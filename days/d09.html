@@ -486,16 +486,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#pre" id="toc-pre" class="nav-link active" data-scroll-target="#pre">① 읽기 전 답</a></li>
-  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">② 학습자료</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link active" data-scroll-target="#lesson">② 학습자료</a></li>
   <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">③ 노트에 정리</a></li>
   <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 내 답</a></li>
   <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑤ 학습 완료</a></li>
   <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑥ 피드백과 꼬리질문</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Claude에게 질문</a>
-  <ul class="collapse">
-  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers">답변</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -541,11 +536,6 @@ ul.task-list li input[type="checkbox"] {
   <li data-step="answer"><a href="#answer"><b>4</b>내 답</a></li>
   <li data-step="done"><a href="#done"><b>5</b>학습 완료</a></li>
 </ol>
-<section id="pre" class="level2">
-<h2 class="anchored" data-anchor-id="pre">① 읽기 전 답</h2>
-<p>자료를 보기 전에 10분 동안, 지금 아는 만큼만 씁니다. 틀려도 괜찮습니다. 저장한 뒤에는 고치지 않습니다. 공부가 끝난 뒤 이 답과 ④의 차이가 곧 오늘 배운 것입니다.</p>
-<div class="editable" data-file="d09-pre" data-title="읽기 전 답" data-lock="true" data-placeholder="자료를 보기 전에 지금 아는 만큼만 적어 보세요."></div>
-</section>
 <section id="lesson" class="level2">
 <h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
 <div class="pending-box">
@@ -596,22 +586,9 @@ ul.task-list li input[type="checkbox"] {
 <div class="pending-box">
 <p>내 답을 저장한 뒤 Claude에게 <strong>"D9 검토해줘"</strong>라고 말하세요. 맞게 이해한 점, 핵심 오류와 근거, 고쳐야 할 인과관계, 다시 답할 질문을 이 자리에 남깁니다.</p>
 </div>
-</section>
-<section id="questions" class="level2">
-<h2 class="anchored" data-anchor-id="questions">Claude에게 질문</h2>
-<div class="howto-line">
-<p>읽다가 막히면 오른쪽 아래 <strong>Claude에게 질문</strong> 버튼(본문을 드래그해 두면 그 부분이 인용됨)을 누르거나, 아래 칸에 직접 씁니다. 저장한 뒤 Claude Code 채팅에서 <strong>"D9 질문 답해줘"</strong>라고 말하면 답이 그 아래 '답변' 칸에 질문과 함께 붙습니다. 지난 질문은 버튼의 '지난 질문' 탭이나 <a href="../ledger/questions.html">질문 모음</a>에서 볼 수 있습니다.</p>
-</div>
-<div class="editable" data-file="d09-questions" data-title="질문" data-placeholder="예: 2-3절의 ○○가 왜 그렇게 되는지 모르겠다."></div>
-<section id="answers" class="level3">
-<h3 class="anchored" data-anchor-id="answers">답변</h3>
-<div class="qa-block pending-box">
-<p>아직 답변이 없습니다. 질문을 저장한 뒤 Claude Code에서 <strong>"D9 질문 답해줘"</strong>라고 말하면 여기에 질문과 답이 함께 붙습니다.</p>
-</div>
 <section class="comments" id="comments"></section>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
