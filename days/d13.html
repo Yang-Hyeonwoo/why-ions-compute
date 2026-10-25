@@ -89,6 +89,35 @@ ul.task-list li input[type="checkbox"] {
   };
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/study.css">
 </head>
@@ -486,11 +515,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#lesson" id="toc-lesson" class="nav-link active" data-scroll-target="#lesson">② 학습자료</a></li>
-  <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">③ 노트에 정리</a></li>
-  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 내 답</a></li>
-  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑤ 학습 완료</a></li>
-  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑥ 피드백과 꼬리질문</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">① 사전 테스트와 먼저 만들어 보기</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">② 학습자료</a></li>
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 가르치듯 내 답</a></li>
+  <li><a href="#posttest" id="toc-posttest" class="nav-link" data-scroll-target="#posttest">⑤ 다시 풀기 (선택)</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑥ 학습 완료</a></li>
+  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑦ 피드백과 꼬리질문</a></li>
   </ul>
 </nav>
     </div>
@@ -530,34 +560,791 @@ ul.task-list li input[type="checkbox"] {
   <button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button>
 </div>
 <ol class="day-steps" data-day="d13">
-  <li data-step="pre"><a href="#pre"><b>1</b>읽기 전 답</a></li>
+  <li data-step="pretest"><a href="#pretest"><b>1</b>사전 테스트 <small>권장</small></a></li>
   <li data-step="lesson" data-manual="true"><a href="#lesson"><b>2</b>학습자료</a></li>
-  <li data-step="note" data-manual="true"><a href="#note"><b>3</b>노트 정리</a></li>
-  <li data-step="answer"><a href="#answer"><b>4</b>내 답</a></li>
-  <li data-step="done"><a href="#done"><b>5</b>학습 완료</a></li>
+  <li data-step="recall"><a href="#recall"><b>3</b>백지 회상</a></li>
+  <li data-step="answer"><a href="#answer"><b>4</b>가르치듯 답</a></li>
+  <li data-step="posttest"><a href="#posttest"><b>5</b>다시 풀기 <small>선택</small></a></li>
+  <li data-step="done"><a href="#done"><b>6</b>완료</a></li>
 </ol>
+<div class="flow-line path-line">
+<p><strong>기본 경로</strong>: ① 사전 테스트(권장) → ② 학습자료(구간마다 잠깐 점검까지) → ③ 백지 회상 → ④ 가르치듯 내 답. ⓪·⑤와 접힌 '심화'·'추가 연습'은 선택입니다. 한 번에 끝낼 필요 없이 구간 단위로 나눠 읽어도 되고, 다시 열면 '지난번 읽던 곳' 링크가 뜹니다.</p>
+</div>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">① 사전 테스트와 먼저 만들어 보기</h2>
+<div class="flow-line">
+<p>아직 배우지 않은 내용을 먼저 풀어 봅니다. <strong>많이 틀리는 것이 정상</strong>이고, 그게 목적입니다. 먼저 답해 본 문제는 읽을 때 눈에 들어오고 더 오래 남습니다. 문제마다 정답만 보이고, 이유는 학습자료와 ⑤ 다시 풀기에서 봅니다. 다 풀면 학습자료가 열립니다. 건너뛰려면 학습자료 위의 '그냥 읽기'를 누르세요(권장 단계일 뿐 필수는 아닙니다).</p>
+</div>
+<div class="quiz" data-day="d13" data-set="pre"></div>
+</section>
 <section id="lesson" class="level2">
 <h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
-<div class="pending-box">
-<p>이 날의 학습자료는 아직 준비되지 않았습니다.</p>
-<p>읽기 전 답을 먼저 써 두고 Claude에게 <strong>"D13 자료 만들어줘"</strong>라고 말하세요. 읽기 전 답과 앞선 날들의 답을 읽고, 비어 있는 곳 위주로 자료를 만들어 이 자리에 넣습니다.</p>
+<div class="lesson-body" data-pre="d13-pre">
+<div class="lesson-meta">
+<p>학습 구간 5개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 80분 안팎(추정) · 선택 영상 1.5분 · 퀴즈 22문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024 p.196, 198, 200 / Stepney 2024 p.679(7.3.2절) / Singh 2026 p.8–9(3.1절·Table 1), p.11–13(Table 2·3.1절), p.18–19(5.2절) / Lee 2025 (npj) p.2–4, 6–8(Fig. 2d·6a 눈금 읽기 포함) / Roadmap 2026 p.8113, 8122. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 오늘의 계산 예(선형 누설 노드, 그림 2의 입력 8개짜리 예, 10 ms 소자와 10 s 소자의 비교, Lee 2025 소자의 τ로 계산한 <span class="math inline">\(a\)</span>)는 모두 Claude가 만든 모형 계산이며 실제 소자의 측정값이 아닙니다. 원문 그래프에서 눈으로 읽은 값은 '약'을 붙였습니다.</p>
 </div>
+<p>Phase 3의 첫날입니다. Phase 2에서는 RC가 <strong>어떻게</strong> 작동하는지 봤습니다. 소자의 상태가 최근 입력을 조금씩 품고 있고(fading memory), 그 상태에서 학습한 직선(readout)이 답을 꺼낸다는 것. Phase 3은 질문을 바꿉니다. <strong>얼마나 잘</strong> 작동하는가, 그리고 그것을 무엇으로 재는가. 첫 주제는 "기억"입니다. 소자 논문에서 가장 흔한 문장 중 하나가 "우리 소자는 기억이 길다"인데, 오늘 끝에는 이 문장을 들으면 "어떤 기억을, 어떤 입력 간격에서, 무엇과 비교해 쟀나?"를 되물을 수 있게 됩니다.</p>
+<ol type="1">
+<li>소자 논문의 "기억"에는 무엇이 섞여 있나? retention, 시간상수 τ, memory capacity는 각각 무엇을 센 값인가?</li>
+<li>memory capacity(MC)는 상태 숫자 하나에 과거 입력이 어떻게 담기는지를 어떻게 보여 주나? (손으로 계산합니다)</li>
+<li>감쇠가 10 ms인 소자와 10 s인 소자 중 어느 쪽이 좋은가? 무엇이 그 답을 정하나?</li>
+<li>소자(노드)를 여러 개 쓰면 기억도 그만큼 늘어나나?</li>
+<li>그래서 "좋은 memory"란 무엇이고, 논문에서 무엇을 확인해야 하나?</li>
+</ol>
+<section id="ch-three-memories" class="level3">
+<h3 class="anchored" data-anchor-id="ch-three-memories">1. 같은 '기억', 세 가지 양: retention, τ, memory capacity</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 retention time, 시간상수 τ, memory capacity가 각각 누가 무엇을 잰 값인지 말하고, 셋을 서로 바꿔 쓰면 왜 틀리는지 숫자 하나로 보일 수 있다.</p>
+</div>
+<p>실험실 장면 하나로 시작합니다. 이온 소자에 전압 펄스를 한 번 주면 전도도(소자 전체로 전류가 얼마나 잘 흐르는가, 컨덕턴스 <span class="math inline">\(G\)</span> [S]. 재료 성질인 이온전도도 σ [S/m]와는 다른 양, <a href="../days/d04.html#ch-basics-matrix">D4 1구간</a>)가 올라갔다가 서서히 원래로 돌아옵니다. 이 곡선을 보고 사람들은 세 가지 다른 말을 합니다. "이 소자는 retention이 2초다", "이 소자의 τ는 0.8초다", "이 소자는 기억이 좋아서 RC에 쓸 만하다". 세 문장은 같은 곡선에서 나왔지만, 같은 것을 말하지 않습니다. 첫째는 <strong>정의에 따라 달라지는 측정 지표</strong>, 둘째는 <strong>곡선에 맞춘 모형의 숫자</strong>, 셋째는 <strong>계산 능력에 대한 주장</strong>입니다. 셋째를 뒷받침하려면 곡선 하나로는 부족하고, 다른 실험이 필요합니다. 이 구간이 그 차이를 정리합니다.</p>
+<p>먼저 앞에서 배운 두 단어를 다시 꺼냅니다. <strong>시간상수 τ</strong>는 어떤 양이 변한 뒤 원래로 돌아가는 속도를 나타내는 시간의 척도입니다. 변화가 <span class="math inline">\(e^{-t/\tau}\)</span> 꼴로 줄어들면 <span class="math inline">\(t = \tau\)</span>에서 처음 변화의 약 37%가 남습니다(<a href="../days/d01.html#ch-volatile">D1 4절</a>, <a href="../days/d03.html#ch-analog-time">D3 5구간</a>). <strong>retention</strong>은 써 넣은 상태가 "얼마나 오래 남는가"를 재는 지표로, D4에서 "몇 %가 남는 시간인지, 측정한 가장 긴 시간인지 정의를 확인하라"고 했습니다(<a href="../days/d04.html#ch-synapse-reliability">D4 5구간</a>).</p>
+<div id="b-retention-vs-mc" class="basics">
+<section id="retention-time과-memory-capacity는-무엇이-다른가" class="level4">
+<h4 class="anchored" data-anchor-id="retention-time과-memory-capacity는-무엇이-다른가">retention time과 memory capacity는 무엇이 다른가</h4>
+<p><strong>① 왜 필요한가.</strong> "기억이 길다"는 말이 RC에 좋은 소자라는 뜻이 되려면, 길게 남는 것이 <strong>과제에 필요한 과거 입력의 정보</strong>여야 하고, 그 정보를 <strong>readout이 실제로 꺼낼 수 있어야</strong> 합니다. retention 곡선 하나는 이 두 가지를 보여 주지 않습니다. 그래서 세 양을 갈라 둡니다.</p>
+<p><strong>② 세 양의 정의.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>양</th>
+<th>누가, 무엇을 재나</th>
+<th>단위</th>
+<th>결정하는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>retention time</td>
+<td>펄스(또는 쓰기) <strong>한 번</strong> 뒤 상태 변화가 <strong>정한 기준</strong>(예: 처음의 50%, 10%) 아래로 떨어질 때까지의 시간</td>
+<td>s</td>
+<td>측정 조건, 기준 %, 측정 기간</td>
+</tr>
+<tr class="even">
+<td>시간상수 τ</td>
+<td>그 감쇠 곡선을 <span class="math inline">\(e^{-t/\tau}\)</span> 같은 <strong>모형</strong>으로 맞췄을 때의 매개변수</td>
+<td>s</td>
+<td>모형의 꼴(지수 하나? 여럿?), 맞춘 구간</td>
+</tr>
+<tr class="odd">
+<td>memory capacity (MC)</td>
+<td><strong>무작위 입력열</strong>을 계속 넣으면서, 지금 상태에서 <span class="math inline">\(k\)</span>개 전 입력을 <strong>학습한 선형 readout</strong>으로 얼마나 되살리는지를 <span class="math inline">\(k\)</span>마다 재서 더한 값</td>
+<td>무차원(0 이상, 상태 수 이하)</td>
+<td>소자의 동역학 + 입력 간격 + 잡음 + 상태 수 + readout</td>
+</tr>
+</tbody>
+</table>
+<p><strong>③ 무엇이 어떤 순서로.</strong> retention과 τ는 <strong>입력 하나</strong>에 대한 반응만 봅니다. MC는 입력이 <strong>끊임없이 이어질 때</strong>, 새 입력이 옛 입력의 흔적을 덮어쓰는 상황에서 잽니다. 소자 상태는 숫자 몇 개뿐이라, 새 입력이 들어올 자리를 내주면서 옛 정보는 다른 입력들과 섞이고 잡음에 묻힙니다. retention은 "흔적이 남아 있나"를, MC는 "그 흔적을 <strong>다른 입력들과 구별해서</strong> 꺼낼 수 있나"를 묻습니다.</p>
+<p><strong>④ 작은 숫자로.</strong> τ = 10 ms인 소자와 τ = 10 s인 소자가 있고, 둘 다 감쇠가 정확히 지수 하나를 따른다고 합시다. "처음 변화의 50%가 남을 때까지"를 retention으로 정하면 <span class="math inline">\(\tau \ln 2\)</span>이므로 6.93 ms와 6.93 s, "10%가 남을 때까지"로 정하면 <span class="math inline">\(\tau \ln 10\)</span>이므로 23.0 ms와 23.0 s입니다. <strong>같은 곡선인데 기준만 바꿔도 retention이 3.3배 달라집니다</strong>(<span class="math inline">\(\ln 10 / \ln 2 = 3.32\)</span>). 감쇠가 지수 여러 개의 합이면(빠른 부분 + 느린 꼬리) τ도 하나로 정해지지 않고, 맞추는 구간에 따라 바뀝니다. 그리고 두 소자의 MC는 이 숫자들만으로는 <strong>아예 정해지지 않습니다</strong>. 입력이 얼마나 자주 들어오는지(3구간), 잡음이 얼마인지(2구간), 상태가 몇 개인지(4구간)가 빠져 있기 때문입니다.</p>
+<p><strong>⑤ 이름과 정확한 뜻.</strong> retention time = 기준·조건이 붙은 <strong>소자 지표</strong>. τ = <strong>모형 매개변수</strong>. memory capacity = 입력열·readout·잡음을 포함한 <strong>계의 계산 지표</strong>. 셋 중 MC만 "readout이 무엇을 꺼낼 수 있나"를 직접 잽니다.</p>
+<p><strong>⑥ 이온·RC와의 연결.</strong> 폴더의 이온 소자 논문들은 대부분 ①·②를 보고합니다(펄스 뒤 감쇠 곡선, 그리고 두 펄스를 가까이 주면 둘째 응답이 커지는 PPF의 τ, <a href="../days/d06.html#ch-ppf-limits">D6 3구간</a>). Singh 2026은 "천천히 감쇠하는 전기적·광학적·기계적·화학적 응답이 있다는 것만으로는 유용한 reservoir 기억이 확립되지 않는다. 계산에 중요한 질문은 앞선 입력의 정보가 <strong>지금의 reservoir 상태에서 접근 가능한가</strong>이다"라고 씁니다. <span class="src">Singh 2026, p.8</span> 같은 글은 그래서 지연별 기억 곡선 전체(<span class="math inline">\(MC_k\)</span> 대 <span class="math inline">\(k\)</span>; 지연 <span class="math inline">\(k\)</span> = 몇 개 전 입력인가, 2구간에서 계산합니다)를 누적값과 함께 보고하라고 권합니다. "총 기억이 비슷한 reservoir라도 정보를 담는 시간 범위가 크게 다를 수 있기 때문"입니다. <span class="src">Singh 2026, p.13</span></p>
+<p><strong>⑦ 짧은 확인.</strong> "retention이 10배 긴 소자는 MC도 10배 크다"가 왜 틀렸는지 한 줄로 말해 보세요. (답: retention은 입력 하나의 흔적이 남는 시간이고, MC는 이어지는 입력들 사이에서 그 흔적을 구별해 꺼내는 양이다. 2–4구간에서 반례를 계산합니다.)</p>
+</section>
+</div>
+<figure class="fig figure"><img src="../assets/img/d13/fig1-three-memories.svg" alt="같은 지수 감쇠 곡선에서 50% 기준과 10% 기준의 retention이 3.3배 다르고, τ는 1/e(37%) 지점으로 맞춘 모형 매개변수이며, MC는 지연 k마다 되살린 정도를 막대로 더한 값이라는 세 패널 그림" class="figure-img"><figcaption><b>그림 1.</b> 같은 말 '기억'의 세 가지 양. 왼쪽과 가운데는 같은 지수 곡선이다. 왼쪽은 기준을 어디에 두느냐에 따라 retention이 바뀌는 것(50% → 10%로 바꾸면 3.3배), 가운데는 1/e 지점의 τ, 오른쪽은 a = 0.8인 선형 노드 하나의 $MC_k$(잡음 없음, 다 더하면 1.00)다. 오른쪽만 무작위 입력열과 학습한 readout을 전제로 한다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>실제 측정 곡선 하나.</strong> 그림 1의 왼쪽·가운데가 실제 소자에서는 어떻게 생겼는지, 3구간에서 다시 만날 Lee 2025(npj)의 그림으로 봅니다. 읽는 법: 검은 네모가 측정값, 빨간 선이 지수 모형을 맞춘 것이고, 그 모형의 매개변수가 τ<sub>0</sub> = 0.92 ms입니다. 곡선이 0이 아니라 약 0.115 µS(식의 β)로 내려가 멈춘다는 점도 보세요. retention을 "처음 변화의 50%"로 정하려면 무엇을 '처음 변화'로 볼지(β 위쪽만? 전도도 값 전체?)부터 정해야 합니다. 그림 아래 표가 그 차이를 계산합니다. <span class="tag tag-interp">해석</span></p>
+<figure class="fig paper figure"><img src="../assets/img/papers/lee2025npj-fig2d.png" alt="Lee 2025 npj UC Fig. 2d: 1 ms, 1.85 V 펄스 한 번 뒤 전도도(µS)가 시간(0–20 ms)에 따라 0.24에서 약 0.11로 내려가는 측정값(검은 네모)과 지수 모형 G = α exp(−t/τ0) + β로 맞춘 빨간 곡선, τ0 = 0.92 ms" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Lee et al., <a href="https://doi.org/10.1038/s44335-025-00043-3" target="_blank"><i>npj Unconv. Comput.</i> 2025, 2, 27</a>, Fig. 2d, p.3. 볼 것: (1) 위 왼쪽 작은 그림은 자극(1 ms 동안 1.85 V 펄스 하나, 그 뒤 읽기). (2) 가로축 0–20 ms, 세로축 전도도. 측정점은 처음 3 ms 안에 대부분 내려가고 5 ms 뒤로는 약 0.11–0.12 µS에서 흔들린다. (3) τ<sub>0</sub> = 0.92 ms는 이 곡선에 지수 하나를 맞춘 <b>모형 매개변수</b>이며, 빠르게 떨어지는 구간의 측정점은 서너 개뿐이다. 이 곡선은 "입력 하나의 흔적"이므로, 이것만으로는 MC(이어지는 입력 사이에서 구별해 꺼내는 양)가 정해지지 않는다(1구간 ⑦). 측정 데이터. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p><strong>같은 곡선, 다섯 가지 retention.</strong> 이 측정 곡선 하나에 1구간의 정의들을 나란히 적용해 봅니다. 출발점은 첫 측정점(1 ms, 약 0.24 µS)이고, 곡선이 멈추는 값 β는 약 0.115 µS입니다(둘 다 Claude가 그래프 눈금에서 읽은 값). "β 위쪽 변화"는 전도도에서 β를 뺀 높이, 곧 아직 사라지지 않은 변화입니다. 장기 기억 소자에서 같은 비교를 한 <a href="../days/d04.html#ch-synapse-reliability">D4 그림 5-1</a>과 견주어 보세요.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>정의</th>
+<th>무엇이 어디까지 줄 때까지</th>
+<th>이 곡선에서</th>
+<th>그 값의 출처</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1/e 시간 = τ</td>
+<td>β 위쪽 변화가 처음의 37%</td>
+<td>0.92 ms</td>
+<td>논문이 지수 하나로 맞춘 모형값</td>
+</tr>
+<tr class="even">
+<td>반감 시간(50%)</td>
+<td>β 위쪽 변화가 처음의 50%</td>
+<td>0.92 × ln 2 ≈ 0.64 ms</td>
+<td>모형에서 계산. 측정 간격(1 ms)보다 짧아 측정점으로는 직접 보이지 않음</td>
+</tr>
+<tr class="odd">
+<td>10% 시간</td>
+<td>β 위쪽 변화가 처음의 10%</td>
+<td>0.92 × ln 10 ≈ 2.1 ms</td>
+<td>모형에서 계산</td>
+</tr>
+<tr class="even">
+<td>절대값 50%</td>
+<td>전도도 값 자체가 약 0.24 → 0.12 µS</td>
+<td>맞춘 곡선으로 약 2.7 ms, 측정점으로는 약 4 ms(5 ms 점에서 처음 0.12 아래)</td>
+<td>0.12가 β(0.115)에 너무 가까워 읽는 법에 따라 크게 흔들림</td>
+</tr>
+<tr class="odd">
+<td>측정 창</td>
+<td>"측정하는 동안 남아 있었다"</td>
+<td>"20 ms 동안 처음 값의 약 45% 이상(0.11 µS 이상) 유지"</td>
+<td>하한일 뿐, 감쇠 시간이 아님</td>
+</tr>
+</tbody>
+</table>
+<p>같은 측정 곡선이 정의에 따라 0.64 ms에서 "20 ms 이상"까지 30배 넘게 다른 숫자가 됩니다. τ = 0.92 ms는 그중 한 정의(1/e)와 같을 뿐이고, "지수 하나"라는 모형을 받아들였을 때만 그 뜻을 가집니다. 그래서 논문에서 retention이나 τ를 옮겨 적을 때는 <strong>기준(몇 %, β 위쪽인가 값 전체인가), 출발점, 측정 간격, 측정 창</strong>을 함께 적어야 다른 소자와 비교할 수 있습니다. [해석, 계산]</p>
+<div class="myth">
+<p><strong>"retention time이 곧 기억 용량이다"</strong> — 자주 섞이는 두 개념입니다. retention은 "흔적이 얼마나 오래 남나"이고 memory capacity는 "흔적을 다른 입력과 구별해서 몇 개나 꺼낼 수 있나"입니다. τ도 마찬가지로 모형의 매개변수일 뿐 지표가 아닙니다. 소자 논문의 "long-term memory", "short-term memory"는 보통 retention 쪽 말이고, RC 논문의 "memory capacity"는 셋째 양입니다. 둘을 이어 주는 것은 오늘 3구간의 입력 간격입니다.</p>
+</div>
+<div class="quiz" data-day="d13" data-set="1-check"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+retention time
+</dt>
+<dd>
+쓰기 한 번 뒤 상태 변화가 정한 기준(몇 %) 아래로 떨어질 때까지의 시간. 기준·조건·측정 기간에 따라 값이 바뀌는 소자 지표.
+</dd>
+<dt>
+시간상수 τ
+</dt>
+<dd>
+감쇠 곡선을 지수 모형으로 맞췄을 때의 매개변수. 지수가 여럿이면 하나로 정해지지 않는다.
+</dd>
+<dt>
+memory capacity (MC)
+</dt>
+<dd>
+무작위 입력열에서 k개 전 입력을 학습한 선형 readout으로 되살린 정도(MCₖ, 0–1)를 k에 대해 더한 값. 상태 수를 넘지 못한다.
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>정의: retention(기준이 붙은 소자 지표), τ(모형 매개변수), MC(입력열·readout·잡음을 포함한 계의 계산 지표)는 다른 양이다.</li>
+<li>왜: retention·τ는 입력 하나의 흔적을, MC는 이어지는 입력들 속에서 그 흔적을 구별해 꺼내는 능력을 잰다.</li>
+<li>숫자: 같은 지수 곡선에서 retention 기준을 50% → 10%로 바꾸면 3.3배. τ = 10 ms와 10 s의 retention(10%)은 23.0 ms와 23.0 s(지수 모형에서 Claude 계산).</li>
+<li>측정 곡선에서: Lee 2025(npj)의 τ = 0.92 ms 곡선 하나도 정의에 따라 0.64 ms부터 "20 ms 이상"까지 다른 retention이 된다(그래프 읽기 + Claude 계산). 기준·출발점·측정 간격·측정 창을 함께 적는다.</li>
+<li>남은 질문: MC는 상태 숫자 하나에서 어떻게 계산되나? → 2구간.</li>
+</ul>
+</div>
+</section>
+<section id="ch-mc-by-hand" class="level3">
+<h3 class="anchored" data-anchor-id="ch-mc-by-hand">2. MC를 손으로: 상태 숫자 하나에 과거가 어떻게 담기나</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 선형 누설 노드 하나의 <span class="math inline">\(MC_k\)</span>를 "상태의 흔들림 가운데 k개 전 입력이 차지하는 몫"으로 직접 계산하고, 왜 노드 하나의 MC가 1을 넘지 못하는지, 잡음이 그 몫을 어떻게 갉아먹는지 말할 수 있다.</p>
+</div>
+<p><strong>왜 이런 절차가 필요한가.</strong> 1구간에서 셋 가운데 MC만이 "readout이 실제로 꺼낼 수 있는 과거"를 잰다고 했습니다. 그것을 재려면 세 가지가 갖춰져야 합니다. (1) 과거 입력이 무엇이었는지 정확히 아는 정답지, (2) 그 정답을 다른 입력에서 짐작할 수 없게 만드는 입력(서로 무관한 무작위 숫자), (3) 학습한 readout이 <strong>처음 보는 데이터</strong>에서도 맞히는지 보는 채점. D12에서 <code>tools/esn.py</code>로 이미 돌린 절차를(<a href="../days/d12.html#b-memory-capacity">D12 기초: memory capacity</a>) 이번에는 소자 실험의 말로, 무엇을 넣고·기록하고·맞추고·얻는지 순서대로 적습니다.</p>
+<ol type="1">
+<li><strong>넣는 것 — 무작위 입력열.</strong> 난수나 동전 던지기로 숫자 <span class="math inline">\(u\)</span>를 수천 개 만듭니다. 숫자끼리 서로 무관하고 같은 규칙에서 나와야 합니다(i.i.d., independent and identically distributed). 그래야 "<span class="math inline">\(k\)</span>개 전 입력"을 맞힌 것이 다른 입력에서 짐작한 것이 아니라 상태에 남은 흔적에서 꺼낸 것이 됩니다. 숫자 하나를 펄스 하나로 바꿔(예: <span class="math inline">\(u\)</span>를 펄스 높이에 대응) 일정한 간격 <span class="math inline">\(T_{\text{sym}}\)</span>으로 넣습니다. 숫자를 펄스로 바꾸는 규칙(부호화)과 간격은 결과를 바꾸므로 함께 보고합니다(3·5구간).</li>
+<li><strong>기록하는 것 — 매 입력 뒤의 상태.</strong> 펄스마다 정해진 시점에 작은 읽기 전압으로 전도도(또는 전류)를 읽어 적습니다. 이것이 상태 <span class="math inline">\(x\)</span>이고, 전극이나 가상 노드(<a href="../days/d10.html#b-time-multiplexing">D10 기초</a>)가 여럿이면 한 번에 숫자 <span class="math inline">\(N\)</span>개입니다. 처음 수십–수백 단계는 시작 상태의 흔적이 섞여 있어 버립니다(washout, <a href="../days/d12.html#b-preprocessing">D12 기초: 전처리</a>).</li>
+<li><strong>맞추는 것 — 지연마다 따로 readout.</strong> 지연 <span class="math inline">\(k\)</span>마다 정답 열 "<span class="math inline">\(k\)</span>개 전 입력"을 만듭니다(입력 열을 <span class="math inline">\(k-1\)</span>줄 아래로 밀어 놓은 것). 데이터 앞부분으로 직선 readout <span class="math inline">\(\hat{y} = w_0 + w_1 x_1 + \cdots + w_N x_N\)</span>의 가중치(숫자마다 붙은 "얼마나 중요하게 볼지"라는 수, <a href="../days/d02.html#b-weight">D2 기초</a>)를 최소제곱·ridge 회귀로 정합니다(<a href="../days/d06.html#b-readout">D6 기초 3: readout</a>, <a href="../days/d08.html#b-ridge">D8 기초: ridge 회귀</a>). <span class="math inline">\(k\)</span>가 다르면 readout도 따로입니다.</li>
+<li><strong>나오는 숫자 — <span class="math inline">\(MC_k\)</span>와 MC.</strong> 학습에 쓰지 않은 뒷부분 데이터에서 정답과 <span class="math inline">\(\hat{y}\)</span>의 상관계수를 제곱한 것이 <span class="math inline">\(MC_k\)</span>(0–1)입니다. D11에서 본 목표 하나의 "용량"과 같은 양입니다(<a href="../days/d11.html#b-ipc">D11 기초</a> 단계 5). <span class="math inline">\(k = 1, 2, \ldots, K\)</span>에 대해 더한 것이 MC이고, 큰 <span class="math inline">\(k\)</span>의 아주 작은 <span class="math inline">\(MC_k\)</span>는 사실상 잡음이라 어디서 끊습니다 <span class="src">Stepney 2024, p.679</span>. 최대 지연 <span class="math inline">\(K\)</span>와 끊는 기준도 함께 보고합니다.</li>
+</ol>
+<p>그림 2는 이 네 단계를 입력 8개짜리 작은 예로 끝까지 따라간 것입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d13/fig2-mc-protocol.svg" alt="입력 8개(±1)를 펄스 높이로 넣고, a = 0.5인 노드의 상태를 매번 읽어 표에 적은 뒤, k = 1 목표(지금 줄의 u)와 k = 2 목표(한 줄 위의 u)마다 직선 readout을 맞춰 상관² 0.75, 0.19, 0.01을 얻어 더하는 과정. 이론값은 0.75, 0.19, 0.05" class="figure-img"><figcaption><b>그림 2.</b> MC를 재는 네 단계를 입력 8개로 따라간 예. ① 서로 무관한 무작위 입력(여기서는 계산을 쉽게 ±1)을 펄스 높이로 넣고, ② 입력마다 상태를 읽어 적는다(빨간 점. 점 사이 곡선은 입력을 한 칸 동안 걸어 둔 노드가 그 값을 향해 다가가는 모습, 2-1절). 맨 앞 회색 칸은 시작 상태의 흔적 때문에 버린다. ③ 지연 $k$마다 정답 열을 만들고($k$ = 2 열은 입력 열을 한 줄 내린 것), ④ $k$마다 따로 직선 readout을 맞춰 ⑤ 상관²으로 채점한 것이 $MC_k$, ⑥ 그 합이 MC다. 8줄뿐이라 같은 줄에서 맞추고 채점했고, 결과가 이론값에 가깝게 나오는 입력열을 골랐다. 실제로는 수천 단계를 쓰고 학습에 쓰지 않은 데이터에서 채점한다. Stepney 2024는 Jaeger의 정의를 이렇게 정리하고, i.i.d. 입력에서 MC ≤ N(상태 수)이며 큰 k의 작은 값은 사실상 잡음이므로 잘라 낸다고 쓴다 [Stepney 2024, p.679]{.src}. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>그림 2를 따라 계산해 보기.</strong> 노드는 <span class="math inline">\(a = 0.5\)</span>인 선형 누설 노드 하나(식은 바로 아래 2-1절)이고, 입력이 올 때마다 <span class="math inline">\(x_{\text{새}} = 0.5\,x_{\text{이전}} + 0.5\,u\)</span>입니다. 버린 0줄(<span class="math inline">\(x = -0.5\)</span>) 다음은 <span class="math inline">\(0.5 \times (-0.5) + 0.5 \times 1 = 0.25\)</span>(1줄), <span class="math inline">\(0.5 \times 0.25 + 0.5 \times 1 = 0.625\)</span>(2줄), …입니다. <span class="math inline">\(k = 1\)</span> readout은 <span class="math inline">\(x\)</span> 열로 "지금 줄의 <span class="math inline">\(u\)</span>"를 맞추는 직선이고, D11 단계 2의 최소제곱 계산(평균을 뺀 값끼리 곱한 합 ÷ <span class="math inline">\(x\)</span> 쪽 제곱합)으로 기울기 <span class="math inline">\(w_1 = 1.64\)</span>가 나옵니다. 정답과 출력의 상관²이 0.75이므로 <span class="math inline">\(MC_1 = 0.75\)</span>. 같은 일을 "한 줄 위의 <span class="math inline">\(u\)</span>"에 하면 <span class="math inline">\(MC_2 = 0.19\)</span>, "두 줄 위"에 하면 <span class="math inline">\(MC_3 = 0.01\)</span>입니다. 직선 readout의 출력은 <span class="math inline">\(x\)</span>를 늘이고 옮긴 것일 뿐이라, 이 상관²은 <span class="math inline">\(x\)</span>와 정답의 상관²과 같습니다.</p>
+<p>세 숫자를 2-1절에서 식으로 구할 정확한 값(0.75, 0.19, 0.05)과 비교해 보세요. 앞의 둘이 잘 맞는 것은 Claude가 그렇게 나오는 입력열을 골랐기 때문입니다. 무작위로 뽑은 8개짜리 입력열 2만 개로 같은 계산을 하면, 가운데 80%의 열에서 <span class="math inline">\(MC_1\)</span>은 0.72–0.87, <span class="math inline">\(MC_2\)</span>는 0.01–0.50 사이로 흩어집니다(Claude 계산). 데이터가 적으면 우연히 맞아떨어진 상관이 점수에 섞이기 때문입니다(작은 용량이 우연히 부푸는 문제는 D11 2구간의 '문턱'). 그래서 실제로는 수천 단계를 쓰고(D12의 <code>esn.py</code>는 2,000단계로 맞춤), 맞추는 데이터와 채점하는 데이터를 나눕니다.</p>
+<p><strong><span class="math inline">\(k\)</span>를 어디서부터 세나.</strong> D13은 입력을 받은 직후 상태를 읽으므로 그 '방금 들어온 입력'을 <span class="math inline">\(k = 1\)</span>로 셉니다. D9 5구간과 D11은 같은 입력을 <span class="math inline">\(k = 0\)</span>(지금 입력)으로 셌습니다. D12의 <code>esn.py</code>는 readout에 지금 입력 <span class="math inline">\(u(t)\)</span>를 따로 넣어 주고 한 단계 전 <span class="math inline">\(u(t-1)\)</span>부터 <span class="math inline">\(k = 1\)</span>로 세므로, D12 출력의 <span class="math inline">\(MC_1\)</span>은 D13의 <span class="math inline">\(MC_2\)</span>에 해당합니다. 계산 규칙은 같고 번호만 다릅니다. 논문의 <span class="math inline">\(MC_k\)</span>를 비교할 때는 첫 지연을 어떻게 셌는지 확인합니다.</p>
+<p>이 절차를 수천 단계로 손으로 하기는 어렵습니다. 그런데 노드가 <strong>하나</strong>이고 <strong>선형</strong>이면 데이터 없이 식만으로 정확한 <span class="math inline">\(MC_k\)</span>를 구할 수 있습니다. 그 계산이 MC가 무엇인지를 가장 잘 보여 줍니다.</p>
+<div id="b-variance-share" class="basics">
+<section id="흔들림분산과-그-몫-그리고-상관²" class="level4">
+<h4 class="anchored" data-anchor-id="흔들림분산과-그-몫-그리고-상관²">흔들림(분산)과 그 몫, 그리고 상관²</h4>
+<p><strong>왜 필요한가.</strong> 2-1절의 손 계산은 "상태의 흔들림을 과거 입력들이 나눠 갖고, 그 몫이 곧 <span class="math inline">\(MC_k\)</span>"라는 한 문장으로 끝납니다. 그 문장에 필요한 도구 셋(분산, 무관한 것을 더할 때의 분산, 상관² = 몫)을 여기 모았습니다. 분산과 상관계수는 D9·D11에서 숫자 넷으로 계산해 봤고, 이 상자는 그 정리판입니다.</p>
+<p><strong>흔들림의 크기 — 분산.</strong> 숫자들이 평균 주위에서 얼마나 흩어지는지를 하나의 숫자로 적은 것이 <strong>분산</strong>(variance)입니다. 평균에서 벗어난 양을 제곱해 평균 냅니다. 예: 입력이 −1, +1, −1, +1, …로 반반 나오면 평균 0, 벗어난 양은 늘 ±1이므로 분산은 1입니다. 입력이 −0.5, +0.5로 반반이면 분산은 0.25입니다. 크기를 절반으로 줄이면 분산은 4분의 1이 됩니다(제곱이므로). 오늘 쓰는 입력은 −1과 1 사이에서 고르게 나오는 무작위 숫자이고, 이 경우 분산은 1/3 ≈ 0.333입니다. 분산의 제곱근이 <strong>표준편차</strong>(흔들림의 전형적 크기)입니다.</p>
+<p><strong><span class="math inline">\(n\)</span>으로 나누나, <span class="math inline">\(n-1\)</span>로 나누나.</strong> 위의 분산은 "무작위 숫자를 만드는 규칙" 자체의 분산이라 평균을 낼 때 개수 <span class="math inline">\(n\)</span>으로 나눕니다. 실제로 잰 숫자 몇 개(표본)로 분산을 <strong>추정</strong>할 때는 <span class="math inline">\(n-1\)</span>로 나누는 <strong>표본 분산</strong>이 기본입니다. 표본의 평균이 그 숫자들에 맞춰져 있어 <span class="math inline">\(n\)</span>으로 나누면 흩어짐을 조금 작게 보기 때문입니다. 예: <a href="../days/d11.html#b-ipc">D11 기초</a>의 측정값 1, 2, 3, 6은 평균 3, 평균에서 뺀 값의 제곱합 4 + 1 + 0 + 9 = 14이므로 <span class="math inline">\(n\)</span>으로 나누면 3.5, <span class="math inline">\(n-1\)</span>로 나누면 약 4.67(표준편차 약 2.16)입니다. 이 교재의 규칙은 둘입니다. 측정값을 "평균 ± 표준편차"로 보고할 때는 <span class="math inline">\(n-1\)</span>로 나눈 표본 표준편차가 기본이고, <span class="math inline">\(n\)</span>으로 나눈 값을 쓰는 곳(예: D12의 seed 흔들림)은 그렇게 밝힙니다. D11의 용량과 D12의 NMSE처럼 "오차 제곱의 평균 ÷ 분산"으로 비교하는 식에서는 분자의 평균과 같은 잣대로 분산도 <span class="math inline">\(n\)</span>으로 나눕니다. 데이터가 수천 개면 둘의 차이는 무시할 만합니다.</p>
+<p><strong>서로 무관한 것을 더하면 분산도 더해진다.</strong> 무관한 두 무작위 숫자 <span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span>를 더하면 <span class="math inline">\(p + q\)</span>의 분산은 <span class="math inline">\(p\)</span>의 분산 + <span class="math inline">\(q\)</span>의 분산입니다. 예: 분산 1인 것과 분산 0.25인 것을 더하면 분산 1.25. 그러면 "합의 흔들림 1.25 가운데 <span class="math inline">\(p\)</span>가 1, <span class="math inline">\(q\)</span>가 0.25를 차지한다", 즉 <strong>몫</strong>이 <span class="math inline">\(1/1.25 = 0.8\)</span>과 <span class="math inline">\(0.2\)</span>라고 말할 수 있습니다.</p>
+<p><strong>상관²이 곧 몫이다.</strong> 합 <span class="math inline">\(s = p + q\)</span>만 보고 <span class="math inline">\(p\)</span>를 맞히고 싶다고 합시다. 할 수 있는 최선은 <span class="math inline">\(s\)</span>에 적당한 숫자를 곱하는 것뿐입니다(직선 하나. 여기서는 평균이 모두 0이라 더할 상수도 0). 이때 맞힌 정도를 0–1로 적은 것이 <strong>상관계수의 제곱</strong>(상관²)이고(상관계수를 숫자 넷으로 구하는 법은 <a href="../days/d09.html#ch-causal">D9 5구간</a>, 그것이 readout의 '용량'과 같다는 것은 <a href="../days/d11.html#b-ipc">D11 기초</a> 단계 5), 무관한 숫자들을 더한 경우 그 값은 정확히 <strong><span class="math inline">\(p\)</span>가 <span class="math inline">\(s\)</span>의 흔들림에서 차지하는 몫</strong>과 같습니다. 위 예에서 0.8입니다. 몫이 1이면 <span class="math inline">\(s\)</span>가 곧 <span class="math inline">\(p\)</span>이므로 완벽히 맞히고, 몫이 0이면 <span class="math inline">\(s\)</span>에 <span class="math inline">\(p\)</span>의 흔적이 없습니다. 왜 같은지 한 줄로: <span class="math inline">\(s\)</span>와 <span class="math inline">\(p\)</span>가 함께 오르내리는 정도(공분산)는 <span class="math inline">\(p\)</span>의 분산과 같으므로, 상관² = (공분산)² ÷ (<span class="math inline">\(p\)</span>의 분산 × <span class="math inline">\(s\)</span>의 분산) = <span class="math inline">\(p\)</span>의 분산 ÷ <span class="math inline">\(s\)</span>의 분산 = 몫입니다. [계산] "서로 상관없는 것들의 합의 분산은 각 분산의 합"은 확률론의 기본 성질(Bienaymé 공식)입니다. <span class="tag tag-fact">확인</span> (공개 정리: <a href="https://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables">Wikipedia "Variance", Sum of uncorrelated variables 절</a>, 2026-10-24 열람. 폴더 논문의 내용은 아님)</p>
+</section>
+</div>
+<section id="선형-누설-노드-하나를-따라가기" class="level4">
+<h4 class="anchored" data-anchor-id="선형-누설-노드-하나를-따라가기">2-1. 선형 누설 노드 하나를 따라가기</h4>
+<p>가장 단순한 "소자"를 정합니다. 입력 <span class="math inline">\(u\)</span>가 들어올 때마다 상태 <span class="math inline">\(x\)</span>가 다음처럼 바뀝니다.</p>
+<p><span class="math display">\[
+x_{\text{새}} = a\,x_{\text{이전}} + (1 - a)\,u
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: 펄스 뒤 지수 감쇠하는 소자를, 입력이 일정 간격으로 이어질 때의 모습으로 적은 가장 단순한 모형이 이것입니다. D9의 fading memory(옛 입력의 영향이 점점 줄어드는 성질, <a href="../days/d09.html#b-fading-memory">D9 기초</a>)를 숫자 하나로 보여 줍니다.</li>
+<li>기호: <span class="math inline">\(a\)</span>는 "다음 입력이 올 때까지 남는 비율"(0과 1 사이, 무차원). <span class="math inline">\((1-a)\)</span>는 새 입력이 상태를 움직이는 정도.</li>
+<li><span class="math inline">\(a\)</span>와 τ의 관계: 입력이 <span class="math inline">\(T_{\text{sym}}\)</span> 간격으로 들어오고 그 사이에 상태가 <span class="math inline">\(e^{-t/\tau}\)</span>로 감쇠하면 <span class="math inline">\(a = e^{-T_{\text{sym}}/\tau}\)</span>입니다. 3구간에서 이 식이 주인공이 됩니다.</li>
+<li>왜 새 입력 쪽 계수가 <span class="math inline">\((1-a)\)</span>인가: 입력 <span class="math inline">\(u\)</span>를 한 간격 동안 걸어 둔다고 생각하면, 상태는 화공의 1차 이완처럼 <span class="math inline">\(u\)</span>를 향해 <span class="math inline">\(dx/dt = (u - x)/\tau\)</span>로 다가갑니다(평형값 <span class="math inline">\(u\)</span>와의 차이가 <span class="math inline">\(e^{-t/\tau}\)</span>로 줄어듦). 한 간격 뒤에는 그 차이가 <span class="math inline">\(a\)</span>배로 남으므로 <span class="math inline">\(x_{\text{새}} = u + a\,(x_{\text{이전}} - u) = a\,x_{\text{이전}} + (1-a)\,u\)</span>입니다. 그래서 τ가 길면(<span class="math inline">\(a \to 1\)</span>) 한 간격 동안 <span class="math inline">\(u\)</span> 쪽으로 조금밖에 못 갑니다(그림 2의 점 사이 곡선, 3구간 그림 4). <a href="../days/d09.html#b-fading-memory">D9 기초</a>의 <span class="math inline">\(x(t+1) = d\,x(t) + u(t)\)</span>는 짧은 펄스마다 일정한 양을 더하는 소자의 식입니다. 두 식은 상태 전체에 곱한 배율 <span class="math inline">\((1-a)\)</span>만 다르고 <span class="math inline">\(d\)</span>와 <span class="math inline">\(a\)</span>는 같은 것이라, 잡음이 없으면 <span class="math inline">\(MC_k\)</span>가 똑같습니다(배율을 곱해도 상관²은 그대로). 차이는 잡음이 있을 때 생깁니다(2-2절).</li>
+<li>계산 순서: 이전 상태에 <span class="math inline">\(a\)</span>를 곱하고, 새 입력에 <span class="math inline">\((1-a)\)</span>를 곱해 더한다.</li>
+<li>결과의 뜻: 상태는 최근 입력들을 <strong>무게를 달리해</strong> 섞은 숫자입니다.</li>
+</ul>
+<p>몇 번 펼쳐 보면 구조가 보입니다. 방금 입력을 <span class="math inline">\(u_1\)</span>, 그 전을 <span class="math inline">\(u_2\)</span>, 그 전을 <span class="math inline">\(u_3\)</span> …이라고 부르면(아래첨자 = 몇 번째 전인가)</p>
+<p><span class="math display">\[
+x = (1-a)\left(u_1 + a\,u_2 + a^2 u_3 + a^3 u_4 + \cdots\right)
+\]</span></p>
+<p>입니다. <span class="math inline">\(k\)</span>번째 전 입력은 <span class="math inline">\(a^{k-1}\)</span>배로 줄어든 채 들어 있습니다. 입력들은 서로 무관하므로, 위 기초 상자의 "몫"을 그대로 쓸 수 있습니다. <span class="math inline">\(a = 0.5\)</span>를 넣은 결과를 먼저 표로 보고, 아래 단계에서 열 하나씩 따라갑니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>입력</th>
+<th>상태 속 계수 <span class="math inline">\((1-a)\,a^{k-1}\)</span></th>
+<th>그 항의 흔들림(첫 항 = 1로 놓은 상대값) <span class="math inline">\(a^{2(k-1)}\)</span></th>
+<th>몫 = <span class="math inline">\(MC_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(u_1\)</span> (방금, <span class="math inline">\(k\)</span> = 1)</td>
+<td>0.5</td>
+<td>1</td>
+<td>1 ÷ 1.333 = 0.750</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(u_2\)</span> (<span class="math inline">\(k\)</span> = 2)</td>
+<td>0.25</td>
+<td>0.25</td>
+<td>0.25 ÷ 1.333 = 0.188</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(u_3\)</span> (<span class="math inline">\(k\)</span> = 3)</td>
+<td>0.125</td>
+<td>0.0625</td>
+<td>0.0625 ÷ 1.333 = 0.047</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(u_4\)</span> (<span class="math inline">\(k\)</span> = 4)</td>
+<td>0.0625</td>
+<td>0.0156</td>
+<td>0.012</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>합</td>
+<td></td>
+<td>1.333</td>
+<td>1.000</td>
+</tr>
+</tbody>
+</table>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 각 항의 흔들림(표의 셋째 열).</strong> <span class="math inline">\(u\)</span>의 분산을 <span class="math inline">\(\sigma^2\)</span>이라 하면, <span class="math inline">\(u_k\)</span> 항의 분산은 (계수)² × <span class="math inline">\(\sigma^2\)</span> = <span class="math inline">\((1-a)^2 a^{2(k-1)} \sigma^2\)</span>입니다. 모든 항에 공통으로 붙은 <span class="math inline">\((1-a)^2\sigma^2\)</span>은 몫을 구할 때(나눌 때) 지워지므로 빼고 적습니다. <span class="math inline">\(a = 0.5\)</span>면 1, 0.25, 0.0625, 0.0156, …으로 매번 <span class="math inline">\(a^2 = 0.25\)</span>배입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 전체 흔들림.</strong> 다 더하면 <span class="math inline">\(1 + 0.25 + 0.0625 + \cdots = 1/(1 - 0.25) = 1.333\)</span>. (매번 0.25배씩 줄어드는 수들의 합입니다. 이런 합은 <span class="math inline">\(1 + r + r^2 + \cdots = 1/(1-r)\)</span>로 끝이 정해지고(단 <span class="math inline">\(r\)</span>이 1보다 작을 때), 여기서는 <span class="math inline">\(r = a^2 = 0.25\)</span>입니다. 직접 더해 봐도 1 + 0.25 = 1.25, + 0.0625 = 1.3125, + 0.0156 = 1.328, …로 1.333에 다가갑니다.)</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 몫 = <span class="math inline">\(MC_k\)</span>(표의 넷째 열).</strong> <span class="math inline">\(MC_1 = 1/1.333 = 0.75\)</span>, <span class="math inline">\(MC_2 = 0.25/1.333 = 0.1875\)</span>, <span class="math inline">\(MC_3 = 0.0625/1.333 = 0.047\)</span>. 방금 입력은 상태 흔들림의 75%를 차지하므로 상태 하나로 75% 되살릴 수 있고, 2개 전 입력은 19%, 3개 전은 5%만 되살립니다. <a href="../days/d09.html#ch-causal">D9 그림 7</a>의 <span class="math inline">\(d\)</span> = 0.5 막대(0.75, 0.19, 0.047)와 같은 숫자입니다. D9는 방금 입력을 <span class="math inline">\(k\)</span> = 0으로 셌을 뿐입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 일반식.</strong> 같은 계산을 기호로 하면 <span class="math inline">\(MC_k = (1 - a^2)\,a^{2(k-1)}\)</span>. <span class="math inline">\(a = 0.5\)</span>를 넣으면 <span class="math inline">\(0.75 \times 0.25^{k-1}\)</span>로 위와 같습니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 합은 1.</strong> 모든 <span class="math inline">\(k\)</span>에 대해 몫을 더하면 전체이므로 <span class="math inline">\(MC = MC_1 + MC_2 + \cdots = 1\)</span>. <strong><span class="math inline">\(a\)</span>가 무엇이든</strong> 노드 하나의 MC는 1입니다. <span class="math inline">\(a\)</span>는 그 1을 <strong>어떻게 나눠 갖는지</strong>만 바꿉니다. 이것이 "상태 수가 MC의 상한"(그림 2)의 가장 작은 예입니다.</p>
+</div>
+</div>
+<p><span class="math display">\[
+MC_k = (1 - a^2)\,a^{2(k-1)}, \qquad \sum_{k=1}^{\infty} MC_k = 1 \quad (\text{노드 하나, 잡음 없음})
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: τ가 길어지면(<span class="math inline">\(a \to 1\)</span>) 기억이 "커지는" 것이 아니라 "퍼진다"는 것을 한 줄로 보여 준다.</li>
+<li>단위: 무차원(0–1).</li>
+<li>결과의 뜻: <span class="math inline">\(a\)</span>가 작으면 몫이 최근 입력에 몰리고, <span class="math inline">\(a\)</span>가 1에 가까우면 아주 먼 과거까지 고르게 퍼지되 <strong>각 몫은 작아진다</strong>.</li>
+</ul>
+<p><span class="math inline">\(a = 0.9\)</span>면 <span class="math inline">\(MC_1 = 0.19\)</span>, <span class="math inline">\(MC_2 = 0.154\)</span>, <span class="math inline">\(MC_3 = 0.125\)</span>로 천천히 줄어, <span class="math inline">\(k = 1\)</span>–10을 다 더해도 0.88입니다. <span class="math inline">\(a = 0.5\)</span>의 0.75보다 <span class="math inline">\(MC_1\)</span>이 훨씬 작습니다. "τ가 길수록 좋다"면 <span class="math inline">\(a = 0.9\)</span>가 이겨야 하지만, 방금 입력을 맞히는 과제라면 <span class="math inline">\(a = 0.5\)</span>가 4배 가까이 낫습니다. <strong>어느 쪽이 좋은가는 과제가 몇 개 전 입력을 필요로 하느냐</strong>에 달렸습니다(3구간).</p>
+</section>
+<section id="잡음이-들어오면" class="level4">
+<h4 class="anchored" data-anchor-id="잡음이-들어오면">2-2. 잡음이 들어오면</h4>
+<p>실제 측정에는 잡음이 있습니다. 측정할 때마다 상태에 무관한 흔들림 <span class="math inline">\(n\)</span>이 더해진다고 합시다. 그러면 전체 흔들림 = (입력들의 몫) + (잡음의 몫)이 되고, 잡음이 차지한 만큼 모든 <span class="math inline">\(MC_k\)</span>가 줄어듭니다. 문제는 <span class="math inline">\(a\)</span>가 1에 가까울 때입니다. 식 <span class="math inline">\(x_{\text{새}} = a\,x + (1-a)\,u\)</span>에서 입력 하나가 상태를 움직이는 양이 <span class="math inline">\((1-a)\)</span>로 작아지므로, 신호의 흔들림 자체가 작아지고 상대적으로 잡음이 커집니다.</p>
+<p>숫자로 봅니다. 입력은 −1과 1 사이(분산 0.333), 잡음의 표준편차(흔들림의 전형적인 크기, 분산의 제곱근)는 0.01(최대 진폭의 1%)로 둡니다. 이 잡음 크기는 예시 가정입니다. <span class="math inline">\(a = 0.99\)</span>이면 상태(신호)의 분산은 2-1절 표의 합(단계 2)에 빼 두었던 공통 인자를 되살려 <span class="math inline">\(0.333 \times (1-a)^2/(1-a^2) = 0.333 \times 0.01/1.99 = 0.00168\)</span>, 표준편차는 그 제곱근 0.041로 잡음(0.01)의 4배밖에 안 됩니다. 분산으로 보면 잡음이 <span class="math inline">\(0.0001/(0.00168 + 0.0001) \approx 6\%\)</span>를 차지합니다. 남은 94%는 수백 개 입력에 고르게 나뉘어 <span class="math inline">\(MC_1 = 0.019\)</span>, <span class="math inline">\(MC_2 = 0.018\)</span>, …이고, <span class="math inline">\(k = 1\)</span>–10을 다 더해도 0.17입니다.</p>
+<p>두 원인의 크기를 갈라 보면, 잡음이 없어도 <span class="math inline">\(a = 0.99\)</span>의 최근 10개 합은 <span class="math inline">\(1 - 0.99^{20} = 0.18\)</span>뿐입니다. 몫이 수백 개 입력에 <strong>퍼진</strong> 것이 주된 원인이고, 잡음은 여기서 6%를 더 가져가 0.17로 만듭니다. 잡음의 몫은 <span class="math inline">\(a\)</span>가 1에 더 가까워질수록 빠르게 커져서, 3구간의 <span class="math inline">\(a = 0.9998\)</span>에서는 75%가 됩니다. 이 계산은 입력 하나가 상태를 <span class="math inline">\((1-a)\)</span>만큼 움직이는 2-1절의 모형을 따른 것입니다. 펄스마다 일정한 양을 더하는 소자(D9의 식)라면 신호가 줄지 않아 잡음 몫은 작지만, 퍼짐은 똑같이 일어납니다. 내 소자가 어느 쪽에 가까운지는 펄스 하나가 바꾸는 양과 반복 잡음을 재 봐야 압니다(아래 생각해 보기). 그림 3이 세 경우를 막대 하나씩으로 보여 줍니다.</p>
+<figure class="fig figure"><img src="../assets/img/d13/fig3-variance-share.svg" alt="상태 분산을 1로 놓은 가로 막대 세 개. a=0.5는 k=1이 0.75, k=2가 0.19로 대부분을 차지하고, a=0.9는 k=1–10에 고르게 나뉘어 합이 0.88, a=0.99에 잡음을 더하면 k=1–10의 합이 0.17이고 나머지는 더 먼 과거와 잡음(0.06)이 차지한다" class="figure-img"><figcaption><b>그림 3.</b> 상태 숫자 하나의 흔들림을 과거 입력들이 나눠 갖는 모습. 막대 전체가 상태의 분산(= 1)이고, 조각 하나의 폭이 그 지연의 $MC_k$다. 위 두 막대는 잡음이 없고, 아래 막대는 표준편차 0.01의 측정 잡음(예시 가정)을 넣었다. $a$가 1에 가까울수록 조각이 잘게 쪼개져, 최근 10개 입력의 몫이 0.17까지 줄어든다. 선형 누설 노드 하나의 정확한 계산값이다. (Claude가 계산해 그림)</figcaption></figure>
+<div class="predict">
+<p><span class="math inline">\(a = 0.8\)</span>인 노드(잡음 없음)의 <span class="math inline">\(MC_1\)</span>과 <span class="math inline">\(MC_2\)</span>는 얼마일까요? 위 일반식에 넣어 먼저 계산하고 아래 점검으로 확인하세요. 첫 문제는 본문 숫자의 확인, 둘째는 일부가 채워져 있고, 셋째는 혼자 풉니다.</p>
+</div>
+<div class="quiz" data-day="d13" data-set="2-check"></div>
+<div class="think">
+<p>내 소자의 펄스 응답에서 "신호의 흔들림"과 "측정 잡음"은 각각 얼마인가요? 같은 펄스를 열 번 주었을 때 응답이 얼마나 다른지(잡음)와, 펄스 하나가 전도도를 얼마나 바꾸는지(신호)를 적어 보세요. 신호가 잡음의 몇 배인지가 2-2절에서 본 "몫"의 출발점입니다. 펄스 하나의 변화가 아주 작은 대신 오래 남는 소자라면 어떤 문제가 생길까요?</p>
+</div>
+<div class="quiz" data-day="d13" data-set="2-end"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+분산 / 표준편차
+</dt>
+<dd>
+평균에서 벗어난 양의 제곱의 평균 / 그 제곱근(흔들림의 전형적 크기). −1과 1 사이 고른 무작위 숫자의 분산은 1/3. 측정값 몇 개로 추정할 때는 n−1로 나누는 표본 분산·표본 표준편차가 기본.
+</dd>
+<dt>
+상관² (상관계수의 제곱)
+</dt>
+<dd>
+한 숫자에 상수를 곱해 다른 숫자를 맞힌 정도(0–1). 서로 무관한 항의 합에서는 그 항이 합의 분산에서 차지하는 몫과 같다.
+</dd>
+<dt>
+선형 누설 노드
+</dt>
+<dd>
+x ← a·x + (1−a)·u. 옛 입력은 a의 거듭제곱으로 줄어든다. a = e의 지수 (−입력 간격/τ). (1−a)는 입력을 한 간격 동안 걸어 둘 때 상태가 그 값 쪽으로 가는 비율.
+</dd>
+<dt>
+i.i.d. 입력
+</dt>
+<dd>
+independent and identically distributed. 값끼리 서로 무관하고 같은 규칙에서 나온 입력. MC를 잴 때 쓰는 입력.
+</dd>
+<dt>
+washout
+</dt>
+<dd>
+시작 상태의 흔적이 남은 처음 수십–수백 단계를 버리는 것.
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>절차: i.i.d. 입력을 펄스로 넣고 → 입력마다 상태를 읽고 → 지연마다 readout을 맞추고 → 새 데이터에서 상관²(<span class="math inline">\(MC_k\)</span>)을 구해 더한다. 입력 8개짜리 예는 0.75, 0.19, 0.01(정확한 값 0.75, 0.19, 0.05). 데이터가 적으면 크게 흔들린다(Claude 계산).</li>
+<li>번호: D13의 <span class="math inline">\(k\)</span> = 1(방금 입력) = D9·D11의 <span class="math inline">\(k\)</span> = 0. D12 <code>esn.py</code>의 <span class="math inline">\(MC_1\)</span>은 D13의 <span class="math inline">\(MC_2\)</span>.</li>
+<li>정의: 노드 하나의 <span class="math inline">\(MC_k\)</span> = 상태의 흔들림에서 k개 전 입력이 차지하는 몫 = <span class="math inline">\((1-a^2)a^{2(k-1)}\)</span>.</li>
+<li>왜: 상태가 숫자 하나뿐이라, 과거 입력들이 그 흔들림을 나눠 가질 수밖에 없다. 그래서 합은 1(= 상태 수)을 넘지 못한다.</li>
+<li>숫자: <span class="math inline">\(a = 0.5\)</span>이면 0.75, 0.19, 0.05, …. <span class="math inline">\(a = 0.99\)</span>에 잡음(표준편차 0.01)을 넣으면 최근 10개의 합이 0.17(Claude 계산, 잡음 크기는 예시 가정).</li>
+<li>조건: 입력이 서로 무관하고 노드가 선형일 때의 정확한 계산이다. 비선형 노드는 몫의 일부를 "입력들의 곱" 같은 비선형 정보에 쓴다(4구간 끝, <a href="../days/d11.html#b-tradeoff">D11 기초: 상충</a>).</li>
+<li>남은 질문: <span class="math inline">\(a\)</span>를 정하는 것은 τ뿐인가? → 3구간: τ와 입력 간격의 비.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-timescale" class="level3">
+<h3 class="anchored" data-anchor-id="ch-timescale">3. 10 ms냐 10 s냐: 과제의 시간척도에 맞춘다</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span>과 과제가 필요로 하는 기억 창을 써서 "τ = 10 ms 소자와 τ = 10 s 소자 중 어느 쪽이 좋은가"에 조건을 붙여 답하고, 두 가지 실패(너무 빨리 잊음, 너무 오래 끌고 감)를 숫자로 보일 수 있다.</p>
+</div>
+<p>이 질문을 처음 들으면 "10 s가 1,000배 오래 기억하니 좋다"고 답하기 쉽습니다. 2구간에서 이미 반례를 봤습니다. <span class="math inline">\(a\)</span>가 1에 가까워지면 기억은 커지는 것이 아니라 퍼지고, 잡음이 있으면 퍼진 조각이 묻힙니다. 그렇다면 <span class="math inline">\(a\)</span>는 무엇이 정하나? τ 하나가 아니라 <strong>τ와 입력 간격의 비</strong>입니다. 그리고 "어느 쪽이 좋은가"를 정하는 마지막 재료는 <strong>과제가 얼마나 먼 과거를 필요로 하는가</strong>입니다.</p>
+<p>먼저 "시계열"과 "입력 간격"을 다시 짚습니다. 시계열은 일정한 시간 간격으로 잰 숫자들의 줄입니다. 1초에 250번 재면 간격은 4 ms입니다(<a href="../days/d08.html#b-time-series">D8 기초: 시계열</a>). RC에서는 이렇게 이어지는 숫자 하나하나를 소자에 펄스로 넣습니다.</p>
+<div id="b-timescale-match" class="basics">
+<section id="소자-시간상수와-과제-시간척도의-정합" class="level4">
+<h4 class="anchored" data-anchor-id="소자-시간상수와-과제-시간척도의-정합">소자 시간상수와 과제 시간척도의 정합</h4>
+<p><strong>① 왜 필요한가.</strong> 같은 소자가 어떤 과제에서는 쓸 만하고 어떤 과제에서는 쓸모없습니다. 그 차이를 소자 탓이나 과제 탓으로 돌리기 전에, 둘의 <strong>시간척도가 맞았는지</strong>부터 확인해야 합니다.</p>
+<p><strong>② 무엇인가 — 세 개의 시간.</strong></p>
+<ul>
+<li><strong>소자의 시간상수 τ</strong> [s]: 상태가 스스로 원래로 돌아가는 속도(1구간).</li>
+<li><strong>입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span></strong> [s]: 연속한 두 입력이 <strong>시작되는 시각 사이의 간격</strong>. Singh 2026은 이것을 "연속한 두 부호화 입력 기호(symbol)의 시작 사이 시간"으로 정의하고, 펄스 폭이 그보다 짧아도 이 정의를 쓴다고 적습니다. 그리고 "언제 상태를 읽느냐"(state-sampling delay)와는 다른 양이므로 따로 보고하라고 합니다. <span class="src">Singh 2026, p.13</span> 이 교재에서는 "입력 간격"이라고 부릅니다.</li>
+<li><strong>과제의 기억 창</strong> [s]: 답을 내는 데 필요한 과거의 길이. 예를 들어 "최근 10개 입력의 패턴"이 필요하면 기억 창은 <span class="math inline">\(10 \times T_{\text{sym}}\)</span>입니다. <span class="math inline">\(k\)</span>개 전 입력의 물리적 시간 지연은 <span class="math inline">\(\tau_k = k\,T_{\text{sym}}\)</span>입니다. <span class="src">Singh 2026, p.13</span></li>
+</ul>
+<p><strong>③ 무슨 일이 어떤 순서로.</strong></p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 한 간격 동안 얼마나 남나.</strong> 입력 하나가 상태를 바꾼 뒤 다음 입력까지 <span class="math inline">\(T_{\text{sym}}\)</span> 동안 상태가 <span class="math inline">\(e^{-t/\tau}\)</span>로 감쇠하므로, 남는 비율은 <span class="math inline">\(a = e^{-T_{\text{sym}}/\tau}\)</span>입니다(2구간의 <span class="math inline">\(a\)</span>).</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — <span class="math inline">\(a\)</span>가 기억의 모양을 정한다.</strong> <span class="math inline">\(a\)</span>가 0에 가까우면(τ ≪ <span class="math inline">\(T_{\text{sym}}\)</span>) 상태는 방금 입력만 품습니다. <span class="math inline">\(a\)</span>가 1에 가까우면(τ ≫ <span class="math inline">\(T_{\text{sym}}\)</span>) 입력 하나가 상태를 아주 조금만 움직이고, 그 흔적이 수천 개 입력에 걸쳐 퍼집니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 과제의 창과 겹쳐 보기.</strong> 과제가 필요로 하는 지연 <span class="math inline">\(k = 1, 2, \ldots, K\)</span>에서 <span class="math inline">\(MC_k\)</span>가 잡음 수준보다 충분히 커야 합니다. 창 안의 <span class="math inline">\(MC_k\)</span> 합이 클수록 좋고, 창 밖으로 길게 끌고 가는 것은 득이 없거나 해롭습니다(아래 ⑥).</p>
+</div>
+</div>
+<p><strong>④ 작은 숫자로 — 10 ms 소자와 10 s 소자.</strong> 두 소자(τ = 10 ms, τ = 10 s)와 두 과제를 놓습니다. 빠른 과제는 입력이 2 ms마다 오고(예: 1초에 500번 재는 진동 신호), 느린 과제는 2 s마다 옵니다(예: 몇 초에 한 번 바뀌는 환경 신호). 두 과제 모두 <strong>최근 10개 입력</strong>(<span class="math inline">\(k = 1\)</span>–10)이 필요하다고 합시다. 잡음은 2구간과 같이 표준편차 0.01로 둡니다(예시 가정).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>소자 × 과제</th>
+<th><span class="math inline">\(T_{\text{sym}}/\tau\)</span></th>
+<th><span class="math inline">\(a = e^{-T_{\text{sym}}/\tau}\)</span></th>
+<th>창(<span class="math inline">\(k\)</span> = 1–10) 안의 <span class="math inline">\(MC_k\)</span> 합</th>
+<th><span class="math inline">\(MC_k &gt; 0.05\)</span>인 지연 수</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>10 ms × 빠른 과제(2 ms)</td>
+<td>0.2</td>
+<td>0.819</td>
+<td>0.979</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>10 ms × 느린 과제(2 s)</td>
+<td>200</td>
+<td>≈ 0 (10⁻⁸⁷)</td>
+<td>1.000이지만 전부 <span class="math inline">\(k\)</span> = 1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>10 s × 빠른 과제(2 ms)</td>
+<td>0.0002</td>
+<td>0.9998</td>
+<td>0.001</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>10 s × 느린 과제(2 s)</td>
+<td>0.2</td>
+<td>0.819</td>
+<td>0.979</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>계산 과정을 칸마다 봅니다.</p>
+<ul>
+<li><strong>10 ms × 빠른 과제.</strong> <span class="math inline">\(2/10 = 0.2\)</span>, <span class="math inline">\(a = e^{-0.2} = 0.819\)</span>. <span class="math inline">\(MC_1\)</span>–<span class="math inline">\(MC_5\)</span> = 0.329, 0.220, 0.148, 0.099, 0.066으로 최근 다섯 입력이 기준 0.05를 넘습니다.</li>
+<li><strong>10 ms × 느린 과제.</strong> 2 s 동안 τ의 200배가 지나 상태가 완전히 원래로 돌아갑니다. 방금 입력은 100% 남지만 그 전 입력은 흔적이 없습니다. <strong>너무 빨리 잊는</strong> 실패입니다.</li>
+<li><strong>10 s × 빠른 과제.</strong> 입력 하나가 상태를 <span class="math inline">\((1-a) = 0.0002\)</span>만큼만 움직이고(2-1절의 '조금밖에 못 감'), 그 흔적이 약 5,000개 입력(<span class="math inline">\(1/(1-a)\)</span>)에 걸쳐 퍼집니다. 신호의 표준편차(0.0058)가 잡음(0.01)보다 작아 잡음이 흔들림의 75%를 차지하고, 입력들의 몫인 MC 0.25마저 수천 개 지연에 흩어져 창 안에는 0.001만 남습니다. 나머지 약 0.249는 창 밖(<span class="math inline">\(k &gt; 10\)</span>), 곧 과제에 필요 없는 먼 과거의 흔적입니다. 입력열이 바뀌어도 이 흔적이 남아 다음 입력열로 <strong>넘어오는</strong> 것이 아래 ⑥의 둘째 실패입니다. <strong>retention(10% 기준)이 23 s로 1,000배 긴 소자가 이 과제에서는 거의 아무것도 기억하지 못합니다.</strong></li>
+<li><strong>10 s × 느린 과제.</strong> 첫째 칸과 <strong>똑같은</strong> 막대가 나옵니다. <span class="math inline">\(T_{\text{sym}}/\tau\)</span>가 같기 때문입니다. 좋은 τ는 절대값이 아니라 <strong>입력 간격에 대한 비율</strong>로 정해집니다.</li>
+</ul>
+<p><strong>⑤ 이름과 정확한 뜻.</strong> 이것을 <strong>시간척도 정합</strong>(timescale matching)이라 부릅니다. 이 교재의 뜻: 소자의 τ(들)가 입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span>과 과제의 기억 창 <span class="math inline">\(K \cdot T_{\text{sym}}\)</span> 사이에 놓여, 창 안의 지연들이 잡음보다 큰 <span class="math inline">\(MC_k\)</span>를 갖는 상태. 하나의 숫자로 "τ ≈ <span class="math inline">\(T_{\text{sym}}\)</span>"이라고 줄여 말하기도 하지만, 정확히는 <strong>창 전체</strong>를 덮어야 합니다.</p>
+<p><strong>⑥ 이온·RC와의 연결 — 두 가지 실패.</strong> Singh 2026은 지연별 기억 곡선과 물리 지연 <span class="math inline">\(\tau_k = k T_{\text{sym}}\)</span>이 측정한 과도 응답을 과제가 쓸 수 있는 시간 맥락과 이어 준다고 쓰고, 두 실패를 함께 적습니다. "과제에 필요한 지연 전에 정보를 잃는 reservoir는 시간 맥락이 부족하고, 너무 느린 회복은 명목상 독립인 입력열 사이에 원치 않는 <strong>넘어옴</strong>(carry-over)을 만든다." <span class="src">Singh 2026, p.18–19</span> 같은 글의 표는 이 설계 규칙("과제와 reservoir의 시간척도를 맞춰라")이 깨졌다는 신호로 "과제가 필요로 하는 지연 전에 기억이 사라짐, 연속 입력 사이의 과도한 넘어옴, 입력 속도에 따라 성능이 크게 변함"을 듭니다. <span class="src">Singh 2026, p.9, Table 1</span> Liang 2024는 물리 노드의 τ가 "전체 시스템의 동작 시간척도를 정한다"고 쓰고, 센서 근처 응용에서는 자연 신호와 상호작용하려면 생물학적 시간척도(1 ms 이상)가 필요하며 τ가 짧으면 실시간 신호와 결합하지 못한다고 씁니다. <span class="src">Liang 2024, p.198</span> 예로 τ가 약 1 s인 rotating-neuron RC는 손글씨 궤적 끝의 상태가 과거 약 0.8 s의 정보를 담아 중간 상태를 따로 저장할 필요가 없었고, τ를 짧게 하면 궤적을 빨리 잊어 성능이 떨어졌다고 소개합니다. <span class="src">Liang 2024, p.200</span></p>
+<p><strong>⑦ 짧은 확인.</strong> τ = 50 ms 소자에 입력을 10 ms 간격으로 넣으면 <span class="math inline">\(a\)</span>는? (<span class="math inline">\(e^{-0.2} = 0.819\)</span>. 그림 5의 첫째·넷째 칸과 같은 모양이 나옵니다.)</p>
+</section>
+</div>
+<p>그림 4는 같은 입력열을 τ만 다른 세 소자에 넣은 모식도이고, 그림 5는 위 표의 네 칸을 막대로 그린 계산 결과입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d13/fig4-timescale-match.svg" alt="같은 계단 모양 입력열에 대해, τ가 입력 간격보다 훨씬 짧은 소자는 입력을 그대로 따라가고, 비슷한 소자는 최근 몇 개가 겹쳐 남고, 훨씬 긴 소자는 거의 움직이지 않고 평균만 남는 세 곡선의 모식도" class="figure-img"><figcaption><b>그림 4.</b> 같은 입력열(맨 위, 막대 하나가 입력 하나), τ만 다른 세 소자의 상태. 파랑(τ ≪ 간격)은 방금 입력만, 초록(τ ≈ 간격)은 최근 몇 개가 겹친 모양을, 주황(τ ≫ 간격)은 아주 작은 움직임만 남긴다. 주황 곡선이 "오래 기억한다"는 말과 달리 거의 평평한 이유가 2-2절의 $(1-a)$다. 곡선은 $dx/dt = (u - x)/\tau$를 적분한 것이고 세로 크기는 설명용이다. (Claude가 그림, 모식도)</figcaption></figure>
+<figure class="fig figure"><img src="../assets/img/d13/fig5-tau-vs-task.svg" alt="τ=10 ms 소자와 τ=10 s 소자를 입력 간격 2 ms와 2 s인 두 과제에 넣은 네 칸의 MCk 막대. 비율이 0.2인 두 칸은 똑같이 k=1–5가 기준 0.05를 넘고 창 안 합 0.979, 10 ms 소자 × 2 s 과제는 k=1만 1.0, 10 s 소자 × 2 ms 과제는 모든 막대가 0.0001 수준으로 창 안 합 0.001" class="figure-img"><figcaption><b>그림 5.</b> 10 ms 소자와 10 s 소자, 빠른 과제(입력 간격 2 ms)와 느린 과제(2 s)의 $MC_k$, $k$ = 1–10. 가로축 $k$는 물리 시간으로 $k \times$ 입력 간격이다. 주황 점선은 '쓸 만한' 기준의 예(0.05). 초록 두 칸은 입력 간격/τ가 0.2로 같아 막대가 똑같다. 빨강 두 칸은 각각 "너무 빨리 잊음"과 "한 입력의 흔적이 너무 작고 넓게 퍼짐"의 실패다. 잡음 표준편차 0.01은 예시 가정이며, 선형 누설 노드 하나의 정확한 계산값이다. (Claude가 계산해 그림)</figcaption></figure>
+<section id="누가-입력-간격을-정하나" class="level4">
+<h4 class="anchored" data-anchor-id="누가-입력-간격을-정하나">3-1. 누가 입력 간격을 정하나</h4>
+<p>여기서 중요한 구분이 하나 생깁니다. <strong>실시간 신호</strong>(심전도, 진동, 말소리)에서는 입력 간격을 <strong>신호가 정합니다</strong>. 심장은 내 소자의 τ에 맞춰 뛰어 주지 않습니다. 이때 정합은 소자 쪽을 바꿔서만 맞출 수 있습니다. 반면 <strong>저장된 데이터셋</strong>(정지 영상인 MNIST처럼 시간이 없는 데이터를 펄스열로 바꾸는 경우)에서는 실험자가 입력 간격을 <strong>마음대로 고릅니다</strong>. 그러면 어떤 τ의 소자든 간격을 맞춰 주면 정합이 됩니다. 이것은 편리하지만, 그 결과가 "이 소자가 실제 신호의 시간척도와 맞는다"는 증거는 아니라는 뜻이기도 합니다(D15에서 자세히). <span class="tag tag-interp">해석</span></p>
+<p>Singh 2026은 실험 순서로 이 점을 정리합니다. 재료 조성과 소자 구조를 고정한 채 먼저 입력 간격, 펄스 폭, 진폭, 바이어스, 상태 읽는 시점 같은 <strong>프로토콜 변수</strong>를 바꿔 보고, 거기서 재현 가능한 좋은 영역이 나오면 처음의 한계는 "프로토콜과 reservoir 동역학의 불일치"였을 가능성이 크며, 비파괴 범위 안에서 그런 영역이 없을 때 비로소 소자 구조나 재료를 바꾸라는 것입니다. <span class="src">Singh 2026, p.8</span></p>
+</section>
+<section id="실제-데이터-데이터-간격이-τ를-넘으면" class="level4">
+<h4 class="anchored" data-anchor-id="실제-데이터-데이터-간격이-τ를-넘으면">3-2. 실제 데이터: 데이터 간격이 τ를 넘으면</h4>
+<p>폴더에 이 현상을 측정으로 보인 논문이 있습니다. Lee 2025(npj Unconv. Comput.)의 HfO₂ 2단자 소자는 펄스 뒤 감쇠를 지수 하나로 맞춘 τ가 0.92 ms이고 <span class="src">Lee 2025 (npj), p.2</span>, 펄스 사이 쉬는 구간에 일정한 전압(바이어스 <span class="math inline">\(V_b\)</span>, <a href="../days/d06.html#ch-folder-examples">D6 4구간</a>)을 걸어 두는 방법으로 τ를 최대 123 ms까지 늘립니다(데이터 간격 100 ms, <span class="math inline">\(V_b\)</span> = 1.6 V). <span class="src">Lee 2025 (npj), p.3</span> 사건 카메라(밝기가 바뀐 픽셀만 기록하는 카메라)로 찍은 손글씨 숫자를 네 장의 시간 프레임으로 나눠 픽셀마다 펄스 네 개로 넣는 과제(N-MNIST)에서, 프레임 사이 간격을 0.14 ms에서 100 ms까지 바꿨습니다. 저자들은 "기존 방식(<span class="math inline">\(V_b\)</span> = 0 V)은 데이터 시간척도가 소자 고유의 τ를 넘으면 정확도가 떨어지고", <span class="math inline">\(V_b\)</span>로 τ를 늘린 방식은 세 자릿수에 걸쳐 정확도를 유지한다고 씁니다. <span class="src">Lee 2025 (npj), p.7</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/b5yJpxLEKoI?start=0&amp;rel=0" title="영상: Event-based Vision Sensor (EVS) - Detecting Changes in Moving Subjects" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:00–1:26, 약 1분 30초 · 전체 3분, 영어).</b> Sony 공식 채널, "Event-based Vision Sensor (EVS) - Detecting Changes in Moving Subjects [Technology]". <b>볼 이유:</b> N-MNIST를 만든 '사건 카메라'가 무엇을 기록하는지 보는 용도다. 챕터 'What is Event-based Vision Sensor (EVS)?'(0:00)와 'How EVS captures moving subjects'(0:34)가 밝기가 <b>바뀐</b> 픽셀만 기록하는 방식을 설명한다(설명란: 피사체의 움직임을 밝기 변화로 잡아 지연이 짧다). 1:26 뒤는 제품 기능 소개라 건너뛰어도 된다. 영상의 센서는 Sony 제품이고, Lee 2025의 N-MNIST를 찍은 카메라와 같은 기종이라는 뜻은 아니다. <b>보고 답할 질문:</b> 사건 카메라 데이터에서 '프레임 사이 간격'은 누가 정하나? 카메라인가, 데이터를 네 장으로 나눈 실험자인가(3-1절)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 목록(영상 내용은 미검증)</span></div></div>
+<p>그림에는 비교 대상도 하나 그려져 있습니다. <strong>기준선</strong>(baseline)은 소자를 빼고 같은 readout을 돌린 성능으로, 소자가 정말 무언가를 보탰는지 재는 잣대입니다(<a href="../days/d06.html#b-heldout-baseline">D6 기초 4</a>). 여기서는 원시 프레임 네 장을 그대로 readout에 넣은 성능입니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/lee2025npj-fig6a-d.png" alt="Lee 2025 npj UC Fig. 6: a는 데이터 시간척도(0.14–100 ms, 로그축)에 대한 N-MNIST 정확도로, 기존 방식(파랑)은 86.8%에서 85.0%로 떨어지고 바이어스로 τ를 늘린 방식(빨강·검정)은 유지되며, 점선 소프트웨어 기준선은 91.32%. c·d는 읽기 방식별 정확도 막대" class="figure-img"><figcaption><b>원문 그림.</b> Lee et al., <a href="https://doi.org/10.1038/s44335-025-00043-3" target="_blank"><i>npj Unconv. Comput.</i> 2025, 2, 27</a>, Fig. 6a–d, p.7. 볼 것: 오늘은 <b>a</b>만 봅니다. 가로축은 네 프레임 사이의 데이터 간격(시간척도, 로그 눈금: 한 칸이 10배), 세로축은 정확도(%). 파랑(Conventional, τ ≈ 0.92 ms 그대로)은 간격이 τ보다 짧은 0.14 ms에서 86.8%, τ를 넘는 1 ms에서 약 86.0%, 100 ms에서 85.0%로 천천히 내려가고, 빨강(바이어스 하나)과 검정(바이어스 셋)은 유지된다. 이것이 "간격이 τ를 넘으면 앞 프레임을 잊는다"는 3구간의 실패가 실제로 나타난 모습이다. 그런데 세로축 눈금을 확인하라. 파랑이 잃은 것은 약 2%p(86.8 → 85.0%)뿐이고, 맨 위 점선(원시 프레임 네 장을 그대로 readout에 넣은 기준선, 91.32%)이 모든 곡선보다 높다. <b>c·d</b>는 여러 소자를 묶어 읽는 방식의 비교로 D15·D16에서 다시 본다. 측정 데이터. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p><strong>측정한 τ로 <span class="math inline">\(a\)</span>를 계산해 보기.</strong> 3구간의 식 <span class="math inline">\(a = e^{-T_{\text{sym}}/\tau}\)</span>에 이 소자의 측정값을 넣으면, 파랑 곡선의 각 점에서 상태에 무엇이 남았는지 숫자로 볼 수 있습니다. 이 과제는 픽셀마다 프레임 넷을 펄스 넷으로 넣은 뒤 전도도를 읽으므로 <span class="src">Lee 2025 (npj), p.6</span>, 읽는 순간 마지막 프레임의 흔적을 1로 놓으면 그 전 프레임들은 <span class="math inline">\(a\)</span>, <span class="math inline">\(a^2\)</span>, <span class="math inline">\(a^3\)</span>의 무게로 남습니다. 펄스마다 일정한 양을 더하는 D9의 식으로 본 대략적인 그림이며, 실제 소자의 전도도 증가는 선형이 아닙니다. [해석, Claude 계산]</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>데이터 간격 <span class="math inline">\(t_b\)</span></th>
+<th>τ (조건)</th>
+<th><span class="math inline">\(a = e^{-t_b/\tau}\)</span></th>
+<th>프레임 넷의 무게(마지막 → 첫째)</th>
+<th>파랑의 정확도(그림에서 읽음)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.14 ms</td>
+<td>0.92 ms (<span class="math inline">\(V_b\)</span> = 0)</td>
+<td>0.86</td>
+<td>1, 0.86, 0.74, 0.63</td>
+<td>86.8%</td>
+</tr>
+<tr class="even">
+<td>1 ms</td>
+<td>0.92 ms</td>
+<td>0.34</td>
+<td>1, 0.34, 0.11, 0.04</td>
+<td>약 86.0%</td>
+</tr>
+<tr class="odd">
+<td>10 ms</td>
+<td>0.92 ms</td>
+<td>약 2 × 10⁻⁵</td>
+<td>1, 0, 0, 0</td>
+<td>약 85.5%</td>
+</tr>
+<tr class="even">
+<td>100 ms</td>
+<td>0.92 ms</td>
+<td>약 10⁻⁴⁷</td>
+<td>1, 0, 0, 0</td>
+<td>85.0%</td>
+</tr>
+<tr class="odd">
+<td>100 ms</td>
+<td>123 ms (<span class="math inline">\(V_b\)</span> = 1.6 V)</td>
+<td>0.44</td>
+<td>1, 0.44, 0.20, 0.09</td>
+<td>(파랑이 아님, 아래 설명)</td>
+</tr>
+</tbody>
+</table>
+<p>읽는 법: 간격이 τ보다 짧은 첫 줄에서는 네 프레임이 모두 상당한 무게로 섞여 남고, 간격이 τ의 10배를 넘는 셋째·넷째 줄에서는 읽는 순간 마지막 프레임만 남습니다. 바이어스로 τ를 123 ms로 늘린 마지막 줄은 100 ms 간격에서도 둘째 줄(1 ms, <span class="math inline">\(V_b\)</span> = 0)보다 앞 프레임이 더 많이 남습니다. 조건마다의 τ는 저자들이 그림 위의 곡선과 같은 지수 맞춤으로 구했고, 간격이 1 ms보다 길 때 <span class="math inline">\(V_b\)</span> = 0의 τ는 첫 읽기가 늦어 실제보다 크게 맞춰진다고 적었습니다. <span class="src">Lee 2025 (npj), p.3</span> 그래서 위 표의 <span class="math inline">\(V_b\)</span> = 0 줄은 τ₀ = 0.92 ms 하나를 모든 간격에 쓴 Claude의 계산입니다. 빨강('Single') 곡선은 50·100 ms에서 <span class="math inline">\(V_b\)</span> = 1.2 V를 썼고 <span class="src">Lee 2025 (npj), p.7</span>, 그 조건의 τ는 본문에 숫자로 나오지 않아 마지막 줄과 바로 이어 볼 수 없습니다. <span class="tag tag-unverified">미확인</span></p>
+<p>이 그림이 오늘 질문에 주는 것은 두 가지입니다. 첫째, 시간척도 불일치는 실제로 성능을 깎는다. 둘째, 그 크기는 <strong>과제가 기억에 얼마나 기대느냐</strong>에 달렸다. 파랑 곡선이 앞 프레임들을 잊어도 85%를 지킨다는 것은, 이 과제의 정보 대부분이 마지막 프레임 하나에도 들어 있다는 뜻으로 읽힙니다. <span class="tag tag-interp">해석</span> 기억이 핵심인 과제였다면 떨어지는 폭이 훨씬 컸을 것입니다. 그래서 "τ를 맞췄더니 성능이 올랐다"는 주장을 평가하려면 <strong>그 과제가 기억을 얼마나 필요로 하는지</strong>를 함께 봐야 합니다(D15의 주제).</p>
+<div class="myth">
+<p><strong>"time-multiplexing의 θ ≈ τ/4가 시간척도 정합이다"</strong> — 다른 간격입니다. Liang 2024의 θ ≈ τ/4는 입력 <strong>하나</strong>를 여러 조각(가상 노드)으로 나눌 때 그 <strong>조각 하나의 길이</strong>에 대한 경험칙입니다. 조각이 너무 길면 다음 값이 오기 전에 포화해 상태가 두 값으로만 몰리고, 너무 짧으면 소자가 작은 선형 범위에서만 움직입니다. <span class="src">Liang 2024, p.198</span> 오늘의 입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span>은 입력과 입력 <strong>사이</strong>의 간격이고, 기억 창은 과제가 정합니다. 둘 다 τ와 비교하지만 묻는 것이 다릅니다. 시간다중화와 가상 노드는 <a href="../days/d10.html#b-time-multiplexing">D10 기초</a>에 있습니다.</p>
+</div>
+<div class="quiz" data-day="d13" data-set="3-check"></div>
+<div class="think">
+<p>내 소자를 쓰고 싶은 신호 하나를 정해 보세요(예: 피부 땀 센서, 심전도, 호흡). 그 신호를 몇 ms 간격으로 재야 하고, 답을 내는 데 몇 초 전까지의 신호가 필요한가요? 그 두 숫자를 내 소자의 τ(들)와 나란히 적으면 3구간 ④의 네 칸 표 중 어디에 가까운가요? τ를 모른다면, 그것이 Phase 4·5에서 가장 먼저 잴 숫자입니다.</p>
+</div>
+<div class="quiz" data-day="d13" data-set="3-end"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span>
+</dt>
+<dd>
+연속한 두 입력이 시작되는 시각 사이의 간격. 상태를 읽는 시점과는 다른 양이다.
+</dd>
+<dt>
+기억 창
+</dt>
+<dd>
+과제가 답을 내는 데 필요한 과거의 길이. 지연 k의 물리 시간은 τₖ = k × 입력 간격.
+</dd>
+<dt>
+시간척도 정합
+</dt>
+<dd>
+소자의 τ(들)가 입력 간격과 기억 창 사이에 놓여, 창 안의 지연들이 잡음보다 큰 MCₖ를 갖는 상태. 좋은 τ는 입력 간격에 대한 비율로 정해진다.
+</dd>
+<dt>
+넘어옴 (carry-over)
+</dt>
+<dd>
+회복이 너무 느려 앞 입력열의 흔적이 독립이어야 할 다음 입력열에 남는 것.
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>정의: 한 간격 동안 남는 비율 <span class="math inline">\(a = e^{-T_{\text{sym}}/\tau}\)</span>가 기억의 모양을 정한다. 좋은 τ는 입력 간격에 대한 비율과 과제의 기억 창으로 정해진다.</li>
+<li>숫자: 10 ms × 2 ms 과제와 10 s × 2 s 과제는 똑같다(창 안 합 0.979). 10 ms × 2 s는 방금 입력만, 10 s × 2 ms는 창 안 합 0.001(선형 노드 모형, 잡음 0.01 가정, Claude 계산).</li>
+<li>실패 둘: 창보다 빨리 잊음 / 너무 느린 회복으로 넘어옴 <span class="src">Singh 2026, p.18–19</span>. 실제 측정: 데이터 간격이 τ를 넘으면 정확도가 떨어진다 <span class="src">Lee 2025 (npj), p.7</span>.</li>
+<li>측정 τ에 이어 보기: Lee 2025 소자(τ₀ = 0.92 ms)는 간격 0.14 ms에서 <span class="math inline">\(a\)</span> = 0.86(네 프레임이 섞여 남음), 10 ms 이상에서 <span class="math inline">\(a \approx 0\)</span>(마지막 프레임만)이고, 그사이 정확도는 86.8% → 85.0%로 약 2%p 떨어졌다(Claude 계산 + 그림 읽기).</li>
+<li>조건: 실시간 신호는 신호가 간격을 정하고, 저장된 데이터는 실험자가 정한다. 후자의 정합은 실제 신호와의 정합을 증명하지 않는다 <span class="tag tag-interp">해석</span>.</li>
+<li>남은 질문: 시간척도가 다른 소자를 여러 개 쓰면? → 4구간.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-many-nodes" class="level3">
+<h3 class="anchored" data-anchor-id="ch-many-nodes">4. 소자를 늘리면 기억도 늘까: 같은 τ는 겹치고 다른 τ는 쌓인다</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 같은 τ의 소자를 여러 개 쓰면 MC가 거의 늘지 않고 τ가 서로 다를 때 쌓이는 이유를 말하고, 이온 소자에서 여러 시간척도를 만드는 방법이 왜 중요한지 연결할 수 있다.</p>
+</div>
+<p>2구간에서 노드 하나의 MC는 1을 넘지 못했습니다. 상태 숫자가 하나뿐이기 때문입니다. 그렇다면 상태 숫자를 늘리면, 즉 소자를 넷 쓰면 MC도 4가 될까요? 앞에서 배운 상태 갱신식으로 다시 말하면, reservoir의 상태는 숫자 목록이고 입력이 올 때마다 그 목록이 정해진 규칙으로 갱신됩니다(<a href="../days/d08.html#b-rc-update">D8 기초: 상태 갱신</a>). 소자 넷을 나란히 두면 목록의 숫자가 넷입니다.</p>
+<div class="predict">
+<p>τ가 모두 같은 소자 넷(<span class="math inline">\(a\)</span> = 0.8 넷)과 τ가 서로 다른 소자 넷(<span class="math inline">\(a\)</span> = 0.3, 0.6, 0.85, 0.95)의 MC는 각각 얼마쯤일까요? 상한은 4입니다. 그림 6을 보기 전에 짐작을 적어 두세요.</p>
+</div>
+<p>같은 τ의 소자 넷은 같은 입력을 받아 <strong>같은 모양으로</strong> 움직입니다. 입력이 소자마다 다른 배율로 들어가도, 선형 소자라면 상태는 서로의 배수일 뿐입니다. readout 입장에서 넷은 한 숫자를 네 번 본 것과 같아서, 새로 꺼낼 수 있는 과거 정보가 없습니다. 측정 잡음이 소자마다 독립이면 넷을 평균해 잡음이 조금 줄 뿐입니다. 반면 τ가 다르면 각 소자가 <strong>다른 무게로</strong> 과거를 섞으므로(빠른 소자는 최근을, 느린 소자는 먼 과거를), readout이 이들을 더하고 빼서 특정 지연의 입력을 골라낼 수 있습니다.</p>
+<p><strong>노드 둘로 확인하기.</strong> 가장 작은 예로, 혼자서는 기억이 전혀 없는 노드 A(<span class="math inline">\(a = 0\)</span>, 상태 = 방금 입력 <span class="math inline">\(u_1\)</span>)와 2구간의 노드 B(<span class="math inline">\(a = 0.5\)</span>, 상태 = <span class="math inline">\(0.5u_1 + 0.25u_2 + 0.125u_3 + \cdots\)</span>)를 함께 읽는다고 합시다. B 혼자로는 <span class="math inline">\(u_2\)</span>의 몫이 0.19뿐이었습니다. readout이 <span class="math inline">\(2 \times B - A\)</span>를 만들면 <span class="math inline">\(u_1\)</span>이 지워져 <span class="math inline">\(0.5u_2 + 0.25u_3 + 0.125u_4 + \cdots\)</span>가 남고, 이제 <span class="math inline">\(u_2\)</span>가 이 흔들림의 75%를 차지합니다(2-1절 표와 같은 계산: 0.25 ÷ 0.333). 그래서 둘을 함께 읽으면 <span class="math inline">\(MC_1 = 1\)</span>(A가 곧 <span class="math inline">\(u_1\)</span>), <span class="math inline">\(MC_2 = 0.75\)</span>, …로 총 MC가 2(= 상태 수)가 됩니다(Claude 계산, 잡음 없음). 혼자서는 '기억 없는 소자'인 A가 B의 기억을 또렷하게 만든 것입니다. 반대로 B와 <strong>같은 <span class="math inline">\(a\)</span></strong>의 노드 B′를 더하면(입력 배율만 달라 B′ = 2 × B), 어떻게 더하고 빼도 B를 몇 배 한 것만 나와 <span class="math inline">\(u_1\)</span>을 지울 수 없고, 총 MC는 1 그대로입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d13/fig6-many-nodes.svg" alt="지연 k에 대한 MCk 곡선. 노드 1개(a=0.8)와 같은 a의 노드 4개는 거의 겹쳐 총 MC가 1.00이고, a=0.3·0.6·0.85·0.95인 노드 4개는 k=1에서 0.97로 시작해 총 MC 3.80" class="figure-img"><figcaption><b>그림 6.</b> 노드 넷의 $MC_k$. 회색 점선(노드 하나, $a$ = 0.8)과 빨강(같은 $a$의 노드 넷)이 거의 겹치고 총 MC가 둘 다 1.00이다. 초록(서로 다른 $a$ 넷)은 총 MC 3.80으로 상한 4에 가깝다. 각 노드에 독립 잡음(표준편차 0.01, 예시 가정)을 넣은 선형 노드의 정확한 계산값이다. (Claude가 계산해 그림)</figcaption></figure>
+<p>이것은 폴더의 리뷰가 지적하는 한계와 정확히 같습니다. Liang 2024는 소자 여러 개를 나란히 쓰는 dynamic-device RC 구조에서 "MC가 단일 소자의 용량에만 의존하며, 병렬 소자들의 MC는 더 큰 값으로 쌓이기보다 대부분 <strong>겹친다</strong>"고 쓰고, 그래서 MC가 낮은 수준에 머물며 중간 상태를 외부 메모리 버퍼에 저장해 보완할 수 있지만 그 대가가 따른다고 씁니다. <span class="src">Liang 2024, p.196</span> 같은 리뷰는 소자 사이의 시간 동역학 편차가 상태의 풍부함을 어느 정도 높이고, 편차가 너무 작은 소자 묶음은 readout의 과적합 같은 문제를 일으킬 수 있다고도 씁니다. <span class="src">Liang 2024, p.196</span> 편차가 늘 좋은지는 D18에서 따집니다(학습한 readout을 다른 소자로 옮길 때의 문제).</p>
+<p>이온 소자 쪽에서 "서로 다른 시간척도"를 만드는 방법은 여럿입니다. 소자마다 구조를 다르게 하거나, 한 소자 안에 이완 과정이 여럿 있게 하거나, 같은 소자를 다른 조건으로 구동하는 것입니다. Lee 2025(npj)는 마지막 방법을 썼습니다. 같은 소자를 세 가지 <span class="math inline">\(V_b\)</span>(0, 0.8, 1.2 V)로 각각 구동해 얻은 상태를 이어 붙여 상태 수를 세 배로 늘린 "Multiple" 방식이 바이어스 하나보다 정확도가 높았고, 저자들은 이것을 "상태 확장의 가능성"이라고 씁니다. <span class="src">Lee 2025 (npj), p.8</span> 그림 6의 초록 곡선이 말하는 것과 같은 방향입니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>비선형이 끼면.</strong> 그림 6은 선형 노드의 계산입니다. 실제 소자는 비선형이고, 비선형 노드는 상태의 흔들림 일부를 "입력들의 곱" 같은 비선형 정보에 씁니다. Liang 2024는 선형 노드로 만든 RC가 비선형 노드보다 보통 MC가 훨씬 높은데, 과거 정보가 비선형성으로 왜곡되기 때문이라고 씁니다. <span class="src">Liang 2024, p.200</span> 기억과 비선형 변환이 같은 상태 수를 나눠 쓰는 이 관계가 D11의 상충입니다(<a href="../days/d11.html#b-tradeoff">D11 기초: memory–nonlinearity 상충</a>). 그래서 MC가 높다는 것만으로 좋은 reservoir라고 할 수 없고, 과제가 비선형 변환을 얼마나 필요로 하는지와 같이 봐야 합니다(D14).</p>
+<div class="quiz" data-day="d13" data-set="4-check"></div>
+<div class="keypoints">
+<ul>
+<li>같은 τ의 소자 넷은 서로의 배수처럼 움직여 MC가 1.00(노드 하나와 같음). τ가 다른 넷은 3.80(상한 4)이다(Claude의 선형 모형 계산).</li>
+<li>폴더의 리뷰: 병렬 소자들의 MC는 쌓이기보다 대부분 겹친다 <span class="src">Liang 2024, p.196</span>. 한 소자를 여러 바이어스로 읽어 상태를 늘린 예 <span class="src">Lee 2025 (npj), p.8</span>.</li>
+<li>조건: 선형 노드의 결과다. 비선형 노드는 상태의 일부를 비선형 정보에 쓰므로 MC가 낮아진다 <span class="src">Liang 2024, p.200</span>.</li>
+<li>남은 질문: 그러면 "좋은 memory"를 어떻게 보고하고 확인하나? → 5구간.</li>
+</ul>
+</div>
+</section>
+<section id="ch-good-memory" class="level3">
+<h3 class="anchored" data-anchor-id="ch-good-memory">5. 좋은 memory의 조건과 논문 읽는 법</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "좋은 memory"를 과제·입력 간격·잡음·상태 수가 붙은 문장으로 쓰고, 기억에 관한 소자 논문의 주장을 확인하는 질문 여섯 개를 적용할 수 있다.</p>
+</div>
+<p>1–4구간을 한 문장으로 모으면 이렇습니다. <strong>좋은 memory는 "오래 남는 기억"이 아니라, 과제가 필요로 하는 지연들의 입력 정보를 잡음보다 크게, 서로 구별되게, 그리고 그 이상은 끌고 가지 않게 담는 상태다.</strong> 이 문장의 각 부분이 하나의 확인 질문이 됩니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>확인 질문</th>
+<th>왜</th>
+<th>논문에서 찾을 것</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>① 과제의 기억 창은 얼마인가(물리 시간으로)?</td>
+<td>좋은 τ는 창이 정한다(3구간)</td>
+<td>과제 설명, 입력 간격, 필요한 과거의 길이</td>
+</tr>
+<tr class="even">
+<td>② retention·τ만 있나, <span class="math inline">\(MC_k\)</span> 곡선이 있나?</td>
+<td>retention은 MC를 정하지 않는다(1구간)</td>
+<td>지연별 <span class="math inline">\(MC_k\)</span> 그림, 누적 MC와 최대 지연 <span class="math inline">\(K\)</span></td>
+</tr>
+<tr class="odd">
+<td>③ <span class="math inline">\(MC_k\)</span>의 가로축에 물리 시간 <span class="math inline">\(\tau_k = kT_{\text{sym}}\)</span>이 있나?</td>
+<td>입력 간격이 다르면 같은 <span class="math inline">\(k\)</span>도 다른 시간이다</td>
+<td><span class="math inline">\(T_{\text{sym}}\)</span>, 상태 읽는 시점</td>
+</tr>
+<tr class="even">
+<td>④ 잡음과 상태 수가 적혀 있나?</td>
+<td>잡음이 퍼진 기억을 묻고, 상태 수가 상한이다(2·4구간)</td>
+<td>반복 측정 편차, 물리·가상 노드 수</td>
+</tr>
+<tr class="odd">
+<td>⑤ 창 밖으로 넘어오지 않나?</td>
+<td>너무 느린 회복은 다음 입력열을 오염시킨다(3구간)</td>
+<td>입력열 사이의 회복·리셋 절차, washout</td>
+</tr>
+<tr class="even">
+<td>⑥ 무엇과 비교했나?</td>
+<td>과거 <span class="math inline">\(k\)</span>개를 그대로 저장하는 디지털 버퍼는 MC가 정확히 <span class="math inline">\(k\)</span>다</td>
+<td>지연 탭 기준선, 같은 readout, 같은 데이터 분할</td>
+</tr>
+</tbody>
+</table>
+<figure class="fig figure"><img src="../assets/img/d13/fig7-mc-span.svg" alt="지연 k(1–300, 로그 눈금)에 대한 MCk 곡선 두 개. A(a = 0.2, 0.5, 0.7, 파랑)는 k = 1에서 거의 1로 시작해 빨리 떨어지고 합의 90%가 k ≤ 6(입력 간격 10 ms면 60 ms)에 있다. B(a = 0.9, 0.95, 0.98, 주황)는 0.26에서 시작해 낮고 길게 이어져 합의 90%가 k ≤ 75(750 ms)에 있다. 총 MC는 A 2.87, B 2.47" class="figure-img"><figcaption><b>그림 5-1.</b> 질문 ②·③을 그림으로. 총 MC는 2.87과 2.47로 비슷하지만, 파랑(A)은 최근 몇 개를 또렷하게, 주황(B)은 수십 개를 흐릿하게 담습니다. 먼저 두 점선(합의 90%가 들어가는 지연)을 보고, 그다음 아래 회색 물리 시간을 읽으세요. 과제의 기억 창이 50 ms면 A, 1 s면 B가 맞습니다. 총 MC 숫자 하나만 보고하면 이 차이가 사라집니다(Singh 2026이 지연별 곡선 전체를 요구하는 이유). 노드 셋은 설명용 예시이고, 값은 2구간과 같은 방식의 정확한 계산이다. (Claude가 계산해 그림)</figcaption></figure>
+<p>⑥은 조금 더 설명이 필요합니다. 과거 입력 10개를 숫자로 적어 두는 보통 컴퓨터의 디지털 메모리(0과 1로 값을 적는 저장소, <a href="../days/d02.html#b-bit">D2 기초</a>; 이렇게 과거 값을 줄지어 저장하는 것을 지연 탭이라 부릅니다)는 <span class="math inline">\(k\)</span> = 1–10을 완벽히 되살리므로 MC가 정확히 10입니다(<a href="../days/d12.html#b-delay-baseline">D12 기초: 지연 탭 기준선</a>). 그러니 물리 reservoir의 "MC = 3"이라는 숫자는 그 자체로 크지도 작지도 않습니다. 비교 대상은 <strong>숫자 3개를 저장하고 갱신하는 비용</strong>이고, 물리 기억의 가치는 그 비용(에너지, 면적, 센서와의 거리)에서 나와야 합니다. <span class="tag tag-interp">해석</span> 이 비교가 D16(무엇과 비교하나)과 D17(시스템 비용)의 주제입니다.</p>
+<p>폴더의 글들도 같은 항목을 요구합니다. Singh 2026의 최소 특성화 표는 시간 기억 항목으로 "전체 지연별 기억 곡선(<span class="math inline">\(MC_k\)</span>), 대응하는 물리 지연 축(<span class="math inline">\(\tau_k = kT_{\text{sym}}\)</span>), 정해진 지연 범위의 누적 기억 <span class="math inline">\(MC(K)\)</span>"를 결과로, "입력 분포와 물리적 부호화, <span class="math inline">\(T_{\text{sym}}\)</span>, 입력열 길이, washout 구간(처음 몇 단계를 버리는 구간), 최대 지연 <span class="math inline">\(K\)</span>, 상태 획득 조건" 등을 함께 보고할 조건으로 적습니다. <span class="src">Singh 2026, p.11, Table 2</span> 그리고 입력 통계, <span class="math inline">\(T_{\text{sym}}\)</span>, 상태 획득, readout, 규제(ridge 회귀에서 가중치가 너무 커지지 않게 거는 벌점, <a href="../days/d08.html#b-ridge">D8 기초</a>)가 다르면 지표를 직접 비교하지 말라고 덧붙입니다. <span class="src">Singh 2026, p.12, Table 2 각주</span> Roadmap 2026은 시냅스 소자의 retention에 대해 "단기 기억 과제나 과도 전처리 단계에서는 빨리 감쇠하는 상태가 유리할 수 있으므로 retention은 의도한 과제와 구조적 제약의 맥락에서 평가해야 한다"고 씁니다. <span class="src">Roadmap 2026, p.8113</span> 감각 소자의 시공간 동역학 지표로는 "memory decay constant"를 들지만 <span class="src">Roadmap 2026, p.8122</span>, 그것이 계산 용량과 어떻게 이어지는지는 정의하지 않습니다. <span class="tag tag-interp">해석</span></p>
+<section id="오늘의-반론" class="level4">
+<h4 class="anchored" data-anchor-id="오늘의-반론">오늘의 반론</h4>
+<p>가장 강한 반론은 이것입니다. <strong>"MC는 서로 무관한 무작위 입력으로 잰다. 그런데 실제 신호(심전도, 말소리)는 앞뒤가 강하게 이어져 있다. 그러니 MC는 실제 과제 성능을 예측하지 못하고, 차라리 과제 정확도만 보고하면 된다."</strong></p>
+<p>이 반론은 절반쯤 맞습니다. i.i.d. 입력의 MC는 과제에 독립적인 <strong>대리 지표</strong>이고, 앞뒤가 이어진 신호에서는 상태가 과거를 더 쉽게 "짐작"할 수 있어 MC와 과제 성능이 같은 방향으로 움직이지 않을 수 있습니다. <span class="tag tag-interp">해석</span> Stepney 2024도 과제 독립 지표의 "적절한 값"은 과제에 따라 다르며, 어떤 과제는 높은 기억이, 어떤 과제는 높은 kernel rank(서로 다른 입력이 상태를 얼마나 많은 서로 다른 방향으로 펼치나, <a href="../days/d14.html#b-kernel-quality">D14 기초</a>)와 낮은 기억이 더 나을 수 있다고 씁니다. <span class="src">Stepney 2024, p.681</span> 그러나 반대쪽도 성립합니다. 과제 정확도 하나만 있으면, 성능이 소자의 기억에서 왔는지 입력 부호화나 readout에서 왔는지 가를 수 없습니다(3-2절의 Lee 2025에서 기억을 잃어도 85%가 남은 것처럼). 그래서 실용적인 답은 <strong>둘 다</strong>입니다. 같은 조건에서 <span class="math inline">\(MC_k\)</span> 곡선(소자가 무엇을 담는가)과 과제 성능(그것이 과제에 쓰이는가)을 함께 보고하고, 과제의 기억 창을 명시하는 것. 이 반론에 대한 내 답을 오늘 쓰는 글의 "가장 강한 반론" 칸에 적어 보세요.</p>
+<div class="think">
+<p>폴더에서 내가 읽은 이온 소자 논문 하나를 골라(Readable papers1), 위 표의 ①–⑥ 중 몇 개에 답할 수 있는지 세어 보세요. retention·PPF만 있다면 ②–⑥은 비어 있을 것입니다. 그 빈칸이 "이 소자는 기억이 좋다"는 문장과 "이 소자는 RC에서 쓸 만한 기억을 갖는다"는 문장 사이의 거리입니다.</p>
+</div>
+<div class="quiz" data-day="d13" data-set="5-check"></div>
+<div class="keypoints">
+<ul>
+<li>좋은 memory = 과제의 기억 창 안 지연들의 정보를 잡음보다 크게, 구별되게, 창 밖으로는 끌고 가지 않게 담는 상태.</li>
+<li>확인 질문 여섯: 기억 창 / <span class="math inline">\(MC_k\)</span> 곡선 / 물리 지연 축 / 잡음·상태 수 / 넘어옴 / 비교 대상. 보고 항목은 Singh 2026 Table 2와 같다 <span class="src">Singh 2026, p.11–12</span>.</li>
+<li>retention은 과제 맥락에서 평가해야 한다 <span class="src">Roadmap 2026, p.8113</span>. 지표의 적절한 값은 과제에 따라 다르다 <span class="src">Stepney 2024, p.681</span>.</li>
+<li>반론: i.i.d. MC는 대리 지표다. 그래서 MC 곡선과 과제 성능을 같은 조건에서 함께 보고한다.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>자료를 덮고 아래 표를 먼저 머릿속으로 채운 뒤 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+한 장 요약 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>retention, τ, MC는 무엇이 다른가</td>
+<td>기준이 붙은 소자 지표 / 모형 매개변수 / 입력열·readout·잡음을 포함한 계의 계산 지표</td>
+<td>같은 곡선에서 retention 기준 50% → 10%면 3.3배 [해석, 계산]. "느린 감쇠만으로 유용한 기억이 아니다" <span class="src">Singh 2026, p.8</span></td>
+</tr>
+<tr class="even">
+<td>MC는 무엇을 세나</td>
+<td>노드 하나면 상태 흔들림에서 k개 전 입력의 몫, <span class="math inline">\((1-a^2)a^{2(k-1)}\)</span>. 합은 상태 수 이하</td>
+<td>선형·잡음 없음의 정확한 계산. i.i.d. 입력에서 MC ≤ N <span class="src">Stepney 2024, p.679</span></td>
+</tr>
+<tr class="odd">
+<td>10 ms냐 10 s냐</td>
+<td>τ ÷ 입력 간격과 과제의 기억 창이 정한다. 10 s 소자가 2 ms 간격 과제에서 창 안 MC 합 0.001(Claude 계산)</td>
+<td>사전 테스트·먼저 만들어 보기에서 "길수록 좋다"고 썼다면 여기가 달라질 지점. 잡음 0.01은 예시 가정</td>
+</tr>
+<tr class="even">
+<td>실제로도 그런가</td>
+<td>데이터 간격이 τ를 넘으면 정확도가 떨어졌다(단 약 2%p, 원시 프레임 기준선 91.32%가 더 높음)</td>
+<td><span class="src">Lee 2025 (npj), p.7–8</span></td>
+</tr>
+<tr class="odd">
+<td>소자를 늘리면</td>
+<td>같은 τ는 겹치고(MC 1.00) 다른 τ는 쌓인다(3.80/4)</td>
+<td><span class="src">Liang 2024, p.196</span>; Claude의 선형 모형 계산</td>
+</tr>
+<tr class="even">
+<td>오늘의 반론</td>
+<td>i.i.d. MC는 실제 신호 성능을 예측하지 못한다</td>
+<td>반은 맞다. MC 곡선 + 과제 성능 + 기억 창을 함께 보고 <span class="src">Stepney 2024, p.681</span></td>
+</tr>
+<tr class="odd">
+<td>모르는 것 하나</td>
+<td>내 소자의 τ 분포와 반복 측정 잡음, 그리고 내 응용의 기억 창</td>
+<td>Phase 4·5에서 측정</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="quiz" data-day="d13" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<ol type="1">
+<li>retention time, τ, memory capacity를 각각 "누가 무엇을 잰 값인가"로 구별했나? 같은 곡선에서 retention이 기준에 따라 바뀐다는 예를 들었나?</li>
+<li>노드 하나의 MC가 1을 넘지 못하는 이유를 "몫"으로 설명했나? τ가 길어지면 기억이 커지는 것이 아니라 퍼진다는 점과 잡음의 역할을 적었나?</li>
+<li>"10 ms냐 10 s냐"에 입력 간격과 기억 창이라는 조건을 붙여 답했나? 두 가지 실패(빨리 잊음, 넘어옴)를 숫자나 근거로 보였나?</li>
+<li>실시간 신호와 저장된 데이터에서 "누가 입력 간격을 정하나"를 구별했나?</li>
+<li>같은 τ의 소자를 늘려도 MC가 거의 늘지 않는 이유와, 이온 소자에서 여러 시간척도를 만드는 방법을 연결했나?</li>
+<li>기억에 관한 주장을 확인하는 질문(기억 창, <span class="math inline">\(MC_k\)</span> 곡선, 물리 지연 축, 잡음·상태 수, 넘어옴, 비교 대상)을 내 소자에 적용해 봤나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 과제의 기억 창(예: 심전도 박동 하나 약 0.7 s, D15) 안의 지연들에서 잡음보다 큰 <span class="math inline">\(MC_k\)</span> vs (메커니즘이 허용하는 것) 내 소자의 τ 분포와 펄스 하나당 상태 변화(신호) 대 반복 잡음. 둘 다 아직 미측정.</li>
+<li><strong>병목 장부:</strong> 같은 τ의 소자를 늘려도 MC가 쌓이지 않는다 <span class="src">Liang 2024, p.196</span>. 한 소자 안의 여러 이완 과정이나 구동 조건으로 τ를 다양화할 수 있는가가 이온 소재의 기회인지는 <span class="tag tag-hypo">가설</span>.</li>
+<li><strong>아직 모르는 것:</strong> 내 소자의 감쇠가 지수 하나로 맞는가, 여럿인가. / 반복 측정 잡음은 펄스 하나의 변화의 몇 %인가. / 입력열 사이 회복에 얼마나 걸리나(넘어옴).</li>
+<li><strong>용어집:</strong> retention time, 시간상수 τ, memory capacity(MC, MCₖ), 분산, 표준편차, 상관², 선형 누설 노드, 입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span>, 기억 창, 물리 지연 τₖ, 시간척도 정합, 넘어옴(carry-over), washout.</li>
+<li><strong>접는 기준 후보:</strong> "내 응용의 기억 창과 내 소자의 τ 분포가 한 자릿수 안에서 겹치지 않으면, 그 응용을 '시간 동역학 활용'의 예로 쓰지 않는다."</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다. 아래는 모두 보충이며, 오늘 본문은 이것 없이 읽히도록 썼습니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Liang 2024, <em>Nat. Electron.</em> 7, 193–206. p.196(병렬 소자의 MC는 겹친다, 소자 간 편차와 풍부함), p.198(τ가 시스템 시간척도를 정한다, θ ≈ τ/4), p.200(rotating neurons τ ≈ 1 s와 0.8 s, MC의 정의, 선형 노드의 MC가 더 높다, 시간척도 결합).</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
+<ul>
+<li>Singh 2026, <em>Adv. Mater.</em> (Descriptors to Dynamics), e74897. p.8(느린 감쇠만으로는 유용한 기억이 아니다, 프로토콜 변수부터 바꿔 보라), p.9 Table 1(DR1의 실패 신호), p.11–12 Table 2(시간 기억 보고 항목), p.13(τₖ = kT_sym, 입력 간격과 상태 읽는 시점의 구별), p.18–19(빨리 잊음과 넘어옴).</li>
+<li>Stepney 2024, <em>Natural Computing</em> 23, 665–685. p.679(MC의 정의와 MC ≤ N, 큰 k의 잘라 냄), p.681(지표의 적절한 값은 과제에 따라 다르다).</li>
+<li>Lee 2025, <em>npj Unconv. Comput.</em> 2, 27. p.2–3(τ = 0.92 ms → 123 ms), p.7–8 Fig. 6(데이터 간격과 정확도, 원시 프레임 기준선, 상태 확장).</li>
+<li>Roadmap 2026, <em>ACS Nano</em> 20, 8102–8163. p.8113(retention은 과제 맥락에서), p.8122(memory decay constant).</li>
+</ul>
+<p><strong>폴더 밖</strong> <span class="tag tag-unverified">미확인</span></p>
+<ul>
+<li>Jaeger 2002, <em>Short Term Memory in Echo State Networks</em> (GMD 보고서). MC의 원 정의로 Liang 2024(ref. 18)와 Stepney 2024가 인용하는 문헌. 오늘 본문의 정의는 Stepney 2024의 정리를 따랐다.</li>
+<li>Inubushi &amp; Yoshimura 2017, "Reservoir computing beyond memory-nonlinearity trade-off", <em>Sci. Rep.</em> 7, 10199. Liang 2024가 "선형 노드의 MC가 더 높다"의 근거로 인용(ref. 129).</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d13">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커. 숫자는 tools/figs_d13.py --numbers와 일치한다.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "세 '기억 장치' — 한 번 쓰면 오래 남지만 덮어쓰는 칠판 한 칸, 돌을 던질 때마다 물결이 겹치며 서서히 잦아드는 연못, 최근 숫자 5개만 적어 두는 메모장 — 에 대해 '흔적이 얼마나 오래 남나'와 '최근 입력 몇 개를 서로 구별해 꺼낼 수 있나'를 각각 1–3등으로 매겨 2열 표를 채워 보세요. 두 열의 순위가 같은지 다른지, 다르다면 왜인지 한 줄로 적으세요.", "items": [{"id": "d13-p01", "ref": "#ch-three-memories", "type": "ox", "q": "소자에 남은 변화가 오래 유지될수록(retention이 길수록), 그 소자로 만든 reservoir의 기억 용량(memory capacity)도 크다.", "a": false, "why": "retention은 입력 하나의 흔적이 기준(예: 10%) 이상 남는 시간이고, memory capacity는 이어지는 입력들 속에서 과거 입력을 구별해 꺼내는 능력입니다. 둘은 다른 양이라, retention이 23 s인 소자도 2 ms 간격 과제에서는 기억 용량이 거의 0일 수 있습니다(1구간)."}, {"id": "d13-p02", "ref": "#ch-three-memories", "type": "mc", "q": "'유지 시간(retention)', '시간상수 τ', '기억 용량(memory capacity)' 가운데, 연달아 들어오는 입력들 속에서 과거 입력을 서로 구별해 꺼내는 능력을 재는 것은?", "options": ["기억 용량", "유지 시간", "시간상수 τ", "셋 다 같은 것을 다른 이름으로 부른다"], "a": 0, "why": "retention은 기준이 붙은 소자 지표, τ는 감쇠 곡선을 맞춘 모형 매개변수이고, 기억 용량은 입력열·readout·잡음을 포함한 계의 계산 지표입니다(1구간)."}, {"id": "d13-p03", "ref": "#ch-mc-by-hand", "type": "mc", "q": "한 단계에 상태의 99%가 남는(아주 천천히 잊는) 노드에 작은 측정 잡음이 섞여 있다. 최근 입력 10개를 얼마나 꺼낼 수 있을까?", "options": ["아주 잘 꺼낸다 — 흔적이 오래 남으니까", "잘 꺼내지 못한다 — 입력 하나가 상태를 1%만 움직여 흔적이 작고, 그마저 수백 개 과거 입력에 잘게 나뉘어 잡음에 묻힌다", "잡음 덕분에 더 잘 꺼낸다", "잡음은 기억과 관계가 없다"], "a": 1, "why": "a = 0.99에 표준편차 0.01의 잡음을 넣으면 최근 10개 입력의 기억 용량 합이 0.17에 그칩니다(Claude 계산, 잡음 크기는 예시 가정). 노드 하나의 흔들림을 과거 입력들이 나눠 가지므로, 오래 끌수록 하나하나의 몫은 작아집니다(2구간)."}, {"id": "d13-p04", "ref": "#ch-timescale", "type": "mc", "q": "2 ms 간격으로 들어오는 진동 신호에서 최근 값 10개(약 20 ms 분량)의 패턴을 구별해야 한다. 시간상수가 10 ms인 소자와 10 s인 소자 중 어느 쪽이 맞나?", "options": ["10 s — 오래 남을수록 좋으니까", "10 ms — 과제가 필요로 하는 기억 창과 비슷하니까", "둘은 같다", "둘 다 쓸 수 없다"], "a": 1, "why": "한 간격 동안 남는 비율 a = e^(−간격/τ)가 기억 모양을 정합니다. 10 ms 소자는 창 안 기억 합이 0.979인데, 10 s 소자는 입력 하나가 상태를 0.0002만 움직여 창 안 합이 약 0.001입니다(Claude 계산, 3구간)."}, {"id": "d13-p05", "ref": "#ch-timescale", "type": "ox", "q": "시간상수 10 ms 소자로 2 ms 간격 입력을 처리하는 것과, 시간상수 10 s 소자로 2 s 간격 입력을 처리하는 것은 기억의 모양이 똑같다.", "a": true, "why": "기억의 모양은 τ 자체가 아니라 '입력 간격 ÷ τ'의 비로 정해지므로 두 경우의 a가 같습니다. 그래서 좋은 τ는 입력 간격과 과제의 기억 창에 대해 정해집니다(3구간)."}, {"id": "d13-p06", "ref": "#ch-many-nodes", "type": "mc", "q": "시간상수가 모두 같은 선형 소자 4개를 함께 읽는 경우와, 시간상수가 서로 다른(빠른 것부터 느린 것까지) 소자 4개를 함께 읽는 경우의 기억 용량을 비교하면?", "options": ["둘이 같다", "같은 시간상수 쪽이 훨씬 크다", "다른 시간상수 쪽이 훨씬 크다 — 같은 시간상수 넷은 서로의 배수처럼 움직여 소자 하나와 다를 바 없다", "둘 다 0이다"], "a": 2, "why": "같은 τ의 소자 넷은 MC 1.00(노드 하나와 같음), τ가 다른 넷은 3.80(상한 4)이었습니다(Claude의 선형 모형 계산). 병렬 소자의 기억은 쌓이기보다 대부분 겹친다는 리뷰의 지적과 같습니다(4구간)."}, {"id": "d13-p07", "ref": "#ch-good-memory", "type": "mc", "q": "reservoir에 '좋은 memory'를 가장 정확히 말한 것은?", "options": ["가능한 한 오래 남는 기억", "한 번 쓰면 지워지지 않는 기억", "가장 빨리 사라지는 기억", "과제가 필요로 하는 기간 안의 과거 입력들을 잡음보다 크게, 서로 구별되게 담고, 그 기간 밖의 입력은 끌고 가지 않는 기억"], "a": 3, "why": "좋은 memory는 과제의 기억 창에 맞춰 정의됩니다. 그래서 논문의 기억 주장은 기억 창, 지연별 MC 곡선, 물리 지연 축, 잡음·상태 수, 넘어옴, 비교 대상을 함께 확인합니다(5구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 세 가지 기억", "items": [{"id": "d13-q01", "type": "mc", "q": "어떤 이온 소자 논문이 \"펄스 하나 뒤 전도도 변화가 10 s 동안 50% 이상 유지된다\"고 보고했다. 이 문장만으로 알 수 있는 것은?", "options": ["이 소자로 만든 reservoir의 memory capacity가 크다", "펄스 하나의 흔적이 50% 기준으로 10 s 이상 남는다(조건이 붙은 retention)", "이 소자는 어떤 과제에서든 기억이 충분하다", "시간상수 τ가 정확히 10 s다"], "a": 1, "why": "retention은 기준(50%)과 측정 조건이 붙은 소자 지표다. MC는 이어지는 무작위 입력열·잡음·readout이 있어야 정해지고, τ는 곡선을 모형으로 맞춰야 나온다(지수 하나면 50% 시점은 τ의 0.69배). 흔한 혼동: '오래 남는다 = 많이 기억한다'. 1구간 기초 상자의 표를 다시 보세요.", "ref": "#ch-three-memories"}, {"id": "d13-q02", "type": "ox", "q": "같은 감쇠 곡선이라도 retention을 '50% 남는 시간'으로 정하느냐 '10% 남는 시간'으로 정하느냐에 따라 값이 달라진다.", "a": true, "why": "지수 하나로 감쇠하면 50% 시점은 τ·ln2, 10% 시점은 τ·ln10이라 3.3배 차이가 난다. 그래서 retention 숫자에는 기준이 함께 적혀 있어야 한다. 그림 1 왼쪽.", "ref": "#ch-three-memories"}, {"id": "d13-q03", "type": "short", "q": "감쇠가 정확히 지수 하나를 따르고 τ = 10 ms이다. 펄스 하나 뒤 변화가 처음의 10%로 줄어들 때까지 몇 ms 걸리나? (소수 첫째 자리까지, ln 10 ≈ 2.303)", "a": ["23.0", "23", "23.0 ms", "23ms", "23 ms", "약 23"], "why": "e의 지수 (−t/τ) = 0.1에서 t = τ·ln10 = 10 ms × 2.303 = 23.0 ms. τ = 10 s면 23.0 s. 둘의 retention이 1,000배 달라도 RC에서 어느 쪽이 나은지는 3구간의 입력 간격이 정한다.", "ref": "#ch-three-memories"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · MC를 손으로 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d13-q04", "type": "short", "q": "[풀이 예시 확인] 선형 누설 노드 하나, a = 0.5, 잡음 없음. 본문 단계 1–3에서 각 항의 흔들림은 1, 0.25, 0.0625, …이고 전체는 1.333이었다. 그렇다면 MC₁(방금 입력의 몫)은? (소수 둘째 자리까지)", "a": ["0.75", ".75", "3/4", "75%"], "why": "MC₁ = 1/1.333 = 0.75. 일반식 (1 − a²)·a의 2(k−1)제곱에 a = 0.5, k = 1을 넣어도 1 − 0.25 = 0.75. 2구간 단계 3.", "ref": "#ch-mc-by-hand"}, {"id": "d13-q05", "type": "short", "q": "[일부 채우기] 이번에는 a = 0.8. 일반식에서 (1 − a²) = 1 − 0.64 = 0.36이다. MC₂ = 0.36 × a² = 0.36 × 0.64 = ? (소수 넷째 자리까지)", "a": ["0.2304", ".2304", "0.230", "0.23"], "why": "MC₂ = (1 − a²)·a² = 0.36 × 0.64 = 0.2304. 2개 전 입력은 상태 흔들림의 약 23%를 차지한다. MC₁은 0.36이다(그림 1 오른쪽 막대).", "ref": "#ch-mc-by-hand"}, {"id": "d13-q06", "type": "short", "q": "[혼자 풀기] a = 0.9, 잡음 없음. MC₁은 얼마인가? (소수 둘째 자리까지)", "a": ["0.19", ".19", "19%", "0.190"], "why": "MC₁ = 1 − 0.81 = 0.19. a = 0.5의 0.75보다 훨씬 작다. τ가 길어질수록(a가 1에 가까울수록) 방금 입력의 몫은 줄고 먼 과거로 퍼진다. 헷갈렸다면 'a가 크면 기억이 많다'고 생각했는지 확인하세요. 2-1절.", "ref": "#ch-mc-by-hand"}]}, "2-end": {"kind": "end", "title": "2장 마무리", "items": [{"id": "d13-q07", "type": "ox", "q": "선형 누설 노드 하나(잡음 없음)의 총 MC는 a를 1에 가깝게 할수록(τ를 길게 할수록) 1보다 커진다.", "a": false, "why": "모든 k의 몫을 더하면 전체이므로 a와 상관없이 총 MC = 1(= 상태 수). a는 그 1을 어떻게 나눠 갖는지만 바꾼다. 2구간 단계 5.", "ref": "#ch-mc-by-hand"}, {"id": "d13-q08", "type": "mc", "q": "a = 0.99인 노드에 표준편차 0.01의 측정 잡음이 있으면 최근 10개 입력의 MC 합이 0.17밖에 안 된다(Claude 계산). 주된 이유는?", "options": ["a가 크면 노드가 비선형이 되기 때문", "입력 하나가 상태를 (1 − a) = 0.01배만 움직여 신호의 흔들림이 작고, 그마저 수백 개 지연에 잘게 나뉘기 때문", "잡음이 입력보다 항상 크기 때문", "readout이 학습되지 않았기 때문"], "a": 1, "why": "잡음이 없어도 최근 10개의 합은 1 − 0.99²⁰ = 0.18뿐이다. 몫이 수백 개 지연에 잘게 퍼진 것이 주된 원인이다. 여기에 신호 표준편차(0.041)가 잡음의 4배 정도라 잡음이 흔들림의 6%를 더 가져가 0.17이 되고, 각 MCₖ는 약 0.019다. 노드는 여전히 선형이다. 2-2절, 그림 3 아래 막대.", "ref": "#ch-mc-by-hand"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 입력 간격과 a (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d13-q09", "type": "short", "q": "[풀이 예시 확인] τ = 10 ms 소자에 입력이 2 ms 간격으로 들어온다. a = e의 지수 (−2/10) = e의 지수 (−0.2) ≈ ? (소수 셋째 자리까지)", "a": ["0.819", ".819", "0.82", "0.8187"], "why": "e의 −0.2제곱 = 0.819. 이때 MC₁–MC₅는 0.329, 0.220, 0.148, 0.099, 0.066으로 최근 다섯 입력이 기준 0.05를 넘는다. 3구간 표 첫 줄.", "ref": "#ch-timescale"}, {"id": "d13-q10", "type": "short", "q": "[일부 채우기] τ = 10 s 소자에 입력이 1 s 간격으로 들어온다. 입력 간격/τ = 1/10 = 0.1이므로 a = e의 지수 (−0.1) ≈ ? (소수 셋째 자리까지)", "a": ["0.905", ".905", "0.90", "0.9048", "0.9"], "why": "e의 −0.1제곱 = 0.905. τ = 10 ms 소자에 1 ms 간격으로 넣어도 비율이 같으므로 a도 0.905다. 좋은 τ는 절대값이 아니라 입력 간격에 대한 비율로 정해진다.", "ref": "#ch-timescale"}, {"id": "d13-q11", "type": "mc", "q": "[혼자 풀기] τ = 10 ms 소자로, 2 s 간격으로 들어오는 입력의 최근 10개 패턴을 구별해야 하는 과제를 하면?", "options": ["τ ≪ 입력 간격이라 a ≈ 0: 방금 입력만 남고 그 전 입력의 흔적은 사라진다", "τ가 짧아 잡음에 묻히므로 방금 입력도 못 되살린다", "10개 입력이 고르게 담겨 잘 된다", "입력 간격과 무관하게 MC는 τ만으로 정해진다"], "a": 0, "why": "2 s 동안 τ의 200배가 지나 a ≈ 0(10의 −87제곱 수준)이다. 방금 입력은 거의 완벽히(MC₁ ≈ 1) 남지만 k ≥ 2는 0이다. 실패 '창보다 빨리 잊음'. 그림 5 오른쪽 위.", "ref": "#ch-timescale"}]}, "3-end": {"kind": "end", "title": "3장 마무리", "items": [{"id": "d13-q12r", "type": "mc", "q": "Lee 2025(npj) Fig. 6a에서 τ ≈ 0.92 ms 그대로인 방식은 데이터 간격을 0.14 ms에서 100 ms로 늘리면 정확도가 약 86.8%에서 85.0%로 떨어진다. 이 관찰에서 가장 조심스럽게 말할 수 있는 것은?", "options": ["τ가 맞지 않으면 이 과제에서 RC가 완전히 실패한다", "시간척도 불일치는 성능을 깎았지만 폭이 작아, 이 과제의 정보 상당 부분이 기억 없이도(마지막 프레임에) 있는 것으로 보인다", "소자가 원시 입력 기준선보다 낫다는 것이 증명됐다", "τ는 정확도와 무관하다"], "a": 1, "why": "떨어진 폭은 약 2%p이고, 원시 프레임 네 장을 그대로 넣은 기준선(91.32%)이 모든 곡선보다 높다. 그래서 '그 과제가 기억을 얼마나 필요로 하나'를 함께 봐야 한다. 둘째 문장의 '보인다'는 [해석]이다. 3-2절.", "ref": "#ch-timescale"}, {"id": "d13-q13", "type": "mc", "q": "정지 영상(MNIST)을 펄스열로 바꿔 소자에 넣는 실험에서 '시간척도를 맞췄다'는 주장이 실제 응용에 대해 약한 근거인 이유는?", "options": ["영상에는 고유한 시간 간격이 없어, 실험자가 입력 간격을 소자의 τ에 맞춰 마음대로 고를 수 있기 때문", "영상은 항상 τ보다 빠르기 때문", "MNIST는 분류 과제가 아니기 때문", "펄스열로 바꾸면 정보가 사라지기 때문"], "a": 0, "why": "실시간 신호는 신호가 입력 간격을 정하지만 저장된 데이터는 실험자가 정한다. 그 정합은 '이 소자가 실제 신호의 시간척도와 맞는다'를 증명하지 않는다[해석]. 3-1절, D15에서 더.", "ref": "#ch-timescale"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 노드를 늘리면", "items": [{"id": "d13-q14", "type": "ox", "q": "τ가 모두 같은 선형 소자 4개를 나란히 쓰면 총 MC는 4에 가까워진다.", "a": false, "why": "같은 τ의 선형 소자들은 서로의 배수처럼 움직여 readout이 새로 꺼낼 정보가 없다. Claude가 선형 모형으로 계산하면 1.00(노드 하나와 같음). τ가 서로 다르면 3.80. Liang 2024 p.196의 '병렬 소자의 MC는 대부분 겹친다'. 그림 6.", "ref": "#ch-many-nodes"}, {"id": "d13-q15", "type": "mc", "q": "Liang 2024는 선형 노드로 만든 RC가 비선형 노드보다 보통 MC가 훨씬 높다고 쓴다. 이것이 'MC가 높을수록 좋은 소자'라는 결론으로 이어지지 않는 이유는?", "options": ["MC는 측정할 수 없기 때문", "상태 수가 정한 한정된 용량을 기억과 비선형 변환이 나눠 쓰므로, 과제가 비선형 변환을 필요로 하면 MC를 일부 내줘야 하기 때문", "비선형 노드는 항상 더 정확하기 때문", "선형 노드는 물리적으로 만들 수 없기 때문"], "a": 1, "why": "기억과 비선형이 같은 상태 수를 나눠 쓰는 것이 D11의 상충이다. 그래서 MC는 과제가 요구하는 비선형과 함께 봐야 한다(D14). 4구간 끝.", "ref": "#ch-many-nodes"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 좋은 memory를 확인하기", "items": [{"id": "d13-q16", "type": "mc", "q": "어떤 논문이 'MC = 3.2'라는 숫자 하나만 보고했다. 그 숫자를 해석하려면 가장 먼저 필요한 정보 묶음은?", "options": ["소자의 색과 두께", "입력 간격 T_sym과 물리 지연 축, 지연별 MCₖ 곡선, 최대 지연 K, 잡음·상태 수, readout과 규제 방법", "저자의 소속", "펄스 하나 뒤의 retention만"], "a": 1, "why": "총 MC가 같아도 담는 시간 범위가 다를 수 있고, 입력 간격·상태 획득·readout이 다르면 직접 비교하면 안 된다(Singh 2026 p.11–13). 5구간 표 ②–④.", "ref": "#ch-good-memory"}, {"id": "d13-q17", "type": "ox", "q": "과거 입력 5개를 숫자로 저장하는 디지털 지연 탭은 MC가 정확히 5이므로, 물리 reservoir의 'MC = 3'이 가치 있으려면 그 기억을 만드는 비용(에너지·면적·센서와의 거리)에서 이점이 있어야 한다.", "a": true, "why": "MC 숫자 자체는 크지도 작지도 않다. 비교 대상은 같은 기억을 디지털로 만드는 비용이다[해석]. 5구간 ⑥, D16·D17로 이어진다.", "ref": "#ch-good-memory"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d13-q18", "type": "mc", "q": "τ = 10 s 소자를 2 ms 간격으로 들어오는 진동 신호의 최근 10개 패턴 구별에 쓰면 창 안 MC 합이 약 0.001이다(잡음 표준편차 0.01 가정, Claude 계산). 이 소자의 retention(10% 기준)은 23 s나 되는데 왜 이렇게 작은가?", "options": ["retention 측정이 틀렸기 때문", "a = 0.9998이라 입력 하나가 상태를 0.0002만큼만 움직이고, 그 흔적이 수천 개 입력에 퍼져 잡음보다 작기 때문", "소자가 너무 빨리 잊기 때문", "진동 신호는 RC로 다룰 수 없기 때문"], "a": 1, "why": "오래 남는 흔적이 곧 꺼낼 수 있는 기억은 아니다. 신호 표준편차 0.0058이 잡음 0.01보다 작고, 전체 MC 0.25가 약 5,000개 지연에 흩어진다. 실패 '한 입력의 흔적이 너무 작고 넓게 퍼짐'. 그림 5 왼쪽 아래.", "ref": "#ch-timescale"}, {"id": "d13-q19", "type": "mc", "q": "'감쇠 10 ms 소자와 10 s 소자 중 어느 쪽이 좋은가?'에 대한 가장 정확한 답은?", "options": ["10 s, 기억이 1,000배 기니까", "10 ms, 빠를수록 좋으니까", "입력 간격과 과제가 필요로 하는 기억 창에 달렸다. τ ÷ 입력 간격이 창 안 지연들을 잡음보다 크게 담도록 놓여야 한다", "둘 다 MC가 1이므로 같다"], "a": 2, "why": "10 ms × 2 ms 과제와 10 s × 2 s 과제는 똑같은 MCₖ를 준다(창 안 합 0.979, Claude 계산). 'MC가 1로 같다'는 노드 하나·잡음 없음의 총합일 뿐, 창 안의 몫은 크게 다르다. 3구간.", "ref": "#ch-timescale"}, {"id": "d13-q20", "type": "mc", "q": "Singh 2026이 든 '시간척도가 맞지 않았다'는 신호가 아닌 것은?", "options": ["과제에 필요한 지연 전에 기억이 사라진다", "연속한 입력열 사이에 앞 입력의 흔적이 과도하게 넘어온다", "입력 속도를 바꾸면 성능이 크게 변한다", "펄스 하나 뒤의 감쇠 곡선이 지수 하나로 잘 맞는다"], "a": 3, "why": "앞의 셋은 Table 1(p.9)의 DR1 실패 신호다. 감쇠가 지수 하나로 맞는다는 것은 모형의 모양일 뿐, 시간척도 정합과는 다른 이야기다. 3구간 기초 상자 ⑥.", "ref": "#ch-timescale"}, {"id": "d13-q21", "type": "mc", "q": "'i.i.d. 입력의 MC는 실제 신호 성능을 예측하지 못하니 과제 정확도만 보고하면 된다'는 반론에 대한 가장 균형 잡힌 응답은?", "options": ["MC만 보고하면 충분하다", "과제 정확도만으로는 성능이 소자의 기억에서 왔는지 부호화·readout에서 왔는지 가를 수 없으므로, 같은 조건의 MCₖ 곡선·과제 성능·기억 창을 함께 보고한다", "둘 다 의미 없으니 retention만 본다", "MC는 항상 과제 정확도와 비례한다"], "a": 1, "why": "MC는 대리 지표이고(적절한 값은 과제에 따라 다르다, Stepney 2024 p.681), 과제 정확도는 원인을 가르지 못한다. 5구간 '오늘의 반론'.", "ref": "#ch-good-memory"}, {"id": "d13-q22", "type": "ox", "q": "한 소자를 서로 다른 구동 조건(예: 세 가지 바이어스)으로 구동해 시간척도가 다른 상태를 여러 개 만드는 것은, 같은 τ의 소자를 여러 개 쓰는 것보다 MC를 쌓는 데 유리한 방향이다.", "a": true, "why": "같은 τ는 겹치고 다른 τ는 쌓인다(그림 6, 선형 모형). Lee 2025(npj)의 세 바이어스 'Multiple'이 한 바이어스보다 정확도가 높았던 것과 같은 방향이다[해석]. 4구간.", "ref": "#ch-many-nodes"}]}}}</script>
 <div class="step-check local-only">
 <label><input type="checkbox" data-step-check="lesson" data-day="d13"> 학습자료를 다 읽었다</label>
 </div>
 </section>
-<section id="note" class="level2">
-<h2 class="anchored" data-anchor-id="note">③ 노트에 정리</h2>
-<div class="note-line">
-<p>자료를 덮고 노트를 펴세요. 오늘 질문에 대한 답의 뼈대를 손으로 그려 봅니다. 인과의 화살표 하나, 숫자 하나, 반론 하나가 들어가면 충분합니다. 막히는 곳은 자료로 돌아가 다시 읽고, 그래도 막히면 따로 적어 두세요.</p>
-</div>
-<div class="step-check local-only">
-<label><input type="checkbox" data-step-check="note" data-day="d13"> 노트에 정리했다</label>
-</div>
-</section>
 <section id="answer" class="level2">
-<h2 class="anchored" data-anchor-id="answer">④ 내 답</h2>
-<p>노트를 보면서 내 말로 씁니다. 주장마다 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이세요. <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 저장은 초안 저장입니다. 몇 번이고 고쳐도 됩니다.</p>
+<h2 class="anchored" data-anchor-id="answer">④ 가르치듯 내 답</h2>
+<div class="flow-line">
+<p>후배에게 <strong>설명한다고 생각하고</strong> 오늘 질문에 답합니다. <strong>기본은 짧은 답</strong>입니다: 3–5문장, 또는 작은 도식 하나와 한 줄 설명, 그리고 설명하다 막힌 곳 한 줄. 이것만으로 정상적인 학습입니다. 왜·어떻게, 근거와 반론까지 쓰는 긴 종합 답안은 <strong>선택</strong>입니다. 주장에 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이면 좋고, <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 몇 번이고 고쳐도 됩니다. 막히는 곳은 따로 적어 두세요.</p>
+</div>
 <div class="editable" data-file="d13-answer" data-title="내 답" data-template="answer"></div>
 <div class="ledger-links">
   <span>장부에 옮기기 →</span>
@@ -567,12 +1354,19 @@ ul.task-list li input[type="checkbox"] {
   <a href="../ledger/kill-criteria.html">접는 기준</a>
 </div>
 </section>
+<section id="posttest" class="level2">
+<h2 class="anchored" data-anchor-id="posttest">⑤ 다시 풀기 (선택)</h2>
+<div class="flow-line">
+<p>① 사전 테스트와 <strong>같은 문제</strong>를 이유와 함께 다시 풉니다. 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 다시 떠올리기 연습입니다. 이해 점검은 학습자료의 <strong>잠깐 점검</strong>과 <strong>종합 퀴즈</strong>에서 처음 고른 답으로 봅니다.</p>
+</div>
+<div class="quiz" data-day="d13" data-set="pre" data-mode="post"></div>
+</section>
 <section id="done" class="level2">
-<h2 class="anchored" data-anchor-id="done">⑤ 학습 완료</h2>
+<h2 class="anchored" data-anchor-id="done">⑥ 학습 완료</h2>
 <div class="done-box" data-day="d13">
   <div class="done-text">
     <b>오늘 학습 완료</b>
-    <span class="done-desc">학습자료를 읽고, 노트에 정리하고, 내 답을 저장했으면 누르세요. 답을 저장했다고 자동으로 완료되지는 않습니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
+    <span class="done-desc">기본 경로(학습자료 → 짧은 백지 회상 → 짧은 내 답)를 마쳤으면 누르세요. 읽음 체크·학습 완료·이해 점검(퀴즈 첫 시도)은 따로 기록되고 아래에 나란히 보입니다. 완료한 날짜를 기준으로 커버 페이지가 복습(1·3·7·14·30일 뒤)을 알려 줍니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
   </div>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">오늘 학습 완료</button>
@@ -582,7 +1376,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 <section id="feedback" class="level2">
-<h2 class="anchored" data-anchor-id="feedback">⑥ 피드백과 꼬리질문</h2>
+<h2 class="anchored" data-anchor-id="feedback">⑦ 피드백과 꼬리질문</h2>
 <div class="pending-box">
 <p>내 답을 저장한 뒤 Claude에게 <strong>"D13 검토해줘"</strong>라고 말하세요. 맞게 이해한 점, 핵심 오류와 근거, 고쳐야 할 인과관계, 다시 답할 질문을 이 자리에 남깁니다.</p>
 </div>

@@ -1,0 +1,44 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 660 420' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='330' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >tools/esn.py가 하는 일: 다섯 상자와 그 함수 이름</text>
+<rect x='20' y='50' width='145' height='112' rx='8' fill='#fff' stroke='#e08a3c' stroke-width='1.6' />
+<text x='92' y='72' font-size='12' fill='#e08a3c' text-anchor='middle' font-weight='bold' >① 과제 만들기</text>
+<text x='30' y='96' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >make_narma10: 입력 u(0~0.5)와</text>
+<text x='30' y='115' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >정답 y를 4,000단계</text>
+<text x='30' y='134' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >make_mc_input: −1~1 난수</text>
+<rect x='180' y='50' width='145' height='112' rx='8' fill='#fff' stroke='#3d6fb4' stroke-width='1.6' />
+<text x='252' y='72' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >② reservoir 돌리기</text>
+<text x='190' y='96' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' ><tspan>make_reservoir: W, W</tspan><tspan dy='4' font-size='8'>in</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan>, b 난수</tspan></text>
+<text x='190' y='115' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >(ρ로 크기 맞춤, 고정)</text>
+<text x='190' y='134' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >run_reservoir: 상태 x(t) 기록</text>
+<rect x='340' y='50' width='145' height='112' rx='8' fill='#fff' stroke='#13936b' stroke-width='1.6' />
+<text x='412' y='72' font-size='12' fill='#13936b' text-anchor='middle' font-weight='bold' >③ readout 학습</text>
+<text x='350' y='96' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >features: [1, u(t), x(t)]</text>
+<text x='350' y='115' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >fit_eval: 학습·검증·시험 나눔</text>
+<text x='350' y='134' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' ><tspan>ridge: W</tspan><tspan dy='4' font-size='8'>out</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> 한 번에 계산</tspan></text>
+<rect x='500' y='50' width='145' height='112' rx='8' fill='#fff' stroke='#c8553d' stroke-width='1.6' />
+<text x='572' y='72' font-size='12' fill='#c8553d' text-anchor='middle' font-weight='bold' >④ 성적 매기기</text>
+<text x='510' y='96' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >nmse: 시험 구간 오차</text>
+<text x='510' y='115' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >memory_capacity: 지연</text>
+<text x='510' y='134' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >1–200 되살리기의 corr² 합</text>
+<line x1='165' y1='106' x2='178' y2='106' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<line x1='325' y1='106' x2='338' y2='106' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<line x1='485' y1='106' x2='498' y2='106' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<rect x='20' y='185' width='300' height='175' rx='8' fill='#fafafa' stroke='#999' stroke-width='1.2' />
+<text x='170' y='207' font-size='12' fill='#444' text-anchor='middle' font-weight='bold' >⑤ 비교와 확인</text>
+<text x='32' y='230' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >baseline_experiment: reservoir 없이 지연 탭(10·20·50개)</text>
+<text x='32' y='249' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >  + 선형 회귀, 탭과 그 곱(2차) + 선형 회귀</text>
+<text x='32' y='268' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >esp_check: 출발점만 다른 두 상태의 거리(ρ별)</text>
+<text x='32' y='287' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >main: 조건을 하나씩 바꾸며 ①–④ 반복, 결과 저장</text>
+<rect x='340' y='185' width='305' height='175' rx='8' fill='#fff6ee' stroke='#e08a3c' stroke-width='1.2' />
+<text x='492' y='207' font-size='12' fill='#e08a3c' text-anchor='middle' font-weight='bold' >실행 방법(study 폴더에서)</text>
+<text x='350' y='228' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' font-family='Consolas, monospace'>python tools/esn.py --quick</text>
+<text x='362' y='242' font-size='9' fill='#999' text-anchor='start' font-weight='normal' >→ 확인용, 약 25초, 저장 안 함</text>
+<text x='350' y='261' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' font-family='Consolas, monospace'>python tools/esn.py</text>
+<text x='362' y='275' font-size='9' fill='#999' text-anchor='start' font-weight='normal' >→ 전체, 약 1분, 결과 저장</text>
+<text x='350' y='294' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' font-family='Consolas, monospace'>python tools/esn.py --one N=400 s_in=0.1</text>
+<text x='362' y='308' font-size='9' fill='#999' text-anchor='start' font-weight='normal' >→ 내 조건 하나</text>
+<text x='350' y='327' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' font-family='Consolas, monospace'>python tools/esn.py --taps 11</text>
+<text x='362' y='341' font-size='9' fill='#999' text-anchor='start' font-weight='normal' >→ 기준선 탭 수 바꾸기</text>
+<text x='330' y='395' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >실행 시간은 Claude의 컴퓨터(numpy 2.5.4)에서 잰 값이며 컴퓨터마다 다르다. (Claude가 그림, 모식도)</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='300' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >Dennard scaling: 왜 한동안 공짜였고, 왜 끝났나 (모형 계산)</text>
+<text x='40' y='50' font-size='12' fill='#444' text-anchor='start' font-weight='bold' >한 세대마다 치수를 1/κ로 줄이면 (κ ≈ 1.4)</text>
+<text x='50' y='70' font-size='11.5' fill='#444' text-anchor='start' font-weight='normal' >전압 V</text>
+<text x='230' y='70' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >1/κ</text>
+<text x='50' y='90' font-size='11.5' fill='#444' text-anchor='start' font-weight='normal' >정전용량 C</text>
+<text x='230' y='90' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >1/κ</text>
+<text x='50' y='110' font-size='11.5' fill='#444' text-anchor='start' font-weight='normal' >클록 f</text>
+<text x='230' y='110' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >×κ</text>
+<text x='50' y='130' font-size='11.5' fill='#444' text-anchor='start' font-weight='normal' >면적 A</text>
+<text x='230' y='130' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >1/κ²</text>
+<text x='50' y='150' font-size='11.5' fill='#444' text-anchor='start' font-weight='normal' >전력 P = α·C·V²·f</text>
+<text x='230' y='150' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >1/κ²</text>
+<text x='50' y='170' font-size='11.5' fill='#444' text-anchor='start' font-weight='normal' >전력밀도 P/A</text>
+<text x='230' y='170' font-size='11.5' fill='#13936b' text-anchor='end' font-weight='bold' >일정</text>
+<text x='40' y='200' font-size='11.5' fill='#13936b' text-anchor='start' font-weight='normal' >→ 더 작고 더 빠른데 단위 면적당 열은 그대로</text>
+<text x='40' y='222' font-size='11.5' fill='#c8553d' text-anchor='start' font-weight='normal' >2000년대 중반 이후: 누설 때문에 V를 못 내림</text>
+<text x='40' y='240' font-size='11.5' fill='#c8553d' text-anchor='start' font-weight='normal' >→ V 고정, f만 올리면 전력밀도 ∝ f  → 과열</text>
+<rect x='330' y='50' width='240' height='180' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
+<polyline points='330.0,218.0 360.0,218.0 390.0,218.0 420.0,218.0 450.0,218.0 480.0,180.5 510.0,143.0 540.0,105.5 570.0,68.0' fill='none' stroke='#c8553d' stroke-width='2.2' stroke-linejoin='round'/>
+<polyline points='330.0,218.0 360.0,218.0 390.0,218.0 420.0,218.0 450.0,218.0 480.0,218.0 510.0,218.0 540.0,218.0 570.0,218.0' fill='none' stroke='#13936b' stroke-width='2.2' stroke-dasharray='5 3' stroke-linejoin='round'/>
+<text x='334.0' y='210.0' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >Dennard 유지: 일정</text>
+<text x='324' y='222.0' font-size='10' fill='#999' text-anchor='end' font-weight='normal' >×1</text>
+<text x='324' y='72.0' font-size='10' fill='#999' text-anchor='end' font-weight='normal' >×15 (4세대 뒤)</text>
+<line x1='330' y1='68.0' x2='334' y2='68.0' stroke='#999' stroke-width='1'/>
+<text x='532.0' y='107.5' font-size='10.5' fill='#c8553d' text-anchor='end' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >V 고정 후: 세대마다 ×2.0</text>
+<text x='450.0' y='246' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >트랜지스터 세대 →</text>
+<text x='336' y='64' font-size='10' fill='#999' text-anchor='start' font-weight='normal' >전력밀도 (로그 눈금)</text>
+<text x='300' y='272' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >그래서 클록은 수 GHz에서 멈췄고(Roadmap 2026, p.8114) 코어 수를 늘리는 쪽으로 갔다.</text>
+<text x='300' y='288' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >식의 구조만 보는 모형 계산이며, 실제 공정의 세대별 κ·전압 값은 다루지 않는다 (Claude가 계산해 그림).</text>
+</svg>

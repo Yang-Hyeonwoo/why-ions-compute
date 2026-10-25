@@ -1,0 +1,35 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 334' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='300' y='20' font-size='12.5' fill='#444' text-anchor='middle' font-weight='bold' >엣지 센서 노드의 에너지 사슬: 어디를 끊어야 줄어드나 (모형 계산, 가정값)</text>
+<rect x='40' y='44' width='110' height='34' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.4' />
+<text x='95' y='66' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >센서</text>
+<line x1='150' y1='61' x2='180' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<rect x='180' y='44' width='110' height='34' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.4' />
+<text x='235' y='66' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >ADC</text>
+<line x1='290' y1='61' x2='320' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<rect x='320' y='44' width='110' height='34' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.4' />
+<text x='375' y='66' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >MCU 처리</text>
+<line x1='430' y1='61' x2='460' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<rect x='460' y='44' width='110' height='34' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.4' />
+<text x='515' y='66' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >무선 송신</text>
+<text x='240' y='114' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >A. 원시 데이터를 전부 보냄</text>
+<text x='240' y='130' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >1000 S/s × 12 bit 송신</text>
+<rect x='250' y='102' width='279.30916001765803' height='24' rx='3' fill='#c8553d' stroke='none' stroke-width='1.2' />
+<text x='535.3091600176581' y='119' font-size='11' fill='#c8553d' text-anchor='start' font-weight='bold' >621 µW</text>
+<text x='240' y='164' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >B. MCU가 처리해 사건만 보냄</text>
+<text x='240' y='180' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >송신 2 사건/s × 16 bit</text>
+<rect x='250' y='152' width='135.41084391474013' height='24' rx='3' fill='#e08a3c' stroke='none' stroke-width='1.2' />
+<text x='391.4108439147401' y='169' font-size='11' fill='#e08a3c' text-anchor='start' font-weight='bold' >23 µW</text>
+<text x='240' y='214' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >C. 아날로그 전처리 + 사건마다만 ADC·MCU</text>
+<text x='240' y='230' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >소자 1 µW + 사건당 변환·처리</text>
+<rect x='250' y='202' width='42.19328132785085' height='24' rx='3' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='298.19328132785085' y='219' font-size='11' fill='#13936b' text-anchor='start' font-weight='bold' >3 µW</text>
+<line x1='250' y1='250' x2='550' y2='250' stroke='#999' stroke-width='1'/>
+<text x='250.0' y='264' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >1 µW</text>
+<text x='350.0' y='264' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >10 µW</text>
+<text x='450.0' y='264' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >100 µW</text>
+<text x='550.0' y='264' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >1 mW</text>
+<text x='300' y='288' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >A→B: 송신을 줄여 27배. B→C: 매 샘플의 ADC·MCU까지 줄여 9배 더. 어느 단계가 지배하느냐에 따라 끊을 곳이 다르다.</text>
+<text x='300' y='304' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >가정: ADC 1 nJ/변환, MCU 20 nJ/샘플, 무선 50 nJ/bit (그림 2의 근거로 자릿수만 맞춘 값). C의 '소자 1 µW'는 임의값.</text>
+<text x='300' y='320' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >센서·증폭기 전력과, 부품이 잠든 동안의 대기 전력은 넣지 않았다.</text>
+</svg>

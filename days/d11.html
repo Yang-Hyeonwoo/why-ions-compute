@@ -89,6 +89,35 @@ ul.task-list li input[type="checkbox"] {
   };
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/study.css">
 </head>
@@ -486,11 +515,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#lesson" id="toc-lesson" class="nav-link active" data-scroll-target="#lesson">② 학습자료</a></li>
-  <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">③ 노트에 정리</a></li>
-  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 내 답</a></li>
-  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑤ 학습 완료</a></li>
-  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑥ 피드백과 꼬리질문</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">① 사전 테스트와 먼저 만들어 보기</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">② 학습자료</a></li>
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 가르치듯 내 답</a></li>
+  <li><a href="#posttest" id="toc-posttest" class="nav-link" data-scroll-target="#posttest">⑤ 다시 풀기 (선택)</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑥ 학습 완료</a></li>
+  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑦ 피드백과 꼬리질문</a></li>
   </ul>
 </nav>
     </div>
@@ -530,34 +560,442 @@ ul.task-list li input[type="checkbox"] {
   <button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button>
 </div>
 <ol class="day-steps" data-day="d11">
-  <li data-step="pre"><a href="#pre"><b>1</b>읽기 전 답</a></li>
+  <li data-step="pretest"><a href="#pretest"><b>1</b>사전 테스트 <small>권장</small></a></li>
   <li data-step="lesson" data-manual="true"><a href="#lesson"><b>2</b>학습자료</a></li>
-  <li data-step="note" data-manual="true"><a href="#note"><b>3</b>노트 정리</a></li>
-  <li data-step="answer"><a href="#answer"><b>4</b>내 답</a></li>
-  <li data-step="done"><a href="#done"><b>5</b>학습 완료</a></li>
+  <li data-step="recall"><a href="#recall"><b>3</b>백지 회상</a></li>
+  <li data-step="answer"><a href="#answer"><b>4</b>가르치듯 답</a></li>
+  <li data-step="posttest"><a href="#posttest"><b>5</b>다시 풀기 <small>선택</small></a></li>
+  <li data-step="done"><a href="#done"><b>6</b>완료</a></li>
 </ol>
+<div class="flow-line path-line">
+<p><strong>기본 경로</strong>: ① 사전 테스트(권장) → ② 학습자료(구간마다 잠깐 점검까지) → ③ 백지 회상 → ④ 가르치듯 내 답. ⓪·⑤와 접힌 '심화'·'추가 연습'은 선택입니다. 한 번에 끝낼 필요 없이 구간 단위로 나눠 읽어도 되고, 다시 열면 '지난번 읽던 곳' 링크가 뜹니다.</p>
+</div>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">① 사전 테스트와 먼저 만들어 보기</h2>
+<div class="flow-line">
+<p>아직 배우지 않은 내용을 먼저 풀어 봅니다. <strong>많이 틀리는 것이 정상</strong>이고, 그게 목적입니다. 먼저 답해 본 문제는 읽을 때 눈에 들어오고 더 오래 남습니다. 문제마다 정답만 보이고, 이유는 학습자료와 ⑤ 다시 풀기에서 봅니다. 다 풀면 학습자료가 열립니다. 건너뛰려면 학습자료 위의 '그냥 읽기'를 누르세요(권장 단계일 뿐 필수는 아닙니다).</p>
+</div>
+<div class="quiz" data-day="d11" data-set="pre"></div>
+</section>
 <section id="lesson" class="level2">
 <h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
-<div class="pending-box">
-<p>이 날의 학습자료는 아직 준비되지 않았습니다.</p>
-<p>읽기 전 답을 먼저 써 두고 Claude에게 <strong>"D11 자료 만들어줘"</strong>라고 말하세요. 읽기 전 답과 앞선 날들의 답을 읽고, 비어 있는 곳 위주로 자료를 만들어 이 자리에 넣습니다.</p>
+<div class="lesson-body" data-pre="d11-pre">
+<div class="lesson-meta">
+<p>학습 구간 7개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 100분 안팎(추정) · 선택 영상 9분 · 퀴즈 26문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024는 p.196(병렬 소자의 MC 겹침, 소자 간 편차), p.200("Performance benchmark"의 MC·IPC 문단); Stepney 2024는 4.5절(p.673), 7.2.2절(p.676–677, NARMA), 7.3.2–7.3.3절(p.679–680, MC·IPC와 그 한계); Singh 2026은 p.5–6(DR4), p.8(3.1절), p.13(3.2–3.3절)만; Zhong 2022는 p.674(Fig. 2와 그 설명)만. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 정보처리용량의 원 논문(Dambre 2012)은 폴더에 없지만 공개 본문(PMC)에서 초록, Theorem 4·7과 그 조건, 'Total capacity'·잡음 절을 대조했습니다(보충자료는 미대조). memory–nonlinearity 상충을 다룬 논문(Inubushi &amp; Yoshimura 2017)은 폴더에 없어 내용은 <span class="tag tag-unverified">미확인</span>이고, Liang이 요약한 문장만 씁니다. 그림 2–4의 숫자는 Claude가 <code>tools/esn.py</code>로 돌린 시뮬레이션입니다.</p>
 </div>
+<p>D9에서 reservoir가 기억을 갖는 법을, D10에서 비선형을 갖는 법을 따로 보았습니다. 오늘은 둘을 함께 놓고 묻습니다. <strong>기억은 길수록, 비선형은 강할수록 좋은가?</strong> 이 질문은 이온 소자 연구에 바로 닿습니다. "더 긴 retention(바뀐 상태가 유지되는 시간)", "더 큰 정류비(한 방향 전류 ÷ 반대 방향 전류)", "더 큰 히스테리시스(전압을 올릴 때와 내릴 때 전류가 다른 길로 가는 정도)"가 논문의 개선 목표로 자주 나오는데, 그것들이 reservoir로서 '더 좋음'을 뜻하는지가 오늘의 끝에 놓입니다.</p>
+<ol type="1">
+<li>기억과 비선형은 각각 무엇을 사 주나? 과제는 무엇을 요구하나?</li>
+<li>둘을 같은 저울로 재는 법: 정보처리용량(IPC)이란?</li>
+<li>왜 그 총량은 노드 수를 넘지 못하나? (3차원 그림자로 손 계산)</li>
+<li>기억과 비선형은 정말 서로 자리를 빼앗나? (시뮬레이션)</li>
+<li>노드 수가 아니라 '서로 다른' 노드 수: 같은 이온 소자를 여러 개 놓으면?</li>
+<li>그래서 좋은 reservoir란 무엇인가?</li>
+</ol>
+<section id="ch-two-resources" class="level3">
+<h3 class="anchored" data-anchor-id="ch-two-resources">1. 두 자원: 기억과 비선형</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 기억(D9)과 비선형(D10)이 각각 무엇을 가능하게 하는지 한 줄씩 되짚고, NARMA10 같은 과제가 둘을 '얼마나' 요구하는지 말할 수 있다.</p>
+</div>
+<p><strong>되짚기.</strong> <a href="../days/d09.html#b-fading-memory">D9의 fading memory</a>: 지금 상태에 <span class="math inline">\(k\)</span>단계 전 입력의 몫이 <span class="math inline">\(d^k\)</span>만큼 남아, 과거가 필요한 질문("한 단계 전에 1이었나?")에 답할 수 있게 합니다. 노드 하나의 기억은 합이 1인 예산이었습니다(<a href="../days/d09.html#ch-causal">D9 5구간</a>). <a href="../days/d10.html#b-nonlinearity">D10의 비선형</a>: 겹침 원리를 깨서 입력들의 곱(XOR = 두 입력의 곱, 3-parity = 세 입력의 곱)을 상태에 남겨, 선형 readout이 가중합으로는 못 만드는 답을 꺼내게 합니다.</p>
+<p><strong>과제는 둘을 정해진 양만큼 요구한다.</strong> D12에서 직접 돌릴 NARMA10을 미리 봅니다. NARMA10은 0~0.5 사이의 무작위 입력 <span class="math inline">\(u(t)\)</span>를 넣고, 정해진 식 <span class="math inline">\(y(t+1) = 0.3\,y(t) + 0.05\,y(t)\sum_{i=0}^{9} y(t-i) + 1.5\,u(t-9)\,u(t) + 0.1\)</span>로 만든 출력 <span class="math inline">\(y\)</span>를 reservoir가 따라 하게 하는 시험 과제입니다(식은 외우지 않아도 되고, 항마다의 뜻은 D12에서 풉니다). 지금 볼 곳은 두 군데입니다. <span class="math inline">\(y(t) \times y(t-i)\)</span>와 <span class="math inline">\(u(t-9) \times u(t)\)</span>는 <strong>두 값의 곱</strong>이고(2차 비선형), 그 곱에 들어가는 값이 <strong>9–10단계 전</strong>까지 거슬러 갑니다(기억). Stepney도 NARMA 계열의 (2차) 비선형성이 이런 곱 항들에서 오고 <strong>이전 <span class="math inline">\(N\)</span>개 상태의 기억도 필요하다</strong>고 씁니다. <span class="src">Stepney 2024, p.676</span> (Stepney는 출력을 <span class="math inline">\(x\)</span>, 과제의 길이를 <span class="math inline">\(N\)</span>으로 적습니다. 이 교재에서 <span class="math inline">\(x\)</span>는 reservoir 상태, <span class="math inline">\(N\)</span>은 노드 수이므로 여기서는 출력을 <span class="math inline">\(y\)</span>, 길이를 10으로 바꿔 적었습니다.) 그래서 NARMA10에는 약 10단계의 기억과 2차(두 값의 곱) 비선형이 함께 필요합니다. 기억이 3단계뿐이면 아무리 비선형이 강해도 소용없고, 기억이 100단계여도 곱을 못 만들면 소용없습니다. 지연 XOR은 2단계 기억 + 2차, 3-parity는 3단계 기억 + 3차입니다(D10).</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig5-task-demands.svg" alt="가로축 필요한 기억(0–12단계), 세로축 필요한 비선형 차수(1–3차)인 지도. 지연 XOR은 (2단계, 2차), 3-parity는 (3단계, 3차), NARMA10은 (10단계, 2차)에 점이 있고, 각 점까지 점선 상자가 그려져 있다. 기억 3단계까지를 덮는 파란 음영과 1차만 덮는 회색 띠가 있으며 NARMA10은 어느 음영에도 들어가지 않는다" class="figure-img"><figcaption><b>그림 1-1.</b> 과제마다 요구하는 기억과 비선형을 한 지도에. 먼저 빨간 점(NARMA10)을 찾고, 그다음 두 음영을 보세요. 파란 음영(기억이 3단계뿐인 reservoir)은 지연 XOR과 3-parity는 덮지만 NARMA10의 10단계에 닿지 못하고, 회색 띠(선형 reservoir)는 1차 줄만 덮어 세 과제 모두 놓칩니다. 이것이 "기억만 길어도, 비선형만 강해도 소용없다"의 그림입니다. 과제 좌표는 본문의 값이고 음영은 설명용 예입니다. (Claude가 그림, 모식도)</figcaption></figure>
+<p>그러니 질문을 바꿔야 합니다. "기억이 길수록 좋은가?"가 아니라 <strong>"과제가 요구하는 기억과 비선형을, reservoir가 충분히 그리고 동시에 줄 수 있는가?"</strong> 이 질문에 답하려면 기억과 비선형을 같은 단위로 재는 저울이 필요합니다.</p>
+<div class="quiz" data-day="d11" data-set="1-check"></div>
+<div class="keypoints">
+<ul>
+<li>기억 = 지난 입력의 흔적(D9), 비선형 = 입력들의 곱·굽힘(D10). 둘은 다른 일을 한다.</li>
+<li>과제는 둘을 정해진 양만큼 요구한다: NARMA10 ≈ 10단계 기억 + 2차 곱 <span class="src">Stepney 2024, p.676</span>, 지연 XOR = 2단계 + 2차, 3-parity = 3단계 + 3차.</li>
+<li>바른 질문: 과제가 요구하는 기억과 비선형을 동시에 줄 수 있나?</li>
+</ul>
+</div>
+</section>
+<section id="ch-ipc" class="level3">
+<h3 class="anchored" data-anchor-id="ch-ipc">2. 정보처리용량: 목표 하나를 얼마나 되살리나</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 용량 <span class="math inline">\(C = 1 - (\text{평균 제곱 오차})/(\text{목표의 분산})\)</span>을 숫자로 계산하고, 목표 함수를 '차수'로 나눠 더하는 이유(차수 1 = 기억, 차수 2 이상 = 비선형)와 서로 겹치지 않는 목표를 쓰는 이유를 말할 수 있다.</p>
+</div>
+<div id="b-ipc" class="basics">
+<section id="정보처리용량ipc과-노드-수에-묶인-총량" class="level4">
+<h4 class="anchored" data-anchor-id="정보처리용량ipc과-노드-수에-묶인-총량">정보처리용량(IPC)과 노드 수에 묶인 총량</h4>
+<p><strong>왜 필요한가.</strong> 기억은 "몇 단계 전 입력을 되살리나"로, 비선형은 "XOR을 맞히나"로 따로 재면 둘을 비교할 수 없습니다. 둘을 같은 저울에 올리려면 "<strong>어떤 목표 함수든</strong> 상태에서 얼마나 잘 되살리나"라는 하나의 질문으로 바꿉니다.</p>
+<p><strong>목표 하나의 용량.</strong> 입력 이력으로 정해지는 목표 신호 <span class="math inline">\(f(t)\)</span>를 하나 정합니다. 예: <span class="math inline">\(f(t) = u(t-2)\)</span>(두 단계 전 입력, 기억을 묻는 목표), <span class="math inline">\(f(t) = u(t-1) \cdot u(t-2)\)</span>(두 입력의 곱, 비선형을 묻는 목표). reservoir 상태로 선형 readout을 학습해(<a href="../days/d08.html#b-ridge">D8 기초: 최소제곱</a>) <span class="math inline">\(f\)</span>를 흉내 낸 값을 <span class="math inline">\(\hat{f}\)</span>("에프 햇". 모자 표시는 '추정한 값'이라는 뜻)라 하면, 그 목표의 용량은</p>
+<p><span class="math display">\[
+C_f = 1 - \frac{\langle (f - \hat{f})^2 \rangle}{\mathrm{Var}(f)}
+\]</span></p>
+<ul>
+<li><strong>평균 기호 <span class="math inline">\(\langle \cdot \rangle\)</span>.</strong> 꺾쇠 안의 양을 시간 단계마다 계산한 뒤, 단계 수 <span class="math inline">\(n\)</span>으로 나눈 <strong>평균</strong>입니다(시험 구간에서 냄). 예: 네 단계의 오차 <span class="math inline">\(f - \hat{f}\)</span>가 −1, 1, −1, 1이면 제곱은 1, 1, 1, 1이고 <span class="math inline">\(\langle (f-\hat{f})^2 \rangle = 4/4 = 1\)</span>입니다. 그래서 분자는 "오차 제곱의 평균"(평균 제곱 오차)입니다.</li>
+<li><strong>분산 <span class="math inline">\(\mathrm{Var}(f)\)</span>.</strong> 목표가 자기 평균에서 얼마나 흩어지나. 숫자 넷으로: 목표 값이 1, 2, 3, 6이면 평균은 3, 평균에서 뺀 값은 −2, −1, 0, 3, 그 제곱은 4, 1, 0, 9로 합이 14입니다. 개수 4로 나누면 분산 3.5, 표본 분산(개수−1 = 3으로 나눔)이면 약 4.67입니다. 분산의 제곱근이 표준편차입니다(이 교재의 기본은 <span class="math inline">\(n-1\)</span>로 나눈 표본 표준편차). <strong>D11의 용량 식에서는 분산도 개수 <span class="math inline">\(n\)</span>으로 나눕니다.</strong> 분자의 <span class="math inline">\(\langle \cdot \rangle\)</span>가 <span class="math inline">\(n\)</span>으로 나누니 분모도 같은 잣대로 맞추는 것이고(아래 단계 4에서 어긋나면 어떻게 되는지 봅니다), 그림 2·3의 숫자를 낸 Claude의 코드(<code>tools/esn.py</code>)도 <span class="math inline">\(n\)</span>으로 나눕니다. 시험 구간이 수천 단계라 <span class="math inline">\(n\)</span>과 <span class="math inline">\(n-1\)</span>의 차이는 무시할 만합니다. 정식 설명은 <a href="../days/d13.html#b-variance-share">D13 기초: 분산·상관²</a>.</li>
+<li>단위: 무차원, 0~1.</li>
+<li>결과의 뜻: 1이면 완벽히 되살림, 0이면 평균값만 말하는 것과 같음(D8의 NMSE를 1에서 뺀 것). Singh 2026의 3.2절 식이 이것이고, 목표 함수의 다항 차수와 그것을 만든 입력 지연으로 목표를 구별합니다. <span class="src">Singh 2026, p.13</span></li>
+</ul>
+<p><strong>네 단계로 처음부터 끝까지.</strong> 식의 조각이 실제로 어떻게 맞물리는지, 시간 네 단계짜리 장난감 예로 따라갑니다(Claude가 만든 예, 숫자는 손으로 확인 가능).</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 목표와 상태를 적는다.</strong> 시간 네 단계에서 목표가 <span class="math inline">\(f\)</span> = 1, 2, 3, 6이고, readout이 볼 수 있는 것은 노드 하나의 상태 <span class="math inline">\(x\)</span> = 2, 1, 4, 5라고 합시다(D9 5구간 상관계수 예의 두 숫자 열 <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>를 그대로 가져왔습니다). 선형 readout이 할 수 있는 일은 <span class="math inline">\(\hat{f} = w_0 + w_1 x\)</span>, 곧 "상태에 숫자 <span class="math inline">\(w_1\)</span>을 곱하고 상수 <span class="math inline">\(w_0\)</span>을 더하기"뿐입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — readout을 맞춘다(최소제곱).</strong> 오차 제곱의 합을 가장 작게 하는 <span class="math inline">\(w_1\)</span>은 (평균을 뺀 값끼리 곱해 더한 것) ÷ (<span class="math inline">\(x\)</span> 쪽 제곱합)입니다(<a href="../days/d08.html#b-ridge">D8 기초</a>의 <span class="math inline">\(w = \sum xy / \sum x^2\)</span>를 평균을 뺀 값에 쓴 것). 평균을 뺀 값은 <span class="math inline">\(f\)</span>: −2, −1, 0, 3, <span class="math inline">\(x\)</span>: −1, −2, 1, 2이므로 <span class="math inline">\(w_1 = (2 + 2 + 0 + 6)/(1 + 4 + 1 + 4) = 10/10 = 1\)</span>이고, <span class="math inline">\(w_0 = (f\text{의 평균}) - w_1 \times (x\text{의 평균}) = 3 - 3 = 0\)</span>입니다. 그래서 <span class="math inline">\(\hat{f}\)</span> = 2, 1, 4, 5.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 분자: 오차 제곱의 평균.</strong> <span class="math inline">\(f - \hat{f}\)</span> = −1, 1, −1, 1, 제곱 1, 1, 1, 1, 평균 <span class="math inline">\(\langle (f-\hat{f})^2 \rangle = 1\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 분모로 나눠 1에서 뺀다.</strong> <span class="math inline">\(\mathrm{Var}(f) = 14/4 = 3.5\)</span>(<span class="math inline">\(n\)</span> = 4로 나눔). <span class="math inline">\(C = 1 - 1/3.5 \approx 0.714\)</span>. 목표의 흔들림 3.5 가운데 1만큼을 놓쳐, 약 71%를 되살렸다는 뜻입니다. 분모만 <span class="math inline">\(n-1\)</span> = 3으로 나눈 4.67을 쓰면 <span class="math inline">\(1 - 1/4.67 \approx 0.786\)</span>이 되어 다음 단계의 값과 어긋납니다. 분자와 분모를 같은 <span class="math inline">\(n\)</span>으로 나누는 이유입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 상관²과 비교한다.</strong> D9에서 같은 두 숫자 열의 상관계수는 <span class="math inline">\(10/\sqrt{14 \times 10} \approx 0.845\)</span>였고, 제곱하면 <span class="math inline">\(100/140 \approx 0.714\)</span>로 단계 4와 같습니다. 최소제곱으로 맞춘 <strong>바로 그 데이터</strong>에서 계산하면 "1 − 오차/분산"은 목표와 readout 출력의 상관²과 정확히 같습니다(회귀분석에서 결정계수 R²의 성질, 일반 교과 내용 <span class="tag tag-fact">확인</span>). 학습에 쓰지 않은 시험 구간에서는 거의 같을 뿐 정확히 같지는 않습니다. 기억 용량을 처음 정의한 Jaeger의 식도 이 상관²(공분산² ÷ 두 분산의 곱)으로 적혀 있습니다. <span class="src">Stepney 2024, p.679</span></p>
+</div>
+</div>
+<p><strong>작은 숫자로.</strong> 목표의 분산이 1.0이고 readout의 평균 제곱 오차가 0.36이면 <span class="math inline">\(C = 1 - 0.36/1.0 = 0.64\)</span>입니다. 단계 5처럼 이것은 목표와 readout 출력의 상관계수 0.8의 제곱이고, D9 5구간의 "되살리는 정도"와 같은 양입니다.</p>
+<p><strong>용량 1과 용량 0은 무엇을 뜻하나.</strong> <a href="../days/d09.html#ch-causal">D9 5구간</a>의 노드 하나 <span class="math inline">\(x(t) = d\,x(t-1) + u(t)\)</span>(입력은 서로 독립인 난수)로 봅니다.</p>
+<ul>
+<li><strong>용량 1</strong>: <span class="math inline">\(d = 0\)</span>이면 <span class="math inline">\(x(t) = u(t)\)</span>입니다. 목표 <span class="math inline">\(u(t)\)</span>에 대해 readout이 <span class="math inline">\(\hat{f} = x\)</span>로 두면 오차가 매 단계 0이라 <span class="math inline">\(C = 1 - 0 = 1\)</span>. 완벽히 되살립니다.</li>
+<li><strong>용량 0</strong>: 같은 노드(<span class="math inline">\(d = 0\)</span>)에 목표 <span class="math inline">\(u(t-1)\)</span>을 주면, 지금 상태 <span class="math inline">\(x(t) = u(t)\)</span>에는 한 단계 전 입력의 흔적이 전혀 없습니다. 어떤 가중치도 도움이 안 되니 readout의 최선은 늘 목표의 평균(여기서 0)을 말하는 것이고, 그때 평균 제곱 오차가 목표의 분산과 같아져 <span class="math inline">\(C = 1 - 1 = 0\)</span>입니다. 시험 구간에서 계산값이 음수로 나오면(평균만 말하는 것보다도 못하면) 0으로 둡니다.</li>
+<li><strong>그 사이</strong>: <span class="math inline">\(d = 0.5\)</span>면 목표 <span class="math inline">\(u(t), u(t-1), u(t-2), u(t-3)\)</span>의 용량이 0.75, 0.19, 0.047, 0.012, …입니다(D9의 <span class="math inline">\(d^{2k}(1-d^2)\)</span>).</li>
+</ul>
+<p><strong>목표마다 더하면.</strong> 이 <span class="math inline">\(d = 0.5\)</span> 노드의 용량을 모든 지연에 대해 더하면 0.75 + 0.19 + 0.047 + 0.012 + … = 1입니다. 노드가 하나(<span class="math inline">\(N = 1\)</span>)라 합이 1을 넘지 못한 것이고, 이것이 아래 "노드 수에 묶인 총량"의 가장 작은 예입니다(왜 그런지는 3구간). 이 노드는 선형이라 용량 1이 모두 '지난 입력을 그대로 되살리는 일'(아래의 차수 1)에 쓰였습니다.</p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/bMccdk8EdGo?start=96&amp;rel=0" title="영상: R-squared, Clearly Explained!!!" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:36–6:22, 약 5분 · 전체 11분, 영어·자동 자막).</b> StatQuest with Josh Starmer, "R-squared, Clearly Explained!!!" (2022판). <b>볼 이유:</b> 챕터 'Visualizing variation'(1:36)부터 'R-squared calculation example'(5:06)까지가, 평균선 둘레의 흩어짐과 맞춘 선 둘레의 흩어짐을 비교해 R²를 계산하는 부분이다(챕터 제목 기준). 본문의 $C_f = 1 - \langle(f-\hat f)^2\rangle/\mathrm{Var}(f)$에서 분모 $\mathrm{Var}(f)$가 '평균선 둘레의 흩어짐', 분자가 'readout 둘레의 흩어짐'에 해당한다 [해석]. 영상의 예는 몸무게와 크기 같은 두 변수의 직선 맞춤이고 reservoir는 나오지 않는다. <b>보고 답할 질문:</b> 영상에서 R² = 0.6이라는 숫자가 나오면, 그것은 본문의 어떤 용량 값과 같은 뜻이고 "목표의 흔들림 가운데 몇 %를 되살렸다"는 말이 되는가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 목록(영상 내용은 미검증)</span></div></div>
+<p><strong>차수: 목표가 입력 몇 개를 곱한 것인가.</strong> 목표를 입력의 다항식(입력끼리 곱하고 더한 식)으로 만들 때, 한 항에 <strong>곱해진 입력의 개수</strong>(같은 입력을 두 번 곱하면 2로 셈, 곧 지수의 합)를 그 목표의 <strong>차수</strong>(degree)라 부릅니다.</p>
+<ul>
+<li><span class="math inline">\(u(t-2)\)</span>: 입력 하나 → 차수 1. 지난 입력을 그대로 되살리는 일, 곧 <strong>기억</strong>입니다.</li>
+<li><span class="math inline">\(u(t-1)\,u(t-2)\)</span>, <span class="math inline">\(u(t-1)^2\)</span>: 입력 둘의 곱 → 차수 2.</li>
+<li><span class="math inline">\(u(t-1)^3\)</span>, <span class="math inline">\(u(t-1)\,u(t-2)^2\)</span>: 차수 3(Stepney가 드는 3차 예). <span class="src">Stepney 2024, p.679</span></li>
+</ul>
+<p>숫자로: <span class="math inline">\(u(t-1) = 0.5\)</span>, <span class="math inline">\(u(t-2) = -0.4\)</span>인 순간, 차수 1 목표 <span class="math inline">\(u(t-2)\)</span>의 값은 −0.4, 차수 2 목표 <span class="math inline">\(u(t-1)\,u(t-2)\)</span>는 −0.2, <span class="math inline">\(u(t-1)^2\)</span>은 0.25입니다. 입력을 모두 2배(1.0, −0.8)로 키우면 차수 1 목표는 2배(−0.8), 차수 2 목표는 4배(−0.8, 1.0)가 됩니다. <strong>차수 = 입력을 키울 때 목표가 몇 제곱으로 커지나</strong>로 읽어도 됩니다. 차수 2 이상인 목표는 입력들의 곱이라 겹침 원리를 깨는 비선형이 있어야 만들 수 있습니다(<a href="../days/d10.html#b-nonlinearity">D10 기초</a>). 그래서 "차수 1 = 기억, 차수 2 이상 = 비선형"으로 나눠 셉니다. 서로 다른 시각의 입력이 함께 들어간 목표(<span class="math inline">\(u(t-1)\,u(t-2)\)</span>처럼)의 용량을 <strong>교차 용량</strong>(cross capacity)이라고 부릅니다. <span class="src">Stepney 2024, p.679</span></p>
+<p><strong>차수 1 목표들의 용량을 모든 지연에 대해 더한 것이 memory capacity(MC)</strong>입니다. 위의 <span class="math inline">\(d = 0.5\)</span> 노드라면 MC = 1입니다. Stepney는 "선형 memory capacity는 차수 1의 IPC"라고 씁니다. <span class="src">Stepney 2024, p.680</span></p>
+<p><strong>정보처리용량(IPC).</strong> 모든 차수, 모든 지연 조합의 목표에 대해 용량을 구해 더한 것이 <strong>정보처리용량</strong>(information processing capacity, IPC)입니다. 차수별로 따로 더해 "차수 1(기억)에 얼마, 차수 2에 얼마, 차수 3에 얼마"로 보고하면, 기억과 비선형을 한 저울에서 비교할 수 있습니다. Liang은 IPC를 MC의 비선형 확장으로 소개하며, 단기 기억과 비선형 근사를 <strong>동시에</strong> 재므로 과학적으로 더 의미 있고 서로 다른 구현의 비교에 권한다고 씁니다. <span class="src">Liang 2024, p.200</span></p>
+<p><strong>서로 겹치지 않는 목표: 왜 <span class="math inline">\(u\)</span>, <span class="math inline">\(u^2\)</span>, <span class="math inline">\(u^3\)</span>을 그대로 쓰지 않나.</strong> 목표를 셀 때 두 목표가 서로 <strong>겹치면</strong> 같은 능력을 두 번 셉니다. '겹친다'의 기준은 두 목표를 시각마다 곱해 평균 낸 값 <span class="math inline">\(\langle f \cdot g \rangle\)</span>이고, 이것이 0이면 겹치지 않는다(<strong>직교</strong>, orthogonal)고 합니다. 입력이 −1~1에서 고르게 나오는 경우를 숫자로 확인합니다(Claude 계산).</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 고르게 나온 입력 10개.</strong> <span class="math inline">\(u\)</span> = ±0.1, ±0.3, ±0.5, ±0.7, ±0.9(−1~1을 열 칸으로 나눈 각 칸의 가운데. 무작위로 뽑은 수천 개를 줄여 놓은 것). 양수 다섯 개의 제곱은 0.01, 0.09, 0.25, 0.49, 0.81이고 음수 쪽도 제곱하면 같으므로 <span class="math inline">\(\langle u^2 \rangle = 1.65/5 = 0.33\)</span>. 네제곱은 0.0001, 0.0081, 0.0625, 0.2401, 0.6561로 <span class="math inline">\(\langle u^4 \rangle = 0.967/5 \approx 0.193\)</span>. (−1~1에서 고르게 나오는 입력이 무한히 많으면 정확히 1/3과 1/5입니다.)</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — <span class="math inline">\(u\)</span>와 <span class="math inline">\(u^3\)</span>은 겹친다.</strong> <span class="math inline">\(\langle u \cdot u^3 \rangle = \langle u^4 \rangle \approx 0.193\)</span>. 네제곱은 늘 0 이상이라 이 평균은 결코 0이 될 수 없습니다. <span class="math inline">\(u^3\)</span>의 그래프도 <span class="math inline">\(u\)</span>처럼 왼쪽 아래에서 오른쪽 위로 올라갑니다. 그래서 <span class="math inline">\(u(t-1)\)</span>만 그대로 기억하는 reservoir도 목표 <span class="math inline">\(u(t-1)^3\)</span>을 상관² 약 0.85만큼 '맞힙니다'(이 10개 입력 기준. 무한히 많으면 정확히 0.84). 차수 1의 1과 차수 3의 0.85를 더하면, 'u(t−1)을 기억함'이라는 한 가지 능력을 1.85로 부풀려 세게 됩니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 겹친 몫을 빼낸다: <span class="math inline">\(P_3\)</span>.</strong> <span class="math inline">\(u^3\)</span>에서 <span class="math inline">\(u\)</span>와 같이 움직이는 몫을 빼면 됩니다. 그 몫의 크기는 <span class="math inline">\(\langle u \cdot u^3 \rangle / \langle u^2 \rangle = (1/5)/(1/3) = 0.6\)</span>이라(10개 입력이면 0.193/0.33 ≈ 0.59), <span class="math inline">\(u^3 - 0.6\,u\)</span>를 만들고 2.5를 곱해 <span class="math inline">\(u = 1\)</span>에서 값이 1이 되게 맞춘 것이 <span class="math inline">\(P_3(u) = (5u^3 - 3u)/2\)</span>입니다. 확인: <span class="math inline">\(\langle u \cdot P_3 \rangle = (5\langle u^4 \rangle - 3\langle u^2 \rangle)/2 = (0.967 - 0.99)/2 \approx -0.012\)</span>(10개 입력), 무한히 많으면 <span class="math inline">\((5 \times 1/5 - 3 \times 1/3)/2 = 0\)</span>. 겹침이 0.193에서 거의 0으로 줄었고, <span class="math inline">\(u\)</span>만 기억하는 reservoir가 <span class="math inline">\(P_3\)</span> 목표에서 받는 상관²도 0.003뿐입니다(10개 입력 기준). 곱한 배율 2.5는 용량에 영향이 없습니다(용량은 목표의 분산으로 나누므로).</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 평균을 뺀다: <span class="math inline">\(P_2\)</span>.</strong> <span class="math inline">\(\langle u^2 \rangle = 1/3\)</span>이라 <span class="math inline">\(u^2\)</span>에는 '늘 1/3만큼 깔려 있는 부분'이 있고, 다른 목표와 곱하면 이 부분 때문에 겹침이 생깁니다. 예: 목표 <span class="math inline">\(u(t-1)^2\,u(t-2)\)</span>와 목표 <span class="math inline">\(u(t-2)\)</span>의 곱의 평균은 <span class="math inline">\(\langle u^2 \rangle \times \langle u^2 \rangle = 1/9 \approx 0.11\)</span>. 평균을 빼고 1.5를 곱한 <span class="math inline">\(P_2(u) = (3u^2 - 1)/2\)</span>는 평균이 0입니다(10개 입력에서는 <span class="math inline">\((3 \times 0.33 - 1)/2 = -0.005\)</span>).</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 홀짝과 다른 시각은 저절로 0.</strong> <span class="math inline">\(u \cdot P_2(u)\)</span>는 <span class="math inline">\(u\)</span>를 <span class="math inline">\(-u\)</span>로 바꾸면 부호만 바뀌는 곡선이라 +와 −가 정확히 상쇄됩니다(아래 그림 2-1 ②, 10개 입력에서도 정확히 0). 서로 다른 시각의 입력 <span class="math inline">\(u(t-1)\)</span>과 <span class="math inline">\(u(t-2)\)</span>는 독립이라 곱의 평균이 <span class="math inline">\(\langle u \rangle \times \langle u \rangle = 0\)</span>입니다. 그래서 실제로 쓰는 목표는 <strong>시각마다 이런 다항식(<span class="math inline">\(P_1\)</span>, <span class="math inline">\(P_2\)</span>, <span class="math inline">\(P_3\)</span>, … 가운데 하나)을 골라 곱한 것</strong>, 예를 들어 <span class="math inline">\(P_1(u(t-1)) \cdot P_2(u(t-3))\)</span>이고, 그 차수는 곱한 다항식 차수의 합(1 + 2 = 3)입니다.</p>
+</div>
+</div>
+<p>이렇게 차수마다 하나씩, <strong>자기보다 낮은 차수의 모든 다항식(상수 1 포함)과 곱의 평균이 0이 되도록</strong> 계수를 정한 묶음 <span class="math inline">\(P_1(u) = u\)</span>, <span class="math inline">\(P_2(u) = (3u^2 - 1)/2\)</span>, <span class="math inline">\(P_3(u) = (5u^3 - 3u)/2\)</span>, …이 <strong>Legendre 다항식</strong>(르장드르 다항식)입니다. <span class="math inline">\(P_n(1) = 1\)</span>이 되게 배율을 맞추는 것이 관례입니다(일반 교과 내용 <span class="tag tag-fact">확인</span>: Wikipedia "Legendre polynomials", 2026-10-25 열람). 다항식에는 낮은 차수의 항이 섞여 있어(<span class="math inline">\(P_3\)</span>의 <span class="math inline">\(-1.5u\)</span>) 앞의 "입력을 2배 하면 목표가 2<sup>차수</sup>배" 규칙은 가장 높은 항에만 맞고, 차수는 가장 높은 항의 차수로 셉니다. Dambre 등은 시각마다 (크기를 맞춘) Legendre 다항식을 하나씩 골라 곱한 것을 목표로 쓰고, 그 차수를 각 다항식 차수의 합으로 셉니다. <span class="src">Dambre 2012, 'Total capacity'</span> Stepney는 Dambre 등이 직교 다항식 묶음으로 모든 비선형 용량과 교차 용량을 <strong>중복 없이</strong> 세었고, 입력 분포에 따라 다른 묶음(정규분포면 Hermite)을 써야 한다고 씁니다. <span class="src">Stepney 2024, p.679–680</span> 겹침의 판정이 '그 분포로 낸 평균'이기 때문입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig6-legendre.svg" alt="세 칸. 왼쪽: −1~1 구간에서 P1 = u(파랑 직선), P2 = (3u²−1)/2(주황 포물선), P3 = (5u³−3u)/2(초록 S자) 세 곡선. 가운데: P1×P2 곡선과 그 넓이로, 양쪽 끝과 가운데의 초록(+) 넓이와 주황(−) 넓이가 같아 평균이 0. 오른쪽: u×u³ = u⁴(회색 점선, 전부 0 이상, 평균 0.2)과 u×P3(검정 실선, 양 끝의 + 넓이와 가운데의 − 넓이가 같아 평균 0)" class="figure-img"><figcaption><b>그림 2-1.</b> '서로 겹치지 않는 목표'의 뜻. ① 입력 u가 −1~1에서 고르게 나올 때 쓰는 목표 셋(1·2·3차). ② 두 목표를 곱한 곡선(P<sub>1</sub> × P<sub>2</sub>)의 넓이가 위(초록)와 아래(주황)로 정확히 상쇄되어 평균이 0입니다. u를 −u로 뒤집으면 곡선 높이의 부호만 바뀌기 때문입니다. ③ u와 u<sup>3</sup>을 곱한 u<sup>4</sup>(회색 점선)는 어디서나 0 이상이라 평균이 0.2로 남지만(겹침), u와 P<sub>3</sub>을 곱한 곡선(검정)은 양 끝의 + 넓이와 가운데의 − 넓이가 같아 평균이 0입니다. 평균이 0이면 한 목표를 맞히는 능력이 다른 목표를 맞히는 능력으로 두 번 세어지지 않습니다. 곡선과 평균은 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>노드 수에 묶인 총량.</strong> 그리고 핵심 결과: Stepney는 Dambre 등이 <strong>fading memory를 가진 계에서 (선형과 비선형 다항식 전부의 기여를 더한) 총 IPC가 노드 수 <span class="math inline">\(N\)</span>과 같다</strong>는 것을 증명했다고 요약합니다. <span class="src">Stepney 2024, p.680</span> 원 논문(Dambre 등 2012, <em>Sci. Rep.</em> 2, 514, <a href="https://doi.org/10.1038/srep00514">doi:10.1038/srep00514</a>)은 폴더에 없지만 공개 본문에서 정리의 조건을 직접 확인했습니다. 원 논문이 말하는 것은 "상한"과 "같아지는 조건"의 두 층입니다. <span class="src">Dambre 2012, 초록·Theorem 4·7</span> 3구간에서 그 이유를 그림으로 따라갑니다.</p>
+<p><strong>이 결과가 성립하는 조건(원 논문 기준).</strong></p>
+<ul>
+<li><strong>상한.</strong> readout이 관측한 상태 변수 <span class="math inline">\(N\)</span>개의 선형 결합일 때, 서로 직교하는 목표 함수들의 용량을 몇 개를 모아 더하든 합은 <span class="math inline">\(N\)</span>을 넘지 못합니다(Theorem 4). 초록의 표현으로는 상한이 <strong>선형 독립인 상태 변수의 수</strong>입니다. 이 부등식 자체는 fading memory를 가정하지 않습니다.</li>
+<li><strong>같아지는 조건.</strong> 합이 <span class="math inline">\(N\)</span>에 이르려면 (1) 계가 fading memory를 가지고(<a href="../days/d09.html#b-fading-memory">D9 기초</a>), (2) <span class="math inline">\(N\)</span>개 상태 변수가 선형 독립이며(어떤 상태도 다른 상태들의 가중합으로 만들어지지 않음. 원 논문의 표현으로는 상태들이 함께 움직이는 정도를 적은 표, 곧 상관 행렬의 rank가 <span class="math inline">\(N\)</span>, <a href="../days/d14.html#ch-rank">D14 3구간</a>에서 다룸), (3) 서로 겹치지 않는 목표 함수 묶음이 fading memory를 가진 모든 목표를 빠짐없이 만들 수 있을 만큼 완전하고(완전한 직교 기저), (4) 데이터 길이와 처음 버리는 초기화 구간이 무한대인 극한이어야 합니다(Theorem 7).</li>
+<li><strong>입력.</strong> 정리는 매 단계 입력 <span class="math inline">\(u(t)\)</span>를 같은 확률분포 <span class="math inline">\(p(u)\)</span>에서 서로 독립으로 뽑는 경우(i.i.d.)를 다루고, "직교"는 그 분포로 낸 평균으로 판단합니다. 그래서 입력 분포마다 맞는 다항식 묶음이 다릅니다(위의 Legendre·Hermite). 저자들은 i.i.d.가 아닌 입력에도 이론의 대부분이 성립할 것이라고 보면서도, 그때는 직교 기저를 실제로 만들기가 흔히 어렵다고 적습니다.</li>
+<li><strong>유한한 데이터로 추정할 때.</strong> 측정값은 통계적 흔들림을 가지며, 특히 아주 작은 용량은 우연한 상관 때문에 <strong>부풀려질</strong> 수 있습니다. 원 논문은 <span class="math inline">\(10^6\)</span>단계 데이터로 9차까지의 Legendre 다항식 곱을 세고, 문턱(노드 50개 ESN, 곧 <a href="../days/d07.html#ch-esn-lsm">D7</a>의 난수로 연결한 소프트웨어 reservoir에서 <span class="math inline">\(1.7\times10^{-4}\)</span>)보다 작은 용량은 0으로 두었습니다(문턱을 정한 근거는 보충자료). 비선형이 강한 경우에는 센 목표 밖에 남은 용량 때문에 측정한 총합이 실제 총량보다 작게 나온다고 적습니다.</li>
+<li><strong>잡음.</strong> 알 수 없는 잡음이 계를 흔들면, 입력 <span class="math inline">\(u\)</span>만으로 정해지는 목표들의 용량 합은 <span class="math inline">\(N\)</span>보다 작습니다. 합이 <span class="math inline">\(N\)</span>이 되는 것은 잡음까지 포함한 전체 함수 공간에서뿐입니다.</li>
+</ul>
+<p><strong>소자 개수 ≠ 독립 상태 수.</strong> 여기서 <span class="math inline">\(N\)</span>은 "물리 소자 개수"가 아니라 <strong>readout이 실제로 받는 상태 변수 가운데 선형 독립인 것의 수</strong>입니다. 둘은 두 방향으로 어긋납니다. 소자 하나라도 여러 시점·여러 단자에서 읽으면(D10의 가상 노드) 상태 변수가 여럿이 되고, 반대로 소자가 20개여도 모두 같거나 서로의 가중합처럼 움직이면 독립 상태 수는 그보다 훨씬 작습니다(5구간의 '같은 소자 20개 = 1.00', D14의 rank). 수학적으로는 독립이어도 측정 잡음에 묻힌 방향은 쓸 수 없습니다. <span class="tag tag-interp">해석</span> 그러니 "노드 수"는 기대할 수 있는 값이 아니라, 선형 readout에서 <strong>참 용량의 합이 넘을 수 없는 천장</strong>으로 읽으세요. 유한한 데이터로 추정한 값은 우연한 상관으로 부풀 수 있으므로, 측정값을 보고할 때는 데이터 길이·센 차수와 지연·문턱을 함께 적습니다.</p>
+</section>
+</div>
+<p><strong>실제로 재려면.</strong> 목표 수는 차수와 지연이 늘면 폭발적으로 늘어 계산이 무겁고, 높은 차수·긴 지연의 기여는 작아 어딘가에서 끊습니다. <span class="src">Stepney 2024, p.680</span> 끊는 기준, 입력 분포, 데이터 길이, 잡음과 우연한 상관을 버리는 기준에 따라 숫자가 달라지므로 그것들을 함께 보고해야 한다고 Stepney와 Singh은 모두 강조합니다. <span class="src">Stepney 2024, p.680</span> <span class="src">Singh 2026, p.13</span> 오늘의 시뮬레이션은 차수 1–4, 차수별 지연 창(1차 0–99, 2차 0–19, 3차 0–11, 4차 0–7)을 셌고, 시험 구간에서 계산한 용량이 음수면 0으로 두었습니다.</p>
+<div class="predict">
+<p>목표의 분산이 0.5이고 readout의 평균 제곱 오차가 0.1이면 용량은 얼마일까요? 첫 문제는 본문 숫자의 확인, 둘째는 빈칸, 셋째는 혼자 풀기입니다.</p>
+</div>
+<div class="quiz" data-day="d11" data-set="2-check"></div>
+<div class="quiz" data-day="d11" data-set="2-end"></div>
+<div class="keypoints">
+<ul>
+<li>목표 하나의 용량 <span class="math inline">\(C_f = 1 - \langle(f-\hat f)^2\rangle/\mathrm{Var}(f)\)</span> <span class="src">Singh 2026, p.13</span>. <span class="math inline">\(\langle\cdot\rangle\)</span>는 단계 수 <span class="math inline">\(n\)</span>으로 나눈 평균, 분산도 <span class="math inline">\(n\)</span>으로 나눈다. 예: 오차 0.36, 분산 1 → 0.64. 네 단계 예(목표 1, 2, 3, 6)는 0.714 = 상관². 1 = 완벽, 0 = 평균만 말하는 것과 같음.</li>
+<li>차수 1 목표의 합 = MC <span class="src">Stepney 2024, p.680</span>. 모든 차수의 합 = IPC. 기억과 비선형을 한 저울에서 잰다 <span class="src">Liang 2024, p.200</span>.</li>
+<li>차수 = 곱해진 입력의 개수(차수 1 = 기억, 2 이상 = 비선형). 겹치지 않는 목표(Legendre 다항식, 서로 다른 시각의 독립 입력)로 중복 없이 센다 <span class="src">Stepney 2024, p.679–680</span>. <span class="math inline">\(u\)</span>와 <span class="math inline">\(u^3\)</span>은 겹치므로(곱의 평균 0.2) <span class="math inline">\(P_3 = (5u^3-3u)/2\)</span>를 쓴다.</li>
+<li>총 IPC ≤ 선형 독립인 상태 변수 수. 같아지려면 fading memory, 상태의 선형 독립(rank <span class="math inline">\(N\)</span>), 완전한 직교 기저, 무한한 데이터, i.i.d. 입력이라는 조건이 붙는다 <span class="src">Dambre 2012, 초록·Theorem 4·7</span> <span class="src">Stepney 2024, p.680</span>. 소자 개수 ≠ 독립 상태 수. 측정은 데이터 길이·차수·지연·문턱을 함께 보고한다.</li>
+</ul>
+</div>
+</section>
+<section id="ch-bound" class="level3">
+<h3 class="anchored" data-anchor-id="ch-bound">3. 왜 총량은 노드 수를 넘지 못하나: 그림자 길이의 합</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "서로 수직인 목표 세 개를 노드 2개의 평면에 비추면 그림자 길이 제곱의 합이 2"를 손으로 계산하고, 그것이 "용량 총합 ≤ 노드 수"의 그림이라는 것과, 총합이 <span class="math inline">\(N\)</span>보다 작아지는 세 가지 이유를 말할 수 있다.</p>
+</div>
+<p>수학적 증명은 이 교재의 범위를 넘지만, <strong>왜 그런지</strong>는 3차원 그림 하나로 볼 수 있습니다. 먼저 신호를 화살표로 그리는 법을 정합니다.</p>
+<ul>
+<li><strong>신호 = 화살표.</strong> 시간 <span class="math inline">\(T\)</span>단계의 신호는 숫자 <span class="math inline">\(T\)</span>개의 목록이고, 숫자 <span class="math inline">\(T\)</span>개는 <span class="math inline">\(T\)</span>차원 공간의 화살표 하나로 볼 수 있습니다(숫자 3개 = 3차원 화살표). 2구간 네 단계 예의 목표 <span class="math inline">\(f\)</span> = 1, 2, 3, 6에서 평균을 뺀 (−2, −1, 0, 3)은 4차원 화살표입니다.</li>
+<li><strong>곱의 평균 = 두 화살표가 얼마나 같은 쪽을 향하나.</strong> 두 화살표의 자리끼리 곱해 더한 값(내적)이 0이면 둘은 서로 수직입니다. 예: (1, 0, 0)과 (0, 1, 0)은 1×0 + 0×1 + 0×0 = 0. 2구간의 "곱의 평균 <span class="math inline">\(\langle f \cdot g \rangle\)</span>"는 이 내적을 <span class="math inline">\(T\)</span>로 나눈 것이므로, <strong>겹치지 않는 목표 = 서로 수직인 화살표</strong>입니다. 같은 식으로 (길이²)/<span class="math inline">\(T\)</span> = <span class="math inline">\(\langle f^2 \rangle\)</span> = 분산(평균을 뺀 경우)이라, 분산을 1로 맞춘 목표는 모두 같은 길이(아래에서는 1)로 그립니다.</li>
+<li><strong>readout 출력 = 판 위의 화살표.</strong> 노드 하나의 상태 시계열도 화살표 하나이고, 선형 readout의 출력은 노드 화살표들에 가중치를 곱해 더한 것입니다. 그런 출력을 모두 모으면 노드 화살표들이 펼치는 <strong>평평한 판</strong>이 되고, 노드 화살표 <span class="math inline">\(N\)</span>개가 서로의 가중합이 아니면(선형 독립) 판은 <span class="math inline">\(N\)</span>차원입니다. 노드 2개면 2차원 평면입니다.</li>
+<li><strong>최선의 readout = 그림자, 용량 = 그림자 길이².</strong> 최소제곱 readout은 판 위에서 목표 화살표에 가장 가까운 점, 곧 목표를 판에 수직으로 비춘 <strong>그림자</strong>를 찾습니다. 용량은 (그림자 길이 ÷ 목표 길이)²이고, 목표 길이가 1이면 그림자 길이²입니다. 평면 안에 들어 있는 목표는 그림자 길이 1(용량 1), 평면에 수직인 목표는 그림자 0(용량 0). 2구간 네 단계 예라면 판은 상태 화살표 (−1, −2, 1, 2) 하나가 만드는 직선(1차원)이고, 목표 (−2, −1, 0, 3)의 그림자에 대해 (그림자 길이 ÷ 목표 길이)² = 10²/(10 × 14) ≈ 0.714로 용량과 같습니다. [계산]</li>
+</ul>
+<p>어디까지 맞고 어디서 깨지나: 신호를 화살표로, 곱의 평균을 내적으로 보는 것은 비유가 아니라 같은 계산입니다. 그림이 줄인 것은 두 가지입니다. 실제 화살표는 3차원이 아니라 시험 구간 길이(수천)만큼의 차원을 갖고, 목표는 셋이 아니라 무수히 많습니다(모든 차수·지연의 조합). 그래도 "수직인 화살표들의 그림자 제곱 합 ≤ 판의 차원"이라는 계산은 차원이 몇이든 그대로 성립합니다. 또 데이터가 유한하면 원래 수직이어야 할 목표들도 정확히 수직이 아니어서(2구간의 10개 입력에서 <span class="math inline">\(\langle u \cdot P_3 \rangle\)</span> = −0.012처럼) 작은 그림자가 우연히 생깁니다. 2구간의 '문턱'이 필요한 이유입니다. <span class="tag tag-interp">해석</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/zSd7jd2HGhM?start=84&amp;rel=0" title="영상: 제9장: 내적과 쌍대성 | 선형대수학의 본질" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:24–5:19, 약 4분 · 전체 14분, 한국어 더빙·번역판).</b> 3Blue1Brown 한국어, "제9장: 내적과 쌍대성 | 선형대수학의 본질"(원본: 3Blue1Brown, "Dot products and duality"). <b>볼 이유:</b> 챕터 '내적의 기하적 해석'(1:24)과 '내적은 왜 사영과 관련있는가?'(3:56)가 화살표 하나를 다른 방향에 수직으로 비춘 <b>그림자(사영)</b>의 길이를 내적으로 계산하는 장면이다(챕터 제목 기준). 아래 단계 2–4에서 쓰는 "각 방향과의 곱의 합"이 이 계산이다. 5:19 이후의 쌍대성은 오늘 몰라도 된다. <b>보고 답할 질문:</b> 단계 3에서 목표 2 = (0, 1, 0)을 방향 $b_2$ = (0, 0.707, 0.707)에 비춘 그림자 길이 0.707은, 영상의 어느 계산(어떤 두 화살표의 내적)과 같은가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 목록(영상 내용은 미검증)</span></div></div>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 판을 정한다.</strong> 노드 2개가 만드는 평면을 두 방향 <span class="math inline">\(b_1 = (1, 0, 0)\)</span>과 <span class="math inline">\(b_2 = (0, 0.707, 0.707)\)</span>로 정합니다(<span class="math inline">\(0.707 = 1/\sqrt{2}\)</span>, 둘은 서로 수직이고 길이 1). 바닥에서 비스듬히 선 평면입니다(그림 1).</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 목표 1 = (1, 0, 0).</strong> 그림자는 각 방향과의 곱의 합으로 구합니다(<span class="math inline">\(b_1\)</span>과 <span class="math inline">\(b_2\)</span>가 서로 수직이고 길이 1이라서, 방향마다 따로 구해 제곱해 더할 수 있습니다): <span class="math inline">\(b_1\)</span> 쪽 <span class="math inline">\(1 \times 1 = 1\)</span>, <span class="math inline">\(b_2\)</span> 쪽 0. 그림자 길이² <span class="math inline">\(= 1^2 + 0^2 = 1\)</span>. 목표 1은 평면 안에 있으므로 완벽히 되살립니다(용량 1).</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 목표 2 = (0, 1, 0).</strong> <span class="math inline">\(b_1\)</span> 쪽 0, <span class="math inline">\(b_2\)</span> 쪽 <span class="math inline">\(1 \times 0.707 = 0.707\)</span>. 그림자 길이² <span class="math inline">\(= 0.707^2 = 0.5\)</span>. 용량 0.5.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 목표 3 = (0, 0, 1).</strong> 같은 계산으로 <span class="math inline">\(b_2\)</span> 쪽 0.707, 용량 0.5.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 더한다.</strong> <span class="math inline">\(1 + 0.5 + 0.5 = 2\)</span>. 평면이 2차원(노드 2개)이니 합이 2입니다. 평면을 바닥(<span class="math inline">\(z = 0\)</span>)으로 눕히면 <span class="math inline">\(1 + 1 + 0 = 2\)</span>, 다른 어떤 기울기여도 2입니다. 왜 기울기와 상관없나: 평면의 방향 하나(예: <span class="math inline">\(b_2\)</span>)를 놓고 세 목표와의 곱을 제곱해 더하면 <span class="math inline">\(0^2 + 0.707^2 + 0.707^2 = 1\)</span>, 곧 그 방향의 길이² 1이 나옵니다(세 목표가 서로 수직이고 3차원 전부를 덮기 때문). 방향이 둘이니 합은 2입니다. 목표를 일부만 세면(목표 3을 빼면 1 + 0.5 = 1.5) 2보다 작아질 뿐 넘지는 않습니다. <strong>노드 2개로는 서로 겹치지 않는 목표들을 합쳐서 2만큼만 되살릴 수 있고</strong>, 목표 1을 완벽히 되살리면 나머지 둘은 합쳐서 1만 남습니다.</p>
+</div>
+</div>
+<figure class="fig figure"><img src="../assets/img/d11/fig1-projection-budget.svg" alt="3차원에서 서로 수직인 목표 화살표 셋(파랑 목표 1, 주황 목표 2, 초록 목표 3)과 노드 2개의 출력이 만드는 비스듬한 파란 평면. 목표 1은 평면 안에 있어 그림자² 1.00, 목표 2와 3은 그림자² 0.50씩, 합 2.00 = 평면의 차원" class="figure-img"><figcaption><b>그림 1.</b> 용량 = 그림자 길이의 제곱. 서로 수직인 목표 셋을 노드 2개의 출력 평면에 비추면 1.00 + 0.50 + 0.50 = 2.00이다. 평면을 어떻게 기울여도 합은 2이고, 이것이 "용량 총합 ≤ 노드 수"의 3차원 판이다. 모식도이며 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong><span class="math inline">\(N\)</span>차원으로 늘리면.</strong> 노드 <span class="math inline">\(N\)</span>개는 <span class="math inline">\(N\)</span>차원 판을 만들고, 서로 수직인 목표를 아무리 많이 세어도 그림자 제곱의 합은 <strong>판의 차원 <span class="math inline">\(N\)</span>을 넘지 못합니다</strong>. D9의 "노드 하나의 기억 예산 = 1"은 <span class="math inline">\(N = 1\)</span>인 경우였습니다. 그리고 목표들이 상태가 할 수 있는 모든 것을 빠짐없이 덮으면(모든 차수·모든 지연) 합은 정확히 <span class="math inline">\(N\)</span>이 됩니다. fading memory가 필요한 이유는, 그래야 상태가 <strong>입력 이력만의 함수</strong>(D9의 ESP)가 되어 "입력 이력의 다항식" 목표들로 상태가 할 수 있는 일을 다 덮을 수 있기 때문입니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>총합이 <span class="math inline">\(N\)</span>보다 작아지는 세 이유.</strong> <span class="tag tag-interp">해석</span></p>
+<ol type="1">
+<li><strong>노드가 서로의 복사본이거나 가중합이면</strong> 판의 실제 차원이 <span class="math inline">\(N\)</span>보다 작습니다. 노드 20개가 모두 같으면 판은 1차원입니다(5구간에서 숫자로).</li>
+<li><strong>잡음</strong>이 있으면 아주 작은 그림자는 잡음에 묻혀 읽을 수 없습니다. Stepney는 이 상한이 이론적 성질이고, 유한한 데이터와 실험 잡음 때문에 실제로는 임의의 기준과 문턱이 있어야 의미 있는 값이 나온다고 씁니다. <span class="src">Stepney 2024, p.680</span></li>
+<li><strong>세지 않은 목표</strong>에 용량이 가 있으면 합이 작게 나옵니다(높은 차수, 긴 지연). 측정이 차수·지연을 어디서 끊었는지 함께 보고해야 하는 이유입니다.</li>
+</ol>
+<p><strong>계산의 몫과 readout의 몫.</strong> 이 상한은 <strong>선형 readout</strong>에 대한 것입니다. readout이 상태를 제곱하거나 곱하면(비선형 readout) 판 자체가 커져 상한이 달라집니다. 그 경우 늘어난 몫은 재료가 아니라 readout이 한 일입니다(D8 7구간, D10 7구간). <span class="tag tag-interp">해석</span></p>
+<div class="quiz" data-day="d11" data-set="3-check"></div>
+<div class="quiz" data-day="d11" data-set="3-end"></div>
+<div class="keypoints">
+<ul>
+<li>목표 = 화살표, 노드 <span class="math inline">\(N\)</span>개의 출력 = <span class="math inline">\(N\)</span>차원 판, 용량 = 그림자 길이². 수직인 목표 셋을 2차원 판에 비추면 1 + 0.5 + 0.5 = 2.</li>
+<li>그림자 제곱 합은 판의 차원 <span class="math inline">\(N\)</span>을 넘지 못하고, 목표가 전부를 덮으면 <span class="math inline">\(N\)</span>이다(D9의 예산 1은 <span class="math inline">\(N = 1\)</span>).</li>
+<li><span class="math inline">\(N\)</span>보다 작아지는 이유: 복사본 노드, 잡음 <span class="src">Stepney 2024, p.680</span>, 세지 않은 목표.</li>
+<li>상한은 선형 readout 기준이다. 비선형 readout이 키운 몫은 readout의 몫.</li>
+</ul>
+</div>
+</section>
+<section id="ch-tradeoff" class="level3">
+<h3 class="anchored" data-anchor-id="ch-tradeoff">4. memory–nonlinearity 상충: 시뮬레이션으로 보기</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 노드 20개 reservoir의 차수별 용량이 입력 크기에 따라 어떻게 바뀌는지(선형 기억 11.5 → 4.0, 3차 0.02 → 6.9) 그림 2에서 읽고, 같은 총량 안에서 기억과 비선형이 서로 자리를 나눠 갖는다는 상충을 설명할 수 있다.</p>
+</div>
+<div id="b-tradeoff" class="basics">
+<section id="memorynonlinearity-상충" class="level4">
+<h4 class="anchored" data-anchor-id="memorynonlinearity-상충">memory–nonlinearity 상충</h4>
+<p><strong>무엇인가.</strong> 3구간에 따르면 선형 readout이 꺼낼 수 있는 총량은 노드 수 <span class="math inline">\(N\)</span>으로 묶여 있습니다. 그 총량을 <strong>차수 1(선형 기억)</strong>과 <strong>차수 2 이상(비선형)</strong>이 나눠 갖습니다. 그러니 같은 <span class="math inline">\(N\)</span>에서 비선형 쪽 몫이 늘면 선형 기억 쪽 몫은 줄 수밖에 없습니다. 이것이 <strong>memory–nonlinearity 상충</strong>(trade-off)입니다.</p>
+<p><strong>왜 그렇게 되나(직관).</strong> <span class="tag tag-interp">해석</span> 노드가 <span class="math inline">\(\tanh\)</span>의 휘는 구간에서 움직이면, 지난 입력의 흔적이 깨끗한 "복사본"으로 남지 않고 일부가 그 입력의 제곱·세제곱, 다른 입력과의 곱으로 <strong>바뀌어</strong> 남습니다. 비선형을 얻은 대가로 깨끗한 기억이 줄어든 것입니다. 또 입력이 커서 노드가 포화 쪽으로 밀리면 새 입력이 상태를 거의 덮어써서 옛 흔적이 빨리 지워집니다.</p>
+<p><strong>원문.</strong> Liang은 이전 연구에서 <strong>선형 노드를 쓴 RC가 비선형 노드를 쓴 RC보다 보통 훨씬 높은 MC를 보이며, 이는 과거 정보가 비선형성에 의해 왜곡되기 때문</strong>이라고 씁니다. <span class="src">Liang 2024, p.200</span> (Liang이 인용한 Inubushi &amp; Yoshimura 2017, <em>Sci. Rep.</em> 7, 10199, "Reservoir computing beyond memory-nonlinearity trade-off"(<a href="https://doi.org/10.1038/s41598-017-10257-6">doi:10.1038/s41598-017-10257-6</a>)는 폴더 밖이지만 공개 초록(PMC5579006)을 Claude가 확인했습니다 <span class="tag tag-fact">확인</span>. 초록은 이 상충을 Dambre 등 2012가 밝힌 것으로 소개하고, 그 동역학적 원인을 분석한 뒤 선형 동역학과 비선형 동역학을 섞은 reservoir로 성능을 높일 수 있다고 씁니다. 본문의 수식과 수치는 <span class="tag tag-unverified">미확인</span>입니다.)</p>
+<p><strong>조절 손잡이.</strong> 같은 reservoir에서 비선형의 세기를 바꾸는 가장 쉬운 손잡이가 <strong>입력 크기</strong>입니다. 입력이 작으면 노드가 <span class="math inline">\(\tanh\)</span>의 거의 직선인 가운데 구간에서 움직이고(선형에 가까움), 크면 휘는·포화 구간까지 갑니다. D10 5구간에서 입력 0.05가 XOR을 잘 못 푼 것이 이 이유였습니다.</p>
+</section>
+</div>
+<p><strong>시뮬레이션.</strong> 노드 20개 reservoir(spectral radius ρ = 0.9, <a href="../days/d09.html#b-spectral-radius">D9 기초</a>)에 −1~1 난수 입력을 넣고, 입력 크기(입력에 곱하는 배율)만 0.01 → 0.1 → 0.3 → 1 → 3으로 바꾸며 차수 1–4의 용량을 쟀습니다. 상태를 읽을 때 작은 측정 잡음(0.001)을 더했습니다. 비교를 위해 선형 reservoir도 넣었습니다.</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig2-ipc-by-degree.svg" alt="노드 20개 reservoir의 차수별 용량 쌓은 막대. 선형 입력 0.5: 차수 1만 14.5. tanh 입력 0.01: 8.4(거의 차수 1). 입력 0.1: 차수1 11.5, 차수2 3.3, 합 14.8. 입력 0.3: 10.2, 6.7, 1.7, 합 18.7. 입력 1: 7.1, 3.5, 7.2, 0.3, 합 18.1. 입력 3: 4.0, 1.4, 6.9, 0.5, 합 12.8. 빨간 점선 N=20이 상한" class="figure-img"><figcaption><b>그림 2.</b> 차수별 정보처리용량(파랑 = 차수 1 선형 기억, 주황 = 2차, 초록 = 3차, 보라 = 4차). 입력을 키울수록 파랑이 줄고 주황·초록이 는다. 합은 어느 경우에도 빨간 점선(노드 수 20)을 넘지 않는다. 입력 0.01은 신호가 잡음에 비해 작아 합이 8.4에 그치고, 입력 3은 센 범위(4차까지, 짧은 지연) 밖으로 용량이 나가 12.8로 보인다. Claude의 시뮬레이션(`tools/esn.py --ipc`). (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>읽을 것.</strong> <span class="tag tag-interp">해석</span></p>
+<ul>
+<li><strong>상충</strong>: 입력 0.1 → 0.3 → 1 → 3에서 차수 1(선형 기억)이 11.5 → 10.2 → 7.1 → 4.0으로 줄고, 차수 3이 0.02 → 1.7 → 7.2 → 6.9로 늡니다. 같은 노드 20개가 기억과 비선형에 나눠 주는 비율이 바뀐 것입니다.</li>
+<li><strong>상한</strong>: 가장 큰 합은 입력 0.3의 18.7로, 노드 수 20에 가깝지만 넘지 않습니다.</li>
+<li><strong>너무 작은 입력</strong>: 입력 0.01은 거의 선형이라 비선형 몫이 0이고, 신호 자체가 작아 측정 잡음(0.001)에 오래된 흔적이 묻혀 차수 1도 8.4뿐입니다. "약한 입력 = 깨끗한 기억"이 아닙니다.</li>
+<li><strong>선형 reservoir</strong>: 차수 1만 14.5이고 비선형은 0입니다. 같은 잡음에서 tanh의 어떤 설정보다 선형 기억이 큽니다(Liang의 문장과 같은 방향). 그러나 20에 못 미치는 것은 오래된 입력의 작은 흔적이 잡음에 묻혔기 때문입니다.</li>
+</ul>
+<p><strong>노드 200개에서도.</strong> D12의 시뮬레이션(노드 200개, 측정 잡음 없음)에서 MC는 선형 reservoir 56.9, tanh 입력 0.1에서 29.3, 기본(입력 0.5)에서 17.9, 입력 2.0에서 8.2로, 입력을 키울수록 줄었습니다(Claude의 시뮬레이션). 같은 상충입니다.</p>
+<div class="predict">
+<p>선형 reservoir는 MC가 56.9로 tanh(17.9)의 세 배입니다. 그렇다면 NARMA10(10단계 기억 + 2차 곱)도 선형 reservoir가 더 잘할까요? 아래 점검의 둘째 문제입니다.</p>
+</div>
+<div class="quiz" data-day="d11" data-set="4-check"></div>
+<div class="quiz" data-day="d11" data-set="4-end"></div>
+<div class="keypoints">
+<ul>
+<li>같은 <span class="math inline">\(N\)</span>을 차수 1(기억)과 차수 ≥ 2(비선형)가 나눠 갖는다 → 상충. 선형 노드가 대개 MC가 훨씬 높다 <span class="src">Liang 2024, p.200</span>.</li>
+<li>노드 20개: 입력 0.1 → 3에서 차수 1이 11.5 → 4.0, 차수 3이 0.02 → 6.9. 합은 최대 18.7로 20을 넘지 않는다(Claude의 시뮬레이션).</li>
+<li>입력이 너무 작으면 잡음에 묻혀 합 자체가 작다(8.4). 노드 200개에서도 MC 56.9(선형) → 8.2(입력 2.0). 모두 Claude의 시뮬레이션.</li>
+</ul>
+</div>
+</section>
+<section id="ch-independent" class="level3">
+<h3 class="anchored" data-anchor-id="ch-independent">5. 노드 수가 아니라 '서로 다른' 노드 수: 이온 소자 배열의 경우</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 서로 연결되지 않은 소자 20개 배열의 IPC가 "모두 같은 소자"면 1.0, "시간상수만 다르면" 6.6, "시간상수·감도·치우침이 다르면" 11.7이라는 시뮬레이션을 읽고, 소자 배열의 용량을 정하는 것이 개수가 아니라 서로 다른 정도라는 것을 이온 소자 설계의 질문으로 옮길 수 있다.</p>
+</div>
+<p>이온 소자 연구에서 가장 흔한 reservoir 구성은 소자 여러 개를 <strong>서로 연결하지 않고</strong> 같은 입력(또는 마스크를 거친 입력, D10 4구간)에 나란히 놓고 각각의 전류를 읽는 것입니다. Liang은 이것을 dynamic devices RC라 부릅니다. <span class="src">Liang 2024, p.195</span> 3구간의 그림을 이 구성에 대 봅니다. 소자 20개 = 노드 20개이니 상한은 20입니다. 실제로는 얼마일까요?</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig3-device-arrays.svg" alt="연결 없는 소자 20개 배열의 차수별 용량 막대. 같은 소자 20개는 1.00, 시간상수만 다른 20개는 6.59(전부 차수 1), 시간상수·감도·치우침이 모두 다른 20개는 11.67(차수1 6.03, 2차 2.60, 3차 2.05, 4차 0.99), 서로 연결된 reservoir 20노드는 18.65" class="figure-img"><figcaption><b>그림 3.</b> 서로 연결되지 않은 소자 20개 배열(각 소자: $x \leftarrow (1-a)x + a\tanh(g\,u + c)$)의 정보처리용량. 모두 같은 소자 20개는 소자 하나와 같은 1.00이다. 시간상수($a$)를 소자마다 다르게 하면 6.59(전부 선형 기억), 감도($g$)와 치우침($c$)까지 다르게 하면 비선형 용량이 생겨 11.67이 된다. 오른쪽은 비교용 연결 reservoir(그림 2의 입력 0.3). 소자 규칙은 설명용 가상 모형이며 Claude의 시뮬레이션(`tools/esn.py --ipc`)이다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>읽을 것.</strong> <span class="tag tag-interp">해석</span></p>
+<ol type="1">
+<li><strong>같은 소자는 몇 개를 놓아도 하나다.</strong> 같은 규칙, 같은 입력이면 20개의 전류가 똑같이 움직입니다. 판의 차원은 1이고(3구간 이유 1), 용량 합은 1.00입니다. 소자 20개를 만드는 비용을 치르고 소자 하나의 계산을 얻은 셈입니다.</li>
+<li><strong>시간상수가 다르면 기억이 늘어난다.</strong> 잊는 속도(<span class="math inline">\(a\)</span>)를 0.05–1 사이로 다르게 하면, 빠른 소자는 최근을, 느린 소자는 먼 과거를 맡아 D9의 "기억 예산"이 소자들 사이에 나뉘어 쌓입니다(6.59). 다만 이 소자들은 대칭(<span class="math inline">\(c = 0\)</span>)이고 입력이 적당해 비선형 몫은 거의 0입니다.</li>
+<li><strong>감도와 치우침까지 다르면 비선형이 생긴다.</strong> 소자마다 휘는 구간이 달라지고 대칭이 깨져 2–4차 몫이 생깁니다(11.67). D10의 "치우침 없는 tanh는 XOR을 못 한다"와 같은 이야기입니다.</li>
+<li><strong>연결이 있으면 더 쓴다.</strong> 같은 20개라도 서로 연결된 reservoir는 18.65로 상한에 가깝습니다. 연결이 노드들을 서로 다른 함수로 만들기 때문입니다. 단, 이온 소자끼리 연결하는 것은 소자를 나란히 놓는 것보다 훨씬 어렵습니다(D26).</li>
+</ol>
+<p><strong>원문은 같은 방향을 말한다.</strong> Liang은 dynamic devices RC의 과제로, 내부 상태가 긴 시간척도의 정보를 담고 구별하기 어렵다는 점을 들며 <strong>"MC가 소자 하나의 용량에만 의존하고, 병렬 소자 여러 개의 MC는 누적되지 않고 대부분 겹친다"</strong>고 씁니다. <span class="src">Liang 2024, p.196</span> 같은 쪽에서 상태의 풍부함은 <strong>소자 간 시간 동역학의 편차</strong>로 어느 정도 높일 수 있고, 편차가 작은 소자 무리는 readout의 과적합 같은 문제를 일으킬 수 있으며, <strong>게이트 길이를 다르게 한 이온 트랜지스터로 이완 시간과 비선형성을 다르게 해</strong> 풍부함을 높인 사례를 소개합니다. <span class="src">Liang 2024, p.196</span> 그림 3의 2·3번 막대가 그 방향입니다. Singh 2026은 물리 전극·샘플링 지점·가상 노드의 수는 <strong>독립적인 계산 상태의 수와 같지 않다</strong>며, 측정한 상태들의 공분산(두 상태가 함께 변하는 정도를 모든 쌍에 대해 적은 표)의 고윳값(D9의 '특별한 방향의 배율') 분포에서 참여비 차원 <span class="math inline">\(D_{PR}\)</span>(상태들의 흔들림이 몇 개의 독립 방향에 고르게 퍼져 있는지를 나타내는 수. 20개 방향에 고르게 퍼지면 20, 한 방향에 몰리면 1)을 구하고 채널을 하나씩 늘리며 과제 성능을 보라고 권합니다. <span class="src">Singh 2026, p.13</span> 그리고 독립적인 관측량이 많을수록 분리가 좋아지지만 중복된 채널은 배선·데이터·보정 부담과 과적합 위험만 늘린다고 씁니다. <span class="src">Singh 2026, p.6</span></p>
+<p><strong>실제 하드웨어에서는.</strong> 폴더의 Zhong 2022는 같은 공정으로 만든 소자 24개를 나란히 놓은 reservoir를 하드웨어로 만들었습니다. 아래 그림의 왼쪽이 그 24개의 전류–전압 곡선입니다. 읽는 법: 먼저 왼쪽 그래프에서 색이 다른 곡선 24개가 얼마나 겹치는지 보고, 그다음 가운데 실물 사진(소자 칩과 회로 기판)을 봅니다. 곡선이 거의 겹친다는 것은 그대로 쓰면 그림 3의 '같은 소자 20개'에 가깝다는 뜻이고, 그래서 저자들은 소자마다 <strong>다른 마스크</strong>(입력에 곱하는 서로 다른 ±1 순서, <a href="../days/d10.html#b-mask">D10 기초</a>)를 줘서 노드를 서로 다르게 만들었습니다. <span class="tag tag-interp">해석</span></p>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2022-fig2a.png" alt="Zhong 2022 Fig. 2a: 왼쪽은 Ti/TiOx/Pd 동적 멤리스터(DM) 24개의 전류–전압 곡선으로 −3~3 V에서 1 V 위로 전류가 솟는 비슷한 모양의 곡선 24개가 겹쳐 있고 단면 전자현미경 사진이 들어 있다. 가운데는 소자 칩 사진(눈금 100 µm)과 검은 회로 기판 사진, 오른쪽은 비휘발성 메모리(NVM) 16개 상태의 전류–전압 직선" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41928-022-00838-3" target="_blank"><i>Nat. Electron.</i> 2022, 5, 672–681</a>, Fig. 2a, p.674. 볼 것: (1) 왼쪽 DM 곡선 24개는 모양이 거의 같고(저자들도 "24개 DM 모두 비슷한 I–V 곡선과 강한 정류 특성"을 보인다고 씀), 높이만 조금씩 다르다. (2) 가운데 사진은 이 소자 칩이 실제로 올라간 기판(전원·마이크로컨트롤러·reservoir·readout 모듈)이다. (3) 그림 설명은 아날로그 입력이 "서로 다른 마스크를 가진 여러 병렬 DM 노드"에 들어간다고 적는다(Fig. 2c). 즉 '서로 다름'의 상당 부분을 소자가 아니라 마스크가 만든다. 오른쪽 NVM은 readout 가중치를 담는 소자다. 측정 데이터와 실물 사진. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p><strong>이온 소자 설계의 질문으로 옮기면.</strong> <span class="tag tag-hypo">가설</span> 이온 소자의 "시간상수"는 이온의 이동 거리와 확산(D21), 고분자 사슬 운동(D22)으로 정해지고, "감도·치우침"은 계면 전하, 정류 구조, 조성으로 정해질 것입니다. 그렇다면 같은 공정으로 만든 소자들을 일부러 <strong>서로 다르게</strong>(두께, 조성, 전극 간격, 게이트 길이) 만드는 것이 용량을 늘리는 설계 변수가 됩니다. 반대로 "소자 간 편차가 작다"는, 메모리 소자에서는 장점이지만 reservoir 배열에서는 용량을 깎는 요인일 수 있습니다. 단, <strong>통제된</strong> 차이여야 합니다. 같은 소자가 날마다 다르게 응답하는 편차(재현성 문제, D18)는 용량이 아니라 잡음입니다. <span class="tag tag-interp">해석</span></p>
+<div class="think">
+<p>내 소자를 10개 만들어 나란히 놓는다고 해 봅시다. 그 10개가 서로 "다른 함수"가 되게 하려면 무엇을 일부러 다르게 만들 수 있나요(두께? 고분자 조성? 이온 농도? 전극 거리?)? 그리고 그 차이가 매번 같은 차이로 재현되려면 무엇을 관리해야 하나요? 두 줄로 적어 보세요.</p>
+</div>
+<div class="quiz" data-day="d11" data-set="5-check"></div>
+<div class="quiz" data-day="d11" data-set="5-end"></div>
+<div class="keypoints">
+<ul>
+<li>연결 없는 소자 20개: 같은 소자 1.00, 시간상수만 다름 6.59, 시간상수·감도·치우침 다름 11.67, 연결된 reservoir 18.65(Claude의 시뮬레이션).</li>
+<li>병렬 소자의 MC는 누적되지 않고 대부분 겹친다; 소자 간 동역학 편차·다른 게이트 길이가 풍부함을 높인다 <span class="src">Liang 2024, p.196</span>.</li>
+<li>채널 수 ≠ 독립 상태 수. 참여비 차원과 채널을 늘리며 본 성능으로 확인한다 <span class="src">Singh 2026, p.6, 13</span>.</li>
+<li>이온 소자 배열의 설계 변수 후보: 통제된 차이(시간상수·감도·대칭) <span class="tag tag-hypo">가설</span>. 통제 안 된 편차는 잡음이다.</li>
+</ul>
+</div>
+</section>
+<section id="ch-task-match" class="level3">
+<h3 class="anchored" data-anchor-id="ch-task-match">6. 그래서 좋은 reservoir란: 과제에 맞춘 배분</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 그림 4에서 "MC가 가장 큰 설정(선형, 56.9)"도 "가장 비선형인 설정(입력 2.0)"도 NARMA10에서 최선이 아니었다는 것을 읽고, '좋은 reservoir'를 "과제가 요구하는 차수와 지연에 용량을 배분하는 reservoir"로 다시 정의할 수 있다.</p>
+</div>
+<p>D12에서 직접 돌릴 결과를 미리 한 그림에 놓습니다. 가로축은 MC(지난 입력을 얼마나 되살리나), 세로축은 NARMA10의 오차(NMSE, 0이면 완벽, 아래로 갈수록 좋음)입니다. 세로축은 <strong>로그 눈금</strong>이라 0.01, 0.1, 1이 같은 간격으로 놓입니다(한 칸 = 10배, <a href="../days/d01.html#b-log-axis">D1 기초: 로그 축</a>).</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig4-mc-vs-narma.svg" alt="가로축 MC, 세로축 NARMA10 NMSE(로그) 산점도. 기본 tanh 200노드 MC 17.9·0.053, 입력 0.1 MC 29.3·0.032, N=800 MC 21.9·0.0165가 아래쪽(좋음)에 있고, 선형 reservoir MC 56.9·0.144와 75.0·0.146, 지연 탭 50 MC 49.0·0.146은 MC가 커도 오차가 크며, 입력 2.0 MC 8.2·0.232, ρ=0.3 MC 8.8·0.428, leak 0.1 MC 6.2·0.329는 MC가 작고 오차도 크다" class="figure-img"><figcaption><b>그림 4.</b> 기억(MC)과 NARMA10 오차. 원은 reservoir 200노드에서 조건 하나씩을 바꾼 것, 네모는 reservoir 없는 지연 탭 기준선이다. 오른쪽(MC가 큼)의 선형 reservoir와 지연 탭 50개는 오차가 0.14대에서 멈추고, 왼쪽 위(MC가 작음)는 기억이 부족하다. 가장 좋은 것은 기억과 비선형을 함께 준 설정이다. Claude의 시뮬레이션(`tools/esn.py`, reservoir 난수 3개 평균). (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>읽을 것.</strong> <span class="tag tag-interp">해석</span></p>
+<ul>
+<li><strong>기억이 최대인 쪽이 최선이 아니다.</strong> 선형 reservoir(MC 56.9, 75.0)와 지연 탭 50개(MC 49.0)는 기억이 넉넉하지만 2차 곱을 못 만들어 오차 0.14대에서 멈춥니다(D10 1구간).</li>
+<li><strong>비선형이 강한 쪽도 최선이 아니다.</strong> 입력 2.0은 비선형이 강하지만 MC 8.2로 기억이 10단계에 못 미쳐 0.232입니다. 짧은 기억(ρ 0.3, leak 0.1)도 마찬가지입니다.</li>
+<li><strong>둘을 함께 준 쪽이 낫다.</strong> 기본 설정(MC 17.9, 0.053)보다 입력을 0.1로 줄인 설정(MC 29.3, 0.032)이 나았습니다. NARMA10의 비선형은 2차라 약한 비선형으로 충분하고, 남는 용량을 기억에 쓴 것이 이득이었다고 해석할 수 있습니다. 노드를 800개로 늘리면(총량 자체를 키우면) 0.0165로 가장 좋습니다.</li>
+</ul>
+<p><strong>"좋은 reservoir"의 정의를 바꾼다.</strong> 오늘의 결론은 이렇게 쓸 수 있습니다. <strong>reservoir의 질은 기억의 길이나 비선형의 세기 하나로 정해지지 않는다. 노드 수로 묶인 총량을, 과제가 요구하는 차수와 지연에 얼마나 배분하느냐로 정해진다.</strong> <span class="tag tag-interp">해석</span> 그래서 "retention을 두 배로 늘렸다", "정류비(한 방향과 반대 방향 전류의 비, <a href="../days/d10.html#ch-linear">D10</a>)를 열 배로 키웠다"는 소자 개선은 그 자체로는 reservoir 개선이 아닙니다. 그 개선이 과제가 요구하는 쪽으로 용량을 옮겼는지, 아니면 이미 넘치는 쪽에 더 얹었는지를 차수별 용량이나 과제 성능으로 확인해야 합니다.</p>
+<p>Singh 2026은 같은 취지로, 시계열 예측과 계 식별에서는 <strong>지연별 기억 분포, 필요한 차수의 비선형 정보처리용량, 예측 구간 동안의 상태 안정성</strong>에 무게를 두라고 하고, 이 지표들은 서로 바꿔 쓸 수 없는 보완적 기술이라고 씁니다. <span class="src">Singh 2026, p.8</span> 기억도 합계 하나가 아니라 <strong>지연별 분포 전체</strong>(<span class="math inline">\(MC_k\)</span> 대 <span class="math inline">\(k\)</span>)를 보고하라고 하는데, 합계가 비슷해도 기억이 닿는 시간 범위가 크게 다를 수 있기 때문입니다. <span class="src">Singh 2026, p.13</span></p>
+<p><strong>NARMA라는 과제 자체에 대한 주의.</strong> Stepney는 NARMA가 아마 RC 문헌에서 가장 흔한 벤치마크이지만, 가끔 값이 발산하고 문헌마다 매개변수가 제각각이며 <span class="math inline">\(N\)</span>에 따른 결론을 내리기 어려워 <strong>조심해서 써야 하고</strong>, 비선형 기억 과제의 성격을 가지므로 더 해석하기 쉬운 IPC가 이런 한계를 넘는다고 씁니다. <span class="src">Stepney 2024, p.677</span> 또 NARMA가 2차 비선형 기억 용량과 비슷해 보이지만 정확히 무엇을 재는지, 이론적 한계가 무엇인지 불분명하다고 덧붙입니다. <span class="src">Stepney 2024, p.680</span> 그러니 D12에서 NARMA10 숫자 하나만 보고 "이 reservoir가 좋다"고 결론 내리지 말고, MC와 함께 보아야 합니다.</p>
+<div class="quiz" data-day="d11" data-set="6-check"></div>
+<div class="keypoints">
+<ul>
+<li>NARMA10: 선형(MC 56.9) 0.144, 입력 2.0(MC 8.2) 0.232, 기본(17.9) 0.053, 입력 0.1(29.3) 0.032, N = 800 0.0165(Claude의 시뮬레이션). 최대 기억도 최대 비선형도 최선이 아니다.</li>
+<li>좋은 reservoir = 노드 수로 묶인 총량을 과제가 요구하는 차수·지연에 배분하는 reservoir <span class="tag tag-interp">해석</span>. 지연별 기억 분포와 차수별 용량을 함께 본다 <span class="src">Singh 2026, p.8, 13</span>.</li>
+<li>NARMA 숫자 하나로 결론 내리지 않는다 <span class="src">Stepney 2024, p.677, 680</span>.</li>
+</ul>
+</div>
+</section>
+<section id="ch-objection" class="level3">
+<h3 class="anchored" data-anchor-id="ch-objection">7. 오늘의 반론</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "IPC 상한은 시뮬레이션 이야기이고 물리 소자에는 적용하기 어렵다"는 반론에 대해, 그 반론이 맞는 부분과 그래도 IPC가 주는 실용적 질문을 적을 수 있다.</p>
+</div>
+<p>가장 강한 반론은 이것입니다. <strong>"IPC를 제대로 재려면 수천 개의 목표와 수만 단계의 깨끗한 데이터가 필요하다. 이온 소자는 느리고(ms–s), 잡음이 있고, 날마다 조금씩 변한다. 그러니 IPC 상한은 시뮬레이션 속 이야기이고, 실제 소자 평가에는 과제 정확도를 쓰면 충분하다."</strong></p>
+<p>반론의 앞부분은 상당히 옳습니다. Stepney는 이 측정이 계산량이 크고, 이론적 성질(합 = <span class="math inline">\(N\)</span>)이 유한한 데이터와 실험 잡음 앞에서는 임의의 문턱 없이는 의미 있는 값을 내기 어렵다고 인정합니다. <span class="src">Stepney 2024, p.680</span> 느린 소자로 수만 단계를 재면 측정 시간 자체가 길고, 그동안의 드리프트(시간이 지나며 소자의 응답이 조금씩 변하는 것. 전기장에 끌려 이온이 움직이는 '드리프트 이동'과는 다른 뜻, D19)가 기억처럼 보일 수 있습니다(D9). 그러나 과제 정확도 하나만으로는 오늘 본 두 질문, <strong>"소자를 더 놓으면 용량이 느나(같은 소자 20개 = 1.00)"</strong>와 <strong>"소자 개선이 과제가 요구하는 쪽으로 용량을 옮겼나"</strong>에 답할 수 없습니다. 차수 1–2, 짧은 지연까지만이라도 재면 그 두 질문에는 답할 수 있습니다. <span class="tag tag-interp">해석</span> 이 반론에 대한 내 입장을 적어 보세요. 답은 내 몫입니다.</p>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>자료를 덮고 아래 표를 먼저 머릿속으로 채운 뒤 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+한 장 요약 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>과제는 무엇을 요구하나</td>
+<td>정해진 길이의 기억과 정해진 차수의 비선형</td>
+<td>NARMA10 ≈ 10단계 + 2차 <span class="src">Stepney 2024, p.676</span></td>
+</tr>
+<tr class="even">
+<td>정보처리용량</td>
+<td>목표 하나의 용량 <span class="math inline">\(1 - \text{오차}/\text{분산}\)</span>을 겹치지 않는 목표 전부에 대해 더한 것. 차수 1의 합 = MC</td>
+<td><span class="src">Singh 2026, p.13</span> <span class="src">Stepney 2024, p.679–680</span> <span class="src">Liang 2024, p.200</span></td>
+</tr>
+<tr class="odd">
+<td>왜 총량 ≤ <span class="math inline">\(N\)</span></td>
+<td>용량 = 그림자 길이², 수직인 목표들의 그림자² 합 = 판의 차원</td>
+<td>1 + 0.5 + 0.5 = 2(노드 2개). 상한은 선형 독립인 상태 변수 수(소자 개수가 아님). fading memory·선형 독립·완전한 직교 기저·무한한 데이터에서 = <span class="math inline">\(N\)</span> <span class="src">Dambre 2012, Theorem 4·7</span> <span class="src">Stepney 2024, p.680</span></td>
+</tr>
+<tr class="even">
+<td>상충</td>
+<td>같은 <span class="math inline">\(N\)</span>을 기억(차수 1)과 비선형(차수 ≥ 2)이 나눠 갖는다</td>
+<td>노드 20개: 차수 1이 11.5 → 4.0, 차수 3이 0.02 → 6.9(Claude의 시뮬레이션); 선형 노드가 MC가 높다 <span class="src">Liang 2024, p.200</span></td>
+</tr>
+<tr class="odd">
+<td>소자 배열</td>
+<td>개수가 아니라 서로 다른 정도가 용량을 정한다</td>
+<td>같은 소자 20개 1.00, 시간상수만 다름 6.59, 다 다름 11.67(Claude의 시뮬레이션); 병렬 소자의 MC는 겹친다 <span class="src">Liang 2024, p.196</span></td>
+</tr>
+<tr class="even">
+<td>좋은 reservoir</td>
+<td>총량을 과제가 요구하는 차수·지연에 배분하는 것</td>
+<td>NARMA10: 선형(MC 56.9) 0.144 vs 입력 0.1(MC 29.3) 0.032(Claude의 시뮬레이션)</td>
+</tr>
+<tr class="odd">
+<td>사전 테스트·먼저 만들어 보기와 달라질 점</td>
+<td>"기억은 길수록, 비선형은 강할수록 좋다" → 둘은 같은 예산을 나눠 쓰고, 과제가 배분을 정한다</td>
+<td>그림 2, 4</td>
+</tr>
+<tr class="even">
+<td>오늘의 숫자</td>
+<td>같은 소자 20개의 용량 = 1.00</td>
+<td>Claude의 시뮬레이션</td>
+</tr>
+<tr class="odd">
+<td>오늘의 반론</td>
+<td>IPC는 시뮬레이션 이야기 → 측정은 어렵지만, 소자 수·소자 개선의 효과를 묻는 데는 낮은 차수만으로도 쓸모 있다</td>
+<td><span class="src">Stepney 2024, p.680</span></td>
+</tr>
+<tr class="even">
+<td>모르는 것 하나</td>
+<td>내 소자 <span class="math inline">\(N\)</span>개의 참여비 차원은 얼마인가</td>
+<td><span class="src">Singh 2026, p.13</span>; D14, D18</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="quiz" data-day="d11" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<p>모범 문장은 주지 않습니다. 내 답이 아래 질문에 답했는지 확인하세요.</p>
+<ol type="1">
+<li>"기억이 길수록, 비선형이 강할수록 좋은가?"에 대해 "과제가 요구하는 양"이라는 기준을 세웠나? 과제 하나(NARMA10, XOR 등)의 요구를 숫자로 적었나?</li>
+<li>정보처리용량을 목표 하나의 용량에서 출발해 차수별 합으로 설명했나? MC가 그중 차수 1이라는 것을 적었나?</li>
+<li>총량이 노드 수에 묶이는 이유를 그림자(또는 내 말의 비유)로 설명했나? 총량이 <span class="math inline">\(N\)</span>보다 작아지는 이유(복사본 노드, 잡음, 세지 않은 목표)를 하나 이상 적었나?</li>
+<li>상충을 시뮬레이션 숫자(입력 크기에 따른 차수별 용량)로 보였나? 그 숫자가 Claude의 시뮬레이션이라는 것을 표시했나?</li>
+<li>이온 소자 배열에서 "개수가 아니라 서로 다른 정도"를 내 소자의 설계 변수로 옮겨 적었나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 과제의 기억 길이(단계 수 × 샘플링 주기)와 비선형 차수 vs (메커니즘이 허용하는 것) 소자 배열의 독립 상태 수(참여비 차원)와 그 용량의 차수별 배분. 소자 수를 늘리는 것만으로는 용량이 늘지 않는다(같은 소자 20개 = 1).</li>
+<li><strong>병목 장부:</strong> 소자 개선 목표("retention ↑", "정류비 ↑")가 용량을 과제가 요구하는 쪽으로 옮기는지, 넘치는 쪽에 얹는지.</li>
+<li><strong>아직 모르는 것:</strong> 이온 소자의 시간상수·감도를 소자마다 통제해 다르게 만들 수 있나(D21–D22)? / 느린 소자로 차수 1–2의 용량을 재는 데 측정 시간이 얼마나 드나(D13, D18).</li>
+<li><strong>용어집:</strong> 정보처리용량(IPC), 목표 함수의 용량, 차수, 교차 용량, Legendre 다항식, 직교(겹치지 않음), 총량 상한, memory–nonlinearity 상충, 참여비 차원, dynamic devices RC, 소자 간 편차.</li>
+<li><strong>접는 기준 후보:</strong> "내 소자 <span class="math inline">\(N\)</span>개 배열의 참여비 차원이 소자 수와 상관없이 2–3에 머물고, 소자를 다르게 만드는 통제 변수도 찾지 못했다."</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다. 아래는 모두 보충이며, 오늘 본문은 이것 없이 읽히도록 썼습니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Liang 2024, <em>Nat. Electron.</em> 7, 193–206. p.196 "Dynamic devices RC"의 둘째·마지막 문단(소자 간 편차, 게이트 길이, MC가 겹침), p.200 "Performance benchmark"의 MC·IPC 문단(선형 노드의 MC, IPC를 권하는 이유).</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 일부 대조함)</strong></p>
+<ul>
+<li>Stepney 2024, <em>Natural Computing</em> 23, 665–685. 7.3.2절(p.679–680: 선형 MC, 비선형 용량, 직교 다항식, 총 IPC = <span class="math inline">\(N\)</span>)과 7.3.3절(p.680: 과제 독립 지표의 장단점). 7.2.2절(p.676–677: NARMA와 그 한계). 두 쪽 남짓이라 직접 읽을 가치가 있습니다.</li>
+<li>Singh 2026, <em>Adv. Mater.</em> e74897. p.5–6(DR4: 중복되지 않는 관측 상태), p.8(지연별 기억과 과제별 우선순위), p.13(3.2절 IPC 식, 3.3절 참여비 차원).</li>
+</ul>
+<p><strong>폴더 밖, 공개 본문으로 일부 대조</strong></p>
+<ul>
+<li>Dambre, Verstraeten, Schrauwen, Massar 2012, <em>Sci. Rep.</em> 2, 514. "Information processing capacity of dynamical systems" (<a href="https://doi.org/10.1038/srep00514">doi:10.1038/srep00514</a>, 공개 본문 PMC3400147). 총 IPC 상한의 원 논문. Claude가 초록, 'Dynamical systems'(i.i.d. 입력), 'Maximum capacity of a dynamical system'(Theorem 4), 'Fading Memory'(Theorem 7), 'Total capacity'(Legendre 기저, <span class="math inline">\(10^6\)</span>단계, 문턱), 잡음 절을 대조했습니다. 보충자료(문턱의 근거)는 보지 않았습니다.</li>
+</ul>
+<p><strong>폴더 밖 (서지는 확인, 내용은 <span class="tag tag-unverified">미확인</span>)</strong></p>
+<ul>
+<li>Inubushi &amp; Yoshimura 2017, <em>Sci. Rep.</em> 7, 10199. "Reservoir computing beyond memory-nonlinearity trade-off". Liang이 선형 노드의 높은 MC의 근거로 인용(ref. 129). 공개 초록(PMC5579006)만 Claude가 확인했습니다.</li>
+<li>Kubota, Takahashi, Nakajima 2021, <em>Phys. Rev. Research</em> 3, 043135. "Unifying framework for information processing in stochastically driven dynamical systems". Stepney는 이 논문이 IPC를 깊이 분석하며 NARMA10을 사례로 비판한다고 소개합니다(p.680).</li>
+<li>Jaeger 2002, GMD Report 152, "Short term memory in echo state networks". MC의 원 정의(Stepney·Liang이 인용). DOI 없음.</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d11">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 장의 앵커.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "10칸짜리 막대를 '기억(얼마나 오래전 입력을 붙잡나)'과 '조합(여러 입력을 곱하고 섞기)'으로 나눠 칠한다고 하고, 세 과제 — 사흘 전 기온을 그대로 말하기, 어제와 그제 기온이 같았는지 판단하기, 최근 열흘 기온으로 내일 기온 예측하기 — 에 10칸을 각각 어떻게 나눌지 칠해 보세요. 기억과 조합을 둘 다 10칸씩 가질 수는 없다면 어느 과제가 가장 곤란할지 한 줄로 적으세요.", "items": [{"id": "d11-p01", "ref": "#ch-two-resources", "type": "mc", "q": "reservoir에서 '기억'과 '비선형'이 하는 일로 맞는 짝은?", "options": ["기억 = 입력들끼리 곱하기, 비선형 = 지난 입력 보관하기", "기억 = 지난 입력의 흔적을 남기기, 비선형 = 입력들의 곱이나 굽힘을 만들기", "둘은 같은 일을 다른 이름으로 부른 것이다", "둘 다 잡음을 줄이는 일이다"], "a": 1, "why": "기억은 지난 입력의 흔적(D9), 비선형은 입력들의 곱·굽힘(D10)으로 서로 다른 일입니다. 과제는 둘을 정해진 양만큼 요구합니다. 예: NARMA10은 약 10단계 기억 + 2차 곱(1구간)."}, {"id": "d11-p02", "ref": "#ch-ipc", "type": "ox", "q": "'얼마나 오래전 입력을 되살리나'(기억)와 '입력들의 곱 같은 함수를 얼마나 잘 만드나'(비선형)는 하나의 같은 척도로 함께 잴 수 있다.", "a": true, "why": "목표 하나를 얼마나 되살리는지를 용량 C = 1 − 오차/분산(0–1)으로 재고, 목표를 차수로 나눠 더합니다. 차수 1의 합이 기억 용량(MC), 모든 차수의 합이 정보처리용량(IPC)이라 한 저울에서 잽니다(2구간)."}, {"id": "d11-p03", "ref": "#ch-bound", "type": "mc", "q": "노드 10개짜리 reservoir에 선형 readout을 붙였다. 서로 겹치지 않는 여러 목표를 각각 얼마나 되살리는지(0–1)를 모두 더하면 그 합은 최대 얼마일 수 있나?", "options": ["1", "100", "제한 없이 커질 수 있다", "노드 수인 10"], "a": 3, "why": "목표를 화살표, 노드 출력을 N차원 판으로 보면 용량은 그림자 길이²이고, 서로 수직인 목표들의 그림자² 합은 판의 차원 N을 넘지 못합니다. 노드 하나의 기억 예산 1(D9)이 N = 1인 경우입니다. 정확히는 선형 독립인 상태 변수의 수가 상한이고, 그 값에 이르려면 fading memory·충분한 데이터 같은 조건이 붙습니다(2–3구간)."}, {"id": "d11-p04", "ref": "#ch-tradeoff", "type": "mc", "q": "입력을 크게 넣어 reservoir 노드들이 더 강하게 휘도록(비선형이 강하도록) 만들면, 지난 입력을 그대로 되살리는 기억 능력은 어떻게 되기 쉬운가?", "options": ["함께 커진다", "변하지 않는다", "줄어든다 — 노드 수로 묶인 같은 총량을 기억과 비선형이 나눠 갖기 때문", "끝없이 커진다"], "a": 2, "why": "노드 20개 시뮬레이션(Claude 계산)에서 입력을 0.1 → 3으로 키우자 선형 기억은 11.5 → 4.0으로 줄고 3차 비선형은 0.02 → 6.9로 늘었으며, 합은 20을 넘지 않았습니다. 이것이 기억–비선형 상충입니다(4구간)."}, {"id": "d11-p05", "ref": "#ch-tradeoff", "type": "ox", "q": "입력을 아주 작게 넣어 reservoir를 거의 선형으로 움직이게 할수록, 기억 능력은 계속 커진다.", "a": false, "why": "입력이 너무 작으면 상태 변화도 작아 측정 잡음이 오래된 입력의 작은 흔적을 묻습니다. 입력 0.01인 tanh reservoir의 기억(8.4)이 선형 reservoir(14.5)보다 작았습니다(Claude의 시뮬레이션, 4구간)."}, {"id": "d11-p06", "ref": "#ch-independent", "type": "ox", "q": "같은 공정으로 만든 똑같은 소자를 연결 없이 많이 늘어놓고 모든 출력을 읽으면, reservoir의 용량은 소자 수에 비례해 커진다.", "a": false, "why": "완전히 같은 소자 20개는 같은 입력에 같은 값을 내 용량 합이 약 1.0에 그칩니다. 시간상수만 다르게 하면 6.6, 시간상수·감도·치우침까지 다르면 11.7이었습니다(Claude의 시뮬레이션). 개수가 아니라 '서로 다른' 정도가 용량을 정합니다(5구간)."}, {"id": "d11-p07", "ref": "#ch-task-match", "type": "mc", "q": "'좋은 reservoir'를 가장 정확히 말한 것은?", "options": ["노드 수로 정해진 총량을, 과제가 요구하는 기억 길이와 비선형 차수에 맞게 나눠 쓰는 reservoir", "기억이 가장 오래가는 reservoir", "비선형이 가장 강한 reservoir", "총 용량이 가장 커서 어떤 과제에서든 이기는 reservoir"], "a": 0, "why": "NARMA10에서 기억 용량이 가장 큰 선형 설정(56.9)은 오차 0.144, 비선형이 가장 강한 설정은 0.232로, 둘 다 기본 설정(0.053)보다 나빴습니다(Claude의 시뮬레이션). 최대 기억도 최대 비선형도 최선이 아니고 배분이 과제에 맞아야 합니다(6구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 과제가 요구하는 것", "items": [{"id": "d11-q01", "type": "mc", "q": "NARMA10을 잘 풀려면 reservoir 상태에 무엇이 있어야 하나?", "options": ["가능한 한 긴 기억만", "가능한 한 강한 비선형만", "약 10단계의 기억과 2차(두 입력의 곱) 비선형이 함께", "입력의 현재 값만"], "a": 2, "why": "Stepney는 NARMA의 비선형이 2차($x(t)x(t-i)$, $u(t-N+1)u(t)$ 항)이고 이전 $N$개 상태의 기억이 필요하다고 쓴다(p.676). 하나만 있으면 부족하다 — 기억만 있는 선형 reservoir는 0.144에서 멈췄다(Claude의 시뮬레이션).", "ref": "#ch-two-resources"}, {"id": "d11-q02", "type": "ox", "q": "3-parity($u(t-1)\\oplus u(t-2)\\oplus u(t-3)$)는 3단계 기억과 3차 비선형을 함께 요구한다.", "a": true, "why": "세 지난 입력이 모두 필요하고(기억 3단계), ±1 표기에서 세 입력의 곱이다(3차). D10 5구간의 Claude 시뮬레이션에서 입력이 작은 tanh reservoir는 3차 몫이 없어 49%였다.", "ref": "#ch-two-resources"}]}, "2-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 목표 하나의 용량", "items": [{"id": "d11-q03", "type": "short", "q": "[풀이 예시 확인] 목표의 분산 1.0, readout의 평균 제곱 오차 0.36. 용량 $C = 1 - \\text{오차}/\\text{분산}$은?", "a": ["0.64"], "why": "$1 - 0.36/1.0 = 0.64$. 상관계수 0.8의 제곱과 같다. 0.36이라 답했다면 1에서 빼는 것을 빠뜨린 것 — 용량은 '되살린 몫', 오차 비율은 '못 되살린 몫'이다(기초 계단: 정보처리용량).", "ref": "#ch-ipc"}, {"id": "d11-q04", "type": "short", "q": "[일부 채우기] 목표의 분산 0.5, 평균 제곱 오차 0.1. $C = 1 - ▢ = ?$ 빈칸(오차/분산)과 답을 '빈칸,답' 꼴로", "a": ["0.2,0.8", "0.2, 0.8"], "why": "$0.1/0.5 = 0.2$, $C = 0.8$. 0.9가 나왔다면 분산으로 나누지 않고 오차를 그대로 뺀 것. 분산으로 나누는 이유는 목표의 크기(단위)와 상관없이 0–1로 비교하기 위해서다.", "ref": "#ch-ipc"}, {"id": "d11-q05", "type": "short", "q": "[혼자 풀기] 목표의 분산 2.0, 평균 제곱 오차 1.5인 목표의 용량은?", "a": ["0.25"], "why": "$1 - 1.5/2.0 = 0.25$. 목표의 4분의 1만 되살렸다. 오차가 분산보다 크면 계산값이 음수가 되는데, 그때는 '평균값만 말하는 것보다 못하다'는 뜻이라 용량을 0으로 둔다.", "ref": "#ch-ipc"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d11-q06", "type": "mc", "q": "목표 $P_1(u(t-1)) \\cdot P_2(u(t-3))$의 차수는?", "options": ["1", "2", "3", "4"], "a": 2, "why": "차수는 곱해진 다항식 차수의 합: $P_1$은 1차, $P_2$는 2차 → 3. 지연이 둘(1과 3)이라 2라고 답했다면 지연 개수와 차수를 혼동한 것. 서로 다른 지연이 섞인 목표를 교차 용량이라고도 부른다.", "ref": "#ch-ipc"}, {"id": "d11-q07", "type": "mc", "q": "IPC를 셀 때 Legendre 다항식처럼 서로 겹치지 않는(곱의 평균이 0인) 목표 묶음을 쓰는 이유는?", "options": ["계산이 빨라서", "비슷한 목표를 여러 번 세어 같은 능력을 중복으로 더하는 것을 막으려고", "목표를 더 어렵게 만들려고", "입력이 정규분포라서"], "a": 1, "why": "Stepney는 Dambre 등이 직교 다항식으로 모든 비선형·교차 용량을 중복 없이 세었다고 쓴다(p.679). 입력 분포가 바뀌면 묶음도 바꿔야 한다(정규분포면 Hermite).", "ref": "#ch-ipc"}, {"id": "d11-q25", "type": "ox", "q": "입력 $u$가 −1~1에서 고르게 나올 때, 목표 $u$와 목표 $u^3$은 곱의 평균이 0이라 서로 겹치지 않는다.", "a": false, "why": "$\\langle u \\cdot u^3 \\rangle = \\langle u^4 \\rangle$는 네제곱(늘 0 이상)의 평균이라 0이 될 수 없다(고른 입력이면 1/5). 그래서 $u$만 기억하는 reservoir도 $u^3$ 목표를 상관² 0.84만큼 맞혀 같은 능력이 두 번 세어진다. $u^3$에서 $u$와 겹치는 몫($0.6u$)을 빼고 배율을 맞춘 $P_3 = (5u^3 - 3u)/2$를 쓰는 이유다(2구간).", "ref": "#ch-ipc"}, {"id": "d11-q26", "type": "short", "q": "노드 하나의 상태가 $x(t) = u(t)$(지금 입력만 담음, 입력은 서로 독립인 난수)이다. 목표 $u(t-1)$(한 단계 전 입력)에 대한 용량은? (숫자만)", "a": ["0"], "why": "지금 상태에 한 단계 전 입력의 흔적이 없어 readout의 최선은 늘 평균을 말하는 것이고, 그때 평균 제곱 오차 = 목표의 분산이라 $C = 1 - 1 = 0$. 같은 노드에 목표 $u(t)$를 주면 오차가 0이라 $C = 1$이다. 1이라 답했다면 '상태가 입력을 담는다'와 '그 목표의 입력을 담는다'를 혼동한 것(2구간).", "ref": "#ch-ipc"}]}, "3-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 그림자 합", "items": [{"id": "d11-q08", "type": "short", "q": "[풀이 예시 확인] 평면이 $b_1 = (1,0,0)$, $b_2 = (0, 0.707, 0.707)$로 펼쳐질 때 목표 2 = (0, 1, 0)의 그림자 길이²는?", "a": ["0.5", "0.50", "1/2"], "why": "$b_1$과의 곱 0, $b_2$와의 곱 0.707, 그림자² $= 0.707^2 = 0.5$. 0.707이라 답했다면 제곱을 빠뜨린 것 — 용량은 그림자 길이의 제곱이다.", "ref": "#ch-bound"}, {"id": "d11-q09", "type": "short", "q": "[일부 채우기] 평면을 바닥(z = 0)으로 눕히면 세 목표의 그림자²는 (1, 1, ▢)이고 합은? '빈칸,합' 꼴로", "a": ["0,2", "0, 2"], "why": "목표 3 = (0,0,1)은 바닥 평면에 수직이라 그림자 0. 합은 1 + 1 + 0 = 2. 평면을 어떻게 기울여도 합은 평면의 차원 2다.", "ref": "#ch-bound"}, {"id": "d11-q10", "type": "short", "q": "[혼자 풀기] 4차원 공간에서 노드 3개가 3차원 판을 만든다. 서로 수직인 길이 1의 목표 4개를 그 판에 비춘 그림자² 합은? (숫자만)", "a": ["3"], "why": "그림자 제곱 합 = 판의 차원 = 노드 수 3. 목표가 4개여도 4가 될 수 없다. 이것이 '총 용량 ≤ 노드 수'다. 노드가 서로의 복사본이면 판의 차원이 더 작아진다.", "ref": "#ch-bound"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d11-q11", "type": "mc", "q": "측정한 총 IPC가 노드 수 $N$보다 작게 나왔다. 이유가 될 수 없는 것은?", "options": ["노드 중 여럿이 서로의 복사본이나 가중합이다", "측정 잡음이 작은 그림자를 묻었다", "높은 차수나 긴 지연의 목표를 세지 않았다", "readout을 선형으로 썼기 때문에 원래 상한이 $N$보다 크다"], "a": 3, "why": "상한 $N$은 선형 readout 기준의 상한이다. 앞의 셋이 실제로 합을 깎는 이유다(복사본 → 판의 차원 감소, 잡음 → Stepney p.680, 끊은 범위 → 세지 않은 몫).", "ref": "#ch-bound"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 상충", "items": [{"id": "d11-q12", "type": "mc", "q": "노드 20개 tanh reservoir에서 입력 크기를 0.1 → 3으로 키울 때(그림 2) 일어난 일은?", "options": ["모든 차수의 용량이 함께 커졌다", "차수 1(선형 기억)은 11.5 → 4.0으로 줄고 차수 3은 0.02 → 6.9로 늘었다", "총합이 20을 넘었다", "아무 변화가 없었다"], "a": 1, "why": "같은 노드 수 안에서 기억과 비선형이 자리를 나눠 갖는 상충이다. 총합은 최대 18.7(입력 0.3)로 20을 넘지 않았다(Claude의 시뮬레이션).", "ref": "#ch-tradeoff"}, {"id": "d11-q13", "type": "ox", "q": "선형 reservoir는 MC가 tanh reservoir보다 크므로(56.9 대 17.9, Claude의 시뮬레이션) NARMA10도 더 잘 푼다.", "a": false, "why": "NARMA10은 2차 곱도 요구한다. Claude의 시뮬레이션에서 선형 reservoir는 0.144, tanh 기본은 0.053이었다. 기억만 크고 비선형이 없으면 곱을 못 만든다(D10 1구간). Liang이 말한 '선형 노드의 높은 MC'(p.200)는 기억에 대한 말이지 과제 성능에 대한 말이 아니다.", "ref": "#ch-tradeoff"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d11-q14", "type": "mc", "q": "입력 크기 0.01의 tanh reservoir는 거의 선형인데도 차수 1 용량이 8.4로, 선형 reservoir(14.5)보다 작았다(Claude의 시뮬레이션). 가장 그럴듯한 이유는?", "options": ["tanh는 기억을 지운다", "입력이 아주 작아 상태의 변화가 작고, 측정 잡음(0.001)이 오래된 입력의 작은 흔적을 묻었다", "노드 수가 줄었다", "계산 오류"], "a": 1, "why": "용량은 '잡음보다 크게 남은' 흔적만 센다. 약한 입력은 깨끗한 기억이 아니라 묻힌 기억을 준다. 물리 소자에서 입력 진폭을 너무 작게 잡을 때의 실패와 같다(Liang p.198의 '작은 진폭의 선형 범위').", "ref": "#ch-tradeoff"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 서로 다른 소자", "items": [{"id": "d11-q15", "type": "mc", "q": "서로 연결되지 않은, 완전히 같은 소자 20개에 같은 입력을 넣고 20개의 전류를 모두 readout에 주었다. 정보처리용량의 총합은 대략?", "options": ["20", "10", "1", "0"], "a": 2, "why": "20개의 전류가 똑같이 움직여 판의 차원이 1이다. Claude의 시뮬레이션에서도 1.00이었다. 소자 수만 늘린다고 계산이 늘지 않는다 — Liang이 말한 '병렬 소자의 MC가 겹친다'(p.196)의 극단적인 경우다.", "ref": "#ch-independent"}, {"id": "d11-q16", "type": "mc", "q": "연결 없는 소자 20개 배열에서 비선형 용량(차수 2 이상)까지 생기게 한 변화는(그림 3)?", "options": ["소자 수를 40개로 늘린 것", "시간상수만 다르게 한 것", "시간상수에 더해 입력 감도와 치우침까지 소자마다 다르게 한 것", "모든 소자를 같게 만든 것"], "a": 2, "why": "Claude의 시뮬레이션에서 시간상수만 다르면 6.59로 거의 전부 선형 기억이었고, 감도·치우침까지 다르게 하자 11.67이 되며 2–4차 몫이 생겼다. 치우침은 tanh의 대칭을 깨 짝수 차수를 연다(D10 5구간 심화).", "ref": "#ch-independent"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d11-q17", "type": "mc", "q": "Singh 2026(p.13)이 소자 배열의 '독립적인 계산 상태 수'를 확인하라고 권하는 방법은?", "options": ["전극 수를 센다", "측정한 상태들의 공분산 고윳값 분포에서 참여비 차원을 구하고, 채널을 하나씩 늘리며 과제 성능을 본다", "소자의 I–V 곡선을 그린다", "가장 큰 전류를 잰다"], "a": 1, "why": "전극·샘플링 지점·가상 노드의 수는 독립 상태 수와 같지 않다. 대부분의 분산이 몇 개 모드에 몰리면 채널이 많아도 참여비 차원은 작다. 채널을 늘려도 성능이 안 오르면 중복이다.", "ref": "#ch-independent"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 좋은 reservoir", "items": [{"id": "d11-q18", "type": "mc", "q": "노드 200개 Claude 시뮬레이션에서 기본(입력 0.5, MC 17.9, NMSE 0.053)보다 입력 0.1(MC 29.3, NMSE 0.032)이 NARMA10을 더 잘했다. 가장 그럴듯한 해석은?", "options": ["입력이 작을수록 언제나 좋다", "NARMA10은 2차라 약한 비선형으로 충분하고, 남는 용량을 기억에 쓴 배분이 과제에 더 맞았다", "MC가 클수록 언제나 좋다", "우연이다"], "a": 1, "why": "같은 총량 안에서 과제가 요구하는 차수·지연으로 배분한 쪽이 이겼다. '언제나'는 틀렸다: 입력 0.01은 잡음에 묻히고(그림 2), MC가 가장 큰 선형 reservoir는 0.144였다.", "ref": "#ch-task-match"}, {"id": "d11-q19", "type": "ox", "q": "총 정보처리용량(모든 차수의 합)이 더 큰 reservoir는 어떤 과제에서도 더 나은 성능을 낸다.", "a": false, "why": "총합이 같아도 배분이 다르면 과제 성능이 다르다. 과제가 요구하는 차수·지연에 용량이 있어야 한다. 그래서 Singh은 지연별 기억 분포와 필요한 차수의 용량을 함께 보고하라고 한다(p.8, 13).", "ref": "#ch-task-match"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d11-q20", "type": "mc", "q": "'기억은 길수록, 비선형은 강할수록 좋은가?'에 대한 오늘의 답으로 가장 알맞은 것은?", "options": ["예, 둘 다 클수록 좋다", "아니다. 둘은 노드 수로 묶인 같은 예산을 나눠 쓰고, 과제가 요구하는 차수·지연에 맞게 배분되어야 한다", "기억만 중요하다", "비선형만 중요하다"], "a": 1, "why": "총량 ≤ $N$(3구간), 상충(4구간), 배분(6구간)이 오늘의 사슬이다. 그림 4에서 최대 기억(선형)도 최대 비선형(입력 2.0)도 최선이 아니었다.", "ref": "#ch-task-match"}, {"id": "d11-q21", "type": "short", "q": "노드 하나(D9)의 기억 예산과 노드 $N$개 reservoir의 IPC 상한은 같은 원리다. 노드 5개면 선형 readout이 꺼낼 수 있는 용량 총합의 상한은? (숫자만)", "a": ["5"], "why": "판의 차원 = 노드 수 = 5(노드 출력들이 선형 독립일 때). D9의 노드 하나 예산 1은 $N = 1$인 경우였다. 잡음·복사본·세지 않은 목표가 있으면 실제 값은 이보다 작다.", "ref": "#ch-bound"}, {"id": "d11-q22", "type": "mc", "q": "이온 소자 논문이 'retention을 두 배로 늘려 reservoir 성능을 개선했다'고 주장한다. 오늘 배운 관점에서 먼저 확인할 것은?", "options": ["retention 측정 장비", "그 변화가 과제가 요구하는 지연·차수 쪽으로 용량을 옮겼는지(지연별 MC, 차수별 용량, held-out 과제 성능)와, 이미 넘치는 기억에 더 얹은 것은 아닌지", "소자의 색", "논문의 인용 수"], "a": 1, "why": "기억을 늘리는 것은 예산을 과거 쪽으로 옮기는 것일 수 있다(D9). 과제에 필요한 쪽으로 갔는지 보지 않으면 개선이라고 말할 수 없다.", "ref": "#ch-task-match"}, {"id": "d11-q23", "type": "mc", "q": "같은 공정으로 만든 이온 소자 10개의 응답이 거의 똑같다(편차가 아주 작다). reservoir 배열로 쓸 때 이것이 뜻하는 것은?", "options": ["용량이 10이 보장된다", "독립 상태 수가 작아 용량이 소자 하나 수준에 머물 수 있고, readout 과적합 위험도 있다", "아무 영향이 없다", "비선형 용량만 커진다"], "a": 1, "why": "Liang은 편차가 작은 소자 무리가 과적합 같은 문제를 일으킬 수 있고 MC가 겹친다고 쓴다(p.196). 메모리 소자의 장점(균일성)이 reservoir 배열에서는 단점이 될 수 있다. 단, 날마다 변하는 편차는 용량이 아니라 잡음이다.", "ref": "#ch-independent"}, {"id": "d11-q24", "type": "ox", "q": "Stepney 2024는 총 IPC = $N$이라는 성질이 유한한 데이터와 실험 잡음 앞에서도 그대로 측정된다고 본다.", "a": false, "why": "Stepney는 이것이 이론적 성질이고, 수치 잡음과 실험 잡음 때문에 임의의 기준·문턱 없이는 의미 있는 값을 얻기 어렵다고 쓴다(p.680). 그래서 측정 조건(차수, 지연 범위, 문턱)을 함께 보고해야 한다.", "ref": "#ch-bound"}]}}}</script>
 <div class="step-check local-only">
 <label><input type="checkbox" data-step-check="lesson" data-day="d11"> 학습자료를 다 읽었다</label>
 </div>
 </section>
-<section id="note" class="level2">
-<h2 class="anchored" data-anchor-id="note">③ 노트에 정리</h2>
-<div class="note-line">
-<p>자료를 덮고 노트를 펴세요. 오늘 질문에 대한 답의 뼈대를 손으로 그려 봅니다. 인과의 화살표 하나, 숫자 하나, 반론 하나가 들어가면 충분합니다. 막히는 곳은 자료로 돌아가 다시 읽고, 그래도 막히면 따로 적어 두세요.</p>
-</div>
-<div class="step-check local-only">
-<label><input type="checkbox" data-step-check="note" data-day="d11"> 노트에 정리했다</label>
-</div>
-</section>
 <section id="answer" class="level2">
-<h2 class="anchored" data-anchor-id="answer">④ 내 답</h2>
-<p>노트를 보면서 내 말로 씁니다. 주장마다 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이세요. <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 저장은 초안 저장입니다. 몇 번이고 고쳐도 됩니다.</p>
+<h2 class="anchored" data-anchor-id="answer">④ 가르치듯 내 답</h2>
+<div class="flow-line">
+<p>후배에게 <strong>설명한다고 생각하고</strong> 오늘 질문에 답합니다. <strong>기본은 짧은 답</strong>입니다: 3–5문장, 또는 작은 도식 하나와 한 줄 설명, 그리고 설명하다 막힌 곳 한 줄. 이것만으로 정상적인 학습입니다. 왜·어떻게, 근거와 반론까지 쓰는 긴 종합 답안은 <strong>선택</strong>입니다. 주장에 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이면 좋고, <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 몇 번이고 고쳐도 됩니다. 막히는 곳은 따로 적어 두세요.</p>
+</div>
 <div class="editable" data-file="d11-answer" data-title="내 답" data-template="answer"></div>
 <div class="ledger-links">
   <span>장부에 옮기기 →</span>
@@ -567,12 +1005,19 @@ ul.task-list li input[type="checkbox"] {
   <a href="../ledger/kill-criteria.html">접는 기준</a>
 </div>
 </section>
+<section id="posttest" class="level2">
+<h2 class="anchored" data-anchor-id="posttest">⑤ 다시 풀기 (선택)</h2>
+<div class="flow-line">
+<p>① 사전 테스트와 <strong>같은 문제</strong>를 이유와 함께 다시 풉니다. 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 다시 떠올리기 연습입니다. 이해 점검은 학습자료의 <strong>잠깐 점검</strong>과 <strong>종합 퀴즈</strong>에서 처음 고른 답으로 봅니다.</p>
+</div>
+<div class="quiz" data-day="d11" data-set="pre" data-mode="post"></div>
+</section>
 <section id="done" class="level2">
-<h2 class="anchored" data-anchor-id="done">⑤ 학습 완료</h2>
+<h2 class="anchored" data-anchor-id="done">⑥ 학습 완료</h2>
 <div class="done-box" data-day="d11">
   <div class="done-text">
     <b>오늘 학습 완료</b>
-    <span class="done-desc">학습자료를 읽고, 노트에 정리하고, 내 답을 저장했으면 누르세요. 답을 저장했다고 자동으로 완료되지는 않습니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
+    <span class="done-desc">기본 경로(학습자료 → 짧은 백지 회상 → 짧은 내 답)를 마쳤으면 누르세요. 읽음 체크·학습 완료·이해 점검(퀴즈 첫 시도)은 따로 기록되고 아래에 나란히 보입니다. 완료한 날짜를 기준으로 커버 페이지가 복습(1·3·7·14·30일 뒤)을 알려 줍니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
   </div>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">오늘 학습 완료</button>
@@ -582,7 +1027,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 <section id="feedback" class="level2">
-<h2 class="anchored" data-anchor-id="feedback">⑥ 피드백과 꼬리질문</h2>
+<h2 class="anchored" data-anchor-id="feedback">⑦ 피드백과 꼬리질문</h2>
 <div class="pending-box">
 <p>내 답을 저장한 뒤 Claude에게 <strong>"D11 검토해줘"</strong>라고 말하세요. 맞게 이해한 점, 핵심 오류와 근거, 고쳐야 할 인과관계, 다시 답할 질문을 이 자리에 남깁니다.</p>
 </div>

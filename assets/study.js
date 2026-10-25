@@ -60,11 +60,22 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   }
+  // 브라우저 임시 저장. 실패하면 성공처럼 넘어가지 않고 한 번 알린다.
+  var STORE_WARNED = false;
   function store(key, value) {
     try {
       if (value == null) localStorage.removeItem(key);
       else localStorage.setItem(key, value);
-    } catch (e) {}
+      return true;
+    } catch (e) {
+      if (!STORE_WARNED) {
+        STORE_WARNED = true;
+        setTimeout(function () {
+          toast("이 브라우저에 기록을 저장하지 못했어요(사생활 보호 창이거나 저장 공간이 꽉 찼을 수 있어요). 퀴즈·실습 기록이 남지 않습니다.", true);
+        }, 0);
+      }
+      return false;
+    }
   }
   function recall(key) {
     try {
@@ -78,6 +89,8 @@
     if (!t) {
       t = h("div");
       t.id = "study-toast";
+      t.setAttribute("role", "status");
+      t.setAttribute("aria-live", "polite");
       document.body.appendChild(t);
     }
     t.textContent = msg;
@@ -251,6 +264,7 @@
     return loadContent(this.name).then(function (data) {
       self.content = (data && data.content) || "";
       self.updated = (data && data.updated) || null;
+      self.rev = (data && data.rev) || null;
       self.renderView();
       // 저장하지 않은 임시 글이 있으면 알려 준다
       var draft = recall("study-draft:" + self.name);
@@ -334,6 +348,8 @@
 
     var bar = h("div", "ed-toolbar");
     var ta = h("textarea");
+    ta.setAttribute("aria-label", this.title + " 쓰기");
+    self._ta = ta;
     var preview = h("div", "ed-preview");
     var panes = h("div", "ed-panes");
     if (window.innerWidth < 900) panes.classList.add("single");
@@ -441,26 +457,76 @@
     ta.focus();
     this.el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  Editable.prototype.save = function (text, btn) {
+  Editable.prototype.save = function (text, btn, force) {
     var self = this;
+    if (self.saving) return; // 저장 중 중복 클릭 방지
     var content = text.replace(/\r\n/g, "\n");
-    if (btn) btn.disabled = true;
-    api("answers/" + this.name, {
+    self.saving = true;
+    function done() {
+      self.saving = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "초안 저장";
+      }
+    }
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "저장 중…";
+    }
+    var body = { content: content, base_rev: self.rev || null };
+    if (force) body.force = true;
+    fetch("/api/answers/" + this.name, {
       method: "PUT",
+      cache: "no-store",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: content }),
+      body: JSON.stringify(body),
     })
-      .then(function (j) {
+      .then(
+        function (r) {
+          return r.json().then(function (j) {
+            return { status: r.status, j: j };
+          });
+        },
+        function () {
+          throw new Error("서버에 연결할 수 없어요. 사이트 서버가 꺼졌는지 확인하세요.");
+        }
+      )
+      .then(function (res) {
+        done();
+        if (res.status === 409) {
+          var when = res.j.updated ? fmtTime(res.j.updated) : "";
+          store("study-draft:" + self.name, text);
+          if (confirm("이 칸은 다른 탭(또는 창)에서 " + when + "에 먼저 저장되었습니다.\n\n확인: 지금 쓴 글로 덮어쓰기 (앞 버전은 수정 이력에 남습니다)\n취소: 저장하지 않기 (지금 쓴 글은 임시 글로 남습니다)")) {
+            self.rev = res.j.rev;
+            return self.save(text, btn, true);
+          }
+          toast("저장하지 않았어요. 쓴 글은 임시 글로 남아 있어요. 새로고침하면 최신 버전을 보고 임시 글을 불러올 수 있어요.", true);
+          return;
+        }
+        if (res.status !== 200 || !res.j.ok) throw new Error(res.j.error || res.status);
+        var j = res.j;
         self.content = content;
         self.updated = j.updated;
+        self.rev = j.rev;
         if (content.trim()) FILES[self.name] = j.updated;
         else delete FILES[self.name];
+        var ta = self._ta;
+        var typedMore = ta && document.body.contains(ta) && ta.value.replace(/\r\n/g, "\n") !== content;
+        if (typedMore) {
+          // 저장하는 동안 더 쓴 내용은 편집기에 그대로 두고 임시 글로 보관
+          self.dirty = true;
+          store("study-draft:" + self.name, ta.value);
+          toast("저장했어요. 저장하는 동안 더 쓴 내용은 아직 저장 전이에요.", true);
+          return;
+        }
         store("study-draft:" + self.name, null);
         self.renderView();
-        toast(j.committed ? "초안을 저장했어요 · 수정 이력에 남겼어요" : "초안을 저장했어요");
+        if (j.history_error) toast("저장했어요. 다만 수정 이력(git) 기록은 실패했어요: " + j.history_error, true);
+        else toast(j.committed ? "초안을 저장했어요 · 수정 이력에 남겼어요" : "초안을 저장했어요");
       })
       .catch(function (err) {
-        if (btn) btn.disabled = false;
+        done();
+        store("study-draft:" + self.name, text);
         toast("저장하지 못했어요: " + err.message + " 쓴 글은 임시 글로 남아 있어요.", true);
       });
   };
@@ -532,7 +598,7 @@
   function dayState(did) {
     var d = DAYS[did] || {};
     if (d.done) return "done";
-    if (FILES[did + "-pre"] || FILES[did + "-answer"] || d.lesson || d.note) return "started";
+    if (FILES[did + "-pre"] || FILES[did + "-answer"] || FILES[did + "-recall"] || d.lesson || d.note || d.pretest || d.recall) return "started";
     return "";
   }
   function setDayStatus(did, patch) {
@@ -572,11 +638,16 @@
     document.querySelectorAll(".day-steps[data-day]").forEach(function (ol) {
       var did = ol.dataset.day;
       var d = DAYS[did] || {};
+      var prev = "d" + String(parseInt(did.slice(1), 10) - 1).padStart(2, "0");
       var map = {
+        review: !!FILES[prev + "-recall2"] || !!(DAYS[prev] || {}).recall2,
+        pretest: !!d.pretest || !!recall("study-pre-done:" + did),
         pre: !!FILES[did + "-pre"],
         lesson: !!d.lesson,
         note: !!d.note,
+        recall: !!FILES[did + "-recall"] || !!d.recall,
         answer: !!FILES[did + "-answer"],
+        posttest: !!d.posttest,
         done: !!d.done,
       };
       ol.querySelectorAll("li").forEach(function (li) {
@@ -594,6 +665,33 @@
       if (d.done && desc) desc.textContent = "완료한 날: " + fmtTime(d.done) + ". 답은 계속 고칠 수 있어요.";
       var st = box.querySelector(".done-static");
       if (st) st.textContent = d.done ? "학습 완료 " + fmtTime(d.done) : "";
+      // 읽음·학습 완료·이해 점검을 섞지 않고 나란히 보여 준다
+      var sum = box.querySelector(".done-summary");
+      if (!sum) {
+        sum = h("div", "done-summary");
+        box.appendChild(sum);
+      }
+      var did = box.dataset.day,
+        firsts = {};
+      try {
+        firsts = JSON.parse(recall("study-first:" + did) || "{}");
+      } catch (e) {}
+      var fk = Object.keys(firsts),
+        fok = fk.filter(function (k) {
+          return firsts[k].ok;
+        }).length;
+      sum.innerHTML = "";
+      [
+        ["읽음 체크", d.lesson ? "했음" : "아직", "학습자료를 끝까지 읽었다는 내 표시(서버)"],
+        ["학습 완료", d.done ? fmtTime(d.done) : "아직", "기본 경로를 마쳤다는 내 표시(서버). 복습 날짜의 기준"],
+        ["이해 점검", fk.length ? "첫 시도 " + fok + " / " + fk.length + "문항 정답" : "아직 푼 문항 없음", "잠깐 점검·종합 퀴즈에서 처음 고른 답(이 브라우저). 정답 본 뒤 다시 푼 것은 세지 않음"],
+      ].forEach(function (r) {
+        var row = h("div", "ds-row");
+        row.appendChild(h("span", "ds-k", r[0]));
+        row.appendChild(h("span", "ds-v", r[1]));
+        row.appendChild(h("span", "ds-n", r[2]));
+        sum.appendChild(row);
+      });
     });
   }
   function setupStepChecks() {
@@ -614,10 +712,11 @@
       doneBtn.addEventListener("click", function () {
         var d = DAYS[did] || {};
         var missing = [];
-        if (!FILES[did + "-answer"]) missing.push("내 답 저장");
+        // 기본 경로만 확인한다(사전 테스트·다시 풀기는 선택)
         if (!d.lesson) missing.push("학습자료 읽음 체크");
-        if (!d.note) missing.push("노트 정리 체크");
-        if (missing.length && !confirm("아직 안 한 것: " + missing.join(", ") + ". 그래도 완료로 표시할까요?")) return;
+        if (!FILES[did + "-recall"] && !d.recall) missing.push("백지 회상");
+        if (!FILES[did + "-answer"]) missing.push("가르치듯 내 답 저장");
+        if (missing.length && !confirm("기본 경로에서 아직 안 한 것: " + missing.join(", ") + ". 그래도 완료로 표시할까요?")) return;
         setDayStatus(did, { done: true })
           .then(function () {
             toast("D" + parseInt(did.slice(1), 10) + " 학습 완료로 표시했어요");
@@ -639,19 +738,24 @@
     if (!LOCAL) return;
     document.querySelectorAll(".lesson-body[data-pre]").forEach(function (lb) {
       var pre = lb.dataset.pre;
-      if (FILES[pre] || recall("study-gate-open:" + pre)) return;
+      var did = pre.replace(/-pre$/, "");
+      var hasPretest = !!document.querySelector('.quiz[data-day="' + did + '"][data-set="pre"]:not([data-mode])');
+      if (recall("study-pre-done:" + did) || (DAYS[did] || {}).pretest || recall("study-gate-open:" + pre)) return;
+      if (!hasPretest && FILES[pre]) return;
       if (lb.querySelector(".gate")) return;
       lb.classList.add("gated");
       var gate = h("div", "gate");
       var p = h("p");
-      p.innerHTML =
-        "<b>읽기 전 답을 먼저 써 볼까요?</b><br>자료를 보기 전에 10분 동안 지금 아는 만큼 써 두면, 공부가 끝난 뒤 무엇을 배웠는지 분명해집니다.";
+      p.innerHTML = hasPretest
+        ? "<b>사전 테스트를 먼저 풀어 볼까요?</b><br>아직 배우지 않았으니 많이 틀리는 게 정상입니다. 먼저 답해 본 문제는 읽을 때 눈에 들어오고 더 오래 남습니다. 다 풀면 자료가 열립니다."
+        : "<b>'먼저 만들어 보기'를 먼저 해 볼까요?</b><br>자료를 보기 전에 지금 아는 만큼 써 두면, 공부가 끝난 뒤 무엇을 배웠는지 보입니다.";
       gate.appendChild(p);
       var row = h("div", "btn-row");
       row.appendChild(
-        button("읽기 전 답 쓰기", "primary", function () {
-          var ed = EDITORS[pre];
-          if (ed) ed.startEdit();
+        button(hasPretest ? "사전 테스트로 가기" : "먼저 해 보기 쓰기", "primary", function () {
+          var t = document.getElementById("pretest");
+          if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+          else if (EDITORS[pre]) EDITORS[pre].startEdit();
         })
       );
       row.appendChild(
@@ -664,6 +768,14 @@
       lb.insertBefore(gate, lb.firstChild);
     });
   }
+  document.addEventListener("study:pre-done", function (e) {
+    var lb = document.querySelector('.lesson-body[data-pre="' + e.detail.day + '-pre"]');
+    if (lb && lb.classList.contains("gated")) {
+      ungate(lb);
+      toast("자료가 열렸어요. 틀린 문제의 답을 찾으며 읽어 보세요.");
+    }
+    applyStatus();
+  });
   function ungate(lb) {
     lb.classList.remove("gated");
     var g = lb.querySelector(".gate");
@@ -672,7 +784,8 @@
   document.addEventListener("study:changed", function () {
     applyStatus();
     document.querySelectorAll(".lesson-body.gated").forEach(function (lb) {
-      if (FILES[lb.dataset.pre]) ungate(lb);
+      var hasPretest = !!document.querySelector('.quiz[data-set="pre"]:not([data-mode])');
+      if (FILES[lb.dataset.pre] && !hasPretest) ungate(lb);
     });
   });
 
@@ -725,68 +838,216 @@
     apply();
   }
 
-  // ---------- 커버 페이지: 오늘의 질문 / 이어서 할 질문 ----------
+  // ---------- 커버 페이지: 다음 Day, 이어서 하기, 날짜에 맞춘 작은 복습 ----------
+  // Day는 마감이 아니라 순서다. 밀린 날 목록 대신 "다음에 할 것"과 "지금 복습할 것"만 보여 준다.
+  var REVIEW_GAPS = [1, 3, 7, 14, 30]; // 학습 완료 뒤 며칠째에 핵심 목록을 다시 떠올릴지 (조정 가능한 규칙)
+  function daysBetween(isoA, isoB) {
+    var a = new Date(isoA.slice(0, 10) + "T00:00:00"),
+      b = new Date(isoB.slice(0, 10) + "T00:00:00");
+    return Math.round((b - a) / 86400000);
+  }
+  function dueReviews(days) {
+    var today = todayIso(),
+      out = [];
+    days.forEach(function (d) {
+      var st = DAYS[d.day] || {};
+      if (!st.done) return;
+      var since = daysBetween(st.done, today);
+      var rv = st.reviews || {};
+      // 아직 하지 않은 간격 중 이미 때가 된 가장 큰 간격 하나만 낸다(밀린 복습을 한꺼번에 쌓지 않음)
+      var gap = null;
+      REVIEW_GAPS.forEach(function (g) {
+        if (since >= g && !rv[String(g)]) gap = g;
+      });
+      if (gap !== null) out.push({ d: d, gap: gap, since: since });
+    });
+    out.sort(function (x, y) {
+      return y.since - x.since;
+    });
+    return out;
+  }
   function setupToday() {
     var card = document.getElementById("today-card");
     var dataEl = document.getElementById("study-days");
     if (!card || !dataEl) return;
     var days = JSON.parse(dataEl.textContent);
-    var today = todayIso();
-    var todays = days.find(function (d) {
-      return d.date === today;
-    });
     var firstOpen = days.find(function (d) {
       return dayState(d.day) !== "done";
-    });
-    var late = days.filter(function (d) {
-      return d.date < today && dayState(d.day) !== "done";
     });
     var done = days.filter(function (d) {
       return dayState(d.day) === "done";
     }).length;
-
-    function dayLine(label, d, primary) {
+    function dayLine(label, d, primary, href, sub) {
       var row = h("div", "tc-row");
-      var dd = new Date(d.date + "T00:00:00");
-      row.appendChild(h("div", "tc-label", label + " · D" + d.n + " · " + (dd.getMonth() + 1) + "월 " + dd.getDate() + "일"));
-      row.appendChild(h("div", "tc-title", d.title));
+      row.appendChild(h("div", "tc-label", label + " · D" + d.n));
+      row.appendChild(h("div", "tc-title", sub || d.title));
       var a = h("a", "sbtn " + (primary ? "primary" : ""), primary ? "공부 시작 →" : "열기 →");
-      a.href = OFFSET + "days/" + d.day + ".html";
+      a.href = href || OFFSET + "days/" + d.day + ".html";
       row.appendChild(a);
       return row;
     }
-
     card.innerHTML = "";
-    if (!firstOpen) {
-      card.appendChild(h("div", "tc-label", "30일을 모두 완료했습니다"));
-      card.appendChild(h("div", "tc-title", "D30의 결정을 다시 읽어 보세요."));
-      return;
-    }
-    if (today < days[0].date) {
-      card.appendChild(dayLine("곧 시작", days[0], true));
-    } else if (todays && todays.day === firstOpen.day) {
-      card.appendChild(dayLine("오늘의 질문", todays, true));
-    } else if (firstOpen.date > today) {
-      // 오늘 몫은 끝났다
-      card.appendChild(dayLine("다음 질문", firstOpen, true));
+    var last = null;
+    try {
+      last = JSON.parse(recall("study-last-any") || "null");
+    } catch (e) {}
+    var lastDay =
+      last &&
+      days.find(function (d) {
+        return d.day === last.day;
+      });
+    if (lastDay && dayState(lastDay.day) !== "done") {
+      card.appendChild(dayLine("이어서 하기 (마지막으로 읽던 구간)", lastDay, true, OFFSET + "days/" + lastDay.day + ".html#" + last.id, last.title));
+      if (firstOpen && firstOpen.day !== lastDay.day) card.appendChild(dayLine("아직 끝내지 않은 첫 Day", firstOpen, false));
+    } else if (firstOpen) {
+      card.appendChild(dayLine(done ? "다음 Day" : "처음 시작", firstOpen, true));
     } else {
-      // 날짜가 밀렸다: 기본 버튼은 가장 먼저 끝내지 못한 날로, 오늘 질문은 따로
-      card.appendChild(dayLine("이어서 할 질문 (가장 먼저 끝내지 못한 날)", firstOpen, true));
-      if (todays && dayState(todays.day) !== "done") card.appendChild(dayLine("오늘 날짜의 질문", todays, false));
+      card.appendChild(h("div", "tc-label", "30개 Day를 모두 완료로 표시했습니다"));
+      card.appendChild(h("div", "tc-title", "아래 복습을 이어 가고, D30의 결정을 다시 읽어 보세요."));
+    }
+    var due = dueReviews(days);
+    if (due.length) {
+      var rb = h("div", "tc-review");
+      rb.appendChild(h("div", "tc-label", "오늘 복습할 것 (" + Math.min(3, due.length) + "개" + (due.length > 3 ? ", 나머지 " + (due.length - 3) + "개는 다음에" : "") + " · 각 5분 안팎)"));
+      due.slice(0, 3).forEach(function (r) {
+        var row = h("div", "tc-rv-row");
+        var a = h("a", "", "D" + r.d.n + " 핵심 떠올리기");
+        a.href = OFFSET + "days/" + r.d.day + ".html#recall";
+        row.appendChild(a);
+        row.appendChild(h("span", "tc-rv-when", " 완료 " + r.since + "일 뒤 (" + r.gap + "일 복습)"));
+        if (LOCAL) {
+          row.appendChild(
+            button("복습했어요", "ghost lab-small", function () {
+              // 이번 복습으로 그보다 짧은 간격의 복습도 끝난 것으로 본다(밀린 것을 한꺼번에 시키지 않음)
+              var patch = { reviews: {} };
+              var have = (DAYS[r.d.day] || {}).reviews || {};
+              REVIEW_GAPS.forEach(function (g) {
+                if (g <= r.gap && !have[String(g)]) patch.reviews[String(g)] = todayIso();
+              });
+              setDayStatus(r.d.day, patch)
+                .then(function () {
+                  toast("D" + r.d.n + " 복습을 기록했어요 (서버)");
+                  setupToday();
+                })
+                .catch(function (err) {
+                  toast("저장하지 못했어요: " + err.message, true);
+                });
+            })
+          );
+        }
+        rb.appendChild(row);
+      });
+      rb.appendChild(h("div", "tc-rv-note", "핵심 목록을 보지 않고 먼저 떠올린 뒤 그 페이지에서 대조합니다. 복습 간격(완료 뒤 1·3·7·14·30일)은 출발점일 뿐이니 버거우면 건너뛰어도 됩니다. Day30 이후에도 계속 나옵니다."));
+      card.appendChild(rb);
     }
     var meta = h("div", "tc-meta");
-    var parts = ["완료 " + done + " / " + days.length + "일"];
-    if (late.length)
-      parts.push(
-        "밀린 날: " +
-          late
-            .map(function (d) {
-              return "D" + d.n;
-            })
-            .join(", ")
-      );
-    meta.textContent = parts.join(" · ");
+    meta.textContent = "완료로 표시한 Day " + done + " / " + days.length + " · Day는 마감이 아니라 순서입니다";
     card.appendChild(meta);
+  }
+
+  // ---------- 학습 기록 백업과 복원 ----------
+  // 백업 파일 = 서버의 답·진도(answers 폴더) + 이 브라우저의 기록(퀴즈·실습·읽던 위치).
+  // 복원은 지금 기록을 지우지 않는다: 답 파일은 내용이 다른 것만 바꾸고(이전 판은 git 이력에 남음), 진도와 브라우저 기록은 비어 있는 칸만 채운다.
+  function browserRecords() {
+    var out = {};
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf("study-") === 0) out[k] = localStorage.getItem(k);
+      }
+    } catch (e) {}
+    return out;
+  }
+  function setupBackup() {
+    var box = document.getElementById("backup-box");
+    if (!box || !LOCAL) return;
+    var row = h("div", "btn-row");
+    var msg = h("div", "backup-msg");
+    msg.setAttribute("role", "status");
+    row.appendChild(
+      button("백업 파일 내려받기", "primary", function () {
+        api("backup")
+          .then(function (srv) {
+            srv.browser = browserRecords();
+            srv.browser_origin = location.origin;
+            var blob = new Blob([JSON.stringify(srv, null, 1)], { type: "application/json" });
+            var a = h("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "study-backup-" + todayIso() + ".json";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            msg.textContent = "내려받기를 시작했어요: 답 " + Object.keys(srv.answers || {}).length + "개, 진도 " + Object.keys(srv.status || {}).length + "일, 브라우저 기록 " + Object.keys(srv.browser).length + "개. 파일이 '다운로드' 폴더에 생겼는지 확인하세요.";
+          })
+          .catch(function (err) {
+            msg.textContent = "백업하지 못했어요: " + err.message;
+          });
+      })
+    );
+    var file = h("input");
+    file.type = "file";
+    file.accept = ".json,application/json";
+    file.style.display = "none";
+    file.addEventListener("change", function () {
+      var f = file.files && file.files[0];
+      file.value = "";
+      if (!f) return;
+      var rd = new FileReader();
+      rd.onload = function () {
+        var data;
+        try {
+          data = JSON.parse(rd.result);
+        } catch (e) {
+          msg.textContent = "백업 파일을 읽지 못했어요(JSON 형식이 아님).";
+          return;
+        }
+        if (!data || data.format !== "study-backup") {
+          msg.textContent = "이 사이트의 백업 파일이 아니에요.";
+          return;
+        }
+        var body = { answers: data.answers || {}, status: data.status || {} };
+        api("restore", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+          .then(function (dry) {
+            var br = data.browser || {},
+              brFill = Object.keys(br).filter(function (k) {
+                return k.indexOf("study-") === 0 && recall(k) == null;
+              });
+            var summary =
+              "백업 시각 " + (data.exported_at || "?") + "\n" +
+              "· 내용이 달라 덮어쓸 답 파일: " + dry.changed.length + "개" + (dry.changed.length ? " (" + dry.changed.slice(0, 6).join(", ") + (dry.changed.length > 6 ? " …" : "") + ")" : "") + "\n" +
+              "· 새로 생길 답 파일: " + dry.new.length + "개\n" +
+              "· 같은 내용이라 그대로: " + dry.same + "개\n" +
+              "· 진도에서 비어 있어 채울 칸: " + dry.status_fill + "개\n" +
+              "· 이 브라우저에서 비어 있어 채울 기록: " + brFill.length + "개\n\n" +
+              "덮어쓰는 답의 지금 내용은 git 이력에 남아 되돌릴 수 있습니다. 복원할까요?";
+            if (!confirm(summary)) {
+              msg.textContent = "복원을 취소했어요. 아무것도 바뀌지 않았습니다.";
+              return;
+            }
+            body.apply = true;
+            return api("restore", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(function (res) {
+              var okN = 0;
+              brFill.forEach(function (k) {
+                if (store(k, br[k])) okN++;
+              });
+              msg.textContent = "복원했어요: 답 " + (res.changed.length + res.new.length) + "개, 진도 칸 " + res.status_fill + "개, 브라우저 기록 " + okN + "/" + brFill.length + "개. 페이지를 새로 고치면 반영됩니다.";
+            });
+          })
+          .catch(function (err) {
+            msg.textContent = "복원하지 못했어요: " + err.message + " (아무것도 바뀌지 않았거나, 일부만 바뀌었을 수 있으니 페이지를 새로 고쳐 확인하세요)";
+          });
+      };
+      rd.readAsText(f, "utf-8");
+    });
+    row.appendChild(
+      button("백업 파일로 복원", "", function () {
+        file.click();
+      })
+    );
+    box.appendChild(row);
+    box.appendChild(file);
+    box.appendChild(msg);
+    box.appendChild(h("p", "backup-note", "권장: 일주일에 한 번, 또는 브라우저를 바꾸거나 데이터를 지우기 전에 내려받아 두세요. 복원은 지금 기록을 지우지 않습니다. 내용이 다른 답만 바꾸고, 진도와 브라우저 기록은 비어 있는 칸만 채웁니다."));
   }
 
   // ---------- 댓글 ----------
@@ -884,81 +1145,168 @@
   }
 
   // ---------- 장 내비게이터: 오늘의 지도 + 지금 읽는 장 표시 ----------
+  // 핵심 장은 id가 ch-로 시작하는 h3. 스크롤 위치는 '방문'일 뿐 읽음·이해가 아니다.
+  var CUR_CH = "";
+  function chTitle(x) {
+    return x.textContent.replace(/\s+/g, " ").trim();
+  }
+  // 제목에 적힌 구간 번호(예: "0", "1-2", "학습 구간 3")와 번호를 뺀 제목. 번호가 없으면 순서 번호를 쓴다.
+  // 두 쪽으로 나뉜 Day의 뒤쪽은 3구간부터 시작하므로, 순서 번호가 아니라 제목의 번호를 써야 한다.
+  function chNum(x, i) {
+    var m = chTitle(x).match(/^(?:학습 구간 )?(\d+(?:-\d+)?)\.\s/);
+    return m ? m[1] : String(i + 1);
+  }
+  function chBare(x) {
+    return chTitle(x).replace(/^(?:학습 구간 )?\d+(?:-\d+)?\.\s*/, "");
+  }
+  // Quarto는 제목의 id를 감싸는 <section>에 두고 h3에는 data-anchor-id를 남긴다
+  function hid(x) {
+    return x.id || x.getAttribute("data-anchor-id") || (x.parentElement && x.parentElement.tagName === "SECTION" ? x.parentElement.id : "") || "";
+  }
   function setupChapters() {
     var lb = document.querySelector(".lesson-body");
     if (!lb) return;
-    var heads = Array.prototype.slice.call(lb.querySelectorAll("h3"));
-    if (heads.length < 3) return;
-    heads.forEach(function (h3, i) {
-      if (!h3.id) h3.id = "ch-" + i;
+    var all = Array.prototype.slice.call(lb.querySelectorAll("h3"));
+    var core = all.filter(function (x) {
+      return /^ch-/.test(hid(x));
     });
-    // 지도
-    var map = h("div", "chap-map");
-    map.appendChild(h("div", "cm-title", "오늘의 지도 · 읽은 장에는 ✓가 붙습니다"));
-    var ol = h("ol");
-    heads.forEach(function (h3) {
-      var li = h("li");
-      var a = h("a", "", h3.textContent.replace(/\s+/g, " ").trim());
-      a.href = "#" + h3.id;
-      li.appendChild(a);
-      li.dataset.target = h3.id;
-      ol.appendChild(li);
+    if (core.length < 2) core = all.filter(function (x) { return hid(x); });
+    if (!core.length) return;
+    var extra = all.filter(function (x) {
+      return hid(x) && core.indexOf(x) < 0;
     });
-    map.appendChild(ol);
-    var meta = lb.querySelector(".lesson-meta");
-    if (meta && meta.nextSibling) lb.insertBefore(map, meta.nextSibling);
-    else lb.insertBefore(map, lb.firstChild);
-    // 위쪽 고정 표시
-    var now = h("div");
-    now.id = "chap-now";
-    var cn = h("div", "cn");
-    now.appendChild(cn);
-    document.body.appendChild(now);
-    var did = (document.querySelector(".day-steps[data-day]") || {}).dataset;
-    var seenKey = "study-seen:" + (did ? did.day : location.pathname);
+    var steps = document.querySelector(".day-steps[data-day]");
+    var dkey = steps ? steps.dataset.day : location.pathname;
+    var seenKey = "study-visited:" + dkey,
+      lastKey = "study-last:" + dkey;
     var seen = {};
     try {
       seen = JSON.parse(recall(seenKey) || "{}");
     } catch (e) {}
-    function update() {
-      var y = window.scrollY + 120;
-      var cur = -1;
-      heads.forEach(function (h3, i) {
-        if (h3.getBoundingClientRect().top + window.scrollY <= y) cur = i;
+
+    var map = h("nav", "chap-map");
+    map.setAttribute("aria-label", "오늘의 지도");
+    map.appendChild(h("div", "cm-head", "오늘의 지도 · 학습 구간 " + core.length + "개"));
+    map.appendChild(h("div", "cm-sub", "굵은 초록 = 지금 읽는 구간 · '머묾' = 10초 이상 머문 구간(읽음·이해와는 다릅니다) · 며칠에 나눠 읽어도 됩니다"));
+    var ul = h("ul", "cm-core");
+    var items = core.map(function (x, i) {
+      var li = h("li");
+      var a = h("a");
+      a.href = "#" + hid(x);
+      a.appendChild(h("span", "cm-num", chNum(x, i) + "구간"));
+      a.appendChild(h("span", "cm-title", chBare(x)));
+      li.appendChild(a);
+      ul.appendChild(li);
+      return li;
+    });
+    map.appendChild(ul);
+    if (extra.length) {
+      var ex = h("div", "cm-extra");
+      ex.appendChild(h("span", "", "마무리 · "));
+      extra.forEach(function (x) {
+        var a = h("a", "", chTitle(x));
+        a.href = "#" + hid(x);
+        ex.appendChild(a);
+      });
+      map.appendChild(ex);
+    }
+    var last = recall(lastKey);
+    if (last && !location.hash && document.getElementById(last)) {
+      var back = h("div", "cm-resume");
+      var a2 = h("a", "", "지난번 읽던 곳으로: " + chTitle(document.getElementById(last)) + " →");
+      a2.href = "#" + last;
+      back.appendChild(a2);
+      map.appendChild(back);
+    }
+    core.forEach(function (x, i) {
+      if (i === 0) return;
+      var sec = x.parentElement && x.parentElement.tagName === "SECTION" ? x.parentElement : x;
+      var rp = h("div", "rest-point");
+      rp.innerHTML = "<span class='rp-mark'>⏸</span> 여기까지가 " + chNum(core[i - 1], i - 1) + "구간입니다. 쉬어도 좋습니다. 다음: <b>" + chNum(x, i) + "구간 · " + escapeHtml(chBare(x)) + "</b>";
+      sec.parentNode.insertBefore(rp, sec);
+    });
+    var meta = lb.querySelector(".lesson-body .lesson-meta") || lb.querySelector(".lesson-meta");
+    if (meta && meta.nextSibling) lb.insertBefore(map, meta.nextSibling);
+    else lb.insertBefore(map, lb.firstChild);
+
+    var now = h("div");
+    now.id = "chap-now";
+    var cn = h("div", "cn");
+    var prevA = h("a", "cn-nav", "‹ 이전");
+    var label = h("span", "cn-label");
+    var nextA = h("a", "cn-nav", "다음 ›");
+    cn.appendChild(prevA);
+    cn.appendChild(label);
+    cn.appendChild(nextA);
+    now.appendChild(cn);
+    document.body.appendChild(now);
+
+    var cur = -2,
+      timer = null,
+      ticking = false;
+    function compute() {
+      ticking = false;
+      var y = window.scrollY + 120,
+        c = -1;
+      core.forEach(function (x, i) {
+        if (x.getBoundingClientRect().top + window.scrollY <= y) c = i;
       });
       var rect = lb.getBoundingClientRect();
-      var inside = rect.top < 100 && rect.bottom > 200;
-      now.classList.toggle("show", inside && cur >= 0);
-      if (cur >= 0) {
-        cn.innerHTML = "";
-        cn.appendChild(h("span", "", "지금 읽는 곳: "));
-        cn.appendChild(h("b", "", heads[cur].textContent.replace(/\s+/g, " ").trim()));
-        cn.appendChild(h("span", "cn-pos", cur + 1 + " / " + heads.length + "장"));
-        // 앞 장들은 읽은 것으로 표시
-        for (var i = 0; i < cur; i++) seen[heads[i].id] = 1;
-        store(seenKey, JSON.stringify(seen));
-      }
-      ol.querySelectorAll("li").forEach(function (li, i) {
-        li.classList.toggle("cur", i === cur);
-        li.classList.toggle("seen", !!seen[li.dataset.target] && i !== cur);
+      now.classList.toggle("show", rect.top < 100 && rect.bottom > 200 && c >= 0);
+      if (c === cur) return; // 장이 바뀔 때만 갱신
+      cur = c;
+      CUR_CH = c >= 0 ? hid(core[c]) : "";
+      clearTimeout(timer);
+      items.forEach(function (li, i) {
+        li.classList.toggle("cur", i === c);
+        li.classList.toggle("seen", !!seen[hid(core[i])] && i !== c);
       });
+      if (c < 0) return;
+      label.textContent = chNum(core[c], c) + "구간 (" + (c + 1) + "/" + core.length + ") · " + chBare(core[c]) + (c < core.length - 1 ? "  →  다음: " + chBare(core[c + 1]).slice(0, 18) : "");
+      prevA.style.visibility = c > 0 ? "" : "hidden";
+      if (c > 0) prevA.href = "#" + hid(core[c - 1]);
+      nextA.style.visibility = c < core.length - 1 ? "" : "hidden";
+      if (c < core.length - 1) nextA.href = "#" + hid(core[c + 1]);
+      var id = hid(core[c]);
+      timer = setTimeout(function () {
+        store(lastKey, id);
+        store("study-last-any", JSON.stringify({ day: dkey, id: id, title: chTitle(core[c]), at: new Date().toISOString() }));
+        if (!seen[id]) {
+          seen[id] = 1;
+          store(seenKey, JSON.stringify(seen));
+        }
+      }, 10000);
     }
-    window.addEventListener("scroll", update, { passive: true });
-    update();
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(compute);
+        }
+      },
+      { passive: true }
+    );
+    compute();
   }
-
   // ---------- 퀴즈 ----------
+  // 응답은 문항 id로 저장한다(문항을 고치면 id도 바꾸므로 옛 답이 새 문항에 붙지 않는다).
   function norm(s) {
     return String(s)
       .toLowerCase()
-      .replace(/[\s·,.;:()\[\]'"]/g, "")
+      .replace(/[\s·,.;:()\[\]'"$]/g, "")
       .replace(/×/g, "x")
       .replace(/[−–—]/g, "-");
+  }
+  function hashStr(s) {
+    var x = 0;
+    for (var i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) | 0;
+    return (x >>> 0).toString(36);
   }
   function setupQuiz() {
     document.querySelectorAll(".quiz[data-day]").forEach(renderQuiz);
   }
-  var KIND_LABEL = { check: "잠깐 점검", end: "마무리 퀴즈", final: "종합 퀴즈" };
+  var KIND_LABEL = { check: "잠깐 점검", end: "마무리 퀴즈", final: "종합 퀴즈", pre: "사전 테스트", post: "사후 테스트" };
   var LETTERS = ["A", "B", "C", "D", "E", "F"];
   function renderQuiz(box) {
     var dataEl = document.getElementById("quiz-" + box.dataset.day);
@@ -979,70 +1327,138 @@
       box.remove();
       return;
     }
+    box.innerHTML = "";
     var items = set.items;
     var kind = set.kind || "end";
+    if (kind === "end" && !box.dataset.mode && !box.closest("details")) {
+      var wrapD = h("details", "practice");
+      wrapD.appendChild(h("summary", "", "추가 연습 (선택) · 마무리 퀴즈 " + items.length + "문항"));
+      box.parentNode.insertBefore(wrapD, box);
+      wrapD.appendChild(box);
+    }
+    // 첫 시도 기록: 문항 id별로 한 번만 쓴다. '다시 풀기' 뒤의 답은 '정답 본 뒤 재응답'으로 따로 표시한다.
+    var firstKey = "study-first:" + box.dataset.day;
+    var firsts = {};
+    try {
+      firsts = JSON.parse(recall(firstKey) || "{}");
+    } catch (e) {}
+    // 사전 테스트(pre): 정답 여부와 정답만, 이유는 사후 테스트(post)에서. 사후는 같은 문항을 새로 푼다.
+    var mode = box.dataset.mode || (kind === "pre" ? "pre" : "");
+    if (mode === "post") kind = "post";
     box.className = "quiz quiz-" + kind;
-    var key = "study-quiz:" + box.dataset.day + ":" + setId;
+    box.setAttribute("role", "group");
+    box.setAttribute("aria-label", (KIND_LABEL[kind] || "퀴즈") + " " + (set.title || ""));
+    var key =
+      mode === "pre" ? "study-pre:" + box.dataset.day : mode === "post" ? "study-post:" + box.dataset.day : "study-quiz2:" + box.dataset.day + ":" + setId;
     var saved = {};
     try {
       saved = JSON.parse(recall(key) || "{}");
     } catch (e) {}
+    function qid(it, i) {
+      return it.id || "i" + i + ":" + hashStr(it.q);
+    }
 
-    // 머리: 제목 + 진행 점
     var head = h("div", "quiz-head");
     var left = h("div", "quiz-left");
     left.appendChild(h("span", "quiz-kind", KIND_LABEL[kind] || "퀴즈"));
     left.appendChild(h("span", "quiz-title", set.title || ""));
     head.appendChild(left);
     var dots = h("div", "quiz-dots");
+    dots.setAttribute("aria-hidden", "true");
     items.forEach(function () {
       dots.appendChild(h("span", "qdot"));
     });
     head.appendChild(dots);
     box.appendChild(head);
-
     var body = h("div", "quiz-body");
     box.appendChild(body);
     var banner = h("div", "quiz-banner");
+    banner.setAttribute("role", "status");
     banner.style.display = "none";
     box.appendChild(banner);
 
-    function updateScore() {
+    function updateScore(fresh) {
       var n = 0,
         ok = 0;
       items.forEach(function (it, i) {
         var d = dots.children[i];
         d.className = "qdot";
-        if (saved[i]) {
+        var sv = saved[qid(it, i)];
+        if (sv) {
           n++;
-          if (saved[i].ok) ok++;
-          d.classList.add(saved[i].ok ? "ok" : "no");
+          if (sv.ok) ok++;
+          d.classList.add(sv.ok ? "ok" : "no");
         }
       });
       store(key, JSON.stringify(saved));
-      if (n === items.length) {
+      if (n === items.length && n > 1) {
         banner.style.display = "";
         var msg;
-        if (ok === n) msg = n === 1 ? "정확해요. 다음으로 넘어가세요." : "모두 맞혔어요. 이 장은 내 것이 됐습니다.";
-        else if (ok >= n * 0.6) msg = "거의 다 왔어요. 틀린 문제의 이유를 한 번만 더 읽어 보세요.";
-        else msg = "괜찮아요. 틀린 문제가 오늘 배울 지점입니다. 요점으로 돌아가 보세요.";
-        banner.innerHTML =
-          "<div class='qb-score'><b>" + ok + "</b> / " + n + "</div><div class='qb-msg'>" + msg + "</div>";
-        banner.className = "quiz-banner " + (ok === n ? "all" : ok >= n * 0.6 ? "most" : "few");
-      } else {
-        banner.style.display = "none";
-      }
+        if (mode === "pre") {
+          msg = "사전 테스트 끝. 많이 틀려도 정상입니다. 틀린 문제가 오늘 읽을 때의 표지판이 됩니다. 이유는 학습을 마친 뒤 ⑤ 사후 테스트에서 확인합니다.";
+          store("study-pre-done:" + box.dataset.day, "1");
+        } else if (mode === "post") {
+          var pre = {};
+          try {
+            pre = JSON.parse(recall("study-pre:" + box.dataset.day) || "{}");
+          } catch (e) {}
+          var preN = 0,
+            preOk = 0,
+            both = [];
+          items.forEach(function (it, i) {
+            var pv = pre[qid(it, i)],
+              sv = saved[qid(it, i)];
+            if (pv) {
+              preN++;
+              if (pv.ok) preOk++;
+            }
+            if (pv && !pv.ok && sv && !sv.ok) both.push("Q" + (i + 1));
+          });
+          msg =
+            (preN ? "사전 " + preOk + "/" + preN + " → 다시 풀기 " + ok + "/" + n + ". 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 '다시 떠올리기' 연습입니다. 이해 점검은 구간의 잠깐 점검과 종합 퀴즈의 첫 시도로 보세요. " : "") +
+            (both.length
+              ? "두 번 다 틀린 문제(" + both.join(", ") + ")는 이유를 읽고, 내일 ⓪ 되살리기 때 먼저 떠올려 보세요."
+              : "사전에 틀렸다가 맞힌 문제가 있다면, 왜 그런지 ④ 내 답에 자기 말로 써 보세요.");
+        } else {
+          msg =
+            ok === n
+              ? "모두 맞혔어요. 이유를 자기 말로 설명할 수 있는지 내 답에서 확인해 보세요."
+              : "틀린 문제는 이유를 읽고, 해당 부분으로 돌아가 다시 풀어 보세요. 점수는 진단일 뿐입니다.";
+        }
+        var fN = 0,
+          fOk = 0,
+          re = 0;
+        items.forEach(function (it, i) {
+          var f = firsts[qid(it, i)];
+          if (f) {
+            fN++;
+            if (f.ok) fOk++;
+          }
+          if ((saved[qid(it, i)] || {}).retry) re++;
+        });
+        var firstLine = mode === "" && fN ? "<div class='qb-first'>첫 시도 " + fOk + "/" + fN + (re ? " · 정답 본 뒤 다시 푼 문항 " + re + "개(이해 점검 점수에는 첫 시도만 봅니다)" : "") + "</div>" : "";
+        banner.innerHTML = "<div class='qb-score'><b>" + ok + "</b> / " + n + "</div><div class='qb-msg'>" + msg + firstLine + "</div>";
+        banner.className = "quiz-banner " + (mode === "pre" ? "pre" : ok === n ? "all" : ok >= n * 0.6 ? "most" : "few");
+        if (mode === "pre" || mode === "post") {
+          if (fresh && LOCAL) {
+            var patch = {};
+            patch[mode === "pre" ? "pretest" : "posttest"] = { score: ok, total: n };
+            setDayStatus(box.dataset.day, patch).catch(function () {});
+          }
+          document.dispatchEvent(new CustomEvent("study:" + mode + "-done", { detail: { day: box.dataset.day } }));
+        }
+      } else banner.style.display = "none";
     }
 
     items.forEach(function (it, i) {
+      var k = qid(it, i);
       var qi = h("div", "qitem");
       var qt = h("div", "qtext");
       qt.appendChild(h("span", "qn", "Q" + (i + 1)));
-      var qs = h("span", "qq");
-      qs.appendChild(document.createTextNode(it.q));
-      qt.appendChild(qs);
+      qt.appendChild(h("span", "qq", it.q));
       qi.appendChild(qt);
       var why = h("div", "qwhy");
+      why.setAttribute("aria-live", "polite");
       why.style.display = "none";
       function reveal(ok, chosenText, animate) {
         qi.classList.add("answered", ok ? "is-ok" : "is-no");
@@ -1055,39 +1471,79 @@
         why.style.display = "";
         why.className = "qwhy " + (ok ? "ok" : "no");
         var ans = it.type === "ox" ? (it.a ? "O (참)" : "X (거짓)") : it.type === "mc" ? it.options[it.a] : it.a[0];
-        why.innerHTML =
-          "<span class='qw-badge'>" +
-          (ok ? "정답" : "오답") +
-          "</span> " +
-          (ok ? "" : "<b>정답: " + escapeHtml(String(ans)) + "</b> ") +
-          escapeHtml(it.why || "");
-        saved[i] = { ok: ok, chosen: chosenText };
-        updateScore();
+        why.innerHTML = "";
+        if (mode === "pre") {
+          why.appendChild(h("span", "qw-badge", ok ? "정답" : "오답"));
+          if (!ok) why.appendChild(h("b", "", " 정답: " + ans));
+          why.appendChild(h("span", "qw-later", " · 이유는 학습 뒤 사후 테스트에서"));
+          saved[k] = { ok: ok, chosen: chosenText };
+          updateScore(animate);
+          typeset(why);
+          return;
+        }
+        var isRetry;
+        if (saved[k]) {
+          isRetry = !!saved[k].retry;
+          // 이 기능 전에 푼 기록은 첫 시도로 옮겨 둔다
+          if (mode === "" && !isRetry && !firsts[k]) {
+            firsts[k] = { ok: saved[k].ok, at: "earlier" };
+            store(firstKey, JSON.stringify(firsts));
+          }
+        } else if (mode === "") {
+          isRetry = !!firsts[k];
+          if (!firsts[k]) {
+            firsts[k] = { ok: ok, at: new Date().toISOString() };
+            store(firstKey, JSON.stringify(firsts));
+          }
+        } else isRetry = mode === "post";
+        why.appendChild(h("span", "qw-badge", ok ? "정답" : "오답"));
+        if (isRetry) why.appendChild(h("span", "qw-retry", mode === "post" ? "사전에 정답을 본 뒤 재응답" : "정답 본 뒤 재응답 · 첫 시도: " + (firsts[k] && firsts[k].ok ? "정답" : "오답")));
+        if (!ok) why.appendChild(h("b", "", " 정답: " + ans + " "));
+        why.appendChild(h("span", "", " " + (it.why || "")));
+        if (!ok) {
+          var row = h("div", "qw-actions");
+          if (it.ref && document.querySelector(it.ref)) {
+            var a = h("a", "", "↑ 해당 부분 다시 읽기");
+            a.href = it.ref;
+            row.appendChild(a);
+          }
+          row.appendChild(
+            button("이 문제 다시 풀기", "ghost", function () {
+              delete saved[k];
+              store(key, JSON.stringify(saved));
+              renderQuiz(box);
+            })
+          );
+          why.appendChild(row);
+        }
+        saved[k] = { ok: ok, chosen: chosenText, retry: isRetry };
+        updateScore(animate);
+        typeset(why);
       }
       if (it.type === "ox" || it.type === "mc") {
         var opts = it.type === "ox" ? ["O  참", "X  거짓"] : it.options;
         var correct = it.type === "ox" ? (it.a ? 0 : 1) : it.a;
         var row = h("div", "qopts" + (it.type === "ox" ? " ox" : ""));
-        opts.forEach(function (o, k) {
+        opts.forEach(function (o, j) {
           var b = button("", "qopt", function () {
             if (qi.classList.contains("answered")) return;
-            row.querySelectorAll(".qopt").forEach(function (x, j) {
-              if (j === correct) x.classList.add("right");
-              else if (j === k) x.classList.add("wrong");
+            row.querySelectorAll(".qopt").forEach(function (x, m) {
+              if (m === correct) x.classList.add("right");
+              else if (m === j) x.classList.add("wrong");
             });
-            reveal(k === correct, o, true);
+            reveal(j === correct, o, true);
           });
-          if (it.type === "mc") b.appendChild(h("span", "qletter", LETTERS[k]));
+          if (it.type === "mc") b.appendChild(h("span", "qletter", LETTERS[j]));
           b.appendChild(h("span", "qlabel", o));
           row.appendChild(b);
         });
         qi.appendChild(row);
-        if (saved[i]) {
-          row.querySelectorAll(".qopt").forEach(function (x, j) {
-            if (j === correct) x.classList.add("right");
-            else if (opts[j] === saved[i].chosen) x.classList.add("wrong");
+        if (saved[k]) {
+          row.querySelectorAll(".qopt").forEach(function (x, m) {
+            if (m === correct) x.classList.add("right");
+            else if (opts[m] === saved[k].chosen) x.classList.add("wrong");
           });
-          reveal(saved[i].ok, saved[i].chosen, false);
+          reveal(saved[k].ok, saved[k].chosen, false);
         }
       } else {
         var row2 = h("div", "qshort");
@@ -1095,12 +1551,13 @@
         inp.type = "text";
         inp.placeholder = "답을 쓰고 Enter";
         inp.autocomplete = "off";
+        inp.setAttribute("aria-label", "Q" + (i + 1) + " 답");
         var check = button("확인", "primary", function () {
           if (qi.classList.contains("answered")) return;
           var v = norm(inp.value);
           if (!v) return;
-          var ok = it.a.some(function (a) {
-            return norm(a) === v;
+          var ok = it.a.some(function (x) {
+            return norm(x) === v;
           });
           inp.disabled = true;
           reveal(ok, inp.value, true);
@@ -1111,44 +1568,80 @@
         row2.appendChild(inp);
         row2.appendChild(check);
         qi.appendChild(row2);
-        if (saved[i]) {
-          inp.value = saved[i].chosen || "";
+        if (saved[k]) {
+          inp.value = saved[k].chosen || "";
           inp.disabled = true;
-          reveal(saved[i].ok, saved[i].chosen, false);
+          reveal(saved[k].ok, saved[k].chosen, false);
         }
       }
       qi.appendChild(why);
       body.appendChild(qi);
     });
+    if (mode === "pre" && set.challenge) {
+      var ch = h("div", "quiz-challenge");
+      ch.appendChild(h("div", "qc-title", "먼저 만들어 보기 (약 10분, 정답 없음)"));
+      ch.appendChild(h("div", "qc-text", set.challenge));
+      ch.appendChild(h("div", "qc-hint", "아래 '먼저 만들어 보기' 칸이나 공책에 해 보세요. 그림·숫자·화살표 무엇이든 좋습니다. 공부한 뒤 다시 보면 무엇이 달라졌는지 보입니다."));
+      box.appendChild(ch);
+    }
     var foot = h("div", "quiz-foot");
-    foot.appendChild(h("span", "", kind === "check" ? "이해를 점검하는 가벼운 문제예요. 틀려도 괜찮습니다." : "틀린 문제는 그 장의 요점으로 돌아가 확인하세요. 결과는 이 브라우저에만 남습니다."));
     foot.appendChild(
-      button("다시 풀기", "ghost", function () {
-        store(key, null);
-        box.innerHTML = "";
-        renderQuiz(box);
-      })
+      h(
+        "span",
+        "",
+        mode === "pre"
+          ? "모르는 게 당연합니다. 찍어도 됩니다. 먼저 답해 본 문제는 읽을 때 더 잘 눈에 들어옵니다."
+          : mode === "post"
+          ? "사전 테스트와 같은 문제를 이유와 함께 다시 풉니다(선택). 결과는 이 브라우저에 남습니다."
+          : kind === "check"
+          ? "이해 점검: 처음 고른 답이 따로 기록됩니다. 결과는 이 브라우저에만 남습니다."
+          : "결과는 이 브라우저에만 남고, 학습 완료와는 관계없어요."
+      )
     );
+    if (mode !== "pre")
+      foot.appendChild(
+        button("모두 다시 풀기", "ghost", function () {
+          store(key, null);
+          renderQuiz(box);
+        })
+      );
     box.appendChild(foot);
-    updateScore();
+    updateScore(false);
+    typeset(box);
   }
-
-  // ---------- 질문 패널: 읽다가 바로 적고, 지난 질문을 보고, 답 받는 법을 안내한다 ----------
-  function parseQuestions(md) {
-    // "### 질문 · 10/23 19:55" 단위로 나눈다
+  // ---------- 질문 패널: 비동기 기록 도구 (기록 → Claude Code에 요청 → 답이 이 페이지에 붙음) ----------
+  function newQid() {
+    return "q-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+  }
+  function parseEntries(md, kindFilter) {
+    // "### 질문 · 10/23 20:58 · id:q-xxx" 또는 옛 형식 "### 질문 · 10/23 20:58"
     var out = [];
-    var parts = (md || "").split(/\n(?=### )/);
-    parts.forEach(function (p) {
-      var m = p.match(/^### (질문|요청)[^\n]*·\s*([^\n]+)\n([\s\S]*)$/);
+    (md || "").split(/\n(?=### )/).forEach(function (p) {
+      var m = p.match(/^### ([^\n]*)\n?([\s\S]*)$/);
       if (!m) return;
-      var body = m[3].trim();
-      var quote = "";
-      var qm = body.match(/^> ([^\n]+)\n\n?/);
-      if (qm) {
-        quote = qm[1];
-        body = body.slice(qm[0].length).trim();
-      }
-      out.push({ kind: m[1], when: m[2].trim(), quote: quote, text: body });
+      var head = m[1].split(/\s+·\s+/);
+      var kind = head[0].trim();
+      if (kind !== "질문" && kind !== "요청") return;
+      var id = "",
+        when = "",
+        day = "";
+      head.slice(1).forEach(function (x) {
+        x = x.trim();
+        if (/^id:/.test(x)) id = x.slice(3);
+        else if (/^\d+\/\d+ \d\d:\d\d$/.test(x)) when = x;
+        else if (/^D\d+$/.test(x)) day = x;
+      });
+      if (kindFilter && day && day !== kindFilter) return;
+      var lines = m[2].trim().split("\n");
+      var where = "",
+        quote = [],
+        text = [];
+      lines.forEach(function (l) {
+        if (/^\*위치:/.test(l)) where = l.replace(/^\*위치:\s*/, "").replace(/\*$/, "");
+        else if (/^> /.test(l)) quote.push(l.slice(2));
+        else text.push(l);
+      });
+      out.push({ kind: kind, id: id, when: when, where: where, quote: quote.join(" "), text: text.join("\n").trim() });
     });
     return out;
   }
@@ -1158,36 +1651,38 @@
     var did = steps.dataset.day;
     var dn = parseInt(did.slice(1), 10);
     var qname = did + "-questions";
+    var draftKey = "study-askdraft:" + did;
 
     var fab = h("button", "");
     fab.id = "ask-fab";
     fab.type = "button";
-    fab.innerHTML = "<span class='fab-icon'>?</span> Claude에게 질문";
+    fab.setAttribute("aria-haspopup", "dialog");
+    fab.innerHTML = "<span class='fab-icon' aria-hidden='true'>?</span> Claude에게 질문";
     var panel = h("div");
     panel.id = "ask-panel";
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-label", "Claude에게 질문 남기기");
 
-    // 탭: 새 질문 / 지난 질문
     var tabs = h("div", "ap-tabs");
     var tabNew = button("새 질문", "ap-tab on", function () {
       show("new");
     });
-    var tabList = button("지난 질문", "ap-tab", function () {
+    var tabList = button("지난 질문·요청", "ap-tab", function () {
       show("list");
     });
     tabs.appendChild(tabNew);
     tabs.appendChild(tabList);
-    tabs.appendChild(
-      button("닫기", "ghost ap-close", function () {
-        panel.classList.remove("show");
-      })
-    );
+    tabs.appendChild(button("닫기", "ghost ap-close", close));
     panel.appendChild(tabs);
 
-    // 새 질문
     var viewNew = h("div", "ap-view");
     var quote = h("div", "ap-quote");
     viewNew.appendChild(quote);
+    var lab = h("label", "ap-label", "질문 또는 수정 요청");
+    lab.setAttribute("for", "ap-text");
+    viewNew.appendChild(lab);
     var ta = h("textarea");
+    ta.id = "ap-text";
     ta.placeholder = "본문을 드래그해 두고 버튼을 누르면 그 부분이 인용됩니다. 막힌 곳, 모르는 용어, 또는 고치고 싶은 점을 쓰세요.";
     viewNew.appendChild(ta);
     var kind = h("div", "ap-kind");
@@ -1196,31 +1691,29 @@
       '<label><input type="radio" name="ap-kind" value="r"> 디자인·내용 수정 요청</label>';
     viewNew.appendChild(kind);
     var foot = h("div", "ap-foot");
-    foot.appendChild(button("저장", "primary", save));
+    var saveBtn = button("저장", "primary", save);
+    foot.appendChild(h("span", "ap-hint", "쓰는 동안 임시 글이 이 브라우저에 남아요."));
+    foot.appendChild(saveBtn);
     viewNew.appendChild(foot);
     panel.appendChild(viewNew);
 
-    // 지난 질문
     var viewList = h("div", "ap-view");
     viewList.style.display = "none";
     var list = h("div", "ap-list");
     viewList.appendChild(list);
-    var goto = h("a", "ap-goto", "이 페이지 아래 '질문' 칸과 Claude의 답 보기 ↓");
+    var goto = h("a", "ap-goto", "이 페이지 아래 '질문'과 '답변' 칸으로 ↓");
     goto.href = "#questions";
-    goto.addEventListener("click", function () {
-      panel.classList.remove("show");
-    });
+    goto.addEventListener("click", close);
     viewList.appendChild(goto);
     panel.appendChild(viewList);
 
-    // 답 받는 법
     var how = h("div", "ap-how");
     how.innerHTML =
-      "<b>답을 받는 법</b><ol><li>저장하면 <code>answers/" +
+      "<b>이건 실시간 채팅이 아니라 기록 도구예요.</b><ol><li>저장하면 <code>answers/" +
       qname +
-      ".md</code>에 쌓입니다.</li><li>Claude Code 채팅에서 <b>\"D" +
+      ".md</code>(요청은 <code>requests.md</code>)에 ID와 함께 쌓입니다.</li><li>Claude Code 채팅에서 <b>\"D" +
       dn +
-      " 질문 답해줘\"</b>라고 말합니다. (수정 요청은 \"요청 반영해줘\")</li><li>답은 이 페이지 맨 아래 '질문' 칸 밑에 질문과 함께 나타납니다.</li></ol>" +
+      " 질문 답해줘\"</b>(요청은 \"요청 반영해줘\")라고 말합니다.</li><li>답은 이 페이지의 '답변' 칸에 같은 ID로 붙고, 그 뒤 '답변 있음'으로 바뀝니다.</li></ol>" +
       "<button type='button' class='sbtn tagbtn' data-copy='D" + dn + " 질문 답해줘'>\"D" + dn + " 질문 답해줘\" 복사</button>";
     panel.appendChild(how);
     how.querySelector("[data-copy]").addEventListener("click", function (e) {
@@ -1233,6 +1726,24 @@
       }
     });
 
+    function readDraft() {
+      try {
+        return JSON.parse(recall(draftKey) || "null");
+      } catch (e) {
+        return null;
+      }
+    }
+    function writeDraft() {
+      var k = panel.querySelector('input[name="ap-kind"]:checked').value;
+      if (ta.value.trim()) store(draftKey, JSON.stringify({ text: ta.value, kind: k, sel: panel._sel || "", ch: panel._ch || "" }));
+      else store(draftKey, null);
+    }
+    var dt = null;
+    ta.addEventListener("input", function () {
+      clearTimeout(dt);
+      dt = setTimeout(writeDraft, 300);
+    });
+
     function show(which) {
       viewNew.style.display = which === "new" ? "" : "none";
       viewList.style.display = which === "list" ? "" : "none";
@@ -1242,112 +1753,184 @@
     }
     function refreshList() {
       list.innerHTML = "";
-      loadContent(qname).then(function (d) {
-        var qs = parseQuestions(d && d.content);
-        var qaSec = document.querySelector(".qa-block");
-        var answeredStamps = qaSec ? qaSec.innerText : "";
+      list.appendChild(h("div", "ap-empty", "불러오는 중…"));
+      Promise.all([loadContent(qname), loadContent("requests")]).then(function (r) {
+        var qs = parseEntries(r[0] && r[0].content).concat(parseEntries(r[1] && r[1].content, "D" + dn).filter(function (e) {
+          return e.kind === "요청";
+        }));
+        var qa = document.querySelector(".qa-block");
+        var qaText = qa && !qa.classList.contains("pending-box") ? qa.textContent : "";
+        list.innerHTML = "";
         if (!qs.length) {
-          list.appendChild(h("div", "ap-empty", "아직 저장한 질문이 없어요."));
+          list.appendChild(h("div", "ap-empty", "아직 저장한 질문이나 요청이 없어요."));
           return;
         }
         qs.reverse().forEach(function (q) {
           var it = h("div", "ap-item");
           var top = h("div", "ap-item-top");
-          top.appendChild(h("span", "ap-when", q.when));
-          var answered = answeredStamps.indexOf(q.when) >= 0;
-          top.appendChild(h("span", "ap-state " + (answered ? "done" : "wait"), answered ? "답변 있음" : "답변 대기"));
+          top.appendChild(h("span", "ap-when", q.kind + " · " + q.when + (q.where ? " · " + q.where : "")));
+          var answered = q.kind === "질문" && qaText && (q.id ? qaText.indexOf(q.id) >= 0 : qaText.indexOf(q.when) >= 0);
+          var state = q.kind === "요청" ? "요청 기록됨" : answered ? "답변 있음" : "답변 대기";
+          top.appendChild(h("span", "ap-state " + (answered ? "done" : "wait"), state));
           it.appendChild(top);
           if (q.quote) it.appendChild(h("div", "ap-item-quote", "“" + q.quote.slice(0, 80) + (q.quote.length > 80 ? "…" : "") + "”"));
           it.appendChild(h("div", "ap-item-text", q.text.slice(0, 160) + (q.text.length > 160 ? "…" : "")));
+          if (answered && q.id) {
+            var a = h("a", "ap-goto", "답 보기 ↓");
+            a.href = "#a-" + q.id;
+            a.addEventListener("click", close);
+            it.appendChild(a);
+          }
           list.appendChild(it);
         });
       });
     }
-    function openPanel() {
-      panel.classList.toggle("show");
-      if (!panel.classList.contains("show")) return;
+    function open() {
+      panel.classList.add("show");
       var sel = String(window.getSelection && window.getSelection()).trim();
-      quote.textContent = sel ? "인용: " + sel.slice(0, 400) : "";
-      quote.style.display = sel ? "" : "none";
-      panel._sel = sel;
+      var d = readDraft();
+      if (sel) {
+        panel._sel = sel;
+        panel._ch = CUR_CH;
+      } else if (d && d.sel) {
+        panel._sel = d.sel;
+        panel._ch = d.ch;
+      } else {
+        panel._sel = "";
+        panel._ch = CUR_CH;
+      }
+      if (d && d.text && !ta.value) {
+        ta.value = d.text;
+        var r = panel.querySelector('input[name="ap-kind"][value="' + d.kind + '"]');
+        if (r) r.checked = true;
+      }
+      quote.textContent = panel._sel ? "인용: " + panel._sel.slice(0, 400) : "";
+      quote.style.display = panel._sel ? "" : "none";
       show("new");
       ta.focus();
     }
+    function close() {
+      panel.classList.remove("show");
+      fab.focus();
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && panel.classList.contains("show")) close();
+    });
     function save() {
       var text = ta.value.trim();
       if (!text) {
         ta.focus();
         return;
       }
+      if (saveBtn.disabled) return; // 저장 중 중복 클릭 방지
       var isReq = panel.querySelector('input[name="ap-kind"]:checked').value === "r";
       var name = isReq ? "requests" : qname;
-      var stamp = fmtTime(new Date().toISOString());
+      var id = newQid();
+      var chEl = panel._ch && document.getElementById(panel._ch);
+      var where = "D" + dn + (chEl ? " · " + chTitle(chEl) + " (#" + panel._ch + ")" : "");
       var entry =
-        "\n\n### " +
+        "### " +
         (isReq ? "요청" : "질문") +
         " · " +
         (isReq ? "D" + dn + " · " : "") +
-        stamp +
-        "\n" +
-        (panel._sel ? "> " + panel._sel.replace(/\n+/g, " ").slice(0, 600) + "\n\n" : "") +
+        fmtTime(new Date().toISOString()) +
+        " · id:" +
+        id +
+        "\n*위치: " +
+        where +
+        "*\n" +
+        (panel._sel ? "> " + panel._sel.replace(/\n+/g, " ").slice(0, 600) + "\n\n" : "\n") +
         text +
         "\n";
-      loadContent(name)
-        .then(function (d) {
-          var content = ((d && d.content) || "").replace(/\s+$/, "") + entry;
-          return api("answers/" + name, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ content: content }),
-          }).then(function () {
-            return content;
-          });
-        })
-        .then(function (content) {
-          ta.value = "";
-          panel._sel = "";
-          quote.style.display = "none";
+      var sent = ta.value;
+      saveBtn.disabled = true;
+      saveBtn.textContent = "저장 중…";
+      api("append/" + name, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ entry: entry }),
+      })
+        .then(function (j) {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "저장";
+          // 저장하는 동안 더 쓴 내용은 남긴다
+          if (ta.value === sent) {
+            ta.value = "";
+            store(draftKey, null);
+            panel._sel = "";
+            quote.style.display = "none";
+          } else writeDraft();
           toast(
-            isReq
-              ? "요청을 저장했어요. Claude Code에서 \"요청 반영해줘\"라고 말하면 처리합니다."
-              : "질문을 저장했어요. Claude Code에서 \"D" + dn + " 질문 답해줘\"라고 말하면 답이 이 페이지 아래에 붙습니다.",
+            (isReq ? "요청을 저장했어요 (" : "질문을 저장했어요 (") + id + "). Claude Code에서 \"" + (isReq ? "요청 반영해줘" : "D" + dn + " 질문 답해줘") + "\"라고 말하면 처리합니다." + (j.history_error ? " 수정 이력(git) 기록은 실패했어요." : ""),
             true
           );
           var ed = EDITORS[name];
-          if (ed) {
-            ed.content = content;
-            ed.updated = new Date().toISOString();
-            FILES[name] = ed.updated;
+          if (ed && !(ed._ta && document.body.contains(ed._ta))) {
+            ed.content = j.content;
+            ed.updated = j.updated;
+            ed.rev = j.rev;
+            FILES[name] = j.updated;
             ed.renderView();
           }
           show("list");
         })
         .catch(function (err) {
-          toast("저장하지 못했어요: " + err.message, true);
+          saveBtn.disabled = false;
+          saveBtn.textContent = "저장";
+          writeDraft();
+          toast("저장하지 못했어요: " + err.message + " 쓴 글은 그대로 있어요.", true);
         });
     }
-    fab.addEventListener("click", openPanel);
+    fab.addEventListener("click", function () {
+      if (panel.classList.contains("show")) close();
+      else open();
+    });
     document.body.appendChild(fab);
     document.body.appendChild(panel);
   }
-
-  // ---------- 근거 표기를 참고문헌 페이지로 연결 ----------
+  // ---------- 근거 표기를 참고문헌의 해당 항목으로 연결 ----------
   function setupSrcLinks() {
-    document.querySelectorAll("span.src").forEach(function (sp) {
-      if (sp.closest("a")) return;
-      var a = h("a", "src-link");
-      a.href = OFFSET + "ledger/references.html";
-      a.title = "참고문헌 페이지에서 서지·DOI 보기";
-      sp.parentNode.insertBefore(a, sp);
-      a.appendChild(sp);
+    var spans = document.querySelectorAll("span.src");
+    if (!spans.length) return;
+    fetchJson(OFFSET + "assets/papers-index.json").then(function (idx) {
+      var papers = (idx && idx.papers) || [];
+      papers.sort(function (a, b) {
+        return b.cite.length - a.cite.length;
+      });
+      spans.forEach(function (sp) {
+        if (sp.closest("a")) return;
+        var t = sp.textContent.replace(/\s+/g, " ").trim();
+        var hit = null;
+        for (var i = 0; i < papers.length; i++) {
+          var c = papers[i].cite;
+          var base = c.replace(/\s*\(.*\)$/, "");
+          if (t.indexOf(c) === 0 || (t.indexOf(base) === 0 && !/\(/.test(c))) {
+            hit = papers[i];
+            break;
+          }
+        }
+        if (!hit) {
+          for (var j = 0; j < papers.length; j++) {
+            var b2 = papers[j].cite.replace(/\s*\(.*\)$/, "");
+            if (t.indexOf(b2) === 0) {
+              hit = papers[j];
+              break;
+            }
+          }
+        }
+        var a = h("a", "src-link");
+        a.href = OFFSET + "ledger/references.html" + (hit ? "#ref-" + hit.id : "");
+        a.title = hit ? hit.bib : "참고문헌 페이지";
+        sp.parentNode.insertBefore(a, sp);
+        a.appendChild(sp);
+      });
     });
   }
-
   // ---------- 공개 사이트에서 빠진 원문 그림 자리 ----------
   function setupPaperFigs() {
     document.querySelectorAll("figure.fig.paper img").forEach(function (img) {
       function gone() {
-        var ph = h("div", "paper-missing", "원문 그림은 저작권 때문에 공개 사이트에서 빠집니다. 캡션의 저널 링크에서 원문을 볼 수 있습니다.");
+        var ph = h("div", "paper-missing", "그림 파일을 불러오지 못했어요 (" + img.getAttribute("src") + "). 로컬이면 assets/img/papers 폴더와 서버를, 공개 사이트면 tools/publish.json의 paper_figs 설정을 확인하세요. 캡션의 DOI 링크에서 원문을 볼 수 있습니다.");
         img.replaceWith(ph);
       }
       if (img.complete && img.naturalWidth === 0) gone();
@@ -1355,13 +1938,1187 @@
     });
   }
 
+  // ---------- 기초 설명으로 갔다가 읽던 곳으로 돌아오기 ----------
+  function setupRecall() {
+    var lb = document.querySelector(".lesson-body");
+    if (!lb) return;
+    var back = h("button", "", "← 읽던 곳으로 돌아가기");
+    back.id = "back-btn";
+    back.type = "button";
+    back.style.display = "none";
+    var savedY = null;
+    back.addEventListener("click", function () {
+      if (savedY !== null) window.scrollTo({ top: savedY, behavior: "smooth" });
+      back.style.display = "none";
+      savedY = null;
+    });
+    document.body.appendChild(back);
+    lb.addEventListener("click", function (e) {
+      var a = e.target.closest("a");
+      if (!a) return;
+      // Quarto가 href를 절대 주소로 바꿔 두므로 hash 속성으로 읽는다
+      var id = a.hash ? decodeURIComponent(a.hash.slice(1)) : "";
+      if (!id || a.pathname !== location.pathname) return;
+      if (!(a.classList.contains("recall") || /^b-/.test(id))) return;
+      var target = document.getElementById(id);
+      if (!target) return;
+      savedY = window.scrollY;
+      back.style.display = "";
+      target.classList.add("flash");
+      setTimeout(function () {
+        target.classList.remove("flash");
+      }, 1600);
+    });
+    document.querySelectorAll(".basics[id]").forEach(function (b) {
+      var lab = h("div", "b-label", "기초 계단");
+      b.insertBefore(lab, b.firstChild);
+    });
+  }
+
+  // ---------- 단계별 보기 (계산 따라가기, 장치 동작 순서) ----------
+  function setupSteppers() {
+    document.querySelectorAll(".stepper").forEach(function (st) {
+      var steps = Array.prototype.slice.call(st.querySelectorAll(":scope > .step"));
+      if (steps.length < 2) return;
+      var cur = 0;
+      var bar = h("div", "step-bar");
+      var cnt = h("span", "step-count");
+      var next = button("다음 단계 →", "primary", function () {
+        if (cur < steps.length - 1) {
+          cur++;
+          show();
+          steps[cur].scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+      });
+      var reset = button("처음부터", "ghost", function () {
+        cur = 0;
+        show();
+      });
+      bar.appendChild(cnt);
+      bar.appendChild(next);
+      bar.appendChild(reset);
+      st.appendChild(bar);
+      function show() {
+        steps.forEach(function (s, i) {
+          s.style.display = i <= cur ? "" : "none";
+          s.classList.toggle("step-cur", i === cur);
+        });
+        cnt.textContent = "단계 " + (cur + 1) + " / " + steps.length;
+        next.disabled = cur >= steps.length - 1;
+        next.textContent = cur >= steps.length - 1 ? "끝" : "다음 단계 →";
+      }
+      show();
+    });
+  }
+
+  // ---------- 백지 회상: 자료를 가리고 쓰고, 오늘의 핵심 목록과 대조한다 ----------
+  function keypointsFrom(root) {
+    // 장(학습 구간)별 요점 목록: [{ch, title, items:[...]}]
+    var out = [];
+    root.querySelectorAll(".keypoints").forEach(function (kp) {
+      var sec = kp.closest("section[id^='ch-']");
+      var h3 = sec && sec.querySelector("h3");
+      var lis = Array.prototype.slice.call(kp.querySelectorAll("li")).map(function (li) {
+        return li.textContent.replace(/\s+/g, " ").trim();
+      });
+      if (lis.length) out.push({ ch: sec ? sec.id : "", title: h3 ? chTitle(h3) : "", items: lis });
+    });
+    return out;
+  }
+  function renderRecallCheck(box, groups, pageHref, round) {
+    var did = box.dataset.day;
+    var key = "study-recallcheck:" + did + ":" + round;
+    var got = {};
+    try {
+      got = JSON.parse(recall(key) || "{}");
+    } catch (e) {}
+    box.innerHTML = "";
+    if (!groups.length) {
+      box.appendChild(h("div", "rc-empty", "이 날의 핵심 목록이 아직 없어요."));
+      return;
+    }
+    var total = 0;
+    groups.forEach(function (g) {
+      total += g.items.length;
+    });
+    box.appendChild(h("div", "rc-head", "내가 쓴 것과 대조하기 — 적은 항목에 체크하세요(뜻이 맞으면 표현은 달라도 됩니다)"));
+    var score = h("div", "rc-score");
+    box.appendChild(score);
+    function update(fresh) {
+      var hit = 0;
+      Object.keys(got).forEach(function (k) {
+        if (got[k]) hit++;
+      });
+      score.textContent = "적은 것 " + hit + " / " + total + (hit < total ? " · 못 적은 것이 다음에 다시 볼 곳입니다" : " · 전부 떠올렸어요");
+      store(key, JSON.stringify(got));
+      if (fresh && LOCAL) {
+        var patch = {};
+        patch[round === 2 ? "recall2" : "recall"] = { hit: hit, total: total };
+        setDayStatus(did, patch).catch(function () {});
+      }
+    }
+    groups.forEach(function (g, gi) {
+      var gb = h("div", "rc-group");
+      var t = h("a", "rc-ch", g.title || "핵심");
+      t.href = (pageHref || "") + "#" + g.ch;
+      gb.appendChild(t);
+      g.items.forEach(function (txt, i) {
+        var id = gi + "-" + i;
+        var lab = h("label", "rc-item");
+        var cb = h("input");
+        cb.type = "checkbox";
+        cb.checked = !!got[id];
+        cb.addEventListener("change", function () {
+          got[id] = cb.checked;
+          lab.classList.toggle("hit", cb.checked);
+          update(true);
+        });
+        lab.classList.toggle("hit", cb.checked);
+        lab.appendChild(cb);
+        lab.appendChild(h("span", "", txt));
+        gb.appendChild(lab);
+      });
+      box.appendChild(gb);
+    });
+    update(false);
+    typeset(box);
+  }
+  function setupBlankRecall() {
+    document.querySelectorAll(".recall-tools[data-day]").forEach(function (tools) {
+      var did = tools.dataset.day;
+      var round = tools.dataset.round === "2" ? 2 : 1;
+      var src = tools.dataset.src || "";
+      var checkBox = document.querySelector('.recall-check[data-day="' + did + '"][data-round="' + round + '"]');
+      var hideBtn = button("자료 가리고 쓰기", "primary", function () {
+        var on = !document.body.classList.contains("recall-hide");
+        document.body.classList.toggle("recall-hide", on);
+        hideBtn.textContent = on ? "자료 다시 보이기" : "자료 가리고 쓰기";
+        if (on) {
+          var ed = EDITORS[did + (round === 2 ? "-recall2" : "-recall")];
+          if (ed && !(ed._ta && document.body.contains(ed._ta))) ed.startEdit();
+        }
+      });
+      var checkBtn = button("빠진 것 확인", "", function () {
+        document.body.classList.remove("recall-hide");
+        hideBtn.textContent = "자료 가리고 쓰기";
+        if (!checkBox) return;
+        checkBox.style.display = "";
+        if (src) {
+          checkBox.textContent = "핵심 목록을 불러오는 중…";
+          fetch(src, { cache: "no-store" })
+            .then(function (r) {
+              return r.text();
+            })
+            .then(function (t) {
+              var doc = new DOMParser().parseFromString(t, "text/html");
+              renderRecallCheck(checkBox, keypointsFrom(doc), src, round);
+            })
+            .catch(function () {
+              checkBox.textContent = "핵심 목록을 불러오지 못했어요.";
+            });
+        } else {
+          var lb = document.querySelector(".lesson-body");
+          renderRecallCheck(checkBox, lb ? keypointsFrom(lb) : [], "", round);
+        }
+        if (!tools._auto) checkBox.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      if (round === 1) tools.appendChild(hideBtn);
+      tools.appendChild(checkBtn);
+      if (checkBox) {
+        var done = recall("study-recallcheck:" + did + ":" + round);
+        checkBox.style.display = done ? "" : "none";
+        if (done) {
+          tools._auto = true;
+          checkBtn.click();
+          tools._auto = false;
+        }
+      }
+    });
+  }
+
+  // ---------- 조작 실습(lab): 여러 날이 다시 쓰는 작은 부품 ----------
+  // <div class="lab" data-lab="이름"> 안에 정적 예제(.lab-static)를 두면, 스크립트가 성공했을 때만 실습으로 바꾼다.
+  // 기록은 이 브라우저(localStorage)에만 남는다: 예측·첫 시도·힌트 사용·마지막 답을 따로 적는다.
+  var LABS = {};
+  function labGet(key) {
+    try {
+      return JSON.parse(recall("study-lab:" + key) || "null");
+    } catch (e) {
+      return null;
+    }
+  }
+  function labPut(key, val) {
+    store("study-lab:" + key, val == null ? null : JSON.stringify(val));
+  }
+  function fmtNum(v) {
+    return Number(v).toLocaleString("ko-KR", { maximumFractionDigits: 3 }).replace(/^-/, "−");
+  }
+  // 단계형 슬라이더: 키보드 ←/→로 한 칸씩, 값은 글자로도 읽어 준다.
+  function labSlider(o) {
+    var wrap = h("div", "lab-ctl");
+    var lab = h("label", "lab-ctl-label", o.label);
+    lab.setAttribute("for", o.id);
+    var inp = h("input");
+    inp.type = "range";
+    inp.id = o.id;
+    inp.min = 0;
+    inp.max = o.values.length - 1;
+    inp.step = 1;
+    inp.value = o.index;
+    var out = h("output", "lab-ctl-value");
+    out.setAttribute("for", o.id);
+    function sync() {
+      var v = o.values[+inp.value];
+      out.textContent = o.fmt(v);
+      inp.setAttribute("aria-valuetext", o.fmt(v));
+    }
+    inp.addEventListener("input", function () {
+      sync();
+      o.onInput(+inp.value);
+    });
+    sync();
+    var row = h("div", "lab-ctl-row");
+    row.appendChild(inp);
+    row.appendChild(out);
+    wrap.appendChild(lab);
+    if (o.help) wrap.appendChild(h("div", "lab-ctl-help", o.help));
+    wrap.appendChild(row);
+    wrap.setIndex = function (i) {
+      inp.value = i;
+      sync();
+    };
+    return wrap;
+  }
+  // 선택형 점검: "모르겠음"도 답으로 받고, 첫 시도·힌트·재시도를 구분해 적는다.
+  function labCheck(o) {
+    var box = h("div", "lab-q");
+    box.appendChild(h("div", "lab-q-text", o.question));
+    var row = h("div", "lab-q-opts");
+    row.setAttribute("role", "group");
+    row.setAttribute("aria-label", o.question);
+    var res = h("div", "lab-q-res");
+    res.setAttribute("aria-live", "polite");
+    var rec = labGet(o.key) || {};
+    var hint = null,
+      hintBtn = null;
+    function show(choice) {
+      row.querySelectorAll("button").forEach(function (b, j) {
+        b.disabled = true;
+        b.classList.toggle("right", j === o.correct);
+        b.classList.toggle("wrong", j === choice && j !== o.correct && o.options[j] !== "모르겠음");
+        b.setAttribute("aria-pressed", j === choice ? "true" : "false");
+      });
+      res.innerHTML = "";
+      var unsure = o.options[choice] === "모르겠음";
+      res.appendChild(h("b", "", unsure ? "괜찮아요. 모르는 데서 출발합니다. " : choice === o.correct ? "맞아요. " : "다른 답이 나왔어요. "));
+      var ex = h("span");
+      ex.innerHTML = choice === o.correct ? o.explain : (o.why && o.why[choice]) || o.explain;
+      res.appendChild(ex);
+      if (rec.first) {
+        var log = "첫 시도: " + o.options[rec.first.choice] + (rec.first.hint ? " (힌트 본 뒤)" : "") + (rec.tries > 1 ? " · 정답 공개 뒤 다시 고른 횟수 " + (rec.tries - 1) : "");
+        res.appendChild(h("div", "lab-q-log", log));
+      }
+      typeset(res);
+    }
+    o.options.forEach(function (label, j) {
+      row.appendChild(
+        button(label, "lab-opt", function () {
+          rec.tries = (rec.tries || 0) + 1;
+          if (!rec.first) rec.first = { choice: j, hint: !!rec.hint, at: new Date().toISOString() };
+          rec.last = { choice: j, at: new Date().toISOString() };
+          labPut(o.key, rec);
+          show(j);
+        })
+      );
+    });
+    box.appendChild(row);
+    if (o.hint) {
+      hint = h("div", "lab-hint");
+      hint.innerHTML = o.hint;
+      hint.style.display = rec.hint ? "" : "none";
+      hintBtn = button("힌트 보기", "ghost lab-small", function () {
+        rec.hint = true;
+        labPut(o.key, rec);
+        hint.style.display = "";
+        hintBtn.disabled = true;
+        typeset(hint);
+      });
+      if (rec.hint) hintBtn.disabled = true;
+      box.appendChild(hintBtn);
+      box.appendChild(hint);
+    }
+    box.appendChild(res);
+    box.appendChild(
+      button("다시 풀기", "ghost lab-small", function () {
+        rec.last = null;
+        labPut(o.key, rec);
+        row.querySelectorAll("button").forEach(function (b) {
+          b.disabled = false;
+          b.classList.remove("right", "wrong");
+          b.removeAttribute("aria-pressed");
+        });
+        res.innerHTML = "";
+      })
+    );
+    if (rec.last) show(rec.last.choice);
+    return box;
+  }
+  function setupLabs() {
+    document.querySelectorAll(".lab[data-lab]").forEach(function (el) {
+      var fn = LABS[el.dataset.lab];
+      if (!fn) return;
+      try {
+        var mount = h("div", "lab-live");
+        fn(mount, el);
+        el.appendChild(mount);
+        el.classList.add("lab-ready");
+      } catch (err) {
+        el.classList.add("lab-failed");
+        if (window.console) console.error("lab", el.dataset.lab, err);
+      }
+    });
+  }
+
+  // D2 1-1구간: 계산은 빨라도 기다릴 수 있다 (교육용 모형. 가정은 본문의 '모형의 가정'에 적어 둠)
+  LABS.memwait = function (root, host) {
+    var N = 1000; // 해야 할 곱해서 더하기 수
+    var SPEED = [1, 2, 4, 8]; // 연산기 속도 배수: 계산 1번 = 1/배수 ns
+    var BW = [0.25, 0.5, 1, 2, 4]; // 1 ns에 옮기는 숫자 수
+    var REUSE = [1, 2, 4, 8]; // 가져온 숫자 하나를 쓰는 계산 수
+    var AXIS = 4000; // 막대 눈금 끝(ns): 가장 느린 경우 = 1,000 ÷ 0.25
+    var st = { s: 0, b: 0, r: 0 };
+    var prev = null; // 직전 결과: 무엇을 바꿨을 때 무엇이 변했는지 말해 주려고
+    var pred = labGet("d02-wait-predict");
+
+    function calc() {
+      var C = N / SPEED[st.s];
+      var F = N / REUSE[st.r];
+      var M = F / BW[st.b];
+      var T = Math.max(C, M);
+      return { C: C, F: F, M: M, T: T, wait: T - C };
+    }
+
+    // 1) 예측
+    var pbox = h("div", "lab-q lab-predict");
+    pbox.appendChild(h("div", "lab-step", "1 · 먼저 예상"));
+    pbox.appendChild(h("div", "lab-q-text", "처음 설정(연산기 1×, 전송 0.25개/ns, 재사용 1)에서 연산기만 2배 빠르게 바꾸면 전체 시간은 어떻게 될까요? 고르면 기록만 하고, 답은 직접 바꿔 보면서 확인합니다."));
+    var popts = ["거의 절반이 된다", "거의 그대로다", "더 길어진다", "모르겠음"];
+    var prow = h("div", "lab-q-opts");
+    prow.setAttribute("role", "group");
+    prow.setAttribute("aria-label", "먼저 예상");
+    var pmsg = h("div", "lab-q-res");
+    pmsg.setAttribute("aria-live", "polite");
+    popts.forEach(function (t, j) {
+      prow.appendChild(
+        button(t, "lab-opt", function () {
+          if (!pred) pred = { choice: j, at: new Date().toISOString() };
+          labPut("d02-wait-predict", pred);
+          markPred();
+        })
+      );
+    });
+    function markPred() {
+      prow.querySelectorAll("button").forEach(function (b, j) {
+        b.disabled = !!pred;
+        b.setAttribute("aria-pressed", pred && pred.choice === j ? "true" : "false");
+        b.classList.toggle("chosen", !!pred && pred.choice === j);
+      });
+      if (pred) pmsg.textContent = "예상을 기록했어요: '" + popts[pred.choice] + "'. 첫 예상은 바뀌지 않게 남겨 둡니다. 이제 아래에서 연산기 속도만 2×로 바꿔 보세요.";
+    }
+    pbox.appendChild(prow);
+    pbox.appendChild(pmsg);
+    root.appendChild(pbox);
+
+    // 2) 조작
+    root.appendChild(h("div", "lab-step", "2 · 하나씩 바꿔 보기"));
+    var ctls = h("div", "lab-ctls");
+    function onCtl(key) {
+      return function (i) {
+        st[key] = i;
+        draw(key);
+      };
+    }
+    var sS = labSlider({ id: "lab-memwait-speed", label: "연산기 속도", help: "계산 한 번에 걸리는 시간 = 1 ÷ 배수 ns", values: SPEED, index: st.s, fmt: function (v) { return v + "× (계산 1번 " + fmtNum(1 / v) + " ns)"; }, onInput: onCtl("s") });
+    var sB = labSlider({ id: "lab-memwait-bw", label: "전송 속도 (길의 폭)", help: "메모리에서 연산기로 1 ns에 옮기는 숫자 수", values: BW, index: st.b, fmt: function (v) { return fmtNum(v) + "개 / ns"; }, onInput: onCtl("b") });
+    var sR = labSlider({ id: "lab-memwait-reuse", label: "재사용 횟수", help: "가져온 숫자 하나를 몇 번의 계산에 쓰나", values: REUSE, index: st.r, fmt: function (v) { return v + "번"; }, onInput: onCtl("r") });
+    ctls.appendChild(sS);
+    ctls.appendChild(sB);
+    ctls.appendChild(sR);
+    root.appendChild(ctls);
+    root.appendChild(
+      button("처음 설정으로", "ghost lab-small", function () {
+        st = { s: 0, b: 0, r: 0 };
+        sS.setIndex(0);
+        sB.setIndex(0);
+        sR.setIndex(0);
+        prev = null;
+        obs.className = "lab-observe";
+        obs.innerHTML = "";
+        draw(null);
+      })
+    );
+
+    // 모식도와 막대 (같은 ns 눈금)
+    var pic = h("div", "lab-pic");
+    pic.setAttribute("aria-hidden", "true");
+    var bars = h("div", "lab-bars");
+    var live = h("div", "lab-live-text");
+    live.setAttribute("aria-live", "polite");
+    var obs = h("div", "lab-observe");
+    obs.setAttribute("aria-live", "polite");
+    root.appendChild(pic);
+    root.appendChild(bars);
+    root.appendChild(live);
+    root.appendChild(obs);
+
+    function barRow(label, value, cls, note) {
+      var r = h("div", "lab-bar " + cls);
+      r.appendChild(h("div", "lab-bar-label", label));
+      var track = h("div", "lab-bar-track");
+      var fill = h("div", "lab-bar-fill");
+      fill.style.width = Math.max(0.5, (100 * value) / AXIS) + "%";
+      track.appendChild(fill);
+      r.appendChild(track);
+      r.appendChild(h("div", "lab-bar-num", fmtNum(value) + " ns" + (note ? " · " + note : "")));
+      return r;
+    }
+    function observe(key, v) {
+      if (!key || !prev) return;
+      var same = Math.abs(v.T - prev.T) < 1e-9;
+      var bound = v.M > v.C ? "move" : v.M < v.C ? "compute" : "even";
+      var msg;
+      if (key === "s") {
+        msg = same
+          ? "연산기 속도를 바꿨지만 전체 시간은 " + fmtNum(v.T) + " ns 그대로입니다. 줄어든 것은 계산 시간(" + fmtNum(prev.C) + " → " + fmtNum(v.C) + " ns)뿐이고, 전체를 정하는 긴 쪽은 가져오기였습니다."
+          : "연산기 속도를 바꾸자 전체 시간도 " + fmtNum(prev.T) + " → " + fmtNum(v.T) + " ns로 바뀌었습니다. 지금은 계산이 긴 쪽(또는 같은 쪽)이기 때문입니다.";
+      } else {
+        var what = key === "b" ? "전송 속도" : "재사용 횟수";
+        msg = same
+          ? what + "를 바꿔 가져오기 시간이 " + fmtNum(prev.M) + " → " + fmtNum(v.M) + " ns가 됐지만 전체는 " + fmtNum(v.T) + " ns 그대로입니다. 이미 계산이 긴 쪽이었습니다."
+          : what + "를 바꾸자 가져오기 시간이 " + fmtNum(prev.M) + " → " + fmtNum(v.M) + " ns, 전체 시간이 " + fmtNum(prev.T) + " → " + fmtNum(v.T) + " ns로 바뀌었습니다.";
+      }
+      if (key === "s" && same && pred && prev.s === 0 && st.s === 1 && st.b === 0 && st.r === 0) msg += " (내 예상: '" + popts[pred.choice] + "')";
+      var next = bound === "move" ? " 다음: 재사용이나 전송 속도를 올려 보세요." : bound === "compute" ? " 다음: 이 상태에서 연산기 속도를 바꿔 보세요." : " 계산과 가져오기가 딱 맞는 지점입니다. 여기서 어느 한쪽만 바꾸면 무엇이 달라질까요?";
+      obs.innerHTML = "<b>관찰.</b> ";
+      obs.appendChild(document.createTextNode(msg + next));
+      obs.className = "lab-observe on";
+    }
+    function draw(key) {
+      var v = calc();
+      // 모식도: 메모리 → 길 → 연산기. 길의 굵기 = 전송 속도, 칸 하나 = 가져올 숫자 100개
+      var thick = 3 + 4 * st.b;
+      var tokens = Math.min(10, Math.round(v.F / 100));
+      var tk = "";
+      // 좁은 화면(휴대폰)에서는 글자가 읽히도록 위→아래로 세워 그린다
+      if ((host || root).clientWidth < 440) {
+        for (var k = 0; k < 10; k++) tk += "<rect x='" + (32 + k * 24) + "' y='38' width='18' height='18' rx='2' fill='" + (k < tokens ? "#3d6fb4" : "#e6ecf4") + "'/>";
+        pic.innerHTML =
+          "<svg viewBox='0 0 300 292' width='100%'>" +
+          "<rect x='14' y='6' width='272' height='84' rx='8' fill='#f4f7fb' stroke='#3d6fb4'/>" +
+          "<text x='150' y='28' text-anchor='middle' font-size='15' fill='#2c4f80' font-weight='700'>메모리</text>" +
+          tk +
+          "<text x='150' y='78' text-anchor='middle' font-size='13' fill='#333'>가져올 숫자 " + fmtNum(v.F) + "개 (한 칸 = 100개)</text>" +
+          "<line x1='60' y1='96' x2='60' y2='176' stroke='#7b8794' stroke-width='" + thick + "'/>" +
+          "<polygon points='49,176 71,176 60,194' fill='#7b8794'/>" +
+          "<text x='86' y='130' font-size='13' fill='#333'>길: 1 ns에 " + fmtNum(BW[st.b]) + "개</text>" +
+          "<text x='86' y='152' font-size='13' fill='#333'>숫자 하나 → 계산 " + REUSE[st.r] + "번</text>" +
+          "<rect x='14' y='200' width='272' height='86' rx='8' fill='#eef8f3' stroke='#13936b'/>" +
+          "<text x='150' y='222' text-anchor='middle' font-size='15' fill='#0f6b4f' font-weight='700'>연산기</text>" +
+          "<text x='150' y='254' text-anchor='middle' font-size='26' fill='#0f6b4f'>×" + SPEED[st.s] + "</text>" +
+          "<text x='150' y='276' text-anchor='middle' font-size='13' fill='#333'>계산 " + fmtNum(N) + "번</text>" +
+          "</svg>";
+      } else {
+        for (var i = 0; i < 10; i++) tk += "<rect x='" + (22 + (i % 5) * 18) + "' y='" + (42 + Math.floor(i / 5) * 18) + "' width='13' height='13' rx='2' fill='" + (i < tokens ? "#3d6fb4" : "#e6ecf4") + "'/>";
+        pic.innerHTML =
+          "<svg viewBox='0 0 520 124' width='100%' height='124'>" +
+          "<rect x='8' y='12' width='124' height='104' rx='8' fill='#f4f7fb' stroke='#3d6fb4'/>" +
+          "<text x='70' y='32' text-anchor='middle' font-size='13' fill='#2c4f80' font-weight='700'>메모리</text>" +
+          tk +
+          "<text x='70' y='92' text-anchor='middle' font-size='11' fill='#555'>■ 한 칸 = 숫자 100개</text>" +
+          "<text x='70' y='108' text-anchor='middle' font-size='11.5' fill='#333'>가져올 숫자 " + fmtNum(v.F) + "개</text>" +
+          "<line x1='140' y1='64' x2='362' y2='64' stroke='#7b8794' stroke-width='" + thick + "'/>" +
+          "<polygon points='362,53 380,64 362,75' fill='#7b8794'/>" +
+          "<text x='260' y='48' text-anchor='middle' font-size='12' fill='#333'>길: 1 ns에 " + fmtNum(BW[st.b]) + "개</text>" +
+          "<text x='260' y='92' text-anchor='middle' font-size='12' fill='#333'>숫자 하나 → 계산 " + REUSE[st.r] + "번에 사용</text>" +
+          "<rect x='388' y='12' width='124' height='104' rx='8' fill='#eef8f3' stroke='#13936b'/>" +
+          "<text x='450' y='32' text-anchor='middle' font-size='13' fill='#0f6b4f' font-weight='700'>연산기</text>" +
+          "<text x='450' y='66' text-anchor='middle' font-size='22' fill='#0f6b4f'>×" + SPEED[st.s] + "</text>" +
+          "<text x='450' y='92' text-anchor='middle' font-size='11.5' fill='#333'>계산 " + fmtNum(N) + "번</text>" +
+          "</svg>";
+      }
+      bars.innerHTML = "";
+      bars.appendChild(barRow("계산 시간", v.C, "is-compute", fmtNum(N) + "번 × " + fmtNum(1 / SPEED[st.s]) + " ns"));
+      bars.appendChild(barRow("가져오기 시간", v.M, "is-move", fmtNum(v.F) + "개 ÷ " + fmtNum(BW[st.b]) + "개/ns"));
+      var tl = h("div", "lab-bar is-total");
+      tl.appendChild(h("div", "lab-bar-label", "전체 시간"));
+      var track = h("div", "lab-bar-track");
+      var busy = h("div", "lab-bar-fill busy");
+      busy.style.width = (100 * v.C) / AXIS + "%";
+      busy.title = "연산기가 계산한 시간";
+      var idle = h("div", "lab-bar-fill idle");
+      idle.style.width = (100 * v.wait) / AXIS + "%";
+      idle.title = "연산기가 숫자를 기다린 시간";
+      track.appendChild(busy);
+      track.appendChild(idle);
+      tl.appendChild(track);
+      tl.appendChild(h("div", "lab-bar-num", fmtNum(v.T) + " ns = 계산 " + fmtNum(v.C) + " + 기다림 " + fmtNum(v.wait)));
+      bars.appendChild(tl);
+      var legend = h("div", "lab-axis");
+      legend.innerHTML = "<span class='lg busy'></span>계산 <span class='lg idle'></span>연산기가 기다림 · 눈금 0–" + fmtNum(AXIS) + " ns, 모든 설정에서 같은 눈금";
+      bars.appendChild(legend);
+      var who = v.M > v.C ? "가져오기가 더 오래 걸려 연산기가 전체의 " + Math.round((100 * v.wait) / v.T) + "% 동안 기다립니다." : v.M < v.C ? "계산이 더 오래 걸립니다. 연산기는 쉬지 않고, 숫자가 먼저 도착해 기다립니다." : "계산과 가져오기가 딱 맞습니다. 아무도 기다리지 않습니다.";
+      live.textContent = "전체 " + fmtNum(v.T) + " ns. " + who;
+      observe(key, v);
+      prev = { C: v.C, M: v.M, T: v.T, s: st.s, b: st.b, r: st.r };
+    }
+    markPred();
+    draw(null);
+    var narrowNow = (host || root).clientWidth < 440;
+    window.addEventListener("resize", function () {
+      var n = (host || root).clientWidth < 440;
+      if (n !== narrowNow) {
+        narrowNow = n;
+        draw(null);
+      }
+    });
+
+    // 3) 이유를 내 말로 (이 브라우저에만 저장, 채점 없음)
+    root.appendChild(h("div", "lab-step", "3 · 왜 그런지 내 말로 한 줄"));
+    var why = h("textarea", "lab-why");
+    why.id = "lab-memwait-why";
+    why.rows = 2;
+    why.placeholder = "예: 연산기를 빠르게 해도 전체가 그대로였던 이유는 …";
+    why.setAttribute("aria-label", "왜 그런지 내 말로 한 줄");
+    why.value = recall("study-lab:d02-wait-why") || "";
+    why.addEventListener("input", function () {
+      store("study-lab:d02-wait-why", why.value || null);
+    });
+    root.appendChild(why);
+    root.appendChild(h("div", "lab-note", "적은 내용은 이 브라우저에만 저장되고 채점하지 않습니다. 아래 '무슨 일이 있었나'와 비교해 보세요."));
+  };
+
+  // D2 1-1구간 끝: 새 숫자로 같은 원리 확인 (첫 시도·힌트·재시도를 따로 기록)
+  LABS["memwait-check"] = function (root) {
+    root.appendChild(
+      labCheck({
+        key: "d02-wait-new1",
+        question: "다른 컴퓨터: 연산기는 계산 1번에 2 ns, 길은 1 ns에 숫자 1개, 계산 600번, 재사용 1. 이때 길을 2배로 넓히면 전체 시간은?",
+        options: ["거의 절반이 된다", "그대로 1,200 ns다", "600 ns가 된다", "모르겠음"],
+        correct: 1,
+        hint: "계산 시간 = 600 × 2 ns, 가져오기 시간 = 600개 ÷ 1개/ns. 둘 중 긴 쪽이 전체 시간입니다.",
+        explain: "계산 1,200 ns, 가져오기 600 ns라 이번에는 <b>계산이 긴 쪽</b>입니다. 길을 넓혀 가져오기가 300 ns가 되어도 전체는 계산 시간 1,200 ns 그대로입니다. 긴 쪽을 줄여야 전체가 줄어듭니다.",
+        why: { 0: "길을 넓히면 가져오기만 빨라집니다. 계산 1,200 ns, 가져오기 600 ns이니 원래부터 계산이 긴 쪽이었고, 전체는 계산 시간에 묶여 있습니다.", 2: "600 ns는 넓히기 전의 가져오기 시간입니다. 전체 시간은 계산(1,200 ns)과 가져오기 중 긴 쪽입니다." },
+      })
+    );
+    root.appendChild(
+      labCheck({
+        key: "d02-wait-new2",
+        question: "처음 설정(연산기 1×, 전송 0.25개/ns, 계산 1,000번)에서 연산기를 놀리지 않으려면 숫자 하나를 최소 몇 번 다시 써야 할까요?",
+        options: ["2번", "4번", "8번", "모르겠음"],
+        correct: 1,
+        hint: "재사용 r번이면 가져올 숫자는 1,000 ÷ r개, 가져오기 시간은 그것 ÷ 0.25입니다. 이것이 계산 시간 1,000 ns 이하가 되는 가장 작은 r을 찾아보세요.",
+        explain: "r = 4이면 가져올 숫자 250개, 가져오기 250 ÷ 0.25 = 1,000 ns로 계산 시간과 같아집니다. 그보다 적게 쓰면 연산기가 기다리고, 더 많이 써도 전체는 계산 시간 1,000 ns보다 줄지 않습니다. 위 실습에서 재사용을 4로 놓고 확인해 보세요.",
+        why: { 0: "r = 2이면 가져오기 500 ÷ 0.25 = 2,000 ns로 아직 계산(1,000 ns)보다 깁니다.", 2: "8번이면 연산기가 놀지는 않지만 최소는 아닙니다. 4번에서 이미 가져오기(1,000 ns)가 계산 시간과 같아집니다." },
+      })
+    );
+  };
+
+  // ---------- 실습 공용 조각: 먼저 예상, 내 말로 한 줄, 작은 그래프 ----------
+  // 첫 예상은 한 번만 기록한다(나중에 바꿀 수 없음). "모르겠음"도 정상 답이다.
+  function labPredict(o) {
+    var rec = labGet(o.key);
+    var box = h("div", "lab-q lab-predict");
+    box.appendChild(h("div", "lab-step", "1 · 먼저 예상"));
+    box.appendChild(h("div", "lab-q-text", o.question));
+    var row = h("div", "lab-q-opts");
+    row.setAttribute("role", "group");
+    row.setAttribute("aria-label", "먼저 예상");
+    var msg = h("div", "lab-q-res");
+    msg.setAttribute("aria-live", "polite");
+    function mark() {
+      row.querySelectorAll("button").forEach(function (b, j) {
+        b.disabled = !!rec;
+        b.setAttribute("aria-pressed", rec && rec.choice === j ? "true" : "false");
+        b.classList.toggle("chosen", !!rec && rec.choice === j);
+      });
+      if (rec) msg.textContent = "예상을 기록했어요: '" + o.options[rec.choice] + "'. 첫 예상은 바뀌지 않게 남겨 둡니다. " + (o.next || "");
+    }
+    o.options.forEach(function (t, j) {
+      row.appendChild(
+        button(t, "lab-opt", function () {
+          if (!rec) rec = { choice: j, at: new Date().toISOString() };
+          labPut(o.key, rec);
+          mark();
+        })
+      );
+    });
+    box.appendChild(row);
+    box.appendChild(msg);
+    mark();
+    return {
+      el: box,
+      label: function () {
+        return rec ? o.options[rec.choice] : "";
+      },
+    };
+  }
+  function labWhy(root, key, placeholder, step) {
+    root.appendChild(h("div", "lab-step", (step || "3") + " · 왜 그런지 내 말로 한 줄"));
+    var ta = h("textarea", "lab-why");
+    ta.rows = 2;
+    ta.placeholder = placeholder;
+    ta.setAttribute("aria-label", "왜 그런지 내 말로 한 줄");
+    ta.value = recall("study-lab:" + key) || "";
+    ta.addEventListener("input", function () {
+      store("study-lab:" + key, ta.value || null);
+    });
+    root.appendChild(ta);
+    root.appendChild(h("div", "lab-note", "이 브라우저에만 저장되고 채점하지 않습니다. 아래 설명과 비교해 보세요."));
+  }
+  function labObserve(root) {
+    var obs = h("div", "lab-observe");
+    obs.setAttribute("aria-live", "polite");
+    root.appendChild(obs);
+    return function (text) {
+      if (!text) {
+        obs.className = "lab-observe";
+        obs.textContent = "";
+        return;
+      }
+      obs.innerHTML = "<b>관찰.</b> ";
+      obs.appendChild(document.createTextNode(text));
+      obs.className = "lab-observe on";
+    };
+  }
+  // 작은 선 그래프(SVG 문자열). 휴대폰에서도 글자가 읽히도록 viewBox를 작게 잡는다.
+  function labPlot(o) {
+    var W = 400,
+      H = 210,
+      L = 52,
+      R = 12,
+      T = 12,
+      B = 44;
+    function X(v) {
+      return L + ((v - o.x0) / (o.x1 - o.x0)) * (W - L - R);
+    }
+    function Y(v) {
+      var c = Math.max(o.y0, Math.min(o.y1, v));
+      return T + (1 - (c - o.y0) / (o.y1 - o.y0)) * (H - T - B);
+    }
+    var s = "<svg class='lab-plot' viewBox='0 0 " + W + " " + H + "' width='100%' role='img' aria-label='" + escapeHtml(o.label || "그래프") + "'>";
+    s += "<line x1='" + L + "' y1='" + Y(o.y0) + "' x2='" + (W - R) + "' y2='" + Y(o.y0) + "' stroke='#888'/>";
+    s += "<line x1='" + L + "' y1='" + T + "' x2='" + L + "' y2='" + Y(o.y0) + "' stroke='#888'/>";
+    if (o.y0 < 0 && o.y1 > 0) s += "<line x1='" + L + "' y1='" + Y(0) + "' x2='" + (W - R) + "' y2='" + Y(0) + "' stroke='#ccc' stroke-dasharray='3,3'/>";
+    (o.xticks || []).forEach(function (t) {
+      s += "<text x='" + X(t) + "' y='" + (Y(o.y0) + 15) + "' font-size='13' text-anchor='middle' fill='#555'>" + fmtNum(t) + "</text>";
+    });
+    (o.yticks || []).forEach(function (t) {
+      s += "<text x='" + (L - 5) + "' y='" + (Y(t) + 4) + "' font-size='13' text-anchor='end' fill='#555'>" + fmtNum(t) + "</text>";
+    });
+    s += "<text x='" + (L + (W - L - R) / 2) + "' y='" + (H - 6) + "' font-size='13.5' text-anchor='middle' fill='#333'>" + escapeHtml(o.xlabel || "") + "</text>";
+    s += "<text x='12' y='" + (T + (H - T - B) / 2) + "' font-size='13.5' text-anchor='middle' fill='#333' transform='rotate(-90 12 " + (T + (H - T - B) / 2) + ")'>" + escapeHtml(o.ylabel || "") + "</text>";
+    (o.series || []).forEach(function (se) {
+      var pts = se.pts
+        .map(function (p) {
+          return X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1);
+        })
+        .join(" ");
+      if (se.line !== false) s += "<polyline points='" + pts + "' fill='none' stroke='" + se.color + "' stroke-width='" + (se.width || 2) + "'" + (se.dash ? " stroke-dasharray='" + se.dash + "'" : "") + "/>";
+      if (se.dots)
+        se.pts.forEach(function (p) {
+          s += "<circle cx='" + X(p[0]).toFixed(1) + "' cy='" + Y(p[1]).toFixed(1) + "' r='" + (se.r || 3.5) + "' fill='" + se.color + "'/>";
+        });
+    });
+    (o.legend || []).forEach(function (lg, i) {
+      var x = W - R - 4,
+        y = T + 13 + i * 17;
+      s += "<text x='" + x + "' y='" + y + "' font-size='12.5' text-anchor='end' fill='" + lg[1] + "'>" + escapeHtml(lg[0]) + "</text>";
+    });
+    return s + "</svg>";
+  }
+
+  // D2 3구간: 2×2 행렬–벡터 곱 (교육용, 손계산 예 W = (1 3; 2 0.5), u = (2, 1)과 같은 숫자에서 시작)
+  LABS.mvm = function (root) {
+    var WV = [-1, 0, 0.5, 1, 2, 3];
+    var UV = [-1, 0, 1, 2, 3, 4];
+    var st = { w11: 3, w12: 5, w21: 4, w22: 2, u1: 3, u2: 2 };
+    var prev = null;
+    var pr = labPredict({
+      key: "d02-mvm-predict",
+      question: "위 손계산(W의 행 1 = (1, 3), 입력 u = (2, 1), 출력 y₁ = 5)에서 u₁만 2에서 4로 두 배 하면 y₁은?",
+      options: ["10이 된다(두 배)", "7이 된다", "그대로 5", "모르겠음"],
+      next: "아래에서 입력 u₁만 4로 바꿔 보세요.",
+    });
+    root.appendChild(pr.el);
+    root.appendChild(h("div", "lab-step", "2 · 하나씩 바꿔 보기"));
+    var grid = h("div", "lab-ctls");
+    var sl = {};
+    function mk(key, label, vals, help) {
+      sl[key] = labSlider({ id: "lab-mvm-" + key, label: label, help: help, values: vals, index: st[key], fmt: fmtNum, onInput: function (i) { st[key] = i; draw(key); } });
+      grid.appendChild(sl[key]);
+    }
+    mk("u1", "입력 u₁", UV, "세로줄 1에 거는 값");
+    mk("u2", "입력 u₂", UV, "세로줄 2에 거는 값");
+    mk("w11", "W[1,1]", WV, "행 1 · 자리 1");
+    mk("w12", "W[1,2]", WV, "행 1 · 자리 2");
+    mk("w21", "W[2,1]", WV, "행 2 · 자리 1");
+    mk("w22", "W[2,2]", WV, "행 2 · 자리 2");
+    root.appendChild(grid);
+    root.appendChild(
+      button("처음 숫자로", "ghost lab-small", function () {
+        st = { w11: 3, w12: 5, w21: 4, w22: 2, u1: 3, u2: 2 };
+        Object.keys(sl).forEach(function (k) {
+          sl[k].setIndex(st[k]);
+        });
+        prev = null;
+        say("");
+        draw(null);
+      })
+    );
+    var tbl = h("div", "lab-tablewrap");
+    root.appendChild(tbl);
+    var live = h("div", "lab-live-text");
+    live.setAttribute("aria-live", "polite");
+    root.appendChild(live);
+    var say = labObserve(root);
+    function v() {
+      var w11 = WV[st.w11], w12 = WV[st.w12], w21 = WV[st.w21], w22 = WV[st.w22], u1 = UV[st.u1], u2 = UV[st.u2];
+      return { w11: w11, w12: w12, w21: w21, w22: w22, u1: u1, u2: u2, p11: w11 * u1, p12: w12 * u2, p21: w21 * u1, p22: w22 * u2, y1: w11 * u1 + w12 * u2, y2: w21 * u1 + w22 * u2 };
+    }
+    function cell(a, b, p, hot) {
+      return "<td" + (hot ? " class='hot'" : "") + ">" + fmtNum(a) + " × " + fmtNum(b) + " = <b>" + fmtNum(p) + "</b></td>";
+    }
+    function draw(key) {
+      var x = v();
+      var hot = function (k) {
+        return key && (key === k || key === "u1" && (k === "p11" || k === "p21") || key === "u2" && (k === "p12" || k === "p22") || key === "w11" && k === "p11" || key === "w12" && k === "p12" || key === "w21" && k === "p21" || key === "w22" && k === "p22");
+      };
+      tbl.innerHTML =
+        "<table class='lab-table'><thead><tr><th></th><th>자리 1 (u₁ = " + fmtNum(x.u1) + ")</th><th>자리 2 (u₂ = " + fmtNum(x.u2) + ")</th><th>더하면</th></tr></thead><tbody>" +
+        "<tr><th>행 1 → y₁</th>" + cell(x.w11, x.u1, x.p11, hot("p11")) + cell(x.w12, x.u2, x.p12, hot("p12")) + "<td class='sum'>y₁ = <b>" + fmtNum(x.y1) + "</b></td></tr>" +
+        "<tr><th>행 2 → y₂</th>" + cell(x.w21, x.u1, x.p21, hot("p21")) + cell(x.w22, x.u2, x.p22, hot("p22")) + "<td class='sum'>y₂ = <b>" + fmtNum(x.y2) + "</b></td></tr></tbody></table>";
+      live.textContent = "출력 y = (" + fmtNum(x.y1) + ", " + fmtNum(x.y2) + "). 곱셈 4번, 덧셈 2번.";
+      if (key && prev) {
+        var d1 = x.y1 - prev.y1, d2 = x.y2 - prev.y2;
+        var why =
+          key === "u1" || key === "u2"
+            ? "입력 하나를 바꾸면 그 입력이 들어가는 칸(같은 세로줄)의 곱만 바뀝니다. 출력 변화 = 그 자리 가중치 × 입력 변화."
+            : "가중치 하나를 바꾸면 그 칸 하나의 곱만 바뀌어, 그 행의 출력 하나만 달라집니다.";
+        var t = "y₁: " + fmtNum(prev.y1) + " → " + fmtNum(x.y1) + " (" + (d1 >= 0 ? "+" : "") + fmtNum(d1) + "), y₂: " + fmtNum(prev.y2) + " → " + fmtNum(x.y2) + " (" + (d2 >= 0 ? "+" : "") + fmtNum(d2) + "). " + why;
+        if (key === "u1" && x.u1 === 4 && x.u2 === 1 && x.w11 === 1 && x.w12 === 3 && pr.label()) t += " (내 예상: '" + pr.label() + "')";
+        say(t);
+      }
+      prev = x;
+    }
+    draw(null);
+    labWhy(root, "d02-mvm-why", "예: u₁을 두 배 했는데 y₁이 두 배가 아닌 이유는 …");
+  };
+  LABS["mvm-check"] = function (root) {
+    root.appendChild(
+      labCheck({
+        key: "d02-mvm-new1",
+        question: "W의 행 1 = (2, −1), 입력 u = (3, 2)일 때 y₁은?",
+        options: ["4", "8", "7", "모르겠음"],
+        correct: 0,
+        hint: "행 1과 입력을 같은 자리끼리 곱해 더합니다: 2 × 3 + (−1) × 2.",
+        explain: "2 × 3 = 6, (−1) × 2 = −2, 더하면 4입니다. 음수 가중치는 그 입력이 출력을 줄이는 쪽으로 작용한다는 뜻입니다.",
+        why: { 1: "8은 −1을 +1로 계산한 값(6 + 2)입니다. 가중치의 부호까지 곱합니다.", 2: "7은 행 대신 다른 줄의 숫자를 섞어 쓴 경우에 나옵니다. 출력 1은 행 1만 씁니다." },
+      })
+    );
+    root.appendChild(
+      labCheck({
+        key: "d02-mvm-new2",
+        question: "W[1,2]를 0으로 바꾸면 무엇이 달라지나요?",
+        options: ["u₂가 y₁에 주는 영향만 사라진다", "y₁이 0이 된다", "u₂가 모든 출력에서 사라진다", "모르겠음"],
+        correct: 0,
+        hint: "W[1,2]는 '행 1(출력 1)의 자리 2(입력 2)' 칸 하나입니다.",
+        explain: "W[1,2]는 입력 2가 출력 1에 들어가는 세기 하나입니다. 0이 되면 그 칸의 곱만 0이 되고, y₁에는 u₁의 몫이 남고 y₂에서는 u₂의 몫(W[2,2] × u₂)이 그대로입니다. crossbar에서는 그 교차점의 소자 하나가 전류를 거의 안 흘리는 것과 같습니다(3구간 뒷부분).",
+        why: { 1: "y₁ = W[1,1]·u₁ + W[1,2]·u₂이므로 첫째 항은 남습니다.", 2: "u₂는 y₂에도 W[2,2]를 통해 들어갑니다. 바꾼 칸은 하나뿐입니다." },
+      })
+    );
+  };
+
+  // D7 0구간: 가중치 하나의 손실과 기울기 (교육용, L = (2w − 5)², 입력 2, 목표 5)
+  LABS.lossgrad = function (root) {
+    var WS = [-0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5];
+    var ETA = [0.01, 0.05, 0.1, 0.2, 0.25, 0.3];
+    var st = { w0: 3, e: 1 };
+    var path = [];
+    function loss(w) {
+      return Math.pow(2 * w - 5, 2);
+    }
+    function grad(w) {
+      return 4 * (2 * w - 5);
+    }
+    var pr = labPredict({
+      key: "d07-lossgrad-predict",
+      question: "w = 1.0에서 시작합니다. 한 걸음 크기를 정하는 학습률 η를 0.05에서 0.3으로 키우면 손실은 어떻게 될까요?",
+      options: ["더 빨리 0에 간다", "왔다 갔다 하며 커진다", "아무 변화 없다", "모르겠음"],
+      next: "아래에서 η를 바꾸고 '한 걸음'을 여러 번 눌러 보세요.",
+    });
+    root.appendChild(pr.el);
+    root.appendChild(h("div", "lab-step", "2 · 하나씩 바꿔 보기"));
+    var grid = h("div", "lab-ctls");
+    var s0 = labSlider({ id: "lab-lg-w0", label: "시작 가중치 w", values: WS, index: st.w0, fmt: fmtNum, onInput: function (i) { st.w0 = i; reset(); } });
+    var s1 = labSlider({ id: "lab-lg-eta", label: "학습률 η (한 걸음 크기)", help: "다음 w = w − η × 기울기", values: ETA, index: st.e, fmt: fmtNum, onInput: function (i) { st.e = i; reset(); } });
+    grid.appendChild(s0);
+    grid.appendChild(s1);
+    root.appendChild(grid);
+    var btns = h("div", "btn-row");
+    btns.appendChild(button("한 걸음", "primary lab-small", function () { step(1); }));
+    btns.appendChild(button("다섯 걸음", "lab-small", function () { step(5); }));
+    btns.appendChild(button("처음으로", "ghost lab-small", function () { st = { w0: 3, e: 1 }; s0.setIndex(3); s1.setIndex(1); reset(); say(""); }));
+    root.appendChild(btns);
+    var pic = h("div", "lab-pic");
+    root.appendChild(pic);
+    var live = h("div", "lab-live-text");
+    live.setAttribute("aria-live", "polite");
+    root.appendChild(live);
+    var say = labObserve(root);
+    function reset() {
+      path = [WS[st.w0]];
+      draw();
+    }
+    function step(n) {
+      for (var i = 0; i < n; i++) {
+        var w = path[path.length - 1];
+        path.push(w - ETA[st.e] * grad(w));
+      }
+      draw();
+      var first = Math.abs(path[0] - 2.5), last = Math.abs(path[path.length - 1] - 2.5);
+      var f = 1 - 8 * ETA[st.e];
+      var t;
+      if (last > first + 1e-9) t = "걸음이 너무 커서 골짜기 바닥(w = 2.5)을 넘어 반대편 더 높은 곳으로 갑니다. 손실이 오히려 커집니다(발산). 이 식에서는 한 걸음마다 바닥까지의 거리에 (1 − 8η) = " + fmtNum(f) + "가 곱해지므로, 그 크기가 1보다 크면 발산합니다.";
+      else if (Math.abs(last - first) < 1e-9 && first > 0) t = "바닥을 사이에 두고 같은 높이에서 왔다 갔다 합니다. 곱해지는 배율 (1 − 8η) = −1이라 거리가 줄지 않습니다.";
+      else t = "바닥까지의 거리가 매 걸음 " + fmtNum(Math.abs(f)) + "배가 됩니다" + (f < 0 ? "(바닥을 넘었다 돌아오며)" : "") + ". 기울기가 0에 가까워질수록 걸음도 작아집니다.";
+      if (ETA[st.e] === 0.3 && pr.label()) t += " (내 예상: '" + pr.label() + "')";
+      say(t);
+    }
+    function draw() {
+      var curve = [];
+      for (var x = -0.5; x <= 5.5001; x += 0.1) curve.push([x, loss(x)]);
+      var pts = path.map(function (w) {
+        return [w, loss(w)];
+      });
+      var out = path.some(function (w) {
+        return w < -0.5 || w > 5.5 || loss(w) > 40;
+      });
+      pic.innerHTML = labPlot({
+        x0: -0.5, x1: 5.5, y0: 0, y1: 40, xticks: [0, 1, 2, 2.5, 3, 4, 5], yticks: [0, 10, 20, 30, 40],
+        xlabel: "가중치 w", ylabel: "손실 L", label: "손실 L = (2w − 5)² 곡선과 지나온 w",
+        series: [{ pts: curve, color: "#9aa5b1" }, { pts: pts, color: "#c0392b", width: 1.5, dots: true, dash: "4,3" }],
+        legend: [["곡선: L = (2w − 5)²", "#6b7785"], ["점: 지나온 w", "#c0392b"]],
+      });
+      var w = path[path.length - 1];
+      live.textContent =
+        "지금 w = " + fmtNum(w) + ", 손실 L = " + fmtNum(loss(w)) + ", 기울기 dL/dw = " + fmtNum(grad(w)) + " → 다음 w = " + fmtNum(w) + " − " + fmtNum(ETA[st.e]) + " × (" + fmtNum(grad(w)) + ") = " + fmtNum(w - ETA[st.e] * grad(w)) +
+        (out ? ". 점 일부가 그래프 밖으로 나갔습니다." : ".") + " 걸음 수 " + (path.length - 1) + ".";
+    }
+    reset();
+    labWhy(root, "d07-lossgrad-why", "예: η가 크면 손실이 커진 이유는 …");
+  };
+  LABS["lossgrad-check"] = function (root) {
+    root.appendChild(
+      labCheck({
+        key: "d07-lossgrad-new1",
+        question: "같은 손실 L = (2w − 5)²에서 w = 3.5일 때 기울기는?",
+        options: ["+8", "−8", "+4", "모르겠음"],
+        correct: 0,
+        hint: "기울기 = 2 × 오차 × 입력. 오차 = 2 × 3.5 − 5.",
+        explain: "오차 = 7 − 5 = 2, 기울기 = 2 × 2 × 2 = +8입니다. 양수이므로 w를 줄여야(왼쪽으로) 손실이 줍니다.",
+        why: { 1: "부호를 보세요. 오차가 +2(목표보다 큼)이면 기울기도 양수입니다.", 2: "입력 2를 곱하는 것을 빠뜨리면 4가 나옵니다." },
+      })
+    );
+    root.appendChild(
+      labCheck({
+        key: "d07-lossgrad-new2",
+        question: "η = 0.25로 w = 1.0에서 한 걸음 가면 w는?",
+        options: ["4.0", "2.5", "1.6", "모르겠음"],
+        correct: 0,
+        hint: "다음 w = w − η × 기울기, w = 1.0에서 기울기는 −12.",
+        explain: "1.0 − 0.25 × (−12) = 4.0입니다. 손실은 (8 − 5)² = 9로 시작점과 같습니다. 바닥(2.5)을 넘어 반대편 같은 높이로 간 것이고, 계속하면 1.0과 4.0을 오갑니다.",
+        why: { 1: "바닥 2.5로 바로 가려면 걸음이 1.5여야 하는데, 0.25 × 12 = 3을 움직입니다.", 2: "1.6은 η = 0.05일 때입니다." },
+      })
+    );
+  };
+
+  // D9 2구간: 이완 시간 τ와 입력 간격 Δt → 다음 입력 때 남는 흔적 d = e^(−Δt/τ) (교육용 지수 감쇠 모형)
+  LABS.decay = function (root) {
+    var TAU = [5, 10, 20, 38, 50, 100, 200, 500];
+    var DT = [1, 2, 4, 10, 20, 50, 100, 200];
+    var st = { t: 3, d: 2 };
+    var prev = null;
+    var pr = labPredict({
+      key: "d09-decay-predict",
+      question: "τ = 38 ms인 소자에 입력을 4 ms 간격으로 넣으면 다음 입력 때 앞 입력의 흔적이 약 90% 남습니다. 간격을 100 ms로 늘리면?",
+      options: ["90% 정도 그대로", "약 7%로 줄어든다", "더 커진다", "모르겠음"],
+      next: "아래에서 입력 간격만 100 ms로 바꿔 보세요.",
+    });
+    root.appendChild(pr.el);
+    root.appendChild(h("div", "lab-step", "2 · 하나씩 바꿔 보기"));
+    var grid = h("div", "lab-ctls");
+    var s0 = labSlider({ id: "lab-dc-tau", label: "이완 시간 τ (소자의 성질)", values: TAU, index: st.t, fmt: function (v) { return v + " ms"; }, onInput: function (i) { st.t = i; draw("t"); } });
+    var s1 = labSlider({ id: "lab-dc-dt", label: "입력 간격 Δt (과제·측정의 성질)", values: DT, index: st.d, fmt: function (v) { return v + " ms"; }, onInput: function (i) { st.d = i; draw("d"); } });
+    grid.appendChild(s0);
+    grid.appendChild(s1);
+    root.appendChild(grid);
+    root.appendChild(button("처음 설정으로", "ghost lab-small", function () { st = { t: 3, d: 2 }; s0.setIndex(3); s1.setIndex(2); prev = null; say(""); draw(null); }));
+    var pic = h("div", "lab-pic");
+    root.appendChild(pic);
+    var live = h("div", "lab-live-text");
+    live.setAttribute("aria-live", "polite");
+    root.appendChild(live);
+    var say = labObserve(root);
+    function draw(key) {
+      var tau = TAU[st.t], dt = DT[st.d], d = Math.exp(-dt / tau);
+      var pts = [];
+      for (var k = 0; k <= 10; k++) pts.push([k, Math.pow(d, k)]);
+      var cont = [];
+      for (var x = 0; x <= 10.001; x += 0.1) cont.push([x, Math.exp((-x * dt) / tau)]);
+      pic.innerHTML = labPlot({
+        x0: 0, x1: 10, y0: 0, y1: 1, xticks: [0, 2, 4, 6, 8, 10], yticks: [0, 0.25, 0.5, 0.75, 1],
+        xlabel: "몇 번째 다음 입력인가 k (시각 = k × " + dt + " ms)", ylabel: "남은 흔적", label: "입력 한 번의 흔적이 줄어드는 모양",
+        series: [{ pts: cont, color: "#9aa5b1", width: 1.5 }, { pts: pts, color: "#3d6fb4", line: false, dots: true }],
+        legend: [["선: 소자 안의 연속 감쇠 e^(−t/τ)", "#6b7785"], ["점: 입력 시점마다 남은 몫 dᵏ", "#3d6fb4"]],
+      });
+      var n10 = d > 0 && d < 1 ? Math.ceil(Math.log(0.1) / Math.log(d)) : Infinity;
+      live.textContent =
+        "d = e^(−" + dt + "/" + tau + ") = " + fmtNum(d) + " → 다음 입력 때 " + Math.round(d * 100) + "% 남음. 5번째 입력 때 " + (Math.pow(d, 5) * 100 < 0.01 ? "0.01% 미만" : fmtNum(Math.pow(d, 5) * 100) + "%") + ". 10% 아래로 줄 때까지 " + n10 + "번째 입력(약 " + fmtNum(n10 * dt) + " ms).";
+      if (key && prev) {
+        var t = (key === "d" ? "입력 간격" : "이완 시간") + "을 바꾸자 d가 " + fmtNum(prev) + " → " + fmtNum(d) + "가 됐습니다. 남는 몫은 τ 하나가 아니라 Δt/τ의 비로 정해집니다. 같은 소자도 입력을 띄엄띄엄 넣으면 기억이 짧아 보이고, 촘촘히 넣으면 길어 보입니다.";
+        if (key === "d" && dt === 100 && tau === 38 && pr.label()) t += " (내 예상: '" + pr.label() + "')";
+        say(t);
+      }
+      prev = d;
+    }
+    draw(null);
+    labWhy(root, "d09-decay-why", "예: 같은 소자인데 간격을 늘리니 흔적이 줄어든 이유는 …");
+  };
+  LABS["decay-check"] = function (root) {
+    root.appendChild(
+      labCheck({
+        key: "d09-decay-new1",
+        question: "입력 간격 Δt가 이완 시간 τ와 같으면, 다음 입력 때 앞 입력의 흔적은 약 몇 %?",
+        options: ["약 37%", "50%", "0%", "모르겠음"],
+        correct: 0,
+        hint: "d = e^(−Δt/τ)에 Δt/τ = 1을 넣습니다.",
+        explain: "e^(−1) ≈ 0.37입니다. 지수 감쇠에서 τ는 '37%로 줄어드는 시간'이고, 절반이 되는 시간은 τ × ln 2 ≈ 0.69τ입니다.",
+        why: { 1: "50%가 되는 시간(반감기)은 τ가 아니라 0.69τ입니다.", 2: "지수 감쇠는 유한한 시간에 정확히 0이 되지 않습니다." },
+      })
+    );
+    root.appendChild(
+      labCheck({
+        key: "d09-decay-new2",
+        question: "d = 0.5인 노드에서 3번 전 입력의 흔적은?",
+        options: ["12.5%", "50%", "25%", "모르겠음"],
+        correct: 0,
+        hint: "한 번 지날 때마다 d를 곱합니다: d³.",
+        explain: "0.5 × 0.5 × 0.5 = 0.125입니다. 흔적은 빼기가 아니라 곱하기로 줄어서, 몇 단계만 지나도 빠르게 작아집니다.",
+        why: { 1: "50%는 바로 앞 입력(1번 전)의 흔적입니다.", 2: "25%는 2번 전입니다." },
+      })
+    );
+  };
+
+  // D8 2구간: 노드 두 개 reservoir의 입력 → 상태 → 출력 (본문 손계산과 같은 W, W_in, tanh)
+  LABS.reservoir = function (root) {
+    var W = [[0.4, 0.3], [-0.3, 0.5]],
+      WIN = [1.0, -0.5];
+    var SC = [0.5, 1, 2, 4];
+    var GS = [0, 0.5, 1, 1.5, 2];
+    var st = { s: 1, g: 2, u: [1, 0, 0, 0, 0, 0] };
+    var prev = null;
+    var pr = labPredict({
+      key: "d08-res-predict",
+      question: "처음 상태 (0, 0)에서 입력 1을 한 번만 넣고 그 뒤로는 0을 넣습니다. 3단계 뒤 상태는?",
+      options: ["정확히 (0, 0)으로 돌아간다", "0은 아니지만 점점 작아진다", "계속 커진다", "모르겠음"],
+      next: "아래 표에서 t = 3 줄을 보고, 'W 배율'을 0으로 바꿔 보세요.",
+    });
+    root.appendChild(pr.el);
+    root.appendChild(h("div", "lab-step", "2 · 하나씩 바꿔 보기"));
+    var seq = h("div", "lab-seq");
+    seq.appendChild(h("span", "lab-ctl-label", "입력 순서 u(0)…u(5) (눌러서 0/1 바꾸기)"));
+    var seqBtns = [];
+    st.u.forEach(function (val, i) {
+      var b = button("", "lab-opt lab-bit", function () {
+        st.u[i] = st.u[i] ? 0 : 1;
+        draw("u");
+      });
+      seqBtns.push(b);
+      seq.appendChild(b);
+    });
+    root.appendChild(seq);
+    var grid = h("div", "lab-ctls");
+    var s0 = labSlider({ id: "lab-rs-s", label: "입력 세기 (입력에 곱하는 수)", values: SC, index: st.s, fmt: function (v) { return "× " + fmtNum(v); }, onInput: function (i) { st.s = i; draw("s"); } });
+    var s1 = labSlider({ id: "lab-rs-g", label: "W 배율 (노드끼리 섞는 세기)", help: "0이면 지난 상태가 다음 상태에 안 들어감", values: GS, index: st.g, fmt: function (v) { return "× " + fmtNum(v); }, onInput: function (i) { st.g = i; draw("g"); } });
+    grid.appendChild(s0);
+    grid.appendChild(s1);
+    root.appendChild(grid);
+    root.appendChild(button("처음 설정으로", "ghost lab-small", function () { st = { s: 1, g: 2, u: [1, 0, 0, 0, 0, 0] }; s0.setIndex(1); s1.setIndex(2); prev = null; say(""); draw(null); }));
+    var pic = h("div", "lab-pic");
+    root.appendChild(pic);
+    var tbl = h("div", "lab-tablewrap");
+    root.appendChild(tbl);
+    var say = labObserve(root);
+    function run() {
+      var x = [0, 0],
+        rows = [];
+      st.u.forEach(function (u, t) {
+        var g = GS[st.g],
+          s = SC[st.s];
+        var z = [0, 1].map(function (i) {
+          return g * (W[i][0] * x[0] + W[i][1] * x[1]) + WIN[i] * s * u;
+        });
+        x = z.map(Math.tanh);
+        rows.push({ t: t + 1, u: u, x1: x[0], x2: x[1], y: x[0] - x[1] });
+      });
+      return rows;
+    }
+    function draw(key) {
+      seqBtns.forEach(function (b, i) {
+        b.textContent = "u(" + i + ") = " + st.u[i];
+        b.setAttribute("aria-pressed", st.u[i] ? "true" : "false");
+        b.classList.toggle("chosen", !!st.u[i]);
+      });
+      var rows = run();
+      var r3 = function (v) {
+        return (Math.round(v * 1000) / 1000).toFixed(3).replace(/^-/, "−");
+      };
+      pic.innerHTML = labPlot({
+        x0: 0, x1: 6, y0: -1, y1: 1, xticks: [0, 1, 2, 3, 4, 5, 6], yticks: [-1, -0.5, 0, 0.5, 1],
+        xlabel: "시간 단계 t", ylabel: "상태 값", label: "노드 두 개의 상태",
+        series: [
+          { pts: [[0, 0]].concat(rows.map(function (r) { return [r.t, r.x1]; })), color: "#13936b", dots: true },
+          { pts: [[0, 0]].concat(rows.map(function (r) { return [r.t, r.x2]; })), color: "#3d6fb4", dots: true, dash: "5,3" },
+        ],
+        legend: [["x₁ (노드 1)", "#13936b"], ["x₂ (노드 2)", "#3d6fb4"]],
+      });
+      var html = "<table class='lab-table'><thead><tr><th>t</th><th>들어간 입력</th><th>x₁(t)</th><th>x₂(t)</th><th>예시 출력 y = x₁ − x₂</th></tr></thead><tbody>";
+      rows.forEach(function (r) {
+        html += "<tr><td>" + r.t + "</td><td>u(" + (r.t - 1) + ") = " + r.u + "</td><td>" + r3(r.x1) + "</td><td>" + r3(r.x2) + "</td><td>" + r3(r.y) + "</td></tr>";
+      });
+      tbl.innerHTML = html + "</tbody></table><div class='lab-note'>예시 출력의 가중치 (1, −1)는 설명용으로 고른 값입니다. 실제 readout 가중치는 4구간처럼 데이터로 학습해 정합니다.</div>";
+      if (key) {
+        var t;
+        if (key === "g") t = GS[st.g] === 0 ? "W 배율이 0이면 지난 상태가 섞이지 않아, 입력이 0이 되는 다음 단계에 상태도 0이 됩니다. 기억이 없습니다." : "W 배율 × " + fmtNum(GS[st.g]) + ": 지난 상태가 다음 상태에 섞여 들어가는 세기가 바뀌어, 입력이 끝난 뒤 상태가 남는 길이가 달라집니다.";
+        else if (key === "s") t = "입력 세기 × " + fmtNum(SC[st.s]) + ": x₁(1) = tanh(" + fmtNum(SC[st.s]) + ") = " + r3(rows[0].x1) + ". tanh는 1을 넘지 못하므로 입력을 4배로 해도 상태는 4배가 되지 않습니다(비선형, 포화).";
+        else t = "입력 순서를 바꾸면 같은 시각의 상태가 달라집니다. 상태는 지금 입력만이 아니라 지난 입력들이 섞인 결과입니다.";
+        if (key === "g" && GS[st.g] === 0 && pr.label()) t += " (내 예상: '" + pr.label() + "')";
+        say(t);
+      }
+      prev = rows;
+    }
+    draw(null);
+    labWhy(root, "d08-res-why", "예: 입력이 0인데도 상태가 0이 아닌 이유는 …");
+  };
+  LABS["reservoir-check"] = function (root) {
+    root.appendChild(
+      labCheck({
+        key: "d08-res-new1",
+        question: "입력 세기를 1에서 4로 올리면 x₁(1)은? (x₁(1) = tanh(1.0 × 세기))",
+        options: ["0.762의 4배인 3.05", "약 0.999로 1을 넘지 못한다", "그대로 0.762", "모르겠음"],
+        correct: 1,
+        hint: "tanh의 출력은 언제나 −1과 1 사이입니다.",
+        explain: "tanh(4) ≈ 0.999입니다. 입력이 커지면 출력이 1 근처에 눌려 붙습니다(포화). 이 비선형 덕분에 상태가 입력의 단순 배수가 아니게 되지만, 너무 세게 넣으면 입력의 차이가 지워집니다.",
+        why: { 0: "선형이라면 4배가 되지만 tanh는 1을 넘지 못합니다.", 2: "입력 세기를 바꾸면 tanh 안의 값이 달라집니다." },
+      })
+    );
+    root.appendChild(
+      labCheck({
+        key: "d08-res-new2",
+        question: "W를 0으로 두고(노드끼리 안 섞음) 입력 1, 0, 0을 넣으면 x(2)는?",
+        options: ["(0, 0)", "(0.164, −0.430)", "(0.762, −0.462)", "모르겠음"],
+        correct: 0,
+        hint: "x(2) = tanh(W x(1) + W_in u(1))에서 W = 0, u(1) = 0입니다.",
+        explain: "W가 0이고 입력도 0이면 tanh(0) = 0이라 상태가 바로 0이 됩니다. 기억은 W(또는 소자의 느린 이완)가 지난 상태를 다음으로 넘겨 줄 때만 생깁니다.",
+        why: { 1: "그 값은 W가 본문의 원래 값일 때입니다.", 2: "그 값은 입력 1을 넣은 직후 x(1)입니다." },
+      })
+    );
+  };
+
+  // ---------- 그림 클릭 확대 (원문 그림의 작은 글씨를 읽기 위해) ----------
+  function setupFigZoom() {
+    var imgs = document.querySelectorAll("figure.fig img");
+    if (!imgs.length) return;
+    var ov = h("div");
+    ov.id = "fig-zoom";
+    ov.setAttribute("role", "dialog");
+    ov.setAttribute("aria-label", "그림 크게 보기");
+    ov.setAttribute("aria-modal", "true");
+    // 키보드 사용자를 위해 닫기 버튼에 초점을 두고, 열려 있는 동안 Tab이 밖으로 나가지 않게 한다
+    var closeBtn = button("닫기 ✕", "fz-close", function (e) {
+      e.stopPropagation();
+      close();
+    });
+    ov.appendChild(closeBtn);
+    var inner = h("div", "fz-inner");
+    var big = h("img");
+    var cap = h("div", "fz-cap");
+    inner.appendChild(big);
+    inner.appendChild(cap);
+    ov.appendChild(inner);
+    ov.appendChild(h("div", "fz-hint", "클릭, Esc 또는 닫기 버튼으로 닫기 · 그림이 크면 스크롤"));
+    document.body.appendChild(ov);
+    var last = null;
+    function close() {
+      ov.classList.remove("show");
+      document.body.classList.remove("fz-open");
+      if (last) last.focus();
+    }
+    ov.addEventListener("click", function (e) {
+      if (e.target.closest("a")) return;
+      close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!ov.classList.contains("show")) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "Tab") {
+        e.preventDefault();
+        closeBtn.focus();
+      }
+    });
+    imgs.forEach(function (img) {
+      img.classList.add("zoomable");
+      img.tabIndex = 0;
+      img.setAttribute("role", "button");
+      img.setAttribute("aria-label", (img.alt || "그림") + " — 크게 보기");
+      function open() {
+        if (img.naturalWidth === 0) return;
+        last = img;
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt;
+        var fc = img.closest("figure") && img.closest("figure").querySelector("figcaption");
+        cap.innerHTML = fc ? fc.innerHTML : "";
+        ov.classList.add("show");
+        document.body.classList.add("fz-open");
+        ov.scrollTop = 0;
+        closeBtn.focus();
+      }
+      img.addEventListener("click", open);
+      img.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
+  }
+
   // ---------- 시작 ----------
-  if (document.querySelector('section.hero')) document.body.classList.add('home');
+  // 본문·목차·퀴즈는 바로 쓸 수 있게 하고, 외부 라이브러리(CDN)는 기다리지 않는다.
+  if (document.querySelector("section.hero")) document.body.classList.add("home");
   setupBrand();
   setupPaperFigs();
+  setupFigZoom();
+  setupRecall();
+  setupSteppers();
+  setupLabs();
   setupFontSize();
   setupProgressBar();
-  Promise.all([detectMode(), deps()])
+  setupChapters();
+  setupQuiz();
+  setupSrcLinks();
+  var depsP = deps();
+  detectMode()
     .then(loadStatus)
     .then(function () {
       var els = Array.prototype.slice.call(document.querySelectorAll(".editable[data-file]"));
@@ -1375,12 +3132,21 @@
       setupStepChecks();
       applyStatus();
       setupGates();
+      setupBlankRecall();
       setupReadMode();
       setupToday();
+      setupBackup();
       setupComments();
-      setupChapters();
-      setupQuiz();
       setupAskPanel();
-      setupSrcLinks();
     });
+  depsP.then(function () {
+    // 마크다운·수식 라이브러리가 늦게 오면 그때 다시 그린다 (쓰는 중인 칸은 건드리지 않음)
+    for (var k in EDITORS) {
+      var ed = EDITORS[k];
+      if (!(ed._ta && document.body.contains(ed._ta)) && ed.content) ed.renderView();
+    }
+    document.querySelectorAll(".quiz").forEach(typeset);
+    // 그림 캡션은 HTML 블록이라 Pandoc이 수식으로 표시하지 않는다 → 여기서 조판
+    document.querySelectorAll("figure.fig figcaption, .video .vcap, table.mvm-table").forEach(typeset);
+  });
 })();

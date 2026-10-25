@@ -1,0 +1,36 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 352' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='300' y='20' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >두 단계 사슬 입력 → 은닉 → 출력: 앞쪽 가중치의 기울기는 '기울기들의 곱'이다</text>
+<rect x='12' y='72' width='100' height='36' rx='8' fill='#fff' stroke='#e08a3c' stroke-width='1.2' />
+<text x='62' y='95' font-size='12' fill='#e08a3c' text-anchor='middle' font-weight='bold' >입력 u = 2</text>
+<rect x='168' y='72' width='100' height='36' rx='8' fill='#fff' stroke='#3d6fb4' stroke-width='1.2' />
+<text x='218' y='95' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >은닉 h = 2</text>
+<rect x='324' y='72' width='100' height='36' rx='8' fill='#fff' stroke='#3d6fb4' stroke-width='1.2' />
+<text x='374' y='95' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >출력 y = 1</text>
+<rect x='482' y='72' width='100' height='36' rx='8' fill='#fff' stroke='#13936b' stroke-width='1.2' />
+<text x='532' y='95' font-size='12' fill='#13936b' text-anchor='middle' font-weight='bold' >정답 5</text>
+<line x1='114' y1='90' x2='166' y2='90' stroke='#444' stroke-width='1.6' marker-end='url(#arr)'/>
+<text x='140.0' y='62' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' >× w₁ = 1.0</text>
+<line x1='270' y1='90' x2='322' y2='90' stroke='#444' stroke-width='1.6' marker-end='url(#arr)'/>
+<text x='296.0' y='62' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' >× w₂ = 0.5</text>
+<line x1='426' y1='90' x2='480' y2='90' stroke='#444' stroke-width='1.6' marker-end='url(#arr)'/>
+<text x='453.0' y='62' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' >오차 −4, L = 16</text>
+<text x='300' y='136' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >앞으로 계산(순전파): h = w₁·u, y = w₂·h, L = (y − 정답)²</text>
+<text x='300' y='166' font-size='11.5' fill='#c8553d' text-anchor='middle' font-weight='bold' >거꾸로 묻기(역전파): 각 화살표를 '조금 바꾸면 얼마나 변하나'(국소 기울기)로 바꾼다</text>
+<rect x='35' y='172' width='150' height='46' rx='6' fill='#fbeeec' stroke='#c8553d' stroke-width='1.2' />
+<text x='110' y='190' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >h는 w₁의 몇 배로 변하나</text>
+<text x='110' y='208' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='bold' >∂h/∂w₁ = u = 2</text>
+<rect x='225' y='172' width='150' height='46' rx='6' fill='#fbeeec' stroke='#c8553d' stroke-width='1.2' />
+<text x='300' y='190' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >y는 h의 몇 배로 변하나</text>
+<text x='300' y='208' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='bold' >∂y/∂h = w₂ = 0.5</text>
+<rect x='415' y='172' width='150' height='46' rx='6' fill='#fbeeec' stroke='#c8553d' stroke-width='1.2' />
+<text x='490' y='190' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >L은 y의 몇 배로 변하나</text>
+<text x='490' y='208' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='bold' >∂L/∂y = 2·오차 = −8</text>
+<line x1='223' y1='195' x2='187' y2='195' stroke='#c8553d' stroke-width='1.4' marker-end='url(#arr)'/>
+<line x1='413' y1='195' x2='377' y2='195' stroke='#c8553d' stroke-width='1.4' marker-end='url(#arr)'/>
+<rect x='40' y='244' width='520' height='74' rx='8' fill='#fafafa' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='60' y='264' font-size='11.5' fill='#444' text-anchor='start' font-weight='normal' >w₂의 기울기 = (∂L/∂y)·(∂y/∂w₂) = (−8) × 2 = −16</text>
+<text x='60' y='286' font-size='11.5' fill='#c8553d' text-anchor='start' font-weight='bold' >w₁의 기울기 = (∂L/∂y)·(∂y/∂h)·(∂h/∂w₁) = (−8) × 0.5 × 2 = −8</text>
+<text x='60' y='306' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >w₁의 변화는 w₂라는 '통로'를 지나서야 L에 닿는다. 통로가 k개면 통로의 배율이 k번 곱해진다 → 2구간의 BPTT.</text>
+<text x='300' y='338' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >확인: w₁을 1.0 → 1.1로 바꾸면 L은 16 → 15.21, 변화 −0.79 ÷ 0.1 = −7.9 ≈ −8. 숫자는 코드가 계산했다. (Claude가 계산해 그림)</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 300' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='320.0' y='22.0' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >이온 소자의 기억과 비선형: 상태 x 하나로 보는 공통 틀 (모식도)</text>
+<rect x='20.0' y='60.0' width='130.0' height='70.0' rx='6' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
+<text x='85.0' y='88.0' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >입력 전압 V(t)</text>
+<text x='85.0' y='108.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >펄스·사인파</text>
+<line x1='150.0' y1='95.0' x2='205.0' y2='95.0' stroke='#444' stroke-width='1.6' marker-end='url(#arr)'/>
+<rect x='210.0' y='50.0' width='220.0' height='90.0' rx='6' fill='#eef9f4' stroke='#13936b' stroke-width='1.2' />
+<text x='320.0' y='76.0' font-size='12' fill='#13936b' text-anchor='middle' font-weight='bold' >상태 x (소자 안에서 바뀌는 양)</text>
+<text x='320.0' y='98.0' font-size='12' fill='#444' text-anchor='middle' font-weight='normal' >dx/dt = f(x, V)</text>
+<text x='320.0' y='120.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >쌓이고(V가 밀 때) · 새어 나간다(혼자 둘 때)</text>
+<line x1='430.0' y1='95.0' x2='485.0' y2='95.0' stroke='#444' stroke-width='1.6' marker-end='url(#arr)'/>
+<rect x='490.0' y='60.0' width='130.0' height='70.0' rx='6' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.2' />
+<text x='555.0' y='88.0' font-size='12' fill='#e08a3c' text-anchor='middle' font-weight='bold' >출력 전류</text>
+<text x='555.0' y='108.0' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' >I = G(x, V)·V</text>
+<text x='320.0' y='170.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='normal' >기억 = x가 이전 입력의 흔적을 들고 있는 시간 (f의 '새어 나감' 속도가 정함)</text>
+<text x='320.0' y='190.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='normal' >비선형 = G가 x·V에 대해 휘어 있거나, x가 V의 부호에 따라 다르게 쌓이는 것</text>
+<rect x='20.0' y='214.0' width='148.0' height='56.0' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.2' />
+<text x='94.0' y='236.0' font-size='10.5' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >EDL 충전</text>
+<text x='94.0' y='256.0' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >x = 계면에 모인 전하</text>
+<rect x='175.0' y='214.0' width='148.0' height='56.0' rx='6' fill='#fff' stroke='#13936b' stroke-width='1.2' />
+<text x='249.0' y='236.0' font-size='10.5' fill='#13936b' text-anchor='middle' font-weight='bold' >농도 분극·이온 고갈</text>
+<text x='249.0' y='256.0' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >x = 접합·채널의 이온 농도</text>
+<rect x='330.0' y='214.0' width='148.0' height='56.0' rx='6' fill='#fff' stroke='#e08a3c' stroke-width='1.2' />
+<text x='404.0' y='236.0' font-size='10.5' fill='#e08a3c' text-anchor='middle' font-weight='bold' >전기화학 도핑·삽입·산화환원</text>
+<text x='404.0' y='256.0' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >x = 물질 속 이온 양·산화 상태</text>
+<rect x='485.0' y='214.0' width='148.0' height='56.0' rx='6' fill='#fff' stroke='#7a5fb0' stroke-width='1.2' />
+<text x='559.0' y='236.0' font-size='10.5' fill='#7a5fb0' text-anchor='middle' font-weight='bold' >나노유체 표면전하</text>
+<text x='559.0' y='256.0' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >x = 통로 속 반대이온·흡착량</text>
+<text x='320.0' y='290.0' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >메커니즘마다 x가 무엇인지가 다르다. 식의 꼴은 Pandey 2026(PDF p.7)의 일반 memristor 표현을 따랐다.</text>
+</svg>

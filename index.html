@@ -554,16 +554,24 @@ ul.task-list li input[type="checkbox"] {
     <div class="f-desc">읽기 전에 답을 쓴다. 숫자 하나, 반론 하나. "뇌가 그러니까"로 끝나면 실패.</div>
   </a>
 </section>
-<section id="하루는-이렇게-흐릅니다" class="level2">
-<h2 class="anchored" data-anchor-id="하루는-이렇게-흐릅니다">하루는 이렇게 흐릅니다</h2>
+<section id="공부하는-순서" class="level2">
+<h2 class="anchored" data-anchor-id="공부하는-순서">공부하는 순서</h2>
+<p>D1–D30은 <strong>마감이 아니라 순서</strong>입니다. 날짜는 처음 세운 계획일 뿐이고, 한 Day를 며칠에 나눠 구간 단위로 읽어도 됩니다. 쉬었다 돌아오면 위 카드의 <strong>이어서 하기</strong>가 마지막으로 읽던 구간으로 데려갑니다.</p>
 <ol class="flow">
-  <li><span class="flow-n">1</span><div><b>읽기 전 답</b><span>자료를 보기 전에 지금 아는 만큼 씁니다. 10분.</span></div></li>
-  <li><span class="flow-n">2</span><div><b>학습자료</b><span>그림·영상·잠깐 점검 퀴즈와 함께 읽습니다. 장마다 요점이 정리됩니다. 45–60분.</span></div></li>
-  <li><span class="flow-n">3</span><div><b>노트에 정리</b><span>자료를 덮고 답의 뼈대를 손으로 그립니다. 20분.</span></div></li>
-  <li><span class="flow-n">4</span><div><b>내 답</b><span>사이트에서 직접 내 말로 씁니다. 주장마다 [확인]·[해석]·[가설] 태그. 40분.</span></div></li>
-  <li><span class="flow-n">5</span><div><b>종합 퀴즈와 피드백</b><span>그날의 종합 퀴즈를 풀고, Claude가 오류와 빈틈을 짚고 꼬리질문을 남깁니다. 20분.</span></div></li>
+  <li><span class="flow-n">1</span><div><b>사전 테스트 (권장)</b><span>배우기 전에 몇 문제를 풀어 봅니다. 정답만 보이고, 많이 틀리는 게 정상입니다. 건너뛰고 싶으면 '그냥 읽기'를 눌러도 됩니다.</span></div></li>
+  <li><span class="flow-n">2</span><div><b>학습자료 (기본)</b><span>구간마다 그림·단계 보기·<b>잠깐 점검</b>까지가 기본 경로입니다. 실습이 있는 구간은 3–5분 조작해 봅니다. '심화'·'추가 연습'·'처음부터 다시 읽기'로 접힌 것은 선택입니다.</span></div></li>
+  <li><span class="flow-n">3</span><div><b>백지 회상 (기본, 짧게)</b><span>자료를 가리고 핵심 질문 2–3개에 짧게 답하거나 작은 도식 하나를 그린 뒤, 핵심 목록과 대조합니다. 전부 쓰기는 선택입니다.</span></div></li>
+  <li><span class="flow-n">4</span><div><b>가르치듯 내 답 (기본, 짧게)</b><span>후배에게 설명하듯 3–5문장 또는 도식 하나로 답하고, 막힌 곳 한 줄을 적습니다. 긴 종합 답안은 선택입니다.</span></div></li>
+  <li><span class="flow-n">+</span><div><b>선택</b><span>⓪ 되살리기와 날짜에 맞춘 복습(위 카드가 알려 줌), ⑤ 사후 테스트(사전 문항을 정답 본 뒤 다시 푸는 연습), 마무리 퀴즈, 피드백 요청.</span></div></li>
 </ol>
-<p>하루 2–3시간을 넘기지 않습니다. 답하지 못한 질문은 "답하지 못했다"고 적고 넘어갑니다.</p>
+<p><strong>점수 읽는 법.</strong> 잠깐 점검과 종합 퀴즈는 <strong>처음 고른 답</strong>이 따로 기록됩니다. 정답을 본 뒤 다시 푼 답과 사후 테스트는 "다시 떠올리기" 연습이고, 이해가 늘었다는 증거로 세지 않습니다. 기록은 세 가지로 따로 봅니다. <strong>읽음</strong>(지도의 ✓는 그 구간에 머물렀다는 뜻, '다 읽었다' 체크는 내 표시), <strong>학습 완료</strong>(기본 경로를 마쳤다는 내 표시, 복습 날짜의 기준), <strong>이해 점검</strong>(퀴즈 첫 시도 결과). 각 Day의 ⑥ 완료 칸에 셋이 나란히 보입니다.</p>
+</section>
+<section id="기록과-백업" class="level2">
+<h2 class="anchored" data-anchor-id="기록과-백업">기록과 백업</h2>
+<div id="backup-box" class="backup-box">
+  <p><b>기록이 남는 곳은 두 군데입니다.</b> ① <b>서버(내 컴퓨터의 <code>answers</code> 폴더)</b>: 내 답, 먼저 만들어 보기, 백지 회상, 질문, 학습 완료, 복습 기록. 저장할 때마다 git 이력에도 남아 이전 판으로 되돌릴 수 있습니다. ② <b>이 브라우저</b>: 퀴즈 결과, 실습 기록, 읽던 위치. 브라우저 데이터를 지우거나 다른 브라우저로 열면 보이지 않습니다.</p>
+  <p class="static-only">공개 사이트에서는 백업 기능을 쓸 수 없습니다. '사이트 열기'로 연 내 컴퓨터의 사이트에서 쓰세요.</p>
+</div>
 </section>
 <section id="진행-상황" class="level2">
 <h2 class="anchored" data-anchor-id="진행-상황">진행 상황</h2>

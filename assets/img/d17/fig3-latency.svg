@@ -1,0 +1,35 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 330' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='320.0' y='22.0' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >소자의 응답 시간과 시스템의 지연시간은 다른 양이다 (가정값으로 계산)</text>
+<line x1='150.0' y1='250.0' x2='600.0' y2='250.0' stroke='#999' stroke-width='1'/>
+<line x1='150.0' y1='247.0' x2='150.0' y2='253.0' stroke='#999' stroke-width='1'/>
+<text x='150.0' y='265.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<line x1='231.8' y1='247.0' x2='231.8' y2='253.0' stroke='#999' stroke-width='1'/>
+<text x='231.8' y='265.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >200</text>
+<line x1='313.6' y1='247.0' x2='313.6' y2='253.0' stroke='#999' stroke-width='1'/>
+<text x='313.6' y='265.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >400</text>
+<line x1='395.5' y1='247.0' x2='395.5' y2='253.0' stroke='#999' stroke-width='1'/>
+<text x='395.5' y='265.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >600</text>
+<line x1='477.3' y1='247.0' x2='477.3' y2='253.0' stroke='#999' stroke-width='1'/>
+<text x='477.3' y='265.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >800</text>
+<line x1='559.1' y1='247.0' x2='559.1' y2='253.0' stroke='#999' stroke-width='1'/>
+<text x='559.1' y='265.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >1000</text>
+<text x='600.0' y='280.0' font-size='10' fill='#999' text-anchor='end' font-weight='normal' >시간 (ms)</text>
+<text x='142.0' y='68.0' font-size='10.5' fill='#444' text-anchor='end' font-weight='bold' >실시간(B)</text>
+<rect x='150.0' y='52.0' width='409.1' height='24.0' rx='0' fill='#fbeeec' stroke='#c8553d' stroke-width='1.2' />
+<text x='354.5' y='68.0' font-size='9.5' fill='#c8553d' text-anchor='middle' font-weight='normal' >박동 신호가 들어오는 동안 소자가 함께 변한다</text>
+<rect x='559.1' y='52.0' width='2.0' height='24.0' rx='0' fill='#3d6fb4' stroke='none' stroke-width='1.2' />
+<text x='259.1' y='92.0' font-size='9.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >박동이 끝난 뒤 추가 지연 0.6 ms (읽기+readout)</text>
+<text x='142.0' y='134.0' font-size='10.5' fill='#444' text-anchor='end' font-weight='bold' >재생, τ = 50 ms(D)</text>
+<rect x='150.0' y='118.0' width='204.5' height='24.0' rx='0' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.2' />
+<text x='252.3' y='134.0' font-size='9.5' fill='#e08a3c' text-anchor='middle' font-weight='normal' >입력 50단계 × 10 ms = 500 ms</text>
+<rect x='354.5' y='118.0' width='102.3' height='24.0' rx='0' fill='#eeeeee' stroke='#999' stroke-width='1.2' />
+<text x='405.7' y='134.0' font-size='9.5' fill='#666' text-anchor='middle' font-weight='normal' >초기화 대기 5τ = 250 ms</text>
+<text x='150.0' y='158.0' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >합계 지연 750.6 ms → 1초에 1.33개 처리</text>
+<text x='142.0' y='200.0' font-size='10.5' fill='#444' text-anchor='end' font-weight='bold' >재생, τ = 50 µs(E)</text>
+<rect x='150.0' y='184.0' width='2.0' height='24.0' rx='0' fill='#e08a3c' stroke='none' stroke-width='1.2' />
+<text x='158.0' y='200.0' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >합계 지연 1.35 ms (그림에서는 선 하나) → 1초에 741개</text>
+<text x='20.0' y='290.0' font-size='10' fill='#444' text-anchor='start' font-weight='normal' >실시간 처리에서는 신호 자체의 길이(박동 1 s)가 어느 방법에나 공통이고, 소자의 느림은 '추가 지연'이 되지 않는다.</text>
+<text x='20.0' y='307.0' font-size='10' fill='#444' text-anchor='start' font-weight='normal' >저장된 데이터를 다시 넣을 때는 소자의 시간척도가 곧 지연이 되고, 지연 × 대기 전력이 에너지가 된다.</text>
+<text x='20.0' y='324.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >ADC 1회 10 µs, readout 0.1 ms, 초기화 대기 5τ는 가정. (Claude가 계산해 그림)</text>
+</svg>

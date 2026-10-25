@@ -486,11 +486,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#lesson" id="toc-lesson" class="nav-link active" data-scroll-target="#lesson">② 학습자료</a></li>
-  <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">③ 노트에 정리</a></li>
-  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 내 답</a></li>
-  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑤ 학습 완료</a></li>
-  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑥ 피드백과 꼬리질문</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">① 사전 테스트와 먼저 만들어 보기</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">② 학습자료</a></li>
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 가르치듯 내 답</a></li>
+  <li><a href="#posttest" id="toc-posttest" class="nav-link" data-scroll-target="#posttest">⑤ 다시 풀기 (선택)</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑥ 학습 완료</a></li>
+  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑦ 피드백과 꼬리질문</a></li>
   </ul>
 </nav>
     </div>
@@ -530,12 +531,25 @@ ul.task-list li input[type="checkbox"] {
   <button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button>
 </div>
 <ol class="day-steps" data-day="d28">
-  <li data-step="pre"><a href="#pre"><b>1</b>읽기 전 답</a></li>
+  <li data-step="pretest"><a href="#pretest"><b>1</b>사전 테스트 <small>권장</small></a></li>
   <li data-step="lesson" data-manual="true"><a href="#lesson"><b>2</b>학습자료</a></li>
-  <li data-step="note" data-manual="true"><a href="#note"><b>3</b>노트 정리</a></li>
-  <li data-step="answer"><a href="#answer"><b>4</b>내 답</a></li>
-  <li data-step="done"><a href="#done"><b>5</b>학습 완료</a></li>
+  <li data-step="recall"><a href="#recall"><b>3</b>백지 회상</a></li>
+  <li data-step="answer"><a href="#answer"><b>4</b>가르치듯 답</a></li>
+  <li data-step="posttest"><a href="#posttest"><b>5</b>다시 풀기 <small>선택</small></a></li>
+  <li data-step="done"><a href="#done"><b>6</b>완료</a></li>
 </ol>
+<div class="flow-line path-line">
+<p><strong>기본 경로</strong>: ① 사전 테스트(권장) → ② 학습자료(구간마다 잠깐 점검까지) → ③ 백지 회상 → ④ 가르치듯 내 답. ⓪·⑤와 접힌 '심화'·'추가 연습'은 선택입니다. 한 번에 끝낼 필요 없이 구간 단위로 나눠 읽어도 되고, 다시 열면 '지난번 읽던 곳' 링크가 뜹니다.</p>
+</div>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">① 사전 테스트와 먼저 만들어 보기</h2>
+<div class="flow-line">
+<p>아직 배우지 않은 내용을 먼저 풀어 봅니다. <strong>많이 틀리는 것이 정상</strong>이고, 그게 목적입니다. 먼저 답해 본 문제는 읽을 때 눈에 들어오고 더 오래 남습니다. 문제마다 정답만 보이고, 이유는 학습자료와 ⑤ 다시 풀기에서 봅니다. 다 풀면 학습자료가 열립니다. 건너뛰려면 학습자료 위의 '그냥 읽기'를 누르세요(권장 단계일 뿐 필수는 아닙니다).</p>
+</div>
+<div class="pending-box">
+<p>이 날의 사전 테스트는 아직 준비되지 않았습니다. 아래 '먼저 만들어 보기'만 해도 됩니다.</p>
+</div>
+</section>
 <section id="lesson" class="level2">
 <h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
 <div class="pending-box">
@@ -545,18 +559,11 @@ ul.task-list li input[type="checkbox"] {
 <label><input type="checkbox" data-step-check="lesson" data-day="d28"> 학습자료를 다 읽었다</label>
 </div>
 </section>
-<section id="note" class="level2">
-<h2 class="anchored" data-anchor-id="note">③ 노트에 정리</h2>
-<div class="note-line">
-<p>자료를 덮고 노트를 펴세요. 오늘 질문에 대한 답의 뼈대를 손으로 그려 봅니다. 인과의 화살표 하나, 숫자 하나, 반론 하나가 들어가면 충분합니다. 막히는 곳은 자료로 돌아가 다시 읽고, 그래도 막히면 따로 적어 두세요.</p>
-</div>
-<div class="step-check local-only">
-<label><input type="checkbox" data-step-check="note" data-day="d28"> 노트에 정리했다</label>
-</div>
-</section>
 <section id="answer" class="level2">
-<h2 class="anchored" data-anchor-id="answer">④ 내 답</h2>
-<p>노트를 보면서 내 말로 씁니다. 주장마다 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이세요. <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 저장은 초안 저장입니다. 몇 번이고 고쳐도 됩니다.</p>
+<h2 class="anchored" data-anchor-id="answer">④ 가르치듯 내 답</h2>
+<div class="flow-line">
+<p>후배에게 <strong>설명한다고 생각하고</strong> 오늘 질문에 답합니다. <strong>기본은 짧은 답</strong>입니다: 3–5문장, 또는 작은 도식 하나와 한 줄 설명, 그리고 설명하다 막힌 곳 한 줄. 이것만으로 정상적인 학습입니다. 왜·어떻게, 근거와 반론까지 쓰는 긴 종합 답안은 <strong>선택</strong>입니다. 주장에 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이면 좋고, <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 몇 번이고 고쳐도 됩니다. 막히는 곳은 따로 적어 두세요.</p>
+</div>
 <div class="guide-box">
 <p><strong>오늘은 가설 후보를 비교하는 날입니다.</strong></p>
 <ul>
@@ -577,12 +584,21 @@ ul.task-list li input[type="checkbox"] {
   <a href="../ledger/kill-criteria.html">접는 기준</a>
 </div>
 </section>
+<section id="posttest" class="level2">
+<h2 class="anchored" data-anchor-id="posttest">⑤ 다시 풀기 (선택)</h2>
+<div class="flow-line">
+<p>① 사전 테스트와 <strong>같은 문제</strong>를 이유와 함께 다시 풉니다. 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 다시 떠올리기 연습입니다. 이해 점검은 학습자료의 <strong>잠깐 점검</strong>과 <strong>종합 퀴즈</strong>에서 처음 고른 답으로 봅니다.</p>
+</div>
+<div class="pending-box">
+<p>이 날의 사후 테스트는 사전 테스트가 준비되면 함께 생깁니다.</p>
+</div>
+</section>
 <section id="done" class="level2">
-<h2 class="anchored" data-anchor-id="done">⑤ 학습 완료</h2>
+<h2 class="anchored" data-anchor-id="done">⑥ 학습 완료</h2>
 <div class="done-box" data-day="d28">
   <div class="done-text">
     <b>오늘 학습 완료</b>
-    <span class="done-desc">학습자료를 읽고, 노트에 정리하고, 내 답을 저장했으면 누르세요. 답을 저장했다고 자동으로 완료되지는 않습니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
+    <span class="done-desc">기본 경로(학습자료 → 짧은 백지 회상 → 짧은 내 답)를 마쳤으면 누르세요. 읽음 체크·학습 완료·이해 점검(퀴즈 첫 시도)은 따로 기록되고 아래에 나란히 보입니다. 완료한 날짜를 기준으로 커버 페이지가 복습(1·3·7·14·30일 뒤)을 알려 줍니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
   </div>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">오늘 학습 완료</button>
@@ -592,7 +608,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 <section id="feedback" class="level2">
-<h2 class="anchored" data-anchor-id="feedback">⑥ 피드백과 꼬리질문</h2>
+<h2 class="anchored" data-anchor-id="feedback">⑦ 피드백과 꼬리질문</h2>
 <div class="pending-box">
 <p>피드백은(는) 공개 범위에서 제외되어 있습니다.</p>
 </div>

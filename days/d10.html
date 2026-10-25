@@ -89,6 +89,35 @@ ul.task-list li input[type="checkbox"] {
   };
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/study.css">
 </head>
@@ -486,11 +515,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#lesson" id="toc-lesson" class="nav-link active" data-scroll-target="#lesson">② 학습자료</a></li>
-  <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">③ 노트에 정리</a></li>
-  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 내 답</a></li>
-  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑤ 학습 완료</a></li>
-  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑥ 피드백과 꼬리질문</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">① 사전 테스트와 먼저 만들어 보기</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">② 학습자료</a></li>
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 가르치듯 내 답</a></li>
+  <li><a href="#posttest" id="toc-posttest" class="nav-link" data-scroll-target="#posttest">⑤ 다시 풀기 (선택)</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑥ 학습 완료</a></li>
+  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑦ 피드백과 꼬리질문</a></li>
   </ul>
 </nav>
     </div>
@@ -530,34 +560,613 @@ ul.task-list li input[type="checkbox"] {
   <button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button>
 </div>
 <ol class="day-steps" data-day="d10">
-  <li data-step="pre"><a href="#pre"><b>1</b>읽기 전 답</a></li>
+  <li data-step="pretest"><a href="#pretest"><b>1</b>사전 테스트 <small>권장</small></a></li>
   <li data-step="lesson" data-manual="true"><a href="#lesson"><b>2</b>학습자료</a></li>
-  <li data-step="note" data-manual="true"><a href="#note"><b>3</b>노트 정리</a></li>
-  <li data-step="answer"><a href="#answer"><b>4</b>내 답</a></li>
-  <li data-step="done"><a href="#done"><b>5</b>학습 완료</a></li>
+  <li data-step="recall"><a href="#recall"><b>3</b>백지 회상</a></li>
+  <li data-step="answer"><a href="#answer"><b>4</b>가르치듯 답</a></li>
+  <li data-step="posttest"><a href="#posttest"><b>5</b>다시 풀기 <small>선택</small></a></li>
+  <li data-step="done"><a href="#done"><b>6</b>완료</a></li>
 </ol>
+<div class="flow-line path-line">
+<p><strong>기본 경로</strong>: ① 사전 테스트(권장) → ② 학습자료(구간마다 잠깐 점검까지) → ③ 백지 회상 → ④ 가르치듯 내 답. ⓪·⑤와 접힌 '심화'·'추가 연습'은 선택입니다. 한 번에 끝낼 필요 없이 구간 단위로 나눠 읽어도 되고, 다시 열면 '지난번 읽던 곳' 링크가 뜹니다.</p>
+</div>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">① 사전 테스트와 먼저 만들어 보기</h2>
+<div class="flow-line">
+<p>아직 배우지 않은 내용을 먼저 풀어 봅니다. <strong>많이 틀리는 것이 정상</strong>이고, 그게 목적입니다. 먼저 답해 본 문제는 읽을 때 눈에 들어오고 더 오래 남습니다. 문제마다 정답만 보이고, 이유는 학습자료와 ⑤ 다시 풀기에서 봅니다. 다 풀면 학습자료가 열립니다. 건너뛰려면 학습자료 위의 '그냥 읽기'를 누르세요(권장 단계일 뿐 필수는 아닙니다).</p>
+</div>
+<div class="quiz" data-day="d10" data-set="pre"></div>
+</section>
 <section id="lesson" class="level2">
 <h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
-<div class="pending-box">
-<p>이 날의 학습자료는 아직 준비되지 않았습니다.</p>
-<p>읽기 전 답을 먼저 써 두고 Claude에게 <strong>"D10 자료 만들어줘"</strong>라고 말하세요. 읽기 전 답과 앞선 날들의 답을 읽고, 비어 있는 곳 위주로 자료를 만들어 이 자리에 넣습니다.</p>
+<div class="lesson-body" data-pre="d10-pre">
+<div class="lesson-meta">
+<p>학습 구간 7개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 105분 안팎(추정) · 선택 영상 약 24분 · 퀴즈 26문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024는 p.194–195(delay-coupled RC와 시간다중화), p.197(물리 노드의 비선형성), p.198(전처리: 시간다중화와 θ ≈ τ/4), p.199(Fig. 4a), p.200(kernel quality와 선형 분리); Stepney 2024는 3.2.3절(p.668, 무작위 사상), 3.4.2절(p.670–672, 시간다중화와 마스크), 4.5절(p.673); Singh 2026은 p.4–5(DR2), p.13(3.2절)만; Zhong 2022는 p.674(Fig. 2b: 마스크를 거는 회로)와 p.675(마스크·노드 수)만; Zhong 2026은 p.3–4(선형 영역·포화 영역, 펄스 간격 부호화)만; 폴더 밖의 Appeltant 2011은 PubMed Central 공개본에서 θ = τ/N·표본 유지·θ &lt; T(θ = 0.2T) 문장만. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. XOR·마스크·가상 노드·소자 A/B의 숫자 예와 그림 1–6, 8은 Claude가 계산한 예시·모식도이고, 그림 7은 Claude가 순수 Python으로 돌린 시뮬레이션입니다.</p>
 </div>
+<p>D8에서 노드 두 개 reservoir가 "두 입력이 서로 다른가"(XOR)라는 질문에는 직선 하나로 답하지 못하는 것을 보았고, D9에서는 기억이 왜 필요하고 어떻게 흐려지는지를 보았습니다. 오늘은 reservoir의 다른 한 축, <strong>비선형성</strong>입니다. 기억만 있고 비선형이 없으면 무엇을 못 하는지, 차원을 늘린다는 말이 왜 비선형과 함께여야 하는지, 그리고 이온 소자의 휜 전류–전압 곡선이 그 비선형성을 주는지를 숫자로 따라갑니다.</p>
+<ol type="1">
+<li>선형과 비선형은 정확히 무엇이 다른가? (겹침 원리)</li>
+<li>선형 readout으로 못 푸는 과제는 무엇인가? (XOR, parity를 손으로)</li>
+<li>"고차원으로 사상한다"는 말은 왜 비선형이어야 뜻이 있나? (선형으로 늘린 차원은 여전히 선형)</li>
+<li>입력 하나를 여러 노드로 퍼뜨리는 방법: 입력 마스크와, 소자 하나를 시간으로 나눠 쓰는 시간다중화</li>
+<li>실제 reservoir로 XOR을 풀면? 어떤 비선형이 필요한가?</li>
+<li>소자의 I–V 비선형성은 그 자체로 쓸모 있는 비선형성인가?</li>
+</ol>
+<section id="ch-linear" class="level3">
+<h3 class="anchored" data-anchor-id="ch-linear">1. 선형과 비선형: 겹침 원리</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "선형 = 겹침 원리가 성립한다"를 숫자로 확인하고, 선형 reservoir의 readout은 결국 지난 입력들의 가중합이라서 지연 탭 기준선과 같은 일밖에 못 한다는 것을 시뮬레이션 숫자(NMSE 0.144 대 0.146)로 말할 수 있다.</p>
+</div>
+<div id="b-nonlinearity" class="basics">
+<section id="선형-함수와-비선형-함수-겹침-원리가-깨지는-것" class="level4">
+<h4 class="anchored" data-anchor-id="선형-함수와-비선형-함수-겹침-원리가-깨지는-것">선형 함수와 비선형 함수: 겹침 원리가 깨지는 것</h4>
+<p><strong>왜 필요한가.</strong> "비선형이 필요하다"는 말을 하려면 선형이 무엇인지부터 정확해야 합니다. 그래프가 직선이냐 곡선이냐로 구별하는 것은 입력이 하나일 때만 통합니다. 입력이 여럿이고 시간에 따라 들어오면 다른 기준이 필요합니다.</p>
+<p><strong>정의(겹침 원리, superposition).</strong> 함수 <span class="math inline">\(f\)</span>가 다음 두 가지를 만족하면 <strong>선형</strong>입니다.</p>
+<ol type="1">
+<li>더한 것의 결과 = 결과의 합: <span class="math inline">\(f(a + b) = f(a) + f(b)\)</span></li>
+<li>배수의 결과 = 결과의 배수: <span class="math inline">\(f(c \cdot a) = c \cdot f(a)\)</span></li>
+</ol>
+<p><strong>숫자로.</strong> <span class="math inline">\(f(u) = 2u\)</span>: <span class="math inline">\(f(1) + f(2) = 2 + 4 = 6\)</span>, <span class="math inline">\(f(1 + 2) = f(3) = 6\)</span>. 같습니다. 선형입니다. <span class="math inline">\(f(u) = u^2\)</span>: <span class="math inline">\(f(1) + f(2) = 1 + 4 = 5\)</span>, <span class="math inline">\(f(3) = 9\)</span>. 다릅니다. 비선형입니다. <span class="math inline">\(\tanh\)</span>: <span class="math inline">\(\tanh(1) + \tanh(2) = 0.762 + 0.964 = 1.726\)</span>, <span class="math inline">\(\tanh(3) = 0.995\)</span>. 다릅니다. 비선형입니다. 둘을 따로 넣은 효과의 합과 함께 넣은 효과가 다르면, 그 차이가 "함께 있었다"는 정보이고 이것이 비선형의 쓸모입니다. D8 3구간의 <span class="math inline">\(x(10) + x(01) \neq x(11)\)</span>이 바로 이것이었습니다.</p>
+<figure class="fig figure"><img src="../assets/img/d10/fig0-superposition.svg" alt="두 패널 막대그림. 왼쪽 f(u)=2u: f(1)=2와 f(2)=4를 쌓은 6이 f(3)=6과 같아 선형. 오른쪽 tanh: 0.762와 0.964를 쌓은 1.726이 f(3)=0.995보다 커서 비선형" class="figure-img"><figcaption><b>그림 1.</b> 위 숫자를 막대로. 볼 것: 각 패널에서 셋째 막대(f(1)과 f(2)를 쌓은 것)와 넷째 막대(f(3), 테두리만)의 높이를 비교한다. 왼쪽은 같고, 오른쪽은 쌓은 쪽이 훨씬 높다. 그 높이 차이 0.731이 "1과 2가 함께 들어왔다"는 사실이 남긴 몫이고, 오늘 말하는 '쓸모 있는 비선형'의 재료다. (Claude가 그림, 계산은 코드)</figcaption></figure>
+<p><strong>상수 하나는 봐준다.</strong> readout <span class="math inline">\(y = w_0 + w_1 x_1 + \cdots\)</span>처럼 상수 <span class="math inline">\(w_0\)</span>가 붙은 함수는 엄밀히는 겹침 원리를 어기지만(입력 0에서 0이 아님), 차이를 보면 겹침이 성립하므로 이 교재에서는 "선형(곱해 더하기 + 상수)"으로 함께 부릅니다. 오늘의 결론은 상수가 있든 없든 같습니다.</p>
+<p><strong>시간이 있으면.</strong> 함수의 입력이 "입력의 이력 전체"일 때도 같은 기준을 씁니다. 이력 A를 넣은 결과와 이력 B를 넣은 결과의 합이, A와 B를 더한 이력을 넣은 결과와 같으면 선형입니다.</p>
+</section>
+</div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/wOQDGvCLOs8?start=0&amp;rel=0" title="영상: Linear and Non-Linear Systems" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–13:25, 약 13분, 영어·자막).</b> Neso Academy, "Linear and Non-Linear Systems" (신호와 시스템 강의). <b>볼 이유:</b> 설명란의 목차가 선형 시스템의 정의 → 겹침 원리 → 더하기 법칙(additivity) → 배수 법칙(homogeneity) → 어떤 시스템이 선형인지 확인하는 법 순서로, 위 정의 1·2를 칠판 풀이로 여러 번 연습한다. 전자공학 강의라 입력이 '신호', 함수가 '시스템'이라고 불릴 뿐 같은 기준이다. 챕터 시각이 없어 처음부터 본다. <b>보고 답할 질문:</b> 영상의 판정 절차를 $\tanh$에 적용하면 정의 1과 2 중 어느 것이 먼저 깨지나? '입력 0에서 출력이 0이 아닌 시스템'을 영상은 어떻게 판정하나(이 절의 '상수 하나는 봐준다'와 비교)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명란 목차(챕터 시각 없음, 영상 내용은 미검증)</span></div></div>
+<p><strong>선형 reservoir가 하는 일.</strong> D8의 갱신식에서 <span class="math inline">\(\tanh\)</span>를 빼면 <span class="math inline">\(x(t+1) = W x(t) + W_{in} u(t)\)</span>입니다(<a href="../days/d08.html#b-rc-update">D8 기초: 상태 갱신식</a>). 처음 상태를 <span class="math inline">\(x(0) = 0\)</span>으로 두고 한 단계씩 넣어 봅니다(<span class="math inline">\(W^2\)</span>는 표 <span class="math inline">\(W\)</span>를 두 번 곱한다는 뜻).</p>
+<ul>
+<li><span class="math inline">\(x(1) = W_{in} u(0)\)</span></li>
+<li><span class="math inline">\(x(2) = W x(1) + W_{in} u(1) = W W_{in} u(0) + W_{in} u(1)\)</span></li>
+<li><span class="math inline">\(x(3) = W x(2) + W_{in} u(2) = W^2 W_{in} u(0) + W W_{in} u(1) + W_{in} u(2)\)</span></li>
+</ul>
+<p>한 단계가 지날 때마다 앞의 항들에 <span class="math inline">\(W\)</span>가 하나씩 더 곱해질 뿐, <strong>입력끼리 곱해지는 일은 한 번도 없습니다</strong>. 같은 규칙으로 계속 펼치면</p>
+<p><span class="math display">\[
+x(t) = W_{in} u(t-1) + W W_{in} u(t-2) + W^2 W_{in} u(t-3) + \cdots
+\]</span></p>
+<p>즉 지난 입력들에 정해진 벡터(<span class="math inline">\(W_{in}\)</span>, <span class="math inline">\(W W_{in}\)</span>, …)를 곱해 더한 것입니다. readout은 여기에 다시 가중치를 곱해 더하므로, 최종 출력은</p>
+<p><span class="math display">\[
+y(t) = c_1 u(t-1) + c_2 u(t-2) + c_3 u(t-3) + \cdots
+\]</span></p>
+<p>처럼 <strong>지난 입력들의 가중합</strong>일 수밖에 없습니다(<span class="math inline">\(c_k\)</span>는 readout과 <span class="math inline">\(W\)</span>로 정해지는 숫자). D9의 노드 하나짜리 식 <span class="math inline">\(x(t) = u(t-1) + d\,u(t-2) + \cdots\)</span>(<a href="../days/d09.html#b-fading-memory">D9 기초: fading memory</a>)에서 숫자 <span class="math inline">\(d\)</span> 자리에 표 <span class="math inline">\(W\)</span>가 들어간 꼴입니다. 노드가 200개든 2,000개든, 선형 reservoir + 선형 readout이 할 수 있는 것은 "지난 입력에 숫자를 곱해 더하기"뿐입니다. 이것은 지난 입력을 그대로 저장해 넣는 <strong>지연 탭 + 선형 회귀 기준선</strong>(D9 1구간, D12)과 같은 종류의 계산입니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>시뮬레이션으로 확인.</strong> D12에서 돌릴 <code>tools/esn.py</code>의 결과입니다(Claude가 돌린 시뮬레이션, reservoir 난수 3개 평균). NARMA10이라는 비선형 시계열 과제(D12에서 설명; 지금은 "지난 입력들의 곱이 필요한 과제"로만 읽으세요)의 오차 NMSE(0이면 완벽, 1이면 평균값만 찍는 것과 같음)입니다. 표의 <strong>특징 수</strong>는 readout이 곱해 더하는 숫자의 개수입니다(지연 탭 50개 + 상수 1 = 51, 노드 200개 + 지금 입력 + 상수 = 202).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>방법</th>
+<th>특징 수</th>
+<th>NARMA10 NMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>지연 탭 50개 + 선형 readout (reservoir 없음)</td>
+<td>51</td>
+<td>0.146</td>
+</tr>
+<tr class="even">
+<td><strong>선형</strong> reservoir 200노드 + 선형 readout</td>
+<td>202</td>
+<td>0.144</td>
+</tr>
+<tr class="odd">
+<td><strong>tanh</strong> reservoir 200노드 + 선형 readout</td>
+<td>202</td>
+<td>0.053</td>
+</tr>
+</tbody>
+</table>
+<p>선형 reservoir는 노드가 200개인데도 지연 탭 50개와 거의 같은 성적입니다. 지난 입력의 가중합 이상을 못 하기 때문입니다. 같은 노드 수에 <span class="math inline">\(\tanh\)</span>만 넣으면 오차가 3분의 1로 줄어듭니다.</p>
+<p><strong>물리에서는.</strong> 옴의 법칙(<span class="math inline">\(I = GV\)</span>, 전도도 <span class="math inline">\(G\)</span>가 고정이면 전류는 전압에 비례. 여기서 <span class="math inline">\(G\)</span>는 소자 하나 전체의 전도도(컨덕턴스, 단위 S)이고, 재료의 성질인 이온전도도 <span class="math inline">\(\sigma\)</span> [S/m]와는 다릅니다. 두께 <span class="math inline">\(L\)</span>, 면적 <span class="math inline">\(A\)</span>인 막이면 <span class="math inline">\(G = \sigma A/L\)</span>), 저항–커패시터(전하를 담는 그릇, <a href="../days/d04.html#b-capacitor">D4 기초</a>) 회로의 충·방전, 묽은 용액에서 농도가 확산 방정식을 따를 때의 퍼짐은 모두 입력에 대해 선형입니다. 이런 과정은 D9의 기억(흐려지는 흔적)은 줄 수 있지만, 그것만으로는 오늘의 비선형을 주지 못합니다. 다이오드의 정류(전기 정류: 한 방향으로 전류가 더 잘 흐르는 성질. 증류탑의 정류와 다른 말), 포화, 문턱, 농도에 따라 바뀌는 이동도(운반자가 단위 전기장마다 얼마나 빨리 움직이는지를 나타내는 값, 정식 설명은 D19) 같은 것이 비선형의 후보입니다. <span class="tag tag-interp">해석</span></p>
+<div class="quiz" data-day="d10" data-set="1-check"></div>
+<div class="keypoints">
+<ul>
+<li>선형 = 겹침 원리: <span class="math inline">\(f(a+b) = f(a)+f(b)\)</span>, <span class="math inline">\(f(ca) = cf(a)\)</span>. <span class="math inline">\(2u\)</span>는 선형, <span class="math inline">\(u^2\)</span>·<span class="math inline">\(\tanh\)</span>는 비선형(<span class="math inline">\(\tanh 1 + \tanh 2 = 1.726 \neq \tanh 3 = 0.995\)</span>).</li>
+<li>선형 reservoir + 선형 readout의 출력은 지난 입력들의 가중합뿐 → 지연 탭 기준선과 같은 일.</li>
+<li>시뮬레이션: 선형 reservoir 200노드 0.144 ≈ 지연 탭 50개 0.146, tanh reservoir 0.053(Claude의 시뮬레이션).</li>
+</ul>
+</div>
+</section>
+<section id="ch-xor" class="level3">
+<h3 class="anchored" data-anchor-id="ch-xor">2. 선형 readout으로 못 푸는 과제: XOR과 parity</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 XOR을 직선 하나로 가를 수 없다는 것을 부등식 네 줄로 증명하고, 3-parity가 "세 입력의 곱"에 해당하는 더 높은 차수의 과제라는 것을 말할 수 있다.</p>
+</div>
+<div id="b-xor" class="basics">
+<section id="xorparity-선형-readout으로-못-푸는-과제" class="level4">
+<h4 class="anchored" data-anchor-id="xorparity-선형-readout으로-못-푸는-과제">XOR·parity: 선형 readout으로 못 푸는 과제</h4>
+<p><strong>XOR(배타적 논리합).</strong> 두 입력 <span class="math inline">\(u_1, u_2\)</span>(각각 0 또는 1)가 <strong>서로 다를 때만</strong> 1을 냅니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(u_1\)</span></th>
+<th><span class="math inline">\(u_2\)</span></th>
+<th>XOR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>직선으로 못 가르는 이유(손으로 증명).</strong> 선형 readout <span class="math inline">\(y = w_1 u_1 + w_2 u_2 + b\)</span>를 "0.5보다 크면 1"로 읽는다고 합시다. 네 줄이 모두 맞으려면</p>
+<ol type="1">
+<li>(0, 0) → 0: <span class="math inline">\(b &lt; 0.5\)</span></li>
+<li>(0, 1) → 1: <span class="math inline">\(w_2 + b &gt; 0.5\)</span></li>
+<li>(1, 0) → 1: <span class="math inline">\(w_1 + b &gt; 0.5\)</span></li>
+<li>(1, 1) → 0: <span class="math inline">\(w_1 + w_2 + b &lt; 0.5\)</span></li>
+</ol>
+<p>2와 3을 더하면 <span class="math inline">\(w_1 + w_2 + 2b &gt; 1\)</span>. 1과 4를 더하면 <span class="math inline">\(w_1 + w_2 + 2b &lt; 1\)</span>. 같은 양이 1보다 크면서 작을 수는 없습니다. 그러니 <strong>어떤 <span class="math inline">\(w_1, w_2, b\)</span>로도</strong> 네 줄을 다 맞힐 수 없습니다. 평면 그림으로 말하면, 1인 두 점(01, 10)과 0인 두 점(00, 11)이 대각선으로 엇갈려 있어 직선 하나로 나눌 수 없습니다(아래 그림 2 왼쪽). D8에서 본 것처럼 readout의 경계 <span class="math inline">\(w_1 u_1 + w_2 u_2 + b = 0.5\)</span>는 1차식이라 평면에서 직선이고, D8은 같은 결론을 "두 대각선이 한 점에서 만나므로 그 점이 양쪽에 동시에 있을 수 없다"는 그림 논리로 보였습니다(<a href="../days/d08.html#ch-state-meaning">D8 3구간</a>). 위 부등식은 그 결론을 계산으로 확인한 것입니다. 이렇게 직선(차원이 높으면 평면, 초평면) 하나로 두 무리를 가를 수 있는 경우를 <strong>선형 분리 가능</strong>(linearly separable)하다고 하고, XOR은 그렇지 않은 가장 작은 예입니다.</p>
+<p><strong>곱으로 보면.</strong> 입력을 0·1 대신 −1·+1로 적으면(0 → −1, 1 → +1), "둘이 같다"는 <span class="math inline">\(u_1 \times u_2 = +1\)</span>, "둘이 다르다"는 <span class="math inline">\(u_1 \times u_2 = -1\)</span>입니다. XOR은 <strong>두 입력의 곱</strong>의 부호입니다. 가중합(<span class="math inline">\(w_1 u_1 + w_2 u_2\)</span>)으로는 곱을 만들 수 없으니 선형 readout이 못 하는 것입니다.</p>
+<p><strong>parity(홀짝).</strong> 입력 여러 개 중 1이 <strong>홀수 개</strong>면 1을 냅니다. 2개짜리 parity가 XOR이고, 3-parity는 세 입력의 곱(<span class="math inline">\(u_1 u_2 u_3\)</span>, ±1 표기)의 부호입니다. 입력이 하나 늘 때마다 곱의 <strong>차수</strong>(곱해지는 입력의 개수)가 하나 늘어, 더 높은 차수의 비선형이 필요합니다. D11에서 이 "차수"가 정보처리용량(지금 상태에서 readout이 여러 목표 신호를 각각 얼마나 되살리는지를 0~1 점수로 재어 더한 값. D9의 MC를 곱 같은 비선형 목표까지 넓힌 것)을 나누는 기준이 됩니다.</p>
+<figure class="fig figure"><img src="../assets/img/d10/fig5-parity.svg" alt="왼쪽은 XOR의 네 점(00, 11 파랑, 01, 10 빨강)을 정사각형 꼭짓점에, 오른쪽은 3-parity의 여덟 점을 정육면체 꼭짓점에 놓은 그림. 빨강 4개와 파랑 4개가 번갈아 놓여 모서리로 이어진 이웃은 늘 색이 다르다" class="figure-img"><figcaption><b>그림 2.</b> XOR(왼쪽)과 3-parity(오른쪽)를 꼭짓점 색으로. 볼 것: 선 하나는 입력 한 칸만 바꾼 이웃을 잇는데, 어느 선이든 양 끝 색이 다르다. 빨강끼리, 파랑끼리 한쪽에 모여 있지 않고 대각선으로 엇갈려 있으니 직선(3차원에서는 평면) 하나로 가르기 어렵다. 왼쪽이 위 부등식 증명의 그림이고, 오른쪽은 입력이 하나 늘어 엇갈림이 한 차원 더 깊어진 경우다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>시간 판(지연 XOR).</strong> reservoir 과제로 쓸 때는 시간에 펼칩니다. "한 단계 전 입력과 두 단계 전 입력이 다른가?" <span class="math inline">\(y(t) = u(t-1) \oplus u(t-2)\)</span>(<span class="math inline">\(\oplus\)</span>는 XOR). 기억(D9)과 비선형이 <strong>둘 다</strong> 있어야 풀 수 있는, 가장 작은 시계열 과제입니다.</p>
+</section>
+</div>
+<p>Liang은 2003년에 물리 영역의 liquid state machine이 XOR과 음성 인식 문제를 푸는 데 쓰였다고 소개하고 <span class="src">Liang 2024, p.194</span>, 물리 노드는 입출력 사이에 비선형 함수를 제공해야 하며 <strong>그렇지 않으면 물리 RC는 선형 분리 가능한 문제만 풀 수 있다, 나머지 네트워크(readout)가 보통 선형이기 때문</strong>이라고 씁니다. <span class="src">Liang 2024, p.197</span> 오늘의 증명이 그 문장의 이유입니다.</p>
+<div class="predict">
+<p>3-parity를 0·1로 쓰면 (1, 1, 0)의 답은 무엇일까요? ±1로 바꾸면 세 입력의 곱은 얼마일까요? 아래 점검에서 확인하세요.</p>
+</div>
+<div class="quiz" data-day="d10" data-set="2-check"></div>
+<div class="keypoints">
+<ul>
+<li>XOR: 서로 다를 때만 1. 부등식 2+3과 1+4가 <span class="math inline">\(w_1 + w_2 + 2b\)</span>를 1보다 크면서 작게 만들어 모순 → 선형 분리 불가.</li>
+<li>±1 표기에서 XOR = 두 입력의 곱, 3-parity = 세 입력의 곱. 차수가 높을수록 더 높은 차수의 비선형이 필요하다.</li>
+<li>물리 노드가 비선형이 아니면 물리 RC는 선형 분리 가능한 문제만 푼다 <span class="src">Liang 2024, p.197</span>.</li>
+</ul>
+</div>
+</section>
+<section id="ch-separability" class="level3">
+<h3 class="anchored" data-anchor-id="ch-separability">3. 고차원 사상과 선형 분리: 선형으로 늘린 차원은 여전히 선형</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 XOR의 네 점을 (a) 그대로, (b) 선형으로 늘린 3차원, (c) 곱을 더한 3차원에 놓고 각각 최소제곱 readout의 출력(0.50 넷 / 0.50 넷 / 0, 1, 1, 0)을 설명하고, 곱 특징이 점 11을 들어 올려 평면 하나로 가르게 되는 과정을 따라가며, "고차원 사상"이 비선형일 때만 분리를 돕는 이유를 말할 수 있다.</p>
+</div>
+<div id="b-separability" class="basics">
+<section id="선형-분리와-고차원-사상-선형-사상은-차원을-늘려도-여전히-선형" class="level4">
+<h4 class="anchored" data-anchor-id="선형-분리와-고차원-사상-선형-사상은-차원을-늘려도-여전히-선형">선형 분리와 고차원 사상 (선형 사상은 차원을 늘려도 여전히 선형)</h4>
+<p><strong>고차원 사상.</strong> 입력 <span class="math inline">\((u_1, u_2)\)</span>를 숫자 여러 개짜리 목록 <span class="math inline">\((z_1, z_2, z_3, \dots)\)</span>으로 바꾸는 것을 <strong>사상</strong>(mapping, 옮겨 적기)이라 하고, 목록이 원래보다 길면 <strong>고차원 사상</strong>이라고 합니다. reservoir의 상태 <span class="math inline">\(N\)</span>개가 입력의 고차원 사상입니다(D8).</p>
+<p><strong>특징 하나를 더한다는 것.</strong> readout이 곱해 더하는 숫자 하나하나를 <strong>특징</strong>(feature)이라고 부릅니다(1구간 표의 '특징 수'). 특징이 두 개면 각 입력은 평면 위의 점입니다. 특징을 하나 더하면 점마다 좌표가 하나 늘어, <strong>점이 바닥에서 위로 들어 올려집니다</strong>. 새 숫자가 그 점의 '높이'가 되는 것입니다. 3차원에서 readout의 경계 <span class="math inline">\(w_0 + w_1 z_1 + w_2 z_2 + w_3 z_3 = 0.5\)</span>는 여전히 1차식이라, 직선이 한 차원 올라간 <strong>평면</strong>입니다. 그러니 질문은 하나입니다. <strong>점들을 들어 올린 뒤, 평면 하나로 빨강과 파랑을 가를 수 있나?</strong> 같은 네 점을 세 가지로 옮겨 적어 봅니다(그림 3). readout은 D8의 최소제곱으로 맞춥니다. 네 점에서 (출력 − 정답)²의 합이 가장 작아지도록 가중치를 고르는 방법입니다(<a href="../days/d08.html#b-ridge">D8 기초: 최소제곱과 ridge</a>).</p>
+<figure class="fig figure"><img src="../assets/img/d10/fig1-xor-lift.svg" alt="세 칸 그림. (a) 2차원에서 XOR의 네 점(빨강 01·10, 파랑 00·11)이 대각선으로 엇갈려 있고 최소제곱 출력은 0.50 넷. (b) 셋째 축을 u1+u2로 늘린 3차원에서도 점들이 한 평면 위에 있어 출력은 0.50 넷. (c) 셋째 축을 u1·u2로 늘리면 11만 위로 올라가 출력이 0, 1, 1, 0" class="figure-img"><figcaption><b>그림 3.</b> 같은 네 점을 세 가지로 옮겨 적고 최소제곱 readout(상수 포함)을 맞춘 결과. (b)는 차원이 3이지만 셋째 축이 앞의 둘의 합이라 readout 입장에서는 (a)와 같다. (c)의 셋째 축(곱) 하나가 XOR을 푼다. (c)가 어떻게 푸는지는 그림 4에서 한 단계씩 본다. 3차원은 비스듬히 그린 투영이며 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>(a) 그대로 두면.</strong> 2구간에서 본 대로 직선 하나로는 못 가르고, 최소제곱 readout은 네 점 모두에 0.50을 냅니다. <span class="math inline">\(u_1\)</span> 쪽으로 기울이면(<span class="math inline">\(w_1\)</span>을 키우면) 정답이 1인 10과 정답이 0인 11의 출력이 함께 올라가, 하나가 좋아지는 만큼 하나가 나빠집니다. <span class="math inline">\(u_2\)</span> 쪽도 마찬가지(01과 11)입니다. 그래서 기울이지 않고 정답의 평균 0.5를 내는 것이 오차 제곱합이 가장 작습니다(가장 덜 틀리는 답이 "모르겠다"인 것).</p>
+<p><strong>(b) 선형으로 늘리면.</strong> <span class="math inline">\(z = (u_1, u_2, u_1 + u_2)\)</span>처럼 셋째 숫자를 앞의 둘을 더해 만들면 차원은 3이 됩니다. 그런데 readout은</p>
+<p><span class="math display">\[
+w_1 z_1 + w_2 z_2 + w_3 z_3 = w_1 u_1 + w_2 u_2 + w_3(u_1 + u_2) = (w_1 + w_3)\,u_1 + (w_2 + w_3)\,u_2
+\]</span></p>
+<p>로, 결국 <strong>원래 두 입력의 가중합</strong>입니다. XOR 네 점은 들어 올려지기는 하지만 모두 <span class="math inline">\(z_3 = z_1 + z_2\)</span>라는 비스듬한 <strong>평면 위에</strong> 놓이고(그림 3b), 그 평면 위에서 가르는 문제는 (a)와 똑같습니다. 최소제곱 readout은 (a)와 똑같이 네 점 모두에 0.50을 냅니다. 일반적으로 새 숫자들이 모두 <span class="math inline">\(u_1, u_2\)</span>의 가중합이면(행렬 <span class="math inline">\(A\)</span>를 곱한 것, <span class="math inline">\(z = Au\)</span>. 위 예는 <span class="math inline">\(A\)</span>의 세 행이 (1, 0), (0, 1), (1, 1)인 경우), readout의 가중합을 풀어 <span class="math inline">\(u_1\)</span>끼리, <span class="math inline">\(u_2\)</span>끼리 모으면 계수만 바뀐 <span class="math inline">\(u_1\)</span>, <span class="math inline">\(u_2\)</span>의 가중합이 됩니다. 기호로 쓰면 <span class="math inline">\(w \cdot z = (A^{\mathsf T} w) \cdot u\)</span>입니다(<span class="math inline">\(A^{\mathsf T}\)</span>는 <span class="math inline">\(A\)</span>의 행과 열을 바꾼 표로, 위에서 계수를 모은 계산을 한꺼번에 적은 것). 그래서 <strong>선형 사상은 몇 차원으로 늘려도 readout 입장에서는 원래 입력의 선형 함수</strong>입니다.</p>
+<p><strong>(c) 비선형으로 늘리면.</strong> <span class="math inline">\(z = (u_1, u_2, u_1 \cdot u_2)\)</span>처럼 셋째 숫자를 <strong>곱</strong>으로 만들면, 네 점은 (0,0,0), (0,1,0), (1,0,0), (1,1,1)이 됩니다. readout <span class="math inline">\(y = z_1 + z_2 - 2 z_3\)</span>을 계산하면 00 → 0, 01 → 1, 10 → 1, 11 → <span class="math inline">\(1 + 1 - 2 = 0\)</span>. XOR이 정확히 나옵니다. 최소제곱도 이 답(0, 1, 1, 0)을 찾습니다. 3차원에서 평면 하나가 두 무리를 가른 것인데, 그 평면이 어디에 있고 점들이 어느 쪽에 있는지 한 단계씩 따라가 봅니다(그림 4).</p>
+<figure class="fig figure"><img src="../assets/img/d10/fig6-xor-plane.svg" alt="세 칸과 표. ① 바닥에 XOR의 네 점과 각 점의 u1·u2 값(11만 1). ② 셋째 특징 z3=u1·u2를 높이로 그린 3차원: 11만 높이 1로 올라가고, 보라색 기울어진 평면 z3=(z1+z2−0.5)/2의 아래에 빨강 01·10, 위에 파랑 00·11이 놓인다. ③ 경계를 바닥 좌표로 옮기면 u1=0.5와 u2=0.5의 두 직선이 만드는 십자이고 01·10과 00·11이 서로 다른 칸에 들어간다. 표: 점 높이 0,0,0,1, 평면 높이 −0.25, 0.25, 0.25, 0.75, 위·아래·아래·위, y = 0, 1, 1, 0" class="figure-img"><figcaption><b>그림 4.</b> 특징 하나를 더한다는 것의 모습. ① 원래 네 점(바닥). ② 셋째 특징 $z_3 = u_1 u_2$를 높이로 그리면 11만 높이 1로 올라가고, 보라 평면 $z_3 = (z_1 + z_2 - 0.5)/2$ 아래에 빨강 둘(01, 10), 위에 파랑 둘(00, 11)이 놓인다(보라 짧은 막대 = 각 점 바로 위·아래의 평면 높이). ③ 바닥의 어느 자리를 들어 올렸을 때 평면에 딱 걸리는지를 바닥에 표시하면 $u_1 = 0.5$와 $u_2 = 0.5$의 십자가 된다. 아래 표가 단계 3–4의 숫자다. 3차원은 비스듬히 그린 투영이며 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 새 특징을 계산한다.</strong> <span class="math inline">\(z_3 = u_1 \times u_2\)</span>: 00 → 0, 01 → 0, 10 → 0, 11 → 1. 넷 중 11만 0이 아닙니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 높이로 읽는다.</strong> <span class="math inline">\(z_3\)</span>를 높이로 그리면 00, 01, 10은 바닥에 그대로 있고 <strong>11만 높이 1로 들어 올려집니다</strong>(그림 4 ②). 2차원에서 대각선으로 엇갈려 있던 파랑 둘(00, 11) 가운데 하나가 위로 빠져나온 것입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 평면을 찾는다.</strong> readout <span class="math inline">\(y = z_1 + z_2 - 2z_3\)</span>를 0.5 기준으로 읽으면, 경계는 <span class="math inline">\(z_1 + z_2 - 2z_3 = 0.5\)</span>입니다. 높이 <span class="math inline">\(z_3\)</span>에 대해 풀면 <span class="math inline">\(z_3 = (z_1 + z_2 - 0.5)/2\)</span>, 곧 기울어진 평면입니다. 네 자리에서 이 평면의 높이를 재면 00 자리 −0.25, 01·10 자리 0.25, 11 자리 0.75입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 점은 평면의 위인가 아래인가.</strong> 00: 점 높이 0 &gt; 평면 −0.25(위). 01·10: 0 &lt; 0.25(아래). 11: 1 &gt; 0.75(위). 평면보다 아래이면 <span class="math inline">\(y &gt; 0.5\)</span>라 1, 위이면 0으로 읽으니 결과는 0, 1, 1, 0, 곧 XOR입니다(그림 4의 표). 11이 들어 올려지지 않았다면(높이 0) 평면 높이 0.75보다 아래라 1로 잘못 읽혔을 것입니다. <strong>들어 올림 하나가 11을 평면의 반대쪽으로 넘겨 준 것</strong>입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 경계를 바닥 좌표로 옮긴다.</strong> 경계 <span class="math inline">\(z_1 + z_2 - 2z_3 = 0.5\)</span>에 <span class="math inline">\(z_1 = u_1\)</span>, <span class="math inline">\(z_2 = u_2\)</span>, <span class="math inline">\(z_3 = u_1 u_2\)</span>를 넣으면 <span class="math inline">\(u_1 + u_2 - 2u_1 u_2 = 0.5\)</span>입니다. 0.5를 왼쪽으로 옮겨 정리하면 <span class="math inline">\(-2(u_1 - 0.5)(u_2 - 0.5) = 0\)</span>(괄호를 풀면 원래 식이 됩니다), 곧 <span class="math inline">\(u_1 = 0.5\)</span> <strong>또는</strong> <span class="math inline">\(u_2 = 0.5\)</span>. 바닥에서 보면 경계는 <strong>직선 두 개가 만든 십자</strong>이고, 01과 10은 서로 마주 보는 두 칸, 00과 11은 나머지 두 칸에 들어갑니다(그림 4 ③). 바닥의 직선 하나로는 못 하던 가르기를 3차원의 평면 하나가 해낸 것입니다. readout은 여전히 '곱해 더하기'(3차원의 평면)이고, 굽힘은 전부 새 특징 <span class="math inline">\(z_3\)</span>에서 왔습니다.</p>
+</div>
+</div>
+<p><strong>정리.</strong> 차원을 늘리는 것 자체가 아니라, <strong>새 차원이 기존 숫자들의 가중합이 아닌 것</strong>(비선형 조합)이어야 분리가 쉬워집니다. 서로 가중합 관계가 없는 숫자 <span class="math inline">\(N\)</span>개를 "선형 독립"이라고 부르는데, D8 4구간의 "거의 같은 노드 둘"은 이 조건을 거의 어긴 경우였고, D11에서 이것이 용량의 상한이 됩니다.</p>
+</section>
+</div>
+<p><strong>커널: 특징을 직접 만들지 않고 같은 효과를 내는 요령.</strong> 아래 영상 제목의 SVM(서포트 벡터 머신, support vector machine)은 두 무리 사이에 <strong>여유가 가장 넓은</strong> 직선(평면)을 긋도록 학습하는 선형 분류기입니다. 경계가 직선(평면)이라는 점은 readout과 같습니다. <strong>커널</strong>(kernel)은 새 특징 목록을 하나하나 만들어 저장하지 않고, 두 점의 늘린 특징 목록끼리 곱해 더한 값만 바로 계산하는 요령입니다. 예를 들어 두 점 <span class="math inline">\(a = (a_1, a_2)\)</span>, <span class="math inline">\(b = (b_1, b_2)\)</span>에 대해 다항식 커널 <span class="math inline">\((a_1 b_1 + a_2 b_2)^2\)</span>을 전개하면 <span class="math inline">\(a_1^2 b_1^2 + a_2^2 b_2^2 + 2 a_1 a_2 b_1 b_2\)</span>입니다. 이것은 각 점의 특징을 <span class="math inline">\((a_1^2,\ a_2^2,\ \sqrt{2}\,a_1 a_2)\)</span>처럼 늘린 뒤 두 목록을 곱해 더한 것과 같고, 그 안에 두 좌표의 곱 특징(XOR 예의 <span class="math inline">\(u_1 u_2\)</span>와 같은 꼴)이 들어 있습니다. [해석: 기계학습 교재의 표준 내용이며 폴더 원문과는 대조하지 않음] reservoir에서는 이 늘리기를 계산 요령 대신 <strong>물리 동역학</strong>이 하고, 아래에 나오는 'kernel quality'의 kernel도 이 비유를 빌린 말로 볼 수 있습니다. <span class="tag tag-interp">해석</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/OdlNM96sHio?start=0&amp;rel=0" title="영상: SVM with polynomial kernel visualization (HD)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–0:47, 약 1분, 말 없음).</b> udiprod, "SVM with polynomial kernel visualization (HD)". <b>볼 이유:</b> 설명란에 따르면 2차원에서 직선으로 못 가르는 두 무리를 변환 $f([x, y]) = [x, y, x^2 + y^2]$로 3차원에 올리자 평면 하나로 갈리는 장면이다. 셋째 좌표가 앞 두 숫자의 <b>가중합이 아니라 제곱의 합</b>(비선형 조합)이라는 점이 그림 3의 (c), 그림 4와 같다. (b)처럼 셋째 좌표를 $x + y$로 만들었다면 점들이 비스듬한 평면 위에 그대로 남아 갈리지 않았을 것이다. <b>보고 답할 질문:</b> 영상에서 점들이 들어 올려진 뒤 가르는 면은 원래 2차원 바닥에 내려놓으면 어떤 모양의 경계가 되나? 그 경계가 직선이 아닌 이유를 '선형 readout + 비선형 사상'으로 설명해 보세요. <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명(영상 내용은 미검증)</span></div></div>
+<p><strong>reservoir에서는.</strong> reservoir가 상태를 일부러 <span class="math inline">\(u_1 u_2\)</span>처럼 만들어 주지는 않습니다. <span class="math inline">\(\tanh\)</span>가 입력들을 섞어 굽히는 과정에서 곱과 비슷한 성분들이 <strong>여러 노드에 조금씩, 서로 다른 비율로</strong> 섞여 들어가고, readout이 그것들을 골라 더합니다(D8 3구간의 "둘 다 1"의 흔적). Stepney는 난수 가중치가 입력을 고차원 공간으로 무작위 사상하고, 그래서 학습한 선형 출력으로 원하는 분리를 이룰 수 있다고 씁니다. <span class="src">Stepney 2024, p.668</span> 그리고 reservoir의 계산 용량은 관측 가능한 노드 수가 정한다며, <strong>선형 출력층이 서로 다른 입력 부류를 가를 수 있도록 충분한 차원이 관측 가능해야 한다</strong>고 씁니다. <span class="src">Stepney 2024, p.673</span> Liang은 이상적인 물리 RC라면 노드 상태들이 <strong>고차원 공간에서 선형 분리 가능하게</strong> 될 것이라며, 이를 재는 지표로 kernel quality(서로 다른 입력열이 끝에 남긴 상태들을 모은 표의 계수(rank), 즉 그 상태들 가운데 서로의 가중합이 아닌 것이 몇 개인가)를 소개합니다. <span class="src">Liang 2024, p.200</span> (kernel quality는 D14에서 다룹니다.)</p>
+<div class="myth">
+<p><strong>"노드(전극, 측정 채널)를 많이 늘리면 고차원이니까 분리가 잘 된다"</strong> — 늘린 숫자들이 서로의 가중합(그림 3b)이거나 같은 것을 거의 그대로 반복하면, 차원 수는 늘어도 readout이 쓸 수 있는 정보는 늘지 않습니다. 필요한 것은 "서로 다른 비선형 조합"이 늘어나는 것입니다. Singh 2026은 전극이 많다고 reservoir가 계산적으로 풍부한 것이 아니며, 중요한 것은 readout이 실제로 관측할 수 있는 <strong>재현 가능하고 서로 중복되지 않는</strong> 국소 응답이라고 씁니다. <span class="src">Singh 2026, p.5</span></p>
+</div>
+<div class="quiz" data-day="d10" data-set="3-check"></div>
+<div class="quiz" data-day="d10" data-set="3-end"></div>
+<div class="keypoints">
+<ul>
+<li>선형 사상 <span class="math inline">\(z = Au\)</span>는 차원을 늘려도 readout에게는 <span class="math inline">\(u\)</span>의 선형 함수: <span class="math inline">\(w \cdot z = (A^{\mathsf T}w)\cdot u\)</span>. XOR에서 (a)와 (b) 모두 출력 0.50 넷.</li>
+<li>곱 하나(<span class="math inline">\(u_1 u_2\)</span>)를 더한 (c)는 <span class="math inline">\(z_1 + z_2 - 2z_3\)</span>으로 XOR을 정확히 낸다.</li>
+<li>분리를 돕는 것은 차원 수가 아니라 서로 다른 비선형 조합. 관측 가능한 차원이 충분해야 한다 <span class="src">Stepney 2024, p.673</span>, 이상적인 상태는 고차원에서 선형 분리 가능하다 <span class="src">Liang 2024, p.200</span>, 채널 수 ≠ 풍부함 <span class="src">Singh 2026, p.5</span>.</li>
+</ul>
+</div>
+</section>
+<section id="ch-mask-multiplex" class="level3">
+<h3 class="anchored" data-anchor-id="ch-mask-multiplex">4. 입력 마스크와 시간다중화: 노드를 늘리는 두 방법</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 입력 마스크가 "입력 하나에 노드마다 다른 무게를 곱해 퍼뜨리는 것"(ESN의 <span class="math inline">\(W_{in}\)</span>과 같음)임을 말하고, 소자 하나에 입력 하나를 θ 칸으로 나눠 걸고 칸 끝마다 읽는 시간선을 그려 마스크 (1, −1, 1, 1)의 가상 노드 네 개 값을 손으로 계산하며, 시간 간격 θ와 소자 시간상수 τ의 관계(θ ≈ τ/4)가 왜 중요한지 숫자로 설명할 수 있다.</p>
+</div>
+<p>3구간의 결론은 "서로 다른 비선형 조합이 여럿 필요하다"였습니다. 그런데 이온 소자 하나는 전극 두 개에 전류 하나를 냅니다. <strong>숫자 하나</strong>입니다. 입력도 대개 숫자 하나(센서 값)입니다. 숫자 하나에서 어떻게 서로 다른 상태 수십 개를 만드나? 두 가지 방법이 있고, 둘 다 <strong>마스크</strong>에서 시작합니다.</p>
+<div id="b-mask" class="basics">
+<section id="입력-마스크-입력-하나를-여러-무게로-퍼뜨리기" class="level4">
+<h4 class="anchored" data-anchor-id="입력-마스크-입력-하나를-여러-무게로-퍼뜨리기">입력 마스크: 입력 하나를 여러 무게로 퍼뜨리기</h4>
+<p><strong>왜 필요한가.</strong> 입력 <span class="math inline">\(u(t)\)</span> 하나를 노드 <span class="math inline">\(N\)</span>개에 <strong>똑같이</strong> 넣고 노드들의 성질도 같다면, 노드 <span class="math inline">\(N\)</span>개는 같은 값을 냅니다. D8 4구간의 "거의 같은 노드"가 <span class="math inline">\(N\)</span>개인 셈이고, 노드 하나와 다를 바 없습니다. 노드마다 입력을 <strong>다른 무게로</strong> 받아야 서로 다른 상태가 생깁니다.</p>
+<p><strong>무엇인가.</strong> 노드 <span class="math inline">\(i\)</span>에 들어가는 입력을 <span class="math inline">\(m_i \times u(t)\)</span>로 정하는 숫자 목록 <span class="math inline">\((m_1, m_2, \dots, m_N)\)</span>을 <strong>마스크</strong>(mask)라고 부릅니다. 보통 난수로 한 번 정하고 고정합니다(+1과 −1을 무작위로, 또는 −1~1의 난수). 사실 이것은 D8의 <span class="math inline">\(W_{in}\)</span>과 <strong>같은 것</strong>입니다. Stepney는 마스크가 "입력 가중치 행렬을, ESN처럼 공간으로 퍼뜨리는 대신 <strong>시간으로 퍼뜨리는 장치</strong>로 다시 읽은 것일 뿐"이라고 씁니다. <span class="src">Stepney 2024, p.671</span></p>
+<p><strong>회로에서는.</strong> Zhong 2022의 memristor(지나간 전압·전류에 따라 저항이 바뀌는 2단자 소자) reservoir는 증폭한 입력과 그 부호를 뒤집은 신호를 다중화기(MUX: 여러 입력선 가운데 하나를 골라 내보내는 전자 스위치)에 연결하고, 펄스 폭 δ의 마스크 순서에 따라 둘 중 하나를 골라 보냅니다. 거기에 입력 바이어스 전압 <span class="math inline">\(B_i\)</span>를 더해 소자에 겁니다. <span class="src">Zhong 2022, p.674</span> 마스크 +1은 '원래 신호를 고른다', −1은 '뒤집은 신호를 고른다'는 스위치 순서인 셈이고, δ는 아래 시간다중화의 칸 길이 θ, <span class="math inline">\(B_i\)</span>는 아래 '어디서 깨지나'의 치우침에 해당합니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>작은 숫자로.</strong> 입력 <span class="math inline">\(u = 0.5\)</span>, 마스크 <span class="math inline">\((1.0, -0.6, 0.3, 0.8)\)</span>이면 노드 넷은 각각 0.5, −0.3, 0.15, 0.4를 받습니다. 각 노드가 <span class="math inline">\(\tanh\)</span>로 굽히면 0.462, −0.291, 0.149, 0.380. 입력이 1.0으로 두 배가 되면 받는 값도 두 배(1.0, −0.6, 0.3, 0.8)지만 <span class="math inline">\(\tanh\)</span> 뒤의 값은 0.762, −0.537, 0.291, 0.664로 <strong>두 배가 아닙니다</strong>. 받는 값이 큰 노드(0.762 &lt; 2 × 0.462)일수록 더 많이 휘어서, 노드마다 휘는 정도가 다릅니다. 같은 입력에서 서로 다른 비선형 조합이 생기는 첫걸음입니다.</p>
+<p><strong>어디서 깨지나.</strong> 마스크 값이 +1과 −1뿐이고 노드가 대칭(<span class="math inline">\(\tanh(-z) = -\tanh(z)\)</span>)이며 치우침(bias: 노드마다 입력에 더해 두는 고정된 작은 상수로, 노드가 휘는 지점을 옮겨 좌우 대칭을 깨는 것)이 없으면, −1을 받은 노드는 +1을 받은 노드의 정확히 <strong>부호만 바뀐 복사본</strong>이 됩니다. 두 노드는 서로의 가중합(−1배)이라 정보가 늘지 않습니다(3구간). 그래서 마스크만으로는 부족하고, 노드의 치우침·시간 응답·서로의 연결이 다양함을 더해야 합니다(아래 시간다중화, 5구간).</p>
+</section>
+</div>
+<p><strong>실제 소자 배열의 예.</strong> Zhong 2022의 memristor RC는 1차원 시간 신호를 <strong>서로 다른 마스크</strong>(길이 5)를 거쳐 동적 memristor 노드 24개에 병렬로 넣고, 노드마다 한 시간 단계에 상태를 5개씩 읽어 <strong>시간 단계당 reservoir 상태 120개</strong>를 얻었습니다. <span class="src">Zhong 2022, p.675</span> 24 × 5 = 120입니다. 소자 24개를 마스크로 다양하게 만들고, 그 각각을 다시 시간으로 5개씩 나눠 쓴 것입니다. 뒤의 "시간으로 나눠 쓰기"가 다음 기초입니다.</p>
+<div id="b-time-multiplexing" class="basics">
+<section id="시간다중화와-가상-노드-소자-하나를-시간으로-나눠-여러-노드처럼-쓰기" class="level4">
+<h4 class="anchored" data-anchor-id="시간다중화와-가상-노드-소자-하나를-시간으로-나눠-여러-노드처럼-쓰기">시간다중화와 가상 노드: 소자 하나를 시간으로 나눠 여러 노드처럼 쓰기</h4>
+<p><strong>왜 필요한가.</strong> 소자를 수십 개 만들어 연결하는 것은 어렵습니다. 특히 젤·고분자 이온 소자는 배열로 집적하기가 실리콘보다 어렵다고 보는 것이 출발점입니다(D26). <span class="tag tag-interp">해석</span> 소자가 <strong>하나</strong>뿐이어도 노드 여럿의 효과를 내는 방법이 있다면 매력적입니다.</p>
+<p><strong>무엇인가.</strong> 입력 한 단계의 시간(예: 1 ms)을 <span class="math inline">\(N\)</span>개의 짧은 칸(각 θ = 1/<span class="math inline">\(N\)</span> ms)으로 나눕니다. 칸 <span class="math inline">\(j\)</span> 동안 소자에 <span class="math inline">\(m_j \times u(t)\)</span>를 넣습니다(마스크를 <strong>시간 순서로</strong> 적용). 그리고 각 칸이 끝날 때 소자의 출력을 읽습니다. 그러면 입력 한 단계마다 숫자 <span class="math inline">\(N\)</span>개가 나오고, 이 <span class="math inline">\(N\)</span>개를 노드 <span class="math inline">\(N\)</span>개의 상태처럼 취급합니다. 이것을 <strong>시간다중화</strong>(time multiplexing), 그 <span class="math inline">\(N\)</span>개를 <strong>가상 노드</strong>(virtual node)라고 부릅니다. Stepney는 마스크를 곱한 입력열을 입력 주파수의 <span class="math inline">\(N\)</span>배로 reservoir에 넣고, 같은 주파수로 지연선 끝의 상태를 읽어 원래 시간 단계마다 <span class="math inline">\(N\)</span>개의 값을 모은다고 설명합니다. <span class="src">Stepney 2024, p.671</span></p>
+<p><strong>생김새: 소자 하나와 시간선.</strong> 그림 5가 입력 하나가 소자를 지나가는 모습입니다. 위는 부품의 연결, 아래는 시간에 따라 무엇이 변하는지입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d10/fig7-delay-timeline.svg" alt="위: 입력 u(k) → 표본 유지(한 단계 Nθ 동안 같은 값) → 마스크 곱하기(칸마다 m1–m4) → 더하기 → 비선형 소자 하나(시간상수 τ) → 칸 끝마다 읽기(v1–v4 → readout), 소자 출력에서 v1–v4 칸이 있는 점선 지연 고리가 더하기로 돌아온다. 아래: 시간선. ① 입력 0.5가 칸 넷 동안, 다음 단계에 1.0이 칸 넷 동안 유지됨. ② 칸마다 +0.5, −0.5, +0.5, +0.5 그리고 +1.0, −1.0, +1.0, +1.0을 건다. ③ θ=τ/4에서 소자 응답이 칸마다 목표값 tanh(마스크×u)를 향해 조금씩 움직이고, 칸 끝 값 v1–v4는 0.10, −0.02, 0.08, 0.17 그리고 0.30, 0.06, 0.22, 0.34" class="figure-img"><figcaption><b>그림 5.</b> 소자 하나로 가상 노드 넷을 만드는 모습. 위(모식도): 입력 하나를 한 단계 동안 붙잡아 두고(표본 유지), 칸마다 마스크 값을 곱해 비선형 소자 하나에 걸고, 칸 끝마다 출력을 읽는다. 점선 고리는 원래 방식의 지연선으로, 칸 $j$에서 읽은 값을 한 입력 단계 뒤 같은 칸에 되돌려 준다. 아래(시간선): ① 유지된 입력 0.5와 1.0, ② 칸마다 건 입력(마스크 × u), ③ 소자 응답(θ = τ/4, 지연 고리를 뺀 모형). 소자는 칸마다 회색 점선(목표값 tanh(마스크 × u))을 향해 22%씩만 다가가고, 칸 끝의 파란 점이 가상 노드 $v_1$–$v_4$다. 숫자는 아래 손 계산과 같다. (Claude가 계산해 그림, 블록도는 모식도)</figcaption></figure>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 입력을 붙잡아 둔다(표본 유지).</strong> 센서 값 <span class="math inline">\(u(k) = 0.5\)</span>(<span class="math inline">\(k\)</span>는 입력 단계 번호. 위의 <span class="math inline">\(u(t)\)</span>와 같은 것인데, 한 단계 안의 칸과 구별하려고 <span class="math inline">\(k\)</span>로 씁니다)를 한 입력 단계 내내 같은 값으로 유지합니다(sample and hold). 이 단계를 칸 <span class="math inline">\(N = 4\)</span>개로 나누고, 칸 하나의 길이를 θ라고 부릅니다(그림 5 ①).</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 칸마다 마스크를 곱해 소자에 건다.</strong> 마스크 (1, −1, 1, 1)이면 칸 1–4에 +0.5, −0.5, +0.5, +0.5를 차례로 겁니다(그림 5 ②). 공간에 노드 넷을 두는 대신, <strong>같은 소자 하나에 서로 다른 입력 넷을 시간 순서로</strong> 거는 것입니다. 마스크는 입력 단계가 바뀌어도 같은 순서로 되풀이됩니다. <span class="src">Liang 2024, p.198</span></p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 소자가 따라간다.</strong> 한 칸의 입력을 오래 유지하면 소자는 어떤 값에 자리 잡을 것입니다. 이 모형은 그 목표값을 <span class="math inline">\(\tanh(\text{마스크} \times u)\)</span>로 둡니다(굽는 응답, 그림 5 ③의 회색 점선). 그러나 소자는 시간상수 τ로 천천히 움직이므로(D9의 이완), 칸 하나 동안 목표까지 다 가지 못하고 일부만 다가간 채 다음 칸을 맞습니다. 화공의 1차 공정에 계단 입력을 넣으면 시간 <span class="math inline">\(t\)</span> 뒤 최종 변화량의 <span class="math inline">\(1 - e^{-t/\tau}\)</span>만큼 와 있는 것과 같은 꼴입니다. θ = τ/4이면 <span class="math inline">\(1 - e^{-0.25} = 0.22\)</span>, 곧 22%입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 칸 끝마다 한 번씩 읽는다.</strong> 칸이 끝나는 순간의 출력(예: 전류)을 하나씩 기록하면 입력 하나에 숫자 넷 <span class="math inline">\((v_1, v_2, v_3, v_4)\)</span>가 모입니다(그림 5 ③의 파란 점). 이 넷이 <strong>가상 노드</strong> 네 개의 상태이고, readout은 D8처럼 이 넷에 가중치를 곱해 더합니다. '가상'인 이유는 따로 만든 부품이 아니라 <strong>같은 소자를 서로 다른 시각에 읽은 값</strong>이기 때문입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 과거는 어떻게 들어오나.</strong> 원래 방식(Appeltant 2011의 delay-coupled RC)에는 <strong>지연 고리</strong>가 있습니다. 소자 출력을 한 바퀴 도는 데 <span class="math inline">\(T_D = N\theta\)</span>가 걸리는 지연선으로 보내고, 돌아온 값을 새 입력에 더합니다. 그러면 칸 <span class="math inline">\(j\)</span>에서 읽은 값이 정확히 한 입력 단계 뒤 같은 칸 <span class="math inline">\(j\)</span>로 돌아와, 가상 노드 <span class="math inline">\(j\)</span>가 <strong>자기 과거</strong>를 받습니다(D8 갱신식의 <span class="math inline">\(W x(t)\)</span>가 하던 일). Liang은 노드 출력이 지연되어 되먹임선으로 마스크 입력에 더해지고, 지연선이 현재 입력과 이전 노드 상태를 이어 과거 정보를 보존하며 순환 신경망을 이룬다고 씁니다. <span class="src">Liang 2024, p.195</span> Stepney는 이것이 지연 경로를 따라 가상 노드 <span class="math inline">\(N\)</span>개를 놓은 고리 모양 연결이 된다고 씁니다. <span class="src">Stepney 2024, p.671</span> 원 논문은 지연 길이를 τ, 소자의 시간척도를 T로 쓰니, D9부터 τ를 소자 시간상수로 쓰는 이 교재에서는 지연 길이를 <span class="math inline">\(T_D\)</span>로 적어 둘을 구분합니다. 한편 Zhong 2022의 memristor 회로 설명(Fig. 2b)에는 이런 되먹임 고리가 없고, 소자 자체의 짧은 기억이 과거를 잇습니다. <span class="src">Zhong 2022, p.674</span> <span class="tag tag-interp">해석</span> 아래 손 계산도 고리가 없는 쪽입니다.</p>
+</div>
+</div>
+<p><strong>가상 노드들이 서로 다른 이유.</strong> 소자는 칸이 바뀌는 순간 바로 새 값으로 가지 못하고 시간상수 τ로 천천히 따라갑니다(D9의 이완). 그래서 칸 <span class="math inline">\(j\)</span> 끝의 값은 "칸 <span class="math inline">\(j\)</span>의 입력"과 "칸 <span class="math inline">\(j-1\)</span> 끝의 값"이 섞인 것이 되고, 이웃 가상 노드가 서로 연결된 것과 같은 효과가 납니다. 한 칸 동안 남는 비율은 D9의 식 그대로 <span class="math inline">\(d = e^{-\theta/\tau}\)</span>입니다.</p>
+<p><strong>손 계산(마스크 (1, −1, 1, 1), 입력 0.5).</strong> 모형: 칸마다 <span class="math inline">\(v \leftarrow d\cdot v + (1-d)\cdot\tanh(m_j \times u)\)</span>. <span class="math inline">\(\tanh(0.5) = 0.462\)</span>.</p>
+<ul>
+<li>θ = τ/4: <span class="math inline">\(d = e^{-0.25} = 0.779\)</span>, <span class="math inline">\(1-d = 0.221\)</span>. 칸마다 새로 들어오는 몫은 <span class="math inline">\(0.221 \times (\pm 0.462) = \pm 0.102\)</span>.
+<ol type="1">
+<li><span class="math inline">\(v_1 = 0.779 \times 0 + 0.102 = 0.102\)</span></li>
+<li><span class="math inline">\(v_2 = 0.779 \times 0.102 - 0.102 = 0.080 - 0.102 = -0.023\)</span></li>
+<li><span class="math inline">\(v_3 = 0.779 \times (-0.023) + 0.102 = -0.018 + 0.102 = 0.085\)</span></li>
+<li><span class="math inline">\(v_4 = 0.779 \times 0.085 + 0.102 = 0.066 + 0.102 = 0.168\)</span></li>
+</ol>
+가상 노드 넷 = (0.102, −0.023, 0.085, 0.168). 마스크가 같은 +1인 칸 1, 3, 4도 <strong>서로 다른 값</strong>입니다. 앞 칸의 흔적이 다르기 때문입니다.</li>
+<li>θ = 4τ: <span class="math inline">\(d = e^{-4} = 0.018\)</span>. 소자가 칸마다 거의 완전히 새 값으로 가서 <span class="math inline">\(v \approx \tanh(m_j u)\)</span> = (0.454, −0.445, 0.445, 0.462). 사실상 ±0.46 두 종류뿐이고, +1 칸끼리는 거의 같은 값입니다.</li>
+</ul>
+<p><strong>다음 입력에서: 기억.</strong> 이어서 입력 1.0이 오면, θ = τ/4는 앞 입력의 흔적을 안고 시작해 (0.30, 0.06, 0.22, 0.34)이고, 앞 입력이 없었다면 (0.17, −0.04, 0.14, 0.28)이었을 것입니다. 앞 입력이 상태에 남은 것입니다. θ = 4τ는 앞 입력이 있든 없든 (0.76, −0.73, 0.73, 0.76)으로 거의 같습니다. 칸이 τ보다 너무 길면 가상 노드는 서로 비슷하고, 입력과 입력 사이의 기억도 사라집니다.</p>
+<p><strong>θ를 τ와 견주는 이유: 세 경우.</strong> 한 칸 동안 소자가 목표 쪽으로 움직이는 몫은 <span class="math inline">\(1 - d = 1 - e^{-\theta/\tau}\)</span>로, θ 하나가 아니라 <strong>θ/τ의 비</strong>가 정합니다. 같은 소자라도 칸을 짧게 자르느냐 길게 자르느냐에 따라 세 가지가 됩니다(그림 6, 같은 마스크와 입력 0.5 → 1.0).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>칸 길이 θ</th>
+<th>한 칸 뒤 남는 몫 <span class="math inline">\(d\)</span></th>
+<th>한 칸에 다가가는 몫 <span class="math inline">\(1-d\)</span></th>
+<th>입력 1.0 구간의 가상 노드</th>
+<th>무슨 일이 생기나</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>τ/40</td>
+<td>0.975</td>
+<td>2.5%</td>
+<td>(0.041, 0.021, 0.039, 0.057)</td>
+<td>소자가 거의 움직이지 못한다. 앞 입력은 오래 남지만 값이 0.06 이하로 작고 이웃끼리 차이도 0.02 안팎이라, 측정 잡음에 묻히기 쉽다</td>
+</tr>
+<tr class="even">
+<td>τ/4</td>
+<td>0.779</td>
+<td>22%</td>
+<td>(0.30, 0.06, 0.22, 0.34)</td>
+<td>앞 칸 흔적 78% + 새 입력 22%. 이웃과 이어져 있으면서도 각자 다르고, 앞 입력도 기억한다</td>
+</tr>
+<tr class="odd">
+<td>4τ</td>
+<td>0.018</td>
+<td>98%</td>
+<td>(0.76, −0.73, 0.73, 0.76)</td>
+<td>칸마다 목표값까지 가 버린다(포화). ±tanh(u) 두 종류뿐이고 앞 입력을 잊는다</td>
+</tr>
+</tbody>
+</table>
+<p>θ ≈ τ/4는 "이웃 칸과 이어질 만큼 짧고, 새 입력이 뚜렷한 흔적을 남길 만큼 긴" 중간입니다. 원 논문(Appeltant 2011)도 칸 간격 θ를 소자의 시간척도 T보다 짧게(θ = 0.2T) 잡았고, 그래야 가상 노드의 상태가 이웃 가상 노드의 상태에 의존하게 된다고 씁니다(폴더 밖 논문, PubMed Central 공개본에서 Claude가 해당 문장만 대조). τ/40 줄에는 이 모형의 한계가 있습니다. 이 모형은 비선형(<span class="math inline">\(\tanh\)</span>)을 입력에 먼저 걸기 때문에 진폭이 작아도 이미 굽은 값이 들어옵니다. 실제 소자처럼 비선형이 소자 상태(진폭)에 걸린다면, 진폭이 작을 때는 굽은 곡선의 거의 곧은 부분만 쓰게 되어 비선형 자체가 약해집니다. 아래 Liang의 "작은 진폭의 좁은 선형 범위"가 이것입니다. <span class="tag tag-interp">해석</span></p>
+</section>
+</div>
+<figure class="fig figure"><img src="../assets/img/d10/fig2-mask-multiplex.svg" alt="소자 하나를 네 칸으로 나눠 마스크 1, −1, 1, 1을 적용한 가상 노드 값을 칸 길이 세 가지로 비교. 위(θ=τ/40, d=0.975)는 곡선이 0 근처에서 거의 움직이지 않아 입력 1.0 구간 값이 0.041, 0.021, 0.039, 0.057로 작다. 가운데(θ=τ/4, d=0.779)는 0.10, −0.02, 0.08, 0.17 다음 0.30, 0.06, 0.22, 0.34로 서로 다르고 앞 입력을 기억한다. 아래(θ=4τ, d=0.018)는 칸마다 목표값까지 올라가 ±0.45, ±0.73 근처 두 값뿐이고 앞 입력이 없어도 거의 같은 값" class="figure-img"><figcaption><b>그림 6.</b> 같은 시간다중화를 칸 길이 θ 세 가지로. 분홍 막대는 칸마다 건 입력(마스크 × u), 회색 점선은 그 입력이 오래 유지되면 갈 목표값, 곡선은 소자 응답, 점은 칸 끝에서 읽은 가상 노드다. θ = τ/40(위)은 소자가 칸마다 2.5%만 움직여 진폭이 0.06 이하로 작다. θ = τ/4(가운데)는 가상 노드들이 서로 다르고 앞 입력의 흔적을 지닌다. θ = 4τ(아래)는 칸마다 목표값까지 가 버려(포화) 값이 ±tanh(u) 두 종류뿐이고 앞 입력을 잊는다. 세 줄의 세로 눈금은 같다. 모형은 설명용 예시이며 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>읽는 법.</strong> 아래 원문 그림은 위 손 계산의 원본입니다. 맨 위 줄에서 검정 계단(원래 입력, 한 계단 = 입력 한 단계)과 분홍 막대(마스크 [1 −1 1 1 …]를 곱한 입력, 마스크 길이 10)를 찾으세요. 그다음 가운데 줄(θ &gt; 소자 시간상수)과 아래 줄(θ = 시간상수/4)에서 점들이 어떻게 다른지 비교하세요. 가운데 줄의 점들은 위아래 두 값에 붙어 있고(포화), 아래 줄의 점들은 제각각입니다. 맨 아래의 "State vector at t₁, t₂, …"가 입력 한 단계마다 모은 가상 노드 열 개입니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/liang2024-fig4a.png" alt="Liang 2024 Fig. 4a: 원래 입력 신호(검정 계단)에 길이 10의 마스크를 곱한 신호(분홍 막대), 그리고 칸 길이 θ가 소자 시간상수보다 길 때(가운데, 노드 응답이 두 값에 포화)와 시간상수의 1/4일 때(아래, 응답이 제각각)의 노드 응답과 입력 단계마다 모은 상태 벡터" class="figure-img"><figcaption><b>원문 그림.</b> Liang et al., <a href="https://doi.org/10.1038/s41928-024-01133-z" target="_blank"><i>Nat. Electron.</i> 2024, 7, 193–206</a>, Fig. 4a, p.199. 볼 것: 맨 위는 원래 입력(검정)과 마스크를 곱한 신호(분홍), θ는 칸 하나의 길이다. 가운데(θ &gt; 물리 노드 시간상수)는 다음 칸이 오기 전에 노드가 포화되어 점들이 두 값에 몰린다(왼쪽 그림의 연결 없는 노드들, 빨간 X). 아래(θ = 시간상수/4)는 노드 응답이 앞 칸의 흔적을 안고 제각각이 되어, 왼쪽 그림처럼 가상 노드끼리 연결된 효과를 낸다(초록 체크). 맨 아래 상자가 입력 단계 $t_1, \dots, t_4$마다 모은 상태 벡터다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p>Liang은 이 방법을 이렇게 정리합니다. 2011년의 delay-coupled RC에서 시간다중화는 매 시간 단계 안에서 입력에 <strong>마스크 행렬을 곱해</strong> 진동시키고, 그 신호를 비선형 물리 노드에 넣어 시간다중화 간격과 노드 시간상수를 조율해 복잡한 동역학을 만든다. 상태 벡터(가상 노드)는 노드 출력을 순서대로 샘플링해 얻는다. <span class="src">Liang 2024, p.194–195</span> 그리고 경험적으로 <strong>칸 길이 θ는 물리 노드 시간상수의 약 4분의 1</strong>이며, θ가 너무 길면 다음 값이 오기 전에 포화되어 두 값에 머무는 노드 응답 때문에 상태가 풍부하지 않고, 너무 짧으면 노드가 진폭이 작은 좁은 선형 범위에서만 움직인다고 씁니다. <span class="src">Liang 2024, p.198</span> 그림 6의 아래 줄(너무 김)과 위 줄(너무 짧음)이 그 두 실패입니다.</p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/5AfJaQlPWMU?start=955&amp;rel=0" title="영상: Reservoir Computing based on Delay-dynamical Systems" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 15:55–26:13, 약 10분 · 전체 59분, 영어·자동 자막).</b> IFISC(스페인 학제간물리·복잡계 연구소) 채널, "Reservoir Computing based on Delay-dynamical Systems". 설명란에 따르면 연사는 Lennert Appeltant(Vrije Universiteit Brussel, 2012년 강연)로, 더 읽을거리의 Appeltant et al. 2011 원 논문의 제1저자다. <b>볼 이유:</b> 15:55 'Delayed Feedback Systems', 20:16 'Input driving', 22:15 'Masking', 23:57 'Virtual node separation distance' 챕터가 이 구간의 마스크 → 시간다중화 → 가상 노드 간격 θ와 같은 순서다. 23:57 챕터는 제목으로 보아 그림 6의 θ 비교와 같은 주제다. 학회 강연 녹화라 슬라이드 위주다. <b>보고 답할 질문:</b> 강연에서 가상 노드 간격을 소자 반응 시간보다 짧게 잡으라고 하는 이유는 그림 6의 어느 줄로 설명되나? 마스크가 없으면 가상 노드들은 어떻게 되나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터·설명(영상 내용은 미검증)</span></div></div>
+<p><strong>대가.</strong> 소자 하나로 가상 노드 <span class="math inline">\(N\)</span>개를 얻는 대신, 입력을 넣고 출력을 읽는 속도가 <strong><span class="math inline">\(N\)</span>배 빨라야</strong> 합니다. Stepney는 이것을 이 방법의 단점으로 들며, <span class="math inline">\(N\)</span>이 크면 구현이 어려워질 수 있다고 씁니다. <span class="src">Stepney 2024, p.671</span> Liang은 delay-coupled RC가 물리 노드를 시간다중화하므로 <strong>직렬로</strong> 동작한다는 점을 단점으로 들고, 흔한 구현에서는 되먹임과 시간다중화를 디지털(0·1의 숫자)로 해서 아날로그(연속 전압)와 디지털 사이의 변환, 즉 ADC·DAC(전압과 숫자를 서로 바꾸는 회로, <a href="../days/d04.html#b-adc">D4 기초</a>)가 필요하고, 비용을 줄이려고 4–10 bit의 저정밀 ADC·DAC를 쓸 수 있지만 그 잡음 영향은 따로 따져야 한다고 씁니다. <span class="src">Liang 2024, p.195</span> 이온 소자의 τ가 ms–s라면 θ = τ/4도 ms 이상이므로, 가상 노드 <span class="math inline">\(N\)</span>개를 쓰면 입력 한 단계가 <span class="math inline">\(N\)</span>배 길어집니다. 실시간 과제에서는 이것이 지연 시간이 됩니다. <span class="tag tag-interp">해석</span></p>
+<div class="predict">
+<p>마스크가 (1, −1, 1, 1)이고 θ = τ/4(<span class="math inline">\(d\)</span> = 0.779)일 때, 입력이 0.5가 아니라 −0.5라면 첫 가상 노드 <span class="math inline">\(v_1\)</span>은 얼마일까요? 아래 점검의 첫 문제는 본문 숫자의 확인, 둘째는 빈칸, 셋째는 혼자 풀기입니다.</p>
+</div>
+<div class="quiz" data-day="d10" data-set="4-check"></div>
+<div class="quiz" data-day="d10" data-set="4-end"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+입력 마스크
+</dt>
+<dd>
+노드 <span class="math inline">\(i\)</span>에 <span class="math inline">\(m_i \times u\)</span>를 넣도록 정한 숫자 목록. ESN의 <span class="math inline">\(W_{in}\)</span>과 같은 것 <span class="src">Stepney 2024, p.671</span>. 노드마다 입력을 다른 무게로 받아야 서로 다른 상태가 생긴다.
+</dd>
+<dt>
+시간다중화 / 가상 노드
+</dt>
+<dd>
+입력 한 단계를 <span class="math inline">\(N\)</span>칸으로 나눠 소자 하나에 마스크를 시간 순서로 적용하고, 칸마다 읽은 <span class="math inline">\(N\)</span>개를 노드처럼 쓰는 것 / 그 <span class="math inline">\(N\)</span>개. 대가는 입출력 속도 <span class="math inline">\(N\)</span>배, 직렬 동작.
+</dd>
+<dt>
+θ ≈ τ/4
+</dt>
+<dd>
+칸 길이를 소자 시간상수의 약 4분의 1로 잡는 경험칙 <span class="src">Liang 2024, p.198</span>. 너무 길면 포화·망각, 너무 짧으면 작은 진폭의 선형 범위.
+</dd>
+<dt>
+delay-coupled RC
+</dt>
+<dd>
+비선형 노드 하나 + 지연 되먹임 + 시간다중화로 만든 RC(2011년) <span class="src">Liang 2024, p.194–195</span>.
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>마스크 = 입력 하나를 노드마다 다른 무게로 퍼뜨리는 숫자 목록(<span class="math inline">\(W_{in}\)</span>). <span class="math inline">\(u\)</span> = 0.5 → 1.0에서 tanh 값이 두 배가 아니고(0.462 → 0.762), 노드마다 휘는 정도가 다르다.</li>
+<li>시간다중화: 입력 하나를 한 단계 동안 붙잡아 θ 칸으로 나누고, 칸마다 마스크 값을 곱해 소자 하나에 걸고, 칸 끝마다 읽은 값 <span class="math inline">\(N\)</span>개가 가상 노드. 원 방식은 지연 고리(<span class="math inline">\(T_D = N\theta\)</span>)로 가상 노드마다 자기 과거를 되돌려 준다 <span class="src">Liang 2024, p.195</span>.</li>
+<li>θ/τ가 정한다: θ = τ/4(<span class="math inline">\(d\)</span> = 0.78)이면 (0.102, −0.023, 0.085, 0.168)처럼 제각각이고 앞 입력을 기억, θ = 4τ면 ±0.46 두 종류로 포화·망각, θ = τ/40이면 한 칸에 2.5%만 움직여 진폭이 작다 <span class="src">Liang 2024, p.198–199</span>.</li>
+<li>실제 예: 소자 24개 × 마스크 길이 5 = 상태 120개 <span class="src">Zhong 2022, p.675</span>. 대가: 입출력 <span class="math inline">\(N\)</span>배 속도, 직렬 동작, 변환 <span class="src">Stepney 2024, p.671</span> <span class="src">Liang 2024, p.195</span>.</li>
+</ul>
+</div>
+</section>
+<section id="ch-reservoir-xor" class="level3">
+<h3 class="anchored" data-anchor-id="ch-reservoir-xor">5. reservoir로 XOR을 풀어 보면: 어떤 비선형이 필요한가</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 노드 20개 reservoir의 지연 XOR·3-parity 정답률(선형 48%, tanh 81%, 치우침 없는 tanh 50%와 99% 등)을 읽고, "비선형이면 된다"가 아니라 "과제가 요구하는 종류와 세기의 비선형이 상태에 읽을 수 있게 남아야 한다"를 말할 수 있다.</p>
+</div>
+<p>이제 2구간의 지연 XOR(<span class="math inline">\(y(t) = u(t-1) \oplus u(t-2)\)</span>)과 3-parity(<span class="math inline">\(u(t-1) \oplus u(t-2) \oplus u(t-3)\)</span>)를 실제 reservoir에 시켜 봅니다. 입력은 ±1 난수열, 노드 20개, spectral radius 0.9, 상태를 읽을 때 작은 측정 잡음(0.001)을 더했고, D8의 ridge readout을 1,000단계로 학습한 뒤 <strong>학습에 쓰지 않은</strong> 1,000단계에서 정답률을 쟀습니다. 정답률 50%는 동전 던지기 수준입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d10/fig3-reservoir-xor.svg" alt="일곱 가지 방법의 지연 XOR(파랑)과 3-parity(주황) 정답률 막대. 지연 탭 3개 선형 51%·48%, 지연 탭+곱 특징 100%·100%, 선형 reservoir 48%·49%, tanh 입력 0.05는 63%·49%, tanh 입력 0.5는 81%·83%, tanh 입력 1.0은 81%·95%, 치우침 없는 tanh 입력 1.0은 50%·99%" class="figure-img"><figcaption><b>그림 7.</b> 노드 20개 reservoir로 지연 XOR과 3-parity 맞히기. 막대는 학습에 쓰지 않은 1,000단계의 정답률이고, reservoir는 난수 3개의 평균(검은 선 = 최소–최대)이다. 선형 reservoir와 선형 지연 탭은 둘 다 동전 던지기 수준이고, 곱 특징을 직접 넣으면 100%다. Claude가 순수 Python으로 돌린 시뮬레이션(`tools/figs_d10.py`)이다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>읽을 것 넷.</strong> <span class="tag tag-interp">해석</span></p>
+<ol type="1">
+<li><strong>선형은 안 된다.</strong> 선형 reservoir(48%, 49%)는 노드가 20개인데도 지연 탭 3개 + 선형 readout(51%, 48%)과 같이 동전 던지기 수준입니다. 1구간의 결론("선형 reservoir = 지난 입력의 가중합")과 2구간의 증명("가중합으로는 곱을 못 만든다")이 그대로 나타납니다.</li>
+<li><strong>비선형의 세기가 맞아야 한다.</strong> 같은 tanh라도 입력을 0.05로 작게 넣으면 노드가 거의 직선 구간에서만 움직여 XOR 63%, 3-parity 49%에 그칩니다. 입력을 0.5–1.0으로 키우면 81%, 83–95%로 오릅니다. Liang의 "진폭이 작은 좁은 선형 범위"(4구간)와 같은 실패이고, Singh 2026이 쓸모없는 운전 영역의 하나로 든 "특징 섞임이 너무 적은 거의 선형인 영역" <span class="src">Singh 2026, p.5</span>입니다.</li>
+<li><strong>비선형의 종류가 맞아야 한다.</strong> 노드에 치우침(bias)이 없는 tanh reservoir는 XOR에서 <strong>50%</strong>, 3-parity에서 <strong>99%</strong>입니다. 같은 reservoir가 쉬운 과제는 못 하고 어려운 과제는 합니다. 이유를 한 줄로: tanh는 입력 부호를 뒤집으면 출력도 그대로 뒤집히는 대칭이 있어서, 치우침이 없으면 입력열의 부호를 모두 뒤집을 때 모든 노드의 상태도 부호만 뒤집힙니다. XOR의 답은 그때 <strong>그대로</strong>라 선형 readout이 둘을 구분할 수 없고, 3-parity의 답은 <strong>함께 뒤집혀</strong> 대칭과 맞습니다. 숫자로 따라가는 설명은 아래 심화 상자에 있습니다. 요점은 "비선형이다"라는 말 하나로는 어떤 과제를 풀지 알 수 없다는 것입니다.</li>
+<li><strong>readout에 곱을 직접 주면 쉽다.</strong> 지연 탭에 곱 특징(두 개씩, 세 개의 곱)을 더하면 둘 다 100%입니다. 이것이 D8 7구간과 D12의 "2차 탭 기준선"이고, reservoir가 이겨야 할 상대입니다.</li>
+</ol>
+<details class="deep">
+<summary>
+심화 · 치우침 없는 tanh reservoir가 XOR은 못 하고 3-parity는 하는 이유
+</summary>
+<p><span class="math inline">\(\tanh\)</span>는 <span class="math inline">\(\tanh(-z) = -\tanh(z)\)</span>인 <strong>홀함수</strong>입니다. 치우침이 없으면 reservoir 전체도 홀함수처럼 동작해서, 입력열의 부호를 <strong>모두</strong> 뒤집으면 모든 노드의 상태도 정확히 부호만 뒤집힙니다(<span class="math inline">\(x \to -x\)</span>). 그러면 readout 출력 <span class="math inline">\(y = w_0 + \mathbf{w}\cdot x\)</span>는 <span class="math inline">\(w_0 - \mathbf{w}\cdot x\)</span>가 됩니다. 즉 어떤 이력과 그 "뒤집힌 이력"에 대한 출력은 <span class="math inline">\(w_0\)</span>를 중심으로 대칭입니다.</p>
+<ul>
+<li>XOR(±1 표기에서 <span class="math inline">\(u_1 u_2\)</span>의 부호)은 두 입력을 다 뒤집어도 <span class="math inline">\((-u_1)(-u_2) = u_1 u_2\)</span>로 <strong>답이 같습니다</strong>. 답이 1인 이력이라면 그 이력과 뒤집힌 이력 모두에서 <span class="math inline">\(y &gt; 0.5\)</span>여야 하니 <span class="math inline">\(w_0 &gt; 0.5\)</span>여야 하고, 답이 0인 이력이라면 둘 다 <span class="math inline">\(y &lt; 0.5\)</span>여야 하니 <span class="math inline">\(w_0 &lt; 0.5\)</span>여야 합니다. 둘은 동시에 성립하지 못합니다. 그래서 50%.</li>
+<li>3-parity(<span class="math inline">\(u_1 u_2 u_3\)</span>)는 다 뒤집으면 <span class="math inline">\((-1)^3 = -1\)</span>배로 <strong>답도 뒤집힙니다</strong>. 홀함수 reservoir와 대칭이 맞으므로 문제가 없습니다. 그래서 99%.</li>
+</ul>
+치우침이 있으면 이 대칭이 깨져 XOR도 81%까지 됩니다. 물리 소자로 옮기면, 소자의 응답이 양·음 전압에 대칭인지(예: 대칭 전극) 비대칭인지(예: 정류하는 이온 다이오드)가 어떤 과제를 풀 수 있는지를 바꿀 수 있다는 뜻입니다. [해석; 소자에서의 검증은 <span class="tag tag-hypo">가설</span>] D11에서 이것을 "차수별 용량"(짝수 차수, 홀수 차수)으로 다시 봅니다.
+</details>
+<p><strong>노드 20개로 81%.</strong> 지연 XOR은 가장 작은 비선형 시계열 과제인데도 노드 20개 tanh reservoir는 81%에 머뭅니다. 곱 하나를 직접 준 기준선은 100%입니다. reservoir의 비선형은 "필요한 곱을 정확히 하나" 주는 것이 아니라, 많은 곱·굽힘을 <strong>조금씩 섞어</strong> 주고 readout이 그중에서 고르는 방식이라 노드가 적으면 부족합니다. <span class="tag tag-interp">해석</span> 노드 수와 용량의 관계가 D11의 주제입니다.</p>
+<div class="quiz" data-day="d10" data-set="5-check"></div>
+<div class="keypoints">
+<ul>
+<li>선형 reservoir와 선형 지연 탭은 지연 XOR·3-parity에서 동전 던지기(48–51%, 노드 20개 모형으로 한 Claude의 시뮬레이션. 이 줄부터 아래 숫자 모두 같음). 비선형이 필요하다.</li>
+<li>세기: tanh 입력 0.05는 63%·49%, 0.5–1.0은 81%·83–95%. 거의 선형인 영역은 섞임이 부족하다 <span class="src">Singh 2026, p.5</span>.</li>
+<li>종류: 치우침 없는 tanh는 XOR 50%, 3-parity 99%(대칭 때문, Claude의 시뮬레이션). '비선형'이라는 말만으로 과제를 알 수 없다.</li>
+<li>곱 특징을 readout에 직접 주면 100% → reservoir가 이겨야 할 기준선(Claude의 시뮬레이션).</li>
+</ul>
+</div>
+</section>
+<section id="ch-device-nonlinearity" class="level3">
+<h3 class="anchored" data-anchor-id="ch-device-nonlinearity">6. 소자의 I–V 비선형성은 쓸모 있는 비선형성인가</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "읽기 전압을 고정하면 I–V 곡선의 휨은 상수 하나로 접힌다"를 숫자(I = g × 0.102)로 보이고, 쓸모 있는 비선형은 상태가 입력 이력에 따라 바뀌는 방식(쓰기·이완)이나 과거와 현재가 섞인 신호에 작용하는 비선형에 있어야 한다는 것, 그리고 그것을 확인하는 시험(겹침 검사, 차수별 용량, held-out)을 말할 수 있다.</p>
+</div>
+<p>이온 소자 논문에는 전류–전압(I–V) 곡선이 휘어 있다(정류, 히스테리시스(전압을 올릴 때와 내릴 때 곡선이 다른 길을 가는 것), 포화)는 그림이 거의 늘 있습니다. 그 휨이 곧 reservoir의 비선형일까요? 두 가상 소자로 따져 봅니다.</p>
+<ul>
+<li><strong>소자 A</strong>: 상태(전도도) <span class="math inline">\(g\)</span>가 입력에 대해 <strong>선형으로</strong> 쌓이고 흐려진다. <span class="math inline">\(g \leftarrow 0.5\,g + u\)</span>. 그런데 I–V 곡선은 크게 휘었다: <span class="math inline">\(I = g\,(V + 2V^3)\)</span>.</li>
+<li><strong>소자 B</strong>: 상태가 포화되며 쌓인다. <span class="math inline">\(g \leftarrow 0.5\,g + 0.8\,u\,(1 - g)\)</span>. 이미 <span class="math inline">\(g\)</span>가 크면 같은 펄스가 덜 올린다(예: 이온이 들어갈 자리가 줄어드는 경우를 흉내 낸 것).</li>
+</ul>
+<p>둘 다 읽기는 <strong>0.1 V로 고정</strong>해서 합니다. 입력 이력 두 칸(00, 10, 01, 11)을 넣고 마지막에 읽은 전류를 비교합니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 읽기 전압을 고정하면.</strong> <span class="math inline">\(V = 0.1\)</span>이면 <span class="math inline">\(V + 2V^3 = 0.1 + 0.002 = 0.102\)</span>. 그래서 소자 A의 전류는 <span class="math inline">\(I = 0.102 \times g\)</span>. I–V 곡선이 아무리 휘어도, 읽기 전압 하나에서는 <strong>상수 0.102를 곱하는 것</strong>일 뿐입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 소자 A의 네 이력.</strong> <span class="math inline">\(g\)</span> = 0, 0.5, 1.0, 1.5(00, 10, 01, 11). 전류 = 0, 0.051, 0.102, 0.153. 겹침 검사: <span class="math inline">\(I(10) + I(01) = 0.051 + 0.102 = 0.153 = I(11)\)</span>. <strong>겹침 원리가 정확히 성립합니다.</strong> 이력에 대해서는 선형입니다. 그러니 이런 소자를 몇 개를 써도 선형 readout은 XOR을 못 합니다(2구간).</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 소자 B의 네 이력.</strong> 10: 첫 펄스로 <span class="math inline">\(g = 0.8 \times 1 \times (1 - 0) = 0.8\)</span>, 다음 단계에 <span class="math inline">\(0.5 \times 0.8 = 0.40\)</span>. 01: <span class="math inline">\(g = 0.80\)</span>. 11: 첫 펄스 뒤 0.8, 둘째 펄스에서 <span class="math inline">\(0.5 \times 0.8 + 0.8 \times (1 - 0.8) = 0.40 + 0.16 = 0.56\)</span>. 전류는 0.102배: 0, 0.0408, 0.0816, 0.0571.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 소자 B의 겹침 검사.</strong> <span class="math inline">\(I(10) + I(01) = 0.1224 \neq I(11) = 0.0571\)</span>. 겹침이 깨졌습니다. "두 펄스가 연달아 왔다"는 사실이 따로 흔적을 남긴 것이고, D8의 <span class="math inline">\(x(11) \neq x(10) + x(01)\)</span>과 같은 종류의 비선형입니다. 이 비선형은 I–V 곡선이 아니라 <strong>상태가 바뀌는 규칙</strong>(쓰기)에서 왔습니다.</p>
+</div>
+<div class="step">
+<p><strong>정리.</strong> 소자 하나의 전류 하나로는 B도 XOR을 직선 하나로 가르지 못합니다(값의 순서가 0, 0.041, 0.057, 0.082라 두 무리가 엇갈림). 비선형 섞임이 있는 서로 다른 상태가 <strong>여럿</strong> 있어야 합니다(3구간, 4구간의 마스크·가상 노드, 5구간).</p>
+</div>
+</div>
+<figure class="fig figure"><img src="../assets/img/d10/fig4-read-vs-write.svg" alt="왼쪽: I = g(V + 2V³) 곡선 두 개(g=1, 0.5)와 0.1 V의 읽기선. 0.1 V에서 I = g × 0.102로 상수 하나. 오른쪽: 소자 A(선형으로 쌓임)는 이력 00, 10, 01, 11의 전류가 0, 0.051, 0.102, 0.153으로 I(10)+I(01)=I(11) 성립. 소자 B(포화하며 쌓임)는 0, 0.0408, 0.0816, 0.0571로 I(10)+I(01)=0.1224 ≠ I(11)=0.0571" class="figure-img"><figcaption><b>그림 8.</b> 휜 I–V 곡선(왼쪽)도 읽기 전압을 0.1 V로 고정하면 상태에 상수 0.102를 곱하는 것이다. 소자 A는 상태가 선형으로 쌓여 이력에 대해 겹침 원리가 성립하고, 소자 B는 쓰기가 포화되어 겹침이 깨진다. 두 소자 모두 설명용 가상 예시이며 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>언제 I–V의 휨이 쓸모 있나.</strong> <span class="tag tag-interp">해석</span> 위 결론을 일반화하면 비선형이 쓸모 있으려면 <strong>과거(상태)와 현재(입력)가 섞인 신호에</strong> 작용해야 합니다. 세 경우로 나눌 수 있습니다.</p>
+<ol type="1">
+<li><strong>쓰기·이완이 비선형</strong>(소자 B): 상태가 바뀌는 크기가 지금 상태나 입력 크기에 따라 굽는다. 포화, 문턱, 농도에 따라 바뀌는 이동, 정류.</li>
+<li><strong>소자의 입력 자리에 이미 섞인 신호가 들어가는 구조</strong>: D7에서 본 Zhong 2026의 트랜지스터 ESN은 트랜지스터의 선형 영역으로 희소 행렬 곱(가중치 곱해 더하기)을 하고, 포화 영역으로 <strong>비선형성과 진폭 제한</strong>을 준다고 씁니다. <span class="src">Zhong 2026, p.3</span> 즉 소자에 들어가는 것이 이미 <span class="math inline">\(W x + W_{in} u\)</span>(과거와 현재의 합)라서, 그 소자의 휜 전달 곡선이 D8 갱신식의 <span class="math inline">\(\tanh\)</span> 자리를 그대로 맡습니다.</li>
+<li><strong>입력을 읽기 전압으로 넣고 상태가 그 응답을 바꾸는 구조</strong>: <span class="math inline">\(I = g(\text{과거}) \times h(V_{\text{지금}})\)</span>이면 과거와 현재의 곱이 생깁니다. [가설: 이온 소자에서 이 구조의 효과는 확인하지 않았다]</li>
+</ol>
+<p>반대로 <strong>고정된 작은 읽기 전압에서 상태를 읽기만 하는</strong> 구조라면, 읽기 I–V의 휨은 대부분 상수로 접힙니다. 그래서 논문의 휜 I–V 그림 하나는 "이 소자가 계산에 쓸모 있는 비선형을 준다"의 증거가 되지 못합니다.</p>
+<p><strong>실제 시스템에서 두 종류의 I–V.</strong> 아래는 4구간에서 본 Zhong 2022의 하드웨어입니다. 읽는 순서: (1) 왼쪽 DM(reservoir 노드로 쓰는 동적 memristor) 곡선이 −3–3 V에서 크게 휘고 오르내리는 길이 다른 것(히스테리시스), (2) 가운데 실제 회로 기판 사진, (3) 오른쪽 NVM(readout 가중치를 저장하는 비휘발 memristor) 곡선이 0–0.2 V의 작은 읽기 범위에서 거의 직선인 것을 차례로 봅니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2022-fig2a.png" alt="Zhong 2022 Fig. 2a: 왼쪽은 DM 24개의 I–V 곡선(−3–3 V, 1 V 위에서 전류가 0에서 최대 약 40 µA로 급히 오르며 화살표 방향으로 고리를 그림)과 Ti/TiOx/Pd 단면 TEM 사진, 가운데는 소자 칩 광학 사진과 검은 회로 기판 사진, 오른쪽은 NVM의 I–V 곡선 여러 개(0–0.2 V에서 0–약 3.8 µA로 거의 직선)와 TiN/TaOx/HfAlOy/TiN 단면 TEM 사진" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41928-022-00838-3" target="_blank"><i>Nat. Electron.</i> 2022, 5, 672–681</a>, Fig. 2a, p.674. 볼 것: <b>왼쪽</b> reservoir 노드(DM)는 문턱(약 1 V) 위에서 전류가 급히 오르고, 올라갈 때와 내려올 때 길이 다르다(검은 화살표). 저자들은 이 강한 정류성 I–V를 노드로 쓴다(p.674). 이 소자에는 입력이 쓰기 크기의 전압 펄스로 직접 들어가므로, 이 절의 '쓰기·이완이 비선형'인 경우에 가깝다 [해석]. <b>오른쪽</b> readout(NVM)은 0–0.2 V에서 선이 거의 곧고, 선마다 기울기(전도도)가 다르다. 이 기울기가 readout 가중치이고, 작은 읽기 전압에서는 '전도도 × 전압', 곧 상수 곱셈으로 쓰인다. 같은 시스템 안에서 비선형은 reservoir 쪽, 선형은 readout 쪽에 일부러 나눠 둔 것이다. 가운데 사진은 이 둘을 담은 실제 회로 기판이다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p><strong>원문은 같은 말을 이렇게 한다.</strong> Singh 2026은 비선형성을 "I–V 스윕 한 번에서 뽑은 숫자 하나"로 다루지 말고, 실제 계산에 쓰는 구동 조건에서의 <strong>운전점 의존 응답군</strong>으로 보라고 씁니다. 쓸모없는 운전 영역으로는 특징 섞임이 너무 적은 거의 선형인 영역, 반복마다 크게 흔들리는 급격한 문턱 스위칭, 동적 범위를 압축하는 포화 근처 응답을 듭니다. <span class="src">Singh 2026, p.5</span> 그리고 3.2절에서 더 직접적으로 씁니다. <strong>"비선형 전기 특성만으로는 관측된 비선형성이 쓸모 있는 계산에 기여한다는 것이 확립되지 않는다. 큰 히스테리시스 고리, 뚜렷한 전달 곡선의 휨, 강한 고조파 응답(사인파 전압을 넣었을 때 그 주파수의 2배, 3배 같은 정수배 성분이 전류에 나타나는 것)은 불안정하거나 포화되었거나 과제에 맞지 않는 영역에서 생길 수 있다."</strong> 계산적 기여는 입력 이력의 비선형 함수를 측정한 reservoir 상태에서 <strong>선형 readout으로 재구성할 수 있는가</strong>로 보아야 하고, 이것이 정보처리용량이며, 전기적 비선형 측정은 메커니즘과 운전 범위를 알려 주는 보완 정보라고 정리합니다. <span class="src">Singh 2026, p.13</span> 정보처리용량은 내일(D11) 숫자로 봅니다.</p>
+<p><strong>구별되는 상태의 실제 예.</strong> Zhong 2026은 4-bit 부호화에서 펄스 간격을 늘리면 "0,0,0,0"과 "1,0,1,0"이 만드는 응답이 서로 달라진다고 보고합니다. <span class="src">Zhong 2026, p.4</span> 이것이 "서로 다른 이력 → 서로 구별되는 상태"를 소자에서 확인하는 가장 작은 형태입니다. 다만 그 차이가 선형 겹침에서 오는지 비선형 섞임에서 오는지는 소자 A/B처럼 겹침 검사를 해야 압니다. <span class="tag tag-interp">해석</span></p>
+<div class="think">
+<p>내 소자의 I–V 곡선(또는 정류 곡선)을 떠올리세요. 실제로 reservoir로 쓸 때 입력은 어떤 형태로 들어가나요(쓰기 펄스? 읽기 전압 자체?), 상태는 어떤 전압에서 읽나요? 그 조건에서 "10, 01, 11" 세 펄스 열을 넣고 <span class="math inline">\(I(10) + I(01)\)</span>과 <span class="math inline">\(I(11)\)</span>을 비교하는 실험 하나를 설계해 보세요. 두 값이 같으면 무엇을 뜻하고, 다르면 무엇을 뜻하나요?</p>
+</div>
+<div class="quiz" data-day="d10" data-set="6-check"></div>
+<div class="quiz" data-day="d10" data-set="6-end"></div>
+<div class="keypoints">
+<ul>
+<li>읽기 전압을 고정하면 I–V의 휨은 상수 하나(0.1 V에서 <span class="math inline">\(I = 0.102\,g\)</span>). 상태가 선형으로 쌓이는 소자 A는 이력에 대해 겹침이 성립한다(0.051 + 0.102 = 0.153).</li>
+<li>쓰기가 포화하는 소자 B는 겹침이 깨진다(0.1224 ≠ 0.0571). 쓸모 있는 비선형은 과거와 현재가 섞인 신호에 작용해야 한다 <span class="tag tag-interp">해석</span>.</li>
+<li>휜 전기 특성만으로는 계산 기여가 확립되지 않는다. 선형 readout으로 비선형 함수를 재구성할 수 있는지(정보처리용량)를 보라 <span class="src">Singh 2026, p.5, 13</span>.</li>
+<li>소자 실험의 최소 확인: 겹침 검사 <span class="math inline">\(I(10)+I(01)\)</span> vs <span class="math inline">\(I(11)\)</span>, 그리고 held-out 성능.</li>
+</ul>
+</div>
+</section>
+<section id="ch-objection" class="level3">
+<h3 class="anchored" data-anchor-id="ch-objection">7. 오늘의 반론</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "비선형은 readout에서 계산하면 된다"는 반론에 대해, 그 반론이 맞는 지점과 reservoir에 남는 몫을 적을 수 있다.</p>
+</div>
+<p>가장 강한 반론은 이것입니다. <strong>"그림 7에서 곱 특징을 readout에 직접 주면 100%다. 그렇다면 비선형은 컴퓨터가 계산하면 되고, 소자는 기억(흐려지는 흔적)만 주면 충분하지 않나? 굳이 소자의 비선형에 매달릴 이유가 있나?"</strong></p>
+<p>이 반론은 공학적으로 일리가 있습니다. 실제로 D12에서 지연 탭 20개와 그 곱(특징 231개)을 넣은 기준선이 노드 200개 tanh reservoir보다 NARMA10에서 나았습니다(0.035 대 0.053, Claude의 시뮬레이션). 그러나 세 가지를 따져야 합니다. (1) 곱 특징의 수는 탭 수의 제곱으로 늘고(20개 → 210개, 50개 → 1,275개), 3차는 세제곱으로 늡니다. 필요한 차수와 기억 길이가 크면 readout 쪽 계산·저장 비용이 빠르게 커집니다. <span class="tag tag-interp">해석</span> (2) 그 계산을 디지털로 하면 Stepney가 말한 "출력 단계에서 다른 컴퓨터가 계산을 다 하는" 경우에 가까워지고 <span class="src">Stepney 2024, p.667</span>, 소자의 몫은 기억뿐이 됩니다. 그것도 하나의 정직한 설계입니다(D9의 기억 예산이 그때의 질문). (3) Singh 2026은 재료를 평가할 때 선형 readout을 기준으로 삼으라고 합니다 <span class="src">Singh 2026, p.18</span>. 비선형을 readout으로 옮기면 재료의 기여는 그만큼 좁게 말해야 합니다. 어느 쪽이 나은지는 같은 정확도에서의 시스템 비용(D17)으로 판정합니다. 답은 내 몫입니다.</p>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>자료를 덮고 아래 표를 먼저 머릿속으로 채운 뒤 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+한 장 요약 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>선형이란</td>
+<td>겹침 원리 <span class="math inline">\(f(a+b) = f(a)+f(b)\)</span>가 성립하는 것</td>
+<td><span class="math inline">\(\tanh 1 + \tanh 2 = 1.726 \neq \tanh 3 = 0.995\)</span></td>
+</tr>
+<tr class="even">
+<td>선형 reservoir는 무엇을 하나</td>
+<td>지난 입력의 가중합뿐 → 지연 탭 기준선과 같은 일</td>
+<td>NARMA10: 선형 200노드 0.144 ≈ 지연 탭 50개 0.146, tanh 0.053(Claude의 시뮬레이션)</td>
+</tr>
+<tr class="odd">
+<td>선형 readout으로 못 하는 것</td>
+<td>XOR: <span class="math inline">\(w_1 + w_2 + 2b\)</span>가 1보다 크고 작아야 하는 모순. ±1 표기에서 XOR = 곱, 3-parity = 세 곱</td>
+<td>물리 노드가 선형이면 선형 분리 문제만 <span class="src">Liang 2024, p.197</span></td>
+</tr>
+<tr class="even">
+<td>고차원 사상</td>
+<td>선형 사상은 차원을 늘려도 선형(<span class="math inline">\(w\cdot Au = (A^{\mathsf T}w)\cdot u\)</span>). 곱 하나가 XOR을 푼다</td>
+<td>그림 3: 0.50 넷 / 0.50 넷 / 0, 1, 1, 0. 그림 4: 곱을 높이로 주면 평면 하나, 바닥에서는 십자 경계 <span class="src">Stepney 2024, p.668, 673</span></td>
+</tr>
+<tr class="odd">
+<td>마스크·시간다중화</td>
+<td>입력을 노드마다 다른 무게로(<span class="math inline">\(W_{in}\)</span>), 소자 하나를 θ 칸으로 나눠 칸 끝마다 읽은 값이 가상 노드. θ/τ가 너무 작으면 진폭이 작고, 너무 크면 포화·망각</td>
+<td>θ ≈ τ/4 <span class="src">Liang 2024, p.198</span>; 24 × 5 = 120 <span class="src">Zhong 2022, p.675</span>; 대가: 입출력 <span class="math inline">\(N\)</span>배 <span class="src">Stepney 2024, p.671</span></td>
+</tr>
+<tr class="even">
+<td>어떤 비선형이 필요한가</td>
+<td>과제가 요구하는 종류(짝·홀 차수)와 세기</td>
+<td>치우침 없는 tanh: XOR 50%, 3-parity 99%; 입력 0.05: 63%(Claude의 시뮬레이션)</td>
+</tr>
+<tr class="odd">
+<td>I–V 비선형</td>
+<td>고정 읽기 전압에서는 상수로 접힌다. 쓰기·이완의 비선형이나 섞인 신호에 작용하는 비선형이어야</td>
+<td>소자 A/B 겹침 검사; <span class="src">Singh 2026, p.5, 13</span></td>
+</tr>
+<tr class="even">
+<td>사전 테스트·먼저 만들어 보기와 달라질 점</td>
+<td>"I–V가 휘었으니 비선형 소자다 → reservoir에 좋다"가 아니다. "노드·전극이 많으면 고차원"도 아니다</td>
+<td>그림 3b, 그림 8</td>
+</tr>
+<tr class="odd">
+<td>오늘의 숫자</td>
+<td><span class="math inline">\(I(10)+I(01) = 0.1224 \neq I(11) = 0.0571\)</span>(소자 B)</td>
+<td>Claude 계산</td>
+</tr>
+<tr class="even">
+<td>오늘의 반론</td>
+<td>비선형은 readout에서 계산하면 된다 → 곱 특징 수가 차수에 따라 폭증하고, 재료의 몫이 좁아진다. 판정은 시스템 비용</td>
+<td><span class="src">Stepney 2024, p.667</span> <span class="src">Singh 2026, p.18</span></td>
+</tr>
+<tr class="odd">
+<td>모르는 것 하나</td>
+<td>내 소자의 비선형은 쓰기에 있나 읽기에 있나</td>
+<td>겹침 검사 실험(6구간 생각해 보기)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="quiz" data-day="d10" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<p>모범 문장은 주지 않습니다. 내 답이 아래 질문에 답했는지 확인하세요.</p>
+<ol type="1">
+<li>선형을 "그래프가 직선"이 아니라 겹침 원리로 정의했나? 선형 reservoir가 지연 탭 기준선과 같은 일밖에 못 하는 이유를 적었나?</li>
+<li>XOR(또는 parity)을 선형 readout으로 못 푸는 이유를 부등식이나 그림으로 보였나?</li>
+<li>"고차원 사상"이 비선형일 때만 분리를 돕는다는 것을 그림 3의 (b)와 (c)(그림 4의 평면)로 설명했나? 노드·전극 수와 '독립인 비선형 조합'의 수를 구별했나?</li>
+<li>마스크와 시간다중화가 무엇을 얻고(노드 수, 다양함) 무엇을 치르는지(입출력 속도, 직렬, θ와 τ의 정합) 적었나?</li>
+<li>내 소자의 I–V 비선형이 쓸모 있는 비선형인지 판단하는 시험(겹침 검사, 차수별 용량, held-out)을 하나라도 적었나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 과제가 필요로 하는 비선형의 차수(곱의 개수)와 종류(짝·홀) vs (메커니즘이 허용하는 것) 소자의 쓰기·이완 규칙이 만드는 비선형 섞임. 고정 읽기 전압의 I–V 휨은 여기에 넣지 않는다.</li>
+<li><strong>병목 장부:</strong> 시간다중화로 가상 노드 <span class="math inline">\(N\)</span>개를 얻으면 입력 한 단계가 <span class="math inline">\(N \times \theta \approx N\tau/4\)</span>로 길어진다. 이온 소자의 τ(ms–s)와 응용의 실시간 요구(D5, D13)가 맞는가.</li>
+<li><strong>아직 모르는 것:</strong> 내 소자에서 <span class="math inline">\(I(10) + I(01)\)</span>과 <span class="math inline">\(I(11)\)</span>은 같은가? / 대칭 전극과 비대칭(정류) 구조가 짝·홀 차수 용량을 어떻게 바꾸나 <span class="tag tag-hypo">가설</span>.</li>
+<li><strong>용어집:</strong> 선형, 겹침 원리, 비선형, XOR, parity, 차수, 선형 분리, 고차원 사상, 선형 독립, 입력 마스크, 시간다중화, 가상 노드, θ ≈ τ/4, delay-coupled RC, 치우침(bias), 홀함수, 쓰기 비선형 vs 읽기 비선형.</li>
+<li><strong>접는 기준 후보:</strong> "내 소자의 상태가 이력에 대해 겹침 원리를 (측정 잡음 안에서) 만족하고, 비선형을 줄 다른 구조(섞인 신호를 넣는 배치)도 없다."</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다. 아래는 모두 보충이며, 오늘 본문은 이것 없이 읽히도록 썼습니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Liang 2024, <em>Nat. Electron.</em> 7, 193–206. p.194–195 "Delay-coupled RC"(마스크·시간다중화·가상 노드), p.197 "Physical node design" 첫 두 문단(비선형이 없으면 선형 분리 문제만), p.198 "Pre-processing techniques"(θ ≈ τ/4)와 p.199 Fig. 4a, p.200 kernel quality 문단.</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 일부 대조함)</strong></p>
+<ul>
+<li>Stepney 2024, <em>Natural Computing</em> 23, 665–685. 3.4.2절(p.670–672): delay feedback reservoir, 마스크 = 시간으로 퍼뜨린 입력 가중치, 입출력 <span class="math inline">\(N\)</span>배의 대가. 4.5절(p.673): 관측 가능한 차원과 선형 분리.</li>
+<li>Singh 2026, <em>Adv. Mater.</em> e74897. p.4–5(DR2: 쓸모 있는 운전 영역의 비선형), p.13(3.2절: 전기적 비선형 ≠ 계산 기여, 정보처리용량).</li>
+<li>Zhong 2022, <em>Nat. Electron.</em> 5, 672–681. p.675(마스크 길이 5 × 노드 24 = 상태 120).</li>
+<li>Zhong 2026, <em>Nat. Commun.</em> 17, 3321. p.3(선형 영역과 포화 영역의 역할), p.4(펄스 간격 부호화와 서로 다른 응답).</li>
+</ul>
+<p><strong>폴더 밖 (내용은 <span class="tag tag-unverified">미확인</span>)</strong></p>
+<ul>
+<li>Appeltant et al. 2011, <em>Nat. Commun.</em> 2, 468, "Information processing using a single dynamical node as complex system". delay feedback reservoir의 원 논문으로 Stepney가 인용. 서지는 Crossref로 확인했고, 4구간에 쓴 θ = τ/N(τ = 지연 길이)·표본 유지·θ &lt; T(θ = 0.2T)와 그 이유 문장만 PubMed Central 공개본에서 Claude가 대조했습니다. 나머지 내용은 <span class="tag tag-unverified">미확인</span>입니다.</li>
+<li><strong>절편(bias)이 있는</strong> 선형 분류기는 <span class="math inline">\(N\)</span>차원에서 일반 위치의 점 <span class="math inline">\(N+1\)</span>개를 어떤 라벨로든 가를 수 있다는 고전 결과(Cover 1965 등)는 폴더 밖입니다. 절편이 없어 경계가 원점을 지나야 하면 <span class="math inline">\(N\)</span>개까지입니다. [해석: 표준 결과. 원문은 Claude가 대조하지 않음]</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d10">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 장의 앵커.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "종이에 네 점 (0,0), (0,1), (1,0), (1,1)을 찍고 '두 좌표가 다르면 ●, 같으면 ○'로 표시한 뒤, 직선 하나로 ●와 ○를 가르려고 여러 번 시도해 보세요. 안 되면 점마다 세 번째 값(높이)을 하나 더 붙여 들어 올렸을 때 평면 하나로 가를 수 있게 만드는 '높이 규칙'을 생각해 적어 보세요.", "items": [{"id": "d10-p01", "ref": "#ch-linear", "type": "mc", "q": "'두 입력을 따로 넣은 결과의 합이 둘을 함께 넣은 결과와 같고, 입력을 c배 하면 출력도 c배'인 규칙(선형)은 다음 중 어느 것인가?", "options": ["y = u²", "y = tanh(u)", "y = 2u", "y = |u| (절댓값)"], "a": 2, "why": "2u는 2(a+b) = 2a + 2b로 겹침 원리가 성립합니다. u²는 2² + 3² = 13 ≠ 25, tanh는 tanh1 + tanh2 = 1.726 ≠ tanh3 = 0.995로 깨집니다(1구간)."}, {"id": "d10-p02", "ref": "#ch-linear", "type": "mc", "q": "선형으로만 반응하는 reservoir에 선형 readout(곱해 더하기)을 붙이면, 최종 출력은 결국 어떤 종류의 계산인가?", "options": ["지난 입력들에 각각 숫자를 곱해 더한 값 — 지난 입력을 저장해 두고 곱해 더하는 것과 같은 종류", "지난 입력들끼리의 곱", "노드만 많으면 어떤 함수든", "매번 달라서 알 수 없다"], "a": 0, "why": "선형 단계를 몇 번 거쳐도 출력은 지난 입력들의 가중합입니다. 시뮬레이션에서 선형 reservoir 200노드(NMSE 0.144)와 지연 탭 50개(0.146)가 거의 같았고, tanh reservoir는 0.053이었습니다(1구간)."}, {"id": "d10-p03", "ref": "#ch-xor", "type": "mc", "q": "두 입력(0 또는 1)이 서로 다를 때만 1을 내는 과제(XOR)를 '각 입력에 숫자를 곱해 더하고 기준값보다 크면 1'이라는 규칙으로 풀 수 있나?", "options": ["숫자만 잘 고르면 풀 수 있다", "어떤 숫자를 골라도 풀 수 없다 — 네 경우를 직선 하나로 가를 수 없다", "기준값을 0으로 두면 풀 수 있다", "입력이 0과 1이 아니라 −1과 +1이면 풀 수 있다"], "a": 1, "why": "(01)과 (10)의 조건을 더하면 w₁ + w₂ + 2b > 1, (00)과 (11)을 더하면 같은 식이 < 1이 되어 모순입니다. ±1 표기에서 XOR은 두 입력의 곱이라 비선형이 필요합니다(2구간)."}, {"id": "d10-p04", "ref": "#ch-separability", "type": "ox", "q": "입력 (u₁, u₂)에 u₁ + u₂처럼 입력들을 섞어 더한 새 숫자를 덧붙여 차원을 늘리면, 선형 readout이 XOR을 풀 수 있게 된다.", "a": false, "why": "입력들의 가중합으로 늘린 차원은 readout에게 여전히 원래 입력의 선형 함수라서, 최소제곱 출력이 네 경우 모두 0.50으로 나옵니다. 분리를 돕는 것은 차원 수가 아니라 서로 다른 비선형 조합입니다(3구간)."}, {"id": "d10-p05", "ref": "#ch-separability", "type": "mc", "q": "선형 readout이 XOR을 정확히 풀게 하려면, 입력 (u₁, u₂) 옆에 어떤 숫자 하나를 덧붙이면 되나?", "options": ["u₁ + u₂", "u₁ − u₂", "2u₁", "u₁ × u₂ (두 입력의 곱)"], "a": 3, "why": "곱 특징 z₃ = u₁u₂를 더하면 y = z₁ + z₂ − 2z₃가 00, 01, 10, 11에 0, 1, 1, 0을 정확히 냅니다. reservoir의 비선형은 이런 '서로 다른 비선형 조합'을 만들어 주는 역할입니다(3구간)."}, {"id": "d10-p06", "ref": "#ch-mask-multiplex", "type": "ox", "q": "소자가 하나뿐이어도, 입력을 짧은 시간 칸으로 나눠 칸마다 다른 무게로 넣고 읽으면 여러 노드가 있는 것처럼 쓸 수 있다.", "a": true, "why": "시간다중화는 소자 하나를 시간 칸 θ로 나눠 가상 노드 여럿을 만듭니다. 칸 길이가 소자 시간상수의 약 1/4이면 가상 노드 값이 제각각이 되지만, 4배로 길면 포화해 두 종류로 몰립니다. 대가로 입출력이 N배 빨라야 하고 동작이 직렬이 됩니다(4구간)."}, {"id": "d10-p07", "ref": "#ch-reservoir-xor", "type": "ox", "q": "reservoir가 비선형이기만 하면, 비선형이 필요한 과제(XOR 등)는 무엇이든 잘 푼다.", "a": false, "why": "종류와 세기가 맞아야 합니다. Claude의 시뮬레이션(노드 20개)에서 치우침 없는 tanh reservoir는 3-parity 99%인데 지연 XOR은 50%였고, 입력이 작아 거의 직선 구간에서만 움직이면 63%에 그쳤습니다. '비선형'이라는 말만으로 과제 성능을 알 수 없습니다(5구간)."}, {"id": "d10-p08", "ref": "#ch-device-nonlinearity", "type": "mc", "q": "소자의 전류–전압 곡선이 크게 휘어 있지만, 상태를 읽을 때는 늘 같은 전압(예: 0.1 V) 하나로만 읽는다. 이 휨은 계산에 어떤 역할을 하나?", "options": ["입력 이력에 대해 매우 강한 비선형을 준다", "읽기 전압이 고정이면 휨은 상수 하나를 곱하는 것으로 접혀, 입력 이력에 대한 비선형을 주지 않을 수 있다", "기억을 더 길게 만든다", "소자를 망가뜨린다"], "a": 1, "why": "0.1 V에서 I = g × 0.102처럼 상수 배일 뿐이라, 상태가 선형으로 쌓이는 소자는 이력에 대해 겹침이 그대로 성립합니다. 쓸모 있는 비선형은 상태가 바뀌는 규칙(쓰기 포화 등)처럼 과거와 현재가 섞인 신호에 작용해야 합니다(6구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 겹침 원리", "items": [{"id": "d10-q01", "type": "mc", "q": "$f(u) = u^2$에 대해 $f(2) + f(3)$과 $f(2+3)$을 비교한 결과로 맞는 것은?", "options": ["13 = 13, 선형", "13 ≠ 25, 비선형", "25 = 25, 선형", "5 ≠ 25, 비선형"], "a": 1, "why": "$f(2) + f(3) = 4 + 9 = 13$, $f(5) = 25$. 따로 넣은 결과의 합과 함께 넣은 결과가 다르니 겹침 원리가 깨진다 — 비선형. 5라고 답했다면 제곱하기 전의 입력을 더한 것(기초 계단: 비선형성).", "ref": "#ch-linear"}, {"id": "d10-q02", "type": "ox", "q": "선형 reservoir라도 노드를 2,000개로 늘리면 선형 readout으로 지연 XOR을 풀 수 있다.", "a": false, "why": "선형 reservoir + 선형 readout의 출력은 노드 수와 상관없이 지난 입력의 가중합이고, 가중합으로는 곱(XOR)을 만들 수 없다. 노드 20개 시뮬레이션에서도 48%(동전 던지기)였다.", "ref": "#ch-linear"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · XOR과 parity", "items": [{"id": "d10-q03", "type": "mc", "q": "XOR을 $y = w_1 u_1 + w_2 u_2 + b$('0.5보다 크면 1')로 못 푸는 증명에서, 모순을 만드는 두 계산은?", "options": ["(00)과 (01)의 조건을 더하기 / (10)과 (11)의 조건을 더하기", "(01)과 (10)의 조건을 더하면 $w_1 + w_2 + 2b > 1$, (00)과 (11)의 조건을 더하면 $w_1 + w_2 + 2b < 1$", "(00) 조건만으로 $b < 0$", "(11) 조건만으로 $w_1 + w_2 < 0$"], "a": 1, "why": "같은 양 $w_1 + w_2 + 2b$가 1보다 크면서 작아야 하므로 어떤 가중치로도 불가능하다(기초 계단: XOR). 다른 묶음으로 더하면 모순이 나오지 않는다.", "ref": "#ch-xor"}, {"id": "d10-q04", "type": "short", "q": "3-parity에서 입력 (1, 1, 0)의 답은? 그리고 0 → −1, 1 → +1로 바꾼 세 입력의 곱은? '답,곱' 꼴로 (예: 1,1)", "a": ["0,-1", "0, -1", "0,−1", "0, −1"], "why": "1이 두 개(짝수)라 parity는 0. ±1 표기로 (+1)(+1)(−1) = −1. 곱이 −1이면 0, +1이면 1에 대응한다(1이 홀수 개면 −1이 짝수 개라 곱이 +1). 3-parity는 세 입력의 곱 — 3차 비선형이 필요하다.", "ref": "#ch-xor"}]}, "3-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 고차원 사상", "items": [{"id": "d10-q05", "type": "short", "q": "[풀이 예시 확인] 선형으로 늘린 특징 $z = (u_1, u_2, u_1 + u_2)$에 readout 가중치 $(w_1, w_2, w_3) = (1, 2, 3)$을 쓰면, 이것은 원래 입력에 대한 가중치 몇과 몇의 readout과 같은가? '$u_1$ 가중치,$u_2$ 가중치' 꼴로", "a": ["4,5", "4, 5"], "why": "$1\\cdot u_1 + 2\\cdot u_2 + 3(u_1 + u_2) = 4u_1 + 5u_2$. 선형으로 늘린 차원은 readout에게 원래 입력의 가중합일 뿐이다(그림 3b, 기초 계단: 선형 분리).", "ref": "#ch-separability"}, {"id": "d10-q06", "type": "short", "q": "[일부 채우기] 곱을 더한 특징 $z = (u_1, u_2, u_1 u_2)$와 readout $y = z_1 + z_2 - 2z_3$. 입력 (1, 1)에서 $y = 1 + 1 - 2 \\times ▢ = ?$ 빈칸과 답을 '빈칸,답' 꼴로", "a": ["1,0", "1, 0"], "why": "$z_3 = 1 \\times 1 = 1$이라 $y = 2 - 2 = 0$. XOR(1,1) = 0과 맞는다. 빈칸에 2를 넣었다면 곱 대신 합($u_1 + u_2$)을 쓴 것 — 그러면 그림 3b처럼 선형으로 돌아간다.", "ref": "#ch-separability"}, {"id": "d10-q07", "type": "short", "q": "[혼자 풀기] 같은 특징 $z = (u_1, u_2, u_1 u_2)$에 readout $y = z_1 + z_2 - z_3$을 쓰면 입력 00, 01, 10, 11의 출력은? 쉼표로 (예: 0,0,0,1)", "a": ["0,1,1,1", "0, 1, 1, 1"], "why": "00 → 0, 01 → 1, 10 → 1, 11 → 1 + 1 − 1 = 1. 이것은 OR(하나라도 1이면 1)이다. 곱 특징 하나와 가중치만 바꿔 XOR, OR, AND($z_3$만 쓰면 0,0,0,1)를 모두 만들 수 있다 — readout이 섞는 비율만 바꾸는 것이다.", "ref": "#ch-separability"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d10-q08", "type": "mc", "q": "소자 배열의 전극을 16개에서 64개로 늘렸다. 이것만으로 선형 readout의 분리 능력이 늘었다고 말할 수 없는 가장 큰 이유는?", "options": ["전극이 많으면 항상 잡음이 줄어서", "늘어난 채널이 기존 채널의 가중합에 가깝거나 같은 것을 반복하면 차원 수만 늘고 독립인 비선형 조합은 늘지 않으므로", "전극은 선형 소자라서", "readout이 64개를 다룰 수 없어서"], "a": 1, "why": "그림 3b처럼 가중합으로 만든 새 차원은 분리를 돕지 않는다. Singh 2026은 전극이 많다고 계산적으로 풍부한 것이 아니고 재현 가능하고 중복되지 않는 국소 응답이 중요하다고 쓴다(p.5).", "ref": "#ch-separability"}]}, "4-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 가상 노드", "items": [{"id": "d10-q09", "type": "short", "q": "[풀이 예시 확인] 마스크 (1, −1, 1, 1), 입력 0.5, θ = τ/4($d = 0.779$, $1-d = 0.221$, $\\tanh 0.5 = 0.462$), 시작값 0. 첫 가상 노드 $v_1$은? (소수 셋째 자리까지)", "a": ["0.102", "0.10", "0.1022"], "why": "$v_1 = 0.779 \\times 0 + 0.221 \\times 0.462 = 0.102$. 0.462가 나왔다면 소자가 한 칸 안에 새 값으로 다 간다고 본 것($d = 0$, θ ≫ τ의 경우) — θ = τ/4에서는 22%만 따라간다(기초 계단: 시간다중화).", "ref": "#ch-mask-multiplex"}, {"id": "d10-q10", "type": "short", "q": "[일부 채우기] 둘째 칸은 마스크 −1. $v_2 = 0.779 \\times 0.102 + 0.221 \\times (▢) = ?$ 빈칸($\\tanh$ 값)과 답을 '빈칸,답' 꼴로 (소수 셋째 자리까지)", "a": ["-0.462,-0.023", "-0.462, -0.023", "−0.462,−0.023", "−0.462, −0.023", "-0.462,-0.022"], "why": "마스크 −1이라 $\\tanh(-0.5) = -0.462$. $0.0795 - 0.102 = -0.023$. +0.462를 넣었다면 마스크의 부호를 빠뜨린 것. 앞 칸의 흔적(0.0795) 때문에 −0.102가 아니라 −0.023이 된다 — 이것이 가상 노드끼리의 연결이다.", "ref": "#ch-mask-multiplex"}, {"id": "d10-q11", "type": "short", "q": "[혼자 풀기] 같은 조건에서 입력이 −0.5라면 첫 가상 노드 $v_1$은? (시작값 0, 소수 셋째 자리까지)", "a": ["-0.102", "−0.102", "-0.10", "−0.10"], "why": "마스크 +1 × 입력 −0.5 = −0.5, $\\tanh(-0.5) = -0.462$, $v_1 = 0.221 \\times (-0.462) = -0.102$. 치우침 없는 대칭 소자에서는 입력 부호를 뒤집으면 가상 노드 값도 부호만 뒤집힌다 — 5구간 심화 상자의 대칭과 같은 이야기다.", "ref": "#ch-mask-multiplex"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d10-q12", "type": "mc", "q": "시간다중화에서 칸 길이 θ를 소자 시간상수 τ의 4배로 잡았다. 그림 6과 Liang(p.198)에 따르면 생기는 일은?", "options": ["가상 노드가 더 다양해진다", "소자가 칸마다 거의 다 포화되어 가상 노드가 ±tanh(u) 두 종류에 몰리고, 앞 입력도 잊어 상태가 풍부하지 않다", "아무 변화가 없다", "입출력 속도를 더 빠르게 해야 한다"], "a": 1, "why": "$d = e^{-4} = 0.02$라 칸마다 새 값으로 거의 다 간다: (0.45, −0.45, 0.45, 0.46). 앞 입력이 있든 없든 다음 구간 값이 같다. Liang은 경험칙 θ ≈ τ/4를 제시한다. 반대로 θ가 너무 짧으면 작은 진폭의 선형 범위에 머문다.", "ref": "#ch-mask-multiplex"}, {"id": "d10-q13", "type": "mc", "q": "소자 하나로 가상 노드 $N$개를 만드는 시간다중화의 대가로 맞는 것은?", "options": ["소자 수가 $N$배 필요하다", "입력을 넣고 출력을 읽는 속도가 $N$배 빨라야 하고(또는 입력 한 단계가 $N$배 길어지고), 동작이 직렬이 된다", "readout을 학습할 수 없다", "비선형성이 사라진다"], "a": 1, "why": "Stepney는 입출력이 외부 입력 주파수의 $N$배여야 한다는 것을 단점으로 들고(p.671), Liang은 직렬 동작과 디지털 되먹임의 변환 비용을 든다(p.195). 이온 소자처럼 τ가 길면 입력 한 단계가 $N\\tau/4$ 정도로 길어진다.", "ref": "#ch-mask-multiplex"}, {"id": "d10-q14", "type": "short", "q": "Zhong 2022는 동적 memristor 노드 24개에 서로 다른 마스크(길이 5)를 거친 신호를 넣고, 노드마다 시간 단계당 상태를 5개씩 읽었다. 시간 단계당 reservoir 상태는 몇 개인가? (숫자만)", "a": ["120", "120개"], "why": "24 × 5 = 120(p.675). 공간(소자 24개)과 시간(가상 노드 5개)으로 함께 다중화한 것이다. 29가 나왔다면 더한 것 — 소자마다 5개씩이므로 곱한다.", "ref": "#ch-mask-multiplex"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 어떤 비선형이 필요한가", "items": [{"id": "d10-q15", "type": "mc", "q": "노드 20개 시뮬레이션(Claude 계산)에서 치우침(bias) 없는 tanh reservoir가 지연 XOR에서 50%, 3-parity에서 99%를 낸 이유로 가장 맞는 것은?", "options": ["XOR이 3-parity보다 어려워서", "치우침 없는 tanh reservoir는 입력 부호를 모두 뒤집으면 상태도 뒤집히는 대칭을 가지는데, XOR(두 입력의 곱)은 뒤집어도 답이 같고 3-parity(세 곱)는 답도 뒤집혀서 앞의 것만 대칭과 충돌하므로", "노드 수가 부족해서", "학습 데이터가 부족해서"], "a": 1, "why": "심화 상자의 논리: 대칭 때문에 출력이 $w_0$를 중심으로 대칭이 되어, 뒤집어도 답이 같은 과제(XOR)는 $w_0 > 0.5$와 $w_0 < 0.5$를 동시에 요구한다. 치우침이 있으면 81%까지 된다. '비선형'이라는 말만으로 어떤 과제를 풀지 알 수 없다.", "ref": "#ch-reservoir-xor"}, {"id": "d10-q16", "type": "mc", "q": "같은 tanh reservoir(Claude의 시뮬레이션)에 입력을 0.05로 작게 넣자 지연 XOR 63%, 3-parity 49%로 떨어졌다. 가장 그럴듯한 설명은?", "options": ["입력이 작으면 노드가 tanh의 거의 직선 구간에서만 움직여 비선형 섞임이 잡음에 비해 너무 작다", "입력이 작으면 기억이 없어진다", "readout이 학습되지 않았다", "spectral radius가 바뀌었다"], "a": 0, "why": "Liang이 말한 '진폭이 작은 좁은 선형 범위'(p.198), Singh이 말한 '특징 섞임이 너무 적은 거의 선형인 영역'(p.5)과 같은 실패다. 3차가 필요한 3-parity가 먼저 무너진다.", "ref": "#ch-reservoir-xor"}, {"id": "d10-q17", "type": "ox", "q": "비선형 reservoir라면 노드 20개로도 지연 XOR을 거의 100% 맞힌다.", "a": false, "why": "Claude의 시뮬레이션에서 노드 20개 tanh reservoir는 81% 안팎이었다. reservoir는 필요한 곱을 정확히 하나 주는 것이 아니라 많은 굽힘을 조금씩 섞어 주므로 노드가 적으면 부족하다. 곱 특징을 직접 준 기준선은 100%였다.", "ref": "#ch-reservoir-xor"}]}, "6-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 겹침 검사", "items": [{"id": "d10-q18", "type": "mc", "q": "[풀이 예시 확인] 소자 A($g \\leftarrow 0.5g + u$, 0.1 V에서 $I = 0.102g$)의 전류가 00, 10, 01, 11에서 0, 0.051, 0.102, 0.153이었다. 겹침 검사 결과는?", "options": ["$I(10)+I(01) = 0.153 = I(11)$: 성립, 이력에 대해 선형", "$I(10)+I(01) \\neq I(11)$: 비선형", "I–V가 휘었으므로 비선형", "판단할 수 없다"], "a": 0, "why": "0.051 + 0.102 = 0.153. 읽기 전압을 고정하면 I–V의 휨은 상수(0.102)로 접히고, 상태가 선형으로 쌓이므로 이력에 대해 선형이다. 'I–V가 휘었으니 비선형'은 오늘 바로잡은 흔한 오해다.", "ref": "#ch-device-nonlinearity"}, {"id": "d10-q19", "type": "short", "q": "[일부 채우기] 소자 B($g \\leftarrow 0.5g + 0.8u(1-g)$)에 11을 넣는다. 첫 펄스 뒤 $g = 0.8$. 둘째 펄스 뒤 $g = 0.5 \\times 0.8 + 0.8 \\times (1 - ▢) = ?$ 빈칸과 답을 '빈칸,답' 꼴로", "a": ["0.8,0.56", "0.8, 0.56"], "why": "$0.40 + 0.8 \\times 0.2 = 0.56$. 이미 $g$가 크면 같은 펄스가 덜 올린다(포화). 그래서 $g(10) + g(01) = 0.4 + 0.8 = 1.2 \\neq 0.56$ — 겹침이 깨진다. 빈칸에 0을 넣었다면 포화 항을 빠뜨린 것.", "ref": "#ch-device-nonlinearity"}, {"id": "d10-q20", "type": "short", "q": "[혼자 풀기] 포화 세기만 바꾼 소자 $g \\leftarrow 0.5g + 0.5u(1-g)$. $g(10) + g(01)$과 $g(11)$을 '합,g(11)' 꼴로 (시작 $g = 0$)", "a": ["0.75,0.5", "0.75, 0.5", "0.75,0.50", "0.75, 0.50"], "why": "10: 첫 펄스 0.5 → 다음 단계 0.25. 01: 0.5. 합 0.75. 11: 0.5 → $0.25 + 0.5 \\times 0.5 = 0.5$. 0.75 ≠ 0.5로 겹침이 깨진다. 겹침 검사는 소자에서도 펄스 열 세 개(10, 01, 11)로 바로 해 볼 수 있다.", "ref": "#ch-device-nonlinearity"}]}, "6-end": {"kind": "end", "title": "6장 마무리 퀴즈", "items": [{"id": "d10-q21", "type": "mc", "q": "Singh 2026(p.13)에 따르면 소자의 비선형이 계산에 기여한다는 것을 보이려면 무엇을 보여야 하나?", "options": ["큰 히스테리시스 고리", "뚜렷한 전달 곡선의 휨", "입력 이력의 비선형 함수를 측정한 reservoir 상태에서 선형 readout으로 재구성할 수 있다는 것(정보처리용량)", "강한 고조파 응답"], "a": 2, "why": "Singh은 비선형 전기 특성만으로는 계산 기여가 확립되지 않으며, 그런 특성은 불안정·포화·부적합 영역에서도 생긴다고 쓴다. 전기적 측정은 메커니즘과 운전 범위를 알려 주는 보완 정보다.", "ref": "#ch-device-nonlinearity"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d10-q22", "type": "mc", "q": "NARMA10에서 선형 reservoir 200노드(NMSE 0.144)와 지연 탭 50개 + 선형 readout(0.146)이 거의 같았던 이유는?", "options": ["우연이다", "선형 reservoir + 선형 readout의 출력은 지난 입력들의 가중합이라, 지연 탭 기준선과 같은 종류의 계산이기 때문", "노드 수가 같아서", "둘 다 비선형이라서"], "a": 1, "why": "선형 reservoir를 펼치면 $x(t) = \\sum W^k W_{in} u(t-1-k)$이고 readout은 그 가중합이다. 같은 노드 수에 tanh만 넣은 reservoir는 0.053이었다(Claude의 시뮬레이션).", "ref": "#ch-linear"}, {"id": "d10-q23", "type": "mc", "q": "'고차원으로 사상하면 선형 분리가 쉬워진다'가 참이 되는 조건은?", "options": ["차원 수만 늘리면 된다", "새 차원들이 기존 숫자들의 가중합이 아닌 서로 다른 비선형 조합이고, readout이 관측할 수 있으며 재현 가능할 때", "행렬을 곱해 늘리면 된다", "노드가 1,000개 이상일 때"], "a": 1, "why": "선형 사상 $z = Au$는 readout에게 $u$의 선형 함수다(그림 3b). 관측 가능한 차원이 충분해야 하고(Stepney p.673), 채널은 중복되지 않아야 한다(Singh p.5).", "ref": "#ch-separability"}, {"id": "d10-q24", "type": "short", "q": "시간다중화에서 칸 길이를 θ = τ/2로 잡으면 한 칸 동안 남는 비율 $d = e^{-\\theta/\\tau}$는? ($e^{-0.5} = 0.607$, 소수 둘째 자리까지)", "a": ["0.61", "0.607", "약 0.61"], "why": "$d = e^{-0.5} = 0.61$. θ = τ/4(0.78)보다 앞 칸의 흔적이 적게 남는다. θ를 길게 할수록 $d$가 작아져 가상 노드 사이 연결과 입력 사이 기억이 약해진다.", "ref": "#ch-mask-multiplex"}, {"id": "d10-q25", "type": "mc", "q": "입력 마스크(또는 $W_{in}$)를 노드마다 다르게 두는 가장 직접적인 이유는?", "options": ["계산을 빠르게 하려고", "같은 입력을 모든 노드가 똑같이 받으면 같은 성질의 노드들이 같은 값을 내어 사실상 노드 하나와 다를 바 없으므로", "입력을 저장하려고", "readout을 생략하려고"], "a": 1, "why": "노드마다 입력을 다른 무게로 받아야 서로 다른 상태(서로 다른 비선형 조합)가 생긴다. Stepney는 마스크가 입력 가중치 행렬을 시간으로 퍼뜨린 것이라고 쓴다(p.671). ±1 마스크에 대칭 노드면 부호만 바뀐 복사본이 생기는 한계도 있다.", "ref": "#ch-mask-multiplex"}, {"id": "d10-q26", "type": "ox", "q": "논문에 실린 이온 소자의 I–V 곡선이 크게 휘어 있다는 것은, 그 소자가 reservoir에 쓸모 있는 비선형성을 준다는 충분한 증거다.", "a": false, "why": "고정 읽기 전압에서는 I–V의 휨이 상수로 접힐 수 있고(소자 A), 쓸모 있는 비선형은 쓰기·이완 또는 섞인 신호에 작용해야 한다. 확인은 겹침 검사, 차수별 정보처리용량, held-out 성능으로 한다(Singh 2026, p.13).", "ref": "#ch-device-nonlinearity"}]}}}</script>
 <div class="step-check local-only">
 <label><input type="checkbox" data-step-check="lesson" data-day="d10"> 학습자료를 다 읽었다</label>
 </div>
 </section>
-<section id="note" class="level2">
-<h2 class="anchored" data-anchor-id="note">③ 노트에 정리</h2>
-<div class="note-line">
-<p>자료를 덮고 노트를 펴세요. 오늘 질문에 대한 답의 뼈대를 손으로 그려 봅니다. 인과의 화살표 하나, 숫자 하나, 반론 하나가 들어가면 충분합니다. 막히는 곳은 자료로 돌아가 다시 읽고, 그래도 막히면 따로 적어 두세요.</p>
-</div>
-<div class="step-check local-only">
-<label><input type="checkbox" data-step-check="note" data-day="d10"> 노트에 정리했다</label>
-</div>
-</section>
 <section id="answer" class="level2">
-<h2 class="anchored" data-anchor-id="answer">④ 내 답</h2>
-<p>노트를 보면서 내 말로 씁니다. 주장마다 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이세요. <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 저장은 초안 저장입니다. 몇 번이고 고쳐도 됩니다.</p>
+<h2 class="anchored" data-anchor-id="answer">④ 가르치듯 내 답</h2>
+<div class="flow-line">
+<p>후배에게 <strong>설명한다고 생각하고</strong> 오늘 질문에 답합니다. <strong>기본은 짧은 답</strong>입니다: 3–5문장, 또는 작은 도식 하나와 한 줄 설명, 그리고 설명하다 막힌 곳 한 줄. 이것만으로 정상적인 학습입니다. 왜·어떻게, 근거와 반론까지 쓰는 긴 종합 답안은 <strong>선택</strong>입니다. 주장에 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이면 좋고, <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 몇 번이고 고쳐도 됩니다. 막히는 곳은 따로 적어 두세요.</p>
+</div>
 <div class="editable" data-file="d10-answer" data-title="내 답" data-template="answer"></div>
 <div class="ledger-links">
   <span>장부에 옮기기 →</span>
@@ -567,12 +1176,19 @@ ul.task-list li input[type="checkbox"] {
   <a href="../ledger/kill-criteria.html">접는 기준</a>
 </div>
 </section>
+<section id="posttest" class="level2">
+<h2 class="anchored" data-anchor-id="posttest">⑤ 다시 풀기 (선택)</h2>
+<div class="flow-line">
+<p>① 사전 테스트와 <strong>같은 문제</strong>를 이유와 함께 다시 풉니다. 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 다시 떠올리기 연습입니다. 이해 점검은 학습자료의 <strong>잠깐 점검</strong>과 <strong>종합 퀴즈</strong>에서 처음 고른 답으로 봅니다.</p>
+</div>
+<div class="quiz" data-day="d10" data-set="pre" data-mode="post"></div>
+</section>
 <section id="done" class="level2">
-<h2 class="anchored" data-anchor-id="done">⑤ 학습 완료</h2>
+<h2 class="anchored" data-anchor-id="done">⑥ 학습 완료</h2>
 <div class="done-box" data-day="d10">
   <div class="done-text">
     <b>오늘 학습 완료</b>
-    <span class="done-desc">학습자료를 읽고, 노트에 정리하고, 내 답을 저장했으면 누르세요. 답을 저장했다고 자동으로 완료되지는 않습니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
+    <span class="done-desc">기본 경로(학습자료 → 짧은 백지 회상 → 짧은 내 답)를 마쳤으면 누르세요. 읽음 체크·학습 완료·이해 점검(퀴즈 첫 시도)은 따로 기록되고 아래에 나란히 보입니다. 완료한 날짜를 기준으로 커버 페이지가 복습(1·3·7·14·30일 뒤)을 알려 줍니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
   </div>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">오늘 학습 완료</button>
@@ -582,7 +1198,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 <section id="feedback" class="level2">
-<h2 class="anchored" data-anchor-id="feedback">⑥ 피드백과 꼬리질문</h2>
+<h2 class="anchored" data-anchor-id="feedback">⑦ 피드백과 꼬리질문</h2>
 <div class="pending-box">
 <p>내 답을 저장한 뒤 Claude에게 <strong>"D10 검토해줘"</strong>라고 말하세요. 맞게 이해한 점, 핵심 오류와 근거, 고쳐야 할 인과관계, 다시 답할 질문을 이 자리에 남깁니다.</p>
 </div>

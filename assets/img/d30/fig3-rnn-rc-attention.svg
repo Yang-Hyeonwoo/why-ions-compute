@@ -1,0 +1,133 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 792' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<rect x='0' y='0' width='1000' height='792' fill='#fff'/>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='500.0' y='28.0' font-size='17' fill='#444' text-anchor='middle' font-weight='bold' >과거를 다루는 세 방식 (모식도)</text>
+<text x='500.0' y='50.0' font-size='14' fill='#999' text-anchor='middle' font-weight='normal' >상태 하나에 넘기기 / 고정된 상태에 남기기 / 지난 단어를 모두 다시 보기</text>
+<rect x='20.0' y='64.0' width='306.0' height='316.0' rx='10' fill='#fafafa' stroke='#3d6fb4' stroke-width='1.4' />
+<text x='173.0' y='90.0' font-size='16' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >RNN</text>
+<text x='173.0' y='308.0' font-size='14' fill='#444' text-anchor='middle' font-weight='normal' >상태 h를 다음 단계로 넘긴다</text>
+<text x='173.0' y='331.0' font-size='13.5' fill='#999' text-anchor='middle' font-weight='normal' >모든 가중치를 학습</text>
+<text x='173.0' y='349.0' font-size='13.5' fill='#999' text-anchor='middle' font-weight='normal' >(BPTT, D7)</text>
+<rect x='38.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='54.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>1</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='112.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='128.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>2</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='186.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='202.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>3</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='260.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='276.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>4</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<circle cx='62' cy='188' r='22' fill='#eef3fb' stroke='#3d6fb4' stroke-width='1.6'/>
+<text x='54.2' y='193.0' font-size='14' fill='#3d6fb4' text-anchor='start' font-weight='bold' ><tspan font-size='14'>h</tspan><tspan dy='5' font-size='13'>1</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<line x1='62.0' y1='254.0' x2='62.0' y2='212.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='84.0' y1='188.0' x2='112.0' y2='188.0' stroke='#3d6fb4' stroke-width='1.8' marker-end='url(#arr)'/>
+<circle cx='136' cy='188' r='22' fill='#eef3fb' stroke='#3d6fb4' stroke-width='1.6'/>
+<text x='128.2' y='193.0' font-size='14' fill='#3d6fb4' text-anchor='start' font-weight='bold' ><tspan font-size='14'>h</tspan><tspan dy='5' font-size='13'>2</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<line x1='136.0' y1='254.0' x2='136.0' y2='212.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='158.0' y1='188.0' x2='186.0' y2='188.0' stroke='#3d6fb4' stroke-width='1.8' marker-end='url(#arr)'/>
+<circle cx='210' cy='188' r='22' fill='#eef3fb' stroke='#3d6fb4' stroke-width='1.6'/>
+<text x='202.2' y='193.0' font-size='14' fill='#3d6fb4' text-anchor='start' font-weight='bold' ><tspan font-size='14'>h</tspan><tspan dy='5' font-size='13'>3</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<line x1='210.0' y1='254.0' x2='210.0' y2='212.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='232.0' y1='188.0' x2='260.0' y2='188.0' stroke='#3d6fb4' stroke-width='1.8' marker-end='url(#arr)'/>
+<circle cx='284' cy='188' r='22' fill='#eef3fb' stroke='#3d6fb4' stroke-width='1.6'/>
+<text x='276.2' y='193.0' font-size='14' fill='#3d6fb4' text-anchor='start' font-weight='bold' ><tspan font-size='14'>h</tspan><tspan dy='5' font-size='13'>4</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<line x1='284.0' y1='254.0' x2='284.0' y2='212.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<text x='173.0' y='126.0' font-size='14' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >과거는 h 하나에 압축되어 전달</text>
+<rect x='347.0' y='64.0' width='306.0' height='316.0' rx='10' fill='#fafafa' stroke='#13936b' stroke-width='1.4' />
+<text x='500.0' y='90.0' font-size='16' fill='#13936b' text-anchor='middle' font-weight='bold' >RC (reservoir)</text>
+<text x='500.0' y='308.0' font-size='14' fill='#444' text-anchor='middle' font-weight='normal' >고정된 reservoir 상태가</text>
+<text x='500.0' y='327.0' font-size='14' fill='#444' text-anchor='middle' font-weight='normal' >서서히 잊는다</text>
+<text x='500.0' y='350.0' font-size='13.5' fill='#999' text-anchor='middle' font-weight='normal' >readout만 학습</text>
+<text x='500.0' y='368.0' font-size='13.5' fill='#999' text-anchor='middle' font-weight='normal' >(ridge, D8)</text>
+<rect x='365.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='381.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>1</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='439.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='455.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>2</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='513.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='529.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>3</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='587.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='603.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>4</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='373.0' y='142.0' width='254.0' height='90.0' rx='12' fill='#eaf6f0' stroke='#13936b' stroke-width='1.2' />
+<circle cx='410' cy='160' r='7' fill='#fff' stroke='#13936b' stroke-width='1.2'/>
+<circle cx='440' cy='176' r='7' fill='#fff' stroke='#13936b' stroke-width='1.2'/>
+<circle cx='470' cy='160' r='7' fill='#fff' stroke='#13936b' stroke-width='1.2'/>
+<circle cx='500' cy='176' r='7' fill='#fff' stroke='#13936b' stroke-width='1.2'/>
+<circle cx='530' cy='160' r='7' fill='#fff' stroke='#13936b' stroke-width='1.2'/>
+<circle cx='560' cy='176' r='7' fill='#fff' stroke='#13936b' stroke-width='1.2'/>
+<circle cx='590' cy='160' r='7' fill='#fff' stroke='#13936b' stroke-width='1.2'/>
+<text x='500.0' y='218.0' font-size='14' fill='#13936b' text-anchor='middle' font-weight='normal' >고정(학습 안 함), 서서히 잊음</text>
+<line x1='389.0' y1='254.0' x2='389.0' y2='236.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='463.0' y1='254.0' x2='463.0' y2='236.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='537.0' y1='254.0' x2='537.0' y2='236.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='611.0' y1='254.0' x2='611.0' y2='236.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<text x='500.0' y='126.0' font-size='14' fill='#13936b' text-anchor='middle' font-weight='normal' >readout(선형)만 학습 ↑</text>
+<rect x='674.0' y='64.0' width='306.0' height='316.0' rx='10' fill='#fafafa' stroke='#7a5aa6' stroke-width='1.4' />
+<text x='827.0' y='90.0' font-size='16' fill='#7a5aa6' text-anchor='middle' font-weight='bold' >어텐션 (트랜스포머)</text>
+<text x='827.0' y='308.0' font-size='14' fill='#444' text-anchor='middle' font-weight='normal' >지난 단어 목록을 모두</text>
+<text x='827.0' y='327.0' font-size='14' fill='#444' text-anchor='middle' font-weight='normal' >보관하고 다시 본다</text>
+<text x='827.0' y='350.0' font-size='13.5' fill='#999' text-anchor='middle' font-weight='normal' >모든 가중치를 학습</text>
+<text x='827.0' y='368.0' font-size='13.5' fill='#999' text-anchor='middle' font-weight='normal' >(역전파)</text>
+<rect x='692.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='708.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>1</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='766.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='782.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>2</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='840.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='856.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>3</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='914.0' y='254.0' width='48.0' height='28.0' rx='5' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='930.2' y='273.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' ><tspan font-size='14'>u</tspan><tspan dy='5' font-size='13'>4</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<circle cx='938' cy='164' r='22' fill='#f3eefa' stroke='#7a5aa6' stroke-width='1.6'/>
+<text x='930.2' y='169.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='bold' ><tspan font-size='14'>q</tspan><tspan dy='5' font-size='13'>4</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<rect x='685.0' y='212.0' width='62.0' height='28.0' rx='4' fill='#f3eefa' stroke='#7a5aa6' stroke-width='1.2' />
+<text x='696.1' y='231.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='normal' ><tspan font-size='14'>k</tspan><tspan dy='5' font-size='13'>1</tspan><tspan dy='-5' font-size='14'>, v</tspan><tspan dy='5' font-size='13'>1</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<line x1='716.0' y1='254.0' x2='716.0' y2='242.0' stroke='#999' stroke-width='1.2'/>
+<line x1='930.0' y1='184.0' x2='716.0' y2='212.0' stroke='#7a5aa6' stroke-width='1.1' stroke-dasharray='3 2'/>
+<rect x='759.0' y='212.0' width='62.0' height='28.0' rx='4' fill='#f3eefa' stroke='#7a5aa6' stroke-width='1.2' />
+<text x='770.1' y='231.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='normal' ><tspan font-size='14'>k</tspan><tspan dy='5' font-size='13'>2</tspan><tspan dy='-5' font-size='14'>, v</tspan><tspan dy='5' font-size='13'>2</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<line x1='790.0' y1='254.0' x2='790.0' y2='242.0' stroke='#999' stroke-width='1.2'/>
+<line x1='930.0' y1='184.0' x2='790.0' y2='212.0' stroke='#7a5aa6' stroke-width='1.1' stroke-dasharray='3 2'/>
+<rect x='833.0' y='212.0' width='62.0' height='28.0' rx='4' fill='#f3eefa' stroke='#7a5aa6' stroke-width='1.2' />
+<text x='844.1' y='231.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='normal' ><tspan font-size='14'>k</tspan><tspan dy='5' font-size='13'>3</tspan><tspan dy='-5' font-size='14'>, v</tspan><tspan dy='5' font-size='13'>3</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<line x1='864.0' y1='254.0' x2='864.0' y2='242.0' stroke='#999' stroke-width='1.2'/>
+<line x1='930.0' y1='184.0' x2='864.0' y2='212.0' stroke='#7a5aa6' stroke-width='1.1' stroke-dasharray='3 2'/>
+<rect x='907.0' y='212.0' width='62.0' height='28.0' rx='4' fill='#f3eefa' stroke='#7a5aa6' stroke-width='1.2' />
+<text x='918.1' y='231.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='normal' ><tspan font-size='14'>k</tspan><tspan dy='5' font-size='13'>4</tspan><tspan dy='-5' font-size='14'>, v</tspan><tspan dy='5' font-size='13'>4</tspan><tspan dy='-5' font-size='14'>​</tspan></text>
+<line x1='938.0' y1='254.0' x2='938.0' y2='242.0' stroke='#999' stroke-width='1.2'/>
+<line x1='938.0' y1='184.0' x2='938.0' y2='212.0' stroke='#7a5aa6' stroke-width='1.1' stroke-dasharray='3 2'/>
+<text x='688.0' y='116.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='normal' >새 단어가 지난 단어 모두와</text>
+<text x='688.0' y='135.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='normal' >점수 계산</text>
+<text x='20.0' y='414.0' font-size='15' fill='#444' text-anchor='start' font-weight='bold' >문장 하나(단어 n개)를 처리하며 '과거를 보는' 셈의 수 (로그 눈금)</text>
+<text x='20.0' y='436.0' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >RNN·RC: 단어마다 상태 하나만 갱신 → n번.</text>
+<text x='20.0' y='456.0' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >어텐션: k번째 단어가 자기를 포함한 k개와 점수 계산 → 1 + 2 + … + n = n(n+1)/2번</text>
+<text x='118.0' y='496.0' font-size='14' fill='#444' text-anchor='end' font-weight='bold' >n = 10</text>
+<rect x='130.0' y='472.0' width='116.7' height='20.0' rx='3' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='254.7' y='487.0' font-size='14' fill='#13936b' text-anchor='start' font-weight='bold' >RNN·RC 10</text>
+<rect x='130.0' y='496.0' width='203.0' height='20.0' rx='3' fill='#7a5aa6' stroke='none' stroke-width='1.2' />
+<text x='341.0' y='511.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='bold' >어텐션 55</text>
+<text x='118.0' y='554.0' font-size='14' fill='#444' text-anchor='end' font-weight='bold' >n = 100</text>
+<rect x='130.0' y='530.0' width='233.3' height='20.0' rx='3' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='371.3' y='545.0' font-size='14' fill='#13936b' text-anchor='start' font-weight='bold' >RNN·RC 100</text>
+<rect x='130.0' y='554.0' width='432.1' height='20.0' rx='3' fill='#7a5aa6' stroke='none' stroke-width='1.2' />
+<text x='570.1' y='569.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='bold' >어텐션 5,050</text>
+<text x='118.0' y='612.0' font-size='14' fill='#444' text-anchor='end' font-weight='bold' >n = 1,000</text>
+<rect x='130.0' y='588.0' width='350.0' height='20.0' rx='3' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='488.0' y='603.0' font-size='14' fill='#13936b' text-anchor='start' font-weight='bold' >RNN·RC 1,000</text>
+<rect x='130.0' y='612.0' width='664.9' height='20.0' rx='3' fill='#7a5aa6' stroke='none' stroke-width='1.2' />
+<text x='802.9' y='627.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='bold' >어텐션 500,500</text>
+<line x1='130.0' y1='646.0' x2='130.0' y2='651.0' stroke='#444' stroke-width='1'/>
+<text x='126.2' y='666.0' font-size='13' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='13'>1</tspan></text>
+<line x1='246.7' y1='646.0' x2='246.7' y2='651.0' stroke='#444' stroke-width='1'/>
+<text x='239.1' y='666.0' font-size='13' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='13'>10</tspan></text>
+<line x1='363.3' y1='646.0' x2='363.3' y2='651.0' stroke='#444' stroke-width='1'/>
+<text x='352.0' y='666.0' font-size='13' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='13'>100</tspan></text>
+<line x1='480.0' y1='646.0' x2='480.0' y2='651.0' stroke='#444' stroke-width='1'/>
+<text x='463.0' y='666.0' font-size='13' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='13'>1,000</tspan></text>
+<line x1='596.7' y1='646.0' x2='596.7' y2='651.0' stroke='#444' stroke-width='1'/>
+<text x='585.4' y='666.0' font-size='13' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='13'>10</tspan><tspan dy='-8' font-size='13'>4</tspan><tspan dy='8' font-size='13'>​</tspan></text>
+<line x1='713.3' y1='646.0' x2='713.3' y2='651.0' stroke='#444' stroke-width='1'/>
+<text x='702.0' y='666.0' font-size='13' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='13'>10</tspan><tspan dy='-8' font-size='13'>5</tspan><tspan dy='8' font-size='13'>​</tspan></text>
+<line x1='830.0' y1='646.0' x2='830.0' y2='651.0' stroke='#444' stroke-width='1'/>
+<text x='818.7' y='666.0' font-size='13' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='13'>10</tspan><tspan dy='-8' font-size='13'>6</tspan><tspan dy='8' font-size='13'>​</tspan></text>
+<text x='20.0' y='694.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >셈 한 번의 크기가 다르다: 점수 1번 = 길이 d인 두 목록의 내적(곱셈 d번),</text>
+<text x='20.0' y='715.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >상태 갱신 1번 = 노드 N개 갱신(밀집 ESN이면 곱셈 N²번, 물리 RC면 이완 + 읽기 N번).</text>
+<text x='20.0' y='736.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >차원(d, N)·층과 갈래 수·정밀도·메모리(어텐션은 단어 n개의 k와 v를 보관)·전처리를 맞추기 전에는</text>
+<text x='20.0' y='757.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >연산량·에너지 비교가 아니다. 막대는 n에 따른 증가 방식만 비교한다.</text>
+</svg>

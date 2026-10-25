@@ -1,34 +1,41 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 172' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 262' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
-<text x='150' y='24' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >보통 컴퓨터 (von Neumann 구조)</text>
-<rect x='30' y='50' width='100' height='70' rx='6' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
-<text x='80' y='80' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >CPU</text>
-<text x='80' y='100' font-size='12' fill='#999' text-anchor='middle' font-weight='normal' >계산</text>
-<rect x='170' y='50' width='100' height='70' rx='6' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.2' />
-<text x='220' y='80' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >메모리</text>
-<text x='220' y='100' font-size='12' fill='#999' text-anchor='middle' font-weight='normal' >저장</text>
-<line x1='130' y1='75' x2='170' y2='75' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
-<line x1='170' y1='95' x2='130' y2='95' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
-<text x='150' y='140' font-size='12' fill='#999' text-anchor='middle' font-weight='normal' >더하기 한 번마다 숫자가 버스를 왕복한다</text>
-<text x='150' y='158' font-size='12' fill='#999' text-anchor='middle' font-weight='normal' >→ 시간과 에너지의 많은 부분이 '옮기는 일'에 쓰인다</text>
-<text x='450' y='24' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >뉴로모픽 쪽 (co-location)</text>
-<rect x='365' y='48' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='390' y='64' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<rect x='365' y='78' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='390' y='94' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<rect x='365' y='108' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='390' y='124' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<rect x='423' y='48' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='448' y='64' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<rect x='423' y='78' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='448' y='94' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<rect x='423' y='108' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='448' y='124' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<rect x='481' y='48' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='506' y='64' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<rect x='481' y='78' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='506' y='94' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<rect x='481' y='108' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
-<text x='506' y='124' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
-<text x='450' y='158' font-size='12' fill='#999' text-anchor='middle' font-weight='normal' >값을 들고 있는 곳에서 바로 계산한다 → 옮길 것이 없다</text>
+<text x='300' y='22' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >계산은 가까운 곳(레지스터)에서, 값은 멀리(DRAM)에: 멀수록 느리고 비싸다</text>
+<rect x='85.0' y='46' width='150' height='40' rx='6' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
+<text x='160' y='63' font-size='12.5' fill='#444' text-anchor='middle' font-weight='bold' >연산부 + 레지스터</text>
+<text x='160' y='78' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >수십 개 값 · 1클록 안팎</text>
+<rect x='65.0' y='98' width='190' height='40' rx='6' fill='#f6f9fc' stroke='#6c8ebf' stroke-width='1.2' />
+<text x='160' y='115' font-size='12.5' fill='#444' text-anchor='middle' font-weight='bold' >캐시 (SRAM)</text>
+<text x='160' y='130' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >자주 쓰는 값 · 수 클록</text>
+<rect x='45.0' y='150' width='230' height='40' rx='6' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.2' />
+<text x='160' y='167' font-size='12.5' fill='#444' text-anchor='middle' font-weight='bold' >주메모리 (DRAM)</text>
+<text x='160' y='182' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >큰 데이터 · 수백 클록</text>
+<line x1='160' y1='86' x2='160' y2='98' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='160' y1='138' x2='160' y2='150' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<text x='172' y='95' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >↓ 멀수록 느리고 비싸다</text>
+<text x='160' y='212' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' >데이터가 가까운 곳에 없거나 재사용이 안 되면</text>
+<text x='160' y='228' font-size='11' fill='#444' text-anchor='middle' font-weight='bold' >'옮기는 일'이 시간·에너지의 병목이 된다</text>
+<text x='450' y='52' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >뉴로모픽 쪽에서 노리는 것</text>
+<rect x='365' y='68' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='390' y='84' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<rect x='365' y='98' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='390' y='114' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<rect x='365' y='128' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='390' y='144' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<rect x='423' y='68' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='448' y='84' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<rect x='423' y='98' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='448' y='114' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<rect x='423' y='128' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='448' y='144' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<rect x='481' y='68' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='506' y='84' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<rect x='481' y='98' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='506' y='114' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<rect x='481' y='128' width='50' height='24' rx='4' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='506' y='144' font-size='9.5' fill='#13936b' text-anchor='middle' font-weight='normal' >저장+계산</text>
+<text x='450' y='176' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' >값을 들고 있는 곳에서 계산해</text>
+<text x='450' y='192' font-size='11' fill='#444' text-anchor='middle' font-weight='bold' >주요 데이터 이동을 줄인다</text>
+<text x='450' y='212' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >(없애는 것이 아니라 줄이는 것. 입력·출력·제어는 남는다)</text>
+<text x='300' y='252' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >모식도. 실제 계층은 더 많고(L1/L2/L3), 숫자는 자릿수 감각용이다.</text>
 </svg>

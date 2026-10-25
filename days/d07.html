@@ -89,6 +89,35 @@ ul.task-list li input[type="checkbox"] {
   };
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/study.css">
 </head>
@@ -486,11 +515,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#lesson" id="toc-lesson" class="nav-link active" data-scroll-target="#lesson">② 학습자료</a></li>
-  <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note">③ 노트에 정리</a></li>
-  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 내 답</a></li>
-  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑤ 학습 완료</a></li>
-  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑥ 피드백과 꼬리질문</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">① 사전 테스트와 먼저 만들어 보기</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">② 학습자료</a></li>
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 가르치듯 내 답</a></li>
+  <li><a href="#posttest" id="toc-posttest" class="nav-link" data-scroll-target="#posttest">⑤ 다시 풀기 (선택)</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑥ 학습 완료</a></li>
+  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑦ 피드백과 꼬리질문</a></li>
   </ul>
 </nav>
     </div>
@@ -530,34 +560,916 @@ ul.task-list li input[type="checkbox"] {
   <button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button>
 </div>
 <ol class="day-steps" data-day="d07">
-  <li data-step="pre"><a href="#pre"><b>1</b>읽기 전 답</a></li>
+  <li data-step="pretest"><a href="#pretest"><b>1</b>사전 테스트 <small>권장</small></a></li>
   <li data-step="lesson" data-manual="true"><a href="#lesson"><b>2</b>학습자료</a></li>
-  <li data-step="note" data-manual="true"><a href="#note"><b>3</b>노트 정리</a></li>
-  <li data-step="answer"><a href="#answer"><b>4</b>내 답</a></li>
-  <li data-step="done"><a href="#done"><b>5</b>학습 완료</a></li>
+  <li data-step="recall"><a href="#recall"><b>3</b>백지 회상</a></li>
+  <li data-step="answer"><a href="#answer"><b>4</b>가르치듯 답</a></li>
+  <li data-step="posttest"><a href="#posttest"><b>5</b>다시 풀기 <small>선택</small></a></li>
+  <li data-step="done"><a href="#done"><b>6</b>완료</a></li>
 </ol>
+<div class="flow-line path-line">
+<p><strong>기본 경로</strong>: ① 사전 테스트(권장) → ② 학습자료(구간마다 잠깐 점검까지) → ③ 백지 회상 → ④ 가르치듯 내 답. ⓪·⑤와 접힌 '심화'·'추가 연습'은 선택입니다. 한 번에 끝낼 필요 없이 구간 단위로 나눠 읽어도 되고, 다시 열면 '지난번 읽던 곳' 링크가 뜹니다.</p>
+</div>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">① 사전 테스트와 먼저 만들어 보기</h2>
+<div class="flow-line">
+<p>아직 배우지 않은 내용을 먼저 풀어 봅니다. <strong>많이 틀리는 것이 정상</strong>이고, 그게 목적입니다. 먼저 답해 본 문제는 읽을 때 눈에 들어오고 더 오래 남습니다. 문제마다 정답만 보이고, 이유는 학습자료와 ⑤ 다시 풀기에서 봅니다. 다 풀면 학습자료가 열립니다. 건너뛰려면 학습자료 위의 '그냥 읽기'를 누르세요(권장 단계일 뿐 필수는 아닙니다).</p>
+</div>
+<div class="quiz" data-day="d07" data-set="pre"></div>
+</section>
 <section id="lesson" class="level2">
 <h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
-<div class="pending-box">
-<p>이 날의 학습자료는 아직 준비되지 않았습니다.</p>
-<p>읽기 전 답을 먼저 써 두고 Claude에게 <strong>"D7 자료 만들어줘"</strong>라고 말하세요. 읽기 전 답과 앞선 날들의 답을 읽고, 비어 있는 곳 위주로 자료를 만들어 이 자리에 넣습니다.</p>
+<div class="lesson-body" data-pre="d07-pre">
+<div class="lesson-meta">
+<p>학습 구간 7개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 80분 안팎 · 선택 영상 약 33분 · 퀴즈 30문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024는 p.193–194(서론·RC 정의), p.201–202(비교·전망) 전체; Stepney 2024(Natural Computing 튜토리얼)는 1–2절, 3.2–3.4절, 4.1–4.3절, 7.2–7.3절 일부; Zhong 2026(Nat. Commun.)은 초록·서론·Fig. 1 캡션·Methods 식 (1)(2)만; 폴더 밖 Lukoševičius 2012는 저자 공개본의 3.2.1절(reservoir 크기)만, Pascanu 2013(ICML)은 공개본(arXiv)의 2.1절(고유값과 소실·폭주 조건)만. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 0구간(학습·기울기·역전파의 기초)은 폴더 논문이 아니라 일반 교과 내용이며, 숫자 예는 모두 Claude가 계산한 것입니다.</p>
 </div>
+<p>오늘의 질문 "RC란 무엇이고 어떤 문제를 풀려고 나왔나? 뉴로모픽과 어떤 관계인가?"는 다섯 개의 작은 질문으로 나뉩니다. 앞을 알아야 뒤가 읽히니 순서대로 가세요. 특히 0번은 "신경망을 학습시킨다"는 말을 처음 듣는 사람을 위한 계단입니다. 이미 아는 사람에게는 복습이지만, 2구간의 "같은 인자가 k번 곱해진다"는 문장은 0번 없이는 읽히지 않습니다.</p>
+<ol start="0" type="1">
+<li>신경망의 '모델·가중치·학습·기울기·역전파'는 각각 무슨 뜻인가? (숫자 하나짜리 예로)</li>
+<li>시계열을 다루는 신경망(RNN)은 무엇이고, 왜 학습시키기 어려운가?</li>
+<li>ESN(2001)과 LSM(2002)은 무엇을 포기해서 그 어려움을 피했나?</li>
+<li>그 둘이 왜 'reservoir computing'이라는 하나의 이름이 됐고, 왜 물리 소자로 옮기기 좋은가?</li>
+<li>물리 reservoir computing(PRC)은 D1의 다섯 줄기 중 어디에 있고, 무엇을 약속하고 무엇을 약속하지 않나?</li>
+</ol>
+<section id="ch-basics" class="level3">
+<h3 class="anchored" data-anchor-id="ch-basics">0. 기초 계단: 모델, 가중치, 학습, 기울기, 역전파</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "모델이 무엇이고, 학습이 무엇을 고치는 일이며, 기울기가 왜 '어느 쪽으로 옮길지'를 알려 주고, 역전파에서 왜 기울기들이 곱해지는지"를 숫자 하나짜리 예로 직접 계산하며 말할 수 있다.</p>
+</div>
+<p>오늘의 본론은 "RNN은 왜 학습이 어렵고, RC는 그 어려움을 어떻게 피했나"입니다. 그런데 이 문장에는 '학습', '기울기', '역전파'라는 말이 들어 있고, 셋 다 처음 듣는 사람에게는 뜻이 없는 단어입니다. 이 구간은 신경망의 수학 전체가 아니라, 오늘 필요한 네 가지만 작은 숫자로 다룹니다. 모델이 무엇인지, 학습이 무엇인지, 기울기가 무엇인지, 역전파가 무엇인지. 네 가지 모두 <strong>숫자 하나짜리 모델</strong>로 손 계산이 됩니다.</p>
+<div id="b-model" class="basics">
+<section id="모델-입력을-받아-가중치를-곱해-출력을-내는-규칙" class="level4">
+<h4 class="anchored" data-anchor-id="모델-입력을-받아-가중치를-곱해-출력을-내는-규칙">모델: 입력을 받아 가중치를 곱해 출력을 내는 규칙</h4>
+<p>온실에 온도 센서가 하나 있다고 합시다. 기준보다 온도가 얼마나 높은지를 <span class="math inline">\(u\)</span>(단위 °C)라고 하고, 이 값으로 경보 점수 <span class="math inline">\(y\)</span>를 만들려 합니다. 가장 단순한 규칙은 "온도 편차에 어떤 숫자를 곱한다"입니다.</p>
+<p><span class="math display">\[
+y = w \times u
+\]</span></p>
+<p><span class="math inline">\(w = 1.5\)</span>로 정해 두고 온도 편차 <span class="math inline">\(u = 2\)</span> °C가 들어오면 <span class="math inline">\(y = 1.5 \times 2 = 3\)</span>점입니다. 이 규칙 전체, 즉 "숫자를 받아서 정해진 방식으로 다른 숫자를 내는 것"을 <strong>모델(model)</strong>이라고 부릅니다. 들어오는 숫자 <span class="math inline">\(u\)</span>가 <strong>입력(input)</strong>, 나오는 숫자 <span class="math inline">\(y\)</span>가 <strong>출력(output)</strong>, 그리고 모델이 안에 들고 있는 숫자 <span class="math inline">\(w\)</span>가 <strong>가중치(weight)</strong>입니다. 가중치는 "입력을 얼마나 중요하게 볼지"를 정하는 숫자이고, 모델이 하는 일은 결국 가중치를 곱하는 것입니다. 수학에서는 "입력을 넣으면 출력이 하나로 정해지는 규칙"을 <strong>함수</strong>라고 부르는데, 모델도 함수입니다. 2를 넣으면 3이 나오고, 4를 넣으면 6이 나옵니다.</p>
+<p>신경망(neural network)은 이런 "곱해서 더하는" 규칙을 수백만 개 이어 붙이고, 그 사이사이에 S자 모양의 함수를 끼워 넣은 큰 모델입니다(S자 함수가 무엇이고 왜 끼우는지는 이 구간 끝 역전파 상자에서 숫자로 봅니다). 아래에서 두 개를 이어 붙인 예가 나오고, 그보다 큰 것은 구조가 같을 뿐입니다.</p>
+</section>
+</div>
+<div id="b-vector-matrix" class="basics">
+<section id="입력이-여럿이면-벡터-행렬-가중치-행렬" class="level4">
+<h4 class="anchored" data-anchor-id="입력이-여럿이면-벡터-행렬-가중치-행렬">입력이 여럿이면: 벡터, 행렬, 가중치 행렬</h4>
+<p><strong>짧은 복습.</strong> 벡터는 숫자 목록, 행렬은 숫자 표이고, 행렬–벡터 곱은 "행 하나와 입력을 같은 자리끼리 곱해 더하면 출력 하나"입니다. 예: 가중치 행이 <span class="math inline">\((1, 3)\)</span>이고 입력이 <span class="math inline">\((2, 1)\)</span>이면 출력 하나는 <span class="math inline">\(1\times2 + 3\times1 = 5\)</span>입니다. 행이 둘이면 출력도 둘이고, 행마다 같은 계산을 합니다. '<span class="math inline">\(N\times N\)</span> 행렬'은 '행 <span class="math inline">\(N\)</span>개, 열 <span class="math inline">\(N\)</span>개인 표'(행 수 × 열 수)라는 뜻입니다. 오늘 식의 <span class="math inline">\(W\,h(t)\)</span>가 바로 이 계산이고, 1구간에서 상태 두 개짜리 예로 직접 해 봅니다. 처음 설명은 <a href="../days/d01.html#b-vector-matrix">D1 기초: 벡터·행렬</a>과 <a href="../days/d04.html#b-vector-matrix">D4 기초 1</a>에 있습니다.</p>
+<details class="fold">
+<summary>
+처음부터 다시 읽기
+</summary>
+<p>센서가 둘(온도 편차 <span class="math inline">\(u_1\)</span>, 습도 편차 <span class="math inline">\(u_2\)</span>)이고 출력도 둘(경보 점수 <span class="math inline">\(y_1\)</span>, 환기 점수 <span class="math inline">\(y_2\)</span>)이라면, 출력마다 가중치가 입력 수만큼 필요합니다. 숫자를 순서대로 나열한 목록 <span class="math inline">\((u_1, u_2)\)</span>를 <strong>벡터</strong>라 부르고, 가중치를 행(가로줄)·열(세로줄)로 배열한 표를 <strong>행렬</strong>이라 부르며, 표 안의 숫자 하나하나를 <strong>원소</strong>라고 합니다. 규칙은 하나입니다. <strong>행 하나가 출력 하나의 가중치 목록</strong>이고, 출력은 "행과 입력을 같은 자리끼리 곱해서 더한 것"입니다. 입력 <span class="math inline">\(\mathbf{u} = (2, 1)\)</span>에 행렬 <span class="math inline">\(W\)</span>의 행 1이 <span class="math inline">\((1, 3)\)</span>, 행 2가 <span class="math inline">\((2, 0.5)\)</span>라면</p>
+<ul>
+<li><span class="math inline">\(y_1 = 1 \times 2 + 3 \times 1 = 2 + 3 = 5\)</span></li>
+<li><span class="math inline">\(y_2 = 2 \times 2 + 0.5 \times 1 = 4 + 0.5 = 4.5\)</span></li>
+</ul>
+<p>이 계산을 <span class="math inline">\(\mathbf{y} = W\mathbf{u}\)</span>로 줄여 씁니다. 1구간의 RNN 식에 나오는 <span class="math inline">\(W\,h(t)\)</span>가 바로 이것입니다. 상태 <span class="math inline">\(h(t)\)</span>가 숫자 목록이고, <span class="math inline">\(W\)</span>가 그 목록에 곱하는 가중치 표입니다. 이 구간에서는 숫자 하나짜리 모델(<span class="math inline">\(w\)</span> 하나)로 모든 것을 설명하고, 여러 개가 되어도 "곱해서 더한다"가 반복될 뿐이라는 것만 기억하면 됩니다. (행렬 계산을 더 자세히 따라가고 싶으면 D2 3구간에 같은 예가 단계별로 있습니다. 보충이며 오늘 필수는 아닙니다.)</p>
+</details>
+</section>
+</div>
+<div id="b-training" class="basics">
+<section id="학습-가중치를-데이터에-맞게-고치기-그리고-오차와-손실" class="level4">
+<h4 class="anchored" data-anchor-id="학습-가중치를-데이터에-맞게-고치기-그리고-오차와-손실">학습: 가중치를 데이터에 맞게 고치기, 그리고 오차와 손실</h4>
+<p>위의 <span class="math inline">\(w = 1.5\)</span>는 누가 정했을까요. 아무도 모릅니다. 그래서 <strong>데이터</strong>로 정합니다. 과거 기록에 "온도 편차 2 °C였던 날, 경보 점수는 5점이 맞았다"가 있다고 합시다. 즉 입력 2에 대한 <strong>정답</strong>이 5입니다. 지금 모델의 가중치가 <span class="math inline">\(w = 1.0\)</span>이면 출력은 <span class="math inline">\(y = 1.0 \times 2 = 2\)</span>이고, 정답 5와 다릅니다.</p>
+<p>이 차이를 <strong>오차(error)</strong>라 하고 <span class="math inline">\(y - \text{정답} = 2 - 5 = -3\)</span>으로 적습니다. 오차에는 부호가 있어서(모자라면 음수, 넘치면 양수) 그대로 "얼마나 틀렸나"의 크기로 쓰기 불편합니다. 그래서 제곱합니다. <span class="math inline">\((-3)^2 = 9\)</span>. 이 값을 <strong>손실(loss)</strong>이라 하고 <span class="math inline">\(L\)</span>로 적습니다.</p>
+<p><span class="math display">\[
+L = (y - \text{정답})^2
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: "얼마나 틀렸나"를 부호 없는 숫자 하나로 만들어야 "줄인다"는 말을 할 수 있다.</li>
+<li>기호: <span class="math inline">\(y\)</span>는 모델 출력, 정답은 데이터가 준 값. 데이터가 여러 개면 각각의 손실을 더하거나 평균한다.</li>
+<li>단위: 출력 단위의 제곱(점²). 신경망에서는 보통 무차원.</li>
+<li>계산 순서: 출력을 구한다 → 정답을 뺀다 → 제곱한다.</li>
+<li>결과의 뜻: 0이면 딱 맞음. 클수록 많이 틀림. 제곱이라 큰 오차 하나가 작은 오차 여럿보다 훨씬 크게 센다.</li>
+</ul>
+<p><strong>학습(training)</strong>이란 손실이 가장 작아지는 가중치를 데이터로 찾아내는 일입니다. 이 예에서는 답이 보입니다. <span class="math inline">\(w = 2.5\)</span>면 <span class="math inline">\(y = 5\)</span>, 손실 0. 하지만 가중치가 100만 개면 눈으로 찾을 수 없습니다. 그래서 신경망은 다른 방법을 씁니다. "지금 <span class="math inline">\(w\)</span>에서 어느 쪽으로 <strong>조금</strong> 움직이면 손실이 주는가"만 알아내서 그쪽으로 조금 옮기고, 이것을 수천 번 반복합니다. 그 "어느 쪽으로, 얼마나 민감하게"를 알려 주는 숫자가 다음의 <strong>기울기</strong>입니다.</p>
+</section>
+</div>
+<div id="b-gradient" class="basics">
+<section id="조금-바꾸면-얼마나-변하나-기울기" class="level4">
+<h4 class="anchored" data-anchor-id="조금-바꾸면-얼마나-변하나-기울기">"조금 바꾸면 얼마나 변하나": 기울기</h4>
+<p>손실 <span class="math inline">\(L\)</span>은 <span class="math inline">\(w\)</span>에 따라 달라지므로, <span class="math inline">\(w\)</span>를 넣으면 <span class="math inline">\(L\)</span>이 나오는 함수 <span class="math inline">\(L(w)\)</span>입니다. 이 함수에게 묻습니다. <strong><span class="math inline">\(w\)</span>를 조금 올리면 <span class="math inline">\(L\)</span>은 얼마나 변하나?</strong> 직접 해 봅니다(입력 2, 정답 5).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(w\)</span></th>
+<th><span class="math inline">\(y = w \times 2\)</span></th>
+<th>오차 <span class="math inline">\(y - 5\)</span></th>
+<th>손실 <span class="math inline">\(L\)</span></th>
+<th><span class="math inline">\(L\)</span>의 변화</th>
+<th>변화 ÷ <span class="math inline">\(w\)</span>의 변화</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.0</td>
+<td>2.0</td>
+<td>−3.0</td>
+<td>9</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>1.1</td>
+<td>2.2</td>
+<td>−2.8</td>
+<td>7.84</td>
+<td>−1.16 (0.1만큼 올려서)</td>
+<td>−1.16 ÷ 0.1 = −11.6</td>
+</tr>
+<tr class="odd">
+<td>1.01</td>
+<td>2.02</td>
+<td>−2.98</td>
+<td>8.8804</td>
+<td>−0.1196 (0.01만큼 올려서)</td>
+<td>−0.1196 ÷ 0.01 = −11.96</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(w\)</span>를 0.1 올리면 <span class="math inline">\(L\)</span>이 1.16 줄고, 0.01 올리면 0.1196 줍니다. "변화 ÷ 변화"의 비율이 −11.6, −11.96으로 어떤 값에 가까워집니다. 올리는 양을 한없이 작게 하면 이 비율은 정확히 <strong>−12</strong>가 되고, 이 극한의 비율을 <span class="math inline">\(w = 1.0\)</span>에서의 <strong>기울기(gradient)</strong>라고 부릅니다(수학에서는 <strong>미분값</strong>(derivative)이라고도 하며, 기호로 <span class="math inline">\(dL/dw\)</span>라고 씁니다). 그래프로 그리면(그림 1) 곡선 위의 그 점에서 곡선이 얼마나 가파른가, 어느 쪽으로 기울었나입니다.</p>
+<p>이 모델에서는 기울기를 공식으로도 쓸 수 있습니다.</p>
+<p><span class="math display">\[
+\frac{dL}{dw} = 2 \times (y - \text{정답}) \times u
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: 표를 매번 만들지 않고 기울기를 바로 계산하기 위해. 신경망은 이런 공식을 모든 가중치에 대해 자동으로 만든다.</li>
+<li>기호: <span class="math inline">\(y - \text{정답}\)</span>은 오차, <span class="math inline">\(u\)</span>는 입력. 앞의 2는 제곱에서 나오는 수(바로 아래에서 확인).</li>
+<li>단위: 손실 단위 ÷ 가중치 단위.</li>
+<li>계산 순서: 오차를 구한다(−3) → 2배 한다(−6) → 입력을 곱한다(−6 × 2 = −12).</li>
+<li>결과의 뜻: "<span class="math inline">\(w\)</span>를 아주 조금(<span class="math inline">\(\delta\)</span>) 올리면 <span class="math inline">\(L\)</span>은 약 <span class="math inline">\(-12\delta\)</span>만큼, 즉 12배 빠르게 <strong>준다</strong>." 부호가 방향, 크기가 민감도다.</li>
+</ul>
+<p><strong>공식은 어디서 나오나(표의 숫자로 확인).</strong> <span class="math inline">\(\delta\)</span>(델타)는 '아주 작은 양'을 뜻하는 기호입니다. <span class="math inline">\(w\)</span>를 <span class="math inline">\(\delta\)</span>만큼 올리면 출력은 <span class="math inline">\(u\delta = 2\delta\)</span>만큼 오르고, 오차는 <span class="math inline">\(-3\)</span>에서 <span class="math inline">\(-3 + 2\delta\)</span>가 됩니다. 손실은 그 제곱이니 펼치면 <span class="math inline">\((-3 + 2\delta)^2 = 9 - 12\delta + 4\delta^2\)</span>. <span class="math inline">\(\delta = 0.1\)</span>을 넣으면 <span class="math inline">\(9 - 1.2 + 0.04 = 7.84\)</span>로 표와 같습니다. 손실의 변화 <span class="math inline">\(-12\delta + 4\delta^2\)</span>를 <span class="math inline">\(\delta\)</span>로 나누면 <span class="math inline">\(-12 + 4\delta\)</span>이고, <span class="math inline">\(\delta\)</span>를 0.1, 0.01로 줄이면 <span class="math inline">\(4\delta\)</span> 부분이 0.4, 0.04로 줄어 비율이 <span class="math inline">\(-12\)</span>에 다가갑니다(표의 −11.6 = −12 + 0.4, −11.96 = −12 + 0.04). 일반적으로 오차를 <span class="math inline">\(e\)</span>, 입력을 <span class="math inline">\(u\)</span>라 하면 <span class="math inline">\((e + u\delta)^2 = e^2 + 2eu\delta + u^2\delta^2\)</span>이므로 비율은 <span class="math inline">\(2 \times e \times u\)</span>로 다가갑니다. 이것이 위 공식이고, 앞의 2는 제곱을 펼칠 때 가운데 항에서 나옵니다.</p>
+<figure class="fig figure"><img src="../assets/img/d07/fig6-loss-slope.svg" alt="가중치 w에 대한 손실 L=(2w−5)²의 포물선. w=1.0에서 손실 9, 기울기 −12(오른쪽으로 옮겨야 줄어듦), w=3.5에서 손실 4, 기울기 +8(왼쪽으로), w=2.5에서 손실 0·기울기 0. 보폭 0.05로 한 걸음 가면 w=1.6, 손실 3.24. 오른쪽 표에 w별 출력·오차·손실" class="figure-img"><figcaption><b>그림 1.</b> 손실을 가중치의 함수로 본 그림. 점선이 그 점의 기울기(접선)이고, 짧은 화살표가 "손실이 줄어드는 쪽"이다. 기울기가 음수인 곳(빨강)에서는 $w$를 올려야 하고, 양수인 곳(파랑)에서는 내려야 한다. 가장 낮은 곳(초록)에서는 기울기가 0이다. 표의 숫자와 한 걸음의 결과는 모두 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>기울기의 반대쪽으로 한 걸음.</strong> 기울기가 음수라는 것은 "<span class="math inline">\(w\)</span>를 올리면 <span class="math inline">\(L\)</span>이 준다"는 뜻이므로 올려야 하고, 양수면 내려야 합니다. 즉 <strong>기울기의 부호와 반대쪽으로</strong> 옮깁니다. 얼마나 옮기나는 "보폭 × 기울기"로 정합니다. 보폭을 <strong>학습률</strong>(learning rate, <span class="math inline">\(\eta\)</span>)이라 부르는 작은 수로 둡니다. 한 걸음을 실제로 계산해 봅니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 방향.</strong> <span class="math inline">\(w = 1.0\)</span>에서 기울기는 −12. 음수이므로 <span class="math inline">\(w\)</span>를 <strong>올려야</strong> <span class="math inline">\(L\)</span>이 줍니다. (그림 1의 빨간 화살표가 오른쪽을 향하는 이유.)</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 보폭.</strong> 학습률 <span class="math inline">\(\eta = 0.05\)</span>로 두면 옮기는 양은 <span class="math inline">\(-\eta \times \text{기울기} = -0.05 \times (-12) = +0.6\)</span>. 새 가중치는 <span class="math inline">\(w = 1.0 + 0.6 = 1.6\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 확인.</strong> <span class="math inline">\(w = 1.6\)</span>이면 <span class="math inline">\(y = 1.6 \times 2 = 3.2\)</span>, 오차 <span class="math inline">\(3.2 - 5 = -1.8\)</span>, 손실 <span class="math inline">\((-1.8)^2 = 3.24\)</span>. 손실이 9에서 3.24로 줄었습니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 반복.</strong> <span class="math inline">\(w = 1.6\)</span>에서의 기울기는 <span class="math inline">\(2 \times (-1.8) \times 2 = -7.2\)</span>. 아직 음수이니 또 올립니다. <span class="math inline">\(w = 1.6 + 0.05 \times 7.2 = 1.96\)</span>, <span class="math inline">\(y = 3.92\)</span>, 손실 <span class="math inline">\((-1.08)^2 \approx 1.17\)</span>. 걸음을 거듭할수록 2.5에 다가가고, 가까워질수록 기울기가 작아져 걸음도 짧아집니다. 가중치가 100만 개여도 하는 일은 같습니다. 가중치마다 기울기를 구해 반대쪽으로 조금씩 옮깁니다. 이 절차를 <strong>경사 하강(gradient descent)</strong>이라고 부릅니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 보폭이 너무 크면.</strong> 같은 자리에서 <span class="math inline">\(\eta = 0.5\)</span>로 두면 옮기는 양은 <span class="math inline">\(+6\)</span>, <span class="math inline">\(w = 7\)</span>, <span class="math inline">\(y = 14\)</span>, 손실 <span class="math inline">\((14 - 5)^2 = 81\)</span>. 9였던 손실이 81로 <strong>나빠집니다</strong>. 골짜기 바닥을 지나쳐 건너편 비탈로 튄 것입니다. "보폭 × 기울기"가 너무 크면 학습이 발산한다는 이 사실을 기억해 두세요. 2구간에서 기울기 자체가 수천 배로 커지는 일(폭주)이 왜 치명적인지가 여기서 보입니다.</p>
+</div>
+</div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/IHZwWFHWa-w?start=181&amp;rel=0" title="영상: Gradient descent, how neural networks learn | Deep Learning Chapter 2" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 3:01–12:19, 약 9분 · 전체 20분, 영어·자막).</b> 3Blue1Brown, "Gradient descent, how neural networks learn | Deep Learning Chapter 2". <b>볼 이유:</b> 3:01 'Cost functions' 챕터에서 손실(영상의 cost)을 정의하고, 6:55 'Gradient descent' 챕터에서 골짜기 비탈을 따라 공을 굴리듯 기울기의 반대쪽으로 한 걸음씩 가는 모습을 애니메이션으로 보여 준다. 위 단계 1–5(방향 → 보폭 → 확인 → 반복)를 가중치 수만 개짜리 신경망에서 본다. 같은 내용의 한국어 더빙판이 '3Blue1Brown 한국어' 채널에 있다(<a href="https://www.youtube.com/watch?v=8861RzFOFs8" target="_blank">DL2 경사하강법</a>, 챕터 시각은 확인하지 않음). <b>보고 답할 질문:</b> 영상의 '언덕을 내려가는 공'에서 공의 위치는 이 절의 무엇($w$, $L$, 기울기 중)이고, 한 걸음의 크기를 정하는 것은 무엇인가? 보폭이 너무 크면 단계 5처럼 되는 이유를 영상의 그림으로 말해 보세요. <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터(영상 내용은 미검증)</span></div></div>
+</section>
+<section id="직접-바꿔-보기-걸음-크기와-손실-35분" class="level4">
+<h4 class="anchored" data-anchor-id="직접-바꿔-보기-걸음-크기와-손실-35분">직접 바꿔 보기: 걸음 크기와 손실 (3–5분)</h4>
+<p>위 손계산과 같은 손실 <span class="math inline">\(L = (2w - 5)^2\)</span>(입력 2, 목표 5)에서, 한 걸음 크기 η(<strong>학습률</strong>: 기울기에 곱해 실제로 움직일 양을 정하는 수)를 바꿔 봅니다. <strong>먼저 예상을 고른 뒤</strong> '한 걸음'을 여러 번 눌러 보세요.</p>
+<div class="lab" data-lab="lossgrad">
+<p class="lab-model-line"><b>교육용 모형</b>입니다. 가중치 하나, 데이터 하나짜리 손실이라 실제 신경망 학습(가중치 수백만 개, 데이터 여러 개, 매 걸음 다른 표본)보다 훨씬 단순합니다. w는 −0.5–5.5, η는 0.01–0.3에서 고릅니다(단위 없음).</p>
+<div class="lab-static">
+<p><b>정적 예제.</b> w = 1.0에서 시작해 다음 w = w − η × 기울기, 기울기 = 4(2w − 5).</p>
+
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">η</th>
+<th data-quarto-table-cell-role="th">지나온 w (5걸음)</th>
+<th data-quarto-table-cell-role="th">결과</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.05</td>
+<td>1.0 → 1.6 → 1.96 → 2.176 → 2.306 → 2.383</td>
+<td>바닥 2.5로 다가감</td>
+</tr>
+<tr class="even">
+<td>0.25</td>
+<td>1.0 → 4.0 → 1.0 → 4.0 → 1.0 → 4.0</td>
+<td>바닥을 사이에 두고 왔다 갔다</td>
+</tr>
+<tr class="odd">
+<td>0.3</td>
+<td>1.0 → 4.6 → −0.44 → 6.616 → −3.262 → 10.567</td>
+<td>점점 멀어짐(발산)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p><strong>무슨 일이 있었나.</strong> 정적 예제의 '기울기 = 4(2w − 5)'는 위 공식 <span class="math inline">\(2 \times \text{오차} \times \text{입력}\)</span>에 오차 <span class="math inline">\(2w - 5\)</span>, 입력 2를 넣은 것이고, <span class="math inline">\(4(2w-5) = 8(w - 2.5)\)</span>로 고쳐 쓰면 '바닥(w = 2.5)까지의 거리 <span class="math inline">\((w - 2.5)\)</span>의 8배'입니다. 그래서 한 걸음 가면 바닥까지의 거리는 <span class="math inline">\((w - 2.5) - \eta \times 8(w - 2.5) = (1 - 8\eta)(w - 2.5)\)</span>가 됩니다. 즉 한 걸음마다 거리에 <span class="math inline">\((1 - 8\eta)\)</span>가 곱해집니다(예: η = 0.05면 거리 −1.5가 0.6배인 −0.9로, w는 1.0 → 1.6). η = 0.05면 0.6배씩 줄어 바닥에 다가가고, η = 0.25면 −1배라 같은 높이에서 왔다 갔다 하고, η = 0.3이면 −1.4배라 점점 멀어집니다. 기울기는 <strong>방향</strong>(어느 쪽으로 가야 손실이 주나)과 <strong>가파른 정도</strong>를 알려 줄 뿐이고, 얼마나 갈지는 η가 정합니다. 너무 크면 골짜기를 건너뛰어 학습이 망가집니다. 이 숫자들은 이 한 가지 손실에 대한 Claude 계산이며, 다른 손실에서는 안전한 η의 범위가 다릅니다. '같은 수를 거듭 곱하면 1보다 작을 때 줄고, 1보다 클 때 커진다'는 이 모양은 2구간에서 걸음이 아니라 시간 단계마다 다시 나옵니다.</p>
+<div class="lab" data-lab="lossgrad-check">
+<div class="lab-static">
+<ol>
+<li>w = 3.5에서 기울기는? <details><summary>답</summary>오차 2 × 3.5 − 5 = 2, 기울기 = 2 × 2 × 2 = +8.</details></li>
+<li>η = 0.25로 w = 1.0에서 한 걸음 가면? <details><summary>답</summary>1.0 − 0.25 × (−12) = 4.0. 손실은 9로 그대로입니다.</details></li>
+</ol>
+</div>
+</div>
+<p>일반식으로 쓰면 가중치 하나당</p>
+<p><span class="math display">\[
+w_{\text{새}} = w - \eta\,\frac{dL}{dw}
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: 위 다섯 단계를 한 줄로. 신경망 학습의 거의 모든 방법이 이 식의 변형이다.</li>
+<li>기호: <span class="math inline">\(\eta\)</span>는 학습률(보폭, 무차원 또는 가중치 단위 ÷ 기울기 단위), <span class="math inline">\(dL/dw\)</span>는 그 가중치의 기울기.</li>
+<li>단위: 가중치 단위.</li>
+<li>계산 순서: 기울기를 구한다 → 학습률을 곱한다 → 지금 값에서 <strong>뺀다</strong>(기울기의 반대쪽이므로).</li>
+<li>결과의 뜻: 손실이 줄어드는 쪽으로 조금 옮긴 새 가중치. 한 번이 아니라 수천 번 반복한다.</li>
+</ul>
+<div class="predict">
+<p>위 모델(입력 2, 정답 5)에서 <span class="math inline">\(w = 1.0\)</span>, 학습률 <span class="math inline">\(\eta = 0.1\)</span>로 한 걸음 가면 새 <span class="math inline">\(w\)</span>는 얼마일까요? 손으로 먼저 계산하고 아래에서 확인하세요. 첫 문제는 본문 숫자의 확인, 둘째는 일부가 비어 있고, 셋째는 입력과 정답이 다른 새 문제입니다.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="0-check"></div>
+</section>
+</div>
+<div id="b-backprop" class="basics">
+<section id="역전파-가중치가-두-개-이어져-있으면-기울기는-곱이다" class="level4">
+<h4 class="anchored" data-anchor-id="역전파-가중치가-두-개-이어져-있으면-기울기는-곱이다">역전파: 가중치가 두 개 이어져 있으면 기울기는 '곱'이다</h4>
+<p>지금까지는 가중치가 하나였습니다. 신경망은 가중치가 <strong>이어져</strong> 있습니다. 가장 작은 예로 두 개를 잇습니다. 입력 <span class="math inline">\(u\)</span>에 <span class="math inline">\(w_1\)</span>을 곱해 중간 숫자 <span class="math inline">\(h\)</span>를 만들고, 거기에 <span class="math inline">\(w_2\)</span>를 곱해 출력 <span class="math inline">\(y\)</span>를 만듭니다.</p>
+<p><span class="math display">\[
+h = w_1 \times u, \qquad y = w_2 \times h, \qquad L = (y - \text{정답})^2
+\]</span></p>
+<p>입력도 출력도 아닌 중간 숫자 <span class="math inline">\(h\)</span>를 <strong>은닉(hidden)</strong> 값이라 부릅니다(바깥에서 안 보인다는 뜻일 뿐입니다). 숫자를 넣습니다. <span class="math inline">\(u = 2\)</span>, <span class="math inline">\(w_1 = 1.0\)</span>, <span class="math inline">\(w_2 = 0.5\)</span>, 정답 5. 앞으로 계산하면 <span class="math inline">\(h = 2\)</span>, <span class="math inline">\(y = 1\)</span>, 오차 <span class="math inline">\(-4\)</span>, 손실 16. 이렇게 입력에서 출력 쪽으로 계산해 가는 것을 <strong>순전파</strong>라고 합니다.</p>
+<p>이제 학습을 하려면 <span class="math inline">\(w_1\)</span>과 <span class="math inline">\(w_2\)</span> <strong>각각</strong>의 기울기가 필요합니다. <span class="math inline">\(w_2\)</span>는 출력 바로 앞에 있어서 한 가중치짜리 예와 같습니다. <span class="math inline">\(w_1\)</span>은 다릅니다. <span class="math inline">\(w_1\)</span>을 바꾸면 <span class="math inline">\(h\)</span>가 바뀌고, <span class="math inline">\(h\)</span>가 바뀌어야 <span class="math inline">\(y\)</span>가 바뀌고, <span class="math inline">\(y\)</span>가 바뀌어야 <span class="math inline">\(L\)</span>이 바뀝니다. 즉 <span class="math inline">\(w_1\)</span>의 영향은 <strong><span class="math inline">\(w_2\)</span>라는 통로를 지나서야</strong> 손실에 닿습니다. 단계별로 따라갑니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 출력 쪽 배율.</strong> 손실은 출력에 대해 얼마나 민감한가? <span class="math inline">\(y\)</span>를 직접 <span class="math inline">\(\delta\)</span>만큼 올리면 오차가 <span class="math inline">\(e\)</span>에서 <span class="math inline">\(e + \delta\)</span>가 되고 <span class="math inline">\((e + \delta)^2 = e^2 + 2e\delta + \delta^2\)</span>이므로(기울기 상자의 '공식은 어디서 나오나'에서 입력 자리에 1을 넣은 것), 비율은 <span class="math inline">\(2 \times \text{오차} = 2 \times (-4) = -8\)</span>. "<span class="math inline">\(y\)</span>를 조금 올리면 <span class="math inline">\(L\)</span>은 그 8배로 <strong>준다</strong>."</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — <span class="math inline">\(w_2\)</span>의 기울기.</strong> <span class="math inline">\(y = w_2 \times h\)</span>이므로 <span class="math inline">\(w_2\)</span>를 조금 올리면 <span class="math inline">\(y\)</span>는 그 <span class="math inline">\(h = 2\)</span>배 오릅니다. 그러면 <span class="math inline">\(L\)</span>은 그 <span class="math inline">\(-8\)</span>배. 둘을 곱해 <span class="math inline">\(w_2\)</span>의 기울기 <span class="math inline">\(= (-8) \times 2 = -16\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — <span class="math inline">\(w_1\)</span>의 영향이 지나는 통로.</strong> <span class="math inline">\(h = w_1 \times u\)</span>이므로 <span class="math inline">\(w_1\)</span>을 조금 올리면 <span class="math inline">\(h\)</span>는 그 <span class="math inline">\(u = 2\)</span>배 오릅니다. <span class="math inline">\(h\)</span>가 오르면 <span class="math inline">\(y = w_2 \times h\)</span>는 그 <span class="math inline">\(w_2 = 0.5\)</span>배 오릅니다. <span class="math inline">\(y\)</span>가 오르면 <span class="math inline">\(L\)</span>은 그 <span class="math inline">\(-8\)</span>배. 세 배율을 <strong>곱하면</strong> <span class="math inline">\(w_1\)</span>의 기울기 <span class="math inline">\(= 2 \times 0.5 \times (-8) = -8\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 표로 확인.</strong> <span class="math inline">\(w_1\)</span>을 1.0에서 1.1로 올리면 <span class="math inline">\(h = 2.2\)</span>, <span class="math inline">\(y = 1.1\)</span>, 오차 <span class="math inline">\(-3.9\)</span>, 손실 <span class="math inline">\(15.21\)</span>. 변화 <span class="math inline">\(-0.79\)</span>를 0.1로 나누면 <span class="math inline">\(-7.9\)</span>. 공식의 <span class="math inline">\(-8\)</span>과 맞습니다(0.1이 '한없이 작은' 양은 아니라 조금 다릅니다).</p>
+</div>
+<div class="step">
+<p><strong>정리.</strong> 거쳐 가는 단계마다 "조금 바꾸면 그 몇 배로 변하나"라는 배율이 하나씩 있고, 앞쪽 가중치의 기울기는 <strong>그 배율들을 전부 곱한 것</strong>입니다. 이 규칙을 <strong>연쇄 법칙(chain rule)</strong>이라 하고, 출력 쪽에서 입력 쪽으로 배율을 거꾸로 곱해 내려오며 모든 가중치의 기울기를 한 번에 구하는 절차를 <strong>역전파(backpropagation)</strong>라고 합니다. 그림 2가 이 다섯 단계입니다.</p>
+<p>그림 2에는 기울기가 <span class="math inline">\(d\)</span> 대신 <span class="math inline">\(\partial\)</span>(둥근 d. '편미분 기호'라 부름)로 적혀 있습니다. 뜻은 같은 '조금 바꾸면 몇 배로 변하나'이고, 값이 여럿일 때 <strong>하나만 조금 바꾸고 나머지는 그대로 둔 채</strong> 잰 비율이라는 표시입니다. 예: <span class="math inline">\(\partial y/\partial h = w_2 = 0.5\)</span>는 '<span class="math inline">\(w_2\)</span>는 그대로 두고 <span class="math inline">\(h\)</span>만 조금 바꾸면 <span class="math inline">\(y\)</span>는 그 0.5배만큼 변한다'.</p>
+</div>
+</div>
+<figure class="fig figure"><img src="../assets/img/d07/fig7-chain-rule.svg" alt="입력 u=2에 w1=1.0을 곱해 은닉 h=2, 다시 w2=0.5를 곱해 출력 y=1, 정답 5와의 오차 −4로 손실 16인 두 단계 사슬. 아래에 세 국소 기울기 2, 0.5, −8이 있고 w1의 기울기는 그 곱 −8, w2의 기울기는 −16" class="figure-img"><figcaption><b>그림 2.</b> 두 단계 사슬의 역전파. 위는 앞으로 계산(순전파), 아래는 각 화살표를 "조금 바꾸면 몇 배로 변하나"로 바꾼 것. $w_1$의 기울기는 세 배율의 곱이다. 통로가 길어지면 곱하는 배율도 늘어난다는 것이 2구간의 전부다. 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/tIeHLnjs5U8?start=38&amp;rel=0" title="영상: Backpropagation calculus | Deep Learning Chapter 4" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:38–5:39, 약 5분 · 전체 10분, 영어·자막).</b> 3Blue1Brown, "Backpropagation calculus | Deep Learning Chapter 4". <b>볼 이유:</b> 0:38 'The Chain Rule in networks' 챕터가 그림 2와 똑같이 뉴런이 한 줄로 이어진 가장 단순한 사슬을 놓고, 손실이 맨 앞 가중치에 얼마나 민감한지를 '단계마다의 배율을 곱한 것'으로 쓴다. 5:39 'Sensitivity to weights/biases'까지 보면 된다. 기호가 많은 편이니 그림 2의 숫자(2, 0.5, −8)를 옆에 두고 대응시키며 보세요. 한국어 더빙판: <a href="https://www.youtube.com/watch?v=HKqdFQfXVhw" target="_blank">DL4</a>(챕터 시각은 확인하지 않음). <b>보고 답할 질문:</b> 영상의 세 분수 곱(∂z/∂w · ∂a/∂z · ∂C/∂a)은 그림 2의 어느 세 숫자에 해당하나? 사슬이 스무 개로 길어지면 이 곱이 왜 0이나 무한대로 가기 쉬운가(2구간)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터(영상 내용은 미검증)</span></div></div>
+<p><strong>핵심 관찰 하나.</strong> <span class="math inline">\(w_2\)</span>의 기울기에는 통로가 없었고(<span class="math inline">\(-8 \times 2\)</span>), <span class="math inline">\(w_1\)</span>의 기울기에는 통로 하나(<span class="math inline">\(w_2 = 0.5\)</span>)가 끼었습니다. 가중치가 셋 이어지면 맨 앞 가중치의 기울기에는 통로 둘이 곱해지고, 스무 개 이어지면 열아홉 개가 곱해집니다. 통로의 배율이 0.5 안팎이면 <span class="math inline">\(0.5^{19}\)</span>, 1.5 안팎이면 <span class="math inline">\(1.5^{19}\)</span>. <strong>앞쪽 가중치의 기울기는 통로 배율의 거듭제곱으로 쪼그라들거나 터집니다.</strong> 2구간은 이 문장에 "RNN에서는 통로가 시간 단계마다 하나씩 생기고, 배율이 매번 같은 <span class="math inline">\(W\)</span>"라는 말을 보태는 것뿐입니다.</p>
+<p><strong>비선형 함수가 끼면: <span class="math inline">\(\tanh\)</span>.</strong></p>
+<p><em>왜 끼우나.</em> 곱하기만 이어 붙이면 <span class="math inline">\(y = w_2 \times (w_1 \times u) = (w_2 w_1) \times u\)</span>라서, 가중치를 몇 개 이어도 결국 '입력에 숫자 하나 곱하기'와 같습니다(<span class="math inline">\(w_1 = 1.0\)</span>, <span class="math inline">\(w_2 = 0.5\)</span>인 위 사슬은 <span class="math inline">\(w = 0.5\)</span> 하나짜리 모델과 똑같은 출력을 냅니다). "입력이 커질수록 출력이 덜 늘어난다"처럼 곱하기 하나로는 그릴 수 없는 관계를 만들려면 중간에 곡선 모양의 함수를 끼웁니다. 그래프가 직선이 아닌 함수를 <strong>비선형</strong>(nonlinear) 함수라 하고, 오늘 쓰는 것은 <span class="math inline">\(\tanh\)</span>(쌍곡탄젠트, hyperbolic tangent)입니다. (비선형이 계산에 왜 꼭 필요한지는 D10의 주제입니다.)</p>
+<div class="predict">
+<p><span class="math inline">\(\tanh(1) = 0.762\)</span>입니다. 입력을 세 배로 늘린 <span class="math inline">\(\tanh(3)\)</span>은 <span class="math inline">\(0.762 \times 3 = 2.29\)</span>쯤일까요, 아니면 다른 값일까요? 먼저 정한 뒤 아래 숫자와 그림 3을 보세요.</p>
+</div>
+<p><em>어떻게 생겼나(그림 3 왼쪽).</em> 입력 0에서 출력 0이고, 입력이 커지면 출력이 1에, 음수로 커지면 −1에 다가가는 S자 곡선입니다. 몇 점: <span class="math inline">\(\tanh(0) = 0\)</span>, <span class="math inline">\(\tanh(0.5) = 0.462\)</span>, <span class="math inline">\(\tanh(1) = 0.762\)</span>, <span class="math inline">\(\tanh(2) = 0.964\)</span>, <span class="math inline">\(\tanh(3) = 0.995\)</span>. 음수 입력은 부호만 바뀝니다(<span class="math inline">\(\tanh(-1) = -0.762\)</span>). 0 근처에서는 거의 '입력 그대로'(<span class="math inline">\(\tanh(0.1) = 0.0997\)</span>)이고, 입력이 클수록 출력이 1에 눌려 거의 변하지 않습니다. 입력을 1에서 3으로 세 배 늘려도 출력은 0.762에서 0.995로 0.23만 늘고, 1을 넘지 못합니다. 이것을 <strong>포화</strong>(saturation)라고 합니다. 1구간의 예에 나오는 <span class="math inline">\(\tanh(0.381) = 0.363\)</span>도 이 곡선 위의 한 점입니다.</p>
+<p><em>입력을 조금 바꾸면 출력은 얼마나 변하나(그림 3 오른쪽).</em> 기울기 상자와 같은 방법으로 잽니다. 입력 1에서 0.01 올리면 <span class="math inline">\(\tanh(1.01) - \tanh(1) = 0.76576 - 0.76159 = 0.00417\)</span>이고, 0.01로 나누면 약 0.42입니다. 같은 계산을 하면 입력 0에서 약 1.00, 입력 2에서 약 0.07, 입력 3에서 약 0.01. 이 '함수 자체의 기울기'를 <span class="math inline">\(f'\)</span>(에프 프라임)로 적습니다. <span class="math inline">\(\tanh\)</span>의 기울기는 입력 0에서 가장 커서 1이고, 곡선이 평평해질수록(입력이 0에서 멀어질수록) 0에 가까워집니다. 공식으로는 <span class="math inline">\(f' = 1 - \tanh^2\)</span>(입력 1이면 <span class="math inline">\(1 - 0.762^2 = 0.42\)</span>)입니다. (일반 수학 사실이며 폴더 논문의 내용은 아닙니다.)</p>
+<figure class="fig figure"><img src="../assets/img/d07/fig8-tanh.svg" alt="왼쪽: tanh 곡선이 입력 −3에서 3까지 −1과 1 사이의 S자로 그려져 있고 입력 0, 1, 2에서 접선이 표시됨. tanh(1)=0.762, tanh(2)=0.964. 오른쪽: 기울기 f′(x)=1−tanh² 곡선이 입력 0에서 1.00, 1에서 0.42, 2에서 0.07, 3에서 0.01로 종 모양" class="figure-img"><figcaption><b>그림 3.</b> S자 함수 $\tanh$와 그 기울기 $f'$. 왼쪽 곡선의 점선은 그 점에서의 접선(기울기)이고, 오른쪽은 그 기울기를 입력마다 그린 것이다. 입력 0 근처에서는 출력이 입력만큼 변하지만(기울기 1), 입력이 커질수록 곡선이 1에 눌려(포화) 기울기가 0에 가까워진다. 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><em>통로 배율이 어떻게 바뀌나.</em> <span class="math inline">\(h = \tanh(w_1 u)\)</span>이면, <span class="math inline">\(w_1\)</span>을 조금 바꿀 때 <span class="math inline">\(h\)</span>의 변화는 '<span class="math inline">\(\tanh\)</span> 안에 들어가는 값(<span class="math inline">\(w_1 u\)</span>)의 변화 × 그 지점의 <span class="math inline">\(f'\)</span>'입니다. 연쇄 법칙의 배율이 하나 더 끼는 것입니다. 마찬가지로 1구간의 RNN에서 한 상태가 다음 상태로 넘어가는 통로의 배율은 '가중치 × 그 지점에서의 <span class="math inline">\(f'\)</span>'가 됩니다. <span class="math inline">\(\tanh\)</span>의 <span class="math inline">\(f'\)</span>는 0보다 크고 1 이하이므로 배율의 크기는 가중치의 크기를 넘지 못합니다. 기호로 <span class="math inline">\(|W \cdot f'| \le |W|\)</span>이고, 세로 막대 <span class="math inline">\(|\;|\)</span>는 부호를 떼고 크기만 본 값(절댓값)입니다. 2구간의 '인자 <span class="math inline">\(= W \cdot f'\)</span>'가 이 뜻입니다.</p>
+<p>(역전파는 폴더 논문이 설명하지 않는 일반 교과 내용입니다. 시간 순서로 들어오는 신호를 다루는 신경망에서 역전파가 어떻게 되는지는 2구간에서 다룹니다.)</p>
+<div class="quiz" data-day="d07" data-set="0-end"></div>
+</section>
+</div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+모델 / 입력 / 출력 / 가중치
+</dt>
+<dd>
+입력을 받아 출력을 내는 규칙 / 들어오는 숫자 / 나오는 숫자 / 모델이 들고 있는, 입력에 곱하는 숫자. <span class="math inline">\(y = w \times u\)</span>.
+</dd>
+<dt>
+벡터 / 행렬 / 원소
+</dt>
+<dd>
+숫자 목록 / 행·열로 배열한 숫자 표 / 표의 숫자 하나. 행 하나 = 출력 하나의 가중치 목록. <span class="math inline">\(\mathbf{y} = W\mathbf{u}\)</span>.
+</dd>
+<dt>
+오차 / 손실
+</dt>
+<dd>
+출력 − 정답 / 오차의 제곱(부호 없이, 큰 오차를 크게). 학습은 손실을 줄이는 일.
+</dd>
+<dt>
+기울기 (gradient, 미분값)
+</dt>
+<dd>
+가중치를 한없이 조금 바꿀 때 손실이 변하는 비율. 부호가 방향, 크기가 민감도. 예: <span class="math inline">\(w=1.0\)</span>에서 −12.
+</dd>
+<dt>
+경사 하강 / 학습률
+</dt>
+<dd>
+<span class="math inline">\(w \leftarrow w - \eta \cdot dL/dw\)</span>를 반복하기 / 보폭 <span class="math inline">\(\eta\)</span>. 너무 크면 골짜기를 지나쳐 손실이 커진다.
+</dd>
+<dt>
+은닉 / 순전파 / 역전파 / 연쇄 법칙
+</dt>
+<dd>
+중간 숫자 / 입력에서 출력 쪽으로 계산 / 출력에서 입력 쪽으로 배율을 곱해 내려오며 기울기 구하기 / 거쳐 가는 단계의 배율을 곱한다는 규칙. <span class="math inline">\(\partial\)</span>는 '하나만 조금 바꾸면 몇 배'를 적는 기호.
+</dd>
+<dt>
+비선형 함수 / <span class="math inline">\(\tanh\)</span> / <span class="math inline">\(f'\)</span>
+</dt>
+<dd>
+그래프가 직선이 아닌 함수 / 어떤 입력도 −1과 1 사이로 누르는 S자 함수(<span class="math inline">\(\tanh(1) = 0.762\)</span>) / 함수 자체의 기울기. <span class="math inline">\(\tanh\)</span>는 입력 0에서 1, 입력 2에서 0.07(포화할수록 작다).
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>모델 = 입력 × 가중치 → 출력. 학습 = 손실(오차²)이 줄도록 가중치를 데이터로 고치기. 예: 입력 2, 정답 5, <span class="math inline">\(w=1.0\)</span>이면 손실 9.</li>
+<li>기울기 = "조금 바꾸면 얼마나 변하나"의 극한 비율. <span class="math inline">\(w=1.0\)</span>에서 −12. 기울기의 반대쪽으로 보폭만큼 옮기면 손실이 준다(9 → 3.24). 보폭이 너무 크면 나빠진다(9 → 81).</li>
+<li>가중치가 이어져 있으면 앞쪽 가중치의 기울기는 통로 배율의 <strong>곱</strong>이다(연쇄 법칙·역전파): <span class="math inline">\(2 \times 0.5 \times (-8) = -8\)</span>. 통로가 <span class="math inline">\(k\)</span>개면 배율이 <span class="math inline">\(k\)</span>번 곱해진다.</li>
+<li>S자 함수 <span class="math inline">\(\tanh\)</span>가 끼면 통로 배율은 '가중치 × <span class="math inline">\(f'\)</span>'. <span class="math inline">\(f'\)</span>는 입력 0에서 1, 입력 2에서 0.07로 1 이하라서 배율이 가중치보다 커지지 않는다.</li>
+<li>남은 질문: 시간 순서로 들어오는 신호에는 어떤 모델을 쓰나? → 1구간. 그 모델에서 통로가 몇 개나 되나? → 2구간.</li>
+</ul>
+</div>
+</section>
+<section id="ch-rnn" class="level3">
+<h3 class="anchored" data-anchor-id="ch-rnn">1. 시계열과 순환 신경망: 상태를 다음 단계로 넘긴다</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "RNN은 무엇을 다음 시간 단계로 넘기고, 왜 같은 가중치를 매 단계 다시 쓰는가"를 숫자 하나짜리 예(0.762 → 0.363 → …)로 말할 수 있다.</p>
+</div>
+<p><strong>직관.</strong> 사진 한 장을 보고 고양이인지 맞히는 신경망은 0구간의 <a href="#b-model" class="recall">모델</a>처럼 입력 하나를 받아 출력 하나를 냅니다. 입력 → 중간(은닉) → 출력으로 한 방향으로만 흐르므로 <strong>피드포워드 신경망</strong>(feed-forward NN)이라 부르고, 입력과 출력 사이에 '시간'이 없습니다. 그런데 음성, 심전도, 센서 신호처럼 <strong>시간 순서로 들어오는 신호</strong>(시계열)는 지금 값만으로는 부족합니다. 방금 전까지 어떤 값이 왔는지가 있어야 합니다. 순환 신경망(recurrent neural network, RNN)은 이 '방금 전까지'를 <strong>내부 상태</strong>라는 변수에 담아 다음 시간 단계로 넘깁니다. Stepney의 튜토리얼은 이것을 한 줄로 씁니다. RNN은 순환 연결을 통해 기억을 얻고, 그래서 시계열 예측과 분류에 쓸모가 있다. <span class="src">Stepney 2024, p.665</span></p>
+<p><strong>변수와 단위.</strong> 시간 단계 <span class="math inline">\(t\)</span> (정수, 샘플 번호), 입력 <span class="math inline">\(u(t)\)</span> (예: 전압 [V], 또는 −1~1 범위로 맞춘 무차원 값. 이렇게 범위를 맞추는 것을 정규화(normalization)라 부릅니다), 상태 <span class="math inline">\(h(t)\)</span> (<span class="math inline">\(N\)</span>개의 숫자를 묶은 <a href="#b-vector-matrix" class="recall">벡터</a>, 무차원), 가중치 행렬 <span class="math inline">\(W\)</span> (<span class="math inline">\(N\times N\)</span>: 행 <span class="math inline">\(N\)</span>개·열 <span class="math inline">\(N\)</span>개인 표, 상태에 곱함)와 <span class="math inline">\(W_{in}\)</span> (<span class="math inline">\(N\times N_u\)</span>, <span class="math inline">\(N_u\)</span>는 입력 신호의 개수; 입력에 곱함), 비선형 함수 <span class="math inline">\(f\)</span> (보통 0구간 끝에서 본 <span class="math inline">\(\tanh\)</span>). 상태 갱신은</p>
+<p><span class="math display">\[
+h(t+1) = f\big(W\,h(t) + W_{in}\,u(t)\big)
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: "상태를 다음 단계로 넘긴다"를 식으로 적어야 2구간에서 통로가 몇 개인지 셀 수 있다.</li>
+<li>기호: <span class="math inline">\(W\,h(t)\)</span>는 지금 상태에 가중치 표를 곱한 것, <span class="math inline">\(W_{in}\,u(t)\)</span>는 지금 입력에 가중치를 곱한 것. 둘을 더해 S자 함수 <span class="math inline">\(f\)</span>에 넣은 결과가 다음 상태.</li>
+<li>단위: 상태와 가중치는 무차원.</li>
+<li>계산 순서: 지금 상태와 입력에 각각 가중치를 곱해 더한다 → <span class="math inline">\(f\)</span>를 통과시킨다 → 다음 상태로 저장한다 → 다음 입력으로 반복.</li>
+<li>결과의 뜻: 다음 상태는 "지금 입력 + 지금 상태의 흔적"이다.</li>
+</ul>
+<p>핵심은 <strong>같은 <span class="math inline">\(W\)</span>를 매 단계 다시 쓴다</strong>는 것입니다. 시간으로 펼쳐 그리면(그림 4) 같은 상자가 줄지어 있고, 상자 사이를 잇는 화살표가 모두 같은 <span class="math inline">\(W\)</span>입니다.</p>
+<p><strong>작은 예시.</strong> 상태가 숫자 하나뿐인 RNN을 손으로 돌려 봅니다. <span class="math inline">\(h(t+1) = \tanh(0.5\,h(t) + u(t))\)</span>, <span class="math inline">\(h(0)=0\)</span>, 입력은 <span class="math inline">\(u = 1, 0, 0, 0\)</span>.</p>
+<ul>
+<li><span class="math inline">\(h(1) = \tanh(0.5\cdot 0 + 1) = \tanh(1) = 0.762\)</span></li>
+<li><span class="math inline">\(h(2) = \tanh(0.5\cdot 0.762 + 0) = \tanh(0.381) = 0.363\)</span></li>
+<li><span class="math inline">\(h(3) = \tanh(0.5\cdot 0.363) = \tanh(0.182) = 0.180\)</span></li>
+<li><span class="math inline">\(h(4) = \tanh(0.090) = 0.090\)</span></li>
+</ul>
+<p>입력 1이 한 번 들어간 뒤 0만 들어와도 상태는 0.762 → 0.363 → 0.180 → 0.090으로 <strong>흔적을 남기며 줄어듭니다</strong>. 이것이 "상태가 기억을 담는다"는 말의 가장 작은 형태이고, 줄어드는 속도는 <span class="math inline">\(W\)</span>(여기서는 0.5)가 정합니다. D9의 fading memory(입력의 흔적이 시간이 지나며 서서히 사라지는 성질)가 여기서 시작됩니다.</p>
+<p><strong>상태가 둘이면: 행렬–벡터 곱을 한 번 써 보기.</strong> 실제 RNN의 <span class="math inline">\(W\,h(t)\)</span>는 <a href="#b-vector-matrix" class="recall">행렬–벡터 곱</a>입니다. 상태 두 개 <span class="math inline">\(h = (h_a, h_b)\)</span>, <span class="math inline">\(W\)</span>의 행 1 = <span class="math inline">\((0.5,\ 0)\)</span>, 행 2 = <span class="math inline">\((0,\ 0.9)\)</span>, <span class="math inline">\(W_{in} = (1, 1)\)</span>(입력 하나를 두 상태에 똑같이 넣음), 입력은 위와 같은 1, 0, 0으로 둡니다.</p>
+<div class="predict">
+<p>두 번째 상태(<span class="math inline">\(W\)</span>의 행 2에 0.9가 있는 칸)는 첫 번째 상태보다 빨리 줄어들까요, 천천히 줄어들까요? 먼저 정한 뒤 단계를 넘기세요.</p>
+</div>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 첫 입력.</strong> <span class="math inline">\(h(0) = (0, 0)\)</span>이므로 <span class="math inline">\(W h(0) = (0, 0)\)</span>. 입력 쪽은 <span class="math inline">\(W_{in} \times 1 = (1, 1)\)</span>. 더하면 <span class="math inline">\((1, 1)\)</span>, 칸마다 <span class="math inline">\(\tanh\)</span>를 씌우면 <span class="math inline">\(h(1) = (0.762,\ 0.762)\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 행렬–벡터 곱.</strong> <span class="math inline">\(W h(1)\)</span>의 첫 칸 = 행 1과 상태를 같은 자리끼리 곱해 더하기 <span class="math inline">\(= 0.5 \times 0.762 + 0 \times 0.762 = 0.381\)</span>, 둘째 칸 = 행 2로 <span class="math inline">\(0 \times 0.762 + 0.9 \times 0.762 = 0.685\)</span>. 입력이 0이라 더할 것이 없고, <span class="math inline">\(\tanh\)</span>를 씌우면 <span class="math inline">\(h(2) = (0.363,\ 0.595)\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 한 번 더.</strong> <span class="math inline">\(W h(2) = (0.5 \times 0.363,\ 0.9 \times 0.595) = (0.182,\ 0.536)\)</span>, <span class="math inline">\(\tanh\)</span>를 씌우면 <span class="math inline">\(h(3) = (0.180,\ 0.490)\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>정리.</strong> 첫 번째 칸은 위의 1차원 예와 똑같이 빨리 줄고(0.762 → 0.363 → 0.180), 두 번째 칸은 천천히 줄어(0.762 → 0.595 → 0.490) 더 오래 기억합니다. 상태 목록 하나에 '빨리 잊는 칸'과 '천천히 잊는 칸'이 함께 들어 있다는 것이 3구간에서 쓸모를 냅니다. 이 <span class="math inline">\(W\)</span>는 대각선 밖이 0이라 두 칸이 서로 섞이지 않는 가장 단순한 경우입니다. 실제 RNN의 <span class="math inline">\(W\)</span>는 대부분의 칸이 0이 아니어서, 한 상태가 다른 상태의 다음 값에도 영향을 줍니다.</p>
+</div>
+</div>
+<p><strong>적용 조건.</strong> 위 식은 모형입니다. 실제 신경망은 <span class="math inline">\(N\)</span>이 수백에서 수천이고 <span class="math inline">\(W\)</span>는 행렬이지만, "상태를 넘기고 같은 <span class="math inline">\(W\)</span>를 반복해서 쓴다"는 구조는 같습니다. 물리 소자에서는 <span class="math inline">\(h(t)\)</span>가 전도도나 전하 같은 물리량이 되고, <span class="math inline">\(W\)</span>는 소자의 동역학이 대신합니다(D8–D9).</p>
+<figure class="fig figure"><img src="../assets/img/d07/fig1-rnn-unrolled.svg" alt="RNN을 시간으로 펼친 모식도. 네 개의 상태 상자 h(1)–h(4)가 같은 가중치 W로 이어지고, 각 상자 위에서 입력 u가 들어온다. 아래에 1차원 예시의 계산값 0.762, 0.363, 0.180, 0.090과 학습이 어려운 세 가지 이유가 적혀 있다" class="figure-img"><figcaption><b>그림 4.</b> 순환 신경망을 시간으로 펼친 모습. 상자 사이의 화살표는 모두 같은 $W$다. 아래 숫자는 본문의 1차원 예시 $h(t+1)=\tanh(0.5\,h(t)+u(t))$를 코드로 계산한 값. 상자 안의 세 가지가 2구간의 주제다. (Claude가 계산해 그림, 모식도)</figcaption></figure>
+<div class="predict">
+<p><span class="math inline">\(h(1) = 0.762\)</span>이고 다음 입력이 0이면 <span class="math inline">\(h(2)\)</span>는 얼마일까요? <span class="math inline">\(\tanh(0.381) \approx 0.363\)</span>이라는 값을 써서 먼저 계산하고 아래에서 확인하세요.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="1-check"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+시계열 (time series)
+</dt>
+<dd>
+시간 순서로 들어오는 값의 나열. '지금 값'만으로는 부족하고 '방금 전까지'가 있어야 처리할 수 있는 신호. D1 (라)에서 한 번 나왔다.
+</dd>
+<dt>
+피드포워드 신경망 (feed-forward NN)
+</dt>
+<dd>
+입력 → 은닉층 → 출력으로 한 방향으로만 흐르는 신경망. 내부 상태가 없어 입력 하나에 출력 하나. 학습 알고리즘(역전파)이 잘 정립되어 있다 <span class="src">Stepney 2024, p.665</span>.
+</dd>
+<dt>
+순환 신경망 (RNN)
+</dt>
+<dd>
+상태 <span class="math inline">\(h(t)\)</span>를 다음 단계로 넘기는 신경망. 같은 <span class="math inline">\(W\)</span>를 매 단계 다시 쓴다. 시간을 펼치면 깊이가 시간 길이만큼인 네트워크가 된다.
+</dd>
+<dt>
+가중치 (weight)
+</dt>
+<dd>
+신경망의 조절 가능한 숫자. 학습이란 이 숫자들을 오차가 줄어드는 쪽으로 바꾸는 일이다(0구간).
+</dd>
+</dl>
+</div>
+<div class="think">
+<p>1차원 예시에서 0.5를 1.2로 바꾸면 <span class="math inline">\(h\)</span>는 어떻게 될까요? 입력이 0이어도 상태가 줄지 않거나 커질 수 있습니다(단, <span class="math inline">\(\tanh\)</span> 때문에 1을 넘지는 못합니다). "기억이 안 사라지는 것"이 좋은 일일까요? 답은 D9에서 숫자로 확인하니, 지금은 직감만 적어 두세요.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="1-end"></div>
+<div class="keypoints">
+<ul>
+<li>RNN은 상태 <span class="math inline">\(h(t)\)</span>를 다음 단계로 넘겨 시계열의 '방금 전까지'를 담는다 <span class="src">Stepney 2024, p.665</span>.</li>
+<li>같은 <span class="math inline">\(W\)</span>를 매 단계 다시 쓴다. 1차원 예시: 입력 1 뒤에 0만 와도 0.762 → 0.363 → 0.180으로 흔적이 남으며 줄어든다.</li>
+<li>줄어드는 속도는 <span class="math inline">\(W\)</span>가 정한다. 이것이 D9 fading memory의 씨앗이다.</li>
+<li>남은 질문: 이 구조를 어떻게 학습시키나? 왜 어렵나?</li>
+</ul>
+</div>
+</section>
+<section id="ch-bptt" class="level3">
+<h3 class="anchored" data-anchor-id="ch-bptt">2. 왜 RNN 학습은 어려운가: 시간을 거슬러 올라가는 기울기</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "RNN을 시간으로 펼치면 0구간의 사슬이 시간 길이만큼 길어지고, 통로의 배율이 매번 같은 <span class="math inline">\(W\)</span>라서 <span class="math inline">\(k\)</span>단계 전의 기울기에 같은 인자가 <span class="math inline">\(k\)</span>번 곱해진다"를 <span class="math inline">\(0.5^{20}\)</span>, <span class="math inline">\(1.5^{20}\)</span>이라는 숫자와 함께 말할 수 있고, 물리 소자에는 벽이 하나 더 있음을 안다.</p>
+</div>
+<section id="학습이란-무엇인가-0구간-되짚기" class="level4">
+<h4 class="anchored" data-anchor-id="학습이란-무엇인가-0구간-되짚기">2-1. 학습이란 무엇인가 (0구간 되짚기)</h4>
+<p>신경망을 '학습시킨다'는 것은 출력과 정답의 차이(<a href="#b-training" class="recall">오차</a>)를 제곱한 손실을 재고, 손실이 줄어드는 방향으로 가중치를 조금씩 바꾸는 일을 수천 번 반복하는 것입니다. 어느 방향으로 바꿔야 손실이 주는지를 알려 주는 양이 <a href="#b-gradient" class="recall">기울기</a>입니다. "이 가중치를 아주 조금 올리면 손실이 얼마나 변하나"를 모든 가중치에 대해 계산한 것입니다.</p>
+<p>피드포워드 신경망에서는 출력 쪽 층부터 입력 쪽 층으로 거꾸로 내려오며 기울기를 계산합니다(<a href="#b-backprop" class="recall">역전파</a>). 각 층을 지날 때마다 연쇄 법칙으로 "앞 층의 변화가 뒤 층에 얼마나 전해지나"라는 배율을 곱해 나갑니다. 0구간의 두 단계 사슬에서 <span class="math inline">\(2 \times 0.5 \times (-8)\)</span>이 그것이었습니다. <span class="tag tag-unverified">미확인</span> (역전파 자체는 폴더 논문이 설명하지 않는 일반 지식입니다. Stepney는 피드포워드 신경망의 학습 알고리즘으로 역전파를 들고, RNN의 표준 학습 알고리즘인 <strong>시간 역전파</strong>(backpropagation through time, BPTT)가 계산량이 더 크다고만 씁니다. <span class="src">Stepney 2024, p.665</span>)</p>
+</section>
+<section id="rnn에서는-시간이-깊이가-된다" class="level4">
+<h4 class="anchored" data-anchor-id="rnn에서는-시간이-깊이가-된다">2-2. RNN에서는 시간이 깊이가 된다</h4>
+<p><strong>직관.</strong> 그림 4처럼 RNN을 시간으로 펼치면, 시간 길이가 <span class="math inline">\(T\)</span>인 신호에 대해 깊이가 <span class="math inline">\(T\)</span>인 네트워크가 됩니다. 0구간의 사슬은 입력 → 은닉 → 출력의 두 단계였지만, 펼친 RNN은 <span class="math inline">\(h(1) \to h(2) \to \cdots \to h(T)\)</span>로 <strong>시간 단계마다 통로가 하나씩</strong> 생깁니다. 시간 단계 <span class="math inline">\(t\)</span>에서 생긴 오차를 <span class="math inline">\(W\)</span> 탓으로 돌리려면, <span class="math inline">\(W\)</span>가 <span class="math inline">\(t-1, t-2, \dots\)</span> 단계에서도 쓰였으므로 <strong>시간을 거슬러 모든 단계를 지나며</strong> 기울기를 모아야 합니다. Stepney는 이것을 "순환을 시간 역전파로 풀어헤쳐야(unwinding) 하기 때문에 반복적 역전파로 RNN을 학습시키는 것은 비싸다"고 씁니다. <span class="src">Stepney 2024, p.669</span></p>
+<p><strong>변수와 단위.</strong> 묻는 양은 "<span class="math inline">\(k\)</span>단계 전의 상태 <span class="math inline">\(h(t-k)\)</span>를 조금 바꾸면 지금 상태 <span class="math inline">\(h(t)\)</span>가 몇 배로 변하나"입니다. 0구간의 표기로 <span class="math inline">\(\partial h(t)/\partial h(t-k)\)</span>(무차원)이고, 연쇄 법칙에 따라 한 단계짜리 통로의 배율 <span class="math inline">\(k\)</span>개를 곱한 것입니다. 1차원 예시에서는 각 배율이 <span class="math inline">\(W\cdot f'\)</span>(가중치 × <span class="math inline">\(\tanh\)</span>의 기울기, <a href="#b-backprop" class="recall">0구간 끝의 그림 3</a>)입니다. 상태가 여럿일 때의 배율은 아래 '상태가 여럿이면'에서 봅니다.</p>
+<p>0구간과 다른 점은 딱 하나입니다. 피드포워드에서는 통로마다 가중치가 다를 수 있지만(<span class="math inline">\(w_1, w_2, \dots\)</span>), RNN에서는 <strong>통로의 배율이 매번 같은 <span class="math inline">\(W\)</span></strong>입니다. 그래서 곱이 "서로 다른 수 <span class="math inline">\(k\)</span>개의 곱"이 아니라 "같은 수의 <span class="math inline">\(k\)</span>제곱"이 됩니다. 1차원 예시로 세어 봅니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 통로 하나의 배율.</strong> 1차원 예시 <span class="math inline">\(h(t+1) = \tanh(0.5\,h(t) + u(t))\)</span>에서 "<span class="math inline">\(h(t)\)</span>를 조금 바꾸면 <span class="math inline">\(h(t+1)\)</span>은 몇 배로 변하나"는 <span class="math inline">\(0.5 \times f'\)</span>. <span class="math inline">\(\tanh\)</span>의 기울기 <span class="math inline">\(f'\)</span>는 1 이하이므로 배율은 많아야 0.5이고, 상태가 0 근처일 때 0.5에 가깝습니다. 아래에서는 0.5로 둡니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 두 단계 전.</strong> <span class="math inline">\(h(t-2)\)</span>의 변화가 <span class="math inline">\(h(t)\)</span>에 닿으려면 통로 둘을 지납니다. <span class="math inline">\(0.5 \times 0.5 = 0.25\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — <span class="math inline">\(k\)</span>단계 전.</strong> 통로 <span class="math inline">\(k\)</span>개: <span class="math inline">\(0.5^k\)</span>. <span class="math inline">\(k=3\)</span>이면 0.125, <span class="math inline">\(k=10\)</span>이면 <span class="math inline">\(1/1024 \approx 0.001\)</span>, <span class="math inline">\(k=20\)</span>이면 약 <span class="math inline">\(10^{-6}\)</span>. 0구간의 두 단계 사슬에서 출력 쪽 배율 <span class="math inline">\(-8\)</span>에 통로 배율 0.5가 한 번 곱해졌던 것(<span class="math inline">\(-8 \times 0.5 = -4\)</span>, 여기에 입력 <span class="math inline">\(u = 2\)</span>를 곱해 <span class="math inline">\(w_1\)</span>의 기울기 <span class="math inline">\(-8\)</span>)이, 여기서는 스무 번 곱해지는 것입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 1구간 예시의 실제 숫자로.</strong> 0.5로 둔 것을 실제 <span class="math inline">\(f'\)</span>로 확인합니다. <span class="math inline">\(\tanh\)</span>의 기울기는 <span class="math inline">\(1 - (\text{출력})^2\)</span>이고, 통로 <span class="math inline">\(h(t) \to h(t+1)\)</span>의 출력은 다음 상태 <span class="math inline">\(h(t+1)\)</span>입니다. 1구간 예의 <span class="math inline">\(h(2), h(3), h(4) = 0.363, 0.180, 0.090\)</span>을 넣으면 배율은 <span class="math inline">\(0.5 \times (1 - 0.363^2) = 0.434\)</span>, <span class="math inline">\(0.5 \times (1 - 0.180^2) = 0.484\)</span>, <span class="math inline">\(0.5 \times (1 - 0.090^2) = 0.496\)</span>. 셋을 곱하면 <span class="math inline">\(h(4)\)</span>가 <span class="math inline">\(h(1)\)</span>에 대해 갖는 배율은 약 <span class="math inline">\(0.104\)</span>로, 0.5를 세 번 곱한 0.125보다 조금 작습니다. <span class="math inline">\(f'\)</span>가 1보다 작은 만큼 더 빨리 줄어듭니다(그림 5).</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 반대 경우.</strong> 가중치가 1.5면(그리고 <span class="math inline">\(f' \approx 1\)</span>이면) <span class="math inline">\(1.5^k\)</span>: <span class="math inline">\(k=10\)</span>에 약 58, <span class="math inline">\(k=20\)</span>에 약 3325. 0구간 단계 5에서 보폭 × 기울기가 커지면 학습이 발산했던 것을 떠올리세요. 기울기가 3,000배가 되면 어떤 보폭으로도 걸음을 제어할 수 없습니다. 단, '<span class="math inline">\(f' \approx 1\)</span>'은 상태가 0 근처에 머문다는 가정입니다. 1차원 <span class="math inline">\(\tanh\)</span> 예에서 <span class="math inline">\(1.5 \times f'\)</span>가 1을 넘으려면 <span class="math inline">\(f' &gt; 0.67\)</span>, 곧 상태의 크기가 약 0.58보다 작아야 합니다(<span class="math inline">\(1 - 0.58^2 \approx 0.67\)</span>). 가중치 1.5로 상태가 커지면 <span class="math inline">\(\tanh\)</span>가 포화해 <span class="math inline">\(f'\)</span>가 작아지고(상태 0.86이면 <span class="math inline">\(f' \approx 0.26\)</span>, 배율 <span class="math inline">\(1.5 \times 0.26 \approx 0.39\)</span>), 오히려 줄어드는 쪽이 됩니다. 실제 폭주는 큰 네트워크에서 포화하지 않은 채 배율이 1을 넘는 방향이 있을 때 생깁니다. <span class="tag tag-interp">해석</span></p>
+</div>
+</div>
+<figure class="fig figure"><img src="../assets/img/d07/fig9-backward-chain.svg" alt="1구간 예시 h(1)=0.762, h(2)=0.363, h(3)=0.180, h(4)=0.090을 펼쳐 놓고, 거꾸로 가는 빨간 화살표마다 배율 0.5×(1−다음 상태²) = 0.434, 0.484, 0.496을 적었다. h(4)가 각 상태에 대해 갖는 누적 배율은 0.104, 0.240, 0.496, 1.000이고 0.5만 곱한 값 0.125, 0.250, 0.500, 1.000보다 작다" class="figure-img"><figcaption><b>그림 5.</b> 그림 4의 펼친 RNN을 거꾸로 따라가기. 위는 앞으로 계산한 상태, 가운데 빨간 화살표는 통로 하나의 배율($0.5 \times f'$), 아래 상자는 $h(4)$에서 출발해 배율을 곱해 온 값이다. 통로가 하나 늘 때마다 1보다 작은 수가 하나 더 곱해진다. 이것이 20단계로 길어진 것이 그림 6이다. 숫자는 본문 예시를 코드로 계산했다. (Claude가 계산해 그림, 모식도)</figcaption></figure>
+<p><strong>작은 예시.</strong> 인자가 0.5면 10단계 거슬러 올라갔을 때 <span class="math inline">\(0.5^{10} \approx 0.001\)</span>, 20단계면 <span class="math inline">\(0.5^{20} \approx 10^{-6}\)</span>입니다. 20단계 전 입력이 지금 오차에 얼마나 책임이 있는지를 알려 주는 신호가 100만 분의 1로 쪼그라듭니다. 반대로 인자가 1.5면 <span class="math inline">\(1.5^{10} \approx 58\)</span>, <span class="math inline">\(1.5^{20} \approx 3325\)</span>로 터집니다. 앞은 <strong>기울기 소실</strong>(vanishing), 뒤는 <strong>기울기 폭주</strong>(exploding)입니다. 인자가 정확히 1.0이면 둘 다 안 생기지만, 그것은 특수한 경우이고 학습 중에 가중치가 바뀌면 유지되지 않습니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>상태가 여럿이면: 고유값.</strong> 상태가 숫자 목록이고 <span class="math inline">\(W\)</span>가 행렬이면 '통로 배율'이 숫자 하나가 아닙니다. 1구간의 두 상태 예(<span class="math inline">\(W\)</span>의 행 1 = <span class="math inline">\((0.5, 0)\)</span>, 행 2 = <span class="math inline">\((0, 0.9)\)</span>)로 봅니다. 첫 칸만 있는 변화 <span class="math inline">\((1, 0)\)</span>에 <span class="math inline">\(W\)</span>를 곱하면 <span class="math inline">\((0.5, 0)\)</span>으로 <strong>방향은 그대로, 크기만 0.5배</strong>이고, 둘째 칸만 있는 <span class="math inline">\((0, 1)\)</span>은 <span class="math inline">\((0, 0.9)\)</span>로 0.9배가 됩니다. 이렇게 행렬을 곱해도 방향이 바뀌지 않고 크기만 몇 배가 되는 특별한 방향이 있을 때, 그 배율을 그 행렬의 <strong>고유값</strong>(eigenvalue)이라고 부릅니다. 이 <span class="math inline">\(W\)</span>의 고유값은 0.5와 0.9입니다. <span class="math inline">\(k\)</span>번 곱하면 두 방향은 각각 <span class="math inline">\(0.5^k\)</span>배, <span class="math inline">\(0.9^k\)</span>배가 되고(<span class="math inline">\(k = 20\)</span>이면 약 <span class="math inline">\(10^{-6}\)</span>과 0.12), 마지막까지 살아남는 것은 <strong>크기가 가장 큰 고유값</strong>의 방향입니다. 그래서 행렬에서는 가장 큰 고유값의 크기가 1차원의 '인자' 역할을 합니다. 대각선 밖이 0이 아닌 보통의 행렬에서는 고유값을 대각선에서 바로 읽을 수 없고 따로 계산해야 하며, 그 예는 <a href="../days/d09.html#b-spectral-radius">D9 4구간</a>에 있습니다.</p>
+<p>Pascanu·Mikolov·Bengio(2013)는 <span class="math inline">\(f\)</span>가 없는 선형 RNN에서 가장 큰 고유값의 크기가 1보다 작으면 먼 과거로 가는 기울기 성분이 사라지기에 <strong>충분</strong>하고, 기울기가 폭주하려면 그것이 1보다 커야 한다(<strong>필요</strong>조건: 이것 없이는 폭주가 없지만 이것만으로 폭주가 보장되지는 않는다)고 정리하고, <span class="math inline">\(\tanh\)</span>처럼 기울기가 1 이하인 함수가 낀 경우로 넓힙니다(<a href="https://proceedings.mlr.press/v28/pascanu13.html">Pascanu, Mikolov &amp; Bengio 2013, <em>ICML</em>, PMLR 28(3), 1310–1318</a>; 공개본 arXiv:1211.5063의 2.1절을 Claude가 대조. 비선형인 경우의 엄밀한 조건은 고유값 대신 '특잇값'이라는 다른 배율로 적혀 있으며 오늘은 다루지 않음).</p>
+<figure class="fig figure"><img src="../assets/img/d07/fig2-gradient-product.svg" alt="거슬러 올라간 단계 수 k에 대한 기울기 배율의 로그 그래프. 인자 1.5는 20단계에서 3325배로 커지고, 인자 0.5는 9.5×10⁻⁷로 줄며, 인자 1.0만 수평선이다" class="figure-img"><figcaption><b>그림 6.</b> 같은 인자를 $k$번 곱한 값. 세로축은 로그 눈금으로, 가로 격자 한 칸이 100배다([D1 기초: 로그 축](d01.qmd#b-log-axis)). 인자가 1보다 작으면 소실, 크면 폭주. 숫자는 코드로 계산한 $0.5^k$, $1.0^k$, $1.5^k$. 스칼라 모형이며, 상태가 여럿인 실제 RNN에서는 가장 큰 고유값의 크기가 대략 이 역할을 한다(본문 '상태가 여럿이면') [해석]. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>적용 조건.</strong> 이 산수는 "같은 인자를 반복해서 곱한다"는 구조에서 나오므로, 인자가 단계마다 달라지는 실제 네트워크에서는 평균적인 경향으로만 성립합니다. 기울기 소실·폭주라는 이름과 그 수학적 분석의 원 출처(1990년대 논문들)는 폴더에 없습니다. 흔히 인용되는 원 논문 하나는 <a href="https://doi.org/10.1109/72.279181">Bengio, Simard &amp; Frasconi 1994, <em>IEEE Trans. Neural Netw.</em> 5, 157–166</a>로, 서지와 요지(먼 과거에 대한 기울기가 거슬러 갈수록 지수적으로 줄어 긴 의존성 학습이 어렵다)는 웹에서 확인했지만 <span class="tag tag-fact">확인</span>, 본문의 수식은 Claude가 대조하지 않았습니다 [미확인: 본문]. 폴더의 Liang 리뷰는 결과만 적습니다. RC의 장점은 출력층만 학습하는 단순함이고, 그것이 <strong>기존 RNN의 기울기 폭주·소실 문제를 피한다</strong>는 것입니다. <span class="src">Liang 2024, p.194</span></p>
+</section>
+<section id="물리-소자에는-세-번째-벽이-있다" class="level4">
+<h4 class="anchored" data-anchor-id="물리-소자에는-세-번째-벽이-있다">2-3. 물리 소자에는 세 번째 벽이 있다</h4>
+<p>위 두 문제(비용, 소실·폭주)는 소프트웨어의 문제입니다. 내부 가중치를 학습시키는 방식에는 물리 구현에서 더 치명적인 벽이 하나 더 있습니다. 가중치를 바꾸려면 <strong>네트워크 내부에 손을 댈 수 있어야 하고</strong>, 기울기를 계산하려면 <strong>미분 가능한 모형</strong>(소자의 입력을 조금 바꾸면 출력이 몇 배로 변하는지, 즉 0구간의 '통로 배율'을 식으로 쓸 수 있는 모형)이 있어야 합니다. 재료 덩어리나 소자 하나로 만든 네트워크는 둘 다 어렵습니다. Stepney는 ESN의 장점을 바로 이 말로 정리합니다. "내부 매개변수를 바꿀 필요가 없고, 소자의 미분 가능한 모형도 필요 없다." <span class="src">Stepney 2024, p.669</span> 2026년의 소자 ESN 논문도 같은 동기를 씁니다. 시계열 문제에 RNN을 쓰는 소자 연구가 적은 이유는 "학습 과정이 더 복잡하고, 물리 소자에 더 넓은 범위의 전도도 상태를 요구하기 때문"이라고. <span class="src">Zhong 2026, p.2</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/AsNTP8Kwu80?start=253&amp;rel=0" title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (16분 37초 중 4:13부터, 영어, 자막 가능).</b> StatQuest with Josh Starmer, "Recurrent Neural Networks (RNNs), Clearly Explained!!!". 설명란 챕터: 4:13 RNN의 기본 구조, 5:59 데이터를 흘려 보내기, 10:31 공유되는 가중치와 편향, 11:23 기울기 소실·폭주 문제. 추천 구간 4:13–16:37(약 12분). 볼 이유: 그림 4의 '같은 W를 반복해서 쓴다'와 그림 6의 '같은 인자를 반복해서 곱한다'를 숫자를 넣어 가며 보여 주는 영상이라 2절 전체의 복습이 된다. 보고 답할 질문: 영상이 말하는 'shared weights'는 그림 4의 어느 화살표인가? 영상이 폭주를 설명할 때 쓰는 숫자는 그림 6의 어느 인자에 해당하나? (Claude가 확인한 범위: 제목·채널·길이·챕터 시각(tools/ytdesc.py). 내용은 미검증.)</div></div>
+<div class="quiz" data-day="d07" data-set="2-check"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+기울기 (gradient)
+</dt>
+<dd>
+가중치를 조금 바꿀 때 오차가 변하는 비율. 학습은 기울기의 반대 방향으로 가중치를 옮기는 일(경사 하강, gradient descent)이다. 0구간의 숫자 예: −12.
+</dd>
+<dt>
+역전파 / BPTT
+</dt>
+<dd>
+출력에서 입력 쪽으로 연쇄 법칙을 따라 기울기를 계산하는 절차. RNN에서는 시간을 거슬러 올라가므로 backpropagation through time. 폴더 논문은 이름과 '계산량이 크다'는 평가만 준다 <span class="src">Stepney 2024, p.665</span>.
+</dd>
+<dt>
+고유값 (eigenvalue)
+</dt>
+<dd>
+행렬을 곱해도 방향이 안 바뀌고 크기만 변하는 특별한 방향의 배율. 행 <span class="math inline">\((0.5, 0)\)</span>, <span class="math inline">\((0, 0.9)\)</span>인 행렬은 0.5와 0.9. 가장 큰 크기가 행렬판 '통로 배율'. D9에서 자세히.
+</dd>
+<dt>
+기울기 소실·폭주 (vanishing / exploding gradient)
+</dt>
+<dd>
+시간을 거슬러 <span class="math inline">\(k\)</span>단계를 지나며 같은 인자가 <span class="math inline">\(k\)</span>번 곱해져 기울기가 0으로 꺼지거나 무한히 커지는 일. RC가 피하는 문제 <span class="src">Liang 2024, p.194</span>.
+</dd>
+</dl>
+</div>
+<div class="myth">
+<p><strong>"RNN 학습이 어려운 건 컴퓨터가 느려서다"</strong> — 비용은 문제의 일부일 뿐입니다. 더 빠른 컴퓨터로도 <span class="math inline">\(0.5^{20}\)</span>은 <span class="math inline">\(10^{-6}\)</span>입니다. 소실·폭주는 "같은 인자를 반복해서 곱한다"는 구조에서 오는 문제이고, 물리 소자에서는 "내부에 손을 댈 수 없다"는 세 번째 벽이 더해집니다. <span class="tag tag-interp">해석</span></p>
+</div>
+<div class="think">
+<p>내 이온 소자로 작은 RNN을 만들었다고 합시다. "오차가 줄어드는 방향으로 소자 하나의 응답을 조금 바꿔라"라는 명령을 실제로 실행할 수 있나요? 바꾼다면 무엇을(전압? 조성? 두께?) 바꾸나요, 그리고 그 변화가 오차에 미치는 영향을 미분으로 쓸 수 있나요? 이 질문에 "아니오"가 하나라도 나오면 3절의 우회로가 필요한 이유를 몸으로 안 것입니다.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="2-end"></div>
+<div class="keypoints">
+<ul>
+<li>학습 = 기울기(가중치 변화 → 오차 변화)의 반대 방향으로 가중치를 반복해 옮기기. RNN은 시간을 거슬러 기울기를 모아야 한다(BPTT) <span class="src">Stepney 2024, p.665, 669</span>.</li>
+<li>펼친 RNN은 시간 단계마다 통로가 하나씩 있고 통로 배율이 매번 같은 <span class="math inline">\(W\cdot f'\)</span>이므로, 거슬러 올라가며 같은 인자가 <span class="math inline">\(k\)</span>번 곱해진다: <span class="math inline">\(0.5^{20}\approx10^{-6}\)</span>(소실), <span class="math inline">\(1.5^{20}\approx3325\)</span>(폭주). 1구간 예의 실제 <span class="math inline">\(f'\)</span>로 세 단계를 곱하면 0.104(0.5만 곱하면 0.125). 상태가 여럿이면 가장 큰 고유값의 크기가 이 인자 역할을 한다. RC는 이 문제를 피한다 <span class="src">Liang 2024, p.194</span>.</li>
+<li>물리 소자의 세 번째 벽: 내부 가중치에 손을 댈 수 없고 미분 가능한 모형이 없다 <span class="src">Stepney 2024, p.669</span>.</li>
+<li>남은 질문: 내부를 학습시키지 않고도 쓸모 있는 네트워크가 가능한가?</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-esn-lsm" class="level3">
+<h3 class="anchored" data-anchor-id="ch-esn-lsm">3. 우회로: 내부는 고정하고 출력층만 학습한다 — ESN과 LSM</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "ESN·LSM은 무엇을 고정하고 무엇만 학습하는가"를 RNN과 나란히 놓은 표로 말할 수 있고, 그 선택이 무엇을 얻고 무엇을 잃었는지 Liang·Stepney의 문장으로 댈 수 있다.</p>
+</div>
+<section id="년-2002년" class="level4">
+<h4 class="anchored" data-anchor-id="년-2002년">3-1. 2001년, 2002년</h4>
+<p>Liang 리뷰는 RC의 기원을 두 문장으로 씁니다. <strong>2001년 Herbert Jaeger가 RNN의 효율적 구현으로 echo state network(ESN)를 발명</strong>했고, 복잡한 RNN 층의 '에코 상태'(입력의 메아리가 남아 있는 상태값들)에 선형 회귀로 학습한 선형 readout 층을 붙였다. <strong>2002년 Wolfgang Maass가 연속적이고 스파이킹 방식으로 동작하는 liquid-state machine(LSM)을 제안</strong>했다. <span class="src">Liang 2024, p.193</span> 두 원문은 폴더에 없으므로 내용은 <span class="tag tag-unverified">미확인</span>이고, 서지만 Liang의 참고문헌(ref. 13, 15)으로 확인했습니다.</p>
+<p>여기서 <strong>선형 회귀</strong>(linear regression)가 다시 나옵니다. <a href="../days/d06.html#b-readout">D6 기초 3</a>에서 본 '점들에 가장 잘 맞는 직선 긋기'입니다(예: 상태 2, 4, 6에 정답 1, 2, 3이면 가중치 0.5). 0구간의 학습은 "기울기의 반대쪽으로 조금씩, 수천 번"이었습니다. 그런데 모델이 "숫자들에 가중치를 곱해 더하기"<strong>만</strong>으로 되어 있고 중간에 S자 함수가 없으면, 손실이 가장 작은 가중치를 반복 없이 <strong>공식 한 번</strong>으로 구할 수 있습니다(그림 1의 포물선 바닥을 바로 찾는 것과 같습니다. 0구간 예라면 '<span class="math inline">\(2w = 5\)</span>'를 풀어 <span class="math inline">\(w = 2.5\)</span>). 그 공식이 선형 회귀이고, D8에서 손으로 풉니다. 오늘은 "반복 학습이 아니라 한 번에 푸는 방법"으로만 읽으면 됩니다.</p>
+<p>Stepney는 ESN의 핵심을 더 구체적으로 씁니다. ESN에서는 RNN의 <strong>입력 가중치와 내부 가중치를 난수로 고르고, 출력 가중치만을 반복 없는 한 번의 알고리즘으로 학습</strong>한다. 이 알고리즘이 RNN의 실용성을 크게 높였다. <span class="src">Stepney 2024, p.665</span> Jaeger의 핵심 통찰은 "readout 가중치를 한 번에 학습하는 것으로 충분하다"는 것이었다. <span class="src">Stepney 2024, p.669</span></p>
+<p><strong>직관.</strong> 2구간의 세 가지 벽은 모두 "내부 <span class="math inline">\(W\)</span>를 학습시킨다"에서 왔습니다. 그러면 내부를 학습시키지 말자. 난수로 만든 <span class="math inline">\(W\)</span>를 그대로 두고, 그 네트워크가 입력에 반응해 만드는 상태 <span class="math inline">\(h(t)\)</span>를 읽어서, 상태로부터 답을 만드는 마지막 한 층 <span class="math inline">\(W_{out}\)</span>만 학습하자. <span class="math inline">\(W_{out}\)</span>은 상태들에 가중치를 곱해 더한 것(<strong>선형 조합</strong>, 0구간의 <a href="#b-vector-matrix" class="recall">행렬–벡터 곱</a>과 같은 계산)이므로 기울기를 시간으로 거슬러 보낼 필요가 없고, 선형 회귀 한 번으로 구해집니다(D8). 이 난수 네트워크를 <strong>reservoir</strong>(저수지), 마지막 층을 <strong>readout</strong>이라고 부릅니다(readout은 <a href="../days/d06.html#b-readout">D6 기초 3</a>에서 '상태에서 답을 꺼내는 규칙'으로 본 그것입니다).</p>
+<p><strong>작은 예시.</strong> 1구간의 두 상태 RNN을 reservoir로 써 봅니다. <span class="math inline">\(W\)</span>와 <span class="math inline">\(W_{in}\)</span>은 그대로 두고 상태만 읽습니다. 과제는 "두 입력 전의 입력이 1이었는가"라고 합시다.</p>
+<ul>
+<li>경우 A: 두 입력 전에 1, 바로 전에 0. 1구간 단계 2의 계산 그대로 지금 상태는 <span class="math inline">\((h_a, h_b) = (0.363,\ 0.595)\)</span>.</li>
+<li>경우 B: 두 입력 전에 0, 바로 전에 0.38. 그러면 <span class="math inline">\(h_a = \tanh(0.38) = 0.363\)</span>, <span class="math inline">\(h_b = \tanh(0.38) = 0.363\)</span>.</li>
+</ul>
+<p>첫 번째 상태 <span class="math inline">\(h_a\)</span>만 읽으면 두 경우 모두 0.363이라 구분할 수 없습니다. '오래전의 큰 입력'과 '방금의 작은 입력'이 같은 흔적을 남긴 것입니다. 천천히 잊는 두 번째 상태 <span class="math inline">\(h_b\)</span>는 0.595와 0.363으로 다릅니다. readout이 두 상태에 가중치를 곱해 더하면(예: <span class="math inline">\(h_b - h_a\)</span>, 곧 가중치 <span class="math inline">\((-1, 1)\)</span>) A는 0.232, B는 0이 되어 둘이 갈립니다. 상태가 <span class="math inline">\(N\)</span>개이고 각각 다른 속도로 잊는다면 같은 선형 조합 <span class="math inline">\(W_{out}h\)</span>로 답할 수 있는 질문이 늘어납니다. 이 "여러 상태의 선형 조합"이 readout의 전부입니다. <span class="tag tag-interp">해석</span> (어떤 조건에서 충분한지는 D8–D11에서 다룹니다.)</p>
+<figure class="fig figure"><img src="../assets/img/d07/fig3-rnn-vs-esn.svg" alt="왼쪽 일반 RNN은 입력·내부·출력 가중치가 모두 빨강(학습 대상)이고 반복적 BPTT가 필요하다. 오른쪽 ESN은 내부 가중치를 난수로 고정하고 출력 가중치 W_out만 빨강이며, 내부는 블랙박스라 물리 소자로 바꿀 수 있다" class="figure-img"><figcaption><b>그림 7.</b> 무엇을 학습하나. 왼쪽은 모든 가중치(빨강), 오른쪽은 $W_{out}$만. 오른쪽의 내부는 블랙박스이므로 재료·소자로 바꿔 끼울 수 있다는 것이 4구간의 주제다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>무엇이 고정이고 무엇이 학습인가.</strong> 그림 7을 표로 적으면 아래와 같습니다. 세 번째 열은 4구간의 내용을 미리 적은 것입니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>부분</th>
+<th>일반 RNN</th>
+<th>ESN (소프트웨어 RC)</th>
+<th>물리 RC (PRC)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>입력 가중치 <span class="math inline">\(W_{in}\)</span></td>
+<td><strong>학습</strong> (BPTT)</td>
+<td>난수로 정해 <strong>고정</strong></td>
+<td>입력을 소자에 넣는 방식(전압 크기·마스크 등)으로 <strong>고정</strong></td>
+</tr>
+<tr class="even">
+<td>내부 가중치 <span class="math inline">\(W\)</span> (상태를 다음 단계로 넘기는 규칙)</td>
+<td><strong>학습</strong> (BPTT, 소실·폭주의 원인)</td>
+<td>난수로 정해 <strong>고정</strong></td>
+<td>재료·소자의 <strong>물리 동역학</strong>이 대신함. 만든 뒤에는 손대지 않음</td>
+</tr>
+<tr class="odd">
+<td>비선형 함수 <span class="math inline">\(f\)</span></td>
+<td>설계자가 고름 (<span class="math inline">\(\tanh\)</span> 등)</td>
+<td>설계자가 고름</td>
+<td>소자의 비선형 응답이 대신함</td>
+</tr>
+<tr class="even">
+<td>출력 가중치 <span class="math inline">\(W_{out}\)</span> (readout)</td>
+<td><strong>학습</strong> (BPTT)</td>
+<td><strong>학습</strong> (선형 회귀 한 번)</td>
+<td><strong>학습</strong> (선형 회귀 한 번, 보통 컴퓨터에서)</td>
+</tr>
+</tbody>
+</table>
+<p>이 표에서 읽을 것은 둘입니다. 첫째, RNN에서 ESN으로 가며 바뀐 것은 "내부 두 줄을 학습에서 고정으로" 옮긴 것뿐이고, 학습은 맨 아랫줄 하나로 줄었습니다. 둘째, 내부가 <strong>고정</strong>이라는 것은 <strong>학습이 내부의 값을 알 필요도, 바꿀 필요도 없다</strong>는 뜻입니다. 학습이 보는 것은 상태 <span class="math inline">\(h(t)\)</span>뿐입니다. 그러니 내부가 난수 행렬이든, 전도도가 변하는 이온 소자든, 호수의 물결이든 <strong>상태를 읽을 수만 있으면</strong> 학습 절차는 똑같습니다. 이것이 "내부를 고정한다"가 "재료를 reservoir로 쓸 수 있다"로 이어지는 이유이고, 4구간은 Stepney의 문장으로 같은 말을 합니다. <span class="tag tag-interp">해석</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/cDxtFtoQVNc?start=396&amp;rel=0" title="영상: The Most Counterintuitive Way to Build a Brain" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 6:36–13:38, 약 7분 · 전체 14분, 영어·자동 자막).</b> Artem Kirsanov, "The Most Counterintuitive Way to Build a Brain" (2026). <b>볼 이유:</b> 설명란에 따르면 "연결을 하나하나 설계하는 대신 난수 뉴런 묶음을 그대로 두고 그것을 '듣는' 법만 배워, 어려운 학습 문제를 선형 회귀로 줄이는" reservoir computing을 다루는 영상이다. 6:36 'Reservoir Computing Paradox'(난수 네트워크가 왜 쓸모 있나), 9:28 'Why it works at all', 12:00 'Putting it together' 챕터가 위 표의 "내부는 고정, $W_{out}$만 학습"을 애니메이션으로 보여 준다. 1:04–5:36(RNN과 echo state property)은 1–2구간 복습이자 D9의 예고이고, 5:36–6:36은 광고다. <b>보고 답할 질문:</b> 영상에서 학습되는 숫자는 그림 7의 어느 화살표인가? 영상이 "왜 되나"에 대해 내놓는 답을 이 절의 '여러 상태의 선형 조합' 문장과 비교해 한 줄로 적어 보세요. <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터·설명(영상 내용은 미검증)</span></div></div>
+<div class="quiz" data-day="d07" data-set="3-check"></div>
+</section>
+<section id="liquid라는-이름" class="level4">
+<h4 class="anchored" data-anchor-id="liquid라는-이름">3-2. 'liquid'라는 이름</h4>
+<p>Liang은 LSM의 liquid state를 호수에 돌을 계속 던지는 장면으로 설명합니다. 여러 물결이 서로 간섭해 복잡한 무늬(liquid state)를 만들고, <strong>지난 몇 초 동안의 돌 던지기에 관한 정보를 그 무늬에 선형 층을 적용해 꺼낼 수 있다</strong>. <span class="src">Liang 2024, p.193</span> 이 비유에서 챙길 것은 둘입니다. (1) 물은 학습하지 않는다. 물결 무늬는 물리 법칙이 만든다. (2) 무늬는 서서히 사라진다. 오래전 돌의 흔적은 작아진다. 이 둘이 D9의 fading memory입니다.</p>
+<figure class="fig photo figure"><img src="../assets/img/web/d07-lake-ripples.jpg" alt="얕은 호숫가 모래 바닥 위로 여러 개의 동심원 물결이 서로 겹쳐 퍼지며, 물결이 만든 밝은 빛 무늬가 겹치는 곳에서 복잡한 그물 모양이 된 사진" loading="lazy" class="figure-img"><figcaption><b>사진.</b> 미국 몬태나 시리 호수의 얕은 물에 생긴 물결. 오른쪽 아래와 왼쪽 위에서 퍼진 동심원 물결이 겹친다. <b>볼 것:</b> 동심원이 둘 이상 겹친 가운데 부분의 무늬는 '언제, 어디에 무엇이 떨어졌나'를 모두 반영한 하나의 상태다. 바깥으로 갈수록 물결이 약해지는 것이 '서서히 잊음'이다. Liang의 비유에서 readout은 이 무늬의 여러 점을 읽어 가중합하는 일이다. 사진은 비유를 보여 줄 뿐, 이 호수로 계산한 실험은 아니다. 출처: Scott Robinson, <a href="https://commons.wikimedia.org/wiki/File:Constructive_interference.jpg" target="_blank">Wikimedia Commons</a>, CC BY 2.0.</figcaption></figure>
+</section>
+<section id="년-하나의-이름" class="level4">
+<h4 class="anchored" data-anchor-id="년-하나의-이름">3-3. 2007년, 하나의 이름</h4>
+<p>ESN은 실수값 뉴런과 이산 시간(정해진 박자마다 한 걸음), LSM은 스파이크(신경세포가 내는 짧은 전압 펄스, 값 대신 '언제 펄스가 났나'로 정보를 보냄)와 연속 시간으로 출발이 달랐지만, "고정된 reservoir + 학습하는 선형 readout"이라는 원리가 같았습니다. Liang은 두 연구가 이후 그 유사한 원리를 바탕으로 <strong>reservoir computing(RC)으로 실험적으로 통합</strong>되었다고 쓰고, 그 구조를 입력층, 복잡한 시간 의존 동역학을 가진 <strong>고정</strong> reservoir 층에서의 고차원 사상(입력 몇 개를 훨씬 많은 상태값 <span class="math inline">\(N\)</span>개의 목록으로 옮겨 적는 것; '차원'은 목록에 든 숫자의 개수), 선형 readout 층으로 정리합니다. <span class="src">Liang 2024, p.193</span> (통합 논문은 Verstraeten 등 2007, Liang ref. 16. 폴더에 없어 내용은 <span class="tag tag-unverified">미확인</span>.)</p>
+<p><strong>읽는 법.</strong> 아래 원문 그림은 세 칸입니다. 보기 전에 위 표의 "고정 / 학습" 구분을 머리에 두고, 각 칸에서 <strong>빨간색(학습하는 부분)이 어디 하나뿐인지</strong>를 먼저 찾으세요. 그다음 b와 c에서 reservoir 칸의 내용물만 다르고 빨간 화살표의 위치는 같다는 것을 확인하면 됩니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/liang2024-fig1.png" alt="Liang 2024 Fig. 1: a 뇌의 신경 활동에서 선형 readout으로 행동을 읽어 내는 그림, b 소프트웨어 RC(입력층, 고정 reservoir, 학습하는 출력 가중치 W_out), c 물리 RC(물리 노드와 아키텍처로 된 reservoir층, 상태 신호, 물리 시냅스 출력층)" class="figure-img"><figcaption><b>원문 그림.</b> Liang et al., <a href="https://doi.org/10.1038/s41928-024-01133-z" target="_blank"><i>Nat. Electron.</i> 2024, 7, 193–206</a>, Fig. 1, p.194. 볼 것: <b>a</b>는 뇌의 여러 뉴런 활동(주황 파형)을 가중합(빨강 선)해 행동 변수를 읽어 내는 그림으로, Liang이 RC와 뇌를 잇는 근거다(p.193의 생쥐 전극 실험). <b>b</b>는 소프트웨어 RC: 입력 $W_{in}$(청록), reservoir의 $f(x)$와 한 걸음 지연 $Z^{-1}$, 그리고 학습하는 $W_{out}$(빨강)만 색이 다르다는 점을 보라. <b>c</b>는 물리 RC: reservoir 층이 '아키텍처 + 물리 노드'로 바뀌고 출력층이 '물리 시냅스'로 그려져 있다. b와 c에서 빨간 화살표(학습하는 것)의 위치가 같다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+</section>
+<section id="무엇을-얻고-무엇을-잃었나" class="level4">
+<h4 class="anchored" data-anchor-id="무엇을-얻고-무엇을-잃었나">3-4. 무엇을 얻고 무엇을 잃었나</h4>
+<p>얻은 것은 Liang이 한 문단에 모아 둡니다. 출력층 학습이 단순해서 기울기 폭주·소실을 피하고, <strong>적은 샘플로 빠른 학습</strong>이 가능하며, 출력층은 선형 회귀로 쉽게 학습된다. <span class="src">Liang 2024, p.194</span> 잃은 것도 같은 문단에 있습니다. 기울기로 학습하는 피드포워드 DNN과 비교하면 <strong>RC는 목표 함수를 근사하는 표현력이 더 낮고</strong>, 대신 학습·동역학계 근사·시간 신호 처리에서 장점을 가진다. <span class="src">Liang 2024, p.194</span> Outlook에서는 더 구체적으로, reservoir가 깊고 넓어져도 각 뉴런의 입출력 범위가 최적화되지 않기 때문에 <strong>대개 2,000 뉴런 미만의 비교적 작은 규모에서 성능이 포화</strong>하고, 그래서 기계학습 벤치마크에서 최첨단 결과를 얻기는 어렵다고 씁니다. <span class="src">Liang 2024, p.202</span> 이 "2,000"은 한 리뷰가 "대개"라는 말을 붙여 적은 일반적 관찰입니다. 그 문장에는 어떤 과제·구조·데이터에서 잰 값인지, 근거 문헌이 무엇인지가 붙어 있지 않고, 바로 다음 문장에서 Liang은 계층형 RC·deep RC 같은 새 RC 알고리즘이 물리 RC의 구조와 노드 설계에 새 아이디어를 줄 수 있다고 덧붙입니다. <span class="src">Liang 2024, p.202</span> 반대 방향의 실무 지침도 있습니다. Lukoševičius의 ESN 안내서는 과적합(<a href="../days/d06.html#b-heldout-baseline">D6 기초 4</a>: 훈련 데이터의 우연한 잡음까지 외워 새 데이터에서 나빠지는 것)을 막는 <strong>규제</strong>(regularization: 가중치가 지나치게 커지지 않게 손실에 벌점을 더하는 것. 4-3의 ridge regression이 그 예이고, 1구간의 '정규화(normalization)'와는 다른 말)를 적절히 하면 "대개 reservoir가 클수록 얻을 수 있는 성능이 좋다"고 하고, <span class="math inline">\(10^4\)</span> 규모의 reservoir도 드물지 않다고 씁니다. <span class="src">Lukoševičius 2012, 3.2.1절</span> 그러니 이 숫자는 RC 전체의 보편적 한계가 아니라, 과제·구조·규제·데이터 양에 따라 달라지는 경향으로 읽습니다. <span class="tag tag-interp">해석</span> ("표현력이 낮다"는 말은 0구간의 말로 하면 이렇습니다. 내부 가중치를 데이터에 맞춰 고치지 못하므로, 같은 데이터에서 도달할 수 있는 손실의 바닥이 더 높다.)</p>
+<p>Stepney는 다른 종류의 주의를 하나 더 적습니다. Jaeger 등(2007)의 그림에서 좋은 예측이 무한정 유지되지는 않았고, 수천 단계 뒤에 예측이 발산한 사례가 있다. 학습·시험 길이보다 훨씬 길어서 보통은 문제가 안 되지만, <strong>실제 배치(deployment)에서는 문제가 된다</strong>. <span class="src">Stepney 2024, p.669</span></p>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+reservoir (저수지)
+</dt>
+<dd>
+난수로 만들어 고정한 순환 네트워크(또는 그 역할을 하는 물리계). 입력을 받아 고차원 상태를 만든다. 학습하지 않는다.
+</dd>
+<dt>
+readout (출력층)
+</dt>
+<dd>
+reservoir 상태의 선형 조합으로 답을 만드는 마지막 층 <span class="math inline">\(W_{out}\)</span>. 유일하게 학습하는 부분. 선형 회귀 한 번으로 구한다 <span class="src">Stepney 2024, p.665, 669</span>. D8의 주제.
+</dd>
+<dt>
+선형 회귀 (linear regression)
+</dt>
+<dd>
+"가중치를 곱해 더하기"만으로 된 모델에서 손실이 가장 작은 가중치를 반복 없이 공식 한 번으로 구하는 방법. readout 학습에 쓴다.
+</dd>
+<dt>
+ESN (echo state network)
+</dt>
+<dd>
+Jaeger 2001. 실수값 뉴런, 이산 시간. '에코'는 입력의 메아리가 상태에 남는다는 뜻으로, 그 조건(echo state property)은 D9에서.
+</dd>
+<dt>
+LSM (liquid state machine)
+</dt>
+<dd>
+Maass 2002. 스파이킹 뉴런, 연속 시간. 호수의 물결 무늬 비유 <span class="src">Liang 2024, p.193</span>.
+</dd>
+<dt>
+RC (reservoir computing)
+</dt>
+<dd>
+ESN과 LSM을 '고정 reservoir + 학습 readout'이라는 공통 원리로 묶은 이름(2007년 통합, Liang ref. 16).
+</dd>
+</dl>
+</div>
+<div class="think">
+<p>난수로 만든 네트워크가 쓸모 있다는 말은 처음 들으면 이상합니다. 내 말로 한 문장을 써 보세요. "reservoir는 _<strong>을 하지 않고 </strong>_만 한다. 쓸모는 ___에서 나온다." 세 번째 빈칸을 못 채웠다면 그것이 D8의 질문입니다.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="3-end"></div>
+<div class="keypoints">
+<ul>
+<li>2001 ESN(Jaeger): 난수 RNN + 선형 회귀로 한 번에 학습하는 readout. 2002 LSM(Maass): 스파이킹·연속 시간. 2007년 RC로 통합 <span class="src">Liang 2024, p.193</span>. 원문 셋은 폴더에 없음(서지·제목은 확인, 본문 내용은 Claude 미대조 <span class="tag tag-unverified">미확인</span>).</li>
+<li>고정: <span class="math inline">\(W_{in}\)</span>, <span class="math inline">\(W\)</span>. 학습: <span class="math inline">\(W_{out}\)</span> 하나. 내부가 고정이면 학습은 내부 값을 알 필요가 없고 상태만 읽는다 → 내부를 재료로 바꿀 수 있다 <span class="tag tag-interp">해석</span>.</li>
+<li>포기한 것: 내부 <span class="math inline">\(W\)</span>의 학습. 얻은 것: 소실·폭주 회피, 적은 샘플로 빠른 학습 <span class="src">Liang 2024, p.194</span>. 잃은 것: DNN보다 낮은 표현력 <span class="src">Liang 2024, p.194</span>. Liang 리뷰는 성능이 "대개 2,000 뉴런 미만"에서 포화한다고 관찰하지만 <span class="src">Liang 2024, p.202</span>, 과제 조건이 없는 일반적 관찰이고 규제를 적절히 하면 클수록 좋아진다는 지침도 있어 보편 한계로 읽지 않는다 <span class="src">Lukoševičius 2012, 3.2.1절</span>.</li>
+<li>호수 비유의 두 교훈: 물은 학습하지 않는다, 무늬는 서서히 사라진다 → D9.</li>
+<li>남은 질문: 고정된 블랙박스라면 컴퓨터 안의 난수 행렬이 아니어도 되지 않나?</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-prc" class="level3">
+<h3 class="anchored" data-anchor-id="ch-prc">4. 블랙박스를 재료로 바꾸다: 물리 reservoir computing</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "ESN 모형이 물리 구현에 맞는 이유"를 Stepney의 세 조건으로 말하고, 기판이 reservoir가 되기 위한 세 요구와 그것이 깨지는 조건(특히 시간척도)을 내 소자에 대입할 수 있다.</p>
+</div>
+<section id="esn-모형이-물리-구현에-맞는-이유" class="level4">
+<h4 class="anchored" data-anchor-id="esn-모형이-물리-구현에-맞는-이유">4-1. ESN 모형이 물리 구현에 맞는 이유</h4>
+<p>Stepney는 RNN을 "열린 동역학계의 한 특수한 경우"로 보고, ESN 학습 알고리즘은 그것을 <strong>내부 구성을 바꾸지 않는 블랙박스</strong>로 다룬다고 씁니다. 그래서 소프트웨어 RNN 자리에 물리 동역학계를 넣어 물리 reservoir computing을 할 수 있다는 것이 발견되었다. <span class="src">Stepney 2024, p.665</span> ("열린 동역학계"란 바깥에서 입력을 받으며 시간에 따라 상태가 변해 가는 계를 말합니다. 1구간의 식 <span class="math inline">\(h(t+1) = f(\cdots)\)</span>가 그 가장 단순한 꼴입니다.) 3.3.5절은 조건을 세 줄로 정리합니다. (i) ESN 성능은 뉴런 연결 구조에 둔감하다, (ii) 학습이 reservoir 내부 매개변수에 접근하지 않는다, (iii) 식 1(Stepney가 쓴 ESN 상태 갱신 식으로, 1구간의 <span class="math inline">\(h(t+1) = f(\cdots)\)</span>와 같은 꼴)은 특정 전달함수(입력의 합을 다음 상태로 바꾸는 함수, 곧 <span class="math inline">\(\tanh\)</span> 같은 <span class="math inline">\(f\)</span>)를 가진 이산 시간 열린 동역학계의 꼴이다. 따라서 재료는 뉴런과 닮은 내부 구조가 전혀 없어도 되고, <strong>그 동역학이 충분히 비선형이고 소산적(dissipative)이기만 하면</strong> ESN 모형의 요구를 만족한다. (소산적이란 저항·마찰·확산처럼 에너지가 빠져나가서, 외부 자극이 없으면 상태가 원래대로 가라앉는 성질입니다.) <span class="src">Stepney 2024, p.670</span> 조건 (ii)가 3구간 표의 "내부 고정"이고, 조건 (i)이 "난수여도 된다"의 뒷받침입니다.</p>
+<p>4.1절에서는 거의 모든 기판이 "reservoir가 되는" 이유를 다시 세 가지 요구로 씁니다. <strong>측정할 수 있는 고차원 상태</strong>, 입력에 자극받았을 때의 <strong>(ESN과) 유사한 동역학</strong>, 그리고 <strong>fading memory</strong>. 대부분의 기판은 비선형 동역학계이고, 소산적이므로 fading memory를 가진다. <span class="src">Stepney 2024, p.672</span></p>
+<p><strong>적용 조건.</strong> 바로 다음 절 제목이 "모든 것이 reservoir가 잘 되는 것은 아니다"입니다. 기판의 자연 시간척도와 입력의 시간척도 맞추기(기억이 사라지되 너무 빨리는 아니게), 환경 변화와 잡음에 대한 강건성, 응용에 충분한 계산 용량, 입력을 넣고 상태를 읽는 인터페이스. <span class="src">Stepney 2024, p.672</span> 특히 시간척도에 대해서는 이렇게 씁니다. 기판의 동역학이 입력보다 훨씬 빠르면 다음 입력이 오기 전에 이완해 이전 입력의 기억이 없고, 훨씬 느리면 다음 입력이 오기 전에 제대로 반응하지 못한다. <strong>두 시간척도가 비슷해야 한다.</strong> <span class="src">Stepney 2024, p.673</span> 이온 소자의 ms–s 시간척도가 자원이 되는지 짐이 되는지는 이 문장 하나에 달려 있습니다(D13, D21).</p>
+</section>
+<section id="물리로-옮긴-역사" class="level4">
+<h4 class="anchored" data-anchor-id="물리로-옮긴-역사">4-2. 물리로 옮긴 역사</h4>
+<p>Liang은 물리 구현의 연표를 짧게 줍니다. 2003년 <strong>물리 영역의 LSM</strong>이 XOR과 음성 인식 문제를 푸는 데 쓰여 RC와 물리계 사이의 간극을 이었다. <span class="src">Liang 2024, p.194</span> (XOR은 "두 입력이 서로 다를 때만 1"을 내는 작은 문제로, 선형 조합 한 번으로는 풀 수 없어 비선형성의 시험 문제로 흔히 쓰입니다.) 2011년에는 <strong>delay-coupled RC</strong>가 시연되었는데, 매 시간 단계마다 마스크 행렬을 곱해 입력 신호를 진동시키는 시간다중화를 쓰고, 그 신호를 비선형 물리 노드 하나에 넣어 복잡한 동역학을 만든다. (풀어 쓰면: 노드를 여러 개 만드는 대신 소자 하나를 쓰고, 입력 하나를 정해진 무늬(마스크)로 잘게 쪼개 차례로 넣어서, 시간 순서상의 여러 순간을 마치 여러 노드처럼 쓰는 방법입니다. 이렇게 시간을 나눠 한 장치를 여럿처럼 쓰는 것을 시간다중화라 합니다.) <span class="src">Liang 2024, p.194</span> 즉 노드가 하나뿐이어도 시간을 쪼개 여러 개처럼 쓸 수 있다는 것입니다(D1 그림 Liang Fig. 2의 첫 아키텍처). 그 뒤 완전 디지털 RC → 물리 reservoir + 디지털 readout → 2020년 무렵부터 출력층까지 아날로그로 가는 흐름(디지털은 값을 0·1의 숫자로 바꿔 다루는 것, 아날로그는 연속적인 전압·전류 그대로 다루는 것, <a href="../days/d03.html#b-digital-analog">D3 기초: 디지털과 아날로그</a>)은 D1에서 본 Liang Fig. 5의 이야기입니다. <span class="src">Liang 2024, p.201, Fig. 5</span></p>
+<figure class="fig figure"><img src="../assets/img/d07/fig4-timeline.svg" alt="RC 연표 모식도: 1990년대 BPTT 시대, 2001 ESN, 2002 LSM, 2003 물리 영역의 LSM, 2007 RC로 통합, 2011 delay-coupled RC, 2020 전후 출력층까지 아날로그, 2026 소자 ESN 논문. 녹색은 알고리즘, 파랑은 물리 구현" class="figure-img"><figcaption><b>그림 8.</b> 폴더의 두 논문이 정리한 것만 모은 연표. 가로 간격은 연도에 비례하지 않는다. 녹색은 알고리즘, 파랑은 물리 구현. 1990년대 항목은 배경이며 특정 논문을 가리키지 않는다 [미확인]. (Claude가 그림)</figcaption></figure>
+</section>
+<section id="년의-한-사례-트랜지스터로-만든-esn" class="level4">
+<h4 class="anchored" data-anchor-id="년의-한-사례-트랜지스터로-만든-esn">4-3. 2026년의 한 사례: 트랜지스터로 만든 ESN</h4>
+<p>폴더의 Zhong 2026(Nat. Commun.)은 ESN의 reservoir 층을 P3HT–ZnO 양극성 트랜지스터로 만든 논문입니다. 초록은 트랜지스터의 가변 저항 영역(전압에 따라 저항처럼 동작하는 구간)이 희소 행렬 연산(대부분이 0인 가중치 표로 곱해 더하기)을, 포화 영역(전류가 더 늘지 않고 평평해지는 구간)이 <strong>tanh 비슷한 비선형성</strong>(작은 입력엔 비례하다 큰 입력엔 ±1로 눌리는 S자 함수, <a href="#b-backprop" class="recall">0구간 그림 3</a>)을 제공하고, 소자의 동적 응답이 시간 속성을 더한다고 씁니다. <span class="src">Zhong 2026, p.1</span> Methods의 식은 3구간의 ESN 그대로입니다.</p>
+<p><span class="math display">\[
+U_t = U_{t-1}(1-\alpha) + \alpha\,\tanh\!\big(X_t W_{in} + U_{t-1} W_{res}\big), \qquad W_{out} = (U^{\mathsf T}U)^{-1} U^{\mathsf T} y_{label}
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: 소자로 만든 ESN도 1구간의 식과 3구간의 표를 그대로 따른다는 것을 확인하기 위해.</li>
+<li>기호: <span class="math inline">\(U_t\)</span>가 reservoir 상태(1구간의 <span class="math inline">\(h(t)\)</span>), <span class="math inline">\(X_t\)</span>가 입력, <span class="math inline">\(W_{in}\)</span>·<span class="math inline">\(W_{res}\)</span>가 고정된 입력·내부 가중치, <span class="math inline">\(\alpha\)</span>가 forgetting rate(잊는 비율, 0~1), <span class="math inline">\(y_{label}\)</span>이 정답. 곱하는 순서가 1구간(<span class="math inline">\(W\,h\)</span>)과 반대(<span class="math inline">\(X_t W_{in}\)</span>)인 것은 상태를 가로줄(행)로 적는 표기 차이일 뿐 계산 내용은 같다. 둘째 식의 <span class="math inline">\((U^{\mathsf T}U)^{-1}U^{\mathsf T}y\)</span>는 선형 회귀의 공식이다. <span class="math inline">\(U^{\mathsf T}\)</span>(전치)는 표의 행과 열을 바꿔 쓴 것, <span class="math inline">\((\cdot)^{-1}\)</span>(역행렬)은 행렬판 '나누기'이며, D8에서 손으로 푼다.</li>
+<li>단위: 모두 무차원(정규화한 값).</li>
+<li>계산 순서: 첫 식을 시간 순서로 돌려 상태를 모은다 → 모은 상태 표 <span class="math inline">\(U\)</span>와 정답으로 둘째 식을 한 번 계산한다.</li>
+<li>결과의 뜻: 학습하는 것은 <span class="math inline">\(W_{out}\)</span> 하나다. <span class="src">Zhong 2026, p.8</span> (첫 식의 <span class="math inline">\((1-\alpha)\)</span> 항은 Stepney 식 3의 leaky node와 같은 꼴이고 <span class="src">Stepney 2024, p.669</span>, 둘째 식은 D8에서 손으로 풀 ridge regression에서 <span class="math inline">\(\lambda = 0\)</span>인 경우입니다. leak(누설)이란 이렇게 지난 상태의 일부 <span class="math inline">\((1-\alpha)\)</span>만 남기고 새 계산값을 <span class="math inline">\(\alpha\)</span>만큼 섞어, 상태가 한 박자에 다 바뀌지 않고 천천히 따라가게 하는 것입니다. 예: <span class="math inline">\(\alpha = 0.3\)</span>이고 지난 상태가 0.762, 새 계산값이 0이면 다음 상태는 <span class="math inline">\(0.7 \times 0.762 + 0.3 \times 0 = 0.533\)</span>으로, 한 번에 0으로 떨어지지 않습니다. 정식 설명은 <a href="../days/d09.html#b-spectral-radius">D9 기초: leak rate</a>. ridge regression은 선형 회귀에 "가중치가 너무 커지지 않게" 하는 항 <span class="math inline">\(\lambda\)</span>를 더한 것이고, <span class="math inline">\(\lambda = 0\)</span>이면 보통의 선형 회귀입니다.)</li>
+</ul>
+<p>이 논문에서 챙길 것은 숫자가 아니라 구조입니다. <strong>학습하는 것은 여전히 <span class="math inline">\(W_{out}\)</span> 하나이고, 소자는 <span class="math inline">\(\tanh\)</span>와 시간 지연의 자리를 맡았다.</strong> 3구간 표의 세 번째 열 그대로입니다. 정확도 수치(MNIST 96.98% 등)는 초록에 있지만, 그것이 시간 과제인지와 기준선(소자 없이도 얻을 수 있는 성능, <a href="../days/d06.html#b-heldout-baseline">D6 기초</a>)이 무엇인지는 D15–D16의 질문이므로 오늘은 판단을 유보합니다.</p>
+<p><strong>읽는 법.</strong> 아래 원문 그림은 축이 두 벌입니다. 먼저 검정 곡선(소자의 전류–전압)을 아래·왼쪽 축으로 읽고, 그다음 빨간 곡선(<span class="math inline">\(\tanh\)</span>)을 위·오른쪽 축으로 읽으세요. 두 곡선이 겹쳐 보이도록 축을 따로 맞춘 그림이라는 것을 알고 보면, "얼마나 닮았나"가 아니라 "어디서 어긋나나"가 보입니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2026-fig1g.png" alt="Zhong 2026 Fig. 1g: 양극성 트랜지스터의 출력 특성(드레인 전류 I_ds 대 V_ds, −30~30 V)이 tanh 함수(위·오른쪽 축, −4~4)와 겹쳐 그려져 있다" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41467-026-70171-2" target="_blank"><i>Nat. Commun.</i> 2026, 17, 3321</a>, Fig. 1g, p.2. 볼 것: 아래·왼쪽 축은 소자(검정, $I_{ds}$ [µA] 대 $V_{ds}$ [V], −30~30 V), 위·오른쪽 축은 $\tanh$(빨강, −4~4 대 −1~1). 두 축의 눈금을 따로 맞춰 겹친 그림이므로 "소자 = tanh"가 아니라 "비슷한 S자 포화 꼴"을 보여 주는 그림이다. 양 끝의 포화와 가운데의 기울기가 어디서 어긋나는지 보라. 전압 범위가 ±30 V라는 점도 D17(비용)에서 다시 볼 숫자다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<div class="quiz" data-day="d07" data-set="4-check"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+PRC (physical reservoir computing)
+</dt>
+<dd>
+소프트웨어 reservoir 자리에 물리 동역학계(재료·소자·회로)를 넣은 RC. Liang은 전자식 구현을 eRC라고 부르고 네 아키텍처로 나눈다(D1 원문 그림 Liang Fig. 2).
+</dd>
+<dt>
+열린 동역학계
+</dt>
+<dd>
+바깥에서 입력을 받으며 시간에 따라 상태가 변하는 계. RNN 식 <span class="math inline">\(h(t+1)=f(\cdots)\)</span>가 가장 단순한 꼴. Stepney는 RNN을 그 특수한 경우로 본다 <span class="src">Stepney 2024, p.665</span>.
+</dd>
+<dt>
+소산 (dissipative)
+</dt>
+<dd>
+에너지가 빠져나가 외부 자극이 없으면 상태가 가라앉는 성질. Stepney는 "소산적이므로 fading memory를 가진다"고 쓴다 <span class="src">Stepney 2024, p.672</span>. 저항·마찰·확산이 있는 거의 모든 실제 계가 그렇다.
+</dd>
+<dt>
+시간다중화 (time multiplexing)
+</dt>
+<dd>
+노드 하나의 입력을 시간으로 잘게 쪼개(마스크) 여러 가상 노드처럼 쓰는 방법. 2011년 delay-coupled RC <span class="src">Liang 2024, p.194</span>.
+</dd>
+<dt>
+leaky node / forgetting rate
+</dt>
+<dd>
+상태의 일부 <span class="math inline">\((1-\alpha)\)</span>를 다음 단계로 그대로 넘기는 ESN 변형. 이산 '클록' 외에 시간척도를 하나 더 준다 <span class="src">Stepney 2024, p.669</span>. Zhong 2026의 <span class="math inline">\(\alpha\)</span>가 이것. D9·D12에서 leak rate로 돌려 본다.
+</dd>
+</dl>
+</div>
+<div class="think">
+<p>Stepney의 세 요구(측정 가능한 고차원 상태, 유사한 동역학, fading memory)를 내 소자에 대입해 보세요. 세 번째는 거의 자동으로 만족됩니다(소산적이므로). 첫 번째는 어떤가요? 이온 소자 하나에서 "서로 다른 상태"를 몇 개나 읽어 낼 수 있나요? 전극이 두 개뿐이라면 답은 "시간다중화로 늘린다"일 텐데, 그때 드는 비용은 무엇일까요? (D17)</p>
+</div>
+<div class="quiz" data-day="d07" data-set="4-end"></div>
+<div class="keypoints">
+<ul>
+<li>ESN이 물리 구현에 맞는 이유: 연결 구조에 둔감, 내부 접근 불필요, 열린 동역학계의 꼴. 재료는 뉴런을 닮을 필요가 없고 비선형·소산적이면 된다 <span class="src">Stepney 2024, p.670</span>.</li>
+<li>기판의 세 요구: 측정 가능한 고차원 상태, 유사한 동역학, fading memory <span class="src">Stepney 2024, p.672</span>. 단, 시간척도 정합·잡음·용량·인터페이스가 안 맞으면 "reservoir가 잘 안 된다" <span class="src">Stepney 2024, p.672–673</span>.</li>
+<li>역사: 2003 물리 LSM, 2011 delay-coupled(시간다중화) <span class="src">Liang 2024, p.194</span>, 2020 전후 아날로그 readout <span class="src">Liang 2024, p.201</span>.</li>
+<li>Zhong 2026: 소자가 tanh와 지연의 자리를 맡아도 학습하는 것은 <span class="math inline">\(W_{out}\)</span> 하나 <span class="src">Zhong 2026, p.8</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-neuromorphic" class="level3">
+<h3 class="anchored" data-anchor-id="ch-neuromorphic">5. 뉴로모픽과의 관계: 어디에 있고, 무엇을 약속하나</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 RC(알고리즘)와 PRC(구현)를 구분해 D1의 지도 위에 놓을 수 있고, "재료가 비선형이고 기억하면 계산이다"가 왜 틀린 문장인지 Stepney와 Liang의 조건으로 말할 수 있다.</p>
+</div>
+<section id="d1의-지도-위에서" class="level4">
+<h4 class="anchored" data-anchor-id="d1의-지도-위에서">5-1. D1의 지도 위에서</h4>
+<p>D1에서 뉴로모픽을 네 줄기로 나눴습니다. RC는 그 자체로는 <strong>알고리즘</strong>이고, 컴퓨터 안의 난수 행렬로 돌리면 뉴로모픽 하드웨어와 아무 관계가 없습니다. 뉴로모픽과 만나는 지점은 <strong>reservoir를 물리로 바꿀 때</strong>, 즉 (라) 물리 컴퓨팅입니다. Liang은 뉴로모픽 컴퓨팅을 "뇌의 작동 방식을 모방해 에너지 효율적인 계산 시스템을 만드는 것"으로 정의하고, 뇌의 신경 활동을 선형 readout으로 행동으로 해독할 수 있다는 생쥐 실험을 RC의 생물학적 근거로 듭니다(Fig. 1a). <span class="src">Liang 2024, p.193</span> 즉 Liang에게 RC와 뇌의 연결 고리는 '뉴런을 닮은 소자'가 아니라 <strong>'복잡한 순환 동역학 + 선형 읽기'라는 구조</strong>입니다. <span class="tag tag-interp">해석</span></p>
+<p>Stepney는 다른 틀로 같은 위치를 설명합니다. 물리 컴퓨팅에는 "기판 먼저"(재료를 보고 모형을 만든다), "계산 모형 먼저"(모형을 정하고 거기 맞는 재료를 찾는다), "공동 설계"의 세 출발점이 있는데, PRC는 <strong>계산 모형 먼저</strong>에 해당한다. <span class="src">Stepney 2024, p.667</span> 이 구분은 이온 소자 연구자에게 실용적입니다. 내 소자의 PPF(펄스 두 개를 연달아 주면 둘째 응답이 커지는 현상)·STP(짧게 유지되는 응답 증가) 곡선에서 출발해 "이것도 reservoir가 되지 않을까"라고 묻는 것은 기판 먼저이고, "ESN 모형이 요구하는 세 가지를 내 소자가 어느 정도 만족하나"라고 묻는 것은 계산 모형 먼저입니다. 후자가 D13–D18의 평가 틀입니다. <span class="tag tag-interp">해석</span></p>
+<figure class="fig figure"><img src="../assets/img/d07/fig5-position.svg" alt="뉴로모픽 우산 아래 네 줄기 중 (라) 물리 컴퓨팅 안에 RC(소프트웨어 알고리즘, 고정 reservoir + 학습 readout)와 PRC(재료·소자의 동역학이 reservoir)가 나란히 있고, 'reservoir를 물리로 교체'라는 화살표로 이어진다" class="figure-img"><figcaption><b>그림 9.</b> RC는 알고리즘, PRC는 그 reservoir를 물리로 바꾼 구현. D1의 분류 위에 놓은 모식도이며 분류는 겹친다. (Claude가 그림, 모식도)</figcaption></figure>
+</section>
+<section id="언제-계산한다고-말할-수-있나" class="level4">
+<h4 class="anchored" data-anchor-id="언제-계산한다고-말할-수-있나">5-2. 언제 '계산한다'고 말할 수 있나</h4>
+<p>Stepney 튜토리얼의 2절은 "물리계가 언제 계산을 하는가"를 묻습니다. 아무 바위나 어떤 함수든 계산한다고 우길 수 있고 우주 전체가 컴퓨터라고 할 수도 있지만, 그런 답은 소자를 만들려는 공학자에게 도움이 안 된다. 추상/표현 이론(AR theory)은 추상 모형의 계산 결과와 물리 진화의 결과(를 추상으로 되읽은 것)가 <strong>문제에 따라 정한 오차 <span class="math inline">\(\epsilon\)</span> 안에서 일치</strong>할 때, 그리고 그 일치가 <strong>잘 특성화된 영역</strong>에서 성립할 때 "계산한다"고 말합니다. <span class="src">Stepney 2024, p.666–667</span> 계산이 아닌 경우도 세 가지로 듭니다. 추상 모형과 소자를 잇는 표현이 아예 없는 경우, <strong>출력 표현 단계에서 다른 컴퓨터가 전체 계산을 사후에 다 해 버리는 경우</strong>(바위 컴퓨터), 그리고 <strong>우연히 맞은 결과만 고르고 나머지는 버리는 경우</strong>. <span class="src">Stepney 2024, p.667</span></p>
+<p>이 세 조건은 D6에서 세운 "계산의 최소 조건"과 같은 말입니다. 재료가 비선형이고 서서히 잊는다는 것은 reservoir의 <strong>재료</strong>가 될 수 있다는 뜻이지 계산이 됐다는 뜻이 아닙니다. 과제에 필요한 차이가 <strong>읽을 수 있는 상태들</strong>에 보존되고, 학습한 readout이 <strong>학습에 쓰지 않은 데이터</strong>에서 답을 구분하며, 그것이 <strong>단순한 기준선</strong>(예: 입력 지연 탭 + 선형 회귀, D12·D16)보다 나을 때 비로소 계산입니다. 둘째 실패 사례(readout이 일을 다 한다)는 D15의 질문 "readout이 일을 다 하고 있지는 않은지"와 정확히 같습니다. <span class="tag tag-interp">해석</span></p>
+<div class="myth">
+<p><strong>"재료가 비선형이고 기억하면 그 자체가 reservoir computing이다"</strong> — 그것은 재료가 될 수 있다는 조건이지 계산의 증명이 아닙니다. Stepney의 틀로 말하면 표현(어느 상태를 어떻게 읽나), <span class="math inline">\(\epsilon\)</span>-일치(새 데이터에서 성능), 특성화된 영역(어떤 입력 범위·시간척도에서 성립하나)이 있어야 합니다 <span class="src">Stepney 2024, p.666–667</span>. Liang의 틀로 말하면 MC·IPC 같은 과제 독립 지표(얼마나 오래전 입력을 얼마나 잘 복원하나 등을 재는 지표, D11)와 벤치마크, 그리고 디지털 RC와의 비교가 있어야 합니다 <span class="src">Liang 2024, p.200–202</span>. D1의 그림 5는 '재료'까지만 보여 준 것입니다.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="5-check"></div>
+</section>
+<section id="prc가-약속하는-것과-약속하지-않는-것" class="level4">
+<h4 class="anchored" data-anchor-id="prc가-약속하는-것과-약속하지-않는-것">5-3. PRC가 약속하는 것과 약속하지 않는 것</h4>
+<p>Liang은 기존 eRC(전자 소자·회로로 만든 물리 RC)들을 비교해 네 가지 사실을 꼽습니다. (1) 다양한 물리 노드로 기계학습 과제와 시간 신호 처리를 물리 영역에서 할 수 있다. (2) 정확도는 수용할 만하지만 RC 알고리즘의 본성상 최첨단 기울기 기반 DNN보다 낫지 않다. (3) 하드웨어 잡음 때문에 <strong>비슷한 구성이면 소프트웨어 RC가 대개 eRC보다 낫다</strong>(하드웨어의 풍부한 동역학을 활용한 예외는 있다). (4) eRC의 장점은 정확도가 아니라 <strong>시스템 복잡도, 전력 소모</strong>(그리고 학습 비용·속도)에 있다. <span class="src">Liang 2024, p.201</span> 그리고 전망에서 못 박습니다. <strong>디지털 RC보다 자원을 더 쓰는 PRC는 의미가 없다.</strong> <span class="src">Liang 2024, p.202</span></p>
+<p>그러니 PRC가 약속하는 것은 "더 똑똑한 계산"이 아니라 "시계열 전처리를 재료의 물리로 떠넘겨 시스템 전체의 비용을 줄이는 것"이고, 그 약속은 <strong>시스템 전체로 셌을 때</strong> 디지털보다 싸다는 조건에서만 유효합니다. 소자 하나의 에너지가 아니라 입력 인코딩·측정·ADC(아날로그 값을 숫자로 바꾸는 회로)·readout까지 센 비용(D17)이 그 조건을 판정합니다. <span class="tag tag-interp">해석</span></p>
+<div class="think">
+<p>"내 이온 소자로 RC를 한다"는 문장에서 '한다'의 주어는 누구인가요? 소자인가요, readout을 학습시키는 컴퓨터인가요, 둘을 합친 시스템인가요? 주어를 바꿔 가며 세 문장을 쓰고, 각 문장이 참이 되려면 무엇을 보여야 하는지 한 줄씩 적어 보세요.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="5-end"></div>
+<div class="keypoints">
+<ul>
+<li>RC는 알고리즘, PRC는 reservoir를 물리로 바꾼 구현. 뉴로모픽과 만나는 곳은 D1의 (라)이며, Liang이 보는 뇌와의 고리는 '순환 동역학 + 선형 읽기' 구조다 <span class="src">Liang 2024, p.193</span> <span class="tag tag-interp">해석</span>.</li>
+<li>Stepney의 '계산' 조건: 표현, <span class="math inline">\(\epsilon\)</span>-일치, 특성화된 영역. 실패 사례: 표현 없음, 출력 단계에서 계산을 다 함, 맞은 것만 고름 <span class="src">Stepney 2024, p.666–667</span>.</li>
+<li>비선형 + 서서히 잊음은 재료의 조건이지 계산의 증명이 아니다. 읽을 수 있는 상태, 학습한 readout, 새 데이터, 기준선이 있어야 한다.</li>
+<li>PRC의 장점은 정확도가 아니라 복잡도·전력이고, 디지털 RC보다 자원을 더 쓰면 무의미 <span class="src">Liang 2024, p.201–202</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-objection" class="level3">
+<h3 class="anchored" data-anchor-id="ch-objection">6. 오늘의 반론</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "RC는 낡은 우회로"라는 반론에 대해, 소자 RC의 근거가 '똑똑함'이 아니라 무엇인지와 그 근거가 성립하려면 무엇을 보여야 하는지를 적을 수 있다.</p>
+</div>
+<p>가장 강한 반론은 이것입니다. <strong>"RC는 2001년의 우회로다. 지금은 LSTM·Transformer가 시계열을 더 잘 다루고 GPU로 학습도 된다. 소자 RC는 낡은 알고리즘을 재료로 다시 만드는 일 아닌가?"</strong> (LSTM과 Transformer는 RNN 이후에 나온 시계열용 신경망들로, 내부 가중치를 모두 학습시키되 소실·폭주를 구조로 완화한 설계입니다. 폴더 논문에는 없으므로 <span class="tag tag-unverified">미확인</span>이며, 오늘은 "내부를 학습시키는 쪽의 최신 대안"으로만 읽으면 됩니다.)</p>
+<p>생각할 재료는 있습니다. Liang도 RC가 DNN보다 표현력이 낮고 벤치마크에서 최첨단이 아니라고 인정합니다. <span class="src">Liang 2024, p.194, 202</span> 그런데 소자 RC의 근거는 "RC가 더 똑똑해서"가 아니라 "내부를 학습시키지 않아도 되므로 <strong>재료를 그대로 쓸 수 있고</strong>, 그래서 센서 옆에서 시계열 전처리를 싸게 할 수 있다"입니다. <span class="src">Stepney 2024, p.669–670</span> <span class="tag tag-interp">해석</span> 이 반론에 답하려면 "싸다"를 시스템 전체로 보여야 하고(D17), 그 응용이 고정된 reservoir + 선형 readout의 표현력으로 충분한 문제여야 합니다(D5의 '적합한 문제'; Liang은 그 규모가 대개 2,000 뉴런 미만에서 포화한다고 보지만 과제와 구조에 따라 다르다). 답은 내 몫입니다.</p>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>여기까지 읽었으면 자료를 덮고 아래 표를 <strong>먼저 머릿속으로 채운 뒤</strong> 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+한 장 요약 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>학습이란? 기울기란?</td>
+<td>손실(오차²)이 줄도록 가중치를 고치기. 기울기는 "조금 바꾸면 얼마나 변하나"의 비율이고, 그 반대쪽으로 보폭만큼 옮긴다</td>
+<td>0구간 숫자 예(입력 2, 정답 5, <span class="math inline">\(w\)</span> 1.0 → 1.6, 손실 9 → 3.24). 일반 교과 내용</td>
+</tr>
+<tr class="even">
+<td>역전파에서 왜 곱하나?</td>
+<td>앞쪽 가중치의 변화는 뒤쪽 통로를 지나서야 손실에 닿으므로, 통로마다의 배율을 곱한다</td>
+<td>두 단계 사슬 <span class="math inline">\(2\times0.5\times(-8) = -8\)</span></td>
+</tr>
+<tr class="odd">
+<td>RNN이란?</td>
+<td>상태를 다음 단계로 넘겨 시계열의 '방금 전까지'를 담는 신경망. 같은 <span class="math inline">\(W\)</span>를 매 단계 반복</td>
+<td><span class="src">Stepney 2024, p.665</span></td>
+</tr>
+<tr class="even">
+<td>왜 학습이 어렵나?</td>
+<td>시간을 거슬러 기울기를 모아야 하고(BPTT, 비쌈), 통로 배율이 매번 같은 <span class="math inline">\(W\)</span>라 같은 인자가 <span class="math inline">\(k\)</span>번 곱해져 소실·폭주하며, 물리 소자는 내부에 손을 댈 수 없다</td>
+<td><span class="src">Stepney 2024, p.665, 669</span> <span class="src">Liang 2024, p.194</span>; 소실·폭주의 원 출처 <span class="tag tag-unverified">미확인</span></td>
+</tr>
+<tr class="odd">
+<td>ESN·LSM은 무엇을 바꿨나?</td>
+<td>내부 <span class="math inline">\(W\)</span>를 난수로 고정하고 선형 readout만 한 번에 학습</td>
+<td><span class="src">Liang 2024, p.193</span> <span class="src">Stepney 2024, p.665</span></td>
+</tr>
+<tr class="even">
+<td>대가는?</td>
+<td>DNN보다 낮은 표현력. 성능이 "대개 2,000 뉴런 미만"에서 포화한다는 것은 Liang 리뷰의 일반적 관찰이며 RC 전체의 보편 한계가 아님</td>
+<td><span class="src">Liang 2024, p.194, 202</span>; 규제를 적절히 하면 클수록 대개 좋다는 지침 <span class="src">Lukoševičius 2012, 3.2.1절</span></td>
+</tr>
+<tr class="odd">
+<td>왜 물리로 옮기기 좋은가?</td>
+<td>블랙박스라 내부 접근·미분 모형이 필요 없고, 재료는 비선형·소산적이면 된다</td>
+<td><span class="src">Stepney 2024, p.669–670</span>; 시간척도 정합 조건 <span class="src">Stepney 2024, p.673</span></td>
+</tr>
+<tr class="even">
+<td>뉴로모픽과의 관계</td>
+<td>RC는 알고리즘, PRC는 (라) 물리 컴퓨팅의 구현. 뇌와의 고리는 '순환 동역학 + 선형 읽기'</td>
+<td><span class="src">Liang 2024, p.193</span> <span class="tag tag-interp">해석</span></td>
+</tr>
+<tr class="odd">
+<td>오늘의 숫자</td>
+<td>기울기 −12, 한 걸음 뒤 손실 9 → 3.24 · <span class="math inline">\(0.5^{20}\approx 10^{-6}\)</span>, <span class="math inline">\(1.5^{20}\approx 3325\)</span> · 1차원 예시 0.762 → 0.363 → 0.180 · Liang 리뷰가 관찰한 RC 성능 포화 규모 "대개 2,000 뉴런 미만"(과제 조건 없음)</td>
+<td>앞 셋은 계산, 뒤는 <span class="src">Liang 2024, p.202</span></td>
+</tr>
+<tr class="even">
+<td>사전 테스트·먼저 만들어 보기와 달라질 점</td>
+<td>"비선형 + 기억 = reservoir computing"이 아니라 "재료의 조건"일 뿐. RC로 계산했다는 증명은 표현·새 데이터 성능·기준선</td>
+<td><span class="src">Stepney 2024, p.666–667</span></td>
+</tr>
+<tr class="odd">
+<td>오늘의 반론</td>
+<td>RC는 낡은 우회로이고 LSTM·Transformer가 낫다 — 소자 RC의 근거는 '똑똑함'이 아니라 '재료를 그대로 쓸 수 있음 + 시스템 비용'</td>
+<td>내 답에서 응답</td>
+</tr>
+<tr class="even">
+<td>아직 모르는 것</td>
+<td>왜 난수 reservoir가 쓸모 있는가(D8), 언제 기억이 너무 길어지는가(D9), 비선형이 꼭 필요한 이유(D10)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="quiz" data-day="d07" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<p>내 답을 쓸 때 아래 다섯 질문에 답했는지 확인하세요. 모범 문장은 주지 않습니다.</p>
+<ol type="1">
+<li>RNN이 시계열에 필요한 이유와, 학습이 어려운 이유를 <strong>구조</strong>(같은 <span class="math inline">\(W\)</span>의 반복 → 같은 배율의 거듭제곱)로 설명했나? 숫자 하나(예: <span class="math inline">\(0.5^{20}\)</span>)를 넣었나? "기울기"를 쓸 때 그 뜻("조금 바꾸면 얼마나 변하나")을 내 말로 적었나?</li>
+<li>ESN과 LSM이 무엇을 <strong>포기</strong>해서 그 어려움을 피했는지(무엇이 고정이고 무엇이 학습인지), 그리고 그 대가가 무엇인지 둘 다 말했나?</li>
+<li>"ESN 모형이 물리 구현에 맞는 이유"를 Stepney의 조건으로 말했나? 그 조건이 내 소자에서 깨질 수 있는 지점(시간척도, 읽을 수 있는 상태 수)을 하나라도 적었나?</li>
+<li>RC(알고리즘)와 PRC(구현)를 구분했고, PRC가 D1의 어느 줄기인지 말했나?</li>
+<li>"재료가 비선형이고 기억하면 계산이다"를 쓰지 않았나? 대신 계산이라고 부를 조건(읽을 수 있는 상태, 학습한 readout, 새 데이터, 기준선)을 적었나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> Stepney의 시간척도 정합 조건(기판의 자연 시간척도 ≈ 입력 시간척도 <span class="src">Stepney 2024, p.673</span>) 대 내 이온 소자의 ms–s 이완. 어떤 입력(생체 신호? 촉각? 음성?)의 시간척도가 여기에 맞는지가 응용 요구 사양이 된다(D13·D21). / Liang의 조건 "디지털 RC보다 자원을 더 쓰면 무의미" <span class="src">Liang 2024, p.202</span>를 시스템 비용 항목으로(D17).</li>
+<li><strong>아직 모르는 것:</strong> 난수 reservoir가 쓸모 있는 수학적 이유(D8). / 내 소자 하나에서 "읽을 수 있는 서로 다른 상태"가 몇 개인가(2단자면 시간다중화의 비용은?). / 소실·폭주의 원 출처와 정확한 조건 <span class="tag tag-unverified">미확인</span>.</li>
+<li><strong>용어집:</strong> 모델, 가중치, 손실, 기울기, 경사 하강, 학습률, 연쇄 법칙, 역전파, RNN, 피드포워드, BPTT, 기울기 소실·폭주, reservoir, readout, 선형 회귀, ESN, LSM, RC, PRC, 소산, 시간다중화, leaky node(forgetting rate).</li>
+<li><strong>접는 기준 후보:</strong> "내 소자로 만든 PRC가 같은 과제에서 디지털 RC(또는 지연 탭 + 선형 회귀)보다 시스템 전체 비용에서 싸지 않다"가 확인되면.</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Liang 2024, <em>Nat. Electron.</em> 7, 193–206. p.193(ESN·LSM 기원, 호수 비유, 뇌와의 고리), p.194(기울기 문제 회피, 표현력의 대가, 식 1–2, 2003·2011), p.201(네 가지 사실), p.202(자원 조건, 2,000 뉴런).</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 일부 대조함)</strong></p>
+<ul>
+<li>Stepney 2024, <em>Natural Computing</em> 23, 665–685. "Physical reservoir computing: a tutorial". 2절(언제 계산인가), 3.2절(ESN 식과 학습), 3.3.5절(물리 구현 적합성), 4.1–4.3절(기판 조건·시간척도). D8–D11의 뼈대가 되는 튜토리얼이니 21쪽 중 이 부분(약 8쪽)은 직접 읽을 가치가 있습니다.</li>
+<li>Zhong 2026, <em>Nat. Commun.</em> 17, 3321. 트랜지스터 ESN. Fig. 1a·g와 Methods 식 (1)(2)만 오늘 봤습니다. 과제·기준선 평가는 D15–D16에서.</li>
+</ul>
+<p><strong>폴더 밖 (서지는 Crossref로 확인, 내용은 <span class="tag tag-unverified">미확인</span>)</strong></p>
+<ul>
+<li>Jaeger 2001, GMD Report 148. ESN 원 보고서 (DOI 없음).</li>
+<li>Maass, Natschläger, Markram 2002, <em>Neural Comput.</em> 14, 2531–2560. LSM 원 논문.</li>
+<li>Verstraeten et al. 2007, <em>Neural Netw.</em> 20, 391–403. ESN·LSM의 통합.</li>
+<li>Pascanu, Mikolov, Bengio 2013, <em>ICML</em> (PMLR 28(3), 1310–1318; <a href="https://arxiv.org/abs/1211.5063">arXiv:1211.5063</a>). 기울기 소실·폭주와 행렬의 가장 큰 고유값의 관계. 2.1절만 Claude가 공개본에서 대조했고, 나머지는 <span class="tag tag-unverified">미확인</span>입니다.</li>
+<li>Lukoševičius 2012, LNCS 7700, 659–686 (<a href="https://doi.org/10.1007/978-3-642-35289-8_36">doi:10.1007/978-3-642-35289-8_36</a>). ESN 실무 지침. Stepney와 Liang이 모두 인용. D8·D12에서 다시. 3.2.1절(reservoir 크기)만 저자 공개본(PracticalESN.pdf)에서 Claude가 대조했고, 나머지 내용은 <span class="tag tag-unverified">미확인</span>입니다.</li>
+<li>0구간의 학습·기울기·역전파는 일반 교과 내용으로, 폴더 밖의 어떤 교재(예: 3Blue1Brown의 신경망 영상 시리즈)로도 보충할 수 있습니다. 내용은 <span class="tag tag-unverified">미확인</span>이며, 본문 설명만으로 오늘 분량은 충분합니다.</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d07">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 장의 앵커.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "'오늘 값 = 0.5 × 어제 값 + 오늘 입력'이라는 규칙에서, 월요일에만 입력 1이 있고 나머지 날은 0일 때 월~금의 값을 손으로 계산해 막대그래프로 그려 보세요. 0.5 대신 1.5를 넣은 그래프도 옆에 그리고, 이 숫자(0.5 또는 1.5)를 데이터에 맞게 고쳐 가며 '학습'시키려면 무엇이 어려울지 한 줄로 적어 보세요.", "items": [{"id": "d07-p01", "ref": "#ch-basics", "type": "mc", "q": "신경망을 '학습'시킨다는 것은 무엇을 하는 일인가?", "options": ["입력 데이터를 전부 외워 저장하는 일", "출력과 정답의 차이(오차)가 줄도록, 입력에 곱하는 숫자(가중치)를 데이터에 맞춰 조금씩 고치는 일", "회로를 새로 설계해 만드는 일", "입력 데이터를 더 많이 모으는 일"], "a": 1, "why": "모델은 입력 × 가중치로 출력을 내고, 학습은 손실(오차²)이 줄어들도록 가중치를 데이터로 고치는 일입니다(0구간). 학습되는 것은 데이터가 아니라 가중치라는 점이 핵심입니다."}, {"id": "d07-p02", "ref": "#ch-basics", "type": "ox", "q": "오차를 줄이려고 가중치를 기울기 반대 방향으로 옮길 때, 한 번에 많이 옮길수록(보폭이 클수록) 오차는 언제나 더 빨리 줄어든다.", "a": false, "why": "보폭이 너무 크면 골짜기 바닥을 지나쳐 반대편으로 튀어 오차가 오히려 커집니다. 예시에서 보폭 0.05면 손실이 9 → 3.24로 줄지만, 0.5면 9 → 81로 나빠집니다(0구간)."}, {"id": "d07-p03", "ref": "#ch-rnn", "type": "mc", "q": "시간 순서로 들어오는 신호를 다루는 순환 신경망(RNN)이 보통 신경망과 달리 다음 시간 단계로 넘겨주는 것은?", "options": ["정답 값", "학습 보폭", "내부 상태 — 방금 전까지의 입력이 남긴 흔적", "아무것도 넘기지 않는다"], "a": 2, "why": "RNN은 상태 h(t)를 다음 단계로 넘겨 '방금 전까지'를 담고, 같은 가중치를 매 단계 다시 씁니다. 입력 1 뒤에 0만 와도 0.762 → 0.363 → 0.180처럼 흔적이 줄어들며 남습니다(1구간)."}, {"id": "d07-p04", "ref": "#ch-bptt", "type": "mc", "q": "시간을 거슬러 학습 신호를 한 단계씩 전할 때마다 같은 배율 0.5가 곱해진다면, 20단계 전의 가중치에 도착하는 학습 신호는 처음의 대략 몇 배인가?", "options": ["절반(0.5배)", "10분의 1", "약 100만분의 1(10⁻⁶)", "줄지 않는다(1배)"], "a": 2, "why": "같은 인자가 단계마다 곱해지므로 0.5²⁰ ≈ 10⁻⁶입니다(기울기 소실). 배율이 1.5면 1.5²⁰ ≈ 3,325로 폭주합니다. '같은 숫자를 반복해 곱하는 구조'가 순환 신경망 학습을 어렵게 합니다(2구간)."}, {"id": "d07-p05", "ref": "#ch-bptt", "type": "ox", "q": "순환 신경망 학습이 어려운 근본 이유는 컴퓨터가 느리기 때문이므로, 충분히 빠른 컴퓨터를 쓰면 해결된다.", "a": false, "why": "더 빠른 컴퓨터로도 0.5²⁰은 10⁻⁶입니다. 소실·폭주는 같은 인자를 반복해 곱하는 구조에서 오고, 물리 소자에서는 '내부에 손을 댈 수 없고 미분 가능한 모형이 없다'는 벽이 하나 더 있습니다(2구간)."}, {"id": "d07-p06", "ref": "#ch-esn-lsm", "type": "mc", "q": "순환 신경망의 내부 연결은 무작위로 정한 뒤 고정하고, 마지막 출력 연결만 학습하는 방식(reservoir computing)이 얻는 것은?", "options": ["깊은 신경망보다 높은 표현력", "학습 신호의 소실·폭주를 피하고, 적은 데이터로 빠르게 학습한다", "내부 연결도 학습 중에 저절로 최적화된다", "어떤 과제에서나 깊은 신경망보다 정확하다"], "a": 1, "why": "출력층 하나만 선형 회귀로 한 번에 구하므로 시간을 거슬러 기울기를 전할 일이 없습니다. 대신 표현력은 깊은 신경망보다 낮고, Liang 2024는 RC 성능이 대개 2,000 뉴런 미만의 비교적 작은 규모에서 포화한다고 씁니다. 이것은 과제 조건 없이 적힌 리뷰의 관찰이라 보편 한계로 읽지 않습니다(3구간)."}, {"id": "d07-p07", "ref": "#ch-prc", "type": "ox", "q": "물질 덩어리를 reservoir(고정된 내부)로 쓰는 데에, 그 물질 속 구조가 뇌의 뉴런을 닮을 필요는 없다.", "a": true, "why": "재료는 뉴런을 닮을 필요가 없고, 비선형이고 소산적이면(서서히 잊으면) 됩니다. 대신 측정할 수 있는 여러 상태, 입력과 맞는 시간척도 같은 요구를 만족해야 합니다(4구간)."}, {"id": "d07-p08", "ref": "#ch-neuromorphic", "type": "mc", "q": "reservoir computing과 뉴로모픽 컴퓨팅의 관계로 맞는 것은?", "options": ["둘은 같은 말이다", "reservoir computing은 특정 회사의 칩 이름이다", "둘은 서로 아무 관계가 없다", "reservoir computing은 계산 방법(알고리즘)이고, 그 고정된 내부를 물질로 바꾼 물리 RC가 뉴로모픽의 '소재 기반 물리 컴퓨팅' 줄기와 만난다"], "a": 3, "why": "RC는 알고리즘이고, reservoir를 물리로 바꾼 구현(PRC)이 뉴로모픽 지도의 물리 컴퓨팅 줄기에 놓입니다. 재료가 비선형이고 기억한다는 것은 재료의 조건일 뿐 계산의 증명은 아닙니다(5구간)."}]}, "0-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 기울기 한 걸음", "items": [{"id": "d07-q27", "type": "short", "q": "[풀이 예시 확인] 본문 모델(입력 2, 정답 5)에서 $w=1.0$, 학습률 0.05로 한 걸음 가면 $w=1.6$이었다. 그때의 손실 $L$은? (숫자만)", "a": ["3.24", "3.2", "약 3.24", "약3.24"], "why": "$y = 1.6\\times2 = 3.2$, 오차 $3.2-5 = -1.8$, 제곱하면 3.24. 9가 나왔다면 걸음 전의 손실을 쓴 것이고, 1.8이 나왔다면 제곱을 빠뜨린 것 — 손실은 오차의 제곱이다(기초 계단: 학습).", "ref": "#ch-basics"}, {"id": "d07-q28", "type": "short", "q": "[일부 채우기] 같은 모델, $w=1.0$, 학습률 0.1. 새 $w = 1.0 - 0.1\\times(▢) = ?$ 빈칸의 기울기와 새 $w$를 '빈칸,답' 꼴로 (예: -3,1.3)", "a": ["-12,2.2", "-12, 2.2", "−12,2.2", "−12, 2.2", "(-12,2.2)", "(-12, 2.2)"], "why": "기울기는 $2\\times(2-5)\\times2 = -12$, 새 $w = 1.0 + 1.2 = 2.2$. 빈칸에 +12를 넣어 $w = -0.2$가 됐다면 '기울기 부호 = 옮길 방향'으로 헷갈린 것 — 옮기는 방향은 기울기의 반대쪽이다(기초 계단: 기울기, 그림 1).", "ref": "#ch-basics"}, {"id": "d07-q29", "type": "short", "q": "[혼자 풀기] 새 데이터: 입력 1, 정답 3. $w=1.0$, 학습률 0.1로 한 걸음 간 뒤의 $w$는? (숫자만)", "a": ["1.4", "1.40"], "why": "$y = 1$, 오차 $-2$, 기울기 $2\\times(-2)\\times1 = -4$, 새 $w = 1.0 - 0.1\\times(-4) = 1.4$. 0.6이 나왔다면 기울기를 뺀 것이 아니라 더한 것(부호), 2.2가 나왔다면 본문의 입력 2를 그대로 쓴 것. 공식 $dL/dw = 2\\times(y-\\text{정답})\\times u$의 $u$가 1로 바뀐 것을 확인(기초 계단: 기울기).", "ref": "#ch-basics"}]}, "0-end": {"kind": "end", "title": "0장 마무리 퀴즈", "items": [{"id": "d07-q31", "type": "mc", "q": "가중치 다섯 개가 일렬로 이어진 사슬(입력 → … → 출력)에서, 맨 앞 가중치의 기울기에는 '통로의 배율'이 몇 번 곱해지나?", "options": ["0번", "1번", "4번", "5번"], "a": 2, "why": "맨 앞 가중치와 손실 사이에 가중치 네 개가 끼어 있으므로 배율 네 개가 곱해진다(두 단계 사슬에서는 한 개, $w_2 = 0.5$). 5번이라 답했다면 자기 자리의 배율($\\partial h/\\partial w_1 = u$)까지 통로로 센 것. 배율이 0.5 안팎이면 $0.5^4$ — 이것이 2구간에서 $0.5^k$가 되는 구조다(기초 계단: 역전파, 그림 2).", "ref": "#ch-basics"}]}, "1-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d07-q01", "type": "short", "q": "1차원 예시 $h(t+1)=\\tanh(0.5\\,h(t)+u(t))$에서 $h(1)=0.762$, $u(1)=0$일 때 $h(2)$는? (소수 둘째 자리까지)", "a": ["0.36", "0.363", "0.3634", "0.364", "약 0.36", "약0.36"], "why": "$\\tanh(0.5\\times0.762)=\\tanh(0.381)\\approx0.363$. 입력이 0이어도 앞 상태의 절반이 남아 비선형 함수를 거친다. 줄어드는 속도를 정하는 것은 0.5다.", "ref": "#ch-rnn"}, {"id": "d07-q02", "type": "ox", "q": "RNN은 시간 단계마다 서로 다른 가중치 행렬을 쓴다.", "a": false, "why": "같은 $W$를 매 단계 다시 쓴다(가중치 공유). 그래서 시간으로 펼치면 같은 상자가 줄지어 있고, 이것이 2절의 '같은 인자가 k번 곱해진다'의 원인이다.", "ref": "#ch-rnn"}]}, "1-end": {"kind": "end", "title": "1장 마무리 퀴즈", "items": [{"id": "d07-q03", "type": "mc", "q": "피드포워드 신경망이 시계열 처리에 부족한 가장 직접적인 이유는?", "options": ["가중치 수가 적다", "'방금 전까지'를 담는 내부 상태가 없다", "비선형 함수를 쓰지 않는다", "학습 알고리즘이 없다"], "a": 1, "why": "피드포워드는 입력 하나에 출력 하나이고 상태를 다음 단계로 넘기지 않는다. RNN은 상태 $h(t)$로 이력을 담는다 [Stepney 2024, p.665]. 가중치 수나 비선형성, 학습 알고리즘(역전파)은 부족하지 않다.", "ref": "#ch-rnn"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 기울기", "items": [{"id": "d07-q04", "type": "short", "q": "인자 0.5가 10번 곱해지면 약 얼마인가? (소수 또는 분수)", "a": ["0.001", "0.00098", "0.0010", "9.8e-4", "1e-3", "10^-3", "1/1000", "1/1024", "약 0.001", "약0.001", "천분의 1", "천분의1"], "why": "$0.5^{10}=1/1024\\approx0.001$. 20번이면 약 $10^{-6}$. 거슬러 올라갈수록 학습 신호가 사라지는 것이 기울기 소실이다(그림 6).", "ref": "#ch-bptt"}, {"id": "d07-q05", "type": "mc", "q": "내부 가중치를 학습시키는 방식이 물리 소자 reservoir에서 특히 어려운 이유로 자료가 든 것은?", "options": ["소자가 너무 빠르다", "내부 가중치에 접근해 바꿔야 하고, 미분 가능한 소자 모형이 필요하다", "소자는 선형이라 학습할 것이 없다", "물리 소자는 기울기 폭주가 더 심하다"], "a": 1, "why": "Stepney 2024 p.669: ESN은 내부 매개변수를 바꿀 필요도, 소자의 미분 가능한 모형도 필요 없다. 거꾸로 말하면 내부를 학습시키려면 둘 다 필요하다. 나머지 보기는 자료에 근거가 없다.", "ref": "#ch-bptt"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d07-q06", "type": "ox", "q": "ESN은 BPTT를 더 빠르게 계산하는 알고리즘이다.", "a": false, "why": "ESN은 BPTT를 빠르게 하는 것이 아니라 내부 가중치를 학습시키지 않음으로써 BPTT 자체를 하지 않는다. 출력 가중치만 한 번의 선형 회귀로 구한다 [Stepney 2024, p.665, 669].", "ref": "#ch-bptt"}, {"id": "d07-q07", "type": "mc", "q": "그림 6에서 인자 1.0을 '특수한 경우'라고 한 이유로 가장 적절한 것은?", "options": ["인자 1.0에서는 기울기가 항상 0이다", "정확히 1을 유지해야 소실도 폭주도 없는데, 학습 중 가중치가 바뀌면 유지되지 않는다", "인자 1.0이면 RNN이 피드포워드가 된다", "인자 1.0은 tanh의 최대 기울기다"], "a": 1, "why": "같은 인자를 k번 곱하는 구조에서 1보다 조금만 작아도 k가 크면 0으로, 조금만 커도 무한대로 간다. 1.0은 경계이지 안정된 해법이 아니다(자료의 해석).", "ref": "#ch-bptt"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · ESN", "items": [{"id": "d07-q08", "type": "mc", "q": "ESN에서 학습하는 것은?", "options": ["입력 가중치 W_in만", "내부 가중치 W만", "출력 가중치 W_out만", "W_in, W, W_out 모두"], "a": 2, "why": "입력·내부 가중치는 난수로 고르고 고정하며, 출력 가중치만 반복 없는 한 번의 알고리즘(선형 회귀)으로 학습한다 [Stepney 2024, p.665].", "ref": "#ch-esn-lsm"}, {"id": "d07-q33", "ref": "#ch-esn-lsm", "type": "mc", "q": "ESN(2001)과 LSM(2002)이 'reservoir computing'이라는 하나의 이름으로 묶인 이유는?", "options": ["둘 다 스파이크를 쓴다", "출발(실수값·이산 시간 vs 스파이크·연속 시간)은 달랐지만, '내부는 고정하고 출력층만 선형으로 학습'이라는 원리가 같았다", "같은 연구자가 만들었다", "둘 다 처음부터 물리 소자로 만들었다"], "a": 1, "why": "Liang 2024 p.193: 유사한 원리를 바탕으로 RC로 통합. '스파이크'를 골랐다면 ESN은 실수값 뉴런이라는 점을 3구간에서 다시."}, {"id": "d07-q32", "type": "mc", "q": "물리 RC(PRC)에서 '내부 가중치 $W$'의 자리를 맡는 것과 그 학습 여부로 맞는 것은?", "options": ["컴퓨터 안의 난수 행렬이며 학습하지 않는다", "재료·소자의 물리 동역학이며 학습하지 않는다", "재료·소자의 물리 동역학이며 BPTT로 학습한다", "readout과 함께 선형 회귀로 학습한다"], "a": 1, "why": "3-1의 표 세 번째 열: 내부는 물리 동역학이 대신하고 만든 뒤에는 손대지 않는다. 학습하는 것은 $W_{out}$ 하나(선형 회귀). '난수 행렬'은 소프트웨어 ESN의 경우다. 내부가 고정이라 학습이 내부 값을 알 필요가 없다는 점이 재료를 reservoir로 쓸 수 있는 이유다. BPTT로 학습한다고 답했다면 2장의 세 번째 벽(내부 접근·미분 모형)을 다시.", "ref": "#ch-esn-lsm"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d07-q10", "type": "mc", "q": "Liang 2024가 적은 RC의 대가(단점)는?", "options": ["학습에 샘플이 매우 많이 필요하다", "기울기 폭주가 더 심하다", "목표 함수를 근사하는 표현력이 DNN보다 낮다", "시간 신호 처리에 쓸 수 없다"], "a": 2, "why": "p.194: RC는 목표 함수 근사에서 DNN보다 덜 표현적이고, 대신 학습·동역학계 근사·시간 신호 처리에 장점이 있다. 적은 샘플로 빠른 학습은 오히려 장점이다.", "ref": "#ch-esn-lsm"}, {"id": "d07-q11", "type": "ox", "q": "Liang 2024에 따르면 RC는 적은 샘플로도 빠르게 학습할 수 있다.", "a": true, "why": "p.194 (ref. 17). 출력층만 선형 회귀로 학습하므로. 다만 '적은 샘플'이 몇 개인지는 과제와 reservoir 크기에 따라 다르며 자료가 수치를 주지는 않는다.", "ref": "#ch-esn-lsm"}, {"id": "d07-q35", "type": "mc", "q": "Liang 2024는 RC의 성능이 비교적 작은 규모(대개 2,000 뉴런 미만)에서 포화한다고 쓴다. 그 이유로 Liang이 든 것은?", "options": ["뉴런이 많으면 컴퓨터 메모리가 모자라서", "내부 연결이 난수로 정해진 채 고정되어, 뉴런마다 입출력 범위를 데이터에 맞게 다듬지 못하므로", "선형 회귀는 뉴런 2,000개 이상을 계산할 수 없어서", "뉴런이 많을수록 기울기 소실이 심해져서"], "a": 1, "why": "p.202: 기울기로 학습하는 DNN은 앞쪽 가중치와 치우침으로 뉴런마다 작동 범위를 다듬지만, RC는 연결이 난수로 고정되어 있어 그러지 못한다. 고정의 대가(3구간)다. 기울기 소실은 RC가 오히려 피한 문제이고, 선형 회귀는 규모 제한이 아니다. D12에서 N = 50/200/800을 직접 돌려 규모에 따른 경향을 본다. '2,000'은 그 문장에 과제 조건·근거 문헌이 붙지 않은 리뷰의 관찰이고, 정규화하면 클수록 대개 좋다는 ESN 지침(Lukoševičius 2012)도 있으므로 RC 전체의 보편 한계로 읽지 않는다.", "ref": "#ch-esn-lsm"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 물리 구현", "items": [{"id": "d07-q13", "type": "mc", "q": "Stepney 2024가 든 '물리 기판이 reservoir가 되기 위한 요구'가 아닌 것은?", "options": ["측정할 수 있는 고차원 상태", "입력에 대한 (ESN과) 유사한 동역학", "fading memory", "뉴런을 닮은 내부 구조"], "a": 3, "why": "p.670, 672: 기판은 뉴런과 닮은 내부 구조가 전혀 없어도 된다. 필요한 것은 측정 가능한 고차원 상태, 유사한 동역학, fading memory다.", "ref": "#ch-prc"}, {"id": "d07-q14", "type": "ox", "q": "Stepney 2024는 대부분의 기판이 소산적(dissipative)이므로 fading memory를 가진다고 쓴다.", "a": true, "why": "p.672. 단, 그래서 '모든 것이 reservoir가 잘 된다'는 뜻은 아니다. 바로 다음 절(4.2)이 시간척도 정합·잡음·용량·인터페이스 조건을 든다.", "ref": "#ch-prc"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d07-q15", "type": "mc", "q": "2011년 delay-coupled RC의 핵심 아이디어는?", "options": ["뉴런 수를 수천 개로 늘린다", "비선형 물리 노드 하나에 시간다중화(마스크)한 입력을 넣어 여러 가상 노드처럼 쓴다", "출력층을 memristor로 만든다", "reservoir를 스파이킹으로 바꾼다"], "a": 1, "why": "Liang 2024 p.194: 매 시간 단계마다 마스크 행렬을 곱해 입력을 진동시키고 비선형 노드 하나에 넣는다. 노드가 하나여도 시간을 쪼개 여러 개처럼 쓴다. 전극이 둘뿐인 소자처럼 읽을 수 있는 상태가 적을 때 상태 수를 늘리는 방법이다(D10).", "ref": "#ch-prc"}, {"id": "d07-q16", "type": "mc", "q": "Zhong 2026의 Methods에서 출력층 W_out을 구하는 방법은?", "options": ["BPTT로 반복 학습", "선형 회귀 (UᵀU)⁻¹Uᵀy", "강화학습", "소자 전도도를 직접 프로그래밍"], "a": 1, "why": "p.8 식 (2). 소자가 tanh와 시간 지연의 자리를 맡아도 학습은 여전히 선형 회귀 한 번이다. D8에서 이 식에 $\\lambda$를 더한 ridge regression을 손으로 푼다.", "ref": "#ch-prc"}, {"id": "d07-q17", "type": "ox", "q": "Stepney 2024에 따르면 기판의 자연 시간척도는 입력의 시간척도보다 훨씬 빠를수록 좋다.", "a": false, "why": "p.673: 훨씬 빠르면 다음 입력이 오기 전에 이완해 기억이 없고, 훨씬 느리면 제대로 반응하지 못한다. 두 시간척도가 비슷해야 한다. 이온 소자의 ms–s가 자원인지 짐인지는 입력의 시간척도에 달렸다(D13).", "ref": "#ch-prc"}]}, "5-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d07-q18", "type": "ox", "q": "재료가 입력에 비선형으로 반응하고 서서히 잊는다면, 그 자체로 계산을 한 것이다.", "a": false, "why": "그것은 reservoir의 재료가 될 수 있다는 조건이다. 계산이라고 부르려면 과제에 필요한 차이가 읽을 수 있는 상태들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며, 단순 기준선보다 나아야 한다 [Stepney 2024, p.666–667; Liang 2024, p.200–202].", "ref": "#ch-neuromorphic"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d07-q19", "type": "mc", "q": "Liang 2024가 기존 eRC 비교에서 얻은 사실과 가장 가까운 것은?", "options": ["eRC는 대개 소프트웨어 RC보다 정확하다", "비슷한 구성이면 소프트웨어 RC가 대개 eRC보다 낫고, eRC의 장점은 복잡도·전력 쪽이다", "eRC는 DNN보다 벤치마크 성능이 높다", "eRC의 정확도는 수용할 수 없는 수준이다"], "a": 1, "why": "p.201의 네 가지 사실 중 (3)(4). 하드웨어 잡음 때문에 소프트웨어 RC가 대개 낫고, 장점은 시스템 복잡도·전력·학습 비용·속도다. 정확도는 '수용할 만하지만 최첨단은 아니다'.", "ref": "#ch-neuromorphic"}, {"id": "d07-q20", "type": "mc", "q": "Stepney 2024의 AR 이론에서 '계산이 아니다'로 분류되는 경우는?", "options": ["기판이 뉴런 구조를 닮지 않았다", "출력 표현 단계에서 다른 컴퓨터가 전체 계산을 사후에 다 해 버린다", "readout이 선형이다", "상태가 고차원이다"], "a": 1, "why": "p.667: 표현이 없는 경우, 출력 단계에서 다른 컴퓨터가 계산을 다 하는 경우(바위 컴퓨터), 맞은 결과만 고르는 경우. 선형 readout과 고차원 상태는 오히려 RC의 정상 구성이다.", "ref": "#ch-neuromorphic"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d07-q21", "type": "mc", "q": "RC가 피한 RNN 학습의 문제를 가장 정확히 묶은 것은?", "options": ["메모리 부족과 느린 클록", "시간을 거슬러 기울기를 반복 계산하는 비용과 기울기 소실·폭주", "비선형 함수의 부재", "입력 정규화의 어려움"], "a": 1, "why": "BPTT의 비용 [Stepney 2024, p.665, 669]과 기울기 소실·폭주 [Liang 2024, p.194]. 둘 다 '내부 W를 학습시킨다'에서 오고, RC는 내부를 고정해 둘을 피한다.", "ref": "#ch-bptt"}, {"id": "d07-q34", "ref": "#ch-esn-lsm", "type": "mc", "q": "ESN 방식(내부 고정, 출력층만 학습)이 재료 덩어리나 소자를 reservoir로 쓰기에 특히 유리한 이유는?", "options": ["재료가 디지털이라서", "내부를 학습하지 않으므로, 재료 내부에 손을 대거나 재료의 미분 가능한 모형을 만들 필요가 없어서", "재료가 소프트웨어보다 정확해서", "출력층이 필요 없어서"], "a": 1, "why": "Stepney 2024 p.669: 내부 매개변수를 바꿀 필요도, 소자의 미분 가능한 모형도 필요 없다. 역전파는 통로마다 '배율'을 알아야 하는데(0구간), 재료의 배율은 식으로 쓰기 어렵다."}, {"id": "d07-q23", "type": "mc", "q": "RC와 뉴로모픽 컴퓨팅의 관계를 자료가 정리한 방식은?", "options": ["RC는 뉴로모픽 하드웨어의 한 종류다", "RC는 알고리즘이고, reservoir를 물리로 바꾼 PRC가 D1의 (라) 물리 컴퓨팅 줄기에 해당한다", "RC는 (나) 디지털 SNN 칩에서만 돌아간다", "RC와 뉴로모픽은 관계가 없다"], "a": 1, "why": "컴퓨터 안의 난수 행렬로 돌리는 RC는 뉴로모픽 하드웨어와 무관하다. 물리로 바꿀 때 (라)와 만난다. Liang이 보는 뇌와의 고리는 '순환 동역학 + 선형 읽기' 구조다 (p.193, 자료의 해석).", "ref": "#ch-neuromorphic"}, {"id": "d07-q24", "type": "ox", "q": "Liang 2024는 디지털 RC보다 자원을 더 쓰는 PRC도 물리 영역에서 계산한다는 점에서 의미가 있다고 본다.", "a": false, "why": "p.202: 디지털 RC보다 자원을 더 쓰는 PRC는 의미가 없다. PRC의 약속은 '더 똑똑한 계산'이 아니라 시스템 전체 비용이고, 그 비용은 소자 하나가 아니라 인코딩·측정·readout까지 세야 한다(D17).", "ref": "#ch-neuromorphic"}, {"id": "d07-q26", "type": "mc", "q": "Stepney 2024가 PRC를 '계산 모형 먼저' 출발점으로 분류한 것이 이온 소자 연구자에게 뜻하는 바로, 자료가 든 것은?", "options": ["소자의 PPF 곡선만 있으면 reservoir가 된다", "ESN 모형이 요구하는 조건을 내 소자가 어느 정도 만족하는지를 먼저 묻는 것이 평가의 틀이 된다", "재료 연구는 필요 없다", "모형보다 소자가 항상 우선한다"], "a": 1, "why": "p.667의 세 출발점 중 PRC는 '계산 모형 먼저'. 소자 곡선에서 출발해 '이것도 reservoir가 되지 않을까'라고 묻는 것(기판 먼저)과 구별된다(자료의 해석). D13–D18의 평가 틀이 후자다.", "ref": "#ch-neuromorphic"}]}}}</script>
 <div class="step-check local-only">
 <label><input type="checkbox" data-step-check="lesson" data-day="d07"> 학습자료를 다 읽었다</label>
 </div>
 </section>
-<section id="note" class="level2">
-<h2 class="anchored" data-anchor-id="note">③ 노트에 정리</h2>
-<div class="note-line">
-<p>자료를 덮고 노트를 펴세요. 오늘 질문에 대한 답의 뼈대를 손으로 그려 봅니다. 인과의 화살표 하나, 숫자 하나, 반론 하나가 들어가면 충분합니다. 막히는 곳은 자료로 돌아가 다시 읽고, 그래도 막히면 따로 적어 두세요.</p>
-</div>
-<div class="step-check local-only">
-<label><input type="checkbox" data-step-check="note" data-day="d07"> 노트에 정리했다</label>
-</div>
-</section>
 <section id="answer" class="level2">
-<h2 class="anchored" data-anchor-id="answer">④ 내 답</h2>
-<p>노트를 보면서 내 말로 씁니다. 주장마다 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이세요. <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 저장은 초안 저장입니다. 몇 번이고 고쳐도 됩니다.</p>
+<h2 class="anchored" data-anchor-id="answer">④ 가르치듯 내 답</h2>
+<div class="flow-line">
+<p>후배에게 <strong>설명한다고 생각하고</strong> 오늘 질문에 답합니다. <strong>기본은 짧은 답</strong>입니다: 3–5문장, 또는 작은 도식 하나와 한 줄 설명, 그리고 설명하다 막힌 곳 한 줄. 이것만으로 정상적인 학습입니다. 왜·어떻게, 근거와 반론까지 쓰는 긴 종합 답안은 <strong>선택</strong>입니다. 주장에 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이면 좋고, <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 몇 번이고 고쳐도 됩니다. 막히는 곳은 따로 적어 두세요.</p>
+</div>
 <div class="editable" data-file="d07-answer" data-title="내 답" data-template="answer"></div>
 <div class="ledger-links">
   <span>장부에 옮기기 →</span>
@@ -567,12 +1479,19 @@ ul.task-list li input[type="checkbox"] {
   <a href="../ledger/kill-criteria.html">접는 기준</a>
 </div>
 </section>
+<section id="posttest" class="level2">
+<h2 class="anchored" data-anchor-id="posttest">⑤ 다시 풀기 (선택)</h2>
+<div class="flow-line">
+<p>① 사전 테스트와 <strong>같은 문제</strong>를 이유와 함께 다시 풉니다. 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 다시 떠올리기 연습입니다. 이해 점검은 학습자료의 <strong>잠깐 점검</strong>과 <strong>종합 퀴즈</strong>에서 처음 고른 답으로 봅니다.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="pre" data-mode="post"></div>
+</section>
 <section id="done" class="level2">
-<h2 class="anchored" data-anchor-id="done">⑤ 학습 완료</h2>
+<h2 class="anchored" data-anchor-id="done">⑥ 학습 완료</h2>
 <div class="done-box" data-day="d07">
   <div class="done-text">
     <b>오늘 학습 완료</b>
-    <span class="done-desc">학습자료를 읽고, 노트에 정리하고, 내 답을 저장했으면 누르세요. 답을 저장했다고 자동으로 완료되지는 않습니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
+    <span class="done-desc">기본 경로(학습자료 → 짧은 백지 회상 → 짧은 내 답)를 마쳤으면 누르세요. 읽음 체크·학습 완료·이해 점검(퀴즈 첫 시도)은 따로 기록되고 아래에 나란히 보입니다. 완료한 날짜를 기준으로 커버 페이지가 복습(1·3·7·14·30일 뒤)을 알려 줍니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
   </div>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">오늘 학습 완료</button>
@@ -582,7 +1501,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 <section id="feedback" class="level2">
-<h2 class="anchored" data-anchor-id="feedback">⑥ 피드백과 꼬리질문</h2>
+<h2 class="anchored" data-anchor-id="feedback">⑦ 피드백과 꼬리질문</h2>
 <div class="pending-box">
 <p>내 답을 저장한 뒤 Claude에게 <strong>"D7 검토해줘"</strong>라고 말하세요. 맞게 이해한 점, 핵심 오류와 근거, 고쳐야 할 인과관계, 다시 답할 질문을 이 자리에 남깁니다.</p>
 </div>

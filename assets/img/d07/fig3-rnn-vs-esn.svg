@@ -1,0 +1,76 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 330' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='300' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >무엇을 학습하나: 일반 RNN(왼쪽) 대 ESN/reservoir computing(오른쪽)</text>
+<text x='150' y='44' font-size='13' fill='#c8553d' text-anchor='middle' font-weight='bold' >일반 RNN</text>
+<circle cx='40' cy='100' r='11' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.4'/>
+<circle cx='40' cy='150' r='11' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.4'/>
+<text x='40' y='175' font-size='11' fill='#e08a3c' text-anchor='middle' font-weight='normal' >입력 u</text>
+<rect x='90' y='54' width='110' height='134' rx='12' fill='#fbeeec' stroke='none' stroke-width='1.2' />
+<circle cx='115' cy='90' r='10' fill='#fff' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='160' cy='115' r='10' fill='#fff' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='125' cy='155' r='10' fill='#fff' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='180' cy='170' r='10' fill='#fff' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='155' cy='68' r='10' fill='#fff' stroke='#c8553d' stroke-width='1.4'/>
+<line x1='115' y1='90' x2='160' y2='115' stroke='#c8553d' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='160' y1='115' x2='125' y2='155' stroke='#c8553d' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='125' y1='155' x2='115' y2='90' stroke='#c8553d' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='180' y1='170' x2='160' y2='115' stroke='#c8553d' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='155' y1='68' x2='160' y2='115' stroke='#c8553d' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='125' y1='155' x2='180' y2='170' stroke='#c8553d' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='115' y1='90' x2='155' y2='68' stroke='#c8553d' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='51' y1='100' x2='106' y2='90' stroke='#c8553d' stroke-width='0.8'/>
+<line x1='51' y1='100' x2='151' y2='115' stroke='#c8553d' stroke-width='0.8'/>
+<line x1='51' y1='100' x2='116' y2='155' stroke='#c8553d' stroke-width='0.8'/>
+<line x1='51' y1='150' x2='106' y2='90' stroke='#c8553d' stroke-width='0.8'/>
+<line x1='51' y1='150' x2='151' y2='115' stroke='#c8553d' stroke-width='0.8'/>
+<line x1='51' y1='150' x2='116' y2='155' stroke='#c8553d' stroke-width='0.8'/>
+<text x='145' y='200' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='normal' ><tspan>내부 가중치 W, W</tspan><tspan dy='4' font-size='9'>in</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
+<circle cx='260' cy='125' r='11' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.4'/>
+<line x1='124' y1='90' x2='249' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<line x1='169' y1='115' x2='249' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<line x1='134' y1='155' x2='249' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<line x1='189' y1='170' x2='249' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<line x1='164' y1='68' x2='249' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<text x='260' y='150' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >출력 y</text>
+<text x='260' y='200' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='normal' ><tspan>(빨강 = 학습) W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
+<text x='150' y='236' font-size='11.5' fill='#c8553d' text-anchor='middle' font-weight='normal' >모든 가중치를 학습: 반복적 BPTT</text>
+<text x='150' y='254' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >시간을 거슬러 기울기 전파</text>
+<text x='150' y='270' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >내부 접근 + 미분 가능한 모형 필요</text>
+<text x='450' y='44' font-size='13' fill='#13936b' text-anchor='middle' font-weight='bold' >ESN (Jaeger 2001)</text>
+<circle cx='340' cy='100' r='11' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.4'/>
+<circle cx='340' cy='150' r='11' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.4'/>
+<text x='340' y='175' font-size='11' fill='#e08a3c' text-anchor='middle' font-weight='normal' >입력 u</text>
+<rect x='390' y='54' width='110' height='134' rx='12' fill='#eef9f4' stroke='none' stroke-width='1.2' />
+<circle cx='415' cy='90' r='10' fill='#fff' stroke='#13936b' stroke-width='1.4'/>
+<circle cx='460' cy='115' r='10' fill='#fff' stroke='#13936b' stroke-width='1.4'/>
+<circle cx='425' cy='155' r='10' fill='#fff' stroke='#13936b' stroke-width='1.4'/>
+<circle cx='480' cy='170' r='10' fill='#fff' stroke='#13936b' stroke-width='1.4'/>
+<circle cx='455' cy='68' r='10' fill='#fff' stroke='#13936b' stroke-width='1.4'/>
+<line x1='415' y1='90' x2='460' y2='115' stroke='#444' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='460' y1='115' x2='425' y2='155' stroke='#444' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='425' y1='155' x2='415' y2='90' stroke='#444' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='480' y1='170' x2='460' y2='115' stroke='#444' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='455' y1='68' x2='460' y2='115' stroke='#444' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='425' y1='155' x2='480' y2='170' stroke='#444' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='415' y1='90' x2='455' y2='68' stroke='#444' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='351' y1='100' x2='406' y2='90' stroke='#444' stroke-width='0.8'/>
+<line x1='351' y1='100' x2='451' y2='115' stroke='#444' stroke-width='0.8'/>
+<line x1='351' y1='100' x2='416' y2='155' stroke='#444' stroke-width='0.8'/>
+<line x1='351' y1='150' x2='406' y2='90' stroke='#444' stroke-width='0.8'/>
+<line x1='351' y1='150' x2='451' y2='115' stroke='#444' stroke-width='0.8'/>
+<line x1='351' y1='150' x2='416' y2='155' stroke='#444' stroke-width='0.8'/>
+<text x='445' y='200' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' ><tspan>내부 가중치 W, W</tspan><tspan dy='4' font-size='9'>in</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
+<circle cx='560' cy='125' r='11' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.4'/>
+<line x1='424' y1='90' x2='549' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<line x1='469' y1='115' x2='549' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<line x1='434' y1='155' x2='549' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<line x1='489' y1='170' x2='549' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<line x1='464' y1='68' x2='549' y2='125' stroke='#c8553d' stroke-width='1.0'/>
+<text x='560' y='150' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >출력 y</text>
+<text x='560' y='200' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='normal' ><tspan>(빨강 = 학습) W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
+<text x='450' y='236' font-size='11.5' fill='#13936b' text-anchor='middle' font-weight='normal' ><tspan>난수로 두고 고정: W, W</tspan><tspan dy='4' font-size='9'>in</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
+<text x='450' y='254' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' ><tspan>(D8) 선형 회귀로 한 번에 학습: W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
+<text x='450' y='270' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >내부는 블랙박스 → 물리 소자로 바꿀 수 있다</text>
+<line x1='300' y1='54' x2='300' y2='280' stroke='#d9d9d9' stroke-width='1' stroke-dasharray='4 4'/>
+<text x='300' y='308' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >모식도. 대가: 고정된 난수 reservoir는 과제에 맞춰 내부를 다듬지 못한다 → 표현력은 DNN보다 낮다 [Liang 2024, p.194].</text>
+</svg>

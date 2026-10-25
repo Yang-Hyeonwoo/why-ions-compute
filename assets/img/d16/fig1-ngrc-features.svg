@@ -1,0 +1,63 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 392' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='300.0' y='20.0' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >NG-RC의 특징: 지연된 입력과 그 곱을 늘어놓고, 직선(readout)만 학습한다</text>
+<rect x='20.0' y='50.0' width='120.0' height='64.0' rx='6' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
+<text x='80.0' y='72.0' font-size='11.5' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >지금 u(t) = 0.5</text>
+<text x='80.0' y='92.0' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >한 칸 전 u(t−1) = −1</text>
+<text x='80.0' y='108.0' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >(지연 k = 2개)</text>
+<line x1='140.0' y1='82.0' x2='172.0' y2='82.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<rect x='176.0' y='44.0' width='112.0' height='24.0' rx='4' fill='#fff' stroke='#999' stroke-width='1.2' />
+<text x='184.0' y='60.0' font-size='10.5' fill='#999' text-anchor='start' font-weight='bold' >1</text>
+<text x='282.0' y='60.0' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >1</text>
+<text x='296.0' y='60.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >상수</text>
+<rect x='176.0' y='74.0' width='112.0' height='24.0' rx='4' fill='#fff' stroke='#3d6fb4' stroke-width='1.2' />
+<text x='184.0' y='90.0' font-size='10.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >u(t)</text>
+<text x='282.0' y='90.0' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >0.5</text>
+<text x='296.0' y='90.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >선형(그대로)</text>
+<rect x='176.0' y='104.0' width='112.0' height='24.0' rx='4' fill='#fff' stroke='#3d6fb4' stroke-width='1.2' />
+<text x='184.0' y='120.0' font-size='10.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >u(t−1)</text>
+<text x='282.0' y='120.0' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >−1</text>
+<text x='296.0' y='120.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >선형(그대로)</text>
+<rect x='176.0' y='134.0' width='112.0' height='24.0' rx='4' fill='#fff' stroke='#13936b' stroke-width='1.2' />
+<text x='184.0' y='150.0' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='bold' >u(t)²</text>
+<text x='282.0' y='150.0' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >0.25</text>
+<text x='296.0' y='150.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >2차(곱)</text>
+<rect x='176.0' y='164.0' width='112.0' height='24.0' rx='4' fill='#fff' stroke='#13936b' stroke-width='1.2' />
+<text x='184.0' y='180.0' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='bold' >u(t)·u(t−1)</text>
+<text x='282.0' y='180.0' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >−0.5</text>
+<text x='296.0' y='180.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >2차(곱)</text>
+<rect x='176.0' y='194.0' width='112.0' height='24.0' rx='4' fill='#fff' stroke='#13936b' stroke-width='1.2' />
+<text x='184.0' y='210.0' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='bold' >u(t−1)²</text>
+<text x='282.0' y='210.0' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >1</text>
+<text x='296.0' y='210.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >2차(곱)</text>
+<line x1='372.0' y1='128.0' x2='404.0' y2='128.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<rect x='404.0' y='92.0' width='176.0' height='74.0' rx='6' fill='#eef9f4' stroke='#33cc99' stroke-width='1.2' />
+<text x='492.0' y='114.0' font-size='10.5' fill='#13936b' text-anchor='middle' font-weight='bold' >readout: 특징마다 가중치</text>
+<text x='492.0' y='132.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >y = w₀·1 + w₁·0.5 + w₂·(−1)</text>
+<text x='492.0' y='148.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >+ w₃·0.25 + w₄·(−0.5) + w₅·1</text>
+<text x='492.0' y='162.0' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >학습은 w만 (ridge 회귀)</text>
+<text x='20.0' y='254.0' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' >특징 수(상수항 포함) = 지연 k개와 최고 차수로 정해진다</text>
+<text x='20.0' y='276.0' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >지연 k</text>
+<text x='20.0' y='298.0' font-size='10.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >선형까지</text>
+<text x='20.0' y='320.0' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >2차까지</text>
+<text x='20.0' y='342.0' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >3차까지</text>
+<text x='150.0' y='276.0' font-size='11' fill='#444' text-anchor='middle' font-weight='bold' >2</text>
+<text x='150.0' y='298.0' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >3</text>
+<text x='150.0' y='320.0' font-size='11' fill='#13936b' text-anchor='middle' font-weight='normal' >6</text>
+<text x='150.0' y='342.0' font-size='11' fill='#e08a3c' text-anchor='middle' font-weight='normal' >10</text>
+<text x='255.0' y='276.0' font-size='11' fill='#444' text-anchor='middle' font-weight='bold' >5</text>
+<text x='255.0' y='298.0' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >6</text>
+<text x='255.0' y='320.0' font-size='11' fill='#13936b' text-anchor='middle' font-weight='normal' >21</text>
+<text x='255.0' y='342.0' font-size='11' fill='#e08a3c' text-anchor='middle' font-weight='normal' >56</text>
+<text x='360.0' y='276.0' font-size='11' fill='#444' text-anchor='middle' font-weight='bold' >10</text>
+<text x='360.0' y='298.0' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >11</text>
+<text x='360.0' y='320.0' font-size='11' fill='#13936b' text-anchor='middle' font-weight='normal' >66</text>
+<text x='360.0' y='342.0' font-size='11' fill='#e08a3c' text-anchor='middle' font-weight='normal' >286</text>
+<text x='465.0' y='276.0' font-size='11' fill='#444' text-anchor='middle' font-weight='bold' >20</text>
+<text x='465.0' y='298.0' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >21</text>
+<text x='465.0' y='320.0' font-size='11' fill='#13936b' text-anchor='middle' font-weight='normal' >231</text>
+<text x='465.0' y='342.0' font-size='11' fill='#e08a3c' text-anchor='middle' font-weight='normal' >1771</text>
+<line x1='20.0' y1='282.0' x2='580.0' y2='282.0' stroke='#d9d9d9' stroke-width='1'/>
+<text x='300.0' y='370.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >2차 곱의 개수 = k(k+1)/2 (서로 다른 쌍 + 제곱). k = 10이면 55개라 특징은 1 + 10 + 55 = 66개.</text>
+<text x='300.0' y='386.0' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >숫자는 코드가 계산했다. (Claude가 그림)</text>
+</svg>
