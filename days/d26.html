@@ -89,6 +89,35 @@ ul.task-list li input[type="checkbox"] {
   };
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/study.css">
 </head>
@@ -546,15 +575,805 @@ ul.task-list li input[type="checkbox"] {
 <div class="flow-line">
 <p>아직 배우지 않은 내용을 먼저 풀어 봅니다. <strong>많이 틀리는 것이 정상</strong>이고, 그게 목적입니다. 먼저 답해 본 문제는 읽을 때 눈에 들어오고 더 오래 남습니다. 문제마다 정답만 보이고, 이유는 학습자료와 ⑤ 다시 풀기에서 봅니다. 다 풀면 학습자료가 열립니다. 건너뛰려면 학습자료 위의 '그냥 읽기'를 누르세요(권장 단계일 뿐 필수는 아닙니다).</p>
 </div>
-<div class="pending-box">
-<p>이 날의 사전 테스트는 아직 준비되지 않았습니다. 아래 '먼저 만들어 보기'만 해도 됩니다.</p>
-</div>
+<div class="quiz" data-day="d26" data-set="pre"></div>
 </section>
 <section id="lesson" class="level2">
 <h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
-<div class="pending-box">
-<p>이 날의 학습자료은(는) 공개 범위에서 제외되어 있습니다.</p>
+<div class="lesson-body" data-pre="d26-pre">
+<div class="lesson-meta">
+<p>학습 구간 6개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 105분 안팎(추정) · 선택 영상 12분 · 퀴즈 28문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>(모두 본문·캡션·Methods만, SI 미확인): Liang 2024 p.196, 198–202(Fig. 4d, Fig. 5) / Zhong 2022 p.673–680 / Jiang 2026 p.1113–1115 / Roadmap 2026 p.8120, 8123–8126, 8137 / Aluru 2026 p.598(Table 1) / Guo 2026 p.2, 5–10(Fig. 4) / Zhang 2024 (ACS Nano) p.15025–15032 / Huang 2026 p.2, 10–13 / Zhou 2026 (Nat. Nanotech.) p.579–586 / Lee 2025 (npj) p.2–3 / Kim 2026 p.536, 540, 543 / Wang 2025 (Chem. Soc. Rev.) p.313, 328 / D25 표의 논문들은 D25에서 대조한 쪽. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 오늘의 계산(확산 시간, 계면 충전 에너지와 박동당 에너지 장부, 배열 크기에 따른 부품 수, 1년 박동 수, 가중치 쓰기 오차)은 모두 Claude가 가정값으로 한 자릿수 계산이며, 가정은 그 자리에 적었습니다.</p>
 </div>
+<p>어제는 폴더의 대표 논문 13편을 표에 놓고 무엇이 입증됐고 무엇이 아직인지 판정했습니다. 빈칸이 많았습니다. 원시 입력 기준선(소자를 빼고 입력을 그대로 같은 readout에 넣은 비교), 소자 간 편차, drift, 시스템 에너지, 배열. 여기서 reservoir는 입력열을 내부 상태로 바꾸는 물리계(오늘은 이온 소자), readout은 그 상태들에 가중치를 곱해 더해 답을 내는 마지막 층입니다(<a href="../days/d08.html#b-reservoir-state">D8 기초: 내부 상태</a>). 오늘의 질문은 그다음입니다. <strong>그 빈칸들 중 무엇이 이온성 RC를 실제로 쓰지 못하게 막는 "진짜 병목"인가?</strong> 빈칸이 모두 같은 무게는 아닙니다. 어떤 것은 다음 논문 한 편이 채울 수 있고, 어떤 것은 이온이라는 물리 자체에서 옵니다. 그것을 가르는 것이 오늘의 일입니다.</p>
+<ol type="1">
+<li>"병목"이란 정확히 무엇이고, 왜 소자·회로·시스템·응용의 계층으로 나눠 보나?</li>
+<li>속도: 이온 소자는 왜 느리고, 그 느림은 재료의 성질인가 크기의 문제인가? 느림은 병목인가 자원인가?</li>
+<li>전력과 안정성: fJ는 왜 시스템 이득이 아니고, 이온 소재에만 있는 안정성 문제는 무엇인가?</li>
+<li>배열과 집적: 배열이란 무엇이고 왜 만드나? 젤·연성 이온 소자도 집적되나?</li>
+<li>전자회로와의 접속: reservoir만 소자로 할 때와 readout까지 소자로 할 때는 무엇이 다른가? 학습은 어디서 하나?</li>
+<li>그래서 진짜 병목은 무엇인가?</li>
+</ol>
+<section id="ch-bottleneck-layers" class="level3">
+<h3 class="anchored" data-anchor-id="ch-bottleneck-layers">1. 병목이란 무엇이고, 왜 계층으로 나누나</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 '병목'을 처리량과 비용의 숫자로 정의하고, 이온성 RC의 문제를 소자·회로·시스템·응용의 네 계층에 놓은 뒤, 네 질문으로 '진짜 병목'과 '고칠 수 있는 빈칸'을 가를 수 있다.</p>
+</div>
+<div id="b-bottleneck-layers" class="basics">
+<section id="병목의-계층-소자회로시스템응용" class="level4">
+<h4 class="anchored" data-anchor-id="병목의-계층-소자회로시스템응용">병목의 계층: 소자·회로·시스템·응용</h4>
+<p><strong>병의 목.</strong> 물이 가득 든 병을 뒤집으면, 병이 아무리 커도 물이 나오는 빠르기는 가장 좁은 목이 정합니다. 여러 단계를 차례로 거치는 일에서 <strong>전체의 빠르기(또는 비용)를 정하는 가장 좁은 단계</strong>를 병목(bottleneck)이라고 부릅니다.</p>
+<p><strong>숫자로.</strong> 신호가 세 단계를 거친다고 합시다. 1단계는 1초에 1,000개, 2단계는 1초에 10개, 3단계는 1초에 500개를 처리합니다. 전체는 1초에 몇 개를 처리할까요? 2단계가 10개만 넘겨주므로 <strong>10개</strong>입니다. 이제 1단계를 열 배 빠르게(10,000개/s) 해도 전체는 여전히 10개입니다. 2단계를 20개/s로 두 배 빠르게 하면 전체도 20개/s가 됩니다. 병목이 아닌 곳을 아무리 고쳐도 전체는 변하지 않고, 병목을 고치면 전체가 바로 움직입니다. 에너지도 같은 구조입니다. 추론 한 번(새 입력 하나에 답 하나를 내는 일)에 소자가 6 fJ, ADC(아날로그 값을 숫자로 바꾸는 변환기) 변환이 1 nJ(D17의 가정값)를 쓴다면, 소자를 1 fJ로 줄여도 전체는 거의 그대로입니다(<a href="../days/d17.html#b-system-cost">D17 기초: 시스템 비용</a>).</p>
+<p><strong>왜 계층으로 나누나.</strong> 이온성 RC가 실제로 쓰이려면 여러 층이 함께 작동해야 합니다. 이 교재는 넷으로 나눕니다(이해를 위한 분류이며 겹칩니다).</p>
+<ul>
+<li><strong>소자</strong>: 소자 하나가 내는 것. 시간상수 τ(응답이 줄어드는 빠르기를 나타내는 시간), 반복·소자 간 편차, 몇 번이나 버티나(내구), 시간에 따른 변화(drift).</li>
+<li><strong>회로·배열</strong>: 소자 여러 개를 배선으로 엮고, 입력을 넣고 상태를 읽는 회로. 배열의 크기, 엉뚱한 길로 새는 전류, 읽기 회로의 수.</li>
+<li><strong>시스템</strong>: 센서부터 판정까지 전체. 추론 한 번의 에너지, 지연시간(답이 나오기까지 걸리는 시간), 이온 신호와 전자 회로 사이의 변환, 봉지.</li>
+<li><strong>응용</strong>: 이 장치가 쓰일 자리가 요구하는 것. 정확도, 시간 창, 수명, 크기, 몸 안 조건.</li>
+</ul>
+<p>계층을 나누는 이유는 둘입니다. 첫째, <strong>어느 계층의 병목인지에 따라 누가 풀 수 있는지가 다릅니다.</strong> 소재 연구자가 고분자 설계로 바꿀 수 있는 것은 주로 소자 계층이고, 배열·시스템 계층은 회로·공정과 함께 풀어야 합니다. 둘째, <strong>아래 계층을 풀어도 위 계층이 막히면 응용은 열리지 않습니다.</strong> τ를 과제에 꼭 맞춰도, 소자를 배열로 엮을 수 없거나 몸 안에서 일주일을 버티지 못하면 이식형 장치는 만들 수 없습니다.</p>
+<p><strong>진짜 병목을 가르는 네 질문.</strong> 빈칸 하나를 병목 장부에 올리기 전에 묻습니다(그림 4). Q1 응용이 정말 그 사양을 요구하나(숫자와 출처)? Q2 메커니즘의 한계인가, 공정·측정의 한계인가? Q3 전자·광학 대안이 이미 그 사양을 내나? Q4 내가 고분자 설계로 바꿀 수 있는 계층인가? 네 질문을 통과한 줄이 D27의 "응용 요구 vs 메커니즘 허용" 교차표에 들어갑니다.</p>
+</section>
+</div>
+<figure class="fig figure"><img src="../assets/img/d26/fig1-layers.svg" alt="병목 후보를 네 계층에 놓은 그림. 소자: 겔 소자 τ가 0.05–4000 s에 흩어짐, 교차점 전압 560±60 mV 편차, 탈수로 17시간 동안 전류 감소, 내구 10² 회. 회로·배열: 3×3 사용·10×10 수율 시험 수준, sneak path·선택 소자 미논의, 연성 소재와 CMOS 접속·봉지. 시스템: readout·마스크가 소프트웨어, 에너지 경계가 소자뿐, 이온→전자 변환의 지연·손실. 응용: τ와 과제 시간척도의 정합, 원시 입력 기준선 부재, 재보정 주기" class="figure-img"><figcaption><b>그림 1.</b> 병목 후보를 네 계층에 놓은 지도(모식도). 각 줄의 근거는 본문 2–5구간에 쪽수와 함께 있다(Guo 2026 p.6–7, Aluru 2026 p.598, Roadmap 2026 p.8125–8126, Zhou 2026 p.586, Liang 2024 p.198). CMOS는 보통 디지털 칩을 만드는 방식이다. 분류는 이해를 위한 것이며 서로 겹친다. (Claude가 그림)</figcaption></figure>
+<figure class="fig figure"><img src="../assets/img/d26/fig4-real-bottleneck.svg" alt="장부에 넣기 전에 묻는 네 질문의 흐름도: Q1 응용이 그 사양을 요구하나, Q2 메커니즘 한계인가 공정·측정 한계인가, Q3 전자·광학 대안이 이미 그 사양을 내나, Q4 고분자 설계로 바꿀 수 있는 계층인가. 네 질문을 거친 줄만 병목 장부에 들어간다" class="figure-img"><figcaption><b>그림 4.</b> '진짜 병목인가'를 가르는 네 질문. 예시의 숫자는 Liang 2024 p.198(자연 신호와 맞물리려면 1 ms보다 긴 시간척도), Lee 2025 (npj) p.2–3(HfO₂ 2단자 소자 τ 0.92–123 ms)에서 왔다. 판정 순서는 이 교재의 제안이다. (Claude가 그림)</figcaption></figure>
+<div class="predict">
+<p>세 단계가 1초에 각각 200개, 50개, 5,000개를 처리합니다. 전체는 1초에 몇 개를 처리하고, 셋째 단계를 두 배로 빠르게 하면 전체는 어떻게 될까요? 아래 점검으로 확인하세요.</p>
+</div>
+<div class="quiz" data-day="d26" data-set="1-check"></div>
+<div class="keypoints">
+<ul>
+<li>병목 = 전체의 빠르기·비용을 정하는 가장 좁은 단계. 병목이 아닌 곳을 고쳐도 전체는 그대로다(1,000·10·500개/s → 10개/s).</li>
+<li>네 계층: 소자 · 회로·배열 · 시스템 · 응용. 계층에 따라 누가 풀 수 있는지가 다르고, 아래를 풀어도 위가 막히면 응용은 열리지 않는다.</li>
+<li>네 질문(요구가 실재하나 / 메커니즘인가 공정인가 / 대안이 이미 내나 / 내가 바꿀 수 있나)을 통과한 줄만 병목 장부에 올린다.</li>
+</ul>
+</div>
+</section>
+<section id="ch-speed" class="level3">
+<h3 class="anchored" data-anchor-id="ch-speed">2. 속도: 느림은 재료의 성질인가, 크기의 문제인가</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 확산 시간 τ ~ L²/D로 소자 크기와 τ의 관계를 직접 계산하고, 폴더 소자들의 τ를 과제의 시간척도와 같은 축에 놓아 "느림"이 어떤 응용에서 병목이고 어떤 응용에서 자원인지 말할 수 있다.</p>
+</div>
+<p><strong>먼저 복습.</strong> 이온이 거리 <span class="math inline">\(L\)</span>을 확산으로 건너는 데 걸리는 시간은 대략 <span class="math inline">\(\tau \sim L^2/D\)</span>입니다. <span class="math inline">\(D\)</span>는 확산계수(이온이 얼마나 빨리 퍼지나, 단위 m²/s)입니다(<a href="../days/d21.html#b-diffusion-time">D21 기초: 확산 시간</a>). 물 속의 작은 이온은 <span class="math inline">\(D\)</span>가 대략 10⁻⁹ m²/s 자릿수이고, 겔·고분자 속에서는 더 작아집니다(<a href="../days/d19.html#b-mobility-diffusion">D19 기초: 이동도와 확산계수</a>). 핵심은 <strong>거리의 제곱</strong>입니다. 거리를 10배 줄이면 시간은 100배 줄어듭니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>L = 1 mm.</strong> <span class="math inline">\(L^2 = (10^{-3}\,\text{m})^2 = 10^{-6}\)</span> m². <span class="math inline">\(D = 10^{-9}\)</span> m²/s로 나누면 <span class="math inline">\(10^{-6}/10^{-9} = 10^{3}\)</span> s, 즉 <strong>약 17분</strong>. 손으로 만든 mm 크기 하이드로겔 소자의 이완이 수백–수천 초인 것은 이 자릿수입니다.</p>
+</div>
+<div class="step">
+<p><strong>L = 100 µm.</strong> <span class="math inline">\(L^2 = 10^{-8}\)</span> m² → <span class="math inline">\(10^{-8}/10^{-9} = 10\)</span> s.</p>
+</div>
+<div class="step">
+<p><strong>L = 10 µm.</strong> <span class="math inline">\(L^2 = 10^{-10}\)</span> m² → <span class="math inline">\(0.1\)</span> s = 100 ms. 심전도 박동 하나(약 0.6–1 s)보다 짧아집니다.</p>
+</div>
+<div class="step">
+<p><strong>L = 1 µm.</strong> <span class="math inline">\(L^2 = 10^{-12}\)</span> m² → <span class="math inline">\(10^{-3}\)</span> s = 1 ms.</p>
+</div>
+<div class="step">
+<p><strong>L = 100 nm.</strong> <span class="math inline">\(L^2 = 10^{-14}\)</span> m² → <span class="math inline">\(10^{-5}\)</span> s = 10 µs. 같은 이온, 같은 <span class="math inline">\(D\)</span>인데 크기만 줄여 <strong>10⁸배</strong> 빨라졌습니다. [가정: D는 10⁻⁹ m²/s로 고정, 계면·고분자의 효과는 무시]</p>
+</div>
+</div>
+<p><strong>폴더의 예 하나.</strong> Zhang 2024 (ACS Nano)는 같은 폴리전해질 겔 소자의 크기를 바꿔 기억 시간을 4,000 s(큰 소자)에서 200 s(작은 소자)로 바꿨고, 겔 영역 전체 길이 <span class="math inline">\(L\)</span>(4.3 mm와 1.5 mm)로 <span class="math inline">\(\tau = L^2/4D\)</span>를 어림하면 2,311 s와 281 s라고 적습니다(분모의 4는 퍼지는 모양에 따라 붙는 숫자 인자로, 자릿수 어림에서는 생략합니다. <a href="../days/d21.html#b-diffusion-time">D21 기초: 확산 시간</a>) <span class="src">Zhang 2024 (ACS Nano), p.15029</span>. 다만 시뮬레이션에서는 τ의 변화가 균일 물질의 <span class="math inline">\(L^2/D\)</span> 예측보다 덜 가팔랐습니다 <span class="src">Zhang 2024 (ACS Nano), p.15030</span>. 크기가 τ를 정하는 큰 손잡이인 것은 맞지만, 겔과 계면이 섞인 실제 구조는 단순한 식과 조금 다르게 움직인다는 뜻입니다.</p>
+<p>이제 폴더 소자들의 τ를 한 축에 놓습니다. 그림 2를 읽을 때는 <strong>초록 막대(연성 이온 소자)가 어디에 몰려 있는지</strong>, 그리고 <strong>주황 막대(과제가 요구하는 시간)와 얼마나 겹치는지</strong>를 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d26/fig2-timescales.svg" alt="로그 시간축(10⁻⁸–10⁴ s)에 소자 τ와 과제 시간척도를 놓은 지도. 고체 양성자 접합 5 µs, HfO₂ 전자 소자 0.92–123 ms, 연성 이온 소자: 겔 유체 memristor 88–131 ms, 이온겔 짝펄스 응답 52·395 ms, 겔 섬유 약 6 s, 이온겔 단기→장기 19.3→259 s, 하이드로겔 이완 약 120 s, 침전 다이오드 1,000 s, 폴리전해질 겔 200–4000 s. 과제: 초음파~심전도 10⁻⁷~1 s, 자연 신호는 1 ms보다 길게" class="figure-img"><figcaption><b>그림 2.</b> 시간척도 지도. 초록은 연성 이온 소자(폴더 원문의 측정값: Guo 2026 p.5, Zhou 2025 p.4·6, Chen 2024 p.6, Wang 2024 (ACS Nano) p.29709, Han 2023 p.3, Zhang 2024 (ACS Nano) p.15029), 보라는 고체 양성자 소자(Zhou 2026 (Nat. Nanotech.) p.581), 파랑은 전자 소자(Lee 2025 (npj) p.2–3), 주황은 과제가 요구하는 시간(Liang 2024 p.196, 198). 소자마다 τ를 정의하고 잰 방법이 다르므로(지수 맞춤의 시간상수, 기저선으로 돌아오는 시간, 기억 시간) 자릿수만 비교한다. (Claude가 그림)</figcaption></figure>
+<p><strong>지도가 말하는 것.</strong> 세 가지입니다.</p>
+<ol type="1">
+<li><strong>연성 이온 소자의 τ는 수십 ms부터 수천 s까지 흩어져 있다.</strong> 같은 "하이드로겔 시냅스"라도 메커니즘(이중층 충전, 계면 이온 고갈, 침전)과 크기에 따라 자릿수가 다섯 개나 다릅니다. 그러니 "이온은 느리다"는 한 문장은 틀리지는 않지만 쓸모가 적습니다. <strong>얼마나 느린지는 대부분 크기와 메커니즘이 정합니다.</strong> <span class="tag tag-interp">해석</span></li>
+<li><strong>이온이라서 반드시 느린 것은 아니다.</strong> 고체 산화물 속 양성자(H⁺)가 nm–µm 거리를 움직이는 소자는 τ가 5 µs였습니다 <span class="src">Zhou 2026 (Nat. Nanotech.), p.581</span>. 반대로 전자 소자도 ms–s를 낼 수 있습니다. Pt/HfO₂ 2단자 소자는 바이어스 전압으로 τ를 0.92 ms에서 123 ms까지 바꿨습니다 <span class="src">Lee 2025 (npj), p.2–3</span>. 즉 "ms–s의 τ"는 이온 소자만의 자산이 아닙니다(그림 4의 Q3).</li>
+<li><strong>과제와의 정합.</strong> Liang 리뷰는 센서 가까이에서 자연 신호와 맞물리려면 물리 노드가 1 ms보다 긴, 생물학적으로 현실적인 시간척도를 가질 수 있다고 쓰고, τ가 너무 짧으면 실시간 신호와 결합하지 못한다고 씁니다 <span class="src">Liang 2024, p.198</span>. 같은 리뷰는 과제의 시간상수가 초음파(10⁻⁷ s)부터 심전도(1 s)까지 퍼져 있다고 적습니다 <span class="src">Liang 2024, p.196</span>. 심전도·호흡·걸음 같은 신호에는 연성 이온 소자의 ms–s τ가 맞고, 초음파나 디지털 칩의 박자(ns)에는 맞지 않습니다(<a href="../days/d13.html#b-timescale-match">D13 기초: 시간척도 정합</a>).</li>
+</ol>
+<p><strong>그런데 느림에는 두 번째 비용이 있습니다: 처리율.</strong> τ가 과제와 맞아도, 소자 하나가 1초에 처리할 수 있는 입력의 수는 τ에 묶입니다. 실시간 신호 하나를 그 신호의 빠르기로 처리하는 일(심전도 한 사람)에는 문제가 없습니다. 그러나 <strong>같은 소자를 시간으로 쪼개 여러 노드처럼 쓰는 시간다중화</strong>(<a href="../days/d10.html#b-time-multiplexing">D10 기초</a>)나, <strong>큰 데이터셋을 소자로 통과시키는 일</strong>에는 치명적입니다. D25에서 계산한 대로, 펄스 하나에 1 s가 드는 소자로 MNIST 7만 장을 모두 처리하면 약 356일입니다. 그래서 논문들이 lookup 방식을 씁니다. 4개짜리 0·1 조합 16가지에 대한 소자의 응답만 한 번씩 재 두고, 큰 데이터셋은 컴퓨터가 그 16칸짜리 표를 찾아 계산하는 방식입니다(<a href="../days/d25.html#ch-rc-papers">D25 4구간</a>). Roadmap도 이온 수송에 기반한 감지 소자는 재료 고유의 동역학 때문에 더 느리게 반응하는 경향이 있다고 적습니다 <span class="src">Roadmap 2026, p.8120</span>.</p>
+<div class="myth">
+<p><strong>"이온 소자는 느려서 쓸모가 없다" / "이온 소자는 느려서 생체 신호에 딱 맞다"</strong> — 둘 다 조건이 빠졌습니다. τ는 대부분 크기와 메커니즘이 정하고(µs–ks), 과제와 맞는지는 과제마다 다릅니다. 그리고 맞더라도 소자 하나의 처리율은 τ에 묶이므로, 시간다중화나 대량 처리에는 별도의 비용이 됩니다.</p>
+</div>
+<div class="quiz" data-day="d26" data-set="2-check"></div>
+<div class="keypoints">
+<ul>
+<li>τ ~ L²/D: D = 10⁻⁹ m²/s일 때 1 mm → 1,000 s, 10 µm → 0.1 s, 100 nm → 10 µs [가정]. 크기를 10배 줄이면 100배 빨라진다.</li>
+<li>연성 이온 소자의 τ는 52 ms–4,000 s에 흩어져 있다. 고체 양성자 소자는 5 µs <span class="src">Zhou 2026 (Nat. Nanotech.), p.581</span>, 전자 소자도 0.92–123 ms <span class="src">Lee 2025 (npj), p.2–3</span>. ms–s τ는 이온만의 자산이 아니다.</li>
+<li>자연 신호와 맞물리려면 1 ms보다 긴 τ <span class="src">Liang 2024, p.198</span>. 맞더라도 처리율은 τ에 묶여, 시간다중화·대량 처리에는 비용이 된다.</li>
+</ul>
+</div>
+</section>
+<section id="ch-power-stability" class="level3">
+<h3 class="anchored" data-anchor-id="ch-power-stability">3. 전력과 안정성: 이온 소재에 고유한 비용</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 논문에 보고된 사건당 에너지가 무엇을 셌는지 가르고, 전극 계면을 충전하는 에너지를 ½CV²로 어림하며, 이식형 심전도 장치가 1년에 요구하는 반복 횟수와 보고된 내구를 자릿수로 비교할 수 있다.</p>
+</div>
+<section id="전력-fj는-어디서-나오고-무엇이-빠졌나" class="level4">
+<h4 class="anchored" data-anchor-id="전력-fj는-어디서-나오고-무엇이-빠졌나">3-1. 전력: fJ는 어디서 나오고 무엇이 빠졌나</h4>
+<p>D25에서 사건당 에너지가 fJ인 이온 시냅스를 여럿 봤습니다. 그림 3은 그 숫자들을 한 축에 놓고, 옆에 <strong>어떤 조건에서 계산했는지</strong>를 적은 것입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d26/fig3-energy-accounting.svg" alt="로그 에너지축(10⁻¹⁷–10⁻⁷ J)에 보고된 사건당 에너지를 조건과 함께 놓은 그림: Chen 2024 0.074–0.291 fJ(−10 µV), Chang 2025 0.85 fJ(−20 µV), Chen 2025 6 fJ(0.5 pA, 20 mV), Zhou 2025 0.06 pJ(150 mm²), Guo 2026 0.54 pJ(mV 펄스), Zhou 2026 0.2 nJ(입력당, 소자만), Huang 2026 5.5–27.5 nJ(계산 사건당). 아래에 1 mm² 전극의 ½CV² 가정 계산: 20 mV 20 pJ, 0.1 V 0.5 nJ, 1 V 50 nJ" class="figure-img"><figcaption><b>그림 3.</b> 보고된 사건당 에너지와 그 조건(초록, 각 논문 본문: Chen 2024 p.6, Chang 2025 p.7, Chen 2025 p.5, Zhou 2025 p.5, Guo 2026 p.5, Zhou 2026 (Nat. Nanotech.) p.579·586, Huang 2026 p.12). 주황 원은 Claude의 가정 계산으로, 계면 용량 10 µF/cm²(가정: 매끈한 금속 전극의 대표값 약 20 µF/cm²의 절반, Ge 2020 p.3216)인 1 mm² 전극을 한 번 충전할 때 저장되는 에너지 ½CV²다(전원이 쓰는 에너지는 그 두 배인 CV², 3-1절). 축 위의 위치 차이는 소재의 우열이 아니라 대부분 <b>입력 전압과 면적의 차이</b>다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>왜 fJ가 나오나.</strong> 에너지는 대략 전압 × 전류 × 시간입니다(<a href="../days/d17.html#ch-energy-budget">D17 3-1절</a>). 가장 작은 숫자들은 µV 수준의 자극에서 나왔습니다. Chen 2024는 −10 µV에서 0.074 fJ <span class="src">Chen 2024, p.6</span>, Chang 2025는 −20 µV에서 0.85 fJ <span class="src">Chang 2025, p.7</span>를 계산합니다. 그런데 D25 표의 과제 논문들은 ±1 V 펄스를 씁니다(Lee 2026 (AFM), Guo 2026). 전압이 10만 배 커지면 전류도 함께 커지므로, 저항이 그대로라는 단순한 가정에서는 에너지가 전압의 제곱, 즉 10¹⁰배가 됩니다(<a href="../days/d25.html#ch-patterns">D25 5구간</a>에서 한 계산). <span class="tag tag-interp">해석</span></p>
+<p><strong>이온 소자에만 있는 비용 하나: 계면 충전.</strong> 이온 소자에 전압을 걸면 전극 표면에 이온이 모여 전기이중층(EDL)이 생깁니다. 이 층은 커패시터처럼 행동하고(<a href="../days/d20.html#b-edl">D20 기초: EDL</a>, <a href="../days/d04.html#b-capacitor">D4 기초: 커패시터</a>), 펄스를 걸 때마다 이 커패시터가 채워졌다가 비워집니다.</p>
+<ul>
+<li><strong>식의 뜻.</strong> 커패시터를 전압 <span class="math inline">\(V\)</span>까지 채우면 그 안에 <span class="math inline">\(\tfrac{1}{2}CV^2\)</span>의 에너지가 <strong>저장</strong>됩니다. 일정한 전압의 전원으로 저항을 거쳐 채우면 전원은 <span class="math inline">\(CV^2\)</span>를 내놓고, 그 절반은 채우는 동안 저항(이온 소자에서는 전해질 자체)에서 열이 됩니다. 펄스가 끝나 방전할 때 저장된 절반도 열이 됩니다. 그래서 펄스 한 번(충전 → 방전)에 전원이 쓰는 에너지는 <span class="math inline">\(CV^2\)</span>이고, 아래에서 ½CV²로 센 값은 <strong>하한</strong>입니다. D1의 CMOS 인버터에서 출력 커패시터를 충방전할 때와 같은 계산입니다(<a href="../days/d01.html#b-switch-cmos">D1 기초: nMOS·pMOS와 CMOS</a>).</li>
+<li><strong>단위.</strong> <span class="math inline">\(C\)</span> [F] × <span class="math inline">\(V^2\)</span> [V²]. F = C/V(쿨롬 ÷ 볼트)이므로 (C/V) × V² = C × V = J. 면적당 용량 [µF/cm²] × 면적 [cm²] = µF입니다.</li>
+<li><strong>이 계산이 맞는 조건.</strong> (1) 펄스가 계면 충전 시간(τ ≈ RC, <a href="../days/d21.html#b-edl-charging">D21 기초: EDL 충전</a>)보다 길어 끝까지 찬다. 더 짧으면 덜 차서 에너지도 작습니다. (2) 전류가 계면에 전하로 쌓이는 전극(이온을 막는 전극)이다. Ag/AgCl처럼 표면의 산화·환원 반응으로 전류를 넘기는 전극은 커패시터로 쌓이기보다 반응으로 전류가 지나가므로, 그때는 D17처럼 <span class="math inline">\(V \times I \times t\)</span>로 셉니다. [해석: 전기화학 일반 원리(이상적 분극 전극과 비분극 전극의 구분)]</li>
+</ul>
+<div class="stepper">
+<div class="step">
+<p><strong>가정.</strong> 전극–전해질 계면의 용량을 면적당 10 µF/cm²로 둡니다 [가정: 계면 하나만 셈. 두 전극이 모두 이온을 막는 전극이면 두 계면이 직렬이라 C는 절반입니다(D21)]. 매끈한 금속 전극의 대표값은 약 20 µF/cm²(보고 범위 15–50 µF/cm²)이므로 <span class="src">Ge 2020, p.3216</span>, 금속 전극이라면 아래 에너지는 2배 안팎 커질 수 있습니다(거친 다공성 전극이면 더). 전극 면적 1 mm² = 0.01 cm²이면 <span class="math inline">\(C = 10 \times 10^{-6} \times 0.01 = 10^{-7}\)</span> F = 0.1 µF.</p>
+</div>
+<div class="step">
+<p><strong>1 V로 한 번.</strong> <span class="math inline">\(\tfrac{1}{2} \times 10^{-7} \times 1^2 = 5 \times 10^{-8}\)</span> J = <strong>50 nJ</strong>.</p>
+</div>
+<div class="step">
+<p><strong>20 mV로 한 번.</strong> <span class="math inline">\(\tfrac{1}{2} \times 10^{-7} \times 0.02^2 = 2 \times 10^{-11}\)</span> J = <strong>20 pJ</strong>. 전압이 50배 작아지면 에너지는 2,500배 작아집니다(제곱).</p>
+</div>
+<div class="step">
+<p><strong>뜻.</strong> mm 크기 전극을 ±1 V로 펄스마다 충전한다면, 그 에너지만으로도 nJ–수십 nJ 자릿수입니다. D17의 가정값 ADC 한 번 1 nJ과 비슷하거나 큽니다. 이 에너지가 매번 다 열로 빠지는지, 일부 회수되는지는 회로에 달렸습니다 <span class="tag tag-interp">해석</span>. 면적을 줄이면(10 µm × 10 µm는 1 mm²의 1만분의 1) 비례해서 줄어듭니다. 여기서도 <strong>크기</strong>가 손잡이입니다.</p>
+</div>
+</div>
+</section>
+<section id="박동-하나의-장부-d17의-표에-계면-충전을-넣으면" class="level4">
+<h4 class="anchored" data-anchor-id="박동-하나의-장부-d17의-표에-계면-충전을-넣으면">3-2. 박동 하나의 장부: D17의 표에 계면 충전을 넣으면</h4>
+<p>위의 한 번짜리 숫자를 장치 전체의 비용과 비교하려면, D17에서 쌓은 심전도 장치의 박동 하나(추론 한 번 = 신호 1 s) 장부에 넣어야 합니다(<a href="../days/d17.html#ch-energy-budget">D17 3-3절</a>). D17의 B 경로(이온 RC, 아날로그 입력)는 소자 10개 × 박동당 50단계 = <strong>펄스 500개</strong>였고, 소자 줄은 0.5 V × 1 µA × 1 ms = 0.5 nJ/펄스라는 가정이었습니다. 이 소자 줄만 계면 충전 계산으로 바꿔 봅니다. 나머지 줄의 값과 기호(ⓐ–ⓙ)는 D17 3-2절 표의 가정값 그대로입니다.</p>
+<div class="predict">
+<p>1 mm² 전극을 1 V 펄스로 박동마다 500번 충전한다면, 그 에너지만으로 D17의 '디지털만' 경로 전체(박동당 21.05 µJ)보다 클까요, 작을까요? 아래 표를 펼치기 전에 어림해 보세요.</p>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>줄 (D17 기호)</th>
+<th>한 번의 에너지 (단위를 따라가며)</th>
+<th>박동 하나에 몇 번</th>
+<th>박동당 [µJ]</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>소자 ⓘ, D17의 가정</td>
+<td>0.5 V × 1 µA × 1 ms = 0.5 nJ (V·A·s = J)</td>
+<td>펄스 500</td>
+<td>0.25</td>
+</tr>
+<tr class="even">
+<td>소자, 계면 충전 1 mm², 0.5 V</td>
+<td>C = 10 µF/cm² × 0.01 cm² = 0.1 µF → ½ × 10⁻⁷ F × (0.5 V)² = 1.25 × 10⁻⁸ J = 12.5 nJ</td>
+<td>500</td>
+<td>6.25</td>
+</tr>
+<tr class="odd">
+<td>소자, 계면 충전 1 mm², 1 V</td>
+<td>½ × 10⁻⁷ F × (1 V)² = 5 × 10⁻⁸ J = 50 nJ</td>
+<td>500</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<td>소자, 계면 충전 100 µm × 100 µm, 0.5 V</td>
+<td>C = 10 µF/cm² × 10⁻⁴ cm² = 1 nF → ½ × 10⁻⁹ F × (0.5 V)² = 0.125 nJ</td>
+<td>500</td>
+<td>0.0625</td>
+</tr>
+<tr class="odd">
+<td>펄스 구동 ⓗ</td>
+<td>0.1 nJ</td>
+<td>500</td>
+<td>0.05</td>
+</tr>
+<tr class="even">
+<td>상태 읽기 TIA ⓙ (늘 켜짐)</td>
+<td>1 µW/채널 × 1 s = 1 µJ/채널 (W·s = J)</td>
+<td>10채널</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>상태 ADC ⓓ</td>
+<td>1 nJ/변환</td>
+<td>50 (소자 10 × 5번)</td>
+<td>0.05</td>
+</tr>
+<tr class="even">
+<td>readout: MCU의 곱하고 더하기 ⓕ</td>
+<td>3 nJ/MAC</td>
+<td>100 (특징 50 × 2클래스)</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td>MCU 대기·제어 ⓑ</td>
+<td>2 µW × 1 s = 2 µJ</td>
+<td>—</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>AFE ⓐ + 무선 ⓒ</td>
+<td>10 µW × 1 s + 16 bit × 50 nJ/bit</td>
+<td>—</td>
+<td>10 + 0.8</td>
+</tr>
+</tbody>
+</table>
+<p>소자 줄을 뺀 나머지의 합은 0.05 + 10 + 0.05 + 0.3 + 2 + 10.8 = <strong>23.2 µJ</strong>입니다. 소자 줄을 무엇으로 두느냐에 따라 합과 소자의 몫이 이렇게 바뀝니다. [가정, Claude 계산]</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>소자 줄을 무엇으로 두나</th>
+<th>박동 하나의 합 [µJ]</th>
+<th>소자의 몫</th>
+<th>가장 큰 줄</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D17의 가정 (V × I × t)</td>
+<td>23.2 + 0.25 = 23.45</td>
+<td>1.1%</td>
+<td>TIA·AFE (각 10)</td>
+</tr>
+<tr class="even">
+<td>계면 충전 1 mm², 0.5 V</td>
+<td>23.2 + 6.25 = 29.45</td>
+<td>21%</td>
+<td>TIA·AFE, 그다음 소자</td>
+</tr>
+<tr class="odd">
+<td>계면 충전 1 mm², 1 V</td>
+<td>23.2 + 25 = 48.2</td>
+<td>52%</td>
+<td><strong>소자</strong></td>
+</tr>
+<tr class="even">
+<td>계면 충전 100 µm × 100 µm, 0.5 V</td>
+<td>23.2 + 0.06 ≈ 23.26</td>
+<td>0.3%</td>
+<td>TIA·AFE</td>
+</tr>
+<tr class="odd">
+<td>(비교) D17의 A: 디지털만</td>
+<td>21.05</td>
+<td>—</td>
+<td>AFE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>사슬로 읽기.</strong> mm 크기 전극(1 mm²) × 계면 10 µF/cm² → C = 0.1 µF → ±1 V 펄스마다 ½CV² = 50 nJ → 박동당 500펄스면 25 µJ → <strong>이 줄 하나가 디지털 경로 전체(21.05 µJ)보다 큽니다.</strong> 전원이 실제로 내놓는 <span class="math inline">\(CV^2\)</span>로 세면 두 배인 50 µJ입니다. 반대로 전극 한 변을 1/10(100 µm)로 줄이면 면적이 1/100이라 에너지도 1/100이 되고, 전압을 0.5 V로 낮추면 다시 1/4이 되어 소자의 몫은 0.3%로 떨어집니다. 그러면 병목은 박동 내내 켜져 있는 TIA(10 µJ)로 옮겨 갑니다(D17의 결론). readout 쪽(ADC 0.05 + MAC 0.3 = 0.35 µJ)은 어느 경우에도 작습니다. 정리하면, 이 장부에서 시스템 에너지를 정하는 것은 <strong>mm 크기 전극의 계면 충전</strong>이거나 <strong>늘 켜진 읽기 회로</strong>이고, 어느 쪽인지는 전극 면적과 펄스 전압이 가릅니다. <span class="tag tag-interp">해석</span></p>
+<p>D17의 소자 줄이 작았던 이유도 같은 식으로 보입니다. 1 µA × 1 ms = 1 nC(전하 = 전류 × 시간)인데, 1 mm² 계면을 0.5 V까지 채우는 데 필요한 전하는 <span class="math inline">\(Q = CV\)</span> = 0.1 µF × 0.5 V = 50 nC입니다. D17의 가정은 이 계면의 1/50만 채우는 셈이므로, 계면이 작은 소자나 계면이 거의 차지 않는 짧은 펄스에 해당합니다. [Claude 계산]</p>
+<p><strong>경계를 밝힌 좋은 예.</strong> Zhou 2026 (Nat. Nanotech.)은 입력 하나당 약 0.2 nJ을 보고하면서, 이 값이 "주변 읽기 회로나 앞단 회로를 뺀, 소자 고유 동작만"이라고 스스로 적습니다 <span class="src">Zhou 2026 (Nat. Nanotech.), p.586</span>. 이런 문장이 있으면 독자는 숫자를 어디에 놓을지 압니다. 시스템 에너지를 보고한 이온 소자 논문은 폴더에 없습니다. <span class="tag tag-interp">해석</span></p>
+</section>
+<section id="안정성-젖은-소재-반응하는-전극-몇-번이나-버티나" class="level4">
+<h4 class="anchored" data-anchor-id="안정성-젖은-소재-반응하는-전극-몇-번이나-버티나">3-3. 안정성: 젖은 소재, 반응하는 전극, 몇 번이나 버티나</h4>
+<p>D18에서 편차를 반복 간·소자 간·drift·환경으로 나눴습니다(<a href="../days/d18.html#b-variability">D18 기초</a>). 연성 이온 소재에는 그중 특히 아픈 곳이 있습니다.</p>
+<ul>
+<li><strong>물이 빠진다.</strong> Guo 2026의 3×3 배열은 17시간 동안 각 칸의 전류가 서서히 줄었고, 저자들은 겔 탈수로 내부 저항이 커진 것으로 봅니다 <span class="src">Guo 2026, p.7</span>. Wu 2025는 고온·고습 같은 극한 조건에 오래 두면 하이드로겔 탈수나 전해질 결정화가 생길 수 있다고 씁니다 <span class="src">Wu 2025, p.9</span>. Roadmap은 이온–전자 혼합 전도 고분자가 열과 습기에 팽윤·박리·균열로 열화할 수 있다고 정리합니다 <span class="src">Roadmap 2026, p.8123</span>.</li>
+<li><strong>전극이 소모된다.</strong> Ag/AgCl 전극은 전류가 흐를 때 화학 반응으로 전자를 주고받습니다(D27 1구간). 한 방향으로만 계속 전압을 걸면 전극 물질이 다 쓰일 수 있어서, 이식형 약물 방출 장치는 일부러 전압 방향을 번갈아 걸었습니다 <span class="src">Yoo 2025, p.5</span>.</li>
+<li><strong>몇 번이나 버티나(내구).</strong> Aluru 2026의 표는 이온 소자의 내구를 <strong>10² 회</strong>로 적습니다. 같은 표에서 전기화학 RAM(ECRAM, 이온을 넣고 빼서 저항을 바꾸는 메모리 소자; RAM은 <a href="../days/d02.html#b-memory-kinds">D2 기초</a>)은 10⁹ 회, 상변화 메모리(PCM)는 10¹² 회입니다 <span class="src">Aluru 2026, p.598</span>. 이 표는 주로 나노유체 이온 소자를 모은 값이고, 폴더의 연성 소자들은 500 회의 쓰기·지우기(Guo 2026 <span class="src">Guo 2026, p.6</span>), 1,000 회의 빛 자극(Chen 2024 <span class="src">Chen 2024, p.8</span>), 4,000개가 넘는 펄스(Lee 2026 (ACS Nano) <span class="src">Lee 2026 (ACS Nano), p.19468</span>)를 보였습니다.</li>
+</ul>
+<p><strong>숫자로 보는 병목: 1년의 박동.</strong> 몸 안에서 심전도를 박동마다 판정하는 장치를 생각합니다(D27). 필요한 반복 횟수를 계산해 봅니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>하루의 박동.</strong> 1분에 60번(1초에 1번)이라고 하면 하루 86,400 s × 1번/s = <strong>86,400번</strong> [가정: 심박수].</p>
+</div>
+<div class="step">
+<p><strong>1년의 박동.</strong> 86,400 × 365 = <strong>31,536,000번</strong>, 약 3.2 × 10⁷번.</p>
+</div>
+<div class="step">
+<p><strong>1년의 펄스.</strong> Zhong 2022처럼 박동 하나를 50단계로 나눠 넣는다면 <span class="src">Zhong 2022, p.675</span> 3.2 × 10⁷ × 50 ≈ <strong>1.6 × 10⁹ 펄스</strong>. (Zhong 2022는 각 단계를 다시 길이 5의 마스크로 넣으므로 소자 하나가 받는 펄스는 그 5배일 수 있습니다. 아래 비교는 적게 잡은 쪽입니다.)</p>
+</div>
+<div class="step">
+<p><strong>보고된 내구와 비교.</strong> 폴더 연성 소자의 최대치 4,000 펄스와 비교하면 1.6 × 10⁹ ÷ 4 × 10³ = 4 × 10⁵, 즉 <strong>다섯 자릿수 넘게</strong> 모자랍니다. 보고된 내구가 "그 이상은 재지 않았다"는 뜻일 수도 있으므로 소자가 반드시 그만큼 약하다는 뜻은 아닙니다. 그러나 <strong>이식형 응용이 요구하는 수준의 반복을 잰 연성 이온 소자는 폴더에 없습니다.</strong> <span class="tag tag-interp">해석</span></p>
+</div>
+</div>
+<p>이 계산은 D27의 교차표에서 "수명·안정성" 칸의 가장 큰 숫자가 됩니다. 그리고 D18의 재보정 주기(허용 drift ÷ drift 속도, <a href="../days/d18.html#ch-long-term">D18 4구간</a>)와 함께 봐야 합니다. 몸 안에서 수십억 번 펄스를 받는 동안 응답이 얼마나 흐르는지, 그때마다 readout을 다시 맞출 수 있는지가 이식형 RC의 성패를 정합니다.</p>
+<div class="quiz" data-day="d26" data-set="3-check"></div>
+<div class="keypoints">
+<ul>
+<li>가장 작은 fJ 숫자는 µV 자극에서 나왔다(−10 µV에서 0.074 fJ <span class="src">Chen 2024, p.6</span>). 과제의 ±1 V 펄스, 읽기 회로, readout은 경계 밖이다.</li>
+<li>계면 충전 ½CV²: 1 mm², 10 µF/cm²[가정], 1 V → 50 nJ, 20 mV → 20 pJ. 면적과 전압의 제곱이 손잡이다. ½CV²는 저장되는 몫이고, 전원은 펄스마다 CV²를 쓴다(하한과 실제).</li>
+<li>박동당 장부(D17 B 경로, 펄스 500개): 소자 줄을 1 mm²·1 V 계면 충전으로 바꾸면 25 µJ로 합 48.2 µJ의 52%, 디지털 경로 전체(21.05 µJ)보다 크다. 100 µm 전극·0.5 V면 0.06 µJ(0.3%)이고 병목은 늘 켜진 TIA(10 µJ) [가정, Claude 계산].</li>
+<li>연성 이온 소재의 안정성 문제: 탈수(17시간 전류 감소 <span class="src">Guo 2026, p.7</span>), 팽윤·박리 <span class="src">Roadmap 2026, p.8123</span>, 전극 소모 <span class="src">Yoo 2025, p.5</span>, 내구 10² 회(나노유체 위주) <span class="src">Aluru 2026, p.598</span>.</li>
+<li>이식 ECG 1년 ≈ 3.2 × 10⁷ 박동 ≈ 1.6 × 10⁹ 펄스 vs 보고된 최대 4,000 펄스: 다섯 자릿수 이상의 간극 <span class="tag tag-interp">해석</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-array-integration" class="level3">
+<h3 class="anchored" data-anchor-id="ch-array-integration">4. 배열과 집적: 소자 하나에서 수천 개로</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 배열(array)·crossbar·집적이 무엇인지 그림으로 설명하고, 왜 만드는지, 어떻게 만드는지(패터닝·리소그래피·인쇄), 읽을 때 무엇이 새는지(sneak path)와 그 해결(1T1R)을 말하며, 젤·연성 이온 소자가 지금 어디까지 집적됐는지 폴더 논문으로 답할 수 있다.</p>
+</div>
+<p>D25의 표에서 "배열"이 여러 번 나왔습니다. 10×10 배열, 5×5 배열, 20×20 배열. 그런데 배열이 정확히 무엇이고, 왜 그렇게 중요하게 다루는지는 아직 말하지 않았습니다. 처음부터 갑니다.</p>
+<div id="b-array-integration" class="basics">
+<section id="배열crossbar집적이란-무엇이고-어떻게-만드나" class="level4">
+<h4 class="anchored" data-anchor-id="배열crossbar집적이란-무엇이고-어떻게-만드나">배열·crossbar·집적이란 무엇이고 어떻게 만드나</h4>
+<p><strong>① 소자 하나는 선 두 개가 필요하다.</strong> 실험실의 이온 소자를 떠올려 보세요. 한쪽 전극에 선을 하나 이어 전압을 걸고, 다른 쪽 전극에 선을 하나 이어 전류를 잽니다. 소자 하나에 선 두 개, 그리고 소스미터 한 대입니다. 소자가 9개면 선 18개, 100개면 200개, 1만 개면 2만 개입니다(그림 5a). 선마다 측정 장비의 채널이 하나씩 필요하고, 선이 차지하는 자리가 소자보다 커집니다.</p>
+<p><strong>② 배열 = 소자를 격자로 놓고 선을 나눠 쓰는 것.</strong> 소자를 바둑판처럼 가로줄(행)과 세로줄(열)에 맞춰 놓고, 같은 가로줄의 소자들은 가로 선 하나를, 같은 세로줄의 소자들은 세로 선 하나를 함께 씁니다. 가로 선과 세로 선이 교차하는 점마다 소자가 하나 있어서 이 구조를 <strong>crossbar</strong>(교차 막대)라고 부릅니다. 이제 3×3 배열은 선 6개(가로 3 + 세로 3), 100×100은 선 200개면 됩니다. 소자 1만 개를 선 200개로 다룹니다(그림 5a). D4에서 crossbar가 행렬–벡터 곱(숫자 표의 각 행과 입력 목록을 자리끼리 곱해 더하기, <a href="../days/d02.html#ch-mvm">D2 3구간</a>)을 물리로 한다는 것을 봤습니다. 가로 선에 전압을 걸면 교차점 소자마다 Ohm 법칙으로 곱셈이 일어나고, 세로 선에서 전류가 합쳐지며 덧셈이 일어납니다(<a href="../days/d04.html#ch-vmm">D4 2구간</a>).</p>
+<p><strong>③ 왜 만드나.</strong> 세 가지 이유가 있습니다. (가) <strong>노드 수</strong>: reservoir가 담을 수 있는 정보의 총량은 서로 다른 노드의 수에 묶입니다(<a href="../days/d11.html#b-ipc">D11 기초: IPC</a>). 소자 하나를 시간으로 쪼개 쓰는 데는 2구간의 처리율 한계가 있으니, 물리적으로 다른 소자가 여러 개 필요합니다. (나) <strong>readout 계산</strong>: 가중합을 crossbar로 하면 상태들을 숫자로 바꾸지 않고 물리로 곱해 더할 수 있습니다(5구간). (다) <strong>크기와 배선</strong>: 장치를 작게 만들려면 선과 측정 채널의 수를 줄여야 합니다.</p>
+<p><strong>④ 집적(integration)이란.</strong> 같은 면적에 소자를 많이 두고, 그 소자들을 쓰는 데 필요한 배선·스위치·읽기 회로와 함께 <strong>한 판(칩이나 기판) 위에</strong> 만드는 것입니다. 실험실에서는 소자 1개가 장비 케이블 2개와 이어지지만, 집적된 장치에서는 소자 수천 개가 칩 안의 배선과 몇 개의 주변회로에 이어집니다. Liang 리뷰는 물리 RC의 집적을 세 수준으로 나눕니다. 낱개 소자의 측정, 인쇄회로기판(PCB, 부품을 꽂아 납땜하는 녹색 판) 위의 회로 집적, 그리고 칩 수준의 집적입니다 <span class="src">Liang 2024, p.202</span>.</p>
+<p><strong>⑤ 어떻게 만드나.</strong> 기판 위에 원하는 모양을 그려 넣는 일을 <strong>패터닝</strong>이라고 합니다. 대표적인 방법 셋입니다. - <strong>포토리소그래피</strong>: 빛에 반응하는 막을 바르고, 무늬가 뚫린 가리개(마스크)를 통해 빛을 쬔 뒤, 빛을 받은 부분(또는 받지 않은 부분)만 녹여 내 무늬를 남깁니다. 그 위에 금속을 올리거나 깎아 µm–nm 크기의 선을 만듭니다. 반도체 칩을 만드는 방법입니다. Huang 2026의 그래핀 산화물 나노채널 소자가 이 방법을 썼습니다 <span class="src">Huang 2026, p.2</span>. - <strong>인쇄</strong>: 실크스크린처럼 무늬가 뚫린 망 위로 잉크를 밀어 기판에 찍습니다(스크린 인쇄). 빠르고 싸지만 선이 굵습니다. Guo 2026은 Ag/AgCl 선을 스크린 인쇄로 폭 약 250 µm로 찍었습니다 <span class="src">Guo 2026, p.10</span>. - <strong>레이저 가공과 빛 경화</strong>: 레이저로 구멍을 뚫거나 접착 필름을 잘라 채널을 만들고, 겔 전구체를 떨어뜨려 빛으로 굳힙니다. Zhang 2024 (ACS Nano)는 펨토초 레이저로 자른 접착 필름 채널과 마스크 빛 경화로 겔을 만들어 "포토리소그래피와 식각이 필요 없다"고 씁니다 <span class="src">Zhang 2024 (ACS Nano), p.15026</span>.</p>
+<p><strong>⑥ 읽을 때 새는 길: sneak path.</strong> 3×3 crossbar에서 가운데 칸(행 2, 열 2)만 읽고 싶다고 합시다. 행 2에 전압을 걸고 열 2의 전류를 잽니다. 전류는 가운데 소자를 지나 열 2로 오는 길(원하는 길)만 가지 않습니다. 행 2 → 소자(2,1) → 열 1 → 소자(1,1) → 행 1 → 소자(1,2) → 열 2처럼, <strong>옆 소자 세 개를 거쳐 열 2로 들어오는 길</strong>도 있습니다(그림 5b의 빨간 점선). 이 엉뚱한 길로 새는 전류를 <strong>sneak path</strong>(몰래 지나가는 길)라고 부릅니다. 이 전류가 섞이면 가운데 칸의 값을 잘못 읽고, 쓸 때도 엉뚱한 칸이 함께 바뀝니다. Jiang 리뷰는 sneak path를 "배열 안의 의도하지 않은 경로를 따라 흐르는 기생 전류로, 쓰기와 읽기의 정확도를 떨어뜨린다"고 정의합니다 <span class="src">Jiang 2026, p.1114</span>. 이 우회 전류가 따로 섞이는 것은 칸 하나만 읽거나 쓰려고 나머지 선을 떠 있게 둘 때입니다. 모든 입력선을 구동하고 모든 출력선을 0 V로 붙드는 행렬–벡터 곱에서는 선마다 전위가 정해져 있어 따로 생기지 않고, IR drop으로 전위가 어긋난 만큼만 섞입니다(<a href="../days/d04.html#ch-vmm">D4 2구간 조건 4</a>에서 본 구분).</p>
+<p><strong>⑦ 해결: 1T1R과 선택 소자</strong>(D4 <a href="../days/d04.html#b-transistor">기초 4</a>의 복습). 가장 흔한 해결은 칸마다 <strong>트랜지스터</strong>(전압으로 여닫는 스위치, <a href="../days/d01.html#b-transistor">D1 기초</a>)를 하나씩 소자와 직렬로 붙이는 것입니다. 읽는 칸의 스위치만 켜면 다른 칸을 거치는 길이 끊깁니다(그림 5c). 이것을 1T1R(트랜지스터 1개 + 저항성 소자 1개)이라 부르고, Jiang 리뷰는 이것이 sneak path를 효과적으로 막고 정밀한 쓰기도 가능하게 한다고 씁니다 <span class="src">Jiang 2026, p.1114</span>. Liang 리뷰도 readout 배열의 셀은 sneak path를 피하려고 보통 1T1R 구조를 쓴다고 적습니다 <span class="src">Liang 2024, p.198</span>. 트랜지스터 대신 일정 전압 아래에서는 전류를 거의 흘리지 않는 "선택 소자"를 쓰는 방법도 있지만, 큰 배열에서는 트랜지스터만큼 성숙하지 않다고 합니다 <span class="src">Jiang 2026, p.1114</span>. 대가는 칸마다 트랜지스터 하나의 면적과, 스위치를 켜는 선 하나입니다. 배열이 커지면 선 자체의 저항 때문에 먼 칸의 전압이 떨어지는 문제(IR drop)도 커집니다(예: 128×128을 넘으면) <span class="src">Jiang 2026, p.1114</span>. 한 줄의 칸 수를 두 배로 하면 강하가 약 네 배가 된다는 계산은 <a href="../days/d04.html#ch-vmm">D4 2구간 조건 2</a>에 있습니다.</p>
+</section>
+</div>
+<figure class="fig figure"><img src="../assets/img/d26/fig5-array-basics.svg" alt="a: 소자 하나는 선 두 개(V 걸기, I 재기); 따로 뽑으면 3×3은 선 18개, 10×10은 200개, 100×100은 20,000개, crossbar로 나눠 쓰면 6개, 20개, 200개. b: 3×3 crossbar에서 가운데 칸을 읽을 때 행2→소자(2,2)→열2의 초록 길과 행2→(2,1)→열1→(1,1)→행1→(1,2)→열2의 빨간 sneak path. c: 1T1R에서 게이트 선으로 읽는 칸의 트랜지스터만 켜고 나머지는 끊긴다. 왼쪽 아래에 집적의 정의" class="figure-img"><figcaption><b>그림 5.</b> 배열의 기초(모식도). <b>a</b> 선의 수는 코드가 계산했다(따로: 2 × 소자 수, crossbar: 행 + 열). <b>b</b> 가운데 칸을 읽을 때 원하는 길(초록)과 옆 소자 셋을 거쳐 새는 sneak path(빨강). <b>c</b> 칸마다 트랜지스터(T)를 붙인 1T1R: 게이트 선으로 읽는 칸의 T만 켠다. 실제 배열은 소자가 교차점 위아래로 쌓인 입체 구조이고, 이 그림은 전기적 연결만 보인다. (Claude가 그림)</figcaption></figure>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/rvA5r4LtVnc?start=24&amp;rel=0" title="영상: 6-Minute Memristor Guide" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:24–2:37, 약 2분 · 전체 6분, 영어).</b> IEEE Spectrum, "6-Minute Memristor Guide" (2008). <b>볼 이유:</b> 설명란: memristor를 발견한 HP 연구팀의 R. Stanley Williams가 화이트보드로 소자의 동작을 짧게 설명한다. 챕터 'Designing the Crossbar Array'(0:24)와 'Realizing the Physical Device'(1:20)가 위 ②의 가로 선·세로 선이 교차하는 격자, 그리고 교차점마다 소자가 놓인 실제 구조를 손으로 그려 보여 준다. 2:37 이후는 memristor 발견 이야기와 동작 원리(산화물 속 산소 빈자리의 이동)이고 2008년 영상이라 최신 배열 기술은 다루지 않는다. <b>보고 답할 질문:</b> 영상의 격자에서 한 교차점만 읽으려 할 때, 그림 5b의 sneak path는 어느 선들을 따라 생기나? 영상의 구조에는 그림 5c의 트랜지스터가 있나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·설명·챕터(영상 내용은 직접 보지 못함)</span></div></div>
+<section id="배열-둘레에는-무엇이-붙고-n이-커지면-무엇이-늘어나나" class="level4">
+<h4 class="anchored" data-anchor-id="배열-둘레에는-무엇이-붙고-n이-커지면-무엇이-늘어나나">4-1. 배열 둘레에는 무엇이 붙고, N이 커지면 무엇이 늘어나나</h4>
+<p><strong>무엇을 보려는가.</strong> 그림 5는 배열의 전기적 연결만 보였습니다. 실제 장치에서 배열은 혼자 있지 않습니다. 선 끝마다 전압을 걸어 주는 회로와 전류를 받아 읽는 회로가 붙고, 그 회로의 개수와 쓰는 시간이 배열 크기에 따라 <strong>서로 다르게</strong> 늘어납니다. 이것이 "배열을 키우면 무엇이 비싸지나"의 답입니다. 부품 하나하나는 D4에서 봤습니다(드라이버·DAC는 <a href="../days/d04.html#ch-periphery">D4 6구간</a>, TIA·ADC는 <a href="../days/d04.html#ch-vmm">D4 2구간 그림 1-0</a>).</p>
+<p><strong>생김새.</strong> 그림 5-1은 4×4 crossbar를 위에서 본 배치입니다. 배열 왼쪽 가장자리에는 행마다 드라이버(DAC를 포함해, 그 행에 정해진 전압을 거는 회로)가 하나씩, 아래 가장자리에는 열마다 TIA가 하나씩 줄지어 있습니다. TIA 출력 4개는 MUX(여러 선 가운데 하나를 골라 한 선으로 보내는 스위치 묶음, <a href="../days/d17.html#ch-sensing-chain">D17 2구간</a>)로 모여 <strong>ADC 하나</strong>에 차례로 들어가고, ADC가 낸 숫자를 <strong>MCU 하나</strong>가 받습니다. MCU는 어느 행에 언제 전압을 걸지, MUX가 어느 열을 고를지도 정합니다(점선).</p>
+<figure class="fig figure"><img src="../assets/img/d26/fig5-1-array-periphery.svg" alt="왼쪽: 4×4 crossbar 평면 배치. 행 4개 왼쪽 끝에 드라이버 D가 하나씩, 열 4개 아래 끝에 TIA가 하나씩, TIA 출력이 MUX로 모여 ADC 하나로, ADC가 MCU·제어로 이어지고 MCU에서 드라이버와 MUX로 제어 점선. 오른쪽 표: N×N 배열에서 소자 N²(16, 10⁴, 10⁶), 선 2N(8, 200, 2,000), 행 드라이버 N, 열 TIA N, ADC 1, 다 읽는 데 변환 N번, 변환 에너지 4 nJ·0.1 µJ·1 µJ, MCU 1, 먼 칸의 IR drop 0.02 mV·10 mV·약 1 V" class="figure-img"><figcaption><b>그림 5-1.</b> 배열 둘레의 회로(모식도). 왼쪽: 행에 전압을 걸고 열에서 전류를 재는 4×4 배열(그림 5와 같은 방향). 파란 D가 행 드라이버, 주황 삼각형이 열 TIA, 그 아래 MUX가 TIA 출력을 하나씩 골라 ADC 하나로 보낸다. 오른쪽: N에 따라 필요한 수. 변환 에너지는 D17 3-2절의 가정값(1 nJ/회), IR drop은 D4 2구간의 모형(한 줄에 N칸, 칸마다 1 µA, 칸 사이 배선 2 Ω)으로 Claude가 계산했다. 1T1R이면 게이트 선 구동 회로가 행마다 하나씩 더 붙는다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>N이 커지면.</strong> 늘어나는 방식이 셋으로 나뉩니다.</p>
+<ol type="1">
+<li><strong>칸 수에 비례(N²)</strong>: 소자.</li>
+<li><strong>둘레에 비례(N)</strong>: 선, 드라이버, TIA, 1T1R이면 게이트 선. 이 회로들은 가장자리에만 놓이므로, 칸 하나가 나눠 지는 몫은 N ÷ N² = 1/N로 줄어듭니다. 배열이 클수록 주변회로가 칸당 싸지는 이유입니다(<a href="../days/d04.html#ch-periphery">D4 6구간의 조건 3</a>).</li>
+<li><strong>공유(1개)</strong>: ADC와 MCU. 개수는 그대로지만 <strong>차례로</strong> 써야 하므로, 배열 전체를 한 번 읽는 ADC 변환은 N번이고 그 시간과 에너지가 N에 비례합니다.</li>
+</ol>
+<p>그리고 선이 길어지고 선에 모이는 전류가 커지므로 IR drop은 N²에 가깝게 커집니다.</p>
+<p><strong>작은 예제: N = 4 → 100 → 1,000.</strong> 소자 16 → 10⁴ → 10⁶개, 선 8 → 200 → 2,000개, TIA 4 → 100 → 1,000개. ADC는 1개 그대로지만 한 번 다 읽는 변환은 4 → 100 → 1,000번이고, D17의 가정값 1 nJ/변환이면 4 nJ → 0.1 µJ → 1 µJ입니다. D4의 IR drop 모형으로 가장 먼 칸의 출력선이 뜨는 전압은 2 Ω × (1 + 2 + ⋯ + N) µA로 약 0.02 mV → 10 mV → 1 V입니다. 0.1 V로 읽는 배열이라면 N = 1,000에서는 이 모형이 그대로 성립할 수 없을 만큼 커서, 배열을 작은 조각(타일)으로 나누거나 칸의 전류를 줄여야 합니다. [Claude 계산, D4·D17의 가정값; 타일로 나누는 대응은 일반적인 설계 방식에 대한 해석]</p>
+<p><strong>연구와의 연결.</strong> 폴더에서 이 둘레 회로까지 배열과 한 판에 올린 예는 산화물 소자의 Zhong 2022 PCB(5구간)이고, 연성 이온 배열 논문(아래 4-2)에서는 찾지 못했습니다. <span class="tag tag-interp">해석</span> 연성 이온 배열을 키울 때 무엇이 함께 커지는지는 이 그림의 오른쪽 표가 미리 알려 줍니다.</p>
+</section>
+<section id="젤연성-이온-소자도-집적되나-폴더의-세-예" class="level4">
+<h4 class="anchored" data-anchor-id="젤연성-이온-소자도-집적되나-폴더의-세-예">4-2. 젤·연성 이온 소자도 집적되나: 폴더의 세 예</h4>
+<p><strong>원문 그림을 읽기 전에.</strong> 아래 Guo 2026의 그림 4는 네 패널입니다. a는 3×3 배열의 구조 그림(투명 판 위의 분홍 반구가 겔 소자), b는 그 9개 소자의 전류–전압 곡선, c는 10×10 배열의 사진, d는 10×10 중 동작한 칸(연한 색)과 동작하지 않은 칸(진한 청록)의 지도입니다. <strong>c의 눈금 막대(10 mm)로 칸 하나의 크기를 어림해 보세요.</strong></p>
+<figure class="fig paper figure"><img src="../assets/img/papers/guo2026-fig4.png" alt="Guo 2026 Fig. 4: a 3×3 유체 memristor 배열 구조(Ag/AgCl 전극, PI 막, 갇힌 하이드로겔 memristor, UV 봉지제), b 9개 소자의 I–V 곡선(−1~1 V), c 10×10 배열 사진(입력 전극 X1–X10, 출력 전극 Y1–Y10, 눈금 10 mm), d 10×10 기능 지도(동작하지 않는 칸 6개)" class="figure-img"><figcaption><b>원문 그림.</b> Guo et al., <a href="https://doi.org/10.1038/s41467-026-70728-1" target="_blank"><i>Nat. Commun.</i> 2026, 17, 4275</a>, Fig. 4, p.6. 볼 것: <b>b</b>의 9개 곡선은 모양은 비슷하지만 −1 V에서의 전류가 칸마다 다르다(본문은 교차점 전압 560 ± 60 mV로 정리, p.6). <b>c</b>의 눈금 10 mm에 칸 열 개가 거의 들어가므로 칸 사이 간격은 mm 단위다. <b>d</b>에서 진한 칸 6개가 동작하지 않아 수율 94%다(p.7). 이 배열은 칸마다 스위치가 없는 수동 crossbar이고, 본문에 sneak path·선택 소자에 대한 논의는 없다. 계산(4×5 숫자, MNIST)에는 3×3 배열 중 소자 다섯 개를 각각 하나의 reservoir 노드로 썼고 readout은 MATLAB이다(p.8). 측정 데이터. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>예</th>
+<th>무엇을 만들었나</th>
+<th>어떻게</th>
+<th>무엇을 계산했나</th>
+<th>아직 아닌 것</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Guo 2026 (Nat. Commun.)</td>
+<td>하이드로겔 유체 memristor 10×10(수율 94%), 3×3</td>
+<td>스크린 인쇄 Ag/AgCl 선, 레이저로 뚫은 원뿔 구멍(끝 5 µm, 바닥 50 µm), 겔 방울 2.5 µL를 빛으로 경화 <span class="src">Guo 2026, p.10</span></td>
+<td>3×3 중 5개를 각각 reservoir 노드로, readout은 MATLAB <span class="src">Guo 2026, p.8</span></td>
+<td>배열로 동시에 곱해 더하기, sneak path 대책, 칸 간격 축소</td>
+</tr>
+<tr class="even">
+<td>Zhang 2024 (ACS Nano, 읽음)</td>
+<td>평면 바이폴라 폴리전해질 겔 memristor. 가장 작은 가운데 채널 폭 100 µm, 길이 500 µm <span class="src">Zhang 2024 (ACS Nano), p.15027</span></td>
+<td>레이저로 자른 접착 필름 채널 + 마스크 빛 경화 <span class="src">Zhang 2024 (ACS Nano), p.15026</span></td>
+<td>계산 과제 없음. "기하학적으로 확장 가능"은 <strong>크기에 따라 기억 시간이 바뀐다</strong>는 뜻(200–4,000 s)</td>
+<td>배열. 저자들의 다음 목표가 "작은 규모의 집적 이온 회로" <span class="src">Zhang 2024 (ACS Nano), p.15032</span></td>
+</tr>
+<tr class="odd">
+<td>Huang 2026 (Adv. Mater.)</td>
+<td>그래핀 산화물 광 나노유체 소자. 소자 2개를 이은 논리 게이트, 부화소 27개 배열(정류비 변동계수 15% 미만) <span class="src">Huang 2026, p.12</span></td>
+<td>포토리소그래피 미세가공 <span class="src">Huang 2026, p.2</span></td>
+<td>27 부화소의 전류를 키르히호프 법칙으로 합해 글자 셋 인식. 가중치는 컴퓨터에서 학습해 게이트 전압으로 옮김 <span class="src">Huang 2026, p.12</span></td>
+<td>큰 네트워크. 저자들도 네트워크 확장과 부화소 축소가 "상당한 제조 과제"로 남는다고 씀 <span class="src">Huang 2026, p.12</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="집적-밀도-크기τ의-묶임-그리고-집적이-안-되면" class="level4">
+<h4 class="anchored" data-anchor-id="집적-밀도-크기τ의-묶임-그리고-집적이-안-되면">4-3. 집적 밀도, 크기–τ의 묶임, 그리고 집적이 안 되면</h4>
+<p><strong>집적 밀도를 자릿수로.</strong> Guo 2026의 10×10은 40 mm × 40 mm 기판 위에 있습니다 <span class="src">Guo 2026, p.7</span>. 소자 100개 ÷ 16 cm² ≈ <strong>6개/cm²</strong>. 비교로, Zhong 2022의 reservoir 산화물 memristor 하나의 크기는 5 µm × 5 µm입니다 <span class="src">Zhong 2022, p.679</span>. 칸 사이 간격을 소자 크기의 두 배(10 µm)로만 잡아도 1 cm²에 (10⁴ µm ÷ 10 µm)² = 10⁶개, 즉 <strong>백만 개/cm²</strong>가 들어갑니다 [가정: 간격 10 µm, 배선·주변회로 면적 무시]. 약 <strong>10⁵배</strong> 차이입니다. <span class="tag tag-interp">해석</span> 이 차이의 일부는 공정(인쇄 vs 리소그래피)이고 일부는 메커니즘입니다. 2구간의 τ ~ L²/D 때문에, 소자를 작게 만들면 τ도 함께 짧아집니다. 즉 <strong>ms–s의 τ를 지키면서 µm 크기로 줄이려면, D가 훨씬 작은 소재나 다른 메커니즘이 필요합니다.</strong> <span class="tag tag-interp">해석</span> 크기·밀도와 시간척도가 묶여 있다는 이 점이 연성 이온 소자의 집적에 고유한 조건입니다. 숫자로 이으면, τ ≥ 0.1 s를 지키려면 2구간의 계산(D = 10⁻⁹ m²/s)에서 L ≥ 10 µm → 칸 간격을 그 두 배인 20 µm로 잡으면 1 cm²에 많아야 (10⁴ µm ÷ 20 µm)² = 2.5 × 10⁵개 → 같은 조건의 빠른 소자(10 µm 간격, 10⁶개/cm²)보다 4배 성깁니다. D가 100배 작은 소재(10⁻¹¹ m²/s)라면 L ≥ 1 µm로 이 제약이 풀립니다. [가정, Claude 계산]</p>
+<p><strong>리뷰들의 판단.</strong> Roadmap은 이온 게이트 트랜지스터 계열에서 여러 전략이 소자 집적을 진전시켰지만 "신뢰할 만한 배열 수준의 동작은 여전히 과제"라고 쓰고 <span class="src">Roadmap 2026, p.8124</span>, 연성 이온·유기 소재는 단단한 CMOS 기판에 봉지하고 접속하기 어려워 박리·응력 집중·신호 열화가 생긴다고 씁니다 <span class="src">Roadmap 2026, p.8125</span>. Aluru 2026은 이온 소자의 대규모 3차원 집적을 일곱 지식 공백의 하나로 꼽습니다 <span class="src">Aluru 2026, p.598</span>.</p>
+<p><strong>집적이 안 되면 무엇이 남나.</strong> 배열·칩 집적이 어렵다고 연성 이온 소자의 의미가 사라지는 것은 아닙니다. 노드 몇 개면 되는 자리가 있습니다. (가) <strong>센서 바로 옆의 전처리</strong>: 센서 신호 하나를 소자 몇 개가 받아 느린 특징(적분, 순서, 피로 적응)을 뽑아 주고, 판정은 보통의 전자 회로가 하는 구성. (나) <strong>생체 인터페이스</strong>: 몸·조직과 이온으로 신호를 주고받는 자리는 전자 소자가 대신하기 어려운 곳입니다(D27). (다) <strong>PCB 수준의 혼성 시스템</strong>: Liang의 둘째 수준처럼, 낱개 이온 소자 몇 개를 기판 위의 전자 회로에 꽂아 쓰는 구성은 지금 기술로 만들 수 있습니다. <span class="tag tag-interp">해석</span> 이 세 자리가 정말 이득인지는 D27의 교차표에서 따집니다.</p>
+<div class="quiz" data-day="d26" data-set="4-check"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+배열 (array) / crossbar
+</dt>
+<dd>
+소자를 행·열 격자로 놓고 같은 행·열의 선을 나눠 쓰는 구조. N×M 소자를 N + M개의 선으로 다룬다.
+</dd>
+<dt>
+집적 (integration)
+</dt>
+<dd>
+같은 면적에 소자를 많이, 배선·스위치·읽기 회로와 함께 한 판 위에 만드는 것. 낱개 측정 → PCB → 칩.
+</dd>
+<dt>
+패터닝 / 포토리소그래피 / 스크린 인쇄
+</dt>
+<dd>
+기판에 무늬 그리기 / 빛과 마스크로 µm–nm 무늬 / 망 위로 잉크를 밀어 찍기(굵지만 빠르고 쌈).
+</dd>
+<dt>
+sneak path
+</dt>
+<dd>
+배열에서 읽으려는 칸 대신 옆 칸들을 거쳐 새는 기생 전류. 읽기·쓰기 정확도를 떨어뜨린다.
+</dd>
+<dt>
+1T1R / 선택 소자
+</dt>
+<dd>
+칸마다 트랜지스터 스위치 1개를 붙여 읽는 칸만 연다 / 낮은 전압에서 전류를 막는 소자로 같은 일을 하려는 방법.
+</dd>
+<dt>
+IR drop
+</dt>
+<dd>
+선의 저항 때문에 배열의 먼 칸에서 전압이 떨어지는 것. 배열이 클수록 커진다.
+</dd>
+<dt>
+둘레 회로 / MUX (복습)
+</dt>
+<dd>
+배열 가장자리의 행 드라이버·열 TIA(각 N개)와 공유하는 ADC·MCU / 여러 선 중 하나를 골라 한 선으로 보내는 스위치 묶음(D17).
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>배열은 선을 나눠 써서 소자 1만 개를 선 200개로 다루게 한다. 대가는 sneak path이고, 1T1R(칸마다 스위치)이 흔한 해결이다 <span class="src">Jiang 2026, p.1114</span> <span class="src">Liang 2024, p.198</span>.</li>
+<li>둘레: 소자 N², 선·드라이버·TIA N, ADC·MCU는 공유(한 번 다 읽는 변환 N번). 칸당 주변회로는 1/N로 줄지만 IR drop은 ~N²(D4 모형: N = 100에서 10 mV, 1,000에서 약 1 V) [Claude 계산].</li>
+<li>연성 이온 소자의 집적 현황: 인쇄·레이저 공정의 10×10(수율 94%), 계산은 3×3 중 5개를 하나씩 <span class="src">Guo 2026, p.7–8</span>; 27 부화소 <span class="src">Huang 2026, p.12</span>; Zhang 2024는 배열 없음.</li>
+<li>밀도: 약 6개/cm² vs 5 µm 소자를 10 µm 간격으로 놓으면 10⁶개/cm² [가정]. τ ~ L²/D 때문에 줄이면 빨라진다 — 크기와 시간척도가 묶여 있다 <span class="tag tag-interp">해석</span>.</li>
+<li>집적이 어려워도 남는 자리: 센서 옆 소수 노드 전처리, 생체 인터페이스, PCB 혼성 시스템 <span class="tag tag-interp">해석</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-all-analog" class="level3">
+<h3 class="anchored" data-anchor-id="ch-all-analog">5. 전자회로와의 접속: reservoir만 소자로, 아니면 readout까지</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 reservoir만 소자로 하는 구성과 readout까지 소자(crossbar)로 하는 구성의 차이를 ADC·가중치 저장·쓰기 오차·drift로 설명하고, 가중치를 어디서 학습하는지, 그리고 '완전 아날로그'가 어떤 조건에서 가능한지 말할 수 있다.</p>
+</div>
+<p><strong>먼저 D17의 사슬을 다시 꺼냅니다.</strong> 심전도 장치의 사슬은 전극 → 증폭·필터 → 입력 부호화 → 소자(reservoir) → 상태 읽기 → (ADC) → readout → 판정이었고, ADC(아날로그 값을 숫자로 바꾸는 변환기)는 <strong>다음 단계가 디지털일 때</strong> 필요했습니다(<a href="../days/d17.html#ch-sensing-chain">D17 2구간</a>, <a href="../days/d04.html#b-adc">D4 기초 5</a>). Zhong 2022의 그림 1은 이것을 세 종류로 나눴습니다. 맨 앞에 ADC가 있는 완전 디지털, reservoir 뒤에 ADC가 있는 혼합형, 그 사이 ADC가 없는 완전 아날로그. 오늘은 둘째와 셋째의 차이를 정면으로 봅니다.</p>
+<div id="b-all-analog" class="basics">
+<section id="reservoir만-소자로-vs-readout까지-소자로" class="level4">
+<h4 class="anchored" data-anchor-id="reservoir만-소자로-vs-readout까지-소자로">reservoir만 소자로 vs readout까지 소자로</h4>
+<p><strong>readout이 하는 일.</strong> readout은 상태 <span class="math inline">\(x_1, x_2, \dots, x_N\)</span>에 가중치 <span class="math inline">\(w_1, \dots, w_N\)</span>을 곱해 더하는 계산 <span class="math inline">\(y = w_1 x_1 + w_2 x_2 + \cdots + w_N x_N + b\)</span>입니다(<a href="../days/d08.html#b-ridge">D8 기초: ridge</a>). 이 계산을 <strong>어디서 하느냐</strong>가 두 구성을 가릅니다.</p>
+<p><strong>구성 A — reservoir만 소자(혼합형).</strong> 소자 상태를 읽어(TIA: 전류를 전압으로 바꿔 키우는 증폭기. 소자가 여럿이면 TIA 출력들을 MUX로 하나씩 골라) ADC로 숫자로 바꾸고, MCU(작은 범용 계산 칩, <a href="../days/d05.html#b-sensor-node">D5 기초</a>)나 PC가 곱셈·덧셈을 합니다. 가중치는 <strong>메모리에 적힌 숫자</strong>입니다. - 장점: 가중치가 정밀하고(32 bit 숫자), 다시 학습하면 숫자만 바꾸면 되며, 시간이 지나도 변하지 않습니다. - 단점: 상태 하나를 읽을 때마다 ADC 변환과 디지털 곱셈·덧셈이 듭니다. 상태가 120개면 박동마다 변환 120번입니다. D17에서 ADC가 시스템 에너지의 큰 몫이 될 수 있음을 봤습니다. - 폴더의 이온 RC 논문은 <strong>모두 이 구성</strong>입니다(readout은 MATLAB, PyTorch, scikit-learn).</p>
+<p><strong>구성 B — readout까지 소자(완전 아날로그 추론).</strong> 상태 전류를 TIA나 적분기(integrator: 전류를 커패시터에 정해진 시간 동안 모아, 모인 전하 <span class="math inline">\(Q\)</span>를 전압 <span class="math inline">\(V = Q/C\)</span>로 내는 회로)로 전압으로 만든 뒤, 숫자로 바꾸지 않고 바로 비휘발(전원을 꺼도 값이 남는, <a href="../days/d01.html#ch-volatile">D1 4구간</a>) memristor crossbar의 가로 선에 겁니다. 교차점의 전도도 <span class="math inline">\(G\)</span>가 가중치이고, 세로 선에 모이는 전류 <span class="math inline">\(I_j = \sum_i G_{ji} V_i\)</span>가 곧 가중합입니다(원문 그림 4d). 마지막에 비교기(두 전압 중 어느 쪽이 큰지만 알려 주는 회로)가 문턱과 비교해 답을 냅니다. 가중치는 <strong>전도도</strong>입니다. 전도도는 늘 0 이상이므로, 음의 가중치는 세로 선 두 개(<span class="math inline">\(G^+\)</span>, <span class="math inline">\(G^-\)</span>)를 짝으로 두고 두 전류의 차 <span class="math inline">\(I^+ - I^-\)</span>로 나타냅니다(아래 Zhong 2022 그림의 BL⁺·BL⁻). - 장점: 상태와 readout 사이에 ADC가 없습니다. 곱셈·덧셈을 물리가 병렬로(여러 개를 동시에) 합니다. - 단점: (1) <strong>쓰기 오차</strong>: 원하는 <span class="math inline">\(G\)</span>를 정확히 쓰기 어렵습니다. 쓰고-읽고-고치기를 반복하는 쓰기(write-verify)는 회로 복잡도와 시간을 크게 늘리고, 이런 방식으로 보고된 프로그래밍 정밀도는 8 bit 아래입니다. 작은 양·음 펄스를 번갈아 주어 잡음을 줄이는 방법으로 11 bit를 보인 예도 있지만, 읽기·쓰기를 여러 번 되풀이하는 시간과 에너지가 듭니다 <span class="src">Jiang 2026, p.1115</span>. (2) <strong>drift</strong>: 쓴 뒤에도 전도도가 예측하기 어렵게 흐릅니다 <span class="src">Jiang 2026, p.1115</span>. (3) readout용 소자는 학습한 가중치를 붙잡아야 하므로 <strong>비휘발</strong>이어야 합니다 <span class="src">Liang 2024, p.198</span>. (4) 배열의 sneak path 때문에 보통 1T1R이 필요합니다(4구간).</p>
+</section>
+</div>
+<figure class="fig figure"><img src="../assets/img/d26/fig6-readout-placement.svg" alt="A: 입력 펄스 → 이온 소자들 → 읽기(TIA·MUX) → ADC(상태마다 변환) → MCU·PC(숫자 곱셈·덧셈) → 답. B: 입력 펄스 → 이온 소자들 → 읽기(TIA·적분기) → 비휘발 crossbar(I = ΣG·V) → 비교기 → 답. C: 상태 기록(ADC 샘플) → 컴퓨터 ridge 회귀 → A는 숫자로 저장, B는 쓰고-읽고-고치기 반복으로 전도도에 씀" class="figure-img"><figcaption><b>그림 6.</b> reservoir만 소자(A)와 readout까지 소자(B), 그리고 가중치를 정하는 곳(C). C의 Zhong 2022 설명은 p.676, 680에서 옮겼다. 칩 위에서 스스로 가중치를 고치는 학습은 이 그림에 없다. (Claude가 그림, 모식도)</figcaption></figure>
+<section id="보드-위에서-보면-부품은-어디에-있고-노드-수-n이-늘면-무엇이-늘어나나" class="level4">
+<h4 class="anchored" data-anchor-id="보드-위에서-보면-부품은-어디에-있고-노드-수-n이-늘면-무엇이-늘어나나">5-1. 보드 위에서 보면: 부품은 어디에 있고, 노드 수 N이 늘면 무엇이 늘어나나</h4>
+<p><strong>무엇을 보려는가.</strong> 그림 6은 신호가 지나는 순서입니다. 실제 장치에서는 이 상자들이 판 위의 서로 다른 자리에 놓인 부품이고, 어떤 부품은 <strong>소자마다 하나씩</strong>, 어떤 부품은 <strong>모두가 하나를 나눠</strong> 씁니다. 그 구분이 노드를 늘릴 때의 비용을 정합니다. 숫자는 D17 3-2절 표의 가정값(소자 10개, 박동 하나 = 신호 1 s)을 그대로 씁니다(<a href="../days/d17.html#ch-energy-budget">D17 3구간</a>).</p>
+<figure class="fig figure"><img src="../assets/img/d26/fig6-1-readout-board.svg" alt="A: 판 위에 AFE 1개, 구동 1개, 이온 소자 10개, 소자마다 TIA 10개, MUX 1개, ADC 1개, MCU 1개, 무선. 박동당 에너지 AFE 10, 구동 0.05, 소자 0.25, TIA 10(N에 비례, 늘 켜짐), ADC 50번 0.05(변환 수 N에 비례), MCU MAC 100번 0.3 + 대기 2(MAC 수 N에 비례), 무선 0.8 µJ. B: AFE, 구동, 소자 10개, TIA·적분기 10개, 상태 전압이 10행 × 2열(G⁺, G⁻) crossbar에 바로 걸리고 열마다 적분기, 비교기가 I⁺−I⁻를 문턱과 비교해 1 bit를 MCU로. ADC는 학습할 때만(점선). crossbar·적분기·비교기 에너지는 측정값 없음" class="figure-img"><figcaption><b>그림 6-1.</b> 그림 6의 A·B를 판 위의 배치로 그린 것(모식도). 초록 네모가 이온 소자, 주황 삼각형이 소자마다 하나씩 붙는 TIA(B에서는 TIA·적분기)다. A에서는 TIA 출력 10개가 MUX를 거쳐 ADC 하나와 MCU 하나를 나눠 쓰고, B에서는 상태 전압이 crossbar의 행에 바로 걸려 두 열(G⁺, G⁻)의 전류가 적분기와 비교기를 거친다. 아래 숫자는 박동 하나의 에너지[µJ]로 D17 3-2절의 가정값이며, 주황 글씨는 노드 수 N에 비례하는 항목이다. B의 새 부품 에너지는 이 조건의 측정값이 폴더에 없어 비웠다. (Claude가 그림, D17 가정값으로 계산)</figcaption></figure>
+<p><strong>A에서 소자마다 붙는 것.</strong> 소자 하나에 입력 펄스선 하나, 그리고 그 소자 전류만 받는 TIA 하나가 붙습니다. TIA는 박동이 들어오는 1 s 내내 켜져 있어야 하므로(<a href="../days/d17.html#ch-sensing-chain">D17 2구간</a>) 채널마다 1 µW × 1 s = 1 µJ, 10채널이면 10 µJ입니다. TIA 출력 10개는 MUX로 <strong>ADC 하나</strong>를 나눠 쓰고, ADC는 소자마다 5번씩 모두 50번 변환합니다(50 × 1 nJ = 0.05 µJ). <strong>MCU 하나</strong>가 그 50개 숫자에 가중치를 곱해 더합니다(MAC 100번 × 3 nJ = 0.3 µJ).</p>
+<p><strong>B에서 바뀌는 것.</strong> TIA·적분기는 그대로 소자마다 하나씩 남습니다. 상태 전압 10개는 MUX와 ADC를 거치지 않고 crossbar의 행 10개에 바로 걸리고, 출력 하나(정상/이상)를 위한 열 두 개(G⁺, G⁻)에서 전류가 모여 적분기 → 비교기를 거쳐 1 bit 답이 됩니다. 상태와 readout 사이의 ADC 50번과 MAC 100번이 없어지는 대신 crossbar 칸 20개(10행 × 2열)와 적분기·비교기가 생깁니다. 이 새 부품들의 에너지는 이 조건에서 잰 값이 폴더에 없어 비워 둡니다. <span class="tag tag-unverified">미확인</span> ADC는 학습할 때(상태 기록, 쓰기 확인)에만 씁니다(점선, 아래 5-2). 이 그림은 출력 하나와 소자당 상태 하나로 줄인 모식도이고, Zhong 2022의 실제 회로는 아래 원문 그림에 있습니다.</p>
+<p><strong>N을 10 → 100으로 늘리면.</strong> [D17 가정값, Claude 계산]</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>부품</th>
+<th>개수</th>
+<th>A: 박동당 [µJ], N = 10 → 100</th>
+<th>B: N = 10 → 100</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>소자·입력선</td>
+<td>N</td>
+<td>소자 줄은 3-2절 표</td>
+<td>같음</td>
+</tr>
+<tr class="even">
+<td>TIA (늘 켜짐)</td>
+<td>N</td>
+<td>10 → 100</td>
+<td>10 → 100</td>
+</tr>
+<tr class="odd">
+<td>ADC 변환 (ADC 1개 공유)</td>
+<td>5N번</td>
+<td>0.05 → 0.5</td>
+<td>추론에는 없음(학습 때만)</td>
+</tr>
+<tr class="even">
+<td>곱하고 더하기</td>
+<td>A: MCU MAC 5N × 2번 / B: crossbar 칸 2N개</td>
+<td>0.3 → 3</td>
+<td>칸 20 → 200개, 에너지 <span class="tag tag-unverified">미확인</span></td>
+</tr>
+<tr class="odd">
+<td>AFE·MCU 대기·무선</td>
+<td>1 (공유)</td>
+<td>12.8 → 12.8</td>
+<td>12.8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>사슬로 읽기.</strong> 노드 N개 → TIA N채널이 박동 내내 켜짐 → 채널당 1 µJ/박동 → N = 10이면 10 µJ로 readout 계산(ADC + MAC 0.35 µJ)의 약 30배, N = 100이면 100 µJ(readout 3.5 µJ의 약 30배). 그래서 readout을 crossbar로 옮겨(B) ADC·MAC를 없애도 늘 켜진 TIA는 그대로 남아, N = 10에서 장부의 합은 23.45 → 약 23.1 µJ(새 부품 제외)로 거의 줄지 않습니다. 노드 수를 늘릴 때의 병목은 readout의 위치보다 <strong>상태를 읽는 회로의 개수와 전력</strong>입니다. D17에서 본 민감도(TIA가 채널당 0.76 µW보다 작아야 B 경로가 디지털 경로보다 싸다)가 N이 커질수록 더 중요해지는 이유입니다. [해석, D17 가정값]</p>
+</section>
+<section id="가중치는-어디서-학습하나-두-구성-모두-칩-밖에서-한-번" class="level4">
+<h4 class="anchored" data-anchor-id="가중치는-어디서-학습하나-두-구성-모두-칩-밖에서-한-번">5-2. 가중치는 어디서 학습하나: 두 구성 모두 칩 밖에서, 한 번</h4>
+<p>학습용 입력을 넣고 상태를 기록(ADC로 샘플)한 뒤, 컴퓨터가 ridge 회귀(연립방정식 한 번으로 가중치를 구하는 방법)로 <span class="math inline">\(w\)</span>를 계산합니다. A는 그 숫자를 메모리에 적고, B는 그 숫자를 전도도로 씁니다(그림 6). Zhong 2022는 잡음을 일부러 섞어 계산하는 선형 회귀로 <span class="math inline">\(W_{out}\)</span>을 구하고 <span class="src">Zhong 2022, p.676</span>, PC의 파이썬 프로그램이 "읽고 → 목표와 비교하고 → SET(전도도를 올리는 쓰기 펄스) 또는 RESET(내리는 펄스)을 주는" 순환을 반복해 0–33 µS 사이에 썼습니다 <span class="src">Zhong 2022, p.676, 680</span>. 그래서 "완전 아날로그" 시스템에도 <strong>학습 단계에서는</strong> ADC가 쓰였습니다. 저자들은 ADC가 적분기 출력을 모으는 것 외에는 학습 중 상태 샘플링과 가중치 쓰기 단계에서만 쓰인다고 적습니다 <span class="src">Zhong 2022, p.679</span>.</p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/BTnr8z-ePR4?start=0&amp;rel=0" title="영상: What is In-Memory Computing?" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:00–9:58, 전체 약 10분, 영어·자막).</b> IBM Technology, "What is In-Memory Computing?". <b>볼 이유:</b> 설명란에 따르면 IBM 연구자(Nicole Saulnier)가 in-memory computing으로 AI의 에너지를 줄이는 방법과 IBM의 아날로그 AI 하드웨어 도구를 설명한다. 위 구성 B(가중치 = 전도도, 곱해서 더하기를 물리로)를 회사 연구소의 눈으로 본다. 챕터가 없어 전체를 권한다. <b>보고 답할 질문:</b> 영상에서 '메모리와 계산을 한곳에서 한다'는 말은 그림 6의 A와 B 중 어느 쪽 이야기인가? 영상이 말하는 이득은 쓰기 오차·drift(위 단점 (1)(2))와 어떻게 맞바뀌나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명란·챕터(영상 내용은 직접 보지 못함, 미검증)</span></div></div>
+<p><strong>원문 그림 두 장.</strong> 아래 Liang 2024의 그림 4d는 readout(출력층) 신경망(왼쪽)이 crossbar(오른쪽)와 같은 계산이라는 것을 보입니다. 오른쪽에서 위쪽 막대 넷이 입력 전압 <span class="math inline">\(V_1\)</span>–<span class="math inline">\(V_4\)</span>, 기둥 열두 개가 전도도 <span class="math inline">\(G_{11}\)</span>–<span class="math inline">\(G_{34}\)</span>, 아래쪽 막대 셋에서 전류 <span class="math inline">\(I_1\)</span>–<span class="math inline">\(I_3\)</span>이 나옵니다. <strong><span class="math inline">\(I_1\)</span>에 어떤 <span class="math inline">\(G\)</span>들이 참여하는지</strong> 세어 보세요.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/liang2024-fig4d.png" alt="Liang 2024 Fig. 4d: 왼쪽은 입력 V1–V4에서 출력 I1–I3로 모두 이어진 출력층 신경망, 오른쪽은 같은 계산을 하는 memristor crossbar로, 위쪽 막대에 V1–V4, 교차점 기둥에 G11–G34, 아래쪽 막대에서 I1=ΣG1jVj, I2=ΣG2jVj, I3=ΣG3jVj" class="figure-img"><figcaption><b>원문 그림.</b> Liang et al., <a href="https://doi.org/10.1038/s41928-024-01133-z" target="_blank"><i>Nat. Electron.</i> 2024, 7, 193–206</a>, Fig. 4d, p.199. 볼 것: $I_1$에는 $G_{11}, G_{12}, G_{13}, G_{14}$ 넷이 참여하고, 이것이 왼쪽 신경망에서 $I_1$로 들어오는 선 넷이다. 캡션은 RC의 출력층이 보통 상태 벡터의 가중합을 내는 완전 연결 선형 망이고, memristor crossbar로 행렬–벡터 곱을 병렬로, 제자리에서 할 수 있다고 쓴다. 곱셈은 Ohm 법칙, 덧셈은 전류가 합쳐지는 것이다. 개념도. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<figure class="fig paper figure"><img src="../assets/img/papers/liang2024-fig5.png" alt="Liang 2024 Fig. 5: a 디지털 RC(입력마다 ADC, 디지털 reservoir와 출력층), b 혼합 신호 RC(물리 reservoir 뒤에 ADC, 디지털 출력층), c 아날로그 RC(물리 reservoir와 memristor 배열 출력층), d 단일체 3차원 집적 아날로그 RC(위 reservoir층, 가운데 출력층, 아래 CMOS 회로), e 2001년 ESN·LSM부터 2024년 이후 미래 방향까지의 연표" class="figure-img"><figcaption><b>원문 그림.</b> Liang et al., <a href="https://doi.org/10.1038/s41928-024-01133-z" target="_blank"><i>Nat. Electron.</i> 2024, 7, 193–206</a>, Fig. 5, p.200. 볼 것: <b>a→b→c</b>에서 ADC 상자가 맨 앞 → reservoir 뒤 → 사라짐으로 옮겨 간다. 캡션은 2011년부터 reservoir층을 물리계로 근사하면서도 출력층은 디지털에 남아 혼합 신호 RC가 되었고, 최근 memristor 배열 출력층과 결합해 완전 아날로그 RC가 되었다고 쓴다. <b>d</b>는 미래의 구상(아래층 CMOS가 전체 제어)이다. <b>e</b>의 'All-analogue RC system (ref. 33)'이 Zhong 2022이고, 맨 위 ESN은 소프트웨어 reservoir의 원형이다(D7). 이온 소자로 c를 만든 예는 폴더에 없다. 개념도·연표. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+</section>
+<section id="쓰기-오차는-출력을-얼마나-흔드나" class="level4">
+<h4 class="anchored" data-anchor-id="쓰기-오차는-출력을-얼마나-흔드나">5-3. 쓰기 오차는 출력을 얼마나 흔드나</h4>
+<p>B 구성의 가장 큰 걱정인 쓰기 오차를 작은 숫자로 봅니다. 상태 4개, 가중치 4개입니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>계획한 값.</strong> 상태 <span class="math inline">\(x = (0.5, -0.5, 0.5, 0.5)\)</span>, 학습한 가중치 <span class="math inline">\(w = (0.2, 0.4, -0.1, 0.3)\)</span>. 출력 <span class="math inline">\(y = 0.2 \times 0.5 + 0.4 \times (-0.5) + (-0.1) \times 0.5 + 0.3 \times 0.5 = 0.1 - 0.2 - 0.05 + 0.15 = 0.00\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>쓴 값.</strong> 각 가중치를 쓸 때 ±0.04의 오차가 났습니다. 실제로 쓰인 값이 <span class="math inline">\(w' = (0.24, 0.36, -0.06, 0.34)\)</span>라면(오차 +0.04, −0.04, +0.04, +0.04), <span class="math inline">\(y' = 0.12 - 0.18 - 0.03 + 0.17 = 0.08\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>출력이 움직인 양.</strong> <span class="math inline">\(y' - y = 0.08\)</span>. 이것은 오차 × 상태를 더한 것과 같습니다. <span class="math inline">\(0.04 \times 0.5 + (-0.04) \times (-0.5) + 0.04 \times 0.5 + 0.04 \times 0.5 = 0.02 + 0.02 + 0.02 + 0.02 = 0.08\)</span>. 이번에는 모든 항이 같은 방향으로 더해진 최악의 경우입니다.</p>
+</div>
+<div class="step">
+<p><strong>상태가 많아지면.</strong> 오차의 부호가 무작위면 서로 일부 상쇄되어, 출력 흔들림의 크기는 대략 (오차 크기) × (상태 크기) × <span class="math inline">\(\sqrt{N}\)</span>입니다. <span class="math inline">\(N = 120\)</span>(Zhong 2022의 상태 수)이면 <span class="math inline">\(0.04 \times 0.5 \times \sqrt{120} \approx 0.04 \times 0.5 \times 10.95 \approx 0.22\)</span>. 판정 문턱 근처의 박동이라면 이 정도 흔들림이 답을 뒤집을 수 있습니다. [가정: 오차는 서로 독립]</p>
+</div>
+<div class="step">
+<p><strong>대응.</strong> Zhong 2022는 학습할 때 일부러 잡음을 섞어 잡음에 덜 민감한 가중치를 구했고, 잡음 수준을 올리면 학습 오차는 조금 늘지만 시뮬레이션 시험 오차(평균과 흩어짐)가 빠르게 줄었다고 보고합니다 <span class="src">Zhong 2022, p.676</span>. 쓰기 허용 오차는 소자 잡음 때문에 목표 최댓값의 0.04배보다 작게 할 수 없었습니다 <span class="src">Zhong 2022, p.680</span>. 오늘의 ±0.04는 이 숫자를 빌린 예입니다.</p>
+</div>
+</div>
+<p><strong>결과의 크기.</strong> 그렇게 해서 얻은 숫자가 심전도 96.6%(디지털 RC 98.2%)와 제스처 평균 1.1% 손실, 그리고 전력 99.9% 이상 절감입니다 <span class="src">Zhong 2022, p.677, 679</span>. 전력 절감의 두 이유로 저자들은 ADC를 없앤 것과, 큰 순환 신경망 대신 동적 memristor 몇 개를 병렬로 쓴 것을 듭니다 <span class="src">Zhong 2022, p.679</span>. 전력의 경계는 보충 자료 표에 있습니다. [미확인: 경계]</p>
+<p><strong>원문 그림을 읽기 전에.</strong> 아래 Zhong 2022의 그림 2는 구성 B를 실제로 만든 하드웨어입니다. a 가운데의 검은 판이 시스템 전체이고, c가 그 신호 경로입니다. <strong>c에서 ADC 상자를 찾아보세요.</strong></p>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2022-fig2.png" alt="Zhong 2022 Fig. 2: a 왼쪽은 동적 memristor 24개의 광학 사진(눈금 100 µm)과 I–V 고리, 단면 TEM(Ti/TiOx/Pd), 가운데는 전원·reservoir·readout 모듈과 MCU가 있는 PCB 사진(금색 칩 넷이 readout용 비휘발 memristor 칩), 오른쪽은 비휘발 memristor의 여러 저항 상태 I–V. b는 DM 노드 하나의 신호 처리(입력 증폭, MUX 마스크, 바이어스, DM과 TIA, 출력 증폭). c는 아날로그 입력 → 마스크 → DM 1–24 → 1T1R 배열의 BL 쌍 → 적분기 1–4 → 아날로그 출력의 회로도" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41928-022-00838-3" target="_blank"><i>Nat. Electron.</i> 2022, 5, 672–681</a>, Fig. 2, p.674. 볼 것: <b>a</b> 가운데 사진이 전원·reservoir·readout 모듈과 MCU를 한 판에 올린 PCB이고(캡션), 위 오른쪽의 금색 칩 넷이 readout용 비휘발 memristor 칩이다(칩마다 1T1R 셀 2,048개, p.675). 왼쪽의 작은 사각형 줄이 reservoir 소자(동적 memristor 24개, 눈금 100 µm)다. <b>c</b>를 왼쪽에서 오른쪽으로 읽으면 아날로그 입력 → 마스크 → 소자 → 그 출력 전압이 배열의 선(BL)에 바로 걸리고 → 아래 적분기에서 아날로그 출력이 나온다. 상태와 readout 사이에 ADC가 없다는 것이 그림 6의 구성 B다. 교차점마다 트랜지스터가 붙은 1T1R 구조가 4구간의 sneak path 대책이고, 양·음 가중치를 위해 선을 쌍(BL⁺, BL⁻)으로 쓴다(캡션). 산화물 소자이며 이온 소자가 아니다. 장치 사진과 측정 곡선, 회로도. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+</section>
+<section id="완전-아날로그는-언제-가능한가-그리고-이온전자-접속의-비용" class="level4">
+<h4 class="anchored" data-anchor-id="완전-아날로그는-언제-가능한가-그리고-이온전자-접속의-비용">5-4. 완전 아날로그는 언제 가능한가, 그리고 이온–전자 접속의 비용</h4>
+<p><strong>완전 아날로그는 언제 가능한가.</strong> 위를 모으면 조건은 이렇습니다. <span class="tag tag-interp">해석</span></p>
+<ol type="1">
+<li><strong>reservoir 상태가 crossbar가 받을 수 있는 전압으로 나와야 한다.</strong> 상태 읽기 회로(TIA·적분기)는 여전히 필요합니다.</li>
+<li><strong>readout 가중치가 학습 뒤 고정되고, 재보정 주기 동안 충분히 안 흘러야 한다</strong>(비휘발, 낮은 drift). D18의 재보정 주기 계산이 그대로 적용됩니다.</li>
+<li><strong>마지막 답이 문턱 비교(예/아니오)처럼 단순해야</strong> 끝에서도 ADC가 필요 없다. 여러 숫자를 내보내야 하면 끝에 변환이 다시 생깁니다.</li>
+<li><strong>학습은 칩 밖에서, 순서 제어는 MCU가.</strong> "완전 아날로그"는 추론의 신호 경로를 말하는 것이지, 디지털 부품이 하나도 없다는 뜻이 아닙니다(D17).</li>
+<li><strong>이온 소자를 어디에 쓰나.</strong> 연성 이온 소자는 대체로 휘발성이라, 가중치를 오래 붙잡는 readout에는 맞지 않습니다. Wang 2025는 연성 이온 전도체 시냅스 소자 대부분이 휘발성이라 장기 가중치 유지에 맞지 않는다고 적습니다 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.328</span>. 그러니 현실적인 그림은 <strong>reservoir는 이온 소자, readout crossbar는 산화물·CMOS 같은 다른 소자</strong>인 혼성입니다. 이온 소자로 readout까지 만든 시연은 폴더에 없습니다.</li>
+</ol>
+<p><strong>칩 위 학습은?</strong> 폴더에서 소자 위에서 가중치가 스스로 바뀌는 학습을 하드웨어로 보인 것은 Kim 2026의 자가발전 아날로그 시스템입니다. 확산형·드리프트형 산화물 memristor와 저항·커패시터로 동전 크기의 PCB를 만들어 비지도 학습(정답 없이 입력의 시간 관계로 가중치가 바뀌는 규칙)을 했습니다 <span class="src">Kim 2026, p.543</span>. 이온 소자도 RC readout도 아니지만, "학습까지 아날로그로"가 원리적으로 가능하다는 예입니다. 다만 이 시스템도 빛·압력 자극의 시작을 맞추는 데 마이크로컨트롤러를 썼습니다 <span class="src">Kim 2026, p.540</span>.</p>
+<p><strong>이온–전자 접속 자체의 비용.</strong> 마지막으로, 이온 소자와 전자 회로가 만나는 경계에서 생기는 비용을 Roadmap이 정리합니다. 전자 소자의 전하 이동은 ns 단위인데 이온 이동은 µs–s라 시간척도가 맞지 않고, 이온–전자 변환 같은 영역 간 신호 변환은 지연·에너지 손실·신호 왜곡을 들여오며, 그래서 박자 맞추기·버퍼·오류 허용 장치가 필요하다는 것입니다 <span class="src">Roadmap 2026, p.8126</span>. 연성 이온 소재는 단단한 CMOS에 봉지·접속하기 어렵고, 이온겔은 전자 소자와 붙였을 때 안정한 접촉과 장기 수화를 유지하기 어렵다고도 씁니다 <span class="src">Roadmap 2026, p.8125</span>.</p>
+<div class="quiz" data-day="d26" data-set="5-check"></div>
+<div class="quiz" data-day="d26" data-set="5-end"></div>
+<div class="keypoints">
+<ul>
+<li>A(reservoir만 소자): 가중치는 숫자, 정밀·재학습 쉬움, 대신 상태마다 ADC. 폴더 이온 RC는 모두 A.</li>
+<li>보드 위: TIA는 소자마다(N개, 늘 켜짐), ADC·MCU는 공유. N = 10 → 100이면 TIA 10 → 100 µJ/박동, readout(ADC + MAC) 0.35 → 3.5 µJ. readout을 crossbar로 옮겨도 TIA는 남는다 [D17 가정값, Claude 계산].</li>
+<li>B(readout까지 crossbar): ADC 없이 물리로 가중합. 대신 쓰기 정밀도는 보통 8 bit 미만(반복 쓰기로 11 bit 예), drift <span class="src">Jiang 2026, p.1115</span>, 비휘발 필요 <span class="src">Liang 2024, p.198</span>. 오차 ±0.04, 상태 120개면 출력이 약 0.22 흔들림 [가정].</li>
+<li>학습은 A·B 모두 칩 밖 컴퓨터에서 한 번(ridge), B는 쓰고-읽고-고치기로 옮긴다 <span class="src">Zhong 2022, p.676, 680</span>. 학습 단계에는 ADC가 쓰인다.</li>
+<li>완전 아날로그의 조건: 전압 상태, 고정·저drift 가중치, 단순 문턱 출력, MCU 제어. 이온 소자는 휘발성이라 readout보다 reservoir 쪽 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.328</span> <span class="tag tag-interp">해석</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-real-bottleneck" class="level3">
+<h3 class="anchored" data-anchor-id="ch-real-bottleneck">6. 그래서 진짜 병목은 무엇인가</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 속도·전력·재현성·집적·안정성·전자 인터페이스 여섯 후보를 네 질문에 통과시켜, 어느 것이 메커니즘에서 오는 진짜 병목이고 어느 것이 공정·보고의 빈칸인지 내 판단으로 적을 수 있다.</p>
+</div>
+<section id="병목을-사슬로-쓰기-원인-결과-숫자" class="level4">
+<h4 class="anchored" data-anchor-id="병목을-사슬로-쓰기-원인-결과-숫자">6-1. 병목을 사슬로 쓰기: 원인 → 결과 → 숫자</h4>
+<p>병목 후보를 이름만 늘어놓으면 무엇을 고쳐야 하는지 보이지 않습니다. 1–5구간의 계산을 <strong>원인 → 중간 단계 → 숫자 → 결과</strong>의 사슬로 다시 쓰면, 사슬의 어느 고리를 끊어야 하는지가 보입니다. 숫자는 모두 위 구간의 가정값과 계산입니다.</p>
+<ol type="1">
+<li><strong>속도 (소자).</strong> 손으로 만든 겔 L ≈ 1 mm → τ ~ L²/D ≈ 10³ s(D = 10⁻⁹ m²/s, 2구간) → 펄스 하나에 1 s가 드는 소자로 MNIST 7만 장을 처리하면 약 356일(D25) → 대량 처리·시간다중화에는 병목. 그러나 심전도 박동(약 1 s)에는 52 ms–수 s의 τ가 맞으므로 이 응용에서는 병목이 아니다.</li>
+<li><strong>에너지 (소자 → 시스템).</strong> 전극 1 mm² × 계면 10 µF/cm² → C = 0.1 µF → ±1 V 펄스마다 ½CV² = 50 nJ → 박동당 500펄스면 25 µJ → 디지털 경로 전체(21.05 µJ)보다 크다(3-2절 장부). 전극 한 변을 1/10로 줄이면 1/100인 0.25 µJ가 되고, 병목은 늘 켜진 TIA(10 µJ)로 옮겨 간다.</li>
+<li><strong>배열과 readout 배치 (회로).</strong> 노드 N개 → 소자마다 TIA가 박동 내내 켜짐 → 채널당 1 µJ/박동 → N = 100이면 100 µJ로 readout 계산(3.5 µJ)의 약 30배 → readout을 crossbar로 옮겨도 이 항은 남는다(5-1절). 큰 crossbar에서는 IR drop이 ~N²로 커져 N = 1,000에서 D4 모형으로 약 1 V(4-1절).</li>
+<li><strong>집적 밀도 (배열).</strong> τ ≥ 0.1 s를 지키려면 L ≥ 10 µm → 칸 간격 ≥ 약 20 µm → 1 cm²에 많아야 약 2.5 × 10⁵개 [가정]. 지금의 인쇄 배열은 약 6개/cm²(Guo 2026) → 노드 수십–수백이면 되는 응용에는 충분할 수 있지만, 큰 배열은 공정과 메커니즘 양쪽에서 막힌다(4-3절).</li>
+<li><strong>내구·안정성 (소자).</strong> 1박동/s × 박동당 50펄스 → 1년 약 1.6 × 10⁹ 펄스 → 보고된 연성 소자의 최대 약 4 × 10³ 펄스의 4 × 10⁵배 → 이식 1년을 견디는지 판정할 측정 자체가 없다(3-3절). 탈수로 17시간 동안 전류가 줄었다는 보고(Guo 2026) → 재보정 주기가 시간 단위일 수 있다 <span class="tag tag-interp">해석</span>.</li>
+<li><strong>소자 간 재현성 (소자·배열).</strong> 3×3 배열 9개 소자의 교차점 전압 560 ± 60 mV(약 ±11%, Guo 2026) → 칩마다 상태 값이 달라짐 → 한 칩에서 학습한 readout이 다른 칩에 그대로 옮겨지지 않음(<a href="../days/d18.html#ch-variation-two-faces">D18 3-2절</a>) → 칩마다 상태를 기록하고 다시 학습하는 비용(5-2절의 ADC·컴퓨터 단계)이 반복된다.</li>
+<li><strong>이온–전자 접속 (시스템).</strong> 전자의 전하 이동은 ns, 이온 이동은 µs–s(Roadmap 2026) → 경계마다 지연·에너지 손실·신호 왜곡 → 박자 맞추기·버퍼 회로가 추가된다 → 그 회로의 전력은 폴더 문헌에서 잰 값이 없다(모름).</li>
+</ol>
+<p>사슬 1·4는 확산 물리(τ ~ L²/D)에서, 사슬 2는 계면의 전기화학에서, 사슬 3·7은 회로에서, 사슬 5·6은 재료와 공정에서 시작합니다. 어디서 시작하느냐가 아래 표의 Q2(메커니즘인가 공정인가)와 Q4(고분자 설계로 바꿀 수 있나)의 답이 됩니다. <span class="tag tag-interp">해석</span></p>
+</section>
+<section id="네-질문으로-판정하기" class="level4">
+<h4 class="anchored" data-anchor-id="네-질문으로-판정하기">6-2. 네 질문으로 판정하기</h4>
+<p>1–5구간의 결과를 네 질문(그림 4)에 넣어 봅니다. 아래 표는 <strong>판단의 예</strong>입니다. 응용을 무엇으로 잡느냐에 따라 판정이 바뀌므로, 여기서는 D27의 이식형 심전도 장치를 응용으로 놓았습니다. 내 응용으로 바꿔 다시 채우는 것이 오늘 내 답의 일입니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>후보 (계층)</th>
+<th>Q1 응용이 요구하나</th>
+<th>Q2 메커니즘 vs 공정</th>
+<th>Q3 대안이 이미 내나</th>
+<th>Q4 고분자 설계로</th>
+<th>판정 <span class="tag tag-interp">해석</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>속도 τ (소자)</td>
+<td>박동 ~1 s, τ는 ms–s면 됨</td>
+<td>τ ~ L²/D: 크기·D가 정함(메커니즘이지만 조절 가능)</td>
+<td>전자 소자도 ms–s를 냄</td>
+<td>가능(크기, 가교, 이온 종류)</td>
+<td>이 응용에서는 병목 아님. 다만 <strong>경쟁 우위도 아님</strong></td>
+</tr>
+<tr class="even">
+<td>반복 내구·안정성 (소자)</td>
+<td>1년 1.6 × 10⁹ 펄스, 몸 안 수년</td>
+<td>탈수·팽윤(재료+봉지), 전극 반응(전기화학)</td>
+<td>고체 소자 10⁹–10¹² 회</td>
+<td>일부 가능(이온겔, 가교, 봉지)</td>
+<td><strong>진짜 병목 후보 1순위</strong>. 측정 자체가 없음</td>
+</tr>
+<tr class="odd">
+<td>소자 간 재현성 (소자·배열)</td>
+<td>readout을 칩마다 다시 학습하면 비용</td>
+<td>대부분 공정(손으로 만든 mm 겔)</td>
+<td>—</td>
+<td>재료 균일성은 일부</td>
+<td>진짜 병목 후보. 먼저 <strong>재야</strong> 함</td>
+</tr>
+<tr class="even">
+<td>집적 밀도 (배열)</td>
+<td>이 응용은 노드 수십–수백이면 충분할 수 있음</td>
+<td>공정 + 메커니즘(작게 하면 τ도 짧아짐)</td>
+<td>CMOS는 비교 불가한 밀도</td>
+<td>제한적</td>
+<td>대규모 응용에서는 병목, 소수 노드 응용에서는 아님</td>
+</tr>
+<tr class="odd">
+<td>전자 인터페이스·봉지 (시스템)</td>
+<td>모든 이식 응용</td>
+<td>공정·회로가 크지만, 이온–전자 변환은 계면 물리</td>
+<td>—</td>
+<td>계면 소재 설계로 일부</td>
+<td>진짜 병목 후보. 회로·패키징과 함께 풀 문제</td>
+</tr>
+<tr class="even">
+<td>시스템 에너지 (시스템)</td>
+<td>배터리 수명</td>
+<td>아직 측정이 없음</td>
+<td>MCU + 소프트웨어 기준선</td>
+<td>—</td>
+<td><strong>모름</strong>. 병목인지 이득인지 먼저 재야 함</td>
+</tr>
+</tbody>
+</table>
+<p><strong>표가 말하는 것.</strong> 연성 이온 RC의 실용화를 막는 것은 "느림"보다 <strong>오래·똑같이 버티는 것(내구·drift·소자 간 재현성)</strong>과 <strong>전자 세계와 붙는 것(인터페이스·봉지)</strong>일 가능성이 큽니다. 그리고 가장 중요한 숫자인 시스템 에너지는 폴더 문헌에서 잰 것을 찾지 못했습니다(2026-10 기준). <span class="tag tag-interp">해석</span> 이 판단은 응용에 따라 바뀝니다. 실험실의 촉각 센서라면 내구 요구는 훨씬 낮고, 데이터센터라면 속도와 밀도가 결정적입니다.</p>
+</section>
+<section id="오늘의-반론" class="level4">
+<h4 class="anchored" data-anchor-id="오늘의-반론">오늘의 반론</h4>
+<p>가장 강한 반론은 이것입니다. <strong>"지금의 병목은 모두 공정과 공학의 문제다. 실리콘 트랜지스터도 처음에는 크고 불안정했지만 수십 년의 공정 개발로 풀렸다. 연성 이온 소자도 투자와 시간이 쌓이면 내구·재현성·집적이 해결될 것이다."</strong></p>
+<p>이 반론에는 맞는 부분이 있습니다. 표의 많은 칸이 Q2에서 "공정"으로 갔고, 손으로 겔을 붓는 지금의 제조는 분명히 개선될 수 있습니다. 그러나 두 가지는 공정만으로 풀리지 않을 수 있습니다. 첫째, <strong>크기와 시간척도가 묶여 있다</strong>는 것(τ ~ L²/D). 소자를 실리콘처럼 작게 만들면 ms–s τ라는 장점이 함께 줄어듭니다. 둘째, <strong>물이 있어야 동작한다</strong>는 것. 하이드로겔은 물이 빠지면 성질이 바뀌고, 전극에서는 전기화학 반응이 일어납니다. 이 둘은 이온이라는 메커니즘에서 오는 조건입니다. <span class="tag tag-interp">해석</span> 그리고 실리콘의 비유에는 함정이 있습니다. 실리콘이 공정을 개선하는 동안 비교 대상(진공관)은 멈춰 있었지만, 지금 이온 소자의 비교 대상(CMOS 저전력 MCU)은 계속 좋아지고 있습니다. 이 반론에 대한 내 답을 양식의 "오늘의 반론" 칸에 적으세요.</p>
+<figure class="fig photo figure"><img src="../assets/img/web/d26-first-transistor.jpg" alt="유리 덮개 안의 투명한 플라스틱 받침 위에 금박을 두른 쐐기, 구부린 철사 스프링, 작은 반도체 조각이 얹힌 첫 점접촉 트랜지스터 복제품" loading="lazy" class="figure-img"><figcaption><b>사진.</b> 1947년 Bell 연구소에서 처음 동작한 점접촉 트랜지스터의 복제품. <b>볼 것:</b> 손바닥 위에 올릴 만한 받침, 손으로 구부린 스프링과 금박 쐐기. 반론이 말하는 "처음에는 크고 불안정했다"의 출발점이 이런 모습이었다. 다만 첫 트랜지스터의 반도체는 실리콘이 아니라 저마늄이었다고 알려져 있다 [미확인: 폴더 밖 일반 지식]. 이 사진은 공정이 수십 년 동안 무엇을 바꿨는지 떠올리는 용도이고, 이온 소자가 같은 길을 갈지에 대한 근거는 아니다. 출처: Mister rf, <a href="https://commons.wikimedia.org/wiki/File:A_replica_of_the_first_working_transistor.jpg" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0.</figcaption></figure>
+<div class="think">
+<p>위 표에서 내 소재(예: 폴리전해질 접합, 이온겔)로 Q4에 "가능"이라고 쓸 수 있는 줄은 어디인가요? 그 줄의 병목을 줄이는 고분자 설계 변수(가교 밀도, 이온 종류, 고정 전하, 함수율)를 하나씩 짝지어 보세요. 짝지을 수 없는 줄은 "다른 계층의 병목"으로 장부에 적습니다.</p>
+</div>
+<div class="quiz" data-day="d26" data-set="6-check"></div>
+<div class="keypoints">
+<ul>
+<li>이식 ECG를 응용으로 놓으면: 속도는 병목 아님(우위도 아님), 내구·drift·소자 간 재현성과 인터페이스·봉지가 진짜 병목 후보, 시스템 에너지는 미측정 <span class="tag tag-interp">해석</span>.</li>
+<li>공정으로 풀릴 수 있는 것과 메커니즘에서 오는 조건(크기–τ의 묶임, 젖은 동작·전극 반응)을 구별한다.</li>
+<li>판정은 응용에 따라 바뀐다. 교차표는 D27에서.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>자료를 덮고 아래 표를 먼저 머릿속으로 채운 뒤 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+한 장 요약 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>병목과 계층</td>
+<td>전체를 정하는 가장 좁은 단계. 소자·회로·시스템·응용 네 계층, 네 질문으로 진짜를 가림</td>
+<td>병목 아닌 곳을 고치면 전체는 그대로(10개/s 예)</td>
+</tr>
+<tr class="even">
+<td>속도</td>
+<td>τ는 대부분 크기와 메커니즘이 정함(52 ms–4,000 s). 이온이라서 반드시 느린 것은 아님(양성자 5 µs)</td>
+<td>사전 테스트와 '먼저 만들어 보기'에서 "이온은 느려서 안 된다"고 봤다면 여기가 달라질 지점 <span class="src">Zhou 2026 (Nat. Nanotech.), p.581</span></td>
+</tr>
+<tr class="odd">
+<td>숫자 하나</td>
+<td>이식 ECG 1년 ≈ 3.2 × 10⁷ 박동 ≈ 1.6 × 10⁹ 펄스, 보고된 연성 소자 최대 4,000 펄스</td>
+<td>가정: 1박동/s, 박동당 50단계</td>
+</tr>
+<tr class="even">
+<td>전력</td>
+<td>fJ는 µV 자극의 소자 에너지. 1 mm² 전극을 1 V로 충전하면 약 50 nJ(½CV², 전원은 CV²). 박동당 500펄스면 25 µJ로 D17 디지털 경로 전체(21 µJ)보다 크고, 100 µm 전극·0.5 V면 0.06 µJ</td>
+<td>계면 용량 10 µF/cm² 가정(매끈한 금속의 대표값 약 20 µF/cm²이면 2배) <span class="src">Ge 2020, p.3216</span></td>
+</tr>
+<tr class="odd">
+<td>배열</td>
+<td>선을 나눠 쓰는 격자. sneak path → 1T1R. 둘레 회로(드라이버·TIA)는 N, 소자는 N², ADC·MCU는 공유. 연성 이온 배열은 10×10 수율 시험, 계산은 5개를 하나씩</td>
+<td><span class="src">Guo 2026, p.7–8</span> <span class="src">Jiang 2026, p.1114</span></td>
+</tr>
+<tr class="even">
+<td>readout까지 소자</td>
+<td>ADC 없이 물리로 가중합. 쓰기 정밀도·drift·비휘발이 조건. 학습은 칩 밖에서. 소자마다 붙은 TIA(N = 10이면 10 µJ/박동)는 어느 구성에서나 남음</td>
+<td><span class="src">Zhong 2022, p.676–680</span> <span class="src">Jiang 2026, p.1115</span></td>
+</tr>
+<tr class="odd">
+<td>반론</td>
+<td>병목은 공정 문제라 시간이 해결한다</td>
+<td>크기–τ 묶임, 젖은 동작은 메커니즘의 조건. 비교 대상도 움직인다</td>
+</tr>
+<tr class="even">
+<td>모르는 것 하나</td>
+<td>이온 RC 시스템의 추론 한 번 에너지</td>
+<td>폴더에 측정 없음</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="quiz" data-day="d26" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<ol type="1">
+<li>병목 후보(속도·전력·재현성·집적·안정성·인터페이스)를 계층에 놓고, 네 질문 중 적어도 Q1(응용의 숫자)과 Q2(메커니즘인가 공정인가)를 답했나?</li>
+<li>속도를 τ ~ L²/D로 크기와 이어 설명했나? 전자 소자도 같은 τ를 낼 수 있다는 점(Q3)을 다뤘나?</li>
+<li>사건당 에너지 숫자를 쓸 때 입력 전압과 경계를 적었나? 계면 충전 같은 이온 고유 비용을 한 번이라도 어림하고, D17의 박동당 장부에 넣어 소자의 몫을 봤나?</li>
+<li>배열·집적의 현황을 폴더 논문(무엇을 만들었고 무엇을 계산했나)으로 적었나? 집적이 안 될 때 남는 자리를 하나 이상 들었나?</li>
+<li>reservoir만 소자 vs readout까지 소자를 ADC·가중치 저장·쓰기 오차·학습 위치로 비교했나? 노드 수 N이 늘 때 무엇이 N에 비례하고 무엇을 공유하는지 적었나?</li>
+<li>"진짜 병목"을 하나 고르고, 원인 → 결과의 사슬을 숫자 하나와 함께 쓴 뒤, 그것이 내 소재 설계로 줄일 수 있는 것인지 적었나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 이식형 ECG의 1년 약 1.6 × 10⁹ 펄스 반복과 몸 안 수년의 안정성 vs (메커니즘이 허용하는 것) 보고된 연성 이온 소자의 내구 10²–4 × 10³ 회, 탈수·전극 반응. 측정 자체가 없다.</li>
+<li><strong>병목 장부:</strong> (응용) µm 크기 고밀도 배열 vs (메커니즘) τ ~ L²/D 때문에 작게 만들면 τ가 짧아진다. ms–s τ를 µm 크기에서 내려면 D를 크게 낮추는 소재가 필요하다 <span class="tag tag-hypo">가설</span>.</li>
+<li><strong>병목 장부:</strong> (응용) readout 가중치의 장기 유지 vs (메커니즘) 연성 이온 소자는 대체로 휘발성 → readout은 다른 소자와의 혼성.</li>
+<li><strong>아직 모르는 것:</strong> 이온 RC 시스템의 추론 한 번 에너지. / 연성 이온 소자의 동적 응답 소자 간 CV. / 실제 계면 용량과 펄스당 충전 에너지가 회수되는 비율. / 이온 소자를 PCB 혼성으로 엮을 때의 읽기 회로 비용.</li>
+<li><strong>용어집:</strong> 병목, 계층(소자·회로·시스템·응용), 처리율, 확산 시간, 계면 충전 에너지, 내구, 배열, crossbar, 집적, 패터닝, 포토리소그래피, 스크린 인쇄, sneak path, 1T1R, 선택 소자, IR drop, 둘레(주변) 회로, MUX, 적분기, 혼합형 RC, 완전 아날로그 RC, write-verify, drift, 칩 위 학습.</li>
+<li><strong>접는 기준 후보:</strong> "내 소자가 목표 응용의 1년 반복 횟수의 1/1000도 견디지 못하고 그 원인이 소재 자체(탈수·전극 반응)라면, 그 응용을 목표로 쓰지 않는다."</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다. 아래는 모두 보충이며, 오늘 본문은 이것 없이 읽히도록 썼습니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Liang 2024, <em>Nat. Electron.</em> 7, 193–206. p.196(과제 시간상수 10⁻⁷–1 s), p.198(1 ms보다 긴 시간척도, 출력층의 비휘발·1T1R·잡음 허용), p.199–200(Fig. 4d, Fig. 5), p.202(집적의 세 수준).</li>
+<li>Zhang 2024, <em>ACS Nano</em> 18, 15025–15034. p.15026–15032(제조, 크기와 기억 시간, 다음 목표).</li>
+<li>Chen 2024, <em>PNAS</em> 121, e2407971121. p.6, 8.</li>
+<li>Wang 2025, <em>Chem. Soc. Rev.</em> 55, 299–335. p.328.</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
+<ul>
+<li>Zhong 2022, <em>Nat. Electron.</em> 5, 672–681. p.676(잡음 고려 학습, 쓰기), p.677–679(결과, 전력 비교와 두 이유), p.679(ADC의 쓰임), p.680(쓰기 순환).</li>
+<li>Jiang 2026, <em>Nat. Mater.</em> 25, 1110–1124. p.1114(sneak path, 1T1R, 선택 소자, IR drop), p.1115(쓰기 정밀도, drift).</li>
+<li>Roadmap 2026, <em>ACS Nano</em> 20, 8102–8163. p.8120, 8123–8126.</li>
+<li>Aluru 2026, <em>Science</em> 392, 592–601. p.598(Table 1: 내구 10² 회, 3차원 집적).</li>
+<li>Guo 2026, <em>Nat. Commun.</em> 17, 4275. p.5–10(Fig. 4, 제조, 탈수).</li>
+<li>Huang 2026, <em>Adv. Mater.</em> 38, e74080. p.2, 10–12.</li>
+<li>Kim 2026, <em>Nat. Sensors</em> 1, 535–544. p.536, 540, 543.</li>
+<li>Lee 2025, <em>npj Unconv. Comput.</em> 2, 27. p.2–3(τ 0.92–123 ms).</li>
+<li>Yoo 2025, <em>Adv. Mater.</em> 37, 2412377. p.5(전극 소모와 교대 바이어스). D27에서 다시 봄.</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d26">{"version": 2, "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "지금 실험실에서 이온 소자 하나를 재는 셋업(소자, 케이블, 소스미터, PC)을 떠올리고, 이것을 '주머니에 들어가는 장치'로 만들려면 무엇이 바뀌어야 하는지 다섯 가지를 적어 보세요. 그다음 가장 어려울 것 같은 하나에 동그라미를 치고, 왜 그런지 한 줄 적습니다.", "items": [{"id": "d26-p01", "type": "ox", "q": "이온은 전자보다 무겁고 느리게 움직이므로, 이온 소자는 언제나 ms보다 느리게 동작한다.", "a": false, "why": "확산 시간은 대략 거리의 제곱에 비례한다(τ ~ L²/D). 고체 산화물 속 양성자가 짧은 거리를 움직이는 소자는 τ가 5 µs였다. 느림은 대부분 크기와 메커니즘이 정한다. 2구간에서 설명한다.", "ref": "#ch-speed"}, {"id": "d26-p02", "type": "short", "q": "이온이 거리 L을 건너는 시간이 대략 L²에 비례한다면, L을 10분의 1로 줄일 때 그 시간은 몇 분의 1이 되나? (숫자만)", "a": ["100", "100분의 1", "1/100", "백"], "why": "(1/10)² = 1/100. 1 mm에서 약 1,000 s이던 것이 100 µm에서 10 s가 된다(D = 10⁻⁹ m²/s 가정). 2구간에서 계산한다.", "ref": "#ch-speed"}, {"id": "d26-p03", "type": "mc", "q": "소자 9개를 3×3 격자로 놓고, 같은 가로줄과 같은 세로줄의 소자들이 선을 함께 쓰게 하면 필요한 선은 몇 개인가?", "options": ["18개", "9개", "6개", "3개"], "a": 2, "why": "가로 3 + 세로 3 = 6개. 소자마다 선 두 개씩 따로 뽑으면 18개다. 이렇게 선을 나눠 쓰는 격자가 crossbar 배열이다. 4구간에서 설명한다.", "ref": "#ch-array-integration"}, {"id": "d26-p04", "type": "ox", "q": "격자형 배열에서 한 칸을 읽으려고 그 칸의 가로줄에 전압을 걸고 세로줄의 전류를 재면, 그 칸의 소자를 지난 전류만 측정된다.", "a": false, "why": "옆 칸 소자들을 거쳐 같은 세로줄로 들어오는 전류(sneak path)가 섞인다. 칸마다 스위치(트랜지스터)를 붙인 1T1R이 흔한 해결이다. 4구간에서 설명한다.", "ref": "#ch-array-integration"}, {"id": "d26-p05", "type": "mc", "q": "readout(상태의 가중합)까지 memristor 배열로 하는 '완전 아날로그' RC에서, 가중치는 보통 어떻게 정하나?", "options": ["소자가 동작하면서 스스로 정한다", "칩 밖 컴퓨터에서 계산한 뒤 전도도로 써 넣는다", "입력이 들어올 때마다 새로 계산한다", "정하지 않고 무작위로 둔다"], "a": 1, "why": "폴더의 사례(Zhong 2022)는 상태를 기록해 PC에서 회귀로 가중치를 구하고, 쓰고-읽고-고치기를 반복해 전도도에 썼다. 5구간에서 설명한다.", "ref": "#ch-all-analog"}, {"id": "d26-p06", "type": "ox", "q": "사건당 에너지가 fJ인 이온 시냅스로 만든 장치는, 장치 전체가 쓰는 에너지도 fJ 수준이다.", "a": false, "why": "fJ는 µV–mV 자극에서 소자에 들어간 에너지를 계산한 값이다. 과제의 ±1 V 펄스, 전극 계면 충전, 읽기 회로·ADC·readout은 들어 있지 않다. 3구간에서 설명한다.", "ref": "#ch-power-stability"}, {"id": "d26-p07", "type": "mc", "q": "1초에 한 번씩 심장 박동을 판정하는 이식 장치가 1년 동안 받는 박동 수에 가장 가까운 것은?", "options": ["약 10⁴번", "약 10⁵번", "약 3 × 10⁷번", "약 10¹²번"], "a": 2, "why": "86,400 s/일 × 365일 ≈ 3.2 × 10⁷번. 박동마다 펄스를 여러 개 넣으면 10⁹ 자릿수가 된다. 보고된 연성 이온 소자의 반복 시험은 최대 수천 번이다. 3구간에서 계산한다.", "ref": "#ch-power-stability"}, {"id": "d26-p08", "type": "ox", "q": "여러 단계를 거치는 장치에서, 가장 느린 단계가 아닌 다른 단계를 10배 빠르게 만들면 전체 처리 속도도 크게 빨라진다.", "a": false, "why": "전체 속도는 가장 좁은 단계(병목)가 정한다. 병목이 아닌 곳을 고쳐도 전체는 거의 그대로다. 1구간에서 설명한다.", "ref": "#ch-bottleneck-layers"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 병목", "items": [{"id": "d26-q01", "type": "short", "q": "세 단계가 1초에 각각 200개, 50개, 5,000개를 처리한다. 전체는 1초에 몇 개를 처리하나? (숫자만)", "a": ["50", "50개"], "why": "가장 적게 넘겨주는 둘째 단계(50개/s)가 전체를 정한다.", "ref": "#ch-bottleneck-layers"}, {"id": "d26-q02", "type": "mc", "q": "위 장치에서 셋째 단계(5,000개/s)를 두 배로 빠르게 하면 전체 처리는?", "options": ["두 배가 된다", "변하지 않는다(50개/s)", "절반이 된다", "5,000개/s가 된다"], "a": 1, "why": "셋째 단계는 병목이 아니다. 둘째 단계를 고쳐야 전체가 움직인다. 소자 에너지만 줄이는 것이 시스템 에너지를 거의 바꾸지 못하는 것도 같은 구조다.", "ref": "#ch-bottleneck-layers"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 확산 시간 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d26-q03", "type": "short", "q": "[풀이 예시 확인] L = 10 µm = 10⁻⁵ m, D = 10⁻⁹ m²/s. L² = 10⁻¹⁰ m², L²/D = 10⁻¹⁰ ÷ 10⁻⁹ = 0.1 s. 몇 ms인가? (숫자만)", "a": ["100", "100 ms", "100ms"], "why": "0.1 s = 100 ms. 손바닥 크기가 아니라 머리카락 굵기의 1/10 정도로 줄이면 심전도 박동보다 짧아진다.", "ref": "#ch-speed"}, {"id": "d26-q04", "type": "short", "q": "[일부 채우기] L = 3 µm이면 L² = 9 × 10⁻¹² m². D = 10⁻⁹ m²/s로 나누면 몇 ms인가? (숫자만)", "a": ["9", "9 ms", "9ms"], "why": "9 × 10⁻¹² ÷ 10⁻⁹ = 9 × 10⁻³ s = 9 ms. 거리가 3배면 시간은 9배다.", "ref": "#ch-speed"}, {"id": "d26-q05", "type": "short", "q": "[혼자 풀기] 겔 속이라 D가 더 작은 5 × 10⁻¹⁰ m²/s이고, L = 50 µm이다. τ ~ L²/D는 몇 초인가? (숫자만)", "a": ["5", "5 s", "5초"], "why": "L² = (5 × 10⁻⁵)² = 2.5 × 10⁻⁹ m². ÷ 5 × 10⁻¹⁰ = 5 s. 헷갈렸다면 50 µm를 5 × 10⁻⁵ m로 바꿨는지, 제곱을 지수 두 배로 했는지 확인하세요.", "ref": "#ch-speed"}, {"id": "d26-q06", "type": "ox", "q": "ms–s 범위의 시간상수는 이온 소자만 낼 수 있으므로, 생체 신호 처리에서 이온 소자는 경쟁 상대가 없다.", "a": false, "why": "Pt/HfO₂ 2단자 전자 소자도 바이어스로 τ를 0.92–123 ms로 조절했다(Lee 2025 npj). 저항–커패시터 회로도 같은 τ를 낸다(D16). τ가 맞는 것은 필요조건일 뿐 우위가 아니다.", "ref": "#ch-speed"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 에너지와 내구", "items": [{"id": "d26-q07", "type": "short", "q": "계면 용량 10 µF/cm²(가정), 전극 1 mm²(= 0.01 cm²)이면 C = 0.1 µF = 10⁻⁷ F. 0.1 V로 한 번 충전하는 에너지 ½CV²는 몇 nJ인가? (숫자만)", "a": ["0.5", "0.5 nJ", "0.5nJ"], "why": "½ × 10⁻⁷ × 0.01 = 5 × 10⁻¹⁰ J = 0.5 nJ. 1 V면 100배인 50 nJ. 전압의 제곱과 면적이 손잡이다.", "ref": "#ch-power-stability"}, {"id": "d26-q08", "type": "mc", "q": "어떤 이온 섬유 시냅스가 사건당 0.074 fJ를 보고했다. 이 숫자가 이렇게 작은 가장 큰 이유는?", "options": ["이온이 전자보다 에너지 효율적이라서", "−10 µV라는 아주 작은 자극 전압에서 계산했기 때문", "섬유 모양이라서", "readout을 포함했기 때문"], "a": 1, "why": "에너지는 전압·전류·시간의 곱이다. 과제에서 흔히 쓰는 ±1 V는 −10 µV의 10만 배다. 숫자를 비교하려면 입력 조건과 경계를 맞춰야 한다.", "ref": "#ch-power-stability"}, {"id": "d26-q09", "type": "short", "q": "하루 86,400번 박동하고, 박동 하나를 50단계 펄스로 넣는다. 하루에 소자가 받는 펄스는 몇 개인가? (숫자만, 쉼표 없이)", "a": ["4320000", "4,320,000", "432만", "4.32×10⁶", "4.32e6"], "why": "86,400 × 50 = 4,320,000. 하루 만에 보고된 연성 소자 최대 반복(4,000 펄스)의 천 배가 넘는다.", "ref": "#ch-power-stability"}, {"id": "d26-q26", "type": "short", "q": "[혼자 풀기] 전극을 100 µm × 100 µm(= 10⁻⁴ cm²)로 줄였다. 계면 10 µF/cm²(가정)이면 C = 1 nF = 10⁻⁹ F. 0.5 V 펄스 하나의 ½CV²는 몇 nJ인가? (숫자만)", "a": ["0.125", "0.125 nJ", ".125", "0.13"], "why": "½ × 10⁻⁹ F × (0.5 V)² = 1.25 × 10⁻¹⁰ J = 0.125 nJ. 박동당 500펄스면 0.0625 µJ로 박동 하나 장부(약 23.3 µJ)의 0.3%다. 1 mm²·1 V(펄스당 50 nJ)와 비교하면 면적 1/100 × 전압의 제곱 1/4 = 1/400. 헷갈렸다면 µF/cm² × cm²로 C부터 구했는지, 전압을 제곱했는지 확인하세요.", "ref": "#ch-power-stability"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 배열과 집적", "items": [{"id": "d26-q10", "type": "short", "q": "100×100 crossbar 배열에 필요한 선은 몇 개인가? (숫자만)", "a": ["200", "200개"], "why": "가로 100 + 세로 100 = 200. 소자마다 두 선씩 뽑으면 20,000개다.", "ref": "#ch-array-integration"}, {"id": "d26-q11", "type": "mc", "q": "배열의 sneak path를 막는 가장 흔한 방법은?", "options": ["선을 굵게 한다", "칸마다 트랜지스터 스위치를 붙여 읽는 칸만 연다(1T1R)", "소자를 더 크게 만든다", "읽기 전압을 높인다"], "a": 1, "why": "1T1R은 읽는 칸의 스위치만 켜서 옆 칸을 거치는 길을 끊는다. 대가는 칸마다 트랜지스터 면적과 게이트 선이다. 읽기 전압을 높이면 새는 전류도 커진다.", "ref": "#ch-array-integration"}, {"id": "d26-q12", "type": "ox", "q": "Guo 2026의 하이드로겔 10×10 배열에서는 소자 100개가 동시에 행렬–벡터 곱을 해 MNIST를 풀었다.", "a": false, "why": "10×10은 수율(94%)을 보인 것이고, 계산에는 3×3 배열 중 소자 다섯 개를 각각 노드로 썼다. readout은 MATLAB, MNIST는 측정한 16상태로 컴퓨터 안에서 계산했다.", "ref": "#ch-array-integration"}, {"id": "d26-q27", "type": "mc", "q": "N × N crossbar의 행마다 드라이버, 열마다 TIA가 하나씩 있고, ADC 하나를 MUX로 나눠 쓴다. N을 10에서 100으로 키우면 TIA의 수와 '배열을 한 번 다 읽는 데 드는 ADC 변환 횟수'는 각각 어떻게 되나?", "options": ["TIA 10배, 변환 횟수 10배", "TIA 100배, 변환 횟수 100배", "TIA 10배, 변환 횟수는 그대로(ADC가 1개라서)", "둘 다 그대로"], "a": 0, "why": "TIA는 가장자리(열)에 하나씩이라 N에 비례해 10 → 100개. ADC는 1개지만 열 N개를 차례로 변환하므로 횟수도 N에 비례한다. N²에 비례하는 것은 칸(소자) 수다. ADC가 하나라는 것(개수)과 몇 번 쓰느냐(횟수)를 구별하세요.", "ref": "#ch-array-integration"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · readout의 위치", "items": [{"id": "d26-q13", "type": "mc", "q": "상태가 120개인 reservoir에서, readout을 위해 상태 하나하나를 ADC로 숫자로 바꿔야 하는 구성은?", "options": ["A: reservoir만 소자, readout은 MCU", "B: readout까지 비휘발 crossbar", "둘 다 아니다", "둘 다 상태마다 ADC가 필요하다"], "a": 0, "why": "A는 MCU가 숫자로 곱해 더하므로 상태마다 변환이 필요하다. B는 상태 전압을 crossbar에 바로 걸어 물리로 가중합하므로 그 사이 ADC가 없다(학습 단계는 별개).", "ref": "#ch-all-analog"}, {"id": "d26-q14", "type": "short", "q": "상태 x = (0.5, 0.5, −0.5), 가중치 쓰기 오차 e = (+0.02, +0.02, −0.02)일 때 출력이 움직이는 양 Σ eᵢxᵢ는? (숫자만)", "a": ["0.03", "+0.03", ".03"], "why": "0.02×0.5 + 0.02×0.5 + (−0.02)×(−0.5) = 0.01 + 0.01 + 0.01 = 0.03. 세 항이 같은 방향인 최악의 경우다. 부호가 무작위면 대략 √N에 비례해 커진다.", "ref": "#ch-all-analog"}, {"id": "d26-q28", "type": "short", "q": "노드(이온 소자) 100개에 TIA가 하나씩 붙고, TIA는 채널당 1 µW로 박동 하나(1 s) 내내 켜져 있다. TIA만의 박동당 에너지는 몇 µJ인가? (숫자만)", "a": ["100", "100 µJ", "100µJ"], "why": "100채널 × 1 µW × 1 s = 100 µW × 1 s = 100 µJ (W·s = J). 같은 조건의 readout 계산(ADC 500번 + MAC 1,000번 = 0.5 + 3 = 3.5 µJ)의 약 30배다. readout을 crossbar로 옮겨도 이 항은 남는다.", "ref": "#ch-all-analog"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d26-q15", "type": "ox", "q": "Zhong 2022의 완전 아날로그 RC는 학습 단계를 포함해 ADC를 전혀 쓰지 않았다.", "a": false, "why": "저자들은 ADC가 적분기 출력을 모으는 것 외에, 학습 중 상태를 샘플링하고 가중치를 쓰는 단계에서 쓰인다고 적는다(p.679). '완전 아날로그'는 추론의 신호 경로를 말한다.", "ref": "#ch-all-analog"}, {"id": "d26-q16", "type": "mc", "q": "연성 이온 소자를 readout(가중치 저장) 쪽보다 reservoir 쪽에 쓰는 것이 현실적인 이유는?", "options": ["이온 소자는 너무 빨라서", "대체로 휘발성이라 학습한 가중치를 오래 붙잡기 어렵기 때문", "이온 소자는 곱셈을 할 수 없어서", "readout에는 소자가 필요 없어서"], "a": 1, "why": "readout 소자는 비휘발이어야 한다(Liang 2024, p.198). 연성 이온 소자는 대체로 저절로 돌아오는 휘발성이라 장기 가중치 유지에 맞지 않는다는 리뷰의 정리도 있다(Wang 2025, p.328).", "ref": "#ch-all-analog"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 진짜 병목", "items": [{"id": "d26-q17", "type": "mc", "q": "다음 중 공정 개선만으로는 사라지기 어려운, 이온 메커니즘에서 오는 조건은?", "options": ["손으로 겔을 붓는 제조", "스크린 인쇄의 굵은 선", "소자를 작게 만들면 τ도 함께 짧아지는 것(τ ~ L²/D)", "측정 장비가 큰 것"], "a": 2, "why": "나머지는 공정·측정의 한계라 다른 기술로 바뀔 수 있다. 크기와 시간척도가 묶인 것은 확산 물리에서 온다. 이를 풀려면 D를 크게 낮추는 소재 같은 다른 길이 필요하다[가설].", "ref": "#ch-real-bottleneck"}, {"id": "d26-q18", "type": "ox", "q": "이온성 RC의 '진짜 병목'은 응용과 무관하게 하나로 정해진다.", "a": false, "why": "이식형 ECG라면 내구·안정성·인터페이스가, 데이터센터라면 속도·밀도가 앞에 선다. 네 질문의 Q1(응용의 요구)이 판정을 바꾼다.", "ref": "#ch-real-bottleneck"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d26-q19", "type": "mc", "q": "연성 이온 RC를 데이터센터의 대량 추론에 쓰려 할 때 가장 먼저 막히는 계층과 이유는?", "options": ["응용: 정확도가 너무 높아서", "소자·배열: τ에 묶인 처리율과 집적 밀도", "시스템: 무선이 없어서", "어디도 막히지 않는다"], "a": 1, "why": "대량 처리에는 소자 하나가 1초에 처리하는 입력 수와 같은 면적의 노드 수가 결정적이다. 연성 이온 소자의 ms–s τ와 mm 크기는 여기서 불리하다.", "ref": "#ch-real-bottleneck"}, {"id": "d26-q20", "type": "mc", "q": "몸 안 심전도 장치를 응용으로 놓을 때, 오늘의 판단 예에서 진짜 병목 후보 1순위는?", "options": ["τ가 너무 길다", "반복 내구·장기 안정성(탈수·전극 반응)", "배열 밀도", "정확도"], "a": 1, "why": "1년 약 1.6 × 10⁹ 펄스와 몸 안 수년을 요구하지만, 연성 소자의 보고된 반복은 수천 번이고 몸 안 장기 시험은 없다. τ는 박동 시간과 맞는다.", "ref": "#ch-real-bottleneck"}, {"id": "d26-q21", "type": "ox", "q": "readout까지 crossbar로 하면 순서 제어용 MCU나 디지털 부품이 전혀 필요 없다.", "a": false, "why": "Zhong 2022의 시스템에도 전원 모듈과 MCU가 있고, 학습·쓰기는 PC가 했다. Kim 2026의 자가발전 시스템도 자극의 시작을 맞추는 데 마이크로컨트롤러를 썼다.", "ref": "#ch-all-analog"}, {"id": "d26-q22", "type": "mc", "q": "Zhang 2024 (ACS Nano)의 제목 'Geometrically Scalable'이 실제로 보인 것은?", "options": ["소자를 수천 개로 늘려 배열을 만들었다", "소자 크기를 바꾸면 기억 시간이 200–4,000 s로 바뀌었다", "nm 크기로 줄였다", "CMOS 칩 위에 올렸다"], "a": 1, "why": "확장 가능하다는 것은 크기에 따라 기억 시간이 바뀐다는 뜻이었다. 배열은 만들지 않았고, 저자들은 다음 목표를 작은 집적 이온 회로로 적었다.", "ref": "#ch-array-integration"}, {"id": "d26-q23", "type": "short", "q": "소자 100개가 40 mm × 40 mm(16 cm²) 기판에 있다. 1 cm²당 몇 개인가? (소수 둘째 자리까지)", "a": ["6.25", "6.25개", "약 6.25", "6.3", "6"], "why": "100 ÷ 16 = 6.25개/cm². 5 µm 소자를 10 µm 간격으로 놓으면 10⁶개/cm²가 되므로[가정] 약 10⁵배 차이다.", "ref": "#ch-array-integration"}, {"id": "d26-q24", "type": "mc", "q": "Liang 리뷰의 집적 세 수준(낱개 소자 측정 / PCB 회로 / 칩)에서, 연성 이온 소자로 지금 기술로 갈 수 있는 다음 단계로 가장 현실적인 것은?", "options": ["곧바로 칩 수준 3차원 집적", "낱개 이온 소자 몇 개를 PCB 위 전자 회로와 엮은 혼성 시스템", "측정을 줄이고 시뮬레이션만", "단계를 오를 필요가 없다"], "a": 1, "why": "Zhong 2022도 PCB에 탐침 카드로 소자를 이었다. 연성 이온 소자 몇 개를 PCB 혼성으로 엮는 것은 지금의 공정으로 가능한 다음 단계다[해석].", "ref": "#ch-array-integration"}, {"id": "d26-q25", "type": "ox", "q": "Roadmap은 이온 신호와 전자 신호 사이의 변환이 지연, 에너지 손실, 신호 왜곡을 들여온다고 정리한다.", "a": true, "why": "p.8126. 그래서 박자 맞추기·버퍼·오류 허용 장치가 필요하다고 쓴다. 인터페이스는 회로·패키징과 함께 풀 시스템 계층의 병목 후보다.", "ref": "#ch-all-analog"}]}}}</script>
 <div class="step-check local-only">
 <label><input type="checkbox" data-step-check="lesson" data-day="d26"> 학습자료를 다 읽었다</label>
 </div>
@@ -564,9 +1383,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="flow-line">
 <p>후배에게 <strong>설명한다고 생각하고</strong> 오늘 질문에 답합니다. <strong>기본은 짧은 답</strong>입니다: 3–5문장, 또는 작은 도식 하나와 한 줄 설명, 그리고 설명하다 막힌 곳 한 줄. 이것만으로 정상적인 학습입니다. 왜·어떻게, 근거와 반론까지 쓰는 긴 종합 답안은 <strong>선택</strong>입니다. 주장에 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이면 좋고, <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 몇 번이고 고쳐도 됩니다. 막히는 곳은 따로 적어 두세요.</p>
 </div>
-<div class="pending-box">
-<p>내 답은(는) 공개 범위에서 제외되어 있습니다.</p>
-</div>
+<div class="editable" data-file="d26-answer" data-title="내 답" data-template="answer"></div>
 <div class="ledger-links">
   <span>장부에 옮기기 →</span>
   <a href="../ledger/bottleneck.html">병목 장부</a>
@@ -580,9 +1397,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="flow-line">
 <p>① 사전 테스트와 <strong>같은 문제</strong>를 이유와 함께 다시 풉니다. 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 다시 떠올리기 연습입니다. 이해 점검은 학습자료의 <strong>잠깐 점검</strong>과 <strong>종합 퀴즈</strong>에서 처음 고른 답으로 봅니다.</p>
 </div>
-<div class="pending-box">
-<p>이 날의 사후 테스트는 사전 테스트가 준비되면 함께 생깁니다.</p>
-</div>
+<div class="quiz" data-day="d26" data-set="pre" data-mode="post"></div>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">⑥ 학습 완료</h2>
@@ -601,7 +1416,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="feedback" class="level2">
 <h2 class="anchored" data-anchor-id="feedback">⑦ 피드백과 꼬리질문</h2>
 <div class="pending-box">
-<p>피드백은(는) 공개 범위에서 제외되어 있습니다.</p>
+<p>내 답을 저장한 뒤 Claude에게 <strong>"D26 검토해줘"</strong>라고 말하세요. 맞게 이해한 점, 핵심 오류와 근거, 고쳐야 할 인과관계, 다시 답할 질문을 이 자리에 남깁니다.</p>
 </div>
 <section class="comments" id="comments"></section>
 
