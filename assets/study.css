@@ -979,3 +979,26 @@ figure.fig.photo img { border-radius: 6px; border: 1px solid #e6e6e6; max-height
 .chap-map ul.cm-core li.seen a { color: #333; }
 .chap-map ul.cm-core li.seen a::after { content: "머묾"; flex: none; font-size: 0.7rem; color: #6b6b6b; border: 1px solid #ddd; border-radius: 8px; padding: 0 0.35rem; margin-left: auto; }
 @media (max-width: 600px) { .chap-map ul.cm-core { columns: 1; } }
+
+/* 이어서 읽기: 짧은 버튼 + 줄인 구간 제목 */
+.chap-map .cm-resume { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.chap-map .cm-resume a.sbtn { color: #fff; font-weight: 600; font-size: 0.84rem; padding: 0.25rem 0.8rem; }
+.chap-map .cm-resume-sub { font-size: 0.8rem; color: #5b6066; }
+
+/* 출처 확인 과정·제작 기록: 학습 설명과 구분하되 읽을 수 있는 대비(#5b6066, 약 6:1)를 유지한다.
+   본문 이해에 필요한 조건(단위, 모델 가정, 측정인지 예시인지)은 .prov에 넣지 않는다. */
+.prov { font-size: 0.84em; color: #5b6066; }
+.prov::before { content: "출처·검증 "; font-size: 0.85em; font-weight: 600; color: #6b7076; }
+figcaption .prov, .vcap .prov { display: block; margin-top: 0.25rem; }
+details.prov { margin: 0.4rem 0 0.8rem; padding: 0.3rem 0.7rem; border-left: 3px solid #d5d8dc; background: #f7f8f9; }
+details.prov::before { content: none; }
+details.prov > summary { cursor: pointer; font-size: 0.82rem; color: #5b6066; }
+
+/* Day 시작의 연구 지도: 오늘의 연구 질문 · 필요한 개념 · 끝나면 설명할 것 · 나중에 쓰이는 곳 */
+.day-map { border: 1px solid #cfe3da; background: #f7fbf9; border-radius: 8px; padding: 0.7rem 1rem; margin: 0.6rem 0 1.1rem; font-size: 0.95rem; }
+.day-map::before { content: "오늘의 연구 지도"; display: block; font-weight: 700; color: var(--mint-dark); margin-bottom: 0.3rem; }
+.day-map p { margin: 0.25rem 0; }
+.day-map ul { margin: 0.15rem 0 0.35rem; padding-left: 1.2rem; }
+/* 멈추기 좋은 곳: 작은 학습 단위의 끝 */
+.stop-point { border-top: 1px dashed #c9d3ce; margin: 1.4rem 0 1rem; padding-top: 0.45rem; font-size: 0.86rem; color: #4f6159; }
+.stop-point::before { content: "멈추기 좋은 곳 · "; font-weight: 700; color: var(--mint-dark); }

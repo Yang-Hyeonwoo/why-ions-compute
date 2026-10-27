@@ -1212,10 +1212,17 @@
     }
     var last = recall(lastKey);
     if (last && !location.hash && document.getElementById(last)) {
+      // 버튼은 '이어서 읽기 · 3구간'만, 구간 제목은 짧게 줄여 옆에 보조 문구로 단다
       var back = h("div", "cm-resume");
-      var a2 = h("a", "", "지난번 읽던 곳으로: " + chTitle(document.getElementById(last)) + " →");
+      var lastEl = document.getElementById(last);
+      // 저장된 id가 구간 전체(section)를 가리키면 그 제목만 쓴다
+      if (!/^H[1-6]$/.test(lastEl.tagName)) lastEl = lastEl.querySelector("h2, h3, h4") || lastEl;
+      var li = core.indexOf(lastEl);
+      var a2 = h("a", "sbtn primary", "이어서 읽기 · " + chNum(lastEl, li < 0 ? 0 : li) + "구간");
       a2.href = "#" + last;
       back.appendChild(a2);
+      var bare = chBare(lastEl);
+      back.appendChild(h("span", "cm-resume-sub", bare.length > 24 ? bare.slice(0, 23) + "…" : bare));
       map.appendChild(back);
     }
     core.forEach(function (x, i) {
@@ -1503,7 +1510,8 @@
         if (!ok) {
           var row = h("div", "qw-actions");
           if (it.ref && document.querySelector(it.ref)) {
-            var a = h("a", "", "↑ 해당 부분 다시 읽기");
+            // refLabel: 처음부터가 아니라 바로 필요한 설명·작은 예제의 이름 (예: "2×2 예제의 저장 칸 세기")
+            var a = h("a", "", "↑ 다시 볼 곳: " + (it.refLabel || "해당 부분"));
             a.href = it.ref;
             row.appendChild(a);
           }

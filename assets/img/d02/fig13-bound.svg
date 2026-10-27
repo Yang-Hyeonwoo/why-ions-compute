@@ -1,0 +1,54 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 391' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='350' y='24' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >계산 시간과 전송 시간 중 긴 쪽이 전체를 정한다 (1,000×1,000 MVM, 가상의 장치)</text>
+<text x='24' y='52' font-size='12' fill='#444' text-anchor='start' font-weight='bold' >장치 A: 연산 속도 10¹³ op/s, 대역폭 10¹² byte/s (경계 10 op/byte)</text>
+<text x='140' y='82' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >배치 B = 1</text>
+<rect x='150' y='70' width='2.9999999999999996' height='11' rx='1' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='158.0' y='80' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >계산 0.2 µs</text>
+<rect x='150' y='84' width='60.0' height='11' rx='1' fill='#e08a3c' stroke='none' stroke-width='1.2' />
+<text x='215.0' y='94' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >전송 4 µs</text>
+<text x='676' y='87' font-size='11' fill='#e08a3c' text-anchor='end' font-weight='bold' >전송이 김 → memory-bound</text>
+<text x='140' y='120' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >배치 B = 8</text>
+<rect x='150' y='108' width='23.999999999999996' height='11' rx='1' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='179.0' y='118' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >계산 1.6 µs</text>
+<rect x='150' y='122' width='60.0' height='11' rx='1' fill='#e08a3c' stroke='none' stroke-width='1.2' />
+<text x='215.0' y='132' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >전송 4 µs</text>
+<text x='676' y='125' font-size='11' fill='#e08a3c' text-anchor='end' font-weight='bold' >전송이 김 → memory-bound</text>
+<text x='140' y='158' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >배치 B = 20</text>
+<rect x='150' y='146' width='60.0' height='11' rx='1' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='215.0' y='156' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >계산 4 µs</text>
+<rect x='150' y='160' width='60.0' height='11' rx='1' fill='#e08a3c' stroke='none' stroke-width='1.2' />
+<text x='215.0' y='170' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >전송 4 µs</text>
+<text x='676' y='163' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >같다 → 경계</text>
+<text x='140' y='196' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >배치 B = 64</text>
+<rect x='150' y='184' width='191.99999999999997' height='11' rx='1' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='347.0' y='194' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >계산 12.8 µs</text>
+<rect x='150' y='198' width='60.0' height='11' rx='1' fill='#e08a3c' stroke='none' stroke-width='1.2' />
+<text x='215.0' y='208' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >전송 4 µs</text>
+<text x='676' y='201' font-size='11' fill='#13936b' text-anchor='end' font-weight='bold' >계산이 김 → compute-bound</text>
+<text x='24' y='232' font-size='12' fill='#444' text-anchor='start' font-weight='bold' >장치 B: 연산 속도 10¹¹ op/s, 대역폭 10¹² byte/s (경계 0.1 op/byte)</text>
+<text x='140' y='262' font-size='11.5' fill='#444' text-anchor='end' font-weight='normal' >배치 B = 1</text>
+<rect x='150' y='250' width='300.0' height='11' rx='1' fill='#13936b' stroke='none' stroke-width='1.2' />
+<text x='455.0' y='260' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >계산 20 µs</text>
+<rect x='150' y='264' width='60.0' height='11' rx='1' fill='#e08a3c' stroke='none' stroke-width='1.2' />
+<text x='215.0' y='274' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >전송 4 µs</text>
+<text x='676' y='267' font-size='11' fill='#13936b' text-anchor='end' font-weight='bold' >계산이 김 → compute-bound</text>
+<line x1='150' y1='292' x2='465.0' y2='292' stroke='#999' stroke-width='1'/>
+<line x1='150.0' y1='292' x2='150.0' y2='296' stroke='#999' stroke-width='1'/>
+<text x='150.0' y='306' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<line x1='210.0' y1='292' x2='210.0' y2='296' stroke='#999' stroke-width='1'/>
+<text x='210.0' y='306' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >4</text>
+<line x1='270.0' y1='292' x2='270.0' y2='296' stroke='#999' stroke-width='1'/>
+<text x='270.0' y='306' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >8</text>
+<line x1='330.0' y1='292' x2='330.0' y2='296' stroke='#999' stroke-width='1'/>
+<text x='330.0' y='306' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >12</text>
+<line x1='390.0' y1='292' x2='390.0' y2='296' stroke='#999' stroke-width='1'/>
+<text x='390.0' y='306' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >16</text>
+<line x1='450.0' y1='292' x2='450.0' y2='296' stroke='#999' stroke-width='1'/>
+<text x='450.0' y='306' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >20</text>
+<text x='471.0' y='306' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >µs</text>
+<text x='24' y='328' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >같은 계산(배치 1, 0.5 op/byte)이라도 장치 A에서는 전송이, 장치 B에서는 계산이 길다.</text>
+<text x='24' y='345' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >병목은 연산 밀도 하나가 아니라 장치의 (연산 속도 ÷ 대역폭)과 함께 정해진다.</text>
+<text x='24' y='362' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >전송은 가중치 4 MB만 셌다(입력·출력은 벡터마다 8 kB). 입력·출력까지 세면 장치 A의 경계는 B ≈ 21로 조금 오른쪽으로 간다.</text>
+<text x='24' y='379' font-size='10' fill='#999' text-anchor='start' font-weight='normal' >두 장치는 특정 제품이 아닌 가상의 값이고, 계산과 전송이 완전히 겹친다고 둔다. 막대 길이는 코드가 계산 (Claude가 그림)</text>
+</svg>
