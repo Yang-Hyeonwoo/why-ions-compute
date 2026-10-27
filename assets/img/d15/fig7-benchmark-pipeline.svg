@@ -1,42 +1,44 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 268' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 402' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
-<rect x='20.0' y='40.0' width='128.0' height='46.0' rx='6' fill='#444' stroke='#444' stroke-width='1.2' fill-opacity='0.12'/>
-<text x='84.0' y='69.0' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >데이터</text>
-<line x1='149.0' y1='63.0' x2='165.0' y2='63.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
-<text x='84.0' y='116.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='bold' >원래 시간이 있나?</text>
-<text x='84.0' y='136.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >MNIST: 없음 / ECG·소리: 있음</text>
-<text x='84.0' y='154.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 1·4구간</text>
-<rect x='166.0' y='40.0' width='128.0' height='46.0' rx='6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.2' fill-opacity='0.12'/>
-<text x='230.0' y='69.0' font-size='14' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >전처리</text>
-<line x1='295.0' y1='63.0' x2='311.0' y2='63.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
-<text x='230.0' y='116.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='bold' >필터·자르기·정규화</text>
-<text x='230.0' y='136.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >64통로 귀 모형이 이미 한 일</text>
-<text x='230.0' y='154.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 2·3·6구간</text>
-<rect x='312.0' y='40.0' width='128.0' height='46.0' rx='6' fill='#13936b' stroke='#13936b' stroke-width='1.2' fill-opacity='0.12'/>
-<text x='376.0' y='69.0' font-size='14' fill='#13936b' text-anchor='middle' font-weight='bold' >부호화</text>
-<line x1='441.0' y1='63.0' x2='457.0' y2='63.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
-<text x='376.0' y='116.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='bold' >시간을 누가 만들었나</text>
-<text x='376.0' y='136.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >행/열 순서, 입력 간격</text>
-<text x='376.0' y='154.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 4구간</text>
-<rect x='458.0' y='40.0' width='128.0' height='46.0' rx='6' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.2' fill-opacity='0.12'/>
-<text x='522.0' y='69.0' font-size='14' fill='#e08a3c' text-anchor='middle' font-weight='bold' >소자</text>
-<line x1='587.0' y1='63.0' x2='603.0' y2='63.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
-<text x='522.0' y='116.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='bold' >측정인가 모형인가</text>
-<text x='522.0' y='136.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >하드웨어 / 시뮬레이션</text>
-<text x='522.0' y='154.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 1구간 표</text>
-<rect x='604.0' y='40.0' width='128.0' height='46.0' rx='6' fill='#7a4ea3' stroke='#7a4ea3' stroke-width='1.2' fill-opacity='0.12'/>
-<text x='668.0' y='69.0' font-size='14' fill='#7a4ea3' text-anchor='middle' font-weight='bold' >readout</text>
-<line x1='733.0' y1='63.0' x2='749.0' y2='63.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
-<text x='668.0' y='116.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='bold' >특징 수는?</text>
-<text x='668.0' y='136.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >원시 입력 기준선과 비교</text>
-<text x='668.0' y='154.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 5구간</text>
-<rect x='750.0' y='40.0' width='128.0' height='46.0' rx='6' fill='#c8553d' stroke='#c8553d' stroke-width='1.2' fill-opacity='0.12'/>
-<text x='814.0' y='69.0' font-size='14' fill='#c8553d' text-anchor='middle' font-weight='bold' >채점</text>
-<text x='814.0' y='116.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='bold' >어떻게 나눴나</text>
-<text x='814.0' y='136.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >사람·화자 단위, 균형 정확도</text>
-<text x='814.0' y='154.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 6·7구간</text>
-<text x='450.0' y='192.0' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >논문의 "정확도 95%"는 이 여섯 칸 전체가 함께 낸 숫자다.</text>
-<text x='450.0' y='214.0' font-size='12' fill='#444' text-anchor='middle' font-weight='normal' >소자(주황)의 몫을 말하려면, 소자 칸만 뺀 같은 사슬(원시 입력 기준선)의 숫자가 함께 있어야 한다.</text>
-<text x='450.0' y='238.0' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >예: Zhou 2026의 말소리는 귀 모형(전처리) 뒤 '처리 없음'만으로도 높은 정확도를 낸다(6구간 원문 그림 c).</text>
-<text x='450.0' y='258.0' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >칸 나누기와 질문은 본문 2–7구간의 정리이며 Claude의 분류다. (Claude가 그림, 모식도)</text>
+<rect x='20.0' y='24.0' width='184.0' height='40.0' rx='6' fill='#444' stroke='#444' stroke-width='1.2' fill-opacity='0.12'/>
+<text x='112.0' y='50.0' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >1. 데이터</text>
+<line x1='205.0' y1='44.0' x2='227.0' y2='44.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<text x='112.0' y='86.0' font-size='12' fill='#444' text-anchor='middle' font-weight='bold' >원래 시간이 있나?</text>
+<text x='112.0' y='104.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >MNIST: 없음 / ECG·소리: 있음</text>
+<text x='112.0' y='121.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 1·4구간</text>
+<rect x='228.0' y='24.0' width='184.0' height='40.0' rx='6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.2' fill-opacity='0.12'/>
+<text x='320.0' y='50.0' font-size='14' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >2. 전처리</text>
+<line x1='413.0' y1='44.0' x2='435.0' y2='44.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<text x='320.0' y='86.0' font-size='12' fill='#444' text-anchor='middle' font-weight='bold' >필터·자르기·정규화</text>
+<text x='320.0' y='104.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >64통로 귀 모형이 이미 한 일</text>
+<text x='320.0' y='121.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 2·3·6구간</text>
+<rect x='436.0' y='24.0' width='184.0' height='40.0' rx='6' fill='#13936b' stroke='#13936b' stroke-width='1.2' fill-opacity='0.12'/>
+<text x='528.0' y='50.0' font-size='14' fill='#13936b' text-anchor='middle' font-weight='bold' >3. 부호화</text>
+<text x='528.0' y='86.0' font-size='12' fill='#444' text-anchor='middle' font-weight='bold' >시간을 누가 만들었나</text>
+<text x='528.0' y='104.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >행/열 순서, 입력 간격</text>
+<text x='528.0' y='121.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 4구간</text>
+<rect x='20.0' y='156.0' width='184.0' height='40.0' rx='6' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.2' fill-opacity='0.12'/>
+<text x='112.0' y='182.0' font-size='14' fill='#e08a3c' text-anchor='middle' font-weight='bold' >4. 소자</text>
+<line x1='205.0' y1='176.0' x2='227.0' y2='176.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<text x='112.0' y='218.0' font-size='12' fill='#444' text-anchor='middle' font-weight='bold' >측정인가 모형인가</text>
+<text x='112.0' y='236.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >하드웨어 / 시뮬레이션</text>
+<text x='112.0' y='253.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 1구간 표</text>
+<rect x='228.0' y='156.0' width='184.0' height='40.0' rx='6' fill='#7a4ea3' stroke='#7a4ea3' stroke-width='1.2' fill-opacity='0.12'/>
+<text x='320.0' y='182.0' font-size='14' fill='#7a4ea3' text-anchor='middle' font-weight='bold' >5. readout</text>
+<line x1='413.0' y1='176.0' x2='435.0' y2='176.0' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
+<text x='320.0' y='218.0' font-size='12' fill='#444' text-anchor='middle' font-weight='bold' >특징 수는?</text>
+<text x='320.0' y='236.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >원시 입력 기준선과 비교</text>
+<text x='320.0' y='253.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 5구간</text>
+<rect x='436.0' y='156.0' width='184.0' height='40.0' rx='6' fill='#c8553d' stroke='#c8553d' stroke-width='1.2' fill-opacity='0.12'/>
+<text x='528.0' y='182.0' font-size='14' fill='#c8553d' text-anchor='middle' font-weight='bold' >6. 채점</text>
+<text x='528.0' y='218.0' font-size='12' fill='#444' text-anchor='middle' font-weight='bold' >어떻게 나눴나</text>
+<text x='528.0' y='236.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >사람·화자 단위, 균형 정확도</text>
+<text x='528.0' y='253.0' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >→ 6·7구간</text>
+<polyline points='528.0,128.0 528.0,140.0 112.0,140.0 112.0,154.0' fill='none' stroke='#999' stroke-width='1.2' stroke-linejoin='round'/>
+<text x='320.0' y='288.0' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >논문의 "정확도 95%"는 이 여섯 칸 전체가 함께 낸 숫자다.</text>
+<text x='320.0' y='310.0' font-size='12' fill='#444' text-anchor='middle' font-weight='normal' >소자(주황)의 몫을 말하려면, 소자 칸만 뺀 같은 사슬</text>
+<text x='320.0' y='327.0' font-size='12' fill='#444' text-anchor='middle' font-weight='normal' >(원시 입력 기준선)의 숫자가 함께 있어야 한다.</text>
+<text x='320.0' y='350.0' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >예: Zhou 2026의 말소리는 귀 모형(전처리) 뒤 '처리 없음'만으로도</text>
+<text x='320.0' y='366.0' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >높은 정확도를 낸다(6구간 원문 그림 c).</text>
+<text x='320.0' y='394.0' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >칸 나누기와 질문은 본문 2–7구간의 정리이며 Claude의 분류다. (Claude가 그림, 모식도)</text>
 </svg>

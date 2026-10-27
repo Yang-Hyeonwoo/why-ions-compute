@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 33. 이온과 전자의 숫자: 이동도·확산·상태 – Why Ions Compute</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d19b.html" rel="next">
+<link href="../days/d18.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">커버</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">전체 학습 지도</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">장부</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../ledger/bottleneck.html">
+ <span class="dropdown-text">병목 장부</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/unknowns.html">
+ <span class="dropdown-text">아직 모르는 것</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/glossary.html">
+ <span class="dropdown-text">용어집</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/kill-criteria.html">
+ <span class="dropdown-text">접는 기준</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/references.html">
+ <span class="dropdown-text">참고문헌</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/questions.html">
+ <span class="dropdown-text">질문 모음</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../rules.html"> 
+<span class="menu-text">공부 규칙</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d19a.html">Phase 4 · 왜 이온 고분자인가</a></li><li class="breadcrumb-item"><a href="../days/d19a.html">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">전체 학습 지도</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">장부</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">병목 장부</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">아직 모르는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어집</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">접는 기준</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">질문 모음</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rules.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">공부 규칙</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d19a.html">Phase 4 · 왜 이온 고분자인가</a></li><li class="breadcrumb-item"><a href="../days/d19a.html">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 33. 이온과 전자의 숫자: 이동도·확산·상태</h1>
+<p class="subtitle lead">Phase 4 · 왜 이온성 고분자인가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> — 이온과 전자의 이동도·확산계수는 얼마나 다르고, 느린 것은 왜 신호가 아니라 상태인가?</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d19a">
+  <li data-step="lesson"><a href="#lesson"><b>1</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>2</b>학습 완료</a></li>
+</ol>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">사전 테스트 (선택)</h2>
+<details class="fold pretest-fold"><summary>사전 테스트 펼치기 · 배우기 전에 짐작해 보는 문제 (선택)</summary><div class="quiz" data-day="d19" data-set="pre"></div>
+</details>
+</section>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<div class="lesson-meta">
+<p>학습 구간 5개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 90분 안팎(추정) · 선택 영상 9분 · 퀴즈 23문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Wang 2025 (Chem. Soc. Rev.) p.305, 315, 320, 328–329 / Aluru 2026 요약면, p.593, 595–597, 598(Table 1), 599–600 / Roadmap 2026 p.8113, 8124, 8126 / Zhu 2025 p.9–10, 14 / Zhang 2024 (ACS Nano) p.15029–15030 / Chen 2023 p.560–561 / Dobashi 2022 p.502, 505 / Hoskin 2022 p.650 / Han 2023 p.3 / Yang 2015 p.59–60 / Guo 2026 p.2, 7 / Lee 2026 (AFM) p.6 / Liang 2024 p.198 / Tang 2022 p.1555(제목·초록). 모두 해당 쪽만 봤습니다. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 결정 실리콘 전자의 이동도(1400 cm²/(V·s))·확산계수(36 cm²/s)는 폴더 밖 공개 물성표(Ioffe 연구소, 300 K)에서, K⁺의 극한 몰전도도(73.5 S·cm²/mol)·확산계수(1.96×10⁻⁹ m²/s, 25 °C)와 Si 전자의 전도 유효질량(0.26 m₀)은 폴더 밖 공개 표·교재 값으로, OECT의 탈도핑 동작은 Kim 2018 (Nat. Commun.) 본문 일부로 확인했습니다.</p>
+</div>
+<p>Phase 4의 첫날입니다. Phase 3까지는 "좋은 물리 reservoir(입력의 흔적을 내부 상태에 담는 물리계, <a href="../days/d07b.html#ch-prc">Day 12 4구간</a>)를 무엇으로 판정하나"를 물었습니다. Phase 4는 그 판정의 <strong>재료 쪽 원인</strong>으로 내려갑니다. 이온이 어떻게 움직이고, 그 움직임이 어떤 기억과 비선형을 만들고, 그것을 고분자 화학으로 어떻게 바꿀 수 있는지. 오늘은 그 첫 질문, "왜 전자가 아닌 이온인가"입니다.</p>
+<p>이 질문에 "생체친화적이다", "저전력이다" 같은 한 줄로 답하면 Day 49–50에서 아무것도 결정할 수 없습니다. 그래서 오늘은 전자와 이온을 <strong>같은 물리량</strong>으로 나란히 놓고, 이온에만 있는 자유도를 세고, 이온이 지는 축을 <strong>숫자와 조건</strong>으로 적습니다. 다섯 개의 작은 질문으로 갑니다.</p>
+<ol type="1">
+<li>운반자가 "얼마나 잘 움직이나"를 재는 두 숫자, 이동도와 확산계수는 무엇인가? 전자와 이온은 몇 자릿수 다른가?</li>
+<li>"이온은 느리다"에서 느린 것은 정확히 무엇인가? 신호인가, 상태 변화인가?</li>
+<li>전자에는 없고 이온에는 있는 자유도는 무엇인가? (여러 종류의 운반자, 화학 선택성, 연성·수계)</li>
+<li>이온이 이기기 어려운 영역(속도·정밀도·집적 밀도)은 숫자로 얼마나 떨어져 있고, 연구는 지금 어디까지 왔나?</li>
+<li>그래서 "왜 이온인가"를 어떤 문장으로 써야 정직한가?</li>
+</ol>
+<p>이 자료는 이온 뉴로모픽을 정당화하는 글이 아닙니다. 4구간의 표를 채운 뒤 "내 소재가 이길 수 있는 칸이 하나라도 있는가"를 내 답에서 스스로 판단하세요.</p>
+<section id="ch-carriers" class="level3">
+<h3 class="anchored" data-anchor-id="ch-carriers">1. 운반자의 숫자: 이동도와 확산계수</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 확산과 드리프트를 실험실 장면으로 설명하고, 이동도와 확산계수를 아인슈타인 관계로 서로 바꾸며, 결정 실리콘의 전자·물속 이온·고분자 속 이온이 몇 자릿수 다른지 숫자로 말할 수 있다.</p>
+</div>
+<p>전기를 나르는 입자를 <strong>운반자</strong>(carrier)라고 부릅니다. 구리선과 실리콘 칩에서는 전자가, 소금물과 하이드로겔과 이온겔에서는 이온이 운반자입니다. "이온은 전자보다 느리다"는 말은 누구나 하지만, 얼마나 느린지, 그리고 무엇을 기준으로 느린지는 숫자가 있어야 말할 수 있습니다. 그 숫자가 이동도와 확산계수입니다. 화학공학 수업에서 확산계수는 익숙할 것이고, 이동도는 전기화학에서 한 번쯤 봤을 것입니다. 여기서는 둘을 처음부터 같은 그림 위에 놓습니다.</p>
+<div id="b-mobility-diffusion" class="basics">
+<section id="이동도확산계수와-자릿수-비교" class="level4">
+<h4 class="anchored" data-anchor-id="이동도확산계수와-자릿수-비교">이동도·확산계수와 자릿수 비교</h4>
+<p><strong>① 왜 필요한가.</strong> 이온 소자의 상태(전도도, 전압)가 바뀌려면 이온이 어디론가 <strong>움직여야</strong> 합니다. 전극 표면에 모이거나, 접합에서 빠져나가거나, 고분자 속으로 들어가야 하죠. 그 움직임이 얼마나 빠른지가 소자의 응답 시간과 기억 시간을 정합니다(Day 37). 전자 소자와 비교하려면 두 운반자를 <strong>같은 단위</strong>로 적어야 합니다.</p>
+<p><strong>② 무엇인가: 두 가지 움직임.</strong> 운반자가 움직이는 방식은 두 가지입니다(그림 0).</p>
+<ul>
+<li><strong>확산</strong>(diffusion). 물컵에 잉크 한 방울을 떨어뜨리면 아무도 휘젓지 않아도 퍼집니다. 분자 하나하나는 열 때문에 이웃 분자와 부딪히며 아무 방향으로나 움직입니다(그림 0 ① 위). 그런데 많은 곳에서 적은 곳으로 나가는 분자가 그 반대보다 많으니, <strong>알짜로는</strong> 농도가 고르게 됩니다(그림 0 ① 아래). 화학공학의 Fick 법칙, 곧 흐름이 농도 기울기에 비례한다는 <span class="math inline">\(J = -D\,dc/dx\)</span>가 이것이고, 그 비례 상수가 <strong>확산계수</strong> <span class="math inline">\(D\)</span> [m²/s]입니다. 단위가 "넓이 ÷ 시간"인 이유는, 무작위로 앞뒤로 흔들리는 걸음은 서로 상당 부분 상쇄되어 간 거리가 시간이 아니라 시간의 <strong>제곱근</strong>에 비례하기 때문입니다. 한 방향으로 퍼지는 전형적인 거리는 <span class="math inline">\(\sqrt{2Dt}\)</span>이고, 100배 오래 기다려도 10배만 더 퍼집니다.</li>
+<li><strong>드리프트</strong>(drift). 소금물에 전극 두 개를 넣고 전압을 걸면, 양이온은 (−) 쪽으로, 음이온은 (+) 쪽으로 끌려갑니다. 이온은 여전히 열 때문에 무작위로 흔들리지만, 그 흔들림 위에 전기장이 늘 한쪽으로 미는 힘이 더해져 <strong>평균 위치가 한 방향으로 옮겨 갑니다</strong>(그림 0 ②).
+<ul>
+<li><em>왜 속도가 일정한가.</em> 전하 <span class="math inline">\(q\)</span>에 전기장 <span class="math inline">\(E\)</span>(1 m당 걸린 전압, V/m)가 주는 힘은 <span class="math inline">\(qE\)</span>입니다. 이온이 움직이면 물 분자와 부딪히는 마찰이 속도에 비례해 <span class="math inline">\(f\,v\)</span>만큼 반대로 걸립니다(<span class="math inline">\(f\)</span>는 <strong>마찰 계수</strong>, 단위 N·s/m: 1 m/s로 끌고 가는 데 드는 힘). 원심분리에서 입자가 곧 일정한 침강 속도에 이르듯, 아주 짧은 시간 안에 두 힘이 같아지고(<span class="math inline">\(qE = fv\)</span>) 그 뒤로는 속도가 일정합니다: <span class="math inline">\(v = (q/f)\,E\)</span>.</li>
+<li><em>이동도의 뜻.</em> 이 비례 상수 <span class="math inline">\(q/f\)</span>가 <strong>이동도</strong> <span class="math inline">\(\mu\)</span>입니다: <span class="math inline">\(v = \mu E\)</span>. 말로 하면 "전기장 1 V/m가 운반자를 몇 m/s로 끄나"이고, 단위는 (m/s) ÷ (V/m) = m²/(V·s)입니다. 마찰이 작을수록 이동도가 큽니다. 예: <span class="math inline">\(\mu = 7.7\times10^{-8}\)</span> m²/(V·s)인 이온은 1 V/m에서 초속 <span class="math inline">\(7.7\times10^{-8}\)</span> m, 100 V/m에서 그 100배로 끌려갑니다(아래 단계 3).</li>
+<li>(같은 영어 단어 drift가 Day 32에서는 "시간이 지나며 소자 응답이 서서히 변하는 것"을 뜻했습니다. 두 뜻을 섞지 않도록 이 교재에서는 전기장에 끌리는 이동을 <strong>드리프트</strong>, 시간에 따른 응답 변화를 <strong>drift</strong>로 적습니다.) 이 교재에서 이 식은 크기끼리의 관계입니다. <span class="math inline">\(\mu\)</span>는 늘 양수로 두고, 움직이는 방향은 전하의 부호가 정합니다(양이온은 전기장 방향, 음이온은 반대 방향).</li>
+</ul></li>
+</ul>
+<figure class="fig figure"><img src="../assets/img/d19/fig0-drift-diffusion.svg" alt="왼쪽 확산: 한 점에서 출발한 K⁺ 일곱 개가 무작위 경로로 사방에 퍼지고, 농도 분포가 처음의 좁은 봉우리에서 넓고 낮은 모양으로 바뀌며 알짜 흐름은 많은 곳에서 적은 곳으로 향한다. 오른쪽 드리프트: (+)극과 (−)극 사이에서 K⁺는 흔들리면서도 평균적으로 (−)극 쪽으로, Cl⁻는 (+)극 쪽으로 이동하고, 전기력 qE와 마찰 fv가 같아져 속도가 일정하다. 아래 표는 두 운동의 원인·방향·거리와 시간·재는 숫자를 비교한다" class="figure-img"><figcaption><b>그림 0.</b> 운반자가 움직이는 두 방식을 한 그림에서 비교(모식도). <b>①</b> 확산: 입자 하나하나는 무작위로 움직이지만(위), 모아 보면 농도 봉우리가 낮고 넓어지며 알짜 흐름은 많은 곳 → 적은 곳이다(아래). 퍼진 거리는 $\sqrt{2Dt}$로 시간의 제곱근에 비례한다. <b>②</b> 드리프트: 같은 무작위 흔들림 위에 전기장의 힘이 더해져, 점선 화살표(평균 이동)가 양이온은 (−)극 쪽, 음이온은 (+)극 쪽을 향한다. 전기력 $qE$와 마찰 $fv$가 같아져 속도 $v = \mu E$가 일정하다. 전자는 음전하이므로 Cl⁻와 같은 쪽으로 간다. 경로 모양은 보기용이고, 63 µm·7.7 µm/s·14 m/s 같은 숫자는 코드가 계산했다. (Claude가 계산해 그림, 모식도)</figcaption></figure>
+<p><strong>③ 둘은 어떻게 이어지나: 아인슈타인 관계.</strong> 확산과 드리프트는 <strong>같은 마찰</strong> <span class="math inline">\(f\)</span>를 겪습니다. 드리프트에서는 방금 본 대로 <span class="math inline">\(\mu = q/f\)</span>입니다. 확산에서는 열이 주는 흔들림의 세기(<span class="math inline">\(kT\)</span>, 입자 하나가 가진 열에너지의 크기)를 마찰이 얼마나 누르느냐가 퍼지는 빠르기를 정해 <span class="math inline">\(D = kT/f\)</span>입니다. 화학에서 본 스토크스–아인슈타인 식 <span class="math inline">\(D = kT/(6\pi\eta r)\)</span>이 바로 물속 구형 입자의 마찰 <span class="math inline">\(f = 6\pi\eta r\)</span>(<span class="math inline">\(\eta\)</span> 점도, <span class="math inline">\(r\)</span> 반지름)를 넣은 경우입니다. 두 식을 나누면 <span class="math inline">\(f\)</span>가 사라지고, 열평형에서 성립하는 <strong>아인슈타인 관계</strong>가 남습니다.</p>
+<p><span class="math display">\[
+D = \mu\,\frac{kT}{q}
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: 전자 쪽 문헌은 보통 <span class="math inline">\(\mu\)</span>를, 이온 쪽 문헌은 보통 <span class="math inline">\(D\)</span>를 보고합니다. 이 식이 있어야 둘을 같은 축에 놓을 수 있습니다.</li>
+<li>기호: <span class="math inline">\(k\)</span>는 볼츠만 상수(1.38×10⁻²³ J/K), <span class="math inline">\(T\)</span>는 절대온도, <span class="math inline">\(q\)</span>는 운반자 하나의 전하(1가 이온·전자는 1.6×10⁻¹⁹ C). 2가 이온이면 <span class="math inline">\(q\)</span>가 두 배입니다.</li>
+<li>단위: <span class="math inline">\(kT/q\)</span>는 전압 단위이고 300 K에서 <strong>25.8 mV</strong>입니다. "열 때문에 흔들리는 에너지를 전하 하나당 전압으로 적은 값"이라 <strong>열전압</strong>이라 부릅니다(<a href="../days/d01a.html#ch-origin">Day 1 1-2절</a>에서 문턱 아래 전류의 기울기를 정한 그 값). 단위를 따라가면 (m²/(V·s)) × V = m²/s로 <span class="math inline">\(D\)</span>의 단위가 됩니다.</li>
+<li>계산 순서: <span class="math inline">\(\mu\)</span>를 알면 25.8 mV(= 0.0258 V)를 곱해 <span class="math inline">\(D\)</span>를, <span class="math inline">\(D\)</span>를 알면 0.0258로 나눠 <span class="math inline">\(\mu\)</span>를 얻는다.</li>
+<li>결과의 뜻: 이동도와 확산계수는 같은 "움직이기 쉬움"을 두 방식으로 잰 것이다.</li>
+</ul>
+<details class="deep">
+<summary>
+심화 · <span class="math inline">\(D = \mu kT/q\)</span>를 한 줄씩 유도하기: 평형에서 두 흐름이 비기는 조건
+</summary>
+<p>전해질 기둥에 전기장 <span class="math inline">\(E\)</span>가 <span class="math inline">\(+x\)</span> 방향으로 걸려 있고, 전류가 흐르지 않는 평형을 생각합니다(1가 양이온, 농도 <span class="math inline">\(n(x)\)</span>).</p>
+<ol type="1">
+<li>드리프트는 양이온을 <span class="math inline">\(+x\)</span>로 보냅니다. 단위 면적·단위 시간당 흐름은 <span class="math inline">\(n\mu E\)</span>.</li>
+<li>그렇게 <span class="math inline">\(+x\)</span> 쪽에 이온이 쌓이면 농도 차가 생기고, 확산이 반대로 <span class="math inline">\(-D\,dn/dx\)</span>만큼 돌려보냅니다.</li>
+<li>평형이면 둘이 비깁니다: <span class="math inline">\(D\,dn/dx = n\mu E\)</span>.</li>
+<li>한편 평형의 농도는 볼츠만 분포를 따릅니다(<a href="../days/d01a.html#ch-origin">Day 1 1-2절</a>에서 장벽을 넘는 전자 수를 정한 그 분포). 양이온의 전기적 위치에너지는 <span class="math inline">\(+x\)</span>로 갈수록 <span class="math inline">\(qEx\)</span>만큼 낮아지므로 <span class="math inline">\(n \propto e^{qEx/kT}\)</span>이고, 미분하면 <span class="math inline">\(dn/dx = n\,qE/kT\)</span>.</li>
+<li>3에 넣으면 <span class="math inline">\(D\,n\,qE/kT = n\mu E\)</span>, 곧 <span class="math inline">\(D = \mu kT/q\)</span>.</li>
+</ol>
+4단계에 "이온끼리 서로 영향을 주지 않을 만큼 묽다"는 가정이 들어 있습니다. 그래서 아래 적용 조건에서 진한 이온겔·이온성 탄성체가 예외가 됩니다.
+</details>
+<p><strong>숫자로 확인하기.</strong> 이 관계가 실제 표의 숫자와 맞는지 두 운반자로 확인합니다.</p>
+<ul>
+<li>결정 Si의 전자: 물성표의 이동도 1400 cm²/(V·s)에 0.02585 V를 곱하면 36.2 cm²/s이고, 같은 표에 실린 전자 확산계수 36 cm²/s와 맞습니다. <span class="src">Ioffe NSM (Si)</span></li>
+<li>물속 K⁺: 전기화학에서 익숙한 극한 몰전도도 <span class="math inline">\(\lambda^\circ\)</span>(K⁺) = 73.5 S·cm²/mol(25 °C, 무한 희석)에서 출발합니다. 몰전도도는 "전도도 ÷ 몰농도", 곧 이온 1 mol/m³당 내는 전도도이므로 이동도와 <span class="math inline">\(\lambda = |z|F\mu\)</span>로 이어집니다(<span class="math inline">\(F\)</span> = 96,485 C/mol은 1 mol의 전하). (1) 단위 맞추기: 73.5 S·cm²/mol = 73.5×10⁻⁴ S·m²/mol. (2) <span class="math inline">\(\mu = \lambda/F = 73.5\times10^{-4} \div 96485 = 7.62\times10^{-8}\)</span> m²/(V·s)(S·m²/C = (A/V)·m²/(A·s) = m²/(V·s)). (3) 25 °C의 열전압 0.02569 V를 곱하면 <span class="math inline">\(D = 1.96\times10^{-9}\)</span> m²/s. 표에 실린 K⁺의 확산계수도 1.96×10⁻⁹ m²/s입니다. 전기화학 교재의 <strong>네른스트–아인슈타인 식</strong> <span class="math inline">\(D = RT\lambda/(z^2F^2)\)</span>은 같은 관계를 1 mol 단위로 적은 것입니다(입자 하나 대신 1 mol로 세면 <span class="math inline">\(k \to R\)</span>, <span class="math inline">\(q \to F\)</span>이고 <span class="math inline">\(kT/q = RT/F\)</span>). 단, 이런 표의 무한 희석 <span class="math inline">\(D\)</span>는 몰전도도에서 바로 이 관계로 계산해 싣는 경우가 많아, 이 대조는 독립 실험의 증명이라기보다 <strong>단위와 환산의 확인</strong>입니다. (폴더 밖: 몰전도도 <a href="https://en.wikipedia.org/wiki/Molar_conductivity">Wikipedia "Molar conductivity"</a>, 확산계수 <a href="https://www.aqion.de/site/diffusion-coefficients">aqion 표</a>)</li>
+</ul>
+<p><strong>④ 작은 숫자로 따라가기.</strong></p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 물속 K⁺의 확산.</strong> 묽은 수용액 속 K⁺·Cl⁻의 확산계수는 약 <span class="math inline">\(2\times10^{-9}\)</span> m²/s입니다. Zhang 2024가 소자의 시간척도를 어림할 때 "벌크 용액 값"으로 가정한 숫자입니다. <span class="src">Zhang 2024 (ACS Nano), p.15029</span> 1초 동안 퍼지는 거리는 <span class="math inline">\(\sqrt{2 \times 2\times10^{-9} \times 1} = 6.3\times10^{-5}\)</span> m = <strong>63 µm</strong>, 100초면 <strong>0.63 mm</strong>, 1시간이면 <strong>3.8 mm</strong>입니다. 시간이 100배가 되어도 거리는 10배밖에 늘지 않습니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 확산계수를 이동도로.</strong> 아인슈타인 관계를 거꾸로 씁니다. <span class="math inline">\(\mu = D \div 0.0258 = 2\times10^{-9} \div 0.0258 = 7.7\times10^{-8}\)</span> m²/(V·s). 단위도 같이 나눕니다: (m²/s) ÷ V = m²/(V·s).</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 드리프트 속도.</strong> 1 cm 간격의 전극에 1 V를 걸면 전기장은 <span class="math inline">\(E = 1\ \text{V} \div 0.01\ \text{m} = 100\)</span> V/m. K⁺의 속도는 <span class="math inline">\(v = 7.7\times10^{-8} \times 100 = 7.7\times10^{-6}\)</span> m/s = <strong>7.7 µm/s</strong>. 1초에 머리카락 굵기의 약 10분의 1을 갑니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 같은 전기장 속 전자.</strong> 결정 실리콘 속 전자의 이동도는 물성표에 약 1400 cm²/(V·s)로 실려 있습니다(300 K, 불순물이 적을 때의 값. 불순물을 많이 넣을수록 작아집니다) <span class="src">Ioffe NSM (Si)</span>. 반도체 표는 길이를 cm로 적으므로 m로 바꿉니다: 1 cm = 10⁻² m이니 1 cm² = 10⁻⁴ m², 따라서 1400 cm²/(V·s) = 1400 × 10⁻⁴ = <strong>0.14 m²/(V·s)</strong>. 실리콘 막대에 같은 100 V/m를 건다면 <span class="math inline">\(v = 0.14 \times 100 = 14\)</span> m/s이고, 방향은 K⁺와 반대입니다(전자는 음전하라 (+)극 쪽으로). 크기로 이온보다 약 <strong>180만 배</strong> 빠릅니다. 확산계수로 바꾸면 <span class="math inline">\(D = 0.14 \times 0.0258 = 3.6\times10^{-3}\)</span> m²/s이고, 물속 이온(<span class="math inline">\(2\times10^{-9}\)</span>)과의 비도 같은 <span class="math inline">\(1.8\times10^{6}\)</span>입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 고분자 속 이온.</strong> 용매가 없는 폴리전해질과 이온성 탄성체의 이온전도도는 보통 <span class="math inline">\(10^{-5}\)</span>–<span class="math inline">\(10^{-2}\)</span> S/m이고, 이온의 움직임이 사슬의 분절 운동(사슬 일부가 꿈틀거리는 운동)에 크게 기댄다고 Zhu 리뷰는 씁니다. <span class="src">Zhu 2025, p.10</span> 전도도 <span class="math inline">\(\sigma\)</span> [S/m]는 "움직이는 운반자 수 × 하나의 전하 × 하나의 이동도", 곧 <span class="math inline">\(\sigma = n\,q\,\mu\)</span>입니다(전기화학의 <span class="math inline">\(\kappa = \sum |z_i| F c_i u_i\)</span>를 개수 단위로 적은 것). 그래서 전도도에서 <span class="math inline">\(D\)</span>로 가려면 움직이는 이온의 수 <span class="math inline">\(n\)</span>이 필요합니다(Day 39에서 자세히). 1 mol/L의 1가 이온이 <strong>모두</strong> 움직인다고 가정하고 세 걸음으로 갑니다. ① <span class="math inline">\(n\)</span>: 1 mol/L = 1000 mol/m³(1 m³ = 1000 L)이고, 여기에 아보가드로 수 6.02×10²³을 곱해 <span class="math inline">\(6.0\times10^{26}\)</span> 개/m³. ② <span class="math inline">\(\mu = \sigma/(nq) = 10^{-5} \div (6.0\times10^{26} \times 1.6\times10^{-19}) = 1.0\times10^{-13}\)</span> m²/(V·s)(σ = 10⁻² S/m이면 <span class="math inline">\(1.0\times10^{-10}\)</span>). ③ <span class="math inline">\(D = \mu \times 0.0258 \approx 2.7\times10^{-15}\)</span>–<span class="math inline">\(2.7\times10^{-12}\)</span> m²/s [해석: 농도 가정에 따른 환산]. 실제로 움직이는 이온이 그보다 적으면 같은 전도도를 적은 이온이 내야 하므로 <span class="math inline">\(D\)</span>는 그만큼 커집니다. 물속보다 3–6자릿수 작습니다.</p>
+</div>
+</div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/g0u2EO6eqlY?start=0&amp;rel=0" title="영상: Ionic Drift Velocity in an Electrolye (Instructions for a Physical Chemistry Lab Experiment)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 전체(0:00–2:09), 약 2분 · 영어·자막).</b> Physical Chemistry 101 by SciFox, "Ionic Drift Velocity in an Electrolye (Instructions for a Physical Chemistry Lab Experiment)". <b>볼 이유:</b> 제목대로 전해질 속 이온의 드리프트 속도를 재는 물리화학 학생 실험의 안내 영상이다. 단계 3에서 계산한 "1 V/cm에서 K⁺ 7.7 µm/s"가 실험대 위에서 어떤 느낌의 속도인지(전자처럼 순식간이 아니라 눈으로 따라갈 만한 속도인지) 보는 용도. <b>보고 답할 질문:</b> 영상의 실험에서 걸어 준 전압과 전극 간격, 이온(또는 색 경계)이 움직인 거리와 시간을 읽을 수 있다면, 속도를 전기장(V/m)으로 나눠 이동도를 어림하고 단계 2의 7.7×10⁻⁸ m²/(V·s)와 비교하라. <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이(설명란은 한 줄뿐)(영상 내용은 직접 보지 못함)</span></div></div>
+<p><strong>⑤ 이름과 정확한 뜻, 그리고 같은 식이 숨기는 차이.</strong> 확산계수 <span class="math inline">\(D\)</span>는 "농도 차가 있을 때 얼마나 빨리 고르게 되나", 이동도 <span class="math inline">\(\mu\)</span>는 "전기장에 얼마나 잘 끌려가나"입니다. 둘을 같은 식(<span class="math inline">\(v = \mu E\)</span>, <span class="math inline">\(D = \mu kT/q\)</span>)으로 적을 수 있다고 해서 전자와 이온이 같은 원리로 움직이는 것은 아닙니다. 물속 이온은 물 분자를 수화 껍질로 두르고 이웃 분자와 부딪히며 밀려가는 <strong>질량이 있는 입자</strong>이고, 그 마찰은 용매의 점도와 이온의 크기가 정합니다. 결정 속 전자는 원자 격자를 거의 막힘없이 지나가는 <strong>파동</strong>에 가깝고, 이동도는 격자 진동이나 불순물에 흩어지는 빈도가 정합니다 [해석: 일반 물리 지식]. 그리고 결정적으로, 이온이 움직이면 <strong>그 자리의 화학 조성이 바뀝니다</strong>(어느 쪽은 염이 진해지고 어느 쪽은 묽어진다). 전자가 금속선을 흘러도 구리는 구리입니다. 3구간의 "이온에만 있는 자유도"는 모두 이 차이에서 나옵니다.</p>
+<p><strong>왜 10⁶배나 차이 나나: 마찰 계수로 비교.</strong> ②에서 <span class="math inline">\(\mu = q/f\)</span>였으니, 이동도의 차이는 곧 마찰 계수의 차이입니다. 전하는 둘 다 <span class="math inline">\(1.6\times10^{-19}\)</span> C로 같습니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>물속 K⁺</th>
+<th>결정 Si의 전자</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>이동도 <span class="math inline">\(\mu\)</span></td>
+<td><span class="math inline">\(7.7\times10^{-8}\)</span> m²/(V·s)</td>
+<td>0.14 m²/(V·s)</td>
+</tr>
+<tr class="even">
+<td>마찰 계수 <span class="math inline">\(f = q/\mu\)</span> (1 m/s로 끄는 데 드는 힘)</td>
+<td><span class="math inline">\(2.1\times10^{-12}\)</span> N·s/m</td>
+<td><span class="math inline">\(1.1\times10^{-18}\)</span> N·s/m</td>
+</tr>
+<tr class="odd">
+<td>질량</td>
+<td><span class="math inline">\(6.5\times10^{-26}\)</span> kg (K 원자 하나)</td>
+<td><span class="math inline">\(2.4\times10^{-31}\)</span> kg (유효질량 0.26 <span class="math inline">\(m_0\)</span>)</td>
+</tr>
+<tr class="even">
+<td>마찰의 기원</td>
+<td>물의 점성. 스토크스 마찰 <span class="math inline">\(6\pi\eta r\)</span>에 물의 점도 0.89 mPa·s, K⁺의 유효 반지름 약 0.125 nm를 넣으면 <span class="math inline">\(2.1\times10^{-12}\)</span></td>
+<td>격자 진동·불순물에 의한 산란. 평균 약 0.2 ps마다 운동 방향을 잃는다</td>
+</tr>
+</tbody>
+</table>
+<p>전자 쪽 숫자를 읽는 법: 결정 속 전자는 원자 하나하나와 부딪히지 않고 규칙적인 격자를 파동처럼 지나가며, 격자가 열로 흔들리거나 불순물이 있을 때만 흩어집니다. 그 사이에 전기장이 전자를 가속하는 정도를 질량처럼 적은 것이 <strong>유효질량</strong> <span class="math inline">\(m^*\)</span>(실리콘 전자는 자유 전자 질량 <span class="math inline">\(m_0\)</span>의 0.26배)이고, 이동도는 <span class="math inline">\(\mu = q\tau/m^*\)</span>로 쓸 수 있습니다(<span class="math inline">\(\tau\)</span>는 흩어지기까지의 평균 시간). 거꾸로 풀면 <span class="math inline">\(\tau = \mu m^*/q = 0.14 \times 2.4\times10^{-31} \div 1.6\times10^{-19} \approx 0.2\)</span> ps입니다. 같은 방식으로 이온이 "속도를 잊는 시간" <span class="math inline">\(m/f\)</span>를 구하면 약 0.03 ps(31 fs)입니다. 정리하면 <span class="math inline">\(1.8\times10^{6}\)</span>배 가운데 약 <span class="math inline">\(2.7\times10^{5}\)</span>배는 <strong>질량</strong>에서, 나머지 약 7배는 이온이 물 분자에 더 자주 막힌다는 데서 옵니다(Claude 계산) [해석: 드루드 모형식 어림. 이온의 <span class="math inline">\(m/f\)</span>는 액체 속 브라운 운동의 속도 이완 시간이고, 전자의 유효질량은 양자역학적 개념이라 같은 식으로 적었을 뿐 같은 물리가 아니다]. K⁺의 유효(스토크스) 반지름 0.125 nm는 확산계수에서 거꾸로 구해 흔히 인용되는 값이라 독립적인 예측은 아닙니다 [미확인: 원 출처 미대조]. 유효질량 0.26 <span class="math inline">\(m_0\)</span>는 반도체 교재의 표준값입니다.</p>
+<p><strong>⑥ 뉴로모픽·RC와의 연결.</strong> 이온 소자의 상태가 바뀌려면 이온이 어떤 길이 <span class="math inline">\(L\)</span>을 움직여야 합니다. 확산으로 <span class="math inline">\(L\)</span>만큼 퍼지는 데 걸리는 시간은 <span class="math inline">\(\sqrt{2Dt} = L\)</span>을 거꾸로 풀어 <span class="math inline">\(t \approx L^2/(2D)\)</span>, 즉 <span class="math inline">\(L^2/D\)</span>의 자릿수입니다. 오늘은 이 감각만 가져가고, Day 37에서 이 식을 주인공으로 다룹니다.</p>
+<p><strong>⑦ 짧은 확인.</strong> 이동도가 10배인 운반자는 확산계수도 10배인가요? (답: 같은 온도·같은 전하라면 그렇다. <span class="math inline">\(D = \mu \times 0.0258\)</span>에서 비례 상수가 같다.)</p>
+</section>
+</div>
+<p>이제 숫자를 한 줄에 놓아 봅니다(그림 1). 가로축은 로그 눈금(같은 간격이 같은 배수, <a href="../days/d01a.html#b-log-axis">Day 1 기초</a>)이고, 눈금 한 칸이 100배입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d19/fig1-D-ladder.svg" alt="확산계수 로그 사다리: 결정 실리콘 전자 3.6×10⁻³, 물·하이드로겔 이온 10⁻¹⁰–10⁻⁸, 묽은 수용액 K⁺ 2×10⁻⁹, 무용매 폴리전해질 이온 약 10⁻¹⁵–10⁻¹² m²/s(전도도에서 환산)" class="figure-img"><figcaption><b>그림 1.</b> 확산계수 $D$의 사다리(로그 눈금). 실리콘 전자는 공개 물성표의 이동도(300 K, 1400 cm²/(V·s))에서 환산했고 <span class="src">Ioffe NSM (Si)</span>, 물·하이드로겔 범위는 Wang 2025, 수용액 값은 Zhang 2024의 가정값, 고분자 띠는 Zhu 2025의 전도도 범위를 "1 mol/L의 1가 이온이 모두 움직인다"는 가정으로 바꾼 것이다 [해석]. 전자와 수용액 이온 사이가 약 $1.8\times10^{6}$배이고, 고분자 속에서는 3–6자릿수가 더 벌어질 수 있다. (Claude가 계산해 그림)</figcaption></figure>
+<p>Wang 2025 리뷰는 물·하이드로겔 속 이온의 확산계수를 <span class="math inline">\(10^{-10}\)</span>–<span class="math inline">\(10^{-8}\)</span> m²/s로 적습니다. <span class="src">Wang 2025 (Chem. Soc. Rev.), p.315</span> 같은 리뷰는 겔 속 <span class="math inline">\(D\)</span>가 순수 용매 속과 다르며, 이온 크기와 용매 점도가 클수록 작아지고 온도가 높을수록 커질 뿐 아니라, 고분자망의 입체 장애와 이온–고분자 상용성에도 좌우되어 <strong>망이 촘촘할수록 <span class="math inline">\(D\)</span>가 줄어든다</strong>고 씁니다. <span class="src">Wang 2025 (Chem. Soc. Rev.), p.305</span> 이 문장이 Day 38(고분자 화학구조 → 계산 특성)의 출발점입니다.</p>
+<p><strong>적용 조건.</strong> (1) 아인슈타인 관계는 묽은 계·열평형에서 성립합니다. Wang 2025는 이온 농도가 높은 이온겔과 polyionic elastomer에서는 이온끼리, 이온과 고분자망 사이의 상호작용이 커져 기본 PNP 이론(이온의 확산·드리프트를 함께 푸는 식)의 정확도가 떨어지고, 활동도 계수나 농도에 따라 바뀌는 유전율 같은 보정이 필요하다고 씁니다. <span class="src">Wang 2025 (Chem. Soc. Rev.), p.305</span> 그런 계에서는 측정한 전도도·<span class="math inline">\(D\)</span>·<span class="math inline">\(\mu\)</span>가 위 식대로 단순 비례하지 않습니다(Day 39). (2) 1400 cm²/(V·s)는 결정 실리콘 덩어리의 값이고, 유기 반도체(탄소 사슬로 된 고분자·분자 반도체)의 정공·전자 이동도는 그보다 몇 자릿수 낮습니다 [미확인: 값의 범위]. 이온트로닉스에서 자주 만나는 <strong>OECT</strong>(유기 전기화학 트랜지스터)의 채널이 바로 이런 고분자입니다. OECT의 생김새와 동작은 <a href="../days/d19b.html#b-oect">3-3절의 기초 상자</a>에서 그림으로 봅니다. 즉 "전자 vs 이온"의 간격은 <strong>어느 전자 소재와 비교하느냐</strong>에 따라 크게 달라집니다.</p>
+<div class="numbers">
+<ul>
+<li>열전압 <span class="math inline">\(kT/q\)</span> = 25.8 mV (300 K)</li>
+<li>전자(결정 Si): <span class="math inline">\(\mu \approx 0.14\)</span> m²/(V·s) → <span class="math inline">\(D \approx 3.6\times10^{-3}\)</span> m²/s(같은 물성표의 확산계수 36 cm²/s와 일치) <span class="src">Ioffe NSM (Si)</span></li>
+<li>이온(묽은 수용액): <span class="math inline">\(D \approx 2\times10^{-9}\)</span> m²/s → <span class="math inline">\(\mu \approx 7.7\times10^{-8}\)</span> m²/(V·s) <span class="src">Zhang 2024 (ACS Nano), p.15029</span> (환산은 Claude)</li>
+<li>확인(K⁺, 25 °C): 몰전도도 73.5 S·cm²/mol → <span class="math inline">\(\mu = \lambda/F = 7.6\times10^{-8}\)</span> m²/(V·s) → <span class="math inline">\(D = 1.96\times10^{-9}\)</span> m²/s(표값과 같음, 폴더 밖 표)</li>
+<li>마찰 계수 <span class="math inline">\(f = q/\mu\)</span>: K⁺ <span class="math inline">\(2.1\times10^{-12}\)</span>, Si 전자 <span class="math inline">\(1.1\times10^{-18}\)</span> N·s/m. 차이의 대부분은 질량(약 <span class="math inline">\(2.7\times10^{5}\)</span>배)</li>
+<li>이온(물·하이드로겔 범위): <span class="math inline">\(10^{-10}\)</span>–<span class="math inline">\(10^{-8}\)</span> m²/s <span class="src">Wang 2025 (Chem. Soc. Rev.), p.315</span></li>
+<li>이온전도도(무용매 폴리전해질·이온성 탄성체): <span class="math inline">\(10^{-5}\)</span>–<span class="math inline">\(10^{-2}\)</span> S/m <span class="src">Zhu 2025, p.10</span> → <span class="math inline">\(D \approx 10^{-15}\)</span>–<span class="math inline">\(10^{-12}\)</span> m²/s (1 mol/L 가정의 환산) <span class="tag tag-interp">해석</span></li>
+</ul>
+</div>
+<p>이제 이 자릿수를 <strong>시간</strong>으로 바꿔 봅니다. 길이 <span class="math inline">\(L\)</span>의 소자 양 끝에 전압 <span class="math inline">\(V\)</span>를 걸면 전기장은 <span class="math inline">\(E = V/L\)</span>이고, 운반자가 끝에서 끝까지 끌려가는 시간은 "거리 ÷ 속도"이므로</p>
+<p><span class="math display">\[
+t = \frac{L}{v} = \frac{L}{\mu E} = \frac{L^{2}}{\mu V}
+\]</span></p>
+<p>입니다. <span class="math inline">\(L\)</span>이 두 번 들어가는 이유는 둘입니다. 가야 할 거리가 <span class="math inline">\(L\)</span>에 비례해 늘고, 같은 전압이 더 긴 거리에 나뉘어 걸려 전기장(곧 속도)이 <span class="math inline">\(L\)</span>에 반비례해 약해집니다. 1 V에서 물속 이온(<span class="math inline">\(\mu = 7.7\times10^{-8}\)</span>)이 1 mm를 건너는 데 <span class="math inline">\(10^{-6} \div (7.7\times10^{-8} \times 1) \approx\)</span> <strong>13 s</strong>, 1 µm를 건너는 데 <span class="math inline">\(10^{-12} \div 7.7\times10^{-8} \approx\)</span> <strong>13 µs</strong>가 걸립니다. 실리콘 전자는 1 µm를 약 <strong>7 ps</strong>에 건넙니다(그림 2). 같은 이온이라도 소자가 1 mm에서 1 µm로 작아지면 시간은 <span class="math inline">\(10^{6}\)</span>분의 1이 됩니다. <strong>이온이 "느린" 까닭의 한쪽은 <span class="math inline">\(\mu\)</span>(재료)이고, 다른 쪽은 <span class="math inline">\(L^{2}\)</span>(크기)입니다.</strong> 어느 쪽이 더 큰 몫인지는 Day 37의 질문입니다.</p>
+<p><strong>속도와 크기에 주는 뜻.</strong> 이동도가 <span class="math inline">\(1.8\times10^{6}\)</span>배 작은 운반자로 같은 전압에서 같은 시간 안에 건너려면 <span class="math inline">\(L\)</span>을 <span class="math inline">\(\sqrt{1.8\times10^{6}} \approx 1300\)</span>배 줄여야 합니다. 그림 2에서 실리콘 전자가 1 mm를 건너는 시간(약 7 µs)과 물속 이온이 1 µm를 건너는 시간(약 13 µs)이 같은 자릿수인 것이 그 예입니다(Claude 계산). 이온 소자를 빠르게 하는 가장 강한 손잡이가 '작게 만들기'이고, 반대로 이온 소자를 cm–mm 크기로 만들면 초–분 단위의 느린 상태 변화가 자연스럽게 나온다는 뜻입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d19/fig2-transit-time.svg" alt="1 V에서 길이 L을 건너는 시간: 물속 이온은 1 mm에 13 s, 1 µm에 13 µs; 실리콘 전자는 1 µm에 7 ps; D=10⁻¹³ m²/s로 가정한 고분자 속 이온은 그보다 4자릿수 느리다. 로그–로그 눈금이라 세 직선은 같은 기울기(t가 L²에 비례)" class="figure-img"><figcaption><b>그림 2.</b> 1 V를 걸었을 때 운반자가 길이 $L$을 건너는 시간 $t = L^2/(\mu V)$. 드리프트만 고려한 어림이고, 확산·쌓인 전하(공간전하)·전극 계면은 무시했다. 두 축이 모두 로그 눈금이라 $t \propto L^2$가 직선으로 보인다(가로로 한 칸(10배) 가면 세로로 100배). 세 직선 사이의 세로 간격이 재료($\mu$)의 몫, 한 직선을 따라 오르내리는 것이 크기($L$)의 몫이다. 주황선의 $D = 10^{-13}$ m²/s는 그림 1의 고분자 띠 안에서 고른 예시값이다. (Claude가 계산해 그림)</figcaption></figure>
+<div class="predict">
+<p>물속 이온이 1 µm를 퍼지는 데(확산, <span class="math inline">\(t \approx L^2/(2D)\)</span>) 걸리는 시간은 얼마일까요? 위 그림의 드리프트 시간(13 µs, 1 V)과 비교해 먼저 어림해 보세요. 아래 점검의 첫 문제는 풀이 예시, 둘째는 일부가 채워져 있고, 셋째는 혼자 풉니다.</p>
+</div>
+<div class="quiz" data-day="d19" data-set="1-check"></div>
+<div class="think">
+<p>내 polyelectrolyte heterojunction에서 이온이 움직여야 하는 길이는 얼마쯤인가요? 접합 두께, 전극 사이 거리, 이온이 빠져나간 층(depletion층)의 폭 가운데 무엇이 "그 소자의 <span class="math inline">\(L\)</span>"일까요? 그 <span class="math inline">\(L\)</span>과 내가 쓰는 전해질의 <span class="math inline">\(D\)</span>로 <span class="math inline">\(L^{2}/D\)</span>를 머릿속으로 계산해, 측정한 응답 시간과 같은 자릿수인지 보세요. 다르다면 그 차이가 오늘 '아직 모르는 것'의 첫 줄입니다.</p>
+</div>
+<div class="quiz" data-day="d19" data-set="1-end"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+운반자 (carrier)
+</dt>
+<dd>
+전하를 실어 나르는 입자. 금속·반도체에서는 전자(와 정공), 전해질·겔에서는 이온.
+</dd>
+<dt>
+확산 / 확산계수 <span class="math inline">\(D\)</span>
+</dt>
+<dd>
+농도 차 때문에 저절로 퍼지는 움직임 / 그 빠르기 [m²/s]. 퍼지는 거리 ~ √(2Dt).
+</dd>
+<dt>
+드리프트 / 이동도 <span class="math inline">\(\mu\)</span>
+</dt>
+<dd>
+전기장에 끌려가는 일정한 속도의 움직임 / 속도 ÷ 전기장 [m²/(V·s)]. 마찰 계수 <span class="math inline">\(f\)</span>로 쓰면 <span class="math inline">\(\mu = q/f\)</span>.
+</dd>
+<dt>
+마찰 계수 <span class="math inline">\(f\)</span>
+</dt>
+<dd>
+운반자를 1 m/s로 끌고 가는 데 드는 힘 [N·s/m]. 물속 이온은 점성(스토크스 <span class="math inline">\(6\pi\eta r\)</span>), 결정 속 전자는 산란(유효질량 ÷ 산란 시간)이 정한다.
+</dd>
+<dt>
+아인슈타인 관계
+</dt>
+<dd>
+D = µ·kT/q. 묽은 계·열평형에서 확산과 드리프트를 잇는다. 300 K에서 kT/q = 25.8 mV(열전압).
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>정의: 확산계수(저절로 퍼지기)와 이동도(전기장에 끌려가기)는 같은 "움직이기 쉬움"을 두 방식으로 잰 것이고, 아인슈타인 관계 <span class="math inline">\(D = \mu kT/q\)</span>로 이어진다(묽은 계·열평형 조건).</li>
+<li>숫자: 결정 Si 전자 <span class="math inline">\(3.6\times10^{-3}\)</span> <span class="src">Ioffe NSM (Si)</span> vs 수용액 이온 <span class="math inline">\(2\times10^{-9}\)</span> m²/s, 약 <span class="math inline">\(1.8\times10^{6}\)</span>배. 무용매 고분자 속 이온은 3–6자릿수 더 작을 수 있다 <span class="src">Zhu 2025, p.10</span> <span class="tag tag-interp">해석</span>.</li>
+<li>같은 식으로 적어도 원리는 다르다: 이온은 수화 껍질을 두른 입자이고, 움직이면 그 자리의 조성이 바뀐다. <span class="math inline">\(\mu = q/f\)</span>로 보면 10⁶배 차이의 대부분은 질량(약 2.7×10⁵배), 나머지는 마찰이다.</li>
+<li>건너는 시간 <span class="math inline">\(t = L^{2}/(\mu V)\)</span>: 느림의 한쪽은 재료(<span class="math inline">\(\mu\)</span>), 다른 쪽은 크기(<span class="math inline">\(L^{2}\)</span>). 같은 시간을 맞추려면 이온 소자는 약 1000배 작아야 한다(Si 전자 1 mm ≈ 이온 1 µm). → Day 37.</li>
+</ul>
+</div>
+</section>
+<section id="ch-signal-vs-carrier" class="level3">
+<h3 class="anchored" data-anchor-id="ch-signal-vs-carrier">2. 느린 것은 신호가 아니라 '상태'다</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 이온 전도체에서 "전기 신호가 전달되는 빠르기"와 "이온이 실제로 이동하는 빠르기"가 다른 양임을 ionic cable의 숫자로 보이고, 이온 소자에서 느린 것이 무엇인지 한 문장으로 말할 수 있다.</p>
+</div>
+<p>1구간의 숫자를 보면 "이온 소자는 전기 신호도 느리게 보내겠구나"라고 생각하기 쉽습니다. 그렇지 않습니다. 이 구분이 오늘 가장 중요한 한 줄입니다.</p>
+<p><strong>직관 하나.</strong> 물이 가득 찬 긴 호스의 한쪽 끝을 누르면, 반대쪽 끝에서 거의 동시에 물이 나옵니다. 내가 누른 그 물 분자가 호스 끝까지 달려간 것이 아니라, 호스 안의 물이 <strong>한꺼번에 조금씩 밀린</strong> 것입니다. 전선 속 전자도, 이온 전도체 속 이온도 마찬가지입니다. 신호(밀림)는 빠르게 퍼지고, 운반자 하나하나는 거의 제자리에서 조금 움직일 뿐입니다. 비유가 깨지는 곳: 물은 압력파로 밀림을 전하지만, 이온 전도체에서는 전하가 쌓이고 빠지는 <strong>저항–축전기 회로</strong>의 방식으로 전합니다(아래).</p>
+<p><strong>ionic cable.</strong> Suo 그룹은 LiCl 하이드로겔 두 가닥 사이에 얇은 유전체 탄성체를 끼운 전송선을 만들었습니다. 겔과 전극이 만나는 면, 그리고 겔과 유전체가 만나는 면에는 이온이 한 겹 늘어선 아주 얇은 층이 생겨 축전기처럼 동작합니다(이 층이 <strong>전기이중층</strong>이며 Day 35–36에서 자세히 봅니다). 그래서 케이블의 짧은 토막 하나하나가 "저항(겔) + 축전기(유전체)"이고, 이 토막들이 길게 이어진 선을 따라 전압 파형이 <strong>확산 방정식</strong>처럼 퍼집니다. 원 논문은 신호의 확산계수를 <span class="math inline">\(D = 1/(rc) \approx bd/(\rho\varepsilon)\)</span>로 적습니다. 여기서 <span class="math inline">\(b\)</span>와 <span class="math inline">\(\rho\)</span>는 이온 전도체의 두께와 저항률, <span class="math inline">\(d\)</span>와 <span class="math inline">\(\varepsilon\)</span>은 유전체의 두께와 유전율이고, <span class="math inline">\(r\)</span>·<span class="math inline">\(c\)</span>는 길이당 저항·정전용량입니다. <span class="src">Yang 2015, p.60</span> 왜 '확산계수' 꼴이 되는지는 <a href="../days/d16b.html#b-rc-circuit">Day 29 기초</a>의 RC 회로로 볼 수 있습니다. 저항 <span class="math inline">\(R\)</span>을 거쳐 커패시터 <span class="math inline">\(C\)</span>를 충전하는 시간은 <span class="math inline">\(\tau = RC\)</span>입니다. 길이 <span class="math inline">\(L\)</span>의 케이블은 전체 저항 <span class="math inline">\(rL\)</span>, 전체 정전용량 <span class="math inline">\(cL\)</span>을 가지므로 끝까지 충전되는 시간이 <span class="math inline">\(\tau \approx (rL)(cL) = rc\,L^{2}\)</span>, 곧 1구간의 <span class="math inline">\(L^{2}/D\)</span>와 같은 꼴이고 <span class="math inline">\(D = 1/(rc)\)</span>입니다(단위: <span class="math inline">\(r\)</span> [Ω/m] × <span class="math inline">\(c\)</span> [F/m] = s/m², 그 역수가 m²/s) <span class="tag tag-interp">해석</span>. 여기서 '확산'하는 것은 이온이 아니라 <strong>전압 파형</strong>입니다. Wang 2025는 전형적인 소자에서 이 값이 <span class="math inline">\(10^{7}\)</span> m²/s에 이르러 물·하이드로겔 속 이온의 확산계수(<span class="math inline">\(10^{-10}\)</span>–<span class="math inline">\(10^{-8}\)</span> m²/s)보다 훨씬 크다고 정리합니다. <span class="src">Wang 2025 (Chem. Soc. Rev.), p.315</span> 원 논문은 신호의 확산계수가 이온보다 <strong>약 16자릿수</strong> 크고, 100 MHz 신호를 10 cm 전송했다고 보고합니다. <span class="src">Yang 2015, p.59</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/2AXQ3p64CEY?start=0&amp;rel=0" title="영상: Highly stretchable transparent ionic cable" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 전체(0:00–2:25), 약 2분 · 언어 미확인).</b> 杨灿辉(Canhui Yang), "Highly stretchable transparent ionic cable" (2015년 10월 업로드, 설명란은 "Ionic music." 한 줄). 올린 사람의 이름이 위 원 논문 Yang 2015의 제1저자와 같고 제목이 논문의 소자와 같지만, 공식 기관 채널은 아니다. <b>볼 이유:</b> 본문이 말하는 바로 그 ionic cable로 음악 신호를 보내는 시연으로 보인다. 늘였을 때도 신호가 끊기지 않는지 보라 [미확인: 영상 내용]. <b>보고 답할 질문:</b> 케이블을 늘이면 길이당 저항 r과 정전용량 c가 바뀐다. 위 식 D = 1/(rc)에서 신호 확산계수는 커질까 작아질까? 그래도 소리가 전달되는 이유를 자릿수로 말해 보라. <span class="vcheck">Claude가 확인한 범위: 제목·채널 이름·업로드 날짜·길이(영상 내용은 직접 보지 못함)</span></div></div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/5K5KSDL1gXE?start=0&amp;rel=0" title="영상: Transparent loudspeaker" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 전체(0:00–1:59), 약 2분 · 영어).</b> Harvard School of Engineering and Applied Sciences(하버드 공대 공식 채널), "Transparent loudspeaker" (2013). <b>볼 이유:</b> 설명란: 겔로 만든 오디오 스피커가 "응용이 제한된다고 여겨지던 이온 전도체"의 능력을 보여 준다. 같은 Suo 그룹의 하이드로겔(이온 전도체) + 탄성체 구조로, 이온 전도체가 귀에 들리는 주파수(수십 Hz–수십 kHz)의 전기 신호를 그대로 전달한다는 것을 소리로 확인할 수 있다. ionic cable(2015) 자체는 아니지만 같은 원리(겔 = 저항, 탄성체 = 축전기)다. <b>보고 답할 질문:</b> 음악이 들리는 동안 겔 속 이온은 1 cm라도 이동했을까? 1구간의 7.7 µm/s와 이 구간의 "신호 확산계수 10⁷ m²/s"로 답해 보라. <span class="vcheck">Claude가 확인한 범위: 제목·채널·설명·길이(영상 내용은 직접 보지 못함)</span></div></div>
+<p><strong>작은 예시.</strong> 같은 <span class="math inline">\(t \approx L^{2}/D\)</span> 어림으로 10 cm를 "건너는" 시간을 비교합니다.</p>
+<ul>
+<li>신호: <span class="math inline">\(0.1^2 \div 10^{7} = 10^{-9}\)</span> s</li>
+<li>이온 자체: <span class="math inline">\(0.1^2 \div (2\times10^{-9}) = 5\times10^{6}\)</span> s ≈ <strong>58일</strong></li>
+</ul>
+<p>열다섯 자릿수가 넘게 다릅니다(그림 3).</p>
+<figure class="fig figure"><img src="../assets/img/d19/fig3-signal-vs-carrier.svg" alt="ionic cable 모식도: 하이드로겔-유전체-하이드로겔 세 층. 신호 확산계수 10⁷ m²/s로 10 cm를 10⁻⁹ s에 건너지만 이온 확산계수 2×10⁻⁹ m²/s로는 5×10⁶ s(약 58일)" class="figure-img"><figcaption><b>그림 3.</b> ionic cable(모식도). 전압 파형은 "저항 + 축전기"가 이어진 선을 따라 빠르게 퍼지고, 이온 자체는 계면의 얇은 층을 충전할 만큼만 움직인다. 10 cm를 '건너는' 시간은 신호 $10^{-9}$ s, 이온 $5\times10^{6}$ s. 신호의 $D$는 Wang 2025 p.315의 값, 이온의 $D$는 그림 1의 수용액 값으로 Claude가 계산했다. (Claude가 그림)</figcaption></figure>
+<p><strong>그러면 이온 소자가 느리다는 말은 무엇인가.</strong> Roadmap은 전자 소자의 전하 수송이 전형적으로 ns 시간척도인 반면 <strong>이온 이동은 µs에서 s에 걸친다</strong>고 쓰고, 이 불일치가 이온–전자 변환에서 지연·에너지 손실·신호 왜곡을 만든다고 지적합니다. <span class="src">Roadmap 2026, p.8126</span> 여기서 느린 것은 <strong>상태를 바꾸는 과정</strong>입니다. 농도 분포를 다시 배치하거나(이온이 한쪽에 쌓이고 다른 쪽에서 빠지는 것), 고분자 속으로 이온을 집어넣거나(도핑), 계면의 얇은 이온층을 충전하는 과정입니다. 전기 신호를 보내는 과정이 아닙니다. <span class="tag tag-interp">해석</span></p>
+<p>이 구분이 왜 중요한가. Day 1–2 4절에서 "이온 이완은 crossbar(가중치를 소자의 전도도로 저장해 곱셈·덧셈을 한 번에 하는 격자, <a href="../days/d04a.html#ch-vmm">Day 7 2구간</a>) 같은 저장형 계산에서는 오차, RC에서는 자원"이라고 했습니다(<a href="../days/d01b.html#ch-volatile">Day 2 4절</a>). 그 '이완'은 바로 이 상태 변화의 시간입니다. 상태 변화가 느리다는 것은, 소자가 과거 입력의 흔적을 그만큼 오래 들고 있다는 말과 같습니다(Day 15의 fading memory, 즉 과거 입력의 영향이 서서히 줄어드는 성질, <a href="../days/d09.html#b-fading-memory">Day 15 기초</a>). 느림을 결점으로 볼지 자원으로 볼지는 과제의 시간척도가 정합니다(<a href="../days/d13b.html#b-timescale-match">Day 23 기초: 시간척도의 정합</a>). 그리고 신호 전달 자체는 느리지 않으므로, "이온이라서 실시간 처리가 안 된다"는 말은 조건 없이 쓰면 틀립니다. <span class="tag tag-interp">해석</span></p>
+<div class="myth">
+<p><strong>"이온은 느리니까 이온 소자의 모든 것이 느리다"</strong> — 자주 섞이는 두 '느림'입니다. 이온의 <span class="math inline">\(D\)</span>가 작다는 것은 <strong>상태(농도·도핑)를 바꾸는 시간</strong>이 길다는 뜻이고, 전기 신호의 전파는 겔의 저항률과 유전체의 유전율·두께가 정합니다 <span class="src">Yang 2015, p.60</span>. 그리고 상태 변화의 시간도 재료만이 아니라 <span class="math inline">\(L^{2}\)</span>가 함께 정합니다(1구간). "느리다"라고 쓸 때는 <strong>무엇이, 어느 길이에서, 어느 과제에 비해</strong> 느린지를 붙이세요.</p>
+</div>
+<div class="quiz" data-day="d19" data-set="2-check"></div>
+<div class="think">
+<p>내 ionic diode에 전압을 바꿔 걸었을 때 전류가 새 값에 자리 잡는 데 걸리는 시간(수 초?)과, 같은 소자에 작은 교류를 걸어 재는 임피던스 측정에서 고주파 쪽에 보이는 빠른 응답은 서로 다른 '느림'을 보고 있습니다. 각각 그림 3의 어느 쪽(상태 변화 / 신호 전달)에 가까운가요?</p>
+</div>
+<div class="keypoints">
+<ul>
+<li>ionic cable의 신호 확산계수는 <span class="math inline">\(\sim10^{7}\)</span> m²/s, 이온은 <span class="math inline">\(10^{-10}\)</span>–<span class="math inline">\(10^{-8}\)</span> m²/s <span class="src">Wang 2025 (Chem. Soc. Rev.), p.315</span>. 원 논문: 약 16자릿수 차이, 100 MHz를 10 cm 전송 <span class="src">Yang 2015, p.59</span>. 신호 전달은 느리지 않다.</li>
+<li>느린 것은 <strong>상태 변화</strong>(농도 재배치·도핑·계면 충전). 이온 이동 µs–s vs 전자 ns <span class="src">Roadmap 2026, p.8126</span>.</li>
+<li>상태 변화가 느림 = 과거 입력의 흔적이 오래 남음. 결점인지 자원인지는 과제의 시간척도가 정한다 <span class="tag tag-interp">해석</span>.</li>
+</ul>
+</div>
+</section>
+</div>
+<script type="application/json" id="quiz-d19">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커. 숫자는 tools/figs_d19.py --numbers와 일치한다.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "결정 실리콘 속 전자, 소금물 속 이온, 고무처럼 말랑한 고분자 속 이온이 각각 1 mm를 가는 데 걸리는 시간을 '빠른 순서'로 적고 이유를 한 줄씩 붙여 보세요. 그리고 '이온이 전자보다 나을 것 같은 상황'을 하나 적어 보세요.", "items": [{"id": "d19-p01", "type": "ox", "q": "이온은 전자보다 훨씬 느리게 움직이므로, 이온 전도체(하이드로겔 등)로 만든 선으로는 MHz 수준의 전기 신호를 전달할 수 없다.", "a": false, "why": "하이드로겔 ionic cable은 100 MHz 신호를 10 cm 전송했다. 신호는 '저항 + 축전기' 선을 따라 빠르게 퍼지고, 느린 것은 이온이 실제로 옮겨 가 상태를 바꾸는 과정이다. 2구간(느린 것은 신호가 아니라 상태)에서 설명한다.", "ref": "#ch-signal-vs-carrier"}, {"id": "d19-p02", "type": "mc", "q": "결정 실리콘 속 전자와 묽은 소금물 속 이온(K⁺)의 확산계수는 대략 몇 배 차이가 날까?", "options": ["약 10배", "약 1만 배", "약 100만 배", "약 1조 배"], "a": 2, "why": "전자(Si) 약 3.6×10⁻³ m²/s, 물속 K⁺ 약 2×10⁻⁹ m²/s로 약 1.8×10⁶배. 단 전자 값은 결정 실리콘의 물성표 값(300 K)이고, 유기 반도체와 비교하면 간격이 훨씬 작다. 1구간에서 아인슈타인 관계로 계산한다.", "ref": "#ch-carriers"}, {"id": "d19-p03", "type": "ox", "q": "같은 이온, 같은 전압이라면 소자 길이를 1/10로 줄이면 이온이 끝에서 끝까지 끌려가는 시간은 약 1/100이 된다.", "a": true, "why": "건너는 시간은 L²/(µV)라 길이의 제곱에 비례한다. 길이가 줄면 거리도 짧아지고 전기장도 세지기 때문이다. 1구간의 '건너는 시간' 식과 그림에서 설명한다.", "ref": "#ch-carriers"}, {"id": "d19-p04", "type": "short", "q": "물속 이온의 확산계수를 D = 2×10⁻⁹ m²/s라고 하자. 거리 L = 1 mm를 확산으로 퍼지는 시간을 L²/D로 어림하면 몇 초인가? (정수로)", "a": ["500", "500 s", "500초", "약 500"], "why": "(10⁻³)² ÷ (2×10⁻⁹) = 10⁻⁶ ÷ 2×10⁻⁹ = 500 s. 1 mm만 되어도 분 단위다. 1구간 기초 상자에서 확산 거리와 시간의 관계를 다룬다.", "ref": "#ch-carriers"}, {"id": "d19-p05", "type": "mc", "q": "다음 중 이온에는 있고 전자에는 없는 성질은?", "options": ["전하를 나른다", "종류(K⁺, Ca²⁺ 등)마다 다른 화학적 정체성을 가져 소재가 종류별로 다르게 통과시킬 수 있다", "전기장에 끌려간다", "열 때문에 무작위로 움직인다"], "a": 1, "why": "전하 운반·드리프트·열운동은 둘 다 한다. 이온은 종류가 여럿이고 수화 껍질·화학 반응이 있어 종별 선택성이 생길 수 있다. 3구간(전자에는 없고 이온에는 있는 자유도)에서 설명한다.", "ref": "#ch-unique"}, {"id": "d19-p06", "type": "ox", "q": "어떤 이온 소자가 상태 하나를 바꾸는 데 35 aJ(아토줄)밖에 들지 않는다는 보고가 있다면, 그 소자로 만든 계산 시스템 전체도 전자 시스템보다 에너지를 덜 쓴다고 말할 수 있다.", "a": false, "why": "35 aJ은 소자 하나의 상태 전환 에너지이고 읽기 회로·ADC·구동 회로는 들어 있지 않다. 비교는 같은 경계(소자만/시스템)에서만 성립한다. 3구간과 4구간의 흔한 오해 상자에서 다룬다.", "ref": "#ch-where-ions-lose"}, {"id": "d19-p07", "type": "mc", "q": "이온 메모리 소자를 전자·전기화학 메모리 소자와 비교할 때, 현재 이온 소자가 대체로 크게 불리한 항목 묶음은?", "options": ["쓰기 전압과 연결도", "쓰기 시간, 구별되는 상태 수, 반복 쓰기 횟수(내구성)", "생체 호환성과 유연성", "여러 종류의 운반자를 쓸 수 있는가"], "a": 1, "why": "Aluru 2026 Table 1: 쓰기 10⁻⁹ s(ECRAM) vs 10⁻³ s부터(이온), 상태 2¹¹ vs 2⁶–2⁸, 내구 10⁹ vs 10²회. 쓰기 전압은 비슷하고, 연결도는 이온이 PRAM·PCM보다 크다(ECRAM과는 같다). 4구간에서 원문 표로 설명한다.", "ref": "#ch-where-ions-lose"}, {"id": "d19-p08", "type": "ox", "q": "이온 소자에 전자에 없는 자유도(여러 종의 운반자, 화학 상태 등)가 있다는 사실만으로, 이온 소자의 계산 능력이 같은 크기의 전자 소자보다 크다고 결론 내릴 수 있다.", "a": false, "why": "자유도는 '상태변수가 하나 더 있다'는 뜻이다. 계산 자원이 되려면 그 상태가 읽히고, 과제에 필요한 차이를 보존하며, 기준선보다 나아야 한다. 5구간(조건부 결론)에서 설명한다.", "ref": "#ch-conditional"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 이동도와 확산계수 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d19-q01", "type": "short", "q": "[풀이 예시 확인] 본문 단계 1에서 물속 K⁺(D = 2×10⁻⁹ m²/s)가 1초에 퍼지는 거리는 √(2×2×10⁻⁹×1) = 63 µm였다. 같은 이온이 1 µm를 확산으로 퍼지는 데 걸리는 시간 t ≈ L²/(2D)는 몇 µs인가? (정수로)", "a": ["250", "250 µs", "250µs", "2.5×10⁻⁴ s", "0.00025", "약 250"], "why": "t = (10⁻⁶)² ÷ (2 × 2×10⁻⁹) = 10⁻¹² ÷ 4×10⁻⁹ = 2.5×10⁻⁴ s = 250 µs. 1 V의 드리프트(13 µs)보다 약 20배 길다. 거리가 1/1000이 되면 시간은 1/10⁶이 된다는 것도 확인하세요. 1구간 기초 상자 ④.", "ref": "#ch-carriers"}, {"id": "d19-q02", "type": "short", "q": "[일부 채우기] 어떤 1가 이온의 확산계수가 D = 1×10⁻⁹ m²/s다. 아인슈타인 관계를 거꾸로 써서 µ = D ÷ (kT/q) = 1×10⁻⁹ ÷ 0.0258 = ? ×10⁻⁸ m²/(V·s). 빈칸의 숫자를 소수 첫째 자리까지 쓰시오.", "a": ["3.9", "3.88", "3.87", "3.9×10⁻⁸", "3.9e-8"], "why": "1 ÷ 0.0258 = 38.8이므로 µ = 38.8×10⁻⁹ = 3.9×10⁻⁸ m²/(V·s). D가 K⁺(2×10⁻⁹)의 절반이니 µ도 7.7×10⁻⁸의 절반이다. 기초 상자의 아인슈타인 관계.", "ref": "#ch-carriers"}, {"id": "d19-q03", "type": "short", "q": "[혼자 풀기] 바로 앞의 이온(µ = 3.9×10⁻⁸ m²/(V·s))이 1 V를 건 1 mm 길이를 드리프트로 건너는 시간 t = L²/(µV)는 약 몇 초인가? (정수로)", "a": ["26", "25.8", "25.9", "약 26", "26 s", "26초"], "why": "t = (10⁻³)² ÷ (3.9×10⁻⁸ × 1) ≈ 26 s. 정확히는 L²·(kT/q)/(D·V) = 10⁻⁶ × 0.0258 ÷ 10⁻⁹ = 25.8 s. K⁺(13 s)의 두 배다. 헷갈렸다면 L을 제곱하지 않았는지 확인하세요. 그림 2.", "ref": "#ch-carriers"}]}, "1-end": {"kind": "end", "title": "1장 마무리", "items": [{"id": "d19-q04", "type": "mc", "q": "같은 이온, 같은 1 V에서 소자 길이를 1 mm에서 10 µm로 줄이면 드리프트로 건너는 시간은 어떻게 되나?", "options": ["1/100로 준다", "1/10,000로 준다", "그대로다(이온의 성질이므로)", "1/10로 준다"], "a": 1, "why": "t = L²/(µV)에서 L이 1/100이 되면 t는 (1/100)² = 1/10,000. 전압이 같으면 전기장도 100배 세지므로 거리와 속도 양쪽에서 이득을 본다. '느림은 재료의 성질'이라고만 생각하면 3번을 고르게 된다. 그림 2.", "ref": "#ch-carriers"}, {"id": "d19-q05", "type": "ox", "q": "이동도와 확산계수를 같은 식(v = µE, D = µkT/q)으로 적을 수 있으므로, 물속 이온과 결정 속 전자는 같은 원리로 움직인다.", "a": false, "why": "식은 '얼마나 잘 움직이나'를 재는 방법이 같다는 뜻일 뿐이다. 물속 이온은 수화 껍질을 두른 입자로 용매와 부딪히며 끌려가고, 움직이면 그 자리의 조성이 바뀐다. 결정 속 전자는 격자에 흩어지는 파동에 가깝고 지나가도 물질은 그대로다. 기초 상자 ⑤.", "ref": "#ch-carriers"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 신호와 상태", "items": [{"id": "d19-q06", "type": "mc", "q": "ionic cable에서 전기 신호가 퍼지는 빠르기(신호 확산계수 ≈ bd/(ρε))를 주로 정하는 것은?", "options": ["이온의 확산계수와 수화 반지름", "겔의 두께·저항률과 유전체의 두께·유전율", "이온의 종류(K⁺인지 Li⁺인지)", "전극 금속의 일함수"], "a": 1, "why": "케이블의 짧은 토막 하나가 '저항(겔) + 축전기(유전체)'이고, 신호는 그 연결을 따라 확산 방정식처럼 퍼진다. 이온 하나하나는 계면을 충전할 만큼만 움직인다. Yang 2015 p.60, 2구간.", "ref": "#ch-signal-vs-carrier"}, {"id": "d19-q07", "type": "ox", "q": "Roadmap이 말한 '이온 이동은 µs–s'의 느림은, 이온 소자로는 MHz 신호를 전달할 수 없다는 뜻이다.", "a": false, "why": "ionic cable은 100 MHz 신호를 10 cm 전송했다(Yang 2015 p.59). µs–s는 농도 재배치·도핑·계면 충전 같은 상태 변화의 시간이다. 두 '느림'을 섞으면 이 문장을 참으로 고르게 된다. 2구간의 흔한 오해 상자.", "ref": "#ch-signal-vs-carrier"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 이온만의 자유도", "items": [{"id": "d19-q08", "type": "mc", "q": "Chen 2023에서 고른 하이드로겔은 K⁺·Ca²⁺·Fe³⁺의 문턱이 모두 약 1 mV였고, 상분리 겔에서는 5·40·60 mV로 갈렸다. 이 결과가 직접 보여 주는 것은?", "options": ["이온 종을 입력으로 쓰면 분류 정확도가 오른다", "같은 겔 계에서 이온 종에 따라 다른 상태(통과 문턱)를 만들 수 있다", "이 겔은 전자 소자보다 에너지를 덜 쓴다", "단일 이온 선택성 문제가 해결되었다"], "a": 1, "why": "결과는 '종별로 다른 응답이 생긴다(자유도가 있다)'까지다. 그것이 계산 성능을 올리는지는 과제·기준선 비교가 따로 필요하고, Aluru 리뷰는 같은 전하의 다른 이온 사이 선택성과 종별 전류 측정을 여전히 공백으로 둔다(p.593, 595). 3-1절.", "ref": "#ch-unique"}, {"id": "d19-q09", "type": "ox", "q": "Aluru 리뷰가 인용한 '전기화학 도핑으로 아날로그 상태를 35 aJ에 부호화'는 그 소자를 쓴 시스템 전체의 상태당 에너지다.", "a": false, "why": "35 aJ은 약 300 nm 소자 하나의 상태 전환 에너지이고 읽기 회로·주변 회로·ADC는 포함하지 않는다. 시스템 비용은 Day 30–31의 다섯 숫자로 따로 센다. 3-3절.", "ref": "#ch-unique"}, {"id": "d19-q23", "type": "mc", "q": "PEDOT:PSS 채널을 쓰는 OECT의 게이트에 +0.5 V를 걸었다. 채널 안에서 일어나는 일로 가장 알맞은 것은?", "options": ["전해질의 Cl⁻가 채널로 들어가 정공이 늘고 드레인 전류가 커진다", "전해질의 K⁺가 채널 부피 안으로 들어가 PSS⁻의 짝이 되고, 정공이 전극으로 빠져나가 드레인 전류가 줄어든다", "게이트의 전자가 전해질을 건너 채널로 직접 흘러 들어가 드레인 전류가 커진다", "이온은 채널 표면에만 쌓이고 채널 안의 정공 수는 그대로라 전류도 그대로다"], "a": 1, "why": "양(+)인 게이트는 양이온을 채널 쪽으로 밀고, PEDOT:PSS에서는 양이온이 막 부피 전체로 들어가 PSS⁻의 음전하를 맞춘다. 그러면 정공이 필요 없어져 빠져나가고(탈도핑) 전류가 준다(공핍형). 1번은 (−) 게이트로 음이온을 넣는 축적형의 이야기이고, 3번은 전해질이 전자를 통과시키지 않는다는 점을, 4번은 이온이 부피 전체로 들어간다는 점을 놓친 것이다. 3-3절 OECT 기초 상자.", "ref": "#ch-unique"}]}, "3-end": {"kind": "end", "title": "3장 마무리", "items": [{"id": "d19-q10", "type": "short", "q": "압전이온 겔의 응답 시간이 두께 L의 제곱에 비례한다고 가정하면, 두께를 1 mm에서 0.2 mm로 줄였을 때 응답 시간은 몇 분의 1이 되어야 하나? (정수로)", "a": ["25", "1/25", "25분의 1", "25배"], "why": "(1 ÷ 0.2)² = 5² = 25. 실제 보고는 약 5 s → 30 ms(약 167분의 1)로, L² 하나로는 설명되지 않는다. 저자들은 두꺼운 겔에서 압력이 넓게 퍼져 압력 구배가 작아지는 것을 이유로 든다(Dobashi 2022 p.505). 시간상수가 크기 말고 다른 요인에도 기대는 예로, Day 37에서 다시 본다.", "ref": "#ch-unique"}, {"id": "d19-q11", "type": "ox", "q": "BaSO₄ 침전처럼 전압을 끈 뒤에도 남는 화학 상태변수는 오래 남는다는 장점이 있지만, 되돌리기(가역성)와 반복 재현성이 함께 문제가 될 수 있다.", "a": true, "why": "Han 2023에서 침전은 저장액을 KCl로 바꿔도 거의 그대로 남았다(p.3). 오래 남는 상태는 지우기도 어렵다. 이온 자유도마다 '오래 남는가'와 '되돌릴 수 있는가'를 같이 적어야 한다. 3-3절.", "ref": "#ch-unique"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 숫자로 지는 축", "items": [{"id": "d19-q12", "type": "short", "q": "Aluru 2026 Table 1에서 ECRAM의 쓰기 시간은 10⁻⁹ s, 이온 소자는 10⁻³ s부터다. 몇 자릿수 차이인가? (정수로)", "a": ["6", "6자릿수", "10⁶", "백만 배", "10^6"], "why": "10⁻³ ÷ 10⁻⁹ = 10⁶, 여섯 자릿수. 같은 표에서 상태 수는 2¹¹ vs 2⁶–2⁸, 내구성은 10⁹ vs 10²회다. 4구간 원문 표.", "ref": "#ch-where-ions-lose"}, {"id": "d19-q13", "type": "short", "q": "Guo 2026은 40 mm × 40 mm 기판에 10 × 10 = 100개의 하이드로겔 memristor를 만들었다. 1 cm²당 몇 개인가? (소수 둘째 자리까지)", "a": ["6.25", "6.25개", "약 6", "6"], "why": "기판 넓이는 4 cm × 4 cm = 16 cm², 100 ÷ 16 = 6.25개/cm². 실리콘 칩의 수십억 개와 비교하면 집적은 이온 소자가 가장 크게 지는 축의 하나다. 4구간 '집적 밀도'.", "ref": "#ch-where-ions-lose"}]}, "4-end": {"kind": "end", "title": "4장 마무리", "items": [{"id": "d19-q14", "type": "mc", "q": "'속도' 축에서 이온 소자의 판정이 바뀌는 조건으로 가장 알맞은 것은?", "options": ["이온을 더 빠른 종으로 바꾸면 ns 쓰기가 가능하므로", "과제의 시간척도가 ms–s라서 소자의 느린 변화가 입력과 정합할 때", "소자를 많이 병렬로 놓으면 쓰기 시간이 줄어들므로", "전압을 높이면 어떤 과제에서든 전자 소자를 이기므로"], "a": 1, "why": "Liang 리뷰는 센서 근처 처리에 1 ms보다 긴 생물학적 시간척도가 필요하고 τ가 너무 짧으면 실시간 신호와 결합하지 못한다고 쓴다(p.198). 이것은 '이온이 빠르다'가 아니라 '그 과제에서는 빠를 필요가 없다'는 뜻이다. 1번은 ECRAM과 여섯 자릿수 차이를 이온 종 교체로 메울 근거가 없다. 4구간.", "ref": "#ch-where-ions-lose"}, {"id": "d19-q15", "type": "ox", "q": "Aluru 2026 Table 1에 따르면 이온 소자는 모든 항목에서 전자 메모리 소자보다 불리하다.", "a": false, "why": "쓰기 전압은 0.5 V 미만으로 비슷하거나 낮고, 연결도(한 소자가 이어지는 수)는 ≥3으로 PRAM·PCM(2)보다 크다. 지는 축(쓰기 시간, 상태 수, 내구성)과 그렇지 않은 축을 나눠 읽어야 한다. 4구간 원문 표.", "ref": "#ch-where-ions-lose"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 조건부 결론", "items": [{"id": "d19-q16", "type": "mc", "q": "다음 중 '왜 이온인가'에 대한 가장 정직한 문장 형식은?", "options": ["이온 소자는 생체친화적이고 저전력이므로 차세대 뉴로모픽에 적합하다", "응용 X가 요구하는 시간척도·상태 수·매질·사용 기간이 메커니즘 Y가 허용하는 범위와 겹치고, 그 칸을 전자 소자가 더 싸게 채우지 못하는 이유는 ___이다", "이온은 전자보다 자유도가 많으므로 계산 능력이 더 크다", "이온 소자는 전자 소자와 원리가 같으므로 같은 기준으로 비교할 수 있다"], "a": 1, "why": "답은 조건문이어야 한다. 1번은 조건 없는 슬로건, 3번은 '자유도 = 계산 자원'의 비약, 4번은 원리가 다르다는 1구간의 내용과 반대다. 마지막 빈칸을 채우지 못하면 그 응용에서는 아직 답이 없다. 5구간.", "ref": "#ch-conditional"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d19-q17", "type": "short", "q": "결정 실리콘 전자의 이동도를 0.14 m²/(V·s)로 두면, 아인슈타인 관계(kT/q = 0.0258 V)로 구한 확산계수는 몇 ×10⁻³ m²/s인가? (소수 첫째 자리까지)", "a": ["3.6", "3.6×10⁻³", "3.61", "0.0036"], "why": "D = 0.14 × 0.0258 = 3.6×10⁻³ m²/s. 물속 K⁺(2×10⁻⁹)와의 비는 약 1.8×10⁶. 단, 1400 cm²/(V·s)는 폴더 밖 공개 물성표(Ioffe, 300 K)의 결정 실리콘 값이고, 유기 반도체와 비교하면 간격은 훨씬 작아진다. 1구간.", "ref": "#ch-carriers"}, {"id": "d19-q18", "type": "mc", "q": "이온 소자의 응답이 느린 이유를 가장 정확히 적은 것은?", "options": ["이온 전도체 속 전기 신호의 전파가 느려서", "농도 분포·도핑·계면 충전 같은 상태 변화에 이온이 실제로 거리를 움직여야 하고, 그 시간이 D와 L²에 함께 달려서", "이온은 전하가 커서 전기장에 덜 끌려가서", "전극이 금속이라서"], "a": 1, "why": "신호 전달은 빠를 수 있고(ionic cable), 느린 것은 상태 변화다. 그 시간은 재료(D, µ)와 크기(L²)가 함께 정한다. 3번은 사실과 반대(2가 이온은 같은 전기장에서 더 큰 힘을 받는다). 2구간과 1구간.", "ref": "#ch-signal-vs-carrier"}, {"id": "d19-q19", "type": "short", "q": "Aluru 2026 Table 1에서 이온 소자의 상태 수 아래 끝은 2⁶이다. 이는 몇 단계인가?", "a": ["64", "64단계", "64개"], "why": "2⁶ = 64. 위 끝 2⁸ = 256, ECRAM의 2¹¹ = 2048과 비교된다. 상태 수가 적어도 RC처럼 readout이 여러 상태를 함께 보는 계산에서는 문제가 덜할 수 있지만, 그것은 잡음 대비 상태 차이로 확인할 일이다(Day 32). 4구간.", "ref": "#ch-where-ions-lose"}, {"id": "d19-q20", "type": "ox", "q": "이온에는 전자에 없는 자유도(여러 종, 화학 상태 등)가 있으므로, 이온 소자는 같은 크기의 전자 소자보다 계산 용량이 크다고 결론 내릴 수 있다.", "a": false, "why": "자유도는 상태변수가 하나 더 있다는 뜻이다. 계산 자원이 되려면 그 상태가 읽히고, 과제에 필요한 차이를 보존하며, 기준선보다 나아야 한다. Aluru 리뷰도 계산 용량 평가 틀을 공백으로 둔다(p.595). 3·5구간.", "ref": "#ch-conditional"}, {"id": "d19-q21", "type": "mc", "q": "어떤 논문이 '이온겔 시냅스 6 fJ/event로 생물 시냅스 수준의 에너지'라고 쓴다. 이 숫자를 전자 시스템과 비교하기 전에 먼저 확인할 것은?", "options": ["이온의 종류", "이 숫자가 소자 하나의 상태 전환만 센 것인지, 읽기 회로·ADC·구동까지 센 것인지, 그리고 event당인지 op당인지", "소자가 투명한지", "논문이 실린 저널"], "a": 1, "why": "소자만/시스템의 경계와 단위가 같아야 비교가 성립한다. 6 fJ/event(Chen 2025 p.3)는 작은 전류 펄스 조건의 소자 값이다. 4구간의 흔한 오해 상자와 Day 30–31.", "ref": "#ch-where-ions-lose"}, {"id": "d19-q22", "type": "mc", "q": "하이드로겔 이온 소자의 '연성·수계'라는 자유도가 동시에 약점이 되는 이유로 가장 알맞은 것은?", "options": ["물속에서는 전기 신호가 전달되지 않아서", "탈수·이온 누출·농도 차 소실로 상태와 전류가 시간에 따라 변해(drift) 장기 안정성이 떨어져서", "연성 재료는 이온전도도가 0이라서", "생체 조직보다 너무 단단해서"], "a": 1, "why": "Guo 2026 배열은 17시간 동안 전류가 줄었고 저자는 겔 탈수를 이유로 든다(p.7). Roadmap도 전기화학계의 이온 재분포·산화환원 불안정을 drift 원인으로 든다(p.8113). 같은 성질이 자원이자 drift의 원천이다. 3-4절.", "ref": "#ch-unique"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d19a">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d19b.html">Day 34 · 이온만의 자유도와 이온이 지는 영역 →</a></p>
+</div>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d18.html" class="pagination-link" aria-label="Day 32 · 재현성과 신뢰성, Phase 3 종합">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d19b.html" class="pagination-link" aria-label="Day 34 · 이온만의 자유도와 이온이 지는 영역">
+        <span class="nav-page-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

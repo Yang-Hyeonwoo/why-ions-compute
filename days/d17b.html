@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 31. 지연시간과 같은 경계에서 비교하기 – Why Ions Compute</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d18.html" rel="next">
+<link href="../days/d17a.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">커버</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">전체 학습 지도</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">장부</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../ledger/bottleneck.html">
+ <span class="dropdown-text">병목 장부</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/unknowns.html">
+ <span class="dropdown-text">아직 모르는 것</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/glossary.html">
+ <span class="dropdown-text">용어집</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/kill-criteria.html">
+ <span class="dropdown-text">접는 기준</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/references.html">
+ <span class="dropdown-text">참고문헌</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/questions.html">
+ <span class="dropdown-text">질문 모음</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../rules.html"> 
+<span class="menu-text">공부 규칙</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d13a.html">Phase 3 · 좋은 시스템이란</a></li><li class="breadcrumb-item"><a href="../days/d17b.html">Day 31 · 지연시간과 같은 경계에서 비교하기</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">전체 학습 지도</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">장부</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">병목 장부</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">아직 모르는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어집</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">접는 기준</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">질문 모음</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rules.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">공부 규칙</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link active" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing">선택 활동: 글로 정리하기</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d13a.html">Phase 3 · 좋은 시스템이란</a></li><li class="breadcrumb-item"><a href="../days/d17b.html">Day 31 · 지연시간과 같은 경계에서 비교하기</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 31. 지연시간과 같은 경계에서 비교하기</h1>
+<p class="subtitle lead">Phase 3 · 좋은 시스템이란 무엇인가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> — 소자의 응답 시간과 시스템의 지연시간은 어떻게 다르고, 비용은 어떤 경계에서 비교해야 하나?</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d17b">
+  <li data-step="lesson"><a href="#lesson"><b>1</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>2</b>학습 완료</a></li>
+</ol>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<section id="ch-latency" class="level3">
+<h3 class="anchored" data-anchor-id="ch-latency">4. 소자의 응답 시간과 시스템의 지연시간</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 지연시간을 잴 때 시작·끝 시점을 정해야 하는 이유를 말할 수 있고, 실시간 처리와 저장한 데이터의 재생에서 느린 소자가 지연·처리율·에너지에 주는 영향이 왜 다른지 숫자로 설명할 수 있다.</p>
+</div>
+<p><strong>자주 섞이는 두 시간.</strong> 소자 논문에는 "응답 시간 10 ms", "이완 시간 50 ms" 같은 숫자가 나옵니다. 이것은 소자의 상태가 바뀌거나 돌아오는 데 걸리는 시간, 즉 <strong>소자의 시간척도</strong>입니다. 시스템의 <strong>지연시간</strong>은 그와 다릅니다. 입력을 펄스로 바꾸는 시간, 소자가 입력열을 다 받는 시간, 상태를 읽고 숫자로 바꾸는 시간, readout을 계산하는 시간, 다음 입력을 위해 소자가 원래 상태로 돌아오기를 기다리는 시간이 모두 들어갑니다. Singh 2026은 재료의 고유 응답 시간을 시스템 전체의 지연시간으로 보고하면 안 되며, 입력 부호화·reservoir의 변화·상태 획득·readout 계산을 <strong>같은 시간 경계 안에</strong> 넣었을 때만 시스템 지연이라 부를 수 있다고 씁니다. <span class="src">Singh 2026, p.19</span> 보고하는 값이 고유 응답 시간인지 전체 구간인지를 밝히고, 처리율과 가정한 <strong>병렬</strong> 동작(여러 개를 동시에 처리하는 것)도 적으라고 합니다. <span class="src">Singh 2026, p.14</span></p>
+<p>Day 22–23의 시간척도 정합을 다시 떠올립니다. 소자의 기억 시간척도 τ는 입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span>(입력 하나가 들어오는 간격)과 맞아야 과거 입력을 쓸 만큼 품었습니다(<a href="../days/d13b.html#b-timescale-match">Day 23 기초: 시간척도 정합</a>). 오늘은 그 정합이 시간과 에너지에서 무엇을 뜻하는지 봅니다. 핵심은 <strong><span class="math inline">\(T_{\text{sym}}\)</span>을 누가 정하느냐</strong>입니다.</p>
+<p><strong>경우 1 — 실시간 처리: 신호가 <span class="math inline">\(T_{\text{sym}}\)</span>을 정한다.</strong> 가슴의 심전도처럼 신호가 실제 시간에 흘러들어오면, 박동 하나는 어차피 1 s 동안 들어옵니다. 박동을 50단계로 나눠 넣으면 <span class="math inline">\(T_{\text{sym}}\)</span> = 1 s ÷ 50 = 20 ms이고, 이것은 소자가 아니라 신호가 정한 값입니다. 디지털만 쓰는 장치(A)도 박동이 끝나야 판정할 수 있으니, 이 1 s는 <strong>어느 방법에나 공통</strong>입니다. 소자는 신호가 들어오는 동안 함께 변하므로, 박동이 끝난 뒤 추가로 드는 시간은 상태를 읽고(ADC 50회 × 10 µs = 0.5 ms) readout을 계산하는(0.1 ms) <strong>0.6 ms</strong>뿐입니다 [가정]. 이 경우 이온 소자의 느림은 단점이 아니라 정합의 조건입니다. 단, 3구간에서 보았듯 TIA가 1 s 내내 켜져 있어야 하는 비용은 남습니다.</p>
+<p><strong>경우 2 — 재생: 소자가 <span class="math inline">\(T_{\text{sym}}\)</span>을 정한다.</strong> 하루치 기록을 저장해 두었다가 나중에 한꺼번에 판정하거나(심전도 장기 기록 분석), MNIST처럼 원래 시간이 없는 데이터를 넣을 때는(Day 26–27) <span class="math inline">\(T_{\text{sym}}\)</span>을 실험자가 고릅니다. 그런데 Day 22–23에서 보았듯 기억이 쓸모 있으려면 <span class="math inline">\(T_{\text{sym}}\)</span>이 τ와 맞아야 하므로, 사실상 <strong>소자의 τ가 <span class="math inline">\(T_{\text{sym}}\)</span>을 정합니다</strong>. 그리고 그 시간이 고스란히 지연시간이 됩니다. 계산해 봅니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 입력 시간.</strong> 이온 소자 τ = 50 ms에 맞춰 <span class="math inline">\(T_{\text{sym}}\)</span> = 10 ms로 둡니다(한 단계 사이에 남는 비율 <span class="math inline">\(e^{-10/50} \approx 0.82\)</span>로, Day 22–23에서 기억이 잘 펼쳐졌던 정합 사례와 같은 값). 50단계를 넣는 데 50 × 10 ms = <strong>500 ms</strong>.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 초기화 대기.</strong> 다음 박동을 넣기 전에 앞 박동의 흔적이 지워져야 서로 섞이지 않습니다. 지수 감쇠에서 5τ가 지나면 처음 변화의 <span class="math inline">\(e^{-5} \approx 0.7\%\)</span>만 남으므로, 5τ = <strong>250 ms</strong>를 기다린다고 합시다 [가정: 허용 잔여를 0.7%로 둠]. Singh 2026도 회복 시간이 독립된 입력열 사이의 간격을 제약한다고 씁니다. <span class="src">Singh 2026, p.19</span></p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 읽기와 readout.</strong> ADC 50회 × 10 µs = 0.5 ms, readout 0.1 ms [가정: MAC 100번 × 10박자 = 1,000박자를 10 MHz로 돌린 시간].</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 합과 처리율.</strong> 지연 = 500 + 250 + 0.6 = <strong>750.6 ms</strong>. 처리율은 1 ÷ 0.7506 s ≈ <strong>1.33 박동/s</strong>. 하루 기록(분당 60회로 86,400박동 [가정])을 이 소자 한 세트로 다시 처리하면 86,400 × 0.7506 s ≈ 64,852 s ≈ <strong>18시간</strong>이 걸립니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 빠른 소자와 비교.</strong> 같은 구조에 τ = 50 µs인 가상의 빠른 소자를 쓰면 <span class="math inline">\(T_{\text{sym}}\)</span> = 10 µs, 입력 0.5 ms + 대기 0.25 ms + 읽기·readout 0.6 ms = <strong>1.35 ms</strong>, 처리율 약 741 박동/s, 하루 기록은 약 117 s. 빠른 소자에서는 오히려 읽기·readout이 지연의 절반 가까이를 차지합니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 6 — 지연 × 대기 전력 = 에너지.</strong> 재생에서 TIA(10채널, 10 µW)와 MCU 대기(2 µW)는 지연 내내 켜져 있다고 봅니다(초기화 대기 동안에도 끄지 않는다는 [가정]). 느린 소자: 12 µW × 0.7506 s ≈ 9.0 µJ(TIA 7.51 + 대기 1.50). 빠른 소자: 12 µW × 1.35 ms ≈ 0.016 µJ. 그림 2(Day 30)의 (나)에서 D가 10.11 µJ, E가 0.87 µJ인 차이의 대부분이 이것입니다(D에서 시간 비례 항목이 89%). 두 막대의 나머지는 입력 DAC 500 × 1 nJ = 0.5 µJ, 소자(D는 1 ms 펄스라 0.25 µJ, E는 10 µs 펄스로 가정해 0.0025 µJ), 상태 ADC 0.05 µJ, readout 0.3 µJ이고, 저장한 기록을 다시 넣는 경우라 전극·증폭+필터·무선은 넣지 않았습니다 [가정].</p>
+</div>
+</div>
+<figure class="fig figure"><img src="../assets/img/d17/fig3-latency.svg" alt="시간축(0–1,100 ms) 위의 세 줄. 실시간 처리에서는 박동 신호 1 s 동안 소자가 함께 변하고 박동이 끝난 뒤 추가 지연은 0.6 ms. 재생에서 τ=50 ms 소자는 입력 500 ms + 초기화 대기 250 ms로 합계 750.6 ms, 1초에 1.33개. τ=50 µs 소자는 합계 1.35 ms, 1초에 741개" class="figure-img"><figcaption><b>그림 3.</b> 소자의 응답 시간과 시스템의 지연시간(가정값으로 계산). 위: 실시간 처리에서는 신호 자체의 길이(1 s)가 어느 방법에나 공통이고 소자는 그동안 함께 변하므로, 소자의 느림이 추가 지연이 되지 않는다. 가운데·아래: 저장한 데이터를 다시 넣을 때는 소자의 τ가 입력 간격과 초기화 대기를 정해 그대로 지연이 된다. ADC 1회 10 µs, readout 0.1 ms, 초기화 대기 5τ는 [가정]. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>처리율은 병렬로 늘릴 수 있지만 공짜가 아니다.</strong> 느린 소자로 하루 기록을 18시간이 아니라 1시간에 처리하려면 소자 세트를 18개 두고 동시에 돌리면 됩니다. 그러면 TIA·ADC 채널도 18배가 되어, 면적과 대기 전력이 그만큼 늘어납니다. 그래서 지연·처리율을 적을 때는 <strong>가정한 병렬 동작</strong>을 함께 적어야 합니다. <span class="src">Singh 2026, p.14</span></p>
+<p><strong>이온–전자 경계에서 생기는 시간 비용.</strong> Roadmap은 전자 소자의 전하 수송이 ns 시간척도인 반면 이온 이동은 µs에서 s까지에 걸치며, 이온–전자 변환 같은 영역 간 신호 변환이 지연·에너지 손실·신호 왜곡을 들여오기 때문에, 서로 다른 모듈을 하나의 시스템으로 묶으려면 클록 맞추기, 버퍼(잠깐 담아 두는 기억장치), 오차 허용 장치를 공들여 설계해야 한다고 씁니다. <span class="src">Roadmap 2026, p.8126</span> 위 단계 2의 초기화 대기와 단계 3의 읽기가 그 "경계 비용"의 작은 예입니다. <span class="tag tag-interp">해석</span></p>
+<div class="myth">
+<p><strong>"이온 소자는 느리니 시스템도 느리다"</strong> 와 <strong>"이온 소자는 느려도 상관없다"</strong> — 둘 다 조건이 빠졌습니다. 신호가 실제 시간에 들어오는 실시간 처리에서 소자의 τ가 신호의 시간척도와 맞으면 느림은 추가 지연이 되지 않습니다. 저장한 데이터를 다시 넣는 일에서는 τ가 곧 지연이고, 지연 × 대기 전력이 에너지가 됩니다. 논문이 어느 쪽 사용 상황을 가정하는지 먼저 확인합니다. <span class="tag tag-interp">해석</span></p>
+</div>
+<div class="quiz" data-day="d17" data-set="4-check"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+소자의 응답(이완) 시간 vs 시스템 지연시간
+</dt>
+<dd>
+소자 상태가 바뀌거나 돌아오는 시간 / 입력에서 답까지 부호화·변화·읽기·readout·초기화를 모두 포함한 시간. 같은 시간 경계 안에 넣어야 후자다 <span class="src">Singh 2026, p.19</span>.
+</dd>
+<dt>
+실시간 처리 vs 재생
+</dt>
+<dd>
+신호가 실제 시간에 들어와 <span class="math inline">\(T_{\text{sym}}\)</span>을 정함 / 저장된 데이터를 다시 넣어 소자의 τ가 사실상 <span class="math inline">\(T_{\text{sym}}\)</span>을 정함.
+</dd>
+<dt>
+초기화 대기
+</dt>
+<dd>
+다음 입력열 전에 앞 입력의 흔적이 지워지길 기다리는 시간. 지수 감쇠에서 5τ면 약 0.7%가 남는다.
+</dd>
+<dt>
+버퍼
+</dt>
+<dd>
+속도가 다른 두 모듈 사이에서 데이터를 잠깐 담아 두는 기억장치.
+</dd>
+</dl>
+</div>
+<div class="quiz" data-day="d17" data-set="4-end"></div>
+<div class="keypoints">
+<ul>
+<li>지연시간은 시작·끝을 정해야 하는 시스템의 양이다. 소자의 고유 응답 시간을 그대로 시스템 지연이라 부르지 않는다 <span class="src">Singh 2026, p.14, 19</span>.</li>
+<li>실시간 처리: 신호 길이는 공통, 소자가 맞으면 추가 지연은 읽기·readout(이 예에서 0.6 ms)뿐 [가정].</li>
+<li>재생: τ = 50 ms 소자는 박동당 750.6 ms(입력 500 + 초기화 250), 하루 기록 약 18시간. 지연 × 대기 전력이 예산의 89% [가정, 계산].</li>
+<li>이온–전자 경계는 클록·버퍼·오차 허용 설계를 요구한다 <span class="src">Roadmap 2026, p.8126</span>. 남은 질문: 논문의 에너지 숫자들은 어느 경계에서 잰 것인가? → 5구간.</li>
+</ul>
+</div>
+</section>
+<section id="ch-like-for-like" class="level3">
+<h3 class="anchored" data-anchor-id="ch-like-for-like">5. 같은 경계에서 비교하기</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 논문에 나오는 에너지·전력 숫자마다 "단위, 센 경계, 측정인지 추정인지, 같은 과제인지"를 확인할 수 있고, 조건이 다른 두 숫자로 "몇 배 효율적"이라고 결론 내리면 안 되는 이유를 폴더 사례로 말할 수 있다.</p>
+</div>
+<p><strong>비교의 네 가지 조건.</strong> 두 에너지 숫자를 나란히 놓아 의미가 있으려면 다음이 같아야 합니다. [해석, Singh 2026의 권고를 정리]</p>
+<ol type="1">
+<li><strong>단위가 같은 일을 센다.</strong> J/펄스, J/스파이크, J/추론, W는 서로 다른 양입니다. 특히 W(전력)와 J(에너지)를 섞지 않습니다.</li>
+<li><strong>경계가 같다.</strong> 그림 1(Day 30)의 ①(소자만), ②(구동·읽기 회로 포함), ③(장치 전체) 중 어디까지 셌는가. Singh 2026은 에너지 비교가 <strong>회계 경계를 밝힐 때만</strong> 의미가 있다고 씁니다. <span class="src">Singh 2026, p.14</span></li>
+<li><strong>측정인가 추정인가.</strong> 실제 전류·전압 파형을 잰 값인지, 부품 값을 더한 계산인지. <span class="src">Singh 2026, p.12</span></li>
+<li><strong>같은 과제, 같은 정확도.</strong> 쉬운 과제를 낮은 정확도로 푼 에너지와 어려운 과제를 높은 정확도로 푼 에너지는 비교되지 않습니다.</li>
+</ol>
+<p><strong>폴더의 숫자들을 이 기준으로 읽기.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>숫자</th>
+<th>단위</th>
+<th>무엇을 셌나</th>
+<th>경계</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6.7 fJ</td>
+<td>J/스파이크</td>
+<td>45 nm 같은 첨단 공정의 CMOS 뉴런 회로가 "낮게는" 도달하는 값</td>
+<td>회로 하나(최선값)</td>
+<td><span class="src">Roadmap 2026, p.8119</span></td>
+</tr>
+<tr class="even">
+<td>3.6 pJ</td>
+<td>J/스파이크</td>
+<td>RRAM 시냅스 SNN 칩, 시냅스·뉴런 수준, MNIST</td>
+<td>칩의 일부</td>
+<td><span class="src">Roadmap 2026, p.8135</span></td>
+</tr>
+<tr class="odd">
+<td>0.5 nJ</td>
+<td>J/펄스</td>
+<td>광시냅스 reservoir의 펄스 에너지. 하류 readout·ADC는 다 세지 않음</td>
+<td>①</td>
+<td><span class="src">Singh 2026, p.22, Table 4</span></td>
+</tr>
+<tr class="even">
+<td>0.07 nW</td>
+<td>W/나노접합</td>
+<td>나노접합 네트워크 소자의 접합당 <strong>전력</strong>. 추론 에너지 경계(획득·readout 포함)는 보고되지 않음</td>
+<td>①의 일부</td>
+<td><span class="src">Singh 2026, p.22, Table 4</span></td>
+</tr>
+<tr class="odd">
+<td>22 vs 29,400 µW</td>
+<td>"제스처당 전력"(제스처 하나 약 3 s 동안의 평균)</td>
+<td>아날로그 RC는 소자·증폭기·MUX 전력을 부품 값으로 계산한 합(MCU 제외), 디지털 RC는 데스크톱 CPU 전력 × 사용률로 계산. 둘 다 추정</td>
+<td>② 일부 vs 범용 CPU</td>
+<td><span class="src">Zhong 2022, p.678–679, Supplementary Table 1</span></td>
+</tr>
+<tr class="even">
+<td>최대 70%</td>
+<td>시스템 전력 중 몫</td>
+<td>고정밀 ADC/DAC 등 주변회로</td>
+<td>③</td>
+<td><span class="src">Roadmap 2026, p.8130</span></td>
+</tr>
+</tbody>
+</table>
+<p>표의 어느 두 줄도 그대로 나눠서 "몇 배"를 말할 수 없습니다. Day 1–2에서 본 대로 6.7 fJ/스파이크(보통 디지털 칩을 만드는 트랜지스터 회로 방식인 <strong>CMOS</strong>(<a href="../days/d02a.html#b-transistor-switch">Day 3 기초</a>)로 만든 특수 뉴런 회로의 최선값)와 생물 뉴런의 수십 pJ/스파이크(2차 문헌의 추정)도 같은 기준의 숫자가 아니었습니다(<a href="../days/d01b.html#ch-axes">Day 2 3절</a>). 무엇을 포함했는지(시냅스, 통신, 대기 전력)가 다르기 때문입니다.</p>
+<p><strong>사례 — Zhong 2022의 "1,000배"를 다시 읽기.</strong> Day 9에서 본 이 논문의 Fig. 5g는 제스처 분류에서 디지털 RC 29,400 µW, 아날로그 RC 22 µW를 막대로 비교하고, 본문은 평균 정확도 손실 1.1%로 전력을 99.9% 이상 줄였다고 씁니다. <span class="src">Zhong 2022, p.678–679</span> 오늘의 기준으로 세 가지를 확인합니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2022-fig5g.png" alt="Zhong 2022 Fig. 5g: 왼쪽 연두 영역은 네 제스처(G1–G4)와 평균의 정확도 막대(디지털 RC 파랑, 아날로그 RC 빨강, 평균 99.0 vs 97.9%), 오른쪽 분홍 영역은 제스처당 전력 막대 29,400 µW vs 22 µW(로그축)와 '>×1,000' 화살표" loading="lazy" class="figure-img"><figcaption><b>원문 그림(Day 9에서 본 것을 다시).</b> Zhong et al., <a href="https://doi.org/10.1038/s41928-022-00838-3" target="_blank"><i>Nat. Electron.</i> 2022, 5, 672–681</a>, Fig. 5g, p.678. 볼 것: 이번에는 오늘의 네 조건으로 읽는다. ① <b>단위</b>: 오른쪽 축 이름이 'Power per gesture (µW)', 즉 에너지가 아니라 전력이다. ② <b>경계</b>: 빨강 22는 소자·증폭기·MUX를 부품 값으로 더한 것, 파랑 29,400은 데스크톱 CPU 전력 × 사용률이다(아래 목록). 같은 상자를 센 막대가 아니다. ③ <b>측정/추정</b>: 왼쪽 정확도 막대는 측정, 오른쪽 전력 막대는 둘 다 추정이다. ④ <b>같은 과제</b>: 같은 제스처 과제이고 정확도 차이는 평균 1.1%p(99.0 vs 97.9)다. 정확도 축이 80%부터 시작해 차이가 크게 보이는 것도 확인하라. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<ul>
+<li><strong>단위</strong>: 축 이름은 "제스처당 전력(µW)"입니다. 전력은 초당 에너지이므로 제스처 하나의 에너지를 알려면 시간을 곱해야 합니다. 이 계산은 폴더에 없는 보충자료(Supplementary Table 1, 웹에 공개)에 있습니다. 거기서 두 값은 모두 제스처 하나의 시간척도 3 s 동안의 평균 전력입니다. 에너지로 바꾸면 22.2 µW × 3 s ≈ 67 µJ, 29,400 µW × 3 s ≈ 88 mJ이고, 비율(약 1,300배)은 전력의 비율과 같습니다 [계산]. <span class="src">Zhong 2022, p.679, Supplementary Table 1</span></li>
+<li><strong>경계</strong>: 같은 표에서 22 µW는 입력용 memristor 배열 0.002 µW, 휘발성 memristor 19.2 µW, 증폭기 2.68 µW, MUX 0.32 µW를 부품 사양과 펄스 조건으로 <strong>계산한 합</strong>(22.202 µW)입니다. 2구간에서 본 MCU·디지털 가변저항은 들어 있지 않습니다. 29,400 µW는 데스크톱 CPU(Intel Core i5-4460T, 35 W)의 전력 × 사용률 27% × 제스처 900개 처리 시간 8.4 s를 제스처 수와 3 s로 나눈 값입니다. 즉 <strong>둘 다 측정이 아닌 추정</strong>이고, 센 경계도 다릅니다(한쪽은 ②의 일부, 다른 쪽은 범용 CPU 전체). <span class="src">Zhong 2022, Supplementary Table 1</span> [해석: 경계 비교]</li>
+<li><strong>이유</strong>: 저자들이 드는 두 요인은 (1) 완전 아날로그 신호 전달로 기존 RC 시스템의 큰 <strong>ADC 오버헤드를 없앤 것</strong>, (2) 큰 순환 신경망을 <strong>소수의 병렬 소자로 대체한 것</strong>입니다. <span class="src">Zhong 2022, p.679</span> 둘 다 소자 하나의 펄스 에너지가 아니라 <strong>시스템 구조</strong>의 이야기입니다. 오늘 3구간의 결론(지렛대는 변환 횟수와 주변회로에 있다)과 같은 방향입니다. <span class="tag tag-interp">해석</span></li>
+</ul>
+<p><strong>ADC의 정밀도도 비용이다.</strong> Day 7–8에서 <strong>비트</strong>(0·1 하나, <a href="../days/d02a.html#b-bit">Day 3 기초</a>)가 하나 늘면 단계가 두 배로 촘촘해지고 그만큼 정밀한 비교 회로·시간·전력이 든다고 했습니다(<a href="../days/d04a.html#b-adc">Day 7 기초 5: ADC</a>). Liang은 비용을 줄이려고 4–10 bit의 낮은 정밀도 ADC/DAC를 쓸 수 있지만 그 잡음 영향을 신중히 따져야 한다고 씁니다. <span class="src">Liang 2024, p.195</span> Roadmap은 큰 시스템에서 주변회로, 특히 고정밀 ADC/DAC가 시스템 전체 전력의 최대 70%까지 차지할 수 있다고 씁니다. <span class="src">Roadmap 2026, p.8130</span> 즉 "ADC를 몇 bit로 할까"는 정확도와 에너지의 상충이고, 이 상충은 소자 논문의 그림에는 보통 나타나지 않습니다. <span class="tag tag-interp">해석</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/EnfjYwe2A0w?start=0&amp;rel=0" title="영상: Electronic Basics #27: ADC (Analog to Digital Converter)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 전체(0:00–6:47), 약 7분 · 영어·자막).</b> GreatScott!, "Electronic Basics #27: ADC (Analog to Digital Converter)". <b>볼 이유:</b> 설명란에 따르면 ADC의 가장 중요한 사양(샘플링 속도와 분해능)과 축차 비교형(SAR) ADC의 동작, 그리고 직접 만들기 어려운 이유를 다룬다. 챕터: 0:00 소개, 1:02 샘플링 속도, 4:18 분해능(비트 수), 4:50 직접 만들어 보기. 위 단락의 "비트가 하나 늘면 단계가 두 배로 촘촘해진다"를 실물 칩과 측정으로 본다. <b>보고 답할 질문:</b> 영상이 말하는 두 사양(초당 샘플 수, 비트 수) 중 소자 상태를 읽는 ADC에서 에너지를 키우는 것은 어느 쪽인가? 둘 다라면 왜인가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·설명·챕터(영상 내용은 직접 보지 못함)</span></div></div>
+<p><strong>숫자 하나가 다른 경계로 옮겨질 때.</strong> Singh 2026은 낮은 reservoir 요소 에너지가 반드시 낮은 시스템 에너지를 뜻하지는 않으며, 자극 생성, 증폭, 데이터 획득, ADC, 초기화, readout 계산이 총비용을 지배할 수 있다고 씁니다. <span class="src">Singh 2026, p.19</span> 그리고 reservoir 요소 에너지를 readout, ADC, 전처리, 보정, 안정화 비용과 <strong>나눠 적으면</strong> 플랫폼 간 비교가 투명해진다고 권합니다. <span class="src">Singh 2026, p.19</span> 같은 글의 Table 4는 폴더 밖 몇몇 연구를 예로 들어, 에너지를 시스템 수준으로 보고하지 않았거나(NR) 소자 펄스 에너지만 적고 하류 readout·ADC는 다 세지 않은 경우가 있음을 보여 줍니다. <span class="src">Singh 2026, p.21–22</span> 그 표는 분야 전체의 비율을 추정하려는 것이 아니라 보고 관행을 예시하는 것이라고 저자들이 밝힙니다. <span class="src">Singh 2026, p.22</span></p>
+<div class="myth">
+<p><strong>"소자 하나가 0.5 nJ(또는 fJ)로 동작하니 이 RC 시스템은 저전력이다"</strong> — 이 문장은 경계 ①의 숫자로 경계 ③의 결론을 냈습니다. 3구간의 가정 예산에서 소자는 시스템의 약 1%였습니다. "저전력"을 말하려면 같은 과제·같은 정확도에서 경계 ③의 추론 한 번 에너지를 경쟁자(Day 28–29의 <strong>기준선</strong>: 소자를 빼거나 다른 것으로 바꾼 비교 대상, Day 9의 MCU + 작은 신경망)와 비교해야 합니다(<a href="../days/d16a.html#b-baselines">Day 28 기초: 기준선의 종류</a>).</p>
+</div>
+<div class="quiz" data-day="d17" data-set="5-check"></div>
+<div class="quiz" data-day="d17" data-set="5-end"></div>
+<div class="keypoints">
+<ul>
+<li>비교의 네 조건: 같은 일을 세는 단위(W와 J를 섞지 않음), 같은 경계, 측정/추정 구분, 같은 과제·정확도 <span class="src">Singh 2026, p.12, 14</span> <span class="tag tag-interp">해석</span>.</li>
+<li>6.7 fJ/스파이크, 0.5 nJ/펄스, 0.07 nW/접합, 22 µW/제스처는 서로 다른 경계·단위의 숫자다 <span class="src">Roadmap 2026, p.8119</span> <span class="src">Singh 2026, p.22</span> <span class="src">Zhong 2022, p.678</span>.</li>
+<li>Zhong 2022의 전력 절감 요인은 ADC 제거와 작은 reservoir라는 시스템 구조였다 <span class="src">Zhong 2022, p.679</span>. 주변회로는 시스템 전력의 최대 70%일 수 있다 <span class="src">Roadmap 2026, p.8130</span>.</li>
+<li>남은 질문: 그래서 논문에 무엇을 요구하고, 내 측정에서 무엇을 재야 하나? → 6구간.</li>
+</ul>
+</div>
+</section>
+<section id="ch-cost-report" class="level3">
+<h3 class="anchored" data-anchor-id="ch-cost-report">6. 비용 보고에서 확인할 것, 그리고 오늘의 반론</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 소자 RC 논문의 비용 주장을 확인하는 질문 목록을 쓸 수 있고, 보정·재학습 비용을 추론 한 번에 나눠 얹는 계산을 할 수 있으며, "원리 증명 논문에 시스템 비용까지 요구하는 것은 과하다"는 반론에 조건을 붙여 답할 수 있다.</p>
+</div>
+<section id="보정재학습-비용을-추론-한-번에-나누기" class="level4">
+<h4 class="anchored" data-anchor-id="보정재학습-비용을-추론-한-번에-나누기">6-1. 보정·재학습 비용을 추론 한 번에 나누기</h4>
+<p>소자가 시간에 따라 변하면(Day 32에서 자세히) readout을 다시 학습해야 합니다. 그때는 정답이 붙은 데이터를 모으고, readout 가중치를 다시 계산하는 에너지와 시간이 듭니다. 이 비용은 매번 드는 것이 아니므로, <strong>다음 보정까지 하는 추론 횟수로 나눠</strong> 추론 한 번에 얹습니다.</p>
+<p><span class="math display">\[
+E_{\text{추론, 실효}} = E_{\text{추론}} + \frac{E_{\text{보정}}}{N_{\text{보정 사이 추론 수}}}
+\]</span></p>
+<ul>
+<li>기호: <span class="math inline">\(E_{\text{보정}}\)</span>은 보정 한 번의 에너지[J], <span class="math inline">\(N\)</span>은 보정과 보정 사이의 추론 횟수[회].</li>
+<li>계산 순서: 보정 에너지를 추론 수로 나누고, 추론 한 번의 에너지에 더한다.</li>
+<li>결과의 뜻: 소자가 빨리 변해 보정을 자주 해야 할수록 <span class="math inline">\(N\)</span>이 작아져 실효 에너지가 커진다.</li>
+</ul>
+<p><strong>작은 숫자로.</strong> 보정 한 번에 10 mJ이 든다고 합시다 [가정]. 하루에 한 번 보정하면 그 사이 추론은 86,400번이므로 10 mJ ÷ 86,400 ≈ <strong>0.12 µJ</strong>를 얹습니다. 3구간의 23 µJ에 비하면 작습니다. 그런데 소자가 빨리 변해 10분마다(600박동마다) 보정해야 한다면 10 mJ ÷ 600 ≈ <strong>16.7 µJ</strong>로, 추론 한 번의 예산 전체와 맞먹습니다. 소자의 안정성이 곧 에너지 항목이 되는 이유입니다. Singh 2026의 권장 보고 항목도 시스템 에너지에 "보정·초기화를 나눠 얹은 추론 횟수"를 적고, 학습·프로그래밍 에너지는 따로 적으라고 합니다. <span class="src">Singh 2026, p.12, Table 2</span> 학습이나 한 번의 프로그래밍 에너지는 추론마다 반복되지 않는 한 추론 에너지와 따로 보고해야 한다고도 씁니다. <span class="src">Singh 2026, p.14</span></p>
+</section>
+<section id="논문을-읽을-때-확인할-질문" class="level4">
+<h4 class="anchored" data-anchor-id="논문을-읽을-때-확인할-질문">6-2. 논문을 읽을 때 확인할 질문</h4>
+<p>Singh 2026의 보고 체크리스트(Table 3)는 에너지 회계 항목으로 reservoir 요소 에너지 <span class="math inline">\(E_{res}\)</span>, 그리고 가능한 경우 자극 생성·획득·readout·초기화·보정의 기여와 측정값/추정값의 구분을 들고, 그 이유를 "경계를 정해 소자만의 값이 시스템 에너지로 해석되는 것을 막기 위해"라고 적습니다. 지연·처리율 항목으로는 부호화 시간, reservoir 변화 시간, 상태 획득 시간, readout 시간, 전체 추론 지연과 처리율을 듭니다. <span class="src">Singh 2026, p.20, Table 3</span> 이것을 오늘 배운 말로 바꾸면, 논문의 비용 주장 앞에서 다음을 묻습니다. <span class="tag tag-interp">해석</span></p>
+<ol type="1">
+<li>에너지·전력 숫자의 <strong>단위</strong>는? W인가 J인가, 무엇당인가(펄스, 스파이크, 추론)?</li>
+<li><strong>경계</strong>는? 소자만(①), 구동·읽기 회로까지(②), 장치 전체(③)?</li>
+<li><strong>측정인가 추정인가?</strong> 추정이면 어떤 부품 값을 가정했나?</li>
+<li>입력 부호화는 어느 경로인가? 실험실처럼 ADC → DAC를 거친다면 그 변환 비용은 들어갔나?</li>
+<li><strong>지연시간</strong>의 시작·끝은? 실시간 처리인가 재생인가? 초기화 대기는 들어갔나?</li>
+<li><strong>비교 대상</strong>은 같은 과제·같은 정확도·같은 경계의 경쟁자인가(Day 28–29의 기준선, Day 9의 MCU + 작은 신경망)?</li>
+<li><strong>보정·재학습</strong>은 얼마나 자주, 얼마의 비용으로 필요한가?</li>
+</ol>
+<figure class="fig paper figure"><img src="../assets/img/papers/singh2026-table3-energy.png" alt="Singh 2026 Table 3 가운데 머리줄(Reporting domain, Minimum information to report, Why it is needed)과 두 줄: Energy accounting(reservoir 요소 에너지 E_res, 가능하면 자극 생성·획득·readout·초기화·보정의 기여, 측정값과 추정값 구분 / 에너지 경계를 정해 소자만의 값이 시스템 에너지로 해석되는 것을 막음), Latency and throughput(부호화 시간, reservoir 변화 시간, 상태 획득 시간, readout 시간, 전체 추론 지연과 처리율 / 재료 고유 동역학을 시스템 전체 시간과 연결)" loading="lazy" class="figure-img"><figcaption><b>원문 표(일부).</b> Singh et al., <a href="https://doi.org/10.1002/adma.74897" target="_blank"><i>Adv. Mater.</i> 2026, e74897</a>, Table 3, p.20(머리줄과 Energy accounting·Latency and throughput 두 줄만 잘라 붙임). 볼 것: 가운데 열(Minimum information to report)의 낱말을 위 질문 목록과 짝지어 보라. 'Reservoir-element energy (E<sub>res</sub>)'는 경계 ①, 'stimulus generation, acquisition, readout, reset, and calibration'은 경계 ②·③과 6-1의 보정 비용, 'measured versus estimated'는 질문 3, 아래 줄의 'Encoding time … total inference latency'는 질문 5다. 오른쪽 열 첫 줄 'prevents device-only values from being interpreted as system energy'가 5구간 myth 상자의 요지와 같다. 표 전체는 Day 32 5구간에서 본다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p>Jiang 리뷰도 다른 분야(아날로그 in-memory 계산)에서 같은 요구를 합니다. 처리 속도나 지연만이 아니라 정확도 저하를 함께 정량화하고, 오차를 줄이는 기법의 면적·지연·에너지 오버헤드를 허용 범위와 함께 보고하는 업계 공통 벤치마크가 필요하다고 씁니다. <span class="src">Jiang 2026, p.1120</span> 오차를 줄이려고 붙인 회로와 절차도 비용이라는 뜻입니다.</p>
+</section>
+<section id="오늘의-반론" class="level4">
+<h4 class="anchored" data-anchor-id="오늘의-반론">오늘의 반론</h4>
+<p>가장 강한 반론은 이것입니다. <strong>"소재·소자 연구의 목적은 새로운 물리적 기능을 보이는 것이다. 원리 증명 논문에 전극부터 무선까지의 시스템 에너지를 요구하는 것은 과하고, 그런 기준이면 아무도 새 소자를 발표하지 못한다."</strong></p>
+<p>이 반론은 상당 부분 맞습니다. Singh 2026도 모든 원리 증명 연구가 이 요구를 다 만족할 필요는 없다고 씁니다. 다만 <strong>주장의 강도는 제시된 실험 증거의 수준과 일치해야 한다</strong>고 덧붙입니다. <span class="src">Singh 2026, p.19</span> 그러니 답은 "요구하느냐 마느냐"가 아니라 <strong>"무엇을 주장했느냐"</strong>에 달려 있습니다. <span class="tag tag-interp">해석</span></p>
+<ul>
+<li>reservoir 기능만 주장한다면: <span class="math inline">\(E_{res}\)</span>를 경계 ①이라고 밝혀 적으면 충분합니다.</li>
+<li>제목이나 초록에서 "저전력", "에너지 효율적"을 주장한다면: 같은 과제의 경쟁자와 같은 경계(최소 ②, 가능하면 ③)에서의 비교, 적어도 오늘 같은 가정 예산이 있어야 그 주장이 증거와 맞습니다.</li>
+<li>내 연구에서는: 소자 펄스 에너지를 낮추는 실험과 함께, <strong>상태를 읽는 데 필요한 전류·전압 크기와 읽는 시간</strong>을 기록해 두는 것이 3구간의 민감한 가정(TIA 전력)을 실제 숫자로 바꾸는 가장 싼 방법입니다. <span class="tag tag-interp">해석</span></li>
+</ul>
+<div class="think">
+<p>내 소자 하나로 오늘의 예산표를 채워 보세요. 펄스 전압·전류·시간을 넣어 <span class="math inline">\(E_{res}\)</span>를 계산하고, 상태를 읽을 때의 전류 크기(nA? µA?)와 읽는 데 필요한 시간을 적습니다. 그다음 "이 소자를 쓰는 장치가 실시간 처리인가 재생인가"를 정하고, 시간에 비례하는 항목이 무엇이 될지 적어 보세요. 채우지 못한 칸이 Day 41–42 논문 평가와 Phase 5 실험 계획의 재료입니다.</p>
+</div>
+<div class="quiz" data-day="d17" data-set="6-check"></div>
+<div class="keypoints">
+<ul>
+<li>보정 비용은 보정 사이의 추론 수로 나눠 얹는다. 10 mJ을 86,400번에 나누면 0.12 µJ, 600번에 나누면 16.7 µJ [가정, 계산]. 안정성이 곧 에너지 항목이다.</li>
+<li>논문의 비용 주장에는 단위·경계·측정/추정·부호화 경로·지연의 정의·비교 대상·보정 빈도를 묻는다 <span class="src">Singh 2026, p.12, 20</span> <span class="tag tag-interp">해석</span>.</li>
+<li>반론에 대한 답: 주장의 강도를 증거 수준에 맞춘다 <span class="src">Singh 2026, p.19</span>. "저전력"을 주장할 때만 시스템 경계 비교가 필요하다 <span class="tag tag-interp">해석</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>자료를 덮고 아래 표를 먼저 머릿속으로 채운 뒤 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+한 장 요약 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>정확도 옆에 무엇을 붙이나</td>
+<td>추론 한 번의 에너지[J], 지연시간[s], 처리율, 면적, 보정 비용. 전력이 작아도 오래 걸리면 에너지는 크다</td>
+<td>1 µW × 2 s = 2 µJ &gt; 100 µW × 1 ms = 0.1 µJ. 지표는 아직 합의 전 <span class="src">Roadmap 2026, p.8136</span></td>
+</tr>
+<tr class="even">
+<td>비용은 어디서 생기나</td>
+<td>전극 → 증폭+필터 → 입력 부호화 → 소자 → TIA → ADC → readout → 무선, 늘 켜진 MCU</td>
+<td>'완전 아날로그'도 MCU·증폭기·MUX가 있다 <span class="src">Zhong 2022, p.673–674</span></td>
+</tr>
+<tr class="odd">
+<td>소자는 시스템의 몇 %</td>
+<td>가정 예산에서 약 1%. 소자를 10배 좋게 해도 시스템은 약 1% 감소</td>
+<td>사전 테스트·먼저 만들어 보기에서 "소자가 fJ이면 저전력"이라 썼다면 달라질 지점 [가정, 계산]</td>
+</tr>
+<tr class="even">
+<td>오늘의 숫자</td>
+<td>실시간 박동 하나: A 21.05 / B 23.45 / C 24.15 µJ. TIA가 채널당 0.76 µW보다 작으면 B &lt; A(0.1 µW면 14.45 µJ)</td>
+<td>민감한 가정 하나가 결론을 뒤집는다 [가정]</td>
+</tr>
+<tr class="odd">
+<td>지연시간</td>
+<td>실시간 처리에서는 신호 길이가 공통이라 추가 지연 0.6 ms. 재생에서는 τ = 50 ms 소자가 박동당 750.6 ms</td>
+<td>소자 응답 시간 ≠ 시스템 지연 <span class="src">Singh 2026, p.19</span></td>
+</tr>
+<tr class="even">
+<td>숫자 비교</td>
+<td>단위·경계·측정/추정·과제가 같아야 한다. 22 vs 29,400 µW는 '제스처당 전력'이고, 보충자료에서 보면 둘 다 부품 값으로 계산한 추정이며 경계도 다르다(아날로그 쪽은 MCU 제외, 디지털 쪽은 데스크톱 CPU)</td>
+<td><span class="src">Zhong 2022, p.678–679, Supplementary Table 1</span> <span class="src">Roadmap 2026, p.8130</span></td>
+</tr>
+<tr class="odd">
+<td>오늘의 반론</td>
+<td>원리 증명 논문에 시스템 비용은 과하다</td>
+<td>주장의 강도 = 증거 수준 <span class="src">Singh 2026, p.19</span></td>
+</tr>
+<tr class="even">
+<td>모르는 것 하나</td>
+<td>내 소자의 상태를 읽는 회로의 실제 전력(TIA)과 읽기 시간</td>
+<td>측정 계획으로</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="quiz" data-day="d17" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<ol type="1">
+<li>정확도 외에 붙일 숫자(추론 한 번의 에너지, 지연시간, 처리율, 보정 비용)를 단위와 함께 적었나? 전력(W)과 에너지(J)를 섞지 않았나?</li>
+<li>실제 감지 사슬(전극 → 증폭+필터 → 부호화 → 소자 → 읽기 → ADC → readout)을 그리고, 소자를 쓰든 안 쓰든 남는 부분을 표시했나?</li>
+<li>가정을 드러낸 예산표로 소자의 몫을 계산했나? 결론을 뒤집는 가정이 무엇인지 적었나?</li>
+<li>실시간 처리와 재생에서 소자의 시간척도가 지연·에너지에 주는 영향을 구별했나?</li>
+<li>폴더의 숫자 하나 이상을 "단위·경계·측정/추정·과제"로 읽었나? "몇 배 효율적"이라는 문장이 조건 없이 남아 있지 않나?</li>
+<li>오늘의 반론에 "무엇을 주장했느냐"라는 조건을 붙여 답했나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 같은 과제·같은 정확도에서 장치 전체(경계 ③)의 추론 한 번 에너지가 MCU + 작은 신경망보다 작을 것 vs (메커니즘이 허용하는 것) 이온 소자의 작은 전류·느린 상태를 읽는 데 드는 TIA·대기 비용. 가정 예산에서는 읽기 회로가 결론을 쥐고 있다 [가정].</li>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 저장 데이터를 빠르게 다시 처리하는 처리율 vs (메커니즘이 허용하는 것) τ = 수십 ms의 소자는 박동당 약 0.75 s(초기화 포함). 실시간 처리 응용으로 좁히는 근거 후보.</li>
+<li><strong>아직 모르는 것:</strong> 이온 소자 상태를 읽는 저전력 TIA의 실제 전력과 잡음 <span class="tag tag-unverified">미확인</span>. / Zhong 2022 같은 아날로그 RC 시스템을 MCU까지 포함한 경계에서 실제로 잰 전력(보충자료의 22 µW는 MCU를 뺀 추정). / 내 소자의 보정 주기(Day 32).</li>
+<li><strong>용어집:</strong> 추론, 추론 한 번의 에너지, 지연시간, 처리율, TOPS/W, 파레토 경계, 아날로그 프런트엔드(AFE), 입력 부호화, 구동 증폭기, 임피던스·트랜스임피던스, TIA, MUX, 적분기, 완전 디지털/혼합형/완전 아날로그 RC, reservoir 요소 에너지 <span class="math inline">\(E_{res}\)</span>, 회계 경계, 민감도 분석, 실시간 처리/재생, 초기화 대기, 버퍼, 보정 비용의 분할.</li>
+<li><strong>접는 기준 후보:</strong> "내 소자가 들어갈 장치에서 '시간에 비례하는 항목'(읽기 회로·대기)을 줄일 방법을 하나도 제시하지 못하면 '저전력'을 연구 동기로 쓰지 않는다."</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다. 아래는 모두 보충이며, 오늘 본문은 이것 없이 읽히도록 썼습니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Liang 2024, <em>Nat. Electron.</em> 7, 193–206. p.195(4–10 bit ADC/DAC와 잡음), p.201(물리 RC의 장점은 정확도가 아니라 시스템 복잡도·전력·학습 비용·속도), p.202(디지털 RC보다 자원을 더 쓰는 물리 RC는 무의미).</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
+<ul>
+<li>Singh 2026, <em>Adv. Mater.</em> e74897 (Readable papers3). p.12 Table 2(시스템 에너지·지연 항목), p.14 3.5–3.6절(<span class="math inline">\(E_{res}\)</span> 식, 상충을 합친 점수로 줄이지 말 것), p.19 5.2–5.3절(소자 에너지 ≠ 시스템 에너지, 고유 응답 시간 ≠ 시스템 지연, 회계 경계), p.20 Table 3, p.21–22 Table 4(보고 관행 예시).</li>
+<li>Zhong 2022, <em>Nat. Electron.</em> 5, 672–681 (Readable papers3). p.673 Fig. 1(세 종류의 RC 시스템과 ADC 위치), p.674(전원 모듈·MCU·주변회로, 노드 = 소자 + 주변회로), p.678 Fig. 5g와 p.679(전력 절감의 두 요인, Methods의 TIA·적분기·디지털 가변저항).</li>
+<li>Roadmap 2026, <em>ACS Nano</em> 20, 8102–8163. p.8119(6.7 fJ/스파이크 CMOS 뉴런), p.8126(이온 µs–s vs 전자 ns, 경계의 클록·버퍼), p.8130(주변회로 최대 70%), p.8135(3.6 pJ/스파이크), p.8136(벤치마크 지표와 합의 부재).</li>
+<li>Jiang 2026, <em>Nat. Mater.</em> 25, 1110–1124. p.1120(정확도 저하와 오차 완화 오버헤드를 함께 보고하는 벤치마크).</li>
+</ul>
+<p><strong>폴더 밖</strong> <span class="tag tag-unverified">미확인</span></p>
+<ul>
+<li>저전력 생체신호 프런트엔드(증폭기·필터)와 TIA의 실제 전력, ADC 변환당 에너지의 공정별 값은 회로 분야의 조사 문헌에 있으며 폴더에 없습니다. 오늘의 가정값을 실제 값으로 바꾸려면 이 문헌을 따로 확인해야 합니다.</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d17">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "가슴에 붙인 심전도 패치가 심장 신호를 받아 '이상 있음'을 휴대폰에 알리기까지 거치는 부품을 상자와 화살표로 그리고, 각 상자 옆에 에너지를 얼마나 쓸지 '많음/중간/적음'으로 어림해 적어 보세요. 이온 소자를 넣는다면 어느 상자를 대신하고 어느 상자는 그대로 남을지 색으로 표시하세요.", "items": [{"id": "d17-p01", "ref": "#ch-beyond-accuracy", "type": "ox", "q": "같은 과제에서 두 장치의 정확도가 같다면, 둘 중 어느 쪽이 나은지 더 따져 볼 것은 없다.", "a": false, "why": "정확도 옆에 추론 한 번의 에너지, 지연시간, 처리율, 면적·부품 수, 보정·재학습 비용을 함께 봐야 합니다. 물리 RC의 장점이 정확도가 아니라 시스템 비용 쪽에 있다면, 그 비용을 재야 동기가 검증됩니다(1구간)."}, {"id": "d17-p02", "ref": "#ch-sensing-chain", "type": "mc", "q": "이온 소자 reservoir를 쓴 감지 장치에서 에너지가 몰리기 쉬운 곳은?", "options": ["소자 자체", "소자 주변의 회로 — 입력 펄스 만들기, 상태 읽기, 숫자로 바꾸기, 늘 켜진 제어 칩", "부품을 잇는 전선", "장치의 겉 케이스"], "a": 1, "why": "계산의 물리는 소자가 하지만, 그 물리를 쓸 수 있게 만드는 일(펄스 생성, 상태 읽기, 변환, 시간 맞추기)은 주변회로가 하고 에너지도 그쪽에 몰리기 쉽습니다. 전극·증폭·무선처럼 소자를 쓰든 안 쓰든 남는 부분도 있습니다(2구간)."}, {"id": "d17-p03", "ref": "#ch-energy-budget", "type": "short", "q": "소자에 0.5 V를 걸었더니 1 µA의 전류가 1 ms 동안 일정하게 흘렀다. 소자가 쓴 에너지는 몇 nJ인가? (숫자만)", "a": ["0.5", "0.5nJ", "0.5 nJ", "500pJ", "500 pJ", ".5"], "why": "일정한 펄스면 E = V × I × t = 0.5 V × 10⁻⁶ A × 10⁻³ s = 5 × 10⁻¹⁰ J = 0.5 nJ입니다. 다만 이것은 소자 한 개의 몫이고, 시스템 예산에서는 작은 부분일 수 있습니다(3구간)."}, {"id": "d17-p04", "ref": "#ch-energy-budget", "type": "ox", "q": "소자 RC 장치에서 소자 한 개의 에너지를 10분의 1로 줄이면, 장치 전체의 에너지도 대략 10분의 1로 준다.", "a": false, "why": "가정을 표로 드러낸 예산에서 소자의 몫은 약 1%라, 소자를 10배 좋게 해도 시스템은 약 1%만 줄었습니다. 결론은 상태를 읽는 증폭기 전력 같은 민감한 가정 하나에 달릴 수 있고, 그것이 곧 측정할 대상입니다(3구간)."}, {"id": "d17-p05", "ref": "#ch-latency", "type": "ox", "q": "실시간으로 들어오는 신호를 처리할 때, 이온 소자의 시간척도(수십 ms)가 신호의 시간척도와 맞는다면 소자가 장치에 더하는 지연은 신호가 끝난 뒤 상태를 읽고 판정하는 시간 정도뿐이다.", "a": true, "why": "신호 길이는 소자를 쓰든 안 쓰든 같으므로, 시간척도가 맞으면 추가 지연은 상태 읽기와 readout(예: 약 0.6 ms)뿐입니다. 느림이 지연·에너지 문제가 되는 것은 저장한 데이터를 다시 넣는 경우입니다(4구간)."}, {"id": "d17-p06", "ref": "#ch-latency", "type": "mc", "q": "저장해 둔 하루치 심전도를 시간상수 50 ms인 소자에 다시 넣어 처리한다. 문제가 되는 것은?", "options": ["아무 문제도 없다", "데이터가 지워진다", "소자의 시간이 그대로 지연이 되고, 기다리는 동안 켜져 있는 회로의 대기 전력이 에너지를 크게 늘린다", "정확도가 반드시 100%가 된다"], "a": 2, "why": "재생에서는 박동마다 입력 500 ms + 초기화 대기 250 ms가 걸려 하루 기록에 약 18시간이 들고, 지연 × 대기 전력이 예산의 89%를 차지했습니다(가정 계산). 논문이 어느 사용 상황을 가정하는지 먼저 확인합니다(4구간)."}, {"id": "d17-p07", "ref": "#ch-like-for-like", "type": "mc", "q": "논문 A는 '스파이크 하나에 6.7 fJ', 논문 B는 '제스처 하나에 22 µW'를 보고했다. 두 숫자로 말할 수 있는 것은?", "options": ["숫자가 훨씬 작으니 A가 B보다 훨씬 효율적이다", "B가 A보다 효율적이다", "두 장치의 효율은 같다", "단위(에너지 J와 전력 W)도, 센 범위(소자 하나인지 장치 전체인지)도, 과제도 달라 그대로 비교할 수 없다"], "a": 3, "why": "비교하려면 같은 일을 세는 단위, 같은 경계, 측정/추정 구분, 같은 과제·정확도가 필요합니다. 6.7 fJ/스파이크, 0.5 nJ/펄스, 22 µW/제스처는 서로 다른 경계·단위의 숫자입니다(5구간)."}, {"id": "d17-p08", "ref": "#ch-cost-report", "type": "mc", "q": "소자가 시간이 지나며 조금씩 변해 주기적으로 다시 맞춰야(보정) 한다. 이것이 추론 한 번의 에너지에 주는 영향은?", "options": ["보정 에너지를 보정 사이의 추론 횟수로 나눈 만큼 더해진다 — 자주 보정할수록 커진다", "영향이 없다 — 보정은 추론과 따로이므로", "보정할수록 추론 에너지가 줄어든다", "보정 에너지는 언제나 무시할 만큼 작다"], "a": 0, "why": "보정 10 mJ을 하루 86,400번의 추론에 나누면 0.12 µJ이지만, 600번에 나누면 16.7 µJ이 얹힙니다(가정 계산). 그래서 안정성이 곧 에너지 항목입니다(6구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 전력과 에너지", "items": [{"id": "d17-q01", "type": "mc", "q": "장치 P는 10 µW로 추론 한 번에 0.5 s가 걸리고, 장치 Q는 1 mW로 추론 한 번에 2 ms가 걸린다. 추론 한 번의 에너지가 작은 쪽은?", "options": ["P — 전력이 100배 작으니까", "Q — P는 10 µW × 0.5 s = 5 µJ, Q는 1 mW × 0.002 s = 2 µJ", "둘이 같다", "전력만으로는 알 수 없고 정확도를 알아야 한다"], "a": 1, "why": "에너지 = 전력 × 시간. P 5 µJ, Q 2 µJ이라 Q가 작다. 흔한 혼동은 전력(W)이 작으면 일 하나의 에너지(J)도 작다고 보는 것이다. 둘을 잇는 것이 지연시간이다. 1구간 기초 계단.", "ref": "#ch-beyond-accuracy"}, {"id": "d17-q02", "type": "mc", "q": "세 설계 X(정확도 95%, 20 µJ/추론), Y(93%, 5 µJ), Z(92%, 8 µJ) 중 어떤 응용에서도 고를 이유가 없는 것은?", "options": ["X", "Y", "Z", "셋 다 응용에 따라 고를 수 있다"], "a": 2, "why": "Z는 Y보다 정확도도 낮고 에너지도 크다(Y가 Z를 지배한다). X와 Y는 한쪽이 낫고 다른 쪽이 못해 둘 다 파레토 경계에 남는다. X냐 Y냐는 응용이 정한다. 1구간 파레토 예.", "ref": "#ch-beyond-accuracy"}]}, "1-end": {"kind": "end", "title": "1구간 마무리", "items": [{"id": "d17-q03", "type": "ox", "q": "TOPS/W가 더 높은 칩은 같은 과제에서 추론 한 번의 에너지도 반드시 더 작다.", "a": false, "why": "TOPS/W는 1 J당 연산 수(10¹² op/J)이지만, 연산 하나를 세는 방식이 구조마다 다르고(디지털 곱셈 vs 아날로그 전류 합산), 과제 하나에 드는 연산 수도 모형마다 다르며, 주변회로를 포함했는지도 다르다. 그래서 같은 과제의 추론당 에너지를 따로 봐야 한다. 1구간.", "ref": "#ch-beyond-accuracy"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 감지 사슬", "items": [{"id": "d17-q04", "type": "mc", "q": "몸에 붙이는 심전도 장치에서, 이온 소자 reservoir를 쓰든 디지털 MCU로만 처리하든 똑같이 필요한 부분은?", "options": ["소자에 펄스를 만들어 주는 DAC", "전극과 증폭+필터(아날로그 프런트엔드)", "소자의 상태를 읽는 TIA", "소자 상태를 숫자로 바꾸는 50번의 ADC"], "a": 1, "why": "전극의 mV 신호는 어느 방법이든 키우고 걸러야 한다. 그래서 비교할 때 양쪽에 똑같이 넣는 '공통 항목'이다. DAC·TIA·상태 ADC는 소자 경로에만 있다. 2구간 단계 2.", "ref": "#ch-sensing-chain"}, {"id": "d17-q05", "type": "ox", "q": "Zhong 2022의 '완전 아날로그' RC 시스템에는 디지털 부품이 하나도 없다.", "a": false, "why": "그 시스템에는 전원 모듈과 MCU(제어 신호·데이터 전송)가 있고, 증폭기·MUX·디지털 가변저항 같은 주변회로가 있다(p.674, 679). '완전 아날로그'는 reservoir와 readout 사이의 ADC를 없앴다는 뜻이다. 2구간.", "ref": "#ch-sensing-chain"}]}, "2-end": {"kind": "end", "title": "2구간 마무리", "items": [{"id": "d17-q06", "type": "mc", "q": "Zhong 2022 Fig. 1b의 혼합형 RC에서 ADC는 어디에 있나?", "options": ["입력 신호가 reservoir에 들어가기 전", "아날로그 reservoir와 디지털 readout 사이", "readout 뒤, 최종 출력에만", "없다"], "a": 1, "why": "혼합형은 아날로그 신호를 reservoir가 바로 받지만, readout이 디지털이라 reservoir 상태를 숫자로 바꾸는 ADC가 그 사이에 생긴다. ADC는 '다음 단계가 디지털인 자리'마다 생긴다. 2구간 원문 그림.", "ref": "#ch-sensing-chain"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 에너지 예산 계산", "items": [{"id": "d17-q07", "type": "short", "q": "(풀이 예시 확인) 상태 읽기 증폭기(TIA) 10채널, 채널당 1 µW가 0.5 s 동안 켜져 있으면 몇 µJ인가? (숫자와 단위)", "a": ["5 µJ", "5µJ", "5 uJ", "5uJ", "5", "5 마이크로줄"], "why": "10 × 1 µW = 10 µW, 10 µW × 0.5 s = 5 µJ. 시간에 비례하는 항목은 '전력 × 켜져 있는 시간'. W × s = J. 3-4절.", "ref": "#ch-energy-budget"}, {"id": "d17-q08", "type": "short", "q": "(일부 채우기) 같은 10채널이 입력 50단계 × 1 ms = ___ s 동안만 켜져 있다. 에너지는 10 µW × ___ s = ? µJ", "a": ["0.5 µJ", "0.5µJ", "0.5 uJ", "0.5uJ", "0.5", "500 nJ", "500nJ"], "why": "50 × 1 ms = 0.05 s. 10 µW × 0.05 s = 0.5 µJ(= 500 nJ). 켜진 시간이 10분의 1이면 에너지도 10분의 1이다. 그래서 소자가 빨라 짧게 켜도 되면 시간 비례 항목이 줄어든다(4구간). 3-4절.", "ref": "#ch-energy-budget"}, {"id": "d17-q09", "type": "short", "q": "(혼자 풀기) MCU가 5 µW로 대기하며, 추론 한 번의 지연시간이 2 s다. 대기에만 드는 에너지는 몇 µJ인가?", "a": ["10 µJ", "10µJ", "10 uJ", "10uJ", "10"], "why": "5 µW × 2 s = 10 µJ. 지연이 길면 대기 전력이 작아도 추론당 에너지가 커진다. 3-4절과 4구간 단계 6.", "ref": "#ch-energy-budget"}, {"id": "d17-q10", "type": "short", "q": "소자에 0.2 V를 2 ms 동안 걸었고 전류가 0.5 µA로 일정했다. E = V × I × t는 몇 nJ인가?", "a": ["0.2 nJ", "0.2nJ", "0.2", "200 pJ", "200pJ", "2×10⁻¹⁰ J", "2e-10"], "why": "0.2 × (0.5 × 10⁻⁶) × (2 × 10⁻³) = 2 × 10⁻¹⁰ J = 0.2 nJ. 전압·전류가 펄스 동안 일정하면 적분 ∫V·I dt는 곱셈이 된다. 3-1절.", "ref": "#ch-energy-budget"}]}, "3-end": {"kind": "end", "title": "3구간 마무리", "items": [{"id": "d17-q11", "type": "mc", "q": "3구간의 예산 B(합 23.45 µJ, 소자 0.25 µJ)에서 소자 에너지만 10분의 1로 줄이면 합은?", "options": ["약 2.3 µJ (10분의 1)", "약 11.7 µJ (절반)", "약 23.2 µJ (약 1% 감소)", "변하지 않는다"], "a": 2, "why": "0.25 µJ가 0.025 µJ가 되어 0.225 µJ만 준다. 23.45 − 0.225 ≈ 23.2 µJ. 소자의 몫이 1%라 소자를 아무리 좋게 해도 시스템은 거의 안 바뀐다. 흔한 혼동: 소자 개선 배율을 시스템 개선 배율로 옮기는 것. 3-3절.", "ref": "#ch-energy-budget"}, {"id": "d17-q12", "type": "mc", "q": "3구간의 가정 안에서 '이온 RC(B)가 디지털만(A)보다 싼가'의 답을 뒤집는 가정은?", "options": ["소자 펄스의 전압", "상태를 읽는 TIA의 채널당 전력", "무선으로 보내는 비트 수", "아날로그 프런트엔드의 전력"], "a": 1, "why": "TIA가 채널당 1 µW면 B 23.45 µJ > A 21.05 µJ이고, 채널당 0.76 µW보다 작으면 B가 더 싸진다(0.1 µW면 B 14.45 µJ < A). 무선과 AFE는 A·B에 똑같이 들어가 순위를 바꾸지 못하고, 소자는 몫이 1%라 영향이 작다. 이렇게 가정을 바꿔 결론이 언제 뒤집히는지 보는 것이 민감도 분석이다. 3-3절.", "ref": "#ch-energy-budget"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 지연시간", "items": [{"id": "d17-q13", "type": "mc", "q": "가슴에 붙인 장치가 심전도를 실시간으로 처리한다. 박동 하나는 1 s 동안 들어온다. τ = 50 ms 이온 소자가 시스템에 더하는 지연은 대략?", "options": ["박동 1 s + 초기화 대기 250 ms", "박동이 끝난 뒤 상태 읽기와 readout 시간(이 예에서 약 0.6 ms)", "τ와 같은 50 ms", "디지털 장치보다 항상 1,000배 길다"], "a": 1, "why": "실시간 처리에서 박동 1 s는 어느 방법이든 기다려야 하는 공통 시간이고, 소자는 그동안 신호와 함께 변한다. 박동이 끝난 뒤 추가로 드는 것은 읽기·readout뿐이다. 초기화 대기를 따로 두는 것은 저장한 데이터를 다시 넣는 재생의 경우다. 4구간 경우 1.", "ref": "#ch-latency"}, {"id": "d17-q14", "type": "short", "q": "저장한 박동을 소자에 다시 넣는다. 앞 박동의 흔적이 약 0.7%로 줄 때까지 5τ를 기다린다면, τ = 50 ms일 때 초기화 대기는 몇 ms인가?", "a": ["250 ms", "250ms", "250", "0.25 s", "0.25s", "0.25"], "why": "5 × 50 ms = 250 ms. 지수 감쇠에서 e의 지수 −5 ≈ 0.007이라 약 0.7%가 남는다. 허용 잔여를 더 작게 잡으면 대기도 길어진다. 4구간 단계 2.", "ref": "#ch-latency"}]}, "4-end": {"kind": "end", "title": "4구간 마무리", "items": [{"id": "d17-q15", "type": "mc", "q": "하루 기록 86,400박동을 박동당 0.75 s 걸리는 소자 한 세트로 다시 처리하면 대략 얼마나 걸리나?", "options": ["약 18분", "약 18시간", "약 1.8일", "약 2분"], "a": 1, "why": "86,400 × 0.75 s ≈ 64,800 s ≈ 18시간(본문의 750.6 ms로 계산하면 64,852 s). 세트를 18개 두면 1시간으로 줄지만 TIA·ADC 채널과 면적·대기 전력도 18배가 된다. 그래서 처리율에는 가정한 병렬 동작을 함께 적는다. 4구간 단계 4.", "ref": "#ch-latency"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 같은 경계", "items": [{"id": "d17-q16", "type": "ox", "q": "Zhong 2022 Fig. 5g의 '제스처당 전력' 22 µW vs 29,400 µW는, 같은 과제에서 아날로그 RC의 추론 한 번 에너지가 1,000배 이상 작다는 것을 본문만으로 증명한다.", "a": false, "why": "축의 양은 전력(W)이라 에너지로 바꾸려면 처리 시간이 필요하고, 두 값의 추정 방법과 무엇을 포함했는지는 본문이 아니라 보충자료(Supplementary Table 1)에 있다. 보충자료를 보면 둘 다 부품 값으로 계산한 추정이고 경계도 다르다(아날로그: 소자·증폭기·MUX, MCU 제외 / 디지털: 데스크톱 CPU 전력 × 사용률). 저자들이 드는 절감 요인도 ADC 제거와 작은 reservoir라는 시스템 구조다(p.679). 5구간.", "ref": "#ch-like-for-like"}, {"id": "d17-q17", "type": "mc", "q": "어떤 논문이 'reservoir 펄스 에너지 0.5 nJ'만 적었다. Singh 2026의 기준으로 아직 답하지 않은 질문은?", "options": ["소자가 몇 V에서 동작했나", "readout·ADC·자극 생성·보정을 포함한 추론 한 번의 시스템 에너지는 얼마인가", "펄스가 몇 개였나", "소자가 휘발성인가"], "a": 1, "why": "0.5 nJ는 경계 ①(소자)의 값이다. Singh 2026은 소자 에너지를 자극 생성·획득·ADC·readout·초기화·보정과 나눠 적고, 시스템 에너지를 따로 보고하라고 권한다(p.12, 19). Table 4의 예도 하류 readout·ADC를 다 세지 않았다고 적는다(p.22). 5구간.", "ref": "#ch-like-for-like"}]}, "5-end": {"kind": "end", "title": "5구간 마무리", "items": [{"id": "d17-q18", "type": "mc", "q": "다음 중 나란히 놓고 비율을 말해도 되는 짝에 가장 가까운 것은?", "options": ["45 nm CMOS 뉴런 회로의 6.7 fJ/스파이크 vs 생물 뉴런의 수십 pJ/스파이크", "같은 심전도 과제·같은 정확도에서, 전극부터 판정까지 같은 경계로 잰 두 장치의 추론 한 번 에너지", "소자 0.5 nJ/펄스 vs MCU 20 nJ/샘플", "나노접합 0.07 nW vs 제스처당 22 µW"], "a": 1, "why": "비교의 네 조건(같은 일을 세는 단위, 같은 경계, 측정/추정 구분, 같은 과제·정확도)을 모두 맞춘 것은 두 번째뿐이다. 첫째는 회로 최선값 vs 2차 문헌 추정, 셋째는 경계가 다른 부분끼리, 넷째는 단위부터 다르다. 5구간 표.", "ref": "#ch-like-for-like"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 보고와 반론", "items": [{"id": "d17-q19", "type": "short", "q": "보정 한 번에 10 mJ이 들고, 하루에 한 번 보정하며 그 사이 추론이 86,400번이다. 추론 한 번에 얹히는 보정 에너지는 약 몇 µJ인가?", "a": ["0.12 µJ", "0.12µJ", "0.116 µJ", "0.116µJ", "0.12", "0.116", "116 nJ", "116nJ", "약 0.12 µJ", "0.12 uJ"], "why": "10 mJ ÷ 86,400 ≈ 1.16 × 10⁻⁷ J ≈ 0.12 µJ. 10분마다(600번마다) 보정하면 10 mJ ÷ 600 ≈ 16.7 µJ로 추론 예산 전체와 맞먹는다. 안정성이 곧 에너지 항목이다. 6-1절.", "ref": "#ch-cost-report"}, {"id": "d17-q20", "type": "mc", "q": "'원리 증명 논문에 시스템 비용까지 요구하는 것은 과하다'는 반론에 대해 오늘 자료가 붙인 조건은?", "options": ["모든 소자 논문은 장치 전체의 에너지를 측정해야 한다", "소자 논문은 에너지를 보고할 필요가 없다", "주장의 강도를 증거에 맞춘다: '저전력'을 주장하면 같은 과제·같은 경계의 비교가 필요하고, reservoir 기능만 주장하면 경계를 밝힌 소자 에너지로 충분하다", "정확도가 소프트웨어와 같으면 비용은 묻지 않는다"], "a": 2, "why": "Singh 2026은 모든 원리 증명 연구가 모든 요구를 만족할 필요는 없지만 주장의 강도는 증거 수준과 일치해야 한다고 쓴다(p.19). 그래서 기준은 '무엇을 주장했느냐'다. 6구간 오늘의 반론.", "ref": "#ch-cost-report"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d17-q21", "type": "mc", "q": "'이 이온 소자는 펄스 하나에 수 fJ만 쓰므로 이 RC 시스템은 저전력이다.' 이 문장에서 가장 먼저 빠진 것은?", "options": ["소자의 화학 조성", "에너지를 센 경계(소자만인지 장치 전체인지)와, 같은 과제의 경쟁자와 같은 경계에서 비교한 추론 한 번 에너지", "펄스의 모양", "소자의 retention"], "a": 1, "why": "fJ/펄스는 경계 ①의 숫자다. 가정 예산에서 소자는 시스템의 약 1%였고, 결론은 읽기 회로·대기·변환 횟수가 쥐었다. '저전력'은 경계 ③에서 같은 과제·정확도의 경쟁자와 비교해야 말할 수 있다. 3·5구간.", "ref": "#ch-like-for-like"}, {"id": "d17-q22", "type": "ox", "q": "소자가 느릴수록 시스템의 추론 한 번 에너지는 언제나 커진다.", "a": false, "why": "실시간 처리에서는 신호 길이가 어느 방법에나 공통이라 소자의 τ가 신호와 맞으면 느림이 추가 지연이 되지 않는다(단, 읽기 회로가 신호 동안 켜져 있는 비용은 남는다). 저장한 데이터를 다시 넣는 재생에서는 τ가 곧 지연이고, 지연 × 대기 전력이 에너지가 된다. '언제나'가 틀렸다. 4구간.", "ref": "#ch-latency"}, {"id": "d17-q23", "type": "mc", "q": "3구간에서 디지털 입력 경로(C)가 아날로그 입력 경로(B)보다 비싼 이유는?", "options": ["소자 펄스 에너지가 더 크다", "신호를 ADC로 숫자로 바꾼 뒤 DAC로 다시 전압 펄스를 만들어, 변환을 두 번 한다", "readout 계산이 더 복잡하다", "무선으로 더 많이 보낸다"], "a": 1, "why": "C는 입력 ADC 0.25 µJ와 DAC 0.5 µJ를 더 쓴다(아날로그 → 숫자 → 아날로그). 실험실 시연이 흔히 이 꼴이라, 논문의 '저전력' 주장이 실제 장치의 어느 경로를 가정하는지 확인해야 한다. 3-3절.", "ref": "#ch-energy-budget"}, {"id": "d17-q24", "type": "mc", "q": "소자 RC 논문의 비용 주장을 확인할 때 오늘 목록에 없는 질문은?", "options": ["에너지 숫자의 단위와 회계 경계는?", "지연시간의 시작·끝은, 초기화 대기가 들어갔나?", "보정·재학습은 얼마나 자주, 얼마의 비용으로?", "소자 사진이 얼마나 선명한가?"], "a": 3, "why": "오늘의 질문 목록: 단위, 경계, 측정/추정, 부호화 경로, 지연의 정의, 비교 대상, 보정 빈도(6-2절). Singh 2026 Table 3의 에너지 회계·지연·처리율 항목을 오늘의 말로 옮긴 것이다(p.20).", "ref": "#ch-cost-report"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d17b">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d18.html">Day 32 · 재현성과 신뢰성, Phase 3 종합 →</a></p>
+</div>
+</section>
+<section id="writing" class="level2">
+<h2 class="anchored" data-anchor-id="writing">선택 활동: 글로 정리하기</h2>
+<details class="fold writing-fold"><summary>선택 활동 펼치기 · 백지 회상, 가르치듯 내 답, 사전 테스트 다시 풀기 (학습 완료와 무관)</summary>
+<p><strong>가르치듯 내 답.</strong> 후배에게 설명한다고 생각하고 짧게(3–5문장 또는 작은 도식 하나) 답합니다.</p>
+<div class="editable" data-file="d17-answer" data-title="내 답" data-template="answer"></div>
+<p><strong>사전 테스트 다시 풀기.</strong> 같은 문제를 이유와 함께 다시 풉니다(정답을 이미 본 문제라 이해 점검 점수로 쓰지 않습니다).</p>
+<div class="quiz" data-day="d17" data-set="pre" data-mode="post"></div>
+</details>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d17a.html" class="pagination-link" aria-label="Day 30 · 정확도 옆의 숫자와 에너지 예산">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d18.html" class="pagination-link" aria-label="Day 32 · 재현성과 신뢰성, Phase 3 종합">
+        <span class="nav-page-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

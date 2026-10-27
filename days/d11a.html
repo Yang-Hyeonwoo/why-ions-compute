@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 18. 정보처리용량과 노드 수 한계 – Why Ions Compute</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d11b.html" rel="next">
+<link href="../days/d10b.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">커버</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">전체 학습 지도</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">장부</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../ledger/bottleneck.html">
+ <span class="dropdown-text">병목 장부</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/unknowns.html">
+ <span class="dropdown-text">아직 모르는 것</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/glossary.html">
+ <span class="dropdown-text">용어집</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/kill-criteria.html">
+ <span class="dropdown-text">접는 기준</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/references.html">
+ <span class="dropdown-text">참고문헌</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/questions.html">
+ <span class="dropdown-text">질문 모음</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../rules.html"> 
+<span class="menu-text">공부 규칙</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07a.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d11a.html">Day 18 · 정보처리용량과 노드 수 한계</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">전체 학습 지도</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">장부</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">병목 장부</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">아직 모르는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어집</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">접는 기준</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">질문 모음</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rules.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">공부 규칙</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">지난 학습 복습</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07a.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d11a.html">Day 18 · 정보처리용량과 노드 수 한계</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 18. 정보처리용량과 노드 수 한계</h1>
+<p class="subtitle lead">Phase 2 · RC는 왜, 어떻게 작동하는가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> — reservoir가 과거 입력의 어떤 함수를 얼마나 되살리는지 어떻게 재고, 총량은 왜 노드 수를 넘지 못하나?</p>
+<p><strong>배울 핵심</strong> — 목표 하나의 용량 C = 1 − 오차/분산, 차수(1 = 기억, 2 이상 = 비선형)와 그 합인 MC·IPC, 용량 총합 ≤ 서로 독립인 상태 수</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 20–21 MC 실습, Day 22–23 지연별 MC, Day 24–25 rank로 독립 상태 세기, Day 43–44 소자 배열. '소자를 더 놓으면 용량이 느나'를 판단할 때</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d11a">
+  <li data-step="review"><a href="#review"><b>1</b>지난 학습 복습</a></li>
+  <li data-step="lesson"><a href="#lesson"><b>2</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>3</b>학습 완료</a></li>
+</ol>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
+<div class="flow-line">
+<p>지난 학습 단위(Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+</div>
+<div class="quiz" data-day="d11" data-set="review"></div>
+</section>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">사전 테스트 (선택)</h2>
+<details class="fold pretest-fold"><summary>사전 테스트 펼치기 · 배우기 전에 짐작해 보는 문제 (선택)</summary><div class="quiz" data-day="d11" data-set="pre"></div>
+</details>
+</section>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<div class="lesson-meta">
+<p>학습 구간 7개(1–7) · 한 번에 다 읽지 않아도 됩니다(구간 안의 '멈추기 좋은 곳'에서 끊어 읽어도 됩니다) · 선택 영상 2개(모두 선택) · 퀴즈 26문항 · 내 답 쓰기는 따로. 네 가지 이력 예(그림 2), 겹치지 않는 다항식(그림 3), 그림자 계산(그림 4)의 숫자는 <strong>Claude가 계산한 교육용 예</strong>이고, 그림 5(Day 19)–7의 숫자는 Claude가 돌린 <strong>시뮬레이션</strong>입니다(측정이 아님). 원문 그림은 한 장입니다(Zhong 2022 Fig. 2a: 실제 소자 24개의 I–V 측정과 회로 기판).</p>
+<details class="meta-more">
+<summary>
+근거 표기와 Claude가 대조한 범위
+</summary>
+<p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024는 p.196(병렬 소자의 MC 겹침, 소자 간 편차), p.200("Performance benchmark"의 MC·IPC 문단); Stepney 2024는 4.5절(p.673), 7.2.2절(p.676–677, NARMA), 7.3.2–7.3.3절(p.679–680, MC·IPC와 그 한계); Singh 2026은 p.5–6(DR4), p.8(3.1절), p.13(3.2–3.3절)만; Zhong 2022는 p.674(Fig. 2와 그 설명)만. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 정보처리용량의 원 논문(Dambre 2012)은 폴더에 없지만 공개 본문(PMC)에서 초록, Theorem 4·7과 그 조건, 'Total capacity'·잡음 절을 대조했습니다(보충자료는 미대조). memory–nonlinearity 상충을 다룬 논문(Inubushi &amp; Yoshimura 2017)은 폴더에 없어 공개 초록만 확인했고 본문 내용은 <span class="tag tag-unverified">미확인</span>이며, 상충의 근거로는 Liang이 요약한 문장을 씁니다. 그림 5(Day 19)–7의 숫자는 Claude가 <code>tools/esn.py</code>로 돌린 시뮬레이션이고, 그림 2–4는 <code>tools/figs_d11.py</code>가 계산했습니다.</p>
+</details>
+</div>
+<p>Day 15에서 reservoir가 기억을 갖는 법을, Day 16–17에서 비선형을 갖는 법을 따로 보았습니다. 오늘은 둘을 함께 놓고 묻습니다. <strong>기억은 길수록, 비선형은 강할수록 좋은가?</strong> 이 질문은 이온 소자 연구에 바로 닿습니다. "더 긴 retention(바뀐 상태가 유지되는 시간)", "더 큰 정류비(한 방향 전류 ÷ 반대 방향 전류)", "더 큰 히스테리시스(전압을 올릴 때와 내릴 때 전류가 다른 길로 가는 정도)"가 논문의 개선 목표로 자주 나오는데, 그것들이 reservoir로서 '더 좋음'을 뜻하는지가 오늘의 끝에 놓입니다.</p>
+<ol type="1">
+<li>기억과 비선형은 각각 무엇을 사 주나? 과제는 무엇을 요구하나?</li>
+<li>둘을 같은 저울로 재는 법: 목표 하나의 용량, 기저 함수, 그리고 그 합인 정보처리용량(IPC)이란?</li>
+<li>왜 그 총량은 노드 수를 넘지 못하나? (노드 2개가 만드는 평면의 그림자로 손 계산)</li>
+<li>기억과 비선형은 정말 서로 자리를 빼앗나? (시뮬레이션)</li>
+<li>노드 수가 아니라 '서로 다른' 노드 수: 같은 이온 소자를 여러 개 놓으면?</li>
+<li>그래서 좋은 reservoir란 무엇인가?</li>
+</ol>
+<section id="ch-two-resources" class="level3">
+<h3 class="anchored" data-anchor-id="ch-two-resources">1. 두 자원: 기억과 비선형</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 기억(Day 15)과 비선형(Day 16–17)이 각각 무엇을 가능하게 하는지 한 줄씩 되짚고, NARMA10 같은 과제가 둘을 '얼마나' 요구하는지 말할 수 있다.</p>
+</div>
+<p><strong>되짚기.</strong> <a href="../days/d09.html#b-fading-memory">Day 15의 fading memory</a>: 지금 상태에 <span class="math inline">\(k\)</span>단계 전 입력의 몫이 <span class="math inline">\(d^k\)</span>만큼 남아, 과거가 필요한 질문("한 단계 전에 1이었나?")에 답할 수 있게 합니다. 노드 하나의 기억은 합이 1인 예산이었습니다(<a href="../days/d09.html#ch-causal">Day 15 5구간</a>). <a href="../days/d10a.html#b-nonlinearity">Day 16의 비선형</a>: 겹침 원리를 깨서 입력들의 곱(XOR = 두 입력의 곱, 3-parity = 세 입력의 곱)을 상태에 남겨, 선형 readout이 가중합으로는 못 만드는 답을 꺼내게 합니다.</p>
+<p><span id="s-narma-demand"></span><strong>과제는 둘을 정해진 양만큼 요구한다.</strong> Day 20–21에서 직접 돌릴 NARMA10을 미리 봅니다. NARMA10은 0~0.5 사이의 무작위 입력 <span class="math inline">\(u(t)\)</span>를 넣고, 정해진 식 <span class="math inline">\(y(t+1) = 0.3\,y(t) + 0.05\,y(t)\sum_{i=0}^{9} y(t-i) + 1.5\,u(t-9)\,u(t) + 0.1\)</span>로 만든 출력 <span class="math inline">\(y\)</span>를 reservoir가 따라 하게 하는 시험 과제입니다(식은 외우지 않아도 되고, 항마다의 뜻은 Day 20–21에서 풉니다). 지금 볼 곳은 두 군데입니다. <span class="math inline">\(y(t) \times y(t-i)\)</span>와 <span class="math inline">\(u(t-9) \times u(t)\)</span>는 <strong>두 값의 곱</strong>이고(곱한 값이 둘이라 '2차' 비선형이라고 부릅니다. 차수의 정확한 뜻은 2구간), 그 곱에 들어가는 값이 <strong>9–10단계 전</strong>까지 거슬러 갑니다(기억). Stepney도 NARMA 계열의 (2차) 비선형성이 이런 곱 항들에서 오고 <strong>이전 <span class="math inline">\(N\)</span>개 상태의 기억도 필요하다</strong>고 씁니다. <span class="src">Stepney 2024, p.676</span> <span class="prov">Stepney는 출력을 <span class="math inline">\(x\)</span>, 과제의 길이를 <span class="math inline">\(N\)</span>으로 적는다. 이 교재에서 <span class="math inline">\(x\)</span>는 reservoir 상태, <span class="math inline">\(N\)</span>은 노드 수이므로 출력을 <span class="math inline">\(y\)</span>, 길이를 10으로 바꿔 적었다.</span> 그래서 NARMA10에는 약 10단계의 기억과 2차(두 값의 곱) 비선형이 함께 필요합니다. 기억이 3단계뿐이면 비선형이 아무리 강해도 9–10단계 전 값이 든 곱을 만들 재료가 없고, 기억이 100단계여도 곱을 못 만들면 2차 항을 흉내 낼 수 없습니다. 지연 XOR은 2단계 기억 + 2차, 3-parity는 3단계 기억 + 3차입니다(<a href="../days/d10a.html#b-xor">Day 16 기초: XOR·parity</a>).</p>
+<p><strong>무엇을 볼지.</strong> 그림 1의 가로축은 과제가 쓰는 가장 오래된 입력이 몇 단계 전인지(필요한 기억), 세로축은 몇 개의 입력을 곱해야 하는지(필요한 비선형의 차수)입니다. 점 하나가 과제 하나이고, 두 음영은 어떤 reservoir가 덮을 수 있는 범위의 예입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig5-task-demands.svg" alt="가로축 필요한 기억(0–12단계), 세로축 필요한 비선형 차수(1–3차)인 지도. 지연 XOR은 (2단계, 2차), 3-parity는 (3단계, 3차), NARMA10은 (10단계, 2차)에 점이 있고, 각 점까지 점선 상자가 그려져 있다. 기억 3단계까지를 덮는 파란 음영과 1차만 덮는 회색 띠가 있으며 NARMA10은 어느 음영에도 들어가지 않는다" class="figure-img"><figcaption><b>그림 1.</b> 과제마다 요구하는 기억과 비선형을 한 지도에. 먼저 빨간 점(NARMA10)을 찾고, 그다음 두 음영을 보세요. 파란 음영(기억이 3단계뿐인 reservoir)은 지연 XOR과 3-parity는 덮지만 NARMA10의 10단계에 닿지 못하고, 회색 띠(선형 reservoir)는 1차 줄만 덮어 세 과제 모두 놓칩니다. 이것이 "기억만 길어도, 비선형만 강해도 소용없다"의 그림입니다. 과제 좌표는 본문의 값이고 음영은 설명용 예입니다. (Claude가 그림, 모식도)</figcaption></figure>
+<p>그러니 질문을 바꿔야 합니다. "기억이 길수록 좋은가?"가 아니라 <strong>"과제가 요구하는 기억과 비선형을, reservoir가 충분히 그리고 동시에 줄 수 있는가?"</strong> 이 질문에 답하려면 기억과 비선형을 같은 단위로 재는 저울이 필요합니다.</p>
+<div class="quiz" data-day="d11" data-set="1-check"></div>
+<div class="keypoints">
+<ul>
+<li>기억 = 지난 입력의 흔적(Day 15), 비선형 = 입력들의 곱·굽힘(Day 16–17). 둘은 다른 일을 한다.</li>
+<li>과제는 둘을 정해진 양만큼 요구한다: NARMA10 ≈ 10단계 기억 + 2차 곱 <span class="src">Stepney 2024, p.676</span>, 지연 XOR = 2단계 + 2차, 3-parity = 3단계 + 3차.</li>
+<li>바른 질문: 과제가 요구하는 기억과 비선형을 동시에 줄 수 있나?</li>
+</ul>
+</div>
+</section>
+<section id="ch-ipc" class="level3">
+<h3 class="anchored" data-anchor-id="ch-ipc">2. 정보처리용량: 목표 하나를 얼마나 되살리나</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 용량 <span class="math inline">\(C = 1 - (\text{평균 제곱 오차})/(\text{목표의 분산})\)</span>을 숫자로 계산하고, 그림 2의 네 가지 이력 예에서 기억 항(차수 1)과 곱 항(차수 2)의 용량을 구해 노드 하나의 용량을 모두 더하면 왜 1이 되는지, 그리고 MC와 IPC가 그 합이라는 것을 말할 수 있다.</p>
+</div>
+<div id="b-ipc" class="basics">
+<section id="정보처리용량ipc-①-목표-하나의-용량-상태로-목표를-얼마나-되살리나" class="level4">
+<h4 class="anchored" data-anchor-id="정보처리용량ipc-①-목표-하나의-용량-상태로-목표를-얼마나-되살리나">정보처리용량(IPC) ① 목표 하나의 용량: 상태로 목표를 얼마나 되살리나</h4>
+<p>이 기초는 세 걸음입니다. ① 목표 하나의 용량(여기) → ② 목표를 이루는 조각(기저 함수)과 차수, 그 합인 MC·IPC(<a href="#b-basis-function">바로 아래 기초</a>) → ③ 그 합이 노드 수에 묶이는 이유와 원 논문의 조건(<a href="#s-bound-conditions">3구간</a>).</p>
+<p><strong>왜 필요한가.</strong> 기억은 "몇 단계 전 입력을 되살리나"로, 비선형은 "XOR을 맞히나"로 따로 재면 둘을 비교할 수 없습니다. 둘을 같은 저울에 올리려면 "<strong>어떤 목표 함수든</strong> 상태에서 얼마나 잘 되살리나"라는 하나의 질문으로 바꿉니다.</p>
+<p><strong>목표 하나의 용량.</strong> 입력 이력으로 정해지는 목표 신호 <span class="math inline">\(f(t)\)</span>를 하나 정합니다. 예: <span class="math inline">\(f(t) = u(t-2)\)</span>(두 단계 전 입력, 기억을 묻는 목표), <span class="math inline">\(f(t) = u(t-1) \cdot u(t-2)\)</span>(두 입력의 곱, 비선형을 묻는 목표). reservoir 상태로 선형 readout을 학습해(<a href="../days/d08a.html#b-ridge">Day 13 기초: 최소제곱</a>) <span class="math inline">\(f\)</span>를 흉내 낸 값을 <span class="math inline">\(\hat{f}\)</span>("에프 햇". 모자 표시는 '추정한 값'이라는 뜻)라 하면, 그 목표의 용량은</p>
+<p><span class="math display">\[
+C_f = 1 - \frac{\langle (f - \hat{f})^2 \rangle}{\mathrm{Var}(f)}
+\]</span></p>
+<ul>
+<li><strong>평균 기호 <span class="math inline">\(\langle \cdot \rangle\)</span>.</strong> 꺾쇠 안의 양을 시간 단계마다 계산한 뒤, 단계 수 <span class="math inline">\(n\)</span>으로 나눈 <strong>평균</strong>입니다(시험 구간에서 냄). 예: 네 단계의 오차 <span class="math inline">\(f - \hat{f}\)</span>가 −1, 1, −1, 1이면 제곱은 1, 1, 1, 1이고 <span class="math inline">\(\langle (f-\hat{f})^2 \rangle = 4/4 = 1\)</span>입니다. 그래서 분자는 "오차 제곱의 평균"(평균 제곱 오차)입니다.</li>
+<li><strong>분산 <span class="math inline">\(\mathrm{Var}(f)\)</span>.</strong> 목표가 자기 평균에서 얼마나 흩어지나. 숫자 넷으로: 목표 값이 1, 2, 3, 6이면 평균은 3, 평균에서 뺀 값은 −2, −1, 0, 3, 그 제곱은 4, 1, 0, 9로 합이 14입니다. 개수 4로 나누면 분산 3.5, 표본 분산(개수−1 = 3으로 나눔)이면 약 4.67입니다. 분산의 제곱근이 표준편차입니다(이 교재의 기본은 <span class="math inline">\(n-1\)</span>로 나눈 표본 표준편차). <strong>Day 18–19의 용량 식에서는 분산도 개수 <span class="math inline">\(n\)</span>으로 나눕니다.</strong> 분자의 <span class="math inline">\(\langle \cdot \rangle\)</span>가 <span class="math inline">\(n\)</span>으로 나누니 분모도 같은 잣대로 맞추는 것이고(아래 단계 4에서 어긋나면 어떻게 되는지 봅니다), 그림 5(Day 19)·6의 숫자를 낸 시뮬레이션 코드도 <span class="math inline">\(n\)</span>으로 나눕니다. 시험 구간이 수천 단계라 <span class="math inline">\(n\)</span>과 <span class="math inline">\(n-1\)</span>의 차이는 무시할 만합니다. 정식 설명은 <a href="../days/d13a.html#b-variance-share">Day 22 기초: 분산·상관²</a>.</li>
+<li>단위: 무차원, 0~1.</li>
+<li>결과의 뜻: 1이면 완벽히 되살림, 0이면 평균값만 말하는 것과 같음(Day 13–14의 NMSE를 1에서 뺀 것). Singh 2026의 3.2절 식이 이것이고, 목표 함수의 다항 차수와 그것을 만든 입력 지연으로 목표를 구별합니다. <span class="src">Singh 2026, p.13</span></li>
+</ul>
+<p><span id="s-capacity-steps"></span><strong>네 단계로 처음부터 끝까지.</strong> 식의 조각이 실제로 어떻게 맞물리는지, 시간 네 단계짜리 장난감 예로 따라갑니다(교육용 예. 숫자는 손으로 확인할 수 있습니다).</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 목표와 상태를 적는다.</strong> 시간 네 단계에서 목표가 <span class="math inline">\(f\)</span> = 1, 2, 3, 6이고, readout이 볼 수 있는 것은 노드 하나의 상태 <span class="math inline">\(x\)</span> = 2, 1, 4, 5라고 합시다(<a href="../days/d09.html#s-budget">Day 15 5구간</a> 상관계수 예의 두 숫자 열 <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>를 그대로 가져왔습니다). 선형 readout이 할 수 있는 일은 <span class="math inline">\(\hat{f} = w_0 + w_1 x\)</span>, 곧 "상태에 숫자 <span class="math inline">\(w_1\)</span>을 곱하고 상수 <span class="math inline">\(w_0\)</span>을 더하기"뿐입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — readout을 맞춘다(최소제곱).</strong> 오차 제곱의 합을 가장 작게 하는 <span class="math inline">\(w_1\)</span>은 (평균을 뺀 값끼리 곱해 더한 것) ÷ (<span class="math inline">\(x\)</span> 쪽 제곱합)입니다(<a href="../days/d08a.html#b-ridge">Day 13 기초</a>의 <span class="math inline">\(w = \sum xy / \sum x^2\)</span>를 평균을 뺀 값에 쓴 것). 평균을 뺀 값은 <span class="math inline">\(f\)</span>: −2, −1, 0, 3, <span class="math inline">\(x\)</span>: −1, −2, 1, 2이므로 <span class="math inline">\(w_1 = (2 + 2 + 0 + 6)/(1 + 4 + 1 + 4) = 10/10 = 1\)</span>이고, <span class="math inline">\(w_0 = (f\text{의 평균}) - w_1 \times (x\text{의 평균}) = 3 - 3 = 0\)</span>입니다. 그래서 <span class="math inline">\(\hat{f}\)</span> = 2, 1, 4, 5.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 분자: 오차 제곱의 평균.</strong> <span class="math inline">\(f - \hat{f}\)</span> = −1, 1, −1, 1, 제곱 1, 1, 1, 1, 평균 <span class="math inline">\(\langle (f-\hat{f})^2 \rangle = 1\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 분모로 나눠 1에서 뺀다.</strong> <span class="math inline">\(\mathrm{Var}(f) = 14/4 = 3.5\)</span>(<span class="math inline">\(n\)</span> = 4로 나눔). <span class="math inline">\(C = 1 - 1/3.5 \approx 0.714\)</span>. 목표의 흔들림 3.5 가운데 1만큼을 놓쳐, 약 71%를 되살렸다는 뜻입니다. 분모만 <span class="math inline">\(n-1\)</span> = 3으로 나눈 4.67을 쓰면 <span class="math inline">\(1 - 1/4.67 \approx 0.786\)</span>이 되어 다음 단계의 값과 어긋납니다. 분자와 분모를 같은 <span class="math inline">\(n\)</span>으로 나누는 이유입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 상관²과 비교한다.</strong> Day 15에서 같은 두 숫자 열의 상관계수는 <span class="math inline">\(10/\sqrt{14 \times 10} \approx 0.845\)</span>였고, 제곱하면 <span class="math inline">\(100/140 \approx 0.714\)</span>로 단계 4와 같습니다. 최소제곱으로 맞춘 <strong>바로 그 데이터</strong>에서 계산하면 "1 − 오차/분산"은 목표와 readout 출력의 상관²과 정확히 같습니다(회귀분석에서 결정계수 R²의 성질, 일반 교과 내용 <span class="tag tag-fact">확인</span>). 학습에 쓰지 않은 시험 구간에서는 거의 같을 뿐 정확히 같지는 않습니다. 기억 용량을 처음 정의한 Jaeger의 식도 이 상관²(공분산² ÷ 두 분산의 곱)으로 적혀 있습니다. <span class="src">Stepney 2024, p.679</span></p>
+</div>
+</div>
+<p><span id="s-capacity-number"></span><strong>작은 숫자로.</strong> 목표의 분산이 1.0이고 readout의 평균 제곱 오차가 0.36이면 <span class="math inline">\(C = 1 - 0.36/1.0 = 0.64\)</span>입니다. 단계 5처럼 이것은 목표와 readout 출력의 상관계수 0.8의 제곱이고, Day 15 5구간의 "되살리는 정도"와 같은 양입니다.</p>
+<p><span id="s-capacity-01"></span><strong>용량 1과 용량 0은 무엇을 뜻하나.</strong> <a href="../days/d09.html#ch-causal">Day 15 5구간</a>의 노드 하나 <span class="math inline">\(x(t) = d\,x(t-1) + u(t)\)</span>(입력은 서로 독립인 난수)로 봅니다.</p>
+<ul>
+<li><strong>용량 1</strong>: <span class="math inline">\(d = 0\)</span>이면 <span class="math inline">\(x(t) = u(t)\)</span>입니다. 목표 <span class="math inline">\(u(t)\)</span>에 대해 readout이 <span class="math inline">\(\hat{f} = x\)</span>로 두면 오차가 매 단계 0이라 <span class="math inline">\(C = 1 - 0 = 1\)</span>. 완벽히 되살립니다.</li>
+<li><strong>용량 0</strong>: 같은 노드(<span class="math inline">\(d = 0\)</span>)에 목표 <span class="math inline">\(u(t-1)\)</span>을 주면, 지금 상태 <span class="math inline">\(x(t) = u(t)\)</span>에는 한 단계 전 입력의 흔적이 전혀 없습니다. 어떤 가중치도 도움이 안 되니 readout의 최선은 늘 목표의 평균(여기서 0)을 말하는 것이고, 그때 평균 제곱 오차가 목표의 분산과 같아져 <span class="math inline">\(C = 1 - 1 = 0\)</span>입니다. 시험 구간에서 계산값이 음수로 나오면(평균만 말하는 것보다도 못하면) 0으로 둡니다.</li>
+<li><strong>그 사이</strong>: <span class="math inline">\(d = 0.5\)</span>면 목표 <span class="math inline">\(u(t), u(t-1), u(t-2), u(t-3)\)</span>의 용량이 0.75, 0.19, 0.047, 0.012, …입니다(Day 15의 <span class="math inline">\(d^{2k}(1-d^2)\)</span>).</li>
+</ul>
+<p><span id="s-sum-one"></span><strong>목표마다 더하면.</strong> 이 <span class="math inline">\(d = 0.5\)</span> 노드의 용량을 모든 지연에 대해 더하면 0.75 + 0.19 + 0.047 + 0.012 + … = 1입니다. 노드가 하나(<span class="math inline">\(N = 1\)</span>)라 합이 1을 넘지 못한 것이고, 이것이 "용량의 총합은 노드 수를 넘지 못한다"(3구간)의 가장 작은 예입니다. 이 노드는 선형이라 용량 1이 모두 '지난 입력을 그대로 되살리는 일'(다음 기초의 차수 1)에 쓰였습니다.</p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/bMccdk8EdGo?start=96&amp;rel=0" title="영상: R-squared, Clearly Explained!!!" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:36–6:22, 약 5분 · 전체 11분, 영어·자동 자막).</b> StatQuest with Josh Starmer, "R-squared, Clearly Explained!!!" (2022판). <b>볼 이유:</b> 챕터 'Visualizing variation'(1:36)부터 'R-squared calculation example'(5:06)까지가, 평균선 둘레의 흩어짐과 맞춘 선 둘레의 흩어짐을 비교해 R²를 계산하는 부분이다(챕터 제목 기준). 본문의 $C_f = 1 - \langle(f-\hat f)^2\rangle/\mathrm{Var}(f)$에서 분모 $\mathrm{Var}(f)$가 '평균선 둘레의 흩어짐', 분자가 'readout 둘레의 흩어짐'에 해당한다 [해석]. 영상의 예는 몸무게와 크기 같은 두 변수의 직선 맞춤이고 reservoir는 나오지 않는다. <b>보고 답할 질문:</b> 영상에서 R² = 0.6이라는 숫자가 나오면, 그것은 본문의 어떤 용량 값과 같은 뜻이고 "목표의 흔들림 가운데 몇 %를 되살렸다"는 말이 되는가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 목록(영상 내용은 미검증)</span></div></div>
+</section>
+</div>
+<div class="stop-point">
+<p>여기까지: 네 단계 예(목표 1, 2, 3, 6과 상태 2, 1, 4, 5)로 <span class="math inline">\(C = 1 - 1/3.5 \approx 0.714\)</span>를 계산하고, 그것이 Day 15의 상관² 0.714와 같다는 것, 용량 1과 0이 각각 무엇을 뜻하는지 말할 수 있다. 다음: 목표를 '지난 입력 하나'와 '두 입력의 곱'으로 바꿔, 노드 하나가 둘에 용량을 어떻게 나눠 주는지.</p>
+</div>
+<div id="b-basis-function" class="basics">
+<section id="정보처리용량ipc-②-기억-항과-곱-항-입력-1-두-개의-네-가지-이력으로" class="level4">
+<h4 class="anchored" data-anchor-id="정보처리용량ipc-②-기억-항과-곱-항-입력-1-두-개의-네-가지-이력으로">정보처리용량(IPC) ② 기억 항과 곱 항: 입력 ±1 두 개의 네 가지 이력으로</h4>
+<p><strong>무엇을 하려는가.</strong> 위에서는 목표가 아무 숫자 열이었습니다. 이제 목표를 정보처리용량이 실제로 쓰는 것, 곧 <strong>지난 입력 하나</strong>(<span class="math inline">\(u(t-1)\)</span>, 기억을 묻는 목표)와 <strong>지난 입력 둘의 곱</strong>(<span class="math inline">\(u(t-1)\,u(t-2)\)</span>, 비선형을 묻는 목표)으로 바꿉니다. 손으로 끝까지 계산하려고 세계를 가장 작게 줄입니다. [가정] 입력은 매 단계 +1 또는 −1이 동전 던지기처럼 같은 확률로 나오고(Day 16–17의 ±1 표기), 노드의 상태는 <strong>최근 두 입력</strong> <span class="math inline">\(u(t-1)\)</span>, <span class="math inline">\(u(t-2)\)</span>로만 정해진다고 둡니다. 그러면 가능한 이력은 (+1, +1), (+1, −1), (−1, +1), (−1, −1)의 네 가지뿐이고, 긴 입력열에서 이 넷은 같은 비율로 나옵니다. 그래서 시간 평균 <span class="math inline">\(\langle \cdot \rangle\)</span>은 <strong>네 이력의 평균</strong>이 됩니다.</p>
+<p><strong>두 노드.</strong></p>
+<ul>
+<li><strong>노드 A (선형, Day 15).</strong> Day 15의 노드 <span class="math inline">\(x(t) = d\,x(t-1) + u(t)\)</span>를 <span class="math inline">\(d = 0.5\)</span>로, 0에서 시작해 두 입력만 넣은 것입니다: <span class="math inline">\(x_A = u(t-1) + 0.5\,u(t-2)\)</span>. 한 단계 전 입력은 그대로, 두 단계 전 입력은 절반만 남았습니다(그보다 오래된 입력은 이 장난감에서 지웠습니다).</li>
+<li><strong>노드 B (<span class="math inline">\(\tanh\)</span>, Day 16–17).</strong> <a href="../days/d10a.html#s-node-product">Day 16 3구간</a>의 노드 <span class="math inline">\(h = \tanh(u_1 + u_2)\)</span>(입력 0/1)를 ±1 표기로 옮긴 것입니다: <span class="math inline">\(x_B = \tanh\big(0.5\,(u(t-1) + u(t-2)) + 1\big)\)</span>. 입력 +1을 Day 16–17의 1로, −1을 0으로 읽으면 값이 Day 16–17과 똑같이 0.964, 0.762, 0.762, 0입니다.</li>
+</ul>
+<p><strong>무엇을 볼지.</strong> 그림 2에서 줄 하나가 신호 하나입니다. 칸 ①–④는 네 가지 이력이고, 막대는 그 이력에서의 값입니다(막대가 붙은 가로선이 0). 위 두 줄은 노드 상태, 아래 세 줄은 목표입니다. <strong>노드 줄의 막대 모양이 어느 목표 줄의 모양을 닮았는지</strong> 보세요. 오른쪽 숫자는 그 목표를 그 노드 하나로 되살린 용량입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig7-two-histories.svg" alt="입력 ±1 두 개의 네 이력 (+1,+1), (+1,−1), (−1,+1), (−1,−1)에서 노드 A = u(t−1) + 0.5u(t−2)는 1.5, 0.5, −0.5, −1.5, 노드 B = tanh(0.5(u(t−1)+u(t−2))+1)는 0.964, 0.762, 0.762, 0. 목표 u(t−1)은 +1,+1,−1,−1, u(t−2)는 +1,−1,+1,−1, 곱은 +1,−1,−1,+1. 노드 A로 되살린 용량은 0.80, 0.20, 0.00, 노드 B는 0.43, 0.43, 0.14로 둘 다 합 1.00" class="figure-img"><figcaption><b>그림 2.</b> 노드 하나의 용량을 목표 셋으로 나누기. 노드 A(선형)의 막대 모양은 목표 ①을 크게, ②를 작게 닮았고 ③(곱)과는 무관해 0.80, 0.20, 0.00이다. 노드 B($\tanh$)는 ④에서만 푹 낮아 ①·②를 반씩 닮고 ③도 조금 닮아 0.43, 0.43, 0.14다. 둘 다 합은 1.00이다. 아래 두 줄은 각 노드를 목표 조각에 숫자를 곱해 더한 꼴로 다시 쓴 것이다. 교육용 예이며 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-two-histories-calc"></span><strong>그림을 따라: 노드 A로 목표 <span class="math inline">\(u(t-1)\)</span> 되살리기.</strong> 계산 방법은 위 네 단계 예와 같습니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 숫자를 적는다.</strong> 목표 <span class="math inline">\(u(t-1)\)</span> = +1, +1, −1, −1(그림 2의 목표 ① 줄), 노드 A = 1.5, 0.5, −0.5, −1.5(노드 A 줄). 둘 다 평균이 0이라 readout의 상수 <span class="math inline">\(w_0\)</span>은 0입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — readout을 맞춘다.</strong> <span class="math inline">\(w_1\)</span> = (곱의 합) ÷ (노드 값의 제곱합) = (1.5 + 0.5 + 0.5 + 1.5)/(2.25 + 0.25 + 0.25 + 2.25) = 4/5 = 0.8. 그래서 <span class="math inline">\(\hat f\)</span> = 1.2, 0.4, −0.4, −1.2.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 용량.</strong> 오차 <span class="math inline">\(f - \hat f\)</span> = −0.2, 0.6, −0.6, 0.2, 제곱의 평균 (0.04 + 0.36 + 0.36 + 0.04)/4 = 0.2. 목표의 분산은 (1 + 1 + 1 + 1)/4 = 1이므로 <span class="math inline">\(C = 1 - 0.2/1 = 0.8\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 나머지 두 목표.</strong> 목표 <span class="math inline">\(u(t-2)\)</span> = +1, −1, +1, −1이면 곱의 합 = 1.5 − 0.5 − 0.5 + 1.5 = 2, <span class="math inline">\(w_1 = 2/5 = 0.4\)</span>, 오차 제곱의 평균 (0.16 + 1.44 + 1.44 + 0.16)/4 = 0.8, <span class="math inline">\(C = 0.2\)</span>. 곱 목표 <span class="math inline">\(u(t-1)\,u(t-2)\)</span> = +1, −1, −1, +1이면 곱의 합 = 1.5 − 0.5 + 0.5 − 1.5 = 0이라 <span class="math inline">\(w_1 = 0\)</span>, readout은 평균 0만 말할 수 있어 <span class="math inline">\(C = 0\)</span>. 셋을 더하면 0.8 + 0.2 + 0 = <strong>1</strong>입니다.</p>
+</div>
+</div>
+<p><span id="s-basis-def"></span><strong>조각으로 나누기: 기저 함수.</strong> 노드 A는 목표 줄들로 정확히 다시 쓸 수 있습니다: <span class="math inline">\(x_A = 1 \cdot u(t-1) + 0.5 \cdot u(t-2) + 0 \cdot u(t-1)\,u(t-2)\)</span>. 노드 B도 네 칸에 대입해 확인하면 <span class="math inline">\(x_B = 0.622 + 0.241\,u(t-1) + 0.241\,u(t-2) - 0.140\,u(t-1)\,u(t-2)\)</span>입니다(이력 ①: 0.622 + 0.241 + 0.241 − 0.140 = 0.964, 이력 ④: 0.622 − 0.241 − 0.241 − 0.140 = 0.000). 이렇게 상수 1, <span class="math inline">\(u(t-1)\)</span>, <span class="math inline">\(u(t-2)\)</span>, <span class="math inline">\(u(t-1)\,u(t-2)\)</span>처럼 <strong>숫자를 곱해 더하면 이 세계의 어떤 신호든 만들 수 있는 조각</strong>을 <strong>기저 함수</strong>(basis function)라고 부릅니다. 이력이 넷이고 조각도 넷이라, 최근 두 입력으로 정해지는 값이라면 무엇이든 네 조각의 조합으로 꼭 한 가지 방법으로 쓸 수 있습니다. 노드 B의 곱 조각 계수 −0.140은 Day 16–17에서 구한 '곱의 몫' <span class="math inline">\(0.964 - 2 \times 0.762 = -0.560\)</span>을 4로 나눈 값입니다(±1 표기로 옮기면서 생긴 배율).</p>
+<p><span id="s-orthogonal-def"></span><strong>직교: 조각끼리 겹치지 않는다.</strong> 두 조각을 이력마다 곱해 평균 낸 값이 0이면 둘은 <strong>직교</strong>(orthogonal)한다, 곧 서로 겹치지 않는다고 합니다. 예: <span class="math inline">\(u(t-1)\)</span> 줄과 <span class="math inline">\(u(t-2)\)</span> 줄을 칸마다 곱하면 +1, −1, −1, +1로 평균 0입니다. <span class="math inline">\(u(t-1)\)</span>과 곱 <span class="math inline">\(u(t-1)\,u(t-2)\)</span>를 곱하면 <span class="math inline">\(u(t-1)^2\,u(t-2) = u(t-2)\)</span>(±1의 제곱은 1)라 역시 평균 0입니다. 직교이기 때문에 계수 하나하나를 <strong>그 조각과의 곱의 평균</strong>으로 따로따로 구할 수 있습니다. 노드 B와 <span class="math inline">\(u(t-1)\)</span>: (0.964 + 0.762 − 0.762 − 0)/4 = 0.241. 또 한 조각의 몫이 다른 조각에서 두 번 세어지지 않습니다.</p>
+<p><span id="s-capacity-share"></span><strong>용량 = 그 조각이 노드의 흔들림에서 차지하는 몫.</strong> 조각들이 직교이고 각 조각의 제곱의 평균이 1이라, 노드의 분산은 상수를 뺀 계수들의 제곱합입니다. 노드 A는 <span class="math inline">\(1^2 + 0.5^2 + 0^2 = 1.25\)</span>, 노드 B는 <span class="math inline">\(0.241^2 + 0.241^2 + 0.140^2 \approx 0.136\)</span>. 목표 하나의 용량은 그 조각의 몫(계수² ÷ 분산)입니다. 노드 A의 <span class="math inline">\(u(t-1)\)</span>은 <span class="math inline">\(1/1.25 = 0.80\)</span>(위 단계 3과 같은 값), <span class="math inline">\(u(t-2)\)</span>는 <span class="math inline">\(0.25/1.25 = 0.20\)</span>, 곱은 0입니다. 노드 B는 <span class="math inline">\(0.058/0.136 \approx 0.43\)</span>, 0.43, <span class="math inline">\(0.0196/0.136 \approx 0.14\)</span>입니다. 몫을 모두 더하면 전체이니 <strong>노드 하나의 합은 1</strong>입니다. Day 15의 "노드 하나의 기억 예산 = 1"을 곱 항까지 넓힌 것입니다. 노드 A는 1을 모두 기억 항에 썼고, 노드 B는 0.86을 기억 항에, 0.14를 곱 항에 나눠 썼습니다. [계산]</p>
+<p><span id="s-degree"></span><strong>차수: 목표가 입력 몇 개를 곱한 것인가.</strong> 목표를 입력의 다항식(입력끼리 곱하고 더한 식)으로 만들 때, 한 항에 <strong>곱해진 입력의 개수</strong>(같은 입력을 두 번 곱하면 2로 셈, 곧 지수의 합)를 그 목표의 <strong>차수</strong>(degree)라 부릅니다.</p>
+<ul>
+<li><span class="math inline">\(u(t-2)\)</span>: 입력 하나 → 차수 1. 지난 입력을 그대로 되살리는 일, 곧 <strong>기억</strong>입니다.</li>
+<li><span class="math inline">\(u(t-1)\,u(t-2)\)</span>, <span class="math inline">\(u(t-1)^2\)</span>: 입력 둘의 곱 → 차수 2.</li>
+<li><span class="math inline">\(u(t-1)^3\)</span>, <span class="math inline">\(u(t-1)\,u(t-2)^2\)</span>: 차수 3(Stepney가 드는 3차 예). <span class="src">Stepney 2024, p.679</span></li>
+</ul>
+<p>숫자로: <span class="math inline">\(u(t-1) = 0.5\)</span>, <span class="math inline">\(u(t-2) = -0.4\)</span>인 순간, 차수 1 목표 <span class="math inline">\(u(t-2)\)</span>의 값은 −0.4, 차수 2 목표 <span class="math inline">\(u(t-1)\,u(t-2)\)</span>는 −0.2, <span class="math inline">\(u(t-1)^2\)</span>은 0.25입니다. 입력을 모두 2배(1.0, −0.8)로 키우면 차수 1 목표는 2배(−0.8), 차수 2 목표는 4배(−0.8, 1.0)가 됩니다. <strong>차수 = 입력을 키울 때 목표가 몇 제곱으로 커지나</strong>로 읽어도 됩니다. 차수 2 이상인 목표는 입력들의 곱이라 겹침 원리를 깨는 비선형이 있어야 만들 수 있습니다(<a href="../days/d10a.html#b-nonlinearity">Day 16 기초</a>). 그래서 "차수 1 = 기억, 차수 2 이상 = 비선형"으로 나눠 셉니다. 서로 다른 시각의 입력이 함께 들어간 목표(<span class="math inline">\(u(t-1)\,u(t-2)\)</span>처럼)의 용량을 <strong>교차 용량</strong>(cross capacity)이라고 부릅니다. <span class="src">Stepney 2024, p.679</span></p>
+<p><strong>차수 1 목표들의 용량을 모든 지연에 대해 더한 것이 memory capacity(MC)</strong>입니다. 위의 <span class="math inline">\(d = 0.5\)</span> 노드라면 MC = 1이고, 그림 2의 노드 A면 0.8 + 0.2 = 1, 노드 B면 0.43 + 0.43 ≈ 0.86입니다. Stepney는 "선형 memory capacity는 차수 1의 IPC"라고 씁니다. <span class="src">Stepney 2024, p.680</span></p>
+<p><strong>정보처리용량(IPC).</strong> 모든 차수, 모든 지연 조합의 목표에 대해 용량을 구해 더한 것이 <strong>정보처리용량</strong>(information processing capacity, IPC)입니다. 차수별로 따로 더해 "차수 1(기억)에 얼마, 차수 2에 얼마, 차수 3에 얼마"로 보고하면, 기억과 비선형을 한 저울에서 비교할 수 있습니다. 그림 2의 두 노드는 IPC가 둘 다 1이지만, 차수별로 나누면 노드 A는 (차수 1: 1.00, 차수 2: 0), 노드 B는 (0.86, 0.14)입니다. Liang은 IPC를 MC의 비선형 확장으로 소개하며, 단기 기억과 비선형 근사를 <strong>동시에</strong> 재므로 과학적으로 더 의미 있고 서로 다른 구현의 비교에 권한다고 씁니다. <span class="src">Liang 2024, p.200</span></p>
+</section>
+</div>
+<div class="stop-point">
+<p>여기까지: 그림 2의 노드 A·B로 목표 <span class="math inline">\(u(t-1)\)</span>, <span class="math inline">\(u(t-2)\)</span>, <span class="math inline">\(u(t-1)\,u(t-2)\)</span>의 용량(0.80, 0.20, 0 / 0.43, 0.43, 0.14)을 구하고, 기저 함수·직교·차수·MC·IPC를 이 숫자로 설명할 수 있다. 다음: 입력이 ±1이 아니라 연속값이면 겹치지 않는 조각을 어떻게 고르나(요점만 읽고 계산은 심화로 넘겨도 됩니다).</p>
+</div>
+<section id="s-orthogonal-basis" class="level4">
+<h4 class="anchored" data-anchor-id="s-orthogonal-basis">입력이 연속값이면: 겹치지 않는 조각 고르기</h4>
+<p>입력이 ±1뿐이면 <span class="math inline">\(u^2 = 1\)</span>이라 같은 입력을 거듭 곱해도 새 조각이 생기지 않았습니다. 입력이 −1~1 사이의 아무 값(연속값)이면 <span class="math inline">\(u^2\)</span>, <span class="math inline">\(u^3\)</span>, …도 새 목표가 되고, 이번에는 조각끼리 <strong>겹칠</strong> 수 있습니다. 예: −1~1에서 고르게 나오는 입력에서 <span class="math inline">\(u\)</span>와 <span class="math inline">\(u^3\)</span>은 곱의 평균이 <span class="math inline">\(\langle u \cdot u^3 \rangle = \langle u^4 \rangle = 1/5\)</span>로 0이 아닙니다. 둘 다 왼쪽 아래에서 오른쪽 위로 올라가는 모양이라, <span class="math inline">\(u(t-1)\)</span>만 기억하는 reservoir도 목표 <span class="math inline">\(u(t-1)^3\)</span>을 상관² 0.84만큼 '맞혀' 같은 능력이 1 + 0.84로 두 번 세어집니다.</p>
+<p>그래서 겹친 몫을 빼서 만든 다항식을 조각으로 씁니다: <span class="math inline">\(P_1(u) = u\)</span>, <span class="math inline">\(P_2(u) = (3u^2 - 1)/2\)</span>, <span class="math inline">\(P_3(u) = (5u^3 - 3u)/2\)</span>, …(<strong>Legendre 다항식</strong>, 르장드르 다항식). 실제 목표는 시각마다 이런 다항식을 하나씩 골라 곱한 것, 예를 들어 <span class="math inline">\(P_1(u(t-1)) \cdot P_2(u(t-3))\)</span>이고, 그 차수는 곱한 다항식 차수의 합(1 + 2 = 3)입니다. Dambre 등은 시각마다 (크기를 맞춘) Legendre 다항식을 하나씩 골라 곱한 것을 목표로 쓰고, 그 차수를 각 다항식 차수의 합으로 셉니다. <span class="src">Dambre 2012, 'Total capacity'</span> Stepney는 Dambre 등이 직교 다항식 묶음으로 모든 비선형 용량과 교차 용량을 <strong>중복 없이</strong> 세었고, 입력 분포에 따라 다른 묶음(정규분포면 Hermite)을 써야 한다고 씁니다. <span class="src">Stepney 2024, p.679–680</span> '겹침'의 판정이 그 입력 분포로 낸 평균이기 때문입니다. 그림 2의 ±1 목표는 입력이 ±1 두 값뿐일 때의 겹치지 않는 묶음입니다(그 분포에서는 <span class="math inline">\(u^2 = 1\)</span>이라 1차 다항식 <span class="math inline">\(u\)</span> 하나로 충분합니다). <span class="tag tag-interp">해석</span></p>
+<details class="deep">
+<summary>
+심화 · 겹친 몫을 빼서 <span class="math inline">\(P_2\)</span>, <span class="math inline">\(P_3\)</span>를 만드는 손 계산과 그림 3
+</summary>
+<p><strong>서로 겹치지 않는 목표: 왜 <span class="math inline">\(u\)</span>, <span class="math inline">\(u^2\)</span>, <span class="math inline">\(u^3\)</span>을 그대로 쓰지 않나.</strong> 목표를 셀 때 두 목표가 서로 <strong>겹치면</strong> 같은 능력을 두 번 셉니다. '겹친다'의 기준은 두 목표를 시각마다 곱해 평균 낸 값 <span class="math inline">\(\langle f \cdot g \rangle\)</span>이고, 이것이 0이면 겹치지 않는다(<strong>직교</strong>, orthogonal)고 합니다. 입력이 −1~1에서 고르게 나오는 경우를 숫자로 확인합니다(Claude 계산).</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 고르게 나온 입력 10개.</strong> <span class="math inline">\(u\)</span> = ±0.1, ±0.3, ±0.5, ±0.7, ±0.9(−1~1을 열 칸으로 나눈 각 칸의 가운데. 무작위로 뽑은 수천 개를 줄여 놓은 것). 양수 다섯 개의 제곱은 0.01, 0.09, 0.25, 0.49, 0.81이고 음수 쪽도 제곱하면 같으므로 <span class="math inline">\(\langle u^2 \rangle = 1.65/5 = 0.33\)</span>. 네제곱은 0.0001, 0.0081, 0.0625, 0.2401, 0.6561로 <span class="math inline">\(\langle u^4 \rangle = 0.967/5 \approx 0.193\)</span>. (−1~1에서 고르게 나오는 입력이 무한히 많으면 정확히 1/3과 1/5입니다.)</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — <span class="math inline">\(u\)</span>와 <span class="math inline">\(u^3\)</span>은 겹친다.</strong> <span class="math inline">\(\langle u \cdot u^3 \rangle = \langle u^4 \rangle \approx 0.193\)</span>. 네제곱은 늘 0 이상이라 이 평균은 결코 0이 될 수 없습니다. <span class="math inline">\(u^3\)</span>의 그래프도 <span class="math inline">\(u\)</span>처럼 왼쪽 아래에서 오른쪽 위로 올라갑니다. 그래서 <span class="math inline">\(u(t-1)\)</span>만 그대로 기억하는 reservoir도 목표 <span class="math inline">\(u(t-1)^3\)</span>을 상관² 약 0.85만큼 '맞힙니다'(이 10개 입력 기준. 무한히 많으면 정확히 0.84). 차수 1의 1과 차수 3의 0.85를 더하면, 'u(t−1)을 기억함'이라는 한 가지 능력을 1.85로 부풀려 세게 됩니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 겹친 몫을 빼낸다: <span class="math inline">\(P_3\)</span>.</strong> <span class="math inline">\(u^3\)</span>에서 <span class="math inline">\(u\)</span>와 같이 움직이는 몫을 빼면 됩니다. 그 몫의 크기는 <span class="math inline">\(\langle u \cdot u^3 \rangle / \langle u^2 \rangle = (1/5)/(1/3) = 0.6\)</span>이라(10개 입력이면 0.193/0.33 ≈ 0.59), <span class="math inline">\(u^3 - 0.6\,u\)</span>를 만들고 2.5를 곱해 <span class="math inline">\(u = 1\)</span>에서 값이 1이 되게 맞춘 것이 <span class="math inline">\(P_3(u) = (5u^3 - 3u)/2\)</span>입니다. 확인: <span class="math inline">\(\langle u \cdot P_3 \rangle = (5\langle u^4 \rangle - 3\langle u^2 \rangle)/2 = (0.967 - 0.99)/2 \approx -0.012\)</span>(10개 입력), 무한히 많으면 <span class="math inline">\((5 \times 1/5 - 3 \times 1/3)/2 = 0\)</span>. 겹침이 0.193에서 거의 0으로 줄었고, <span class="math inline">\(u\)</span>만 기억하는 reservoir가 <span class="math inline">\(P_3\)</span> 목표에서 받는 상관²도 0.003뿐입니다(10개 입력 기준). 곱한 배율 2.5는 용량에 영향이 없습니다(용량은 목표의 분산으로 나누므로).</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 평균을 뺀다: <span class="math inline">\(P_2\)</span>.</strong> <span class="math inline">\(\langle u^2 \rangle = 1/3\)</span>이라 <span class="math inline">\(u^2\)</span>에는 '늘 1/3만큼 깔려 있는 부분'이 있고, 다른 목표와 곱하면 이 부분 때문에 겹침이 생깁니다. 예: 목표 <span class="math inline">\(u(t-1)^2\,u(t-2)\)</span>와 목표 <span class="math inline">\(u(t-2)\)</span>의 곱의 평균은 <span class="math inline">\(\langle u^2 \rangle \times \langle u^2 \rangle = 1/9 \approx 0.11\)</span>. 평균을 빼고 1.5를 곱한 <span class="math inline">\(P_2(u) = (3u^2 - 1)/2\)</span>는 평균이 0입니다(10개 입력에서는 <span class="math inline">\((3 \times 0.33 - 1)/2 = -0.005\)</span>).</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 홀짝과 다른 시각은 저절로 0.</strong> <span class="math inline">\(u \cdot P_2(u)\)</span>는 <span class="math inline">\(u\)</span>를 <span class="math inline">\(-u\)</span>로 바꾸면 부호만 바뀌는 곡선이라 +와 −가 정확히 상쇄됩니다(아래 그림 3 ②, 10개 입력에서도 정확히 0). 서로 다른 시각의 입력 <span class="math inline">\(u(t-1)\)</span>과 <span class="math inline">\(u(t-2)\)</span>는 독립이라 곱의 평균이 <span class="math inline">\(\langle u \rangle \times \langle u \rangle = 0\)</span>입니다. 그래서 실제로 쓰는 목표는 <strong>시각마다 이런 다항식(<span class="math inline">\(P_1\)</span>, <span class="math inline">\(P_2\)</span>, <span class="math inline">\(P_3\)</span>, … 가운데 하나)을 골라 곱한 것</strong>, 예를 들어 <span class="math inline">\(P_1(u(t-1)) \cdot P_2(u(t-3))\)</span>이고, 그 차수는 곱한 다항식 차수의 합(1 + 2 = 3)입니다.</p>
+</div>
+</div>
+<p>이렇게 차수마다 하나씩, <strong>자기보다 낮은 차수의 모든 다항식(상수 1 포함)과 곱의 평균이 0이 되도록</strong> 계수를 정한 묶음 <span class="math inline">\(P_1(u) = u\)</span>, <span class="math inline">\(P_2(u) = (3u^2 - 1)/2\)</span>, <span class="math inline">\(P_3(u) = (5u^3 - 3u)/2\)</span>, …이 <strong>Legendre 다항식</strong>(르장드르 다항식)입니다. <span class="math inline">\(P_n(1) = 1\)</span>이 되게 배율을 맞추는 것이 관례입니다(일반 교과 내용 <span class="tag tag-fact">확인</span>: Wikipedia "Legendre polynomials", 2026-10-25 열람). 다항식에는 낮은 차수의 항이 섞여 있어(<span class="math inline">\(P_3\)</span>의 <span class="math inline">\(-1.5u\)</span>) 앞의 "입력을 2배 하면 목표가 2<sup>차수</sup>배" 규칙은 가장 높은 항에만 맞고, 차수는 가장 높은 항의 차수로 셉니다.</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig6-legendre.svg" alt="세 칸. 왼쪽: −1~1 구간에서 P1 = u(파랑 직선), P2 = (3u²−1)/2(주황 포물선), P3 = (5u³−3u)/2(초록 S자) 세 곡선. 가운데: P1×P2 곡선과 그 넓이로, 양쪽 끝과 가운데의 초록(+) 넓이와 주황(−) 넓이가 같아 평균이 0. 오른쪽: u×u³ = u⁴(회색 점선, 전부 0 이상, 평균 0.2)과 u×P3(검정 실선, 양 끝의 + 넓이와 가운데의 − 넓이가 같아 평균 0)" class="figure-img"><figcaption><b>그림 3.</b> '서로 겹치지 않는 목표'의 뜻. ① 입력 u가 −1~1에서 고르게 나올 때 쓰는 목표 셋(1·2·3차). ② 두 목표를 곱한 곡선(P<sub>1</sub> × P<sub>2</sub>)의 넓이가 위(초록)와 아래(주황)로 정확히 상쇄되어 평균이 0입니다. u를 −u로 뒤집으면 곡선 높이의 부호만 바뀌기 때문입니다. ③ u와 u<sup>3</sup>을 곱한 u<sup>4</sup>(회색 점선)는 어디서나 0 이상이라 평균이 0.2로 남지만(겹침), u와 P<sub>3</sub>을 곱한 곡선(검정)은 양 끝의 + 넓이와 가운데의 − 넓이가 같아 평균이 0입니다. 평균이 0이면 한 목표를 맞히는 능력이 다른 목표를 맞히는 능력으로 두 번 세어지지 않습니다. 곡선과 평균은 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+</details>
+<p><span id="s-bound-preview"></span><strong>총량은 어디까지 늘 수 있나.</strong> 노드 하나는 Day 15의 <span class="math inline">\(d = 0.5\)</span> 노드든 그림 2의 노드 A·B든, 서로 겹치지 않는 목표들의 용량을 다 더하면 1이었습니다. 노드가 <span class="math inline">\(N\)</span>개면 그 합은 <span class="math inline">\(N\)</span>을 넘지 못합니다(정확히는 '서로 독립인 상태 변수의 수'를 넘지 못합니다). 왜 그런지는 3구간에서 노드 2개짜리 그림으로 먼저 보고, 원 논문이 붙인 조건은 그다음에 정리합니다(<a href="#s-bound-conditions">3구간: 상한과 조건</a>).</p>
+<div class="predict">
+<p>목표의 분산이 0.5이고 readout의 평균 제곱 오차가 0.1이면 용량은 얼마일까요? 첫 문제는 본문 숫자의 확인, 둘째는 빈칸, 셋째는 혼자 풀기입니다.</p>
+</div>
+<div class="quiz" data-day="d11" data-set="2-check"></div>
+<div class="quiz" data-day="d11" data-set="2-end"></div>
+<div class="keypoints">
+<ul>
+<li>목표 하나의 용량 <span class="math inline">\(C_f = 1 - \langle(f-\hat f)^2\rangle/\mathrm{Var}(f)\)</span> <span class="src">Singh 2026, p.13</span>. <span class="math inline">\(\langle\cdot\rangle\)</span>는 단계 수 <span class="math inline">\(n\)</span>으로 나눈 평균, 분산도 <span class="math inline">\(n\)</span>으로 나눈다. 예: 오차 0.36, 분산 1 → 0.64. 네 단계 예(목표 1, 2, 3, 6)는 0.714 = 상관². 1 = 완벽, 0 = 평균만 말하는 것과 같음.</li>
+<li>기저 함수 = 숫자를 곱해 더해 목표를 만드는 조각, 직교 = 곱의 평균이 0(겹치지 않음). 그림 2: 노드 A(선형)는 <span class="math inline">\(u(t-1)\)</span> 0.80, <span class="math inline">\(u(t-2)\)</span> 0.20, 곱 0, 노드 B(<span class="math inline">\(\tanh\)</span>)는 0.43, 0.43, 0.14. 용량 = 그 조각이 노드 분산에서 차지하는 몫이라 노드 하나의 합은 1.</li>
+<li>차수 = 곱해진 입력의 개수(차수 1 = 기억, 2 이상 = 비선형). 차수 1의 합 = MC <span class="src">Stepney 2024, p.680</span>, 모든 차수의 합 = IPC. 기억과 비선형을 한 저울에서 잰다 <span class="src">Liang 2024, p.200</span>.</li>
+<li>연속 입력에서는 <span class="math inline">\(u\)</span>와 <span class="math inline">\(u^3\)</span>이 겹치므로(곱의 평균 1/5) 겹친 몫을 뺀 Legendre 다항식 <span class="math inline">\(P_3 = (5u^3-3u)/2\)</span> 등을 쓴다 <span class="src">Stepney 2024, p.679–680</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-bound" class="level3">
+<h3 class="anchored" data-anchor-id="ch-bound">3. 왜 총량은 노드 수를 넘지 못하나: 그림자 길이의 합</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 그림 4를 따라 "서로 수직인 목표 세 개를 노드 2개의 평면에 비추면 그림자 길이 제곱의 합이 2"를 손으로 계산하고, 그것이 "용량 총합 ≤ 노드 수"의 그림이라는 것과, 원 논문이 붙인 조건, 총합이 <span class="math inline">\(N\)</span>보다 작아지는 세 가지 이유를 말할 수 있다.</p>
+</div>
+<p>수학적 증명은 이 교재의 범위를 넘지만, <strong>왜 그런지</strong>는 그림 하나로 볼 수 있습니다. 출발점은 2구간 그림 2의 세 목표 <span class="math inline">\(u(t-1)\)</span>, <span class="math inline">\(u(t-2)\)</span>, <span class="math inline">\(u(t-1)\,u(t-2)\)</span>입니다.</p>
+<p><span id="s-shadow-guide"></span><strong>무엇을 볼지.</strong> 그림 4의 세 화살표는 서로 겹치지 않는 그 세 목표입니다(겹치지 않는 목표를 왜 서로 수직인 화살표로 그릴 수 있는지는 그림 아래에서). 파란 평면은 노드 2개의 상태에 숫자를 곱해 더해 만들 수 있는 모든 readout 출력이고, 회색 점선은 목표를 그 평면에 수직으로 비춘 <strong>그림자</strong>입니다. 가장 좋은 readout이 바로 이 그림자이고, 목표 길이를 1로 맞추면 <strong>용량 = 그림자 길이²</strong>입니다. <strong>세 목표의 그림자 길이를 제곱해 더하면 얼마인지</strong> 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d11/fig1-projection-budget.svg" alt="3차원에서 서로 수직인 목표 화살표 셋(파랑 목표 1 = u(t−1), 주황 목표 2 = u(t−2), 초록 목표 3 = 곱)과 노드 2개의 출력이 만드는 비스듬한 파란 평면. 목표 1은 평면 안에 있어 그림자² 1.00, 목표 2와 3은 그림자² 0.50씩, 합 2.00 = 평면의 차원" class="figure-img"><figcaption><b>그림 4.</b> 용량 = 그림자 길이의 제곱. 서로 수직인 목표 셋(2구간의 $u(t-1)$, $u(t-2)$, 곱)을 노드 2개의 출력 평면에 비추면 1.00 + 0.50 + 0.50 = 2.00이다. 이 평면은 노드 하나가 $u(t-1)$을 그대로 담고, 다른 노드가 $u(t-2)$와 곱을 같은 크기로 섞어 담은 경우다(아래 단계 1). 평면을 어떻게 기울여도 합은 2이고, 이것이 "용량 총합 ≤ 노드 수"의 3차원 판이다. 모식도이며 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-shadow-why"></span><strong>왜 화살표로 그릴 수 있나.</strong> 그림의 요소를 하나씩 계산과 맞춥니다.</p>
+<ul>
+<li><strong>신호 = 화살표.</strong> 시간 <span class="math inline">\(T\)</span>단계의 신호는 숫자 <span class="math inline">\(T\)</span>개의 목록이고, 숫자 <span class="math inline">\(T\)</span>개는 <span class="math inline">\(T\)</span>차원 공간의 화살표 하나로 볼 수 있습니다(숫자 3개 = 3차원 화살표). 2구간 네 단계 예의 목표 <span class="math inline">\(f\)</span> = 1, 2, 3, 6에서 평균을 뺀 (−2, −1, 0, 3)은 4차원 화살표입니다. 그림 2의 목표도 네 이력에서의 값 4개라 4차원 화살표인데, 평균 방향(상수)은 readout의 <span class="math inline">\(w_0\)</span>이 맡으므로 남는 것은 3차원입니다. <strong>그림 4의 3차원은 그림 2의 세계 그대로</strong>입니다.</li>
+<li><strong>곱의 평균 = 두 화살표가 얼마나 같은 쪽을 향하나.</strong> 두 화살표의 자리끼리 곱해 더한 값(내적)이 0이면 둘은 서로 수직입니다. 예: (1, 0, 0)과 (0, 1, 0)은 1×0 + 0×1 + 0×0 = 0. 그림 2의 <span class="math inline">\(u(t-1)\)</span> = (1, 1, −1, −1)과 <span class="math inline">\(u(t-2)\)</span> = (1, −1, 1, −1)도 1 − 1 − 1 + 1 = 0으로 수직입니다. 2구간의 "곱의 평균 <span class="math inline">\(\langle f \cdot g \rangle\)</span>"는 이 내적을 <span class="math inline">\(T\)</span>로 나눈 것이므로, <strong>겹치지 않는 목표 = 서로 수직인 화살표</strong>입니다. 같은 식으로 (길이²)/<span class="math inline">\(T\)</span> = <span class="math inline">\(\langle f^2 \rangle\)</span> = 분산(평균을 뺀 경우)이라, 분산을 1로 맞춘 목표는 모두 같은 길이(아래에서는 1)로 그립니다.</li>
+<li><strong>readout 출력 = 판 위의 화살표.</strong> 노드 하나의 상태 시계열도 화살표 하나이고, 선형 readout의 출력은 노드 화살표들에 가중치를 곱해 더한 것입니다. 그런 출력을 모두 모으면 노드 화살표들이 펼치는 <strong>평평한 판</strong>이 되고, 노드 화살표 <span class="math inline">\(N\)</span>개가 서로의 가중합이 아니면(선형 독립) 판은 <span class="math inline">\(N\)</span>차원입니다. 노드 2개면 2차원 평면입니다.</li>
+<li><strong>최선의 readout = 그림자, 용량 = 그림자 길이².</strong> 최소제곱 readout은 판 위에서 목표 화살표에 가장 가까운 점, 곧 목표를 판에 수직으로 비춘 <strong>그림자</strong>를 찾습니다. 용량은 (그림자 길이 ÷ 목표 길이)²이고, 목표 길이가 1이면 그림자 길이²입니다. 평면 안에 들어 있는 목표는 그림자 길이 1(용량 1), 평면에 수직인 목표는 그림자 0(용량 0). 2구간 네 단계 예라면 판은 상태 화살표 (−1, −2, 1, 2) 하나가 만드는 직선(1차원)이고, 목표 (−2, −1, 0, 3)의 그림자에 대해 (그림자 길이 ÷ 목표 길이)² = 10²/(10 × 14) ≈ 0.714로 용량과 같습니다. 그림 2의 노드 A 하나로 <span class="math inline">\(u(t-1)\)</span>을 비추면 4²/(5 × 4) = 0.8로 2구간 단계 3의 값입니다. [계산]</li>
+</ul>
+<p>어디까지 맞고 어디서 깨지나: 신호를 화살표로, 곱의 평균을 내적으로 보는 것은 비유가 아니라 같은 계산입니다. 그림이 줄인 것은 두 가지입니다. 실제 화살표는 3차원이 아니라 시험 구간 길이(수천)만큼의 차원을 갖고, 목표는 셋이 아니라 무수히 많습니다(모든 차수·지연의 조합). 그래도 "수직인 화살표들의 그림자 제곱 합 ≤ 판의 차원"이라는 계산은 차원이 몇이든 그대로 성립합니다. 또 데이터가 유한하면 원래 수직이어야 할 목표들도 정확히 수직이 아니어서(2구간 심화의 10개 입력에서 <span class="math inline">\(\langle u \cdot P_3 \rangle\)</span> = −0.012처럼) 작은 그림자가 우연히 생깁니다. 아래 '원 논문의 정리'에서 볼 문턱이 필요한 이유입니다. <span class="tag tag-interp">해석</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/zSd7jd2HGhM?start=84&amp;rel=0" title="영상: 제9장: 내적과 쌍대성 | 선형대수학의 본질" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:24–5:19, 약 4분 · 전체 14분, 한국어 더빙·번역판).</b> 3Blue1Brown 한국어, "제9장: 내적과 쌍대성 | 선형대수학의 본질"(원본: 3Blue1Brown, "Dot products and duality"). <b>볼 이유:</b> 챕터 '내적의 기하적 해석'(1:24)과 '내적은 왜 사영과 관련있는가?'(3:56)가 화살표 하나를 다른 방향에 수직으로 비춘 <b>그림자(사영)</b>의 길이를 내적으로 계산하는 장면이다(챕터 제목 기준). 아래 단계 2–4에서 쓰는 "각 방향과의 곱의 합"이 이 계산이다. 5:19 이후의 쌍대성은 오늘 몰라도 된다. <b>보고 답할 질문:</b> 단계 3에서 목표 2 = (0, 1, 0)을 방향 $b_2$ = (0, 0.707, 0.707)에 비춘 그림자 길이 0.707은, 영상의 어느 계산(어떤 두 화살표의 내적)과 같은가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 목록(영상 내용은 미검증)</span></div></div>
+<p><span id="s-shadow-steps"></span><strong>손으로 계산하기.</strong> 그림 4의 숫자를 다섯 단계로 따라갑니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 판을 정한다.</strong> 노드 하나는 <span class="math inline">\(u(t-1)\)</span>을 그대로 담고(방향 <span class="math inline">\(b_1 = (1, 0, 0)\)</span>), 다른 노드는 <span class="math inline">\(u(t-2)\)</span>와 곱을 같은 크기로 섞어 담았다고 합시다(방향 <span class="math inline">\(b_2 = (0, 0.707, 0.707)\)</span>, <span class="math inline">\(0.707 = 1/\sqrt{2}\)</span>). 세 숫자는 차례로 목표 1·2·3 방향의 성분이고, <span class="math inline">\(b_1\)</span>과 <span class="math inline">\(b_2\)</span>는 서로 수직이고 길이 1입니다. 두 노드가 만드는 평면은 바닥에서 비스듬히 선 평면입니다(그림 4).</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 목표 1 = (1, 0, 0).</strong> 그림자는 각 방향과의 곱의 합으로 구합니다(<span class="math inline">\(b_1\)</span>과 <span class="math inline">\(b_2\)</span>가 서로 수직이고 길이 1이라서, 방향마다 따로 구해 제곱해 더할 수 있습니다): <span class="math inline">\(b_1\)</span> 쪽 <span class="math inline">\(1 \times 1 = 1\)</span>, <span class="math inline">\(b_2\)</span> 쪽 0. 그림자 길이² <span class="math inline">\(= 1^2 + 0^2 = 1\)</span>. 목표 1은 평면 안에 있으므로 완벽히 되살립니다(용량 1).</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 목표 2 = (0, 1, 0).</strong> <span class="math inline">\(b_1\)</span> 쪽 0, <span class="math inline">\(b_2\)</span> 쪽 <span class="math inline">\(1 \times 0.707 = 0.707\)</span>. 그림자 길이² <span class="math inline">\(= 0.707^2 = 0.5\)</span>. 용량 0.5.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 목표 3 = (0, 0, 1).</strong> 같은 계산으로 <span class="math inline">\(b_2\)</span> 쪽 0.707, 용량 0.5.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 더한다.</strong> <span class="math inline">\(1 + 0.5 + 0.5 = 2\)</span>. 평면이 2차원(노드 2개)이니 합이 2입니다. 평면을 바닥(<span class="math inline">\(z = 0\)</span>)으로 눕히면 <span class="math inline">\(1 + 1 + 0 = 2\)</span>, 다른 어떤 기울기여도 2입니다. 왜 기울기와 상관없나: 평면의 방향 하나(예: <span class="math inline">\(b_2\)</span>)를 놓고 세 목표와의 곱을 제곱해 더하면 <span class="math inline">\(0^2 + 0.707^2 + 0.707^2 = 1\)</span>, 곧 그 방향의 길이² 1이 나옵니다(세 목표가 서로 수직이고 3차원 전부를 덮기 때문). 방향이 둘이니 합은 2입니다. 목표를 일부만 세면(목표 3을 빼면 1 + 0.5 = 1.5) 2보다 작아질 뿐 넘지는 않습니다. <strong>노드 2개로는 서로 겹치지 않는 목표들을 합쳐서 2만큼만 되살릴 수 있고</strong>, 목표 1을 완벽히 되살리면 나머지 둘은 합쳐서 1만 남습니다.</p>
+</div>
+</div>
+<p><span id="s-shadow-ab"></span><strong>그림 2의 두 노드를 함께 쓰면.</strong> 노드 A와 B를 함께 readout에 주면(노드 2개) 평면의 기울기가 그림 4와 다를 뿐 계산은 같습니다. 세 목표의 용량은 <span class="math inline">\(u(t-1)\)</span> 0.87, <span class="math inline">\(u(t-2)\)</span> 0.50, 곱 0.63으로 합이 2.00입니다. <span class="prov">Claude 계산(<code>tools/figs_d11.py</code>)</span> 노드 하나씩일 때 1.00이던 합이 서로 다른 노드가 하나 늘자 2.00이 되었습니다. 곱 항은 노드 하나씩으로는 0과 0.14뿐이었는데 둘을 함께 쓰면 0.63입니다. 노드 A가 기억 항을 맡아 주니, readout이 노드 B에서 곱 성분을 따로 떼어 쓸 수 있게 된 것입니다. <span class="tag tag-interp">해석</span> 이 장난감 세계는 3차원이라 서로 다른 노드가 셋이면 합이 3, 곧 세 목표를 모두 완벽히 되살릴 수 있고, 넷째 노드는 더 보탤 것이 없습니다.</p>
+<p><span id="s-n-dim"></span><strong><span class="math inline">\(N\)</span>차원으로 늘리면.</strong> 노드 <span class="math inline">\(N\)</span>개는 <span class="math inline">\(N\)</span>차원 판을 만들고, 서로 수직인 목표를 아무리 많이 세어도 그림자 제곱의 합은 <strong>판의 차원 <span class="math inline">\(N\)</span>을 넘지 못합니다</strong>. Day 15의 "노드 하나의 기억 예산 = 1"은 <span class="math inline">\(N = 1\)</span>인 경우였습니다. 그리고 목표들이 상태가 할 수 있는 모든 것을 빠짐없이 덮으면(모든 차수·모든 지연) 합은 정확히 <span class="math inline">\(N\)</span>이 됩니다. fading memory가 필요한 이유는, 그래야 상태가 <strong>입력 이력만의 함수</strong>(Day 15의 ESP)가 되어 "입력 이력의 다항식" 목표들로 상태가 할 수 있는 일을 다 덮을 수 있기 때문입니다. <span class="tag tag-interp">해석</span></p>
+<div class="stop-point">
+<p>여기까지: 그림 4의 그림자² 1 + 0.5 + 0.5 = 2를 손으로 계산하고, 그림 2의 두 노드를 함께 쓰면 0.87 + 0.50 + 0.63 = 2.00이 되는 것을 '평면의 차원 = 노드 수'로 설명할 수 있다. 다음: 원 논문이 이 상한을 어떤 조건에서 증명했고, 실제로 잰 합이 왜 <span class="math inline">\(N\)</span>보다 작게 나오는지.</p>
+</div>
+<section id="s-bound-conditions" class="level4">
+<h4 class="anchored" data-anchor-id="s-bound-conditions">원 논문의 정리: 상한과 같아지는 조건</h4>
+<p><strong>원 논문이 증명한 것.</strong> Stepney는 Dambre 등이 <strong>fading memory를 가진 계에서 (선형과 비선형 다항식 전부의 기여를 더한) 총 IPC가 노드 수 <span class="math inline">\(N\)</span>과 같다</strong>는 것을 증명했다고 요약합니다. <span class="src">Stepney 2024, p.680</span> 원 논문(Dambre 등 2012, <em>Sci. Rep.</em> 2, 514, <a href="https://doi.org/10.1038/srep00514">doi:10.1038/srep00514</a>)이 말하는 것은 "상한"과 "같아지는 조건"의 두 층입니다. <span class="src">Dambre 2012, 초록·Theorem 4·7</span> <span class="prov">원 논문은 폴더 밖. Claude가 공개 본문(PMC3400147)에서 초록·Theorem 4·7과 그 조건을 대조</span> 위 그림자 그림이 상한의 이유였고, 아래는 그 정리가 붙인 조건입니다.</p>
+<p><strong>이 결과가 성립하는 조건(원 논문 기준).</strong></p>
+<ul>
+<li><strong>상한.</strong> readout이 관측한 상태 변수 <span class="math inline">\(N\)</span>개의 선형 결합일 때, 서로 직교하는 목표 함수들의 용량을 몇 개를 모아 더하든 합은 <span class="math inline">\(N\)</span>을 넘지 못합니다(Theorem 4). 초록의 표현으로는 상한이 <strong>선형 독립인 상태 변수의 수</strong>입니다. 이 부등식 자체는 fading memory를 가정하지 않습니다.</li>
+<li><strong>같아지는 조건.</strong> 합이 <span class="math inline">\(N\)</span>에 이르려면 (1) 계가 fading memory를 가지고(<a href="../days/d09.html#b-fading-memory">Day 15 기초</a>), (2) <span class="math inline">\(N\)</span>개 상태 변수가 선형 독립이며(어떤 상태도 다른 상태들의 가중합으로 만들어지지 않음. 원 논문의 표현으로는 상태들이 함께 움직이는 정도를 적은 표, 곧 상관 행렬의 rank가 <span class="math inline">\(N\)</span>, <a href="../days/d14a.html#ch-rank">Day 24 3구간</a>에서 다룸), (3) 서로 겹치지 않는 목표 함수 묶음이 fading memory를 가진 모든 목표를 빠짐없이 만들 수 있을 만큼 완전하고(완전한 직교 기저), (4) 데이터 길이와 처음 버리는 초기화 구간이 무한대인 극한이어야 합니다(Theorem 7).</li>
+<li><strong>입력.</strong> 정리는 매 단계 입력 <span class="math inline">\(u(t)\)</span>를 같은 확률분포 <span class="math inline">\(p(u)\)</span>에서 서로 독립으로 뽑는 경우(i.i.d.)를 다루고, "직교"는 그 분포로 낸 평균으로 판단합니다. 그래서 입력 분포마다 맞는 다항식 묶음이 다릅니다(위의 Legendre·Hermite). 저자들은 i.i.d.가 아닌 입력에도 이론의 대부분이 성립할 것이라고 보면서도, 그때는 직교 기저를 실제로 만들기가 흔히 어렵다고 적습니다.</li>
+<li><strong>유한한 데이터로 추정할 때.</strong> 측정값은 통계적 흔들림을 가지며, 특히 아주 작은 용량은 우연한 상관 때문에 <strong>부풀려질</strong> 수 있습니다. 원 논문은 <span class="math inline">\(10^6\)</span>단계 데이터로 9차까지의 Legendre 다항식 곱을 세고, 문턱(노드 50개 ESN, 곧 <a href="../days/d07b.html#ch-esn-lsm">Day 12</a>의 난수로 연결한 소프트웨어 reservoir에서 <span class="math inline">\(1.7\times10^{-4}\)</span>)보다 작은 용량은 0으로 두었습니다(문턱을 정한 근거는 보충자료). 비선형이 강한 경우에는 센 목표 밖에 남은 용량 때문에 측정한 총합이 실제 총량보다 작게 나온다고 적습니다.</li>
+<li><strong>잡음.</strong> 알 수 없는 잡음이 계를 흔들면, 입력 <span class="math inline">\(u\)</span>만으로 정해지는 목표들의 용량 합은 <span class="math inline">\(N\)</span>보다 작습니다. 합이 <span class="math inline">\(N\)</span>이 되는 것은 잡음까지 포함한 전체 함수 공간에서뿐입니다.</li>
+</ul>
+<p><span id="s-device-count"></span><strong>소자 개수 ≠ 독립 상태 수.</strong> 여기서 <span class="math inline">\(N\)</span>은 "물리 소자 개수"가 아니라 <strong>readout이 실제로 받는 상태 변수 가운데 선형 독립인 것의 수</strong>입니다. 둘은 두 방향으로 어긋납니다. 소자 하나라도 여러 시점·여러 단자에서 읽으면(Day 16–17의 가상 노드) 상태 변수가 여럿이 되고, 반대로 소자가 20개여도 모두 같거나 서로의 가중합처럼 움직이면 독립 상태 수는 그보다 훨씬 작습니다(5구간의 '같은 소자 20개 = 1.00', Day 24–25의 rank). 수학적으로는 독립이어도 측정 잡음에 묻힌 방향은 쓸 수 없습니다. <span class="tag tag-interp">해석</span> 그러니 "노드 수"는 기대할 수 있는 값이 아니라, 선형 readout에서 <strong>참 용량의 합이 넘을 수 없는 천장</strong>으로 읽으세요. 유한한 데이터로 추정한 값은 우연한 상관으로 부풀 수 있으므로, 측정값을 보고할 때는 데이터 길이·센 차수와 지연·문턱을 함께 적습니다.</p>
+<p><strong>실제로 재려면.</strong> 목표 수는 차수와 지연이 늘면 폭발적으로 늘어 계산이 무겁고, 높은 차수·긴 지연의 기여는 작아 어딘가에서 끊습니다. <span class="src">Stepney 2024, p.680</span> 끊는 기준, 입력 분포, 데이터 길이, 잡음과 우연한 상관을 버리는 기준에 따라 숫자가 달라지므로 그것들을 함께 보고해야 한다고 Stepney와 Singh은 모두 강조합니다. <span class="src">Stepney 2024, p.680</span> <span class="src">Singh 2026, p.13</span> 오늘의 시뮬레이션은 차수 1–4, 차수별 지연 창(1차 0–99, 2차 0–19, 3차 0–11, 4차 0–7)을 셌고, 시험 구간에서 계산한 용량이 음수면 0으로 두었습니다.</p>
+<p><span id="s-bound-less"></span><strong>총합이 <span class="math inline">\(N\)</span>보다 작아지는 세 이유.</strong> <span class="tag tag-interp">해석</span></p>
+<ol type="1">
+<li><strong>노드가 서로의 복사본이거나 가중합이면</strong> 판의 실제 차원이 <span class="math inline">\(N\)</span>보다 작습니다. 노드 20개가 모두 같으면 판은 1차원입니다(5구간에서 숫자로).</li>
+<li><strong>잡음</strong>이 있으면 아주 작은 그림자는 잡음에 묻혀 읽을 수 없습니다. Stepney는 이 상한이 이론적 성질이고, 유한한 데이터와 실험 잡음 때문에 실제로는 임의의 기준과 문턱이 있어야 의미 있는 값이 나온다고 씁니다. <span class="src">Stepney 2024, p.680</span></li>
+<li><strong>세지 않은 목표</strong>에 용량이 가 있으면 합이 작게 나옵니다(높은 차수, 긴 지연). 측정이 차수·지연을 어디서 끊었는지 함께 보고해야 하는 이유입니다.</li>
+</ol>
+<p><strong>계산의 몫과 readout의 몫.</strong> 이 상한은 <strong>선형 readout</strong>에 대한 것입니다. readout이 상태를 제곱하거나 곱하면(비선형 readout) 판 자체가 커져 상한이 달라집니다. 그 경우 늘어난 몫은 재료가 아니라 readout이 한 일입니다(Day 14 7구간, Day 17 7구간). <span class="tag tag-interp">해석</span></p>
+<div class="quiz" data-day="d11" data-set="3-check"></div>
+<div class="quiz" data-day="d11" data-set="3-end"></div>
+<div class="keypoints">
+<ul>
+<li>목표 = 화살표, 노드 <span class="math inline">\(N\)</span>개의 출력 = <span class="math inline">\(N\)</span>차원 판, 용량 = 그림자 길이². 수직인 목표 셋을 2차원 판에 비추면 1 + 0.5 + 0.5 = 2(그림 2의 두 노드를 함께 쓰면 0.87 + 0.50 + 0.63 = 2).</li>
+<li>그림자 제곱 합은 판의 차원 <span class="math inline">\(N\)</span>을 넘지 못하고, 목표가 전부를 덮으면 <span class="math inline">\(N\)</span>이다(Day 15의 예산 1은 <span class="math inline">\(N = 1\)</span>).</li>
+<li><span class="math inline">\(N\)</span>보다 작아지는 이유: 복사본 노드, 잡음 <span class="src">Stepney 2024, p.680</span>, 세지 않은 목표.</li>
+<li>상한은 선형 readout 기준이다. 비선형 readout이 키운 몫은 readout의 몫.</li>
+<li>원 논문: 총 IPC ≤ 선형 독립인 상태 변수 수. 같아지려면 fading memory, 상태의 선형 독립(rank <span class="math inline">\(N\)</span>), 완전한 직교 기저, 무한한 데이터, i.i.d. 입력이라는 조건이 붙는다 <span class="src">Dambre 2012, 초록·Theorem 4·7</span> <span class="src">Stepney 2024, p.680</span>. 소자 개수 ≠ 독립 상태 수. 측정은 데이터 길이·차수·지연·문턱을 함께 보고한다.</li>
+</ul>
+</div>
+</section>
+</section>
+</div>
+<script type="application/json" id="quiz-d11">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 장의 앵커.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 노드를 늘리는 법과 소자 비선형의 쓸모", "items": [{"id": "d11-r01", "type": "mc", "q": "성질이 똑같은 노드 8개에 센서 값 u를 모두 같은 무게(1)로 넣었다. readout이 받는 상태에 대해 가장 맞는 말은?", "options": ["노드가 8개이므로 서로 다른 상태 8개가 생긴다", "tanh가 굽혀 주므로 노드마다 다른 값이 나온다", "8개가 같은 값을 내어 노드 하나와 다를 바 없다", "시간이 지나면 노드마다 다른 과거가 쌓여 갈라진다"], "a": 2, "why": "같은 성질의 노드에 같은 입력이 같은 무게로 들어가면 모두 같은 값을 냅니다. 노드마다 입력을 다른 무게로 받게 하는 숫자 목록이 마스크(= W_in)이고, 그래야 서로 다른 상태가 생깁니다.", "wrongWhy": ["개수만 8개일 뿐, 같은 규칙에 같은 입력이 들어가면 8개 값이 똑같아 서로 다른 상태는 하나뿐이다.", "tanh는 모든 노드에 똑같이 걸리므로, 같은 입력을 받은 노드들은 똑같이 굽은 값을 낸다.", "", "규칙과 입력이 모두 같으면 과거도 똑같이 쌓이므로 노드끼리 갈라질 이유가 없다."], "note": "마스크 (m₁, …, m_N): 노드 i에 m_i × u를 넣는 숫자 목록. 보통 ±1이나 −1~1 난수로 한 번 정해 고정한다.", "ref": "d10b.html#b-mask", "refLabel": "입력 마스크: 왜 필요한가"}, {"id": "d11-r02", "type": "mc", "q": "노드 둘에 마스크 (+1, −1)로 같은 입력을 넣는다. 두 노드는 같은 tanh이고 치우침(bias)이 없다. 둘째 노드는 readout에 무엇을 더해 주나?", "options": ["첫째와 반대로 휘어 새로운 곱 성분을 더해 준다", "첫째의 부호만 바꾼 값이라 새 정보가 없다", "두 노드를 더하면 입력의 제곱 성분이 생긴다", "−1을 받은 노드는 늘 0을 내어 쓸모가 없다"], "a": 1, "why": "tanh는 입력 부호를 뒤집으면 출력도 그대로 뒤집히는 대칭이라, 치우침이 없으면 −1을 받은 노드는 +1 노드의 정확히 −1배입니다. 서로의 가중합이라 정보가 늘지 않습니다. 노드의 치우침·시간 응답·연결로 이 대칭을 깨야 합니다.", "wrongWhy": ["tanh(−z) = −tanh(z)라서 둘째 노드는 첫째를 정확히 뒤집은 것일 뿐, 다른 굽힘을 주지 않는다.", "", "부호만 바뀐 두 값을 더하면 0이 되어 아무 성분도 남지 않는다.", "−1을 곱한 입력도 0이 아니므로, 둘째 노드는 첫째와 크기가 같고 부호가 반대인 값을 낸다."], "ref": "d10b.html#s-mask-break", "refLabel": "마스크가 깨지는 곳: 부호만 바뀐 복사본"}, {"id": "d11-r03", "type": "ox", "q": "시간다중화에서 칸 길이를 θ = τ/4로 잡으면, 마스크 값이 똑같이 +1인 칸들이라도 그 칸 끝에서 읽은 가상 노드 값은 서로 다를 수 있다.", "a": true, "why": "칸 끝의 값은 '이번 칸의 입력'과 '앞 칸 끝의 값'이 섞인 것입니다. θ = τ/4면 앞 칸의 흔적이 78% 남아, 마스크가 같은 칸도 앞 칸에 따라 값이 달라집니다(예: 0.102, 0.085, 0.168). 이것이 가상 노드끼리 이어진 효과입니다.", "wrongWhy": ["", "소자가 τ로 천천히 따라가므로 칸 끝 값에는 바로 앞 칸의 흔적이 섞인다. 앞 칸이 다르면 마스크가 같아도 값이 달라진다."], "ref": "d10b.html#s-tm-hand", "refLabel": "손 계산: 마스크 (1, −1, 1, 1), 입력 0.5", "fig": "../assets/img/d10/fig7-delay-timeline.svg", "figAlt": "소자 하나에 칸마다 마스크를 곱한 입력을 걸고 칸 끝마다 읽어 가상 노드 넷을 만드는 시간선"}, {"id": "d11-r04", "type": "mc", "q": "시간다중화에서 칸 길이 θ를 소자 시간상수 τ의 40분의 1로 아주 짧게 잡았다. 가장 먼저 생길 문제는?", "options": ["칸마다 목표값까지 가 버려 값이 두 종류로 몰린다", "앞 입력을 금방 잊어 입력 사이의 기억이 사라진다", "칸이 짧아 가상 노드 수가 줄고 readout이 받는 숫자가 준다", "소자가 칸마다 조금만 움직여 값이 작고 잡음에 묻힌다"], "a": 3, "why": "한 칸에 다가가는 몫은 1 − e^(−θ/τ)라 θ = τ/40이면 2.5%뿐입니다. 소자가 거의 움직이지 못해 가상 노드 값이 0.06 이하로 작고 이웃끼리 차이도 작아, 측정 잡음에 묻히기 쉽습니다.", "wrongWhy": ["그것은 θ가 τ보다 훨씬 긴 경우(예: 4τ)의 포화다. τ/40이면 한 칸에 2.5%만 움직인다.", "θ가 짧으면 한 칸 뒤 남는 비율 d가 0.975로 커서, 오히려 앞 입력이 오래 남는다.", "가상 노드 수 N은 한 입력 단계를 몇 칸으로 나누느냐로 정한다. 칸 길이가 바뀌어도 N은 그대로다.", ""], "ref": "d10b.html#s-theta-cases", "refLabel": "θ를 τ와 견주는 세 경우", "fig": "../assets/img/d10/fig2-mask-multiplex.svg", "figAlt": "칸 길이 θ = τ/40, τ/4, 4τ에서 가상 노드 값의 크기와 다양함 비교"}, {"id": "d11-r05", "type": "mc", "q": "시간상수 τ = 2 s인 이온 소자 하나로 가상 노드 10개를 만들고, 칸 길이를 θ ≈ τ/4로 잡는다. 입력 하나를 처리하는 데 걸리는 시간은 대략?", "options": ["약 5 s", "약 0.5 s", "약 2 s", "약 20 s"], "a": 0, "why": "θ = 2 s ÷ 4 = 0.5 s이고, 한 입력 단계는 칸 10개를 차례로 거치므로 0.5 × 10 = 5 s입니다. 가상 노드 N개의 대가는 입출력이 N배 빨라야 하거나 그만큼 한 단계가 길어지는 것(직렬 동작)이고, 실시간 과제에서는 이것이 지연 시간이 됩니다.", "wrongWhy": ["", "0.5 s는 칸 하나의 길이다. 입력 한 단계는 칸 10개를 차례로 거치므로 10배가 걸린다.", "τ 자체는 입력 한 단계의 길이가 아니다. 한 단계 = 칸 길이 θ × 칸 수 N이다.", "칸 길이를 τ(2 s)로 잡았을 때의 값이다. θ = τ/4 = 0.5 s이므로 0.5 × 10 = 5 s다."], "ref": "d10b.html#s-tm-cost", "refLabel": "시간다중화의 대가"}, {"id": "d11-r06", "type": "mc", "q": "치우침(bias) 없는 tanh reservoir가 시뮬레이션에서 3-parity는 99% 맞혔지만 지연 XOR은 50%였다. 노드마다 작은 치우침을 더하면 지연 XOR 정답률은 어떻게 될 것으로 예상되나?", "options": ["치우침은 상수라 readout 상수항과 같아 변화가 없다", "XOR은 그대로 50%이고 3-parity만 더 오른다", "부호 대칭이 깨져 XOR 정답률이 오른다", "두 과제 모두 동전 던지기 수준으로 떨어진다"], "a": 2, "why": "치우침이 없으면 입력 부호를 모두 뒤집을 때 상태도 부호만 뒤집혀, 답이 그대로인 XOR을 선형 readout이 가르지 못합니다. 치우침이 이 대칭을 깨면 XOR도 풀 수 있게 됩니다(같은 시뮬레이션에서 81%).", "wrongWhy": ["치우침은 tanh 안에서 더해져 노드가 휘는 지점을 옮긴다. readout 바깥의 상수항과 달리 대칭을 깬다.", "XOR이 50%였던 원인이 바로 부호 대칭이므로, 대칭을 깨는 치우침은 XOR 쪽에 영향을 준다.", "", "치우침은 비선형을 없애지 않는다. 시뮬레이션에서도 치우침이 있는 tanh는 XOR 81%였다."], "note": "'비선형이다'라는 말만으로는 어떤 과제를 풀지 알 수 없다. 과제가 요구하는 종류(대칭 여부)와 세기가 맞아야 한다.", "ref": "d10b.html#s-res-kind", "refLabel": "비선형의 종류가 맞아야 한다", "fig": "../assets/img/d10/fig3-reservoir-xor.svg", "figAlt": "노드 20개 reservoir의 지연 XOR·3-parity 정답률 막대(선형, tanh, 치우침 없는 tanh 등)"}, {"id": "d11-r07", "type": "mc", "q": "어떤 소자의 I–V 곡선이 I = g(V + V³)로 휘어 있다(g는 소자 상태). 상태는 늘 0.2 V에서만 읽는다. 읽은 전류 I와 상태 g의 관계는?", "options": ["I = 0.208g, 상태에 상수를 곱한 것이다", "I가 g의 세제곱을 따라가 상태가 굽어 읽힌다", "V³ 항 때문에 입력 이력의 곱 성분이 생긴다", "곡선이 휘었으므로 g마다 곱해지는 비율이 다르다"], "a": 0, "why": "V = 0.2이면 V + V³ = 0.2 + 0.008 = 0.208이라 I = 0.208 g입니다. I–V가 아무리 휘어도 한 전압에서 읽기만 하면 그 휨은 상수 하나로 접힙니다.", "wrongWhy": ["", "세제곱은 전압 V에 걸린 것이지 상태 g에 걸린 것이 아니다. V를 고정하면 g에 대해서는 직선이다.", "고정된 V에서 V³은 숫자 0.008일 뿐이라, 이력에 대한 겹침 원리를 깨지 못한다.", "읽기 전압이 하나뿐이면 V + V³도 0.208 하나뿐이라, 어떤 g에도 같은 비율이 곱해진다."], "ref": "d10b.html#s-device-steps", "refLabel": "단계 1: 읽기 전압을 고정하면", "fig": "../assets/img/d10/fig4-read-vs-write.svg", "figAlt": "휜 I–V 곡선을 0.1 V 한 점에서 읽으면 상태에 상수를 곱하는 것이 되는 그림과 두 소자의 겹침 검사"}, {"id": "d11-r08", "type": "mc", "q": "소자에 쓰기 펄스 이력 10, 01, 11(왼쪽이 먼저)을 넣고 같은 읽기 전압에서 전류를 쟀더니 I(10) = 0.03, I(01) = 0.05, I(11) = 0.08이었다. 이 결과가 뜻하는 것은?", "options": ["11의 전류가 가장 크므로 비선형 기억이 확인되었다", "I–V 곡선을 모르므로 아무것도 말할 수 없다", "연달아 온 두 펄스의 흔적이 따로 남아 XOR을 풀 수 있다", "겹침이 성립해, 두 펄스의 곱 같은 성분은 보이지 않는다"], "a": 3, "why": "I(10) + I(01) = 0.08 = I(11)이라 입력 이력에 대해 겹침 원리가 성립합니다. 이 상태는 지난 펄스들의 가중합일 뿐이라, 이런 상태만으로는 선형 readout이 XOR 같은 곱을 만들 수 없습니다.", "wrongWhy": ["11이 가장 큰 것은 두 펄스의 흔적을 더한 결과일 뿐이다. 비선형인지는 두 경우의 합과 비교해야 안다.", "읽기 전압이 고정이면 I–V의 휨은 상수로 접히므로, 이력끼리 비교하는 것만으로 겹침 여부를 판단할 수 있다.", "0.03 + 0.05 = 0.08로 11이 두 경우의 합과 같으므로, '연달아 왔다'는 사실은 따로 흔적을 남기지 않았다.", ""], "ref": "d10b.html#s-device-steps", "refLabel": "겹침 검사: 소자 A와 소자 B"}, {"id": "d11-r09", "type": "mc", "q": "다음 중 계산에 쓰이는 비선형을 줄 가능성이 가장 큰 소자 구조는?", "options": ["상태는 선형으로 쌓이고, 크게 휜 I–V를 작은 고정 전압에서 읽는 구조", "이미 쌓인 상태가 클수록 같은 쓰기 펄스가 덜 올리는(포화하는) 구조", "오르내릴 때 길이 다른 I–V를 보이지만 고정 전압에서 읽기만 하는 구조", "상태가 입력의 가중합으로 쌓이고 흐려지는 소자를 여럿 나란히 둔 구조"], "a": 1, "why": "쓸모 있는 비선형은 과거(상태)와 현재(입력)가 섞인 신호에 작용해야 합니다. 쓰기가 포화하면 '두 펄스가 연달아 왔다'는 사실이 따로 흔적을 남겨 겹침이 깨집니다(I(10) + I(01) ≠ I(11)).", "wrongWhy": ["고정 전압에서 읽으면 I–V의 휨은 상수로 접히고, 상태가 선형으로 쌓이므로 이력에 대해 선형이다.", "", "히스테리시스 같은 전기적 비선형도 고정 전압에서 읽기만 하면 상태에 상수를 곱하는 것으로 접힌다.", "가중합으로 쌓이는 상태는 몇 개를 놓아도 지난 입력의 가중합이라, 곱 성분을 만들지 못한다."], "ref": "d10b.html#s-when-iv", "refLabel": "언제 I–V의 휨이 쓸모 있나"}, {"id": "d11-r10", "type": "ox", "q": "지연 탭에 곱 특징을 더해 readout에서 비선형을 계산하면 정확도가 오르므로, 소자는 기억만 주고 비선형은 readout이 맡는 설계가 언제나 더 낫다.", "a": false, "why": "곱을 readout에 주는 것도 정직한 설계 중 하나지만, 곱 특징 수가 탭 수의 제곱으로 늘고 그 계산을 디지털로 하면 소자의 몫은 기억뿐이 됩니다. 늘 낫다고 할 수 없고, 같은 정확도에서의 시스템 비용으로 비교해야 합니다.", "wrongWhy": ["곱 특징 수는 탭 수의 제곱으로 늘어(20개 → 210개, 50개 → 1,275개) readout의 계산·저장 비용이 빠르게 커진다. 어느 쪽이 나은지는 같은 정확도에서의 시스템 비용으로 판정한다.", ""], "ref": "d10b.html#ch-objection", "refLabel": "반론: 비선형은 readout에서 계산하면 된다"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 정보처리용량과 노드 수 한계", "items": [{"id": "d11-rb01", "type": "mc", "q": "어떤 과제의 정답이 y(t) = u(t−6) × u(t−7)이다. 이 과제를 풀 reservoir 상태에 있어야 하는 것은?", "options": ["약 7단계 기억이면 충분하고 비선형은 필요 없다", "약 7단계 기억과 두 입력을 곱하는 2차 비선형", "2차 비선형이면 충분하고 기억은 1단계면 된다", "약 13단계 기억과 3차 이상의 강한 비선형"], "a": 1, "why": "과제가 쓰는 가장 오래된 입력이 필요한 기억 길이(7단계)를, 곱해진 입력의 개수가 필요한 비선형의 차수(2차)를 정합니다. 둘 중 하나만 넉넉해서는 안 되고 동시에 있어야 합니다.", "wrongWhy": ["정답이 두 입력의 곱이라, 지난 입력의 가중합만으로는 만들 수 없다.", "", "u(t−7)이 들어가므로 상태에 7단계 전 입력의 흔적이 남아 있어야 곱의 재료가 생긴다.", "가장 오래된 입력은 7단계 전이고 곱해지는 입력은 둘이라 2차다. 6과 7을 더할 이유는 없다."], "ref": "d11a.html#s-narma-demand", "refLabel": "과제는 기억과 비선형을 정해진 양만큼 요구한다", "fig": "../assets/img/d11/fig5-task-demands.svg", "figAlt": "과제마다 요구하는 기억 길이(가로)와 비선형 차수(세로)를 한 지도에 놓은 그림"}, {"id": "d11-rb02", "type": "mc", "q": "두 목표 A, B를 같은 reservoir로 되살렸다. 평균 제곱 오차는 둘 다 0.2인데, 목표의 분산은 A가 1.0, B가 0.25이다. 용량 C = 1 − 오차/분산으로 보면?", "options": ["오차가 같으므로 두 목표의 용량도 같다", "A는 0.2, B는 0.8로 B를 더 잘 되살렸다", "분산이 작은 B가 쉬운 목표라 용량이 크다", "A는 0.8, B는 0.2로 A를 더 잘 되살렸다"], "a": 3, "why": "A는 1 − 0.2/1.0 = 0.8, B는 1 − 0.2/0.25 = 0.2입니다. 오차는 목표가 원래 얼마나 흔들리는지와 견줘야 뜻이 있고, 그래서 분산으로 나눕니다.", "wrongWhy": ["용량은 오차를 목표가 원래 흔들리는 크기(분산)로 나눠 본다. 같은 오차라도 흔들림이 작은 목표에서는 큰 실패다.", "계산을 거꾸로 했다. A는 1 − 0.2/1.0 = 0.8, B는 1 − 0.2/0.25 = 0.2이다.", "분산이 작다고 쉬운 목표가 아니다. 같은 오차 0.2가 B의 흔들림 0.25의 80%라 B의 용량은 0.2뿐이다.", ""], "ref": "d11a.html#s-capacity-number", "refLabel": "작은 숫자로: 용량 계산"}, {"id": "d11-rb03", "type": "ox", "q": "기억이 3단계뿐인 reservoir는 비선형을 아무리 강하게 해도 NARMA10에 필요한 '1단계 전 입력 × 10단계 전 입력' 같은 곱을 만들 수 없다.", "a": true, "why": "곱을 만들려면 곱할 두 입력의 흔적이 모두 상태에 있어야 합니다. NARMA10에는 약 10단계 기억과 2차 곱이 함께 필요하고, 반대로 기억이 100단계여도 곱을 못 만들면 2차 항을 흉내 낼 수 없습니다.", "wrongWhy": ["", "비선형은 상태에 있는 재료를 굽히고 곱할 뿐이다. 10단계 전 입력의 흔적이 지워졌다면 곱할 재료가 없다."], "ref": "d11a.html#s-narma-demand", "refLabel": "과제는 기억과 비선형을 정해진 양만큼 요구한다"}, {"id": "d11-rb04", "type": "mc", "q": "어떤 목표는 입력을 모두 2배로 키우면 값이 4배가 된다. 이 목표에 대해 맞는 말은?", "options": ["차수 2라서 비선형이 있어야 상태에 생긴다", "차수 4라서 입력 넷의 곱이 들어 있다", "차수 1이라서 지난 입력의 가중합으로 된다", "값이 커질 뿐이라 차수와는 관계가 없다"], "a": 0, "why": "2배 → 4배 = 2²이므로 입력 둘을 곱한 차수 2 목표입니다(예: u(t−1)·u(t−2) 또는 u(t−1)²). 차수 2 이상은 겹침 원리를 깨는 비선형이 있어야 상태에 생깁니다.", "wrongWhy": ["", "2배 → 4배는 2의 2제곱이라 차수 2다. 차수 4라면 2⁴ = 16배가 된다.", "차수 1(지난 입력 하나)이라면 입력을 2배 할 때 목표도 2배가 된다.", "차수는 '입력을 키울 때 목표가 몇 제곱으로 커지나'로 읽을 수 있다. 4배 = 2²는 차수 2라는 뜻이다."], "ref": "d11a.html#s-degree", "refLabel": "차수: 목표가 입력 몇 개를 곱한 것인가"}, {"id": "d11-rb05", "type": "mc", "q": "최근 두 입력(±1)만으로 정해지는 장난감 세계에서 노드 하나의 용량을 쟀더니 목표 u(t−1)에 0.6, u(t−2)에 0.25였다. 이 세계의 겹치지 않는 목표는 이 둘과 곱 u(t−1)·u(t−2)뿐이다. 곱 목표의 용량은?", "options": ["0 (곱은 이 노드에 담기지 않는다)", "0.85 (두 기억 용량을 더한 값)", "0.15 (합 1에서 남은 몫)", "1.0 (곱 항은 따로 센다)"], "a": 2, "why": "노드 하나의 용량은 겹치지 않는 목표들에 나뉘고 합이 1입니다(이 세계에서는 세 목표가 상태가 할 수 있는 일을 다 덮습니다). 1 − 0.6 − 0.25 = 0.15가 곱 항의 몫입니다. 선형 노드 A(0.80, 0.20, 0)와 tanh 노드 B(0.43, 0.43, 0.14)도 합이 1이었습니다.", "wrongWhy": ["기억 항의 합이 0.85로 1보다 작다. 이 세계의 목표가 셋뿐이니 남은 0.15가 곱 항에 가 있다.", "0.85는 기억 항(차수 1)의 합, 곧 이 노드의 MC다. 곱 항의 몫이 아니다.", "", "겹치지 않는 목표들의 용량을 모두 더해도 노드 하나는 1을 넘지 못한다."], "ref": "d11a.html#s-capacity-share", "refLabel": "용량 = 그 조각이 노드의 흔들림에서 차지하는 몫", "fig": "../assets/img/d11/fig7-two-histories.svg", "figAlt": "입력 ±1 두 개의 네 가지 이력에서 선형 노드와 tanh 노드의 용량을 목표 셋으로 나눈 그림"}, {"id": "d11-rb06", "type": "mc", "q": "노드 수가 같은 두 reservoir의 IPC 총합이 똑같이 10이다. X는 차수 1에 9, 차수 2에 1을, Y는 차수 1에 4, 차수 2에 6을 썼다. 짧은 기억과 두 입력의 곱이 많이 필요한 과제에 더 맞는 것은?", "options": ["X, MC가 더 커서 어떤 과제든 유리하다", "Y, 과제가 요구하는 차수에 용량이 있다", "둘 다 IPC가 같으므로 차이가 없다", "X, 차수 1이 크면 곱은 readout이 만든다"], "a": 1, "why": "MC는 차수 1 용량의 합, IPC는 모든 차수의 합입니다. 총합이 같아도 차수별로 나누면 X는 기억 쪽, Y는 곱 쪽에 용량을 썼고, 곱이 많이 필요한 과제에는 Y가 맞습니다.", "wrongWhy": ["MC는 차수 1(지난 입력을 그대로 되살리기)만 센 것이다. 곱이 필요한 과제에는 차수 2 용량이 있어야 한다.", "", "총합이 같아도 차수별 배분이 다르다. 차수별로 나눠 봐야 과제와 맞는지 알 수 있다.", "선형 readout은 가중합만 하므로, 상태에 차수 2 성분이 없으면 곱을 만들지 못한다."], "ref": "d11a.html#s-degree", "refLabel": "차수별 용량, 그리고 MC와 IPC"}, {"id": "d11-rb07", "type": "mc", "q": "입력이 −1~1에서 고르게 나온다. u(t−1)만 기억하는 노드 하나의 용량을 목표 u(t−1)에 대해 1, 목표 u(t−1)³에 대해 0.84로 재서 더해 1.84라고 보고했다. 무엇이 잘못됐나?", "options": ["세제곱 목표는 차수 3이라 원래 0이어야 한다", "노드 하나도 비선형이면 1을 넘을 수 있다", "분산을 n−1로 나누지 않아 값이 부풀었다", "u와 u³이 겹쳐 같은 능력을 두 번 셌다"], "a": 3, "why": "u와 u³은 둘 다 오른쪽 위로 올라가는 모양이라 곱의 평균(1/5)이 0이 아닙니다. 겹친 목표를 그대로 세면 'u(t−1)을 기억함'이라는 한 능력을 두 번 셉니다. 그래서 겹친 몫을 뺀 Legendre 다항식 P₃ = (5u³ − 3u)/2 같은 조각을 씁니다.", "wrongWhy": ["u(t−1)³은 u(t−1)과 겹쳐서 u(t−1)만 기억해도 상관²이 0.84나 나온다. 0이 되는 것은 겹친 몫을 뺀 P₃ 목표다.", "겹치지 않는 목표들로 세면 노드 하나의 합은 1을 넘지 못한다. 1을 넘은 것 자체가 중복의 신호다.", "데이터가 길면 n과 n−1의 차이는 무시할 만하다. 0.84의 원인은 목표끼리의 겹침이다.", ""], "ref": "d11a.html#s-orthogonal-basis", "refLabel": "연속 입력에서 겹치지 않는 조각 고르기", "fig": "../assets/img/d11/fig6-legendre.svg", "figAlt": "u와 u³을 곱하면 평균이 0이 아니지만 u와 P₃를 곱하면 넓이가 상쇄되어 평균이 0이 되는 그림"}, {"id": "d11-rb08", "type": "mc", "q": "어떤 논문이 노드 5개 reservoir에서 선형 readout으로 잰 총 IPC를 6.3으로 보고했다. 가장 먼저 의심할 것은?", "options": ["데이터가 유한해 우연한 상관으로 작은 용량이 부풀었을 가능성", "비선형이 강해 총량의 상한이 노드 수보다 커졌을 가능성", "높은 차수를 많이 세면 합이 끝없이 커질 수 있다는 점", "노드마다 차수가 높아 각 노드가 1 이상을 낼 수 있다는 점"], "a": 0, "why": "선형 readout에서 참 용량의 합은 선형 독립인 상태 수(여기서 5 이하)를 넘을 수 없습니다. 측정값이 넘었다면 유한한 데이터에서 아주 작은 용량들이 우연한 상관으로 부풀었는지부터 봐야 합니다. 그래서 데이터 길이·센 차수와 지연·문턱을 함께 보고합니다.", "wrongWhy": ["", "상한은 선형 readout이 받는 독립 상태의 수로 정해지며, 비선형의 세기와는 무관하다.", "서로 겹치지 않는 목표를 아무리 많이 세어도 그림자 제곱의 합은 판의 차원 N을 넘지 못한다.", "노드 하나의 몫은 겹치지 않는 목표들에 나뉠 뿐 합이 1이다. 차수가 높아도 늘지 않는다."], "ref": "d11a.html#s-bound-conditions", "refLabel": "원 논문의 정리: 상한과 같아지는 조건"}, {"id": "d11-rb09", "type": "ox", "q": "선형 노드 A와 tanh 노드 B는 하나씩 쓸 때 곱 항 용량이 0과 0.14였다. 그러니 둘을 함께 readout에 주어도 곱 항 용량은 0.14를 넘지 못한다.", "a": false, "why": "노드가 둘이면 readout 출력이 만드는 판이 2차원이라 용량 합이 2까지 됩니다. 실제로 u(t−1) 0.87, u(t−2) 0.50, 곱 0.63으로 합이 2.00이었습니다. 용량은 노드마다 따로 더해지는 것이 아니라 함께 쓴 판에서 나뉩니다.", "wrongWhy": ["둘을 함께 쓰면 판이 2차원이 되어 곱 항 용량이 0.63이 되었다. 노드 A가 기억 항을 맡으니 readout이 노드 B에서 곱 성분을 떼어 쓸 수 있다.", ""], "ref": "d11a.html#s-shadow-ab", "refLabel": "그림 2의 두 노드를 함께 쓰면", "fig": "../assets/img/d11/fig1-projection-budget.svg", "figAlt": "서로 수직인 목표 셋을 노드 2개의 평면에 비춘 그림자 길이² 합이 2가 되는 그림"}, {"id": "d11-rb10", "type": "mc", "q": "이온 소자 하나를 한 입력 단계 안의 네 시각에 읽어, 서로의 가중합이 아닌 상태 값 4개를 얻었다. 선형 readout으로 꺼낼 수 있는 용량 합의 천장은?", "options": ["1, 물리 소자가 하나이므로", "2, 소자의 단자가 둘이므로", "4, 독립인 상태 변수가 넷이므로", "8, 읽은 값 넷과 그 곱까지 세므로"], "a": 2, "why": "상한의 N은 물리 소자 수가 아니라 readout이 받는 상태 변수 가운데 선형 독립인 것의 수입니다. 소자 하나라도 여러 시각에 읽으면(가상 노드) 상태 변수가 여럿이 되고, 반대로 소자 20개가 똑같이 움직이면 천장은 1에 가깝습니다. 단, 잡음에 묻힌 방향은 쓸 수 없습니다.", "wrongWhy": ["천장은 소자 개수가 아니라 readout이 받는 상태 변수 가운데 선형 독립인 것의 수다.", "단자 수가 아니라 readout이 실제로 받는 독립 상태 변수의 수가 천장을 정한다.", "", "곱을 만드는 것은 선형 readout이 하는 일이 아니다. readout이 곱을 만들면 늘어난 몫은 재료가 아니라 readout의 몫이다."], "ref": "d11a.html#s-device-count", "refLabel": "소자 개수 ≠ 독립 상태 수"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "10칸짜리 막대를 '기억(얼마나 오래전 입력을 붙잡나)'과 '조합(여러 입력을 곱하고 섞기)'으로 나눠 칠한다고 하고, 세 과제 — 사흘 전 기온을 그대로 말하기, 지난 학습과 그제 기온이 같았는지 판단하기, 최근 열흘 기온으로 내일 기온 예측하기 — 에 10칸을 각각 어떻게 나눌지 칠해 보세요. 기억과 조합을 둘 다 10칸씩 가질 수는 없다면 어느 과제가 가장 곤란할지 한 줄로 적으세요.", "items": [{"id": "d11-p01", "ref": "#s-narma-demand", "type": "mc", "q": "reservoir에서 '기억'과 '비선형'이 하는 일로 맞는 짝은?", "options": ["기억 = 입력들의 곱 만들기, 비선형 = 지난 입력 보관하기", "기억 = 지난 입력의 흔적 남기기, 비선형 = 입력들의 곱 만들기", "기억 = 지난 입력의 흔적 남기기, 비선형 = 잡음 줄이기", "기억과 비선형은 같은 일을 하는 두 이름이다"], "a": 1, "why": "기억은 지난 입력의 흔적(Day 15), 비선형은 입력들의 곱·굽힘(Day 16–17)으로 서로 다른 일입니다. 짝을 뒤바꾸거나 비선형을 잡음 줄이기로 보면 틀립니다. 과제는 둘을 정해진 양만큼 요구합니다. 예: NARMA10은 약 10단계 기억 + 2차 곱(1구간).", "refLabel": "NARMA10이 요구하는 기억과 곱"}, {"id": "d11-p02", "ref": "#b-basis-function", "type": "ox", "q": "'얼마나 오래전 입력을 되살리나'(기억)와 '입력들의 곱 같은 함수를 얼마나 잘 만드나'(비선형)는 하나의 같은 척도로 함께 잴 수 있다.", "a": true, "why": "목표 하나를 얼마나 되살리는지를 용량 C = 1 − 오차/분산(0–1)으로 재면, 목표가 '지난 입력 하나'(기억)든 '두 입력의 곱'(비선형)이든 같은 식으로 잽니다. 예: 입력 ±1 두 개의 이력 네 가지에서 tanh 노드 하나는 기억 항에 0.43 + 0.43, 곱 항에 0.14를 줍니다. 차수 1의 합이 MC, 모든 차수의 합이 IPC입니다(2구간).", "refLabel": "기억 항과 곱 항을 같은 저울로(네 가지 이력 예)"}, {"id": "d11-p03", "ref": "#s-shadow-steps", "type": "mc", "q": "노드 10개짜리 reservoir에 선형 readout을 붙였다. 서로 겹치지 않는 여러 목표를 각각 얼마나 되살리는지(0–1)를 모두 더하면 그 합은 최대 얼마일 수 있나?", "options": ["1", "10", "100", "제한 없이 커질 수 있다"], "a": 1, "why": "목표를 화살표, 노드 출력을 N차원 판으로 보면 용량은 그림자 길이²이고, 서로 수직인 목표들의 그림자² 합은 판의 차원 N을 넘지 못합니다. 노드 2개면 2, 10개면 10입니다. 1은 노드 하나일 때의 예산(Day 15)이고, 목표를 많이 센다고 합이 커지지는 않습니다. 정확히는 선형 독립인 상태 변수의 수가 상한이고, 그 값에 이르려면 fading memory·충분한 데이터 같은 조건이 붙습니다(3구간).", "refLabel": "노드 2개 평면의 그림자 합"}, {"id": "d11-p04", "ref": "#b-tradeoff", "type": "mc", "q": "입력을 크게 넣어 reservoir 노드들이 더 강하게 휘도록(비선형이 강하도록) 만들면, 지난 입력을 그대로 되살리는 기억 능력은 어떻게 되기 쉬운가?", "options": ["함께 커진다 — 큰 입력이 더 큰 흔적을 남기므로", "변하지 않는다 — 기억은 연결 행렬만으로 정해지므로", "줄어든다 — 같은 총량을 비선형과 나눠 쓰므로", "커지다가 멈춘다 — 노드 수만큼 채워지므로"], "a": 2, "why": "노드 하나에서도 보입니다: 선형 노드는 용량 1을 모두 기억에 쓰지만, tanh 노드는 0.86을 기억에, 0.14를 곱에 씁니다. 노드 20개 시뮬레이션(Claude 계산)에서도 입력을 0.1 → 3으로 키우자 선형 기억은 11.5 → 4.0으로 줄고 3차 비선형은 0.02 → 6.9로 늘었으며, 합은 20을 넘지 않았습니다. 입력 크기는 연결 행렬이 같아도 노드가 얼마나 휘는지를 바꿉니다(4구간).", "refLabel": "상충: 같은 총량을 나눠 갖기"}, {"id": "d11-p05", "ref": "#s-tradeoff-read", "type": "ox", "q": "입력을 아주 작게 넣어 reservoir를 거의 선형으로 움직이게 할수록, 기억 능력은 계속 커진다.", "a": false, "why": "입력이 너무 작으면 상태 변화도 작아 측정 잡음이 오래된 입력의 작은 흔적을 묻습니다. 입력 0.01인 tanh reservoir의 기억(8.4)이 선형 reservoir(14.5)보다 작았습니다(Claude의 시뮬레이션, 4구간).", "refLabel": "입력 0.01이 잡음에 묻히는 이유"}, {"id": "d11-p06", "ref": "#s-devices-read", "type": "ox", "q": "같은 공정으로 만든 똑같은 소자를 연결 없이 많이 늘어놓고 모든 출력을 읽으면, reservoir의 용량은 소자 수에 비례해 커진다.", "a": false, "why": "완전히 같은 소자 20개는 같은 입력에 같은 값을 내 용량 합이 약 1.0에 그칩니다. 시간상수만 다르게 하면 6.6, 시간상수·감도·치우침까지 다르면 11.7이었습니다(Claude의 시뮬레이션). 개수가 아니라 '서로 다른' 정도가 용량을 정합니다(5구간).", "refLabel": "같은 소자 20개 = 1.00"}, {"id": "d11-p07", "ref": "#s-good-reservoir", "type": "mc", "q": "'좋은 reservoir'를 가장 정확히 말한 것은?", "options": ["기억이 가장 오래가도록 감쇠를 늦춘 reservoir", "입력을 가장 강하게 휘게 하는 reservoir", "총 용량이 커서 어떤 과제에서든 이기는 reservoir", "총량을 과제가 요구하는 기억 길이·차수에 맞게 나눈 reservoir"], "a": 3, "why": "NARMA10에서 기억 용량이 가장 큰 선형 설정(56.9)은 오차 0.144, 비선형이 가장 강한 설정은 0.232로, 둘 다 기본 설정(0.053)보다 나빴습니다(Claude의 시뮬레이션). 총량이 같아도 배분이 다르면 성능이 다릅니다. 최대 기억도 최대 비선형도 최선이 아니고 배분이 과제에 맞아야 합니다(6구간).", "refLabel": "좋은 reservoir의 새 정의"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 과제가 요구하는 것", "items": [{"id": "d11-q01", "type": "mc", "q": "NARMA10을 잘 풀려면 reservoir 상태에 무엇이 있어야 하나?", "options": ["100단계 이상의 긴 기억만 있으면 된다", "3차 이상의 강한 비선형만 있으면 된다", "약 10단계 기억과 2차 곱이 함께 있어야 한다", "지금 입력의 값만 정확히 있으면 된다"], "a": 2, "why": "식의 곱 항 $u(t-9)\\,u(t)$, $y(t)\\,y(t-i)$는 두 값의 곱(2차)이고, 9–10단계 전 값이 들어간다(1구간). 긴 기억만 있으면 곱을 못 만들고, 비선형만 강하면 10단계 전 값이 상태에 없다. 기억만 있는 선형 reservoir는 오차 0.144에서 멈췄다(Claude의 시뮬레이션).", "ref": "#s-narma-demand", "refLabel": "NARMA10이 요구하는 기억과 곱(그림 1)"}, {"id": "d11-q02", "type": "ox", "q": "3-parity($u(t-1)\\oplus u(t-2)\\oplus u(t-3)$)는 3단계 기억과 3차 비선형을 함께 요구한다.", "a": true, "why": "세 지난 입력이 모두 필요하고(기억 3단계), ±1 표기에서 세 입력의 곱이다(3차). Day 17 5구간의 Claude 시뮬레이션에서 입력이 작은 tanh reservoir는 3차 몫이 없어 49%였다.", "ref": "#s-narma-demand", "refLabel": "과제마다 요구하는 기억·차수(그림 1)"}]}, "2-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 목표 하나의 용량", "items": [{"id": "d11-q03", "type": "short", "q": "[풀이 예시 확인] 목표의 분산 1.0, readout의 평균 제곱 오차 0.36. 용량 $C = 1 - \\text{오차}/\\text{분산}$은?", "a": ["0.64"], "why": "$1 - 0.36/1.0 = 0.64$. 상관계수 0.8의 제곱과 같다. 0.36이라 답했다면 1에서 빼는 것을 빠뜨린 것 — 용량은 '되살린 몫', 오차 비율은 '못 되살린 몫'이다(기초 계단: 정보처리용량).", "ref": "#s-capacity-number", "refLabel": "오차 0.36, 분산 1 → 0.64"}, {"id": "d11-q04", "type": "short", "q": "[일부 채우기] 목표의 분산 0.5, 평균 제곱 오차 0.1. $C = 1 - ▢ = ?$ 빈칸(오차/분산)과 답을 '빈칸,답' 꼴로", "a": ["0.2,0.8", "0.2, 0.8"], "why": "$0.1/0.5 = 0.2$, $C = 0.8$. 0.9가 나왔다면 분산으로 나누지 않고 오차를 그대로 뺀 것. 분산으로 나누는 이유는 목표의 크기(단위)와 상관없이 0–1로 비교하기 위해서다.", "ref": "#s-capacity-steps", "refLabel": "용량 식을 네 단계로"}, {"id": "d11-q05", "type": "short", "q": "[혼자 풀기] 목표의 분산 2.0, 평균 제곱 오차 1.5인 목표의 용량은?", "a": ["0.25"], "why": "$1 - 1.5/2.0 = 0.25$. 목표의 4분의 1만 되살렸다. 오차가 분산보다 크면 계산값이 음수가 되는데, 그때는 '평균값만 말하는 것보다 못하다'는 뜻이라 용량을 0으로 둔다.", "ref": "#s-capacity-number", "refLabel": "오차 0.36, 분산 1 → 0.64"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d11-q06", "type": "mc", "q": "목표 $P_1(u(t-1)) \\cdot P_2(u(t-3))$의 차수는?", "options": ["1", "2", "3", "4"], "a": 2, "why": "차수는 곱해진 다항식 차수의 합: $P_1$은 1차, $P_2$는 2차 → 3. 지연이 둘(1과 3)이라 2라고 답했다면 지연 개수와 차수를 혼동한 것. 서로 다른 지연이 섞인 목표를 교차 용량이라고도 부른다.", "ref": "#s-orthogonal-basis", "refLabel": "목표의 차수 = 곱한 다항식 차수의 합"}, {"id": "d11-q07", "type": "mc", "q": "IPC를 셀 때 Legendre 다항식처럼 서로 겹치지 않는(곱의 평균이 0인) 목표 묶음을 쓰는 이유는?", "options": ["목표 수를 줄여 계산을 빠르게 하려고", "높은 차수 목표를 일부러 더 어렵게 하려고", "입력이 정규분포여야 정리가 성립해서", "같은 능력을 두 번 세지 않으려고"], "a": 3, "why": "$u$와 $u^3$처럼 겹치는 목표를 그대로 쓰면 'u(t−1)을 기억함'이 1 + 0.84로 두 번 세어진다. 직교 묶음은 계산을 줄이려는 것이 아니고(목표 수는 그대로 많다), 목표를 어렵게 만들려는 것도 아니다. 입력이 정규분포일 필요도 없다. 분포에 맞는 묶음을 고르면 된다(고른 입력이면 Legendre, 정규분포면 Hermite).", "ref": "#s-orthogonal-basis", "refLabel": "u와 u³이 겹치는 문제"}, {"id": "d11-q25", "type": "ox", "q": "입력 $u$가 −1~1에서 고르게 나올 때, 목표 $u$와 목표 $u^3$은 곱의 평균이 0이라 서로 겹치지 않는다.", "a": false, "why": "$\\langle u \\cdot u^3 \\rangle = \\langle u^4 \\rangle$는 네제곱(늘 0 이상)의 평균이라 0이 될 수 없다(고른 입력이면 1/5). 그래서 $u$만 기억하는 reservoir도 $u^3$ 목표를 상관² 0.84만큼 맞혀 같은 능력이 두 번 세어진다. $u^3$에서 $u$와 겹치는 몫($0.6u$)을 빼고 배율을 맞춘 $P_3 = (5u^3 - 3u)/2$를 쓰는 이유다(2구간).", "ref": "#s-orthogonal-basis", "refLabel": "u와 u³의 곱의 평균 1/5"}, {"id": "d11-q26", "type": "short", "q": "노드 하나의 상태가 $x(t) = u(t)$(지금 입력만 담음, 입력은 서로 독립인 난수)이다. 목표 $u(t-1)$(한 단계 전 입력)에 대한 용량은? (숫자만)", "a": ["0"], "why": "지금 상태에 한 단계 전 입력의 흔적이 없어 readout의 최선은 늘 평균을 말하는 것이고, 그때 평균 제곱 오차 = 목표의 분산이라 $C = 1 - 1 = 0$. 같은 노드에 목표 $u(t)$를 주면 오차가 0이라 $C = 1$이다. 1이라 답했다면 '상태가 입력을 담는다'와 '그 목표의 입력을 담는다'를 혼동한 것(2구간).", "ref": "#s-capacity-01", "refLabel": "용량 0: 그 입력의 흔적이 없는 상태"}]}, "3-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 그림자 합", "items": [{"id": "d11-q08", "type": "short", "q": "[풀이 예시 확인] 평면이 $b_1 = (1,0,0)$, $b_2 = (0, 0.707, 0.707)$로 펼쳐질 때 목표 2 = (0, 1, 0)의 그림자 길이²는?", "a": ["0.5", "0.50", "1/2"], "why": "$b_1$과의 곱 0, $b_2$와의 곱 0.707, 그림자² $= 0.707^2 = 0.5$. 0.707이라 답했다면 제곱을 빠뜨린 것 — 용량은 그림자 길이의 제곱이다.", "ref": "#s-shadow-steps", "refLabel": "그림자 계산 단계 3"}, {"id": "d11-q09", "type": "short", "q": "[일부 채우기] 평면을 바닥(z = 0)으로 눕히면 세 목표의 그림자²는 (1, 1, ▢)이고 합은? '빈칸,합' 꼴로", "a": ["0,2", "0, 2"], "why": "목표 3 = (0,0,1)은 바닥 평면에 수직이라 그림자 0. 합은 1 + 1 + 0 = 2. 평면을 어떻게 기울여도 합은 평면의 차원 2다.", "ref": "#s-shadow-steps", "refLabel": "그림자 계산 단계 5: 평면을 눕히면"}, {"id": "d11-q10", "type": "short", "q": "[혼자 풀기] 4차원 공간에서 노드 3개가 3차원 판을 만든다. 서로 수직인 길이 1의 목표 4개를 그 판에 비춘 그림자² 합은? (숫자만)", "a": ["3"], "why": "그림자 제곱 합 = 판의 차원 = 노드 수 3. 목표가 4개여도 4가 될 수 없다. 이것이 '총 용량 ≤ 노드 수'다. 노드가 서로의 복사본이면 판의 차원이 더 작아진다.", "ref": "#s-n-dim", "refLabel": "N차원으로 늘리면"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d11-q11", "type": "mc", "q": "측정한 총 IPC가 노드 수 $N$보다 작게 나왔다. 이유가 될 수 없는 것은?", "options": ["선형 readout이라 원래 상한이 $N$보다 크다", "노드 중 여럿이 서로의 복사본이나 가중합이다", "측정 잡음이 작은 그림자를 묻었다", "높은 차수나 긴 지연의 목표를 세지 않았다"], "a": 0, "why": "상한 $N$은 선형 readout 기준의 상한이라, 선형 readout에서 원래 상한이 $N$보다 클 수는 없다. 나머지 셋은 실제로 합을 깎는 이유다(복사본 → 판의 차원 감소, 잡음 → 작은 그림자를 못 읽음, 끊은 범위 → 세지 않은 몫).", "ref": "#s-bound-less", "refLabel": "총합이 N보다 작아지는 세 이유"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 상충", "items": [{"id": "d11-q12", "type": "mc", "q": "노드 20개 tanh reservoir에서 입력 크기를 0.1 → 3으로 키울 때(그림 5(Day 19)) 일어난 일은?", "options": ["모든 차수의 용량이 함께 커졌다", "차수 1은 줄고 차수 3의 몫이 늘었다", "차수 1은 늘고 차수 3의 몫이 줄었다", "총합이 노드 수 20을 넘었다"], "a": 1, "why": "차수 1(선형 기억)은 11.5 → 4.0으로 줄고 차수 3은 0.02 → 6.9로 늘었다. 같은 노드 수 안에서 기억과 비선형이 자리를 나눠 갖는 상충이다. 총합은 최대 18.7(입력 0.3)로 20을 넘지 않았다(Claude의 시뮬레이션).", "ref": "#s-tradeoff-read", "refLabel": "입력 크기에 따른 차수별 용량(그림 5(Day 19))"}, {"id": "d11-q13", "type": "ox", "q": "선형 reservoir는 MC가 tanh reservoir보다 크므로(56.9 대 17.9, Claude의 시뮬레이션) NARMA10도 더 잘 푼다.", "a": false, "why": "NARMA10은 2차 곱도 요구한다. Claude의 시뮬레이션에서 선형 reservoir는 0.144, tanh 기본은 0.053이었다. 기억만 크고 비선형이 없으면 곱을 못 만든다(Day 16 1구간). Liang이 말한 '선형 노드의 높은 MC'(p.200)는 기억에 대한 말이지 과제 성능에 대한 말이 아니다.", "ref": "#s-narma-demand", "refLabel": "NARMA10은 2차 곱도 요구한다"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d11-q14", "type": "mc", "q": "입력 크기 0.01의 tanh reservoir는 거의 선형인데도 차수 1 용량이 8.4로, 선형 reservoir(14.5)보다 작았다(Claude의 시뮬레이션). 가장 그럴듯한 이유는?", "options": ["tanh가 지난 입력을 매 단계 지운다", "상태 변화가 작아 측정 잡음이 오래된 흔적을 묻었다", "입력이 작으면 spectral radius가 작아진다", "입력이 작아도 비선형 몫이 기억을 빼앗았다"], "a": 1, "why": "용량은 '잡음보다 크게 남은' 흔적만 센다. 입력 0.01에서는 상태 변화 자체가 작아 표준편차 0.001의 측정 잡음이 오래된 입력의 작은 흔적을 덮는다. 입력 0.01에서 비선형 몫은 거의 0이었고(그림 5(Day 19)), ρ는 연결 행렬의 성질이라 입력 크기로 바뀌지 않는다. 약한 입력은 깨끗한 기억이 아니라 묻힌 기억을 준다.", "ref": "#s-tradeoff-read", "refLabel": "입력 0.01이 잡음에 묻히는 이유"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 서로 다른 소자", "items": [{"id": "d11-q15", "type": "mc", "q": "서로 연결되지 않은, 완전히 같은 소자 20개에 같은 입력을 넣고 20개의 전류를 모두 readout에 주었다. 정보처리용량의 총합은 대략?", "options": ["20", "10", "1", "0"], "a": 2, "why": "20개의 전류가 똑같이 움직여 판의 차원이 1이다. Claude의 시뮬레이션에서도 1.00이었다. 소자 수만 늘린다고 계산이 늘지 않는다 — Liang이 말한 '병렬 소자의 MC가 겹친다'(p.196)의 극단적인 경우다.", "ref": "#s-devices-read", "refLabel": "같은 소자 20개(그림 6(Day 19) ①)"}, {"id": "d11-q16", "type": "mc", "q": "연결 없는 소자 20개 배열에서 비선형 용량(차수 2 이상)까지 생기게 한 변화는(그림 6(Day 19))?", "options": ["소자 수를 40개로 늘린 것", "시간상수만 소자마다 다르게 한 것", "모든 소자의 시간상수를 같게 맞춘 것", "감도와 치우침까지 소자마다 다르게 한 것"], "a": 3, "why": "Claude의 시뮬레이션에서 시간상수만 다르면 6.59로 거의 전부 선형 기억이었고, 감도·치우침까지 다르게 하자 11.67이 되며 2–4차 몫이 생겼다. 치우침은 tanh의 대칭을 깨 짝수 차수를 연다(Day 17 5구간 심화). 같은 소자를 더 놓거나 같게 맞추면 판의 차원이 늘지 않는다.", "ref": "#s-devices-read", "refLabel": "감도·치우침이 비선형을 연다(그림 6(Day 19) ③)"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d11-q17", "type": "mc", "q": "연결 없는 소자 배열에서 전극 16개의 전류를 모두 읽는다. 독립적인 계산 상태가 실제로 몇 개인지 확인하는 방법으로 알맞은 것은?", "options": ["공분산으로 참여비 차원을 구하고 채널을 늘려 본다", "전극 수 16을 그대로 독립 상태 수로 쓴다", "소자 하나의 I–V 곡선이 얼마나 휘었는지 본다", "전류가 가장 큰 채널의 개수를 센다"], "a": 0, "why": "전극·샘플링 지점·가상 노드의 수는 독립 상태 수와 같지 않다(5구간). 흔들림이 몇 방향에 몰리면 채널이 많아도 참여비 차원이 작고, 채널을 늘려도 성능이 안 오르면 중복이다. I–V의 휨은 소자 하나의 성질이라 소자들이 서로 다른지 알려 주지 않고, 전류 크기는 독립성과 무관하다.", "ref": "#s-singh-dpr", "refLabel": "참여비 차원으로 독립 상태 세기"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 좋은 reservoir", "items": [{"id": "d11-q18", "type": "mc", "q": "노드 200개 Claude 시뮬레이션에서 기본(입력 0.5, MC 17.9, NMSE 0.053)보다 입력 0.1(MC 29.3, NMSE 0.032)이 NARMA10을 더 잘했다. 가장 그럴듯한 해석은?", "options": ["입력이 작을수록 언제나 NARMA10이 좋아진다", "MC가 클수록 언제나 NARMA10이 좋아진다", "입력이 작아 측정 잡음의 영향이 줄었다", "약한 비선형으로 충분해 남는 용량이 기억으로 갔다"], "a": 3, "why": "같은 총량 안에서 과제가 요구하는 차수·지연으로 배분한 쪽이 이겼다(NARMA10의 비선형은 2차). '언제나'는 틀렸다: 측정 잡음이 있으면 입력 0.01은 묻히고(그림 5(Day 19)), MC가 가장 큰 선형 reservoir는 0.144였다(그림 7(Day 19)). 이 200노드 시뮬레이션에는 측정 잡음을 넣지 않았으므로 잡음 감소는 이유가 아니다.", "ref": "#s-task-read", "refLabel": "그림 7(Day 19) 읽기: 입력 0.1이 나은 이유"}, {"id": "d11-q19", "type": "ox", "q": "총 정보처리용량(모든 차수의 합)이 더 큰 reservoir는 어떤 과제에서도 더 나은 성능을 낸다.", "a": false, "why": "총합이 같아도 배분이 다르면 과제 성능이 다르다. 과제가 요구하는 차수·지연에 용량이 있어야 한다. 그래서 Singh은 지연별 기억 분포와 필요한 차수의 용량을 함께 보고하라고 한다(p.8, 13).", "ref": "#s-good-reservoir", "refLabel": "총량이 아니라 배분"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d11-q20", "type": "mc", "q": "'기억은 길수록, 비선형은 강할수록 좋은가?'에 대한 오늘의 답으로 가장 알맞은 것은?", "options": ["같은 예산을 과제의 요구에 맞게 나눠야 한다", "둘 다 클수록 좋으니 둘 다 최대로 키워야 한다", "기억이 길수록 좋고, 비선형은 부차적이다", "비선형이 강할수록 좋고, 기억은 부차적이다"], "a": 0, "why": "총량 ≤ $N$(3구간), 상충(4구간), 배분(6구간)이 오늘의 사슬이다. 둘을 동시에 최대로 키울 수 없고, 그림 7(Day 19)에서 최대 기억(선형)도 최대 비선형(입력 2.0)도 최선이 아니었다.", "ref": "#s-good-reservoir", "refLabel": "좋은 reservoir의 새 정의"}, {"id": "d11-q21", "type": "short", "q": "노드 하나(Day 15)의 기억 예산과 노드 $N$개 reservoir의 IPC 상한은 같은 원리다. 노드 5개면 선형 readout이 꺼낼 수 있는 용량 총합의 상한은? (숫자만)", "a": ["5"], "why": "판의 차원 = 노드 수 = 5(노드 출력들이 선형 독립일 때). Day 15의 노드 하나 예산 1은 $N = 1$인 경우였다. 잡음·복사본·세지 않은 목표가 있으면 실제 값은 이보다 작다.", "ref": "#s-n-dim", "refLabel": "N차원으로 늘리면: 상한 = 노드 수"}, {"id": "d11-q22", "type": "mc", "q": "이온 소자 논문이 'retention을 두 배로 늘려 reservoir 성능을 개선했다'고 주장한다. 오늘 배운 관점에서 먼저 확인할 것은?", "options": ["retention이 두 배면 MC도 두 배가 되었는지 확인한다", "소자 하나의 감쇠 곡선이 정말 느려졌는지 다시 잰다", "용량이 과제가 요구하는 지연·차수 쪽으로 옮겨 갔는지 확인한다", "같은 소자를 더 많이 놓으면 성능이 더 오르는지 확인한다"], "a": 2, "why": "느린 감쇠는 기억을 늘리기보다 과거 쪽으로 옮긴다(Day 15: 노드 하나의 예산 1)라 MC가 두 배가 될 이유가 없고, 감쇠 곡선만으로는 과제에 필요한 쪽인지 알 수 없다. 같은 소자를 늘려도 용량은 거의 늘지 않는다(그림 6(Day 19)). 지연별 MC·차수별 용량과 새 데이터의 과제 성능으로 확인한다.", "ref": "#s-good-reservoir", "refLabel": "소자 개선을 배분으로 따지기"}, {"id": "d11-q23", "type": "mc", "q": "같은 공정으로 만든 이온 소자 10개의 응답이 거의 똑같다(편차가 아주 작다). reservoir 배열로 쓸 때 이것이 뜻하는 것은?", "options": ["소자 수만큼 용량이 10에 가깝게 보장된다", "독립 상태가 적어 소자 하나 수준에 머물 수 있다", "용량은 소자 수로만 정해지므로 영향이 없다", "비선형 용량만 커지고 기억 용량은 그대로다"], "a": 1, "why": "응답이 거의 같은 소자들은 판의 차원을 늘리지 못한다(그림 6(Day 19)의 같은 소자 20개 = 1.00). Liang은 편차가 작은 소자 무리가 과적합 같은 문제를 일으킬 수 있고 병렬 소자의 MC가 겹친다고 쓴다(p.196). 메모리 소자의 장점(균일성)이 reservoir 배열에서는 단점이 될 수 있다. 단, 날마다 변하는 편차는 용량이 아니라 잡음이다.", "ref": "#s-liang-overlap", "refLabel": "병렬 소자의 MC는 겹친다"}, {"id": "d11-q24", "type": "ox", "q": "유한한 길이의 데이터와 측정 잡음이 있어도, 측정한 총 IPC는 노드 수 $N$과 그대로 같게 나온다.", "a": false, "why": "합 = $N$은 무한한 데이터·잡음 없음 같은 조건에서의 이론적 성질이다. 실제로는 잡음이 작은 그림자를 묻고 세지 않은 목표가 남아 합이 작아지며, 아주 작은 용량은 우연한 상관으로 부풀 수 있어 문턱이 필요하다(Stepney p.680, Dambre의 잡음·문턱 절). 그래서 측정 조건(차수, 지연 범위, 문턱)을 함께 보고한다.", "ref": "#s-bound-conditions", "refLabel": "유한한 데이터·잡음에서의 측정"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d11a">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d11b.html">Day 19 · 기억–비선형 상충과 '서로 다른' 노드 →</a></p>
+</div>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d10b.html" class="pagination-link" aria-label="Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d11b.html" class="pagination-link" aria-label="Day 19 · 기억–비선형 상충과 '서로 다른' 노드">
+        <span class="nav-page-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

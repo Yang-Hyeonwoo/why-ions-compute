@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-11-01">
 
-<title>D9. 왜 memory가 필요하고, fading memory란 무엇인가? – Why Ions Compute</title>
+<title>Day 15. fading memory와 echo state property – Why Ions Compute</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -37,8 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../days/d10.html" rel="next">
-<link href="../days/d08.html" rel="prev">
+<link href="../days/d10a.html" rel="next">
+<link href="../days/d08b.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -145,7 +144,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../plan.html"> 
-<span class="menu-text">30일 질문표</span></a>
+<span class="menu-text">전체 학습 지도</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -193,7 +192,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d09.html">D9 · fading memory</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07a.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d09.html">Day 15 · fading memory와 echo state property</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -208,13 +207,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">커버 페이지</span></a>
+ <span class="menu-text">홈</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">30일 질문표</span></a>
+ <span class="menu-text">전체 학습 지도</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -228,38 +227,62 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D1 · 뉴로모픽 컴퓨팅이란?</span></a>
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D2 · 기존 컴퓨터의 한계</span></a>
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D3 · 왜 하필 뇌인가</span></a>
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D4 · 하드웨어는 어떻게 계산하나</span></a>
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D5 · 적합한 문제, 부적합한 문제</span></a>
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D6 · '계산한다'의 조건</span></a>
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
   </div>
 </li>
       </ul>
@@ -275,38 +298,68 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D7 · RC는 왜 나왔나</span></a>
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D8 · readout만 학습하는 이유</span></a>
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d09.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">D9 · fading memory</span></a>
+ <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D10 · nonlinearity와 separability</span></a>
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D11 · memory–nonlinearity trade-off</span></a>
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D12 · 실습: ESN 직접 돌리기</span></a>
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
   </div>
 </li>
       </ul>
@@ -322,38 +375,68 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D13 · 좋은 memory란</span></a>
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D14 · nonlinearity 평가</span></a>
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d15.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D15 · 벤치마크가 검증하는 것</span></a>
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d16.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D16 · 무엇과 비교해야 하나</span></a>
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d17.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D17 · 시스템 전체의 비용</span></a>
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D18 · 재현성과 신뢰성</span></a>
+ <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
   </div>
 </li>
       </ul>
@@ -369,38 +452,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d19.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D19 · 왜 전자가 아닌 이온인가</span></a>
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d20.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D20 · memory·nonlinearity의 기원</span></a>
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D21 · 이온 동역학의 시간척도</span></a>
+ <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D22 · 화학구조 → 계산 특성</span></a>
+ <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D23 · 이온전도도와 성능</span></a>
+ <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D24 · single-ion·PE·heterojunction</span></a>
+ <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
   </div>
 </li>
       </ul>
@@ -416,38 +511,62 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d25.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D25 · 논문들이 입증한 것과 못 한 것</span></a>
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d26.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D26 · 진짜 병목</span></a>
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d27.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D27 · 어디서 경쟁력이 있나</span></a>
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D28 · 가장 중요한 가설</span></a>
+ <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D29 · 최소 검증 실험</span></a>
+ <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d30.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">D30 · 결정</span></a>
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
   </div>
 </li>
       </ul>
@@ -515,22 +634,21 @@ window.Quarto = {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">① 사전 테스트와 먼저 만들어 보기</a></li>
-  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">② 학습자료</a></li>
-  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">④ 가르치듯 내 답</a></li>
-  <li><a href="#posttest" id="toc-posttest" class="nav-link" data-scroll-target="#posttest">⑤ 다시 풀기 (선택)</a></li>
-  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">⑥ 학습 완료</a></li>
-  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">⑦ 피드백과 꼬리질문</a></li>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">지난 학습 복습</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing">선택 활동: 글로 정리하기</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d09.html">D9 · fading memory</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07a.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d09.html">Day 15 · fading memory와 echo state property</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">D9. 왜 memory가 필요하고, fading memory란 무엇인가?</h1>
-<p class="subtitle lead">Phase 2 · RC는 왜, 어떻게 작동하는가 · 11월 1일 (일)</p>
+<h1 class="title">Day 15. fading memory와 echo state property</h1>
+<p class="subtitle lead">Phase 2 · RC는 왜, 어떻게 작동하는가</p>
 </div>
 
 
@@ -538,12 +656,6 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">날짜</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2026-11-01</p>
-    </div>
-  </div>
   
     
   </div>
@@ -553,33 +665,32 @@ window.Quarto = {
 </header>
 
 
-<div class="needs-line">
-<p><strong>답에 들어가야 할 것</strong> — echo state property, 전류가 천천히 감소하는 것이 왜 계산에 도움이 되는지의 인과</p>
+<div class="unit-head">
+<p><strong>이번 질문</strong> — 왜 memory가 필요하고, fading memory란 무엇인가?</p>
+<p><strong>배울 핵심</strong> — 남는 비율 d = e^(−Δt/τ)와 fading memory, 처음 상태를 잊는 echo state property, spectral radius·leak rate, 합이 1인 기억 예산</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 18–19 용량 상한, Day 20–21 ESN 실습(ρ·leak·washout), Day 22–23 τ와 과제 시간척도, Day 37 이온 이완. 목표 입력 간격에서 내 소자의 d가 맞는지, 같은 펄스 열에 같은 궤적이 나오는지 판단</p>
 </div>
-<div class="day-tools local-only">
-  <button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button>
-</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d09">
-  <li data-step="pretest"><a href="#pretest"><b>1</b>사전 테스트 <small>권장</small></a></li>
-  <li data-step="lesson" data-manual="true"><a href="#lesson"><b>2</b>학습자료</a></li>
-  <li data-step="recall"><a href="#recall"><b>3</b>백지 회상</a></li>
-  <li data-step="answer"><a href="#answer"><b>4</b>가르치듯 답</a></li>
-  <li data-step="posttest"><a href="#posttest"><b>5</b>다시 풀기 <small>선택</small></a></li>
-  <li data-step="done"><a href="#done"><b>6</b>완료</a></li>
+  <li data-step="review"><a href="#review"><b>1</b>지난 학습 복습</a></li>
+  <li data-step="lesson"><a href="#lesson"><b>2</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>3</b>학습 완료</a></li>
 </ol>
-<div class="flow-line path-line">
-<p><strong>기본 경로</strong>: ① 사전 테스트(권장) → ② 학습자료(구간마다 잠깐 점검까지) → ③ 백지 회상 → ④ 가르치듯 내 답. ⓪·⑤와 접힌 '심화'·'추가 연습'은 선택입니다. 한 번에 끝낼 필요 없이 구간 단위로 나눠 읽어도 되고, 다시 열면 '지난번 읽던 곳' 링크가 뜹니다.</p>
-</div>
-<section id="pretest" class="level2">
-<h2 class="anchored" data-anchor-id="pretest">① 사전 테스트와 먼저 만들어 보기</h2>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
 <div class="flow-line">
-<p>아직 배우지 않은 내용을 먼저 풀어 봅니다. <strong>많이 틀리는 것이 정상</strong>이고, 그게 목적입니다. 먼저 답해 본 문제는 읽을 때 눈에 들어오고 더 오래 남습니다. 문제마다 정답만 보이고, 이유는 학습자료와 ⑤ 다시 풀기에서 봅니다. 다 풀면 학습자료가 열립니다. 건너뛰려면 학습자료 위의 '그냥 읽기'를 누르세요(권장 단계일 뿐 필수는 아닙니다).</p>
+<p>지난 학습 단위(Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
 </div>
-<div class="quiz" data-day="d09" data-set="pre"></div>
+<div class="quiz" data-day="d09" data-set="review"></div>
+</section>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">사전 테스트 (선택)</h2>
+<details class="fold pretest-fold"><summary>사전 테스트 펼치기 · 배우기 전에 짐작해 보는 문제 (선택)</summary><div class="quiz" data-day="d09" data-set="pre"></div>
+</details>
 </section>
 <section id="lesson" class="level2">
-<h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
-<div class="lesson-body" data-pre="d09-pre">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
 <div class="lesson-meta">
 <p>학습 구간 6개(1–6) · 한 번에 다 읽지 않아도 됩니다(구간 안의 '멈추기 좋은 곳'에서 끊어 읽어도 됩니다) · 선택 영상 1개 · 퀴즈 29문항 · 내 답 쓰기는 따로. 노드 하나·두 개의 숫자 예, 2구간의 이온 소자 대응, 그림 0–4와 7은 <strong>Claude가 계산한 교육용 예</strong>이고 측정값이 아닙니다. 그림 6은 모식도입니다. 그림 5와 4구간의 memory capacity 숫자는 Claude가 <code>tools/esn.py</code>로 돌린 <strong>시뮬레이션</strong> 결과입니다. 실제 측정 데이터는 원문 그림 두 장(Liang 2024 Fig. 3, Zhong 2026 Fig. 3)입니다.</p>
 <details class="meta-more">
@@ -589,30 +700,12 @@ window.Quarto = {
 <p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024는 p.194(단기·fading memory, spectral radius와 echo state property), p.196(병렬 소자의 MC가 겹친다는 문단), p.197(물리 노드의 두 특성과 Fig. 3), p.200(MC 문단과 회전 뉴런 예); Stepney 2024는 3.2.3절(p.668, ESP·spectral radius), 3.3.1절(p.669, leak), 4.1–4.3절(p.672–673); Singh 2026은 p.4(DR1), p.5(DR3 첫 문단), p.8(3.1절 첫 문단)만; Zhong 2026은 p.4, p.7의 forgetting factor 문장만; 폴더 밖 Lukoševičius 2012는 저자 공개본의 3.2.6절(leak rate를 연속 시간 이완식의 시간 간격으로 보는 문단)만; Yildiz 2012는 서지·초록과 5절 첫 문단만. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 4구간의 고윳값 손 계산과 5구간 기억 예산의 유도는 일반 교과 수학입니다.</p>
 </details>
 </div>
-<div class="day-map">
-<p><strong>오늘의 연구 질문</strong> — 이온 소자의 전류가 펄스 뒤에 천천히 줄어든다는 것이 시계열 계산에 쓸모 있으려면, 얼마나 천천히 줄어야 하고, 그 밖에 무엇이 더 성립해야 하나?</p>
-<p><strong>필요한 개념</strong> (★ = 오늘 처음)</p>
-<ul>
-<li>D3 LIF의 유지 계수 <span class="math inline">\(0.9 = e^{-\Delta t/\tau}\)</span>(<a href="../days/d03.html#s-lif-decay">D3 2-3</a>), D7의 숫자 하나짜리 RNN과 washout(<a href="../days/d07.html#s-washout">D7 3-1</a>), D8의 노드 두 개 상태 갱신과 <span class="math inline">\(W\)</span>(<a href="../days/d08.html#b-rc-update">D8 기초</a>), 샘플링 주기 <span class="math inline">\(\Delta t\)</span>(<a href="../days/d08.html#b-time-series">D8 기초</a>) — 처음 쓰는 자리에서 한두 줄로 다시 말합니다</li>
-<li>★ fading memory와 남는 비율 <span class="math inline">\(d\)</span>, 시간상수 <span class="math inline">\(\tau\)</span>와의 관계 (2구간)</li>
-<li>★ echo state property(처음 상태를 잊는 것), washout과의 관계 (3구간)</li>
-<li>★ 고유벡터·고윳값·spectral radius ρ, leak rate <span class="math inline">\(a\)</span> (4구간)</li>
-<li>★ 기억 예산: 상태 하나로 지난 입력을 되살리는 정도의 합 (5구간)</li>
-</ul>
-<p><strong>끝나면 내 말로 설명할 수 있어야 하는 것</strong></p>
-<ul>
-<li>그림 1–2를 따라, 새 소자(예: τ = 20 ms)와 새 입력 간격에서 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>를 계산하고 다음 펄스 때 흔적이 얼마나 남는지 말할 수 있다.</li>
-<li>그림 4를 따라, 2×2 표 <span class="math inline">\(W\)</span>를 (1, 0)에 거듭 곱할 때 왜 한 방향만 남는지 설명하고, <span class="math inline">\(d\)</span>·τ·고윳값·ρ·<span class="math inline">\(a\)</span>가 서로 다른 양임을 구별할 수 있다.</li>
-<li>그림 6의 다섯 고리를 짚으며, "느리게 감소하는 전류 → 계산"이라는 새 논문 문장이 어느 고리까지 보였고 어디서 끊길 수 있는지 말할 수 있다.</li>
-</ul>
-<p><strong>나중에 쓰이는 곳</strong> — D10(선형 기억과 비선형), D11(노드 수와 기억 용량의 상한), D12(ESN 실습: ρ·leak·washout·ESP 확인 줄), D13(소자 τ와 과제 시간척도, τ와 retention), D15–D16(누설 노드 = 저역 통과 필터), D21(이온 이완의 메커니즘). 소자 판단으로는 "목표 입력 간격에서 내 소자의 <span class="math inline">\(d\)</span>가 과제에 맞는 범위인가", "같은 펄스 열에 같은 전류 궤적이 나오는가(처음 상태를 잊는가)"에 쓰입니다.</p>
-</div>
-<p>D8에서 reservoir(내부를 고정한 순환 네트워크, <a href="../days/d07.html#ch-esn-lsm">D7 3구간</a>)의 상태가 "지난 입력들의 고정된 비선형 함수"라는 것을 숫자로 보았습니다. 그리고 그 상태가 과거를 <strong>전부</strong> 담지는 못하고 "최근 입력의 일부"만 읽을 수 있게 남긴다고 했습니다. 오늘은 그 "최근"과 "일부"를 정확히 합니다. 이온 소자 연구자에게 오늘의 질문은 특히 가깝습니다. 내 소자의 전류가 펄스 뒤에 <strong>천천히 줄어드는 것</strong>이 왜 계산에 쓸모가 있다고들 하는지, 그 말이 언제 참이고 언제 거짓인지가 오늘의 끝에 놓입니다.</p>
+<p>Day 13–14에서 reservoir(내부를 고정한 순환 네트워크, <a href="../days/d07b.html#ch-esn-lsm">Day 12 3구간</a>)의 상태가 "지난 입력들의 고정된 비선형 함수"라는 것을 숫자로 보았습니다. 그리고 그 상태가 과거를 <strong>전부</strong> 담지는 못하고 "최근 입력의 일부"만 읽을 수 있게 남긴다고 했습니다. 오늘은 그 "최근"과 "일부"를 정확히 합니다. 이온 소자 연구자에게 오늘의 질문은 특히 가깝습니다. 내 소자의 전류가 펄스 뒤에 <strong>천천히 줄어드는 것</strong>이 왜 계산에 쓸모가 있다고들 하는지, 그 말이 언제 참이고 언제 거짓인지가 오늘의 끝에 놓입니다.</p>
 <ol type="1">
 <li>어떤 계산에 기억이 필요한가? 기억 없이 하면 무엇이 불가능한가?</li>
 <li>fading memory란 무엇인가? 한 단계 뒤 남는 비율 하나(0.5, 0.9, 1.1)가 무엇을 바꾸나?</li>
 <li>echo state property란 무엇인가? 왜 "처음 상태를 잊는 것"이 필요한가?</li>
-<li>노드가 여럿이면 "몇 배로 줄이나"를 무엇이 정하나? (D8의 2×2 표에서 이어서 손 계산) leak rate는 무엇을 바꾸나?</li>
+<li>노드가 여럿이면 "몇 배로 줄이나"를 무엇이 정하나? (Day 13–14의 2×2 표에서 이어서 손 계산) leak rate는 무엇을 바꾸나?</li>
 <li>천천히 감소하는 전류는 어떤 인과 사슬을 거쳐 계산에 도움이 되나? 그 사슬은 어디서 끊기나?</li>
 </ol>
 <section id="ch-why-memory" class="level3">
@@ -623,14 +716,14 @@ window.Quarto = {
 <p><strong>기억이 없는 장치.</strong> 출력이 <strong>지금 입력 하나</strong>로만 정해지는 장치를 생각합니다. <span class="math inline">\(y(t) = g(u(t))\)</span>. 예를 들어 전압을 넣으면 그 순간의 전류가 나오는 이상적인 저항이 그렇습니다. 이런 장치는 아무리 복잡한 곡선 <span class="math inline">\(g\)</span>를 가져도 "지금 입력이 같으면 답도 같다"는 성질에서 벗어나지 못합니다.</p>
 <p><span id="s-memoryless-example"></span><strong>작은 예.</strong> 입력이 0과 1로 오는 신호에서 "<strong>한 단계 전</strong>에 1이 왔었나?"라는 질문을 합시다. 두 이력 "1, 0"과 "0, 0"을 비교합니다. 둘 다 <strong>지금 입력은 0</strong>입니다. 기억 없는 장치는 두 경우에 같은 출력 <span class="math inline">\(g(0)\)</span>을 냅니다. 그런데 정답은 앞은 "예", 뒤는 "아니오"입니다. 어떤 <span class="math inline">\(g\)</span>를 골라도 둘 중 하나는 틀립니다. 과거가 필요한 질문은 기억 없이 풀 수 없습니다. 증명은 이 한 줄이 전부입니다.</p>
 <figure class="fig figure"><img src="../assets/img/d09/fig0-memoryless.svg" alt="이력 A(1, 0)와 B(0, 0)를 비교한 세 줄 그림. 위: 입력 막대. 가운데: 기억 없는 장치의 출력은 t=2에서 둘 다 g(0)이라 같다. 아래: x(t)=0.5·x(t−1)+u(t) 노드는 t=2에서 A가 0.5, B가 0이라 다르다" class="figure-img"><figcaption><b>그림 0.</b> 위 작은 예를 그림으로. 볼 것: 가운데 줄의 굵은 상자(t = 2)는 두 이력에서 똑같이 g(0)이다. g가 어떤 곡선이든 같은 입력에는 같은 출력이므로 가를 수 없다. 아래 줄은 지난 입력의 흔적이 절반씩 남는 노드로, t = 2의 상태가 A는 0.5, B는 0이라 이 숫자 하나로 가를 수 있다. 이것이 아래 '둘째 방법(상태에 흔적 남기기)'이다. (Claude가 그림, 모식도)</figcaption></figure>
-<p><strong>현실의 과제는 대부분 이렇다.</strong> 심전도에서 부정맥은 박동 하나의 모양뿐 아니라 <strong>앞 박동과의 간격</strong>으로 판단합니다. 말소리는 "ㄱ 다음에 ㅏ"처럼 순서가 뜻을 바꿉니다. 손동작 "삼각형"과 "역삼각형"은 같은 세 방향의 움직임을 <strong>다른 순서로</strong> 한 것입니다. D8 1구간의 시계열 과제들은 거의 다 지금 값만으로는 답이 정해지지 않습니다.</p>
+<p><strong>현실의 과제는 대부분 이렇다.</strong> 심전도에서 부정맥은 박동 하나의 모양뿐 아니라 <strong>앞 박동과의 간격</strong>으로 판단합니다. 말소리는 "ㄱ 다음에 ㅏ"처럼 순서가 뜻을 바꿉니다. 손동작 "삼각형"과 "역삼각형"은 같은 세 방향의 움직임을 <strong>다른 순서로</strong> 한 것입니다. Day 13 1구간의 시계열 과제들은 거의 다 지금 값만으로는 답이 정해지지 않습니다.</p>
 <p><span id="s-memory-two-ways"></span><strong>기억을 얻는 두 방법.</strong> <span class="tag tag-interp">해석</span></p>
 <ol type="1">
-<li><strong>저장해 두기</strong>: 지난 입력 <span class="math inline">\(u(t-1), u(t-2), \dots, u(t-k)\)</span>를 메모리에 그대로 적어 두고 함께 본다. 지난 입력 <span class="math inline">\(k\)</span>개를 순서대로 보관하는 이 칸들을 <strong>지연 탭</strong>(delay taps)이라 부르고, D12에서 이것을 소자 없이도 얻을 수 있는 성능, 곧 기준선으로 씁니다(<a href="../days/d06.html#b-heldout-baseline">D6 기초: 기준선</a>). 정확하지만, 길이 <span class="math inline">\(k\)</span>만큼의 저장 공간과 그것을 옮기는 비용이 든다(<a href="../days/d02.html#ch-data-path">D2 2구간: 데이터 이동</a>).</li>
-<li><strong>상태에 흔적 남기기</strong>: 입력이 상태를 바꾸고, 그 변화가 <strong>천천히</strong> 사라지게 한다. 저장 공간이 따로 없어도 지금 상태에 과거의 흔적이 섞여 있다(D8의 <span class="math inline">\(x(t) = F(u(t-1), u(t-2), \dots)\)</span>).</li>
+<li><strong>저장해 두기</strong>: 지난 입력 <span class="math inline">\(u(t-1), u(t-2), \dots, u(t-k)\)</span>를 메모리에 그대로 적어 두고 함께 본다. 지난 입력 <span class="math inline">\(k\)</span>개를 순서대로 보관하는 이 칸들을 <strong>지연 탭</strong>(delay taps)이라 부르고, Day 20–21에서 이것을 소자 없이도 얻을 수 있는 성능, 곧 기준선으로 씁니다(<a href="../days/d06.html#b-heldout-baseline">Day 10 기초: 기준선</a>). 정확하지만, 길이 <span class="math inline">\(k\)</span>만큼의 저장 공간과 그것을 옮기는 비용이 든다(<a href="../days/d02a.html#ch-data-path">Day 3 2구간: 데이터 이동</a>).</li>
+<li><strong>상태에 흔적 남기기</strong>: 입력이 상태를 바꾸고, 그 변화가 <strong>천천히</strong> 사라지게 한다. 저장 공간이 따로 없어도 지금 상태에 과거의 흔적이 섞여 있다(Day 13–14의 <span class="math inline">\(x(t) = F(u(t-1), u(t-2), \dots)\)</span>).</li>
 </ol>
 <p>reservoir와 물리 소자는 둘째 방법입니다.</p>
-<p><strong>흔적이 얼마나 남았나를 재는 점수: memory capacity(MC).</strong> 지금 상태만 보고 1단계 전, 2단계 전, …의 입력을 각각 얼마나 되살릴 수 있는지를 0~1 점수로 재어 모두 더한 값입니다. 클수록 지난 입력을 더 많이, 더 멀리까지 담고 있다는 뜻입니다. 5구간에서 노드 하나로 숫자를 직접 보고, 측정법은 D12에서 돌려 봅니다.</p>
+<p><strong>흔적이 얼마나 남았나를 재는 점수: memory capacity(MC).</strong> 지금 상태만 보고 1단계 전, 2단계 전, …의 입력을 각각 얼마나 되살릴 수 있는지를 0~1 점수로 재어 모두 더한 값입니다. 클수록 지난 입력을 더 많이, 더 멀리까지 담고 있다는 뜻입니다. 5구간에서 노드 하나로 숫자를 직접 보고, 측정법은 Day 20–21에서 돌려 봅니다.</p>
 <p>Liang은 RC에서 순환 연결 때문에 지금과 과거의 뉴런 동역학 사이에 의존성이 생기고, 이것을 <strong>단기 기억(short-term memory) 또는 fading memory</strong>라고 부르며, 이 기억은 과거 정보를 시간 단계를 넘어 reservoir 상태에 남게 하고 MC로 정량화된다고 씁니다. <span class="src">Liang 2024, p.194</span> 그리고 물리 RC에서 MC를 키우면 <strong>보조 메모리를 쓰지 않아도 되어</strong> 시스템 비용을 줄일 수 있다고 씁니다. <span class="src">Liang 2024, p.200</span> 반대로 병렬로 놓은 동적 소자들은 MC가 "누적되지 않고 대부분 겹쳐서" 낮은 수준에 머물고, 이것을 버퍼에 중간 상태를 저장해 보완하면 <strong>외부 메모리라는 비용</strong>이 든다고 적습니다. <span class="src">Liang 2024, p.196</span> 두 방법이 서로의 대안이라는 뜻입니다.</p>
 <div class="quiz" data-day="d09" data-set="1-check"></div>
 <div class="keypoints">
@@ -646,7 +739,7 @@ window.Quarto = {
 <div class="goal">
 <p>이 구간을 읽고 나면 노드 하나의 상태가 입력 펄스 뒤에 <span class="math inline">\(d, d^2, d^3, \dots\)</span>으로 줄어드는 것을 <span class="math inline">\(d\)</span> = 0.5, 0.9, 1.1로 직접 계산하고, <span class="math inline">\(d\)</span>를 시간상수 <span class="math inline">\(\tau\)</span>와 입력 간격 <span class="math inline">\(\Delta t\)</span>로 바꿀 수 있으며, 이온 소자의 이완과 '감소하는 전류'를 식의 <span class="math inline">\(x\)</span>, <span class="math inline">\(u\)</span>, <span class="math inline">\(d\)</span>로 옮기고, <span class="math inline">\(\tau\)</span>와 retention이 다른 말인 이유를 말할 수 있다.</p>
 </div>
-<p>D7 1구간에서 숫자 하나짜리 RNN(상태를 다음 시간 단계로 넘기는 신경망) <span class="math inline">\(h(t+1) = \tanh(0.5\,h(t) + u(t))\)</span>에 1을 한 번 넣으면 상태가 0.762 → 0.363 → 0.180으로 줄었습니다. D7은 이것이 D3 LIF의 <span class="math inline">\(u_{\text{다음}} = 0.9 \times u_{\text{지금}} + (\text{입력})\)</span>과 같은 꼴, 곧 "이전 값의 일부를 남기고 새 입력을 더하는" 꼴이라고 했습니다(<a href="../days/d07.html#s-rnn-small">D7 1구간</a>). 오늘은 <span class="math inline">\(\tanh\)</span>를 잠시 빼고, 남기는 비율 하나만 둔 가장 단순한 모형으로 그 말을 정확히 합니다.</p>
+<p>Day 11 1구간에서 숫자 하나짜리 RNN(상태를 다음 시간 단계로 넘기는 신경망) <span class="math inline">\(h(t+1) = \tanh(0.5\,h(t) + u(t))\)</span>에 1을 한 번 넣으면 상태가 0.762 → 0.363 → 0.180으로 줄었습니다. Day 11–12은 이것이 Day 5–6 LIF의 <span class="math inline">\(u_{\text{다음}} = 0.9 \times u_{\text{지금}} + (\text{입력})\)</span>과 같은 꼴, 곧 "이전 값의 일부를 남기고 새 입력을 더하는" 꼴이라고 했습니다(<a href="../days/d07a.html#s-rnn-small">Day 11 1구간</a>). 오늘은 <span class="math inline">\(\tanh\)</span>를 잠시 빼고, 남기는 비율 하나만 둔 가장 단순한 모형으로 그 말을 정확히 합니다.</p>
 <div id="b-fading-memory" class="basics">
 <section id="fading-memory-과거-입력의-영향이-줄어드는-것" class="level4">
 <h4 class="anchored" data-anchor-id="fading-memory-과거-입력의-영향이-줄어드는-것">fading memory: 과거 입력의 영향이 줄어드는 것</h4>
@@ -658,7 +751,7 @@ x(t+1) = d\cdot x(t) + u(t)
 <li>뜻: 다음 상태 = (지금 상태의 <span class="math inline">\(d\)</span>배) + (지금 입력). 매 단계 과거의 몫이 <span class="math inline">\(d\)</span>배가 된다.</li>
 <li>계산 순서: 지금 상태에 <span class="math inline">\(d\)</span>를 곱한다 → 지금 입력을 더한다 → 다음 상태.</li>
 </ul>
-<p><span id="s-d-meaning"></span><strong><span class="math inline">\(d\)</span>는 '남는' 비율입니다.</strong> <span class="math inline">\(d\)</span> = 0.9이면 한 단계 뒤 지금 값의 90%가 남고, 한 단계에 줄어드는 몫은 지금 값의 10%(<span class="math inline">\(1 - d\)</span> = 0.1)입니다. 10에서 시작하면 10 → 9 → 8.1 → 7.29로, 줄어드는 양이 1, 0.9, 0.81로 점점 작아집니다. "매 단계 0.9씩 뺀다"도, "처음 값의 10%씩 일정하게 준다"도 아닙니다. D3 LIF의 0.9를 읽던 방식과 같습니다(<a href="../days/d03.html#s-lif-decay">D3 2-3</a>). 문헌은 이 <span class="math inline">\(d\)</span>를 감쇠 계수(decay factor)라고 부르고, 이 교재의 뒤 Day에서 '줄어드는 비율 <span class="math inline">\(d\)</span>'라고 적은 곳도 같은 <span class="math inline">\(d\)</span>(남는 몫)를 가리킵니다.</p>
+<p><span id="s-d-meaning"></span><strong><span class="math inline">\(d\)</span>는 '남는' 비율입니다.</strong> <span class="math inline">\(d\)</span> = 0.9이면 한 단계 뒤 지금 값의 90%가 남고, 한 단계에 줄어드는 몫은 지금 값의 10%(<span class="math inline">\(1 - d\)</span> = 0.1)입니다. 10에서 시작하면 10 → 9 → 8.1 → 7.29로, 줄어드는 양이 1, 0.9, 0.81로 점점 작아집니다. "매 단계 0.9씩 뺀다"도, "처음 값의 10%씩 일정하게 준다"도 아닙니다. Day 5–6 LIF의 0.9를 읽던 방식과 같습니다(<a href="../days/d03a.html#s-lif-decay">Day 5 2-3</a>). 문헌은 이 <span class="math inline">\(d\)</span>를 감쇠 계수(decay factor)라고 부르고, 이 교재의 뒤 Day에서 '줄어드는 비율 <span class="math inline">\(d\)</span>'라고 적은 곳도 같은 <span class="math inline">\(d\)</span>(남는 몫)를 가리킵니다.</p>
 <p><strong>무엇을 볼지.</strong> 그림 1은 <span class="math inline">\(t = 0\)</span>에 1을 한 번 넣고 그 뒤로는 입력 0일 때, <span class="math inline">\(d\)</span>만 다른 노드들의 상태입니다. 가로축은 시간 단계, 세로축은 상태 <span class="math inline">\(x\)</span>(단위 없음). 색마다 몇 단계 만에 0에 가까워지는지, 그리고 0으로 가지 않는 선이 어느 것인지 보세요.</p>
 <figure class="fig figure"><img src="../assets/img/d09/fig1-decay.svg" alt="입력 1을 한 번 넣은 뒤 노드 하나의 상태. d=0.5는 1, 0.5, 0.25로 빨리 0이 되고, d=0.9는 1, 0.9, 0.81로 천천히 줄며 11단계에 0.349, 선형 d=1.1은 1, 1.1, 1.21로 계속 커지고, tanh가 있는 d=1.1은 0.76에서 시작해 0.5 근처에 머문다" class="figure-img"><figcaption><b>그림 1.</b> 남는 비율 $d$가 기억의 길이를 정한다. 파랑($d$ = 0.5)은 몇 단계 만에 잊고, 초록($d$ = 0.9)은 오래 기억하며, 빨강($d$ = 1.1)은 잊지 않고 오히려 키운다. 주황 점선은 같은 $d$ = 1.1에 $\tanh$를 씌운 것으로, 터지지는 않지만 0으로 돌아가지 않고 약 0.50에 머문다. 모두 코드가 계산한 값이다. (Claude가 계산해 그림)</figcaption></figure>
 <p><span id="s-fading-calc"></span><strong>손 계산(그림 1의 점을 하나씩).</strong> <span class="math inline">\(x(0) = 0\)</span>, 입력은 <span class="math inline">\(t = 0\)</span>에 1, 그 뒤로는 0.</p>
@@ -671,15 +764,15 @@ x(t+1) = d\cdot x(t) + u(t)
 <p><span class="math display">\[
 x(t) = u(t-1) + d\,u(t-2) + d^2 u(t-3) + \cdots
 \]</span></p>
-<p>처럼 <strong>지난 입력들의 가중합이고, 가중치가 과거로 갈수록 <span class="math inline">\(d\)</span>배씩 줄어듭니다.</strong> 이것이 <strong>fading memory</strong>(흐려지는 기억)입니다. <span class="math inline">\(d &lt; 1\)</span>이면 오래된 입력일수록 영향이 작아지고, 결국 지금 상태는 <strong>최근 입력들이 주로 정합니다</strong>. D8의 "읽을 수 있게 남는 것은 최근 입력의 일부"가 바로 이 뜻입니다.</p>
+<p>처럼 <strong>지난 입력들의 가중합이고, 가중치가 과거로 갈수록 <span class="math inline">\(d\)</span>배씩 줄어듭니다.</strong> 이것이 <strong>fading memory</strong>(흐려지는 기억)입니다. <span class="math inline">\(d &lt; 1\)</span>이면 오래된 입력일수록 영향이 작아지고, 결국 지금 상태는 <strong>최근 입력들이 주로 정합니다</strong>. Day 13–14의 "읽을 수 있게 남는 것은 최근 입력의 일부"가 바로 이 뜻입니다.</p>
 <p><strong>이름의 두 얼굴.</strong> 문헌은 같은 성질을 두 방향에서 말합니다. Liang은 "과거 정보가 상태에 <strong>남는다</strong>"(단기 기억) 쪽에서 <span class="src">Liang 2024, p.194</span>, Stepney는 "먼 과거의 세부가 지금 상태를 <strong>좌우하지 않는다</strong>" 쪽에서 <span class="src">Stepney 2024, p.668</span> 씁니다. 둘 다 맞고, 한 성질의 앞뒷면입니다. 최근은 남고 먼 과거는 흐려진다.</p>
 </section>
 </div>
-<p><span id="s-d-bad"></span><strong><span class="math inline">\(d\)</span> = 1.1은 왜 나쁜가.</strong> 기억이 오래가니 좋을 것 같지만 둘 다 문제입니다. 선형이면 과거가 계속 커져 결국 지금 입력의 몫(1)이 과거의 몫(수십, 수백)에 묻힙니다. <span class="math inline">\(\tanh\)</span>가 있으면 터지지는 않지만, 한 번 1이 들어온 뒤 상태가 0.50 근처에 <strong>영원히</strong> 머뭅니다. 0.50에서는 <span class="math inline">\(\tanh(1.1 \times 0.50) = \tanh(0.55) = 0.50\)</span>이라 다음 상태가 지금 상태와 같기 때문입니다(3구간에서 이 '머무는 값'을 다시 씁니다). 그 뒤로 무엇이 들어와도 "언젠가 1이 왔었다"는 사실만 남고, 언제·몇 번이었는지는 구별되지 않습니다. 저장 소자(비휘발성 메모리)로는 좋은 성질이지만, 시계열을 처리하는 reservoir로는 나쁜 성질입니다. D1 4구간의 "같은 현상, 정반대의 역할: 휘발성과 비휘발성"(<a href="../days/d01.html#ch-volatile">D1 4구간</a>)이 여기서 숫자로 보입니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-d-bad"></span><strong><span class="math inline">\(d\)</span> = 1.1은 왜 나쁜가.</strong> 기억이 오래가니 좋을 것 같지만 둘 다 문제입니다. 선형이면 과거가 계속 커져 결국 지금 입력의 몫(1)이 과거의 몫(수십, 수백)에 묻힙니다. <span class="math inline">\(\tanh\)</span>가 있으면 터지지는 않지만, 한 번 1이 들어온 뒤 상태가 0.50 근처에 <strong>영원히</strong> 머뭅니다. 0.50에서는 <span class="math inline">\(\tanh(1.1 \times 0.50) = \tanh(0.55) = 0.50\)</span>이라 다음 상태가 지금 상태와 같기 때문입니다(3구간에서 이 '머무는 값'을 다시 씁니다). 그 뒤로 무엇이 들어와도 "언젠가 1이 왔었다"는 사실만 남고, 언제·몇 번이었는지는 구별되지 않습니다. 저장 소자(비휘발성 메모리)로는 좋은 성질이지만, 시계열을 처리하는 reservoir로는 나쁜 성질입니다. Day 2 4구간의 "같은 현상, 정반대의 역할: 휘발성과 비휘발성"(<a href="../days/d01b.html#ch-volatile">Day 2 4구간</a>)이 여기서 숫자로 보입니다. <span class="tag tag-interp">해석</span></p>
 <section id="s-d-time" class="level4">
 <h4 class="anchored" data-anchor-id="s-d-time"><span class="math inline">\(d\)</span>를 실제 시간으로: 시간상수 τ와 입력 간격 Δt</h4>
-<p>D3 2-3에서 LIF의 0.9를 이렇게 읽었습니다. 0.9는 "1 ms씩 끊어 계산한다"는 선택에 딸린 계수이고, 막이 실제로 얼마나 빨리 새는지는 시간상수 <span class="math inline">\(\tau\)</span>가 정하며, 둘은 <span class="math inline">\(0.9 = e^{-\Delta t/\tau}\)</span>로 이어진다(<span class="math inline">\(\Delta t\)</span> = 1 ms이면 <span class="math inline">\(\tau \approx\)</span> 9.5 ms, <a href="../days/d03.html#s-lif-decay">D3 2-3</a>). 오늘의 <span class="math inline">\(d\)</span>도 같은 관계입니다.</p>
-<p>왜 숫자 하나로 정해지는지만 다시 짚습니다. D8 1구간에서 시간 단계 <span class="math inline">\(t\)</span>는 번호이고, 실제 시각은 <span class="math inline">\(t\)</span> × 샘플링 주기 <span class="math inline">\(\Delta t\)</span>라고 했습니다(<a href="../days/d08.html#b-time-series">D8 기초: 시계열·샘플링</a>). 물리 소자의 흔적이 지수함수 <span class="math inline">\(e^{-t/\tau}\)</span>로 줄어든다고 합시다(<span class="math inline">\(\tau\)</span>는 시간상수, 단위 s. 화공의 1차 반응이나 1차 이완에서 평형과의 농도 차이가 <span class="math inline">\(e^{-t/\tau}\)</span>로 줄어드는 것과 같은 꼴입니다). 어느 시각 <span class="math inline">\(t\)</span>의 값과 <span class="math inline">\(\Delta t\)</span> 뒤의 값의 비는 <span class="math inline">\(e^{-(t+\Delta t)/\tau} \div e^{-t/\tau} = e^{-\Delta t/\tau}\)</span>로, <strong>언제 재든 같습니다</strong>. 그래서 한 단계(<span class="math inline">\(\Delta t\)</span>) 동안 남는 비율이 숫자 하나로 정해집니다.</p>
+<p>Day 5–6 2-3에서 LIF의 0.9를 이렇게 읽었습니다. 0.9는 "1 ms씩 끊어 계산한다"는 선택에 딸린 계수이고, 막이 실제로 얼마나 빨리 새는지는 시간상수 <span class="math inline">\(\tau\)</span>가 정하며, 둘은 <span class="math inline">\(0.9 = e^{-\Delta t/\tau}\)</span>로 이어진다(<span class="math inline">\(\Delta t\)</span> = 1 ms이면 <span class="math inline">\(\tau \approx\)</span> 9.5 ms, <a href="../days/d03a.html#s-lif-decay">Day 5 2-3</a>). 오늘의 <span class="math inline">\(d\)</span>도 같은 관계입니다.</p>
+<p>왜 숫자 하나로 정해지는지만 다시 짚습니다. Day 13 1구간에서 시간 단계 <span class="math inline">\(t\)</span>는 번호이고, 실제 시각은 <span class="math inline">\(t\)</span> × 샘플링 주기 <span class="math inline">\(\Delta t\)</span>라고 했습니다(<a href="../days/d08a.html#b-time-series">Day 13 기초: 시계열·샘플링</a>). 물리 소자의 흔적이 지수함수 <span class="math inline">\(e^{-t/\tau}\)</span>로 줄어든다고 합시다(<span class="math inline">\(\tau\)</span>는 시간상수, 단위 s. 화공의 1차 반응이나 1차 이완에서 평형과의 농도 차이가 <span class="math inline">\(e^{-t/\tau}\)</span>로 줄어드는 것과 같은 꼴입니다). 어느 시각 <span class="math inline">\(t\)</span>의 값과 <span class="math inline">\(\Delta t\)</span> 뒤의 값의 비는 <span class="math inline">\(e^{-(t+\Delta t)/\tau} \div e^{-t/\tau} = e^{-\Delta t/\tau}\)</span>로, <strong>언제 재든 같습니다</strong>. 그래서 한 단계(<span class="math inline">\(\Delta t\)</span>) 동안 남는 비율이 숫자 하나로 정해집니다.</p>
 <p><span class="math display">\[
 d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 \]</span></p>
@@ -689,13 +782,13 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 <li>같은 소자(<span class="math inline">\(\tau\)</span> = 38 ms)에 8 ms마다 넣으면 <span class="math inline">\(d = e^{-8/38} = 0.81\)</span>. 4 ms를 두 번 지난 것과 같아서 <span class="math inline">\(0.9^2 = 0.81\)</span>입니다.</li>
 <li>같은 소자에 10 Hz(<span class="math inline">\(\Delta t\)</span> = 100 ms)로 넣으면 <span class="math inline">\(d = e^{-100/38} = 0.07\)</span>로, 다음 입력이 올 때 흔적이 7%만 남습니다.</li>
 </ul>
-<p><strong>같은 소자라도 입력 간격에 따라 <span class="math inline">\(d\)</span>가 달라집니다.</strong> 그래서 "이 소자는 기억이 길다/짧다"는 말은 입력 간격을 함께 말해야 뜻이 있습니다. 0.9를 그대로 둔 채 간격만 바꾸면 다른 <span class="math inline">\(\tau\)</span>, 곧 다른 소자를 계산하는 셈입니다(D3에서 본 것과 같은 함정). 상태가 절반이 되는 단계 수 <span class="math inline">\(n\)</span>은 <span class="math inline">\(d^n = 0.5\)</span>의 양변에 로그를 취해 풀면 <span class="math inline">\(n = \ln 0.5/\ln d\)</span>로, <span class="math inline">\(d\)</span> = 0.5면 1단계, <span class="math inline">\(d\)</span> = 0.9면 6.6단계입니다.</p>
+<p><strong>같은 소자라도 입력 간격에 따라 <span class="math inline">\(d\)</span>가 달라집니다.</strong> 그래서 "이 소자는 기억이 길다/짧다"는 말은 입력 간격을 함께 말해야 뜻이 있습니다. 0.9를 그대로 둔 채 간격만 바꾸면 다른 <span class="math inline">\(\tau\)</span>, 곧 다른 소자를 계산하는 셈입니다(Day 5–6에서 본 것과 같은 함정). 상태가 절반이 되는 단계 수 <span class="math inline">\(n\)</span>은 <span class="math inline">\(d^n = 0.5\)</span>의 양변에 로그를 취해 풀면 <span class="math inline">\(n = \ln 0.5/\ln d\)</span>로, <span class="math inline">\(d\)</span> = 0.5면 1단계, <span class="math inline">\(d\)</span> = 0.9면 6.6단계입니다.</p>
 </section>
 <section id="직접-바꿔-보기-τ와-입력-간격" class="level4">
 <h4 class="anchored" data-anchor-id="직접-바꿔-보기-τ와-입력-간격">직접 바꿔 보기: τ와 입력 간격</h4>
 <p>소자의 이완 시간 τ와 입력을 넣는 간격 Δt를 따로 바꿔, 다음 입력 때 앞 입력의 흔적이 얼마나 남는지(d) 봅니다. <strong>먼저 예상을 고른 뒤</strong> 입력 간격만 바꿔 보세요.</p>
 <div class="lab" data-lab="decay">
-<p class="lab-model-line"><b>교육용 모형</b>입니다. 흔적이 정확히 지수함수 e<sup>−t/τ</sup>로 준다고 가정합니다. 실제 이온 소자는 여러 시간척도가 섞이거나 지수 모양이 아닐 수 있습니다(D13, D21). τ는 5–500 ms, Δt는 1–200 ms에서 고릅니다.</p>
+<p class="lab-model-line"><b>교육용 모형</b>입니다. 흔적이 정확히 지수함수 e<sup>−t/τ</sup>로 준다고 가정합니다. 실제 이온 소자는 여러 시간척도가 섞이거나 지수 모양이 아닐 수 있습니다(Day 22–23, Day 37). τ는 5–500 ms, Δt는 1–200 ms에서 고릅니다.</p>
 <div class="lab-static">
 <p><b>정적 예제.</b> d = e^(−Δt/τ)</p>
 
@@ -742,7 +835,7 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 </div>
 </div>
 <div id="s-tau-retention" class="myth">
-<p><strong>"시간상수 <span class="math inline">\(\tau\)</span>가 길면 retention이 길고, 그러면 기억이 좋다"</strong> — <span class="math inline">\(\tau\)</span>는 응답을 지수함수로 맞췄을 때의 <strong>모형 매개변수</strong>이고, retention(유지 시간)은 "어떤 값이 허용 오차 안에 얼마 동안 남나"를 <strong>정의·허용오차·측정 기간</strong>을 정해 잰 <strong>지표</strong>입니다. 둘은 다른 양입니다. 그리고 계산에 필요한 것은 둘 중 어느 것도 아니라, <strong>과제의 시간척도에 맞는</strong> 흐려짐입니다. 그림 1의 <span class="math inline">\(d\)</span> = 1.1처럼 너무 오래가는 기억은 reservoir에서는 해롭고, 5구간에서 보듯 "느리게 잊는 것"과 "많이 기억하는 것"도 다른 말입니다. retention과 memory capacity의 차이는 D13에서 다룹니다.</p>
+<p><strong>"시간상수 <span class="math inline">\(\tau\)</span>가 길면 retention이 길고, 그러면 기억이 좋다"</strong> — <span class="math inline">\(\tau\)</span>는 응답을 지수함수로 맞췄을 때의 <strong>모형 매개변수</strong>이고, retention(유지 시간)은 "어떤 값이 허용 오차 안에 얼마 동안 남나"를 <strong>정의·허용오차·측정 기간</strong>을 정해 잰 <strong>지표</strong>입니다. 둘은 다른 양입니다. 그리고 계산에 필요한 것은 둘 중 어느 것도 아니라, <strong>과제의 시간척도에 맞는</strong> 흐려짐입니다. 그림 1의 <span class="math inline">\(d\)</span> = 1.1처럼 너무 오래가는 기억은 reservoir에서는 해롭고, 5구간에서 보듯 "느리게 잊는 것"과 "많이 기억하는 것"도 다른 말입니다. retention과 memory capacity의 차이는 Day 22–23에서 다룹니다.</p>
 </div>
 <div class="stop-point">
 <p>여기까지: 그림 1의 점을 <span class="math inline">\(d^k\)</span>로 계산하고, <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>로 같은 소자(τ = 38 ms)가 4 ms 간격이면 0.90, 8 ms면 0.81, 100 ms면 0.07이 되는 것을 계산할 수 있다. 다음: 실제 이온 소자의 펄스 응답을 이 식의 기호로 옮긴다.</p>
@@ -764,7 +857,7 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 <p><strong>단계 3 — 4 ms 기다림(이완).</strong> 펄스가 끝나면 여분의 이온이 제자리로 돌아가며 여분이 <span class="math inline">\(e^{-4/38}\)</span> = 0.90배가 됩니다. 2 µS 중 1.8 µS가 남아 <span class="math inline">\(x\)</span> = 0.9. <strong>이 0.9가 식의 <span class="math inline">\(d\)</span>입니다.</strong> 소자의 이완(물리)이 식에서는 "지금 상태에 <span class="math inline">\(d\)</span>를 곱한다"(수학)가 됩니다.</p>
 </div>
 <div class="step">
-<p><strong>단계 4 — 둘째 펄스(<span class="math inline">\(u\)</span> = 1).</strong> 남은 흔적 위에 다시 2 µS가 더해져 <span class="math inline">\(x = 0.9 + 1 = 1.9\)</span>, <span class="math inline">\(g\)</span> = 13.8 µS, 전류 1.38 µA. 식으로는 <span class="math inline">\(x = d \times 1 + 1\)</span>. 첫 펄스가 없었다면 둘째 펄스 뒤에는 <span class="math inline">\(x\)</span> = 1, 전류 1.2 µA였을 것입니다. <strong>같은 둘째 펄스인데 지난 이력에 따라 지금 전류가 다릅니다.</strong> D6의 PPF(펄스 두 개를 연달아 주면 둘째 응답이 커지는 현상, <a href="../days/d06.html#b-ppf">D6 기초</a>)가 이것의 가장 작은 판이고, 5구간 인과 사슬의 고리 ③입니다.</p>
+<p><strong>단계 4 — 둘째 펄스(<span class="math inline">\(u\)</span> = 1).</strong> 남은 흔적 위에 다시 2 µS가 더해져 <span class="math inline">\(x = 0.9 + 1 = 1.9\)</span>, <span class="math inline">\(g\)</span> = 13.8 µS, 전류 1.38 µA. 식으로는 <span class="math inline">\(x = d \times 1 + 1\)</span>. 첫 펄스가 없었다면 둘째 펄스 뒤에는 <span class="math inline">\(x\)</span> = 1, 전류 1.2 µA였을 것입니다. <strong>같은 둘째 펄스인데 지난 이력에 따라 지금 전류가 다릅니다.</strong> Day 10의 PPF(펄스 두 개를 연달아 주면 둘째 응답이 커지는 현상, <a href="../days/d06.html#b-ppf">Day 10 기초</a>)가 이것의 가장 작은 판이고, 5구간 인과 사슬의 고리 ③입니다.</p>
 </div>
 <div class="step">
 <p><strong>단계 5 — 펄스 없이 계속.</strong> 4 ms마다 0.90배: <span class="math inline">\(x\)</span> = 1.71, 1.54, 1.39, 1.25, 전류 1.34, 1.31, 1.28, 1.25 µA. 논문이 말하는 "천천히 감소하는 전류"가 식에서는 "<span class="math inline">\(u\)</span> = 0인 동안 <span class="math inline">\(x\)</span>가 매 단계 <span class="math inline">\(d\)</span>배가 되는 것"이고, 지금 전류에서 쉬는 전류(1.0 µA)를 뺀 몫이 <span class="math inline">\(x\)</span>에 비례합니다.</p>
@@ -823,9 +916,9 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 </tbody>
 </table>
 <p><strong>원문 그림에서 같은 고리 찾기.</strong> 아래 원문 그림은 Liang 리뷰가 물리 노드를 추상화한 모형(a)과 여러 소자 예(b–e)입니다. 먼저 (a)에서 상자 <span class="math inline">\(f\)</span>와 삼각형 <span class="math inline">\(d\)</span>, 그리고 <span class="math inline">\(Z^{-1}\)</span>(한 단계 지연)을 찾으세요. 오늘의 <span class="math inline">\(x(t+1) = d\,x(t) + u(t)\)</span>에서 <span class="math inline">\(d\)</span>를 곱하고 한 단계 미루는 고리가 그 왼쪽 고리입니다. 그다음 (e)의 아래 그래프에서 전압 펄스(보라)가 끝난 뒤 전도도(파랑)가 <strong>바로 떨어지지 않고 천천히</strong> 내려오는 모양, 그리고 두 번째 펄스가 첫 번째 펄스의 흔적 위에서 시작하는 모양을 보세요. 그림 2의 단계 3–4와 같은 장면입니다.</p>
-<figure class="fig paper figure"><img src="../assets/img/papers/liang2024-fig3a-e.png" alt="Liang 2024 Fig. 3 a–e: a 물리 노드의 일반 모형(비선형 함수 f, 감쇠 계수 d, 한 단계 지연 Z^-1의 되먹임 고리), b Mackey–Glass 비선형 회로, c 적분–ReLU–누설 회로와 입력이 끊긴 뒤 천천히 내려오는 출력, d 스핀 토크 나노 발진기, e 산소 이온이 움직이는 동적 memristor의 전류–전압 곡선과 펄스 뒤 천천히 이완하는 전도도" class="figure-img"><figcaption><b>원문 그림.</b> Liang et al., <a href="https://doi.org/10.1038/s41928-024-01133-z" target="_blank"><i>Nat. Electron.</i> 2024, 7, 193–206</a>, Fig. 3a–e, p.197. 볼 것: <b>a</b>는 물리 노드의 두 기본 특성을 비선형 함수 $f$와 감쇠 계수 $d$(decay factor), 한 단계 지연 $Z^{-1}$로 추상화한 것으로, 오늘 식의 $d$가 이 삼각형이다. <b>c</b>의 오른쪽 그래프는 입력(보라)이 끊긴 뒤 출력(파랑)이 저항–커패시터(전하를 담는 그릇, [D1 기초](d01.qmd#b-capacitor)) 회로의 시간상수로 천천히 내려오는 모습이다(ReLU는 음수는 0, 양수는 그대로 내보내는 꺾인 함수). <b>e</b>는 산소 이온이 움직이는 동적 memristor(지나간 전류에 따라 저항이 변하는 소자)로, 아래 그래프에서 펄스마다 전도도가 오르고 펄스 사이에 천천히 이완하며, 둘째 펄스는 첫 펄스의 흔적 위에서 출발한다. 캡션은 이것을 "외부 자극이 없으면 처음 값으로 서서히 이완해 단기 기억과 비선형성을 제공한다"고 적는다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p>Liang은 물리 노드가 대체로 <strong>비선형성과 동역학</strong>이라는 두 특성을 가지며, 물리 RC는 피드포워드 신경망과 달리 단기 기억을 가진 동역학계이고 <strong>그 단기 기억은 주로 물리 노드에서 나온다</strong>고 씁니다. <span class="src">Liang 2024, p.197</span> 이온 소자의 이완(D20–D21의 전기이중층 충전, 농도 분극 등)이 바로 이 <span class="math inline">\(d\)</span>의 후보입니다. <span class="tag tag-interp">해석</span></p>
-<p><strong>대응이 깨지는 곳.</strong> 이 대응은 세 가정 위에 있습니다. (1) 펄스 하나가 올리는 양 <span class="math inline">\(\Delta g\)</span>가 지금 상태와 무관하다: 실제로는 이온이 많이 쌓이면 덜 올라 포화될 수 있고, 이것이 비선형 함수(위 원문 그림 a의 <span class="math inline">\(f\)</span>, D7의 <span class="math inline">\(\tanh\)</span>)가 들어갈 자리입니다. (2) 이완이 시간상수 하나짜리 지수함수다: 실제로는 전기이중층 충전, 이온 확산, 전기화학 도핑처럼 빠르기가 다른 과정이 섞여 <span class="math inline">\(\tau\)</span>가 여럿이거나 지수 모양이 아닐 수 있고(D13, D21), 그러면 <span class="math inline">\(d\)</span>도 숫자 하나로 정해지지 않습니다. (3) 쉬는 값 <span class="math inline">\(g_{rest}\)</span>가 그대로다: 쉬는 값이 서서히 움직이면(드리프트) 그 변화가 기억처럼 보일 수 있습니다(3구간 끝). <span class="tag tag-interp">해석</span></p>
+<figure class="fig paper figure"><img src="../assets/img/papers/liang2024-fig3a-e.png" alt="Liang 2024 Fig. 3 a–e: a 물리 노드의 일반 모형(비선형 함수 f, 감쇠 계수 d, 한 단계 지연 Z^-1의 되먹임 고리), b Mackey–Glass 비선형 회로, c 적분–ReLU–누설 회로와 입력이 끊긴 뒤 천천히 내려오는 출력, d 스핀 토크 나노 발진기, e 산소 이온이 움직이는 동적 memristor의 전류–전압 곡선과 펄스 뒤 천천히 이완하는 전도도" class="figure-img"><figcaption><b>원문 그림.</b> Liang et al., <a href="https://doi.org/10.1038/s41928-024-01133-z" target="_blank"><i>Nat. Electron.</i> 2024, 7, 193–206</a>, Fig. 3a–e, p.197. 볼 것: <b>a</b>는 물리 노드의 두 기본 특성을 비선형 함수 $f$와 감쇠 계수 $d$(decay factor), 한 단계 지연 $Z^{-1}$로 추상화한 것으로, 오늘 식의 $d$가 이 삼각형이다. <b>c</b>의 오른쪽 그래프는 입력(보라)이 끊긴 뒤 출력(파랑)이 저항–커패시터(전하를 담는 그릇, [Day 1 기초](d01a.qmd#b-capacitor)) 회로의 시간상수로 천천히 내려오는 모습이다(ReLU는 음수는 0, 양수는 그대로 내보내는 꺾인 함수). <b>e</b>는 산소 이온이 움직이는 동적 memristor(지나간 전류에 따라 저항이 변하는 소자)로, 아래 그래프에서 펄스마다 전도도가 오르고 펄스 사이에 천천히 이완하며, 둘째 펄스는 첫 펄스의 흔적 위에서 출발한다. 캡션은 이것을 "외부 자극이 없으면 처음 값으로 서서히 이완해 단기 기억과 비선형성을 제공한다"고 적는다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p>Liang은 물리 노드가 대체로 <strong>비선형성과 동역학</strong>이라는 두 특성을 가지며, 물리 RC는 피드포워드 신경망과 달리 단기 기억을 가진 동역학계이고 <strong>그 단기 기억은 주로 물리 노드에서 나온다</strong>고 씁니다. <span class="src">Liang 2024, p.197</span> 이온 소자의 이완(Day 35–37의 전기이중층 충전, 농도 분극 등)이 바로 이 <span class="math inline">\(d\)</span>의 후보입니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>대응이 깨지는 곳.</strong> 이 대응은 세 가정 위에 있습니다. (1) 펄스 하나가 올리는 양 <span class="math inline">\(\Delta g\)</span>가 지금 상태와 무관하다: 실제로는 이온이 많이 쌓이면 덜 올라 포화될 수 있고, 이것이 비선형 함수(위 원문 그림 a의 <span class="math inline">\(f\)</span>, Day 11–12의 <span class="math inline">\(\tanh\)</span>)가 들어갈 자리입니다. (2) 이완이 시간상수 하나짜리 지수함수다: 실제로는 전기이중층 충전, 이온 확산, 전기화학 도핑처럼 빠르기가 다른 과정이 섞여 <span class="math inline">\(\tau\)</span>가 여럿이거나 지수 모양이 아닐 수 있고(Day 22–23, Day 37), 그러면 <span class="math inline">\(d\)</span>도 숫자 하나로 정해지지 않습니다. (3) 쉬는 값 <span class="math inline">\(g_{rest}\)</span>가 그대로다: 쉬는 값이 서서히 움직이면(드리프트) 그 변화가 기억처럼 보일 수 있습니다(3구간 끝). <span class="tag tag-interp">해석</span></p>
 <div class="predict">
 <p><span class="math inline">\(d\)</span> = 0.9인 노드에 1을 한 번 넣었습니다. 3단계 뒤 상태는 얼마일까요? 첫 문제는 본문 <span class="math inline">\(d\)</span> = 0.5의 확인, 둘째는 빈칸 채우기, 셋째는 <span class="math inline">\(d\)</span> = 0.8의 새 문제입니다.</p>
 </div>
@@ -837,7 +930,7 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 <li><span class="math inline">\(d\)</span> = 0.5: 1, 0.5, 0.25 … / 0.9: 1, 0.9, 0.81 …(11단계에 0.349) / 1.1: 계속 커짐. <span class="math inline">\(\tanh\)</span>를 씌운 1.1은 0.50에 영원히 머문다(잊지 못함).</li>
 <li><span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>: 같은 소자도 입력 간격에 따라 <span class="math inline">\(d\)</span>가 다르다. τ = 38 ms에서 4 ms 간격 0.90, 8 ms 0.81, 100 ms 0.07.</li>
 <li>이온 소자로 읽으면 <span class="math inline">\(x\)</span> = 늘어난 전도도(펄스 하나의 <span class="math inline">\(\Delta g\)</span> 단위), <span class="math inline">\(u\)</span> = 쓰기 펄스, <span class="math inline">\(d\)</span> = 다음 펄스 때까지 남는 몫. '천천히 감소하는 전류'는 <span class="math inline">\(u\)</span> = 0인 동안 <span class="math inline">\(x\)</span>가 <span class="math inline">\(d\)</span>배씩 줄어드는 것이다(그림 2).</li>
-<li>단기 기억은 주로 물리 노드의 동역학에서 나온다 <span class="src">Liang 2024, p.197</span>. <span class="math inline">\(\tau\)</span> ≠ retention(D13).</li>
+<li>단기 기억은 주로 물리 노드의 동역학에서 나온다 <span class="src">Liang 2024, p.197</span>. <span class="math inline">\(\tau\)</span> ≠ retention(Day 22–23).</li>
 </ul>
 </div>
 </section>
@@ -847,11 +940,11 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 <div class="goal">
 <p>이 구간을 읽고 나면 echo state property를 "출발점만 다른 두 상태가 같은 입력을 받으면 하나로 모인다"로 정의하고, 노드 하나(<span class="math inline">\(d\)</span> = 0.5, 0.9, 1.1)의 숫자로 언제 성립하고 언제 깨지는지, 입력의 크기가 왜 결과를 바꾸는지 말할 수 있다. (노드가 여럿일 때는 4구간에서 spectral radius로 다시 본다.)</p>
 </div>
-<p>fading memory는 "과거 입력의 영향이 줄어든다"였습니다. 그런데 과거에는 입력만 있는 것이 아닙니다. <strong>처음 상태</strong>도 있습니다. 소자를 켰을 때의 상태, 지난번 실험이 남긴 상태. 그것까지 잊어야 합니다. D7 3-1에서 시작값 0과 0.8의 차이가 0.124 → 0.053 → 0.025로 줄어서, 처음 몇 단계를 버리면(washout) 된다고 했던 것을 떠올리세요(<a href="../days/d07.html#s-washout">D7 3-1</a>). 오늘은 그 "줄어든다"가 언제 성립하는지 봅니다.</p>
+<p>fading memory는 "과거 입력의 영향이 줄어든다"였습니다. 그런데 과거에는 입력만 있는 것이 아닙니다. <strong>처음 상태</strong>도 있습니다. 소자를 켰을 때의 상태, 지난번 실험이 남긴 상태. 그것까지 잊어야 합니다. Day 11–12 3-1에서 시작값 0과 0.8의 차이가 0.124 → 0.053 → 0.025로 줄어서, 처음 몇 단계를 버리면(washout) 된다고 했던 것을 떠올리세요(<a href="../days/d07b.html#s-washout">Day 12 3-1</a>). 오늘은 그 "줄어든다"가 언제 성립하는지 봅니다.</p>
 <div id="b-esp" class="basics">
 <section id="echo-state-property-초기-상태를-잊고-입력만으로-상태가-정해지는-것" class="level4">
 <h4 class="anchored" data-anchor-id="echo-state-property-초기-상태를-잊고-입력만으로-상태가-정해지는-것">echo state property: 초기 상태를 잊고 입력만으로 상태가 정해지는 것</h4>
-<p><strong>왜 필요한가.</strong> readout은 "이런 상태면 이런 답"을 배웁니다. 그런데 같은 입력 이력을 넣었는데 <strong>처음 상태가 다르다는 이유로</strong> 다른 상태가 나온다면, 어제 학습한 readout이 오늘은 틀립니다. 실험을 다시 해도 같은 결과가 나오지 않습니다. 상태가 "입력의 메아리(echo)"여야 readout이 쓸 수 있습니다.</p>
+<p><strong>왜 필요한가.</strong> readout은 "이런 상태면 이런 답"을 배웁니다. 그런데 같은 입력 이력을 넣었는데 <strong>처음 상태가 다르다는 이유로</strong> 다른 상태가 나온다면, 지난 학습에서 학습한 readout이 오늘은 틀립니다. 실험을 다시 해도 같은 결과가 나오지 않습니다. 상태가 "입력의 메아리(echo)"여야 readout이 쓸 수 있습니다.</p>
 <p><strong>정의(이 교재의 뜻).</strong> 같은 reservoir 두 벌을 서로 다른 처음 상태에서 출발시키고, <strong>같은 입력</strong>을 넣었을 때 두 상태의 차이가 시간이 지나며 0으로 줄어들면, 그 reservoir는 <strong>echo state property</strong>(ESP)를 가진다고 말합니다. 그러면 충분히 시간이 지난 뒤의 상태는 처음 상태와 무관하게 <strong>입력 이력만으로</strong> 정해집니다.</p>
 <p><span id="s-esp-linear"></span><strong>작은 숫자로: 두 궤적(선형, 노드 하나).</strong> <span class="math inline">\(x(t+1) = 0.5\,x(t) + u(t)\)</span>를 두 벌 만듭니다. 벌 A는 +0.8에서, 벌 B는 −0.8에서 출발하고(소자로 치면 직전 실험이 남긴 상태가 다른 두 경우), 둘 다에 같은 입력 1, 0, 1, 1, 0을 넣습니다. 계산은 2구간과 같습니다(지금 상태 × 0.5 + 지금 입력).</p>
 <table class="caption-top table">
@@ -914,12 +1007,12 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 <figure class="fig figure"><img src="../assets/img/d09/fig2-esp-one-node.svg" alt="출발점 +0.8(실선)과 −0.8(점선)인 두 노드에 같은 난수 입력을 넣은 네 경우. d=0.5와 d=0.9(입력 ±0.1)는 두 선이 하나로 모이고, d=1.1(입력 ±0.1)은 위아래 두 갈래로 남아 차이 0.96이 유지되며, d=1.1(입력 ±1.0)은 다시 하나로 모인다" class="figure-img"><figcaption><b>그림 3.</b> 출발점만 다른 두 노드 $x(t+1) = \tanh(d\,x(t) + u(t))$. $d$ = 0.5와 0.9는 처음 차이 1.60이 39단계 뒤 0.000, 0.011로 사라진다(ESP). $d$ = 1.1에 작은 입력(±0.1)을 넣으면 차이가 0.96으로 남아 두 상태가 끝까지 다르다(ESP 깨짐). 같은 $d$ = 1.1이라도 입력이 크면(±1.0) 다시 모인다. 입력은 고정 seed의 난수이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
 <p><strong>그림 3 따라 읽기.</strong></p>
 <ol type="1">
-<li>위 두 칸(<span class="math inline">\(d\)</span> = 0.5, 0.9): 선형 노드와 같이 차이가 사라집니다. <span class="math inline">\(\tanh\)</span>의 기울기는 1 이하라서(<a href="../days/d07.html#b-backprop">D7 기초: 역전파</a> 끝) 차이를 더 줄이는 쪽으로만 작용합니다.</li>
+<li>위 두 칸(<span class="math inline">\(d\)</span> = 0.5, 0.9): 선형 노드와 같이 차이가 사라집니다. <span class="math inline">\(\tanh\)</span>의 기울기는 1 이하라서(<a href="../days/d07a.html#b-backprop">Day 11 기초: 역전파</a> 끝) 차이를 더 줄이는 쪽으로만 작용합니다.</li>
 <li>왼쪽 아래(<span class="math inline">\(d\)</span> = 1.1, 작은 입력): 2구간에서 본 '머무는 값'이 둘 있습니다. <span class="math inline">\(\tanh(1.1 \times 0.50) = 0.50\)</span>이고, 부호만 바꾸면 <span class="math inline">\(\tanh(1.1 \times (-0.50)) = -0.50\)</span>입니다. +0.8에서 출발한 벌은 +0.50 근처에, −0.8에서 출발한 벌은 −0.50 근처에 자리 잡고, ±0.1짜리 입력으로는 서로의 자리로 넘어가지 못합니다. 그래서 차이가 약 1(그림에서 0.96)로 남습니다.</li>
 <li>오른쪽 아래(<span class="math inline">\(d\)</span> = 1.1, 큰 입력): ±1짜리 입력이 두 벌을 자주 ±1 근처, 곧 <span class="math inline">\(\tanh\)</span>가 평평해지는 끝으로 함께 밀어냅니다. 그곳에서는 기울기가 작아서(상태 0.9에서 <span class="math inline">\(1 - 0.9^2 = 0.19\)</span>), 차이에 실제로 곱해지는 배율이 <span class="math inline">\(1.1 \times 0.19 \approx 0.21\)</span>처럼 1보다 훨씬 작아집니다. 그래서 차이가 다시 줄어듭니다. <span class="tag tag-interp">해석</span></li>
 </ol>
 <p>그래서 ESP는 reservoir만의 성질이 아니라 <strong>reservoir와 입력의 조합</strong>의 성질입니다. <span class="tag tag-interp">해석</span> 노드가 여럿일 때도 같은 일이 일어난다는 원문의 말은 4구간에서 spectral radius를 배운 뒤 봅니다.</p>
-<p><span id="s-washout-esp"></span><strong>실험에서 무엇을 뜻하나: washout과 반복성.</strong> 시뮬레이션에서도 실험에서도, 처음 몇 단계는 처음 상태의 영향이 남아 있으므로 학습에 쓰지 않고 버립니다. 이것이 D7에서 본 <strong>washout</strong>(씻어 내기)이고, <code>tools/esn.py</code>는 처음 100단계를 버립니다. ESP가 있으면 washout은 "흔적이 충분히 사라질 만큼"이면 되고, ESP가 없으면 <strong>아무리 길게 버려도</strong> 처음 상태의 영향이 사라지지 않습니다(그림 3 왼쪽 아래: 39단계 뒤에도 차이 0.96). 물리 소자로 말하면, 매번 같은 리셋 절차 없이도 같은 입력에 같은 상태를 내는가의 문제입니다. Singh 2026은 반복성 확인의 첫 단계로 "같은 입력에 대해 소자 응답이 반복되는가, 측정 창 동안 느린 비정상 드리프트가 있는가"를 먼저 확인하라고 하고, <strong>드리프트는 기억처럼 보일 수 있다</strong>고 경고합니다. <span class="src">Singh 2026, p.5</span></p>
+<p><span id="s-washout-esp"></span><strong>실험에서 무엇을 뜻하나: washout과 반복성.</strong> 시뮬레이션에서도 실험에서도, 처음 몇 단계는 처음 상태의 영향이 남아 있으므로 학습에 쓰지 않고 버립니다. 이것이 Day 11–12에서 본 <strong>washout</strong>(씻어 내기)이고, <code>tools/esn.py</code>는 처음 100단계를 버립니다. ESP가 있으면 washout은 "흔적이 충분히 사라질 만큼"이면 되고, ESP가 없으면 <strong>아무리 길게 버려도</strong> 처음 상태의 영향이 사라지지 않습니다(그림 3 왼쪽 아래: 39단계 뒤에도 차이 0.96). 물리 소자로 말하면, 매번 같은 리셋 절차 없이도 같은 입력에 같은 상태를 내는가의 문제입니다. Singh 2026은 반복성 확인의 첫 단계로 "같은 입력에 대해 소자 응답이 반복되는가, 측정 창 동안 느린 비정상 드리프트가 있는가"를 먼저 확인하라고 하고, <strong>드리프트는 기억처럼 보일 수 있다</strong>고 경고합니다. <span class="src">Singh 2026, p.5</span></p>
 <div class="predict">
 <p>선형 노드 두 벌의 차이가 1.6에서 시작합니다. <span class="math inline">\(d\)</span> = 0.9면 2단계 뒤 차이는 얼마일까요?</p>
 </div>
@@ -939,12 +1032,12 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 <div class="goal">
 <p>이 구간을 읽고 나면 2×2 표 <span class="math inline">\(W\)</span>를 (1, 0)에 거듭 곱한 그림에서 "곱해도 방향이 안 바뀌는" 두 방향 (1, 1), (1, −1)과 그 배율(고윳값 0.9, 0.3)을 찾고 손 계산으로 확인하며, spectral radius가 "가장 오래 남는 방향의 배율"이라는 것과 ρ &lt; 1이 ESP의 조건으로 언제 맞고 언제 모자라는지, leak rate <span class="math inline">\(a\)</span>가 배율을 <span class="math inline">\((1-a) + a\lambda\)</span>로 바꾸는 것을 말할 수 있다. 그리고 <span class="math inline">\(d\)</span>·τ·고윳값·ρ·<span class="math inline">\(a\)</span>를 구별할 수 있다.</p>
 </div>
-<p><span id="s-from-d8"></span><strong>D8의 노드 두 개에서 이어서.</strong> 노드 하나에서는 숫자 <span class="math inline">\(d\)</span> 하나가 "한 단계에 몇 배로 줄이나"를 정했습니다. D8 2구간의 노드 두 개는 갱신식 <span class="math inline">\(x(t+1) = \tanh(W x(t) + W_{in} u(t))\)</span>에서 <span class="math inline">\(d\)</span> 자리에 2×2 표 <span class="math inline">\(W\)</span>(행 1 = (0.4, 0.3), 행 2 = (−0.3, 0.5))가 있었고, 입력이 0이 된 뒤 상태는 <span class="math inline">\(x(1) = (0.762, -0.462)\)</span> → <span class="math inline">\(x(2) = (0.164, -0.430)\)</span> → <span class="math inline">\(x(3) = (-0.063, -0.258)\)</span>으로 줄어들면서 노드 1의 부호가 바뀌었습니다(<a href="../days/d08.html#s-update-steps">D8 2구간</a>). 이 <span class="math inline">\(W\)</span>는 몇 배로 줄이는 표일까요? 표는 숫자가 아니니 바로 말할 수 없습니다.</p>
-<p>D7 2구간의 표(행 1 = (0.5, 0), 행 2 = (0, 0.9))는 대각선에만 숫자가 있어서 칸마다 따로 곱하기만 했습니다. 그래서 (1, 0)은 방향 그대로 0.5배, (0, 1)은 0.9배가 되었고, 그 배율을 대각선에서 그대로 읽었습니다(<a href="../days/d07.html#s-memory-gradient">D7 2-2</a>). 대각선 밖에도 숫자가 있으면 이렇게 읽을 수 없습니다. 이 구간의 첫 예로는 D8의 <span class="math inline">\(W\)</span> 대신, 두 노드가 서로를 <strong>같은 세기로</strong> 섞는 표</p>
+<p><span id="s-from-d8"></span><strong>Day 13–14의 노드 두 개에서 이어서.</strong> 노드 하나에서는 숫자 <span class="math inline">\(d\)</span> 하나가 "한 단계에 몇 배로 줄이나"를 정했습니다. Day 13 2구간의 노드 두 개는 갱신식 <span class="math inline">\(x(t+1) = \tanh(W x(t) + W_{in} u(t))\)</span>에서 <span class="math inline">\(d\)</span> 자리에 2×2 표 <span class="math inline">\(W\)</span>(행 1 = (0.4, 0.3), 행 2 = (−0.3, 0.5))가 있었고, 입력이 0이 된 뒤 상태는 <span class="math inline">\(x(1) = (0.762, -0.462)\)</span> → <span class="math inline">\(x(2) = (0.164, -0.430)\)</span> → <span class="math inline">\(x(3) = (-0.063, -0.258)\)</span>으로 줄어들면서 노드 1의 부호가 바뀌었습니다(<a href="../days/d08a.html#s-update-steps">Day 13 2구간</a>). 이 <span class="math inline">\(W\)</span>는 몇 배로 줄이는 표일까요? 표는 숫자가 아니니 바로 말할 수 없습니다.</p>
+<p>Day 11 2구간의 표(행 1 = (0.5, 0), 행 2 = (0, 0.9))는 대각선에만 숫자가 있어서 칸마다 따로 곱하기만 했습니다. 그래서 (1, 0)은 방향 그대로 0.5배, (0, 1)은 0.9배가 되었고, 그 배율을 대각선에서 그대로 읽었습니다(<a href="../days/d07a.html#s-memory-gradient">Day 11 2-2</a>). 대각선 밖에도 숫자가 있으면 이렇게 읽을 수 없습니다. 이 구간의 첫 예로는 Day 13–14의 <span class="math inline">\(W\)</span> 대신, 두 노드가 서로를 <strong>같은 세기로</strong> 섞는 표</p>
 <p><span class="math display">\[
 W = \begin{pmatrix} 0.6 &amp; 0.3 \\ 0.3 &amp; 0.6 \end{pmatrix}
 \]</span></p>
-<p>을 씁니다. D8의 <span class="math inline">\(W\)</span>는 상태가 '돌면서' 줄어드는 조금 더 복잡한 경우라서, 이 표로 원리를 본 뒤 끝에서 D8의 <span class="math inline">\(W\)</span>로 돌아옵니다. 이 <span class="math inline">\(W\)</span>에 (1, 0)을 곱하면(행마다 같은 자리끼리 곱해 더하는 행렬–벡터 곱, <a href="../days/d07.html#b-vector-matrix">D7 기초</a>) 행 1: <span class="math inline">\(0.6 \times 1 + 0.3 \times 0 = 0.6\)</span>, 행 2: <span class="math inline">\(0.3 \times 1 + 0.6 \times 0 = 0.3\)</span>, 곧 (0.6, 0.3)입니다. 둘째 칸이 0이던 벡터에 둘째 칸 값이 생겼으니 <strong>방향이 바뀌었습니다</strong>. 그래서 대각선의 0.6을 배율이라고 읽을 수 없습니다.</p>
+<p>을 씁니다. Day 13–14의 <span class="math inline">\(W\)</span>는 상태가 '돌면서' 줄어드는 조금 더 복잡한 경우라서, 이 표로 원리를 본 뒤 끝에서 Day 13–14의 <span class="math inline">\(W\)</span>로 돌아옵니다. 이 <span class="math inline">\(W\)</span>에 (1, 0)을 곱하면(행마다 같은 자리끼리 곱해 더하는 행렬–벡터 곱, <a href="../days/d07a.html#b-vector-matrix">Day 11 기초</a>) 행 1: <span class="math inline">\(0.6 \times 1 + 0.3 \times 0 = 0.6\)</span>, 행 2: <span class="math inline">\(0.3 \times 1 + 0.6 \times 0 = 0.3\)</span>, 곧 (0.6, 0.3)입니다. 둘째 칸이 0이던 벡터에 둘째 칸 값이 생겼으니 <strong>방향이 바뀌었습니다</strong>. 그래서 대각선의 0.6을 배율이라고 읽을 수 없습니다.</p>
 <p><span id="s-eigen-picture"></span><strong>무엇을 볼지.</strong> 그림 4 왼쪽은 이 계산을 계속한 것입니다. 가로축은 노드 1의 값, 세로축은 노드 2의 값이고, 파란 점 하나가 상태 하나입니다. (1, 0)에서 출발해 <span class="math inline">\(W\)</span>를 한 번 곱할 때마다 다음 점으로 갑니다(입력 없이 선형으로만). 점들이 <strong>어느 직선으로 모이는지</strong>, 그리고 그 직선 위에서는 한 번 곱할 때 <strong>몇 배</strong>가 되는지 보세요. 오른쪽 표는 같은 점들을 두 점선 방향의 성분으로 나눈 값입니다.</p>
 <figure class="fig figure"><img src="../assets/img/d09/fig4-eigen-repeat.svg" alt="2×2 표 W=[[0.6,0.3],[0.3,0.6]]를 x(0)=(1,0)에 거듭 곱한 점 x(0)부터 x(8)이 (1,1) 방향 점선으로 모이며 원점 쪽으로 줄어드는 그림. x(0)은 (1,1) 방향 성분 0.5와 (1,−1) 방향 성분 0.5의 합으로 화살표가 그려져 있다. 오른쪽 표는 t=0,1,2,3,4,8에서 x(t), (1,1) 방향의 몫 0.5·0.9^t(0.5, 0.45, 0.405, 0.364, 0.328, 0.215), (1,−1) 방향의 몫 0.5·0.3^t(0.5, 0.15, 0.045, 0.0135, 0.00405, 0.00003)" class="figure-img"><figcaption><b>그림 4.</b> 2×2 표 $W$를 거듭 곱하면 방향마다 줄어드는 배율이 다르다. 볼 것: 파란 점은 (1, 0)에서 시작해 (1, 1) 방향의 초록 점선으로 모이고, 그 위에서는 한 번에 0.9배씩 원점으로 다가간다. 오른쪽 표에서 초록 열((1, 1) 방향의 몫)은 매 단계 0.9배, 주황 열((1, −1) 방향의 몫)은 0.3배가 되어 3단계 만에 거의 사라진다. 입력 없이(u = 0) 선형으로만 곱한 경우이며, 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
 <p><strong>그림 4 따라 읽기.</strong></p>
@@ -996,7 +1089,7 @@ W = \begin{pmatrix} 0.6 &amp; 0.3 \\ 0.3 &amp; 0.6 \end{pmatrix}
 <div id="b-spectral-radius" class="basics">
 <section id="고유벡터고윳값spectral-radius-한-번-곱할-때-특별한-방향이-몇-배가-되나" class="level4">
 <h4 class="anchored" data-anchor-id="고유벡터고윳값spectral-radius-한-번-곱할-때-특별한-방향이-몇-배가-되나">고유벡터·고윳값·spectral radius: 한 번 곱할 때 특별한 방향이 몇 배가 되나</h4>
-<p><strong>고유벡터와 고윳값.</strong> 위처럼 "곱해도 방향이 안 바뀌고 몇 배만 되는" 방향을 <strong>고유벡터</strong>(eigenvector), 그 배율을 <strong>고윳값</strong>(eigenvalue, λ. D7에서 '고유값'으로 적은 것과 같은 말)이라고 부릅니다. 위 <span class="math inline">\(W\)</span>의 고윳값은 0.9(방향 (1, 1))와 0.3(방향 (1, −1))입니다. D7 2구간에서 "행렬 버전의 통로 배율"이라고 미리 불렀던 것입니다. 대각선 밖이 0인 표는 대각선의 숫자가 바로 고윳값입니다(D7의 0.5, 0.9).</p>
+<p><strong>고유벡터와 고윳값.</strong> 위처럼 "곱해도 방향이 안 바뀌고 몇 배만 되는" 방향을 <strong>고유벡터</strong>(eigenvector), 그 배율을 <strong>고윳값</strong>(eigenvalue, λ. Day 11–12에서 '고유값'으로 적은 것과 같은 말)이라고 부릅니다. 위 <span class="math inline">\(W\)</span>의 고윳값은 0.9(방향 (1, 1))와 0.3(방향 (1, −1))입니다. Day 11 2구간에서 "행렬 버전의 통로 배율"이라고 미리 불렀던 것입니다. 대각선 밖이 0인 표는 대각선의 숫자가 바로 고윳값입니다(Day 11–12의 0.5, 0.9).</p>
 <p><strong>아무 벡터나 곱하면.</strong> 그림 4의 따라 읽기 4를 식으로 쓰면, <span class="math inline">\(x(0) = (1, 0) = 0.5\cdot(1,1) + 0.5\cdot(1,-1)\)</span>이고 <span class="math inline">\(W\)</span>를 <span class="math inline">\(t\)</span>번 곱하면 각 조각이 자기 배율로 줄어드니</p>
 <p><span class="math display">\[
 x(t) = 0.5 \cdot 0.9^t \cdot (1, 1) + 0.5 \cdot 0.3^t \cdot (1, -1)
@@ -1004,7 +1097,7 @@ x(t) = 0.5 \cdot 0.9^t \cdot (1, 1) + 0.5 \cdot 0.3^t \cdot (1, -1)
 <p>입니다. 확인: <span class="math inline">\(x(1) = 0.5\cdot0.9\cdot(1,1) + 0.5\cdot0.3\cdot(1,-1) = (0.45 + 0.15,\; 0.45 - 0.15) = (0.6, 0.3)\)</span>. 0.3배 조각은 금방 사라지고(3단계에 <span class="math inline">\(0.5 \times 0.3^3 = 0.0135\)</span>), 0.9배 조각이 오래 남습니다. 그래서 <strong>오래 남는 정도를 정하는 것은 가장 큰 배율</strong>입니다.</p>
 <p><strong>spectral radius.</strong> 행렬의 고윳값들의 크기(절댓값) 중 <strong>가장 큰 값</strong>을 spectral radius(스펙트럼 반지름) ρ라고 부릅니다. 위 <span class="math inline">\(W\)</span>는 ρ = 0.9입니다. 입력 없이 선형으로만 곱한다면 ρ &lt; 1이면 모든 방향이 줄어들고, ρ &gt; 1이면 커지는 방향이 생깁니다. 노드 하나의 "<span class="math inline">\(d &lt; 1\)</span>이면 줄어든다"를 행렬로 옮긴 말입니다.</p>
 <p><strong>음수인 경우.</strong> 고윳값은 음수일 수도 있습니다. −0.95라면 그 방향은 매 단계 부호가 뒤집히며 0.95배가 되므로, 오래 남는 정도는 부호를 뗀 크기 0.95가 정합니다. 그래서 크기(절댓값)를 봅니다.</p>
-<p><span id="s-d8-rotate"></span><strong>D8의 <span class="math inline">\(W\)</span>로 돌아가면: '도는' 경우.</strong> D8의 <span class="math inline">\(W\)</span>(행 1 = (0.4, 0.3), 행 2 = (−0.3, 0.5))를 (1, 0)에 거듭 곱하면 (0.4, −0.3) → (0.07, −0.27) → (−0.05, −0.16) → (−0.07, −0.06) → …으로 <strong>방향이 매번 돌아갑니다</strong>. 곱해도 방향이 그대로인 (실수) 방향이 하나도 없는 경우입니다. 그래도 길이는 1 → 0.50 → 0.28 → 0.16 → 0.09로 줄고, 10번 뒤에는 0.0022로 <span class="math inline">\(0.54^{10} \approx 0.002\)</span>와 비슷합니다. 이 평균 배율 0.54가 D8 <span class="math inline">\(W\)</span>의 ρ입니다(구하는 법은 아래 심화). D8에서 입력이 0이 된 뒤 노드 1의 부호가 바뀌며 줄어들던 것이 이 '돌면서 줄어드는' 모습입니다. <span class="prov">숫자는 Claude 계산</span></p>
+<p><span id="s-d8-rotate"></span><strong>Day 13–14의 <span class="math inline">\(W\)</span>로 돌아가면: '도는' 경우.</strong> Day 13–14의 <span class="math inline">\(W\)</span>(행 1 = (0.4, 0.3), 행 2 = (−0.3, 0.5))를 (1, 0)에 거듭 곱하면 (0.4, −0.3) → (0.07, −0.27) → (−0.05, −0.16) → (−0.07, −0.06) → …으로 <strong>방향이 매번 돌아갑니다</strong>. 곱해도 방향이 그대로인 (실수) 방향이 하나도 없는 경우입니다. 그래도 길이는 1 → 0.50 → 0.28 → 0.16 → 0.09로 줄고, 10번 뒤에는 0.0022로 <span class="math inline">\(0.54^{10} \approx 0.002\)</span>와 비슷합니다. 이 평균 배율 0.54가 Day 13–14 <span class="math inline">\(W\)</span>의 ρ입니다(구하는 법은 아래 심화). Day 13–14에서 입력이 0이 된 뒤 노드 1의 부호가 바뀌며 줄어들던 것이 이 '돌면서 줄어드는' 모습입니다. <span class="prov">숫자는 Claude 계산</span></p>
 <details class="deep">
 <summary>
 심화 · 아무 2×2 표의 고윳값 공식과 '도는' 경우(복소수 고윳값)
@@ -1013,8 +1106,8 @@ x(t) = 0.5 \cdot 0.9^t \cdot (1, 1) + 0.5 \cdot 0.3^t \cdot (1, -1)
 <p><span class="math display">\[
 (p - \lambda)(s - \lambda) - q\,r = 0 \quad\Longleftrightarrow\quad \lambda^2 - (p + s)\,\lambda + (p\,s - q\,r) = 0
 \]</span></p>
-<p>이라는 2차방정식이 되고, 근의 공식 <span class="math inline">\(\lambda = \big[(p+s) \pm \sqrt{(p+s)^2 - 4(ps - qr)}\,\big]/2\)</span>로 두 고윳값을 얻습니다. 위 예(<span class="math inline">\(p = s = 0.6\)</span>, <span class="math inline">\(q = r = 0.3\)</span>)는 <span class="math inline">\(\lambda^2 - 1.2\lambda + 0.27 = 0\)</span> → <span class="math inline">\((1.2 \pm \sqrt{1.44 - 1.08})/2 = (1.2 \pm 0.6)/2\)</span> = 0.9, 0.3으로 단계 4와 같습니다. 대각선 밖이 0이면(<span class="math inline">\(q = 0\)</span> 또는 <span class="math inline">\(r = 0\)</span>) 식이 <span class="math inline">\((p - \lambda)(s - \lambda) = 0\)</span>이 되어, D7처럼 대각선의 <span class="math inline">\(p\)</span>, <span class="math inline">\(s\)</span>가 바로 고윳값입니다.</p>
-<p>근호 안 <span class="math inline">\((p+s)^2 - 4(ps - qr)\)</span>이 음수이면 실수 λ가 없습니다. 곱해도 방향이 그대로인 방향이 하나도 없다는 뜻이고, 상태는 매 단계 조금씩 <strong>돌면서</strong> 줄거나 커집니다. 이때 두 고윳값은 복소수(실수와 <span class="math inline">\(i = \sqrt{-1}\)</span>을 섞은 수)이고 크기는 둘 다 <span class="math inline">\(\sqrt{ps - qr}\)</span>이며, 이 크기가 여러 단계에 걸친 평균 배율 역할을 합니다. D8의 <span class="math inline">\(W\)</span>는 <span class="math inline">\(p + s = 0.9\)</span>, <span class="math inline">\(ps - qr = 0.20 + 0.09 = 0.29\)</span>, 근호 안 <span class="math inline">\(0.81 - 1.16 = -0.35 &lt; 0\)</span> → 도는 경우, 크기 <span class="math inline">\(\sqrt{0.29} = 0.54\)</span>, 곧 ρ = 0.54. 한 단계에 도는 각도는 약 33°입니다. <span class="prov">Claude 계산</span></p>
+<p>이라는 2차방정식이 되고, 근의 공식 <span class="math inline">\(\lambda = \big[(p+s) \pm \sqrt{(p+s)^2 - 4(ps - qr)}\,\big]/2\)</span>로 두 고윳값을 얻습니다. 위 예(<span class="math inline">\(p = s = 0.6\)</span>, <span class="math inline">\(q = r = 0.3\)</span>)는 <span class="math inline">\(\lambda^2 - 1.2\lambda + 0.27 = 0\)</span> → <span class="math inline">\((1.2 \pm \sqrt{1.44 - 1.08})/2 = (1.2 \pm 0.6)/2\)</span> = 0.9, 0.3으로 단계 4와 같습니다. 대각선 밖이 0이면(<span class="math inline">\(q = 0\)</span> 또는 <span class="math inline">\(r = 0\)</span>) 식이 <span class="math inline">\((p - \lambda)(s - \lambda) = 0\)</span>이 되어, Day 11–12처럼 대각선의 <span class="math inline">\(p\)</span>, <span class="math inline">\(s\)</span>가 바로 고윳값입니다.</p>
+<p>근호 안 <span class="math inline">\((p+s)^2 - 4(ps - qr)\)</span>이 음수이면 실수 λ가 없습니다. 곱해도 방향이 그대로인 방향이 하나도 없다는 뜻이고, 상태는 매 단계 조금씩 <strong>돌면서</strong> 줄거나 커집니다. 이때 두 고윳값은 복소수(실수와 <span class="math inline">\(i = \sqrt{-1}\)</span>을 섞은 수)이고 크기는 둘 다 <span class="math inline">\(\sqrt{ps - qr}\)</span>이며, 이 크기가 여러 단계에 걸친 평균 배율 역할을 합니다. Day 13–14의 <span class="math inline">\(W\)</span>는 <span class="math inline">\(p + s = 0.9\)</span>, <span class="math inline">\(ps - qr = 0.20 + 0.09 = 0.29\)</span>, 근호 안 <span class="math inline">\(0.81 - 1.16 = -0.35 &lt; 0\)</span> → 도는 경우, 크기 <span class="math inline">\(\sqrt{0.29} = 0.54\)</span>, 곧 ρ = 0.54. 한 단계에 도는 각도는 약 33°입니다. <span class="prov">Claude 계산</span></p>
 </details>
 <p><strong>ρ를 손잡이로 만드는 법.</strong> 난수 행렬의 고윳값을 계산해 가장 큰 크기로 나누고 원하는 ρ를 곱합니다. <code>tools/esn.py</code>의 <code>W *= rho / max|eig(W)|</code> 한 줄이 이것입니다. 그러면 그 행렬의 spectral radius가 정확히 ρ가 됩니다. Stepney의 식 1에서 <span class="math inline">\(W\)</span> 앞의 ρ가 이 조절 손잡이입니다. <span class="src">Stepney 2024, p.668</span></p>
 <p>leak rate는 아래 <a href="#b-leak">기초: leak rate</a>에서 따로 봅니다.</p>
@@ -1026,9 +1119,9 @@ x(t) = 0.5 \cdot 0.9^t \cdot (1, 1) + 0.5 \cdot 0.3^t \cdot (1, -1)
 <section id="s-rho-200" class="level4">
 <h4 class="anchored" data-anchor-id="s-rho-200">노드 200개에서: ρ를 바꾸면 처음 상태를 잊는가</h4>
 <p>3구간에서 노드 하나는 <span class="math inline">\(d &lt; 1\)</span>이면(선형) 처음 상태를 잊었습니다. 노드가 여럿이면 <span class="math inline">\(d\)</span> 자리에 ρ가 들어갑니다. Liang은 ESN 이론에 따라 <span class="math inline">\(W_{res}\)</span>를 spectral radius에 맞춰 적절히 조절해야 바람직한 ESP가 생긴다고 쓰고 <span class="src">Liang 2024, p.194</span>, Stepney도 <span class="math inline">\(W\)</span>를 정규화(크기를 일정하게 맞추는 것)하는 이유가 ESP를 보장하기 위해서라고 씁니다. <span class="src">Stepney 2024, p.668</span></p>
-<p><strong>두 상태가 얼마나 다른지를 숫자 하나로: 거리.</strong> D12에서 돌릴 <code>tools/esn.py</code>는 노드 200개짜리 reservoir 두 벌을 서로 다른 난수 상태에서 출발시키고 같은 입력을 넣어 둘 사이의 <strong>거리</strong>를 잽니다. 상태가 숫자 200개의 목록이라 차이도 200개이므로, 이것을 숫자 하나로 줄인 것이 거리입니다. 칸마다 두 값의 차이를 제곱해 모두 더한 뒤 제곱근을 취합니다(평면 위 두 점의 거리를 피타고라스 정리로 구하는 것을 200칸으로 늘린 것, 유클리드 거리). 칸이 두 개이고 두 상태가 (0.8, 0.1)과 (−0.4, 0.6)이면 차이는 (1.2, −0.5), 거리는 <span class="math inline">\(\sqrt{1.2^2 + 0.5^2} = 1.3\)</span>입니다. 거리가 0이면 두 상태가 완전히 같습니다.</p>
-<p><strong>무엇을 볼지.</strong> 그림 5의 가로축은 시간 단계(0, 10, 50, 200, 1000. 눈금 간격은 일정하지 않음), 세로축은 두 벌의 거리이고 로그 눈금입니다(가로 격자 한 칸이 1만 배, <a href="../days/d01.html#b-log-axis">D1 기초: 로그 축</a>). 그래서 아주 작은 거리까지 한 그림에 보입니다. 색마다 ρ가 다르고, 선이 아래로 떨어지면 처음 상태를 잊는 것입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d09/fig3-esp-n200.svg" alt="노드 200개 reservoir에서 출발점만 다른 두 상태의 거리(로그 눈금)를 시간 단계 0, 10, 50, 200, 1000에서 잰 그래프. ρ=0.3은 10단계에 3.5×10⁻⁵, ρ=0.9는 10단계 1.3, 1000단계 1.4×10⁻¹⁵로 0이 되고, ρ=1.2는 1000단계에도 5.3, ρ=2.0은 14로 줄지 않는다" class="figure-img"><figcaption><b>그림 5.</b> 노드 200개 reservoir의 ESP 확인. 처음 거리는 약 11. ρ = 0.3은 10단계 만에 10만 분의 3 수준으로, ρ = 0.9는 200단계 뒤 $10^{-13}$ 수준으로 거리가 사라진다. ρ = 1.2와 2.0은 1,000단계 뒤에도 거리가 5.3, 14로 남는다. 이 입력 크기(0.5)로는 ρ = 1.2의 ESP를 되살리지 못했다. `tools/esn.py`(numpy, reservoir seed 1)로 계산한 시뮬레이션이며 D12에서 같은 숫자를 직접 확인할 수 있다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>두 상태가 얼마나 다른지를 숫자 하나로: 거리.</strong> Day 20–21에서 돌릴 <code>tools/esn.py</code>는 노드 200개짜리 reservoir 두 벌을 서로 다른 난수 상태에서 출발시키고 같은 입력을 넣어 둘 사이의 <strong>거리</strong>를 잽니다. 상태가 숫자 200개의 목록이라 차이도 200개이므로, 이것을 숫자 하나로 줄인 것이 거리입니다. 칸마다 두 값의 차이를 제곱해 모두 더한 뒤 제곱근을 취합니다(평면 위 두 점의 거리를 피타고라스 정리로 구하는 것을 200칸으로 늘린 것, 유클리드 거리). 칸이 두 개이고 두 상태가 (0.8, 0.1)과 (−0.4, 0.6)이면 차이는 (1.2, −0.5), 거리는 <span class="math inline">\(\sqrt{1.2^2 + 0.5^2} = 1.3\)</span>입니다. 거리가 0이면 두 상태가 완전히 같습니다.</p>
+<p><strong>무엇을 볼지.</strong> 그림 5의 가로축은 시간 단계(0, 10, 50, 200, 1000. 눈금 간격은 일정하지 않음), 세로축은 두 벌의 거리이고 로그 눈금입니다(가로 격자 한 칸이 1만 배, <a href="../days/d01a.html#b-log-axis">Day 1 기초: 로그 축</a>). 그래서 아주 작은 거리까지 한 그림에 보입니다. 색마다 ρ가 다르고, 선이 아래로 떨어지면 처음 상태를 잊는 것입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d09/fig3-esp-n200.svg" alt="노드 200개 reservoir에서 출발점만 다른 두 상태의 거리(로그 눈금)를 시간 단계 0, 10, 50, 200, 1000에서 잰 그래프. ρ=0.3은 10단계에 3.5×10⁻⁵, ρ=0.9는 10단계 1.3, 1000단계 1.4×10⁻¹⁵로 0이 되고, ρ=1.2는 1000단계에도 5.3, ρ=2.0은 14로 줄지 않는다" class="figure-img"><figcaption><b>그림 5.</b> 노드 200개 reservoir의 ESP 확인. 처음 거리는 약 11. ρ = 0.3은 10단계 만에 10만 분의 3 수준으로, ρ = 0.9는 200단계 뒤 $10^{-13}$ 수준으로 거리가 사라진다. ρ = 1.2와 2.0은 1,000단계 뒤에도 거리가 5.3, 14로 남는다. 이 입력 크기(0.5)로는 ρ = 1.2의 ESP를 되살리지 못했다. `tools/esn.py`(numpy, reservoir seed 1)로 계산한 시뮬레이션이며 Day 20–21에서 같은 숫자를 직접 확인할 수 있다. (Claude가 계산해 그림)</figcaption></figure>
 <p>ρ &lt; 1인 두 선(0.3, 0.9)은 노드 하나의 <span class="math inline">\(d\)</span> = 0.5, 0.9처럼 잊고, ρ가 작을수록 빨리 잊습니다. ρ &gt; 1인 두 선(1.2, 2.0)은 그림 3의 <span class="math inline">\(d\)</span> = 1.1·작은 입력처럼 끝까지 다릅니다.</p>
 <p><span id="s-esp-condition"></span><strong>ρ &lt; 1은 ESP의 조건인가: 한 줄씩.</strong></p>
 <ul>
@@ -1059,11 +1152,11 @@ x(t) = 0.5 \cdot 0.9^t \cdot (1, 1) + 0.5 \cdot 0.3^t \cdot (1, -1)
 x(t+1) = (1-a)\,x(t) + a\,\tanh\big(\rho W x(t) + W_{in} u(t)\big)
 \]</span></p>
 <ul>
-<li>기호: <span class="math inline">\(a\)</span>는 leak 매개변수(leak rate, 0~1). 괄호 안 <span class="math inline">\(\tanh(\rho W x(t) + W_{in} u(t))\)</span>는 D8의 기본 갱신식이 계산하던 '새 값'입니다(<a href="../days/d08.html#b-rc-update">D8 기초: 상태 갱신식</a>). <span class="math inline">\(\rho W\)</span>는 위의 손잡이 표기로, <span class="math inline">\(W\)</span>를 먼저 spectral radius 1로 맞춰 두고 앞에 ρ를 곱한 것입니다. 다음 상태 = 지금 상태의 <span class="math inline">\((1-a)\)</span> + 새 값의 <span class="math inline">\(a\)</span>.</li>
+<li>기호: <span class="math inline">\(a\)</span>는 leak 매개변수(leak rate, 0~1). 괄호 안 <span class="math inline">\(\tanh(\rho W x(t) + W_{in} u(t))\)</span>는 Day 13–14의 기본 갱신식이 계산하던 '새 값'입니다(<a href="../days/d08a.html#b-rc-update">Day 13 기초: 상태 갱신식</a>). <span class="math inline">\(\rho W\)</span>는 위의 손잡이 표기로, <span class="math inline">\(W\)</span>를 먼저 spectral radius 1로 맞춰 두고 앞에 ρ를 곱한 것입니다. 다음 상태 = 지금 상태의 <span class="math inline">\((1-a)\)</span> + 새 값의 <span class="math inline">\(a\)</span>.</li>
 <li>숫자로 한 단계: 노드 하나의 지금 상태가 0.8이고 이번 단계의 새 값이 0.2라고 합시다. <span class="math inline">\(a\)</span> = 1: <span class="math inline">\(0 \times 0.8 + 1 \times 0.2 = 0.2\)</span>(지금 상태를 다 갈아 치움, 기본 식과 같다). <span class="math inline">\(a\)</span> = 0.5: <span class="math inline">\(0.5 \times 0.8 + 0.5 \times 0.2 = 0.5\)</span>(가운데). <span class="math inline">\(a\)</span> = 0.1: <span class="math inline">\(0.9 \times 0.8 + 0.1 \times 0.2 = 0.74\)</span>(새 값 쪽으로 거리의 10%만 이동).</li>
 <li>비유: 탱크 물의 비율 <span class="math inline">\(a\)</span>만큼을 퍼내고 그만큼 새 물을 붓는 혼합과 같다(다음 상태는 옛 값과 새 값의 가중 평균). 깨지는 곳: reservoir에서는 붓는 '새 물'의 값이 지금 상태로 계산된다(괄호 안의 <span class="math inline">\(\rho W x(t)\)</span>).</li>
 <li>배율이 왜 <span class="math inline">\((1-a) + a\lambda\)</span>인가: 값이 작아 <span class="math inline">\(\tanh(z) \approx z\)</span>인 선형 영역에서, 입력이 없으면 고윳값 λ인 방향의 성분 <span class="math inline">\(c\)</span>는 새 값에서 <span class="math inline">\(\lambda c\)</span>가 된다. 그러면 다음 값 = <span class="math inline">\((1-a)\,c + a\lambda\,c = [(1-a) + a\lambda]\,c\)</span>. λ = 0.9일 때 <span class="math inline">\(a\)</span> = 1이면 0.90, <span class="math inline">\(a\)</span> = 0.5면 0.95, <span class="math inline">\(a\)</span> = 0.1이면 0.99. 절반이 되는 단계 수(<span class="math inline">\(\ln 0.5 / \ln\)</span> 배율, 2구간)는 6.6 → 13.5 → 69. leak을 줄이면 배율이 1 쪽으로 다가가 더 천천히 잊는다.</li>
-<li>시간척도: Stepney는 이 매개변수가 시간 단계 하나라는 이산적인 박자 외에 <strong>또 하나의 시간척도</strong>를 준다고 씁니다. <span class="src">Stepney 2024, p.669</span> 이웃 노드와의 연결이 없고(<span class="math inline">\(W = 0\)</span>) 입력도 없으면 <span class="math inline">\(x(t+1) = (1-a)\,x(t)\)</span>이므로 <span class="math inline">\(1 - a\)</span>가 2구간의 <span class="math inline">\(d\)</span> 자리입니다. 연속 시간의 1차 이완으로 보면 <span class="math inline">\(a \approx \Delta t/\tau\)</span>이고, <span class="math inline">\(\Delta t \ll \tau\)</span>이면 <span class="math inline">\(1 - \Delta t/\tau \approx e^{-\Delta t/\tau}\)</span>입니다(4 ms, 38 ms: 0.895와 0.900). 이온 소자의 이완 시간 <span class="math inline">\(\tau\)</span>가 leak 노드에서 들어가는 자리가 여기입니다. <span class="tag tag-interp">해석</span> D7에서 본 Zhong 2026의 forgetting rate <span class="math inline">\(\alpha\)</span>(<a href="../days/d07.html#s-zhong">D7 4-3</a>)가 같은 자리입니다.</li>
+<li>시간척도: Stepney는 이 매개변수가 시간 단계 하나라는 이산적인 박자 외에 <strong>또 하나의 시간척도</strong>를 준다고 씁니다. <span class="src">Stepney 2024, p.669</span> 이웃 노드와의 연결이 없고(<span class="math inline">\(W = 0\)</span>) 입력도 없으면 <span class="math inline">\(x(t+1) = (1-a)\,x(t)\)</span>이므로 <span class="math inline">\(1 - a\)</span>가 2구간의 <span class="math inline">\(d\)</span> 자리입니다. 연속 시간의 1차 이완으로 보면 <span class="math inline">\(a \approx \Delta t/\tau\)</span>이고, <span class="math inline">\(\Delta t \ll \tau\)</span>이면 <span class="math inline">\(1 - \Delta t/\tau \approx e^{-\Delta t/\tau}\)</span>입니다(4 ms, 38 ms: 0.895와 0.900). 이온 소자의 이완 시간 <span class="math inline">\(\tau\)</span>가 leak 노드에서 들어가는 자리가 여기입니다. <span class="tag tag-interp">해석</span> Day 11–12에서 본 Zhong 2026의 forgetting rate <span class="math inline">\(\alpha\)</span>(<a href="../days/d07b.html#s-zhong">Day 12 4-3</a>)가 같은 자리입니다.</li>
 </ul>
 <details class="deep">
 <summary>
@@ -1073,7 +1166,7 @@ x(t+1) = (1-a)\,x(t) + a\,\tanh\big(\rho W x(t) + W_{in} u(t)\big)
 </details>
 </section>
 </div>
-<p><span id="s-leak-mc"></span><strong>느리게 잊는 것 ≠ 많이 기억하는 것.</strong> leak을 작게 하면 배율이 1에 가까워져 오래 기억할 것 같습니다. 그런데 D12에서 돌릴 시뮬레이션(노드 200개, ρ = 0.9, reservoir seed 3개의 평균)에서 leak <span class="math inline">\(a\)</span>를 1.0 → 0.5 → 0.1로 줄이자 memory capacity(MC, 1구간: 지난 입력을 하나하나 되살리는 점수의 합)가 17.9 → 11.2 → 6.2로 <strong>오히려 줄었습니다</strong>. <span class="prov">Claude가 <code>tools/esn.py</code>로 계산</span> <span class="math inline">\(a\)</span>가 작으면 새 입력이 상태에 <span class="math inline">\(a\)</span>배로만 들어가서, 상태가 지난 입력들의 <strong>평균</strong>처럼 뭉개지기 때문입니다. <span class="tag tag-interp">해석</span> 노드 하나로 보면 이렇습니다. 이웃 연결 없이(<span class="math inline">\(W\)</span> = 0) 새 값이 그냥 입력 <span class="math inline">\(u\)</span>인 leak 노드 <span class="math inline">\(x(t+1) = (1-a)\,x(t) + a\,u(t)\)</span>에 1, 0, 1, 0, 1, 0을 넣습니다(<span class="math inline">\(x(0) = 0\)</span>).</p>
+<p><span id="s-leak-mc"></span><strong>느리게 잊는 것 ≠ 많이 기억하는 것.</strong> leak을 작게 하면 배율이 1에 가까워져 오래 기억할 것 같습니다. 그런데 Day 20–21에서 돌릴 시뮬레이션(노드 200개, ρ = 0.9, reservoir seed 3개의 평균)에서 leak <span class="math inline">\(a\)</span>를 1.0 → 0.5 → 0.1로 줄이자 memory capacity(MC, 1구간: 지난 입력을 하나하나 되살리는 점수의 합)가 17.9 → 11.2 → 6.2로 <strong>오히려 줄었습니다</strong>. <span class="prov">Claude가 <code>tools/esn.py</code>로 계산</span> <span class="math inline">\(a\)</span>가 작으면 새 입력이 상태에 <span class="math inline">\(a\)</span>배로만 들어가서, 상태가 지난 입력들의 <strong>평균</strong>처럼 뭉개지기 때문입니다. <span class="tag tag-interp">해석</span> 노드 하나로 보면 이렇습니다. 이웃 연결 없이(<span class="math inline">\(W\)</span> = 0) 새 값이 그냥 입력 <span class="math inline">\(u\)</span>인 leak 노드 <span class="math inline">\(x(t+1) = (1-a)\,x(t) + a\,u(t)\)</span>에 1, 0, 1, 0, 1, 0을 넣습니다(<span class="math inline">\(x(0) = 0\)</span>).</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1161,7 +1254,7 @@ x(t+1) = (1-a)\,x(t) + a\,\tanh\big(\rho W x(t) + W_{in} u(t)\big)
 <td>ρ (spectral radius)</td>
 <td>고윳값 크기 중 가장 큰 값 = 가장 오래 남는 방향의 배율</td>
 <td>없음</td>
-<td>0.9(D8의 <span class="math inline">\(W\)</span>는 0.54)</td>
+<td>0.9(Day 13–14의 <span class="math inline">\(W\)</span>는 0.54)</td>
 <td><span class="math inline">\(W\)</span>(설계자가 ρ에 맞춰 조절)</td>
 </tr>
 <tr class="odd">
@@ -1215,7 +1308,7 @@ washout
 </div>
 <div class="keypoints">
 <ul>
-<li>고윳값 = 곱해도 방향이 안 바뀌는 특별한 방향의 배율. <span class="math inline">\(W = [[0.6, 0.3],[0.3, 0.6]]\)</span>은 (1, 1) 방향 0.9배, (1, −1) 방향 0.3배(<span class="math inline">\((0.6-\lambda)^2 = 0.09\)</span>). 가장 큰 크기가 spectral radius ρ(여기 0.9). D8의 <span class="math inline">\(W\)</span>는 방향이 돌며 줄고 ρ = 0.54.</li>
+<li>고윳값 = 곱해도 방향이 안 바뀌는 특별한 방향의 배율. <span class="math inline">\(W = [[0.6, 0.3],[0.3, 0.6]]\)</span>은 (1, 1) 방향 0.9배, (1, −1) 방향 0.3배(<span class="math inline">\((0.6-\lambda)^2 = 0.09\)</span>). 가장 큰 크기가 spectral radius ρ(여기 0.9). Day 13–14의 <span class="math inline">\(W\)</span>는 방향이 돌며 줄고 ρ = 0.54.</li>
 <li>반복해서 곱하면 작은 배율 방향은 사라지고 가장 큰 배율 방향만 남는다(그림 4) → ρ가 기억의 길이를 정한다. 노드 200개에서 ρ = 0.3, 0.9는 처음 상태를 잊고 1.2, 2.0은 1,000단계 뒤에도 거리 5.3, 14(그림 5, 시뮬레이션).</li>
 <li>ρ &lt; 1: 선형이면 ESP의 조건. <span class="math inline">\(\tanh\)</span> reservoir에서는 관행적 기준일 뿐 충분조건도(ρ &lt; 1에서 깨지는 예) 필요조건도(큰 입력이면 ρ &gt; 1에서도 성립) 아니다. 보장하는 충분조건은 가장 큰 특잇값 &lt; 1 <span class="src">Stepney 2024, p.668</span>.</li>
 <li>leak: 다음 상태가 새 값 쪽으로 <span class="math inline">\(a\)</span>만큼만 움직인다(0.8과 새 값 0.2, <span class="math inline">\(a\)</span> = 0.1이면 0.74). 배율 <span class="math inline">\((1-a)+a\lambda\)</span>: λ = 0.9에서 <span class="math inline">\(a\)</span> = 1, 0.5, 0.1 → 0.90, 0.95, 0.99 <span class="src">Stepney 2024, p.669</span>. 연속 시간으로는 <span class="math inline">\(a \approx \Delta t/\tau\)</span> <span class="src">Lukoševičius 2012, 3.2.6절</span>.</li>
@@ -1239,23 +1332,23 @@ washout
 <p><strong>② 그 변화가 천천히 돌아간다.</strong> 펄스가 끝나도 이온이 제자리로 돌아가는 데 시간이 걸려, 다음 입력이 올 때 변화의 일부 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>가 남습니다(2구간). <strong>끊기는 조건</strong>: <span class="math inline">\(\tau\)</span>가 입력 간격보다 훨씬 짧으면 <span class="math inline">\(d \approx 0\)</span>이라 흔적이 없고(기억 없는 장치, 1구간), 훨씬 길면 <span class="math inline">\(d \approx 1\)</span>이라 흔적이 쌓이기만 합니다(아래 그림 7). Stepney는 기판의 동역학이 입력보다 훨씬 빠르면 다음 입력이 올 때 이전 입력의 기억이 없고, 훨씬 느리면 다음 입력 전에 제대로 반응하지 못하므로 <strong>두 시간척도가 비슷해야 한다</strong>고 씁니다. <span class="src">Stepney 2024, p.673</span></p>
 </div>
 <div class="step">
-<p><strong>③ 지금 읽는 값 = 지금 입력 + 지난 입력의 가중합.</strong> 읽기 전압 <span class="math inline">\(V\)</span>에서 전류 <span class="math inline">\(I = g \cdot V\)</span>를 재면(그림 2의 <span class="math inline">\(I = (g_{rest} + \Delta g\,x)\,V\)</span>), <span class="math inline">\(g\)</span>가 지난 펄스들의 흔적을 <span class="math inline">\(d^k\)</span>의 비율로 담고 있으므로 전류도 그렇습니다. 그래서 <strong>이력이 다르면 지금 읽는 전류가 다릅니다.</strong> D6의 PPF(<a href="../days/d06.html#ch-ppf-limits">D6 3구간</a>)는 이 고리의 가장 작은 판입니다. "첫 펄스가 있었다"와 "없었다"가 둘째 펄스 때의 전류를 다르게 만듭니다.</p>
+<p><strong>③ 지금 읽는 값 = 지금 입력 + 지난 입력의 가중합.</strong> 읽기 전압 <span class="math inline">\(V\)</span>에서 전류 <span class="math inline">\(I = g \cdot V\)</span>를 재면(그림 2의 <span class="math inline">\(I = (g_{rest} + \Delta g\,x)\,V\)</span>), <span class="math inline">\(g\)</span>가 지난 펄스들의 흔적을 <span class="math inline">\(d^k\)</span>의 비율로 담고 있으므로 전류도 그렇습니다. 그래서 <strong>이력이 다르면 지금 읽는 전류가 다릅니다.</strong> Day 10의 PPF(<a href="../days/d06.html#ch-ppf-limits">Day 10 3구간</a>)는 이 고리의 가장 작은 판입니다. "첫 펄스가 있었다"와 "없었다"가 둘째 펄스 때의 전류를 다르게 만듭니다.</p>
 </div>
 <div class="step">
-<p><strong>④ 서로 다른 이력이 구별되는 상태로 끝난다.</strong> 과제가 가르라고 요구하는 이력들(예: "삼각형"과 "역삼각형")이 <strong>잡음과 드리프트보다 큰 차이로</strong> 다른 상태로 끝나야 합니다(D6 <a href="../days/d06.html#b-task-state">읽을 수 있는 상태</a>). 그리고 그 차이는 처음 상태가 아니라 입력에서 와야 합니다(3구간 ESP). <strong>끊기는 조건</strong>: 차이가 잡음보다 작다 / 드리프트가 기억처럼 보인다 <span class="src">Singh 2026, p.5</span> / 처음 상태에 따라 다른 상태가 나온다.</p>
+<p><strong>④ 서로 다른 이력이 구별되는 상태로 끝난다.</strong> 과제가 가르라고 요구하는 이력들(예: "삼각형"과 "역삼각형")이 <strong>잡음과 드리프트보다 큰 차이로</strong> 다른 상태로 끝나야 합니다(Day 10 <a href="../days/d06.html#b-task-state">읽을 수 있는 상태</a>). 그리고 그 차이는 처음 상태가 아니라 입력에서 와야 합니다(3구간 ESP). <strong>끊기는 조건</strong>: 차이가 잡음보다 작다 / 드리프트가 기억처럼 보인다 <span class="src">Singh 2026, p.5</span> / 처음 상태에 따라 다른 상태가 나온다.</p>
 </div>
 <div class="step">
-<p><strong>⑤ 학습한 readout이 과거가 필요한 질문에 답한다.</strong> D8의 ridge readout을 학습 데이터로 정하고, <strong>학습에 쓰지 않은 데이터</strong>에서 답을 가르며, 지난 입력을 그대로 저장해 넣은 <strong>기준선</strong>(지연 탭, 1구간)보다 나아야 "느린 감쇠가 계산에 도움이 됐다"고 말할 수 있습니다. <strong>끊기는 조건</strong>: readout이 학습 데이터를 외웠다 / 기준선과 같거나 못하다.</p>
+<p><strong>⑤ 학습한 readout이 과거가 필요한 질문에 답한다.</strong> Day 13–14의 ridge readout을 학습 데이터로 정하고, <strong>학습에 쓰지 않은 데이터</strong>에서 답을 가르며, 지난 입력을 그대로 저장해 넣은 <strong>기준선</strong>(지연 탭, 1구간)보다 나아야 "느린 감쇠가 계산에 도움이 됐다"고 말할 수 있습니다. <strong>끊기는 조건</strong>: readout이 학습 데이터를 외웠다 / 기준선과 같거나 못하다.</p>
 </div>
 </div>
-<p><strong>실제 소자에서 고리 ②–④.</strong> D7에서 본 Zhong 2026의 트랜지스터에 펄스 네 개짜리 0/1 열 16가지를 넣고 매 단계 전류를 읽은 그림입니다. 읽는 순서: (1) 왼쪽 a의 오른쪽 끝(4단계)에서 점 16개가 얼마나 퍼져 있는지, 겹쳐 보이는 쌍이 있는지 찾습니다(고리 ④). (2) 오른쪽 b에서 같은 열을 펄스 간격만 5 ms → 30 ms로 늘렸을 때 전류가 어떻게 낮아지는지 봅니다(고리 ②의 <span class="math inline">\(\tau\)</span>와 입력 간격).</p>
+<p><strong>실제 소자에서 고리 ②–④.</strong> Day 11–12에서 본 Zhong 2026의 트랜지스터에 펄스 네 개짜리 0/1 열 16가지를 넣고 매 단계 전류를 읽은 그림입니다. 읽는 순서: (1) 왼쪽 a의 오른쪽 끝(4단계)에서 점 16개가 얼마나 퍼져 있는지, 겹쳐 보이는 쌍이 있는지 찾습니다(고리 ④). (2) 오른쪽 b에서 같은 열을 펄스 간격만 5 ms → 30 ms로 늘렸을 때 전류가 어떻게 낮아지는지 봅니다(고리 ②의 <span class="math inline">\(\tau\)</span>와 입력 간격).</p>
 <figure class="fig paper figure"><img src="../assets/img/papers/zhong2026-fig3ab.png" alt="Zhong 2026 Fig. 3a–b: a는 4비트 입력열 0000부터 1111까지 16가지에 대한 전류 I_ds(0.02–0.07 µA)를 시간 단계 1–4에 그린 선 16개. b는 1111(주황)과 1010(하늘색) 입력을 펄스 간격 5 ms부터 30 ms까지 바꿔 가며 그린 선들로, 간격이 길수록 전류가 낮다" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41467-026-70171-2" target="_blank"><i>Nat. Commun.</i> 2026, 17, 3321</a>, Fig. 3a–b, p.5. 볼 것: <b>a</b> 가로축은 시간 단계 1–4(펄스 하나가 한 단계), 세로축은 읽은 전류 $I_{ds}$(µA). 1로 시작하는 열(위쪽 무리)과 0으로 시작하는 열(아래쪽 무리)이 1단계부터 갈리고, 4단계에서는 16개 열이 서로 다른 높이로 끝난다. 다만 몇몇 쌍은 4단계 값이 가깝다. 반복 측정의 흔들림이 그 간격보다 작은지는 이 그림만으로 알 수 없다(고리 ④의 조건). <b>b</b> 범례는 1111(주황)과 1010(하늘색)이고, 화살표 방향으로 펄스 간격이 5 ms에서 30 ms로 길어질수록 같은 열의 전류가 낮아진다. 간격이 길면 펄스 사이에 흔적이 더 많이 사라진다는 뜻으로 읽을 수 있다 [해석]. <span class="prov">본문(p.4)은 b를 "0,0,0,0"과 "1,0,1,0" 부호화의 실현이라고 적어 그림 범례(1111, 1010)와 다르다. Claude는 범례대로 적었다.</span> <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
 <p><span id="s-singh-summary"></span>Singh 2026은 이 사슬을 한 문장으로 요약합니다. <strong>"천천히 감쇠하는 전기적·광학적·기계적·화학적 응답이 있다는 것만으로는 쓸모 있는 reservoir 기억이 확립되지 않는다. 계산에 관련된 질문은 이전 입력의 정보가 지금 reservoir 상태에서 접근 가능한가이다."</strong> <span class="src">Singh 2026, p.8</span> 그리고 설계 규칙 1로 "reservoir는 그 fading memory 시간척도가 과제의 시간 구조에 맞을 때만 쓸모 있다"고 씁니다. <span class="src">Singh 2026, p.4</span></p>
 <div class="stop-point">
 <p>여기까지: 그림 6의 다섯 고리를 순서대로 말하고, 느린 감쇠는 ②일 뿐이며 ④(잡음·드리프트보다 큰 차이, ESP)와 ⑤(새 데이터, 기준선)가 따로 확인되어야 한다는 것을 Zhong 그림의 예로 짚을 수 있다. 다음: 고리 ②를 숫자로, 노드 하나의 '기억 예산'.</p>
 </div>
 <p><span id="s-budget"></span><strong>고리 ②를 숫자로: 노드 하나의 기억은 '예산'이다.</strong> 노드 하나 <span class="math inline">\(x(t) = d\,x(t-1) + u(t)\)</span>에 서로 독립인 난수 입력을 넣고, 지금 상태 <span class="math inline">\(x(t)\)</span> 하나로 <span class="math inline">\(k\)</span>단계 전 입력 <span class="math inline">\(u(t-k)\)</span>를 얼마나 되살릴 수 있는지 잽니다(여기서는 지금 입력이 바로 지금 상태에 들어가도록 2구간의 식을 번호 하나 당겨 적었습니다). 되살리는 정도는 <strong>상관계수의 제곱 corr²</strong>으로 잽니다. 상관계수는 두 숫자 열이 함께 오르내리는 정도를 −1~1로 나타낸 값이고(1이면 같은 모양으로, 0이면 서로 무관하게 움직임), 그 제곱은 0(전혀 못 되살림)~1(완벽)입니다.</p>
-<p><em>상관계수를 숫자 넷으로.</em> <span class="math inline">\(a\)</span> = 1, 2, 3, 6과 <span class="math inline">\(b\)</span> = 2, 1, 4, 5. 둘 다 평균이 3이고, 평균에서 뺀 값은 <span class="math inline">\(a\)</span>: −2, −1, 0, 3, <span class="math inline">\(b\)</span>: −1, −2, 1, 2입니다. 자리끼리 곱해 더하면 2 + 2 + 0 + 6 = 10, 각자의 제곱합은 <span class="math inline">\(a\)</span>: 4 + 1 + 0 + 9 = 14, <span class="math inline">\(b\)</span>: 1 + 4 + 1 + 4 = 10. 상관계수 = <span class="math inline">\(10/\sqrt{14 \times 10} \approx 0.85\)</span>, corr² ≈ 0.71입니다. "<span class="math inline">\(b\)</span>의 흔들림 가운데 약 71%가 <span class="math inline">\(a\)</span>와 같은 모양으로 설명된다"고 읽습니다. 정식 설명은 <a href="../days/d13.html#b-variance-share">D13 기초: 분산·상관²</a>.</p>
+<p><em>상관계수를 숫자 넷으로.</em> <span class="math inline">\(a\)</span> = 1, 2, 3, 6과 <span class="math inline">\(b\)</span> = 2, 1, 4, 5. 둘 다 평균이 3이고, 평균에서 뺀 값은 <span class="math inline">\(a\)</span>: −2, −1, 0, 3, <span class="math inline">\(b\)</span>: −1, −2, 1, 2입니다. 자리끼리 곱해 더하면 2 + 2 + 0 + 6 = 10, 각자의 제곱합은 <span class="math inline">\(a\)</span>: 4 + 1 + 0 + 9 = 14, <span class="math inline">\(b\)</span>: 1 + 4 + 1 + 4 = 10. 상관계수 = <span class="math inline">\(10/\sqrt{14 \times 10} \approx 0.85\)</span>, corr² ≈ 0.71입니다. "<span class="math inline">\(b\)</span>의 흔들림 가운데 약 71%가 <span class="math inline">\(a\)</span>와 같은 모양으로 설명된다"고 읽습니다. 정식 설명은 <a href="../days/d13a.html#b-variance-share">Day 22 기초: 분산·상관²</a>.</p>
 <p><strong>무엇을 볼지.</strong> 그림 7의 가로축은 "몇 단계 전 입력인가"(<span class="math inline">\(k\)</span> = 0은 지금 입력), 세로축은 그 입력을 지금 상태로 되살리는 정도(corr²)입니다. 색마다 <span class="math inline">\(d\)</span>가 다릅니다. 막대가 높고 짧게 끝나는지, 낮고 길게 퍼지는지 보세요.</p>
 <figure class="fig figure"><img src="../assets/img/d09/fig6-memory-budget.svg" alt="노드 하나가 k단계 전 입력을 되살리는 정도 막대그래프. d=0.1은 k=0에서 0.99이고 나머지는 거의 0, d=0.5는 0.75, 0.188, 0.047로 빠르게 줄고, d=0.9는 0.19, 0.154, 0.125로 낮게 길게 퍼진다. 세 경우 모두 합은 1.000" class="figure-img"><figcaption><b>그림 7.</b> 노드 하나의 기억 예산. 남는 비율 $d$는 "얼마나 기억하나"가 아니라 **합이 1인 예산을 과거에 어떻게 나눠 주나**를 정한다. 느린 감쇠($d$ = 0.9)는 먼 과거까지 닿지만 지금 입력조차 19%만 되살린다. 잡음 없는 선형 모형의 계산값이며 식과 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
 <ul>
@@ -1269,7 +1362,7 @@ washout
 </summary>
 <p>지금 상태는 <span class="math inline">\(u(t) + d\,u(t-1) + d^2 u(t-2) + \cdots\)</span>이고, <span class="math inline">\(k\)</span>단계 전 입력의 몫은 <span class="math inline">\(d^k\)</span>입니다. 위 숫자 넷 예의 상관계수 = (평균을 뺀 값끼리 곱해 더한 것) ÷ √(제곱합 × 제곱합)을 여기에 옮기면 세 조각이 필요합니다. ① 지금 상태의 흔들림(분산): 입력들이 서로 독립이면 합의 분산은 각 몫의 분산의 합이므로, 입력 하나의 분산을 1로 두면 <span class="math inline">\(1 + d^2 + d^4 + \cdots = 1/(1-d^2)\)</span>(공비 <span class="math inline">\(d^2\)</span>인 등비급수). ② <span class="math inline">\(u(t-k)\)</span>의 분산: 1. ③ 둘이 함께 오르내리는 부분(공분산): 지금 상태 안에서 <span class="math inline">\(u(t-k)\)</span>와 같이 움직이는 것은 그 몫 <span class="math inline">\(d^k\)</span>뿐이므로 <span class="math inline">\(d^k\)</span>. 그래서 corr² <span class="math inline">\(= (d^k)^2 \div [1/(1-d^2) \times 1] = d^{2k}(1-d^2)\)</span>. 모든 <span class="math inline">\(k\)</span>에 대해 더하면 <span class="math inline">\((1-d^2) \times 1/(1-d^2) = 1\)</span>입니다. 제곱합을 평균 내어 나누는 수(n으로 나누는 분산, 또는 n − 1로 나누는 표본 분산)는 분자와 분모에 똑같이 들어가 지워지므로 상관계수는 어느 쪽으로 나눠도 같습니다. <span class="prov">Claude의 유도. 쓰인 성질은 일반 통계 교과 내용</span></p>
 </details>
-<p>이 그림이 오늘의 인과 질문에 대한 핵심 답입니다. <strong>느린 감쇠는 기억을 늘리는 것이 아니라 기억을 과거 쪽으로 옮기는 것입니다.</strong> 소자 하나로는 "최근을 또렷이"와 "먼 과거까지"를 동시에 가질 수 없습니다. 둘 다 필요하면 <strong>서로 다른 <span class="math inline">\(d\)</span>를 가진 노드 여럿</strong>이 필요하고, 그 노드들이 서로의 복사본이나 가중합이 아니어야(선형 독립) 예산의 합이 노드 수까지 늘 수 있습니다. 노드 수는 넘을 수 없는 상한이고, 잡음이 없고 데이터가 충분히 긴 이상적 조건에서야 그 값에 닿습니다. 이것이 D11의 "정보처리용량은 선형 독립인 상태 변수의 수에 묶인다"(Dambre 등 2012의 정리, 조건은 <a href="../days/d11.html#b-ipc">D11 2구간</a>)의 첫 모습입니다. <span class="tag tag-interp">해석</span> 4구간의 leak 결과(leak을 줄이자 MC 감소)도 같은 원리입니다.</p>
+<p>이 그림이 오늘의 인과 질문에 대한 핵심 답입니다. <strong>느린 감쇠는 기억을 늘리는 것이 아니라 기억을 과거 쪽으로 옮기는 것입니다.</strong> 소자 하나로는 "최근을 또렷이"와 "먼 과거까지"를 동시에 가질 수 없습니다. 둘 다 필요하면 <strong>서로 다른 <span class="math inline">\(d\)</span>를 가진 노드 여럿</strong>이 필요하고, 그 노드들이 서로의 복사본이나 가중합이 아니어야(선형 독립) 예산의 합이 노드 수까지 늘 수 있습니다. 노드 수는 넘을 수 없는 상한이고, 잡음이 없고 데이터가 충분히 긴 이상적 조건에서야 그 값에 닿습니다. 이것이 Day 18–19의 "정보처리용량은 선형 독립인 상태 변수의 수에 묶인다"(Dambre 등 2012의 정리, 조건은 <a href="../days/d11a.html#b-ipc">Day 18 2구간</a>)의 첫 모습입니다. <span class="tag tag-interp">해석</span> 4구간의 leak 결과(leak을 줄이자 MC 감소)도 같은 원리입니다.</p>
 <p><span id="s-zhong-forget"></span><strong>폴더 원문의 사례.</strong> Liang은 회전 뉴런 RC에서 <span class="math inline">\(\tau\)</span>가 약 1 s인 물리 노드가 손글씨 궤적을 실시간으로 처리하고, 궤적 끝에서 모은 상태 벡터가 MC 덕분에 <strong>지난 약 0.8 s의 정보를 담는다</strong>고 소개합니다. <span class="math inline">\(\tau\)</span>가 더 짧고 회전이 빠르면 과거 궤적을 빨리 잊어 성능이 떨어진다. <span class="src">Liang 2024, p.200</span> 과제의 시간 구조(실시간으로 들어오는 손글씨 궤적)와 노드의 <span class="math inline">\(\tau\)</span>(약 1 s)를 맞춘 예로 읽을 수 있습니다. <span class="tag tag-interp">해석</span> 한편 Zhong 2026의 트랜지스터 ESN은 시계열 예측에서 처음에는 ESN에서 흔히 쓰는 forgetting factor <span class="math inline">\(\alpha\)</span>(4구간 leak의 <span class="math inline">\(a\)</span>와 같은 자리)로 동역학을 <strong>대신</strong>했고 <span class="src">Zhong 2026, p.4</span>, 저자들은 시계열 예측이 이 forgetting factor에 의존해 온라인 반복 계산이 필요하다는 것을 한계로 적으며 소자의 고유한 동적 응답으로 완화할 수 있다고 씁니다. <span class="src">Zhong 2026, p.7</span> 소자 논문의 "ESN"에서 기억이 <strong>소자에서 오는지, 소프트웨어의 leak 항에서 오는지</strong>를 확인해야 하는 이유입니다. <span class="tag tag-interp">해석</span></p>
 <div class="think">
 <p>내 소자의 펄스 응답 곡선을 하나 떠올리세요. 감쇠 시간상수가 대략 얼마인가요? 그 소자를 쓰고 싶은 신호(심전도? 촉각? 호흡?)의 "한 사건"은 몇 ms–s인가요? 그 둘을 이용해 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>를 계산해 보고, 그림 7의 세 막대 중 어느 쪽에 가까운지 적어 보세요. 그 막대 모양이 내 과제에 맞나요?</p>
@@ -1280,7 +1373,7 @@ washout
 <ul>
 <li>다섯 고리: ① 입력이 물리량을 바꾼다 → ② 천천히 돌아간다(<span class="math inline">\(d\)</span>) → ③ 지금 읽는 값에 과거가 섞인다 → ④ 이력이 잡음보다 크게 구별된다(ESP 포함) → ⑤ 학습한 readout이 새 데이터에서 기준선보다 낫다. 느린 감쇠는 ② 하나다.</li>
 <li>느린 감쇠만으로는 쓸모 있는 기억이 확립되지 않는다 <span class="src">Singh 2026, p.8</span>. 시간척도가 과제에 맞아야 한다 <span class="src">Singh 2026, p.4</span> <span class="src">Stepney 2024, p.673</span>.</li>
-<li>(잡음 없는 선형) 노드 하나의 기억은 합이 1인 예산: <span class="math inline">\(d^{2k}(1-d^2)\)</span>. <span class="math inline">\(d\)</span>는 예산을 과거에 나눠 주는 방식일 뿐이다. 최근과 먼 과거를 다 원하면 서로 다른 노드가 여럿 필요하다(D11).</li>
+<li>(잡음 없는 선형) 노드 하나의 기억은 합이 1인 예산: <span class="math inline">\(d^{2k}(1-d^2)\)</span>. <span class="math inline">\(d\)</span>는 예산을 과거에 나눠 주는 방식일 뿐이다. 최근과 먼 과거를 다 원하면 서로 다른 노드가 여럿 필요하다(Day 18–19).</li>
 <li>소자 논문의 기억이 소자에서 오는지 소프트웨어 leak에서 오는지 확인한다 <span class="src">Zhong 2026, p.4, 7</span>.</li>
 </ul>
 </div>
@@ -1291,7 +1384,7 @@ washout
 <p>이 구간을 읽고 나면 "기억은 그냥 메모리에 저장하면 된다"는 반론에 대해, 저장과 흔적의 비용을 비교하는 질문으로 응답을 적을 수 있다.</p>
 </div>
 <p>가장 강한 반론은 이것입니다. <strong>"과거가 필요하면 지난 입력 10개를 메모리에 저장하면 된다. 그것이 정확하고, 남는 비율을 맞출 필요도 없고, ESP를 걱정할 필요도 없다. 왜 굳이 흐려지는 기억을 쓰나?"</strong></p>
-<p>이 반론은 계산의 정확도로는 대부분 옳습니다. 노드 하나의 기억 예산은 1이고(그림 7), 지연 탭 10개는 지난 10개 입력을 빠짐없이 줍니다. D12에서 이 기준선이 실제로 꽤 강하다는 것을 봅니다. 그런데 반론이 놓치는 것은 <strong>비용의 자리</strong>입니다. 지난 입력을 저장하려면 센서 신호를 먼저 숫자로 바꾸고(ADC, <a href="../days/d04.html#b-adc">D4 기초</a>), 메모리에 쓰고, 다시 읽어 옮겨야 합니다(D2의 데이터 이동). 물리 소자의 흔적은 그 일을 재료의 이완이 대신한다는 약속입니다. Liang이 MC를 키우면 보조 메모리를 쓰지 않아도 된다고 쓴 것 <span class="src">Liang 2024, p.200</span>과, 병렬 소자의 MC가 겹쳐 버퍼에 저장해야 하면 외부 메모리 비용이 든다고 쓴 것 <span class="src">Liang 2024, p.196</span>이 같은 이야기의 양면입니다. 그러니 이 반론에 대한 응답은 "흐려지는 기억이 더 정확하다"가 아니라, <strong>같은 정확도에서 저장·변환·이동 비용을 얼마나 줄이는가</strong>여야 합니다(D17). <span class="tag tag-interp">해석</span> 답은 내 몫입니다.</p>
+<p>이 반론은 계산의 정확도로는 대부분 옳습니다. 노드 하나의 기억 예산은 1이고(그림 7), 지연 탭 10개는 지난 10개 입력을 빠짐없이 줍니다. Day 20–21에서 이 기준선이 실제로 꽤 강하다는 것을 봅니다. 그런데 반론이 놓치는 것은 <strong>비용의 자리</strong>입니다. 지난 입력을 저장하려면 센서 신호를 먼저 숫자로 바꾸고(ADC, <a href="../days/d04a.html#b-adc">Day 7 기초</a>), 메모리에 쓰고, 다시 읽어 옮겨야 합니다(Day 3–4의 데이터 이동). 물리 소자의 흔적은 그 일을 재료의 이완이 대신한다는 약속입니다. Liang이 MC를 키우면 보조 메모리를 쓰지 않아도 된다고 쓴 것 <span class="src">Liang 2024, p.200</span>과, 병렬 소자의 MC가 겹쳐 버퍼에 저장해야 하면 외부 메모리 비용이 든다고 쓴 것 <span class="src">Liang 2024, p.196</span>이 같은 이야기의 양면입니다. 그러니 이 반론에 대한 응답은 "흐려지는 기억이 더 정확하다"가 아니라, <strong>같은 정확도에서 저장·변환·이동 비용을 얼마나 줄이는가</strong>여야 합니다(Day 30–31). <span class="tag tag-interp">해석</span> 답은 내 몫입니다.</p>
 </section>
 <section id="wrapup" class="level3">
 <h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
@@ -1337,7 +1430,7 @@ washout
 <tr class="odd">
 <td>spectral radius</td>
 <td>행렬의 가장 큰 배율(고윳값 크기). 가장 오래 남는 방향을 정한다</td>
-<td><span class="math inline">\([[0.6,0.3],[0.3,0.6]]\)</span> → 0.9, 0.3; D8의 <span class="math inline">\(W\)</span>는 0.54. ρ &lt; 1은 관행이지만 <span class="math inline">\(\tanh\)</span> reservoir에서 ESP의 충분조건도 필요조건도 아님(보장: 가장 큰 특잇값 &lt; 1) <span class="src">Stepney 2024, p.668</span></td>
+<td><span class="math inline">\([[0.6,0.3],[0.3,0.6]]\)</span> → 0.9, 0.3; Day 13–14의 <span class="math inline">\(W\)</span>는 0.54. ρ &lt; 1은 관행이지만 <span class="math inline">\(\tanh\)</span> reservoir에서 ESP의 충분조건도 필요조건도 아님(보장: 가장 큰 특잇값 &lt; 1) <span class="src">Stepney 2024, p.668</span></td>
 </tr>
 <tr class="even">
 <td>leak rate</td>
@@ -1372,7 +1465,7 @@ washout
 <tr class="even">
 <td>모르는 것 하나</td>
 <td>내 소자의 <span class="math inline">\(\tau\)</span>와 내 과제의 시간척도를 넣으면 <span class="math inline">\(d\)</span>가 얼마인가</td>
-<td>D13, D21</td>
+<td>Day 22–23, Day 37</td>
 </tr>
 </tbody>
 </table>
@@ -1393,8 +1486,8 @@ washout
 <section id="ledger-items" class="level3">
 <h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
 <ul>
-<li><strong>병목 장부:</strong> (응용이 요구하는 것) 과제의 "한 사건" 길이와 필요한 과거 길이(예: 부정맥 판정에 필요한 박동 간격) vs (메커니즘이 허용하는 것) 소자 이완 <span class="math inline">\(\tau\)</span>와 입력 간격 <span class="math inline">\(\Delta t\)</span>가 주는 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>. <span class="math inline">\(d\)</span>가 0.1–0.9 범위 밖이면 경고(D13).</li>
-<li><strong>병목 장부:</strong> 소자 하나의 기억 예산은 1 → 과제가 "최근 + 먼 과거"를 요구하면 서로 다른 <span class="math inline">\(\tau\)</span>의 노드가 필요하다. 내 재료에서 <span class="math inline">\(\tau\)</span>를 여러 개 만들 수 있나(D11, D21–D22).</li>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 과제의 "한 사건" 길이와 필요한 과거 길이(예: 부정맥 판정에 필요한 박동 간격) vs (메커니즘이 허용하는 것) 소자 이완 <span class="math inline">\(\tau\)</span>와 입력 간격 <span class="math inline">\(\Delta t\)</span>가 주는 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>. <span class="math inline">\(d\)</span>가 0.1–0.9 범위 밖이면 경고(Day 22–23).</li>
+<li><strong>병목 장부:</strong> 소자 하나의 기억 예산은 1 → 과제가 "최근 + 먼 과거"를 요구하면 서로 다른 <span class="math inline">\(\tau\)</span>의 노드가 필요하다. 내 재료에서 <span class="math inline">\(\tau\)</span>를 여러 개 만들 수 있나(Day 18–19, Day 37–38).</li>
 <li><strong>아직 모르는 것:</strong> 내 소자는 ESP를 갖나? 같은 펄스 열을 다른 초기 상태(직전 실험 직후 vs 충분히 쉰 뒤)에서 넣었을 때 같은 전류 궤적이 나오나? / 드리프트와 기억을 어떻게 구별하나(Singh의 반복성 시험).</li>
 <li><strong>용어집:</strong> 기억 없는 장치, 지연 탭, 단기 기억, fading memory, 남는 비율 d(감쇠 계수), 시간상수 τ, 절반이 되는 단계, echo state property, washout, 고유벡터, 고윳값, spectral radius, 특잇값, leak rate, 기억 예산, 유클리드 거리, 오일러 방법(leak의 <span class="math inline">\(a = \Delta t/\tau\)</span>).</li>
 <li><strong>접는 기준 후보:</strong> "내 소자의 <span class="math inline">\(d\)</span>(목표 입력 속도에서)가 0.05 미만이거나 0.98 초과라서 입력 속도를 바꿔도 과제 시간척도와 맞출 수 없다."</li>
@@ -1418,55 +1511,36 @@ washout
 <li>Lukoševičius 2012, LNCS 7700, 659–686. ESN 실무 지침. 저자 공개본의 3.2.6절(leak rate를 연속 시간 이완식의 시간 간격으로 보는 문단)만 Claude가 대조했고, 나머지는 <span class="tag tag-unverified">미확인</span>입니다. 4구간의 <span class="math inline">\(a = \Delta t/\tau\)</span>가 여기서 왔습니다.</li>
 <li>Yildiz, Jaeger, Kiebel 2012, <em>Neural Networks</em> 35, 1–9. ρ &lt; 1이 ESP를 보장하지 않는 해석적 예(입력 0의 경우)와, 입력이 있으면 ρ &gt; 1에서도 ESP가 가능한 예. 저자 공개본의 초록과 5절 첫 문단만 Claude가 대조했습니다.</li>
 <li>Jaeger H. 2001, GMD Report 148. ESP의 원 정의. Stepney가 인용.</li>
-<li>Kamsma, Teijema, van Roij, Spitoni 2025, <em>Chaos</em> 35, 093133 (arXiv:2505.13451). 물속에서 이온이 움직이는 휘발성 이온트로닉 memristor의 전도도가 ESN의 활성화 함수와 leaky integrator(이 교재의 leak 노드) 동역학을 함께 제공한다는 시뮬레이션 연구. 초록만 확인했습니다. 이온 소자의 이완을 4구간의 leak로 직접 옮기려는 시도로, D21 이후 다시 볼 후보입니다.</li>
+<li>Kamsma, Teijema, van Roij, Spitoni 2025, <em>Chaos</em> 35, 093133 (arXiv:2505.13451). 물속에서 이온이 움직이는 휘발성 이온트로닉 memristor의 전도도가 ESN의 활성화 함수와 leaky integrator(이 교재의 leak 노드) 동역학을 함께 제공한다는 시뮬레이션 연구. 초록만 확인했습니다. 이온 소자의 이완을 4구간의 leak로 직접 옮기려는 시도로, Day 37 이후 다시 볼 후보입니다.</li>
 </ul>
 </section>
 </div>
-<script type="application/json" id="quiz-d09">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 바로 그 설명·작은 예제의 앵커, refLabel은 그곳의 짧은 이름.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "종을 한 번 치면 점점 작아지는 소리의 크기를 1·2·3·5·10초 뒤마다 0–1 점수로 어림해 곡선을 그리고, 종을 2초마다 친다면 지금 들리는 소리로 몇 번 전 타격까지 알아챌 수 있을지 적어 보세요. 소리가 아주 빨리 사라지는 종과 거의 사라지지 않는 종이라면 각각 무엇이 곤란할지도 한 줄씩 덧붙이세요.", "items": [{"id": "d09-p01", "ref": "#s-memoryless-example", "refLabel": "'1, 0'과 '0, 0' 작은 예(그림 0)", "type": "mc", "q": "지금 들어온 입력 하나만 보고 출력을 정하는(기억이 없는) 장치로 '바로 전 단계에 1이 들어왔나?'를 맞힐 수 있을까?", "options": ["출력 규칙을 잘 고르면 맞힐 수 있다", "출력 규칙이 굽은 곡선이면 맞힐 수 있다", "지금 입력이 같으면 답도 같아서 못 맞힌다", "입력 신호가 충분히 크면 맞힐 수 있다"], "a": 2, "why": "기억 없는 장치 y = g(u(t))는 이력 '1, 0'과 '0, 0'에 둘 다 g(0)을 냅니다. 규칙이 곡선(비선형)이어도, 입력이 커도 같은 입력에는 같은 답입니다. 과거가 필요한 과제는 지난 입력을 저장해 두거나 상태에 흔적을 남겨야 풀 수 있습니다(1구간)."}, {"id": "d09-p02", "ref": "#s-fading-calc", "refLabel": "노드 하나 손 계산: 몫이 dᵏ", "type": "short", "q": "매 단계 상태의 0.6배만 남는 장치에 1을 한 번 넣었다(넣은 직후 상태 = 1). 그 뒤 입력 없이 두 단계가 지나면 상태는? (소수)", "a": ["0.36", ".36", "0.360", "9/25"], "why": "k단계 뒤 몫은 dᵏ이므로 0.6² = 0.36입니다. d < 1이면 오래된 입력의 몫이 거듭제곱으로 줄어 최근 입력이 상태를 주로 정합니다. 이것이 fading memory입니다(2구간)."}, {"id": "d09-p03", "ref": "#s-d-bad", "refLabel": "d = 1.1은 왜 나쁜가", "type": "mc", "q": "매 단계 상태가 1.1배가 되는(조금씩 커지는) 장치에 1을 한 번 넣고 그 뒤 입력을 주지 않으면?", "options": ["흔적이 줄지 않고 계속 커진다", "흔적이 서서히 줄어 0으로 사라진다", "흔적이 다음 단계에 곧바로 0이 된다", "흔적이 다음 단계부터 1에 머문다"], "a": 0, "why": "1.1ᵏ는 계속 커집니다. S자 함수(tanh)로 눌러도 0.50 근처에 영원히 머물러 처음 입력을 잊지 못합니다. 기억이 '오래갈수록 좋다'가 아니라 과제에 맞게 흐려져야 하는 이유입니다(2구간)."}, {"id": "d09-p04", "ref": "#s-d-time", "refLabel": "d = e^(−Δt/τ): 같은 소자, 다른 입력 간격", "type": "ox", "q": "같은 소자라도 입력을 넣는 시간 간격을 바꾸면, 다음 입력이 올 때까지 남아 있는 흔적의 비율이 달라진다.", "a": true, "why": "남는 비율은 d = e^(−Δt/τ)라서 간격 Δt에 따라 바뀝니다. τ ≈ 38 ms인 소자는 4 ms 간격이면 d ≈ 0.9지만, 100 ms 간격이면 d ≈ 0.07로 기억이 거의 없는 장치처럼 됩니다(2구간)."}, {"id": "d09-p05", "ref": "#b-esp", "refLabel": "기초: echo state property", "type": "mc", "q": "출발 상태만 다른 같은 reservoir 두 벌에 똑같은 입력을 계속 넣었다. 계산에 쓰기 좋은 reservoir라면 두 상태는 어떻게 되어야 하나?", "options": ["끝까지 서로 다른 값을 유지해야 한다", "점점 하나로 모여 입력 이력만으로 정해져야 한다", "입력과 관계없이 둘 다 0으로 멈춰야 한다", "둘 다 같은 비율로 끝없이 커져야 한다"], "a": 1, "why": "출발점의 차이를 잊고 같은 입력에 같은 상태로 모이는 성질이 echo state property입니다. 그래야 같은 입력에 같은 답을 낼 수 있고, 처음 몇 단계를 버리는(washout) 처리도 의미가 있습니다(3구간)."}, {"id": "d09-p06", "ref": "#s-eigen-picture", "refLabel": "그림 4: 거듭 곱하면 (1, 1) 방향만 남는다", "type": "mc", "q": "어떤 행렬을 상태에 반복해서 곱한다. 방향마다 한 번에 줄어드는 배율이 다를 때 결국 남는 것은?", "options": ["배율이 가장 큰(가장 느리게 줄어드는) 방향", "배율이 가장 작은(가장 빨리 줄어드는) 방향", "곱하기 전의 처음 방향 그대로", "모든 방향이 같은 비율로 섞인 모양"], "a": 0, "why": "작은 배율 방향은 빨리 사라지고 가장 큰 배율 방향만 남습니다. 그 가장 큰 배율의 크기가 spectral radius이고, 그래서 이 값이 기억의 길이를 정합니다(4구간)."}, {"id": "d09-p07", "ref": "#s-leak-mc", "refLabel": "leak을 줄이자 MC가 줄어든 예", "type": "ox", "q": "새 입력을 덜 받아들이고 이전 상태를 더 오래 유지하도록 바꾸면, 하나하나의 과거 입력을 되살리는 능력도 반드시 커진다.", "a": false, "why": "leak을 줄여 배율을 1에 가깝게 하자 기억 용량(MC)은 오히려 17.9 → 6.2로 줄었습니다(노드 200개 모형의 시뮬레이션). 상태가 지난 입력들의 평균처럼 뭉개져, 오래 남는 것은 평균이지 각각의 입력이 아니기 때문입니다(4구간)."}, {"id": "d09-p08", "ref": "#s-budget", "refLabel": "노드 하나의 기억 예산(그림 7)", "type": "mc", "q": "노드 하나가 잊는 속도를 느리게 바꿔 먼 과거를 더 잘 담게 하면, 그 대신 무엇이 일어나나?", "options": ["아무것도 잃지 않고 먼 과거만 더 담는다", "기억의 총량이 그만큼 늘어난다", "지금 입력에 더 빨리 반응하게 된다", "최근 입력을 되살리는 정도가 줄어든다"], "a": 3, "why": "잡음 없는 선형 노드 하나가 지금과 모든 과거를 되살리는 정도를 더하면 d와 관계없이(0 ≤ d < 1이면) 1입니다. d는 그 예산을 과거에 나눠 주는 방식일 뿐이라, 먼 과거에 더 나눠 주면 최근 몫이 줄어듭니다. 최근과 먼 과거를 다 원하면 서로 다른 노드가 여럿 필요합니다(5구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 기억이 필요한 계산", "items": [{"id": "d09-q01", "type": "mc", "q": "출력이 지금 입력 하나로만 정해지는 장치 $y = g(u(t))$로 '한 단계 전에 1이 왔나?'를 맞히려 한다. 이력 '1, 0'과 '0, 0'에 대해 맞는 것은?", "options": ["$g$를 알맞은 곡선으로 고르면 둘을 가를 수 있다", "$g$가 비선형(굽은 곡선)이면 둘을 가를 수 있다", "입력 크기를 키우면 둘을 가를 수 있다", "둘 다 $g(0)$을 내므로 어떤 $g$로도 못 가른다"], "a": 3, "why": "두 경우 모두 지금 입력이 0이라 같은 출력 $g(0)$을 내고, 정답은 '예'와 '아니오'로 다르니 둘 중 하나는 틀린다. 비선형 $g$도 마찬가지다 — 비선형성은 기억을 대신하지 못한다. 과거가 필요한 과제에는 저장(지연 탭)이든 흔적(상태)이든 기억이 있어야 한다.", "ref": "#s-memoryless-example", "refLabel": "'1, 0'과 '0, 0' 작은 예(그림 0)"}, {"id": "d09-q02", "type": "ox", "q": "과거 입력에 대한 기억은 상태에 흔적을 남기는 방법(reservoir, 물리 소자)으로만 얻을 수 있다.", "a": false, "why": "지난 입력을 메모리에 그대로 저장해 함께 보는 방법(지연 탭)도 있다. 정확하지만 저장·이동 비용이 든다. Liang은 MC가 크면 보조 메모리를 줄일 수 있고(p.200), 병렬 소자의 MC가 겹치면 버퍼에 저장하는 외부 메모리 비용이 든다고 쓴다(p.196). 두 방법은 서로의 대안이다.", "ref": "#s-memory-two-ways", "refLabel": "기억을 얻는 두 방법"}]}, "2-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 흐려지는 흔적", "items": [{"id": "d09-q03", "type": "short", "q": "[풀이 예시 확인] $x(t+1) = 0.5\\,x(t) + u(t)$, $u(0) = 1$, 그 뒤 입력 0. $x(1) = 1$일 때 $x(4)$는?", "a": ["0.125", "1/8", "0.13"], "why": "$x(2) = 0.5$, $x(3) = 0.25$, $x(4) = 0.125$. 매 단계 절반이 된다. 0.0625가 나왔다면 한 단계를 더 간 것 — $x(1)$에서 $x(4)$까지는 세 번 곱한다($0.5^3$).", "ref": "#s-fading-calc", "refLabel": "노드 하나 손 계산(그림 1의 파랑)"}, {"id": "d09-q04", "type": "short", "q": "[일부 채우기] $d = 0.9$, $x(1) = 1$. $x(4) = 0.9^{▢} = ?$ 빈칸(지수)과 답을 '빈칸,답' 꼴로 (예: 2,0.81)", "a": ["3,0.729", "3, 0.729", "3,0.73", "3, 0.73"], "why": "$x(1)$에서 세 단계 → $0.9^3 = 0.729$. 지수 4를 넣었다면 $x(0)$부터 센 것인데, 입력 1이 처음 들어간 상태가 $x(1) = 1$이다(그림 1의 초록 곡선).", "ref": "#s-fading-calc", "refLabel": "노드 하나 손 계산(그림 1의 초록)"}, {"id": "d09-q05", "type": "short", "q": "[혼자 풀기] $d = 0.8$인 노드에 $u(0) = 1$을 한 번 넣었다($x(0) = 0$). $x(4)$는?", "a": ["0.512", "0.51"], "why": "$x(1) = 1$, $x(2) = 0.8$, $x(3) = 0.64$, $x(4) = 0.8^3 = 0.512$. 0.4096이 나왔다면 지수를 하나 더 센 것. $d = 0.8$은 그림 1의 0.5와 0.9 사이 속도로 잊는다.", "ref": "#s-fading-calc", "refLabel": "노드 하나 손 계산: 몫이 dᵏ"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d09-q30", "type": "mc", "q": "남는 비율이 $d = 0.9$인 노드의 지금 상태가 10이다. 입력 없이 한 단계, 두 단계가 지나면 상태는?", "options": ["9, 8.1 — 매번 지금 값의 10%만큼 준다", "9, 8 — 매번 처음 값의 10%인 1씩 준다", "9.1, 8.2 — 매번 0.9씩 뺀다", "1, 0.1 — 매번 90%가 줄어든다"], "a": 0, "why": "$d$는 한 단계 뒤 '남는' 몫이다. $10 \\times 0.9 = 9$, $9 \\times 0.9 = 8.1$로, 줄어드는 양이 1, 0.9처럼 지금 값에 비례해 작아진다. 처음 값 기준으로 일정하게 빼거나(9, 8), 0.9를 빼거나(9.1, 8.2), 90%를 줄이는(1, 0.1) 것은 '남는 비율'을 다르게 읽은 것이다(D3 LIF의 0.9와 같은 읽기).", "ref": "#s-d-meaning", "refLabel": "d는 '남는' 비율(0.9 = 90% 남음)"}, {"id": "d09-q06", "type": "mc", "q": "τ ≈ 38 ms인 소자는 4 ms 간격 입력에서 $d = 0.9$이다. 같은 소자에 10 Hz(100 ms 간격)로 넣으면 $d = e^{-100/38} \\approx 0.07$이 된다. 이것이 뜻하는 것은?", "options": ["소자의 τ가 38 ms보다 짧아졌다는 뜻이다", "간격이 길수록 기억이 길어진다는 뜻이다", "τ는 그대로이고 흔적이 7%만 남는다", "소자가 바뀌었으니 식을 새로 맞춰야 한다"], "a": 2, "why": "τ는 소자가 정하는 값이라 그대로(38 ms)이고, $d$만 입력 간격에 따라 바뀐다. 다음 입력 때 흔적이 7%만 남아 기억이 거의 없는 장치처럼 된다. 그래서 '이 소자는 기억이 길다'는 말은 입력 간격과 함께 말해야 뜻이 있다(Stepney의 시간척도 정합, p.673).", "ref": "#s-d-time", "refLabel": "d = e^(−Δt/τ): 같은 소자, 다른 입력 간격"}, {"id": "d09-q27", "type": "short", "q": "같은 소자(τ ≈ 38 ms, 4 ms 간격에서 $d = 0.90$)에 8 ms마다 입력을 넣으면 $d$는? (소수 둘째 자리)", "a": ["0.81", ".81", "0.810", "약 0.81"], "why": "$e^{-8/38} = 0.81$. 8 ms는 4 ms를 두 번 지나는 것이라 $0.9 \\times 0.9 = 0.81$과 같다. 0.8(0.9에서 0.1을 뺌)이나 0.45(0.9의 절반)가 나왔다면 남는 비율을 거듭 곱하지 않고 빼거나 나눈 것이다.", "ref": "#s-d-time", "refLabel": "d = e^(−Δt/τ): 4 ms, 8 ms, 100 ms 예"}, {"id": "d09-q07", "type": "ox", "q": "펄스 응답을 지수함수로 맞춘 시간상수 $\\tau$가 길면 곧 retention이 길다는 뜻이고, 따라서 reservoir로 더 좋다.", "a": false, "why": "$\\tau$는 모형 매개변수, retention은 정의·허용오차·측정 기간을 정해 잰 지표로 다른 양이다. 그리고 reservoir에 필요한 것은 과제 시간척도에 맞는 흐려짐이다. 너무 오래가는 기억($d$ = 1.1, 그림 1)은 해롭다(D13).", "ref": "#s-tau-retention", "refLabel": "흔한 오해: τ와 retention"}]}, "3-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 두 출발점의 차이", "items": [{"id": "d09-q08", "type": "short", "q": "[풀이 예시 확인] 선형 노드 $x(t+1) = 0.5\\,x(t) + u(t)$ 두 벌의 출발점 차이가 1.6이다. 같은 입력을 넣으면 3단계 뒤 차이는?", "a": ["0.2", "0.20"], "why": "같은 입력이 두 벌에 똑같이 더해지므로 차이는 입력과 무관하게 매 단계 $d$배: 1.6 → 0.8 → 0.4 → 0.2. 입력 값을 차이에 더했다면 두 벌이 같은 입력을 받는다는 점을 놓친 것(기초 계단: echo state property의 표).", "ref": "#s-esp-linear", "refLabel": "선형 노드 두 벌의 차이 표"}, {"id": "d09-q09", "type": "short", "q": "[일부 채우기] 같은 상황에서 $d = 0.9$. 2단계 뒤 차이 $= 1.6 \\times ▢ = ?$ 빈칸과 답을 '빈칸,답' 꼴로 (예: 0.25,0.4)", "a": ["0.81,1.296", "0.81, 1.296", "0.81,1.3", "0.81, 1.3"], "why": "$0.9^2 = 0.81$, $1.6 \\times 0.81 = 1.296$. 0.9를 넣었다면 한 단계만 간 것. $d = 0.9$는 출발점을 천천히 잊는다 — 그래서 washout을 더 길게 잡아야 한다.", "ref": "#s-esp-linear", "refLabel": "차이(t+1) = d × 차이(t)"}, {"id": "d09-q10", "type": "short", "q": "[혼자 풀기] 선형 노드 $d = 0.7$, 출발점 차이 2.0. 2단계 뒤 차이는?", "a": ["0.98"], "why": "$2.0 \\times 0.7^2 = 2.0 \\times 0.49 = 0.98$. $d < 1$이면 차이가 계속 줄어 결국 0이 된다(ESP). $d$가 1.1이었다면 $2.0 \\times 1.21 = 2.42$로 벌어진다.", "ref": "#s-esp-linear", "refLabel": "차이(t+1) = d × 차이(t)"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d09-q29", "type": "ox", "q": "$\\tanh$ 노드 $x(t+1) = \\tanh(1.1\\,x(t) + u(t))$ 두 벌을 +0.8과 −0.8에서 출발시키고 ±0.1의 작은 같은 입력을 넣으면, 오래 기다려도 두 벌이 하나로 모이지 않을 수 있다.", "a": true, "why": "$\\tanh(1.1 \\times 0.50) = 0.50$이라 +0.50과 −0.50이 각각 머무는 값이 된다. 두 벌이 서로 다른 머무는 값에 자리 잡고, 작은 입력으로는 넘어가지 못해 차이가 약 0.96으로 남는다(그림 3 왼쪽 아래). 입력이 ±1.0으로 크면 $\\tanh$의 평평한 끝에서 배율이 작아져 다시 모인다.", "ref": "#s-esp-tanh", "refLabel": "그림 3 따라 읽기: d = 1.1의 두 머무는 값"}, {"id": "d09-q11", "type": "mc", "q": "시뮬레이션·실험에서 처음 몇 단계(washout)를 학습에 쓰지 않고 버리는 이유와 그 한계로 맞는 것은?", "options": ["처음 상태의 흔적을 빼려고. ESP가 없으면 소용없다", "계산 시간을 줄이려고. 버리는 양은 짧을수록 좋다", "측정 잡음을 없애려고. 길게 버릴수록 정확하다", "입력이 아직 안 들어온 구간이라서. 한계는 없다"], "a": 0, "why": "그림 3의 $d$ = 1.1·작은 입력은 39단계 뒤에도 두 벌의 차이가 0.96으로 남았다. 처음 상태를 잊는 성질(ESP)이 있어야 버린 뒤의 상태가 입력만으로 정해진다. washout은 ESP를 전제로 한 절차다. `tools/esn.py`는 처음 100단계를 버린다.", "ref": "#s-washout-esp", "refLabel": "washout과 반복성"}]}, "4-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 고윳값과 leak", "items": [{"id": "d09-q13", "type": "short", "q": "[풀이 예시 확인] $W = [[0.6, 0.3],[0.3, 0.6]]$에 (1, 1)을 곱하면 (0.9, 0.9)가 된다. 이 방향의 고윳값은?", "a": ["0.9"], "why": "(0.9, 0.9) = 0.9 × (1, 1). 방향은 그대로이고 길이만 0.9배 — 그 배율이 고윳값이다(그림 4의 초록 점선).", "ref": "#s-eigen-picture", "refLabel": "그림 4 따라 읽기: (1, 1)에 W를 곱하면"}, {"id": "d09-q14", "type": "short", "q": "[일부 채우기] 같은 $W$에 (1, −1)을 곱하면 (0.6 − 0.3, 0.3 − 0.6) = (▢, −0.3)이다. 빈칸과 이 방향의 고윳값을 '빈칸,고윳값' 꼴로", "a": ["0.3,0.3", "0.3, 0.3"], "why": "(0.3, −0.3) = 0.3 × (1, −1)이므로 고윳값 0.3. 두 고윳값 0.9와 0.3 중 큰 크기가 spectral radius 0.9다. −0.3을 고윳값으로 답했다면 결과 벡터의 둘째 성분과 배율을 혼동한 것.", "ref": "#s-eigen-steps", "refLabel": "손으로 찾기: (0.6 − λ)² = 0.09"}, {"id": "d09-q15", "type": "short", "q": "[혼자 풀기] leak $a = 0.5$, 어떤 방향의 고윳값 λ = 0.8. 선형 영역에서 그 방향의 배율 $(1-a) + a\\lambda$는?", "a": ["0.9", "0.90"], "why": "$0.5 + 0.5 \\times 0.8 = 0.5 + 0.4 = 0.9$. leak을 넣으면 배율이 1 쪽으로 다가가 더 천천히 잊는다. 0.4가 나왔다면 $(1-a)$ 항(지금 상태를 그대로 남기는 몫)을 빠뜨린 것.", "ref": "#b-leak", "refLabel": "기초: leak 배율 (1 − a) + aλ"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d09-q16", "type": "mc", "q": "노드 200개 시뮬레이션에서 leak $a$를 1.0 → 0.1로 줄이자 배율은 1에 가까워졌는데 memory capacity는 17.9 → 6.2로 줄었다. 가장 그럴듯한 설명은?", "options": ["leak을 줄이면 처음 상태를 잊지 못하게 되기 때문", "상태가 지난 입력들의 평균처럼 뭉개지기 때문", "배율이 1에 가까워 상태가 터져 버리기 때문", "leak을 줄이면 쓸 수 있는 노드 수가 줄기 때문"], "a": 1, "why": "새 입력이 상태에 $a$배로만 들어가, $a$ = 0.1이면 상태가 입력의 평균(0.5) 쪽으로 천천히 오르며 하나하나의 입력은 0.01–0.09의 잔물결로만 남는다(4구간 표). 오래 남는 것은 평균이지 하나하나의 입력이 아니다. 배율 0.99는 1보다 작아 터지지도 않고 처음 상태도 결국 잊으며, 노드 수는 그대로다. 노드 하나에서도 기억은 합이 1인 예산이다(5구간, 그림 7). 이 설명은 Claude의 해석이다.", "ref": "#s-leak-mc", "refLabel": "느리게 잊는 것 ≠ 많이 기억하는 것"}, {"id": "d09-q12", "type": "ox", "q": "spectral radius가 1보다 큰 reservoir는 어떤 입력을 넣어도 echo state property를 가질 수 없다.", "a": false, "why": "Stepney는 Jaeger(2007)를 인용해, ρ > 1이면 그 자체로는 ESP가 없지만 입력이 충분히 크면 가질 수 있다고 쓴다(p.668). 노드 하나에서도 그림 3의 $d$ = 1.1이 입력 ±1.0에서는 다시 모였다. ρ < 1은 ESP의 필요조건이 아니고, ESP는 reservoir와 입력의 조합의 성질이다.", "ref": "#s-esp-condition", "refLabel": "ρ < 1은 ESP의 조건인가"}, {"id": "d09-q28", "type": "ox", "q": "$\\tanh$ reservoir의 spectral radius를 1보다 작게 맞추면, 어떤 입력을 넣어도 echo state property가 보장된다.", "a": false, "why": "Stepney는 ρ를 1로 맞추는 것이 '대부분의 경우' 충분할 뿐이라고 쓰고, 보장하는 충분조건은 가장 큰 특잇값 < 1이라고 한다(p.668). ρ < 1인 $\\tanh$ reservoir가 입력이 0일 때조차 처음 상태를 잊지 못하는 해석적 예도 보고되어 있다(Yildiz 등 2012). 그래서 쓸 입력 크기에서 두 벌의 거리를 직접 재어 확인한다(그림 5). 입력 없이 선형으로만 곱할 때는 ρ < 1이 그대로 조건이다.", "ref": "#s-esp-condition", "refLabel": "ρ < 1은 ESP의 조건인가"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 기억 예산", "items": [{"id": "d09-q17", "type": "mc", "q": "노드 하나 $x(t) = 0.9\\,x(t-1) + u(t)$는 지금 입력 $u(t)$조차 corr² 0.19만큼만 되살린다. 그 이유는?", "options": ["지난 입력들의 몫이 섞여 지금 입력을 가리기 때문", "남는 비율이 큰 노드는 입력에 늦게 반응하기 때문", "corr²는 원래 0.19보다 커질 수 없기 때문", "입력이 서로 독립인 난수라 예측할 수 없기 때문"], "a": 0, "why": "되살리는 정도 $= d^{2k}(1-d^2)$이고 $k = 0$이면 $1 - 0.81 = 0.19$. 지금 상태에는 지금 입력과 함께 지난 입력의 몫($0.9, 0.81, \\dots$)이 섞여 있어 지금 입력이 흐려진다. $d$ = 0.1이면 같은 값이 0.99이므로 corr²에 0.19라는 상한은 없다. 합은 늘 1이다(그림 7).", "ref": "#s-budget", "refLabel": "노드 하나의 기억 예산(그림 7)"}, {"id": "d09-q18", "type": "ox", "q": "소자의 전류가 펄스 뒤에 느리게 감소할수록 그 소자는 시계열 계산에 항상 더 유리하다.", "a": false, "why": "느린 감쇠는 인과 사슬의 한 고리(②)일 뿐이고, 너무 느리면 옛 입력이 쌓여 최근 것이 묻힌다. 노드 하나의 기억 예산은 1이라 느린 감쇠는 기억을 '늘리는' 것이 아니라 과거 쪽으로 '옮긴다'. 시간척도가 과제에 맞아야 한다(Singh 2026, p.4).", "ref": "#s-chain", "refLabel": "그림 6의 다섯 고리(②의 끊기는 조건)"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d09-q31", "type": "mc", "q": "어떤 소자 논문이 '펄스 뒤 전류가 30 ms에 걸쳐 천천히 감소하므로 시간 정보를 처리할 수 있다'고 썼다. 이 문장을 '계산에 쓸모 있는 기억'의 증거로 쓰려면 무엇을 더 보여야 하나?", "options": ["감쇠 곡선을 지수함수로 정확히 맞춘 시간상수", "더 긴 감쇠 시간(예: 300 ms)을 가진 소자", "새 데이터에서 지난 입력을 상태로 되살린 결과", "펄스 세기를 바꿔도 같은 감쇠 모양이라는 것"], "a": 2, "why": "느린 감쇠는 그림 6의 고리 ② 하나다. 쓸모 있는 기억이 되려면 지난 입력의 정보가 지금 상태에서 접근 가능해야 하고(Singh 2026, p.8), 그것을 학습에 쓰지 않은 데이터에서 기준선과 비교해 보여야 한다(고리 ④–⑤). 감쇠를 더 정확히 맞추거나 더 길게 만드는 것은 여전히 고리 ②에 관한 정보다.", "ref": "#s-singh-summary", "refLabel": "Singh의 요약: 느린 감쇠만으로는 부족하다"}, {"id": "d09-q20", "type": "mc", "q": "어떤 소자 ESN 논문이 시계열 예측을 잘했다. 그 성능의 '기억'이 소자에서 왔는지 확인하려면 무엇을 봐야 하나?", "options": ["정확도가 기준선보다 몇 % 높은지 본다", "펄스 응답의 감쇠 시간상수가 긴지 본다", "readout을 더 큰 신경망으로 바꿔 본다", "소프트웨어 leak 항을 빼고 다시 본다"], "a": 3, "why": "Zhong 2026은 시계열 예측에서 forgetting factor α가 명시적 동역학을 대신했고(p.4), 이 의존이 온라인 반복 계산을 요구한다는 한계를 적었다(p.7). 기억이 소프트웨어 항에서 오면 소자의 기여가 아니다. 정확도나 감쇠 시간상수만으로는 기억의 출처를 가르지 못하고, readout을 키우면 소자 밖에서 계산이 더해진다(D8).", "ref": "#s-zhong-forget", "refLabel": "Zhong 2026의 forgetting factor"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d09-q21", "type": "short", "q": "소자의 시간상수 $\\tau = 10$ ms, 입력 간격 $\\Delta t = 10$ ms. 한 단계 동안 남는 비율 $d = e^{-\\Delta t/\\tau}$는? ($e^{-1} = 0.368$, 소수 둘째 자리까지)", "a": ["0.37", "0.368", "약 0.37"], "why": "$\\Delta t/\\tau = 1$이므로 $d = e^{-1} = 0.37$. 다음 입력 때 흔적이 37% 남는다 — 그림 7의 0.1과 0.5 사이 모양이다. 입력 간격을 $\\tau$와 같게 두면 최근 한두 단계를 주로 기억한다.", "ref": "#s-d-time", "refLabel": "d = e^(−Δt/τ)"}, {"id": "d09-q22", "type": "mc", "q": "spectral radius에 대한 설명으로 맞는 것은?", "options": ["행렬의 모든 원소를 더한 값", "고윳값의 크기 중 가장 큰 값", "행렬의 대각선 원소 중 가장 큰 값", "입력이 상태에 들어가는 세기 $W_{in}$"], "a": 1, "why": "고윳값은 곱해도 방향이 안 바뀌는 방향의 배율이고, 그 크기 중 가장 큰 값이 ρ다. 그림 4에서 대각선이 0.6인 $W$의 배율은 0.6이 아니라 0.9와 0.3이었고, 0.3배 방향이 먼저 사라져 0.9배 방향만 남았다. 대각선이 바로 고윳값인 것은 대각선 밖이 0일 때뿐이다.", "ref": "#b-spectral-radius", "refLabel": "기초: 고윳값과 spectral radius"}, {"id": "d09-q23", "type": "mc", "q": "같은 펄스 열을 넣었는데, 직전 실험 직후에 잰 전류 궤적과 하루 쉰 뒤 잰 궤적이 끝까지 다르다. 이것이 가장 직접적으로 문제 삼는 성질은?", "options": ["처음 상태를 잊는 성질과 반복성", "입력에 대한 응답의 비선형성", "spectral radius가 너무 작은 것", "샘플링 주기가 너무 긴 것"], "a": 0, "why": "상태가 처음 상태(직전 실험의 흔적)에 따라 끝까지 다르면 echo state property가 없고, 학습한 readout이 다른 날 틀린다. Singh은 반복성과 드리프트를 먼저 확인하라고 하고, 드리프트가 기억처럼 보일 수 있다고 경고한다(p.5). spectral radius가 작으면 오히려 처음 상태를 더 빨리 잊는다.", "ref": "#s-washout-esp", "refLabel": "washout과 반복성"}, {"id": "d09-q24", "type": "mc", "q": "'천천히 감소하는 전류 → 계산에 도움'의 인과 사슬에서, 아래 중 다른 고리가 다 성립해도 이것이 빠지면 '계산에 도움이 됐다'고 말할 수 없는 것은?", "options": ["펄스 뒤 전류가 지수함수로 줄어든다", "소자가 전자 대신 이온으로 동작한다", "감쇠 시간상수가 1 s보다 길다", "새 데이터에서 저장 기준선보다 낫다"], "a": 3, "why": "⑤가 없으면 readout이 외운 것인지, 저장 기반 기준선으로도 되는 것인지 모른다(D6, D12). 지수 감쇠나 긴 시간상수는 ②의 모양일 뿐이고, 이온으로 동작한다는 것은 고리와 무관한 재료 정보다.", "ref": "#s-chain", "refLabel": "그림 6의 고리 ⑤"}, {"id": "d09-q26", "type": "ox", "q": "노드 하나의 기억 예산(지금 입력을 포함해 되살리는 정도를 모든 지연에 대해 더한 값)은 잡음 없는 선형 모형에서, 남는 비율이 $0 \\le d < 1$이기만 하면 $d$에 관계없이 1이다.", "a": true, "why": "$\\sum_k d^{2k}(1-d^2) = (1-d^2)/(1-d^2) = 1$. $d$ = 0.1, 0.5, 0.9 모두 1.000(그림 7). $d \\ge 1$이면 상태가 줄지 않아 이 계산 자체가 성립하지 않는다(2구간). $d$는 예산의 총량이 아니라 나눠 주는 방식을 정한다. 노드가 여럿이면 예산이 노드 수만큼 늘 수 있다(D11).", "ref": "#s-budget", "refLabel": "노드 하나의 기억 예산(그림 7)"}]}}}</script>
-<div class="step-check local-only">
-<label><input type="checkbox" data-step-check="lesson" data-day="d09"> 학습자료를 다 읽었다</label>
-</div>
-</section>
-<section id="answer" class="level2">
-<h2 class="anchored" data-anchor-id="answer">④ 가르치듯 내 답</h2>
-<div class="flow-line">
-<p>후배에게 <strong>설명한다고 생각하고</strong> 오늘 질문에 답합니다. <strong>기본은 짧은 답</strong>입니다: 3–5문장, 또는 작은 도식 하나와 한 줄 설명, 그리고 설명하다 막힌 곳 한 줄. 이것만으로 정상적인 학습입니다. 왜·어떻게, 근거와 반론까지 쓰는 긴 종합 답안은 <strong>선택</strong>입니다. 주장에 <span class="tag tag-fact">확인</span> <span class="tag tag-interp">해석</span> <span class="tag tag-hypo">가설</span> 태그를 붙이면 좋고, <span class="tag tag-fact">확인</span>은 원문에서 직접 본 것에만 씁니다. 몇 번이고 고쳐도 됩니다. 막히는 곳은 따로 적어 두세요.</p>
-</div>
-<div class="editable" data-file="d09-answer" data-title="내 답" data-template="answer"></div>
-<div class="ledger-links">
-  <span>장부에 옮기기 →</span>
-  <a href="../ledger/bottleneck.html">병목 장부</a>
-  <a href="../ledger/unknowns.html">아직 모르는 것</a>
-  <a href="../ledger/glossary.html">용어집</a>
-  <a href="../ledger/kill-criteria.html">접는 기준</a>
-</div>
-</section>
-<section id="posttest" class="level2">
-<h2 class="anchored" data-anchor-id="posttest">⑤ 다시 풀기 (선택)</h2>
-<div class="flow-line">
-<p>① 사전 테스트와 <strong>같은 문제</strong>를 이유와 함께 다시 풉니다. 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 다시 떠올리기 연습입니다. 이해 점검은 학습자료의 <strong>잠깐 점검</strong>과 <strong>종합 퀴즈</strong>에서 처음 고른 답으로 봅니다.</p>
-</div>
-<div class="quiz" data-day="d09" data-set="pre" data-mode="post"></div>
+<script type="application/json" id="quiz-d09">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 바로 그 설명·작은 예제의 앵커, refLabel은 그곳의 짧은 이름.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 분류 readout과 학습 방법, 고정해도 되는 이유", "items": [{"id": "d09-r01", "type": "mc", "q": "손동작 네 종류를 '원 = 1, 사각 = 2, 세모 = 3, 별 = 4'처럼 숫자 하나로 적고, readout이 그 숫자를 맞히게 학습시켰다. 이 방식의 가장 큰 문제는?", "options": ["정답 숫자가 커서 학습률을 아주 작게 잡아야 한다", "'사각은 원과 세모의 중간'이라는 없는 순서를 배운다", "종류마다 표본 수가 달라 정답의 평균이 한쪽으로 쏠린다", "출력이 숫자 하나라 ridge로는 가중치를 구할 수 없다"], "a": 1, "why": "종류에는 순서가 없는데 1, 2, 3, 4를 붙이면 readout은 그 숫자의 크기 관계까지 맞추려 합니다. 그래서 종류 수만큼 칸을 두고 맞는 칸만 1로 적는 원-핫 정답을 씁니다.", "wrongWhy": ["학습률은 손실의 가파름에 맞추는 것이고, 정답을 숫자로 붙인 방식의 핵심 문제는 크기가 아니라 없는 순서입니다.", "", "표본 수의 치우침은 다른 문제이고, 여기서 생기는 오류는 종류 사이에 엉터리 순서가 생기는 것입니다.", "숫자 하나짜리 출력도 ridge로 맞출 수 있습니다. 문제는 풀 수 있느냐가 아니라 그 숫자가 없는 순서를 담는다는 점입니다."], "ref": "d08b.html#b-softmax", "refLabel": "원-핫 정답이 필요한 이유", "note": "원-핫: 종류가 넷이면 칸 네 개를 두고 맞는 칸만 1, 나머지는 0으로 적는다. 예: 세모 = (0, 0, 1, 0)."}, {"id": "d09-r02", "type": "ox", "q": "세 종류의 점수가 (−1.0, 0.5, 0.2)처럼 음수가 섞여 있으면, softmax로 바꾼 뒤 확률이 가장 큰 종류가 argmax로 고른 종류와 달라질 수 있다.", "a": false, "why": "softmax는 점수마다 e^점수를 계산해 합으로 나눕니다. e^점수는 늘 양수이고 점수가 클수록 커지므로, 점수 순서가 확률 순서로 그대로 이어집니다. 이 예에서는 둘째 종류(0.5)가 argmax의 답이자 가장 큰 확률입니다.", "wrongWhy": ["음수 점수도 e^점수로 바꾸면 작은 양수가 될 뿐 순서는 그대로라, 확률이 가장 큰 종류는 늘 점수가 가장 큰 종류입니다.", ""], "ref": "d08b.html#s-softmax-steps", "refLabel": "softmax 세 단계", "fig": "../assets/img/d08/fig-softmax-ce.svg", "figAlt": "점수 (2.0, 1.0, 0.1)이 e의 거듭제곱과 나누기를 거쳐 확률 (0.659, 0.242, 0.099)가 되고, 교차 엔트로피 곡선이 정답 확률이 작을수록 가파르게 오르는 그림"}, {"id": "d09-r03", "type": "mc", "q": "정답이 A인 표본 두 개가 있다. softmax 확률에서 A의 확률이 표본 1은 0.5, 표본 2는 0.02였다. 교차 엔트로피 손실(정답 칸 확률의 −ln)에 대해 맞는 것은?", "options": ["argmax로 맞았는지만 보므로 두 손실은 0 아니면 1이다", "확률 차이가 0.48이므로 손실 차이도 0.5쯤으로 작다", "정답 칸 확률이 작을수록 손실도 작아 표본 2가 더 작다", "표본 2가 훨씬 커서, 틀린 쪽을 확신할수록 크게 벌받는다"], "a": 3, "why": "−ln 0.5 ≈ 0.69, −ln 0.02 ≈ 3.9입니다. −ln 곡선은 확률 1에서 0이고 확률이 작아질수록 가파르게 올라가므로, 정답에 아주 작은 확률을 준(틀린 종류를 자신 있게 고른) 표본이 훨씬 큰 손실을 받습니다.", "wrongWhy": ["교차 엔트로피는 맞음·틀림이 아니라 정답 칸의 확률 자체를 써서 연속적인 손실을 냅니다.", "−ln은 직선이 아니라 확률이 작은 쪽에서 가파르게 오르는 곡선이라, 손실 차이는 약 3.2로 확률 차이보다 훨씬 큽니다.", "방향이 반대입니다. 정답 칸 확률이 작을수록 −ln 값은 커집니다.", ""], "ref": "d08b.html#s-cross-entropy", "refLabel": "교차 엔트로피: 얼마나 틀렸나", "fig": "../assets/img/d08/fig-softmax-ce.svg", "figAlt": "④ 교차 엔트로피 곡선: 정답 칸 확률이 1이면 손실 0, 확률이 작아질수록 손실이 가파르게 커진다"}, {"id": "d09-r04", "type": "mc", "q": "세 종류 분류에서 softmax 확률이 (0.2, 0.7, 0.1)이고 정답은 A다. 점수의 기울기 '확률 − 원-핫 정답'으로 한 걸음 학습하면 세 점수는 어떻게 움직이나?", "options": ["A 점수는 오르고, B 점수는 크게, C 점수는 조금 내려간다", "B 확률이 가장 크니 B 점수를 더 올려 확신을 키운다", "세 점수가 같은 양만큼 내려가 확률의 합 1을 지킨다", "A 점수만 오르고, 정답이 아닌 B·C 점수는 그대로 둔다"], "a": 0, "why": "기울기는 (0.2 − 1, 0.7 − 0, 0.1 − 0) = (−0.8, 0.7, 0.1)입니다. 경사 하강은 기울기의 반대쪽으로 가므로, 음수인 A는 오르고 양수인 B는 크게, C는 조금 내려갑니다.", "wrongWhy": ["", "정답은 A이므로 B의 기울기는 +0.7이고, 학습은 B 점수를 내리는 쪽으로 갑니다.", "기울기가 칸마다 다르므로(−0.8, 0.7, 0.1) 같은 양만큼 움직이지 않고, A는 오히려 오릅니다.", "원-핫 정답이 0인 칸도 기울기가 그 칸의 확률(0.7, 0.1)이라 0이 아니므로 함께 내려갑니다."], "ref": "d08b.html#s-cross-entropy", "refLabel": "학습에 쓰는 기울기: 확률 − 정답", "note": "softmax + 교차 엔트로피에서 점수 k의 기울기 = p_k − y_k. 음수면 그 점수를 올리고, 양수면 내린다."}, {"id": "d09-r05", "type": "mc", "q": "손실 L(w) = 14w² − 29w + 15.06(기울기 28w − 29)에서는 학습률 0.06이 바닥을 넘나들며 결국 다가갔다. 모양은 같고 두 배 가파른 그릇(기울기 56w − 58)에 같은 학습률 0.06을 쓰면?", "options": ["학습률이 같으니 넘나들며 다가가는 경로도 똑같다", "그릇이 가파를수록 바닥이 뚜렷해 더 빨리 닿는다", "한 걸음에 바닥을 크게 넘어 갈수록 멀어질 수 있다", "기울기가 커진 만큼 걸음은 오히려 짧아져 느려진다"], "a": 2, "why": "바닥까지의 거리는 걸음마다 (1 − 기울기 앞의 수 × η)배가 됩니다. 처음 그릇은 1 − 28 × 0.06 = −0.68배라 넘나들며 줄지만, 두 배 가파른 그릇은 1 − 56 × 0.06 = −2.36배라 넘을 때마다 더 멀어집니다(발산). 그래서 학습률은 손실마다 따로 골라야 합니다.", "wrongWhy": ["같은 학습률이라도 그릇의 가파름이 다르면 한 걸음의 크기(η × 기울기)가 달라 경로가 달라집니다.", "가파른 그릇에서는 같은 η로 걸음이 너무 커져, 바닥에 닿기는커녕 넘어서 튈 수 있습니다.", "", "걸음은 η × 기울기라 기울기가 크면 걸음도 커집니다."], "ref": "d08b.html#s-learning-rate", "refLabel": "학습률만 바꾸면", "fig": "../assets/img/d08/fig5-optimizers.svg", "figAlt": "같은 포물선 손실에서 학습률 0.02는 곧게 다가가고 0.06은 넘나들며 0.08은 발산하는 경사 하강 경로"}, {"id": "d09-r06", "type": "mc", "q": "readout 가중치 두 개의 기울기가 −50과 −0.05로 1,000배 다르다. 학습률 η = 0.01로 첫 걸음을 갈 때 맞는 것은?", "options": ["Adam은 두 가중치를 모두 대략 0.01씩 옮겨 보폭이 비슷하다", "Adam도 기울기에 비례해 0.5와 0.0005씩 서로 다르게 옮긴다", "경사 하강은 두 가중치를 기울기와 상관없이 0.01씩 옮긴다", "Adam은 기울기가 큰 쪽만 옮기고 작은 쪽은 그대로 둔다"], "a": 0, "why": "Adam은 기울기의 평균(방향)을 기울기 크기의 평균으로 나눠 걸음을 정하므로, 첫 걸음은 기울기 크기와 상관없이 정확히 η입니다. 경사 하강이었다면 0.01 × 50 = 0.5와 0.01 × 0.05 = 0.0005로 1,000배 차이가 납니다.", "wrongWhy": ["", "기울기에 비례해 0.5와 0.0005씩 가는 것은 경사 하강입니다. Adam은 방향 ÷ 크기로 보폭을 맞춥니다.", "경사 하강의 걸음은 η × 기울기라, 기울기 크기가 다르면 걸음도 그만큼 다릅니다.", "Adam은 작은 기울기의 가중치도 크기로 나눠 키우므로 비슷한 보폭으로 움직입니다."], "ref": "d08b.html#b-adam", "refLabel": "Adam: 방향 ÷ 크기로 보폭 맞추기"}, {"id": "d09-r07", "type": "mc", "q": "다음 중 ridge처럼 공식으로 한 번에 풀기 어려워, 경사 하강 계열(Adam 등)로 조금씩 내려가는 길이 필요한 경우는?", "options": ["노드 300개의 선형 readout으로 다음 순간의 전압값을 맞힐 때", "거의 같은 노드 둘 때문에 가중치가 크게 튈 위험이 있을 때", "데이터를 모두 모아 상태 표를 한꺼번에 만들 수 있을 때", "softmax 확률과 교차 엔트로피로 분류 readout을 학습할 때"], "a": 3, "why": "softmax + 교차 엔트로피는 기울기를 0으로 놓아도 e^점수와 그 합의 나눗셈 때문에 가중치를 공식으로 꺼낼 수 없어, 조금씩 내려가야 합니다. 나머지 셋은 손실이 포물선인 ridge 한 번으로 풀리는 상황입니다.", "wrongWhy": ["연속값을 내는 선형 readout은 손실이 포물선이라 ridge 공식으로 바닥이 바로 나옵니다.", "거의 같은 노드 문제는 ridge의 λ로 다루며, 여전히 공식으로 한 번에 풉니다.", "데이터를 다 모을 수 있으면 오히려 ridge 한 번이 편한 경우입니다.", ""], "ref": "d08b.html#s-two-paths-table", "refLabel": "언제 무엇을 쓰나 표"}, {"id": "d09-r08", "type": "ox", "q": "곡선(특징)의 모양을 고정해 두고 섞는 비율(가중치)만 정하면, 손실이 그릇 모양 포물선이 되어 그 비율을 공식으로 한 번에 구할 수 있다.", "a": true, "why": "곡선 모양이 고정이면 출력은 가중치에 대해 '곱해 더하기'뿐이라 손실이 포물선입니다. 그래서 최소제곱·ridge로 한 번에 풀리고(노드가 거의 같으면 λ가 필요), 내부까지 학습할 때 생기는 시간을 거슬러 가는 기울기 문제가 없습니다.", "wrongWhy": ["", "모양을 학습하지 않고 섞는 비율만 정하는 한, 손실은 가중치의 2차식이라 공식으로 바닥을 구할 수 있습니다."], "ref": "d08b.html#s-random-features", "refLabel": "고정된 난수 곡선 + 학습한 섞는 비율", "fig": "../assets/img/d08/fig6-random-features.svg", "figAlt": "고정된 난수 S자 곡선 K개를 섞어 목표 곡선을 흉내 낸 결과: K가 2, 5, 20으로 늘수록 오차가 준다"}, {"id": "d09-r09", "type": "mc", "q": "같은 공정으로 만든 소자 100개를 reservoir 노드로 쓰려고 같은 입력을 넣었더니 100개의 전류 궤적이 거의 겹쳤다. '고정해도 되는 조건' 가운데 가장 먼저 의심할 것은?", "options": ["기억: 과거 입력의 흔적이 상태에 남아 있는가", "비선형 섞임: 입력들의 곱이 상태에 들어 있는가", "다양함: 노드들이 서로 다른 함수를 내는가", "읽을 수 있음: 상태를 측정할 수 있는가"], "a": 2, "why": "궤적이 거의 겹친다는 것은 100개가 서로의 복사본이라는 뜻입니다. 거의 같은 노드는 노드 하나와 거의 다르지 않아, readout이 섞을 재료가 늘지 않습니다.", "wrongWhy": ["궤적이 겹친다는 사실만으로는 흔적이 남는지 알 수 없습니다. 이 관찰이 직접 가리키는 것은 노드끼리 같다는 점입니다.", "비선형 섞임이 있더라도 100개가 모두 같은 것을 담으면 하나와 다르지 않습니다. 관찰이 가리키는 것은 다양함입니다.", "", "100개의 궤적을 쟀으니 읽을 수는 있습니다. 문제는 읽은 값들이 서로 같다는 것입니다."], "ref": "d08b.html#s-fixed-conditions", "refLabel": "고정해도 되는 조건 세 가지"}, {"id": "d09-r10", "type": "mc", "q": "물리 reservoir + 선형 readout이 어떤 시계열 과제에서 오차(NMSE) 0.08을 냈다. reservoir 없이 지난 입력들과 그 곱을 같은 readout에 넣은 기준선은 0.06이었다. 이 결과로 할 수 있는 말은?", "options": ["오차 차이가 작으니 소자가 계산에 크게 기여했다고 본다", "정확도로는 기여를 말하기 어렵고, 같은 정확도의 비용을 따진다", "기준선이 더 나으니 이 소자는 어떤 조건에서도 쓸모가 없다", "기준선은 소자를 쓰지 않았으니 비교 대상이 될 수 없다"], "a": 1, "why": "같은 readout에 소자 없이 만든 특징을 준 기준선이 더 정확하므로, 정확도만으로는 reservoir의 기여를 주장할 수 없습니다. 남는 질문은 기준선이 필요로 하는 저장·곱셈 회로를 소자가 더 싸게 대신하는가, 곧 같은 정확도에서의 시스템 비용입니다.", "wrongWhy": ["소자 없이도 더 낮은 오차가 나왔으니, 정확도는 소자의 기여를 보여 주지 못합니다.", "", "정확도가 조금 낮아도 비용이 훨씬 싸다면 쓸모가 있을 수 있으므로 '어떤 조건에서도'는 지나칩니다.", "기준선은 바로 '소자 없이도 얻을 수 있는 성능'이라서 소자의 기여를 가리는 비교 대상입니다."], "ref": "d08b.html#ch-objection", "refLabel": "반론: readout이 일을 다 하는 것 아닌가"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "종을 한 번 치면 점점 작아지는 소리의 크기를 1·2·3·5·10초 뒤마다 0–1 점수로 어림해 곡선을 그리고, 종을 2초마다 친다면 지금 들리는 소리로 몇 번 전 타격까지 알아챌 수 있을지 적어 보세요. 소리가 아주 빨리 사라지는 종과 거의 사라지지 않는 종이라면 각각 무엇이 곤란할지도 한 줄씩 덧붙이세요.", "items": [{"id": "d09-p01", "ref": "#s-memoryless-example", "refLabel": "'1, 0'과 '0, 0' 작은 예(그림 0)", "type": "mc", "q": "지금 들어온 입력 하나만 보고 출력을 정하는(기억이 없는) 장치로 '바로 전 단계에 1이 들어왔나?'를 맞힐 수 있을까?", "options": ["출력 규칙을 잘 고르면 맞힐 수 있다", "출력 규칙이 굽은 곡선이면 맞힐 수 있다", "지금 입력이 같으면 답도 같아서 못 맞힌다", "입력 신호가 충분히 크면 맞힐 수 있다"], "a": 2, "why": "기억 없는 장치 y = g(u(t))는 이력 '1, 0'과 '0, 0'에 둘 다 g(0)을 냅니다. 규칙이 곡선(비선형)이어도, 입력이 커도 같은 입력에는 같은 답입니다. 과거가 필요한 과제는 지난 입력을 저장해 두거나 상태에 흔적을 남겨야 풀 수 있습니다(1구간)."}, {"id": "d09-p02", "ref": "#s-fading-calc", "refLabel": "노드 하나 손 계산: 몫이 dᵏ", "type": "short", "q": "매 단계 상태의 0.6배만 남는 장치에 1을 한 번 넣었다(넣은 직후 상태 = 1). 그 뒤 입력 없이 두 단계가 지나면 상태는? (소수)", "a": ["0.36", ".36", "0.360", "9/25"], "why": "k단계 뒤 몫은 dᵏ이므로 0.6² = 0.36입니다. d < 1이면 오래된 입력의 몫이 거듭제곱으로 줄어 최근 입력이 상태를 주로 정합니다. 이것이 fading memory입니다(2구간)."}, {"id": "d09-p03", "ref": "#s-d-bad", "refLabel": "d = 1.1은 왜 나쁜가", "type": "mc", "q": "매 단계 상태가 1.1배가 되는(조금씩 커지는) 장치에 1을 한 번 넣고 그 뒤 입력을 주지 않으면?", "options": ["흔적이 줄지 않고 계속 커진다", "흔적이 서서히 줄어 0으로 사라진다", "흔적이 다음 단계에 곧바로 0이 된다", "흔적이 다음 단계부터 1에 머문다"], "a": 0, "why": "1.1ᵏ는 계속 커집니다. S자 함수(tanh)로 눌러도 0.50 근처에 영원히 머물러 처음 입력을 잊지 못합니다. 기억이 '오래갈수록 좋다'가 아니라 과제에 맞게 흐려져야 하는 이유입니다(2구간)."}, {"id": "d09-p04", "ref": "#s-d-time", "refLabel": "d = e^(−Δt/τ): 같은 소자, 다른 입력 간격", "type": "ox", "q": "같은 소자라도 입력을 넣는 시간 간격을 바꾸면, 다음 입력이 올 때까지 남아 있는 흔적의 비율이 달라진다.", "a": true, "why": "남는 비율은 d = e^(−Δt/τ)라서 간격 Δt에 따라 바뀝니다. τ ≈ 38 ms인 소자는 4 ms 간격이면 d ≈ 0.9지만, 100 ms 간격이면 d ≈ 0.07로 기억이 거의 없는 장치처럼 됩니다(2구간)."}, {"id": "d09-p05", "ref": "#b-esp", "refLabel": "기초: echo state property", "type": "mc", "q": "출발 상태만 다른 같은 reservoir 두 벌에 똑같은 입력을 계속 넣었다. 계산에 쓰기 좋은 reservoir라면 두 상태는 어떻게 되어야 하나?", "options": ["끝까지 서로 다른 값을 유지해야 한다", "점점 하나로 모여 입력 이력만으로 정해져야 한다", "입력과 관계없이 둘 다 0으로 멈춰야 한다", "둘 다 같은 비율로 끝없이 커져야 한다"], "a": 1, "why": "출발점의 차이를 잊고 같은 입력에 같은 상태로 모이는 성질이 echo state property입니다. 그래야 같은 입력에 같은 답을 낼 수 있고, 처음 몇 단계를 버리는(washout) 처리도 의미가 있습니다(3구간)."}, {"id": "d09-p06", "ref": "#s-eigen-picture", "refLabel": "그림 4: 거듭 곱하면 (1, 1) 방향만 남는다", "type": "mc", "q": "어떤 행렬을 상태에 반복해서 곱한다. 방향마다 한 번에 줄어드는 배율이 다를 때 결국 남는 것은?", "options": ["배율이 가장 큰(가장 느리게 줄어드는) 방향", "배율이 가장 작은(가장 빨리 줄어드는) 방향", "곱하기 전의 처음 방향 그대로", "모든 방향이 같은 비율로 섞인 모양"], "a": 0, "why": "작은 배율 방향은 빨리 사라지고 가장 큰 배율 방향만 남습니다. 그 가장 큰 배율의 크기가 spectral radius이고, 그래서 이 값이 기억의 길이를 정합니다(4구간)."}, {"id": "d09-p07", "ref": "#s-leak-mc", "refLabel": "leak을 줄이자 MC가 줄어든 예", "type": "ox", "q": "새 입력을 덜 받아들이고 이전 상태를 더 오래 유지하도록 바꾸면, 하나하나의 과거 입력을 되살리는 능력도 반드시 커진다.", "a": false, "why": "leak을 줄여 배율을 1에 가깝게 하자 기억 용량(MC)은 오히려 17.9 → 6.2로 줄었습니다(노드 200개 모형의 시뮬레이션). 상태가 지난 입력들의 평균처럼 뭉개져, 오래 남는 것은 평균이지 각각의 입력이 아니기 때문입니다(4구간)."}, {"id": "d09-p08", "ref": "#s-budget", "refLabel": "노드 하나의 기억 예산(그림 7)", "type": "mc", "q": "노드 하나가 잊는 속도를 느리게 바꿔 먼 과거를 더 잘 담게 하면, 그 대신 무엇이 일어나나?", "options": ["아무것도 잃지 않고 먼 과거만 더 담는다", "기억의 총량이 그만큼 늘어난다", "지금 입력에 더 빨리 반응하게 된다", "최근 입력을 되살리는 정도가 줄어든다"], "a": 3, "why": "잡음 없는 선형 노드 하나가 지금과 모든 과거를 되살리는 정도를 더하면 d와 관계없이(0 ≤ d < 1이면) 1입니다. d는 그 예산을 과거에 나눠 주는 방식일 뿐이라, 먼 과거에 더 나눠 주면 최근 몫이 줄어듭니다. 최근과 먼 과거를 다 원하면 서로 다른 노드가 여럿 필요합니다(5구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 기억이 필요한 계산", "items": [{"id": "d09-q01", "type": "mc", "q": "출력이 지금 입력 하나로만 정해지는 장치 $y = g(u(t))$로 '한 단계 전에 1이 왔나?'를 맞히려 한다. 이력 '1, 0'과 '0, 0'에 대해 맞는 것은?", "options": ["$g$를 알맞은 곡선으로 고르면 둘을 가를 수 있다", "$g$가 비선형(굽은 곡선)이면 둘을 가를 수 있다", "입력 크기를 키우면 둘을 가를 수 있다", "둘 다 $g(0)$을 내므로 어떤 $g$로도 못 가른다"], "a": 3, "why": "두 경우 모두 지금 입력이 0이라 같은 출력 $g(0)$을 내고, 정답은 '예'와 '아니오'로 다르니 둘 중 하나는 틀린다. 비선형 $g$도 마찬가지다 — 비선형성은 기억을 대신하지 못한다. 과거가 필요한 과제에는 저장(지연 탭)이든 흔적(상태)이든 기억이 있어야 한다.", "ref": "#s-memoryless-example", "refLabel": "'1, 0'과 '0, 0' 작은 예(그림 0)"}, {"id": "d09-q02", "type": "ox", "q": "과거 입력에 대한 기억은 상태에 흔적을 남기는 방법(reservoir, 물리 소자)으로만 얻을 수 있다.", "a": false, "why": "지난 입력을 메모리에 그대로 저장해 함께 보는 방법(지연 탭)도 있다. 정확하지만 저장·이동 비용이 든다. Liang은 MC가 크면 보조 메모리를 줄일 수 있고(p.200), 병렬 소자의 MC가 겹치면 버퍼에 저장하는 외부 메모리 비용이 든다고 쓴다(p.196). 두 방법은 서로의 대안이다.", "ref": "#s-memory-two-ways", "refLabel": "기억을 얻는 두 방법"}]}, "2-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 흐려지는 흔적", "items": [{"id": "d09-q03", "type": "short", "q": "[풀이 예시 확인] $x(t+1) = 0.5\\,x(t) + u(t)$, $u(0) = 1$, 그 뒤 입력 0. $x(1) = 1$일 때 $x(4)$는?", "a": ["0.125", "1/8", "0.13"], "why": "$x(2) = 0.5$, $x(3) = 0.25$, $x(4) = 0.125$. 매 단계 절반이 된다. 0.0625가 나왔다면 한 단계를 더 간 것 — $x(1)$에서 $x(4)$까지는 세 번 곱한다($0.5^3$).", "ref": "#s-fading-calc", "refLabel": "노드 하나 손 계산(그림 1의 파랑)"}, {"id": "d09-q04", "type": "short", "q": "[일부 채우기] $d = 0.9$, $x(1) = 1$. $x(4) = 0.9^{▢} = ?$ 빈칸(지수)과 답을 '빈칸,답' 꼴로 (예: 2,0.81)", "a": ["3,0.729", "3, 0.729", "3,0.73", "3, 0.73"], "why": "$x(1)$에서 세 단계 → $0.9^3 = 0.729$. 지수 4를 넣었다면 $x(0)$부터 센 것인데, 입력 1이 처음 들어간 상태가 $x(1) = 1$이다(그림 1의 초록 곡선).", "ref": "#s-fading-calc", "refLabel": "노드 하나 손 계산(그림 1의 초록)"}, {"id": "d09-q05", "type": "short", "q": "[혼자 풀기] $d = 0.8$인 노드에 $u(0) = 1$을 한 번 넣었다($x(0) = 0$). $x(4)$는?", "a": ["0.512", "0.51"], "why": "$x(1) = 1$, $x(2) = 0.8$, $x(3) = 0.64$, $x(4) = 0.8^3 = 0.512$. 0.4096이 나왔다면 지수를 하나 더 센 것. $d = 0.8$은 그림 1의 0.5와 0.9 사이 속도로 잊는다.", "ref": "#s-fading-calc", "refLabel": "노드 하나 손 계산: 몫이 dᵏ"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d09-q30", "type": "mc", "q": "남는 비율이 $d = 0.9$인 노드의 지금 상태가 10이다. 입력 없이 한 단계, 두 단계가 지나면 상태는?", "options": ["9, 8.1 — 매번 지금 값의 10%만큼 준다", "9, 8 — 매번 처음 값의 10%인 1씩 준다", "9.1, 8.2 — 매번 0.9씩 뺀다", "1, 0.1 — 매번 90%가 줄어든다"], "a": 0, "why": "$d$는 한 단계 뒤 '남는' 몫이다. $10 \\times 0.9 = 9$, $9 \\times 0.9 = 8.1$로, 줄어드는 양이 1, 0.9처럼 지금 값에 비례해 작아진다. 처음 값 기준으로 일정하게 빼거나(9, 8), 0.9를 빼거나(9.1, 8.2), 90%를 줄이는(1, 0.1) 것은 '남는 비율'을 다르게 읽은 것이다(Day 5–6 LIF의 0.9와 같은 읽기).", "ref": "#s-d-meaning", "refLabel": "d는 '남는' 비율(0.9 = 90% 남음)"}, {"id": "d09-q06", "type": "mc", "q": "τ ≈ 38 ms인 소자는 4 ms 간격 입력에서 $d = 0.9$이다. 같은 소자에 10 Hz(100 ms 간격)로 넣으면 $d = e^{-100/38} \\approx 0.07$이 된다. 이것이 뜻하는 것은?", "options": ["소자의 τ가 38 ms보다 짧아졌다는 뜻이다", "간격이 길수록 기억이 길어진다는 뜻이다", "τ는 그대로이고 흔적이 7%만 남는다", "소자가 바뀌었으니 식을 새로 맞춰야 한다"], "a": 2, "why": "τ는 소자가 정하는 값이라 그대로(38 ms)이고, $d$만 입력 간격에 따라 바뀐다. 다음 입력 때 흔적이 7%만 남아 기억이 거의 없는 장치처럼 된다. 그래서 '이 소자는 기억이 길다'는 말은 입력 간격과 함께 말해야 뜻이 있다(Stepney의 시간척도 정합, p.673).", "ref": "#s-d-time", "refLabel": "d = e^(−Δt/τ): 같은 소자, 다른 입력 간격"}, {"id": "d09-q27", "type": "short", "q": "같은 소자(τ ≈ 38 ms, 4 ms 간격에서 $d = 0.90$)에 8 ms마다 입력을 넣으면 $d$는? (소수 둘째 자리)", "a": ["0.81", ".81", "0.810", "약 0.81"], "why": "$e^{-8/38} = 0.81$. 8 ms는 4 ms를 두 번 지나는 것이라 $0.9 \\times 0.9 = 0.81$과 같다. 0.8(0.9에서 0.1을 뺌)이나 0.45(0.9의 절반)가 나왔다면 남는 비율을 거듭 곱하지 않고 빼거나 나눈 것이다.", "ref": "#s-d-time", "refLabel": "d = e^(−Δt/τ): 4 ms, 8 ms, 100 ms 예"}, {"id": "d09-q07", "type": "ox", "q": "펄스 응답을 지수함수로 맞춘 시간상수 $\\tau$가 길면 곧 retention이 길다는 뜻이고, 따라서 reservoir로 더 좋다.", "a": false, "why": "$\\tau$는 모형 매개변수, retention은 정의·허용오차·측정 기간을 정해 잰 지표로 다른 양이다. 그리고 reservoir에 필요한 것은 과제 시간척도에 맞는 흐려짐이다. 너무 오래가는 기억($d$ = 1.1, 그림 1)은 해롭다(Day 22–23).", "ref": "#s-tau-retention", "refLabel": "흔한 오해: τ와 retention"}]}, "3-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 두 출발점의 차이", "items": [{"id": "d09-q08", "type": "short", "q": "[풀이 예시 확인] 선형 노드 $x(t+1) = 0.5\\,x(t) + u(t)$ 두 벌의 출발점 차이가 1.6이다. 같은 입력을 넣으면 3단계 뒤 차이는?", "a": ["0.2", "0.20"], "why": "같은 입력이 두 벌에 똑같이 더해지므로 차이는 입력과 무관하게 매 단계 $d$배: 1.6 → 0.8 → 0.4 → 0.2. 입력 값을 차이에 더했다면 두 벌이 같은 입력을 받는다는 점을 놓친 것(기초 계단: echo state property의 표).", "ref": "#s-esp-linear", "refLabel": "선형 노드 두 벌의 차이 표"}, {"id": "d09-q09", "type": "short", "q": "[일부 채우기] 같은 상황에서 $d = 0.9$. 2단계 뒤 차이 $= 1.6 \\times ▢ = ?$ 빈칸과 답을 '빈칸,답' 꼴로 (예: 0.25,0.4)", "a": ["0.81,1.296", "0.81, 1.296", "0.81,1.3", "0.81, 1.3"], "why": "$0.9^2 = 0.81$, $1.6 \\times 0.81 = 1.296$. 0.9를 넣었다면 한 단계만 간 것. $d = 0.9$는 출발점을 천천히 잊는다 — 그래서 washout을 더 길게 잡아야 한다.", "ref": "#s-esp-linear", "refLabel": "차이(t+1) = d × 차이(t)"}, {"id": "d09-q10", "type": "short", "q": "[혼자 풀기] 선형 노드 $d = 0.7$, 출발점 차이 2.0. 2단계 뒤 차이는?", "a": ["0.98"], "why": "$2.0 \\times 0.7^2 = 2.0 \\times 0.49 = 0.98$. $d < 1$이면 차이가 계속 줄어 결국 0이 된다(ESP). $d$가 1.1이었다면 $2.0 \\times 1.21 = 2.42$로 벌어진다.", "ref": "#s-esp-linear", "refLabel": "차이(t+1) = d × 차이(t)"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d09-q29", "type": "ox", "q": "$\\tanh$ 노드 $x(t+1) = \\tanh(1.1\\,x(t) + u(t))$ 두 벌을 +0.8과 −0.8에서 출발시키고 ±0.1의 작은 같은 입력을 넣으면, 오래 기다려도 두 벌이 하나로 모이지 않을 수 있다.", "a": true, "why": "$\\tanh(1.1 \\times 0.50) = 0.50$이라 +0.50과 −0.50이 각각 머무는 값이 된다. 두 벌이 서로 다른 머무는 값에 자리 잡고, 작은 입력으로는 넘어가지 못해 차이가 약 0.96으로 남는다(그림 3 왼쪽 아래). 입력이 ±1.0으로 크면 $\\tanh$의 평평한 끝에서 배율이 작아져 다시 모인다.", "ref": "#s-esp-tanh", "refLabel": "그림 3 따라 읽기: d = 1.1의 두 머무는 값"}, {"id": "d09-q11", "type": "mc", "q": "시뮬레이션·실험에서 처음 몇 단계(washout)를 학습에 쓰지 않고 버리는 이유와 그 한계로 맞는 것은?", "options": ["처음 상태의 흔적을 빼려고. ESP가 없으면 소용없다", "계산 시간을 줄이려고. 버리는 양은 짧을수록 좋다", "측정 잡음을 없애려고. 길게 버릴수록 정확하다", "입력이 아직 안 들어온 구간이라서. 한계는 없다"], "a": 0, "why": "그림 3의 $d$ = 1.1·작은 입력은 39단계 뒤에도 두 벌의 차이가 0.96으로 남았다. 처음 상태를 잊는 성질(ESP)이 있어야 버린 뒤의 상태가 입력만으로 정해진다. washout은 ESP를 전제로 한 절차다. `tools/esn.py`는 처음 100단계를 버린다.", "ref": "#s-washout-esp", "refLabel": "washout과 반복성"}]}, "4-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 고윳값과 leak", "items": [{"id": "d09-q13", "type": "short", "q": "[풀이 예시 확인] $W = [[0.6, 0.3],[0.3, 0.6]]$에 (1, 1)을 곱하면 (0.9, 0.9)가 된다. 이 방향의 고윳값은?", "a": ["0.9"], "why": "(0.9, 0.9) = 0.9 × (1, 1). 방향은 그대로이고 길이만 0.9배 — 그 배율이 고윳값이다(그림 4의 초록 점선).", "ref": "#s-eigen-picture", "refLabel": "그림 4 따라 읽기: (1, 1)에 W를 곱하면"}, {"id": "d09-q14", "type": "short", "q": "[일부 채우기] 같은 $W$에 (1, −1)을 곱하면 (0.6 − 0.3, 0.3 − 0.6) = (▢, −0.3)이다. 빈칸과 이 방향의 고윳값을 '빈칸,고윳값' 꼴로", "a": ["0.3,0.3", "0.3, 0.3"], "why": "(0.3, −0.3) = 0.3 × (1, −1)이므로 고윳값 0.3. 두 고윳값 0.9와 0.3 중 큰 크기가 spectral radius 0.9다. −0.3을 고윳값으로 답했다면 결과 벡터의 둘째 성분과 배율을 혼동한 것.", "ref": "#s-eigen-steps", "refLabel": "손으로 찾기: (0.6 − λ)² = 0.09"}, {"id": "d09-q15", "type": "short", "q": "[혼자 풀기] leak $a = 0.5$, 어떤 방향의 고윳값 λ = 0.8. 선형 영역에서 그 방향의 배율 $(1-a) + a\\lambda$는?", "a": ["0.9", "0.90"], "why": "$0.5 + 0.5 \\times 0.8 = 0.5 + 0.4 = 0.9$. leak을 넣으면 배율이 1 쪽으로 다가가 더 천천히 잊는다. 0.4가 나왔다면 $(1-a)$ 항(지금 상태를 그대로 남기는 몫)을 빠뜨린 것.", "ref": "#b-leak", "refLabel": "기초: leak 배율 (1 − a) + aλ"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d09-q16", "type": "mc", "q": "노드 200개 시뮬레이션에서 leak $a$를 1.0 → 0.1로 줄이자 배율은 1에 가까워졌는데 memory capacity는 17.9 → 6.2로 줄었다. 가장 그럴듯한 설명은?", "options": ["leak을 줄이면 처음 상태를 잊지 못하게 되기 때문", "상태가 지난 입력들의 평균처럼 뭉개지기 때문", "배율이 1에 가까워 상태가 터져 버리기 때문", "leak을 줄이면 쓸 수 있는 노드 수가 줄기 때문"], "a": 1, "why": "새 입력이 상태에 $a$배로만 들어가, $a$ = 0.1이면 상태가 입력의 평균(0.5) 쪽으로 천천히 오르며 하나하나의 입력은 0.01–0.09의 잔물결로만 남는다(4구간 표). 오래 남는 것은 평균이지 하나하나의 입력이 아니다. 배율 0.99는 1보다 작아 터지지도 않고 처음 상태도 결국 잊으며, 노드 수는 그대로다. 노드 하나에서도 기억은 합이 1인 예산이다(5구간, 그림 7). 이 설명은 Claude의 해석이다.", "ref": "#s-leak-mc", "refLabel": "느리게 잊는 것 ≠ 많이 기억하는 것"}, {"id": "d09-q12", "type": "ox", "q": "spectral radius가 1보다 큰 reservoir는 어떤 입력을 넣어도 echo state property를 가질 수 없다.", "a": false, "why": "Stepney는 Jaeger(2007)를 인용해, ρ > 1이면 그 자체로는 ESP가 없지만 입력이 충분히 크면 가질 수 있다고 쓴다(p.668). 노드 하나에서도 그림 3의 $d$ = 1.1이 입력 ±1.0에서는 다시 모였다. ρ < 1은 ESP의 필요조건이 아니고, ESP는 reservoir와 입력의 조합의 성질이다.", "ref": "#s-esp-condition", "refLabel": "ρ < 1은 ESP의 조건인가"}, {"id": "d09-q28", "type": "ox", "q": "$\\tanh$ reservoir의 spectral radius를 1보다 작게 맞추면, 어떤 입력을 넣어도 echo state property가 보장된다.", "a": false, "why": "Stepney는 ρ를 1로 맞추는 것이 '대부분의 경우' 충분할 뿐이라고 쓰고, 보장하는 충분조건은 가장 큰 특잇값 < 1이라고 한다(p.668). ρ < 1인 $\\tanh$ reservoir가 입력이 0일 때조차 처음 상태를 잊지 못하는 해석적 예도 보고되어 있다(Yildiz 등 2012). 그래서 쓸 입력 크기에서 두 벌의 거리를 직접 재어 확인한다(그림 5). 입력 없이 선형으로만 곱할 때는 ρ < 1이 그대로 조건이다.", "ref": "#s-esp-condition", "refLabel": "ρ < 1은 ESP의 조건인가"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 기억 예산", "items": [{"id": "d09-q17", "type": "mc", "q": "노드 하나 $x(t) = 0.9\\,x(t-1) + u(t)$는 지금 입력 $u(t)$조차 corr² 0.19만큼만 되살린다. 그 이유는?", "options": ["지난 입력들의 몫이 섞여 지금 입력을 가리기 때문", "남는 비율이 큰 노드는 입력에 늦게 반응하기 때문", "corr²는 원래 0.19보다 커질 수 없기 때문", "입력이 서로 독립인 난수라 예측할 수 없기 때문"], "a": 0, "why": "되살리는 정도 $= d^{2k}(1-d^2)$이고 $k = 0$이면 $1 - 0.81 = 0.19$. 지금 상태에는 지금 입력과 함께 지난 입력의 몫($0.9, 0.81, \\dots$)이 섞여 있어 지금 입력이 흐려진다. $d$ = 0.1이면 같은 값이 0.99이므로 corr²에 0.19라는 상한은 없다. 합은 늘 1이다(그림 7).", "ref": "#s-budget", "refLabel": "노드 하나의 기억 예산(그림 7)"}, {"id": "d09-q18", "type": "ox", "q": "소자의 전류가 펄스 뒤에 느리게 감소할수록 그 소자는 시계열 계산에 항상 더 유리하다.", "a": false, "why": "느린 감쇠는 인과 사슬의 한 고리(②)일 뿐이고, 너무 느리면 옛 입력이 쌓여 최근 것이 묻힌다. 노드 하나의 기억 예산은 1이라 느린 감쇠는 기억을 '늘리는' 것이 아니라 과거 쪽으로 '옮긴다'. 시간척도가 과제에 맞아야 한다(Singh 2026, p.4).", "ref": "#s-chain", "refLabel": "그림 6의 다섯 고리(②의 끊기는 조건)"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d09-q31", "type": "mc", "q": "어떤 소자 논문이 '펄스 뒤 전류가 30 ms에 걸쳐 천천히 감소하므로 시간 정보를 처리할 수 있다'고 썼다. 이 문장을 '계산에 쓸모 있는 기억'의 증거로 쓰려면 무엇을 더 보여야 하나?", "options": ["감쇠 곡선을 지수함수로 정확히 맞춘 시간상수", "더 긴 감쇠 시간(예: 300 ms)을 가진 소자", "새 데이터에서 지난 입력을 상태로 되살린 결과", "펄스 세기를 바꿔도 같은 감쇠 모양이라는 것"], "a": 2, "why": "느린 감쇠는 그림 6의 고리 ② 하나다. 쓸모 있는 기억이 되려면 지난 입력의 정보가 지금 상태에서 접근 가능해야 하고(Singh 2026, p.8), 그것을 학습에 쓰지 않은 데이터에서 기준선과 비교해 보여야 한다(고리 ④–⑤). 감쇠를 더 정확히 맞추거나 더 길게 만드는 것은 여전히 고리 ②에 관한 정보다.", "ref": "#s-singh-summary", "refLabel": "Singh의 요약: 느린 감쇠만으로는 부족하다"}, {"id": "d09-q20", "type": "mc", "q": "어떤 소자 ESN 논문이 시계열 예측을 잘했다. 그 성능의 '기억'이 소자에서 왔는지 확인하려면 무엇을 봐야 하나?", "options": ["정확도가 기준선보다 몇 % 높은지 본다", "펄스 응답의 감쇠 시간상수가 긴지 본다", "readout을 더 큰 신경망으로 바꿔 본다", "소프트웨어 leak 항을 빼고 다시 본다"], "a": 3, "why": "Zhong 2026은 시계열 예측에서 forgetting factor α가 명시적 동역학을 대신했고(p.4), 이 의존이 온라인 반복 계산을 요구한다는 한계를 적었다(p.7). 기억이 소프트웨어 항에서 오면 소자의 기여가 아니다. 정확도나 감쇠 시간상수만으로는 기억의 출처를 가르지 못하고, readout을 키우면 소자 밖에서 계산이 더해진다(Day 13–14).", "ref": "#s-zhong-forget", "refLabel": "Zhong 2026의 forgetting factor"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d09-q21", "type": "short", "q": "소자의 시간상수 $\\tau = 10$ ms, 입력 간격 $\\Delta t = 10$ ms. 한 단계 동안 남는 비율 $d = e^{-\\Delta t/\\tau}$는? ($e^{-1} = 0.368$, 소수 둘째 자리까지)", "a": ["0.37", "0.368", "약 0.37"], "why": "$\\Delta t/\\tau = 1$이므로 $d = e^{-1} = 0.37$. 다음 입력 때 흔적이 37% 남는다 — 그림 7의 0.1과 0.5 사이 모양이다. 입력 간격을 $\\tau$와 같게 두면 최근 한두 단계를 주로 기억한다.", "ref": "#s-d-time", "refLabel": "d = e^(−Δt/τ)"}, {"id": "d09-q22", "type": "mc", "q": "spectral radius에 대한 설명으로 맞는 것은?", "options": ["행렬의 모든 원소를 더한 값", "고윳값의 크기 중 가장 큰 값", "행렬의 대각선 원소 중 가장 큰 값", "입력이 상태에 들어가는 세기 $W_{in}$"], "a": 1, "why": "고윳값은 곱해도 방향이 안 바뀌는 방향의 배율이고, 그 크기 중 가장 큰 값이 ρ다. 그림 4에서 대각선이 0.6인 $W$의 배율은 0.6이 아니라 0.9와 0.3이었고, 0.3배 방향이 먼저 사라져 0.9배 방향만 남았다. 대각선이 바로 고윳값인 것은 대각선 밖이 0일 때뿐이다.", "ref": "#b-spectral-radius", "refLabel": "기초: 고윳값과 spectral radius"}, {"id": "d09-q23", "type": "mc", "q": "같은 펄스 열을 넣었는데, 직전 실험 직후에 잰 전류 궤적과 하루 쉰 뒤 잰 궤적이 끝까지 다르다. 이것이 가장 직접적으로 문제 삼는 성질은?", "options": ["처음 상태를 잊는 성질과 반복성", "입력에 대한 응답의 비선형성", "spectral radius가 너무 작은 것", "샘플링 주기가 너무 긴 것"], "a": 0, "why": "상태가 처음 상태(직전 실험의 흔적)에 따라 끝까지 다르면 echo state property가 없고, 학습한 readout이 다른 날 틀린다. Singh은 반복성과 드리프트를 먼저 확인하라고 하고, 드리프트가 기억처럼 보일 수 있다고 경고한다(p.5). spectral radius가 작으면 오히려 처음 상태를 더 빨리 잊는다.", "ref": "#s-washout-esp", "refLabel": "washout과 반복성"}, {"id": "d09-q24", "type": "mc", "q": "'천천히 감소하는 전류 → 계산에 도움'의 인과 사슬에서, 아래 중 다른 고리가 다 성립해도 이것이 빠지면 '계산에 도움이 됐다'고 말할 수 없는 것은?", "options": ["펄스 뒤 전류가 지수함수로 줄어든다", "소자가 전자 대신 이온으로 동작한다", "감쇠 시간상수가 1 s보다 길다", "새 데이터에서 저장 기준선보다 낫다"], "a": 3, "why": "⑤가 없으면 readout이 외운 것인지, 저장 기반 기준선으로도 되는 것인지 모른다(Day 10, Day 20–21). 지수 감쇠나 긴 시간상수는 ②의 모양일 뿐이고, 이온으로 동작한다는 것은 고리와 무관한 재료 정보다.", "ref": "#s-chain", "refLabel": "그림 6의 고리 ⑤"}, {"id": "d09-q26", "type": "ox", "q": "노드 하나의 기억 예산(지금 입력을 포함해 되살리는 정도를 모든 지연에 대해 더한 값)은 잡음 없는 선형 모형에서, 남는 비율이 $0 \\le d < 1$이기만 하면 $d$에 관계없이 1이다.", "a": true, "why": "$\\sum_k d^{2k}(1-d^2) = (1-d^2)/(1-d^2) = 1$. $d$ = 0.1, 0.5, 0.9 모두 1.000(그림 7). $d \\ge 1$이면 상태가 줄지 않아 이 계산 자체가 성립하지 않는다(2구간). $d$는 예산의 총량이 아니라 나눠 주는 방식을 정한다. 노드가 여럿이면 예산이 노드 수만큼 늘 수 있다(Day 18–19).", "ref": "#s-budget", "refLabel": "노드 하나의 기억 예산(그림 7)"}]}}}</script>
 </section>
 <section id="done" class="level2">
-<h2 class="anchored" data-anchor-id="done">⑥ 학습 완료</h2>
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
 <div class="done-box" data-day="d09">
-  <div class="done-text">
-    <b>오늘 학습 완료</b>
-    <span class="done-desc">기본 경로(학습자료 → 짧은 백지 회상 → 짧은 내 답)를 마쳤으면 누르세요. 읽음 체크·학습 완료·이해 점검(퀴즈 첫 시도)은 따로 기록되고 아래에 나란히 보입니다. 완료한 날짜를 기준으로 커버 페이지가 복습(1·3·7·14·30일 뒤)을 알려 줍니다. 완료한 뒤에도 답은 계속 고칠 수 있습니다.</span>
-  </div>
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
   <div class="btn-row local-only">
-    <button type="button" class="sbtn primary" data-action="done">오늘 학습 완료</button>
-    <button type="button" class="sbtn ghost" data-action="undone">완료 취소</button>
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
   </div>
+  <div class="done-msg" role="alert"></div>
   <div class="done-static static-only"></div>
 </div>
-</section>
-<section id="feedback" class="level2">
-<h2 class="anchored" data-anchor-id="feedback">⑦ 피드백과 꼬리질문</h2>
-<div class="pending-box">
-<p>내 답을 저장한 뒤 Claude에게 <strong>"D9 검토해줘"</strong>라고 말하세요. 맞게 이해한 점, 핵심 오류와 근거, 고쳐야 할 인과관계, 다시 답할 질문을 이 자리에 남깁니다.</p>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d10a.html">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리 →</a></p>
 </div>
+</section>
+<section id="writing" class="level2">
+<h2 class="anchored" data-anchor-id="writing">선택 활동: 글로 정리하기</h2>
+<details class="fold writing-fold"><summary>선택 활동 펼치기 · 백지 회상, 가르치듯 내 답, 사전 테스트 다시 풀기 (학습 완료와 무관)</summary>
+<p><strong>가르치듯 내 답.</strong> 후배에게 설명한다고 생각하고 짧게(3–5문장 또는 작은 도식 하나) 답합니다.</p>
+<div class="editable" data-file="d09-answer" data-title="내 답" data-template="answer"></div>
+<p><strong>사전 테스트 다시 풀기.</strong> 같은 문제를 이유와 함께 다시 풉니다(정답을 이미 본 문제라 이해 점검 점수로 쓰지 않습니다).</p>
+<div class="quiz" data-day="d09" data-set="pre" data-mode="post"></div>
+</details>
 <section class="comments" id="comments"></section>
 
 
@@ -1890,13 +1964,13 @@ washout
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../days/d08.html" class="pagination-link" aria-label="D8 · readout만 학습하는 이유">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">D8 · readout만 학습하는 이유</span>
+      <a href="../days/d08b.html" class="pagination-link" aria-label="Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../days/d10.html" class="pagination-link" aria-label="D10 · nonlinearity와 separability">
-        <span class="nav-page-text">D10 · nonlinearity와 separability</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../days/d10a.html" class="pagination-link" aria-label="Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리">
+        <span class="nav-page-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1907,7 +1981,7 @@ washout
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Why Ions Compute · 30일 탐구 노트 · 2026</p>
+<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

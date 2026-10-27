@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 12. ESN·LSM과 물리 reservoir computing – Why Ions Compute</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d08a.html" rel="next">
+<link href="../days/d07a.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">커버</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">전체 학습 지도</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">장부</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../ledger/bottleneck.html">
+ <span class="dropdown-text">병목 장부</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/unknowns.html">
+ <span class="dropdown-text">아직 모르는 것</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/glossary.html">
+ <span class="dropdown-text">용어집</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/kill-criteria.html">
+ <span class="dropdown-text">접는 기준</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/references.html">
+ <span class="dropdown-text">참고문헌</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/questions.html">
+ <span class="dropdown-text">질문 모음</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../rules.html"> 
+<span class="menu-text">공부 규칙</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07a.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d07b.html">Day 12 · ESN·LSM과 물리 reservoir computing</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">전체 학습 지도</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">장부</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">병목 장부</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">아직 모르는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어집</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">접는 기준</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">질문 모음</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rules.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">공부 규칙</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">지난 학습 복습</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing">선택 활동: 글로 정리하기</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07a.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d07b.html">Day 12 · ESN·LSM과 물리 reservoir computing</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 12. ESN·LSM과 물리 reservoir computing</h1>
+<p class="subtitle lead">Phase 2 · RC는 왜, 어떻게 작동하는가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> — 내부를 고정하고 출력층만 학습하면 무엇을 얻고, 그 내부를 재료로 바꾸면 무엇이 달라지나?</p>
+<p><strong>배울 핵심</strong> — 내부는 고정하고 readout만 학습(ESN·LSM·RC), washout, 재료가 reservoir가 될 조건(읽을 상태·비선형·소산·시간척도)과 '계산'의 조건</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 15–19 기억·비선형·용량, Day 22–23 시간척도, Day 28–29 기준선, Day 30–31 시스템 비용. 내 이온 소자가 reservoir 재료가 될 수 있는지 가설을 세우고 시험할 때 쓰임</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d07b">
+  <li data-step="review"><a href="#review"><b>1</b>지난 학습 복습</a></li>
+  <li data-step="lesson"><a href="#lesson"><b>2</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>3</b>학습 완료</a></li>
+</ol>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
+<div class="flow-line">
+<p>지난 학습 단위(Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="review-b"></div>
+</section>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<section id="ch-esn-lsm" class="level3">
+<h3 class="anchored" data-anchor-id="ch-esn-lsm">3. 우회로: 내부는 고정하고 출력층만 학습한다 — ESN과 LSM</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 1구간의 같은 RNN을 reservoir로 써서 readout만 맞추는 과정(그림 8)을 따라가며 "readout만 학습하면 왜 시간을 거슬러 갈 필요가 없는가"를 말하고, ESN·LSM이 무엇을 고정하고 무엇을 학습하는지와 그 선택으로 얻은 것·잃은 것을 말할 수 있다.</p>
+</div>
+<section id="s-esn-idea" class="level4">
+<h4 class="anchored" data-anchor-id="s-esn-idea">3-1. 아이디어: 내부는 그대로 두고 마지막 층만 학습한다</h4>
+<p><strong>직관.</strong> 2구간의 세 가지 벽(시간을 거슬러 가는 계산 비용, 같은 인자의 거듭 곱, 물리 소자 내부에 손대기)은 모두 "내부 <span class="math inline">\(W\)</span>를 학습시킨다"에서 왔습니다. 그러면 내부를 학습시키지 말자는 것이 오늘의 우회로입니다. 이 생각에 필요한 이름 세 개를 먼저 정합니다. 모두 1구간의 같은 예로 설명합니다.</p>
+<ul>
+<li><strong>reservoir</strong>(저수지): 가중치를 (보통 난수로) 정한 뒤 <strong>고정해 두는</strong> 순환 네트워크. 1구간의 두 상태 RNN(<span class="math inline">\(W\)</span>의 대각선 0.5와 0.9, <span class="math inline">\(W_{in} = (1, 1)\)</span>)은 난수로 고른 것은 아니지만, 가중치를 고치지 않고 그대로 두면 reservoir 역할을 합니다. 입력을 받아 상태 <span class="math inline">\(h(t)\)</span>를 만들 뿐 학습하지 않습니다.</li>
+<li><strong>echo</strong>(메아리): 입력이 지나간 뒤에도 그 흔적이 상태에 남아 있는 것. 1구간에서 입력 1 뒤에 0만 와도 상태가 0.762 → 0.363 → 0.180으로 남던 것이 그 예입니다. 입력의 메아리를 담은 상태를 '에코 상태'(echo state)라 부르고, 그래서 이 방식의 이름이 echo state network(ESN)입니다. 메아리가 언제 제대로 생기는지(echo state property)는 Day 15에서 봅니다.</li>
+<li><strong>readout</strong>(출력층): 상태들에 가중치를 곱해 더해(선형 조합, 0구간의 <a href="../days/d07a.html#b-vector-matrix" class="recall">행렬–벡터 곱</a>과 같은 계산) 답을 만드는 마지막 층 <span class="math inline">\(W_{out}\)</span>. <a href="../days/d06.html#b-readout">Day 10 기초 3</a>에서 '상태에서 답을 꺼내는 규칙'으로 본 그것이고, ESN에서 <strong>학습하는 것은 이것 하나</strong>입니다.</li>
+</ul>
+<p><strong>그림 읽는 법.</strong> 그림 7은 같은 모양의 네트워크 두 개를 나란히 놓고 <strong>학습하는 화살표만 빨강</strong>으로 칠했습니다. 왼쪽(일반 RNN)은 입력·내부·출력 화살표가 모두 빨강이고, 오른쪽(ESN)은 출력으로 가는 화살표만 빨강입니다. 오른쪽에서 검정으로 남은 부분이 reservoir입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d07/fig3-rnn-vs-esn.svg" alt="왼쪽 일반 RNN은 입력·내부·출력 가중치가 모두 빨강(학습 대상)이고 반복적 BPTT가 필요하다. 오른쪽 ESN은 내부 가중치를 난수로 고정하고 출력 가중치 W_out만 빨강이며, 내부는 블랙박스라 물리 소자로 바꿀 수 있다" class="figure-img"><figcaption><b>그림 7.</b> 무엇을 학습하나. 왼쪽은 모든 가중치(빨강), 오른쪽은 $W_{out}$만. 오른쪽의 내부는 블랙박스이므로 재료·소자로 바꿔 끼울 수 있다는 것이 4구간의 주제다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><span id="s-readout-fit"></span><strong>작은 예: 1구간의 RNN을 reservoir로 써서 readout만 맞추기.</strong> 과제는 "두 단계 전에 입력 1이 들어왔는가(정답 1), 아닌가(정답 0)"로 정합니다. 1구간의 두 상태 RNN을 고정한 채 상태만 읽습니다. 0.5 칸 <span class="math inline">\(h_a\)</span>는 1구간의 1차원 예와 똑같이 빨리 잊고, 0.9 칸 <span class="math inline">\(h_b\)</span>(Day 5–6 LIF와 같은 유지 계수)는 천천히 잊습니다.</p>
+<div class="stepper">
+<div class="step">
+<p><span id="s-washout"></span><strong>단계 0 — 상태를 모으기 전에 앞부분 버리기(washout).</strong> 상태는 입력뿐 아니라 <strong>시작값</strong> <span class="math inline">\(h(0)\)</span>에도 영향을 받습니다. 1차원 예를 <span class="math inline">\(h(0) = 0\)</span>과 <span class="math inline">\(h(0) = 0.8\)</span>에서 같은 입력 1, 0, 0, 0으로 돌리면 두 상태의 차이는 0.124 → 0.053 → 0.025 → 0.013으로 한 단계에 대략 절반씩 줄어듭니다(여기서도 0.5가 곱해집니다). 시작값의 흔적이 남은 앞부분 상태로 readout을 맞추면 입력이 아니라 우연한 시작값을 배우게 되므로, 처음 몇 단계는 버리고 그 뒤 상태만 씁니다. 이것을 <strong>washout</strong>이라 합니다. 몇 단계를 버릴지는 이 차이가 충분히 작아질 때까지이고(Day 20–21 실습에서는 100단계), 시작값을 잊는 성질이 있어야 의미가 있습니다(Day 15). 아래 두 경우는 <span class="math inline">\(h(0) = 0\)</span>에서 시작한 짧은 예라 washout을 생략했습니다. <span class="prov">차이의 숫자는 Claude 계산</span></p>
+</div>
+<div class="step">
+<p><strong>단계 1 — 두 경우의 상태.</strong> 경우 A(정답 1): 두 단계 전에 1, 바로 전에 0. 1구간 두 상태 예의 단계 2 계산 그대로 상태는 <span class="math inline">\((h_a, h_b) = (0.363,\ 0.595)\)</span>. 경우 B(정답 0): 두 단계 전에 0, 바로 전에 0.38. 그러면 <span class="math inline">\(h_a = \tanh(0.38) = 0.363\)</span>, <span class="math inline">\(h_b = \tanh(0.38) = 0.363\)</span>. <span class="math inline">\(h_a\)</span>만 읽으면 둘 다 0.363이라 구분할 수 없습니다. '오래전의 큰 입력'과 '방금의 작은 입력'이 같은 흔적을 남긴 것입니다. 천천히 잊는 <span class="math inline">\(h_b\)</span>는 0.595와 0.363으로 다릅니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — readout의 기울기는 '지금 상태'만 쓴다.</strong> readout을 <span class="math inline">\(y = w_a h_a + w_b h_b\)</span>, 처음 값을 <span class="math inline">\(W_{out} = (-1, 1)\)</span>로 두면 경우 A의 출력은 <span class="math inline">\(-0.363 + 0.595 = 0.232\)</span>, 정답 1과의 오차는 <span class="math inline">\(-0.768\)</span>입니다. <span class="math inline">\(w_b\)</span>의 기울기는 0구간 공식 <span class="math inline">\(2 \times \text{오차} \times \text{입력}\)</span>에서 입력 자리에 <strong>지금 상태</strong> <span class="math inline">\(h_b\)</span>를 넣은 것뿐입니다. <span class="math inline">\(2 \times (-0.768) \times 0.595 = -0.914\)</span>, 같은 방법으로 <span class="math inline">\(w_a\)</span>의 기울기는 <span class="math inline">\(2 \times (-0.768) \times 0.363 = -0.558\)</span>. 그림 5(Day 11)에서처럼 <span class="math inline">\(h(3), h(2), h(1)\)</span>로 거슬러 가며 0.434, 0.484, …를 곱할 일이 <strong>없습니다</strong>. 상태를 만든 과거는 reservoir 안에서 이미 계산되어 지금 상태에 들어 있고, readout은 그 결과만 받기 때문입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 경사 하강 없이 한 번에.</strong> readout은 "상태에 가중치를 곱해 더하기"만으로 되어 있고 중간에 S자 함수가 없으므로, 손실이 가장 작은 가중치를 반복 없이 <strong>식을 풀어</strong> 구할 수 있습니다(0구간 예라면 <span class="math inline">\(2w = 5\)</span>를 풀어 <span class="math inline">\(w = 2.5\)</span>, 곧 그림 1(Day 11)의 포물선 바닥을 바로 찾는 것). 여기서는 두 경우가 정답을 정확히 맞히도록 두 식을 세웁니다. <span class="math inline">\(0.363\,w_a + 0.595\,w_b = 1\)</span>, <span class="math inline">\(0.363\,w_a + 0.363\,w_b = 0\)</span>. 둘째 식에서 <span class="math inline">\(w_a = -w_b\)</span>이고, 첫째 식에 넣으면 <span class="math inline">\((0.595 - 0.363)\,w_b = 1\)</span>, 곧 <span class="math inline">\(w_b \approx 4.31\)</span>, <span class="math inline">\(w_a \approx -4.31\)</span>. 확인: A는 <span class="math inline">\(4.31 \times 0.232 \approx 1.00\)</span>, B는 0. 데이터가 많아 모든 식을 정확히 맞출 수 없을 때, 오차 제곱의 합이 가장 작은 가중치를 공식 한 번으로 구하는 방법이 <strong>선형 회귀</strong>(linear regression)입니다. <a href="../days/d06.html#b-readout">Day 10 기초 3</a>의 '점들에 가장 잘 맞는 직선 긋기'(예: 상태 2, 4, 6에 정답 1, 2, 3이면 가중치 0.5)가 그 가장 작은 경우이고, Day 13–14에서 손으로 풉니다.</p>
+</div>
+<div class="step">
+<p><strong>정리.</strong> 같은 RNN이라도 <strong>무엇을 학습하느냐</strong>에 따라 계산이 다릅니다. 내부의 0.5를 학습하려면 0.5가 쓰인 모든 시간 단계를 거슬러 가며 그림 5(Day 11)의 배율을 곱해 모아야 하고(BPTT), 그 곱이 소실·폭주의 원인이었습니다. readout만 학습하면 기울기에 지금 상태와 지금 오차만 들어가므로 거슬러 갈 사슬이 없습니다. 대신 readout이 쓸 수 있는 것은 reservoir가 이미 만들어 둔 상태뿐이라, 필요한 흔적이 상태에 없으면(<span class="math inline">\(h_a\)</span> 하나로 A·B를 가리려 할 때처럼) 어떤 <span class="math inline">\(W_{out}\)</span>도 답을 내지 못합니다. 상태가 <span class="math inline">\(N\)</span>개이고 각각 다른 속도로 잊는다면 같은 선형 조합 <span class="math inline">\(W_{out}h\)</span>로 답할 수 있는 질문이 늘어납니다. 이 "여러 상태의 선형 조합"이 readout의 전부입니다. <span class="tag tag-interp">해석</span> (어떤 조건에서 충분한지는 Day 13–19에서 다룹니다.)</p>
+</div>
+</div>
+<figure class="fig figure"><img src="../assets/img/d07/fig10-readout-vs-chain.svg" alt="위: 1구간 예의 상태 h(1)–h(4)를 거꾸로 따라가며 배율 0.434, 0.484, 0.496을 곱해 모아야 하는 내부 가중치 학습. 아래: 고정된 reservoir의 지금 상태 (0.363, 0.595)에 W_out=(−1, 1)을 곱해 출력 0.232, 오차 −0.768, 기울기 −0.558과 −0.914를 바로 구하고, 두 경우를 맞추는 식 두 개를 풀면 W_out=(−4.31, 4.31)" class="figure-img"><figcaption><b>그림 8.</b> 같은 RNN에서 무엇을 학습하느냐에 따라 기울기 계산이 달라진다. 위(①): 내부의 0.5를 학습하려면 0.5가 쓰인 모든 단계를 거슬러 그림 5(Day 11)의 배율을 곱해 모아야 한다. 아래(②): readout $W_{out}$만 학습하면 기울기는 2 × 오차 × 지금 상태뿐이다. 경우 A·B의 상태는 1구간 두 상태 예의 값이며, 숫자는 소수 셋째 자리로 반올림한 상태로 코드가 계산했다. (Claude가 계산해 그림, 모식도)</figcaption></figure>
+<div class="stop-point">
+<p>여기까지: 그림 8을 짚으며 readout의 기울기가 '2 × 오차 × 지금 상태'뿐이라 시간을 거슬러 갈 필요가 없다는 것과, 두 경우를 가르는 <span class="math inline">\(W_{out} \approx (-4.31, 4.31)\)</span>을 식 두 개로 구하는 과정을 말할 수 있다. 다음: 무엇이 고정이고 무엇이 학습인지 표로 정리.</p>
+</div>
+<p><span id="s-fixed-vs-trained"></span><strong>무엇이 고정이고 무엇이 학습인가.</strong> 그림 7을 표로 적으면 아래와 같습니다. 세 번째 열은 4구간의 내용을 미리 적은 것입니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>부분</th>
+<th>일반 RNN</th>
+<th>ESN (소프트웨어 RC)</th>
+<th>물리 RC (PRC)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>입력 가중치 <span class="math inline">\(W_{in}\)</span></td>
+<td><strong>학습</strong> (BPTT)</td>
+<td>난수로 정해 <strong>고정</strong></td>
+<td>입력을 소자에 넣는 방식(전압 크기·마스크 등)으로 <strong>고정</strong></td>
+</tr>
+<tr class="even">
+<td>내부 가중치 <span class="math inline">\(W\)</span> (상태를 다음 단계로 넘기는 규칙)</td>
+<td><strong>학습</strong> (BPTT, 소실·폭주의 원인)</td>
+<td>난수로 정해 <strong>고정</strong></td>
+<td>재료·소자의 <strong>물리 동역학</strong>이 대신함. 만든 뒤에는 손대지 않음</td>
+</tr>
+<tr class="odd">
+<td>비선형 함수 <span class="math inline">\(f\)</span></td>
+<td>설계자가 고름 (<span class="math inline">\(\tanh\)</span> 등)</td>
+<td>설계자가 고름</td>
+<td>소자의 비선형 응답이 대신함</td>
+</tr>
+<tr class="even">
+<td>출력 가중치 <span class="math inline">\(W_{out}\)</span> (readout)</td>
+<td><strong>학습</strong> (BPTT)</td>
+<td><strong>학습</strong> (선형 회귀 한 번)</td>
+<td><strong>학습</strong> (선형 회귀 한 번, 보통 컴퓨터에서)</td>
+</tr>
+</tbody>
+</table>
+<p>이 표에서 읽을 것은 둘입니다. 첫째, RNN에서 ESN으로 가며 바뀐 것은 "내부 두 줄을 학습에서 고정으로" 옮긴 것뿐이고, 학습은 맨 아랫줄 하나로 줄었습니다. 둘째, 내부가 <strong>고정</strong>이라는 것은 <strong>학습이 내부의 값을 알 필요도, 바꿀 필요도 없다</strong>는 뜻입니다. 학습이 보는 것은 상태 <span class="math inline">\(h(t)\)</span>뿐입니다. 그러니 내부가 난수 행렬이든, 전도도가 변하는 이온 소자든, 호수의 물결이든 <strong>상태를 읽을 수만 있으면</strong> 학습 절차는 똑같습니다. 이것이 "내부를 고정한다"가 "재료를 reservoir로 쓸 수 있다"로 이어지는 이유이고, 4구간은 Stepney의 문장으로 같은 말을 합니다. <span class="tag tag-interp">해석</span></p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/cDxtFtoQVNc?start=396&amp;rel=0" title="영상: The Most Counterintuitive Way to Build a Brain" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 6:36–13:38, 약 7분 · 전체 14분, 영어·자동 자막).</b> Artem Kirsanov, "The Most Counterintuitive Way to Build a Brain" (2026). <b>볼 이유:</b> 설명란에 따르면 "연결을 하나하나 설계하는 대신 난수 뉴런 묶음을 그대로 두고 그것을 '듣는' 법만 배워, 어려운 학습 문제를 선형 회귀로 줄이는" reservoir computing을 다루는 영상이다. 6:36 'Reservoir Computing Paradox'(난수 네트워크가 왜 쓸모 있나), 9:28 'Why it works at all', 12:00 'Putting it together' 챕터가 위 표의 "내부는 고정, $W_{out}$만 학습"을 애니메이션으로 보여 준다. 1:04–5:36(RNN과 echo state property)은 1–2구간 복습이자 Day 15의 예고이고, 5:36–6:36은 광고다. <b>보고 답할 질문:</b> 영상에서 학습되는 숫자는 그림 7의 어느 화살표인가? 영상이 "왜 되나"에 대해 내놓는 답을 이 절의 '여러 상태의 선형 조합' 문장과 비교해 한 줄로 적어 보세요. <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터·설명(영상 내용은 미검증)</span></div></div>
+<div class="quiz" data-day="d07" data-set="3-check"></div>
+</section>
+<section id="년-2002년-esn과-lsm" class="level4">
+<h4 class="anchored" data-anchor-id="년-2002년-esn과-lsm">3-2. 2001년, 2002년: ESN과 LSM</h4>
+<p>Liang 리뷰는 RC의 기원을 두 문장으로 씁니다. <strong>2001년 Herbert Jaeger가 RNN의 효율적 구현으로 echo state network(ESN)를 발명</strong>했고, 복잡한 RNN 층의 '에코 상태'(입력의 메아리가 남아 있는 상태값들)에 선형 회귀로 학습한 선형 readout 층을 붙였다. <strong>2002년 Wolfgang Maass가 연속적이고 스파이킹 방식으로 동작하는 liquid-state machine(LSM)을 제안</strong>했다. <span class="src">Liang 2024, p.193</span> 두 원문은 폴더에 없어 내용은 <span class="tag tag-unverified">미확인</span>입니다. <span class="prov">서지는 Liang의 참고문헌 ref. 13, 15로 확인</span> 위 3-1의 이름으로 읽으면, ESN은 '고정한 난수 RNN(reservoir)의 에코 상태 + 선형 회귀로 한 번에 맞춘 readout'입니다.</p>
+<p>Stepney는 ESN의 핵심을 더 구체적으로 씁니다. ESN에서는 RNN의 <strong>입력 가중치와 내부 가중치를 난수로 고르고, 출력 가중치만을 반복 없는 한 번의 알고리즘으로 학습</strong>한다. 이 알고리즘이 RNN의 실용성을 크게 높였다. <span class="src">Stepney 2024, p.665</span> Jaeger의 핵심 통찰은 "readout 가중치를 한 번에 학습하는 것으로 충분하다"는 것이었다. <span class="src">Stepney 2024, p.669</span></p>
+</section>
+<section id="liquid라는-이름" class="level4">
+<h4 class="anchored" data-anchor-id="liquid라는-이름">3-3. 'liquid'라는 이름</h4>
+<p>Liang은 LSM의 liquid state를 호수에 돌을 계속 던지는 장면으로 설명합니다. 여러 물결이 서로 간섭해 복잡한 무늬(liquid state)를 만들고, <strong>지난 몇 초 동안의 돌 던지기에 관한 정보를 그 무늬에 선형 층을 적용해 꺼낼 수 있다</strong>. <span class="src">Liang 2024, p.193</span> 이 비유에서 챙길 것은 둘입니다. (1) 물은 학습하지 않는다. 물결 무늬는 물리 법칙이 만든다. (2) 무늬는 서서히 사라진다. 오래전 돌의 흔적은 작아진다. 이 둘이 Day 15의 fading memory입니다.</p>
+<figure class="fig photo figure"><img src="../assets/img/web/d07-lake-ripples.jpg" alt="얕은 호숫가 모래 바닥 위로 여러 개의 동심원 물결이 서로 겹쳐 퍼지며, 물결이 만든 밝은 빛 무늬가 겹치는 곳에서 복잡한 그물 모양이 된 사진" loading="lazy" class="figure-img"><figcaption><b>사진.</b> 미국 몬태나 시리 호수의 얕은 물에 생긴 물결. 오른쪽 아래와 왼쪽 위에서 퍼진 동심원 물결이 겹친다. <b>볼 것:</b> 동심원이 둘 이상 겹친 가운데 부분의 무늬는 '언제, 어디에 무엇이 떨어졌나'를 모두 반영한 하나의 상태다. 바깥으로 갈수록 물결이 약해지는 것이 '서서히 잊음'이다. Liang의 비유에서 readout은 이 무늬의 여러 점을 읽어 가중합하는 일이다. 사진은 비유를 보여 줄 뿐, 이 호수로 계산한 실험은 아니다. 출처: Scott Robinson, <a href="https://commons.wikimedia.org/wiki/File:Constructive_interference.jpg" target="_blank">Wikimedia Commons</a>, CC BY 2.0.</figcaption></figure>
+</section>
+<section id="년-하나의-이름" class="level4">
+<h4 class="anchored" data-anchor-id="년-하나의-이름">3-4. 2007년, 하나의 이름</h4>
+<p>ESN은 실수값 뉴런과 이산 시간(정해진 박자마다 한 걸음), LSM은 스파이크(신경세포가 내는 짧은 전압 펄스, 값 대신 '언제 펄스가 났나'로 정보를 보냄)와 연속 시간으로 출발이 달랐지만, "고정된 reservoir + 학습하는 선형 readout"이라는 원리가 같았습니다. Liang은 두 연구가 이후 그 유사한 원리를 바탕으로 <strong>reservoir computing(RC)으로 실험적으로 통합</strong>되었다고 쓰고, 그 구조를 입력층, 복잡한 시간 의존 동역학을 가진 <strong>고정</strong> reservoir 층에서의 고차원 사상(입력 몇 개를 훨씬 많은 상태값 <span class="math inline">\(N\)</span>개의 목록으로 옮겨 적는 것; '차원'은 목록에 든 숫자의 개수), 선형 readout 층으로 정리합니다. <span class="src">Liang 2024, p.193</span> (통합 논문은 Verstraeten 등 2007, Liang ref. 16. 폴더에 없어 내용은 <span class="tag tag-unverified">미확인</span>.)</p>
+<p><strong>읽는 법.</strong> 아래 원문 그림은 세 칸입니다. 보기 전에 위 표의 "고정 / 학습" 구분을 머리에 두고, 각 칸에서 <strong>빨간색(학습하는 부분)이 어디 하나뿐인지</strong>를 먼저 찾으세요. 그다음 b와 c에서 reservoir 칸의 내용물만 다르고 빨간 화살표의 위치는 같다는 것을 확인하면 됩니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/liang2024-fig1.png" alt="Liang 2024 Fig. 1: a 뇌의 신경 활동에서 선형 readout으로 행동을 읽어 내는 그림, b 소프트웨어 RC(입력층, 고정 reservoir, 학습하는 출력 가중치 W_out), c 물리 RC(물리 노드와 아키텍처로 된 reservoir층, 상태 신호, 물리 시냅스 출력층)" class="figure-img"><figcaption><b>원문 그림.</b> Liang et al., <a href="https://doi.org/10.1038/s41928-024-01133-z" target="_blank"><i>Nat. Electron.</i> 2024, 7, 193–206</a>, Fig. 1, p.194. 볼 것: <b>a</b>는 뇌의 여러 뉴런 활동(주황 파형)을 가중합(빨강 선)해 행동 변수를 읽어 내는 그림으로, Liang이 RC와 뇌를 잇는 근거다(p.193의 생쥐 전극 실험). <b>b</b>는 소프트웨어 RC: 입력 $W_{in}$(청록), reservoir의 $f(x)$와 한 걸음 지연 $Z^{-1}$, 그리고 학습하는 $W_{out}$(빨강)만 색이 다르다는 점을 보라. <b>c</b>는 물리 RC: reservoir 층이 '아키텍처 + 물리 노드'로 바뀌고 출력층이 '물리 시냅스'로 그려져 있다. b와 c에서 빨간 화살표(학습하는 것)의 위치가 같다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+</section>
+<section id="s-gain-loss" class="level4">
+<h4 class="anchored" data-anchor-id="s-gain-loss">3-5. 무엇을 얻고 무엇을 잃었나</h4>
+<p>얻은 것은 Liang이 한 문단에 모아 둡니다. 출력층 학습이 단순해서 기울기 폭주·소실을 피하고, <strong>적은 샘플로 빠른 학습</strong>이 가능하며, 출력층은 선형 회귀로 쉽게 학습된다. <span class="src">Liang 2024, p.194</span> 잃은 것도 같은 문단에 있습니다. 기울기로 학습하는 피드포워드 DNN과 비교하면 <strong>RC는 목표 함수를 근사하는 표현력이 더 낮고</strong>, 대신 학습·동역학계 근사·시간 신호 처리에서 장점을 가진다. <span class="src">Liang 2024, p.194</span> Outlook에서는 더 구체적으로, reservoir가 깊고 넓어져도 각 뉴런의 입출력 범위가 최적화되지 않기 때문에 <strong>대개 2,000 뉴런 미만의 비교적 작은 규모에서 성능이 포화</strong>하고, 그래서 기계학습 벤치마크에서 최첨단 결과를 얻기는 어렵다고 씁니다. <span class="src">Liang 2024, p.202</span> 이 "2,000"은 한 리뷰가 "대개"라는 말을 붙여 적은 일반적 관찰입니다. 그 문장에는 어떤 과제·구조·데이터에서 잰 값인지, 근거 문헌이 무엇인지가 붙어 있지 않고, 바로 다음 문장에서 Liang은 계층형 RC·deep RC 같은 새 RC 알고리즘이 물리 RC의 구조와 노드 설계에 새 아이디어를 줄 수 있다고 덧붙입니다. <span class="src">Liang 2024, p.202</span> 반대 방향의 실무 지침도 있습니다. Lukoševičius의 ESN 안내서는 과적합(<a href="../days/d06.html#b-heldout-baseline">Day 10 기초 4</a>: 훈련 데이터의 우연한 잡음까지 외워 새 데이터에서 나빠지는 것)을 막는 <strong>규제</strong>(regularization: 가중치가 지나치게 커지지 않게 손실에 벌점을 더하는 것. 4-3의 ridge regression이 그 예이고, 1구간의 '정규화(normalization)'와는 다른 말)를 적절히 하면 "대개 reservoir가 클수록 얻을 수 있는 성능이 좋다"고 하고, <span class="math inline">\(10^4\)</span> 규모의 reservoir도 드물지 않다고 씁니다. <span class="src">Lukoševičius 2012, 3.2.1절</span> 그러니 이 숫자는 RC 전체의 보편적 한계가 아니라, 과제·구조·규제·데이터 양에 따라 달라지는 경향으로 읽습니다. <span class="tag tag-interp">해석</span> ("표현력이 낮다"는 말은 0구간의 말로 하면 이렇습니다. 내부 가중치를 데이터에 맞춰 고치지 못하므로, 같은 데이터에서 도달할 수 있는 손실의 바닥이 더 높다.)</p>
+<p>Stepney는 다른 종류의 주의를 하나 더 적습니다. Jaeger 등(2007)의 그림에서 좋은 예측이 무한정 유지되지는 않았고, 수천 단계 뒤에 예측이 발산한 사례가 있다. 학습·시험 길이보다 훨씬 길어서 보통은 문제가 안 되지만, <strong>실제 배치(deployment)에서는 문제가 된다</strong>. <span class="src">Stepney 2024, p.669</span></p>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+reservoir (저수지)
+</dt>
+<dd>
+난수로 만들어 고정한 순환 네트워크(또는 그 역할을 하는 물리계). 입력을 받아 고차원 상태를 만든다. 학습하지 않는다.
+</dd>
+<dt>
+readout (출력층)
+</dt>
+<dd>
+reservoir 상태의 선형 조합으로 답을 만드는 마지막 층 <span class="math inline">\(W_{out}\)</span>. 유일하게 학습하는 부분. 선형 회귀 한 번으로 구한다 <span class="src">Stepney 2024, p.665, 669</span>. Day 13–14의 주제.
+</dd>
+<dt>
+선형 회귀 (linear regression)
+</dt>
+<dd>
+"가중치를 곱해 더하기"만으로 된 모델에서 손실이 가장 작은 가중치를 반복 없이 공식 한 번으로 구하는 방법. readout 학습에 쓴다.
+</dd>
+<dt>
+echo / washout
+</dt>
+<dd>
+입력이 지나간 뒤에도 그 흔적이 상태에 남는 것(ESN의 이름) / 시작값 <span class="math inline">\(h(0)\)</span>의 흔적이 남은 처음 몇 단계의 상태를 readout 학습·평가에서 버리는 것. 1차원 예에서 시작값 0과 0.8의 차이는 0.124 → 0.053 → 0.025로 줄었다. 정식 조건은 Day 15.
+</dd>
+<dt>
+ESN (echo state network)
+</dt>
+<dd>
+Jaeger 2001. 실수값 뉴런, 이산 시간. '에코'는 입력의 메아리가 상태에 남는다는 뜻으로, 그 조건(echo state property)은 Day 15에서.
+</dd>
+<dt>
+LSM (liquid state machine)
+</dt>
+<dd>
+Maass 2002. 스파이킹 뉴런, 연속 시간. 호수의 물결 무늬 비유 <span class="src">Liang 2024, p.193</span>.
+</dd>
+<dt>
+RC (reservoir computing)
+</dt>
+<dd>
+ESN과 LSM을 '고정 reservoir + 학습 readout'이라는 공통 원리로 묶은 이름(2007년 통합, Liang ref. 16).
+</dd>
+</dl>
+</div>
+<div class="think">
+<p>난수로 만든 네트워크가 쓸모 있다는 말은 처음 들으면 이상합니다. 내 말로 한 문장을 써 보세요. "reservoir는 _<strong>을 하지 않고 </strong>_만 한다. 쓸모는 ___에서 나온다." 세 번째 빈칸을 못 채웠다면 그것이 Day 13–14의 질문입니다.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="3-end"></div>
+<div class="keypoints">
+<ul>
+<li>2001 ESN(Jaeger): 난수 RNN + 선형 회귀로 한 번에 학습하는 readout. 2002 LSM(Maass): 스파이킹·연속 시간. 2007년 RC로 통합 <span class="src">Liang 2024, p.193</span>. 원문 셋은 폴더에 없음(서지·제목은 확인, 본문 내용은 Claude 미대조 <span class="tag tag-unverified">미확인</span>).</li>
+<li>1구간 예를 reservoir로 쓰면 readout의 기울기는 2 × 오차 × 지금 상태(−0.558, −0.914)뿐이라 시간을 거슬러 갈 사슬이 없고, 두 경우를 가르는 <span class="math inline">\(W_{out} \approx (-4.31, 4.31)\)</span>은 식 두 개로 한 번에 풀린다. 빨리 잊는 칸(<span class="math inline">\(h_a\)</span>) 하나로는 못 가르고 천천히 잊는 칸(<span class="math inline">\(h_b\)</span>)이 있어야 했다.</li>
+<li>고정: <span class="math inline">\(W_{in}\)</span>, <span class="math inline">\(W\)</span>. 학습: <span class="math inline">\(W_{out}\)</span> 하나. 내부가 고정이면 학습은 내부 값을 알 필요가 없고 상태만 읽는다 → 내부를 재료로 바꿀 수 있다 <span class="tag tag-interp">해석</span>.</li>
+<li>포기한 것: 내부 <span class="math inline">\(W\)</span>의 학습. 얻은 것: 소실·폭주 회피, 적은 샘플로 빠른 학습 <span class="src">Liang 2024, p.194</span>. 잃은 것: DNN보다 낮은 표현력 <span class="src">Liang 2024, p.194</span>. Liang 리뷰는 성능이 "대개 2,000 뉴런 미만"에서 포화한다고 관찰하지만 <span class="src">Liang 2024, p.202</span>, 과제 조건이 없는 일반적 관찰이고 규제를 적절히 하면 클수록 좋아진다는 지침도 있어 보편 한계로 읽지 않는다 <span class="src">Lukoševičius 2012, 3.2.1절</span>.</li>
+<li>호수 비유의 두 교훈: 물은 학습하지 않는다, 무늬는 서서히 사라진다 → Day 15.</li>
+<li>남은 질문: 고정된 블랙박스라면 컴퓨터 안의 난수 행렬이 아니어도 되지 않나?</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-prc" class="level3">
+<h3 class="anchored" data-anchor-id="ch-prc">4. 블랙박스를 재료로 바꾸다: 물리 reservoir computing</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "ESN 모형이 물리 구현에 맞는 이유"를 Stepney의 세 조건으로 말하고, 기판이 reservoir가 되기 위한 세 요구와 그것이 깨지는 조건(특히 시간척도)을 내 소자에 대입할 수 있다.</p>
+</div>
+<section id="s-prc-why" class="level4">
+<h4 class="anchored" data-anchor-id="s-prc-why">4-1. ESN 모형이 물리 구현에 맞는 이유</h4>
+<p>먼저 두 낱말입니다. <strong>열린 동역학계</strong>는 바깥에서 입력을 받으며 시간에 따라 상태가 변해 가는 계로, 1구간의 식 <span class="math inline">\(h(t+1) = f(\cdots)\)</span>가 그 가장 단순한 꼴입니다. <strong>소산적</strong>(dissipative)이란 저항·마찰·확산처럼 에너지가 빠져나가서, 외부 자극이 없으면 상태가 원래대로 가라앉는 성질입니다. 1구간 예에서 입력이 0이면 상태가 0 쪽으로 줄어드는 것이 그 모양입니다.</p>
+<p>Stepney는 RNN을 "열린 동역학계의 한 특수한 경우"로 보고, ESN 학습 알고리즘은 그것을 <strong>내부 구성을 바꾸지 않는 블랙박스</strong>로 다룬다고 씁니다. 그래서 소프트웨어 RNN 자리에 물리 동역학계를 넣어 물리 reservoir computing을 할 수 있다는 것이 발견되었다. <span class="src">Stepney 2024, p.665</span> 3.3.5절은 조건을 세 줄로 정리합니다. (i) ESN 성능은 뉴런 연결 구조에 둔감하다, (ii) 학습이 reservoir 내부 매개변수에 접근하지 않는다, (iii) 식 1(Stepney가 쓴 ESN 상태 갱신 식으로, 1구간의 <span class="math inline">\(h(t+1) = f(\cdots)\)</span>와 같은 꼴)은 특정 전달함수(입력의 합을 다음 상태로 바꾸는 함수, 곧 <span class="math inline">\(\tanh\)</span> 같은 <span class="math inline">\(f\)</span>)를 가진 이산 시간 열린 동역학계의 꼴이다. 따라서 재료는 뉴런과 닮은 내부 구조가 전혀 없어도 되고, <strong>그 동역학이 충분히 비선형이고 소산적(dissipative)이기만 하면</strong> ESN 모형의 요구를 만족한다. <span class="src">Stepney 2024, p.670</span> 조건 (ii)가 3구간 표의 "내부 고정"이고, 조건 (i)이 "난수여도 된다"의 뒷받침입니다.</p>
+<p>4.1절에서는 거의 모든 기판이 "reservoir가 되는" 이유를 다시 세 가지 요구로 씁니다. <strong>측정할 수 있는 고차원 상태</strong>, 입력에 자극받았을 때의 <strong>(ESN과) 유사한 동역학</strong>, 그리고 <strong>fading memory</strong>. 대부분의 기판은 비선형 동역학계이고, 소산적이므로 fading memory를 가진다. <span class="src">Stepney 2024, p.672</span></p>
+<p><strong>적용 조건.</strong> 바로 다음 절 제목이 "모든 것이 reservoir가 잘 되는 것은 아니다"입니다. 기판의 자연 시간척도와 입력의 시간척도 맞추기(기억이 사라지되 너무 빨리는 아니게), 환경 변화와 잡음에 대한 강건성, 응용에 충분한 계산 용량, 입력을 넣고 상태를 읽는 인터페이스. <span class="src">Stepney 2024, p.672</span> 특히 시간척도에 대해서는 이렇게 씁니다. 기판의 동역학이 입력보다 훨씬 빠르면 다음 입력이 오기 전에 이완해 이전 입력의 기억이 없고, 훨씬 느리면 다음 입력이 오기 전에 제대로 반응하지 못한다. <strong>두 시간척도가 비슷해야 한다.</strong> <span class="src">Stepney 2024, p.673</span> 이온 소자의 ms–s 이완이 자원이 될지 짐이 될지는 소자만 보고 정할 수 없고, <strong>입력 신호의 시간척도와 비교해야</strong> 정해집니다(Day 22–23, Day 37).</p>
+<p><span id="s-prc-hypothesis"></span><strong>지금은 가설입니다.</strong> 이 조건들을 내 이온 소자에 대입하면 "이완(서서히 원래대로 돌아감)이 있으니 fading memory가 있고, 응답이 S자로 포화하니 비선형이 있다"고 말하고 싶어집니다. 그러나 그것은 <strong>reservoir의 재료가 될 수 있다는 가설</strong>일 뿐입니다 <span class="tag tag-hypo">가설</span>. 그 기억이 과제에 필요한 시간척도와 맞는지, 같은 입력에 같은 상태가 반복되는지, 읽을 수 있는 서로 다른 상태가 몇 개인지, 학습한 readout이 새 데이터에서 단순한 기준선보다 나은지는 Day 15(fading memory·echo state property), Day 16–17(비선형), Day 18–19(MC·IPC), Day 22–29(시간척도·벤치마크·기준선)에서 하나씩 시험합니다.</p>
+<div class="stop-point">
+<p>여기까지: 재료가 reservoir가 되기 위한 Stepney의 요구(측정 가능한 고차원 상태, 유사한 동역학, fading memory)와 그것이 깨지는 조건(특히 시간척도)을 말하고, 내 소자에 대한 주장이 아직 가설인 이유를 말할 수 있다. 다음: 물리로 옮긴 역사와 2026년의 소자 ESN.</p>
+</div>
+</section>
+<section id="s-prc-history" class="level4">
+<h4 class="anchored" data-anchor-id="s-prc-history">4-2. 물리로 옮긴 역사</h4>
+<p>Liang은 물리 구현의 연표를 짧게 줍니다. 2003년 <strong>물리 영역의 LSM</strong>이 XOR과 음성 인식 문제를 푸는 데 쓰여 RC와 물리계 사이의 간극을 이었다. <span class="src">Liang 2024, p.194</span> (XOR은 "두 입력이 서로 다를 때만 1"을 내는 작은 문제로, 선형 조합 한 번으로는 풀 수 없어 비선형성의 시험 문제로 흔히 쓰입니다.) 2011년에는 <strong>delay-coupled RC</strong>가 시연되었는데, 매 시간 단계마다 마스크 행렬을 곱해 입력 신호를 진동시키는 시간다중화를 쓰고, 그 신호를 비선형 물리 노드 하나에 넣어 복잡한 동역학을 만든다. (풀어 쓰면: 노드를 여러 개 만드는 대신 소자 하나를 쓰고, 입력 하나를 정해진 무늬(마스크)로 잘게 쪼개 차례로 넣어서, 시간 순서상의 여러 순간을 마치 여러 노드처럼 쓰는 방법입니다. 이렇게 시간을 나눠 한 장치를 여럿처럼 쓰는 것을 시간다중화라 합니다.) <span class="src">Liang 2024, p.194</span> 즉 노드가 하나뿐이어도 시간을 쪼개 여러 개처럼 쓸 수 있다는 것입니다(Day 1–2 그림 Liang Fig. 2의 첫 아키텍처). 그 뒤 완전 디지털 RC → 물리 reservoir + 디지털 readout → 2020년 무렵부터 출력층까지 아날로그로 가는 흐름(디지털은 값을 0·1의 숫자로 바꿔 다루는 것, 아날로그는 연속적인 전압·전류 그대로 다루는 것, <a href="../days/d03a.html#b-digital-analog">Day 5 기초: 디지털과 아날로그</a>)은 Day 1–2에서 본 Liang Fig. 5의 이야기입니다. <span class="src">Liang 2024, p.201, Fig. 5</span></p>
+<figure class="fig figure"><img src="../assets/img/d07/fig4-timeline.svg" alt="RC 연표 모식도: 1990년대 BPTT 시대, 2001 ESN, 2002 LSM, 2003 물리 영역의 LSM, 2007 RC로 통합, 2011 delay-coupled RC, 2020 전후 출력층까지 아날로그, 2026 소자 ESN 논문. 녹색은 알고리즘, 파랑은 물리 구현" class="figure-img"><figcaption><b>그림 9.</b> 폴더의 두 논문이 정리한 것만 모은 연표. 가로 간격은 연도에 비례하지 않는다. 녹색은 알고리즘, 파랑은 물리 구현. 1990년대 항목은 배경이며 특정 논문을 가리키지 않는다 [미확인]. (Claude가 그림)</figcaption></figure>
+</section>
+<section id="s-zhong" class="level4">
+<h4 class="anchored" data-anchor-id="s-zhong">4-3. 2026년의 한 사례: 트랜지스터로 만든 ESN</h4>
+<p>폴더의 Zhong 2026(Nat. Commun.)은 ESN의 reservoir 층을 P3HT–ZnO 양극성 트랜지스터로 만든 논문입니다. 초록은 트랜지스터의 가변 저항 영역(전압에 따라 저항처럼 동작하는 구간)이 희소 행렬 연산(대부분이 0인 가중치 표로 곱해 더하기)을, 포화 영역(전류가 더 늘지 않고 평평해지는 구간)이 <strong>tanh 비슷한 비선형성</strong>(작은 입력엔 비례하다 큰 입력엔 ±1로 눌리는 S자 함수, <a href="../days/d07a.html#b-backprop" class="recall">0구간 그림 3(Day 11)</a>)을 제공하고, 소자의 동적 응답이 시간 속성을 더한다고 씁니다. <span class="src">Zhong 2026, p.1</span> Methods의 식은 3구간의 ESN 그대로입니다.</p>
+<p>식을 읽기 전에 한 가지. Zhong의 상태 갱신에는 1구간 식에 없던 <span class="math inline">\((1-\alpha)\)</span>가 있습니다. 지난 상태 <span class="math inline">\(U_{t-1}\)</span>의 <span class="math inline">\((1-\alpha)\)</span>만큼을 그대로 남기고, 새로 계산한 값(<span class="math inline">\(\tanh(\cdots)\)</span>)을 <span class="math inline">\(\alpha\)</span>만큼 섞는다는 뜻입니다. 그래서 상태가 한 박자에 다 바뀌지 않고 천천히 따라갑니다. 이런 노드를 leaky node라 하고 <span class="math inline">\(\alpha\)</span>를 forgetting rate(잊는 비율, 0~1)라 부릅니다. 예: <span class="math inline">\(\alpha = 0.1\)</span>이면 지난 상태의 90%가 남으므로, 지난 상태가 0.762이고 새 계산값이 0이면 다음 상태는 <span class="math inline">\(0.9 \times 0.762 + 0.1 \times 0 = 0.686\)</span>으로 한 번에 0으로 떨어지지 않습니다. 남는 비율 <span class="math inline">\(1 - \alpha = 0.9\)</span>는 Day 5–6 LIF의 0.9와 같은 역할을 하는 유지 계수입니다. Stepney는 이 항이 이산 시간의 박자 외에 시간척도를 하나 더 준다고 씁니다 <span class="src">Stepney 2024, p.669</span>. 'leaky'(누설)라는 이름은 Day 5–6 LIF의 L(leaky, 막을 통해 전하가 새어 나가 막전위가 줄어드는 것)에서 빌려 온 것으로 보이며 <span class="tag tag-interp">해석</span>, 여기서 실제로 일어나는 일은 지난 상태가 한 박자마다 <span class="math inline">\((1-\alpha)\)</span>배로 줄어드는 감쇠(decay)입니다. 정식 설명은 <a href="../days/d09.html#b-spectral-radius">Day 15 기초: leak rate</a>에 있습니다.</p>
+<p><span class="math display">\[
+U_t = U_{t-1}(1-\alpha) + \alpha\,\tanh\!\big(X_t W_{in} + U_{t-1} W_{res}\big), \qquad W_{out} = (U^{\mathsf T}U)^{-1} U^{\mathsf T} y_{label}
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: 소자로 만든 ESN도 1구간의 식과 3구간의 표를 그대로 따른다는 것을 확인하기 위해.</li>
+<li>기호: <span class="math inline">\(U_t\)</span>가 reservoir 상태(1구간의 <span class="math inline">\(h(t)\)</span>), <span class="math inline">\(X_t\)</span>가 입력, <span class="math inline">\(W_{in}\)</span>·<span class="math inline">\(W_{res}\)</span>가 고정된 입력·내부 가중치, <span class="math inline">\(\alpha\)</span>가 forgetting rate(잊는 비율, 0~1), <span class="math inline">\(y_{label}\)</span>이 정답. 곱하는 순서가 1구간(<span class="math inline">\(W\,h\)</span>)과 반대(<span class="math inline">\(X_t W_{in}\)</span>)인 것은 상태를 가로줄(행)로 적는 표기 차이일 뿐 계산 내용은 같다. 둘째 식의 <span class="math inline">\((U^{\mathsf T}U)^{-1}U^{\mathsf T}y\)</span>는 선형 회귀의 공식이다. <span class="math inline">\(U^{\mathsf T}\)</span>(전치)는 표의 행과 열을 바꿔 쓴 것, <span class="math inline">\((\cdot)^{-1}\)</span>(역행렬)은 행렬판 '나누기'이며, Day 13–14에서 손으로 푼다.</li>
+<li>단위: 모두 무차원(정규화한 값).</li>
+<li>계산 순서: 첫 식을 시간 순서로 돌려 상태를 모은다 → 모은 상태 표 <span class="math inline">\(U\)</span>와 정답으로 둘째 식을 한 번 계산한다.</li>
+<li>결과의 뜻: 학습하는 것은 <span class="math inline">\(W_{out}\)</span> 하나다. <span class="src">Zhong 2026, p.8</span> (첫 식의 <span class="math inline">\((1-\alpha)\)</span> 항은 Stepney 식 3의 leaky node와 같은 꼴이고 <span class="src">Stepney 2024, p.669</span>, 둘째 식은 Day 13–14에서 손으로 풀 ridge regression에서 <span class="math inline">\(\lambda = 0\)</span>인 경우입니다. ridge regression은 선형 회귀에 "가중치가 너무 커지지 않게" 하는 항 <span class="math inline">\(\lambda\)</span>를 더한 것이고, <span class="math inline">\(\lambda = 0\)</span>이면 보통의 선형 회귀입니다.)</li>
+</ul>
+<p>이 논문에서 챙길 것은 숫자가 아니라 구조입니다. <strong>학습하는 것은 여전히 <span class="math inline">\(W_{out}\)</span> 하나이고, 소자는 <span class="math inline">\(\tanh\)</span>와 시간 지연의 자리를 맡았다.</strong> 3구간 표의 세 번째 열 그대로입니다. 정확도 수치(MNIST 96.98% 등)는 초록에 있지만, 그것이 시간 과제인지와 기준선(소자 없이도 얻을 수 있는 성능, <a href="../days/d06.html#b-heldout-baseline">Day 10 기초</a>)이 무엇인지는 Day 26–29의 질문이므로 오늘은 판단을 유보합니다.</p>
+<p><strong>읽는 법.</strong> 아래 원문 그림은 축이 두 벌입니다. 먼저 검정 곡선(소자의 전류–전압)을 아래·왼쪽 축으로 읽고, 그다음 빨간 곡선(<span class="math inline">\(\tanh\)</span>)을 위·오른쪽 축으로 읽으세요. 두 곡선이 겹쳐 보이도록 축을 따로 맞춘 그림이라는 것을 알고 보면, "얼마나 닮았나"가 아니라 "어디서 어긋나나"가 보입니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2026-fig1g.png" alt="Zhong 2026 Fig. 1g: 양극성 트랜지스터의 출력 특성(드레인 전류 I_ds 대 V_ds, −30~30 V)이 tanh 함수(위·오른쪽 축, −4~4)와 겹쳐 그려져 있다" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41467-026-70171-2" target="_blank"><i>Nat. Commun.</i> 2026, 17, 3321</a>, Fig. 1g, p.2. 볼 것: 아래·왼쪽 축은 소자(검정, $I_{ds}$ [µA] 대 $V_{ds}$ [V], −30~30 V), 위·오른쪽 축은 $\tanh$(빨강, −4~4 대 −1~1). 두 축의 눈금을 따로 맞춰 겹친 그림이므로 "소자 = tanh"가 아니라 "비슷한 S자 포화 꼴"을 보여 주는 그림이다. 양 끝의 포화와 가운데의 기울기가 어디서 어긋나는지 보라. 전압 범위가 ±30 V라는 점도 Day 30–31(비용)에서 다시 볼 숫자다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<div class="quiz" data-day="d07" data-set="4-check"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+PRC (physical reservoir computing)
+</dt>
+<dd>
+소프트웨어 reservoir 자리에 물리 동역학계(재료·소자·회로)를 넣은 RC. Liang은 전자식 구현을 eRC라고 부르고 네 아키텍처로 나눈다(Day 1–2 원문 그림 Liang Fig. 2).
+</dd>
+<dt>
+열린 동역학계
+</dt>
+<dd>
+바깥에서 입력을 받으며 시간에 따라 상태가 변하는 계. RNN 식 <span class="math inline">\(h(t+1)=f(\cdots)\)</span>가 가장 단순한 꼴. Stepney는 RNN을 그 특수한 경우로 본다 <span class="src">Stepney 2024, p.665</span>.
+</dd>
+<dt>
+소산 (dissipative)
+</dt>
+<dd>
+에너지가 빠져나가 외부 자극이 없으면 상태가 가라앉는 성질. Stepney는 "소산적이므로 fading memory를 가진다"고 쓴다 <span class="src">Stepney 2024, p.672</span>. 저항·마찰·확산이 있는 거의 모든 실제 계가 그렇다.
+</dd>
+<dt>
+시간다중화 (time multiplexing)
+</dt>
+<dd>
+노드 하나의 입력을 시간으로 잘게 쪼개(마스크) 여러 가상 노드처럼 쓰는 방법. 2011년 delay-coupled RC <span class="src">Liang 2024, p.194</span>.
+</dd>
+<dt>
+leaky node / forgetting rate
+</dt>
+<dd>
+상태의 일부 <span class="math inline">\((1-\alpha)\)</span>를 다음 단계로 그대로 넘기는 ESN 변형. 이산 '클록' 외에 시간척도를 하나 더 준다 <span class="src">Stepney 2024, p.669</span>. Zhong 2026의 <span class="math inline">\(\alpha\)</span>가 이것. <span class="math inline">\(\alpha = 0.1\)</span>이면 90%가 남는다(Day 5–6 LIF의 0.9와 같은 역할). Day 15·Day 20–21에서 leak rate로 돌려 본다.
+</dd>
+</dl>
+</div>
+<div class="think">
+<p>Stepney의 세 요구(측정 가능한 고차원 상태, 유사한 동역학, fading memory)를 내 소자에 대입해 보세요. 세 번째는 거의 자동으로 만족됩니다(소산적이므로). 첫 번째는 어떤가요? 이온 소자 하나에서 "서로 다른 상태"를 몇 개나 읽어 낼 수 있나요? 전극이 두 개뿐이라면 답은 "시간다중화로 늘린다"일 텐데, 그때 드는 비용은 무엇일까요? (Day 30–31)</p>
+</div>
+<div class="quiz" data-day="d07" data-set="4-end"></div>
+<div class="keypoints">
+<ul>
+<li>ESN이 물리 구현에 맞는 이유: 연결 구조에 둔감, 내부 접근 불필요, 열린 동역학계의 꼴. 재료는 뉴런을 닮을 필요가 없고 비선형·소산적이면 된다 <span class="src">Stepney 2024, p.670</span>.</li>
+<li>기판의 세 요구: 측정 가능한 고차원 상태, 유사한 동역학, fading memory <span class="src">Stepney 2024, p.672</span>. 단, 시간척도 정합·잡음·용량·인터페이스가 안 맞으면 "reservoir가 잘 안 된다" <span class="src">Stepney 2024, p.672–673</span>.</li>
+<li>역사: 2003 물리 LSM, 2011 delay-coupled(시간다중화) <span class="src">Liang 2024, p.194</span>, 2020 전후 아날로그 readout <span class="src">Liang 2024, p.201</span>.</li>
+<li>Zhong 2026: 소자가 tanh와 지연의 자리를 맡아도 학습하는 것은 <span class="math inline">\(W_{out}\)</span> 하나 <span class="src">Zhong 2026, p.8</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-neuromorphic" class="level3">
+<h3 class="anchored" data-anchor-id="ch-neuromorphic">5. 뉴로모픽과의 관계: 어디에 있고, 무엇을 약속하나</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 RC(알고리즘)와 PRC(구현)를 구분해 Day 1–2의 지도 위에 놓을 수 있고, "재료가 비선형이고 기억하면 계산이다"가 왜 틀린 문장인지 Stepney와 Liang의 조건으로 말할 수 있다.</p>
+</div>
+<section id="s-position" class="level4">
+<h4 class="anchored" data-anchor-id="s-position">5-1. Day 1–2의 지도 위에서</h4>
+<p>Day 1–2에서 뉴로모픽을 네 줄기로 나눴습니다. RC는 그 자체로는 <strong>알고리즘</strong>이고, 컴퓨터 안의 난수 행렬로 돌리면 뉴로모픽 하드웨어와 아무 관계가 없습니다. 뉴로모픽과 만나는 지점은 <strong>reservoir를 물리로 바꿀 때</strong>, 즉 (라) 물리 컴퓨팅입니다. Liang은 뉴로모픽 컴퓨팅을 "뇌의 작동 방식을 모방해 에너지 효율적인 계산 시스템을 만드는 것"으로 정의하고, 뇌의 신경 활동을 선형 readout으로 행동으로 해독할 수 있다는 생쥐 실험을 RC의 생물학적 근거로 듭니다(Fig. 1a). <span class="src">Liang 2024, p.193</span> 즉 Liang에게 RC와 뇌의 연결 고리는 '뉴런을 닮은 소자'가 아니라 <strong>'복잡한 순환 동역학 + 선형 읽기'라는 구조</strong>입니다. <span class="tag tag-interp">해석</span></p>
+<p>Stepney는 다른 틀로 같은 위치를 설명합니다. 물리 컴퓨팅에는 "기판 먼저"(재료를 보고 모형을 만든다), "계산 모형 먼저"(모형을 정하고 거기 맞는 재료를 찾는다), "공동 설계"의 세 출발점이 있는데, PRC는 <strong>계산 모형 먼저</strong>에 해당한다. <span class="src">Stepney 2024, p.667</span> 이 구분은 이온 소자 연구자에게 실용적입니다. 내 소자의 PPF(펄스 두 개를 연달아 주면 둘째 응답이 커지는 현상, <a href="../days/d06.html#b-ppf">Day 10 기초</a>)·STP(짧게 유지되는 응답 증가) 곡선에서 출발해 "이것도 reservoir가 되지 않을까"라고 묻는 것은 기판 먼저이고, "ESN 모형이 요구하는 세 가지를 내 소자가 어느 정도 만족하나"라고 묻는 것은 계산 모형 먼저입니다. 후자가 Day 22–32의 평가 틀입니다. <span class="tag tag-interp">해석</span></p>
+<figure class="fig figure"><img src="../assets/img/d07/fig5-position.svg" alt="뉴로모픽 우산 아래 네 줄기 중 (라) 물리 컴퓨팅 안에 RC(소프트웨어 알고리즘, 고정 reservoir + 학습 readout)와 PRC(재료·소자의 동역학이 reservoir)가 나란히 있고, 'reservoir를 물리로 교체'라는 화살표로 이어진다" class="figure-img"><figcaption><b>그림 10.</b> RC는 알고리즘, PRC는 그 reservoir를 물리로 바꾼 구현. Day 1–2의 분류 위에 놓은 모식도이며 분류는 겹친다. (Claude가 그림, 모식도)</figcaption></figure>
+</section>
+<section id="s-when-compute" class="level4">
+<h4 class="anchored" data-anchor-id="s-when-compute">5-2. 언제 '계산한다'고 말할 수 있나</h4>
+<p>Stepney 튜토리얼의 2절은 "물리계가 언제 계산을 하는가"를 묻습니다. 아무 바위나 어떤 함수든 계산한다고 우길 수 있고 우주 전체가 컴퓨터라고 할 수도 있지만, 그런 답은 소자를 만들려는 공학자에게 도움이 안 된다. 추상/표현 이론(AR theory)은 추상 모형의 계산 결과와 물리 진화의 결과(를 추상으로 되읽은 것)가 <strong>문제에 따라 정한 오차 <span class="math inline">\(\epsilon\)</span> 안에서 일치</strong>할 때, 그리고 그 일치가 <strong>잘 특성화된 영역</strong>에서 성립할 때 "계산한다"고 말합니다. <span class="src">Stepney 2024, p.666–667</span> 계산이 아닌 경우도 세 가지로 듭니다. 추상 모형과 소자를 잇는 표현이 아예 없는 경우, <strong>출력 표현 단계에서 다른 컴퓨터가 전체 계산을 사후에 다 해 버리는 경우</strong>(바위 컴퓨터), 그리고 <strong>우연히 맞은 결과만 고르고 나머지는 버리는 경우</strong>. <span class="src">Stepney 2024, p.667</span></p>
+<p>이 세 조건은 <a href="../days/d06.html#ch-minimal-conditions">Day 10 2구간</a>에서 세운 "계산의 최소 조건"과 같은 말입니다. 재료가 비선형이고 서서히 잊는다는 것은 reservoir의 <strong>재료</strong>가 될 수 있다는 뜻이지 계산이 됐다는 뜻이 아닙니다. 과제에 필요한 차이가 <strong>읽을 수 있는 상태들</strong>에 보존되고, 학습한 readout이 <strong>학습에 쓰지 않은 데이터</strong>에서 답을 구분하며, 그것이 <strong>단순한 기준선</strong>(예: 입력 지연 탭 + 선형 회귀, Day 20–21·Day 28–29)보다 나을 때 비로소 계산입니다. 둘째 실패 사례(readout이 일을 다 한다)는 Day 26–27의 질문 "readout이 일을 다 하고 있지는 않은지"와 정확히 같습니다. <span class="tag tag-interp">해석</span></p>
+<div class="myth">
+<p><strong>"재료가 비선형이고 기억하면 그 자체가 reservoir computing이다"</strong> — 그것은 재료가 될 수 있다는 조건이지 계산의 증명이 아닙니다. Stepney의 틀로 말하면 표현(어느 상태를 어떻게 읽나), <span class="math inline">\(\epsilon\)</span>-일치(새 데이터에서 성능), 특성화된 영역(어떤 입력 범위·시간척도에서 성립하나)이 있어야 합니다 <span class="src">Stepney 2024, p.666–667</span>. Liang의 틀로 말하면 MC·IPC 같은 과제 독립 지표(얼마나 오래전 입력을 얼마나 잘 복원하나 등을 재는 지표, Day 18–19)와 벤치마크, 그리고 디지털 RC와의 비교가 있어야 합니다 <span class="src">Liang 2024, p.200–202</span>. Day 2의 그림 5(Day 11)는 '재료'까지만 보여 준 것입니다.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="5-check"></div>
+<div class="stop-point">
+<p>여기까지: RC(알고리즘)와 PRC(구현)를 그림 10 위에서 구분하고, "비선형 + 서서히 잊음"이 왜 계산의 증명이 아닌지 Stepney의 세 실패 사례로 말할 수 있다. 다음: PRC가 약속하는 것과 약속하지 않는 것.</p>
+</div>
+</section>
+<section id="s-prc-promise" class="level4">
+<h4 class="anchored" data-anchor-id="s-prc-promise">5-3. PRC가 약속하는 것과 약속하지 않는 것</h4>
+<p>Liang은 기존 eRC(전자 소자·회로로 만든 물리 RC)들을 비교해 네 가지 사실을 꼽습니다. (1) 다양한 물리 노드로 기계학습 과제와 시간 신호 처리를 물리 영역에서 할 수 있다. (2) 정확도는 수용할 만하지만 RC 알고리즘의 본성상 최첨단 기울기 기반 DNN보다 낫지 않다. (3) 하드웨어 잡음 때문에 <strong>비슷한 구성이면 소프트웨어 RC가 대개 eRC보다 낫다</strong>(하드웨어의 풍부한 동역학을 활용한 예외는 있다). (4) eRC의 장점은 정확도가 아니라 <strong>시스템 복잡도, 전력 소모</strong>(그리고 학습 비용·속도)에 있다. <span class="src">Liang 2024, p.201</span> 그리고 전망에서 못 박습니다. <strong>디지털 RC보다 자원을 더 쓰는 PRC는 의미가 없다.</strong> <span class="src">Liang 2024, p.202</span></p>
+<p>그러니 PRC가 약속하는 것은 "더 똑똑한 계산"이 아니라 "시계열 전처리를 재료의 물리로 떠넘겨 시스템 전체의 비용을 줄이는 것"이고, 그 약속은 <strong>시스템 전체로 셌을 때</strong> 디지털보다 싸다는 조건에서만 유효합니다. 소자 하나의 에너지가 아니라 입력 인코딩·측정·ADC(아날로그 값을 숫자로 바꾸는 회로)·readout까지 센 비용(Day 30–31)이 그 조건을 판정합니다. <span class="tag tag-interp">해석</span></p>
+<div class="think">
+<p>"내 이온 소자로 RC를 한다"는 문장에서 '한다'의 주어는 누구인가요? 소자인가요, readout을 학습시키는 컴퓨터인가요, 둘을 합친 시스템인가요? 주어를 바꿔 가며 세 문장을 쓰고, 각 문장이 참이 되려면 무엇을 보여야 하는지 한 줄씩 적어 보세요.</p>
+</div>
+<div class="quiz" data-day="d07" data-set="5-end"></div>
+<div class="keypoints">
+<ul>
+<li>RC는 알고리즘, PRC는 reservoir를 물리로 바꾼 구현. 뉴로모픽과 만나는 곳은 Day 1–2의 (라)이며, Liang이 보는 뇌와의 고리는 '순환 동역학 + 선형 읽기' 구조다 <span class="src">Liang 2024, p.193</span> <span class="tag tag-interp">해석</span>.</li>
+<li>Stepney의 '계산' 조건: 표현, <span class="math inline">\(\epsilon\)</span>-일치, 특성화된 영역. 실패 사례: 표현 없음, 출력 단계에서 계산을 다 함, 맞은 것만 고름 <span class="src">Stepney 2024, p.666–667</span>.</li>
+<li>비선형 + 서서히 잊음은 재료의 조건이지 계산의 증명이 아니다. 읽을 수 있는 상태, 학습한 readout, 새 데이터, 기준선이 있어야 한다.</li>
+<li>PRC의 장점은 정확도가 아니라 복잡도·전력이고, 디지털 RC보다 자원을 더 쓰면 무의미 <span class="src">Liang 2024, p.201–202</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-objection" class="level3">
+<h3 class="anchored" data-anchor-id="ch-objection">6. 오늘의 반론</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "RC는 낡은 우회로"라는 반론에 대해, 소자 RC의 근거가 '똑똑함'이 아니라 무엇인지와 그 근거가 성립하려면 무엇을 보여야 하는지를 적을 수 있다.</p>
+</div>
+<p>가장 강한 반론은 이것입니다. <strong>"RC는 2001년의 우회로다. 지금은 LSTM·Transformer가 시계열을 더 잘 다루고 GPU로 학습도 된다. 소자 RC는 낡은 알고리즘을 재료로 다시 만드는 일 아닌가?"</strong> (LSTM과 Transformer는 RNN 이후에 나온 시계열용 신경망들로, 내부 가중치를 모두 학습시키되 소실·폭주를 구조로 완화한 설계입니다. 폴더 논문에는 없으므로 <span class="tag tag-unverified">미확인</span>이며, 오늘은 "내부를 학습시키는 쪽의 최신 대안"으로만 읽으면 됩니다.)</p>
+<p>생각할 재료는 있습니다. Liang도 RC가 DNN보다 표현력이 낮고 벤치마크에서 최첨단이 아니라고 인정합니다. <span class="src">Liang 2024, p.194, 202</span> 그런데 소자 RC의 근거는 "RC가 더 똑똑해서"가 아니라 "내부를 학습시키지 않아도 되므로 <strong>재료를 그대로 쓸 수 있고</strong>, 그래서 센서 옆에서 시계열 전처리를 싸게 할 수 있다"입니다. <span class="src">Stepney 2024, p.669–670</span> <span class="tag tag-interp">해석</span> 이 반론에 답하려면 "싸다"를 시스템 전체로 보여야 하고(Day 30–31), 그 응용이 고정된 reservoir + 선형 readout의 표현력으로 충분한 문제여야 합니다(Day 9의 '적합한 문제'; Liang은 그 규모가 대개 2,000 뉴런 미만에서 포화한다고 보지만 과제와 구조에 따라 다르다). 답은 내 몫입니다.</p>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>여기까지 읽었으면 자료를 덮고 아래 표를 <strong>먼저 머릿속으로 채운 뒤</strong> 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+한 장 요약 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>학습이란? 기울기란?</td>
+<td>손실(오차²)이 줄도록 가중치를 고치기. 기울기는 "조금 바꾸면 얼마나 변하나"의 비율이고, 그 반대쪽으로 보폭만큼 옮긴다</td>
+<td>0구간 숫자 예(입력 2, 정답 5, <span class="math inline">\(w\)</span> 1.0 → 1.6, 손실 9 → 3.24). 일반 교과 내용</td>
+</tr>
+<tr class="even">
+<td>역전파에서 왜 곱하나?</td>
+<td>앞쪽 가중치의 변화는 뒤쪽 통로를 지나서야 손실에 닿으므로, 통로마다의 배율을 곱한다</td>
+<td>두 단계 사슬 <span class="math inline">\(2\times0.5\times(-8) = -8\)</span></td>
+</tr>
+<tr class="odd">
+<td>RNN이란?</td>
+<td>상태를 다음 단계로 넘겨 시계열의 '방금 전까지'를 담는 신경망. 같은 <span class="math inline">\(W\)</span>를 매 단계 반복</td>
+<td><span class="src">Stepney 2024, p.665</span></td>
+</tr>
+<tr class="even">
+<td>왜 학습이 어렵나?</td>
+<td>시간을 거슬러 기울기를 모아야 하고(BPTT, 비쌈), 통로 배율이 매번 같은 <span class="math inline">\(W\)</span>라 같은 인자가 <span class="math inline">\(k\)</span>번 곱해져 소실·폭주하며, 물리 소자는 내부에 손을 댈 수 없다</td>
+<td><span class="src">Stepney 2024, p.665, 669</span> <span class="src">Liang 2024, p.194</span>; 소실·폭주의 원 출처 <span class="tag tag-unverified">미확인</span></td>
+</tr>
+<tr class="odd">
+<td>ESN·LSM은 무엇을 바꿨나?</td>
+<td>내부 <span class="math inline">\(W\)</span>를 난수로 고정하고 선형 readout만 한 번에 학습</td>
+<td><span class="src">Liang 2024, p.193</span> <span class="src">Stepney 2024, p.665</span></td>
+</tr>
+<tr class="even">
+<td>대가는?</td>
+<td>DNN보다 낮은 표현력. 성능이 "대개 2,000 뉴런 미만"에서 포화한다는 것은 Liang 리뷰의 일반적 관찰이며 RC 전체의 보편 한계가 아님</td>
+<td><span class="src">Liang 2024, p.194, 202</span>; 규제를 적절히 하면 클수록 대개 좋다는 지침 <span class="src">Lukoševičius 2012, 3.2.1절</span></td>
+</tr>
+<tr class="odd">
+<td>왜 물리로 옮기기 좋은가?</td>
+<td>블랙박스라 내부 접근·미분 모형이 필요 없고, 재료는 비선형·소산적이면 된다</td>
+<td><span class="src">Stepney 2024, p.669–670</span>; 시간척도 정합 조건 <span class="src">Stepney 2024, p.673</span></td>
+</tr>
+<tr class="even">
+<td>뉴로모픽과의 관계</td>
+<td>RC는 알고리즘, PRC는 (라) 물리 컴퓨팅의 구현. 뇌와의 고리는 '순환 동역학 + 선형 읽기'</td>
+<td><span class="src">Liang 2024, p.193</span> <span class="tag tag-interp">해석</span></td>
+</tr>
+<tr class="odd">
+<td>오늘의 숫자</td>
+<td>기울기 −12, 한 걸음 뒤 손실 9 → 3.24 · <span class="math inline">\(0.5^{20}\approx 10^{-6}\)</span>, <span class="math inline">\(0.9^{20}\approx 0.12\)</span>, <span class="math inline">\(1.5^{20}\approx 3325\)</span> · 1차원 예시 0.762 → 0.363 → 0.180 · readout 기울기 −0.558·−0.914, <span class="math inline">\(W_{out}\approx(-4.31, 4.31)\)</span> · Liang 리뷰가 관찰한 RC 성능 포화 규모 "대개 2,000 뉴런 미만"(과제 조건 없음)</td>
+<td>앞 셋은 계산, 뒤는 <span class="src">Liang 2024, p.202</span></td>
+</tr>
+<tr class="even">
+<td>사전 테스트·먼저 만들어 보기와 달라질 점</td>
+<td>"비선형 + 기억 = reservoir computing"이 아니라 "재료의 조건"일 뿐. RC로 계산했다는 증명은 표현·새 데이터 성능·기준선</td>
+<td><span class="src">Stepney 2024, p.666–667</span></td>
+</tr>
+<tr class="odd">
+<td>오늘의 반론</td>
+<td>RC는 낡은 우회로이고 LSTM·Transformer가 낫다 — 소자 RC의 근거는 '똑똑함'이 아니라 '재료를 그대로 쓸 수 있음 + 시스템 비용'</td>
+<td>내 답에서 응답</td>
+</tr>
+<tr class="even">
+<td>아직 모르는 것</td>
+<td>왜 난수 reservoir가 쓸모 있는가(Day 13–14), 언제 기억이 너무 길어지는가(Day 15), 비선형이 꼭 필요한 이유(Day 16–17)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><strong>오늘의 연구 질문으로 돌아가기.</strong> 처음 질문은 "내 이온 소자의 서서히 잊는 응답을 시계열 계산에 쓰려면 왜 readout만 학습하는 방식이 필요하고, 그 방식은 소자에 무엇을 요구하나"였습니다. 오늘 얻은 답의 뼈대는 셋입니다. (1) 내부를 학습시키면 시간을 거슬러 같은 배율을 곱해야 하고(<span class="math inline">\(0.5^{20} \approx 10^{-6}\)</span>), 소자 안에서는 그 계산에 필요한 접근과 미분 가능한 모형도 없다(2구간). (2) readout만 학습하면 기울기에 지금 상태만 들어가 그 사슬이 사라진다(그림 8). (3) 대신 필요한 흔적은 소자 상태가 이미 갖고 있어야 하므로, reservoir 소자에 요구되는 것은 학습용 갱신 특성이 아니라 읽을 수 있는 여러 상태, 입력과 맞는 시간척도, 반복성이다(4구간. readout까지 소자로 만들면 그 부분에는 Day 7–8의 가중치 사양이 다시 필요하다). 이것이 내 소자에서 성립하는지는 아직 가설이고 Day 15–29에서 시험한다.</p>
+<div class="quiz" data-day="d07" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<p>내 답을 쓸 때 아래 다섯 질문에 답했는지 확인하세요. 모범 문장은 주지 않습니다.</p>
+<ol type="1">
+<li>RNN이 시계열에 필요한 이유와, 학습이 어려운 이유를 <strong>구조</strong>(같은 <span class="math inline">\(W\)</span>의 반복 → 같은 배율의 거듭제곱)로 설명했나? 숫자 하나(예: <span class="math inline">\(0.5^{20}\)</span>)를 넣었나? "기울기"를 쓸 때 그 뜻("조금 바꾸면 얼마나 변하나")을 내 말로 적었나?</li>
+<li>ESN과 LSM이 무엇을 <strong>포기</strong>해서 그 어려움을 피했는지(무엇이 고정이고 무엇이 학습인지), 그리고 그 대가가 무엇인지 둘 다 말했나?</li>
+<li>"ESN 모형이 물리 구현에 맞는 이유"를 Stepney의 조건으로 말했나? 그 조건이 내 소자에서 깨질 수 있는 지점(시간척도, 읽을 수 있는 상태 수)을 하나라도 적었나?</li>
+<li>RC(알고리즘)와 PRC(구현)를 구분했고, PRC가 Day 1–2의 어느 줄기인지 말했나?</li>
+<li>"재료가 비선형이고 기억하면 계산이다"를 쓰지 않았나? 대신 계산이라고 부를 조건(읽을 수 있는 상태, 학습한 readout, 새 데이터, 기준선)을 적었나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> Stepney의 시간척도 정합 조건(기판의 자연 시간척도 ≈ 입력 시간척도 <span class="src">Stepney 2024, p.673</span>) 대 내 이온 소자의 ms–s 이완. 어떤 입력(생체 신호? 촉각? 음성?)의 시간척도가 여기에 맞는지가 응용 요구 사양이 된다(Day 22–23·Day 37). / Liang의 조건 "디지털 RC보다 자원을 더 쓰면 무의미" <span class="src">Liang 2024, p.202</span>를 시스템 비용 항목으로(Day 30–31).</li>
+<li><strong>아직 모르는 것:</strong> 난수 reservoir가 쓸모 있는 수학적 이유(Day 13–14). / 내 소자 하나에서 "읽을 수 있는 서로 다른 상태"가 몇 개인가(2단자면 시간다중화의 비용은?). / 소실·폭주의 원 출처와 정확한 조건 <span class="tag tag-unverified">미확인</span>.</li>
+<li><strong>용어집:</strong> 모델, 가중치, 손실, 기울기, 경사 하강, 학습률, epoch, 연쇄 법칙, 역전파, RNN, 은닉 상태, 피드포워드, BPTT, 기울기 소실·폭주, reservoir, echo, washout, readout, 선형 회귀, ESN, LSM, RC, PRC, 소산, 시간다중화, leaky node(forgetting rate).</li>
+<li><strong>접는 기준 후보:</strong> "내 소자로 만든 PRC가 같은 과제에서 디지털 RC(또는 지연 탭 + 선형 회귀)보다 시스템 전체 비용에서 싸지 않다"가 확인되면.</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Liang 2024, <em>Nat. Electron.</em> 7, 193–206. p.193(ESN·LSM 기원, 호수 비유, 뇌와의 고리), p.194(기울기 문제 회피, 표현력의 대가, 식 1–2, 2003·2011), p.201(네 가지 사실), p.202(자원 조건, 2,000 뉴런).</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 일부 대조함)</strong></p>
+<ul>
+<li>Stepney 2024, <em>Natural Computing</em> 23, 665–685. "Physical reservoir computing: a tutorial". 2절(언제 계산인가), 3.2절(ESN 식과 학습), 3.3.5절(물리 구현 적합성), 4.1–4.3절(기판 조건·시간척도). Day 13–19의 뼈대가 되는 튜토리얼이니 21쪽 중 이 부분(약 8쪽)은 직접 읽을 가치가 있습니다.</li>
+<li>Zhong 2026, <em>Nat. Commun.</em> 17, 3321. 트랜지스터 ESN. Fig. 1a·g와 Methods 식 (1)(2)만 오늘 봤습니다. 과제·기준선 평가는 Day 26–29에서.</li>
+</ul>
+<p><strong>폴더 밖 (서지는 Crossref로 확인, 내용은 <span class="tag tag-unverified">미확인</span>)</strong></p>
+<ul>
+<li>Jaeger 2001, GMD Report 148. ESN 원 보고서 (DOI 없음).</li>
+<li>Maass, Natschläger, Markram 2002, <em>Neural Comput.</em> 14, 2531–2560. LSM 원 논문.</li>
+<li>Verstraeten et al. 2007, <em>Neural Netw.</em> 20, 391–403. ESN·LSM의 통합.</li>
+<li>Pascanu, Mikolov, Bengio 2013, <em>ICML</em> (PMLR 28(3), 1310–1318; <a href="https://arxiv.org/abs/1211.5063">arXiv:1211.5063</a>). 기울기 소실·폭주와 행렬의 가장 큰 고유값의 관계. 2.1절만 Claude가 공개본에서 대조했고, 나머지는 <span class="tag tag-unverified">미확인</span>입니다.</li>
+<li>Lukoševičius 2012, LNCS 7700, 659–686 (<a href="https://doi.org/10.1007/978-3-642-35289-8_36">doi:10.1007/978-3-642-35289-8_36</a>). ESN 실무 지침. Stepney와 Liang이 모두 인용. Day 13–14·Day 20–21에서 다시. 3.2.1절(reservoir 크기)만 저자 공개본(PracticalESN.pdf)에서 Claude가 대조했고, 나머지 내용은 <span class="tag tag-unverified">미확인</span>입니다.</li>
+<li>0구간의 학습·기울기·역전파는 일반 교과 내용으로, 폴더 밖의 어떤 교재(예: 3Blue1Brown의 신경망 영상 시리즈)로도 보충할 수 있습니다. 내용은 <span class="tag tag-unverified">미확인</span>이며, 본문 설명만으로 오늘 분량은 충분합니다.</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d07">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 장의 앵커.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: '계산한다'의 조건과 증거 사다리", "items": [{"id": "d07-r01", "type": "mc", "q": "어떤 소자에 펄스 두 개를 넣었더니 첫 응답이 2.0 µA, 두 번째 응답이 2.6 µA였다(PPF 지수 130%). 첫 펄스의 흔적이 시간이 지나면 사라지는 소자라면, 펄스 간격을 아주 길게 했을 때 PPF 지수는 어떻게 될까?", "options": ["200%에 가까워진다", "0%에 가까워진다", "100%에 가까워진다", "130% 그대로 유지된다"], "a": 2, "why": "PPF 지수 = 두 번째 응답 ÷ 첫 번째 응답 × 100이고, 100%를 넘는 만큼이 첫 펄스가 남긴 흔적이다. 간격이 길어 흔적이 다 사라지면 두 번째 응답이 첫 응답과 같아져 100%에 다가간다.", "wrongWhy": ["200% 쪽은 간격이 아주 짧을 때(흔적이 거의 그대로 남을 때)의 방향이다.", "0%는 두 번째 펄스에 전혀 응답하지 않는다는 뜻이다. 흔적이 사라지면 첫 응답과 같은 크기로 응답한다.", "", "흔적이 시간에 따라 사라지는 소자라면 간격에 따라 지수가 변한다. 그대로라면 흔적이 사라지지 않는다는 뜻이 된다."], "ref": "d06.html#b-ppf", "refLabel": "PPF 지수 읽기(그림 1(Day 11))", "note": "모형 소자에서 10 ms 간격은 188%, 1 s 간격은 105%였다. 간격이 길수록 100%에 가깝다.", "fig": "../assets/img/d06/fig2-ppf-limits.svg", "figAlt": "펄스 간격(로그 축)이 길어질수록 PPF 지수가 200% 근처에서 100%로 내려가는 곡선"}, {"id": "d07-r02", "type": "mc", "q": "한 논문이 이온 소자에 펄스를 반복해 넣을수록 전도도가 오르고 오래 유지되는 곡선(LTP)만 보여 주고 '계산 소자'라고 불렀다. 네 단계(부호화 → 물리 변화 → 해독 → 비교)로 보면, 계산이라고 말하려면 무엇이 더 있어야 하나?", "options": ["풀 문제와 해독 규칙, 그리고 정답과의 비교", "펄스를 더 많이 넣었을 때의 전도도 곡선", "전도도가 더 오래 유지되는 시간의 측정", "온도를 바꿔 가며 잰 전도도 변화 곡선"], "a": 0, "why": "LTP 곡선은 ② 물리가 움직였다는 것만 보여 준다. ① 문제의 입력을 물리로 부호화하고, ③ 상태를 답으로 해독하고, ④ 그 답이 직접 구한 답과 허용 오차 안에서 맞아야 '사각형이 닫혀' 계산이 된다.", "wrongWhy": ["", "펄스를 더 넣은 곡선도 여전히 ② 물리 변화만 보여 준다. 문제도 해독 규칙도 생기지 않는다.", "유지 시간을 더 재는 것도 ②의 측정을 늘리는 일이다. 무엇을 답으로 읽는지는 여전히 없다.", "조건을 바꾼 측정도 ② 물리 변화의 범위를 넓힐 뿐, 문제·해독·비교는 채우지 못한다."], "ref": "d06.html#s-square-connect", "refLabel": "시냅스 현상은 사각형의 ②만", "fig": "../assets/img/d06/fig0-square-example.svg", "figAlt": "추상 세계와 물리 세계 사이를 부호화, 물리 변화, 해독, 비교 네 화살표로 잇는 사각형"}, {"id": "d07-r03", "type": "mc", "q": "'두 번째 응답 ÷ 첫 응답이 1.5보다 크면 짧은 간격(1)'이라는 해독 규칙을 미리 정해 두고, 간격 5 ms와 2 s 두 경우만 재 보니 둘 다 맞았다. 이것만으로 '이 소자가 간격 판별을 계산한다'고 쓰기 어려운 가장 큰 이유는?", "options": ["문턱을 사람이 미리 정했으므로 계산으로 볼 수 없다", "두 경우 사이의 간격에서도 맞는지 재지 않았다", "PPF 지수가 200%를 넘는 경우를 보이지 않았다", "해독 규칙이 너무 단순해서 계산을 숨기고 있다"], "a": 1, "why": "미리 정한 문턱도 쓸 수 있지만, 어떤 입력 범위에서 사각형이 닫히는지 재 두는 특성화가 필요하다. 모형 소자에서도 문턱 1.5는 약 69–99 ms 간격에서 틀렸다. 맞는 두 점만 보고하면 '우연히 맞은 것만 고르는' 실패에 가까워진다.", "wrongWhy": ["해독 규칙을 미리 정해 두는 계산도 있다. 그때의 기준은 닫히는 입력 범위를 재 두는 것(특성화)이다.", "", "200%를 넘는지는 계산 여부와 상관없다. 이 모형에서는 지수가 200%에 다가갈 뿐 넘지 않는다.", "계산을 숨기는 실패는 해독 단계가 크고 복잡해 일을 다 할 때다. 문턱 하나는 숨길 만한 계산이 없다."], "ref": "d06.html#s-fail-types", "refLabel": "어디서 실패하나: 특성화", "note": "특성화 = 실험으로 '어떤 입력 범위에서 사각형이 허용 오차 안에 닫히는가'를 미리 알아 두는 것."}, {"id": "d07-r04", "type": "mc", "q": "소자에서 읽는 가상 노드 수를 10, 50, 100개로 바꿔 가며 readout을 학습했고, 시험 데이터 정확도가 가장 높았던 50개를 골라 그 시험 정확도를 논문에 적었다. 무엇이 문제인가?", "options": ["가상 노드는 많을수록 좋으므로 100개를 골랐어야 한다", "가중치는 훈련 데이터로만 정했으니 아무 문제가 없다", "노드 수를 바꾸면 소자가 달라지므로 비교할 수 없다", "시험 데이터를 설정 고르기에 써서 독립된 증거가 아니다"], "a": 3, "why": "떼어 둔 시험 데이터는 readout의 숫자뿐 아니라 '상태를 몇 개 쓸지' 같은 설정을 고를 때도 쓰지 않아야 한다. 시험 데이터를 보며 고르면 그 데이터도 사실상 훈련에 쓴 셈이라 새 데이터에서의 성능을 과대평가한다.", "wrongWhy": ["노드가 많을수록 외우기가 쉬워져 과적합이 생길 수 있다. 많다고 늘 좋은 것이 아니다.", "가중치만이 아니라 설정을 고를 때 시험 데이터를 봐도 시험 점수가 독립 증거가 아니게 된다.", "같은 소자에서 읽는 개수를 바꾼 것이라 비교 자체는 할 수 있다. 문제는 고를 때 쓴 데이터다.", ""], "ref": "d06.html#b-heldout-baseline", "refLabel": "held-out: 설정을 고를 때도 쓰지 않는다"}, {"id": "d07-r05", "type": "mc", "q": "정답과 아무 관계 없는 잡음 숫자 20개를 상태로 주고 직선 readout을 맞춘다. 훈련 표본이 25개일 때와 400개일 때, 훈련 데이터에서 잰 R²(1이면 완벽, 0이면 평균만 찍는 수준)는 어떻게 될 가능성이 큰가?", "options": ["25개일 때 꽤 높고, 400개일 때는 0 근처다", "두 경우 모두 0 근처다(잡음이므로)", "두 경우 모두 1 근처다(상태가 20개이므로)", "400개일 때가 더 높다(표본이 많으므로)"], "a": 0, "why": "가중치 하나는 예측을 움직이는 손잡이 하나다. 손잡이 수가 표본 수에 가까울수록 훈련 표본을 하나하나 맞춰 줄 여지가 커서, 잡음으로도 훈련 R²가 대략 상태 수 ÷ 표본 수 근처로 오른다(20/25 ≈ 0.8, 20/400 = 0.05). 이 '맞음'은 외운 것이라 held-out에서는 사라진다.", "wrongWhy": ["", "잡음이어도 손잡이가 많으면 훈련 표본에는 맞춰진다. 표본이 25개뿐이면 훈련 R²가 꽤 오른다.", "1 근처가 되려면 손잡이 수가 표본 수와 같아야 한다. 표본이 400개면 20개의 손잡이로는 거의 못 맞춘다.", "표본이 많을수록 손잡이 20개로 하나하나 맞춰 줄 여지가 줄어 훈련 R²는 오히려 내려간다."], "ref": "d06.html#s-r2-sim", "refLabel": "외우기가 얼마나 쉬운가(그림 5(Day 11))", "note": "훈련 성능은 증거가 아니다. 상태 수·표본 수와 함께 held-out 성능을 적어야 한다.", "fig": "../assets/img/d06/fig3-heldout.svg", "figAlt": "상태 수가 늘수록 훈련 R²(빨강)는 오르고 held-out R²(파랑)는 떨어지는 그래프"}, {"id": "d07-r06", "type": "mc", "q": "readout이 마지막 펄스 순간의 소자 값만 볼 수 있는 과제에서, '소자의 기억(시간 동역학)이 실제로 쓰였나'를 확인하려면 어떤 기준선과 비교하는 것이 가장 맞나?", "options": ["입력 숫자를 그대로 readout에 넣은 원시 입력 기준선", "소자 반응을 흉내 낸 식을 잡음 없이 돌린 디지털 RC", "지금 전압에만 반응하는 기억 없는 소자의 기준선", "센서 옆에 붙는 MCU와 작은 신경망의 기준선"], "a": 2, "why": "정적 소자 기준선은 기억이 없는(또는 최소화한) 소자로 같은 일을 시켜 시간 동역학의 기여를 잰다. 펄스 간격 예제에서 기억 없는 저항은 50%, 소자는 75%였다.", "wrongWhy": ["원시 입력 기준선은 소자가 입력을 '더 가르기 쉽게' 바꿨는지를 잰다. 기억의 기여를 따로 떼어 보지는 않는다.", "디지털 RC 기준선은 같은 구조를 잡음 없이 돌려 하드웨어 잡음으로 잃은 정확도를 잰다.", "", "MCU + 작은 신경망은 시스템 수준의 경쟁자다. 소자 안의 기억이 쓰였는지를 가르는 비교가 아니다."], "ref": "d06.html#s-baseline-kinds", "refLabel": "기준선의 네 종류"}, {"id": "d07-r07", "type": "mc", "q": "저항과 커패시터만 이은 회로에서도 펄스 간격이 짧을수록 두 번째 응답이 커졌다. 내 이온 소자가 '비선형'인지 확인하려면 어떤 측정이 필요한가?", "options": ["간격을 더 촘촘히 바꿔 가며 PPF 곡선을 다시 잰다", "두 펄스를 함께 준 응답과 따로 준 응답의 합을 비교한다", "PPF 지수가 저항–커패시터 회로보다 큰지 비교한다", "곡선을 이중 지수로 맞춰 시간상수가 둘인지 확인한다"], "a": 1, "why": "'짧은 간격에서 커짐'은 선형 회로에서도 나오므로 비선형의 증거가 아니다. 겹침 원리로 시험한다. 함께 준 응답이 따로 준 응답을 시간 맞춰 더한 것과 같으면 선형, 다르면 비선형이다.", "wrongWhy": ["PPF 곡선을 더 촘촘히 재도 선형 회로에서 나오는 모양과 구별되지 않는다.", "", "지수의 크기는 시간상수와 몫에 달린 것이라, 크다고 비선형이라는 뜻이 아니다.", "시간상수가 몇 개인지는 기억의 시간척도를 말해 줄 뿐, 선형인지 비선형인지는 알려 주지 않는다."], "ref": "d06.html#s-ppf-nonlinear", "refLabel": "비선형은 PPF 곡선만으로 증명되지 않는다"}, {"id": "d07-r08", "type": "mc", "q": "4-bit 펄스 열 16가지를 넣었더니 끝 전류값들이 0.05 µA 간격으로 늘어섰다. 그런데 같은 열을 다시 넣으면 전류가 ±0.1 µA씩 흔들렸다. 이 소자와 읽기 방식에 대해 맞는 것은?", "options": ["16가지 열이 모두 구별되는 상태로 끝난다", "구별되는 상태 수는 16가지보다 적다", "흔들림은 기억이 크다는 표시라서 유리하다", "값이 서로 다르므로 반복 가능성도 확인됐다"], "a": 1, "why": "읽을 수 있는 상태에는 구별과 반복 가능이 함께 필요하다. 반복 측정의 흔들림(±0.1 µA)이 이웃 값의 간격(0.05 µA)보다 크면 이웃한 열들이 섞여, 실제로 구별되는 상태 수는 16보다 적다.", "wrongWhy": ["평균값이 서로 달라도 한 번 잰 값이 이웃 값의 자리까지 흔들리면 어느 열이었는지 가릴 수 없다.", "", "반복할 때마다 달라지는 값은 기억이 아니라 재현성을 해치는 흔들림이라 계산 자원으로는 불리하다.", "반복 가능성은 같은 열을 다시 넣었을 때 같은 값이 나오는지로 본다. 이 소자는 그 조건이 약하다."], "ref": "d06.html#b-task-state", "refLabel": "읽을 수 있는 상태: 구별·반복 가능"}, {"id": "d07-r09", "type": "ox", "q": "같은 입력열을 넣을 때마다 끝 상태가 크게 달라지는 소자라도, 학습한 readout의 held-out 정확도만 높게 나오면 그 성능을 소자 동역학의 공으로 돌릴 수 있다.", "a": false, "why": "사다리는 아래 단이 서야 위 단을 해석할 수 있다. 2단(같은 입력에 구별·재현되는 상태)이 서지 않으면, 그 위의 정확도가 소자 동역학 덕인지 readout과 운 덕인지 가릴 수 없다.", "wrongWhy": ["상태가 재현되지 않으면 높은 정확도가 소자 동역학 덕인지 readout과 운 덕인지 가릴 수 없다. 2단이 먼저다.", ""], "ref": "d06.html#s-ladder", "refLabel": "사다리: 순서가 있는 이유", "fig": "../assets/img/d06/fig1-ladder.svg", "figAlt": "현상 재현(0단)부터 과제, 읽을 수 있는 상태, 학습한 readout, held-out, 기준선, 시스템 비용으로 올라가는 사다리"}, {"id": "d07-r10", "type": "mc", "q": "어떤 논문이 소자 상태를 읽어 학습한 readout으로, 떼어 둔 시험 데이터에서 85%를 얻었다. 소자를 빼고 같은 readout을 돌린 비교는 없다. 증거 수준에 맞는 결론은?", "options": ["이 소자는 이 분류 과제에서 디지털 방식보다 낫다", "이 소자는 시냅스 현상을 보였다는 것까지만 말한다", "정확도가 높으므로 소자가 계산에 기여한 것이다", "새 데이터에서 맞혔지만 소자의 기여는 아직 모른다"], "a": 3, "why": "과제·상태·학습한 readout·held-out까지는 섰으므로 '새 데이터에서 답을 구분했다'고 말할 수 있다. '소자가 기여했다'는 5단(기준선) 비교가 있어야 하는 한 걸음 더 나간 주장이다. 주장의 강도는 증거 수준과 맞춰야 한다.", "wrongWhy": ["디지털 방식과 비교하려면 기준선과 시스템 비용(5·6단)이 있어야 한다. 이 논문에는 없다.", "held-out 성능까지 보였으므로 현상 재현(0단)보다는 위에 있다. 너무 낮춰 말한 것이다.", "소자 없이 같은 readout으로도 85%가 나올 수 있다. 기준선 없이는 기여를 말할 수 없다.", ""], "ref": "d06.html#s-evidence-levels", "refLabel": "증거의 세 수준"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 학습·기울기·RNN, 그리고 BPTT가 어려운 이유", "items": [{"id": "d07-rb01", "type": "mc", "q": "모델 y = w × u에 데이터(입력 1, 정답 3)가 있고 지금 w = 4다. 기울기 공식 2 × (y − 정답) × 입력으로 보면, 손실을 줄이려면 w를 어떻게 옮겨야 하나?", "options": ["기울기가 +2이므로 w를 줄인다", "기울기가 +2이므로 w를 늘린다", "기울기가 −2이므로 w를 늘린다", "기울기가 −2이므로 w를 줄인다"], "a": 0, "why": "y = 4 × 1 = 4, 오차 = 4 − 3 = +1, 기울기 = 2 × 1 × 1 = +2다. 기울기가 양수면 'w를 올리면 손실이 는다'는 뜻이므로 반대쪽, 곧 w를 줄인다.", "wrongWhy": ["", "기울기는 맞게 구했지만 방향이 반대다. 양수 기울기 쪽으로 가면 손실이 커진다.", "출력 4가 정답 3보다 커서 오차가 양수이므로 기울기도 양수다.", "기울기 부호를 잘못 구했다. 오차 +1, 입력 1이라 기울기는 +2다."], "ref": "d07a.html#s-gd-step", "refLabel": "기울기의 반대쪽으로 한 걸음", "fig": "../assets/img/d07/fig6-loss-slope.svg", "figAlt": "가중치에 따른 손실 골짜기. 기울기가 음수인 곳에서는 오른쪽, 양수인 곳에서는 왼쪽으로 옮긴다"}, {"id": "d07-rb02", "type": "mc", "q": "경사 하강을 돌렸더니 손실이 9 → 25 → 64 → 169처럼 걸음마다 커졌다. 가장 그럴듯한 원인과 처방은?", "options": ["데이터가 부족하니 정답 붙은 예를 더 모은다", "학습률이 너무 커서 바닥을 건너뛰니 줄인다", "기울기 부호가 틀렸으니 기울기 쪽으로 옮긴다", "걸음 수가 모자라니 같은 설정으로 더 돌린다"], "a": 1, "why": "옮기는 양은 학습률 × 기울기다. 이것이 너무 크면 골짜기 바닥을 지나쳐 건너편 비탈로 튀고, 걸음마다 바닥에서 더 멀어져 손실이 커진다(본문: η = 0.5에서 손실 9 → 81). 학습률을 줄인다.", "wrongWhy": ["데이터 양은 손실이 걸음마다 커지는 발산과 관계가 없다. 보폭이 문제다.", "", "기울기 쪽으로 옮기면 손실이 커지는 방향으로 간다. 방향은 기울기의 반대가 맞다.", "보폭이 너무 큰 채로 더 돌리면 바닥에서 계속 더 멀어진다."], "ref": "d07a.html#s-gd-step", "refLabel": "단계 5: 보폭이 너무 크면"}, {"id": "d07-rb03", "type": "mc", "q": "가중치 두 개를 이은 모델 h = w₁ × u, y = w₂ × h에서 w₁ = 4, w₂ = 0.25다. 중간에 S자 함수가 없을 때 이 모델에 대해 맞는 것은?", "options": ["가중치가 둘이라 하나짜리 모델보다 표현력이 크다", "입력이 커질수록 출력이 덜 늘어나는 관계를 그린다", "w = 1 하나짜리 모델과 언제나 같은 출력을 낸다", "w₁과 w₂의 기울기는 서로 아무 관계가 없다"], "a": 2, "why": "y = w₂ × (w₁ × u) = (w₂ w₁) × u = 1 × u다. 곱하기만 이으면 몇 개를 이어도 '입력에 숫자 하나 곱하기'와 같다. 그래서 신경망은 사이에 tanh 같은 비선형 함수를 끼운다.", "wrongWhy": ["곱하기만 이은 사슬은 숫자 하나 곱하기로 줄어든다. 가중치 개수가 늘어도 그릴 수 있는 관계는 같다.", "'덜 늘어나는' 관계는 곡선이다. 곱하기만으로는 직선 관계밖에 만들 수 없다.", "", "w₁의 영향은 w₂라는 통로를 지나 손실에 닿으므로, w₁의 기울기에는 w₂가 배율로 곱해진다."], "ref": "d07a.html#b-backprop", "refLabel": "비선형 함수가 끼면: 왜 끼우나"}, {"id": "d07-rb04", "type": "mc", "q": "가중치 세 개가 일렬로 이어진 사슬에서 역전파를 한다. 중간 통로 하나의 배율('앞 값을 조금 바꾸면 뒤 값이 몇 배로 변하나')이 0이라면, 맨 앞 가중치의 기울기는?", "options": ["다른 배율들의 합만큼 남는다", "0이 되어 학습 신호가 닿지 않는다", "출력 쪽 배율과 같은 값이 된다", "통로 수에 비례해 오히려 커진다"], "a": 1, "why": "연쇄 법칙에 따라 앞쪽 가중치의 기울기는 거쳐 가는 단계의 배율을 모두 곱한 것이다. 곱 가운데 하나가 0이면 전체가 0이라, 그 가중치를 어느 쪽으로 옮길지 알려 주는 신호가 없다.", "wrongWhy": ["배율들은 더하는 것이 아니라 곱한다. 하나가 0이면 곱 전체가 0이다.", "", "출력 쪽 배율에 통로 배율들이 곱해진 값이다. 그중 0이 있으면 0이 된다.", "통로가 늘수록 배율이 더 곱해질 뿐이고, 0이 곱해지면 크기와 상관없이 0이다."], "ref": "d07a.html#b-backprop", "refLabel": "역전파: 기울기는 배율의 곱", "fig": "../assets/img/d07/fig7-chain-rule.svg", "figAlt": "두 단계 사슬에서 세 배율을 곱해 앞쪽 가중치의 기울기를 구하는 그림"}, {"id": "d07-rb05", "type": "mc", "q": "RNN 한 단계의 통로 배율은 '가중치 × tanh의 기울기 f′'다. 가중치가 0.9인데 tanh에 들어가는 값이 3 근처라 곡선이 거의 평평한(포화한) 자리라면, 이 통로의 배율은?", "options": ["0.9보다 훨씬 작다", "0.9와 거의 같다", "0.9보다 조금 크다", "1보다 훨씬 크다"], "a": 0, "why": "tanh의 기울기 f′는 입력 0에서 1로 가장 크고, 곡선이 평평해질수록 0에 가까워진다(입력 3이면 약 0.01). 그래서 배율 0.9 × f′는 약 0.009로, 가중치 0.9보다 훨씬 작다.", "wrongWhy": ["", "0.9와 같아지려면 f′가 1 근처, 곧 tanh에 들어가는 값이 0 근처여야 한다.", "f′는 1을 넘지 않으므로 배율의 크기는 가중치 0.9를 넘지 못한다.", "f′가 1 이하라 배율은 가중치보다 커질 수 없고, 포화한 자리에서는 오히려 매우 작다."], "ref": "d07a.html#b-backprop", "refLabel": "tanh와 그 기울기 f′(그림 3(Day 11))", "fig": "../assets/img/d07/fig8-tanh.svg", "figAlt": "S자 tanh 곡선과, 입력이 0에서 멀어질수록 0에 가까워지는 그 기울기"}, {"id": "d07-rb06", "type": "mc", "q": "상태가 두 칸인 RNN에서 한 칸은 이전 값의 30%, 다른 칸은 95%를 다음 단계로 남긴다(서로 섞이지 않음). 입력 1이 한 번 들어온 뒤 0만 들어왔다. 10단계 뒤 '그 입력이 있었는지'를 읽어 내기에 쓸모 있는 칸은?", "options": ["30% 칸, 빨리 반응하므로", "두 칸 모두 비슷하게 쓸모 있다", "두 칸 모두 흔적이 없다", "95% 칸, 흔적이 더 오래 남으므로"], "a": 3, "why": "남는 비율이 한 단계마다 곱해지므로, 10단계 뒤 흔적은 30% 칸에서 0.3¹⁰ ≈ 0.000006배, 95% 칸에서 0.95¹⁰ ≈ 0.6배다. 오래 남기는 칸이 먼 과거를 담는다.", "wrongWhy": ["30% 칸은 한 단계마다 70%씩 잃어 10단계 뒤에는 흔적이 거의 없다.", "두 칸의 남는 비율이 크게 달라 10단계 뒤 흔적의 크기는 수만 배 차이가 난다.", "95% 칸에는 10단계 뒤에도 처음의 약 60%가 남는다.", ""], "ref": "d07a.html#s-rnn-general", "refLabel": "상태가 둘이면: 빨리 잊는 칸과 천천히 잊는 칸"}, {"id": "d07-rb07", "type": "mc", "q": "tanh 없이 h(t+1) = c × h(t) + u(t)로 도는 RNN에서 계수 c를 0.5에서 0.9로 바꿨다. 입력의 흔적과, 시간을 거슬러 가는 학습 신호(기울기)는 각각 어떻게 되나?", "options": ["흔적은 오래 남고, 기울기는 더 빨리 사라진다", "흔적은 빨리 사라지고, 기울기는 더 멀리 닿는다", "흔적은 오래 남고, 기울기도 더 멀리 닿는다", "흔적은 그대로이고, 기울기만 더 멀리 닿는다"], "a": 2, "why": "앞으로 가는 흔적도, 거꾸로 가는 기울기도 한 단계마다 같은 c가 곱해진다. c가 1에 가까울수록 둘 다 천천히 줄어든다(20단계: 0.5²⁰ ≈ 10⁻⁶, 0.9²⁰ ≈ 0.12). 오래 기억하게 하는 계수와 먼 과거까지 학습 신호가 닿게 하는 계수는 같은 수다.", "wrongWhy": ["흔적과 기울기에는 같은 c가 곱해지므로 한쪽만 빨라질 수 없다.", "c가 커지면 한 단계에 남는 몫이 커지므로 흔적은 더 오래 남는다.", "", "흔적도 한 단계마다 c배가 되므로 c가 바뀌면 흔적이 남는 길이도 바뀐다."], "ref": "d07a.html#s-memory-gradient", "refLabel": "흔적과 기울기는 같은 곱"}, {"id": "d07-rb08", "type": "mc", "q": "시간을 거슬러 30단계를 가며 같은 통로 배율이 곱해지는 단순한 모형이다. 배율이 1.2일 때와 0.8일 때, 30단계 전까지 닿는 기울기는 각각 어떻게 되나?", "options": ["1.2는 크게 터지고, 0.8은 거의 0으로 줄어든다", "둘 다 1에 가까워 거의 그대로 유지된다", "1.2는 거의 0이 되고, 0.8은 크게 터진다", "둘 다 조금씩 줄지만 크기는 비슷하다"], "a": 0, "why": "같은 인자를 k번 곱하면 1보다 크면 커지고 작으면 줄어든다. 1.2³⁰은 약 240, 0.8³⁰은 약 0.001이다. 앞은 기울기 폭주, 뒤는 기울기 소실이다.", "wrongWhy": ["", "1에서 조금만 벗어나도 30번 곱하면 차이가 수백 배로 커진다.", "방향이 반대다. 1보다 큰 수를 거듭 곱하면 커지고, 작은 수를 곱하면 줄어든다.", "1.2는 곱할수록 커지므로 줄어들지 않는다. 두 경우의 크기는 수십만 배 차이가 난다."], "ref": "d07a.html#s-vanish-explode", "refLabel": "같은 인자를 k번: 소실과 폭주", "fig": "../assets/img/d07/fig2-gradient-product.svg", "figAlt": "인자 0.5, 1.0, 1.5를 k번 곱한 값을 로그 눈금으로 그린 세 선"}, {"id": "d07-rb09", "type": "mc", "q": "상태가 두 칸인 RNN의 W가 행 1 = (0.3, 0), 행 2 = (0, 1.1)이다. 이 W를 매 단계 반복해 곱할 때 무엇이 결과를 좌우하나?", "options": ["두 고윳값의 평균 0.7이므로 서서히 줄어든다", "가장 작은 고윳값 0.3이므로 빨리 사라진다", "대각선 밖이 0이므로 반복해도 변하지 않는다", "가장 큰 고윳값 1.1이므로 그 방향이 커진다"], "a": 3, "why": "이 W는 첫째 칸 방향을 0.3배, 둘째 칸 방향을 1.1배 하므로 고윳값이 0.3과 1.1이다. k번 곱하면 0.3ᵏ과 1.1ᵏ이 되고, 마지막까지 남아 결과를 좌우하는 것은 크기가 가장 큰 고윳값 1.1의 방향이다. 1보다 크므로 그 방향은 커진다.", "wrongWhy": ["고윳값은 평균 내지 않는다. 각 방향이 따로 0.3ᵏ배, 1.1ᵏ배가 된다.", "0.3 방향은 사라지지만 1.1 방향은 커지므로, 전체 모양은 1.1이 정한다.", "대각선 밖이 0이면 칸끼리 섞이지 않을 뿐, 각 칸은 0.3배·1.1배씩 계속 변한다.", ""], "ref": "d07a.html#s-vanish-explode", "refLabel": "상태가 여럿이면: 고윳값"}, {"id": "d07-rb10", "type": "ox", "q": "이온 소자로 만든 RNN의 내부를 기울기로 학습시키려면, 소자 내부의 값을 바꿀 수 있어야 하고 '입력을 조금 바꾸면 출력이 몇 배로 변하나'를 식으로 쓸 수 있는 모형도 있어야 한다.", "a": true, "why": "내부 가중치를 학습하려면 그 값을 고칠 수 있어야 하고, 기울기를 계산하려면 통로 배율을 식으로 쓸 수 있는 미분 가능한 모형이 필요하다. 재료 덩어리나 소자로 만든 네트워크는 둘 다 어렵다. 이것이 물리 소자의 세 번째 벽이다.", "wrongWhy": ["", "기울기 학습은 '어느 쪽으로 얼마나 고칠지'를 계산하고 실제로 고치는 일이라, 두 조건이 모두 필요하다."], "ref": "d07a.html#s-physical-wall", "refLabel": "물리 소자의 세 번째 벽"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "'오늘 값 = 0.5 × 지난 학습에서 값 + 오늘 입력'이라는 규칙에서, 월요일에만 입력 1이 있고 나머지 날은 0일 때 월~금의 값을 손으로 계산해 막대그래프로 그려 보세요. 0.5 대신 1.5를 넣은 그래프도 옆에 그리고, 이 숫자(0.5 또는 1.5)를 데이터에 맞게 고쳐 가며 '학습'시키려면 무엇이 어려울지 한 줄로 적어 보세요.", "items": [{"id": "d07-p01", "ref": "#b-training", "type": "mc", "q": "신경망을 '학습'시킨다는 것은 무엇을 하는 일인가?", "options": ["입력 데이터를 저장했다가 그대로 다시 꺼내는 일", "출력이 정답에 가까워지게 입력에 곱하는 수를 고치는 일", "정답에 맞게 입력 데이터 자체를 고쳐 다시 넣는 일", "회로의 연결선을 새로 깔아 계산 순서를 바꾸는 일"], "a": 1, "why": "모델은 입력 × 가중치로 출력을 내고, 학습은 손실(오차²)이 줄도록 가중치를 데이터로 고치는 일입니다(0구간 '학습' 기초). 바뀌는 것은 데이터가 아니라 가중치입니다. 저장했다 꺼내기는 외우기이고, 입력을 고치면 모델은 그대로입니다.", "refLabel": "기초: 학습 — 오차와 손실"}, {"id": "d07-p02", "ref": "#s-gd-step", "type": "ox", "q": "오차를 줄이려고 가중치를 기울기 반대 방향으로 옮길 때, 한 번에 많이 옮길수록(보폭이 클수록) 오차는 언제나 더 빨리 줄어든다.", "a": false, "why": "보폭이 너무 크면 골짜기 바닥을 지나쳐 반대편으로 튀어 오차가 오히려 커집니다. 예시에서 보폭 0.05면 손실이 9 → 3.24로 줄지만, 0.5면 9 → 81로 나빠집니다(0구간).", "refLabel": "기울기의 반대쪽으로 한 걸음 (단계 5: 보폭이 너무 크면)"}, {"id": "d07-p03", "ref": "#s-rnn-small", "type": "mc", "q": "시간 순서로 들어오는 신호를 다루는 순환 신경망(RNN)이 보통 신경망과 달리 다음 시간 단계로 넘겨주는 것은?", "options": ["방금까지의 입력이 남긴 상태값", "이번 단계의 정답 값", "이번 단계에서 새로 고친 가중치", "다음에 들어올 입력의 예측값"], "a": 0, "why": "RNN은 은닉 상태 h(t)를 다음 단계로 넘겨 '방금 전까지'를 담고, 같은 가중치를 매 단계 다시 씁니다. 입력 1 뒤에 0만 와도 0.762 → 0.363 → 0.180처럼 흔적이 줄어들며 남습니다(1구간). 정답이나 가중치는 시간 단계마다 넘기는 값이 아닙니다.", "refLabel": "1구간 작은 예: 0.762 → 0.363 → …"}, {"id": "d07-p04", "ref": "#s-bptt-chain", "type": "mc", "q": "시간을 거슬러 학습 신호를 한 단계씩 전할 때마다 같은 배율 0.5가 곱해진다면, 20단계 전의 가중치에 도착하는 학습 신호는 처음의 대략 몇 배인가?", "options": ["처음의 절반(0.5배)", "처음의 약 10분의 1", "처음과 같다(1배)", "처음의 약 100만분의 1"], "a": 3, "why": "같은 인자가 단계마다 곱해지므로 0.5²⁰ ≈ 10⁻⁶입니다(기울기 소실). 배율이 1.5면 1.5²⁰ ≈ 3,325로 폭주합니다. '같은 숫자를 반복해 곱하는 구조'가 순환 신경망 학습을 어렵게 합니다(2구간, 그림 5(Day 11)·6).", "refLabel": "그림 5(Day 11): 거꾸로 배율을 곱하기"}, {"id": "d07-p05", "ref": "#s-vanish-explode", "type": "ox", "q": "순환 신경망 학습이 어려운 근본 이유는 컴퓨터가 느리기 때문이므로, 충분히 빠른 컴퓨터를 쓰면 해결된다.", "a": false, "why": "더 빠른 컴퓨터로도 0.5²⁰은 10⁻⁶입니다. 소실·폭주는 같은 인자를 반복해 곱하는 구조에서 오고, 물리 소자에서는 '내부에 손을 댈 수 없고 미분 가능한 모형이 없다'는 벽이 하나 더 있습니다(2구간).", "refLabel": "같은 인자를 k번: 소실과 폭주"}, {"id": "d07-p06", "ref": "#s-readout-fit", "type": "mc", "q": "순환 신경망의 내부 연결은 무작위로 정한 뒤 고정하고, 마지막 출력 연결만 학습하는 방식(reservoir computing)이 얻는 것은?", "options": ["깊은 신경망보다 표현력이 높아진다", "내부 연결도 학습 중에 저절로 다듬어진다", "어떤 과제에서나 깊은 신경망보다 정확해진다", "시간을 거슬러 기울기를 전할 필요가 없어진다"], "a": 3, "why": "출력층 하나만 학습하면 그 기울기는 '2 × 오차 × 지금 상태'뿐이라 시간을 거슬러 갈 사슬이 없고, 선형 회귀로 한 번에 풀 수도 있습니다(3구간, 그림 8). 대신 내부를 데이터에 맞춰 다듬지 못하므로 표현력은 깊은 신경망보다 낮습니다(3-5).", "refLabel": "3구간 작은 예: readout만 맞추기"}, {"id": "d07-p07", "ref": "#s-prc-why", "type": "ox", "q": "물질 덩어리를 reservoir(고정된 내부)로 쓰는 데에, 그 물질 속 구조가 뇌의 뉴런을 닮을 필요는 없다.", "a": true, "why": "재료는 뉴런을 닮을 필요가 없고, 비선형이고 소산적이면(서서히 잊으면) 됩니다. 대신 측정할 수 있는 여러 상태, 입력과 맞는 시간척도 같은 요구를 만족해야 합니다(4구간).", "refLabel": "4-1: ESN 모형이 물리 구현에 맞는 이유"}, {"id": "d07-p08", "ref": "#s-position", "type": "mc", "q": "reservoir computing과 뉴로모픽 컴퓨팅의 관계로 맞는 것은?", "options": ["같은 개념을 부르는 서로 다른 두 이름이다", "RC는 계산 방법이고, 물리 RC가 뉴로모픽과 만난다", "RC는 스파이크를 쓰는 뉴로모픽 칩에서만 돌아간다", "RC를 컴퓨터로 돌려도 그 자체로 뉴로모픽 하드웨어다"], "a": 1, "why": "RC는 알고리즘이고, reservoir를 물리로 바꾼 구현(PRC)이 뉴로모픽 지도의 물리 컴퓨팅 줄기에 놓입니다. 컴퓨터 안의 난수 행렬로 돌리는 RC는 뉴로모픽 하드웨어가 아닙니다(5구간). ESN은 실수값 뉴런을 쓰므로 스파이크 칩에 묶이지도 않습니다.", "refLabel": "5-1: RC와 PRC를 Day 1–2의 지도 위에"}]}, "0-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 기울기 한 걸음", "items": [{"id": "d07-q27", "type": "short", "q": "[풀이 예시 확인] 본문 모델(입력 2, 정답 5)에서 $w=1.0$, 학습률 0.05로 한 걸음 가면 $w=1.6$이었다. 그때의 손실 $L$은? (숫자만)", "a": ["3.24", "3.2", "약 3.24", "약3.24"], "why": "$y = 1.6\\times2 = 3.2$, 오차 $3.2-5 = -1.8$, 제곱하면 3.24. 9가 나왔다면 걸음 전의 손실을 쓴 것이고, 1.8이 나왔다면 제곱을 빠뜨린 것 — 손실은 오차의 제곱이다(기초 계단: 학습).", "ref": "#s-gd-step", "refLabel": "한 걸음 단계 3: 손실 확인"}, {"id": "d07-q28", "type": "short", "q": "[일부 채우기] 같은 모델, $w=1.0$, 학습률 0.1. 새 $w = 1.0 - 0.1\\times(▢) = ?$ 빈칸의 기울기와 새 $w$를 '빈칸,답' 꼴로 (예: -3,1.3)", "a": ["-12,2.2", "-12, 2.2", "−12,2.2", "−12, 2.2", "(-12,2.2)", "(-12, 2.2)"], "why": "기울기는 $2\\times(2-5)\\times2 = -12$, 새 $w = 1.0 + 1.2 = 2.2$. 빈칸에 +12를 넣어 $w = -0.2$가 됐다면 '기울기 부호 = 옮길 방향'으로 헷갈린 것 — 옮기는 방향은 기울기의 반대쪽이다(기초 계단: 기울기, 그림 1(Day 11)).", "ref": "#b-gradient", "refLabel": "기울기 공식과 그림 1(Day 11)"}, {"id": "d07-q29", "type": "short", "q": "[혼자 풀기] 새 데이터: 입력 1, 정답 3. $w=1.0$, 학습률 0.1로 한 걸음 간 뒤의 $w$는? (숫자만)", "a": ["1.4", "1.40"], "why": "$y = 1$, 오차 $-2$, 기울기 $2\\times(-2)\\times1 = -4$, 새 $w = 1.0 - 0.1\\times(-4) = 1.4$. 0.6이 나왔다면 기울기를 뺀 것이 아니라 더한 것(부호), 2.2가 나왔다면 본문의 입력 2를 그대로 쓴 것. 공식 $dL/dw = 2\\times(y-\\text{정답})\\times u$의 $u$가 1로 바뀐 것을 확인(기초 계단: 기울기).", "ref": "#b-gradient", "refLabel": "기울기 공식 2 × 오차 × 입력"}]}, "0-end": {"kind": "end", "title": "0장 마무리 퀴즈", "items": [{"id": "d07-q31", "type": "mc", "q": "가중치 다섯 개가 일렬로 이어진 사슬(입력 → … → 출력)에서, 맨 앞 가중치의 기울기에는 '통로의 배율'이 몇 번 곱해지나?", "options": ["0번", "1번", "4번", "5번"], "a": 2, "why": "맨 앞 가중치와 손실 사이에 가중치 네 개가 끼어 있으므로 배율 네 개가 곱해진다(두 단계 사슬에서는 한 개, $w_2 = 0.5$). 5번이라 답했다면 자기 자리의 배율($\\partial h/\\partial w_1 = u$)까지 통로로 센 것. 배율이 0.5 안팎이면 $0.5^4$ — 이것이 2구간에서 $0.5^k$가 되는 구조다(기초 계단: 역전파, 그림 2(Day 11)).", "ref": "#b-backprop", "refLabel": "역전파: 두 단계 사슬과 그림 2(Day 11)"}, {"id": "d07-q36", "type": "short", "q": "정답이 붙은 데이터가 3개이고, 데이터를 하나씩 볼 때마다 가중치를 한 걸음 옮긴다. 5 epoch 동안 가중치를 몇 번 옮기나? (숫자만)", "a": ["15", "15번", "15회"], "why": "한 epoch는 가진 데이터를 모두 한 번씩 쓰는 한 바퀴이므로 3걸음, 5 epoch면 3 × 5 = 15걸음입니다. 5라고 답했다면 epoch를 '한 걸음'으로 본 것이고, 3이라고 답했다면 epoch 수를 곱하지 않은 것입니다(0구간 epoch 표: 데이터 2개면 한 epoch에 2걸음).", "ref": "#s-epoch", "refLabel": "데이터가 여럿이면: epoch 표"}]}, "1-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d07-q01", "type": "short", "q": "1차원 예시 $h(t+1)=\\tanh(0.5\\,h(t)+u(t))$에서 $h(1)=0.762$, $u(1)=0$일 때 $h(2)$는? (소수 둘째 자리까지)", "a": ["0.36", "0.363", "0.3634", "0.364", "약 0.36", "약0.36"], "why": "$\\tanh(0.5\\times0.762)=\\tanh(0.381)\\approx0.363$. 입력이 0이어도 앞 상태의 절반이 남아 비선형 함수를 거친다. 줄어드는 속도를 정하는 것은 0.5다.", "ref": "#s-rnn-small", "refLabel": "1구간 작은 예: 0.762 → 0.363 → …"}, {"id": "d07-q02", "type": "ox", "q": "RNN은 시간 단계마다 서로 다른 가중치 행렬을 쓴다.", "a": false, "why": "같은 $W$를 매 단계 다시 쓴다(가중치 공유). 그래서 시간으로 펼치면 같은 상자가 줄지어 있고, 이것이 2절의 '같은 인자가 k번 곱해진다'의 원인이다.", "ref": "#s-rnn-general", "refLabel": "일반식: 같은 W를 매 단계"}]}, "1-end": {"kind": "end", "title": "1장 마무리 퀴즈", "items": [{"id": "d07-q03", "type": "mc", "q": "피드포워드 신경망이 시계열 처리에 부족한 가장 직접적인 이유는?", "options": ["가중치 수가 너무 적다", "비선형 함수를 쓰지 않는다", "학습 알고리즘이 없다", "방금 전까지를 담는 상태가 없다"], "a": 3, "why": "피드포워드는 입력 하나에 출력 하나이고 상태를 다음 단계로 넘기지 않는다. RNN은 은닉 상태 $h(t)$로 이력을 담는다 [Stepney 2024, p.665]. 가중치 수나 비선형성, 학습 알고리즘(역전파)은 부족하지 않다.", "ref": "#ch-rnn", "refLabel": "1구간 직관: 피드포워드와 RNN"}, {"id": "d07-q37", "type": "mc", "q": "$\\tanh$를 뺀 규칙 $h(t+1) = 0.9\\,h(t) + u(t)$에서 0.9의 뜻으로 맞는 것은? (Day 5–6 LIF의 0.9와 같은 꼴)", "options": ["한 단계마다 이전 상태의 90%가 남는다", "한 단계마다 이전 상태의 90%가 사라진다", "한 단계마다 상태가 0.9씩 줄어든다", "상태가 0.9단계 뒤에 0이 된다"], "a": 0, "why": "0.9는 이전 상태에 곱하는 유지 계수라서 입력이 없으면 1 → 0.9 → 0.81처럼 한 단계마다 지금 값의 90%가 남습니다(10%씩 줄어듦). '0.9씩 줄어든다'는 곱을 뺄셈으로 본 것이고, 90%가 사라지는 것은 계수 0.1일 때입니다. 1구간의 0.5는 50%가 남는 계수입니다(1구간 작은 예, Day 5–6 2-3).", "ref": "#s-rnn-small", "refLabel": "1구간 작은 예: 0.5와 Day 5–6의 0.9"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 기울기", "items": [{"id": "d07-q04", "type": "short", "q": "인자 0.5가 10번 곱해지면 약 얼마인가? (소수 또는 분수)", "a": ["0.001", "0.00098", "0.0010", "9.8e-4", "1e-3", "10^-3", "1/1000", "1/1024", "약 0.001", "약0.001", "천분의 1", "천분의1"], "why": "$0.5^{10}=1/1024\\approx0.001$. 20번이면 약 $10^{-6}$. 거슬러 올라갈수록 학습 신호가 사라지는 것이 기울기 소실이다(그림 6(Day 11)).", "ref": "#s-vanish-explode", "refLabel": "같은 인자를 k번: 그림 6(Day 11)"}, {"id": "d07-q05", "type": "mc", "q": "내부 가중치를 기울기로 학습시키는 방식이 물리 소자 reservoir에서 특히 어려운 이유는?", "options": ["내부를 바꿀 수단과 미분 가능한 소자 모형이 필요하다", "소자의 응답이 너무 빨라 기울기를 잴 틈이 없다", "소자는 선형이라 학습할 것이 없다", "물리 소자에서는 기울기 폭주가 늘 더 심하다"], "a": 0, "why": "기울기를 계산하려면 통로마다 '조금 바꾸면 몇 배'를 식으로 알아야 하고(미분 가능한 모형), 그 결과로 내부를 실제로 바꿀 수 있어야 한다. Stepney는 ESN의 장점을 바로 '내부 매개변수를 바꿀 필요도, 소자의 미분 가능한 모형도 필요 없다'로 정리한다 [Stepney 2024, p.669]. 속도·선형성·폭주의 정도는 이 어려움의 근거가 아니다.", "ref": "#s-physical-wall", "refLabel": "2-3: 물리 소자의 세 번째 벽"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d07-q38", "type": "mc", "q": "$\\tanh$ 없이 $h(t+1) = 0.9\\,h(t) + u(t)$로 도는 RNN에서, 20단계 전 상태에 대한 지금 상태의 배율(거꾸로 곱해 온 값)은 대략?", "options": ["0.9", "약 0.12", "약 10⁻⁶", "약 18"], "a": 1, "why": "통로 하나의 배율이 0.9이고 20번 곱해지므로 0.9²⁰ ≈ 0.12입니다. 앞으로 흔적이 0.9배씩 남는 것과 같은 곱입니다. 10⁻⁶은 인자 0.5일 때(0.5²⁰), 18은 0.9를 20번 더한 값, 0.9는 한 단계만 본 값입니다(2-2 '앞으로 사라지는 흔적과 거꾸로 사라지는 기울기').", "ref": "#s-memory-gradient", "refLabel": "앞으로 사라지는 흔적과 거꾸로 사라지는 기울기"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · ESN", "items": [{"id": "d07-q08", "type": "mc", "q": "ESN에서 학습하는 것은?", "options": ["입력 가중치 W_in만", "내부 가중치 W만", "출력 가중치 W_out만", "W_in, W, W_out 모두"], "a": 2, "why": "입력·내부 가중치는 난수로 고르고 고정하며, 출력 가중치만 반복 없는 한 번의 알고리즘(선형 회귀)으로 학습한다 [Stepney 2024, p.665].", "ref": "#s-esn-idea", "refLabel": "3-1: reservoir·echo·readout과 그림 7"}, {"id": "d07-q32", "type": "mc", "q": "물리 RC(PRC)에서 '내부 가중치 $W$'의 자리를 맡는 것과 그 학습 여부로 맞는 것은?", "options": ["컴퓨터 안의 난수 행렬이며 학습하지 않는다", "재료·소자의 물리 동역학이며 학습하지 않는다", "재료·소자의 물리 동역학이며 BPTT로 학습한다", "readout과 함께 선형 회귀로 학습한다"], "a": 1, "why": "3-1의 표 세 번째 열: 내부는 물리 동역학이 대신하고 만든 뒤에는 손대지 않는다. 학습하는 것은 $W_{out}$ 하나(선형 회귀). '난수 행렬'은 소프트웨어 ESN의 경우다. 내부가 고정이라 학습이 내부 값을 알 필요가 없다는 점이 재료를 reservoir로 쓸 수 있는 이유다. BPTT로 학습한다고 답했다면 2장의 세 번째 벽(내부 접근·미분 모형)을 다시.", "ref": "#s-fixed-vs-trained", "refLabel": "3-1 표: 무엇이 고정이고 무엇이 학습인가"}, {"id": "d07-q39", "type": "mc", "q": "3구간 예에서 readout 가중치 $w_b$의 기울기를 구할 때 필요한 것은?", "options": ["지금 상태 $h_b$와 지금 오차", "지난 단계들의 배율 0.5 × f′의 곱", "내부 가중치 0.9의 기울기", "처음 시작값 $h(0)$과 입력 전체"], "a": 0, "why": "readout은 상태에 가중치를 곱해 더하기만 하므로, 그 기울기는 0구간 공식 2 × 오차 × 입력에서 입력 자리에 지금 상태가 들어간 것뿐입니다(경우 A: 2 × (−0.768) × 0.595 = −0.914). 지난 단계의 배율을 곱해 모으는 것은 내부 0.5를 학습할 때(BPTT)이고, 시작값은 washout으로 버리는 쪽입니다(그림 8).", "ref": "#s-readout-fit", "refLabel": "3구간 작은 예: readout의 기울기(단계 2)"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d07-q10", "type": "mc", "q": "내부를 고정하고 readout만 학습할 때 치르는 대가로 맞는 것은?", "options": ["학습에 샘플이 훨씬 많이 필요해진다", "시간을 거슬러 가는 기울기 폭주가 더 심해진다", "도달할 수 있는 손실의 바닥이 더 높을 수 있다", "시간 순서가 있는 신호는 처리할 수 없게 된다"], "a": 2, "why": "내부 가중치를 데이터에 맞춰 고치지 못하므로 같은 데이터에서 도달할 수 있는 손실의 바닥이 더 높을 수 있다(표현력이 깊은 신경망보다 낮다 [Liang 2024, p.194]). 적은 샘플로 빠른 학습과 소실·폭주 회피는 오히려 얻은 것이고, 시간 신호 처리는 RC가 강한 쪽이다. 규모에 따른 포화('대개 2,000 뉴런 미만')는 과제 조건이 없는 리뷰의 관찰이라 보편 한계로 읽지 않는다(3-5).", "ref": "#s-gain-loss", "refLabel": "3-5: 무엇을 얻고 무엇을 잃었나"}, {"id": "d07-q40", "type": "ox", "q": "readout을 학습할 때 처음 몇 단계의 상태를 버리는(washout) 이유는, 그 상태가 입력보다 시작값 $h(0)$의 영향을 더 많이 받을 수 있기 때문이다.", "a": true, "why": "시작값 0과 0.8로 같은 입력을 넣으면 두 상태의 차이가 0.124 → 0.053 → 0.025로 줄어듭니다. 차이가 남아 있는 앞부분으로 readout을 맞추면 우연한 시작값을 배우게 되므로 버립니다. 시작값을 잊는 성질(Day 15의 echo state property)이 있어야 의미가 있습니다(3구간 단계 0).", "ref": "#s-washout", "refLabel": "3구간 단계 0: washout"}, {"id": "d07-q06", "type": "ox", "q": "ESN은 BPTT를 더 빠르게 계산하는 알고리즘이다.", "a": false, "why": "ESN은 BPTT를 빠르게 하는 것이 아니라 내부 가중치를 학습시키지 않음으로써 BPTT 자체를 하지 않는다. 출력 가중치만 한 번의 선형 회귀로 구한다 [Stepney 2024, p.665, 669].", "ref": "#s-readout-fit", "refLabel": "3구간 작은 예: readout만 맞추기(정리)"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 물리 구현", "items": [{"id": "d07-q13", "type": "mc", "q": "물질 덩어리를 reservoir로 쓰려 할 때 필요한 조건이 아닌 것은?", "options": ["측정할 수 있는 고차원 상태", "입력에 대한 (ESN과) 유사한 동역학", "fading memory", "뉴런을 닮은 내부 구조"], "a": 3, "why": "Stepney는 기판이 뉴런과 닮은 내부 구조가 전혀 없어도 되고, 측정할 수 있는 고차원 상태, (ESN과) 유사한 동역학, fading memory가 필요하다고 쓴다 [Stepney 2024, p.670, 672]. 학습은 내부 값을 보지 않고 상태만 읽기 때문이다(3-1 표).", "ref": "#s-prc-why", "refLabel": "4-1: 기판의 세 요구"}, {"id": "d07-q41", "type": "ox", "q": "외부 자극이 없으면 상태가 가라앉는(소산적) 기판은 대개 fading memory를 가지지만, 그것만으로 좋은 reservoir가 된다고 할 수는 없다.", "a": true, "why": "Stepney는 대부분의 기판이 소산적이므로 fading memory를 가진다고 쓰지만 [Stepney 2024, p.672], 바로 다음 절에서 시간척도 정합·잡음 강건성·계산 용량·인터페이스가 맞지 않으면 reservoir가 잘 안 된다고 씁니다 [Stepney 2024, p.672–673]. 내 소자에 대한 주장도 그래서 아직 가설입니다(4-1).", "ref": "#s-prc-hypothesis", "refLabel": "4-1: 지금은 가설입니다"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d07-q15", "type": "mc", "q": "2011년 delay-coupled RC의 핵심 아이디어는?", "options": ["뉴런 수를 수천 개로 늘린다", "노드 하나에 입력을 시간으로 쪼개 넣는다", "출력층을 memristor로 만든다", "reservoir를 스파이킹 방식으로 바꾼다"], "a": 1, "why": "Liang 2024 p.194: 매 시간 단계마다 마스크 행렬을 곱해 입력을 진동시키고 비선형 노드 하나에 넣는다. 노드가 하나여도 시간을 쪼개 여러 개처럼 쓴다(시간다중화). 전극이 둘뿐인 소자처럼 읽을 수 있는 상태가 적을 때 상태 수를 늘리는 방법이고, 그 비용은 Day 30–31에서 센다.", "ref": "#s-prc-history", "refLabel": "4-2: 물리로 옮긴 역사(시간다중화)"}, {"id": "d07-q42", "type": "mc", "q": "소자가 $\\tanh$와 시간 지연의 자리를 맡은 물리 ESN에서, 학습하는 것과 그 방법으로 맞는 것은?", "options": ["소자 내부 전도도, 시간 역전파로", "입력 가중치 $W_{in}$, 경사 하강으로", "모든 가중치, 반복 학습으로", "출력 가중치 $W_{out}$, 선형 회귀 한 번으로"], "a": 3, "why": "소자가 reservoir의 비선형과 기억을 맡아도 학습하는 것은 여전히 $W_{out}$ 하나이고, 상태를 모은 표 $U$와 정답으로 선형 회귀 공식 $(U^{\\mathsf T}U)^{-1}U^{\\mathsf T}y$를 한 번 계산한다 [Zhong 2026, p.8]. 3구간 표의 세 번째 열과 같다. 소자 내부를 시간 역전파로 학습하는 것은 2-3의 벽에 막힌다(4-3).", "ref": "#s-zhong", "refLabel": "4-3: 트랜지스터로 만든 ESN의 식"}, {"id": "d07-q17", "type": "ox", "q": "기판의 자연 시간척도는 입력의 시간척도보다 훨씬 빠를수록 reservoir로 좋다.", "a": false, "why": "p.673: 훨씬 빠르면 다음 입력이 오기 전에 이완해 기억이 없고, 훨씬 느리면 제대로 반응하지 못한다. 두 시간척도가 비슷해야 한다. 이온 소자의 ms–s가 자원인지 짐인지는 입력의 시간척도에 달렸다(Day 22–23).", "ref": "#s-prc-why", "refLabel": "4-1 적용 조건: 시간척도 정합"}]}, "5-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d07-q18", "type": "ox", "q": "재료가 입력에 비선형으로 반응하고 서서히 잊는다면, 그 자체로 계산을 한 것이다.", "a": false, "why": "그것은 reservoir의 재료가 될 수 있다는 조건이다. 계산이라고 부르려면 과제에 필요한 차이가 읽을 수 있는 상태들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며, 단순 기준선보다 나아야 한다 [Stepney 2024, p.666–667; Liang 2024, p.200–202].", "ref": "#s-when-compute", "refLabel": "5-2: 언제 '계산한다'고 말할 수 있나"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d07-q43", "type": "mc", "q": "같은 구성이라면 전자 소자로 만든 물리 RC(eRC)가 소프트웨어 RC보다 나을 수 있는 쪽은 주로 무엇인가?", "options": ["같은 구성에서의 정확도", "최첨단 깊은 신경망을 넘는 점수", "시스템 복잡도와 전력", "잡음이 전혀 없는 계산"], "a": 2, "why": "Liang은 기존 eRC 비교에서 하드웨어 잡음 때문에 비슷한 구성이면 소프트웨어 RC가 대개 더 정확하고, eRC의 장점은 정확도가 아니라 시스템 복잡도·전력(그리고 학습 비용·속도)에 있다고 정리한다 [Liang 2024, p.201]. 그 장점도 인코딩·측정·ADC·readout까지 센 시스템 비용으로 확인해야 한다(5-3, Day 30–31).", "ref": "#s-prc-promise", "refLabel": "5-3: PRC가 약속하는 것과 약속하지 않는 것"}, {"id": "d07-q20", "type": "mc", "q": "물리 소자가 '계산했다'고 말할 수 없는 경우는?", "options": ["출력을 읽는 단계에서 다른 컴퓨터가 계산을 다 한다", "기판의 내부 구조가 뉴런을 닮지 않았다", "readout이 상태의 선형 조합으로 되어 있다", "읽어 내는 상태가 여러 개(고차원)다"], "a": 0, "why": "Stepney의 AR 이론은 표현이 없는 경우, 출력 단계에서 다른 컴퓨터가 계산을 다 하는 경우(바위 컴퓨터), 맞은 결과만 고르는 경우를 '계산이 아니다'로 든다 [Stepney 2024, p.667]. 선형 readout과 고차원 상태는 오히려 RC의 정상 구성이고, 뉴런을 닮을 필요는 없다(4-1).", "ref": "#s-when-compute", "refLabel": "5-2: 계산이 아닌 세 경우"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d07-q34", "ref": "#s-fixed-vs-trained", "type": "mc", "q": "ESN 방식(내부 고정, 출력층만 학습)이 재료 덩어리나 소자를 reservoir로 쓰기에 특히 유리한 이유는?", "options": ["재료가 0과 1의 디지털 값을 내므로", "재료가 소프트웨어보다 늘 정확하므로", "재료를 쓰면 출력층이 필요 없으므로", "재료 내부를 바꾸거나 미분할 필요가 없으므로"], "a": 3, "why": "Stepney 2024 p.669: 내부 매개변수를 바꿀 필요도, 소자의 미분 가능한 모형도 필요 없다. 역전파는 통로마다 '배율'을 알아야 하는데(0구간), 재료의 배율은 식으로 쓰기 어렵다. 출력층(readout)은 오히려 유일하게 학습하는 부분이다.", "refLabel": "3-1 표: 내부가 고정이면 학습은 상태만 본다"}, {"id": "d07-q45", "type": "mc", "q": "1구간의 RNN($h(t+1) = \\tanh(0.5\\,h(t) + u(t))$)을 그대로 두고 readout만 학습하기로 했다. 이때 0.5에 대해 맞는 것은?", "options": ["0.5는 고정되고, 흔적이 줄어드는 빠르기를 정한다", "0.5도 readout과 함께 선형 회귀로 한 번에 정해진다", "0.5를 학습하지 않으므로 상태에 흔적이 남지 않는다", "0.5는 시간 역전파로 매 단계 계속 고쳐야 한다"], "a": 0, "why": "reservoir로 쓰면 0.5는 고정이고 학습하지 않습니다. 그래도 입력의 흔적은 0.762 → 0.363 → 0.180처럼 남고, 그 빠르기(한 단계에 몇 %가 남나)를 0.5가 정합니다. 그래서 빨리 잊는 0.5 칸 하나로는 경우 A·B를 못 가르고, 천천히 잊는 0.9 칸이 있어야 했습니다(3구간 작은 예). 선형 회귀로 정하는 것은 $W_{out}$뿐입니다.", "ref": "#s-readout-fit", "refLabel": "3구간 작은 예: 1구간 RNN을 reservoir로"}, {"id": "d07-q44", "type": "ox", "q": "물리 RC가 디지털 RC보다 유리하다고 주장하려면, 소자 하나의 에너지가 아니라 입력 인코딩·측정·ADC·readout까지 센 시스템 비용을 같은 과제에서 비교해야 한다.", "a": true, "why": "Liang은 디지털 RC보다 자원을 더 쓰는 PRC는 의미가 없다고 쓴다 [Liang 2024, p.202]. PRC의 약속은 '더 똑똑한 계산'이 아니라 시스템 전체 비용이고, 소자 하나의 숫자는 그 일부일 뿐이다(5-3, Day 30–31).", "ref": "#s-prc-promise", "refLabel": "5-3: PRC가 약속하는 것과 약속하지 않는 것"}, {"id": "d07-q26", "type": "mc", "q": "내 소자를 reservoir로 평가할 때 '계산 모형 먼저' 접근은 무엇부터 묻나?", "options": ["소자의 PPF 곡선만 있으면 reservoir가 되는가", "ESN 모형의 요구를 내 소자가 얼마나 만족하는가", "재료 연구 없이 모형만 바꾸면 되는가", "소자 곡선에 맞는 새 모형을 만들 수 있는가"], "a": 1, "why": "Stepney는 물리 컴퓨팅의 세 출발점 중 PRC를 '계산 모형 먼저'로 분류한다 [Stepney 2024, p.667]. 소자 곡선에서 출발해 '이것도 reservoir가 되지 않을까'를 묻거나 곡선에 맞는 모형을 만드는 것은 '기판 먼저'에 가깝다. Day 22–32의 평가 틀은 전자다(자료의 해석).", "ref": "#s-position", "refLabel": "5-1: '계산 모형 먼저'"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d07b">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d08a.html">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지 →</a></p>
+</div>
+</section>
+<section id="writing" class="level2">
+<h2 class="anchored" data-anchor-id="writing">선택 활동: 글로 정리하기</h2>
+<details class="fold writing-fold"><summary>선택 활동 펼치기 · 백지 회상, 가르치듯 내 답, 사전 테스트 다시 풀기 (학습 완료와 무관)</summary>
+<p><strong>가르치듯 내 답.</strong> 후배에게 설명한다고 생각하고 짧게(3–5문장 또는 작은 도식 하나) 답합니다.</p>
+<div class="editable" data-file="d07-answer" data-title="내 답" data-template="answer"></div>
+<p><strong>사전 테스트 다시 풀기.</strong> 같은 문제를 이유와 함께 다시 풉니다(정답을 이미 본 문제라 이해 점검 점수로 쓰지 않습니다).</p>
+<div class="quiz" data-day="d07" data-set="pre" data-mode="post"></div>
+</details>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d07a.html" class="pagination-link" aria-label="Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d08a.html" class="pagination-link" aria-label="Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지">
+        <span class="nav-page-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

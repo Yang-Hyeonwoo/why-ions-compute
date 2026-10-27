@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 49. 결정의 틀과 트랜스포머·어텐션 기초 – Why Ions Compute</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d30b.html" rel="next">
+<link href="../days/d29.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">커버</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">전체 학습 지도</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">장부</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../ledger/bottleneck.html">
+ <span class="dropdown-text">병목 장부</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/unknowns.html">
+ <span class="dropdown-text">아직 모르는 것</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/glossary.html">
+ <span class="dropdown-text">용어집</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/kill-criteria.html">
+ <span class="dropdown-text">접는 기준</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/references.html">
+ <span class="dropdown-text">참고문헌</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ledger/questions.html">
+ <span class="dropdown-text">질문 모음</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../rules.html"> 
+<span class="menu-text">공부 규칙</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d25a.html">Phase 5 · 무엇을 연구할까</a></li><li class="breadcrumb-item"><a href="../days/d30a.html">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">전체 학습 지도</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">장부</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">병목 장부</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">아직 모르는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어집</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">접는 기준</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">질문 모음</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rules.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">공부 규칙</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d25a.html">Phase 5 · 무엇을 연구할까</a></li><li class="breadcrumb-item"><a href="../days/d30a.html">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 49. 결정의 틀과 트랜스포머·어텐션 기초</h1>
+<p class="subtitle lead">Phase 5 · 나는 무엇을 연구해야 하는가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> — 연구 결정을 어떤 틀로 쓰고, 트랜스포머의 어텐션은 작은 숫자로 무엇을 하나?</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d30a">
+  <li data-step="lesson"><a href="#lesson"><b>1</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>2</b>학습 완료</a></li>
+</ol>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">사전 테스트 (선택)</h2>
+<details class="fold pretest-fold"><summary>사전 테스트 펼치기 · 배우기 전에 짐작해 보는 문제 (선택)</summary><div class="quiz" data-day="d30" data-set="pre"></div>
+</details>
+</section>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<div class="lesson-meta">
+<p>학습 구간 6개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 130분 안팎(추정) · 선택 영상 28분 · 퀴즈 25문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>(본문·캡션·Methods만, SI 미확인): Sun 2026 (EHD) p.1–2, 4–6 / Kim 2026 (EOC) p.1–3, 8 / Huang 2026 (BCM) p.1–2, 7–8 / Zhang 2026 (dopamine) p.1(초록·핵심어) / Jiang 2026 p.1120(Fig. 6) / Pandey 2026 p.13, 17 / Jiao 2026 p.1, 10–11 / Fan 2026 p.6 / Roadmap 2026 p.8103, 8139 / Aluru 2026 p.598(Table 1) / Huang 2026 p.12, Wang 2022 p.586·593은 Day 43–44·Day 45–46에서 대조한 쪽. <strong>폴더 밖 문헌</strong>(Vaswani 2017, Brown 2020, Shen 2021, Köster 2024, Chen 2025 (ALBERT), Büchel 2024, Leroux 2025, Anderson 2023, Gu &amp; Dao 2024, Bienenstock 1982, Camsari 2017)은 2026-10-24에 웹(출판사·arXiv·ACL Anthology·Crossref)에서 <strong>서지를 확인</strong>했고, 내용은 초록과 일부 본문 요약 수준이라 문장마다 <span class="tag tag-unverified">미확인</span>을 붙였습니다. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 3구간의 단어·숫자 목록은 설명용 장난감 값이며 실제 언어 모델의 값이 아닙니다.</p>
+</div>
+<p>30일의 마지막 날입니다. 30일 내내 따라온 물리 reservoir computing(RC)을 한 번 더 짧게 말하면, 고정된 물리계(이온 소자)가 입력 이력을 내부 상태로 바꾸고, 그 상태에 가중치를 곱해 더하는 마지막 층인 readout만 데이터로 학습하는 방식이었습니다(<a href="../days/d08a.html#b-reservoir-state">Day 13 기초</a>). Day 47에서 가설 후보를 세우는 방법을, Day 48에서 각 후보를 가장 싸게 죽일 수 있는 최소 실험과 기각 조건을 봤습니다. 오늘은 <strong>결정</strong>합니다. 이 연구를 할 가치가 있는가, 좁혀야 하는가, 접어야 하는가.</p>
+<p>오늘 자료는 세 부분입니다. 앞의 두 구간은 <strong>결정하는 방법</strong>입니다. 접는 기준을 먼저 대조하고, 그다음 결정을 적고, "한다" 또는 "좁혀서 한다"라면 연구문제 하나를 A–E 양식으로 씁니다. 가운데 두 구간은 사용자가 따로 물은 질문입니다. <strong>트랜스포머·LLM·어텐션은 무엇이고, RC나 물리 소자로 그것을 만들려는 시도는 어디까지 왔나?</strong> 뒤의 두 구간은 <strong>RC의 의미가 줄어든다면 이온 컴퓨팅은 어디로 가나</strong>, 그리고 오늘의 결정과 30일 회고입니다. 결정의 답은 오늘도 자료가 아니라 내가 씁니다.</p>
+<ol type="1">
+<li>한다·좁혀서 한다·접는다는 각각 무엇이고, 어떤 순서로 판단하나? '모름'과 이미 쓴 시간은 어떻게 다루나?</li>
+<li>A–E 연구문제 양식의 각 칸은 무엇에 답해야 하나? 좋은 A–E의 조건은?</li>
+<li>언어 모델은 무엇을 예측하나? 단어는 어떻게 숫자가 되고, 어텐션은 어떤 계산인가?</li>
+<li>RNN·RC·어텐션은 무엇이 다른가? 물리 소자·RC로 어텐션이나 트랜스포머를 구현한 시도는 무엇을 보였고 무엇을 보이지 못했나?</li>
+<li>RC의 의미가 줄어든다면 기술은 어디로 가나? 차세대 이온 컴퓨팅 후보는 무엇을 약속하고 아직 무엇이 없나?</li>
+<li>오늘의 결정을 어떻게 적고, 30일 전의 나와 무엇이 달라졌나?</li>
+</ol>
+<section id="ch-decision" class="level3">
+<h3 class="anchored" data-anchor-id="ch-decision">1. 결정의 세 갈래: 한다, 좁혀서 한다, 접는다</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 한다·좁혀서 한다·접는다를 각각 정의하고, "접는 기준 대조 → 치명 기준 → 모름의 판정 가능성 → 결정"의 순서로 가상의 장부 하나를 판정하며, '모름'과 매몰 비용을 다루는 규칙을 말할 수 있다.</p>
+</div>
+<p><strong>왜 순서가 중요한가.</strong> Day 49–50 양식 안내는 "먼저 Day 1–2에 적어 둔 접는 기준을 가져와 하나씩 대조하고, 그다음에 결정을 적는다. 순서를 바꾸면 결정이 감정으로 내려진다"고 적습니다. 결론을 먼저 정하면, 장부의 줄 가운데 그 결론을 뒷받침하는 줄만 눈에 들어오기 때문입니다(Day 47의 확증 편향). 이 교재는 Day 1–2부터 날마다 "접는 기준 후보"를 한 줄씩 장부에 적어 왔고, Day 48에서 기각 조건을 숫자로 적는 법을 봤습니다(<a href="../days/d29.html#b-kill-criteria">Day 48 기초: 기각 조건</a>). 짧게 다시 말하면, 기각 조건은 결과를 보기 전에 숫자로 적은 "이 결과면 접는다"였습니다. 오늘은 그 장부를 펼쳐 놓고 결정합니다.</p>
+<div id="b-decision" class="basics">
+<section id="할-것-좁힐-것-접을-것-판단-기준" class="level4">
+<h4 class="anchored" data-anchor-id="할-것-좁힐-것-접을-것-판단-기준">할 것 / 좁힐 것 / 접을 것: 판단 기준</h4>
+<p><strong>세 갈래의 뜻(이 교재의 정의).</strong></p>
+<ul>
+<li><strong>한다</strong>: 접는 기준을 통과했고, 남은 '모름'은 정해 둔 기간 안의 최소 실험으로 판정할 수 있으며, A–E로 연구문제 하나를 쓸 수 있다.</li>
+<li><strong>좁혀서 한다</strong>: 일부 기준이 걸렸거나 '모름'이 크지만, <strong>범위를 줄이면</strong> 기준을 통과하는 버전이 있다. 줄이는 방향은 넷이다(아래 표).</li>
+<li><strong>접는다</strong>: 방향 전체를 무너뜨리는 <strong>치명 기준</strong>이 걸렸고, 좁혀도 통과하는 버전이 없다. 접는 것은 "이 틀"(예: 이온 RC를 계산 소자로 쓰는 연구)이지 소재나 연구자가 아니다. Day 1–2에서 본 넷째 선택지("뉴로모픽이라는 틀을 떠나 이온 고분자의 다른 문제로")가 이것이다(<a href="../days/d01b.html#ch-my-position">Day 2 5구간</a>).</li>
+</ul>
+<p><strong>좁히는 네 방향.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>방향</th>
+<th>무엇을 줄이나</th>
+<th>예</th>
+<th>어느 날의 재료</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>응용을 좁힌다</td>
+<td>목표 응용의 요구 사양</td>
+<td>몸 안 수년 → 피부 위·단기 이식</td>
+<td>Day 45–46 교차표</td>
+</tr>
+<tr class="even">
+<td>주장을 좁힌다</td>
+<td>증거 계단의 높이</td>
+<td>"저전력 시스템" → "원시 입력보다 시험 오차가 낮다"</td>
+<td>Day 41–42 계단, Day 32 증거 수준</td>
+</tr>
+<tr class="odd">
+<td>메커니즘을 좁힌다</td>
+<td>다루는 이온 물리의 범위</td>
+<td>여러 메커니즘이 섞인 소자 → 하나를 떼어 낸 소자</td>
+<td>Day 35–36 메커니즘 표</td>
+</tr>
+<tr class="even">
+<td>역할을 좁힌다</td>
+<td>이온이 맡는 일</td>
+<td>계산 전체 → 계면의 감지·전처리</td>
+<td>Day 45–46의 반론</td>
+</tr>
+</tbody>
+</table>
+<p><strong>판단 규칙 다섯.</strong> <span class="tag tag-interp">해석</span></p>
+<ol type="1">
+<li><strong>기준이 먼저, 결정은 그다음.</strong> 대조 전에 결론을 적지 않는다.</li>
+<li><strong>치명 기준을 대조 전에 표시한다.</strong> 장부의 줄 가운데 "이것이 걸리면 방향 전체가 무너지는 줄"을 먼저 고른다. 결과를 보고 고르면 1번이 깨진다.</li>
+<li><strong>'모름'은 '통과'가 아니다.</strong> '모름'은 판정 가능한가로 다시 나눈다. 정해 둔 기간 안의 최소 실험으로 판정할 수 있으면 "좁혀서 한다"의 일감이 되고, 판정할 수 없으면 그 가정 위에 연구를 세우지 않는다.</li>
+<li><strong>이미 쓴 시간·돈(매몰 비용)은 칸에 넣지 않는다.</strong> 2년을 썼다는 사실은 앞으로의 가치에 대한 근거가 아니다.</li>
+<li><strong>결정은 영원하지 않다.</strong> 결정에는 "다시 결정할 날짜"를 함께 적는다. 그날 장부를 다시 대조한다.</li>
+</ol>
+</section>
+</div>
+<p>그림 1이 이 규칙을 흐름으로 그린 것입니다. <strong>읽는 법</strong>: 위에서 아래로, 마름모마다 "예/아니요"를 따라갑니다. 초록이 계속하는 쪽, 빨강이 접거나 좁히는 쪽입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d30/fig1-decision-flow.svg" alt="결정 흐름도. ① 접는 기준 장부를 한 줄씩 대조(통과/걸림/모름+근거) → ② 치명 기준이 걸림인가? 예→접는다 또는 역할을 바꿔 좁힌다 / 아니요 → ③ 모름이 남았나? 아니요→한다(A–E로 연구문제 한 개) / 예 → ④ 각 모름을 Day 48의 최소 실험으로 정해 둔 기간 안에 판정할 수 있나? 예→좁혀서 한다(판정 실험+기각 조건+다시 결정할 날짜) / 아니요→좁히거나 접는다. 아래: 매몰 비용·소문·결론을 정해 두고 고른 근거는 칸에 넣지 않는다, 모름은 통과가 아니다" class="figure-img"><figcaption><b>그림 1.</b> 결정의 흐름(모식도). 흐름과 규칙은 이 교재의 제안이며 정답이 아니다. 내 답에서는 이 흐름을 바꿔 써도 되지만, 바꾼 이유를 적는다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>가상의 장부 하나를 판정해 보기.</strong> 표에 나오는 <strong>기준선</strong>은 소자에서 재료를 한 가지씩 뺀 비교 대상(원시 입력 + 같은 readout, 최근 입력 몇 개를 그대로 늘어놓고 직선을 맞추는 지연 탭 + 선형 회귀 등)이었습니다(<a href="../days/d16a.html#b-baselines">Day 28 기초</a>). 아래는 <strong>가상의 연구자 X</strong>가 Day 3–46에서 적었을 법한 접는 기준 후보 여덟 줄과, X가 오늘 매긴 판정입니다. 줄의 문장은 각 날의 "장부에 옮길 후보"에서 가져왔고, <strong>판정은 X의 것이지 내 판정이 아닙니다.</strong> 판정하는 순서를 보는 예입니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>접는 기준 후보 (날)</th>
+<th>X의 판정</th>
+<th>근거(X)</th>
+<th>치명?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>내 소자가 줄이는 벽을 하나도 지목하지 못하면 '에너지 효율'을 연구 동기로 쓰지 않는다 (Day 3–4)</td>
+<td>걸림</td>
+<td>벽을 지목하지 못함</td>
+<td>아니요</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>시스템 전력이 MCU + 작은 신경망보다 낮다는 계산을 못 하면 '엣지 적합'을 동기로 쓰지 않는다 (Day 9)</td>
+<td>모름</td>
+<td>계산 안 함</td>
+<td>아니요</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>응용의 기억 창과 소자 τ가 한 자릿수 안에서 겹치지 않으면 그 응용을 쓰지 않는다 (Day 22–23)</td>
+<td>통과</td>
+<td>박동 0.6–1 s, 소자 τ 수십 ms–수 s</td>
+<td>아니요</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>지연 탭 + 선형 회귀 기준선을 이기지 못하고 비용 이득도 없으면 '계산 소자'라 쓰지 않는다 (Day 28–29)</td>
+<td>모름</td>
+<td>측정 없음</td>
+<td><strong>예</strong></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>소자 간 CV(변동계수 = 표준편차 ÷ 평균)가 readout 이식을 깨고 응용이 칩별 재보정을 허용하지 않으면 그 응용을 쓰지 않는다 (Day 32)</td>
+<td>모름</td>
+<td>소자 간 CV 미측정</td>
+<td>아니요</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>원시 입력 + 같은 readout 기준선보다 낫지 않으면 계산 이득을 동기로 쓰지 않는다 (Day 41–42)</td>
+<td>모름</td>
+<td>측정 없음</td>
+<td><strong>예</strong></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>1년 반복 횟수의 1/1000도 견디지 못하고 원인이 소재 자체라면 그 응용을 쓰지 않는다 (Day 43–44)</td>
+<td>걸림(몸 안 수년)</td>
+<td>보고된 연성 소자 최대 약 4,000 펄스 vs 1년 약 1.6 × 10⁹ 펄스(Day 43–44)</td>
+<td>아니요</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>계면 전처리가 기준선보다 아무것도 줄이지 못하면 '이온 계산' → '이온 계면'으로 좁힌다 (Day 45–46)</td>
+<td>모름</td>
+<td>측정 없음</td>
+<td>아니요</td>
+</tr>
+</tbody>
+</table>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 치명 기준을 먼저 표시했다.</strong> X는 대조 전에 4번과 6번을 치명 기준으로 골랐습니다. X의 방향은 "이온 소자로 계산한다"이므로, 소자가 기준선을 못 이기면 방향 전체가 무너지기 때문입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 셈.</strong> 통과 1(3번), 걸림 2(1번, 7번), 모름 5(2, 4, 5, 6, 8번). 치명 기준(4, 6번)은 '걸림'이 아니라 '모름'입니다. 그러니 흐름의 ②에서 "접는다"로 가지 않습니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 걸린 줄은 좁혀서 피한다.</strong> 1번이 걸렸으므로 동기 문장에서 '에너지 효율'을 뺍니다(주장을 좁힘). 7번이 걸렸으므로 몸 안 수년 응용을 접고 피부 위·단기 응용으로 갑니다(응용을 좁힘).</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — '모름'의 판정 가능성.</strong> 4번과 6번은 기존 소자와 계산으로 3개월 안에 판정할 수 있습니다(Day 48의 사다리 1–2단). Day 48의 <strong>실험 비용 사다리</strong>는 실험을 싼 것부터 늘어놓은 단이었습니다. 0 문헌·옛 데이터 → 1 계산·시뮬레이션 → 2 기존 소자로 새 측정 → 3 새 소자 한 종 → 4 여러 소자·대조군 → 5 배열·회로 → 6 시스템(<a href="../days/d29.html#ch-minimal-experiment">Day 48 1구간</a>). 5번은 소자 여러 개가 필요해 6개월이 걸립니다. 2번과 8번은 지금 방향(계산 기여)의 판정에는 급하지 않습니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — X의 결정.</strong> "좁혀서 한다: 피부 위·단기 응용, '에너지 효율' 주장 없이. 3개월 안에 원시 입력 기준선 실험(6번)과 지연 탭 기준선 실험(4번)을 하고, 둘 중 하나라도 Day 48식 기각 구간(결과를 보기 전에 숫자로 적어 둔 '이 결과면 접는다'의 범위, <a href="../days/d29.html#ch-kill-numbers">Day 48 4구간</a>)이면 '이온 계산'을 접고 '이온 계면'(8번)으로 옮긴다. 다시 결정할 날: 3개월 뒤." 결정 문장에 판정 실험, 기각 조건, 날짜가 모두 들어 있습니다.</p>
+</div>
+</div>
+<p><strong>X의 결정을 내 결정으로 옮기지 않는다.</strong> 같은 장부에서도 치명 기준을 무엇으로 고르느냐(예: 방향이 "계산"이 아니라 "계면 소재"라면 4·6번은 치명이 아님)에 따라 결정이 달라집니다. 그래서 치명 기준을 고르는 일이 결정의 절반입니다.</p>
+<div class="quiz" data-day="d30" data-set="1-check"></div>
+<div class="keypoints">
+<ul>
+<li>한다(기준 통과 + 모름은 기간 안에 판정 가능), 좁혀서 한다(응용·주장·메커니즘·역할 중 하나 이상을 줄이면 통과), 접는다(치명 기준이 걸리고 좁혀도 안 됨). 접는 것은 틀이지 소재가 아니다.</li>
+<li>순서: 장부 대조 → 치명 기준(대조 전에 표시) → 모름의 판정 가능성 → 결정 + 다시 결정할 날짜.</li>
+<li>'모름'은 '통과'가 아니다. 매몰 비용은 칸에 넣지 않는다.</li>
+<li>가상의 X: 통과 1, 걸림 2, 모름 5, 치명 기준 둘은 모름 → "좁혀서 한다"(3개월 판정 실험 + 날짜). 치명 기준을 무엇으로 고르느냐가 결정을 바꾼다.</li>
+</ul>
+</div>
+</section>
+<section id="ch-a-to-e" class="level3">
+<h3 class="anchored" data-anchor-id="ch-a-to-e">2. A–E로 연구문제 한 개 쓰기</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 A–E 양식의 다섯 칸이 각각 무엇에 답해야 하는지, 어느 날의 재료로 채우는지 말하고, 좋은 A–E의 조건으로 막연한 초안 하나를 고쳐 쓸 수 있다.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="A–E는 새 제안입니다">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>A–E는 새 제안입니다
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>원래 계획표에는 "A–E 템플릿"이라는 이름만 있었고 각 항목의 정의는 없었습니다. 아래 정의는 이 교재가 새로 제안하는 것입니다. 마음에 들지 않으면 항목을 바꾸거나 더해도 됩니다. 결정이 "접는다"라면 A–E 대신 양식의 "접거나 좁히는 경우의 근거" 칸을 씁니다.</p>
+</div>
+</div>
+<p><strong>다섯 칸과 재료.</strong> 표의 '재료' 열에 나오는 앞 날의 낱말을 먼저 되짚습니다. Day 47의 <strong>사슬 ①</strong>은 "응용 → 요구 → 병목 → 필요한 값"으로 <em>왜 필요한가</em>를, <strong>사슬 ②</strong>는 "설계 손잡이 → 이온 동역학 → 소자 응답 → 계산 지표"로 <em>왜 그렇게 되는가</em>를 잇는 줄이었습니다(<a href="../days/d28.html#b-hypothesis-chain">Day 47 기초: 가설의 두 사슬</a>). Day 48의 <strong>세 구간</strong>은 결과를 보기 전에 숫자로 적어 둔 성공·모호·기각의 범위였습니다(<a href="../days/d29.html#ch-kill-numbers">Day 48 4구간</a>).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>칸</th>
+<th>답해야 할 질문</th>
+<th>채우는 재료</th>
+<th>흔한 실수</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>A. 문제</strong></td>
+<td>지금 분야가 답하지 못하는 구체적인 질문은? (한두 문장)</td>
+<td>Day 41–42 증거 표의 빈칸, Day 43–44 병목, Day 45–46 교차표의 "모름"</td>
+<td>주제를 문제로 씀("안정성을 높인다")</td>
+</tr>
+<tr class="even">
+<td><strong>B. 왜 지금, 왜 나인가</strong></td>
+<td>풀리면 어느 병목이 풀리나? 내가 풀 수 있는 이유는?</td>
+<td>병목 장부의 한 줄, Day 47 사슬 ①, 내 소재·장비·경험</td>
+<td>"중요하다"만 쓰고 장부의 어느 줄인지 없음</td>
+</tr>
+<tr class="odd">
+<td><strong>C. 가설과 예측</strong></td>
+<td>참이면 어떤 측정에서 어떤 숫자가? 틀리면?</td>
+<td>Day 47 가설과 사슬 ②</td>
+<td>틀릴 수 없게 씀</td>
+</tr>
+<tr class="even">
+<td><strong>D. 검증과 기각 조건</strong></td>
+<td>무엇을 만들고(또는 쓰고) 무엇을 재며, 어떤 결과면 접나?</td>
+<td>Day 48 최소 실험, 기준선, 세 구간</td>
+<td>숫자가 없음, 기준선이 없음</td>
+</tr>
+<tr class="odd">
+<td><strong>E. 결과가 바꾸는 것</strong></td>
+<td>다른 연구자는 이 결과를 보고 무엇을 다르게 하나? 실패해도 무엇을 배우나?</td>
+<td>Day 48 "성공하면/실패하면"</td>
+<td>"논문이 나온다"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>좋은 A–E의 조건.</strong> 양식 안내가 넷을 듭니다. A는 한 문장으로 말할 수 있고, C는 틀릴 수 있으며, D에 숫자가 있고, E는 "내 논문이 나온다"가 아니라 다른 사람이 무엇을 다르게 할지를 말한다. 이 교재는 둘을 더합니다. B가 병목 장부의 <strong>특정 줄</strong>을 가리키고, D의 첫 실험이 Day 48 사다리의 <strong>가장 낮은 단</strong>에 있다. <span class="tag tag-interp">해석</span></p>
+<p><strong>고쳐 쓰기 예시.</strong> 양식 안내의 작성 예시는 하이드로겔 소자의 drift를 봉지로 줄이는 연구입니다. 그것도 예시일 뿐입니다. 여기서는 같은 drift 주제를 Day 47·Day 48의 예시 A(이온겔, 용매 증발)로 바꿔, 막연한 초안부터 고쳐 쓰는 과정을 봅니다. <strong>이 예시는 쓰는 방법을 보이는 것이지 추천 연구가 아닙니다.</strong></p>
+<div class="stepper">
+<div class="step">
+<p><strong>초안.</strong> A: "이온겔 뉴로모픽 소자의 안정성을 높인다." C: "새 이온겔은 안정적일 것이다." D: "장기 안정성을 측정한다." E: "실용적인 이온 소자를 만든다." — 네 칸 모두 막연합니다. A는 주제이고, C는 틀릴 수 없으며, D에 숫자가 없고, E는 다른 사람이 할 일을 말하지 않습니다.</p>
+</div>
+<div class="step">
+<p><strong>A를 고치면.</strong> "이온겔 소자의 응답 drift가 용매 증발에서 오는지, 그리고 고분자 설계로 그것을 줄여 같은 readout을 1주 이상 쓸 수 있는지 잰 연구를 폴더 문헌에서 찾지 못했다." 한 문장이고, 무엇이 비어 있는지가 보입니다.</p>
+</div>
+<div class="step">
+<p><strong>B를 고치면.</strong> "병목 장부의 'readout 재보정 주기 vs drift' 줄(Day 43–44·Day 45–46)과 연결된다. 지금 겔의 재보정 주기는 약 2.5시간으로 추정되고 응용은 1주를 요구한다(약 67배 차이, Day 48). 나는 이온겔 조성을 바꿀 수 있고 24시간 연속 측정 장비가 있다." 장부의 줄과 숫자, 내 자원이 들어 있습니다.</p>
+</div>
+<div class="step">
+<p><strong>C와 D를 고치면.</strong> C: "drift는 용매 증발에서 온다. 그렇다면 같은 두께에서 24시간 동안 무게 감소와 응답 감소가 함께 움직이고, 비휘발 용매로 바꾼 겔은 drift 속도가 10배 이상 준다. 틀리면 무게가 그대로인데 응답이 변한다." D: "지금의 휘발 용매 겔 7개와 실험실에 이미 있는 비휘발(이온액체) 겔 7개로 24시간 측정(사다리 2단, 비휘발 겔이 없으면 새로 만들어야 하니 3단). 성공: 무게–응답 상관이 뚜렷하고 비휘발 겔의 drift가 10배 이상 감소. 기각: 3배 미만 감소 또는 무게와 무관한 drift. 기준선: 같은 두께의 지금 겔."</p>
+</div>
+<div class="step">
+<p><strong>E를 고치면.</strong> "성공하면 연성 이온 RC 논문들이 drift의 원인을 용매량으로 보고하고 설계로 다룰 수 있게 된다. 실패하면 drift의 원인이 전극·계면이라는 근거가 되어, drift 보정을 회로·소프트웨어로 맡기는 쪽이 정당해진다." 다른 사람이 무엇을 다르게 할지가 두 결과 모두에 들어 있습니다.</p>
+</div>
+</div>
+<figure class="fig figure"><img src="../assets/img/d30/fig6-a-to-e.svg" alt="다섯 줄 표 모식도. A 문제: 초안 '이온겔 소자의 안정성을 높인다' → drift가 용매 증발에서 오는지, 설계로 줄여 같은 readout을 1주 이상 쓸 수 있는지 잰 연구가 없다(주제 → 한 문장의 빈칸). B 왜 지금·나: 초안에 없음 → 장부의 재보정 주기 vs drift 줄, 지금 약 2.5 h vs 요구 1주(약 67배), 조성 변경과 24 h 측정 장비(장부의 줄 + 숫자 + 내 자원). C 가설·예측: '새 이온겔은 안정적일 것이다' → 증발이 원인이면 무게와 응답이 함께 변하고 비휘발 겔 drift 10배 이상 감소, 틀리면 무게는 그대로인데 응답 변화(틀릴 수 있게). D 검증·기각: '장기 안정성을 측정한다' → 겔 7개 + 비휘발 겔 7개 24 h, 성공 10배 감소, 기각 3배 미만 또는 무게와 무관한 drift, 기준선 같은 두께의 지금 겔(숫자·기준선·낮은 단). E 바꾸는 것: '실용적인 이온 소자를 만든다' → 성공이면 drift 원인을 용매량으로 보고·설계, 실패면 보정은 회로·소프트웨어로(다른 사람의 다음 행동)" class="figure-img"><figcaption><b>그림 6.</b> 위 고쳐 쓰기를 한 장으로(모식도). <b>볼 것:</b> 줄마다 왼쪽 회색 초안과 가운데 고친 것을 견주고, 오른쪽 초록 열이 위 '좋은 A–E의 조건'(A 한 문장, C 틀릴 수 있음, D 숫자, E 다른 사람의 행동, B 장부의 줄, D 가장 낮은 단)과 맞는지 확인하라. 예시이며 추천 연구가 아니다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>접거나 좁히는 경우.</strong> 결정이 "접는다"나 "좁혀서 한다"라면, 양식의 "접거나 좁히는 경우의 근거" 칸에 <strong>어느 가정이 무너졌는지(날과 쪽수)</strong>, <strong>어느 병목이 넘을 수 없었는지(메커니즘 때문인가 공정 때문인가, Day 43–44의 질문)</strong>를 적습니다. 접는 결론도 근거가 있으면 A–E만큼 가치 있는 결론입니다.</p>
+<div class="quiz" data-day="d30" data-set="2-check"></div>
+<div class="keypoints">
+<ul>
+<li>A 문제(한 문장의 빈칸), B 왜 지금·왜 나(장부의 특정 줄 + 내 자원), C 가설과 예측(틀릴 수 있게), D 검증과 기각 조건(최소 실험·기준선·숫자), E 결과가 바꾸는 것(다른 사람이 무엇을 다르게, 실패해도 무엇을).</li>
+<li>A–E는 이 교재의 새 제안이며 바꿔 써도 된다.</li>
+<li>고쳐 쓰기의 핵심: 주제 → 빈칸, "중요하다" → 장부의 줄과 숫자, "안정적일 것" → 틀릴 수 있는 예측, "측정한다" → 세 구간의 숫자, "실용적 소자" → 다른 사람의 행동.</li>
+</ul>
+</div>
+</section>
+<section id="ch-transformer" class="level3">
+<h3 class="anchored" data-anchor-id="ch-transformer">3. 트랜스포머·LLM·어텐션: 작은 숫자로 처음부터</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 언어 모델이 무엇을 예측하는지, 단어가 어떻게 숫자 목록이 되는지, 어텐션이 "내적 → softmax → 가중합"으로 무엇을 하는지를 작은 숫자로 직접 계산하고, 트랜스포머와 LLM이 그 위에 무엇을 쌓은 것인지 말할 수 있다.</p>
+</div>
+<p><strong>왜 지금 이것을 보나.</strong> 지난 30일 동안 RC는 "시간에 따라 들어오는 신호를 처리하는 방법"이었습니다. 그런데 오늘날 글·말소리·시계열 같은 순서 있는 데이터를 다루는 AI의 주력은 트랜스포머라는 구조이고, ChatGPT 같은 대형 언어 모델(LLM)이 그 대표입니다. RC의 자리를 판단하려면(5구간), 그 주력이 무엇을 하는지 알아야 합니다. 아무것도 가정하지 않고 처음부터 갑니다.</p>
+<div id="b-language-model" class="basics">
+<section id="언어-모델-다음-단어의-확률을-내는-기계-그리고-숫자-목록이-된-단어" class="level4">
+<h4 class="anchored" data-anchor-id="언어-모델-다음-단어의-확률을-내는-기계-그리고-숫자-목록이-된-단어">언어 모델: 다음 단어의 확률을 내는 기계, 그리고 숫자 목록이 된 단어</h4>
+<p><strong>언어 모델이 하는 일은 하나.</strong> 지금까지의 글을 보고, <strong>다음에 올 단어(정확히는 토큰)가 무엇일지 확률을 낸다.</strong> "나는 사과를"까지 보았다면, 다음 단어 후보마다 확률을 매깁니다. 그중 하나를 골라 붙이고, 다시 처음부터 같은 일을 합니다. 긴 답이 나오는 것은 이 한 걸음을 수백 번 되풀이한 결과입니다. <strong>토큰</strong>은 모델이 글을 자르는 단위로, 단어 하나일 수도 단어의 조각일 수도 있습니다 [미확인: 모델마다 다름]. 아래에서는 편하게 "단어"라고 씁니다.</p>
+<p><strong>점수에서 확률로: softmax 다시 보기.</strong> 모델은 후보마다 점수를 내고, 그 점수를 Day 13–14에서 본 softmax로 확률로 바꿉니다. 짧게 다시 말하면, softmax는 점수마다 <span class="math inline">\(e^{\text{점수}}\)</span>를 계산해 다 더한 뒤 각각을 합으로 나누는 계산이었고, 결과는 0–1 사이이고 합이 1이었습니다(<a href="../days/d08b.html#b-softmax">Day 14 기초: softmax</a>). "나는 사과를 ___"의 후보 점수가 (먹었다 2, 샀다 1, 달렸다 −1)이라면(예시 점수):</p>
+<ul>
+<li><span class="math inline">\(e^{2} = 7.389\)</span>, <span class="math inline">\(e^{1} = 2.718\)</span>, <span class="math inline">\(e^{-1} = 0.368\)</span>, 합 10.475</li>
+<li>확률: 7.389 ÷ 10.475 = <strong>0.705</strong>, 2.718 ÷ 10.475 = <strong>0.259</strong>, 0.368 ÷ 10.475 = <strong>0.035</strong></li>
+</ul>
+<p>모델은 확률대로 하나를 고릅니다(가장 큰 것만 고르게 할 수도 있습니다). 학습이란 수많은 글에서 "실제로 나온 다음 단어"의 확률이 커지도록 모델의 가중치를 고치는 일입니다. Day 11–12에서 본 대로, 틀린 정도를 손실이라는 숫자로 재고 그 손실이 줄어드는 쪽으로 가중치를 조금씩 옮기는 일입니다(<a href="../days/d07a.html#b-training">Day 11 기초: 학습</a>). 분류에서는 Day 13–14의 교차 엔트로피 손실을 씁니다.</p>
+<p><strong>단어를 숫자 목록으로.</strong> 계산하려면 단어가 숫자여야 합니다. 모델은 단어마다 <strong>숫자 목록</strong>(벡터, <a href="../days/d02a.html#b-matrix">Day 3 기초</a>)을 하나씩 갖고 있습니다. 실제 모델에서 이 목록의 길이는 수백에서 1만 남짓까지 모델마다 다릅니다(예: GPT-3 계열은 가장 작은 모델 768, 가중치가 1,750억 개인 가장 큰 모델 12,288. Brown 외 2020, arXiv:2005.14165 표 2.1을 Claude가 웹에서 확인), 그 숫자들도 학습으로 정해져서 비슷하게 쓰이는 단어는 비슷한 목록을 갖게 됩니다 <span class="tag tag-unverified">미확인</span>. 아래에서는 손으로 계산할 수 있게 길이 2–3짜리 장난감 목록을 씁니다.</p>
+<p><strong>두 목록이 얼마나 같은 쪽을 보나: 내적.</strong> 두 숫자 목록을 <strong>같은 자리끼리 곱해서 더한 값</strong>을 <strong>내적</strong>(dot product)이라 합니다. Day 3–4에서 행렬–벡터 곱의 "행 하나와 입력을 자리끼리 곱해 더하기"가 바로 내적이었습니다(<a href="../days/d02a.html#ch-mvm">Day 3 3구간</a>). (0, 2)와 (0, 1)의 내적은 0 × 0 + 2 × 1 = 2, (0, 2)와 (1, 0)의 내적은 0입니다. 두 목록이 같은 방향의 숫자를 크게 가질수록 내적이 큽니다.</p>
+</section>
+</div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/wjZofJX0v4M?start=0&amp;rel=0" title="영상: Transformers, the tech behind LLMs | Deep Learning Chapter 5" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:00–3:03, 약 3분, 이어서 12:27–18:25, 약 6분 · 전체 27분, 영어·자막).</b> 3Blue1Brown, "Transformers, the tech behind LLMs | Deep Learning Chapter 5". <b>볼 이유:</b> 첫 챕터 'Predict, sample, repeat'(0:00–3:03)가 위의 '다음 단어 확률 → 하나 고르기 → 되풀이'이고, 'Word embeddings'(12:27–18:25)가 '단어를 숫자 목록으로'와 내적을 그림으로 보여 준다. 'Softmax with temperature'(22:22)는 Day 13–14의 softmax를 다시 본다. 중간의 'The premise of Deep Learning'(7:20)은 Day 11–12의 학습 복습이라 건너뛰어도 된다. <b>보고 답할 질문:</b> 영상에서 뜻이 비슷한 단어들의 숫자 목록은 공간에서 어떻게 놓이나? 두 목록의 내적이 크다는 것은 무엇을 뜻하나(위의 (0, 2)·(0, 1) = 2와 연결)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명란·챕터(영상 내용은 직접 보지 못함, 미검증)</span></div></div>
+<p>이제 트랜스포머의 핵심 계산인 <strong>어텐션</strong>으로 갑니다.</p>
+<div id="b-transformer" class="basics">
+<section id="트랜스포머llm어텐션-문장의-어느-단어를-볼지-스스로-정하는-계산" class="level4">
+<h4 class="anchored" data-anchor-id="트랜스포머llm어텐션-문장의-어느-단어를-볼지-스스로-정하는-계산">트랜스포머·LLM·어텐션: 문장의 어느 단어를 볼지 스스로 정하는 계산</h4>
+<p><strong>① 왜 필요한가.</strong> "나는 사과를 먹었다"에서 "먹었다"의 뜻을 제대로 담으려면, <strong>무엇을</strong> 먹었는지("사과를")를 알아야 합니다. 그런데 필요한 단어가 바로 앞에 있다는 보장이 없습니다. 긴 글에서는 수십 단어 앞에 있을 수도 있습니다. 어텐션은 <strong>각 단어가 문장의 다른 단어들 중 어디를 볼지 숫자로 정하는</strong> 계산입니다.</p>
+<p><strong>② 무엇인가: 질문·꼬리표·내용.</strong> 각 단어는 자기 숫자 목록에서 세 개의 목록을 만듭니다. 만드는 법은 Day 3–4의 행렬–벡터 곱입니다(<a href="../days/d02a.html#ch-mvm">Day 3 3구간</a>). 단어의 목록 <span class="math inline">\(x\)</span>에 학습한 가중치 표(행렬) 세 개를 각각 곱하면 질문·꼬리표·내용이 나옵니다. 예를 들어 '먹었다'의 목록이 <span class="math inline">\(x\)</span> = (1, 2)이고 질문용 표의 두 행이 (0, 0)과 (0, 1)이라면, 질문은 (0 × 1 + 0 × 2, 0 × 1 + 1 × 2) = (0, 2)로 아래 손 계산의 질문이 됩니다(장난감 값). 같은 <span class="math inline">\(x\)</span>라도 곱하는 표가 다르면 서로 다른 목록이 나오고, 표의 행 수가 결과 목록의 길이를 정합니다(아래에서 내용은 길이 3).</p>
+<ul>
+<li><strong>질문</strong>(query, <span class="math inline">\(q\)</span>): "나는 이런 정보를 찾는다".</li>
+<li><strong>꼬리표</strong>(key, <span class="math inline">\(k\)</span>): "나는 이런 정보를 갖고 있다"라는 표시.</li>
+<li><strong>내용</strong>(value, <span class="math inline">\(v\)</span>): 남이 나를 볼 때 실제로 넘겨줄 정보.</li>
+</ul>
+<p><strong>③ 순서.</strong> (가) 내 질문과 각 단어의 꼬리표를 <strong>내적</strong>해 점수를 낸다 → (나) 점수를 <strong>softmax</strong>로 무게(0–1, 합 1)로 바꾼다 → (다) 각 단어의 <strong>내용</strong>에 그 무게를 곱해 더한다(<strong>가중합</strong>). 결과가 "다른 단어들을 보고 온" 나의 새 숫자 목록이다.</p>
+<p><strong>④ 작은 숫자로.</strong> 그림 2와 아래 단계가 같은 계산입니다. 숫자는 장난감 값입니다.</p>
+<p><strong>⑤ 이름과 정확한 뜻.</strong> 이 계산이 <strong>어텐션</strong>(attention, 주의)입니다. 이것을 여러 갈래로 동시에 하고(갈래마다 다른 질문·꼬리표를 배워 "목적어 찾기", "주어 찾기"처럼 다른 관계를 봄 [미확인: 실제 갈래의 역할은 해석이 어렵다고 알려짐]), 그 결과를 단어마다 작은 신경망 층(Day 5–6에서 본 "곱해서 더하고 휘게 하는" 층, <a href="../days/d03a.html#b-ann-snn">Day 5 기초 7</a>)에 통과시킨 묶음을 수십 번 쌓은 것이 <strong>트랜스포머</strong>(transformer)입니다. 2017년 논문은 이 구조를 순환(RNN)이나 합성곱 없이 "오직 어텐션 메커니즘에 기반한" 구조로 제안했습니다 <span class="src">Vaswani 2017, 초록</span> [미확인: 본문 대조 안 함]. <strong>LLM</strong>(large language model, 대형 언어 모델)은 아주 큰 트랜스포머를 아주 많은 글로 학습시켜 다음 단어를 예측하게 만든 것입니다. 예를 들어 GPT-3은 가중치가 1,750억 개인 언어 모델이었습니다 <span class="src">Brown 2020, 초록</span>. 이 모든 가중치(질문·꼬리표·내용을 만드는 표까지)는 Day 11–12의 역전파로 <strong>전부 학습</strong>합니다(<a href="../days/d07a.html#b-backprop">Day 11 기초: 역전파</a>). Roadmap은 GPT-3 같은 대형 언어 모델 하나를 학습시키는 에너지가 미국 가정 수백 가구의 연간 소비와 맞먹는다고 적습니다 <span class="src">Roadmap 2026, p.8103</span>.</p>
+<p><strong>⑥ 뉴로모픽·RC와의 연결.</strong> RC는 안쪽(reservoir)을 고정하고 readout만 학습합니다. 트랜스포머는 정반대로 <strong>모든 것을 학습</strong>합니다. 그리고 어텐션의 곱셈 중 일부(질문과 꼬리표의 내적)는 <strong>두 숫자가 모두 단어마다 바뀝니다.</strong> 이 두 가지가 4구간의 "물리 소자로 할 수 있나"를 정합니다.</p>
+</section>
+</div>
+<p><strong>어텐션 한 번을 손으로.</strong> "나는 사과를 먹었다"에서 "먹었다"의 질문이 <span class="math inline">\(q\)</span> = (0, 2), 즉 "무엇을?"을 찾는 목록이라고 합시다. 세 단어의 꼬리표는 나는 = (1, 0), 사과를 = (0, 1), 먹었다 = (0.5, 0.5), 내용은 계산 결과가 잘 보이게 나는 = (1, 0, 0), 사과를 = (0, 1, 0), 먹었다 = (0, 0, 1)로 둡니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 점수 = 내적.</strong> 나는: 0 × 1 + 2 × 0 = <strong>0</strong>. 사과를: 0 × 0 + 2 × 1 = <strong>2</strong>. 먹었다: 0 × 0.5 + 2 × 0.5 = <strong>1</strong>.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — softmax.</strong> <span class="math inline">\(e^{0} = 1.000\)</span>, <span class="math inline">\(e^{2} = 7.389\)</span>, <span class="math inline">\(e^{1} = 2.718\)</span>, 합 11.107. 무게는 1 ÷ 11.107 = <strong>0.090</strong>, 7.389 ÷ 11.107 = <strong>0.665</strong>, 2.718 ÷ 11.107 = <strong>0.245</strong>.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 가중합.</strong> 0.090 × (1, 0, 0) + 0.665 × (0, 1, 0) + 0.245 × (0, 0, 1) = <strong>(0.090, 0.665, 0.245)</strong>.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 뜻.</strong> "먹었다"의 새 목록에서 66.5%가 "사과를"의 내용입니다. "먹었다"가 목적어를 "보고" 와서 그 정보를 품게 되었습니다. 어떤 단어를 볼지는 질문과 꼬리표의 숫자가 정했고, 그 숫자들은 학습으로 정해집니다.</p>
+<p><strong>실제 모델의 한 가지 더: 점수를 <span class="math inline">\(\sqrt{d}\)</span>로 나눈다.</strong> 원 논문은 점수를 꼬리표 목록의 길이 <span class="math inline">\(d\)</span>의 제곱근으로 나눈 뒤 softmax를 합니다 <span class="src">Vaswani 2017, 3.2.1절</span>. 왜 그럴까요? 목록이 길면 자리끼리 곱한 값을 더 많이 더하므로 점수가 커집니다. 점수 차가 크면 softmax가 무게를 거의 한 단어에 몰아 줍니다. 예를 들어 점수가 (0, 20, 10)이면 무게는 약 (0.000, 1.000, 0.000)입니다. 이렇게 한쪽으로 쏠린 softmax에서는 점수를 조금 바꿔도 무게가 거의 변하지 않아, 학습이 가중치를 고칠 방향을 알려 주는 기울기(<a href="../days/d07a.html#b-gradient">Day 11 기초: 기울기</a>)가 아주 작아집니다. 원 논문은 이 때문에 나눈다고 적습니다. 위 장난감 예에서는 <span class="math inline">\(d\)</span> = 2이므로 √2 ≈ 1.41로 나누면 점수 (0, 1.41, 0.71), 무게 (0.140, 0.576, 0.284)로 조금 덜 뾰족해집니다(Claude 계산). 아래 퀴즈와 손 계산은 나누지 않은 단순한 꼴을 씁니다.</p>
+</div>
+</div>
+<figure class="fig figure"><img src="../assets/img/d30/fig2-attention-steps.svg" alt="어텐션 계산 단계 그림. ① 먹었다의 질문 q=(0,2). ② 꼬리표 k: 나는(1,0) 점수 0, 사과를(0,1) 점수 2, 먹었다(0.5,0.5) 점수 1. ③ softmax: e⁰=1.000, e²=7.389, e¹=2.718, 합 11.107, 무게 9.0%, 66.5%, 24.5% 막대. ④ 가중합 0.090×(1,0,0)+0.665×(0,1,0)+0.245×(0,0,1)=(0.090,0.665,0.245). 오른쪽 상자: 나는 사과를 ___ 다음 단어 점수 +2,+1,−1 → 70.5%, 25.9%, 3.5%" class="figure-img"><figcaption><b>그림 2.</b> 어텐션 한 번(왼쪽)과 언어 모델의 마지막 단계(오른쪽 상자)를 장난감 숫자로. 모든 숫자는 코드가 계산했다. 실제 모델의 목록 길이는 수백–1만 남짓(모델마다 다름)이고, 질문·꼬리표·내용은 학습한 가중치 표로 만들고, 점수는 √(목록 길이)로 나눈 뒤 softmax한다 <span class="src">Vaswani 2017, 3.2.1절</span>. (Claude가 계산해 그림)</figcaption></figure>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/eMlx5fFNoYc?start=99&amp;rel=0" title="영상: Attention in transformers, step-by-step | Deep Learning Chapter 6" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:39–15:44, 약 14분 · 전체 26분, 영어·자막).</b> 3Blue1Brown, "Attention in transformers, step-by-step | Deep Learning Chapter 6". <b>볼 이유:</b> 챕터 'Motivating examples'(1:39), 'The attention pattern'(4:29), 'Masking'(11:08), 'Context size'(12:42), 'Values'(13:10)가 위 손 계산(질문·꼬리표 내적 → softmax → 내용의 가중합)을 큰 그림으로 보여 준다. 'Context size'는 4구간의 n² 문제와 이어지고, 'Multiple heads'(19:19)는 기초 상자 ⑤의 '여러 갈래'다. <b>보고 답할 질문:</b> 영상의 attention pattern 격자에서 칸 하나는 위 단계 1–2의 어느 숫자에 해당하나? 문맥(단어 수)이 두 배가 되면 그 격자의 칸 수는 몇 배가 되나(그림 3(Day 50)과 연결)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명란·챕터(영상 내용은 직접 보지 못함, 미검증)</span></div></div>
+<div class="predict">
+<p>질문이 <span class="math inline">\(q\)</span> = (1, 1)이고 꼬리표가 (1, 0), (0, 1), (1, 1)이라면 점수는 각각 얼마이고, 어느 단어가 가장 큰 무게를 받을까요? 첫 문제는 위 계산의 확인, 둘째는 일부 채우기, 셋째는 혼자 풀기입니다.</p>
+</div>
+<div class="quiz" data-day="d30" data-set="3-check"></div>
+<div class="quiz" data-day="d30" data-set="3-end"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+언어 모델 / 토큰
+</dt>
+<dd>
+지금까지의 글로 다음 토큰의 확률을 내는 모델. 토큰은 글을 자르는 단위(단어 또는 조각).
+</dd>
+<dt>
+내적
+</dt>
+<dd>
+두 숫자 목록을 같은 자리끼리 곱해 더한 값. 같은 쪽을 볼수록 크다. 행렬–벡터 곱의 한 행과 같은 계산.
+</dd>
+<dt>
+어텐션 (질문·꼬리표·내용)
+</dt>
+<dd>
+질문과 꼬리표의 내적 → softmax → 내용의 가중합. 각 단어가 볼 곳을 숫자로 정한다.
+</dd>
+<dt>
+트랜스포머 / LLM
+</dt>
+<dd>
+어텐션 + 단어별 작은 신경망 층을 여러 번 쌓은 구조 / 그것을 아주 크게 만들어 많은 글로 학습한 언어 모델. 가중치를 전부 학습한다.
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>언어 모델은 다음 단어(토큰)의 확률을 낸다. 점수 (2, 1, −1) → softmax → 0.705, 0.259, 0.035. 고르고 붙이고 되풀이한다.</li>
+<li>단어는 학습된 숫자 목록이다. 내적 = 같은 자리끼리 곱해 더하기.</li>
+<li>어텐션: 질문·꼬리표 내적 → softmax → 내용 가중합. 예: 점수 (0, 2, 1) → 무게 (0.090, 0.665, 0.245) → "먹었다"의 새 목록 66.5%가 "사과를".</li>
+<li>트랜스포머 = 어텐션 + 작은 신경망 층을 여러 번 쌓은 것, LLM = 그것을 아주 크게(GPT-3: 가중치 1,750억 개 <span class="src">Brown 2020, 초록</span>) 학습한 것. RC와 달리 모든 가중치를 학습한다.</li>
+</ul>
+</div>
+</section>
+</div>
+<script type="application/json" id="quiz-d30">{"version": 2, "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "두 가지를 10분 안에 해 보세요. (1) Day 1–2부터 날마다 적은 '접는 기준 후보' 가운데 다섯 줄을 떠올려(또는 장부를 열어) 적고, 줄마다 지금의 판정(통과 / 걸림 / 모름)을 붙입니다. 그다음 결정(한다 / 좁혀서 한다 / 접는다)을 한 단어로, 이유를 한 문장으로 적습니다. (2) '대형 언어 모델은 어떻게 다음 단어를 내놓나'를 아는 만큼 그림 하나로 그려 보세요. 단어가 무엇으로 바뀌고, 어떤 계산을 거쳐, 다음 단어가 어떻게 골라지는지 상자와 화살표로.", "items": [{"id": "d30-p01", "type": "ox", "q": "연구를 계속할지 결정할 때는 먼저 결론을 정하고, 그다음 그 결론을 뒷받침하는 근거를 고르는 것이 효율적이다.", "a": false, "why": "결론을 먼저 정하면 그 결론을 지지하는 근거만 눈에 들어온다(확증 편향). 접는 기준을 먼저 대조하고 그다음 결정을 적는다. 1구간에서 설명한다.", "ref": "#ch-decision"}, {"id": "d30-p02", "type": "mc", "q": "'좁혀서 한다'에 해당하는 것은?", "options": ["같은 계획을 그대로 계속한다", "응용·주장·메커니즘·역할 중 하나 이상을 줄여, 기준을 통과하는 버전으로 바꾼다", "모든 연구를 그만둔다", "결정을 미룬다"], "a": 1, "why": "예: 몸 안 수년 응용 → 피부 위·단기 응용(응용), '저전력 시스템' → '원시 입력보다 낫다'(주장), 계산 전체 → 계면 전처리(역할). 1구간에서 설명한다.", "ref": "#ch-decision"}, {"id": "d30-p03", "type": "mc", "q": "대형 언어 모델(LLM)이 기본적으로 학습하는 일은?", "options": ["문법 규칙을 외운다", "지금까지의 글을 보고 다음 단어(토큰)의 확률을 예측한다", "사람의 뇌를 그대로 시뮬레이션한다", "인터넷을 실시간으로 검색한다"], "a": 1, "why": "언어 모델은 다음 토큰의 확률을 내고, 하나를 골라 붙이는 일을 되풀이한다. 학습은 실제로 나온 다음 단어의 확률이 커지도록 가중치를 고치는 일이다. 3구간에서 설명한다.", "ref": "#ch-transformer"}, {"id": "d30-p04", "type": "mc", "q": "다음 단어 후보 세 개의 점수가 (2, 1, −1)이다. softmax로 확률로 바꾸면 가장 큰 확률은 대략? (e² ≈ 7.39, e¹ ≈ 2.72, e⁻¹ ≈ 0.37)", "options": ["약 0.33", "약 0.70", "약 0.95", "2"], "a": 1, "why": "7.39 ÷ (7.39 + 2.72 + 0.37) = 7.39 ÷ 10.48 ≈ 0.705. 3구간에서 계산한다.", "ref": "#ch-transformer"}, {"id": "d30-p05", "type": "ox", "q": "트랜스포머의 어텐션은 새 단어마다 지난 단어들과의 점수를 다시 계산하므로, 글이 길어질수록 계산량이 단어 수보다 빠르게(대략 제곱으로) 는다.", "a": true, "why": "k번째 단어가 자기를 포함한 k개와 점수를 내므로 n개면 n(n+1)/2번이다. 1,000단어면 500,500번. RNN·RC는 단어마다 상태 하나만 갱신한다. 다만 점수 한 번(길이 d 내적)과 상태 갱신 한 번(노드 N개 갱신)은 비용 단위가 달라, 이것은 증가 방식의 비교이지 연산량 비교가 아니다. 4구간에서 설명한다.", "ref": "#ch-physical-attention"}, {"id": "d30-p06", "type": "ox", "q": "대형 언어 모델은 reservoir computing처럼 내부를 무작위로 고정하고 마지막 층만 학습해서 만든다.", "a": false, "why": "트랜스포머는 질문·꼬리표·내용을 만드는 표까지 모든 가중치를 역전파로 학습한다. RC와 정반대다. 3구간에서 설명한다.", "ref": "#ch-transformer"}, {"id": "d30-p07", "type": "ox", "q": "이온 소자로 트랜스포머의 어텐션 계산을 보인 실험 논문은 이미 여러 편 있다.", "a": false, "why": "웹 검색으로 확인한 범위에서는 찾지 못했다(전수 조사는 아님). 측정된 아날로그 하드웨어는 주로 고정 가중치 곱셈을 했고, 단어마다 바뀌는 어텐션 곱셈은 디지털이거나 시뮬레이션이었다. 4구간에서 설명한다.", "ref": "#ch-physical-attention"}, {"id": "d30-p08", "type": "ox", "q": "새로운 계산 방식에서도 소자의 잡음은 언제나 없애야 할 대상이다.", "a": false, "why": "확률적 계산은 입력이 '1이 나올 확률'을 정하는 소자의 무작위성을 자원으로 쓴다. 대신 많이 뽑아야 하는 비용이 든다. 5구간에서 설명한다.", "ref": "#ch-next-iontronics"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 결정의 규칙", "items": [{"id": "d30-q01", "type": "mc", "q": "장부의 '모름' 줄을 다루는 규칙으로 이 교재가 제안한 것은?", "options": ["'모름'은 통과로 센다", "'모름'은 모두 걸림으로 센다", "정해 둔 기간 안의 최소 실험으로 판정할 수 있으면 '좁혀서 한다'의 일감으로, 판정할 수 없으면 그 가정 위에 연구를 세우지 않는다", "'모름'은 무시한다"], "a": 2, "why": "'모름'은 통과가 아니지만 곧바로 걸림도 아니다. 판정 가능성으로 다시 나눈다.", "ref": "#ch-decision"}, {"id": "d30-q02", "type": "ox", "q": "이미 2년을 쓴 방향이라면, 치명 기준에 걸려도 계속하는 것이 합리적이다.", "a": false, "why": "이미 쓴 시간(매몰 비용)은 앞으로의 가치에 대한 근거가 아니다. 걸린 치명 기준이 좁혀서도 피할 수 없다면 그 틀을 접는다.", "ref": "#ch-decision"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · A–E", "items": [{"id": "d30-q03", "type": "mc", "q": "A–E의 E(결과가 바꾸는 것)로 가장 알맞은 것은?", "options": ["좋은 논문이 나온다", "성공하면 다른 연구자들이 drift의 원인을 용매량으로 보고하고 설계로 다루게 되고, 실패하면 drift 보정을 회로·소프트웨어에 맡기는 쪽이 정당해진다", "실용적인 소자를 만든다", "분야에 기여한다"], "a": 1, "why": "E는 다른 사람이 무엇을 다르게 할지를, 성공과 실패 둘 다에 대해 말한다. 나머지는 막연하거나 내 이익만 말한다.", "ref": "#ch-a-to-e"}, {"id": "d30-q04", "type": "ox", "q": "A–E 양식은 원래 계획표에 정의가 있던 것이므로 항목을 바꾸면 안 된다.", "a": false, "why": "원래 계획표에는 이름만 있었고, 각 항목의 정의는 이 교재의 새 제안이다. 바꾸거나 더해도 된다.", "ref": "#ch-a-to-e"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 어텐션 계산 (풀이 → 채우기 → 혼자)", "items": [{"id": "d30-q05", "type": "short", "q": "풀이 확인: 점수 (0, 2, 1)의 e값은 (1, 7.389, 2.718), 합 11.107이다. 점수 2인 단어의 무게는? (소수 셋째 자리까지)", "a": ["0.665", ".665", "0.67"], "why": "7.389 ÷ 11.107 = 0.665. '먹었다'의 새 목록에서 66.5%가 '사과를'의 내용이 된다.", "ref": "#ch-transformer"}, {"id": "d30-q06", "type": "short", "q": "일부 채우기: 질문 q = (1, 1), 꼬리표 k₁ = (1, 0), k₂ = (0, 1), k₃ = (1, 1). 점수는 q·k₁ = 1×1 + 1×0 = 1, q·k₂ = 1이다. q·k₃는?", "a": ["2"], "why": "1 × 1 + 1 × 1 = 2. 같은 자리끼리 곱해 더한다.", "ref": "#ch-transformer"}, {"id": "d30-q07", "type": "short", "q": "혼자 풀기: 점수 (1, 1, 2)를 softmax하면 셋째 단어의 무게는? (e¹ = 2.718, e² = 7.389, 소수 셋째 자리까지)", "a": ["0.576", ".576", "0.58"], "why": "합 = 2.718 + 2.718 + 7.389 = 12.825. 7.389 ÷ 12.825 = 0.576.", "ref": "#ch-transformer"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d30-q08", "type": "mc", "q": "어텐션에서 '꼬리표(key)'의 역할은?", "options": ["다른 단어에게 실제로 넘겨줄 정보", "'나는 이런 정보를 갖고 있다'는 표시로, 다른 단어의 질문과 내적되어 점수를 만든다", "다음 단어의 확률", "문장의 길이"], "a": 1, "why": "질문(query)과 꼬리표(key)의 내적이 점수이고, 넘겨줄 정보는 내용(value)이다.", "ref": "#ch-transformer"}, {"id": "d30-q09", "type": "ox", "q": "트랜스포머에서 질문·꼬리표·내용을 만드는 가중치 표는 학습하지 않고 무작위로 고정해 둔다.", "a": false, "why": "모두 역전파로 학습한다. 내부를 고정하는 것은 RC의 방식이다(트랜스포머 안에 고정 층을 끼운 Reservoir Transformers는 별도의 소프트웨어 연구다).", "ref": "#ch-transformer"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · RNN·RC·어텐션과 물리 구현", "items": [{"id": "d30-q10", "type": "short", "q": "단어 100개 글에서 어텐션이 한 층·한 갈래에서 계산하는 점수의 수는? (각 단어가 자기와 앞 단어 모두와, n(n+1)/2)", "a": ["5050", "5,050"], "why": "100 × 101 ÷ 2 = 5,050. RNN·RC의 상태 갱신은 100번이다. 점수 한 번과 상태 갱신 한 번은 비용 단위가 달라(길이 d 내적 vs 노드 N개 갱신) 두 숫자를 연산량으로 바로 비교하지는 않는다.", "ref": "#ch-physical-attention"}, {"id": "d30-q11", "type": "mc", "q": "가중치를 전도도로 저장하는 crossbar가 트랜스포머의 어느 곱셈에 더 잘 맞나?", "options": ["단어마다 바뀌는 질문과 꼬리표의 내적", "학습이 끝나면 고정되는 가중치 표와 입력의 곱", "softmax", "어느 곱셈에도 맞지 않는다"], "a": 1, "why": "고정 가중치는 한 번 써 두고 계속 쓴다. 질문·꼬리표는 둘 다 단어마다 바뀌어, crossbar라면 단어마다 새로 써야 한다.", "ref": "#ch-physical-attention"}, {"id": "d30-q12", "type": "ox", "q": "폴더의 Zhang 2026 (dopamine) 논문은 이온 소자로 트랜스포머의 어텐션을 계산한 연구다.", "a": false, "why": "그 논문의 attention은 생물의 주의를 뜻하며, 도파민 농도가 시냅스 이득을 바꾸게 한 것이다. 질문·꼬리표 내적 → softmax → 가중합과는 다른 개념이다.", "ref": "#ch-physical-attention"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 차세대 후보", "items": [{"id": "d30-q13", "type": "mc", "q": "확률적 비트(p-bit)의 출력에 대해 옳은 것은?", "options": ["입력이 같으면 늘 같은 0/1이 나온다", "입력이 '1이 나올 확률'을 정하고, 여러 번 뽑은 1의 비율이 그 확률에 가까워진다", "확률은 늘 0.5다", "출력이 연속값이다"], "a": 1, "why": "p = 0.82여도 20번 뽑으면 12/20처럼 흔들린다. 비율이 확률에 가까워지려면 많이 뽑아야 하고, 그것이 비용이다.", "ref": "#ch-next-iontronics"}, {"id": "d30-q14", "type": "mc", "q": "BCM 규칙에서 문턱 θ가 최근 활동에 따라 올라가는 것의 효과는?", "options": ["모든 시냅스가 더 쉽게 강화된다", "같은 활동도 약화 쪽으로 가기 쉬워져 강화가 끝없이 이어지지 않는다", "학습이 멈춘다", "출력이 무작위가 된다"], "a": 1, "why": "y = 1.3에서 θ = 1이면 +0.39(강화), θ = 1.6이면 −0.39(약화). 문턱이 따라 움직여 폭주를 막는다.", "ref": "#ch-next-iontronics"}, {"id": "d30-q15", "type": "ox", "q": "Kim 2026 (EOC)의 확산 memristor 논문은 분류 같은 계산 과제의 정확도를 보였다.", "a": false, "why": "음의 미분저항, 자발 진동, 잡음 증폭 같은 동역학을 낮은 전력으로 보였고, 확률적 계산·p-bit로의 활용은 제안이다. 계산 과제는 없었다.", "ref": "#ch-next-iontronics"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d30-q16", "type": "short", "q": "전류 100 nA에서 0.97 V, 130 nA에서 0.36 V였다. 그 사이의 기울기(전압 변화 ÷ 전류 변화)는 몇 MΩ인가? (정수, 부호 포함)", "a": ["-20", "−20", "-20.3", "−20.3", "-20 MΩ"], "why": "(0.36 − 0.97) V ÷ 30 nA = −0.61 ÷ 30 × 10⁻⁹ ≈ −2.0 × 10⁷ Ω = −20 MΩ. 전류를 늘렸는데 전압이 준 음의 미분저항이다.", "ref": "#ch-next-iontronics"}, {"id": "d30-q17", "type": "short", "q": "단순한 BCM 식 Δw ∝ y(y − θ)에서 y = 0.5, θ = 1이면 Δw는? (소수 둘째 자리까지, 부호 포함)", "a": ["-0.25", "−0.25"], "why": "0.5 × (0.5 − 1) = 0.5 × (−0.5) = −0.25. 활동이 문턱보다 작아 약화된다.", "ref": "#ch-next-iontronics"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 결정 적기", "items": [{"id": "d30-q18", "type": "mc", "q": "결정을 '좁혀서 한다'로 적을 때 함께 적어야 하는 것은?", "options": ["결론을 내릴 때의 기분", "판정 실험, 기각 조건, 다시 결정할 날짜", "다른 연구자의 의견", "아무것도 없다"], "a": 1, "why": "좁혀서 한다는 '첫 실험 결과로 다시 결정한다'를 날짜·기각 조건과 함께 적는 결정이다.", "ref": "#ch-final"}, {"id": "d30-q19", "type": "ox", "q": "기준 없이 하던 일을 계속하는 것은 '결정하지 않은 것'이므로 결정의 책임에서 벗어난다.", "a": false, "why": "결정하지 않는 것도 결정이다. 기준 없이 '한다'를 고른 것과 같다.", "ref": "#ch-final"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d30-q20", "type": "mc", "q": "치명 기준을 언제 표시해야 하나?", "options": ["장부를 다 판정한 뒤 결과를 보고", "장부를 대조하기 전에, 내 방향에 비추어", "결정을 적은 뒤", "표시할 필요가 없다"], "a": 1, "why": "결과를 보고 치명 기준을 고르면 원하는 결론에 맞춰 고르게 된다. 무엇을 치명으로 고르느냐가 결정을 바꾸므로 먼저 정한다.", "ref": "#ch-decision"}, {"id": "d30-q21", "type": "ox", "q": "좋은 A–E에서 C(가설과 예측)는 틀릴 수 있어야 하고, D(검증과 기각 조건)에는 숫자가 있어야 한다.", "a": true, "why": "양식 안내의 좋은 A–E 조건이다. A는 한 문장, E는 다른 사람이 무엇을 다르게 할지.", "ref": "#ch-a-to-e"}, {"id": "d30-q22", "type": "mc", "q": "어텐션과 RC가 과거를 다루는 방식의 차이로 알맞은 것은?", "options": ["둘 다 지난 입력을 모두 그대로 보관한다", "어텐션은 지난 단어의 꼬리표·내용을 보관해 다시 보고(글이 길수록 계산이 제곱으로 늚), RC는 고정 크기의 상태에 지난 입력이 서서히 잊히며 남는다", "RC가 더 많은 과거를 정확히 보관한다", "어텐션에는 기억이 없다"], "a": 1, "why": "어텐션은 잊지 않는 대신 보관량과 계산이 길이에 따라 늘고, RC는 상태 크기가 고정이지만 과거가 흐려진다(fading memory).", "ref": "#ch-physical-attention"}, {"id": "d30-q23", "type": "mc", "q": "물리 소자로 트랜스포머를 구현한 시도에 대해 확인된 범위로 알맞은 것은?", "options": ["이온 소자로 LLM 전체를 구동했다", "전자 아날로그 칩(상변화 메모리)이 고정 가중치 곱셈을 하고, 단어마다 바뀌는 어텐션 곱셈과 softmax는 디지털에 남은 시연이 있다", "어텐션 곱셈은 이미 여러 아날로그 칩에서 측정됐다", "물리 소자는 어떤 곱셈도 할 수 없다"], "a": 1, "why": "Chen 2025 (ALBERT)는 가중치 99% 이상을 칩에서, 어텐션 행렬 계산은 디지털로 했다. 어텐션을 아날로그로 한 Leroux 2025는 회로 시뮬레이션이었다(폴더 밖, 웹 확인).", "ref": "#ch-physical-attention"}, {"id": "d30-q24", "type": "short", "q": "이온 소자의 문헌 대표 내구성이 10²회이고, 길이 1,024의 창에서 기억 칸 하나가 1,024 단어마다 한 번 새로 쓰인다면, 칸이 닳기 전에 처리할 수 있는 단어 수는 대략? (숫자 또는 10의 거듭제곱)", "a": ["102400", "102,400", "10^5", "10⁵", "약 10만", "100000", "1e5", "10만"], "why": "10² × 1,024 = 102,400 ≈ 10⁵ 단어. 쓰기 한 번이 내구 1회를 쓴다고 가정한 값이다. 쓰기마다 확인하고 다시 쓰는 펄스가 여러 번 들면 그 배수만큼 줄어든다. PCM의 10¹²회라면 약 10¹⁵ 단어다(Aluru 2026 Table 1의 대표값으로 한 해석).", "ref": "#ch-physical-attention"}, {"id": "d30-q25", "type": "mc", "q": "폴더의 차세대 이온 컴퓨팅 후보들에 공통으로 아직 없는 것으로 가장 알맞은 것은?", "options": ["소자 하나의 흥미로운 동역학", "여러 소자를 엮은 하드웨어 시스템과, 같은 일을 하는 전자·소프트웨어 기준선과의 에너지·성능 비교", "논문 발표", "이온의 움직임"], "a": 1, "why": "소자 하나의 새 동역학(확률적 발화, 음의 미분저항, BCM 규칙)은 보였지만, 엮은 시스템·시스템 에너지·기준선 비교는 거의 모든 후보에서 비어 있다.", "ref": "#ch-next-iontronics"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d30a">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d30b.html">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정 →</a></p>
+</div>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d29.html" class="pagination-link" aria-label="Day 48 · 최소 검증 실험">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 48 · 최소 검증 실험</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d30b.html" class="pagination-link" aria-label="Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정">
+        <span class="nav-page-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

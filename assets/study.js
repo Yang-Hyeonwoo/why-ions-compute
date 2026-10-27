@@ -25,6 +25,8 @@
   ];
 
   var LOCAL = false;
+  // 움직임 줄이기 설정을 켠 사람에게는 부드러운 스크롤도 끈다
+  var SMOOTH = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
   var FILES = {}; // 파일 이름 -> 마지막 저장 시각
   var DAYS = {}; // d01 -> {lesson, note, done}
   var EDITORS = {};
@@ -455,7 +457,7 @@
     refresh();
     grow();
     ta.focus();
-    this.el.scrollIntoView({ behavior: "smooth", block: "start" });
+    this.el.scrollIntoView({ behavior: SMOOTH, block: "start" });
   };
   Editable.prototype.save = function (text, btn, force) {
     var self = this;
@@ -593,14 +595,58 @@
       });
   }
 
-  // ---------- 날짜 상태 ----------
-  // done: 내가 '오늘 학습 완료'를 누름 / started: 무엇이든 저장했거나 체크함 / "": 아직
-  function dayState(did) {
-    var d = DAYS[did] || {};
-    if (d.done) return "done";
-    if (FILES[did + "-pre"] || FILES[did + "-answer"] || FILES[did + "-recall"] || d.lesson || d.note || d.pretest || d.recall) return "started";
+  // ---------- 학습 단위 상태 ----------
+  // 키: 학습 단위 id(d01a, d01b, d05 …). 원래 Day(dNN)의 기록(답 파일·퀴즈·사전 테스트 점수)은 Day 키에 그대로 있다.
+  // 원래 Day를 둘로 나눈 단위는, 나누기 전에 Day 전체에 남긴 완료·읽음·복습 기록을 두 단위 모두 이어 받는다.
+  function srcOf(key) {
+    return String(key).slice(0, 3);
+  }
+  function isSplit(key) {
+    return /^d\d\d[ab]$/.test(key);
+  }
+  function pageStatus(key) {
+    if (!isSplit(key)) return DAYS[key] || {};
+    var old = DAYS[srcOf(key)] || {},
+      out = {};
+    ["done", "lesson", "reviews"].forEach(function (k) {
+      if (old[k]) out[k] = old[k];
+    });
+    if (old.done) out.inherited = true;
+    var cur = DAYS[key] || {};
+    Object.keys(cur).forEach(function (k) {
+      out[k] = cur[k];
+    });
+    if (cur.done) delete out.inherited;
+    return out;
+  }
+  // 세부 기록으로 판단할 수 없는 예전 기록(사전 테스트 점수·회상·답 파일)이 있는가: 숙달로 보지 않고 '기존 기록 있음'으로만 알린다
+  function legacyNote(key) {
+    var src = srcOf(key),
+      d = DAYS[src] || {},
+      bits = [];
+    if (d.pretest) bits.push("사전 테스트");
+    if (d.posttest) bits.push("다시 풀기");
+    if (FILES[src + "-recall"] || d.recall) bits.push("백지 회상");
+    if (FILES[src + "-answer"]) bits.push("내 답");
+    if (FILES[src + "-questions"]) bits.push("질문");
+    return bits;
+  }
+  function visited(key) {
+    try {
+      return Object.keys(JSON.parse(recall("study-visited:" + key) || "{}")).length > 0;
+    } catch (e) {
+      return false;
+    }
+  }
+  // done: '학습 완료'를 누름 / started: 읽기 시작했거나 기록이 있음 / "": 학습 전
+  function dayState(key) {
+    var st = pageStatus(key);
+    if (st.done) return "done";
+    if (st.lesson || st.note || visited(key) || legacyNote(key).length) return "started";
     return "";
   }
+  var STATE_NAME = { done: "완료", started: "학습 중", "": "학습 전" };
+  var STATE_ICON = { done: "✓", started: "◐", "": "○" };
   function setDayStatus(did, patch) {
     return api("status/" + did, {
       method: "PUT",
@@ -618,118 +664,146 @@
       var st = dayState(el.dataset.day);
       el.classList.toggle("st-done", st === "done");
       el.classList.toggle("st-started", st === "started");
-      el.classList.toggle("is-today", el.dataset.date === todayIso());
+      el.setAttribute("aria-label", (el.getAttribute("title") || "") + " · " + STATE_NAME[st]);
     });
     document.querySelectorAll(".day-status[data-day]").forEach(function (el) {
       var st = dayState(el.dataset.day);
-      el.textContent = st === "done" ? "완료" : st === "started" ? "진행 중" : "예정";
+      el.textContent = STATE_ICON[st] + " " + STATE_NAME[st];
       el.className = "day-status" + (st ? " st-" + st : "");
     });
     document.querySelectorAll("#quarto-sidebar a.sidebar-link").forEach(function (a) {
-      var m = (a.getAttribute("href") || "").match(/days\/(d\d\d)\.html/);
+      var m = (a.getAttribute("href") || "").match(/days\/(d\d\d[ab]?)\.html/);
       if (!m) return;
       var old = a.querySelector(".sb-dot");
       if (old) old.remove();
       var st = dayState(m[1]);
       if (!st) return;
       var text = a.querySelector(".sidebar-item-text") || a;
-      text.appendChild(h("span", "sb-dot st-" + st));
+      var dot = h("span", "sb-dot st-" + st, STATE_ICON[st]);
+      dot.title = STATE_NAME[st];
+      text.appendChild(dot);
     });
     document.querySelectorAll(".day-steps[data-day]").forEach(function (ol) {
-      var did = ol.dataset.day;
-      var d = DAYS[did] || {};
-      var prev = "d" + String(parseInt(did.slice(1), 10) - 1).padStart(2, "0");
-      var map = {
-        review: !!FILES[prev + "-recall2"] || !!(DAYS[prev] || {}).recall2,
-        pretest: !!d.pretest || !!recall("study-pre-done:" + did),
-        pre: !!FILES[did + "-pre"],
-        lesson: !!d.lesson,
-        note: !!d.note,
-        recall: !!FILES[did + "-recall"] || !!d.recall,
-        answer: !!FILES[did + "-answer"],
-        posttest: !!d.posttest,
-        done: !!d.done,
-      };
+      var key = ol.dataset.day,
+        st = pageStatus(key);
+      var map = { lesson: !!st.lesson || visited(key), done: !!st.done, review: !!document.querySelector(".quiz-review .qitem.answered") };
       ol.querySelectorAll("li").forEach(function (li) {
         li.classList.toggle("done", !!map[li.dataset.step]);
       });
     });
-    document.querySelectorAll("input[data-step-check]").forEach(function (cb) {
-      var d = DAYS[cb.dataset.day] || {};
-      cb.checked = !!d[cb.dataset.stepCheck];
-    });
     document.querySelectorAll(".done-box[data-day]").forEach(function (box) {
-      var d = DAYS[box.dataset.day] || {};
-      box.classList.toggle("is-done", !!d.done);
-      var desc = box.querySelector(".done-desc");
-      if (d.done && desc) desc.textContent = "완료한 날: " + fmtTime(d.done) + ". 답은 계속 고칠 수 있어요.";
-      var st = box.querySelector(".done-static");
-      if (st) st.textContent = d.done ? "학습 완료 " + fmtTime(d.done) : "";
-      // 읽음·학습 완료·이해 점검을 섞지 않고 나란히 보여 준다
+      var key = box.dataset.day,
+        d = pageStatus(key),
+        s0 = dayState(key);
+      box.classList.toggle("is-done", s0 === "done");
+      var stEl = box.querySelector(".done-state");
+      if (stEl) {
+        stEl.innerHTML = "";
+        stEl.appendChild(h("span", "ds-icon st-" + (s0 || "none"), STATE_ICON[s0]));
+        stEl.appendChild(h("b", "", STATE_NAME[s0]));
+        if (s0 === "done")
+          stEl.appendChild(
+            h("span", "ds-when", d.inherited ? " · 나누기 전 원래 Day의 완료 기록(" + fmtTime(d.done) + ")을 이어 받음" : " · " + fmtTime(d.done))
+          );
+        var legacy = legacyNote(key);
+        if (legacy.length && s0 !== "done") stEl.appendChild(h("span", "ds-when", " · 기존 학습 기록 있음(" + legacy.join(", ") + ") — 완료 여부는 직접 표시하세요"));
+      }
+      var doneBtn = box.querySelector('[data-action="done"]'),
+        undoneBtn = box.querySelector('[data-action="undone"]');
+      if (doneBtn) doneBtn.style.display = s0 === "done" ? "none" : "";
+      if (undoneBtn) undoneBtn.style.display = s0 === "done" ? "" : "none";
+      var stc = box.querySelector(".done-static");
+      if (stc) stc.textContent = s0 === "done" ? "학습 완료 " + fmtTime(d.done) : "";
+      // 퀴즈 결과는 완료와 따로 보여 준다
       var sum = box.querySelector(".done-summary");
       if (!sum) {
         sum = h("div", "done-summary");
         box.appendChild(sum);
       }
-      var did = box.dataset.day,
-        firsts = {};
+      var firsts = {};
       try {
-        firsts = JSON.parse(recall("study-first:" + did) || "{}");
+        firsts = JSON.parse(recall("study-first:" + srcOf(key)) || "{}");
       } catch (e) {}
+      var ids = {};
+      box.closest("main, body").querySelectorAll(".quiz[data-set]").forEach(function (q) {
+        if (q.dataset.set !== "pre") ids[q.dataset.set] = 1;
+      });
       var fk = Object.keys(firsts),
         fok = fk.filter(function (k) {
           return firsts[k].ok;
         }).length;
-      sum.innerHTML = "";
-      [
-        ["읽음 체크", d.lesson ? "했음" : "아직", "학습자료를 끝까지 읽었다는 내 표시(서버)"],
-        ["학습 완료", d.done ? fmtTime(d.done) : "아직", "기본 경로를 마쳤다는 내 표시(서버). 복습 날짜의 기준"],
-        ["이해 점검", fk.length ? "첫 시도 " + fok + " / " + fk.length + "문항 정답" : "아직 푼 문항 없음", "잠깐 점검·종합 퀴즈에서 처음 고른 답(이 브라우저). 정답 본 뒤 다시 푼 것은 세지 않음"],
-      ].forEach(function (r) {
-        var row = h("div", "ds-row");
-        row.appendChild(h("span", "ds-k", r[0]));
-        row.appendChild(h("span", "ds-v", r[1]));
-        row.appendChild(h("span", "ds-n", r[2]));
-        sum.appendChild(row);
-      });
+      sum.textContent = fk.length ? "퀴즈 첫 시도 기록(원래 Day 전체): " + fok + " / " + fk.length + "문항 정답 · 완료와는 따로 기록됩니다" : "";
     });
   }
   function setupStepChecks() {
-    document.querySelectorAll("input[data-step-check]").forEach(function (cb) {
-      cb.addEventListener("change", function () {
-        var patch = {};
-        patch[cb.dataset.stepCheck] = cb.checked;
-        setDayStatus(cb.dataset.day, patch).catch(function (err) {
-          cb.checked = !cb.checked;
-          toast("저장하지 못했어요: " + err.message, true);
-        });
-      });
-    });
     document.querySelectorAll(".done-box[data-day]").forEach(function (box) {
-      var did = box.dataset.day;
+      var key = box.dataset.day,
+        src = srcOf(key);
       var doneBtn = box.querySelector('[data-action="done"]');
       var undoneBtn = box.querySelector('[data-action="undone"]');
-      doneBtn.addEventListener("click", function () {
-        var d = DAYS[did] || {};
-        var missing = [];
-        // 기본 경로만 확인한다(사전 테스트·다시 풀기는 선택)
-        if (!d.lesson) missing.push("학습자료 읽음 체크");
-        if (!FILES[did + "-recall"] && !d.recall) missing.push("백지 회상");
-        if (!FILES[did + "-answer"]) missing.push("가르치듯 내 답 저장");
-        if (missing.length && !confirm("기본 경로에서 아직 안 한 것: " + missing.join(", ") + ". 그래도 완료로 표시할까요?")) return;
-        setDayStatus(did, { done: true })
+      var msg = box.querySelector(".done-msg");
+      if (!doneBtn || !undoneBtn) return;
+      function busy(on) {
+        doneBtn.disabled = undoneBtn.disabled = on;
+        if (on && msg) {
+          msg.className = "done-msg";
+          msg.textContent = "저장하는 중…";
+        }
+      }
+      function fail(err, retry) {
+        busy(false);
+        if (!msg) return toast("저장하지 못했어요: " + err.message, true);
+        msg.className = "done-msg is-error";
+        msg.innerHTML = "";
+        msg.appendChild(h("span", "", "⚠ 저장하지 못했어요(" + err.message + "). 화면의 표시는 바뀌지 않았습니다. 사이트를 연 창(사이트열기)이 켜져 있는지 확인한 뒤 "));
+        msg.appendChild(button("다시 시도", "ghost lab-small", retry));
+      }
+      function ok(text) {
+        busy(false);
+        if (msg) {
+          msg.className = "done-msg is-ok";
+          msg.textContent = text;
+        }
+      }
+      function markDone() {
+        busy(true);
+        setDayStatus(key, { done: true })
           .then(function () {
-            toast("D" + parseInt(did.slice(1), 10) + " 학습 완료로 표시했어요");
+            ok("✓ 학습 완료로 저장했어요. 다음 학습은 아래 링크에서 이어 가세요.");
           })
           .catch(function (err) {
-            toast("저장하지 못했어요: " + err.message, true);
+            fail(err, markDone);
           });
-      });
-      undoneBtn.addEventListener("click", function () {
-        setDayStatus(did, { done: false }).catch(function (err) {
-          toast("저장하지 못했어요: " + err.message, true);
-        });
-      });
+      }
+      function markUndone() {
+        busy(true);
+        var st = pageStatus(key);
+        var chain = Promise.resolve();
+        // 나누기 전 원래 Day의 완료 기록을 이어 받은 단위: 짝 단위의 완료는 원래 시각 그대로 남기고, 이 단위만 되돌린다
+        if (isSplit(key) && st.inherited) {
+          var sib = src + (key.slice(-1) === "a" ? "b" : "a");
+          var oldDone = (DAYS[src] || {}).done;
+          chain = chain
+            .then(function () {
+              return (DAYS[sib] || {}).done ? null : setDayStatus(sib, { done: oldDone });
+            })
+            .then(function () {
+              return setDayStatus(src, { done: false });
+            });
+        }
+        chain
+          .then(function () {
+            return setDayStatus(key, { done: false });
+          })
+          .then(function () {
+            ok("학습 중으로 되돌렸어요.");
+          })
+          .catch(function (err) {
+            fail(err, markUndone);
+          });
+      }
+      doneBtn.addEventListener("click", markDone);
+      undoneBtn.addEventListener("click", markUndone);
     });
   }
 
@@ -754,7 +828,7 @@
       row.appendChild(
         button(hasPretest ? "사전 테스트로 가기" : "먼저 해 보기 쓰기", "primary", function () {
           var t = document.getElementById("pretest");
-          if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (t) t.scrollIntoView({ behavior: SMOOTH, block: "start" });
           else if (EDITORS[pre]) EDITORS[pre].startEdit();
         })
       );
@@ -850,7 +924,7 @@
     var today = todayIso(),
       out = [];
     days.forEach(function (d) {
-      var st = DAYS[d.day] || {};
+      var st = pageStatus(d.day);
       if (!st.done) return;
       var since = daysBetween(st.done, today);
       var rv = st.reviews || {};
@@ -866,6 +940,27 @@
     });
     return out;
   }
+  // 학습 단위 k의 핵심 복습 퀴즈는 다음 단위 맨 앞(#review)에 있다. 마지막 단위는 그 단위의 종합 퀴즈로.
+  function reviewHref(days, d) {
+    var nx = days[d.n];
+    return OFFSET + "days/" + (nx && nx.hasReview ? nx.day + ".html#review" : d.day + ".html#lesson");
+  }
+  function unitForLast(days, last) {
+    if (!last) return null;
+    var u = days.find(function (d) {
+      return d.day === last.day;
+    });
+    if (u) return u;
+    // 나누기 전 기록(원래 Day 키): 그 장이 있는 단위
+    var cands = days.filter(function (d) {
+      return d.src === last.day;
+    });
+    return (
+      cands.find(function (d) {
+        return (d.chs || []).indexOf(last.id) >= 0;
+      }) || cands[0] || null
+    );
+  }
   function setupToday() {
     var card = document.getElementById("today-card");
     var dataEl = document.getElementById("study-days");
@@ -877,56 +972,50 @@
     var done = days.filter(function (d) {
       return dayState(d.day) === "done";
     }).length;
-    function dayLine(label, d, primary, href, sub) {
-      var row = h("div", "tc-row");
-      row.appendChild(h("div", "tc-label", label + " · D" + d.n));
-      row.appendChild(h("div", "tc-title", sub || d.title));
-      var a = h("a", "sbtn " + (primary ? "primary" : ""), primary ? "공부 시작 →" : "열기 →");
-      a.href = href || OFFSET + "days/" + d.day + ".html";
-      row.appendChild(a);
-      return row;
-    }
     card.innerHTML = "";
     var last = null;
     try {
       last = JSON.parse(recall("study-last-any") || "null");
     } catch (e) {}
-    var lastDay =
-      last &&
-      days.find(function (d) {
-        return d.day === last.day;
-      });
-    if (lastDay && dayState(lastDay.day) !== "done") {
-      card.appendChild(dayLine("이어서 하기 (마지막으로 읽던 구간)", lastDay, true, OFFSET + "days/" + lastDay.day + ".html#" + last.id, last.title));
-      if (firstOpen && firstOpen.day !== lastDay.day) card.appendChild(dayLine("아직 끝내지 않은 첫 Day", firstOpen, false));
-    } else if (firstOpen) {
-      card.appendChild(dayLine(done ? "다음 Day" : "처음 시작", firstOpen, true));
+    var lastU = unitForLast(days, last);
+    var cur = lastU && dayState(lastU.day) !== "done" ? lastU : firstOpen;
+    var main = h("div", "tc-main");
+    if (cur) {
+      main.appendChild(h("div", "tc-label", lastU && cur === lastU ? "이어서 학습" : done ? "다음 학습" : "처음 시작"));
+      var t = h("div", "tc-title");
+      t.appendChild(h("span", "tc-day", "Day " + cur.n));
+      t.appendChild(h("span", "", cur.title));
+      main.appendChild(t);
+      var where = cur === lastU && last.title ? "마지막으로 읽던 곳: " + last.title : "Phase " + cur.phaseName;
+      main.appendChild(h("div", "tc-sub", where));
+      var a = h("a", "sbtn primary tc-go", "이어서 학습 →");
+      a.href = OFFSET + "days/" + cur.day + ".html" + (cur === lastU && last.id && last.day === cur.day ? "#" + last.id : "");
+      main.appendChild(a);
     } else {
-      card.appendChild(h("div", "tc-label", "30개 Day를 모두 완료로 표시했습니다"));
-      card.appendChild(h("div", "tc-title", "아래 복습을 이어 가고, D30의 결정을 다시 읽어 보세요."));
+      main.appendChild(h("div", "tc-label", "모든 학습 단위를 완료로 표시했습니다"));
+      main.appendChild(h("div", "tc-title", "아래 복습을 이어 가고, 마지막 Day의 결정을 다시 읽어 보세요."));
     }
+    card.appendChild(main);
     var due = dueReviews(days);
     if (due.length) {
       var rb = h("div", "tc-review");
-      rb.appendChild(h("div", "tc-label", "오늘 복습할 것 (" + Math.min(3, due.length) + "개" + (due.length > 3 ? ", 나머지 " + (due.length - 3) + "개는 다음에" : "") + " · 각 5분 안팎)"));
+      rb.appendChild(h("div", "tc-label", "지난 학습 복습 · 핵심 퀴즈" + (due.length > 3 ? " (3개만, 나머지는 다음에)" : "")));
       due.slice(0, 3).forEach(function (r) {
         var row = h("div", "tc-rv-row");
-        var a = h("a", "", "D" + r.d.n + " 핵심 떠올리기");
-        a.href = OFFSET + "days/" + r.d.day + ".html#recall";
+        var a = h("a", "", "Day " + r.d.n + " · " + r.d.title);
+        a.href = reviewHref(days, r.d);
         row.appendChild(a);
-        row.appendChild(h("span", "tc-rv-when", " 완료 " + r.since + "일 뒤 (" + r.gap + "일 복습)"));
         if (LOCAL) {
           row.appendChild(
-            button("복습했어요", "ghost lab-small", function () {
-              // 이번 복습으로 그보다 짧은 간격의 복습도 끝난 것으로 본다(밀린 것을 한꺼번에 시키지 않음)
+            button("풀었어요", "ghost lab-small", function () {
               var patch = { reviews: {} };
-              var have = (DAYS[r.d.day] || {}).reviews || {};
+              var have = pageStatus(r.d.day).reviews || {};
               REVIEW_GAPS.forEach(function (g) {
                 if (g <= r.gap && !have[String(g)]) patch.reviews[String(g)] = todayIso();
               });
               setDayStatus(r.d.day, patch)
                 .then(function () {
-                  toast("D" + r.d.n + " 복습을 기록했어요 (서버)");
+                  toast("Day " + r.d.n + " 복습을 기록했어요");
                   setupToday();
                 })
                 .catch(function (err) {
@@ -937,12 +1026,37 @@
         }
         rb.appendChild(row);
       });
-      rb.appendChild(h("div", "tc-rv-note", "핵심 목록을 보지 않고 먼저 떠올린 뒤 그 페이지에서 대조합니다. 복습 간격(완료 뒤 1·3·7·14·30일)은 출발점일 뿐이니 버거우면 건너뛰어도 됩니다. Day30 이후에도 계속 나옵니다."));
+      rb.appendChild(h("div", "tc-rv-note", "완료한 단위의 핵심을 객관식으로 다시 확인합니다(완료 뒤 1·3·7·14·30일 무렵). 버거우면 건너뛰어도 됩니다."));
       card.appendChild(rb);
     }
     var meta = h("div", "tc-meta");
-    meta.textContent = "완료로 표시한 Day " + done + " / " + days.length + " · Day는 마감이 아니라 순서입니다";
+    meta.textContent = "완료한 학습 단위 " + done + " / " + days.length + " · Day는 마감이 아니라 순서입니다";
     card.appendChild(meta);
+    // 표시용: 진행 막대 비율과 지도 위 '지금 위치'
+    card.style.setProperty("--done", days.length ? done / days.length : 0);
+    document.querySelectorAll(".pb-day.is-current").forEach(function (el) {
+      el.classList.remove("is-current");
+      el.removeAttribute("aria-current");
+    });
+    if (cur) {
+      var curChip = document.querySelector('.pb-day[data-day="' + cur.day + '"]');
+      if (curChip) {
+        curChip.classList.add("is-current");
+        curChip.setAttribute("aria-current", "step");
+      }
+    }
+    document.querySelectorAll("[data-phase-count]").forEach(function (el) {
+      var ph = parseInt(el.dataset.phaseCount, 10);
+      var us = days.filter(function (d) {
+        return d.phase === ph;
+      });
+      var dn = us.filter(function (d) {
+        return dayState(d.day) === "done";
+      }).length;
+      el.textContent = dn + " / " + us.length;
+      var phEl = el.closest(".pb-phase");
+      if (phEl) phEl.style.setProperty("--done", us.length ? dn / us.length : 0);
+    });
   }
 
   // ---------- 학습 기록 백업과 복원 ----------
@@ -1095,7 +1209,7 @@
     var a = h("a", "site-brand-title", "Why Ions Compute");
     a.href = OFFSET + "index.html";
     inner.appendChild(a);
-    inner.appendChild(h("div", "site-brand-sub", "이온 소자는 어떻게, 왜 계산하는가 · 30일 탐구 노트"));
+    inner.appendChild(h("div", "site-brand-sub", "이온 소자는 어떻게, 왜 계산하는가"));
     strip.appendChild(inner);
     header.insertBefore(strip, header.firstChild);
   }
@@ -1182,11 +1296,17 @@
     var seen = {};
     try {
       seen = JSON.parse(recall(seenKey) || "{}");
+      if (isSplit(dkey)) {
+        var oldSeen = JSON.parse(recall("study-visited:" + srcOf(dkey)) || "{}");
+        Object.keys(oldSeen).forEach(function (k) {
+          if (!seen[k] && document.getElementById(k)) seen[k] = oldSeen[k];
+        });
+      }
     } catch (e) {}
 
     var map = h("nav", "chap-map");
-    map.setAttribute("aria-label", "오늘의 지도");
-    map.appendChild(h("div", "cm-head", "오늘의 지도 · 학습 구간 " + core.length + "개"));
+    map.setAttribute("aria-label", "이 Day의 지도");
+    map.appendChild(h("div", "cm-head", "이 Day의 지도 · 학습 구간 " + core.length + "개"));
     map.appendChild(h("div", "cm-sub", "굵은 초록 = 지금 읽는 구간 · '머묾' = 10초 이상 머문 구간(읽음·이해와는 다릅니다) · 며칠에 나눠 읽어도 됩니다"));
     var ul = h("ul", "cm-core");
     var items = core.map(function (x, i) {
@@ -1210,7 +1330,7 @@
       });
       map.appendChild(ex);
     }
-    var last = recall(lastKey);
+    var last = recall(lastKey) || (isSplit(dkey) ? recall("study-last:" + srcOf(dkey)) : null);
     if (last && !location.hash && document.getElementById(last)) {
       // 버튼은 '이어서 읽기 · 3구간'만, 구간 제목은 짧게 줄여 옆에 보조 문구로 단다
       var back = h("div", "cm-resume");
@@ -1313,7 +1433,7 @@
   function setupQuiz() {
     document.querySelectorAll(".quiz[data-day]").forEach(renderQuiz);
   }
-  var KIND_LABEL = { check: "잠깐 점검", end: "마무리 퀴즈", final: "종합 퀴즈", pre: "사전 테스트", post: "사후 테스트" };
+  var KIND_LABEL = { check: "잠깐 점검", end: "마무리 퀴즈", final: "종합 퀴즈", pre: "사전 테스트", post: "다시 풀기", review: "지난 학습 복습" };
   var LETTERS = ["A", "B", "C", "D", "E", "F"];
   function renderQuiz(box) {
     var dataEl = document.getElementById("quiz-" + box.dataset.day);
@@ -1425,11 +1545,16 @@
             (preN ? "사전 " + preOk + "/" + preN + " → 다시 풀기 " + ok + "/" + n + ". 사전 테스트에서 정답을 이미 봤으므로 이 점수는 이해가 늘었다는 증거가 아니라 '다시 떠올리기' 연습입니다. 이해 점검은 구간의 잠깐 점검과 종합 퀴즈의 첫 시도로 보세요. " : "") +
             (both.length
               ? "두 번 다 틀린 문제(" + both.join(", ") + ")는 이유를 읽고, 내일 ⓪ 되살리기 때 먼저 떠올려 보세요."
-              : "사전에 틀렸다가 맞힌 문제가 있다면, 왜 그런지 ④ 내 답에 자기 말로 써 보세요.");
+              : "사전에 틀렸다가 맞힌 문제가 있다면, 왜 그런지 한 문장으로 떠올려 보세요(쓰기는 선택).");
+        } else if (kind === "review") {
+          msg =
+            ok === n
+              ? "지난 학습의 핵심을 모두 다시 확인했어요. 바로 아래 학습자료로 이어 가세요."
+              : "틀린 문제에는 다시 볼 곳(새 탭)이 붙어 있습니다. 확인은 언제 해도 되고, 아래 학습자료는 그대로 이어 가도 됩니다.";
         } else {
           msg =
             ok === n
-              ? "모두 맞혔어요. 이유를 자기 말로 설명할 수 있는지 내 답에서 확인해 보세요."
+              ? "모두 맞혔어요. 이유를 자기 말로 한 문장으로 말할 수 있는지만 확인해 보세요."
               : "틀린 문제는 이유를 읽고, 해당 부분으로 돌아가 다시 풀어 보세요. 점수는 진단일 뿐입니다.";
         }
         var fN = 0,
@@ -1467,7 +1592,7 @@
       var why = h("div", "qwhy");
       why.setAttribute("aria-live", "polite");
       why.style.display = "none";
-      function reveal(ok, chosenText, animate) {
+      function reveal(ok, chosenText, animate, chosenIdx) {
         qi.classList.add("answered", ok ? "is-ok" : "is-no");
         if (animate) {
           qi.classList.add(ok ? "pop" : "shake");
@@ -1507,13 +1632,30 @@
         if (isRetry) why.appendChild(h("span", "qw-retry", mode === "post" ? "사전에 정답을 본 뒤 재응답" : "정답 본 뒤 재응답 · 첫 시도: " + (firsts[k] && firsts[k].ok ? "정답" : "오답")));
         if (!ok) why.appendChild(h("b", "", " 정답: " + ans + " "));
         why.appendChild(h("span", "", " " + (it.why || "")));
+        // 고른 오답이 왜 맞지 않는지(wrongWhy[보기 번호]), 같은 자리에서 볼 짧은 개념(note)과 그림(fig)
+        if (!ok && it.wrongWhy && chosenIdx != null && it.wrongWhy[chosenIdx]) why.appendChild(h("div", "qw-wrong", "고른 보기가 맞지 않는 이유: " + it.wrongWhy[chosenIdx]));
+        if (!ok && it.note) why.appendChild(h("div", "qw-note", it.note));
+        if (!ok && it.fig) {
+          var im = h("img", "qw-fig");
+          im.src = it.fig;
+          im.alt = it.figAlt || "다시 볼 그림";
+          im.loading = "lazy";
+          why.appendChild(im);
+        }
         if (!ok) {
           var row = h("div", "qw-actions");
-          if (it.ref && document.querySelector(it.ref)) {
+          if (it.ref && it.ref.charAt(0) === "#" && document.querySelector(it.ref)) {
             // refLabel: 처음부터가 아니라 바로 필요한 설명·작은 예제의 이름 (예: "2×2 예제의 저장 칸 세기")
             var a = h("a", "", "↑ 다시 볼 곳: " + (it.refLabel || "해당 부분"));
             a.href = it.ref;
             row.appendChild(a);
+          } else if (it.ref && it.ref.charAt(0) !== "#") {
+            // 지난 학습 단위의 정확한 위치를 새 탭으로 연다(이 복습 화면은 그대로 남는다)
+            var a2 = h("a", "", "↗ 다시 볼 곳(새 탭): " + (it.refLabel || "지난 학습"));
+            a2.href = it.ref;
+            a2.target = "_blank";
+            a2.rel = "noopener";
+            row.appendChild(a2);
           }
           row.appendChild(
             button("이 문제 다시 풀기", "ghost", function () {
@@ -1539,7 +1681,7 @@
               if (m === correct) x.classList.add("right");
               else if (m === j) x.classList.add("wrong");
             });
-            reveal(j === correct, o, true);
+            reveal(j === correct, o, true, j);
           });
           if (it.type === "mc") b.appendChild(h("span", "qletter", LETTERS[j]));
           b.appendChild(h("span", "qlabel", o));
@@ -1656,8 +1798,11 @@
   function setupAskPanel() {
     var steps = document.querySelector(".day-steps[data-day]");
     if (!steps || !LOCAL) return;
-    var did = steps.dataset.day;
+    var did = srcOf(steps.dataset.day);
     var dn = parseInt(did.slice(1), 10);
+    // 화면에 보이는 번호(Day N). 질문 파일에 남기는 꼬리표는 원래 Day(D5)를 그대로 쓴다(기존 질문과 맞추기 위해).
+    var tm = (document.title || "").match(/^Day (\d+)/);
+    var dayLabel = tm ? "Day " + tm[1] : "D" + dn;
     var qname = did + "-questions";
     var draftKey = "study-askdraft:" + did;
 
@@ -1722,7 +1867,7 @@
       ".md</code>(요청은 <code>requests.md</code>)에 ID와 함께 쌓입니다.</li><li>Claude Code 채팅에서 <b>\"D" +
       dn +
       " 질문 답해줘\"</b>(요청은 \"요청 반영해줘\")라고 말합니다.</li><li>답은 이 페이지의 '답변' 칸에 같은 ID로 붙고, 그 뒤 '답변 있음'으로 바뀝니다.</li></ol>" +
-      "<button type='button' class='sbtn tagbtn' data-copy='D" + dn + " 질문 답해줘'>\"D" + dn + " 질문 답해줘\" 복사</button>";
+      "<button type='button' class='sbtn tagbtn' data-copy='" + dayLabel + " 질문 답해줘'>\"" + dayLabel + " 질문 답해줘\" 복사</button>";
     panel.appendChild(how);
     how.querySelector("[data-copy]").addEventListener("click", function (e) {
       var t = e.currentTarget.dataset.copy;
@@ -1869,7 +2014,7 @@
             quote.style.display = "none";
           } else writeDraft();
           toast(
-            (isReq ? "요청을 저장했어요 (" : "질문을 저장했어요 (") + id + "). Claude Code에서 \"" + (isReq ? "요청 반영해줘" : "D" + dn + " 질문 답해줘") + "\"라고 말하면 처리합니다." + (j.history_error ? " 수정 이력(git) 기록은 실패했어요." : ""),
+            (isReq ? "요청을 저장했어요 (" : "질문을 저장했어요 (") + id + "). Claude Code에서 \"" + (isReq ? "요청 반영해줘" : dayLabel + " 질문 답해줘") + "\"라고 말하면 처리합니다." + (j.history_error ? " 수정 이력(git) 기록은 실패했어요." : ""),
             true
           );
           var ed = EDITORS[name];
@@ -1956,7 +2101,7 @@
     back.style.display = "none";
     var savedY = null;
     back.addEventListener("click", function () {
-      if (savedY !== null) window.scrollTo({ top: savedY, behavior: "smooth" });
+      if (savedY !== null) window.scrollTo({ top: savedY, behavior: SMOOTH });
       back.style.display = "none";
       savedY = null;
     });
@@ -1995,7 +2140,7 @@
         if (cur < steps.length - 1) {
           cur++;
           show();
-          steps[cur].scrollIntoView({ block: "nearest", behavior: "smooth" });
+          steps[cur].scrollIntoView({ block: "nearest", behavior: SMOOTH });
         }
       });
       var reset = button("처음부터", "ghost", function () {
@@ -2128,7 +2273,7 @@
           var lb = document.querySelector(".lesson-body");
           renderRecallCheck(checkBox, lb ? keypointsFrom(lb) : [], "", round);
         }
-        if (!tools._auto) checkBox.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (!tools._auto) checkBox.scrollIntoView({ behavior: SMOOTH, block: "start" });
       });
       if (round === 1) tools.appendChild(hideBtn);
       tools.appendChild(checkBtn);
