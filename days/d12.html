@@ -983,13 +983,13 @@ runtime 56.6 s -&gt; C:\Users\hyeon\OneDrive\Desktop\Neuromorphic ionotronics\st
 <p><strong>손잡이 1 — 노드 수 N (50 / 200 / 800).</strong></p>
 <p><strong>바꾸는 것.</strong> 상태 <span class="math inline">\(x\)</span>에 든 숫자의 개수입니다. 표 <span class="math inline">\(W\)</span>가 <span class="math inline">\(N \times N\)</span>으로 커지고(50개면 2,500칸, 800개면 640,000칸), readout이 받는 특징이 <span class="math inline">\(N + 2\)</span>개(52, 202, 802)가 됩니다. 노드마다의 성질(ρ, leak, 입력 크기)은 그대로이고 "섞어 쓸 재료의 수"만 늘어납니다. <strong>볼 곳.</strong> <code>N</code> 세 줄의 NMSE 칸과 MC 칸. MC를 그 줄의 N(50, 200, 800)과 나란히 놓아 보세요.</p>
 <div class="predict">
-<p>N을 4배씩 늘리면 NMSE는? MC는 N에 비례해 50, 200, 800 근처가 될까요? (D8 6구간의 그림 8, D11 3구간의 "총량 ≤ N")</p>
+<p>N을 4배씩 늘리면 NMSE는? MC는 N에 비례해 50, 200, 800 근처가 될까요? (D8 6구간의 그림 12, D11 3구간의 "총량 ≤ N")</p>
 </div>
 <details class="deep">
 <summary>
 설명 펼치기 · 노드 수
 </summary>
-Claude의 출력: NMSE 0.213 → 0.053 → 0.0165, MC 11.7 → 17.9 → 21.9. NMSE는 꾸준히 줄었습니다. 고정된 특징이 많을수록 readout이 섞어 쓸 재료가 많기 때문입니다(D8 그림 8). 그런데 MC는 N에 한참 못 미치고, N이 16배가 되는 동안 2배도 안 늘었습니다. MC ≤ N은 상한일 뿐이고(D11), tanh reservoir는 총량의 상당 부분을 비선형(차수 2 이상)에 쓰며, ρ = 0.9의 흐려짐 속도가 기억이 닿는 길이를 정하기 때문입니다(D9). "MC가 노드 수에 묶이는가?"에 대한 답은 "위로는 묶이지만(≤ N), 그 상한까지 차지는 않는다"입니다. <span class="tag tag-interp">해석</span>
+Claude의 출력: NMSE 0.213 → 0.053 → 0.0165, MC 11.7 → 17.9 → 21.9. NMSE는 꾸준히 줄었습니다. 고정된 특징이 많을수록 readout이 섞어 쓸 재료가 많기 때문입니다(D8 그림 12). 그런데 MC는 N에 한참 못 미치고, N이 16배가 되는 동안 2배도 안 늘었습니다. MC ≤ N은 상한일 뿐이고(D11), tanh reservoir는 총량의 상당 부분을 비선형(차수 2 이상)에 쓰며, ρ = 0.9의 흐려짐 속도가 기억이 닿는 길이를 정하기 때문입니다(D9). "MC가 노드 수에 묶이는가?"에 대한 답은 "위로는 묶이지만(≤ N), 그 상한까지 차지는 않는다"입니다. <span class="tag tag-interp">해석</span>
 </details>
 <p><strong>손잡이 2 — spectral radius ρ (0.3 / 0.9 / 1.2).</strong></p>
 <p><strong>바꾸는 것.</strong> 표 <span class="math inline">\(W\)</span> 전체에 곱하는 배율입니다. 입력을 끊으면 상태에 남은 흔적이 한 단계마다 대략 ρ배가 됩니다(tanh의 직선 구간에서, <a href="../days/d09.html#ch-spectral-radius">D9 4구간</a>). 3단계 뒤면 ρ = 0.3은 <span class="math inline">\(0.3^3 \approx 0.027\)</span>, ρ = 0.9는 <span class="math inline">\(0.9^3 \approx 0.73\)</span>이 남고, ρ = 1.2는 줄지 않고 커지려다 tanh에 눌립니다. <strong>볼 곳.</strong> <code>rho</code> 세 줄의 NMSE·MC·λ 칸, 그리고 ESP 확인 줄 <code>rho=0.3</code>, <code>rho=0.9</code>, <code>rho=1.2</code>의 맨 끝(<code>t=1000</code>) 값.</p>

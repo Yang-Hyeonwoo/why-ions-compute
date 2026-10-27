@@ -1,56 +1,107 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 340' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 375' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
-<text x='320' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >readout 가중치 하나를 찾는 세 가지 '걸음': 경사 하강 · momentum · Adam</text>
-<rect x='70' y='45' width='380' height='220' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
-<text x='64' y='269.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >0.0</text>
-<line x1='70' y1='265.0' x2='450' y2='265.0' stroke='#f2f2f2' stroke-width='1'/>
-<text x='64' y='214.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >0.5</text>
-<line x1='70' y1='210.0' x2='450' y2='210.0' stroke='#f2f2f2' stroke-width='1'/>
-<text x='64' y='159.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >1.0</text>
-<line x1='70' y1='155.0' x2='450' y2='155.0' stroke='#f2f2f2' stroke-width='1'/>
-<text x='64' y='104.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >1.5</text>
-<line x1='70' y1='100.0' x2='450' y2='100.0' stroke='#f2f2f2' stroke-width='1'/>
-<text x='64' y='49.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >2.0</text>
-<line x1='70' y1='45.0' x2='450' y2='45.0' stroke='#f2f2f2' stroke-width='1'/>
-<text x='70.0' y='280' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
-<text x='196.66666666666669' y='280' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >10</text>
-<text x='323.33333333333337' y='280' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >20</text>
-<text x='450.0' y='280' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >30</text>
-<text x='260.0' y='297' font-size='11.5' fill='#444' text-anchor='middle' font-weight='normal' >걸음 수</text>
-<text x='22' y='155.0' font-size='11.5' fill='#444' text-anchor='middle' font-weight='normal' transform='rotate(-90 22 155.0)'>가중치 w</text>
-<line x1='70' y1='151.07142857142856' x2='450' y2='151.07142857142856' stroke='#13936b' stroke-width='1.4' stroke-dasharray='5,3'/>
-<text x='446' y='167.07142857142856' font-size='10.5' fill='#13936b' text-anchor='end' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >한 번에 푼 답(최소제곱) w = 1.036</text>
-<polyline points='70.0,265.0 82.7,201.2 95.3,173.1 108.0,160.8 120.7,155.3 133.3,153.0 146.0,151.9 158.7,151.4 171.3,151.2 184.0,151.1 196.7,151.1 209.3,151.1 222.0,151.1 234.7,151.1 247.3,151.1 260.0,151.1 272.7,151.1 285.3,151.1 298.0,151.1 310.7,151.1 323.3,151.1 336.0,151.1 348.7,151.1 361.3,151.1 374.0,151.1 386.7,151.1 399.3,151.1 412.0,151.1 424.7,151.1 437.3,151.1 450.0,151.1' fill='none' stroke='#3d6fb4' stroke-width='1.8' stroke-linejoin='round'/>
-<circle cx='70.0' cy='265.0' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
-<circle cx='82.66666666666667' cy='201.2' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
-<circle cx='95.33333333333333' cy='173.128' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
-<circle cx='108.0' cy='160.77632' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
-<circle cx='120.66666666666666' cy='155.3415808' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
-<circle cx='133.33333333333334' cy='152.950295552' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
-<polyline points='70.0,265.0 82.7,201.2 95.3,115.7 108.0,58.6 120.7,58.9 133.3,110.9 146.0,180.1 158.7,226.2 171.3,225.6 184.0,183.3 196.7,127.2 209.3,90.1 222.0,90.8 234.7,125.2 247.3,170.7 260.0,200.6 272.7,199.8 285.3,171.8 298.0,135.0 310.7,110.9 323.3,111.7 336.0,134.5 348.7,164.3 361.3,183.7 374.0,182.9 386.7,164.4 399.3,140.2 412.0,124.6 424.7,125.3 437.3,140.4 450.0,160.0' fill='none' stroke='#e08a3c' stroke-width='1.8' stroke-linejoin='round'/>
-<circle cx='70.0' cy='265.0' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
-<circle cx='82.66666666666667' cy='201.2' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
-<circle cx='95.33333333333333' cy='115.70799999999997' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
-<circle cx='108.0' cy='58.568719999999956' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
-<circle cx='120.66666666666666' cy='58.94488479999998' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
-<circle cx='133.33333333333334' cy='110.87429763200001' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
-<polyline points='70.0,265.0 82.7,254.0 95.3,243.0 108.0,232.2 120.7,221.4 133.3,210.8 146.0,200.5 158.7,190.4 171.3,180.8 184.0,171.5 196.7,162.9 209.3,154.8 222.0,147.5 234.7,141.0 247.3,135.4 260.0,130.6 272.7,126.9 285.3,124.0 298.0,122.1 310.7,121.0 323.3,120.8 336.0,121.3 348.7,122.4 361.3,124.2 374.0,126.4 386.7,129.0 399.3,131.9 412.0,135.0 424.7,138.2 437.3,141.5 450.0,144.7' fill='none' stroke='#c8553d' stroke-width='1.8' stroke-linejoin='round'/>
-<circle cx='70.0' cy='265.0' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
-<circle cx='82.66666666666667' cy='254.0000000037931' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
-<circle cx='95.33333333333333' cy='243.04317606475897' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
-<circle cx='108.0' cy='232.1658085931257' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
-<circle cx='120.66666666666666' cy='221.410875849142' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
-<circle cx='133.33333333333334' cy='210.82889412605863' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
-<rect x='465' y='45' width='160' height='220' rx='6' fill='#fafafa' stroke='#d9d9d9' stroke-width='1.2' />
-<text x='475' y='64' font-size='11' fill='#444' text-anchor='start' font-weight='bold' >첫 두 걸음 (코드 계산)</text>
-<text x='475' y='86' font-size='11' fill='#3d6fb4' text-anchor='start' font-weight='bold' >경사 하강</text>
-<text x='475' y='103' font-size='10.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >w: 0 → 0.580 → 0.835</text>
-<text x='475' y='119' font-size='10.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >30걸음 뒤 1.036</text>
-<text x='475' y='144' font-size='11' fill='#e08a3c' text-anchor='start' font-weight='bold' >momentum</text>
-<text x='475' y='161' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >w: 0 → 0.580 → 1.357</text>
-<text x='475' y='177' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >30걸음 뒤 0.955</text>
-<text x='475' y='202' font-size='11' fill='#c8553d' text-anchor='start' font-weight='bold' >Adam</text>
-<text x='475' y='219' font-size='10.5' fill='#c8553d' text-anchor='start' font-weight='normal' >w: 0 → 0.100 → 0.200</text>
-<text x='475' y='235' font-size='10.5' fill='#c8553d' text-anchor='start' font-weight='normal' >30걸음 뒤 1.094</text>
-<text x='320' y='325' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >데이터(예시): x = 1, 2, 3 / 정답 y = 1.1, 1.9, 3.2 / 손실 L(w) = Σ(w·x − y)². 시작 w = 0.</text>
+<text x='350' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' ><tspan>같은 그릇 L(w) = 14w</tspan><tspan dy='-6' font-size='9'>2</tspan><tspan dy='6' font-size='1'>​</tspan><tspan> − 29w + 15.06에서 가중치 w를 찾는 '걸음'</tspan></text>
+<text x='25' y='48' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' >① 학습률 η만 바꾼 경사 하강</text>
+<rect x='55' y='62' width='245' height='220' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='49' y='286.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >−1</text>
+<line x1='55' y1='282.0' x2='300' y2='282.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='49' y='231.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >0</text>
+<line x1='55' y1='227.0' x2='300' y2='227.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='49' y='176.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >1</text>
+<line x1='55' y1='172.0' x2='300' y2='172.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='49' y='121.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >2</text>
+<line x1='55' y1='117.0' x2='300' y2='117.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='49' y='66.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >3</text>
+<line x1='55' y1='62.0' x2='300' y2='62.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='55.0' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='116.25' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >2</text>
+<text x='177.5' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >4</text>
+<text x='238.75' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >6</text>
+<text x='300.0' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >8</text>
+<text x='177.5' y='313' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' >걸음 수</text>
+<text x='18' y='172.0' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' transform='rotate(-90 18 172.0)'>가중치 w</text>
+<line x1='55' y1='170.03571428571428' x2='300' y2='170.03571428571428' stroke='#13936b' stroke-width='1.4' stroke-dasharray='5,3'/>
+<polyline points='55.0,227.0 85.6,195.1 116.2,181.1 146.9,174.9 177.5,172.2 208.1,171.0 238.8,170.4 269.4,170.2 300.0,170.1' fill='none' stroke='#3d6fb4' stroke-width='1.8' stroke-linejoin='round'/>
+<circle cx='55.0' cy='227.0' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='85.625' cy='195.1' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='116.25' cy='181.06400000000002' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='146.875' cy='174.88816' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='177.5' cy='172.1707904' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='208.125' cy='170.975147776' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='238.75' cy='170.44906502144' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='269.375' cy='170.2175886094336' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='300.0' cy='170.11573898815078' r='2.6' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<polyline points='55.0,227.0 85.6,131.3 116.2,196.4 146.9,152.1 177.5,182.2 208.1,161.8 238.8,175.7 269.4,166.2 300.0,172.6' fill='none' stroke='#7a5bb5' stroke-width='1.8' stroke-linejoin='round'/>
+<circle cx='55.0' cy='227.0' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<circle cx='85.625' cy='131.29999999999998' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<circle cx='116.25' cy='196.376' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<circle cx='146.875' cy='152.12432' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<circle cx='177.5' cy='182.2154624' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<circle cx='208.125' cy='161.753485568' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<circle cx='238.75' cy='175.66762981376002' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<circle cx='269.375' cy='166.20601172664323' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<circle cx='300.0' cy='172.6399120258826' r='2.6' fill='#7a5bb5' stroke='#7a5bb5' stroke-width='1.4'/>
+<polyline points='55.0,227.0 85.6,99.4 116.2,257.6' fill='none' stroke='#999' stroke-width='1.8' stroke-dasharray='5,3' stroke-linejoin='round'/>
+<circle cx='55.0' cy='227.0' r='2.6' fill='#999' stroke='#999' stroke-width='1.4'/>
+<circle cx='85.625' cy='99.39999999999998' r='2.6' fill='#999' stroke='#999' stroke-width='1.4'/>
+<circle cx='116.25' cy='257.624' r='2.6' fill='#999' stroke='#999' stroke-width='1.4'/>
+<line x1='150' y1='74' x2='168' y2='74' stroke='#3d6fb4' stroke-width='2.2'/>
+<text x='172' y='78' font-size='10' fill='#3d6fb4' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >η = 0.02: 곧게 다가감</text>
+<line x1='150' y1='89' x2='168' y2='89' stroke='#7a5bb5' stroke-width='2.2'/>
+<text x='172' y='93' font-size='10' fill='#7a5bb5' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >η = 0.06: 넘었다 돌아옴</text>
+<line x1='150' y1='104' x2='168' y2='104' stroke='#999' stroke-width='2.2' stroke-dasharray='5,3'/>
+<text x='172' y='108' font-size='10' fill='#999' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >η = 0.08: 발산</text>
+<line x1='150' y1='119' x2='168' y2='119' stroke='#13936b' stroke-width='1.6' stroke-dasharray='5,3'/>
+<text x='172' y='123' font-size='10' fill='#13936b' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >바닥(한 번에 푼 답) 1.036</text>
+<text x='370' y='48' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' >② 세 가지 걸음 규칙</text>
+<rect x='400' y='62' width='280' height='220' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='394' y='286.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >0.0</text>
+<line x1='400' y1='282.0' x2='680' y2='282.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='394' y='231.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >0.5</text>
+<line x1='400' y1='227.0' x2='680' y2='227.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='394' y='176.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >1.0</text>
+<line x1='400' y1='172.0' x2='680' y2='172.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='394' y='121.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >1.5</text>
+<line x1='400' y1='117.0' x2='680' y2='117.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='394' y='66.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >2.0</text>
+<line x1='400' y1='62.0' x2='680' y2='62.0' stroke='#f2f2f2' stroke-width='1'/>
+<text x='400.0' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='493.3333333333333' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >10</text>
+<text x='586.6666666666666' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >20</text>
+<text x='680.0' y='297' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >30</text>
+<text x='540.0' y='313' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' >걸음 수</text>
+<text x='364' y='172.0' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' transform='rotate(-90 364 172.0)'>가중치 w</text>
+<line x1='400' y1='168.07142857142856' x2='680' y2='168.07142857142856' stroke='#13936b' stroke-width='1.4' stroke-dasharray='5,3'/>
+<polyline points='400.0,282.0 409.3,218.2 418.7,190.1 428.0,177.8 437.3,172.3 446.7,170.0 456.0,168.9 465.3,168.4 474.7,168.2 484.0,168.1 493.3,168.1 502.7,168.1 512.0,168.1 521.3,168.1 530.7,168.1 540.0,168.1 549.3,168.1 558.7,168.1 568.0,168.1 577.3,168.1 586.7,168.1 596.0,168.1 605.3,168.1 614.7,168.1 624.0,168.1 633.3,168.1 642.7,168.1 652.0,168.1 661.3,168.1 670.7,168.1 680.0,168.1' fill='none' stroke='#3d6fb4' stroke-width='1.8' stroke-linejoin='round'/>
+<circle cx='400.0' cy='282.0' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='409.3333333333333' cy='218.2' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='418.6666666666667' cy='190.128' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='428.0' cy='177.77632' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='437.3333333333333' cy='172.3415808' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<circle cx='446.6666666666667' cy='169.950295552' r='2.4' fill='#3d6fb4' stroke='#3d6fb4' stroke-width='1.4'/>
+<polyline points='400.0,282.0 409.3,218.2 418.7,132.7 428.0,75.6 437.3,75.9 446.7,127.9 456.0,197.1 465.3,243.2 474.7,242.6 484.0,200.3 493.3,144.2 502.7,107.1 512.0,107.8 521.3,142.2 530.7,187.7 540.0,217.6 549.3,216.8 558.7,188.8 568.0,152.0 577.3,127.9 586.7,128.7 596.0,151.5 605.3,181.3 614.7,200.7 624.0,199.9 633.3,181.4 642.7,157.2 652.0,141.6 661.3,142.3 670.7,157.4 680.0,177.0' fill='none' stroke='#e08a3c' stroke-width='1.8' stroke-linejoin='round'/>
+<circle cx='400.0' cy='282.0' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
+<circle cx='409.3333333333333' cy='218.2' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
+<circle cx='418.6666666666667' cy='132.70799999999997' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
+<circle cx='428.0' cy='75.56871999999996' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
+<circle cx='437.3333333333333' cy='75.94488479999998' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
+<circle cx='446.6666666666667' cy='127.87429763200001' r='2.4' fill='#e08a3c' stroke='#e08a3c' stroke-width='1.4'/>
+<polyline points='400.0,282.0 409.3,271.0 418.7,260.0 428.0,249.2 437.3,238.4 446.7,227.8 456.0,217.5 465.3,207.4 474.7,197.8 484.0,188.5 493.3,179.9 502.7,171.8 512.0,164.5 521.3,158.0 530.7,152.4 540.0,147.6 549.3,143.9 558.7,141.0 568.0,139.1 577.3,138.0 586.7,137.8 596.0,138.3 605.3,139.4 614.7,141.2 624.0,143.4 633.3,146.0 642.7,148.9 652.0,152.0 661.3,155.2 670.7,158.5 680.0,161.7' fill='none' stroke='#c8553d' stroke-width='1.8' stroke-linejoin='round'/>
+<circle cx='400.0' cy='282.0' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='409.3333333333333' cy='271.0000000037931' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='418.6666666666667' cy='260.043176064759' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='428.0' cy='249.1658085931257' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='437.3333333333333' cy='238.410875849142' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
+<circle cx='446.6666666666667' cy='227.82889412605863' r='2.4' fill='#c8553d' stroke='#c8553d' stroke-width='1.4'/>
+<line x1='498' y1='222' x2='516' y2='222' stroke='#3d6fb4' stroke-width='2.2'/>
+<text x='520' y='226' font-size='10' fill='#3d6fb4' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >경사 하강 (η = 0.02)</text>
+<line x1='498' y1='236' x2='516' y2='236' stroke='#e08a3c' stroke-width='2.2'/>
+<text x='520' y='240' font-size='10' fill='#e08a3c' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >momentum (η = 0.02, β = 0.9)</text>
+<line x1='498' y1='250' x2='516' y2='250' stroke='#c8553d' stroke-width='2.2'/>
+<text x='520' y='254' font-size='10' fill='#c8553d' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >Adam (η = 0.1)</text>
+<line x1='498' y1='264' x2='516' y2='264' stroke='#13936b' stroke-width='1.6' stroke-dasharray='5,3'/>
+<text x='520' y='268' font-size='10' fill='#13936b' text-anchor='start' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >한 번에 푼 답 1.036</text>
+<text x='350' y='330' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >첫 두 걸음 — 경사 하강 0 → 0.580 → 0.835 · momentum 0 → 0.580 → 1.357 · Adam 0 → 0.100 → 0.200</text>
+<text x='350' y='348' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >30걸음 뒤 — 경사 하강 1.036 · momentum 0.955 · Adam 1.094.  ① η = 0.06: 0 → 1.740 → 0.557, η = 0.08: 0 → 2.320 → −0.557</text>
+<text x='350' y='366' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >데이터(예시): x = 1, 2, 3 / 정답 y = 1.1, 1.9, 3.2. 기울기 = 28w − 29. 시작 w = 0. 숫자는 모두 코드가 계산했다.</text>
 </svg>
