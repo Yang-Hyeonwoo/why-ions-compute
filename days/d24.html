@@ -634,7 +634,8 @@ window.Quarto = {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#pretest" id="toc-pretest" class="nav-link active" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">지난 학습 복습</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
   <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
   <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
   <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing">선택 활동: 글로 정리하기</a></li>
@@ -666,12 +667,22 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> — single-ion conductor·polyelectrolyte·heterojunction은 어떤 고유 이점이 있는가? 일반 ionogel보다 반드시 유리한가?</p>
+<p><strong>배울 핵심</strong> — 세 재료의 차이를 수송수와 경계의 쌓임·빔(δ × I/F)으로, 바깥 염이 Donnan 배제와 정류를 깎는 정도, 정류·고갈·다중 τ가 되는 계산 primitive와 Phase 4 대응표</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 41–42 논문 평가 표, Day 43–44 속도·전력 병목, Day 45–46 몸 안 장치의 150 mM·pH 7.4 조건, Day 47–48 내 polyelectrolyte 접합의 가설과 염 농도 계열·같은 부호 대조 실험</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d24">
-  <li data-step="lesson"><a href="#lesson"><b>1</b>학습자료</a></li>
-  <li data-step="done"><a href="#done"><b>2</b>학습 완료</a></li>
+  <li data-step="review"><a href="#review"><b>1</b>지난 학습 복습</a></li>
+  <li data-step="lesson"><a href="#lesson"><b>2</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>3</b>학습 완료</a></li>
 </ol>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
+<div class="flow-line">
+<p>지난 학습 단위(Day 39 · 이온전도도와 성능)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+</div>
+<div class="quiz" data-day="d24" data-set="review"></div>
+</section>
 <section id="pretest" class="level2">
 <h2 class="anchored" data-anchor-id="pretest">사전 테스트 (선택)</h2>
 <details class="fold pretest-fold"><summary>사전 테스트 펼치기 · 배우기 전에 짐작해 보는 문제 (선택)</summary><div class="quiz" data-day="d24" data-set="pre"></div>
@@ -681,10 +692,16 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
 <div class="lesson-body">
 <div class="lesson-meta">
-<p>학습 구간 5개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 100분 안팎(추정) · 선택 영상 8분 · 퀴즈 22문항 · 내 답 쓰기는 따로(오늘은 Phase 종합 양식 포함). 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Balqis 2026 p.27066–27072 / Zheng 2025 p.1–2 / Lee 2026 (AFM) p.2–4 / Zhang 2024 (ACS Nano) p.15026, 15030 / Han 2023 p.3, 9 / Wang 2025 (Chem. Soc. Rev.) p.306, 316 / Zhu 2025 p.7, 9–10 / Roadmap 2026 p.8107–8108 / Pandey 2026 p.7(PDF 쪽 순서) / Li 2026 (IPC fiber) p.1, 6. 모두 해당 쪽만 봤고 SI는 보지 않았습니다. <strong>폴더 밖에서 확인한 것</strong>: KCl의 이온 전도도 표 값(수송수 0.49), 이온교환막의 막 전위 측정법, Pärnamäe 2023(바이폴라 막의 한계 전류, 본문), Doyle·Fuller·Newman 1994(수송수 1 전해질, 초록). <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 1구간의 수송수·경계 계산, 3구간의 Donnan 계산과 4구간의 이력 응답 그림은 Claude가 만든 단순 모형의 계산이며, 5구간의 대응표 가운데 "이온만의 몫" 열은 Claude의 판단입니다.</p>
+<p>학습 구간 5개(1–5) · 한 번에 다 읽지 않아도 됩니다(구간 안의 '멈추기 좋은 곳'에서 끊어 읽어도 됩니다) · 선택 영상 3개 · 퀴즈 22문항(사전 테스트·지난 학습 복습 제외) · 내 답 쓰기는 따로(Phase 종합 양식 포함). 이번 숫자 가운데 <strong>측정이 아닌 것</strong>: 1구간의 수송수·경계 계산과 3구간의 Donnan 계산은 이상 모형(1가 염, 활동도 1, 25 °C)의 계산이고, 4구간 그림 4는 Day 35–36과 같은 꼴의 장난감 접합 모형이며, 5구간 대응표의 '이온만의 몫' 열은 Claude의 판단입니다. 모두 실제 소자의 측정이 아닙니다. 측정값은 논문 숫자와 KCl의 표 값뿐이고, 그때마다 출처를 붙였습니다. 계산 그림은 <code>python tools/figs_d24.py</code>로 다시 그릴 수 있습니다(<code>--numbers</code>를 붙이면 본문에 쓴 숫자를 출력).</p>
+<details class="meta-more">
+<summary>
+근거 표기와 Claude가 대조한 범위
+</summary>
+<p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Balqis 2026 p.27066–27072 / Zheng 2025 p.1–2 / Lee 2026 (AFM) p.2–4 / Zhang 2024 (ACS Nano) p.15026, 15030 / Han 2023 p.3, 9 / Wang 2025 (Chem. Soc. Rev.) p.306, 316 / Zhu 2025 p.7, 9–10 / Roadmap 2026 p.8107–8108 / Pandey 2026 p.7(PDF 쪽 순서) / Li 2026 (IPC fiber) p.1, 6. 모두 해당 쪽만 봤고 SI는 보지 않았습니다. <strong>폴더 밖에서 확인한 것</strong>: KCl의 이온 전도도 표 값(수송수 0.49), 이온교환막의 막 전위 측정법, Pärnamäe 2023(바이폴라 막의 한계 전류, 본문), Doyle·Fuller·Newman 1994(수송수 1 전해질, 초록). <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다.</p>
+</details>
 </div>
-<p>Phase 4의 마지막 날입니다. 오늘 질문은 사용자의 연구 소재에 가장 가깝습니다. <strong>single-ion conductor, polyelectrolyte, heterojunction은 어떤 고유한 이점이 있나? 그리고 일반 이온겔보다 반드시 유리한가?</strong> 이 질문에 답한 뒤, Day 33–40 전체를 하나의 표로 묶습니다. <strong>이온 물리 → 계산 primitive(계산을 이루는 기본 부품)</strong>의 대응표입니다.</p>
-<p>먼저 밝혀 둡니다. 이 날의 내용은 사용자가 직접 다뤄 온 계(anionic/cationic polyelectrolyte heterojunction, ionic diode, depletion layer)와 겹칩니다. 아래의 그림과 계산은 그 경험을 정답으로 삼지 않고, 폴더 원문과 단순 모형으로 다시 세운 것입니다. 내 데이터와 다르면 내 데이터가 우선입니다.</p>
+<p>Phase 4(Day 33–40)의 마지막 Day입니다. 이번 질문은 고분자 이온 소재 연구에 가장 가깝습니다. <strong>single-ion conductor, polyelectrolyte, heterojunction은 어떤 고유한 이점이 있나? 그리고 일반 이온겔보다 반드시 유리한가?</strong> 이 질문에 답한 뒤, Day 33–40 전체를 하나의 표로 묶습니다. <strong>이온 물리 → 계산 primitive(계산을 이루는 기본 부품, 4구간에서 정의)</strong>의 대응표입니다.</p>
+<p>이번 내용은 내가 직접 다뤄 온 계(음이온성·양이온성 polyelectrolyte heterojunction, 이온 다이오드(ionic diode), 고갈층(depletion layer))와 겹칩니다. 아래의 그림과 계산은 그 경험을 정답으로 삼지 않고, 폴더 원문과 단순 모형으로 다시 세운 것입니다. 내 데이터와 다르면 내 데이터가 우선입니다.</p>
 <ol type="1">
 <li>일반 이온겔, 단일 이온 전도체(폴리전해질), 이종접합은 무엇이 다른가? 전류의 몇 할을 어느 이온이 나르고(수송수), 그것이 어디에서 이온을 쌓고 비우나?</li>
 <li>이종접합의 정류·고갈 비선형·다중 시간상수는 어디서 오고, 연구는 어디까지 왔나?</li>
@@ -700,36 +717,39 @@ window.Quarto = {
 <div id="b-polyelectrolyte-junction" class="basics">
 <section id="single-ion-conductorpolyelectrolyteheterojunction-정류" class="level4">
 <h4 class="anchored" data-anchor-id="single-ion-conductorpolyelectrolyteheterojunction-정류">single-ion conductor·polyelectrolyte·heterojunction 정류</h4>
-<p><strong>① 왜 필요한가.</strong> 이온 소자의 재료를 고를 때 "이온겔이냐 폴리전해질이냐"는 단순한 재료 선택이 아니라, <strong>어떤 이온이 움직일 수 있느냐</strong>의 선택입니다. 그것이 Day 35–36의 메커니즘(EDL, 농도 분극, 고갈) 가운데 무엇이 일어날지를 정합니다.</p>
-<p><strong>② 무엇인가: 세 계단(그림 1).</strong></p>
+<p><strong>① 왜 필요한가.</strong> 이온 소자의 재료를 고를 때 "이온겔이냐 폴리전해질이냐"는 단순한 재료 선택이 아니라, <strong>어떤 이온이 움직일 수 있느냐</strong>의 선택입니다. 그것이 Day 35–36에서 본 메커니즘(EDL, 농도 분극, 고갈) 가운데 무엇이 일어날지를 정합니다(<a href="../days/d20a.html#b-polarization">Day 35 기초: 농도 분극</a>).</p>
+<p><span id="s-three-materials"></span><strong>② 무엇인가: 세 계단(그림 1을 먼저).</strong> 그림 1의 세 칸을 왼쪽부터 봅니다. 동그라미는 움직이는 이온, 네모는 고분자 사슬에 붙어 움직이지 못하는 전하입니다(빨강 +, 파랑 −). 볼 것은 칸마다 <strong>어느 색의 동그라미가 있느냐</strong>입니다. 아래 줄의 <span class="math inline">\(t_+\)</span>(수송수)는 1-1에서 정의하니 지금은 건너뛰어도 됩니다.</p>
+<figure class="fig figure"><img src="../assets/img/d24/fig1-three-steps.svg" alt="세 패널 모식도: ① 일반 이온겔에서는 양·음이온이 모두 움직임(양이온 수송수 약 0.49), ② 단일 이온 전도체에서는 음이온이 사슬에 고정(네모)되고 양이온만 움직임(수송수 약 1), ③ 이종접합(p|n)을 역방향(p쪽 전극 −, n쪽 전극 +)으로 건 모습: 양이온은 왼쪽 전극, 음이온은 오른쪽 전극으로 몰려 접합에 고갈층이 생김. p쪽 수송수 약 1, n쪽 약 0" class="figure-img"><figcaption><b>그림 1.</b> 세 계단(모식도). 네모는 사슬에 고정된 전하, 동그라미는 움직이는 이온, ③ 양끝의 짙은 막대는 전극이다(그림은 역방향). 아래 줄은 각 재료의 양이온 수송수 $t_+$(1-1). ②와 ③의 핵심은 고정 전하가 공이온을 배제한다는 것이고, 그 배제는 바깥 염 농도에 달려 있다(3구간). (Claude가 그림, 모식도)</figcaption></figure>
 <ul>
-<li><strong>일반 이온겔</strong>: 고분자망에 이온액체(양이온과 음이온만으로 된 액체)나 염 용액이 스며 있습니다. <strong>양이온과 음이온이 모두</strong> 움직입니다. 전류를 흘리면 한쪽에는 양이온이, 다른 쪽에는 음이온이 쌓여 농도 차가 생깁니다.</li>
-<li><strong>단일 이온 전도체</strong>(single-ion conductor): 한쪽 부호의 이온이 고분자 사슬에 <strong>공유결합으로 묶여</strong> 움직이지 못하고, 반대 부호의 이온(반대이온)만 움직입니다. 고분자에 전하가 붙은 <strong>폴리전해질</strong>(polyelectrolyte)이 대표적이고, 이온액체 단위를 고분자로 만든 poly(ionic liquid)도 같은 범주입니다. Balqis 2026은 이것을 "움직이는 이온이 전하를 띤 고분자 주사슬에 짝이온으로 매인" 재료로 설명합니다. <span class="src">Balqis 2026, p.27067</span></li>
-<li><strong>이종접합</strong>(heterojunction): 고정 음전하 재료(양이온만 나름, p형이라고도 함)와 고정 양전하 재료(음이온만 나름, n형)를 맞붙인 것입니다. Wang 2025는 음전하 망과 양전하 망이 만나는 이온 p–n 접합에서 "두 겹의 정전기적 반발이 이온을 한 방향으로만 지나가게 해" 독특한 정류가 생긴다고 정리합니다. <span class="src">Wang 2025 (Chem. Soc. Rev.), p.306</span></li>
+<li><strong>일반 이온겔</strong>(그림 1 ①): 고분자망에 이온액체(양이온과 음이온만으로 된 상온의 액체 염, 예: EMIM⁺와 TFSI⁻)나 염 용액이 스며 있습니다. <strong>양이온과 음이온이 모두</strong> 움직입니다. 이 교재에서는 소금물을 머금은 하이드로겔도 두 이온이 다 움직인다는 점에서 같은 칸에 넣어 '일반 이온겔'이라 부르고, 숫자 예에는 10 mM KCl 겔을 씁니다. 전류를 흘리면 한쪽에는 양이온이, 다른 쪽에는 음이온이 쌓여 농도 차가 생깁니다.</li>
+<li><strong>단일 이온 전도체</strong>(single-ion conductor, 그림 1 ②): 한쪽 부호의 이온이 고분자 사슬에 <strong>공유결합으로 묶여</strong> 움직이지 못하고, 반대 부호의 이온(반대이온, counter-ion)만 움직입니다. <strong>작은 예</strong>: 사슬에 술폰산기(–SO₃⁻)가 붙은 겔 1 L 안에 술폰산기가 0.5 mol 있으면 고정 전하 농도 <span class="math inline">\(X\)</span> = 0.5 M이고, 겔이 전기적으로 중성이려면 움직이는 양이온(예: K⁺)이 약 0.5 mol 함께 들어 있어야 합니다. 이 <strong>0.5 M 겔</strong>을 이번 Day 끝까지 예제로 씁니다. 고분자에 전하가 붙은 <strong>폴리전해질</strong>(polyelectrolyte)이 대표적이고, 이온액체 단위를 고분자로 만든 poly(ionic liquid, PIL)도 같은 범주입니다. Balqis 2026은 이것을 "움직이는 이온이 전하를 띤 고분자 주사슬에 짝이온으로 매인" 재료로 설명합니다. <span class="src">Balqis 2026, p.27067</span></li>
+<li><strong>이종접합</strong>(heterojunction, 그림 1 ③): 고정 음전하 재료(양이온만 나름)와 고정 양전하 재료(음이온만 나름)를 맞붙인 것입니다. <strong>작은 예</strong>: 위의 –SO₃⁻ 겔과, 사슬에 4급 암모늄기(–NR₃⁺)가 붙은 겔을 붙인 것. 폴더의 이온 다이오드 연구가 이런 짝(PSPA/PDADMAC 하이드로겔)을 썼습니다. <span class="src">Han 2023, p.9</span> 반도체의 p–n 접합에 빗대어 양이온이 움직이는 쪽을 p형, 음이온이 움직이는 쪽을 n형이라 부르기도 합니다. 닮은 점은 정류라는 결과이고, 다른 점은 운반자가 전자·정공이 아니라 이온이며 고갈·회복에 이온이 실제로 움직이는 시간(대략 <span class="math inline">\(L^2/D\)</span>, <a href="../days/d21.html#b-diffusion-time">Day 37 기초</a>)이 걸린다는 것입니다. Wang 2025는 음전하 망과 양전하 망이 만나는 이온 p–n 접합에서 "두 겹의 정전기적 반발이 이온을 한 방향으로만 지나가게 해" 독특한 정류가 생긴다고 정리합니다. <span class="src">Wang 2025 (Chem. Soc. Rev.), p.306</span></li>
 </ul>
-<p><strong>③ 무슨 일이 어떤 순서로(이종접합).</strong></p>
+<p><span id="s-pn-steps"></span><strong>③ 무슨 일이 어떤 순서로(이종접합).</strong></p>
 <div class="stepper">
 <div class="step">
-<p><strong>단계 1 — 왜 한쪽 이온만 들어가나.</strong> 고정 전하는 같은 부호의 이동 이온(공이온)을 밀어냅니다(Day 35–36의 Donnan 배제, <a href="../days/d20a.html#b-polarization">Day 35 기초</a>). 그래서 p형 쪽에는 양이온만, n형 쪽에는 음이온만 움직일 수 있습니다.</p>
+<p><strong>단계 1 — 왜 한쪽 이온만 들어가나.</strong> 고정 전하는 같은 부호의 이동 이온(공이온, co-ion)을 밀어냅니다(Donnan 배제). Day 35–36에서 계산했듯 고정 전하 <span class="math inline">\(X\)</span>인 겔을 바깥 염 농도 <span class="math inline">\(c_s\)</span>인 용액에 담그면 겔 속 공이온은 약 <span class="math inline">\(c_s^2/X\)</span>입니다(<a href="../days/d20a.html#s-donnan">Day 35 3구간: Donnan 배제</a>). 0.5 M 겔을 10 mM KCl에 담그면 <span class="math inline">\((0.01)^2 \div 0.5\)</span> = 0.0002 M = <strong>0.2 mM</strong>, 바깥의 1/50입니다. 그래서 p형 쪽에는 사실상 양이온만, n형 쪽에는 음이온만 움직일 수 있습니다.</p>
 </div>
 <div class="step">
-<p><strong>단계 2 — 순방향.</strong> p형에 (+), n형에 (−)를 걸면 두 쪽의 반대이온이 모두 접합을 <strong>향해</strong> 밀려 접합에 쌓입니다. 전도도가 오르고 전류가 큽니다.</p>
+<p><strong>단계 2 — 순방향(그림 1 ③의 전극 극성을 뒤집은 경우).</strong> p형에 (+), n형에 (−)를 걸면 두 쪽의 반대이온이 모두 접합을 <strong>향해</strong> 밀려 접합에 쌓입니다. 전도도가 오르고 전류가 큽니다.</p>
 </div>
 <div class="step">
-<p><strong>단계 3 — 역방향.</strong> 전압을 뒤집으면 두 반대이온이 모두 접합에서 <strong>멀어지고</strong>, 접합을 다시 채울 이온이 없습니다(공이온은 배제되므로). 접합은 이온이 빠진 <strong>고갈층</strong>이 되어 전류가 작습니다.</p>
+<p><strong>단계 3 — 역방향(그림 1 ③ 그대로).</strong> 전압을 뒤집으면 두 반대이온이 모두 접합에서 <strong>멀어지고</strong>, 접합을 다시 채울 이온이 없습니다(공이온은 배제되므로). 접합은 이온이 빠진 <strong>고갈층</strong>이 되어 전류가 작습니다.</p>
 </div>
 <div class="step">
-<p><strong>단계 4 — 정류와 기억.</strong> 같은 크기의 전압에서 방향에 따라 전류가 다르니 정류(비선형)이고, 쌓이고 빠지는 데 이온이 실제로 움직여야 하니 시간이 걸리고 이력이 남습니다(기억). Day 35 3구간의 장난감 모형이 이 물리를 상태 하나로 흉내 낸 것이었습니다(<a href="../days/d20a.html#ch-polarization">Day 35 3구간</a>).</p>
+<p><strong>단계 4 — 정류와 기억.</strong> 같은 크기의 전압에서 방향에 따라 전류가 다르니 정류(비선형)이고, 쌓이고 빠지는 데 이온이 실제로 움직여야 하니 시간이 걸리고 이력이 남습니다(기억). Day 35–36 3-1의 장난감 모형이 이 물리를 상태 하나로 흉내 낸 것이었습니다(<a href="../days/d20a.html#s-toy-model">Day 35 3-1: 장난감 모형</a>).</p>
 </div>
 </div>
 <p><strong>④ 이름과 정확한 뜻.</strong> 단일 이온 전도체 = 한 부호의 이온만 움직이는 이온 전도체. 폴리전해질 = 사슬에 이온기가 붙은 고분자(그 반대이온이 움직임). 이종접합 정류 = 고정 전하의 부호가 다른 두 재료의 접합에서, 고갈과 축적이 방향에 따라 갈려 전류가 한쪽으로 잘 흐르는 것.</p>
-<p><strong>⑤ 뉴로모픽·RC와의 연결.</strong> 일반 이온겔은 양·음이온이 다 움직이므로 전극에 EDL을 만들고 덩어리에 농도 분극을 만들지만, <strong>정류를 만들려면</strong> 계면·형상의 비대칭이 따로 필요합니다. 이종접합은 재료의 고정 전하 자체가 비대칭을 주므로, 정류(비선형)와 고갈·회복(기억)이 접합 하나에서 함께 나옵니다. 이것이 오늘 질문의 "고유한 이점" 후보입니다. 그것이 실제로 이점인지는 3구간에서 조건을 붙여 봅니다.</p>
-<p><strong>⑥ 짧은 확인.</strong> 단일 이온 전도체 두 개를 같은 부호끼리(둘 다 고정 음전하) 붙이면 정류가 생길까요? (답: 이종접합의 정류는 거의 생기지 않는다. 양쪽 모두 양이온이 움직여 역방향에서도 접합이 고갈되지 않는다. Lee 2026 (AFM)의 같은 재료 대조군이 그 예다.)</p>
+<p><strong>⑤ 뉴로모픽·RC와의 연결.</strong> 일반 이온겔은 양·음이온이 다 움직이므로 전극에 EDL을 만들고 덩어리에 농도 분극을 만들지만, <strong>정류를 만들려면</strong> 계면·형상의 비대칭이 따로 필요합니다. 이종접합은 재료의 고정 전하 자체가 비대칭을 주므로, 정류(비선형)와 고갈·회복(기억)이 접합 하나에서 함께 나옵니다. 이것이 이번 질문의 "고유한 이점" 후보입니다. 그것이 실제로 이점인지는 3구간에서 조건을 붙여 봅니다.</p>
+<p><span id="s-same-sign"></span><strong>⑥ 짧은 확인.</strong> 단일 이온 전도체 두 개를 같은 부호끼리(둘 다 고정 음전하) 붙이면 정류가 생길까요? (답: 이종접합의 정류는 거의 생기지 않는다. 양쪽 모두 양이온이 움직여 역방향에서도 접합이 고갈되지 않는다. 2구간에서 이 비교를 실제로 한 대조 실험을 봅니다.)</p>
 </section>
 </div>
-<figure class="fig figure"><img src="../assets/img/d24/fig1-three-steps.svg" alt="세 패널 모식도: ① 일반 이온겔에서는 양·음이온이 모두 움직임(양이온 수송수 약 0.49), ② 단일 이온 전도체에서는 음이온이 사슬에 고정(네모)되고 양이온만 움직임(수송수 약 1), ③ 이종접합(p|n)을 역방향(p쪽 전극 −, n쪽 전극 +)으로 건 모습: 양이온은 왼쪽 전극, 음이온은 오른쪽 전극으로 몰려 접합에 고갈층이 생김. p쪽 수송수 약 1, n쪽 약 0" class="figure-img"><figcaption><b>그림 1.</b> 세 계단(모식도). 네모는 사슬에 고정된 전하, 동그라미는 움직이는 이온, ③ 양끝의 짙은 막대는 전극이다(그림은 역방향). 아래 줄은 각 재료의 양이온 수송수 $t_+$(아래 1-1). ②와 ③의 핵심은 고정 전하가 공이온을 배제한다는 것이고, 그 배제는 바깥 염 농도에 달려 있다(3구간). (Claude가 그림, 모식도)</figcaption></figure>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/9SvOntCp6oM?start=0&amp;rel=0" title="영상: Understanding Ion Selective Permeation Membranes and Electrodialysis" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체(2분), 영어).</b> Hangzhou Lanran Technology(이온 교환막 제조사의 소개 영상), "Understanding Ion Selective Permeation Membranes and Electrodialysis"(2024). <b>볼 이유:</b> 설명란에 따르면 양이온 교환막과 음이온 교환막이 "이온 체"처럼 한쪽 이온만 통과시키는 원리를 애니메이션으로 보여 줍니다. 위 단계 1 "고정 전하가 같은 부호의 이온(공이온)을 밀어낸다"가 바닷물 담수화 같은 산업 공정에서 이미 쓰이고 있는 모습입니다. 뒷부분은 전기투석 장치 소개입니다. <b>보고 답할 질문:</b> 양이온만 통과시키는 막에 붙어 있는 고정 전하의 부호는? 그 막은 그림 1의 ②(단일 이온 전도체)와 무엇이 같은가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명(챕터 없음)(영상 내용은 직접 보지 못함)</span></div></div>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/ZyIqRdtwEGc?start=0&amp;rel=0" title="영상: Understanding Bipolar Membranes | Lanran Tech" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체(3분), 영어).</b> Hangzhou Lanran Technology(같은 제조사), "Understanding Bipolar Membranes | Lanran Tech"(2024). <b>볼 이유:</b> 바이폴라 막은 음이온 교환층과 양이온 교환층을 맞붙인 막으로, 구조로 보면 그림 1의 ③ 이종접합과 같은 "이온 p–n 접합"입니다. 설명란에 따르면 전압을 걸면 막이 물을 H⁺와 OH⁻로 효율적으로 갈라 내고, 그 쓰임새(에너지·배터리·화학 공정)를 소개합니다. 접합에서 이온이 빠져나가 고갈되면(단계 3) 그 자리를 채울 이온을 물 분해가 만들어 내는 것으로 읽을 수 있습니다 [해석]. 내 폴리전해질 접합에 큰 역방향 전압을 걸 때 무엇이 끼어들 수 있는지 보여 주는 산업 사례입니다. <b>보고 답할 질문:</b> 영상에서 물이 갈라지는 자리는 막의 어디인가(겉면, 두 층의 경계)? 그때 전압의 방향은 단계 2(순방향)와 단계 3(역방향) 중 어느 쪽에 가까운가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명(챕터 없음)(영상 내용은 직접 보지 못함)</span></div></div>
+<div class="stop-point">
+<p>여기까지: 그림 1의 세 칸에서 누가 움직이고 누가 묶였는지 말하고, 0.5 M 겔을 10 mM에 담갔을 때의 공이온(0.2 mM)을 <span class="math inline">\(c_s^2/X\)</span>로 다시 어림하며, 이종접합의 순방향 축적·역방향 고갈을 단계로 설명할 수 있다. 다음: 같은 그림을 숫자 하나(수송수)로 적고, 이온이 쌓이는 자리를 세기.</p>
+</div>
 <section id="수송수-전류의-몇-할을-누가-나르나" class="level4">
 <h4 class="anchored" data-anchor-id="수송수-전류의-몇-할을-누가-나르나">1-1. 수송수: 전류의 몇 할을 누가 나르나</h4>
 </section>
@@ -737,7 +757,7 @@ window.Quarto = {
 <section id="수송수transference-number-t-전류-가운데-각-이온이-나르는-몫" class="level4">
 <h4 class="anchored" data-anchor-id="수송수transference-number-t-전류-가운데-각-이온이-나르는-몫">수송수(transference number, t): 전류 가운데 각 이온이 나르는 몫</h4>
 <p><strong>① 왜 필요한가.</strong> 그림 1은 "누가 묶이고 누가 움직이나"를 그림으로 보였습니다. 이것을 숫자 하나로 적으면 세 재료를 같은 눈금에 놓을 수 있고, 전류를 흘릴 때 <strong>어디에서</strong> 이온이 쌓이고 비는지(농도 분극, <a href="../days/d20a.html#b-polarization">Day 35 기초</a>)를 미리 셀 수 있습니다. 그 숫자가 수송수입니다.</p>
-<p><strong>② 무엇인가.</strong> Day 39에서 전도도는 움직이는 이온 종류마다의 몫 <span class="math inline">\(n_i|z_i|e\mu_i\)</span>를 더한 것이었습니다(<span class="math inline">\(n\)</span> 움직일 수 있는 이온의 수, <span class="math inline">\(|z|e\)</span> 이온 하나의 전하 크기, <span class="math inline">\(\mu\)</span> 이동도, <a href="../days/d23.html#b-conductivity">Day 39 기초</a>). 그 몫 하나를 전체로 나눈 것이 그 이온의 <strong>수송수</strong>(transference number, 운반수라고도 함)입니다.</p>
+<p><span id="s-tplus-def"></span><strong>② 무엇인가.</strong> Day 39에서 전도도는 움직이는 이온 종류마다의 몫 <span class="math inline">\(n_i|z_i|e\mu_i\)</span>를 더한 것이었습니다(<span class="math inline">\(n\)</span> 움직일 수 있는 이온의 수, <span class="math inline">\(|z|e\)</span> 이온 하나의 전하 크기, <span class="math inline">\(\mu\)</span> 이동도, <a href="../days/d23.html#b-conductivity">Day 39 기초: 이온전도도</a>). 그 몫 하나를 전체로 나눈 것이 그 이온의 <strong>수송수</strong>(transference number, 운반수라고도 함)입니다.</p>
 <p><span class="math display">\[
 t_i = \frac{n_i |z_i| e \mu_i}{\sum_j n_j |z_j| e \mu_j}, \qquad \sum_i t_i = 1
 \]</span></p>
@@ -745,17 +765,20 @@ t_i = \frac{n_i |z_i| e \mu_i}{\sum_j n_j |z_j| e \mu_j}, \qquad \sum_i t_i = 1
 <li>뜻: 전류 가운데 이온 <span class="math inline">\(i\)</span>가 나르는 비율(0–1, 단위 없음). 양이온 수송수 <span class="math inline">\(t_+ = 0.7\)</span>이면 전류의 70%를 양이온이, 30%를 음이온이 나릅니다. 1가 염이면 <span class="math inline">\(t_- = 1 - t_+\)</span>.</li>
 <li>고정 전하는 움직이지 않으므로(<span class="math inline">\(\mu = 0\)</span>) 몫이 0입니다. 고정 전하가 많은 재료일수록 반대이온 한 종이 전류를 거의 다 나릅니다.</li>
 <li>수송수는 재료만의 상수가 아닙니다. 바깥 염 농도·온도에 따라 바뀝니다(3구간).</li>
+<li><strong>기호 주의.</strong> 이번 Day의 <span class="math inline">\(t_+\)</span>, <span class="math inline">\(t_-\)</span>는 수송수이고 시간이 아닙니다. 시간은 아래첨자 없는 <span class="math inline">\(t\)</span>나 간격 <span class="math inline">\(\Delta t\)</span>로 쓰고, 경계 양쪽 수송수의 차는 <span class="math inline">\(\delta\)</span>로 씁니다(④).</li>
 </ul>
-<p><strong>③ 세 재료의 숫자(그림 1 아래 줄).</strong></p>
+<p><span id="s-tplus-numbers"></span><strong>③ 세 재료의 숫자(그림 1 아래 줄).</strong></p>
 <ul>
-<li><strong>일반 전해질·이온겔</strong>: 10 mM KCl 물에서 K⁺의 몫은 0.074 S/m, Cl⁻의 몫은 0.076 S/m였습니다(Day 39 ③). <span class="math inline">\(t_+ = 0.074 \div 0.150 \approx 0.49\)</span>, 거의 반반입니다(무한 희석 몰 이온 전도도 표 값 K⁺ 73.5, Cl⁻ 76.4 S·cm²/mol, 25 °C로도 0.49). 이온액체를 품은 이온겔도 두 이온이 다 움직이므로 <span class="math inline">\(t_+\)</span>는 0과 1 사이이고, 값은 두 이온의 이동도 비로 정해집니다(이온액체별 값은 여기서 다루지 않습니다).</li>
-<li><strong>단일 이온 전도체</strong>: 고정 음전하 0.5 M 겔을 10 mM KCl에 담그면, Day 35–36과 같은 이상 Donnan 계산으로 겔 속 K⁺는 500.2 mM, Cl⁻는 0.2 mM입니다(3구간 그림 3). 겔 속 두 이온의 이동도가 같다고 어림하면 <span class="math inline">\(t_+ = 500.2 \div (500.2 + 0.2) = 0.9996\)</span>. 용매도 공이온도 없는 무용매 PIL이라면 이상적으로 <span class="math inline">\(t_+ = 1\)</span>입니다. 물속에서 쓰는 <strong>이온교환막</strong>(양이온 교환막·음이온 교환막, 위 첫 영상)이 바로 이런 재료이고, 막의 "선택도"는 반대이온의 수송수로 잽니다(3-1).</li>
+<li><strong>일반 전해질·이온겔</strong>: 10 mM KCl 물에서 K⁺의 몫은 0.074 S/m, Cl⁻의 몫은 0.076 S/m였습니다(<a href="../days/d23.html#s-kcl-steps">Day 39 1구간 ③: 10 mM KCl</a>). <span class="math inline">\(t_+ = 0.074 \div 0.150 \approx 0.49\)</span>, 거의 반반입니다(25 °C 무한 희석 몰 이온 전도도 K⁺ 73.5, Cl⁻ 76.4 S·cm²/mol로 계산해도 0.49 <span class="prov">물성표 값, 폴더 밖</span>). 이온액체를 품은 이온겔도 두 이온이 다 움직이므로 <span class="math inline">\(t_+\)</span>는 0과 1 사이이고, 값은 두 이온의 이동도 비로 정해집니다(이온액체별 값은 여기서 다루지 않습니다).</li>
+<li><strong>단일 이온 전도체</strong>: 0.5 M 겔을 10 mM KCl에 담그면, 단계 1의 어림대로 겔 속 Cl⁻는 0.2 mM이고 K⁺는 고정 전하만큼에 공이온만큼을 더한 500.2 mM입니다(이상 Donnan, 3구간 그림 3에서 곡선으로 다시 봅니다). 겔 속 두 이온의 이동도가 같다고 어림하면 <span class="math inline">\(t_+ = 500.2 \div (500.2 + 0.2) = 0.9996\)</span>. 용매도 공이온도 없는 무용매 PIL이라면 이상적으로 <span class="math inline">\(t_+ = 1\)</span>입니다. 물속에서 쓰는 <strong>이온교환막</strong>(양이온 교환막·음이온 교환막, 위 첫 영상)이 바로 이런 재료이고, 막의 "선택도"는 반대이온의 수송수로 잽니다(3-1).</li>
 <li><strong>이종접합</strong>: 한 소자 안에서 수송수가 <strong>접합을 경계로 뛴다</strong>는 것이 핵심입니다. p쪽은 <span class="math inline">\(t_+ \approx 1\)</span>, n쪽은 <span class="math inline">\(t_+ \approx 0\)</span>(전류를 거의 음이온이 나름)입니다.</li>
 </ul>
-<p><strong>④ 수송수가 바뀌는 경계에서 이온이 쌓이거나 빈다.</strong></p>
+<p><span id="s-boundary-steps"></span><strong>④ 수송수가 바뀌는 경계에서 이온이 쌓이거나 빈다.</strong></p>
 <div class="predict">
-<p>같은 전류 1 µA를 흘립니다. (가) 같은 KCl 겔 두 조각의 경계, (나) KCl 겔과 양이온 선택 겔의 경계, (다) p | n 접합 가운데 이온이 쌓이지도 비지도 않는 곳은? 가장 빨리 쌓이거나 비는 곳은? 먼저 적고 단계를 넘기세요.</p>
+<p>같은 전류 1 µA를 흘립니다. (가) 같은 KCl 겔 두 조각의 경계, (나) KCl 겔과 양이온 선택 겔의 경계, (다) p | n 접합 가운데 이온이 쌓이지도 비지도 않는 곳은? 가장 빨리 쌓이거나 비는 곳은? 먼저 적고 아래 그림과 단계를 보세요.</p>
 </div>
+<p>그림 2를 먼저 봅니다. 네 줄이 경계 (가)–(라)이고, 가운데 점선이 경계입니다. 화살표 길이는 1초에 경계로 들어오거나 경계에서 나가는 이온의 양이고(빨강 양이온, 파랑 음이온), 오른쪽의 <span class="math inline">\(\delta\)</span>는 '전류가 들어오는 쪽 <span class="math inline">\(t_+\)</span> − 나가는 쪽 <span class="math inline">\(t_+\)</span>'입니다. 아래 단계 1–4가 이 화살표를 차례로 셉니다.</p>
+<figure class="fig figure"><img src="../assets/img/d24/fig1b-transference.svg" alt="네 줄의 경계 모식도, 같은 전류 1 µA. (가) KCl 겔끼리(양이온 수송수 0.49 | 0.49): 들어오고 나가는 이온이 같아 δ = 0, 쌓이지 않음. (나) KCl 겔에서 양이온 선택 겔로(0.49 | 1.00): δ = −0.51, 경계가 1초에 5.3 pmol씩 빔. (다) p | n 순방향(1 | 0): 양이온과 음이온이 모두 접합으로 들어와 δ = +1, 10.4 pmol/s 쌓임. (라) p | n 역방향: 전류가 n에서 p로 흐르고 두 이온이 모두 접합을 떠나 δ = −1, 10.4 pmol/s 빔" class="figure-img"><figcaption><b>그림 2.</b> 수송수가 바뀌는 경계에서만 이온이 쌓이거나 빈다(1가 염, 확산 무시, 코드 계산). 화살표 길이는 1초에 경계로 오가는 이온의 양을 $I/F$의 배수로 나타낸다. 양이온(빨강)은 전류 방향으로, 음이온(파랑)은 그 반대로 움직인다. 오른쪽은 $\delta$(전류가 들어오는 쪽 $t_+$ − 나가는 쪽 $t_+$)와 1 µA에서의 속도다. KCl 겔의 0.49는 물속 값을 빌린 것이고, 고정 전하 겔의 1과 0은 공이온이 없다고 둔 이상값이다. (Claude가 계산해 그림, 모식도)</figcaption></figure>
 <div class="stepper">
 <div class="step">
 <p><strong>단계 1 — 양이온 세기.</strong> 전류 <span class="math inline">\(I\)</span>가 영역 1에서 영역 2로 흐릅니다. 양이온은 전류와 같은 방향으로 움직이므로, 1초에 영역 1에서 경계로 <span class="math inline">\(t_+^{(1)} I/F\)</span> mol이 들어오고 영역 2로 <span class="math inline">\(t_+^{(2)} I/F\)</span> mol이 나갑니다. <span class="math inline">\(F\)</span> = 96485 C/mol(패러데이 상수)은 1가 이온 1 mol이 나르는 전하라서, <span class="math inline">\(I/F\)</span>는 "1초에 지나가는 전하를 이온 몰수로 바꾼 값"입니다.</p>
@@ -766,25 +789,16 @@ t_i = \frac{n_i |z_i| e \mu_i}{\sum_j n_j |z_j| e \mu_j}, \qquad \sum_i t_i = 1
 <div class="step">
 <p><strong>단계 3 — 정리.</strong> 들어온 것에서 나간 것을 빼면 양이온과 음이온이 <strong>같은 양</strong>씩 남거나 모자랍니다. 그래서 경계는 전기적으로 중성인 채로 염이 쌓이거나 빕니다.</p>
 <p><span class="math display">\[
-\frac{dN_{\text{염}}}{dt} = \left(t_+^{(1)} - t_+^{(2)}\right)\frac{I}{F}
+\frac{dN_{\text{염}}}{dt} = \delta\,\frac{I}{F}, \qquad \delta = t_+^{(1)} - t_+^{(2)}
 \]</span></p>
-<p><span class="math inline">\(N_{\text{염}}\)</span>은 경계에 쌓인 염의 몰수, 괄호 <span class="math inline">\(\Delta t\)</span>는 "전류가 들어오는 쪽 <span class="math inline">\(t_+\)</span> − 나가는 쪽 <span class="math inline">\(t_+\)</span>"입니다. 양수면 쌓이고(축적), 음수면 빕니다(고갈). <span class="math inline">\(\Delta t = 0\)</span>이면 전류가 아무리 커도 쌓이지 않습니다. 쌓인 것을 확산이 다시 퍼뜨리는 효과는 여기서 뺐습니다(그것이 회복, 곧 기억이 사라지는 쪽입니다).</p>
+<p><span class="math inline">\(N_{\text{염}}\)</span>은 경계에 쌓인 염의 몰수, <span class="math inline">\(t\)</span>는 시간, <span class="math inline">\(\delta\)</span>는 "전류가 들어오는 쪽 <span class="math inline">\(t_+\)</span> − 나가는 쪽 <span class="math inline">\(t_+\)</span>"입니다. 양수면 쌓이고(축적), 음수면 빕니다(고갈). <span class="math inline">\(\delta = 0\)</span>이면 전류가 아무리 커도 쌓이지 않습니다. 쌓인 것을 확산이 다시 퍼뜨리는 효과는 여기서 뺐습니다(그것이 회복, 곧 기억이 사라지는 쪽입니다).</p>
 </div>
 <div class="step">
-<p><strong>단계 4 — 숫자(그림 2).</strong> <span class="math inline">\(I\)</span> = 1 µA이면 <span class="math inline">\(I/F = 10^{-6} \div 96485 = 1.04\times10^{-11}\)</span> mol/s, 곧 1초에 약 10 pmol입니다. (가) 같은 겔끼리: <span class="math inline">\(\Delta t = 0.49 - 0.49 = 0\)</span>, 쌓이지 않습니다. (나) KCl 겔 → 양이온 선택 겔: <span class="math inline">\(0.49 - 1 = -0.51\)</span>, 1초에 약 5.3 pmol씩 경계가 빕니다(Day 35–36 영상의 '이온 농도 분극'). (다) p | n 순방향: <span class="math inline">\(1 - 0 = +1\)</span>, 10.4 pmol/s씩 쌓입니다. 역방향이면 전류가 n에서 p로 흐르므로 <span class="math inline">\(0 - 1 = -1\)</span>, 10.4 pmol/s씩 빕니다. 같은 크기의 전류에서 <strong>부호만 바꿔도 쌓임과 빔이 뒤집히는</strong> 것이 정류와 기억의 출발점입니다. 같은 부호끼리 붙인 p | p는 <span class="math inline">\(1 - 1 = 0\)</span>이라 정류가 없습니다(위 기초 상자 ⑥의 같은 재료 대조군과 같은 결론).</p>
+<p><strong>단계 4 — 숫자(그림 2).</strong> <span class="math inline">\(I\)</span> = 1 µA이면 <span class="math inline">\(I/F = 10^{-6} \div 96485 = 1.04\times10^{-11}\)</span> mol/s, 곧 1초에 약 10 pmol입니다. (가) 같은 겔끼리: <span class="math inline">\(\delta = 0.49 - 0.49 = 0\)</span>, 쌓이지 않습니다. (나) KCl 겔 → 양이온 선택 겔: <span class="math inline">\(0.49 - 1 = -0.51\)</span>, 1초에 약 5.3 pmol씩 경계가 빕니다(Day 35–36 영상의 '이온 농도 분극'). (다) p | n 순방향: <span class="math inline">\(1 - 0 = +1\)</span>, 10.4 pmol/s씩 쌓입니다. 역방향이면 전류가 n에서 p로 흐르므로 <span class="math inline">\(0 - 1 = -1\)</span>, 10.4 pmol/s씩 빕니다. 같은 크기의 전류에서 <strong>부호만 바꿔도 쌓임과 빔이 뒤집히는</strong> 것이 정류와 기억의 출발점입니다. 같은 부호끼리 붙인 p | p는 <span class="math inline">\(1 - 1 = 0\)</span>이라 정류가 없습니다(위 기초 상자 ⑥과 같은 결론).</p>
 </div>
 </div>
-<figure class="fig figure"><img src="../assets/img/d24/fig1b-transference.svg" alt="네 줄의 경계 모식도, 같은 전류 1 µA. (가) KCl 겔끼리(양이온 수송수 0.49 | 0.49): 들어오고 나가는 이온이 같아 Δt = 0, 쌓이지 않음. (나) KCl 겔에서 양이온 선택 겔로(0.49 | 1.00): Δt = −0.51, 경계가 1초에 5.3 pmol씩 빔. (다) p | n 순방향(1 | 0): 양이온과 음이온이 모두 접합으로 들어와 Δt = +1, 10.4 pmol/s 쌓임. (라) p | n 역방향: 전류가 n에서 p로 흐르고 두 이온이 모두 접합을 떠나 Δt = −1, 10.4 pmol/s 빔" class="figure-img"><figcaption><b>그림 2.</b> 수송수가 바뀌는 경계에서만 이온이 쌓이거나 빈다(1가 염, 확산 무시, 코드 계산). 화살표 길이는 1초에 경계로 오가는 이온의 양을 $I/F$의 배수로 나타낸다. 양이온(빨강)은 전류 방향으로, 음이온(파랑)은 그 반대로 움직인다. 오른쪽은 $\Delta t$(전류가 들어오는 쪽 $t_+$ − 나가는 쪽 $t_+$)와 1 µA에서의 속도다. KCl 겔의 0.49는 물속 값을 빌린 것이고, 고정 전하 겔의 1과 0은 공이온이 없다고 둔 이상값이다. (Claude가 계산해 그림, 모식도)</figcaption></figure>
-<p><strong>⑤ 그래서 재료마다 무엇이 바뀌나.</strong></p>
+<p><span id="s-material-table"></span><strong>⑤ 그래서 재료마다 무엇이 바뀌나.</strong></p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>재료</th>
@@ -802,13 +816,13 @@ t_i = \frac{n_i |z_i| e \mu_i}{\sum_j n_j |z_j| e \mu_j}, \qquad \sum_i t_i = 1
 <td>약 0.49 (10 mM KCl)</td>
 <td>전극 앞뿐(전극은 이온을 통과시키지 않거나 한 종만 받아들임)</td>
 <td>재료만으로는 없음. 전극·형상의 비대칭이 따로 필요</td>
-<td>전극의 EDL과 그 회복(Day 35–36·Day 37)</td>
+<td>전극의 EDL과 그 회복(<a href="../days/d20a.html#ch-edl">Day 35 2구간</a>, <a href="../days/d21.html#ch-edl-time">Day 37 3구간</a>)</td>
 </tr>
 <tr class="even">
 <td>단일 이온 전도체</td>
 <td>반대이온만</td>
 <td>약 1</td>
-<td>덩어리 안은 <span class="math inline">\(\Delta t = 0\)</span>이라 농도 차가 생기지 않고, 전극 앞에서만</td>
+<td>덩어리 안은 <span class="math inline">\(\delta = 0\)</span>이라 농도 차가 생기지 않고, 전극 앞에서만</td>
 <td>혼자서는 없음</td>
 <td>전극 앞(반대이온이 모이거나 떠나 고정 전하가 드러난 층) <span class="tag tag-interp">해석</span></td>
 </tr>
@@ -816,24 +830,33 @@ t_i = \frac{n_i |z_i| e \mu_i}{\sum_j n_j |z_j| e \mu_j}, \qquad \sum_i t_i = 1
 <td>이종접합</td>
 <td>p쪽 양이온, n쪽 음이온</td>
 <td>1 → 0</td>
-<td>재료 한가운데의 접합(<span class="math inline">\(\Delta t = \pm 1\)</span>, 전류 방향에 따라 부호가 바뀜)</td>
+<td>재료 한가운데의 접합(<span class="math inline">\(\delta = \pm 1\)</span>, 전류 방향에 따라 부호가 바뀜)</td>
 <td>있음</td>
-<td>접합의 축적·고갈(Day 35–36 장난감 모형)</td>
+<td>접합의 축적·고갈(<a href="../days/d20a.html#s-toy-model">Day 35 3-1 장난감 모형</a>)</td>
 </tr>
 </tbody>
 </table>
-<p>단일 이온 전도체 줄의 "덩어리에 농도 차가 생기지 않는다"는 리튬 전지 전해질에서 오래 알려진 결과입니다. Doyle·Fuller·Newman(<em>Electrochim. Acta</em> 39, 2073, 1994)의 전지 모사에서 수송수 1인 고분자 전해질은 전도도가 10배 낮아도 수송수 0.2인 전해질보다 높은 방전 속도에서 성능이 좋았고, 그 이유는 수송수 0.2인 쪽에 큰 농도 차가 생겨 전해질이 고갈되기 때문이었습니다 [폴더 밖: 초록으로 확인]. 반대로 말하면 수송수 1인 재료는 덩어리 안에서 <strong>농도 분극으로 생기는 느린 기억도 없습니다</strong>. 기억이 필요하면 그것을 어디에 둘지(전극 앞이나 접합)를 따로 설계해야 합니다 <span class="tag tag-interp">해석</span>.</p>
-<p><strong>⑥ 뉴로모픽과의 연결.</strong> 이종접합의 이점을 수송수로 말하면 이렇습니다. 고정 전하의 부호를 바꿔 배치하면 <strong>분극이 일어날 자리(<span class="math inline">\(\Delta t\)</span>가 뛰는 곳)를 전극이 아니라 재료 안의 원하는 곳에 둘 수 있고</strong>, 그 자리의 쌓임·빔이 전압 부호에 따라 갈립니다 <span class="tag tag-interp">해석</span>. 일반 이온겔로 같은 일을 하려면 전극이나 형상의 비대칭을 따로 만들어야 합니다. 그 이점이 실제로 있는지 보이는 실험은 3-1에 모았습니다.</p>
+<p>단일 이온 전도체 줄의 "덩어리에 농도 차가 생기지 않는다"는 단계 4의 p | p와 같은 계산입니다(덩어리 어디를 잘라도 양쪽 <span class="math inline">\(t_+\)</span>가 같아 <span class="math inline">\(\delta = 0\)</span>). 반대로 말하면 수송수 1인 재료는 덩어리 안에서 <strong>농도 분극으로 생기는 느린 기억도 없습니다</strong>. 기억이 필요하면 그것을 어디에 둘지(전극 앞이나 접합)를 따로 설계해야 합니다 <span class="tag tag-interp">해석</span>.</p>
+<details class="deep">
+<summary>
+심화 · 리튬 전지 전해질에서 이미 알려진 같은 결과
+</summary>
+<p>"수송수 1이면 덩어리에 농도 차가 생기지 않는다"는 리튬 전지 전해질에서 오래 알려진 결과입니다. Doyle·Fuller·Newman(<em>Electrochim. Acta</em> 39, 2073, 1994)의 전지 모사(시뮬레이션)에서 수송수 1인 고분자 전해질은 전도도가 10배 낮아도 수송수 0.2인 전해질보다 높은 방전 속도에서 성능이 좋았고, 그 이유는 수송수 0.2인 쪽에 큰 농도 차가 생겨 전해질이 고갈되기 때문이었습니다 <span class="prov">폴더 밖 문헌, Claude는 초록만 확인</span>. 전지에서는 이것이 장점(고갈 없음)이고, 기억을 원하는 뉴로모픽 소자에서는 같은 성질이 "덩어리에는 느린 기억이 없다"로 읽힙니다 <span class="tag tag-interp">해석</span>.</p>
+</details>
+<p><strong>⑥ 뉴로모픽과의 연결.</strong> 이종접합의 이점을 수송수로 말하면 이렇습니다. 고정 전하의 부호를 바꿔 배치하면 <strong>분극이 일어날 자리(<span class="math inline">\(\delta\)</span>가 0이 아닌 곳)를 전극이 아니라 재료 안의 원하는 곳에 둘 수 있고</strong>, 그 자리의 쌓임·빔이 전압 부호에 따라 갈립니다 <span class="tag tag-interp">해석</span>. 일반 이온겔로 같은 일을 하려면 전극이나 형상의 비대칭을 따로 만들어야 합니다. 그 이점이 실제로 있는지 보이는 실험은 3-1에 모았습니다.</p>
 </section>
 </div>
 <div class="quiz" data-day="d24" data-set="1-check"></div>
+<div class="stop-point">
+<p>여기까지: 두 이온의 전도도 몫으로 <span class="math inline">\(t_+\)</span>를 계산하고(10 mM KCl 0.49, 0.5 M 겔 0.9996), 그림 2의 네 경계에서 <span class="math inline">\(\delta \times I/F\)</span>로 쌓임·빔을 세며(1 µA에서 p | n ±10.4 pmol/s, 같은 겔끼리 0), 단일 이온 전도체 덩어리에는 농도 분극 기억이 없다는 것을 말할 수 있다. 다음: 폴더의 이종접합 소자들이 실제로 보인 것.</p>
+</div>
 <div class="keypoints">
 <ul>
-<li>이온겔: 양·음이온 모두 이동. 단일 이온 전도체(폴리전해질·poly(ionic liquid)): 반대이온만 이동 <span class="src">Balqis 2026, p.27067</span>.</li>
+<li>이온겔: 양·음이온 모두 이동. 단일 이온 전도체(폴리전해질·poly(ionic liquid)): 반대이온만 이동 <span class="src">Balqis 2026, p.27067</span>. 예제: 고정 전하 0.5 M 겔, 10 mM에서 공이온 0.2 mM.</li>
 <li>이종접합: 고정 전하의 부호가 다른 두 재료. 순방향 축적, 역방향 고갈 → 정류 + 기억 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.306</span>.</li>
 <li>같은 부호끼리 붙이면 접합 정류는 거의 없다(같은 재료 대조군).</li>
 <li>수송수 <span class="math inline">\(t_i\)</span> = 이온 <span class="math inline">\(i\)</span>의 전도도 몫 ÷ 전체. 10 mM KCl 0.49, 0.5 M 고정 전하 겔(10 mM) 0.9996, 이종접합은 접합에서 1 → 0으로 뛴다.</li>
-<li>경계에 쌓이는 속도 = (들어오는 쪽 <span class="math inline">\(t_+\)</span> − 나가는 쪽 <span class="math inline">\(t_+\)</span>) × <span class="math inline">\(I/F\)</span>. 1 µA에서 p | n은 ±10.4 pmol/s, 같은 겔끼리는 0(Claude 계산).</li>
+<li>경계에 쌓이는 속도 = <span class="math inline">\(\delta \times I/F\)</span>, <span class="math inline">\(\delta\)</span> = 들어오는 쪽 <span class="math inline">\(t_+\)</span> − 나가는 쪽 <span class="math inline">\(t_+\)</span>. 1 µA에서 p | n은 ±10.4 pmol/s, 같은 겔끼리는 0(Claude 계산).</li>
 </ul>
 </div>
 </section>
@@ -842,10 +865,11 @@ t_i = \frac{n_i |z_i| e \mu_i}{\sum_j n_j |z_j| e \mu_j}, \qquad \sum_i t_i = 1
 <div class="goal">
 <p>이 구간을 읽고 나면 폴더의 이종접합 소자들이 정류·고갈·시간상수에 대해 무엇을 보였는지(그리고 정류비가 소자마다 얼마나 다른지) 숫자로 말하고, 고갈을 직접 본 증거와 간접 증거를 구분하며, 이 소재 계열의 연구 현황·한계·넘을 과제를 적을 수 있다.</p>
 </div>
-<p><strong>고갈층을 직접 보았나.</strong> 이종접합 논문 대부분은 고갈을 전류·임피던스로 간접 추론합니다. Lee 2026 (AFM)은 히알루론산–키토산 하이드로겔 접합의 역방향 저항이 같은 재료 접합의 약 35배라는 임피던스 비교로 고갈을 뒷받침했습니다(Day 35–36). <span class="src">Lee 2026 (AFM), p.4</span> Balqis 2026은 한 걸음 더 나아가, 폴리음이온 PIL(poly[EMIm][SPA])과 폴리양이온 PIL(poly[BVIm][TFSI])을 쌓은 접합의 <strong>깊이에 따른 성분 분포</strong>를 비행시간 이차이온 질량분석(TOF-SIMS: 이온빔으로 표면을 깎아 가며 깊이별 성분을 재는 방법)으로 보였습니다. 접합면 근처에서 한쪽 이온 신호가 줄고 다른 쪽이 늘어나는 구간이 있고, 저자들은 그 사이를 이온 고갈층(IDL)으로 표시합니다. <span class="src">Balqis 2026, p.27067, Fig. 1</span> 다만 이것은 <strong>한 시료의 분포 하나</strong>이고, 전압을 바꿔 가며 잰 것이 아니며, 저자들도 고갈층의 폭을 정량하지 못했다고 씁니다. <span class="src">Balqis 2026, p.27069</span> 전압에 따라 고갈이 달라진다는 근거는 보충자료의 라만 측정(Fig. S9)으로 제시되었는데, 보충자료는 확인하지 못했습니다 <span class="tag tag-unverified">미확인</span>. 다만 TOF-SIMS는 전압을 끈 뒤 진공에서 재는 방법이라, 동작 중의 분포와 같다고 보려면 조심해야 합니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-depletion-evidence"></span><strong>고갈층을 직접 보았나.</strong> 이종접합 논문 대부분은 고갈을 전류·임피던스로 간접 추론합니다. Lee 2026 (AFM)은 히알루론산–키토산 하이드로겔 접합의 역방향 저항이 같은 재료 접합의 약 35배라는 임피던스 비교로 고갈을 뒷받침했습니다(1구간 ⑥의 같은 부호 대조, <a href="../days/d20a.html#s-junction-devices">Day 35 3-2</a>). <span class="src">Lee 2026 (AFM), p.4</span> 이보다 분포 자체에 다가간 측정이 하나 있습니다. Balqis 2026은 폴리음이온 PIL(poly[EMIm][SPA])과 폴리양이온 PIL(poly[BVIm][TFSI])을 쌓은 접합의 <strong>깊이에 따른 성분 분포</strong>를 비행시간 이차이온 질량분석(TOF-SIMS: 이온빔으로 표면을 깎아 가며 깊이별 성분을 재는 방법)으로 쟀습니다.</p>
 <p><strong>원문 그림 읽는 법(아래 Balqis 2026 Fig. 1c–e):</strong> c의 가로축 '스퍼터 시간'은 이온빔으로 시료를 깎아 들어간 시간이라 <strong>깊이</strong>로 읽습니다. 시료는 폴리음이온 PIL 위에 폴리양이온 PIL을 스핀코팅한 얇은 막이어서, 오른쪽으로 갈수록 위층(폴리양이온 쪽)에서 아래층(폴리음이온 쪽)으로 들어갑니다. <span class="src">Balqis 2026, p.27069</span> 세로축은 검출된 음이온 세기(로그 눈금)입니다. 파랑 CF₃SO₂N⁻은 위층의 이동 음이온 TFSI⁻, 주황 SO₃⁻는 아래층 사슬에 묶인 음이온의 표지입니다. d와 e는 같은 두 이온의 3차원 분포이고, Z축(아래 방향)이 깊이입니다.</p>
 <figure class="fig paper figure"><img src="../assets/img/papers/balqis2026-fig1c-e.png" alt="Balqis 2026 Fig. 1c–e: PIL 이종접합 얇은 막의 TOF-SIMS 음이온 깊이 분포. TFSI⁻ 표지(파랑)는 약 1100 s까지 평평하다가 줄고 폴리음이온 표지 SO₃⁻(주황)는 그 무렵부터 늘며, 점선 두 개 사이에 IDL이라고 적혀 있다. 옆의 두 상자는 두 이온의 3차원 분포" class="figure-img"><figcaption><b>원문 그림.</b> Balqis et al., <a href="https://doi.org/10.1021/acsnano.6c07651" target="_blank"><i>ACS Nano</i> 2026, 20, 27066–27078</a>, Fig. 1c–e, p.27067. 볼 것: c에서 파랑은 약 1100 s까지 평평하다가 줄고 주황은 그 무렵부터 늘어, 깊은 쪽으로 가며 위층 음이온이 줄고 아래층 사슬이 나타납니다. d에서 SO₃⁻는 상자의 아래(깊은 쪽)에 몰려 있고, e에서 CF₃SO₂N⁻는 거의 전체에 퍼져 있습니다. 저자들은 경계가 날카롭지 않고 스퍼터 약 500 s(약 395 nm)에 걸쳐 점진적으로 바뀐다고 보고, 이 계면 구간을 IDL과 연결합니다(p.27069). 점선 두 개(약 840 s와 1230 s, Claude가 눈금에서 읽음) 사이에 'IDL'이라고 적혀 있지만, 그 안에서 두 선은 대체로 평평하고 크게 바뀌는 것은 오른쪽 점선 무렵부터 약 1500 s까지입니다. 이 그림에 없는 것: 원문 캡션은 'IDL 폭을 전압으로 조절'이라는 제목 아래 c–e를 두지만, 그림은 한 시료의 깊이 분포 하나뿐이고 전압 조건별 비교나 동작 중 측정은 없으며, 이 시료에 전압을 걸었는지도 적혀 있지 않습니다. 저자들도 정량 한계로 IDL 폭을 정확히 분석하지 못했다고 씁니다(p.27069). 전압에 따른 계면 이온 변화는 공초점 라만(보충자료 Fig. S9, Claude 미확인)으로 보였다고 합니다(p.27071). <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p><strong>정류는 얼마나 강한가.</strong> 정류비(같은 크기의 순방향·역방향 전압에서의 전류 비, <a href="../days/d20a.html#b-polarization">Day 35 기초</a>)는 소자마다 크게 다릅니다.</p>
+<p><span id="s-depletion-limits"></span><strong>그림이 보여 주는 것과 못 보여 주는 것.</strong> 접합면 근처에서 한쪽 이온 신호가 줄고 다른 쪽이 늘어나는 구간이 있고, 저자들은 그 사이를 이온 고갈층(IDL)으로 표시합니다. <span class="src">Balqis 2026, p.27067, Fig. 1</span> 다만 이것은 <strong>한 시료의 분포 하나</strong>이고, 전압을 바꿔 가며 잰 것이 아니며, 저자들도 고갈층의 폭을 정량하지 못했다고 씁니다. <span class="src">Balqis 2026, p.27069</span> 전압에 따라 고갈이 달라진다는 근거는 보충자료의 라만 측정(Fig. S9)으로 제시되었습니다 <span class="tag tag-unverified">미확인</span> <span class="prov">보충자료는 Claude가 보지 못함</span>. 또 TOF-SIMS는 전압을 끈 뒤 진공에서 재는 방법이라, 동작 중의 분포와 같다고 보려면 조심해야 합니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-rect-ratio"></span><strong>정류는 얼마나 강한가.</strong> 정류비(같은 크기의 순방향·역방향 전압에서의 전류 비, <a href="../days/d20a.html#b-polarization">Day 35 기초</a>)는 소자마다 크게 다릅니다.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -882,20 +906,24 @@ t_i = \frac{n_i |z_i| e \mu_i}{\sum_j n_j |z_j| e \mu_j}, \qquad \sum_i t_i = 1
 </tr>
 </tbody>
 </table>
-<p>같은 "이종접합"이라도 폴더에 보고된 정류비는 2.5(Balqis)에서 10 이상(Han의 선별 기준)까지 흩어져 있고, 같은 조건에서 나란히 잰 값은 없습니다. 측정 조건도 정류비를 바꿉니다. Lee 2026 (AFM)은 전압을 훑는 속도가 빨라질수록 정류비와 고리 넓이가 함께 줄어 직선에 가까워졌다고 보고합니다. <span class="src">Lee 2026 (AFM), p.3</span> Balqis 2026은 PIL의 정류비가 온도가 오를수록 커졌고(−20–100 °C에서 측정), 낮은 온도에서는 사슬의 분절 운동이 제한된다고 설명합니다. <span class="src">Balqis 2026, p.27071</span> Day 38에서 본 Tg와 사슬 운동성이 정류에도 닿는 것입니다.</p>
-<p><strong>시간상수는 여럿이고, 극성에 따라 다르다.</strong> Balqis 2026의 PIL 접합은 쌍펄스 촉진(PPF: 두 펄스를 가까이 주면 둘째 응답이 커지는 것, <a href="../days/d16b.html#ch-rc-circuit">Day 29 4구간</a>)과 쌍펄스 억제(PPD: 둘째 응답이 작아지는 것)가 펄스 간격이 길어질수록 줄어드는 모양을 지수 두 개로 맞춰 PPF는 21·36 ms, PPD는 15·6 ms를 얻었고, 두 방향의 시간상수가 다른 것을 "비대칭 변화"로 해석합니다. <span class="src">Balqis 2026, p.27072</span> 같은 글의 유변학 측정은 1 ms 이하의 빠른 이완과 100 s 이상의 느린 이완을 함께 보였습니다. <span class="src">Balqis 2026, p.27071</span> 하이드로겔 P–M–N 접합(양이온 선택 겔–중성 겔–음이온 선택 겔, Day 35–36)에서도 1 V 단계에서 평형에 이르는 시간이 −1 V보다 길었습니다. <span class="src">Zhang 2024 (ACS Nano), p.15030</span> 즉 이종접합은 <strong>쌓을 때와 비울 때의 시간이 다르고</strong>, 한 소자 안에 서로 다른 시간척도가 여럿 있습니다. 이 '극성별 비대칭'과 '다중 시간상수'가 4구간의 계산 primitive로 이어집니다.</p>
-<p><strong>원문 그림 읽는 법(아래 Balqis 2026 Fig. 3a–f):</strong> 위 줄 b·c는 전압 방향에 따라 접합의 고갈층이 좁아지고 넓어지는 모식도, 아래 줄 d·e는 두 펄스를 30 ms 간격으로 줄 때 첫째 응답 <span class="math inline">\(A_1\)</span>과 둘째 응답 <span class="math inline">\(A_2\)</span>를 재는 법, f는 두 펄스 사이 간격 <span class="math inline">\(\Delta t\)</span>를 바꿔 가며 잰 지수 <span class="math inline">\((A_2 - A_1)/A_1\)</span>입니다. f에서 <strong>두 곡선이 0으로 다가가는 빠르기</strong>가 본문의 시간상수입니다.</p>
+<p>같은 "이종접합"이라도 폴더에 보고된 정류비는 2.5(Balqis)에서 10 이상(Han의 선별 기준)까지 흩어져 있고, 같은 조건에서 나란히 잰 값은 없습니다. 측정 조건도 정류비를 바꿉니다. Lee 2026 (AFM)은 전압을 훑는 속도가 빨라질수록 정류비와 고리 넓이가 함께 줄어 직선에 가까워졌다고 보고합니다. <span class="src">Lee 2026 (AFM), p.3</span> Day 35–36의 장난감 모형에서 아주 빠르게 훑으면 I–V가 직선이 되던 것과 같은 방향입니다(<a href="../days/d20a.html#s-toy-model">Day 35 3-1</a>). Balqis 2026은 PIL의 정류비가 온도가 오를수록 커졌고(−20–100 °C에서 측정), 낮은 온도에서는 사슬의 분절 운동이 제한된다고 설명합니다. <span class="src">Balqis 2026, p.27071</span> Day 38에서 본 Tg와 사슬 운동성이 정류에도 닿는 것입니다(<a href="../days/d22.html#b-tg-mobility">Day 38 기초</a>).</p>
+<p><span id="s-multi-tau"></span><strong>시간상수는 여럿이고, 극성에 따라 다르다.</strong> 먼저 두 용어입니다. 두 펄스를 짧은 간격으로 주면 둘째 응답이 커지는 것이 쌍펄스 촉진(PPF), 작아지는 것이 쌍펄스 억제(PPD)입니다. 두 펄스 사이 간격을 <span class="math inline">\(\Delta t\)</span>(여기서는 시간 간격)라 하고, 간격에 따른 지수 <span class="math inline">\((A_2 - A_1)/A_1\)</span>(<span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span>: 첫째·둘째 응답)을 지수 함수 두 개의 합 <span class="math inline">\(C_1 e^{-\Delta t/\tau_1} + C_2 e^{-\Delta t/\tau_2}\)</span>로 맞추면 시간상수 두 개(<span class="math inline">\(\tau_1\)</span>, <span class="math inline">\(\tau_2\)</span>)가 나옵니다. Day 10에서 PPF 곡선을 읽은 것과 같은 꼴입니다(<a href="../days/d06.html#s-ppf-formula">Day 10 3구간: PPF 곡선 읽기</a>).</p>
+<p><strong>원문 그림 읽는 법(아래 Balqis 2026 Fig. 3a–f):</strong> 위 줄 b·c는 전압 방향에 따라 접합의 고갈층이 좁아지고 넓어지는 모식도, 아래 줄 d·e는 두 펄스를 30 ms 간격으로 줄 때 첫째 응답 <span class="math inline">\(A_1\)</span>과 둘째 응답 <span class="math inline">\(A_2\)</span>를 재는 법, f는 두 펄스 사이 간격 <span class="math inline">\(\Delta t\)</span>를 바꿔 가며 잰 지수 <span class="math inline">\((A_2 - A_1)/A_1\)</span>입니다. f에서 <strong>두 곡선이 0으로 다가가는 빠르기</strong>가 아래 문단의 시간상수입니다.</p>
 <figure class="fig paper figure"><img src="../assets/img/papers/balqis2026-fig3a-f.png" alt="Balqis 2026 Fig. 3a–f: a는 생물 시냅스 모식도. b는 양의 전압에서 위층 양이온과 아래층 음이온이 접합으로 모여 가운데 고갈층이 좁아지는 그림, c는 음의 전압에서 이온이 접합에서 멀어져 고갈층이 넓어지는 그림. d와 e는 폭 10 ms, 간격 30 ms인 두 펄스(+1 V, 음의 전압)와 그 전류에서 A1, A2를 표시한 곡선. f는 펄스 간격 25–100 ms에 대한 PPF(주황, +1 V, 약 +4%에서 +1.5%로) 지수와 PPD(파랑, −1.5 V, 약 −11%에서 −1%로) 지수, 회색 맞춤 곡선" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Balqis et al., <a href="https://doi.org/10.1021/acsnano.6c07651" target="_blank"><i>ACS Nano</i> 2026, 20, 27066–27078</a>, Fig. 3a–f, p.27070. 볼 것: a는 생물 시냅스(비교용)입니다. b(+ 전압)에서는 위층(폴리음이온)의 양이온과 아래층(폴리양이온)의 음이온이 접합 쪽으로 내려오고 올라와 가운데의 옅은 띠(고갈층)가 좁아지고, c(− 전압)에서는 반대로 멀어져 넓어집니다. 그림 1 ③의 순방향·역방향과 같은 그림입니다. f에서 주황(+1 V, PPF)은 25 ms 간격에서 약 +4%, 파랑(−1.5 V, PPD)은 약 −11%에서 시작해 둘 다 간격이 길어질수록 0으로 갑니다. 회색 곡선이 지수 두 개의 맞춤이고, 본문의 PPF 21·36 ms, PPD 15·6 ms가 이 맞춤에서 나온 값입니다(p.27072). 두 곡선의 크기와 모양이 다른 것이 "극성별 비대칭"입니다. 조심할 것: 곡선마다 점이 9개이고 지수 두 개를 맞췄으므로 시간상수 하나하나는 크게 흔들릴 수 있으며(오차는 본문에 없음) [해석], e의 원문 캡션은 −1 V라고 쓰지만 f의 범례는 −1.5 V입니다. 또 PPF 지수의 크기 자체가 몇 %로 작습니다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p><strong>속도.</strong> Balqis 2026은 기존 이온액체 기반 소자가 이온을 움직이려면 1 s 폭의 펄스가, 이전 PIL 소자는 100 ms·6 V가 필요했던 데 비해 <span class="src">Balqis 2026, p.27067</span>, 이 PIL 접합이 1 ms 미만의 바이어스에 반응하고 10 µs·5 mV 펄스에서 스파이크(짧은 전압 펄스 하나)당 2.96 fJ을 쓴다고 보고합니다. <span class="src">Balqis 2026, p.27066</span> 2.96 fJ은 소자 하나의 펄스 에너지이고 읽기·구동 회로는 포함하지 않습니다(Day 30–31).</p>
-<p><strong>착물화로 프로그래밍하는 계층 구조.</strong> 폴리양이온(PDDA)과 DNA의 계면 착물화로 만든 섬유는 다른 방향을 보여 줍니다. 느린 이완 시간상수가 최대 40분에 이르고, 펄스 수와 섬유 접점 수에 따라 몇 자릿수에 걸쳐 바뀌었습니다. <span class="src">Li 2026 (IPC fiber), p.1, 6</span> 폴리전해질 착물화가 정류보다는 <strong>긴 기억의 프로그래밍</strong>에 쓰인 예입니다.</p>
-<section id="연구는-어디까지-왔나-한계-넘어야-할-것" class="level4">
-<h4 class="anchored" data-anchor-id="연구는-어디까지-왔나-한계-넘어야-할-것">2-1. 연구는 어디까지 왔나 / 한계 / 넘어야 할 것</h4>
+<p>Balqis 2026은 이 맞춤으로 PPF는 21·36 ms, PPD는 15·6 ms를 얻었고, 두 방향의 시간상수가 다른 것을 "비대칭 변화"로 해석합니다. <span class="src">Balqis 2026, p.27072</span> 같은 글의 유변학 측정(rheology: 재료에 작은 변형을 주고 응력이 풀리는 빠르기를 재는 측정)은 1 ms 이하의 빠른 이완과 100 s 이상의 느린 이완을 함께 보였습니다. <span class="src">Balqis 2026, p.27071</span> 하이드로겔 P–M–N 접합(양이온 선택 겔–중성 겔–음이온 선택 겔, Day 35–36)에서도 1 V 단계에서 평형에 이르는 시간이 −1 V보다 길었습니다. <span class="src">Zhang 2024 (ACS Nano), p.15030</span> 즉 이종접합은 <strong>쌓을 때와 비울 때의 시간이 다르고</strong>, 한 소자 안에 서로 다른 시간척도가 여럿 있습니다. 이 '극성별 비대칭'과 '다중 시간상수'가 4구간의 계산 primitive로 이어집니다.</p>
+<p><span id="s-speed"></span><strong>속도.</strong> Balqis 2026은 기존 이온액체 기반 소자가 이온을 움직이려면 1 s 폭의 펄스가, 이전 PIL 소자는 100 ms·6 V가 필요했던 데 비해 <span class="src">Balqis 2026, p.27067</span>, 이 PIL 접합이 1 ms 미만의 바이어스에 반응하고 10 µs·5 mV 펄스에서 스파이크(짧은 전압 펄스 하나)당 2.96 fJ을 쓴다고 보고합니다. <span class="src">Balqis 2026, p.27066</span> 2.96 fJ은 소자 하나의 펄스 에너지이고 읽기·구동 회로는 포함하지 않습니다(Day 30–31).</p>
+<p><span id="s-complexation"></span><strong>착물화로 프로그래밍하는 계층 구조.</strong> 착물화(complexation)는 반대 전하를 띤 두 고분자(또는 고분자와 DNA처럼 전하를 띤 분자)가 서로 묶여 복합체를 만드는 것입니다(<a href="../days/d19b.html#s-chem-state">Day 34 3-3: 화학 상태를 바꾼다</a>). 폴리양이온(PDDA)과 DNA의 계면 착물화로 만든 섬유는 다른 방향을 보여 줍니다. 느린 이완 시간상수가 최대 40분에 이르고, 펄스 수와 섬유 접점 수에 따라 몇 자릿수에 걸쳐 바뀌었습니다. <span class="src">Li 2026 (IPC fiber), p.1, 6</span> 폴리전해질 착물화가 정류보다는 <strong>긴 기억의 프로그래밍</strong>에 쓰인 예입니다.</p>
+<section id="s-junction-status" class="level4">
+<h4 class="anchored" data-anchor-id="s-junction-status">2-1. 연구는 어디까지 왔나 / 한계 / 넘어야 할 것</h4>
 <ul>
 <li><strong>어디까지 왔나.</strong> 하이드로겔·천연 고분자·무용매 PIL·착물화 섬유까지 다양한 폴리전해질 접합에서 정류, 가소성(축적·고갈), 다중 시간상수가 보고되었습니다. 고갈층으로 해석되는 깊이 분포가 한 예 나왔고(폭 정량·전압 비교는 없음) <span class="src">Balqis 2026, p.27067, 27069</span>, 반응 속도는 ms 아래까지 왔습니다.</li>
 <li><strong>지금 한계.</strong> (a) 정류비가 소자마다 2.5배–10배 이상으로 흩어지고 표준 조건(전압·속도·염 농도)이 없습니다. (b) Wang 2025가 지적한 대로 이종 계면이 이완을 정하는지, 느린 이온 역류가 정하는지가 불분명합니다. <span class="src">Wang 2025 (Chem. Soc. Rev.), p.316</span> (c) 폴더 논문들은 대부분 10 mM 같은 묽은 염에서 쟀고, 생체 조건(약 150 mM, pH 7.4)에서의 정류는 폴더에서 찾지 못했습니다(3구간). (d) 계산 평가는 측정 상태를 신경망 시뮬레이션에 넣는 수준입니다(Balqis 2026의 이미지 인식 90% 등 <span class="src">Balqis 2026, p.27066</span>).</li>
 <li><strong>넘어야 할 것.</strong> 동작 중 고갈층의 직접 관찰, 같은 조건(염·온도·전압)에서의 정류비·시간상수 표준 보고, 생리 조건의 성능, 그리고 다중 시간상수가 계산 지표(memory capacity MC, <a href="../days/d12a.html#b-memory-capacity">Day 20 기초</a>; 정보처리용량 IPC, <a href="../days/d11a.html#b-ipc">Day 18 기초</a>)를 실제로 늘리는지의 측정. <span class="tag tag-hypo">가설</span></li>
 </ul>
 <div class="quiz" data-day="d24" data-set="2-check"></div>
+<div class="stop-point">
+<p>여기까지: 고갈의 간접 증거(같은 재료 대조 대비 35배 저항)와 분포에 다가간 증거(TOF-SIMS 깊이 분포 하나)를 구분하고, 정류비가 2.5–10배 이상으로 흩어지며 훑는 속도·온도로 바뀐다는 것, PPF·PPD 시간상수가 극성마다 다르다는 것을 숫자로 말할 수 있다. 다음: 이 이점이 바깥 염 농도에 얼마나 기대는지 계산.</p>
+</div>
 <div class="keypoints">
 <ul>
 <li>고갈에 가장 가까운 증거: TOF-SIMS 깊이 분포 하나(전압을 바꾼 비교·폭 정량은 없음) <span class="src">Balqis 2026, p.27067, 27069</span>; 간접 증거: 같은 재료 대조군 대비 35배 저항 <span class="src">Lee 2026 (AFM), p.4</span>.</li>
@@ -910,41 +938,44 @@ t_i = \frac{n_i |z_i| e \mu_i}{\sum_j n_j |z_j| e \mu_j}, \qquad \sum_i t_i = 1
 <div class="goal">
 <p>이 구간을 읽고 나면 폴리전해질·이종접합이 일반 이온겔보다 유리한 조건과 불리한 조건을 표로 나누고, 바깥 염 농도가 고정 전하의 이점을 얼마나 깎는지 Donnan 퍼텐셜과 계산으로 보이며, 그 이점을 보일 실험과 대조군을 적고, "반드시"가 왜 맞지 않는지 말할 수 있다.</p>
 </div>
-<p>먼저 Donnan 배제가 바깥 염에 얼마나 민감한지 계산합니다. 2구간의 정류는 결국 "고정 전하가 공이온을 밀어낸다"는 한 가지에 기대기 때문입니다.</p>
+<p>2구간의 정류는 결국 "고정 전하가 공이온을 밀어낸다"(1구간 단계 1)는 한 가지에 기댑니다. 그래서 먼저 그 배제가 바깥 염에 얼마나 민감한지 계산합니다.</p>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/MhSfQio8mp0?start=0&amp;rel=0" title="영상: 3. Gibbs-Donnan Equilibrium" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체(3분), 영어).</b> Larry Keeley, "3. Gibbs-Donnan Equilibrium"(2011). <b>볼 이유:</b> 생리학 강의의 한 편으로, 세포막 안쪽에 갇혀 나가지 못하는 음전하(단백질) 때문에 작은 이온들이 막 양쪽에 고르지 않게 나뉘고 막에 전압이 생기는 과정을 그림으로 따라갑니다(챕터: 0:00 처음 배치와 확산, 1:11 이온 기울기가 생김, 1:52 평형). 세포 안의 "갇힌 음전하"를 겔의 "사슬에 묶인 고정 전하"로 바꿔 읽으면 아래 계산과 같은 원리입니다. <b>보고 답할 질문:</b> 갇힌 음전하가 있는 쪽에서 Cl⁻(공이온)는 바깥보다 많아지나 적어지나? 바깥 소금이 진해지면 그 치우침은 커지나 작아지나(아래 그림 3으로 확인)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 직접 보지 못함)</span></div></div>
-<p><strong>Donnan 퍼텐셜: 배제를 만드는 전압.</strong> Day 35–36에서는 <span class="math inline">\(c_+ c_- = c_s^2\)</span>를 계산에 그냥 썼습니다. 그 식이 어디서 오는지 보면 배제가 왜 바깥 염에 민감한지 보입니다. 고정 음전하 겔을 염 용액(농도 <span class="math inline">\(c_s\)</span>)에 담그면, 처음에는 겔 속 K⁺가 바깥보다 훨씬 많아 K⁺가 밖으로 퍼져 나가려 합니다. 그런데 K⁺가 아주 조금만 빠져도 겔에는 짝 잃은 고정 음전하가 남아 겔 전체가 바깥보다 음의 전위가 되고, 이 전위가 K⁺를 다시 붙잡고 Cl⁻를 밀어냅니다. 퍼지려는 경향과 전기적 끌림이 맞서 멈춘 상태의 겔–바깥 전위차가 <strong>Donnan 퍼텐셜</strong> <span class="math inline">\(\Delta\phi_D\)</span>입니다. 이때 겔 속 이온 농도는 Day 37에서 본 볼츠만 분포를 따릅니다(<a href="../days/d21.html#b-debye-length">Day 37 기초</a>).</p>
+<p><span id="s-donnan-potential"></span><strong>Donnan 퍼텐셜: 배제를 만드는 전압.</strong> Day 35–36에서는 <span class="math inline">\(c_+ c_- = c_s^2\)</span>를 계산에 그냥 썼습니다. 그 식이 어디서 오는지 보면 배제가 왜 바깥 염에 민감한지 보입니다. 고정 음전하 겔을 염 용액(농도 <span class="math inline">\(c_s\)</span>)에 담그면, 처음에는 겔 속 K⁺가 바깥보다 훨씬 많아 K⁺가 밖으로 퍼져 나가려 합니다. 그런데 K⁺가 아주 조금만 빠져도 겔에는 짝 잃은 고정 음전하가 남아 겔 전체가 바깥보다 음의 전위가 되고, 이 전위가 K⁺를 다시 붙잡고 Cl⁻를 밀어냅니다. 퍼지려는 경향과 전기적 끌림이 맞서 멈춘 상태의 겔–바깥 전위차가 <strong>Donnan 퍼텐셜</strong> <span class="math inline">\(\Delta\phi_D\)</span>입니다. 이때 겔 속 이온 농도는 Day 37에서 본 볼츠만 분포를 따릅니다(<a href="../days/d21.html#b-debye-length">Day 37 기초</a>). 아래 식에서 <span class="math inline">\(e\Delta\phi_D\)</span>는 이온 하나가 바깥에서 겔로 들어갈 때 바뀌는 전기 에너지, <span class="math inline">\(k_BT\)</span>는 열에너지(<span class="math inline">\(k_B\)</span> 볼츠만 상수, <span class="math inline">\(T\)</span> 절대온도; 25 °C에서 <span class="math inline">\(k_BT/e\)</span> = 25.7 mV)입니다.</p>
 <p><span class="math display">\[
-c_+ = c_s\, e^{-e\Delta\phi_D/kT}, \qquad c_- = c_s\, e^{+e\Delta\phi_D/kT}
+c_+ = c_s\, e^{-e\Delta\phi_D/k_BT}, \qquad c_- = c_s\, e^{+e\Delta\phi_D/k_BT}
 \]</span></p>
 <p>두 식을 곱하면 지수가 지워져 <span class="math inline">\(c_+ c_- = c_s^2\)</span>가 됩니다. 여기에 겔의 전기적 중성 <span class="math inline">\(c_+ = c_- + X\)</span>(<span class="math inline">\(X\)</span>: 고정 전하 농도)를 함께 풀면 공이온 <span class="math inline">\(c_-\)</span>가 나옵니다(그림 3의 곡선). 바깥 염이 고정 전하보다 훨씬 묽으면(<span class="math inline">\(c_s \ll X\)</span>) <span class="math inline">\(c_+ \approx X\)</span>이므로</p>
 <p><span class="math display">\[
 c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \frac{X}{c_s}
 \]</span></p>
-<p>곧 배제는 "고정 전하가 바깥 염의 몇 배인가"로 어림됩니다. 숫자(25 °C, <span class="math inline">\(kT/e\)</span> = 25.7 mV, 활동도 1): <span class="math inline">\(X\)</span> = 0.5 M, <span class="math inline">\(c_s\)</span> = 10 mM이면 <span class="math inline">\(c_- \approx 0.01^2 \div 0.5\)</span> M = 0.2 mM, 배제 ≈ 50이고, <span class="math inline">\(\Delta\phi_D = -(kT/e)\ln(c_+/c_s) = -25.7 \times \ln(500.2/10) \approx -101\)</span> mV입니다. 150 mM이면 <span class="math inline">\(c_s\)</span>가 <span class="math inline">\(X\)</span>에 가까워져 어림식(45 mM)이 조금 벗어나고, 정확히 풀면 공이온 42 mM, 배제 3.6배, <span class="math inline">\(\Delta\phi_D \approx -33\)</span> mV입니다. 농도가 다른 두 용액 사이에 겔 막을 끼우면 양쪽 Donnan 퍼텐셜의 차가 전압으로 나타나는데, 그것을 재는 것이 3-1의 막 전위 측정입니다.</p>
+<p>곧 배제는 "고정 전하가 바깥 염의 몇 배인가"로 어림됩니다. 숫자(25 °C, 활동도 1): <span class="math inline">\(X\)</span> = 0.5 M, <span class="math inline">\(c_s\)</span> = 10 mM이면 <span class="math inline">\(c_- \approx 0.01^2 \div 0.5\)</span> M = 0.2 mM, 배제 ≈ 50이고, <span class="math inline">\(\Delta\phi_D = -(k_BT/e)\ln(c_+/c_s) = -25.7 \times \ln(500.2/10) \approx -101\)</span> mV입니다. 150 mM이면 <span class="math inline">\(c_s\)</span>가 <span class="math inline">\(X\)</span>에 가까워져 어림식(45 mM)이 조금 벗어나고, 정확히 풀면 공이온 42 mM, 배제 3.6배, <span class="math inline">\(\Delta\phi_D \approx -33\)</span> mV입니다. 농도가 다른 두 용액 사이에 겔 막을 끼우면 양쪽 Donnan 퍼텐셜의 차가 전압으로 나타나는데, 그것을 재는 것이 3-1의 막 전위 측정입니다.</p>
+<p><span id="s-donnan-figure"></span>그림 3을 먼저 봅니다. 가로축은 바깥 염 농도, 세로축은 공이온 배제(바깥 농도 ÷ 겔 속 공이온 농도)이고 둘 다 로그 눈금(눈금 한 칸이 10배, <a href="../days/d01a.html#b-log-axis">Day 1 기초: 로그 축</a>)입니다. 세 곡선은 고정 전하 0.1·0.5·2 M 겔이고, 세로 점선 둘이 실험실(10 mM)과 체액 수준(150 mM)입니다. 볼 것은 모든 곡선이 오른쪽으로 갈수록 내려간다는 것, 그리고 고정 전하가 클수록 곡선이 위에 있다는 것입니다. 아래 단계 1–3이 0.5 M 곡선과 두 점선이 만나는 곳, 그리고 다른 두 곡선을 계산합니다.</p>
+<figure class="fig figure"><img src="../assets/img/d24/fig2-donnan-salt.svg" alt="이상 Donnan 계산: 바깥 염 농도(1 mM–1 M)에 따른 공이온 배제(바깥 ÷ 겔 속). 고정 전하 0.1, 0.5, 2 M 세 곡선, 모두 오른쪽 아래로 내려감. 0.5 M 겔에서 10 mM이면 공이온 1/50·수송수 0.9996·Donnan 퍼텐셜 −101 mV, 150 mM이면 1/3.6·0.93·−33 mV, 겔 속 공이온이 약 208배로 늘어남" class="figure-img"><figcaption><b>그림 3.</b> 바깥 염이 진해지면 고정 전하의 공이온 배제가 약해진다(이상 Donnan, 활동도 1, 25 °C, 코드 계산). 가로·세로 모두 로그 눈금(한 칸이 10배)이다. 세로 점선은 실험실(10 mM)과 체액 수준(150 mM). 오른쪽 글은 0.5 M 겔의 수송수(1-1)와 Donnan 퍼텐셜이다. 실제 겔은 이온쌍·팽윤이 함께 바뀌어 이 단순 계산과 다를 수 있다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-donnan-steps"></span></p>
 <div class="stepper">
 <div class="step">
 <p><strong>단계 1 — 실험실 조건.</strong> 고정 전하 0.5 M인 겔을 10 mM 염에 담그면 이상 Donnan 평형에서 겔 속 공이온은 약 0.2 mM, 바깥의 <strong>1/50</strong>입니다(코드 계산, 어림식 <span class="math inline">\(X/c_s\)</span> = 0.5 ÷ 0.01 = 50과 같음).</p>
 </div>
 <div class="step">
-<p><strong>단계 2 — 체액 수준.</strong> 같은 겔을 150 mM에 담그면 공이온이 약 42 mM, 바깥의 <strong>1/3.6</strong>에 그칩니다. 배제가 약 14배 약해졌습니다.</p>
+<p><strong>단계 2 — 체액 수준.</strong> 같은 겔을 150 mM에 담그면 공이온이 약 42 mM, 바깥의 <strong>1/3.6</strong>에 그칩니다. 배제가 약 14배(50 ÷ 3.6) 약해졌습니다.</p>
 </div>
 <div class="step">
 <p><strong>단계 3 — 고정 전하를 늘리면.</strong> 고정 전하 2 M이면 150 mM에서도 공이온은 약 11 mM(1/13), 0.1 M이면 약 108 mM(1/1.4)로 거의 배제가 없습니다.</p>
 </div>
 <div class="step">
-<p><strong>단계 4 — 뜻: 쌓이는 빠르기보다 역방향의 바닥 전류가 바뀐다.</strong> 1-1의 수송수로 보면 0.5 M 겔의 <span class="math inline">\(t_+\)</span>는 0.9996(10 mM)에서 0.93(150 mM)으로, 접합의 <span class="math inline">\(\Delta t\)</span>는 1.00에서 0.86으로 조금만 줄어듭니다. 쌓이고 비는 <strong>빠르기</strong>는 크게 변하지 않는다는 뜻입니다. 크게 바뀌는 것은 역방향에서 접합의 반대이온이 다 빠져나간 뒤 남는 전류, 곧 <strong>바닥 전류</strong>입니다. 그 전류는 겔 속에 새어 들어와 있던 공이온이 나르는데, 겔 속 공이온은 0.2 mM에서 42 mM로 약 <strong>200배</strong>가 됩니다. 순방향 전류를 나르는 반대이온은 0.50 M에서 0.54 M로 거의 그대로입니다. 그래서 같은 접합이라도 150 mM에서는 정류비가 크게 줄 수 있습니다 [해석: 이상 Donnan 어림]. 바이폴라 막(그림 1 ③과 같은 구조의 산업용 막) 연구도 물 분해가 시작되기 전 역방향의 한계 전류를 주로 염 이온이 나른다고 보고하며, 이상 모형은 그 전류가 바깥 염 농도의 제곱에 비례한다고 예측했지만 측정은 거의 1제곱 비례였습니다(Pärnamäe et al., <a href="https://doi.org/10.1021/acs.est.2c09410" target="_blank"><i>Environ. Sci. Technol.</i> 2023, 57, 9664</a>, 폴더 밖). 그러니 염을 15배 진하게 하면 바닥 전류는 약 15배(측정 경향)에서 약 200배(이상 어림) 사이로 오른다고 어림되고, 실제 폭은 내 소자에서 재야 합니다. 실험실(10 mM)에서 잰 정류비를 몸속(약 150 mM)에 그대로 옮길 수 없다는 뜻입니다.</p>
+<p><strong>단계 4 — 쌓이는 빠르기는 거의 그대로.</strong> 1-1의 수송수로 보면 0.5 M 겔의 <span class="math inline">\(t_+\)</span>는 0.9996(10 mM)에서 0.93(150 mM)으로, 접합의 <span class="math inline">\(\delta\)</span>는 1.00에서 0.86으로 조금만 줄어듭니다(n쪽도 같은 크기의 고정 전하라고 둔 계산). 순방향에서 쌓이고 역방향에서 비는 <strong>빠르기</strong>는 크게 변하지 않는다는 뜻입니다.</p>
+</div>
+<div class="step">
+<p><span id="s-floor-current"></span><strong>단계 5 — 크게 바뀌는 것은 역방향의 바닥 전류.</strong> 역방향에서 접합의 반대이온이 다 빠져나간 뒤에도 남는 작은 전류를 여기서는 <strong>바닥 전류</strong>라 부릅니다(전기화학의 '한계 전류'). 그 전류는 겔 속에 새어 들어와 있던 공이온이 나르는데, 겔 속 공이온은 0.2 mM에서 42 mM로 약 <strong>208배</strong>가 됩니다. 순방향 전류를 나르는 반대이온은 0.50 M에서 0.54 M로 거의 그대로입니다. 그래서 같은 접합이라도 150 mM에서는 정류비가 크게 줄 수 있습니다 [해석: 이상 Donnan 어림]. 바이폴라 막(그림 1 ③과 같은 구조의 산업용 막) 연구도 물 분해가 시작되기 전 역방향의 한계 전류를 주로 염 이온이 나른다고 보고하며, 이상 모형은 그 전류가 바깥 염 농도의 제곱에 비례한다고 예측했지만 측정은 거의 1제곱 비례였습니다(Pärnamäe et al., <a href="https://doi.org/10.1021/acs.est.2c09410" target="_blank"><i>Environ. Sci. Technol.</i> 2023, 57, 9664</a> <span class="prov">폴더 밖 문헌</span>). 그러니 염을 15배 진하게 하면 바닥 전류는 약 15배(측정 경향)에서 약 200배(이상 어림) 사이로 오른다고 어림되고, 실제 폭은 내 소자에서 재야 합니다. 실험실(10 mM)에서 잰 정류비를 몸속(약 150 mM)에 그대로 옮길 수 없다는 뜻입니다.</p>
 </div>
 </div>
-<figure class="fig figure"><img src="../assets/img/d24/fig2-donnan-salt.svg" alt="이상 Donnan 계산: 바깥 염 농도(1 mM–1 M)에 따른 공이온 배제(바깥 ÷ 겔 속). 고정 전하 0.1, 0.5, 2 M 세 곡선, 모두 오른쪽 아래로 내려감. 0.5 M 겔에서 10 mM이면 공이온 1/50·수송수 0.9996·Donnan 퍼텐셜 −101 mV, 150 mM이면 1/3.6·0.93·−33 mV, 겔 속 공이온이 약 208배로 늘어남" class="figure-img"><figcaption><b>그림 3.</b> 바깥 염이 진해지면 고정 전하의 공이온 배제가 약해진다(이상 Donnan, 활동도 1, 25 °C, 코드 계산). 가로·세로 모두 로그 눈금(한 칸이 10배)이다. 세로 점선은 실험실(10 mM)과 체액 수준(150 mM). 오른쪽 글은 0.5 M 겔의 수송수(1-1)와 Donnan 퍼텐셜이다. 실제 겔은 이온쌍·팽윤이 함께 바뀌어 이 단순 계산과 다를 수 있다. (Claude가 계산해 그림)</figcaption></figure>
-<p>Lee 2026 (AFM)의 접합도 10 mM KCl, pH 6에서 측정했고, 저자들은 히알루론산과 키토산의 pKa(각각 약 3.0–3.2, 6.2–6.5) 때문에 pH 6에서 두 겔이 각각 음·양전하를 띤다고 설명합니다. <span class="src">Lee 2026 (AFM), p.3</span> 그렇다면 생체의 pH 7.4에서는 키토산의 양전하가 줄어 n형 쪽의 선택성이 약해질 수 있다는 질문이 남습니다 <span class="tag tag-interp">해석</span>. 같은 글의 이식 실험은 5일 이식 뒤 <strong>꺼내어</strong> 측정한 것이었습니다(Day 33–34). <span class="src">Lee 2026 (AFM), p.6</span></p>
-<p>이제 조건표입니다. 각 칸은 "그 조건에서 유리/불리"이며, 일반 이온겔과의 비교입니다.</p>
+<div class="quiz" data-day="d24" data-set="3-check"></div>
+<div class="stop-point">
+<p>여기까지: 그림 3의 0.5 M 곡선에서 10 mM 1/50, 150 mM 1/3.6을 <span class="math inline">\(c_s^2/X\)</span>와 정확한 식으로 다시 계산하고, 염이 진해질 때 <span class="math inline">\(\delta\)</span>는 조금(1.00 → 0.86)만 줄지만 역방향 바닥 전류를 나르는 공이온이 약 208배가 된다는 것을 말할 수 있다. 다음: pH와 조건표, 그리고 그래서 "반드시" 유리한가.</p>
+</div>
+<p><span id="s-ph"></span>Lee 2026 (AFM)의 접합도 10 mM KCl, pH 6에서 측정했고, 저자들은 히알루론산과 키토산의 pKa(각각 약 3.0–3.2, 6.2–6.5) 때문에 pH 6에서 두 겔이 각각 음·양전하를 띤다고 설명합니다. <span class="src">Lee 2026 (AFM), p.3</span> 키토산의 아민기는 pH가 pKa보다 낮을 때 대부분 양성자를 받아 양전하를 띠고, pH가 pKa보다 높아지면 그 몫이 줄어듭니다. 그렇다면 생체의 pH 7.4에서는 키토산의 양전하(곧 고정 전하 <span class="math inline">\(X\)</span>)가 줄어 n형 쪽의 선택성이 약해질 수 있다는 질문이 남습니다 <span class="tag tag-interp">해석</span>. 같은 글의 이식 실험은 5일 이식 뒤 <strong>꺼내어</strong> 측정한 것이었습니다(Day 33–34). <span class="src">Lee 2026 (AFM), p.6</span></p>
+<p><span id="s-condition-table"></span>이제 조건표입니다. 각 칸은 "그 조건에서 유리/불리"이며, 일반 이온겔과의 비교입니다.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>항목</th>
@@ -982,7 +1013,7 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 <td>화학 손잡이</td>
 <td>고정 전하 밀도·짝이온·결합기를 따로 설계</td>
 <td>이온겔도 이온액체 종류·cation–π 등 손잡이가 많다</td>
-<td>Day 38</td>
+<td><a href="../days/d22.html#ch-ion-polymer">Day 38</a></td>
 </tr>
 <tr class="even">
 <td>생체 조건</td>
@@ -998,9 +1029,9 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 </tr>
 </tbody>
 </table>
-<p>Zhu 리뷰도 폴리전해질이 누출과 증발을 근본적으로 없애는 대신 사슬 운동에 기대는 <strong>낮은 이온전도도</strong>가 주요한 대가라고 씁니다. <span class="src">Zhu 2025, p.10</span> 이온겔에 대해서는 넓은 온도 범위·넓은 전기화학 창과 함께 이온액체 누출·비용·생체적합성 불확실을 장단점으로 듭니다. <span class="src">Zhu 2025, p.9</span></p>
-<section id="이점을-실험으로-보이려면" class="level4">
-<h4 class="anchored" data-anchor-id="이점을-실험으로-보이려면">3-1. 이점을 실험으로 보이려면</h4>
+<p>Zhu 리뷰도 폴리전해질이 누출과 증발을 근본적으로 없애는 대신 사슬 운동에 기대는 <strong>낮은 이온전도도</strong>가 주요한 대가라고 씁니다. <span class="src">Zhu 2025, p.10</span> 이온겔에 대해서는 넓은 온도 범위·넓은 전기화학 창과 함께 이온액체 누출·비용·생체적합성 불확실을 장단점으로 듭니다. <span class="src">Zhu 2025, p.9</span> 전도도가 낮다는 것이 무엇을 바꾸고 무엇을 바꾸지 않는지는 Day 39에서 나눴습니다: 읽기 전류·전력·신호 전달은 바꾸지만, 기억 시간·비선형은 직접 정하지 않습니다(<a href="../days/d23.html#s-sets-table">Day 39 2구간 표</a>).</p>
+<section id="s-experiments" class="level4">
+<h4 class="anchored" data-anchor-id="s-experiments">3-1. 이점을 실험으로 보이려면</h4>
 <p>"유리하다"는 말은 실험 하나와 대조군 하나로 바꿔 둬야 검증할 수 있습니다. 주장마다 이점이 맞다면 보일 숫자를 함께 적습니다.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1050,16 +1081,18 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 </tr>
 </tbody>
 </table>
-<p><strong>막 전위의 숫자.</strong> 이상적으로 막 전위는 <span class="math inline">\(E = (2t_+ - 1)\,(kT/e)\ln(c_1/c_2)\)</span>입니다(<span class="math inline">\(c_1\)</span>, <span class="math inline">\(c_2\)</span> 두 용액의 농도). <span class="math inline">\(t_+ = 1\)</span>이면 <span class="math inline">\(25.7 \times \ln 10 = 25.7 \times 2.303 \approx 59\)</span> mV, KCl처럼 <span class="math inline">\(t_+ = 0.49\)</span>이면 <span class="math inline">\((2 \times 0.49 - 1) \times 59 \approx -1\)</span> mV로 거의 0입니다. 양이온만 지나는 막에서는 묽은 쪽에서 진한 쪽으로 퍼지려는 K⁺만 움직이고 Cl⁻는 따라가지 못하므로 전하가 갈려 전압이 생기고, 두 이온이 비슷하게 움직이면 서로 상쇄됩니다. 실제로는 농도 대신 활동도를 쓰고, 고정 전하 겔도 진한 쪽(100 mM)에서는 공이온이 조금 들어와(그림 3) 59 mV보다 작게 나옵니다. 측정값 ÷ 이상값이 이온교환막 분야에서 쓰는 "겉보기 선택도"입니다 [폴더 밖: 이온교환막 문헌의 일반 방법, 원문 대조 안 함].</p>
-<p><strong>그래서 "반드시"인가.</strong> 아닙니다. <span class="tag tag-interp">해석</span> 폴리전해질·이종접합의 고유한 몫은 <strong>재료 자체의 고정 전하가 주는 비대칭(정류)과 고갈·회복의 기억이 한 접합에 함께 있다는 것</strong>, 그리고 <strong>누출이 없다는 것</strong>입니다. 그러나 (a) 전도도와 속도가 중요한 기능(신호 전달, 빠른 응답)에서는 불리하고, (b) 진한 염·생리 pH에서는 이점의 크기 자체가 줄 수 있으며, (c) Day 39에서 본 대로 정류·기억이 계산 성능으로 이어지는지는 따로 재야 합니다. "어떤 기능, 어떤 환경에서"를 붙여야 답이 됩니다.</p>
+<p><span id="s-membrane-potential"></span><strong>막 전위의 숫자.</strong> 이상적으로 막 전위는 <span class="math inline">\(E = (2t_+ - 1)\,(k_BT/e)\ln(c_1/c_2)\)</span>입니다(<span class="math inline">\(c_1\)</span>, <span class="math inline">\(c_2\)</span> 두 용액의 농도). <span class="math inline">\(t_+ = 1\)</span>이면 <span class="math inline">\(25.7 \times \ln 10 = 25.7 \times 2.303 \approx 59\)</span> mV, KCl처럼 <span class="math inline">\(t_+ = 0.49\)</span>이면 <span class="math inline">\((2 \times 0.49 - 1) \times 59 \approx -1\)</span> mV로 거의 0입니다. 양이온만 지나는 막에서는 묽은 쪽에서 진한 쪽으로 퍼지려는 K⁺만 움직이고 Cl⁻는 따라가지 못하므로 전하가 갈려 전압이 생기고, 두 이온이 비슷하게 움직이면 서로 상쇄됩니다. 실제로는 농도 대신 활동도를 쓰고, 고정 전하 겔도 진한 쪽(100 mM)에서는 공이온이 조금 들어와(그림 3) 59 mV보다 작게 나옵니다. 측정값 ÷ 이상값이 이온교환막 분야에서 쓰는 "겉보기 선택도"입니다 <span class="prov">폴더 밖: 이온교환막 문헌의 일반 방법, 원문 대조 안 함</span>.</p>
+<p><span id="s-not-always"></span><strong>그래서 "반드시"인가.</strong> 아닙니다. <span class="tag tag-interp">해석</span> 폴리전해질·이종접합의 고유한 몫은 <strong>재료 자체의 고정 전하가 주는 비대칭(정류)과 고갈·회복의 기억이 한 접합에 함께 있다는 것</strong>, 그리고 <strong>누출이 없다는 것</strong>입니다. 그러나 (a) 전도도와 속도가 중요한 기능(신호 전달, 빠른 응답)에서는 불리하고, (b) 진한 염·생리 pH에서는 이점의 크기 자체가 줄 수 있으며, (c) Day 39에서 본 대로 정류·기억이 계산 성능으로 이어지는지는 따로 재야 합니다(<a href="../days/d23.html#s-bounded">Day 39 4구간: 최적점</a>). "어떤 기능, 어떤 환경에서"를 붙여야 답이 됩니다.</p>
 <div class="think">
 <p>내가 만든 polyelectrolyte heterojunction의 고정 전하 농도(대략)와 측정 염 농도를 그림 3에 놓아 보세요. 공이온 배제가 몇 배인가요? 같은 소자를 150 mM에서 쟀다면 정류비가 어떻게 될지 예측하고, 그 예측을 확인할 가장 간단한 실험을 한 줄로 적어 보세요.</p>
 </div>
-<div class="quiz" data-day="d24" data-set="3-check"></div>
+<div class="stop-point">
+<p>여기까지: 조건표로 폴리전해질·이종접합이 유리한 조건(누출 없음, 재료 정류, 고갈 기억)과 불리한 조건(낮은 전도도, 염·pH 의존, 흩어진 정류비)을 나누고, 막 전위(이상 59 mV vs 중성 겔 약 −1 mV)처럼 이점을 대조군과 짝지은 실험으로 바꿀 수 있다. 다음: 정류·고갈·다중 시간상수를 계산의 부품 이름으로.</p>
+</div>
 <div class="keypoints">
 <ul>
 <li>Donnan 퍼텐셜이 <span class="math inline">\(c_+c_- = c_s^2\)</span>를 만들고, 배제 ≈ <span class="math inline">\(X/c_s\)</span>. 0.5 M 겔, 10 mM → 1/50(−101 mV), 150 mM → 1/3.6(−33 mV)(코드 계산).</li>
-<li>염이 진해지면 접합의 <span class="math inline">\(\Delta t\)</span>는 조금(1.00 → 0.86) 줄지만, 역방향 바닥 전류를 나르는 겔 속 공이온은 약 200배 → 정류비가 준다 <span class="tag tag-interp">해석</span>. 실험실 정류비를 몸속에 그대로 옮길 수 없다.</li>
+<li>염이 진해지면 접합의 <span class="math inline">\(\delta\)</span>는 조금(1.00 → 0.86) 줄지만, 역방향 바닥 전류를 나르는 겔 속 공이온은 약 208배 → 정류비가 준다 <span class="tag tag-interp">해석</span>. 실험실 정류비를 몸속에 그대로 옮길 수 없다.</li>
 <li>이점을 보이려면 대조군과 짝지은 실험: 막 전위(이상 59 mV vs 중성 겔 약 0), 같은 부호 접합 대조, 염 농도 계열.</li>
 <li>이점: 누출 없음·단일 상, 재료 자체의 정류 + 고갈·회복 기억, 따로 설계할 수 있는 고정 전하.</li>
 <li>대가: 낮은 전도도, 염·pH 의존, 흩어진 정류비, 이력에 따라 바뀌는 시간상수. 그러므로 "반드시 유리"는 아니다 <span class="tag tag-interp">해석</span>.</li>
@@ -1076,19 +1109,21 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 <section id="계산-primitive-이온-물리-계산-기능-대응" class="level4">
 <h4 class="anchored" data-anchor-id="계산-primitive-이온-물리-계산-기능-대응">계산 primitive: 이온 물리 → 계산 기능 대응</h4>
 <p><strong>① 왜 필요한가.</strong> "이 소자는 뉴로모픽에 쓸 수 있다"는 말은 너무 넓습니다. 소자의 물리가 <strong>계산의 어떤 부품</strong>을 대신하는지 이름을 붙여야, 그 부품이 정말 필요한 자리인지, 전자 회로로 더 싸게 만들 수 없는지를 물을 수 있습니다.</p>
-<p><strong>② 무엇인가.</strong> 큰 계산을 쪼개면 몇 가지 작은 부품이 반복됩니다. Day 3–4·Day 11–12·Day 13–14에서 본 신경망과 RC를 떠올리면:</p>
+<p><span id="s-primitive-list"></span><strong>② 무엇인가.</strong> 큰 계산을 쪼개면 몇 가지 작은 부품이 반복됩니다. 앞에서 본 신경망과 RC를 떠올리면:</p>
 <ul>
-<li><strong>곱하기(가중치)와 더하기(합산)</strong>: 입력에 가중치를 곱해 더하는 일(<a href="../days/d02a.html#b-weight">Day 3 기초: 가중치</a>). crossbar에서는 옴의 법칙과 전류의 합이 했습니다.</li>
+<li><strong>곱하기(가중치)와 더하기(합산)</strong>: 입력에 가중치를 곱해 더하는 일(<a href="../days/d02a.html#b-weight">Day 3 기초: 가중치</a>). crossbar(가로·세로 전선이 교차하는 격자)에서는 옴의 법칙과 전류의 합이 했습니다(<a href="../days/d04a.html#b-conductance">Day 7 기초</a>).</li>
 <li><strong>비선형 함수</strong>: 합한 값을 휘게 하는 함수(정류, 포화, 문턱)(<a href="../days/d10a.html#b-nonlinearity">Day 16 기초</a>).</li>
-<li><strong>누설 적분(기억)</strong>: 입력을 쌓되 서서히 잊는 것(<a href="../days/d09.html#b-fading-memory">Day 15 기초: fading memory</a>).</li>
-<li><strong>곱셈적 상호작용</strong>: 지금 입력의 효과가 지금 상태에 따라 달라지는 것(입력 × 상태).</li>
-<li><strong>다중 시간척도</strong>: 여러 지연의 정보를 함께 들고 있는 것.</li>
+<li><strong>누설 적분(기억)</strong>: 입력을 쌓되 서서히 잊는 것(<a href="../days/d09.html#b-fading-memory">Day 15 기초: fading memory</a>). Day 15·Day 22–23의 누설 노드 <span class="math inline">\(x_{\text{새}} = d\,x_{\text{이전}} + (1-d)\,u\)</span>(<span class="math inline">\(d\)</span>: 한 간격 동안 남는 비율)가 가장 단순한 예입니다.</li>
+<li><strong>곱셈적 상호작용</strong>: 지금 입력의 효과가 지금 상태에 따라 달라지는 것(입력 × 상태). 예: 같은 +1 V가 상태가 클 때는 큰 출력을, 작을 때는 작은 출력을 낸다.</li>
+<li><strong>다중 시간척도</strong>: 시간상수가 서로 다른 상태를 여럿 두어, 여러 지연(1초 전 입력, 1분 전 입력)의 정보를 함께 들고 있는 것.</li>
 </ul>
-<p>이런 작은 부품을 <strong>계산 primitive</strong>라 부릅니다. Zhu 리뷰는 연성 이온 소자의 고유한 이완 성질을 시간 적분이나 단기 가소성 같은 계산 primitive에 대응시켜 기본 기능을 재료 수준에 넣을 수 있다고 씁니다. <span class="src">Zhu 2025, p.7</span> Roadmap은 이온 게이트 트랜지스터·이종접합 이온 전도체에서 이온 축적이 <strong>적분</strong>을, 역확산이 <strong>누설</strong>을 흉내 낸다고 정리합니다. <span class="src">Roadmap 2026, p.8108</span> 뉴런의 동역학이 자극의 시간 적분, 누설, 문턱에서의 발화, 재설정으로 흔히 묘사된다는 것도 같은 문서에 있습니다. <span class="src">Roadmap 2026, p.8107</span></p>
-<p><strong>③ 작은 숫자로: 같은 +1 V, 다른 출력.</strong> Day 35–36의 접합 장난감 모형(상태 하나, <span class="math inline">\(\tau\)</span> = 2 s)에 ±1 V 펄스열(폭 0.5 s, 간격 0.5 s)을 넣어 봤습니다(그림 4, 코드 계산).</p>
+<p>이런 작은 부품을 <strong>계산 primitive</strong>라 부릅니다. Zhu 리뷰는 연성 이온 소자의 고유한 이완 성질을 시간 적분이나 단기 가소성 같은 계산 primitive에 대응시켜 기본 기능을 재료 수준에 넣을 수 있다고 씁니다. <span class="src">Zhu 2025, p.7</span> Roadmap은 뉴런의 동역학이 자극의 시간 적분(integration), 누설(leak), 문턱에서의 발화(firing), 리셋(reset)으로 흔히 묘사된다고 쓰고 <span class="src">Roadmap 2026, p.8107</span>(Day 7–8의 LIF 뉴런이 이 네 항이었습니다, <a href="../days/d04b.html#s-lif-circuit">Day 8 3-1: 적분·누설·발화·리셋</a>), 이온 게이트 트랜지스터·이종접합 이온 전도체에서 이온 축적이 <strong>적분</strong>을, 역확산이 <strong>누설</strong>을 흉내 낸다고 정리합니다. <span class="src">Roadmap 2026, p.8108</span></p>
+<p><span id="s-toy-pulses"></span><strong>③ 작은 숫자로: 같은 +1 V, 다른 출력.</strong> Day 35–36 3-1의 장난감 접합 모형을 그대로 씁니다(<a href="../days/d20a.html#s-toy-model">Day 35 3-1</a>). 규칙을 다시 적으면: 상태는 접합 농도 <span class="math inline">\(c\)</span> 하나(전압 0일 때를 1로 둔 상대값)이고, <span class="math inline">\(c\)</span>가 따라가려는 목표값은 <span class="math inline">\(c_{\text{정상}}(V) = e^{\alpha V}\)</span>(<span class="math inline">\(\alpha\)</span> = 1.5 /V)입니다. <span class="math inline">\(c\)</span>는 시간상수 <span class="math inline">\(\tau\)</span>로 목표값을 따라가며(짧은 시간 <span class="math inline">\(\Delta t\)</span>마다 <span class="math inline">\(c_{\text{새}} = d\,c_{\text{이전}} + (1-d)\,c_{\text{정상}}(V)\)</span>, 남는 비율 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>), 전류는 <span class="math inline">\(I = cV\)</span>입니다. 이번에는 <span class="math inline">\(\tau\)</span> = 2 s로 두고, ±1 V 펄스(폭 0.5 s, 펄스 사이 0 V 0.5 s) 12개를 넣어 각 펄스 끝의 전류를 읽습니다(코드 계산). Day 35–36처럼 사인파로 훑는 대신 펄스를 넣는 것은 "같은 입력이 다른 출력을 낸다"를 숫자로 보이기 위해서입니다.</p>
+<p>그림 4를 먼저 봅니다. 위 줄이 입력 전압의 순서(+1, +1, +1, −1, +1, −1, −1, −1, +1, +1, −1, +1)이고, 아래 초록 선이 출력 전류, 점과 숫자가 각 펄스 끝의 출력입니다. 볼 것은 빨간 점(+1 V)의 높이가 모두 다르다는 것과, 파란 점(−1 V)이 생각보다 크다는 것입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d24/fig3-history-response.svg" alt="±1 V 펄스열과 장난감 접합 모형(τ=2 s)의 출력: 같은 +1 V에 대한 출력이 1.73–2.52로 앞의 입력에 따라 달라지고, 연속된 −1 V의 출력은 −1.75에서 −0.93으로 점점 작아진다. 기억 없는 정류기라면 +1 V는 늘 4.48, −1 V는 늘 −0.22" class="figure-img"><figcaption><b>그림 4.</b> 같은 +1 V라도 앞의 입력에 따라 다른 출력(Day 35–36과 같은 꼴의 장난감 접합 모형, $\tau$ = 2 s, 펄스 폭·간격 0.5 s, 코드 계산). 정류(비선형)와 고갈·회복(기억)이 곱해져 이력 의존 출력을 만든다. 실제 소자의 측정이 아니다. (Claude가 계산해 그림)</figcaption></figure>
 <div class="stepper">
 <div class="step">
-<p><strong>단계 1 — 기억 없는 정류기라면.</strong> +1 V에는 늘 4.48, −1 V에는 늘 −0.22를 냅니다. 입력이 같으면 출력도 같습니다(비선형이지만 기억이 없음).</p>
+<p><strong>단계 1 — 기억 없는 정류기라면.</strong> <span class="math inline">\(c\)</span>가 매 순간 목표값과 같다면(<span class="math inline">\(\tau\)</span>가 0에 가까우면) 출력은 <span class="math inline">\(I = e^{\alpha V}\,V\)</span>뿐입니다. +1 V면 <span class="math inline">\(e^{1.5} \times 1 \approx\)</span> 4.48, −1 V면 <span class="math inline">\(e^{-1.5} \times (-1) \approx\)</span> −0.22. 입력이 같으면 출력도 늘 같습니다(비선형이지만 기억이 없음).</p>
 </div>
 <div class="step">
 <p><strong>단계 2 — 접합 모형에서는.</strong> 같은 +1 V의 출력이 1.73에서 2.52까지 흩어집니다. +1 V가 이어지면 커지고(1.77 → 2.24 → 2.52), −1 V가 세 번 이어진 바로 뒤에는 1.73으로 가장 작습니다. −1 V 한 번 뒤(다섯째 펄스, 2.23)에는 그 앞 +1 V 세 번의 흔적이 아직 남아 크게 나옵니다. 출력이 지금 입력과 지난 입력들에 함께 달린 것, 곧 입력 × 이력의 <strong>곱셈적 상호작용</strong>입니다.</p>
@@ -1101,19 +1136,21 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 </div>
 </div>
 <p><strong>④ 이름과 정확한 뜻.</strong> 계산 primitive = 더 큰 계산을 이루는 가장 작은 기능 부품(곱·합, 비선형, 누설 적분, 곱셈적 상호작용, 다중 시간척도, 문턱 사건 등). 이온 물리 → primitive 대응은 "이 물리가 이 부품의 역할을 할 수 있다"는 뜻이지, "이 부품이 계산 성능을 높인다"는 증명이 아닙니다.</p>
-<p><strong>⑤ 반드시 같이 물을 것.</strong> 같은 primitive를 <strong>전자 회로로</strong> 만들 수 있나? 누설 적분은 저항–커패시터 회로가(<a href="../days/d16b.html#b-rc-circuit">Day 29 기초</a>), 정류는 다이오드가 합니다. 이온 소자가 고유한 몫을 가지려면 (a) 감지와 같은 자리에서(변환 없이), (b) 화학·생체 매질과 직접 닿으며, (c) 여러 시간상수를 한 소자에 넣는 것처럼 회로로 하면 부품이 많이 드는 일을 해야 합니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-circuit-alternative"></span><strong>⑤ 반드시 같이 물을 것.</strong> 같은 primitive를 <strong>전자 회로로</strong> 만들 수 있나? 누설 적분은 저항–커패시터 회로가(<a href="../days/d16b.html#b-rc-circuit">Day 29 기초</a>), 정류는 다이오드가 합니다. 이온 소자가 고유한 몫을 가지려면 (a) 감지와 같은 자리에서(변환 없이), (b) 화학·생체 매질과 직접 닿으며, (c) 여러 시간상수를 한 소자에 넣는 것처럼 회로로 하면 부품이 많이 드는 일을 해야 합니다. <span class="tag tag-interp">해석</span></p>
 <p><strong>⑥ 짧은 확인.</strong> "기억 없는 정류기"와 "접합 모형"의 차이를 primitive 이름으로 말하면? (답: 둘 다 비선형(정류)이지만, 접합 모형에는 누설 적분과 곱셈적 상호작용(이력 의존)이 더 있다.)</p>
 </section>
 </div>
-<figure class="fig figure"><img src="../assets/img/d24/fig3-history-response.svg" alt="±1 V 펄스열과 장난감 접합 모형(τ=2 s)의 출력: 같은 +1 V에 대한 출력이 1.73–2.52로 앞의 입력에 따라 달라지고, 연속된 −1 V의 출력은 −1.75에서 −0.93으로 점점 작아진다. 기억 없는 정류기라면 +1 V는 늘 4.48, −1 V는 늘 −0.22" class="figure-img"><figcaption><b>그림 4.</b> 같은 +1 V라도 앞의 입력에 따라 다른 출력(Day 35–36과 같은 꼴의 장난감 접합 모형, $\tau$ = 2 s, 펄스 폭·간격 0.5 s, 코드 계산). 정류(비선형)와 고갈·회복(기억)이 곱해져 이력 의존 출력을 만든다. 실제 소자의 측정이 아니다. (Claude가 계산해 그림)</figcaption></figure>
-<p><strong>이종접합의 세 성질 → primitive.</strong></p>
+<p><span id="s-primitive-props"></span><strong>이종접합의 세 성질 → primitive.</strong></p>
 <ul>
 <li><strong>정류</strong> → 부호 비대칭 비선형. 신경망의 반파 정류형 활성화(입력이 음이면 작게)와 모양이 닮았지만, 위 단계 3처럼 시간척도에 따라 세기가 바뀝니다. <span class="tag tag-interp">해석</span></li>
-<li><strong>고갈과 회복</strong> → 이력 의존 전도도(입력 × 상태), 그리고 고갈이 일정 이상 진행되면 전류가 급히 줄어드는 문턱형 응답. Pandey 2026은 휘발성이고 비선형이 강한 고리를 문턱·과도 응답·시간 적분 같은 뉴런형 기능과 reservoir computing에 대응시킵니다(Day 35–36). <span class="src">Pandey 2026, p.7</span></li>
-<li><strong>다중 시간상수</strong>(극성별, 빠른·느린) → 다중 시간척도 기억. Day 22–23에서 본 대로 시간상수가 서로 다른 노드들이 있어야 기억이 쌓입니다(<a href="../days/d13b.html#b-timescale-match">Day 23 기초: 시간척도의 정합</a>). 한 접합 안의 여러 시간상수가 그 역할을 할 수 있는지는, 각 모드가 <strong>따로 읽히는가</strong>(Day 24–25의 독립 방향 수)로 판정해야 합니다. <span class="tag tag-hypo">가설</span></li>
+<li><strong>고갈과 회복</strong> → 이력 의존 전도도(입력 × 상태), 그리고 고갈이 일정 이상 진행되면 전류가 급히 줄어드는 문턱형 응답. Pandey 2026은 휘발성이고 비선형이 강한 고리를 문턱·과도 응답·시간 적분 같은 뉴런형 기능과 reservoir computing에 대응시킵니다(<a href="../days/d20b.html#s-pandey-loops">Day 36 5구간</a>). <span class="src">Pandey 2026, p.7</span></li>
+<li><strong>다중 시간상수</strong>(극성별, 빠른·느린) → 다중 시간척도 기억. Day 22–23에서 본 대로 시간상수가 서로 다른 노드들이 있어야 여러 지연의 기억이 쌓입니다(<a href="../days/d13b.html#b-timescale-match">Day 23 기초: 시간척도의 정합</a>). 한 접합 안의 여러 시간상수가 그 역할을 할 수 있는지는, 각 모드가 <strong>따로 읽히는가</strong>(Day 24–25의 독립 방향 수, <a href="../days/d14a.html#b-kernel-quality">Day 24 기초</a>)로 판정해야 합니다. <span class="tag tag-hypo">가설</span></li>
 </ul>
 <div class="quiz" data-day="d24" data-set="4-check"></div>
 <div class="quiz" data-day="d24" data-set="4-end"></div>
+<div class="stop-point">
+<p>여기까지: 계산 primitive 다섯 가지를 앞 Day의 예와 함께 말하고, 그림 4에서 같은 +1 V가 1.73–2.52로 흩어지는 이유(곱셈적 상호작용)와 −1 V 출력이 −0.22보다 큰 이유(펄스가 τ보다 짧음)를 짚으며, 각 primitive를 전자 회로로도 만들 수 있는지 함께 물을 수 있다. 다음: Phase 4 전체를 한 표로.</p>
+</div>
 <div class="keypoints">
 <ul>
 <li>계산 primitive = 곱·합, 비선형, 누설 적분, 곱셈적 상호작용, 다중 시간척도, 문턱 사건. 이온 축적 = 적분, 역확산 = 누설 <span class="src">Roadmap 2026, p.8108</span>; 이완 → 시간 적분·단기 가소성 <span class="src">Zhu 2025, p.7</span>.</li>
@@ -1127,103 +1164,109 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 <div class="goal">
 <p>Day 33–40의 결론을 한 사슬로 잇고, 이온 물리 → 계산 primitive 대응표를 완성하며, 근거가 가장 약한 고리와 이 Phase에서 바뀐 가정을 Phase 종합 양식에 옮길 준비를 마친다.</p>
 </div>
-<p><strong>주장 사슬.</strong> 여섯 날의 결론을 한 줄씩 잇습니다.</p>
+<p><span id="s-claim-chain"></span><strong>주장 사슬.</strong> 여섯 Day의 결론을 한 줄씩 잇습니다. 줄마다 그 결론을 배운 곳을 붙였습니다. 기억나지 않는 줄은 링크로 돌아가 그 구간만 다시 보세요.</p>
 <ul>
-<li><strong>Day 33–34 (왜 이온인가)</strong>: 이온은 전자보다 확산계수가 약 <span class="math inline">\(10^{6}\)</span>배 작고, 쓰기 시간·상태 수·내구·집적에서 전자 메모리에 크게 진다. 대신 여러 종·화학 상태·연성 매질이라는, 전자에 없는 상태변수를 준다. 근거: 폴더 원문(Aluru Table 1 등) + 계산.</li>
-<li><strong>Day 35–36 (기억·비선형의 기원)</strong>: 기억과 비선형은 상태 <span class="math inline">\(x\)</span>가 쌓이고 새는 방식에서 나오고, EDL·농도 분극·도핑·나노유체가 각각 다른 <span class="math inline">\(x\)</span>와 시간척도를 준다. 근거: 폴더 원문 + 장난감 모형.</li>
-<li><strong>Day 37 (시간척도)</strong>: 시간은 <span class="math inline">\(L^2/D\)</span>, <span class="math inline">\(\lambda_D L/D\)</span>로 어림되고, 크기가 가장 넓은 손잡이다. 측정은 어림보다 복잡하다(크기 비의 제곱보다 크게 바뀐 두 예). 근거: 계산 + 폴더 측정.</li>
-<li><strong>Day 38 (화학구조)</strong>: 화학 하나가 느린 시간상수를 수 배–수십 배 바꾸지만, 교란변수 때문에 원인을 가른 연구는 드물고, 소자 응답 → 계산 기능의 정량 연결은 비어 있다. 근거: 폴더 원문.</li>
-<li><strong>Day 39 (전도도)</strong>: 전도도는 신호·전력·충전 속도를 정하지만 기억·비선형·다양성은 정하지 않고, 기억 과제에는 최적점이 있다. 질문을 "기능 → 서술자 → 손잡이"로 바꾼다. 근거: 계산 + Singh 2026.</li>
-<li><strong>Day 40 (접합 구조)</strong>: 폴리전해질·이종접합의 고유한 몫은 재료가 주는 정류 + 고갈 기억 + 누출 없음이지만, 염·pH·전도도에 따라 이점이 줄고 "반드시 유리"는 아니다. 근거: 폴더 원문 + Donnan 계산.</li>
+<li><strong>Day 33–34 (왜 이온인가)</strong>: 이온은 전자보다 확산계수가 약 <span class="math inline">\(10^{6}\)</span>배 작고, 쓰기 시간·상태 수·내구·집적에서 전자 메모리에 크게 진다. 대신 여러 종·화학 상태·연성 매질이라는, 전자에 없는 상태변수를 준다. 근거: 폴더 원문(Aluru Table 1 등) + 계산. (<a href="../days/d19a.html#ch-carriers">Day 33 1구간</a>, <a href="../days/d19b.html#ch-unique">Day 34 3구간</a>, <a href="../days/d19b.html#ch-where-ions-lose">Day 34 4구간</a>)</li>
+<li><strong>Day 35–36 (기억·비선형의 기원)</strong>: 기억과 비선형은 상태 <span class="math inline">\(x\)</span>가 쌓이고 새는 방식에서 나오고, EDL·농도 분극·도핑·나노유체가 각각 다른 <span class="math inline">\(x\)</span>와 시간척도를 준다. 근거: 폴더 원문 + 장난감 모형. (<a href="../days/d20a.html#ch-state-variable">Day 35 1구간</a>, <a href="../days/d20b.html#s-mechanism-table">Day 36 6-1 대응표</a>)</li>
+<li><strong>Day 37 (시간척도)</strong>: 시간은 <span class="math inline">\(L^2/D\)</span>, <span class="math inline">\(\lambda_D L/D\)</span>로 어림되고, 크기가 가장 넓은 손잡이다. 측정은 어림보다 복잡하다(크기 비의 제곱보다 크게 바뀐 두 예). 근거: 계산 + 폴더 측정. (<a href="../days/d21.html#b-diffusion-time">Day 37 기초: 확산 시간</a>, <a href="../days/d21.html#s-answer">Day 37 5-1</a>)</li>
+<li><strong>Day 38 (화학구조)</strong>: 화학 하나가 느린 시간상수를 수 배–수십 배 바꾸지만, 교란변수 때문에 원인을 가른 연구는 드물고, 소자 응답 → 계산 기능의 정량 연결은 비어 있다. 근거: 폴더 원문. (<a href="../days/d22.html#ch-path-map">Day 38 5구간 경로 지도</a>)</li>
+<li><strong>Day 39 (전도도)</strong>: 전도도는 신호·전력·충전 속도를 정하지만 기억·비선형·다양성은 정하지 않고, 기억 과제에는 최적점이 있다. 질문을 "기능 → 서술자 → 손잡이"로 바꾼다. 근거: 계산 + Singh 2026. (<a href="../days/d23.html#s-sets-table">Day 39 2구간</a>, <a href="../days/d23.html#s-optimum-steps">Day 39 4구간</a>, <a href="../days/d23.html#ch-reframe">Day 39 5구간</a>)</li>
+<li><strong>Day 40 (접합 구조)</strong>: 폴리전해질·이종접합의 고유한 몫은 재료가 주는 정류 + 고갈 기억 + 누출 없음이지만, 염·pH·전도도에 따라 이점이 줄고 "반드시 유리"는 아니다. 근거: 폴더 원문 + Donnan 계산. (<a href="#s-boundary-steps">1-1 수송수</a>, <a href="#s-donnan-steps">3구간 Donnan</a>)</li>
 </ul>
-<section id="이온-물리-계산-primitive-대응표" class="level4">
-<h4 class="anchored" data-anchor-id="이온-물리-계산-primitive-대응표">5-1. 이온 물리 → 계산 primitive 대응표</h4>
-<figure class="fig figure"><img src="../assets/img/d24/fig4-primitive-map.svg" alt="Phase 4 대응표: EDL 충전·방전 → 누설 적분 → fading memory·빠른 τ → RC 회로 → 약함; 접합 축적/고갈 → 정류 → 비선형 사상·문턱 → 다이오드 → 중간; 고갈+회복 시간 → 이력 의존 전도도 → 입력×상태 → memristor → 중간; 도핑·삽입 → 다중 시간척도 기억 → 여러 지연 → 여러 RC → 중간–강; 침전·착물화 → 비휘발 상태 → 가중치 저장 → 비휘발 메모리 → 중간; 공유 전해질 결합 → 노드 간 결합 → reservoir 내부 연결 → 배선 → 중간; 이온 종 선택성 → 다채널 화학 입력 → 센서+변환기 → 강" class="figure-img"><figcaption><b>그림 5.</b> Phase 4 종합 대응표(모식도). 맨 오른쪽 '이온만의 몫'은 Claude의 판단이다[해석]: 같은 기능을 전자 회로로 싸게 만들 수 있으면 약함, 화학·생체 매질과 직접 닿아야 하면 강함. 각 줄의 근거와 조건은 아래 표에 있다. (Claude가 그림)</figcaption></figure>
+<section id="s-map-table" class="level4">
+<h4 class="anchored" data-anchor-id="s-map-table">5-1. 이온 물리 → 계산 primitive 대응표</h4>
+<p>그림 5를 먼저 봅니다. 한 줄이 하나의 이온 물리이고, 왼쪽에서 오른쪽으로 "이온 물리 → 계산 primitive → RC·뉴로모픽에서의 쓰임 → 같은 일을 하는 전자 회로 → 이온만의 몫"을 읽습니다. 넷째 열의 memristor는 지나간 전압·전류에 따라 저항이 바뀌고 그 값을 기억하는 2단자 소자입니다(<a href="../days/d04a.html#b-conductance">Day 7 기초</a>). 맨 오른쪽 열은 Claude의 판단입니다. 그림 아래 표는 같은 줄마다 <strong>그 물리를 배운 곳</strong>과 근거·조건을 붙였습니다. 물리가 기억나지 않으면 '배운 곳' 링크로 돌아가세요. 여기서는 다시 설명하지 않습니다.</p>
+<figure class="fig figure"><img src="../assets/img/d24/fig4-primitive-map.svg" alt="Phase 4 대응표: EDL 충전·방전 → 누설 적분 → fading memory·빠른 τ → RC 회로 → 약함; 접합 축적/고갈 → 정류 → 비선형 사상·문턱 → 다이오드 → 중간; 고갈+회복 시간 → 이력 의존 전도도 → 입력×상태 → memristor → 중간; 도핑·삽입 → 다중 시간척도 기억 → 여러 지연 → 여러 RC → 중간–강; 침전·착물화 → 비휘발 상태 → 가중치 저장 → 비휘발 메모리 → 중간; 공유 전해질 결합 → 노드 간 결합 → reservoir 내부 연결 → 배선 → 중간; 이온 종 선택성 → 다채널 화학 입력 → 센서+변환기 → 강" class="figure-img"><figcaption><b>그림 5.</b> Phase 4 종합 대응표(모식도). 맨 오른쪽 '이온만의 몫'은 Claude의 판단이다[해석]: 같은 기능을 전자 회로로 싸게 만들 수 있으면 약함, 화학·생체 매질과 직접 닿아야 하면 강함. 각 줄을 배운 곳과 근거·조건은 아래 표에 있다. (Claude가 그림)</figcaption></figure>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>이온 물리</th>
+<th>배운 곳</th>
 <th>계산 primitive</th>
-<th>근거(폴더·앞날)</th>
+<th>근거(폴더)</th>
 <th>판정에 붙는 조건</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>EDL 충전·방전</td>
+<td><a href="../days/d20a.html#b-edl">Day 35 2구간</a>, <a href="../days/d21.html#b-edl-charging">Day 37 3구간: 충전 시간</a></td>
 <td>누설 적분(빠른 fading memory)</td>
-<td><span class="src">Lee 2024 (AFM), p.3</span>; Day 35–36·Day 37</td>
-<td>저항–커패시터 회로로 같은 일을 함(Day 28–29). 이온 고유성 약함</td>
+<td><span class="src">Lee 2024 (AFM), p.3</span></td>
+<td>저항–커패시터 회로로 같은 일을 함(<a href="../days/d16b.html#b-rc-circuit">Day 29 기초</a>). 이온 고유성 약함</td>
 </tr>
 <tr class="even">
 <td>접합 축적/고갈</td>
+<td><a href="../days/d20a.html#s-junction-steps">Day 35 3구간: 접합 단계</a>, <a href="#s-pn-steps">이번 1구간</a>, <a href="#s-boundary-steps">1-1 수송수 차</a></td>
 <td>부호 비대칭 비선형(정류), 문턱</td>
 <td><span class="src">Wang 2025 (Chem. Soc. Rev.), p.306</span> <span class="src">Lee 2026 (AFM), p.4</span></td>
-<td>정류비가 소자·염·시간척도에 따라 2.5배–10배 이상</td>
+<td>정류비가 소자·염·시간척도에 따라 2.5배–10배 이상(2·3구간)</td>
 </tr>
 <tr class="odd">
 <td>고갈 + 회복 시간</td>
+<td><a href="../days/d20a.html#s-polarization-time">Day 35 3구간 단계 4</a>, <a href="../days/d21.html#b-diffusion-time">Day 37 기초: <span class="math inline">\(L^2/D\)</span></a></td>
 <td>이력 의존 전도도(입력 × 상태)</td>
 <td><span class="src">Zhang 2024 (ACS Nano), p.15030</span>; 그림 4</td>
-<td>쓸모는 과제 시간척도와의 정합에 달림(Day 22–23)</td>
+<td>쓸모는 과제 시간척도와의 정합에 달림(<a href="../days/d13b.html#b-timescale-match">Day 23 기초</a>, <a href="../days/d23.html#s-optimum-steps">Day 39 4구간 최적점</a>)</td>
 </tr>
 <tr class="even">
 <td>도핑·삽입·느린 결합</td>
+<td><a href="../days/d20b.html#b-ec-doping">Day 36 4구간</a>, <a href="../days/d22.html#ch-ion-polymer">Day 38 2구간</a></td>
 <td>다중 시간척도 기억</td>
 <td><span class="src">Lee 2025 (structure), p.4</span>; Day 38 그림 4</td>
-<td>각 모드가 따로 읽혀야 다양성(Day 24–25)</td>
+<td>각 모드가 따로 읽혀야 다양성(<a href="../days/d14a.html#b-kernel-quality">Day 24 기초</a>)</td>
 </tr>
 <tr class="odd">
 <td>침전·착물화</td>
+<td><a href="../days/d19b.html#s-chem-state">Day 34 3-3</a>, <a href="../days/d20b.html#s-precipitation">Day 36 4구간: 침전</a></td>
 <td>비휘발 상태, 문턱 사건</td>
 <td><span class="src">Han 2023, p.3</span> <span class="src">Li 2026 (IPC fiber), p.6</span></td>
 <td>가역성·재현성</td>
 </tr>
 <tr class="even">
 <td>공유 전해질의 결합</td>
+<td>Day 33–39에서 따로 다루지 않음(배열은 <a href="../days/d26a.html#ch-array-integration">Day 43 4구간</a>)</td>
 <td>노드 간 결합·합산</td>
-<td>Day 33–34·Day 43–44(배열)</td>
+<td>—</td>
 <td>결합의 세기·범위 제어 <span class="tag tag-unverified">미확인</span></td>
 </tr>
 <tr class="odd">
 <td>이온 종 선택성</td>
+<td><a href="../days/d19b.html#s-species">Day 34 3-1</a>, <a href="../days/d20b.html#b-nanofluidic">Day 36 5구간</a></td>
 <td>다채널 화학 입력</td>
-<td><span class="src">Jiao 2026, p.4</span>; Day 33–34</td>
+<td><span class="src">Jiao 2026, p.4</span></td>
 <td>종별 전류 측정법이 공백 <span class="src">Aluru 2026, p.595</span></td>
 </tr>
 </tbody>
 </table>
-<p>이 표의 마지막 열이 Phase 5(Day 41–46)에서 "어느 응용에서 이 조건이 성립하나"로 이어집니다.</p>
+<p>Day 39의 이온전도도는 이 표의 한 줄이 아니라 모든 줄에 붙는 <strong>조건</strong>입니다. 전도도는 읽기 전류·전력·충전 속도를 정하고 기억 시간·비선형은 정하지 않습니다(<a href="../days/d23.html#s-sets-table">Day 39 2구간 표</a>). 이 표의 마지막 열이 Phase 5(Day 41–46)에서 "어느 응용에서 이 조건이 성립하나"로 이어집니다.</p>
 </section>
-<section id="한-단락-답의-형식과-가장-약한-고리" class="level4">
-<h4 class="anchored" data-anchor-id="한-단락-답의-형식과-가장-약한-고리">5-2. 한 단락 답의 형식과 가장 약한 고리</h4>
+<section id="s-weakest" class="level4">
+<h4 class="anchored" data-anchor-id="s-weakest">5-2. 한 단락 답의 형식과 가장 약한 고리</h4>
 <p>Phase 종합 양식의 첫 칸("이 Phase의 질문들에 대한 한 단락 답")은 위 사슬을 하나의 주장으로 엮는 자리입니다. 모범 문장은 주지 않고 형식만 제안합니다. 첫 문장은 <strong>이온 물리가 계산에 주는 것</strong>(어떤 상태변수, 어떤 primitive), 둘째 문장은 <strong>그것을 정하는 손잡이와 그 크기</strong>(크기 <span class="math inline">\(L\)</span>, 확산계수 <span class="math inline">\(D\)</span>, 결합·고정 전하, 그리고 각각 몇 배의 효과), 셋째 문장은 <strong>아직 비어 있는 연결</strong>(소자 응답 → 계산 지표)과 내 연구가 그 빈칸에 어떻게 닿는지입니다. "항상", "우수한"이 조건 없이 들어가지 않게 하고, 적어도 하나에는 <span class="tag tag-hypo">가설</span>이나 <span class="tag tag-unverified">미확인</span>이 붙어야 정직합니다.</p>
-<p><strong>가장 약한 고리.</strong> 위 사슬의 근거 열을 보면 Day 35–40의 계산 연결(장난감 모형, Donnan 계산, 최적점 계산)은 모두 <strong>상태 하나짜리 단순 모형</strong>입니다. 실제 이온 소자는 시간상수가 여럿이고(Day 35–36), 시간상수가 자극 이력에 따라 바뀌며(Day 38), 정류비도 시간척도에 따라 바뀝니다(오늘 4구간). <span class="tag tag-interp">해석</span> 그리고 Day 38에서 본 대로 "화학 → 소자 응답"까지는 폴더 근거가 있지만 "소자 응답 → 계산 기능"은 폴더의 어느 논문도 정량으로 잇지 않았습니다. 내 답에서 다른 고리를 골라도 됩니다. 고른 고리마다 "무엇을 측정하면 이 고리가 <span class="tag tag-fact">확인</span>으로 바뀌는가"를 한 줄 적으세요.</p>
+<p><strong>가장 약한 고리.</strong> 위 사슬의 근거 열을 보면 Day 35–40의 계산 연결(장난감 모형, Donnan 계산, 최적점 계산)은 모두 <strong>상태 하나짜리 단순 모형</strong>입니다. 실제 이온 소자는 시간상수가 여럿이고(Day 35–36), 시간상수가 자극 이력에 따라 바뀌며(Day 38), 정류비도 시간척도에 따라 바뀝니다(이번 4구간). <span class="tag tag-interp">해석</span> 그리고 Day 38에서 본 대로 "화학 → 소자 응답"까지는 폴더 근거가 있지만 "소자 응답 → 계산 기능"은 폴더의 어느 논문도 정량으로 잇지 않았습니다. 내 답에서 다른 고리를 골라도 됩니다. 고른 고리마다 "무엇을 측정하면 이 고리가 <span class="tag tag-fact">확인</span>으로 바뀌는가"를 한 줄 적으세요.</p>
 </section>
-<section id="이-phase에서-바뀌었을-가정-회고-안내" class="level4">
-<h4 class="anchored" data-anchor-id="이-phase에서-바뀌었을-가정-회고-안내">5-3. 이 Phase에서 바뀌었을 가정 — 회고 안내</h4>
+<section id="s-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="s-assumptions">5-3. 이 Phase에서 바뀌었을 가정 — 회고 안내</h4>
 <p>Phase 종합 양식의 "앞서 세운 가정 중 바뀐 것" 표(바뀌기 전 가정 | 바뀐 뒤 | 바꾼 근거)를 채웁니다.</p>
 <ol type="1">
-<li>Day 33–40의 사전 테스트와 '먼저 만들어 보기', 그리고 그날의 내 답을 다시 엽니다. 흔한 후보: "이온은 느리니까 이온 소자의 모든 것이 느리다"(Day 33–34), "히스테리시스가 크면 기억이 좋다"(Day 35–36), "이온이 느린 것은 재료 탓이다"(Day 37), "이온이 고분자에 세게 붙을수록 기억이 좋다"(Day 38), "이온전도도가 높을수록 뉴로모픽 성능이 좋다"(Day 39), "폴리전해질 접합은 이온겔보다 늘 유리하다"(Day 40).</li>
-<li>각 가정이 <strong>어느 날, 어느 글</strong>에서 바뀌었는지와 <strong>바꾼 근거</strong>(쪽수, 또는 <span class="tag tag-interp">해석</span>·모형 계산이면 그렇게)를 적습니다. 그대로인 가정도 적어도 됩니다.</li>
+<li>Day 33–40의 사전 테스트와 '먼저 만들어 보기', 그리고 그 Day의 내 답을 다시 엽니다. 흔한 후보: "이온은 느리니까 이온 소자의 모든 것이 느리다"(Day 33–34), "히스테리시스가 크면 기억이 좋다"(Day 35–36), "이온이 느린 것은 재료 탓이다"(Day 37), "이온이 고분자에 세게 붙을수록 기억이 좋다"(Day 38), "이온전도도가 높을수록 뉴로모픽 성능이 좋다"(Day 39), "폴리전해질 접합은 이온겔보다 늘 유리하다"(Day 40).</li>
+<li>각 가정이 <strong>어느 Day, 어느 글</strong>에서 바뀌었는지와 <strong>바꾼 근거</strong>(쪽수, 또는 <span class="tag tag-interp">해석</span>·모형 계산이면 그렇게)를 적습니다. 그대로인 가정도 적어도 됩니다.</li>
 <li>바뀐 가정 하나는 <strong>내 연구 방향</strong>에 관한 것이어야 합니다. 예: "내 polyelectrolyte 접합의 느린 이완은 RC 자원이다"가 Day 35–36(메커니즘이 섞임), Day 37(크기로 정해지는 몫), Day 39(최적점), Day 40(염·pH 의존)를 지나며 어떤 조건이 붙었는지.</li>
 </ol>
 <p><strong>모의 디펜스.</strong> 내 답을 저장한 뒤 Claude에게 "Day 40 모의 디펜스"라고 말하면, Phase 4 전체(Day 33–40)에서 섞어 묻습니다. 답하지 못한 것을 양식의 마지막 칸에 적습니다.</p>
 </section>
-<section id="오늘의-반론" class="level4">
-<h4 class="anchored" data-anchor-id="오늘의-반론">5-4. 오늘의 반론</h4>
+<section id="s-objection" class="level4">
+<h4 class="anchored" data-anchor-id="s-objection">5-4. 이번 반론</h4>
 <p>가장 강한 반론은 이것입니다. <strong>"정류는 다이오드가, 누설 적분은 저항–커패시터가, 다중 시간상수는 회로 몇 개가 한다. 이온 이종접합이 주는 primitive 가운데 전자 회로가 못 하는 것은 없다. 그러니 이온 접합 소자는 계산 소자로서 의미가 없다."</strong></p>
-<p>이 반론은 primitive 하나하나에 대해서는 대체로 맞습니다(그림 5의 '전자 회로 대체물' 열). 그러나 반론이 놓치는 것이 있습니다. (a) <strong>자리</strong>: 화학·생체 신호를 전자 신호로 바꾸기 <strong>전에</strong>, 감지하는 그 자리에서 비선형·기억을 거는 일은 회로로 하려면 변환기·증폭기가 먼저 필요합니다(Day 30–31의 시스템 비용, Day 45–46). (b) <strong>입력의 종류</strong>: 이온 종 선택성처럼 화학적 정체성을 입력 축으로 쓰는 일은 회로에 없는 입력입니다(Day 33–34). (c) <strong>집적된 다중성</strong>: 한 소자에 여러 시간상수·극성별 동역학이 들어 있다면 회로 부품 여러 개를 대신할 수 있습니다. 다만 (c)는 각 모드가 따로 읽히고 재현될 때만 의미가 있고, 그것은 아직 보이지 않았습니다. <span class="tag tag-hypo">가설</span> 그래서 정직한 응답은 "이온 접합의 의미는 primitive 하나의 성능이 아니라, 그것이 <strong>어디에 있고 무엇을 입력으로 받느냐</strong>에 있다. 그 조건이 성립하는 응용이 무엇인지는 Phase 5에서 숫자로 확인한다"입니다. 이 반론에 대한 내 답을 양식의 "가장 강한 반론" 칸에 적으세요.</p>
+<p>이 반론은 primitive 하나하나에 대해서는 대체로 맞습니다(그림 5의 '전자 회로 대체물' 열). 그러나 반론이 놓치는 것이 있습니다. (a) <strong>자리</strong>: 화학·생체 신호를 전자 신호로 바꾸기 <strong>전에</strong>, 감지하는 그 자리에서 비선형·기억을 거는 일은 회로로 하려면 변환기·증폭기가 먼저 필요합니다(Day 30–31의 시스템 비용, Day 45–46). (b) <strong>입력의 종류</strong>: 이온 종 선택성처럼 화학적 정체성을 입력 축으로 쓰는 일은 회로에 없는 입력입니다(<a href="../days/d19b.html#s-species">Day 34 3-1</a>). (c) <strong>집적된 다중성</strong>: 한 소자에 여러 시간상수·극성별 동역학이 들어 있다면 회로 부품 여러 개를 대신할 수 있습니다. 다만 (c)는 각 모드가 따로 읽히고 재현될 때만 의미가 있고, 그것은 아직 보이지 않았습니다. <span class="tag tag-hypo">가설</span> 그래서 정직한 응답은 "이온 접합의 의미는 primitive 하나의 성능이 아니라, 그것이 <strong>어디에 있고 무엇을 입력으로 받느냐</strong>에 있다. 그 조건이 성립하는 응용이 무엇인지는 Phase 5에서 숫자로 확인한다"입니다. 이 반론에 대한 내 답을 양식의 "가장 강한 반론" 칸에 적으세요.</p>
 <div class="think">
 <p>Phase 4를 마치며, 내 소재에 대해 지금 쓸 수 있는 가장 정직한 문장을 세 칸으로 적어 보세요. "① 내 소재는 ____ 메커니즘으로 ____ primitive를 줄 수 있다(근거: ____). ② 그 primitive의 크기를 정하는 손잡이는 ____이고, 그 효과는 약 ____배다. ③ 그것이 계산 지표를 높이는지는 ____을 재야 안다." 빈칸이 많을수록 Phase 5–6에서 할 일이 분명해집니다.</p>
 </div>
 <div class="quiz" data-day="d24" data-set="5-check"></div>
+<div class="stop-point">
+<p>여기까지: Day 33–40의 결론을 한 사슬로 잇고, 그림 5의 각 줄을 배운 Day로 되짚으며, 가장 약한 고리(상태 하나짜리 모형, 소자 응답 → 계산 지표의 빈칸)와 반론(전자 회로가 다 한다)에 대한 응답(자리와 입력의 종류)을 말할 수 있다. 다음: 총정리와 종합 퀴즈.</p>
+</div>
 <div class="keypoints">
 <ul>
 <li>Phase 4의 사슬: 이온의 숫자(Day 33–34) → 기억·비선형의 기원(Day 35–36) → 시간척도(Day 37) → 화학구조(Day 38) → 전도도와 기능(Day 39) → 접합 구조와 primitive(Day 40).</li>
@@ -1238,7 +1281,7 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 <p>자료를 덮고 아래 표를 먼저 머릿속으로 채운 뒤 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
 <details class="recap">
 <summary>
-한 장 요약 펼치기
+총정리 표 펼치기(질문 · 한 줄 답 · 근거)
 </summary>
 <table class="caption-top table">
 <colgroup>
@@ -1261,7 +1304,7 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 </tr>
 <tr class="even">
 <td>수송수</td>
-<td>이온겔 <span class="math inline">\(t_+\)</span> ≈ 0.49, 단일 이온 전도체 ≈ 1, 이종접합은 접합에서 1 → 0으로 뜀. 경계에 쌓이는 속도 = <span class="math inline">\(\Delta t \times I/F\)</span></td>
+<td>이온겔 <span class="math inline">\(t_+\)</span> ≈ 0.49, 단일 이온 전도체 ≈ 1, 이종접합은 접합에서 1 → 0으로 뜀. 경계에 쌓이는 속도 = <span class="math inline">\(\delta \times I/F\)</span></td>
 <td>1 µA에서 ±10.4 pmol/s(Claude 계산), Day 39의 전도도 몫</td>
 </tr>
 <tr class="odd">
@@ -1285,7 +1328,7 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 <td><span class="src">Roadmap 2026, p.8108</span> <span class="src">Zhu 2025, p.7</span> <span class="src">Pandey 2026, p.7</span></td>
 </tr>
 <tr class="odd">
-<td>오늘의 숫자</td>
+<td>이번 숫자</td>
 <td>같은 +1 V 출력이 1.73–2.52(장난감 모형)</td>
 <td>그림 4</td>
 </tr>
@@ -1295,7 +1338,7 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 <td><span class="tag tag-interp">해석</span></td>
 </tr>
 <tr class="odd">
-<td>오늘의 반론</td>
+<td>이번 반론</td>
 <td>"전자 회로가 모든 primitive를 한다"</td>
 <td>자리와 입력의 종류. Phase 5</td>
 </tr>
@@ -1317,15 +1360,15 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 <li>폴리전해질·이종접합이 일반 이온겔보다 유리한 조건과 불리한 조건을 각각 둘 이상 들고, "반드시"가 맞지 않는 이유를 적었나? 염 농도의 효과를 숫자로 보였나? 그 이점을 보일 실험과 대조군을 하나 이상 적었나?</li>
 <li>정류·고갈·다중 시간상수를 각각 계산 primitive로 옮기고, 같은 primitive를 전자 회로로 만들 수 있는지 함께 적었나?</li>
 <li>Phase 종합: 한 단락 답, 가장 약한 고리, 바뀐 가정(그중 하나는 내 연구 방향) 표를 채웠나?</li>
-<li>오늘의 반론("전자 회로가 다 한다")에 대한 내 응답을 적었나?</li>
+<li>이번 반론("전자 회로가 다 한다")에 대한 내 응답을 적었나?</li>
 </ol>
 </section>
 <section id="ledger-items" class="level3">
 <h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
 <ul>
 <li><strong>병목 장부:</strong> (a) 생체 응용이 요구하는 조건(약 150 mM, pH 7.4) vs 폴리전해질 접합의 정류가 허용하는 조건(고정 전하 0.5 M이면 150 mM에서 배제 1/3.6, 코드 계산). (b) 다중 시간상수가 계산 자원이 되려면 각 모드가 따로 읽혀야 하는데, 그 측정이 없음. (c) 정류비·시간상수의 표준 보고 조건 부재.</li>
-<li><strong>아직 모르는 것:</strong> 내 접합의 고정 전하 농도와 생리 조건 정류비 / 순·역방향 시간상수의 비 / 한 소자 안 시간상수들이 서로 독립적으로 바뀌는가 / 접합 소자 출력에 readout을 붙였을 때 기준선(저항–커패시터 + 다이오드 회로)보다 나은가.</li>
-<li><strong>용어집:</strong> 단일 이온 전도체, 폴리전해질, poly(ionic liquid), 반대이온, 공이온, 수송수, <span class="math inline">\(\Delta t\)</span>(경계의 수송수 차), Donnan 배제, Donnan 퍼텐셜, 막 전위, 바닥 전류(역방향 한계 전류), 이종접합, 이온 p–n 접합, 고갈층, 정류비, TOF-SIMS, 계산 primitive, 누설 적분, 곱셈적 상호작용, 다중 시간척도 기억, 문턱 사건.</li>
+<li><strong>아직 모르는 것:</strong> 내 접합의 고정 전하 농도와 생리 조건 정류비 / 순·역방향 시간상수의 비 / 한 소자 안 시간상수들이 서로 독립적으로 바뀌는가 / 접합 소자 출력에 readout을 붙였을 때 기준선(저항–커패시터 + 다이오드 회로, <a href="../days/d16a.html#b-baselines">Day 28 기초</a>)보다 나은가.</li>
+<li><strong>용어집:</strong> 단일 이온 전도체, 폴리전해질, poly(ionic liquid), 반대이온, 공이온, 수송수, <span class="math inline">\(\delta\)</span>(경계의 수송수 차), Donnan 배제, Donnan 퍼텐셜, 막 전위, 바닥 전류(역방향 한계 전류), 이종접합, 이온 p–n 접합, 고갈층, 정류비, TOF-SIMS, 착물화, 계산 primitive, 누설 적분, 곱셈적 상호작용, 다중 시간척도 기억, 문턱 사건.</li>
 <li><strong>접는 기준 후보:</strong> 내 접합 소자가 주는 primitive가 모두 전자 회로로 더 싸게 만들 수 있는 것이고, 감지 자리·화학 입력 같은 '자리의 이점'도 쓰지 않는 응용이라면, 그 응용을 계산 소자로서의 목표로 두지 않는다.</li>
 </ul>
 </section>
@@ -1341,21 +1384,21 @@ c_- \approx \frac{c_s^2}{X}, \qquad \text{배제} = \frac{c_s}{c_-} \approx \fra
 </ul>
 <p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
 <ul>
-<li>Balqis 2026, <em>ACS Nano</em> 20, 27066–27078. 무용매 poly(ionic liquid) 이종접합: p.27067–27068(PIL 정의, 이온겔과의 비교, TOF-SIMS 고갈층), p.27071(정류비 2.5, 온도, 유변학 이완), p.27072(PPF·PPD 시간상수). 사용자 소재 계열과 가장 가까운 폴더 논문 중 하나입니다.</li>
+<li>Balqis 2026, <em>ACS Nano</em> 20, 27066–27078. 무용매 poly(ionic liquid) 이종접합: p.27067–27068(PIL 정의, 이온겔과의 비교, TOF-SIMS 고갈층), p.27071(정류비 2.5, 온도, 유변학 이완), p.27072(PPF·PPD 시간상수). 내 소재 계열과 가장 가까운 폴더 논문 중 하나입니다.</li>
 <li>Lee 2026, <em>Adv. Funct. Mater.</em> e76901. p.2–4(HA–CS 접합의 축적·고갈, pKa, 임피던스 대조), p.6(이식 후 적출 측정).</li>
 <li>Li 2026, <em>Adv. Mater.</em> e74913. 폴리양이온–DNA 계면 착물화 섬유의 프로그래밍 가능한 기억.</li>
 <li>Roadmap 2026 p.8107–8108(뉴런 동역학과 이온 축적 = 적분, 역확산 = 누설), Zhu 2025 p.7(이완 → 계산 primitive), p.9–10(이온겔·폴리전해질 장단점), Pandey 2026 p.7(M1–M4 기능 대응).</li>
 </ul>
 <p><strong>폴더 밖</strong> <span class="tag tag-unverified">미확인</span></p>
 <ul>
-<li>Pärnamäe et al., <em>Environ. Sci. Technol.</em> 2023, 57, 9664–9674, <a href="https://doi.org/10.1021/acs.est.2c09410" target="_blank">doi</a>. 바이폴라 막의 한계 전류(염 이온이 나름)와 물 해리 전류의 기원. 3구간 단계 4의 근거(본문 일부를 웹에서 확인).</li>
-<li>Doyle, Fuller, Newman, <em>Electrochim. Acta</em> 1994, 39, 2073–2081. 수송수 1 고분자 전해질과 농도 분극(초록만 확인). 1-1의 근거.</li>
+<li>Pärnamäe et al., <em>Environ. Sci. Technol.</em> 2023, 57, 9664–9674, <a href="https://doi.org/10.1021/acs.est.2c09410" target="_blank">doi</a>. 바이폴라 막의 한계 전류(염 이온이 나름)와 물 해리 전류의 기원. 3구간 단계 5의 근거(본문 일부를 웹에서 확인).</li>
+<li>Doyle, Fuller, Newman, <em>Electrochim. Acta</em> 1994, 39, 2073–2081. 수송수 1 고분자 전해질과 농도 분극(초록만 확인). 1-1 심화의 근거.</li>
 <li>바이폴라 막의 물 해리(높은 역방향 전압에서 접합에 H⁺·OH⁻가 생기는 현상)는 <code>../notes/extra</code>에 노트만 있습니다. 역방향 고전압을 쓰는 접합 소자라면 고갈 대신 물 해리가 전류를 만들 수 있으니 원문으로 확인하세요.</li>
 <li>폴리전해질 복합체의 염 농도–시간 중첩(Ali 2018 등)도 노트만 있습니다. 착물화 기반 소자를 설계한다면 읽을 가치가 큽니다.</li>
 </ul>
 </section>
 </div>
-<script type="application/json" id="quiz-d24">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다(pre는 페이지 틀이 놓는다). type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커. 숫자는 tools/figs_d24.py --numbers와 일치한다.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "음전하가 고정된 겔과 양전하가 고정된 겔을 붙인 소자를 실험실 소금물(10 mM)이 아니라 몸속 체액(약 150 mM)에 넣었다고 상상해 보세요. 정류(한 방향으로만 전류가 잘 흐르는 성질)가 강해질지 약해질지 예상하고, 그 이유를 그림이나 한두 문장으로 설명해 보세요. 그리고 '이 소자가 하는 일을 전자 부품으로 흉내 낸다면 어떤 부품이 필요할지' 두 가지를 적어 보세요.", "items": [{"id": "d24-p01", "type": "mc", "q": "폴리전해질(사슬에 음전하가 붙은 고분자)에서 전기를 나르는 것은 주로 무엇일까?", "options": ["사슬에 붙은 음전하", "사슬의 음전하를 상쇄하는 움직이는 양이온(반대이온)", "전자", "양이온과 음이온이 똑같이"], "a": 1, "why": "사슬에 붙은 이온은 움직이지 못하고 반대이온만 움직인다. 이런 재료를 단일 이온 전도체라 부른다. 1구간 기초 상자.", "ref": "#ch-single-ion"}, {"id": "d24-p02", "type": "ox", "q": "고정 음전하 겔과 고정 양전하 겔을 맞붙인 접합에 역방향 전압을 걸면, 접합 근처에서 이온이 빠져나가 전류가 작아진다.", "a": true, "why": "두 쪽의 반대이온이 모두 접합에서 멀어지고 공이온은 배제되어 보충되지 않으므로 고갈층이 생긴다. 1구간 단계 3.", "ref": "#ch-single-ion"}, {"id": "d24-p03", "type": "ox", "q": "같은 부호(둘 다 고정 음전하)의 겔 두 개를 붙여도 이종접합과 같은 정도의 정류가 생긴다.", "a": false, "why": "같은 부호끼리는 양쪽 모두 같은 이온이 움직여 역방향에서도 접합이 고갈되지 않는다. 같은 재료 접합 대비 이종접합의 역방향 저항이 약 35배였다는 대조 결과가 있다. 1구간 확인과 2구간.", "ref": "#ch-single-ion"}, {"id": "d24-p04b", "type": "mc", "q": "폴리전해질 이종접합 소자들에서 보고된 정류비(같은 크기 순·역방향 전압의 전류 비)는 대체로 어떨까?", "options": ["모든 소자가 1000배 이상", "소자·측정 조건에 따라 몇 배에서 10배 이상까지 크게 다르다", "항상 정확히 10배", "정류가 없다"], "a": 1, "why": "무용매 PIL 접합은 20 °C에서 2.5, 침전 연구의 하이드로겔 다이오드는 10배 넘는 것만 골랐다. 같은 소자도 전압을 빨리 훑을수록 정류비가 줄었다(Lee 2026 (AFM) p.3). 시간척도·온도·염에 따라 바뀐다. 2구간 표.", "ref": "#ch-junction-dynamics"}, {"id": "d24-p05", "type": "mc", "q": "고정 전하로 공이온을 밀어내는 겔을 실험실 소금물(10 mM)에서 체액 수준(150 mM)으로 옮기면 공이온 배제는 어떻게 될까?", "options": ["더 강해진다", "약해진다", "변하지 않는다", "완전히 사라진다"], "a": 1, "why": "바깥 염이 진할수록 겔 속으로 들어오는 공이온이 많아진다. 고정 전하 0.5 M이면 1/50에서 1/3.6로 약해진다(이상 Donnan 계산). 3구간.", "ref": "#ch-vs-ionogel"}, {"id": "d24-p06", "type": "ox", "q": "폴리전해질·이종접합 소자는 누출이 없고 정류를 스스로 만들므로, 어떤 기능·환경에서든 일반 이온겔 소자보다 반드시 유리하다.", "a": false, "why": "전도도가 낮고(무용매 폴리전해질 10⁻⁵–10⁻² S/m), 염·pH에 따라 이점이 줄며, 정류·기억이 계산 성능으로 이어지는지는 따로 재야 한다. 3구간 조건표.", "ref": "#ch-vs-ionogel"}, {"id": "d24-p07", "type": "mc", "q": "같은 +1 V 입력에 대한 소자 출력이 바로 앞의 입력들에 따라 달라지는 성질을 계산 부품의 말로 가장 잘 표현한 것은?", "options": ["단순 저항", "입력 × 상태의 곱셈적 상호작용(이력 의존)", "선형 증폭", "잡음"], "a": 1, "why": "지금 입력의 효과가 지금 상태(과거 이력)에 따라 달라지는 것이다. 장난감 접합 모형에서 같은 +1 V의 출력이 1.73–2.52로 흩어졌다. 4구간.", "ref": "#ch-primitive"}, {"id": "d24-p08", "type": "ox", "q": "정류는 다이오드로, 서서히 잊는 기억은 저항–커패시터 회로로도 만들 수 있으므로, 이온 접합 소자의 고유한 가치는 개별 기능 하나의 성능보다 '어디에 있고 무엇을 입력으로 받느냐'에서 찾아야 한다.", "a": true, "why": "primitive 하나하나는 전자 회로로 대체 가능하다. 감지 자리에서의 처리, 화학적 정체성을 입력으로 쓰는 것, 한 소자의 다중 시간상수가 후보다. 5구간 오늘의 반론.", "ref": "#ch-phase4-wrapup"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 세 계단", "items": [{"id": "d24-q01", "type": "mc", "q": "일반 이온겔과 단일 이온 전도체의 가장 핵심적인 차이는?", "options": ["색깔", "이온겔은 양·음이온이 모두 움직이고, 단일 이온 전도체는 한 부호가 사슬에 묶여 반대이온만 움직인다", "단일 이온 전도체는 이온이 전혀 없다", "이온겔은 고분자가 없다"], "a": 1, "why": "누가 움직이고 누가 묶였나가 메커니즘(EDL, 농도 분극, 고갈) 가운데 무엇이 일어날지를 정한다. 1구간.", "ref": "#ch-single-ion"}, {"id": "d24-q02", "type": "ox", "q": "이종접합에 순방향 전압을 걸면 두 겔의 반대이온이 접합을 향해 밀려 쌓이므로 접합의 전도도가 오른다.", "a": true, "why": "p형의 양이온과 n형의 음이온이 모두 접합 쪽으로 이동한다. 역방향은 반대로 고갈. 1구간 단계 2.", "ref": "#ch-single-ion"}, {"id": "d24-q21", "type": "short", "q": "[수송수 계산] 어떤 겔 속에서 K⁺가 나르는 전도도 몫이 0.30 S/m, Cl⁻의 몫이 0.10 S/m다. 양이온 수송수 t₊는? (소수 둘째 자리까지)", "a": ["0.75", ".75", "0.750", "75%"], "why": "t₊ = 0.30 ÷ (0.30 + 0.10) = 0.75. 전류의 75%를 K⁺가, 25%를 Cl⁻가 나른다. 3으로 답했다면 두 몫의 비를 쓴 것이고, 수송수는 '몫 하나 ÷ 전체 합'이다. 1구간 1-1 ②.", "ref": "#ch-single-ion"}, {"id": "d24-q22", "type": "mc", "q": "같은 전류를 흘릴 때 경계에 이온이 쌓이지도 비지도 않는 것은?", "options": ["양이온 선택 겔(고정 음전하)과 음이온 선택 겔(고정 양전하)의 접합", "KCl 하이드로겔과 양이온 선택 겔의 경계", "같은 KCl 하이드로겔 두 조각의 경계", "음이온 선택 겔과 KCl 하이드로겔의 경계"], "a": 2, "why": "경계에 쌓이는 속도는 (전류가 들어오는 쪽 t₊ − 나가는 쪽 t₊) × I/F다. 같은 겔끼리는 t₊가 같아 0이다. 이종접합은 차이가 ±1로 가장 크고, 이온겔과 선택 겔의 경계는 약 ±0.5다(이온 농도 분극). 1구간 1-1 ④, 그림 2.", "ref": "#ch-single-ion"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 폴더의 이종접합", "items": [{"id": "d24-q03b", "type": "mc", "q": "이종접합의 고갈층을 '직접' 본 증거에 가장 가까운 것은?", "options": ["I–V 곡선의 정류", "접합면 근처의 이온 성분 변화를 TOF-SIMS 깊이 분포로 측정한 것(시료 하나, 전압 비교·폭 정량은 없다는 한계가 있음)", "MNIST 정확도", "펄스 응답의 감쇠"], "a": 1, "why": "Balqis 2026은 TOF-SIMS로 고갈층 폭의 변화를 보였다(p.27067). 정류·임피던스·감쇠는 고갈을 간접적으로 시사한다. 2구간. 다만 Balqis 2026의 TOF-SIMS는 시료 하나의 분포이고, 저자들도 고갈층의 폭을 정량하지 못했다고 씁니다(p.27069).", "ref": "#ch-junction-dynamics"}, {"id": "d24-q04", "type": "ox", "q": "PIL 이종접합에서 쌍펄스 촉진(PPF)과 억제(PPD)의 시간상수가 서로 달랐다(21·36 ms vs 15·6 ms)는 것은, 쌓을 때와 비울 때의 동역학이 비대칭이라는 해석과 맞는다.", "a": true, "why": "Balqis 2026 p.27072. 하이드로겔 P–M–N 접합에서도 1 V와 −1 V의 평형 시간이 달랐다(Zhang 2024 p.15030). 극성별 비대칭은 계산 primitive 후보다. 2구간.", "ref": "#ch-junction-dynamics"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 염과 Donnan 배제 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d24-q05", "type": "short", "q": "[풀이 예시 확인] 고정 전하 X = 0.5 M인 겔을 10 mM 염에 담갔다. 근사식 c₋ ≈ c_s²/X = (0.01)² ÷ 0.5로 겔 속 공이온은 몇 mM인가? (소수 첫째 자리까지)", "a": ["0.2", "0.20", "0.2 mM"], "why": "10⁻⁴ ÷ 0.5 = 2×10⁻⁴ M = 0.2 mM, 바깥의 1/50. 3구간 단계 1.", "ref": "#ch-vs-ionogel"}, {"id": "d24-q06", "type": "short", "q": "[일부 채우기] 고정 전하 X = 2 M인 겔을 150 mM에 담갔다. c₋ ≈ c_s²/X = (0.15)² ÷ 2 = 0.0225 ÷ 2 = ? mM (소수 첫째 자리까지)", "a": ["11.3", "11.2", "11", "11.25"], "why": "0.01125 M = 11.25 mM(정확한 식으로는 11.2 mM), 바깥의 약 1/13. 고정 전하가 높으면 체액 수준에서도 배제가 남는다.", "ref": "#ch-vs-ionogel"}, {"id": "d24-q07", "type": "short", "q": "[혼자 풀기] 고정 전하 X = 1 M인 겔을 150 mM에 담갔다. 겔 속 공이온은 약 몇 mM인가? (정수로)", "a": ["22", "23", "22.5", "약 22"], "why": "근사로 0.0225 ÷ 1 = 22.5 mM, 정확한 식 (−X + √(X² + 4c_s²))/2로 22.0 mM. 바깥(150 mM)의 약 1/7이다. 헷갈렸다면 c_s를 제곱했는지 확인하세요. 그림 3.", "ref": "#ch-vs-ionogel"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 계산 primitive", "items": [{"id": "d24-q08", "type": "mc", "q": "이종접합의 세 성질과 계산 primitive의 짝으로 가장 알맞은 것은?", "options": ["정류 → 누설 적분, 고갈 → 곱셈, 다중 τ → 합산", "정류 → 부호 비대칭 비선형, 고갈+회복 → 이력 의존(입력×상태), 다중 τ → 다중 시간척도 기억", "정류 → 가중치 저장, 고갈 → 합산, 다중 τ → 잡음", "셋 다 선형 증폭"], "a": 1, "why": "4구간의 대응. 이 대응은 '역할을 할 수 있다'이지 계산 성능을 높인다는 증명은 아니다.", "ref": "#ch-primitive"}, {"id": "d24-q09", "type": "ox", "q": "장난감 접합 모형에서 펄스가 시간상수보다 짧으면 −1 V 펄스의 전류가 기억 없는 정류기보다 훨씬 크게(덜 정류되게) 나올 수 있다. 즉 정류의 세기도 시간척도에 달려 있다.", "a": true, "why": "0.5 s 펄스, τ = 2 s에서 −1 V 출력이 −1.75로 시작해 연속된 −1 V마다 작아졌다(기억 없는 정류기는 늘 −0.22). 접합이 아직 다 비지 않았기 때문이다. 4구간 단계 3.", "ref": "#ch-primitive"}, {"id": "d24-q10", "type": "mc", "q": "Roadmap 2026이 이온 게이트 트랜지스터·이종접합 이온 전도체에 대해 정리한 대응은?", "options": ["이온 축적 = 적분, 역확산 = 누설", "이온 축적 = 곱셈, 역확산 = 증폭", "이온 축적 = 잡음, 역확산 = 신호", "대응을 제시하지 않았다"], "a": 0, "why": "p.8108. 누설 적분 뉴런의 두 요소와 같다. 4구간 기초 상자.", "ref": "#ch-primitive"}]}, "4-end": {"kind": "end", "title": "4장 마무리", "items": [{"id": "d24-q11", "type": "mc", "q": "이온 접합 소자의 primitive가 '이온만의 몫'이 강하다고 볼 수 있는 경우로 가장 알맞은 것은?", "options": ["저항–커패시터 회로로 같은 누설 적분을 더 싸게 만들 수 있을 때", "화학·생체 매질에서 감지하는 그 자리에서, 이온 종 같은 화학적 정체성을 입력으로 받아 처리해야 할 때", "GHz 속도가 필요할 때", "높은 정밀도의 가중치가 필요할 때"], "a": 1, "why": "같은 기능을 전자 회로로 싸게 만들 수 있으면 약하고, 변환 없이 매질과 직접 닿아야 하면 강하다(그림 5의 판단 기준, [해석]). 4구간 ⑤.", "ref": "#ch-primitive"}, {"id": "d24-q12", "type": "ox", "q": "한 접합 안에 시간상수가 여럿 있다면, 그것만으로 그 소자는 여러 노드를 가진 reservoir처럼 기억 용량이 늘어난다.", "a": false, "why": "각 모드가 따로 읽히고(독립된 방향, Day 24–25) 재현될 때만 다양성이 된다. 그 측정은 폴더 문헌에서 아직 찾지 못했다 [가설]. 4구간.", "ref": "#ch-primitive"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · Phase 4 종합", "items": [{"id": "d24-q13", "type": "mc", "q": "Phase 4 주장 사슬에서 근거가 가장 약한 고리로 오늘 자료가 지목한 것은?", "options": ["이온의 확산계수가 전자보다 작다는 것", "계산 연결이 상태 하나짜리 단순 모형에 기대고, 소자 응답 → 계산 지표의 정량 연결이 비어 있다는 것", "EDL이 축전기처럼 동작한다는 것", "Donnan 배제가 있다는 것"], "a": 1, "why": "나머지 보기(확산계수 차이, EDL의 축전기 동작, Donnan 배제)는 폴더 원문과 교과서적 물리로 받쳐진다. 비어 있는 것은 소자 응답이 계산 지표(MC, IPC, 기준선 대비 이득)를 얼마나 바꾸는지다. 5-2절.", "ref": "#ch-phase4-wrapup"}, {"id": "d24-q14", "type": "ox", "q": "Phase 종합 양식의 '바뀐 가정' 표에는 적어도 하나, 내 연구 방향에 관한 가정을 넣고 바꾼 근거(쪽수 또는 모형 계산)를 적는다.", "a": true, "why": "5-3절 회고 안내. 예: '내 접합의 느린 이완은 RC 자원이다'에 Day 35–40를 지나며 붙은 조건.", "ref": "#ch-phase4-wrapup"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d24-q15", "type": "mc", "q": "무용매 poly(ionic liquid) 이종접합이 일반 이온겔에 비해 내세운 이점으로 원문에 적힌 것은?", "options": ["더 높은 전도도", "단일 상이라 이온겔의 상분리·누출 문제가 없다", "GHz 동작", "물이 있어 생체적합성이 높다"], "a": 1, "why": "Balqis 2026 p.27068. 대신 정류비는 20 °C에서 2.5로 크지 않았다(p.27071). 3구간.", "ref": "#ch-vs-ionogel"}, {"id": "d24-q16", "type": "short", "q": "고정 전하 0.5 M 겔의 공이온 배제(바깥 ÷ 겔 속)는 10 mM에서 약 50배, 150 mM에서 약 3.6배였다. 배제가 약 몇 배 약해졌나? (정수로)", "a": ["14", "약 14", "13.9", "14배"], "why": "50 ÷ 3.6 ≈ 14. 실험실 정류비를 체액 조건으로 그대로 옮길 수 없다는 뜻이다. 3구간.", "ref": "#ch-vs-ionogel"}, {"id": "d24-q17", "type": "ox", "q": "Lee 2026 (AFM)의 히알루론산–키토산 접합은 pH 6에서 측정되었고, 키토산의 pKa가 6.2–6.5 부근이므로 생체의 pH 7.4에서는 n형 쪽 선택성이 약해질 수 있다는 질문이 남는다.", "a": true, "why": "저자들은 pKa 때문에 pH 6에서 두 겔이 각각 음·양전하를 띤다고 설명한다(p.3). pH 7.4에서의 측정은 본문에 없다. 3구간.", "ref": "#ch-vs-ionogel"}, {"id": "d24-q18", "type": "mc", "q": "'폴리전해질 이종접합은 일반 이온겔보다 반드시 유리한가'에 대한 가장 정직한 답의 형식은?", "options": ["예, 항상 유리하다", "아니오, 항상 불리하다", "기능(정류·기억·전달 속도)과 환경(염·pH·온도)을 붙여 유리한 조건과 불리한 조건을 나눈다", "판단할 수 없다"], "a": 2, "why": "누출 없음·재료 정류·고갈 기억은 이점, 낮은 전도도·염/pH 의존·흩어진 정류비는 대가다. 3구간 조건표.", "ref": "#ch-vs-ionogel"}, {"id": "d24-q19", "type": "mc", "q": "착물화 섬유에서 느린 시간상수가 펄스 수와 섬유 접점 수에 따라 몇 자릿수에 걸쳐 바뀌었다는 결과가 계산 primitive 관점에서 뜻하는 것은?", "options": ["착물화는 기억과 무관하다", "폴리전해질 착물화가 긴 기억의 '프로그래밍'에 쓰일 수 있지만, 시간상수가 자극 이력에 따라 바뀌므로 보고·재현 조건을 함께 적어야 한다", "정류가 가장 강하다", "전도도가 높다"], "a": 1, "why": "Li 2026 (IPC fiber) p.1, 6. Day 38에서 본 'τ는 재료 상수가 아니다'와 같은 이야기다. 2구간.", "ref": "#ch-junction-dynamics"}, {"id": "d24-q20", "type": "mc", "q": "'전자 회로가 모든 primitive를 할 수 있으니 이온 접합 소자는 의미가 없다'는 반론에 대한 가장 균형 잡힌 응답은?", "options": ["반론은 완전히 틀렸다", "primitive 하나하나는 대체로 회로로 대체 가능하다. 이온 접합의 의미는 감지 자리에서의 처리, 화학적 정체성 입력, 한 소자의 다중 동역학처럼 '자리와 입력의 종류'에서 찾아야 하고, 그 조건이 성립하는 응용은 따로 확인해야 한다", "이온 소자가 더 빠르므로 의미가 있다", "이온 소자가 더 정밀하므로 의미가 있다"], "a": 1, "why": "5-4절. 다중 동역학의 이점은 각 모드가 따로 읽히고 재현될 때만이며 아직 보이지 않았다[가설]. 응용 조건은 Phase 5(Day 41–46)에서.", "ref": "#ch-phase4-wrapup"}]}}}</script>
+<script type="application/json" id="quiz-d24">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다(pre는 페이지 틀이 놓는다). type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커. 숫자는 tools/figs_d24.py --numbers와 일치한다.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 이온전도도와 성능", "items": [{"id": "d24-r01", "type": "mc", "q": "어떤 하이드로겔에서 움직이는 양이온의 수를 2배로 늘렸더니, 가교도 함께 바뀌어 그 양이온의 이동도가 절반이 되었다(음이온의 몫은 무시). 전도도 σ는 어떻게 될까?", "options": ["약 2배가 된다", "약 절반이 된다", "약 4배가 된다", "거의 그대로다"], "a": 3, "why": "σ = n|z|eµ는 곱이다. n이 2배, µ가 0.5배면 곱은 2 × 0.5 = 1로 그대로다. 전도도 하나만 보면 이 두 변화가 보이지 않는다.", "wrongWhy": ["n만 보고 µ의 변화를 빠뜨린 값이다.", "µ만 보고 n의 변화를 빠뜨린 값이다.", "두 변화를 곱하지 않고 둘 다 키우는 쪽으로 읽은 값이다.", ""], "ref": "d23.html#s-why-product", "refLabel": "1구간 '왜 수 × 전하 × 이동도의 곱인가'"}, {"id": "d24-r02", "type": "mc", "q": "같은 10 mM KCl 겔(σ = 0.150 S/m)로 길이 100 µm·단면 1 mm²인 소자(G = 1.5 mS)를 만들었다. 길이를 200 µm, 단면을 2 mm²로 둘 다 2배 늘린 소자의 σ와 G는?", "options": ["σ도 G도 그대로다", "σ는 그대로, G는 2배다", "σ는 그대로, G는 절반이다", "σ와 G가 모두 2배다"], "a": 0, "why": "σ는 재료의 값이라 모양과 무관하다. 소자의 G = σA/L에서 A와 L이 함께 2배라 서로 지워져 1.5 mS 그대로다.", "wrongWhy": ["", "단면만 보고 길이가 2배 된 것을 빠뜨렸다(G는 L에 반비례).", "길이만 보고 단면이 2배 된 것을 빠뜨렸다(G는 A에 비례).", "σ는 재료의 성질이라 소자를 크게 만들어도 바뀌지 않는다."], "ref": "d23.html#s-sigma-vs-g", "refLabel": "1구간 '용어 약속: σ와 G'(그림 1 ②)"}, {"id": "d24-r03", "type": "mc", "q": "모양과 전압이 같은 두 이온겔 소자가 전도도만 3배 다르다. 이 정보만으로 말할 수 있는 것은? (이온이 전극을 드나들거나 짧은 펄스로 읽는 경우)", "options": ["전도도가 큰 쪽의 기억 시간이 3배 짧다", "전도도가 큰 쪽의 읽기 전류가 약 3배다", "전도도가 큰 쪽의 정류(비선형)가 더 강하다", "전도도가 큰 쪽의 상태 다양성이 3배다"], "a": 1, "why": "같은 모양이면 G = σA/L도 3배이고, 같은 전압에서 I = GV도 3배다(전력 GV²도 3배). 기억 시간(L²/D, 결합), 비선형(선택성·접합), 상태 다양성은 전도도가 정하지 않는다.", "wrongWhy": ["기억 시간은 D와 결합이 정한다. 같은 σ라도 n과 D의 나눔에 따라 기억이 100배 다를 수 있었다.", "", "정류는 선택성·비대칭·접합이 만든다. 전도도는 정하지 않는다.", "상태 다양성은 서로 다른 시간상수의 수가 정한다. 전도도와 직접 관계가 없다."], "ref": "d23.html#s-sets-table", "refLabel": "2구간 표: 전도도가 정하는 것과 정하지 못하는 것"}, {"id": "d24-r04", "type": "ox", "q": "물에 녹인 염을 10배 더 넣어 전도도를 10배로 올리면, 계면(EDL) 충전 시간도 반드시 10분의 1이 된다.", "a": false, "why": "τ_c = εL/(σλ_D)에서 σ가 10배가 되면 디바이 길이 λ_D도 짧아져(농도의 제곱근에 반비례) 정전용량이 커진다. 두 효과가 일부 상쇄되어 τ_c는 약 √10 ≈ 3배만 줄어든다(Day 39 표: 4.3 → 1.4 ms).", "ref": "d23.html#s-edl-row", "refLabel": "2구간 '계면 충전 줄 풀어 보기'", "note": "계면 충전 시간은 σ와 농도(λ_D)를 함께 본다."}, {"id": "d24-r05", "type": "mc", "q": "재료 P는 움직이는 이온 100 mM·D = 10⁻¹⁰ m²/s, 재료 Q는 10 mM·D = 10⁻⁹ m²/s다(1가 이온 한 종, 길이 L = 100 µm). 두 재료의 전도도는 같다. 덩어리 확산 시간 L²/D는?", "options": ["둘 다 10 s", "P 10 s, Q 100 s", "P 100 s, Q 10 s", "P 1000 s, Q 10 s"], "a": 2, "why": "L² = (10⁻⁴ m)² = 10⁻⁸ m². P는 10⁻⁸ ÷ 10⁻¹⁰ = 100 s, Q는 10⁻⁸ ÷ 10⁻⁹ = 10 s. n × D가 같아 전도도는 같지만, 기억 시간은 D만 본다.", "wrongWhy": ["전도도가 같으면 기억도 같다고 본 생각이다. L²/D는 n과 상관없이 D로 정해진다.", "D가 큰 쪽이 더 오래 기억한다고 뒤집어 읽었다. D가 클수록 빨리 고르게 된다.", "", "L²을 10⁻⁷로 잘못 넣은 값이다. 100 µm의 제곱은 10⁻⁸ m²다."], "ref": "d23.html#s-same-sigma-steps", "refLabel": "3구간 단계 1–3: 같은 σ, 다른 L²/D"}, {"id": "d24-r06", "type": "mc", "q": "전도도가 같은 두 고분자 전해질이 기억 시간에서 크게 다르다. 그 원인을 가르려면 무엇을 따로 재야 할까?", "options": ["다른 주파수에서 전도도를 한 번 더", "움직이는 이온 수 n이나 확산계수 D", "같은 전압에서 소자 전류를 한 번 더", "두께를 바꾼 소자의 컨덕턴스 G"], "a": 1, "why": "전도도와 그것에서 나온 G·전류는 모두 n × D의 곱만 본다. 둘의 나눔을 알려면 D(예: NMR 확산 측정)나 n을 독립적으로 재야 한다.", "wrongWhy": ["전도도를 다시 재도 여전히 n × D의 곱만 보인다.", "", "전류는 G × V라 전도도와 같은 정보다.", "G = σA/L도 σ에서 나온 값이라 n과 D를 가르지 못한다."], "ref": "d23.html#s-measure-d", "refLabel": "3구간 '그래서 무엇을 따로 재야 하나'"}, {"id": "d24-r07", "type": "mc", "q": "선형 누설 노드에서 '5개 전 입력' 과제의 최적 τ는 입력 간격의 약 9배였다. 입력 간격이 0.1 s인 과제라면, 길이 100 µm 소자(τ = L²/D)의 최적 D는 대략 얼마일까?", "options": ["1.1×10⁻¹⁰ m²/s", "1.1×10⁻⁹ m²/s", "1.1×10⁻⁸ m²/s", "1.1×10⁻⁷ m²/s"], "a": 2, "why": "최적 τ ≈ 9 × 0.1 s = 0.9 s. D = L²/τ = 10⁻⁸ ÷ 0.9 ≈ 1.1×10⁻⁸ m²/s. 입력 간격이 10배 짧아지면 최적 D는 10배 커진다.", "wrongWhy": ["τ를 9 s의 10배(90 s)로 늘린 값이다. 입력이 빨라지면 τ는 짧아져야 한다.", "입력 간격 1 s일 때의 값을 그대로 쓴 것이다.", "", "τ를 0.09 s로 잡은 값이다. 최적 τ는 입력 간격의 약 9배다."], "ref": "d23.html#s-optimum-steps", "refLabel": "4구간 단계 1–3: 최적의 d, τ, D"}, {"id": "d24-r08", "type": "mc", "q": "기준 소자(τ = 100 s, 입력 1 s 간격, '5개 전 입력' 과제)의 전도도를 10배 올리려 한다. 잡음이 없을 때 과제 성능 MC₅를 키우는 길은?", "options": ["염을 10배 넣어 움직이는 이온 수를 늘린다", "D를 100배 올려 τ를 1 s로 줄인다", "전도도가 같으면 어느 길이든 효과가 같다", "가소제로 D를 10배 올려 τ를 10 s로 줄인다"], "a": 3, "why": "최적 τ는 약 9 s다. D를 10배 올리면 τ가 100 s → 10 s로 최적 가까이 와서 MC₅가 0.018 → 0.081로 는다. 염으로 올리면 τ가 그대로라 MC₅도 그대로이고, D를 100배 올리면 τ = 1 s로 지나쳐 거의 0이 된다.", "wrongWhy": ["n을 늘리면 전류·전력만 커지고 τ = L²/D는 그대로다(잡음이 없으면 MC₅도 그대로).", "τ가 입력 간격까지 짧아지면 5개 전 입력이 거의 남지 않는다(MC₅ ≈ 0.0003).", "같은 σ라도 n으로 올리느냐 D로 올리느냐에 따라 τ가 다르다.", ""], "ref": "d23.html#s-routes", "refLabel": "4구간 표: 전도도를 올리는 길에 따라"}, {"id": "d24-r09", "type": "ox", "q": "읽기 전류가 잡음보다 충분히 커질 만큼의 전도도를 확보했다면, 그 뒤 기억 창이나 비선형은 전도도를 더 올리기보다 다른 손잡이(D·결합·접합 구조)로 맞추는 것이 이치에 맞다.", "a": true, "why": "전도도는 신호 대 잡음과 전력 예산을 위해 '충분해야 하는' 조건이다. 그 이상 올리면 기억이 짧아지거나 전력만 늘 수 있고, 기억·비선형은 다른 양이 정한다.", "ref": "d23.html#s-objection", "refLabel": "5구간 '가장 강한 반론'과 최소 전도도", "note": "전도도는 '높을수록 좋은' 목표가 아니라 '충분해야 하는' 조건이다."}, {"id": "d24-r10", "type": "mc", "q": "같은 재료 계열로 이온 신호를 멀리 보내는 '인공 축삭'과 펄스를 기억하는 '시냅스' 소자를 만든다. 이온의 이동 속도는 각각 어느 쪽으로 설계해야 할까?", "options": ["축삭은 빠르게, 시냅스는 느리게", "둘 다 가능한 한 빠르게", "둘 다 가능한 한 느리게", "축삭은 느리게, 시냅스는 빠르게"], "a": 0, "why": "신호 전달은 높은 전도도·이동도를 원하고, 기억(이완)은 이온 이동을 늦춰야 생긴다. 같은 재료 계열 안에서도 기능에 따라 바람직한 방향이 반대다.", "wrongWhy": ["", "빠르면 자극을 끈 뒤 신호가 금방 사라져 기억이 남지 않는다.", "느리면 신호가 멀리 가며 줄어들고 늦어진다.", "두 기능의 방향을 뒤바꿨다."], "ref": "d23.html#s-transmit-vs-memory", "refLabel": "2구간 '전달과 기억은 반대 방향을 원한다'"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "음전하가 고정된 겔과 양전하가 고정된 겔을 붙인 소자를 실험실 소금물(10 mM)이 아니라 몸속 체액(약 150 mM)에 넣었다고 상상해 보세요. 정류(한 방향으로만 전류가 잘 흐르는 성질)가 강해질지 약해질지 예상하고, 그 이유를 그림이나 한두 문장으로 설명해 보세요. 그리고 '이 소자가 하는 일을 전자 부품으로 흉내 낸다면 어떤 부품이 필요할지' 두 가지를 적어 보세요.", "items": [{"id": "d24-p01b", "type": "mc", "q": "폴리전해질(사슬에 음전하가 붙은 고분자) 겔에서 전류를 주로 나르는 것은 무엇일까?", "options": ["사슬에 붙어 있는 음전하", "양이온과 음이온이 반씩", "음전하를 상쇄하는 움직이는 양이온", "사슬에서 떨어져 나온 음이온 조각"], "a": 2, "why": "사슬에 붙은 이온은 움직이지 못하고 반대이온만 움직인다. 이런 재료를 단일 이온 전도체라 부른다. 1구간 기초 상자 ②.", "ref": "#s-three-materials", "refLabel": "1구간 ② 세 계단(그림 1)"}, {"id": "d24-p02", "type": "ox", "q": "고정 음전하 겔과 고정 양전하 겔을 맞붙인 접합에 역방향 전압을 걸면, 접합 근처에서 이온이 빠져나가 전류가 작아진다.", "a": true, "why": "두 쪽의 반대이온이 모두 접합에서 멀어지고 공이온은 배제되어 보충되지 않으므로 고갈층이 생긴다. 1구간 단계 3.", "ref": "#s-pn-steps", "refLabel": "1구간 ③ 단계 2–3: 순방향 축적, 역방향 고갈"}, {"id": "d24-p03", "type": "ox", "q": "같은 부호(둘 다 고정 음전하)의 겔 두 개를 붙여도 이종접합과 같은 정도의 정류가 생긴다.", "a": false, "why": "같은 부호끼리는 양쪽 모두 같은 이온이 움직여 역방향에서도 접합이 고갈되지 않는다. 같은 재료 접합 대비 이종접합의 역방향 저항이 약 35배였다는 대조 결과가 있다. 1구간 확인과 2구간.", "ref": "#s-same-sign", "refLabel": "1구간 ⑥ 같은 부호끼리 붙이면"}, {"id": "d24-p04c", "type": "mc", "q": "폴리전해질 이종접합 소자들에서 보고된 정류비(같은 크기 순·역방향 전압의 전류 비)는 대체로 어떨까?", "options": ["소자·조건에 따라 몇 배에서 10배 이상까지 흩어진다", "재료가 같으면 어느 실험실에서나 거의 같다", "고정 전하만 있으면 늘 1000배 이상이다", "전압을 훑는 속도를 바꿔도 거의 그대로다"], "a": 0, "why": "무용매 PIL 접합은 20 °C에서 2.5, 침전 연구의 하이드로겔 다이오드는 10배 넘는 것만 골랐다. 같은 소자도 전압을 빨리 훑을수록 정류비가 줄었다. 시간척도·온도·염에 따라 바뀐다. 2구간 표.", "ref": "#s-rect-ratio", "refLabel": "2구간 '정류는 얼마나 강한가' 표"}, {"id": "d24-p05b", "type": "mc", "q": "고정 전하로 공이온을 밀어내는 겔을 실험실 소금물(10 mM)에서 체액 수준(150 mM)으로 옮기면 공이온 배제는 어떻게 될까?", "options": ["더 강해진다", "변하지 않는다", "완전히 사라진다", "약해진다"], "a": 3, "why": "바깥 염이 진할수록 겔 속으로 들어오는 공이온이 많아진다. 고정 전하 0.5 M이면 1/50에서 1/3.6로 약해지지만 사라지지는 않는다(이상 Donnan 계산). 3구간 그림 3.", "ref": "#s-donnan-steps", "refLabel": "3구간 그림 3과 단계 1–3"}, {"id": "d24-p06", "type": "ox", "q": "폴리전해질·이종접합 소자는 누출이 없고 정류를 스스로 만들므로, 어떤 기능·환경에서든 일반 이온겔 소자보다 반드시 유리하다.", "a": false, "why": "전도도가 낮고(무용매 폴리전해질 10⁻⁵–10⁻² S/m), 염·pH에 따라 이점이 줄며, 정류·기억이 계산 성능으로 이어지는지는 따로 재야 한다. 3구간 조건표.", "ref": "#s-not-always", "refLabel": "3구간 '그래서 반드시인가'"}, {"id": "d24-p07b", "type": "mc", "q": "같은 +1 V 입력에 대한 소자 출력이 바로 앞의 입력들에 따라 달라지는 성질을 계산 부품의 말로 가장 잘 표현한 것은?", "options": ["단순 저항(옴의 법칙)", "입력 × 상태의 곱셈적 상호작용", "입력에 비례하는 선형 증폭", "측정 잡음에 의한 흔들림"], "a": 1, "why": "지금 입력의 효과가 지금 상태(과거 이력)에 따라 달라지는 것이다. 장난감 접합 모형에서 같은 +1 V의 출력이 1.73–2.52로 흩어졌다. 4구간.", "ref": "#s-toy-pulses", "refLabel": "4구간 ③ 같은 +1 V, 다른 출력(그림 4)"}, {"id": "d24-p08", "type": "ox", "q": "정류는 다이오드로, 서서히 잊는 기억은 저항–커패시터 회로로도 만들 수 있으므로, 이온 접합 소자의 고유한 가치는 개별 기능 하나의 성능보다 '어디에 있고 무엇을 입력으로 받느냐'에서 찾아야 한다.", "a": true, "why": "primitive 하나하나는 전자 회로로 대체 가능하다. 감지 자리에서의 처리, 화학적 정체성을 입력으로 쓰는 것, 한 소자의 다중 시간상수가 후보다. 5-4 반론.", "ref": "#s-objection", "refLabel": "5-4 반론과 응답"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 세 계단과 수송수", "items": [{"id": "d24-q01b", "type": "mc", "q": "어떤 겔을 10 mM KCl에 담근 뒤 전류를 흘렸더니 전류의 거의 전부를 K⁺가 날랐다. 이 겔에 대한 설명으로 가장 알맞은 것은?", "options": ["음전하가 사슬에 묶여 있어 K⁺만 사실상 움직인다", "K⁺가 Cl⁻보다 작아서 혼자 훨씬 빨리 움직인다", "양전하가 사슬에 묶여 있어 그 전하가 K⁺를 끈다", "두 이온이 다 움직이지만 Cl⁻는 전하가 없다"], "a": 0, "why": "고정 음전하가 공이온 Cl⁻를 배제하고(0.5 M 겔이면 10 mM에서 0.2 mM), 전기적 중성을 맞추는 반대이온 K⁺만 남아 전류를 나른다. 단일 이온 전도체다.", "wrongWhy": ["", "물속의 K⁺와 Cl⁻는 이동도가 비슷해 거의 반반(t₊ ≈ 0.49)을 나른다.", "고정 양전하는 K⁺를 밀어내고 Cl⁻만 남긴다. 그러면 Cl⁻가 전류를 나른다.", "Cl⁻도 전하를 띤다. 움직이면 전류를 나른다."], "ref": "#s-three-materials", "refLabel": "1구간 ② 세 계단과 0.5 M 겔 예"}, {"id": "d24-q02", "type": "ox", "q": "이종접합에 순방향 전압을 걸면 두 겔의 반대이온이 접합을 향해 밀려 쌓이므로 접합의 전도도가 오른다.", "a": true, "why": "p형의 양이온과 n형의 음이온이 모두 접합 쪽으로 이동한다. 역방향은 반대로 고갈. 1구간 단계 2.", "ref": "#s-pn-steps", "refLabel": "1구간 ③ 단계 2: 순방향"}, {"id": "d24-q21", "type": "short", "q": "[수송수 계산] 어떤 겔 속에서 K⁺가 나르는 전도도 몫이 0.30 S/m, Cl⁻의 몫이 0.10 S/m다. 양이온 수송수 t₊는? (소수 둘째 자리까지)", "a": ["0.75", ".75", "0.750", "75%"], "why": "t₊ = 0.30 ÷ (0.30 + 0.10) = 0.75. 전류의 75%를 K⁺가, 25%를 Cl⁻가 나른다. 3으로 답했다면 두 몫의 비를 쓴 것이고, 수송수는 '몫 하나 ÷ 전체 합'이다. 1구간 1-1 ②.", "ref": "#s-tplus-def", "refLabel": "1-1 ② 수송수의 정의"}, {"id": "d24-q22", "type": "mc", "q": "같은 전류를 흘릴 때 경계에 이온이 쌓이지도 비지도 않는 것은?", "options": ["양이온 선택 겔(고정 음전하)과 음이온 선택 겔(고정 양전하)의 접합", "KCl 하이드로겔과 양이온 선택 겔의 경계", "같은 KCl 하이드로겔 두 조각의 경계", "음이온 선택 겔과 KCl 하이드로겔의 경계"], "a": 2, "why": "경계에 쌓이는 속도는 δ × I/F다(δ = 전류가 들어오는 쪽 t₊ − 나가는 쪽 t₊). 같은 겔끼리는 t₊가 같아 0이다. 이종접합은 차이가 ±1로 가장 크고, 이온겔과 선택 겔의 경계는 약 ±0.5다(이온 농도 분극). 1구간 1-1 ④, 그림 2.", "ref": "#s-boundary-steps", "refLabel": "1-1 ④ 경계에서 쌓이고 비기(그림 2)"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 폴더의 이종접합", "items": [{"id": "d24-q03c", "type": "mc", "q": "이종접합의 고갈을 보이는 측정 가운데, 접합 근처의 이온 '분포'에 가장 직접 다가간 것은?", "options": ["±1 V에서 전류 비가 2.5배인 I–V 곡선", "같은 재료 접합보다 35배 큰 역방향 저항", "펄스 뒤 전류가 지수적으로 줄어드는 곡선", "깊이에 따라 두 이온 신호가 바뀌는 TOF-SIMS 분포"], "a": 3, "why": "TOF-SIMS는 깊이별 성분을 직접 잰다. 나머지는 전류·저항에서 고갈을 추론한 간접 증거다. 다만 그 분포도 시료 하나이고, 전압을 바꾼 비교·폭 정량이 없으며, 전압을 끈 뒤 진공에서 잰 것이다.", "wrongWhy": ["정류는 고갈이 있으면 생기지만, 분포를 본 것은 아니다.", "같은 재료 대조가 있어 좋은 간접 증거지만, 분포가 아니라 저항이다.", "감쇠는 고갈 말고도 EDL 방전 등 여러 원인으로 생긴다.", ""], "ref": "#s-depletion-evidence", "refLabel": "2구간 '고갈층을 직접 보았나'와 Fig. 1c–e"}, {"id": "d24-q04", "type": "ox", "q": "PIL 이종접합에서 쌍펄스 촉진(PPF)과 억제(PPD)의 시간상수가 서로 달랐다(21·36 ms vs 15·6 ms)는 것은, 쌓을 때와 비울 때의 동역학이 비대칭이라는 해석과 맞는다.", "a": true, "why": "Balqis 2026 p.27072. 하이드로겔 P–M–N 접합에서도 1 V와 −1 V의 평형 시간이 달랐다(Zhang 2024 p.15030). 극성별 비대칭은 계산 primitive 후보다. 2구간.", "ref": "#s-multi-tau", "refLabel": "2구간 '시간상수는 여럿이고, 극성에 따라 다르다'"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 염과 Donnan 배제 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d24-q05", "type": "short", "q": "[풀이 예시 확인] 고정 전하 X = 0.5 M인 겔을 10 mM 염에 담갔다. 근사식 c₋ ≈ c_s²/X = (0.01)² ÷ 0.5로 겔 속 공이온은 몇 mM인가? (소수 첫째 자리까지)", "a": ["0.2", "0.20", "0.2 mM"], "why": "10⁻⁴ ÷ 0.5 = 2×10⁻⁴ M = 0.2 mM, 바깥의 1/50. 3구간 단계 1.", "ref": "#s-donnan-steps", "refLabel": "3구간 단계 1: 실험실 조건"}, {"id": "d24-q06", "type": "short", "q": "[일부 채우기] 고정 전하 X = 2 M인 겔을 150 mM에 담갔다. c₋ ≈ c_s²/X = (0.15)² ÷ 2 = 0.0225 ÷ 2 = ? mM (소수 첫째 자리까지)", "a": ["11.3", "11.2", "11", "11.25"], "why": "0.01125 M = 11.25 mM(정확한 식으로는 11.2 mM), 바깥의 약 1/13. 고정 전하가 높으면 체액 수준에서도 배제가 남는다.", "ref": "#s-donnan-steps", "refLabel": "3구간 단계 3: 고정 전하를 늘리면"}, {"id": "d24-q07", "type": "short", "q": "[혼자 풀기] 고정 전하 X = 1 M인 겔을 150 mM에 담갔다. 겔 속 공이온은 약 몇 mM인가? (정수로)", "a": ["22", "23", "22.5", "약 22"], "why": "근사로 0.0225 ÷ 1 = 22.5 mM, 정확한 식 (−X + √(X² + 4c_s²))/2로 22.0 mM. 바깥(150 mM)의 약 1/7이다. 헷갈렸다면 c_s를 제곱했는지 확인하세요. 그림 3.", "ref": "#s-donnan-potential", "refLabel": "3구간 Donnan 퍼텐셜과 어림식 c₋ ≈ c_s²/X"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 계산 primitive", "items": [{"id": "d24-q08b", "type": "mc", "q": "이종접합의 '고갈 + 회복 시간'이 계산 primitive로서 하는 역할에 가장 가까운 것은?", "options": ["부호에 따라 응답이 다른 비선형 함수", "지금 입력의 효과가 지난 입력에 달린 이력 의존", "여러 입력에 가중치를 곱해 더하는 합산", "입력을 그대로 일정 배로 키우는 선형 증폭"], "a": 1, "why": "고갈·회복에는 이온이 움직이는 시간이 걸려 지금 상태가 최근 입력을 담는다. 그래서 같은 입력의 효과가 상태(이력)에 따라 달라진다. 부호 비대칭 비선형은 '정류'에 대응한다.", "wrongWhy": ["그것은 정류(축적/고갈의 방향 차이)에 대응한다. 고갈+회복 '시간'이 주는 것은 이력 의존이다.", "", "가중 합산은 readout이나 crossbar가 하는 일이다.", "선형 증폭은 이력도 비대칭도 없다."], "ref": "#s-primitive-props", "refLabel": "4구간 '이종접합의 세 성질 → primitive'"}, {"id": "d24-q09", "type": "ox", "q": "장난감 접합 모형에서 펄스가 시간상수보다 짧으면 −1 V 펄스의 전류가 기억 없는 정류기보다 훨씬 크게(덜 정류되게) 나올 수 있다. 즉 정류의 세기도 시간척도에 달려 있다.", "a": true, "why": "0.5 s 펄스, τ = 2 s에서 −1 V 출력이 −1.75로 시작해 연속된 −1 V마다 작아졌다(기억 없는 정류기는 늘 −0.22). 접합이 아직 다 비지 않았기 때문이다. 4구간 단계 3.", "ref": "#s-toy-pulses", "refLabel": "4구간 ③ 단계 3: 짧은 펄스의 정류"}, {"id": "d24-q10b", "type": "mc", "q": "접합에 이온이 쌓이는 것과, 쌓인 이온이 확산으로 다시 퍼지는 것을 LIF 뉴런의 네 항(적분·누설·발화·리셋)으로 옮기면?", "options": ["쌓임 = 발화, 퍼짐 = 리셋", "쌓임 = 누설, 퍼짐 = 적분", "쌓임 = 리셋, 퍼짐 = 발화", "쌓임 = 적분, 퍼짐 = 누설"], "a": 3, "why": "입력이 올 때마다 상태가 쌓이는 것이 적분, 입력이 없을 때 상태가 쉬는 값으로 돌아가는 것이 누설이다. 발화와 리셋은 문턱을 넘을 때 일어나는 사건이라 쌓임·퍼짐 자체와는 다르다.", "wrongWhy": ["발화·리셋은 문턱을 넘을 때의 사건이다. 쌓이는 과정 자체는 적분이다.", "두 항을 뒤바꿨다. 퍼져서 원래대로 돌아가는 것이 누설이다.", "리셋은 발화 직후 상태를 되돌리는 사건이다.", ""], "ref": "#s-primitive-list", "refLabel": "4구간 ② primitive 목록과 LIF의 네 항"}]}, "4-end": {"kind": "end", "title": "4장 마무리", "items": [{"id": "d24-q11b", "type": "mc", "q": "다음 쓰임 가운데 이온 접합 소자의 '이온만의 몫'이 가장 강하게 남는 것은?", "options": ["땀 속 Na⁺와 K⁺를 구별해 감지한 그 자리에서 기억을 거는 것", "회로 기판 위에서 1 s 시간상수의 누설 적분을 만드는 것", "MHz로 바뀌는 전압 신호를 한쪽 방향만 통과시키는 것", "디지털 칩 안에서 8비트 가중치를 오래 저장하는 것"], "a": 0, "why": "누설 적분은 저항–커패시터 회로가, 고속 정류는 다이오드가, 디지털 가중치 저장은 기존 메모리가 더 싸게 한다. 화학적 정체성을 입력으로 받아 감지 자리에서 처리하는 일은 회로로 하려면 센서와 변환기가 먼저 필요하다 [해석].", "wrongWhy": ["", "같은 일을 저항–커패시터 회로가 부품 두 개로 한다.", "이온 접합은 ms보다 느려 MHz 신호를 따라가지 못하고, 다이오드가 더 낫다.", "비휘발 디지털 메모리가 훨씬 빠르고 촘촘하다."], "ref": "#s-circuit-alternative", "refLabel": "4구간 ⑤ 같은 primitive를 전자 회로로?"}, {"id": "d24-q12", "type": "ox", "q": "한 접합 안에 시간상수가 여럿 있다면, 그것만으로 그 소자는 여러 노드를 가진 reservoir처럼 기억 용량이 늘어난다.", "a": false, "why": "각 모드가 따로 읽히고(독립된 방향, Day 24–25) 재현될 때만 다양성이 된다. 그 측정은 폴더 문헌에서 아직 찾지 못했다 [가설]. 4구간.", "ref": "#s-primitive-props", "refLabel": "4구간 '다중 시간상수 → 다중 시간척도 기억'"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · Phase 4 종합", "items": [{"id": "d24-q13b", "type": "mc", "q": "한 연구자가 '내 접합의 다중 시간상수가 reservoir 성능을 높인다'고 쓰려 한다. 지금 Phase 4의 근거로 가장 부족한 것은?", "options": ["접합에서 이온이 쌓이고 빈다는 물리적 근거", "시간상수가 크기로 L²/D만큼 어림된다는 계산", "그 시간상수들이 MC 같은 계산 지표를 바꾸는 측정", "고정 전하가 공이온을 배제한다는 평형 계산"], "a": 2, "why": "축적·고갈, L²/D 어림, Donnan 배제는 폴더 원문과 교과서적 물리로 받쳐진다. 비어 있는 것은 소자 응답이 계산 지표(MC, IPC, 기준선 대비 이득)를 얼마나 바꾸는지의 측정이다.", "wrongWhy": ["축적·고갈은 대조 실험과 TOF-SIMS 등으로 받쳐진다.", "L²/D 어림은 Day 37에서 측정과 같은 자릿수로 맞았다.", "", "Donnan 배제는 교과서적 평형 결과이고 폴더 원문도 같은 설명을 쓴다."], "ref": "#s-weakest", "refLabel": "5-2 '가장 약한 고리'"}, {"id": "d24-q14b", "type": "ox", "q": "대응표에서 어떤 이온 물리가 전자 회로로 대체할 수 있다고 판정되면(예: EDL 충전 → 저항–커패시터 회로), 그 물리를 쓰는 소자는 어떤 응용에서도 계산 소자로서 쓸모가 없다.", "a": false, "why": "판정은 primitive 하나의 성능에 대한 것이다. 같은 primitive라도 화학·생체 매질과 닿는 감지 자리에서 변환 없이 처리해야 하는 응용이라면 의미가 남을 수 있다. 그 조건이 성립하는 응용은 Phase 5에서 숫자로 확인한다 [해석].", "ref": "#s-objection", "refLabel": "5-4 반론과 응답(자리와 입력의 종류)"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d24-q15b", "type": "mc", "q": "이온액체를 품은 일반 이온겔을 같은 이온 단위의 poly(ionic liquid)로 바꿀 때 '얻는 것'과 '잃기 쉬운 것'의 짝으로 알맞은 것은?", "options": ["얻음: 더 높은 전도도 / 잃음: 누출 없는 단일 상", "얻음: 누출 없는 단일 상 / 잃음: 높은 이온전도도", "얻음: 진한 염에서 더 강한 배제 / 잃음: 정류", "얻음: 더 빠른 응답 / 잃음: 넓은 동작 온도"], "a": 1, "why": "이온이 사슬에 묶여 새지 않고 상분리가 없는 대신, 사슬 운동에 기대는 이동이라 전도도가 낮다(무용매 10⁻⁵–10⁻² S/m). 무용매 PIL은 −20–100 °C 동작이 보고되었다.", "wrongWhy": ["두 쪽을 뒤바꿨다. 묶인 이온은 새지 않지만 느리다.", "", "고정 전하의 배제는 진한 염에서 약해진다. 재료를 바꿔도 이 경향은 그대로다.", "무용매 PIL은 낮은 전도도 때문에 대개 더 느리고, 넓은 온도 동작이 보고되었다."], "ref": "#s-condition-table", "refLabel": "3구간 조건표: 누출·전도도·열 안정 줄"}, {"id": "d24-q16", "type": "short", "q": "고정 전하 0.5 M 겔의 공이온 배제(바깥 ÷ 겔 속)는 10 mM에서 약 50배, 150 mM에서 약 3.6배였다. 배제가 약 몇 배 약해졌나? (정수로)", "a": ["14", "약 14", "13.9", "14배"], "why": "50 ÷ 3.6 ≈ 14. 실험실 정류비를 체액 조건으로 그대로 옮길 수 없다는 뜻이다. 3구간.", "ref": "#s-donnan-steps", "refLabel": "3구간 단계 1–2: 1/50 → 1/3.6"}, {"id": "d24-q17", "type": "ox", "q": "Lee 2026 (AFM)의 히알루론산–키토산 접합은 pH 6에서 측정되었고, 키토산의 pKa가 6.2–6.5 부근이므로 생체의 pH 7.4에서는 n형 쪽 선택성이 약해질 수 있다는 질문이 남는다.", "a": true, "why": "저자들은 pKa 때문에 pH 6에서 두 겔이 각각 음·양전하를 띤다고 설명한다(p.3). pH 7.4에서의 측정은 본문에 없다. 3구간.", "ref": "#s-ph", "refLabel": "3구간 pH와 고정 전하(Lee 2026 (AFM)의 측정 조건)"}, {"id": "d24-q18b", "type": "mc", "q": "'폴리전해질 이종접합은 일반 이온겔보다 반드시 유리한가?'에 대한 답으로 근거와 가장 잘 맞는 것은?", "options": ["그렇다: 재료 자체가 정류하고 누출이 없다", "아니다: 전도도가 낮아 모든 기능에서 불리하다", "조건부다: 기능과 염·pH·속도에 따라 갈린다", "알 수 없다: 두 재료를 비교한 측정이 하나도 없다"], "a": 2, "why": "누출 없음·재료 자체의 정류·고갈 기억은 이점이고, 낮은 전도도·염/pH 의존·흩어진 정류비는 대가다. 그래서 '어떤 기능, 어떤 환경에서'를 붙여야 답이 된다.", "wrongWhy": ["이점만 본 답이다. 진한 염에서는 배제가 약해지고 전도도가 낮다.", "대가만 본 답이다. 정류·기억이 필요한 기능에서는 이점이 있다.", "", "조건표의 각 줄은 폴더 원문의 측정과 계산으로 받쳐져 있다. 판단할 근거가 없지는 않다."], "ref": "#s-not-always", "refLabel": "3구간 '그래서 반드시인가'"}, {"id": "d24-q19b", "type": "mc", "q": "착물화 섬유의 느린 시간상수가 펄스 수와 섬유 접점 수에 따라 몇 자릿수 바뀌었다. 이 결과를 내 보고서에 옮길 때 가장 알맞은 것은?", "options": ["τ를 그 재료의 상수로 하나만 적는다", "가장 긴 τ만 골라 그 재료의 기억 시간으로 적는다", "τ가 바뀌니 기억 소자로 쓸 수 없다고 적는다", "τ와 함께 펄스 수·접점 수 같은 자극 조건을 적는다"], "a": 3, "why": "τ는 재료 상수가 아니라 자극 이력에 따라 바뀌는 값이다(Day 38). 긴 기억을 프로그래밍할 수 있다는 이점과, 보고·재현에 조건이 필요하다는 대가가 함께 있다.", "wrongWhy": ["τ가 자극에 따라 몇 자릿수 바뀌었으므로 하나의 상수로 적을 수 없다.", "조건 없이 가장 긴 값만 적으면 재현할 수 없고 과장이 된다.", "바뀌는 τ는 오히려 기억을 '프로그래밍'하는 손잡이가 될 수 있다.", ""], "ref": "#s-complexation", "refLabel": "2구간 '착물화로 프로그래밍하는 계층 구조'"}, {"id": "d24-q20b", "type": "mc", "q": "'전자 회로가 모든 primitive를 할 수 있으니 이온 접합 소자는 의미가 없다'는 반론에 대한 응답으로 가장 균형 잡힌 것은?", "options": ["부분만 맞다: 자리와 입력의 종류에서 의미가 남는다", "틀렸다: 이온 접합의 정류비가 다이오드보다 늘 크기 때문이다", "틀렸다: 이온 접합이 전자 회로보다 빠르게 응답하기 때문이다", "맞다: 그러므로 이온 접합 연구는 접는 것이 옳다"], "a": 0, "why": "primitive 하나하나는 대체로 회로로 대체 가능하다. 이온 접합의 의미는 감지 자리에서의 처리, 화학적 정체성 입력, 한 소자의 다중 동역학처럼 '자리와 입력의 종류'에 있고, 다중 동역학은 각 모드가 따로 읽힐 때만 의미가 있다[가설]. 응용 조건은 Phase 5에서 확인한다.", "wrongWhy": ["", "폴더의 정류비는 2.5–10배 남짓으로, 다이오드보다 크지 않다.", "이온 접합의 응답은 ms 수준으로 전자 회로보다 느리다.", "반론은 primitive 하나에 대해서만 맞고, 자리와 입력의 이점은 따로 따져야 한다."], "ref": "#s-objection", "refLabel": "5-4 반론과 응답"}]}}}</script>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>
