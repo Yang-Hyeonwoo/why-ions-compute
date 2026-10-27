@@ -1,4 +1,4 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 356' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 324' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
 <text x='360.0' y='20' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >한 샘플이 센서 노드의 사슬을 지나가는 모습 (심전도 패치 예, 모식도)</text>
 <rect x='18' y='34' width='150' height='30' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.5' />
@@ -72,18 +72,11 @@
 <text x='449.0' y='208' font-size='10.5' fill='#444' text-anchor='middle' font-weight='bold' >출력: 판정(또는 숫자)</text>
 <text x='627.0' y='208' font-size='10.5' fill='#444' text-anchor='middle' font-weight='bold' >출력: 전파</text>
 <line x1='14' y1='220' x2='706' y2='220' stroke='#d9d9d9' stroke-width='1'/>
-<text x='14' y='238' font-size='11' fill='#999' text-anchor='start' font-weight='bold' >한 번의 일에 드는 에너지 — 모형의 가정값과 그 근거(자릿수)</text>
-<text x='93.0' y='260' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >이 모형에서는 뺌</text>
-<text x='93.0' y='278' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >(세 시나리오에서 같다고 봄)</text>
-<text x='271.0' y='260' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >변환 1번 = 1 nJ (가정)</text>
-<text x='271.0' y='278' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >데이터시트 예: 145 µA × 3 V</text>
-<text x='271.0' y='294' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >× 약 3.9 µs ≈ 1.7 nJ</text>
-<text x='449.0' y='260' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >샘플 1개 = 20 nJ (가정)</text>
-<text x='449.0' y='278' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >= 0.3 nJ/사이클 × 약 67 사이클</text>
-<text x='449.0' y='294' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >(100 µA/MHz × 3 V)</text>
-<text x='627.0' y='260' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1 bit = 50 nJ (가정)</text>
-<text x='627.0' y='278' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >전파를 내는 동안만 ≈ 16 nJ/bit</text>
-<text x='627.0' y='294' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >실측 시스템 ≈ 400 nJ/bit</text>
-<text x='360.0' y='326' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >근거: TI MSP430FR5969 데이터시트(ADC·MCU), Nordic nRF52832 제품 안내서(무선 칩), Siekkinen et al. 2012(무선 실측).</text>
-<text x='360.0' y='344' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >가정값은 이 근거로 자릿수만 맞춘 것이며 칩·설정마다 다르다. 파형은 모양만 흉내 낸 것으로 측정값이 아니다.</text>
+<text x='14' y='238' font-size='11' fill='#999' text-anchor='start' font-weight='bold' >각 고리의 '한 번의 일' — 에너지는 이 단위로 센다 (숫자는 그림 3)</text>
+<text x='93.0' y='260' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >늘 켜져 있음 (always-on)</text>
+<text x='271.0' y='260' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >변환 1번 = 샘플 1개</text>
+<text x='449.0' y='260' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >샘플 1개 처리</text>
+<text x='627.0' y='260' font-size='11' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1 bit 송신</text>
+<text x='360.0' y='290' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >1초에 몇 번 하나: ②·③은 샘플링률(이 예 1,000 S/s), ④는 1초에 보내는 비트 수, ①은 횟수 없이 늘 켜져 있다.</text>
+<text x='360.0' y='310' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >파형은 모양만 흉내 낸 것으로 측정값이 아니다. 숫자 1234와 12 bit 묶음은 같은 값을 두 방식으로 적은 것이다.</text>
 </svg>

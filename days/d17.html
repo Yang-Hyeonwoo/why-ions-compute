@@ -581,7 +581,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="lesson">② 학습자료</h2>
 <div class="lesson-body" data-pre="d17-pre">
 <div class="lesson-meta">
-<p>학습 구간 6개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 75분 안팎(추정) · 선택 영상 9분 · 퀴즈 24문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Singh 2026은 p.8, 12(Table 2), 14(3.5–3.6절), 19(5.2–5.3절), 20(Table 3), 21–22(Table 4) / Zhong 2022는 p.672–674(서론·Fig. 1·시스템 구성), 677–679(Fig. 5g 포함)(결과·전력 비교·Methods 일부), 그리고 웹에 공개된 보충자료의 Supplementary Table 1(전력 추정 방법) / Roadmap 2026은 p.8119, 8126, 8130, 8135–8136 / Liang 2024는 p.195, 201–202 / Jiang 2026은 p.1120. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 오늘 에너지 예산의 부품 값은 모두 자릿수 감각을 위한 [가정]이며, D5 그림 3의 가정값(ADC 1 nJ/변환, MCU 20 nJ/샘플, 무선 50 nJ/bit)과 D5 3구간의 곱하고 더하기 한 번 3 nJ(10박자 × 0.3 nJ)을 그대로 이어 씁니다. 증폭+필터와 상태 읽기 증폭기의 가정값은 제조사 공개 사양(MAX30003, AD8232, TLV8541)으로 자릿수를 맞췄습니다(3-2절 표).</p>
+<p>학습 구간 6개 · 한 번에 다 읽지 않아도 됩니다(구간 끝마다 쉬는 지점이 있고, 다음에 열면 "지난번 읽던 곳" 링크가 뜹니다). 필수 읽기 75분 안팎(추정) · 선택 영상 9분 · 퀴즈 24문항 · 내 답 쓰기는 따로. 근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Singh 2026은 p.8, 12(Table 2), 14(3.5–3.6절), 19(5.2–5.3절), 20(Table 3), 21–22(Table 4) / Zhong 2022는 p.672–674(서론·Fig. 1·시스템 구성), 677–679(Fig. 5g 포함)(결과·전력 비교·Methods 일부), 그리고 웹에 공개된 보충자료의 Supplementary Table 1(전력 추정 방법) / Roadmap 2026은 p.8119, 8126, 8130, 8135–8136 / Liang 2024는 p.195, 201–202 / Jiang 2026은 p.1120. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 오늘 에너지 예산의 부품 값은 모두 자릿수 감각을 위한 [가정]이며, D5 그림 4의 가정값(ADC 1 nJ/변환, MCU 20 nJ/샘플, 무선 50 nJ/bit)과 D5 3구간의 곱하고 더하기 한 번 3 nJ(10박자 × 0.3 nJ)을 그대로 이어 씁니다. 증폭+필터와 상태 읽기 증폭기의 가정값은 제조사 공개 사양(MAX30003, AD8232, TLV8541)으로 자릿수를 맞췄습니다(3-2절 표).</p>
 </div>
 <p>어제까지 우리는 소자가 계산에 쓸모 있는지를 <strong>정확도</strong>로 따졌습니다. 기억이 과제의 시간척도에 맞는지(D13), 상태가 서로 다른 방향으로 펼쳐지는지(D14), 벤치마크가 무엇을 시험하는지(D15), 그리고 무엇과 비교해야 정확도 숫자가 뜻을 갖는지(D16). 오늘은 질문을 하나 더 붙입니다. <strong>같은 정확도라면, 그 답을 얻는 데 시스템 전체가 얼마를 썼는가?</strong> <strong>물리 reservoir computing</strong>(<strong>RC</strong>: 고정된 물리계인 <strong>reservoir</strong>가 입력을 상태로 바꾸고, 상태에서 답을 꺼내는 마지막 곱셈·덧셈 층인 <strong>readout</strong>만 데이터로 학습하는 방식, D7)을 하는 논문의 상당수는 "저전력"을 동기로 씁니다. 오늘은 그 말을 숫자로 검사하는 방법을 배웁니다.</p>
 <ol type="1">
@@ -800,7 +800,7 @@ E_{res} = \int_{t_0}^{t_1} V(t)\, I(t)\, dt
 <ul>
 <li><strong>켜져 있는 동안 계속 쓰는 항목</strong>(증폭기, MCU 대기): 값이 전력 <span class="math inline">\(P\)</span> [W]로 주어집니다. W = J/s이므로 켜져 있던 시간 <span class="math inline">\(t\)</span> [s]를 곱하면 s가 지워지고 J이 남습니다. <span class="math inline">\(E = P \times t\)</span>. 예: 10 µW × 1 s = 10 µJ.</li>
 <li><strong>한 번 할 때마다 쓰는 항목</strong>(ADC 변환, 펄스, 무선 비트, 계산): 값이 한 번의 에너지 [J/회]로 주어지고, 횟수를 곱하면 J입니다. <span class="math inline">\(E = n \times E_1\)</span>. 예: 50회 × 1 nJ/회 = 50 nJ.</li>
-<li>둘은 서로 바뀝니다. 한 번의 에너지에 <strong>1초당 횟수</strong>(율, 예: 샘플링률 [S/s])를 곱하면 [J/회] × [회/s] = [J/s] = W, 즉 평균 전력입니다. D5에서 센서 노드의 평균 전력을 <span class="math inline">\(P_{\text{avg}} \approx f_s E_{ADC} + \ldots\)</span>로 구한 방식입니다(<a href="../days/d05.html#b-sensor-node">D5 기초 1</a>). 예: 250 S/s × 1 nJ = 250 nJ/s = 0.25 µW. 이 전력을 박동 하나(1 s) 동안 쓰면 0.25 µW × 1 s = 0.25 µJ로, "250회 × 1 nJ"과 같은 값입니다.</li>
+<li>둘은 서로 바뀝니다. 한 번의 에너지에 <strong>1초당 횟수</strong>(율, 예: 샘플링률 [S/s])를 곱하면 [J/회] × [회/s] = [J/s] = W, 즉 평균 전력입니다. D5에서 센서 노드의 평균 전력을 <span class="math inline">\(P_{\text{avg}} \approx f_s E_{ADC} + \ldots\)</span>로 구한 방식입니다(<a href="../days/d05.html#s-energy-model">D5 2-2: 평균 전력을 세는 법</a>). 예: 250 S/s × 1 nJ = 250 nJ/s = 0.25 µW. 이 전력을 박동 하나(1 s) 동안 쓰면 0.25 µW × 1 s = 0.25 µJ로, "250회 × 1 nJ"과 같은 값입니다.</li>
 </ul>
 <p>오늘은 박동 하나 = 추론 한 번에 든 에너지[J/추론]를 세므로, 모든 항목을 박동 하나 동안의 J로 맞춰 더합니다.</p>
 <p><strong>계산 조건</strong>(모두 [가정]): 박동 하나 = 신호 1 s(분당 60회). 소자 10개, 박동당 50단계(단계당 20 ms)이므로 펄스는 10 × 50 = 500개. readout에 넣는 숫자(<strong>특징</strong>, feature)는 소자마다 5번 샘플해 50개이므로 상태 ADC는 50회. 디지털 경로의 심전도 샘플링은 250 S/s(1초에 250번 숫자로 바꿈)로, D5 예제의 1,000 S/s보다 낮춰 디지털 쪽(A)에 유리하게 두었습니다.</p>
@@ -841,7 +841,7 @@ E_{res} = \int_{t_0}^{t_1} V(t)\, I(t)\, dt
 <td>무선</td>
 <td>50 nJ/bit, 결과 16 bit</td>
 <td>한 번마다</td>
-<td>D5 그림 2·3과 같다(칩이 전파를 내는 순간 약 16 nJ/bit와 실측 약 400 nJ/bit 사이)</td>
+<td>D5 그림 3·4와 같다(칩이 전파를 내는 순간 약 16 nJ/bit와 실측 약 400 nJ/bit 사이)</td>
 </tr>
 <tr class="even">
 <td>ⓓ</td>
