@@ -1,0 +1,127 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 654' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='350' y='22' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >시냅스 소자의 사양: 곡선이 어떻게 생겼고, 학습 규칙은 왜 신경 쓰나 (모식도)</text>
+<rect x='6' y='38' width='344' height='142' rx='6' fill='#fbfbfb' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='16' y='56' font-size='11' fill='#444' text-anchor='start' font-weight='bold' >학습 규칙이 소자에 주는 명령</text>
+<line x1='28' y1='152' x2='144' y2='152' stroke='#999' stroke-width='1.1'/>
+<line x1='28' y1='152' x2='28' y2='68' stroke='#999' stroke-width='1.1'/>
+<text x='86.0' y='164' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >펄스 차례</text>
+<text x='24' y='110.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' transform='rotate(-90 24 110.0)'>G</text>
+<text x='46' y='74' font-size='11' fill='#13936b' text-anchor='middle' font-weight='bold' >+</text>
+<text x='64' y='74' font-size='11' fill='#13936b' text-anchor='middle' font-weight='bold' >+</text>
+<text x='82' y='74' font-size='11' fill='#13936b' text-anchor='middle' font-weight='bold' >+</text>
+<text x='100' y='74' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='bold' >−</text>
+<text x='118' y='74' font-size='11' fill='#13936b' text-anchor='middle' font-weight='bold' >+</text>
+<text x='136' y='74' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='bold' >−</text>
+<polyline points='28.0,130.0 46.0,130.0 46.0,118.0 64.0,118.0 64.0,106.0 82.0,106.0 82.0,94.0 100.0,94.0 100.0,106.0 118.0,106.0 118.0,94.0 136.0,94.0 136.0,106.0 144.0,106.0' fill='none' stroke='#444' stroke-width='1.8' stroke-linejoin='round'/>
+<text x='156' y='78' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >오차를 보고 가중치마다</text>
+<text x='156' y='93' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >'조금 올려(+)·내려(−)'를 계산</text>
+<text x='156' y='108' font-size='9.5' fill='#13936b' text-anchor='start' font-weight='normal' >→ 소자에는 강화(+)·억제(−)</text>
+<text x='156' y='123' font-size='9.5' fill='#13936b' text-anchor='start' font-weight='normal' >   펄스 몇 번으로 전달된다.</text>
+<text x='156' y='138' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >아래 일곱 칸은 이 전달이</text>
+<text x='156' y='153' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >얼마나 정확한지를 본다.</text>
+<rect x='356' y='38' width='344' height='142' rx='6' fill='#fbfbfb' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='366' y='56' font-size='11' fill='#e08a3c' text-anchor='start' font-weight='bold' >① 상태 수 (weight resolution)</text>
+<line x1='378' y1='152' x2='494' y2='152' stroke='#999' stroke-width='1.1'/>
+<line x1='378' y1='152' x2='378' y2='68' stroke='#999' stroke-width='1.1'/>
+<text x='436.0' y='164' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >전도도 G</text>
+<text x='374' y='110.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' transform='rotate(-90 374 110.0)'>소자 수</text>
+<polyline points='383.0,151.0 384.0,150.1 385.0,148.7 386.0,146.4 387.0,143.1 388.0,138.4 389.0,132.3 390.0,124.9 391.0,116.4 392.0,107.5 393.0,99.2 394.0,92.2 395.0,87.6 396.0,86.0 397.0,87.6 398.0,92.2 399.0,99.2 400.0,107.5 401.0,116.4 402.0,124.9 403.0,132.3 404.0,138.4 405.0,143.1 406.0,146.4 407.0,148.7 408.0,150.1 409.0,151.0' fill='none' stroke='#e08a3c' stroke-width='1.8' stroke-linejoin='round'/>
+<polyline points='411.0,151.0 412.0,150.1 413.0,148.7 414.0,146.4 415.0,143.1 416.0,138.4 417.0,132.3 418.0,124.9 419.0,116.4 420.0,107.5 421.0,99.2 422.0,92.2 423.0,87.6 424.0,86.0 425.0,87.6 426.0,92.2 427.0,99.2 428.0,107.5 429.0,116.4 430.0,124.9 431.0,132.3 432.0,138.4 433.0,143.1 434.0,146.4 435.0,148.7 436.0,150.1 437.0,151.0' fill='none' stroke='#e08a3c' stroke-width='1.8' stroke-linejoin='round'/>
+<polyline points='439.0,151.0 440.0,150.1 441.0,148.7 442.0,146.4 443.0,143.1 444.0,138.4 445.0,132.3 446.0,124.9 447.0,116.4 448.0,107.5 449.0,99.2 450.0,92.2 451.0,87.6 452.0,86.0 453.0,87.6 454.0,92.2 455.0,99.2 456.0,107.5 457.0,116.4 458.0,124.9 459.0,132.3 460.0,138.4 461.0,143.1 462.0,146.4 463.0,148.7 464.0,150.1 465.0,151.0' fill='none' stroke='#e08a3c' stroke-width='1.8' stroke-linejoin='round'/>
+<polyline points='467.0,151.0 468.0,150.1 469.0,148.7 470.0,146.4 471.0,143.1 472.0,138.4 473.0,132.3 474.0,124.9 475.0,116.4 476.0,107.5 477.0,99.2 478.0,92.2 479.0,87.6 480.0,86.0 481.0,87.6 482.0,92.2 483.0,99.2 484.0,107.5 485.0,116.4 486.0,124.9 487.0,132.3 488.0,138.4 489.0,143.1 490.0,146.4 491.0,148.7 492.0,150.1 493.0,151.0' fill='none' stroke='#e08a3c' stroke-width='1.8' stroke-linejoin='round'/>
+<text x='506' y='78' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >구별되는 전도도 단계의 수.</text>
+<text x='506' y='93' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >봉우리가 겹치지 않아야</text>
+<text x='506' y='108' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >한 단계로 센다.</text>
+<text x='506' y='123' font-size='9.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >학습: 한 단계보다 작은</text>
+<text x='506' y='138' font-size='9.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >'조금'은 반영되지 않는다.</text>
+<rect x='6' y='186' width='344' height='142' rx='6' fill='#fbfbfb' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='16' y='204' font-size='11' fill='#3d6fb4' text-anchor='start' font-weight='bold' >② 읽기 선형성 (read linearity)</text>
+<line x1='28' y1='300' x2='144' y2='300' stroke='#999' stroke-width='1.1'/>
+<line x1='28' y1='300' x2='28' y2='216' stroke='#999' stroke-width='1.1'/>
+<text x='86.0' y='312' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >읽기 전압 V</text>
+<text x='24' y='258.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' transform='rotate(-90 24 258.0)'>I</text>
+<polyline points='28.0,300.0 30.9,298.8 33.8,297.5 36.7,296.2 39.6,295.0 42.5,293.8 45.4,292.5 48.3,291.2 51.2,290.0 54.1,288.8 57.0,287.5 59.9,286.2 62.8,285.0 65.7,283.8 68.6,282.5 71.5,281.2 74.4,280.0 77.3,278.8 80.2,277.5 83.1,276.2 86.0,275.0 88.9,273.8 91.8,272.5 94.7,271.2 97.6,270.0 100.5,268.8 103.4,267.5 106.3,266.2 109.2,265.0 112.1,263.8 115.0,262.5 117.9,261.2 120.8,260.0 123.7,258.8 126.6,257.5 129.5,256.2 132.4,255.0 135.3,253.8 138.2,252.5 141.1,251.2 144.0,250.0' fill='none' stroke='#13936b' stroke-width='1.8' stroke-linejoin='round'/>
+<polyline points='28.0,300.0 30.9,298.7 33.8,297.5 36.7,296.2 39.6,295.0 42.5,293.7 45.4,292.4 48.3,291.1 51.2,289.7 54.1,288.4 57.0,287.0 59.9,285.6 62.8,284.1 65.7,282.6 68.6,281.1 71.5,279.5 74.4,277.9 77.3,276.3 80.2,274.5 83.1,272.8 86.0,270.9 88.9,269.0 91.8,267.1 94.7,265.1 97.6,263.0 100.5,260.8 103.4,258.6 106.3,256.3 109.2,253.9 112.1,251.4 115.0,248.8 117.9,246.1 120.8,243.4 123.7,240.5 126.6,237.5 129.5,234.5 132.4,231.3 135.3,228.0 138.2,224.6 141.1,221.1 144.0,217.5' fill='none' stroke='#c8553d' stroke-width='1.8' stroke-linejoin='round'/>
+<text x='142' y='272' font-size='9' fill='#13936b' text-anchor='end' font-weight='normal' >I = G·V</text>
+<text x='90' y='222' font-size='9' fill='#c8553d' text-anchor='end' font-weight='normal' >휘어짐</text>
+<text x='156' y='226' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >같은 G에서 전류가 전압에</text>
+<text x='156' y='241' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >비례하나 (작은 읽기 전압).</text>
+<text x='156' y='256' font-size='9.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >곱셈 I = G·V가 틀리면 출력이</text>
+<text x='156' y='271' font-size='9.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >틀리고, 그 출력으로 계산한</text>
+<text x='156' y='286' font-size='9.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >갱신 명령도 틀린다.</text>
+<rect x='356' y='186' width='344' height='142' rx='6' fill='#fbfbfb' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='366' y='204' font-size='11' fill='#13936b' text-anchor='start' font-weight='bold' >③ 갱신 선형성 (update linearity)</text>
+<line x1='378' y1='300' x2='494' y2='300' stroke='#999' stroke-width='1.1'/>
+<line x1='378' y1='300' x2='378' y2='216' stroke='#999' stroke-width='1.1'/>
+<text x='436.0' y='312' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >강화 펄스 수</text>
+<text x='374' y='258.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' transform='rotate(-90 374 258.0)'>G</text>
+<polyline points='378.0,300.0 383.8,296.6 389.6,293.2 395.4,289.8 401.2,286.4 407.0,283.0 412.8,279.6 418.6,276.2 424.4,272.8 430.2,269.4 436.0,266.0 441.8,262.6 447.6,259.2 453.4,255.8 459.2,252.4 465.0,249.0 470.8,245.6 476.6,242.2 482.4,238.8 488.2,235.4 494.0,232.0' fill='none' stroke='#999' stroke-width='1.5' stroke-dasharray='4 3' stroke-linejoin='round'/>
+<polyline points='378.0,300.0 383.8,289.2 389.6,280.0 395.4,272.3 401.2,265.7 407.0,260.1 412.8,255.4 418.6,251.4 424.4,248.1 430.2,245.2 436.0,242.8 441.8,240.8 447.6,239.0 453.4,237.6 459.2,236.3 465.0,235.3 470.8,234.4 476.6,233.6 482.4,233.0 488.2,232.5 494.0,232.0' fill='none' stroke='#13936b' stroke-width='2' stroke-linejoin='round'/>
+<text x='492' y='270' font-size='9' fill='#999' text-anchor='end' font-weight='normal' >이상</text>
+<text x='422' y='222' font-size='9' fill='#13936b' text-anchor='start' font-weight='normal' >실제: 포화</text>
+<text x='506' y='226' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >펄스 하나마다 ΔG가 같은가.</text>
+<text x='506' y='241' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >실제는 위로 갈수록 덜 변한다.</text>
+<text x='506' y='256' font-size='9.5' fill='#13936b' text-anchor='start' font-weight='normal' >학습: 같은 '+1'이 지금 G가</text>
+<text x='506' y='271' font-size='9.5' fill='#13936b' text-anchor='start' font-weight='normal' >어디냐에 따라 다른 양이 된다.</text>
+<rect x='6' y='334' width='344' height='142' rx='6' fill='#fbfbfb' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='16' y='352' font-size='11' fill='#7a4fa3' text-anchor='start' font-weight='bold' >④ 대칭성 (symmetry)</text>
+<line x1='28' y1='448' x2='144' y2='448' stroke='#999' stroke-width='1.1'/>
+<line x1='28' y1='448' x2='28' y2='364' stroke='#999' stroke-width='1.1'/>
+<text x='86.0' y='460' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >펄스 차례 (+5번, −5번)</text>
+<text x='24' y='406.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' transform='rotate(-90 24 406.0)'>G</text>
+<polyline points='28.0,417.3 39.6,409.1 51.2,400.8 62.8,392.6 74.4,384.4 86.0,376.1 97.6,384.4 109.2,392.6 120.8,400.8 132.4,409.1 144.0,417.3' fill='none' stroke='#999' stroke-width='1.5' stroke-dasharray='4 3' stroke-linejoin='round'/>
+<polyline points='28.0,417.3 39.6,409.1 51.2,400.8 62.8,392.6 74.4,384.4 86.0,376.1 97.6,388.5 109.2,400.8 120.8,413.2 132.4,425.5 144.0,437.9' fill='none' stroke='#7a4fa3' stroke-width='2' stroke-linejoin='round'/>
+<line x1='28' y1='417.29411764705884' x2='144' y2='417.29411764705884' stroke='#ddd' stroke-width='1'/>
+<text x='32' y='429.29411764705884' font-size='8.5' fill='#999' text-anchor='start' font-weight='normal' >출발점</text>
+<text x='134' y='440.88235294117646' font-size='9' fill='#7a4fa3' text-anchor='end' font-weight='bold' >−0.25</text>
+<text x='156' y='374' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >올림·내림 펄스의 ΔG 크기가</text>
+<text x='156' y='389' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >같은가 (예: +0.1, −0.15).</text>
+<text x='156' y='404' font-size='9.5' fill='#7a4fa3' text-anchor='start' font-weight='normal' >학습: +와 −를 같은 수만큼</text>
+<text x='156' y='419' font-size='9.5' fill='#7a4fa3' text-anchor='start' font-weight='normal' >받아도 제자리로 오지 않고</text>
+<text x='156' y='434' font-size='9.5' fill='#7a4fa3' text-anchor='start' font-weight='normal' >한쪽으로 쏠린다.</text>
+<rect x='356' y='334' width='344' height='142' rx='6' fill='#fbfbfb' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='366' y='352' font-size='11' fill='#3d6fb4' text-anchor='start' font-weight='bold' >⑤ 유지 (retention)</text>
+<line x1='378' y1='448' x2='494' y2='448' stroke='#999' stroke-width='1.1'/>
+<line x1='378' y1='448' x2='378' y2='364' stroke='#999' stroke-width='1.1'/>
+<text x='436.0' y='460' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >쓰고 난 뒤 시간 (로그)</text>
+<text x='374' y='406.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' transform='rotate(-90 374 406.0)'>G</text>
+<polyline points='378.0,372.5 380.9,372.6 383.8,372.7 386.7,372.9 389.6,373.0 392.5,373.2 395.4,373.4 398.3,373.6 401.2,373.9 404.1,374.2 407.0,374.6 409.9,375.1 412.8,375.6 415.7,376.2 418.6,376.9 421.5,377.7 424.4,378.7 427.3,379.8 430.2,381.0 433.1,382.5 436.0,384.2 438.9,386.0 441.8,388.2 444.7,390.6 447.6,393.3 450.5,396.2 453.4,399.4 456.3,402.9 459.2,406.6 462.1,410.5 465.0,414.5 467.9,418.4 470.8,422.3 473.7,425.9 476.6,429.2 479.5,432.0 482.4,434.4 485.3,436.1 488.2,437.4 491.1,438.3 494.0,438.8' fill='none' stroke='#3d6fb4' stroke-width='2' stroke-linejoin='round'/>
+<text x='506' y='374' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >써 둔 G가 시간이 지나도</text>
+<text x='506' y='389' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >남는가. 필요한 기간은 과제가</text>
+<text x='506' y='404' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >정한다 (5구간).</text>
+<text x='506' y='419' font-size='9.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >학습: 다음 갱신·사용 전에</text>
+<text x='506' y='434' font-size='9.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >배운 값이 흐려진다.</text>
+<rect x='6' y='482' width='344' height='142' rx='6' fill='#fbfbfb' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='16' y='500' font-size='11' fill='#c8553d' text-anchor='start' font-weight='bold' >⑥ 내구성 (endurance)</text>
+<line x1='28' y1='596' x2='144' y2='596' stroke='#999' stroke-width='1.1'/>
+<line x1='28' y1='596' x2='28' y2='512' stroke='#999' stroke-width='1.1'/>
+<text x='86.0' y='608' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >쓰고 지운 횟수 (로그)</text>
+<text x='24' y='554.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' transform='rotate(-90 24 554.0)'>G</text>
+<polyline points='28.0,520.0 30.9,520.0 33.8,520.0 36.7,520.0 39.6,520.0 42.5,520.0 45.4,520.0 48.3,520.0 51.2,520.0 54.1,520.0 57.0,520.0 59.9,520.0 62.8,520.0 65.7,520.0 68.6,520.0 71.5,520.0 74.4,520.1 77.3,520.1 80.2,520.2 83.1,520.3 86.0,520.4 88.9,520.6 91.8,520.9 94.7,521.5 97.6,522.2 100.5,523.3 103.4,524.8 106.3,527.0 109.2,529.7 112.1,532.9 115.0,536.5 117.9,540.1 120.8,543.3 123.7,546.0 126.6,548.2 129.5,549.7 132.4,550.8 135.3,551.5 138.2,552.1 141.1,552.4 144.0,552.6' fill='none' stroke='#c8553d' stroke-width='2' stroke-linejoin='round'/>
+<polyline points='28.0,580.0 30.9,580.0 33.8,580.0 36.7,580.0 39.6,580.0 42.5,580.0 45.4,580.0 48.3,580.0 51.2,580.0 54.1,580.0 57.0,580.0 59.9,580.0 62.8,580.0 65.7,580.0 68.6,580.0 71.5,580.0 74.4,579.9 77.3,579.9 80.2,579.9 83.1,579.8 86.0,579.7 88.9,579.5 91.8,579.2 94.7,578.8 97.6,578.2 100.5,577.3 103.4,576.0 106.3,574.3 109.2,572.1 112.1,569.4 115.0,566.5 117.9,563.6 120.8,560.9 123.7,558.7 126.6,557.0 129.5,555.7 132.4,554.8 135.3,554.2 138.2,553.8 141.1,553.5 144.0,553.3' fill='none' stroke='#c8553d' stroke-width='2' stroke-linejoin='round'/>
+<text x='34' y='514' font-size='8.5' fill='#c8553d' text-anchor='start' font-weight='normal' >켜진 상태</text>
+<text x='34' y='594' font-size='8.5' fill='#c8553d' text-anchor='start' font-weight='normal' >꺼진 상태</text>
+<text x='156' y='522' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >쓰고 지우기를 몇 번 반복해도</text>
+<text x='156' y='537' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >두 상태의 차이가 유지되나.</text>
+<text x='156' y='552' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >학습: 갱신이 매 단계라</text>
+<text x='156' y='567' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >추론용보다 훨씬 많이</text>
+<text x='156' y='582' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >고쳐 쓴다.</text>
+<rect x='356' y='482' width='344' height='142' rx='6' fill='#fbfbfb' stroke='#d9d9d9' stroke-width='1.2' />
+<text x='366' y='500' font-size='11' fill='#e08a3c' text-anchor='start' font-weight='bold' >⑦ 편차 (variation)</text>
+<line x1='378' y1='596' x2='494' y2='596' stroke='#999' stroke-width='1.1'/>
+<line x1='378' y1='596' x2='378' y2='512' stroke='#999' stroke-width='1.1'/>
+<text x='436.0' y='608' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >강화 펄스 수</text>
+<text x='374' y='554.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' transform='rotate(-90 374 554.0)'>G</text>
+<polyline points='378.0,596.0 383.8,584.9 389.6,575.4 395.4,567.4 401.2,560.7 407.0,555.0 412.8,550.1 418.6,546.0 424.4,542.5 430.2,539.6 436.0,537.1 441.8,535.0 447.6,533.2 453.4,531.7 459.2,530.4 465.0,529.4 470.8,528.5 476.6,527.7 482.4,527.0 488.2,526.5 494.0,526.0' fill='none' stroke='#e08a3c' stroke-width='1.3' stroke-linejoin='round'/>
+<polyline points='378.0,596.0 383.8,582.4 389.6,571.7 395.4,563.4 401.2,557.0 407.0,552.0 412.8,548.1 418.6,545.0 424.4,542.6 430.2,540.8 436.0,539.4 441.8,538.2 447.6,537.4 453.4,536.7 459.2,536.2 465.0,535.7 470.8,535.4 476.6,535.2 482.4,535.0 488.2,534.8 494.0,534.7' fill='none' stroke='#e08a3c' stroke-width='1.3' stroke-linejoin='round'/>
+<polyline points='378.0,596.0 383.8,590.0 389.6,584.8 395.4,580.1 401.2,576.0 407.0,572.4 412.8,569.2 418.6,566.4 424.4,563.9 430.2,561.7 436.0,559.7 441.8,558.0 447.6,556.5 453.4,555.2 459.2,554.0 465.0,553.0 470.8,552.1 476.6,551.3 482.4,550.5 488.2,549.9 494.0,549.4' fill='none' stroke='#e08a3c' stroke-width='1.3' stroke-linejoin='round'/>
+<polyline points='378.0,596.0 383.8,589.6 389.6,583.9 395.4,578.7 401.2,574.0 407.0,569.7 412.8,565.9 418.6,562.4 424.4,559.2 430.2,556.4 436.0,553.8 441.8,551.4 447.6,549.3 453.4,547.4 459.2,545.7 465.0,544.1 470.8,542.7 476.6,541.4 482.4,540.3 488.2,539.2 494.0,538.3' fill='none' stroke='#e08a3c' stroke-width='1.3' stroke-linejoin='round'/>
+<polyline points='378.0,596.0 383.8,588.1 389.6,581.6 395.4,576.3 401.2,572.0 407.0,568.5 412.8,565.6 418.6,563.2 424.4,561.2 430.2,559.6 436.0,558.3 441.8,557.3 447.6,556.4 453.4,555.7 459.2,555.1 465.0,554.6 470.8,554.2 476.6,553.9 482.4,553.6 488.2,553.4 494.0,553.2' fill='none' stroke='#e08a3c' stroke-width='1.3' stroke-linejoin='round'/>
+<text x='492' y='518' font-size='9' fill='#e08a3c' text-anchor='end' font-weight='normal' >소자 다섯 개</text>
+<text x='506' y='522' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >소자마다(D2D), 반복마다(C2C)</text>
+<text x='506' y='537' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >같은 펄스의 결과가 다른가.</text>
+<text x='506' y='552' font-size='9.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >학습: 같은 명령이 소자마다</text>
+<text x='506' y='567' font-size='9.5' fill='#e08a3c' text-anchor='start' font-weight='normal' >다른 변화를 만든다.</text>
+<text x='350' y='644' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >모든 곡선은 모양을 보이기 위한 모식도이며 측정값이 아니다. 용도(추론용·소자 내 학습용)에 따라 무엇이 얼마나 중요한지는 4·5구간.</text>
+</svg>
