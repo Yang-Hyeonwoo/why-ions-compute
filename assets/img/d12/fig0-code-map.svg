@@ -3,13 +3,13 @@
 <text x='330' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >tools/esn.py가 하는 일: 다섯 상자와 그 함수 이름</text>
 <rect x='20' y='50' width='145' height='112' rx='8' fill='#fff' stroke='#e08a3c' stroke-width='1.6' />
 <text x='92' y='72' font-size='12' fill='#e08a3c' text-anchor='middle' font-weight='bold' >① 과제 만들기</text>
-<text x='30' y='96' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >make_narma10: 입력 u(0~0.5)와</text>
-<text x='30' y='115' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >정답 y를 4,000단계</text>
+<text x='30' y='96' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >make_narma10: 입력 u와</text>
+<text x='30' y='115' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >정답 y, 4,000단계</text>
 <text x='30' y='134' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >make_mc_input: −1~1 난수</text>
 <rect x='180' y='50' width='145' height='112' rx='8' fill='#fff' stroke='#3d6fb4' stroke-width='1.6' />
 <text x='252' y='72' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >② reservoir 돌리기</text>
-<text x='190' y='96' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' ><tspan>make_reservoir: W, W</tspan><tspan dy='4' font-size='8'>in</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan>, b 난수</tspan></text>
-<text x='190' y='115' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >(ρ로 크기 맞춤, 고정)</text>
+<text x='190' y='96' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' ><tspan>make_reservoir: W, W</tspan><tspan dy='4' font-size='8'>in</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan>, b</tspan></text>
+<text x='190' y='115' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >난수(ρ로 크기 맞춤, 고정)</text>
 <text x='190' y='134' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' >run_reservoir: 상태 x(t) 기록</text>
 <rect x='340' y='50' width='145' height='112' rx='8' fill='#fff' stroke='#13936b' stroke-width='1.6' />
 <text x='412' y='72' font-size='12' fill='#13936b' text-anchor='middle' font-weight='bold' >③ readout 학습</text>
@@ -33,12 +33,12 @@
 <rect x='340' y='185' width='305' height='175' rx='8' fill='#fff6ee' stroke='#e08a3c' stroke-width='1.2' />
 <text x='492' y='207' font-size='12' fill='#e08a3c' text-anchor='middle' font-weight='bold' >실행 방법(study 폴더에서)</text>
 <text x='350' y='228' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' font-family='Consolas, monospace'>python tools/esn.py --quick</text>
-<text x='362' y='242' font-size='9' fill='#999' text-anchor='start' font-weight='normal' >→ 확인용, 약 25초, 저장 안 함</text>
+<text x='362' y='242' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >→ 확인용(reservoir 한 벌), 저장 안 함</text>
 <text x='350' y='261' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' font-family='Consolas, monospace'>python tools/esn.py</text>
-<text x='362' y='275' font-size='9' fill='#999' text-anchor='start' font-weight='normal' >→ 전체, 약 1분, 결과 저장</text>
+<text x='362' y='275' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >→ 전체(reservoir 세 벌), 결과 저장</text>
 <text x='350' y='294' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' font-family='Consolas, monospace'>python tools/esn.py --one N=400 s_in=0.1</text>
-<text x='362' y='308' font-size='9' fill='#999' text-anchor='start' font-weight='normal' >→ 내 조건 하나</text>
+<text x='362' y='308' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >→ 내 조건 하나, 저장 안 함</text>
 <text x='350' y='327' font-size='9.5' fill='#444' text-anchor='start' font-weight='normal' font-family='Consolas, monospace'>python tools/esn.py --taps 11</text>
-<text x='362' y='341' font-size='9' fill='#999' text-anchor='start' font-weight='normal' >→ 기준선 탭 수 바꾸기</text>
-<text x='330' y='395' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >실행 시간은 Claude의 컴퓨터(numpy 2.5.4)에서 잰 값이며 컴퓨터마다 다르다. (Claude가 그림, 모식도)</text>
+<text x='362' y='341' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >→ 기준선 탭 수 바꾸기, 저장 안 함</text>
+<text x='330' y='395' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >명령은 study 폴더에서 연 터미널에 친다. 걸리는 시간은 본문 1구간. (Claude가 그림, 모식도)</text>
 </svg>
