@@ -1,0 +1,93 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 400' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<rect x='0' y='0' width='760' height='400' fill='#fff'/>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<text x='380.0' y='26.0' font-size='16' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >확률적 비트: 입력이 '1이 나올 확률'을 정한다 (계산한 모식도)</text>
+<rect x='90.0' y='50.0' width='400.0' height='200.0' rx='4' fill='#fafafa' stroke='#d9d9d9' stroke-width='1.2' />
+<polyline points='90.0,246.4 95.0,246.0 100.0,245.6 105.0,245.2 110.0,244.7 115.0,244.1 120.0,243.5 125.0,242.9 130.0,242.2 135.0,241.4 140.0,240.5 145.0,239.6 150.0,238.5 155.0,237.4 160.0,236.2 165.0,234.8 170.0,233.4 175.0,231.8 180.0,230.0 185.0,228.2 190.0,226.2 195.0,224.0 200.0,221.6 205.0,219.1 210.0,216.4 215.0,213.5 220.0,210.4 225.0,207.2 230.0,203.7 235.0,200.1 240.0,196.2 245.0,192.2 250.0,188.0 255.0,183.6 260.0,179.1 265.0,174.5 270.0,169.7 275.0,164.9 280.0,160.0 285.0,155.0 290.0,150.0 295.0,145.0 300.0,140.0 305.0,135.1 310.0,130.3 315.0,125.5 320.0,120.9 325.0,116.4 330.0,112.0 335.0,107.8 340.0,103.8 345.0,99.9 350.0,96.3 355.0,92.8 360.0,89.6 365.0,86.5 370.0,83.6 375.0,80.9 380.0,78.4 385.0,76.0 390.0,73.8 395.0,71.8 400.0,70.0 405.0,68.2 410.0,66.6 415.0,65.2 420.0,63.8 425.0,62.6 430.0,61.5 435.0,60.4 440.0,59.5 445.0,58.6 450.0,57.8 455.0,57.1 460.0,56.5 465.0,55.9 470.0,55.3 475.0,54.8 480.0,54.4 485.0,54.0 490.0,53.6' fill='none' stroke='#3d6fb4' stroke-width='2.2' stroke-linejoin='round'/>
+<text x='82.0' y='255.0' font-size='13' fill='#999' text-anchor='end' font-weight='normal' >0</text>
+<text x='82.0' y='155.0' font-size='13' fill='#999' text-anchor='end' font-weight='normal' >0.5</text>
+<text x='82.0' y='55.0' font-size='13' fill='#999' text-anchor='end' font-weight='normal' >1</text>
+<text x='90.0' y='268.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >−4</text>
+<text x='215.0' y='268.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >−1.5</text>
+<text x='290.0' y='268.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='365.0' y='268.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >+1.5</text>
+<text x='490.0' y='268.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >+4</text>
+<text x='44.0' y='150.0' font-size='13.5' fill='#444' text-anchor='middle' font-weight='normal' transform='rotate(-90 44 150.0)'>1이 나올 확률 p</text>
+<text x='290.0' y='288.0' font-size='14' fill='#444' text-anchor='middle' font-weight='normal' >입력 x (바이어스)</text>
+<text x='514.0' y='70.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >곡선: p = 1 / (1 + e<tspan dy='-7' font-size='10'>−x</tspan><tspan dy='7' font-size='1'> </tspan>)</text>
+<text x='514.0' y='94.0' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >(로지스틱 함수, S자)</text>
+<text x='514.0' y='130.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >x가 크면 p → 1</text>
+<text x='514.0' y='152.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >x = 0이면 p = 0.5</text>
+<text x='514.0' y='174.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >x가 음수로 크면 p → 0</text>
+<text x='514.0' y='210.0' font-size='13.5' fill='#3d6fb4' text-anchor='start' font-weight='normal' >파란 점 셋: 아래 표의 입력</text>
+<text x='20.0' y='316.0' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >각 입력에서 20번 뽑은 결과(1 = 파랑 굵게)와 1의 수</text>
+<circle cx='215.0' cy='213.5' r='5' fill='#3d6fb4'/>
+<text x='20.0' y='342.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' >입력 −1.5: p = 0.18</text>
+<text x='190.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='203.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='216.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='229.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='242.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='255.0' y='342.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='268.0' y='342.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='281.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='294.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='307.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='320.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='333.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='346.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='359.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='372.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='385.0' y='342.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='398.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='411.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='424.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='437.0' y='342.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='456.0' y='342.0' font-size='14' fill='#444' text-anchor='start' font-weight='bold' >3/20 = 0.15</text>
+<circle cx='290.0' cy='150.0' r='5' fill='#3d6fb4'/>
+<text x='20.0' y='366.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' >입력 0: p = 0.50</text>
+<text x='190.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='203.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='216.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='229.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='242.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='255.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='268.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='281.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='294.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='307.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='320.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='333.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='346.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='359.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='372.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='385.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='398.0' y='366.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='411.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='424.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='437.0' y='366.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='456.0' y='366.0' font-size='14' fill='#444' text-anchor='start' font-weight='bold' >9/20 = 0.45</text>
+<circle cx='365.0' cy='86.5' r='5' fill='#3d6fb4'/>
+<text x='20.0' y='390.0' font-size='14' fill='#444' text-anchor='start' font-weight='normal' >입력 +1.5: p = 0.82</text>
+<text x='190.0' y='390.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='203.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='216.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='229.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='242.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='255.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='268.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='281.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='294.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='307.0' y='390.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='320.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='333.0' y='390.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='346.0' y='390.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='359.0' y='390.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='372.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='385.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='398.0' y='390.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='411.0' y='390.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='424.0' y='390.0' font-size='13' fill='#999' text-anchor='middle' font-weight='normal' >0</text>
+<text x='437.0' y='390.0' font-size='13' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >1</text>
+<text x='456.0' y='390.0' font-size='14' fill='#444' text-anchor='start' font-weight='bold' >12/20 = 0.60</text>
+</svg>

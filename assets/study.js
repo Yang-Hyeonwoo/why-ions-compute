@@ -1854,8 +1854,10 @@
     viewList.style.display = "none";
     var list = h("div", "ap-list");
     viewList.appendChild(list);
-    var goto = h("a", "ap-goto", "이 페이지 아래 '질문'과 '답변' 칸으로 ↓");
-    goto.href = "#questions";
+    // 나뉜 Day의 앞 단위에는 질문·답변 칸이 없다: 같은 Day의 마지막 단위(…b)로 보낸다
+    var qaPage = document.getElementById("questions") ? "" : did + "b.html";
+    var goto = h("a", "ap-goto", qaPage ? "질문과 답변 칸(이 Day의 다음 학습 단위)으로 →" : "이 페이지 아래 '질문'과 '답변' 칸으로 ↓");
+    goto.href = qaPage + "#questions";
     goto.addEventListener("click", close);
     viewList.appendChild(goto);
     panel.appendChild(viewList);
@@ -1929,8 +1931,8 @@
           if (q.quote) it.appendChild(h("div", "ap-item-quote", "“" + q.quote.slice(0, 80) + (q.quote.length > 80 ? "…" : "") + "”"));
           it.appendChild(h("div", "ap-item-text", q.text.slice(0, 160) + (q.text.length > 160 ? "…" : "")));
           if (answered && q.id) {
-            var a = h("a", "ap-goto", "답 보기 ↓");
-            a.href = "#a-" + q.id;
+            var a = h("a", "ap-goto", qaPage ? "답 보기 →" : "답 보기 ↓");
+            a.href = qaPage + "#a-" + q.id;
             a.addEventListener("click", close);
             it.appendChild(a);
           }
