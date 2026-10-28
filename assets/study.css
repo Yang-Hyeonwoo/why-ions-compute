@@ -397,6 +397,19 @@ body.local-mode .static-only { display: none !important; }
    ===================================================================== */
 body.home #title-block-header { display: none; }
 .hero { margin: 0.6rem 0 0.4rem; }
+.hero-split { display: grid; grid-template-columns: minmax(0, 1fr) clamp(220px, 30%, 300px); column-gap: 1.2rem; align-items: center; }
+.hero-split > .today-card { margin-bottom: 0; }
+.hero-split { margin-bottom: 1.4rem; }
+/* 고분자 그림(정지) + 그 위 이온 캔버스. 그림은 장식이라 글자·버튼을 가리지 않는다 */
+.hero-art { position: relative; aspect-ratio: 1 / 1; width: 100%; pointer-events: none; user-select: none; }
+.hero-art img, .hero-art canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero-art img, .hero-art canvas { transform: scale(1.25); }
+.hero-art img { object-fit: contain;
+  -webkit-mask-image: radial-gradient(closest-side, #000 78%, transparent 100%); mask-image: radial-gradient(closest-side, #000 78%, transparent 100%); }
+@media (max-width: 720px) {
+  .hero-split { grid-template-columns: 1fr; row-gap: 0.4rem; }
+  .hero-art { width: min(64vw, 230px); justify-self: center; }
+}
 
 /* 지금 위치 · 이어서 학습 · 지난 학습 복습 */
 .today-card {
