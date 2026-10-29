@@ -15,8 +15,8 @@
 <text x='140.0' y='242' font-size='10' fill='#c8553d' text-anchor='middle' font-weight='normal' >0.1 V에서 I = g × 0.102: 상수 하나</text>
 <rect x='255' y='45' width='390' height='215' rx='6' fill='#fafafa' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='265' y='66' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' >(b) 입력 이력 → 상태 g → 읽은 전류 I (0.1 V)</text>
-<text x='265' y='88' font-size='10.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >소자 A: 상태가 선형으로 쌓임  g ← 0.5·g + u</text>
-<text x='265' y='154' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='bold' >소자 B: 쓰기가 포화  g ← 0.5·g + 0.8·u·(1 − g)</text>
+<text x='265' y='88' font-size='10.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >device A: 상태가 선형으로 쌓임  g ← 0.5·g + u</text>
+<text x='265' y='154' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='bold' >device B: 쓰기가 포화  g ← 0.5·g + 0.8·u·(1 − g)</text>
 <text x='265' y='106' font-size='10' fill='#3d6fb4' text-anchor='start' font-weight='normal' >g: 00 0.00,  10 0.50,  01 1.00,  11 1.50</text>
 <text x='265' y='122' font-size='10' fill='#3d6fb4' text-anchor='start' font-weight='normal' >I: 00 0.0000,  10 0.0510,  01 0.1020,  11 0.1530</text>
 <text x='265' y='138' font-size='10' fill='#999' text-anchor='start' font-weight='normal' >I(10) + I(01) = 0.1530  =  I(11) = 0.1530  → superposition 성립(선형)</text>
@@ -25,6 +25,6 @@
 <text x='265' y='204' font-size='10' fill='#c8553d' text-anchor='start' font-weight='normal' >I(10) + I(01) = 0.1224  ≠  I(11) = 0.0571  → superposition 깨짐(비선형 섞임)</text>
 <text x='265' y='238' font-size='10' fill='#444' text-anchor='start' font-weight='normal' >A는 I–V가 아무리 휘어도 이력에 대해서는 선형이다.</text>
 <text x='265' y='254' font-size='10' fill='#444' text-anchor='start' font-weight='normal' >B는 '둘 다 1'이 따로 흔적을 남긴다: I(11) ≠ I(10) + I(01).</text>
-<text x='330' y='290' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >두 소자 모두 가상의 예시다(기억 비율 0.5, 입력 0·1, 시작 g = 0). 숫자는 코드가 계산했다. (Claude가 계산해 그림)</text>
-<text x='330' y='306' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >한 소자의 전류 하나로는 B도 XOR을 직선 하나로 가르지 못한다. 서로 다른 상태 여럿이 필요하다(3·5구간).</text>
+<text x='330' y='290' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >두 device 모두 가상의 예시다(기억 비율 0.5, 입력 0·1, 시작 g = 0). 숫자는 코드가 계산했다. (Claude가 계산해 그림)</text>
+<text x='330' y='306' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >한 device의 전류 하나로는 B도 XOR을 직선 하나로 가르지 못한다. 서로 다른 상태 여럿이 필요하다(3·5구간).</text>
 </svg>

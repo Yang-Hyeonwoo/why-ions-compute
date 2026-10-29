@@ -1,4 +1,4 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 560' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 645' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
 <text x='300.0' y='20.0' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >소리 → 주파수 통로별 세기 지도 → 0/1 스파이크 (합성 소리, 계산)</text>
 <text x='20.0' y='50.0' font-size='12' fill='#444' text-anchor='start' font-weight='bold' >①</text>
@@ -9,7 +9,7 @@
 <rect x='80.0' y='146.0' width='150.0' height='44.0' rx='3' fill='#fafafa' stroke='#d9d9d9' stroke-width='1.2' />
 <polyline points='80.0,167.8 81.9,163.8 83.8,159.7 85.6,156.3 87.5,153.2 89.4,151.4 91.2,150.2 93.1,150.3 95.0,150.5 96.9,152.8 98.8,155.5 100.6,158.8 102.5,162.4 104.4,166.6 106.2,170.7 108.1,174.6 110.0,178.4 111.9,181.9 113.8,184.0 115.6,185.5 117.5,185.9 119.4,185.5 121.2,183.8 123.1,181.6 125.0,178.2 126.9,175.0 128.8,170.6 130.6,166.4 132.5,162.6 134.4,158.8 136.2,155.4 138.1,152.6 140.0,150.6 141.9,150.3 143.8,150.3 145.6,151.6 147.5,153.3 149.4,156.3 151.2,159.8 153.1,163.7 155.0,167.9 156.9,171.9 158.8,176.2 160.6,179.7 162.5,182.5 164.4,184.6 166.2,185.5 168.1,185.9 170.0,185.1 171.9,183.4 173.8,180.8 175.6,177.7 177.5,173.5 179.4,169.3 181.2,165.2 183.1,161.3 185.0,157.3 186.9,154.3 188.8,152.0 190.6,150.5 192.5,150.1 194.4,150.5 196.2,152.0 198.1,154.6 200.0,157.6 201.9,161.3 203.8,165.1 205.6,169.9 207.5,173.5 209.4,177.3 211.2,180.6 213.1,183.1 215.0,185.2 216.9,185.7 218.8,185.7 220.6,184.6 222.5,182.2 224.4,179.6 226.2,175.9 228.1,172.2' fill='none' stroke='#444' stroke-width='1.2' stroke-linejoin='round'/>
 <text x='238.0' y='164.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >확대: 0.15–0.16 s (10 ms). 300 Hz는 10 ms에 3번 떨린다.</text>
-<text x='238.0' y='178.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >이렇게 빠른 떨림은 시간상수가 ms–s인 소자가 따라가기 어렵다.</text>
+<text x='238.0' y='178.0' font-size='9.5' fill='#999' text-anchor='start' font-weight='normal' >이렇게 빠른 떨림은 시간상수가 ms–s인 device가 따라가기 어렵다.</text>
 <text x='20.0' y='214.0' font-size='12' fill='#444' text-anchor='start' font-weight='bold' >②</text>
 <text x='40.0' y='214.0' font-size='10.5' fill='#444' text-anchor='start' font-weight='bold' >필터 통로 8개 × 20 ms 창마다의 세기 (진할수록 셈, 위로 갈수록 높은 소리)</text>
 <rect x='80.0' y='362.0' width='15.4' height='19.0' rx='0' fill='#ffffff' stroke='none' stroke-width='1.2' />
@@ -261,7 +261,7 @@
 <rect x='544.0' y='222.0' width='15.4' height='19.0' rx='0' fill='#ffffff' stroke='none' stroke-width='1.2' />
 <text x='74.0' y='236.0' font-size='9' fill='#999' text-anchor='end' font-weight='normal' >3,200 Hz</text>
 <text x='20.0' y='416.0' font-size='12' fill='#444' text-anchor='start' font-weight='bold' >③</text>
-<text x='40.0' y='416.0' font-size='10.5' fill='#444' text-anchor='start' font-weight='bold' >문턱(최대 세기의 30%)을 넘으면 1 = 스파이크 → 소자에 들어가는 입력</text>
+<text x='40.0' y='416.0' font-size='10.5' fill='#444' text-anchor='start' font-weight='bold' >문턱(최대 세기의 30%)을 넘으면 1 = 스파이크 → device에 들어가는 입력</text>
 <line x1='80.0' y1='521.0' x2='560.0' y2='521.0' stroke='#eee' stroke-width='1'/>
 <text x='74.0' y='524.5' font-size='9' fill='#999' text-anchor='end' font-weight='normal' >150 Hz</text>
 <line x1='80.0' y1='508.0' x2='560.0' y2='508.0' stroke='#eee' stroke-width='1'/>
@@ -306,7 +306,9 @@
 <text x='480.0' y='540.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >0.5</text>
 <text x='560.0' y='540.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >0.6</text>
 <text x='560.0' y='553.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >시간 (s)</text>
-<text x='300.0' y='572.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >소자가 받는 것: 통로 8개 × 30단계 = 숫자 240개(그중 1이 20개). 원래 녹음은 숫자 4,800개.</text>
-<text x='300.0' y='588.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >통로 중심 주파수는 150–3,200 Hz를 로그 간격으로 나눴고, 세기는 20 ms 창의 스펙트럼을 통로마다 삼각형 무게로 모은 값이다.</text>
-<text x='300.0' y='601.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >(Claude가 계산해 그림, 합성 소리 — 실제 말소리 데이터가 아님)</text>
+<text x='300.0' y='572.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >device가 받는 것: 통로 8개 × 30단계 = 숫자 240개 (그중 1이 20개)</text>
+<text x='300.0' y='586.0' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >원래 녹음은 숫자 4,800개</text>
+<text x='300.0' y='602.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >통로 중심 주파수는 150–3,200 Hz를 로그 간격으로 나눴다.</text>
+<text x='300.0' y='615.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >세기 = 20 ms 창의 스펙트럼을 통로마다 삼각형 무게로 모은 값.</text>
+<text x='300.0' y='628.0' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >(Claude가 계산해 그림, 합성 소리 — 실제 말소리 데이터가 아님)</text>
 </svg>

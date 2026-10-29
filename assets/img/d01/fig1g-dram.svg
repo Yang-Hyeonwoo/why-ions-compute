@@ -1,6 +1,6 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 360' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='a-ink' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='a-red' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker><marker id='a-blue' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#3d6fb4'/></marker><marker id='a-mint' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#13936b'/></marker><marker id='a-orange' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#e08a3c'/></marker><marker id='a-gray' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#999'/></marker><marker id='a-purple' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#8a5cb8'/></marker><pattern id='hatch' width='6' height='6' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'><line x1='0' y1='0' x2='0' y2='6' stroke='#bbb' stroke-width='2'/></pattern></defs>
-<text x='360.0' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >DRAM 한 칸(트랜지스터 1개 + 커패시터 1개)이 비트 하나를 저장하는 순서 (단순화한 모식도)</text>
+<text x='360.0' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >DRAM 한 칸(트랜지스터 1개 + capacitor 1개)이 비트 하나를 저장하는 순서 (단순화한 모식도)</text>
 <text x='120.0' y='50' font-size='11.5' fill='#444' text-anchor='middle' font-weight='bold' >(a) 쓰기: 스위치 켜고 채운다</text>
 <line x1='40' y1='70' x2='40' y2='250' stroke='#3d6fb4' stroke-width='2.4'/>
 <text x='34' y='82' font-size='9.5' fill='#3d6fb4' text-anchor='end' font-weight='normal' >비트선</text>
@@ -23,7 +23,7 @@
 <text x='187' y='176' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >+</text>
 <text x='194' y='176' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >+</text>
 <text x='202' y='189' font-size='10' fill='#444' text-anchor='start' font-weight='bold' >C</text>
-<text x='180' y='248' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >커패시터 전압 1 V</text>
+<text x='180' y='248' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >capacitor 전압 1 V</text>
 <line x1='48.0' y1='128.0' x2='86.0' y2='128.0' stroke='#c8553d' stroke-width='1.6' marker-end='url(#a-red)'/>
 <text x='50' y='122' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >전류 I</text>
 <text x='120.0' y='290' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >비트선을 1 V로 두고 스위치를 켠다.</text>
@@ -48,9 +48,9 @@
 <text x='413' y='176' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >+</text>
 <text x='420' y='176' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >+</text>
 <text x='442' y='189' font-size='10' fill='#444' text-anchor='start' font-weight='bold' >C</text>
-<text x='420' y='248' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >커패시터 전압 1 V → 조금씩 샘</text>
+<text x='420' y='248' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >capacitor 전압 1 V → 조금씩 샘</text>
 <line x1='394.0' y1='168.0' x2='334.0' y2='168.0' stroke='#999' stroke-width='1.2' stroke-dasharray='3 2' marker-end='url(#a-gray)'/>
-<text x='360' y='182' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >아주 작은 누설</text>
+<text x='360' y='182' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >아주 작은 leak</text>
 <text x='360.0' y='290' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >스위치를 끄면 전하가 갇힌다.</text>
 <text x='360.0' y='305' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >꺼진 트랜지스터의 문턱 아래 전류 등으로</text>
 <text x='360.0' y='320' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >조금씩 새서, 수십 ms마다 다시 채운다</text>
@@ -73,11 +73,11 @@
 <text x='646' y='176' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >+</text>
 <text x='653' y='176' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >+</text>
 <text x='682' y='189' font-size='10' fill='#444' text-anchor='start' font-weight='bold' >C</text>
-<text x='660' y='248' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >커패시터 전압 0.55 V</text>
+<text x='660' y='248' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >capacitor 전압 0.55 V</text>
 <line x1='566.0' y1='128.0' x2='528.0' y2='128.0' stroke='#c8553d' stroke-width='1.6' marker-end='url(#a-red)'/>
 <text x='530' y='122' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >전하 일부가 비트선으로</text>
 <text x='600.0' y='290' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >비트선을 0.5 V로 맞춰 두고 스위치를 켠다.</text>
 <text x='600.0' y='305' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >셀 20 fF와 비트선 180 fF가 전하를 나눠</text>
 <text x='600.0' y='320' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' >비트선이 +0.05 V 움직인다 → 증폭기가 '1'로 판정</text>
-<text x='360.0' y='354' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >읽으면 셀의 전하가 줄어들어 다시 써 넣는다(새로 고침도 같은 방식). 정전용량 값은 예시이며 전압은 코드가 계산. (Claude가 그림, 모식도)</text>
+<text x='360.0' y='354' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >읽으면 셀의 전하가 줄어들어 다시 써 넣는다(새로 고침도 같은 방식). capacitance 값은 예시이며 전압은 코드가 계산. (Claude가 그림, 모식도)</text>
 </svg>

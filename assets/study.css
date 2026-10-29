@@ -1323,3 +1323,45 @@ svg[id^="mermaid"] .cluster .nodeLabel, svg[id^="mermaid"] .cluster-label span {
 /* 프로젝트 그림(SVG): 좁은 화면에서도 글자가 읽히도록 최소 폭을 두고 그림 안에서만 가로로 밀어 본다 */
 .quarto-figure figure > p:has(> img[src^="img/f"]) { overflow-x: auto; margin-bottom: .4rem; }
 .quarto-figure img[src^="img/f"] { min-width: 720px; }
+
+/* ===== 2026-10-30 학습자 피드백 30가지 반영 ===== */
+/* 머리말 상자 속 중요한 부분도 형광펜 */
+.unit-head .key { font-weight: 600; color: var(--ink); background: linear-gradient(transparent 58%, #fbe7a1 58%); padding: 0 0.1em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+/* 구간 첫머리 상자: 상황 / 왜 지금? / 어디에 쓰이나 / 끝나면 … 을 줄마다 나눠 보이게 */
+.goal::before { content: "이 구간을 시작하며"; display: block; margin-bottom: 0.35rem; }
+.goal p { display: block; margin: 0 0 0.55rem; }
+.goal p:last-child { margin-bottom: 0; }
+/* 단계 카드 → 한눈에 보이는 번호 흐름 */
+.stepper.flow { padding: 0.9rem 1.1rem 0.6rem; }
+.stepper.flow > .step { display: block !important; border-left: 3px solid var(--accent); background: var(--accent-soft); margin: 0 0 0.45rem; padding: 0.5rem 0.8rem; border-radius: 0 8px 8px 0; position: relative; }
+.stepper.flow > .step + .step::before { content: "↓"; position: absolute; left: -0.62rem; top: -0.78rem; font-size: 0.8rem; color: var(--accent); background: #fff; line-height: 1; }
+.stepper.flow .step-bar { display: none; }
+/* ①②… → 읽기 쉬운 숫자 배지 */
+.cnum { display: inline-flex; align-items: center; justify-content: center; min-width: 1.35em; height: 1.35em; padding: 0 0.2em; margin: 0 0.12em; border-radius: 999px; background: var(--accent); color: #fff; font-size: 0.8em; font-weight: 700; line-height: 1; vertical-align: 0.08em; font-variant-numeric: tabular-nums; }
+/* 용어 정리 = 단어장 */
+.terms-box { border: 1px solid #e8d38a; background: #fffcf0; border-radius: var(--radius); padding: 0.9rem 1.1rem 0.7rem; margin: 1.8rem 0; }
+.terms-box::before { content: "📒 단어장 · 여기서 용어를 정리하고 갑니다"; display: block; font-weight: 700; color: #8a6a0a; margin-bottom: 0.4rem; }
+dl.terms { display: grid; grid-template-columns: minmax(9rem, 30%) 1fr; gap: 0; margin: 0.2rem 0 0.2rem; }
+dl.terms dt { margin: 0; padding: 0.55rem 0.7rem 0.55rem 0; border-top: 1px solid #f0e3b4; }
+dl.terms dt { color: var(--ink); font-weight: 700; text-decoration: underline 0.5em #fbe7a1; text-underline-offset: -0.32em; text-decoration-skip-ink: none; }
+dl.terms dd { margin: 0; padding: 0.55rem 0 0.55rem 0.4rem; border-top: 1px solid #f0e3b4; }
+@media (max-width: 640px) { dl.terms { grid-template-columns: 1fr; } dl.terms dd { border-top: 0; padding-top: 0; } }
+/* 멈추고 생각하기: 정답 예시를 눌러 확인 */
+.think details.think-answer { margin-top: 0.6rem; background: #fff; border: 1px solid #ecd9a8; border-radius: 8px; padding: 0.35rem 0.8rem; }
+.think details.think-answer > summary { cursor: pointer; font-weight: 700; color: var(--amber-ink); font-size: 0.92rem; }
+.think details.think-answer[open] > summary { margin-bottom: 0.4rem; }
+.think::before { content: "멈추고 생각하기 · 먼저 답해 보고, 아래 '생각 정리 보기'로 확인하세요"; }
+/* 구간 사이 '지금까지 온 길' 띠 */
+.progress-strip { margin: 2.6rem 0 1.6rem; padding: 0.8rem 1rem 0.6rem; border: 1px solid var(--line); border-radius: var(--radius); background: #fafbfd; font-size: 0.9rem; }
+.progress-strip .ps-head { font-weight: 700; color: var(--accent-strong); margin-bottom: 0.4rem; }
+.progress-strip .ps-list { list-style: none; margin: 0; padding: 0 0 0 0.2rem; border-left: 2px solid var(--line); }
+.progress-strip .ps-list li { position: relative; padding: 0.2rem 0 0.35rem 0.9rem; }
+.progress-strip .ps-mark { position: absolute; left: -0.55rem; top: 0.22rem; width: 1rem; text-align: center; background: #fafbfd; font-size: 0.8rem; }
+.progress-strip li.done { color: var(--muted); }
+.progress-strip li.done .ps-mark { color: #13936b; font-weight: 700; }
+.progress-strip li.now { font-weight: 700; color: var(--ink); }
+.progress-strip li.now .ps-mark { color: var(--accent); }
+.progress-strip li.later { color: #a0a6b2; }
+.progress-strip .ps-gist { font-size: 0.86rem; color: var(--text); margin-top: 0.1rem; }
+/* 논문 탭에서 인용 링크로 온 논문 표시 */
+article.paper:target { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }

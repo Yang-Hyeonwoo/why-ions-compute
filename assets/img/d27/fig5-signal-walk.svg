@@ -56,7 +56,7 @@
 <text x='18' y='446' font-size='10.8' fill='#444' text-anchor='start' font-weight='normal' >운반: 숫자 → 전자 (펄스)</text>
 <rect x='206' y='407' width='250' height='64' rx='4' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='468' y='422' font-size='11.2' fill='#444' text-anchor='start' font-weight='normal' >1초에 72번, 12 bit 숫자로 → 박동 = 숫자 50개</text>
-<text x='468' y='441' font-size='11.2' fill='#444' text-anchor='start' font-weight='normal' >[−1, 1]로 맞추고 마스크 5칸 × 소자 24개</text>
+<text x='468' y='441' font-size='11.2' fill='#444' text-anchor='start' font-weight='normal' >[−1, 1]로 맞추고 마스크 5칸 × device 24개</text>
 <text x='468' y='460' font-size='11.2' fill='#444' text-anchor='start' font-weight='normal' >→ 시간 단계마다 펄스 120개</text>
 <line x1='100' y1='472' x2='100' y2='490' stroke='#7a5aa6' stroke-width='1.6' marker-end='url(#arr)'/>
 <line x1='218.0' y1='447.0' x2='218.0' y2='446.5777539163018' stroke='#7a5aa6' stroke-width='1'/>
@@ -162,16 +162,16 @@
 <text x='448' y='466' font-size='10.5' fill='#999' text-anchor='end' font-weight='normal' >점 50개 = 숫자 50개</text>
 <rect x='8' y='486' width='744' height='78' rx='8' fill='#fbfbfc' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='18' y='512' font-size='12.2' fill='#13936b' text-anchor='start' font-weight='bold' >④⑤ reservoir + 상태 읽기</text>
-<text x='18' y='532' font-size='10.8' fill='#444' text-anchor='start' font-weight='normal' >운반: 소자 안 이온, 읽기 전자</text>
+<text x='18' y='532' font-size='10.8' fill='#444' text-anchor='start' font-weight='normal' >운반: device 안 이온, 읽기 전자</text>
 <rect x='206' y='493' width='250' height='64' rx='4' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
-<text x='468' y='508' font-size='11.2' fill='#444' text-anchor='start' font-weight='normal' >전도도가 박동 모양에 따라 오르내리고</text>
+<text x='468' y='508' font-size='11.2' fill='#444' text-anchor='start' font-weight='normal' >conductance가 박동 모양에 따라 오르내리고</text>
 <text x='468' y='527' font-size='11.2' fill='#444' text-anchor='start' font-weight='normal' >펄스가 끝나도 천천히 돌아온다(이력)</text>
 <text x='468' y='546' font-size='11.2' fill='#444' text-anchor='start' font-weight='normal' >읽기 전류 → 시간 단계마다 상태 120개</text>
 <line x1='100' y1='558' x2='100' y2='576' stroke='#13936b' stroke-width='1.6' marker-end='url(#arr)'/>
 <polyline points='218.0,514.9 222.5,514.6 227.0,514.1 231.5,513.6 235.9,513.3 240.4,513.3 244.9,513.7 249.4,514.1 253.9,514.5 258.4,514.7 262.8,514.8 267.3,514.9 271.8,514.9 276.3,515.0 280.8,515.0 285.3,515.5 289.7,515.7 294.2,511.5 298.7,505.0 303.2,505.9 307.7,511.4 312.2,514.0 316.7,514.5 321.1,514.8 325.6,514.9 330.1,514.9 334.6,515.0 339.1,515.0 343.6,514.9 348.0,514.8 352.5,514.6 357.0,514.3 361.5,513.7 366.0,512.9 370.5,511.9 374.9,511.0 379.4,510.4 383.9,510.2 388.4,510.4 392.9,511.1 397.4,511.9 401.8,512.8 406.3,513.5 410.8,514.0 415.3,514.4 419.8,514.7 424.3,514.8 428.8,514.9 433.2,514.9 437.7,515.0' fill='none' stroke='#13936b' stroke-width='1.6' stroke-linejoin='round'/>
 <polyline points='218.0,527.0 222.5,526.8 227.0,526.7 231.5,526.4 235.9,526.2 240.4,526.1 244.9,526.1 249.4,526.2 253.9,526.3 258.4,526.4 262.8,526.5 267.3,526.5 271.8,526.6 276.3,526.7 280.8,526.7 285.3,526.9 289.7,527.1 294.2,525.8 298.7,523.3 303.2,522.6 307.7,523.8 312.2,524.6 316.7,525.0 321.1,525.3 325.6,525.5 330.1,525.8 334.6,525.9 339.1,526.1 343.6,526.2 348.0,526.3 352.5,526.3 357.0,526.2 361.5,526.0 366.0,525.7 370.5,525.3 374.9,524.8 379.4,524.3 383.9,523.9 388.4,523.8 392.9,523.8 397.4,523.9 401.8,524.2 406.3,524.5 410.8,524.9 415.3,525.2 419.8,525.4 424.3,525.7 428.8,525.9 433.2,526.0 437.7,526.2' fill='none' stroke='#5bb594' stroke-width='1.6' stroke-linejoin='round'/>
 <polyline points='218.0,539.0 222.5,538.9 227.0,538.9 231.5,538.8 235.9,538.7 240.4,538.6 244.9,538.6 249.4,538.6 253.9,538.6 258.4,538.6 262.8,538.7 267.3,538.7 271.8,538.7 276.3,538.7 280.8,538.7 285.3,538.8 289.7,538.8 294.2,538.4 298.7,537.5 303.2,537.2 307.7,537.5 312.2,537.7 316.7,537.7 321.1,537.8 325.6,537.9 330.1,537.9 334.6,538.0 339.1,538.0 343.6,538.1 348.0,538.1 352.5,538.1 357.0,538.1 361.5,538.0 366.0,537.9 370.5,537.8 374.9,537.6 379.4,537.4 383.9,537.2 388.4,537.1 392.9,537.0 397.4,537.0 401.8,537.1 406.3,537.1 410.8,537.2 415.3,537.3 419.8,537.4 424.3,537.5 428.8,537.5 433.2,537.6 437.7,537.7' fill='none' stroke='#9fd3bf' stroke-width='1.6' stroke-linejoin='round'/>
-<text x='448' y='552' font-size='10.5' fill='#999' text-anchor='end' font-weight='normal' >소자 3개의 상태 (예시)</text>
+<text x='448' y='552' font-size='10.5' fill='#999' text-anchor='end' font-weight='normal' >device 3개의 상태 (예시)</text>
 <rect x='8' y='572' width='744' height='78' rx='8' fill='#fbfbfc' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='18' y='598' font-size='12.2' fill='#e08a3c' text-anchor='start' font-weight='bold' >⑥⑦ readout·판단·출력</text>
 <text x='18' y='618' font-size='10.8' fill='#444' text-anchor='start' font-weight='normal' >운반: 숫자 → 전자 (무선)</text>
@@ -193,6 +193,6 @@
 <circle cx='373.0' cy='617' r='5' fill='#c8553d'/>
 <text x='373.0' y='607' font-size='10.5' fill='#c8553d' text-anchor='middle' font-weight='bold' >이상</text>
 <text x='14' y='666' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' >정보량으로 보면: 원시 신호를 그대로 보내면 72 × 12 = 864 bit/s, 판정 뒤에는 박동당 1 bit(경보는 이상일 때만).</text>
-<text x='14' y='686' font-size='10.8' fill='#999' text-anchor='start' font-weight='normal' >숫자 출처: 72 Hz·50단계·소자 24개 × 마스크 5은 Zhong 2022 p.675, 12 bit·경보 크기는 [가정], 세포 전압·R파 크기는 폴더 밖 자료.</text>
+<text x='14' y='686' font-size='10.8' fill='#999' text-anchor='start' font-weight='normal' >숫자 출처: 72 Hz·50단계·device 24개 × 마스크 5은 Zhong 2022 p.675, 12 bit·경보 크기는 [가정], 세포 전압·R파 크기는 폴더 밖 자료.</text>
 <text x='14' y='704' font-size='10.8' fill='#999' text-anchor='start' font-weight='normal' >파형은 합성한 모식도이고 단계마다 세로 축척이 다르다. ①의 오프셋은 실제로 신호보다 수백 배 클 수 있어 같은 축척으로 그릴 수 없다.</text>
 </svg>

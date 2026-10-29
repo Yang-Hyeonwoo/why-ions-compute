@@ -1652,11 +1652,38 @@
       back.appendChild(h("span", "cm-resume-sub", bare.length > 24 ? bare.slice(0, 23) + "…" : bare));
       map.appendChild(back);
     }
+    // 구간이 바뀌는 곳마다 '지금까지 온 길' 띠: 지난 구간은 ✓와 요약 한 줄(그 구간 요점의 첫 문장), 이번 구간은 ●, 남은 구간은 ○
+    function secOf(x) {
+      return x.parentElement && x.parentElement.tagName === "SECTION" ? x.parentElement : null;
+    }
+    function gist(x) {
+      var sec = secOf(x);
+      var li = sec ? sec.querySelector(".keypoints li") : null;
+      if (!li) return "";
+      var t = li.textContent.replace(/\s+/g, " ").trim();
+      var m = t.match(/^(.{12,90}?[.다])(\s|$)/);
+      t = m ? m[1] : t;
+      return t.length > 95 ? t.slice(0, 94) + "…" : t;
+    }
     core.forEach(function (x, i) {
       if (i === 0) return;
-      var sec = x.parentElement && x.parentElement.tagName === "SECTION" ? x.parentElement : x;
-      var rp = h("div", "rest-point");
-      rp.innerHTML = "<span class='rp-mark'>⏸</span> 여기까지가 " + chNum(core[i - 1], i - 1) + "구간입니다. 쉬어도 좋습니다. 다음: <b>" + chNum(x, i) + "구간 · " + escapeHtml(chBare(x)) + "</b>";
+      var sec = secOf(x) || x;
+      var rp = h("div", "progress-strip");
+      rp.appendChild(h("div", "ps-head", "지금까지 온 길 · 이 Day의 구간 " + core.length + "개 중 " + (i + 1) + "번째로 들어갑니다"));
+      var ol = h("ol", "ps-list");
+      core.forEach(function (y, j) {
+        var li = h("li", j < i ? "done" : j === i ? "now" : "later");
+        var head = h("div", "ps-title");
+        head.appendChild(h("span", "ps-mark", j < i ? "✓" : j === i ? "●" : "○"));
+        head.appendChild(h("span", "", chNum(y, j) + "구간 · " + chBare(y) + (j === i ? "  (지금부터)" : "")));
+        li.appendChild(head);
+        if (j < i) {
+          var g = gist(y);
+          if (g) li.appendChild(h("div", "ps-gist", "배운 것: " + g));
+        }
+        ol.appendChild(li);
+      });
+      rp.appendChild(ol);
       sec.parentNode.insertBefore(rp, sec);
     });
     var meta = lb.querySelector(".lesson-body .lesson-meta") || lb.querySelector(".lesson-meta");
@@ -2157,9 +2184,12 @@
             }
           }
         }
+        // 보이는 글자는 '저자, 저널, 연도'(쪽수는 뺀다), 누르면 논문 탭의 그 논문으로(없으면 참고문헌)
         var a = h("a", "src-link");
-        a.href = OFFSET + "ledger/references.html" + (hit ? "#ref-" + hit.id : "");
+        if (hit && hit.pp) a.href = OFFSET + "papers.html#" + hit.pp;
+        else a.href = OFFSET + "ledger/references.html" + (hit ? "#ref-" + hit.id : "");
         a.title = hit ? hit.bib : "참고문헌 페이지";
+        if (hit && hit.short) sp.textContent = hit.short;
         sp.parentNode.insertBefore(a, sp);
         a.appendChild(sp);
       });
@@ -2215,7 +2245,57 @@
   }
 
   // ---------- 단계별 보기 (계산 따라가기, 장치 동작 순서) ----------
+  // ---------- ①②… 원문자는 글꼴에서 너무 작게 보여서 동그란 숫자 배지로 바꾼다 ----------
+  var CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳";
+  function circledIn(root) {
+    if (!root) return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        if (!/[①-⑳]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+        var p = n.parentElement;
+        return p && !p.closest("svg, script, style, textarea, .editable, .cnum") ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      },
+    });
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (n) {
+      var frag = document.createDocumentFragment();
+      n.nodeValue.split(/([①-⑳])/).forEach(function (part) {
+        if (!part) return;
+        var k = CIRCLED.indexOf(part);
+        if (k >= 0) {
+          var b = document.createElement("span");
+          b.className = "cnum";
+          b.textContent = String(k + 1);
+          frag.appendChild(b);
+        } else frag.appendChild(document.createTextNode(part));
+      });
+      n.parentNode.replaceChild(frag, n);
+    });
+  }
+  function setupCircled() {
+    var main = document.querySelector("main") || document.body;
+    circledIn(main);
+    // 퀴즈처럼 나중에 그려지는 곳도
+    var pending = false;
+    new MutationObserver(function () {
+      if (pending) return;
+      pending = true;
+      setTimeout(function () {
+        pending = false;
+        circledIn(main);
+      }, 60);
+    }).observe(main, { childList: true, subtree: true });
+  }
+
+  // 2026-10-30 학습자 피드백: 버튼으로 한 장씩 넘기는 것은 집중에 도움이 안 됨 →
+  // 모든 단계를 한눈에 보이는 번호 흐름(세로 타임라인)으로 보여 준다.
   function setupSteppers() {
+    document.querySelectorAll(".stepper").forEach(function (st) {
+      st.classList.add("flow");
+    });
+  }
+  function setupSteppersOld() {
     document.querySelectorAll(".stepper").forEach(function (st) {
       var steps = Array.prototype.slice.call(st.querySelectorAll(":scope > .step"));
       if (steps.length < 2) return;
@@ -2896,8 +2976,8 @@
       sl[key] = labSlider({ id: "lab-mvm-" + key, label: label, help: help, values: vals, index: st[key], fmt: fmtNum, onInput: function (i) { st[key] = i; draw(key); } });
       grid.appendChild(sl[key]);
     }
-    mk("u1", "입력 u₁", UV, "세로줄 1에 거는 값");
-    mk("u2", "입력 u₂", UV, "세로줄 2에 거는 값");
+    mk("u1", "입력 u₁", UV, "column 1에 거는 값");
+    mk("u2", "입력 u₂", UV, "column 2에 거는 값");
     mk("w11", "W[1,1]", WV, "행 1 · 자리 1");
     mk("w12", "W[1,2]", WV, "행 1 · 자리 2");
     mk("w21", "W[2,1]", WV, "행 2 · 자리 1");
@@ -2941,8 +3021,8 @@
         var d1 = x.y1 - prev.y1, d2 = x.y2 - prev.y2;
         var why =
           key === "u1" || key === "u2"
-            ? "입력 하나를 바꾸면 그 입력이 들어가는 칸(같은 세로줄)의 곱만 바뀝니다. 출력 변화 = 그 자리 가중치 × 입력 변화."
-            : "가중치 하나를 바꾸면 그 칸 하나의 곱만 바뀌어, 그 행의 출력 하나만 달라집니다.";
+            ? "입력 하나를 바꾸면 그 입력이 들어가는 칸(같은 column)의 곱만 바뀝니다. 출력 변화 = 그 자리 weight × 입력 변화."
+            : "weight 하나를 바꾸면 그 칸 하나의 곱만 바뀌어, 그 행의 출력 하나만 달라집니다.";
         var t = "y₁: " + fmtNum(prev.y1) + " → " + fmtNum(x.y1) + " (" + (d1 >= 0 ? "+" : "") + fmtNum(d1) + "), y₂: " + fmtNum(prev.y2) + " → " + fmtNum(x.y2) + " (" + (d2 >= 0 ? "+" : "") + fmtNum(d2) + "). " + why;
         if (key === "u1" && x.u1 === 4 && x.u2 === 1 && x.w11 === 1 && x.w12 === 3 && pr.label()) t += " (내 예상: '" + pr.label() + "')";
         say(t);
@@ -2960,8 +3040,8 @@
         options: ["4", "8", "7", "모르겠음"],
         correct: 0,
         hint: "행 1과 입력을 같은 자리끼리 곱해 더합니다: 2 × 3 + (−1) × 2.",
-        explain: "2 × 3 = 6, (−1) × 2 = −2, 더하면 4입니다. 음수 가중치는 그 입력이 출력을 줄이는 쪽으로 작용한다는 뜻입니다.",
-        why: { 1: "8은 −1을 +1로 계산한 값(6 + 2)입니다. 가중치의 부호까지 곱합니다.", 2: "7은 행 대신 다른 줄의 숫자를 섞어 쓴 경우에 나옵니다. 출력 1은 행 1만 씁니다." },
+        explain: "2 × 3 = 6, (−1) × 2 = −2, 더하면 4입니다. 음수 weight는 그 입력이 출력을 줄이는 쪽으로 작용한다는 뜻입니다.",
+        why: { 1: "8은 −1을 +1로 계산한 값(6 + 2)입니다. weight의 부호까지 곱합니다.", 2: "7은 행 대신 다른 줄의 숫자를 섞어 쓴 경우에 나옵니다. 출력 1은 행 1만 씁니다." },
       })
     );
     root.appendChild(
@@ -2971,7 +3051,7 @@
         options: ["u₂가 y₁에 주는 영향만 사라진다", "y₁이 0이 된다", "u₂가 모든 출력에서 사라진다", "모르겠음"],
         correct: 0,
         hint: "W[1,2]는 '행 1(출력 1)의 자리 2(입력 2)' 칸 하나입니다.",
-        explain: "W[1,2]는 입력 2가 출력 1에 들어가는 세기 하나입니다. 0이 되면 그 칸의 곱만 0이 되고, y₁에는 u₁의 몫이 남고 y₂에서는 u₂의 몫(W[2,2] × u₂)이 그대로입니다. crossbar에서는 그 교차점의 소자 하나가 전류를 거의 안 흘리는 것과 같습니다(3구간 뒷부분).",
+        explain: "W[1,2]는 입력 2가 출력 1에 들어가는 세기 하나입니다. 0이 되면 그 칸의 곱만 0이 되고, y₁에는 u₁의 몫이 남고 y₂에서는 u₂의 몫(W[2,2] × u₂)이 그대로입니다. crossbar에서는 그 교차점의 device 하나가 전류를 거의 안 흘리는 것과 같습니다(3구간 뒷부분).",
         why: { 1: "y₁ = W[1,1]·u₁ + W[1,2]·u₂이므로 첫째 항은 남습니다.", 2: "u₂는 y₂에도 W[2,2]를 통해 들어갑니다. 바꾼 칸은 하나뿐입니다." },
       })
     );
@@ -2998,7 +3078,7 @@
     root.appendChild(pr.el);
     root.appendChild(h("div", "lab-step", "2 · 하나씩 바꿔 보기"));
     var grid = h("div", "lab-ctls");
-    var s0 = labSlider({ id: "lab-lg-w0", label: "시작 가중치 w", values: WS, index: st.w0, fmt: fmtNum, onInput: function (i) { st.w0 = i; reset(); } });
+    var s0 = labSlider({ id: "lab-lg-w0", label: "시작 weight w", values: WS, index: st.w0, fmt: fmtNum, onInput: function (i) { st.w0 = i; reset(); } });
     var s1 = labSlider({ id: "lab-lg-eta", label: "학습률 η (한 걸음 크기)", help: "다음 w = w − η × 기울기", values: ETA, index: st.e, fmt: fmtNum, onInput: function (i) { st.e = i; reset(); } });
     grid.appendChild(s0);
     grid.appendChild(s1);
@@ -3044,7 +3124,7 @@
       });
       pic.innerHTML = labPlot({
         x0: -0.5, x1: 5.5, y0: 0, y1: 40, xticks: [0, 1, 2, 2.5, 3, 4, 5], yticks: [0, 10, 20, 30, 40],
-        xlabel: "가중치 w", ylabel: "손실 L", label: "손실 L = (2w − 5)² 곡선과 지나온 w",
+        xlabel: "weight w", ylabel: "손실 L", label: "손실 L = (2w − 5)² 곡선과 지나온 w",
         series: [{ pts: curve, color: "#9aa5b1" }, { pts: pts, color: "#c0392b", width: 1.5, dots: true, dash: "4,3" }],
         legend: [["곡선: L = (2w − 5)²", "#6b7785"], ["점: 지나온 w", "#c0392b"]],
       });
@@ -3089,14 +3169,14 @@
     var prev = null;
     var pr = labPredict({
       key: "d09-decay-predict",
-      question: "τ = 38 ms인 소자에 입력을 4 ms 간격으로 넣으면 다음 입력 때 앞 입력의 흔적이 약 90% 남습니다. 간격을 100 ms로 늘리면?",
+      question: "τ = 38 ms인 device에 입력을 4 ms 간격으로 넣으면 다음 입력 때 앞 입력의 흔적이 약 90% 남습니다. 간격을 100 ms로 늘리면?",
       options: ["90% 정도 그대로", "약 7%로 줄어든다", "더 커진다", "모르겠음"],
       next: "아래에서 입력 간격만 100 ms로 바꿔 보세요.",
     });
     root.appendChild(pr.el);
     root.appendChild(h("div", "lab-step", "2 · 하나씩 바꿔 보기"));
     var grid = h("div", "lab-ctls");
-    var s0 = labSlider({ id: "lab-dc-tau", label: "이완 시간 τ (소자의 성질)", values: TAU, index: st.t, fmt: function (v) { return v + " ms"; }, onInput: function (i) { st.t = i; draw("t"); } });
+    var s0 = labSlider({ id: "lab-dc-tau", label: "이완 시간 τ (device의 성질)", values: TAU, index: st.t, fmt: function (v) { return v + " ms"; }, onInput: function (i) { st.t = i; draw("t"); } });
     var s1 = labSlider({ id: "lab-dc-dt", label: "입력 간격 Δt (과제·측정의 성질)", values: DT, index: st.d, fmt: function (v) { return v + " ms"; }, onInput: function (i) { st.d = i; draw("d"); } });
     grid.appendChild(s0);
     grid.appendChild(s1);
@@ -3118,20 +3198,20 @@
         x0: 0, x1: 10, y0: 0, y1: 1, xticks: [0, 2, 4, 6, 8, 10], yticks: [0, 0.25, 0.5, 0.75, 1],
         xlabel: "몇 번째 다음 입력인가 k (시각 = k × " + dt + " ms)", ylabel: "남은 흔적", label: "입력 한 번의 흔적이 줄어드는 모양",
         series: [{ pts: cont, color: "#9aa5b1", width: 1.5 }, { pts: pts, color: "#3d6fb4", line: false, dots: true }],
-        legend: [["선: 소자 안의 연속 감쇠 e^(−t/τ)", "#6b7785"], ["점: 입력 시점마다 남은 몫 dᵏ", "#3d6fb4"]],
+        legend: [["선: device 안의 연속 감쇠 e^(−t/τ)", "#6b7785"], ["점: 입력 시점마다 남은 몫 dᵏ", "#3d6fb4"]],
       });
       var n10 = d > 0 && d < 1 ? Math.ceil(Math.log(0.1) / Math.log(d)) : Infinity;
       live.textContent =
         "d = e^(−" + dt + "/" + tau + ") = " + fmtNum(d) + " → 다음 입력 때 " + Math.round(d * 100) + "% 남음. 5번째 입력 때 " + (Math.pow(d, 5) * 100 < 0.01 ? "0.01% 미만" : fmtNum(Math.pow(d, 5) * 100) + "%") + ". 10% 아래로 줄 때까지 " + n10 + "번째 입력(약 " + fmtNum(n10 * dt) + " ms).";
       if (key && prev) {
-        var t = (key === "d" ? "입력 간격" : "이완 시간") + "을 바꾸자 d가 " + fmtNum(prev) + " → " + fmtNum(d) + "가 됐습니다. 남는 몫은 τ 하나가 아니라 Δt/τ의 비로 정해집니다. 같은 소자도 입력을 띄엄띄엄 넣으면 기억이 짧아 보이고, 촘촘히 넣으면 길어 보입니다.";
+        var t = (key === "d" ? "입력 간격" : "이완 시간") + "을 바꾸자 d가 " + fmtNum(prev) + " → " + fmtNum(d) + "가 됐습니다. 남는 몫은 τ 하나가 아니라 Δt/τ의 비로 정해집니다. 같은 device도 입력을 띄엄띄엄 넣으면 기억이 짧아 보이고, 촘촘히 넣으면 길어 보입니다.";
         if (key === "d" && dt === 100 && tau === 38 && pr.label()) t += " (내 예상: '" + pr.label() + "')";
         say(t);
       }
       prev = d;
     }
     draw(null);
-    labWhy(root, "d09-decay-why", "예: 같은 소자인데 간격을 늘리니 흔적이 줄어든 이유는 …");
+    labWhy(root, "d09-decay-why", "예: 같은 device인데 간격을 늘리니 흔적이 줄어든 이유는 …");
   };
   LABS["decay-check"] = function (root) {
     root.appendChild(
@@ -3235,7 +3315,7 @@
       rows.forEach(function (r) {
         html += "<tr><td>" + r.t + "</td><td>u(" + (r.t - 1) + ") = " + r.u + "</td><td>" + r3(r.x1) + "</td><td>" + r3(r.x2) + "</td><td>" + r3(r.y) + "</td></tr>";
       });
-      tbl.innerHTML = html + "</tbody></table><div class='lab-note'>예시 출력의 가중치 (1, −1)는 설명용으로 고른 값입니다. 실제 readout 가중치는 4구간처럼 데이터로 학습해 정합니다.</div>";
+      tbl.innerHTML = html + "</tbody></table><div class='lab-note'>예시 출력의 weight (1, −1)는 설명용으로 고른 값입니다. 실제 readout weight는 4구간처럼 데이터로 학습해 정합니다.</div>";
       if (key) {
         var t;
         if (key === "g") t = GS[st.g] === 0 ? "W 배율이 0이면 지난 상태가 섞이지 않아, 입력이 0이 되는 다음 단계에 상태도 0이 됩니다. 기억이 없습니다." : "W 배율 × " + fmtNum(GS[st.g]) + ": 지난 상태가 다음 상태에 섞여 들어가는 세기가 바뀌어, 입력이 끝난 뒤 상태가 남는 길이가 달라집니다.";
@@ -3268,7 +3348,7 @@
         options: ["(0, 0)", "(0.164, −0.430)", "(0.762, −0.462)", "모르겠음"],
         correct: 0,
         hint: "x(2) = tanh(W x(1) + W_in u(1))에서 W = 0, u(1) = 0입니다.",
-        explain: "W가 0이고 입력도 0이면 tanh(0) = 0이라 상태가 바로 0이 됩니다. 기억은 W(또는 소자의 느린 이완)가 지난 상태를 다음으로 넘겨 줄 때만 생깁니다.",
+        explain: "W가 0이고 입력도 0이면 tanh(0) = 0이라 상태가 바로 0이 됩니다. 기억은 W(또는 device의 느린 이완)가 지난 상태를 다음으로 넘겨 줄 때만 생깁니다.",
         why: { 1: "그 값은 W가 본문의 원래 값일 때입니다.", 2: "그 값은 입력 1을 넣은 직후 x(1)입니다." },
       })
     );
@@ -3699,6 +3779,7 @@
   setupSrcLinks();
   setupEmphasis();
   setupGlossary();
+  setupCircled();
   var depsP = deps();
   detectMode()
     .then(loadStatus)

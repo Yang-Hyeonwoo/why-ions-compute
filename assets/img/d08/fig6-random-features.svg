@@ -1,6 +1,6 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 325' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
-<text x='320' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >고정된 난수 곡선 K개 + 학습한 가중치: K가 늘면 목표 곡선을 따라간다</text>
+<text x='320' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >고정된 난수 곡선 K개 + 학습한 weight: K가 늘면 목표 곡선을 따라간다</text>
 <rect x='70' y='45' width='360' height='210' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='64' y='238.67741935483872' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >-1</text>
 <line x1='70' y1='234.67741935483872' x2='430' y2='234.67741935483872' stroke='#f2f2f2' stroke-width='1'/>
@@ -22,13 +22,13 @@
 <line x1='462' y1='68' x2='490' y2='68' stroke='#444' stroke-width='3.2'/>
 <text x='498' y='72' font-size='11' fill='#444' text-anchor='start' font-weight='normal' >목표 곡선</text>
 <line x1='462' y1='92' x2='490' y2='92' stroke='#e08a3c' stroke-width='1.8' stroke-dasharray='6,3'/>
-<text x='498' y='96' font-size='11' fill='#e08a3c' text-anchor='start' font-weight='bold' >K = 2: NMSE 0.3337</text>
+<text x='496' y='96' font-size='10.5' fill='#e08a3c' text-anchor='start' font-weight='bold' >K = 2: NMSE 0.3337</text>
 <line x1='462' y1='118' x2='490' y2='118' stroke='#3d6fb4' stroke-width='1.8' stroke-dasharray='6,3'/>
-<text x='498' y='122' font-size='11' fill='#3d6fb4' text-anchor='start' font-weight='bold' >K = 5: NMSE 0.0074</text>
+<text x='496' y='122' font-size='10.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >K = 5: NMSE 0.0074</text>
 <line x1='462' y1='144' x2='490' y2='144' stroke='#13936b' stroke-width='1.8'/>
-<text x='498' y='148' font-size='11' fill='#13936b' text-anchor='start' font-weight='bold' >K = 20: NMSE 0.0001 미만</text>
+<text x='496' y='148' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='bold' >K = 20: NMSE &lt; 0.0001</text>
 <text x='462' y='186' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >곡선 모양(난수)은 고정,</text>
-<text x='462' y='203' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >학습한 것은 섞는 비율(가중치)</text>
+<text x='462' y='203' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >학습한 것은 섞는 비율(weight)</text>
 <text x='462' y='220' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >뿐이다. 학습 점 21개,</text>
 <text x='462' y='237' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >평가 점 201개.</text>
 <text x='320' y='312' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >목표(예시) = sin(3u) + 0.5u². 각 곡선 = tanh(a·u + c), a·c는 고정 난수. NMSE = 평균 제곱 오차 ÷ 목표의 분산.</text>

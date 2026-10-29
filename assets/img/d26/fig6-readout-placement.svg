@@ -1,14 +1,14 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 780 370' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <rect x='0' y='0' width='780' height='370' fill='#fff'/>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arrR' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker></defs>
-<text x='390' y='22' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >reservoir만 소자로 할 때와 readout까지 소자로 할 때 — 그리고 가중치는 어디서 정하나 (모식도)</text>
-<text x='20' y='54' font-size='11.5' fill='#e08a3c' text-anchor='start' font-weight='bold' >A  reservoir만 소자 (흔한 실험실 구성, 혼합형)</text>
+<text x='390' y='22' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >reservoir만 device로 할 때와 readout까지 device로 할 때 — 그리고 weight는 어디서 정하나 (모식도)</text>
+<text x='20' y='54' font-size='11.5' fill='#e08a3c' text-anchor='start' font-weight='bold' >A  reservoir만 device (흔한 실험실 구성, 혼합형)</text>
 <rect x='20' y='64' width='112' height='42' rx='6' fill='#fff' stroke='#444' stroke-width='1.2' />
 <text x='76.0' y='81' font-size='10.6' fill='#444' text-anchor='middle' font-weight='bold' >입력 펄스</text>
 <text x='76.0' y='96' font-size='10.2' fill='#444' text-anchor='middle' font-weight='normal' >마스크 곱한 전압</text>
 <line x1='132' y1='85' x2='148' y2='85' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
 <rect x='150' y='64' width='112' height='42' rx='6' fill='#fff' stroke='#13936b' stroke-width='1.2' />
-<text x='206.0' y='81' font-size='10.6' fill='#13936b' text-anchor='middle' font-weight='bold' >이온 소자들</text>
+<text x='206.0' y='81' font-size='10.6' fill='#13936b' text-anchor='middle' font-weight='bold' >이온 device들</text>
 <text x='206.0' y='96' font-size='10.2' fill='#444' text-anchor='middle' font-weight='normal' >상태 = 전류</text>
 <line x1='262' y1='85' x2='268' y2='85' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
 <rect x='270' y='64' width='112' height='42' rx='6' fill='#fff' stroke='#444' stroke-width='1.2' />
@@ -26,14 +26,14 @@
 <rect x='650' y='64' width='112' height='42' rx='6' fill='#fff' stroke='#444' stroke-width='1.2' />
 <text x='706.0' y='81' font-size='10.6' fill='#444' text-anchor='middle' font-weight='bold' >답</text>
 <text x='706.0' y='96' font-size='10.2' fill='#444' text-anchor='middle' font-weight='normal' >가장 큰 출력</text>
-<text x='20' y='124' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >가중치 wᵢ는 소프트웨어의 숫자로 저장된다. 정밀하고 바꾸기 쉽지만, 상태마다 ADC 변환과 디지털 곱셈·덧셈이 든다.</text>
-<text x='20' y='154' font-size='11.5' fill='#13936b' text-anchor='start' font-weight='bold' >B  readout까지 소자 (완전 아날로그 추론, Zhong 2022의 방식)</text>
+<text x='20' y='124' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >weight wᵢ는 소프트웨어의 숫자로 저장된다. 정밀하고 바꾸기 쉽지만, 상태마다 ADC 변환과 디지털 곱셈·덧셈이 든다.</text>
+<text x='20' y='154' font-size='11.5' fill='#13936b' text-anchor='start' font-weight='bold' >B  readout까지 device (완전 아날로그 inference, Zhong 2022의 방식)</text>
 <rect x='20' y='164' width='112' height='42' rx='6' fill='#fff' stroke='#444' stroke-width='1.2' />
 <text x='76.0' y='181' font-size='10.6' fill='#444' text-anchor='middle' font-weight='bold' >입력 펄스</text>
 <text x='76.0' y='196' font-size='10.2' fill='#444' text-anchor='middle' font-weight='normal' >마스크 곱한 전압</text>
 <line x1='132' y1='185' x2='148' y2='185' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
 <rect x='150' y='164' width='112' height='42' rx='6' fill='#fff' stroke='#13936b' stroke-width='1.2' />
-<text x='206.0' y='181' font-size='10.6' fill='#13936b' text-anchor='middle' font-weight='bold' >이온 소자들</text>
+<text x='206.0' y='181' font-size='10.6' fill='#13936b' text-anchor='middle' font-weight='bold' >이온 device들</text>
 <text x='206.0' y='196' font-size='10.2' fill='#444' text-anchor='middle' font-weight='normal' >상태 = 전류</text>
 <line x1='262' y1='185' x2='268' y2='185' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
 <rect x='270' y='164' width='112' height='42' rx='6' fill='#fff' stroke='#444' stroke-width='1.2' />
@@ -50,8 +50,8 @@
 <line x1='632' y1='185' x2='648' y2='185' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
 <rect x='650' y='164' width='112' height='42' rx='6' fill='#fff' stroke='#444' stroke-width='1.2' />
 <text x='706.0' y='189.0' font-size='10.6' fill='#444' text-anchor='middle' font-weight='bold' >답</text>
-<text x='20' y='224' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >가중치는 전도도 G로 저장된다. 상태와 readout 사이 ADC가 없지만, G를 원하는 값에 정확히 쓰기 어렵고 시간이 지나면 G가 흐른다(drift).</text>
-<text x='20' y='254' font-size='11.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >C  가중치를 정하는 곳 (A·B 모두 같다: 보통 칩 밖 컴퓨터에서 한 번)</text>
+<text x='20' y='224' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >weight는 conductance G로 저장된다. 상태와 readout 사이 ADC가 없지만, G를 원하는 값에 정확히 쓰기 어렵고 시간이 지나면 G가 흐른다(drift).</text>
+<text x='20' y='254' font-size='11.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >C  weight를 정하는 곳 (A·B 모두 같다: 보통 칩 밖 컴퓨터에서 한 번)</text>
 <rect x='20' y='264' width='160' height='42' rx='6' fill='#fff' stroke='#444' stroke-width='1.2' />
 <text x='100.0' y='281' font-size='10.6' fill='#444' text-anchor='middle' font-weight='bold' >① 상태 기록</text>
 <text x='100.0' y='296' font-size='10.2' fill='#444' text-anchor='middle' font-weight='normal' >학습용 입력을 넣고 ADC로 샘플</text>
@@ -70,5 +70,5 @@
 <polyline points='370.0,285.0 370.0,320.0 640.0,320.0' fill='none' stroke='#444' stroke-width='1.4' stroke-linejoin='round'/>
 <line x1='640' y1='320' x2='640' y2='309' stroke='#444' stroke-width='1.4' marker-end='url(#arr)'/>
 <text x='20' y='342' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >Zhong 2022: 노이즈를 고려한 선형 회귀로 w를 PC에서 계산 → PC의 파이썬 프로그램이 읽기·SET·RESET을 반복해 0–33 µS에 씀(p.676, 680).</text>
-<text x='20' y='358' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >칩 위에서 스스로 가중치를 고치는 학습(on-chip training)은 이 그림의 어느 경로에도 없다. 별도의 연구 주제다. [해석]</text>
+<text x='20' y='358' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >칩 위에서 스스로 weight를 고치는 학습(on-chip training)은 이 그림의 어느 경로에도 없다. 별도의 연구 주제다. [해석]</text>
 </svg>
