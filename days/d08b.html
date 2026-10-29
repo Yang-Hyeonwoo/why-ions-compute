@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 14. 분류 readout과 학습 방법, 고정해도 되는 이유 – Why Ions Compute</title>
+<title>Day 14. 분류 readout과 학습 방법, 고정해도 되는 이유 – Why Ions Compute?</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,7 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../days/d09.html" rel="next">
+<link href="../days/d09a.html" rel="next">
 <link href="../days/d08a.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -47,18 +47,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
-  "collapse-after": 3,
+  "collapse-after": 2,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    "/"
   ],
   "language": {
     "search-no-results-text": "일치 없음",
@@ -129,7 +127,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Why Ions Compute</span>
+    <span class="navbar-title">Why Ions Compute?</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="검색"></div>
@@ -140,46 +138,27 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
-<span class="menu-text">커버</span></a>
+<span class="menu-text">홈</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../plan.html"> 
-<span class="menu-text">전체 학습 지도</span></a>
+<span class="menu-text">로드맵</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">장부</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
-        <li>
-    <a class="dropdown-item" href="../ledger/bottleneck.html">
- <span class="dropdown-text">병목 장부</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/unknowns.html">
- <span class="dropdown-text">아직 모르는 것</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/glossary.html">
- <span class="dropdown-text">용어집</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/kill-criteria.html">
- <span class="dropdown-text">접는 기준</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/references.html">
- <span class="dropdown-text">참고문헌</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/questions.html">
- <span class="dropdown-text">질문 모음</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" href="../rules.html"> 
-<span class="menu-text">공부 규칙</span></a>
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -213,7 +192,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">전체 학습 지도</span></a>
+ <span class="menu-text">로드맵</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -270,7 +249,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -311,7 +290,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -322,44 +301,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
   </div>
 </li>
       </ul>
@@ -376,67 +361,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
   </div>
 </li>
       </ul>
@@ -453,49 +444,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
   </div>
 </li>
       </ul>
@@ -512,69 +527,93 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">장부</span></a>
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -582,46 +621,28 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">병목 장부</span></a>
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">아직 모르는 것</span></a>
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">용어집</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">접는 기준</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">참고문헌</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">질문 모음</span></a>
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rules.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">공부 규칙</span></a>
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
   </div>
 </li>
     </ul>
@@ -666,8 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> — 분류에는 어떤 readout과 학습법을 쓰고, reservoir를 고정해도 되는 조건은 무엇인가?</p>
-<p><strong>배울 핵심</strong> — 분류 readout(softmax·교차 엔트로피), ridge 한 번 대 경사 하강·Adam, 고정된 다양한 특징의 선형 결합, readout이 만들 수 없는 정보</p>
-<p><strong>이후 쓰이는 곳</strong> — Day 16–19 비선형·다양성, Day 20–21 실습, Day 26–27 심전도 분류, Day 28–29 기준선. 논문 성능이 선형 readout으로 잰 것인지, readout이 일을 다 했는지 판단</p>
+<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> — 소자 논문의 분류 과제(부정맥, 손동작)는 readout이 점수를 내고 softmax로 종류를 고르는 구조이고, 학습법(ridge, gradient descent, Adam)도 논문마다 다릅니다. 오늘을 마치면 '재료가 계산했다'는 주장이 선형 readout만으로 얻은 결과인지, 내 소자 상태가 기억·비선형·다양함을 갖췄는지 판단합니다.</p>
+<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> — 상태 x → 종류마다 점수(가중치 행 × x) → softmax로 확률 → 가장 큰 종류를 답으로(argmax). 학습: 확률과 정답의 차이(cross-entropy)가 줄도록 가중치를 ridge로 한 번에, 또는 gradient descent로 조금씩 고칩니다.</p>
+<p><strong>오늘 반드시</strong> — readout은 상태에 있는 것을 섞을 뿐 없는 것을 만들지 않는다. reservoir를 고정해도 되는 조건은 기억, 비선형 섞임, 다양함이고, 선형 readout만으로 높은 성능이 나와야 재료의 기여라고 말할 수 있다.</p>
+<p><strong>나중에 더 봐도 되는 것</strong> — momentum과 Adam의 계산 세부(심화 접기), 학습률을 바꿔 발산을 확인하는 실험, 오늘의 반론 구간의 기준선 숫자. 논문에서 그 말이 나올 때 다시 펼치면 됩니다.</p>
+<p><strong>다음으로 넘어가는 기준</strong> — '오늘 반드시'를 내 말로 한두 문장 말할 수 있으면 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 17–20 비선형·다양성, Day 21–22 실습, Day 27–28 심전도 분류, Day 29–30 기준선. 논문 성능이 선형 readout으로 잰 것인지, readout이 일을 다 했는지 판단</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d08b">
@@ -678,7 +703,7 @@ window.Quarto = {
 <section id="review" class="level2">
 <h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
 <div class="flow-line">
-<p>지난 학습 단위(Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+<p>지난 학습 단위(Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
 </div>
 <div class="quiz" data-day="d08" data-set="review-b"></div>
 </section>
@@ -688,10 +713,10 @@ window.Quarto = {
 <section id="ch-classify-train" class="level3">
 <h3 class="anchored" data-anchor-id="ch-classify-train">5. 분류 readout과 학습의 두 길: softmax, 경사 하강, Adam</h3>
 <div class="goal">
-<p>이 구간을 읽고 나면 원-핫 정답·점수·argmax·softmax·교차 엔트로피를 점수 (2.0, 1.0, 0.1)로 직접 계산하고 각 단계가 무엇을 받아 무엇을 내는지 말할 수 있으며, readout을 학습하는 두 길(한 번에 푸는 ridge, 조금씩 내려가는 경사 하강·momentum·Adam)의 차이와 학습률이 너무 크면 무슨 일이 생기는지, RC에서 보통 ridge를 쓰는 이유를 말할 수 있다.</p>
+<p>이 구간을 읽고 나면 원-핫 정답·점수·argmax·softmax·교차 엔트로피를 점수 (2.0, 1.0, 0.1)로 직접 계산하고 각 단계가 무엇을 받아 무엇을 내는지 말할 수 있으며, readout을 학습하는 두 길(한 번에 푸는 ridge, 조금씩 내려가는 경사 하강)의 차이와 학습률이 너무 크면 무슨 일이 생기는지, RC에서 보통 ridge를 쓰는 이유를 말할 수 있다. momentum·Adam은 경사 하강의 무엇을 바꾼 변형인지 한 줄씩 말할 수 있으면 충분하다(Adam의 계산 세부는 심화 접기에서 다시 볼 때).</p>
 </div>
 <p>4구간의 정답은 숫자 하나(예: 다음 순간의 신호값)였습니다. 그런데 소자 논문의 과제는 대부분 <strong>분류</strong>입니다. "이 심장 박동은 정상인가 부정맥인가", "이 손동작은 네 가지 중 무엇인가". 답이 숫자가 아니라 <strong>종류</strong>일 때 readout이 무엇을 내는지를 먼저 보고, 그다음 readout을 학습하는 두 가지 길을 비교합니다.</p>
-<p>새 이름이 다섯 개 나오므로 먼저 지도를 봅니다. 모두 같은 예(종류 A, B, C 세 개, 정답은 A)로 이어지고, 앞의 셋은 답을 낼 때마다, 뒤의 둘은 학습할 때만 씁니다.</p>
+<p>새 이름이 다섯 개 나오므로 먼저 지도를 봅니다. 모두 같은 예(종류 A, B, C 세 개, 정답은 A)로 이어지고, 앞의 셋은 답을 낼 때마다, 뒤의 둘은 학습할 때만 씁니다. 손으로 할 수 있어야 하는 것은 ①–④(분류 출력과 오차)와 ⑤ 중 경사 하강·학습률이고, momentum·Adam은 무엇을 바꾼 것인지까지만 잡습니다.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -744,16 +769,16 @@ window.Quarto = {
 <section id="분류-readout-원-핫-정답-argmax-softmax-교차-엔트로피" class="level4">
 <h4 class="anchored" data-anchor-id="분류-readout-원-핫-정답-argmax-softmax-교차-엔트로피">분류 readout: 원-핫 정답, argmax, softmax, 교차 엔트로피</h4>
 <p><strong>왜 필요한가.</strong> "부정맥 = 1, 정상 = 0"처럼 종류에 숫자를 붙이면 두 종류까지는 4구간 그대로 됩니다. 그러나 손동작이 네 종류일 때 "삼각형 = 1, N자 = 2, 역삼각형 = 3, Z자 = 4"로 붙이면, readout은 "N자(2)는 삼각형(1)과 역삼각형(3)의 중간"이라는 엉터리 순서를 배웁니다. 종류에는 순서가 없으니 다른 방법이 필요합니다.</p>
-<p><strong>원-핫 정답(one-hot).</strong> 종류 수만큼 칸을 만들고 맞는 칸만 1, 나머지는 0으로 적습니다. 종류가 셋(A, B, C)이면 A = (1, 0, 0), B = (0, 1, 0), C = (0, 0, 1). "칸 하나만 뜨겁다(hot)"는 뜻입니다. readout은 종류마다 출력 하나씩, 즉 <strong>점수 세 개</strong>를 냅니다. 종류마다 4구간의 readout이 하나씩 있다고 보면 됩니다: 점수<span class="math inline">\(_k = \mathbf{w}_k \cdot \mathbf{x}\)</span> (상태에 종류 <span class="math inline">\(k\)</span>의 가중치 행을 곱해 더한 값). 예: 상태가 <span class="math inline">\(x = (0.8, -0.4)\)</span>이고 종류 A의 가중치 행이 <span class="math inline">\((2.0, -1.0)\)</span>이면 A의 점수는 <span class="math inline">\(2.0 \times 0.8 + (-1.0) \times (-0.4) = 1.6 + 0.4 = 2.0\)</span>. B 행 <span class="math inline">\((1.0, -0.5)\)</span>이면 <span class="math inline">\(0.8 + 0.2 = 1.0\)</span>, C 행 <span class="math inline">\((0.5, 0.75)\)</span>이면 <span class="math inline">\(0.4 - 0.3 = 0.1\)</span>. 이 점수 (2.0, 1.0, 0.1)을 아래에서 계속 씁니다. (실제로는 여기에 종류마다 상수 하나를 더하기도 합니다. 아래 Singh의 '아핀'이 그 뜻입니다.)</p>
+<p><strong>원-핫 정답(one-hot).</strong> 종류 수만큼 칸을 만들고 맞는 칸만 1, 나머지는 0으로 적습니다. 종류가 셋(A, B, C)이면 A = (1, 0, 0), B = (0, 1, 0), C = (0, 0, 1). "칸 하나만 뜨겁다(hot)"는 뜻입니다. readout은 종류마다 출력 하나씩, 즉 <strong>점수</strong>(score, 논문에서는 흔히 logit) <strong>세 개</strong>를 냅니다. 종류마다 4구간의 readout이 하나씩 있다고 보면 됩니다: 점수<span class="math inline">\(_k = \mathbf{w}_k \cdot \mathbf{x}\)</span> (상태에 종류 <span class="math inline">\(k\)</span>의 가중치 행을 곱해 더한 값). 예: 상태가 <span class="math inline">\(x = (0.8, -0.4)\)</span>이고 종류 A의 가중치 행이 <span class="math inline">\((2.0, -1.0)\)</span>이면 A의 점수는 <span class="math inline">\(2.0 \times 0.8 + (-1.0) \times (-0.4) = 1.6 + 0.4 = 2.0\)</span>. B 행 <span class="math inline">\((1.0, -0.5)\)</span>이면 <span class="math inline">\(0.8 + 0.2 = 1.0\)</span>, C 행 <span class="math inline">\((0.5, 0.75)\)</span>이면 <span class="math inline">\(0.4 - 0.3 = 0.1\)</span>. 이 점수 (2.0, 1.0, 0.1)을 아래에서 계속 씁니다. (실제로는 여기에 종류마다 상수 하나를 더하기도 합니다. 아래 Singh의 '아핀(affine)'이 그 뜻입니다.)</p>
 <p><strong>argmax.</strong> 점수 중 <strong>가장 큰 칸의 번호</strong>를 답으로 고르는 규칙입니다. 점수가 (2.0, 1.0, 0.1)이면 첫째 칸이 가장 크니 답은 A. "가장 큰 것(max)의 자리(arg)"라는 뜻입니다.</p>
-<p><span id="s-softmax-steps"></span><strong>softmax: 점수를 확률로.</strong> 점수는 음수일 수도 있고 합이 1도 아니라 "얼마나 확신하나"를 말해 주지 못합니다. softmax는 점수를 0과 1 사이, 합이 1인 숫자(확률)로 바꿉니다. 계산은 세 단계입니다.</p>
+<p><span id="s-softmax-steps"></span><strong>softmax: 점수를 확률로.</strong> 점수는 음수일 수도 있고 합이 1도 아니라 "얼마나 확신하나"를 말해 주지 못합니다. <span class="key">softmax는 점수를 0과 1 사이, 합이 1인 숫자(확률)로 바꿉니다.</span> 계산은 세 단계입니다.</p>
 <ol type="1">
 <li>점수마다 <span class="math inline">\(e^{\text{점수}}\)</span>를 계산한다(<span class="math inline">\(e \approx 2.718\)</span>. <span class="math inline">\(e^{\text{점수}}\)</span>는 항상 양수이고 점수가 클수록 빠르게 커진다): <span class="math inline">\(e^{2.0} = 7.389\)</span>, <span class="math inline">\(e^{1.0} = 2.718\)</span>, <span class="math inline">\(e^{0.1} = 1.105\)</span>.</li>
 <li>다 더한다: <span class="math inline">\(7.389 + 2.718 + 1.105 = 11.212\)</span>.</li>
 <li>각각을 합으로 나눈다: <span class="math inline">\(7.389/11.212 = 0.659\)</span>, <span class="math inline">\(2.718/11.212 = 0.242\)</span>, <span class="math inline">\(1.105/11.212 = 0.099\)</span>.</li>
 </ol>
-<p><strong>그림 읽는 법.</strong> 그림 9의 ①–③은 위 세 단계를 막대로 그린 것입니다(파랑이 A). 막대 높이의 순서는 세 칸 모두 같고, ③에서 합이 1이 됩니다. ④는 아래 '교차 엔트로피'에서 씁니다. 가로축은 정답 칸의 확률, 세로축은 그때의 손실입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d08/fig-softmax-ce.svg" alt="왼쪽 세 막대 묶음: 점수 2.0, 1.0, 0.1 → e의 거듭제곱 7.389, 2.718, 1.105(합 11.212) → 확률 0.659, 0.242, 0.099. 오른쪽: 가로축 정답 칸 확률 p, 세로축 손실 −ln p의 곡선과 점 1→0, 0.659→0.417, 0.242→1.42, 0.1→2.30, 0.01→4.61" class="figure-img"><figcaption><b>그림 9.</b> softmax와 교차 엔트로피. ①→③ 점수 (2.0, 1.0, 0.1)을 $e$의 거듭제곱으로 바꾸고(모두 양수, 큰 점수일수록 더 커짐), 합 11.212로 나누면 합이 1인 확률 (0.659, 0.242, 0.099)가 된다. 순서는 점수와 같다. ④ 교차 엔트로피 $L = -\ln p_{\text{정답}}$의 곡선. 정답 칸의 확률이 1이면 0이고, 작아질수록 빠르게 커진다. 점수는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>그림 읽는 법.</strong> 그림 9(a)–(c)는 위 세 단계를 막대로 그린 것입니다(파랑이 A). 막대 높이의 순서는 세 패널 모두 같고, (c)에서 합이 1이 됩니다. (d)는 아래 '교차 엔트로피'에서 씁니다. 가로축은 정답 칸의 확률, 세로축은 그때의 손실입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d08/fig-softmax-ce.svg" alt="(a)–(c) 세 막대 묶음: 점수 2.0, 1.0, 0.1 → e의 거듭제곱 7.389, 2.718, 1.105(합 11.212) → 확률 0.659, 0.242, 0.099. (d) 가로축 정답 칸 확률 p, 세로축 손실 −ln p의 곡선과 점 1→0, 0.659→0.417, 0.242→1.42, 0.1→2.30, 0.01→4.61" class="figure-img"><figcaption><b>그림 9.</b> softmax와 교차 엔트로피. <b>(a)→(c)</b> 점수 (2.0, 1.0, 0.1)을 $e$의 거듭제곱으로 바꾸고(모두 양수, 큰 점수일수록 더 커짐), 합 11.212로 나누면 합이 1인 확률 (0.659, 0.242, 0.099)가 된다. 순서는 점수와 같다. <b>(d)</b> 교차 엔트로피 $L = -\ln p_{\text{정답}}$의 곡선. 정답 칸의 확률이 1이면 0이고, 작아질수록 빠르게 커진다. 점수는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
 <p>결과 (0.659, 0.242, 0.099)는 합이 1이고, 순서는 점수와 같으며(argmax는 그대로 A), "A일 확률 약 66%"처럼 읽습니다. 세 단계를 식으로 쓰면</p>
 <p><span class="math display">\[
 p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
@@ -764,7 +789,7 @@ p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
 <li>결과의 뜻: 점수 차이가 클수록 한 종류에 확률이 몰린다. 점수가 모두 같으면 모두 <span class="math inline">\(1/(\text{종류 수})\)</span>.</li>
 </ul>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/KpKog-L9veg?start=122&amp;rel=0" title="영상: Neural Networks Part 5: ArgMax and SoftMax" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 2:02–9:31, 약 7분 · 전체 14분, 영어·자막).</b> StatQuest with Josh Starmer, "Neural Networks Part 5: ArgMax and SoftMax". <b>볼 이유:</b> 2:02 'ArgMax', 4:21 'SoftMax', 6:36 'SoftMax properties', 9:31 'general equation' 챕터 순서가 이 절의 argmax → softmax 세 단계 → 성질과 같다. 출력 점수 세 개를 확률로 바꾸는 숫자 예를 직접 계산해 보인다. 이어서 교차 엔트로피를 보려면 같은 채널의 <a href="https://www.youtube.com/watch?v=6ArSys5qHAU" target="_blank">Neural Networks Part 6: Cross Entropy</a>의 1:48–5:41(챕터 'Cross Entropy defined'부터 'Calculating Total Cross Entropy'까지, 약 4분). <b>보고 답할 질문:</b> 영상의 예에서 점수 순서와 softmax 확률의 순서는 같은가? 이 절의 (2.0, 1.0, 0.1) → (0.659, 0.242, 0.099)를 영상 방식대로 다시 계산해 보세요. <span class="vcheck">Claude가 확인한 범위: 두 영상의 제목·채널·길이·챕터(영상 내용은 미검증)</span></div></div>
-<p><span id="s-cross-entropy"></span><strong>교차 엔트로피: 얼마나 틀렸나를 숫자 하나로.</strong> 학습하려면 4구간의 손실처럼 "얼마나 틀렸나"가 숫자 하나로 필요합니다. 받는 것은 softmax 확률과 원-핫 정답, 내는 것은 손실 하나입니다. 규칙은 "정답 칸의 확률에 <span class="math inline">\(-\ln\)</span>을 붙인다"입니다(<span class="math inline">\(\ln\)</span>은 <span class="math inline">\(e\)</span>를 밑으로 하는 자연로그). 정답이 A면 <span class="math inline">\(-\ln 0.659 = 0.417\)</span>, 정답이 B였다면 <span class="math inline">\(-\ln 0.242 = 1.42\)</span>. 정답 칸 확률이 1이면 <span class="math inline">\(-\ln 1 = 0\)</span>, 0.1이면 2.30, 0.01이면 4.61입니다. 그림 9 ④의 곡선이 이 숫자들을 이은 것이고, 오른쪽 끝(확률 1)에서 0이다가 왼쪽으로 갈수록 가파르게 올라갑니다. 곧 <strong>틀린 종류를 자신 있게 고를수록 손실이 크게</strong> 뜁니다. 이것이 <strong>교차 엔트로피</strong>(cross-entropy) 손실입니다. 원-핫 정답 <span class="math inline">\((y_A, y_B, y_C)\)</span>로 쓰면 <span class="math inline">\(L = -(y_A \ln p_A + y_B \ln p_B + y_C \ln p_C)\)</span>이고, 정답 칸만 1이라 그 한 항만 남습니다. 분류 readout을 학습할 때 4구간의 "오차 제곱" 대신 쓰는 경우가 많습니다.</p>
+<p><span id="s-cross-entropy"></span><strong>교차 엔트로피: 얼마나 틀렸나를 숫자 하나로.</strong> 학습하려면 4구간의 손실처럼 "얼마나 틀렸나"가 숫자 하나로 필요합니다. 받는 것은 softmax 확률과 원-핫 정답, 내는 것은 손실 하나입니다. 규칙은 "정답 칸의 확률에 <span class="math inline">\(-\ln\)</span>을 붙인다"입니다(<span class="math inline">\(\ln\)</span>은 <span class="math inline">\(e\)</span>를 밑으로 하는 자연로그(natural logarithm)). 정답이 A면 <span class="math inline">\(-\ln 0.659 = 0.417\)</span>, 정답이 B였다면 <span class="math inline">\(-\ln 0.242 = 1.42\)</span>. 정답 칸 확률이 1이면 <span class="math inline">\(-\ln 1 = 0\)</span>, 0.1이면 2.30, 0.01이면 4.61입니다. 그림 9(d)의 곡선이 이 숫자들을 이은 것이고, 오른쪽 끝(확률 1)에서 0이다가 왼쪽으로 갈수록 가파르게 올라갑니다. <span class="key">곧 <strong>틀린 종류를 자신 있게 고를수록 손실이 크게</strong> 뜁니다.</span> 이것이 <strong>교차 엔트로피</strong>(cross-entropy) 손실입니다. 원-핫 정답 <span class="math inline">\((y_A, y_B, y_C)\)</span>로 쓰면 <span class="math inline">\(L = -(y_A \ln p_A + y_B \ln p_B + y_C \ln p_C)\)</span>이고, 정답 칸만 1이라 그 한 항만 남습니다. 분류 readout을 학습할 때 4구간의 "오차 제곱" 대신 쓰는 경우가 많습니다.</p>
 <p><strong>학습에 쓰는 기울기: 확률 − 정답.</strong> 경사 하강을 하려면 손실의 기울기가 필요합니다. softmax와 교차 엔트로피를 이어 붙이면 점수 <span class="math inline">\(z_k\)</span>에 대한 기울기가 단순해집니다.</p>
 <p><span class="math display">\[
 \frac{\partial L}{\partial z_k} = p_k - y_k
@@ -778,7 +803,7 @@ p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
 <p><span class="prov">이 결과의 유도는 일반 교과 내용이며, Claude는 토론토대 CSC321 강의 노트(K. Swersky의 softmax 유도: 정답 칸 가중치의 기울기 = (확률 − 1) × 입력, 다른 칸 = 확률 × 입력)와 대조했습니다(확인).</span></p>
 <p><strong>한 번 따라가기.</strong> 그림 10은 이 흐름 전체를 숫자로 한 번 돌린 것입니다. 위 줄 ①→④는 답을 낼 때마다, 아래 줄 ⑤→⑦은 학습할 때만 돕니다. ⑦의 학습률 <span class="math inline">\(\eta\)</span>는 Day 11–12에서 본 보폭이고(<a href="../days/d07a.html#s-gd-step">Day 11 0구간</a>), "가중치 ← 가중치 − <span class="math inline">\(\eta\)</span> × 기울기"를 그대로 씁니다. 한 걸음 뒤 정답 A의 확률이 0.659 → 0.706, 손실이 0.417 → 0.348로 바뀝니다.</p>
 <figure class="fig figure"><img src="../assets/img/d08/fig-classify-flow.svg" alt="위 줄 상자 넷: 상태 x=(0.8, −0.4) → 종류별 가중치 행 A(2.0, −1.0), B(1.0, −0.5), C(0.5, 0.75) → 점수 z=(2.0, 1.0, 0.1), argmax로 답 A → softmax p=(0.659, 0.242, 0.099). 아래 줄은 오른쪽에서 왼쪽으로: 원-핫 정답 (1,0,0)과 비교한 손실 0.417 → 점수의 기울기 p−y=(−0.341, 0.242, 0.099) → 가중치 한 걸음 뒤 p_A 0.706, 손실 0.348, 그리고 가중치 상자로 돌아가는 화살표" class="figure-img"><figcaption><b>그림 10.</b> 분류 readout을 한 번 따라가기. 위 줄(①→④)은 답을 낼 때마다 도는 길이다: 상태 → 종류별 점수 → argmax로 답, softmax로 확률. 아래 줄(⑤→⑦)은 학습할 때만 돈다: 원-핫 정답과 비교해 교차 엔트로피 손실을 재고, 점수의 기울기 $p - y$를 구해 가중치를 한 걸음 고친다(학습률 $\eta = 0.5$). 한 걸음 뒤 정답 A의 확률이 0.659 → 0.706, 손실이 0.417 → 0.348로 바뀐다. 상태와 가중치는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
-<p><span id="s-rc-readout"></span><strong>RC에서는.</strong> Singh 2026은 물리 reservoir 자체를 평가할 때 <strong>선형 readout이 가장 분명한 기준</strong>이라며, 연속값 과제에는 ridge 회귀, 분류에는 다항 로지스틱 또는 <strong>SoftMax 회귀</strong> 같은 아핀(곱해 더하고 상수를 더하는) 분류기를 쓸 수 있다고 씁니다. 이 경우 종류별 점수는 확률로 바꾸기 <strong>전까지는</strong> reservoir 특징의 선형 함수이므로, readout이 숨은 비선형 특징 추출을 더하지 않는다. 더 복잡한 비선형 readout은 응용 시연에는 쓸 수 있지만, 그 성능만으로 재료의 계산 기여를 추론해서는 안 된다. <span class="src">Singh 2026, p.18</span> 실제 예로, Singh이 소개하는 SnS 소자 reservoir 사례(빛 펄스 열을 넣고 마지막 전류를 읽은 연구)는 분류 readout으로 SoftMax 회귀를 썼습니다. <span class="src">Singh 2026, p.16</span> 더 간단하게는 원-핫 정답을 그대로 4구간의 ridge로 맞추고 argmax로 고르는 방법도 흔합니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-rc-readout"></span><strong>RC에서는.</strong> Singh 2026은 물리 reservoir 자체를 평가할 때 <strong>선형 readout이 가장 분명한 기준</strong>이라며, 연속값 과제에는 ridge 회귀, 분류에는 다항 로지스틱(multinomial logistic) 또는 <strong>SoftMax 회귀</strong> 같은 아핀(곱해 더하고 상수를 더하는) 분류기를 쓸 수 있다고 씁니다. 이 경우 종류별 점수는 확률로 바꾸기 <strong>전까지는</strong> reservoir 특징의 선형 함수이므로, readout이 숨은 비선형 특징 추출을 더하지 않는다. 더 복잡한 비선형 readout은 응용 시연에는 쓸 수 있지만, 그 성능만으로 재료의 계산 기여를 추론해서는 안 된다. <span class="src">Singh 2026, p.18</span> 실제 예로, Singh이 소개하는 SnS 소자 reservoir 사례(빛 펄스 열을 넣고 마지막 전류를 읽은 연구)는 분류 readout으로 SoftMax 회귀를 썼습니다. <span class="src">Singh 2026, p.16</span> 더 간단하게는 원-핫 정답을 그대로 4구간의 ridge로 맞추고 argmax로 고르는 방법도 흔합니다. <span class="tag tag-interp">해석</span></p>
 </section>
 </div>
 <div class="predict">
@@ -792,17 +817,21 @@ p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
 <div id="b-adam" class="basics">
 <section id="readout을-학습하는-두-길-한-번에-푸는-ridge-vs-조금씩-내려가는-경사-하강momentumadam" class="level4">
 <h4 class="anchored" data-anchor-id="readout을-학습하는-두-길-한-번에-푸는-ridge-vs-조금씩-내려가는-경사-하강momentumadam">readout을 학습하는 두 길: 한 번에 푸는 ridge vs 조금씩 내려가는 경사 하강·momentum·Adam</h4>
-<p><strong>왜 두 길이 있나.</strong> 손실이 4구간처럼 깔끔한 포물선이면 바닥을 공식으로 바로 풀 수 있습니다. 그러나 (1) softmax + 교차 엔트로피처럼 바닥을 공식으로 못 쓰는 손실(기울기 <span class="math inline">\(p - y = 0\)</span>으로 놓아도 <span class="math inline">\(p\)</span> 안에 <span class="math inline">\(e^{z}\)</span>와 그 합의 나눗셈이 들어 있어, 4구간처럼 나눗셈 한 번으로 <span class="math inline">\(w\)</span>를 꺼낼 수 없습니다. 일반 교과 내용), (2) 데이터가 너무 많아 한꺼번에 표 <span class="math inline">\(X\)</span>를 만들 수 없을 때, (3) 데이터가 계속 들어와 그때그때 고쳐야 할 때(온라인 학습)는 조금씩 내려가는 수밖에 없습니다.</p>
+<p><strong>왜 두 길이 있나.</strong> 손실이 4구간처럼 깔끔한 포물선이면 바닥을 공식으로 바로 풀 수 있습니다. 그러나 (1) softmax + 교차 엔트로피처럼 바닥을 공식으로 못 쓰는 손실(기울기 <span class="math inline">\(p - y = 0\)</span>으로 놓아도 <span class="math inline">\(p\)</span> 안에 <span class="math inline">\(e^{z}\)</span>와 그 합의 나눗셈이 들어 있어, 4구간처럼 나눗셈 한 번으로 <span class="math inline">\(w\)</span>를 꺼낼 수 없습니다. 일반 교과 내용), (2) 데이터가 너무 많아 한꺼번에 표 <span class="math inline">\(X\)</span>를 만들 수 없을 때, (3) 데이터가 계속 들어와 그때그때 고쳐야 할 때(온라인 학습, online learning)는 조금씩 내려가는 수밖에 없습니다.</p>
 <p><strong>같은 문제로 비교.</strong> 걸음 규칙의 차이만 보이도록, 답을 이미 아는 4구간의 그릇을 씁니다. 데이터 <span class="math inline">\(x = 1, 2, 3\)</span>, <span class="math inline">\(y = 1.1, 1.9, 3.2\)</span>, 손실 <span class="math inline">\(L(w) = 14w^2 - 29w + 15.06\)</span>(그림 4(Day 13)). 기울기는 <span class="math inline">\(dL/dw = 2\sum(w x - y)x = 28w - 29\)</span>입니다(<span class="math inline">\(28 = 2 \times \sum x^2\)</span>, <span class="math inline">\(29 = 2 \times \sum xy\)</span>). 한 번에 푼 답은 <span class="math inline">\(w = 1.036\)</span>. 모든 규칙이 <span class="math inline">\(w = 0\)</span>에서 출발합니다.</p>
-<p><strong>그림 읽는 법.</strong> 그림 11의 두 패널 모두 가로축은 걸음 수, 세로축은 그 걸음 뒤의 가중치 <span class="math inline">\(w\)</span>, 초록 점선은 한 번에 푼 답 1.036입니다. ①은 경사 하강에서 학습률 <span class="math inline">\(\eta\)</span>만 바꾼 것, ②는 세 가지 걸음 규칙입니다. 아래에서 ① → 경사 하강 → momentum → Adam 순서로 따라갑니다.</p>
-<figure class="fig figure"><img src="../assets/img/d08/fig5-optimizers.svg" alt="두 패널. 왼쪽: 경사 하강의 학습률만 바꾼 것으로, η=0.02는 0.580, 0.835로 곧게 다가가고, η=0.06은 1.740, 0.557로 바닥을 넘었다 돌아오며, η=0.08은 2.320, −0.557로 점점 멀어진다. 오른쪽: 같은 그릇에서 경사 하강(파랑)은 빠르게 1.036에 닿고, momentum(주황)은 1.357, 1.877로 지나쳐 출렁이며, Adam(빨강)은 0.1씩 올라가다 1.3 근처까지 지나친 뒤 돌아온다. 초록 점선은 한 번에 푼 답 1.036" class="figure-img"><figcaption><b>그림 11.</b> 같은 포물선 손실(그림 4(Day 13))에서 가중치를 찾는 걸음. ① 경사 하강에서 학습률 $\eta$만 바꾼 것: 0.02는 곧게 다가가고, 0.06은 바닥을 넘었다 돌아오며, 0.08은 넘을 때마다 더 멀어진다(발산, 그림 밖으로 나간 뒤는 생략). ② 세 가지 걸음 규칙: 이 쉬운 문제에서는 경사 하강($\eta = 0.02$)이 가장 빨리 닿고, momentum은 출렁이며, Adam은 일정한 보폭으로 다가가다 지나친 뒤 돌아온다. 초록 점선이 공식으로 한 번에 푼 답이다. 어느 것이 낫다는 그림이 아니라 '걸음 규칙과 보폭이 다르면 경로가 다르다'는 그림이다. 숫자는 코드가 계산했다(Adam의 $\beta_1 = 0.9$, $\beta_2 = 0.999$). (Claude가 계산해 그림)</figcaption></figure>
-<p><span id="s-learning-rate"></span><strong>학습률만 바꾸면(그림 11 ①).</strong> 경사 하강의 한 걸음은 <span class="math inline">\(w \leftarrow w - \eta \times (28w - 29)\)</span>입니다. 이것을 정리하면 "바닥까지의 거리"가 걸음마다 <span class="math inline">\((1 - 28\eta)\)</span>배가 됩니다. <span class="math inline">\(\eta = 0.02\)</span>이면 0.44배라 곧게 다가가고(0 → 0.580 → 0.835), <span class="math inline">\(\eta = 0.06\)</span>이면 −0.68배라 바닥을 넘었다가 돌아오기를 반복하며 다가가고(0 → 1.740 → 0.557 → 1.361), <span class="math inline">\(\eta = 0.08\)</span>이면 −1.24배라 넘을 때마다 더 멀리 튀어 <strong>발산</strong>합니다(0 → 2.320 → −0.557 → 3.010). <span class="math inline">\(\eta = 1/28 \approx 0.036\)</span>이면 첫 걸음에 바로 바닥입니다. Day 11–12 단계 5에서 보폭 0.5로 손실이 9에서 81로 나빠진 것(<a href="../days/d07a.html#s-gd-step">Day 11 0구간</a>)과 같은 현상이고, "학습률을 키우면 빨라진다"는 바닥을 넘지 않는 범위에서만 맞습니다. 그 범위는 그릇의 가파름(<span class="math inline">\(w^2\)</span> 앞의 수)에 따라 달라서, 학습률은 손실마다 따로 골라야 합니다.</p>
+<p><strong>그림 읽는 법.</strong> 그림 11의 두 패널 모두 가로축은 걸음 수, 세로축은 그 걸음 뒤의 가중치 <span class="math inline">\(w\)</span>, 초록 점선은 한 번에 푼 답 1.036입니다. (a)는 경사 하강에서 학습률 <span class="math inline">\(\eta\)</span>만 바꾼 것, (b)는 세 가지 걸음 규칙입니다. 아래에서 (a) → 경사 하강 → momentum → Adam 순서로 따라갑니다. 필수는 (a)의 학습률이고, (b)의 momentum·Adam은 "걸음 규칙이 다르면 경로가 다르다"만 보면 됩니다.</p>
+<figure class="fig figure"><img src="../assets/img/d08/fig5-optimizers.svg" alt="두 패널. (a) 경사 하강의 학습률만 바꾼 것으로, η=0.02는 0.580, 0.835로 곧게 다가가고, η=0.06은 1.740, 0.557로 바닥을 넘었다 돌아오며, η=0.08은 2.320, −0.557로 점점 멀어진다. (b) 같은 그릇에서 경사 하강(파랑)은 빠르게 1.036에 닿고, momentum(주황)은 1.357, 1.877로 지나쳐 출렁이며, Adam(빨강)은 0.1씩 올라가다 1.3 근처까지 지나친 뒤 돌아온다. 초록 점선은 한 번에 푼 답 1.036" class="figure-img"><figcaption><b>그림 11.</b> 같은 포물선 손실(그림 4(Day 13))에서 가중치를 찾는 걸음. <b>(a)</b> 경사 하강에서 학습률 $\eta$만 바꾼 것: 0.02는 곧게 다가가고, 0.06은 바닥을 넘었다 돌아오며, 0.08은 넘을 때마다 더 멀어진다(발산, 그림 밖으로 나간 뒤는 생략). <b>(b)</b> 세 가지 걸음 규칙: 이 쉬운 문제에서는 경사 하강($\eta = 0.02$)이 가장 빨리 닿고, momentum은 출렁이며, Adam은 일정한 보폭으로 다가가다 지나친 뒤 돌아온다. 초록 점선이 공식으로 한 번에 푼 답이다. 어느 것이 낫다는 그림이 아니라 '걸음 규칙과 보폭이 다르면 경로가 다르다'는 그림이다. 숫자는 코드가 계산했다(Adam의 $\beta_1 = 0.9$, $\beta_2 = 0.999$). (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-learning-rate"></span><strong>학습률만 바꾸면(그림 11(a)).</strong> 경사 하강의 한 걸음은 <span class="math inline">\(w \leftarrow w - \eta \times (28w - 29)\)</span>입니다. 이것을 정리하면 "바닥까지의 거리"가 걸음마다 <span class="math inline">\((1 - 28\eta)\)</span>배가 됩니다. <span class="math inline">\(\eta = 0.02\)</span>이면 0.44배라 곧게 다가가고(0 → 0.580 → 0.835), <span class="math inline">\(\eta = 0.06\)</span>이면 −0.68배라 바닥을 넘었다가 돌아오기를 반복하며 다가가고(0 → 1.740 → 0.557 → 1.361), <span class="math inline">\(\eta = 0.08\)</span>이면 −1.24배라 넘을 때마다 더 멀리 튀어 <strong>발산</strong>(divergence)합니다(0 → 2.320 → −0.557 → 3.010). <span class="math inline">\(\eta = 1/28 \approx 0.036\)</span>이면 첫 걸음에 바로 바닥입니다. Day 11–12 단계 5에서 보폭 0.5로 손실이 9에서 81로 나빠진 것(<a href="../days/d07a.html#s-gd-step">Day 11 0구간</a>)과 같은 현상이고, "학습률을 키우면 빨라진다"는 바닥을 넘지 않는 범위에서만 맞습니다. 그 범위는 그릇의 가파름(<span class="math inline">\(w^2\)</span> 앞의 수)에 따라 달라서, 학습률은 손실마다 따로 골라야 합니다.</p>
 <ul>
 <li><strong>경사 하강</strong>(학습률 <span class="math inline">\(\eta = 0.02\)</span>). 기억하는 것: 없음. 한 걸음: <span class="math inline">\(w \leftarrow w - \eta \times \text{기울기}\)</span>(Day 11–12 그대로). 기울기 <span class="math inline">\(-29\)</span> → <span class="math inline">\(w = 0 - 0.02 \times (-29) = 0.580\)</span>. 다음 기울기 <span class="math inline">\(28 \times 0.58 - 29 = -12.76\)</span> → <span class="math inline">\(w = 0.580 + 0.255 = 0.835\)</span>. 바닥에 가까워질수록 기울기가 작아져 걸음도 짧아집니다.</li>
 <li><strong>momentum</strong>(관성, <span class="math inline">\(\eta = 0.02\)</span>, <span class="math inline">\(\beta = 0.9\)</span>). 왜 필요한가: 경사 하강은 기울기가 작으면 걸음도 작아서, 기울기가 작지만 계속 같은 방향인 길고 완만한 비탈에서 아주 느립니다. 기억하는 것: 지난 기울기들을 쌓은 <strong>속도</strong> <span class="math inline">\(v\)</span>(언덕을 굴러 내려가는 공처럼). 한 걸음: <span class="math inline">\(v \leftarrow \beta v + \text{기울기}\)</span>, <span class="math inline">\(w \leftarrow w - \eta v\)</span>. 기울기가 매번 −1로 같다면 <span class="math inline">\(v\)</span>는 −1 → −1.9 → −2.71 → −3.44 → …로 쌓여 −10에 다가가므로, 보폭이 경사 하강의 최대 10배(<span class="math inline">\(1/(1-\beta)\)</span>배)까지 커집니다. (교재에 따라 <span class="math inline">\(\eta\)</span>를 <span class="math inline">\(v\)</span> 안에 넣어 쓰기도 합니다.) 이 그릇에서는 첫 걸음이 경사 하강과 같고(<span class="math inline">\(v = -29\)</span>, <span class="math inline">\(w = 0.580\)</span>), 둘째 걸음은 <span class="math inline">\(v = 0.9 \times (-29) - 12.76 = -38.86\)</span>이라 <span class="math inline">\(w = 0.580 + 0.777 = 1.357\)</span>. 바닥(1.036)을 <strong>지나쳐</strong> 버렸습니다. 관성은 평평하고 긴 골짜기에서 빨리 가게 해 주지만, 이렇게 출렁일 수 있습니다. <span class="prov">이 꼴은 PyTorch의 SGD momentum 설명서와 같은 형태임을 Claude가 확인 (확인: PyTorch 문서)</span></li>
-<li><strong>Adam</strong>(<span class="math inline">\(\eta = 0.1\)</span>). 왜 필요한가: 가중치마다 기울기 크기가 크게 다르면 학습률 하나로 모두를 맞출 수 없습니다. 예를 들어 두 가중치의 기울기가 −29와 −0.029이면 경사 하강(<span class="math inline">\(\eta = 0.02\)</span>)의 걸음은 0.58과 0.00058로 1,000배 차이가 납니다. Adam은 둘 다 첫 걸음을 <span class="math inline">\(\eta\)</span>만큼 갑니다. 기억하는 것: 기울기의 평균(방향)과 기울기 제곱의 평균(크기)을 따로 기억하고, <strong>방향 ÷ 크기</strong>로 걸음을 정합니다. 그래서 걸음의 크기가 기울기의 크기와 상관없이 대략 <span class="math inline">\(\eta\)</span>입니다. 첫 걸음: 평균 기울기 <span class="math inline">\(-29\)</span>, 크기 <span class="math inline">\(\sqrt{29^2} = 29\)</span>, 걸음 <span class="math inline">\(= 0.1 \times (-29)/29 = -0.1\)</span> → <span class="math inline">\(w = 0.100\)</span>. 둘째 걸음도 약 0.1 → <span class="math inline">\(w = 0.200\)</span>. 가중치마다 기울기 크기가 수천 배씩 다를 때 모두 비슷한 보폭으로 가게 해 주는 것이 장점입니다.</li>
+<li><strong>Adam</strong>(<span class="math inline">\(\eta = 0.1\)</span>). 왜 필요한가: 가중치마다 기울기 크기가 크게 다르면 학습률 하나로 모두를 맞출 수 없습니다. 예를 들어 두 가중치의 기울기가 −29와 −0.029이면 경사 하강(<span class="math inline">\(\eta = 0.02\)</span>)의 걸음은 0.58과 0.00058로 1,000배 차이가 납니다. Adam은 둘 다 첫 걸음을 <span class="math inline">\(\eta\)</span>만큼 갑니다. 기억하는 것: 기울기의 평균(방향)과 기울기 제곱의 평균(크기)을 따로 기억하고, <strong>방향 ÷ 크기</strong>로 걸음을 정합니다. 그래서 걸음의 크기가 기울기의 크기와 상관없이 대략 <span class="math inline">\(\eta\)</span>입니다. 첫 걸음: 평균 기울기 <span class="math inline">\(-29\)</span>, 크기 <span class="math inline">\(\sqrt{29^2} = 29\)</span>, 걸음 <span class="math inline">\(= 0.1 \times (-29)/29 = -0.1\)</span> → <span class="math inline">\(w = 0.100\)</span>. 둘째 걸음도 약 0.1 → <span class="math inline">\(w = 0.200\)</span>. 가중치마다 기울기 크기가 수천 배씩 다를 때 모두 비슷한 보폭으로 가게 해 주는 것이 장점입니다. 여기의 <span class="math inline">\(\eta = 0.1\)</span>은 걸음을 눈으로 보려고 키운 값이고, 흔히 쓰는 기본값은 0.001입니다. 이 정도면 오늘 필요한 것은 다 잡았습니다. 아래 접기는 "평균"과 "크기"를 실제로 어떻게 계산하는지 다시 볼 때 펼치세요.</li>
 </ul>
-<p><strong>Adam을 식 그대로 따라가기.</strong> 위 문장의 "평균"과 "크기"가 실제로 어떻게 계산되는지 두 걸음을 직접 셉니다. Adam은 숫자 두 개를 계속 들고 다닙니다. <span class="math inline">\(m\)</span>은 지금까지 기울기의 <strong>지수 이동 평균</strong>(exponential moving average), <span class="math inline">\(v\)</span>는 기울기 <strong>제곱</strong>의 지수 이동 평균입니다(위 momentum의 속도 <span class="math inline">\(v\)</span>와는 다른 양인데, 교재마다 같은 글자를 씁니다). 지수 이동 평균은 "지난 평균의 90%를 남기고 새 값을 10% 섞는" 식으로 매번 갱신하는 평균이라, 최근 값일수록 크게 반영됩니다. <a href="../days/d03a.html#s-lif-decay">Day 5 LIF의 0.9</a>와 Day 11–12 RNN의 0.5처럼 '이전 값의 일부를 남기고 새 입력을 더하는' 꼴과 같은 구조입니다. 남기는 비율이 <span class="math inline">\(\beta_1 = 0.9\)</span>, <span class="math inline">\(\beta_2 = 0.999\)</span>이고, 섞는 비율이 <span class="math inline">\(1-\beta_1 = 0.1\)</span>, <span class="math inline">\(1-\beta_2 = 0.001\)</span>입니다.</p>
+<details class="deep">
+<summary>
+심화 · Adam을 식 그대로 따라가기(다시 볼 때)
+</summary>
+<p>위 문장의 "평균"과 "크기"가 실제로 어떻게 계산되는지 두 걸음을 직접 셉니다. Adam은 숫자 두 개를 계속 들고 다닙니다. <span class="math inline">\(m\)</span>은 지금까지 기울기의 <strong>지수 이동 평균</strong>(exponential moving average), <span class="math inline">\(v\)</span>는 기울기 <strong>제곱</strong>의 지수 이동 평균입니다(위 momentum의 속도 <span class="math inline">\(v\)</span>와는 다른 양인데, 교재마다 같은 글자를 씁니다). 지수 이동 평균은 "지난 평균의 90%를 남기고 새 값을 10% 섞는" 식으로 매번 update하는 평균이라, 최근 값일수록 크게 반영됩니다. <a href="../days/d03a.html#s-lif-decay">Day 5 LIF의 0.9</a>와 Day 11–12 RNN의 0.5처럼 '이전 값의 일부를 남기고 새 입력을 더하는' 꼴과 같은 구조입니다. 남기는 비율이 <span class="math inline">\(\beta_1 = 0.9\)</span>, <span class="math inline">\(\beta_2 = 0.999\)</span>이고, 섞는 비율이 <span class="math inline">\(1-\beta_1 = 0.1\)</span>, <span class="math inline">\(1-\beta_2 = 0.001\)</span>입니다.</p>
 <div class="stepper">
 <div class="step">
 <p><strong>걸음 1 — 기울기와 두 평균.</strong> <span class="math inline">\(w = 0\)</span>에서 기울기 <span class="math inline">\(g = 28 \times 0 - 29 = -29\)</span>. 처음엔 <span class="math inline">\(m = v = 0\)</span>이므로 <span class="math inline">\(m = 0.9 \times 0 + 0.1 \times (-29) = -2.9\)</span>, <span class="math inline">\(v = 0.999 \times 0 + 0.001 \times 29^2 = 0.841\)</span>.</p>
@@ -817,10 +846,11 @@ p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
 <p><strong>걸음 2.</strong> <span class="math inline">\(w = 0.1\)</span>에서 <span class="math inline">\(g = 28 \times 0.1 - 29 = -26.2\)</span>. <span class="math inline">\(m = 0.9 \times (-2.9) + 0.1 \times (-26.2) = -5.23\)</span>, <span class="math inline">\(v = 0.999 \times 0.841 + 0.001 \times 26.2^2 = 1.5266\)</span>. 보정: <span class="math inline">\(\hat m = -5.23/(1-0.81) = -27.53\)</span>, <span class="math inline">\(\hat v = 1.5266/(1-0.998) = 763.7\)</span>, <span class="math inline">\(\sqrt{\hat v} = 27.63\)</span>. 걸음 <span class="math inline">\(= 0.1 \times 27.53 / 27.63 = 0.0996\)</span> → <span class="math inline">\(w = 0.1996\)</span>.</p>
 </div>
 <div class="step">
-<p><strong>정리.</strong> 일반식으로 쓰면 걸음마다 <span class="math inline">\(m \leftarrow \beta_1 m + (1-\beta_1) g\)</span>, <span class="math inline">\(v \leftarrow \beta_2 v + (1-\beta_2) g^2\)</span>, <span class="math inline">\(\hat m = m/(1-\beta_1^t)\)</span>, <span class="math inline">\(\hat v = v/(1-\beta_2^t)\)</span>, <span class="math inline">\(w \leftarrow w - \eta\, \hat m / (\sqrt{\hat v} + \varepsilon)\)</span>입니다(<span class="math inline">\(t\)</span>는 걸음 번호). <span class="math inline">\(\hat m/\sqrt{\hat v}\)</span>는 "기울기 방향 ÷ 기울기의 전형적인 크기"라 대략 ±1 근처이고, 그래서 보폭이 <span class="math inline">\(\eta\)</span> 정도로 일정합니다. 기울기가 매우 큰 가중치와 매우 작은 가중치가 섞여 있어도 모두 비슷한 속도로 움직입니다. 기본값은 <span class="math inline">\(\beta_1 = 0.9\)</span>, <span class="math inline">\(\beta_2 = 0.999\)</span>, <span class="math inline">\(\varepsilon = 10^{-8}\)</span>, 보폭 0.001이고, 위 예의 <span class="math inline">\(\eta = 0.1\)</span>은 걸음을 눈으로 보려고 키운 값입니다. 그림 11 ②의 빨간 선처럼, 일정한 보폭 때문에 바닥 근처에서 지나쳤다가 돌아오기도 합니다. <span class="prov">갱신식과 기본값은 Claude가 <a href="https://arxiv.org/abs/1412.6980">Kingma &amp; Ba 2015, arXiv:1412.6980</a>의 Algorithm 1과 대조(확인). 원 논문은 폴더 밖</span></p>
+<p><strong>정리.</strong> 일반식으로 쓰면 걸음마다 <span class="math inline">\(m \leftarrow \beta_1 m + (1-\beta_1) g\)</span>, <span class="math inline">\(v \leftarrow \beta_2 v + (1-\beta_2) g^2\)</span>, <span class="math inline">\(\hat m = m/(1-\beta_1^t)\)</span>, <span class="math inline">\(\hat v = v/(1-\beta_2^t)\)</span>, <span class="math inline">\(w \leftarrow w - \eta\, \hat m / (\sqrt{\hat v} + \varepsilon)\)</span>입니다(<span class="math inline">\(t\)</span>는 걸음 번호). <span class="math inline">\(\hat m/\sqrt{\hat v}\)</span>는 "기울기 방향 ÷ 기울기의 전형적인 크기"라 대략 ±1 근처이고, 그래서 보폭이 <span class="math inline">\(\eta\)</span> 정도로 일정합니다. 기울기가 매우 큰 가중치와 매우 작은 가중치가 섞여 있어도 모두 비슷한 속도로 움직입니다. 기본값은 <span class="math inline">\(\beta_1 = 0.9\)</span>, <span class="math inline">\(\beta_2 = 0.999\)</span>, <span class="math inline">\(\varepsilon = 10^{-8}\)</span>, 보폭 0.001이고, 위 예의 <span class="math inline">\(\eta = 0.1\)</span>은 걸음을 눈으로 보려고 키운 값입니다. 그림 11(b)의 빨간 선처럼, 일정한 보폭 때문에 바닥 근처에서 지나쳤다가 돌아오기도 합니다. <span class="prov">update식과 기본값은 Claude가 <a href="https://arxiv.org/abs/1412.6980">Kingma &amp; Ba 2015, arXiv:1412.6980</a>의 Algorithm 1과 대조(확인). 원 논문은 폴더 밖</span></p>
 </div>
 </div>
-<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/iudXf5n_3ro?start=0&amp;rel=0" title="영상: MOMENTUM Gradient Descent (in 3 minutes)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–3:17, 약 3분, 영어·자막).</b> Visually Explained, "MOMENTUM Gradient Descent (in 3 minutes)". <b>볼 이유:</b> 1:00 'Momentum Gradient Descent' 챕터에서 공이 속도를 기억하며 골짜기를 내려가는 애니메이션을 보여 준다. 위 그림의 주황 선(momentum)이 바닥 1.036을 지나쳐 출렁이는 이유를 눈으로 본다. 1:44 이후(Nesterov 가속)는 오늘 범위 밖이다. <b>보고 답할 질문:</b> 영상에서 지나침이 생기는 이유를 이 절의 식 $v \leftarrow \beta v + \text{기울기}$의 $\beta$로 설명해 보세요. $\beta$를 0으로 두면 무엇과 같아지나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터(영상 내용은 미검증)</span></div></div>
+</details>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/iudXf5n_3ro?start=0&amp;rel=0" title="영상: MOMENTUM Gradient Descent (in 3 minutes)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–3:17, 약 3분, 영어·자막).</b> Visually Explained, "MOMENTUM Gradient Descent (in 3 minutes)". <b>볼 이유:</b> 1:00 'Momentum Gradient Descent' 챕터에서 공이 속도를 기억하며 골짜기를 내려가는 애니메이션을 보여 준다. 그림 11(b)의 주황 선(momentum)이 바닥 1.036을 지나쳐 출렁이는 이유를 눈으로 본다. 1:44 이후(Nesterov 가속)는 오늘 범위 밖이다. <b>보고 답할 질문:</b> 영상에서 지나침이 생기는 이유를 이 절의 식 $v \leftarrow \beta v + \text{기울기}$의 $\beta$로 설명해 보세요. $\beta$를 0으로 두면 무엇과 같아지나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터(영상 내용은 미검증)</span></div></div>
 <p><span id="s-two-paths-table"></span><strong>언제 무엇을 쓰나.</strong> <span class="tag tag-interp">해석</span></p>
 <table class="caption-top table">
 <colgroup>
@@ -854,11 +884,11 @@ p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
 <tr class="even">
 <td>소자가 계속 변해 readout을 그때그때 고쳐야 함</td>
 <td>한 걸음씩 고치는 방식</td>
-<td>새 데이터마다 조금씩 수정 [가설: 물리 RC에서의 효과는 Day 32]</td>
+<td>새 데이터마다 조금씩 수정 [가설: physical reservoir computing에서의 효과는 Day 33–34]</td>
 </tr>
 </tbody>
 </table>
-<p>폴더 원문의 근거: Liang은 출력층이 선형 회귀로 쉽게 학습되며, 그 밖에 강화학습, <strong>경사 하강</strong>, 직접 되먹임 정렬 같은 방법도 제안되었다고 씁니다. <span class="src">Liang 2024, p.194</span> Stepney는 RNN을 반복적 역전파로 학습시키는 것은 비싸지만 Jaeger의 핵심 통찰은 <strong>readout 가중치를 한 번에 학습하는 것으로 충분하다</strong>는 것이었다고 씁니다. <span class="src">Stepney 2024, p.669</span> 반대로 Zhong 2026은 readout을 선형 회귀 공식으로 풀면서도, 태풍 중심 예측 과제에서는 <strong>경사 하강에 Adam 최적화기</strong>를 쓰고 손실로 RMSE를 썼다고 적습니다. <span class="src">Zhong 2026, p.8</span> 과제와 readout 구조에 따라 길이 갈린다는 예입니다. <span class="prov">Adam의 원 논문은 Kingma &amp; Ba, ICLR 2015로 폴더 밖. Claude는 Algorithm 1의 갱신식·기본값만 대조했고(확인), 그 밖의 내용은 미확인</span></p>
+<p>폴더 원문의 근거: Liang은 출력층이 선형 회귀로 쉽게 학습되며, 그 밖에 강화학습, <strong>경사 하강</strong>, 직접 되먹임 정렬 같은 방법도 제안되었다고 씁니다. <span class="src">Liang 2024, p.194</span> Stepney는 RNN을 반복적 역전파로 학습시키는 것은 비싸지만 Jaeger의 핵심 통찰은 <strong>readout 가중치를 한 번에 학습하는 것으로 충분하다</strong>는 것이었다고 씁니다. <span class="src">Stepney 2024, p.669</span> 반대로 Zhong 2026은 readout을 선형 회귀 공식으로 풀면서도, 태풍 중심 예측 과제에서는 <strong>경사 하강에 Adam 최적화기</strong>를 쓰고 손실로 RMSE를 썼다고 적습니다. <span class="src">Zhong 2026, p.8</span> 과제와 readout 구조에 따라 길이 갈린다는 예입니다. <span class="prov">Adam의 원 논문은 Kingma &amp; Ba, ICLR 2015로 폴더 밖. Claude는 Algorithm 1의 update식·기본값만 대조했고(확인), 그 밖의 내용은 미확인</span></p>
 </section>
 </div>
 <div class="quiz" data-day="d08" data-set="5-end"></div>
@@ -880,13 +910,13 @@ argmax / softmax
 교차 엔트로피
 </dt>
 <dd>
-정답 칸 확률의 <span class="math inline">\(-\ln\)</span>. 정답 칸 확률이 1에 가까울수록 0, 작을수록 가파르게 커진다(그림 9 ④). softmax와 이으면 점수의 기울기가 <span class="math inline">\(p - y\)</span>(확률 − 원-핫 정답).
+정답 칸 확률의 <span class="math inline">\(-\ln\)</span>. 정답 칸 확률이 1에 가까울수록 0, 작을수록 가파르게 커진다(그림 9(d)). softmax와 이으면 점수의 기울기가 <span class="math inline">\(p - y\)</span>(확률 − 원-핫 정답).
 </dd>
 <dt>
 학습률 (η)
 </dt>
 <dd>
-경사 하강의 보폭. 이 그릇에서 0.02는 곧게, 0.06은 넘었다 돌아오며, 0.08은 발산한다(그림 11 ①).
+경사 하강의 보폭. 이 그릇에서 0.02는 곧게, 0.06은 넘었다 돌아오며, 0.08은 발산한다(그림 11(a)).
 </dd>
 <dt>
 momentum / Adam
@@ -910,21 +940,21 @@ momentum / Adam
 <div class="goal">
 <p>이 구간을 읽고 나면 "고정된 난수 특징 + 학습한 선형 결합"이 왜 많은 목표를 흉내 낼 수 있는지 그림 12의 숫자(K = 2, 5, 20)로 설명하고, readout이 고칠 수 없는 것(상태에 없는 정보)을 예로 들 수 있다.</p>
 </div>
-<p><span id="s-random-features"></span>이제 오늘의 첫 질문에 답할 재료가 모였습니다. 시간 없이 먼저 생각해 봅니다. 입력 <span class="math inline">\(u\)</span> 하나를 받아 목표 곡선 <span class="math inline">\(y = \sin(3u) + 0.5u^2\)</span>을 흉내 내고 싶습니다. 곡선 모양을 학습하지 않고, <strong>난수로 정한 S자 곡선 <span class="math inline">\(K\)</span>개</strong> <span class="math inline">\(\tanh(a_j u + c_j)\)</span>를 고정해 둔 뒤, 그 곡선들을 섞는 비율(가중치)만 4구간의 최소제곱으로 정합니다. 그림 12의 검정 굵은 선이 목표이고, 색 선이 <span class="math inline">\(K\)</span>를 2, 5, 20으로 늘렸을 때 섞어 만든 근사입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d08/fig6-random-features.svg" alt="입력 u가 −1에서 1일 때 목표 곡선(검정 굵은 선)과, 고정 난수 tanh 곡선 K개를 학습한 가중치로 섞은 근사. K=2는 NMSE 0.3337로 크게 어긋나고, K=5는 0.0074, K=20은 0.0001 미만으로 목표와 겹친다" class="figure-img"><figcaption><b>그림 12.</b> 고정된 난수 곡선 $K$개 + 학습한 섞는 비율. $K$가 2 → 5 → 20으로 늘면 정규화 오차(NMSE: 평균 제곱 오차를 목표의 분산, 즉 목표 값들이 자기 평균에서 흩어진 정도(평균에서 뺀 값의 제곱의 평균)로 나눈 값. 0이면 완벽, 1이면 평균값만 찍는 것과 같음. Day 20–21에서 손 계산)가 0.33 → 0.0074 → 0.0001 미만으로 준다. 곡선 모양은 하나도 학습하지 않았다. 학습 점 21개, 평가 점 201개. 목표와 난수는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-random-features"></span>이제 오늘의 첫 질문에 답할 재료가 모였습니다. 시간 없이 먼저 생각해 봅니다. 입력 <span class="math inline">\(u\)</span> 하나를 받아 목표 곡선 <span class="math inline">\(y = \sin(3u) + 0.5u^2\)</span>을 흉내 내고 싶습니다. 곡선 모양을 학습하지 않고, <strong>난수로 정한 S자 곡선 <span class="math inline">\(K\)</span>개</strong> <span class="math inline">\(\tanh(a_j u + c_j)\)</span>를 고정해 둔 뒤, 그 곡선들을 섞는 비율(가중치)만 4구간의 최소제곱으로 정합니다. 그림 12의 검정 굵은 선이 목표이고, 색 선이 <span class="math inline">\(K\)</span>를 2, 5, 20으로 늘렸을 때 섞어 만든 근사(approximation)입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d08/fig6-random-features.svg" alt="입력 u가 −1에서 1일 때 목표 곡선(검정 굵은 선)과, 고정 난수 tanh 곡선 K개를 학습한 가중치로 섞은 근사. K=2는 NMSE 0.3337로 크게 어긋나고, K=5는 0.0074, K=20은 0.0001 미만으로 목표와 겹친다" class="figure-img"><figcaption><b>그림 12.</b> 고정된 난수 곡선 $K$개 + 학습한 섞는 비율. $K$가 2 → 5 → 20으로 늘면 정규화 오차(NMSE: 평균 제곱 오차를 목표의 분산, 즉 목표 값들이 자기 평균에서 흩어진 정도(평균에서 뺀 값의 제곱의 평균)로 나눈 값. 0이면 완벽, 1이면 평균값만 찍는 것과 같음. Day 21–22에서 손 계산)가 0.33 → 0.0074 → 0.0001 미만으로 준다. 곡선 모양은 하나도 학습하지 않았다. 학습 점 21개, 평가 점 201개. 목표와 난수는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
 <p><strong>왜 되나.</strong> 레고 블록에 비유할 수 있습니다. 블록 모양(난수 곡선)은 공장에서 정해져 나오고 바꿀 수 없지만, 모양이 <strong>충분히 다양하고 수가 많으면</strong> 몇 개씩 골라 쌓는 것(가중치)만으로 웬만한 모양을 만들 수 있습니다. 비유가 깨지는 곳: 레고는 블록을 "쓰거나 안 쓰거나"지만, readout은 블록마다 0.37배, −1.2배처럼 연속적인 비율을 곱합니다. 그리고 곡선 모양이 고정되어 있으니 출력은 섞는 비율(가중치)에 대해 '곱해 더하기'뿐이고, 그래서 손실이 4구간과 같은 그릇 모양 포물선이 되어 <strong>한 번에</strong> 풀립니다(노드가 거의 같으면 4-2처럼 <span class="math inline">\(\lambda\)</span>가 필요합니다). 내부를 학습시키면 이 깔끔함이 사라집니다(Day 11–12의 BPTT, 즉 시간을 거슬러 올라가며 기울기를 모으는 RNN 학습과 그 기울기의 소실·폭주. <a href="../days/d07a.html#ch-bptt">Day 11 2구간</a>). Stepney는 같은 방식의 한 번 학습을 시간 없는 피드포워드 신경망에서 쓰는 Extreme Learning Machine을 같은 계열로 소개합니다. <span class="src">Stepney 2024, p.669</span></p>
-<p><strong>시간이 있으면.</strong> reservoir는 이 "난수 곡선들"을 <strong>입력 이력</strong>에 대해 만듭니다. 노드 하나하나가 <span class="math inline">\(F_i(u(t-1), u(t-2), \dots)\)</span>라는 서로 다른 고정 함수이고(3구간), readout은 그것들을 섞는 비율만 정합니다. Day 20–21에서 직접 돌릴 결과를 미리 하나만 보면, NARMA10이라는 시계열 과제(지난 10단계의 입력과 출력이 곱셈으로 얽힌 정해진 식을 따라 다음 값을 맞히는 표준 시험 과제. Day 20–21에서 설명)에서 노드 수를 50 → 200 → 800으로 늘릴 때 시험 데이터의 NMSE가 0.213 → 0.053 → 0.0165로 줄었습니다(시뮬레이션, reservoir 난수 3개 평균). <span class="prov">Claude가 <code>tools/esn.py</code>로 돌린 값</span> 그림 12의 <span class="math inline">\(K\)</span>를 늘린 것과 같은 모양입니다.</p>
+<p><strong>시간이 있으면.</strong> reservoir는 이 "난수 곡선들"을 <strong>입력 이력</strong>에 대해 만듭니다. 노드 하나하나가 <span class="math inline">\(F_i(u(t-1), u(t-2), \dots)\)</span>라는 서로 다른 고정 함수이고(3구간), readout은 그것들을 섞는 비율만 정합니다. Day 21–22에서 직접 돌릴 결과를 미리 하나만 보면, NARMA10이라는 시계열 과제(지난 10단계의 입력과 출력이 곱셈으로 얽힌 정해진 식을 따라 다음 값을 맞히는 표준 시험 과제. Day 21–22에서 설명)에서 노드 수를 50 → 200 → 800으로 늘릴 때 시험 데이터의 NMSE가 0.213 → 0.053 → 0.0165로 줄었습니다(시뮬레이션, reservoir 난수 3개 평균). <span class="prov">Claude가 <code>tools/esn.py</code>로 돌린 값</span> 그림 12의 <span class="math inline">\(K\)</span>를 늘린 것과 같은 모양입니다.</p>
 <p><span id="s-fixed-conditions"></span><strong>고정해도 되는 조건 세 가지.</strong> <span class="tag tag-interp">해석</span> 그림 12와 3구간을 합치면, "readout만 학습해도 된다"는 다음 셋이 성립할 때입니다.</p>
 <ol type="1">
-<li><strong>기억</strong>: 과제에 필요한 과거 입력의 흔적이 상태에 남아 있다(Day 15).</li>
-<li><strong>비선형 섞임</strong>: 과제에 필요한 입력들의 곱·굽은 관계가 상태에 들어 있다(Day 16–17). 3구간의 "둘 다 1"의 흔적.</li>
-<li><strong>다양함</strong>: 노드들이 서로의 복사본이 아니라, 각자 다른 함수다(Day 18–19). 4-2의 "거의 같은 노드 둘"은 노드 하나와 거의 다르지 않다.</li>
+<li><strong>기억</strong>: 과제에 필요한 과거 입력의 흔적이 상태에 남아 있다(Day 15–16).</li>
+<li><strong>비선형 섞임</strong>: 과제에 필요한 입력들의 곱·굽은 관계가 상태에 들어 있다(Day 17–18). 3구간의 "둘 다 1"의 흔적.</li>
+<li><strong>다양함</strong>: 노드들이 서로의 복사본이 아니라, 각자 다른 함수다(Day 19–20). 4-2의 "거의 같은 노드 둘"은 노드 하나와 거의 다르지 않다.</li>
 </ol>
-<p><span id="s-readout-limits"></span><strong>readout이 고칠 수 없는 것.</strong> 셋 중 하나라도 과제에 필요한 만큼 없으면, 선형 readout의 <span class="math inline">\(W_{out}\)</span>을 어떻게 골라도 채우지 못합니다. 상태에 10단계 전 입력의 흔적이 없으면 readout은 그것을 만들어 낼 수 없고, 3구간의 XOR처럼 필요한 차이가 직선으로 가를 수 있는 모양으로 남지 않았으면 선형 readout은 못 가릅니다. readout은 <strong>있는 것을 섞을 뿐, 없는 것을 만들지 않습니다.</strong> 그래서 Liang은 RC가 기울기로 학습하는 DNN보다 목표 함수를 근사하는 <strong>표현력이 낮다</strong>고 쓰고 <span class="src">Liang 2024, p.194</span>, 뉴런의 입출력 범위가 최적화되지 않아 대개 <strong>2,000 뉴런 미만에서 성능이 포화</strong>한다고 씁니다. <span class="src">Liang 2024, p.202</span> 고정의 대가입니다. 다만 "2,000"은 과제 조건 없이 적힌 리뷰의 일반적 관찰이고, 규제(4구간의 <span class="math inline">\(\lambda\)</span>)를 알맞게 하면 reservoir가 클수록 대개 좋아진다는 실무 지침도 있어 RC 전체의 보편 한계로 읽지 않습니다(<a href="../days/d07b.html#s-gain-loss">Day 12 3-5</a>). <span class="tag tag-interp">해석</span></p>
+<p><span id="s-readout-limits"></span><strong>readout이 고칠 수 없는 것.</strong> 셋 중 하나라도 과제에 필요한 만큼 없으면, 선형 readout의 <span class="math inline">\(W_{out}\)</span>을 어떻게 골라도 채우지 못합니다. 상태에 10단계 전 입력의 흔적이 없으면 readout은 그것을 만들어 낼 수 없고, 3구간의 XOR처럼 필요한 차이가 직선으로 가를 수 있는 모양으로 남지 않았으면 선형 readout은 못 가릅니다. <span class="key">readout은 <strong>있는 것을 섞을 뿐, 없는 것을 만들지 않습니다.</strong></span> 그래서 Liang은 RC가 기울기로 학습하는 DNN보다 목표 함수를 근사하는 <strong>표현력</strong>(expressive power)<strong>이 낮다</strong>고 쓰고 <span class="src">Liang 2024, p.194</span>, 뉴런의 입출력 범위가 최적화되지 않아 대개 <strong>2,000 뉴런 미만에서 성능이 포화</strong>한다고 씁니다. <span class="src">Liang 2024, p.202</span> 고정의 대가입니다. 다만 "2,000"은 과제 조건 없이 적힌 리뷰의 일반적 관찰이고, 규제(4구간의 <span class="math inline">\(\lambda\)</span>)를 알맞게 하면 reservoir가 클수록 대개 좋아진다는 실무 지침도 있어 RC 전체의 보편 한계로 읽지 않습니다(<a href="../days/d07b.html#s-gain-loss">Day 12 3-5</a>). <span class="tag tag-interp">해석</span></p>
 <div class="stop-point">
 <p>여기까지: 그림 12를 짚으며 고정된 곡선 <span class="math inline">\(K\)</span>개를 섞기만 해도 <span class="math inline">\(K\)</span>가 늘수록 오차가 주는 이유를 말하고, 기억·비선형 섞임·다양함 중 하나가 없을 때 readout으로 고칠 수 없는 예를 들 수 있다. 다음: 물리 reservoir에 붙는 조건 하나.</p>
 </div>
-<p><span id="s-physical-rc"></span><strong>물리 reservoir에서는.</strong> 상태는 측정한 전류·전압·전도도 값들입니다. 위 세 조건에 하나가 더 붙습니다. <strong>읽을 수 있어야</strong> 합니다. Stepney는 기판이 reservoir가 되려면 측정할 수 있는 고차원 상태, 입력에 대한 유사한 동역학, fading memory가 있어야 한다고 씁니다. <span class="src">Stepney 2024, p.672</span> 그리고 Liang은 하드웨어 잡음 때문에 <strong>비슷한 구성이면 소프트웨어 RC가 대개 물리 RC보다 정확하고</strong> <span class="src">Liang 2024, p.201</span>, <strong>디지털 RC보다 자원을 더 쓰는 물리 RC는 의미가 없다</strong>고 못 박습니다. <span class="src">Liang 2024, p.202</span> 그러니 "고정해도 된다"는 물리 RC의 출발점일 뿐이고, 그 고정된 재료가 위 세 조건을 디지털보다 싸게 만족하는지가 Phase 3의 질문입니다.</p>
+<p><span id="s-physical-rc"></span><strong>물리 reservoir에서는.</strong> 상태는 측정한 전류·전압·전도도 값들입니다. 위 세 조건에 하나가 더 붙습니다. <strong>읽을 수 있어야</strong> 합니다. Stepney는 기판이 reservoir가 되려면 측정할 수 있는 고차원 상태, 입력에 대한 유사한 동역학, fading memory가 있어야 한다고 씁니다. <span class="src">Stepney 2024, p.672</span> 그리고 Liang은 하드웨어 잡음 때문에 <strong>비슷한 구성이면 소프트웨어 RC가 대개 physical reservoir computing보다 정확하고</strong> <span class="src">Liang 2024, p.201</span>, <strong>디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다</strong>고 못 박습니다. <span class="src">Liang 2024, p.202</span> <span class="key">그러니 "고정해도 된다"는 physical reservoir computing의 출발점일 뿐이고, 그 고정된 재료가 위 세 조건을 디지털보다 싸게 만족하는지가 Phase 3의 질문입니다.</span></p>
 <div class="think">
 <p>내 소자 하나를 reservoir 노드로 쓴다고 해 봅시다. 같은 펄스 열을 넣었을 때 "그 소자만의 고정 함수 <span class="math inline">\(F_i\)</span>"는 무엇일까요? 그리고 소자를 10개 만들었을 때 그 10개의 <span class="math inline">\(F_i\)</span>가 서로 <strong>다른</strong> 함수가 되려면 무엇을 다르게 해야 할까요(두께? 조성? 입력 세기?)? 4-2의 "거의 같은 노드 둘"을 떠올리며 한 줄 적어 보세요.</p>
 </div>
@@ -933,8 +963,8 @@ momentum / Adam
 <ul>
 <li>고정된 다양한 특징 + 학습한 선형 결합으로 많은 목표를 흉내 낸다(그림 12: K = 2, 5, 20 → NMSE 0.33, 0.0074, 0.0001 미만, 예시 목표로 한 Claude 계산). 섞는 비율 찾기는 포물선이라 한 번에 풀린다.</li>
 <li>시간이 있으면 노드마다 입력 이력의 다른 함수. NARMA10에서 N = 50 → 800이면 NMSE 0.213 → 0.0165(시뮬레이션).</li>
-<li>고정해도 되는 조건: 기억(Day 15), 비선형 섞임(Day 16–17), 다양함(Day 18–19). readout은 있는 것을 섞을 뿐 없는 것을 만들지 않는다 → 표현력의 한계 <span class="src">Liang 2024, p.194, 202</span>.</li>
-<li>물리 RC는 여기에 '읽을 수 있음'이 붙고 <span class="src">Stepney 2024, p.672</span>, 같은 구성이면 대개 소프트웨어가 더 정확하며 <span class="src">Liang 2024, p.201</span>, 디지털보다 비싸면 의미가 없다 <span class="src">Liang 2024, p.202</span>.</li>
+<li>고정해도 되는 조건: 기억(Day 15–16), 비선형 섞임(Day 17–18), 다양함(Day 19–20). readout은 있는 것을 섞을 뿐 없는 것을 만들지 않는다 → 표현력의 한계 <span class="src">Liang 2024, p.194, 202</span>.</li>
+<li>physical reservoir computing은 여기에 '읽을 수 있음'이 붙고 <span class="src">Stepney 2024, p.672</span>, 같은 구성이면 대개 소프트웨어가 더 정확하며 <span class="src">Liang 2024, p.201</span>, 디지털보다 비싸면 의미가 없다 <span class="src">Liang 2024, p.202</span>.</li>
 </ul>
 </div>
 </section>
@@ -944,8 +974,8 @@ momentum / Adam
 <p>이 구간을 읽고 나면 "readout이 일을 다 하는 것 아닌가"라는 반론에 대해, 그 반론이 맞는 경우와 그것을 가려내는 실험(기준선)을 말할 수 있다.</p>
 </div>
 <p>가장 강한 반론은 이것입니다. <strong>"그림 12를 보면 고정된 곡선은 아무거나 많기만 하면 된다. 그렇다면 reservoir가 계산하는 게 아니라 readout이 계산하는 것이고, 난수 곡선 대신 입력 자체를 여러 번 지연시켜 넣어도 되지 않나?"</strong></p>
-<p>이 반론은 상당 부분 맞습니다. 실제로 Day 20–21에서 돌려 볼 실습에서, reservoir 없이 지난 입력 20개를 그대로 늘어놓고(이것을 <strong>지연 탭</strong>(delay tap)이라 부릅니다. 입력을 1, 2, …, 20단계 늦춰 꺼내 쓰는 것) 그 두 개씩의 곱을 더한 특징 231개를 ridge readout에 넣은 기준선이 NARMA10에서 NMSE 0.035를 냈고, 노드 200개 reservoir(0.053)보다 나았습니다(시뮬레이션). Stepney가 "계산이 아닌 경우"로 든 것 중 하나도 <strong>출력 표현 단계에서 다른 컴퓨터가 계산을 사후에 다 해 버리는 경우</strong>입니다. <span class="src">Stepney 2024, p.667</span> 그래서 reservoir의 기여는 "reservoir를 빼고 같은 readout에 같은 수의 특징을 준 기준선(baseline: 소자 없이도 얻을 수 있는 성능)"과 비교해야만 말할 수 있습니다. Day 10 사다리의 5단이고(4-5의 표, <a href="../days/d06.html#b-heldout-baseline">Day 10 기준선</a>), Day 20–21·Day 28–29에서 직접 합니다.</p>
-<p>그런데 반론이 놓치는 것도 있습니다. 지연 탭 기준선은 지난 입력 20개를 <strong>저장해 두는 메모리</strong>와 231개의 곱을 <strong>계산하는 회로</strong>가 필요합니다. reservoir의 약속은 그 기억과 곱셈의 일부를 재료의 동역학이 추가 회로 없이 해 준다는 것이고, 그 약속이 참인지는 정확도가 아니라 <strong>같은 정확도에서의 시스템 비용</strong>으로 판정됩니다(Day 10 사다리 6단, Day 30–31). <span class="tag tag-interp">해석</span> 답은 내 몫입니다.</p>
+<p>이 반론은 상당 부분 맞습니다. 실제로 Day 21–22에서 돌려 볼 실습에서, reservoir 없이 지난 입력 20개를 그대로 늘어놓고(이것을 <strong>delay tap</strong>이라 부릅니다. 입력을 1, 2, …, 20단계 늦춰 꺼내 쓰는 것) 그 두 개씩의 곱을 더한 특징 231개를 ridge readout에 넣은 기준선이 NARMA10에서 NMSE 0.035를 냈고, 노드 200개 reservoir(0.053)보다 나았습니다(시뮬레이션). Stepney가 "계산이 아닌 경우"로 든 것 중 하나도 <strong>출력 표현 단계에서 다른 컴퓨터가 계산을 사후에 다 해 버리는 경우</strong>입니다. <span class="src">Stepney 2024, p.667</span> <span class="key">그래서 reservoir의 기여는 "reservoir를 빼고 같은 readout에 같은 수의 특징을 준 기준선(baseline: 소자 없이도 얻을 수 있는 성능)"과 비교해야만 말할 수 있습니다.</span> Day 10 사다리의 5단이고(4-5의 표, <a href="../days/d06.html#b-heldout-baseline">Day 10 기준선</a>), Day 21–22·Day 29–30에서 직접 합니다.</p>
+<p>그런데 반론이 놓치는 것도 있습니다. delay tap 기준선은 지난 입력 20개를 <strong>저장해 두는 메모리</strong>와 231개의 곱을 <strong>계산하는 회로</strong>가 필요합니다. reservoir의 약속은 그 기억과 곱셈의 일부를 재료의 동역학이 추가 회로 없이 해 준다는 것이고, 그 약속이 참인지는 정확도가 아니라 <strong>같은 정확도에서의 시스템 비용</strong>으로 판정됩니다(Day 10 사다리 6단, Day 31–32). <span class="tag tag-interp">해석</span> 답은 내 몫입니다.</p>
 </section>
 <section id="wrapup" class="level3">
 <h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
@@ -974,7 +1004,7 @@ momentum / Adam
 <td>250 Hz ↔︎ 4 ms; 심전도 72 Hz, 700 ms ≈ 50단계 <span class="src">Zhong 2022, p.675</span></td>
 </tr>
 <tr class="even">
-<td>상태 갱신식</td>
+<td>state update식</td>
 <td>(지금 상태를 <span class="math inline">\(W\)</span>로 섞기) + (입력 × <span class="math inline">\(W_{in}\)</span>) → <span class="math inline">\(\tanh\)</span>. 매 단계 같은 <span class="math inline">\(W\)</span>. Day 11–12의 섞이지 않는 두 칸에 대각선 밖을 더한 것</td>
 <td>노드 둘: <span class="math inline">\(x(1) = (0.762, -0.462)\)</span>, <span class="math inline">\(x(2) = (0.164, -0.430)\)</span> <span class="src">Liang 2024, p.194</span></td>
 </tr>
@@ -1026,7 +1056,7 @@ momentum / Adam
 <tr class="even">
 <td>모르는 것 하나</td>
 <td>내 소자 <span class="math inline">\(N\)</span>개가 서로 다른 함수 <span class="math inline">\(F_i\)</span>가 되려면 무엇을 바꿔야 하나</td>
-<td>Day 18–19, Day 32</td>
+<td>Day 19–20, Day 33–34</td>
 </tr>
 </tbody>
 </table>
@@ -1037,7 +1067,7 @@ momentum / Adam
 <h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
 <p>모범 문장은 주지 않습니다. 내 답이 아래 질문에 답했는지 확인하세요.</p>
 <ol type="1">
-<li>상태 갱신식의 각 부분(지금 상태의 섞임, 새 입력, 비선형 함수)이 무슨 일을 하는지 숫자 예와 함께 말했나? <span class="math inline">\(t\)</span>가 "번호"이고 실제 시간은 샘플링 주기에 달렸다는 것을 적었나?</li>
+<li>state update식의 각 부분(지금 상태의 섞임, 새 입력, 비선형 함수)이 무슨 일을 하는지 숫자 예와 함께 말했나? <span class="math inline">\(t\)</span>가 "번호"이고 실제 시간은 샘플링 주기에 달렸다는 것을 적었나?</li>
 <li>"상태 = 입력 이력의 비선형 전개"를 내 말로 풀었나? 그리고 상태가 담지 <strong>못하는</strong> 것(오래된 입력, 노드 수를 넘는 정보, 잡음보다 작은 차이)을 한 줄이라도 적었나?</li>
 <li>readout 학습이 왜 "한 번에" 풀리는지(포물선 손실), ridge의 <span class="math inline">\(\lambda\)</span>가 무엇을 막는지(비슷한 노드, 큰 가중치, 새 데이터에서의 오류)를 설명했나?</li>
 <li>"readout만 학습해도 된다"의 조건(기억·비선형 섞임·다양함·읽을 수 있음)과 대가(표현력)를 둘 다 적었나?</li>
@@ -1047,11 +1077,11 @@ momentum / Adam
 <section id="ledger-items" class="level3">
 <h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
 <ul>
-<li><strong>병목 장부:</strong> (응용이 요구하는 것) 과제가 필요로 하는 과거 길이·비선형 차수 vs (메커니즘이 허용하는 것) 소자 상태가 읽을 수 있게 담는 정보의 양과 종류. 둘이 맞는지는 Day 15–19의 지표(MC, IPC)로 잰다.</li>
-<li><strong>병목 장부:</strong> 같은 소자를 여러 개 쓸 때 "거의 같은 노드"가 되면 readout 가중치가 튀고(그림 5(Day 13), 그림 7(Day 13)) 노드 수가 늘어도 정보가 늘지 않는다. 소자 간 차이를 일부러 만들 수 있는가(Day 18–19, Day 32).</li>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 과제가 필요로 하는 과거 길이·비선형 차수 vs (메커니즘이 허용하는 것) 소자 상태가 읽을 수 있게 담는 정보의 양과 종류. 둘이 맞는지는 Day 15–20의 지표(MC, IPC)로 잰다.</li>
+<li><strong>병목 장부:</strong> 같은 소자를 여러 개 쓸 때 "거의 같은 노드"가 되면 readout 가중치가 튀고(그림 5(Day 13), 그림 7(Day 13)) 노드 수가 늘어도 정보가 늘지 않는다. 소자 간 차이를 일부러 만들 수 있는가(Day 19–20, Day 33–34).</li>
 <li><strong>아직 모르는 것:</strong> 내 소자에서 "서로 다른 이력이 서로 다른 상태로 끝나는가"를 확인한 데이터가 있나? / 분류 readout을 softmax로 학습할 때 재료 평가가 ridge와 달라지는가.</li>
-<li><strong>용어집:</strong> 샘플링, 샘플링 속도/주기, 시계열, 시간 단계, 상태 갱신식, 노드, 입력 이력의 비선형 전개, 겹침 원리, 표본, 최소제곱, 과적합, ridge 회귀, 규제항 λ, 전치, 역행렬, 학습/검증/시험 데이터, 원-핫, argmax, softmax, 교차 엔트로피, 학습률, momentum, Adam, 지수 이동 평균, NMSE.</li>
-<li><strong>접는 기준 후보:</strong> "내 소자 배열의 상태로 학습한 선형 readout이 같은 특징 수의 지연 탭 기준선보다 새 데이터에서 낫지 않다."</li>
+<li><strong>용어집:</strong> 샘플링, 샘플링 속도/주기, 시계열, 시간 단계, state update식, 노드, 입력 이력의 비선형 전개, superposition principle, 표본, 최소제곱, 과적합, ridge 회귀, 규제항 λ, 전치, 역행렬, 학습/검증/시험 데이터, 원-핫, argmax, softmax, 교차 엔트로피, 학습률, momentum, Adam, 지수 이동 평균, NMSE.</li>
+<li><strong>접는 기준 후보:</strong> "내 소자 배열의 상태로 학습한 선형 readout이 같은 특징 수의 delay tap 기준선보다 새 데이터에서 낫지 않다."</li>
 </ul>
 </section>
 <section id="reading" class="level3">
@@ -1071,16 +1101,17 @@ momentum / Adam
 <p><strong>폴더 밖 (서지는 확인, 내용은 <span class="tag tag-unverified">미확인</span>)</strong></p>
 <ul>
 <li>Lukoševičius 2012, LNCS 7700, 659–686. ESN 실무 지침(ridge의 <span class="math inline">\(\lambda\)</span> 고르기 등). Stepney가 출력 가중치 학습의 출처로 인용.</li>
-<li>Kingma &amp; Ba, "Adam: A Method for Stochastic Optimization", ICLR 2015 (arXiv:1412.6980). Adam의 원 논문. Claude는 Algorithm 1(갱신식·기본값)만 arXiv PDF로 대조했다.</li>
+<li>Kingma &amp; Ba, "Adam: A Method for Stochastic Optimization", ICLR 2015 (arXiv:1412.6980). Adam의 원 논문. Claude는 Algorithm 1(update식·기본값)만 arXiv PDF로 대조했다.</li>
 </ul>
 </section>
 </div>
-<script type="application/json" id="quiz-d08">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 장의 앵커.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: ESN·LSM과 물리 reservoir computing", "items": [{"id": "d08-r01", "type": "mc", "q": "노드 1,000개짜리 reservoir에 500단계 길이의 신호를 넣고 readout만 학습한다. readout 가중치 하나의 기울기를 구할 때 무엇이 필요한가?", "options": ["500단계를 거슬러 가며 단계마다의 배율을 곱한 값", "reservoir 내부 가중치 W의 값과 그 기울기", "지금 단계의 오차와 그 가중치가 곱해지는 지금 상태", "reservoir를 흉내 낸 미분 가능한 수식 모형"], "a": 2, "why": "readout은 상태에 가중치를 곱해 더할 뿐이라, 기울기는 '2 × 오차 × 지금 상태'다. 과거는 reservoir 안에서 이미 계산되어 지금 상태에 들어 있으므로 시간을 거슬러 배율을 곱할 일이 없다. 그래서 소실·폭주도 생기지 않는다.", "wrongWhy": ["거슬러 가며 배율을 곱하는 것은 내부 W를 학습할 때(BPTT)의 일이다. readout만 학습하면 필요 없다.", "내부는 고정이라 학습이 내부 값을 알 필요도, 바꿀 필요도 없다.", "", "미분 가능한 모형은 내부를 학습할 때 필요하다. readout 학습은 읽은 상태만 있으면 된다."], "ref": "d07b.html#s-readout-fit", "refLabel": "readout의 기울기는 지금 상태만 쓴다", "fig": "../assets/img/d07/fig10-readout-vs-chain.svg", "figAlt": "내부 0.5를 학습하면 모든 단계를 거슬러 배율을 곱하지만, readout만 학습하면 2 × 오차 × 지금 상태뿐임을 비교한 그림"}, {"id": "d08-r02", "type": "mc", "q": "어떤 reservoir에서 '5단계 전에 입력 1이 있었던 경우'와 '없었던 경우'가 모두 같은 상태값 (0.40, 0.40)으로 끝났다. 이 두 경우를 가르려면?", "options": ["readout을 더 오래, 더 작은 학습률로 학습한다", "readout 가중치를 아주 크게 키워 차이를 늘린다", "readout 앞에서 같은 상태를 두 번씩 곱해 쓴다", "그 차이를 상태에 남기는 노드가 필요하다"], "a": 3, "why": "readout이 쓸 수 있는 것은 reservoir가 이미 만들어 둔 상태뿐이다. 두 경우의 상태가 똑같으면 어떤 W_out을 곱해도 같은 답이 나온다. 천천히 잊는 칸이 있어 상태가 달라져야 가를 수 있다.", "wrongWhy": ["더 오래 학습해도 같은 상태에는 같은 답만 낼 수 있다. 학습이 상태에 없는 차이를 만들지 못한다.", "같은 숫자에 큰 가중치를 곱해도 두 경우의 결과는 여전히 같다.", "같은 상태로 만든 숫자는 몇 번 곱해도 두 경우가 같다. 새 정보가 생기지 않는다.", ""], "ref": "d07b.html#s-readout-fit", "refLabel": "정리: 필요한 흔적이 상태에 없으면"}, {"id": "d08-r03", "type": "mc", "q": "어떤 reservoir를 서로 다른 시작 상태에서 같은 입력으로 두 번 돌렸더니, 두 상태의 차이가 0.3 → 0.3 → 0.3으로 줄지 않았다. 이 reservoir에서 앞부분을 버리는 washout은?", "options": ["앞부분을 더 길게 버리면 해결된다", "버리는 길이와 상관없이 의미가 없다", "한 단계만 버려도 충분하다", "처음부터 버릴 필요가 없다"], "a": 1, "why": "washout은 시작값의 흔적이 남은 앞부분을 버려, 그 뒤 상태가 입력만으로 정해지게 하려는 것이다. 시작값의 차이가 줄지 않으면 아무리 버려도 상태가 시작값에 매여 있다. washout은 시작값을 잊는 성질이 있어야 의미가 있다.", "wrongWhy": ["차이가 줄지 않으므로 더 길게 버려도 남은 상태에는 시작값의 흔적이 그대로 있다.", "", "한 단계 뒤에도 차이가 0.3 그대로다. 시작값의 흔적이 줄지 않는다.", "시작값에 따라 상태가 달라지므로, 그대로 쓰면 readout이 우연한 시작값을 배우게 된다."], "ref": "d07b.html#s-washout", "refLabel": "washout: 시작값의 흔적 버리기"}, {"id": "d08-r04", "type": "mc", "q": "이온 소자 배열로 만든 물리 RC에서 각 부분이 맡는 일을 짝지은 것으로 맞는 것은?", "options": ["내부 W는 소자 동역학이 맡고, readout만 컴퓨터에서 학습한다", "내부 W를 소자에서 학습하고, readout은 난수로 정해 고정해 둔다", "비선형 함수는 설계자가 tanh로 고르고, 소자는 기억만 맡는다", "입력 가중치와 readout을 함께 BPTT로 학습하고, 소자는 고정한다"], "a": 0, "why": "물리 RC에서 내부 가중치와 비선형 함수의 자리는 재료·소자의 물리 동역학과 비선형 응답이 맡고, 만든 뒤에는 손대지 않는다. 학습하는 것은 readout W_out 하나이고 보통 컴퓨터에서 선형 회귀 한 번으로 구한다.", "wrongWhy": ["", "고정과 학습이 뒤바뀌었다. 내부는 고정이고 readout만 학습한다.", "물리 RC에서는 비선형 함수 자리도 소자의 비선형 응답이 맡는다.", "BPTT를 피하려고 내부를 고정한 것이다. readout은 선형 회귀로 한 번에 구한다."], "ref": "d07b.html#s-fixed-vs-trained", "refLabel": "무엇이 고정이고 무엇이 학습인가(표)"}, {"id": "d08-r05", "type": "mc", "q": "호수의 물결을 reservoir로 쓰려 한다. readout 학습 절차를 그대로 쓰기 위해 꼭 필요한 것은?", "options": ["물의 움직임을 정확히 적은 미분 가능한 방정식", "물결의 세기를 원하는 대로 조절할 수 있는 장치", "뉴런처럼 연결된 내부 구조를 가진 물", "여러 지점의 물결 높이를 잴 수 있는 방법"], "a": 3, "why": "내부가 고정이면 학습은 내부 값을 알 필요도 바꿀 필요도 없고, 상태만 본다. 그래서 난수 행렬이든 이온 소자든 물결이든 상태를 읽을 수만 있으면 학습 절차가 같다.", "wrongWhy": ["미분 가능한 모형은 내부를 학습할 때 필요하다. readout만 학습하면 필요 없다.", "내부는 고정해 두고 손대지 않으므로 물결을 조절할 수 있어야 할 필요는 없다.", "ESN 성능은 연결 구조에 둔감하고, 재료는 뉴런을 닮지 않아도 된다.", ""], "ref": "d07b.html#s-fixed-vs-trained", "refLabel": "내부 고정 → 상태만 읽으면 된다"}, {"id": "d08-r06", "type": "mc", "q": "입력 펄스가 100 ms마다 하나씩 들어오는 과제에 reservoir 소자를 고른다. 소자가 자극 뒤 원래대로 돌아가는(이완하는) 시간이 각각 다음과 같을 때 가장 알맞은 것은?", "options": ["약 10 µs, 빠를수록 반응이 정확하므로", "약 1,000 s, 오래 기억할수록 좋으므로", "약 100 ms, 입력 간격과 비슷하므로", "어느 것이든 비선형이면 상관없다"], "a": 2, "why": "기판의 동역학이 입력보다 훨씬 빠르면 다음 입력 전에 이완해 이전 입력의 기억이 없고, 훨씬 느리면 다음 입력 전에 제대로 반응하지 못한다. 두 시간척도가 비슷해야 한다.", "wrongWhy": ["10 µs면 다음 입력(100 ms 뒤)이 오기 훨씬 전에 다 이완해 이전 입력의 흔적이 남지 않는다.", "1,000 s면 입력 간격 동안 거의 변하지 않아 새 입력에 제대로 반응하지 못한다.", "", "비선형이어도 시간척도가 안 맞으면 기억이 없거나 반응하지 못해 reservoir가 잘 되지 않는다."], "ref": "d07b.html#s-prc-why", "refLabel": "적용 조건: 시간척도 맞추기"}, {"id": "d08-r07", "type": "mc", "q": "같은 데이터로, 내부까지 모두 기울기로 학습한 신경망과 내부를 고정하고 readout만 학습한 RC를 비교했다. RC의 특성과 맞는 결과는?", "options": ["RC가 손실의 바닥에 늘 더 낮게 도달했다", "RC는 바닥이 높지만 학습이 빠르고 간단했다", "RC가 학습은 더 느리지만 표현력이 더 컸다", "두 방식의 도달 손실과 학습 시간이 같았다"], "a": 1, "why": "RC는 내부를 데이터에 맞춰 고치지 못하므로 표현력이 낮아 도달할 수 있는 손실의 바닥이 더 높다. 대신 출력층만 선형 회귀로 학습하므로 소실·폭주를 피하고 적은 샘플로 빨리 학습된다.", "wrongWhy": ["내부를 고치지 못하는 RC는 같은 데이터에서 바닥이 더 높은 쪽이다.", "", "반대다. RC는 표현력을 내주고 학습의 빠름과 단순함을 얻었다.", "고정과 학습의 범위가 다르므로 표현력과 학습 비용이 서로 다르게 나온다."], "ref": "d07b.html#s-gain-loss", "refLabel": "무엇을 얻고 무엇을 잃었나"}, {"id": "d08-r08", "type": "mc", "q": "내 이온 소자는 이완이 있어 서서히 원래대로 돌아가고, 전압을 키우면 응답이 S자로 포화한다. 지금 쓸 수 있는 가장 정확한 문장은?", "options": ["이 소자는 그 자체로 reservoir computing을 한다", "이 소자는 RC보다 정확한 시계열 계산을 한다", "이 소자는 reservoir 재료가 될 수 있다는 가설이다", "이 소자는 비선형이 있어 기억은 필요 없다"], "a": 2, "why": "이완(fading memory)과 포화(비선형)는 reservoir 재료의 조건이지 계산의 증명이 아니다. 기억이 과제의 시간척도와 맞는지, 상태가 반복되는지, 읽을 수 있는 상태가 몇 개인지, 새 데이터에서 기준선보다 나은지를 따로 시험해야 한다.", "wrongWhy": ["비선형과 서서히 잊음은 재료의 조건일 뿐이다. 읽을 상태·학습한 readout·새 데이터·기준선이 있어야 계산이다.", "정확도는 시험하지 않았다. 리뷰는 오히려 같은 구성이면 소프트웨어 RC가 대개 낫다고 본다.", "", "reservoir에는 비선형과 함께 서서히 잊는 기억이 필요하다. 둘은 서로를 대신하지 않는다."], "ref": "d07b.html#s-prc-hypothesis", "refLabel": "지금은 가설입니다"}, {"id": "d08-r09", "type": "mc", "q": "leaky node의 갱신은 '지난 상태의 (1 − α)를 남기고 새 계산값을 α만큼 섞는다'이다. α = 0.2이고 지난 상태가 0.5, 새 계산값이 0이면 다음 상태는?", "options": ["0.1", "0", "0.5", "0.4"], "a": 3, "why": "다음 상태 = (1 − 0.2) × 0.5 + 0.2 × 0 = 0.4. 새 계산값이 0이어도 지난 상태의 80%가 남아 한 번에 0으로 떨어지지 않는다. 남는 비율 1 − α가 유지 계수 역할을 해 시간척도를 하나 더 준다.", "wrongWhy": ["0.1은 지난 상태에 α를 곱한 값이다. 남는 몫은 α가 아니라 1 − α다.", "leaky node는 지난 상태의 일부를 남기므로 새 계산값이 0이어도 한 번에 0이 되지 않는다.", "0.5는 지난 상태가 그대로 남는 경우(α = 0)다. α = 0.2면 20%가 새 값 쪽으로 옮겨 간다.", ""], "ref": "d07b.html#s-zhong", "refLabel": "leaky node와 forgetting rate α"}, {"id": "d08-r10", "type": "ox", "q": "내부를 난수로 고정한 ESN을 보통 컴퓨터에서 숫자 계산으로 돌리면, 그것만으로도 물리 reservoir computing, 곧 뉴로모픽 하드웨어가 된다.", "a": false, "why": "RC 자체는 알고리즘이다. 컴퓨터 안의 난수 행렬로 돌리면 뉴로모픽 하드웨어와 관계가 없다. reservoir를 재료·소자의 물리 동역학으로 바꿀 때 물리 RC가 되고, 그때 뉴로모픽(물리 컴퓨팅)과 만난다.", "wrongWhy": ["컴퓨터에서 도는 ESN은 소프트웨어 RC다. reservoir를 물리 동역학으로 바꿔야 물리 RC가 된다.", ""], "ref": "d07b.html#s-position", "refLabel": "RC는 알고리즘, PRC는 구현", "fig": "../assets/img/d07/fig5-position.svg", "figAlt": "RC는 알고리즘이고, 그 reservoir를 물리로 바꾼 PRC가 물리 컴퓨팅 줄기와 겹치는 위치도"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 상태 갱신과 readout 학습: 최소제곱에서 ridge까지", "items": [{"id": "d08-rb01", "type": "mc", "q": "어떤 소자는 입력의 흔적을 약 50 ms 동안 들고 있다. 이 신호를 1,000 Hz로 샘플링할 때와 10 Hz로 샘플링할 때, 흔적이 남는 길이를 시간 단계 수로 세면?", "options": ["1,000 Hz는 약 50단계, 10 Hz는 1단계도 안 된다", "두 경우 모두 50단계다", "1,000 Hz는 약 5단계, 10 Hz는 약 500단계다", "두 경우 모두 1단계도 안 된다"], "a": 0, "why": "샘플링 주기는 샘플링 속도의 역수다. 1,000 Hz면 1 ms마다 한 단계라 50 ms는 약 50단계, 10 Hz면 100 ms마다 한 단계라 50 ms는 한 단계도 안 된다. 식의 t는 번호이고, 실제 시각은 t × 샘플링 주기다.", "wrongWhy": ["", "같은 50 ms라도 한 단계의 길이가 1 ms와 100 ms로 다르므로 단계 수가 달라진다.", "거꾸로 셌다. 주기가 짧은(1,000 Hz) 쪽이 같은 시간에 단계가 더 많다.", "1,000 Hz에서는 한 단계가 1 ms라 50 ms 동안 약 50단계가 지나간다."], "ref": "d08a.html#s-sampling-numbers", "refLabel": "샘플링 주기와 시간 단계", "fig": "../assets/img/d08/fig1-sampling.svg", "figAlt": "연속 신호를 4 ms마다 재어 번호 붙은 숫자 목록으로 바꾸는 샘플링 그림"}, {"id": "d08-rb02", "type": "mc", "q": "노드 두 개 reservoir에서 W의 대각선 밖(다른 노드에서 들어오는 몫)을 0으로 두었다가 0.3, −0.3으로 바꿨다. 입력 1을 한 번 넣은 뒤 0만 넣을 때 무엇이 달라지나?", "options": ["입력이 0이 되면 상태가 곧바로 0이 된다", "두 노드가 같은 값을 갖게 되어 하나와 같아진다", "같은 입력의 흔적이 노드마다 다르게 남는다", "tanh가 없어져 상태가 입력에 비례하게 된다"], "a": 2, "why": "대각선 밖이 0이면 두 노드는 섞이지 않고 각자 한 가지 속도로만 줄어든다. 대각선 밖에 숫자가 있으면 한 노드의 값이 다른 노드의 다음 값에 들어가, 같은 입력의 흔적이 노드마다 다른 속도·다른 부호로 남는다. 이 다양함이 readout의 재료다.", "wrongWhy": ["대각선의 몫과 섞여 들어오는 몫이 지난 상태를 넘겨 주므로, 입력이 0이어도 흔적이 남는다.", "섞인다고 같아지지 않는다. 본문 예에서 두 노드는 (0.164, −0.430)처럼 다른 값을 들고 있었다.", "", "W를 바꾸는 것은 tanh와 상관없다. tanh는 그대로 합을 −1과 1 사이로 누른다."], "ref": "d08a.html#s-update-steps", "refLabel": "노드 두 개로 손 계산(그림 2(Day 13))", "fig": "../assets/img/d08/fig2-two-node-update.svg", "figAlt": "서로 섞이는 노드 두 개와 입력 1, 0, 0에 따른 단계별 상태 표"}, {"id": "d08-rb03", "type": "mc", "q": "같은 reservoir에 처음 입력을 1로 넣으면 첫 노드가 tanh(1) = 0.762가 된다. 입력을 3으로 키우면 첫 노드 값은?", "options": ["약 2.29로 세 배가 된다", "0.762보다 작아진다", "0.762 그대로다", "1보다 조금 작은 값이 된다"], "a": 3, "why": "tanh는 어떤 수가 들어와도 −1과 1 사이로 누르고, 입력이 클수록 1 근처에서 눌려 거의 늘지 않는다(포화, tanh(3) = 0.995). 입력을 세 배로 해도 상태는 세 배가 되지 않는다. 이것이 비선형이다.", "wrongWhy": ["세 배가 되는 것은 선형일 때다. tanh는 1을 넘을 수 없다.", "tanh는 입력이 커지면 출력도 커지는 쪽으로만 변한다. 줄어들지 않는다.", "입력이 달라지면 tanh에 들어가는 값이 달라지므로 출력도 달라진다.", ""], "ref": "d08a.html#ch-update", "refLabel": "직접 바꿔 보기: 입력 세기"}, {"id": "d08-rb04", "type": "mc", "q": "어떤 소자의 상태를 재니 '한 단계 전에만 1'이면 0.30, '방금만 1'이면 0.50, '둘 다 1'이면 0.80이었다. 이 결과로 말할 수 있는 것은?", "options": ["'둘 다 1'만의 흔적은 따로 남지 않았다", "두 입력의 곱 같은 정보가 상태에 섞여 들어갔다", "이 소자는 최근 두 입력을 전혀 구별하지 못한다", "이 소자는 겹침 원리가 깨지는 비선형 소자다"], "a": 0, "why": "0.30 + 0.50 = 0.80으로, 함께 넣은 결과가 따로 넣은 결과의 합과 같다(겹침 원리가 성립). 비선형 전개라면 이 합과 다르고, 그 차이가 '두 입력이 함께 1이었다'는 흔적이 된다. 이 측정에서는 그런 흔적이 보이지 않는다.", "wrongWhy": ["", "곱 같은 정보는 겹침이 깨질 때 생기는 차이로 나타난다. 여기서는 합과 정확히 같다.", "세 이력이 0.30, 0.50, 0.80으로 서로 다르므로 구별은 된다.", "함께 넣은 결과가 따로 넣은 결과의 합과 같으므로 이 측정에서는 겹침 원리가 성립한다."], "ref": "d08a.html#s-superposition", "refLabel": "단계 5: 겹침 원리 검사", "note": "선형이면 x(10) + x(01) = x(11). 본문 reservoir는 (0.926, −0.892) ≠ (0.823, −0.744)로 겹침이 깨졌다."}, {"id": "d08-rb05", "type": "ox", "q": "reservoir가 비선형이기만 하면, 상태에 가중치를 곱해 더하는 readout으로 '두 입력이 서로 다른가' 같은 질문에도 항상 답할 수 있다.", "a": false, "why": "선형 readout은 상태 공간에 직선(평면)을 하나 긋는 일이다. 가중치를 바꿔도 직선의 기울기와 위치만 바뀐다. 본문의 노드 두 개 reservoir는 비선형인데도 {10, 01}과 {00, 11}을 직선 하나로 가를 수 없었다. '비선형이다'와 'readout이 원하는 답을 꺼낼 수 있다'는 다른 말이다.", "wrongWhy": ["비선형이어도 필요한 차이가 직선으로 가를 수 있는 모양으로 남는다는 보장은 없다. 본문 reservoir가 그 예다.", ""], "ref": "d08a.html#s-readout-line", "refLabel": "readout은 직선을 긋는 일", "fig": "../assets/img/d08/fig3-history-states.svg", "figAlt": "입력 이력 00, 10, 01, 11이 상태 평면의 네 점이 되고, 직선 경계 두 개가 그어진 그림"}, {"id": "d08-rb06", "type": "mc", "q": "노드 하나, readout ŷ = w x에 표본이 다섯 개라 다섯 점을 모두 지나는 직선이 없다. 최소제곱이 고르는 w는?", "options": ["다섯 표본 중 하나에 딱 맞는 w", "다섯 표본의 오차 제곱 합이 가장 작은 w", "다섯 표본의 오차를 부호째 더해 가장 큰 w", "가장 큰 표본 하나의 오차만 0으로 만드는 w"], "a": 1, "why": "최소제곱은 표본마다의 오차를 제곱해 모두 더한 손실이 가장 작은 w를 고른다. 손실이 바닥 하나인 그릇 모양이라 기울기 = 0을 풀어 한 번에 구한다(w = Σxy ÷ Σx²). 표본 하나에 맞춘 w는 다른 표본에서 오차가 커져 합이 더 크다.", "wrongWhy": ["표본 하나에 맞추면 나머지 표본에서 오차가 커져 전체 손실이 바닥보다 크다.", "", "부호째 더하면 양·음의 오차가 서로 지워진다. 그래서 제곱해 더한다. 또 크게가 아니라 작게 한다.", "한 표본만 맞추는 규칙은 나머지 표본을 무시한다. 모든 표본의 오차 제곱 합을 본다."], "ref": "d08a.html#s-ls-small", "refLabel": "가중치 하나, 표본 셋: 최소제곱", "fig": "../assets/img/d08/fig-ls-bowl.svg", "figAlt": "세 표본에 직선을 맞출 때 가중치에 따른 오차 제곱 합이 바닥 하나인 그릇이 되는 그림"}, {"id": "d08-rb07", "type": "mc", "q": "비슷한 소자 두 개를 노드로 써서 거의 같은 값을 낸다. 최소제곱 readout을 맞추니 가중치가 (+12, −11)로 나왔고 학습 오차는 아주 작았다. 두 노드 값이 학습 때보다 더 벌어진 새 표본에서는?", "options": ["학습 오차가 작았으니 새 표본에서도 잘 맞는다", "두 가중치가 서로 지워져 예측이 0 근처가 된다", "두 노드가 거의 같으니 가중치 크기는 상관없다", "두 노드의 차이가 크게 키워져 예측이 크게 틀린다"], "a": 3, "why": "12x₁ − 11x₂ = x₁ + 11(x₁ − x₂)이다. 학습 표본에서는 두 노드의 아주 작은 차이를 11배로 키워 정답의 잔물결까지 맞췄지만, 차이가 더 큰 새 표본에서는 그 11배가 그대로 예측에 더해져 크게 틀린다. 이것이 과적합이다.", "wrongWhy": ["학습 오차가 작은 것은 증거가 아니다. 작은 차이를 크게 키운 가중치는 새 데이터에서 틀린다.", "두 노드 값이 다르면 서로 완전히 지워지지 않는다. 남는 것은 차이의 11배다.", "가중치가 크면 두 노드의 작은 차이가 크게 키워진다. 노드가 비슷할수록 이 문제가 커진다.", ""], "ref": "d08a.html#s-collinear", "refLabel": "노드 둘이 거의 같을 때: 과적합", "fig": "../assets/img/d08/fig-overfit.svg", "figAlt": "학습 표본에서는 두 노드 차이가 작고 새 표본에서는 커서, 최소제곱 예측이 새 표본에서 크게 벗어나는 그림"}, {"id": "d08-rb08", "type": "mc", "q": "노드 하나 readout에서 Σxy = 10, Σx² = 10이다. ridge 공식 w = Σxy ÷ (Σx² + λ)로 λ를 0에서 10으로 올리면 w와 학습 데이터 오차는?", "options": ["w는 1에서 0.5로 줄고, 학습 오차는 커진다", "w는 1에서 2로 늘고, 학습 오차는 작아진다", "w는 1에서 0.5로 줄고, 학습 오차도 작아진다", "w는 그대로 1이고, 학습 오차만 커진다"], "a": 0, "why": "λ = 0이면 10 ÷ 10 = 1(최소제곱), λ = 10이면 10 ÷ 20 = 0.5다. λ는 '가중치가 크면 벌점'이라 가중치를 0 쪽으로 끌어당기고, 그 대가로 학습 데이터에는 덜 맞아 학습 오차가 커진다.", "wrongWhy": ["", "λ는 분모에 더해지므로 w를 키우지 않고 줄인다.", "λ = 0이 학습 데이터 오차가 가장 작은 최소제곱이다. 가중치를 줄인 대가로 학습 오차는 커진다.", "분모가 10에서 20으로 커지므로 w는 바뀐다."], "ref": "d08a.html#s-ridge-small", "refLabel": "ridge: 가중치가 크면 벌점", "fig": "../assets/img/d08/fig-ridge-bowl.svg", "figAlt": "λ가 커질수록 손실 그릇이 가팔라지고 바닥이 0 쪽으로 옮겨 가는 그림"}, {"id": "d08-rb09", "type": "mc", "q": "데이터를 학습·검증·시험 세 부분으로 나눠 ridge readout을 만든다. 각 부분의 쓰임으로 맞는 것은?", "options": ["학습으로 λ를 고르고, 검증으로 가중치를, 시험으로 성능을 잰다", "학습으로 가중치를, 시험으로 λ를 고르고, 검증으로 성능을 잰다", "학습으로 가중치를, 검증으로 λ를 고르고, 시험으로 성능을 잰다", "세 부분을 합쳐 가중치와 λ를 정하고, 시험으로 성능을 잰다"], "a": 2, "why": "가중치는 학습 데이터로 구한다. λ는 학습에 쓰지 않은 검증 데이터에서 오차가 가장 작은 값으로 고른다(학습 데이터로 고르면 늘 λ = 0이 이긴다). 시험 데이터는 학습·검증 어디에도 쓰지 않고 마지막에 성능을 한 번 잰다.", "wrongWhy": ["학습 데이터로 λ를 고르면 학습 오차가 가장 작은 λ = 0이 늘 골라져 과적합을 막지 못한다.", "시험 데이터로 λ를 고르면 그 데이터도 사실상 학습에 쓴 셈이라 성능이 과대평가된다.", "", "시험 데이터까지 가중치와 λ를 정하는 데 쓰면 '새 데이터에서의 성능'을 잴 데이터가 없다."], "ref": "d08a.html#s-lambda-choice", "refLabel": "λ는 어떻게 고르나"}, {"id": "d08-rb10", "type": "ox", "q": "ridge는 X^T X의 대각선에 λ를 더한다. 그래서 두 노드가 거의 같아 0에 가까워졌던 분모 D = ad − b²가 커지고, 가중치가 크게 튀지 않는다.", "a": true, "why": "X^T X의 대각선 a, d는 같은 노드끼리 곱한 합이고, b는 두 노드를 곱한 합이다. 노드가 거의 같으면 ad와 b²가 거의 같아 D가 0에 가깝다. 대각선에만 λ를 더하면 ad는 커지고 b²는 그대로라 D가 커진다(본문: 0.077 → 6.08). 가중치도 (+4, −3)에서 (0.55, 0.46)으로 모였다.", "wrongWhy": ["", "본문 숫자로 확인된다. λ = 0.1을 대각선에 더하자 D가 0.077에서 6.08로 커지고 가중치가 0.5 근처로 모였다."], "ref": "d08a.html#s-matrix-form", "refLabel": "행렬로 쓰면: ridge를 넣으면", "fig": "../assets/img/d08/fig-matrix-xtx.svg", "figAlt": "상태 표 X, 전치, X^T X의 칸이 합 a, b, d가 되고 대각선에 λ를 더하는 과정"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "모눈종이에 서로 다른 구불구불한 곡선 세 개를 아무렇게나 그린 뒤, 각 곡선에 곱할 숫자 세 개를 골라 더하면 목표 모양(예: 오른쪽으로 올라가는 직선)에 얼마나 가까워지는지 점 다섯 개에서 계산해 보세요. 곡선은 그대로 두고 곱할 숫자만 고르는 이 방법으로는 만들 수 없는 모양이 있을지 한 줄로 적어 보세요.", "items": [{"id": "d08-p01", "ref": "#s-sampling-numbers", "type": "short", "q": "심전도를 1초에 72번 잰다. 약 0.7초 걸리는 심장 박동 하나는 대략 몇 개의 숫자로 기록되나? (정수)", "a": ["50", "약 50", "50개", "약 50개", "50.4", "51", "약50"], "why": "숫자 개수 = 샘플링 속도 × 시간 = 72 × 0.7 ≈ 50입니다. reservoir는 이 숫자 목록을 시간 단계 하나에 하나씩 받습니다(1구간).", "refLabel": "샘플링: 숫자 개수 = 속도 × 시간"}, {"id": "d08-p02", "ref": "#b-rc-update", "type": "mc", "q": "reservoir의 상태를 한 시간 단계 갱신할 때 일어나는 일로 맞는 것은?", "options": ["지금 상태를 그대로 복사해 다음 상태로 넘긴다", "새 입력만으로 상태를 새로 만들고 지난 상태는 버린다", "지금 상태를 고정된 연결로 섞고 새 입력을 더해 S자로 누른다", "매 단계 내부 연결을 새로 학습한 뒤 상태를 계산한다"], "a": 2, "why": "갱신식은 x(t+1) = tanh(W x(t) + W_in u(t))입니다. 같은 W, W_in을 매 단계 쓰고, 둘 다 난수로 정해 학습하지 않습니다(2구간). 지난 상태를 버리면 기억이 없고, 그대로 복사하면 새 입력이 들어갈 자리가 없습니다.", "refLabel": "상태 갱신식의 계산 순서"}, {"id": "d08-p03", "ref": "#s-update-steps", "type": "ox", "q": "reservoir에 입력 1을 한 번 넣은 뒤 입력이 계속 0이면, 다음 단계에서 상태는 곧바로 0이 되어 그 입력의 흔적이 사라진다.", "a": false, "why": "지금 상태가 W로 섞여 다음 상태로 넘어가므로, 입력이 0이어도 흔적이 남으며 점점 줄어듭니다. 노드 두 개 예에서 (0.762, −0.462) → (0.164, −0.430) → (−0.063, −0.258)입니다(2구간).", "refLabel": "노드 두 개 손 계산(입력 1, 0, 0)"}, {"id": "d08-p04", "ref": "#b-reservoir-state", "type": "ox", "q": "reservoir의 현재 상태에는 지금까지 들어온 입력의 과거 전체가 읽어 낼 수 있는 형태로 담겨 있다.", "a": false, "why": "지난 입력이 모두 상태의 재료이긴 하지만, 실제로 읽을 수 있게 남는 것은 최근 입력의 일부 정보입니다. 오래된 흔적은 작아지고, 노드 수만큼의 독립 정보만 담기며, 잡음보다 작은 차이는 없는 것과 같습니다(3구간).", "refLabel": "상태에 담기는 것의 두 단서"}, {"id": "d08-p05", "ref": "#s-readout-line", "type": "mc", "q": "reservoir 상태를 점으로 찍은 공간에서, 상태에 가중치를 곱해 더하기만 하는 출력부(readout)가 답을 가르는 방식을 그림으로 나타내면?", "options": ["점들을 reservoir에 다시 넣어 한 번 더 섞는다", "가장 큰 좌표값 하나만 골라 답으로 쓴다", "점마다 가장 가까운 학습 점의 답을 그대로 쓴다", "점들 사이에 직선(또는 평면)을 그어 양쪽을 가른다"], "a": 3, "why": "곱해 더하기만 하는 readout의 경계(답이 문턱과 같은 점들)는 상태 값의 1차식이라 직선(평면)입니다. 그래서 상태가 직선 하나로 갈리게 놓였는지가 중요하고, 노드 두 개 예에서는 '한 단계 전 입력'은 가를 수 있었지만 XOR은 가르지 못했습니다(3구간). 가장 가까운 점을 외워 쓰는 것은 곱해 더하기가 아닙니다.", "refLabel": "readout = 상태 평면에 직선 긋기"}, {"id": "d08-p06", "ref": "#b-ridge", "type": "mc", "q": "reservoir 상태를 섞어 답을 내는 출력 가중치(곱해 더하기만 하는 readout)는 보통 어떻게 구하나?", "options": ["손실이 포물선이라 바닥을 공식으로 한 번에 푼다", "수천 번 조금씩 고쳐 가는 방법만 쓸 수 있다", "난수로 정한 뒤 그대로 둔다", "reservoir 내부 연결과 함께 학습해야 구할 수 있다"], "a": 0, "why": "readout은 곱해 더하기뿐이라 오차 제곱의 합이 포물선이고, 기울기 = 0을 풀면 w = Σxy / Σx² 같은 공식이 나옵니다. RC의 선형 readout은 대개 ridge 공식 한 번이면 됩니다(4구간). 조금씩 고치는 경사 하강도 쓸 수 있지만 '그것밖에 없다'는 틀립니다.", "refLabel": "최소제곱: 그릇의 바닥을 공식으로"}, {"id": "d08-p07", "ref": "#s-collinear", "type": "mc", "q": "거의 같은 값을 내는 노드 두 개로 출력 가중치를 맞추면 어떤 일이 생기기 쉬운가?", "options": ["두 가중치가 똑같이 작은 값으로 나온다", "가중치가 +4, −3처럼 크게 튀어 새 데이터에서 틀리기 쉽다", "공식의 분모가 너무 커져 계산이 아예 안 된다", "학습 데이터와 새 데이터 모두에서 오차가 0이 된다"], "a": 1, "why": "두 노드가 거의 같으면 공식의 분모 D = ad − b²가 0에 가까워져 두 노드의 작은 차이가 크게 증폭됩니다. 가중치 크기에 벌점을 주는 ridge(λ)를 넣으면 가중치가 줄고 새 데이터 오차가 크게 줄어듭니다(예: 0.317 → 0.0009)(4구간).", "refLabel": "거의 같은 노드 둘(4-2)"}, {"id": "d08-p08", "ref": "#s-random-features", "type": "ox", "q": "모양을 바꾸지 않는 무작위 곡선 여러 개를 알맞은 비율로 섞기만 해도, 꽤 복잡한 목표 곡선을 거의 그대로 흉내 낼 수 있다.", "a": true, "why": "곡선 수 K를 2, 5, 20으로 늘리면 오차(NMSE)가 0.33, 0.0074, 0.0001 미만으로 줄었습니다. 다만 readout은 있는 것을 섞을 뿐 상태에 없는 정보를 만들지는 못하므로, 기억·비선형·다양함이 있어야 고정해도 됩니다(6구간).", "refLabel": "고정된 난수 곡선 K개 섞기(6구간)"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 샘플링", "items": [{"id": "d08-q01", "type": "short", "q": "72 Hz로 샘플링하면 샘플링 주기는 몇 ms인가? (소수 첫째 자리까지)", "a": ["13.9", "13.9 ms", "약 13.9", "13.89", "14", "약 14"], "why": "주기 = 1/72 s = 0.0139 s = 13.9 ms. 72 ms라고 답했다면 속도(1초에 몇 번)와 주기(한 번과 다음 사이의 시간)를 바꿔 쓴 것 — 둘은 서로 역수다(기초 계단: 시계열).", "ref": "#s-sampling-numbers", "refLabel": "샘플링 주기 = 1/샘플링 속도(250 Hz ↔ 4 ms)"}, {"id": "d08-q02", "type": "short", "q": "가속도 센서 신호를 10 Hz로 기록해 3초짜리 손동작 하나를 자르면 시간 단계가 몇 개인가? (숫자만)", "a": ["30", "30개"], "why": "3 s × 10 /s = 30. Zhong 2022도 손동작 하나를 30 시간 단계로 만들었다(p.677). 0.3이 나왔다면 3을 10으로 나눈 것 — 개수 = 시간 × 속도다.", "ref": "#s-sampling-numbers", "refLabel": "숫자 개수 = 시간 × 샘플링 속도"}]}, "2-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 노드 두 개 갱신", "items": [{"id": "d08-q03", "type": "short", "q": "[풀이 예시 확인] 본문 reservoir에서 $x(0) = (0, 0)$, $u(0) = 1$이면 $x(1)$의 첫째 값 $x_1(1)$은? ($\\tanh(1) = 0.762$)", "a": ["0.762", "0.76", "+0.762"], "why": "지금 상태가 0이라 섞기 항이 0이고, 입력 항 $W_{in}[1] \\times 1 = 1.0$만 남는다. $\\tanh(1.0) = 0.762$. 1.0이라고 답했다면 $\\tanh$로 누르는 단계를 빠뜨린 것(기초 계단: 상태 갱신식).", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}, {"id": "d08-q04", "type": "short", "q": "[일부 채우기] 입력을 $u = 1, 1$로 넣는다. $x(1) = (0.762, -0.462)$에서 노드 1의 섞기 결과는 단계 2와 같은 0.166이다. 그러면 $z_1 = 0.166 + ▢$. 빈칸과 $z_1$을 '빈칸,답' 꼴로 (예: 0.5,0.666)", "a": ["1,1.166", "1.0,1.166", "1, 1.166", "1.0, 1.166"], "why": "새 입력 항 $W_{in}[1] \\times u(1) = 1.0 \\times 1 = 1.0$이 더해져 $z_1 = 1.166$, $\\tanh(1.166) = 0.823$이 3구간의 $x(11)$ 첫째 값이다. 빈칸에 0을 넣었다면 입력이 0이던 단계 2를 그대로 옮긴 것 — 이번에는 두 번째 입력도 1이다.", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}, {"id": "d08-q05", "type": "short", "q": "[혼자 풀기] 같은 reservoir에 $x(0) = (0, 0)$, $u(0) = 0.5$를 넣으면 $x(1)$의 둘째 값 $x_2(1)$은? ($\\tanh(0.25) = 0.245$, $\\tanh$는 부호만 바꾸면 $\\tanh(-a) = -\\tanh(a)$)", "a": ["-0.245", "−0.245", "-0.24", "−0.24", "-0.2449"], "why": "$z_2 = W_{in}[2] \\times 0.5 = -0.5 \\times 0.5 = -0.25$, $\\tanh(-0.25) = -0.245$. +0.245가 나왔다면 $W_{in}$의 둘째 값이 음수(−0.5)인 것을 놓친 것. −0.5가 나왔다면 입력 0.5를 곱하지 않은 것.", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 상태의 뜻", "items": [{"id": "d08-q06", "type": "ox", "q": "본문의 노드 두 개 reservoir에서 '둘 다 1'(11)의 상태는 '한 단계 전 1'(10)과 '방금 1'(01)의 상태를 더한 것과 같다.", "a": false, "why": "$x(10)+x(01) = (0.926, -0.892)$이지만 $x(11) = (0.823, -0.744)$다. $\\tanh$ 때문에 겹침 원리가 깨지고, 그 차이가 '두 입력이 함께 1이었다'는 흔적이다. 같다고 생각했다면 reservoir를 선형으로 상상한 것(그림 3(Day 13)).", "ref": "#s-superposition", "refLabel": "겹침 원리 검사(3구간 단계 5)"}, {"id": "d08-q07", "type": "mc", "q": "그림 3(Day 13)의 네 점에서 '직선 하나'로 가를 수 없는 질문은?", "options": ["방금 들어온 입력이 1인가 (01, 11 대 00, 10)", "한 단계 전 입력이 1인가 (10, 11 대 00, 01)", "두 입력이 서로 다른가 (10, 01 대 00, 11)", "아무 입력도 없었는가 (00 대 나머지)"], "a": 2, "why": "00–11을 잇는 선분과 10–01을 잇는 선분이 엇갈리므로 직선 하나로는 못 가른다(XOR, Day 16–17). 앞의 둘은 본문에서 직선으로 갈렸고, 넷째는 원점 하나만 떼어 내면 되므로 가능하다. '비선형이면 다 된다'는 생각에서 헷갈리기 쉽다.", "ref": "#s-readout-line", "refLabel": "readout = 직선 긋기, 세 질문"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d08-q08", "type": "mc", "q": "'상태는 입력 이력의 비선형 전개다'에 대한 설명으로 가장 정확한 것은?", "options": ["지금 상태 하나에 과거 입력 전체가 빠짐없이 기록된다", "지금 입력만으로 정해지고 지난 입력과는 상관이 없다", "비선형이므로 어떤 질문이든 선형 readout으로 답할 수 있다", "지난 입력들의 고정된 비선형 함수이며, 최근 것 일부만 읽힌다"], "a": 3, "why": "$x(t) = F(u(t-1), u(t-2), \\dots)$이지만 오래된 흔적은 작아지고(Day 15), 독립 정보는 노드 수만큼이며(Day 18–19), 잡음보다 작은 차이는 쓸 수 없다. 첫 보기는 흔한 과장, 둘째는 2구간의 '입력 0에도 남는 흔적'이 반례, 셋째는 그림 3(Day 13)의 XOR이 반례다.", "ref": "#b-reservoir-state", "refLabel": "상태 = 입력 이력의 비선형 전개, 두 단서"}]}, "4-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 최소제곱과 ridge", "items": [{"id": "d08-q09", "type": "short", "q": "[풀이 예시 확인] $x = 1, 2, 3$, $y = 1.1, 1.9, 3.2$일 때 최소제곱 $w = \\sum xy / \\sum x^2$는? (소수 셋째 자리까지)", "a": ["1.036", "1.04", "1.0357"], "why": "$\\sum xy = 1.1 + 3.8 + 9.6 = 14.5$, $\\sum x^2 = 14$, $14.5/14 = 1.036$. 0.97 근처가 나왔다면 $\\lambda = 1$을 넣은 ridge 값이다. 1.1이나 0.95가 나왔다면 표본 하나에만 맞춘 값이다(4-1의 표).", "ref": "#s-ls-small", "refLabel": "세 표본의 최소제곱(4-1)"}, {"id": "d08-q10", "type": "short", "q": "[일부 채우기] 같은 데이터, ridge $\\lambda = 1$. $w = 14.5 / (14 + ▢) = ?$ 빈칸과 답을 '빈칸,답' 꼴로 (예: 2,0.906)", "a": ["1,0.967", "1, 0.967", "1,0.97", "1, 0.97", "1,0.9667"], "why": "분모에 $\\lambda = 1$이 더해져 $14.5/15 = 0.967$. 분자에 더했다면 $15.5/14 = 1.107$로 오히려 커진다 — ridge는 분모(상태² 합)에 $\\lambda$를 더해 가중치를 0 쪽으로 끈다.", "ref": "#s-ridge-small", "refLabel": "가중치 하나의 ridge(4-3)"}, {"id": "d08-q11", "type": "short", "q": "[혼자 풀기] 새 데이터 $x = 1, 2$, $y = 2, 3$. 최소제곱 $w$와 $\\lambda = 3$인 ridge $w$를 '최소제곱,ridge' 꼴로 (예: 1.2,0.8)", "a": ["1.6,1", "1.6, 1", "1.6,1.0", "1.6, 1.0"], "why": "$\\sum xy = 2 + 6 = 8$, $\\sum x^2 = 1 + 4 = 5$. 최소제곱 $8/5 = 1.6$, ridge $8/(5+3) = 1.0$. 2.5가 나왔다면 $\\sum y/\\sum x$(5/2)로 계산한 것 — 곱의 합을 제곱의 합으로 나눈다.", "ref": "#s-ridge-small", "refLabel": "최소제곱과 ridge 공식(4-1, 4-3)"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d08-q12", "type": "mc", "q": "거의 같은 값을 내는 노드 두 개에 최소제곱($\\lambda = 0$) readout을 맞추면 가중치가 +4, −3처럼 커진다. 가장 직접적인 이유는?", "options": ["표본이 너무 많아 식끼리 서로 부딪쳐서 풀 수 없으므로", "tanh가 포화되어 두 노드 값이 1 근처에 몰리므로", "학습률이 너무 커서 걸음마다 바닥을 지나치므로", "분모 D = ad − b²가 0에 가까워 작은 차이가 커지므로"], "a": 3, "why": "두 노드가 거의 같으면 $ad \\approx b^2$라 $D = 0.077$처럼 작아지고, 0에 가까운 수로 나누면 해가 튄다. 예측은 $x_1 + 3(x_1 - x_2)$꼴이 되어 두 노드의 작은 차이를 키운다. $\\lambda$를 대각선에 더하면 $D = 6.08$로 커진다. 학습률은 경사 하강의 개념으로, 공식으로 한 번에 푸는 최소제곱에는 없다.", "ref": "#s-collinear", "refLabel": "분모 D가 거의 0(4-2 단계 3)"}, {"id": "d08-q13", "type": "ox", "q": "ridge의 $\\lambda$는 학습 데이터에서 오차가 가장 작아지는 값을 고르면 된다.", "a": false, "why": "학습 데이터 오차는 $\\lambda = 0$일 때 가장 작다(그림 7(Day 13)의 예시 데이터로 한 Claude 계산: 0.00098). 그런데 그때 새 데이터 오차가 가장 크다(같은 계산: 0.317). 그래서 $\\lambda$는 학습에 쓰지 않은 검증 데이터로 고르고, 성능은 또 다른 시험 데이터로 잰다(Day 10 사다리 4단).", "ref": "#s-lambda-choice", "refLabel": "λ 고르기: 검증 데이터(4-5)"}, {"id": "d08-q27", "type": "mc", "q": "상태 표 $X$(행 = 표본, 열 = 노드)에서 $X^{\\mathsf T}X$의 (1, 2) 칸에는 무엇이 들어가나?", "options": ["노드 1 열과 노드 2 열을 같은 자리끼리 곱해 더한 값", "노드 1 열의 값들을 모두 더한 값", "표본 1 행과 표본 2 행을 같은 자리끼리 곱해 더한 값", "노드 1과 노드 2의 readout 가중치를 곱한 값"], "a": 0, "why": "$X^{\\mathsf T}$의 1행은 $X$의 노드 1 열이므로 (1, 2) 칸 = (노드 1 열)·(노드 2 열) = $\\sum x_1 x_2 = b$(4-2의 29.97)다. 표본 행끼리 곱한 값은 표본 × 표본 크기의 다른 표($XX^{\\mathsf T}$)의 칸이다. 가중치는 이 표로 푸는 미지수이지 표의 재료가 아니다.", "ref": "#s-matrix-form", "refLabel": "전치와 XᵀX(그림 8(Day 13))"}]}, "5-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · softmax", "items": [{"id": "d08-q14", "type": "short", "q": "[풀이 예시 확인] 점수 (2.0, 1.0, 0.1)의 softmax에서 첫째 종류의 확률은? ($e^{2} = 7.389$, 합 = 11.212, 소수 셋째 자리까지)", "a": ["0.659", "0.66", "65.9%", "66%"], "why": "$7.389 / 11.212 = 0.659$. 0.645처럼 2.0/3.1로 계산했다면 $e^{\\text{점수}}$를 거치지 않고 점수를 그대로 나눈 것 — softmax는 먼저 $e$의 거듭제곱으로 바꾼다(기초 계단: softmax).", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}, {"id": "d08-q15", "type": "short", "q": "[일부 채우기] 점수 (1.0, 0.0). 첫째 확률 $= 2.718 / (2.718 + ▢) = ?$ 빈칸과 답을 '빈칸,답' 꼴로 (예: 2,0.576)", "a": ["1,0.731", "1, 0.731", "1,0.73", "1, 0.73"], "why": "$e^{0} = 1$이므로 $2.718/3.718 = 0.731$. 빈칸에 0을 넣었다면 점수 0을 그대로 쓴 것 — 점수 0도 $e^0 = 1$로 바뀌어 확률을 나눠 갖는다.", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}, {"id": "d08-q16", "type": "short", "q": "[혼자 풀기] 두 종류의 점수가 (3.0, 1.0)이다. $e^{3} = 20.09$, $e^{1} = 2.718$일 때 첫째 종류의 softmax 확률은? (소수 둘째 자리까지)", "a": ["0.88", "0.881", "88%", "0.8808"], "why": "$20.09/(20.09 + 2.718) = 20.09/22.81 = 0.881$. 0.75(=3/4)가 나왔다면 점수를 그대로 나눈 것. 점수 차이 2가 확률에서는 88:12로 벌어진다 — 이것이 $e^{\\text{점수}}$의 효과다.", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d08-q17", "type": "mc", "q": "RC의 선형 readout(노드 수백 개, 연속값 출력)을 학습할 때 경사 하강·Adam보다 ridge 한 번이 흔히 쓰이는 이유로 가장 알맞은 것은?", "options": ["손실이 포물선이라 공식으로 바로 풀리고 학습률을 고를 필요가 없어서", "ridge가 언제나 더 정확하다는 것이 증명되어 있어서", "Adam은 곱해 더하기만 하는 모델에는 쓸 수 없어서", "ridge는 학습 데이터 없이도 가중치를 정할 수 있어서"], "a": 0, "why": "선형 readout + 제곱 오차는 포물선 손실이라 기울기 = 0을 바로 풀 수 있다(Stepney의 '한 번의 학습'). Adam도 선형 모델에 쓸 수 있고 같은 바닥으로 갈 수 있지만, 학습률과 걸음 수를 정해야 한다(그림 11). '언제나 더 정확'은 과장이고, ridge도 학습 데이터로 푼다.", "ref": "#s-two-paths-table", "refLabel": "언제 무엇을 쓰나(5구간 표)"}, {"id": "d08-q18", "type": "ox", "q": "물리 reservoir의 계산 기여를 평가할 때, 여러 층의 비선형 readout으로 얻은 높은 정확도만으로 '재료가 계산했다'고 말할 수 있다.", "a": false, "why": "Singh 2026은 선형(아핀) readout이 가장 분명한 기준이고, 복잡한 비선형 readout의 성능만으로 재료의 기여를 추론해서는 안 된다고 쓴다(p.18). 비선형 readout은 스스로 특징을 만들어 재료 없이도 맞힐 수 있다.", "ref": "#s-rc-readout", "refLabel": "RC에서는: 선형 readout이 기준"}, {"id": "d08-q28", "type": "short", "q": "세 종류 분류에서 softmax 확률이 (0.659, 0.242, 0.099)이고 정답이 B다. 교차 엔트로피 손실은? ($\\ln 0.242 = -1.419$, 소수 둘째 자리까지)", "a": ["1.42", "1.419", "약 1.42", "1.41"], "why": "교차 엔트로피 = −ln(정답 칸의 확률) = −ln 0.242 = 1.42. 정답이 A일 때(0.417)보다 크다 — 정답 칸에 낮은 확률을 줬기 때문이다(그림 9 ④). 0.417이 나왔다면 가장 큰 확률 칸(A)을 쓴 것이고, 0.242가 나왔다면 −ln을 빠뜨린 것이다.", "ref": "#s-cross-entropy", "refLabel": "교차 엔트로피 = −ln p정답(그림 9 ④)"}, {"id": "d08-q29", "type": "mc", "q": "손실 $L(w) = 14w^2 - 29w + 15.06$(기울기 $28w - 29$)에서 $w = 0$부터 경사 하강을 한다. 학습률을 0.02에서 0.08로 올리면?", "options": ["걸음이 네 배가 되어 바닥에 네 배 빨리 닿는다", "첫 걸음에 바닥을 지나치고, 걸음마다 바닥에서 더 멀어진다", "학습률과 상관없이 같은 경로를 따라 바닥에 닿는다", "기울기가 0이 되어 w = 0에서 더 움직이지 않는다"], "a": 1, "why": "η = 0.08이면 첫 걸음이 0 + 0.08 × 29 = 2.32로 바닥(1.036)을 지나치고, 바닥까지의 거리가 걸음마다 (1 − 28 × 0.08) = −1.24배가 되어 2.32 → −0.557 → 3.01로 커진다(발산, 그림 11 ①). 0.02면 0.44배씩 줄어 곧게 다가간다. '학습률을 키우면 빨라진다'는 바닥을 넘지 않는 범위에서만 맞다(Day 11–12 단계 5의 손실 9 → 81과 같은 현상).", "ref": "#s-learning-rate", "refLabel": "학습률만 바꾼 경사 하강(그림 11 ①)"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 왜 고정해도 되나", "items": [{"id": "d08-q19", "type": "mc", "q": "그림 12에서 난수 곡선을 $K = 20$개 쓰면 목표를 거의 완벽히 흉내 냈다. 이때 학습한 것은?", "options": ["곡선 20개의 모양을 정하는 숫자 a, c", "곡선 20개를 섞는 비율(가중치) 21개", "목표 곡선 sin(3u) + 0.5u²의 식", "입력 u를 넣을 범위(−1에서 1)"], "a": 1, "why": "곡선 모양 $\\tanh(a_j u + c_j)$의 $a$, $c$는 난수로 고정했고, 학습한 것은 섞는 비율(상수 1개 + 곡선 20개 = 21개)뿐이다. reservoir에서 $W$, $W_{in}$을 고정하고 $W_{out}$만 학습하는 것과 같은 구조다.", "ref": "#s-random-features", "refLabel": "고정된 난수 곡선 K개 섞기(그림 12)"}, {"id": "d08-q20", "type": "mc", "q": "어떤 reservoir의 상태에 10단계 전 입력의 흔적이 남아 있지 않다. 10단계 전 입력이 필요한 과제에서 readout으로 할 수 있는 것은?", "options": ["λ를 키워 가중치를 더 작게 만든다", "가중치를 크게 학습해 작은 흔적을 키운다", "reservoir(또는 입력 방식)를 바꿔야 한다", "readout을 softmax로 바꿔 확률로 답한다"], "a": 2, "why": "readout은 상태에 있는 것을 섞을 뿐 없는 것을 만들지 않는다. 흔적이 아예 없으면 키울 것도 없다. 기억이 부족하면 reservoir의 시간척도(Day 15)나 노드 수(Day 18–19), 입력 방식을 바꿔야 한다. 이것이 Liang이 말하는 '낮은 표현력'의 한 얼굴이다.", "ref": "#s-readout-limits", "refLabel": "readout이 고칠 수 없는 것"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d08-q21", "type": "mc", "q": "250 Hz로 샘플링한 시계열에서 '10단계 전'은 실제로 몇 ms 전인가?", "options": ["10 ms", "25 ms", "40 ms", "2,500 ms"], "a": 2, "why": "샘플링 주기 4 ms × 10 = 40 ms. 같은 '10단계'도 10 Hz라면 1초다. 단계 수만 보고 실제 시간을 말할 수 없는 이유이고, Day 15·Day 22–23의 시간척도 비교에서 다시 쓴다.", "ref": "#s-sampling-numbers", "refLabel": "시간 단계 → 실제 시각(t × 샘플링 주기)"}, {"id": "d08-q22", "type": "mc", "q": "reservoir의 $W$와 $W_{in}$을 학습하지 않아도 되는 근거로 가장 정확한 것은? (기억·비선형 섞임·다양함이 상태에 있다는 조건에서)", "options": ["난수로 정한 가중치가 우연히 정답을 담고 있어서", "readout이 비선형이라 어떤 관계든 스스로 만들어 내서", "고정 특징의 선형 결합으로 되는 과제가 많고 한 번에 풀려서", "소자 reservoir가 소프트웨어보다 대개 더 정확해서"], "a": 2, "why": "조건부 답이 핵심이다. 조건이 깨지면(기억 부족, XOR처럼 갈리지 않는 상태, 복사본 노드) readout으로 고칠 수 없다. 둘째 보기의 readout은 선형이고, 넷째는 반대다: 같은 구성이면 대개 소프트웨어 RC가 더 정확하다(Liang 2024, p.201).", "ref": "#s-fixed-conditions", "refLabel": "고정해도 되는 조건 세 가지"}, {"id": "d08-q23", "type": "short", "q": "데이터 $x = 2, 2$, $y = 2, 4$. 최소제곱 $w$와 $\\lambda = 4$인 ridge $w$를 '최소제곱,ridge' 꼴로 (예: 1.2,0.8)", "a": ["1.5,1", "1.5, 1", "1.5,1.0", "1.5, 1.0"], "why": "$\\sum xy = 4 + 8 = 12$, $\\sum x^2 = 8$. 최소제곱 $12/8 = 1.5$, ridge $12/(8+4) = 1.0$. 같은 $x$에서 정답이 2와 4로 갈리면 최소제곱은 그 평균(3)을 내는 직선($w = 1.5$)을 고른다.", "ref": "#s-ridge-small", "refLabel": "최소제곱과 ridge 공식(4-1, 4-3)"}, {"id": "d08-q24", "type": "mc", "q": "'readout이 계산을 다 하는 것 아닌가'를 가려내는 실험으로 가장 알맞은 것은?", "options": ["reservoir 상태로 학습 데이터에서 정확도를 잰다", "노드 수를 늘려 정확도가 더 오르는지 본다", "readout을 여러 층으로 바꿔 정확도를 올린다", "reservoir를 뺀 readout과 새 데이터로 비교한다"], "a": 3, "why": "같은 readout·같은 특징 수의 기준선과 held-out에서 비교해야 reservoir의 몫이 보인다(Day 10 사다리 5단, Day 20–21). 학습 데이터 정확도는 외우기로도 오르고, 여러 층 readout은 오히려 readout의 몫을 키운다.", "ref": "#ch-objection", "refLabel": "오늘의 반론: 지연 탭 기준선"}, {"id": "d08-q26", "type": "ox", "q": "물리 reservoir의 정확도가 같은 구성의 소프트웨어 ESN보다 조금 낮다면, 그것만으로 그 물리 reservoir는 쓸모가 없다고 결론 낼 수 있다.", "a": false, "why": "정확도만으로는 판단할 수 없다. 과제에 필요한 정확도를 넘는지, 그리고 그 정확도에서 회로·전력·지연 같은 시스템 비용이 디지털 구현보다 낮은지를 함께 비교해야 한다(Day 10 사다리 6단, Day 30–31). 반대로 정확도가 같아도 자원을 더 쓰면 이점이 없다. Liang 2024는 비슷한 구성이면 하드웨어 잡음 때문에 소프트웨어 RC가 대개 더 정확하다고 보고(p.201), 디지털 RC보다 자원을 더 쓰는 물리 RC는 의미가 없다고 쓴다(p.202).", "ref": "#s-physical-rc", "refLabel": "물리 reservoir에서는: 읽을 수 있음과 자원 조건"}, {"id": "d08-q30", "type": "mc", "q": "readout의 λ를 검증 데이터로 고르고, 학습·검증에 쓰지 않은 시험 데이터로 성능을 한 번 쟀다. 이 단계가 지우는 '다른 설명'은?", "options": ["readout이 학습 표본을 외워서 맞혔을 수 있다", "reservoir 없이 readout만으로도 같은 점수가 났을 수 있다", "같은 입력에도 상태가 매번 달라 운으로 맞았을 수 있다", "디지털 회로로 하는 편이 더 쌌을 수 있다"], "a": 0, "why": "held-out(Day 10 사다리 4단)은 '외웠을 수 있다'를 지운다. 둘째는 기준선(5단), 셋째는 읽을 수 있는 상태의 반복 가능성(2단), 넷째는 시스템 비용(6단)이 지우는 설명이다.", "ref": "#s-ladder-map", "refLabel": "오늘 한 일 ↔ Day 10 사다리(4-5 표)"}]}}}</script>
+<script type="application/json" id="quiz-d08">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 장의 앵커.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: ESN·LSM과 물리 reservoir computing", "items": [{"id": "d08-r01", "type": "mc", "q": "노드 1,000개짜리 reservoir에 500단계 길이의 신호를 넣고 readout만 학습한다. readout 가중치 하나의 기울기를 구할 때 무엇이 필요한가?", "options": ["500단계를 거슬러 가며 단계마다의 배율을 곱한 값", "reservoir 내부 가중치 W의 값과 그 기울기", "지금 단계의 오차와 그 가중치가 곱해지는 지금 상태", "reservoir를 흉내 낸 미분 가능한 수식 모형"], "a": 2, "why": "readout은 상태에 가중치를 곱해 더할 뿐이라, 기울기는 '2 × 오차 × 지금 상태'다. 과거는 reservoir 안에서 이미 계산되어 지금 상태에 들어 있으므로 시간을 거슬러 배율을 곱할 일이 없다. 그래서 소실·폭주도 생기지 않는다.", "wrongWhy": ["거슬러 가며 배율을 곱하는 것은 내부 W를 학습할 때(BPTT)의 일이다. readout만 학습하면 필요 없다.", "내부는 고정이라 학습이 내부 값을 알 필요도, 바꿀 필요도 없다.", "", "미분 가능한 모형은 내부를 학습할 때 필요하다. readout 학습은 읽은 상태만 있으면 된다."], "ref": "d07b.html#s-readout-fit", "refLabel": "readout의 기울기는 지금 상태만 쓴다", "fig": "../assets/img/d07/fig10-readout-vs-chain.svg", "figAlt": "내부 0.5를 학습하면 모든 단계를 거슬러 배율을 곱하지만, readout만 학습하면 2 × 오차 × 지금 상태뿐임을 비교한 그림", "core": true}, {"id": "d08-r02", "type": "mc", "q": "어떤 reservoir에서 '5단계 전에 입력 1이 있었던 경우'와 '없었던 경우'가 모두 같은 상태값 (0.40, 0.40)으로 끝났다. 이 두 경우를 가르려면?", "options": ["readout을 더 오래, 더 작은 학습률로 학습한다", "readout 가중치를 아주 크게 키워 차이를 늘린다", "readout 앞에서 같은 상태를 두 번씩 곱해 쓴다", "그 차이를 상태에 남기는 노드가 필요하다"], "a": 3, "why": "readout이 쓸 수 있는 것은 reservoir가 이미 만들어 둔 상태뿐이다. 두 경우의 상태가 똑같으면 어떤 W_out을 곱해도 같은 답이 나온다. 천천히 잊는 칸이 있어 상태가 달라져야 가를 수 있다.", "wrongWhy": ["더 오래 학습해도 같은 상태에는 같은 답만 낼 수 있다. 학습이 상태에 없는 차이를 만들지 못한다.", "같은 숫자에 큰 가중치를 곱해도 두 경우의 결과는 여전히 같다.", "같은 상태로 만든 숫자는 몇 번 곱해도 두 경우가 같다. 새 정보가 생기지 않는다.", ""], "ref": "d07b.html#s-readout-fit", "refLabel": "정리: 필요한 흔적이 상태에 없으면", "core": true}, {"id": "d08-r03", "type": "mc", "q": "어떤 reservoir를 서로 다른 시작 상태에서 같은 입력으로 두 번 돌렸더니, 두 상태의 차이가 0.3 → 0.3 → 0.3으로 줄지 않았다. 이 reservoir에서 앞부분을 버리는 washout은?", "options": ["앞부분을 더 길게 버리면 해결된다", "버리는 길이와 상관없이 의미가 없다", "한 단계만 버려도 충분하다", "처음부터 버릴 필요가 없다"], "a": 1, "why": "washout은 시작값의 흔적이 남은 앞부분을 버려, 그 뒤 상태가 입력만으로 정해지게 하려는 것이다. 시작값의 차이가 줄지 않으면 아무리 버려도 상태가 시작값에 매여 있다. washout은 시작값을 잊는 성질이 있어야 의미가 있다.", "wrongWhy": ["차이가 줄지 않으므로 더 길게 버려도 남은 상태에는 시작값의 흔적이 그대로 있다.", "", "한 단계 뒤에도 차이가 0.3 그대로다. 시작값의 흔적이 줄지 않는다.", "시작값에 따라 상태가 달라지므로, 그대로 쓰면 readout이 우연한 시작값을 배우게 된다."], "ref": "d07b.html#s-washout", "refLabel": "washout: 시작값의 흔적 버리기"}, {"id": "d08-r04", "type": "mc", "q": "이온 소자 배열로 만든 physical reservoir computing에서 각 부분이 맡는 일을 짝지은 것으로 맞는 것은?", "options": ["내부 W는 소자 동역학이 맡고, readout만 컴퓨터에서 학습한다", "내부 W를 소자에서 학습하고, readout은 난수로 정해 고정해 둔다", "비선형 함수는 설계자가 tanh로 고르고, 소자는 기억만 맡는다", "입력 가중치와 readout을 함께 BPTT로 학습하고, 소자는 고정한다"], "a": 0, "why": "physical reservoir computing에서 내부 가중치와 비선형 함수의 자리는 재료·소자의 물리 동역학과 비선형 응답이 맡고, 만든 뒤에는 손대지 않는다. 학습하는 것은 readout W_out 하나이고 보통 컴퓨터에서 선형 회귀 한 번으로 구한다.", "wrongWhy": ["", "고정과 학습이 뒤바뀌었다. 내부는 고정이고 readout만 학습한다.", "physical reservoir computing에서는 비선형 함수 자리도 소자의 비선형 응답이 맡는다.", "BPTT를 피하려고 내부를 고정한 것이다. readout은 선형 회귀로 한 번에 구한다."], "ref": "d07b.html#s-fixed-vs-trained", "refLabel": "무엇이 고정이고 무엇이 학습인가(표)"}, {"id": "d08-r05", "type": "mc", "q": "호수의 물결을 reservoir로 쓰려 한다. readout 학습 절차를 그대로 쓰기 위해 꼭 필요한 것은?", "options": ["물의 움직임을 정확히 적은 미분 가능한 방정식", "물결의 세기를 원하는 대로 조절할 수 있는 장치", "뉴런처럼 연결된 내부 구조를 가진 물", "여러 지점의 물결 높이를 잴 수 있는 방법"], "a": 3, "why": "내부가 고정이면 학습은 내부 값을 알 필요도 바꿀 필요도 없고, 상태만 본다. 그래서 난수 행렬이든 이온 소자든 물결이든 상태를 읽을 수만 있으면 학습 절차가 같다.", "wrongWhy": ["미분 가능한 모형은 내부를 학습할 때 필요하다. readout만 학습하면 필요 없다.", "내부는 고정해 두고 손대지 않으므로 물결을 조절할 수 있어야 할 필요는 없다.", "ESN 성능은 연결 구조에 둔감하고, 재료는 뉴런을 닮지 않아도 된다.", ""], "ref": "d07b.html#s-fixed-vs-trained", "refLabel": "내부 고정 → 상태만 읽으면 된다"}, {"id": "d08-r06", "type": "mc", "q": "입력 펄스가 100 ms마다 하나씩 들어오는 과제에 reservoir 소자를 고른다. 소자가 자극 뒤 원래대로 돌아가는(이완하는) 시간이 각각 다음과 같을 때 가장 알맞은 것은?", "options": ["약 10 µs, 빠를수록 반응이 정확하므로", "약 1,000 s, 오래 기억할수록 좋으므로", "약 100 ms, 입력 간격과 비슷하므로", "어느 것이든 비선형이면 상관없다"], "a": 2, "why": "기판의 동역학이 입력보다 훨씬 빠르면 다음 입력 전에 이완해 이전 입력의 기억이 없고, 훨씬 느리면 다음 입력 전에 제대로 반응하지 못한다. 두 시간척도가 비슷해야 한다.", "wrongWhy": ["10 µs면 다음 입력(100 ms 뒤)이 오기 훨씬 전에 다 이완해 이전 입력의 흔적이 남지 않는다.", "1,000 s면 입력 간격 동안 거의 변하지 않아 새 입력에 제대로 반응하지 못한다.", "", "비선형이어도 시간척도가 안 맞으면 기억이 없거나 반응하지 못해 reservoir가 잘 되지 않는다."], "ref": "d07b.html#s-prc-why", "refLabel": "적용 조건: 시간척도 맞추기", "core": true}, {"id": "d08-r07", "type": "mc", "q": "같은 데이터로, 내부까지 모두 기울기로 학습한 신경망과 내부를 고정하고 readout만 학습한 RC를 비교했다. RC의 특성과 맞는 결과는?", "options": ["RC가 손실의 바닥에 늘 더 낮게 도달했다", "RC는 바닥이 높지만 학습이 빠르고 간단했다", "RC가 학습은 더 느리지만 표현력이 더 컸다", "두 방식의 도달 손실과 학습 시간이 같았다"], "a": 1, "why": "RC는 내부를 데이터에 맞춰 고치지 못하므로 표현력이 낮아 도달할 수 있는 손실의 바닥이 더 높다. 대신 출력층만 선형 회귀로 학습하므로 소실·폭주를 피하고 적은 샘플로 빨리 학습된다.", "wrongWhy": ["내부를 고치지 못하는 RC는 같은 데이터에서 바닥이 더 높은 쪽이다.", "", "반대다. RC는 표현력을 내주고 학습의 빠름과 단순함을 얻었다.", "고정과 학습의 범위가 다르므로 표현력과 학습 비용이 서로 다르게 나온다."], "ref": "d07b.html#s-gain-loss", "refLabel": "무엇을 얻고 무엇을 잃었나"}, {"id": "d08-r08", "type": "mc", "q": "내 이온 소자는 이완이 있어 서서히 원래대로 돌아가고, 전압을 키우면 응답이 S자로 포화한다. 지금 쓸 수 있는 가장 정확한 문장은?", "options": ["이 소자는 그 자체로 reservoir computing을 한다", "이 소자는 RC보다 정확한 시계열 계산을 한다", "이 소자는 reservoir 재료가 될 수 있다는 가설이다", "이 소자는 비선형이 있어 기억은 필요 없다"], "a": 2, "why": "이완(fading memory)과 포화(비선형)는 reservoir 재료의 조건이지 계산의 증명이 아니다. 기억이 과제의 시간척도와 맞는지, 상태가 반복되는지, 읽을 수 있는 상태가 몇 개인지, 새 데이터에서 기준선보다 나은지를 따로 시험해야 한다.", "wrongWhy": ["비선형과 서서히 잊음은 재료의 조건일 뿐이다. 읽을 상태·학습한 readout·새 데이터·기준선이 있어야 계산이다.", "정확도는 시험하지 않았다. 리뷰는 오히려 같은 구성이면 소프트웨어 RC가 대개 낫다고 본다.", "", "reservoir에는 비선형과 함께 서서히 잊는 기억이 필요하다. 둘은 서로를 대신하지 않는다."], "ref": "d07b.html#s-prc-hypothesis", "refLabel": "지금은 가설입니다"}, {"id": "d08-r09", "type": "mc", "q": "leaky node의 update는 '지난 상태의 (1 − α)를 남기고 새 계산값을 α만큼 섞는다'이다. α = 0.2이고 지난 상태가 0.5, 새 계산값이 0이면 다음 상태는?", "options": ["0.1", "0", "0.5", "0.4"], "a": 3, "why": "다음 상태 = (1 − 0.2) × 0.5 + 0.2 × 0 = 0.4. 새 계산값이 0이어도 지난 상태의 80%가 남아 한 번에 0으로 떨어지지 않는다. 남는 비율 1 − α가 유지 계수 역할을 해 시간척도를 하나 더 준다.", "wrongWhy": ["0.1은 지난 상태에 α를 곱한 값이다. 남는 몫은 α가 아니라 1 − α다.", "leaky node는 지난 상태의 일부를 남기므로 새 계산값이 0이어도 한 번에 0이 되지 않는다.", "0.5는 지난 상태가 그대로 남는 경우(α = 0)다. α = 0.2면 20%가 새 값 쪽으로 옮겨 간다.", ""], "ref": "d07b.html#s-zhong", "refLabel": "leaky node와 forgetting rate α", "core": true}, {"id": "d08-r10", "type": "ox", "q": "내부를 난수로 고정한 ESN을 보통 컴퓨터에서 숫자 계산으로 돌리면, 그것만으로도 물리 reservoir computing, 곧 뉴로모픽 하드웨어가 된다.", "a": false, "why": "RC 자체는 알고리즘이다. 컴퓨터 안의 난수 행렬로 돌리면 뉴로모픽 하드웨어와 관계가 없다. reservoir를 재료·소자의 물리 동역학으로 바꿀 때 physical reservoir computing이 되고, 그때 뉴로모픽(물리 컴퓨팅)과 만난다.", "wrongWhy": ["컴퓨터에서 도는 ESN은 소프트웨어 RC다. reservoir를 물리 동역학으로 바꿔야 physical reservoir computing이 된다.", ""], "ref": "d07b.html#s-position", "refLabel": "RC는 알고리즘, PRC는 구현", "fig": "../assets/img/d07/fig5-position.svg", "figAlt": "RC는 알고리즘이고, 그 reservoir를 물리로 바꾼 PRC가 물리 컴퓨팅 줄기와 겹치는 위치도"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: state update와 readout 학습: 최소제곱에서 ridge까지", "items": [{"id": "d08-rb01", "type": "mc", "q": "어떤 소자는 입력의 흔적을 약 50 ms 동안 들고 있다. 이 신호를 1,000 Hz로 샘플링할 때와 10 Hz로 샘플링할 때, 흔적이 남는 길이를 시간 단계 수로 세면?", "options": ["1,000 Hz는 약 50단계, 10 Hz는 1단계도 안 된다", "두 경우 모두 50단계다(흔적의 시간이 같으므로)", "1,000 Hz는 약 5단계, 10 Hz는 약 500단계다", "두 경우 모두 1단계도 안 된다(50 ms는 짧으므로)"], "a": 0, "why": "샘플링 주기는 샘플링 속도의 역수다. 1,000 Hz면 1 ms마다 한 단계라 50 ms는 약 50단계, 10 Hz면 100 ms마다 한 단계라 50 ms는 한 단계도 안 된다. 식의 t는 번호이고, 실제 시각은 t × 샘플링 주기다.", "wrongWhy": ["", "같은 50 ms라도 한 단계의 길이가 1 ms와 100 ms로 다르므로 단계 수가 달라진다.", "거꾸로 셌다. 주기가 짧은(1,000 Hz) 쪽이 같은 시간에 단계가 더 많다.", "1,000 Hz에서는 한 단계가 1 ms라 50 ms 동안 약 50단계가 지나간다."], "ref": "d08a.html#s-sampling-numbers", "refLabel": "샘플링 주기와 시간 단계", "fig": "../assets/img/d08/fig1-sampling.svg", "figAlt": "연속 신호를 4 ms마다 재어 번호 붙은 숫자 목록으로 바꾸는 샘플링 그림", "core": true}, {"id": "d08-rb02", "type": "mc", "q": "노드 두 개 reservoir에서 W의 대각선 밖(다른 노드에서 들어오는 몫)을 0으로 두었다가 0.3, −0.3으로 바꿨다. 입력 1을 한 번 넣은 뒤 0만 넣을 때 무엇이 달라지나?", "options": ["입력이 0이 되면 상태가 곧바로 0이 된다", "두 노드가 같은 값을 갖게 되어 하나와 같아진다", "같은 입력의 흔적이 노드마다 다르게 남는다", "tanh가 없어져 상태가 입력에 비례하게 된다"], "a": 2, "why": "대각선 밖이 0이면 두 노드는 섞이지 않고 각자 한 가지 속도로만 줄어든다. 대각선 밖에 숫자가 있으면 한 노드의 값이 다른 노드의 다음 값에 들어가, 같은 입력의 흔적이 노드마다 다른 속도·다른 부호로 남는다. 이 다양함이 readout의 재료다.", "wrongWhy": ["대각선의 몫과 섞여 들어오는 몫이 지난 상태를 넘겨 주므로, 입력이 0이어도 흔적이 남는다.", "섞인다고 같아지지 않는다. 본문 예에서 두 노드는 (0.164, −0.430)처럼 다른 값을 들고 있었다.", "", "W를 바꾸는 것은 tanh와 상관없다. tanh는 그대로 합을 −1과 1 사이로 누른다."], "ref": "d08a.html#s-update-steps", "refLabel": "노드 두 개로 손 계산(그림 2(Day 13))", "fig": "../assets/img/d08/fig2-two-node-update.svg", "figAlt": "서로 섞이는 노드 두 개와 입력 1, 0, 0에 따른 단계별 상태 표"}, {"id": "d08-rb03", "type": "mc", "q": "같은 reservoir에 처음 입력을 1로 넣으면 첫 노드가 tanh(1) = 0.762가 된다. 입력을 3으로 키우면 첫 노드 값은?", "options": ["약 2.29로 세 배가 된다", "0.762보다 작아진다", "0.762 그대로다", "1보다 조금 작은 값이 된다"], "a": 3, "why": "tanh는 어떤 수가 들어와도 −1과 1 사이로 누르고, 입력이 클수록 1 근처에서 눌려 거의 늘지 않는다(포화, tanh(3) = 0.995). 입력을 세 배로 해도 상태는 세 배가 되지 않는다. 이것이 비선형이다.", "wrongWhy": ["세 배가 되는 것은 선형일 때다. tanh는 1을 넘을 수 없다.", "tanh는 입력이 커지면 출력도 커지는 쪽으로만 변한다. 줄어들지 않는다.", "입력이 달라지면 tanh에 들어가는 값이 달라지므로 출력도 달라진다.", ""], "ref": "d08a.html#ch-update", "refLabel": "직접 바꿔 보기: 입력 세기"}, {"id": "d08-rb04", "type": "mc", "q": "어떤 소자의 상태를 재니 '한 단계 전에만 1'이면 0.30, '방금만 1'이면 0.50, '둘 다 1'이면 0.80이었다. 이 결과로 말할 수 있는 것은?", "options": ["'둘 다 1'만의 흔적은 따로 남지 않았다", "두 입력의 곱 같은 정보가 상태에 섞여 들어갔다", "이 소자는 최근 두 입력을 전혀 구별하지 못한다", "이 소자는 superposition principle이 깨지는 비선형 소자다"], "a": 0, "why": "0.30 + 0.50 = 0.80으로, 함께 넣은 결과가 따로 넣은 결과의 합과 같다(superposition principle이 성립). 비선형 전개라면 이 합과 다르고, 그 차이가 '두 입력이 함께 1이었다'는 흔적이 된다. 이 측정에서는 그런 흔적이 보이지 않는다.", "wrongWhy": ["", "곱 같은 정보는 superposition이 깨질 때 생기는 차이로 나타난다. 여기서는 합과 정확히 같다.", "세 이력이 0.30, 0.50, 0.80으로 서로 다르므로 구별은 된다.", "함께 넣은 결과가 따로 넣은 결과의 합과 같으므로 이 측정에서는 superposition principle이 성립한다."], "ref": "d08a.html#s-superposition", "refLabel": "단계 5: superposition principle 검사", "note": "선형이면 x(10) + x(01) = x(11). 본문 reservoir는 (0.926, −0.892) ≠ (0.823, −0.744)로 superposition이 깨졌다.", "core": true}, {"id": "d08-rb05", "type": "ox", "q": "reservoir가 비선형이기만 하면, 상태에 가중치를 곱해 더하는 readout으로 '두 입력이 서로 다른가' 같은 질문에도 항상 답할 수 있다.", "a": false, "why": "선형 readout은 상태 공간에 직선(평면)을 하나 긋는 일이다. 가중치를 바꿔도 직선의 기울기와 위치만 바뀐다. 본문의 노드 두 개 reservoir는 비선형인데도 {10, 01}과 {00, 11}을 직선 하나로 가를 수 없었다. '비선형이다'와 'readout이 원하는 답을 꺼낼 수 있다'는 다른 말이다.", "wrongWhy": ["비선형이어도 필요한 차이가 직선으로 가를 수 있는 모양으로 남는다는 보장은 없다. 본문 reservoir가 그 예다.", ""], "ref": "d08a.html#s-readout-line", "refLabel": "readout은 직선을 긋는 일", "fig": "../assets/img/d08/fig3-history-states.svg", "figAlt": "입력 이력 00, 10, 01, 11이 상태 평면의 네 점이 되고, 직선 경계 두 개가 그어진 그림"}, {"id": "d08-rb06", "type": "mc", "q": "노드 하나, readout ŷ = w x에 표본이 다섯 개라 다섯 점을 모두 지나는 직선이 없다. 최소제곱이 고르는 w는?", "options": ["다섯 표본 중 하나에 딱 맞는 w", "다섯 표본의 오차 제곱 합이 가장 작은 w", "다섯 표본의 오차를 부호째 더해 가장 큰 w", "가장 큰 표본 하나의 오차만 0으로 만드는 w"], "a": 1, "why": "최소제곱은 표본마다의 오차를 제곱해 모두 더한 손실이 가장 작은 w를 고른다. 손실이 바닥 하나인 그릇 모양이라 기울기 = 0을 풀어 한 번에 구한다(w = Σxy ÷ Σx²). 표본 하나에 맞춘 w는 다른 표본에서 오차가 커져 합이 더 크다.", "wrongWhy": ["표본 하나에 맞추면 나머지 표본에서 오차가 커져 전체 손실이 바닥보다 크다.", "", "부호째 더하면 양·음의 오차가 서로 지워진다. 그래서 제곱해 더한다. 또 크게가 아니라 작게 한다.", "한 표본만 맞추는 규칙은 나머지 표본을 무시한다. 모든 표본의 오차 제곱 합을 본다."], "ref": "d08a.html#s-ls-small", "refLabel": "가중치 하나, 표본 셋: 최소제곱", "fig": "../assets/img/d08/fig-ls-bowl.svg", "figAlt": "세 표본에 직선을 맞출 때 가중치에 따른 오차 제곱 합이 바닥 하나인 그릇이 되는 그림"}, {"id": "d08-rb07", "type": "mc", "q": "비슷한 소자 두 개를 노드로 써서 거의 같은 값을 낸다. 최소제곱 readout을 맞추니 가중치가 (+12, −11)로 나왔고 학습 오차는 아주 작았다. 두 노드 값이 학습 때보다 더 벌어진 새 표본에서는?", "options": ["학습 오차가 작았으니 새 표본에서도 잘 맞는다", "두 가중치가 서로 지워져 예측이 0 근처가 된다", "두 노드가 거의 같으니 가중치 크기는 상관없다", "두 노드의 차이가 크게 키워져 예측이 크게 틀린다"], "a": 3, "why": "12x₁ − 11x₂ = x₁ + 11(x₁ − x₂)이다. 학습 표본에서는 두 노드의 아주 작은 차이를 11배로 키워 정답의 잔물결까지 맞췄지만, 차이가 더 큰 새 표본에서는 그 11배가 그대로 예측에 더해져 크게 틀린다. 이것이 과적합이다.", "wrongWhy": ["학습 오차가 작은 것은 증거가 아니다. 작은 차이를 크게 키운 가중치는 새 데이터에서 틀린다.", "두 노드 값이 다르면 서로 완전히 지워지지 않는다. 남는 것은 차이의 11배다.", "가중치가 크면 두 노드의 작은 차이가 크게 키워진다. 노드가 비슷할수록 이 문제가 커진다.", ""], "ref": "d08a.html#s-collinear", "refLabel": "노드 둘이 거의 같을 때: 과적합", "fig": "../assets/img/d08/fig-overfit.svg", "figAlt": "학습 표본에서는 두 노드 차이가 작고 새 표본에서는 커서, 최소제곱 예측이 새 표본에서 크게 벗어나는 그림", "core": true}, {"id": "d08-rb08", "type": "mc", "q": "노드 하나 readout에서 Σxy = 10, Σx² = 10이다. ridge 공식 w = Σxy ÷ (Σx² + λ)로 λ를 0에서 10으로 올리면 w와 학습 데이터 오차는?", "options": ["w는 1에서 0.5로 줄고, 학습 오차는 커진다", "w는 1에서 2로 늘고, 학습 오차는 작아진다", "w는 1에서 0.5로 줄고, 학습 오차도 작아진다", "w는 그대로 1이고, 학습 오차만 커진다"], "a": 0, "why": "λ = 0이면 10 ÷ 10 = 1(최소제곱), λ = 10이면 10 ÷ 20 = 0.5다. λ는 '가중치가 크면 벌점'이라 가중치를 0 쪽으로 끌어당기고, 그 대가로 학습 데이터에는 덜 맞아 학습 오차가 커진다.", "wrongWhy": ["", "λ는 분모에 더해지므로 w를 키우지 않고 줄인다.", "λ = 0이 학습 데이터 오차가 가장 작은 최소제곱이다. 가중치를 줄인 대가로 학습 오차는 커진다.", "분모가 10에서 20으로 커지므로 w는 바뀐다."], "ref": "d08a.html#s-ridge-small", "refLabel": "ridge: 가중치가 크면 벌점", "fig": "../assets/img/d08/fig-ridge-bowl.svg", "figAlt": "λ가 커질수록 손실 그릇이 가팔라지고 바닥이 0 쪽으로 옮겨 가는 그림", "core": true}, {"id": "d08-rb09", "type": "mc", "q": "데이터를 학습·검증·시험 세 부분으로 나눠 ridge readout을 만든다. 각 부분의 쓰임으로 맞는 것은?", "options": ["학습으로 λ를 고르고, 검증으로 가중치를, 시험으로 성능을 잰다", "학습으로 가중치를, 시험으로 λ를 고르고, 검증으로 성능을 잰다", "학습으로 가중치를, 검증으로 λ를 고르고, 시험으로 성능을 잰다", "세 부분을 합쳐 가중치와 λ를 정하고, 시험으로 성능을 잰다"], "a": 2, "why": "가중치는 학습 데이터로 구한다. λ는 학습에 쓰지 않은 검증 데이터에서 오차가 가장 작은 값으로 고른다(학습 데이터로 고르면 늘 λ = 0이 이긴다). 시험 데이터는 학습·검증 어디에도 쓰지 않고 마지막에 성능을 한 번 잰다.", "wrongWhy": ["학습 데이터로 λ를 고르면 학습 오차가 가장 작은 λ = 0이 늘 골라져 과적합을 막지 못한다.", "시험 데이터로 λ를 고르면 그 데이터도 사실상 학습에 쓴 셈이라 성능이 과대평가된다.", "", "시험 데이터까지 가중치와 λ를 정하는 데 쓰면 '새 데이터에서의 성능'을 잴 데이터가 없다."], "ref": "d08a.html#s-lambda-choice", "refLabel": "λ는 어떻게 고르나"}, {"id": "d08-rb10", "type": "ox", "q": "ridge는 X^T X의 대각선에 λ를 더한다. 그래서 두 노드가 거의 같아 0에 가까워졌던 분모 D = ad − b²가 커지고, 가중치가 크게 튀지 않는다.", "a": true, "why": "X^T X의 대각선 a, d는 같은 노드끼리 곱한 합이고, b는 두 노드를 곱한 합이다. 노드가 거의 같으면 ad와 b²가 거의 같아 D가 0에 가깝다. 대각선에만 λ를 더하면 ad는 커지고 b²는 그대로라 D가 커진다(본문: 0.077 → 6.08). 가중치도 (+4, −3)에서 (0.55, 0.46)으로 모였다.", "wrongWhy": ["", "본문 숫자로 확인된다. λ = 0.1을 대각선에 더하자 D가 0.077에서 6.08로 커지고 가중치가 0.5 근처로 모였다."], "ref": "d08a.html#s-matrix-form", "refLabel": "행렬로 쓰면: ridge를 넣으면", "fig": "../assets/img/d08/fig-matrix-xtx.svg", "figAlt": "상태 표 X, 전치, X^T X의 칸이 합 a, b, d가 되고 대각선에 λ를 더하는 과정"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "모눈종이에 서로 다른 구불구불한 곡선 세 개를 아무렇게나 그린 뒤, 각 곡선에 곱할 숫자 세 개를 골라 더하면 목표 모양(예: 오른쪽으로 올라가는 직선)에 얼마나 가까워지는지 점 다섯 개에서 계산해 보세요. 곡선은 그대로 두고 곱할 숫자만 고르는 이 방법으로는 만들 수 없는 모양이 있을지 한 줄로 적어 보세요.", "items": [{"id": "d08-p01", "ref": "#s-sampling-numbers", "type": "short", "q": "심전도를 1초에 72번 잰다. 약 0.7초 걸리는 심장 박동 하나는 대략 몇 개의 숫자로 기록되나? (정수)", "a": ["50", "약 50", "50개", "약 50개", "50.4", "51", "약50"], "why": "숫자 개수 = 샘플링 속도 × 시간 = 72 × 0.7 ≈ 50입니다. reservoir는 이 숫자 목록을 시간 단계 하나에 하나씩 받습니다(1구간).", "refLabel": "샘플링: 숫자 개수 = 속도 × 시간"}, {"id": "d08-p02", "ref": "#b-rc-update", "type": "mc", "q": "reservoir의 상태를 한 시간 단계 update할 때 일어나는 일로 맞는 것은?", "options": ["지금 상태를 그대로 복사해 다음 상태로 넘긴다", "새 입력만으로 상태를 새로 만들고 지난 상태는 버린다", "지금 상태를 고정된 연결로 섞고 새 입력을 더해 S자로 누른다", "매 단계 내부 연결을 새로 학습한 뒤 상태를 계산한다"], "a": 2, "why": "update식은 x(t+1) = tanh(W x(t) + W_in u(t))입니다. 같은 W, W_in을 매 단계 쓰고, 둘 다 난수로 정해 학습하지 않습니다(2구간). 지난 상태를 버리면 기억이 없고, 그대로 복사하면 새 입력이 들어갈 자리가 없습니다.", "refLabel": "state update식의 계산 순서"}, {"id": "d08-p03", "ref": "#s-update-steps", "type": "ox", "q": "reservoir에 입력 1을 한 번 넣은 뒤 입력이 계속 0이면, 다음 단계에서 상태는 곧바로 0이 되어 그 입력의 흔적이 사라진다.", "a": false, "why": "지금 상태가 W로 섞여 다음 상태로 넘어가므로, 입력이 0이어도 흔적이 남으며 점점 줄어듭니다. 노드 두 개 예에서 (0.762, −0.462) → (0.164, −0.430) → (−0.063, −0.258)입니다(2구간).", "refLabel": "노드 두 개 손 계산(입력 1, 0, 0)"}, {"id": "d08-p04", "ref": "#b-reservoir-state", "type": "ox", "q": "reservoir의 현재 상태에는 지금까지 들어온 입력의 과거 전체가 읽어 낼 수 있는 형태로 담겨 있다.", "a": false, "why": "지난 입력이 모두 상태의 재료이긴 하지만, 실제로 읽을 수 있게 남는 것은 최근 입력의 일부 정보입니다. 오래된 흔적은 작아지고, 노드 수만큼의 독립 정보만 담기며, 잡음보다 작은 차이는 없는 것과 같습니다(3구간).", "refLabel": "상태에 담기는 것의 두 단서"}, {"id": "d08-p05", "ref": "#s-readout-line", "type": "mc", "q": "reservoir 상태를 점으로 찍은 공간에서, 상태에 가중치를 곱해 더하기만 하는 출력부(readout)가 답을 가르는 방식을 그림으로 나타내면?", "options": ["점들을 reservoir에 다시 넣어 한 번 더 섞는다", "가장 큰 좌표값 하나만 골라 답으로 쓴다", "점마다 가장 가까운 학습 점의 답을 그대로 쓴다", "점들 사이에 직선(또는 평면)을 그어 양쪽을 가른다"], "a": 3, "why": "곱해 더하기만 하는 readout의 경계(답이 문턱과 같은 점들)는 상태 값의 1차식이라 직선(평면)입니다. 그래서 상태가 직선 하나로 갈리게 놓였는지가 중요하고, 노드 두 개 예에서는 '한 단계 전 입력'은 가를 수 있었지만 XOR은 가르지 못했습니다(3구간). 가장 가까운 점을 외워 쓰는 것은 곱해 더하기가 아닙니다.", "refLabel": "readout = 상태 평면에 직선 긋기"}, {"id": "d08-p06", "ref": "#b-ridge", "type": "mc", "q": "reservoir 상태를 섞어 답을 내는 출력 가중치(곱해 더하기만 하는 readout)는 보통 어떻게 구하나?", "options": ["손실이 포물선이라 바닥을 공식으로 한 번에 푼다", "수천 번 조금씩 고쳐 가는 방법만 쓸 수 있다", "난수로 정한 뒤 그대로 둔다", "reservoir 내부 연결과 함께 학습해야 구할 수 있다"], "a": 0, "why": "readout은 곱해 더하기뿐이라 오차 제곱의 합이 포물선이고, 기울기 = 0을 풀면 w = Σxy / Σx² 같은 공식이 나옵니다. RC의 선형 readout은 대개 ridge 공식 한 번이면 됩니다(4구간). 조금씩 고치는 경사 하강도 쓸 수 있지만 '그것밖에 없다'는 틀립니다.", "refLabel": "최소제곱: 그릇의 바닥을 공식으로"}, {"id": "d08-p07", "ref": "#s-collinear", "type": "mc", "q": "거의 같은 값을 내는 노드 두 개로 출력 가중치를 맞추면 어떤 일이 생기기 쉬운가?", "options": ["두 가중치가 똑같이 작은 값으로 나온다", "가중치가 +4, −3처럼 크게 튀어 새 데이터에서 틀리기 쉽다", "공식의 분모가 너무 커져 계산이 아예 안 된다", "학습 데이터와 새 데이터 모두에서 오차가 0이 된다"], "a": 1, "why": "두 노드가 거의 같으면 공식의 분모 D = ad − b²가 0에 가까워져 두 노드의 작은 차이가 크게 증폭됩니다. 가중치 크기에 벌점을 주는 ridge(λ)를 넣으면 가중치가 줄고 새 데이터 오차가 크게 줄어듭니다(예: 0.317 → 0.0009)(4구간).", "refLabel": "거의 같은 노드 둘(4-2)"}, {"id": "d08-p08", "ref": "#s-random-features", "type": "ox", "q": "모양을 바꾸지 않는 무작위 곡선 여러 개를 알맞은 비율로 섞기만 해도, 꽤 복잡한 목표 곡선을 거의 그대로 흉내 낼 수 있다.", "a": true, "why": "곡선 수 K를 2, 5, 20으로 늘리면 오차(NMSE)가 0.33, 0.0074, 0.0001 미만으로 줄었습니다. 다만 readout은 있는 것을 섞을 뿐 상태에 없는 정보를 만들지는 못하므로, 기억·비선형·다양함이 있어야 고정해도 됩니다(6구간).", "refLabel": "고정된 난수 곡선 K개 섞기(6구간)"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 샘플링", "items": [{"id": "d08-q01", "type": "short", "q": "72 Hz로 샘플링하면 샘플링 주기는 몇 ms인가? (소수 첫째 자리까지)", "a": ["13.9", "13.9 ms", "약 13.9", "13.89", "14", "약 14"], "why": "주기 = 1/72 s = 0.0139 s = 13.9 ms. 72 ms라고 답했다면 속도(1초에 몇 번)와 주기(한 번과 다음 사이의 시간)를 바꿔 쓴 것 — 둘은 서로 역수다(기초 계단: 시계열).", "ref": "#s-sampling-numbers", "refLabel": "샘플링 주기 = 1/샘플링 속도(250 Hz ↔ 4 ms)"}, {"id": "d08-q02", "type": "short", "q": "가속도 센서 신호를 10 Hz로 기록해 3초짜리 손동작 하나를 자르면 시간 단계가 몇 개인가? (숫자만)", "a": ["30", "30개"], "why": "3 s × 10 /s = 30. Zhong 2022도 손동작 하나를 30 시간 단계로 만들었다(p.677). 0.3이 나왔다면 3을 10으로 나눈 것 — 개수 = 시간 × 속도다.", "ref": "#s-sampling-numbers", "refLabel": "숫자 개수 = 시간 × 샘플링 속도"}]}, "2-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 노드 두 개 update", "items": [{"id": "d08-q03", "type": "short", "q": "[풀이 예시 확인] 본문 reservoir에서 $x(0) = (0, 0)$, $u(0) = 1$이면 $x(1)$의 첫째 값 $x_1(1)$은? ($\\tanh(1) = 0.762$)", "a": ["0.762", "0.76", "+0.762"], "why": "지금 상태가 0이라 섞기 항이 0이고, 입력 항 $W_{in}[1] \\times 1 = 1.0$만 남는다. $\\tanh(1.0) = 0.762$. 1.0이라고 답했다면 $\\tanh$로 누르는 단계를 빠뜨린 것(기초 계단: state update식).", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}, {"id": "d08-q04", "type": "short", "q": "[일부 채우기] 입력을 $u = 1, 1$로 넣는다. $x(1) = (0.762, -0.462)$에서 노드 1의 섞기 결과는 단계 2와 같은 0.166이다. 그러면 $z_1 = 0.166 + ▢$. 빈칸과 $z_1$을 '빈칸,답' 꼴로 (예: 0.5,0.666)", "a": ["1,1.166", "1.0,1.166", "1, 1.166", "1.0, 1.166"], "why": "새 입력 항 $W_{in}[1] \\times u(1) = 1.0 \\times 1 = 1.0$이 더해져 $z_1 = 1.166$, $\\tanh(1.166) = 0.823$이 3구간의 $x(11)$ 첫째 값이다. 빈칸에 0을 넣었다면 입력이 0이던 단계 2를 그대로 옮긴 것 — 이번에는 두 번째 입력도 1이다.", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}, {"id": "d08-q05", "type": "short", "q": "[혼자 풀기] 같은 reservoir에 $x(0) = (0, 0)$, $u(0) = 0.5$를 넣으면 $x(1)$의 둘째 값 $x_2(1)$은? ($\\tanh(0.25) = 0.245$, $\\tanh$는 부호만 바꾸면 $\\tanh(-a) = -\\tanh(a)$)", "a": ["-0.245", "−0.245", "-0.24", "−0.24", "-0.2449"], "why": "$z_2 = W_{in}[2] \\times 0.5 = -0.5 \\times 0.5 = -0.25$, $\\tanh(-0.25) = -0.245$. +0.245가 나왔다면 $W_{in}$의 둘째 값이 음수(−0.5)인 것을 놓친 것. −0.5가 나왔다면 입력 0.5를 곱하지 않은 것.", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 상태의 뜻", "items": [{"id": "d08-q06", "type": "ox", "q": "본문의 노드 두 개 reservoir에서 '둘 다 1'(11)의 상태는 '한 단계 전 1'(10)과 '방금 1'(01)의 상태를 더한 것과 같다.", "a": false, "why": "$x(10)+x(01) = (0.926, -0.892)$이지만 $x(11) = (0.823, -0.744)$다. $\\tanh$ 때문에 superposition principle이 깨지고, 그 차이가 '두 입력이 함께 1이었다'는 흔적이다. 같다고 생각했다면 reservoir를 선형으로 상상한 것(그림 3(Day 13)).", "ref": "#s-superposition", "refLabel": "superposition principle 검사(3구간 단계 5)"}, {"id": "d08-q07", "type": "mc", "q": "그림 3(Day 13)의 네 점에서 '직선 하나'로 가를 수 없는 질문은?", "options": ["방금 들어온 입력이 1인가 (01, 11 대 00, 10)", "한 단계 전 입력이 1인가 (10, 11 대 00, 01)", "두 입력이 서로 다른가 (10, 01 대 00, 11)", "아무 입력도 없었는가 (00 대 나머지)"], "a": 2, "why": "00–11을 잇는 선분과 10–01을 잇는 선분이 엇갈리므로 직선 하나로는 못 가른다(XOR, Day 17–18). 앞의 둘은 본문에서 직선으로 갈렸고, 넷째는 원점 하나만 떼어 내면 되므로 가능하다. '비선형이면 다 된다'는 생각에서 헷갈리기 쉽다.", "ref": "#s-readout-line", "refLabel": "readout = 직선 긋기, 세 질문"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d08-q08", "type": "mc", "q": "'상태는 입력 이력의 비선형 전개다'에 대한 설명으로 가장 정확한 것은?", "options": ["지금 상태 하나에 과거 입력 전체가 빠짐없이 기록된다", "지금 입력만으로 정해지고 지난 입력과는 상관이 없다", "비선형이므로 어떤 질문이든 선형 readout으로 답할 수 있다", "지난 입력들의 고정된 비선형 함수이며, 최근 것 일부만 읽힌다"], "a": 3, "why": "$x(t) = F(u(t-1), u(t-2), \\dots)$이지만 오래된 흔적은 작아지고(Day 15–16), 독립 정보는 노드 수만큼이며(Day 19–20), 잡음보다 작은 차이는 쓸 수 없다. 첫 보기는 흔한 과장, 둘째는 2구간의 '입력 0에도 남는 흔적'이 반례, 셋째는 그림 3(Day 13)의 XOR이 반례다.", "ref": "#b-reservoir-state", "refLabel": "상태 = 입력 이력의 비선형 전개, 두 단서"}]}, "4-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 최소제곱과 ridge", "items": [{"id": "d08-q09", "type": "short", "q": "[풀이 예시 확인] $x = 1, 2, 3$, $y = 1.1, 1.9, 3.2$일 때 최소제곱 $w = \\sum xy / \\sum x^2$는? (소수 셋째 자리까지)", "a": ["1.036", "1.04", "1.0357"], "why": "$\\sum xy = 1.1 + 3.8 + 9.6 = 14.5$, $\\sum x^2 = 14$, $14.5/14 = 1.036$. 0.97 근처가 나왔다면 $\\lambda = 1$을 넣은 ridge 값이다. 1.1이나 0.95가 나왔다면 표본 하나에만 맞춘 값이다(4-1의 표).", "ref": "#s-ls-small", "refLabel": "세 표본의 최소제곱(4-1)"}, {"id": "d08-q10", "type": "short", "q": "[일부 채우기] 같은 데이터, ridge $\\lambda = 1$. $w = 14.5 / (14 + ▢) = ?$ 빈칸과 답을 '빈칸,답' 꼴로 (예: 2,0.906)", "a": ["1,0.967", "1, 0.967", "1,0.97", "1, 0.97", "1,0.9667"], "why": "분모에 $\\lambda = 1$이 더해져 $14.5/15 = 0.967$. 분자에 더했다면 $15.5/14 = 1.107$로 오히려 커진다 — ridge는 분모(상태² 합)에 $\\lambda$를 더해 가중치를 0 쪽으로 끈다.", "ref": "#s-ridge-small", "refLabel": "가중치 하나의 ridge(4-3)"}, {"id": "d08-q11", "type": "short", "q": "[혼자 풀기] 새 데이터 $x = 1, 2$, $y = 2, 3$. 최소제곱 $w$와 $\\lambda = 3$인 ridge $w$를 '최소제곱,ridge' 꼴로 (예: 1.2,0.8)", "a": ["1.6,1", "1.6, 1", "1.6,1.0", "1.6, 1.0"], "why": "$\\sum xy = 2 + 6 = 8$, $\\sum x^2 = 1 + 4 = 5$. 최소제곱 $8/5 = 1.6$, ridge $8/(5+3) = 1.0$. 2.5가 나왔다면 $\\sum y/\\sum x$(5/2)로 계산한 것 — 곱의 합을 제곱의 합으로 나눈다.", "ref": "#s-ridge-small", "refLabel": "최소제곱과 ridge 공식(4-1, 4-3)"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d08-q12", "type": "mc", "q": "거의 같은 값을 내는 노드 두 개에 최소제곱($\\lambda = 0$) readout을 맞추면 가중치가 +4, −3처럼 커진다. 가장 직접적인 이유는?", "options": ["표본이 너무 많아 식끼리 서로 부딪쳐서 풀 수 없으므로", "tanh가 포화되어 두 노드 값이 1 근처에 몰리므로", "학습률이 너무 커서 걸음마다 바닥을 지나치므로", "분모 D = ad − b²가 0에 가까워 작은 차이가 커지므로"], "a": 3, "why": "두 노드가 거의 같으면 $ad \\approx b^2$라 $D = 0.077$처럼 작아지고, 0에 가까운 수로 나누면 해가 튄다. 예측은 $x_1 + 3(x_1 - x_2)$꼴이 되어 두 노드의 작은 차이를 키운다. $\\lambda$를 대각선에 더하면 $D = 6.08$로 커진다. 학습률은 경사 하강의 개념으로, 공식으로 한 번에 푸는 최소제곱에는 없다.", "ref": "#s-collinear", "refLabel": "분모 D가 거의 0(4-2 단계 3)"}, {"id": "d08-q13", "type": "ox", "q": "ridge의 $\\lambda$는 학습 데이터에서 오차가 가장 작아지는 값을 고르면 된다.", "a": false, "why": "학습 데이터 오차는 $\\lambda = 0$일 때 가장 작다(그림 7(Day 13)의 예시 데이터로 한 Claude 계산: 0.00098). 그런데 그때 새 데이터 오차가 가장 크다(같은 계산: 0.317). 그래서 $\\lambda$는 학습에 쓰지 않은 검증 데이터로 고르고, 성능은 또 다른 시험 데이터로 잰다(Day 10 사다리 4단).", "ref": "#s-lambda-choice", "refLabel": "λ 고르기: 검증 데이터(4-5)"}, {"id": "d08-q27", "type": "mc", "q": "상태 표 $X$(행 = 표본, 열 = 노드)에서 $X^{\\mathsf T}X$의 (1, 2) 칸에는 무엇이 들어가나?", "options": ["노드 1 열과 노드 2 열을 같은 자리끼리 곱해 더한 값", "노드 1 열의 값들을 모두 더한 값", "표본 1 행과 표본 2 행을 같은 자리끼리 곱해 더한 값", "노드 1과 노드 2의 readout 가중치를 곱한 값"], "a": 0, "why": "$X^{\\mathsf T}$의 1행은 $X$의 노드 1 열이므로 (1, 2) 칸 = (노드 1 열)·(노드 2 열) = $\\sum x_1 x_2 = b$(4-2의 29.97)다. 표본 행끼리 곱한 값은 표본 × 표본 크기의 다른 표($XX^{\\mathsf T}$)의 칸이다. 가중치는 이 표로 푸는 미지수이지 표의 재료가 아니다.", "ref": "#s-matrix-form", "refLabel": "전치와 XᵀX(그림 8(Day 13))"}]}, "5-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · softmax", "items": [{"id": "d08-q14", "type": "short", "q": "[풀이 예시 확인] 점수 (2.0, 1.0, 0.1)의 softmax에서 첫째 종류의 확률은? ($e^{2} = 7.389$, 합 = 11.212, 소수 셋째 자리까지)", "a": ["0.659", "0.66", "65.9%", "66%"], "why": "$7.389 / 11.212 = 0.659$. 0.645처럼 2.0/3.1로 계산했다면 $e^{\\text{점수}}$를 거치지 않고 점수를 그대로 나눈 것 — softmax는 먼저 $e$의 거듭제곱으로 바꾼다(기초 계단: softmax).", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}, {"id": "d08-q15", "type": "short", "q": "[일부 채우기] 점수 (1.0, 0.0). 첫째 확률 $= 2.718 / (2.718 + ▢) = ?$ 빈칸과 답을 '빈칸,답' 꼴로 (예: 2,0.576)", "a": ["1,0.731", "1, 0.731", "1,0.73", "1, 0.73"], "why": "$e^{0} = 1$이므로 $2.718/3.718 = 0.731$. 빈칸에 0을 넣었다면 점수 0을 그대로 쓴 것 — 점수 0도 $e^0 = 1$로 바뀌어 확률을 나눠 갖는다.", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}, {"id": "d08-q16", "type": "short", "q": "[혼자 풀기] 두 종류의 점수가 (3.0, 1.0)이다. $e^{3} = 20.09$, $e^{1} = 2.718$일 때 첫째 종류의 softmax 확률은? (소수 둘째 자리까지)", "a": ["0.88", "0.881", "88%", "0.8808"], "why": "$20.09/(20.09 + 2.718) = 20.09/22.81 = 0.881$. 0.75(=3/4)가 나왔다면 점수를 그대로 나눈 것. 점수 차이 2가 확률에서는 88:12로 벌어진다 — 이것이 $e^{\\text{점수}}$의 효과다.", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d08-q17", "type": "mc", "q": "RC의 선형 readout(노드 수백 개, 연속값 출력)을 학습할 때 경사 하강·Adam보다 ridge 한 번이 흔히 쓰이는 이유로 가장 알맞은 것은?", "options": ["손실이 포물선이라 공식으로 바로 풀리고 학습률을 고를 필요가 없어서", "ridge가 언제나 더 정확하다는 것이 증명되어 있어서", "Adam은 곱해 더하기만 하는 모델에는 쓸 수 없어서", "ridge는 학습 데이터 없이도 가중치를 정할 수 있어서"], "a": 0, "why": "선형 readout + 제곱 오차는 포물선 손실이라 기울기 = 0을 바로 풀 수 있다(Stepney의 '한 번의 학습'). Adam도 선형 모델에 쓸 수 있고 같은 바닥으로 갈 수 있지만, 학습률과 걸음 수를 정해야 한다(그림 11). '언제나 더 정확'은 과장이고, ridge도 학습 데이터로 푼다.", "ref": "#s-two-paths-table", "refLabel": "언제 무엇을 쓰나(5구간 표)"}, {"id": "d08-q18", "type": "ox", "q": "물리 reservoir의 계산 기여를 평가할 때, 여러 층의 비선형 readout으로 얻은 높은 정확도만으로 '재료가 계산했다'고 말할 수 있다.", "a": false, "why": "Singh 2026은 선형(아핀) readout이 가장 분명한 기준이고, 복잡한 비선형 readout의 성능만으로 재료의 기여를 추론해서는 안 된다고 쓴다(p.18). 비선형 readout은 스스로 특징을 만들어 재료 없이도 맞힐 수 있다.", "ref": "#s-rc-readout", "refLabel": "RC에서는: 선형 readout이 기준"}, {"id": "d08-q28", "type": "short", "q": "세 종류 분류에서 softmax 확률이 (0.659, 0.242, 0.099)이고 정답이 B다. 교차 엔트로피 손실은? ($\\ln 0.242 = -1.419$, 소수 둘째 자리까지)", "a": ["1.42", "1.419", "약 1.42", "1.41"], "why": "교차 엔트로피 = −ln(정답 칸의 확률) = −ln 0.242 = 1.42. 정답이 A일 때(0.417)보다 크다 — 정답 칸에 낮은 확률을 줬기 때문이다(그림 9 ④). 0.417이 나왔다면 가장 큰 확률 칸(A)을 쓴 것이고, 0.242가 나왔다면 −ln을 빠뜨린 것이다.", "ref": "#s-cross-entropy", "refLabel": "교차 엔트로피 = −ln p정답(그림 9 ④)"}, {"id": "d08-q29", "type": "mc", "q": "손실 $L(w) = 14w^2 - 29w + 15.06$(기울기 $28w - 29$)에서 $w = 0$부터 경사 하강을 한다. 학습률을 0.02에서 0.08로 올리면?", "options": ["걸음이 네 배가 되어 바닥에 네 배 빨리 닿는다", "첫 걸음에 바닥을 지나치고, 걸음마다 바닥에서 더 멀어진다", "학습률과 상관없이 같은 경로를 따라 바닥에 닿는다", "기울기가 0이 되어 w = 0에서 더 움직이지 않는다"], "a": 1, "why": "η = 0.08이면 첫 걸음이 0 + 0.08 × 29 = 2.32로 바닥(1.036)을 지나치고, 바닥까지의 거리가 걸음마다 (1 − 28 × 0.08) = −1.24배가 되어 2.32 → −0.557 → 3.01로 커진다(발산, 그림 11 ①). 0.02면 0.44배씩 줄어 곧게 다가간다. '학습률을 키우면 빨라진다'는 바닥을 넘지 않는 범위에서만 맞다(Day 11–12 단계 5의 손실 9 → 81과 같은 현상).", "ref": "#s-learning-rate", "refLabel": "학습률만 바꾼 경사 하강(그림 11 ①)"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 왜 고정해도 되나", "items": [{"id": "d08-q19", "type": "mc", "q": "그림 12에서 난수 곡선을 $K = 20$개 쓰면 목표를 거의 완벽히 흉내 냈다. 이때 학습한 것은?", "options": ["곡선 20개의 모양을 정하는 숫자 a, c", "곡선 20개를 섞는 비율(가중치) 21개", "목표 곡선 sin(3u) + 0.5u²의 식", "입력 u를 넣을 범위(−1에서 1)"], "a": 1, "why": "곡선 모양 $\\tanh(a_j u + c_j)$의 $a$, $c$는 난수로 고정했고, 학습한 것은 섞는 비율(상수 1개 + 곡선 20개 = 21개)뿐이다. reservoir에서 $W$, $W_{in}$을 고정하고 $W_{out}$만 학습하는 것과 같은 구조다.", "ref": "#s-random-features", "refLabel": "고정된 난수 곡선 K개 섞기(그림 12)"}, {"id": "d08-q20", "type": "mc", "q": "어떤 reservoir의 상태에 10단계 전 입력의 흔적이 남아 있지 않다. 10단계 전 입력이 필요한 과제에서 readout으로 할 수 있는 것은?", "options": ["λ를 키워 가중치를 더 작게 만든다", "가중치를 크게 학습해 작은 흔적을 키운다", "reservoir(또는 입력 방식)를 바꿔야 한다", "readout을 softmax로 바꿔 확률로 답한다"], "a": 2, "why": "readout은 상태에 있는 것을 섞을 뿐 없는 것을 만들지 않는다. 흔적이 아예 없으면 키울 것도 없다. 기억이 부족하면 reservoir의 시간척도(Day 15–16)나 노드 수(Day 19–20), 입력 방식을 바꿔야 한다. 이것이 Liang이 말하는 '낮은 표현력'의 한 얼굴이다.", "ref": "#s-readout-limits", "refLabel": "readout이 고칠 수 없는 것"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d08-q21", "type": "mc", "q": "250 Hz로 샘플링한 시계열에서 '10단계 전'은 실제로 몇 ms 전인가?", "options": ["10 ms", "25 ms", "40 ms", "2,500 ms"], "a": 2, "why": "샘플링 주기 4 ms × 10 = 40 ms. 같은 '10단계'도 10 Hz라면 1초다. 단계 수만 보고 실제 시간을 말할 수 없는 이유이고, Day 15–16·Day 23–24의 시간척도 비교에서 다시 쓴다.", "ref": "#s-sampling-numbers", "refLabel": "시간 단계 → 실제 시각(t × 샘플링 주기)"}, {"id": "d08-q22", "type": "mc", "q": "reservoir의 $W$와 $W_{in}$을 학습하지 않아도 되는 근거로 가장 정확한 것은? (기억·비선형 섞임·다양함이 상태에 있다는 조건에서)", "options": ["난수로 정한 가중치가 우연히 정답을 담고 있어서", "readout이 비선형이라 어떤 관계든 스스로 만들어 내서", "고정 특징의 선형 결합으로 되는 과제가 많고 한 번에 풀려서", "소자 reservoir가 소프트웨어보다 대개 더 정확해서"], "a": 2, "why": "조건부 답이 핵심이다. 조건이 깨지면(기억 부족, XOR처럼 갈리지 않는 상태, 복사본 노드) readout으로 고칠 수 없다. 둘째 보기의 readout은 선형이고, 넷째는 반대다: 같은 구성이면 대개 소프트웨어 RC가 더 정확하다(Liang 2024, p.201).", "ref": "#s-fixed-conditions", "refLabel": "고정해도 되는 조건 세 가지"}, {"id": "d08-q23", "type": "short", "q": "데이터 $x = 2, 2$, $y = 2, 4$. 최소제곱 $w$와 $\\lambda = 4$인 ridge $w$를 '최소제곱,ridge' 꼴로 (예: 1.2,0.8)", "a": ["1.5,1", "1.5, 1", "1.5,1.0", "1.5, 1.0"], "why": "$\\sum xy = 4 + 8 = 12$, $\\sum x^2 = 8$. 최소제곱 $12/8 = 1.5$, ridge $12/(8+4) = 1.0$. 같은 $x$에서 정답이 2와 4로 갈리면 최소제곱은 그 평균(3)을 내는 직선($w = 1.5$)을 고른다.", "ref": "#s-ridge-small", "refLabel": "최소제곱과 ridge 공식(4-1, 4-3)"}, {"id": "d08-q24", "type": "mc", "q": "'readout이 계산을 다 하는 것 아닌가'를 가려내는 실험으로 가장 알맞은 것은?", "options": ["reservoir 상태로 학습 데이터에서 정확도를 잰다", "노드 수를 늘려 정확도가 더 오르는지 본다", "readout을 여러 층으로 바꿔 정확도를 올린다", "reservoir를 뺀 readout과 새 데이터로 비교한다"], "a": 3, "why": "같은 readout·같은 특징 수의 기준선과 held-out에서 비교해야 reservoir의 몫이 보인다(Day 10 사다리 5단, Day 21–22). 학습 데이터 정확도는 외우기로도 오르고, 여러 층 readout은 오히려 readout의 몫을 키운다.", "ref": "#ch-objection", "refLabel": "오늘의 반론: delay tap 기준선"}, {"id": "d08-q26", "type": "ox", "q": "물리 reservoir의 정확도가 같은 구성의 소프트웨어 ESN보다 조금 낮다면, 그것만으로 그 물리 reservoir는 쓸모가 없다고 결론 낼 수 있다.", "a": false, "why": "정확도만으로는 판단할 수 없다. 과제에 필요한 정확도를 넘는지, 그리고 그 정확도에서 회로·전력·지연 같은 시스템 비용이 디지털 구현보다 낮은지를 함께 비교해야 한다(Day 10 사다리 6단, Day 31–32). 반대로 정확도가 같아도 자원을 더 쓰면 이점이 없다. Liang 2024는 비슷한 구성이면 하드웨어 잡음 때문에 소프트웨어 RC가 대개 더 정확하다고 보고(p.201), 디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다고 쓴다(p.202).", "ref": "#s-physical-rc", "refLabel": "물리 reservoir에서는: 읽을 수 있음과 자원 조건"}, {"id": "d08-q30", "type": "mc", "q": "readout의 λ를 검증 데이터로 고르고, 학습·검증에 쓰지 않은 시험 데이터로 성능을 한 번 쟀다. 이 단계가 지우는 '다른 설명'은?", "options": ["readout이 학습 표본을 외워서 맞혔을 수 있다", "reservoir 없이 readout만으로도 같은 점수가 났을 수 있다", "같은 입력에도 상태가 매번 달라 운으로 맞았을 수 있다", "디지털 회로로 하는 편이 더 쌌을 수 있다"], "a": 0, "why": "held-out(Day 10 사다리 4단)은 '외웠을 수 있다'를 지운다. 둘째는 기준선(5단), 셋째는 읽을 수 있는 상태의 반복 가능성(2단), 넷째는 시스템 비용(6단)이 지우는 설명이다.", "ref": "#s-ladder-map", "refLabel": "오늘 한 일 ↔ Day 10 사다리(4-5 표)"}]}}}</script>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>
 <div class="done-box" data-day="d08b">
   <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>분류 readout(softmax·교차 엔트로피), ridge 한 번 대 경사 하강·Adam, 고정된 다양한 특징의 선형 결합, readout이 만들 수 없는 정보</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
   <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
@@ -1090,7 +1121,7 @@ momentum / Adam
   <div class="done-static static-only"></div>
 </div>
 <div class="next-unit">
-<p><strong>다음 학습</strong> — <a href="../days/d09.html">Day 15 · fading memory와 echo state property →</a></p>
+<p><strong>다음 학습</strong> — <a href="../days/d09a.html">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP) →</a></p>
 </div>
 </section>
 <section id="writing" class="level2">
@@ -1524,13 +1555,13 @@ momentum / Adam
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../days/d08a.html" class="pagination-link" aria-label="Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span>
+      <a href="../days/d08a.html" class="pagination-link" aria-label="Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../days/d09.html" class="pagination-link" aria-label="Day 15 · fading memory와 echo state property">
-        <span class="nav-page-text">Day 15 · fading memory와 echo state property</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../days/d09a.html" class="pagination-link" aria-label="Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)">
+        <span class="nav-page-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1538,14 +1569,14 @@ momentum / Adam
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
     <div class="nav-footer-center">
-<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
-</div>
-    <div class="nav-footer-right">
       &nbsp;
     </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
   </div>
 </footer>
 

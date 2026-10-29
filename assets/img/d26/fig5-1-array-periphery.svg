@@ -2,6 +2,7 @@
 <rect x='0' y='0' width='780' height='418' fill='#fff'/>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arrR' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker></defs>
 <text x='390' y='22' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >배열 둘레에 붙는 회로: 4×4 crossbar를 위에서 본 배치, 그리고 N이 커지면 (모식도)</text>
+<text x='20' y='56' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >(a)</text>
 <text x='100' y='56' font-size='10.4' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >행 드라이버(DAC)</text>
 <text x='100' y='70' font-size='10.2' fill='#999' text-anchor='middle' font-weight='normal' >행마다 1개 → N개</text>
 <rect x='76' y='85' width='48' height='22' rx='4' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
@@ -69,7 +70,7 @@
 <text x='40' y='220' font-size='10.2' fill='#999' text-anchor='end' font-weight='normal' >제어</text>
 <text x='20' y='386' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >행에 전압을 걸고 열에서 전류를 잰다(그림 5와 같은 방향). 1T1R이면 게이트 선 구동 회로도 행마다 하나씩(N개) 더 붙는다.</text>
 <text x='20' y='403' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >둘레(가장자리)의 회로는 N에, 칸은 N²에 비례한다. ADC·MCU는 하나지만 차례로 쓰므로 한 번 다 읽는 변환 횟수와 시간이 N에 비례한다.</text>
-<text x='470' y='56' font-size='11.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >N × N 배열에서 필요한 수</text>
+<text x='470' y='56' font-size='11.5' fill='#3d6fb4' text-anchor='start' font-weight='bold' >(b) N × N 배열에서 필요한 수</text>
 <text x='640' y='80' font-size='10.2' fill='#999' text-anchor='middle' font-weight='bold' >N = 4</text>
 <text x='700' y='80' font-size='10.2' fill='#999' text-anchor='middle' font-weight='bold' >N = 100</text>
 <text x='752' y='80' font-size='10.2' fill='#999' text-anchor='middle' font-weight='bold' >N = 1,000</text>
@@ -112,7 +113,7 @@
 <text x='752' y='282' font-size='10.2' fill='#444' text-anchor='middle' font-weight='normal' >≈ 1 V</text>
 <line x1='470' y1='292' x2='768' y2='292' stroke='#d9d9d9' stroke-width='1'/>
 <text x='470' y='308' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >칸 하나가 나눠 지는 둘레 회로: N ÷ N² = 1/N.</text>
-<text x='470' y='323' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >* D4의 모형: 한 줄에 N칸, 칸마다 1 µA, 칸 사이</text>
+<text x='470' y='323' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >* Day 7–8의 모형: 한 줄에 N칸, 칸마다 1 µA, 칸 사이</text>
 <text x='470' y='336' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >배선 2 Ω. 0.1 V로 읽는다면 N = 1,000은 그대로</text>
-<text x='470' y='349' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >성립할 수 없다. 변환 에너지는 D17의 가정값.</text>
+<text x='470' y='349' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >성립할 수 없다. 변환 에너지는 Day 31–32의 가정값.</text>
 </svg>

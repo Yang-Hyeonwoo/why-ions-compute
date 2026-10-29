@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 46. readout·전원·안전, 그리고 이길 수 있는 문제 – Why Ions Compute</title>
+<title>Day 52. readout·전원·안전, 그리고 이길 수 있는 문제 – Why Ions Compute?</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,7 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../days/d28.html" rel="next">
+<link href="../days/d28a.html" rel="next">
 <link href="../days/d27a.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -47,18 +47,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
-  "collapse-after": 3,
+  "collapse-after": 2,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    "/"
   ],
   "language": {
     "search-no-results-text": "일치 없음",
@@ -129,7 +127,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Why Ions Compute</span>
+    <span class="navbar-title">Why Ions Compute?</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="검색"></div>
@@ -140,46 +138,27 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
-<span class="menu-text">커버</span></a>
+<span class="menu-text">홈</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../plan.html"> 
-<span class="menu-text">전체 학습 지도</span></a>
+<span class="menu-text">로드맵</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">장부</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
-        <li>
-    <a class="dropdown-item" href="../ledger/bottleneck.html">
- <span class="dropdown-text">병목 장부</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/unknowns.html">
- <span class="dropdown-text">아직 모르는 것</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/glossary.html">
- <span class="dropdown-text">용어집</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/kill-criteria.html">
- <span class="dropdown-text">접는 기준</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/references.html">
- <span class="dropdown-text">참고문헌</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/questions.html">
- <span class="dropdown-text">질문 모음</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" href="../rules.html"> 
-<span class="menu-text">공부 규칙</span></a>
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -192,7 +171,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d25a.html">Phase 5 · 무엇을 연구할까</a></li><li class="breadcrumb-item"><a href="../days/d27b.html">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d25a.html">Phase 5 · 무엇을 연구할까</a></li><li class="breadcrumb-item"><a href="../days/d27b.html">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -213,7 +192,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">전체 학습 지도</span></a>
+ <span class="menu-text">로드맵</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -270,7 +249,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -311,7 +290,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -322,44 +301,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
   </div>
 </li>
       </ul>
@@ -376,67 +361,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
   </div>
 </li>
       </ul>
@@ -453,49 +444,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
   </div>
 </li>
       </ul>
@@ -512,69 +527,93 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27b.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">장부</span></a>
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -582,46 +621,28 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">병목 장부</span></a>
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">아직 모르는 것</span></a>
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">용어집</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">접는 기준</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">참고문헌</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">질문 모음</span></a>
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rules.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">공부 규칙</span></a>
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
   </div>
 </li>
     </ul>
@@ -644,9 +665,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d25a.html">Phase 5 · 무엇을 연구할까</a></li><li class="breadcrumb-item"><a href="../days/d27b.html">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d25a.html">Phase 5 · 무엇을 연구할까</a></li><li class="breadcrumb-item"><a href="../days/d27b.html">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Day 46. readout·전원·안전, 그리고 이길 수 있는 문제</h1>
+<h1 class="title">Day 52. readout·전원·안전, 그리고 이길 수 있는 문제</h1>
 <p class="subtitle lead">Phase 5 · 나는 무엇을 연구해야 하는가</p>
 </div>
 
@@ -666,8 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> — 몸 안 장치의 readout·전원·안전 조건은 무엇이고, 고분자 이온 소재가 이길 수 있는 문제는 어디인가?</p>
-<p><strong>배울 핵심</strong> — 선형 readout의 세 이유와 몸 밖 학습·재보정, 이 구성에서 소프트웨어가 맡는 곳, 1년 에너지 예산에서 무엇이 배터리를 먹나, 이온 소재가 경쟁할 조건</p>
-<p><strong>이후 쓰이는 곳</strong> — Day 47 가설과 기각 조건, Day 48 '같은 전극 + 증폭 + ADC + MCU' 기준선 대비 최소 검증 실험, Day 49–50 국소 학습 규칙과 차세대 후보</p>
+<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> — 내 reservoir 뒤의 readout을 선형으로 둘지, 어디서 학습할지, 이온 소자가 시스템 에너지를 정말 줄이는지는 연구 설계의 결정이고 실험 선택(어떤 기준선과 비교할지)을 바꿉니다. 오늘은 1년 에너지 예산과 '같은 전극 + 증폭 + ADC + MCU' 기준선 개념으로 내 소재가 이길 수 있는 문제와 먼저 재야 할 숫자를 정합니다.</p>
+<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> — 입력 = reservoir 상태 120개(x) → 곱해서 더하기 y = Σwᵢxᵢ + b(w는 몸 밖에서 ridge로 한 번 학습) → 문턱과 비교 → 출력 = 정상 / 이상. 에너지 예산은 입력 = 가정값(ADC 1 nJ/변환, 무선 50 nJ/bit, 펄스당 ½CV²) → 줄별 에너지 계산 → 출력 = 1년 µW·J와 가장 큰 줄.</p>
+<p><strong>오늘 반드시</strong> — readout을 선형으로 두는 것은 이 교재의 기본 선택이고 이유는 세 가지다. 몸 안 판정의 가장 큰 에너지 이득은 원시 신호를 안 보내는 것이고, 이온 reservoir는 구동 에너지가 ADC보다 작을 때만 이득이다. 어떤 후보도 기준선보다 낫다는 측정은 아직 없다.</p>
+<p><strong>나중에 더 봐도 되는 것</strong> — Wright 2022 같은 폴더 밖 논문, 안전 표준의 숫자, 출력 시연 논문들의 세부, 생분해 논문 그림, 영상. 후보 표의 네 줄 중 내 소재와 관계없는 줄은 훑기만 해도 됩니다.</p>
+<p><strong>다음으로 넘어가는 기준</strong> — '오늘 반드시'를 내 말로 한두 문장 말할 수 있으면 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 53–54 가설과 기각 조건, Day 55–56 '같은 전극 + 증폭 + ADC + MCU' 기준선 대비 최소 검증 실험, Day 57–58 국소 학습 규칙과 차세대 후보</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d27b">
@@ -678,7 +703,7 @@ window.Quarto = {
 <section id="review" class="level2">
 <h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
 <div class="flow-line">
-<p>지난 학습 단위(Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+<p>지난 학습 단위(Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
 </div>
 <div class="quiz" data-day="d27" data-set="review-b"></div>
 </section>
@@ -688,19 +713,22 @@ window.Quarto = {
 <section id="ch-implant-readout" class="level3">
 <h3 class="anchored" data-anchor-id="ch-implant-readout">4. 몸 안 심전도 장치 (2): 상태 읽기, 선형 readout, 학습, 소프트웨어</h3>
 <div class="goal">
-<p>이 구간을 읽고 나면 readout이 왜 선형(곱해서 더하기)이어야 하는지 세 가지 이유로 말하고, 가중치를 어디서 학습해 어떻게 장치에 넣는지, 이 교재가 고른 구성(몸 밖 오프라인 학습 + MCU 제어)에서 소프트웨어가 맡는 곳이 어디인지, 그리고 완전 아날로그가 어디까지 가능한지 구분해 설명할 수 있다.</p>
+<p>이 구간을 읽고 나면 이 교재가 readout을 선형(곱해서 더하기)으로 두는 세 가지 이유와 그 선택의 범위를 말하고, 가중치를 어디서 학습해 어떻게 장치에 넣는지, 이 교재가 고른 구성(몸 밖 오프라인 학습 + MCU 제어)에서 소프트웨어가 맡는 곳이 어디인지, 그리고 완전 아날로그가 어디까지 가능한지 구분해 설명할 수 있다.</p>
 </div>
 <section id="s-why-linear" class="level4">
 <h4 class="anchored" data-anchor-id="s-why-linear">4-1. 왜 선형 readout인가</h4>
+<p><strong>상황.</strong> reservoir에서 읽은 상태 120개로 정상/이상 박동을 가르려 합니다. readout을 선형으로 둘지, 신경망으로 둘지는 소자의 기여를 어떻게 확인하느냐를 바꾸는 연구 설계 결정입니다.</p>
 <p>reservoir computing의 출발점을 다시 떠올립니다. RNN(과거 상태를 다음 단계로 넘기는 신경망)은 시간을 거슬러 기울기를 곱해 내려가야 해서 학습이 어려웠고, RC는 <strong>안쪽(reservoir)은 고정하고 마지막 층만 학습</strong>해 그 어려움을 피했습니다(<a href="../days/d07b.html#ch-esn-lsm">Day 12 3구간</a>).</p>
 <p><span id="s-linear-example"></span><strong>먼저 작은 숫자로: readout이 하는 일.</strong> <a href="../days/d27a.html#s-chain-steps">3구간 단계 ⑥</a>의 readout을 상태 두 개로 줄여 봅니다. 정상 박동 끝의 상태가 <span class="math inline">\(x = (0.8, 0.2)\)</span>, 이상 박동 끝의 상태가 <span class="math inline">\(x = (0.3, 0.7)\)</span>입니다. 가중치 <span class="math inline">\(w = (-1, 1)\)</span>, <span class="math inline">\(b = 0\)</span>이면 정상은 <span class="math inline">\(y = -0.8 + 0.2 = -0.6\)</span>, 이상은 <span class="math inline">\(y = -0.3 + 0.7 = 0.4\)</span>. 문턱을 0에 두고 "0보다 크면 이상"(단계 ⑦)이라고 정하면 둘이 갈립니다. readout이 한 일은 곱셈 둘, 덧셈 하나, 비교 하나입니다. 상태가 120개여도 하는 일의 종류는 같습니다.</p>
-<p>몸 안 장치에서 readout을 이렇게 선형(곱해서 더하기)으로 두는 것은 세 가지 이유로 특히 중요합니다.</p>
+<p><span class="key">몸 안 장치에서 readout을 이렇게 선형(곱해서 더하기)으로 두는 것은 <strong>이 교재의 기본 선택</strong>입니다. 비선형 readout도 쓸 수 있고 실제 논문도 있습니다(아래).</span> 기본으로 고른 이유는 세 가지입니다. 저비용으로 학습하고, 성능 가운데 소자의 기여를 가려내기 쉽기 때문입니다.</p>
 <ol type="1">
-<li><strong>비선형 일은 reservoir가 이미 했다.</strong> reservoir는 입력 이력을 여러 상태로 비선형하게 펼칩니다(<a href="../days/d08a.html#b-reservoir-state">Day 13 기초</a>). 펼친 뒤에는 정상 박동과 이상 박동의 상태들이 <strong>직선(면) 하나로 갈라질 수 있는</strong> 경우가 많고, 그러면 readout은 그 직선만 그으면 됩니다(<a href="../days/d10a.html#b-separability">Day 16 기초: 선형 분리</a>). 이것이 RC의 약속이고, 그 약속이 이 소자에서 지켜지는지는 원시 입력 기준선(소자를 빼고 원래 입력을 같은 readout에 넣은 비교)으로 확인해야 합니다(<a href="../days/d25a.html#s-baseline-column">Day 41 1구간: baseline 칸</a>).</li>
-<li><strong>학습이 연립방정식 한 번이다.</strong> 선형 readout의 가중치는 ridge 회귀(정답과의 오차 제곱 합에 가중치 크기의 벌점을 더한 값을 가장 작게 하는 <span class="math inline">\(w\)</span>를 연립방정식 한 번으로 구하는 방법)로 풉니다(<a href="../days/d08a.html#b-ridge">Day 13 기초: ridge</a>). 이온 소자의 안쪽은 수식으로 미분할 수 없으므로, 소자를 통과해 기울기를 구하는 학습(역전파)은 쓸 수 없습니다. 선형 readout은 <strong>소자 안을 몰라도 소자 밖에서</strong> 학습할 수 있게 해 줍니다. 그리고 정답이 붙은 박동이 몇백 개뿐이어도 과적합(학습 데이터에만 맞고 새 데이터에 틀리는 것)이 덜합니다. 정해야 할 숫자가 상태 수(여기서는 120개와 <span class="math inline">\(b\)</span> 하나)뿐이기 때문입니다.</li>
-<li><strong>계산이 작고, 물리로도 할 수 있다.</strong> 위 예의 곱셈 둘·덧셈 하나를 상태 120개로 늘리면 판정 한 번에 곱셈 120번과 덧셈 120번(<span class="math inline">\(b\)</span> 포함, MAC 120번, <a href="../days/d02a.html#ch-mvm">Day 3 3구간</a>)입니다. 작은 MCU에게 가벼운 일이고, 곱해서 더하기는 crossbar가 Ohm 법칙과 전류의 합으로 <strong>물리적으로</strong> 하는 계산과 정확히 같습니다(Day 43–44). 비선형 readout(예: 은닉층이 있는 신경망)은 둘 다 어렵게 만듭니다.</li>
+<li><p><strong>비선형 일은 reservoir가 이미 했다.</strong> reservoir는 입력 이력을 여러 상태로 비선형하게 펼칩니다(<a href="../days/d08a.html#b-reservoir-state">Day 13 기초</a>). 펼친 뒤에는 정상 박동과 이상 박동의 상태들이 <strong>직선(면) 하나로 갈라질 수 있는</strong> 경우가 많고, 그러면 readout은 그 직선만 그으면 됩니다(<a href="../days/d10a.html#b-separability">Day 17 기초: 선형 분리</a>). 이것이 RC의 약속이고, 그 약속이 이 소자에서 지켜지는지는 원시 입력 기준선(소자를 빼고 원래 입력을 같은 readout에 넣은 비교)으로 확인해야 합니다(<a href="../days/d25a.html#s-baseline-column">Day 47 1구간: baseline 칸</a>).</p></li>
+<li><p><strong>학습이 연립방정식 한 번이다.</strong> 선형 readout의 가중치는 ridge 회귀(정답과의 오차 제곱 합에 가중치 크기의 벌점을 더한 값을 가장 작게 하는 <span class="math inline">\(w\)</span>를 연립방정식 한 번으로 구하는 방법)로 풉니다(<a href="../days/d08a.html#b-ridge">Day 13 기초: ridge</a>). 이온 소자의 안쪽은 정확한 미분 가능한 식을 대개 모르므로, 소자를 통과해 기울기를 구하는 학습(역전파)은 바로 쓰기 어렵습니다. 소자 모형을 따로 만들어 그 모형으로 기울기를 근사하거나(물리 인식 학습, physics-aware training) 소자 안에서 국소 규칙으로 학습하는 연구도 있지만 (예: Wright 등 2022, <em>Nature</em> 601, 549, <a href="https://doi.org/10.1038/s41586-021-04223-6">doi:10.1038/s41586-021-04223-6</a>) <span class="prov">폴더 밖 논문. 서지만 Claude의 기억, 본문 대조 안 함</span>, 비용과 난도가 큽니다. 소자 밖의 readout만 학습하면 <strong>소자 안을 몰라도</strong> 학습할 수 있고(이 점은 비선형 readout도 같습니다), 선형이면 그 학습이 연립방정식 한 번으로 끝납니다.</p>
+<p>구별할 것: (ㄱ) reservoir는 고정하고 소자 <strong>밖</strong>의 readout만 학습(선형이든 비선형이든), (ㄴ) 소자 <strong>안</strong>의 상태나 연결을 직접 학습. RC는 (ㄱ)이고, 이 교재의 기본은 (ㄱ) 가운데 선형 readout입니다.</p>
+<p>그리고 정답이 붙은 박동이 몇백 개뿐이어도 과적합(학습 데이터에만 맞고 새 데이터에 틀리는 것)이 덜합니다. 정해야 할 숫자가 상태 수(여기서는 120개와 <span class="math inline">\(b\)</span> 하나)뿐이기 때문입니다.</p></li>
+<li><p><strong>계산이 작고, 물리로도 할 수 있다.</strong> 위 예의 곱셈 둘·덧셈 하나를 상태 120개로 늘리면 판정 한 번에 곱셈 120번과 덧셈 120번(<span class="math inline">\(b\)</span> 포함, MAC 120번, <a href="../days/d02a.html#ch-mvm">Day 3 3구간</a>)입니다. 작은 MCU에게 가벼운 일이고, 곱해서 더하기는 crossbar가 Ohm 법칙과 전류의 합으로 <strong>물리적으로</strong> 하는 계산과 정확히 같습니다(Day 49–50). 비선형 readout(예: 은닉층이 있는 신경망)은 둘 다 어렵게 만듭니다.</p></li>
 </ol>
-<p><strong>선형이 아닌 readout을 쓰면.</strong> Lee 2026 (AFM)은 은닉층(입력과 출력 사이에서 비선형 함수를 거치는 중간 계산 층, <a href="../days/d04a.html#b-nn-layer">Day 7 기초 2</a>) 셋의 다층 신경망을 readout으로 썼습니다 <span class="src">Lee 2026 (AFM), p.4</span>. 그러면 (1) 정확도의 얼마가 소자에서 왔는지 가르기 어렵고(<a href="../days/d25b.html#s-lee-afm">Day 42: Lee 2026 (AFM)</a>), (2) 학습이 경사 하강을 수십 epoch(가진 학습 데이터를 모두 한 번씩 쓰는 한 바퀴, <a href="../days/d07a.html#s-epoch">Day 11</a>) 반복하는 일이 되어 몸 밖 컴퓨터의 부담이 커지며, (3) crossbar 한 장으로 물리 계산을 할 수 없습니다. <span class="tag tag-interp">해석</span> 몸 안 장치에서 readout을 선형으로 두는 것은 RC의 원래 설계를 지키는 일이기도 합니다.</p>
+<p><strong>선형이 아닌 readout을 쓰면.</strong> Lee 2026 (AFM)은 은닉층(입력과 출력 사이에서 비선형 함수를 거치는 중간 계산 층, <a href="../days/d04a.html#b-nn-layer">Day 7 기초 2</a>) 셋의 다층 신경망을 readout으로 썼습니다 <span class="src">Lee 2026 (AFM), p.4</span>. 그러면 (1) 정확도의 얼마가 소자에서 왔는지 가르기 어렵고(<a href="../days/d25b.html#s-lee-afm">Day 48: Lee 2026 (AFM)</a>), (2) 학습이 경사 하강(gradient descent)을 수십 epoch(가진 학습 데이터를 모두 한 번씩 쓰는 한 바퀴, <a href="../days/d07a.html#s-epoch">Day 11</a>) 반복하는 일이 되어 몸 밖 컴퓨터의 부담이 커지며, (3) crossbar 한 장으로 물리 계산을 할 수 없습니다. 비선형 readout이 틀린 것은 아닙니다. 소자 바깥의 신경망이 일을 더 많이 하게 되므로, 그때는 같은 비선형 readout에 원시 입력을 넣은 기준선과 비교해야 소자의 몫을 말할 수 있습니다. <span class="tag tag-interp">해석</span> 몸 안 장치에서 readout을 선형으로 두는 것은 RC의 원래 설계를 지키면서 소자의 기여를 가장 쉽게 확인하는 길입니다.</p>
 <div class="stop-point">
 <p>여기까지: 상태 두 개짜리 예(정상 −0.6, 이상 0.4, 문턱 0)로 선형 readout이 하는 일을 계산하고, 선형으로 두는 세 이유(비선형은 reservoir가 이미 했다 / 학습은 ridge 한 번 / 계산이 작고 crossbar로도 된다)를 말할 수 있다. 다음: 가중치는 어디서 학습하고, 이 구성에서 소프트웨어는 어디를 맡나.</p>
 </div>
@@ -708,11 +736,11 @@ window.Quarto = {
 <section id="s-train-where" class="level4">
 <h4 class="anchored" data-anchor-id="s-train-where">4-2. 가중치는 어디서 학습하나, 그리고 소프트웨어는 어디에 필요한가</h4>
 <p><strong>무엇을 볼지.</strong> 그림 6은 세 띠입니다. 위(보라)는 이식 전에 몸 밖에서 한 번, 가운데(초록)는 몸 안에서 박동마다, 아래(주황)는 가끔 무선으로 하는 일입니다. <strong>정답(라벨)이 필요한 일이 어느 띠에 있는지</strong>, 그리고 보라 '소프트웨어' 배지가 어느 띠에 몰려 있는지를 보세요.</p>
-<figure class="fig figure"><img src="../assets/img/d27/fig3-train-vs-infer.svg" alt="세 단계 띠. 1단계 이식 전(몸 밖, 한 번): 라벨 붙은 심전도 → 같은 reservoir에 통과(칩 또는 모형) → 상태 기록(ADC로 숫자) → 가중치 계산(ridge, 소프트웨어) → 가중치 쓰기(메모리 또는 전도도, 소프트웨어). 2단계 몸 안(매 박동, 수년): 전극 신호 → 증폭·필터·부호화 → 이온 reservoir → 선형 readout(w 고정) → 판단. 3단계 점검(가끔, 무선): 기록·상태 올리기 → 성능 확인(소프트웨어) → 다시 계산 → 내려받기·다시 쓰기 → 계속 판정" class="figure-img"><figcaption><b>그림 6.</b> 학습과 추론은 다른 곳에서, 다른 횟수로 일어난다(모식도). 보라 '소프트웨어' 배지는 이 구성(몸 밖에서 ridge로 학습해 장치에 쓰는 구성)에서 프로그램이 맡는 단계다. 몸 안(2단계)에서는 학습을 하지 않고 같은 가중치를 반복해 쓴다. 3단계의 재보정 주기는 Day 32의 "허용 drift ÷ drift 속도"이며, 몸 안 이온 소자의 drift 속도는 이 폴더의 문헌에서 측정을 찾지 못했다 [미확인]. (Claude가 그림)</figcaption></figure>
-<p><strong>1단계 — 이식 전, 몸 밖에서 한 번.</strong> 학습에는 <strong>정답(라벨)이 붙은 박동</strong>이 필요합니다. 공개 데이터베이스(Zhong 2022가 쓴 MIT-BIH처럼)나, 의사가 판독한 환자의 기록입니다 [미확인: 실제 임상 절차]. 이 박동들을 <strong>그 장치에 들어갈 바로 그 reservoir</strong>에 통과시켜 상태를 기록합니다. 다른 칩의 상태로 학습한 가중치는 소자 간 편차 때문에 그대로 옮겨지지 않기 때문입니다(<a href="../days/d18.html#ch-variation-two-faces">Day 32 3-2절</a>). 기록한 상태와 정답으로 컴퓨터가 ridge 회귀를 풀어 <span class="math inline">\(w\)</span>를 구합니다. 그다음 <span class="math inline">\(w\)</span>를 장치에 넣습니다. 구성 (가)면 메모리에 숫자로 적고, 구성 (나)면 쓰고-읽고-고치기를 반복해 전도도로 씁니다. Zhong 2022에서는 이 쓰기 순환이 PC의 파이썬 프로그램으로 돌았습니다 <span class="src">Zhong 2022, p.680</span>.</p>
+<figure class="fig figure"><img src="../assets/img/d27/fig3-train-vs-infer.svg" alt="세 단계 띠. 1단계 이식 전(몸 밖, 한 번): 라벨 붙은 심전도 → 같은 reservoir에 통과(칩 또는 모형) → 상태 기록(ADC로 숫자) → 가중치 계산(ridge, 소프트웨어) → 가중치 쓰기(메모리 또는 전도도, 소프트웨어). 2단계 몸 안(매 박동, 수년): 전극 신호 → 증폭·필터·부호화 → 이온 reservoir → 선형 readout(w 고정) → 판단. 3단계 점검(가끔, 무선): 기록·상태 올리기 → 성능 확인(소프트웨어) → 다시 계산 → 내려받기·다시 쓰기 → 계속 판정" class="figure-img"><figcaption><b>그림 6.</b> 학습과 추론은 다른 곳에서, 다른 횟수로 일어난다(모식도). 보라 '소프트웨어' 배지는 이 구성(몸 밖에서 ridge로 학습해 장치에 쓰는 구성)에서 프로그램이 맡는 단계다. 몸 안(2단계)에서는 학습을 하지 않고 같은 가중치를 반복해 쓴다. 3단계의 재보정 주기는 Day 33–34의 "허용 drift ÷ drift 속도"이며, 몸 안 이온 소자의 drift 속도는 이 폴더의 문헌에서 측정을 찾지 못했다 [미확인]. (Claude가 그림)</figcaption></figure>
+<p><strong>1단계 — 이식 전, 몸 밖에서 한 번.</strong> 학습에는 <strong>정답(라벨)이 붙은 박동</strong>이 필요합니다. 공개 데이터베이스(Zhong 2022가 쓴 MIT-BIH처럼)나, 의사가 판독한 환자의 기록입니다 [미확인: 실제 임상 절차]. 이 박동들을 <strong>그 장치에 들어갈 바로 그 reservoir</strong>에 통과시켜 상태를 기록합니다. 다른 칩의 상태로 학습한 가중치는 소자 간 편차 때문에 그대로 옮겨지지 않기 때문입니다(<a href="../days/d18a.html#ch-variation-two-faces">Day 33 3-2절</a>). 기록한 상태와 정답으로 컴퓨터가 ridge 회귀를 풀어 <span class="math inline">\(w\)</span>를 구합니다. 그다음 <span class="math inline">\(w\)</span>를 장치에 넣습니다. 구성 (가)면 메모리에 숫자로 적고, 구성 (나)면 쓰고-읽고-고치기를 반복해 전도도로 씁니다. Zhong 2022에서는 이 쓰기 순환이 PC의 파이썬 프로그램으로 돌았습니다 <span class="src">Zhong 2022, p.680</span>.</p>
 <p><strong>2단계 — 몸 안, 매 박동.</strong> 장치는 같은 <span class="math inline">\(w\)</span>로 곱해서 더하고 문턱과 비교할 뿐입니다. 기울기 계산도, 회귀도 하지 않습니다. 1초에 한 번씩 수년간 반복합니다.</p>
-<p><strong>3단계 — 가끔, 점검과 재보정.</strong> 소자가 시간에 따라 변하면(drift) 같은 박동에 다른 상태가 나오고, 처음의 <span class="math inline">\(w\)</span>로는 판정이 틀리기 시작합니다. 장치가 기록과 상태를 무선으로 올리면 몸 밖 컴퓨터가 성능을 확인하고, 필요하면 새 <span class="math inline">\(w\)</span>를 계산해 내려보냅니다. 이때 다시 <strong>정답이 붙은 박동</strong>이 필요하다는 것이 몸 안 장치의 어려운 점입니다(누가, 얼마나 자주 라벨을 붙이나 <span class="tag tag-unverified">미확인</span>). 소자가 스스로 가중치를 고치는 칩 위 학습은 이 폴더의 이온 RC 문헌에서 시연을 찾지 못했습니다. 폴더에서 소자 위 학습을 하드웨어로 보인 것은 비이온 소자로 만든 Kim 2026의 비지도 학습 회로가 유일합니다 <span class="src">Kim 2026, p.543</span>.</p>
-<p><span id="s-software-table"></span><strong>이 구성에서 소프트웨어가 맡는 곳.</strong> 사용자가 "어디까지 하드웨어로 되고, 어디서 프로그램이 필요한가"를 물을 때의 답입니다. 아래 표는 그림 2(Day 45)·6의 구성, 곧 가중치를 몸 밖 컴퓨터에서 ridge 회귀로 한 번 학습해 장치에 쓰고, 장치 안에서는 MCU가 순서를 정하는 구성을 기준으로 합니다. 표의 "필수"는 <strong>이 구성에서의 필수</strong>이지, 물리적으로 가능한 모든 학습·제어 방식의 필수조건이 아닙니다. 예를 들어 순서 제어나 통신 규약은 프로그램 대신 고정된 디지털 논리 회로(정해진 순서대로 상태를 바꾸는 회로)로 만들 수도 있고, 소자 안에서 국소 규칙으로 가중치를 고치는 하드웨어 학습 회로도 연구됩니다(폴더에서는 비이온 소자로 만든 Kim 2026의 비지도 학습 회로 <span class="src">Kim 2026, p.543</span>). 그런 방식은 이 폴더의 이온 RC 문헌에서 확인되지 않았고, 정답(라벨)이 필요한 학습이라면 라벨을 누가 어떻게 주는지는 어느 방식이든 남습니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>3단계 — 가끔, 점검과 재보정.</strong> 소자가 시간에 따라 변하면(drift) 같은 박동에 다른 상태가 나오고, 처음의 <span class="math inline">\(w\)</span>로는 판정이 틀리기 시작합니다. 장치가 기록과 상태를 무선으로 올리면 몸 밖 컴퓨터가 성능을 확인하고, 필요하면 새 <span class="math inline">\(w\)</span>를 계산해 내려보냅니다. 이때 다시 <strong>정답이 붙은 박동</strong>이 필요하다는 것이 몸 안 장치의 어려운 점입니다(누가, 얼마나 자주 라벨을 붙이나 <span class="tag tag-unverified">미확인</span>). 소자가 스스로 가중치를 고치는 on-chip training(= in-situ training)은 이 폴더의 이온 RC 문헌에서 시연을 찾지 못했습니다. 폴더에서 소자 위 학습을 하드웨어로 보인 것은 비이온 소자로 만든 Kim 2026의 비지도 학습 회로가 유일합니다 <span class="src">Kim 2026, p.543</span>.</p>
+<p><span id="s-software-table"></span><strong>이 구성에서 소프트웨어가 맡는 곳.</strong> 사용자가 "어디까지 하드웨어로 되고, 어디서 프로그램이 필요한가"를 물을 때의 답입니다. 아래 표는 그림 2(Day 51)·6의 구성, 곧 가중치를 몸 밖 컴퓨터에서 ridge 회귀로 한 번 학습해 장치에 쓰고, 장치 안에서는 MCU가 순서를 정하는 구성을 기준으로 합니다. 표의 "필수"는 <strong>이 구성에서의 필수</strong>이지, 물리적으로 가능한 모든 학습·제어 방식의 필수조건이 아닙니다. 예를 들어 순서 제어나 통신 규약은 프로그램 대신 고정된 디지털 논리 회로(정해진 순서대로 상태를 바꾸는 회로)로 만들 수도 있고, 소자 안에서 국소 규칙으로 가중치를 고치는 하드웨어 학습 회로도 연구됩니다(폴더에서는 비이온 소자로 만든 Kim 2026의 비지도 학습 회로 <span class="src">Kim 2026, p.543</span>). 그런 방식은 이 폴더의 이온 RC 문헌에서 확인되지 않았고, 정답(라벨)이 필요한 학습이라면 라벨을 누가 어떻게 주는지는 어느 방식이든 남습니다. <span class="tag tag-interp">해석</span></p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -740,7 +768,7 @@ window.Quarto = {
 <tr class="odd">
 <td>순서·시간 제어(언제 펄스, 언제 읽기)</td>
 <td>장치 MCU</td>
-<td><strong>필수</strong> (펌웨어: 칩에 넣어 둔 작은 프로그램. 고정 논리 회로로 대신하는 구성도 가능)</td>
+<td><strong>필수</strong> (펌웨어(firmware): 칩에 넣어 둔 작은 프로그램. 고정 논리 회로로 대신하는 구성도 가능)</td>
 </tr>
 <tr class="even">
 <td>기록 저장, 무선 통신</td>
@@ -769,7 +797,7 @@ window.Quarto = {
 </tr>
 <tr class="odd">
 <td>문턱 비교</td>
-<td>비교기 회로 또는 MCU</td>
+<td>비교기(comparator) 회로 또는 MCU</td>
 <td>회로로 하면 불필요</td>
 </tr>
 </tbody>
@@ -777,12 +805,12 @@ window.Quarto = {
 </section>
 <section id="s-full-analog" class="level4">
 <h4 class="anchored" data-anchor-id="s-full-analog">4-3. 완전 아날로그는 가능한가</h4>
-<p>Day 43–44에서 "완전 아날로그"가 가능한 조건을 봤습니다(<a href="../days/d26b.html#b-all-analog">Day 44 기초: reservoir만 vs readout까지</a>). 몸 안 장치에 적용하면 답은 둘로 나뉩니다.</p>
+<p>Day 49–50에서 "완전 아날로그"가 가능한 조건을 봤습니다(<a href="../days/d26b.html#b-all-analog">Day 50 기초: reservoir만 vs readout까지</a>). 몸 안 장치에 적용하면 답은 둘로 나뉩니다.</p>
 <ul>
-<li><strong>신호 경로는 원리상 가능하다.</strong> ② 증폭·필터 → ③ 아날로그 부호화 → ④ reservoir → ⑤ 적분기 → ⑥(나) crossbar → 비교기까지, 숫자로 바꾸지 않고 판정에 이를 수 있습니다. Zhong 2022가 몸 밖에서, 산화물 소자로, 저장된 심전도로 이 경로를 보였습니다 <span class="src">Zhong 2022, p.673–677</span>. 조건은 readout 가중치가 재보정 주기 동안 충분히 안정하다는 것이고(비휘발·저drift), 이온 소자는 대체로 휘발성이라 readout은 다른 소자가 맡아야 할 가능성이 큽니다(Day 43–44).</li>
+<li><strong>신호 경로는 원리상 가능하다.</strong> ② 증폭·필터 → ③ 아날로그 부호화 → ④ reservoir → ⑤ 적분기 → ⑥(나) crossbar → 비교기까지, 숫자로 바꾸지 않고 판정에 이를 수 있습니다. Zhong 2022가 몸 밖에서, 산화물 소자로, 저장된 심전도로 이 경로를 보였습니다 <span class="src">Zhong 2022, p.673–677</span>. 조건은 readout 가중치가 재보정 주기 동안 충분히 안정하다는 것이고(비휘발·저drift), 이온 소자는 대체로 휘발성(volatile)이라 readout은 다른 소자가 맡아야 할 가능성이 큽니다(Day 49–50).</li>
 <li><strong>장치 전체는 아니다.</strong> 순서 제어, 기록, 무선, 재보정은 디지털 부품이 필요하고, 이 구성에서는 그 일을 소프트웨어(펌웨어)가 맡습니다. 그리고 몸 밖에서 학습하는 이 구성에서는 학습 단계에 상태를 숫자로 기록해야 하므로 ADC가 필요합니다. Zhong 2022에서도 ADC는 학습 중 상태 샘플링과 가중치 쓰기에 쓰였습니다 <span class="src">Zhong 2022, p.679</span>.</li>
 </ul>
-<p>즉 "완전 아날로그"는 <strong>매 박동 반복되는 추론의 신호 경로에서 ADC와 디지털 곱셈을 없앤다</strong>는 뜻이고, 그 이득은 그 경로가 장치 에너지에서 차지하는 몫만큼입니다. 그 몫이 얼마인지가 5구간의 예산입니다.</p>
+<p>즉 <span class="key">"완전 아날로그"는 <strong>매 박동 반복되는 추론의 신호 경로에서 ADC와 디지털 곱셈을 없앤다</strong>는 뜻</span>이고, 그 이득은 그 경로가 장치 에너지에서 차지하는 몫만큼입니다. 그 몫이 얼마인지가 5구간의 예산입니다.</p>
 <div class="quiz" data-day="d27" data-set="4-check"></div>
 <div class="quiz" data-day="d27" data-set="4-end"></div>
 <div class="stop-point">
@@ -790,8 +818,8 @@ window.Quarto = {
 </div>
 <div class="keypoints">
 <ul>
-<li>선형 readout의 세 이유: reservoir가 비선형 일을 이미 했다 / 학습이 ridge 한 번이라 소자 안을 몰라도 되고 라벨이 적어도 된다 / 곱해서 더하기는 MCU에 가볍고 crossbar가 물리로 할 수 있다.</li>
-<li>학습은 몸 밖에서 한 번(그 장치의 reservoir로 상태를 기록해야 함), 몸 안에서는 같은 w로 판정만, 가끔 무선으로 재보정. 이온 RC의 칩 위 학습은 이 폴더의 문헌에서 시연을 찾지 못했다.</li>
+<li>이 교재가 readout을 선형으로 두는 세 이유(필수조건은 아님): reservoir가 비선형 일을 이미 했다 / 학습이 ridge 한 번이고 라벨이 적어도 된다(소자 안을 몰라도 되는 것은 소자 밖 readout만 학습하기 때문이며 비선형 readout도 같다) / 곱해서 더하기는 MCU에 가볍고 crossbar가 물리로 할 수 있다. 비선형 readout을 쓰면 같은 readout에 원시 입력을 넣은 기준선과 비교해야 소자의 몫을 말할 수 있다.</li>
+<li>학습은 몸 밖에서 한 번(그 장치의 reservoir로 상태를 기록해야 함), 몸 안에서는 같은 w로 판정만, 가끔 무선으로 재보정. 이온 RC의 on-chip training은 이 폴더의 문헌에서 시연을 찾지 못했다.</li>
 <li>몸 밖 오프라인 학습 + MCU 제어 구성에서 소프트웨어가 맡는 곳: 학습, 가중치 쓰기, 순서 제어, 기록·무선, 재보정 판단. 물리·회로로 가능한 곳: 증폭·필터, reservoir, crossbar readout, 문턱 비교. 학습·제어 방식이 다르면(고정 논리 회로, 하드웨어 학습 회로) 이 목록도 달라진다 <span class="tag tag-interp">해석</span>.</li>
 <li>완전 아날로그는 추론 신호 경로에서만 가능하다(Zhong 2022, 몸 밖) <span class="src">Zhong 2022, p.673–680</span>. 이 구성의 장치 전체는 디지털 부품이 필요하다.</li>
 </ul>
@@ -805,11 +833,11 @@ window.Quarto = {
 </div>
 <section id="s-output" class="level4">
 <h4 class="anchored" data-anchor-id="s-output">5-1. 출력: 판단을 무엇으로 바꾸나</h4>
-<p>판단 뒤의 출력은 셋입니다. <strong>기록</strong>(이상 박동 전후의 신호를 메모리에 저장), <strong>경보</strong>(무선으로 휴대폰·서버에 알림), <strong>자극</strong>(심장에 짧은 전류). 폴더에는 이온 소자가 몸 안에서 "출력"을 한 시연이 하나 있습니다. Yoo 2025의 이온 다이오드 약물 방출 장치는 쥐의 복강, 종양 옆에 이식되어, 배터리와 무선 스위치로 2시간마다 6분 동안 약을 내보냈습니다 <span class="src">Yoo 2025, p.5</span>. 이 장치는 감지나 판단 없이 <strong>정해진 시간표대로</strong> 동작했습니다. 즉 "판단 → 출력"의 고리가 닫힌 것은 아닙니다. 판단에 따라 출력을 바꾼 것은 Pei 2026입니다. 몸 안 소자의 상태로 몸 밖 컴퓨터가 음성 명령과 근육 pH 상태를 판별하고, 그 결과를 PCB가 좌골신경 자극 세기로 바꿔 다리 움직임 각도를 조절했습니다(마취한 쥐, 급성) <span class="src">Pei 2026, p.1205</span>. 출력은 이온이 아니라 전극 자극이었습니다. Dai 2024는 압력을 받으면 이온 전위를 내는 하이드로겔을 쥐의 좌골신경에 백금선으로 이어 근육을 움직였지만, 하이드로겔은 몸 밖에 있었고 마취한 쥐에서 한 급성 실험이었습니다 <span class="src">Dai 2024, p.6, 8</span>. 저자들은 생체 내 이식을 앞으로 시험할 일로 적습니다 <span class="src">Dai 2024, p.7</span>. Zhu 2025는 무선 전력·데이터 전송과의 통합이 "완전히 이식할 수 있는 닫힌 고리 장치"에 필수라고 씁니다 <span class="src">Zhu 2025, p.18</span>.</p>
+<p>4구간까지 판정 <span class="math inline">\(y\)</span>가 나오는 데까지 봤습니다. 이제 판정 뒤에 장치가 무엇을 하는지 봅니다. 판단 뒤의 출력은 셋입니다. <strong>기록</strong>(이상 박동 전후의 신호를 메모리에 저장), <strong>경보</strong>(무선으로 휴대폰·서버에 알림), <strong>자극</strong>(심장에 짧은 전류). 폴더에는 이온 소자가 몸 안에서 "출력"을 한 시연이 하나 있습니다. Yoo 2025의 이온 다이오드 약물 방출 장치는 쥐의 복강, 종양 옆에 이식되어, 배터리와 무선 스위치로 2시간마다 6분 동안 약을 내보냈습니다 <span class="src">Yoo 2025, p.5</span>. 이 장치는 감지나 판단 없이 <strong>정해진 시간표대로</strong> 동작했습니다. 즉 "판단 → 출력"의 고리가 닫힌 것은 아닙니다. 판단에 따라 출력을 바꾼 것은 Pei 2026입니다. 몸 안 소자의 상태로 몸 밖 컴퓨터가 음성 명령과 근육 pH 상태를 판별하고, 그 결과를 PCB가 좌골신경 자극 세기로 바꿔 다리 움직임 각도를 조절했습니다(마취한 쥐, 급성) <span class="src">Pei 2026, p.1205</span>. 출력은 이온이 아니라 전극 자극이었습니다. Dai 2024는 압력을 받으면 이온 전위를 내는 하이드로겔을 쥐의 좌골신경에 백금선으로 이어 근육을 움직였지만, 하이드로겔은 몸 밖에 있었고 마취한 쥐에서 한 급성 실험이었습니다 <span class="src">Dai 2024, p.6, 8</span>. 저자들은 생체 내 이식을 앞으로 시험할 일로 적습니다 <span class="src">Dai 2024, p.7</span>. Zhu 2025는 무선 전력·데이터 전송과의 통합이 "완전히 이식할 수 있는 닫힌 고리(closed-loop) 장치"에 필수라고 씁니다 <span class="src">Zhu 2025, p.18</span>.</p>
 </section>
 <section id="s-energy-budget" class="level4">
 <h4 class="anchored" data-anchor-id="s-energy-budget">5-2. 전원: 1년 에너지 예산, 무엇이 배터리를 먹나</h4>
-<p>몸 안 장치는 배터리를 바꾸기 어렵습니다. 그래서 1년 동안 무엇이 에너지를 쓰는지가 중요합니다. 실제 부품 값은 폴더에 없으므로, Day 30 3-2절 표의 가정값(ADC 1 nJ/변환, 무선 50 nJ/bit, <a href="../days/d17a.html#s-budget-items">Day 30 3-2: 가정 표</a>)과 Day 43–44의 계면 충전 계산으로 자릿수만 봅니다. <strong>모든 숫자는 [가정]이며 측정이 아닙니다.</strong></p>
+<p>몸 안 장치는 배터리를 바꾸기 어렵습니다. 그래서 1년 동안 무엇이 에너지를 쓰는지가 중요합니다. 실제 부품 값은 폴더에 없으므로, Day 31 3-2절 표의 가정값(ADC 1 nJ/변환, 무선 50 nJ/bit, <a href="../days/d17a.html#s-budget-items">Day 31 3-2: 가정 표</a>)과 Day 49–50의 계면 충전 계산으로 자릿수만 봅니다. <strong>모든 숫자는 [가정]이며 측정이 아닙니다.</strong></p>
 <div class="predict">
 <p>원시 심전도를 1년 내내 무선으로 보내는 것과, mm 크기 이온 소자 24개를 1초에 72번씩 ±1 V로 충전하는 것 중 어느 쪽이 1년에 에너지를 더 쓸까요? 동전형 전지 하나(약 2,500 J)와 견주면 어떨까요? 단계를 넘기기 전에 어림해 보세요.</p>
 </div>
@@ -827,7 +855,9 @@ window.Quarto = {
 <p><strong>경우 3 — 아날로그 readout(구성 나).</strong> 상태–readout 사이 ADC가 없으므로 경우 2의 272 J이 거의 사라지고, 끝의 비교기와 경보만 남습니다(비교기 에너지 <span class="tag tag-unverified">미확인</span>).</p>
 </div>
 <div class="step">
-<p><strong>잊기 쉬운 항목 — 이온 reservoir 자체.</strong> 1 mm² 전극의 이온 소자 24개를 ±1 V 펄스로 1초에 72번 충전한다면, 펄스 하나 약 50 nJ(Day 43–44의 ½CV² 가정: 1 mm² 전극 하나의 계면 용량 <span class="math inline">\(C\)</span> = 0.1 µF에 1 V이면 ½ × 10⁻⁷ × 1² = 5 × 10⁻⁸ J. 이 <span class="math inline">\(C\)</span>는 <a href="../days/d27a.html#s-equiv-circuit">3-2절</a> ⓒ와 같은 전극 하나의 값이고, <a href="../days/d27a.html#s-equiv-circuit">3-2절</a> 차단 주파수 계산의 0.05 µF는 감지 전극 두 개를 직렬로 이은 값입니다)이므로 50 nJ × 24 × 72 = 86,400 nJ/s = <strong>86.4 µW</strong>, 1년 약 <strong>2,725 J</strong>. 경우 1의 무선 전송보다 큽니다. 구동 전압을 0.1 V로 낮추면 100배 줄어 0.864 µW, 전극을 100 µm × 100 µm(1 mm²의 1/100)로 줄여도 100배 줍니다(그 대가는 <a href="../days/d27a.html#s-equiv-circuit">3-2절</a>: 같은 계면이 신호를 받는 전극이라면 차단 주파수가 올라갑니다). 이 줄은 두 가지를 적게 잡았습니다. (1) ½CV²는 커패시터에 <strong>저장되는</strong> 에너지이고, 전원이 펄스 한 번(충전 → 방전)에 실제로 내놓는 것은 그 두 배인 <span class="math inline">\(CV^2\)</span>입니다(<a href="../days/d26a.html#ch-power-stability">Day 43 3-1절</a>). (2) Zhong 2022처럼 마스크 5칸을 시간 단계마다 따로 펄스로 건다면, 소자 하나가 받는 펄스는 1초에 72번이 아니라 360번입니다. 둘을 다 넣으면 이 줄은 10배까지 커질 수 있습니다.</p>
+<p><strong>잊기 쉬운 항목 — 이온 reservoir 자체.</strong> 1 mm² 전극의 이온 소자 24개를 ±1 V 펄스로 1초에 72번 충전한다면, 펄스 하나 약 50 nJ입니다(Day 49–50의 ½CV² 가정: 1 mm² 전극 하나의 계면 용량 <span class="math inline">\(C\)</span> = 0.1 µF에 1 V이면 ½ × 10⁻⁷ × 1² = 5 × 10⁻⁸ J. 이 <span class="math inline">\(C\)</span>는 <a href="../days/d27a.html#s-equiv-circuit">3-2절</a> ⓒ와 같은 전극 하나의 값이고, 차단 주파수 계산의 0.05 µF는 감지 전극 두 개를 직렬로 이은 값입니다). 그러므로 50 nJ × 24 × 72 = 86,400 nJ/s = <strong>86.4 µW</strong>, 1년 약 <strong>2,725 J</strong>이고, 경우 1의 무선 전송보다 큽니다.</p>
+<p>구동 전압을 0.1 V로 낮추면 100배 줄어 0.864 µW, 전극을 100 µm × 100 µm(1 mm²의 1/100)로 줄여도 100배 줍니다(그 대가는 <a href="../days/d27a.html#s-equiv-circuit">3-2절</a>: 같은 계면이 신호를 받는 전극이라면 차단 주파수가 올라갑니다).</p>
+<p>이 줄은 두 가지를 적게 잡았습니다. (1) ½CV²는 커패시터에 <strong>저장되는</strong> 에너지이고, 전원이 펄스 한 번(충전 → 방전)에 실제로 내놓는 것은 그 두 배인 <span class="math inline">\(CV^2\)</span>입니다(<a href="../days/d26a.html#ch-power-stability">Day 49 3-1절</a>). (2) Zhong 2022처럼 마스크 5칸을 시간 단계마다 따로 펄스로 건다면, 소자 하나가 받는 펄스는 1초에 72번이 아니라 360번입니다. 둘을 다 넣으면 이 줄은 10배까지 커질 수 있습니다.</p>
 </div>
 <div class="step">
 <p><strong>배터리와 견주기.</strong> 동전형 리튬 전지 CR2032 하나는 3.0 V, 약 235 mAh입니다 <span class="tag tag-fact">확인</span> <span class="prov">출처: <a href="https://data.energizer.com/pdfs/cr2032.pdf">Energizer CR2032 데이터시트</a></span>. 에너지로 바꾸면 3.0 V × 0.235 A × 3,600 s ≈ <strong>2,540 J</strong>(V·A·s = J) <span class="prov">Claude 계산</span>. 위의 이온 소자 줄(1년 약 2,725 J, 적게 잡은 값)만으로 이 전지 하나를 1년 안에 다 씁니다. 실제 이식 기기의 전지는 종류·크기가 다르므로 <span class="tag tag-unverified">미확인</span>, 이 비교는 자릿수 감각용입니다.</p>
@@ -845,8 +875,8 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="s-safety">5-3. 생체적합성·봉지·발열·안전</h4>
 <p><strong>폴더에 있는 것.</strong> Lee 2026 (AFM)은 하이드로겔을 독성 없는 PDMS로 봉지하고 <span class="src">Lee 2026 (AFM), p.2</span>, 용출액으로 세포 생존(3일)과 증식을, 피하 이식 4일째 조직 염색으로 뚜렷한 염증 침윤이나 괴사가 없음을 보였습니다 <span class="src">Lee 2026 (AFM), p.6</span>. Yoo 2025는 쥐에서 0·7·14일 혈액으로 염증·체중 변화·말초 면역 독성이 없음을 보였고 <span class="src">Yoo 2025, p.3</span>, 생체 내 시험에서 전극을 실리콘(Kwik-Sil)으로 덮었습니다 <span class="src">Yoo 2025, p.8</span>. Chang 2025는 소자가 흙 속에서 16일 안에 완전히 분해되고 인산완충식염수(PBS, pH 약 7.4)에서 24시간 넘게 형태를 유지했다고 보고하지만, 세포·동물 시험은 없습니다 <span class="src">Chang 2025, p.2–3</span>.</p>
 <p><strong>폴더가 요구하는 것.</strong> Aluru 2026은 생체와의 통합을 일곱째 지식 공백으로 두고, 몸과 맞물리는 소재로 <strong>생물학적으로 호환되는 전압</strong> 안에서 동작해야 한다고 쓰며 <span class="src">Aluru 2026, p.599</span>, 장기 안정성·효과적인 열 관리·재현성·생체 환경과의 매끄러운 통합을 남은 과제로 꼽습니다 <span class="src">Aluru 2026, p.599</span>. 열은 별도의 지식 공백(넷째)입니다 <span class="src">Aluru 2026, p.595–596</span>. Zhu 2025는 탈수·이온 누출·섬유화를 막는 봉지와 표면 설계, 6개월 이상의 생체 내 연구를 요구합니다 <span class="src">Zhu 2025, p.19–20</span>. Wang 2022의 화학 뉴런은 도파민을 내보내려고 하이드로겔을 37.5–43.5 °C로 가열했고 <span class="src">Wang 2022, p.586</span>, 저자들은 응답 시간·전력·체계적 봉지가 아직 탐구할 과제라고 씁니다 <span class="src">Wang 2022, p.593</span>.</p>
-<p><strong>폴더에 없는 것.</strong> 이식 의료기기가 지켜야 하는 조직 온도 상승 한계, 누설 전류(장치에서 몸으로 의도하지 않게 새는 전류) 한계, 멸균, 수년 단위의 신뢰성 기준은 폴더에 없습니다 <span class="tag tag-unverified">미확인</span>. 하나만 예를 들면, 능동 이식 의료기기의 유럽·국제 표준(ISO 14708-1 계열)은 장치 겉면이 정상 체온보다 2 °C 넘게 뜨거워지지 않게 하는 것으로 알려져 있습니다 <span class="tag tag-unverified">미확인</span> <span class="prov">표준 원문은 유료라 열람하지 못했고, 의료기기 공학자의 공개 해설(Prutchi 2013, implantable-device.com)로만 확인</span>. 설계 숫자로 쓰려면 표준 원문을 확인해야 합니다. 이 한계가 이온 소자와 바로 부딪히는 예가 폴더에 있습니다. Wang 2022는 하이드로겔을 37.5–43.5 °C로 가열해 도파민을 내보냈는데(위), 위쪽 끝은 체온보다 6 °C 넘게 높습니다 <span class="tag tag-interp">해석</span>. <span id="s-physiological"></span>생리 식염수 농도(약 150 mM)와 pH 7.4에서 이온 소자의 정류·기억 특성을 잰 결과도 이번에 대조한 범위에는 없었습니다(Pei 2026은 몸 안 근육 곁에서 동작했고 pH 7.4·7.2·7.0에 따라 달라지는 응답을 판별에 썼지만, 그 근거 자료는 Extended Data·SI에 있고 이번에 대조하지 않았습니다 <span class="src">Pei 2026, p.1205</span>). Lee 2026 (AFM)은 10 mM KCl, pH 6에서 소자를 준비했습니다 <span class="src">Lee 2026 (AFM), p.7</span>. <span class="tag tag-interp">해석</span> 고정 전하의 해리가 pH에 따라 달라지는 폴리전해질 접합(<a href="../days/d24.html#b-polyelectrolyte-junction">Day 40 기초</a>)에서는 이 차이가 동작 자체를 바꿀 수 있습니다. <span class="tag tag-hypo">가설</span></p>
-<p><span id="s-dc-charge"></span><strong>직류와 전하: 왜 한 방향 전류를 피하나.</strong> 조직에 한 방향 전류(직류)가 오래 흐르면 그림 5(Day 45)의 ⓓ를 지나는 반응이 계속 일어납니다. 물이 분해되어 기체와 pH 변화가 생기거나 금속이 녹아 나와, 조직과 전극이 함께 상합니다 [해석: 전기화학 일반 원리]. 그래서 몸에 전류를 보내는 장치는 펄스마다 반대 방향 전류로 전하를 되돌리는(전하 균형) 방식을 쓰는 것으로 알려져 있고 [미확인: 제품 세부], Yoo 2025가 전압 방향을 번갈아 건 것도 같은 문제(전극 소모)를 피하려는 것이었습니다 <span class="src">Yoo 2025, p.5</span>. ±1 V 펄스로 동작하는 이온 소자를 조직에 직접 닿게 두는 구성(<a href="../days/d27a.html#s-reservoir-place">3-3절</a>)이라면, 조직 쪽으로 새는 직류가 얼마인지를 측정으로 보여야 합니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>폴더에 없는 것.</strong> 이식 의료기기가 지켜야 하는 조직 온도 상승 한계, 누설 전류(leakage current: 장치에서 몸으로 의도하지 않게 새는 전류) 한계, 멸균, 수년 단위의 신뢰성 기준은 폴더에 없습니다 <span class="tag tag-unverified">미확인</span>. 하나만 예를 들면, 능동 이식 의료기기의 유럽·국제 표준(ISO 14708-1 계열)은 장치 겉면이 정상 체온보다 2 °C 넘게 뜨거워지지 않게 하는 것으로 알려져 있습니다 <span class="tag tag-unverified">미확인</span> <span class="prov">표준 원문은 유료라 열람하지 못했고, 의료기기 공학자의 공개 해설(Prutchi 2013, implantable-device.com)로만 확인</span>. 설계 숫자로 쓰려면 표준 원문을 확인해야 합니다. 이 한계가 이온 소자와 바로 부딪히는 예가 폴더에 있습니다. Wang 2022는 하이드로겔을 37.5–43.5 °C로 가열해 도파민을 내보냈는데(위), 위쪽 끝은 체온보다 6 °C 넘게 높습니다 <span class="tag tag-interp">해석</span>. <span id="s-physiological"></span>생리 식염수 농도(약 150 mM)와 pH 7.4에서 이온 소자의 정류·기억 특성을 잰 결과도 이번에 대조한 범위에는 없었습니다(Pei 2026은 몸 안 근육 곁에서 동작했고 pH 7.4·7.2·7.0에 따라 달라지는 응답을 판별에 썼지만, 그 근거 자료는 Extended Data·SI에 있고 이번에 대조하지 않았습니다 <span class="src">Pei 2026, p.1205</span>). Lee 2026 (AFM)은 10 mM KCl, pH 6에서 소자를 준비했습니다 <span class="src">Lee 2026 (AFM), p.7</span>. <span class="tag tag-interp">해석</span> 고정 전하의 해리가 pH에 따라 달라지는 폴리전해질 접합(<a href="../days/d24a.html#b-polyelectrolyte-junction">Day 45 기초</a>)에서는 이 차이가 동작 자체를 바꿀 수 있습니다. <span class="tag tag-hypo">가설</span></p>
+<p><span id="s-dc-charge"></span><strong>직류와 전하: 왜 한 방향 전류를 피하나.</strong> 조직에 한 방향 전류(직류)가 오래 흐르면 그림 5(Day 51)의 ⓓ를 지나는 반응이 계속 일어납니다. 물이 분해되어 기체와 pH 변화가 생기거나 금속이 녹아 나와, 조직과 전극이 함께 상합니다 [해석: 전기화학 일반 원리]. 그래서 몸에 전류를 보내는 장치는 펄스마다 반대 방향 전류로 전하를 되돌리는(전하 균형, charge balance) 방식을 쓰는 것으로 알려져 있고 [미확인: 제품 세부], Yoo 2025가 전압 방향을 번갈아 건 것도 같은 문제(전극 소모)를 피하려는 것이었습니다 <span class="src">Yoo 2025, p.5</span>. ±1 V 펄스로 동작하는 이온 소자를 조직에 직접 닿게 두는 구성(<a href="../days/d27a.html#s-reservoir-place">3-3절</a>)이라면, 조직 쪽으로 새는 직류가 얼마인지를 측정으로 보여야 합니다. <span class="tag tag-interp">해석</span></p>
 </section>
 <section id="s-ideal-vs-now" class="level4">
 <h4 class="anchored" data-anchor-id="s-ideal-vs-now">5-4. 이상적 구성 vs 지금 도달한 수준</h4>
@@ -935,7 +965,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p><strong>한 줄 요약.</strong> 각 단계의 부품은 어딘가에서 한 번씩 보였지만, <strong>몸 안의 한 장치로, 오래 이어진 시연은 폴더 문헌과 Claude가 확인한 범위에서 찾지 못했습니다.</strong> 가장 가까운 것은 Pei 2026의 급성 동물 실험으로, ④는 몸 안에 있었지만 부호화·readout·자극 신호 생성은 몸 밖 컴퓨터와 PCB가 했습니다. 가장 먼 거리는 ④(몸 안에서 이온 소자로 오래 계산)와 수명입니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>한 줄 요약.</strong> <span class="key">각 단계의 부품은 어딘가에서 한 번씩 보였지만, <strong>몸 안의 한 장치로, 오래 이어진 시연은 폴더 문헌과 Claude가 확인한 범위에서 찾지 못했습니다.</strong></span> 가장 가까운 것은 Pei 2026의 급성 동물 실험으로, ④는 몸 안에 있었지만 부호화·readout·자극 신호 생성은 몸 밖 컴퓨터와 PCB가 했습니다. 가장 먼 거리는 ④(몸 안에서 이온 소자로 오래 계산)와 수명입니다. <span class="tag tag-interp">해석</span></p>
 <div class="quiz" data-day="d27" data-set="5-check"></div>
 <div class="stop-point">
 <p>여기까지: 출력 시연들(시간표대로 약물 방출, 급성 신경 자극, 몸 밖 컴퓨터를 거친 판별 → 자극)의 조건을 구별하고, 표의 단계마다 '이상적 구성 / 실제 기기 / 폴더 시연 / 찾지 못한 것'을 짚을 수 있다. 다음: 1–5구간을 모아, 고분자 이온 소재가 이길 수 있는 문제의 조건.</p>
@@ -955,6 +985,7 @@ window.Quarto = {
 <div class="goal">
 <p>이 구간을 읽고 나면 고분자 이온 소재가 경쟁력을 가질 수 있는 문제의 조건 네 가지를 말하고, 그 조건에 맞는 후보와 맞지 않는 응용을 교차표·장치 그림·에너지 예산을 근거로 가를 수 있다.</p>
 </div>
+<p><strong>상황.</strong> 내 폴리전해질 접합 논문에서 "이 소재는 어떤 응용에서 유리한가"를 한 문단으로 써야 합니다. 이 구간은 교차표와 장치 그림에서 얻은 근거로 그 문단의 뼈대(조건 네 가지, 후보·비후보)를 만듭니다.</p>
 <p><span id="s-conditions"></span>1–5구간을 모으면, 고분자 이온 소재가 이길 수 있는 문제의 <strong>조건</strong>이 보입니다. 정답이 아니라 판단의 틀입니다. <span class="tag tag-interp">해석</span></p>
 <ol type="1">
 <li><strong>이온·물·부드러움이 꼭 필요한 문제여야 한다.</strong> 교차표에서 "이온만 맞는 칸"(조직 계면, 젖은 환경, 화학 선택성, 부드러움)이 있어야 합니다. 그 칸이 없으면 전자 소자가 거의 모든 축에서 이깁니다.</li>
@@ -1011,13 +1042,13 @@ window.Quarto = {
 </table>
 <p><strong>원문 그림을 읽기 전에.</strong> 후보 (나)의 '생분해' 장점이 실제로 어떻게 생겼는지 Chang 2025의 원문 Fig. 2로 봅니다. b는 필름 사진(위 건조, 아래 PBS 24시간), c는 잡아당긴 곡선, d는 흙 속 16일의 사진입니다. <strong>d에서 소자가 언제 사라지는지, 그리고 그곳이 몸이 아니라 흙이라는 것</strong>을 보세요.</p>
 <figure class="fig paper figure"><img src="../assets/img/papers/chang2025-fig2b-d.png" alt="Chang 2025 Fig. 2b–d: b 가교한(i)과 가교하지 않은(ii) 키토산–구아검 필름의 건조 상태와 PBS pH 7.4 24시간 뒤 사진(가교하지 않은 필름은 무너짐), c 가교·비가교 필름의 건조·습윤 응력–변형 곡선, d 흙 속에 놓은 소자의 1, 3, 10, 16일 사진(3일 Mg 분해, 16일 완전 분해)" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Chang et al., <a href="https://doi.org/10.1038/s41467-025-66511-3" target="_blank"><i>Nat. Commun.</i> 2025, 16, 10610</a>, Fig. 2b–d, p.4. 볼 것: <b>b</b>에서 가교한 필름(i)은 PBS(pH 약 7.4) 24시간 뒤에도 사각형을 유지하고 가교하지 않은 필름(ii)은 무너진다. <b>d</b>는 소자 전체가 흙 속에서 3일째 Mg 전극이 분해되고 16일에 완전히 사라지는 사진이다(캡션: 자연 토양 16일). 후보 (나)의 생분해가 실제로 보인 예이지만, 분해 장소는 몸이 아니라 흙이고 세포·동물 시험은 없다(5-3절). 측정 사진과 곡선. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p><span id="s-baseline-caveat"></span><strong>그리고 반드시 붙는 단서.</strong> 위 후보 어디에서도 이온 reservoir가 <strong>같은 전극 + 증폭 + ADC + MCU 소프트웨어</strong>(그림 2(Day 45)의 기준선)보다 정확도·에너지·크기 중 하나라도 낫다는 측정은 폴더에 없습니다. 후보는 "경쟁할 수 있을지 모르는 자리"이고, 그것을 "경쟁하는 자리"로 바꾸는 것은 그 기준선과의 비교 실험입니다. 이 실험이 Day 47·Day 48의 가설과 기각 조건의 재료가 됩니다.</p>
+<p><span id="s-baseline-caveat"></span><strong>그리고 반드시 붙는 단서.</strong> 위 후보 어디에서도 이온 reservoir가 <strong>같은 전극 + 증폭 + ADC + MCU 소프트웨어</strong>(그림 2(Day 51)의 기준선)보다 정확도·에너지·크기 중 하나라도 낫다는 측정은 폴더에 없습니다. <span class="key">후보는 "경쟁할 수 있을지 모르는 자리"이고, 그것을 "경쟁하는 자리"로 바꾸는 것은 그 기준선과의 비교 실험입니다.</span> 이 실험이 Day 53–54·Day 55–56의 가설과 기각 조건의 재료가 됩니다.</p>
 <section id="s-objection" class="level4">
 <h4 class="anchored" data-anchor-id="s-objection">이번 반론</h4>
 <p>가장 강한 반론은 이것입니다. <strong>"생체 인터페이스가 이온 소재의 자리라면, 이온은 전극만 하면 된다. 부드러운 이온 전극으로 신호를 받고, 계산은 처음부터 성숙한 CMOS 회로가 하면 된다. 왜 굳이 이온 reservoir가 계산까지 해야 하나? 계산을 이온으로 하면 내구·재현성·에너지라는 새 문제만 늘어난다."</strong></p>
 <p>이 반론은 강하고, 이번 자료의 상당 부분이 이 반론을 지지합니다. 교차표에서 이온만 맞는 칸은 대부분 계면의 칸이었고, 에너지 예산에서 mm 크기 이온 소자의 구동 에너지는 ADC보다 클 수 있었습니다. Wang 2025의 제안도 "이온은 조직 가까이, 계산은 전자 쪽"입니다. 그렇다면 이온 계산이 의미를 가지려면 <strong>계면에서 이온으로 처리하는 것이 무엇을 줄이는지</strong>를 보여야 합니다. 후보는 셋입니다. 증폭이 덜 필요해지거나(µV에서 동작하는 소자), 전자 쪽으로 보내는 데이터·변환 횟수가 줄거나, 이온–전자 변환 자체를 처리와 합쳐 부품이 줄어드는 것. 셋 다 폴더 문헌에서 측정을 찾지 못한 <span class="tag tag-hypo">가설</span>입니다. 이 반론에 대한 내 답을 양식의 "오늘의 반론" 칸에 적으세요. 반론을 받아들여 "이온은 계면, 계산은 전자"로 방향을 정하는 것도 정직한 답입니다.</p>
 <div class="think">
-<p>그림 2(Day 45)를 다시 보고, 내 소재(예: 폴리전해질 접합, 이온겔)를 둘 수 있는 자리를 하나 고르세요. ① 경계(전극 겸 전처리), ④ 통 안 reservoir, ⑦ 출력(자극·방출) 중 어디인가요? 그 자리에서 내 소재가 기준선(같은 전극 + 증폭 + ADC + MCU)보다 무엇을 줄일 수 있는지 한 줄, 그것을 재는 실험 하나를 한 줄로 적어 보세요.</p>
+<p>그림 2(Day 51)를 다시 보고, 내 소재(예: 폴리전해질 접합, 이온겔)를 둘 수 있는 자리를 하나 고르세요(내 응용이 아직 정해지지 않았다면 이 사례 장치로 연습하면 됩니다). ① 경계(전극 겸 전처리), ④ 통 안 reservoir, ⑦ 출력(자극·방출) 중 어디인가요? 그 자리에서 내 소재가 기준선(같은 전극 + 증폭 + ADC + MCU)보다 무엇을 줄일 수 있는지 한 줄, 그것을 재는 실험 하나를 한 줄로 적어 보세요.</p>
 </div>
 <div class="quiz" data-day="d27" data-set="6-check"></div>
 <div class="stop-point">
@@ -1074,9 +1105,9 @@ window.Quarto = {
 <td>f_c = 1/(2π·R_in·C): 1 mm² 두 개에 1 MΩ이면 3.2 Hz, 100 MΩ이면 0.032 Hz [가정 계산]</td>
 </tr>
 <tr class="odd">
-<td>왜 선형 readout</td>
-<td>비선형은 reservoir가 했고, 학습은 ridge 한 번(소자 안을 몰라도 됨), 계산은 작고 crossbar로도 가능</td>
-<td>MLP readout은 기여 귀속·학습·물리 구현을 어렵게 함</td>
+<td>왜 선형 readout(이 교재의 기본 선택)</td>
+<td>비선형은 reservoir가 했고, 학습은 ridge 한 번, 계산은 작고 crossbar로도 가능. 소자 안을 몰라도 되는 것은 소자 밖 readout만 학습하기 때문</td>
+<td>MLP readout도 틀린 것은 아니나, 같은 readout의 원시 입력 기준선과 비교해야 소자 몫을 말할 수 있고 학습·물리 구현이 무거워짐</td>
 </tr>
 <tr class="even">
 <td>학습과 소프트웨어</td>
@@ -1114,7 +1145,7 @@ window.Quarto = {
 <li>교차표를 적어도 세 응용 × 다섯 축으로 채웠나? 칸마다 요구값의 출처와 허용값의 근거(폴더 측정값)를 적고, 모르는 칸은 "모름"으로 남겼나?</li>
 <li>"이온만 맞는 칸"과 "모자란 칸"을 구별하고, 경쟁 우위 후보를 그 칸으로 설명했나?</li>
 <li>몸 안 장치의 사슬을 감지부터 출력까지 빠짐없이 적고, 이온이 운반자인 곳과 전자·숫자가 운반자인 곳을 구별했나?</li>
-<li>readout이 선형인 이유, 학습 위치, 소프트웨어가 필요한 곳, 완전 아날로그의 범위를 각각 한 줄 이상 적었나?</li>
+<li>readout을 선형으로 둔 이유와 그 범위(비선형 readout이면 무엇과 비교해야 하나), 학습 위치, 소프트웨어가 필요한 곳, 완전 아날로그의 범위를 각각 한 줄 이상 적었나?</li>
 <li>이상적 구성과 지금 도달한 수준을 단계마다 대조하고, "시연"과 "실제 사용"과 <span class="tag tag-hypo">가설</span>을 섞지 않았나?</li>
 <li>이번 반론("이온은 전극만")에 내 판단을 적었나?</li>
 </ol>
@@ -1124,7 +1155,7 @@ window.Quarto = {
 <ul>
 <li><strong>병목 장부:</strong> (응용이 요구하는 것) 몸 안 심전도 장치의 수년 수명·약 10⁹ 펄스/년 vs (메커니즘이 허용하는 것) 연성 이온 소자의 보고된 내구 수천 펄스, 생체 내 4–14일 시험.</li>
 <li><strong>병목 장부:</strong> (응용) 배터리 수년 → 추론 경로의 에너지가 ADC보다 작아야 이득 vs (메커니즘) mm²·±1 V 계면 충전은 펄스당 약 50 nJ[가정]. 저전압·작은 면적의 동작이 필요하다.</li>
-<li><strong>병목 장부:</strong> (응용) 생리 식염수(약 150 mM)·pH 7.4·37 °C에서의 안정한 동작 vs (메커니즘) 폴리전해질 고정 전하의 해리·이온 선택성이 염 농도와 pH에 의존(Day 35–36·Day 40) — 측정 없음.</li>
+<li><strong>병목 장부:</strong> (응용) 생리 식염수(약 150 mM)·pH 7.4·37 °C에서의 안정한 동작 vs (메커니즘) 폴리전해질 고정 전하의 해리·이온 선택성이 염 농도와 pH에 의존(Day 37–38·Day 45–46) — 측정 없음.</li>
 <li><strong>아직 모르는 것:</strong> 이온 reservoir 장치의 추론 한 번 에너지. / 조직 경계에 둔 이온 소자의 drift와 섬유화 영향. / 몸 안에서 재보정에 쓸 라벨을 누가 어떻게 붙이나. / 실제 이식형 심전도 기기의 전력·크기·수명 사양 <span class="tag tag-unverified">미확인</span>.</li>
 <li><strong>용어집:</strong> 응용 지도(시뮬레이션·시연·사용), 교차표, 사양 축, 전극–조직 계면, 축전 방식·반응 방식, 아날로그 프런트엔드, 증폭 배율(dB), 등가회로(R_s·C_dl·R_ct·E·R_in), 차단 주파수(−3 dB 점), 직류 오프셋, 급성/만성 실험, 마스크, 상태 읽기(TIA·적분기·MUX), 선형 readout, ridge, 펌웨어, 재보정, 완전 아날로그(추론 경로), 닫힌 고리, 봉지, 섬유화, 생분해.</li>
 <li><strong>접는 기준 후보:</strong> "내 소자를 조직 경계 전처리에 두어도 같은 전극 + 증폭 + ADC + MCU 기준선보다 에너지·부품 수·정확도 중 어느 것도 줄이지 못하면, '이온 계산'이 아니라 '이온 계면'으로 방향을 좁힌다."</li>
@@ -1160,12 +1191,13 @@ window.Quarto = {
 </ul>
 </section>
 </div>
-<script type="application/json" id="quiz-d27">{"version": 2, "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 전자회로 접속과 진짜 병목", "items": [{"id": "d27-r01", "type": "mc", "q": "readout 가중치가 (0.3, −0.2)인 선형 readout을 비휘발 crossbar로 만든다. 음의 가중치 −0.2는 어떻게 나타내나?", "options": ["세로 선 두 개(G⁺, G⁻) 전류의 차로 나타낸다", "교차점의 전도도를 음수로 써서 나타낸다", "MCU가 판정마다 입력 전압의 부호를 바꾼다", "음의 가중치는 crossbar로 나타낼 수 없다"], "a": 0, "why": "전도도는 늘 0 이상이므로, 같은 입력을 두 세로 선(G⁺, G⁻)에 걸고 두 전류의 차 I⁺ − I⁻를 가중합으로 쓴다. −0.2는 G⁻ 쪽에 0.2에 해당하는 전도도를 쓰면 된다.", "wrongWhy": ["", "전도도는 전류가 얼마나 잘 흐르는가(저항의 역수)라서 음수가 될 수 없다.", "추론 경로에 디지털 처리를 다시 넣는 셈이다. 음의 가중치는 선 쌍의 전류 차로 나타낸다.", "선 쌍(G⁺, G⁻)을 쓰면 나타낼 수 있다."], "ref": "d26b.html#b-all-analog", "refLabel": "5구간 기초: 구성 B와 G⁺·G⁻ 선 쌍"}, {"id": "d27-r02", "type": "mc", "q": "Day 30–31의 가정(상태 읽기 TIA 채널당 1 µW, 박동 하나 = 신호 1 s)으로 소자 노드를 10개에서 40개로 늘리면, 박동당 TIA 에너지는?", "options": ["10 µJ 그대로다(ADC처럼 하나를 나눠 쓴다)", "10 µJ에서 160 µJ로 N²에 비례해 는다", "10 µJ에서 40 µJ로 N에 비례해 는다", "readout을 crossbar로 옮기면 0이 된다"], "a": 2, "why": "TIA는 소자마다 하나씩 붙고 박동 내내 켜져 있으므로 40채널 × 1 µW × 1 s = 40 µJ다. 노드 수 N에 비례한다.", "wrongWhy": ["나눠 쓰는 것은 ADC·MCU다. TIA는 소자마다 하나씩 붙는다.", "N²에 비례하는 것은 N×N 배열의 소자 칸 수다. TIA는 노드 수만큼이다.", "", "readout을 옮겨도 상태를 읽는 TIA·적분기는 소자마다 남는다."], "ref": "d26b.html#s-board", "refLabel": "5-1 보드 위에서: 소자마다 붙는 TIA"}, {"id": "d27-r03", "type": "mc", "q": "crossbar에 가중치 3개를 쓰다가 셋 모두 계획보다 +0.05씩 크게 쓰였다. 상태가 x = (0.4, 0.4, −0.4)이면 출력 y는 계획보다 얼마나 움직이나?", "options": ["+0.06", "+0.02", "+0.15", "0 (오차가 서로 상쇄된다)"], "a": 1, "why": "움직인 양 = Σ(오차 × 상태) = 0.05 × 0.4 + 0.05 × 0.4 + 0.05 × (−0.4) = 0.02 + 0.02 − 0.02 = +0.02다.", "wrongWhy": ["셋째 상태의 부호(−0.4)를 빼먹고 세 항을 모두 더했다.", "", "오차만 더하고(0.05 × 3) 상태를 곱하지 않았다.", "오차는 모두 같은 부호다. 셋째 항만 상태가 음수라 일부만 상쇄된다."], "ref": "d26b.html#s-write-error", "refLabel": "5-3 쓰기 오차 단계 보기"}, {"id": "d27-r04", "type": "ox", "q": "readout까지 crossbar로 만든 완전 아날로그 RC라도, 가중치를 칩 밖 컴퓨터에서 구한다면 학습 단계에서는 상태를 숫자로 기록하는 ADC가 쓰인다.", "a": true, "why": "완전 아날로그는 매 판정의 추론 경로에 ADC가 없다는 뜻이다. 학습할 때는 상태를 숫자로 기록하고, 쓰고-읽고-고치기로 전도도를 확인하느라 ADC가 쓰인다.", "wrongWhy": ["", "추론 경로와 학습 단계를 섞었다. 칩 밖에서 ridge 회귀를 풀려면 상태가 숫자로 있어야 한다."], "ref": "d26b.html#s-training-where", "refLabel": "5-2 가중치는 어디서 학습하나"}, {"id": "d27-r05", "type": "mc", "q": "펄스를 끊으면 몇 초 안에 원래 전도도로 돌아가는(휘발성) 이온겔 소자가 있다. 완전 아날로그 RC에서 이 소자에 맡기기 알맞은 자리는?", "options": ["readout crossbar(가중치를 붙잡는 자리)", "reservoir와 readout 두 자리 모두", "두 자리 모두 맞지 않는다", "reservoir(입력 이력을 잠시 품는 자리)"], "a": 3, "why": "reservoir에는 최근 입력의 흔적이 서서히 사라지는 성질(fading memory)이 쓸모 있다. readout 가중치는 재보정 주기 동안 흐르지 않아야 하므로 비휘발이 필요하다. 그래서 현실적인 그림은 reservoir는 이온 소자, readout은 다른 비휘발 소자인 혼성이다.", "wrongWhy": ["가중치가 몇 초 만에 원래 값으로 돌아가면 학습한 값을 붙잡지 못한다.", "readout 자리는 비휘발이어야 하므로 두 자리 모두는 맞지 않는다.", "휘발성은 reservoir에서는 단점이 아니라 쓸모다.", ""], "ref": "d26b.html#s-analog-conditions", "refLabel": "5-4 완전 아날로그의 조건 5: 이온 소자를 어디에"}, {"id": "d27-r06", "type": "mc", "q": "완전 아날로그 RC의 출력을 '정상/이상' 문턱 비교 대신 0–9의 등급 숫자로 바꿔 무선으로 보내야 한다면 무엇이 달라지나?", "options": ["끝에서 숫자 변환(ADC)이 다시 필요하다", "reservoir를 디지털 회로로 바꿔야 한다", "readout 가중치를 학습할 필요가 없다", "추론 경로에서는 달라지는 것이 없다"], "a": 0, "why": "답이 문턱 비교처럼 단순하면 끝에서도 ADC가 필요 없지만, 여러 값의 숫자를 내보내야 하면 끝에 변환이 다시 생긴다(완전 아날로그의 조건 3).", "wrongWhy": ["", "reservoir는 그대로 아날로그로 둘 수 있다. 바뀌는 것은 끝의 출력 형식이다.", "출력 형식과 상관없이 가중치는 학습해야 한다.", "아날로그 전압을 숫자로 보내려면 어딘가에서 변환이 필요하다."], "ref": "d26b.html#s-analog-conditions", "refLabel": "5-4 완전 아날로그의 조건 3: 단순한 마지막 답"}, {"id": "d27-r07", "type": "mc", "q": "Day 43–44의 에너지 사슬(전극 1 mm², ±1 V 펄스마다 ½CV² = 50 nJ)에서 전극의 한 변을 1/10로 줄이면 펄스 하나의 계면 충전 에너지는?", "options": ["1/10인 5 nJ", "1/100인 0.5 nJ", "그대로 50 nJ", "1/1,000인 0.05 nJ"], "a": 1, "why": "계면 용량 C는 면적에 비례하고, 한 변이 1/10이면 면적은 1/100이다. 그래서 ½CV²도 1/100인 0.5 nJ다.", "wrongWhy": ["한 변의 길이가 아니라 면적(한 변의 제곱)에 비례한다.", "", "C가 면적에 비례하므로 에너지도 함께 준다.", "면적은 1/100이다. 부피처럼 세제곱으로 줄지 않는다."], "ref": "d26b.html#s-chains", "refLabel": "6-1 사슬 2: 에너지"}, {"id": "d27-r08", "type": "mc", "q": "응용을 이식형 심전도 장치에서 '실험실에서 몇 시간 쓰는 촉각 센서 시연'으로 바꾸면, 반복 내구 후보의 판정은 어떻게 되기 쉬운가?", "options": ["응용과 무관하게 늘 병목 1순위로 남는다", "메커니즘 한계이므로 판정이 바뀌지 않는다", "대안 소자가 없으므로 병목이 아니다", "요구 횟수가 훨씬 적어 병목에서 밀려날 수 있다"], "a": 3, "why": "첫 질문(응용이 그 사양을 요구하나)의 답이 바뀌기 때문이다. 이식 1년은 약 10⁹ 펄스를 요구하지만 몇 시간 시연은 그보다 자릿수로 적다. 판정은 응용에 따라 바뀐다.", "wrongWhy": ["판정의 첫 질문이 '응용이 요구하나'이므로 응용이 바뀌면 판정도 바뀐다.", "메커니즘에서 오는 한계라도 응용이 그만큼을 요구하지 않으면 병목이 아니다.", "대안이 있느냐(Q3)는 경쟁 여부를 가르는 질문이고, 고체 소자는 이미 높은 내구를 낸다.", ""], "ref": "d26b.html#s-four-q-verdict", "refLabel": "6-2 네 질문으로 판정하기"}, {"id": "d27-r09", "type": "ox", "q": "이온 소자를 실리콘 트랜지스터처럼 아주 작게 만들면 τ는 그대로이고 집적 밀도만 올라간다.", "a": false, "why": "확산 시간은 τ ~ L²/D라서 크기 L을 줄이면 τ도 L²에 비례해 짧아진다. 크기와 시간척도가 묶여 있다는 것이 공정만으로 풀리지 않는 조건 하나다.", "wrongWhy": ["τ ~ L²/D이므로 L을 1/10로 줄이면 τ는 1/100이 된다.", ""], "ref": "d26b.html#s-objection", "refLabel": "6구간 이번 반론: 크기와 시간척도의 묶임"}, {"id": "d27-r10", "type": "mc", "q": "이온 reservoir(응답 ms–s)의 상태를 ns 박자로 동작하는 전자 회로가 받아 처리한다. 이 경계에서 생기는 비용으로 알맞은 것은?", "options": ["전자가 더 빠르므로 경계에서는 비용이 생기지 않는다", "이온 소자가 전자 회로의 박자에 저절로 맞춰진다", "박자 맞추기·버퍼가 필요하고 변환에서 지연·손실이 생긴다", "소자를 비휘발로 바꾸면 경계 비용이 사라진다"], "a": 2, "why": "두 세계의 시간척도가 자릿수로 다르고, 이온–전자 변환은 지연·에너지 손실·신호 왜곡을 들여온다. 그래서 박자 맞추기·버퍼·오류 허용 장치가 필요하다. 그 회로의 전력은 아직 잰 값이 없다.", "wrongWhy": ["빠른 쪽이 느린 쪽을 기다리거나 값을 붙잡아 둘 회로가 필요하다. 속도 차이 자체가 비용이다.", "이온 소자의 응답은 소자 물리가 정한다. 회로 박자에 맞춰 빨라지지 않는다.", "", "휘발·비휘발은 값을 붙잡는 시간의 문제다. 시간척도 차이와 변환 손실은 남는다."], "ref": "d26b.html#s-interface-cost", "refLabel": "5-4 이온–전자 접속 자체의 비용"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지", "items": [{"id": "d27-rb01", "type": "mc", "q": "하이드로겔 소자를 쥐 피하에 2주 넣었다가 꺼내서 응답을 재고, 그 측정값으로 컴퓨터가 분류했다. 응용 지도에서 이 결과의 자리는?", "options": ["실험실 시연(이식했던 소자를 몸 밖에서 측정)", "실제 사용(몸 안에서 쓰이는 장치)", "몸 안 계산 시연(소자가 몸 안에서 판별)", "시뮬레이션(측정 없이 모형으로 계산)"], "a": 0, "why": "실제 소자와 실제 측정이 있으니 시뮬레이션이 아니고, 측정·계산은 꺼낸 뒤 몸 밖에서 했으니 몸 안 계산도 아니다. 실험실 시연 칸이다.", "wrongWhy": ["", "제품이나 현장에서 사람들이 쓰는 단계가 아니다.", "계산에 쓴 상태는 꺼낸 뒤 몸 밖에서 쟀다.", "소자를 실제로 만들어 측정했다."], "ref": "d27a.html#b-applications", "refLabel": "1구간 기초: 응용 지도의 세 칸"}, {"id": "d27-rb02", "type": "mc", "q": "어떤 응용이 소자의 시간상수 τ로 약 10 µs를 요구한다. 연성 이온 소자에서 보고된 τ가 52 ms–4,000 s라면 교차표의 시간 칸 판정은?", "options": ["맞음", "모자람", "모름", "해당 없음"], "a": 1, "why": "요구(10 µs)가 소자가 내는 범위보다 수천 배 이상 짧다. 요구를 채우지 못하므로 그 칸은 '모자람', 곧 이 응용의 병목이다.", "wrongWhy": ["범위가 겹치지 않는다. 52 ms는 10 µs의 약 5,000배다.", "", "두 값이 모두 있으므로 판정할 수 있다. '모름'은 잰 값을 찾지 못했을 때다.", "시간 축은 이 응용이 요구하는 축이다."], "ref": "d27a.html#s-crossing-row", "refLabel": "2구간 한 줄 채우기와 '표를 읽는 법'"}, {"id": "d27-rb03", "type": "mc", "q": "어느 응용에서 '부드러움' 칸은 이온겔만 맞고, '시간·정밀도·밀도' 칸은 전자 소자만 맞는다. 교차표로 말할 수 있는 것은?", "options": ["칸이 엇갈리므로 이 표로는 판정할 수 없다", "부드러움 칸이 맞으니 이온 소재가 이긴다", "부드러움 칸은 우위 후보, 모자란 칸은 병목이다", "모든 칸이 맞아야 우위 후보가 된다"], "a": 2, "why": "교차표는 승패 하나를 내는 표가 아니라 칸마다 판정을 적는 표다. 이온만 맞는 칸은 경쟁 우위의 후보이고, 모자란 칸은 그 응용의 병목이다. 둘을 함께 보고 이온 소재를 어디에 쓸지 정한다.", "wrongWhy": ["칸마다 판정할 수 있다. 엇갈림이 오히려 표가 보여 주려는 것이다.", "한 칸이 맞는다고 응용 전체에서 이기지는 않는다. 모자란 칸이 병목으로 남는다.", "", "후보는 '이온만 맞는 칸'이 있는지로 고른다. 모든 칸이 맞을 필요는 없다."], "ref": "d27a.html#s-crossing-row", "refLabel": "2구간 '표를 읽는 법'"}, {"id": "d27-rb04", "type": "mc", "q": "몸 안 심전도 장치의 사슬에서 신호를 이온이 운반하는 곳만 고른 것은?", "options": ["조직–전극 계면과 증폭·필터 회로 안", "reservoir 소자와 readout 회로 안", "전극부터 무선 송신까지의 모든 단계", "조직–전극 계면과 reservoir 소자 안"], "a": 3, "why": "몸 쪽 체액과 reservoir 소자 안에서만 이온이 운반하고, 증폭·부호화·상태 읽기·readout·무선은 전자와 숫자의 세계다. 그래서 이온 reservoir를 넣으면 소자의 입구와 출구에서 변환이 두 번 더 생긴다.", "wrongWhy": ["계면은 맞지만, 증폭·필터는 전자 회로다.", "reservoir는 맞지만, readout은 숫자(MCU)나 전자(crossbar)로 한다.", "대부분의 단계는 전자와 숫자가 운반한다.", ""], "ref": "d27a.html#s-chain-summary", "refLabel": "3구간 단계별로 끝의 '한 문장으로'"}, {"id": "d27-rb05", "type": "mc", "q": "앞단 증폭기 30 dB와 뒷단 증폭기 30 dB를 이었다. 전체 전압 배율은 약 몇 배인가?", "options": ["60배", "약 900배", "약 1,000배", "약 63배"], "a": 2, "why": "이어 붙이면 dB를 더한다. 30 + 30 = 60 dB이고, 60 dB는 10의 (60 ÷ 20)제곱 = 1,000배다. 30 dB 하나는 약 31.6배이고 31.6 × 31.6 ≈ 1,000으로 같다.", "wrongWhy": ["dB 숫자를 배율로 그대로 읽었다. 60 dB는 60배가 아니다.", "30 dB를 30배로 보고 곱했다. 30 dB는 약 31.6배다.", "", "배율 31.6을 더했다(31.6 + 31.6). 이어 붙인 배율은 곱한다."], "ref": "d27a.html#b-decibel", "refLabel": "dB 기초: 이어 붙이면 더한다"}, {"id": "d27-rb06", "type": "mc", "q": "10 bit ADC가 2 V 범위를 나눈다면 한 칸은 약 얼마이고, 증폭하지 않은 1 mV 신호는 이 눈금에서 어떻게 되나?", "options": ["약 0.2 mV, 1 mV 신호가 약 5칸에 걸친다", "약 2 mV, 1 mV 신호는 한 칸도 채우지 못한다", "약 20 mV, 1 mV 신호는 한 칸의 1/20이다", "약 0.5 mV, 1 mV 신호가 약 2칸에 걸친다"], "a": 1, "why": "10 bit는 2¹⁰ = 1,024칸이므로 2 V ÷ 1,024 ≈ 1.95 mV다. 1 mV는 한 칸의 절반이라 모양을 담을 수 없다. 숫자로 바꾸기 전에 먼저 증폭하는 이유다.", "wrongWhy": ["2 V를 약 10,000칸으로 나눈 값이다. 10 bit는 1,024칸이다.", "", "칸 수를 100쯤으로 잘못 셌다. 1,024칸이면 한 칸은 약 2 mV다.", "4,096칸(12 bit)으로 계산했다. 10 bit는 1,024칸이다."], "ref": "d27a.html#s-chain-steps", "refLabel": "단계 ③ 부호화: ADC의 눈금"}, {"id": "d27-rb07", "type": "mc", "q": "축전 방식 전극 두 개가 직렬로 0.05 µF이고, 증폭기 입력 저항을 1 MΩ에서 5 MΩ으로 키웠다. 차단 주파수 f_c = 1/(2π·R·C)는?", "options": ["약 16 Hz로 오른다", "약 3.2 Hz 그대로다", "약 0.13 Hz로 내려간다", "약 0.64 Hz로 내려간다"], "a": 3, "why": "f_c는 R에 반비례한다. 1 MΩ에서 약 3.2 Hz였으니 5 MΩ이면 3.2 ÷ 5 ≈ 0.64 Hz다. 직접 계산해도 1/(2π × 5 × 10⁶ × 5 × 10⁻⁸) = 1/1.57 ≈ 0.64 Hz다.", "wrongWhy": ["R을 키우면 f_c는 내려간다. 곱하지 않고 나눈다.", "f_c는 입력 저항에 따라 바뀐다.", "R이 5배면 f_c는 1/5이다. 제곱(1/25)하지 않는다.", ""], "ref": "d27a.html#s-cutoff-steps", "refLabel": "3-2 차단 주파수 단계 보기"}, {"id": "d27-rb08", "type": "ox", "q": "Ag/AgCl처럼 반응 저항(ⓓ)이 작은 전극을 쓰면 전극과 증폭기 사이의 고역 통과가 사라지고, 대신 두 전극의 전위 차이(직류 오프셋)가 그대로 들어온다.", "a": true, "why": "ⓓ가 작으면 전류가 이중층 용량 ⓒ를 우회해 직류까지 통과한다. 느린 성분을 막던 커패시터의 효과가 사라지므로, 전극 전위 ⓔ의 차이도 막히지 않고 증폭기로 들어온다.", "wrongWhy": ["", "반응 방식 전극은 직류도 흘린다. 그래서 직류 오프셋을 덜어 주던 고역 통과가 없어진다."], "ref": "d27a.html#s-cutoff-steps", "refLabel": "3-2 단계 보기의 '뜻'"}, {"id": "d27-rb09", "type": "mc", "q": "같은 증폭기 입력 저항에서 감지 전극의 면적을 1/4로 줄이면 차단 주파수는?", "options": ["4배로 오른다", "1/4로 내려간다", "그대로다", "16배로 오른다"], "a": 0, "why": "계면 용량 C는 면적에 비례하므로 1/4이 되고, f_c = 1/(2π·R_in·C)는 C에 반비례하므로 4배로 오른다. 작은 전극일수록 느린 성분을 더 잃는다.", "wrongWhy": ["", "C가 줄면 f_c는 오른다(반비례).", "C가 면적에 따라 바뀌므로 f_c도 바뀐다.", "면적이 1/4이면 C도 1/4이다. 한 변이 1/4일 때(면적 1/16)와 헷갈렸다."], "ref": "d27a.html#s-area-link", "refLabel": "3-2 연구와의 연결: 전극 면적과 소재"}, {"id": "d27-rb10", "type": "ox", "q": "이온 reservoir를 밀봉한 통 안 대신 조직과 닿는 경계에 두면, 봉지 문제가 없어지므로 장기 이식에 더 유리하다.", "a": false, "why": "경계에 두면 신호를 이온인 채로 받을 수 있지만, 소자가 체액·단백질·면역 반응에 직접 노출되어 탈수·이온 누출·섬유화 문제가 생긴다. 어느 자리가 나은지 보인 장기 시연은 찾지 못했다.", "wrongWhy": ["노출이 늘어 탈수·누출·섬유화를 막는 설계가 더 중요해진다. 장기 이식에 유리하다고 할 근거가 없다.", ""], "ref": "d27a.html#s-reservoir-place", "refLabel": "3-3 reservoir는 장치의 어디에 두나"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "몸 안에서 심장이 뛸 때 생기는 전기 신호가 '이상 박동이다'라는 판단과 경보까지 가는 길을 상자와 화살표로 그려 보세요(상자 5–8개). 상자마다 '무엇을 하나'를 한 줄 적고, 그 상자에서 신호를 운반하는 것이 이온인지, 전자(전압·전류)인지, 숫자인지 표시합니다. 학습(가중치 정하기)은 어느 상자에서 일어나는지도 적어 보세요.", "items": [{"id": "d27-p01", "type": "ox", "q": "몸 안 체액에서 심장 신호를 운반하는 것은 전자이므로, 금속 전극은 그 신호를 바꾸지 않고 그대로 전선으로 넘긴다.", "a": false, "why": "체액은 소금물이라 신호는 이온의 움직임으로 퍼진다. 전극 표면에서 이온의 움직임이 전자의 움직임으로 바뀌어야 하고, 방법은 축전(이중층)과 반응(예: Ag/AgCl) 둘이다. 3구간에서 설명한다.", "ref": "#s-chain-steps", "refLabel": "단계 ① 감지: 이온에서 전자로"}, {"id": "d27-p02", "type": "mc", "q": "피부 위 심전도 신호(약 1 mV)를 ±1 V로 동작하는 이온 소자에 걸려면 대략 몇 배로 키워야 하나?", "options": ["10배", "100배", "1,000배", "100만 배"], "a": 2, "why": "1 V ÷ 1 mV = 1,000배(60 dB). 이 증폭기는 소자를 쓰든 안 쓰든 필요하고 늘 켜져 있어야 한다. 3구간 단계 ②와 dB 기초에서 설명한다.", "ref": "#s-chain-steps", "refLabel": "단계 ② 증폭과 필터"}, {"id": "d27-p03", "type": "mc", "q": "reservoir computing 방식의 이식 장치에서 readout 가중치를 정하는 학습은 보통 어디서 하나?", "options": ["몸 안 장치가 박동마다 새로 계산한다", "몸 밖 컴퓨터가 계산해 장치에 넣는다", "이온 소자가 펄스마다 스스로 고친다", "처음 값을 그대로 쓰고 학습하지 않는다"], "a": 1, "why": "학습에는 정답이 붙은 박동이 필요하고, 몸 안에는 정답이 없다. 몸 밖에서 상태를 기록해 ridge 회귀로 가중치를 구하고 무선으로 넣는다. 4구간에서 설명한다.", "ref": "#s-train-where", "refLabel": "4-2 그림 6: 학습은 몸 밖에서 한 번"}, {"id": "d27-p04", "type": "ox", "q": "readout을 '곱해서 더하기'(선형)로 두는 이유 중 하나는, 소자 안을 몰라도 학습을 연립방정식 한 번으로 끝낼 수 있기 때문이다.", "a": true, "why": "선형 readout은 ridge 회귀로 한 번에 풀 수 있고, 소자를 통과하는 기울기가 필요 없다. 계산도 작아 MCU나 crossbar로 할 수 있다. 4구간에서 설명한다.", "ref": "#s-why-linear", "refLabel": "4-1 이유 2: 학습이 연립방정식 한 번"}, {"id": "d27-p05", "type": "ox", "q": "신호 처리 부품을 모두 아날로그로 만들면, 이식 장치에는 소프트웨어가 전혀 필요 없다.", "a": false, "why": "신호 처리를 아날로그로 바꿔도 학습, 가중치 쓰기, 순서 제어, 기록·무선, 재보정 판단은 남는다. 이 교재가 고른 구성(몸 밖 오프라인 학습 + MCU 제어)에서는 그 일을 프로그램이 맡는다. 고정 논리 회로나 하드웨어 학습 회로로 일부를 대신하는 다른 구성도 생각할 수 있지만, '신호 처리가 아날로그'라는 것만으로 그 일들이 사라지지는 않는다. '완전 아날로그'는 매 박동의 추론 경로를 말한다. 4구간에서 설명한다.", "ref": "#s-software-table", "refLabel": "4-2 표: 이 구성에서 소프트웨어가 맡는 곳"}, {"id": "d27-p06b", "type": "mc", "q": "어떤 연구가 하이드로겔 이온 소자를 마취한 쥐의 다리 근육 곁에 넣고, 몸 밖 컴퓨터가 그 소자의 상태로 음성 명령을 판별해 신경 자극으로 바꿨다(쥐 2마리, 마취 상태에서 한 단기 실험). 이 결과로 말할 수 있는 것은?", "options": ["전원·readout까지 갖춘 장치로 몸 안에서 오래 판정할 수 있다", "같은 일을 하는 전자 회로보다 에너지를 적게 쓴다는 것이 보였다", "이미 병원에서 환자에게 쓰이는 단계에 이르렀다", "몸 안 조건에서 계산에 쓸 상태를 낼 수 있음을 급성으로 보였다"], "a": 3, "why": "몸 안에 있었던 것은 reservoir 소자뿐이고, 입력 부호화·readout은 몸 밖 컴퓨터, 자극 신호는 회로 기판이 만들었다. 장기 동작·전원·에너지 비교·실제 사용은 보이지 않았다. 시연과 실용을 구별한다. 1구간과 5구간의 표에서 설명한다.", "ref": "#s-reservoir-place", "refLabel": "3-3 지금 도달한 것"}, {"id": "d27-p07", "type": "ox", "q": "고분자 이온 소재가 경쟁력을 갖는 응용은, 이온 소자가 전자 소자보다 빠르고 집적도가 높은 응용이다.", "a": false, "why": "속도·밀도는 대개 전자 소자가 이긴다. 이온 소재의 후보는 물·조직·이온과 직접 닿고 부드러움·화학 선택성이 필요하면서 속도·밀도 요구가 낮은 자리다. 2·6구간에서 설명한다.", "ref": "#s-conditions", "refLabel": "6구간 경쟁 조건 네 가지"}, {"id": "d27-p08", "type": "mc", "q": "이식 장치가 박동을 직접 판정하지 않고 원시 심전도를 계속 무선으로 보낸다면 에너지 면에서 어떻게 될 가능성이 큰가?", "options": ["판정해서 보내는 것과 에너지 차이가 거의 없다", "판정을 하지 않으니 장치 에너지가 오히려 준다", "판정하는 쪽이 계산 때문에 늘 더 많이 쓴다", "무선 전송이 장치 에너지의 큰 몫이 될 수 있다"], "a": 3, "why": "가정값으로 계산하면 원시 신호 전송은 판정 결과만 보내는 것보다 수천 배 크다. 몸 안 판정의 큰 이득은 데이터를 덜 보내는 데서 온다. 5구간에서 계산한다.", "ref": "#s-energy-budget", "refLabel": "5-2 1년 에너지 예산"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 응용 지도", "items": [{"id": "d27-q01b", "type": "ox", "q": "마취한 쥐의 다리 근육 곁에 하이드로겔 reservoir를 넣고 그 상태로 음성 명령을 판별해 신경 자극까지 이은 시연에서는, 입력 부호화·readout·자극 신호 생성까지 모두 몸 안 장치가 했다.", "a": false, "why": "몸 안에 있었던 것은 reservoir 소자이고, 마스킹·readout은 몸 밖 컴퓨터(MATLAB), 자극 신호는 PCB가 만들었다. 마취한 쥐 2마리의 급성 실험이다. 나머지 시연은 몸과 신호만 주고받거나(감지·자극·방출) 몸 밖에서 측정 상태로 분류했다.", "wrongWhy": ["몸 안에 있었던 것은 reservoir 소자뿐이다. 부호화·readout은 몸 밖 컴퓨터, 자극 신호는 PCB가 맡았다.", ""], "ref": "#s-app-table", "refLabel": "1구간 표: 이온 소자는 어디서 계산했나"}, {"id": "d27-q02", "type": "mc", "q": "쥐 복강에 이식한 이온 다이오드 장치가 배터리와 무선 스위치로 2시간마다 6분씩 약을 내보냈다. 감지나 판단은 하지 않았다. 응용 지도에서 이 시연에 대한 설명으로 맞는 것은?", "options": ["판단에 따라 출력을 바꾼 닫힌 고리 장치다", "몸 안에서 출력은 했지만 계산은 하지 않은 시연이다", "소자 측정값을 컴퓨터에 넣어 계산한 시뮬레이션이다", "병원에서 환자에게 쓰이는 실제 사용 단계다"], "a": 1, "why": "이식해 동작시켰으니 실험실 시연이고, 계산 없이 정해진 시간표대로 방출했다. 1구간 표의 '약물 방출' 줄이다.", "wrongWhy": ["정해진 시간표대로 방출했을 뿐, 무엇을 감지해 판단하고 출력을 바꾸지 않았다.", "", "실제 소자를 쥐 몸 안에 넣어 동작시킨 실험실 시연이다.", "동물 실험 단계이며, 이온 뉴로모픽 소자의 실제 사용 칸은 비어 있다."], "ref": "#s-app-table", "refLabel": "1구간 표: 약물 방출 줄"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 교차표", "items": [{"id": "d27-q03", "type": "mc", "q": "교차표에서 '경쟁 우위의 후보'가 되는 칸은?", "options": ["이온과 전자 소자가 모두 맞는 칸", "이온 소자가 모자란 칸", "이온 소자는 맞고 전자 소자는 맞지 않는 칸", "잰 값을 문헌에서 찾지 못한 칸"], "a": 2, "why": "둘 다 맞는 칸은 우위가 아니고, 모자란 칸은 병목이며, 잰 값을 찾지 못한 칸은 '모름'이다.", "wrongWhy": ["둘 다 맞으면 그 칸에서는 이온 소재를 고를 이유가 생기지 않는다.", "모자란 칸은 그 응용의 병목이다.", "", "잰 값이 없으면 '모름'이고, 우위도 병목도 아직 판정할 수 없다."], "ref": "#s-crossing-row", "refLabel": "2구간 '표를 읽는 법'"}, {"id": "d27-q04", "type": "mc", "q": "데이터센터 대량 추론에서 이온 소재가 경쟁하기 어려운 이유로 가장 알맞은 것은?", "options": ["이온 소자로는 곱해서 더하기를 물리로 할 수 없어서", "소자 하나의 에너지가 디지털 곱셈보다 늘 커서", "이온 소재의 재료 값이 실리콘보다 비싸서", "시간·정밀도·밀도 칸이 모자라고 이온만 맞는 칸도 없어서"], "a": 3, "why": "ns 박자, 8 bit 이상 정밀도, 높은 밀도와 내구를 요구하는데, 이온의 장점(젖은 환경·부드러움·화학 선택성)이 쓰일 칸은 없다.", "wrongWhy": ["이온 소자 배열도 Ohm 법칙과 전류의 합으로 곱해서 더할 수 있다. 문제는 속도·정밀도·밀도다.", "에너지 칸은 대부분 '모름'이다. 늘 크다고 말할 근거는 없다.", "교차표에는 재료 값 축이 없다. 판정은 요구 사양을 맞추느냐로 한다.", ""], "ref": "#s-crossing-six", "refLabel": "2구간 여섯 응용 교차표"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 감지에서 reservoir까지", "items": [{"id": "d27-q05", "type": "mc", "q": "전극–조직 계면의 '축전 방식'에 대한 설명으로 옳은 것은?", "options": ["전하는 건너지 않고 이온 배치가 전자를 밀고 당긴다", "표면 화학 반응으로 전자가 계면을 건너간다", "직류 성분을 가장 잘 통과시킨다", "전극 물질이 반응으로 조금씩 소모된다"], "a": 0, "why": "축전 방식은 커패시터처럼 동작해, 빠른 성분은 통과하고 아주 느린 성분(직류)은 통과하지 못한다. 직류도 흘리는 것은 반응 방식(Ag/AgCl 등)이고, 그 대신 전극 물질이 바뀌거나 소모된다.", "wrongWhy": ["", "반응 방식(예: Ag/AgCl)의 설명이다.", "축전 방식은 커패시터처럼 직류를 막는다. 직류를 통과시키는 것은 반응 방식이다.", "물질이 바뀌고 소모되는 것은 반응 방식의 대가다."], "ref": "#s-electrode", "refLabel": "3-1 그림 4(Day 45)a 읽는 법"}, {"id": "d27-q06", "type": "short", "q": "1 mV의 심장 신호를 1 V로 키우려면 몇 배 증폭해야 하나? (숫자만)", "a": ["1000", "1,000", "천", "1000배"], "why": "1 V ÷ 0.001 V = 1,000배. dB로는 20 × log₁₀(1,000) = 60 dB.", "ref": "#s-chain-steps", "refLabel": "단계 ② 증폭과 필터"}, {"id": "d27-q07", "type": "ox", "q": "몸 안 심전도 장치에 이온 reservoir를 넣으면, 장치 안에서 이온–전자 변환이 더 이상 필요 없어진다.", "a": false, "why": "증폭·부호화·상태 읽기·readout은 전자의 세계라, 이온 소자의 입구(전자 → 이온)와 출구(이온 → 전자)에서 변환이 두 번 더 생긴다. Roadmap이 경고한 지연·손실·왜곡의 자리다.", "ref": "#s-chain-summary", "refLabel": "3구간 단계별로 끝의 '한 문장으로'"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d27-q08", "type": "short", "q": "증폭 배율을 dB로 바꾸는 식은 20 × log₁₀(배율)이다. 100배는 몇 dB인가? (숫자만)", "a": ["40", "40 dB", "40dB"], "why": "log₁₀(100) = 2, 20 × 2 = 40 dB. 1,000배는 60 dB, 10배는 20 dB다.", "ref": "#b-decibel", "refLabel": "dB 기초: 배율 → dB"}, {"id": "d27-q09", "type": "mc", "q": "이온 reservoir를 밀봉한 통 안이 아니라 조직과 닿는 경계에 두는 구성의 장점과 대가로 알맞은 것은?", "options": ["장점: 봉지가 필요 없다 / 대가: 증폭이 더 필요해진다", "장점: 이온–전자 변환이 모두 사라진다 / 대가: 소자가 커진다", "장점: 신호를 이온인 채로 받는다 / 대가: 체액·섬유화에 노출된다", "장점: 수명이 길어진다 / 대가: 신호가 느려진다"], "a": 2, "why": "경계에 두면 이온→전자 변환 앞에서 처리할 수 있지만, Zhu 2025가 꼽은 탈수·이온 누출·섬유화 문제에 그대로 노출된다. 조직에 닿게 둔 것은 Pei 2026의 급성 동물 실험뿐이고, 장기 시연은 어느 쪽도 없다[가설].", "wrongWhy": ["소자를 체액에 직접 노출하므로 탈수·누출을 막는 설계가 오히려 더 중요해진다.", "이온 소자 뒤의 상태 읽기·readout은 전자 회로이므로 변환은 남는다.", "", "섬유화·탈수 문제에 노출되므로 수명이 길어진다고 볼 근거가 없다."], "ref": "#s-reservoir-place", "refLabel": "3-3 reservoir는 장치의 어디에 두나"}, {"id": "d27-q27", "type": "short", "q": "축전 방식 전극 두 개의 계면이 직렬로 C = 0.05 µF이고 증폭기 입력 저항이 R = 10 MΩ이다. 이 둘이 만드는 고역 통과의 차단 주파수 f_c = 1/(2π·R·C)는 약 몇 Hz인가? (숫자만, 소수 둘째 자리까지)", "a": ["0.32", "0.3", "0.318", "약 0.32", "0.32 Hz", "0.32Hz"], "why": "2π × 10⁷ Ω × 5 × 10⁻⁸ F = 2π × 0.5 ≈ 3.14 s, 그 역수가 약 0.32 Hz다. 심전도 대역(0.5–40 Hz)보다 낮아 대역의 대부분이 증폭기에 닿는다. 입력 저항이 1 MΩ이면 f_c가 10배인 3.2 Hz가 되어 느린 P파·T파가 깎인다. 커패시터를 저항처럼 보고 R × C(0.5 s)를 답하면 틀린다. 1/(2πRC)의 역수를 취해야 한다.", "ref": "#s-cutoff-steps", "refLabel": "3-2 차단 주파수 단계 보기"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 선형 readout과 학습", "items": [{"id": "d27-q10", "type": "mc", "q": "선형 readout을 쓰면 이온 소자의 안쪽 동작을 수식으로 몰라도 학습할 수 있는 이유는?", "options": ["소자가 펄스마다 스스로 가중치를 고치기 때문에", "소자 자체가 선형이라 수식이 단순하기 때문에", "readout 가중치를 학습하지 않고 고정하기 때문에", "readout 가중치만 ridge 회귀로 풀면 되기 때문에"], "a": 3, "why": "RC는 안쪽(reservoir)을 고정하고 마지막 층만 학습한다. 기록한 상태와 정답으로 연립방정식을 풀면 되고, 소자를 통과하는 기울기 계산이 필요 없다(Day 13–14). 소자가 선형일 필요는 없다.", "wrongWhy": ["이온 RC의 칩 위 학습은 폴더 문헌에서 시연을 찾지 못했다. 가중치는 몸 밖에서 구한다.", "소자는 비선형이어도 된다. 오히려 비선형 일을 reservoir가 맡는다.", "가중치는 기록한 상태와 정답으로 학습한다. 몸 안에서는 고정해 쓸 뿐이다.", ""], "ref": "#s-why-linear", "refLabel": "4-1 이유 2: 학습이 연립방정식 한 번"}, {"id": "d27-q11", "type": "short", "q": "상태 x = (0.6, 0.3), 가중치 w = (1, −1), b = 0.1일 때 readout 출력 y는? (숫자만)", "a": ["0.4", ".4", "0.40"], "why": "1 × 0.6 + (−1) × 0.3 + 0.1 = 0.6 − 0.3 + 0.1 = 0.4. 곱셈 두 번, 덧셈 두 번이다.", "ref": "#s-linear-example", "refLabel": "4-1 상태 두 개짜리 예"}, {"id": "d27-q12", "type": "mc", "q": "몸 안에서 매 박동 장치가 하는 일은?", "options": ["고정된 가중치로 곱해 더해 문턱과 비교한다", "새 가중치를 ridge 회귀로 다시 계산한다", "의사가 붙인 정답과 비교해 오차를 잰다", "소자 상태를 무선으로 보내 몸 밖에서 판정한다"], "a": 0, "why": "학습은 몸 밖에서 한 번(그리고 가끔 재보정)이고, 몸 안에서는 같은 가중치로 추론만 반복한다.", "wrongWhy": ["", "회귀는 몸 밖 컴퓨터에서, 이식 전 한 번과 가끔의 재보정 때만 한다.", "몸 안에는 정답(라벨)이 없다. 정답이 필요한 일은 몸 밖에서 한다.", "매 박동 상태를 보내면 무선 에너지가 커진다. 장치는 판정하고 결과만 보낸다."], "ref": "#s-train-where", "refLabel": "4-2 2단계: 몸 안, 매 박동"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d27-q26", "type": "mc", "q": "가중치를 몸 밖 컴퓨터에서 ridge 회귀로 학습해 장치에 넣는 구성(그림 2(Day 45)·6)에서, 다음 중 소프트웨어(프로그램)가 맡는 일은?", "options": ["이온 소자 안의 상태 변화", "증폭과 필터링", "가중치 학습(ridge 회귀)", "crossbar의 곱셈과 덧셈"], "a": 2, "why": "이 구성에서는 학습·가중치 쓰기·순서 제어·무선·재보정을 프로그램이 맡는다. 나머지 셋은 물리나 아날로그 회로로 할 수 있다. 이것은 이 구성에서의 답이다. 소자 안에서 국소 규칙으로 가중치를 고치는 하드웨어 학습 회로 같은 다른 구성이라면 학습을 프로그램 없이 할 수도 있다(이온 RC에서는 폴더 문헌에서 시연을 찾지 못함).", "wrongWhy": ["소자 안의 변화는 이온의 물리다.", "증폭·필터는 장치의 아날로그 회로가 한다.", "", "crossbar의 곱셈·덧셈은 Ohm 법칙과 전류의 합, 곧 물리로 한다."], "ref": "#s-software-table", "refLabel": "4-2 표: 이 구성에서 소프트웨어가 맡는 곳"}, {"id": "d27-q14", "type": "ox", "q": "readout을 아날로그 crossbar로 하면 장치 전체가 소프트웨어 없이 동작한다.", "a": false, "why": "추론 경로의 곱셈·덧셈은 물리로 하지만, 순서 제어·기록·무선·재보정과 학습 단계(ADC로 상태 기록, 쓰기 순환)는 남는다. 이 교재의 구성과 Zhong 2022(p.679–680)에서는 그 일을 디지털 부품과 프로그램이 맡았다. crossbar readout만으로 그 일들이 사라지지는 않는다.", "ref": "#s-full-analog", "refLabel": "4-3 완전 아날로그는 가능한가"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 1년 에너지 예산 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d27-q15", "type": "short", "q": "[풀이 예시 확인] 1초에 72번 샘플, 샘플당 12 bit면 72 × 12 = 864 bit/s. 무선 50 nJ/bit(가정)이면 864 × 50 = 43,200 nJ/s. 몇 µW인가? (숫자만)", "a": ["43.2", "43.2 µW", "약 43"], "why": "43,200 nJ/s = 43.2 µJ/s = 43.2 µW. 1년이면 약 1,362 J.", "ref": "#s-energy-budget", "refLabel": "5-2 경우 1: 원시 신호를 무선으로"}, {"id": "d27-q16", "type": "short", "q": "[일부 채우기] 상태 60개를 1초에 72번 모두 ADC로 바꾸면 60 × 72 = 4,320 변환/s. 변환 하나 1 nJ(가정)이면 몇 µW인가? (숫자만)", "a": ["4.32", "4.32 µW", "약 4.3"], "why": "4,320 nJ/s = 4.32 µW. 상태 수에 비례하므로 120개면 8.64 µW.", "ref": "#s-energy-budget", "refLabel": "5-2 경우 2: 상태마다 ADC"}, {"id": "d27-q17", "type": "short", "q": "[혼자 풀기] 이온 소자 24개를 1초에 72번 펄스로 구동하고, 펄스 하나의 충전 에너지가 0.5 nJ(작은 전극 또는 0.1 V 가정)이면 몇 µW인가? (숫자만)", "a": ["0.864", "0.864 µW", "0.86", "약 0.86"], "why": "24 × 72 × 0.5 nJ = 864 nJ/s = 0.864 µW. 1 mm²·1 V(펄스당 50 nJ)이면 100배인 86.4 µW다. 헷갈렸다면 nJ/s를 µW로 바꿀 때 1,000으로 나눴는지 확인하세요.", "ref": "#s-energy-budget", "refLabel": "5-2 잊기 쉬운 항목: 이온 reservoir 충전"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 어디서 경쟁하나", "items": [{"id": "d27-q18", "type": "mc", "q": "6구간의 경쟁 조건 네 가지(이온·물·부드러움이 필요 / 속도·밀도 요구가 낮음 / 전자 해법도 비용을 치름 / 수명 요구가 짧음)에 가장 잘 맞는 것은?", "options": ["데이터센터에서 대량 추론을 맡는 가속기 칩", "수술 뒤 몇 주 쓰는 생분해 조직 센서의 전처리", "고해상도 영상을 실시간 분류하는 칩의 연산부", "10년 동안 이식해 두는 장치의 판정 계산 전부"], "a": 1, "why": "조직과 닿고, 부드러움·생분해가 필요하며, 수명 요구가 짧다. 나머지는 속도·밀도·정밀도·내구 칸이 모자란다. 그래도 기준선과의 비교는 측정이 필요한 [가설]이다.", "wrongWhy": ["속도·정밀도·밀도 칸이 모자라고 이온만 맞는 칸이 없다.", "", "해상도가 높을수록 노드 수·정밀도 요구가 커져 밀도 칸이 모자란다.", "수년 이식의 내구 요구(1년 약 10⁹ 펄스)가 지금 보고된 내구를 크게 넘는다."], "ref": "#s-conditions", "refLabel": "6구간 경쟁 조건 네 가지"}, {"id": "d27-q19", "type": "ox", "q": "6구간에서 꼽은 후보 응용에서는 이온 reservoir가 '같은 전극 + 증폭 + ADC + MCU' 기준선보다 낫다는 측정이 이번에 다룬 문헌에 있다.", "a": false, "why": "그런 측정은 폴더에 없다. 후보는 '경쟁할 수 있을지 모르는 자리'이고, 기준선 비교 실험이 그것을 확인한다(Day 47·Day 48).", "ref": "#s-baseline-caveat", "refLabel": "6구간 '반드시 붙는 단서'"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d27-q20", "type": "mc", "q": "가정값 에너지 예산에서, 몸 안에서 박동을 판정하는 것의 가장 큰 이득은 어디서 오나?", "options": ["이온 소자의 펄스 에너지가 fJ로 작은 것", "상태마다 하던 ADC 변환을 없애는 것", "선형 readout으로 곱셈 수를 줄이는 것", "원시 심전도를 계속 무선으로 보내지 않는 것"], "a": 3, "why": "원시 신호 전송(약 43 µW, 1년 약 1,360 J)은 경보만 보내는 것(1년 약 0.44 J)보다 수천 배 크다. 이 이득은 판정을 이온 소자로 하든 디지털로 하든 같다.", "wrongWhy": ["mm²·±1 V 소자의 충전은 펄스당 약 50 nJ로, 이 예산에서는 오히려 가장 큰 줄이다.", "상태 ADC 줄(약 8.6 µW)도 줄일 수 있지만, 원시 신호 무선(약 43 µW)을 없애는 것보다 작다.", "곱셈·덧셈 에너지는 가정값이 없어 예산에 넣지 않았다. 가장 큰 차이는 무선 전송에서 난다.", ""], "ref": "#s-energy-budget", "refLabel": "5-2 정리: 무엇이 배터리를 먹나"}, {"id": "d27-q28", "type": "mc", "q": "쥐 피하에 5일 넣었던 이온 reservoir 소자를 꺼내 측정한 상태로, 컴퓨터의 readout이 손글씨 숫자를 98% 넘게 맞혔다. 이 결과만으로 말할 수 있는 것은?", "options": ["몸에 있었던 뒤에도 소자가 분류에 쓸 상태를 냈다", "소자가 몸 안에서 5일 동안 분류 계산을 했다", "몸 안 장치의 전원과 readout이 5일간 동작했다", "소자가 몸 안 조건에서 수년 동안 버틸 것이다"], "a": 0, "why": "이식 → 꺼내기 → readout 학습 → 예측의 순서이므로, 몸 안 계산이 아니라 '몸에 있었던 소자'의 측정이다. 5-4절의 원문 Fig. 4A와 단계별 표의 ④ 줄이 이 차이를 보여 준다.", "wrongWhy": ["", "측정과 계산은 꺼낸 뒤 몸 밖에서 했다.", "몸 안에 있었던 것은 소자뿐이고, 전원·readout은 시험하지 않았다.", "5일 이식으로 수년 수명을 말할 수 없다. 요구는 6개월 이상의 생체 내 연구다."], "ref": "#s-ideal-vs-now", "refLabel": "5-4 원문 Fig. 4: 꺼내서 측정"}, {"id": "d27-q22", "type": "ox", "q": "교차표의 시간척도 칸이 '맞음'이면, 그 응용에서 이온 소재는 경쟁력이 있다.", "a": false, "why": "시간은 아홉 칸 중 하나이고, 전자 소자도 ms–s τ를 낼 수 있다. 내구·에너지·밀도 칸과 '이온만 맞는 칸'을 함께 봐야 한다.", "ref": "d27a.html#s-crossing-row", "refLabel": "2구간 '표를 읽는 법'"}, {"id": "d27-q23", "type": "mc", "q": "이온 reservoir가 몸 안 장치의 에너지를 줄이려면 무엇이 필요한가?", "options": ["소자 수를 늘려 상태를 더 많이 만든다", "readout을 다층 신경망으로 바꾼다", "소자 구동 에너지가 대신하는 ADC·계산보다 작다", "증폭 배율을 키워 더 큰 펄스를 건다"], "a": 2, "why": "mm²·±1 V 소자 24개를 1초에 72번 충전하면 약 86 µW로, 디지털 readout의 ADC(약 8.6 µW)보다 클 수 있다[가정]. 저전압·작은 면적이 설계 목표가 된다.", "wrongWhy": ["소자 수에 비례해 충전 에너지와 읽기 회로가 늘어난다.", "다층 readout은 학습·계산 부담을 늘리고 crossbar로 물리 계산하기도 어렵다.", "", "펄스 전압을 키우면 ½CV²가 전압의 제곱으로 커진다."], "ref": "#s-energy-budget", "refLabel": "5-2 정리: 이온 reservoir가 이득이 되려면"}, {"id": "d27-q24", "type": "mc", "q": "같은 설계로 만든 이온 reservoir 칩 A와 B가 있다. A로 기록한 상태로 학습한 가중치를 그대로 B에 넣으면 어떻게 될 가능성이 큰가?", "options": ["같은 설계이므로 B에서도 같은 정확도가 나온다", "칩마다 상태 값이 달라 B에서는 판정이 틀어질 수 있다", "B는 가중치를 받을 수 없어 판정을 아예 못 한다", "B에서는 정확도가 오히려 늘 더 높아진다"], "a": 1, "why": "소자 간 편차 때문에 같은 박동에도 칩마다 다른 상태가 나온다(Day 32의 칩 간 readout 이식 실패). 그래서 학습용 상태는 그 장치에 들어갈 바로 그 reservoir로 기록한다. 칩 안 다양성은 이득이지만, 칩 사이 편차는 칩별 학습·재보정 비용을 만든다.", "wrongWhy": ["같은 설계라도 소자 간 편차로 같은 입력에 다른 상태가 나온다.", "", "가중치는 숫자나 전도도로 넣을 수 있다. 문제는 그 값이 B의 상태에 맞지 않는 것이다.", "편차가 정확도를 늘 올린다고 볼 근거는 없다."], "ref": "#s-train-where", "refLabel": "4-2 1단계: 바로 그 reservoir로 상태 기록"}, {"id": "d27-q29", "type": "mc", "q": "폴리전해질 접합 이온 소자의 정류를 10 mM KCl, pH 6에서 측정했다. 이 결과를 몸 안(약 150 mM, pH 7.4)에 그대로 옮기기 전에 다시 재야 하는 이유로 가장 알맞은 것은?", "options": ["배경 염과 pH가 고정 전하의 해리·선택성을 바꿀 수 있어서", "염 농도가 높아지면 소자가 전자 전도체로 바뀌어서", "pH 7.4에서는 하이드로겔이 반드시 녹아 버려서", "몸 안에서는 측정 단위가 달라 숫자를 바꿔야 해서"], "a": 0, "why": "고정 전하의 해리는 pH에, 반대이온만 들어오게 하는 배제(Donnan)는 바깥 염 농도에 달려 있다(Day 40). 바깥 염이 고정 전하 농도에 가까워지면 접합의 이점이 줄 수 있다. 생리 조건의 측정은 이번 범위에 없으므로 [가설]의 칸이다.", "wrongWhy": ["", "염 농도가 높아도 전하를 나르는 것은 여전히 이온이다. 바뀌는 것은 선택성과 정류의 크기다.", "녹는지는 소재와 가교에 달려 있다. '반드시'라고 할 근거가 없다.", "단위는 같다. 바뀌는 것은 소자의 물리적 동작이다."], "ref": "#s-physiological", "refLabel": "5-3 폴더에 없는 것: 생리 조건"}]}}}</script>
+<script type="application/json" id="quiz-d27">{"version": 2, "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 전자회로 접속과 진짜 병목", "items": [{"id": "d27-r01", "type": "mc", "q": "readout 가중치가 (0.3, −0.2)인 선형 readout을 비휘발 crossbar로 만든다. 음의 가중치 −0.2는 어떻게 나타내나?", "options": ["세로 선 두 개(G⁺, G⁻) 전류의 차로 나타낸다", "교차점의 전도도를 음수로 써서 나타낸다", "MCU가 판정마다 입력 전압의 부호를 바꾼다", "음의 가중치는 crossbar로 나타낼 수 없다"], "a": 0, "why": "전도도는 늘 0 이상이므로, 같은 입력을 두 세로 선(G⁺, G⁻)에 걸고 두 전류의 차 I⁺ − I⁻를 가중합으로 쓴다. −0.2는 G⁻ 쪽에 0.2에 해당하는 전도도를 쓰면 된다.", "wrongWhy": ["", "전도도는 전류가 얼마나 잘 흐르는가(저항의 역수)라서 음수가 될 수 없다.", "추론 경로에 디지털 처리를 다시 넣는 셈이다. 음의 가중치는 선 쌍의 전류 차로 나타낸다.", "선 쌍(G⁺, G⁻)을 쓰면 나타낼 수 있다."], "ref": "d26b.html#b-all-analog", "refLabel": "5구간 기초: 구성 B와 G⁺·G⁻ 선 쌍"}, {"id": "d27-r02", "type": "mc", "core": true, "q": "Day 31–32의 가정(상태 읽기 TIA 채널당 1 µW, 박동 하나 = 신호 1 s)으로 소자 노드를 10개에서 40개로 늘리면, 박동당 TIA 에너지는?", "options": ["10 µJ 그대로다(ADC처럼 하나를 나눠 쓴다)", "10 µJ에서 160 µJ로 N²에 비례해 는다", "10 µJ에서 40 µJ로 N에 비례해 는다", "readout을 crossbar로 옮기면 0이 된다"], "a": 2, "why": "TIA는 소자마다 하나씩 붙고 박동 내내 켜져 있으므로 40채널 × 1 µW × 1 s = 40 µJ다. 노드 수 N에 비례한다.", "wrongWhy": ["나눠 쓰는 것은 ADC·MCU다. TIA는 소자마다 하나씩 붙는다.", "N²에 비례하는 것은 N×N 배열의 소자 칸 수다. TIA는 노드 수만큼이다.", "", "readout을 옮겨도 상태를 읽는 TIA·적분기는 소자마다 남는다."], "ref": "d26b.html#s-board", "refLabel": "5-1 보드 위에서: 소자마다 붙는 TIA"}, {"id": "d27-r03", "type": "mc", "core": true, "q": "crossbar에 가중치 3개를 쓰다가 셋 모두 계획보다 +0.05씩 크게 쓰였다. 상태가 x = (0.4, 0.4, −0.4)이면 출력 y는 계획보다 얼마나 움직이나?", "options": ["+0.06", "+0.02", "+0.15", "0 (오차가 서로 상쇄된다)"], "a": 1, "why": "움직인 양 = Σ(오차 × 상태) = 0.05 × 0.4 + 0.05 × 0.4 + 0.05 × (−0.4) = 0.02 + 0.02 − 0.02 = +0.02다.", "wrongWhy": ["셋째 상태의 부호(−0.4)를 빼먹고 세 항을 모두 더했다.", "", "오차만 더하고(0.05 × 3) 상태를 곱하지 않았다.", "오차는 모두 같은 부호다. 셋째 항만 상태가 음수라 일부만 상쇄된다."], "ref": "d26b.html#s-write-error", "refLabel": "5-3 쓰기 오차 단계 보기"}, {"id": "d27-r04", "type": "ox", "q": "readout까지 crossbar로 만든 완전 아날로그 RC라도, 가중치를 칩 밖 컴퓨터에서 구한다면 학습 단계에서는 상태를 숫자로 기록하는 ADC가 쓰인다.", "a": true, "why": "완전 아날로그는 매 판정의 추론 경로에 ADC가 없다는 뜻이다. 학습할 때는 상태를 숫자로 기록하고, 쓰고-읽고-고치기로 전도도를 확인하느라 ADC가 쓰인다.", "wrongWhy": ["", "추론 경로와 학습 단계를 섞었다. 칩 밖에서 ridge 회귀를 풀려면 상태가 숫자로 있어야 한다."], "ref": "d26b.html#s-training-where", "refLabel": "5-2 가중치는 어디서 학습하나"}, {"id": "d27-r05", "type": "mc", "q": "펄스를 끊으면 몇 초 안에 원래 전도도로 돌아가는(휘발성) 이온겔 소자가 있다. 완전 아날로그 RC에서 이 소자에 맡기기 알맞은 자리는?", "options": ["readout crossbar(가중치를 붙잡는 자리)", "reservoir와 readout 두 자리 모두", "두 자리 모두 맞지 않는다", "reservoir(입력 이력을 잠시 품는 자리)"], "a": 3, "why": "reservoir에는 최근 입력의 흔적이 서서히 사라지는 성질(fading memory)이 쓸모 있다. readout 가중치는 재보정 주기 동안 흐르지 않아야 하므로 비휘발이 필요하다. 그래서 현실적인 그림은 reservoir는 이온 소자, readout은 다른 비휘발 소자인 혼성이다.", "wrongWhy": ["가중치가 몇 초 만에 원래 값으로 돌아가면 학습한 값을 붙잡지 못한다.", "readout 자리는 비휘발이어야 하므로 두 자리 모두는 맞지 않는다.", "휘발성은 reservoir에서는 단점이 아니라 쓸모다.", ""], "ref": "d26b.html#s-analog-conditions", "refLabel": "5-4 완전 아날로그의 조건 5: 이온 소자를 어디에"}, {"id": "d27-r06", "type": "mc", "q": "완전 아날로그 RC의 출력을 '정상/이상' 문턱 비교 대신 0–9의 등급 숫자로 바꿔 무선으로 보내야 한다면 무엇이 달라지나?", "options": ["끝에서 숫자 변환(ADC)이 다시 필요하다", "reservoir를 디지털 회로로 바꿔야 한다", "readout 가중치를 학습할 필요가 없다", "추론 경로에서는 달라지는 것이 없다"], "a": 0, "why": "답이 문턱 비교처럼 단순하면 끝에서도 ADC가 필요 없지만, 여러 값의 숫자를 내보내야 하면 끝에 변환이 다시 생긴다(완전 아날로그의 조건 3).", "wrongWhy": ["", "reservoir는 그대로 아날로그로 둘 수 있다. 바뀌는 것은 끝의 출력 형식이다.", "출력 형식과 상관없이 가중치는 학습해야 한다.", "아날로그 전압을 숫자로 보내려면 어딘가에서 변환이 필요하다."], "ref": "d26b.html#s-analog-conditions", "refLabel": "5-4 완전 아날로그의 조건 3: 단순한 마지막 답"}, {"id": "d27-r07", "type": "mc", "core": true, "q": "Day 49–50의 에너지 사슬(전극 1 mm², ±1 V 펄스마다 ½CV² = 50 nJ)에서 전극의 한 변을 1/10로 줄이면 펄스 하나의 계면 충전 에너지는?", "options": ["1/10인 5 nJ", "1/100인 0.5 nJ", "그대로 50 nJ", "1/1,000인 0.05 nJ"], "a": 1, "why": "계면 용량 C는 면적에 비례하고, 한 변이 1/10이면 면적은 1/100이다. 그래서 ½CV²도 1/100인 0.5 nJ다.", "wrongWhy": ["한 변의 길이가 아니라 면적(한 변의 제곱)에 비례한다.", "", "C가 면적에 비례하므로 에너지도 함께 준다.", "면적은 1/100이다. 부피처럼 세제곱으로 줄지 않는다."], "ref": "d26b.html#s-chains", "refLabel": "6-1 사슬 2: 에너지"}, {"id": "d27-r08", "type": "mc", "core": true, "q": "응용을 이식형 심전도 장치에서 '실험실에서 몇 시간 쓰는 촉각 센서 시연'으로 바꾸면, 반복 내구 후보의 판정은 어떻게 되기 쉬운가?", "options": ["응용과 무관하게 늘 병목 1순위로 남는다", "메커니즘 한계이므로 판정이 바뀌지 않는다", "대안 소자가 없으므로 병목이 아니다", "요구 횟수가 훨씬 적어 병목에서 밀려날 수 있다"], "a": 3, "why": "첫 질문(응용이 그 사양을 요구하나)의 답이 바뀌기 때문이다. 이식 1년은 약 10⁹ 펄스를 요구하지만 몇 시간 시연은 그보다 자릿수로 적다. 판정은 응용에 따라 바뀐다.", "wrongWhy": ["판정의 첫 질문이 '응용이 요구하나'이므로 응용이 바뀌면 판정도 바뀐다.", "메커니즘에서 오는 한계라도 응용이 그만큼을 요구하지 않으면 병목이 아니다.", "대안이 있느냐(Q3)는 경쟁 여부를 가르는 질문이고, 고체 소자는 이미 높은 내구를 낸다.", ""], "ref": "d26b.html#s-four-q-verdict", "refLabel": "6-2 네 질문으로 판정하기"}, {"id": "d27-r09", "type": "ox", "q": "이온 소자를 실리콘 트랜지스터처럼 아주 작게 만들면 τ는 그대로이고 집적 밀도만 올라간다.", "a": false, "why": "확산 시간은 τ ~ L²/D라서 크기 L을 줄이면 τ도 L²에 비례해 짧아진다. 크기와 시간척도가 묶여 있다는 것이 공정만으로 풀리지 않는 조건 하나다.", "wrongWhy": ["τ ~ L²/D이므로 L을 1/10로 줄이면 τ는 1/100이 된다.", ""], "ref": "d26b.html#s-objection", "refLabel": "6구간 이번 반론: 크기와 시간척도의 묶임"}, {"id": "d27-r10", "type": "mc", "q": "이온 reservoir(응답 ms–s)의 상태를 ns 박자로 동작하는 전자 회로가 받아 처리한다. 이 경계에서 생기는 비용으로 알맞은 것은?", "options": ["전자가 더 빠르므로 경계에서는 비용이 생기지 않는다", "이온 소자가 전자 회로의 박자에 저절로 맞춰진다", "박자 맞추기·버퍼가 필요하고 변환에서 지연·손실이 생긴다", "소자를 비휘발로 바꾸면 경계 비용이 사라진다"], "a": 2, "why": "두 세계의 시간척도가 자릿수로 다르고, 이온–전자 변환은 지연·에너지 손실·신호 왜곡을 들여온다. 그래서 박자 맞추기·버퍼·오류 허용 장치가 필요하다. 그 회로의 전력은 아직 잰 값이 없다.", "wrongWhy": ["빠른 쪽이 느린 쪽을 기다리거나 값을 붙잡아 둘 회로가 필요하다. 속도 차이 자체가 비용이다.", "이온 소자의 응답은 소자 물리가 정한다. 회로 박자에 맞춰 빨라지지 않는다.", "", "휘발·비휘발은 값을 붙잡는 시간의 문제다. 시간척도 차이와 변환 손실은 남는다."], "ref": "d26b.html#s-interface-cost", "refLabel": "5-4 이온–전자 접속 자체의 비용"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지", "items": [{"id": "d27-rb01", "type": "mc", "core": true, "q": "하이드로겔 소자를 쥐 피하에 2주 넣었다가 꺼내서 응답을 재고, 그 측정값으로 컴퓨터가 분류했다. 응용 지도에서 이 결과의 자리는?", "options": ["실험실 시연(이식했던 소자를 몸 밖에서 측정)", "실제 사용(몸 안에서 쓰이는 장치)", "몸 안 계산 시연(소자가 몸 안에서 판별)", "시뮬레이션(측정 없이 모형으로 계산)"], "a": 0, "why": "실제 소자와 실제 측정이 있으니 시뮬레이션이 아니고, 측정·계산은 꺼낸 뒤 몸 밖에서 했으니 몸 안 계산도 아니다. 실험실 시연 칸이다.", "wrongWhy": ["", "제품이나 현장에서 사람들이 쓰는 단계가 아니다.", "계산에 쓴 상태는 꺼낸 뒤 몸 밖에서 쟀다.", "소자를 실제로 만들어 측정했다."], "ref": "d27a.html#b-applications", "refLabel": "1구간 기초: 응용 지도의 세 칸"}, {"id": "d27-rb02", "type": "mc", "q": "어떤 응용이 소자의 시간상수 τ로 약 10 µs를 요구한다. 연성 이온 소자에서 보고된 τ가 52 ms–4,000 s라면 교차표의 시간 칸 판정은?", "options": ["맞음", "모자람", "모름", "해당 없음"], "a": 1, "why": "요구(10 µs)가 소자가 내는 범위보다 수천 배 이상 짧다. 요구를 채우지 못하므로 그 칸은 '모자람', 곧 이 응용의 병목이다.", "wrongWhy": ["범위가 겹치지 않는다. 52 ms는 10 µs의 약 5,000배다.", "", "두 값이 모두 있으므로 판정할 수 있다. '모름'은 잰 값을 찾지 못했을 때다.", "시간 축은 이 응용이 요구하는 축이다."], "ref": "d27a.html#s-crossing-row", "refLabel": "2구간 한 줄 채우기와 '표를 읽는 법'"}, {"id": "d27-rb03", "type": "mc", "core": true, "q": "어느 응용에서 '부드러움' 칸은 이온겔만 맞고, '시간·정밀도·밀도' 칸은 전자 소자만 맞는다. 교차표로 말할 수 있는 것은?", "options": ["칸이 엇갈리므로 이 표로는 판정할 수 없다", "부드러움 칸이 맞으니 이온 소재가 이긴다", "부드러움 칸은 우위 후보, 모자란 칸은 병목이다", "모든 칸이 맞아야 우위 후보가 된다"], "a": 2, "why": "교차표는 승패 하나를 내는 표가 아니라 칸마다 판정을 적는 표다. 이온만 맞는 칸은 경쟁 우위의 후보이고, 모자란 칸은 그 응용의 병목이다. 둘을 함께 보고 이온 소재를 어디에 쓸지 정한다.", "wrongWhy": ["칸마다 판정할 수 있다. 엇갈림이 오히려 표가 보여 주려는 것이다.", "한 칸이 맞는다고 응용 전체에서 이기지는 않는다. 모자란 칸이 병목으로 남는다.", "", "후보는 '이온만 맞는 칸'이 있는지로 고른다. 모든 칸이 맞을 필요는 없다."], "ref": "d27a.html#s-crossing-row", "refLabel": "2구간 '표를 읽는 법'"}, {"id": "d27-rb04", "type": "mc", "q": "몸 안 심전도 장치의 사슬에서 신호를 이온이 운반하는 곳만 고른 것은?", "options": ["조직–전극 계면과 증폭·필터 회로 안", "reservoir 소자와 readout 회로 안", "전극부터 무선 송신까지의 모든 단계", "조직–전극 계면과 reservoir 소자 안"], "a": 3, "why": "몸 쪽 체액과 reservoir 소자 안에서만 이온이 운반하고, 증폭·부호화·상태 읽기·readout·무선은 전자와 숫자의 세계다. 그래서 이온 reservoir를 넣으면 소자의 입구와 출구에서 변환이 두 번 더 생긴다.", "wrongWhy": ["계면은 맞지만, 증폭·필터는 전자 회로다.", "reservoir는 맞지만, readout은 숫자(MCU)나 전자(crossbar)로 한다.", "대부분의 단계는 전자와 숫자가 운반한다.", ""], "ref": "d27a.html#s-chain-summary", "refLabel": "3구간 단계별로 끝의 '한 문장으로'"}, {"id": "d27-rb05", "type": "mc", "q": "앞단 증폭기 30 dB와 뒷단 증폭기 30 dB를 이었다. 전체 전압 배율은 약 몇 배인가?", "options": ["60배", "약 900배", "약 1,000배", "약 63배"], "a": 2, "why": "이어 붙이면 dB를 더한다. 30 + 30 = 60 dB이고, 60 dB는 10의 (60 ÷ 20)제곱 = 1,000배다. 30 dB 하나는 약 31.6배이고 31.6 × 31.6 ≈ 1,000으로 같다.", "wrongWhy": ["dB 숫자를 배율로 그대로 읽었다. 60 dB는 60배가 아니다.", "30 dB를 30배로 보고 곱했다. 30 dB는 약 31.6배다.", "", "배율 31.6을 더했다(31.6 + 31.6). 이어 붙인 배율은 곱한다."], "ref": "d27a.html#b-decibel", "refLabel": "dB 기초: 이어 붙이면 더한다"}, {"id": "d27-rb06", "type": "mc", "q": "10 bit ADC가 2 V 범위를 나눈다면 한 칸은 약 얼마이고, 증폭하지 않은 1 mV 신호는 이 눈금에서 어떻게 되나?", "options": ["약 0.2 mV, 1 mV 신호가 약 5칸에 걸친다", "약 2 mV, 1 mV 신호는 한 칸도 채우지 못한다", "약 20 mV, 1 mV 신호는 한 칸의 1/20이다", "약 0.5 mV, 1 mV 신호가 약 2칸에 걸친다"], "a": 1, "why": "10 bit는 2¹⁰ = 1,024칸이므로 2 V ÷ 1,024 ≈ 1.95 mV다. 1 mV는 한 칸의 절반이라 모양을 담을 수 없다. 숫자로 바꾸기 전에 먼저 증폭하는 이유다.", "wrongWhy": ["2 V를 약 10,000칸으로 나눈 값이다. 10 bit는 1,024칸이다.", "", "칸 수를 100쯤으로 잘못 셌다. 1,024칸이면 한 칸은 약 2 mV다.", "4,096칸(12 bit)으로 계산했다. 10 bit는 1,024칸이다."], "ref": "d27a.html#s-chain-steps", "refLabel": "단계 ③ 부호화: ADC의 눈금"}, {"id": "d27-rb07", "type": "mc", "core": true, "q": "축전 방식 전극 두 개가 직렬로 0.05 µF이고, 증폭기 입력 저항을 1 MΩ에서 5 MΩ으로 키웠다. 차단 주파수 f_c = 1/(2π·R·C)는?", "options": ["약 16 Hz로 오른다", "약 3.2 Hz 그대로다", "약 0.13 Hz로 내려간다", "약 0.64 Hz로 내려간다"], "a": 3, "why": "f_c는 R에 반비례한다. 1 MΩ에서 약 3.2 Hz였으니 5 MΩ이면 3.2 ÷ 5 ≈ 0.64 Hz다. 직접 계산해도 1/(2π × 5 × 10⁶ × 5 × 10⁻⁸) = 1/1.57 ≈ 0.64 Hz다.", "wrongWhy": ["R을 키우면 f_c는 내려간다. 곱하지 않고 나눈다.", "f_c는 입력 저항에 따라 바뀐다.", "R이 5배면 f_c는 1/5이다. 제곱(1/25)하지 않는다.", ""], "ref": "d27a.html#s-cutoff-steps", "refLabel": "3-2 차단 주파수 단계 보기"}, {"id": "d27-rb08", "type": "ox", "q": "Ag/AgCl처럼 반응 저항(ⓓ)이 작은 전극을 쓰면 전극과 증폭기 사이의 고역 통과가 사라지고, 대신 두 전극의 전위 차이(직류 오프셋)가 그대로 들어온다.", "a": true, "why": "ⓓ가 작으면 전류가 이중층 용량 ⓒ를 우회해 직류까지 통과한다. 느린 성분을 막던 커패시터의 효과가 사라지므로, 전극 전위 ⓔ의 차이도 막히지 않고 증폭기로 들어온다.", "wrongWhy": ["", "반응 방식 전극은 직류도 흘린다. 그래서 직류 오프셋을 덜어 주던 고역 통과가 없어진다."], "ref": "d27a.html#s-cutoff-steps", "refLabel": "3-2 단계 보기의 '뜻'"}, {"id": "d27-rb09", "type": "mc", "core": true, "q": "같은 증폭기 입력 저항에서 감지 전극의 면적을 1/4로 줄이면 차단 주파수는?", "options": ["4배로 오른다", "1/4로 내려간다", "그대로다", "16배로 오른다"], "a": 0, "why": "계면 용량 C는 면적에 비례하므로 1/4이 되고, f_c = 1/(2π·R_in·C)는 C에 반비례하므로 4배로 오른다. 작은 전극일수록 느린 성분을 더 잃는다.", "wrongWhy": ["", "C가 줄면 f_c는 오른다(반비례).", "C가 면적에 따라 바뀌므로 f_c도 바뀐다.", "면적이 1/4이면 C도 1/4이다. 한 변이 1/4일 때(면적 1/16)와 헷갈렸다."], "ref": "d27a.html#s-area-link", "refLabel": "3-2 연구와의 연결: 전극 면적과 소재"}, {"id": "d27-rb10", "type": "ox", "q": "이온 reservoir를 밀봉한 통 안 대신 조직과 닿는 경계에 두면, 봉지 문제가 없어지므로 장기 이식에 더 유리하다.", "a": false, "why": "경계에 두면 신호를 이온인 채로 받을 수 있지만, 소자가 체액·단백질·면역 반응에 직접 노출되어 탈수·이온 누출·섬유화 문제가 생긴다. 어느 자리가 나은지 보인 장기 시연은 찾지 못했다.", "wrongWhy": ["노출이 늘어 탈수·누출·섬유화를 막는 설계가 더 중요해진다. 장기 이식에 유리하다고 할 근거가 없다.", ""], "ref": "d27a.html#s-reservoir-place", "refLabel": "3-3 reservoir는 장치의 어디에 두나"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "몸 안에서 심장이 뛸 때 생기는 전기 신호가 '이상 박동이다'라는 판단과 경보까지 가는 길을 상자와 화살표로 그려 보세요(상자 5–8개). 상자마다 '무엇을 하나'를 한 줄 적고, 그 상자에서 신호를 운반하는 것이 이온인지, 전자(전압·전류)인지, 숫자인지 표시합니다. 학습(가중치 정하기)은 어느 상자에서 일어나는지도 적어 보세요.", "items": [{"id": "d27-p01", "type": "ox", "q": "몸 안 체액에서 심장 신호를 운반하는 것은 전자이므로, 금속 전극은 그 신호를 바꾸지 않고 그대로 전선으로 넘긴다.", "a": false, "why": "체액은 소금물이라 신호는 이온의 움직임으로 퍼진다. 전극 표면에서 이온의 움직임이 전자의 움직임으로 바뀌어야 하고, 방법은 축전(이중층)과 반응(예: Ag/AgCl) 둘이다. 3구간에서 설명한다.", "ref": "#s-chain-steps", "refLabel": "단계 ① 감지: 이온에서 전자로"}, {"id": "d27-p02", "type": "mc", "q": "피부 위 심전도 신호(약 1 mV)를 ±1 V로 동작하는 이온 소자에 걸려면 대략 몇 배로 키워야 하나?", "options": ["10배", "100배", "1,000배", "100만 배"], "a": 2, "why": "1 V ÷ 1 mV = 1,000배(60 dB). 이 증폭기는 소자를 쓰든 안 쓰든 필요하고 늘 켜져 있어야 한다. 3구간 단계 ②와 dB 기초에서 설명한다.", "ref": "#s-chain-steps", "refLabel": "단계 ② 증폭과 필터"}, {"id": "d27-p03", "type": "mc", "q": "reservoir computing 방식의 이식 장치에서 readout 가중치를 정하는 학습은 보통 어디서 하나?", "options": ["몸 안 장치가 박동마다 새로 계산한다", "몸 밖 컴퓨터가 계산해 장치에 넣는다", "이온 소자가 펄스마다 스스로 고친다", "처음 값을 그대로 쓰고 학습하지 않는다"], "a": 1, "why": "학습에는 정답이 붙은 박동이 필요하고, 몸 안에는 정답이 없다. 몸 밖에서 상태를 기록해 ridge 회귀로 가중치를 구하고 무선으로 넣는다. 4구간에서 설명한다.", "ref": "#s-train-where", "refLabel": "4-2 그림 6: 학습은 몸 밖에서 한 번"}, {"id": "d27-p04", "type": "ox", "q": "readout을 '곱해서 더하기'(선형)로 두는 이유 중 하나는, 소자 안을 몰라도 학습을 연립방정식 한 번으로 끝낼 수 있기 때문이다.", "a": true, "why": "선형 readout은 ridge 회귀로 한 번에 풀 수 있다. 소자 안을 몰라도 되는 것은 소자 밖의 readout만 학습하기 때문이고(비선형 readout도 같다), 선형이면 그 학습이 연립방정식 한 번으로 끝난다. 계산도 작아 MCU나 crossbar로 할 수 있다. 선형은 이 교재의 기본 선택이며 유일한 선택은 아니다. 4구간에서 설명한다.", "ref": "#s-why-linear", "refLabel": "4-1 이유 2: 학습이 연립방정식 한 번"}, {"id": "d27-p05", "type": "ox", "q": "신호 처리 부품을 모두 아날로그로 만들면, 이식 장치에는 소프트웨어가 전혀 필요 없다.", "a": false, "why": "신호 처리를 아날로그로 바꿔도 학습, 가중치 쓰기, 순서 제어, 기록·무선, 재보정 판단은 남는다. 이 교재가 고른 구성(몸 밖 오프라인 학습 + MCU 제어)에서는 그 일을 프로그램이 맡는다. 고정 논리 회로나 하드웨어 학습 회로로 일부를 대신하는 다른 구성도 생각할 수 있지만, '신호 처리가 아날로그'라는 것만으로 그 일들이 사라지지는 않는다. '완전 아날로그'는 매 박동의 추론 경로를 말한다. 4구간에서 설명한다.", "ref": "#s-software-table", "refLabel": "4-2 표: 이 구성에서 소프트웨어가 맡는 곳"}, {"id": "d27-p06b", "type": "mc", "q": "어떤 연구가 하이드로겔 이온 소자를 마취한 쥐의 다리 근육 곁에 넣고, 몸 밖 컴퓨터가 그 소자의 상태로 음성 명령을 판별해 신경 자극으로 바꿨다(쥐 2마리, 마취 상태에서 한 단기 실험). 이 결과로 말할 수 있는 것은?", "options": ["전원·readout까지 갖춘 장치로 몸 안에서 오래 판정할 수 있다", "같은 일을 하는 전자 회로보다 에너지를 적게 쓴다는 것이 보였다", "이미 병원에서 환자에게 쓰이는 단계에 이르렀다", "몸 안 조건에서 계산에 쓸 상태를 낼 수 있음을 급성으로 보였다"], "a": 3, "why": "몸 안에 있었던 것은 reservoir 소자뿐이고, 입력 부호화·readout은 몸 밖 컴퓨터, 자극 신호는 회로 기판이 만들었다. 장기 동작·전원·에너지 비교·실제 사용은 보이지 않았다. 시연과 실용을 구별한다. 1구간과 5구간의 표에서 설명한다.", "ref": "#s-reservoir-place", "refLabel": "3-3 지금 도달한 것"}, {"id": "d27-p07", "type": "ox", "q": "고분자 이온 소재가 경쟁력을 갖는 응용은, 이온 소자가 전자 소자보다 빠르고 집적도가 높은 응용이다.", "a": false, "why": "속도·밀도는 대개 전자 소자가 이긴다. 이온 소재의 후보는 물·조직·이온과 직접 닿고 부드러움·화학 선택성이 필요하면서 속도·밀도 요구가 낮은 자리다. 2·6구간에서 설명한다.", "ref": "#s-conditions", "refLabel": "6구간 경쟁 조건 네 가지"}, {"id": "d27-p08", "type": "mc", "q": "이식 장치가 박동을 직접 판정하지 않고 원시 심전도를 계속 무선으로 보낸다면 에너지 면에서 어떻게 될 가능성이 큰가?", "options": ["판정해서 보내는 것과 에너지 차이가 거의 없다", "판정을 하지 않으니 장치 에너지가 오히려 준다", "판정하는 쪽이 계산 때문에 늘 더 많이 쓴다", "무선 전송이 장치 에너지의 큰 몫이 될 수 있다"], "a": 3, "why": "가정값으로 계산하면 원시 신호 전송은 판정 결과만 보내는 것보다 수천 배 크다. 몸 안 판정의 큰 이득은 데이터를 덜 보내는 데서 온다. 5구간에서 계산한다.", "ref": "#s-energy-budget", "refLabel": "5-2 1년 에너지 예산"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 응용 지도", "items": [{"id": "d27-q01b", "type": "ox", "q": "마취한 쥐의 다리 근육 곁에 하이드로겔 reservoir를 넣고 그 상태로 음성 명령을 판별해 신경 자극까지 이은 시연에서는, 입력 부호화·readout·자극 신호 생성까지 모두 몸 안 장치가 했다.", "a": false, "why": "몸 안에 있었던 것은 reservoir 소자이고, 마스킹·readout은 몸 밖 컴퓨터(MATLAB), 자극 신호는 PCB가 만들었다. 마취한 쥐 2마리의 급성 실험이다. 나머지 시연은 몸과 신호만 주고받거나(감지·자극·방출) 몸 밖에서 측정 상태로 분류했다.", "wrongWhy": ["몸 안에 있었던 것은 reservoir 소자뿐이다. 부호화·readout은 몸 밖 컴퓨터, 자극 신호는 PCB가 맡았다.", ""], "ref": "#s-app-table", "refLabel": "1구간 표: 이온 소자는 어디서 계산했나"}, {"id": "d27-q02", "type": "mc", "q": "쥐 복강에 이식한 이온 다이오드 장치가 배터리와 무선 스위치로 2시간마다 6분씩 약을 내보냈다. 감지나 판단은 하지 않았다. 응용 지도에서 이 시연에 대한 설명으로 맞는 것은?", "options": ["판단에 따라 출력을 바꾼 닫힌 고리 장치다", "몸 안에서 출력은 했지만 계산은 하지 않은 시연이다", "소자 측정값을 컴퓨터에 넣어 계산한 시뮬레이션이다", "병원에서 환자에게 쓰이는 실제 사용 단계다"], "a": 1, "why": "이식해 동작시켰으니 실험실 시연이고, 계산 없이 정해진 시간표대로 방출했다. 1구간 표의 '약물 방출' 줄이다.", "wrongWhy": ["정해진 시간표대로 방출했을 뿐, 무엇을 감지해 판단하고 출력을 바꾸지 않았다.", "", "실제 소자를 쥐 몸 안에 넣어 동작시킨 실험실 시연이다.", "동물 실험 단계이며, 이온 뉴로모픽 소자의 실제 사용 칸은 비어 있다."], "ref": "#s-app-table", "refLabel": "1구간 표: 약물 방출 줄"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 교차표", "items": [{"id": "d27-q03", "type": "mc", "q": "교차표에서 '경쟁 우위의 후보'가 되는 칸은?", "options": ["이온과 전자 소자가 모두 맞는 칸", "이온 소자가 모자란 칸", "이온 소자는 맞고 전자 소자는 맞지 않는 칸", "잰 값을 문헌에서 찾지 못한 칸"], "a": 2, "why": "둘 다 맞는 칸은 우위가 아니고, 모자란 칸은 병목이며, 잰 값을 찾지 못한 칸은 '모름'이다.", "wrongWhy": ["둘 다 맞으면 그 칸에서는 이온 소재를 고를 이유가 생기지 않는다.", "모자란 칸은 그 응용의 병목이다.", "", "잰 값이 없으면 '모름'이고, 우위도 병목도 아직 판정할 수 없다."], "ref": "#s-crossing-row", "refLabel": "2구간 '표를 읽는 법'"}, {"id": "d27-q04", "type": "mc", "q": "데이터센터 대량 추론에서 이온 소재가 경쟁하기 어려운 이유로 가장 알맞은 것은?", "options": ["이온 소자로는 곱해서 더하기를 물리로 할 수 없어서", "소자 하나의 에너지가 디지털 곱셈보다 늘 커서", "이온 소재의 재료 값이 실리콘보다 비싸서", "시간·정밀도·밀도 칸이 모자라고 이온만 맞는 칸도 없어서"], "a": 3, "why": "ns 박자, 8 bit 이상 정밀도, 높은 밀도와 내구를 요구하는데, 이온의 장점(젖은 환경·부드러움·화학 선택성)이 쓰일 칸은 없다.", "wrongWhy": ["이온 소자 배열도 Ohm 법칙과 전류의 합으로 곱해서 더할 수 있다. 문제는 속도·정밀도·밀도다.", "에너지 칸은 대부분 '모름'이다. 늘 크다고 말할 근거는 없다.", "교차표에는 재료 값 축이 없다. 판정은 요구 사양을 맞추느냐로 한다.", ""], "ref": "#s-crossing-six", "refLabel": "2구간 여섯 응용 교차표"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 감지에서 reservoir까지", "items": [{"id": "d27-q05", "type": "mc", "q": "전극–조직 계면의 '축전 방식'에 대한 설명으로 옳은 것은?", "options": ["전하는 건너지 않고 이온 배치가 전자를 밀고 당긴다", "표면 화학 반응으로 전자가 계면을 건너간다", "직류 성분을 가장 잘 통과시킨다", "전극 물질이 반응으로 조금씩 소모된다"], "a": 0, "why": "축전 방식은 커패시터처럼 동작해, 빠른 성분은 통과하고 아주 느린 성분(직류)은 통과하지 못한다. 직류도 흘리는 것은 반응 방식(Ag/AgCl 등)이고, 그 대신 전극 물질이 바뀌거나 소모된다.", "wrongWhy": ["", "반응 방식(예: Ag/AgCl)의 설명이다.", "축전 방식은 커패시터처럼 직류를 막는다. 직류를 통과시키는 것은 반응 방식이다.", "물질이 바뀌고 소모되는 것은 반응 방식의 대가다."], "ref": "#s-electrode", "refLabel": "3-1 그림 4(Day 51)(a) 읽는 법"}, {"id": "d27-q06", "type": "short", "q": "1 mV의 심장 신호를 1 V로 키우려면 몇 배 증폭해야 하나? (숫자만)", "a": ["1000", "1,000", "천", "1000배"], "why": "1 V ÷ 0.001 V = 1,000배. dB로는 20 × log₁₀(1,000) = 60 dB.", "ref": "#s-chain-steps", "refLabel": "단계 ② 증폭과 필터"}, {"id": "d27-q07", "type": "ox", "q": "몸 안 심전도 장치에 이온 reservoir를 넣으면, 장치 안에서 이온–전자 변환이 더 이상 필요 없어진다.", "a": false, "why": "증폭·부호화·상태 읽기·readout은 전자의 세계라, 이온 소자의 입구(전자 → 이온)와 출구(이온 → 전자)에서 변환이 두 번 더 생긴다. Roadmap이 경고한 지연·손실·왜곡의 자리다.", "ref": "#s-chain-summary", "refLabel": "3구간 단계별로 끝의 '한 문장으로'"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d27-q08", "type": "short", "q": "증폭 배율을 dB로 바꾸는 식은 20 × log₁₀(배율)이다. 100배는 몇 dB인가? (숫자만)", "a": ["40", "40 dB", "40dB"], "why": "log₁₀(100) = 2, 20 × 2 = 40 dB. 1,000배는 60 dB, 10배는 20 dB다.", "ref": "#b-decibel", "refLabel": "dB 기초: 배율 → dB"}, {"id": "d27-q09", "type": "mc", "q": "이온 reservoir를 밀봉한 통 안이 아니라 조직과 닿는 경계에 두는 구성의 장점과 대가로 알맞은 것은?", "options": ["장점: 봉지가 필요 없다 / 대가: 증폭이 더 필요해진다", "장점: 이온–전자 변환이 모두 사라진다 / 대가: 소자가 커진다", "장점: 신호를 이온인 채로 받는다 / 대가: 체액·섬유화에 노출된다", "장점: 수명이 길어진다 / 대가: 신호가 느려진다"], "a": 2, "why": "경계에 두면 이온→전자 변환 앞에서 처리할 수 있지만, Zhu 2025가 꼽은 탈수·이온 누출·섬유화 문제에 그대로 노출된다. 조직에 닿게 둔 것은 Pei 2026의 급성 동물 실험뿐이고, 장기 시연은 어느 쪽도 없다[가설].", "wrongWhy": ["소자를 체액에 직접 노출하므로 탈수·누출을 막는 설계가 오히려 더 중요해진다.", "이온 소자 뒤의 상태 읽기·readout은 전자 회로이므로 변환은 남는다.", "", "섬유화·탈수 문제에 노출되므로 수명이 길어진다고 볼 근거가 없다."], "ref": "#s-reservoir-place", "refLabel": "3-3 reservoir는 장치의 어디에 두나"}, {"id": "d27-q27", "type": "short", "q": "축전 방식 전극 두 개의 계면이 직렬로 C = 0.05 µF이고 증폭기 입력 저항이 R = 10 MΩ이다. 이 둘이 만드는 고역 통과의 차단 주파수 f_c = 1/(2π·R·C)는 약 몇 Hz인가? (숫자만, 소수 둘째 자리까지)", "a": ["0.32", "0.3", "0.318", "약 0.32", "0.32 Hz", "0.32Hz"], "why": "2π × 10⁷ Ω × 5 × 10⁻⁸ F = 2π × 0.5 ≈ 3.14 s, 그 역수가 약 0.32 Hz다. 심전도 대역(0.5–40 Hz)보다 낮아 대역의 대부분이 증폭기에 닿는다. 입력 저항이 1 MΩ이면 f_c가 10배인 3.2 Hz가 되어 느린 P파·T파가 깎인다. 커패시터를 저항처럼 보고 R × C(0.5 s)를 답하면 틀린다. 1/(2πRC)의 역수를 취해야 한다.", "ref": "#s-cutoff-steps", "refLabel": "3-2 차단 주파수 단계 보기"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 선형 readout과 학습", "items": [{"id": "d27-q10", "type": "mc", "q": "RC에서 readout을 학습할 때 이온 소자의 안쪽 동작을 수식으로 몰라도 되는 이유는?", "options": ["소자가 펄스마다 스스로 가중치를 고치기 때문에", "소자 자체가 선형이라 수식이 단순하기 때문에", "readout 가중치를 학습하지 않고 고정하기 때문에", "readout 가중치만 ridge 회귀로 풀면 되기 때문에"], "a": 3, "why": "RC는 안쪽(reservoir)을 고정하고 소자 밖의 readout만 학습한다. 기록한 상태와 정답만 있으면 되고, 소자를 통과하는 기울기 계산이 필요 없다(Day 13–14). 이 점은 비선형 readout도 같고, readout이 선형이면 그 학습이 ridge 회귀 연립방정식 한 번으로 끝난다. 소자가 선형일 필요는 없다.", "wrongWhy": ["이온 RC의 on-chip training은 폴더 문헌에서 시연을 찾지 못했다. 가중치는 몸 밖에서 구한다.", "소자는 비선형이어도 된다. 오히려 비선형 일을 reservoir가 맡는다.", "가중치는 기록한 상태와 정답으로 학습한다. 몸 안에서는 고정해 쓸 뿐이다.", ""], "ref": "#s-why-linear", "refLabel": "4-1 이유 2: 학습이 연립방정식 한 번"}, {"id": "d27-q11", "type": "short", "q": "상태 x = (0.6, 0.3), 가중치 w = (1, −1), b = 0.1일 때 readout 출력 y는? (숫자만)", "a": ["0.4", ".4", "0.40"], "why": "1 × 0.6 + (−1) × 0.3 + 0.1 = 0.6 − 0.3 + 0.1 = 0.4. 곱셈 두 번, 덧셈 두 번이다.", "ref": "#s-linear-example", "refLabel": "4-1 상태 두 개짜리 예"}, {"id": "d27-q12", "type": "mc", "q": "몸 안에서 매 박동 장치가 하는 일은?", "options": ["고정된 가중치로 곱해 더해 문턱과 비교한다", "새 가중치를 ridge 회귀로 다시 계산한다", "의사가 붙인 정답과 비교해 오차를 잰다", "소자 상태를 무선으로 보내 몸 밖에서 판정한다"], "a": 0, "why": "학습은 몸 밖에서 한 번(그리고 가끔 재보정)이고, 몸 안에서는 같은 가중치로 추론만 반복한다.", "wrongWhy": ["", "회귀는 몸 밖 컴퓨터에서, 이식 전 한 번과 가끔의 재보정 때만 한다.", "몸 안에는 정답(라벨)이 없다. 정답이 필요한 일은 몸 밖에서 한다.", "매 박동 상태를 보내면 무선 에너지가 커진다. 장치는 판정하고 결과만 보낸다."], "ref": "#s-train-where", "refLabel": "4-2 2단계: 몸 안, 매 박동"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d27-q26", "type": "mc", "q": "가중치를 몸 밖 컴퓨터에서 ridge 회귀로 학습해 장치에 넣는 구성(그림 2(Day 51)·6)에서, 다음 중 소프트웨어(프로그램)가 맡는 일은?", "options": ["이온 소자 안의 상태 변화", "증폭과 필터링", "가중치 학습(ridge 회귀)", "crossbar의 곱셈과 덧셈"], "a": 2, "why": "이 구성에서는 학습·가중치 쓰기·순서 제어·무선·재보정을 프로그램이 맡는다. 나머지 셋은 물리나 아날로그 회로로 할 수 있다. 이것은 이 구성에서의 답이다. 소자 안에서 국소 규칙으로 가중치를 고치는 하드웨어 학습 회로 같은 다른 구성이라면 학습을 프로그램 없이 할 수도 있다(이온 RC에서는 폴더 문헌에서 시연을 찾지 못함).", "wrongWhy": ["소자 안의 변화는 이온의 물리다.", "증폭·필터는 장치의 아날로그 회로가 한다.", "", "crossbar의 곱셈·덧셈은 Ohm 법칙과 전류의 합, 곧 물리로 한다."], "ref": "#s-software-table", "refLabel": "4-2 표: 이 구성에서 소프트웨어가 맡는 곳"}, {"id": "d27-q14", "type": "ox", "q": "readout을 아날로그 crossbar로 하면 장치 전체가 소프트웨어 없이 동작한다.", "a": false, "why": "추론 경로의 곱셈·덧셈은 물리로 하지만, 순서 제어·기록·무선·재보정과 학습 단계(ADC로 상태 기록, 쓰기 순환)는 남는다. 이 교재의 구성과 Zhong 2022(p.679–680)에서는 그 일을 디지털 부품과 프로그램이 맡았다. crossbar readout만으로 그 일들이 사라지지는 않는다.", "ref": "#s-full-analog", "refLabel": "4-3 완전 아날로그는 가능한가"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 1년 에너지 예산 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d27-q15", "type": "short", "q": "[풀이 예시 확인] 1초에 72번 샘플, 샘플당 12 bit면 72 × 12 = 864 bit/s. 무선 50 nJ/bit(가정)이면 864 × 50 = 43,200 nJ/s. 몇 µW인가? (숫자만)", "a": ["43.2", "43.2 µW", "약 43"], "why": "43,200 nJ/s = 43.2 µJ/s = 43.2 µW. 1년이면 약 1,362 J.", "ref": "#s-energy-budget", "refLabel": "5-2 경우 1: 원시 신호를 무선으로"}, {"id": "d27-q16", "type": "short", "q": "[일부 채우기] 상태 60개를 1초에 72번 모두 ADC로 바꾸면 60 × 72 = 4,320 변환/s. 변환 하나 1 nJ(가정)이면 몇 µW인가? (숫자만)", "a": ["4.32", "4.32 µW", "약 4.3"], "why": "4,320 nJ/s = 4.32 µW. 상태 수에 비례하므로 120개면 8.64 µW.", "ref": "#s-energy-budget", "refLabel": "5-2 경우 2: 상태마다 ADC"}, {"id": "d27-q17", "type": "short", "q": "[혼자 풀기] 이온 소자 24개를 1초에 72번 펄스로 구동하고, 펄스 하나의 충전 에너지가 0.5 nJ(작은 전극 또는 0.1 V 가정)이면 몇 µW인가? (숫자만)", "a": ["0.864", "0.864 µW", "0.86", "약 0.86"], "why": "24 × 72 × 0.5 nJ = 864 nJ/s = 0.864 µW. 1 mm²·1 V(펄스당 50 nJ)이면 100배인 86.4 µW다. 헷갈렸다면 nJ/s를 µW로 바꿀 때 1,000으로 나눴는지 확인하세요.", "ref": "#s-energy-budget", "refLabel": "5-2 잊기 쉬운 항목: 이온 reservoir 충전"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 어디서 경쟁하나", "items": [{"id": "d27-q18", "type": "mc", "q": "6구간의 경쟁 조건 네 가지(이온·물·부드러움이 필요 / 속도·밀도 요구가 낮음 / 전자 해법도 비용을 치름 / 수명 요구가 짧음)에 가장 잘 맞는 것은?", "options": ["데이터센터에서 대량 추론을 맡는 가속기 칩", "수술 뒤 몇 주 쓰는 생분해 조직 센서의 전처리", "고해상도 영상을 실시간 분류하는 칩의 연산부", "10년 동안 이식해 두는 장치의 판정 계산 전부"], "a": 1, "why": "조직과 닿고, 부드러움·생분해가 필요하며, 수명 요구가 짧다. 나머지는 속도·밀도·정밀도·내구 칸이 모자란다. 그래도 기준선과의 비교는 측정이 필요한 [가설]이다.", "wrongWhy": ["속도·정밀도·밀도 칸이 모자라고 이온만 맞는 칸이 없다.", "", "해상도가 높을수록 노드 수·정밀도 요구가 커져 밀도 칸이 모자란다.", "수년 이식의 내구 요구(1년 약 10⁹ 펄스)가 지금 보고된 내구를 크게 넘는다."], "ref": "#s-conditions", "refLabel": "6구간 경쟁 조건 네 가지"}, {"id": "d27-q19", "type": "ox", "q": "6구간에서 꼽은 후보 응용에서는 이온 reservoir가 '같은 전극 + 증폭 + ADC + MCU' 기준선보다 낫다는 측정이 이번에 다룬 문헌에 있다.", "a": false, "why": "그런 측정은 폴더에 없다. 후보는 '경쟁할 수 있을지 모르는 자리'이고, 기준선 비교 실험이 그것을 확인한다(Day 53–54·Day 55–56).", "ref": "#s-baseline-caveat", "refLabel": "6구간 '반드시 붙는 단서'"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d27-q20", "type": "mc", "q": "가정값 에너지 예산에서, 몸 안에서 박동을 판정하는 것의 가장 큰 이득은 어디서 오나?", "options": ["이온 소자의 펄스 에너지가 fJ로 작은 것", "상태마다 하던 ADC 변환을 없애는 것", "선형 readout으로 곱셈 수를 줄이는 것", "원시 심전도를 계속 무선으로 보내지 않는 것"], "a": 3, "why": "원시 신호 전송(약 43 µW, 1년 약 1,360 J)은 경보만 보내는 것(1년 약 0.44 J)보다 수천 배 크다. 이 이득은 판정을 이온 소자로 하든 디지털로 하든 같다.", "wrongWhy": ["mm²·±1 V 소자의 충전은 펄스당 약 50 nJ로, 이 예산에서는 오히려 가장 큰 줄이다.", "상태 ADC 줄(약 8.6 µW)도 줄일 수 있지만, 원시 신호 무선(약 43 µW)을 없애는 것보다 작다.", "곱셈·덧셈 에너지는 가정값이 없어 예산에 넣지 않았다. 가장 큰 차이는 무선 전송에서 난다.", ""], "ref": "#s-energy-budget", "refLabel": "5-2 정리: 무엇이 배터리를 먹나"}, {"id": "d27-q28", "type": "mc", "q": "쥐 피하에 5일 넣었던 이온 reservoir 소자를 꺼내 측정한 상태로, 컴퓨터의 readout이 손글씨 숫자를 98% 넘게 맞혔다. 이 결과만으로 말할 수 있는 것은?", "options": ["몸에 있었던 뒤에도 소자가 분류에 쓸 상태를 냈다", "소자가 몸 안에서 5일 동안 분류 계산을 했다", "몸 안 장치의 전원과 readout이 5일간 동작했다", "소자가 몸 안 조건에서 수년 동안 버틸 것이다"], "a": 0, "why": "이식 → 꺼내기 → readout 학습 → 예측의 순서이므로, 몸 안 계산이 아니라 '몸에 있었던 소자'의 측정이다. 5-4절의 원문 Fig. 4A와 단계별 표의 ④ 줄이 이 차이를 보여 준다.", "wrongWhy": ["", "측정과 계산은 꺼낸 뒤 몸 밖에서 했다.", "몸 안에 있었던 것은 소자뿐이고, 전원·readout은 시험하지 않았다.", "5일 이식으로 수년 수명을 말할 수 없다. 요구는 6개월 이상의 생체 내 연구다."], "ref": "#s-ideal-vs-now", "refLabel": "5-4 원문 Fig. 4: 꺼내서 측정"}, {"id": "d27-q22", "type": "ox", "q": "교차표의 시간척도 칸이 '맞음'이면, 그 응용에서 이온 소재는 경쟁력이 있다.", "a": false, "why": "시간은 아홉 칸 중 하나이고, 전자 소자도 ms–s τ를 낼 수 있다. 내구·에너지·밀도 칸과 '이온만 맞는 칸'을 함께 봐야 한다.", "ref": "d27a.html#s-crossing-row", "refLabel": "2구간 '표를 읽는 법'"}, {"id": "d27-q23", "type": "mc", "q": "이온 reservoir가 몸 안 장치의 에너지를 줄이려면 무엇이 필요한가?", "options": ["소자 수를 늘려 상태를 더 많이 만든다", "readout을 다층 신경망으로 바꾼다", "소자 구동 에너지가 대신하는 ADC·계산보다 작다", "증폭 배율을 키워 더 큰 펄스를 건다"], "a": 2, "why": "mm²·±1 V 소자 24개를 1초에 72번 충전하면 약 86 µW로, 디지털 readout의 ADC(약 8.6 µW)보다 클 수 있다[가정]. 저전압·작은 면적이 설계 목표가 된다.", "wrongWhy": ["소자 수에 비례해 충전 에너지와 읽기 회로가 늘어난다.", "다층 readout은 학습·계산 부담을 늘리고 crossbar로 물리 계산하기도 어렵다.", "", "펄스 전압을 키우면 ½CV²가 전압의 제곱으로 커진다."], "ref": "#s-energy-budget", "refLabel": "5-2 정리: 이온 reservoir가 이득이 되려면"}, {"id": "d27-q24", "type": "mc", "q": "같은 설계로 만든 이온 reservoir 칩 A와 B가 있다. A로 기록한 상태로 학습한 가중치를 그대로 B에 넣으면 어떻게 될 가능성이 큰가?", "options": ["같은 설계이므로 B에서도 같은 정확도가 나온다", "칩마다 상태 값이 달라 B에서는 판정이 틀어질 수 있다", "B는 가중치를 받을 수 없어 판정을 아예 못 한다", "B에서는 정확도가 오히려 늘 더 높아진다"], "a": 1, "why": "소자 간 편차 때문에 같은 박동에도 칩마다 다른 상태가 나온다(Day 33–34의 칩 간 readout 이식 실패). 그래서 학습용 상태는 그 장치에 들어갈 바로 그 reservoir로 기록한다. 칩 안 다양성은 이득이지만, 칩 사이 편차는 칩별 학습·재보정 비용을 만든다.", "wrongWhy": ["같은 설계라도 소자 간 편차로 같은 입력에 다른 상태가 나온다.", "", "가중치는 숫자나 전도도로 넣을 수 있다. 문제는 그 값이 B의 상태에 맞지 않는 것이다.", "편차가 정확도를 늘 올린다고 볼 근거는 없다."], "ref": "#s-train-where", "refLabel": "4-2 1단계: 바로 그 reservoir로 상태 기록"}, {"id": "d27-q29", "type": "mc", "q": "폴리전해질 접합 이온 소자의 정류를 10 mM KCl, pH 6에서 측정했다. 이 결과를 몸 안(약 150 mM, pH 7.4)에 그대로 옮기기 전에 다시 재야 하는 이유로 가장 알맞은 것은?", "options": ["배경 염과 pH가 고정 전하의 해리를 바꿀 수 있어서", "염 농도가 높아지면 소자가 전자 전도체로 바뀌어서", "pH 7.4에서는 하이드로겔이 반드시 녹아 버려서", "몸 안에서는 측정 단위가 달라 숫자를 바꿔야 해서"], "a": 0, "why": "고정 전하의 해리는 pH에, 반대이온만 들어오게 하는 배제(Donnan)는 바깥 염 농도에 달려 있다(Day 45–46). 바깥 염이 고정 전하 농도에 가까워지면 접합의 이점이 줄 수 있다. 생리 조건의 측정은 이번 범위에 없으므로 [가설]의 칸이다.", "wrongWhy": ["", "염 농도가 높아도 전하를 나르는 것은 여전히 이온이다. 바뀌는 것은 선택성과 정류의 크기다.", "녹는지는 소재와 가교에 달려 있다. '반드시'라고 할 근거가 없다.", "단위는 같다. 바뀌는 것은 소자의 물리적 동작이다."], "ref": "#s-physiological", "refLabel": "5-3 폴더에 없는 것: 생리 조건"}]}}}</script>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>
 <div class="done-box" data-day="d27b">
   <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>readout을 선형으로 두는 세 이유(이 교재의 기본 선택)와 몸 밖 학습·재보정, 이 구성에서 소프트웨어가 맡는 곳, 1년 에너지 예산에서 무엇이 배터리를 먹나, 이온 소재가 경쟁할 조건</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
   <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
@@ -1175,7 +1207,7 @@ window.Quarto = {
   <div class="done-static static-only"></div>
 </div>
 <div class="next-unit">
-<p><strong>다음 학습</strong> — <a href="../days/d28.html">Day 47 · 가장 중요한 가설 →</a></p>
+<p><strong>다음 학습</strong> — <a href="../days/d28a.html">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기 →</a></p>
 </div>
 </section>
 <section id="writing" class="level2">
@@ -1609,13 +1641,13 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../days/d27a.html" class="pagination-link" aria-label="Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span>
+      <a href="../days/d27a.html" class="pagination-link" aria-label="Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../days/d28.html" class="pagination-link" aria-label="Day 47 · 가장 중요한 가설">
-        <span class="nav-page-text">Day 47 · 가장 중요한 가설</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../days/d28a.html" class="pagination-link" aria-label="Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기">
+        <span class="nav-page-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1623,14 +1655,14 @@ window.Quarto = {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
     <div class="nav-footer-center">
-<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
-</div>
-    <div class="nav-footer-right">
       &nbsp;
     </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
   </div>
 </footer>
 

@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 53. 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기 – Why Ions Compute?</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d28b.html" rel="next">
+<link href="../days/d27b.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 2,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "/"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute?</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">홈</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">로드맵</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d25a.html">Phase 5 · 무엇을 연구할까</a></li><li class="breadcrumb-item"><a href="../days/d28a.html">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">로드맵</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">지난 학습 복습</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d25a.html">Phase 5 · 무엇을 연구할까</a></li><li class="breadcrumb-item"><a href="../days/d28a.html">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 53. 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</h1>
+<p class="subtitle lead">Phase 5 · 나는 무엇을 연구해야 하는가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> — 가설은 관찰·주제·목표와 무엇이 다르고, '틀렸다면 무엇이 관측되나'를 숫자로 어떻게 적나? 가설 하나에 붙는 두 사슬(왜 필요한가 / 왜 그렇게 되는가)의 가장 약한 고리는 믿음의 곱과 조건부 믿음으로 어떻게 찾고, 후보는 앞 Day들의 빈칸에서 어떻게 꺼내나?</p>
+<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> — "이온 고분자로 뉴로모픽을 연구한다"는 어떤 실험 결과가 나와도 서 있어서 Day 57–58의 한다/접는다 결정에 쓸 수 없습니다. 오늘은 내 연구 질문을 '가교제를 늘리면 τ가 2배'처럼 실험 결과로 틀릴 수 있는 문장과 그 반증 숫자로 바꾸는 법, 그리고 어느 고리부터 재야 싼지 고르는 법을 익힙니다.</p>
+<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> — 입력 = 앞 Day들의 빈칸(장부·교차표) → 하는 일 = 빈칸 → 질문 → 가설로 바꾸고, 가설에 두 사슬(왜 필요한가 / 왜 그렇게 되는가)을 붙여 고리마다 p를 매겨 곱함 → 출력 = 예측 숫자, 반증 구간, 가장 약한 고리.</p>
+<p><strong>오늘 반드시</strong> — 가설은 "무엇을 같게 둔 채로" 어떤 숫자가 나오면 틀렸다고 말하는 문장이다(예: τ₅ 예측 4.0 s, 반증 1.7–2.3 s). 고리 믿음의 곱은 고리가 늘수록 빨리 줄고, 가장 약한 고리부터 시험하면 가장 많이 배운다.</p>
+<p><strong>나중에 더 봐도 되는 것</strong> — 포퍼와 영상, 조건부 믿음·연쇄 법칙의 계산(한 번 따라가 보고 'p는 앞 고리가 섰다고 치고 매긴다'만 기억), Singh 2026 Fig. 2 심화, 내 가설 직접 쓰기(연구 방향이 정해진 뒤에).</p>
+<p><strong>다음으로 넘어가는 기준</strong> — '오늘 반드시'를 내 말로 한두 문장 말할 수 있으면 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
+<p><strong>이후 쓰이는 곳</strong> — 다음 단위의 관문·점수와 교란변수, Day 55–56 가장 약한 고리를 시험하는 최소 실험. 내 가설 쓰기는 선택이며, 연구 방향이 정해지면 내 장부의 빈칸 하나로 두 사슬을 그려 본다</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d28a">
+  <li data-step="review"><a href="#review"><b>1</b>지난 학습 복습</a></li>
+  <li data-step="lesson"><a href="#lesson"><b>2</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>3</b>학습 완료</a></li>
+</ol>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
+<div class="flow-line">
+<p>지난 학습 단위(Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+</div>
+<div class="quiz" data-day="d28" data-set="review"></div>
+</section>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">사전 테스트 (선택)</h2>
+<details class="fold pretest-fold"><summary>사전 테스트 펼치기 · 배우기 전에 짐작해 보는 문제 (선택)</summary><div class="quiz" data-day="d28" data-set="pre"></div>
+</details>
+</section>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<div class="lesson-meta">
+<p>이번 Day는 학습 구간 1–3 · 한 번에 다 읽지 않아도 됩니다(구간 안의 '멈추기 좋은 곳'에서 끊어 읽어도 됩니다) · 선택 영상 2개(사전 테스트·지난 학습 복습 제외) · 내 답 쓰기는 따로. <strong>숫자의 성격</strong>: 이 Day의 숫자(고리 믿음 <span class="math inline">\(p\)</span>, 후보 점수와 가중치, τ·함수율·두께 값)는 판단 방법을 보이려고 Claude가 정한 예시 값[가정]과 그 계산이며 측정이 아닙니다. <strong>후보 A–E는 모두 판단 방법을 보이기 위한 예시</strong>이며, 내 연구 방향을 정하는 추천이 아닙니다. 가설·예측·반증·교란변수·조건부 확률의 뜻은 과학 방법론과 확률의 일반 교과 내용이고 폴더 논문에서 온 것이 아닙니다. 그림은 <code>python tools/figs_d28.py</code>로 다시 그릴 수 있습니다.</p>
+<details class="meta-more">
+<summary>
+근거 표기와 Claude가 대조한 범위
+</summary>
+<p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). 이번에 다시 부르는 것 중 Zheng 2025, Zhang 2024 (ACS Nano), Wang 2025 (Chem. Soc. Rev.)가 Readable papers1에 있습니다. <strong>Claude가 원문과 대조한 범위</strong>: Singh 2026 p.3(원문 Fig. 2와 캡션, 본문 둘째 단), p.19–20(증거의 세 수준, Table 3) / 그 밖의 쪽수는 Day 37–52에서 대조한 것을 그대로 다시 썼습니다(본문·캡션·Methods만, SI 미확인). <strong>폴더 밖에서 확인한 것</strong>: 포퍼 책의 출판 연도와 '재현되는 결과로만 반증한다'는 문장(Wikipedia "The Logic of Scientific Discovery"가 인용한 영어판 p.66, 원전 미대조), 5구간 Mackie–Meares 식의 형태(2차 문헌으로 확인, 원전 미대조). <span class="tag tag-unverified">미확인</span>은 폴더에 없고 확인하지 못한 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것, <span class="tag tag-fact">확인</span>은 원문·식이나 그 자리에 적은 출처로 확인한 것, [가정]은 계산을 보이려고 정해 둔 예시 값입니다. 2구간에서 사슬의 고리에 붙이는 태그도 같은 뜻입니다.</p>
+</details>
+</div>
+<p>Phase 5의 넷째 Day입니다. Day 47–48에서 이 분야가 무엇을 입증했고 무엇이 비어 있는지(<a href="../days/d25b.html#ch-patterns">Day 48 5구간</a>), Day 49–50에서 실용화를 막는 병목이 무엇인지(<a href="../days/d26a.html#b-bottleneck-layers">Day 49 기초: 병목의 계층</a>), Day 51–52에서 고분자 이온 소재가 경쟁할 수 있을지 모르는 자리가 어디인지(<a href="../days/d27b.html#ch-where-compete">Day 52 6구간</a>) 봤습니다. 이제 질문이 처음으로 <strong>나</strong>를 향합니다. <strong>내가 고분자 설계로 검증할 수 있는 가장 중요한 가설은 무엇인가?</strong></p>
+<p>이번 자료는 이 질문의 <strong>답을 주지 않습니다.</strong> 답은 내 소재, 내 장비, 내 관심으로만 정할 수 있고, 아직 구조·응용(application)·과제(task)를 정하지 않았다면 정해지지 않은 것이 정상입니다. 내 답 양식에 쓰는 것은 선택이고, 지금은 예시 후보 하나로 방법을 따라가도 충분합니다. 이 자료가 주는 것은 답을 고르는 <strong>방법과 판단 기준</strong>입니다. 가설이 무엇이고, 좋은 가설에는 어떤 사슬이 붙어야 하며, 후보를 어디서 꺼내 어떤 체로 거르고, 어떤 함정을 피해 하나를 고르는가. 예시로 드는 후보 다섯 개(A–E)는 그 방법을 보이기 위한 재료입니다. 그중 하나는 사용자의 연구 맥락(폴리전해질(polyelectrolyte) 이종접합, 이온 다이오드, 고갈층)에 가깝게 골랐지만, 그것도 예시일 뿐입니다.</p>
+<p><strong>이 주제의 질문 순서</strong> — 이번 Day 53에서는 구간 1–3만 읽습니다. 나머지는 Day 54에서 이어집니다(구간 번호는 원래 한 묶음이던 순서 그대로입니다).</p>
+<ol type="1">
+<li>가설은 관찰·주제·목표와 무엇이 다른가? "틀릴 수 있다"는 것이 왜 장점인가? <a href="#ch-what-hypothesis">→ 구간 1</a></li>
+<li>좋은 가설에 붙어야 하는 두 사슬, "왜 필요한가"와 "왜 그렇게 되는가"는 무엇인가? 사슬의 가장 약한 고리는 어떻게 찾나? <a href="#ch-hypothesis-chain">→ 구간 2</a></li>
+<li>후보는 어디서 꺼내나? Day 37–52의 빈칸을 가설로 바꾸는 절차는? <a href="#ch-sources">→ 구간 3</a></li>
+<li>후보를 어떤 체로 거르나? 관문과 점수는 왜 따로 봐야 하나? <em>(Day 54에서)</em></li>
+<li>흔한 함정(반증할 수 없는 문장, 시연을 가설로 착각, 교란변수, 크기에 묻히는 손잡이)은 무엇이고 어떻게 피하나? <em>(Day 54에서)</em></li>
+<li>그래서 "가장 중요한" 하나는 어떻게 고르나? <em>(Day 54에서)</em></li>
+</ol>
+<section id="ch-what-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="ch-what-hypothesis">1. 가설이란 무엇인가: 관찰·주제·목표·가설·예측</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 관찰·연구 주제·목표·가설·예측을 예문으로 구별하고, 한 문장짜리 가설이 "틀렸다면 무엇이 관측될지"를 말할 수 있는지(반증 가능성) 판정할 수 있다.</p>
+</div>
+<p><strong>상황.</strong> 연구 계획서에 "MNIST 95%를 달성한다"와 "가교제를 늘리면 τ가 길어진다"가 나란히 적혀 있습니다. 실험 결과 하나로 틀렸다고 판정할 수 있는 문장은 어느 쪽일까요? 이 구간은 그 차이를 문장 종류로 가르는 연습입니다.</p>
+<p><strong>왜 필요한가.</strong> Day 57–58에서는 "이 연구를 한다 / 좁혀서 한다 / 접는다"를 결정합니다. 그런데 "이온 고분자로 뉴로모픽 소자를 연구한다"는 문장으로는 아무것도 결정할 수 없습니다. 어떤 실험 결과가 나와도 그 문장은 그대로 서 있기 때문입니다. 결정을 하려면 <strong>실험 결과에 따라 참과 거짓이 갈리는 문장</strong>이 있어야 합니다. 그것이 가설입니다.</p>
+<p><strong>예문에 나오는 양 세 가지.</strong> 아래 예문들은 앞 Day에서 배운 양을 씁니다. <strong>확산계수</strong> <span class="math inline">\(D\)</span>는 이온이 농도 차를 따라 퍼지는 빠르기(단위 m²/s)이고, <strong>이완 시간</strong> τ는 펄스를 준 뒤 응답이 원래 값으로 돌아가는 데 걸리는 시간의 척도(단위 s)입니다. 두께 <span class="math inline">\(L\)</span>인 층을 이온이 확산으로 가로지르는 시간은 대략 <span class="math inline">\(\tau \sim L^2/D\)</span>로, 두께의 제곱에 비례하고 <span class="math inline">\(D\)</span>에 반비례합니다(<a href="../days/d21a.html#b-diffusion-time">Day 39 기초: 확산 시간</a>). <strong>사슬 운동성</strong>은 고분자 사슬 조각이 얼마나 자유롭게 움직이는가이고, 사슬끼리 묶는 가교(crosslink)를 늘리면 대개 줄어듭니다(<a href="../days/d22a.html#b-tg-mobility">Day 41 기초: Tg와 사슬 운동성</a>). <em>기호 주의</em>: 이 Day에서 기울인 <span class="math inline">\(D\)</span>는 확산계수이고, 3구간부터 나오는 굵은 <strong>D</strong>는 예시 후보의 이름, 'Day 39–40'처럼 숫자가 붙은 것은 Day 번호입니다. Day 15–16·Day 23–24에서 한 단계에 남는 비율로 쓴 <span class="math inline">\(d\)</span>와도 다른 양입니다.</p>
+<div id="b-hypothesis" class="basics">
+<section id="가설예측반증-가능성-결과에-따라-운명이-갈리는-문장" class="level4">
+<h4 class="anchored" data-anchor-id="가설예측반증-가능성-결과에-따라-운명이-갈리는-문장">가설·예측·반증 가능성: 결과에 따라 운명이 갈리는 문장</h4>
+<p><strong>다섯 가지 문장.</strong> 연구 계획서에 흔히 섞여 나오는 문장을 종류별로 나눠 봅니다. 예문은 모두 이 교재가 만든 것입니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>종류</th>
+<th>예문</th>
+<th>무엇인가</th>
+<th>실험으로 틀릴 수 있나</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>관찰(observation)</td>
+<td>"우리 이온겔의 이온전도도는 1 mS/cm다."</td>
+<td>이미 잰 사실</td>
+<td>다시 재면 확인될 뿐</td>
+</tr>
+<tr class="even">
+<td>연구 주제(research topic)</td>
+<td>"이온 고분자로 뉴로모픽 소자를 연구한다."</td>
+<td>관심 영역</td>
+<td>아니요</td>
+</tr>
+<tr class="odd">
+<td>목표(goal)·시연(demonstration)</td>
+<td>"MNIST 정확도 95%를 달성한다."</td>
+<td>이루고 싶은 숫자</td>
+<td>달성/미달은 갈리지만, <strong>왜</strong> 그런지는 말하지 않는다</td>
+</tr>
+<tr class="even">
+<td><strong>가설</strong></td>
+<td>"가교제를 늘리면 사슬 운동성이 줄어 이온 확산계수 <span class="math inline">\(D\)</span>가 줄고, 그래서 이완 시간 τ가 길어진다."</td>
+<td>원인 → 메커니즘 → 결과의 주장</td>
+<td><strong>예</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>예측</strong></td>
+<td>"두께를 같게 두고 가교제를 1 → 5 mol%로 늘리면, <span class="math inline">\(D\)</span>가 절반이 될 때 τ는 약 2배가 된다."</td>
+<td>가설이 참이면 특정 측정에서 나올 숫자</td>
+<td><strong>예</strong>, 숫자로</td>
+</tr>
+</tbody>
+</table>
+<p><strong>가설</strong>(hypothesis)은 "무엇을 바꾸면 무엇이, <strong>왜</strong> 바뀌는가"를 한 문장으로 주장하는 것입니다. 원인(가교제), 메커니즘(사슬 운동성 → <span class="math inline">\(D\)</span>), 결과(τ)가 다 들어 있습니다. <strong>예측</strong>(prediction)은 그 가설이 참이라면 어떤 실험에서 어떤 숫자가 나와야 하는지를 적은 것입니다. 가설은 직접 잴 수 없는 메커니즘을 품고 있지만, 예측은 잴 수 있습니다.</p>
+<p><span class="key"><strong>반증 가능성</strong>(falsifiability)은 "이 가설이 틀렸다면 무엇이 관측될지 미리 말할 수 있는가"입니다.</span> 위 예에서는 "<span class="math inline">\(D\)</span>가 절반이 되었는데도 τ가 측정 오차 안에서 그대로"가 관측되면 가설이 틀렸습니다. 이 말을 할 수 있으면 반증 가능한 가설이고, 할 수 없으면 아무리 그럴듯해도 검증할 수 없는 문장입니다. 이 기준은 과학철학자 칼 포퍼가 『과학적 발견의 논리』(독일어판 1934, 판권면 표기 1935 / 영어판 1959)에서 정리한 것입니다. 포퍼는 한 번 엇나간 결과가 아니라 <strong>다시 해도 나오는(재현되는) 결과</strong>가 이론과 어긋날 때 그 이론을 반증된 것으로 보자고 했습니다. 아래 예에서 τ를 소자 여러 개로 재고, 반복 흔들림(±15%)을 판정 전에 먼저 정하는 이유가 이것입니다. <span class="tag tag-fact">확인</span> <span class="prov">출판 연도와 '재현되는 결과' 문장은 Wikipedia "The Logic of Scientific Discovery"(2026-10-25 열람)가 인용한 영어판 p.66으로 확인. 원전은 폴더에 없어 직접 대조하지 않음</span></p>
+<p><strong>왜 "틀릴 수 있다"가 장점인가.</strong> 어떤 결과가 나와도 살아남는 문장은 아무 정보도 주지 않습니다. "이온 소자는 뉴로모픽에 유리할 수 있다"는 실험이 실패해도 "아직 최적화가 덜 됐다"로, 성공해도 "역시 유리하다"로 읽힙니다. 반대로 "τ가 2배가 된다"는 문장은 실험 하나로 쓰러질 수 있고, 그래서 살아남으면 무언가를 말해 줍니다. <span class="key">좋은 가설은 <strong>쉽게 죽을 수 있게 생긴</strong> 가설입니다.</span></p>
+</section>
+</div>
+<p><span id="s-falsify-steps"></span><strong>작은 숫자로 따라가기.</strong> 위의 가교 가설을 예측과 반증 조건까지 바꿔 봅니다. 앞에서 되짚은 확산 시간 어림식 <span class="math inline">\(\tau \sim L^2/D\)</span>를 씁니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 가설을 잴 수 있는 양으로.</strong> 가설의 말들을 측정량으로 바꿉니다. "사슬 운동성"은 직접 재기 어렵지만, 그 결과인 <span class="math inline">\(D\)</span>는 이온전도도와 이온 농도에서 어림할 수 있고(Day 43–44의 <span class="math inline">\(\sigma = n q \mu\)</span>와 이동도–확산계수 관계, <a href="../days/d23a.html#b-conductivity">Day 43 기초</a>), τ는 펄스 뒤 전류가 돌아오는 곡선에서 맞춥니다. 두께 <span class="math inline">\(L\)</span>은 재서 고정합니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 예측을 숫자로.</strong> <span class="math inline">\(L\)</span>이 같다면 <span class="math inline">\(\tau \propto 1/D\)</span>입니다. 가교제 1 mol%에서 <span class="math inline">\(D_1\)</span>, τ₁ = 2.0 s였고 5 mol%에서 <span class="math inline">\(D_5 = 0.5\,D_1\)</span>로 재졌다면, 가설의 예측은 τ₅ ≈ 2.0 s × (<span class="math inline">\(D_1/D_5\)</span>) = 2.0 × 2 = <strong>4.0 s</strong>입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 반증 조건을 미리.</strong> 같은 조건 반복에서 τ가 ±15% 흔들린다고 합시다(소자 여러 개로 잰 값이라고 가정). 그러면 "τ₅가 1.7–2.3 s(τ₁의 ±15% 안)"이면 <strong>가설이 틀렸다</strong>고 판정합니다. <span class="math inline">\(D\)</span>는 반으로 줄었는데 τ가 움직이지 않았다는 뜻이고, τ를 정하는 것이 <span class="math inline">\(D\)</span>가 아니라는 뜻입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 대안 설명을 적어 둔다.</strong> τ₅가 4 s 근처로 나와도 가설이 "증명"된 것은 아닙니다. 가교제를 늘린 시료가 더 두껍게 만들어졌거나, 함수율(water content, 겔이 머금은 물의 비율)이 함께 줄었다면 같은 결과가 나옵니다. 이런 "함께 움직인 다른 원인"이 5구간의 교란변수입니다(가교제와 함수율의 예를 5구간에서 숫자로 풉니다). 그래서 예측에는 늘 "무엇을 같게 둔 채로"를 붙입니다.</p>
+</div>
+</div>
+<p><strong>숫자의 뜻.</strong> 이 예에서 예측(4.0 s)과 반증 구간(1.7–2.3 s) 사이에는 넓은 회색 지대가 남습니다. 예측 4.0 s에도 같은 ±15% 흔들림을 붙이면 '예측대로'인 구간은 3.4–4.6 s이고, 그 사이의 2.3–3.4 s는 어느 쪽으로도 판정되지 않습니다. 그 지대에 결과가 떨어지면 무엇을 할지도 미리 정해야 하는데, 그것이 Day 55–56의 "세 구간"(결과를 보기 전에 적어 두는 성공·모호·기각의 범위)입니다.</p>
+<div class="myth">
+<p><strong>"좋은 가설은 맞는 가설이다"</strong> — 연구를 시작하는 시점에는 어느 가설이 맞는지 모릅니다. 좋은 가설은 <strong>결과가 어느 쪽으로 나와도 무엇을 배우는</strong> 가설입니다. 틀린 것으로 판정되어 방향을 바꾸게 해 준 가설은 실패가 아니라 제 일을 한 것입니다. 반대로 어떤 결과도 버틸 수 있게 만든 문장("가능성을 보인다", "유리할 수 있다")은 살아남지만 아무것도 결정해 주지 않습니다.</p>
+</div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/-X8Xfl0JdTQ?start=67&amp;rel=0" title="영상: Karl Popper, Science, &amp; Pseudoscience: Crash Course Philosophy #8" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:07–6:35, 약 5.5분 · 전체 9분, 영어·자막).</b> CrashCourse, "Karl Popper, Science, &amp; Pseudoscience: Crash Course Philosophy #8". <b>볼 이유:</b> 챕터 'Science vs pseudoscience'(1:07), 'The scientific method'(3:04), 'Principles of falsification'(4:37)이 위의 반증 가능성을 포퍼의 원래 맥락에서 설명한다. 설명란은 포퍼의 구분을 "과학은 반증하고, 의사과학은 확인한다"로 요약하고, 그 배경으로 아인슈타인의 상대성 이론과 프로이트의 정신분석을 든다. <b>보고 답할 질문:</b> 아인슈타인의 이론과 프로이트의 이론 중 어느 쪽이 '틀릴 수 있는' 예측을 했다고 영상은 말하나? 위 표의 '연구 주제' 문장("이온 고분자로 뉴로모픽 소자를 연구한다")은 어느 쪽을 닮았나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명란·챕터(영상 내용은 직접 보지 못함, 미검증)</span></div></div>
+<div class="quiz" data-day="d28" data-set="1-check"></div>
+<div class="stop-point">
+<p>여기까지: 새 문장 하나를 관찰·주제·목표·가설·예측 중 어디에 드는지 가르고, 가교 가설에서 예측(τ₅ ≈ 4.0 s)과 반증 구간(1.7–2.3 s)을 '무엇을 같게 둔 채로'와 함께 적을 수 있다. 다음: 가설 하나에 붙는 두 사슬과 가장 약한 고리.</p>
+</div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+가설 (hypothesis)
+</dt>
+<dd>
+무엇을 바꾸면 무엇이, 왜 바뀌는가를 한 문장으로 한 주장. 원인·메커니즘·결과를 담는다.
+</dd>
+<dt>
+예측 (prediction)
+</dt>
+<dd>
+가설이 참이면 특정 측정에서 나와야 하는 숫자. "무엇을 같게 둔 채로"를 함께 적는다.
+</dd>
+<dt>
+반증 가능성 (falsifiability)
+</dt>
+<dd>
+틀렸다면 무엇이 관측될지 미리 말할 수 있는 성질. 이것이 없으면 검증할 수 없다.
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>관찰(이미 잰 사실), 주제(관심 영역), 목표(이루고 싶은 숫자), 가설(원인 → 메커니즘 → 결과), 예측(가설이 참이면 나올 숫자)은 다르다.</li>
+<li>반증 가능성 = 틀렸을 때 관측될 결과를 미리 말할 수 있음. 예: <span class="math inline">\(D\)</span>가 절반인데 τ가 ±15% 안이면 "τ는 <span class="math inline">\(D\)</span>가 정한다"는 가설은 틀렸다.</li>
+<li>예측에는 "무엇을 같게 둔 채로"를 붙인다(두께·함수율). 같게 두지 않으면 다른 원인이 같은 결과를 낸다.</li>
+<li>좋은 가설은 쉽게 죽을 수 있게 생겼고, 어느 쪽 결과에서도 무언가를 배운다.</li>
+</ul>
+</div>
+</section>
+<section id="ch-hypothesis-chain" class="level3">
+<h3 class="anchored" data-anchor-id="ch-hypothesis-chain">2. 두 사슬: "왜 필요한가"와 "왜 그렇게 되는가"</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 가설 하나에 붙는 두 사슬(응용 → 요구 → 병목 → 필요한 값 / 설계 손잡이 → 이온 동역학 → 소자 응답 → 계산 지표)을 직접 그리고, 고리마다 근거 상태를 표시해 가장 약한 고리를 찾을 수 있다.</p>
+</div>
+<p><strong>왜 사슬인가.</strong> 1구간의 가교 가설은 반증 가능하지만, 한 가지가 빠져 있습니다. <strong>그 τ가 길어지면 누구에게 좋은가?</strong> 반대로 "몸 안 심전도 장치는 수년을 버텨야 한다"는 문장은 중요하지만, <strong>고분자로 무엇을 바꾸면 그렇게 되는가</strong>가 없습니다. 연구 가설은 이 둘을 잇는 자리에 있어야 합니다. 내 답 양식의 안내문도 같은 말을 합니다. 두 사슬 중 하나라도 빠지면 후보가 아니라 희망사항입니다.</p>
+<p><span id="s-two-chains-fig"></span><strong>그림부터.</strong> 그림 1은 예시 가설 하나에 두 사슬을 그린 것입니다. 그림에 나오는 두 낱말을 먼저 되짚습니다. 물리 <strong>reservoir computing</strong>(RC)은 고정된 물리계(여기서는 이온 소자)가 입력 이력을 내부 상태로 바꾸고, 그 상태에 가중치를 곱해 더하는 마지막 층인 <strong>readout</strong>만 데이터로 학습하는 방식이었습니다(<a href="../days/d08a.html#b-reservoir-state">Day 13 기초: reservoir 상태</a>, <a href="../days/d08a.html#b-ridge">Day 13 기초: ridge</a>). 소자가 변하면 같은 readout이 더 이상 맞지 않아 다시 학습해야 합니다. 그림의 예는 피부 위 심전도 패치(Day 51–52)를 응용으로, 이온겔의 drift(시간이 지나며 응답이 조금씩 변하는 것, <a href="../days/d18a.html#b-variability">Day 33 기초</a>)를 병목으로 잡았습니다. <strong>읽는 법</strong>: 왼쪽(주황)은 위에서 아래로 "왜 이것이 필요한가"를, 오른쪽(초록)은 위에서 아래로 "고분자로 무엇을 바꾸면 그렇게 되는가"를 따라갑니다. 두 사슬이 맨 아래 보라 상자, 곧 가설 한 문장으로 모입니다. 고리 옆의 태그와 <span class="math inline">\(p\)</span>는 그림 바로 아래 기초 상자에서, 그림 맨 아래 글의 '조건부 믿음'은 이 구간 뒤쪽 '곱은 언제 맞나'에서 칸을 세어 설명하니, 지금은 상자 여덟 개의 이름과 위에서 아래로 가는 순서만 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d28/fig1-two-chains.svg" alt="왼쪽 주황 사슬: 응용(피부 위 심전도 패치) → 요구(readout을 날마다 다시 학습할 수 없다) → 병목(τ·응답 크기의 drift) → 필요한 값(재보정 주기 1주 이상), 고리 믿음 0.9·0.9·0.7, 곱 0.57. 오른쪽 초록 사슬: 설계 손잡이(비휘발 용매+가교) → 이온 동역학(용매량·이온 농도 → D 유지) → 소자 응답(τ·응답 크기가 하루에 덜 변함) → 계산 지표(같은 readout의 정확도 유지 기간), 고리 믿음 0.6·0.9·0.6, 곱 0.32. 두 사슬이 아래 보라 가설 상자로 모이고, 전체 0.57×0.32≈0.18(고리 독립을 가정한 주관적 예시 값)" class="figure-img"><figcaption><b>그림 1.</b> 예시 가설 하나의 두 사슬(모식도). 고리 옆 태그는 근거 상태이고, $p$는 설명을 위해 Claude가 매긴 주관적 예시 믿음 값이다[가정]. 곱(0.57, 0.32, 0.18)은 고리들이 서로 독립이라는 단순화 아래 코드가 계산했다. 이 가설은 판단 방법을 보이기 위한 예시이며 추천이 아니다. (Claude가 그림)</figcaption></figure>
+<div id="b-hypothesis-chain" class="basics">
+<section id="가설의-두-사슬-왜-필요한가-왜-그렇게-되는가" class="level4">
+<h4 class="anchored" data-anchor-id="가설의-두-사슬-왜-필요한가-왜-그렇게-되는가">가설의 두 사슬: 왜 필요한가 / 왜 그렇게 되는가</h4>
+<p><strong>사슬 ① 왜 필요한가.</strong> 응용에서 출발해 가설까지 내려옵니다(그림 1 왼쪽). <strong>응용</strong>(누가 쓰나) → <strong>요구</strong>(requirement, 그 응용이 소자에 요구하는 것) → <strong>병목</strong>(지금 그 요구를 못 채우게 막는 것) → <strong>필요한 값</strong>(target value, 병목을 풀었다고 말하려면 넘어야 할 숫자). 재료는 Day 49–50의 병목 표와 Day 51–52의 교차표, 그리고 Day마다 적은 병목 장부입니다(<a href="../days/d26a.html#b-bottleneck-layers">Day 49 기초: 병목의 계층</a>, <a href="../days/d27a.html#b-spec-crossing">Day 51 기초: 교차표</a>). Day 51–52의 교차표를 짧게 다시 말하면, 응용이 요구하는 값과 이온 메커니즘이 허용하는 값을 축마다 나란히 놓고 "맞음/모자람/모름"을 판정한 표였습니다. "모자람" 칸이 사슬 ①의 병목이 됩니다.</p>
+<p><strong>사슬 ② 왜 그렇게 되는가.</strong> 고분자 설계에서 출발해 계산 지표까지 갑니다(그림 1 오른쪽). <strong>설계 손잡이</strong>(design knob, 바꿀 화학·구조) → <strong>이온 동역학</strong>(ion dynamics, 그 손잡이가 바꾸는 <span class="math inline">\(D\)</span>, 이온 농도, 결합, 고정 전하) → <strong>소자 응답</strong>(device response, τ, 정류비, 응답 크기, 그 흔들림) → <strong>계산 지표</strong>(computing metric, memory capacity: 지난 입력을 지연마다 얼마나 되살리는지의 합, <a href="../days/d13a.html#b-retention-vs-mc">Day 23 기초</a> / 시험 데이터 오차: 학습에 쓰지 않은 데이터에서 잰 오차 / 재보정 주기: readout을 다시 학습하지 않고 쓸 수 있는 기간, <a href="../days/d18b.html#s-recal-steps">Day 34 4구간</a>). 이 사슬은 Day 41–42의 경로 지도(화학구조 → 이온 동역학 → 소자 응답 → 계산 기능)와 같은 모양입니다(<a href="../days/d22a.html#b-tg-mobility">Day 41 기초: Tg와 사슬 운동성</a>, <a href="../days/d22b.html#ch-path-map">Day 42 5구간</a>). Day 41–42에서 본 대로, 폴더 근거가 있는 화살표는 앞의 둘이고 "소자 응답 → 계산 기능"은 폴더의 어느 논문도 정량으로 잇지 않은 빈칸이었습니다.</p>
+<p><strong>고리마다 근거 상태.</strong> 각 화살표에 태그를 붙입니다. 이 교재가 문장마다 붙여 온 태그와 같은 낱말, 같은 뜻입니다. <strong>확인</strong>(폴더 원문이나 식, 또는 그 자리에 적은 출처로 뒷받침), <strong>해석</strong>(근거에 기댄 판단), <strong>가설</strong>(방향은 주장하지만 아직 시험하지 않은 고리), <strong>미확인</strong>(찾아봤지만 근거를 찾지 못해 방향조차 모름. 예: 내 재료로 잰 측정이 폴더 문헌에 없음). 가설과 미확인의 차이는 '어느 쪽일지 근거 있는 짐작이 있느냐'입니다. 태그는 <strong>지금 상태</strong>만 말합니다. 무엇을 재야 그 고리가 <span class="tag tag-fact">확인</span>으로 바뀌는지(증거의 종류)는 이 구간 뒤쪽의 '고리마다 어떤 증거가 필요한가' 표에서 따로 봅니다. <span class="key">가설은 이 사슬 가운데 <strong>확인이 아닌 고리</strong>를 시험하는 일이고, 그중 가장 약한 고리부터 시험하는 것이 가장 경제적입니다.</span></p>
+<p><strong>가장 약한 고리를 숫자로.</strong> 각 고리가 성립한다고 내가 믿는 정도, 곧 <strong>믿음</strong>(degree of belief)을 0–1 사이의 숫자 <span class="math inline">\(p\)</span>로 적어 봅니다. 믿음 0.8은 "비슷한 상황을 10번 상상하면 그중 8번은 이 고리가 성립한다"로 읽으면 셀 수 있습니다. 작은 예: 고리 둘이 각각 0.8이고 서로 영향을 주지 않는다면, 10번 중 첫 고리가 서는 8번 가운데 다시 8할(6.4번)에서만 둘째 고리도 섭니다. 둘 다 설 믿음은 6.4/10 = 0.8 × 0.8 = 0.64로, 어느 고리 하나(0.8)보다 낮습니다. 이렇게 고리들이 서로 독립이라고 단순하게 가정하면, 사슬 전체가 성립할 정도는 곱입니다.</p>
+<p><span class="math display">\[
+P_{\text{사슬}} = p_1 \times p_2 \times p_3
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: 고리가 여럿이면 하나하나는 그럴듯해도 전체는 약할 수 있다는 것을 숫자로 보기 위해.</li>
+<li>기호: <span class="math inline">\(p_i\)</span>는 <span class="math inline">\(i\)</span>번째 고리에 대한 내 믿음(0–1). 측정한 확률이 아니라 <strong>스스로 매긴 값</strong>이다.</li>
+<li>단위: 없음.</li>
+<li>계산 순서: 고리마다 <span class="math inline">\(p\)</span>를 적는다 → 곱한다 → 가장 작은 <span class="math inline">\(p\)</span>의 고리를 표시한다.</li>
+<li>조건: 곱이 사슬 전체의 믿음과 같아지는 것은 고리들이 서로 <strong>독립</strong>이라고 볼 때다(한 고리가 서는지가 다른 고리가 서는지에 영향을 주지 않음). 이 단순화가 깨지는 경우(예: 같은 측정 오류가 두 고리를 함께 무너뜨림)와 고치는 법은 이 구간 뒤쪽 '곱은 언제 맞나'에서 칸을 세어 봅니다.</li>
+<li>결과의 뜻: 곱이 작으면 사슬이 길거나 약한 고리가 있다는 뜻이다. 정밀한 확률이 아니라 <strong>어디가 약한지 보이게 하는 장치</strong>다. <span class="tag tag-interp">해석</span></li>
+</ul>
+</section>
+</div>
+<p><span id="s-chain-steps"></span><strong>그림 1의 숫자를 단계별로.</strong></p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 사슬 ①의 곱.</strong> 응용 → 요구(0.9): 심전도 패치의 readout을 날마다 정답 붙은 데이터로 다시 학습하기는 어렵다는 것은 Day 52 4구간의 판단입니다(<a href="../days/d27b.html#s-train-where">Day 52 4-2</a>, <span class="tag tag-interp">해석</span>). 요구 → 병목(0.9): 재학습 없이 쓸 수 있는 기간은 "허용 drift ÷ drift 속도"로 정해진다는 Day 33–34의 식(<a href="../days/d18b.html#s-recal-steps">Day 34 4구간</a>, <span class="tag tag-fact">확인</span>). 병목 → 필요한 값(0.7): "1주면 쓸 만하다"는 내가 정한 기준(<span class="tag tag-hypo">가설</span>). 곱은 0.9 × 0.9 × 0.7 = <strong>0.567</strong>.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 사슬 ②의 곱.</strong> 손잡이 → 이온 동역학(0.6): 비휘발 용매와 가교가 내 겔의 용매량·<span class="math inline">\(D\)</span>를 하루 동안 유지할지는 폴더 문헌에서 잰 것을 찾지 못했습니다(<span class="tag tag-unverified">미확인</span>). 이온 동역학 → 소자 응답(0.9): <span class="math inline">\(D\)</span>가 유지되면 τ도 유지된다는 것은 <span class="math inline">\(\tau \sim L^2/D\)</span>에서 나옵니다(<span class="tag tag-fact">확인</span>). 소자 응답 → 계산 지표(0.6): τ가 덜 변하면 같은 readout이 더 오래 맞는다는 것은 Day 33–34의 모형일 뿐 이 소자에서는 재지 않았습니다(<span class="tag tag-hypo">가설</span>). 곱은 0.6 × 0.9 × 0.6 = <strong>0.324</strong>.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 전체와 가장 약한 고리.</strong> 두 사슬이 모두 성립해야 가설이 의미를 가지므로, 두 사슬도 서로 독립이라고 단순화하면 0.567 × 0.324 ≈ <strong>0.18</strong>. 고리 여섯 개가 모두 0.6 이상이어도 전체는 0.2가 안 됩니다. 가장 약한 고리는 사슬 ②의 두 고리(0.6)입니다. 그러니 이 가설을 시험한다면 "내 겔의 용매량과 τ가 하루에 얼마나 변하나"부터 잽니다. 이것은 새 소재 없이 기존 소자로 할 수 있는 측정이고, Day 55–56의 "가장 싼 실험"이 됩니다.</p>
+</div>
+</div>
+<p><span id="s-weakest"></span><strong>왜 가장 약한 고리부터인가, 숫자로.</strong> 그림 1의 예에서 오른쪽 사슬의 첫 고리(<span class="math inline">\(p\)</span> = 0.6)를 시험해 성립한다고 확인되면(<span class="math inline">\(p\)</span>를 1에 가깝게 올리면) 전체는 0.18에서 0.567 × (1 × 0.9 × 0.6) ≈ <strong>0.31</strong>로 오릅니다. 같은 수고로 0.9인 고리를 확인하면 0.567 × (0.6 × 1 × 0.6) ≈ <strong>0.20</strong>으로 조금 오를 뿐입니다. 반대로 약한 고리가 무너지면 나머지 고리는 잴 필요가 없어집니다. 어느 결과가 나와도 약한 고리에서 가장 많이 배웁니다. <span class="tag tag-interp">해석</span></p>
+<div class="predict">
+<p>고리 네 개에 각각 0.8을 매겼다면 사슬 전체는 얼마일까요? 0.8보다 클까요, 작을까요? 계산한 뒤 아래 점검으로 확인하세요. 첫 문제는 위 예의 확인, 둘째는 일부 채우기, 셋째는 혼자 풀기입니다.</p>
+</div>
+<div class="quiz" data-day="d28" data-set="2-check"></div>
+<div class="stop-point">
+<p>여기까지: 그림 1의 두 사슬을 상자 이름으로 따라가고, 고리 믿음의 곱(0.57, 0.32, 전체 약 0.18)을 계산해 가장 약한 고리를 짚으며, 그 고리부터 시험하면 왜 가장 많이 배우는지(0.18 → 0.31 대 0.20) 말할 수 있다. 다음: 고리마다 필요한 증거의 종류, 곱이 맞는 조건, 문헌의 같은 사슬.</p>
+</div>
+<p><span id="s-evidence-table"></span><strong>고리마다 어떤 증거가 필요한가.</strong> 태그는 지금 상태이고, 시험 계획에는 <strong>그 고리를 <span class="tag tag-fact">확인</span>으로 바꾸려면 무엇을 재야 하나</strong>가 필요합니다. 증거는 대략 세 종류입니다. <strong>식(모형)</strong>은 이미 아는 관계식이 고리를 보장하는 경우, <strong>직접 측정</strong>은 재료나 소자의 물리량을 재는 경우, <strong>과제 평가</strong>는 학습한 readout으로 계산 성능을 재는 경우입니다. 과제 평가는 Day 10 사다리의 3–5단(학습한 readout, held-out 성능: 학습에 쓰지 않고 남겨 둔 데이터에서 잰 성능, 기준선 비교)에 해당합니다(<a href="../days/d06.html#ch-minimal-conditions">Day 10 2구간</a>, <a href="../days/d06.html#b-heldout-baseline">Day 10 기초 4</a>). 그림 1의 사슬 ②를 고분자 손잡이에서 계산 지표까지 한 줄씩 적으면 이렇습니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>고리 (사슬 ②)</th>
+<th>이 고리가 말하는 것</th>
+<th>필요한 증거의 종류와 재는 법</th>
+<th>지금 상태</th>
+<th><span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>설계 손잡이 → 이온 동역학</td>
+<td>비휘발 용매 + 가교 겔은 하루 동안 용매량과 <span class="math inline">\(D\)</span>가 유지된다</td>
+<td><strong>직접 측정</strong>: 겔 무게(용매 손실)와 이온전도도(→ <span class="math inline">\(D\)</span>, <a href="../days/d23a.html#b-conductivity">Day 43 기초</a>)를 1주 동안 매일. 휘발 용매 겔을 비교군으로</td>
+<td><span class="tag tag-unverified">미확인</span> 폴더에서 찾지 못함</td>
+<td>0.6</td>
+</tr>
+<tr class="even">
+<td>이온 동역학 → 소자 응답</td>
+<td><span class="math inline">\(D\)</span>가 유지되면 τ와 응답 크기도 유지된다</td>
+<td><strong>식</strong> <span class="math inline">\(\tau \sim L^2/D\)</span>(<a href="../days/d21a.html#b-diffusion-time">Day 39 기초</a>) + 확인용 <strong>직접 측정</strong>: 같은 날 펄스 응답에서 τ를 잰다</td>
+<td><span class="tag tag-fact">확인</span> 식으로</td>
+<td>0.9</td>
+</tr>
+<tr class="odd">
+<td>소자 응답 → 계산 지표</td>
+<td>τ가 덜 변하면 첫날 학습한 readout이 더 오래 맞는다</td>
+<td><strong>과제 평가</strong>: 첫날 학습한 readout을 고정하고 1·3·7일째 held-out 오차를 잰다. 원시 입력 + 같은 readout 기준선도 함께(Day 10 3–5단)</td>
+<td><span class="tag tag-hypo">가설</span> Day 33–34의 모형뿐</td>
+<td>0.6</td>
+</tr>
+</tbody>
+</table>
+<p>사슬이 계산 지표 쪽으로 갈수록 필요한 증거가 비싸집니다(물리량 하나를 재는 일 → 여러 날에 걸친 과제 평가). 내 가설의 사슬에도 고리마다 이 세 칸(말하는 것, 증거의 종류, 지금 상태)을 적으면, 어디서부터 무엇을 잴지가 보입니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-chain-rule"></span><strong>곱은 언제 맞나: 조건부 믿음과 연쇄 법칙.</strong> 지금까지 곱셈은 "고리들이 서로 영향을 주지 않는다"는 가정 위에 있었습니다. 그런데 그 가정이 틀리면 곱이 얼마나 어긋나는지는 칸을 세어 봐야 보입니다. 이 부분은 한 번 따라가 보면 충분하고, 연구 판단에 가져갈 것은 "각 p를 '앞 고리가 섰다고 치면'으로 매긴다" 하나입니다. 지금까지는 고리들이 서로 영향을 주지 않는다고(독립) 보고 곱했습니다. 그런데 실제 고리는 같은 원인으로 함께 무너지기도 합니다. 기초 상자의 '조건'을 앞의 0.8 × 0.8 예처럼 '10번 중 몇 번'으로 세어 풉니다. 1구간의 가교 가설을 고리 둘로 나눕니다. 고리 1은 "가교를 늘리면 <span class="math inline">\(D\)</span>가 준다", 고리 2는 "<span class="math inline">\(D\)</span>가 줄면 τ가 는다"입니다. 그림 2의 칸 하나가 상상한 경우 하나입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d28/fig6-chain-rule.svg" alt="상상한 경우 1–10을 칸 열 개로 그린 표. 고리 1(가교를 늘리면 D가 준다)은 1–8번 성립(초록 체크), 9–10번 무너짐(빨강). 고리 2(D가 줄면 τ가 는다)는 1–7번 성립, 8–10번 무너짐. 고리 1이 성립한 1–8번을 괄호로 묶고 '이 안에서만 고리 2를 센다 → 7번'. 9–10번은 빨간 점선으로 묶어 같은 원인(두께를 잘못 잼)이 두 고리를 함께 무너뜨린 경우로 표시. 맨 아래 줄 '둘 다 성립'은 1–7번. 아래 글: 따로 물으면 P(1)=0.8, P(2)=0.7, 곱 0.56으로 실제 0.7보다 낮다. 조건부로 물으면 P(2 | 1)=7/8=0.875, 0.8×0.875=0.70으로 실제와 같다(연쇄 법칙)" class="figure-img"><figcaption><b>그림 2.</b> 연쇄 법칙을 칸 세기로(모식도, 예시 값[가정]). <b>볼 것:</b> 둘째 줄을 셀 때 <b>첫 줄이 초록인 칸 안에서만</b> 세는 것이 조건부 믿음이다. 빨간 점선의 두 칸처럼 두 고리가 같은 원인으로 함께 무너지면, 고리 2를 따로 물은 값(0.7)과 조건부로 물은 값(0.875)이 달라지고, 따로 매긴 값의 곱(0.56)은 실제(0.7)를 낮게 잡는다. 숫자는 코드가 칸을 세어 계산했다. (Claude가 그림)</figcaption></figure>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 고리 1을 센다.</strong> 10번 중 8번 성립합니다. <span class="math inline">\(P(1) = 8/10 = 0.8\)</span>. 여기서 <span class="math inline">\(P(\cdot)\)</span>는 "괄호 안의 고리가 성립할 믿음"을 줄여 쓴 것입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 고리 2는 고리 1이 성립한 8번 안에서만 센다.</strong> 그 8번 중 7번 성립합니다. <span class="math inline">\(P(2 \mid 1) = 7/8 = 0.875\)</span>. 세로 막대 '|'는 "~가 성립했다고 치면"으로 읽습니다. 이렇게 앞 고리가 성립했다고 놓고 매긴 믿음이 <strong>조건부 믿음</strong>(확률로는 조건부 확률, conditional probability)입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 둘 다 성립하는 경우.</strong> 7번, 곧 0.7이고, 이것은 정확히 <span class="math inline">\(0.8 \times 0.875\)</span>입니다. 일반 규칙이 <strong>연쇄 법칙</strong>(chain rule)입니다. <span class="math inline">\(P(1\text{과 }2) = P(1) \times P(2 \mid 1)\)</span>. 고리가 셋이면 <span class="math inline">\(P(1) \times P(2 \mid 1) \times P(3 \mid 1\text{과 }2)\)</span>처럼, 앞 고리들이 성립했다는 조건을 달고 이어 곱합니다. 말로 하면 "첫 고리가 설 믿음 × 그것이 섰다고 칠 때 둘째가 설 믿음 × …"입니다. 이 곱은 독립 가정 없이 언제나 맞습니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 따로 물으면 틀릴 수 있다.</strong> 9·10번은 두께를 잘못 잰 경우라고 합시다. 두께는 <span class="math inline">\(D\)</span> 어림(전도도를 계산할 때 두께가 들어감)과 τ 예측(<span class="math inline">\(L^2\)</span>)에 모두 들어가므로, 두 고리가 함께 무너집니다. 이때 고리 2만 따로 물으면 10번 중 7번, <span class="math inline">\(P(2) = 0.7\)</span>이고, <span class="math inline">\(0.8 \times 0.7 = 0.56\)</span>은 실제 0.7보다 낮습니다. 고리들이 <strong>함께 서고 함께 무너지는</strong> 경향이면 따로 매긴 값의 곱은 전체를 낮게 잡고, 한쪽이 서면 다른 쪽이 잘 무너지는 경향이면 높게 잡습니다. 고리 2가 고리 1과 상관없이 같은 비율로 성립할 때(독립)만 <span class="math inline">\(P(2) = P(2 \mid 1)\)</span>이어서 두 방식이 같아집니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 실제로 <span class="math inline">\(p\)</span>를 매길 때.</strong> 각 고리에 "앞 고리들이 모두 성립했다고 치면, 이 고리는?"이라고 물어 <span class="math inline">\(p\)</span>를 적습니다. 그러면 곱은 독립 가정 없이 연쇄 법칙 그대로입니다. 그림 1의 <span class="math inline">\(p\)</span>를 이렇게 다시 물어 보면 몇몇 값이 달라질 수 있습니다.</p>
+</div>
+</div>
+<details class="deep">
+<summary>
+심화 · 문헌은 사슬 ②를 어떻게 그리나(Singh 2026 원문 Fig. 2)
+</summary>
+<p><strong>원문 그림을 읽기 전에.</strong> 사슬 ②를 문헌이 어떻게 그리는지 봅니다. 기본 예제(그림 1·2)를 이해한 뒤 다시 볼 때 펼쳐도 됩니다. 아래 Singh 2026의 원문 Fig. 2는 다섯 칸이 왼쪽에서 오른쪽으로 이어집니다. 칸 사이 주황 말풍선이 화살표의 뜻입니다("동역학 영역을 정한다", "RC 거동을 지배한다", "~로 정량화된다", "~에 비추어 거른다"). 아래 빨간 띠는 문헌에서 반복되는 함정입니다. 첫째 칸(재료 서술자)에 내 고분자 설계 변수가 어디 들어가는지, 넷째 칸(보고 지표) 중 내가 재 본 것이 몇 개인지 세어 보세요.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/singh2026-fig2-full.png" alt="Singh 2026 Figure 2: 재료 서술자(결함 밀도, 이온 이동도, 장벽 비대칭, 퍼콜레이션, 운반자 수명, 휘발성, 잡음) → 소자 수준 특성(이완 시간 스펙트럼, 히스테리시스, 문턱, 이득, drift, 가역성, 채널 상관) → RC 관련 성질(fading memory, 비선형, 상태 차원, 분리, echo-state 동작, 과제 시간척도 정합) → 보고 지표(지연별 MC, 비선형 IPC, 공분산 스펙트럼, 반복성·drift, 작동 범위, 시스템 에너지, 지연·처리율) → 실사용 점검(재현 동작, 장기 안정, 프로토콜 명확성, 공정한 에너지 회계, 제조·패키징, 보정 부담), 아래 빨간 띠에 흔한 실패 여섯 가지" class="figure-img"><figcaption><b>원문 그림.</b> Singh et al., <a href="https://doi.org/10.1002/adma.74897" target="_blank"><i>Adv. Mater.</i> 2026, e74897</a>, Fig. 2, p.3. 볼 것: 왼쪽에서 오른쪽으로 읽으면 이 교재의 사슬 ②(설계 손잡이 → 이온 동역학 → 소자 응답 → 계산 지표)에 "Deployability checks"(실제 사용에 내놓을 수 있는지의 점검, Day 33–34에서 "배치 가능성"이라 부른 것)가 한 칸 더 붙은 모양이다. 셋째 칸의 "Fading memory"는 지난 입력의 영향이 서서히 줄어드는 기억(Day 15–16), 넷째 칸의 "Delay-resolved memory"는 몇 단계 전 입력을 얼마나 되살리는지를 지연마다 잰 기억 용량(Day 21–22)이다. 첫째 칸의 "Ionic mobility"(이온 이동도), "Barrier asymmetry"(장벽 비대칭)가 고분자 설계가 직접 건드리는 서술자이고, 둘째 칸의 "Relaxation time spectrum"(이완 시간 스펙트럼)이 소자 응답이다. 아래 빨간 띠의 여섯 함정(블랙박스 해석, 숨은 사전 처리, 되돌릴 수 없는 변화를 기억으로 착각, 중복 출력을 차원으로 착각, 비교 불가능한 프로토콜, 최고값만 보고)은 5구간의 함정 목록과 겹친다. 개념도이며 데이터가 아니다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p>Singh 2026은 재료를 "물리적으로 잴 수 있고 계산에 결과를 낳는" 서술자로 말해야 한다며, 막연한 "단기 기억" 대신 이완 시간 스펙트럼을, 막연한 "비선형" 대신 장벽 분포를 예로 듭니다 <span class="src">Singh 2026, p.3</span>. 사슬 ②의 상자에 들어갈 말을 고를 때 쓸 수 있는 기준입니다. 같은 쪽에서 이 리뷰는 분야에 필요한 것이 "고립된 점수"가 아니라 서술자–동작 영역–기능 사이의 옮겨 쓸 수 있는 지도라고 씁니다 <span class="src">Singh 2026, p.3</span>. 이것은 리뷰 저자들의 권고이며, 이번 판단의 출발점일 뿐입니다.</p>
+</details>
+<div class="quiz" data-day="d28" data-set="2-end"></div>
+<div class="stop-point">
+<p>여기까지: 고리마다 <span class="tag tag-fact">확인</span>으로 바꾸는 데 필요한 증거(식·직접 측정·과제 평가)를 적고, 10번 세기로 따로 매긴 믿음의 곱과 조건부 믿음의 곱이 언제 달라지는지 말할 수 있다(심화를 펼쳤다면 원문 Fig. 2의 다섯 칸에 사슬 ②를 겹쳐 읽을 수 있다). 다음: 가설 후보를 어디서 꺼내나.</p>
+</div>
+<div class="keypoints">
+<ul>
+<li>사슬 ① 왜 필요한가: 응용 → 요구 → 병목 → 필요한 값(병목 장부·교차표에서). 사슬 ② 왜 그렇게 되는가: 설계 손잡이 → 이온 동역학 → 소자 응답 → 계산 지표(Day 41–42 경로 지도).</li>
+<li>고리마다 확인/해석/가설/미확인 태그를 붙이고, 확인이 아닌 고리가 시험할 대상이다.</li>
+<li>고리 믿음(스스로 매긴 주관적 값)의 곱은 고리가 늘수록 빠르게 준다(0.9·0.9·0.7 = 0.57, 여섯 고리 전체 ≈ 0.18). 곱은 고리들이 독립이라는 단순화(또는 조건부 믿음으로 매긴 p)를 전제한다. 가장 약한 고리부터 시험하는 것이 가장 싸다 <span class="tag tag-interp">해석</span>.</li>
+<li>곱의 조건은 연쇄 법칙이다: <span class="math inline">\(P(1\text{과 }2) = P(1) \times P(2 \mid 1)\)</span>. 각 <span class="math inline">\(p\)</span>를 "앞 고리가 섰다고 치면"으로 매기면 독립 가정 없이 맞고, 따로 매긴 값의 곱은 고리들이 함께 무너지는 경향이면 전체를 낮게(반대 경향이면 높게) 잡는다(10번 세기: 0.56 대 0.7).</li>
+<li>고리마다 필요한 증거의 종류: 식(모형) / 직접 측정 / 과제 평가(Day 10 사다리 3–5단). 계산 지표 쪽일수록 비싸다. 약한 고리를 확인하면 전체 믿음이 가장 많이 오른다(0.18 → 0.31, 강한 고리는 → 0.20) <span class="tag tag-interp">해석</span>.</li>
+<li>문헌의 같은 사슬: 재료 서술자 → 소자 특성 → RC 성질 → 보고 지표 → 실사용 점검 <span class="src">Singh 2026, p.3</span>.</li>
+</ul>
+</div>
+</section>
+<section id="ch-sources" class="level3">
+<h3 class="anchored" data-anchor-id="ch-sources">3. 후보는 어디서 오나: Day 37–52의 빈칸을 질문으로, 질문을 가설로</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 앞 여덟 Day(Day 37–52)의 결론에서 빈칸을 찾아 "빈칸 → 질문 → 가설"의 세 단계로 후보를 만들고, 예시 후보 다섯 개가 각각 어느 Day의 어느 빈칸에서 나왔는지 말할 수 있다.</p>
+</div>
+<p><strong>후보는 머리에서가 아니라 빈칸에서 나온다.</strong> 2구간에서 가설 하나에 붙는 두 사슬을 봤습니다. 그런데 그 가설 자체는 어디서 꺼내나요? 가설을 세우라고 하면 흔히 내가 좋아하는 소재에서 출발합니다. 그러면 사슬 ②는 쉽게 그려지지만 사슬 ①이 비어 있기 쉽습니다. 반대 방향으로 갑니다. Phase 4와 5에서 "폴더 문헌에서 답을 찾지 못했다"고 적은 칸을 모으고, 거기서 질문을 만듭니다. <span class="key">빈칸은 '어디가 비었나'만 말하고, 질문은 잴 양과 조건을 정하되 방향은 열어 두며, 가설에서야 방향·메커니즘·숫자가 붙습니다.</span></p>
+<p><strong>세 단계를 예 하나로.</strong> 먼저 그림 3에서 상자 세 개와 그 아래 둥근 띠(단계마다 더해지는 것)를 보세요. 아래 단계 보기가 상자를 하나씩 따라갑니다.</p>
+<figure class="fig figure"><img src="../assets/img/d28/fig4-gap-to-hypothesis.svg" alt="세 상자가 왼쪽에서 오른쪽으로 이어진 모식도. ① 빈칸(Day 51–52 교차표의 몸 안 동작 환경 칸 미확인, 장부의 고정 전하 해리·선택성의 염·pH 의존 측정 없음) → 질문으로 → ② 질문(생리 식염수 150 mM·pH 7.4에서 이종접합의 정류와 고갈 기억은 얼마나 남나, 방향은 열려 있음) → 가설로 → ③ 가설(고정 전하를 바깥 염의 몇 배로 설계한 접합은 150 mM에서도 정류비를 10 mM 값의 절반 이상 유지, Donnan 배제 때문). 상자 아래 더해진 것: 어느 Day·어느 칸, 잴 양과 조건, 방향·메커니즘·숫자. 빨간 상자: 틀렸다면 고정 전하를 늘려도 150 mM에서 정류비 ≈ 1" class="figure-img"><figcaption><b>그림 3.</b> 빈칸 → 질문 → 가설의 세 단계(예시 B, 모식도). <b>볼 것:</b> 상자 아래 둥근 띠가 단계마다 <b>더해지는 것</b>이다. 빈칸은 '어디가 비었나'만 말하고, 질문은 잴 양과 조건을 정하지만 방향은 열어 두며, 가설에서야 방향·메커니즘·숫자가 붙는다. 빨간 상자가 1구간의 반증 조건이다. 숫자(몇 배, 절반)는 방법을 보이는 예시다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><span id="s-gap-steps"></span></p>
+<div class="stepper">
+<div class="step">
+<p><strong>① 빈칸을 고른다.</strong> Day 51–52의 교차표에서 몸 안 심전도 장치의 "동작 환경" 칸은 "가능성 있으나 미확인"이었고, 장부에는 "폴리전해질 고정 전하의 해리·이온 선택성이 염 농도와 pH에 의존 — 측정 없음"이 적혔습니다(<a href="../days/d27b.html#ledger-items">Day 52 장부</a>). Day 45–46에서는 Donnan 계산으로 바깥 염 농도가 고정 전하 농도에 가까워지면 접합의 이점이 줄어든다는 것을 봤습니다(<a href="../days/d24a.html#b-polyelectrolyte-junction">Day 45 기초</a>).</p>
+</div>
+<div class="step">
+<p><strong>② 질문으로 바꾼다.</strong> "생리 식염수(physiological saline, 약 150 mM)와 pH 7.4에서 폴리전해질 이종접합의 정류와 고갈 기억은 얼마나 남는가?" 질문은 아직 방향을 정하지 않습니다. 답이 "많이 남는다"일 수도 "거의 없다"일 수도 있습니다.</p>
+</div>
+<div class="step">
+<p><strong>③ 가설로 바꾼다.</strong> 방향과 메커니즘과 숫자를 붙입니다. "고정 전하 농도를 바깥 염 농도의 몇 배 이상으로 설계한 접합은, 150 mM에서도 정류비를 10 mM에서의 절반 이상으로 유지한다. 왜냐하면 Donnan 배제가 고정 전하 대 바깥 염의 비로 정해지기 때문이다." 틀렸다면? 고정 전하를 늘려도 150 mM에서 정류비가 1 근처로 떨어진다. 반증 가능합니다. (숫자는 예시입니다. Donnan 배제는 고분자에 고정된 전하와 같은 부호의 이온이 막 안에서 밀려나는 효과로, 바깥 염이 고정 전하에 견줄 만큼 진해지면 약해집니다, <a href="../days/d24a.html#b-polyelectrolyte-junction">Day 45 기초</a>.)</p>
+</div>
+</div>
+<p><strong>빈칸 지도.</strong> 아래 표는 Day 37–52의 빈칸 일부를 질문으로 바꾼 것입니다. 표의 질문은 <strong>누구나 할 수 있는 질문의 예</strong>이며, 내 답에서는 내 장부의 빈칸으로 바꿔 씁니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>그 Day의 빈칸</th>
+<th>질문의 예</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Day 37–38·Day 45–46 메커니즘</td>
+<td>한 접합 안의 빠른·느린 이완이 따로 읽히는지 모른다(<a href="../days/d24b.html#ch-primitive">Day 46 4구간</a>)</td>
+<td>두 시간상수가 독립된 상태 방향 두 개로 읽히나?</td>
+</tr>
+<tr class="even">
+<td>Day 39–40 시간척도</td>
+<td>화학 손잡이와 크기 손잡이 중 어느 쪽이 τ를 싸게 옮기나</td>
+<td>같은 두께에서 화학으로 τ를 몇 배 옮길 수 있나?</td>
+</tr>
+<tr class="odd">
+<td>Day 41–42 화학</td>
+<td>교란변수 없이 원인을 가른 연구가 드물다(<a href="../days/d22b.html#ch-case-studies">Day 42 4구간</a>)</td>
+<td>짝이온만 바꾼 계열에서 느린 τ는 몇 배 바뀌나?</td>
+</tr>
+<tr class="even">
+<td>Day 43–44 전도도</td>
+<td>기억 과제에 최적의 <span class="math inline">\(D\)</span>가 있다는 것은 단순 모형 계산이다(<a href="../days/d23b.html#ch-tradeoff">Day 44 4구간</a>)</td>
+<td>실제 소자에서도 <span class="math inline">\(D\)</span>에 대해 MC의 최적점이 보이나?</td>
+</tr>
+<tr class="odd">
+<td>Day 47–48 증거</td>
+<td>원시 입력 + 같은 readout 기준선이 거의 없다(<a href="../days/d25a.html#b-evidence-table">Day 47 기초</a>)</td>
+<td>내 소자 상태가 원시 입력보다 시험 오차를 줄이나?</td>
+</tr>
+<tr class="even">
+<td>Day 49–50 병목</td>
+<td>내구·drift·소자 간 재현성은 재지도 않았다(<a href="../days/d26b.html#ch-real-bottleneck">Day 50 6구간</a>)</td>
+<td>drift를 설계로 줄여 재보정 주기를 늘릴 수 있나?</td>
+</tr>
+<tr class="odd">
+<td>Day 51–52 교차표</td>
+<td>생리 조건 동작, 시스템 에너지, 계면 전처리의 이득이 "모름"</td>
+<td>µV 입력에서 동작하는 계면 소자가 증폭을 줄이나?</td>
+</tr>
+</tbody>
+</table>
+<p><span id="s-candidates"></span><strong>예시 후보 다섯 개.</strong> 이 표에서 이 Day 끝까지 들고 갈 예시 다섯 개를 만듭니다. 4구간에서 이들을 체로 거릅니다. 다시 말하지만, <strong>이 다섯 개는 방법을 보이기 위한 예시이고 추천 목록이 아닙니다.</strong> 일부러 질이 다른 후보(좋은 것, 고쳐야 할 것, 가설이 아닌 것)를 섞었습니다. 사슬 ① 칸의 링크는 그 후보가 기대는 앞 Day의 근거(병목 장부·교차표·증거 표)이니, 근거를 다시 보고 싶을 때 따라가세요.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>예시 가설</th>
+<th>사슬 ① (왜 필요한가)와 기대는 근거</th>
+<th>사슬 ② (왜 그렇게 되는가)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>A</strong></td>
+<td>비휘발 용매 + 가교로 이온겔의 drift를 줄여, 같은 readout을 1주 이상 쓰게 한다</td>
+<td>패치 응용 → 재학습 불가 → drift(<a href="../days/d18b.html#s-recal-steps">Day 34 재보정 주기</a>, <a href="../days/d26b.html#ch-real-bottleneck">Day 50 6구간</a>)</td>
+<td>용매·가교 → 용매량·<span class="math inline">\(D\)</span> 유지 → τ 안정 → 정확도 유지</td>
+</tr>
+<tr class="even">
+<td><strong>B</strong></td>
+<td>고정 전하를 충분히 높인 폴리전해질 접합은 150 mM에서도 정류의 절반 이상을 유지한다</td>
+<td>몸 안 응용 → 생리 조건 동작(<a href="../days/d27a.html#b-spec-crossing">Day 51 교차표</a>, <a href="../days/d27b.html#s-physiological">Day 52 5-3</a>)</td>
+<td>고정 전하 → Donnan 배제 → 정류·고갈 → 비선형 primitive(Day 45–46)</td>
+</tr>
+<tr class="odd">
+<td><strong>C</strong></td>
+<td>화학으로 τ 분포를 넓히면 같은 소자 수에서 memory capacity가 는다</td>
+<td>기억 과제 → 소자 수 제한 → 같은 τ는 겹친다(<a href="../days/d13b.html#ch-many-nodes">Day 24 4구간</a>)</td>
+<td>화학 계열 → <span class="math inline">\(D\)</span> 분포 → τ 분포 → MC</td>
+</tr>
+<tr class="even">
+<td><strong>D</strong></td>
+<td>이온 소자는 뉴로모픽 컴퓨팅에 유리하다</td>
+<td>(응용이 특정되지 않음)</td>
+<td>(손잡이가 특정되지 않음)</td>
+</tr>
+<tr class="odd">
+<td><strong>E</strong></td>
+<td>µV 입력에서 동작하는 이온 계면 소자가 심전도 증폭기의 일부를 대신한다</td>
+<td>몸 안 응용 → 증폭기 상시 전력(<a href="../days/d27b.html#s-candidate-table">Day 52 후보 표 (가)</a>, <a href="../days/d27b.html#s-objection">Day 52 반론</a>)</td>
+<td>계면 화학 → µV 감도 → 박동 특징 → 판정 정확도</td>
+</tr>
+</tbody>
+</table>
+<p>B는 사용자의 연구 맥락(폴리전해질 이종접합, 고갈층)에 가까운 예이고, A와 E는 다른 소재·다른 자리의 예입니다. D는 일부러 넣은 "가설처럼 보이지만 가설이 아닌 문장"입니다. 이름 <strong>D</strong>는 후보의 이름일 뿐, 확산계수 <span class="math inline">\(D\)</span>와 관계없습니다.</p>
+<div class="quiz" data-day="d28" data-set="3-check"></div>
+<div class="stop-point">
+<p>여기까지: 장부·교차표·증거 표의 빈칸 하나를 골라 '빈칸 → 방향을 정하지 않은 질문 → 방향·메커니즘·숫자를 붙인 가설'로 바꾸고, 예시 후보 A–E가 각각 어느 Day의 근거에 기대는지 짚을 수 있다. 다음: 후보를 거르는 체(관문과 점수).</p>
+</div>
+<div class="keypoints">
+<ul>
+<li>후보는 빈칸에서 나온다: ① 빈칸을 고른다(장부·교차표·증거 표) → ② 방향을 정하지 않은 질문으로 → ③ 방향·메커니즘·숫자를 붙인 가설로.</li>
+<li>빈칸의 예: 다중 시간상수가 따로 읽히나(Day 45–46), 교란변수 없는 화학 계열(Day 41–42), 원시 입력 기준선(Day 47–48), drift·재현성(Day 49–50), 생리 조건·계면 전처리(Day 51–52).</li>
+<li>예시 후보 A–E는 방법을 보이는 재료다. D는 가설이 아닌 문장의 예다.</li>
+</ul>
+</div>
+</section>
+</div>
+<script type="application/json" id="quiz-d28">{"version": 2, "sets": {"review": {"kind": "review", "title": "지난 학습 복습: readout·전원·안전, 그리고 이길 수 있는 문제", "items": [{"id": "d28-r01", "type": "mc", "q": "선형 readout의 가중치가 w = (−1, 1), b = 0이고 '출력 y가 0보다 크면 이상'으로 판정한다. 새 박동 끝의 상태가 x = (0.5, 0.6)이면?", "options": ["y = −0.1이라 정상", "y = 0.1이라 이상", "y = 1.1이라 이상", "y = 0.6이라 이상"], "a": 1, "why": "y = (−1) × 0.5 + 1 × 0.6 + 0 = 0.1이고 문턱 0보다 크므로 이상이다. readout이 한 일은 곱셈 둘, 덧셈 하나, 비교 하나다.", "wrongWhy": ["부호를 거꾸로 계산했다. −0.5 + 0.6은 +0.1이다.", "", "첫 가중치 −1의 부호를 빼고 0.5 + 0.6을 더했다.", "가중치를 곱해 더하지 않고 큰 상태 하나만 봤다."], "ref": "d27b.html#s-linear-example", "refLabel": "4-1 상태 두 개짜리 readout 예", "core": true}, {"id": "d28-r02", "type": "mc", "q": "어떤 연구가 이온 reservoir 뒤에 은닉층 셋인 신경망 readout을 붙여 정확도를 1%p 올렸다. 몸 안 장치의 관점에서 생기는 문제로 가장 알맞은 것은?", "options": ["정확도의 얼마가 소자에서 왔는지 가르기 어렵고 학습·물리 계산이 무거워진다", "신경망 readout은 몸 밖에서 학습할 수 없어 칩 위 학습이 꼭 필요해진다", "은닉층이 비선형 일을 맡으므로 reservoir의 동역학은 더 이상 필요 없어진다", "신경망의 가중치는 숫자라서 장치의 메모리에 저장할 수 없게 된다"], "a": 0, "why": "비선형 readout은 소자의 기여를 가르기 어렵게 하고(원시 입력 기준선이 더 중요해짐), 경사 하강을 여러 epoch 반복해야 하며, crossbar 한 장의 물리 계산으로 할 수 없다.", "wrongWhy": ["", "신경망도 몸 밖 컴퓨터에서 학습해 넣을 수 있다. 문제는 학습이 무거워진다는 것이다.", "그렇게 되면 오히려 소자가 무엇을 했는지 모르게 된다. 은닉층이 있다고 reservoir가 불필요하다는 증거가 되지는 않는다.", "가중치는 선형이든 비선형이든 메모리에 숫자로 저장할 수 있다."], "ref": "d27b.html#s-why-linear", "refLabel": "4-1 선형이 아닌 readout을 쓰면"}, {"id": "d28-r03", "type": "ox", "q": "몸 밖에서 ridge 회귀로 학습해 장치에 넣는 구성에서, 이식 뒤 소자가 drift하면 장치가 몸 안에서 스스로 회귀를 다시 풀어 가중치를 고친다.", "a": false, "why": "이 구성에서 몸 안 장치는 같은 w로 판정만 한다. drift로 판정이 틀리기 시작하면 기록을 무선으로 올리고, 몸 밖 컴퓨터가 정답이 붙은 박동으로 새 w를 계산해 내려보낸다(재보정).", "wrongWhy": ["몸 안에서는 기울기 계산도 회귀도 하지 않는다. 재보정은 몸 밖에서 하고, 정답이 붙은 박동이 다시 필요하다.", ""], "ref": "d27b.html#s-train-where", "refLabel": "4-2 그림 6(Day 54)의 세 띠: 3단계 재보정"}, {"id": "d28-r04", "type": "mc", "q": "같은 구성(몸 밖 ridge 학습 + 장치 MCU)에서 readout만 아날로그 crossbar로 바꿨다. 그래도 소프트웨어가 맡아야 하는 일은?", "options": ["readout의 곱셈과 덧셈", "증폭과 필터", "순서·시간 제어와 재보정 판단", "reservoir 상태의 계산"], "a": 2, "why": "crossbar가 곱해서 더하기를 물리로 해도, 언제 펄스를 주고 언제 읽을지, 기록·무선, 재보정 판단은 이 구성에서 MCU의 펌웨어와 몸 밖 프로그램이 맡는다(고정 논리 회로로 대신하는 구성도 가능).", "wrongWhy": ["crossbar로 바꾸면 곱셈·덧셈은 Ohm 법칙과 전류의 합이 물리로 한다.", "증폭·필터는 처음부터 아날로그 회로의 일이다.", "", "reservoir 계산은 이온 소자의 물리가 한다."], "ref": "d27b.html#s-software-table", "refLabel": "4-2 이 구성에서 소프트웨어가 맡는 곳(표)"}, {"id": "d28-r05", "type": "mc", "q": "가정값: 샘플을 1초에 100번, 샘플당 10 bit로 뽑아 무선 50 nJ/bit로 모두 보낸다. 무선 전송 전력은?", "options": ["5 µW", "500 µW", "0.05 µW", "50 µW"], "a": 3, "why": "100 × 10 = 1,000 bit/s, × 50 nJ/bit = 50,000 nJ/s = 5 × 10⁻⁵ J/s = 50 µW다(1 nJ/s = 10⁻⁹ W).", "wrongWhy": ["bit 수를 10배 적게 셌다(100 × 10 = 1,000 bit/s).", "nJ/s를 µW로 바꿀 때 자리를 하나 더 옮겼다.", "nJ/s를 µW로 바꿀 때 1,000으로 한 번 더 나눴다.", ""], "ref": "d27b.html#s-energy-budget", "refLabel": "5-2 경우 1: 원시 신호 무선 전송", "core": true}, {"id": "d28-r06", "type": "mc", "q": "이온 소자 펄스 하나의 에너지를 ½CV²로 어림한다. 전극 용량은 그대로 두고 구동 전압을 1 V에서 0.3 V로 낮추면 펄스 하나의 에너지는?", "options": ["약 0.3배", "약 0.09배", "변하지 않는다", "약 3.3배"], "a": 1, "why": "에너지는 전압의 제곱에 비례하므로 0.3² = 0.09배다. 1 V → 0.1 V면 0.01배(100배 감소)인 것과 같은 계산이다.", "wrongWhy": ["전압에 비례한다고 봤다. ½CV²는 전압의 제곱에 비례한다.", "", "용량이 같아도 전압이 바뀌면 저장되는 에너지가 바뀐다.", "전압을 낮췄는데 에너지가 커질 수는 없다. 반비례가 아니라 제곱 비례다."], "ref": "d27b.html#s-energy-budget", "refLabel": "5-2 잊기 쉬운 항목: 이온 reservoir 자체", "core": true}, {"id": "d28-r07", "type": "mc", "q": "가정값 예산에서 장치 안에서 디지털 readout으로 판정하고(구성 가) 경보만 무선으로 보내게 바꿨다. 1년 예산에서 남는 가장 큰 줄은?", "options": ["상태를 숫자로 바꾸는 ADC", "경보의 무선 전송", "원시 신호의 무선 전송", "readout 가중치의 저장"], "a": 0, "why": "상태 120개를 1초에 72번 ADC로 바꾸는 줄이 약 8.6 µW(1년 약 270 J)이고, 경보만 보내는 무선은 1년 약 0.44 J이다. 원시 신호 전송은 이 구성에서 없어졌다.", "wrongWhy": ["", "1시간에 한 번 1,000 bit라면 1년 약 0.44 J로 작다.", "판정을 장치 안에서 하므로 원시 신호는 더 이상 보내지 않는다.", "가중치 저장은 이 가정 예산의 줄에 없고, 판정마다 반복되는 큰 비용도 아니다."], "ref": "d27b.html#s-energy-budget", "refLabel": "5-2 경우 2: 장치 안 디지털 판정"}, {"id": "d28-r08", "type": "mc", "q": "어떤 소자가 PBS(pH 약 7.4)에서 24시간 형태를 유지했고, 흙 속에서 16일 만에 완전히 분해됐다. '몸 안 단기 이식 후보'라고 말하기 전에 더 필요한 것은?", "options": ["흙에서 빨리 분해됐으니 몸 안에서도 같은 속도로 분해된다는 가정", "PBS 24시간을 버텼으니 수년 이식에도 쓸 수 있다는 판단", "몸 안 분해 시간, 분해 산물의 안전성, 그동안의 성능 drift 측정", "생분해 소재는 세포 시험 없이도 생체적합하다는 전제"], "a": 2, "why": "생분해가 보인 곳은 몸이 아니라 흙이고 세포·동물 시험은 없었다. 후보 (나)가 성립하려면 요구 기간 동안 성능이 유지되고 분해 산물이 안전해야 하며, 먼저 잴 것은 몸 안 분해 시간과 그동안의 drift다.", "wrongWhy": ["분해 속도는 환경(미생물, 온도, 체액)에 따라 다르다. 몸 안 속도는 따로 재야 한다.", "24시간은 수년과 자릿수가 다르다. 짧은 시험을 긴 수명으로 늘려 읽지 않는다.", "", "생체적합성은 세포·동물 시험으로 보여야 한다. 생분해된다는 것만으로는 보장되지 않는다."], "ref": "d27b.html#s-candidate-table", "refLabel": "6구간 후보 표: (나) 단기·생분해 이식", "core": true}, {"id": "d28-r09", "type": "ox", "q": "±1 V 펄스로 동작하는 이온 소자를 조직에 직접 닿게 둔다면, 조직 쪽으로 새는 직류의 양을 측정으로 보여야 한다.", "a": true, "why": "한 방향 전류가 오래 흐르면 전극 반응으로 물이 분해되어 pH가 바뀌거나 금속이 녹아 나와 조직과 전극이 함께 상할 수 있다. 그래서 몸에 전류를 보내는 장치는 전하를 되돌리는 방식을 쓰는 것으로 알려져 있다.", "wrongWhy": ["", "구동 전압이 조직에 닿는 구성이라면 새는 직류가 전극 반응·pH 변화를 일으킬 수 있어, 그 양이 안전 판단의 숫자가 된다."], "ref": "d27b.html#s-dc-charge", "refLabel": "5-3 직류와 전하"}, {"id": "d28-r10", "type": "mc", "q": "땀 속 이온의 종류를 구별하는 이온 reservoir 패치가 90% 정확도를 냈다. '이온 소재가 경쟁하는 자리'라고 말하려면 무엇과 비교해야 하나?", "options": ["같은 패치를 다른 날 다시 재서 얻은 정확도", "다른 이온 소재로 만든 reservoir의 정확도", "정확도가 90%를 넘으면 비교 없이 충분하다", "같은 일을 하는 전극·증폭·ADC·MCU 기준선"], "a": 3, "why": "후보는 '경쟁할 수 있을지 모르는 자리'이고, 그것을 '경쟁하는 자리'로 바꾸는 것은 같은 일을 하는 전자·소프트웨어 기준선과의 정확도·에너지·크기 비교다.", "wrongWhy": ["반복성은 필요하지만, 다른 방식보다 나은지는 말해 주지 않는다.", "이온 소재끼리의 비교로는 전자 해법보다 나은지를 알 수 없다.", "정확도 하나는 다른 방식이 같은 일을 더 싸게 하는지 말하지 않는다.", ""], "ref": "d27b.html#s-baseline-caveat", "refLabel": "6구간 반드시 붙는 단서: 기준선", "core": true}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "이 문항은 내 연구 방향이 정해졌는지와 상관없이 해 볼 수 있습니다. 내 연구에서 시험해 보고 싶은 것을, 아직 정한 것이 없다면 아무 소재(예: 내가 만들어 본 이온겔)를 골라, 한 문장의 가설로 써 보세요(원인 → 메커니즘 → 결과). 그다음 두 사슬을 화살표 3–4개로 그립니다. 하나는 '왜 필요한가'(어떤 응용의 어떤 병목을 푸나), 다른 하나는 '왜 그렇게 되는가'(어떤 고분자 설계 변수가 어떤 이온 동역학을 바꾸고 그것이 어떤 소자 응답과 계산 지표로 이어지나). 화살표마다 '이 고리가 성립한다고 믿는 정도'를 0–1로 적고, 마지막에 '이 가설이 틀렸다면 무엇이 관측될까'를 한 줄 적습니다. 막히는 칸은 비워 두고 넘어가도 됩니다.", "items": [{"id": "d28-p01", "type": "ox", "q": "'이온 소자는 뉴로모픽 컴퓨팅에 유리하다'는 좋은 연구 가설이다.", "a": false, "why": "틀렸을 때 무엇이 관측될지 말할 수 없고(반증 불가), 어떤 응용·어떤 고분자 손잡이인지도 없다. 어떤 결과가 나와도 살아남는 문장은 결정을 바꾸지 못한다. 1구간과 4구간에서 설명한다.", "ref": "#b-hypothesis", "refLabel": "1구간 기초: 다섯 가지 문장과 반증 가능성"}, {"id": "d28-p02", "type": "mc", "q": "다음 중 '가설'(원인·메커니즘·결과를 담은 주장)에 해당하는 것은?", "options": ["우리 하이드로겔의 이온전도도는 10 mS/cm로 측정됐다", "하이드로겔 소자로 MNIST 정확도 95%를 달성한다", "가교를 늘리면 사슬 운동성이 줄어 이완 시간이 길어진다", "이온 고분자로 뉴로모픽 소자를 개발하는 연구를 한다"], "a": 2, "why": "첫째는 관찰, 둘째는 목표(시연), 넷째는 주제다. 셋째만 원인(가교) → 메커니즘(사슬 운동성) → 결과(이완 시간)를 담는다. 1구간에서 설명한다.", "ref": "#b-hypothesis", "refLabel": "1구간 기초: 다섯 가지 문장 표"}, {"id": "d28-p03", "type": "ox", "q": "가설이 맞다는 증거를 많이 모으는 것보다, 틀렸다면 무엇이 관측될지 미리 말할 수 있는 것이 더 중요하다.", "a": true, "why": "반증 가능성이 있어야 실험 결과가 가설의 운명을 가를 수 있다. 맞는 쪽 증거만 모으면 어떤 결과도 '역시 그렇다'로 읽힌다. 1구간에서 설명한다.", "ref": "#b-hypothesis", "refLabel": "1구간 기초: 왜 '틀릴 수 있다'가 장점인가"}, {"id": "d28-p04", "type": "mc", "q": "원인에서 결과까지 고리가 네 개인 주장이 있고, 각 고리가 성립한다고 0.8만큼 믿는다. 고리들이 서로 독립이라면 주장 전체가 성립할 정도는?", "options": ["약 0.41", "0.8", "0.64", "3.2"], "a": 0, "why": "곱이다. 0.8⁴ = 0.4096. 고리 하나하나는 그럴듯해도 고리가 늘면 전체는 빠르게 약해진다. 그래서 가장 약한 고리부터 시험한다. 2구간에서 설명한다.", "ref": "#s-chain-steps", "refLabel": "2구간: 그림 1의 숫자를 단계별로"}, {"id": "d28-p05", "type": "ox", "q": "후보마다 항목별 점수를 매겨 더했을 때 총점이 가장 높은 후보가 가장 좋은 가설이다.", "a": false, "why": "반증 가능성처럼 다른 점수로 메울 수 없는 조건(관문)을 먼저 봐야 한다. 점수만 더하면 반증할 수 없는 문장이 1위가 될 수 있고, 가중치를 바꾸면 순위가 흔들린다. 4구간에서 설명한다.", "ref": "#s-sum-only", "refLabel": "4구간: 더하기만 하면 생기는 일"}, {"id": "d28-p06", "type": "mc", "q": "가교제를 늘린 겔 시료가 모두 더 두껍게 만들어졌고, 이완 시간이 길어졌다. 가장 알맞은 판단은?", "options": ["가교가 이완 시간을 늘린다는 것이 확인됐다", "가교는 이완 시간과 무관하다는 것이 확인됐다", "시료를 더 많이 만들어 같은 비교를 반복하면 결론이 난다", "두께를 맞추거나 두께의 제곱으로 나눠 다시 비교한다"], "a": 3, "why": "두께라는 교란변수가 함께 움직였다. 이완 시간이 두께의 제곱에 비례하므로 두께 ±30%만으로 3배가 넘는 폭이 생길 수 있다. 같은 방식으로 만든 시료를 늘려도 두께가 함께 움직이는 한 원인은 갈리지 않는다. 5구간에서 계산한다.", "ref": "#s-thickness", "refLabel": "5구간 ④: 손잡이가 크기에 묻힌다"}, {"id": "d28-p07", "type": "ox", "q": "가설이 맞든 틀리든 다음에 할 일이 똑같다면, 그 가설은 지금 시험할 가치가 크다.", "a": false, "why": "결과가 다음 결정을 바꾸지 않는다면 그 실험은 지금 내 결정을 위해서는 급하지 않다. 이 교재는 '맞을 때와 틀릴 때 다음 일이 다른 가설'을 지금 중요한 가설로 정의한다. 6구간에서 설명한다.", "ref": "#s-decision", "refLabel": "6구간: '지금 중요하다'의 정의"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 가설과 반증", "items": [{"id": "d28-q01", "type": "mc", "q": "가설 '두께를 같게 두면 τ는 확산계수에 반비례한다'를 시험했다. 확산계수가 절반이 되었고, 같은 조건 반복의 흔들림은 ±15%다. 어떤 결과가 나오면 가설이 틀렸다고 판정하나?", "options": ["τ가 처음 값의 약 2배가 되었다", "τ가 처음 값의 약 1.5배가 되었다", "τ가 처음 값의 ±15% 안에 남았다", "τ가 처음 값의 약 2.5배가 되었다"], "a": 2, "why": "가설의 예측은 τ 약 2배다. 확산계수가 반이 되었는데 τ가 흔들림 범위 안에 그대로라면 τ를 정하는 것이 확산계수가 아니라는 뜻이다.", "wrongWhy": ["예측과 맞는 결과다. 가설이 살아남는다.", "예측(2배)에도 반증 구간(±15%)에도 들지 않는 회색 지대다. 이때 할 일은 미리 정해 둔다(Day 55–56의 세 구간).", "", "예측에서 벗어났지만 τ는 움직였다. 기각보다 먼저 두께 같은 다른 원인을 본다."], "ref": "#s-falsify-steps", "refLabel": "1구간 단계 3: 반증 조건을 미리"}, {"id": "d28-q02", "type": "ox", "q": "예측에 '무엇을 같게 둔 채로'를 적지 않으면, 다른 원인이 같은 결과를 내도 구별할 수 없다.", "a": true, "why": "가교를 늘릴 때 두께나 함수율이 함께 변하면 τ의 변화가 어디서 왔는지 모른다. 같게 둘 조건을 예측에 함께 적는 것이 교란변수를 막는 첫걸음이다.", "ref": "#s-falsify-steps", "refLabel": "1구간 단계 4: 대안 설명과 '같게 둘 것'", "wrongWhy": ["", "같게 둘 조건을 적지 않으면 두께·함수율 같은 다른 원인이 같은 결과를 내도 가려낼 수 없다."]}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 고리의 곱 (풀이 → 채우기 → 혼자)", "items": [{"id": "d28-q03", "type": "short", "q": "풀이 확인: 사슬 ①의 고리 믿음이 0.9, 0.9, 0.7이다. 곱은? (소수 둘째 자리까지)", "a": ["0.57", "0.567", ".57"], "why": "0.9 × 0.9 = 0.81, 0.81 × 0.7 = 0.567. 그림 1 왼쪽 사슬의 값이다.", "ref": "#s-chain-steps", "refLabel": "2구간 단계 1: 사슬 ①의 곱"}, {"id": "d28-q04", "type": "short", "q": "일부 채우기: 고리 네 개에 0.8씩. 0.8 × 0.8 = 0.64, 0.64 × 0.8 = 0.512. 여기에 0.8을 한 번 더 곱하면? (소수 둘째 자리까지)", "a": ["0.41", "0.4096", "0.410"], "why": "0.512 × 0.8 = 0.4096. 고리들이 독립이라는 단순화 아래, 고리 하나하나는 0.8로 그럴듯해도 넷이면 절반 아래로 떨어진다.", "ref": "#s-chain-steps", "refLabel": "2구간: 고리 믿음의 곱"}, {"id": "d28-q05", "type": "short", "q": "혼자 풀기: 고리 다섯 개에 모두 0.9를 매겼다. 사슬 전체는? (소수 둘째 자리까지)", "a": ["0.59", "0.590", "0.5905", "0.59049"], "why": "0.9⁵ = 0.59049. 다섯 고리가 모두 0.9여도 전체는 0.6이 안 된다. 고리를 줄이거나 약한 고리부터 시험하는 이유다.", "ref": "#s-chain-steps", "refLabel": "2구간: 고리 믿음의 곱"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d28-q26", "type": "mc", "q": "그림 1 사슬 ②의 고리 가운데, [확인]으로 바꾸려면 학습한 readout으로 여러 날 성능을 재는 '과제 평가'가 필요한 고리는?", "options": ["소자 응답 → 계산 지표", "설계 손잡이 → 이온 동역학", "이온 동역학 → 소자 응답", "세 고리 모두 물리량 측정이면 충분하다"], "a": 0, "why": "계산 지표(같은 readout의 held-out 오차)는 물리량이 아니라 과제 성능이라, readout을 학습해 여러 날 재야 한다. 가장 비싼 증거이고, Day 41–42에서 폴더 문헌이 정량으로 잇지 못한 고리이기도 하다.", "wrongWhy": ["", "겔 무게와 이온전도도를 매일 재는 직접 측정이면 된다.", "식 τ ~ L²/D와 같은 날 펄스 응답 측정으로 확인한다.", "계산 지표는 readout을 학습해 새 데이터에서 재야 하는 과제 성능이다."], "ref": "#s-evidence-table", "refLabel": "2구간: 고리마다 필요한 증거 표"}, {"id": "d28-q07", "type": "ox", "q": "모든 고리의 믿음이 0.7 이상이면 사슬 전체도 0.7 이상이다.", "a": false, "why": "고리들이 독립이라는 단순화 아래 곱은 고리가 늘수록 작아진다. 0.7 고리 셋이면 0.343, 넷이면 약 0.24다. 독립이 아니어도 전체가 0.7 이상이라는 보장은 없다(고리들이 완전히 함께 성립·실패하는 극단에서만 0.7까지 올라간다).", "ref": "#s-chain-steps", "refLabel": "2구간 단계 3: 고리가 모두 0.6 이상이어도", "wrongWhy": ["고리들이 독립이라면 0.7 고리 셋의 곱은 0.343이다. 고리가 늘수록 전체는 작아진다.", ""]}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 빈칸에서 질문으로", "items": [{"id": "d28-q08", "type": "mc", "q": "장부의 빈칸 '생리 식염수 조건에서 폴리전해질 접합의 동작은 측정을 찾지 못했다'를 방향을 정하지 않은 '질문'으로 바꾼 것은?", "options": ["고정 전하를 늘린 접합은 150 mM에서도 정류의 절반 이상을 유지한다", "폴리전해질 접합의 정류는 생리 식염수에서 사라질 것이다", "폴리전해질 접합은 몸 안 응용에 쓸 만한 소재인가?", "150 mM, pH 7.4에서 접합의 정류와 고갈 기억은 얼마나 남는가?"], "a": 3, "why": "질문 단계에서는 답의 방향을 정하지 않고, 잴 양(정류·고갈 기억)과 조건(150 mM, pH 7.4)만 정한다. 방향·메커니즘·숫자는 그다음 '가설' 단계에서 붙는다.", "wrongWhy": ["방향(유지한다)과 숫자가 이미 붙은 가설 단계의 문장이다.", "방향(사라진다)을 이미 정한 주장이다.", "질문이지만 무엇을 어떤 조건에서 잴지가 없어 실험으로 답할 수 없다.", ""], "ref": "#s-gap-steps", "refLabel": "3구간 단계 ②: 질문으로 바꾼다"}, {"id": "d28-q09", "type": "ox", "q": "예시 후보 D('이온 소자는 뉴로모픽 컴퓨팅에 유리하다')는 어떤 응용의 어떤 병목인지도, 어떤 고분자 손잡이인지도 특정하지 않은 문장이다.", "a": true, "why": "그래서 사슬 ①과 ②가 모두 비어 있다. 가설처럼 보이지만 가설이 아닌 문장의 예로 넣었다.", "ref": "#s-candidates", "refLabel": "3구간: 예시 후보 다섯 개 표", "wrongWhy": ["", "D는 어느 응용의 어느 병목인지(사슬 ①), 어느 고분자 손잡이인지(사슬 ②)를 말하지 않는다."]}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 가설의 모양, 두 사슬과 고리 믿음", "items": [{"id": "d28-rb01", "type": "mc", "core": true, "q": "이온겔 연구 메모에서 나온 문장 넷이다. 1구간의 '가설'(원인 → 메커니즘 → 결과를 담고 틀릴 수 있는 주장)에 해당하는 것은?", "options": ["염 농도를 바꾼 이온겔들로 기억 소자를 연구한다", "1 M 이온겔 소자로 음성 숫자 인식 90%를 달성한다", "염을 2배로 늘리면 이온쌍이 늘어 전도도는 2배보다 덜 오른다", "우리 1 M 이온겔의 이온전도도는 3 mS/cm로 측정됐다"], "a": 2, "why": "셋째만 원인(염 2배) → 메커니즘(이온쌍 증가) → 결과(전도도 2배 미만)를 담고, 틀렸다면 무엇이 관측될지(전도도가 거의 2배로 오름) 말할 수 있다. 숫자는 문장의 꼴을 보이는 예다.", "wrongWhy": ["관심 영역을 말하는 연구 주제다. 어떤 결과에도 그대로 서 있다.", "이루고 싶은 목표(시연)다. 왜 그렇게 되는지를 말하지 않는다.", "", "이미 잰 관찰이다. 무엇을 바꾸면 무엇이 왜 바뀌는지가 없다."], "ref": "#b-hypothesis", "refLabel": "1구간 기초: 다섯 가지 문장"}, {"id": "d28-rb02", "type": "mc", "core": true, "q": "가설: '다른 조건을 같게 두면 τ ~ L²/D를 따른다.' 두께 50 µm에서 τ = 1.0 s였고 반복 흔들림은 ±20%다. 두께를 100 µm로 하면 예측 τ와 '예측대로'로 볼 구간은?", "options": ["τ ≈ 4.0 s, 3.2–4.8 s", "τ ≈ 2.0 s, 1.6–2.4 s", "τ ≈ 4.0 s, 0.8–1.2 s", "τ ≈ 1.0 s, 0.8–1.2 s"], "a": 0, "why": "τ는 두께의 제곱에 비례하므로 2² = 4배, 4.0 s다. 같은 ±20%를 붙이면 3.2–4.8 s가 '예측대로'이고, 처음 값의 ±20%(0.8–1.2 s) 안에 남으면 가설이 틀렸다고 판정한다. 그 사이는 미리 처리법을 정해 둘 회색 지대다.", "wrongWhy": ["", "두께에 비례한다고 봤다. 확산 시간은 두께의 제곱에 비례한다.", "예측값은 맞지만 0.8–1.2 s는 '처음 값에서 움직이지 않음', 곧 반증 구간이다.", "D가 그대로라 τ도 그대로라고 봤다. 두께가 바뀌면 L²이 바뀐다."], "ref": "#s-falsify-steps", "refLabel": "1구간 단계 2–3: 예측과 반증 조건"}, {"id": "d28-rb03", "type": "short", "core": true, "q": "비슷한 상황을 10번 상상하니 고리 1은 6번 성립했고, 그 6번 가운데 고리 2는 3번 성립했다. 두 고리가 모두 설 믿음은? (소수 첫째 자리까지)", "a": ["0.3", "0.30", ".3"], "why": "P(1) = 6/10 = 0.6, P(2 | 1) = 3/6 = 0.5이고 연쇄 법칙으로 0.6 × 0.5 = 0.3이다. 둘 다 선 경우를 바로 세어도 10번 중 3번이다.", "ref": "#s-chain-rule", "refLabel": "2구간 '곱은 언제 맞나'(그림 2)"}, {"id": "d28-rb04", "type": "mc", "q": "사슬 '짝이온 교체 → D 변화 → τ 변화 → 부정맥 분류 정확도'에서 마지막 고리를 [확인]으로 바꾸려면 어떤 증거가 필요한가?", "options": ["여러 짝이온 겔의 이온전도도를 재서 D를 어림한 값", "τ ~ L²/D 식으로 D 변화에서 τ 변화를 계산한 값", "학습한 readout의 held-out 정확도와 원시 입력 기준선 비교", "같은 화살표를 그린 리뷰 논문의 개념도를 인용한 것"], "a": 2, "why": "계산 지표는 물리량이 아니라 과제 성능이라, readout을 학습해 학습에 쓰지 않은 데이터에서 재고 원시 입력 + 같은 readout 기준선과 견줘야 한다(과제 평가). 세 증거 가운데 가장 비싸다.", "wrongWhy": ["직접 측정으로 '짝이온 → D' 고리를 확인하는 증거다.", "식으로 'D → τ' 고리를 뒷받침하는 증거다.", "", "개념도는 데이터가 아니다. 고리를 [확인]으로 바꾸지 못한다."], "ref": "#s-evidence-table", "refLabel": "2구간: 고리마다 필요한 증거 표"}, {"id": "d28-rb05", "type": "ox", "q": "고리 믿음이 0.9, 0.5, 0.8인 사슬에서, 0.9인 고리를 시험해 확인(1에 가깝게)하면 0.5인 고리를 확인할 때보다 사슬 전체의 믿음이 더 많이 오른다.", "a": false, "why": "지금 전체는 0.9 × 0.5 × 0.8 = 0.36이다. 0.9 고리를 확인하면 1 × 0.5 × 0.8 = 0.40, 0.5 고리를 확인하면 0.9 × 1 × 0.8 = 0.72로 오른다. 가장 약한 고리를 확인할 때 가장 많이 배운다.", "wrongWhy": ["", "0.9 고리를 확인하면 0.36 → 0.40, 0.5 고리를 확인하면 0.36 → 0.72다. 약한 고리 쪽이 훨씬 크다."], "ref": "#s-weakest", "refLabel": "2구간: 왜 가장 약한 고리부터인가, 숫자로"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 관문과 점수", "items": [{"id": "d28-q10", "type": "mc", "q": "후보를 거를 때 관문과 점수를 나누는 가장 큰 이유는?", "options": ["관문 항목에 큰 가중치를 주면 결과는 같지만 계산이 번거로워서", "반증 가능성 같은 조건은 다른 항목의 높은 점수로 메울 수 없어서", "점수는 주관적이므로 관문만으로 순위까지 정해야 해서", "관문을 많이 통과할수록 더 중요한 가설이라서"], "a": 1, "why": "반증할 수 없는 가설은 중요성이 아무리 높아도 검증할 수 없다. 이런 조건을 더하기에 넣으면 메울 수 없는 결함이 다른 높은 점수에 가려진다. 점수는 관문을 통과한 후보끼리 비교할 때 쓴다.", "wrongWhy": ["가중치가 아무리 커도 더하기에서는 다른 높은 점수가 결함을 메울 수 있다. 관문은 더하지 않고 먼저 거른다.", "", "관문은 거를 뿐 순위를 정하지 않는다. 통과한 후보끼리는 점수로 비교한다.", "관문은 통과/탈락만 정한다. 중요성은 점수(와 결정 영향)로 본다."], "ref": "#b-gate-score", "refLabel": "4구간 기초: 관문과 점수"}, {"id": "d28-q11", "type": "mc", "q": "예시 후보 C('화학으로 τ 분포를 넓히면 같은 소자 수에서 memory capacity가 는다')가 '더 단순한 대안' 관문에 걸리는 이유는?", "options": ["크기가 다른 소자 여러 개로도 τ 분포를 넓힐 수 있어서", "틀렸을 때 무엇이 관측될지 말할 수 없어서", "memory capacity는 소자로 잴 수 없는 지표라서", "τ 분포는 고분자 설계로 바꿀 수 없는 양이라서"], "a": 0, "why": "τ ∝ L²이므로 크기만 바꿔도 τ 분포는 넓어진다. C는 '크기로는 못 하는 부분'(한 소자 안의 여러 τ, 크기를 바꿀 수 없는 응용)으로 좁혀야 고분자 설계 가설로 남는다.", "wrongWhy": ["", "C는 반증 가능하다(τ 분포를 넓혀도 MC가 늘지 않으면 틀린 것이다). 걸리는 관문은 단순 대안이다.", "memory capacity는 학습한 readout으로 지연마다 잴 수 있다(Day 23–24).", "짝이온·곁사슬 같은 화학으로 D와 τ를 바꿀 수 있다(Day 41–42). C의 손잡이는 고분자 설계다."], "ref": "#s-sum-only", "refLabel": "4구간 '관문을 먼저 보면' 단계"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈 · 가중 점수 (풀이 → 채우기 → 혼자)", "items": [{"id": "d28-q12", "type": "short", "q": "풀이 확인: 가중치(중요성 0.5, 실현 가능성 0.3, 배움 0.2), 후보 A의 점수(4, 4, 4). 합은?", "a": ["4", "4.0", "4.00"], "why": "0.5 × 4 + 0.3 × 4 + 0.2 × 4 = 2.0 + 1.2 + 0.8 = 4.0.", "ref": "#s-walk-a", "refLabel": "4구간 A 따라가기: 가중 합과 흔들림"}, {"id": "d28-q13", "type": "short", "q": "일부 채우기: 같은 가중치(0.5, 0.3, 0.2), 후보 B의 점수(중요 4, 실현 4, 배움 3). 0.5 × 4 = 2.0, 0.3 × 4 = 1.2이다. 합은?", "a": ["3.8", "3.80"], "why": "0.2 × 3 = 0.6을 더해 2.0 + 1.2 + 0.6 = 3.8.", "ref": "#b-gate-score", "refLabel": "4구간 기초: 가중치와 가중 합"}, {"id": "d28-q27", "type": "short", "q": "혼자 풀기: 가중치를 (중요성 0.6, 실현 가능성 0.2, 배움 0.2)로 바꿨다. 후보 E의 점수(중요 5, 실현 2, 배움 4)로 합을 구하면?", "a": ["4.2", "4.20"], "why": "0.6 × 5 + 0.2 × 2 + 0.2 × 4 = 3.0 + 0.4 + 0.8 = 4.2. 가중치 1에서 3.9, 가중치 2에서 3.3이었다. 중요성 쪽으로 무게를 옮기면 E가 올라간다. 중요하지만 어려운 후보는 가중치에 민감하다.", "ref": "#s-sum-only", "refLabel": "4구간 '가중치를 바꾸면' 단계"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 함정", "items": [{"id": "d28-q15", "type": "mc", "q": "'가교제를 늘리면 τ가 2배가 된다'를 시험했는데, 가교제를 늘린 시료가 모두 더 두꺼웠다. 가장 알맞은 판단은?", "options": ["τ가 길어졌으므로 가교 가설이 확인됐다", "시료가 서로 달라 비교할 수 없으니 가설을 기각한다", "두께를 맞추거나 τ/L²로 바꿔 다시 비교한다", "같은 시료를 여러 번 재서 평균하면 판단할 수 있다"], "a": 2, "why": "τ는 두께의 제곱에 비례하므로 두꺼운 시료는 화학과 무관하게 τ가 길다. 원인을 가르려면 두께를 맞추거나 두께로 나눈 값으로 비교한다.", "wrongWhy": ["두께만으로도 τ가 길어질 수 있어 가교의 효과인지 모른다.", "결과가 가설과 어긋난 것이 아니다. 판단을 보류하고 두께를 맞춘 비교를 한다.", "", "반복 평균은 반복 흔들림만 줄인다. 시료마다 다른 두께라는 치우침은 그대로 남는다."], "ref": "#s-thickness", "refLabel": "5구간 ④ 단계 4: 고치는 법"}, {"id": "d28-q16", "type": "ox", "q": "하이드로겔 소자로 MNIST 정확도 95%를 달성하면 '이온 동역학이 계산에 기여한다'는 가설이 검증된 것이다.", "a": false, "why": "정확도의 얼마가 소자에서 왔는지는 원시 입력 + 같은 readout 기준선과 비교해야 안다(Day 47–48). 시연은 목표이지 메커니즘 가설의 검증이 아니다.", "ref": "#s-demo-trap", "refLabel": "5구간 ②: 시연을 가설로 착각", "wrongWhy": ["정확도 하나는 소자의 기여를 말하지 않는다. 원시 입력 + 같은 readout 기준선과 비교해야 한다.", ""]}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈 · 크기에 묻히는 손잡이", "items": [{"id": "d28-q17", "type": "short", "q": "같은 화학의 두 시료 두께가 0.8배와 1.2배다. τ ∝ L²이면 두 시료의 τ 비(큰 것 ÷ 작은 것)는? (소수 둘째 자리까지)", "a": ["2.25", "2.3"], "why": "1.2² = 1.44, 0.8² = 0.64, 1.44 ÷ 0.64 = 2.25. 두께 ±20%만으로 τ가 2배 넘게 달라진다.", "ref": "#s-thickness", "refLabel": "5구간 ④ 단계 2: 두께 편차의 효과"}, {"id": "d28-q18", "type": "mc", "q": "화학 Y가 τ를 1.5배 늘린다고 기대한다. 시료 두께가 0.9–1.1배로 흔들린다면?", "options": ["두께 ±10%는 τ도 ±10%만 바꾸므로 무시할 만하다", "두께가 두꺼울수록 τ가 짧아져 화학 효과를 덮지 않는다", "화학 효과는 크기 효과보다 언제나 크므로 상관없다", "두께 편차만으로 τ에 약 1.5배 폭이 생겨 화학 효과와 비슷하다"], "a": 3, "why": "1.1² ÷ 0.9² = 1.21 ÷ 0.81 ≈ 1.49. 기대하는 화학 효과와 같은 크기의 폭이므로 두께를 더 맞추거나 τ/L²로 비교한다.", "wrongWhy": ["τ는 두께의 제곱에 비례하므로 ±10%가 0.81–1.21배가 된다.", "τ ∝ L²/D이므로 두꺼울수록 τ가 길다.", "두께 ±30%면 3.4배 폭으로 화학의 3배보다 컸다. 어느 쪽이 큰지는 숫자가 정한다.", ""], "ref": "#s-thickness", "refLabel": "5구간 ④: 두께 편차와 화학 효과 비교"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 가장 중요한 하나", "items": [{"id": "d28-q19", "type": "mc", "q": "이 교재가 제안한 '지금 중요한 가설'의 정의는?", "options": ["다루는 주제가 가장 넓고 큰 가설", "맞을 때와 틀릴 때 다음 일이 다른 가설", "이미 가장 강하게 믿고 있는 가설", "가장 많은 사람이 연구하고 있는 가설"], "a": 1, "why": "결과가 다음 결정을 바꾸는가로 중요성을 정의했다. 이 정의를 쓸지도 내가 정하며, 양식에 내 정의를 적는다.", "wrongWhy": ["넓은 주제는 어떤 결과에도 살아남기 쉬워 결정을 바꾸지 못한다(후보 D).", "", "이미 0.95 믿는 가설은 시험해도 대개 '역시 그렇다'로 끝나 결정이 거의 안 바뀐다.", "많이 연구된다는 것은 새로움 점수의 이야기이지 결정 영향이 아니다."], "ref": "#s-decision", "refLabel": "6구간: '지금 중요하다'의 정의와 그림 7(Day 54)"}, {"id": "d28-q20", "type": "ox", "q": "이미 0.95만큼 믿는 가설을 비싼 실험으로 시험하는 것은 대개 결정을 크게 바꾸지 않는다.", "a": true, "why": "95%의 경우 '역시 그렇다'로 끝나 하던 일을 그대로 한다. 결정을 가장 많이 바꿀 여지가 있는 것은 정말로 모르는 가설이다(이 교재의 해석).", "ref": "#s-confidence", "refLabel": "6구간: 확신이 너무 높거나 낮은 가설", "wrongWhy": ["", "95%의 경우 '역시 그렇다'로 끝나 하던 일을 그대로 하므로 결정이 거의 바뀌지 않는다."]}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d28-q28", "type": "mc", "q": "다음 중 1구간의 '가설'(원인 → 메커니즘 → 결과를 담고 틀릴 수 있는 주장)에 해당하는 문장은?", "options": ["고정 전하를 늘린 접합은 150 mM에서도 정류 특성의 가능성을 보인다", "고정 전하를 2배로 하면 Donnan 배제가 남아 150 mM에서도 정류비가 절반 이상 남는다", "150 mM에서 고정 전하 2배 접합의 정류비는 10 mM 값의 0.6배로 측정됐다", "150 mM에서 정류비가 10 mM 값의 절반 이상인 접합을 개발한다"], "a": 1, "why": "둘째만 원인(고정 전하 2배), 메커니즘(Donnan 배제), 결과(정류비 절반 이상)를 담고, 틀렸을 때의 관측(정류비가 1 근처로 떨어짐)을 말할 수 있다.", "wrongWhy": ["'가능성을 보인다'는 어떤 결과에도 살아남는 문장이다.", "", "이미 잰 관찰이다. 왜 그런지(메커니즘)를 말하지 않는다.", "이루고 싶은 목표다. 무엇이 왜 그렇게 만드는지가 없다."], "ref": "#b-hypothesis", "refLabel": "1구간 기초: 다섯 가지 문장"}, {"id": "d28-q22", "type": "ox", "q": "후보를 고를 때 '내가 가진 장비로 할 수 있다'에 가장 큰 가중치를 두면, 이미 할 줄 아는 측정으로 답할 수 있는 질문만 남기 쉽다.", "a": true, "why": "실현 가능성은 필요하지만 순위를 지배하면 중요한 질문이 빠진다. '이 가설을 하려면 무엇을 새로 배워야 하나'를 함께 적는 것이 정직하다.", "ref": "#s-have", "refLabel": "4구간: '내가 가진 것' 칸은 어떻게 쓰나", "wrongWhy": ["", "실현 가능성이 순위를 지배하면 이미 할 줄 아는 측정으로 답할 수 있는 질문만 남기 쉽다."]}, {"id": "d28-q23", "type": "mc", "q": "사슬의 가장 약한 고리부터 시험하는 이유로 가장 알맞은 것은?", "options": ["무너지면 나머지를 잴 필요가 없고, 서면 전체 믿음이 가장 많이 올라서", "강한 고리는 이미 확인된 셈이라 끝까지 시험할 필요가 없어서", "약한 고리는 언제나 가장 싸고 빠르게 시험할 수 있는 고리라서", "약한 고리를 사슬에서 빼 버리면 전체 믿음이 곧바로 올라가서"], "a": 0, "why": "그림 1에서 0.6 고리를 확인하면 전체가 0.18 → 0.31로, 0.9 고리를 확인하면 0.20으로 오를 뿐이다. 약한 고리가 무너지면 나머지는 잴 필요가 없다. 어느 결과에서도 가장 많이 배운다.", "wrongWhy": ["", "강한 고리도 결국은 확인해야 한다. 순서의 문제일 뿐이다.", "약함(믿음)과 싸게 시험할 수 있음(비용)은 다른 기준이다. 고르는 순서에서 '가장 싼 시험'을 따로 본다.", "고리를 빼면 사슬이 끊겨 가설이 말하는 것이 달라진다. 빼는 것이 아니라 시험해서 확인한다."], "ref": "#s-weakest", "refLabel": "2구간: 왜 가장 약한 고리부터인가, 숫자로"}, {"id": "d28-q24", "type": "short", "q": "고리 세 개의 믿음이 0.6, 0.9, 0.6이다. 사슬 전체는? (소수 둘째 자리까지)", "a": ["0.32", "0.324"], "why": "0.6 × 0.9 × 0.6 = 0.324. 그림 1 오른쪽 사슬의 값이다.", "ref": "#s-chain-steps", "refLabel": "2구간 단계 2: 사슬 ②의 곱"}, {"id": "d28-q25", "type": "mc", "q": "목표 'MNIST 95% 달성'을 검증할 수 있는 가설로 바꾸는 방법으로 가장 알맞은 것은?", "options": ["목표를 99%로 올려 소자의 효과가 더 분명히 보이게 한다", "데이터셋을 MNIST에서 심전도로 바꿔 응용에 맞춘다", "소자 수를 늘려 정확도가 더 오르는지 확인한다", "원시 입력보다 시험 오차를 정한 비율 이상 줄인다고 쓴다"], "a": 3, "why": "정확도 하나는 소자의 기여를 말하지 않는다. 같은 readout에 원시 입력을 넣은 기준선과의 차이가 소자 동역학의 기여를 시험한다(Day 29–30, Day 47–48).", "wrongWhy": ["숫자를 올려도 여전히 목표다. 정확도의 얼마가 소자에서 왔는지는 모른다.", "과제를 바꿔도 기준선 비교가 없으면 같은 문제가 남는다.", "정확도가 올라도 원시 입력 기준선도 같이 오를 수 있다. 비교 대상이 필요하다.", ""], "ref": "#s-demo-trap", "refLabel": "5구간 ②: 시연을 가설로 착각"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d28a">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>관찰·주제·목표·가설·예측의 구별, 반증 가능성(가교 예: 예측 τ₅ ≈ 4.0 s, 반증 구간 1.7–2.3 s, 회색 지대), 두 사슬(응용 → 요구 → 병목 → 필요한 값 / 설계 손잡이 → 이온 동역학 → 소자 응답 → 계산 지표)과 근거 태그, 고리 믿음의 곱(0.57 × 0.32 ≈ 0.18)과 가장 약한 고리(0.18 → 0.31 대 0.20), 증거의 세 종류(식·직접 측정·과제 평가), 10번 세기로 본 조건부 믿음과 연쇄 법칙(0.56 대 0.7), 빈칸 → 질문 → 가설과 예시 후보 A–E</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d28b.html">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나 →</a></p>
+</div>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d27b.html" class="pagination-link" aria-label="Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d28b.html" class="pagination-link" aria-label="Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나">
+        <span class="nav-page-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

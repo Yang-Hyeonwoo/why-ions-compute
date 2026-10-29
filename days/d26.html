@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 43–44 (옛 주소) – Why Ions Compute</title>
+<title>Day 49–50 (옛 주소) – Why Ions Compute?</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -45,18 +45,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
-  "collapse-after": 3,
+  "collapse-after": 2,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    "/"
   ],
   "language": {
     "search-no-results-text": "일치 없음",
@@ -98,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Why Ions Compute</span>
+    <span class="navbar-title">Why Ions Compute?</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="검색"></div>
@@ -109,46 +107,27 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
-<span class="menu-text">커버</span></a>
+<span class="menu-text">홈</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../plan.html"> 
-<span class="menu-text">전체 학습 지도</span></a>
+<span class="menu-text">로드맵</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">장부</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
-        <li>
-    <a class="dropdown-item" href="../ledger/bottleneck.html">
- <span class="dropdown-text">병목 장부</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/unknowns.html">
- <span class="dropdown-text">아직 모르는 것</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/glossary.html">
- <span class="dropdown-text">용어집</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/kill-criteria.html">
- <span class="dropdown-text">접는 기준</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/references.html">
- <span class="dropdown-text">참고문헌</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/questions.html">
- <span class="dropdown-text">질문 모음</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" href="../rules.html"> 
-<span class="menu-text">공부 규칙</span></a>
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -161,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Day 43–44 (옛 주소)</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Day 49–50 (옛 주소)</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -182,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">전체 학습 지도</span></a>
+ <span class="menu-text">로드맵</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -239,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -280,7 +259,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -291,44 +270,50 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
   </div>
 </li>
       </ul>
@@ -345,67 +330,73 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
   </div>
 </li>
       </ul>
@@ -422,49 +413,73 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
   </div>
 </li>
       </ul>
@@ -481,69 +496,93 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">장부</span></a>
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -551,46 +590,28 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">병목 장부</span></a>
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">아직 모르는 것</span></a>
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">용어집</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">접는 기준</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">참고문헌</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">질문 모음</span></a>
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rules.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">공부 규칙</span></a>
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
   </div>
 </li>
     </ul>
@@ -606,7 +627,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Day 43–44 (옛 주소)</h1>
+<h1 class="title">Day 49–50 (옛 주소)</h1>
 <p class="subtitle lead">Phase 5 · 나는 무엇을 연구해야 하는가</p>
 </div>
 
@@ -625,9 +646,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="flow-line">
-<p>이 주소의 내용은 두 학습 단위로 나뉘었습니다: <a href="../days/d26a.html">Day 43 · 병목의 계층: 속도·전력·안정성·집적</a> · <a href="../days/d26b.html">Day 44 · 전자회로 접속과 진짜 병목</a>. 잠시 뒤 맞는 곳으로 넘어갑니다.</p>
+<p>이 주소의 내용은 두 학습 단위로 나뉘었습니다: <a href="../days/d26a.html">Day 49 · 병목의 계층: 속도·전력·안정성·집적</a> · <a href="../days/d26b.html">Day 50 · 전자회로 접속과 진짜 병목</a>. 잠시 뒤 맞는 곳으로 넘어갑니다.</p>
 </div>
-<script>(function(){var m={"ch-bottleneck-layers": "d26a", "b-bottleneck-layers": "d26a", "s-bottleneck-number": "d26a", "s-why-layers": "d26a", "s-four-questions": "d26a", "ch-speed": "d26a", "s-diffusion": "d26a", "s-timescale-map": "d26a", "s-throughput": "d26a", "ch-power-stability": "d26a", "s-energy-fj": "d26a", "s-why-fj": "d26a", "s-interface-charging": "d26a", "s-beat-ledger": "d26a", "s-stability": "d26a", "s-year-pulses": "d26a", "ch-array-integration": "d26a", "b-array-integration": "d26a", "s-array-wires": "d26a", "s-sneak-path": "d26a", "s-1t1r": "d26a", "s-periphery": "d26a", "s-soft-arrays": "d26a", "s-density": "d26a", "s-without-integration": "d26a", "ch-all-analog": "d26b", "b-all-analog": "d26b", "s-liang-figs": "d26b", "s-board": "d26b", "s-training-where": "d26b", "s-write-error": "d26b", "s-analog-conditions": "d26b", "s-interface-cost": "d26b", "ch-real-bottleneck": "d26b", "s-chains": "d26b", "s-four-q-verdict": "d26b", "s-objection": "d26b", "wrapup": "d26b", "checklist": "d26b", "ledger-items": "d26b", "reading": "d26b", "review": "d26a", "pretest": "d26a", "steps": "d26a", "lesson": "d26a", "writing": "d26b", "feedback": "d26b", "posttest": "d26b", "answer": "d26b", "done": "d26b", "comments": "d26b", "recall": "d26b", "questions": "d26b", "answers": "d26b"};var h=decodeURIComponent(location.hash.slice(1));location.replace((m[h]||"d26a")+".html"+location.hash);})();</script>
+<script>(function(){var m={"ch-bottleneck-layers": "d26a", "b-bottleneck-layers": "d26a", "s-bottleneck-number": "d26a", "s-why-layers": "d26a", "s-four-questions": "d26a", "ch-speed": "d26a", "s-diffusion": "d26a", "s-timescale-map": "d26a", "s-throughput": "d26a", "ch-power-stability": "d26a", "s-energy-fj": "d26a", "s-why-fj": "d26a", "s-interface-charging": "d26a", "s-beat-ledger": "d26a", "s-stability": "d26a", "s-year-pulses": "d26a", "ch-array-integration": "d26a", "b-array-integration": "d26a", "s-array-wires": "d26a", "s-sneak-path": "d26a", "s-1t1r": "d26a", "s-periphery": "d26a", "s-soft-arrays": "d26a", "s-density": "d26a", "s-without-integration": "d26a", "ch-all-analog": "d26b", "b-all-analog": "d26b", "s-liang-figs": "d26b", "s-board": "d26b", "s-training-where": "d26b", "s-write-error": "d26b", "s-analog-conditions": "d26b", "s-interface-cost": "d26b", "ch-real-bottleneck": "d26b", "s-chains": "d26b", "s-four-q-verdict": "d26b", "s-objection": "d26b", "wrapup": "d26b", "checklist": "d26b", "ledger-items": "d26b", "reading": "d26b", "review": "d26a", "steps": "d26a", "lesson": "d26a", "pretest": "d26a", "recall": "d26b", "comments": "d26b", "done": "d26b", "feedback": "d26b", "writing": "d26b", "posttest": "d26b", "answer": "d26b", "answers": "d26b", "questions": "d26b"};var h=decodeURIComponent(location.hash.slice(1));location.replace((m[h]||"d26a")+".html"+location.hash);})();</script>
 
 
 
@@ -1051,14 +1072,14 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
     <div class="nav-footer-center">
-<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
-</div>
-    <div class="nav-footer-right">
       &nbsp;
     </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
   </div>
 </footer>
 

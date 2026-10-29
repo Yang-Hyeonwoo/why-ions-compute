@@ -3,6 +3,7 @@
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
 <text x='500.0' y='28.0' font-size='17' fill='#444' text-anchor='middle' font-weight='bold' >과거를 다루는 세 방식 (모식도)</text>
 <text x='500.0' y='50.0' font-size='14' fill='#999' text-anchor='middle' font-weight='normal' >상태 하나에 넘기기 / 고정된 상태에 남기기 / 지난 단어를 모두 다시 보기</text>
+<text x='20.0' y='60.0' font-size='16' fill='#222' text-anchor='start' font-weight='bold' >(a)</text>
 <rect x='20.0' y='64.0' width='306.0' height='316.0' rx='10' fill='#fafafa' stroke='#3d6fb4' stroke-width='1.4' />
 <text x='173.0' y='90.0' font-size='16' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >RNN</text>
 <text x='173.0' y='308.0' font-size='14' fill='#444' text-anchor='middle' font-weight='normal' >상태 h를 다음 단계로 넘긴다</text>
@@ -94,8 +95,9 @@
 <line x1='938.0' y1='184.0' x2='938.0' y2='212.0' stroke='#7a5aa6' stroke-width='1.1' stroke-dasharray='3 2'/>
 <text x='688.0' y='116.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='normal' >새 단어가 지난 단어 모두와</text>
 <text x='688.0' y='135.0' font-size='14' fill='#7a5aa6' text-anchor='start' font-weight='normal' >점수 계산</text>
-<text x='20.0' y='414.0' font-size='15' fill='#444' text-anchor='start' font-weight='bold' >문장 하나(단어 n개)를 처리하며 '과거를 보는' 셈의 수 (로그 눈금)</text>
-<text x='20.0' y='436.0' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >RNN·RC: 단어마다 상태 하나만 갱신 → n번.</text>
+<text x='20.0' y='414.0' font-size='16' fill='#222' text-anchor='start' font-weight='bold' >(b)</text>
+<text x='52.0' y='414.0' font-size='15' fill='#444' text-anchor='start' font-weight='bold' >문장 하나(단어 n개)를 처리하며 '과거를 보는' 셈의 수 (로그 눈금)</text>
+<text x='20.0' y='436.0' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >RNN·RC: 단어마다 state update 한 번 → n번.</text>
 <text x='20.0' y='456.0' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >어텐션: k번째 단어가 자기를 포함한 k개와 점수 계산 → 1 + 2 + … + n = n(n+1)/2번</text>
 <text x='118.0' y='496.0' font-size='14' fill='#444' text-anchor='end' font-weight='bold' >n = 10</text>
 <rect x='130.0' y='472.0' width='116.7' height='20.0' rx='3' fill='#13936b' stroke='none' stroke-width='1.2' />
@@ -127,7 +129,7 @@
 <line x1='830.0' y1='646.0' x2='830.0' y2='651.0' stroke='#444' stroke-width='1'/>
 <text x='818.7' y='666.0' font-size='13' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='13'>10</tspan><tspan dy='-8' font-size='13'>6</tspan><tspan dy='8' font-size='13'>​</tspan></text>
 <text x='20.0' y='694.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >셈 한 번의 크기가 다르다: 점수 1번 = 길이 d인 두 목록의 내적(곱셈 d번),</text>
-<text x='20.0' y='715.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >상태 갱신 1번 = 노드 N개 갱신(밀집 ESN이면 곱셈 N²번, 물리 RC면 이완 + 읽기 N번).</text>
+<text x='20.0' y='715.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >state update 1번 = 노드 N개 update(밀집 ESN이면 곱셈 N²번, physical RC면 이완 + 읽기 N번).</text>
 <text x='20.0' y='736.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >차원(d, N)·층과 갈래 수·정밀도·메모리(어텐션은 단어 n개의 k와 v를 보관)·전처리를 맞추기 전에는</text>
 <text x='20.0' y='757.0' font-size='13.5' fill='#444' text-anchor='start' font-weight='normal' >연산량·에너지 비교가 아니다. 막대는 n에 따른 증가 방식만 비교한다.</text>
 </svg>

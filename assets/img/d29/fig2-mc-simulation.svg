@@ -3,6 +3,7 @@
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
 <text x='500.0' y='28' font-size='17' fill='#444' text-anchor='middle' font-weight='bold' >합성 전에 계산으로: 노드 4개의 τ가 얼마나 퍼져야 기억(MC)이 느나</text>
 <text x='500.0' y='50' font-size='14' fill='#999' text-anchor='middle' font-weight='normal' >(선형 노드 시뮬레이션, Claude가 계산)</text>
+<text x='20' y='84' font-size='15' fill='#444' text-anchor='start' font-weight='bold' >(a)</text>
 <text x='285.0' y='84' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >MC 합과 τ 퍼짐</text>
 <rect x='90' y='96' width='390' height='290' rx='4' fill='#fafafa' stroke='#d9d9d9' stroke-width='1.2' />
 <line x1='90.0' y1='386.0' x2='480.0' y2='386.0' stroke='#eee' stroke-width='1'/>
@@ -52,6 +53,7 @@
 <circle cx='480.0' cy='287.4' r='4.5' fill='#e08a3c'/>
 <text x='466.0' y='308.4' font-size='13' fill='#e08a3c' text-anchor='start' font-weight='normal' >1.36</text>
 <line x1='90.0' y1='348.3' x2='114.0' y2='348.3' stroke='#e08a3c' stroke-width='1.4' stroke-dasharray='2 2'/>
+<text x='540' y='84' font-size='15' fill='#444' text-anchor='start' font-weight='bold' >(b)</text>
 <text x='670' y='84' font-size='14' fill='#444' text-anchor='start' font-weight='bold' ><tspan font-size='14'>MC</tspan><tspan dy='5' font-size='13'>k</tspan><tspan dy='-5' font-size='14'>: σ = 0.01일 때 퍼짐 ×1 vs ×8</tspan></text>
 <rect x='590' y='96' width='380' height='290' rx='4' fill='#fafafa' stroke='#d9d9d9' stroke-width='1.2' />
 <line x1='590.0' y1='386.0' x2='970.0' y2='386.0' stroke='#eee' stroke-width='1'/>
@@ -78,7 +80,7 @@
 <text x='122' y='464' font-size='14' fill='#3d6fb4' text-anchor='start' font-weight='bold' >측정 잡음 σ = 0.01 (상태 흔들림의 약 5%)</text>
 <line x1='520.0' y1='459.0' x2='544.0' y2='459.0' stroke='#e08a3c' stroke-width='2.6'/>
 <text x='552' y='464' font-size='14' fill='#e08a3c' text-anchor='start' font-weight='bold' >측정 잡음 σ = 0.04 (약 20%)</text>
-<text x='90' y='490' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >왼쪽 축의 짧은 점선 = 노드 하나일 때(τ = 4): σ 0.01에서 0.54, σ 0.04에서 0.52</text>
+<text x='90' y='490' font-size='13.5' fill='#999' text-anchor='start' font-weight='normal' >(a) 축의 짧은 점선 = 노드 하나일 때(τ = 4): σ 0.01에서 0.54, σ 0.04에서 0.52</text>
 <text x='90' y='520' font-size='14' fill='#999' text-anchor='start' font-weight='normal' ><tspan font-size='14'>노드: x</tspan><tspan dy='5' font-size='13'>i</tspan><tspan dy='-5' font-size='14'>(t+1) = d</tspan><tspan dy='5' font-size='13'>i</tspan><tspan dy='-5' font-size='14'>·x</tspan><tspan dy='5' font-size='13'>i</tspan><tspan dy='-5' font-size='14'>(t) + (1 − d</tspan><tspan dy='5' font-size='13'>i</tspan><tspan dy='-5' font-size='14'>)·u(t),  d</tspan><tspan dy='5' font-size='13'>i</tspan><tspan dy='-5' font-size='14'> = exp(−1/τ</tspan><tspan dy='5' font-size='13'>i</tspan><tspan dy='-5' font-size='14'>) = 한 단계에 남는 비율,  가운데 τ = 4단계.</tspan></text>
 <text x='90' y='544' font-size='14' fill='#999' text-anchor='start' font-weight='normal' >훈련 2,000 / 시험 1,000단계, ridge readout. 선형 노드라 비선형 과제는 다루지 않는다.</text>
 </svg>

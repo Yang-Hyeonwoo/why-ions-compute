@@ -595,6 +595,117 @@
       });
   }
 
+  // ---------- 용어의 영어 원어 ----------
+  // 논문은 영어로 읽게 되므로, 번역 용어가 페이지에서 처음 나올 때 원어를 괄호로 붙인다(assets/glossary.json).
+  // 이미 괄호가 붙은 곳, 수식·코드·링크·제목·퀴즈 안은 건드리지 않는다.
+  function setupGlossary() {
+    var root = document.querySelector(".lesson-body") || document.querySelector(".unit-head");
+    if (!root || !window.fetch) return;
+    var unit = (document.querySelector(".day-steps") || {}).dataset ? document.querySelector(".day-steps").dataset.day : "";
+    fetch(OFFSET + "assets/glossary.json")
+      .then(function (r) {
+        return r.ok ? r.json() : null;
+      })
+      .then(function (g) {
+        if (!g) return;
+        var terms = g.terms
+          .filter(function (t) {
+            return !t.only || new RegExp(t.only).test(unit || "");
+          })
+          .map(function (t) {
+            var re;
+            try {
+              re = new RegExp(t.pat || t.ko.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+            } catch (e) {
+              return null;
+            }
+            return { t: t, re: re };
+          })
+          .filter(Boolean)
+          .sort(function (a, b) {
+            return b.t.ko.length - a.t.ko.length;
+          });
+        var SKIP = "code, pre, a, h1, h2, h3, h4, h5, h6, script, style, svg, .math, mjx-container, .katex, .quiz, .prov, .src, .gl-en, summary, .paper-note, .day-steps, button, textarea, .editable, .qa-block, .comments";
+        var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            if (!n.nodeValue || n.nodeValue.length < 2) return NodeFilter.FILTER_REJECT;
+            if (/\$|\\\(|\\\[/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+            var p = n.parentElement;
+            return p && !p.closest(SKIP) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          },
+        });
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        // 문장 속 괄호 안('새는 전류(누설)')에 든 용어에는 괄호를 겹쳐 붙이지 않는다
+        function insideParen(v, at) {
+          var open = (v.slice(0, at).match(/[(（]/g) || []).length,
+            close = (v.slice(0, at).match(/[)）]/g) || []).length;
+          return open > close;
+        }
+        terms.forEach(function (x) {
+          var firstWord = x.t.en.split(/[ ,/(]/)[0].toLowerCase();
+          var re = new RegExp(x.re.source, "g");
+          for (var i = 0; i < nodes.length; i++) {
+            var n = nodes[i],
+              v = n.nodeValue,
+              m = null,
+              hit = null,
+              stop = false;
+            re.lastIndex = 0;
+            while ((m = re.exec(v))) {
+              var e = m.index + m[0].length;
+              // 바로 뒤에 이미 괄호(원어)가 있거나 영어가 이어지면 붙이지 않고 이 용어는 끝낸다
+              var after = v.slice(e, e + 40);
+              if (after.length < 40) {
+                // 굵은 글씨 끝처럼 노드가 끝나면 문서 순서로 이어지는 글자까지 본다
+                var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+                tw.currentNode = n;
+                while (after.length < 40 && tw.nextNode()) after += tw.currentNode.nodeValue;
+              }
+              if (/^\s*["'”’」』]?\s*[(（]/.test(after) ||after.toLowerCase().indexOf(firstWord) >= 0) {
+                stop = true;
+                break;
+              }
+              if (insideParen(v, m.index) || /^\s*[)）]/.test(after)) continue;
+              hit = e;
+              break;
+            }
+            if (stop) break;
+            if (hit === null) continue;
+            var end = hit;
+            var tail = n.splitText(end);
+            var sp = document.createElement("span");
+            sp.className = "gl-en";
+            sp.textContent = "(" + x.t.en + ")";
+            if (x.t.def) sp.title = x.t.def;
+            n.parentNode.insertBefore(sp, tail);
+            nodes.splice(i + 1, 0, tail);
+            break;
+          }
+        });
+      })
+      .catch(function () {});
+  }
+
+  // ---------- 핵심 문장 구별 ----------
+  // 문단 첫머리의 굵은 이름표("**무엇을 볼지.**")는 이름표 모양으로, 문장 속 굵은 글씨는 형광펜처럼 보이게 나눈다.
+  function setupEmphasis() {
+    document.querySelectorAll(".lesson-body p > strong:first-child, .lesson-body li > strong:first-child").forEach(function (b) {
+      var prev = b.previousSibling;
+      if (prev && prev.nodeType === 3 && prev.nodeValue.trim()) return;
+      if (/[.:：]\s*$/.test(b.textContent) && b.textContent.length <= 40) b.classList.add("lead-in");
+    });
+    // 본문 문단 속 굵은 핵심어에 옅은 형광펜(.key 핵심 문장은 진한 형광펜 그대로). 문단 첫머리의 소제목성 굵은 글씨·상자·표·퀴즈 안은 제외.
+    document.querySelectorAll(".lesson-body p strong").forEach(function (b) {
+      if (b.classList.contains("lead-in") || b.closest(".key, .callout, details, table, .quiz, .prov, .src, .stepper, figure, .done-box")) return;
+      var t = b.textContent.trim();
+      if (t.length < 2 || t.length > 40) return;
+      var prev = b.previousSibling;
+      if (b.parentNode.firstChild === b || (prev && prev.nodeType === 3 && !prev.nodeValue.trim() && prev === b.parentNode.firstChild)) return;
+      b.classList.add("hl-soft");
+    });
+  }
+
   // ---------- 학습 단위 상태 ----------
   // 키: 학습 단위 id(d01a, d01b, d05 …). 원래 Day(dNN)의 기록(답 파일·퀴즈·사전 테스트 점수)은 Day 키에 그대로 있다.
   // 원래 Day를 둘로 나눈 단위는, 나누기 전에 Day 전체에 남긴 완료·읽음·복습 기록을 두 단위 모두 이어 받는다.
@@ -665,6 +776,16 @@
       el.classList.toggle("st-done", st === "done");
       el.classList.toggle("st-started", st === "started");
       el.setAttribute("aria-label", (el.getAttribute("title") || "") + " · " + STATE_NAME[st]);
+      // 2회독 이상이면 로드맵 카드에 작은 ×N 표시
+      var rc = readCount(el.dataset.day),
+        badge = el.querySelector(".rm-reads");
+      if (rc >= 2 && el.classList.contains("rm-day")) {
+        if (!badge) {
+          badge = h("span", "rm-reads");
+          el.appendChild(badge);
+        }
+        badge.textContent = rc + "회독";
+      } else if (badge) badge.remove();
     });
     document.querySelectorAll(".day-status[data-day]").forEach(function (el) {
       var st = dayState(el.dataset.day);
@@ -708,6 +829,7 @@
         var legacy = legacyNote(key);
         if (legacy.length && s0 !== "done") stEl.appendChild(h("span", "ds-when", " · 기존 학습 기록 있음(" + legacy.join(", ") + ") — 완료 여부는 직접 표시하세요"));
       }
+      readsRow(box, key, d, s0);
       var doneBtn = box.querySelector('[data-action="done"]'),
         undoneBtn = box.querySelector('[data-action="undone"]');
       if (doneBtn) doneBtn.style.display = s0 === "done" ? "none" : "";
@@ -734,6 +856,47 @@
         }).length;
       sum.textContent = fk.length ? "퀴즈 첫 시도 기록(원래 Day 전체): " + fok + " / " + fk.length + "문항 정답 · 완료와는 따로 기록됩니다" : "";
     });
+  }
+  // 회독: 첫 완료가 1회독, 다시 읽고 끝낼 때마다 reads에 시각이 하나씩 붙는다(2회독, 3회독…). 완료·퀴즈와는 따로.
+  function readCount(key) {
+    var st = pageStatus(key);
+    return st.done ? 1 + (st.reads || []).length : 0;
+  }
+  function readsRow(box, key, d, s0) {
+    var row = box.querySelector(".done-reads");
+    if (!row) {
+      row = h("div", "done-reads");
+      var st = box.querySelector(".done-state");
+      st.parentNode.insertBefore(row, st.nextSibling);
+    }
+    row.innerHTML = "";
+    if (s0 !== "done") return;
+    var reads = d.reads || [];
+    var chips = h("div", "rd-chips");
+    chips.appendChild(h("span", "rd-chip", "1회독 · " + fmtTime(d.done).split(" ")[0]));
+    reads.forEach(function (at, i) {
+      chips.appendChild(h("span", "rd-chip", i + 2 + "회독 · " + fmtTime(at).split(" ")[0]));
+    });
+    row.appendChild(chips);
+    if (!LOCAL) return;
+    var acts = h("div", "rd-acts");
+    function send(op) {
+      acts.querySelectorAll("button").forEach(function (b) {
+        b.disabled = true;
+      });
+      setDayStatus(key, { reads: op }).catch(function (err) {
+        toast("저장하지 못했어요: " + err.message, true);
+        applyStatus();
+      });
+    }
+    acts.appendChild(button("+ " + (reads.length + 2) + "회독 완료", "ghost", function () {
+      send("add");
+    }));
+    if (reads.length)
+      acts.appendChild(button("마지막 회독 취소", "ghost lab-small", function () {
+        send("pop");
+      }));
+    row.appendChild(acts);
   }
   function setupStepChecks() {
     document.querySelectorAll(".done-box[data-day]").forEach(function (box) {
@@ -777,10 +940,10 @@
       }
       function markUndone() {
         busy(true);
-        var st = pageStatus(key);
         var chain = Promise.resolve();
-        // 나누기 전 원래 Day의 완료 기록을 이어 받은 단위: 짝 단위의 완료는 원래 시각 그대로 남기고, 이 단위만 되돌린다
-        if (isSplit(key) && st.inherited) {
+        // 나누기 전 원래 Day의 완료 기록이 남은 단위(이어 받았든, 새 완료와 함께 있든): 짝 단위의 완료는 원래 시각 그대로 남기고,
+        // 원래 Day의 완료를 지워야 이 단위의 완료가 되살아나지 않는다
+        if (isSplit(key) && (DAYS[src] || {}).done) {
           var sib = src + (key.slice(-1) === "a" ? "b" : "a");
           var oldDone = (DAYS[src] || {}).done;
           chain = chain
@@ -940,10 +1103,122 @@
     });
     return out;
   }
-  // 학습 단위 k의 핵심 복습 퀴즈는 다음 단위 맨 앞(#review)에 있다. 마지막 단위는 그 단위의 종합 퀴즈로.
+  // 학습 단위 k의 핵심 복습 퀴즈는 다음 단위 맨 앞(#review)에 있다. 마지막 단위는 그 단위의 총정리 바로 뒤 종합 퀴즈로.
   function reviewHref(days, d) {
     var nx = days[d.n];
-    return OFFSET + "days/" + (nx && nx.hasReview ? nx.day + ".html#review" : d.day + ".html#lesson");
+    return OFFSET + "days/" + (nx && nx.hasReview ? nx.day + ".html#review" : d.day + ".html#wrapup");
+  }
+  function reviewLabel(days, d) {
+    var nx = days[d.n];
+    return "Day " + d.n + " · " + d.title + (nx && nx.hasReview ? "" : " (총정리와 종합 퀴즈)");
+  }
+  // 홈의 간격 회상: 완료한 단위 페이지에서 퀴즈 데이터를 읽어, 그 단위에 나온 점검·종합 문항 중 셋을 이 자리에 낸다.
+  // 이미 본 답이 펼쳐진 채로 나오지 않도록 날짜마다 새 세트 이름을 쓴다(첫 시도 기록은 문항 id로 이어진다).
+  function recallHere(d, slot) {
+    if (slot.firstChild) {
+      slot.innerHTML = "";
+      return;
+    }
+    slot.appendChild(h("div", "tc-rv-note", "불러오는 중…"));
+    fetch(OFFSET + "days/" + d.day + ".html")
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.text();
+      })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        var dataEl = doc.getElementById("quiz-" + d.src);
+        if (!dataEl) throw new Error("퀴즈 없음");
+        var data = JSON.parse(dataEl.textContent);
+        var here = {};
+        doc.querySelectorAll(".quiz[data-set]").forEach(function (q) {
+          if (!q.dataset.mode) here[q.dataset.set] = 1;
+        });
+        // 문항의 ref(#앵커, dXX.html#…)와 fig(../assets/…)는 단위 페이지 기준이라, 홈에서 쓰도록 그 페이지 주소로 바꾼다.
+        // 이 쪽에 없는 앵커(나뉜 Day의 다른 쪽)는 단위 페이지에서처럼 링크를 달지 않는다.
+        var pageUrl = new URL(OFFSET + "days/" + d.day + ".html", location.href).href;
+        function rebase(it) {
+          var c = JSON.parse(JSON.stringify(it));
+          if (c.ref && c.ref.charAt(0) === "#") {
+            var ok = false;
+            try {
+              ok = !!doc.querySelector(c.ref);
+            } catch (e) {}
+            if (ok) c.ref = pageUrl + c.ref;
+            else delete c.ref;
+          } else if (c.ref) c.ref = new URL(c.ref, pageUrl).href;
+          if (c.fig) c.fig = new URL(c.fig, pageUrl).href;
+          return c;
+        }
+        var pool = [];
+        Object.keys(data.sets || {}).forEach(function (k) {
+          var st = data.sets[k];
+          if (!here[k] || /^review/.test(k) || st.kind === "pre") return;
+          (st.items || []).forEach(function (it) {
+            if ((it.type === "mc" || it.type === "ox") && it.id && !pool.some(function (x) { return x.id === it.id; })) pool.push(rebase(it));
+          });
+        });
+        if (!pool.length) throw new Error("문항 없음");
+        for (var i = pool.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1)),
+            t = pool[i];
+          pool[i] = pool[j];
+          pool[j] = t;
+        }
+        // 같은 원본의 a/b 단위 복습을 함께 열어도 세트·저장 키가 섞이지 않게 단위 이름을 넣고, 이미 실린 세트는 지우지 않고 합친다.
+        var setId = "recall-" + d.day + "-" + todayIso();
+        var old = document.getElementById("quiz-" + d.src);
+        if (old) {
+          try {
+            var prev = JSON.parse(old.textContent).sets || {};
+            Object.keys(prev).forEach(function (k) {
+              if (/^recall-/.test(k)) data.sets[k] = prev[k];
+            });
+          } catch (e) {}
+          old.remove();
+        }
+        data.sets[setId] = { kind: "review", title: "Day " + d.n + " 다시 떠올리기", items: pool.slice(0, 3) };
+        var sc = document.createElement("script");
+        sc.type = "application/json";
+        sc.id = "quiz-" + d.src;
+        sc.textContent = JSON.stringify(data);
+        document.body.appendChild(sc);
+        slot.innerHTML = "";
+        var box = h("div", "quiz");
+        box.dataset.day = d.src;
+        box.dataset.set = setId;
+        slot.appendChild(box);
+        renderQuiz(box);
+        typeset(box);
+      })
+      .catch(function (e) {
+        slot.innerHTML = "";
+        slot.appendChild(h("div", "tc-rv-note", "문제를 불러오지 못했어요(" + e.message + "). 위 링크로 가서 복습해 주세요."));
+      });
+  }
+  // 홈의 '지금까지 쌓은 것': 완료한 단위의 '배울 핵심'을 최근 것부터. 숙달 판정이 아니라 지나온 길의 목록이다.
+  function gainsPanel(days) {
+    var got = days.filter(function (d) {
+      return dayState(d.day) === "done" && d.learn;
+    });
+    if (!got.length) return null;
+    var box = h("details", "tc-gains");
+    box.appendChild(h("summary", "", "지금까지 배운 것 · " + got.length + "개 단위"));
+    var ul = h("ul");
+    got
+      .slice()
+      .reverse()
+      .forEach(function (d) {
+        var li = h("li");
+        var a = h("a", "", "Day " + d.n);
+        a.href = OFFSET + "days/" + d.day + ".html";
+        li.appendChild(a);
+        li.appendChild(document.createTextNode(" " + d.learn));
+        ul.appendChild(li);
+      });
+    box.appendChild(ul);
+    box.appendChild(h("div", "tc-rv-note", "한 줄씩 소리 내어 설명해 보고, 막히는 줄만 그 Day로 돌아가면 됩니다."));
+    return box;
   }
   function unitForLast(days, last) {
     if (!last) return null;
@@ -961,53 +1236,178 @@
       }) || cands[0] || null
     );
   }
-  function setupToday() {
-    var card = document.getElementById("today-card");
-    var dataEl = document.getElementById("study-days");
-    if (!card || !dataEl) return;
-    var days = JSON.parse(dataEl.textContent);
+  // 지금 학습할 단위: 마지막으로 읽던 단위가 아직 완료 전이면 그것, 아니면 완료 전 첫 단위
+  function currentUnit(days) {
     var firstOpen = days.find(function (d) {
       return dayState(d.day) !== "done";
     });
-    var done = days.filter(function (d) {
-      return dayState(d.day) === "done";
-    }).length;
-    card.innerHTML = "";
     var last = null;
     try {
       last = JSON.parse(recall("study-last-any") || "null");
     } catch (e) {}
     var lastU = unitForLast(days, last);
     var cur = lastU && dayState(lastU.day) !== "done" ? lastU : firstOpen;
+    return { cur: cur, last: last, resume: !!(cur && cur === lastU) };
+  }
+  // 가장 최근에 완료로 표시한 단위
+  // 완료한 단위 중 가장 뒤의 것(누른 시각이 아니라 순서 기준: 앞 Day를 나중에 몰아서 눌러도 흐름상 마지막을 보인다)
+  function lastDone(days) {
+    var best = null;
+    days.forEach(function (d) {
+      if (pageStatus(d.day).done) best = d;
+    });
+    return best;
+  }
+  // "학습 구간 1. Day 3–4의 2×2 예제를 전선으로: …" → "2×2 예제를 전선으로: …"
+  function chapterText(title) {
+    return (title || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .replace(/^(?:학습 구간\s*)?\d+[.)]\s*/, "")
+      .replace(/^Day\s*[\d–-]+의\s*/, "");
+  }
+  // 로드맵(홈의 작은 지도, 로드맵 페이지): Phase별 완료 수, 지금 위치
+  function markRoadmap(days, cur) {
+    var done = days.filter(function (d) {
+      return dayState(d.day) === "done";
+    }).length;
+    document.querySelectorAll(".pb-day.is-current").forEach(function (el) {
+      el.classList.remove("is-current");
+      el.removeAttribute("aria-current");
+    });
+    if (cur)
+      document.querySelectorAll('.pb-day[data-day="' + cur.day + '"]').forEach(function (el) {
+        el.classList.add("is-current");
+        el.setAttribute("aria-current", "step");
+      });
+    document.querySelectorAll("[data-phase-count]").forEach(function (el) {
+      var ph = parseInt(el.dataset.phaseCount, 10);
+      var us = days.filter(function (d) {
+        return d.phase === ph;
+      });
+      var dn = us.filter(function (d) {
+        return dayState(d.day) === "done";
+      }).length;
+      el.textContent = dn + " / " + us.length;
+    });
+    document.querySelectorAll(".pb-phase[data-phase]").forEach(function (el) {
+      var ph = parseInt(el.dataset.phase, 10);
+      var us = days.filter(function (d) {
+        return d.phase === ph;
+      });
+      var dn = us.filter(function (d) {
+        return dayState(d.day) === "done";
+      }).length;
+      el.style.setProperty("--done", us.length ? dn / us.length : 0);
+      el.classList.toggle("is-complete", us.length > 0 && dn === us.length);
+      el.classList.toggle("is-current-phase", !!cur && cur.phase === ph);
+    });
+    ["hm-stat", "rm-stat"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = "완료 " + done + " / " + days.length + (cur ? " · 지금 Day " + cur.n : "");
+    });
+  }
+  function setupRoadmap() {
+    if (document.getElementById("today-card")) return;
+    var dataEl = document.getElementById("study-days");
+    if (!dataEl || !document.querySelector(".pb-phase")) return;
+    var days = JSON.parse(dataEl.textContent);
+    markRoadmap(days, currentUnit(days).cur);
+  }
+  function setupToday() {
+    var card = document.getElementById("today-card");
+    var dataEl = document.getElementById("study-days");
+    if (!card || !dataEl) return;
+    var days = JSON.parse(dataEl.textContent);
+    var cu = currentUnit(days),
+      cur = cu.cur,
+      last = cu.last;
+    var anyDone = days.some(function (d) {
+      return dayState(d.day) === "done";
+    });
+    if (anyDone || cu.resume) document.body.classList.add("returning");
+    card.innerHTML = "";
     var main = h("div", "tc-main");
     if (cur) {
-      main.appendChild(h("div", "tc-label", lastU && cur === lastU ? "이어서 학습" : done ? "다음 학습" : "처음 시작"));
-      var t = h("div", "tc-title");
+      main.appendChild(h("div", "tc-label", cu.resume ? "이어서 학습" : anyDone ? "다음 학습" : "처음 시작"));
+      var t = h("h2", "tc-title");
       t.appendChild(h("span", "tc-day", "Day " + cur.n));
-      t.appendChild(h("span", "", cur.title));
+      t.appendChild(h("span", "tc-t", cur.title));
       main.appendChild(t);
-      var where = cur === lastU && last.title ? "마지막으로 읽던 곳: " + last.title : "Phase " + cur.phaseName;
-      main.appendChild(h("div", "tc-sub", where));
-      var a = h("a", "sbtn primary tc-go", "이어서 학습 →");
-      a.href = OFFSET + "days/" + cur.day + ".html" + (cur === lastU && last.id && last.day === cur.day ? "#" + last.id : "");
+      if (cur.q) main.appendChild(h("p", "tc-q", cur.q));
+      var chs = cur.chs || [];
+      if (chs.length) {
+        var seen = {};
+        try {
+          seen = JSON.parse(recall("study-visited:" + cur.day) || "{}");
+        } catch (e) {}
+        var at = cu.resume && last && last.id ? chs.indexOf(last.id) : -1;
+        var prog = h("div", "tc-prog");
+        var segs = h("div", "tc-segs");
+        segs.setAttribute("aria-hidden", "true");
+        chs.forEach(function (c, i) {
+          segs.appendChild(h("i", (seen[c] || i < at ? "seen" : "") + (i === at ? " at" : "")));
+        });
+        prog.appendChild(segs);
+        var where = h("div", "tc-where");
+        if (at >= 0) {
+          where.appendChild(h("b", "", "구간 " + (at + 1) + " / " + chs.length));
+          var ct = chapterText(last.title);
+          if (ct) where.appendChild(document.createTextNode(" 읽는 중 · " + ct));
+        } else {
+          where.appendChild(document.createTextNode("학습 구간 " + chs.length + "개"));
+        }
+        prog.appendChild(where);
+        main.appendChild(prog);
+      }
+      var a = h("a", "sbtn primary tc-go", cu.resume ? "이어서 학습 →" : "학습 시작 →");
+      a.href = OFFSET + "days/" + cur.day + ".html" + (cu.resume && last.id ? "#" + last.id : "");
       main.appendChild(a);
     } else {
       main.appendChild(h("div", "tc-label", "모든 학습 단위를 완료로 표시했습니다"));
-      main.appendChild(h("div", "tc-title", "아래 복습을 이어 가고, 마지막 Day의 결정을 다시 읽어 보세요."));
+      main.appendChild(h("h2", "tc-title", "복습을 이어 가고, 마지막 Day의 결정을 다시 읽어 보세요."));
     }
     card.appendChild(main);
+
+    var side = h("div", "tc-side");
+    var prev = lastDone(days);
+    if (prev) {
+      var pv = h("div", "tc-prev");
+      pv.appendChild(h("div", "tc-mini-label", "지난번에 배운 것"));
+      var pa = h("a", "tc-prev-t");
+      pa.href = OFFSET + "days/" + prev.day + ".html";
+      pa.appendChild(h("span", "tc-rv-n", "Day " + prev.n));
+      pa.appendChild(document.createTextNode(prev.title));
+      pv.appendChild(pa);
+      if (prev.learn) pv.appendChild(h("p", "tc-prev-l", prev.learn));
+      side.appendChild(pv);
+    }
     var due = dueReviews(days);
     if (due.length) {
       var rb = h("div", "tc-review");
-      rb.appendChild(h("div", "tc-label", "지난 학습 복습 · 핵심 퀴즈" + (due.length > 3 ? " (3개만, 나머지는 다음에)" : "")));
+      var hd = h("div", "tc-rv-head");
+      hd.appendChild(h("span", "tc-mini-label", "복습할 차례"));
+      hd.appendChild(h("span", "tc-rv-hint", "완료 뒤 1·3·7·14·30일에 다시 떠올리면 오래 남습니다. 버거우면 건너뛰어도 됩니다."));
+      rb.appendChild(hd);
       due.slice(0, 3).forEach(function (r) {
         var row = h("div", "tc-rv-row");
-        var a = h("a", "", "Day " + r.d.n + " · " + r.d.title);
-        a.href = reviewHref(days, r.d);
-        row.appendChild(a);
+        var info = h("div", "tc-rv-info");
+        var ra = h("a", "tc-rv-t");
+        ra.href = reviewHref(days, r.d);
+        ra.appendChild(h("span", "tc-rv-n", "Day " + r.d.n));
+        ra.appendChild(document.createTextNode(r.d.title));
+        info.appendChild(ra);
+        row.appendChild(info);
+        var btns = h("div", "tc-rv-btns");
+        var slot = h("div", "tc-recall");
+        btns.appendChild(
+          button("3문제 풀기", "lab-small", function () {
+            recallHere(r.d, slot);
+          })
+        );
         if (LOCAL) {
-          row.appendChild(
-            button("풀었어요", "ghost lab-small", function () {
+          btns.appendChild(
+            button("복습함", "ghost lab-small", function () {
               var patch = { reviews: {} };
               var have = pageStatus(r.d.day).reviews || {};
               REVIEW_GAPS.forEach(function (g) {
@@ -1024,147 +1424,19 @@
             })
           );
         }
+        row.appendChild(btns);
         rb.appendChild(row);
+        rb.appendChild(slot);
       });
-      rb.appendChild(h("div", "tc-rv-note", "완료한 단위의 핵심을 객관식으로 다시 확인합니다(완료 뒤 1·3·7·14·30일 무렵). 버거우면 건너뛰어도 됩니다."));
-      card.appendChild(rb);
+      if (due.length > 3) rb.appendChild(h("div", "tc-rv-note", "나머지 " + (due.length - 3) + "개는 다음에 보여 드려요."));
+      side.appendChild(rb);
     }
-    var meta = h("div", "tc-meta");
-    meta.textContent = "완료한 학습 단위 " + done + " / " + days.length + " · Day는 마감이 아니라 순서입니다";
-    card.appendChild(meta);
-    // 표시용: 진행 막대 비율과 지도 위 '지금 위치'
-    card.style.setProperty("--done", days.length ? done / days.length : 0);
-    document.querySelectorAll(".pb-day.is-current").forEach(function (el) {
-      el.classList.remove("is-current");
-      el.removeAttribute("aria-current");
-    });
-    if (cur) {
-      var curChip = document.querySelector('.pb-day[data-day="' + cur.day + '"]');
-      if (curChip) {
-        curChip.classList.add("is-current");
-        curChip.setAttribute("aria-current", "step");
-      }
-    }
-    document.querySelectorAll("[data-phase-count]").forEach(function (el) {
-      var ph = parseInt(el.dataset.phaseCount, 10);
-      var us = days.filter(function (d) {
-        return d.phase === ph;
-      });
-      var dn = us.filter(function (d) {
-        return dayState(d.day) === "done";
-      }).length;
-      el.textContent = dn + " / " + us.length;
-      var phEl = el.closest(".pb-phase");
-      if (phEl) phEl.style.setProperty("--done", us.length ? dn / us.length : 0);
-    });
+    var gains = gainsPanel(days);
+    if (gains) side.appendChild(gains);
+    if (side.children.length) card.appendChild(side);
+    markRoadmap(days, cur);
   }
 
-  // ---------- 학습 기록 백업과 복원 ----------
-  // 백업 파일 = 서버의 답·진도(answers 폴더) + 이 브라우저의 기록(퀴즈·실습·읽던 위치).
-  // 복원은 지금 기록을 지우지 않는다: 답 파일은 내용이 다른 것만 바꾸고(이전 판은 git 이력에 남음), 진도와 브라우저 기록은 비어 있는 칸만 채운다.
-  function browserRecords() {
-    var out = {};
-    try {
-      for (var i = 0; i < localStorage.length; i++) {
-        var k = localStorage.key(i);
-        if (k && k.indexOf("study-") === 0) out[k] = localStorage.getItem(k);
-      }
-    } catch (e) {}
-    return out;
-  }
-  function setupBackup() {
-    var box = document.getElementById("backup-box");
-    if (!box || !LOCAL) return;
-    var row = h("div", "btn-row");
-    var msg = h("div", "backup-msg");
-    msg.setAttribute("role", "status");
-    row.appendChild(
-      button("백업 파일 내려받기", "primary", function () {
-        api("backup")
-          .then(function (srv) {
-            srv.browser = browserRecords();
-            srv.browser_origin = location.origin;
-            var blob = new Blob([JSON.stringify(srv, null, 1)], { type: "application/json" });
-            var a = h("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = "study-backup-" + todayIso() + ".json";
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            msg.textContent = "내려받기를 시작했어요: 답 " + Object.keys(srv.answers || {}).length + "개, 진도 " + Object.keys(srv.status || {}).length + "일, 브라우저 기록 " + Object.keys(srv.browser).length + "개. 파일이 '다운로드' 폴더에 생겼는지 확인하세요.";
-          })
-          .catch(function (err) {
-            msg.textContent = "백업하지 못했어요: " + err.message;
-          });
-      })
-    );
-    var file = h("input");
-    file.type = "file";
-    file.accept = ".json,application/json";
-    file.style.display = "none";
-    file.addEventListener("change", function () {
-      var f = file.files && file.files[0];
-      file.value = "";
-      if (!f) return;
-      var rd = new FileReader();
-      rd.onload = function () {
-        var data;
-        try {
-          data = JSON.parse(rd.result);
-        } catch (e) {
-          msg.textContent = "백업 파일을 읽지 못했어요(JSON 형식이 아님).";
-          return;
-        }
-        if (!data || data.format !== "study-backup") {
-          msg.textContent = "이 사이트의 백업 파일이 아니에요.";
-          return;
-        }
-        var body = { answers: data.answers || {}, status: data.status || {} };
-        api("restore", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
-          .then(function (dry) {
-            var br = data.browser || {},
-              brFill = Object.keys(br).filter(function (k) {
-                return k.indexOf("study-") === 0 && recall(k) == null;
-              });
-            var summary =
-              "백업 시각 " + (data.exported_at || "?") + "\n" +
-              "· 내용이 달라 덮어쓸 답 파일: " + dry.changed.length + "개" + (dry.changed.length ? " (" + dry.changed.slice(0, 6).join(", ") + (dry.changed.length > 6 ? " …" : "") + ")" : "") + "\n" +
-              "· 새로 생길 답 파일: " + dry.new.length + "개\n" +
-              "· 같은 내용이라 그대로: " + dry.same + "개\n" +
-              "· 진도에서 비어 있어 채울 칸: " + dry.status_fill + "개\n" +
-              "· 이 브라우저에서 비어 있어 채울 기록: " + brFill.length + "개\n\n" +
-              "덮어쓰는 답의 지금 내용은 git 이력에 남아 되돌릴 수 있습니다. 복원할까요?";
-            if (!confirm(summary)) {
-              msg.textContent = "복원을 취소했어요. 아무것도 바뀌지 않았습니다.";
-              return;
-            }
-            body.apply = true;
-            return api("restore", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(function (res) {
-              var okN = 0;
-              brFill.forEach(function (k) {
-                if (store(k, br[k])) okN++;
-              });
-              msg.textContent = "복원했어요: 답 " + (res.changed.length + res.new.length) + "개, 진도 칸 " + res.status_fill + "개, 브라우저 기록 " + okN + "/" + brFill.length + "개. 페이지를 새로 고치면 반영됩니다.";
-            });
-          })
-          .catch(function (err) {
-            msg.textContent = "복원하지 못했어요: " + err.message + " (아무것도 바뀌지 않았거나, 일부만 바뀌었을 수 있으니 페이지를 새로 고쳐 확인하세요)";
-          });
-      };
-      rd.readAsText(f, "utf-8");
-    });
-    row.appendChild(
-      button("백업 파일로 복원", "", function () {
-        file.click();
-      })
-    );
-    box.appendChild(row);
-    box.appendChild(file);
-    box.appendChild(msg);
-    box.appendChild(h("p", "backup-note", "권장: 일주일에 한 번, 또는 브라우저를 바꾸거나 데이터를 지우기 전에 내려받아 두세요. 복원은 지금 기록을 지우지 않습니다. 내용이 다른 답만 바꾸고, 진도와 브라우저 기록은 비어 있는 칸만 채웁니다."));
-  }
-
-  // ---------- 댓글 ----------
   function setupComments() {
     var sec = document.querySelector("section.comments");
     if (!sec) return;
@@ -1201,17 +1473,47 @@
   }
 
   // ---------- 생활코딩식 머리 영역: 흰 제목 띠를 어두운 메뉴 위에 둔다 ----------
-  function setupBrand() {
-    var header = document.getElementById("quarto-header");
-    if (!header) return;
-    var strip = h("div", "site-brand");
-    var inner = h("div", "site-brand-inner");
-    var a = h("a", "site-brand-title", "Why Ions Compute");
-    a.href = OFFSET + "index.html";
-    inner.appendChild(a);
-    inner.appendChild(h("div", "site-brand-sub", "이온 소자는 어떻게, 왜 계산하는가"));
-    strip.appendChild(inner);
-    header.insertBefore(strip, header.firstChild);
+  // ---------- 왼쪽 목차: Phase 제목을 두 줄로, Day 번호와 제목을 나눠 보이기 ----------
+  function setupSidebar() {
+    // 위 메뉴: 지금 페이지만 강조 (Quarto가 모든 페이지에서 '홈'을 강조하는 문제)
+    var here = location.pathname.replace(/index\.html$/, "");
+    document.querySelectorAll(".navbar a.nav-link[href]").forEach(function (a) {
+      var p = new URL(a.getAttribute("href"), location.href).pathname.replace(/index\.html$/, "");
+      // 하위 폴더 탭(예: 프로젝트)은 그 안의 모든 페이지에서 강조
+      var on = p === here || (/\/[^/]+\/$/.test(p) && here.indexOf(p) === 0);
+      a.classList.toggle("active", on);
+      if (on) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    var sb = document.getElementById("quarto-sidebar");
+    if (!sb) return;
+    sb.querySelectorAll(".sidebar-item-section").forEach(function (sec) {
+      var head = sec.querySelector(":scope > .sidebar-item-container .menu-text");
+      if (!head) return;
+      var m = head.textContent.trim().match(/^Phase\s*(\d+)\s*·\s*(.+)$/);
+      if (!m) return;
+      var nums = [];
+      sec.querySelectorAll(".sidebar-section .menu-text").forEach(function (x) {
+        var k = x.textContent.match(/^Day\s*(\d+)/);
+        if (k) nums.push(+k[1]);
+      });
+      head.textContent = "";
+      var top = h("span", "sb-ph", "Phase " + m[1]);
+      if (nums.length) top.appendChild(h("span", "sb-range", "Day " + nums[0] + "–" + nums[nums.length - 1]));
+      head.appendChild(top);
+      head.appendChild(h("span", "sb-pt", m[2]));
+      head.classList.add("sb-phase");
+    });
+    sb.querySelectorAll("a.sidebar-link .menu-text").forEach(function (x) {
+      var m = x.textContent.trim().match(/^Day\s*(\d+)\s*·\s*(.+)$/);
+      if (!m) return;
+      x.textContent = "";
+      x.appendChild(h("span", "sb-n", "Day " + m[1]));
+      x.appendChild(h("span", "sb-t", m[2]));
+      x.classList.add("sb-day");
+      // 두 줄에서 잘리는 긴 제목도 전체를 볼 수 있게
+      x.parentNode.title = "Day " + m[1] + " · " + m[2];
+    });
   }
 
   // ---------- 읽기 편의 ----------
@@ -1244,7 +1546,12 @@
         apply();
       })
     );
-    tools.appendChild(box);
+    // 휴대폰 폭에서는 머리막대에 두면 검색 아이콘이 다음 줄로 밀리므로 ☰ 메뉴 안에 둔다
+    var menu = document.getElementById("navbarCollapse");
+    if (menu && window.matchMedia("(max-width: 575.98px)").matches) {
+      box.classList.add("in-menu");
+      menu.appendChild(box);
+    } else tools.appendChild(box);
   }
   function setupProgressBar() {
     var bar = h("div");
@@ -1484,6 +1791,57 @@
     function qid(it, i) {
       return it.id || "i" + i + ":" + hashStr(it.q);
     }
+    // 문항 내용 서명: 질문·보기·정답이 바뀌면 달라진다. 서명이 다른 옛 기록은 같은 문항으로 읽지 않는다.
+    function sig(it) {
+      return hashStr(JSON.stringify([it.q, it.options || null, it.a]));
+    }
+    function stale(it, rec) {
+      if (!rec) return false;
+      if (rec.v) return rec.v !== sig(it);
+      // 서명 전 기록: 고른 보기 글자가 지금 보기에 없거나, 지금 정답 기준의 맞음/틀림과 어긋나면 다른 문항으로 본다
+      if (it.type !== "mc" || rec.chosen == null) return false;
+      var j = it.options.indexOf(rec.chosen);
+      return j < 0 || (j === it.a) !== !!rec.ok;
+    }
+    var archived = false;
+    items.forEach(function (it, i) {
+      var k = qid(it, i);
+      if (stale(it, saved[k])) {
+        store("study-old:" + key + ":" + k, JSON.stringify(saved[k]));
+        delete saved[k];
+        if (firsts[k]) {
+          store("study-old:" + firstKey + ":" + k, JSON.stringify(firsts[k]));
+          delete firsts[k];
+        }
+        archived = true;
+      } else if (firsts[k] && firsts[k].v && firsts[k].v !== sig(it)) {
+        delete firsts[k];
+        archived = true;
+      }
+    });
+    if (archived) {
+      store(key, JSON.stringify(saved));
+      store(firstKey, JSON.stringify(firsts));
+    }
+    // 지난 학습 복습은 핵심 문항(core 표시, 없으면 앞의 4개)만 기본으로 보이고 나머지는 펼쳐서 푼다
+    var coreN = items.length;
+    if (kind === "review" && mode === "" && items.length > 5) {
+      var flagged = items.filter(function (it) {
+        return it.core;
+      }).length;
+      if (flagged) {
+        items = items
+          .filter(function (it) {
+            return it.core;
+          })
+          .concat(
+            items.filter(function (it) {
+              return !it.core;
+            })
+          );
+        coreN = flagged;
+      } else coreN = 4;
+    }
 
     var head = h("div", "quiz-head");
     var left = h("div", "quiz-left");
@@ -1518,7 +1876,10 @@
         }
       });
       store(key, JSON.stringify(saved));
-      if (n === items.length && n > 1) {
+      var coreDone = items.slice(0, coreN).every(function (it, i) {
+        return saved[qid(it, i)];
+      });
+      if (coreDone && n > 1) {
         banner.style.display = "";
         var msg;
         if (mode === "pre") {
@@ -1582,6 +1943,7 @@
       } else banner.style.display = "none";
     }
 
+    var more = null;
     items.forEach(function (it, i) {
       var k = qid(it, i);
       var qi = h("div", "qitem");
@@ -1624,7 +1986,7 @@
         } else if (mode === "") {
           isRetry = !!firsts[k];
           if (!firsts[k]) {
-            firsts[k] = { ok: ok, at: new Date().toISOString() };
+            firsts[k] = { ok: ok, at: new Date().toISOString(), v: sig(it) };
             store(firstKey, JSON.stringify(firsts));
           }
         } else isRetry = mode === "post";
@@ -1666,7 +2028,7 @@
           );
           why.appendChild(row);
         }
-        saved[k] = { ok: ok, chosen: chosenText, retry: isRetry };
+        saved[k] = { ok: ok, chosen: chosenText, retry: isRetry, v: sig(it) };
         updateScore(animate);
         typeset(why);
       }
@@ -1725,7 +2087,14 @@
         }
       }
       qi.appendChild(why);
-      body.appendChild(qi);
+      if (i >= coreN) {
+        if (!more) {
+          more = h("details", "quiz-more");
+          more.appendChild(h("summary", "", "더 풀어 보기 (선택) · " + (items.length - coreN) + "문항"));
+          body.appendChild(more);
+        }
+        more.appendChild(qi);
+      } else body.appendChild(qi);
     });
     if (mode === "pre" && set.challenge) {
       var ch = h("div", "quiz-challenge");
@@ -1759,291 +2128,6 @@
     updateScore(false);
     typeset(box);
   }
-  // ---------- 질문 패널: 비동기 기록 도구 (기록 → Claude Code에 요청 → 답이 이 페이지에 붙음) ----------
-  function newQid() {
-    return "q-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
-  }
-  function parseEntries(md, kindFilter) {
-    // "### 질문 · 10/23 20:58 · id:q-xxx" 또는 옛 형식 "### 질문 · 10/23 20:58"
-    var out = [];
-    (md || "").split(/\n(?=### )/).forEach(function (p) {
-      var m = p.match(/^### ([^\n]*)\n?([\s\S]*)$/);
-      if (!m) return;
-      var head = m[1].split(/\s+·\s+/);
-      var kind = head[0].trim();
-      if (kind !== "질문" && kind !== "요청") return;
-      var id = "",
-        when = "",
-        day = "";
-      head.slice(1).forEach(function (x) {
-        x = x.trim();
-        if (/^id:/.test(x)) id = x.slice(3);
-        else if (/^\d+\/\d+ \d\d:\d\d$/.test(x)) when = x;
-        else if (/^D\d+$/.test(x)) day = x;
-      });
-      if (kindFilter && day && day !== kindFilter) return;
-      var lines = m[2].trim().split("\n");
-      var where = "",
-        quote = [],
-        text = [];
-      lines.forEach(function (l) {
-        if (/^\*위치:/.test(l)) where = l.replace(/^\*위치:\s*/, "").replace(/\*$/, "");
-        else if (/^> /.test(l)) quote.push(l.slice(2));
-        else text.push(l);
-      });
-      out.push({ kind: kind, id: id, when: when, where: where, quote: quote.join(" "), text: text.join("\n").trim() });
-    });
-    return out;
-  }
-  function setupAskPanel() {
-    var steps = document.querySelector(".day-steps[data-day]");
-    if (!steps || !LOCAL) return;
-    var did = srcOf(steps.dataset.day);
-    var dn = parseInt(did.slice(1), 10);
-    // 화면에 보이는 번호(Day N). 질문 파일에 남기는 꼬리표는 원래 Day(D5)를 그대로 쓴다(기존 질문과 맞추기 위해).
-    var tm = (document.title || "").match(/^Day (\d+)/);
-    var dayLabel = tm ? "Day " + tm[1] : "D" + dn;
-    var qname = did + "-questions";
-    var draftKey = "study-askdraft:" + did;
-
-    var fab = h("button", "");
-    fab.id = "ask-fab";
-    fab.type = "button";
-    fab.setAttribute("aria-haspopup", "dialog");
-    fab.innerHTML = "<span class='fab-icon' aria-hidden='true'>?</span> Claude에게 질문";
-    var panel = h("div");
-    panel.id = "ask-panel";
-    panel.setAttribute("role", "dialog");
-    panel.setAttribute("aria-label", "Claude에게 질문 남기기");
-
-    var tabs = h("div", "ap-tabs");
-    var tabNew = button("새 질문", "ap-tab on", function () {
-      show("new");
-    });
-    var tabList = button("지난 질문·요청", "ap-tab", function () {
-      show("list");
-    });
-    tabs.appendChild(tabNew);
-    tabs.appendChild(tabList);
-    tabs.appendChild(button("닫기", "ghost ap-close", close));
-    panel.appendChild(tabs);
-
-    var viewNew = h("div", "ap-view");
-    var quote = h("div", "ap-quote");
-    viewNew.appendChild(quote);
-    var lab = h("label", "ap-label", "질문 또는 수정 요청");
-    lab.setAttribute("for", "ap-text");
-    viewNew.appendChild(lab);
-    var ta = h("textarea");
-    ta.id = "ap-text";
-    ta.placeholder = "본문을 드래그해 두고 버튼을 누르면 그 부분이 인용됩니다. 막힌 곳, 모르는 용어, 또는 고치고 싶은 점을 쓰세요.";
-    viewNew.appendChild(ta);
-    var kind = h("div", "ap-kind");
-    kind.innerHTML =
-      '<label><input type="radio" name="ap-kind" value="q" checked> 내용 질문</label>' +
-      '<label><input type="radio" name="ap-kind" value="r"> 디자인·내용 수정 요청</label>';
-    viewNew.appendChild(kind);
-    var foot = h("div", "ap-foot");
-    var saveBtn = button("저장", "primary", save);
-    foot.appendChild(h("span", "ap-hint", "쓰는 동안 임시 글이 이 브라우저에 남아요."));
-    foot.appendChild(saveBtn);
-    viewNew.appendChild(foot);
-    panel.appendChild(viewNew);
-
-    var viewList = h("div", "ap-view");
-    viewList.style.display = "none";
-    var list = h("div", "ap-list");
-    viewList.appendChild(list);
-    // 나뉜 Day의 앞 단위에는 질문·답변 칸이 없다: 같은 Day의 마지막 단위(…b)로 보낸다
-    var qaPage = document.getElementById("questions") ? "" : did + "b.html";
-    var goto = h("a", "ap-goto", qaPage ? "질문과 답변 칸(이 Day의 다음 학습 단위)으로 →" : "이 페이지 아래 '질문'과 '답변' 칸으로 ↓");
-    goto.href = qaPage + "#questions";
-    goto.addEventListener("click", close);
-    viewList.appendChild(goto);
-    panel.appendChild(viewList);
-
-    var how = h("div", "ap-how");
-    how.innerHTML =
-      "<b>이건 실시간 채팅이 아니라 기록 도구예요.</b><ol><li>저장하면 <code>answers/" +
-      qname +
-      ".md</code>(요청은 <code>requests.md</code>)에 ID와 함께 쌓입니다.</li><li>Claude Code 채팅에서 <b>\"D" +
-      dn +
-      " 질문 답해줘\"</b>(요청은 \"요청 반영해줘\")라고 말합니다.</li><li>답은 이 페이지의 '답변' 칸에 같은 ID로 붙고, 그 뒤 '답변 있음'으로 바뀝니다.</li></ol>" +
-      "<button type='button' class='sbtn tagbtn' data-copy='" + dayLabel + " 질문 답해줘'>\"" + dayLabel + " 질문 답해줘\" 복사</button>";
-    panel.appendChild(how);
-    how.querySelector("[data-copy]").addEventListener("click", function (e) {
-      var t = e.currentTarget.dataset.copy;
-      try {
-        navigator.clipboard.writeText(t);
-        toast("복사했어요. Claude Code 채팅에 붙여넣으세요.");
-      } catch (err) {
-        toast(t);
-      }
-    });
-
-    function readDraft() {
-      try {
-        return JSON.parse(recall(draftKey) || "null");
-      } catch (e) {
-        return null;
-      }
-    }
-    function writeDraft() {
-      var k = panel.querySelector('input[name="ap-kind"]:checked').value;
-      if (ta.value.trim()) store(draftKey, JSON.stringify({ text: ta.value, kind: k, sel: panel._sel || "", ch: panel._ch || "" }));
-      else store(draftKey, null);
-    }
-    var dt = null;
-    ta.addEventListener("input", function () {
-      clearTimeout(dt);
-      dt = setTimeout(writeDraft, 300);
-    });
-
-    function show(which) {
-      viewNew.style.display = which === "new" ? "" : "none";
-      viewList.style.display = which === "list" ? "" : "none";
-      tabNew.classList.toggle("on", which === "new");
-      tabList.classList.toggle("on", which === "list");
-      if (which === "list") refreshList();
-    }
-    function refreshList() {
-      list.innerHTML = "";
-      list.appendChild(h("div", "ap-empty", "불러오는 중…"));
-      Promise.all([loadContent(qname), loadContent("requests")]).then(function (r) {
-        var qs = parseEntries(r[0] && r[0].content).concat(parseEntries(r[1] && r[1].content, "D" + dn).filter(function (e) {
-          return e.kind === "요청";
-        }));
-        var qa = document.querySelector(".qa-block");
-        var qaText = qa && !qa.classList.contains("pending-box") ? qa.textContent : "";
-        list.innerHTML = "";
-        if (!qs.length) {
-          list.appendChild(h("div", "ap-empty", "아직 저장한 질문이나 요청이 없어요."));
-          return;
-        }
-        qs.reverse().forEach(function (q) {
-          var it = h("div", "ap-item");
-          var top = h("div", "ap-item-top");
-          top.appendChild(h("span", "ap-when", q.kind + " · " + q.when + (q.where ? " · " + q.where : "")));
-          var answered = q.kind === "질문" && qaText && (q.id ? qaText.indexOf(q.id) >= 0 : qaText.indexOf(q.when) >= 0);
-          var state = q.kind === "요청" ? "요청 기록됨" : answered ? "답변 있음" : "답변 대기";
-          top.appendChild(h("span", "ap-state " + (answered ? "done" : "wait"), state));
-          it.appendChild(top);
-          if (q.quote) it.appendChild(h("div", "ap-item-quote", "“" + q.quote.slice(0, 80) + (q.quote.length > 80 ? "…" : "") + "”"));
-          it.appendChild(h("div", "ap-item-text", q.text.slice(0, 160) + (q.text.length > 160 ? "…" : "")));
-          if (answered && q.id) {
-            var a = h("a", "ap-goto", qaPage ? "답 보기 →" : "답 보기 ↓");
-            a.href = qaPage + "#a-" + q.id;
-            a.addEventListener("click", close);
-            it.appendChild(a);
-          }
-          list.appendChild(it);
-        });
-      });
-    }
-    function open() {
-      panel.classList.add("show");
-      var sel = String(window.getSelection && window.getSelection()).trim();
-      var d = readDraft();
-      if (sel) {
-        panel._sel = sel;
-        panel._ch = CUR_CH;
-      } else if (d && d.sel) {
-        panel._sel = d.sel;
-        panel._ch = d.ch;
-      } else {
-        panel._sel = "";
-        panel._ch = CUR_CH;
-      }
-      if (d && d.text && !ta.value) {
-        ta.value = d.text;
-        var r = panel.querySelector('input[name="ap-kind"][value="' + d.kind + '"]');
-        if (r) r.checked = true;
-      }
-      quote.textContent = panel._sel ? "인용: " + panel._sel.slice(0, 400) : "";
-      quote.style.display = panel._sel ? "" : "none";
-      show("new");
-      ta.focus();
-    }
-    function close() {
-      panel.classList.remove("show");
-      fab.focus();
-    }
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && panel.classList.contains("show")) close();
-    });
-    function save() {
-      var text = ta.value.trim();
-      if (!text) {
-        ta.focus();
-        return;
-      }
-      if (saveBtn.disabled) return; // 저장 중 중복 클릭 방지
-      var isReq = panel.querySelector('input[name="ap-kind"]:checked').value === "r";
-      var name = isReq ? "requests" : qname;
-      var id = newQid();
-      var chEl = panel._ch && document.getElementById(panel._ch);
-      var where = "D" + dn + (chEl ? " · " + chTitle(chEl) + " (#" + panel._ch + ")" : "");
-      var entry =
-        "### " +
-        (isReq ? "요청" : "질문") +
-        " · " +
-        (isReq ? "D" + dn + " · " : "") +
-        fmtTime(new Date().toISOString()) +
-        " · id:" +
-        id +
-        "\n*위치: " +
-        where +
-        "*\n" +
-        (panel._sel ? "> " + panel._sel.replace(/\n+/g, " ").slice(0, 600) + "\n\n" : "\n") +
-        text +
-        "\n";
-      var sent = ta.value;
-      saveBtn.disabled = true;
-      saveBtn.textContent = "저장 중…";
-      api("append/" + name, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ entry: entry }),
-      })
-        .then(function (j) {
-          saveBtn.disabled = false;
-          saveBtn.textContent = "저장";
-          // 저장하는 동안 더 쓴 내용은 남긴다
-          if (ta.value === sent) {
-            ta.value = "";
-            store(draftKey, null);
-            panel._sel = "";
-            quote.style.display = "none";
-          } else writeDraft();
-          toast(
-            (isReq ? "요청을 저장했어요 (" : "질문을 저장했어요 (") + id + "). Claude Code에서 \"" + (isReq ? "요청 반영해줘" : dayLabel + " 질문 답해줘") + "\"라고 말하면 처리합니다." + (j.history_error ? " 수정 이력(git) 기록은 실패했어요." : ""),
-            true
-          );
-          var ed = EDITORS[name];
-          if (ed && !(ed._ta && document.body.contains(ed._ta))) {
-            ed.content = j.content;
-            ed.updated = j.updated;
-            ed.rev = j.rev;
-            FILES[name] = j.updated;
-            ed.renderView();
-          }
-          show("list");
-        })
-        .catch(function (err) {
-          saveBtn.disabled = false;
-          saveBtn.textContent = "저장";
-          writeDraft();
-          toast("저장하지 못했어요: " + err.message + " 쓴 글은 그대로 있어요.", true);
-        });
-    }
-    fab.addEventListener("click", function () {
-      if (panel.classList.contains("show")) close();
-      else open();
-    });
-    document.body.appendChild(fab);
-    document.body.appendChild(panel);
-  }
-  // ---------- 근거 표기를 참고문헌의 해당 항목으로 연결 ----------
   function setupSrcLinks() {
     var spans = document.querySelectorAll("span.src");
     if (!spans.length) return;
@@ -3258,10 +3342,351 @@
     });
   }
 
+  // ---------- 검색 ----------
+  // Quarto 기본 검색창 대신: 같은 search.json을 한 번 읽어 두고, 한글 조합 중에도 글자마다 바로 다시 찾는다.
+  // 순서는 제목 > 소제목 > 본문 등장 횟수, 같은 페이지의 결과는 한 묶음으로. 결과 목록은 보통 스크롤 상자라 휠이 그대로 먹는다.
+  function setupSearch() {
+    var qs = document.getElementById("quarto-search");
+    if (!qs) return;
+    var openBtn = h("button", "ss-open");
+    openBtn.type = "button";
+    openBtn.title = "검색 (/)";
+    openBtn.setAttribute("aria-label", "검색");
+    openBtn.innerHTML =
+      '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+    qs.parentNode.insertBefore(openBtn, qs);
+    qs.style.display = "none";
+    var index = null,
+      ov = null,
+      input,
+      list,
+      sel = -1,
+      items = [];
+    function load() {
+      if (index) return Promise.resolve(index);
+      return fetch(OFFSET + "search.json")
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (d) {
+          index = d
+            .filter(function (x) {
+              return x.href && !/^index\.html/.test(x.href);
+            })
+            .map(function (x) {
+              var text = (x.text || "").replace(/\s+/g, " ").trim();
+              return { href: x.href, page: x.href.split("#")[0], title: x.title || "", section: x.section || "", text: text, lt: (x.title || "").toLowerCase(), ls: (x.section || "").toLowerCase(), lx: text.toLowerCase() };
+            });
+          return index;
+        });
+    }
+    function count(hay, t) {
+      var n = 0,
+        i = hay.indexOf(t);
+      while (i >= 0 && n < 8) {
+        n++;
+        i = hay.indexOf(t, i + t.length);
+      }
+      return n;
+    }
+    function mark(s, terms) {
+      var out = escapeHtml(s);
+      terms.forEach(function (t) {
+        var re = new RegExp("(" + escapeHtml(t).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+        out = out.replace(re, "<mark>$1</mark>");
+      });
+      return out;
+    }
+    function snippet(e, terms) {
+      var i = e.lx.indexOf(terms[0]);
+      if (i < 0) return e.text.slice(0, 90);
+      var a = Math.max(0, i - 30);
+      return (a > 0 ? "…" : "") + e.text.slice(a, a + 110) + (a + 110 < e.text.length ? "…" : "");
+    }
+    function run() {
+      var q = input.value.trim().toLowerCase();
+      list.innerHTML = "";
+      items = [];
+      sel = -1;
+      if (!q) {
+        list.appendChild(h("div", "ss-empty", "찾을 낱말을 입력하세요. 예: 이온, reservoir, EDL"));
+        return;
+      }
+      if (!index) {
+        list.appendChild(h("div", "ss-empty", "검색 목록을 불러오는 중…"));
+        return;
+      }
+      var terms = q.split(/\s+/).filter(Boolean);
+      var pages = {},
+        order = [];
+      index.forEach(function (e) {
+        var sc = 0;
+        for (var k = 0; k < terms.length; k++) {
+          var t = terms[k],
+            s = (e.lt.indexOf(t) >= 0 ? 12 : 0) + (e.ls.indexOf(t) >= 0 ? 6 : 0) + count(e.lx, t);
+          if (!s) return;
+          sc += s;
+        }
+        var p = pages[e.page];
+        if (!p) {
+          p = pages[e.page] = { title: e.title, best: 0, total: 0, hits: [] };
+          order.push(p);
+        }
+        p.best = Math.max(p.best, sc);
+        p.total += sc;
+        p.hits.push({ e: e, sc: sc });
+      });
+      order.sort(function (a, b) {
+        return b.best + b.total * 0.2 - (a.best + a.total * 0.2);
+      });
+      if (!order.length) {
+        list.appendChild(h("div", "ss-empty", "‘" + input.value.trim() + "’이(가) 들어간 곳이 없어요."));
+        return;
+      }
+      list.appendChild(h("div", "ss-count", order.length + "개 페이지"));
+      order.slice(0, 30).forEach(function (p) {
+        var g = h("div", "ss-group");
+        g.appendChild(h("div", "ss-page", p.title));
+        p.hits
+          .sort(function (a, b) {
+            return b.sc - a.sc;
+          })
+          .slice(0, 3)
+          .forEach(function (x) {
+            var a = h("a", "ss-item");
+            a.href = OFFSET + x.e.href;
+            var sec = x.e.section && x.e.section !== p.title ? x.e.section : "";
+            a.innerHTML = (sec ? '<span class="ss-sec">' + mark(sec, terms) + "</span>" : "") + '<span class="ss-snip">' + mark(snippet(x.e, terms), terms) + "</span>";
+            a.addEventListener("mousemove", function () {
+              pick(items.indexOf(a), true);
+            });
+            items.push(a);
+            g.appendChild(a);
+          });
+        list.appendChild(g);
+      });
+      pick(0, true);
+    }
+    function pick(i, noScroll) {
+      if (!items.length) return;
+      if (sel >= 0 && items[sel]) items[sel].classList.remove("is-sel");
+      sel = Math.max(0, Math.min(items.length - 1, i));
+      items[sel].classList.add("is-sel");
+      if (!noScroll) items[sel].scrollIntoView({ block: "nearest" });
+    }
+    function close() {
+      if (!ov) return;
+      ov.classList.remove("is-open");
+      document.documentElement.classList.remove("ss-lock");
+    }
+    function open() {
+      if (!ov) {
+        ov = h("div", "ss-overlay");
+        var box = h("div", "ss-box");
+        box.setAttribute("role", "dialog");
+        box.setAttribute("aria-label", "검색");
+        var bar = h("div", "ss-bar");
+        bar.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+        input = h("input", "ss-input");
+        input.type = "search";
+        input.placeholder = "용어·개념·Day 제목 검색";
+        input.setAttribute("autocomplete", "off");
+        bar.appendChild(input);
+        bar.appendChild(button("닫기", "ss-close", close));
+        list = h("div", "ss-list");
+        box.appendChild(bar);
+        box.appendChild(list);
+        ov.appendChild(box);
+        document.body.appendChild(ov);
+        ov.addEventListener("mousedown", function (e) {
+          if (e.target === ov) close();
+        });
+        input.addEventListener("input", run);
+        input.addEventListener("keydown", function (e) {
+          if (e.isComposing) return;
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            pick(sel + 1);
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            pick(sel - 1);
+          } else if (e.key === "Enter" && items[sel]) {
+            e.preventDefault();
+            location.href = items[sel].href;
+            close();
+          } else if (e.key === "Escape") close();
+        });
+      }
+      ov.classList.add("is-open");
+      document.documentElement.classList.add("ss-lock");
+      input.focus();
+      input.select();
+      run();
+      load().then(run, function () {
+        list.innerHTML = "";
+        list.appendChild(h("div", "ss-empty", "검색 목록을 불러오지 못했어요."));
+      });
+    }
+    openBtn.addEventListener("click", open);
+    document.addEventListener(
+      "keydown",
+      function (e) {
+        var tag = (e.target.tagName || "").toLowerCase();
+        if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
+        if (e.key === "/" || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k")) {
+          e.preventDefault();
+          e.stopPropagation();
+          open();
+        }
+      },
+      true
+    );
+  }
+
+  // ---------- 논문 탭: 찾기·종류·주제 거르기와 정렬 ----------
+  function setupPapers() {
+    var listEl = document.querySelector(".paper-list");
+    if (!listEl) return;
+    var cards = Array.prototype.slice.call(listEl.querySelectorAll(".paper"));
+    var q = document.querySelector(".pp-q"),
+      sortSel = document.querySelector(".pp-sort select"),
+      nEl = document.querySelector(".pp-n"),
+      empty = document.querySelector(".pp-empty"),
+      labSel = document.querySelector(".pp-lab select");
+    var f = { kind: "", topic: "", lab: "" };
+    // 카드의 교신·마지막 저자 이름을 누르면 그 연구실 논문만(목록에 없는 1편짜리 연구실도 임시 항목으로 넣는다)
+    function setLab(v, label) {
+      f.lab = v;
+      if (labSel) {
+        if (v && !labSel.querySelector('option[value="' + v.replace(/"/g, "") + '"]')) {
+          var o = document.createElement("option");
+          o.value = v;
+          o.textContent = label || v;
+          labSel.appendChild(o);
+        }
+        labSel.value = v;
+      }
+      apply();
+    }
+    if (labSel) labSel.addEventListener("change", function () { setLab(labSel.value); });
+    listEl.addEventListener("click", function (e) {
+      var b = e.target.closest(".pp-au");
+      if (!b) return;
+      setLab(f.lab === b.dataset.lab ? "" : b.dataset.lab, b.textContent.replace("✉", ""));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    var saved = recall("study-papers-sort");
+    if (saved && sortSel) sortSel.value = saved;
+    document.querySelectorAll(".pp-chips").forEach(function (g) {
+      g.addEventListener("click", function (e) {
+        var b = e.target.closest("button");
+        if (!b) return;
+        g.querySelectorAll("button").forEach(function (x) {
+          x.classList.toggle("on", x === b);
+        });
+        f[g.dataset.filter] = b.dataset.v;
+        apply();
+      });
+    });
+    function apply() {
+      var terms = (q.value || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
+      var key = sortSel ? sortSel.value : "score";
+      store("study-papers-sort", key);
+      cards.sort(function (a, b) {
+        var A = a.dataset, B = b.dataset;
+        if (key === "year") return B.year - A.year || B.score - A.score;
+        if (key === "easy") return A.diff - B.diff || B.score - A.score || B.year - A.year;
+        return B.score - A.score || B.year - A.year;
+      });
+      var shown = 0;
+      cards.forEach(function (c) {
+        var k = c.dataset.kind;
+        var ok =
+          (!f.kind || (f.kind === "other" ? k !== "review" && k !== "article" : k === f.kind)) &&
+          (!f.topic || c.dataset.topic === f.topic) &&
+          (!f.lab || c.dataset.lab.split("|").indexOf(f.lab) >= 0) &&
+          terms.every(function (t) {
+            return c.dataset.hay.indexOf(t) >= 0;
+          });
+        c.hidden = !ok;
+        if (ok) shown++;
+        listEl.appendChild(c);
+      });
+      nEl.textContent = shown;
+      empty.hidden = shown > 0;
+    }
+    q.addEventListener("input", apply);
+    if (sortSel) sortSel.addEventListener("change", apply);
+    apply();
+  }
+
+  // ---------- 떠다니는 이온(홈 배경 장식만) ----------
+  // 학습 단위 본문에는 넣지 않는다(읽기 방해). 카드 뒤 빈 곳에서만 보이도록 맨 뒤에 깔고, 움직임 줄이기 설정이면 멈춘 점으로.
+  function setupDrift() {
+    var b = document.body.classList;
+    if (!b.contains("home")) return;
+    var cv = document.createElement("canvas");
+    cv.className = "ion-drift";
+    cv.setAttribute("aria-hidden", "true");
+    document.body.insertBefore(cv, document.body.firstChild);
+    var ctx = cv.getContext("2d"),
+      dpr = Math.min(window.devicePixelRatio || 1, 2),
+      W = 0,
+      H = 0,
+      P = [];
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function size() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      cv.width = W * dpr;
+      cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    size();
+    window.addEventListener("resize", size);
+    var n = W < 600 ? 9 : 18;
+    for (var i = 0; i < n; i++) {
+      var plus = Math.random() < 0.55;
+      P.push({ x: Math.random() * W, y: Math.random() * H, r: 2 + Math.random() * 3.5, vx: (Math.random() - 0.5) * 0.12, vy: -0.03 - Math.random() * 0.08, ph: Math.random() * 6.28, c: plus ? "43,89,195" : "20,160,170" });
+    }
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+      P.forEach(function (p) {
+        if (!still) {
+          p.x += p.vx + Math.sin(t / 4000 + p.ph) * 0.05;
+          p.y += p.vy;
+          if (p.y < -12) p.y = H + 12;
+          if (p.x < -12) p.x = W + 12;
+          if (p.x > W + 12) p.x = -12;
+        }
+        var a = 0.10 + 0.08 * Math.sin(t / 1600 + p.ph);
+        var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
+        g.addColorStop(0, "rgba(" + p.c + "," + (a + 0.12).toFixed(3) + ")");
+        g.addColorStop(0.35, "rgba(" + p.c + "," + a.toFixed(3) + ")");
+        g.addColorStop(1, "rgba(" + p.c + ",0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, 6.283);
+        ctx.fill();
+      });
+      if (!still && !document.hidden) requestAnimationFrame(draw);
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden && !still) requestAnimationFrame(draw);
+    });
+    requestAnimationFrame(draw);
+  }
+
   // ---------- 시작 ----------
   // 본문·목차·퀴즈는 바로 쓸 수 있게 하고, 외부 라이브러리(CDN)는 기다리지 않는다.
   if (document.querySelector("section.hero")) document.body.classList.add("home");
-  setupBrand();
+  if (document.querySelector(".home-hero")) document.body.classList.add("home");
+  if (document.querySelector("ol.roadmap")) document.body.classList.add("roadmap");
+  if (document.querySelector(".paper-list")) document.body.classList.add("papers");
+  setupSidebar();
+  setupSearch();
+  setupPapers();
+  setupDrift();
   setupPaperFigs();
   setupFigZoom();
   setupRecall();
@@ -3272,6 +3697,8 @@
   setupChapters();
   setupQuiz();
   setupSrcLinks();
+  setupEmphasis();
+  setupGlossary();
   var depsP = deps();
   detectMode()
     .then(loadStatus)
@@ -3290,9 +3717,8 @@
       setupBlankRecall();
       setupReadMode();
       setupToday();
-      setupBackup();
+      setupRoadmap();
       setupComments();
-      setupAskPanel();
     });
   depsP.then(function () {
     // 마크다운·수식 라이브러리가 늦게 오면 그때 다시 그린다 (쓰는 중인 칸은 건드리지 않음)

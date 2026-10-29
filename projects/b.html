@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>B. 작은 보드로 독립 동작하는 시제품 – Why Ions Compute?</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../projects/c.html" rel="next">
+<link href="../projects/a.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 2,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "/"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute?</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">홈</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">로드맵</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/b.html">B. 작은 보드로 독립 동작</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">로드맵</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#board" id="toc-board" class="nav-link active" data-scroll-target="#board">기준 보드 정하기</a></li>
+  <li><a href="#구매-목록" id="toc-구매-목록" class="nav-link" data-scroll-target="#구매-목록">구매 목록</a></li>
+  <li><a href="#b1" id="toc-b1" class="nav-link" data-scroll-target="#b1">B1. ESP32 첫 연결</a></li>
+  <li><a href="#b2b3.-dac로-전압-만들고-adc로-읽기" id="toc-b2b3.-dac로-전압-만들고-adc로-읽기" class="nav-link" data-scroll-target="#b2b3.-dac로-전압-만들고-adc로-읽기">B2–B3. DAC로 전압 만들고 ADC로 읽기</a></li>
+  <li><a href="#b4" id="toc-b4" class="nav-link" data-scroll-target="#b4">B4. 소자 구동·전류 측정 회로</a>
+  <ul class="collapse">
+  <li><a href="#전압전류-경로" id="toc-전압전류-경로" class="nav-link" data-scroll-target="#전압전류-경로">4-1. 전압·전류 경로</a></li>
+  <li><a href="#전원리셋통신-실패-때-무엇이-걸리나" id="toc-전원리셋통신-실패-때-무엇이-걸리나" class="nav-link" data-scroll-target="#전원리셋통신-실패-때-무엇이-걸리나">4-2. 전원·리셋·통신 실패 때 무엇이 걸리나</a></li>
+  <li><a href="#a.-핀과-부호를-한-번에-대조하기" id="toc-a.-핀과-부호를-한-번에-대조하기" class="nav-link" data-scroll-target="#a.-핀과-부호를-한-번에-대조하기">4-2a. 핀과 부호를 한 번에 대조하기</a></li>
+  <li><a href="#b.-데이터시트와-대조할-값-조건부" id="toc-b.-데이터시트와-대조할-값-조건부" class="nav-link" data-scroll-target="#b.-데이터시트와-대조할-값-조건부">4-2b. 데이터시트와 대조할 값 (조건부)</a></li>
+  <li><a href="#전류-측정-션트-또는-tia" id="toc-전류-측정-션트-또는-tia" class="nav-link" data-scroll-target="#전류-측정-션트-또는-tia">4-3. 전류 측정: 션트 또는 TIA</a></li>
+  <li><a href="#저항rc로-회로를-먼저-검증" id="toc-저항rc로-회로를-먼저-검증" class="nav-link" data-scroll-target="#저항rc로-회로를-먼저-검증">4-4. 저항·RC로 회로를 먼저 검증</a></li>
+  </ul></li>
+  <li><a href="#b5" id="toc-b5" class="nav-link" data-scroll-target="#b5">B5. 보드로 레저버 데이터 모으기</a></li>
+  <li><a href="#b6" id="toc-b6" class="nav-link" data-scroll-target="#b6">B6. PC 없이 판단하고 알리기</a></li>
+  <li><a href="#b7" id="toc-b7" class="nav-link" data-scroll-target="#b7">B7. 시간과 에너지를 공정하게 재기</a></li>
+  <li><a href="#b8" id="toc-b8" class="nav-link" data-scroll-target="#b8">B8. ECG 신호로 (도전)</a>
+  <ul class="collapse">
+  <li><a href="#기본-경로-사람-없이" id="toc-기본-경로-사람-없이" class="nav-link" data-scroll-target="#기본-경로-사람-없이">기본 경로: 사람 없이</a></li>
+  <li><a href="#두-경로를-정확히-구분하기" id="toc-두-경로를-정확히-구분하기" class="nav-link" data-scroll-target="#두-경로를-정확히-구분하기">두 경로를 정확히 구분하기</a></li>
+  <li><a href="#연속-처리에-필요한-조건-계산-먼저" id="toc-연속-처리에-필요한-조건-계산-먼저" class="nav-link" data-scroll-target="#연속-처리에-필요한-조건-계산-먼저">연속 처리에 필요한 조건 (계산 먼저)</a></li>
+  </ul></li>
+  <li><a href="#문제-해결" id="toc-문제-해결" class="nav-link" data-scroll-target="#문제-해결">문제 해결</a></li>
+  <li><a href="#ai에게-맡길-때" id="toc-ai에게-맡길-때" class="nav-link" data-scroll-target="#ai에게-맡길-때">AI에게 맡길 때</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/b.html">B. 작은 보드로 독립 동작</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">B. 작은 보드로 독립 동작하는 시제품</h1>
+<p class="subtitle lead">DAC가 전압을 걸고, 작은 회로가 전류를 읽고, 보드가 저장된 가중치로 판단해 알린다</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-tip callout-titled" title="오늘 할 첫 실험 — B1: ESP32에 첫 코드 올리기">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>오늘 할 첫 실험 — B1: ESP32에 첫 코드 올리기
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>준비물:</strong> ESP32 DevKitC(또는 호환) 보드 1개, <strong>데이터용</strong> USB 케이블, PC. 부품이 아직 없으면 <a href="https://wokwi.com">Wokwi</a>(브라우저 시뮬레이터)로 같은 연습을 할 수 있습니다.</li>
+<li><strong>걸리는 시간:</strong> 1–2시간 (드라이버 설치 포함).</li>
+<li><strong>끝나면 얻는 것:</strong> PC가 보드를 알아보고, 내가 쓴 코드가 보드에서 돌아 시리얼 모니터에 숫자가 찍힘.</li>
+<li><strong>오늘의 완료 기준:</strong> <a href="#b1">B1</a>의 4단계까지 됨. 안 되더라도 어느 단계에서 어떤 메시지가 났는지 적으면 그날은 끝입니다.</li>
+<li><strong>남길 기록:</strong> 보드 이름, USB 칩(CP2102/CH340), COM 번호, Arduino IDE와 esp32 코어 버전.</li>
+</ul>
+</div>
+</div>
+<p><strong>이 프로젝트가 묻는 것:</strong> 소스미터·PC가 하던 측정과 판단을 작은 회로와 보드가 대신할 수 있는가, 그때 정확도·시간·에너지가 어떻게 달라지는가. 만드는 것은 <strong>저장된 입력을 재생해</strong> 소자에 걸고 판단·알림하는 브레드보드 시제품이며, 연속 ECG를 실시간으로 처리하는 장치가 아닙니다 (<a href="#b8">B8</a>에서 따로 계산).</p>
+<p><strong>끝났다고 볼 때:</strong> B4에서 저항·RC 측정이 소스미터와 맞고(수준 2), B6에서 같은 저장 특징에 대해 보드와 Python의 점수가 일치하면 B는 끝입니다. 소자를 다시 측정한 정확도가 A와 같을 필요는 없습니다 (재측정하면 소자 상태가 달라질 수 있으므로, 그 차이 자체를 기록).</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="B의 코드·회로 상태">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>B의 코드·회로 상태
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>펌웨어(<code>firmware/</code>)는 <strong>컴파일도, 보드 업로드도, 실물 시험도 아직 하지 않았습니다.</strong> 회로는 설계안입니다. 아래의 보호 기능(입력 거부, 범위 밖 전압 거부, DAC 쓰기 실패 시 중단)도 코드에만 있고 실물에서 확인되지 않았습니다.</p>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>소스미터·PC가 하던 일</th>
+<th>B에서 맡는 것</th>
+<th>다른 점</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>전압 걸기</td>
+<td>MCP4725 DAC + 1.65 V 기준 전압</td>
+<td>범위가 좁고(이상적으로 ±1.65 V), 전원 켜질 때 상태를 직접 관리해야 함</td>
+</tr>
+<tr class="even">
+<td>전류 재기</td>
+<td>션트 저항 또는 TIA + ADS1115</td>
+<td>측정 범위·속도가 회로 값으로 고정됨</td>
+</tr>
+<tr class="odd">
+<td>전류 제한(compliance)</td>
+<td><strong>없음.</strong> 직렬 저항 R_lim이 최대 전류의 상한만 묶음</td>
+<td>소스미터처럼 전압을 자동으로 낮추지 않음</td>
+</tr>
+<tr class="even">
+<td>펄스 순서·마스킹·판단</td>
+<td>ESP32 코드</td>
+<td>실제 펄스 길이를 측정해 기록</td>
+</tr>
+</tbody>
+</table>
+<section id="board" class="level2">
+<h2 class="anchored" data-anchor-id="board">기준 보드 정하기</h2>
+<p>이 단계의 어려운 부분은 MCU가 아니라 <strong>아날로그 측정 회로</strong>(전류 범위, 잡음, 속도)입니다. 비싼 보드가 미검증 회로 문제를 해결하지는 않습니다. 그래서 MCU는 예제가 가장 많은 것 하나를 기준으로 정하고, 측정 회로에 집중합니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>후보</th>
+<th>장점</th>
+<th>확인할 것 / 상태</th>
+<th>이 프로젝트에서</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ESP32 DevKitC</strong> (ESP32-WROOM-32E)</td>
+<td>아두이노 예제·라이브러리가 가장 많음, 블루투스·와이파이</td>
+<td>클래식 ESP32 기준으로 코드 작성</td>
+<td><strong>기준 플랫폼</strong> (코드 묶음의 펌웨어)</td>
+</tr>
+<tr class="even">
+<td>NU40 DK (구매 예정)</td>
+<td>제조사 안내에 따르면 nRF52840 기반, 아두이노 지원. 저전력 블루투스에 강점</td>
+<td>정확한 revision, 핀 배치, 아두이노 코어 이름·버전, I²C 핀, BLE 라이브러리 — <strong>제조사 페이지를 이번에 열지 못해 미확인</strong></td>
+<td>B7(전력) 이후 저전력 판으로 옮길 후보. 아래 이식 목록 참고</td>
+</tr>
+<tr class="odd">
+<td>계측 중심 대안: 전기화학용 AFE 평가보드(예: ADI AD5940/AD5941 계열), 소형 USB 퍼텐쇼스탯 모듈(예: PalmSens EmStat Pico)</td>
+<td>nA 측정·전위 제어가 이미 검증된 하드웨어</td>
+<td>사양·가격·소프트웨어·전압 범위 미확인</td>
+<td>전류가 10 nA 아래로 작거나 브레드보드 TIA가 맞지 않을 때 연구비로 검토</td>
+</tr>
+</tbody>
+</table>
+<p><strong>NU40 DK로 옮길 때 바꿔야 하는 것</strong> (ESP32 코드를 그대로 쓰면 안 됨): <code>Wire.begin(21, 22)</code> → 보드의 I²C 핀, ESP32 <code>BLEDevice</code> → nRF52용 BLE 라이브러리, <code>Serial.printf</code> 지원 여부, <code>ESP32Servo</code> → 보드에 맞는 Servo 라이브러리, GPIO 번호. 보드를 받으면 제조사 문서로 위 항목을 채운 뒤 하나씩 옮깁니다. 여러 보드용 코드를 동시에 만들지 않습니다.</p>
+</section>
+<section id="구매-목록" class="level2">
+<h2 class="anchored" data-anchor-id="구매-목록">구매 목록</h2>
+<p>가격은 구매할 때 다시 확인합니다. DIP(브레드보드에 꽂는 모양)가 편하지만 꼭 DIP일 필요는 없습니다. 표면실장(SMD) 칩도 변환 기판(breakout)에 올린 모듈이면 같이 쓸 수 있습니다. <strong>"A1 뒤" 부품은 A1의 전압·전류 범위를 본 뒤 정합니다.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>단계</th>
+<th>품목</th>
+<th>추천·기준</th>
+<th>수량</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>지금</td>
+<td>ESP32 개발보드</td>
+<td>ESP32-DevKitC V4 또는 호환. 핀헤더 납땜됨, USB 칩(CP2102/CH340) 확인</td>
+<td>2 (예비)</td>
+</tr>
+<tr class="even">
+<td>지금</td>
+<td>브레드보드 830홀, 점퍼선(수-수·수-암), 길이별 고정 점퍼 키트</td>
+<td>전원줄이 가운데 끊긴 제품 주의</td>
+<td>각 2</td>
+</tr>
+<tr class="odd">
+<td>지금</td>
+<td>저항 키트 1% 금속피막, 세라믹·필름·전해 커패시터 키트</td>
+<td>1 µF <strong>필름</strong> 커패시터 몇 개 (RC 모의 소자용)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>지금</td>
+<td>디지털 멀티미터</td>
+<td>자동 범위, DC mV 0.1 mV, µA 범위</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>지금</td>
+<td>데이터용 USB 케이블, LED·220 Ω, 2핀 점퍼(J1용)</td>
+<td>충전 전용 케이블은 업로드 안 됨</td>
+<td>몇 개</td>
+</tr>
+<tr class="even">
+<td>A1 뒤</td>
+<td>DAC 모듈 MCP4725</td>
+<td>3.3 V 동작, 주소 표기, <strong>VOUT·VCC·GND·SDA·SCL 핀 이름을 모듈 실크로 확인</strong></td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>A1 뒤</td>
+<td>ADC 모듈 ADS1115</td>
+<td>ADDR 핀, 모듈의 I²C 풀업 저항 유무 확인</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>A1 뒤</td>
+<td>op-amp</td>
+<td>전류 ≥ 1 µA: MCP6002 (DIP-8). 10 nA–1 µA: 입력 바이어스 전류가 fA–pA인 제품(예: LMC6482). 그 아래: 위의 계측 중심 대안</td>
+<td>각 3–5</td>
+</tr>
+<tr class="odd">
+<td>A1 뒤</td>
+<td>OLED SSD1306(I²C, 0x3C), 액티브 부저, USB 전력 측정기</td>
+<td>전력 측정기는 해상도(mW·mA 단위)를 확인</td>
+<td>각 1</td>
+</tr>
+<tr class="even">
+<td>B8</td>
+<td>ECG 시뮬레이터 또는 데이터 재생 장치, AD8232 모듈</td>
+<td>사람 연결은 B8의 별도 관문</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>구하는 곳: 디바이스마트, 엘레파츠, 아이씨뱅큐(모듈·공구), 메카솔루션·로봇사이언스몰(정품 보드·모듈), 디지키·마우저(정밀 칩). 납땜이 필요한 모듈이면 온도 조절 인두기·무연 실납·플럭스·보안경을 같이 삽니다.</p>
+</section>
+<section id="b1" class="level2">
+<h2 class="anchored" data-anchor-id="b1">B1. ESP32 첫 연결</h2>
+<ol type="1">
+<li><strong>Arduino IDE 2</strong> 설치 → 파일 → 기본 설정 → 추가 보드 관리자 URL에 <code>https://espressif.github.io/arduino-esp32/package_esp32_index.json</code>.</li>
+<li>보드 관리자에서 <strong>esp32 by Espressif Systems</strong>(3.x) 설치. 보드 = ESP32 Dev Module.</li>
+<li>USB 연결 → 장치 관리자에 COM 포트가 생기는지 확인. 안 생기면 USB 칩에 맞는 드라이버(CP210x 또는 CH340).</li>
+<li>아래를 올리고 시리얼 모니터(115200)에 숫자가 나오면 성공. 업로드가 "Failed to connect"면 BOOT 버튼을 누른 채 다시.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span> Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span> Serial<span class="op">.</span>println<span class="op">(</span>millis<span class="op">());</span> delay<span class="op">(</span><span class="dv">500</span><span class="op">);</span> <span class="op">}</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>부품이 오기 전에는 <a href="https://wokwi.com">Wokwi</a>(브라우저 ESP32 시뮬레이터)로 연습할 수 있습니다.</p>
+</section>
+<section id="b2b3.-dac로-전압-만들고-adc로-읽기" class="level2">
+<h2 class="anchored" data-anchor-id="b2b3.-dac로-전압-만들고-adc로-읽기">B2–B3. DAC로 전압 만들고 ADC로 읽기</h2>
+<p><strong>연결 (모듈 핀 이름은 제품마다 다르니 실크 인쇄로 확인):</strong> 두 모듈 모두 VCC→3V3, GND→GND, SDA→GPIO 21, SCL→GPIO 22. ADS1115의 ADDR→GND(주소 0x48). DAC VOUT → ADS1115 A0.</p>
+<ol type="1">
+<li>라이브러리 관리자에서 Adafruit MCP4725, Adafruit ADS1X15를 설치합니다.</li>
+<li>I²C 스캐너(예제 메뉴 또는 AI에게 요청)로 두 주소가 보이는지 확인합니다.</li>
+<li>DAC 코드 0, 1024, 2048, 3072, 4095를 내보내 멀티미터와 ADC 값을 비교합니다. 3V3 전원이 정확히 3.300 V가 아니어서 수십 mV 차이는 정상입니다. 양 끝(0 V·3.3 V 근처)은 출력이 끝까지 붙지 않을 수 있습니다 (출력 여유, headroom).</li>
+<li><strong>풀업 확인:</strong> 모듈마다 I²C 풀업 저항이 있으면 병렬로 합쳐집니다. 통신이 불안정하면 모듈 하나만 남기고 시험해 원인을 좁힙니다.</li>
+</ol>
+</section>
+<section id="b4" class="level2">
+<h2 class="anchored" data-anchor-id="b4">B4. 소자 구동·전류 측정 회로</h2>
+<section id="전압전류-경로" class="level3">
+<h3 class="anchored" data-anchor-id="전압전류-경로">4-1. 전압·전류 경로</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/f3-path.svg" class="img-fluid figure-img" alt="ESP32, DAC, R_lim, 점퍼 J1, 소자, 전류 측정, 기준 전압, ADC의 연결 개념도"></p>
+<figcaption>그림 ③ <strong>개념도</strong> — 전류는 DAC → R_lim → J1 → 소자 → 전류 측정 → V_ref로 흐르고, ADC는 소자 양끝 전압과 전류 신호를 따로 잰다.</figcaption>
+</figure>
+</div>
+<p>DAC는 0–3.3 V만 낼 수 있습니다. 소자의 아래쪽 끝을 0 V 대신 <strong>기준 전압 V_ref ≈ 1.65 V</strong>에 붙이면 소자 전압 ≈ V_DAC − V_ref가 되어 음전원 없이 ±방향을 모두 걸 수 있습니다. 실제로 쓸 수 있는 범위는 DAC 출력 여유, op-amp 출력 범위, R_lim 전압 강하 때문에 ±1.65 V보다 좁습니다. 4-4에서 저항으로 잰 범위만 씁니다.</p>
+</section>
+<section id="전원리셋통신-실패-때-무엇이-걸리나" class="level3">
+<h3 class="anchored" data-anchor-id="전원리셋통신-실패-때-무엇이-걸리나">4-2. 전원·리셋·통신 실패 때 무엇이 걸리나</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>상황</th>
+<th>DAC 출력</th>
+<th>V_ref</th>
+<th>소자에 걸릴 수 있는 것</th>
+<th>대책</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>전원 켜는 순간</td>
+<td><strong>EEPROM에 저장된 코드</strong>를 펌웨어보다 먼저 출력 (공장 출하 값은 제품별 확인)</td>
+<td>0 V에서 1.65 V로 오르는 중 (수 ms)</td>
+<td>순간적으로 수 V 차이 가능</td>
+<td><strong>J1을 빼 둔 채</strong> 켜기. B4_test의 <code>e</code> 명령으로 '소자 0 V' 코드를 EEPROM에 한 번 저장</td>
+</tr>
+<tr class="even">
+<td>ESP32 리셋·업로드 중</td>
+<td>마지막 값 유지 (DAC는 계속 전원을 받음)</td>
+<td>유지</td>
+<td>마지막 펄스 전압이 계속</td>
+<td>업로드 전 J1 빼기</td>
+</tr>
+<tr class="odd">
+<td>I²C 통신 실패</td>
+<td>마지막 값 유지</td>
+<td>유지</td>
+<td>마지막 값</td>
+<td>펌웨어는 시작 점검에 실패하면 구동하지 않음. 측정 중 실패는 J1로 끊기</td>
+</tr>
+<tr class="even">
+<td>USB 뽑힘</td>
+<td>꺼짐</td>
+<td>꺼짐</td>
+<td>커패시터 방전 동안 작은 전압</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>R_lim (전류 상한 저항):</strong> 이 회로에서 어떤 두 점 사이도 3.3 V를 넘지 않으므로, 소자가 완전히 합선돼도 전류 ≤ 3.3 V / R_lim 입니다. 예: R_lim = 33 kΩ이면 100 µA 이하. 대신 정상 동작에서도 I × R_lim만큼 소자 전압이 줄어듭니다. 예: 10 µA × 33 kΩ = 0.33 V. 그래서 소자 전압은 <strong>J1 뒤(소자 위쪽 단자)에서 A0으로 직접 재고</strong>, 분석에는 잰 값을 씁니다. R_lim은 compliance처럼 전압을 조절하지 않고, 상한만 묶습니다.</p>
+<p><strong>R_lim이 펄스를 느리게 만든다:</strong> 소자는 전극 계면 때문에 정전용량 C_dev가 클 수 있고, R_lim과 함께 충전 시간 상수 R_lim × C_dev를 만듭니다. 예: 33 kΩ × 0.5 µF(가정) ≈ 16 ms → θ = 50 ms 펄스의 앞부분 상당 시간 동안 소자 전압이 목표에 못 미칩니다. 그래서 보드는 펄스 끝마다 실제 소자 전압(V 줄)을 같이 기록하고, 목표에 도달하지 못했다면 R_lim을 줄이거나 θ를 늘립니다.</p>
+</section>
+<section id="a.-핀과-부호를-한-번에-대조하기" class="level3">
+<h3 class="anchored" data-anchor-id="a.-핀과-부호를-한-번에-대조하기">4-2a. 핀과 부호를 한 번에 대조하기</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ADS1115 입력</th>
+<th>TIA 방식에서 연결되는 점</th>
+<th>션트 방식에서 연결되는 점</th>
+<th>코드에서의 쓰임</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A0</td>
+<td>소자 ① 위쪽 단자 (R_lim·J1 뒤)</td>
+<td>같음</td>
+<td>A0 − A1 = 소자 전압 (<code>readDeviceV</code>)</td>
+</tr>
+<tr class="even">
+<td>A1</td>
+<td>V_ref</td>
+<td>소자 ② 아래쪽 (= 션트 위쪽)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>A2</td>
+<td>TIA 출력 (MCP6002 7번 핀)</td>
+<td>션트 위쪽 (A1과 같은 점)</td>
+<td>전류 신호 (<code>readCurrent_nA</code>)</td>
+</tr>
+<tr class="even">
+<td>A3</td>
+<td>V_ref</td>
+<td>V_ref (= 션트 아래쪽)</td>
+<td>시작할 때 V_ref를 재는 데도 씀 (<code>ioBegin</code>)</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>약속</th>
+<th>그림</th>
+<th>코드</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>전류 +방향</td>
+<td>소자 ① → ② (그림 ③의 화살표, +V일 때)</td>
+<td>TIA: <code>I = −(A2−A3)/R_f</code>, 션트: <code>I = +(A2−A3)/R_s</code> → 둘 다 ①→②가 +</td>
+</tr>
+<tr class="even">
+<td>소자 전압 +</td>
+<td>①이 ②보다 높음 (A1 그림 ①의 극성 약속과 같음)</td>
+<td><code>A0 − A1</code></td>
+</tr>
+<tr class="odd">
+<td>DAC 코드</td>
+<td>DAC 출력 = V_ref + 목표 소자 전압 (전류가 없을 때)</td>
+<td><code>dacCodeFor(v) = dacCodeForOutput(VREF + v)</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="b.-데이터시트와-대조할-값-조건부" class="level3">
+<h3 class="anchored" data-anchor-id="b.-데이터시트와-대조할-값-조건부">4-2b. 데이터시트와 대조할 값 (조건부)</h3>
+<p>아래는 일반적인 데이터시트 값입니다. <strong>구매한 정확한 부품 번호의 데이터시트로 다시 확인</strong>하고, 다르면 그 값을 씁니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>부품</th>
+<th>항목</th>
+<th>이 설계에서 가정한 것</th>
+<th>조건·주의</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ADS1115</td>
+<td>입력 핀 절대 전압</td>
+<td>모든 입력이 0–3.3 V 안 (GND−0.3 V ~ VDD+0.3 V를 넘으면 안 됨)</td>
+<td>차동 범위(PGA)가 ±4.096 V여도 각 핀은 전원 범위를 넘을 수 없음</td>
+</tr>
+<tr class="even">
+<td>ADS1115</td>
+<td>PGA 범위</td>
+<td>전류: ±2.048 V(TIA) 또는 ±0.256 V(션트), 전압: ±2.048 V</td>
+<td>범위가 작을수록 한 칸이 작지만 넘치기 쉬움</td>
+</tr>
+<tr class="odd">
+<td>ADS1115</td>
+<td>속도·다중화</td>
+<td>최대 860회/초, 한 번에 한 입력쌍만 변환 → 쌍을 바꾸면 순서대로</td>
+<td>신호원 임피던스가 크거나 입력 앞 RC 필터가 있으면 바꾼 직후 값이 덜 정착할 수 있음 → 저항·RC로 확인</td>
+</tr>
+<tr class="even">
+<td>MCP4725</td>
+<td>전원 켤 때 출력</td>
+<td>EEPROM에 저장된 코드</td>
+<td>공장 출하 값은 제품별로 확인. 펌웨어가 돌기 전 출력</td>
+</tr>
+<tr class="odd">
+<td>MCP4725</td>
+<td>출력 범위·정착</td>
+<td>0–VDD 근처, 끝(0 V·3.3 V 근처)은 덜 붙을 수 있음, 정착 수 µs</td>
+<td>부하 전류·정전용량이 크면 더 느려짐</td>
+</tr>
+<tr class="even">
+<td>MCP6002</td>
+<td>출력 범위</td>
+<td>전원 끝에서 수십 mV 안쪽까지 (부하 작을 때)</td>
+<td>부하 전류가 크면 여유가 줄어듦 → 포화 판정 여유 0.15 V</td>
+</tr>
+<tr class="odd">
+<td>MCP6002</td>
+<td>GBW·오프셋·입력 바이어스</td>
+<td>GBW 약 1 MHz, 오프셋 수 mV, 입력 바이어스 pA 수준(상온)</td>
+<td>온도가 오르면 바이어스 전류 증가</td>
+</tr>
+<tr class="even">
+<td>TIA</td>
+<td>C_f 근사식</td>
+<td>아래 4-3의 식</td>
+<td>op-amp를 이상적 1차 응답으로, C_in ≫ C_f로 본 근사. 실측(4-4)으로 확인</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="전류-측정-션트-또는-tia" class="level3">
+<h3 class="anchored" data-anchor-id="전류-측정-션트-또는-tia">4-3. 전류 측정: 션트 또는 TIA</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/f4-tia.svg" class="img-fluid figure-img" alt="10킬로옴 두 개 분압과 1마이크로패럿, U1A 버퍼, U1B TIA, R_f와 C_f, 핀 번호, ADS1115 연결, MCP6002 위에서 본 핀 배치"></p>
+<figcaption>그림 ④ <strong>검증 전 회로도</strong> (실물 배선도 아님) — MCP6002 한 칩으로 V_ref 버퍼(U1A)와 TIA(U1B)를 만든다. 핀 번호는 칩을 위에서 본 배치이며, 꽂기 전에 구매한 칩의 데이터시트와 모듈 실크 라벨로 다시 대조한다.</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>소자 전류 (A1 특성표)</th>
+<th>방법</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 µA – 1 mA</td>
+<td><strong>션트 저항 R_s</strong></td>
+<td>소자와 직렬로 R_s. I = (A2−A3) / R_s. ADS1115 ±0.256 V 범위(한 칸 7.8 µV)</td>
+</tr>
+<tr class="even">
+<td>10 nA – 100 µA</td>
+<td><strong>TIA</strong> (transimpedance amplifier, 전류–전압 변환기)</td>
+<td>op-amp의 − 입력이 V_ref에 붙어 있도록(가상 기준점) 피드백 R_f로 전류를 전압으로. V_out − V_ref = −I × R_f</td>
+</tr>
+<tr class="odd">
+<td>10 nA 미만</td>
+<td>브레드보드로는 어려움</td>
+<td>소스미터 유지, 위의 계측 중심 대안, 또는 소재·면적으로 전류 키우기</td>
+</tr>
+</tbody>
+</table>
+<p><strong>R_f 고르기:</strong> 출력이 전원 끝에 닿지 않도록 <strong>R_f ≈ 1.5 V ÷ 최대 전류</strong>. 예: 최대 10 µA → R_f = 150 kΩ. 이때 ADS1115 ±2.048 V 범위의 한 칸(62.5 µV)은 0.42 nA에 해당합니다.</p>
+<p><strong>포화:</strong> 전류가 약 1.5 V/R_f를 넘으면 op-amp 출력이 전원 끝에 붙고, 가상 기준점이 깨져 <strong>소자 전압도 계산과 달라집니다.</strong> ADC는 여전히 범위 안이라 숫자만 보면 모를 수 있어서, 펌웨어는 출력이 기준에서 1.5 V 이상 벗어나면 포화로 셉니다 (B5의 Q 줄).</p>
+<p><strong>C_f와 안정성 — R_f·C_f 값만으로 보장되지 않습니다.</strong> TIA는 입력에 붙은 용량(C_in: 소자의 큰 계면 용량 + 배선 + op-amp 입력)이 클수록 출력이 떨리기 쉽습니다. 출발점으로 쓰는 근사식:</p>
+<p>C_f ≥ √( C_in / (2π · R_f · GBW) ) (GBW: op-amp의 이득-대역폭 곱, MCP6002 약 1 MHz)</p>
+<p>예: C_in = 0.5 µF(가정), R_f = 150 kΩ → C_f ≥ 약 0.7 nF. 그리고 응답 시간(대략 5 × R_f × C_f)이 펄스 폭 θ보다 충분히 짧아야 합니다: 150 kΩ × 6.8 nF × 5 ≈ 5 ms ≪ 50 ms. C_in은 모르는 값이므로 <strong>실측으로 확인</strong>합니다 (4-4). op-amp 입력 오프셋(수 mV) 때문에 0 V에서도 전류가 0이 아니게 보일 수 있으니, 0 V에서 잰 값을 빼는 영점 보정을 합니다.</p>
+</section>
+<section id="저항rc로-회로를-먼저-검증" class="level3">
+<h3 class="anchored" data-anchor-id="저항rc로-회로를-먼저-검증">4-4. 저항·RC로 회로를 먼저 검증</h3>
+<ol type="1">
+<li><a href="code/firmware/B4_test/B4_test.ino">B4_test</a>를 올리고 J1을 뺀 채 켭니다. 시리얼에 <code>READY VREF=…</code>가 나오는지 확인합니다.</li>
+<li><strong>DAC 출력 보정 (<code>c</code> 명령):</strong> 소자·저항을 <strong>빼서 열어 두고</strong>(J1은 꽂은 채) <code>c</code>를 입력합니다. 전류가 흐르지 않으면 R_lim에 전압이 걸리지 않아 A0 = DAC 출력이 되므로, 이때 잰 직선이 "DAC 코드 → DAC 출력 전압" 보정입니다. 전류가 5 nA 넘게 보이면 코드가 보정을 거부합니다. 출력된 <code>DAC_SLOPE</code>·<code>DAC_OFS</code>를 <code>firmware/common/device_io.h</code>에 넣고 <code>python sync_firmware.py</code>로 각 스케치에 복사합니다.
+<ul>
+<li>이 보정은 <strong>DAC 출력</strong>을 맞추는 것이지 소자 전압을 맞추는 것이 아닙니다. 소자에 전류가 흐르면 소자 전압 = DAC 출력 − V_ref − I × R_lim이 되고, 보드는 이것을 따로 재서 기록합니다 (되먹임으로 맞추지는 않음).</li>
+</ul></li>
+<li>소자 자리에 <strong>100 kΩ 저항</strong>을 꽂고 → <code>s</code> 명령. −1~+1 V에서 "실제 전압 / 100 kΩ"과 측정 전류가 맞는지 봅니다.</li>
+<li><strong>RC 모의 소자</strong>(100 kΩ과 1 µF 필름 커패시터를 병렬로)로 바꿔 전압 계단을 걸고, 출력이 떨리지(발진) 않는지, 원하는 시간 안에 자리 잡는지 봅니다. 떨리면 C_f를 키우거나, 소자와 TIA 입력 사이에 작은 저항(1–10 kΩ)을 넣고 다시 봅니다.</li>
+<li><strong>회로 자체가 기억을 만들지 않는지:</strong> 저항으로 <a href="../projects/a.html#a1-3">A1-3</a>(쓰기–쉬기–읽기)을 하면 읽기 전류 차이가 없어야 합니다. 차이가 보이면 회로(C_f, 기준 전압 커패시터 등)가 만든 것입니다.</li>
+<li>같은 저항·RC를 <strong>소스미터로도</strong> 재서 겹쳐 그립니다. 이 그림이 B의 첫 결과이고, 그 전까지 이 회로는 "설계안"입니다.</li>
+</ol>
+</section>
+</section>
+<section id="b5" class="level2">
+<h2 class="anchored" data-anchor-id="b5">B5. 보드로 레저버 데이터 모으기</h2>
+<p>A에서 소스미터로 잰 값으로 학습한 가중치는 B 회로에서 맞지 않을 수 있습니다 (이득·오프셋이 다름). 그래서 <strong>B 회로로 다시 측정</strong>해 학습합니다.</p>
+<p><strong>준비 (python 폴더에서):</strong></p>
+<ol type="1">
+<li><code>config_board_example.json</code>을 복사해 <code>config_board.json</code>으로 저장하고 고칩니다: <code>device.id</code>·<code>env</code> <strong>(바꿀 것)</strong>, <code>instrument.R_meas_ohm</code>·<code>R_lim_ohm</code> = 실제로 꽂은 저항 값 <strong>(바꿀 것)</strong>, <code>v_limit_V</code> = A1에서 정한 범위 안 <strong>(바꿀 것)</strong>. <code>encoding</code>은 처음엔 그대로 둡니다.</li>
+<li>보드용 <code>config.h</code>를 설정 파일에서 만듭니다 (손으로 옮기지 않음): <code>python tasks.py timing task.npz --n 40</code> → <code>python make_config_h.py config_board.json task.npz ../firmware/B5_collect</code>. 화면에 <code>저장: …config.h (L=12, M=4)</code>가 나오면 됩니다.</li>
+<li>B5_collect를 올리고 시리얼 모니터에서 <code>READY L=12 M=4 …</code>가 보이면 <strong>시리얼 모니터를 닫습니다</strong> (Python이 같은 COM 포트를 써야 하므로).</li>
+</ol>
+<p><strong>측정:</strong></p>
+<p>COM 번호는 장치 관리자 → "포트(COM &amp; LPT)"에서 보드를 꽂을 때 새로 생기는 번호입니다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> board_collect.py config_board.json task.npz runs/b_dev01 <span class="at">--port</span> COM5 <span class="at">--limit</span> 10</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> board_collect.py config_board.json task.npz runs/b_dev01 <span class="at">--port</span> COM5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>보드는 입력 줄의 길이·숫자 형식·범위(0–1)·개수·시간 초과를 검사하고, 하나라도 이상하면 <strong>소자를 구동하지 않고</strong> <code>E</code> 줄을 보냅니다. DAC 쓰기가 실패하면 0 V를 한 번 더 시도하고 멈춥니다.</li>
+<li>측정이 다 끝난 뒤에 결과를 한꺼번에 보냅니다 (보내는 시간이 펄스 타이밍에 섞이지 않게). 시행마다 다섯 줄이 옵니다:</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>줄</th>
+<th>뜻</th>
+<th>단위</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S</td>
+<td>펄스 끝 전류 (상태)</td>
+<td>nA</td>
+</tr>
+<tr class="even">
+<td>V</td>
+<td>펄스 끝에 잰 실제 소자 전압 (A0 − A1)</td>
+<td>V</td>
+</tr>
+<tr class="odd">
+<td>P</td>
+<td>이 펄스의 DAC 명령 시작 → 다음 펄스 명령 시작 = 그 전압 <strong>명령</strong>이 유지된 시간</td>
+<td>µs</td>
+</tr>
+<tr class="even">
+<td>R</td>
+<td>DAC 명령 시작 → 전류·전압 읽기 끝</td>
+<td>µs</td>
+</tr>
+<tr class="odd">
+<td>Q</td>
+<td>측정 범위를 벗어난 읽기 수</td>
+<td>개</td>
+</tr>
+</tbody>
+</table>
+<p><strong>시간 용어를 구분합니다.</strong> P는 "명령"이 유지된 시간이지 "소자에 목표 전압이 걸린 시간"이 아닙니다. DAC 출력이 정착하는 시간(수 µs)과 R_lim × 소자 정전용량의 충전 시간이 더해지기 때문입니다. 소자에 실제로 걸린 전압은 V 줄(펄스 끝 값)로 확인합니다. 펄스 중간의 전압 모양까지 알려면 B4-4처럼 따로 재야 합니다.</p>
+<p><strong>한계 (실물 미검증):</strong> ADC 통신이 끊기면 라이브러리가 변환 완료를 기다리며 멈출 수 있고(라이브러리 버전에 따라 확인 필요), 그동안 DAC는 마지막 전압을 유지합니다. 보드가 응답하지 않으면 J1을 먼저 빼고 리셋합니다.</p>
+</section>
+<section id="b6" class="level2">
+<h2 class="anchored" data-anchor-id="b6">B6. PC 없이 판단하고 알리기</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/b_dev01/checkpoint.npz task.npz <span class="at">--out</span> b_model.joblib <span class="at">--end-only</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> export_mcu.py b_model.joblib runs/b_dev01/manifest.json runs/b_dev01/checkpoint.npz ../firmware/B6_standalone <span class="at">--v-limit</span> 1.0 <span class="at">--inputs</span> task.npz</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>두 번째 명령이 <code>config.h</code>, <code>weights.h</code>, <code>ref_vectors.h</code>, <code>inputs_test.h</code>를 <code>firmware/B6_standalone/</code>에 새로 씁니다 (이진·다중 분류 모두 지원). <code>--v-limit</code>은 <code>config_board.json</code>의 값과 같게.</li>
+<li><a href="code/firmware/B6_standalone/B6_standalone.ino">B6_standalone</a>를 올리면 <strong>먼저 저장된 특징으로 점수를 계산해 Python 점수와 비교</strong>합니다 (소자 사용 안 함). 시리얼의 <code>R,…</code> 줄에 <code>FAIL</code>이 없어야 다음으로 갑니다. "같은 숫자 → 같은 계산"의 확인이고, Python 쪽 계산 일치는 모의 시험으로 확인했습니다 (보드에서는 미검증).</li>
+<li>그다음 시험 입력을 하나씩 재생 → 측정 → 판단합니다. LED·부저·OLED에는 진단처럼 보이지 않게 <strong>클래스 번호</strong>만 표시하고, 클래스 0이 아니면 휴대폰(nRF Connect 앱)으로 알림을 보냅니다.</li>
+<li>재측정 정확도는 B5 결과와 따로 비교·기록합니다.</li>
+</ol>
+<p>전원은 처음에 USB 보조배터리를 씁니다. 리튬폴리머 셀을 직접 쓰려면 충전·보호 회로가 들어 있는 보드를 고르고, 맨 셀을 직접 배선하지 않습니다.</p>
+</section>
+<section id="b7" class="level2">
+<h2 class="anchored" data-anchor-id="b7">B7. 시간과 에너지를 공정하게 재기</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>무엇</th>
+<th>정의</th>
+<th>재는 법</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>전체 에너지</td>
+<td>판단 하나 동안 전원에서 나간 에너지 (대기 포함)</td>
+<td>USB 전력 측정기 mWh 차이 ÷ 판단 수</td>
+</tr>
+<tr class="even">
+<td>추가 에너지</td>
+<td>(처리 중 전력 − 대기 전력) × 처리 시간</td>
+<td>같은 측정기, 대기·처리 구간 분리</td>
+</tr>
+<tr class="odd">
+<td>소자 단자 에너지</td>
+<td>∫ V_소자 · I dt (부호 포함)</td>
+<td>측정한 전압·전류로 계산</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>어디까지 포함했는지 적습니다: 쉬는 시간, 기준 전압 회로, 통신, 알림, (B8이면) ECG 모듈·R파 검출.</li>
+<li>USB 전력 측정기의 해상도(예: 1 mA 단위)로 처리 중·대기 차이를 구별할 수 있는지 먼저 봅니다. 구별되지 않으면 "측정 한계 이하"로 적습니다.</li>
+<li>비교 대상: <strong>MCU만으로</strong> 같은 입력·같은 정확도 조건에서 판단할 때(예: 입력 25점에 같은 선형 분류기)의 시간·에너지.</li>
+</ul>
+<p>에너지의 대부분은 ESP32·ADC·DAC가 쓰고 소자 몫은 작게 나올 가능성이 큽니다. 그렇게 나오면 판독 횟수를 줄이는 소자, 디지털화 전 처리, 깊은 절전이 왜 중요한지를 숫자로 보인 것입니다.</p>
+</section>
+<section id="b8" class="level2">
+<h2 class="anchored" data-anchor-id="b8">B8. ECG 신호로 (도전)</h2>
+<section id="기본-경로-사람-없이" class="level3">
+<h3 class="anchored" data-anchor-id="기본-경로-사람-없이">기본 경로: 사람 없이</h3>
+<p>ECG 시뮬레이터, 또는 두 번째 보드가 MIT-BIH 파형을 재생해 분압기(예: 100 kΩ : 100 Ω, 약 1/1000)로 mV 수준으로 줄여 AD8232 입력에 넣습니다. <strong>B8은 사람에게 연결하지 않고 끝낼 수 있게</strong> 되어 있습니다.</p>
+<p>AD8232의 RL은 단순 접지가 아니라 <strong>오른다리 구동(right-leg drive) 출력</strong>입니다. 몸의 공통 전압을 능동적으로 맞춰 잡음을 줄이는 출력이므로, 시뮬레이터 연결도 제조사 안내대로 합니다.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="사람 몸에 연결하는 것은 별도 관문">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>사람 몸에 연결하는 것은 별도 관문
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>사람 연결에는 절연, 누설 전류, 전원·데이터 경로, 입력 보호 설계가 필요하고, 배터리로 바꾸거나 USB를 뽑는 것만으로 안전해지지 않습니다. 의료 전기안전에 경험이 있는 사람의 검토를 받은 뒤에, 연구 데이터로 쓸 경우 KAIST IRB 승인과 함께 진행합니다. 이 시제품과 AD8232 모듈은 의료기기가 아닙니다.</p>
+</div>
+</div>
+</section>
+<section id="두-경로를-정확히-구분하기" class="level3">
+<h3 class="anchored" data-anchor-id="두-경로를-정확히-구분하기">두 경로를 정확히 구분하기</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  subgraph P1["경로 1: 숫자로 바꾼 뒤 소자에 (디지털 중계)"]
+    direction LR
+    a1["AD8232 출력&lt;br/&gt;(아날로그)"] --&gt; a2["ADS1115&lt;br/&gt;숫자로"] --&gt; a3["ESP32&lt;br/&gt;R파 찾기·자르기"] --&gt; a4["MCP4725 DAC&lt;br/&gt;다시 전압으로"] --&gt; a5["소자 → 전류 측정"]
+  end
+  subgraph P2["경로 2: 아날로그로 바로 (near-sensor)"]
+    direction LR
+    b1["AD8232 출력&lt;br/&gt;(아날로그)"] --&gt; b2["교류 결합 + 증폭·오프셋&lt;br/&gt;op-amp, V_ref 기준"] --&gt; b3["아날로그 스위치&lt;br/&gt;ESP32는 켜고 끄기만"] --&gt; b4["소자 → TIA → 판독만 숫자로"]
+  end
+  P1 ~~~ P2
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>경로 1:</strong> 소자는 디지털화 뒤의 보조 처리기입니다. 엣지 컴퓨팅이긴 하지만 "디지털화 전에 처리"하는 이점은 없습니다.</li>
+<li><strong>경로 2:</strong> 신호가 숫자가 되지 않고 소자에 들어가며, ADC는 레저버 상태만 읽습니다. 아날로그 스위치로 만든 마스킹(켜짐/꺼짐)은 DAC 마스킹(높이 조절)과 입력 모양이 다르므로 <strong>B6의 가중치를 그대로 쓸 수 없고</strong> 다시 측정·학습합니다.</li>
+</ul>
+</section>
+<section id="연속-처리에-필요한-조건-계산-먼저" class="level3">
+<h3 class="anchored" data-anchor-id="연속-처리에-필요한-조건-계산-먼저">연속 처리에 필요한 조건 (계산 먼저)</h3>
+<p>심장 박동은 약 0.6–1초마다 옵니다. 지금 설정(박동 하나 ≈ 7초)으로는 박동이 쌓이기만 합니다. 연속 처리하려면:</p>
+<ul>
+<li>처리 시간 ≤ 박동 간격: L × M × θ + 쉬기 ≤ 약 0.6 s. 예: L=25, M=1, θ=20 ms → 0.5 s, 쉬기 없이. 그러려면 소자의 흔적이 20 ms 규모에서 의미 있게 변해야 합니다 (A1에서 확인할 것).</li>
+<li>ADS1115 변환 예산: 최대 860회/초는 <strong>모든 채널을 합친</strong> 예산입니다. ECG를 250 Hz로 읽으면서(경로 1) 펄스마다 전류도 읽으면 두 일이 같은 예산을 나눠 씁니다.</li>
+<li>버퍼·누락 정책: 처리가 밀리면 어떤 박동을 버릴지 정하고, 그 비율을 기록합니다.</li>
+</ul>
+<p>이 조건을 계산하고 만족하는 설정을 찾기 전에는 "실시간"이라는 말을 쓰지 않습니다.</p>
+</section>
+</section>
+<section id="문제-해결" class="level2">
+<h2 class="anchored" data-anchor-id="문제-해결">문제 해결</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>증상</th>
+<th>확인 순서</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>시작하자마자 <code>E,-1,io_init</code></td>
+<td>I²C 주소(스캐너), SDA·SCL 바뀜, GND 연결, 기준 전압(A3)이 1.4–1.9 V인지</td>
+</tr>
+<tr class="even">
+<td>전류가 소스미터와 일정 비율로 다름</td>
+<td>R_f(R_s) 실제 값, DAC 보정</td>
+</tr>
+<tr class="odd">
+<td>0 V에서 전류가 0이 아님</td>
+<td>op-amp 오프셋 → 0 V 값 빼기</td>
+</tr>
+<tr class="even">
+<td>TIA 출력이 떨림</td>
+<td>C_f 키우기, 칩 옆 100 nF, 배선 짧게, 입력 직렬 저항</td>
+</tr>
+<tr class="odd">
+<td>Q 줄에 포화가 많음</td>
+<td>R_f 줄이기, 전압 범위 줄이기</td>
+</tr>
+<tr class="even">
+<td><code>R,…,FAIL</code></td>
+<td>헤더 파일이 서로 다른 학습에서 나옴 → export를 다시 하고 네 파일을 같이 복사</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ai에게-맡길-때" class="level2">
+<h2 class="anchored" data-anchor-id="ai에게-맡길-때">AI에게 맡길 때</h2>
+<pre class="text"><code>기준 보드 ESP32 DevKitC, Arduino-ESP32 core [버전], Adafruit MCP4725 [버전], ADS1X15 [버전].
+첨부한 device_io.h, B5_collect.ino, config.h가 컴파일 오류 [원문]이 나. 고친 전체 파일을 주고,
+펄스 타이밍(runSequence)과 입력 검사 규칙은 바꾸지 말아 줘.</code></pre>
+<pre class="text"><code>내 소자 특성: 전압 범위 [ ], 전류 [최소]~[최대] A, 흔적의 시간 규모 [ ] s.
+3.3 V 단일 전원에서 이 소자를 구동·측정하는 회로를 검토해 줘: R_lim, 션트/TIA 선택, R_f·C_f,
+C_in을 모를 때 안정성 확인 절차, 출력 여유, 포화 판정. 계산 과정과 가정을 따로 적고,
+데이터시트 근거가 없는 숫자는 표시해 줘.</code></pre>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../projects/a.html" class="pagination-link" aria-label="A. 계측기로 탐색">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">A. 계측기로 탐색</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../projects/c.html" class="pagination-link" aria-label="C. 감지와 처리의 결합">
+        <span class="nav-page-text">C. 감지와 처리의 결합</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

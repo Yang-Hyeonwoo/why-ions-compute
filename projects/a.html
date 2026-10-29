@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>A. 계측기로 탐색하는 물리 레저버 – Why Ions Compute?</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../projects/b.html" rel="next">
+<link href="../projects/index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 2,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "/"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute?</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">홈</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">로드맵</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/a.html">A. 계측기로 탐색</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">로드맵</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#a0" id="toc-a0" class="nav-link active" data-scroll-target="#a0">A0. 장비 없이, 그다음 저항과 RC로</a>
+  <ul class="collapse">
+  <li><a href="#a0-1.-준비-폴더와-python" id="toc-a0-1.-준비-폴더와-python" class="nav-link" data-scroll-target="#a0-1.-준비-폴더와-python">A0-1. 준비: 폴더와 Python</a></li>
+  <li><a href="#a0-2" id="toc-a0-2" class="nav-link" data-scroll-target="#a0-2">A0-2. 모의 장비로 한 바퀴</a></li>
+  <li><a href="#a0-3.-실제-소스미터와-대화하기" id="toc-a0-3.-실제-소스미터와-대화하기" class="nav-link" data-scroll-target="#a0-3.-실제-소스미터와-대화하기">A0-3. 실제 소스미터와 대화하기</a></li>
+  <li><a href="#a0-4.-저항1-mω으로-측정-흐름-확인" id="toc-a0-4.-저항1-mω으로-측정-흐름-확인" class="nav-link" data-scroll-target="#a0-4.-저항1-mω으로-측정-흐름-확인">A0-4. 저항(1 MΩ)으로 측정 흐름 확인</a></li>
+  <li><a href="#a0-5" id="toc-a0-5" class="nav-link" data-scroll-target="#a0-5">A0-5. 직렬 RC로 "기억처럼 보이는 신호" 만들기</a></li>
+  </ul></li>
+  <li><a href="#a1" id="toc-a1" class="nav-link" data-scroll-target="#a1">A1. 소자 특성 측정</a>
+  <ul class="collapse">
+  <li><a href="#a1-1.-쓸-전압-범위-찾기" id="toc-a1-1.-쓸-전압-범위-찾기" class="nav-link" data-scroll-target="#a1-1.-쓸-전압-범위-찾기">A1-1. 쓸 전압 범위 찾기</a></li>
+  <li><a href="#a1-2.-스윕-속도를-바꾼-iv" id="toc-a1-2.-스윕-속도를-바꾼-iv" class="nav-link" data-scroll-target="#a1-2.-스윕-속도를-바꾼-iv">A1-2. 스윕 속도를 바꾼 I–V</a></li>
+  <li><a href="#a1-3" id="toc-a1-3" class="nav-link" data-scroll-target="#a1-3">A1-3. 쓰기–쉬기–읽기</a></li>
+  <li><a href="#a1-4.-짝펄스-두-자극-사이-간격의-흔적" id="toc-a1-4.-짝펄스-두-자극-사이-간격의-흔적" class="nav-link" data-scroll-target="#a1-4.-짝펄스-두-자극-사이-간격의-흔적">A1-4. 짝펄스: 두 자극 사이 간격의 흔적</a></li>
+  <li><a href="#a1-5.-eis-퍼텐쇼스탯이-있으면" id="toc-a1-5.-eis-퍼텐쇼스탯이-있으면" class="nav-link" data-scroll-target="#a1-5.-eis-퍼텐쇼스탯이-있으면">A1-5. EIS (퍼텐쇼스탯이 있으면)</a></li>
+  <li><a href="#a1-6.-특성표" id="toc-a1-6.-특성표" class="nav-link" data-scroll-target="#a1-6.-특성표">A1-6. 특성표</a></li>
+  </ul></li>
+  <li><a href="#a2" id="toc-a2" class="nav-link" data-scroll-target="#a2">A2. 작은 합성 과제: "끝만 읽어도 앞을 기억하는가"</a></li>
+  <li><a href="#a3" id="toc-a3" class="nav-link" data-scroll-target="#a3">A3. (선택) ECG 박동으로 확장</a></li>
+  <li><a href="#문제-해결" id="toc-문제-해결" class="nav-link" data-scroll-target="#문제-해결">문제 해결</a></li>
+  <li><a href="#ai에게-맡길-때" id="toc-ai에게-맡길-때" class="nav-link" data-scroll-target="#ai에게-맡길-때">AI에게 맡길 때</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/a.html">A. 계측기로 탐색</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">A. 계측기로 탐색하는 물리 레저버</h1>
+<p class="subtitle lead">소스미터로 소자에 펄스를 걸고, 남는 전류의 흔적이 계산에 쓸모 있는지 확인한다</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-tip callout-titled" title="오늘 할 첫 실험 — A0: 장비 없이 한 바퀴">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>오늘 할 첫 실험 — A0: 장비 없이 한 바퀴
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>준비물:</strong> Windows PC, Python 3.11 이상, <a href="code/ion-projects-code.zip">코드 묶음 zip</a>. 소스미터·소자는 아직 필요 없습니다.</li>
+<li><strong>걸리는 시간:</strong> 30–60분.</li>
+<li><strong>끝나면 얻는 것:</strong> 모의 장비로 잰 기록 폴더, 시간별 전류 그래프 2장, "기억 있는 모의 소자 vs 저항"의 분류 결과.</li>
+<li><strong>오늘의 완료 기준:</strong> A0-2의 명령 ①–⑧이 모두 예상대로 끝나고, 그래프에서 '펄스 끝 읽기' 점이 무엇인지 설명할 수 있으면 끝입니다.</li>
+<li><strong>남길 기록:</strong> 사용한 Python 버전, 각 명령의 마지막 출력 한 줄, 그래프 2장 (연구 노트에 붙이기).</li>
+</ul>
+</div>
+</div>
+<p><strong>이 프로젝트가 묻는 것:</strong> 내 소자의 전류에 과거 입력의 흔적이 남는가, 남는다면 그 흔적으로 시간 패턴을 구별할 수 있는가. 순서는 A0(장비 없이·저항·RC) → <a href="#a1">A1</a>(소자 특성) → <a href="#a2">A2</a>(작은 합성 과제) → <a href="#a3">A3</a>(선택: ECG)입니다. A1까지 기록이 남으면 <a href="../projects/index.html#levels">수준 2</a>이고, 기억이나 성능 향상이 보이지 않아도 그 단계는 끝난 것입니다.</p>
+<section id="a0" class="level2">
+<h2 class="anchored" data-anchor-id="a0">A0. 장비 없이, 그다음 저항과 RC로</h2>
+<section id="a0-1.-준비-폴더와-python" class="level3">
+<h3 class="anchored" data-anchor-id="a0-1.-준비-폴더와-python">A0-1. 준비: 폴더와 Python</h3>
+<ol type="1">
+<li><p>zip을 받아 원하는 곳(예: 바탕화면)에 <strong>압축 풀기</strong>를 합니다. 생기는 폴더:</p>
+<pre class="text"><code>ion-projects-code/
+  README.md          코드 묶음 설명과 검증 상태
+  python/            Python 파일과 설정 예시 ← 여기서 명령을 입력
+  firmware/          B·C에서 보드에 올리는 아두이노 코드</code></pre></li>
+<li><p>파일 탐색기로 <code>ion-projects-code\python</code> 폴더를 연 뒤, 위쪽 <strong>주소 창을 클릭하고 <code>cmd</code>를 입력해 Enter</strong>를 누릅니다. 그 폴더 위치에서 명령 프롬프트(검은 창)가 열립니다.</p></li>
+<li><p><code>python --version</code>을 입력해 3.11 이상인지 봅니다. "명령을 찾을 수 없음"이 나오면 python.org에서 설치하고, 설치 첫 화면의 <strong>"Add python.exe to PATH"</strong>를 체크합니다.</p></li>
+<li><p><code>python -m pip install -r requirements.txt</code> — 필요한 패키지를 설치합니다 (몇 분). 다른 Python 작업과 섞이는 것이 걱정되면 먼저 <code>python -m venv .venv</code> → <code>.venv\Scripts\activate</code>로 이 폴더 전용 환경(virtual environment)을 만들 수 있습니다.</p></li>
+</ol>
+</section>
+<section id="a0-2" class="level3">
+<h3 class="anchored" data-anchor-id="a0-2">A0-2. 모의 장비로 한 바퀴</h3>
+<p><strong>모의 장비(mock)</strong>는 실제 소스미터 대신 정해진 식으로 전류를 만들어 주는 가짜 장비입니다. 코드 흐름을 익히기 위한 것이고, 모의 결과는 실제 소자에 대해 아무것도 말해 주지 않습니다.</p>
+<p>아래 명령을 <strong>python 폴더에서 열린 명령 프롬프트</strong>에 하나씩 붙여 넣습니다. 각 명령 아래에 성공했을 때 보이는 것과, 다르면 확인할 곳을 적었습니다.</p>
+<p><strong>① 코드 점검</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> run_tests.py</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>성공: 마지막 줄 <code>모두 통과 (12개)</code>. 다르면: 패키지 설치(A0-1의 4)를 다시.</p>
+<p><strong>② 연습용 입력 만들기</strong> → <code>task.npz</code> (입력 40개와 정답)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tasks.py timing task.npz <span class="at">--n</span> 20</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>성공: <code>시행 40개 (클래스 0: 앞쪽, 1: 뒤쪽) … 끝만 읽기 칸 [8, 9, 10, 11]</code>. 다르면: 명령 프롬프트가 python 폴더에서 열렸는지.</p>
+<p><strong>③ 모의 측정 5개만</strong> → <code>runs/practice_mem/</code> 폴더</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_example.json task.npz runs/practice_mem <span class="at">--mock</span> <span class="at">--limit</span> 5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>성공: <code>시행 4 저장 (5/40)</code>에서 멈춤.</p>
+<p><strong>④ 같은 명령에서 <code>--limit 5</code>만 빼고 이어서</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_example.json task.npz runs/practice_mem <span class="at">--mock</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>성공: <code>이어서 측정: 5/40 …</code> → <code>시행 39 저장 (40/40)</code>. 설정 파일을 바꾼 뒤 같은 폴더로 이어 하면 거부됩니다 (조건이 다른 측정이 섞이지 않게 하는 의도된 동작).</p>
+<p><strong>⑤ 시행 하나의 그래프</strong> → <code>runs/practice_mem/trial_00000.png</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_run.py runs/practice_mem <span class="at">--trial</span> 0</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>성공: <code>그래프: …trial_00000.png</code>. 파일 탐색기에서 열어 아래 예시와 비슷한지 봅니다.</p>
+<p><strong>⑥ 기억 없는 모의 저항으로 같은 측정</strong> → <code>runs/practice_res/</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_example.json task.npz runs/practice_res <span class="at">--mock</span> <span class="at">--mock-model</span> resistor</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>⑦·⑧ 끝만 읽고 분류하기</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/practice_mem/checkpoint.npz task.npz <span class="at">--out</span> practice_mem.joblib <span class="at">--end-only</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/practice_res/checkpoint.npz task.npz <span class="at">--out</span> practice_res.joblib <span class="at">--end-only</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>성공: 첫 줄은 <code>균형 정확도 1.00 (찍기 = 0.50)</code> 근처, 둘째 줄은 0.5 근처(예: 0.4–0.65). 시험이 12개뿐이라 모의 저항도 0.6 정도는 우연히 나올 수 있습니다.</p>
+<p><strong>결과 읽기 (⑦·⑧):</strong></p>
+<ul>
+<li><code>--end-only</code>는 <strong>마지막 4칸 동안의 전류만</strong> 씁니다. 그 4칸의 입력은 두 클래스가 똑같으므로, 입력만 봐서는 찍기(0.50)밖에 안 됩니다.</li>
+<li>기억이 있는 모의 소자는 앞에서 받은 입력의 흔적이 남아 높게 나오고, 모의 저항은 찍기 근처입니다. 이 차이를 직접 보는 것이 A0의 목적입니다.</li>
+<li><strong>라벨 섞기 확인</strong>은 정답을 무작위로 섞어 같은 계산을 한 값입니다. 찍기 근처가 아니면 분석 어딘가에서 정답이 새고 있다는 신호입니다.</li>
+<li><code>.joblib</code> 파일에는 학습된 표준화 값·가중치·결과가 들어 있고, 나중에 B의 <code>export_mcu.py</code>가 읽습니다. 직접 열어 볼 필요는 없습니다.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/ex-mock-trial.png" class="img-fluid figure-img" alt="모의 시행 하나의 설정 전압 계단과 전류, 펄스 끝 읽기 점"></p>
+<figcaption>모의 장비로 만든 예시 그래프 (실측 아님) — 위: 설정 전압, 아래: 전류. 빨간 점이 상태로 쓰는 '펄스 끝 읽기'입니다. 설정 펄스 폭은 50 ms인데, 모의 장비가 20 ms마다 읽어 실제로는 60 ms가 되었습니다.</figcaption>
+</figure>
+</div>
+</section>
+<section id="a0-3.-실제-소스미터와-대화하기" class="level3">
+<h3 class="anchored" data-anchor-id="a0-3.-실제-소스미터와-대화하기">A0-3. 실제 소스미터와 대화하기</h3>
+<ol type="1">
+<li>소스미터 뒷면에서 연결 방식(USB·GPIB·LAN·RS-232)을 확인합니다. Keithley 2400처럼 GPIB만 있으면 GPIB–USB 어댑터가 필요합니다 (NI-VISA가 인식하는 제품. 연구실에 남는 것이 있는지 먼저 물어보세요).</li>
+<li><strong>NI-VISA</strong>(NI 홈페이지, 무료)를 설치하고, 같이 설치되는 <strong>NI MAX</strong>를 열어 "장치와 인터페이스"에서 장비 주소를 찾습니다. 예: <code>GPIB0::24::INSTR</code>. 장비가 안 보이면 장비 앞면 메뉴에서 통신 방식·GPIB 주소를 확인합니다.</li>
+<li><code>config_example.json</code>을 복사해 <code>config_real.json</code>으로 저장하고 메모장으로 열어 바꿉니다:
+<ul>
+<li><code>"addr"</code> → NI MAX에서 본 주소 <strong>(바꿀 것)</strong></li>
+<li><code>"compliance_A"</code>, <code>"v_limit_V"</code> → 이번 실험의 전류 제한·전압 상한 <strong>(바꿀 것)</strong></li>
+<li><code>"device"</code>의 <code>"id"</code>, <code>"env"</code> → 시료 이름·측정 환경 <strong>(바꿀 것)</strong></li>
+<li><code>"mock"</code> 줄은 실제 장비에서는 쓰이지 않습니다.</li>
+</ul></li>
+</ol>
+<p><a href="code/python/smu.py">smu.py</a>는 <strong>Keithley 2400 계열</strong> 기준입니다. 2450·2600 시리즈는 명령이 다르므로 파일 전체를 Claude에게 주고 모델에 맞게 바꿔 달라고 하세요. 이 드라이버가 하는 일:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>동작</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>연결만으로는 출력이 켜지지 않고 <code>enable()</code>을 불러야 켜짐</td>
+<td>설정이 끝나기 전에 전압이 걸리지 않게</td>
+</tr>
+<tr class="even">
+<td><code>with</code> 문이 끝나거나 오류·Ctrl+C가 나면 0 V → 출력 OFF를 <strong>시도</strong>하고, 실패하면 화면에 알림</td>
+<td>오류가 나도 출력이 켜진 채 남지 않게</td>
+</tr>
+<tr class="odd">
+<td>계획 상한(<code>v_limit_V</code>)을 넘는 전압 요청은 거부</td>
+<td>오타 한 번으로 큰 전압이 걸리지 않게</td>
+</tr>
+<tr class="even">
+<td>매 측정마다 전류 제한(compliance)에 걸렸는지 기록</td>
+<td>compliance는 전류가 넘지 않게 장비가 전압을 낮추는 동작일 뿐, 프로그램을 멈추지 않으므로</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled" title="소프트웨어가 보장하지 못하는 것">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>소프트웨어가 보장하지 못하는 것
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>USB·GPIB 연결이 끊기면 PC는 장비를 끌 수 없습니다. 장비 앞면 <strong>OUTPUT 버튼</strong> 위치를 알아 두고, 이상하면 직접 끕니다. compliance 상태 비트 번호도 2400 설명서의 상태 워드 표에서 한 번 확인하세요 (코드에 표시해 둠, 실물 검증 대기).</p>
+</div>
+</div>
+</section>
+<section id="a0-4.-저항1-mω으로-측정-흐름-확인" class="level3">
+<h3 class="anchored" data-anchor-id="a0-4.-저항1-mω으로-측정-흐름-확인">A0-4. 저항(1 MΩ)으로 측정 흐름 확인</h3>
+<p><strong>연결:</strong> 소스미터 앞면 <strong>HI</strong> 단자 → 악어 클립 → 저항 한쪽 다리, <strong>LO</strong> 단자 → 저항 다른 쪽 다리. 저항은 방향이 없습니다.</p>
+<ul>
+<li><strong>계산 예시:</strong> 0.5 V를 걸면 I = 0.5 / 1,000,000 = 0.5 µA.</li>
+<li><strong>이번 입력이 실제로 거는 전압:</strong> <code>task.npz</code> + <code>config_example.json</code>의 인코딩은 V = 0.8 × u × mask이므로 펄스 높이가 <strong>약 0.07–0.78 V</strong>입니다. 1 MΩ이면 전류는 약 0.07–0.78 µA입니다.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task.npz runs/r1M <span class="at">--limit</span> 3</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_run.py runs/r1M <span class="at">--trial</span> 0</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><strong>예상:</strong> 그래프의 전류 계단이 전압 계단과 같은 모양이고, 크기가 전압 / 1 MΩ입니다. 제목의 "실제 펄스 길이"가 설정 50 ms보다 <strong>얼마나 긴지</strong> 적습니다. PC가 명령을 하나씩 보내는 방식이라 보통 수십 ms 길어집니다.</li>
+<li><strong>다르면:</strong> 전류가 0 → 연결. 값이 튐 → <code>i_range_A</code> 고정. 시간 초과 → 주소·케이블.</li>
+<li><strong>이 단계의 기록:</strong> 장비 모델, 주소, NPLC, 실제 펄스 길이, 그래프.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="PC가 시키는 펄스의 시간 한계">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">중요</span>PC가 시키는 펄스의 시간 한계
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>PC가 "전압 바꾸기 → 시간이 될 때까지 읽기"를 반복하므로, 실제 펄스 길이 = 설정값 + 통신·측정 시간(NPLC로 정해지는 측정 구간 포함)입니다. 모든 결과에는 설정 θ가 아니라 <strong>기록된 실제 펄스 길이</strong>를 같이 적습니다. 더 짧고 정확한 펄스가 필요하면 장비 내부 기능(2400 리스트 스윕·트리거, 2450 Trigger Model, 2600 TSP)으로 옮기고, 그 타이밍도 측정으로 확인합니다.</p>
+</div>
+</div>
+</section>
+<section id="a0-5" class="level3">
+<h3 class="anchored" data-anchor-id="a0-5">A0-5. 직렬 RC로 "기억처럼 보이는 신호" 만들기</h3>
+<p><strong>연결:</strong> HI → 1 MΩ 저항 → 1 µF <strong>필름</strong> 커패시터(극성 없음) → LO. 저항과 커패시터를 일렬로 잇습니다 (직렬, series). 시간 상수 τ = R × C = 1 s.</p>
+<p>먼저 장비 없이 같은 실험을 모의로 해 봅니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py wrr config_example.json runs/wrr_rc_mock <span class="at">--mock</span> <span class="at">--mock-model</span> series_rc <span class="at">--gaps</span> 0.1,1,5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>이 명령은 그림 ②와 같은 순서로 전압을 겁니다: <strong>0 V 5초(settle) → 쓰기 ±0.5 V 1초 → 0 V 쉬기(gap) → 읽기 0.05 V 0.5초</strong>. 쉬기 0.1·1·5초마다 + 쓰기와 − 쓰기를 한 번씩 합니다.</li>
+<li>화면의 <code>I_read_first</code>는 읽기 시작 직후 전류입니다. 모의 RC에서는 쉬기가 0.1 s일 때 + 쓰기 뒤 약 −0.23 µA, − 쓰기 뒤 약 +0.32 µA로 크게 다르고, 5 s에서는 둘 다 약 +0.045 µA로 거의 같아집니다.</li>
+<li><strong>뜻:</strong> 커패시터에 남은 전하가 쉬는 동안 τ ≈ 1 s로 빠져나갑니다. <strong>커패시터만으로도 '쓰기 극성을 기억하는 것처럼' 보이는 결과가 나옵니다.</strong> 이 모양을 알아 두면 A1에서 소자 결과를 볼 때 비교할 기준이 생깁니다.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/ex-mock-wrr-rc.png" class="img-fluid figure-img" alt="모의 직렬 RC에 쓰기 쉬기 읽기를 세 번 반복한 전압과 전류 그래프"></p>
+<figcaption>모의 직렬 RC의 쓰기–쉬기–읽기 예시 (실측 아님) — 위: 걸어 준 전압, 아래: 전류. 전압을 바꿀 때마다 전류가 튀었다가 τ ≈ 1 s로 0을 향해 줄어듭니다.</figcaption>
+</figure>
+</div>
+<p>실제 RC로는 <code>config_example.json</code> 대신 <code>config_real.json</code>을 쓰고 <code>--mock …</code>을 빼고 실행합니다. 실측 모양이 모의와 비슷하면 측정 흐름이 맞게 동작하는 것입니다.</p>
+</section>
+</section>
+<section id="a1" class="level2">
+<h2 class="anchored" data-anchor-id="a1">A1. 소자 특성 측정</h2>
+<p><strong>목표:</strong> 내 소자가 어떤 전압·전류·시간 규모에서 동작하는지, 과거 입력의 흔적이 남는지를 대조군과 함께 기록합니다. 기대한 기억이 보이지 않아도 이 기록이 결과입니다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/f1-stack.svg" class="img-fluid figure-img" alt="ITO 유리 사이에 EMIMSPA 층과 METMAT X 층이 겹친 단면, 고정 전하와 이동 이온 표시, 확인 필요 표시, 극성 약속"></p>
+<figcaption>그림 ① 소자 단면과 전하 정의 — <strong>개념도·가설</strong>. 고정 전하·이동 이온·X⁻의 종류는 합성 자료로 확인하기 전까지 가설입니다.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="확인 필요 — 소재 표기">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>확인 필요 — 소재 표기
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>사용자 표기 "METMATFSI"의 이동 음이온이 FSI⁻인지 TFSI⁻인지는 <strong>아직 확인하지 않았습니다.</strong> 이 사이트는 확인 전까지 X⁻로 씁니다.</li>
+<li>각 층의 고정 전하 부호(EMIMSPA = 고정 SO₃⁻ / 이동 EMIM⁺, METMAT·X = 고정 암모늄 N⁺ / 이동 X⁻)는 이름에서 추정한 것입니다. 합성 자료로 확인한 뒤 그림을 고칩니다.</li>
+</ul>
+</div>
+</div>
+<p><strong>소자를 만들 때 기록할 것</strong></p>
+<ul>
+<li>활성 면적은 구멍 뚫은 절연 테이프로 고정합니다 (그림 ①의 노란 부분). 위·아래 ITO를 어긋나게 겹쳐 전선 붙일 자리를 남깁니다.</li>
+<li>극성 약속: <strong>소스미터 HI → ITO ①(EMIMSPA 쪽), LO → ITO ②</strong>. 모든 설정 파일의 <code>device.polarity</code>에 적습니다.</li>
+<li>조건별 소자 3개 이상. 두께, 활성 면적, 가교제 비율, 광경화·rinsing·건조 조건, 측정 때 온도·습도, 제작 후 경과 시간.</li>
+<li>대조 소자: <strong>한 층만 있는 소자</strong>(ITO/EMIMSPA/ITO, ITO/METMAT·X/ITO). 흔적이 접합에서 생기는지, 한 층 안·전극 계면에서 생기는지 가르는 데 씁니다.</li>
+</ul>
+<section id="a1-1.-쓸-전압-범위-찾기" class="level3">
+<h3 class="anchored" data-anchor-id="a1-1.-쓸-전압-범위-찾기">A1-1. 쓸 전압 범위 찾기</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py iv config_real.json runs/iv_dev01_02 <span class="at">--vmax</span> 0.2 <span class="at">--step</span> 0.02 <span class="at">--dwell</span> 0.05</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py iv config_real.json runs/iv_dev01_04 <span class="at">--vmax</span> 0.4 <span class="at">--step</span> 0.02 <span class="at">--dwell</span> 0.05</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>결과: <code>.npz</code>(모든 읽기), <code>.json</code>(조건), <code>.png</code>(I–V). compliance를 작게(예: 10–100 µA) 두고 <code>--vmax</code>를 한 단계씩 넓힙니다.</li>
+<li>넓힐 때마다 <strong>처음의 작은 스윕(0.2 V)을 다시 재서 같은지</strong> 확인합니다. 달라졌다면 직전 범위에서 소자가 바뀐 것(전기화학 반응, ITO 손상 등 가능)이므로 그 아래까지만 씁니다. 기포·변색·박리도 눈으로 봅니다.</li>
+<li>여기 적힌 전압·전류 숫자는 모두 <strong>예시</strong>입니다. 내 소자의 범위는 이 측정으로 정합니다.</li>
+</ul>
+</section>
+<section id="a1-2.-스윕-속도를-바꾼-iv" class="level3">
+<h3 class="anchored" data-anchor-id="a1-2.-스윕-속도를-바꾼-iv">A1-2. 스윕 속도를 바꾼 I–V</h3>
+<p>같은 범위에서 <code>--dwell</code>(한 단계 머무는 시간)을 0.02, 0.1, 0.5초로 바꿔 세 번 잽니다. 고리 모양이 속도에 따라 바뀌면 그 시간 규모의 느린 과정이 있다는 뜻입니다. 1 MΩ 저항(고리 없음)과 직렬 RC(속도에 따라 고리)도 같은 명령으로 재서 나란히 놓습니다.</p>
+</section>
+<section id="a1-3" class="level3">
+<h3 class="anchored" data-anchor-id="a1-3">A1-3. 쓰기–쉬기–읽기</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/f2-wrr.svg" class="img-fluid figure-img" alt="쓰기, 쉬기, 읽기 전압 파형과 읽기 구간 전류의 세 가지 가능한 모양"></p>
+<figcaption>그림 ② 쓰기–쉬기–읽기와 읽기 전류의 가능한 모양 — <strong>개념 예시, 실측 아님</strong>. 한 번의 모양만으로 원인을 정하지 않습니다.</figcaption>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py wrr config_real.json runs/wrr_dev01 <span class="at">--vw</span> 0.5 <span class="at">--tw</span> 1 <span class="at">--vr</span> 0.05 <span class="at">--tr</span> 0.5 <span class="at">--gaps</span> 0.1,0.3,1,3,10</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>전압 순서는 그림 ②와 같습니다 (A0-5의 명령과 같은 파일). <code>--vw</code>·<code>--vr</code>은 A1-1에서 정한 범위 안으로 고칩니다. 읽기 전압 <code>--vr</code>은 I–V에서 거의 직선인 작은 값으로.</li>
+<li><code>I_read_first</code>(읽기 직후)와 <code>I_read_late</code>(읽기 후반 평균)를 + 쓰기 / − 쓰기로 비교하고, 쉬기 시간에 따라 차이가 어떻게 줄어드는지 봅니다.</li>
+<li>같은 명령으로 <strong>직렬 RC, 1 MΩ 저항, 한 층 소자</strong>도 잽니다.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>관측</th>
+<th>가능한 원인 (여러 개가 동시에 있을 수 있음)</th>
+<th>후보를 줄이는 대조 실험</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>차이가 읽기 내내 유지됨 (그림 ② ⓐ)</td>
+<td>이온 분포·저항 상태 변화, 계면 분극의 느린 해소, 전기화학 반응 생성물</td>
+<td>쉬기·읽기 전압 바꾸기, 한 층 소자, 반복 후 처음 상태로 돌아오는지</td>
+</tr>
+<tr class="even">
+<td>처음에만 튀고 같아짐 (ⓑ)</td>
+<td>전극 계면·벌크의 충·방전(용량성 과도 응답)</td>
+<td>A0-5의 RC와 모양 비교, 읽기 구간을 길게(<code>--tr</code>)</td>
+</tr>
+<tr class="odd">
+<td>한쪽으로 계속 흘러감 (ⓒ)</td>
+<td>반응·열화, 습도·온도 변화, 읽기 자체가 상태를 바꿈(read disturbance)</td>
+<td>쓰기 없이 읽기만 반복, 환경 기록, 읽기 전압 낮추기</td>
+</tr>
+</tbody>
+</table>
+<p>"멤리스터다", "이온이 이동해서다" 같은 결론은 이 표의 다른 후보를 대조 실험으로 줄인 뒤에 씁니다. <strong>용량성 과도 응답(ⓑ)도 시간 정보를 담기 때문에 계산에 쓸 수 있습니다.</strong> 흔적이 어떤 기작으로 생겼는지와, 그 흔적을 계산에 쓸 수 있는지는 별개의 질문입니다.</p>
+</section>
+<section id="a1-4.-짝펄스-두-자극-사이-간격의-흔적" class="level3">
+<h3 class="anchored" data-anchor-id="a1-4.-짝펄스-두-자극-사이-간격의-흔적">A1-4. 짝펄스: 두 자극 사이 간격의 흔적</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py ppf config_real.json runs/ppf_dev01 <span class="at">--vp</span> 0.5 <span class="at">--tp</span> 0.2 <span class="at">--gaps</span> 0.05,0.1,0.2,0.5,1,2,5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>순서: 0 V 쉬기 → 펄스 1 → 0 V(간격) → 펄스 2. 그래프 위쪽은 간격에 따른 두 번째/첫 번째 펄스 끝 전류 비입니다. 간격이 짧을수록 비가 1에서 멀어지면 간격 정보가 전류에 남는다는 뜻입니다. 직렬 RC로도 같은 명령을 돌려 비교합니다. 간격 0.05 s처럼 짧은 값은 PC 타이밍 한계(A0-4)에 걸리므로 기록된 시각을 확인합니다.</p>
+</section>
+<section id="a1-5.-eis-퍼텐쇼스탯이-있으면" class="level3">
+<h3 class="anchored" data-anchor-id="a1-5.-eis-퍼텐쇼스탯이-있으면">A1-5. EIS (퍼텐쇼스탯이 있으면)</h3>
+<p>이 코드 묶음에는 EIS 스크립트가 없습니다. 퍼텐쇼스탯 자체 소프트웨어로 측정합니다.</p>
+<ul>
+<li>임피던스 스펙트럼의 반원 지름을 <strong>항상 고분자 벌크 저항으로 읽을 수는 없습니다.</strong> 이 소자에는 두 고분자 벌크, 접합 계면, 두 전극 계면이 있어 반원이 겹치거나 여러 개로 나타날 수 있습니다.</li>
+<li>진폭을 바꿔(예: 5, 10, 20 mV) 스펙트럼이 같은지(선형성), 측정 전후가 같은지(정상성)를 먼저 봅니다.</li>
+<li>등가 회로는 가장 단순한 것부터 맞추고, 더 복잡한 모델을 쓰려면 한 층 소자·두께를 바꾼 소자에서 각 성분이 예상대로 변하는지로 근거를 댑니다. 맞춘 값은 "이 모델·이 주파수 범위에서의 값"으로 보고합니다.</li>
+</ul>
+</section>
+<section id="a1-6.-특성표" class="level3">
+<h3 class="anchored" data-anchor-id="a1-6.-특성표">A1-6. 특성표</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>값</th>
+<th>지지하는 관측 (파일 이름)</th>
+<th>아직 배제하지 못한 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>쓸 전압 범위</td>
+<td></td>
+<td>A1-1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>그 범위의 전류 최소·최대</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>흔적이 줄어드는 시간 규모 (A1-3, A1-4)</td>
+<td></td>
+<td></td>
+<td>지수 하나로 맞는지도 적기</td>
+</tr>
+<tr class="even">
+<td>100회 반복 후 변화</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>소자 간 편차 (3개 이상)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>온도·습도 의존</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>이 표의 전압·전류 범위가 <a href="../projects/b.html#b4">B의 부품 선택</a>을 정합니다.</p>
+</section>
+</section>
+<section id="a2" class="level2">
+<h2 class="anchored" data-anchor-id="a2">A2. 작은 합성 과제: "끝만 읽어도 앞을 기억하는가"</h2>
+<p>A0-2의 과제를 실제 소자로 합니다. 정답이 분명한 작은 과제로 "흔적이 분류에 쓸모 있는가"를 묻습니다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/f5-encode.svg" class="img-fluid figure-img" alt="입력 세 개가 마스크 네 개의 펄스 열두 개가 되고 펄스 끝 전류가 특징이 되는 그림, ECG 설정의 시간 계산"></p>
+<figcaption>그림 ⑤ 입력이 펄스와 특징으로 바뀌는 과정과 걸리는 시간 — <strong>개념도</strong>. 막대 높이는 이 페이지의 설정값으로 계산했습니다.</figcaption>
+</figure>
+</div>
+<ul>
+<li>입력 12칸 중 높은 값 3개가 <strong>앞쪽(0–3칸)</strong>이면 클래스 0, <strong>뒤쪽(4–7칸)</strong>이면 클래스 1. 8–11칸은 모든 시행에서 같은 낮은 값입니다.</li>
+<li>각 칸 = 마스크 4개의 펄스 (그림 ⑤). <code>--end-only</code>는 8–11칸 동안의 전류 16개만 씁니다.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tasks.py timing task_a2.npz <span class="at">--n</span> 40</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task_a2.npz runs/a2_dev01 <span class="at">--limit</span> 10</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_run.py runs/a2_dev01 <span class="at">--trial</span> 0</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task_a2.npz runs/a2_dev01</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/a2_dev01/checkpoint.npz task_a2.npz <span class="at">--out</span> a2_dev01.joblib <span class="at">--end-only</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/a2_dev01/checkpoint.npz task_a2.npz <span class="at">--out</span> a2_dev01_full.joblib</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>먼저 10시행만 재고 그래프·compliance·실제 펄스 길이를 확인한 뒤 나머지를 이어서 잽니다. 같은 과제를 <strong>1 MΩ 저항, 직렬 RC, 한 층 소자</strong>로도 잽니다 (폴더 이름만 바꿔서).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>측정</th>
+<th>끝만 읽기 균형 정확도</th>
+<th>전체 읽기 균형 정확도</th>
+<th>라벨 섞기 확인</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>입력 그대로</td>
+<td>0.5 (구조상)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1 MΩ 저항</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>직렬 RC</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>한 층 소자</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>접합 소자</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>시행이 적으면 우연히 0.6–0.7이 나올 수 있습니다 (A0-2의 모의 저항처럼). 같은 측정을 다른 날 한 번 더 하고, 두 결과가 같은 방향인지 봅니다.</li>
+<li>직렬 RC도 0.5보다 높게 나올 수 있습니다. 그렇다면 "용량성 흔적만으로도 이 과제가 풀린다"는 뜻이고, 소자가 RC와 무엇이 다른지가 다음 질문입니다.</li>
+</ul>
+<p><strong>기억 용량(MC, memory capacity) — 같이 재면 좋은 지표.</strong> 무작위 입력 600개를 한 줄로 걸고, 지금 상태로 d걸음 전 입력을 맞히는 정도를 봅니다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tasks.py mc mc_input.npz <span class="at">--n</span> 600</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json mc_input.npz runs/mc_dev01</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> mc.py runs/mc_dev01/checkpoint.npz mc_input.npz <span class="at">--M</span> 4</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="code/python/mc.py">mc.py</a>는 앞 50걸음을 버리고(washout), 앞 2/3로 학습·뒤 1/3로 평가하며, <strong>독립 무작위 목표로 같은 계산을 한 null 값</strong>보다 큰 부분(<code>MC_excess</code>)만 셉니다. MC는 "이 입력 통계에서 선형으로 꺼낼 수 있는 과거 정보의 양"이지 좋은 레저버의 인증서가 아닙니다.</p>
+</section>
+<section id="a3" class="level2">
+<h2 class="anchored" data-anchor-id="a3">A3. (선택) ECG 박동으로 확장</h2>
+<p>A2에서 수준 2 이상이 되었을 때 진행합니다.</p>
+<p><strong>데이터와 라벨.</strong> PhysioNet의 MIT-BIH 부정맥 DB. 표준(AAMI) 묶음으로 클래스 0 = <strong>N 묶음</strong>(정상 N, 좌각차단 L, 우각차단 R, 심방·접합부 이탈 e·j = "비이소성 박동"), 클래스 1 = <strong>V 묶음</strong>(심실조기수축 V, 심실 이탈 E = "심실 이소성 박동")을 가릅니다. "정상 대 비정상"이 아니며, 클래스 이름은 결과 파일의 <code>class_names</code>에도 저장됩니다.</p>
+<p><strong>분할.</strong> 관행적 분할(DS1 학습 / DS2 시험)을 쓰되, PhysioNet 설명에 따르면 <strong>201과 202는 같은 사람의 기록</strong>입니다. <a href="code/python/ecg_prep.py">ecg_prep.py</a>는 기본으로 202를 시험에서 빼고, 사람 번호를 <code>groups</code>에 넣어 내부 교차검증도 사람 단위로 나눕니다.</p>
+<p><strong>전처리는 '오프라인' 경로입니다.</strong> 전체 기록·전문가 R파 주석·앞뒤를 보는 필터를 씁니다. 실시간 장치는 R파를 스스로 찾고 미래 샘플을 볼 수 없으므로 다른 과제입니다. 360 Hz → 36 Hz로 줄일 때 안티앨리어싱 필터가 들어간 <code>resample_poly</code>를 쓰고, 이때 <strong>18 Hz 이상 성분이 사라져</strong> QRS의 날카로운 모양·폭 정보가 무뎌집니다. 그래서 이 결과는 "36 Hz로 줄인 박동 모양에서의 구별"이고, 원 신호 전체를 쓴 분류와 직접 비교할 수 없습니다. 리드는 이름이 MLII인 채널을 고릅니다.</p>
+<p><strong>시간.</strong> 박동 하나 = 25칸 × 마스크 4 × θ 50 ms = 5초 + 쉬기 2초 ≈ 7초 (그림 ⑤). 600박동이면 명목 70분에 통신·읽기 시간이 더해집니다. <strong>저장된 박동을 하나씩 재생하는 실험이고, 실시간 처리가 아닙니다.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> ecg_prep.py ecg_set.npz <span class="at">--train</span> 200 <span class="at">--test</span> 100</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json ecg_set.npz runs/ecg_dev01 <span class="at">--limit</span> 10</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json ecg_set.npz runs/ecg_dev01</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/ecg_dev01/checkpoint.npz ecg_set.npz <span class="at">--out</span> ecg_dev01.joblib</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>첫 줄은 PhysioNet에서 기록을 내려받습니다 (인터넷 필요, 이 줄은 아직 실행 검증하지 않음). <a href="code/python/readout.py">readout.py</a>는 표준화를 분류기와 한 Pipeline에 넣어 교차검증 fold 안에서만 맞추고, 사람 단위 <code>GroupKFold</code>로 정규화 강도를 고르며, 시험 데이터는 마지막에 한 번만 씁니다. 비교는 A2와 같은 줄(입력 그대로, 저항, RC, 소자) + 같은 특징 수의 디지털 기준 모델입니다. 측정 조건·특징 수·분할을 표에 같이 적고, 빈칸은 측정하기 전까지 비워 둡니다.</p>
+<p>정확도가 낮을 때 원인을 τ 하나로 정하지 않습니다. 인코딩(θ, 마스크, 전압 범위), 다운샘플링으로 잃은 정보, 소자 drift, 시행 수, 라벨 묶음의 어려움이 모두 후보입니다.</p>
+</section>
+<section id="문제-해결" class="level2">
+<h2 class="anchored" data-anchor-id="문제-해결">문제 해결</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>증상</th>
+<th>확인 순서</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>python</code>을 찾을 수 없음</td>
+<td>Python 설치 때 "Add to PATH" 체크, 명령 프롬프트 다시 열기</td>
+</tr>
+<tr class="even">
+<td><code>No such file</code></td>
+<td>명령 프롬프트가 <code>python</code> 폴더에서 열렸는지 (A0-1의 2)</td>
+</tr>
+<tr class="odd">
+<td>장비 목록이 비어 있음</td>
+<td>NI MAX에 보이는지 → 어댑터 드라이버 → 장비 통신 설정(주소·인터페이스)</td>
+</tr>
+<tr class="even">
+<td><code>2400 계열이 아닙니다</code></td>
+<td>모델이 다름 → <code>smu.py</code>를 모델에 맞게 수정</td>
+</tr>
+<tr class="odd">
+<td>전류가 compliance 값에 붙음</td>
+<td>전압 낮추기, 두 ITO가 직접 닿았는지(합선)</td>
+</tr>
+<tr class="even">
+<td>이어서 하기가 거부됨</td>
+<td>설정·입력 파일이 바뀜 → 새 폴더 이름으로 (의도된 동작)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ai에게-맡길-때" class="level2">
+<h2 class="anchored" data-anchor-id="ai에게-맡길-때">AI에게 맡길 때</h2>
+<pre class="text"><code>첨부한 smu.py는 Keithley 2400용이야. 내 장비는 [모델]이고 [연결 방식]으로 연결해.
+같은 클래스 구조(open/enable/set_v/read/hold/close, 출력 자동 켜짐 없음, close에서 0 V→OFF를
+단계별로 시도하고 실패 기록, compliance 상태 기록)를 유지하면서 이 모델 명령으로 바꿔 줘.
+바꾼 명령마다 설명서의 어느 절을 근거로 했는지 적고, 확실하지 않은 것은 표시해 줘.</code></pre>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../projects/index.html" class="pagination-link" aria-label="프로젝트">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">프로젝트</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../projects/b.html" class="pagination-link" aria-label="B. 작은 보드로 독립 동작">
+        <span class="nav-page-text">B. 작은 보드로 독립 동작</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

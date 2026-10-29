@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13" role="img" aria-label="입력 L개가 마스크 M개의 펄스로 바뀌고 펄스 끝 전류가 특징 L×M개가 되는 과정과 시간">
+  <rect width="760" height="330" fill="#ffffff"/>
+  <text x="20" y="24" fill="#1f2937" font-weight="600">입력 u 3개 × 마스크 M=4 → 펄스 12개 → 특징 12개 (그림은 L=3만 표시)</text>
+  <!-- inputs -->
+  <g font-size="12" fill="#6b7280"><text x="20" y="60">입력 u</text></g>
+  <g fill="#cbd5e1" stroke="#6b7280"><rect x="90" y="55" width="40" height="30"/><rect x="250" y="40" width="40" height="45"/><rect x="410" y="70" width="40" height="15"/></g>
+  <text x="96" y="100" font-size="12">u₁=0.6</text><text x="256" y="100" font-size="12">u₂=0.9</text><text x="416" y="100" font-size="12">u₃=0.3</text>
+  <!-- axes -->
+  <line x1="70" y1="230" x2="740" y2="230" stroke="#9ca3af"/><text x="700" y="248" fill="#6b7280" font-size="12">시간</text>
+  <line x1="70" y1="120" x2="70" y2="230" stroke="#9ca3af"/><text x="24" y="134" fill="#6b7280" font-size="12">V [V]</text>
+  <!-- rest -->
+  <text x="74" y="222" font-size="11" fill="#6b7280">← 쉬기 rest</text>
+  <!-- pulses: mask .84 .43 .97 .61 ; VA 0.8 ; scale 100px per V -->
+  <g fill="#eef2fb" stroke="#2b59c3">
+    <rect x="160" y="190" width="30" height="40"/><rect x="190" y="209" width="30" height="21"/><rect x="220" y="183" width="30" height="47"/><rect x="250" y="201" width="30" height="29"/>
+    <rect x="290" y="170" width="30" height="60"/><rect x="320" y="199" width="30" height="31"/><rect x="350" y="160" width="30" height="70"/><rect x="380" y="186" width="30" height="44"/>
+    <rect x="420" y="210" width="30" height="20"/><rect x="450" y="220" width="30" height="10"/><rect x="480" y="207" width="30" height="23"/><rect x="510" y="215" width="30" height="15"/>
+  </g>
+  <g fill="#7c3aed">
+    <circle cx="188" cy="186" r="3.5"/><circle cx="218" cy="205" r="3.5"/><circle cx="248" cy="179" r="3.5"/><circle cx="278" cy="197" r="3.5"/>
+    <circle cx="318" cy="166" r="3.5"/><circle cx="348" cy="195" r="3.5"/><circle cx="378" cy="156" r="3.5"/><circle cx="408" cy="182" r="3.5"/>
+    <circle cx="448" cy="206" r="3.5"/><circle cx="478" cy="216" r="3.5"/><circle cx="508" cy="203" r="3.5"/><circle cx="538" cy="211" r="3.5"/>
+  </g>
+  <text x="160" y="148" font-size="12" fill="#2b59c3">높이 = V0 + VA·u·mask[j]</text>
+  <text x="560" y="190" font-size="12" fill="#7c3aed">● 펄스 끝 읽기</text>
+  <text x="560" y="208" font-size="12" fill="#7c3aed">= 특징(상태) 하나</text>
+  <line x1="160" y1="244" x2="190" y2="244" stroke="#1f2937"/><text x="160" y="260" font-size="12">θ</text>
+  <!-- numbers -->
+  <g font-size="12.5" fill="#1f2937">
+    <text x="20" y="288">ECG 설정 예: L=25, M=4, θ=50 ms → 특징 100개, 펄스 구간 25×4×0.05 = 5 s + 쉬기 2 s = 입력 하나에 약 7 s (+ 통신·읽기 시간)</text>
+    <text x="20" y="308">→ 박동(약 0.6–1 s마다)을 들어오는 대로 처리하는 '실시간'이 아니다. 저장된 박동을 하나씩 재생하는 실험이다.</text>
+  </g>
+  <text x="20" y="326" fill="#6b7280" font-size="12">개념도 · 막대 높이는 V0=0, VA=0.8 V, mask = 0.84·0.43·0.97·0.61로 계산한 값</text>
+</svg>

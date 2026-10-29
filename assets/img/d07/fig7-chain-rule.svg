@@ -1,4 +1,4 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 352' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 368' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
 <text x='300' y='20' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >두 단계 사슬 입력 → 은닉 → 출력: 앞쪽 가중치의 기울기는 '기울기들의 곱'이다</text>
 <rect x='12' y='72' width='100' height='36' rx='8' fill='#fff' stroke='#e08a3c' stroke-width='1.2' />
@@ -32,5 +32,6 @@
 <text x='60' y='264' font-size='11.5' fill='#444' text-anchor='start' font-weight='normal' >w₂의 기울기 = (∂L/∂y)·(∂y/∂w₂) = (−8) × 2 = −16</text>
 <text x='60' y='286' font-size='11.5' fill='#c8553d' text-anchor='start' font-weight='bold' >w₁의 기울기 = (∂L/∂y)·(∂y/∂h)·(∂h/∂w₁) = (−8) × 0.5 × 2 = −8</text>
 <text x='60' y='306' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >w₁의 변화는 w₂라는 '통로'를 지나서야 L에 닿는다. 통로가 k개면 그 배율이 k번 곱해진다(2구간).</text>
-<text x='300' y='338' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >확인: w₁을 1.0 → 1.1로 바꾸면 L은 16 → 15.21, 변화 −0.79 ÷ 0.1 = −7.9 ≈ −8. 숫자는 코드가 계산했다. (Claude가 계산해 그림)</text>
+<text x='300' y='338' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >확인: w₁을 1.0 → 1.1로 바꾸면 L은 16 → 15.21, 변화 −0.79 ÷ 0.1 = −7.9 ≈ −8.</text>
+<text x='300' y='356' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >숫자는 코드가 계산했다. (Claude가 계산해 그림)</text>
 </svg>

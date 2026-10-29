@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 36. 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2) – Why Ions Compute</title>
+<title>Day 38. 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2) – Why Ions Compute?</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,7 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../days/d21.html" rel="next">
+<link href="../days/d21a.html" rel="next">
 <link href="../days/d20a.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -47,18 +47,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
-  "collapse-after": 3,
+  "collapse-after": 2,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    "/"
   ],
   "language": {
     "search-no-results-text": "일치 없음",
@@ -129,7 +127,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Why Ions Compute</span>
+    <span class="navbar-title">Why Ions Compute?</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="검색"></div>
@@ -140,46 +138,27 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
-<span class="menu-text">커버</span></a>
+<span class="menu-text">홈</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../plan.html"> 
-<span class="menu-text">전체 학습 지도</span></a>
+<span class="menu-text">로드맵</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">장부</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
-        <li>
-    <a class="dropdown-item" href="../ledger/bottleneck.html">
- <span class="dropdown-text">병목 장부</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/unknowns.html">
- <span class="dropdown-text">아직 모르는 것</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/glossary.html">
- <span class="dropdown-text">용어집</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/kill-criteria.html">
- <span class="dropdown-text">접는 기준</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/references.html">
- <span class="dropdown-text">참고문헌</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/questions.html">
- <span class="dropdown-text">질문 모음</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" href="../rules.html"> 
-<span class="menu-text">공부 규칙</span></a>
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -192,7 +171,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d19a.html">Phase 4 · 왜 이온 고분자인가</a></li><li class="breadcrumb-item"><a href="../days/d20b.html">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d19a.html">Phase 4 · 왜 이온 고분자인가</a></li><li class="breadcrumb-item"><a href="../days/d20b.html">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -213,7 +192,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">전체 학습 지도</span></a>
+ <span class="menu-text">로드맵</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -270,7 +249,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -311,7 +290,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -322,44 +301,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
   </div>
 </li>
       </ul>
@@ -376,67 +361,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
   </div>
 </li>
       </ul>
@@ -453,49 +444,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20b.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
   </div>
 </li>
       </ul>
@@ -512,69 +527,93 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">장부</span></a>
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -582,46 +621,28 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">병목 장부</span></a>
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">아직 모르는 것</span></a>
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">용어집</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">접는 기준</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">참고문헌</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">질문 모음</span></a>
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rules.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">공부 규칙</span></a>
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
   </div>
 </li>
     </ul>
@@ -644,9 +665,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d19a.html">Phase 4 · 왜 이온 고분자인가</a></li><li class="breadcrumb-item"><a href="../days/d20b.html">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d19a.html">Phase 4 · 왜 이온 고분자인가</a></li><li class="breadcrumb-item"><a href="../days/d20b.html">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Day 36. 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</h1>
+<h1 class="title">Day 38. 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</h1>
 <p class="subtitle lead">Phase 4 · 왜 이온성 고분자인가</p>
 </div>
 
@@ -666,8 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> — 이온이 물질 안으로 들어가거나 좁은 채널을 지날 때 어떤 기억과 비선형이 생기나?</p>
-<p><strong>배울 핵심</strong> — 산화·환원과 전기화학 도핑이 만드는 여러 시간상수, 나노채널 벽 전하의 이온 선택성, 메커니즘별 휘발성·시간상수·가역성 대응표</p>
-<p><strong>이후 쓰이는 곳</strong> — Day 37 시간척도를 정하는 것, Day 38 고분자 화학 → 시간상수, Day 41–42 논문 평가, Day 47–48 메커니즘을 가르는 대조 실험</p>
+<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> — 느린 전류 감소가 도핑·삽입인지, 침전인지, EDL인지를 가르려면 메커니즘마다 휘발성·시간상수·가역성이 다르다는 것을 알아야 합니다. step response를 지수 몇 개로 맞출 때 각 τ를 어느 메커니즘에 붙일지 판단하는 근거입니다.</p>
+<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> — 입력: 전압·전류 펄스 → 이온이 물질 안으로 들어가(도핑·삽입·산화환원) 또는 좁은 나노채널의 벽 전하에 걸러짐 → 출력: 여러 시간상수로 줄고 회복되는 전류, 이온 선택적 I–V 고리.</p>
+<p><strong>오늘 반드시</strong> — 이온이 계면에 머물면(EDL) 짧게 기억하고, 물질 안으로 들어가면(도핑·삽입) 길고 시간상수가 여럿인 기억이 된다. 메커니즘마다 휘발성·시간상수·가역성을 하나씩 적는다.</p>
+<p><strong>나중에 더 봐도 되는 것</strong> — 다중 지수 맞춤의 귀속 논쟁, 나노유체 계산의 세부, 6-2 연구 현황 목록.</p>
+<p><strong>다음으로 넘어가는 기준</strong> — '오늘 반드시'를 내 말로 한두 문장 말할 수 있으면 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 39–40 시간척도를 정하는 것, Day 41–42 고분자 화학 → 시간상수, Day 47–48 논문 평가, Day 53–56 메커니즘을 가르는 대조 실험</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d20b">
@@ -678,7 +703,7 @@ window.Quarto = {
 <section id="review" class="level2">
 <h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
 <div class="flow-line">
-<p>지난 학습 단위(Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1))의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+<p>지난 학습 단위(Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1))의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
 </div>
 <div class="quiz" data-day="d20" data-set="review-b"></div>
 </section>
@@ -690,55 +715,56 @@ window.Quarto = {
 <div class="goal">
 <p>이 구간을 읽고 나면 전자가 계면을 건너는지(산화·환원)로 EDL과 도핑을 구분하고, 이온이 계면에 머무는 경우(EDL)와 고분자·결정 안으로 들어가는 경우(도핑·삽입)의 차이를 단계별로 설명하며, 같은 트랜지스터에서 시간상수가 여럿 나오는 이유와 그 귀속이 왜 아직 가설인지 말할 수 있다.</p>
 </div>
-<p>앞 학습 단위의 두 메커니즘에서 이온은 계면 앞에 모이거나(<a href="../days/d20a.html#ch-edl">Day 35 2구간: EDL</a>) 한 영역에서 빠지고 쌓였습니다(<a href="../days/d20a.html#ch-polarization">Day 35 3구간: 농도 분극</a>). 두 경우 모두 이온은 물질 <strong>바깥</strong>이나 통로에 머물고, 고분자나 전극 자체는 바뀌지 않았습니다. 이번에는 이온이 물질 <strong>안으로</strong> 들어가 물질의 상태를 바꾸는 경우입니다.</p>
+<p><strong>상황.</strong> 전압 펄스 뒤 전류가 수 초에서 수백 초에 걸쳐 천천히 돌아오고, 그 곡선이 지수 하나로는 맞지 않는 소자를 생각합니다. 이 느린 회복이 앞의 EDL·접합 메커니즘과 어떻게 다른지, 왜 시간상수가 여럿 나오는지가 이 구간의 질문입니다.</p>
+<p>앞 학습 단위의 두 메커니즘에서 이온은 계면 앞에 모이거나(<a href="../days/d20a.html#ch-edl">Day 37 2구간: EDL</a>) 한 영역에서 빠지고 쌓였습니다(<a href="../days/d20a.html#ch-polarization">Day 37 3구간: 농도 분극</a>). 두 경우 모두 이온은 물질 <strong>바깥</strong>이나 통로에 머물고, 고분자나 전극 자체는 바뀌지 않았습니다. 이번에는 이온이 물질 <strong>안으로</strong> 들어가 물질의 상태를 바꾸는 경우입니다.</p>
 <div id="b-ec-doping" class="basics">
 <section id="전기화학-도핑intercalation산화환원" class="level4">
 <h4 class="anchored" data-anchor-id="전기화학-도핑intercalation산화환원">전기화학 도핑·intercalation·산화환원</h4>
 <p><strong>① 왜 필요한가.</strong> EDL은 1초도 안 되어 잊습니다. 수십 초–수천 초, 때로는 거의 영구적인 상태가 필요할 때 이온 소자가 쓰는 길은 이온을 <strong>물질 안으로 집어넣는 것</strong>입니다.</p>
 <p><span id="s-redox"></span><strong>② 무엇인가: 먼저 '전자가 계면을 건너는가'.</strong> EDL을 배울 때 비패러데이(전자가 계면을 건너지 않음)와 패러데이(전자가 건너 물질이 바뀜)를 나눴습니다. 이 구간의 메커니즘은 모두 패러데이 쪽, 곧 <strong>산화·환원</strong>이 끼는 과정입니다. 화학 용어부터 그림으로 봅니다. 그림 5의 세 칸에서 '전자(e⁻)가 어디서 어디로 가는지'만 따라가세요.</p>
-<figure class="fig figure"><img src="../assets/img/d20/fig-redox.svg" alt="세 칸 비교. ① 비패러데이(EDL): 금속 전극 쪽 전자와 용액 쪽 K⁺가 마주 볼 뿐 계면을 건너는 전자가 없다. ② 패러데이(은 전극): 표면의 은 원자가 전자 하나를 금속에 내주고 Ag⁺가 되어 Cl⁻와 AgCl을 만든다(Ag + Cl⁻ → AgCl + e⁻, 산화). ③ 전기화학 도핑: 고분자 사슬이 전자를 금속 접점에 내주어 정공(+)이 생기고 전해질의 음이온 A⁻가 들어와 전하를 맞춘다" class="figure-img"><figcaption><b>그림 5.</b> 전자가 계면을 건너는가(모식도). ① EDL: 금속 쪽 전자와 용액 쪽 K⁺가 마주 볼 뿐 계면을 건너는 전자가 없다(비패러데이). ② 은 전극: 은 원자가 전자 하나를 금속에 내주고 Ag⁺가 되어 Cl⁻와 고체 AgCl을 만든다. 전자를 잃는 것이 산화, 반대로 얻는 것이 환원이다(패러데이). ③ 고분자 채널: 사슬이 전자를 금속 접점에 내주어(산화) 정공이 생기고, 그 양전하를 맞추려 전해질의 음이온이 고분자 안으로 들어온다. 이것이 전기화학 도핑이다. 원자·이온의 수와 위치는 보기용이다. (Claude가 그림, 모식도)</figcaption></figure>
+<figure class="fig figure"><img src="../assets/img/d20/fig-redox.svg" alt="세 칸 비교. (a) 비패러데이(EDL): 금속 전극 쪽 전자와 용액 쪽 K⁺가 마주 볼 뿐 계면을 건너는 전자가 없다. (b) 패러데이(은 전극): 표면의 은 원자가 전자 하나를 금속에 내주고 Ag⁺가 되어 Cl⁻와 AgCl을 만든다(Ag + Cl⁻ → AgCl + e⁻, 산화). (c) 전기화학 도핑: 고분자 사슬이 전자를 금속 접점에 내주어 정공(+)이 생기고 전해질의 음이온 A⁻가 들어와 전하를 맞춘다" class="figure-img"><figcaption><b>그림 5.</b> 전자가 계면을 건너는가(모식도). <b>(a)</b> EDL: 금속 쪽 전자와 용액 쪽 K⁺가 마주 볼 뿐 계면을 건너는 전자가 없다(비패러데이). <b>(b)</b> 은 전극: 은 원자가 전자 하나를 금속에 내주고 Ag⁺가 되어 Cl⁻와 고체 AgCl을 만든다. 전자를 잃는 것이 산화, 반대로 얻는 것이 환원이다(패러데이). <b>(c)</b> 고분자 채널: 사슬이 전자를 금속 접점에 내주어(산화) 정공이 생기고, 그 양전하를 맞추려 전해질의 음이온이 고분자 안으로 들어온다. 이것이 전기화학 도핑이다. 원자·이온의 수와 위치는 보기용이다. (Claude가 그림, 모식도)</figcaption></figure>
 <p>그림 5를 칸마다 읽습니다.</p>
 <ul>
-<li><strong>①</strong> 금속 쪽 전자와 용액 쪽 K⁺가 마주 보기만 합니다. 계면을 건너는 전자가 없으니 물질은 그대로이고, 전압을 끄면 이온이 흩어져 원래대로 돌아갑니다(EDL).</li>
-<li><strong>②</strong> 표면의 은 원자 Ag가 전자 하나를 금속에 내주고 Ag⁺가 되며, 용액의 Cl⁻와 붙어 고체 AgCl이 됩니다. 전자를 <strong>잃는</strong> 것을 <strong>산화</strong>(oxidation)라 합니다. 거꾸로 전극에서 전자를 받아 AgCl이 Ag와 Cl⁻로 돌아가는 것은 전자를 <strong>얻는</strong> <strong>환원</strong>(reduction)입니다. 둘을 묶어 산화환원(redox)이라 부릅니다. 원자가 전자를 잃거나 얻어 이온이 된다는 것은 <a href="../days/d19a.html#b-ion-electron">Day 33 기초: 전자와 이온</a>에서 봤습니다.</li>
-<li><strong>③</strong> 전자를 나를 수 있는 고분자 사슬이 전자 하나를 금속 접점에 내줍니다(사슬이 산화됨). 전자가 빠진 자리가 양전하 <strong>정공</strong>(hole)이고, 그 양전하를 맞추려고 전해질의 음이온 A⁻가 고분자 안으로 들어옵니다. ②와 같은 산화이지만, 바뀐 것이 '고분자 사슬의 전자 수', 곧 전류를 나를 정공의 수라는 점이 다릅니다.</li>
+<li><strong>(a)</strong> 금속 쪽 전자와 용액 쪽 K⁺가 마주 보기만 합니다. 계면을 건너는 전자가 없으니 물질은 그대로이고, 전압을 끄면 이온이 흩어져 원래대로 돌아갑니다(EDL).</li>
+<li><strong>(b)</strong> 표면의 은 원자 Ag가 전자 하나를 금속에 내주고 Ag⁺가 되며, 용액의 Cl⁻와 붙어 고체 AgCl이 됩니다. 전자를 <strong>잃는</strong> 것을 <strong>산화</strong>(oxidation)라 합니다. 거꾸로 전극에서 전자를 받아 AgCl이 Ag와 Cl⁻로 돌아가는 것은 전자를 <strong>얻는</strong> <strong>환원</strong>(reduction)입니다. 둘을 묶어 산화환원(redox)이라 부릅니다. 원자가 전자를 잃거나 얻어 이온이 된다는 것은 <a href="../days/d19a.html#b-ion-electron">Day 35 기초: 전자와 이온</a>에서 봤습니다.</li>
+<li><strong>(c)</strong> 전자를 나를 수 있는 고분자 사슬이 전자 하나를 금속 접점에 내줍니다(사슬이 산화됨). 전자가 빠진 자리가 양전하 <strong>정공</strong>(hole)이고, 그 양전하를 맞추려고 전해질의 음이온 A⁻가 고분자 안으로 들어옵니다. (b)와 같은 산화이지만, 바뀐 것이 '고분자 사슬의 전자 수', 곧 전류를 나를 정공의 수라는 점이 다릅니다.</li>
 </ul>
 <p>이제 세 메커니즘을 이름으로 정리합니다. 셋은 겹치지만 강조점이 다릅니다.</p>
 <ul>
-<li><strong>전기화학 도핑</strong>(electrochemical doping). 그림 5 ③입니다. 전자와 이온을 함께 나를 수 있는 고분자(공액 고분자: 단일·이중 결합이 번갈아 이어져 사슬을 따라 전하가 움직일 수 있는 고분자, 예: PEDOT, PDPP3T)를 채널로 쓰는 트랜지스터를 생각합니다. 게이트에 (−) 전압을 걸면 전해질의 음이온(TFSI⁻ 등)이 고분자 <strong>안으로</strong> 들어갑니다. 고분자가 중성을 유지하려면 그만큼 양전하, 즉 정공(전자가 빠진 자리)이 고분자 사슬에 생겨야 하고, 정공이 늘면 채널이 전기를 잘 통합니다. 이온의 양이 고분자의 <strong>전자적 운반자 수</strong>를 정하는 것입니다. 반도체 공장의 도핑이 제조 때 고정되는 것과 달리, 이것은 전압으로 넣고 뺄 수 있습니다. Aluru 리뷰는 이 점을 "동적이고 가역적인 과정"이라 부릅니다. <span class="src">Aluru 2026, p.597</span> Day 33–34의 OECT(PEDOT:PSS)는 처음부터 정공이 있는 채널에 <strong>양이온</strong>을 넣어 정공을 없애며 끄는 공핍형이었습니다(<a href="../days/d19b.html#b-oect">Day 34 기초: OECT</a>). 이 구간에서 볼 소자(Lee 2024 (AFM)의 PDPP3T 채널)는 방향이 반대인 <strong>축적형</strong>입니다. 정공이 적은 채널에 (−) 게이트로 <strong>음이온</strong>을 넣어 정공을 만들며 켭니다. 저자들도 이 소자를 OECT라 부릅니다. <span class="src">Lee 2024 (AFM), p.2</span></li>
-<li><span id="s-intercalation"></span><strong>삽입</strong>(intercalation). 결정의 층 사이나 빈자리로 이온이 끼어 들어가는 것. 리튬 전지의 흑연 전극이 대표적입니다 <span class="prov">폴더 밖 일반 지식</span>. 논문 예는 수소 이온(양성자)을 넣은 니켈산화물 소자로, 저자들은 양성자의 재배치로 <strong>나노초 규모</strong>의 과도 응답과 안정된 다단계 저항 상태를 함께 얻었다고 보고합니다. <span class="src">Zhou 2026 (Nat. Nanotech.), p.579</span> 이온도 nm 크기의 고체 속에서는 빠를 수 있다는 예이고, Day 37의 "느림은 크기의 문제"와 이어집니다.</li>
-<li><strong>산화환원</strong>(redox). 그림 5 ②처럼 전자가 계면을 건너가 물질의 산화 상태가 바뀌는 패러데이 반응. 도핑에도 산화·환원이 따르고, 전극(예: Ag/AgCl)에서도 일어납니다. 반응이 일어나는 빠르기(전류)는 전극 전위가 평형 전위에서 벗어난 정도(<strong>과전압</strong>)에 지수적으로 기댑니다. 교과서의 Butler–Volmer 식에서 대칭 계수를 0.5로 두면, 과전압이 충분히 클 때 25 °C에서 과전압이 약 120 mV 늘 때마다 전류가 약 10배가 됩니다 [가정: 대칭 계수 0.5]. 전압을 조금 더 주면 반응이 훨씬 빨라지는 강한 비선형입니다. <span class="prov">폴더 밖 교과서 내용</span></li>
+<li><strong>전기화학 도핑</strong>(electrochemical doping). 그림 5(c)입니다. 전자와 이온을 함께 나를 수 있는 고분자(공액 고분자(conjugated polymer): 단일·이중 결합이 번갈아 이어져 사슬을 따라 전하가 움직일 수 있는 고분자, 예: PEDOT, PDPP3T)를 채널로 쓰는 트랜지스터를 생각합니다. 게이트에 (−) 전압을 걸면 전해질의 음이온(TFSI⁻ 등)이 고분자 <strong>안으로</strong> 들어갑니다. 고분자가 중성을 유지하려면 그만큼 양전하, 즉 정공(전자가 빠진 자리)이 고분자 사슬에 생겨야 하고, 정공이 늘면 채널이 전기를 잘 통합니다. 이온의 양이 고분자의 <strong>전자적 운반자 수</strong>를 정하는 것입니다. 반도체 공장의 도핑이 제조 때 고정되는 것과 달리, 이것은 전압으로 넣고 뺄 수 있습니다. Aluru 리뷰는 이 점을 "동적이고 가역적인 과정"이라 부릅니다. <span class="src">Aluru 2026, p.597</span> Day 35–36의 OECT(PEDOT:PSS)는 처음부터 정공이 있는 채널에 <strong>양이온</strong>을 넣어 정공을 없애며 끄는 공핍형이었습니다(<a href="../days/d19b.html#b-oect">Day 36 기초: OECT</a>). 이 구간에서 볼 소자(Lee 2024 (AFM)의 PDPP3T 채널)는 방향이 반대인 <strong>축적형</strong>(accumulation mode)입니다. 정공이 적은 채널에 (−) 게이트로 <strong>음이온</strong>을 넣어 정공을 만들며 켭니다. 저자들도 이 소자를 OECT라 부릅니다. <span class="src">Lee 2024 (AFM), p.2</span></li>
+<li><span id="s-intercalation"></span><strong>삽입</strong>(intercalation). 결정의 층 사이나 빈자리로 이온이 끼어 들어가는 것. 리튬 전지의 흑연 전극이 대표적입니다 <span class="prov">폴더 밖 일반 지식</span>. 논문 예는 수소 이온(양성자)을 넣은 니켈산화물 소자로, 저자들은 양성자의 재배치로 <strong>나노초 규모</strong>의 과도 응답과 안정된 다단계 저항 상태를 함께 얻었다고 보고합니다. <span class="src">Zhou 2026 (Nat. Nanotech.), p.579</span> 이온도 nm 크기의 고체 속에서는 빠를 수 있다는 예이고, Day 39–40의 "느림은 크기의 문제"와 이어집니다.</li>
+<li><strong>산화환원</strong>(redox). 그림 5(b)처럼 전자가 계면을 건너가 물질의 산화 상태가 바뀌는 패러데이 반응. 도핑에도 산화·환원이 따르고, 전극(예: Ag/AgCl)에서도 일어납니다. 반응이 일어나는 빠르기(전류)는 전극 전위가 평형 전위에서 벗어난 정도(<strong>과전압</strong>, overpotential)에 지수적으로 기댑니다. 교과서의 Butler–Volmer 식에서 대칭 계수를 0.5로 두면, 과전압이 충분히 클 때 25 °C에서 과전압이 약 120 mV 늘 때마다 전류가 약 10배가 됩니다 [가정: 대칭 계수 0.5]. 전압을 조금 더 주면 반응이 훨씬 빨라지는 강한 비선형입니다. <span class="prov">폴더 밖 교과서 내용</span></li>
 </ul>
-<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/7UD6duur308?start=0&amp;rel=0" title="영상: Organic Electrochemical Transistors for Biological Interfacing" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 전체(0:00–17:46), 약 18분 · 영어·자동 자막).</b> Arm Research, "Organic Electrochemical Transistors for Biological Interfacing - Dr. C. Proctor, Uni. of Cambridge" (2018). <b>볼 이유:</b> 설명란: OECT는 전해질에서 이온을 주입해 유기 반도체 채널 <b>전체 부피</b>의 전도도를 바꾸고, 이온과 전자가 채널 전체에서 결합하기 때문에 다른 트랜지스터보다 전달 컨덕턴스가 크다. 바로 위 '전기화학 도핑'(이온이 고분자 안으로 들어감)을 소자 연구자의 발표로 듣는 용도다. 챕터 표시가 없어 전체를 적었다. 응용은 생체 신호 측정 쪽이다. <b>보고 답할 질문:</b> 발표의 '부피 전체에서의 이온–전자 결합'은 아래 그림 6 ②에서 채널 표면에만 모인 음이온(EDL)과 고분자 안으로 들어간 음이온(도핑) 중 어느 쪽인가? 그렇다면 펄스 뒤 전류가 돌아오는 시간은 EDL만 있을 때보다 길까 짧을까? <span class="vcheck">Claude가 확인한 범위: 제목·채널·설명·길이(영상 내용은 직접 보지 못함)</span></div></div>
-<p><span id="s-doping-steps"></span><strong>③ 무슨 일이 어떤 순서로(트랜지스터 펄스 하나).</strong> 그림 6은 축적형 트랜지스터의 채널을 위에서 아래로 자른 모습입니다. 위가 전해질, 아래 주황 영역이 고분자 채널이고, 채널 안 짙은 칸이 사슬이 가지런히 쌓인 결정 영역입니다. 펄스 전에는 채널에 들어간 음이온도 정공도 거의 없어 전류가 작습니다(그림 6 ①).</p>
-<figure class="fig figure"><img src="../assets/img/d20/fig4-edl-vs-doping.svg" alt="세 칸: 펄스 전에는 채널 고분자에 정공이 거의 없어 드레인 전류가 작음, 게이트에 음전압을 주는 동안 음이온이 채널 표면과 고분자의 비정질·결정 영역 근처로 들어가고 같은 수의 정공이 생겨 전류가 큼, 펄스가 끝나고 수십 초 뒤에는 표면 이온이 먼저 빠지고 깊이 들어간 음이온 일부와 정공이 남아 전류가 처음보다 큼" class="figure-img"><figcaption><b>그림 6.</b> 축적형 유기 트랜지스터 채널에 게이트 펄스 하나를 줄 때 음이온과 정공의 위치(모식도). ① 펄스 전: 채널에 정공이 거의 없어 전류가 작다. ② 게이트 (−): 음이온이 채널 표면(EDL)과 고분자의 비정질·결정 영역 근처로 들어가고, 같은 수의 정공(빨간 테두리 +)이 생겨 전류가 커진다. ③ 펄스 뒤: 표면 EDL이 먼저 흩어지고($\tau_1$), 비정질의 이온이 빠지고($\tau_2$), 깊이 들어간 이온은 천천히 빠져($\tau_3$) 전류가 처음보다 큰 채 남는다. $\tau_1$·$\tau_2$·$\tau_3$을 EDL·비정질·결정 영역에 귀속하는 것은 Lee 2024 (AFM)와 Lee 2025 (structure) 저자들의 해석이고, 감쇠 곡선을 지수 세 개로 맞춘 결과에 기댄다. 각 영역을 따로 측정해 분리한 것은 아니다. (Claude가 그림, 모식도)</figcaption></figure>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/7UD6duur308?start=0&amp;rel=0" title="영상: Organic Electrochemical Transistors for Biological Interfacing" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 전체(0:00–17:46), 약 18분 · 영어·자동 자막).</b> Arm Research, "Organic Electrochemical Transistors for Biological Interfacing - Dr. C. Proctor, Uni. of Cambridge" (2018). <b>볼 이유:</b> 설명란: OECT는 전해질에서 이온을 주입해 유기 반도체 채널 <b>전체 부피</b>의 전도도를 바꾸고, 이온과 전자가 채널 전체에서 결합하기 때문에 다른 트랜지스터보다 전달 컨덕턴스가 크다. 바로 위 '전기화학 도핑'(이온이 고분자 안으로 들어감)을 소자 연구자의 발표로 듣는 용도다. 챕터 표시가 없어 전체를 적었다. 응용은 생체 신호 측정 쪽이다. <b>보고 답할 질문:</b> 발표의 '부피 전체에서의 이온–전자 결합'은 아래 그림 6(b)에서 채널 표면에만 모인 음이온(EDL)과 고분자 안으로 들어간 음이온(도핑) 중 어느 쪽인가? 그렇다면 펄스 뒤 전류가 돌아오는 시간은 EDL만 있을 때보다 길까 짧을까? <span class="vcheck">Claude가 확인한 범위: 제목·채널·설명·길이(영상 내용은 직접 보지 못함)</span></div></div>
+<p><span id="s-doping-steps"></span><strong>③ 무슨 일이 어떤 순서로(트랜지스터 펄스 하나).</strong> 그림 6은 축적형 트랜지스터의 채널을 위에서 아래로 자른 모습입니다. 위가 전해질, 아래 주황 영역이 고분자 채널이고, 채널 안 짙은 칸이 사슬이 가지런히 쌓인 결정(crystalline) 영역이고, 나머지 사슬이 흐트러진 부분이 비정질(amorphous) 영역입니다. 펄스 전에는 채널에 들어간 음이온도 정공도 거의 없어 전류가 작습니다(그림 6(a)).</p>
+<figure class="fig figure"><img src="../assets/img/d20/fig4-edl-vs-doping.svg" alt="세 칸: 펄스 전에는 채널 고분자에 정공이 거의 없어 드레인 전류가 작음, 게이트에 음전압을 주는 동안 음이온이 채널 표면과 고분자의 비정질·결정 영역 근처로 들어가고 같은 수의 정공이 생겨 전류가 큼, 펄스가 끝나고 수십 초 뒤에는 표면 이온이 먼저 빠지고 깊이 들어간 음이온 일부와 정공이 남아 전류가 처음보다 큼" class="figure-img"><figcaption><b>그림 6.</b> 축적형 유기 트랜지스터 채널에 게이트 펄스 하나를 줄 때 음이온과 정공의 위치(모식도). <b>(a)</b> 펄스 전: 채널에 정공이 거의 없어 전류가 작다. <b>(b)</b> 게이트 (−): 음이온이 채널 표면(EDL)과 고분자의 비정질·결정 영역 근처로 들어가고, 같은 수의 정공(빨간 테두리 +)이 생겨 전류가 커진다. <b>(c)</b> 펄스 뒤: 표면 EDL이 먼저 흩어지고($\tau_1$), 비정질의 이온이 빠지고($\tau_2$), 깊이 들어간 이온은 천천히 빠져($\tau_3$) 전류가 처음보다 큰 채 남는다. $\tau_1$·$\tau_2$·$\tau_3$을 EDL·비정질·결정 영역에 귀속하는 것은 Lee 2024 (AFM)와 Lee 2025 (structure) 저자들의 해석이고, 감쇠 곡선을 지수 세 개로 맞춘 결과에 기댄다. 각 영역을 따로 측정해 분리한 것은 아니다. (Claude가 그림, 모식도)</figcaption></figure>
 <div class="stepper">
 <div class="step">
-<p><strong>단계 1 — 펄스 중.</strong> 게이트 전압이 들어오면 음이온이 먼저 채널 표면에 EDL을 만들고(빠름), 일부는 고분자의 비정질(사슬이 흐트러진) 영역으로, 일부는 더 깊이 결정(사슬이 가지런히 쌓인) 영역 근처까지 들어갑니다(느림). 들어간 음이온 하나마다 고분자 사슬에 정공 하나가 생겨 전하를 맞추고, 정공이 늘어난 만큼 채널 전류가 커집니다(그림 6 ②).</p>
+<p><strong>단계 1 — 펄스 중.</strong> 게이트 전압이 들어오면 음이온이 먼저 채널 표면에 EDL을 만들고(빠름), 일부는 고분자의 비정질(사슬이 흐트러진) 영역으로, 일부는 더 깊이 결정(사슬이 가지런히 쌓인) 영역 근처까지 들어갑니다(느림). 들어간 음이온 하나마다 고분자 사슬에 정공 하나가 생겨 전하를 맞추고, 정공이 늘어난 만큼 채널 전류가 커집니다(그림 6(b)).</p>
 </div>
 <div class="step">
-<p><strong>단계 2 — 펄스 직후.</strong> EDL이 먼저 흩어지며 전류가 빠르게 떨어집니다(<span class="math inline">\(\tau_1\)</span>, 그림 6 ③).</p>
+<p><strong>단계 2 — 펄스 직후.</strong> EDL이 먼저 흩어지며 전류가 빠르게 떨어집니다(<span class="math inline">\(\tau_1\)</span>, 그림 6(c)).</p>
 </div>
 <div class="step">
 <p><strong>단계 3 — 그다음.</strong> 비정질 영역에 들어간 이온이 빠져나오며 전류가 더 떨어지고(<span class="math inline">\(\tau_2\)</span>), 깊이 들어간 이온은 훨씬 천천히 나옵니다(<span class="math inline">\(\tau_3\)</span>). 끝까지 남는 이온이 있으면 전류가 원래 값보다 높은 채로 머뭅니다(비휘발 성분).</p>
 </div>
 <div class="step">
-<p><strong>단계 4 — 숫자 예(논문).</strong> FSI⁻ 음이온 전해질 소자는 −3 V 펄스 뒤 80초 동안 최대 전류의 50% 이상을 유지했고, 가장 느린 <span class="math inline">\(\tau_3\)</span>이 BF₄⁻ 소자의 6배, TFSI⁻ 소자의 2.5배 이상이었습니다. <span class="src">Lee 2024 (AFM), p.3</span> 주사슬의 받개 단위(전자를 끌어당기는 부분)에서 탄소 하나를 질소로 바꾼 고분자는 <span class="math inline">\(\tau_2\)</span>와 <span class="math inline">\(\tau_3\)</span>이 각각 약 61배, 3.76배 길어졌고, 전류를 3000초까지 유지했습니다(이때 <span class="math inline">\(\tau_1\)</span>은 비슷). <span class="src">Lee 2025 (structure), p.4</span></p>
+<p><strong>단계 4 — 숫자 예(논문).</strong> FSI⁻ 음이온 전해질 소자는 −3 V 펄스 뒤 80초 동안 최대 전류의 50% 이상을 유지했고, 가장 느린 <span class="math inline">\(\tau_3\)</span>이 BF₄⁻ 소자의 6배, TFSI⁻ 소자의 2.5배 이상이었습니다. <span class="src">Lee 2024 (AFM), p.3</span> 주사슬(backbone)의 받개 단위(acceptor unit: 전자를 끌어당기는 부분)에서 탄소 하나를 질소로 바꾼 고분자는 <span class="math inline">\(\tau_2\)</span>와 <span class="math inline">\(\tau_3\)</span>이 각각 약 61배, 3.76배 길어졌고, 전류를 3000초까지 유지했습니다(이때 <span class="math inline">\(\tau_1\)</span>은 비슷). <span class="src">Lee 2025 (structure), p.4</span></p>
 </div>
 </div>
-<p><strong>④ 숫자에서 읽을 것.</strong> 위 예에서 바뀐 것은 이온의 종류(음이온) 또는 고분자 구조 하나였고, 그 결과 <strong>느린 시간상수</strong>가 수 배–수십 배 바뀌었습니다. 빠른 EDL 성분(<span class="math inline">\(\tau_1\)</span>)은 거의 그대로였습니다. 상태변수가 여러 개이고, 화학이 그중 일부를 골라 바꿀 수 있다는 뜻입니다 <span class="tag tag-interp">해석</span>. Day 38에서 이것을 "화학구조 → 시간상수"의 경로로 다시 봅니다.</p>
-<p><span id="s-doping-tau"></span><strong>무엇이 τ를 정하나 — 숫자로 어림.</strong> 빠른 <span class="math inline">\(\tau_1\)</span>은 EDL의 RC 시간입니다. 느린 <span class="math inline">\(\tau_2\)</span>·<span class="math inline">\(\tau_3\)</span>은 고분자 안에 들어간 음이온이 전해질로 되돌아 나오는 시간(저자들의 말로 빠른·느린 역확산 <span class="src">Lee 2024 (AFM), p.3</span>)이라, 농도 분극과 같은 <span class="math inline">\(L^2/D\)</span> 꼴로 읽어 볼 수 있습니다 <span class="tag tag-interp">해석</span>. 막 두께 <span class="math inline">\(L\)</span>을 50 nm로 가정하고 FSI⁻ 소자의 <span class="math inline">\(\tau_3\)</span>(원문 Fig. 2e를 눈으로 읽은 약 30 s)를 넣으면 <span class="math inline">\(D \approx L^2/\tau_3 = (5\times10^{-8})^2 \div 30 \approx 8\times10^{-17}\)</span> m²/s로, 물속 작은 이온(<span class="math inline">\(2\times10^{-9}\)</span> m²/s)보다 약 <span class="math inline">\(2\times10^{7}\)</span>배 작습니다(Claude 계산, 두께는 가정값). 거리가 수십 nm밖에 안 되는데 수십 초가 걸린다는 것은, 이 기억을 정하는 것이 거리보다 <strong>고분자 안에서 이온이 얼마나 붙잡혀 있나</strong>(사슬과의 결합, 결정 영역의 좁은 틈)라는 뜻입니다 <span class="tag tag-interp">해석</span>. 저자들도 DFT(원자 배치로부터 결합 에너지를 계산하는 양자역학 계산법)로 구한 음이온–고분자 흡착 에너지를 근거로 FSI⁻가 다른 음이온보다 천천히 빠져나온다고 설명합니다. <span class="src">Lee 2024 (AFM), p.3, 5</span></p>
-<p><span id="s-doping-nonlinear"></span><strong>왜 비선형인가.</strong> 두 가지가 겹칩니다. 첫째, 고분자에 들어가는 이온의 양은 전위에 따라 S자로 변합니다. 사슬 위의 산화될 수 있는 자리 가운데 산화된 비율을 <span class="math inline">\(\theta\)</span>라 합시다(0이면 하나도 산화되지 않음, 1이면 모두). 이상적인 경우 전극 전위 <span class="math inline">\(E\)</span>가 기준 전위 <span class="math inline">\(E^{\circ}\)</span>(절반이 산화되는 전위)와 같으면 <span class="math inline">\(\theta = 0.5\)</span>이고, 25 °C에서 <span class="math inline">\(E\)</span>를 59 mV 올릴 때마다 '산화된 자리 : 안 된 자리'의 비가 10배씩 커집니다. 그래서 <span class="math inline">\(E - E^{\circ}\)</span> = −59, 0, +59 mV에서 <span class="math inline">\(\theta\)</span> ≈ 0.09, 0.5, 0.91입니다(Claude 계산). 어떤 전위 아래에서는 거의 들어가지 않고, 넘으면 빠르게 들어가다가, 자리가 차면 포화하는 S자입니다. 이것을 식으로 적은 것이 Nernst 식 <span class="math inline">\(\theta/(1-\theta) = \exp[F(E - E^{\circ})/RT]\)</span>입니다(<span class="math inline">\(F\)</span> = 96,485 C/mol, <span class="math inline">\(R\)</span> 기체 상수, <span class="math inline">\(T\)</span> 절대온도. <span class="math inline">\(RT/F\)</span> = 25.7 mV는 <a href="../days/d19a.html#s-einstein">Day 33의 열전압 <span class="math inline">\(kT/q\)</span></a>를 1 mol 단위로 쓴 것이고, 그 2.3배가 59 mV) [해석: 이상화. 실제 공액 고분자의 곡선은 이보다 넓게 퍼진다]. 둘째, 펄스 크기에 따라 '남느냐 마느냐'가 갈립니다. Lee 2024 (AFM)의 FSI⁻ 소자는 −2 V 펄스에서는 휘발성 응답만 보였고, 그보다 큰 펄스에서는 비휘발성 기억을 보였습니다. <span class="src">Lee 2024 (AFM), p.3</span> 입력이 어떤 크기를 넘어야 상태가 남는, 문턱형 비선형입니다.</p>
-<p><strong>⑤ 이름과 정확한 뜻.</strong> 전기화학 도핑 = 이온이 혼합 전도체(전자와 이온을 함께 나르는 물질) 안으로 들어가 전자적 운반자 수를 바꾸는 것. 삽입 = 이온이 결정 구조의 틈에 끼어 들어가는 것. 산화환원 = 전자가 건너가 산화 상태가 바뀌는 반응. 공통점: 이온이 계면을 넘어 <strong>물질 안의 상태</strong>를 바꾼다. 그래서 대개 EDL보다 느리고, 덜 휘발성이며, 되돌리는 데 시간·에너지가 듭니다.</p>
-<p><strong>⑥ 뉴로모픽·RC와의 연결.</strong> 거의 영구적인 상태는 가중치를 저장하는 crossbar(가중치를 소자 전도도로 저장해 곱셈·덧셈을 하는 격자, <a href="../days/d04a.html#ch-vmm">Day 7 2구간</a>)형 시냅스에 맞고(ECRAM: 고체 채널에 이온을 넣고 빼 전도도를 바꾸는 3단자 메모리, <a href="../days/d19b.html#s-aluru-table">Day 34 4구간</a>. 유지 <span class="math inline">\(&gt;10^{8}\)</span> s, <span class="math inline">\(2^{11}\)</span> 상태 <span class="src">Aluru 2026, p.598</span>), 수 초–수백 초로 서서히 빠지는 상태는 RC의 기억에 맞을 수 있습니다. 같은 소자가 펄스 조건에 따라 둘 다를 보여 줄 수 있다는 것이 장점이자, 어느 쪽인지 분명히 해야 하는 이유입니다.</p>
+<p><strong>④ 숫자에서 읽을 것.</strong> 위 예에서 바뀐 것은 이온의 종류(음이온) 또는 고분자 구조 하나였고, 그 결과 <strong>느린 시간상수</strong>가 수 배–수십 배 바뀌었습니다. 빠른 EDL 성분(<span class="math inline">\(\tau_1\)</span>)은 거의 그대로였습니다. <span class="key">상태변수가 여러 개이고, 화학이 그중 일부를 골라 바꿀 수 있다는 뜻입니다</span> <span class="tag tag-interp">해석</span>. Day 41–42에서 이것을 "화학구조 → 시간상수"의 경로로 다시 봅니다.</p>
+<p><span id="s-doping-tau"></span><strong>무엇이 τ를 정하나 — 숫자로 어림.</strong> 빠른 <span class="math inline">\(\tau_1\)</span>은 EDL의 R–C 시간입니다. 느린 <span class="math inline">\(\tau_2\)</span>·<span class="math inline">\(\tau_3\)</span>은 고분자 안에 들어간 음이온이 전해질로 되돌아 나오는 시간(저자들의 말로 빠른·느린 역확산(back-diffusion) <span class="src">Lee 2024 (AFM), p.3</span>)이라, 농도 분극과 같은 <span class="math inline">\(L^2/D\)</span> 꼴로 읽어 볼 수 있습니다 <span class="tag tag-interp">해석</span>. 막 두께 <span class="math inline">\(L\)</span>을 50 nm로 가정하고 FSI⁻ 소자의 <span class="math inline">\(\tau_3\)</span>(원문 Fig. 2e를 눈으로 읽은 약 30 s)를 넣으면 <span class="math inline">\(D \approx L^2/\tau_3 = (5\times10^{-8})^2 \div 30 \approx 8\times10^{-17}\)</span> m²/s로, 물속 작은 이온(<span class="math inline">\(2\times10^{-9}\)</span> m²/s)보다 약 <span class="math inline">\(2\times10^{7}\)</span>배 작습니다(Claude 계산, 두께는 가정값). 거리가 수십 nm밖에 안 되는데 수십 초가 걸린다는 것은, 이 기억을 정하는 것이 거리보다 <strong>고분자 안에서 이온이 얼마나 붙잡혀 있나</strong>(사슬과의 결합, 결정 영역의 좁은 틈)라는 뜻입니다 <span class="tag tag-interp">해석</span>. 저자들도 DFT(원자 배치로부터 결합 에너지를 계산하는 양자역학 계산법)로 구한 음이온–고분자 흡착 에너지를 근거로 FSI⁻가 다른 음이온보다 천천히 빠져나온다고 설명합니다. <span class="src">Lee 2024 (AFM), p.3, 5</span></p>
+<p><span id="s-doping-nonlinear"></span><strong>왜 비선형인가.</strong> 두 가지가 겹칩니다. 첫째, 고분자에 들어가는 이온의 양은 전위에 따라 S자로 변합니다. 사슬 위의 산화될 수 있는 자리 가운데 산화된 비율을 <span class="math inline">\(\theta\)</span>라 합시다(0이면 하나도 산화되지 않음, 1이면 모두). 이상적인 경우 전극 전위 <span class="math inline">\(E\)</span>가 기준 전위 <span class="math inline">\(E^{\circ}\)</span>(절반이 산화되는 전위)와 같으면 <span class="math inline">\(\theta = 0.5\)</span>이고, 25 °C에서 <span class="math inline">\(E\)</span>를 59 mV 올릴 때마다 '산화된 자리 : 안 된 자리'의 비가 10배씩 커집니다. 그래서 <span class="math inline">\(E - E^{\circ}\)</span> = −59, 0, +59 mV에서 <span class="math inline">\(\theta\)</span> ≈ 0.09, 0.5, 0.91입니다(Claude 계산). 어떤 전위 아래에서는 거의 들어가지 않고, 넘으면 빠르게 들어가다가, 자리가 차면 포화하는 S자입니다. 이것을 식으로 적은 것이 Nernst 식 <span class="math inline">\(\theta/(1-\theta) = \exp[F(E - E^{\circ})/RT]\)</span>입니다(<span class="math inline">\(F\)</span> = 96,485 C/mol, <span class="math inline">\(R\)</span> 기체 상수, <span class="math inline">\(T\)</span> 절대온도. <span class="math inline">\(RT/F\)</span> = 25.7 mV는 <a href="../days/d19a.html#s-einstein">Day 35의 열전압 <span class="math inline">\(kT/q\)</span></a>를 1 mol 단위로 쓴 것이고, 그 2.3배가 59 mV) [해석: 이상화. 실제 공액 고분자의 곡선은 이보다 넓게 퍼진다]. 둘째, 펄스 크기에 따라 '남느냐 마느냐'가 갈립니다. Lee 2024 (AFM)의 FSI⁻ 소자는 −2 V 펄스에서는 휘발성 응답만 보였고, 그보다 큰 펄스에서는 비휘발성 기억을 보였습니다. <span class="src">Lee 2024 (AFM), p.3</span> 입력이 어떤 크기를 넘어야 상태가 남는, 문턱형 비선형입니다.</p>
+<p><strong>⑤ 이름과 정확한 뜻.</strong> 전기화학 도핑 = 이온이 혼합 전도체(전자와 이온을 함께 나르는 물질) 안으로 들어가 전자적 운반자 수를 바꾸는 것. 삽입 = 이온이 결정 구조의 틈에 끼어 들어가는 것. 산화환원 = 전자가 건너가 산화 상태가 바뀌는 반응. <span class="key">공통점: 이온이 계면을 넘어 <strong>물질 안의 상태</strong>를 바꾼다. 그래서 대개 EDL보다 느리고, 덜 휘발성이며, 되돌리는 데 시간·에너지가 듭니다.</span></p>
+<p><strong>⑥ 뉴로모픽·reservoir computing과의 연결.</strong> 거의 영구적인 상태는 가중치를 저장하는 crossbar(가중치를 소자 전도도로 저장해 곱셈·덧셈을 하는 격자, <a href="../days/d04a.html#ch-vmm">Day 7 2구간</a>)형 시냅스에 맞고(ECRAM: 고체 채널에 이온을 넣고 빼 전도도를 바꾸는 3단자 메모리, <a href="../days/d19b.html#s-aluru-table">Day 36 4구간</a>. 유지 <span class="math inline">\(&gt;10^{8}\)</span> s, <span class="math inline">\(2^{11}\)</span> 상태 <span class="src">Aluru 2026, p.598</span>), 수 초–수백 초로 서서히 빠지는 상태는 reservoir computing의 기억에 맞을 수 있습니다. 같은 소자가 펄스 조건에 따라 둘 다를 보여 줄 수 있다는 것이 장점이자, 어느 쪽인지 분명히 해야 하는 이유입니다.</p>
 <p><strong>⑦ 짧은 확인.</strong> 이온 게이트 트랜지스터에서 펄스 직후 가장 먼저 사라지는 성분은? (답: EDL 탈분극, <span class="math inline">\(\tau_1\)</span>.)</p>
 </section>
 </div>
-<p><strong>원문 그림을 읽기 전에.</strong> 그림 6의 ②·③이 실제 측정에서 어떻게 보이는지 같은 그룹의 논문으로 봅니다. 고분자 채널은 같고 <strong>음이온 종류만</strong> 바꾼 세 소자입니다. 위 줄은 측정 전류, 아래 줄은 그 감쇠를 지수 세 개로 쪼갠 결과입니다.</p>
-<figure class="fig paper figure"><img src="../assets/img/papers/lee2024afm-fig2a-f.png" alt="Lee 2024 AFM Fig. 2a–f: a BF₄⁻, b FSI⁻, c TFSI⁻ 음이온 이온액체로 게이트한 트랜지스터에 펄스 10번(−2.0, −2.5, −2.7, −3.0 V)을 준 뒤 80초 동안의 전류. BF₄⁻는 곧바로 0, FSI⁻는 −3.0 V에서 약 3 µA가 남고, TFSI⁻는 그 사이. d 세 소자의 정규화 전류와 지수 세 개 맞춤 곡선, e 맞춤으로 얻은 τ₁, τ₂, τ₃(τ₃가 FSI⁻에서 가장 크고 TFSI⁻, BF₄⁻ 순), f 펄스 직후 전류의 1차·2차 미분" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Lee et al., <a href="https://doi.org/10.1002/adfm.202412012" target="_blank"><i>Adv. Funct. Mater.</i> 2024(권호 2025), 35, 2412012</a>, Fig. 2a–f, p.4. 볼 것: (읽는 순서) ① 위 줄 <b>a–c</b>에서 파랑(−3.0 V) 곡선의 80초 뒤 높이를 비교하라. a(BF₄⁻)는 Day 35 2구간의 '바로 원래 전류로 돌아감'(EDL만), b(FSI⁻)는 단계 4의 '80초 동안 50% 이상 유지'(도핑)다. ② <b>d</b>는 세 곡선을 처음 높이 1로 맞춘 뒤 지수 세 개의 합으로 맞춘 것이고, <b>e</b>가 그 결과 τ₁·τ₂·τ₃다. τ₁은 셋 다 0 근처(빠른 EDL), 차이는 τ₃에서 난다. τ₃의 순서가 FSI⁻ &gt; TFSI⁻ &gt; BF₄⁻인지 확인하라. 본문(p.3)은 FSI⁻의 τ₃가 BF₄⁻의 6배, TFSI⁻의 2.5배 이상이라고 쓰는데, e의 점 위치를 눈으로 읽으면(약 32 s, 13 s, 2.5 s) BF₄⁻와의 차이는 그보다 더 벌어져 보인다. 정확한 맞춤 값은 이 쪽에 표로 없다 [미확인]. ③ τ마다 'EDL, 비정질, 결정' 영역을 짝짓는 것은 저자들의 해석이고, 그림 자체는 감쇠 곡선의 맞춤 결과다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p><span id="s-other-knobs"></span><strong>같은 계열의 다른 손잡이.</strong> 같은 그룹의 Sung 2024는 고분자 곁사슬(분지 알킬)의 길이를 세 가지로 바꿨고, 중간 길이에서 펄스 뒤 이완 시간이 25 ms로 가장 길었으며(짧은 것 1 ms, 긴 것 5 ms) <span class="src">Sung 2024, p.3</span>, 피크 전류의 약 10%가 비휘발 성분으로 남았습니다. <span class="src">Sung 2024, p.2</span> 이완 시간 25 ms와 '거의 남는 10%'는 서로 다른 양이라는 점을 눈여겨보세요. 앞의 것은 빠르게 잊는 부분의 속도이고, 뒤의 것은 잊지 않는 부분의 크기입니다. <span class="tag tag-interp">해석</span></p>
-<p><span id="s-precipitation"></span><strong>침전·착물화: 화학 반응이 만드는 상태.</strong> 엄밀히는 도핑이 아니지만, 이온이 서로 반응해 <strong>새 물질</strong>을 만드는 것도 같은 범주(물질의 화학 상태가 바뀜)로 묶어 둡니다. Day 33–34에서 본 Han 2023의 이온 다이오드는 순방향에서 접합에 쌓인 Ba²⁺와 SO₄²⁻가 BaSO₄로 침전하며 전류를 0.5%로 떨어뜨렸고, 그 상태는 저장액을 바꿔도 남았습니다. <span class="src">Han 2023, p.3</span> 같은 글은 녹는 정도가 더 낮은 침전(Zn(OH)₂, 용해도곱 <span class="math inline">\(1.8\times10^{-16}\)</span>)이 BaSO₄(<span class="math inline">\(1.1\times10^{-10}\)</span>)보다 전류가 다시 커지는(장기 강화, LTP) 속도가 느렸다고 보고합니다. <span class="src">Han 2023, p.5</span> 용해도곱은 '물에 얼마나 녹을 수 있나'를 나타내는 평형 상수이고 작을수록 덜 녹습니다. 화학 상수 하나가 시간척도와 이어진 드문 예입니다. 폴리전해질의 착물화·해리도 같은 상태변수가 될 수 있습니다(Day 40).</p>
-<p><span id="s-ec-limits"></span><strong>한계와 주의.</strong> Roadmap은 전기화학계가 이온 재분포와 산화환원 불안정으로 상태를 잃으며, 이온을 단단히 가두지 못하는 작은 소자에서 특히 그렇다고 씁니다. <span class="src">Roadmap 2026, p.8113</span> 또 유기 전기화학 트랜지스터의 응답 시간은 전해질 저항, 접촉 정전용량, 채널 전체로의 이온 확산이 정하는데, 유기 반도체로의 이온 주입과 수송이 <strong>아직 충분히 이해되지 않아</strong> 최적화가 어렵다고 적습니다. <span class="src">Roadmap 2026, p.8120</span> 그리고 전극에서의 산화환원은 소자 특성처럼 보이는 가짜 신호를 만들 수 있습니다. Pandey 2026은 소자 모형이 전극과 읽기 조건(파형·주파수·진폭·전극 화학)의 영향까지 담아야 한다고 씁니다. <span class="src">Pandey 2026, p.7</span></p>
+<p><strong>원문 그림을 읽기 전에.</strong> 그림 6(b)·(c)가 실제 측정에서 어떻게 보이는지 같은 그룹의 논문으로 봅니다. 고분자 채널은 같고 <strong>음이온 종류만</strong> 바꾼 세 소자입니다. 위 줄은 측정 전류, 아래 줄은 그 감쇠를 지수 세 개로 쪼갠 결과입니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/lee2024afm-fig2a-f.png" alt="Lee 2024 AFM Fig. 2a–f: a BF₄⁻, b FSI⁻, c TFSI⁻ 음이온 이온액체로 게이트한 트랜지스터에 펄스 10번(−2.0, −2.5, −2.7, −3.0 V)을 준 뒤 80초 동안의 전류. BF₄⁻는 곧바로 0, FSI⁻는 −3.0 V에서 약 3 µA가 남고, TFSI⁻는 그 사이. d 세 소자의 정규화 전류와 지수 세 개 맞춤 곡선, e 맞춤으로 얻은 τ₁, τ₂, τ₃(τ₃가 FSI⁻에서 가장 크고 TFSI⁻, BF₄⁻ 순), f 펄스 직후 전류의 1차·2차 미분" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Lee et al., <a href="https://doi.org/10.1002/adfm.202412012" target="_blank"><i>Adv. Funct. Mater.</i> 2024(권호 2025), 35, 2412012</a>, Fig. 2a–f, p.4. 볼 것: (읽는 순서) ① 위 줄 <b>a–c</b>에서 파랑(−3.0 V) 곡선의 80초 뒤 높이를 비교하라. a(BF₄⁻)는 Day 37 2구간의 '바로 원래 전류로 돌아감'(EDL만), b(FSI⁻)는 단계 4의 '80초 동안 50% 이상 유지'(도핑)다. ② <b>d</b>는 세 곡선을 처음 높이 1로 맞춘 뒤 지수 세 개의 합으로 맞춘 것이고, <b>e</b>가 그 결과 τ₁·τ₂·τ₃다. τ₁은 셋 다 0 근처(빠른 EDL), 차이는 τ₃에서 난다. τ₃의 순서가 FSI⁻ &gt; TFSI⁻ &gt; BF₄⁻인지 확인하라. 본문(p.3)은 FSI⁻의 τ₃가 BF₄⁻의 6배, TFSI⁻의 2.5배 이상이라고 쓰는데, e의 점 위치를 눈으로 읽으면(약 32 s, 13 s, 2.5 s) BF₄⁻와의 차이는 그보다 더 벌어져 보인다. 정확한 맞춤 값은 이 쪽에 표로 없다 [미확인]. ③ τ마다 'EDL, 비정질, 결정' 영역을 짝짓는 것은 저자들의 해석이고, 그림 자체는 감쇠 곡선의 맞춤 결과다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p><span id="s-other-knobs"></span><strong>같은 계열의 다른 손잡이.</strong> 같은 그룹의 Sung 2024는 고분자 곁사슬(side chain, 분지 알킬)의 길이를 세 가지로 바꿨고, 중간 길이에서 펄스 뒤 이완 시간이 25 ms로 가장 길었으며(짧은 것 1 ms, 긴 것 5 ms) <span class="src">Sung 2024, p.3</span>, 피크 전류의 약 10%가 비휘발 성분으로 남았습니다. <span class="src">Sung 2024, p.2</span> 이완 시간 25 ms와 '거의 남는 10%'는 서로 다른 양이라는 점을 눈여겨보세요. 앞의 것은 빠르게 잊는 부분의 속도이고, 뒤의 것은 잊지 않는 부분의 크기입니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-precipitation"></span><strong>침전·착물화: 화학 반응이 만드는 상태.</strong> 엄밀히는 도핑이 아니지만, 이온이 서로 반응해 <strong>새 물질</strong>을 만드는 것도 같은 범주(물질의 화학 상태가 바뀜)로 묶어 둡니다. Day 35–36에서 본 Han 2023의 이온 다이오드는 순방향에서 접합에 쌓인 Ba²⁺와 SO₄²⁻가 BaSO₄로 침전하며 전류를 0.5%로 떨어뜨렸고, 그 상태는 저장액을 바꿔도 남았습니다. <span class="src">Han 2023, p.3</span> 같은 글은 녹는 정도가 더 낮은 침전(Zn(OH)₂, 용해도곱(solubility product, <span class="math inline">\(K_{sp}\)</span>) <span class="math inline">\(1.8\times10^{-16}\)</span>)이 BaSO₄(<span class="math inline">\(1.1\times10^{-10}\)</span>)보다 전류가 다시 커지는(장기 강화, LTP) 속도가 느렸다고 보고합니다. <span class="src">Han 2023, p.5</span> 용해도곱은 '물에 얼마나 녹을 수 있나'를 나타내는 평형 상수이고 작을수록 덜 녹습니다. 화학 상수 하나가 시간척도와 이어진 드문 예입니다. 폴리전해질의 착물화·해리도 같은 상태변수가 될 수 있습니다(Day 45–46).</p>
+<p><span id="s-ec-limits"></span><strong>한계와 주의.</strong> Roadmap은 전기화학계가 이온 재분포와 산화환원 불안정으로 상태를 잃으며, 이온을 단단히 가두지 못하는 작은 소자에서 특히 그렇다고 씁니다. <span class="src">Roadmap 2026, p.8113</span> 또 유기 전기화학 트랜지스터의 응답 시간은 전해질 저항, 접촉 정전용량, 채널 전체로의 이온 확산이 정하는데, 유기 반도체로의 이온 주입과 수송이 <strong>아직 충분히 이해되지 않아</strong> 최적화가 어렵다고 적습니다. <span class="src">Roadmap 2026, p.8120</span> 그리고 전극에서의 산화환원은 소자 특성처럼 보이는 가짜 신호(artifact)를 만들 수 있습니다. Pandey 2026은 소자 모형이 전극과 읽기 조건(파형·주파수·진폭·전극 화학)의 영향까지 담아야 한다고 씁니다. <span class="src">Pandey 2026, p.7</span></p>
 <div class="quiz" data-day="d20" data-set="4-check"></div>
 <div class="stop-point">
 <p>여기까지: 그림 5를 따라 비패러데이·패러데이·도핑에서 전자가 어디로 가는지 말하고, 그림 6과 원문 그림으로 같은 트랜지스터의 <span class="math inline">\(\tau_1\)</span>(EDL)과 <span class="math inline">\(\tau_2\)</span>·<span class="math inline">\(\tau_3\)</span>(고분자 안의 이온)을 구분하며, 그 귀속이 맞춤 결과에 기댄 해석이라는 것을 말할 수 있다. 다음: 이온을 고르는 일을 고분자 대신 좁은 통로의 벽이 할 때(나노유체).</p>
@@ -770,7 +796,7 @@ window.Quarto = {
 전자가 건너가 산화 상태가 바뀌는 패러데이 반응. 전극에서도 일어나 가짜 신호의 원인이 될 수 있다.
 </dd>
 <dt>
-다중 지수 맞춤
+다중 지수 맞춤 (multi-exponential fit)
 </dt>
 <dd>
 감쇠 곡선을 지수 여러 개의 합으로 맞추는 것. 각 시간상수의 물리적 귀속은 별도 측정이 있어야 확정된다.
@@ -795,27 +821,27 @@ window.Quarto = {
 <div id="b-nanofluidic" class="basics">
 <section id="nanofluidic-표면전하와-이온-선택성" class="level4">
 <h4 class="anchored" data-anchor-id="nanofluidic-표면전하와-이온-선택성">nanofluidic 표면전하와 이온 선택성</h4>
-<p><strong>① 왜 필요한가.</strong> <a href="../days/d20a.html#ch-polarization">Day 35 3구간</a>에서는 겔의 <strong>고분자에 붙은 전하</strong>가 이온을 골랐습니다. 같은 일을 <strong>좁은 통로의 벽 전하</strong>로도 할 수 있습니다. 나노채널·나노포어로 만든 이온 소자(나노유체 소자)는 이온 뉴로모픽의 큰 갈래이고, Aluru 리뷰도 주로 이 계를 다룹니다(Day 33–34).</p>
-<p><strong>② 무엇이고 어디에 있나.</strong> 유리(실리카)나 카복실기(–COOH, 물속에서 H⁺를 내놓고 –COO⁻가 됨)를 가진 고분자 벽은 물속에서 음전하를 띱니다. 벽 앞에는 EDL처럼 양이온이 모인 층이 <a href="../days/d20a.html#b-edl" class="recall">디바이 길이</a> <span class="math inline">\(\lambda_D\)</span>(표면 전하의 영향이 이온에 가려 사라지는 거리, 묽은 수용액에서 수 nm) 두께로 생깁니다. 그림 7을 먼저 보세요. ①은 넓은 채널, ②는 좁은 채널, ③은 입구와 출구의 폭이 다른 통로이고, 빨간 원이 양이온, 파란 원이 음이온, 벽의 파란 −가 벽 전하입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d20/fig5-nanochannel.svg" alt="넓은 채널에서는 가운데에 양·음이온이 반반이고 벽 근처에만 양이온이 모이지만, 디바이 길이 정도로 좁은 채널은 거의 양이온만 채운다. λ_D: 1 mM 9.6 nm, 10 mM 3.0 nm, 100 mM 1.0 nm, 1 M 0.3 nm. Jiao 2026의 11 nm 채널은 1 M에서 λ_D의 약 36배. 아래: 입구가 좁고 출구가 넓은 음전하 통로에 왼쪽 +이면 K⁺가 좁은 끝에서 넓은 쪽으로 흘러 통로 안에 이온이 쌓이고(켜짐), 반대 극성이면 이온이 빠진다(꺼짐)" class="figure-img"><figcaption><b>그림 7.</b> ①② 채널 높이가 디바이 길이에 가까워지면 음전하 벽이 통로 전체의 이온 구성을 정한다. ③ 입구가 좁고 출구가 넓은 통로에서는 전압 방향에 따라 통로 안 이온이 쌓이거나(켜짐) 빈다(꺼짐). 방향은 He et al. 2009(<i>J. Am. Chem. Soc.</i>)의 음전하 원뿔형 나노포어 보고를 따랐다(모식도). 숫자는 물속 1:1 염의 디바이 길이로 코드가 계산했다. (Claude가 그림)</figcaption></figure>
-<p>그림 7 ①: 통로가 넓으면(높이 <span class="math inline">\(\gg \lambda_D\)</span>) 가운데는 양·음이온이 반반이고 벽의 영향은 가장자리뿐입니다. 그림 7 ②: 통로가 <span class="math inline">\(\lambda_D\)</span>와 비슷하게 좁으면 양쪽 벽의 이온층이 <strong>겹쳐</strong> 통로 전체가 거의 양이온만으로 채워집니다. 음이온은 벽 전하에 밀려 들어오기 어렵습니다. 이것이 <strong>표면전하에 의한 이온 선택성</strong>이고, Day 35 3구간의 Donnan 배제를 고분자 대신 벽이 하는 것입니다.</p>
-<p><strong>③ 무슨 일이 어떤 순서로.</strong> 선택성이 있는 통로의 입구와 출구가 <strong>비대칭</strong>이면(원뿔형 포어, 사다리꼴 채널) Day 35 3구간의 접합과 같은 일이 생깁니다. 한 방향 전압에서는 통로 안에 이온이 쌓이고, 반대 방향에서는 빠집니다(그림 7 ③). 벽이 음전하인 원뿔형 나노포어에서는 양이온이 좁은 끝에서 넓은 쪽으로 흐르는 방향이 잘 흐르는 방향으로 보고되었고(<a href="https://doi.org/10.1021/ja808717u">He et al., <em>J. Am. Chem. Soc.</em> 2009, 131, 5194</a>) <span class="prov">폴더 밖, 본문 일부 확인</span>, 이 방향 차이를 통로 안의 이온 축적·고갈로 설명하는 것이 대표적인 해석입니다 <span class="tag tag-interp">해석</span>. 정류와 히스테리시스가 함께 나오고, 그 기억은 쌓인 이온이 흩어지는 시간입니다. 나노채널에서는 여기에 더해 벽에 이온이 <strong>붙었다 떨어지는</strong>(흡착·탈착) 과정, 극도로 좁은 곳에서 양·음이온이 <strong>쌍을 이뤘다 풀리는</strong>(이온쌍 해리·결합) 과정, 소수성(물을 밀어내는) 통로가 <strong>젖었다 마르는</strong> 과정이 상태변수가 됩니다. <span class="src">Pandey 2026, p.6</span></p>
+<p><strong>① 왜 필요한가.</strong> <a href="../days/d20a.html#ch-polarization">Day 37 3구간</a>에서는 겔의 <strong>고분자에 붙은 전하</strong>가 이온을 골랐습니다. 같은 일을 <strong>좁은 통로의 벽 전하</strong>로도 할 수 있습니다. 나노채널·나노포어로 만든 이온 소자(나노유체 소자)는 이온 뉴로모픽의 큰 갈래이고, Aluru 리뷰도 주로 이 계를 다룹니다(Day 35–36).</p>
+<p><strong>② 무엇이고 어디에 있나.</strong> 유리(실리카)나 카복실기(–COOH, 물속에서 H⁺를 내놓고 –COO⁻가 됨)를 가진 고분자 벽은 물속에서 음전하를 띱니다. 벽 앞에는 EDL처럼 양이온이 모인 층이 <a href="../days/d20a.html#b-edl" class="recall">디바이 길이</a> <span class="math inline">\(\lambda_D\)</span>(표면 전하의 영향이 이온에 가려 사라지는 거리, 묽은 수용액에서 수 nm) 두께로 생깁니다. 그림 7을 먼저 보세요. (a)는 넓은 채널, (b)는 좁은 채널, (c)는 입구와 출구의 폭이 다른 통로이고, 빨간 원이 양이온, 파란 원이 음이온, 벽의 파란 −가 벽 전하입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d20/fig5-nanochannel.svg" alt="넓은 채널에서는 가운데에 양·음이온이 반반이고 벽 근처에만 양이온이 모이지만, 디바이 길이 정도로 좁은 채널은 거의 양이온만 채운다. λ_D: 1 mM 9.6 nm, 10 mM 3.0 nm, 100 mM 1.0 nm, 1 M 0.3 nm. Jiao 2026의 11 nm 채널은 1 M에서 λ_D의 약 36배. 아래: 입구가 좁고 출구가 넓은 음전하 통로에 왼쪽 +이면 K⁺가 좁은 끝에서 넓은 쪽으로 흘러 통로 안에 이온이 쌓이고(켜짐), 반대 극성이면 이온이 빠진다(꺼짐)" class="figure-img"><figcaption><b>그림 7.</b> 채널 높이와 벽 전하(모식도). <b>(a)(b)</b> 채널 높이가 디바이 길이에 가까워지면 음전하 벽이 통로 전체의 이온 구성을 정한다. <b>(c)</b> 입구가 좁고 출구가 넓은 통로에서는 전압 방향에 따라 통로 안 이온이 쌓이거나(켜짐) 빈다(꺼짐). 방향은 He et al. 2009(<i>J. Am. Chem. Soc.</i>)의 음전하 원뿔형 나노포어 보고를 따랐다(모식도). 숫자는 물속 1:1 염의 디바이 길이로 코드가 계산했다. (Claude가 그림)</figcaption></figure>
+<p>그림 7(a): 통로가 넓으면(높이 <span class="math inline">\(\gg \lambda_D\)</span>) 가운데는 양·음이온이 반반이고 벽의 영향은 가장자리뿐입니다. 그림 7(b): <span class="key">통로가 <span class="math inline">\(\lambda_D\)</span>와 비슷하게 좁으면 양쪽 벽의 이온층이 <strong>겹쳐</strong> 통로 전체가 거의 양이온만으로 채워집니다.</span> 음이온은 벽 전하에 밀려 들어오기 어렵습니다. 이것이 <strong>표면전하에 의한 이온 선택성</strong>(permselectivity)이고, Day 37 3구간의 Donnan 배제를 고분자 대신 벽이 하는 것입니다.</p>
+<p><strong>③ 무슨 일이 어떤 순서로.</strong> 선택성이 있는 통로의 입구와 출구가 <strong>비대칭</strong>이면(원뿔형 포어(conical nanopore), 사다리꼴 채널) Day 37 3구간의 접합과 같은 일이 생깁니다. 한 방향 전압에서는 통로 안에 이온이 쌓이고, 반대 방향에서는 빠집니다(그림 7(c)). 벽이 음전하인 원뿔형 나노포어에서는 양이온이 좁은 끝에서 넓은 쪽으로 흐르는 방향이 잘 흐르는 방향으로 보고되었고(<a href="https://doi.org/10.1021/ja808717u">He et al., <em>J. Am. Chem. Soc.</em> 2009, 131, 5194</a>) <span class="prov">폴더 밖, 본문 일부 확인</span>, 이 방향 차이를 통로 안의 이온 축적·고갈로 설명하는 것이 대표적인 해석입니다 <span class="tag tag-interp">해석</span>. 정류와 히스테리시스가 함께 나오고, 그 기억은 쌓인 이온이 흩어지는 시간입니다. 나노채널에서는 여기에 더해 벽에 이온이 <strong>붙었다 떨어지는</strong>(흡착·탈착, adsorption–desorption) 과정, 극도로 좁은 곳에서 양·음이온이 <strong>쌍을 이뤘다 풀리는</strong>(이온쌍 해리·결합, ion pairing) 과정, 소수성(물을 밀어내는) 통로가 <strong>젖었다 마르는</strong>(wetting–dewetting) 과정이 상태변수가 됩니다. <span class="src">Pandey 2026, p.6</span></p>
 <p><span id="s-nano-numbers"></span><strong>④ 작은 숫자로.</strong> 1:1 염의 <span class="math inline">\(\lambda_D\)</span>는 1 mM 9.6 nm, 10 mM 3.0 nm, 100 mM 0.96 nm, 1 M 0.30 nm입니다(코드 계산). Jiao 2026의 하이드로겔을 채운 나노채널은 높이가 11 nm입니다. <span class="src">Jiao 2026, p.2</span> 1 mM에서는 <span class="math inline">\(\lambda_D\)</span>와 같은 자릿수라 벽의 영향이 통로 전체에 미치고, 10 mM에서는 약 3.6배, 1 M에서는 약 36배라 대부분이 벌크처럼 행동합니다. 실제로 이 논문은 0.1 M KCl에서 기억 효과가 가장 컸고, 그 이유를 "진한 쪽은 차폐가 강해 농도 분극이 약해지고, 묽은 쪽은 움직일 이온이 모자라 쌓일 것이 적은" 사이의 균형으로 설명합니다. <span class="src">Jiao 2026, p.4</span></p>
-<p><strong>무엇이 τ를 정하나.</strong> 쌓인 이온이 확산으로만 빠져나간다면 시간은 통로 길이 <span class="math inline">\(L\)</span>에 대해 <span class="math inline">\(L^2/D\)</span>입니다. 길이 10 µm 통로에 물속 확산계수 <span class="math inline">\(2\times10^{-9}\)</span> m²/s를 넣으면 <span class="math inline">\((10^{-5})^2 \div (2\times10^{-9}) = 0.05\)</span> s입니다(Claude 계산, 길이는 예시). 그런데 아래에서 보듯 나노유체 소자의 기억은 분–시간 단위까지 보고됩니다. 확산만으로는 설명되지 않는 이 긴 시간은 벽에 붙은 이온이 떨어지는 속도나 젖음·마름처럼 더 느린 과정이 정한다는 뜻입니다 <span class="tag tag-interp">해석</span>.</p>
-<p><strong>⑤ 이름과 정확한 뜻.</strong> 표면전하 = 통로 벽에 붙은 전하. 이온 선택성(permselectivity) = 반대이온은 통과, 공이온은 배제. EDL 겹침 = 통로 높이가 <span class="math inline">\(\lambda_D\)</span> 정도일 때 두 벽의 이온층이 통로 전체를 채우는 것. 선택성이 언제 나타나는지의 경계는 정확한 값이 아니라 "높이 ~ 몇 × <span class="math inline">\(\lambda_D\)</span>"라는 자릿수 감각입니다 <span class="tag tag-interp">해석</span>.</p>
-<p><strong>⑥ 뉴로모픽·RC와의 연결.</strong> 나노유체 소자의 I–V 고리는 모양이 여러 가지이고, 고리 모양에 따라 시냅스형·뉴런형·reservoir형 쓰임을 나누는 리뷰의 정리가 있습니다. 고리 모양을 원문 그림으로 먼저 본 뒤(아래) 그 정리를 읽습니다.</p>
+<p><strong>무엇이 τ를 정하나.</strong> 쌓인 이온이 확산으로만 빠져나간다면 시간은 통로 길이 <span class="math inline">\(L\)</span>에 대해 <span class="math inline">\(L^2/D\)</span>입니다. 길이 10 µm 통로에 물속 확산계수 <span class="math inline">\(2\times10^{-9}\)</span> m²/s를 넣으면 <span class="math inline">\((10^{-5})^2 \div (2\times10^{-9}) = 0.05\)</span> s입니다(Claude 계산, 길이는 예시). 그런데 아래에서 보듯 나노유체 소자의 기억은 분–시간 단위까지 보고됩니다. <span class="key">확산만으로는 설명되지 않는 이 긴 시간은 벽에 붙은 이온이 떨어지는 속도나 젖음·마름처럼 더 느린 과정이 정한다는 뜻입니다</span> <span class="tag tag-interp">해석</span>.</p>
+<p><strong>⑤ 이름과 정확한 뜻.</strong> 표면전하 = 통로 벽에 붙은 전하. 이온 선택성(permselectivity) = 반대이온은 통과, 공이온은 배제. EDL 겹침(EDL overlap) = 통로 높이가 <span class="math inline">\(\lambda_D\)</span> 정도일 때 두 벽의 이온층이 통로 전체를 채우는 것. 선택성이 언제 나타나는지의 경계는 정확한 값이 아니라 "높이 ~ 몇 × <span class="math inline">\(\lambda_D\)</span>"라는 자릿수 감각입니다 <span class="tag tag-interp">해석</span>.</p>
+<p><strong>⑥ 뉴로모픽·reservoir computing과의 연결.</strong> 나노유체 소자의 I–V 고리는 모양이 여러 가지이고, 고리 모양에 따라 시냅스형·뉴런형·reservoir형 쓰임을 나누는 리뷰의 정리가 있습니다. 고리 모양을 원문 그림으로 먼저 본 뒤(아래) 그 정리를 읽습니다.</p>
 <p><strong>⑦ 짧은 확인.</strong> 같은 11 nm 채널에서 염 농도를 1 mM에서 1 M로 올리면 이온 선택성은? (답: 약해진다. <span class="math inline">\(\lambda_D\)</span>가 9.6 nm → 0.30 nm로 줄어 벽의 영향이 가장자리로 밀린다.)</p>
 </section>
 </div>
-<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/LDqOnteIuKs?start=55&amp;rel=0" title="영상: A tutorial on transport phenomena in nanofluidics: Phillippe Renaud" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:55–4:31과 8:55–11:30, 약 6분 · 전체 26분, 영어).</b> Cambridge University Press, "A tutorial on transport phenomena in nanofluidics: Phillippe Renaud" (학술지 <i>Flow</i> 웨비나, 발표자 EPFL Philippe Renaud). <b>볼 이유:</b> 0:55 'Nanofluidics Definition' 챕터가 "채널이 얼마나 좁아야 나노유체인가"(위 그림 7의 디바이 길이 비교)이고, 8:55 'Nanofluidic diodes' 챕터가 위 ③의 비대칭 통로가 만드는 정류다. 4:31–8:55(전도도 모형, 온도로 여닫기)와 12:00 이후(분자·단백질 확산, 서브나노 채널)는 선택. <b>보고 답할 질문:</b> 발표의 나노유체 다이오드와 Day 35 3구간의 polyelectrolyte 접합 다이오드는 '한 종류 이온만 통과시키는 영역'을 각각 무엇으로 만드나(벽의 전하 vs 고분자 사슬의 전하)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·설명·챕터(영상 내용은 직접 보지 못함)</span></div></div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/LDqOnteIuKs?start=55&amp;rel=0" title="영상: A tutorial on transport phenomena in nanofluidics: Phillippe Renaud" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:55–4:31과 8:55–11:30, 약 6분 · 전체 26분, 영어).</b> Cambridge University Press, "A tutorial on transport phenomena in nanofluidics: Phillippe Renaud" (학술지 <i>Flow</i> 웨비나, 발표자 EPFL Philippe Renaud). <b>볼 이유:</b> 0:55 'Nanofluidics Definition' 챕터가 "채널이 얼마나 좁아야 나노유체인가"(위 그림 7의 디바이 길이 비교)이고, 8:55 'Nanofluidic diodes' 챕터가 위 ③의 비대칭 통로가 만드는 정류다. 4:31–8:55(전도도 모형, 온도로 여닫기)와 12:00 이후(분자·단백질 확산, 서브나노 채널)는 선택. <b>보고 답할 질문:</b> 발표의 나노유체 다이오드와 Day 37 3구간의 polyelectrolyte 접합 다이오드는 '한 종류 이온만 통과시키는 영역'을 각각 무엇으로 만드나(벽의 전하 vs 고분자 사슬의 전하)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·설명·챕터(영상 내용은 직접 보지 못함)</span></div></div>
 <p>나노유체 메커니즘이 얼마나 다양한지는 원문 그림 한 장으로 볼 수 있습니다. <strong>원문 그림을 읽기 전에.</strong> 위 줄 a–d는 I–V 고리의 네 유형(M1–M4)입니다. 고리가 <strong>스스로 교차한다</strong>는 것은 원점(0 V, 0 A)에서 8자처럼 꼬여 지나간다는 뜻이고, 고리 위 화살표는 전압을 훑을 때 전류가 어느 길로 도는지입니다. 아래 줄 e–i는 그 고리를 만드는 물리 과정입니다.</p>
 <figure class="fig paper figure"><img src="../assets/img/papers/pandey2026-fig3a-i.png" alt="Pandey 2026 Fig. 3a–i: 나노유체 memristor의 네 가지 I–V 고리(M1, M3는 스스로 교차, M2, M4는 교차하지 않음)와 전도도–전압 곡선, 그리고 관련 메커니즘 다섯 가지(흡착–탈착, 이온쌍 해리–결합, 구속 기울기, 마름–젖음, 블리스터 부풂–꺼짐)" class="figure-img"><figcaption><b>원문 그림.</b> Pandey et al., <a href="https://doi.org/10.1038/s41578-026-00919-1" target="_blank"><i>Nat. Rev. Mater.</i> 2026</a>, Fig. 3a–i, PDF p.6(인쇄 쪽수 없는 온라인 판). 볼 것: 위 a–d는 고리의 방향(화살표)과 원점에서 고리가 스스로 교차하는지에 따라 네 유형으로 나눈 것이고, 각 칸의 작은 그림은 전도도 $G$가 전압에 따라 어떻게 오르내리는지입니다. 아래 e–i는 그 고리를 만드는 물리 과정입니다. e(벽에 이온이 붙었다 떨어짐)와 g(좁아지는 통로의 구속 기울기 = 이 Day의 농도 분극)가 하이드로겔·폴리전해질 소자에서도 친숙한 것이고, f(이온쌍)·h(젖음)·i(블리스터)는 극도로 좁은 2D 채널에 특유한 것입니다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p><span id="s-pandey-loops"></span><strong>고리 모양과 쓰임의 짝.</strong> Pandey 2026은 네 고리(M1–M4) 가운데 휘발성이 약하고 아날로그로 바뀌는 고리(M3, 일부 M1)는 시냅스형 가중치 갱신에, 휘발성이고 비선형이 강한 고리(M2, M4)는 문턱·과도 응답·시간 적분 같은 뉴런형 기능과 <strong>짧은 기억과 비선형을 쓰는 reservoir computing</strong>에 맞는다고 봅니다. <span class="src">Pandey 2026, p.7</span> 같은 글은 이 계에서 아날로그 전환(전도도가 여러 단계로 서서히 바뀜)이 흔하고, 디지털에 가까운 급격한 전환(두 값 사이를 뚝 끊어 바뀜)은 지금까지 한 종류의 고리(M3, 계면 블리스터 형성)에서만 관찰되었다고 씁니다. <span class="src">Pandey 2026, p.7</span> 이 짝짓기는 리뷰의 정리이지, 각 고리로 과제 성능을 비교해 검증한 결과는 아닙니다 <span class="tag tag-interp">해석</span>.</p>
-<p><span id="s-nano-timescales"></span><strong>시간척도의 폭.</strong> 같은 리뷰의 표는 육방정 질화붕소(hBN) 2D 나노채널 하나에서 메커니즘에 따라 기억 시간이 1–5분(M1, M4), 약 20분(M2), 약 74시간(M3)으로 갈린다고 정리합니다. <span class="src">Pandey 2026, p.9</span> 같은 소자에서도 어떤 과정이 지배하느냐에 따라 세 자릿수가 바뀝니다.</p>
-<p><span id="s-species-memory"></span><strong>종(種)이 다르면 기억도 다르다.</strong> Jiao 2026은 카복실기가 많은 하이드로겔(PAA)을 채운 나노채널에서 양이온이 카복실기에 빠르게 붙고 느리게 떨어지는 속도 차이가 히스테리시스를 만든다고 해석하고, 정규화한 고리 넓이의 비가 K⁺/Na⁺ 1.95, K⁺/Ca²⁺ 12.32였다고 보고합니다. <span class="src">Jiao 2026, p.4</span> 같은 글은 훑는 속도가 너무 빠르면 이온이 떨어질 시간이 없고, 너무 느리면(0.5 mV/s) 붙고 떨어짐이 평형을 이뤄 고리가 거의 사라진다고 씁니다. <span class="src">Jiao 2026, p.4</span> Day 35 3구간 장난감 모형(그림 4(Day 35))과 같은 모습입니다. 다만 "양이온마다 카복실기와의 결합 세기가 다르다"는 해석은 결합 세기를 직접 잰 측정 없이 제시된 것이고, 이온의 이동도 차이로도 같은 순서가 나올 수 있습니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-pandey-loops"></span><strong>고리 모양과 쓰임의 짝.</strong> Pandey 2026은 네 고리(M1–M4) 가운데 휘발성이 약하고 아날로그로 바뀌는 고리(M3, 일부 M1)는 시냅스형 가중치 update에, 휘발성이고 비선형이 강한 고리(M2, M4)는 문턱·과도 응답·시간 적분 같은 뉴런형 기능과 <strong>짧은 기억과 비선형을 쓰는 reservoir computing</strong>에 맞는다고 봅니다. <span class="src">Pandey 2026, p.7</span> 같은 글은 이 계에서 아날로그 전환(전도도가 여러 단계로 서서히 바뀜)이 흔하고, 디지털에 가까운 급격한 전환(두 값 사이를 뚝 끊어 바뀜)은 지금까지 한 종류의 고리(M3, 계면 블리스터 형성)에서만 관찰되었다고 씁니다. <span class="src">Pandey 2026, p.7</span> 이 짝짓기는 리뷰의 정리이지, 각 고리로 과제 성능을 비교해 검증한 결과는 아닙니다 <span class="tag tag-interp">해석</span>.</p>
+<p><span id="s-nano-timescales"></span><strong>시간척도의 폭.</strong> 같은 리뷰의 표는 육방정 질화붕소(hexagonal boron nitride, hBN) 2D 나노채널 하나에서 메커니즘에 따라 기억 시간이 1–5분(M1, M4), 약 20분(M2), 약 74시간(M3)으로 갈린다고 정리합니다. <span class="src">Pandey 2026, p.9</span> 같은 소자에서도 어떤 과정이 지배하느냐에 따라 세 자릿수가 바뀝니다.</p>
+<p><span id="s-species-memory"></span><strong>종(種)이 다르면 기억도 다르다.</strong> Jiao 2026은 카복실기가 많은 하이드로겔(PAA)을 채운 나노채널에서 양이온이 카복실기에 빠르게 붙고 느리게 떨어지는 속도 차이가 히스테리시스를 만든다고 해석하고, 정규화한 고리 넓이의 비가 K⁺/Na⁺ 1.95, K⁺/Ca²⁺ 12.32였다고 보고합니다. <span class="src">Jiao 2026, p.4</span> 같은 글은 훑는 속도가 너무 빠르면 이온이 떨어질 시간이 없고, 너무 느리면(0.5 mV/s) 붙고 떨어짐이 평형을 이뤄 고리가 거의 사라진다고 씁니다. <span class="src">Jiao 2026, p.4</span> Day 37 3구간 장난감 모형(그림 4(Day 37))과 같은 모습입니다. 다만 "양이온마다 카복실기와의 결합 세기가 다르다"는 해석은 결합 세기를 직접 잰 측정 없이 제시된 것이고, 이온의 이동도 차이로도 같은 순서가 나올 수 있습니다. <span class="tag tag-interp">해석</span></p>
 <div class="quiz" data-day="d20" data-set="5-check"></div>
 <div class="stop-point">
-<p>여기까지: 채널 높이와 <span class="math inline">\(\lambda_D\)</span>를 비교해 선택성이 강한 조건을 숫자로 판정하고(11 nm 채널: 1 mM에서 같은 자릿수, 1 M에서 36배), 그림 7 ③의 비대칭 통로가 정류와 기억을 주는 이유와 나노유체의 기억 시간이 분–시간까지 퍼지는 이유를 말할 수 있다. 다음: 네 메커니즘을 한 표로.</p>
+<p>여기까지: 채널 높이와 <span class="math inline">\(\lambda_D\)</span>를 비교해 선택성이 강한 조건을 숫자로 판정하고(11 nm 채널: 1 mM에서 같은 자릿수, 1 M에서 36배), 그림 7(c)의 비대칭 통로가 정류와 기억을 주는 이유와 나노유체의 기억 시간이 분–시간까지 퍼지는 이유를 말할 수 있다. 다음: 네 메커니즘을 한 표로.</p>
 </div>
 <div class="terms-box">
 <dl class="terms">
@@ -857,26 +883,29 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <section id="ch-mechanism-map" class="level3">
 <h3 class="anchored" data-anchor-id="ch-mechanism-map">6. 메커니즘 대응표, 그리고 연구는 어디까지 왔나</h3>
 <div class="goal">
-<p>이 구간을 읽고 나면 네 메커니즘의 휘발성·시간상수·가역성·비선형의 모양을 한 표로 비교하고, 메커니즘마다 연구가 어디까지 왔는지, 지금 한계가 무엇이며 무엇을 넘어야 하는지를 논문의 예로 말할 수 있다.</p>
+<p>이 구간을 읽고 나면 네 메커니즘의 바뀌는 상태·읽는 값·되돌아오는 원인과 휘발성·시간상수·가역성·비선형의 모양을 한 표로 비교하고, 메커니즘마다 연구가 어디까지 왔는지, 지금 한계가 무엇이며 무엇을 넘어야 하는지를 논문의 예로 말할 수 있다.</p>
 </div>
 <p>먼저 앞 구간들의 논문이 보고한 시간척도를 한 축에 놓습니다(그림 8). 가로축은 로그 눈금(눈금 한 칸이 1000배)입니다. 서로 다른 소자·크기·전압의 값이므로 <strong>소자끼리 비교하는 그림이 아니라</strong>, 메커니즘마다 시간척도가 얼마나 넓게 퍼지는지 보는 그림입니다.</p>
 <figure class="fig figure"><img src="../assets/img/d20/fig6-timescale-map.svg" alt="로그 시간축 위에 메커니즘별 논문 보고 시간척도: EDL 탈분극 1초 미만과 zwitterion 첨가 이완 시간 0.94→3.92 s, 농도 분극 기억 200–4000 s와 이온겔 1.5–113 h, 전기화학 도핑 80–3000 s, 산화물 양성자 삽입 ns, 침전 1,000 s 이상 지속, 나노유체 hBN 채널 1–5분·20분·74시간" class="figure-img"><figcaption><b>그림 8.</b> 메커니즘별로 논문이 보고한 시간척도(로그 눈금). 막대는 보고된 범위나 측정 구간이고, 점은 단일 보고값이다. 출처 쪽수는 그림 안에 적었다. 같은 메커니즘도 크기·재료·전압에 따라 여러 자릿수를 오가므로, 메커니즘의 이름만으로 시간척도를 말할 수 없다. (Claude가 그림)</figcaption></figure>
 <section id="s-mechanism-table" class="level4">
 <h4 class="anchored" data-anchor-id="s-mechanism-table">6-1. 물리 성질 대응표</h4>
+<p>2–5구간에서 메커니즘마다 던진 네 질문(1구간 끝 ⓐ–ⓓ)을 같은 칸으로 모읍니다. 앞의 세 칸이 계산 기능과 바로 이어집니다. <strong>바뀌는 상태 <span class="math inline">\(x\)</span></strong>는 기억을 담는 양, <strong>읽는 값</strong>은 readout(상태에 가중치를 곱해 답을 내는 출력, <a href="../days/d06.html#b-readout">Day 10 기초 3</a>)이 실제로 받는 측정량(대개 전류나 전압), <strong>되돌아오는 원인</strong>은 입력을 끊은 뒤 <span class="math inline">\(x\)</span>를 원래대로 돌리는 과정(휘발성과 시간상수를 정함)입니다.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>메커니즘</th>
-<th>상태 <span class="math inline">\(x\)</span> (무엇이 남나)</th>
-<th>휘발성</th>
+<th>바뀌는 상태 <span class="math inline">\(x\)</span></th>
+<th>읽는 값</th>
+<th>되돌아오는 원인 → 휘발성</th>
 <th>시간상수 (논문 예)</th>
 <th>가역성</th>
 <th>비선형의 모양</th>
@@ -886,7 +915,8 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <tr class="odd">
 <td>EDL 충전</td>
 <td>계면의 전하·이온층</td>
-<td>높음(방전 길이 열려 있으면)</td>
+<td>채널 전류(이온 게이트 트랜지스터) 또는 개방 전압</td>
+<td>방전 길로 이온층이 흩어짐(<span class="math inline">\(\tau \approx RC\)</span>) → 높음, 길이 막히면 오래 남음</td>
 <td>1초 미만 <span class="src">Lee 2024 (AFM), p.3</span>; 화학으로 3.92 s <span class="src">Lee 2025 (zwitterion), p.5</span></td>
 <td>높음(비패러데이)</td>
 <td>약함; 트랜지스터 문턱에서 주로 옴</td>
@@ -894,23 +924,26 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <tr class="even">
 <td>농도 분극·이온 고갈</td>
 <td>접합·통로의 이온 농도</td>
-<td>중간(확산으로 회복)</td>
+<td>접합 전류·저항(정류비, 임피던스)</td>
+<td>확산으로 농도가 고르게 됨(<span class="math inline">\(\sim L^2/D\)</span>) → 중간</td>
 <td>200–4000 s <span class="src">Zhang 2024 (ACS Nano), p.15029</span>; 이온겔 ~113 h <span class="src">Zhou 2025, p.6</span></td>
 <td>높음(반응 없음), 단 고전압에서 부반응 <span class="tag tag-unverified">미확인</span></td>
 <td>정류(부호 비대칭), 극성별 시간 차</td>
 </tr>
 <tr class="odd">
 <td>전기화학 도핑·삽입</td>
-<td>물질 안 이온 양·산화 상태</td>
-<td>낮음–중간</td>
+<td>물질 안 이온 양·산화 상태(정공 수)</td>
+<td>채널 전류(전도도)</td>
+<td>들어간 이온이 역확산으로 빠져나옴, 고분자에 붙잡힐수록 느림 → 낮음–중간</td>
 <td>80 s 50% 유지 <span class="src">Lee 2024 (AFM), p.3</span>; 3000 s <span class="src">Lee 2025 (structure), p.4</span>; ECRAM <span class="math inline">\(&gt;10^{8}\)</span> s <span class="src">Aluru 2026, p.598</span></td>
-<td>중간(되돌림에 시간·에너지, 내구성 문제)</td>
-<td>포화·문턱(S자), 강화(LTP)·약화(LTD) 갱신의 비대칭</td>
+<td>중간(되돌림에 시간·에너지, endurance 문제)</td>
+<td>포화·문턱(S자), 강화(LTP)·약화(LTD) update의 비대칭</td>
 </tr>
 <tr class="even">
 <td>침전·착물화</td>
 <td>새로 생긴 고체·착물의 양</td>
-<td>매우 낮음</td>
+<td>접합 전류</td>
+<td>침전이 다시 녹아야 함(덜 녹는 침전일수록 느림 <span class="src">Han 2023, p.5</span>) → 매우 낮음</td>
 <td>1,000 s 안에 형성, 바꿔도 남음 <span class="src">Han 2023, p.3</span></td>
 <td>낮음(사실상 비가역에 가까울 수 있음)</td>
 <td>문턱(핵생성), 자기제한적</td>
@@ -918,14 +951,15 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <tr class="odd">
 <td>나노유체 표면전하</td>
 <td>채널 속 반대이온·흡착량·이온쌍</td>
-<td>과정에 따라 다름</td>
+<td>이온 전류(채널 전도도)</td>
+<td>확산·탈착·이온쌍 해리·다시 젖음 중 지배하는 과정 → 과정에 따라 다름</td>
 <td>1–5분 ~ 74 h <span class="src">Pandey 2026, p.9</span></td>
 <td>대체로 높음</td>
 <td>정류, 다양한 고리(M1–M4)</td>
 </tr>
 </tbody>
 </table>
-<p>이 표의 칸은 "그 메커니즘이 항상 그렇다"가 아니라 "표에 적은 논문의 예에서 그랬다"입니다. 그리고 실제 소자에서는 <strong>여러 메커니즘이 섞입니다</strong>. 같은 트랜지스터에 EDL과 도핑이 함께 있고(4구간), 이온겔 이중층의 개방 전압에는 계면 분극과 전극 분극이 함께 있으며(Day 35 3구간), 나노유체 고리에는 축전 성분이 섞여 고리 모양을 바꿉니다. <span class="src">Pandey 2026, p.7</span> 메커니즘을 가려내는 일 자체가 이 분야의 큰 과제입니다. Aluru 리뷰는 여러 메커니즘의 "상호작용과 얽힘"이 더 복잡한 기능을 낳는 방식을 이해하는 것을 첫 번째 지식 공백의 일부로 둡니다. <span class="src">Aluru 2026, p.593</span></p>
+<p><span class="key">이 표의 칸은 "그 메커니즘이 항상 그렇다"가 아니라 "표에 적은 논문의 예에서 그랬다"입니다.</span> 그리고 실제 소자에서는 <strong>여러 메커니즘이 섞입니다</strong>. 같은 트랜지스터에 EDL과 도핑이 함께 있고(4구간), 이온겔 이중층의 개방 전압에는 계면 분극과 전극 분극이 함께 있으며(Day 37 3구간), 나노유체 고리에는 축전 성분이 섞여 고리 모양을 바꿉니다. <span class="src">Pandey 2026, p.7</span> 메커니즘을 가려내는 일 자체가 이 분야의 큰 과제입니다. Aluru 리뷰는 여러 메커니즘의 "상호작용과 얽힘"이 더 복잡한 기능을 낳는 방식을 이해하는 것을 첫 번째 지식 공백의 일부로 둡니다. <span class="src">Aluru 2026, p.593</span></p>
 </section>
 <section id="s-research-status" class="level4">
 <h4 class="anchored" data-anchor-id="s-research-status">6-2. 연구는 어디까지 왔나 / 지금 한계 / 넘어야 할 것</h4>
@@ -955,13 +989,13 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <td>농도 분극·고갈</td>
 <td>하이드로겔·이온겔 접합에서 정류 + 수백–수천 초 기억, 크기로 기억 조절 <span class="src">Zhang 2024 (ACS Nano), p.15029</span>, 이식 후 측정 <span class="src">Lee 2026 (AFM), p.6</span></td>
 <td>기억이 느리고(수백 s 이상) 크기 의존이 <span class="math inline">\(L^2/D\)</span>에서 벗어남 <span class="src">Zhang 2024 (ACS Nano), p.15030</span>; 계면 vs 느린 역류의 역할 불분명 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.316</span></td>
-<td>고갈층의 공간 분포를 직접 보는 측정, 시간상수를 과제 시간척도로 줄이기(크기·확산계수, Day 37–38)</td>
+<td>고갈층의 공간 분포를 직접 보는 측정, 시간상수를 과제 시간척도로 줄이기(크기·확산계수, Day 39–42)</td>
 </tr>
 <tr class="odd">
 <td>전기화학 도핑·삽입</td>
 <td>다단계·비휘발 시냅스, 화학 하나로 느린 <span class="math inline">\(\tau\)</span> 수십 배 조절 <span class="src">Lee 2025 (structure), p.4</span>; 고체 속 ns 동작 <span class="src">Zhou 2026 (Nat. Nanotech.), p.579</span></td>
 <td>산화환원 불안정·drift <span class="src">Roadmap 2026, p.8113</span>, 이온 주입 기구 이해 부족 <span class="src">Roadmap 2026, p.8120</span>, <span class="math inline">\(\tau\)</span> 귀속이 맞춤 결과에 기댐</td>
-<td><span class="math inline">\(\tau\)</span> 귀속을 독립 측정으로, 내구성·되돌림 에너지 보고</td>
+<td><span class="math inline">\(\tau\)</span> 귀속을 독립 측정으로, endurance·되돌림 에너지 보고</td>
 </tr>
 <tr class="even">
 <td>침전·착물화</td>
@@ -977,15 +1011,15 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 </tr>
 </tbody>
 </table>
-<p>Pandey 2026의 결론부는 나노유체 분야가 "아직 초기 단계"이며, 실용적인 신경모사 구조로 가려면 소자 간·주기 간 편차와 채널 상태의 차이를 다뤄야 한다고 씁니다. <span class="src">Pandey 2026, p.17</span> Aluru 리뷰는 기억 메커니즘 목록(기하 비대칭과 농도 분극, 벽의 전하 조절, 표면 전도, 표면 결합, 이온쌍, 소수성 상호작용 등)을 들며 그 시간척도를 구속·매질·표면전하·기하·침전 동역학으로 "몇 자릿수"까지 바꿀 수 있다고 정리합니다. <span class="src">Aluru 2026, p.593</span> 두 리뷰 모두 메커니즘을 <strong>계산 성능과 정량적으로 잇는</strong> 단계까지는 가지 않았습니다(Day 34 5구간). <span class="tag tag-interp">해석</span></p>
-<p><span id="s-objection"></span><strong>가장 강한 반론.</strong> 가장 강한 반론은 이것입니다. <strong>"메커니즘을 가려내는 것은 물리학자의 관심사다. RC에 필요한 것은 쓸 만한 기억과 비선형이지, 그것이 EDL에서 왔는지 도핑에서 왔는지가 아니다. 성능만 좋으면 된다."</strong> 이 반론에는 맞는 부분이 있습니다. 과제 하나를 푸는 데는 메커니즘 이름이 필요 없습니다. 그러나 (a) 시간상수를 과제에 <strong>맞추려면</strong>(Day 22–23) 무엇을 바꿔야 <span class="math inline">\(\tau\)</span>가 바뀌는지 알아야 하고, (b) 소자 간 편차와 drift를 <strong>줄이려면</strong>(Day 32) 어느 과정이 흔들리는지 알아야 하며, (c) 전극 반응 같은 가짜 신호를 소자 성능으로 오인하지 않으려면 메커니즘 판별이 필요합니다. 그래서 메커니즘은 성능의 <strong>손잡이를 찾는 일</strong>입니다. <span class="tag tag-interp">해석</span> 이 반론에 대한 내 답을 양식의 "가장 강한 반론" 칸에 적으세요.</p>
+<p>Pandey 2026의 결론부는 나노유체 분야가 "아직 초기 단계"이며, 실용적인 신경모사 구조로 가려면 소자 간·주기 간 편차와 채널 상태의 차이를 다뤄야 한다고 씁니다. <span class="src">Pandey 2026, p.17</span> Aluru 리뷰는 기억 메커니즘 목록(기하 비대칭과 농도 분극, 벽의 전하 조절, 표면 전도, 표면 결합, 이온쌍, 소수성 상호작용 등)을 들며 그 시간척도를 구속·매질·표면전하·기하·침전 동역학으로 "몇 자릿수"까지 바꿀 수 있다고 정리합니다. <span class="src">Aluru 2026, p.593</span> 두 리뷰 모두 메커니즘을 <strong>계산 성능과 정량적으로 잇는</strong> 단계까지는 가지 않았습니다(Day 36 5구간). <span class="tag tag-interp">해석</span></p>
+<p><span id="s-objection"></span><strong>가장 강한 반론.</strong> 가장 강한 반론은 이것입니다. <strong>"메커니즘을 가려내는 것은 물리학자의 관심사다. reservoir computing에 필요한 것은 쓸 만한 기억과 비선형이지, 그것이 EDL에서 왔는지 도핑에서 왔는지가 아니다. 성능만 좋으면 된다."</strong> 이 반론에는 맞는 부분이 있습니다. 과제 하나를 푸는 데는 메커니즘 이름이 필요 없습니다. 그러나 (a) 시간상수를 과제에 <strong>맞추려면</strong>(Day 23–24) 무엇을 바꿔야 <span class="math inline">\(\tau\)</span>가 바뀌는지 알아야 하고, (b) 소자 간 편차와 drift를 <strong>줄이려면</strong>(Day 33–34) 어느 과정이 흔들리는지 알아야 하며, (c) 전극 반응 같은 가짜 신호를 소자 성능으로 오인하지 않으려면 메커니즘 판별이 필요합니다. <span class="key">그래서 메커니즘은 성능의 <strong>손잡이를 찾는 일</strong>입니다.</span> <span class="tag tag-interp">해석</span> 이 반론에 대한 내 답을 양식의 "가장 강한 반론" 칸에 적으세요.</p>
 <p><span id="s-control-experiments"></span></p>
 <div class="think">
-<p>내 소자에 위 표의 메커니즘 몇 개가 동시에 있을까요? 하나만 남기는 대조 실험(예: 이온을 막는 전극으로 바꾸기, 고정 전하 없는 겔로 바꾸기, 접합 없이 같은 재료만 쓰기)을 메커니즘마다 하나씩 적어 보세요. 그 대조 실험이 Day 47–48의 가설·최소 실험 후보입니다.</p>
+<p>내 소자에 위 표의 메커니즘 몇 개가 동시에 있을까요? 하나만 남기는 대조 실험(예: 이온을 막는 전극으로 바꾸기, 고정 전하 없는 겔로 바꾸기, 접합 없이 같은 재료만 쓰기)을 메커니즘마다 하나씩 적어 보세요. 그 대조 실험이 Day 53–56의 가설·최소 실험 후보입니다.</p>
 </div>
 <div class="quiz" data-day="d20" data-set="6-check"></div>
 <div class="stop-point">
-<p>여기까지: 그림 8과 6-1 표로 메커니즘마다 휘발성·시간상수·가역성·비선형의 모양을 논문 숫자 하나씩과 함께 말하고, 실제 소자에서는 메커니즘이 섞여 판별 자체가 과제라는 것과 그것을 가를 대조 실험을 말할 수 있다. 다음: 총정리와 종합 퀴즈.</p>
+<p>여기까지: 그림 8과 6-1 표로 메커니즘마다 바뀌는 상태·읽는 값·되돌아오는 원인, 휘발성·시간상수·가역성·비선형의 모양을 논문 숫자 하나씩과 함께 말하고, 실제 소자에서는 메커니즘이 섞여 판별 자체가 과제라는 것과 그것을 가를 대조 실험을 말할 수 있다. 다음: 총정리와 종합 퀴즈.</p>
 </div>
 <div class="keypoints">
 <ul>
@@ -1056,7 +1090,7 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <tr class="even">
 <td>모르는 것</td>
 <td>내 소자의 기억은 계면에서 오나, 느린 역류에서 오나, 전극에서 오나</td>
-<td><span class="src">Wang 2025 (Chem. Soc. Rev.), p.316</span>. Day 47</td>
+<td><span class="src">Wang 2025 (Chem. Soc. Rev.), p.316</span>. Day 53–54</td>
 </tr>
 </tbody>
 </table>
@@ -1077,7 +1111,7 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <section id="ledger-items" class="level3">
 <h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
 <ul>
-<li><strong>병목 장부:</strong> (a) RC 과제가 요구하는 기억 시간(입력 간격의 몇 배) vs 농도 분극 소자의 기억 200–4000 s <span class="src">Zhang 2024 (ACS Nano), p.15029</span>: 과제가 ms–s면 크기를 줄이거나 <span class="math inline">\(D\)</span>를 키워야 한다. (b) 시냅스형 응용이 요구하는 내구성·되돌림 vs 침전·도핑 상태의 낮은 가역성. (c) 메커니즘 판별 프로토콜의 부재(전극 반응·축전 성분이 섞임) <span class="src">Pandey 2026, p.7</span>.</li>
+<li><strong>병목 장부:</strong> (a) reservoir computing 과제가 요구하는 기억 시간(입력 간격의 몇 배) vs 농도 분극 소자의 기억 200–4000 s <span class="src">Zhang 2024 (ACS Nano), p.15029</span>: 과제가 ms–s면 크기를 줄이거나 <span class="math inline">\(D\)</span>를 키워야 한다. (b) 시냅스형 응용이 요구하는 endurance·되돌림 vs 침전·도핑 상태의 낮은 가역성. (c) 메커니즘 판별 프로토콜의 부재(전극 반응·축전 성분이 섞임) <span class="src">Pandey 2026, p.7</span>.</li>
 <li><strong>아직 모르는 것:</strong> 내 heterojunction의 기억은 계면 고갈층, 겔 덩어리의 분극, 전극 중 어디서 오나? / 역방향과 순방향의 시간상수는 얼마나 다른가? / Pandey 2026이 말한 M1–M4 분류가 벌크 겔 접합에도 쓸모 있나?</li>
 <li><strong>용어집:</strong> 상태변수 <span class="math inline">\(x\)</span>, 이완, 휘발성, 가역성, 전기이중층(EDL), 디바이 길이, 비패러데이/패러데이, 산화/환원, EDL 탈분극, Donnan 배제, bipolar 접합, 농도 분극, 이온 고갈층, 정류비, 전기화학 도핑, 삽입, 산화환원, 다중 지수 맞춤, 표면전하 이온 선택성, EDL 겹침, 흡착·탈착, M1–M4.</li>
 <li><strong>접는 기준 후보:</strong> 내 소자의 기억이 전극을 이온 차단 전극으로 바꾸면 사라진다면, 그 기억을 '재료의 기억'으로 쓰지 않는다.</li>
@@ -1096,7 +1130,7 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
 <ul>
 <li>Pandey 2026, <em>Nat. Rev. Mater.</em>(온라인 선공개, 권·쪽 미배정). PDF p.6 Fig. 3(고리 유형과 메커니즘), p.7(일반 memristor 식, 기능 대응, 전극·읽기 조건), p.9 Table 1(재료별 기억 시간), p.17(Outlook).</li>
-<li>Lee 2024 (AFM), Lee 2025 (structure), Lee 2025 (zwitterion), Sung 2024: <code>../Eunho Lee/</code> 폴더. EDL과 도핑의 시간상수, 전해질·주사슬·곁사슬 화학. Day 38에서 다시 봅니다.</li>
+<li>Lee 2024 (AFM), Lee 2025 (structure), Lee 2025 (zwitterion), Sung 2024: <code>../Eunho Lee/</code> 폴더. EDL과 도핑의 시간상수, 전해질·주사슬·곁사슬 화학. Day 41–42에서 다시 봅니다.</li>
 <li>Lee 2026, <em>Adv. Funct. Mater.</em> e76901. p.2 Fig. 1(축적·고갈), p.4(바이어스별 임피던스와 대조군).</li>
 <li>Jiao 2026, <em>Adv. Funct. Mater.</em> 36, e76959. p.2(11 nm 채널), p.4(흡착·탈착, 농도 최적, 종별 고리 넓이).</li>
 <li>Zhou 2026, <em>Nat. Nanotechnol.</em> 21, 579–587. p.579(양성자 니켈산화물: ns 과도 응답과 다단계 상태).</li>
@@ -1109,12 +1143,13 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 </ul>
 </section>
 </div>
-<script type="application/json" id="quiz-d20">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커. 숫자는 tools/figs_d20.py --numbers와 일치한다.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 이온만의 자유도와 이온이 지는 영역", "items": [{"id": "d20-r01", "type": "mc", "q": "PEDOT:PSS 채널 OECT의 게이트를 +0.5 V로 두었다가 0 V로 되돌렸다. 채널 안에서 일어나는 일로 가장 알맞은 것은?", "options": ["K⁺가 채널에 남아 정공이 더 줄고 전류도 준다", "Cl⁻가 채널로 들어가 정공을 없애 전류가 준다", "K⁺가 전해질로 돌아가고 정공이 돌아와 전류가 커진다", "정공은 그대로이고 K⁺만 빠져 전류도 그대로다"], "a": 2, "why": "+ 게이트가 K⁺를 채널 부피에 넣어 정공을 빼냈던 것(탈도핑)이 거꾸로 일어난다. K⁺가 나가면 PSS⁻의 음전하를 맞출 정공이 다시 생겨 전류가 회복된다. 돌아오는 빠르기는 막 두께 L에 대한 L²/D 자릿수에 기댄다.", "wrongWhy": ["게이트가 K⁺를 밀어 넣던 전압이 사라졌으므로 K⁺는 전해질로 돌아간다.", "음이온이 들어가면 정공은 오히려 늘어난다(축적형의 방향).", "", "K⁺가 빠지면 PSS⁻의 짝이 다시 필요해져 정공이 돌아온다."], "ref": "d19b.html#b-oect", "refLabel": "OECT 기초: 단계 3 게이트를 다시 0으로"}, {"id": "d20-r02", "type": "mc", "q": "누르면 용매 흐름으로 전압이 생기는 겔의 응답 시간이 두께의 제곱에 비례한다고 가정하자. 두께 0.6 mm에서 응답이 0.9 s였다면, 두께 0.2 mm에서는?", "options": ["약 0.3 s", "약 0.1 s", "약 0.03 s", "약 0.9 s"], "a": 1, "why": "(0.2/0.6)² = 1/9, 0.9 ÷ 9 = 0.1 s. 이 시간은 이온 하나의 이동이 아니라 겔이 눌렸다 용매가 빠져나가는 기계적 이완이 정한다. 실제 측정에서는 이 제곱 법칙보다 더 크게 줄어든 예도 있었다.", "wrongWhy": ["두께에 그대로 비례한다고 봤다(1/3). 가정은 제곱 비례다.", "", "세제곱으로 줄였다(1/27).", "두께가 바뀌면 응답 시간도 바뀐다는 것이 가정이다."], "ref": "d19b.html#s-hydration", "refLabel": "3-2 질량과 수화 껍질: 두께와 응답 시간"}, {"id": "d20-r03", "type": "mc", "q": "어떤 상분리 겔에서 이온이 계면을 건널 때 수화 껍질을 일부 벗어야 하고, 전하 밀도가 큰 이온일수록 물을 강하게 붙잡아 장벽이 높다고 하자. 같은 1 mM에서 Na⁺와 Mg²⁺(더 작고 전하가 2배) 중 전류가 켜지는 문턱 전압이 더 높을 것으로 예상되는 쪽은?", "options": ["Mg²⁺: 전하 밀도가 커 껍질을 벗기 어렵다", "Na⁺: 가수가 작아 전기장에 덜 끌린다", "둘 다 같다: 문턱은 농도만으로 정해진다", "Na⁺: 더 가벼워 껍질을 더 꽉 쥔다"], "a": 0, "why": "가정한 설명대로라면 전하 밀도가 큰 Mg²⁺가 물 분자를 더 강하게 붙잡아 탈수화 장벽이 높고 문턱도 높다. K⁺ 5 mV, Ca²⁺ 40 mV, Fe³⁺ 60 mV로 가수가 클수록 문턱이 높았던 보고와 같은 방향이다. 다만 이것은 저자들의 해석을 적용한 예상이다.", "wrongWhy": ["", "이 설명에서 문턱을 가르는 것은 전기장에 끌리는 힘보다 탈수화 장벽이다.", "고른 겔에서는 그랬지만(모두 약 1 mV), 상분리 겔에서는 이온 종류에 따라 문턱이 갈렸다.", "가벼움이 아니라 전하 밀도가 물을 붙잡는 세기를 정한다."], "ref": "d19b.html#s-species", "refLabel": "3-1 종이 여럿이다: 문턱 5/40/60 mV"}, {"id": "d20-r04", "type": "ox", "q": "어떤 이온 소자에 전자 소자에는 없는 상태변수(예: 침전의 양)가 하나 더 있다는 것이 확인되었다. 그것만으로 이 소자는 계산 자원을 하나 더 가진 셈이다.", "a": false, "why": "상태변수가 계산 자원이 되려면 (i) 읽을 수 있고, (ii) 과제에 필요한 차이를 보존하며, (iii) 단순 기준선보다 나아야 한다. '있다'와 '계산에 쓸모 있다'는 다른 주장이다.", "ref": "d19b.html#s-resource-test", "refLabel": "5구간: 상태변수가 계산 자원이 되는 세 조건"}, {"id": "d20-r05", "type": "mc", "q": "쓰기 시간이 전기화학 메모리 10⁻⁹ s, 이온 소자 10⁻³ s부터라는 비교가 있다. 과제가 입력 간격 수 ms–1 s인 심박 신호 처리라면, '속도' 축의 판정으로 가장 알맞은 것은?", "options": ["여섯 자릿수 느리므로 이 과제에도 쓸 수 없다", "이 과제에서는 이온이 전자보다 빠르다", "클록을 낮추면 속도 차이가 사라진다", "과제가 ms–s라 느림이 정합 조건일 수 있다"], "a": 3, "why": "판정은 과제의 시간척도에 달려 있다. 입력이 ms–s 간격이면 ms 시간상수는 결점이 아니라 정합 조건일 수 있다. 다만 '이온이 빠르다'는 뜻이 아니라 '그 과제에서는 빠를 필요가 없다'는 뜻이다.", "wrongWhy": ["과제의 시간척도가 ms–s이면 ns 쓰기 속도가 필요하지 않다.", "이온이 빨라진 것이 아니라, 이 과제에서는 빠를 필요가 없다는 뜻이다.", "소자의 쓰기 시간은 클록과 무관한 물리 과정의 시간이다.", ""], "ref": "d19b.html#s-speed-axis", "refLabel": "4구간: 속도 축과 판정이 바뀌는 조건"}, {"id": "d20-r06", "type": "mc", "q": "구별되는 상태가 64단계인 이온 소자를 reservoir 노드로 쓰려 한다. '정밀도' 축에서 판정이 바뀌는 조건으로 가장 알맞은 것은?", "options": ["readout이 가를 상태 차이가 반복 흔들림보다 크다", "상태 수를 2¹¹단계까지 늘려야만 쓸 수 있다", "잡음이 클수록 비선형도 커져 오히려 유리하다", "상태 수는 계산과 무관해 따질 필요가 없다"], "a": 0, "why": "판정이 바뀌는 조건은 readout이 구분해야 할 상태 차이가 반복 흔들림(잡음)보다 큰 과제인지다(Δ/σ). 상태 수 자체보다 차이 대 잡음의 비가 중요하다.", "wrongWhy": ["", "상태 수가 적어도 과제가 구분할 차이가 잡음보다 크면 쓸 수 있다.", "잡음은 상태를 흐려 readout이 차이를 가르기 어렵게 만든다.", "상태의 충실도는 readout이 차이를 읽을 수 있는지와 직결된다."], "ref": "d19b.html#s-precision-axis", "refLabel": "4구간: 정밀도(상태 수와 잡음)"}, {"id": "d20-r07", "type": "mc", "q": "30 mm × 30 mm 기판에 8 × 8 = 64개의 겔 소자를 만들었다. 1 cm²당 몇 개인가?", "options": ["약 0.7개", "약 2.1개", "약 7.1개", "약 71개"], "a": 2, "why": "기판 넓이 = 3 cm × 3 cm = 9 cm², 64 ÷ 9 ≈ 7.1개/cm². 칩 하나에 수십억 개가 들어가는 실리콘과 비교하면 집적 밀도의 차이가 보인다.", "wrongWhy": ["90으로 나눴다. 기판 넓이는 3 cm × 3 cm = 9 cm²다.", "한 변 길이(3 cm)로 나눴다. 넓이로 나눠야 한다.", "", "0.9 cm²로 계산했다. 30 mm = 3 cm이므로 9 cm²다."], "ref": "d19b.html#s-density-axis", "refLabel": "4구간: 집적 밀도"}, {"id": "d20-r08", "type": "mc", "q": "논문 A는 이온겔 시냅스의 상태 전환 1회(소자 하나)에 5 fJ, 논문 B는 디지털 칩의 추론 1회(칩 전체, 읽기 포함)에 2 pJ를 보고했다. 'A가 B보다 400배 효율적'이라고 쓸 수 있나?", "options": ["쓸 수 있다: 같은 J 단위라 나누면 된다", "쓸 수 없다: 경계와 작업 단위가 서로 다르다", "쓸 수 있다: 이온 소자는 원래 저전력이다", "쓸 수 없다: fJ와 pJ는 바꿀 수 없는 단위다"], "a": 1, "why": "A는 소자 하나의 상태 전환만 센 값이고 B는 칩 전체의 추론 1회다. 같은 경계(소자만/시스템)와 같은 작업 단위(상태당/추론당)로 맞추기 전에는 배수를 쓸 수 없다.", "wrongWhy": ["단위가 같아도 무엇을 셌는지(소자만/칩 전체, 상태 전환/추론)가 다르면 비교가 성립하지 않는다.", "", "'원래 저전력'은 조건 없는 주장이다. 같은 경계에서 비교해야 한다.", "1 pJ = 1000 fJ로 바꿀 수 있다. 문제는 단위가 아니라 경계다."], "ref": "d19b.html#s-energy-boundary", "refLabel": "4구간 흔한 오해: 이온 소자는 저전력"}, {"id": "d20-r09", "type": "mc", "q": "응용 X는 몸에 붙여 땀 성분을 감지하며 시간척도 1–10 s, 상태 16단계, 사용 기간 2주를 요구한다. 이온 메커니즘 Y는 시간상수 0.5–5 s, 상태 64단계, 수계 동작, 안정 기간 1주를 허용한다. 두 사양이 겹치지 않아 먼저 막히는 칸은?", "options": ["시간척도", "상태 수", "매질", "사용 기간"], "a": 3, "why": "요구 2주에 허용 1주라 사용 기간 칸이 겹치지 않는다. 나머지 칸이 겹쳐도 이 칸이 비면 그 응용에서 Y는 답이 되지 못한다.", "wrongWhy": ["1–10 s와 0.5–5 s는 1–5 s에서 겹친다.", "64단계는 요구한 16단계보다 많다.", "땀은 수계이고 Y도 수계에서 동작한다.", ""], "ref": "d19b.html#s-frame", "refLabel": "5구간: 조건부 결론의 문장 틀"}, {"id": "d20-r10", "type": "ox", "q": "응용 사양과 이온 메커니즘 사양이 겹치는 칸을 찾았다. 그런데 같은 칸을 저전력 마이크로컨트롤러와 디지털 필터가 더 싸게 채울 수 있다. 그래도 그 응용에서 '왜 이온인가'에 답이 있다고 말할 수 있다.", "a": false, "why": "틀의 마지막 칸, '전자 소자가 같은 칸을 더 싸게 채우지 못하는 이유'가 비면 그 응용에서는 '왜 이온인가'에 답이 없다. 겹치는 칸은 필요조건일 뿐이다.", "ref": "d19b.html#s-frame", "refLabel": "5구간: 조건부 결론의 문장 틀"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)", "items": [{"id": "d20-rb01", "type": "mc", "q": "어떤 이온 소자에 펄스를 준 뒤 끄면 전류가 약 30초에 걸쳐 저절로 원래 값으로 돌아가고, 반대 펄스를 주면 곧바로 되돌릴 수도 있다. 휘발성·시간상수·가역성 가운데 '약 30초'라는 숫자로 적는 성질은?", "options": ["가역성", "휘발성", "비선형성", "시간상수"], "a": 3, "why": "돌아가는 빠르기의 척도가 시간상수다. '저절로 돌아간다'는 휘발성, '반대 펄스로 되돌린다'는 가역성으로 따로 적는다.", "wrongWhy": ["가역성은 반대 입력으로 되돌릴 수 있는지와 그 횟수다.", "휘발성은 저절로 돌아가는지를 말하는 성질이고, 그 빠르기는 따로 적는다.", "비선형성은 입력과 출력의 비례가 깨지는 성질로, 시간의 숫자가 아니다.", ""], "ref": "d20a.html#s-three-properties", "refLabel": "1구간: 메커니즘마다 기록할 세 가지"}, {"id": "d20-rb02", "type": "mc", "q": "25 °C 물속 1:1 염의 디바이 길이는 10 mM에서 약 3.0 nm다. 염을 0.1 mM로 묽히면 디바이 길이는 대략?", "options": ["약 0.3 nm", "약 30 nm", "약 300 nm", "약 3.0 nm"], "a": 1, "why": "디바이 길이는 농도의 제곱근에 반비례한다. 농도가 1/100이면 √100 = 10배 길어져 약 30 nm(계산값 30.4 nm)다.", "wrongWhy": ["방향이 반대다. 묽을수록 가려 줄 이온이 적어 층이 두꺼워진다.", "", "농도에 그대로 반비례한다고 봤다(100배). 제곱근이라 10배다.", "디바이 길이는 농도에 따라 바뀐다."], "ref": "d20a.html#s-debye-numbers", "refLabel": "2구간: 디바이 길이의 숫자"}, {"id": "d20-rb03", "type": "mc", "q": "10 mM KCl, 전극 1 cm², 간격 1 cm에서 EDL 충전 시간은 τ ≈ RC ≈ 3.3 ms였다(면적당 계면 정전용량은 고정). 간격은 그대로 두고 두 전극의 면적만 4 cm²로 키우면?", "options": ["약 0.8 ms", "약 13 ms", "약 3.3 ms", "약 53 ms"], "a": 2, "why": "R = 간격 ÷ (전도도 × 면적)은 1/4, C는 면적에 비례해 4배. 곱 τ는 그대로 3.3 ms다. 마주 보는 두 전극에서 면적은 지워진다.", "wrongWhy": ["R이 1/4로 주는 것만 봤다. C도 면적에 비례해 4배가 된다.", "C가 4배가 되는 것만 봤다. R은 면적에 반비례해 1/4이 된다.", "", "R과 C가 모두 4배가 된다고 봤다. R은 면적이 클수록 작아진다."], "ref": "d20a.html#s-edl-numbers", "refLabel": "2구간 ④ 단계 4: 무엇이 τ를 바꾸나"}, {"id": "d20-rb04", "type": "mc", "q": "금 전극 두 개 사이의 전해질에서 EDL을 같은 전압으로 충전한 뒤, 한 번은 두 전극을 도선으로 이어 두고 한 번은 회로를 끊어 두었다. 충전된 전하(개방 전압)가 더 오래 남는 쪽은?", "options": ["회로를 끊어 둔 쪽", "도선으로 이어 둔 쪽", "둘 다 같다: 반응이 없어서", "둘 다 곧 사라진다: 비패러데이라서"], "a": 0, "why": "EDL의 휘발성은 방전 길에 달려 있다. 반응하지 않는 금 전극에서 회로를 끊으면 전하가 빠져나갈 길이 없어 개방 전압이 오래 남을 수 있다(Wang 2025 p.309).", "wrongWhy": ["", "도선이 방전 길이 되어 전하가 τ ≈ RC로 빠져나간다.", "반응이 없어도 방전 길이 있느냐에 따라 빠르기가 달라진다.", "비패러데이라도 방전 길이 막히면 전하가 빠져나갈 곳이 없어 오래 남을 수 있다."], "ref": "d20a.html#s-edl-not-always-volatile", "refLabel": "2구간: EDL이 늘 휘발성은 아니다"}, {"id": "d20-rb05", "type": "mc", "q": "고정 음전하 농도 X = 2 M인 겔을 20 mM 소금물에 담갔다. 이상 Donnan 평형에서 겔 속 공이온(음이온) 농도는 대략? (c₋ ≈ c_s²/X)", "options": ["약 20 mM", "약 0.4 mM", "약 0.2 mM", "약 10 mM"], "a": 2, "why": "c₋ ≈ (0.02)² ÷ 2 = 2×10⁻⁴ M = 0.2 mM. 바깥(20 mM)의 1/100이다. 고정 전하가 진할수록, 바깥 염이 묽을수록 배제가 강하다.", "wrongWhy": ["바깥과 같다고 봤다. Donnan 배제로 공이온은 겔에 잘 들어오지 못한다.", "X를 1 M로 계산했다. 여기서는 2 M이다.", "", "c_s/X처럼 제곱을 빠뜨렸다(0.02 ÷ 2 = 0.01 M). 식은 c_s²/X다."], "ref": "d20a.html#s-donnan", "refLabel": "3구간 ②: Donnan 배제의 숫자"}, {"id": "d20-rb06", "type": "mc", "q": "양이온 선택 겔(왼쪽)과 음이온 선택 겔(오른쪽)을 붙인 접합에서, 왼쪽 전극에 (−), 오른쪽 전극에 (+)를 걸었다. 접합 근처에서 일어나는 일은?", "options": ["두 이온이 접합으로 몰려 접합 농도가 오른다", "양이온만 접합 쪽으로 와서 농도가 그대로다", "전압 방향과 상관없이 접합 농도는 그대로다", "두 이온이 접합에서 멀어져 고갈층이 생긴다"], "a": 3, "why": "왼쪽(양이온 선택) 겔의 양이온은 (−)인 왼쪽 전극으로, 오른쪽 겔의 음이온은 (+)인 오른쪽 전극으로 끌려 둘 다 접합에서 멀어진다. 양쪽 겔이 공이온을 막아 보충이 없으니 고갈층이 생긴다(역방향).", "wrongWhy": ["왼쪽 +, 오른쪽 −일 때(순방향)의 모습이다. 여기서는 극성이 반대다.", "왼쪽 겔의 양이온은 (−) 전극 쪽, 곧 접합에서 멀어지는 쪽으로 끌린다.", "농도는 전압 방향에 따라 쌓이거나 빈다. 그것이 정류의 원인이다.", ""], "ref": "d20a.html#s-junction-steps", "refLabel": "3구간 그림 3(Day 35)과 단계 1–2"}, {"id": "d20-rb07", "type": "mc", "q": "장난감 모형(τ = 1 s)에서 고리가 가장 넓은 주파수는 약 0.08 Hz였다. 다른 조건은 그대로 두고 τ만 4 s로 늘리면, 고리가 가장 넓은 주파수는 대략?", "options": ["약 0.02 Hz", "약 0.08 Hz", "약 0.32 Hz", "약 0.005 Hz"], "a": 0, "why": "이 모형의 고리 모양은 f·τ에만 달려 있으므로 최대 위치가 τ에 반비례한다. 0.08 ÷ 4 = 0.02 Hz.", "wrongWhy": ["", "고리 모양은 f·τ에 달려 있어 τ가 바뀌면 최대 위치도 옮겨 간다.", "τ에 비례한다고 봤다. 느린 소자일수록 더 천천히 훑어야 고리가 커진다.", "τ²에 반비례한다고 봤다(1/16). 최대 위치는 τ에 반비례한다."], "ref": "d20a.html#s-toy-model", "refLabel": "3-1 장난감 모형과 짧은 확인"}, {"id": "d20-rb08", "type": "ox", "q": "어떤 이온 다이오드를 아주 느리게(0.01 Hz) 훑었더니 I–V에 고리가 거의 없고 +1 V 전류가 −1 V 전류의 약 20배였다. 이 측정만으로 이 소자에는 이력(기억)을 담는 상태가 없다고 결론 내릴 수 있다.", "a": false, "why": "아주 느리게 훑으면 상태가 매 순간 목표값을 따라가 고리가 닫힌다. 장난감 모형도 상태 c를 가지고 있지만 0.01 Hz에서는 정류만 보였다. 기억을 보려면 소자 시간상수와 같은 자릿수의 빠르기로 훑거나 펄스 뒤 이완을 재야 한다.", "ref": "d20a.html#s-loop-myth", "refLabel": "3-1: 고리 넓이와 기억(흔한 오해)"}, {"id": "d20-rb09", "type": "mc", "q": "농도 분극을 쓰는 겔 소자의 길이가 2 mm일 때 기억 시간이 약 500 s였다. 같은 재료로 길이만 0.5 mm로 줄이면, L²/D 어림대로라면 기억 시간은 대략?", "options": ["약 125 s", "약 8 s", "약 31 s", "약 2000 s"], "a": 2, "why": "(0.5/2)² = 1/16, 500 ÷ 16 ≈ 31 s. 다만 실제 소자에서는 크기 의존이 이 어림보다 덜 가파를 수 있다(시뮬레이션 보고).", "wrongWhy": ["길이에 그대로 비례한다고 봤다(1/4). 시간은 길이의 제곱에 비례한다.", "길이의 세제곱으로 줄였다(1/64).", "", "방향이 반대다. 짧을수록 이온이 움직일 거리가 줄어 빨라진다."], "ref": "d20a.html#s-polarization-time", "refLabel": "3구간 단계 4: 기억과 그 시간"}, {"id": "d20-rb10", "type": "mc", "q": "작은 전압 범위에서 EDL을 축전기로 볼 때, 걸린 전압을 0.1 V에서 0.2 V로 올리면 계면에 쌓인 전하는 대략?", "options": ["약 4배", "약 2배", "그대로", "약 1.4배"], "a": 1, "why": "Q = CV이므로 전압이 2배면 전하도 2배다. EDL 자체는 작은 전압에서 거의 선형이라, 이온 게이트 트랜지스터의 큰 비선형은 주로 채널의 문턱에서 온다.", "wrongWhy": ["전압의 제곱에 비례하는 것은 축전기에 저장된 에너지다. 전하는 전압에 비례한다.", "", "전압을 올리면 이온이 더 모여 전하가 늘어난다.", "제곱근 관계로 봤다. Q = CV는 비례 관계다."], "ref": "d20a.html#s-edl-nonlinear", "refLabel": "2구간: 왜 비선형인가(EDL은 거의 선형)"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "음전하가 붙은 겔과 양전하가 붙은 겔을 맞붙인 접합에 +1 V와 −1 V를 천천히 번갈아 걸 때 전류–전압 곡선이 어떤 모양일지 손으로 그려 보세요. 그리고 전압을 아주 느리게 바꿀 때와 아주 빠르게 바꿀 때 그 모양이 어떻게 달라질지 한 줄씩 예상해 적어 보세요.", "items": [{"id": "d20-p01", "type": "ox", "q": "이온 소자의 전류–전압 히스테리시스 고리가 클수록 그 소자는 기억이 좋은 소자다.", "a": false, "why": "고리 넓이는 전압을 훑는 빠르기에 따라 바뀐다. 너무 느리거나 너무 빠르면 고리가 닫히고, 전압이 바뀌는 빠르기가 소자 시간상수와 같은 자릿수일 때(2πf ~ 1/τ) 가장 크다. 3구간 장난감 모형(그림 4(Day 35))과 흔한 오해 상자에서 설명한다.", "ref": "#s-loop-myth", "refLabel": "3-1 흔한 오해: 고리 넓이와 기억"}, {"id": "d20-p02", "type": "mc", "q": "10 mM 소금물에 담근 전극 표면에 반대 전하 이온이 모여 생기는 층(전기이중층)의 두께는 대략 어느 정도일까?", "options": ["수 mm", "수 µm", "수 nm", "수 pm(피코미터)"], "a": 2, "why": "두께는 디바이 길이 정도이고 10 mM에서 약 3 nm, 1 mM에서 약 9.6 nm, 100 mM에서 약 1 nm다. 2구간 기초 상자에서 설명한다.", "wrongWhy": ["mm는 눈에 보이는 크기다. 이온층은 이온 몇 개에서 수십 개 두께에 가깝다.", "µm는 세포 크기 정도로, 10 mM의 차폐 거리보다 천 배쯤 크다.", "", "pm는 원자 하나보다도 작은 길이라 이온이 층을 이룰 수 없다."], "ref": "#s-debye-numbers", "refLabel": "2구간: 디바이 길이의 숫자"}, {"id": "d20-p03", "type": "mc", "q": "고정 음전하 겔(양이온만 잘 통과)과 고정 양전하 겔(음이온만 잘 통과)을 붙인 접합에 '역방향' 전압을 걸면 주로 무슨 일이 생길까?", "options": ["접합으로 양·음이온이 몰려 전류가 커진다", "접합의 이온이 빠지고 보충이 없어 전류가 작아진다", "양이온만 접합으로 와서 전류가 절반쯤 된다", "공이온이 겔로 들어와 접합을 채워 전류가 커진다"], "a": 1, "why": "역방향에서는 양·음이온이 모두 접합에서 멀어지고, 각 겔이 공이온을 배제해 보충이 안 되므로 이온 고갈층이 생긴다. 순방향은 반대로 축적. 3구간에서 단계별로 설명한다.", "wrongWhy": ["순방향의 모습이다. 역방향에서는 두 이온이 모두 접합에서 멀어진다.", "", "역방향에서는 양이온도 접합에서 멀어진다. 한 종류만 오는 방향은 없다.", "Donnan 배제 때문에 공이온은 겔에 거의 들어오지 못한다."], "ref": "#s-junction-steps", "refLabel": "3구간 단계 2: 역방향과 고갈층"}, {"id": "d20-p04", "type": "ox", "q": "같은 이온 다이오드라도 전압을 아주 느리게 훑으면 히스테리시스 고리가 거의 닫히고 정류(한쪽 방향 전류가 큼)만 보일 수 있다.", "a": true, "why": "아주 느리면 내부 농도가 매 순간 정상값을 따라가므로 지난 이력이 남지 않는다. 3구간 장난감 모형(0.01 Hz)에서 계산으로 보인다.", "ref": "#s-toy-model", "refLabel": "3-1 장난감 모형: 0.01 Hz 칸"}, {"id": "d20-p05", "type": "ox", "q": "전극 표면 전기이중층의 충전·방전은 화학 반응이 없는 과정이므로, 어떤 측정 조건에서도 1초 안에 원래대로 돌아간다.", "a": false, "why": "휘발성은 방전 길에도 달려 있다. 반응하지 않는 전극에서 방전 길을 막으면 개방 전압이 오래 남을 수 있고, 전해질 화학으로 이완을 늘릴 수도 있다. 2구간에서 설명한다.", "ref": "#s-edl-not-always-volatile", "refLabel": "2구간: EDL이 늘 휘발성은 아니다"}, {"id": "d20-p06", "type": "mc", "q": "이온 게이트 유기 트랜지스터에 펄스를 준 직후, 전류의 여러 감쇠 성분 가운데 가장 먼저 사라지는 것으로 흔히 해석되는 것은?", "options": ["고분자 결정 영역의 이온이 빠져나오는 것", "고분자 비정질 영역의 이온이 빠져나오는 것", "전극 반응으로 생긴 물질이 녹는 것", "채널 표면에 모였던 이온층이 흩어지는 것"], "a": 3, "why": "펄스 뒤 감쇠를 지수 여러 개로 맞추면 가장 빠른 성분(1초 미만)을 계면 이온층(EDL)의 흩어짐으로, 느린 성분을 고분자 안 이온의 역확산으로 귀속한다. 귀속은 저자 해석이다. 4구간에서 설명한다.", "wrongWhy": ["결정 영역 깊이 들어간 이온은 가장 느리게(τ₃) 나온다고 해석된다.", "비정질 영역의 이온은 중간 빠르기(τ₂)로 해석된다.", "이 감쇠 성분들은 채널 안 이온의 이동으로 해석되었고, 전극 반응은 그중 어느 성분에도 귀속되지 않았다.", ""], "ref": "#s-doping-steps", "refLabel": "4구간 단계 2: 펄스 직후 τ₁"}, {"id": "d20-p07", "type": "mc", "q": "높이가 고정된 아주 좁은 나노채널(벽이 음전하)에서 소금 농도를 높이면, 벽 전하 때문에 '양이온만 통과하는' 성질은 어떻게 될까?", "options": ["더 강해진다", "약해진다", "변하지 않는다", "음이온만 통과하게 바뀐다"], "a": 1, "why": "농도가 높을수록 디바이 길이가 짧아져 벽의 영향이 가장자리로 밀린다(1 mM 9.6 nm → 1 M 0.3 nm). 5구간 기초 상자에서 설명한다.", "wrongWhy": ["농도가 높으면 디바이 길이가 짧아져 벽의 영향이 줄어든다.", "", "디바이 길이가 농도에 따라 바뀌므로 선택성도 바뀐다.", "벽 전하의 부호는 그대로라 반대이온은 여전히 양이온이다."], "ref": "#s-nano-numbers", "refLabel": "5구간 ④: 11 nm 채널과 λ_D"}, {"id": "d20-p08", "type": "ox", "q": "기억의 메커니즘이 같다면(예: 둘 다 농도 분극), 소자의 크기가 달라도 기억 시간은 비슷하다.", "a": false, "why": "같은 농도 분극 소자도 크기에 따라 기억이 200 s에서 4000 s로 바뀌었고, 같은 나노채널에서도 지배 과정에 따라 분에서 74시간까지 갈렸다. 6구간 그림 8(시간척도 지도)에서 설명한다.", "ref": "#ch-mechanism-map", "refLabel": "6구간 그림 8: 시간척도 지도"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 상태 x로 보기", "items": [{"id": "d20-q01", "type": "mc", "q": "일반 memristor 표현 i = G(x, V)·V, dx/dt = f(x, V)에서 '기억'에 해당하는 것은?", "options": ["G가 x와 V에 대해 휘어 있는 것", "x가 입력이 끝난 뒤에도 얼마간 남는 것", "전류 i가 전압 V에 비례하는 것", "전압 V가 클수록 i가 커지는 것"], "a": 1, "why": "기억은 상태 x가 과거 입력의 흔적을 얼마나 오래 들고 있느냐이고, 그 빠르기(이완)는 x의 변화율 f가 정한다. G의 휨은 비선형 쪽이다. 1구간 그림 1(Day 35).", "wrongWhy": ["G의 휨은 비선형 쪽이다.", "", "비례하면 선형 저항이고, 이력은 드러나지 않는다.", "전류가 전압과 함께 커지는 것은 보통 저항에도 있는 성질이다."], "ref": "#ch-state-variable", "refLabel": "1구간 그림 1(Day 35): 공통 틀"}, {"id": "d20-q28", "type": "mc", "q": "(가상의 예) 하이드로겔 소자에 전압 펄스를 주면 겔 속 물이 빠져 부피가 줄고, 펄스를 끄면 몇 분에 걸쳐 물이 돌아오며 전류도 따라 회복된다. 그림 1(Day 35)의 공통 틀에서 상태 x에 해당하는 것은?", "options": ["겔의 물 함량(부피)", "걸어 준 펄스 전압 V", "흐르는 전류 I", "펄스를 준 횟수"], "a": 0, "why": "입력에 따라 바뀌고, 입력을 끊은 뒤에도 얼마간 남아 출력(전류)에 영향을 주는 양이 상태다. 여기서는 겔의 물 함량이다. 펄스 전압은 입력, 전류는 출력이다.", "wrongWhy": ["", "V는 입력이다. 펄스를 끄면 0이 되지만 소자의 변화는 남아 있다.", "I는 출력이다. 상태에 따라 달라지는 결과다.", "횟수는 실험자가 세는 숫자이고, 소자 안에서 이완하는 양이 아니다."], "ref": "#ch-state-variable", "refLabel": "1구간: 상태 x를 찾는 작은 장면"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · EDL 충전 시간 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d20-q03", "type": "short", "q": "[풀이 예시 확인] 본문 단계 2–3: 10 mM KCl, 전극 1 cm², 간격 1 cm에서 R ≈ 670 Ω, 직렬 계면 정전용량 C = 5 µF이었다. τ = RC는 몇 ms인가? (소수 첫째 자리까지)", "a": ["3.3", "3.3 ms", "3.34", "3.35", "약 3.3"], "why": "τ = 670 × 5×10⁻⁶ = 3.3×10⁻³ s = 3.3 ms. 저항(재료와 크기)과 정전용량(계면 면적)의 곱이다. 2구간 기초 상자 ④.", "ref": "#s-edl-numbers", "refLabel": "2구간 ④ 단계 2–3: R과 C"}, {"id": "d20-q04", "type": "short", "q": "[일부 채우기] 같은 전해질·같은 전극 면적에서 간격만 1 cm → 2 mm로 줄이면 R은 670 × 0.2 = 134 Ω이 된다. 그러면 τ = 134 × 5×10⁻⁶ = ? ms (소수 둘째 자리까지)", "a": ["0.67", "0.67 ms", "0.670", "0.66"], "why": "τ = 134 × 5×10⁻⁶ = 6.7×10⁻⁴ s = 0.67 ms. 간격이 1/5이 되면 저항도 τ도 1/5이다. EDL 충전 시간은 전극 간격에 비례한다(면적은 R과 C에서 지워진다). Day 37에서 τ ~ λ_D·L/D로 다시 본다.", "ref": "#s-edl-numbers", "refLabel": "2구간 ④ 단계 4: 간격을 바꾸면"}, {"id": "d20-q05", "type": "short", "q": "[혼자 풀기] 간격 1 cm, 면적 1 cm²는 그대로 두고 전해질을 전도도가 100배 낮은 고분자 겔로 바꿨다(계면 정전용량 5 µF은 같다고 가정). τ는 약 몇 초인가? (소수 둘째 자리까지)", "a": ["0.33", "0.33 s", "0.334", "333 ms", "약 0.33"], "why": "전도도가 1/100이면 R이 100배(약 67 kΩ), τ = 6.7×10⁴ × 5×10⁻⁶ ≈ 0.33 s. 같은 '계면 충전'도 전해질 재료에 따라 ms에서 s로 바뀐다. 헷갈렸다면 R이 전도도에 반비례한다는 것을 확인하세요.", "ref": "#s-edl-numbers", "refLabel": "2구간 ④ 단계 4: 전도도를 바꾸면"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · Donnan 배제와 접합", "items": [{"id": "d20-q06", "type": "mc", "q": "polyanion 겔(고정 음전하)과 polycation 겔(고정 양전하)을 맞붙인 접합에 역방향 전압을 걸면 접합의 전도도가 떨어지는 가장 중요한 이유는?", "options": ["역방향에서 이온의 이동도가 작아지기 때문", "전극 앞에 EDL이 두껍게 쌓여 전류를 막기 때문", "접합으로 이온이 너무 많이 몰려 서로 막기 때문", "접합의 이온이 빠지는데 양쪽 겔이 보충을 막기 때문"], "a": 3, "why": "역방향에서는 양이온·음이온 모두 접합에서 멀어지고, p형 겔은 음이온을, n형 겔은 양이온을 Donnan 배제로 막아 보충이 안 된다. 그래서 이온 고갈층이 생긴다. 3구간 단계 2.", "wrongWhy": ["이동도는 이온과 매질의 성질이라 전압 방향으로 바뀌지 않는다.", "EDL은 양 방향 모두 전극에 생기므로 방향 차이를 설명하지 못한다.", "이온이 몰리는 것은 순방향이고, 그때는 전도도가 오른다.", ""], "ref": "#s-junction-steps", "refLabel": "3구간 단계 2: 역방향과 고갈층"}, {"id": "d20-q07", "type": "short", "q": "고정 전하 농도 X = 0.5 M인 겔을 10 mM 염에 담갔다. 이상 Donnan 평형(c₊·c₋ = c_s², c₊ − c₋ = X)에서 겔 속 공이온 농도는 약 몇 mM인가? (소수 첫째 자리까지; 힌트: c₋ ≈ c_s²/X)", "a": ["0.2", "0.20", "0.2 mM", "약 0.2"], "why": "c₋ ≈ (0.01)² ÷ 0.5 = 2×10⁻⁴ M = 0.2 mM. 바깥(10 mM)의 1/50. 본문 예(X = 1 M)는 0.1 mM, 1/100이었다. 고정 전하가 진할수록 배제가 강하다. 3구간 기초 상자 ②.", "ref": "#s-donnan", "refLabel": "3구간 ②: Donnan 배제의 숫자"}]}, "3-end": {"kind": "end", "title": "3장 마무리", "items": [{"id": "d20-q08", "type": "short", "q": "장난감 모형에서 정상 농도가 e의 지수 (αV)이고 I = c·V일 때, 아주 느린 훑기의 정류비 I(+V)/|I(−V)|는 e의 지수 (2αV)이다. α = 1.5 /V, V = 2 V이면 정류비는 약 얼마인가? (정수로)", "a": ["403", "약 403", "400", "e^6"], "why": "2αV = 2 × 1.5 × 2 = 6, e⁶ ≈ 403. ±1 V에서는 e³ ≈ 20이었다. 정류는 입력의 부호에 따라 응답이 다른 비선형이다. 3-1 장난감 모형. (모형 계산이며 실제 소자의 정류비가 아니다.)", "ref": "#s-toy-model", "refLabel": "3-1 장난감 모형: 느린 훑기의 정류비"}, {"id": "d20-q09b", "type": "mc", "q": "장난감 모형(τ = 1 s)에서 ±1 V 사인파의 주파수를 0.01, 0.16, 10 Hz로 바꿨다. 셋 가운데 히스테리시스 고리가 가장 넓은 것과 그 이유는?", "options": ["0.01 Hz: 느릴수록 이온이 많이 쌓이므로", "10 Hz: 빠를수록 상태가 크게 흔들리므로", "0.16 Hz: 빠르기가 τ와 같은 자릿수이므로", "세 경우 모두 같다: 같은 소자이므로"], "a": 2, "why": "고리 넓이는 0.12(0.01 Hz), 0.42(0.16 Hz), 0.008(10 Hz). 느리면 상태가 늘 목표값을 따라가 고리가 닫히고 정류만 남으며, 빠르면 상태가 거의 변하지 않아 직선이 된다. 0.16 Hz는 2πf ≈ 1/τ라 상태가 따라가되 늦게 따라간다. 촘촘히 훑으면 최대는 약 0.08 Hz(0.52)로, '주기 = τ'가 아니라 같은 자릿수의 빠르기라는 뜻이다. 그림 4(Day 35).", "wrongWhy": ["느리면 c가 늘 목표값을 따라가 올라갈 때와 내려갈 때 길이 같아져 고리가 닫힌다(0.12).", "빠르면 c가 따라가지 못해 거의 상수라 직선이 된다(0.008).", "", "고리 넓이는 훑는 빠르기에 따라 0.008에서 0.42까지 바뀐다."], "ref": "#s-toy-model", "refLabel": "3-1 그림 4(Day 35): 세 빠르기의 고리"}, {"id": "d20-q02", "type": "ox", "q": "같은 소자에서 I–V 히스테리시스 고리의 넓이는 전압을 훑는 속도와 상관없이 일정하므로, 고리 넓이만으로 기억의 좋고 나쁨을 말할 수 있다.", "a": false, "why": "아주 느리게 훑으면 상태가 따라가 고리가 닫히고, 아주 빠르게 훑어도 상태가 못 따라가 닫힌다. 고리는 전압이 바뀌는 빠르기가 소자 시간상수와 같은 자릿수일 때(2πf ~ 1/τ) 가장 크다(장난감 모형, 그리고 하이드로겔 나노채널의 훑는 속도 의존 보고). 3-1 흔한 오해 상자.", "ref": "#s-loop-myth", "refLabel": "3-1 흔한 오해: 고리 넓이와 기억"}, {"id": "d20-q10", "type": "ox", "q": "어떤 이종 겔 접합(양이온 선택 겔 + 음이온 선택 겔)의 역방향 저항이, 같은 재료끼리 붙인 접합의 약 35배였다. 이 비교는 그 고저항이 접합 특유의 이온 고갈에서 온다는 주장을 뒷받침하는 대조 비교다.", "a": true, "why": "같은 재료끼리 붙인 접합에는 한쪽 겔이 보충을 막는 구조가 없어 고갈이 생기지 않으므로, 이종 접합만의 큰 역방향 저항은 접합 특유의 효과를 가리킨다(Lee 2026 (AFM) p.4). 다만 고갈층의 공간 분포를 직접 본 측정은 아니다.", "ref": "#s-junction-devices", "refLabel": "3-2 실제 소자: 같은 재료 대조군"}, {"id": "d20-q27", "type": "ox", "q": "이종 계면을 넣은 겔 소자가 뚜렷한 정류를 보였다. 그렇다면 그 소자의 전류 이완(기억) 시간도 계면이 정한다고 결론 내릴 수 있다.", "a": false, "why": "정류와 이완은 서로 다른 과정에서 올 수 있다. 하이드로겔 시냅스들을 정리한 리뷰는 계면이 정류를 주었지만 이완은 느린 이온 역류가 정했다고 본다(Wang 2025 p.316). 계면이 있는 소자와 없는 소자의 이완 시간을 같은 조건에서 비교해야 가릴 수 있다.", "ref": "#s-interface-vs-backflow", "refLabel": "3-2 계면이 정하나, 느린 이온이 정하나"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 산화·환원과 다중 시간상수", "items": [{"id": "d20-q29", "type": "mc", "q": "다음 가운데 전자가 계면을 건너지 않는 과정은?", "options": ["은 전극의 은이 Cl⁻와 만나 AgCl이 된다", "고분자 사슬이 전자를 접점에 내주어 정공이 생긴다", "금 전극 앞에 K⁺가 모였다가 흩어진다", "용액의 Fe³⁺가 전극에서 전자를 받아 Fe²⁺가 된다"], "a": 2, "why": "이온이 계면 앞에 모였다 흩어지기만 하는 EDL 충전·방전이 비패러데이 과정이다. 나머지는 모두 전자가 계면을 건너 물질의 산화 상태가 바뀌는 패러데이 과정(산화·환원)이다. 4구간 그림 5.", "wrongWhy": ["은이 전자를 전극에 내주는 산화다(그림 5 ②).", "사슬이 산화되는 전기화학 도핑이다(그림 5 ③).", "", "전자를 얻는 환원이다. 전자가 전극에서 이온으로 건너갔다."], "ref": "#s-redox", "refLabel": "4구간 그림 5: 전자가 계면을 건너는가"}, {"id": "d20-q11", "type": "mc", "q": "이온 게이트 유기 트랜지스터의 펄스 뒤 전류 감쇠를 지수 세 개로 맞췄더니 τ₁ < 1 s, τ₂, τ₃(가장 느림)이 나왔다. 채널 고분자의 주사슬만 바꿨더니 τ₂·τ₃은 길어지고 τ₁은 비슷했다. 가장 무리 없는 해석은?", "options": ["고분자 안 이온이 빠져나오는 과정이 바뀌었다", "주사슬이 계면의 EDL 충전만 바꿨다", "전해질의 전도도가 크게 바뀌었다", "세 시간상수는 모두 같은 과정이다"], "a": 0, "why": "Lee 2025 (structure)에서 τ₂·τ₃이 약 61배·3.76배 길어지고 τ₁은 비슷했다(p.4). 계면의 빠른 EDL 과정은 그대로이고 고분자 안 이온의 역확산(도핑 쪽)이 바뀌었다고 읽는 것이 무리가 없다. 다만 τ와 과정의 대응은 맞춤 결과에 기댄 저자 해석이라, 독립 측정으로 확인해야 한다. 4구간.", "wrongWhy": ["", "EDL 충전이 바뀌었다면 가장 빠른 τ₁이 달라졌어야 한다. τ₁은 비슷했다.", "전해질 전도도가 바뀌면 EDL의 RC 시간(τ₁)부터 달라진다. 이 실험은 전해질을 바꾸지 않았다.", "τ₁은 그대로이고 τ₂·τ₃만 바뀌었으니 적어도 두 종류의 과정이 있다."], "ref": "#s-doping-steps", "refLabel": "4구간 단계 4: 주사슬 하나를 바꾼 결과"}, {"id": "d20-q12", "type": "ox", "q": "어떤 고분자 채널 소자의 펄스 뒤 이완 시간이 25 ms였고, 피크 전류의 약 10%가 비휘발 성분으로 남았다. 이 두 숫자는 같은 양을 두 가지로 말한 것이다.", "a": false, "why": "25 ms는 빠르게 잊는 부분이 줄어드는 속도이고, 10%는 잊지 않고 남는 부분의 크기다. 서로 다른 양이다(Sung 2024의 곁사슬 비교). 4구간 '같은 계열의 다른 손잡이'.", "ref": "#s-other-knobs", "refLabel": "4구간: 이완 시간과 남는 비율"}, {"id": "d20-q13", "type": "mc", "q": "어떤 이온 다이오드에서 침전이 Zn(OH)₂(용해도곱 1.8×10⁻¹⁶)일 때가 BaSO₄(1.1×10⁻¹⁰)일 때보다 전류가 다시 커지는(LTP) 속도가 느렸다. 이 결과가 보여 주는 것으로 가장 알맞은 것은?", "options": ["침전 기억은 언제나 영구적이다", "용해도곱이 작을수록 전도도가 높다", "산화환원 반응이 없다는 증거다", "재료의 화학 상수가 시간척도와 이어질 수 있다"], "a": 3, "why": "덜 녹는 침전이 더 천천히 녹아 전류가 다시 커지는 속도가 느렸다(Han 2023 p.5). 화학 상수 → 시간상수의 드문 예다. 다만 Zn(OH)₂ 계는 pH와 전극도 달라 용해도곱만의 효과로 단정하기는 어렵다.", "wrongWhy": ["Zn(OH)₂ 쪽도 전류가 다시 커졌다. 느릴 뿐 되돌릴 수 있었다.", "용해도곱은 녹는 정도이고, 이 결과는 전도도의 크기가 아니라 회복 속도에 관한 것이다.", "침전은 이온끼리 붙는 반응이라, 이 결과는 산화환원이 있는지와 관계없다.", ""], "ref": "#s-precipitation", "refLabel": "4구간: 침전과 용해도곱"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 디바이 길이와 선택성 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d20-q14", "type": "short", "q": "[풀이 예시 확인] 물속 1:1 염의 디바이 길이는 10 mM에서 3.04 nm다. 높이 11 nm인 채널은 10 mM에서 λ_D의 약 몇 배인가? (소수 첫째 자리까지)", "a": ["3.6", "3.62", "약 3.6", "3.6배"], "why": "11 ÷ 3.04 ≈ 3.6. 높이가 λ_D의 몇 배 정도면 벽의 이온층이 통로의 큰 부분을 차지한다. 5구간 ④.", "ref": "#s-nano-numbers", "refLabel": "5구간 ④: 11 nm 채널과 λ_D"}, {"id": "d20-q15", "type": "short", "q": "[일부 채우기] λ_D는 농도의 제곱근에 반비례한다. 10 mM에서 3.04 nm이면, 농도를 4배(40 mM)로 올렸을 때 λ_D = 3.04 ÷ √4 = ? nm (소수 둘째 자리까지)", "a": ["1.52", "1.5", "1.52 nm"], "why": "√4 = 2이므로 1.52 nm. 농도를 4배로 하면 디바이 길이는 절반이 된다. 선택성이 약해지는 방향이다.", "ref": "#s-debye-numbers", "refLabel": "2구간: 디바이 길이와 농도의 제곱근"}, {"id": "d20-q16", "type": "short", "q": "[혼자 풀기] 1 mM에서 λ_D = 9.62 nm다. λ_D를 1.92 nm(약 1/5)로 만들려면 염 농도를 약 몇 mM로 해야 하나? (정수로)", "a": ["25", "25 mM", "약 25", "24", "26"], "why": "λ_D ∝ 1/√c이므로 c = 1 mM × (9.62/1.92)² ≈ 1 × 25 = 25 mM. 길이를 1/5로 줄이려면 농도는 25배. 헷갈렸다면 제곱근 관계를 확인하세요. 그림 7.", "ref": "#s-debye-numbers", "refLabel": "2구간: 디바이 길이와 농도의 제곱근"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 메커니즘 대응표", "items": [{"id": "d20-q25", "type": "mc", "q": "같은 hBN 2D 나노채널 소자에서 기억 시간이 약 1–5분인 경우와 약 74시간인 경우가 모두 보고되었다. 이것이 뜻하는 것으로 가장 알맞은 것은?", "options": ["둘 중 하나는 측정 오류일 가능성이 크다", "어떤 과정이 지배하느냐에 따라 시간척도가 달라진다", "시간이 지날수록 같은 소자의 기억이 길어진다", "채널이 넓을수록 기억 시간이 길어진다"], "a": 1, "why": "같은 hBN 채널에서도 고리 유형(지배하는 물리 과정)에 따라 1–5분, 약 20분, 약 74시간으로 갈렸다(Pandey 2026 p.9). 농도 분극 소자도 크기에 따라 200 s에서 4000 s로 바뀌었다. 메커니즘의 이름만으로 시간척도를 말할 수 없다. 그림 8.", "wrongWhy": ["두 값은 서로 다른 고리 유형(메커니즘)의 결과로 정리되었다. 오류로 볼 근거가 없다.", "", "두 값은 서로 다른 고리 유형에서 나온 것이지, 한 소자가 시간에 따라 바뀐 것이 아니다.", "같은 채널의 결과이므로 채널 폭 차이로 설명할 수 없다."], "ref": "#s-nano-timescales", "refLabel": "5구간: hBN 채널의 시간척도 폭"}, {"id": "d20-q26", "type": "mc", "q": "어떤 이온 게이트 트랜지스터의 펄스 뒤 감쇠를 지수 셋으로 맞췄더니 τ₁ = 0.2 s, τ₂ = 5 s, τ₃ = 40 s였다. 메커니즘 대응표에서 이 소자를 한 행으로 골라 적어도 될까?", "options": ["된다: 가장 큰 τ₃가 속한 행 하나를 고르면 된다", "된다: 가장 빠른 τ₁이 속한 EDL 행 하나면 된다", "안 된다: 지수 맞춤은 시간상수를 줄 수 없다", "안 된다: 한 소자에 EDL과 도핑이 섞여 있을 수 있다"], "a": 3, "why": "실제 소자에서는 메커니즘이 섞인다. 같은 트랜지스터에서 EDL(빠름)과 고분자 안 이온(느림)이 함께 나온다(4구간). 표의 칸은 '그 메커니즘이 항상 그렇다'가 아니라 논문의 예이고, 각 τ의 귀속은 대조 실험으로 가려야 한다.", "wrongWhy": ["느린 성분만 보고 빠른 EDL 성분(τ₁)을 버리는 셈이다.", "느린 τ₂·τ₃은 EDL의 RC 시간으로 설명되지 않는다.", "지수 맞춤은 시간상수를 준다. 문제는 각 τ를 어느 과정에 귀속하느냐이고, 그것은 별도 측정이 필요하다.", ""], "ref": "#s-mechanism-table", "refLabel": "6-1 대응표 아래: 메커니즘이 섞인다"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d20-q19", "type": "mc", "q": "네 메커니즘을 '대체로 빠르고 휘발성' → '대체로 느리고 비휘발성' 순서로 놓을 때 가장 알맞은 것은? (예외가 많다는 전제에서)", "options": ["침전 → 도핑 → 농도 분극 → EDL", "도핑 → EDL → 침전 → 농도 분극", "농도 분극 → EDL → 침전 → 도핑", "EDL → 농도 분극 → 전기화학 도핑 → 침전"], "a": 3, "why": "EDL(1초 미만) → 농도 분극(수백–수천 s, 확산으로 회복) → 도핑(수십–수천 s 이상, 일부 비휘발) → 침전(바꿔도 남음). 단 같은 메커니즘도 크기·재료에 따라 여러 자릿수를 오간다(산화물 속 양성자 삽입은 ns). 6-1 표.", "wrongWhy": ["거꾸로 놓았다. 침전은 가장 오래 남고 EDL은 가장 빨리 잊는다.", "EDL은 대체로 가장 빠르고 휘발성이다. 맨 앞에 와야 한다.", "EDL이 농도 분극보다 빠르고, 침전이 도핑보다 오래 남는다.", ""], "ref": "#s-mechanism-table", "refLabel": "6-1 물리 성질 대응표"}, {"id": "d20-q20", "type": "mc", "q": "bipolar 폴리전해질 접합이 RC에 주는 '비선형'과 '기억'의 출처를 바르게 짝지은 것은?", "options": ["비선형: 전극 EDL의 충전 / 기억: 전극 EDL의 방전", "비선형: 겔의 고정 전하 농도 / 기억: 전극 표면의 반응", "비선형: 부호에 따라 다른 접합 농도 / 기억: 그 농도의 회복 시간", "비선형: 접합 농도의 회복 시간 / 기억: 부호에 따른 농도 차"], "a": 2, "why": "한 상태변수(접합 농도)가 부호에 따라 다르게 변해 정류(비선형)를 만들고, 그 변화와 회복에 시간이 걸려 기억을 만든다. 3구간 단계 3–4.", "wrongWhy": ["EDL은 작은 전압에서 거의 선형이고 빨리 잊어, 접합 소자의 정류와 수백 초 기억을 설명하지 못한다.", "고정 전하는 선택성을 만드는 조건이지 바뀌는 상태가 아니다. 전극 반응은 기억처럼 보이는 가짜 신호일 수 있다.", "", "둘을 뒤바꿨다. 부호에 따른 차이가 비선형(정류)이고, 회복에 걸리는 시간이 기억이다."], "ref": "#s-junction-steps", "refLabel": "3구간 단계 3–4: 정류와 기억"}, {"id": "d20-q21", "type": "ox", "q": "EDL은 비패러데이 과정이므로 어떤 측정 조건에서도 1초 안에 잊는다.", "a": false, "why": "EDL의 휘발성은 방전 길에도 달려 있다. 반응하지 않는 전극에서 방전 길을 막으면 EDL의 개방 전압이 오래 남을 수 있다(Wang 2025 p.309). 또 전해질 화학으로 이완을 늘릴 수도 있다(Lee 2025 (zwitterion) p.5). 2구간.", "ref": "#s-edl-not-always-volatile", "refLabel": "2구간: EDL이 늘 휘발성은 아니다"}, {"id": "d20-q22", "type": "mc", "q": "양성자를 넣은 니켈산화물 소자가 ns 규모 과도 응답을 보였다는 보고(Zhou 2026 (Nat. Nanotech.))가 오늘 수업에서 갖는 의미로 가장 알맞은 것은?", "options": ["이온 소자는 모두 ns로 동작할 수 있다", "이온의 느림은 거리(크기)와 매질에도 달려 있다", "양성자는 이온이 아니라서 빠르다", "니켈산화물은 EDL만 써서 빠르다"], "a": 1, "why": "nm 거리의 고체 속 양성자 재배치는 빠를 수 있다. 시간은 대략 L²/D로 크기와 확산계수가 함께 정한다(Day 33–34, Day 37). 하이드로겔 소자의 수백 s 기억과는 크기·매질·메커니즘이 다르다. 4구간.", "wrongWhy": ["하이드로겔 소자는 수백 s 기억을 보인다. 크기·매질이 다르면 시간이 다르다.", "", "양성자(H⁺)도 이온이다. 짧은 거리와 고체 매질이 빠름의 이유다.", "저자들은 양성자의 재배치(삽입)로 설명했다. EDL만으로는 다단계 상태를 설명하지 못한다."], "ref": "#s-intercalation", "refLabel": "4구간 ②: 삽입(양성자 니켈산화물)"}, {"id": "d20-q23", "type": "mc", "q": "내 이온 소자의 기억이 '재료의 기억'인지 확인하는 대조 실험으로 가장 알맞은 것은?", "options": ["이온 차단 전극·같은 재료 접합과 비교한다", "같은 측정을 한 번 더 반복해 본다", "전압을 두 배로 올려 다시 재 본다", "논문 그림과 곡선 모양을 비교한다"], "a": 0, "why": "전극 반응·전극 분극이 기억처럼 보일 수 있고(Pandey 2026 p.7), 접합 특유의 효과는 같은 재료 대조군과 비교해야 드러난다(Lee 2026 (AFM) p.4). 6구간 생각해 보기.", "wrongWhy": ["", "반복은 재현성을 보여 주지만, 기억이 어디서 오는지는 가르지 못한다.", "전압을 바꾸면 다른 과정(전극 반응)이 더 끼어들 수 있어 판별이 더 어려워진다.", "모양이 닮아도 다른 메커니즘일 수 있다. 같은 고리를 여러 과정이 만든다."], "ref": "#s-control-experiments", "refLabel": "6구간 생각해 보기: 대조 실험"}, {"id": "d20-q30", "type": "ox", "q": "휘발성이고 비선형이 강한 I–V 고리를 보이는 소자는, 오래 남는 아날로그 상태가 필요한 시냅스 가중치 저장보다 짧은 기억과 비선형을 쓰는 reservoir 노드 쪽에 더 맞는 후보다.", "a": true, "why": "reservoir는 최근 입력을 잠깐 담고(짧은 기억) 비선형으로 섞는 노드가 필요하고, 가중치 저장은 오래 남는 여러 단계의 상태가 필요하다. 나노유체 리뷰(Pandey 2026 p.7)도 이렇게 짝짓는다. 다만 이것은 후보의 짝짓기이고, 과제 성능으로 검증한 결과는 아니다.", "ref": "#s-pandey-loops", "refLabel": "5구간: 고리 모양과 쓰임의 짝"}]}}}</script>
+<script type="application/json" id="quiz-d20">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커. 숫자는 tools/figs_d20.py --numbers와 일치한다.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 이온만의 자유도와 이온이 지는 영역", "items": [{"id": "d20-r01", "type": "mc", "q": "PEDOT:PSS 채널 OECT의 게이트를 +0.5 V로 두었다가 0 V로 되돌렸다. 채널 안에서 일어나는 일로 가장 알맞은 것은?", "options": ["K⁺가 채널에 남아 정공이 더 줄고 전류도 준다", "Cl⁻가 채널로 들어가 정공을 없애 전류가 준다", "K⁺가 전해질로 돌아가고 정공이 돌아와 전류가 커진다", "정공은 그대로이고 K⁺만 빠져 전류도 그대로다"], "a": 2, "why": "+ 게이트가 K⁺를 채널 부피에 넣어 정공을 빼냈던 것(탈도핑)이 거꾸로 일어난다. K⁺가 나가면 PSS⁻의 음전하를 맞출 정공이 다시 생겨 전류가 회복된다. 돌아오는 빠르기는 막 두께 L에 대한 L²/D 자릿수에 기댄다.", "wrongWhy": ["게이트가 K⁺를 밀어 넣던 전압이 사라졌으므로 K⁺는 전해질로 돌아간다.", "음이온이 들어가면 정공은 오히려 늘어난다(축적형의 방향).", "", "K⁺가 빠지면 PSS⁻의 짝이 다시 필요해져 정공이 돌아온다."], "ref": "d19b.html#b-oect", "refLabel": "OECT 기초: 단계 3 게이트를 다시 0으로", "core": true}, {"id": "d20-r02", "type": "mc", "q": "누르면 용매 흐름으로 전압이 생기는 겔의 응답 시간이 두께의 제곱에 비례한다고 가정하자. 두께 0.6 mm에서 응답이 0.9 s였다면, 두께 0.2 mm에서는?", "options": ["약 0.3 s", "약 0.1 s", "약 0.03 s", "약 0.9 s"], "a": 1, "why": "(0.2/0.6)² = 1/9, 0.9 ÷ 9 = 0.1 s. 이 시간은 이온 하나의 이동이 아니라 겔이 눌렸다 용매가 빠져나가는 기계적 이완이 정한다. 실제 측정에서는 이 제곱 법칙보다 더 크게 줄어든 예도 있었다.", "wrongWhy": ["두께에 그대로 비례한다고 봤다(1/3). 가정은 제곱 비례다.", "", "세제곱으로 줄였다(1/27).", "두께가 바뀌면 응답 시간도 바뀐다는 것이 가정이다."], "ref": "d19b.html#s-hydration", "refLabel": "3-2 질량과 수화 껍질: 두께와 응답 시간", "core": true}, {"id": "d20-r03", "type": "mc", "q": "어떤 상분리 겔에서 이온이 계면을 건널 때 수화 껍질을 일부 벗어야 하고, 전하 밀도가 큰 이온일수록 물을 강하게 붙잡아 장벽이 높다고 하자. 같은 1 mM에서 Na⁺와 Mg²⁺(더 작고 전하가 2배) 중 전류가 켜지는 문턱 전압이 더 높을 것으로 예상되는 쪽은?", "options": ["Mg²⁺: 전하 밀도가 커 껍질을 벗기 어렵다", "Na⁺: 가수가 작아 전기장에 덜 끌린다", "둘 다 같다: 문턱은 농도만으로 정해진다", "Na⁺: 더 가벼워 껍질을 더 꽉 쥔다"], "a": 0, "why": "가정한 설명대로라면 전하 밀도가 큰 Mg²⁺가 물 분자를 더 강하게 붙잡아 탈수화 장벽이 높고 문턱도 높다. K⁺ 5 mV, Ca²⁺ 40 mV, Fe³⁺ 60 mV로 가수가 클수록 문턱이 높았던 보고와 같은 방향이다. 다만 이것은 저자들의 해석을 적용한 예상이다.", "wrongWhy": ["", "이 설명에서 문턱을 가르는 것은 전기장에 끌리는 힘보다 탈수화 장벽이다.", "고른 겔에서는 그랬지만(모두 약 1 mV), 상분리 겔에서는 이온 종류에 따라 문턱이 갈렸다.", "가벼움이 아니라 전하 밀도가 물을 붙잡는 세기를 정한다."], "ref": "d19b.html#s-species", "refLabel": "3-1 종이 여럿이다: 문턱 5/40/60 mV"}, {"id": "d20-r04", "type": "ox", "q": "어떤 이온 소자에 전자 소자에는 없는 상태변수(예: 침전의 양)가 하나 더 있다는 것이 확인되었다. 그것만으로 이 소자는 계산 자원을 하나 더 가진 셈이다.", "a": false, "why": "상태변수가 계산 자원이 되려면 (i) 읽을 수 있고, (ii) 과제에 필요한 차이를 보존하며, (iii) 단순 기준선보다 나아야 한다. '있다'와 '계산에 쓸모 있다'는 다른 주장이다.", "ref": "d19b.html#s-resource-test", "refLabel": "5구간: 상태변수가 계산 자원이 되는 세 조건"}, {"id": "d20-r05", "type": "mc", "q": "쓰기 시간이 전기화학 메모리 10⁻⁹ s, 이온 소자 10⁻³ s부터라는 비교가 있다. 과제가 입력 간격 수 ms–1 s인 심박 신호 처리라면, '속도' 축의 판정으로 가장 알맞은 것은?", "options": ["여섯 자릿수 느리므로 이 과제에도 쓸 수 없다", "이 과제에서는 이온이 전자보다 빠르다", "클록을 낮추면 속도 차이가 사라진다", "과제가 ms–s라 느림이 정합 조건일 수 있다"], "a": 3, "why": "판정은 과제의 시간척도에 달려 있다. 입력이 ms–s 간격이면 ms 시간상수는 결점이 아니라 정합 조건일 수 있다. 다만 '이온이 빠르다'는 뜻이 아니라 '그 과제에서는 빠를 필요가 없다'는 뜻이다.", "wrongWhy": ["과제의 시간척도가 ms–s이면 ns 쓰기 속도가 필요하지 않다.", "이온이 빨라진 것이 아니라, 이 과제에서는 빠를 필요가 없다는 뜻이다.", "소자의 쓰기 시간은 클록과 무관한 물리 과정의 시간이다.", ""], "ref": "d19b.html#s-speed-axis", "refLabel": "4구간: 속도 축과 판정이 바뀌는 조건"}, {"id": "d20-r06", "type": "mc", "q": "구별되는 상태가 64단계인 이온 소자를 reservoir 노드로 쓰려 한다. '정밀도' 축에서 판정이 바뀌는 조건으로 가장 알맞은 것은?", "options": ["readout이 가를 상태 차이가 반복 흔들림보다 크다", "상태 수를 2¹¹단계까지 늘려야만 쓸 수 있다", "잡음이 클수록 비선형도 커져 오히려 유리하다", "상태 수는 계산과 무관해 따질 필요가 없다"], "a": 0, "why": "판정이 바뀌는 조건은 readout이 구분해야 할 상태 차이가 반복 흔들림(잡음)보다 큰 과제인지다(Δ/σ). 상태 수 자체보다 차이 대 잡음의 비가 중요하다.", "wrongWhy": ["", "상태 수가 적어도 과제가 구분할 차이가 잡음보다 크면 쓸 수 있다.", "잡음은 상태를 흐려 readout이 차이를 가르기 어렵게 만든다.", "상태의 충실도는 readout이 차이를 읽을 수 있는지와 직결된다."], "ref": "d19b.html#s-precision-axis", "refLabel": "4구간: 정밀도(상태 수와 잡음)"}, {"id": "d20-r07", "type": "mc", "q": "30 mm × 30 mm 기판에 8 × 8 = 64개의 겔 소자를 만들었다. 1 cm²당 몇 개인가?", "options": ["약 0.7개", "약 2.1개", "약 7.1개", "약 71개"], "a": 2, "why": "기판 넓이 = 3 cm × 3 cm = 9 cm², 64 ÷ 9 ≈ 7.1개/cm². 칩 하나에 수십억 개가 들어가는 실리콘과 비교하면 집적 밀도의 차이가 보인다.", "wrongWhy": ["90으로 나눴다. 기판 넓이는 3 cm × 3 cm = 9 cm²다.", "한 변 길이(3 cm)로 나눴다. 넓이로 나눠야 한다.", "", "0.9 cm²로 계산했다. 30 mm = 3 cm이므로 9 cm²다."], "ref": "d19b.html#s-density-axis", "refLabel": "4구간: 집적 밀도"}, {"id": "d20-r08", "type": "mc", "q": "논문 A는 이온겔 시냅스의 상태 전환 1회(소자 하나)에 5 fJ, 논문 B는 디지털 칩의 추론 1회(칩 전체, 읽기 포함)에 2 pJ를 보고했다. 'A가 B보다 400배 효율적'이라고 쓸 수 있나?", "options": ["쓸 수 있다: 같은 J 단위라 나누면 된다", "쓸 수 없다: 경계와 작업 단위가 서로 다르다", "쓸 수 있다: 이온 소자는 원래 저전력이다", "쓸 수 없다: fJ와 pJ는 바꿀 수 없는 단위다"], "a": 1, "why": "A는 소자 하나의 상태 전환만 센 값이고 B는 칩 전체의 추론 1회다. 같은 경계(소자만/시스템)와 같은 작업 단위(상태당/추론당)로 맞추기 전에는 배수를 쓸 수 없다.", "wrongWhy": ["단위가 같아도 무엇을 셌는지(소자만/칩 전체, 상태 전환/추론)가 다르면 비교가 성립하지 않는다.", "", "'원래 저전력'은 조건 없는 주장이다. 같은 경계에서 비교해야 한다.", "1 pJ = 1000 fJ로 바꿀 수 있다. 문제는 단위가 아니라 경계다."], "ref": "d19b.html#s-energy-boundary", "refLabel": "4구간 흔한 오해: 이온 소자는 저전력", "core": true}, {"id": "d20-r09", "type": "mc", "q": "응용 X는 몸에 붙여 땀 성분을 감지하며 시간척도 1–10 s, 상태 16단계, 사용 기간 2주를 요구한다. 이온 메커니즘 Y는 시간상수 0.5–5 s, 상태 64단계, 수계 동작, 안정 기간 1주를 허용한다. 두 사양이 겹치지 않아 먼저 막히는 칸은?", "options": ["시간척도", "상태 수", "매질", "사용 기간"], "a": 3, "why": "요구 2주에 허용 1주라 사용 기간 칸이 겹치지 않는다. 나머지 칸이 겹쳐도 이 칸이 비면 그 응용에서 Y는 답이 되지 못한다.", "wrongWhy": ["1–10 s와 0.5–5 s는 1–5 s에서 겹친다.", "64단계는 요구한 16단계보다 많다.", "땀은 수계이고 Y도 수계에서 동작한다.", ""], "ref": "d19b.html#s-frame", "refLabel": "5구간: 조건부 결론의 문장 틀", "core": true}, {"id": "d20-r10", "type": "ox", "q": "응용 사양과 이온 메커니즘 사양이 겹치는 칸을 찾았다. 그런데 같은 칸을 저전력 마이크로컨트롤러와 디지털 필터가 더 싸게 채울 수 있다. 그래도 그 응용에서 '왜 이온인가'에 답이 있다고 말할 수 있다.", "a": false, "why": "틀의 마지막 칸, '전자 소자가 같은 칸을 더 싸게 채우지 못하는 이유'가 비면 그 응용에서는 '왜 이온인가'에 답이 없다. 겹치는 칸은 필요조건일 뿐이다.", "ref": "d19b.html#s-frame", "refLabel": "5구간: 조건부 결론의 문장 틀"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)", "items": [{"id": "d20-rb01", "type": "mc", "q": "어떤 이온 소자에 펄스를 준 뒤 끄면 전류가 약 30초에 걸쳐 저절로 원래 값으로 돌아가고, 반대 펄스를 주면 곧바로 되돌릴 수도 있다. 휘발성·시간상수·가역성 가운데 '약 30초'라는 숫자로 적는 성질은?", "options": ["가역성", "휘발성", "비선형성", "시간상수"], "a": 3, "why": "돌아가는 빠르기의 척도가 시간상수다. '저절로 돌아간다'는 휘발성, '반대 펄스로 되돌린다'는 가역성으로 따로 적는다.", "wrongWhy": ["가역성은 반대 입력으로 되돌릴 수 있는지와 그 횟수다.", "휘발성은 저절로 돌아가는지를 말하는 성질이고, 그 빠르기는 따로 적는다.", "비선형성은 입력과 출력의 비례가 깨지는 성질로, 시간의 숫자가 아니다.", ""], "ref": "d20a.html#s-three-properties", "refLabel": "1구간: 메커니즘마다 기록할 세 가지"}, {"id": "d20-rb02", "type": "mc", "q": "25 °C 물속 1:1 염의 디바이 길이는 10 mM에서 약 3.0 nm다. 염을 0.1 mM로 묽히면 디바이 길이는 대략?", "options": ["약 0.3 nm", "약 30 nm", "약 300 nm", "약 3.0 nm"], "a": 1, "why": "디바이 길이는 농도의 제곱근에 반비례한다. 농도가 1/100이면 √100 = 10배 길어져 약 30 nm(계산값 30.4 nm)다.", "wrongWhy": ["방향이 반대다. 묽을수록 가려 줄 이온이 적어 층이 두꺼워진다.", "", "농도에 그대로 반비례한다고 봤다(100배). 제곱근이라 10배다.", "디바이 길이는 농도에 따라 바뀐다."], "ref": "d20a.html#s-debye-numbers", "refLabel": "2구간: 디바이 길이의 숫자"}, {"id": "d20-rb03", "type": "mc", "q": "10 mM KCl, 전극 1 cm², 간격 1 cm에서 EDL 충전 시간은 τ ≈ RC ≈ 3.3 ms였다(면적당 계면 정전용량은 고정). 간격은 그대로 두고 두 전극의 면적만 4 cm²로 키우면?", "options": ["약 0.8 ms", "약 13 ms", "약 3.3 ms", "약 53 ms"], "a": 2, "why": "R = 간격 ÷ (전도도 × 면적)은 1/4, C는 면적에 비례해 4배. 곱 τ는 그대로 3.3 ms다. 마주 보는 두 전극에서 면적은 지워진다.", "wrongWhy": ["R이 1/4로 주는 것만 봤다. C도 면적에 비례해 4배가 된다.", "C가 4배가 되는 것만 봤다. R은 면적에 반비례해 1/4이 된다.", "", "R과 C가 모두 4배가 된다고 봤다. R은 면적이 클수록 작아진다."], "ref": "d20a.html#s-edl-numbers", "refLabel": "2구간 ④ 단계 4: 무엇이 τ를 바꾸나"}, {"id": "d20-rb04", "type": "mc", "q": "금 전극 두 개 사이의 전해질에서 EDL을 같은 전압으로 충전한 뒤, 한 번은 두 전극을 도선으로 이어 두고 한 번은 회로를 끊어 두었다. 충전된 전하(개방 전압)가 더 오래 남는 쪽은?", "options": ["회로를 끊어 둔 쪽", "도선으로 이어 둔 쪽", "둘 다 같다: 반응이 없어서", "둘 다 곧 사라진다: 비패러데이라서"], "a": 0, "why": "EDL의 휘발성은 방전 길에 달려 있다. 반응하지 않는 금 전극에서 회로를 끊으면 전하가 빠져나갈 길이 없어 개방 전압이 오래 남을 수 있다(Wang 2025 p.309).", "wrongWhy": ["", "도선이 방전 길이 되어 전하가 τ ≈ RC로 빠져나간다.", "반응이 없어도 방전 길이 있느냐에 따라 빠르기가 달라진다.", "비패러데이라도 방전 길이 막히면 전하가 빠져나갈 곳이 없어 오래 남을 수 있다."], "ref": "d20a.html#s-edl-not-always-volatile", "refLabel": "2구간: EDL이 늘 휘발성은 아니다", "core": true}, {"id": "d20-rb05", "type": "mc", "q": "고정 음전하 농도 X = 2 M인 겔을 20 mM 소금물에 담갔다. 이상 Donnan 평형에서 겔 속 공이온(음이온) 농도는 대략? (c₋ ≈ c_s²/X)", "options": ["약 20 mM", "약 0.4 mM", "약 0.2 mM", "약 10 mM"], "a": 2, "why": "c₋ ≈ (0.02)² ÷ 2 = 2×10⁻⁴ M = 0.2 mM. 바깥(20 mM)의 1/100이다. 고정 전하가 진할수록, 바깥 염이 묽을수록 배제가 강하다.", "wrongWhy": ["바깥과 같다고 봤다. Donnan 배제로 공이온은 겔에 잘 들어오지 못한다.", "X를 1 M로 계산했다. 여기서는 2 M이다.", "", "c_s/X처럼 제곱을 빠뜨렸다(0.02 ÷ 2 = 0.01 M). 식은 c_s²/X다."], "ref": "d20a.html#s-donnan", "refLabel": "3구간 ②: Donnan 배제의 숫자"}, {"id": "d20-rb06", "type": "mc", "q": "양이온 선택 겔(왼쪽)과 음이온 선택 겔(오른쪽)을 붙인 접합에서, 왼쪽 전극에 (−), 오른쪽 전극에 (+)를 걸었다. 접합 근처에서 일어나는 일은?", "options": ["두 이온이 접합으로 몰려 접합 농도가 오른다", "양이온만 접합 쪽으로 와서 농도가 그대로다", "전압 방향과 상관없이 접합 농도는 그대로다", "두 이온이 접합에서 멀어져 고갈층이 생긴다"], "a": 3, "why": "왼쪽(양이온 선택) 겔의 양이온은 (−)인 왼쪽 전극으로, 오른쪽 겔의 음이온은 (+)인 오른쪽 전극으로 끌려 둘 다 접합에서 멀어진다. 양쪽 겔이 공이온을 막아 보충이 없으니 고갈층이 생긴다(역방향).", "wrongWhy": ["왼쪽 +, 오른쪽 −일 때(순방향)의 모습이다. 여기서는 극성이 반대다.", "왼쪽 겔의 양이온은 (−) 전극 쪽, 곧 접합에서 멀어지는 쪽으로 끌린다.", "농도는 전압 방향에 따라 쌓이거나 빈다. 그것이 정류의 원인이다.", ""], "ref": "d20a.html#s-junction-steps", "refLabel": "3구간 그림 3(Day 37)과 단계 1–2", "core": true}, {"id": "d20-rb07", "type": "mc", "q": "장난감 모형(τ = 1 s)에서 고리가 가장 넓은 주파수는 약 0.08 Hz였다. 다른 조건은 그대로 두고 τ만 4 s로 늘리면, 고리가 가장 넓은 주파수는 대략?", "options": ["약 0.02 Hz", "약 0.08 Hz", "약 0.32 Hz", "약 0.005 Hz"], "a": 0, "why": "이 모형의 고리 모양은 f·τ에만 달려 있으므로 최대 위치가 τ에 반비례한다. 0.08 ÷ 4 = 0.02 Hz.", "wrongWhy": ["", "고리 모양은 f·τ에 달려 있어 τ가 바뀌면 최대 위치도 옮겨 간다.", "τ에 비례한다고 봤다. 느린 소자일수록 더 천천히 훑어야 고리가 커진다.", "τ²에 반비례한다고 봤다(1/16). 최대 위치는 τ에 반비례한다."], "ref": "d20a.html#s-toy-model", "refLabel": "3-1 장난감 모형과 짧은 확인"}, {"id": "d20-rb08", "type": "ox", "q": "어떤 이온 다이오드를 아주 느리게(0.01 Hz) 훑었더니 I–V에 고리가 거의 없고 +1 V 전류가 −1 V 전류의 약 20배였다. 이 측정만으로 이 소자에는 이력(기억)을 담는 상태가 없다고 결론 내릴 수 있다.", "a": false, "why": "아주 느리게 훑으면 상태가 매 순간 목표값을 따라가 고리가 닫힌다. 장난감 모형도 상태 c를 가지고 있지만 0.01 Hz에서는 정류만 보였다. 기억을 보려면 소자 시간상수와 같은 자릿수의 빠르기로 훑거나 펄스 뒤 이완을 재야 한다.", "ref": "d20a.html#s-loop-myth", "refLabel": "3-1: 고리 넓이와 기억(흔한 오해)", "core": true}, {"id": "d20-rb09", "type": "mc", "q": "농도 분극을 쓰는 겔 소자의 길이가 2 mm일 때 기억 시간이 약 500 s였다. 같은 재료로 길이만 0.5 mm로 줄이면, L²/D 어림대로라면 기억 시간은 대략?", "options": ["약 125 s", "약 8 s", "약 31 s", "약 2000 s"], "a": 2, "why": "(0.5/2)² = 1/16, 500 ÷ 16 ≈ 31 s. 다만 실제 소자에서는 크기 의존이 이 어림보다 덜 가파를 수 있다(시뮬레이션 보고).", "wrongWhy": ["길이에 그대로 비례한다고 봤다(1/4). 시간은 길이의 제곱에 비례한다.", "길이의 세제곱으로 줄였다(1/64).", "", "방향이 반대다. 짧을수록 이온이 움직일 거리가 줄어 빨라진다."], "ref": "d20a.html#s-polarization-time", "refLabel": "3구간 단계 4: 기억과 그 시간", "core": true}, {"id": "d20-rb10", "type": "mc", "q": "작은 전압 범위에서 EDL을 축전기로 볼 때, 걸린 전압을 0.1 V에서 0.2 V로 올리면 계면에 쌓인 전하는 대략?", "options": ["약 4배", "약 2배", "그대로", "약 1.4배"], "a": 1, "why": "Q = CV이므로 전압이 2배면 전하도 2배다. EDL 자체는 작은 전압에서 거의 선형이라, 이온 게이트 트랜지스터의 큰 비선형은 주로 채널의 문턱에서 온다.", "wrongWhy": ["전압의 제곱에 비례하는 것은 축전기에 저장된 에너지다. 전하는 전압에 비례한다.", "", "전압을 올리면 이온이 더 모여 전하가 늘어난다.", "제곱근 관계로 봤다. Q = CV는 비례 관계다."], "ref": "d20a.html#s-edl-nonlinear", "refLabel": "2구간: 왜 비선형인가(EDL은 거의 선형)"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "음전하가 붙은 겔과 양전하가 붙은 겔을 맞붙인 접합에 +1 V와 −1 V를 천천히 번갈아 걸 때 전류–전압 곡선이 어떤 모양일지 손으로 그려 보세요. 그리고 전압을 아주 느리게 바꿀 때와 아주 빠르게 바꿀 때 그 모양이 어떻게 달라질지 한 줄씩 예상해 적어 보세요.", "items": [{"id": "d20-p01", "type": "ox", "q": "이온 소자의 전류–전압 히스테리시스 고리가 클수록 그 소자는 기억이 좋은 소자다.", "a": false, "why": "고리 넓이는 전압을 훑는 빠르기에 따라 바뀐다. 너무 느리거나 너무 빠르면 고리가 닫히고, 전압이 바뀌는 빠르기가 소자 시간상수와 같은 자릿수일 때(2πf ~ 1/τ) 가장 크다. 3구간 장난감 모형(그림 4(Day 37))과 흔한 오해 상자에서 설명한다.", "ref": "#s-loop-myth", "refLabel": "3-1 흔한 오해: 고리 넓이와 기억"}, {"id": "d20-p02", "type": "mc", "q": "10 mM 소금물에 담근 전극 표면에 반대 전하 이온이 모여 생기는 층(전기이중층)의 두께는 대략 어느 정도일까?", "options": ["수 mm", "수 µm", "수 nm", "수 pm(피코미터)"], "a": 2, "why": "두께는 디바이 길이 정도이고 10 mM에서 약 3 nm, 1 mM에서 약 9.6 nm, 100 mM에서 약 1 nm다. 2구간 기초 상자에서 설명한다.", "wrongWhy": ["mm는 눈에 보이는 크기다. 이온층은 이온 몇 개에서 수십 개 두께에 가깝다.", "µm는 세포 크기 정도로, 10 mM의 차폐 거리보다 천 배쯤 크다.", "", "pm는 원자 하나보다도 작은 길이라 이온이 층을 이룰 수 없다."], "ref": "#s-debye-numbers", "refLabel": "2구간: 디바이 길이의 숫자"}, {"id": "d20-p03", "type": "mc", "q": "고정 음전하 겔(양이온만 잘 통과)과 고정 양전하 겔(음이온만 잘 통과)을 붙인 접합에 '역방향' 전압을 걸면 주로 무슨 일이 생길까?", "options": ["접합으로 양·음이온이 몰려 전류가 커진다", "접합의 이온이 빠지고 보충이 없어 전류가 작아진다", "양이온만 접합으로 와서 전류가 절반쯤 된다", "공이온이 겔로 들어와 접합을 채워 전류가 커진다"], "a": 1, "why": "역방향에서는 양·음이온이 모두 접합에서 멀어지고, 각 겔이 공이온을 배제해 보충이 안 되므로 이온 고갈층이 생긴다. 순방향은 반대로 축적. 3구간에서 단계별로 설명한다.", "wrongWhy": ["순방향의 모습이다. 역방향에서는 두 이온이 모두 접합에서 멀어진다.", "", "역방향에서는 양이온도 접합에서 멀어진다. 한 종류만 오는 방향은 없다.", "Donnan 배제 때문에 공이온은 겔에 거의 들어오지 못한다."], "ref": "#s-junction-steps", "refLabel": "3구간 단계 2: 역방향과 고갈층"}, {"id": "d20-p04", "type": "ox", "q": "같은 이온 다이오드라도 전압을 아주 느리게 훑으면 히스테리시스 고리가 거의 닫히고 정류(한쪽 방향 전류가 큼)만 보일 수 있다.", "a": true, "why": "아주 느리면 내부 농도가 매 순간 정상값을 따라가므로 지난 이력이 남지 않는다. 3구간 장난감 모형(0.01 Hz)에서 계산으로 보인다.", "ref": "#s-toy-model", "refLabel": "3-1 장난감 모형: 0.01 Hz 칸"}, {"id": "d20-p05", "type": "ox", "q": "전극 표면 전기이중층의 충전·방전은 화학 반응이 없는 과정이므로, 어떤 측정 조건에서도 1초 안에 원래대로 돌아간다.", "a": false, "why": "휘발성은 방전 길에도 달려 있다. 반응하지 않는 전극에서 방전 길을 막으면 개방 전압이 오래 남을 수 있고, 전해질 화학으로 이완을 늘릴 수도 있다. 2구간에서 설명한다.", "ref": "#s-edl-not-always-volatile", "refLabel": "2구간: EDL이 늘 휘발성은 아니다"}, {"id": "d20-p06", "type": "mc", "q": "이온 게이트 유기 트랜지스터에 펄스를 준 직후, 전류의 여러 감쇠 성분 가운데 가장 먼저 사라지는 것으로 흔히 해석되는 것은?", "options": ["고분자 결정 영역의 이온이 빠져나오는 것", "고분자 비정질 영역의 이온이 빠져나오는 것", "전극 반응으로 생긴 물질이 녹는 것", "채널 표면에 모였던 이온층이 흩어지는 것"], "a": 3, "why": "펄스 뒤 감쇠를 지수 여러 개로 맞추면 가장 빠른 성분(1초 미만)을 계면 이온층(EDL)의 흩어짐으로, 느린 성분을 고분자 안 이온의 역확산으로 귀속한다. 귀속은 저자 해석이다. 4구간에서 설명한다.", "wrongWhy": ["결정 영역 깊이 들어간 이온은 가장 느리게(τ₃) 나온다고 해석된다.", "비정질 영역의 이온은 중간 빠르기(τ₂)로 해석된다.", "이 감쇠 성분들은 채널 안 이온의 이동으로 해석되었고, 전극 반응은 그중 어느 성분에도 귀속되지 않았다.", ""], "ref": "#s-doping-steps", "refLabel": "4구간 단계 2: 펄스 직후 τ₁"}, {"id": "d20-p07", "type": "mc", "q": "높이가 고정된 아주 좁은 나노채널(벽이 음전하)에서 소금 농도를 높이면, 벽 전하 때문에 '양이온만 통과하는' 성질은 어떻게 될까?", "options": ["더 강해진다", "약해진다", "변하지 않는다", "음이온만 통과하게 바뀐다"], "a": 1, "why": "농도가 높을수록 디바이 길이가 짧아져 벽의 영향이 가장자리로 밀린다(1 mM 9.6 nm → 1 M 0.3 nm). 5구간 기초 상자에서 설명한다.", "wrongWhy": ["농도가 높으면 디바이 길이가 짧아져 벽의 영향이 줄어든다.", "", "디바이 길이가 농도에 따라 바뀌므로 선택성도 바뀐다.", "벽 전하의 부호는 그대로라 반대이온은 여전히 양이온이다."], "ref": "#s-nano-numbers", "refLabel": "5구간 ④: 11 nm 채널과 λ_D"}, {"id": "d20-p08", "type": "ox", "q": "기억의 메커니즘이 같다면(예: 둘 다 농도 분극), 소자의 크기가 달라도 기억 시간은 비슷하다.", "a": false, "why": "같은 농도 분극 소자도 크기에 따라 기억이 200 s에서 4000 s로 바뀌었고, 같은 나노채널에서도 지배 과정에 따라 분에서 74시간까지 갈렸다. 6구간 그림 8(시간척도 지도)에서 설명한다.", "ref": "#ch-mechanism-map", "refLabel": "6구간 그림 8: 시간척도 지도"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 상태 x로 보기", "items": [{"id": "d20-q01", "type": "mc", "q": "일반 memristor 표현 i = G(x, V)·V, dx/dt = f(x, V)에서 '기억'에 해당하는 것은?", "options": ["G가 x와 V에 대해 휘어 있는 것", "x가 입력이 끝난 뒤에도 얼마간 남는 것", "전류 i가 전압 V에 비례하는 것", "전압 V가 클수록 i가 커지는 것"], "a": 1, "why": "기억은 상태 x가 과거 입력의 흔적을 얼마나 오래 들고 있느냐이고, 그 빠르기(이완)는 x의 변화율 f가 정한다. G의 휨은 비선형 쪽이다. 1구간 그림 1(Day 37).", "wrongWhy": ["G의 휨은 비선형 쪽이다.", "", "비례하면 선형 저항이고, 이력은 드러나지 않는다.", "전류가 전압과 함께 커지는 것은 보통 저항에도 있는 성질이다."], "ref": "#ch-state-variable", "refLabel": "1구간 그림 1(Day 37): 공통 틀"}, {"id": "d20-q28", "type": "mc", "q": "(가상의 예) 하이드로겔 소자에 전압 펄스를 주면 겔 속 물이 빠져 부피가 줄고, 펄스를 끄면 몇 분에 걸쳐 물이 돌아오며 전류도 따라 회복된다. 그림 1(Day 37)의 공통 틀에서 상태 x에 해당하는 것은?", "options": ["겔의 물 함량(부피)", "걸어 준 펄스 전압 V", "흐르는 전류 I", "펄스를 준 횟수"], "a": 0, "why": "입력에 따라 바뀌고, 입력을 끊은 뒤에도 얼마간 남아 출력(전류)에 영향을 주는 양이 상태다. 여기서는 겔의 물 함량이다. 펄스 전압은 입력, 전류는 출력이다.", "wrongWhy": ["", "V는 입력이다. 펄스를 끄면 0이 되지만 소자의 변화는 남아 있다.", "I는 출력이다. 상태에 따라 달라지는 결과다.", "횟수는 실험자가 세는 숫자이고, 소자 안에서 이완하는 양이 아니다."], "ref": "#ch-state-variable", "refLabel": "1구간: 상태 x를 찾는 작은 장면"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · EDL 충전 시간 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d20-q03", "type": "short", "q": "[풀이 예시 확인] 본문 단계 2–3: 10 mM KCl, 전극 1 cm², 간격 1 cm에서 R ≈ 670 Ω, 직렬 계면 정전용량 C = 5 µF이었다. τ = RC는 몇 ms인가? (소수 첫째 자리까지)", "a": ["3.3", "3.3 ms", "3.34", "3.35", "약 3.3"], "why": "τ = 670 × 5×10⁻⁶ = 3.3×10⁻³ s = 3.3 ms. 저항(재료와 크기)과 정전용량(계면 면적)의 곱이다. 2구간 기초 상자 ④.", "ref": "#s-edl-numbers", "refLabel": "2구간 ④ 단계 2–3: R과 C"}, {"id": "d20-q04", "type": "short", "q": "[일부 채우기] 같은 전해질·같은 전극 면적에서 간격만 1 cm → 2 mm로 줄이면 R은 670 × 0.2 = 134 Ω이 된다. 그러면 τ = 134 × 5×10⁻⁶ = ? ms (소수 둘째 자리까지)", "a": ["0.67", "0.67 ms", "0.670", "0.66"], "why": "τ = 134 × 5×10⁻⁶ = 6.7×10⁻⁴ s = 0.67 ms. 간격이 1/5이 되면 저항도 τ도 1/5이다. EDL 충전 시간은 전극 간격에 비례한다(면적은 R과 C에서 지워진다). Day 39–40에서 τ ~ λ_D·L/D로 다시 본다.", "ref": "#s-edl-numbers", "refLabel": "2구간 ④ 단계 4: 간격을 바꾸면"}, {"id": "d20-q05", "type": "short", "q": "[혼자 풀기] 간격 1 cm, 면적 1 cm²는 그대로 두고 전해질을 전도도가 100배 낮은 고분자 겔로 바꿨다(계면 정전용량 5 µF은 같다고 가정). τ는 약 몇 초인가? (소수 둘째 자리까지)", "a": ["0.33", "0.33 s", "0.334", "333 ms", "약 0.33"], "why": "전도도가 1/100이면 R이 100배(약 67 kΩ), τ = 6.7×10⁴ × 5×10⁻⁶ ≈ 0.33 s. 같은 '계면 충전'도 전해질 재료에 따라 ms에서 s로 바뀐다. 헷갈렸다면 R이 전도도에 반비례한다는 것을 확인하세요.", "ref": "#s-edl-numbers", "refLabel": "2구간 ④ 단계 4: 전도도를 바꾸면"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · Donnan 배제와 접합", "items": [{"id": "d20-q06", "type": "mc", "q": "polyanion 겔(고정 음전하)과 polycation 겔(고정 양전하)을 맞붙인 접합에 역방향 전압을 걸면 접합의 전도도가 떨어지는 가장 중요한 이유는?", "options": ["역방향에서 이온의 이동도가 작아지기 때문", "전극 앞에 EDL이 두껍게 쌓여 전류를 막기 때문", "접합으로 이온이 너무 많이 몰려 서로 막기 때문", "접합의 이온이 빠지는데 양쪽 겔이 보충을 막기 때문"], "a": 3, "why": "역방향에서는 양이온·음이온 모두 접합에서 멀어지고, p형 겔은 음이온을, n형 겔은 양이온을 Donnan 배제로 막아 보충이 안 된다. 그래서 이온 고갈층이 생긴다. 3구간 단계 2.", "wrongWhy": ["이동도는 이온과 매질의 성질이라 전압 방향으로 바뀌지 않는다.", "EDL은 양 방향 모두 전극에 생기므로 방향 차이를 설명하지 못한다.", "이온이 몰리는 것은 순방향이고, 그때는 전도도가 오른다.", ""], "ref": "#s-junction-steps", "refLabel": "3구간 단계 2: 역방향과 고갈층"}, {"id": "d20-q07", "type": "short", "q": "고정 전하 농도 X = 0.5 M인 겔을 10 mM 염에 담갔다. 이상 Donnan 평형(c₊·c₋ = c_s², c₊ − c₋ = X)에서 겔 속 공이온 농도는 약 몇 mM인가? (소수 첫째 자리까지; 힌트: c₋ ≈ c_s²/X)", "a": ["0.2", "0.20", "0.2 mM", "약 0.2"], "why": "c₋ ≈ (0.01)² ÷ 0.5 = 2×10⁻⁴ M = 0.2 mM. 바깥(10 mM)의 1/50. 본문 예(X = 1 M)는 0.1 mM, 1/100이었다. 고정 전하가 진할수록 배제가 강하다. 3구간 기초 상자 ②.", "ref": "#s-donnan", "refLabel": "3구간 ②: Donnan 배제의 숫자"}]}, "3-end": {"kind": "end", "title": "3장 마무리", "items": [{"id": "d20-q08", "type": "short", "q": "장난감 모형에서 정상 농도가 e의 지수 (αV)이고 I = c·V일 때, 아주 느린 훑기의 정류비 I(+V)/|I(−V)|는 e의 지수 (2αV)이다. α = 1.5 /V, V = 2 V이면 정류비는 약 얼마인가? (정수로)", "a": ["403", "약 403", "400", "e^6"], "why": "2αV = 2 × 1.5 × 2 = 6, e⁶ ≈ 403. ±1 V에서는 e³ ≈ 20이었다. 정류는 입력의 부호에 따라 응답이 다른 비선형이다. 3-1 장난감 모형. (모형 계산이며 실제 소자의 정류비가 아니다.)", "ref": "#s-toy-model", "refLabel": "3-1 장난감 모형: 느린 훑기의 정류비"}, {"id": "d20-q09b", "type": "mc", "q": "장난감 모형(τ = 1 s)에서 ±1 V 사인파의 주파수를 0.01, 0.16, 10 Hz로 바꿨다. 셋 가운데 히스테리시스 고리가 가장 넓은 것과 그 이유는?", "options": ["0.01 Hz: 느릴수록 이온이 많이 쌓이므로", "10 Hz: 빠를수록 상태가 크게 흔들리므로", "0.16 Hz: 빠르기가 τ와 같은 자릿수이므로", "세 경우 모두 같다: 같은 소자이므로"], "a": 2, "why": "고리 넓이는 0.12(0.01 Hz), 0.42(0.16 Hz), 0.008(10 Hz). 느리면 상태가 늘 목표값을 따라가 고리가 닫히고 정류만 남으며, 빠르면 상태가 거의 변하지 않아 직선이 된다. 0.16 Hz는 2πf ≈ 1/τ라 상태가 따라가되 늦게 따라간다. 촘촘히 훑으면 최대는 약 0.08 Hz(0.52)로, '주기 = τ'가 아니라 같은 자릿수의 빠르기라는 뜻이다. 그림 4(Day 37).", "wrongWhy": ["느리면 c가 늘 목표값을 따라가 올라갈 때와 내려갈 때 길이 같아져 고리가 닫힌다(0.12).", "빠르면 c가 따라가지 못해 거의 상수라 직선이 된다(0.008).", "", "고리 넓이는 훑는 빠르기에 따라 0.008에서 0.42까지 바뀐다."], "ref": "#s-toy-model", "refLabel": "3-1 그림 4(Day 37): 세 빠르기의 고리"}, {"id": "d20-q02", "type": "ox", "q": "같은 소자에서 I–V 히스테리시스 고리의 넓이는 전압을 훑는 속도와 상관없이 일정하므로, 고리 넓이만으로 기억의 좋고 나쁨을 말할 수 있다.", "a": false, "why": "아주 느리게 훑으면 상태가 따라가 고리가 닫히고, 아주 빠르게 훑어도 상태가 못 따라가 닫힌다. 고리는 전압이 바뀌는 빠르기가 소자 시간상수와 같은 자릿수일 때(2πf ~ 1/τ) 가장 크다(장난감 모형, 그리고 하이드로겔 나노채널의 훑는 속도 의존 보고). 3-1 흔한 오해 상자.", "ref": "#s-loop-myth", "refLabel": "3-1 흔한 오해: 고리 넓이와 기억"}, {"id": "d20-q10", "type": "ox", "q": "어떤 이종 겔 접합(양이온 선택 겔 + 음이온 선택 겔)의 역방향 저항이, 같은 재료끼리 붙인 접합의 약 35배였다. 이 비교는 그 고저항이 접합 특유의 이온 고갈에서 온다는 주장을 뒷받침하는 대조 비교다.", "a": true, "why": "같은 재료끼리 붙인 접합에는 한쪽 겔이 보충을 막는 구조가 없어 고갈이 생기지 않으므로, 이종 접합만의 큰 역방향 저항은 접합 특유의 효과를 가리킨다(Lee 2026 (AFM) p.4). 다만 고갈층의 공간 분포를 직접 본 측정은 아니다.", "ref": "#s-junction-devices", "refLabel": "3-2 실제 소자: 같은 재료 대조군"}, {"id": "d20-q27", "type": "ox", "q": "이종 계면을 넣은 겔 소자가 뚜렷한 정류를 보였다. 그렇다면 그 소자의 전류 이완(기억) 시간도 계면이 정한다고 결론 내릴 수 있다.", "a": false, "why": "정류와 이완은 서로 다른 과정에서 올 수 있다. 하이드로겔 시냅스들을 정리한 리뷰는 계면이 정류를 주었지만 이완은 느린 이온 역류가 정했다고 본다(Wang 2025 p.316). 계면이 있는 소자와 없는 소자의 이완 시간을 같은 조건에서 비교해야 가릴 수 있다.", "ref": "#s-interface-vs-backflow", "refLabel": "3-2 계면이 정하나, 느린 이온이 정하나"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 산화·환원과 다중 시간상수", "items": [{"id": "d20-q29", "type": "mc", "q": "다음 가운데 전자가 계면을 건너지 않는 과정은?", "options": ["은 전극의 은이 Cl⁻와 만나 AgCl이 된다", "고분자 사슬이 전자를 접점에 내주어 정공이 생긴다", "금 전극 앞에 K⁺가 모였다가 흩어진다", "용액의 Fe³⁺가 전극에서 전자를 받아 Fe²⁺가 된다"], "a": 2, "why": "이온이 계면 앞에 모였다 흩어지기만 하는 EDL 충전·방전이 비패러데이 과정이다. 나머지는 모두 전자가 계면을 건너 물질의 산화 상태가 바뀌는 패러데이 과정(산화·환원)이다. 4구간 그림 5.", "wrongWhy": ["은이 전자를 전극에 내주는 산화다(그림 5(b)).", "사슬이 산화되는 전기화학 도핑이다(그림 5(c)).", "", "전자를 얻는 환원이다. 전자가 전극에서 이온으로 건너갔다."], "ref": "#s-redox", "refLabel": "4구간 그림 5: 전자가 계면을 건너는가"}, {"id": "d20-q11", "type": "mc", "q": "이온 게이트 유기 트랜지스터의 펄스 뒤 전류 감쇠를 지수 세 개로 맞췄더니 τ₁ < 1 s, τ₂, τ₃(가장 느림)이 나왔다. 채널 고분자의 주사슬만 바꿨더니 τ₂·τ₃은 길어지고 τ₁은 비슷했다. 가장 무리 없는 해석은?", "options": ["고분자 안 이온이 빠져나오는 과정이 바뀌었다", "주사슬이 계면의 EDL 충전만 바꿨다", "전해질의 전도도가 크게 바뀌었다", "세 시간상수는 모두 같은 과정이다"], "a": 0, "why": "Lee 2025 (structure)에서 τ₂·τ₃이 약 61배·3.76배 길어지고 τ₁은 비슷했다(p.4). 계면의 빠른 EDL 과정은 그대로이고 고분자 안 이온의 역확산(도핑 쪽)이 바뀌었다고 읽는 것이 무리가 없다. 다만 τ와 과정의 대응은 맞춤 결과에 기댄 저자 해석이라, 독립 측정으로 확인해야 한다. 4구간.", "wrongWhy": ["", "EDL 충전이 바뀌었다면 가장 빠른 τ₁이 달라졌어야 한다. τ₁은 비슷했다.", "전해질 전도도가 바뀌면 EDL의 R–C 시간(τ₁)부터 달라진다. 이 실험은 전해질을 바꾸지 않았다.", "τ₁은 그대로이고 τ₂·τ₃만 바뀌었으니 적어도 두 종류의 과정이 있다."], "ref": "#s-doping-steps", "refLabel": "4구간 단계 4: 주사슬 하나를 바꾼 결과"}, {"id": "d20-q12", "type": "ox", "q": "어떤 고분자 채널 소자의 펄스 뒤 이완 시간이 25 ms였고, 피크 전류의 약 10%가 비휘발 성분으로 남았다. 이 두 숫자는 같은 양을 두 가지로 말한 것이다.", "a": false, "why": "25 ms는 빠르게 잊는 부분이 줄어드는 속도이고, 10%는 잊지 않고 남는 부분의 크기다. 서로 다른 양이다(Sung 2024의 곁사슬 비교). 4구간 '같은 계열의 다른 손잡이'.", "ref": "#s-other-knobs", "refLabel": "4구간: 이완 시간과 남는 비율"}, {"id": "d20-q13", "type": "mc", "q": "어떤 이온 다이오드에서 침전이 Zn(OH)₂(용해도곱 1.8×10⁻¹⁶)일 때가 BaSO₄(1.1×10⁻¹⁰)일 때보다 전류가 다시 커지는(LTP) 속도가 느렸다. 이 결과가 보여 주는 것으로 가장 알맞은 것은?", "options": ["침전이 생기면 그 기억은 언제나 영구적으로 남는다", "용해도곱이 작을수록 접합의 전도도가 더 높아진다", "전류 변화에 산화환원 반응이 없다는 증거가 된다", "재료의 화학 상수가 시간척도와 이어질 수 있다"], "a": 3, "why": "덜 녹는 침전이 더 천천히 녹아 전류가 다시 커지는 속도가 느렸다(Han 2023 p.5). 화학 상수 → 시간상수의 드문 예다. 다만 Zn(OH)₂ 계는 pH와 전극도 달라 용해도곱만의 효과로 단정하기는 어렵다.", "wrongWhy": ["Zn(OH)₂ 쪽도 전류가 다시 커졌다. 느릴 뿐 되돌릴 수 있었다.", "용해도곱은 녹는 정도이고, 이 결과는 전도도의 크기가 아니라 회복 속도에 관한 것이다.", "침전은 이온끼리 붙는 반응이라, 이 결과는 산화환원이 있는지와 관계없다.", ""], "ref": "#s-precipitation", "refLabel": "4구간: 침전과 용해도곱"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 디바이 길이와 선택성 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d20-q14", "type": "short", "q": "[풀이 예시 확인] 물속 1:1 염의 디바이 길이는 10 mM에서 3.04 nm다. 높이 11 nm인 채널은 10 mM에서 λ_D의 약 몇 배인가? (소수 첫째 자리까지)", "a": ["3.6", "3.62", "약 3.6", "3.6배"], "why": "11 ÷ 3.04 ≈ 3.6. 높이가 λ_D의 몇 배 정도면 벽의 이온층이 통로의 큰 부분을 차지한다. 5구간 ④.", "ref": "#s-nano-numbers", "refLabel": "5구간 ④: 11 nm 채널과 λ_D"}, {"id": "d20-q15", "type": "short", "q": "[일부 채우기] λ_D는 농도의 제곱근에 반비례한다. 10 mM에서 3.04 nm이면, 농도를 4배(40 mM)로 올렸을 때 λ_D = 3.04 ÷ √4 = ? nm (소수 둘째 자리까지)", "a": ["1.52", "1.5", "1.52 nm"], "why": "√4 = 2이므로 1.52 nm. 농도를 4배로 하면 디바이 길이는 절반이 된다. 선택성이 약해지는 방향이다.", "ref": "#s-debye-numbers", "refLabel": "2구간: 디바이 길이와 농도의 제곱근"}, {"id": "d20-q16", "type": "short", "q": "[혼자 풀기] 1 mM에서 λ_D = 9.62 nm다. λ_D를 1.92 nm(약 1/5)로 만들려면 염 농도를 약 몇 mM로 해야 하나? (정수로)", "a": ["25", "25 mM", "약 25", "24", "26"], "why": "λ_D ∝ 1/√c이므로 c = 1 mM × (9.62/1.92)² ≈ 1 × 25 = 25 mM. 길이를 1/5로 줄이려면 농도는 25배. 헷갈렸다면 제곱근 관계를 확인하세요. 그림 7.", "ref": "#s-debye-numbers", "refLabel": "2구간: 디바이 길이와 농도의 제곱근"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 메커니즘 대응표", "items": [{"id": "d20-q25", "type": "mc", "q": "같은 hBN 2D 나노채널 소자에서 기억 시간이 약 1–5분인 경우와 약 74시간인 경우가 모두 보고되었다. 이것이 뜻하는 것으로 가장 알맞은 것은?", "options": ["둘 중 하나는 측정 오류일 가능성이 크다", "어떤 과정이 지배하느냐에 따라 시간척도가 달라진다", "시간이 지날수록 같은 소자의 기억이 길어진다", "채널이 넓을수록 기억 시간이 길어진다"], "a": 1, "why": "같은 hBN 채널에서도 고리 유형(지배하는 물리 과정)에 따라 1–5분, 약 20분, 약 74시간으로 갈렸다(Pandey 2026 p.9). 농도 분극 소자도 크기에 따라 200 s에서 4000 s로 바뀌었다. 메커니즘의 이름만으로 시간척도를 말할 수 없다. 그림 8.", "wrongWhy": ["두 값은 서로 다른 고리 유형(메커니즘)의 결과로 정리되었다. 오류로 볼 근거가 없다.", "", "두 값은 서로 다른 고리 유형에서 나온 것이지, 한 소자가 시간에 따라 바뀐 것이 아니다.", "같은 채널의 결과이므로 채널 폭 차이로 설명할 수 없다."], "ref": "#s-nano-timescales", "refLabel": "5구간: hBN 채널의 시간척도 폭"}, {"id": "d20-q26", "type": "mc", "q": "어떤 이온 게이트 트랜지스터의 펄스 뒤 감쇠를 지수 셋으로 맞췄더니 τ₁ = 0.2 s, τ₂ = 5 s, τ₃ = 40 s였다. 메커니즘 대응표에서 이 소자를 한 행으로 골라 적어도 될까?", "options": ["된다: 가장 큰 τ₃가 속한 행 하나를 고르면 된다", "된다: 가장 빠른 τ₁이 속한 EDL 행 하나면 된다", "안 된다: 지수 맞춤은 시간상수를 줄 수 없다", "안 된다: 한 소자에 EDL과 도핑이 섞여 있을 수 있다"], "a": 3, "why": "실제 소자에서는 메커니즘이 섞인다. 같은 트랜지스터에서 EDL(빠름)과 고분자 안 이온(느림)이 함께 나온다(4구간). 표의 칸은 '그 메커니즘이 항상 그렇다'가 아니라 논문의 예이고, 각 τ의 귀속은 대조 실험으로 가려야 한다.", "wrongWhy": ["느린 성분만 보고 빠른 EDL 성분(τ₁)을 버리는 셈이다.", "느린 τ₂·τ₃은 EDL의 R–C 시간으로 설명되지 않는다.", "지수 맞춤은 시간상수를 준다. 문제는 각 τ를 어느 과정에 귀속하느냐이고, 그것은 별도 측정이 필요하다.", ""], "ref": "#s-mechanism-table", "refLabel": "6-1 대응표 아래: 메커니즘이 섞인다"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d20-q19", "type": "mc", "q": "네 메커니즘을 '대체로 빠르고 휘발성' → '대체로 느리고 비휘발성' 순서로 놓을 때 가장 알맞은 것은? (예외가 많다는 전제에서)", "options": ["침전 → 도핑 → 농도 분극 → EDL", "도핑 → EDL → 침전 → 농도 분극", "농도 분극 → EDL → 침전 → 도핑", "EDL → 농도 분극 → 전기화학 도핑 → 침전"], "a": 3, "why": "EDL(1초 미만) → 농도 분극(수백–수천 s, 확산으로 회복) → 도핑(수십–수천 s 이상, 일부 비휘발) → 침전(바꿔도 남음). 단 같은 메커니즘도 크기·재료에 따라 여러 자릿수를 오간다(산화물 속 양성자 삽입은 ns). 6-1 표.", "wrongWhy": ["거꾸로 놓았다. 침전은 가장 오래 남고 EDL은 가장 빨리 잊는다.", "EDL은 대체로 가장 빠르고 휘발성이다. 맨 앞에 와야 한다.", "EDL이 농도 분극보다 빠르고, 침전이 도핑보다 오래 남는다.", ""], "ref": "#s-mechanism-table", "refLabel": "6-1 물리 성질 대응표"}, {"id": "d20-q20", "type": "mc", "q": "bipolar 폴리전해질 접합이 reservoir computing에 주는 '비선형'과 '기억'의 출처를 바르게 짝지은 것은?", "options": ["비선형: 전극 EDL의 충전 / 기억: 전극 EDL의 방전", "비선형: 겔의 고정 전하 농도 / 기억: 전극 표면의 반응", "비선형: 부호에 따라 다른 접합 농도 / 기억: 그 농도의 회복 시간", "비선형: 접합 농도의 회복 시간 / 기억: 부호에 따른 농도 차"], "a": 2, "why": "한 상태변수(접합 농도)가 부호에 따라 다르게 변해 정류(비선형)를 만들고, 그 변화와 회복에 시간이 걸려 기억을 만든다. 3구간 단계 3–4.", "wrongWhy": ["EDL은 작은 전압에서 거의 선형이고 빨리 잊어, 접합 소자의 정류와 수백 초 기억을 설명하지 못한다.", "고정 전하는 선택성을 만드는 조건이지 바뀌는 상태가 아니다. 전극 반응은 기억처럼 보이는 가짜 신호일 수 있다.", "", "둘을 뒤바꿨다. 부호에 따른 차이가 비선형(정류)이고, 회복에 걸리는 시간이 기억이다."], "ref": "#s-junction-steps", "refLabel": "3구간 단계 3–4: 정류와 기억"}, {"id": "d20-q21", "type": "ox", "q": "EDL은 비패러데이 과정이므로 어떤 측정 조건에서도 1초 안에 잊는다.", "a": false, "why": "EDL의 휘발성은 방전 길에도 달려 있다. 반응하지 않는 전극에서 방전 길을 막으면 EDL의 개방 전압이 오래 남을 수 있다(Wang 2025 p.309). 또 전해질 화학으로 이완을 늘릴 수도 있다(Lee 2025 (zwitterion) p.5). 2구간.", "ref": "#s-edl-not-always-volatile", "refLabel": "2구간: EDL이 늘 휘발성은 아니다"}, {"id": "d20-q22", "type": "mc", "q": "양성자를 넣은 니켈산화물 소자가 ns 규모 과도 응답을 보였다는 보고(Zhou 2026 (Nat. Nanotech.))가 오늘 수업에서 갖는 의미로 가장 알맞은 것은?", "options": ["이온 소자는 모두 ns로 동작할 수 있다", "이온의 느림은 거리(크기)와 매질에도 달려 있다", "양성자는 이온이 아니라서 빠르다", "니켈산화물은 EDL만 써서 빠르다"], "a": 1, "why": "nm 거리의 고체 속 양성자 재배치는 빠를 수 있다. 시간은 대략 L²/D로 크기와 확산계수가 함께 정한다(Day 35–36, Day 39–40). 하이드로겔 소자의 수백 s 기억과는 크기·매질·메커니즘이 다르다. 4구간.", "wrongWhy": ["하이드로겔 소자는 수백 s 기억을 보인다. 크기·매질이 다르면 시간이 다르다.", "", "양성자(H⁺)도 이온이다. 짧은 거리와 고체 매질이 빠름의 이유다.", "저자들은 양성자의 재배치(삽입)로 설명했다. EDL만으로는 다단계 상태를 설명하지 못한다."], "ref": "#s-intercalation", "refLabel": "4구간 ②: 삽입(양성자 니켈산화물)"}, {"id": "d20-q23", "type": "mc", "q": "내 이온 소자의 기억이 '재료의 기억'인지 확인하는 대조 실험으로 가장 알맞은 것은?", "options": ["이온 차단 전극·같은 재료 접합과 비교한다", "같은 측정을 한 번 더 반복해 본다", "전압을 두 배로 올려 다시 재 본다", "논문 그림과 곡선 모양을 비교한다"], "a": 0, "why": "전극 반응·전극 분극이 기억처럼 보일 수 있고(Pandey 2026 p.7), 접합 특유의 효과는 같은 재료 대조군과 비교해야 드러난다(Lee 2026 (AFM) p.4). 6구간 생각해 보기.", "wrongWhy": ["", "반복은 재현성을 보여 주지만, 기억이 어디서 오는지는 가르지 못한다.", "전압을 바꾸면 다른 과정(전극 반응)이 더 끼어들 수 있어 판별이 더 어려워진다.", "모양이 닮아도 다른 메커니즘일 수 있다. 같은 고리를 여러 과정이 만든다."], "ref": "#s-control-experiments", "refLabel": "6구간 생각해 보기: 대조 실험"}, {"id": "d20-q30", "type": "ox", "q": "휘발성이고 비선형이 강한 I–V 고리를 보이는 소자는, 오래 남는 아날로그 상태가 필요한 시냅스 가중치 저장보다 짧은 기억과 비선형을 쓰는 reservoir 노드 쪽에 더 맞는 후보다.", "a": true, "why": "reservoir는 최근 입력을 잠깐 담고(짧은 기억) 비선형으로 섞는 노드가 필요하고, 가중치 저장은 오래 남는 여러 단계의 상태가 필요하다. 나노유체 리뷰(Pandey 2026 p.7)도 이렇게 짝짓는다. 다만 이것은 후보의 짝짓기이고, 과제 성능으로 검증한 결과는 아니다.", "ref": "#s-pandey-loops", "refLabel": "5구간: 고리 모양과 쓰임의 짝"}]}}}</script>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>
 <div class="done-box" data-day="d20b">
   <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>산화·환원과 전기화학 도핑이 만드는 여러 시간상수, 나노채널 벽 전하의 이온 선택성, 메커니즘별 휘발성·시간상수·가역성 대응표</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
   <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
@@ -1124,7 +1159,7 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
   <div class="done-static static-only"></div>
 </div>
 <div class="next-unit">
-<p><strong>다음 학습</strong> — <a href="../days/d21.html">Day 37 · 이온 동역학의 시간척도 →</a></p>
+<p><strong>다음 학습</strong> — <a href="../days/d21a.html">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계 →</a></p>
 </div>
 </section>
 <section id="writing" class="level2">
@@ -1558,13 +1593,13 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../days/d20a.html" class="pagination-link" aria-label="Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span>
+      <a href="../days/d20a.html" class="pagination-link" aria-label="Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../days/d21.html" class="pagination-link" aria-label="Day 37 · 이온 동역학의 시간척도">
-        <span class="nav-page-text">Day 37 · 이온 동역학의 시간척도</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../days/d21a.html" class="pagination-link" aria-label="Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계">
+        <span class="nav-page-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1572,14 +1607,14 @@ Pandey 2026의 나노유체 memristor I–V 고리 분류. 고리의 방향과 �
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
     <div class="nav-footer-center">
-<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
-</div>
-    <div class="nav-footer-right">
       &nbsp;
     </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
   </div>
 </footer>
 

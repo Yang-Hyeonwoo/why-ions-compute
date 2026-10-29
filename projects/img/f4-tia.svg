@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13" role="img" aria-label="MCP6002로 만든 기준 전압 버퍼와 TIA 회로도, 핀 번호와 위에서 본 핀 배치">
+  <rect width="760" height="470" fill="#ffffff"/>
+  <text x="20" y="24" fill="#1f2937" font-weight="600">TIA 방식 회로도 (설계안 · 실측 미검증)</text>
+  <!-- 3V3 / GND rails -->
+  <line x1="40" y1="50" x2="520" y2="50" stroke="#dc2626" stroke-width="2"/><text x="526" y="54" fill="#dc2626">3V3</text>
+  <line x1="40" y1="430" x2="520" y2="430" stroke="#1f2937" stroke-width="2"/><text x="526" y="434" fill="#1f2937">GND</text>
+  <!-- divider -->
+  <line x1="70" y1="50" x2="70" y2="80" stroke="#1f2937"/>
+  <rect x="62" y="80" width="16" height="40" fill="#fff" stroke="#1f2937"/><text x="84" y="104" font-size="12">10 kΩ</text>
+  <line x1="70" y1="120" x2="70" y2="140" stroke="#1f2937"/>
+  <rect x="62" y="140" width="16" height="40" fill="#fff" stroke="#1f2937"/><text x="84" y="164" font-size="12">10 kΩ</text>
+  <line x1="70" y1="180" x2="70" y2="430" stroke="#1f2937"/>
+  <line x1="70" y1="130" x2="130" y2="130" stroke="#1f2937"/>
+  <line x1="100" y1="130" x2="100" y2="190" stroke="#1f2937"/><line x1="90" y1="190" x2="110" y2="190" stroke="#1f2937" stroke-width="2"/><line x1="90" y1="196" x2="110" y2="196" stroke="#1f2937" stroke-width="2"/><line x1="100" y1="196" x2="100" y2="430" stroke="#1f2937"/>
+  <text x="112" y="200" font-size="12">1 µF</text>
+  <!-- op-amp A buffer -->
+  <polygon points="130,110 130,170 190,140" fill="#eef2fb" stroke="#2b59c3" stroke-width="2"/>
+  <text x="136" y="134" font-size="12">+ (3)</text><text x="136" y="160" font-size="12">− (2)</text>
+  <text x="150" y="104" font-size="12" fill="#2b59c3">U1A</text>
+  <line x1="130" y1="155" x2="120" y2="155" stroke="#1f2937"/><line x1="120" y1="155" x2="120" y2="185" stroke="#1f2937"/><line x1="120" y1="185" x2="200" y2="185" stroke="#1f2937"/><line x1="200" y1="185" x2="200" y2="140" stroke="#1f2937"/>
+  <line x1="190" y1="140" x2="215" y2="140" stroke="#0f766e" stroke-width="2.5"/>
+  <text x="196" y="132" font-size="12">(1) V_ref</text>
+  <line x1="215" y1="140" x2="215" y2="330" stroke="#0f766e" stroke-width="2.5"/>
+  <!-- DAC and device -->
+  <text x="300" y="80" fill="#1f2937">DAC OUT</text>
+  <line x1="360" y1="76" x2="390" y2="76" stroke="#2b59c3" stroke-width="2"/>
+  <rect x="390" y="66" width="40" height="20" fill="#fde68a" stroke="#a16207"/><text x="394" y="81" font-size="11">R_lim</text>
+  <line x1="430" y1="76" x2="450" y2="76" stroke="#2b59c3" stroke-width="2"/>
+  <circle cx="455" cy="76" r="4" fill="#fff" stroke="#b45309"/><circle cx="470" cy="76" r="4" fill="#fff" stroke="#b45309"/><text x="450" y="64" font-size="11" fill="#b45309">J1</text>
+  <line x1="474" y1="76" x2="490" y2="76" stroke="#2b59c3" stroke-width="2"/>
+  <line x1="490" y1="76" x2="490" y2="110" stroke="#2b59c3" stroke-width="2"/>
+  <rect x="470" y="110" width="40" height="50" fill="#eef2fb" stroke="#2b59c3" stroke-width="2"/>
+  <text x="490" y="132" text-anchor="middle" font-size="12">소자</text><text x="490" y="150" text-anchor="middle" font-size="11">① 위</text>
+  <text x="518" y="174" font-size="11">② 아래</text>
+  <line x1="490" y1="160" x2="490" y2="250" stroke="#2b59c3" stroke-width="2"/>
+  <line x1="490" y1="250" x2="330" y2="250" stroke="#2b59c3" stroke-width="2"/>
+  <!-- TIA -->
+  <polygon points="330,230 330,290 270,260" fill="#eef2fb" stroke="#2b59c3" stroke-width="2"/>
+  <text x="300" y="224" font-size="12" fill="#2b59c3">U1B</text>
+  <text x="306" y="254" font-size="12">− (6)</text><text x="306" y="282" font-size="12">+ (5)</text>
+  <line x1="330" y1="275" x2="345" y2="275" stroke="#0f766e"/><line x1="345" y1="275" x2="345" y2="330" stroke="#0f766e"/><line x1="215" y1="330" x2="345" y2="330" stroke="#0f766e" stroke-width="2"/>
+  <!-- feedback -->
+  <line x1="400" y1="250" x2="400" y2="200" stroke="#1f2937"/><line x1="400" y1="200" x2="240" y2="200" stroke="#1f2937"/>
+  <rect x="300" y="190" width="50" height="20" fill="#fff" stroke="#1f2937"/><text x="356" y="214" font-size="12">R_f</text>
+    <line x1="270" y1="260" x2="230" y2="260" stroke="#7c3aed" stroke-width="2"/>
+  <line x1="240" y1="200" x2="240" y2="260" stroke="#1f2937"/>
+  <text x="226" y="290" font-size="12" fill="#7c3aed">(7) V_out → A2</text>
+  <line x1="260" y1="200" x2="260" y2="170" stroke="#1f2937"/><line x1="380" y1="200" x2="380" y2="170" stroke="#1f2937"/><line x1="260" y1="170" x2="316" y2="170" stroke="#1f2937"/><line x1="324" y1="170" x2="380" y2="170" stroke="#1f2937"/><line x1="316" y1="160" x2="316" y2="180" stroke="#1f2937" stroke-width="2"/><line x1="324" y1="160" x2="324" y2="180" stroke="#1f2937" stroke-width="2"/><text x="330" y="164" font-size="12">C_f</text>
+  <!-- ADC taps -->
+  <g font-size="12" fill="#7c3aed">
+    <text x="130" y="374">ADS1115 연결</text>
+    <text x="130" y="394">A0 ← 소자 ① 위 (J1 뒤) · A1 ← V_ref → A0−A1 = 소자 전압</text>
+    <text x="130" y="414">A2 ← V_out (핀 7) · A3 ← V_ref → I = −(A2−A3)/R_f</text>
+  </g>
+  <text x="130" y="352" font-size="12" fill="#1f2937">8번 핀 = 3V3, 4번 핀 = GND, 8–4 사이 100 nF를 칩 바로 옆에</text>
+  <!-- DIP top view -->
+  <g transform="translate(590,70)">
+    <text x="0" y="0" font-weight="600" fill="#1f2937">MCP6002 위에서 본 모습</text>
+    <rect x="40" y="16" width="70" height="120" rx="4" fill="#f3f4f6" stroke="#1f2937"/>
+    <path d="M65,16 A10,10 0 0 0 85,16" fill="#fff" stroke="#1f2937"/>
+    <circle cx="52" cy="30" r="3" fill="#1f2937"/>
+    <g font-size="12" fill="#1f2937">
+      <text x="2" y="38">1 OUTA</text><text x="2" y="66">2 −INA</text><text x="2" y="94">3 +INA</text><text x="2" y="122">4 VSS</text>
+      <text x="116" y="38">8 VDD</text><text x="116" y="66">7 OUTB</text><text x="116" y="94">6 −INB</text><text x="116" y="122">5 +INB</text>
+    </g>
+    <text x="0" y="160" font-size="11.5" fill="#6b7280">홈(반달)·점이 위, 1번은 왼쪽 위</text>
+    <text x="0" y="178" font-size="11.5" fill="#6b7280">LMC6482AIN도 같은 배치 (구매 시</text>
+    <text x="0" y="194" font-size="11.5" fill="#6b7280">데이터시트로 다시 확인)</text>
+  </g>
+  <text x="20" y="455" fill="#6b7280" font-size="12">션트 방식: U1B 대신 소자 ② 아래 → R_s → V_ref. A0·A1 = 소자 양끝, A2·A3 = R_s 양끝 (I = (A2−A3)/R_s).</text>
+</svg>

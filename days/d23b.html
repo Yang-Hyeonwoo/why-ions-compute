@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 44. 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도 – Why Ions Compute?</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d24a.html" rel="next">
+<link href="../days/d23a.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 2,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "/"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute?</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">홈</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">로드맵</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d19a.html">Phase 4 · 왜 이온 고분자인가</a></li><li class="breadcrumb-item"><a href="../days/d23b.html">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">로드맵</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">지난 학습 복습</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing">선택 활동: 글로 정리하기</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d19a.html">Phase 4 · 왜 이온 고분자인가</a></li><li class="breadcrumb-item"><a href="../days/d23b.html">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 44. 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</h1>
+<p class="subtitle lead">Phase 4 · 왜 이온성 고분자인가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> — 기억이 필요한 과제에서 전도도는 높을수록 좋은가, 아니면 최적점이 있나? '전도도를 올리면 좋아지나'를 기능 → 서술자 → 분자 손잡이 → 측정으로 어떻게 다시 쓰고, 최소 필요 전도도는 어떻게 어림하나?</p>
+<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> — 기억이 필요한 과제에서 전도도를 올리는 것이 항상 좋은지는 내 소자의 τ가 과제의 최적(입력 간격의 약 9배)보다 긴지 짧은지로 판단합니다. 최소 필요 전도도는 내 측정 잡음으로 어림합니다.</p>
+<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> — 입력: 입력 간격 T_sym, 소자 길이 L, D → τ = L²/D가 Day 23–24 leaky node의 남는 비율 d를 정함 → 출력: MC₅ 곡선의 봉우리(D ≈ 1.1×10⁻⁹ m²/s)와 같은 σ인 두 재료의 0.002 대 0.081.</p>
+<p><strong>오늘 반드시</strong> — 기억 과제에서는 D(전도도)에 최적점이 있어 "높을수록 좋다"는 성립하지 않는다. σ를 n으로 올리면 τ와 MC는 그대로이고 전력만 늘며, D로 올리면 τ가 움직인다.</p>
+<p><strong>나중에 더 봐도 되는 것</strong> — MC₅ 식의 미분 유도, 설계 사례의 세부, 신호 대 잡음에서 최소 전도도를 구하는 예시 숫자.</p>
+<p><strong>다음으로 넘어가는 기준</strong> — '오늘 반드시'를 내 말로 한두 문장 말할 수 있으면 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 45–46 단일 이온 전도체·polyelectrolyte, Day 49–50 속도·전력 병목, Day 53–56 통제된 재료 계열로 세우는 가설과 최소 실험. 내 소자의 입력 간격에서 필요한 τ·D를 거꾸로 정하고, 내 측정 잡음으로 최소 필요 전도도를 어림</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d23b">
+  <li data-step="review"><a href="#review"><b>1</b>지난 학습 복습</a></li>
+  <li data-step="lesson"><a href="#lesson"><b>2</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>3</b>학습 완료</a></li>
+</ol>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
+<div class="flow-line">
+<p>지난 학습 단위(Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+</div>
+<div class="quiz" data-day="d23" data-set="review-b"></div>
+</section>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<section id="ch-tradeoff" class="level3">
+<h3 class="anchored" data-anchor-id="ch-tradeoff">4. 기억이 필요한 과제에서 전도도는 '높을수록 좋은가'</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "k개 전 입력을 되살리는" 과제에서 확산계수(=같은 <span class="math inline">\(n\)</span>이면 전도도)에 최적점이 생기는 이유를 Day 23–24의 식으로 계산해 보이고, 폴더의 설계들이 이 상충을 어떻게 피하려 했는지(빠른 응답과 느린 기억의 분리) 말할 수 있다.</p>
+</div>
+<p><strong>상황.</strong> 입력이 1초마다 들어오고 5개 전 입력까지 기억해야 하는 과제(reservoir computing, <a href="../days/d07b.html#ch-prc">Day 12 4구간</a>)에 두 소재 A, B를 씁니다. 두 소재의 전도도는 같은데 기억 시간은 1000 s 대 10 s였습니다. 어느 쪽이 과제에 맞고 얼마나 차이 나는지를, Day 23–24에서 손으로 계산한 leaky node 식에 <span class="math inline">\(L^2/D\)</span>를 넣어 계산합니다.</p>
+<p>1–3구간에서 본 것을 먼저 짧게 되짚습니다. 이온전도도 <span class="math inline">\(\sigma = \sum n|z|e\mu\)</span>는 움직이는 이온 수와 이동도의 <strong>곱</strong>이라, 소자의 컨덕턴스 <span class="math inline">\(G = \sigma A/L\)</span>을 거쳐 읽기 전류·전력은 정하지만 기억 시간 <span class="math inline">\(L^2/D\)</span>는 정하지 못합니다. 그래서 전도도가 같은(0.038 S/m) 재료 A(1 M, <span class="math inline">\(D = 10^{-11}\)</span> m²/s)와 B(10 mM, <span class="math inline">\(D = 10^{-9}\)</span> m²/s)의 기억이 1000 s 대 10 s로 갈렸습니다. 이 구간은 그 기억 차이가 실제 과제 성능에서 어떻게 나타나는지 계산합니다.</p>
+<p><span id="s-node-recap"></span><strong>Day 23–24의 노드를 다시 한 번.</strong> Day 23–24에서 상태 숫자 하나에 과거 입력이 어떻게 담기는지를 <strong>선형 누설 노드</strong>(linear leaky node)로 계산했습니다(<a href="../days/d13a.html#s-node-model">Day 23 2구간: 노드 하나</a>). 입력이 일정한 간격 <span class="math inline">\(T_\text{sym}\)</span>마다 하나씩 들어오고, 상태 <span class="math inline">\(x\)</span>는 입력이 올 때마다 이렇게 바뀝니다.</p>
+<p><span class="math display">\[
+x_{\text{새}} = d\,x_{\text{이전}} + (1-d)\,u, \qquad d = e^{-T_\text{sym}/\tau}
+\]</span></p>
+<p><span class="math inline">\(d\)</span>는 한 입력 간격 동안 이전 상태가 <strong>남는 비율</strong>(0과 1 사이, 무차원)이고, <span class="math inline">\(1-d\)</span>는 그동안 누설되는 몫이자 새 입력 <span class="math inline">\(u\)</span>가 상태를 움직이는 정도입니다. Day 15–16와 Day 23–42에서 쓴 것과 같은 기호입니다. 기호 둘을 조심하세요. 소문자 <span class="math inline">\(d\)</span>는 남는 비율이라 1–3구간의 확산계수 <span class="math inline">\(D\)</span> [m²/s]와 다른 양이고, 아래 <span class="math inline">\(MC_k\)</span>의 <span class="math inline">\(k\)</span>는 '몇 개 전 입력인가'를 세는 정수라 1구간의 볼츠만 상수 <span class="math inline">\(k_B\)</span>와 다릅니다.</p>
+<p><span class="math inline">\(MC_k\)</span>(memory capacity 가운데 <span class="math inline">\(k\)</span>개 전 입력의 몫)는 지금 상태 숫자 하나를 선형 readout(상태에 가중치를 곱해 답을 내는 출력, <a href="../days/d06.html#b-readout">Day 10 기초 3</a>)으로 읽어 <span class="math inline">\(k\)</span>개 전 입력을 되살린 정도(0–1, 1이면 완벽)이고, 잡음이 없으면 <span class="math inline">\(MC_k = (1-d^2)\,d^{2(k-1)}\)</span>이었습니다(<a href="../days/d13a.html#ch-mc-by-hand">Day 23 2구간</a>). 노드 하나에서는 모든 <span class="math inline">\(k\)</span>의 몫을 더해도 1을 넘지 못합니다. 이제 τ 자리에 Day 39–40의 확산 시간 <span class="math inline">\(L^2/D\)</span>를 넣으면 <span class="math inline">\(d = e^{-T_\text{sym}D/L^2}\)</span>이 되어, 확산계수 <span class="math inline">\(D\)</span>(같은 <span class="math inline">\(n\)</span>이면 전도도)와 계산 기능이 한 줄로 이어집니다.</p>
+<p><strong>과제.</strong> 입력이 1초 간격(<span class="math inline">\(T_\text{sym}\)</span> = 1 s)으로 들어오고, <strong>5개 전 입력</strong>을 되살려야 하는 과제를 생각합니다(소자 길이 <span class="math inline">\(L\)</span> = 100 µm, 잡음 없음).</p>
+<p><span id="s-optimum-figure"></span>그림 4를 먼저 봅니다. 가로축은 확산계수 <span class="math inline">\(D\)</span>이고 <strong>로그 눈금</strong>(눈금 한 칸이 10배, <a href="../days/d01a.html#b-log-axis">Day 1 기초: 로그 축</a>)이며, 같은 <span class="math inline">\(n\)</span>이면 전도도도 같은 비율로 움직입니다. 세로축은 5개 전 입력의 몫 <span class="math inline">\(MC_5\)</span>입니다. 볼 것은 둘입니다. 초록 곡선에 봉우리가 하나 있다는 것, 그리고 3구간의 두 재료(주황 A, 파랑 B)가 전도도는 같은데 곡선의 다른 자리에 놓인다는 것. 아래 단계 1–4가 봉우리의 위치와 양쪽 비탈을, 단계 5가 두 점을 계산합니다.</p>
+<figure class="fig figure"><img src="../assets/img/d23/fig3-mc-vs-D.svg" alt="확산계수 D(10⁻¹²–10⁻⁶ m²/s)에 따른 5개 전 입력의 몫 MC₅: D ≈ 1.1×10⁻⁹(τ ≈ 9.0 s)에서 최대 0.082, 그보다 크거나 작으면 급격히 줄어드는 봉우리 곡선. 전도도가 같은 재료 B(D 10⁻⁹, τ 10 s)는 봉우리 근처 0.081, 재료 A(D 10⁻¹¹, τ 1000 s)는 0.002" class="figure-img"><figcaption><b>그림 4.</b> 5개 전 입력을 되살리는 과제의 확산계수 최적점(선형 누설 노드 장난감 모형, $L$ = 100 µm, 입력 간격 $T_\text{sym}$ = 1 s, 남는 비율 $d = e^{-T_\text{sym}D/L^2}$, 잡음 없음, 코드 계산). 같은 $n$이면 가로축은 전도도와 같은 비율로 움직인다. 주황·파랑 점은 3구간의 재료 A·B로, 전도도는 같지만 $D$가 100배 달라 곡선의 다른 자리에 놓인다. 잡음이 있으면 왼쪽($D$가 작아 느린 쪽)은 더 나빠진다(Day 23–24). 실제 소자의 측정이 아니다. (Claude가 계산해 그림)</figcaption></figure>
+<div class="stepper">
+<div class="step">
+<p><span id="s-optimum-steps"></span><strong>단계 1 — 최적의 d.</strong> <span class="math inline">\(MC_5 = (1-d^2)d^{8}\)</span>에서 <span class="math inline">\(d\)</span>를 키우면 5개 전 입력이 더 많이 남지만(<span class="math inline">\(d^8\)</span> 커짐), 그만큼 더 많은 과거 입력이 몫을 나눠 가져 각자의 몫이 줄어듭니다(<span class="math inline">\(1-d^2\)</span> 작아짐). 그래서 곱에 봉우리가 생깁니다. <span class="math inline">\(y = d^2\)</span>로 두면 <span class="math inline">\((1-y)y^4\)</span>이고, 미분이 0인 곳 <span class="math inline">\(4y^3(1-y) - y^4 = 0\)</span>에서 <span class="math inline">\(y = 4/5\)</span>, 즉 <span class="math inline">\(d = 0.894\)</span>입니다(일반적으로 <span class="math inline">\(d^2 = (k-1)/k\)</span>).</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 최적의 τ.</strong> <span class="math inline">\(d = e^{-T_\text{sym}/\tau}\)</span>이므로 <span class="math inline">\(\tau = -T_\text{sym}/\ln d = -1/\ln 0.894 \approx\)</span> <strong>9.0 s</strong>. 입력 간격의 약 9배입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 최적의 D.</strong> <span class="math inline">\(\tau = L^2/D\)</span>에서 <span class="math inline">\(D = 10^{-8} \div 9.0 \approx\)</span> <strong><span class="math inline">\(1.1\times10^{-9}\)</span> m²/s</strong>. 이때 <span class="math inline">\(MC_5 \approx 0.082\)</span>(5개 전 입력의 흔들림 가운데 약 8%를 되살린다는 뜻. 노드 하나의 몫은 합쳐 1이 상한이라 한 지연의 몫은 작습니다).</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 양쪽으로 벗어나면.</strong> <span class="math inline">\(D = 10^{-8}\)</span>(10배 빠름)이면 <span class="math inline">\(\tau\)</span> = 1 s로 빨리 잊어 <span class="math inline">\(MC_5 \approx 0.0003\)</span>, <span class="math inline">\(D = 10^{-10}\)</span>(10배 느림)이면 <span class="math inline">\(\tau\)</span> = 100 s로 새 입력이 상태를 거의 못 움직여 몫이 먼 과거로 퍼져 <span class="math inline">\(MC_5 \approx 0.018\)</span>입니다. <strong>같은 <span class="math inline">\(n\)</span>이라면 전도도에도 최적점이 있는 것입니다.</strong></p>
+</div>
+<div class="step">
+<p><strong>단계 5 — 3구간의 두 재료로.</strong> 전도도가 같은 A와 B를 이 과제에 넣으면, B는 τ = 10 s로 최적(9 s) 가까이라 <span class="math inline">\(MC_5 \approx\)</span> <strong>0.081</strong>, A는 τ = 1000 s라 <span class="math inline">\(d^2 = e^{-2/1000} \approx 0.998\)</span>이고 <span class="math inline">\(MC_5 \approx\)</span> <strong>0.002</strong>입니다. 전도도가 같은 두 재료가 같은 과제에서 약 40배 다른 성능을 냅니다(그림 4의 주황·파랑 점).</p>
+</div>
+</div>
+<p><span id="s-bounded"></span>이 계산은 장난감 모형이고, 실제 소자는 시간상수가 여럿이며 비선형도 있습니다. 그러나 요지는 남습니다. <span class="key"><strong>기억이 필요한 과제에서 "전도도가 높을수록 좋다"는 일반적으로 성립하지 않고, 과제의 입력 간격과 기억 깊이(memory depth: 몇 개 전 입력까지 되살려야 하나)가 최적의 이온 동역학을 정합니다.</strong></span> <span class="tag tag-interp">해석</span> Singh 2026도 물리 reservoir의 목표가 "최대의 지속성이나 최대의 히스테리시스가 아니라, 상태 변화가 계산적으로 풍부하고 회복 가능하며 학습 가능한 <strong>유계(bounded) 동작 영역</strong>"이라고 씁니다. <span class="src">Singh 2026, p.6</span> 같은 글은 reservoir의 질이 서술자 하나를 최대화해서가 아니라 여러 요구가 함께 만족되는 재현 가능한 동작 창을 찾아서 정해진다고 정리합니다. <span class="src">Singh 2026, p.7</span></p>
+<div class="stop-point">
+<p>여기까지: Day 23–24의 노드 식에 τ = <span class="math inline">\(L^2/D\)</span>를 넣어 그림 4의 봉우리(τ ≈ 9 s, <span class="math inline">\(D\)</span> ≈ <span class="math inline">\(1.1\times10^{-9}\)</span> m²/s, <span class="math inline">\(MC_5\)</span> ≈ 0.082)와 양쪽 비탈을 다시 계산하고, 전도도가 같은 A·B가 0.002 대 0.081로 갈리는 이유를 말할 수 있다. 다음: 전도도를 올리는 세 길을 표로 비교.</p>
+</div>
+<div class="predict">
+<p>3구간 '생각해 보기'를 숫자로 확인합니다. 기준 소자(움직이는 이온 10 mM, <span class="math inline">\(D = 10^{-10}\)</span> m²/s, <span class="math inline">\(L\)</span> = 100 µm, τ = 100 s)의 전도도를 10배 올리는 두 길, (가) 염을 10배 넣기(<span class="math inline">\(n\)</span>↑)와 (나) 가소제로 <span class="math inline">\(D\)</span>를 10배 올리기 중 어느 쪽이 위 과제의 <span class="math inline">\(MC_5\)</span>를 키울까요? 전력은 각각 어떻게 될까요? 먼저 적고 아래 표를 보세요.</p>
+</div>
+<p><span id="s-routes"></span><strong>전도도를 올리는 길에 따라 과제 성능이 다르다</strong>(코드 계산; 1가 이온 한 종, <span class="math inline">\(L\)</span> = 100 µm, <span class="math inline">\(A\)</span> = 1 mm², 1 V, 입력 1 s 간격, 잡음 없음).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>움직이는 이온</th>
+<th><span class="math inline">\(D\)</span> (m²/s)</th>
+<th>σ (S/m)</th>
+<th><span class="math inline">\(G\)</span>, 1 V의 전류·전력</th>
+<th>기억 τ = <span class="math inline">\(L^2/D\)</span></th>
+<th>계면 충전 <span class="math inline">\(\tau_c\)</span></th>
+<th><span class="math inline">\(MC_5\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>기준</td>
+<td>10 mM</td>
+<td><span class="math inline">\(10^{-10}\)</span></td>
+<td>0.0038</td>
+<td>38 µS, 38 µA, 38 µW</td>
+<td>100 s</td>
+<td>4.3 ms</td>
+<td>0.018</td>
+</tr>
+<tr class="even">
+<td>(가) 염 10배</td>
+<td>100 mM</td>
+<td><span class="math inline">\(10^{-10}\)</span></td>
+<td>0.038 (×10)</td>
+<td>×10</td>
+<td>100 s (그대로)</td>
+<td>1.4 ms</td>
+<td>0.018 (그대로)</td>
+</tr>
+<tr class="odd">
+<td>(나) <span class="math inline">\(D\)</span> 10배</td>
+<td>10 mM</td>
+<td><span class="math inline">\(10^{-9}\)</span></td>
+<td>0.038 (×10)</td>
+<td>×10</td>
+<td>10 s</td>
+<td>0.43 ms</td>
+<td><strong>0.081</strong> (×4.5)</td>
+</tr>
+<tr class="even">
+<td>(다) <span class="math inline">\(D\)</span> 100배</td>
+<td>10 mM</td>
+<td><span class="math inline">\(10^{-8}\)</span></td>
+<td>0.38 (×100)</td>
+<td>×100</td>
+<td>1 s</td>
+<td>0.043 ms</td>
+<td>0.0003</td>
+</tr>
+</tbody>
+</table>
+<p>표 읽는 법: (가)와 (나)는 전도도가 같은데(3구간의 A·B와도 같은 0.038 S/m) 과제 성능은 4.5배 다릅니다. (가)에서 <span class="math inline">\(D\)</span>가 그대로라는 것은 가정입니다. 실제로는 진할수록 이온쌍이 늘고, 무용매 고분자에서는 염이 Tg를 올려 <span class="math inline">\(D\)</span>가 줄기도 합니다(<a href="../days/d22b.html#ch-crosslink-concentration">Day 42 3구간</a>). <span class="tag tag-interp">해석</span></p>
+<ul>
+<li><strong>도움이 되는 부분.</strong> (나)처럼 <span class="math inline">\(D\)</span>를 올려 τ를 과제의 최적(입력 간격의 약 9배) 쪽으로 <strong>당길 때</strong>입니다. 기준 τ가 최적보다 길 때만 그렇습니다. (가)는 잡음이 없으면 MC를 바꾸지 않지만, 잡음이 전류와 상관없이 일정하다면 읽기 신호를 10배 키워 상태 차이가 잡음에 묻히는 것을 막습니다(5구간 '가장 강한 반론', <a href="../days/d18a.html#ch-noise-gap">Day 33 2구간: 차이 대 흔들림</a>).</li>
+<li><strong>해가 되는 부분.</strong> 전력은 세 길 모두 σ에 비례해 늡니다. (다)처럼 τ가 입력 간격까지 짧아지면 <span class="math inline">\(MC_5\)</span>는 거의 0입니다. 기준 τ가 이미 최적보다 짧았다면 <span class="math inline">\(D\)</span>를 올리는 것은 처음부터 손해입니다.</li>
+<li><strong>조건.</strong> 그래서 "전도도를 올리면 좋아지나"의 답은 ① σ를 <span class="math inline">\(n\)</span>으로 올리나 <span class="math inline">\(D\)</span>로 올리나, ② 지금 τ가 과제의 최적보다 긴가 짧은가, ③ 신호가 잡음에 묻혀 있나, ④ 전력 예산이 남았나에 달려 있습니다.</li>
+</ul>
+<p><span id="s-separate-design"></span><strong>상충을 피하는 설계: 빠른 응답과 느린 기억을 분리하기.</strong> 전도도(빠른 응답, 큰 신호)와 기억(느린 회복)이 한 손잡이에 묶여 있으면 상충이 생깁니다. 둘을 다른 손잡이에 맡기려는 설계가 있습니다. Zhou 2025는 cation–π 상호작용으로 양이온을 붙잡아 <strong>자유로운 음이온이 빠르게</strong> 응답하게 하고, 이중층 계면에 쌓인 <strong>결합 상태의 이온이 느리게</strong> 이완하게 해, 빠른 응답과 느린 이완을 한 이온겔에 함께 넣었다고 설계를 설명합니다. <span class="src">Zhou 2025, p.2</span> Zheng 2025는 음이온이 사슬에서는 잘 떨어지되(높은 전도도 쪽) 반도체 고분자에서는 머물게(기억 쪽) 짝이온을 골랐습니다. <span class="src">Zheng 2025, p.2, 5</span> 두 설계 모두 "이동하는 이온"과 "기억하는 이온(또는 자리)"을 화학적으로 나누는 전략으로 읽을 수 있습니다. <span class="tag tag-interp">해석</span> 다만 Day 41–42에서 본 대로, 두 모드가 독립적으로 조절되었는지를 보인 측정은 아직 없습니다 <span class="prov">이 강의가 대조한 폴더 문헌 기준</span>.</p>
+<div class="quiz" data-day="d23" data-set="4-check"></div>
+<div class="quiz" data-day="d23" data-set="4-end"></div>
+<div class="stop-point">
+<p>여기까지: '전도도 10배'가 염(<span class="math inline">\(n\)</span>)으로냐 <span class="math inline">\(D\)</span>로냐에 따라 <span class="math inline">\(MC_5\)</span>가 그대로(0.018)이거나 4.5배(0.081)가 된다는 표를 읽고, 그 답이 지금 τ가 최적보다 긴가 짧은가에 달려 있다고 말할 수 있다. 다음: 질문을 기능에서 거꾸로 다시 쓰기.</p>
+</div>
+<div class="keypoints">
+<ul>
+<li>장난감 모형: '5개 전 입력' 과제의 최적 <span class="math inline">\(\tau\)</span> ≈ 입력 간격의 9배, <span class="math inline">\(L\)</span> = 100 µm에서 최적 <span class="math inline">\(D\)</span> ≈ <span class="math inline">\(1.1\times10^{-9}\)</span> m²/s. 10배 빠르거나 느리면 <span class="math inline">\(MC_5\)</span>가 크게 준다(코드 계산).</li>
+<li>같은 σ의 A·B가 이 과제에서 <span class="math inline">\(MC_5\)</span> 0.002 vs 0.081. 같은 σ ×10이라도 염(n)으로 올리면 τ·MC 그대로에 전력만 10배, <span class="math inline">\(D\)</span>로 올리면 τ가 최적 쪽으로 가거나(기준 τ가 길 때) 지나친다(코드 계산).</li>
+<li>기억 과제에서는 전도도(같은 <span class="math inline">\(n\)</span>이면 <span class="math inline">\(D\)</span>)에 최적점이 있다. 목표는 최대화가 아니라 유계 동작 영역이다 <span class="src">Singh 2026, p.6–7</span>.</li>
+<li>상충을 피하는 설계: 이동하는 이온과 기억하는 자리를 화학적으로 나누기 <span class="src">Zhou 2025, p.2</span> <span class="src">Zheng 2025, p.5</span>. 독립 조절을 보인 측정은 아직 없다.</li>
+</ul>
+</div>
+</section>
+<section id="ch-reframe" class="level3">
+<h3 class="anchored" data-anchor-id="ch-reframe">5. 질문 바꾸기: 분자구조로 어떤 이온 동역학을 만들면 어떤 계산 기능이 좋아지나</h3>
+<div class="goal">
+<p>이 구간을 읽고 나면 "전도도를 올리면 좋아지나"를 "기능 → 필요한 동역학 서술자 → 분자 손잡이 → 측정법"의 네 칸으로 다시 쓰고, 그 네 칸을 잇는 실험 설계(통제된 재료 계열, 응답 지도)를 말하며, 이 연구 방향이 어디까지 왔는지 적을 수 있다.</p>
+</div>
+<p>옛 질문은 "분자구조 → 전도도를 올린다 → 성능이 좋아진다?"였습니다. 이 질문은 전도도 하나가 모든 기능을 대신한다고 가정합니다. 새 질문은 기능에서 거꾸로 출발합니다. 그림 5를 보기 전에 말 하나를 정합니다. <span id="s-descriptor-def"></span><strong>서술자</strong>(descriptor)는 재료나 소자의 성질을 잴 수 있는 숫자로 적은 것입니다(예: 확산계수 <span class="math inline">\(D\)</span>, 이완 시간, 정류비). 그림 5는 네 칸을 왼쪽에서 오른쪽으로 읽습니다. 계산 기능 → 그 기능에 필요한 동역학 서술자 → 그 서술자를 움직이는 분자·구조 손잡이 → 재는 법. 전도도가 어느 줄에 있는지 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d23/fig4-reframe.svg" alt="질문 바꾸기 그림: 계산 기능(기억 창 정합, 필요한 비선형, 상태 다양성, 재현성, 신호·에너지) → 필요한 동역학 서술자(이완 시간 스펙트럼, 정류비·문턱·포화, 독립 모드 수, drift·회복·편차, 전도도·계면 정전용량) → 분자·구조 손잡이(결합 세기·Tg·크기, 고정 전하 접합·선택성, 다중 결합기·계층 구조, 봉지·무용매·가교, 이온 농도·해리도) → 재는 법" class="figure-img"><figcaption><b>그림 5.</b> 질문 바꾸기. 왼쪽의 계산 기능마다 필요한 동역학 서술자와 그것을 움직이는 분자·구조 손잡이, 그리고 재는 방법을 잇는다. 전도도는 맨 아래 줄(신호·에너지)의 주인공일 뿐이다. 서술자 이름은 Singh 2026의 권고를 따랐다. (Claude가 그림)</figcaption></figure>
+<p><span id="s-descriptors"></span><strong>서술자를 구체적으로.</strong> Singh 2026은 재료를 "막연한 '단기 기억' 대신 <strong>이완 시간 스펙트럼</strong>, 일반적인 '비선형' 대신 <strong>장벽 분포</strong>"처럼 물리적으로 잴 수 있고 계산에 결과를 낳는 서술자로 이야기하자고 권합니다. <span class="src">Singh 2026, p.3</span> <strong>이완 시간 스펙트럼</strong>(relaxation-time spectrum)은 감쇠 곡선이 시간상수 여러 개의 합일 때 어떤 시간상수가 얼마만큼씩 섞여 있는지의 분포이고(Day 42 4구간의 <span class="math inline">\(\tau_2\)</span>, <span class="math inline">\(\tau_3\)</span>처럼), <strong>장벽 분포</strong>(barrier distribution)는 이온이 자리를 옮길 때 넘는 에너지 장벽의 높이가 하나가 아니라 퍼져 있는 정도입니다(<a href="../days/d21b.html#s-temperature">Day 40 4-2절: 온도</a>). 같은 글은 핵심 서술자가 반드시 시간상수 하나는 아니며, 많은 물리 reservoir가 분포된 시간척도를 가진다고 씁니다. <span class="src">Singh 2026, p.4</span> 그리고 물리 reservoir를 위한 여섯 설계 규칙으로 시간척도 정합, 동작 영역의 비선형, 통제된 확률성, 관측 가능한 상태 차원, 가역적이고 에너지에 맞는 동작, 동작 범위 전체에서의 강건성을 듭니다. <span class="src">Singh 2026, p.1</span> 이 여섯 줄이 그림 5 왼쪽 칸의 다른 이름입니다.</p>
+<p><span id="s-response-map"></span><strong>재료 하나가 지표 하나를 정하지 않는다.</strong> <span class="key">Singh 2026은 "재료 서술자가 계산 지표를 단순한 일대일 관계로 정하는 일은 드물다"고 쓰고</span>, 이온 이동도·결함 농도·막 두께 같은 서술자가 여러 물리 과정에 동시에 영향을 주며 그 효과가 기하·구동 조건·상태 읽기 방식에도 달려 있다고 설명합니다. <span class="src">Singh 2026, p.14</span> 그래서 관계를 응답 지도(response map) <span class="math inline">\(q = F(m, p, e)\)</span>(재료 서술자 <span class="math inline">\(m\)</span>, 구동·읽기 조건 <span class="math inline">\(p\)</span>, 환경 <span class="math inline">\(e\)</span> → 지표 <span class="math inline">\(q\)</span>)로 적고, <strong>서술자 하나만 체계적으로 바꾸고 나머지를 고정한 통제된 재료 계열</strong>(controlled material series)로 세우라고 권합니다. <span class="src">Singh 2026, p.14</span> 서술자와 구동 조건이 함께 영향을 주면 둘을 따로 바꿔 응답 면(response surface)을 그려야 하고, 같은 방법을 이온 농도·막 두께·전극 간격에도 쓸 수 있다고 덧붙입니다. <span class="src">Singh 2026, p.15</span></p>
+<p><strong>새 질문을 내 연구에 쓰면.</strong> 예를 들어 "내 접합 소자로 ECG 박동 간격(약 1 s)을 다루는 reservoir를 만들고 싶다"면 <span class="tag tag-interp">해석</span>:</p>
+<ol type="1">
+<li><strong>기능</strong>: 몇 박동 전까지 기억이 필요한가(기억 깊이 <span class="math inline">\(k\)</span>), 어떤 비선형이 필요한가.</li>
+<li><strong>서술자</strong>: 필요한 이완 시간 스펙트럼(입력 간격의 몇 배에 몇 개), 정류비, 독립 모드 수.</li>
+<li><strong>손잡이</strong>: 접합 크기 <span class="math inline">\(L\)</span>(Day 39–40), 결합기·짝이온·Tg(Day 41–42), 고정 전하 밀도(Day 37–38·Day 45–46).</li>
+<li><strong>측정</strong>: 감쇠 곡선과 임피던스(작은 교류 전압을 주파수마다 걸어 전류의 크기와 늦음을 재는 측정, 아래 영상)로 이완 스펙트럼, 같은 조건에서 MC·IPC(기억 용량·information processing capacity, <a href="../days/d11a.html#b-ipc">Day 19 기초</a>, <a href="../days/d12a.html#b-memory-capacity">Day 21 기초</a>), 기준선 비교(<a href="../days/d16a.html#b-baselines">Day 29 기초</a>).</li>
+</ol>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/3ByVZEDVppM?start=89&amp;rel=0" title="영상: What is Electrochemical Impedance Spectroscopy (EIS) and How Does it Work?" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:29–8:24, 약 7분 · 전체 13분, 영어).</b> Pine Research Instrumentation, "What is Electrochemical Impedance Spectroscopy (EIS) and How Does it Work?"(2021). <b>볼 이유:</b> 위 4번 "측정"의 임피던스가 무엇인지 처음부터 보는 영상입니다. 설명란에 "전기화학은 알지만 교류 기법은 처음인 사람"을 위한 입문이라고 적혀 있습니다. 챕터 1:29 EIS란 → 3:36 임피던스와 푸리에 변환 → 5:17 Bode 그림 → 5:46 Nyquist 그림 → 7:08 비유로 이해하기. 작은 교류 전압을 주파수마다 걸어 전류의 크기와 늦음(위상)을 재면, 빠른 과정(덩어리 저항)과 느린 과정(계면 충전, 확산)이 서로 다른 주파수에 나타납니다. 그것이 "이완 시간 스펙트럼"을 재는 가장 흔한 방법입니다. <b>보고 답할 질문:</b> 주파수를 낮출수록 더 빠른 과정이 보이나, 더 느린 과정이 보이나? Day 39–40의 두 시간($\lambda_D L/D$와 $L^2/D$)은 Nyquist 그림에서 어느 쪽 끝에 나타날까? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 직접 보지 못함)</span></div></div>
+<p>이 네 칸에서 전도도의 자리는 4번 측정에서 "신호가 잡음보다 충분히 큰가"를 확인하는 것입니다. 그 '충분히'를 숫자로 정하는 것이 아래 반론과 계산입니다.</p>
+<section id="연구는-어디까지-왔나-한계-넘어야-할-것" class="level4">
+<h4 class="anchored" data-anchor-id="연구는-어디까지-왔나-한계-넘어야-할-것">5-1. 연구는 어디까지 왔나 / 한계 / 넘어야 할 것</h4>
+<ul>
+<li><strong>어디까지 왔나.</strong> 재료 서술자를 설계 변수로 다루자는 틀이 리뷰 수준에서 제안되었습니다 <span class="src">Singh 2026, p.1</span>. 이온 소자 쪽에서는 빠른 응답과 느린 이완을 화학으로 함께 넣으려는 설계가 나왔습니다 <span class="src">Zhou 2025, p.2</span>. 전도도 대신 이완·결합을 손잡이로 쓰는 사례가 늘고 있습니다(Day 41–42).</li>
+<li><strong>지금 한계.</strong> 이온 소자 논문 대부분이 전도도와 시냅스형 지표(PPF: 두 펄스를 가까이 주면 둘째 응답이 커지는 현상, LTP/LTD: 오래 남는 강화·약화, <a href="../days/d06.html#ch-ppf-limits">Day 10 3구간</a>)를 보고하고, 이완 시간 스펙트럼·기억 용량·응답 지도는 드뭅니다(Day 27–28, Day 41–42). 전도도를 <span class="math inline">\(n\)</span>과 <span class="math inline">\(D\)</span>로 나눠 잰 예도 드뭅니다(3구간).</li>
+<li><strong>넘어야 할 것.</strong> (a) 전도도와 함께 <span class="math inline">\(D\)</span>(또는 <span class="math inline">\(n\)</span>)를 따로 재기, (b) 서술자 하나를 바꾼 재료 계열에서 이완 스펙트럼과 계산 지표를 같은 조건으로 재 응답 지도를 그리기 <span class="src">Singh 2026, p.14–15</span>, (c) 과제의 입력 간격에서 거꾸로 필요한 <span class="math inline">\(D\)</span>·<span class="math inline">\(L\)</span>을 정하고(4구간, Day 39–40) 그것에 맞는 분자를 찾기. <span class="tag tag-hypo">가설</span></li>
+</ul>
+<p><span id="s-objection"></span><strong>가장 강한 반론.</strong> <strong>"그래도 전도도가 너무 낮으면 전류가 잡음에 묻혀 아무것도 못 읽는다. 결국 전도도가 먼저다."</strong> 이 반론은 맞는 부분이 큽니다. 읽기 전류가 잡음보다 충분히 커야 하고(이 비를 <strong>신호 대 잡음비</strong>, SNR이라 합니다: 읽으려는 두 상태의 전류 차이 Δ ÷ 같은 상태를 반복해 읽을 때 전류가 흔들리는 정도(표준편차) <span class="math inline">\(s\)</span>. <a href="../days/d18a.html#ch-noise-gap">Day 33 2구간</a>의 '차이 대 흔들림'과 같은 비입니다. Day 33–34에서는 흔들림을 σ로 썼지만 이번에는 σ가 전도도라서 <span class="math inline">\(s\)</span>로 씁니다), 그 크기는 전도도와 크기·전압이 정합니다. <span class="key">그러나 그것은 "전도도가 <strong>충분해야</strong> 한다"(필요 조건)이지 "높을수록 좋다"가 아닙니다.</span> 필요한 만큼의 전도도를 확보한 뒤에는, 기억 창·비선형·다양성은 다른 손잡이로 맞춰야 하고, 전도도를 더 올리면 4구간처럼 기억이 짧아지거나 2구간처럼 전력만 늘 수 있습니다. <span class="tag tag-interp">해석</span> 내 답에서는 "최소 전도도"를 신호 대 잡음에서 숫자로 정해 보세요. 순서는 이렇습니다(예시 숫자, 코드 계산).</p>
+<p><span id="s-min-sigma"></span></p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 가정.</strong> 1구간 막대 크기(<span class="math inline">\(L\)</span> = 100 µm, <span class="math inline">\(A\)</span> = 1 mm²), 읽기 전압 0.1 V. 기억할 두 상태는 컨덕턴스가 <span class="math inline">\(G\)</span>의 10%만큼 다르고, 반복 읽기의 흔들림은 <span class="math inline">\(s\)</span> = 1 nA라고 둡니다. [가정: 실제 흔들림은 측정 대역·장비·소자에 따라 다릅니다]</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 필요한 차이.</strong> Day 33–34에서 Δ/s = 4이면 정규분포 가정으로 약 2.3% 틀립니다. 이것을 목표로 잡으면 전류 차이 Δ ≥ 4 nA.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — <span class="math inline">\(G\)</span>에서 σ로.</strong> Δ = 0.10 × <span class="math inline">\(G\)</span> × 0.1 V이므로 <span class="math inline">\(G \ge 4\times10^{-9} \div 0.01 = 4\times10^{-7}\)</span> S(0.4 µS). <span class="math inline">\(\sigma = GL/A = 4\times10^{-7} \times 10^{-4} \div 10^{-6} =\)</span> <strong><span class="math inline">\(4\times10^{-5}\)</span> S/m</strong>. 무용매 폴리전해질 범위(<span class="math inline">\(10^{-5}\)</span>–<span class="math inline">\(10^{-2}\)</span> S/m)의 아래쪽 끝 근처입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 그 위에서는.</strong> σ = <span class="math inline">\(10^{-3}\)</span> S/m(25배 여유)이면 Δ = 100 nA, Δ/s = 100이라 읽기 오류는 사실상 없고, 전력은 <span class="math inline">\(GV^2\)</span> = 0.1 µW입니다. 여기서 σ를 10배 더 올려도 줄일 오류가 거의 남지 않고 전력만 10배가 됩니다. 또 흔들림이 전류와 함께 커지는 종류라면 σ를 올려도 Δ/s는 거의 그대로입니다. <span class="tag tag-interp">해석</span></p>
+</div>
+</div>
+<div class="think">
+<p>내 재료의 전도도, 소자 크기, 읽기 전압으로 읽기 전류를 계산하고, 측정 잡음(예: 반복 측정의 흔들림)과 비교해 보세요. 신호가 잡음의 몇 배인가요? 그 배수가 충분하다면, 다음 손잡이는 무엇이어야 할까요(이완 시간? 정류비?)?</p>
+</div>
+<div class="quiz" data-day="d23" data-set="5-check"></div>
+<div class="stop-point">
+<p>여기까지: 그림 5의 네 칸으로 '전도도를 올리면 좋아지나'를 내 연구의 기능 하나에서 거꾸로 다시 쓰고, 흔들림 1 nA·상태 차이 10%·0.1 V 가정에서 최소 전도도 약 <span class="math inline">\(4\times10^{-5}\)</span> S/m를 다시 계산할 수 있다. 다음: 총정리와 종합 퀴즈.</p>
+</div>
+<div class="keypoints">
+<ul>
+<li>새 질문: 기능 → 필요한 동역학 서술자(이완 시간 스펙트럼, 장벽 분포 …) → 분자 손잡이 → 측정 <span class="src">Singh 2026, p.3</span>.</li>
+<li>재료 서술자 하나가 계산 지표 하나를 정하지 않는다. 통제된 재료 계열과 응답 지도 <span class="math inline">\(q = F(m,p,e)\)</span>로 잇는다 <span class="src">Singh 2026, p.14–15</span>.</li>
+<li>전도도는 '충분해야 하는' 조건(신호 대 잡음, 전력 예산)이지 '높을수록 좋은' 목표가 아니다. 예: 흔들림 1 nA·상태 차이 10%·0.1 V 가정에서 최소 약 <span class="math inline">\(4\times10^{-5}\)</span> S/m <span class="tag tag-interp">해석</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>자료를 덮고 아래 표를 먼저 머릿속으로 채운 뒤 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+한 장 요약 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>전도도는 무엇을 세나</td>
+<td><span class="math inline">\(\sigma = \sum n\lvert z\rvert e\mu\)</span>(<span class="math inline">\(\mu &gt; 0\)</span>): 움직이는 이온 수 × 전하의 크기 × 이동도. 양·음이온 기여는 더해진다. 10 mM KCl ≈ 0.150 S/m</td>
+<td>이상 용액(독립 운반자), 코드 계산. 측정 0.141 S/m(25 °C 교정 표준액), 100 mM에서는 계산이 약 16% 큼</td>
+</tr>
+<tr class="even">
+<td>전도도가 정하는 것</td>
+<td>소자의 컨덕턴스 <span class="math inline">\(G = \sigma A/L\)</span> → 읽기 전류 <span class="math inline">\(GV\)</span>, 전력 <span class="math inline">\(GV^2\)</span>, 신호 전달. 계면 충전은 농도(<span class="math inline">\(\lambda_D\)</span>)도 함께</td>
+<td>σ [S/m]는 재료, <span class="math inline">\(G\)</span> [S]는 소자</td>
+</tr>
+<tr class="odd">
+<td>정하지 못하는 것</td>
+<td>기억(<span class="math inline">\(L^2/D\)</span>, 결합), 비선형, 상태 다양성, 재현성</td>
+<td>전달과 기억은 반대 방향 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.307–308</span></td>
+</tr>
+<tr class="even">
+<td>같은 σ, 다른 기억</td>
+<td>1 M·<span class="math inline">\(10^{-11}\)</span> vs 10 mM·<span class="math inline">\(10^{-9}\)</span>: 같은 0.038 S/m, 기억 1000 s vs 10 s, '5개 전 입력' <span class="math inline">\(MC_5\)</span> 0.002 vs 0.081</td>
+<td>코드 계산</td>
+</tr>
+<tr class="odd">
+<td>높을수록 좋은가</td>
+<td>기억 과제에는 최적점이 있다(5개 전 입력: τ ≈ 입력 간격의 9배). σ를 <span class="math inline">\(n\)</span>으로 올리면 τ 그대로·전력만 늘고, <span class="math inline">\(D\)</span>로 올리면 τ가 최적 쪽으로 가거나 지나친다</td>
+<td>장난감 모형. 사전 테스트와 '먼저 만들어 보기'에서 "전도도가 높을수록 좋다"고 답했다면 여기가 달라질 지점</td>
+</tr>
+<tr class="even">
+<td>상충을 피하는 설계</td>
+<td>이동하는 이온과 기억하는 자리를 화학으로 나누기</td>
+<td><span class="src">Zhou 2025, p.2</span> <span class="src">Zheng 2025, p.5</span></td>
+</tr>
+<tr class="odd">
+<td>바뀐 질문</td>
+<td>기능 → 서술자 → 손잡이 → 측정, 통제된 계열의 응답 지도</td>
+<td><span class="src">Singh 2026, p.3, 14</span></td>
+</tr>
+<tr class="even">
+<td>가장 강한 반론</td>
+<td>"전도도가 낮으면 아무것도 못 읽는다"</td>
+<td>필요 조건이지 목표가 아니다(예: 흔들림 1 nA 가정에서 최소 약 <span class="math inline">\(4\times10^{-5}\)</span> S/m). 내 답에서 응답</td>
+</tr>
+<tr class="odd">
+<td>모르는 것</td>
+<td>내 재료의 <span class="math inline">\(n\)</span>과 <span class="math inline">\(D\)</span>의 나눔, 최소 필요 전도도</td>
+<td>Day 53–56</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="quiz" data-day="d23" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<ol type="1">
+<li>전도도를 <span class="math inline">\(n\)</span>, <span class="math inline">\(|z|e\)</span>, <span class="math inline">\(\mu\)</span>로 나눠 숫자 예로 계산했나? <span class="math inline">\(n\)</span>이 '움직이는 이온'만 센다는 것과, 음이온의 기여도 더해진다는 것을 적었나?</li>
+<li>전도도가 정하는 소자 성질과 정하지 못하는 성질을 구분했나?</li>
+<li>같은 전도도에서 기억이 다를 수 있음을 보이고, 그것을 가르려면 무엇을 따로 재야 하는지 적었나?</li>
+<li>기억 과제에서 전도도(또는 <span class="math inline">\(D\)</span>)의 최적점이 생기는 이유를 입력 간격·기억 깊이로 설명했나?</li>
+<li>질문을 "기능 → 서술자 → 손잡이 → 측정"으로 바꿔 내 연구에 한 번 적용했나?</li>
+<li>내 소자의 '최소 필요 전도도'를 신호 대 잡음에서 숫자로 어림했나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> (a) 응용이 요구하는 기억 깊이·입력 간격 vs 재료의 <span class="math inline">\(D\)</span>와 크기 <span class="math inline">\(L\)</span>이 허용하는 이완 시간(최적 τ ≈ 입력 간격의 수 배, 장난감 모형). (b) 응용의 전력 예산 vs 전도도에 비례하는 소모 전력.</li>
+<li><strong>아직 모르는 것:</strong> 내 재료의 전도도는 <span class="math inline">\(n\)</span>과 <span class="math inline">\(D\)</span> 가운데 무엇이 정하나(따로 잰 적 있나)? / 내 소자에서 신호가 잡음의 몇 배인가? / 같은 재료 계열에서 이완 스펙트럼과 MC를 같은 조건으로 잴 수 있나?</li>
+<li><strong>용어집:</strong> 이온전도도, S/m, 넌스트–아인슈타인 관계, 단일 이온 전도체, 움직이는 이온 수, 읽기 전류, 소모 전력, 동역학 서술자, 이완 시간 스펙트럼, 장벽 분포, 응답 지도, 통제된 재료 계열, 유계 동작 영역.</li>
+<li><strong>접는 기준 후보:</strong> 내 연구의 성과를 "전도도 향상"으로만 보고하고 그것이 어떤 계산 기능에 왜 필요한지 한 줄로 쓸 수 없다면, 전도도를 연구 목표로 두지 않는다.</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Wang 2025, <em>Chem. Soc. Rev.</em> 55, 299–335. p.307(전달용 전도도 향상, 기억 없는 센서), p.308(기억에는 이온 이동 속도를 줄이는 것이 핵심).</li>
+<li>Zheng 2025, <em>Adv. Mater.</em> 37, e05312. p.2(결합이 약할수록 전도도가 높음), p.5(사슬에서 떨어지고 P3HT에 머무는 TFSI⁻), p.6(이온 함량과 전력).</li>
+<li>Zhou 2025, <em>Nat. Commun.</em> 16, 4573. p.2(빠른 응답과 느린 이완을 함께 넣는 설계).</li>
+<li>Dobashi 2022, <em>Science</em> 376, 502–507. p.503–504(NMR로 이온별 확산계수와 극성 반전), p.504(진한 염에서 PVDF-HFP 고분자 전해질의 전도도).</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
+<ul>
+<li>Singh 2026, <em>Adv. Mater.</em> e74897. p.1(여섯 설계 규칙), p.3(서술자를 구체적으로), p.4(시간척도는 하나가 아님), p.6–7(최대화가 아니라 유계 동작 영역), p.14–15(서술자–지표 응답 지도, 통제된 계열). 5구간 질문 바꾸기의 뼈대입니다. Phase 5에서도 다시 봅니다.</li>
+<li>Zhu 2025 p.10(폴리전해질·무용매 탄성체의 전도도 범위).</li>
+</ul>
+<p><strong>폴더 밖</strong> <span class="tag tag-unverified">미확인</span></p>
+<ul>
+<li>KCl 용액의 실제 측정 전도도는 전도도계 교정 표준액의 공칭값(25 °C: 0.01 M 1413 µS/cm, 0.1 M 12.88 mS/cm; 여러 제조사의 NIST 추적 표준액 제품 정보에서 확인)으로 비교했고, 이온별 확산계수는 CRC 물성표의 25 °C 무한 희석 값(K⁺ 1.957, Cl⁻ 2.032 × 10⁻⁹ m²/s) <span class="prov">원 책이 아니라 이 표를 인용한 공개 논문 arXiv:2207.10116의 Table I에서 확인</span>입니다. 이번 계산은 이상 용액(독립 운반자) 계산입니다. 3구간의 한 종 디바이 길이(<span class="math inline">\(\sqrt{\varepsilon k_BT/(ne^2)}\)</span>, 움직이는 이온만 가림)와 2구간의 'R–C 충전 한 번에 저항에서 잃는 에너지 <span class="math inline">\(\tfrac12 CV^2\)</span>'는 일반 전기화학·회로 교과서의 결과를 Claude가 적용한 것이며 폴더 원문으로 대조하지 않았습니다.</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d23">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다(pre는 페이지 틀이 놓는다). type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커. review: 지난 학습(Day 41–42) 복습. review-b: 이 Day 앞부분(1–3구간) 복습, 나뉠 때 뒷단위 앞에 놓인다. 숫자는 tools/figs_d23.py --numbers와 일치한다.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 화학구조 → 계산 특성", "items": [{"id": "d23-r01", "type": "mc", "q": "같은 이온탄성체에 가교제를 더 넣었더니 Tg가 15 K 올랐다. 움직이는 이온 수와 소자 크기는 그대로다. 상온에서 전도도와 소자의 시간상수는 어떻게 될 가능성이 클까?", "options": ["전도도는 오르고, 시간상수는 짧아진다", "전도도는 내리고, 시간상수는 길어진다", "전도도는 내리고, 시간상수도 짧아진다", "둘 다 그대로다(이온 수가 같으므로)"], "a": 1, "why": "Tg가 오르면 상온과 Tg의 거리가 줄어 분절 운동이 느려지고, 무용매 고분자에서 이온은 분절 운동에 기대어 움직이므로 D가 준다. n이 같으면 σ ∝ nD도 줄고, 시간상수(L²/D, λ_D·L/D)는 1/D에 비례해 길어진다.", "wrongWhy": ["촘촘한 망이 이온 통로를 만든다고 본 생각. 가교는 분절을 붙들어 D를 줄인다.", "", "σ와 시간상수는 모두 D로 정해져 반대로 움직인다. D가 줄면 σ는 내리고 τ는 길어진다.", "전도도는 n과 D의 곱이다. n이 같아도 D가 바뀌면 달라진다."], "ref": "d22b.html#s-crosslink", "refLabel": "3구간 '가교밀도'와 작은 예(Tg +10 K → τ 10 → 48 ms)", "note": "무용매 고분자에서는 Tg가 오르면 분절 운동이 느려져 D가 줄고, σ는 줄고 시간상수는 길어진다.", "core": true}, {"id": "d23-r02", "type": "mc", "q": "VFT 식 σ ∝ e의 지수 (−B/(T−T₀)), B = 1000 K로 두자. 25 °C에서 T−T₀가 125 K인 고분자 P와 100 K인 고분자 Q가 있다. P의 전도도는 Q의 약 몇 배인가? (e² ≈ 7.4)", "options": ["약 1.25배", "약 2배", "약 7.4배", "약 0.14배"], "a": 2, "why": "비 = e의 지수 (−1000/125 + 1000/100) = e의 지수 (−8 + 10) = e² ≈ 7.4. T₀에서 더 멀리 떨어진(Tg가 낮은) P가 더 잘 나른다.", "wrongWhy": ["거리의 비(125/100)를 그대로 쓴 값. VFT에서는 거리가 지수 안의 분모에 들어간다.", "지수의 차(2)를 배수로 읽은 값. 배수는 e를 그만큼 거듭제곱한 것이다.", "", "부호를 거꾸로 본 값(e의 −2제곱). T₀에서 먼 쪽이 더 빠르다."], "ref": "d22a.html#s-vft-steps", "refLabel": "1구간 ⑥ 단계 1–2: T₀와의 거리와 전도도 비"}, {"id": "d23-r03", "type": "mc", "q": "고분자에 녹인 염이 처음에는 모두 해리되어 있었는데, 다른 조건에서 해리도가 25%로 떨어졌다(확산계수는 그대로). 전도도와 디바이 길이는 처음과 비교해 어떻게 되나?", "options": ["전도도 1/4, 디바이 길이 2배", "전도도 1/4, 디바이 길이 1/2", "전도도 1/2, 디바이 길이 2배", "둘 다 그대로(이온쌍도 전하를 가지므로)"], "a": 0, "why": "전기장에 끌려가는 것은 해리된 이온뿐이라 n이 1/4, σ ∝ nD도 1/4이다. 중성인 이온쌍은 전하를 가려 주지 못하므로 λ_D는 움직이는 이온 농도의 제곱근에 반비례해 √4 = 2배 길어진다.", "wrongWhy": ["", "이온이 적을수록 가림이 약해져 층은 두꺼워진다. 방향이 반대다.", "제곱근은 디바이 길이에만 붙는다. 전도도는 n에 정비례한다.", "이온쌍은 전체로 중성이라 전기장에 끌려가지 않고 전하도 가리지 못한다."], "ref": "d22a.html#b-ion-pairing", "refLabel": "2구간 기초: 이온쌍과 해리", "core": true}, {"id": "d23-r04", "type": "mc", "q": "폴리양이온 사슬(출발지)에서 반도체 고분자 층(도착지)으로 음이온을 밀어 넣어 쓰는 소자가 있다. 어떤 음이온이 사슬과도 반도체와도 약하게 붙는다면, 가장 그럴듯한 동작은?", "options": ["쓰기가 어렵고, 들어간 뒤에는 오래 남는다", "쓰기도 쉽고, 들어간 뒤에도 가장 오래 남는다", "결합 세기는 전도도만 바꾸고 동작은 같다", "쓰기는 쉽지만, 전압을 끄면 빨리 되돌아간다"], "a": 3, "why": "출발지 결합이 약하면 잘 떠나 쓰기가 쉽다. 도착지 결합도 약하면 머물지 못해 유지가 짧다(휘발성). 좋은 짝은 '출발지에서 잘 떠나고 도착지에서 잘 머무는' 이온이다.", "wrongWhy": ["출발지에 약하게 붙은 이온은 오히려 잘 떠난다. 쓰기가 어려운 것은 사슬에 세게 붙은 경우다.", "도착지에 약하게 붙으면 오래 머물지 못한다. 결합은 두 방향으로 작용한다.", "결합 세기는 떠나기(쓰기 폭)와 머물기(유지)를 함께 바꾼다.", ""], "ref": "d22a.html#s-zheng-scene", "refLabel": "2구간 '장면 하나로(Zheng 2025 소자)'"}, {"id": "d23-r05", "type": "ox", "q": "어떤 이온겔의 유변학으로 잰 고분자 망의 이완 시간이 0.5 s였다. 그러면 이 겔로 만든 소자의 전기적 기억 시간도 0.5 s 안팎이라고 보고해도 된다.", "a": false, "why": "고분자 망의 이완과 소자의 전기적 기억은 서로 다른 측정의 다른 숫자다. 한 이온겔에서 망 이완 모드(0.003 s, 13 s)와 전기적 시간척도(52 ms, 395 ms, 수십–수백 초)가 맞지 않은 예가 있다. 둘을 잇는 측정 없이 같은 값으로 쓰지 않는다.", "ref": "d22a.html#s-relax-vs-memory", "refLabel": "1구간 '고분자의 이완 시간 ≠ 소자의 기억 시간'"}, {"id": "d23-r06", "type": "mc", "q": "Tg가 사용 온도에 가까운 무용매 고분자에 염을 3배로 넣었더니(해리도는 같다) Tg가 올라 확산계수가 1/2이 되었다. 전도도는 처음의 몇 배인가?", "options": ["3배", "1.5배", "1/2배", "6배"], "a": 1, "why": "σ ∝ nD. n은 3배, D는 1/2이므로 3 × 1/2 = 1.5배다. 염을 더 넣은 이득을 D가 깎는다.", "wrongWhy": ["D의 감소를 빼고 n만 본 값.", "", "n의 증가를 빼고 D만 본 값.", "D를 나누어야 할 곳에 곱한 값(3 × 2)."], "ref": "d22b.html#s-salt", "refLabel": "3구간 '이온 농도' 단계 1–3", "core": true}, {"id": "d23-r07", "type": "mc", "q": "가교제를 0.5%, 1%, 2%로 바꾼 겔 세 개에서 가교제가 많을수록 기억이 길었다. 그런데 가교제가 많은 겔일수록 수분 함량이 낮았다. 이 결과를 가장 알맞게 읽은 것은?", "options": ["세 수준을 비교했으니 가교 때문이라고 확정할 수 있다", "수분은 이온 이동과 관계없으니 무시해도 된다", "가교와 수분의 효과가 섞여 있어 수분을 맞춘 비교가 더 필요하다", "기억이 길어졌으니 가교제를 늘릴수록 계속 좋아진다"], "a": 2, "why": "수분 함량은 결과(이온 이동, 기억)에 영향을 주면서 바꾸려던 가교와 함께 움직였으므로 교란변수다. 수분을 같게 맞춘 계열이나 대조군이 있어야 원인을 가린다.", "wrongWhy": ["수준이 여럿이어도 함께 바뀐 변수가 있으면 원인을 가르지 못한다.", "겔에서는 물이 이온 수송을 주로 맡으므로 수분은 이온 이동에 크게 영향을 준다.", "", "세 점의 경향만으로는 최적이 있는지 알 수 없고, 원인도 아직 섞여 있다."], "ref": "d22b.html#s-confounders", "refLabel": "4구간 '함께 바뀐 것'과 교란변수"}, {"id": "d23-r08", "type": "mc", "q": "τ = 40 ms인 소자는 입력 간격 8 ms인 과제에 잘 맞았다(입력 간격 ÷ τ = 0.2). 화학 변화로 이온이 20배 빨라져 τ가 2 ms가 되었다. 이 새 소자가 같은 정합을 얻으려면 입력 간격이 얼마인 과제여야 할까?", "options": ["약 0.4 ms", "약 160 ms", "8 ms 그대로", "약 2 ms"], "a": 0, "why": "정합은 입력 간격 ÷ τ로 정해진다. 0.2 × 2 ms = 0.4 ms(= 8 ms ÷ 20). 같은 화학 변화가 8 ms 과제에서는 너무 빨리 잊는 손해이고, 0.4 ms 과제에서는 기준 소자와 같은 정합이 된다.", "wrongWhy": ["", "τ가 짧아졌는데 입력 간격을 20배 늘린 값. 방향이 반대다.", "과제의 입력 간격에 τ를 맞춰야 한다. 화학이 τ를 바꾸면 맞는 과제도 바뀐다.", "입력 간격을 τ와 같게 둔 값. 입력 간격 ÷ τ = 1이면 한 간격 뒤 상태가 37%만 남아 정합이 달라진다."], "ref": "d22b.html#s-match-task", "refLabel": "5-1절 '표를 읽는 법': 입력 간격에 τ 맞추기", "core": true}, {"id": "d23-r09", "type": "mc", "q": "어떤 논문이 새 곁사슬로 소자의 느린 시간상수를 5배 늘렸고, 측정한 전도도 상태를 신경망 시뮬레이션에 넣어 MNIST 분류 정확도가 2%p 올랐다고 보고했다. 화학 → 물리량 → 소자 응답 → 계산 기능의 경로에서 이 보고를 맞게 읽은 것은?", "options": ["분류 정확도가 올랐으니 기억 과제까지 경로가 모두 이어졌다", "화학 → 소자 응답이 비어 있고, 소자 응답 → 계산 기능은 이었다", "시간상수가 5배 길어졌으니 모든 기억 과제에서 성능이 오른다", "화학 → 소자 응답은 보였고, 기억 과제 지표로의 연결은 비어 있다"], "a": 3, "why": "시간상수 5배는 화학이 소자 응답을 바꿨다는 측정이다. 그러나 분류 정확도 시뮬레이션은 시간상수의 변화가 기억이 필요한 과제의 지표(MC·IPC)를 얼마나 바꾸는지 보여 주지 않는다. 소자 응답 → 계산 기능의 정량 연결이 이 분야에서 가장 비어 있는 칸이다.", "wrongWhy": ["MNIST형 분류는 측정 가중치를 넣은 시뮬레이션으로, 시간상수와 기억 과제 성능을 잇지 않는다.", "시간상수 5배는 화학 → 소자 응답의 측정 근거다. 비어 있는 쪽은 반대편이다.", "τ가 길어지는 것이 득인지는 과제의 입력 간격에 달려 있다.", ""], "ref": "d22b.html#s-path-gaps", "refLabel": "5구간 '어디까지 이어져 있나'"}, {"id": "d23-r10", "type": "ox", "q": "체온에서 쓰는 이식 소자의 시간상수가 온도 변화에 덜 흔들리게 하려면, 다른 조건이 같다면 Tg가 사용 온도에서 멀리 떨어진(더 낮은) 고분자가 유리하다.", "a": true, "why": "VFT에서 겉보기 활성화 에너지 E_app = k_B·B·T²/(T−T₀)²는 T가 T₀(곧 Tg)에 가까울수록 커진다. 예시 계산(B = 1000 K)에서 25 → 37 °C에 Tg −10 °C 고분자는 4.3배, Tg −60 °C 고분자는 1.8배 빨라졌다.", "ref": "d22a.html#s-vft-steps", "refLabel": "1구간 ⑥ 단계 4: 체온에서는"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 이온전도도가 세는 것과 정하는 것, 같은 전도도 다른 기억", "items": [{"id": "d23-rb01", "type": "short", "core": true, "q": "길이 L = 200 µm, 단면적 A = 2 mm²인 고분자 전해질 막의 저항을 재니 1000 Ω이었다. 이 재료의 전도도 σ는 몇 S/m인가? (소수로)", "a": ["0.1", "0.10", "0.1 S/m", "0.10 S/m", "1×10⁻¹", "10⁻¹"], "why": "σ = L/(RA) = 2×10⁻⁴ m ÷ (1000 Ω × 2×10⁻⁶ m²) = 0.1 S/m. 길이는 분자, 저항과 면적은 분모에 들어간다.", "ref": "d23a.html#s-measure", "refLabel": "1구간 ② 재는 법과 뜻"}, {"id": "d23-rb02", "type": "mc", "core": true, "q": "20 mM의 1:1 염이 모두 해리되어 있고, 양이온과 음이온의 이동도가 모두 5×10⁻⁸ m²/(V·s)다(이상 용액). 전도도는 약 얼마인가? (n = 1.2×10²⁵ 개/m³, e = 1.6×10⁻¹⁹ C)", "options": ["약 0.096 S/m", "약 0.19 S/m", "약 0 S/m", "약 0.38 S/m"], "a": 1, "why": "한 이온의 항은 1.2×10²⁵ × 1.6×10⁻¹⁹ × 5×10⁻⁸ ≈ 0.096 S/m. 음이온도 전하의 크기 |z|e와 양수 이동도로 같은 크기를 더하므로 합은 약 0.19 S/m.", "wrongWhy": ["양이온 한 항만 센 값. 음이온의 기여도 더해진다.", "", "음이온 항을 뺀 값. 음전하가 반대로 움직이는 것은 같은 방향의 전류라 상쇄되지 않는다.", "합을 한 번 더 두 배 한 값. 이온 종류마다 한 번씩만 더한다."], "ref": "d23a.html#s-abs-charge", "refLabel": "1구간 '왜 절댓값인가'"}, {"id": "d23-rb03", "type": "mc", "core": true, "q": "σ = 0.05 S/m인 재료로 길이 50 µm, 단면 4 mm²의 소자를 만들면 G = 4 mS다. 같은 재료로 길이만 100 µm로 늘리면 σ와 G는?", "options": ["σ 0.025 S/m, G 2 mS", "σ 0.05 S/m, G 4 mS", "σ 0.05 S/m, G 2 mS", "σ 0.1 S/m, G 8 mS"], "a": 2, "why": "σ는 모양과 상관없는 재료의 값이라 그대로 0.05 S/m. 소자의 컨덕턴스 G = σA/L은 길이가 2배면 절반인 2 mS.", "wrongWhy": ["σ는 재료의 성질이라 길이를 바꿔도 변하지 않는다. 바뀌는 것은 G뿐이다.", "G = σA/L에서 L이 분모에 있다. 길이가 늘면 G는 준다.", "", "길이가 늘면 G는 줄고, σ는 그대로다. 둘 다 방향이 반대다."], "ref": "d23a.html#s-sigma-vs-g", "refLabel": "1구간 '용어 약속: σ와 G'"}, {"id": "d23-rb04", "type": "mc", "q": "재료 C는 움직이는 이온 100 mM·D = 10⁻¹⁰ m²/s, 재료 D는 1 mM·D = 10⁻⁸ m²/s다(1가 이온 한 종). 두께 50 µm 막에서 둘을 맞게 비교한 것은?", "options": ["σ는 같고, 기억 L²/D는 C 25 s · D 0.25 s", "σ는 C가 100배, 기억 L²/D는 둘이 같다", "σ도 같고, 기억 L²/D도 둘이 같다", "σ는 D가 100배, 기억 L²/D는 C 25 s · D 0.25 s"], "a": 0, "why": "σ ∝ n×D: 100 × 10⁻¹⁰ = 1 × 10⁻⁸이라 같다. 기억은 L²/D만 본다: (5×10⁻⁵)² = 2.5×10⁻⁹ m²를 나누면 C 25 s, D 0.25 s로 100배 다르다.", "wrongWhy": ["", "n만 보고 D를 뺐다. 전도도는 n과 D의 곱이다.", "전도도가 같으면 기억도 같다고 본 것. 기억 시간은 곱이 아니라 D만 본다.", "D만 보고 n을 뺐다. n이 100배 작아 곱은 같다."], "ref": "d23a.html#s-same-sigma-steps", "refLabel": "3구간 그림 3(Day 43)과 단계 1–3"}, {"id": "d23-rb05", "type": "ox", "q": "전해질에 염을 더 넣어 전도도를 올리면, 계면(EDL) 충전 시간 τ_c는 전도도에 반비례해 그만큼 짧아진다.", "a": false, "why": "τ_c = εL/(σλ_D)에서 염을 넣으면 σ는 오르지만 디바이 길이 λ_D가 얇아져 계면 정전용량이 커진다. 두 효과가 일부 상쇄되므로 τ_c는 σ 하나로 정해지지 않는다(전도도에 반비례하는 것은 농도가 같을 때만).", "ref": "d23a.html#s-edl-row", "refLabel": "2구간 '계면 충전 줄 풀어 보기'"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "이온전도도가 10배 높은 새 겔을 얻었다고 합시다. 이 겔로 만든 소자에서 '읽히는 전류', '소모 전력', '전압을 끈 뒤 원래로 돌아가는 시간(기억)'이 각각 커질지, 작아질지, 그대로일지 예상하고, 이유를 한 줄씩 적어 보세요.", "items": [{"id": "d23-p01", "type": "mc", "q": "이온전도도는 무엇의 곱을 이온 종류마다 더한 값일까?", "options": ["이온 수 × 이온 질량 × 이동 속도", "이온 수 × 전하의 크기 × 이동도", "전압 × 전류 × 소자 길이", "이온 수 × 확산계수 × 소자 길이"], "a": 1, "why": "σ = Σ n·|z|e·µ(µ는 양수). 전하는 크기로 넣으므로 음이온의 몫도 더해진다. n은 이온쌍이나 고분자에 묶인 이온을 빼고 '움직일 수 있는' 것만 센다. 1구간 기초 상자에서 10 mM 소금물로 계산한다.", "ref": "#s-why-product", "refLabel": "1구간 '왜 수 × 전하 × 이동도의 곱인가'"}, {"id": "d23-p02", "type": "ox", "q": "고분자 사슬에 음전하가 붙은 폴리전해질에서는, 염을 녹인 용액과 달리 전도도에 양이온과 음이온이 모두 크게 기여한다.", "a": false, "why": "음전하는 사슬에 묶여 거의 움직이지 않으므로 그 항은 0에 가깝고 반대이온(양이온) 한 종류가 대부분을 나른다(단일 이온 전도체). 1구간 ④.", "ref": "#s-polyelectrolyte", "refLabel": "1구간 ④ 폴리전해질에서는"}, {"id": "d23-p03", "type": "ox", "q": "다른 조건이 같다면, 이온전도도가 높은 재료로 만든 소자일수록 전압을 끈 뒤 상태가 더 오래 남는다(기억이 길다).", "a": false, "why": "같은 이온 수라면 전도도가 높다는 것은 확산계수가 크다는 뜻이고, 상태가 다시 고르게 되는 시간 L²/D는 오히려 짧아진다. 2구간 표와 4구간에서 다룬다.", "ref": "#s-sets-table", "refLabel": "2구간 표: 전도도가 정하는 것과 정하지 못하는 것"}, {"id": "d23-p04", "type": "mc", "q": "같은 전압·같은 크기의 소자에서 재료의 이온전도도만 2배가 되면 소모 전력은?", "options": ["절반", "그대로", "2배", "4배"], "a": 2, "why": "P = GV²이고 소자의 컨덕턴스 G = σA/L(= 1/R)이므로 전력은 전도도에 비례한다. 이온 함량을 늘려 전도도를 올렸더니 기억은 그대로이고 전력만 늘었다는 보고도 있다. 2구간.", "ref": "#s-sets-table", "refLabel": "2구간 표의 '소모 전력' 줄"}, {"id": "d23-p05", "type": "ox", "q": "이온전도도가 정확히 같은 두 재료는 기억 시간도 같다.", "a": false, "why": "전도도는 이온 수 n과 확산계수 D의 곱만 본다. 1 M·10⁻¹¹ m²/s와 10 mM·10⁻⁹ m²/s는 전도도가 같지만 L = 100 µm에서 기억(L²/D)이 1000 s와 10 s로 100배 다르다. 3구간에서 계산한다.", "ref": "#s-same-sigma-steps", "refLabel": "3구간 그림 3(Day 43)과 재료 A·B 계산"}, {"id": "d23-p06", "type": "mc", "q": "입력이 1초마다 들어오고 '5개 전 입력'을 기억해야 하는 과제가 있다. 소자의 기억 시간(시간상수)은 어느 정도가 가장 유리할까?", "options": ["약 0.01초(입력 간격보다 훨씬 짧게)", "약 10초(입력 간격의 몇 배)", "약 1주일(입력 간격보다 훨씬 길게)", "시간상수와 관계없이 같다"], "a": 1, "why": "단순 모형에서 5개 전 입력의 몫은 τ ≈ 9 s(입력 간격의 약 9배)에서 가장 크고, 너무 짧으면 빨리 잊고 너무 길면 새 입력이 상태를 거의 못 움직인다. 4구간 그림.", "ref": "#s-optimum-figure", "refLabel": "4구간 그림 4의 봉우리"}, {"id": "d23-p07", "type": "short", "q": "물에 녹은 10 mM KCl의 이온전도도를 이상 용액으로 계산하면 약 몇 S/m일까? (소수 둘째 자리까지; 힌트: 양이온·음이온 각각 약 0.075 S/m)", "a": ["0.15", "0.150", "0.15 S/m", "약 0.15"], "why": "K⁺ 약 0.074 + Cl⁻ 약 0.076 ≈ 0.150 S/m. 음이온도 전하의 크기로 더한다. 25 °C 측정값(전도도 교정 표준액)은 0.141 S/m로 약 6% 작다. 이온들이 서로 영향을 주기 때문이다(독립 운반자 근사의 한계). 1구간 단계 3–4.", "ref": "#s-kcl-steps", "refLabel": "1구간 ③ 10 mM KCl 단계 계산"}, {"id": "d23-p08", "type": "ox", "q": "고분자 이온 소재로 특정 계산 기능을 좋게 하려면, 그 기능에 필요한 이온 동역학(예: 이완 시간의 분포)을 먼저 정하고 그것을 움직이는 분자 손잡이를 찾는 것이 '전도도를 최대한 올리는 것'보다 직접적인 길이다.", "a": true, "why": "재료 서술자 하나가 계산 지표 하나를 정하는 일은 드물고, 기능 → 서술자 → 손잡이 → 측정으로 잇는 통제된 재료 계열이 필요하다는 것이 5구간의 질문 바꾸기다.", "ref": "#s-response-map", "refLabel": "5구간 '재료 하나가 지표 하나를 정하지 않는다'"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · σ = Σ n·|z|e·µ (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d23-q01", "type": "short", "q": "[풀이 예시 확인] 10 mM KCl에서 K⁺ 항은 6.0×10²⁴ × 1.6×10⁻¹⁹ × 7.6×10⁻⁸ ≈ 0.074 S/m, Cl⁻ 항은 약 0.076 S/m였다. 전체 전도도는? (소수 셋째 자리까지)", "a": ["0.150", "0.15", "0.15 S/m", "0.150 S/m"], "why": "두 항을 더해 0.150 S/m. 음이온은 반대 방향으로 움직이지만 전하도 반대라 전류의 방향은 양이온과 같다. 그래서 전하의 크기 |z|e로 넣고 둘 다 더한다. 1구간 단계 3.", "ref": "#s-kcl-steps", "refLabel": "1구간 ③ 단계 3: 곱하고 더하기"}, {"id": "d23-q02", "type": "short", "q": "[일부 채우기] 농도를 100 mM로 올리면 두 이온의 n이 모두 10배다(µ는 같다고 가정). σ = 0.150 × 10 = ? S/m (소수 둘째 자리까지)", "a": ["1.50", "1.5", "1.5 S/m"], "why": "1.50 S/m(이상 용액). 25 °C 측정값(교정 표준액)은 1.29 S/m로, 이 계산이 약 16% 크다. 진할수록 이온끼리 끌어당기고 짝을 지어 독립 운반자 가정이 깨진다. 1구간 단계 4.", "ref": "#s-ideal-limits", "refLabel": "1구간 ③ 단계 4: 진한 용액과 이 계산이 맞는 범위"}, {"id": "d23-q03b", "type": "short", "q": "[혼자 풀기] 음이온은 사슬에 고정되고 양이온만 움직이는 폴리전해질이 있다. 움직이는 1가 양이온 0.1 M, 확산계수 D = 10⁻¹¹ m²/s, 25 °C(k_BT/e = 0.0257 V). σ는 약 몇 ×10⁻³ S/m인가? (소수 첫째 자리까지)", "a": ["3.8", "3.75", "3.7", "3.8×10⁻³", "약 3.8", "0.0038", "0.00375"], "why": "n = 100 mol/m³ × 6.02×10²³ = 6.0×10²⁵ 개/m³, µ = 10⁻¹¹ ÷ 0.0257 ≈ 3.9×10⁻¹⁰ m²/(V·s), σ = 6.0×10²⁵ × 1.6×10⁻¹⁹ × 3.9×10⁻¹⁰ ≈ 3.8×10⁻³ S/m. 음이온 항은 0이다. ④의 예(0.5 M·10⁻¹² m²/s → 1.9×10⁻³ S/m)와 비교하면 n은 1/5, D는 10배라 σ는 2배다. 무용매 폴리전해질 범위(10⁻⁵–10⁻² S/m) 안이다.", "ref": "#s-polyelectrolyte", "refLabel": "1구간 ④ 폴리전해질 풀이 예"}, {"id": "d23-q21", "type": "ox", "q": "Cl⁻는 음전하이므로 10 mM KCl의 전도도는 K⁺ 항(약 0.074 S/m)에서 Cl⁻ 항(약 0.076 S/m)을 뺀 값, 곧 거의 0이다.", "a": false, "why": "음이온은 전기장 반대 방향으로 움직이고 전하도 음수라, 만드는 전류는 양이온과 같은 방향이다. 그래서 전하의 크기 |z|e와 양수 이동도로 두 항을 모두 더해 0.150 S/m가 된다. 전하를 부호째 넣으려면 이동도도 부호 있는 값(음이온은 음수)으로 써야 곱이 양수가 된다.", "ref": "#s-abs-charge", "refLabel": "1구간 '왜 절댓값인가'"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 전도도가 정하는 것", "items": [{"id": "d23-q04", "type": "mc", "q": "다음 중 이온전도도가 '직접' 정한다고 보기 어려운 소자 성질은?", "options": ["같은 전압에서 흐르는 읽기 전류", "같은 전압에서 드는 소모 전력", "전압을 끈 뒤의 기억 시간", "계면(EDL) 충전 시간"], "a": 2, "why": "기억 시간은 L²/D(그리고 결합·반응)가 정한다. 전도도는 n과 D의 곱이라 D를 따로 알려 주지 않는다. 읽기 전류·전력은 컨덕턴스 G = σA/L로 정해지고, 계면 충전 τ_c = εL/(σλ_D)는 σ와 함께 농도(λ_D)도 본다. 2구간 표.", "ref": "#s-sets-table", "refLabel": "2구간 표: 정하는 것과 정하지 못하는 것"}, {"id": "d23-q05b", "type": "mc", "q": "같은 연성 이온 전도체 계열에서 확산계수가 더 큰 이온으로 바꾸었다. (가) 신호를 멀리 보내는 이온 케이블과 (나) 자극 뒤 서서히 줄어드는 전류로 기억하는 소자에서 각각 예상되는 변화는?", "options": ["(가) 신호가 덜 뭉개지고, (나) 더 빨리 잊는다", "(가) 신호가 덜 뭉개지고, (나) 더 오래 기억한다", "(가) 신호가 더 뭉개지고, (나) 더 빨리 잊는다", "(가)와 (나) 모두 눈에 띄는 변화가 없다"], "a": 0, "why": "전달은 전도도·이동도가 높을수록 덜 왜곡되고, 기억(이완)은 이온이 느리게 되돌아가야 길어진다. 그래서 같은 재료 계열에서도 기능에 따라 바람직한 이온 속도가 반대다(한 리뷰가 정리한 두 처방, 2구간 원문 그림 두 장).", "wrongWhy": ["", "빠른 이온은 자극 뒤 빨리 되돌아가 이완도 빨라진다. 기억에는 느린 이온이 필요하다.", "케이블에서는 이동이 빠를수록 신호가 덜 뭉개진다. 방향이 반대다.", "이온 속도는 신호 전달과 이완 시간을 모두 직접 바꾼다."], "ref": "#s-transmit-vs-memory", "refLabel": "2구간 '전달과 기억은 반대 방향을 원한다'"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 같은 σ, 다른 기억", "items": [{"id": "d23-q06", "type": "short", "q": "재료 A(1 M, D = 10⁻¹¹ m²/s)와 재료 B(10 mM, D = 10⁻⁹ m²/s)는 전도도가 같다. 길이 100 µm에서 기억 시간 L²/D는 A가 B의 몇 배인가? (정수로)", "a": ["100", "100배", "10²"], "why": "A: 10⁻⁸/10⁻¹¹ = 1000 s, B: 10⁻⁸/10⁻⁹ = 10 s, 100배. 전도도·컨덕턴스·전류는 같다. 3구간 그림 3(Day 43).", "ref": "#s-same-sigma-steps", "refLabel": "3구간 단계 3: 기억 L²/D"}, {"id": "d23-q07b", "type": "mc", "q": "전도도가 같은 두 재료의 기억 시간 차이를 실험으로 가르려 한다. 전도도 외에 무엇을 재는 것이 가장 직접적인가?", "options": ["같은 재료로 크기만 다른 소자의 컨덕턴스 G", "더 높은 읽기 전압에서 흐르는 전류", "막 두께를 바꿔 다시 잰 전도도 σ", "이온의 확산계수 D나 움직이는 이온 수 n"], "a": 3, "why": "σ ∝ n×D라 전도도는 둘의 나눔을 숨긴다. 기억 L²/D를 가르려면 D나 n을 따로 재야 한다. 펄스 자기장 기울기 NMR로 고분자 전해질 속 양·음이온의 확산계수를 따로 잰 예가 있다.", "wrongWhy": ["G = σA/L이라 크기를 바꿔도 같은 곱 n×D만 다시 보인다.", "전류 I = GV도 σ에 비례할 뿐, n과 D를 나누지 못한다.", "σ는 재료의 값이라 두께와 무관하다. 다시 재도 같은 곱이 나온다.", ""], "ref": "#s-measure-d", "refLabel": "3구간 '그래서 무엇을 따로 재야 하나'"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 최적 시간상수 (풀이 → 일부 채우기 → 혼자)", "items": [{"id": "d23-q08", "type": "short", "q": "[풀이 예시 확인] '5개 전 입력' 과제에서 MC₅ = (1−d²)d⁸이 최대가 되는 d²는 4/5다(d는 한 입력 간격 동안 남는 비율). 입력 간격 T_sym = 1 s일 때 τ = −T_sym/ln d ≈ ? s (소수 첫째 자리까지; d = 0.894)", "a": ["9.0", "9", "8.96", "약 9"], "why": "ln 0.894 ≈ −0.112이므로 τ ≈ 8.96 ≈ 9.0 s. 입력 간격의 약 9배. 4구간 단계 2.", "ref": "#s-optimum-steps", "refLabel": "4구간 단계 1–2: 최적의 d와 τ"}, {"id": "d23-q09", "type": "short", "q": "[일부 채우기] 일반적으로 MC_k가 최대가 되는 d²는 (k−1)/k다. '2개 전 입력' 과제(k = 2)라면 d² = ? (소수 첫째 자리까지)", "a": ["0.5", "1/2", ".5"], "why": "d² = 1/2, d ≈ 0.707, τ = −1/ln 0.707 ≈ 2.9 s(입력 간격 1 s). 기억해야 할 깊이가 얕으면 최적 τ도 짧다.", "ref": "#s-optimum-steps", "refLabel": "4구간 단계 1: 일반식 d² = (k−1)/k"}, {"id": "d23-q10", "type": "short", "q": "[혼자 풀기] 최적 τ ≈ 9 s를 길이 L = 100 µm 소자로 얻으려면 확산계수 D = L²/τ는 약 몇 ×10⁻⁹ m²/s인가? (소수 첫째 자리까지)", "a": ["1.1", "1.11", "1.1×10⁻⁹", "약 1.1"], "why": "D = 10⁻⁸ ÷ 9 ≈ 1.1×10⁻⁹ m²/s. 같은 n이라면 이 D가 그 과제의 '최적 전도도'를 정한다. 헷갈렸다면 L² = (10⁻⁴)² = 10⁻⁸ m²인지 확인하세요. 4구간 단계 3.", "ref": "#s-optimum-steps", "refLabel": "4구간 단계 3: 최적의 D"}]}, "4-end": {"kind": "end", "title": "4장 마무리", "items": [{"id": "d23-q11", "type": "mc", "q": "장난감 모형에서 D를 최적값보다 10배 작게(느리게) 하면 '5개 전 입력'의 몫 MC₅가 줄어드는 이유는?", "options": ["τ가 짧아져 5개 전 입력이 오기 전에 상태가 원래로 돌아가서", "τ가 길어져 새 입력이 상태를 조금만 움직이고 몫이 퍼져서", "D가 작아 전도도도 작아지므로 읽기 전류가 거의 0이 되어서", "τ가 길어지면 노드 하나가 담는 MC의 합 자체가 줄어서"], "a": 1, "why": "x_새 = d·x + (1−d)·u에서 d가 1에 가까우면 (1−d)가 작아 입력 하나의 영향이 작고, 그 몫이 수많은 과거 입력에 고르게 나뉜다(Day 23–24). 잡음이 없으면 MC 합은 그대로 1이지만 5개 전 입력의 몫이 줄어든다. 잡음이 있으면 더 나빠진다.", "ref": "#s-optimum-steps", "refLabel": "4구간 단계 4: 양쪽으로 벗어나면", "wrongWhy": ["D가 작아지면 τ = L²/D는 길어진다. 빨리 잊는 것은 D가 큰 쪽이다.", "", "이 모형은 잡음이 없어 전류의 크기와 무관하게 MC가 정해진다.", "잡음이 없으면 노드 하나의 MC 합은 τ와 관계없이 1이다. 줄어드는 것은 몫의 배분이다."]}, {"id": "d23-q12b", "type": "ox", "q": "기억이 필요한 과제에서는, 다른 조건이 같다면 소자의 기억 시간(τ)을 길게 만들수록 과제 성능이 계속 좋아진다.", "a": false, "why": "장난감 모형에서 '5개 전 입력' 과제는 τ ≈ 9 s(입력 간격의 약 9배)에서 MC₅가 가장 크고(0.082), τ를 100 s, 1000 s로 늘리면 0.018, 0.002로 준다. 새 입력이 상태를 거의 못 움직이고 몫이 먼 과거로 퍼지기 때문이다. 물리 reservoir의 목표를 최대 지속성이 아니라 계산에 맞는 유계 동작 영역으로 보는 리뷰도 있다.", "ref": "#s-optimum-steps", "refLabel": "4구간 단계 4: 양쪽으로 벗어나면"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 질문 바꾸기", "items": [{"id": "d23-q13b", "type": "mc", "q": "\"이 재료는 단기 기억이 있다\"는 보고를 계산 지표(예: 기억 용량)와 이으려면, 무엇을 함께 보고하는 것이 가장 쓸모 있나?", "options": ["같은 조건에서 잰 이온전도도 한 값", "자극 뒤 전류가 줄어드는지 여부(예/아니오)", "가장 긴 유지 시간 하나(예: 1000 s)", "감쇠의 시간상수들과 각 몫(이완 시간 스펙트럼)"], "a": 3, "why": "기억 과제의 성능은 입력 간격에 대해 시간상수들이 어디에 놓이는지로 정해진다(4구간). 그래서 막연한 '단기 기억' 대신 어떤 시간상수가 얼마만큼씩 있는지(이완 시간 스펙트럼)를 보고해야 과제와 이을 수 있다.", "wrongWhy": ["전도도는 n×D의 곱이라 시간상수를 따로 알려 주지 않는다(3구간).", "줄어든다는 사실만으로는 어떤 입력 간격의 과제에 맞는지 알 수 없다.", "가장 긴 시간 하나는 스펙트럼의 한 점이다. 짧은 시간상수가 함께 있는지 모른다.", ""], "ref": "#s-descriptors", "refLabel": "5구간 '서술자를 구체적으로'"}, {"id": "d23-q14", "type": "mc", "q": "'이온 농도가 기억 용량을 높인다'를 검증하는 설계로 가장 알맞은 것은?", "options": ["이온 농도가 다른 시판 재료 두 개를 사서 비교한다", "같은 고분자에서 농도만 바꾼 계열을 같은 조건으로 잰다", "가장 높은 농도로 만든 소자 하나의 기억 용량을 정밀하게 잰다", "기억 용량 대신 농도별 전도도를 재서 그 경향으로 판단한다"], "a": 1, "why": "서술자 하나만 바꾸고 나머지(고분자, 크기, 구동 조건)를 고정한 통제된 재료 계열이어야 원인을 가린다. 구동 조건이 함께 영향을 주면 그것도 따로 바꿔 응답 면을 그린다(응답 지도 q = F(m, p, e)).", "ref": "#s-response-map", "refLabel": "5구간 '재료 하나가 지표 하나를 정하지 않는다'", "wrongWhy": ["시판 재료는 농도 말고도 많은 것이 다르다(교란변수, Day 41–42).", "", "한 점으로는 농도에 따라 어떻게 바뀌는지 알 수 없다.", "전도도는 n×D만 보여 주고 기억 용량을 대신하지 못한다."]}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d23-q15", "type": "ox", "q": "이온쌍이 많이 생겨 움직이는 이온 수가 절반이 되면, 이동도가 그대로라도 전도도는 절반이 된다.", "a": true, "why": "σ = Σ n·|z|e·µ에서 n이 절반이면 σ도 절반. 이온쌍은 중성이라 전기장에 끌려가지 않는다(Day 41–42 기초). 1구간.", "ref": "#s-three-parts", "refLabel": "1구간 '식의 세 재료': n은 움직이는 이온만"}, {"id": "d23-q16", "type": "mc", "q": "이온 함량을 4.97%에서 7.55%로 늘린 이온탄성체 소자에서 메모리 창은 비슷했고 전력 소모만 늘었다. 오늘의 표로 가장 잘 설명하면?", "options": ["이온 함량을 올린 손잡이가 기억 창은 그대로 두고 전력만 늘렸다", "전도도가 오르면 메모리 창도 커져야 하므로 측정 오류로 봐야 한다", "함량이 늘어 이온이 모두 이온쌍이 되었고 전도도도 내려갔다", "함량이 늘어 확산계수가 커졌고 기억 시간도 함께 길어졌다"], "a": 0, "why": "전도도는 전류·전력을 정하지만 기억 창은 결합·이동 같은 다른 서술자가 정한다(2구간 표). 이온 함량을 늘려 전도도를 올리는 손잡이는 '소모 전력' 줄만 움직일 수 있다.", "ref": "#s-zheng-power", "refLabel": "2구간 '에너지 쪽에서 본 반례'", "wrongWhy": ["", "전도도는 기억 창을 직접 정하지 않는다. 둘이 따로 움직이는 것은 오류가 아니다.", "전력이 늘었다는 것은 전도도가 내려가지 않았다는 뜻이다.", "메모리 창이 비슷했다는 관찰과 맞지 않는다. 또 D가 커지면 기억은 오히려 짧아진다."]}, {"id": "d23-q17", "type": "short", "q": "같은 전압·같은 크기에서 전도도 0.038 S/m 재료로 1 mm² × 100 µm 소자에 1 V를 걸면 전류는 약 몇 mA인가? (소수 둘째 자리까지; I = σ·A·V/L)", "a": ["0.38", "0.376", "0.375", "0.38 mA"], "why": "G = σA/L = 0.038 × 10⁻⁶ ÷ 10⁻⁴ = 3.8×10⁻⁴ S, I = GV = 3.8×10⁻⁴ A = 0.38 mA. 전도도가 같은 재료 A와 B는 이 전류도 같다. 3구간 단계 2.", "ref": "#s-same-sigma-steps", "refLabel": "3구간 단계 2: 컨덕턴스와 전류"}, {"id": "d23-q18", "type": "mc", "q": "'빠른 응답과 느린 기억을 한 재료에 함께'라는 설계 전략의 핵심으로 가장 알맞은 것은?", "options": ["이온 농도를 최대로 올려 전도도를 가능한 한 높인다", "빠른 이온과 느리게 이완하는 결합 상태를 화학으로 나눈다", "소자 길이 L을 키워 모든 이온의 확산 시간을 함께 늘린다", "온도를 낮춰 모든 이온의 이동을 한꺼번에 느리게 한다"], "a": 1, "why": "빠른 응답(큰 신호)과 느린 기억을 한 손잡이에 묶으면 상충한다. 자유 이온은 빠르게, 계면의 결합 이온은 느리게 두는 식으로 '이동하는 이온'과 '기억하는 이온·자리'를 나누는 설계가 있다. 두 모드가 독립적으로 조절되었는지를 보인 측정은 아직 없다.", "ref": "#s-separate-design", "refLabel": "4구간 '상충을 피하는 설계'", "wrongWhy": ["전도도를 올리면 응답은 빨라져도 기억이 짧아지거나 전력만 늘 수 있다(4구간 표).", "", "L을 키우면 모든 시간이 함께 느려져 빠른 응답도 잃는다. 두 성질을 나누지 못한다.", "온도도 모든 이온을 함께 느리게 해 빠른 응답을 잃는다."]}, {"id": "d23-q19", "type": "ox", "q": "'전도도가 너무 낮으면 신호를 못 읽는다'는 반론은 전도도가 '충분해야 하는' 필요 조건이 있다는 뜻이지, '높을수록 좋다'는 뜻은 아니다.", "a": true, "why": "읽기 전류가 잡음보다 충분히 커야 하므로 최소 전도도는 있다. 그 위에서는 기억·비선형·다양성을 다른 손잡이로 맞추고, 전도도를 더 올리면 기억이 짧아지거나 전력만 늘 수 있다. 5구간 오늘의 반론.", "ref": "#s-objection", "refLabel": "5구간 '가장 강한 반론'"}, {"id": "d23-q20b", "type": "mc", "q": "같은 이동도 변화(이온을 2배 빠르게)를 두 소자에 주었더니, 전극 간격이 넓은 소자에서는 기억 과제 성능이 좋아지고 간격이 좁은 소자에서는 나빠졌다. 가장 알맞은 해석은?", "options": ["재료 서술자 하나는 지표 하나를 정하므로 둘 중 하나는 측정 오류다", "이동도는 계산 지표와 관계없으니 다른 서술자를 찾아야 한다", "이동도의 효과가 간격 L에 달려 있어 둘을 함께 바꿔 지도를 그린다", "성능이 좋아진 소자의 결과를 그 재료의 대표값으로 보고한다"], "a": 2, "why": "τ = L²/D라 같은 D 변화도, 간격이 넓은 소자(τ가 최적보다 길었음)는 최적 쪽으로, 좁은 소자(τ가 이미 짧았음)는 최적에서 멀어지게 옮긴다(4구간 표의 조건 ②). 서술자의 효과가 기하·구동 조건에 달려 있으므로 서술자와 조건을 따로 바꾼 통제된 계열로 응답 지도 q = F(m, p, e)를 그려야 한다.", "wrongWhy": ["서술자가 지표를 일대일로 정하는 일은 드물다. 두 결과는 함께 성립할 수 있다.", "이동도는 τ를 통해 지표를 바꾼다. 효과의 방향이 조건에 달려 있을 뿐이다.", "", "한 조건의 결과만 고르면 효과가 조건에 달려 있다는 정보를 잃는다."], "ref": "#s-response-map", "refLabel": "5구간 '재료 하나가 지표 하나를 정하지 않는다'"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d23b">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>Day 23–24 선형 누설 노드에 τ = L²/D를 넣은 MC₅의 봉우리(τ ≈ 입력 간격의 9배, D ≈ 1.1×10⁻⁹ m²/s, 장난감 모형), 같은 σ의 두 재료가 MC₅ 0.002 대 0.081로 갈리는 이유, 전도도를 n으로 올리나 D로 올리나에 따른 차이, 빠른 응답과 느린 기억을 화학으로 나누는 설계, 기능 → 동역학 서술자 → 분자 손잡이 → 측정과 응답 지도·통제된 재료 계열, 신호 대 잡음에서 최소 필요 전도도(예시 4×10⁻⁵ S/m)</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d24a.html">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것 →</a></p>
+</div>
+</section>
+<section id="writing" class="level2">
+<h2 class="anchored" data-anchor-id="writing">선택 활동: 글로 정리하기</h2>
+<details class="fold writing-fold"><summary>선택 활동 펼치기 · 백지 회상, 가르치듯 내 답, 사전 테스트 다시 풀기 (학습 완료와 무관)</summary>
+<p><strong>가르치듯 내 답.</strong> 후배에게 설명한다고 생각하고 짧게(3–5문장 또는 작은 도식 하나) 답합니다.</p>
+<div class="editable" data-file="d23-answer" data-title="내 답" data-template="answer"></div>
+<p><strong>사전 테스트 다시 풀기.</strong> 같은 문제를 이유와 함께 다시 풉니다(정답을 이미 본 문제라 이해 점검 점수로 쓰지 않습니다).</p>
+<div class="quiz" data-day="d23" data-set="pre" data-mode="post"></div>
+</details>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d23a.html" class="pagination-link" aria-label="Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d24a.html" class="pagination-link" aria-label="Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것">
+        <span class="nav-page-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

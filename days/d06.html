@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 10. ’계산한다’의 조건과 증거 사다리 – Why Ions Compute</title>
+<title>Day 10. ’계산한다’의 조건과 증거 사다리 – Why Ions Compute?</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -47,18 +47,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
-  "collapse-after": 3,
+  "collapse-after": 2,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    "/"
   ],
   "language": {
     "search-no-results-text": "일치 없음",
@@ -129,7 +127,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Why Ions Compute</span>
+    <span class="navbar-title">Why Ions Compute?</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="검색"></div>
@@ -140,46 +138,27 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
-<span class="menu-text">커버</span></a>
+<span class="menu-text">홈</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../plan.html"> 
-<span class="menu-text">전체 학습 지도</span></a>
+<span class="menu-text">로드맵</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">장부</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
-        <li>
-    <a class="dropdown-item" href="../ledger/bottleneck.html">
- <span class="dropdown-text">병목 장부</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/unknowns.html">
- <span class="dropdown-text">아직 모르는 것</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/glossary.html">
- <span class="dropdown-text">용어집</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/kill-criteria.html">
- <span class="dropdown-text">접는 기준</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/references.html">
- <span class="dropdown-text">참고문헌</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/questions.html">
- <span class="dropdown-text">질문 모음</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" href="../rules.html"> 
-<span class="menu-text">공부 규칙</span></a>
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -213,7 +192,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">전체 학습 지도</span></a>
+ <span class="menu-text">로드맵</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -270,7 +249,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -311,7 +290,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -322,44 +301,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
   </div>
 </li>
       </ul>
@@ -376,67 +361,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
   </div>
 </li>
       </ul>
@@ -453,49 +444,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
   </div>
 </li>
       </ul>
@@ -512,69 +527,93 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">장부</span></a>
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -582,46 +621,28 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">병목 장부</span></a>
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">아직 모르는 것</span></a>
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">용어집</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">접는 기준</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">참고문헌</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">질문 모음</span></a>
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rules.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">공부 규칙</span></a>
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
   </div>
 </li>
     </ul>
@@ -667,8 +688,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> — 무엇을 해야 '계산한다'고 말할 수 있는가? PPF·STP·LTP 관찰이 곧 유용한 소자인가?</p>
-<p><strong>배울 핵심</strong> — 현상 재현 ≠ 계산, 학습형 계산의 검증 사다리(과제·읽을 수 있는 상태·readout·held-out·기준선), PPF 곡선이 증명하는 것과 못 하는 것</p>
-<p><strong>이후 쓰이는 곳</strong> — Day 11–14 readout 학습과 과적합, Day 20–21 지연 탭 기준선, Day 28–29 기준선 일곱 종류, Day 32·Day 41–42 증거 수준. PPF 다음에 할 실험을 정하는 데 씀</p>
+<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> — 내 소자가 PPF·STP·LTP를 보였다면 논문에 어떤 문장까지 쓸 수 있고 다음에 어떤 실험(여러 입력열 반복, held-out, 기준선)을 해야 하는지 정하는 틀입니다. 다른 논문의 첫 그림(PPF 곡선)을 읽을 때 사다리 몇 단인지 판단하는 데도 씁니다.</p>
+<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> — 입력 = 소자에 넣는 펄스 열(예: 간격 Δt의 펄스 두 개) → 내부 변화 = 소자 안에서 전도도가 변함 → 읽은 상태(전류)를 readout 규칙으로 답(1/0)으로 바꿈 → 출력 = 정확도, 그리고 소자를 뺀 기준선의 정확도와의 비교.</p>
+<p><strong>오늘 반드시</strong> — PPF 곡선은 기억이 있다는 것(사다리 0단)까지만 보이고, '계산했다'고 하려면 과제·읽을 수 있는 상태·학습한 readout·held-out·기준선이 있어야 한다. 훈련 정확도는 증거가 아니다.</p>
+<p><strong>나중에 더 봐도 되는 것</strong> — R² 계산의 세부, 귀속 대조·증거 수준(Singh 2026) 심화 상자, 폴더 논문 사례 5개의 세부, PPF 곡선의 이중 지수 식. Day 29–30·Day 33–34에서 논문을 평가할 때 다시 펼치면 됩니다.</p>
+<p><strong>다음으로 넘어가는 기준</strong> — '오늘 반드시'를 내 말로 한두 문장 말할 수 있으면 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 11–14 readout 학습과 과적합, Day 21–22 delay tap 기준선, Day 29–30 기준선 일곱 종류, Day 33–34·Day 47–48 증거 수준. PPF 다음에 할 실험을 정하는 데 씀</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d06">
@@ -692,7 +717,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
 <div class="lesson-body">
 <div class="lesson-meta">
-<p>학습 구간 5개 · 한 번에 다 읽지 않아도 됩니다(구간 안의 '멈추기 좋은 곳'에서 끊어 읽어도 됩니다) · 선택 영상 2개(합쳐 약 9분, 모두 선택) · 퀴즈 25문항 · 내 답 쓰기는 따로(오늘은 Phase 1 종합 양식). 1–3구간의 소자 전류값(1.00 µA, 1.88 µA 등)은 모두 <strong>모형 소자의 가상 측정값</strong>이고 특정 소자를 잰 값이 아닙니다. 4구간의 정확도는 논문이 적은 값입니다.</p>
+<p>학습 구간 5개 · 한 번에 다 읽지 않아도 됩니다(구간 안의 '멈추기 좋은 곳'에서 끊어 읽어도 됩니다) · 선택 영상 2개(합쳐 약 9분, 모두 선택) · 내 답 쓰기는 따로(오늘은 Phase 1 종합 양식). 1–3구간의 소자 전류값(1.00 µA, 1.88 µA 등)은 모두 <strong>모형 소자의 가상 측정값</strong>이고 특정 소자를 잰 값이 아닙니다. 4구간의 정확도는 논문이 적은 값입니다.</p>
 <details class="meta-more">
 <summary>
 근거 표기와 Claude가 대조한 범위
@@ -701,35 +726,45 @@ window.Quarto = {
 </details>
 </div>
 <p>Phase 1의 마지막 날입니다. 지난 닷새 동안 "왜 뉴로모픽인가"를 기존 컴퓨터의 벽(Day 3–4), 뇌의 원리와 조건(Day 5–6), 하드웨어의 사양(Day 7–8), 적합한 문제(Day 9)로 나눠 봤습니다. 오늘 질문은 그 모든 것의 발밑에 있는 질문입니다. <strong>소자가 PPF·STP·LTP 같은 시냅스 현상을 보였다면, 그 소자는 "계산"을 한 것인가?</strong> 세 현상은 <a href="../days/d01b.html#ch-branches">Day 2 2구간</a>의 (마) 회색지대에서 이름만 봤고, 오늘 1구간 첫머리에서 그림으로 다시 봅니다. 폴더의 이온 소자 논문 상당수가 이 현상들을 첫 그림으로 내세우기 때문에, 이 질문에 답하지 못하면 Phase 2–5의 논문을 평가하기 어렵습니다. 다섯 개의 학습 구간입니다.</p>
+<p><strong>이번 Day의 질문 순서</strong> — 오른쪽 '→ 구간' 링크를 누르면 그 구간으로 갑니다.</p>
 <ol type="1">
-<li>"현상을 재현했다"와 "계산했다"는 왜 다른 말인가? (PPF가 무엇인지부터, 그리고 "계산"의 네 단계)</li>
-<li>readout을 데이터로 학습하는 계산(RC식)에서 "계산했다"고 말하려면 무엇을 보여야 하나? (작은 예제 하나 → 사다리 그림 → 단마다 더 깊게)</li>
-<li>PPF 곡선 하나는 무엇을 증명하고 무엇을 증명하지 못하나?</li>
-<li>폴더의 논문들은 사다리의 어디에서 멈췄나? (기준선이 있는 예와 없는 예)</li>
-<li>Phase 1 종합: Day 1–10을 오늘의 질문에 다시 잇기 (새 내용 없음)</li>
+<li>"현상을 재현했다"와 "계산했다"는 왜 다른 말인가? (PPF가 무엇인지부터, 그리고 "계산"의 네 단계) <a href="#ch-phenomenon-vs-computation">→ 구간 1</a></li>
+<li>readout을 데이터로 학습하는 계산(RC식)에서 "계산했다"고 말하려면 무엇을 보여야 하나? (작은 예제 하나 → 사다리 그림 → 단마다 더 깊게) <a href="#ch-minimal-conditions">→ 구간 2</a></li>
+<li>PPF 곡선 하나는 무엇을 증명하고 무엇을 증명하지 못하나? <a href="#ch-ppf-limits">→ 구간 3</a></li>
+<li>폴더의 논문들은 사다리의 어디에서 멈췄나? (기준선이 있는 예와 없는 예) <a href="#ch-folder-examples">→ 구간 4</a></li>
+<li>Phase 1 종합: Day 1–10을 오늘의 질문에 다시 잇기 (새 내용 없음) <a href="#ch-phase1-wrapup">→ 구간 5</a></li>
 </ol>
 <section id="ch-phenomenon-vs-computation" class="level3">
 <h3 class="anchored" data-anchor-id="ch-phenomenon-vs-computation">학습 구간 1. 현상 재현과 계산은 다른 말이다</h3>
 <div class="goal">
 <p>두 펄스의 전류로 PPF 지수를 계산하고, "물리계가 계산한다"는 말을 네 단계(부호화 → 물리 변화 → 해독 → 비교)로 설명하며, 시냅스 현상 재현이 그중 어디까지인지 말할 수 있게 된다.</p>
 </div>
+<p><strong>상황.</strong> 내 고분자 전해질 소자에 짧은 펄스 두 개를 넣었더니 두 번째 응답이 첫 번째보다 컸습니다. 논문이라면 이것을 "시냅스처럼 반응한다(PPF)"고 쓰고 제목에 computing을 붙입니다. 그런데 응답이 커졌다는 것만으로 이 소자가 무엇을 계산했다고 할 수 있을까요? 오늘의 질문입니다. 먼저 PPF가 무엇인지 그림 하나로 봅니다.</p>
 <div id="b-ppf" class="basics">
 <p><strong>먼저: PPF·STP·LTP — 오늘 내내 판단할 소자 현상</strong></p>
-<p><strong>무엇을 볼지.</strong> 소자에 짧은 전압 펄스(pulse: 짧은 시간만 걸었다 끄는 전압) 두 개를 간격 Δt를 두고 넣고, 펄스마다 흐른 전류의 봉우리를 잽니다. 그림 1은 같은 모형 소자에 간격만 바꿔 넣은 두 경우입니다. 위가 응답 전류, 아래가 입력 펄스입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d06/fig0-ppf-pair.svg" alt="같은 모형 소자에 펄스 두 개를 넣은 두 경우: 간격 10 ms면 첫 응답 1.00 µA, 두 번째 응답 1.88 µA로 PPF 지수 188%, 간격 1 s면 두 번째 응답 1.05 µA로 105%" class="figure-img"><figcaption><b>그림 1.</b> PPF를 펄스 두 개로 보기. 가는 간격 Δt = 10 ms, 나는 1 s. 첫 펄스의 응답 $I_1$은 둘 다 1.00 µA인데, 두 번째 응답 $I_2$는 간격이 짧은 가에서 훨씬 크다. 시간축은 모식도라 눈금이 없고(나는 가운데를 생략), 응답 높이만 3구간 그림 6의 모형식으로 계산한 가상 측정값이다. (Claude가 계산해 그림)</figcaption></figure>
-<p><strong>그림을 따라가며.</strong> 가(10 ms): 첫 응답 <span class="math inline">\(I_1\)</span> = 1.00 µA, 두 번째 응답 <span class="math inline">\(I_2\)</span> = 1.88 µA로 두 번째가 더 큽니다. 나(1 s): <span class="math inline">\(I_2\)</span> = 1.05 µA로 첫 응답과 거의 같습니다. 이렇게 <strong>간격이 짧을수록 두 번째 응답이 커지는 현상</strong>을 PPF(paired-pulse facilitation, 짝펄스 촉진)라 하고, 크기를 PPF 지수로 적습니다.</p>
+<p><strong>무엇을 볼지.</strong> 소자에 짧은 전압 펄스(pulse: 짧은 시간만 걸었다 끄는 전압) 두 개를 간격 Δt를 두고 넣고, 펄스마다 흐른 전류의 봉우리를 잽니다. 그림 1은 같은 모형 소자에 간격만 바꿔 넣은 두 경우(a)(b)입니다. 패널마다 위가 응답 전류, 아래가 입력 펄스입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig0-ppf-pair.svg" alt="같은 모형 소자에 펄스 두 개를 넣은 두 경우: 간격 10 ms면 첫 응답 1.00 µA, 두 번째 응답 1.88 µA로 PPF 지수 188%, 간격 1 s면 두 번째 응답 1.05 µA로 105%" class="figure-img"><figcaption><b>그림 1.</b> PPF를 펄스 두 개로 보기. <b>(a)</b> 간격 Δt = 10 ms. <b>(b)</b> 간격 Δt = 1 s. 첫 펄스의 응답 $I_1$은 둘 다 1.00 µA인데, 두 번째 응답 $I_2$는 간격이 짧은 (a)에서 훨씬 크다. 패널마다 위가 응답 전류, 아래가 입력 펄스다. 시간축은 모식도라 눈금이 없고((b)는 가운데를 생략), 응답 높이만 3구간 그림 6의 모형식으로 계산한 가상 측정값이다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>그림을 따라가며.</strong> (a) 10 ms: 첫 응답 <span class="math inline">\(I_1\)</span> = 1.00 µA, 두 번째 응답 <span class="math inline">\(I_2\)</span> = 1.88 µA로 두 번째가 더 큽니다. (b) 1 s: <span class="math inline">\(I_2\)</span> = 1.05 µA로 첫 응답과 거의 같습니다. 이렇게 <strong>간격이 짧을수록 두 번째 응답이 커지는 현상</strong>을 PPF(paired-pulse facilitation, 짝펄스 촉진)라 하고, 크기를 PPF 지수로 적습니다.</p>
 <p><span class="math display">\[
 \text{PPF 지수} = \frac{I_2}{I_1} \times 100\ (\%)
 \]</span></p>
-<p>가는 1.88 ÷ 1.00 × 100 = 188%, 나는 105%입니다. 100%면 첫 펄스의 흔적이 남지 않은 것이고, 100%를 넘는 만큼이 남은 흔적입니다.</p>
+<p>(a)는 1.88 ÷ 1.00 × 100 = 188%, (b)는 105%입니다. 100%면 첫 펄스의 흔적이 남지 않은 것이고, 100%를 넘는 만큼이 남은 흔적입니다.</p>
 <p><strong>왜 생기나(이온 소자에서 흔히 드는 설명).</strong> 첫 펄스가 이온을 한쪽으로 몰아 전도도(전류가 얼마나 잘 흐르는지)가 잠깐 오르고, 펄스가 끝나면 이온이 농도 차 때문에 천천히 되돌아갑니다. 다 돌아가기 전에 두 번째 펄스가 오면 남은 몫 위에 새 몫이 얹힙니다. <a href="../days/d03b.html#s-time-dynamics">Day 6 5-2</a>의 "이온 축적은 적분, 역확산은 누설"과 같은 그림입니다. 되돌아가는 빠르기를 재는 것이 시간상수 τ이고, 간격 전체에 대한 곡선과 그 모형식은 3구간에서 봅니다. [해석: 실제 기구는 소자마다 다를 수 있음]</p>
-<p><strong>STP와 LTP.</strong> 자극 뒤 커진 응답이 짧게 유지되다 사라지면 STP(short-term potentiation, 단기 강화), 오래 유지되면 LTP(long-term potentiation, 장기 강화)라 부릅니다. PPF도 커진 응답이 짧게 남았다 사라지는 현상이라, 소자 논문에서는 STP와 같은 묶음으로 보고하는 일이 흔합니다. <span class="tag tag-interp">해석</span> '짧다/길다'의 기준 시각은 정해져 있지 않고 논문마다 다르게 씁니다(<a href="../days/d01b.html#ch-branches">Day 2 2구간 용어 상자</a>).</p>
+<p><strong>STP와 LTP.</strong> PPF는 펄스 두 개 사이의 짧은 효과입니다. 논문은 이것과 함께 '커진 응답이 얼마나 오래 남나'도 보고합니다. 자극 뒤 커진 응답이 짧게 유지되다 사라지면 STP(short-term potentiation, 단기 강화), 오래 유지되면 LTP(long-term potentiation, 장기 강화)라 부릅니다. PPF도 커진 응답이 짧게 남았다 사라지는 현상이라, 소자 논문에서는 STP와 같은 묶음으로 보고하는 일이 흔합니다. <span class="tag tag-interp">해석</span> '짧다/길다'의 기준 시각은 정해져 있지 않고 논문마다 다르게 씁니다(<a href="../days/d01b.html#ch-branches">Day 2 2구간 용어 상자</a>).</p>
 </div>
 <p><strong>직관.</strong> 돌멩이를 던지면 포물선을 그립니다. 돌멩이가 "포물선 방정식을 계산했다"고 말하지는 않습니다. 하지만 같은 돌멩이의 궤적을 재서 "초속 몇 m로 던지면 어디 떨어지나"라는 <strong>문제의 답</strong>으로 쓴다면, 그때는 돌멩이를 계산에 쓴 것입니다. 차이는 돌멩이가 아니라 <strong>우리가 문제를 정의하고, 입력을 넣고, 결과를 읽어 답으로 해석하는 절차</strong>에 있습니다. 그림 1의 PPF도 마찬가지입니다. 전류가 커진 것만으로는 아무 문제도 풀지 않았습니다.</p>
 <div id="b-what-is-computing" class="basics">
 <p><strong>기초 1: 물리계가 "계산한다"는 것의 뜻</strong></p>
 <p><strong>왜 필요한가.</strong> "소자가 시냅스처럼 반응했다"와 "소자가 계산했다"를 구별할 기준이 없으면, 모든 물리 현상이 계산이 되어 버립니다. Stepney의 물리 reservoir computing(재료가 입력에 시간에 따라 반응하는 모습을 계산 자원으로 쓰고, 그 반응을 답으로 바꾸는 마지막 규칙만 학습하는 방법; <a href="../days/d01b.html#ch-branches">Day 2 2구간</a>의 (라) 줄기, Phase 2의 주제) 튜토리얼은 이 질문을 정면으로 다룹니다. "물리계는 언제 계산하는가? 즉 단순히 물리계로 존재하는 것이 아니라, 특정하게 그리고 신뢰성 있게 계산을 수행하는 것은 언제인가?" <span class="src">Stepney 2024, p.666</span></p>
-<p><strong>무엇인가.</strong> Stepney가 소개하는 추상/표현(AR) 이론의 틀은 두 층을 둡니다. 위층은 <strong>추상 세계</strong>(문제와 답, 숫자와 기호), 아래층은 <strong>물리 세계</strong>(소자, 전압, 이온). 네 개의 화살표가 사각형을 이룹니다. 그림 2는 그 사각형을 그림 1의 소자로 푸는 작은 문제, "두 펄스 사이 간격이 100 ms보다 짧았나?"(짧으면 1, 아니면 0)에 맞춰 그린 것입니다. 위 띠가 추상 세계, 아래 띠가 물리 세계이고, ①–④를 차례로 따라갑니다.</p>
+<p><strong>무엇인가.</strong> Stepney가 소개하는 추상/표현 이론(abstraction/representation theory, AR 이론)의 틀은 두 층을 둡니다. 위층은 <strong>추상 세계</strong>(abstract domain: 문제와 답, 숫자와 기호), 아래층은 <strong>물리 세계</strong>(physical domain: 소자, 전압, 이온). 네 개의 화살표가 사각형을 이룹니다.</p>
+<p>그림 2는 그 사각형을 그림 1의 소자로 푸는 작은 문제, "두 펄스 사이 간격이 100 ms보다 짧았나?"(짧으면 1, 아니면 0)에 맞춰 그린 것입니다. 위 띠가 추상 세계, 아래 띠가 물리 세계이고, ①–④를 차례로 따라갑니다. 네 화살표를 한 줄로 먼저 적으면 이렇습니다.</p>
+<ul>
+<li>① <strong>부호화</strong>(encoding): 문제의 입력을 물리 입력으로 바꾼다.</li>
+<li>② 물리가 움직인다.</li>
+<li>③ <strong>해독</strong>(decoding): 변한 물리 상태를 읽어 답으로 해석한다. 이 해석 규칙을 <strong>readout</strong>이라 부르고, 그림 2에서는 '비가 <strong>문턱</strong>(threshold) 1.5보다 크면 1'이다.</li>
+<li>④ <strong>비교</strong>: 그 답이 추상 세계에서 직접 구한 답과 <strong>허용 오차</strong>(tolerance) 안에서 같은지 본다.</li>
+</ul>
+<p>아래 단계 상자는 이 네 줄을 그림 2의 숫자로 하나씩 풀어 봅니다.</p>
 <figure class="fig figure"><img src="../assets/img/d06/fig0-square-example.svg" alt="추상 세계(위)와 물리 세계(아래)의 사각형: ① 간격 10 ms를 펄스 두 개로 부호화, ② 소자가 변해 두 번째 전류 1.88 µA, ③ 비 1.88이 1.5보다 크므로 1로 해독, ④ 사람이 직접 판단한 답 1과 같아 사각형이 닫힘" class="figure-img"><figcaption><b>그림 2.</b> 기초 1의 사각형을 펄스 간격 문제에 적용한 교육용 도식. 위 가로 화살표는 사람이 추상 세계에서 직접 구한 답(10 ms &lt; 100 ms → 1), 왼쪽 ① → 아래 ② → 오른쪽 ③은 소자를 거쳐 얻은 답이다. ④에서 두 답이 같으면 "사각형이 닫힌다". 문턱 1.5는 사람이 미리 정한 해독 규칙이다. 전류는 모형 소자의 가상 측정값. (Claude가 그림, 모식도)</figcaption></figure>
 <div class="stepper">
 <div class="step">
@@ -752,9 +787,23 @@ window.Quarto = {
 <div class="stop-point">
 <p>여기까지: 그림 1로 PPF 지수(188%, 105%)를 계산하고, 그림 2의 ①–④를 짚으며 "이 소자가 이 작은 문제를 계산했다"가 무슨 뜻인지 말할 수 있다. 다음: 사각형이 닫히지 않는 경우.</p>
 </div>
-<p><span id="s-fail-types"></span><strong>어디서 실패하나.</strong> Stepney는 "계산한다"고 주장되는 많은 장치가 세 가지 이유로 이 기준을 못 넘는다고 씁니다. (a) 표현(추상 모델과 물리 장치의 연결)이 아예 없는 경우, (b) 사각형을 닫기 위해 <strong>다른 컴퓨터가 필요한</strong> 경우, 전형적으로 원하는 계산 전체를 사후에 출력 해석 단계에 숨겨서 수행하는 경우(돌멩이-컴퓨터), (c) 계가 잘 특성화되지 않아 우연히 맞은 결과만 골라 쓰는 경우. <span class="src">Stepney 2024, p.667</span> 여기서 <strong>특성화</strong>(characterisation)는 실험으로 "어떤 입력 범위에서 사각형이 허용 오차 안에 닫히는가"를 미리 알아 두는 것입니다 <span class="src">Stepney 2024, p.667</span>. 그림 2의 문제에서도 이 일이 생깁니다. 문턱 1.5는 모형식으로 간격 약 69 ms에 해당하므로, 약 69–99 ms 간격은 정답이 1('짧다')인데 비가 1.5 아래라 0으로 해독됩니다. 이 범위에서는 사각형이 닫히지 않습니다. [계산: 3구간 모형식] 10 ms와 1 s만 재 보고 "계산한다"고 쓰면 (c)에 가까워지고, 닫히는 범위를 미리 재 두는 것이 특성화입니다.</p>
-<p><strong>(b)를 장면으로.</strong> 철학 논쟁에는 "돌멩이도 어떤 함수든 계산할 수 있다"는 주장이 있고, Stepney는 이것을 예로 듭니다(Chalmers 1996 인용) <span class="src">Stepney 2024, p.666</span>. 돌멩이 안의 미세한 상태(원자의 진동, 온도 분포)는 늘 변하므로, 변한 상태마다 "이 상태는 답 56을 뜻한다" 같은 해석표를 <strong>나중에</strong> 붙이면 돌멩이가 7 × 8을 '계산'한 것처럼 꾸밀 수 있다는 것입니다. 그런데 그 표를 만들려면 7 × 8 = 56을 이미 다른 곳(사람이나 다른 컴퓨터)에서 계산해 알고 있어야 합니다. 일은 해석표가 했고 돌멩이는 아무 일도 하지 않았습니다. <span class="tag tag-interp">해석</span> 이온 소자에서도 같은 일이 생길 수 있습니다. 해독 단계(readout)가 크고 복잡해서 일을 다 하면, 소자는 계산한 것이 아닙니다. (b)가 오늘의 핵심입니다.</p>
-<p><span id="s-square-connect"></span><strong>연결.</strong> 이온 소자 논문의 PPF·STP·LTP 그림은 위 사각형의 <strong>②만</strong> 보여 줍니다. 물리가 움직였다는 것. ①·③·④(문제, 해독, 비교)가 붙어야 "계산"이 됩니다. Aluru 리뷰가 이온 소자로 "synaptomimetic(시냅스 흉내) 거동"을 낸 보고가 폭발적으로 늘었지만 목표에 닿으려면 훨씬 정교한 기능이 필요하다고 쓰고 <span class="src">Aluru 2026, 요약면</span>, 생물을 흉내 내려면 "단순한 이온 전도도 이력(hysteresis)을 넘는" 복잡한 기능이 필요하다고 쓴 것 <span class="src">Aluru 2026, p.593</span>이 같은 지적입니다.</p>
+<p><span id="s-fail-types"></span><strong>어디서 실패하나.</strong> Stepney는 "계산한다"고 주장되는 많은 장치가 세 가지 이유로 이 기준을 못 넘는다고 씁니다.</p>
+<ul>
+<li><ol type="a">
+<li>표현(representation: 추상 모델과 물리 장치의 연결)이 아예 없는 경우.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>사각형을 닫기 위해 <strong>다른 컴퓨터가 필요한</strong> 경우. 전형적으로 원하는 계산 전체를 사후에 출력 해석 단계에 숨겨서 수행하는 경우(돌멩이-컴퓨터).</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>계가 잘 특성화되지 않아 우연히 맞은 결과만 골라 쓰는 경우.</li>
+</ol></li>
+</ul>
+<p>세 가지의 출처: <span class="src">Stepney 2024, p.667</span>.</p>
+<p>여기서 <strong>특성화</strong>(characterisation)는 실험으로 "어떤 입력 범위에서 사각형이 허용 오차 안에 닫히는가"를 미리 알아 두는 것입니다 <span class="src">Stepney 2024, p.667</span>.</p>
+<p>그림 2의 문제에서도 이 일이 생깁니다. 문턱 1.5는 모형식으로 간격 약 69 ms에 해당하므로, 약 69–99 ms 간격은 정답이 1('짧다')인데 비가 1.5 아래라 0으로 해독됩니다. 이 범위에서는 사각형이 닫히지 않습니다. [계산: 3구간 모형식] 10 ms와 1 s만 재 보고 "계산한다"고 쓰면 (c)에 가까워지고, 닫히는 범위를 미리 재 두는 것이 특성화입니다.</p>
+<p><strong>(b)를 장면으로.</strong> 철학 논쟁에는 "돌멩이도 어떤 함수든 계산할 수 있다"는 주장이 있고, Stepney는 이것을 예로 듭니다(Chalmers 1996 인용) <span class="src">Stepney 2024, p.666</span>. 돌멩이 안의 미세한 상태(원자의 진동, 온도 분포)는 늘 변하므로, 변한 상태마다 "이 상태는 답 56을 뜻한다" 같은 해석표를 <strong>나중에</strong> 붙이면 돌멩이가 7 × 8을 '계산'한 것처럼 꾸밀 수 있다는 것입니다. 그런데 그 표를 만들려면 7 × 8 = 56을 이미 다른 곳(사람이나 다른 컴퓨터)에서 계산해 알고 있어야 합니다. 일은 해석표가 했고 돌멩이는 아무 일도 하지 않았습니다. <span class="tag tag-interp">해석</span> 이온 소자에서도 같은 일이 생길 수 있습니다. <span class="key">해독 단계(readout)가 크고 복잡해서 일을 다 하면, 소자는 계산한 것이 아닙니다.</span> (b)가 오늘의 핵심입니다.</p>
+<p><span id="s-square-connect"></span><strong>연결.</strong> <span class="key">이온 소자 논문의 PPF·STP·LTP 그림은 위 사각형의 <strong>②만</strong>(물리가 움직였다는 것) 보여 주고, ①·③·④(문제, 해독, 비교)가 붙어야 "계산"이 됩니다.</span> Aluru 리뷰가 이온 소자로 "synaptomimetic(시냅스 흉내) 거동"을 낸 보고가 폭발적으로 늘었지만 목표에 닿으려면 훨씬 정교한 기능이 필요하다고 쓰고 <span class="src">Aluru 2026, 요약면</span>, 생물을 흉내 내려면 "단순한 이온 전도도 이력(hysteresis)을 넘는" 복잡한 기능이 필요하다고 쓴 것 <span class="src">Aluru 2026, p.593</span>이 같은 지적입니다.</p>
 <div class="quiz" data-day="d06" data-set="1-check"></div>
 <div class="think">
 <p>내가 최근 본 이온 소자 논문의 첫 그림(PPF나 LTP)을 떠올려, 그림 2의 ①–④ 중 어디까지 보여 줬는지 적어 보세요. "문제"가 정의되어 있었나요? 결과를 "답"으로 해석하는 규칙이 있었나요?</p>
@@ -773,25 +822,27 @@ window.Quarto = {
 <div class="goal">
 <p>readout의 숫자를 데이터로 정하는 계산(RC식)에서 "계산했다", 더 나아가 "소자가 기여했다"고 말하려면 무엇을 보여야 하는지를 펄스 간격 예제 하나로 끝까지 따라가고, 그 단계들을 사다리 그림(그림 4)에 놓을 수 있게 된다.</p>
 </div>
-<p>1구간의 문턱 1.5는 사람이 정했습니다. 그런데 Phase 2 이후에 읽을 reservoir computing(RC) 논문들은 해독 규칙의 숫자를 <strong>데이터로 정합니다</strong>. 소자에서 읽는 숫자가 수백–수천 개가 되면(4구간의 Lee 2025는 2,352개) 사람이 규칙을 손으로 정하기 어렵기 때문입니다. 규칙을 데이터로 정하면 새 함정이 둘 생깁니다. 규칙이 데이터를 <strong>외워서</strong> 맞힐 수 있고, 소자가 없어도 규칙만으로 맞힐 수 있습니다. 이 구간은 먼저 1구간과 같은 문제를 데이터로 푸는 작은 예제를 끝까지 따라가며 필요한 낱말을 하나씩 만나고(2-1), 그 단계들을 사다리 그림 한 장으로 정리한 뒤(2-2), 단마다 더 깊게 봅니다(2-3).</p>
+<p>1구간의 문턱 1.5는 사람이 정했습니다. 그런데 Phase 2 이후에 읽을 reservoir computing(RC) 논문들은 해독 규칙의 숫자를 <strong>데이터로 정합니다</strong>. 소자에서 읽는 숫자가 수백–수천 개가 되면(4구간의 Lee 2025는 2,352개) 사람이 규칙을 손으로 정하기 어렵기 때문입니다. 이 방식을 이 Day에서는 <strong>학습형 계산</strong>이라 부릅니다(RC가 대표 예라 'RC식'이라고도 적습니다). 규칙을 데이터로 정하면 새 함정이 둘 생깁니다. 규칙이 데이터를 <strong>외워서</strong> 맞힐 수 있고, 소자가 없어도 규칙만으로 맞힐 수 있습니다. 이 구간은 먼저 1구간과 같은 문제를 데이터로 푸는 작은 예제를 끝까지 따라가며 필요한 낱말을 하나씩 만나고(2-1), 그 단계들을 사다리 그림 한 장으로 정리한 뒤(2-2), 단마다 더 깊게 봅니다(2-3).</p>
 <section id="s-worked-example" class="level4">
 <h4 class="anchored" data-anchor-id="s-worked-example">2-1. 처음부터 끝까지: 펄스 간격 맞히기</h4>
-<p>문제는 1구간과 같습니다("두 펄스 사이 간격이 100 ms보다 짧았나?"). 소자도 같은 모형 소자이고, 전류값은 그 모형식에서 계산한 <strong>가상 측정값</strong>입니다(같은 입력을 다시 넣으면 같은 값이 나온다고 가정). 다른 점은 하나, 해독 문턱을 사람이 정하지 않고 <strong>데이터로 정한다</strong>는 것입니다. 단계 상자를 하나씩 열며 굵은 낱말을 챙기세요. 오늘 나머지 내내 쓰는 말입니다.</p>
+<p>문제는 1구간과 같습니다("두 펄스 사이 간격이 100 ms보다 짧았나?"). 소자도 같은 모형 소자이고, 전류값은 그 모형식에서 계산한 <strong>가상 측정값</strong>입니다(같은 입력을 다시 넣으면 같은 값이 나온다고 가정). 다른 점은 하나, 해독 문턱을 사람이 정하지 않고 <strong>데이터로 정한다</strong>는 것입니다. 단계 상자를 하나씩 열며 굵은 낱말을 챙기세요. 오늘 나머지 내내 쓰는 말입니다. 아래 '예측하기'에 쓰이는 낱말만 미리 한 줄씩 적어 둡니다. <strong>훈련 표본</strong>(training sample)은 문턱을 정할 때 보는 예, <strong>시험 표본</strong>(test sample)은 문턱을 정한 뒤 채점에만 쓰는 예입니다. <strong>readout</strong>은 1구간처럼 소자에서 읽은 값을 답으로 바꾸는 규칙이고, 여기서는 '전류가 문턱보다 크면 1'입니다.</p>
+<p><strong>먼저 그림 3.</strong> 아래 단계를 한 장에 모은 그림입니다. 맨 위 줄이 단계 1–5의 흐름이고, (a)–(c)가 소자·원시 입력·정적 소자로 답한 결과, 아래 회색 상자가 점수입니다. 처음에는 (a)의 점들만 보세요. 동그라미 네 개(훈련 표본)로 문턱을 정하고, 마름모 네 개(시험 표본)를 채점합니다. (b)·(c)와 점수 상자는 단계 6·7을 읽은 뒤 다시 보면 됩니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig6-worked-example.svg" alt="펄스 간격 예제: 훈련 표본 넷으로 정한 문턱 θ = 1.34 µA로 소자 상태 x를 가르면 시험 표본 중 120 ms만 틀려 75%, 소자 없이 Δt로 정한 문턱 190 ms도 120 ms만 틀려 75%, 기억 없는 저항은 모든 표본이 1.00 µA라 50%임을 세 개의 수직선과 점수 상자로 보인 그림" class="figure-img"><figcaption><b>그림 3.</b> 2-1 단계 상자의 예제를 한 장에. 맨 위 줄이 입력에서 채점까지의 흐름이다. <b>(a)</b> 소자 상태 x(두 번째 펄스 전류, µA)의 수직선(단계 3–5). 동그라미가 훈련 표본(위에 간격 표시), 마름모가 시험 표본, 파랑이 정답 1(짧다), 주황이 정답 0(길다), 빨간 테두리가 틀린 답이다. 주황 점선은 훈련 표본만으로 정한 문턱 θ, 회색 점선은 실제 경계(100 ms일 때의 x). <b>(b)</b> 소자 없이 간격 Δt 숫자로 같은 일을 한 원시 입력 기준선(단계 6; 가로축은 로그 축, 왼쪽이 짧은 간격). <b>(c)</b> 기억 없는 저항(단계 7). 점수 상자의 (c) 50%는 네 표본을 한쪽으로 다 찍은 값이다. x값은 그림 1·6과 같은 PPF 모형식으로 계산한 가상 측정값이며 특정 소자의 측정이 아니다. (Claude가 계산해 그림)</figcaption></figure>
 <div class="predict">
-<p>아래 예제에서 데이터로 정한 readout은 시험 표본 네 개 중 몇 개를 맞힐까요? 소자를 빼고 <strong>간격 Δt 숫자 자체</strong>를 같은 방식의 readout에 넣으면 소자보다 나을까요? 기억이 전혀 없는 소자라면 몇 개를 맞힐까요? 세 숫자를 먼저 적어 보세요.</p>
+<p>아래 예제에서 데이터로 정한 readout은 시험 표본 네 개 중 몇 개를 맞힐까요? 소자를 빼고 <strong>간격 Δt 숫자 자체</strong>를 같은 방식의 readout에 넣으면 소자보다 나을까요? 기억이 전혀 없는 소자라면 몇 개를 맞힐까요? 그림 3의 점수 상자는 손으로 가리고 세 숫자를 먼저 적어 보세요.</p>
 </div>
 <div class="stepper">
 <div class="step">
-<p><b>1. 과제 정하기.</b> 무엇을 맞히는지 정한 문제를 <strong>과제</strong>(task)라 한다. 세 가지가 정해져야 한다. 입력: 펄스 두 개를 간격 Δt로 넣는다. 정답: Δt가 100 ms보다 짧으면 1('짧다'), 아니면 0('길다'). 채점 방법(<strong>척도</strong>): 맞힌 비율, 곧 <strong>정확도</strong>(accuracy, 맞힌 개수 ÷ 전체 개수). 이 세 가지가 있어야 '맞았다'를 셀 수 있다.</p>
+<p><b>1. 과제 정하기.</b> 무엇을 맞히는지 정한 문제를 <strong>과제</strong>(task)라 한다. 세 가지가 정해져야 한다. 입력: 펄스 두 개를 간격 Δt로 넣는다. 정답: Δt가 100 ms보다 짧으면 1('짧다'), 아니면 0('길다'). 채점 방법(<strong>척도</strong>, metric): 맞힌 비율, 곧 <strong>정확도</strong>(accuracy, 맞힌 개수 ÷ 전체 개수). 이 세 가지가 있어야 '맞았다'를 셀 수 있다.</p>
 </div>
 <div class="step">
 <p><b>2. 데이터 나누기.</b> 간격 여덟 가지로 재서 <strong>표본</strong>(sample) 8개를 얻는다. 표본 하나 = 입력 하나(Δt)와 그 정답의 한 쌍. 학습 <b>전에</b> 넷은 규칙을 정하는 데 쓸 <strong>훈련 데이터</strong>(training data), 넷은 채점에만 쓸 <strong>시험 데이터</strong>(test data)로 떼어 둔다. 이렇게 떼어 둔 시험 데이터를 <strong>held-out</strong> 데이터라고도 부른다. 훈련: 20, 80 ms(정답 1), 300, 1000 ms(정답 0). 시험: 10, 50 ms(정답 1), 120, 600 ms(정답 0). 시험 표본은 마지막 채점 때까지 보지 않는다.</p>
 </div>
 <div class="step">
-<p><b>3. 상태 읽기.</b> 소자에서 읽는 숫자를 <strong>상태</strong>(state)라 부른다. 여기서는 두 번째 펄스 때의 전류 x 하나다(첫 펄스의 응답은 늘 1.00 µA). 훈련: 1.79, 1.46, 1.22, 1.05 µA. 시험: 1.88, 1.58, 1.37, 1.12 µA. 간격이 다르면 x가 다르고(<strong>구별</strong>), 다시 재도 같다고 가정했다(<strong>반복 가능</strong>). 실제 소자라면 이 두 가지부터 측정으로 보여야 한다.</p>
+<p><b>3. 상태 읽기.</b> 소자에서 읽는 숫자를 <strong>상태</strong>(state)라 부른다. 여기서는 두 번째 펄스 때의 전류 x 하나다(첫 펄스의 응답은 늘 1.00 µA). 훈련: 1.79, 1.46, 1.22, 1.05 µA. 시험: 1.88, 1.58, 1.37, 1.12 µA. 간격이 다르면 x가 다르고(<strong>구별</strong>, distinguishable), 다시 재도 같다고 가정했다(<strong>반복 가능</strong>, reproducible). 실제 소자라면 이 두 가지부터 측정으로 보여야 한다.</p>
 </div>
 <div class="step">
-<p><b>4. readout 학습.</b> 상태를 답으로 바꾸는 규칙이 1구간에서 본 <strong>readout</strong>이다. 여기서는 'x가 문턱 θ보다 크면 1'. θ를 데이터로 정하는 일이 <strong>학습</strong>이고, <b>훈련 표본만</b> 본다. 정답 1 중 가장 작은 x(1.46)와 정답 0 중 가장 큰 x(1.22)의 가운데: θ = (1.46 + 1.22) ÷ 2 = 1.34 µA. 훈련 표본 넷은 모두 맞는다(훈련 정확도 4/4 = 100%). θ를 그 넷에 맞춰 골랐으니 당연한 결과다.</p>
+<p><b>4. readout 학습.</b> 상태를 답으로 바꾸는 규칙이 1구간에서 본 <strong>readout</strong>이다. 여기서는 'x가 문턱 θ보다 크면 1'. θ를 데이터로 정하는 일이 <strong>학습</strong>(training)이고, <b>훈련 표본만</b> 본다. 정답 1 중 가장 작은 x(1.46)와 정답 0 중 가장 큰 x(1.22)의 가운데: θ = (1.46 + 1.22) ÷ 2 = 1.34 µA. 훈련 표본 넷은 모두 맞는다(훈련 정확도 4/4 = 100%). θ를 그 넷에 맞춰 골랐으니 당연한 결과다.</p>
 </div>
 <div class="step">
 <p><b>5. held-out 채점.</b> 시험 표본에 같은 규칙을 쓴다. 1.88 → 1(맞음), 1.58 → 1(맞음), 1.37 → 1(<b>틀림</b>: 120 ms는 '길다'), 1.12 → 0(맞음). 시험 정확도 3/4 = 75%로 훈련의 100%보다 낮다. 훈련 표본에 80 ms와 300 ms 사이의 간격이 없어서 문턱이 실제 경계(100 ms에서 x = 1.41 µA)보다 낮게 잡혔기 때문이다. 극단적인 비교: 훈련 표본 넷의 (x, 정답)을 표로 <b>외우기만</b> 한 readout도 훈련은 4/4이지만, 시험 표본의 x값은 표에 없으니 하나도 답하지 못한다. 이렇게 readout이 훈련 데이터에만 맞춰져 새 데이터에서 성능이 떨어지는 것을 <strong>과적합</strong>(overfitting)이라 한다(2-3에서 숫자로 다시 본다). 과적합은 시험 데이터에서만 드러난다.</p>
@@ -806,8 +857,6 @@ window.Quarto = {
 <p><b>8. 시스템 비용.</b> 소자가 기여하는 조건이라도, 전류를 재고 숫자로 바꾸는 회로와 readout까지 넣은 비용이 MCU(센서 옆에 붙는 작은 범용 컴퓨터 칩)의 타이머로 간격을 재는 것보다 싼지는 따로 따져야 한다(<a href="../days/d05.html#ch-competitor">Day 9 3구간</a>). 이 예제에서는 계산하지 않는다.</p>
 </div>
 </div>
-<p><strong>한 장으로.</strong> 그림 3은 위 단계를 한 장에 모은 것입니다. 맨 위 줄이 단계 1–5의 흐름이고, ①–③이 소자·원시 입력·정적 소자로 답한 결과, 아래 회색 상자가 점수입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d06/fig6-worked-example.svg" alt="펄스 간격 예제: 훈련 표본 넷으로 정한 문턱 θ = 1.34 µA로 소자 상태 x를 가르면 시험 표본 중 120 ms만 틀려 75%, 소자 없이 Δt로 정한 문턱 190 ms도 120 ms만 틀려 75%, 기억 없는 저항은 모든 표본이 1.00 µA라 50%임을 세 개의 수직선과 점수 상자로 보인 그림" class="figure-img"><figcaption><b>그림 3.</b> 2-1 단계 상자의 예제를 한 장에. 맨 위 줄이 입력에서 채점까지의 흐름이다. ①은 소자 상태 x(두 번째 펄스 전류, µA)의 수직선이다. 동그라미가 훈련 표본(위에 간격 표시), 마름모가 시험 표본, 파랑이 정답 1(짧다), 주황이 정답 0(길다), 빨간 테두리가 틀린 답이다. 주황 점선은 훈련 표본만으로 정한 문턱 θ, 회색 점선은 실제 경계(100 ms일 때의 x). ②는 소자 없이 간격 Δt 숫자로 같은 일을 한 원시 입력 기준선(가로축은 로그 축, 왼쪽이 짧은 간격). ③은 기억 없는 저항. x값은 그림 1·6과 같은 PPF 모형식으로 계산한 가상 측정값이며 특정 소자의 측정이 아니다. (Claude가 계산해 그림)</figcaption></figure>
 <div class="stop-point">
 <p>여기까지: 그림 3을 짚으며 과제·표본·훈련/시험 데이터·readout·정확도·과적합·기준선을 예제의 숫자로 말할 수 있다(θ = 1.34 µA, 훈련 100% → 시험 75%, 원시 입력 75%, 정적 소자 50%). 다음: 이 단계들을 사다리 한 장으로 정리한다.</p>
 </div>
@@ -818,7 +867,7 @@ window.Quarto = {
 <figure class="fig figure"><img src="../assets/img/d06/fig1-ladder.svg" alt="readout을 학습하는 계산(RC식)에서 0단 현상 재현부터 1 과제 정의, 2 읽을 수 있는 상태, 3 학습한 readout, 4 held-out 성능, 5 기준선 비교, 6 시스템 비용까지 일곱 단과, 각 단이 펄스 간격 예제에서 무엇이었는지, 각 단이 증명하는 것을 적은 사다리" class="figure-img"><figcaption><b>그림 4.</b> readout을 학습하는 계산(RC식)에서 "계산한다"고 말하기까지의 사다리. 가운데 회색 줄이 2-1 예제에서 각 단이 무엇이었는지, 오른쪽이 그 단이 증명하는 것이다. 0단은 1–6단의 어느 것도 증명하지 않는다. 해독 규칙을 미리 정해 둔 계산(1구간의 문턱 1.5)에는 3·4단이 그대로 적용되지 않는다. 4구간에서 폴더 논문들을 이 사다리에 놓는다. (Claude가 그림, 모식도)</figcaption></figure>
 <p><strong>순서가 있는 이유.</strong> 아래 단이 서지 않으면 위 단의 결과를 해석할 수 없습니다. 예컨대 같은 입력에 소자가 매번 다른 상태를 낸다면(2단 실패), 그 위에서 얻은 정확도가 소자의 동역학 덕인지 readout과 운 덕인지 가릴 수 없습니다. Singh은 명목상 같은 입력이 구별되고 충분히 재현되는 상태를 만들지 못하면, 그 뒤 벤치마크(성능을 비교하려고 정해 둔 표준 과제) 성능이 좋아져도 그것을 물리 동역학의 공으로 믿을 만하게 돌릴 수 없다고 씁니다. <span class="src">Singh 2026, p.8</span></p>
 <p><strong>이 사다리가 적용되는 범위.</strong> 이 사다리는 Phase 2–5에서 읽을 논문들처럼 readout을 학습해 답을 내는 계산을 검증하는 기준이고, 모든 물리 계산의 필요조건은 아닙니다. 1구간의 문턱 1.5처럼 해독 규칙을 미리 정해 두는 계산에는 "학습한 readout"이 처음부터 없고, 그때의 기준은 정해 둔 입력 범위에서 사각형이 허용 오차 안에서 반복해 닫히는지(특성화), 그리고 해독 규칙이 계산을 숨기지 않는지입니다. <span class="src">Stepney 2024, p.666–667</span> 다만 문턱 1.5 같은 숫자를 측정 데이터를 보고 골랐다면 그것도 데이터로 정한 숫자이므로, 고를 때 쓰지 않은 입력으로 다시 확인해야 합니다. 5단(기준선)은 "계산이 일어났다"보다 한 걸음 더 나간 주장, 곧 "<strong>소자가</strong> 기여했다"를 말할 때 필요한 단입니다. <span class="tag tag-interp">해석</span></p>
-<p><span id="s-ladder-table"></span><strong>각 단이 지우는 '다른 설명'.</strong> 사다리의 각 단은 "그 결과가 소자의 계산 덕이 아니라 다른 이유 때문일 수 있다"는 의심을 하나씩 지웁니다. 2-1의 예제에 맞춰 보면 이렇습니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-ladder-table"></span><strong>각 단이 지우는 '다른 설명'</strong>(alternative explanation). 사다리의 각 단은 "그 결과가 소자의 계산 덕이 아니라 다른 이유 때문일 수 있다"는 의심을 하나씩 지웁니다. 2-1의 예제에 맞춰 보면 이렇습니다. <span class="tag tag-interp">해석</span></p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -877,20 +926,20 @@ window.Quarto = {
 <p><strong>기초 2: 과제와 "읽을 수 있는 상태"</strong></p>
 <p><strong>과제(1단).</strong> 예제의 과제는 입력 = 간격 Δt, 정답 = 1 또는 0, 척도 = 정확도였습니다. 소자 논문에서 가장 흔한 연습 과제는 MNIST입니다. 입력 = 손글씨 숫자 그림(28×28 픽셀), 정답 = 0–9 중 하나, 척도 = 정확도. 시계열 과제라면 입력 = 전압 펄스 열, 정답 = 그 열이 어느 종류인지(분류) 또는 다음 값이 얼마인지(예측), 척도 = 정확도 또는 오차의 크기(예: NRMSE, 오차를 정답의 크기로 나눈 값)입니다. <a href="../days/d02b.html#rt-biosignal">Day 4 장면 2</a>·Day 9의 심전도 패치라면 입력 = 박동 하나 구간의 전압 파형, 정답 = 정상/이상, 척도 = 정확도(또는 이상 박동을 놓친 비율)입니다. 과제가 없으면 "맞았다"는 말 자체가 성립하지 않습니다.</p>
 <figure class="fig photo figure"><img src="../assets/img/web/d06-mnist-digits.png" alt="MNIST 시험 데이터에서 뽑은 손글씨 숫자 0부터 9까지가 줄마다 20개씩, 검은 바탕에 흰 글씨로 놓인 격자" loading="lazy" class="figure-img"><figcaption><b>사진(데이터 실물).</b> MNIST 과제의 입력이 실제로 이렇게 생겼다. 칸 하나가 28×28 픽셀 그림 한 장이고, 줄마다 정답(0–9)이 같은 그림 20장씩이다. <b>볼 것:</b> 같은 '7'이라도 기울기·굵기·가로줄 유무가 제각각이다. 과제(1단)란 이런 그림 하나를 넣고 정답 하나를 맞히는지 세는 규칙이고, readout이 '외우기'가 아니라 '규칙 배우기'를 했는지는 훈련에 안 쓴 그림(held-out, 2-1 단계 2)으로만 알 수 있다. 출처: Suvanjanprasai, <a href="https://commons.wikimedia.org/wiki/File:MNIST_dataset_example.png" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0.</figcaption></figure>
-<p><strong>읽을 수 있는 상태(2단).</strong> 소자 안에서 실제로 변하는 것은 이온 분포·농도 프로필·계면 전하 같은 <strong>물리 상태</strong>입니다. readout은 그것을 직접 볼 수 없고 전극에서 잰 숫자만 받습니다. 그래서 계산에서 말하는 '상태'는 입력을 넣은 뒤 소자에서 <strong>실제로 측정하는 값</strong>(전류, 전압, 전도도)들의 목록입니다. 두 조건이 붙습니다. (a) <strong>구별</strong>: 과제에서 다른 답을 가져야 할 입력들이 서로 다른 상태로 끝나야 합니다. 같은 상태로 끝나면 뒤에서 아무리 애써도 못 가릅니다. (b) <strong>반복 가능</strong>: 같은 입력을 다시 넣으면 거의 같은 상태가 나와야 합니다. Singh 2026은 바닥 드리프트(기준값이 천천히 흘러감), 불완전한 리셋, 열 축적, 비가역적 구조 변화에서 생기는 "겉보기 기억"은 한 번의 측정에서는 인상적으로 보여도 재현성을 해치므로 형편없는 계산 자원이라고 씁니다. <span class="src">Singh 2026, p.6</span> <a href="../days/d04b.html#ch-synapse-states">Day 8 4구간</a>의 "구별되고 반복 가능한 상태 수"와 같은 조건입니다.</p>
+<p><strong>읽을 수 있는 상태(2단).</strong> 소자 안에서 실제로 변하는 것은 이온 분포·농도 프로필·계면 전하 같은 <strong>물리 상태</strong>입니다. readout은 그것을 직접 볼 수 없고 전극에서 잰 숫자만 받습니다. 그래서 계산에서 말하는 '상태'는 입력을 넣은 뒤 소자에서 <strong>실제로 측정하는 값</strong>(전류, 전압, 전도도)들의 목록입니다. 두 조건이 붙습니다. (a) <strong>구별</strong>: 과제에서 다른 답을 가져야 할 입력들이 서로 다른 상태로 끝나야 합니다. 같은 상태로 끝나면 뒤에서 아무리 애써도 못 가릅니다. (b) <strong>반복 가능</strong>: 같은 입력을 다시 넣으면 거의 같은 상태가 나와야 합니다. Singh 2026은 바닥 드리프트(기준값이 천천히 흘러감), 불완전한 리셋, 열 축적, 비가역적 구조 변화에서 생기는 "겉보기 기억"은 한 번의 측정에서는 인상적으로 보여도 재현성을 해치므로 형편없는 계산 자원이라고 씁니다. <span class="src">Singh 2026, p.6</span> <a href="../days/d04b.html#ch-synapse-states">Day 8 4구간</a>의 "구별되고 반복 가능한 상태 수"와 같은 조건입니다. <span class="key">상태에 과거가 담긴다는 것과, 과제에 필요한 정보를 그 상태에서 읽어 낼 수 있다는 것은 다른 말입니다.</span> 읽어 내려면 상태가 몇 가지를 더 갖춰야 하고, 각각 뒤에서 이름을 달고 따로 다룹니다. 서로 다른 입력 이력이 서로 다른 상태로 가는가는 <a href="../days/d14a.html#ch-separation">분리(separation)</a>, 과제에 필요한 만큼 먼 과거까지 남는가(시간 창)는 <a href="../days/d09a.html#ch-fading">fading memory</a>와 <a href="../days/d13a.html#ch-mc-by-hand">memory capacity</a>, 단순한 readout(직선 하나)이 가를 수 있는 모양인가는 <a href="../days/d10a.html#ch-separability">선형 분리</a>와 <a href="../days/d14a.html#ch-rank">rank</a>, 상태 사이의 차이가 반복 흔들림보다 큰가는 <a href="../days/d18a.html#ch-noise-gap">상태 차이 대 잡음</a>, 같은 입력에 같은 상태가 다시 나오는가는 <a href="../days/d09a.html#s-washout-esp">echo state property와 반복성</a>에서 봅니다.</p>
 <p><strong>작은 숫자로.</strong> 4-bit 펄스 열을 넣고 마지막 전류 하나를 읽는다고 합시다. 4-bit 펄스 열은 박자 네 번에 걸쳐 '1이면 그 박자에 펄스를 넣고 0이면 쉬는' 입력입니다. 예: 1010은 첫째·셋째 박자에만 펄스. 가능한 열은 0000부터 1111까지 2⁴ = 16가지입니다. 16개 열이 16개의 서로 다른 전류값으로 끝나고, 각 값의 반복 측정 흔들림이 이웃 값과의 간격보다 작으면, 이 소자는 "4-bit 열을 전류 하나로 구별하는" 상태를 가진 것입니다. 흔들림이 간격보다 크면 구별되는 상태 수는 16보다 작습니다. 4구간의 Lee 2025가 바로 이 방식으로 픽셀 하나의 시간 정보를 소자 하나에 넣습니다.</p>
 </div>
 <div id="b-readout" class="basics">
 <p><strong>기초 3: 학습한 readout — 상태에서 답을 꺼내는 직선 맞추기</strong></p>
 <p><strong>왜 필요한가.</strong> 소자가 내는 전류 0.37 µA가 "숫자 7"이라는 뜻은 아닙니다. 상태(숫자 목록)를 답으로 바꾸는 규칙이 필요하고, 그 규칙을 데이터로 정하는 것이 readout 학습입니다. 예제의 readout은 문턱 하나였습니다. 상태가 여러 개면 규칙도 커집니다.</p>
-<p><strong>무엇인가.</strong> 가장 단순한 readout은 <a href="../days/d04a.html#b-vector-matrix">Day 7 기초 1</a>의 행렬–벡터 곱입니다. 상태 벡터 <span class="math inline">\(\mathbf{x}\)</span>(측정값 목록)에 가중치 행렬 <span class="math inline">\(W_{out}\)</span>(측정값마다 "얼마나 중요하게 볼지"를 곱하는 숫자들의 표; <a href="../days/d02a.html#b-weight">Day 3 기초: 가중치</a>)를 곱해 답 <span class="math inline">\(\mathbf{y} = W_{out}\mathbf{x}\)</span>를 냅니다. "학습"은 정답을 아는 예제들(훈련 데이터)을 놓고, 예측과 정답의 차이(보통 차이를 제곱해 모두 더한 값)가 가장 작아지도록 <span class="math inline">\(W_{out}\)</span>의 숫자들을 정하는 일입니다. 상태가 하나이고 답이 하나면 "점들에 가장 잘 맞는 직선 긋기"(선형 회귀)와 같은 일입니다. 예: 상태 <span class="math inline">\(x\)</span> = 2, 4, 6일 때 정답 <span class="math inline">\(y\)</span> = 1, 2, 3이면 <span class="math inline">\(y = 0.5x\)</span>가 가장 잘 맞고, <span class="math inline">\(W_{out}\)</span> = 0.5입니다. 상태가 100개면 가중치가 100개인 직선, 곧 100차원 공간의 평평한 면(초평면, hyperplane)을 맞추는 것이고, 계산은 컴퓨터가 합니다. 답이 '짧다/길다' 같은 범주일 때(분류) 가장 작은 readout은 <strong>문턱 하나</strong>입니다. 'x가 θ보다 크면 1'에서 θ를 훈련 데이터로 정하면 그것도 학습한 readout입니다(2-1의 예제).</p>
-<p><strong>왜 "readout만" 학습하나.</strong> reservoir computing(RC, Phase 2)의 핵심 약속은 소자(reservoir)는 고정하고 <strong>readout만</strong> 학습한다는 것입니다. Liang은 물리 RC가 RC 틀 안에서 물리 동역학을 계산 자원으로 "수확"해 자원 효율적 정보 처리를 노린다고 씁니다. <span class="src">Liang 2024, p.194</span> 그러니 readout이 커지면 "수확"의 몫은 줄어듭니다.</p>
+<p><strong>무엇인가.</strong> 가장 단순한 readout은 <a href="../days/d04a.html#b-vector-matrix">Day 7 기초 1</a>의 행렬–벡터 곱입니다. 상태 벡터 <span class="math inline">\(\mathbf{x}\)</span>(측정값 목록)에 가중치 행렬 <span class="math inline">\(W_{out}\)</span>(측정값마다 "얼마나 중요하게 볼지"를 곱하는 숫자들의 표; <a href="../days/d02a.html#b-weight">Day 3 기초: 가중치</a>)를 곱해 답 <span class="math inline">\(\mathbf{y} = W_{out}\mathbf{x}\)</span>를 냅니다. "학습"은 정답을 아는 예제들(훈련 데이터)을 놓고, 예측과 정답의 차이(보통 차이를 제곱해 모두 더한 값)가 가장 작아지도록 <span class="math inline">\(W_{out}\)</span>의 숫자들을 정하는 일입니다. 상태가 하나이고 답이 하나면 "점들에 가장 잘 맞는 직선 긋기"(선형 회귀, linear regression)와 같은 일입니다. 예: 상태 <span class="math inline">\(x\)</span> = 2, 4, 6일 때 정답 <span class="math inline">\(y\)</span> = 1, 2, 3이면 <span class="math inline">\(y = 0.5x\)</span>가 가장 잘 맞고, <span class="math inline">\(W_{out}\)</span> = 0.5입니다. 상태가 100개면 가중치가 100개인 직선, 곧 100차원 공간의 평평한 면(초평면, hyperplane)을 맞추는 것이고, 계산은 컴퓨터가 합니다. 답이 '짧다/길다' 같은 범주일 때(분류) 가장 작은 readout은 <strong>문턱 하나</strong>입니다. 'x가 θ보다 크면 1'에서 θ를 훈련 데이터로 정하면 그것도 학습한 readout입니다(2-1의 예제).</p>
+<p><strong>왜 "readout만" 학습하나.</strong> reservoir computing(RC, Phase 2)의 핵심 약속은 소자(reservoir)는 고정하고 <strong>readout만</strong> 학습한다는 것입니다. Liang은 physical reservoir computing이 RC 틀 안에서 물리 동역학을 계산 자원으로 "수확"해 자원 효율적 정보 처리를 노린다고 씁니다. <span class="src">Liang 2024, p.194</span> 그러니 readout이 커지면 "수확"의 몫은 줄어듭니다.</p>
 <p><strong>readout이 커지면 무엇이 문제인가.</strong> readout이 커질수록(상태 수가 많거나, 여러 층의 신경망처럼 선형이 아닌 복잡한 readout을 쓰면) 소자가 아무것도 안 해도 readout이 답을 맞힐 수 있습니다. 1구간의 실패 유형 (b)가 이것입니다. 그래서 다음 두 조건이 필요합니다.</p>
 </div>
 <div id="b-heldout-baseline" class="basics">
 <p><strong>기초 4: held-out 성능과 기준선</strong></p>
 <p><strong>held-out(4단) — 안 본 데이터에서 맞히는가.</strong> 2-1의 단계 2·5에서 본 것을 일반적으로 말하면 이렇습니다. 훈련에 쓴 데이터로 성능을 재면, readout이 그 데이터를 <strong>외운</strong> 것인지 <strong>규칙을 배운</strong> 것인지 구별할 수 없습니다. 그래서 데이터를 둘로 나눠, 한쪽(훈련)으로 <span class="math inline">\(W_{out}\)</span>를 정하고 다른 쪽(held-out, 시험)으로만 성능을 잽니다. 나누는 시점은 학습 <strong>전</strong>이고, 떼어 둔 표본은 readout의 숫자뿐 아니라 '상태를 몇 개 쓸지', '문턱을 얼마로 할지' 같은 설정을 고를 때도 쓰지 않습니다. 시험 데이터를 보며 설정을 고르면 그 데이터도 사실상 훈련에 쓴 셈이 되기 때문입니다. [해석: 기계학습의 일반적 관행] Stepney는 reservoir를 학습한 뒤 "독립적인 시험 데이터로 평가해야 하며, 이 평가가 시스템이 요구된 계산을 충분히 잘 한다는 증거"라고 씁니다. <span class="src">Stepney 2024, p.669</span></p>
-<p><span id="s-r2-sim"></span><strong>작은 숫자로 — 외우기가 얼마나 쉬운가.</strong> 먼저 그림 5의 세로축부터 봅니다. 예제의 척도는 정확도였지만, 정답이 숫자(예: 다음 전압값)인 과제에서는 예측이 정답에서 얼마나 벗어났는지로 채점합니다. 그림 5의 <span class="math inline">\(R^2\)</span>(설명된 분산)가 그런 척도로, 1이면 완벽, 0이면 평균값만 계속 찍는 것과 같음, 음수면 그보다 못함입니다. 여기서 <strong>분산</strong>은 값들이 평균에서 얼마나 흩어져 있는지를 재는 수로, 평균과의 차이를 제곱해 평균 낸 것입니다. 예: 정답이 1, 2, 3, 6이면 평균 3, 차이 −2, −1, 0, 3, 제곱 4, 1, 0, 9 → 합 14를 개수 4로 나누면 3.5입니다. 예측이 평균 3만 계속 찍으면 남는 오차(차이 제곱의 평균)가 바로 이 분산이라 <span class="math inline">\(R^2 = 0\)</span>, 오차가 0이면 <span class="math inline">\(R^2 = 1\)</span>입니다. 식으로는 <span class="math inline">\(R^2 = 1 - (\text{예측 오차 제곱의 평균}) \div (\text{분산})\)</span>이고, 예측이 평균보다 더 엉뚱하면 오차가 분산보다 커져 <span class="math inline">\(R^2\)</span>가 음수가 됩니다. 정식 설명은 <a href="../days/d13a.html#b-variance-share">Day 22 기초: 분산·상관²</a>.</p>
+<p><span id="s-r2-sim"></span><strong>작은 숫자로 — 외우기가 얼마나 쉬운가.</strong> 먼저 그림 5의 세로축부터 봅니다. 예제의 척도는 정확도였지만, 정답이 숫자(예: 다음 전압값)인 과제에서는 예측이 정답에서 얼마나 벗어났는지로 채점합니다. 그림 5의 <span class="math inline">\(R^2\)</span>(설명된 분산)가 그런 척도로, 1이면 완벽, 0이면 평균값만 계속 찍는 것과 같음, 음수면 그보다 못함입니다. 여기서 <strong>분산</strong>(variance)은 값들이 평균에서 얼마나 흩어져 있는지를 재는 수로, 평균과의 차이를 제곱해 평균 낸 것입니다. 예: 정답이 1, 2, 3, 6이면 평균 3, 차이 −2, −1, 0, 3, 제곱 4, 1, 0, 9 → 합 14를 개수 4로 나누면 3.5입니다. 예측이 평균 3만 계속 찍으면 남는 오차(차이 제곱의 평균)가 바로 이 분산이라 <span class="math inline">\(R^2 = 0\)</span>, 오차가 0이면 <span class="math inline">\(R^2 = 1\)</span>입니다. 식으로는 <span class="math inline">\(R^2 = 1 - (\text{예측 오차 제곱의 평균}) \div (\text{분산})\)</span>이고, 예측이 평균보다 더 엉뚱하면 오차가 분산보다 커져 <span class="math inline">\(R^2\)</span>가 음수가 됩니다. 정식 설명은 <a href="../days/d13a.html#b-variance-share">Day 23 기초: 분산·상관²</a>.</p>
 <details class="deep">
 <summary>
 심화 · 분산을 n으로 나누나 n−1로 나누나
@@ -899,7 +948,10 @@ window.Quarto = {
 </details>
 <p><strong>그림 5가 하는 일.</strong> 정답과 <strong>아무 관계 없는</strong> 잡음 숫자 <span class="math inline">\(p\)</span>개를 상태로 주고, 훈련 표본 40개로 직선을 맞춘 시뮬레이션입니다. 가로축은 readout이 쓰는 상태 수 <span class="math inline">\(p\)</span>, 빨간 선이 훈련 데이터, 파란 선이 held-out 데이터의 <span class="math inline">\(R^2\)</span>입니다.</p>
 <figure class="fig figure"><img src="../assets/img/d06/fig3-heldout.svg" alt="정답과 무관한 잡음 상태 p개로 표본 40개에 직선을 맞출 때, 훈련 R²는 p가 늘수록 0.74까지 오르지만 held-out R²는 0 아래로 떨어지는 시뮬레이션 곡선" class="figure-img"><figcaption><b>그림 5.</b> 정답과 무관한 잡음 상태로도 훈련 성능은 오른다(난수 시뮬레이션, 순수 Python, seed 7, 20회 평균. seed는 무작위 숫자를 만드는 시작값으로, 같은 seed면 다시 돌려도 같은 숫자가 나와 결과를 재현할 수 있다). 가로축은 readout이 쓰는 상태 수 $p$, 세로축은 $R^2$. 그림 속 '특징'(feature)은 readout이 받는 숫자 하나하나, 여기서는 상태값이다. 빨간 선이 훈련 데이터, 파란 선이 held-out 데이터(−1 아래는 −1로 잘라 표시). 상태 수가 표본 수(40)에 가까워질수록 외우기가 쉬워진다. (Claude가 계산해 그림)</figcaption></figure>
-<p><strong>그림을 따라가며.</strong> 상태 수가 30개가 되면 훈련 데이터에서는 <span class="math inline">\(R^2\)</span> = 0.74까지 오르지만 held-out에서는 −1 아래로 떨어집니다. 아무 정보 없는 상태로도 훈련 성능은 오릅니다. <strong>왜 오르나.</strong> 가중치 하나는 예측을 움직이는 손잡이 하나입니다. 손잡이가 많을수록 훈련 표본 하나하나의 예측을 따로 맞춰 줄 여지가 커지고, 손잡이 수가 표본 수와 같아지면 모든 훈련 표본을 정확히 맞출 수 있습니다(<span class="math inline">\(p = n\)</span>이면 훈련 <span class="math inline">\(R^2 = 1\)</span>). 정답과 무관한 잡음으로 맞추면 훈련 <span class="math inline">\(R^2\)</span>는 대략 <span class="math inline">\(p/n\)</span> 근처가 됩니다(30/40 = 0.75; 시뮬레이션 값 0.74) <span class="tag tag-interp">해석</span>. 그런데 이 '맞음'은 훈련 표본의 우연한 값에 맞춘 것이라 새 표본에서는 엉뚱한 예측을 내고, 평균값만 찍을 때보다 오차가 커지므로 held-out <span class="math inline">\(R^2\)</span>는 음수가 됩니다. 2-1에서 이름을 붙인 <strong>과적합</strong>(훈련 데이터의 우연한 잡음까지 외워 훈련 성능만 오르고 새 데이터에서는 나빠지는 것)이 이것이고, 조절할 숫자(상태 수·가중치 수)가 표본 수에 가까워질수록 쉽게 일어납니다. 그러니 <strong>훈련 정확도는 증거가 아니고</strong>, held-out 정확도와 함께 상태 수·표본 수·readout 크기를 적어야 합니다.</p>
+<p><strong>그림을 따라가며.</strong> 상태 수가 30개가 되면 훈련 데이터에서는 <span class="math inline">\(R^2\)</span> = 0.74까지 오르지만 held-out에서는 −1 아래로 떨어집니다. 아무 정보 없는 상태로도 훈련 성능은 오릅니다.</p>
+<p><strong>왜 오르나.</strong> 가중치 하나는 예측을 움직이는 손잡이 하나입니다. 손잡이가 많을수록 훈련 표본 하나하나의 예측을 따로 맞춰 줄 여지가 커지고, 손잡이 수가 표본 수와 같아지면 모든 훈련 표본을 정확히 맞출 수 있습니다(<span class="math inline">\(p = n\)</span>이면 훈련 <span class="math inline">\(R^2 = 1\)</span>). 정답과 무관한 잡음으로 맞추면 훈련 <span class="math inline">\(R^2\)</span>는 대략 <span class="math inline">\(p/n\)</span> 근처가 됩니다(30/40 = 0.75; 시뮬레이션 값 0.74) <span class="tag tag-interp">해석</span>.</p>
+<p>그런데 이 '맞음'은 훈련 표본의 우연한 값에 맞춘 것이라 새 표본에서는 엉뚱한 예측을 내고, 평균값만 찍을 때보다 오차가 커지므로 held-out <span class="math inline">\(R^2\)</span>는 음수가 됩니다.</p>
+<p>2-1에서 이름을 붙인 <strong>과적합</strong>(훈련 데이터의 우연한 잡음까지 외워 훈련 성능만 오르고 새 데이터에서는 나빠지는 것)이 이것이고, 조절할 숫자(상태 수·가중치 수)가 표본 수에 가까워질수록 쉽게 일어납니다. 그러니 <span class="key"><strong>훈련 정확도는 증거가 아니고</strong>, held-out 정확도와 함께 상태 수·표본 수·readout 크기를 적어야 합니다.</span></p>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/EuBBz3bI-aA?start=83&amp;rel=0" title="영상: Machine Learning Fundamentals: Bias and Variance" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:23–6:36, 약 5분 · 전체 6분 36초, 영어·자막).</b> StatQuest with Josh Starmer, "Machine Learning Fundamentals: Bias and Variance". <b>볼 이유:</b> 1:23 '훈련/시험 데이터 나누기' 챕터부터, 직선 맞추기와 구불구불한 선 맞추기를 같은 데이터에 해 보고 3:40 '시험 데이터에서의 성능' 챕터에서 둘의 순위가 뒤집히는 장면을 보여 준다. 5:10 챕터가 overfit(과적합)의 정의다. 그림 5에서 빨간 선(훈련)과 파란 선(held-out)이 갈라지는 것과 같은 현상을 손으로 그린 예로 본다. <b>보고 답할 질문:</b> 구불구불한 선이 훈련 데이터에서 오차 0을 낸 것은 무엇을 증명하고, 무엇을 증명하지 못하나? 그림 5의 상태 수 p를 늘리는 것은 영상의 어느 쪽 선에 해당하나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터(영상 내용은 미검증)</span></div></div>
 <p><span id="s-baseline-kinds"></span><strong>기준선(5단) — 소자가 없었다면.</strong> held-out에서 90%가 나왔다고 합시다. 그것이 소자 덕분인지, readout 덕분인지는 <strong>소자를 빼고 같은 readout</strong>을 돌려 봐야 압니다. 2-1에서 두 종류(원시 입력, 정적 소자)를 봤고, 논문에서 쓰는 종류는 더 있습니다.</p>
 <ul>
@@ -908,11 +960,17 @@ window.Quarto = {
 <li><strong>디지털 RC 기준선</strong>: 같은 RC 구조를 소자 없이 컴퓨터의 숫자 계산으로 돌린다(소자의 반응을 흉내 낸 수식을 잡음 없이 계산). 하드웨어 잡음 때문에 잃은 정확도를 잰다(Liang의 "비슷한 구성이면 소프트웨어 RC가 대개 낫다" <span class="src">Liang 2024, p.201</span>).</li>
 <li><strong>MCU + 작은 신경망</strong>(<a href="../days/d05.html#b-sensor-node">Day 9 기초: MCU</a>, 센서 옆에 붙는 작은 범용 컴퓨터 칩): 시스템 수준의 경쟁자.</li>
 </ul>
-<p><span id="s-evidence-levels"></span>Singh 2026은 보고 항목표에 "귀속 대조(attribution controls)"로 입력/원시 센서 기준선, 기억을 최소화한 정적 소자 기준선, 같은 readout을 쓴 동적 reservoir, 마스크(입력을 소자에 넣기 전에 곱하는 고정된 패턴, Day 16–17에서 다룸)·채널 수를 바꾸거나 빼 보는 절제 실험(한 요소를 빼고 성능이 얼마나 변하는지 보는 실험)을 넣고, 그 목적을 "유용한 성능이 이력에 의존하는 물리 동역학에 달려 있는지 시험하는 것"이라고 적습니다. <span class="src">Singh 2026, p.20, Table 3</span> 같은 글은 증거의 수준을 셋으로 나눕니다. reservoir <strong>기능의 시연</strong>은 재현 가능한 상태 + 적절한 계산 지표, 그 기능을 <strong>물리 기판에 귀속</strong>하는 것(기판, substrate는 여기서 웨이퍼가 아니라 계산을 맡은 물리계 자체, 곧 소재·소자를 말하고, 귀속은 성능의 공을 그것에 돌린다는 뜻)은 추가로 입력 부호화·특징 수·상태 획득(언제·어떻게 상태를 재서 숫자로 가져오는지)·readout 복잡도의 효과와 구별하는 대조 실험, <strong>기술적 배치 가능성</strong>은 거기에 안정성·편차·환경·보정·지연(입력에서 답까지 걸리는 시간)·에너지 경계(어디까지의 에너지를 셌는지 밝힌 범위)까지. "주장의 강도는 제시된 증거 수준과 일치해야 한다." <span class="src">Singh 2026, p.19</span></p>
-<p><strong>시스템 비용(6단).</strong> 소자 바깥의 변환 회로·readout·대기 전력까지 넣은 비용입니다(<a href="../days/d04b.html#ch-periphery">Day 8 6구간</a>, Day 30–31). 오늘은 사다리에 자리만 둡니다.</p>
+<p><span id="s-evidence-levels"></span><strong>소자에 공을 돌리려면.</strong> 기준선 한두 개와 비교해 '나았다'는 것과, 그 성능이 <strong>소자의 물리 동역학 덕</strong>이라는 것은 다른 주장입니다. 뒤의 주장을 하려면 입력 부호화·특징 수·readout 크기를 바꿔도 차이가 남는지 보는 대조 실험이 더 필요하다고 Singh 2026은 씁니다. <span class="src">Singh 2026, p.19–20</span> 이 대조 실험의 목록과 Singh이 나눈 증거의 세 수준은 예제를 이해한 뒤 아래 심화에서 봅니다.</p>
+<details class="deep">
+<summary>
+심화 · 귀속 대조(attribution controls)와 증거의 세 수준 (Singh 2026, 다시 볼 때)
+</summary>
+<p>Singh 2026은 보고 항목표에 "귀속 대조(attribution controls)"로 입력/원시 센서 기준선, 기억을 최소화한 정적 소자 기준선, 같은 readout을 쓴 동적 reservoir, 마스크(입력을 소자에 넣기 전에 곱하는 고정된 패턴, Day 17–18에서 다룸)·채널 수를 바꾸거나 빼 보는 절제 실험(한 요소를 빼고 성능이 얼마나 변하는지 보는 실험)을 넣고, 그 목적을 "유용한 성능이 이력에 의존하는 물리 동역학에 달려 있는지 시험하는 것"이라고 적습니다. <span class="src">Singh 2026, p.20, Table 3</span> 같은 글은 증거의 수준을 셋으로 나눕니다. reservoir <strong>기능의 시연</strong>은 재현 가능한 상태 + 적절한 계산 지표, 그 기능을 <strong>물리 기판에 귀속</strong>하는 것(기판, substrate는 여기서 웨이퍼가 아니라 계산을 맡은 물리계 자체, 곧 소재·소자를 말하고, 귀속은 성능의 공을 그것에 돌린다는 뜻)은 추가로 입력 부호화·특징 수·상태 획득(언제·어떻게 상태를 재서 숫자로 가져오는지)·readout 복잡도의 효과와 구별하는 대조 실험, <strong>기술적 배치 가능성</strong>은 거기에 안정성·편차·환경·보정·지연(입력에서 답까지 걸리는 시간)·에너지 경계(어디까지의 에너지를 셌는지 밝힌 범위)까지. "주장의 강도는 제시된 증거 수준과 일치해야 한다." <span class="src">Singh 2026, p.19</span></p>
+</details>
+<p><strong>시스템 비용(6단).</strong> 소자 바깥의 변환 회로·readout·대기 전력까지 넣은 비용입니다(<a href="../days/d04b.html#ch-periphery">Day 8 6구간</a>, Day 31–32). 오늘은 사다리에 자리만 둡니다.</p>
 </div>
 <div class="think">
-<p>그림 5의 논리를 내 실험에 적용해 보세요. 소자 하나에서 가상 노드(소자 하나의 응답을 여러 시점에서 읽어, 각 시점의 값을 별개의 상태처럼 쓰는 것. 정식 설명은 Day 16–17) 200개를 읽고, 과제 표본이 100개라면, 아무 정보 없는 소자로도 훈련 정확도가 얼마나 나올까요? held-out을 떼어 두지 않으면 무엇을 증명할 수 없나요?</p>
+<p>그림 5의 논리를 내 실험에 적용해 보세요. 소자 하나에서 virtual node(소자 하나의 응답을 여러 시점에서 읽어, 각 시점의 값을 별개의 상태처럼 쓰는 것. 정식 설명은 Day 17–18) 200개를 읽고, 과제 표본이 100개라면, 아무 정보 없는 소자로도 훈련 정확도가 얼마나 나올까요? held-out을 떼어 두지 않으면 무엇을 증명할 수 없나요?</p>
 </div>
 <div class="quiz" data-day="d06" data-set="2-end"></div>
 <div class="keypoints">
@@ -931,15 +989,16 @@ window.Quarto = {
 <div class="goal">
 <p>PPF 곡선이 주는 정보(시간상수)와 주지 않는 정보(과제 성능)를 나누고, "비선형 + 서서히 잊음이면 계산"이라는 흔한 비약을 정확한 문장으로 고칠 수 있게 된다.</p>
 </div>
-<p><strong>무엇을 볼지.</strong> 1구간 그림 1은 간격 두 개(10 ms, 1 s)만 봤습니다. 간격을 1 ms부터 10 s까지 바꿔 가며 PPF 지수를 이으면 <strong>PPF 곡선</strong>이 되고, 많은 시냅스 소자 논문이 이것을 첫 그림으로 냅니다. 그림 6의 왼쪽이 같은 모형 소자의 곡선입니다. 가로축은 로그 축입니다(눈금 한 칸이 10배; <a href="../days/d01a.html#b-log-axis">Day 1 기초: 로그 축</a>). 1 ms부터 10 s까지 네 자릿수를 한 그림에 담으려고 씁니다. 파란 점과 주황 점이 그림 1의 두 경우입니다. 오른쪽은 이 곡선으로 알 수 있는 것과 없는 것의 목록입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d06/fig2-ppf-limits.svg" alt="펄스 간격 Δt(로그)에 대한 PPF 지수 곡선(이중 지수, τ₁ 50 ms, τ₂ 0.5 s)에 10 ms 188%, 1 s 105% 두 점을 표시하고, 이 곡선에서 알 수 있는 것(기억, 시간상수 두 개)과 알 수 없는 것(누적이 비선형인지, 상태 구별, 재현성, held-out, 기준선, 시스템 비용)의 목록" class="figure-img"><figcaption><b>그림 6.</b> PPF 곡선 하나가 말해 주는 것과 말해 주지 않는 것(계산). 왼쪽 곡선은 가로축 펄스 간격(로그), 세로축 PPF 지수(%). 모형식 $100\,(1 + 0.6\,e^{-\Delta t/\tau_1} + 0.4\,e^{-\Delta t/\tau_2})$이며 특정 소자의 측정값이 아니다. 파란 점(10 ms, 188%)과 주황 점(1 s, 105%)이 그림 1의 두 경우다. 오른쪽 아래 목록의 첫 줄은 이 구간에서 설명하는 비선형 시험이고, 나머지가 2구간 사다리(그림 4)의 2–6단이다. (Claude가 계산해 그림)</figcaption></figure>
-<p><span id="s-ppf-formula"></span><strong>식 읽기.</strong> 곡선은 <span class="math inline">\(100\,(1 + 0.6\,e^{-\Delta t/\tau_1} + 0.4\,e^{-\Delta t/\tau_2})\)</span>입니다. 100은 첫 응답을 100%로 둔 것, 0.6과 0.4는 빠른 성분과 느린 성분이 간격이 0에 가까울 때 얹는 몫입니다. <span class="math inline">\(e^{-\Delta t/\tau}\)</span>는 간격이 τ만큼 길어질 때마다 남은 몫이 약 0.37배(<span class="math inline">\(1/e\)</span>)로 줄어드는 감쇠이고, 이 τ가 <strong>시간상수</strong>입니다. <a href="../days/d03a.html#s-lif-decay">Day 5 2-3의 LIF</a>에서 본 감쇠 계수 <span class="math inline">\(0.9 = e^{-\Delta t/\tau}\)</span>와 같은 꼴입니다(거기서 Δt는 계산 한 칸의 길이, 여기서는 펄스 간격). 이 곡선에는 시간상수가 둘(τ₁ = 50 ms, τ₂ = 0.5 s) 있어서 <strong>이중 지수</strong>(빨리 사라지는 성분과 천천히 사라지는 성분, 두 지수 감쇠의 합)라 부르고, 실제 논문들도 흔히 이렇게 피팅합니다. 숫자로: Δt = 10 ms면 <span class="math inline">\(0.6 \times 0.82 + 0.4 \times 0.98 \approx 0.88\)</span>이 남아 188%, Δt = 1 s면 빠른 성분은 사실상 0이고 느린 성분은 <span class="math inline">\(0.4 \times 0.14 \approx 0.05\)</span>라 105%입니다. 간격이 아주 길면 100%(첫 응답과 같음), 아주 짧으면 200%에 다가갑니다. 1구간 그림 1·2와 2구간 예제의 전류값이 모두 이 식에서 나왔습니다.</p>
+<p>2구간의 사다리에서 PPF는 맨 아래 0단(현상 재현)이었습니다. 이 구간은 그 0단을 자세히 봅니다. PPF 곡선 하나에서 무엇을 알 수 있고 무엇을 알 수 없나.</p>
+<p><strong>무엇을 볼지.</strong> 1구간 그림 1은 간격 두 개(10 ms, 1 s)만 봤습니다. 간격을 1 ms부터 10 s까지 바꿔 가며 PPF 지수를 이으면 <strong>PPF 곡선</strong>이 되고, 많은 시냅스 소자 논문이 이것을 첫 그림으로 냅니다. 그림 6(a)가 같은 모형 소자의 곡선입니다. 가로축은 로그 축입니다(눈금 한 칸이 10배; <a href="../days/d01a.html#b-log-axis">Day 1 기초: 로그 축</a>). 1 ms부터 10 s까지 네 자릿수를 한 그림에 담으려고 씁니다. 파란 점과 주황 점이 그림 1의 두 경우입니다. 그림 6(b)는 이 곡선으로 알 수 있는 것과 없는 것의 목록입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig2-ppf-limits.svg" alt="펄스 간격 Δt(로그)에 대한 PPF 지수 곡선(이중 지수, τ₁ 50 ms, τ₂ 0.5 s)에 10 ms 188%, 1 s 105% 두 점을 표시하고, 이 곡선에서 알 수 있는 것(기억, 시간상수 두 개)과 알 수 없는 것(누적이 비선형인지, 상태 구별, 재현성, held-out, 기준선, 시스템 비용)의 목록" class="figure-img"><figcaption><b>그림 6.</b> PPF 곡선 하나가 말해 주는 것과 말해 주지 않는 것(계산). <b>(a)</b> PPF 곡선. 가로축 펄스 간격(로그), 세로축 PPF 지수(%). 모형식 $100\,(1 + 0.6\,e^{-\Delta t/\tau_1} + 0.4\,e^{-\Delta t/\tau_2})$이며 특정 소자의 측정값이 아니다. 파란 점(10 ms, 188%)과 주황 점(1 s, 105%)이 그림 1의 두 경우다. <b>(b)</b> 이 곡선으로 알 수 있는 것과 없는 것. 아래 목록의 첫 줄은 이 구간에서 설명하는 비선형 시험이고, 나머지가 2구간 사다리(그림 4)의 2–6단이다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-ppf-formula"></span><strong>식 읽기.</strong> 곡선은 <span class="math inline">\(100\,(1 + 0.6\,e^{-\Delta t/\tau_1} + 0.4\,e^{-\Delta t/\tau_2})\)</span>입니다. 100은 첫 응답을 100%로 둔 것, 0.6과 0.4는 빠른 성분과 느린 성분이 간격이 0에 가까울 때 얹는 몫입니다. <span class="math inline">\(e^{-\Delta t/\tau}\)</span>는 간격이 τ만큼 길어질 때마다 남은 몫이 약 0.37배(<span class="math inline">\(1/e\)</span>)로 줄어드는 감쇠이고, 이 τ가 <strong>시간상수</strong>입니다. <a href="../days/d03a.html#s-lif-decay">Day 5 2-3의 LIF</a>에서 본 decay factor <span class="math inline">\(0.9 = e^{-\Delta t/\tau}\)</span>와 같은 꼴입니다(거기서 Δt는 계산 한 칸의 길이, 여기서는 펄스 간격). 이 곡선에는 시간상수가 둘(τ₁ = 50 ms, τ₂ = 0.5 s) 있어서 <strong>이중 지수</strong>(double exponential: 빨리 사라지는 성분과 천천히 사라지는 성분, 두 지수 감쇠의 합)라 부르고, 실제 논문들도 흔히 이렇게 피팅합니다. 숫자로: Δt = 10 ms면 <span class="math inline">\(0.6 \times 0.82 + 0.4 \times 0.98 \approx 0.88\)</span>이 남아 188%, Δt = 1 s면 빠른 성분은 사실상 0이고 느린 성분은 <span class="math inline">\(0.4 \times 0.14 \approx 0.05\)</span>라 105%입니다. 간격이 아주 길면 100%(첫 응답과 같음), 아주 짧으면 200%에 다가갑니다. 1구간 그림 1·2와 2구간 예제의 전류값이 모두 이 식에서 나왔습니다.</p>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/mlJec5yy3fU?start=587&amp;rel=0" title="영상: Short-Term Plasticity &amp; Binomial Synapse Explained (Paired-Pulse Facilitation &amp; Depression)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 9:47–14:09, 약 4분 · 전체 15분, 영어·자동 자막).</b> Science With Tal, "Short-Term Plasticity &amp; Binomial Synapse Explained (Paired-Pulse Facilitation &amp; Depression)". <b>볼 이유:</b> 9:47 'Short term plasticity (PPF, PPD)' 챕터부터 생물 시냅스에서 펄스 두 개 중 두 번째 응답이 커지거나(PPF) 작아지는(PPD) 현상을 설명한다. 이온 소자 논문의 PPF 그림이 흉내 내는 원래 현상이 무엇인지 보는 용도다. 2:27–9:47 'binomial model'은 신경전달물질 방출 확률 모형이라 건너뛰어도 된다. 작은 개인 교육 채널이다. <b>보고 답할 질문:</b> 영상에서 PPF는 무엇이 '남아서' 생기나? 그 남은 것이 사라지는 시간이 그림 6의 τ에 해당한다면, 그것만으로 사다리의 몇 단까지 올라갔다고 말할 수 있나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터·설명(영상 내용은 미검증)</span></div></div>
 <div class="stop-point">
 <p>여기까지: 그림 6의 곡선에서 τ₁·τ₂가 무엇인지, Δt = 10 ms에서 188%가 식으로 어떻게 나오는지 말할 수 있다. 다음: 이 곡선이 증명하는 것과 못 하는 것.</p>
 </div>
-<p><span id="s-ppf-proves"></span><strong>이 곡선이 증명하는 것.</strong> 소자 상태에 최근 입력의 일부 정보가 두 시간척도로 남는다는 것. 이것은 <a href="../days/d03b.html#s-time-dynamics">Day 6 5구간</a>의 "시간 동역학"이 <strong>있다</strong>는 증거이고, Day 1–2의 fading memory(서서히 잊음)의 가장 단순한 측정입니다. Liang이 물리 노드의 두 기본 성질로 든 nonlinearity(비선형)와 dynamics(시간 동역학) <span class="src">Liang 2024, Fig. 3a</span> 가운데 <strong>dynamics의 존재 증명</strong>입니다.</p>
-<p><span id="s-ppf-nonlinear"></span><strong>비선형은 이 곡선만으로 증명되지 않는다.</strong> 간격이 짧을수록 두 번째 응답이 커지는 것은 선형 회로에서도 일어납니다. 저항과 커패시터(<a href="../days/d01a.html#b-capacitor">Day 1 기초: 커패시터</a>)를 이은 회로에 펄스를 주면 커패시터가 충전되고, 펄스가 끝나면 저항을 통해 천천히 방전합니다. 다 방전하기 전에 두 번째 펄스가 오면 남은 전하 위에 새 충전이 얹혀 두 번째 봉우리가 더 높아집니다. 이 회로는 입력을 두 배로 하면 출력도 두 배인 <strong>선형</strong> 회로인데도 PPF 지수가 100%를 넘습니다(Day 28–29에서 161%를 손으로 계산합니다). 비선형인지 보려면 '두 펄스를 함께 준 응답'과 '각 펄스를 따로 준 응답을 시간을 맞춰 더한 것'을 비교해야 합니다. 둘이 같으면 선형(겹침 원리, <a href="../days/d10a.html#b-nonlinearity">Day 16 기초: 선형과 비선형</a>), 다르면 비선형입니다(<a href="../days/d16b.html#ch-rc-circuit">Day 29 4구간</a>). <span class="tag tag-interp">해석</span></p>
+<p><span id="s-ppf-proves"></span><strong>이 곡선이 증명하는 것.</strong> <span class="key">소자 상태에 최근 입력의 일부 정보가 두 시간척도(timescale)로 남는다는 것, 곧 기억이 <strong>있다</strong>는 것까지입니다.</span> 이것은 <a href="../days/d03b.html#s-time-dynamics">Day 6 5구간</a>의 "시간 동역학"이 <strong>있다</strong>는 증거이고, Day 1–2의 fading memory(서서히 잊음)의 가장 단순한 측정입니다. Liang이 물리 노드의 두 기본 성질로 든 nonlinearity(비선형)와 dynamics(시간 동역학) <span class="src">Liang 2024, Fig. 3a</span> 가운데 <strong>dynamics의 존재 증명</strong>입니다.</p>
+<p><span id="s-ppf-nonlinear"></span><strong>비선형은 이 곡선만으로 증명되지 않는다.</strong> <span class="key">간격이 짧을수록 두 번째 응답이 커지는 것은 선형 회로에서도 일어납니다.</span> 저항과 커패시터(<a href="../days/d01a.html#b-capacitor">Day 1 기초: 커패시터</a>)를 이은 회로에 펄스를 주면 커패시터가 충전되고, 펄스가 끝나면 저항을 통해 천천히 방전합니다. 다 방전하기 전에 두 번째 펄스가 오면 남은 전하 위에 새 충전이 얹혀 두 번째 봉우리가 더 높아집니다. 이 회로는 입력을 두 배로 하면 출력도 두 배인 <strong>선형</strong> 회로인데도 PPF 지수가 100%를 넘습니다(Day 29–30에서 161%를 손으로 계산합니다). 비선형인지 보려면 '두 펄스를 함께 준 응답'과 '각 펄스를 따로 준 응답을 시간을 맞춰 더한 것'을 비교해야 합니다. 둘이 같으면 선형(superposition principle, superposition principle; <a href="../days/d10a.html#b-nonlinearity">Day 17 기초: 선형과 비선형</a>), 다르면 비선형입니다(<a href="../days/d16b.html#ch-rc-circuit">Day 30 4구간</a>). <span class="tag tag-interp">해석</span></p>
 <p><strong>이 곡선이 증명하지 못하는 것</strong> (사다리 2–6단):</p>
 <ul>
 <li>서로 다른 입력열이 <strong>서로 다른 상태</strong>로 끝나는가(구별). PPF는 "두 펄스"라는 한 종류의 입력만 봅니다.</li>
@@ -961,7 +1020,7 @@ window.Quarto = {
 <div class="keypoints">
 <ul>
 <li>PPF 곡선은 기억(시간상수)의 <strong>존재</strong>를 보인다. 사다리 0단. 모형: <span class="math inline">\(100(1 + 0.6e^{-\Delta t/\tau_1} + 0.4e^{-\Delta t/\tau_2})\)</span>, τ₁ 50 ms·τ₂ 0.5 s, 10 ms에서 188%.</li>
-<li>'간격이 짧을수록 커짐'은 선형 저항–커패시터 회로에서도 나오므로 비선형의 증거가 아니다(겹침 시험이 필요, Day 28–29).</li>
+<li>'간격이 짧을수록 커짐'은 선형 저항–커패시터 회로에서도 나오므로 비선형의 증거가 아니다(겹침 시험이 필요, Day 29–30).</li>
 <li>증명하지 못하는 것: 상태 구별·재현, held-out 성능, 기준선 대비 우위, 시스템 비용.</li>
 <li>고친 문장(readout을 학습하는 경우): 최근 입력의 일부 정보가 상태에 남는다. 과제에 필요한 차이가 읽을 수 있는 상태들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며, 기준선보다 나은지는 따로 검증한다.</li>
 </ul>
@@ -972,11 +1031,12 @@ window.Quarto = {
 <div class="goal">
 <p>폴더의 다섯 사례를 사다리에 놓고, "기준선이 있다/없다"와 "기준선의 종류"를 구별해 읽으며, 소자가 기준선보다 <strong>낮은</strong> 사례에서 무엇을 배울지 말할 수 있게 된다.</p>
 </div>
+<p>1–3구간에서 사다리를 작은 예제로 만들었습니다. 이 구간은 같은 사다리로 실제 논문을 읽어 보는 자리이고, 1–3구간을 마친 뒤 다시 와도 됩니다. 처음 읽을 때는 그림 7, 사례 1(원시 입력 기준선)과 사례 2(디지털 RC 기준선), 끝의 '다섯 사례에서 배울 것'만 읽어도 핵심은 잡힙니다. 사례 3–5는 기준선 수치가 불확실하거나 조건이 불명이거나 과제가 없는 경우로, 다시 볼 때 하나씩 판정해 봅니다.</p>
 <p><strong>무엇을 볼지.</strong> 그림 7은 폴더 사례 넷의 소자 성능(색 막대)과 기준선(회색 막대)을 나란히 놓은 것입니다. 각 사례 이름 아래 회색 글씨가 그 기준선의 <strong>종류</strong>(2-3의 네 종류 중 무엇인지)이고, 오른쪽이 한 줄 판정입니다. 사례를 하나씩 읽은 뒤 다시 이 그림으로 돌아옵니다.</p>
 <figure class="fig figure"><img src="../assets/img/d06/fig4-baselines.svg" alt="Lee 2025 npj UC(소자 90.01 vs 원시 입력 기준선 91.32), Zhong 2022(96.6 vs 디지털 RC 98.2), Koh 2022(90.2, 기준선 수치 미확인), Chen 2025(RC 88 vs SVM 약 61)의 정확도 막대 비교" class="figure-img"><figcaption><b>그림 7.</b> 폴더 사례의 소자 성능과 기준선(정확도 %, 논문이 적은 값). 색 막대가 소자, 회색 막대가 기준선. 기준선의 **종류**가 사례마다 달라 막대 길이를 서로 비교할 수는 없다. Chen 2025의 SVM 값은 Fig. 4g에서 눈으로 읽은 근삿값이고 본문에 숫자가 없다. (Claude가 그림)</figcaption></figure>
 <section id="s-case-lee" class="level4">
 <h4 class="anchored" data-anchor-id="s-case-lee">사례 1. Lee 2025 (npj Unconv. Comput.) — 원시 입력 기준선이 있고, 소자가 그보다 낮다</h4>
-<p>HfO₂ 2단자 memristor(흐른 전하나 걸린 전압의 이력에 따라 저항이 바뀌는 소자)로 N-MNIST(손글씨 숫자를 사건 카메라, 곧 밝기가 바뀐 픽셀만 그 순간에 기록하는 카메라로 찍어 시간 프레임 열로 만든 과제)를 풀었습니다. <strong>구조를 그려 보면</strong> 이렇습니다. N-MNIST 숫자 하나는 28×28 픽셀 그림 네 장(시간 프레임 넷)이고, 픽셀 한 자리에는 네 프레임의 값(0 또는 1)이 차례로 있습니다. 이 네 값을 펄스 네 개(1은 3 V·2 ms 펄스, 0은 0 V)로 소자 하나에 차례로 넣고, 끝난 뒤 전도도 하나를 읽습니다. 기초 2의 4-bit 예와 같은 방식입니다. 784(= 28×28) 자리마다 이렇게 하면 상태 784개가 나옵니다(실험에서는 소자 10개를 돌려 가며 썼습니다). <span class="src">Lee 2025 (npj), p.6</span> 데이터 펄스 사이 쉬는 구간에 걸어 두는 전압(바이어스)으로 시간상수를 조절하고, 서로 다른 바이어스 세 개로 얻은 상태를 이어 붙인 방법("Multiple")으로 90.01%를 얻었고, 저자들은 이것이 "네 개의 원시 시간 프레임 그림을 직접 입력으로 쓴 소프트웨어 기준선 91.32%"와 비슷하다고 씁니다. 기준선의 readout은 3136×10(원시 프레임 네 장 × 784 픽셀 = 숫자 3136개를 받아 숫자 0–9의 점수 10개를 내는 가중치 표, 가중치 31,360개), 소자 쪽은 2352×10(바이어스 셋 × 784 = 상태 2352개)으로 더 작습니다. <span class="src">Lee 2025 (npj), p.8</span> 사다리로 읽으면: 1·2·3·4단을 갖췄고, 5단의 <strong>원시 입력 기준선</strong>이 있으며, 소자가 기준선보다 1.3%p <strong>낮습니다</strong>. 이 논문의 소자 기여는 정확도가 아니라 readout 크기 감소(가중치 25% 절감)입니다. 또 이 과제는 픽셀마다 16가지 4-bit 패턴을 서로 다른 전도도로 바꿔 주기만 하면 되는 '찾아보기 표(룩업)'형이라 펄스 네 개보다 긴 기억이 필요 없고, 동적 과제(MSO, Mackey–Glass: 시간에 따라 변하는 신호의 다음 값을 맞히는 예측 과제, Day 26–27)는 시뮬레이션입니다. <span class="tag tag-interp">해석</span> <span class="prov">Claude의 논문 정리 노트 기준</span></p>
+<p>HfO₂ 2단자 memristor(흐른 전하나 걸린 전압의 이력에 따라 저항이 바뀌는 소자)로 N-MNIST(손글씨 숫자를 사건 카메라(event camera), 곧 밝기가 바뀐 픽셀만 그 순간에 기록하는 카메라로 찍어 시간 프레임 열로 만든 과제)를 풀었습니다. <strong>구조를 그려 보면</strong> 이렇습니다. N-MNIST 숫자 하나는 28×28 픽셀 그림 네 장(시간 프레임 넷)이고, 픽셀 한 자리에는 네 프레임의 값(0 또는 1)이 차례로 있습니다. 이 네 값을 펄스 네 개(1은 3 V·2 ms 펄스, 0은 0 V)로 소자 하나에 차례로 넣고, 끝난 뒤 전도도 하나를 읽습니다. 기초 2의 4-bit 예와 같은 방식입니다. 784(= 28×28) 자리마다 이렇게 하면 상태 784개가 나옵니다(실험에서는 소자 10개를 돌려 가며 썼습니다). <span class="src">Lee 2025 (npj), p.6</span> 데이터 펄스 사이 쉬는 구간에 걸어 두는 전압(바이어스)으로 시간상수를 조절하고, 서로 다른 바이어스 세 개로 얻은 상태를 이어 붙인 방법("Multiple")으로 90.01%를 얻었고, 저자들은 이것이 "네 개의 원시 시간 프레임 그림을 직접 입력으로 쓴 소프트웨어 기준선 91.32%"와 비슷하다고 씁니다. 기준선의 readout은 3136×10(원시 프레임 네 장 × 784 픽셀 = 숫자 3136개를 받아 숫자 0–9의 점수 10개를 내는 가중치 표, 가중치 31,360개), 소자 쪽은 2352×10(바이어스 셋 × 784 = 상태 2352개)으로 더 작습니다. <span class="src">Lee 2025 (npj), p.8</span> 사다리로 읽으면: 1·2·3·4단을 갖췄고, 5단의 <strong>원시 입력 기준선</strong>이 있으며, 소자가 기준선보다 1.3%p <strong>낮습니다</strong>. 이 논문의 소자 기여는 정확도가 아니라 readout 크기 감소(가중치 25% 절감)입니다. 또 이 과제는 픽셀마다 16가지 4-bit 패턴을 서로 다른 전도도로 바꿔 주기만 하면 되는 '찾아보기 표(룩업)'형이라 펄스 네 개보다 긴 기억이 필요 없고, 동적 과제(MSO, Mackey–Glass: 시간에 따라 변하는 신호의 다음 값을 맞히는 예측 과제, Day 27–28)는 시뮬레이션입니다. <span class="tag tag-interp">해석</span> <span class="prov">Claude의 논문 정리 노트 기준</span></p>
 <figure class="fig paper figure"><img src="../assets/img/papers/lee2025npj-fig6a-d.png" alt="Lee 2025 npj UC Fig. 6a·c·d: a는 시간척도에 대한 N-MNIST 정확도(Multiple·Single·Conventional과 점선 소프트웨어 기준선 91.32%), c는 단일/그룹 읽기의 정확도 막대, d는 간격을 무작위로 섞은 데이터에서 네 읽기 방식의 정확도 막대" class="figure-img"><figcaption><b>원문 그림.</b> Lee et al., <a href="https://doi.org/10.1038/s44335-025-00043-3" target="_blank"><i>npj Unconv. Comput.</i> 2025, 2, 27</a>, Fig. 6a·c·d(b는 생략), p.7. 볼 것: <b>a</b>에서 가로축은 데이터 간격(시간척도, 로그), 세로축은 정확도(%). 맨 위 **점선이 소프트웨어 기준선(원시 4프레임 직접 입력, 91.32%)**이고, 검은 선(Multiple)이 그 아래 90.01%까지 다가간다. 파란 선(Conventional, 바이어스 없음)은 간격이 소자의 고유 τ를 넘으면 떨어진다. 즉 소자 쪽은 기준선을 넘지 못했고, 기여는 시간척도 조절과 readout 크기 감소다. <b>c</b>는 이웃 셀 여러 개를 묶어 한 번에 읽으면(2×2, 4×4) 정확도가 얼마나 떨어지는지, <b>d</b>는 펄스 간격을 0.14–100 ms에서 무작위로 섞은 데이터에서 읽기 방식별 정확도(흰 막대가 바이어스 없는 Conventional). 측정 데이터(readout은 소프트웨어). <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
 </section>
 <section id="s-case-zhong" class="level4">
@@ -988,17 +1048,22 @@ window.Quarto = {
 </section>
 <section id="s-case-koh" class="level4">
 <h4 class="anchored" data-anchor-id="s-case-koh">사례 3. Koh 2022 (Sci. Rep.) — 저자가 "기준선보다 낮다"고 적었다 (폴더 밖)</h4>
+<details class="deep">
+<summary>
+심화 · 사례 3 펼치기(폴더 밖 논문, 기준선 수치 미확인 — 다시 볼 때)
+</summary>
 <p>이온액체–전극 계면의 유전 이완(전압을 바꾼 뒤 계면의 이온 배치가 새 평형으로 천천히 따라가며 전류가 서서히 줄어드는 현상)을 reservoir로 쓴 논문입니다(<em>Sci. Rep.</em> 12, 6958). 폴더에 원문이 없고, 웹 본문에 따르면 MNIST 정확도 87.3–90.2%(이온액체 종류별)이고, 기준선은 입력 픽셀 400개를 readout에 직접 넣은 것(원시 입력 기준선)이며, 저자들이 물리 reservoir의 분류 정확도가 <strong>기준선보다 낮게 추정되었다</strong>고 서술하고 그 대가로 readout 가중치 수가 줄었다고 설명합니다. <span class="src">Koh 2022</span> <span class="tag tag-fact">확인</span> <strong>기준선의 정확도 값은 원문 그림(Fig. 6a)에만 있어 확인하지 못했습니다</strong> <span class="tag tag-unverified">미확인</span>. <span class="prov">서지는 웹으로 확인. 정확도 숫자, 기준선의 구성, '기준선보다 낮게 추정' 문장은 Claude가 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9051109/">PMC9051109 웹 본문</a>과 대조</span> 이 사례의 가치는 "소재 → 시간상수"의 사슬(점도와 τ의 멱법칙, 곧 τ가 점도의 몇 제곱에 비례하는 관계)은 견고한데 "시간상수 → 계산 성능"의 사슬은 약했다는 데 있습니다. Phase 4·5에서 내 소재를 볼 때의 반면교사입니다. <span class="tag tag-interp">해석</span> <span class="prov">Claude의 논문 정리 노트 기준</span></p>
+</details>
 </section>
 <section id="s-case-chen" class="level4">
 <h4 class="anchored" data-anchor-id="s-case-chen">사례 4. Chen 2025 (Adv. Mater., 읽음) — 선형 기준선(SVM)이 있고, 소자가 그보다 높다. 단 조건이 불명</h4>
-<p>Day 7–8에서 본 이온겔 나노섬유 시냅스. MNIST 표본 1000개의 픽셀 밝기를 0–10 pA 전류 크기로 바꿔 1차원 펄스 열로 넣고, 가상 노드(2-3의 '생각하기'에서 본, 한 소자의 응답을 여러 시점에서 읽은 값들)를 읽어 로지스틱 회귀(직선 맞추기를 분류용으로 바꾼 것: 각 답일 확률을 내도록 가중치를 맞춤) readout을 표본의 80%로 학습했습니다. <span class="src">Chen 2025, p.10</span> 결과는 88% 이상이고, "선형 분류 시스템(SVM)"의 혼동 행렬(정답별로 어떤 답을 냈는지 센 표; 아래 원문 그림 e·f)과 비교해 reservoir의 비선형 변환 뒤 정확도가 크게 올랐다고 씁니다. <span class="src">Chen 2025, p.7–8, Fig. 4e–g</span> SVM(support vector machine)은 점들을 직선(초평면)으로 나누는 선형 분류기이므로 이것은 <strong>선형 기준선</strong>이고, 이 묶음에서 드물게 기준선이 <strong>있는</strong> 사례입니다. 다만 SVM의 입력이 원시 픽셀인지, 가상 노드 수와 특징 차원이 맞춰졌는지 본문에서 분명하지 않습니다. 또 Fig. 4e·f의 혼동 행렬 제목이 "SVM_train", "RC_train"이라 훈련 데이터의 결과로 읽히고, g의 곡선이 떼어 둔 20%에서 잰 값인지도 본문에 적혀 있지 않습니다. <span class="tag tag-interp">해석</span> 기준선의 "종류"와 "조건"을 모르면 막대 길이 차이를 소자 기여로 읽을 수 없습니다.</p>
-<figure class="fig paper figure"><img src="../assets/img/papers/chen2025-fig4e-g.png" alt="Chen 2025 Fig. 4e–g: e는 SVM의 MNIST 혼동 행렬(대각선이 흐림), f는 RC의 혼동 행렬(대각선이 진함), g는 가상 노드(표본) 수에 대한 RC(빨강, 88%까지)와 SVM(청록, 약 60%)의 정확도 곡선" class="figure-img"><figcaption><b>원문 그림.</b> Chen et al., <a href="https://doi.org/10.1002/adma.202419013" target="_blank"><i>Adv. Mater.</i> 2025, 37, 2419013</a>, Fig. 4e–g, p.7. 볼 것: <b>e·f</b>는 혼동 행렬(가로축 예측, 세로축 정답; 대각선이 진할수록 맞힘). <b>g</b>의 가로축은 가상 노드(표본) 수, 세로축 정확도. 빨간 RC 곡선이 88% 근처, 청록 SVM 곡선이 60% 근처에서 포화한다. 이것이 "선형 기준선 대비 소자의 기여"로 읽히려면 SVM의 입력이 무엇이었는지(원시 픽셀? 같은 가상 노드?)를 알아야 하는데 본문은 밝히지 않는다. e·f 위의 제목 "_train"은 훈련 데이터의 혼동 행렬이라는 뜻으로 읽힌다(held-out 결과가 아님). 측정 소자 응답 + 소프트웨어 readout. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p>Day 7–8에서 본 이온겔 나노섬유 시냅스. MNIST 표본 1000개의 픽셀 밝기를 0–10 pA 전류 크기로 바꿔 1차원 펄스 열로 넣고, virtual node(2-3의 '생각하기'에서 본, 한 소자의 응답을 여러 시점에서 읽은 값들)를 읽어 로지스틱 회귀(logistic regression: 직선 맞추기를 분류용으로 바꾼 것: 각 답일 확률을 내도록 가중치를 맞춤) readout을 표본의 80%로 학습했습니다. <span class="src">Chen 2025, p.10</span> 결과는 88% 이상이고, "선형 분류 시스템(SVM)"의 혼동 행렬(confusion matrix: 정답별로 어떤 답을 냈는지 센 표; 아래 원문 그림 e·f)과 비교해 reservoir의 비선형 변환 뒤 정확도가 크게 올랐다고 씁니다. <span class="src">Chen 2025, p.7–8, Fig. 4e–g</span> SVM(support vector machine)은 점들을 직선(초평면)으로 나누는 선형 분류기이므로 이것은 <strong>선형 기준선</strong>이고, 이 묶음에서 드물게 기준선이 <strong>있는</strong> 사례입니다. 다만 SVM의 입력이 원시 픽셀인지, virtual node 수와 특징 차원이 맞춰졌는지 본문에서 분명하지 않습니다. 또 Fig. 4e·f의 혼동 행렬 제목이 "SVM_train", "RC_train"이라 훈련 데이터의 결과로 읽히고, g의 곡선이 떼어 둔 20%에서 잰 값인지도 본문에 적혀 있지 않습니다. <span class="tag tag-interp">해석</span> 기준선의 "종류"와 "조건"을 모르면 막대 길이 차이를 소자 기여로 읽을 수 없습니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/chen2025-fig4e-g.png" alt="Chen 2025 Fig. 4e–g: e는 SVM의 MNIST 혼동 행렬(대각선이 흐림), f는 RC의 혼동 행렬(대각선이 진함), g는 virtual node(표본) 수에 대한 RC(빨강, 88%까지)와 SVM(청록, 약 60%)의 정확도 곡선" class="figure-img"><figcaption><b>원문 그림.</b> Chen et al., <a href="https://doi.org/10.1002/adma.202419013" target="_blank"><i>Adv. Mater.</i> 2025, 37, 2419013</a>, Fig. 4e–g, p.7. 볼 것: <b>e·f</b>는 혼동 행렬(가로축 예측, 세로축 정답; 대각선이 진할수록 맞힘). <b>g</b>의 가로축은 virtual node(표본) 수, 세로축 정확도. 빨간 RC 곡선이 88% 근처, 청록 SVM 곡선이 60% 근처에서 포화한다. 이것이 "선형 기준선 대비 소자의 기여"로 읽히려면 SVM의 입력이 무엇이었는지(원시 픽셀? 같은 virtual node?)를 알아야 하는데 본문은 밝히지 않는다. e·f 위의 제목 "_train"은 훈련 데이터의 혼동 행렬이라는 뜻으로 읽힌다(held-out 결과가 아님). 측정 소자 응답 + 소프트웨어 readout. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
 </section>
 <section id="s-case-fan" class="level4">
 <h4 class="anchored" data-anchor-id="s-case-fan">사례 5. Fan 2026 (Nat. Commun.)과 Wu 2025 (AFM, 읽음) — 학습·평가 과제가 없다</h4>
-<p>Fan 2026은 제목이 "neuromorphic ionic computing"이지만, 본문에 분류·예측·RC 과제와 정확도가 없고 <span class="prov">원문 텍스트 검색으로 확인</span>, 시냅스 기능 모사(PPD: 두 번째 응답이 오히려 작아지는 짝펄스 억제, SRDP: 자극을 주는 빈도에 따라 변화 방향이 달라지는 가소성, 기억·망각, 연상학습: 두 자극을 함께 주다 보면 한 자극만으로도 반응하게 되는 것)와 5×4 어레이의 이미지 저장·소거가 전부입니다. <span class="src">Fan 2026</span> Wu 2025는 압력·빛 자극의 전위 응답을 ADC로 숫자로 바꿔 MCU를 거쳐 컴퓨터 소프트웨어로 보내고, 신호가 미리 정한 세 문턱(Th-1, Th-2, Th-3)을 넘으면 그 명령이 다시 MCU를 거쳐 로봇팔을 움직입니다. <span class="src">Wu 2025, p.8</span> 문턱 비교는 "답"을 내긴 하지만 학습한 readout도, held-out도, 기준선도 없으므로 사다리 1단(과제: 문턱 넘김)에서 멈춥니다. 1구간의 고정 문턱 1.5와 같은 종류입니다. 두 논문 모두 그 자체로 잘못은 아닙니다. 사다리의 어느 단에 있는지를 <strong>제목이 아니라 그림으로</strong> 읽어야 한다는 것이 오늘의 요점입니다.</p>
-<p><span id="s-case-lessons"></span><strong>다섯 사례에서 배울 것.</strong> (1) 기준선의 종류가 분명한 폴더 사례에서 소자는 기준선보다 <strong>낮거나 비슷</strong>합니다(Lee, Zhong, Koh. 단 Koh는 기준선의 정확도 값을 그림에서만 읽을 수 있음). 소자가 기준선보다 높게 나온 Chen은 기준선의 조건이 불명확합니다. 이것은 Liang의 "비슷한 구성이면 소프트웨어 RC가 대개 낫다" <span class="src">Liang 2024, p.201</span>와 맞고, Liang은 같은 자리에서 물리 RC의 장점을 정확도가 아니라 시스템 복잡도·전력 소모·학습 비용·계산 속도 같은 데서 찾습니다 <span class="src">Liang 2024, p.201</span>. 그러니 소자의 가치를 정확도가 아닌 곳(readout 크기, 전력, 시간척도 조절)에서 재야 할 수 있습니다. <span class="tag tag-interp">해석</span> (2) 기준선이 "있다"만으로는 부족하고 <strong>종류와 조건</strong>이 적혀야 합니다(Chen). (3) 제목의 "computing"과 사다리의 단은 별개입니다(Fan).</p>
+<p>Fan 2026은 제목이 "neuromorphic ionic computing"이지만, 본문에 분류·예측·RC 과제와 정확도가 없고 <span class="prov">원문 텍스트 검색으로 확인</span>, 시냅스 기능 모사(PPD: paired-pulse depression, 두 번째 응답이 오히려 작아지는 짝펄스 억제, SRDP: 자극을 주는 빈도에 따라 변화 방향이 달라지는 가소성, 기억·망각, 연상학습: 두 자극을 함께 주다 보면 한 자극만으로도 반응하게 되는 것)와 5×4 어레이의 이미지 저장·소거가 전부입니다. <span class="src">Fan 2026</span> Wu 2025는 압력·빛 자극의 전위 응답을 ADC로 숫자로 바꿔 MCU를 거쳐 컴퓨터 소프트웨어로 보내고, 신호가 미리 정한 세 문턱(Th-1, Th-2, Th-3)을 넘으면 그 명령이 다시 MCU를 거쳐 로봇팔을 움직입니다. <span class="src">Wu 2025, p.8</span> 문턱 비교는 "답"을 내긴 하지만 학습한 readout도, held-out도, 기준선도 없으므로 사다리 1단(과제: 문턱 넘김)에서 멈춥니다. 1구간의 고정 문턱 1.5와 같은 종류입니다. 두 논문 모두 그 자체로 잘못은 아닙니다. <span class="key">사다리의 어느 단에 있는지를 <strong>제목이 아니라 그림으로</strong> 읽어야 한다는 것이 오늘의 요점입니다.</span></p>
+<p><span id="s-case-lessons"></span><strong>다섯 사례에서 배울 것.</strong> (1) 기준선의 종류가 분명한 폴더 사례에서 소자는 기준선보다 <strong>낮거나 비슷</strong>합니다(Lee, Zhong, Koh. 단 Koh는 기준선의 정확도 값을 그림에서만 읽을 수 있음). 소자가 기준선보다 높게 나온 Chen은 기준선의 조건이 불명확합니다. 이것은 Liang의 "비슷한 구성이면 소프트웨어 RC가 대개 낫다" <span class="src">Liang 2024, p.201</span>와 맞고, Liang은 같은 자리에서 physical reservoir computing의 장점을 정확도가 아니라 시스템 복잡도·전력 소모·학습 비용·계산 속도 같은 데서 찾습니다 <span class="src">Liang 2024, p.201</span>. 그러니 소자의 가치를 정확도가 아닌 곳(readout 크기, 전력, 시간척도 조절)에서 재야 할 수 있습니다. <span class="tag tag-interp">해석</span> (2) <span class="key">기준선이 "있다"만으로는 부족하고 <strong>종류와 조건</strong>이 적혀야 합니다</span>(Chen). (3) 제목의 "computing"과 사다리의 단은 별개입니다(Fan).</p>
 <div class="quiz" data-day="d06" data-set="4-check"></div>
 <div class="think">
 <p>Lee 2025처럼 소자가 원시 입력 기준선보다 <strong>낮은</strong> 결과가 나왔을 때, 그 논문이 여전히 가치 있다고 주장할 수 있는 근거는 무엇일까요(readout 크기? 전력? 시간척도?). 내 소자 논문이 같은 상황이 되면 나는 무엇을 근거로 쓸 수 있을지 한 줄 적어 보세요.</p>
@@ -1018,17 +1083,23 @@ window.Quarto = {
 <div class="goal">
 <p>Day 1–10에서 배운 것을 오늘의 연구 질문("PPF를 보인 내 소자는 계산 소자인가")에 다시 잇고, 근거 태그(<span class="tag tag-fact">확인</span>/[해석]/[가설]/[미확인])가 몰린 곳을 "가장 약한 고리"로 지목하며, 사전 테스트·먼저 만들어 보기와 달라진 가정을 표로 적을 준비를 마친다. 이 구간에는 새 내용이 없다.</p>
 </div>
-<p><span id="s-chain"></span><strong>주장 사슬.</strong> 여섯 날의 결론을 한 줄씩 이으면 그림 8입니다. 위에서 아래로 읽으며, 각 날이 오늘의 질문에 무엇을 보태는지 봅니다.</p>
+<p>지금까지 1–4구간은 오늘의 질문 하나(PPF를 보인 소자는 계산하는가)를 다뤘습니다. 이 구간은 그 답을 Phase 1의 앞선 날들과 잇는 자리이고, 1–3구간을 마친 뒤 내 답(Phase 종합 양식)을 쓸 때 펼쳐 봐도 됩니다.</p>
+<p><span id="s-chain"></span><strong>주장 사슬.</strong> 여섯 날의 결론을 한 줄씩 이으면 그림 8입니다. 위에서 아래로 읽으며, 각 날이 오늘의 질문에 무엇을 보태는지 봅니다. 날마다의 근거는 아래 접은 목록에 있습니다.</p>
 <figure class="fig figure"><img src="../assets/img/d06/fig5-phase1-chain.svg" alt="Day 1–2부터 Day 10까지 여섯 주장(뉴로모픽은 여러 줄기의 우산이고 이온 소자 논문 다수는 회색지대 → 기존 컴퓨터가 불리할 수 있는 계산 → 뇌의 원리는 조건부 존재 증명 → 소자 사양은 용도별 → 적합한 자리는 좁고 경쟁자는 MCU → 현상 재현은 계산이 아님)을 세로로 잇고, 각 고리의 근거 상태([해석], [미확인], [가설])를 오른쪽에 적은 그림" class="figure-img"><figcaption><b>그림 8.</b> Phase 1의 주장 사슬과 각 고리의 근거 상태. [가설]과 [미확인]이 몰린 곳이 "가장 약한 고리" 후보다. 어느 고리를 고를지는 내 답에서 정한다. (Claude가 그림, 모식도)</figcaption></figure>
+<details class="deep">
+<summary>
+여섯 고리를 하나씩: 각 날의 결론과 근거 (내 답을 쓸 때)
+</summary>
 <ul>
 <li><strong>Day 1–2</strong> (<a href="../days/d01b.html#ch-branches">Day 2 2구간</a>): '뉴로모픽'은 여러 줄기를 덮는 우산 이름이고, 폴더의 이온 소자 논문 상당수는 시냅스 현상을 재현한 (마) 회색지대, 곧 계산 시스템의 <strong>부품 후보</strong>에 있다 <span class="tag tag-interp">해석</span>. → 오늘의 질문은 그 부품 후보가 언제 "계산하는 소자"가 되느냐였다.</li>
 <li><strong>Day 3–4</strong> (<a href="../days/d02b.html#ch-walls">Day 4 7구간</a>): 기다릴 수 없는 입력, 칩 안에 못 두는 큰 가중치·이력, 정밀도 양보 가능이 함께 맞는 계산에서 기존 컴퓨터가 특히 불리할 수 있고, 디지털 기준선과 같은 조건으로 비교해야 한다 <span class="tag tag-interp">해석</span>. 근거: 리뷰의 정성 서술 + 수치는 대부분 <span class="tag tag-unverified">미확인</span>. → 오늘 2구간의 '기준선'이 그 비교의 형식이다.</li>
 <li><strong>Day 5–6</strong> (<a href="../days/d03b.html#ch-plasticity">Day 6 6구간</a>): 뇌의 원리(co-location: 기억과 계산을 같은 자리에서, 사건 구동: 입력이 올 때만 동작, 아날로그, 시간 동역학, 가소성)는 조건이 맞으면 비용을 줄일 수 있다는 <strong>조건부 존재 증명</strong>이다. "뇌 약 20 W"는 공개 문헌으로 확인되는 총전력이지만 작업당 효율을 증명하지는 않는다 <span class="tag tag-fact">확인</span> <span class="prov">뇌는 몸무게의 약 2%이지만 몸 산소·열량 소비의 약 20%: <a href="https://doi.org/10.1073/pnas.172399499">Raichle &amp; Gusnard 2002, <em>PNAS</em> 99, 10237</a>; 약 20 W: <a href="https://doi.org/10.1073/pnas.2107022118">Balasubramanian 2021, <em>PNAS</em> 118, e2107022118</a></span>. → 오늘의 PPF는 그중 '시간 동역학'이 소자에 있다는 0단 증거다.</li>
-<li><strong>Day 7–8</strong> (<a href="../days/d04a.html#ch-vmm">Day 7 2–5구간</a>): crossbar(가로·세로 도선의 교차점마다 소자를 둔 격자)·LIF(입력을 적분하다 문턱을 넘으면 발화하고 리셋하며, 그사이 누설로 조금씩 줄어드는 뉴런 모형)·시냅스 소자의 사양은 용도(추론: 학습이 끝난 모델로 답 내기 / 학습 / RC 노드)마다 다르다. 근거: 리뷰 인용; 내 소자의 수치는 없음. → 오늘의 readout은 Day 7–8의 행렬–벡터 곱이고, 사다리 2단의 '구별·재현'은 Day 8 4구간의 상태 수 조건이다.</li>
+<li><strong>Day 7–8</strong> (<a href="../days/d04a.html#ch-vmm">Day 7 2–5구간</a>): crossbar(가로·세로 도선의 교차점마다 소자를 둔 격자)·LIF(입력을 적분하다 문턱을 넘으면 발화하고 리셋하며, 그사이 누설로 조금씩 줄어드는 뉴런 모형)·시냅스 소자의 사양은 응용(application: 추론(inference), 곧 학습이 끝난 모델로 답 내기 / 학습(training) / RC 노드)마다 다르다. 근거: 리뷰 인용; 내 소자의 수치는 없음. → 오늘의 readout은 Day 7–8의 행렬–벡터 곱이고, 사다리 2단의 '구별·재현'은 Day 8 4구간의 상태 수 조건이다.</li>
 <li><strong>Day 9</strong> (<a href="../days/d05.html#ch-fit-conditions">Day 9 1구간</a>): 적합한 자리는 좁고(실시간·희소: 입력이 드문드문 옴·근사 허용·τ 정합: 소자 시간상수가 신호의 시간척도와 맞음·다음 단계가 아날로그라 숫자 변환을 생략할 수 있음), 경쟁자는 MCU + 작은 신경망이다. 근거: MCU 비교가 폴더에 없음 <span class="tag tag-hypo">가설</span>. → 사다리 5단 기준선의 한 종류이자 6단 시스템 비용의 비교 상대다.</li>
-<li><strong>Day 10</strong>: 현상 재현은 계산이 아니다. readout을 학습하는 계산(RC식)을 검증하려면 과제·읽을 수 있는 상태·학습한 readout·held-out·기준선·시스템 비용을 보여야 한다(해독 규칙을 미리 정한 계산에는 학습한 readout·held-out이 그대로 적용되지 않는다). 근거: Stepney·Singh·Liang 인용.</li>
+<li><strong>Day 10</strong>: <span class="key">현상 재현은 계산이 아니다.</span> readout을 학습하는 계산(RC식)을 검증하려면 과제·읽을 수 있는 상태·학습한 readout·held-out·기준선·시스템 비용을 보여야 한다(해독 규칙을 미리 정한 계산에는 학습한 readout·held-out이 그대로 적용되지 않는다). 근거: Stepney·Singh·Liang 인용.</li>
 </ul>
-<p><span id="s-three-sentences"></span><strong>"왜 필요한가" 세 문장의 형식.</strong> Phase 종합 양식의 첫 칸("이 Phase의 질문들에 대한 한 단락 답")은 이 사슬을 세 문장으로 줄이는 자리입니다. 모범 문장은 주지 않습니다. 다만 형식은 이렇습니다. 첫 문장은 <strong>어떤 계산에서</strong> 기존 컴퓨터가 불리한지(Day 3–4의 조건), 둘째 문장은 <strong>어느 원리가 어떤 조건에서</strong> 그 비용을 줄이는지(Day 5–8), 셋째 문장은 <strong>그 조건을 만족하는 자리가 어디이고 거기서 무엇을 보여야 하는지</strong>(Day 9–10). 세 문장 모두에 "항상"이 없어야 하고, 적어도 하나에는 <span class="tag tag-unverified">미확인</span> 또는 <span class="tag tag-hypo">가설</span>이 붙어야 정직합니다.</p>
+</details>
+<p><span id="s-three-sentences"></span><strong>"왜 필요한가" 세 문장의 형식.</strong> Phase 종합 양식의 첫 칸("이 Phase의 질문들에 대한 한 단락 답")은 이 사슬을 세 문장으로 줄이는 자리입니다. 모범 문장은 주지 않습니다. 다만 형식은 이렇습니다. 첫 문장은 <strong>어떤 계산에서</strong> 기존 컴퓨터가 불리한지(Day 3–4의 조건), 둘째 문장은 <strong>어느 원리가 어떤 조건에서</strong> 그 비용을 줄이는지(Day 5–8), 셋째 문장은 <strong>그 조건을 만족하는 자리가 어디이고 거기서 무엇을 보여야 하는지</strong>(Day 9–10). <span class="key">세 문장 모두에 "항상"이 없어야 하고, 적어도 하나에는 근거가 약하다는 표시(<span class="tag tag-unverified">미확인</span> 또는 <span class="tag tag-hypo">가설</span>)가 붙어야 정직합니다.</span></p>
 <p><span id="s-weakest-link"></span><strong>가장 약한 고리.</strong> 그림 8의 오른쪽 열을 보고 고릅니다. Claude의 판단으로는 Day 9(MCU 비교 부재)와 Day 3–4(수치 <span class="tag tag-unverified">미확인</span>)가 후보이지만 <span class="tag tag-interp">해석</span>, 내 답에서 다른 고리를 고를 수 있습니다. 고른 고리에 대해 "무엇을 확인하면 이 고리가 <span class="tag tag-fact">확인</span>으로 바뀌는가"를 한 줄 적는 것이 Day 11–12 이후의 숙제가 됩니다.</p>
 <section id="s-changed-assumptions" class="level4">
 <h4 class="anchored" data-anchor-id="s-changed-assumptions">이 Phase에서 바뀌었을 가정 — 회고 안내</h4>
@@ -1036,19 +1107,24 @@ window.Quarto = {
 <ol type="1">
 <li>Day 1–10의 <strong>사전 테스트·먼저 만들어 보기</strong>를 다시 엽니다. 거기 적힌 문장 중 지금 보면 고치고 싶은 것을 고릅니다. 흔한 후보: "컴퓨터는 더하기마다 메모리를 왕복한다"(Day 3–4), "뇌는 20 W라 효율적이다"(Day 5–6), "선형인 소자가 좋다"(Day 7–8), "뉴로모픽은 저전력이 필요한 곳에 쓴다"(Day 9), "PPF를 보이면 뉴로모픽 소자다"(Day 10).</li>
 <li>각 가정이 <strong>어느 날, 어느 글</strong>에서 바뀌었는지와 <strong>바꾼 근거</strong>(쪽수 표기)를 적습니다. 근거가 <span class="tag tag-interp">해석</span>이면 그렇게 적습니다. 바뀌지 않은 가정도 적어도 됩니다. "읽고 나서도 그대로"는 그 자체로 정보입니다.</li>
-<li>바뀐 가정 중 하나는 반드시 <strong>내 연구 방향에 관한 것</strong>이어야 합니다. 예: "내 소재는 (라) 물리 RC의 자원에 가깝다"가 Day 7–8·Day 9를 지나며 어떻게 조건이 붙었는지.</li>
+<li>바뀐 가정 중 하나는 반드시 <strong>내 연구 방향에 관한 것</strong>이어야 합니다. 예: "내 소재는 (라) physical reservoir computing의 자원에 가깝다"가 Day 7–8·Day 9를 지나며 어떻게 조건이 붙었는지.</li>
 </ol>
 </section>
 <section id="s-objection" class="level4">
 <h4 class="anchored" data-anchor-id="s-objection">오늘의 반론</h4>
-<p>가장 강한 반론: <strong>"사다리를 다 올라간 논문은 폴더에 하나도 없다. 그렇다면 기준이 너무 높은 것 아닌가? 현상 재현 논문도 분야를 키우는 데 기여했다."</strong> 응답의 재료는 2-3에서 이미 봤습니다. Singh 2026은 "모든 원리 증명 연구가 모든 요구를 만족할 필요는 없다. 다만 주장의 강도는 제시된 증거 수준과 일치해야 한다"고 씁니다. <span class="src">Singh 2026, p.19</span> 즉 기준은 "모든 논문이 6단까지"가 아니라 "자기가 어느 단에 있는지 제목과 결론이 정직하게 말할 것"입니다. 내 답에서 이 반론에 어떻게 설지 적으세요.</p>
+<details class="deep">
+<summary>
+심화 · 오늘의 반론 펼치기(1–4구간을 이해한 뒤)
+</summary>
+<p>가장 강한 반론: <strong>"사다리를 다 올라간 논문은 폴더에 하나도 없다. 그렇다면 기준이 너무 높은 것 아닌가? 현상 재현 논문도 분야를 키우는 데 기여했다."</strong> 응답의 재료는 2-3의 심화(증거의 세 수준)에 있습니다. Singh 2026은 "모든 원리 증명(proof-of-principle) 연구가 모든 요구를 만족할 필요는 없다. 다만 주장의 강도는 제시된 증거 수준과 일치해야 한다"고 씁니다. <span class="src">Singh 2026, p.19</span> 즉 기준은 "모든 논문이 6단까지"가 아니라 "자기가 어느 단에 있는지 제목과 결론이 정직하게 말할 것"입니다. 내 답에서 이 반론에 어떻게 설지 적으세요.</p>
+</details>
 <div class="think">
 <p>Phase 1을 마치며, 내 소재(polyelectrolyte 접합, ionic diode, depletion층)에 대해 지금 적을 수 있는 가장 정직한 문장은 무엇인가요? "____ 현상을 보일 수 있다(0단). ____ 과제에서 ____ 기준선보다 나은지는 아직 모른다(5단)." 빈칸을 채우고, 채우지 못한 빈칸을 '아직 모르는 것'에 옮기세요.</p>
 </div>
 <div class="quiz" data-day="d06" data-set="5-check"></div>
 <div class="keypoints">
 <ul>
-<li>Phase 1의 사슬: 우산 이름과 회색지대(Day 1–2) → 벽(Day 3–4) → 조건부 존재 증명(Day 5–6) → 용도별 사양(Day 7–8) → 좁은 자리와 MCU 경쟁자(Day 9) → 학습형(RC식) 계산의 검증 조건(Day 10).</li>
+<li>Phase 1의 사슬: 우산 이름과 회색지대(Day 1–2) → 벽(Day 3–4) → 조건부 존재 증명(Day 5–6) → 응용별 사양(Day 7–8) → 좁은 자리와 MCU 경쟁자(Day 9) → 학습형(RC식) 계산의 검증 조건(Day 10).</li>
 <li>"왜 필요한가" 세 문장: 어떤 계산에서 / 어느 원리가 어떤 조건에서 / 어느 자리에서 무엇을 보여야. "항상" 금지, [미확인]·<span class="tag tag-hypo">가설</span> 하나 이상.</li>
 <li>가장 약한 고리는 근거 태그가 몰린 곳. 바뀐 가정은 사전 테스트·먼저 만들어 보기와 대조해 표로.</li>
 <li>반론: 기준이 너무 높다 → 주장의 강도와 증거 수준의 일치가 기준이다 <span class="src">Singh 2026, p.19</span>.</li>
@@ -1161,7 +1237,7 @@ window.Quarto = {
 <p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
 <ul>
 <li>Stepney 2024, <em>Natural Computing</em> 23, 665–685 (Readable papers3). p.666–667(물리계가 계산한다는 것의 정의, 실패 유형), p.669(독립 시험 데이터), §7(벤치마크와 과제 독립 지표 — Phase 3).</li>
-<li>Singh 2026, <em>Adv. Mater.</em> e74897 (Readable papers3). p.3 Figure 2 캡션(함정 목록), p.6(겉보기 기억), p.8(재현되는 상태가 먼저), p.18(기준선 차이는 한 부품의 몫으로 나눌 수 없음), p.19(증거 수준), p.20 Table 3(귀속 대조, 에너지 경계). Day 30–31·Day 32의 핵심 자료.</li>
+<li>Singh 2026, <em>Adv. Mater.</em> e74897 (Readable papers3). p.3 Figure 2 캡션(함정 목록), p.6(겉보기 기억), p.8(재현되는 상태가 먼저), p.18(기준선 차이는 한 부품의 몫으로 나눌 수 없음), p.19(증거 수준), p.20 Table 3(귀속 대조, 에너지 경계). Day 31–32·Day 33–34의 핵심 자료.</li>
 <li>Lee 2025, <em>npj Unconv. Comput.</em> 2, 27 (Readable papers3). p.7–8 Fig. 6(원시 입력 기준선 91.32%).</li>
 <li>Fan 2026, <em>Nat. Commun.</em> 17, 8635 (Readable papers3). 노트(notes/Fan_2026_NatCommun.md)와 원문 텍스트 검색: 분류·정확도 같은 계산 과제가 없음.</li>
 <li>Aluru 2026, <em>Science</em> 392, 592–601. 요약면(synaptomimetic), p.593(단순 전도도 이력을 넘어서).</li>
@@ -1173,12 +1249,13 @@ window.Quarto = {
 </ul>
 </section>
 </div>
-<script type="application/json" id="quiz-d06">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 바로 돌아갈 설명·작은 예제의 앵커. refLabel: '다시 볼 곳' 링크에 보일 짧은 이름. why에는 정답 이유와 흔한 혼동을 적는다.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "내 소자(또는 상상한 이온 소자)가 '시냅스처럼 반응한다'를 넘어 '계산한다'고 다른 사람을 설득하려면 어떤 실험 결과가 필요할지, 순서대로 상자 세 개를 그려 각 상자에 '무엇을 넣고, 무엇을 재고, 무엇과 비교하나'를 적어 보세요. 마지막에 '이 결과가 나오면 설득 실패'인 경우를 하나 적으세요.", "items": [{"id": "d06-p01", "ref": "#b-what-is-computing", "refLabel": "기초 1: 사각형의 네 단계", "type": "ox", "q": "자극을 주면 어떤 물질이든 무언가 변하므로, 모든 물리 현상은 '계산'이라고 부를 수 있다.", "a": false, "why": "물리계가 계산한다고 말하려면 문제의 입력을 물리 입력으로 바꿔 넣고(부호화), 물리가 움직인 뒤 상태를 읽어(해독) 얻은 답이 원래 문제의 답과 허용 오차 안에서 맞아야 합니다. 물리가 움직인 것만으로는 네 단계 중 하나뿐입니다(1구간 그림 2)."}, {"id": "d06-p02", "ref": "#s-fail-types", "refLabel": "실패 유형 (b): 해독 단계에 숨은 계산", "type": "mc", "q": "돌멩이의 온도 변화를 '읽는 방법'을 아주 복잡하게 짜서 원하는 답이 나오게 만들었다. 이것을 '돌멩이가 계산했다'고 말할 수 없는 가장 큰 이유는?", "options": ["돌멩이는 전기가 통하지 않아 신호를 읽을 수 없어서", "온도는 연속적인 값이라 0과 1의 답이 될 수 없어서", "답을 만드는 일을 읽는 단계(다른 컴퓨터)가 대신 해서", "돌멩이의 온도 변화가 계산에 쓰기에는 너무 느려서"], "a": 2, "why": "원하는 계산 전체를 출력 해석 단계에 숨기면 사각형을 닫는 데 다른 컴퓨터가 필요해집니다. 이것이 '계산한다'는 주장이 실패하는 전형적인 유형입니다. 전기·연속값·속도는 계산 여부를 가르는 기준이 아닙니다(1구간)."}, {"id": "d06-p03", "ref": "#s-baseline-kinds", "refLabel": "기준선: 소자를 빼고 같은 readout", "type": "ox", "q": "이온 소자를 거친 신호로 분류 정확도 90%를 얻었다면, 그 숫자만으로 소자가 분류 계산에 기여했다고 말할 수 있다.", "a": false, "why": "소자 없이 원래 입력을 같은 판독 규칙에 그대로 넣은 기준선과 비교해야 소자의 기여를 말할 수 있습니다. 원래 입력만으로도 90% 이상이 나오면 소자는 기여하지 않은 것입니다(2구간)."}, {"id": "d06-p04", "ref": "#s-r2-sim", "refLabel": "그림 5: 잡음 상태로 맞춘 훈련 R²", "type": "mc", "q": "정답과 아무 관계없는 무작위 숫자 30개를 특징으로 삼아, 표본 40개에 직선 모형을 맞췄다. 맞춘 바로 그 표본에서 맞춤 정도(R², 1이면 완벽, 0이면 평균만 찍는 수준)는 어떻게 나올 가능성이 큰가?", "options": ["거의 0 — 무관한 숫자들이므로 맞출 수 없다", "정확히 0.5 — 무작위라 반은 맞고 반은 틀린다", "음수 — 무관한 숫자는 예측을 오히려 망친다", "0.7 안팎 — 무관한 숫자로도 꽤 맞춰진다"], "a": 3, "why": "특징 수가 표본 수에 가까우면 맞춘 그 데이터에서는 우연히 잘 맞습니다(시뮬레이션에서 훈련 R² 약 0.74, 대략 특징 수 ÷ 표본 수). 음수가 나오는 것은 맞출 때 쓰지 않은 새 데이터 쪽입니다. 그래서 훈련에 쓰지 않고 떼어 둔 데이터의 성능만 증거가 됩니다(2구간)."}, {"id": "d06-p05", "ref": "#s-ppf-proves", "refLabel": "PPF 곡선이 증명하는 것과 못 하는 것", "type": "mc", "q": "두 번 연달아 자극하면 두 번째 반응이 첫 번째보다 크고, 두 자극 간격이 길수록 그 차이가 줄어드는 곡선을 소자에서 측정했다. 이 곡선 하나만으로 아직 보이지 못한 것은?", "options": ["최근 자극의 영향이 일정 시간 남아 있다는 것", "새 데이터에서 과제를 소자 없이보다 잘 푼다는 것", "그 영향이 사라지는 데 걸리는 시간의 크기", "자극 간격이 달라지면 반응도 달라진다는 것"], "a": 1, "why": "이런 곡선(짝펄스 촉진, PPF)은 기억(시간상수)이 '있다'는 것을 보입니다. 간격이 짧을수록 커지는 것은 선형 회로에서도 나오므로 비선형의 증거는 아닙니다. 상태가 구별·재현되는지, 떼어 둔 데이터에서 성능, 기준선 대비 우위, 시스템 비용은 따로 보여야 합니다(3구간)."}, {"id": "d06-p06", "ref": "#s-case-fan", "refLabel": "사례 5: 제목과 사다리의 단", "type": "mc", "q": "소자 논문의 제목에 'computing(계산)'이라는 말이 들어 있을 때 맞는 태도는?", "options": ["그림·표에서 과제·판독 규칙·기준선이 있는지 따로 확인한다", "그 소자가 과제를 풀어 보였다고 믿고 결과를 인용한다", "기준선 비교까지 끝난 연구라고 보고 결론을 받아들인다", "시스템 전체의 전력까지 측정했다는 뜻으로 읽는다"], "a": 0, "why": "제목에 계산이 들어 있어도 과제 없이 시냅스 기능 모사에서 멈춘 논문이 있습니다. 증거 사다리의 어느 단에 있는지는 그림으로 읽습니다(4구간)."}, {"id": "d06-p07", "ref": "#s-case-lessons", "refLabel": "다섯 사례에서 배울 것", "type": "ox", "q": "소자로 계산했다는 논문들 가운데 소자 없이 같은 일을 한 기준선과 비교한 경우를 보면, 소자 쪽 성능이 기준선보다 낮거나 비슷한 경우가 흔하다.", "a": true, "why": "원래 입력을 그대로 넣은 기준선(한 사례에서 소자가 1.3%p 낮음)이나 같은 알고리즘을 디지털로 돌린 기준선(다른 사례에서 1.6%p 낮음)과 비교한 사례들에서 소자는 낮거나 비슷했고, 물리 RC 리뷰(Liang 2024)도 비슷한 구성이면 소프트웨어 쪽이 대개 낫다고 씁니다. 소자가 더 높게 나온 사례는 기준선의 조건이 불분명했습니다. 그래서 소자의 가치는 정확도보다 판독 규칙 크기·전력·시간척도 조절에서 찾아야 할 수 있습니다(4구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 계산이란", "items": [{"id": "d06-q01", "type": "mc", "q": "기초 1의 틀에서 물리계가 어떤 문제를 '계산한다'고 말할 수 있는 때는?", "options": ["입력을 넣었을 때 물리계 안에서 무언가 복잡하게 변할 때", "소자가 비선형이고 최근 입력의 흔적을 기억할 때", "해독한 답이 문제의 원래 답과 허용 오차 안에서 맞을 때", "같은 입력을 넣으면 매번 같은 출력이 나올 때"], "a": 2, "why": "네 화살표의 사각형이 닫혀야 한다(부호화 → 물리 변화 → 해독 → 비교). 복잡한 변화나 '비선형 + 기억'은 ②(물리가 움직임)에 관한 말일 뿐이고, 반복해서 같은 출력이 나오는 것도 해독한 답이 맞는지와는 별개다. 그림 2의 ①–④를 다시 보세요.", "ref": "#b-what-is-computing", "refLabel": "그림 2: 사각형의 ①–④"}, {"id": "d06-q29", "type": "mc", "q": "어떤 소자의 출력 전류를 큰 신경망에 넣어 손글씨 숫자를 98% 맞혔다. 그런데 소자 대신 아무 저항이나 넣어도 같은 신경망이 98%를 냈다. 기초 1의 실패 유형 중 무엇에 가까운가?", "options": ["추상 문제와 물리 장치를 잇는 표현이 아예 없는 경우", "계산을 해독 단계에 숨겨 다른 컴퓨터가 한 경우", "잘 맞은 결과만 골라 보고한 경우", "실패가 아니다 — 98%면 소자가 계산한 것이다"], "a": 1, "why": "소자를 바꿔도 점수가 같다면 일은 해독 단계(큰 신경망)가 했다. 돌멩이에 해석표를 붙여 7 × 8을 '계산'한 것처럼 꾸민 장면과 같은 유형 (b)다. 표현은 있고(전류를 신경망에 넣음), 골라 보고한 것도 아니다.", "ref": "#s-fail-types", "refLabel": "실패 유형 (b)와 돌멩이 예"}, {"id": "d06-q03", "type": "ox", "q": "시냅스 현상(PPF·LTP) 재현 논문의 첫 그림은 기초 1의 네 단계 중 '물리가 움직인다'(②)만 보여 준다.", "a": true, "why": "문제 정의(①의 바탕), 해독 규칙(③), 답과의 비교(④)가 없다. Aluru 2026 p.593의 '단순 이온 전도도 이력을 넘어서야'가 같은 지적이다.", "ref": "#s-square-connect", "refLabel": "연결: 시냅스 현상 그림은 ②만"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 펄스 간격 예제와 사다리", "items": [{"id": "d06-q26", "type": "mc", "q": "펄스 간격을 맞히는 과제에서 시험 정확도가 소자 75%, 원시 입력(간격 숫자를 직접 준) 기준선 75%, 기억 없는 저항(정적 소자) 기준선 50%였다. 맞는 해석은?", "options": ["기억은 쓰였으나 간격 숫자보다 낫다고는 못 한다", "소자가 원시 입력 기준선보다 나으므로 소자가 기여했다", "소자의 기억이 정확히 25%p만큼 정확도를 올렸다", "훈련 정확도가 100%이므로 소자가 과제를 완전히 풀었다"], "a": 0, "why": "기준선의 종류마다 묻는 것이 다르다. 원시 입력 기준선과 같으면 '소자가 readout의 일을 덜었다'고 말할 수 없고, 정적 소자보다 높으면 기억이 쓰였다는 진단이 된다. 다만 기준선 사이의 차이를 한 부품의 정확한 몫으로 나눌 수는 없다(Singh 2026 p.18). 훈련 100%는 문턱을 훈련 표본에 맞춰 골랐으니 당연한 값이다.", "ref": "#s-worked-example", "refLabel": "펄스 간격 예제의 단계 6·7"}, {"id": "d06-q28", "type": "mc", "q": "펄스 간격 예제에서 문턱 θ를 고를 때 시험 표본(10, 50, 120, 600 ms)까지 함께 보고, 여덟 개를 모두 맞히는 값으로 정했다. 이때 나온 시험 정확도 100%는 어떻게 읽어야 하나?", "options": ["readout이 실제 경계를 정확히 배웠다는 증거다", "소자의 기억 덕분에 100%가 나왔다는 증거다", "표본이 8개뿐이라 100%는 나올 수 없으니 계산 실수다", "시험 표본이 학습에 쓰여 새 데이터 성능의 증거가 못 된다"], "a": 3, "why": "시험 데이터를 보며 설정(여기서는 θ)을 고르면 그 데이터도 사실상 훈련에 쓴 셈이다. 그래서 학습 전에 떼어 두고 마지막 채점에만 쓴다(단계 2). 100%는 계산상 가능하지만(1.37과 1.46 사이에 θ를 두면 된다), 처음 보는 간격에서도 맞는다는 증거는 아니다.", "ref": "#s-worked-example", "refLabel": "예제 단계 2: 학습 전에 데이터 나누기"}]}, "2-end": {"kind": "end", "title": "2구간 마무리 퀴즈", "items": [{"id": "d06-q04", "type": "short", "q": "상태 x = 2, 4, 6에서 정답 y = 1, 2, 3이면 가장 잘 맞는 직선 y = W·x의 W는?", "a": ["0.5", "1/2", "0.5x", "w=0.5", "w = 0.5"], "why": "세 점 모두 y = 0.5x 위에 있다. 이것이 가장 단순한 readout 학습(선형 회귀)이다. 상태가 100개면 가중치 100개를 같은 원리로 정한다.", "ref": "#b-readout", "refLabel": "기초 3: 2, 4, 6 → 1, 2, 3 직선"}, {"id": "d06-q05", "type": "mc", "q": "'읽을 수 있는 상태'에 붙는 두 조건은?", "options": ["응답이 크고, 입력에 빠르게 반응할 것", "다른 답이면 다른 상태, 같은 입력이면 같은 상태일 것", "전원을 꺼도 상태가 남고, 읽기 I–V가 직선일 것", "값이 아날로그로 연속적이고, 잡음이 전혀 없을 것"], "a": 1, "why": "구별(다른 답을 가져야 할 입력은 다른 상태로) + 반복 가능(같은 입력이면 거의 같은 상태). 크기·속도·비휘발성·선형성은 다른 용도의 사양이고, 잡음이 '전혀' 없을 필요는 없다(흔들림이 상태 사이 간격보다 작으면 된다). Singh 2026 p.6은 드리프트·불완전 리셋·비가역 변화에서 생기는 '겉보기 기억'이 재현성을 해친다고 쓴다.", "ref": "#b-task-state", "refLabel": "기초 2: 구별과 반복 가능"}, {"id": "d06-q30", "type": "mc", "q": "정답과 무관한 잡음 숫자 30개를 상태로 주고 표본 40개로 직선을 맞췄다. 훈련 R²와 held-out R²는 어떻게 나올 가능성이 큰가?", "options": ["둘 다 0 근처 — 무관한 숫자라 어디서도 못 맞힌다", "둘 다 0.7 안팎 — 맞춘 직선이 새 데이터에도 통한다", "훈련은 0.7 안팎, held-out은 0보다 낮다", "훈련은 0 근처, held-out은 0.7 안팎이다"], "a": 2, "why": "손잡이(가중치)가 표본 수에 가까우면 훈련 표본의 우연한 값까지 맞춰 훈련 R²는 대략 30/40 근처(시뮬레이션 0.74)로 오르지만, 새 데이터에서는 평균만 찍는 것보다 못해 음수가 된다. 과적합이고, 그래서 훈련 성능은 증거가 아니다.", "ref": "#s-r2-sim", "refLabel": "그림 5: 훈련 R²와 held-out R²"}, {"id": "d06-q24", "ref": "#b-heldout-baseline", "refLabel": "기초 4: 외우기와 규칙 배우기", "type": "mc", "q": "훈련에 쓰지 않고 떼어 둔 데이터(held-out)로 성능을 재야 하는 이유는?", "options": ["훈련 데이터는 표본 수가 적어 숫자가 흔들리기 때문", "held-out 데이터는 더 정밀한 장비로 따로 측정하기 때문", "훈련 데이터로 재면 성능이 늘 낮게 나오기 때문", "훈련에 쓴 데이터로는 외운 것과 배운 것을 가를 수 없기 때문"], "a": 3, "why": "그림 5처럼 상태가 많고 표본이 적으면 훈련 성능은 높아도 새 데이터에서는 무너진다(훈련 성능은 낮게가 아니라 부풀려져 나온다). readout을 데이터로 학습한 계산이라면 '계산했다'는 주장은 새 데이터 성능으로 서야 한다. 해독 규칙을 미리 정해 둔 계산에는 이 조건이 그대로 적용되지 않는다."}, {"id": "d06-q08", "type": "mc", "q": "'소자가 입력을 더 가르기 쉽게 바꿨는가'를 재는 기준선은?", "options": ["입력을 그대로 같은 readout에 넣은 원시 입력 기준선", "같은 RC를 컴퓨터에서 잡음 없이 돌린 디지털 RC 기준선", "센서 옆 작은 칩에서 신경망을 돌린 MCU 기준선", "기억이 없는 보통 저항을 넣은 정적 소자 기준선"], "a": 0, "why": "원시 입력 기준선은 '소자를 거치지 않은 입력'과 비교하므로 소자의 변환이 도움이 됐는지를 잰다. 디지털 RC 기준선은 하드웨어 잡음의 손실을, 정적 소자 기준선은 시간 동역학(기억)의 기여를, MCU는 시스템 수준 경쟁을 잰다. 종류가 다르면 막대 길이를 비교할 수 없다.", "ref": "#s-baseline-kinds", "refLabel": "기준선의 네 종류"}, {"id": "d06-q31", "type": "mc", "q": "원시 입력 기준선보다 소자 쪽 시험 정확도가 3%p 높았다. '소자의 시간 동역학 덕분'이라고 말하려면 무엇을 더 확인해야 하나?", "options": ["훈련 정확도도 3%p 이상 높은지 확인한다", "소자 수를 늘려 정확도가 더 오르는지 본다", "특징 수·readout을 맞춘 대조에서도 남는지 본다", "같은 소자로 PPF 곡선을 다시 재서 τ를 확인한다"], "a": 2, "why": "기능을 물리 기판(소재·소자)에 귀속하려면 입력 부호화·특징 수·상태 획득·readout 복잡도의 효과와 구별하는 대조 실험(예: 기억을 최소화한 정적 소자 기준선, 특징 수를 맞춘 비교)이 필요하다(Singh 2026). 훈련 정확도는 증거가 아니고, 소자 수나 PPF 재측정은 그 질문에 답하지 않는다.", "ref": "#s-evidence-levels", "refLabel": "증거의 세 수준: 기판에 귀속"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · PPF", "items": [{"id": "d06-q25", "type": "mc", "q": "PPF 곡선(간격 Δt 대 PPF 지수) 하나가 증명하는 것은?", "options": ["새 데이터에서 과제를 푸는 성능", "같은 입력에 상태가 반복해서 재현된다는 것", "소자의 누적 방식이 비선형이라는 것", "최근 입력의 흔적이 남았다가 사라진다는 것"], "a": 3, "why": "사다리 0단: 기억(시간상수)의 존재. '간격이 짧을수록 커짐'은 선형인 저항–커패시터 회로에서도 나오므로 비선형의 증거가 아니다. 비선형은 '함께 준 응답'과 '따로 준 응답의 합'을 비교하는 겹침 시험으로 따로 본다(Day 28–29). 과제 성능과 재현성은 사다리 2–4단에서 따로 검증한다. 그림 6의 오른쪽 목록.", "ref": "#s-ppf-proves", "refLabel": "이 곡선이 증명하는 것"}, {"id": "d06-q11", "type": "ox", "q": "소자가 비선형이고 서서히 잊으면 그 자체로 계산을 한다고 말할 수 있다.", "a": false, "why": "흔한 비약이다. 비선형과 서서히 잊음은 RC 노드에 흔히 요구되는 성질일 뿐 계산의 증거가 아니다. readout을 학습하는 경우의 고친 문장: 최근 입력의 일부 정보가 상태에 남는다. 과제에 필요한 차이가 읽을 수 있는 상태들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며, 기준선보다 나은지는 따로 검증해야 한다.", "ref": "#s-ppf-fix", "refLabel": "고쳐 쓴 문장"}]}, "3-end": {"kind": "end", "title": "3구간 마무리 퀴즈", "items": [{"id": "d06-q12", "type": "mc", "q": "4-bit 펄스 열 '1100'과 '0011'이 같은 최종 전류로 끝나는 소자·읽기 방식에서 알 수 있는 것은?", "options": ["이 읽기 방식으로는 순서를 복원할 수 없다", "소자가 고장 나서 펄스를 기억하지 못한다", "두 열의 순서를 전류 하나로 복원할 수 있다", "이 소자에는 짧은 기억(PPF)이 전혀 없다"], "a": 0, "why": "'상태 하나로 이력·순서를 복원'은 해 봐야 안다. 남는 것과 과제에 충분히 남는 것은 다르다. 같은 전류로 끝났다는 것만으로 기억이 없다거나 고장이라고 할 수는 없고, 다른 시점을 더 읽거나(다중 탭) 다른 상태를 읽으면 달라질 수 있다.", "ref": "#s-one-value", "refLabel": "1100과 0011: 전류 한 값의 한계"}, {"id": "d06-q27", "type": "short", "q": "모형 소자에서 첫 펄스의 응답이 1.00 µA, 50 ms 뒤 두 번째 펄스의 응답이 1.58 µA였다. PPF 지수는 몇 %인가? (숫자만)", "a": ["158", "158%", "158 %"], "why": "PPF 지수 = 두 번째 응답 ÷ 첫 번째 응답 × 100 = 1.58 ÷ 1.00 × 100 = 158%. 그림 1의 10 ms(188%)와 1 s(105%) 사이 값이고, 그림 6의 곡선에서 50 ms 자리에 해당한다.", "ref": "#b-ppf", "refLabel": "그림 1: PPF 지수 계산"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 폴더 사례", "items": [{"id": "d06-q32", "type": "mc", "q": "소자 RC가 90.01%, 원시 시간 프레임 네 장을 그대로 같은 방식의 readout에 넣은 기준선이 91.32%였다. 이 결과로 말할 수 있는 것은?", "options": ["소자가 정확도를 높였으니 계산에 기여했다", "정확도로는 소자 기여를 말할 수 없다", "기준선이 원시 입력이라 이 비교는 의미가 없다", "1.3%p 차이는 하드웨어 잡음 때문에 잃은 정확도다"], "a": 1, "why": "원시 입력 기준선보다 낮으므로 정확도로는 소자 기여를 말할 수 없다. 이 사례(Lee 2025)의 기여는 readout 크기 감소(2352×10 vs 3136×10, 가중치 25% 적음)와 시간척도 조절이다. '하드웨어 잡음의 손실'은 같은 알고리즘을 디지털로 돌린 디지털 RC 기준선이 재는 것이다.", "ref": "#s-case-lee", "refLabel": "사례 1: 원시 입력 기준선보다 낮은 소자"}, {"id": "d06-q15", "type": "mc", "q": "같은 RC 알고리즘을 디지털 컴퓨터로 잡음 없이 돌린 기준선(98.2%)과 아날로그 소자 시스템(96.6%)의 차이가 재는 것은?", "options": ["소자가 입력을 더 가르기 쉽게 바꿨는지", "소자 시스템과 MCU의 전력 차이", "소자 상태가 얼마나 오래 유지되는지", "하드웨어 잡음·편차 때문에 잃은 정확도"], "a": 3, "why": "알고리즘은 같고 구현만 다르므로 차이(1.6%p)는 하드웨어 쪽에서 잃은 몫이다. '소자를 빼고 원시 입력 + 같은 readout' 기준선은 Zhong 2022 본문에 없어서, 소자가 입력을 가르기 쉽게 바꿨는지는 이 비교로 알 수 없다. 기준선의 종류를 적어야 하는 이유.", "ref": "#s-case-zhong", "refLabel": "사례 2: 디지털 RC 기준선"}]}, "4-end": {"kind": "end", "title": "4구간 마무리 퀴즈", "items": [{"id": "d06-q16", "type": "ox", "q": "Chen 2025의 Fig. 4g에서 RC(88%)가 SVM(약 60%)보다 높으므로, 소자의 기여가 약 28%p라고 결론 내릴 수 있다.", "a": false, "why": "SVM(선형 분류기)의 입력이 원시 픽셀인지 같은 가상 노드인지, 특징 차원이 맞춰졌는지 본문에 없다. 또 e·f의 혼동 행렬은 훈련 데이터 결과로 읽힌다 [해석]. 기준선이 '있다'만으로는 부족하고 종류와 조건이 적혀야 막대 길이 차이를 소자 기여로 읽을 수 있다.", "ref": "#s-case-chen", "refLabel": "사례 4: 조건이 불명인 SVM 기준선"}, {"id": "d06-q17", "type": "mc", "q": "제목에 'neuromorphic ionic computing'이 들어 있지만, 그림에는 짝펄스 억제·기억과 망각·연상학습 흉내·어레이 이미지 저장만 있고 분류·예측 과제와 정확도는 없다. 사다리의 어디에 놓나?", "options": ["4단 — 저장한 이미지를 다시 읽었으니 held-out이다", "5단 — 생물 시냅스와 비교했으니 기준선이 있다", "0단 — 현상 재현까지이고 과제가 없다", "6단 — 어레이를 만들었으니 시스템 비용까지 왔다"], "a": 2, "why": "과제(입력·정답·척도)가 없으면 1단도 서지 않는다. 저장한 그림을 다시 읽는 것은 훈련에 안 쓴 데이터로 채점하는 held-out이 아니고, 생물과 닮았다는 것은 소자를 뺀 기준선이 아니며, 어레이 제작은 시스템 비용 측정이 아니다. 제목의 'computing'과 사다리의 단은 별개이며 그림으로 읽는다(Fan 2026).", "ref": "#s-case-fan", "refLabel": "사례 5: 과제가 없는 논문"}, {"id": "d06-q33", "type": "mc", "q": "기준선의 종류가 분명한 사례들에서 소자가 기준선보다 낮거나 비슷했다. 물리 RC 리뷰의 관찰과 함께 보면, 소자의 가치를 어디서 재는 것이 맞나?", "options": ["정확도 밖의 이점(readout 크기·전력)에서", "기준선을 빼고 소자 결과만 보고하는 데서", "정확도 차이 대신 PPF 곡선을 더 많이 보이는 데서", "훈련 정확도를 함께 보고해 차이를 메우는 데서"], "a": 0, "why": "Liang 2024(p.201)는 비슷한 구성이면 소프트웨어 RC가 대개 낫고, 물리 RC의 장점은 정확도보다 시스템 복잡도·전력·학습 비용·속도 같은 데 있다고 쓴다. Lee 2025도 기여가 readout 크기 감소였다. 기준선을 빼거나 훈련 정확도로 메우면 증거 수준이 내려가고, PPF는 0단 증거다.", "ref": "#s-case-lessons", "refLabel": "다섯 사례에서 배울 것"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · Phase 1 종합", "items": [{"id": "d06-q34", "type": "mc", "q": "Phase 1 답의 첫 문장으로 지금까지의 근거에 가장 맞게 쓴 것은?", "options": ["기존 컴퓨터는 모든 계산에서 데이터 이동 때문에 비효율적이다.", "실시간 입력이 이어지는 계산에서는 데이터 이동 비용이 커질 수 있다.", "뉴로모픽 소자는 뇌처럼 20 W로 동작하므로 항상 더 효율적이다.", "PPF를 보인 이온 소자는 이미 계산 소자이므로 응용만 남았다."], "a": 1, "why": "첫 문장은 '어떤 계산에서' 기존 컴퓨터가 불리할 수 있는지를 조건과 함께 말하는 자리다. '모든 계산에서', '항상'은 Day 3–4·Day 5–6에서 조건을 붙인 주장과 맞지 않고, PPF만으로 계산 소자라고 하는 것은 오늘 사다리 0단의 오해다.", "ref": "#s-three-sentences", "refLabel": "'왜 필요한가' 세 문장의 형식"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈 · Phase 1", "items": [{"id": "d06-q20", "type": "mc", "q": "사다리에서 '원시 입력·정적 소자·디지털 RC를 같은 readout으로 비교'가 증명하는 것은?", "options": ["무엇을 계산하는지 말할 수 있다", "외운 것이 아니라 일반화했다", "소자가 기여했다", "시스템으로 쓸 만하다"], "a": 2, "why": "5단 기준선 비교 = 소자의 기여. 1단(과제)은 '무엇을', 4단(held-out)은 '일반화', 6단(시스템 비용)은 '쓸 만한가'. 그림 4의 오른쪽 열.", "ref": "#s-ladder", "refLabel": "그림 4: 각 단이 증명하는 것"}, {"id": "d06-q35", "type": "ox", "q": "원리 증명 단계의 소자 논문은 사다리 6단까지 모두 보여야 가치가 있다.", "a": false, "why": "모든 원리 증명 연구가 모든 요구를 만족할 필요는 없다. 기준은 주장의 강도가 제시된 증거 수준과 일치하는가, 곧 자기가 어느 단에 있는지 제목과 결론이 정직하게 말하는가다(Singh 2026). 오늘의 반론('기준이 너무 높다')에 대한 응답의 재료.", "ref": "#s-objection", "refLabel": "오늘의 반론: 기준이 너무 높은가"}, {"id": "d06-q36", "type": "mc", "q": "Phase 1 주장 사슬에서 '가장 약한 고리'를 고르는 기준으로 맞는 것은?", "options": ["가장 최근에 배운 날의 주장을 고른다", "가장 많은 논문이 인용된 고리를 고른다", "내 소재와 가장 멀어 보이는 고리를 고른다", "[가설]·[미확인] 태그가 몰린 고리를 고른다"], "a": 3, "why": "근거 태그가 약한 곳이 사슬 전체를 약하게 한다(예: MCU 비교가 폴더에 없는 Day 9 [가설], 수치가 대부분 [미확인]인 Day 3–4). 인용 수가 많아도 정성 서술뿐이면 약할 수 있다. 고른 뒤에는 '무엇을 확인하면 [확인]으로 바뀌나'를 적는다.", "ref": "#s-weakest-link", "refLabel": "가장 약한 고리 고르기"}, {"id": "d06-q23", "type": "mc", "q": "내 소자로 사다리 2단(읽을 수 있는 상태)을 보이는 최소 실험에 꼭 들어가야 하는 것은?", "options": ["여러 입력열을 반복해 넣고 끝 상태의 구별·재현을 본다", "PPF 곡선을 여러 간격에서 더 촘촘하게 다시 잰다", "MNIST를 넣어 분류 정확도를 잰다", "펄스 뒤 전류가 얼마나 오래 유지되는지 잰다"], "a": 0, "why": "구별 + 반복 가능. PPF와 유지 시간은 한 종류의 입력(두 펄스, 한 펄스)만 본다. MNIST 정확도는 3·4단이고, 2단 없이 올라가면 readout이 일을 다 하는지 알 수 없다.", "ref": "#b-task-state", "refLabel": "기초 2: 구별과 반복 가능"}]}, "review": {"kind": "review", "title": "지난 학습 복습: 적합한 문제, 부적합한 문제", "items": [{"id": "d06-r01", "type": "mc", "q": "공장의 하루치 측정 기록 수억 줄을 밤마다 한꺼번에 분석하는 일을 적합성 질문 사다리에 올리면, 처음 '아니오'가 나오는 질문과 그 까닭은?", "options": ["질문 1: 입력을 모아 배치로 처리할 수 있다", "질문 3: 기록이 많으면 근사를 견딜 수 없다", "질문 4: 밤마다 하므로 소자의 τ가 하루여야 한다", "질문 6: MCU보다 나은지 아직 모른다"], "a": 0, "why": "첫 질문은 '입력이 한 번에 하나씩, 실시간으로 오나?'입니다. 밤마다 모아 둔 기록은 배치로 가중치를 재사용할 수 있어 보통 컴퓨터가 유리하므로, 여기서 이미 '아니오'입니다. 앞 질문이 '아니오'면 아래는 볼 필요가 없습니다.", "wrongWhy": ["", "근사 허용은 데이터 양이 아니라 과제가 정합니다. 그리고 그보다 앞선 질문 1에서 이미 떨어집니다.", "τ 정합은 신호의 시간척도 이야기이고, 그 전에 질문 1에서 떨어집니다.", "질문 6까지 가기 전에 질문 1에서 '아니오'가 나옵니다."], "ref": "d05.html#s-ladder-questions", "refLabel": "질문 사다리의 여섯 질문", "fig": "../assets/img/d05/fig1-question-ladder.svg", "figAlt": "적합한 문제를 가르는 여섯 질문의 사다리"}, {"id": "d06-r02", "type": "mc", "q": "ADC 변환 한 번에 2 nJ이 들고, 1초에 500번 변환한다. ADC가 쓰는 평균 전력은?", "options": ["2 nJ", "1 µW", "1 µJ", "1 mW"], "a": 1, "why": "한 번의 에너지 × 1초당 횟수 = 평균 전력이므로 2 nJ × 500/s = 1,000 nJ/s = 1 µJ/s = 1 µW입니다.", "wrongWhy": ["2 nJ은 한 번의 에너지입니다. 평균 전력은 여기에 1초당 횟수를 곱한 값입니다.", "", "1 µJ은 1초 동안 쓴 에너지이고, 단위를 J/s(= W)로 적어야 평균 전력입니다.", "1,000 nJ/s = 1 µW입니다. 자릿수를 1,000배 크게 잡았습니다."], "ref": "d05.html#s-energy-model", "refLabel": "2-2 한 번의 에너지 × 1초당 횟수", "fig": "../assets/img/d05/fig2c-energy-model.svg", "figAlt": "평균 전력을 한 번의 에너지, 횟수, 대기 전력으로 나눈 그림"}, {"id": "d06-r03", "type": "mc", "q": "대기 전력 2 µW인 센서 노드에 사건이 하루 1,000번 오고 사건마다 1 µJ을 쓴다(하루 = 86,400 s). 평균 전력을 줄이려면 무엇을 먼저 바꿔야 하나?", "options": ["사건당 에너지를 절반으로 줄인다", "사건 횟수를 절반으로 줄인다", "대기 전력을 절반으로 줄인다", "셋 다 효과가 비슷하다"], "a": 2, "why": "사건 몫은 1,000 × 1 µJ ÷ 86,400 s ≈ 0.012 µW로 대기 2 µW의 1%도 안 됩니다. 사건이 드문 always-on 노드에서는 평균 전력이 거의 대기 전력이라, 대기 전력을 줄이는 것이 먼저입니다.", "wrongWhy": ["사건 몫이 약 0.012 µW라 절반으로 줄여도 약 0.006 µW만 줍니다.", "사건 몫 자체가 작아 횟수를 줄여도 효과가 거의 없습니다.", "", "대기 전력이 평균 전력의 99% 이상이라 효과가 크게 다릅니다."], "ref": "d05.html#s-always-on", "refLabel": "always-on을 숫자로"}, {"id": "d06-r04", "type": "mc", "q": "어떤 센서 노드의 평균 전력 대부분이 무선 송신이다. 효과가 가장 큰 처방은?", "options": ["MCU 클록을 2배로 올린다", "in-sensor 전처리로 ADC·MCU가 깨는 횟수를 줄인다", "센서 채널 수를 늘려 정보를 더 모은다", "엣지 처리로 사건만 보내 송신 비트를 줄인다"], "a": 3, "why": "어느 고리가 지배하느냐가 처방을 정합니다. 송신이 지배하면 노드 안에서 처리해 결과(사건)만 보내는 엣지 처리가 효과를 냅니다(원시 데이터 전부 621 µW → 사건만 23 µW). in-sensor 전처리는 매 샘플의 ADC·MCU가 지배할 때 효과가 큽니다.", "wrongWhy": ["클록을 올려도 보낼 비트 수는 그대로라 송신 전력이 줄지 않습니다.", "ADC·MCU 몫을 줄이는 처방입니다. 지배하는 고리인 송신은 그대로입니다.", "채널이 늘면 보낼 데이터도 늘어 송신 전력이 커집니다.", ""], "ref": "d05.html#s-three-cases", "refLabel": "2-3 세 가지 설계: 사슬의 어디를 끊나", "fig": "../assets/img/d05/fig2-edge-energy-chain.svg", "figAlt": "센서 노드의 에너지 사슬과 세 설계의 평균 전력 막대"}, {"id": "d06-r05", "type": "mc", "q": "심전도 패치 모형에서 C(아날로그 전처리 소자가 늘 켜져 지켜보다가 사건 때만 ADC·MCU를 깨움)의 전처리 소자 전력이 1 µW가 아니라 30 µW라면, B(MCU가 매 샘플 처리, 약 23 µW)와 비교해 어떻게 되나?", "options": ["C가 여전히 B의 약 9분의 1이다", "C가 약 32 µW로 B보다 높아진다", "송신이 같으므로 둘은 같아진다", "ADC·MCU가 잠들므로 C는 0에 가까워진다"], "a": 1, "why": "C = always-on 30 µW + 사건 2개 × 21 nJ ≈ 0.04 µW + 송신 1.6 µW ≈ 32 µW로 B(약 23 µW)보다 커집니다. 일하는 몫을 줄일수록 always-on 부분의 전력이 결론을 정하므로, 전처리 소자의 대기 전력이 작아야 in-sensor가 이득입니다.", "wrongWhy": ["9분의 1은 전처리 소자가 1 µW일 때의 결과입니다. always-on 전력은 평균 전력에 그대로 더해집니다.", "", "송신(1.6 µW)은 같지만 나머지 몫이 다릅니다.", "ADC·MCU가 잠들어도 늘 켜진 전처리 소자의 30 µW는 남습니다."], "ref": "d05.html#ex-three-cases", "refLabel": "그림 4 계산: A·B·C의 평균 전력"}, {"id": "d06-r06", "type": "mc", "q": "어떤 논문이 '전력 99.9% 절감'이라고 적었다. 이 숫자를 내 응용의 근거로 쓰기 전에 먼저 물을 것으로 가장 맞는 것은?", "options": ["기준선과 시스템 경계가 무엇이었나", "절감률이 99%를 넘을 만큼 큰가", "소자 하나의 에너지가 fJ 수준인가", "GPU와 비교해도 절감이 유지되는가"], "a": 0, "why": "절감률은 무엇과 비교했는지(같은 알고리즘의 디지털 구현인지, MCU + 작은 신경망인지, 원시 입력 + 같은 readout인지)와 어디까지 셌는지(센서·ADC·MCU·무선·대기 전력)에 따라 뜻이 달라집니다.", "wrongWhy": ["", "숫자의 크기보다 무엇과 비교했는지가 먼저입니다.", "소자 하나의 에너지는 시스템 전력의 한 항일 뿐입니다.", "엣지 응용의 실제 경쟁자는 GPU가 아니라 MCU + 작은 신경망입니다."], "ref": "d05.html#s-zhong-limits", "refLabel": "논문의 절감 숫자를 읽을 때 볼 세 가지"}, {"id": "d06-r07", "type": "mc", "q": "몸에 붙이는 패치용 작은 신경망(가중치 2,000개, 하나에 1 byte)을 칩 안 메모리 64 KB인 저전력 MCU로 돌린다. 입력이 하나씩(배치 1) 올 때 맞는 것은?", "options": ["배치 1이므로 매번 칩 밖 DRAM에서 가중치를 가져와야 한다", "가중치가 너무 커서 MCU로는 돌릴 수 없다", "가중치 2 KB가 칩 안에 들어가 칩 밖 이동이 없다", "배치 1이면 MCU는 계산을 시작할 수 없다"], "a": 2, "why": "가중치 2,000개 × 1 byte = 2 KB는 칩 안 메모리에 들어가므로, 배치 1이어도 칩 밖에서 가져오지 않습니다. 그래서 MCU + 작은 신경망은 µW 자릿수로 동작하는 진짜 경쟁자입니다.", "wrongWhy": ["가중치가 칩 안에 있으면 배치 1이어도 칩 밖 이동이 없습니다.", "2 KB는 64 KB 칩 안 메모리에 넉넉히 들어갑니다.", "", "MCU는 입력이 하나씩 와도 곱해서 더하기를 차례로 해 나갑니다."], "ref": "d05.html#s-mcu-nn", "refLabel": "MCU에서 작은 신경망이 도는 장면"}, {"id": "d06-r08", "type": "mc", "q": "몸에 붙인 이온 소자 전처리기가 첫 주에는 잘 동작하다가 한 달 뒤 응답이 바뀌었다. bio-interface의 두 조건 가운데 무엇이 부족했나?", "options": ["이온–전자 변환 효율", "입력의 희소성", "프로그램 가능성", "동작 안정성"], "a": 3, "why": "이온 소자가 생체와 '같은 언어'를 쓴다는 이점에는 안정성과 이온–전자 변환 효율이라는 두 조건이 붙습니다. 시간이 지나며 응답이 바뀐 것은 안정성의 문제입니다. 이온 시스템은 동작 안정성에서 전자 시스템에 뒤처진다는 지적이 있습니다.", "wrongWhy": ["변환 효율은 이온 신호를 다음 전자 회로가 읽을 수 있게 바꾸는 효율입니다. 시간에 따른 변화와는 다른 조건입니다.", "희소성은 사다리의 질문이지 bio-interface의 두 조건이 아닙니다.", "프로그램 가능성은 MCU와의 비교 항목입니다.", ""], "ref": "d05.html#s-bio-conditions", "refLabel": "bio-interface의 두 조건", "fig": "../assets/img/d05/fig4-bio-interface.svg", "figAlt": "bio-interface가 요구하는 것과 이온 소자, 전자 소자의 자리"}, {"id": "d06-r09", "type": "ox", "q": "입력이 하나씩 실시간으로 온다는 것만으로, 그 응용에서 뉴로모픽 소자가 MCU + 작은 신경망보다 낫다고 말할 수 있다.", "a": false, "why": "실시간 입력은 사다리의 첫 질문을 통과했다는 뜻일 뿐입니다. 희소·대기 전력, 근사 허용, τ 정합, 다음 단계를 지나도, 같은 과제에서 MCU + 작은 신경망보다 시스템 전체로 나은지는 따로 비교해야 합니다.", "wrongWhy": ["실시간은 첫 질문일 뿐입니다. 나머지 조건과 MCU + 작은 신경망과의 시스템 비교가 남아 있습니다.", ""], "ref": "d05.html#s-ladder-questions", "refLabel": "질문 사다리: 1부터 6까지"}]}}}</script>
+<script type="application/json" id="quiz-d06">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 바로 돌아갈 설명·작은 예제의 앵커. refLabel: '다시 볼 곳' 링크에 보일 짧은 이름. why에는 정답 이유와 흔한 혼동을 적는다.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "내 소자(또는 상상한 이온 소자)가 '시냅스처럼 반응한다'를 넘어 '계산한다'고 다른 사람을 설득하려면 어떤 실험 결과가 필요할지, 순서대로 상자 세 개를 그려 각 상자에 '무엇을 넣고, 무엇을 재고, 무엇과 비교하나'를 적어 보세요. 마지막에 '이 결과가 나오면 설득 실패'인 경우를 하나 적으세요.", "items": [{"id": "d06-p01", "ref": "#b-what-is-computing", "refLabel": "기초 1: 사각형의 네 단계", "type": "ox", "q": "자극을 주면 어떤 물질이든 무언가 변하므로, 모든 물리 현상은 '계산'이라고 부를 수 있다.", "a": false, "why": "물리계가 계산한다고 말하려면 문제의 입력을 물리 입력으로 바꿔 넣고(부호화), 물리가 움직인 뒤 상태를 읽어(해독) 얻은 답이 원래 문제의 답과 허용 오차 안에서 맞아야 합니다. 물리가 움직인 것만으로는 네 단계 중 하나뿐입니다(1구간 그림 2)."}, {"id": "d06-p02", "ref": "#s-fail-types", "refLabel": "실패 유형 (b): 해독 단계에 숨은 계산", "type": "mc", "q": "돌멩이의 온도 변화를 '읽는 방법'을 아주 복잡하게 짜서 원하는 답이 나오게 만들었다. 이것을 '돌멩이가 계산했다'고 말할 수 없는 가장 큰 이유는?", "options": ["돌멩이는 전기가 통하지 않아 신호를 읽을 수 없어서", "온도는 연속적인 값이라 0과 1의 답이 될 수 없어서", "답을 만드는 일을 읽는 단계(다른 컴퓨터)가 대신 해서", "돌멩이의 온도 변화가 계산에 쓰기에는 너무 느려서"], "a": 2, "why": "원하는 계산 전체를 출력 해석 단계에 숨기면 사각형을 닫는 데 다른 컴퓨터가 필요해집니다. 이것이 '계산한다'는 주장이 실패하는 전형적인 유형입니다. 전기·연속값·속도는 계산 여부를 가르는 기준이 아닙니다(1구간)."}, {"id": "d06-p03", "ref": "#s-baseline-kinds", "refLabel": "기준선: 소자를 빼고 같은 readout", "type": "ox", "q": "이온 소자를 거친 신호로 분류 정확도 90%를 얻었다면, 그 숫자만으로 소자가 분류 계산에 기여했다고 말할 수 있다.", "a": false, "why": "소자 없이 원래 입력을 같은 판독 규칙에 그대로 넣은 기준선과 비교해야 소자의 기여를 말할 수 있습니다. 원래 입력만으로도 90% 이상이 나오면 소자는 기여하지 않은 것입니다(2구간)."}, {"id": "d06-p04", "ref": "#s-r2-sim", "refLabel": "그림 5: 잡음 상태로 맞춘 훈련 R²", "type": "mc", "q": "정답과 아무 관계없는 무작위 숫자 30개를 특징으로 삼아, 표본 40개에 직선 모형을 맞췄다. 맞춘 바로 그 표본에서 맞춤 정도(R², 1이면 완벽, 0이면 평균만 찍는 수준)는 어떻게 나올 가능성이 큰가?", "options": ["거의 0 — 무관한 숫자들이므로 맞출 수 없다", "정확히 0.5 — 무작위라 반은 맞고 반은 틀린다", "음수 — 무관한 숫자는 예측을 오히려 망친다", "0.7 안팎 — 무관한 숫자로도 꽤 맞춰진다"], "a": 3, "why": "특징 수가 표본 수에 가까우면 맞춘 그 데이터에서는 우연히 잘 맞습니다(시뮬레이션에서 훈련 R² 약 0.74, 대략 특징 수 ÷ 표본 수). 음수가 나오는 것은 맞출 때 쓰지 않은 새 데이터 쪽입니다. 그래서 훈련에 쓰지 않고 떼어 둔 데이터의 성능만 증거가 됩니다(2구간)."}, {"id": "d06-p05", "ref": "#s-ppf-proves", "refLabel": "PPF 곡선이 증명하는 것과 못 하는 것", "type": "mc", "q": "두 번 연달아 자극하면 두 번째 반응이 첫 번째보다 크고, 두 자극 간격이 길수록 그 차이가 줄어드는 곡선을 소자에서 측정했다. 이 곡선 하나만으로 아직 보이지 못한 것은?", "options": ["최근 자극의 영향이 일정 시간 남아 있다는 것", "새 데이터에서 과제를 소자 없이보다 잘 푼다는 것", "그 영향이 사라지는 데 걸리는 시간의 크기", "자극 간격이 달라지면 반응도 달라진다는 것"], "a": 1, "why": "이런 곡선(짝펄스 촉진, PPF)은 기억(시간상수)이 '있다'는 것을 보입니다. 간격이 짧을수록 커지는 것은 선형 회로에서도 나오므로 비선형의 증거는 아닙니다. 상태가 구별·재현되는지, 떼어 둔 데이터에서 성능, 기준선 대비 우위, 시스템 비용은 따로 보여야 합니다(3구간)."}, {"id": "d06-p06", "ref": "#s-case-fan", "refLabel": "사례 5: 제목과 사다리의 단", "type": "mc", "q": "소자 논문의 제목에 'computing(계산)'이라는 말이 들어 있을 때 맞는 태도는?", "options": ["그림·표에서 과제·판독 규칙·기준선이 있는지 따로 확인한다", "그 소자가 과제를 풀어 보였다고 믿고 결과를 인용한다", "기준선 비교까지 끝난 연구라고 보고 결론을 받아들인다", "시스템 전체의 전력까지 측정했다는 뜻으로 읽는다"], "a": 0, "why": "제목에 계산이 들어 있어도 과제 없이 시냅스 기능 모사에서 멈춘 논문이 있습니다. 증거 사다리의 어느 단에 있는지는 그림으로 읽습니다(4구간)."}, {"id": "d06-p07", "ref": "#s-case-lessons", "refLabel": "다섯 사례에서 배울 것", "type": "ox", "q": "소자로 계산했다는 논문들 가운데 소자 없이 같은 일을 한 기준선과 비교한 경우를 보면, 소자 쪽 성능이 기준선보다 낮거나 비슷한 경우가 흔하다.", "a": true, "why": "원래 입력을 그대로 넣은 기준선(한 사례에서 소자가 1.3%p 낮음)이나 같은 알고리즘을 디지털로 돌린 기준선(다른 사례에서 1.6%p 낮음)과 비교한 사례들에서 소자는 낮거나 비슷했고, physical reservoir computing 리뷰(Liang 2024)도 비슷한 구성이면 소프트웨어 쪽이 대개 낫다고 씁니다. 소자가 더 높게 나온 사례는 기준선의 조건이 불분명했습니다. 그래서 소자의 가치는 정확도보다 판독 규칙 크기·전력·시간척도 조절에서 찾아야 할 수 있습니다(4구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 계산이란", "items": [{"id": "d06-q01", "type": "mc", "q": "기초 1의 틀에서 물리계가 어떤 문제를 '계산한다'고 말할 수 있는 때는?", "options": ["입력을 넣었을 때 물리계 안에서 무언가 복잡하게 변할 때", "소자가 비선형이고 최근 입력의 흔적을 기억할 때", "해독한 답이 문제의 원래 답과 허용 오차 안에서 맞을 때", "같은 입력을 넣으면 매번 같은 출력이 나올 때"], "a": 2, "why": "네 화살표의 사각형이 닫혀야 한다(부호화 → 물리 변화 → 해독 → 비교). 복잡한 변화나 '비선형 + 기억'은 ②(물리가 움직임)에 관한 말일 뿐이고, 반복해서 같은 출력이 나오는 것도 해독한 답이 맞는지와는 별개다. 그림 2의 ①–④를 다시 보세요.", "ref": "#b-what-is-computing", "refLabel": "그림 2: 사각형의 ①–④"}, {"id": "d06-q29", "type": "mc", "q": "어떤 소자의 출력 전류를 큰 신경망에 넣어 손글씨 숫자를 98% 맞혔다. 그런데 소자 대신 아무 저항이나 넣어도 같은 신경망이 98%를 냈다. 기초 1의 실패 유형 중 무엇에 가까운가?", "options": ["추상 문제와 물리 장치를 잇는 표현이 아예 없는 경우", "계산을 해독 단계에 숨겨 다른 컴퓨터가 한 경우", "잘 맞은 결과만 골라 보고한 경우", "실패가 아니다 — 98%면 소자가 계산한 것이다"], "a": 1, "why": "소자를 바꿔도 점수가 같다면 일은 해독 단계(큰 신경망)가 했다. 돌멩이에 해석표를 붙여 7 × 8을 '계산'한 것처럼 꾸민 장면과 같은 유형 (b)다. 표현은 있고(전류를 신경망에 넣음), 골라 보고한 것도 아니다.", "ref": "#s-fail-types", "refLabel": "실패 유형 (b)와 돌멩이 예"}, {"id": "d06-q03", "type": "ox", "q": "시냅스 현상(PPF·LTP) 재현 논문의 첫 그림은 기초 1의 네 단계 중 '물리가 움직인다'(②)만 보여 준다.", "a": true, "why": "문제 정의(①의 바탕), 해독 규칙(③), 답과의 비교(④)가 없다. Aluru 2026 p.593의 '단순 이온 전도도 이력을 넘어서야'가 같은 지적이다.", "ref": "#s-square-connect", "refLabel": "연결: 시냅스 현상 그림은 ②만"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 펄스 간격 예제와 사다리", "items": [{"id": "d06-q26", "type": "mc", "q": "펄스 간격을 맞히는 과제에서 시험 정확도가 소자 75%, 원시 입력(간격 숫자를 직접 준) 기준선 75%, 기억 없는 저항(정적 소자) 기준선 50%였다. 맞는 해석은?", "options": ["기억은 쓰였으나 간격 숫자보다 낫다고는 못 한다", "소자가 원시 입력 기준선보다 나으므로 소자가 기여했다", "소자의 기억이 정확히 25%p만큼 정확도를 올렸다", "훈련 정확도가 100%이므로 소자가 과제를 완전히 풀었다"], "a": 0, "why": "기준선의 종류마다 묻는 것이 다르다. 원시 입력 기준선과 같으면 '소자가 readout의 일을 덜었다'고 말할 수 없고, 정적 소자보다 높으면 기억이 쓰였다는 진단이 된다. 다만 기준선 사이의 차이를 한 부품의 정확한 몫으로 나눌 수는 없다(Singh 2026 p.18). 훈련 100%는 문턱을 훈련 표본에 맞춰 골랐으니 당연한 값이다.", "ref": "#s-worked-example", "refLabel": "펄스 간격 예제의 단계 6·7"}, {"id": "d06-q28", "type": "mc", "q": "펄스 간격 예제에서 문턱 θ를 고를 때 시험 표본(10, 50, 120, 600 ms)까지 함께 보고, 여덟 개를 모두 맞히는 값으로 정했다. 이때 나온 시험 정확도 100%는 어떻게 읽어야 하나?", "options": ["readout이 실제 경계를 정확히 배웠다는 증거다", "소자의 기억 덕분에 100%가 나왔다는 증거다", "표본이 8개뿐이라 100%는 나올 수 없으니 계산 실수다", "시험 표본이 학습에 쓰여 새 데이터 성능의 증거가 못 된다"], "a": 3, "why": "시험 데이터를 보며 설정(여기서는 θ)을 고르면 그 데이터도 사실상 훈련에 쓴 셈이다. 그래서 학습 전에 떼어 두고 마지막 채점에만 쓴다(단계 2). 100%는 계산상 가능하지만(1.37과 1.46 사이에 θ를 두면 된다), 처음 보는 간격에서도 맞는다는 증거는 아니다.", "ref": "#s-worked-example", "refLabel": "예제 단계 2: 학습 전에 데이터 나누기"}]}, "2-end": {"kind": "end", "title": "2구간 마무리 퀴즈", "items": [{"id": "d06-q04", "type": "short", "q": "상태 x = 2, 4, 6에서 정답 y = 1, 2, 3이면 가장 잘 맞는 직선 y = W·x의 W는?", "a": ["0.5", "1/2", "0.5x", "w=0.5", "w = 0.5"], "why": "세 점 모두 y = 0.5x 위에 있다. 이것이 가장 단순한 readout 학습(선형 회귀)이다. 상태가 100개면 가중치 100개를 같은 원리로 정한다.", "ref": "#b-readout", "refLabel": "기초 3: 2, 4, 6 → 1, 2, 3 직선"}, {"id": "d06-q05", "type": "mc", "q": "'읽을 수 있는 상태'에 붙는 두 조건은?", "options": ["응답이 크고, 입력에 빠르게 반응할 것", "다른 답이면 다른 상태, 같은 입력이면 같은 상태일 것", "전원을 꺼도 상태가 남고, 읽기 I–V가 직선일 것", "값이 아날로그로 연속적이고, 잡음이 전혀 없을 것"], "a": 1, "why": "구별(다른 답을 가져야 할 입력은 다른 상태로) + 반복 가능(같은 입력이면 거의 같은 상태). 크기·속도·비휘발성·선형성은 다른 응용의 사양이고, 잡음이 '전혀' 없을 필요는 없다(흔들림이 상태 사이 간격보다 작으면 된다). Singh 2026 p.6은 드리프트·불완전 리셋·비가역 변화에서 생기는 '겉보기 기억'이 재현성을 해친다고 쓴다.", "ref": "#b-task-state", "refLabel": "기초 2: 구별과 반복 가능"}, {"id": "d06-q30", "type": "mc", "q": "정답과 무관한 잡음 숫자 30개를 상태로 주고 표본 40개로 직선을 맞췄다. 훈련 R²와 held-out R²는 어떻게 나올 가능성이 큰가?", "options": ["둘 다 0 근처 — 무관한 숫자라 어디서도 못 맞힌다", "둘 다 0.7 안팎 — 맞춘 직선이 새 데이터에도 통한다", "훈련은 0.7 안팎, held-out은 0보다 낮다", "훈련은 0 근처, held-out은 0.7 안팎이다"], "a": 2, "why": "손잡이(가중치)가 표본 수에 가까우면 훈련 표본의 우연한 값까지 맞춰 훈련 R²는 대략 30/40 근처(시뮬레이션 0.74)로 오르지만, 새 데이터에서는 평균만 찍는 것보다 못해 음수가 된다. 과적합이고, 그래서 훈련 성능은 증거가 아니다.", "ref": "#s-r2-sim", "refLabel": "그림 5: 훈련 R²와 held-out R²"}, {"id": "d06-q24", "ref": "#b-heldout-baseline", "refLabel": "기초 4: 외우기와 규칙 배우기", "type": "mc", "q": "훈련에 쓰지 않고 떼어 둔 데이터(held-out)로 성능을 재야 하는 이유는?", "options": ["훈련 데이터는 표본 수가 적어 숫자가 흔들리기 때문", "held-out 데이터는 더 정밀한 장비로 따로 측정하기 때문", "훈련 데이터로 재면 성능이 늘 낮게 나오기 때문", "훈련에 쓴 데이터로는 외운 것과 배운 것을 가를 수 없기 때문"], "a": 3, "why": "그림 5처럼 상태가 많고 표본이 적으면 훈련 성능은 높아도 새 데이터에서는 무너진다(훈련 성능은 낮게가 아니라 부풀려져 나온다). readout을 데이터로 학습한 계산이라면 '계산했다'는 주장은 새 데이터 성능으로 서야 한다. 해독 규칙을 미리 정해 둔 계산에는 이 조건이 그대로 적용되지 않는다."}, {"id": "d06-q08", "type": "mc", "q": "'소자가 입력을 더 가르기 쉽게 바꿨는가'를 재는 기준선은?", "options": ["입력을 그대로 같은 readout에 넣은 원시 입력 기준선", "같은 RC를 컴퓨터에서 잡음 없이 돌린 디지털 RC 기준선", "센서 옆 작은 칩에서 신경망을 돌린 MCU 기준선", "기억이 없는 보통 저항을 넣은 정적 소자 기준선"], "a": 0, "why": "원시 입력 기준선은 '소자를 거치지 않은 입력'과 비교하므로 소자의 변환이 도움이 됐는지를 잰다. 디지털 RC 기준선은 하드웨어 잡음의 손실을, 정적 소자 기준선은 시간 동역학(기억)의 기여를, MCU는 시스템 수준 경쟁을 잰다. 종류가 다르면 막대 길이를 비교할 수 없다.", "ref": "#s-baseline-kinds", "refLabel": "기준선의 네 종류"}, {"id": "d06-q31", "type": "mc", "q": "원시 입력 기준선보다 소자 쪽 시험 정확도가 3%p 높았다. '소자의 시간 동역학 덕분'이라고 말하려면 무엇을 더 확인해야 하나?", "options": ["훈련 정확도도 3%p 이상 높은지 확인한다", "소자 수를 늘려 정확도가 더 오르는지 본다", "특징 수·readout을 맞춘 대조에서도 남는지 본다", "같은 소자로 PPF 곡선을 다시 재서 τ를 확인한다"], "a": 2, "why": "기능을 물리 기판(소재·소자)에 귀속하려면 입력 부호화·특징 수·상태 획득·readout 복잡도의 효과와 구별하는 대조 실험(예: 기억을 최소화한 정적 소자 기준선, 특징 수를 맞춘 비교)이 필요하다(Singh 2026). 훈련 정확도는 증거가 아니고, 소자 수나 PPF 재측정은 그 질문에 답하지 않는다.", "ref": "#s-evidence-levels", "refLabel": "증거의 세 수준: 기판에 귀속"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · PPF", "items": [{"id": "d06-q25", "type": "mc", "q": "PPF 곡선(간격 Δt 대 PPF 지수) 하나가 증명하는 것은?", "options": ["새 데이터에서 과제를 푸는 성능", "같은 입력에 상태가 반복해서 재현된다는 것", "소자의 누적 방식이 비선형이라는 것", "최근 입력의 흔적이 남았다가 사라진다는 것"], "a": 3, "why": "사다리 0단: 기억(시간상수)의 존재. '간격이 짧을수록 커짐'은 선형인 저항–커패시터 회로에서도 나오므로 비선형의 증거가 아니다. 비선형은 '함께 준 응답'과 '따로 준 응답의 합'을 비교하는 겹침 시험으로 따로 본다(Day 29–30). 과제 성능과 재현성은 사다리 2–4단에서 따로 검증한다. 그림 6(b)의 목록.", "ref": "#s-ppf-proves", "refLabel": "이 곡선이 증명하는 것"}, {"id": "d06-q11", "type": "ox", "q": "소자가 비선형이고 서서히 잊으면 그 자체로 계산을 한다고 말할 수 있다.", "a": false, "why": "흔한 비약이다. 비선형과 서서히 잊음은 RC 노드에 흔히 요구되는 성질일 뿐 계산의 증거가 아니다. readout을 학습하는 경우의 고친 문장: 최근 입력의 일부 정보가 상태에 남는다. 과제에 필요한 차이가 읽을 수 있는 상태들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며, 기준선보다 나은지는 따로 검증해야 한다.", "ref": "#s-ppf-fix", "refLabel": "고쳐 쓴 문장"}]}, "3-end": {"kind": "end", "title": "3구간 마무리 퀴즈", "items": [{"id": "d06-q12", "type": "mc", "q": "4-bit 펄스 열 '1100'과 '0011'이 같은 최종 전류로 끝나는 소자·읽기 방식에서 알 수 있는 것은?", "options": ["이 읽기 방식으로는 순서를 복원할 수 없다", "소자가 고장 나서 펄스를 기억하지 못한다", "두 열의 순서를 전류 하나로 복원할 수 있다", "이 소자에는 짧은 기억(PPF)이 전혀 없다"], "a": 0, "why": "'상태 하나로 이력·순서를 복원'은 해 봐야 안다. 남는 것과 과제에 충분히 남는 것은 다르다. 같은 전류로 끝났다는 것만으로 기억이 없다거나 고장이라고 할 수는 없고, 다른 시점을 더 읽거나(다중 탭) 다른 상태를 읽으면 달라질 수 있다.", "ref": "#s-one-value", "refLabel": "1100과 0011: 전류 한 값의 한계"}, {"id": "d06-q27", "type": "short", "q": "모형 소자에서 첫 펄스의 응답이 1.00 µA, 50 ms 뒤 두 번째 펄스의 응답이 1.58 µA였다. PPF 지수는 몇 %인가? (숫자만)", "a": ["158", "158%", "158 %"], "why": "PPF 지수 = 두 번째 응답 ÷ 첫 번째 응답 × 100 = 1.58 ÷ 1.00 × 100 = 158%. 그림 1의 10 ms(188%)와 1 s(105%) 사이 값이고, 그림 6의 곡선에서 50 ms 자리에 해당한다.", "ref": "#b-ppf", "refLabel": "그림 1: PPF 지수 계산"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 폴더 사례", "items": [{"id": "d06-q32", "type": "mc", "q": "소자 RC가 90.01%, 원시 시간 프레임 네 장을 그대로 같은 방식의 readout에 넣은 기준선이 91.32%였다. 이 결과로 말할 수 있는 것은?", "options": ["소자가 정확도를 높였으니 계산에 기여했다", "정확도로는 소자 기여를 말할 수 없다", "기준선이 원시 입력이라 이 비교는 의미가 없다", "1.3%p 차이는 하드웨어 잡음 때문에 잃은 정확도다"], "a": 1, "why": "원시 입력 기준선보다 낮으므로 정확도로는 소자 기여를 말할 수 없다. 이 사례(Lee 2025)의 기여는 readout 크기 감소(2352×10 vs 3136×10, 가중치 25% 적음)와 시간척도 조절이다. '하드웨어 잡음의 손실'은 같은 알고리즘을 디지털로 돌린 디지털 RC 기준선이 재는 것이다.", "ref": "#s-case-lee", "refLabel": "사례 1: 원시 입력 기준선보다 낮은 소자"}, {"id": "d06-q15", "type": "mc", "q": "같은 RC 알고리즘을 디지털 컴퓨터로 잡음 없이 돌린 기준선(98.2%)과 아날로그 소자 시스템(96.6%)의 차이가 재는 것은?", "options": ["소자가 입력을 더 가르기 쉽게 바꿨는지", "소자 시스템과 MCU의 전력 차이", "소자 상태가 얼마나 오래 유지되는지", "하드웨어 잡음·편차 때문에 잃은 정확도"], "a": 3, "why": "알고리즘은 같고 구현만 다르므로 차이(1.6%p)는 하드웨어 쪽에서 잃은 몫이다. '소자를 빼고 원시 입력 + 같은 readout' 기준선은 Zhong 2022 본문에 없어서, 소자가 입력을 가르기 쉽게 바꿨는지는 이 비교로 알 수 없다. 기준선의 종류를 적어야 하는 이유.", "ref": "#s-case-zhong", "refLabel": "사례 2: 디지털 RC 기준선"}]}, "4-end": {"kind": "end", "title": "4구간 마무리 퀴즈", "items": [{"id": "d06-q16", "type": "ox", "q": "Chen 2025의 Fig. 4g에서 RC(88%)가 SVM(약 60%)보다 높으므로, 소자의 기여가 약 28%p라고 결론 내릴 수 있다.", "a": false, "why": "SVM(선형 분류기)의 입력이 원시 픽셀인지 같은 virtual node인지, 특징 차원이 맞춰졌는지 본문에 없다. 또 e·f의 혼동 행렬은 훈련 데이터 결과로 읽힌다 [해석]. 기준선이 '있다'만으로는 부족하고 종류와 조건이 적혀야 막대 길이 차이를 소자 기여로 읽을 수 있다.", "ref": "#s-case-chen", "refLabel": "사례 4: 조건이 불명인 SVM 기준선"}, {"id": "d06-q17", "type": "mc", "q": "제목에 'neuromorphic ionic computing'이 들어 있지만, 그림에는 짝펄스 억제·기억과 망각·연상학습 흉내·어레이 이미지 저장만 있고 분류·예측 과제와 정확도는 없다. 사다리의 어디에 놓나?", "options": ["4단 — 저장한 이미지를 다시 읽었으니 held-out이다", "5단 — 생물 시냅스와 비교했으니 기준선이 있다", "0단 — 현상 재현까지이고 과제가 없다", "6단 — 어레이를 만들었으니 시스템 비용까지 왔다"], "a": 2, "why": "과제(입력·정답·척도)가 없으면 1단도 서지 않는다. 저장한 그림을 다시 읽는 것은 훈련에 안 쓴 데이터로 채점하는 held-out이 아니고, 생물과 닮았다는 것은 소자를 뺀 기준선이 아니며, 어레이 제작은 시스템 비용 측정이 아니다. 제목의 'computing'과 사다리의 단은 별개이며 그림으로 읽는다(Fan 2026).", "ref": "#s-case-fan", "refLabel": "사례 5: 과제가 없는 논문"}, {"id": "d06-q33", "type": "mc", "q": "기준선의 종류가 분명한 사례들에서 소자가 기준선보다 낮거나 비슷했다. physical reservoir computing 리뷰의 관찰과 함께 보면, 소자의 가치를 어디서 재는 것이 맞나?", "options": ["정확도 밖의 이점(readout 크기·전력)에서", "기준선을 빼고 소자 결과만 보고하는 데서", "정확도 차이 대신 PPF 곡선을 더 많이 보이는 데서", "훈련 정확도를 함께 보고해 차이를 메우는 데서"], "a": 0, "why": "Liang 2024(p.201)는 비슷한 구성이면 소프트웨어 RC가 대개 낫고, physical reservoir computing의 장점은 정확도보다 시스템 복잡도·전력·학습 비용·속도 같은 데 있다고 쓴다. Lee 2025도 기여가 readout 크기 감소였다. 기준선을 빼거나 훈련 정확도로 메우면 증거 수준이 내려가고, PPF는 0단 증거다.", "ref": "#s-case-lessons", "refLabel": "다섯 사례에서 배울 것"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · Phase 1 종합", "items": [{"id": "d06-q34", "type": "mc", "q": "Phase 1 답의 첫 문장으로 지금까지의 근거에 가장 맞게 쓴 것은?", "options": ["기존 컴퓨터는 모든 계산에서 데이터 이동 때문에 비효율적이다.", "실시간 입력이 이어지는 계산에서는 데이터 이동 비용이 커질 수 있다.", "뉴로모픽 소자는 뇌처럼 20 W로 동작하므로 항상 더 효율적이다.", "PPF를 보인 이온 소자는 이미 계산 소자이므로 응용만 남았다."], "a": 1, "why": "첫 문장은 '어떤 계산에서' 기존 컴퓨터가 불리할 수 있는지를 조건과 함께 말하는 자리다. '모든 계산에서', '항상'은 Day 3–4·Day 5–6에서 조건을 붙인 주장과 맞지 않고, PPF만으로 계산 소자라고 하는 것은 오늘 사다리 0단의 오해다.", "ref": "#s-three-sentences", "refLabel": "'왜 필요한가' 세 문장의 형식"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈 · Phase 1", "items": [{"id": "d06-q20", "type": "mc", "q": "사다리에서 '원시 입력·정적 소자·디지털 RC를 같은 readout으로 비교'가 증명하는 것은?", "options": ["무엇을 계산하는지 말할 수 있다", "외운 것이 아니라 일반화했다", "소자가 기여했다", "시스템으로 쓸 만하다"], "a": 2, "why": "5단 기준선 비교 = 소자의 기여. 1단(과제)은 '무엇을', 4단(held-out)은 '일반화', 6단(시스템 비용)은 '쓸 만한가'. 그림 4의 오른쪽 열.", "ref": "#s-ladder", "refLabel": "그림 4: 각 단이 증명하는 것"}, {"id": "d06-q35", "type": "ox", "q": "원리 증명 단계의 소자 논문은 사다리 6단까지 모두 보여야 가치가 있다.", "a": false, "why": "모든 원리 증명 연구가 모든 요구를 만족할 필요는 없다. 기준은 주장의 강도가 제시된 증거 수준과 일치하는가, 곧 자기가 어느 단에 있는지 제목과 결론이 정직하게 말하는가다(Singh 2026). 오늘의 반론('기준이 너무 높다')에 대한 응답의 재료.", "ref": "#s-objection", "refLabel": "오늘의 반론: 기준이 너무 높은가"}, {"id": "d06-q36", "type": "mc", "q": "Phase 1 주장 사슬에서 '가장 약한 고리'를 고르는 기준으로 맞는 것은?", "options": ["가장 최근에 배운 날의 주장을 고른다", "가장 많은 논문이 인용된 고리를 고른다", "내 소재와 가장 멀어 보이는 고리를 고른다", "[가설]·[미확인] 태그가 몰린 고리를 고른다"], "a": 3, "why": "근거 태그가 약한 곳이 사슬 전체를 약하게 한다(예: MCU 비교가 폴더에 없는 Day 9 [가설], 수치가 대부분 [미확인]인 Day 3–4). 인용 수가 많아도 정성 서술뿐이면 약할 수 있다. 고른 뒤에는 '무엇을 확인하면 [확인]으로 바뀌나'를 적는다.", "ref": "#s-weakest-link", "refLabel": "가장 약한 고리 고르기"}, {"id": "d06-q23", "type": "mc", "q": "내 소자로 사다리 2단(읽을 수 있는 상태)을 보이는 최소 실험에 꼭 들어가야 하는 것은?", "options": ["여러 입력열을 반복해 넣고 끝 상태의 구별·재현을 본다", "PPF 곡선을 여러 간격에서 더 촘촘하게 다시 잰다", "MNIST를 넣어 분류 정확도를 잰다", "펄스 뒤 전류가 얼마나 오래 유지되는지 잰다"], "a": 0, "why": "구별 + 반복 가능. PPF와 유지 시간은 한 종류의 입력(두 펄스, 한 펄스)만 본다. MNIST 정확도는 3·4단이고, 2단 없이 올라가면 readout이 일을 다 하는지 알 수 없다.", "ref": "#b-task-state", "refLabel": "기초 2: 구별과 반복 가능"}]}, "review": {"kind": "review", "title": "지난 학습 복습: 적합한 문제, 부적합한 문제", "items": [{"id": "d06-r01", "core": true, "type": "mc", "q": "공장의 하루치 측정 기록 수억 줄을 밤마다 한꺼번에 분석하는 일을 적합성 질문 사다리에 올리면, 처음 '아니오'가 나오는 질문과 그 까닭은?", "options": ["질문 1: 입력을 모아 배치로 처리할 수 있다", "질문 3: 기록이 많으면 근사를 견딜 수 없다", "질문 4: 밤마다 하므로 소자의 τ가 하루여야 한다", "질문 6: MCU보다 나은지 아직 모른다"], "a": 0, "why": "첫 질문은 '입력이 한 번에 하나씩, 실시간으로 오나?'입니다. 밤마다 모아 둔 기록은 배치로 가중치를 재사용할 수 있어 보통 컴퓨터가 유리하므로, 여기서 이미 '아니오'입니다. 앞 질문이 '아니오'면 아래는 볼 필요가 없습니다.", "wrongWhy": ["", "근사 허용은 데이터 양이 아니라 과제가 정합니다. 그리고 그보다 앞선 질문 1에서 이미 떨어집니다.", "τ 정합은 신호의 시간척도 이야기이고, 그 전에 질문 1에서 떨어집니다.", "질문 6까지 가기 전에 질문 1에서 '아니오'가 나옵니다."], "ref": "d05.html#s-ladder-questions", "refLabel": "질문 사다리의 여섯 질문", "fig": "../assets/img/d05/fig1-question-ladder.svg", "figAlt": "적합한 문제를 가르는 여섯 질문의 사다리"}, {"id": "d06-r02", "type": "mc", "q": "ADC 변환 한 번에 2 nJ이 들고, 1초에 500번 변환한다. ADC가 쓰는 평균 전력은?", "options": ["2 nJ", "1 µW", "1 µJ", "1 mW"], "a": 1, "why": "한 번의 에너지 × 1초당 횟수 = 평균 전력이므로 2 nJ × 500/s = 1,000 nJ/s = 1 µJ/s = 1 µW입니다.", "wrongWhy": ["2 nJ은 한 번의 에너지입니다. 평균 전력은 여기에 1초당 횟수를 곱한 값입니다.", "", "1 µJ은 1초 동안 쓴 에너지이고, 단위를 J/s(= W)로 적어야 평균 전력입니다.", "1,000 nJ/s = 1 µW입니다. 자릿수를 1,000배 크게 잡았습니다."], "ref": "d05.html#s-energy-model", "refLabel": "2-2 한 번의 에너지 × 1초당 횟수", "fig": "../assets/img/d05/fig2c-energy-model.svg", "figAlt": "평균 전력을 한 번의 에너지, 횟수, 대기 전력으로 나눈 그림"}, {"id": "d06-r03", "core": true, "type": "mc", "q": "대기 전력 2 µW인 센서 노드에 사건이 하루 1,000번 오고 사건마다 1 µJ을 쓴다(하루 = 86,400 s). 평균 전력을 줄이려면 무엇을 먼저 바꿔야 하나?", "options": ["사건당 에너지를 절반으로 줄인다", "사건 횟수를 절반으로 줄인다", "대기 전력을 절반으로 줄인다", "셋 다 효과가 비슷하다"], "a": 2, "why": "사건 몫은 1,000 × 1 µJ ÷ 86,400 s ≈ 0.012 µW로 대기 2 µW의 1%도 안 됩니다. 사건이 드문 always-on 노드에서는 평균 전력이 거의 대기 전력이라, 대기 전력을 줄이는 것이 먼저입니다.", "wrongWhy": ["사건 몫이 약 0.012 µW라 절반으로 줄여도 약 0.006 µW만 줍니다.", "사건 몫 자체가 작아 횟수를 줄여도 효과가 거의 없습니다.", "", "대기 전력이 평균 전력의 99% 이상이라 효과가 크게 다릅니다."], "ref": "d05.html#s-always-on", "refLabel": "always-on을 숫자로"}, {"id": "d06-r04", "type": "mc", "q": "어떤 센서 노드의 평균 전력 대부분이 무선 송신이다. 효과가 가장 큰 처방은?", "options": ["MCU 클록을 2배로 올린다", "in-sensor 전처리로 ADC·MCU가 깨는 횟수를 줄인다", "센서 채널 수를 늘려 정보를 더 모은다", "엣지 처리로 사건만 보내 송신 비트를 줄인다"], "a": 3, "why": "어느 고리가 지배하느냐가 처방을 정합니다. 송신이 지배하면 노드 안에서 처리해 결과(사건)만 보내는 엣지 처리가 효과를 냅니다(원시 데이터 전부 621 µW → 사건만 23 µW). in-sensor 전처리는 매 샘플의 ADC·MCU가 지배할 때 효과가 큽니다.", "wrongWhy": ["클록을 올려도 보낼 비트 수는 그대로라 송신 전력이 줄지 않습니다.", "ADC·MCU 몫을 줄이는 처방입니다. 지배하는 고리인 송신은 그대로입니다.", "채널이 늘면 보낼 데이터도 늘어 송신 전력이 커집니다.", ""], "ref": "d05.html#s-three-cases", "refLabel": "2-3 세 가지 설계: 사슬의 어디를 끊나", "fig": "../assets/img/d05/fig2-edge-energy-chain.svg", "figAlt": "센서 노드의 에너지 사슬과 세 설계의 평균 전력 막대"}, {"id": "d06-r05", "core": true, "type": "mc", "q": "심전도 패치 모형에서 C(아날로그 전처리 소자가 늘 켜져 지켜보다가 사건 때만 ADC·MCU를 깨움)의 전처리 소자 전력이 1 µW가 아니라 30 µW라면, B(MCU가 매 샘플 처리, 약 23 µW)와 비교해 어떻게 되나?", "options": ["C가 여전히 B의 약 9분의 1이다", "C가 약 32 µW로 B보다 높아진다", "송신이 같으므로 둘은 같아진다", "ADC·MCU가 잠들므로 C는 0에 가까워진다"], "a": 1, "why": "C = always-on 30 µW + 사건 2개 × 21 nJ ≈ 0.04 µW + 송신 1.6 µW ≈ 32 µW로 B(약 23 µW)보다 커집니다. 일하는 몫을 줄일수록 always-on 부분의 전력이 결론을 정하므로, 전처리 소자의 대기 전력이 작아야 in-sensor가 이득입니다.", "wrongWhy": ["9분의 1은 전처리 소자가 1 µW일 때의 결과입니다. always-on 전력은 평균 전력에 그대로 더해집니다.", "", "송신(1.6 µW)은 같지만 나머지 몫이 다릅니다.", "ADC·MCU가 잠들어도 늘 켜진 전처리 소자의 30 µW는 남습니다."], "ref": "d05.html#ex-three-cases", "refLabel": "그림 4 계산: A·B·C의 평균 전력"}, {"id": "d06-r06", "type": "mc", "q": "어떤 논문이 '전력 99.9% 절감'이라고 적었다. 이 숫자를 내 응용의 근거로 쓰기 전에 먼저 물을 것으로 가장 맞는 것은?", "options": ["기준선과 시스템 경계가 무엇이었나", "절감률이 99%를 넘을 만큼 큰가", "소자 하나의 에너지가 fJ 수준인가", "GPU와 비교해도 절감이 유지되는가"], "a": 0, "why": "절감률은 무엇과 비교했는지(같은 알고리즘의 디지털 구현인지, MCU + 작은 신경망인지, 원시 입력 + 같은 readout인지)와 어디까지 셌는지(센서·ADC·MCU·무선·대기 전력)에 따라 뜻이 달라집니다.", "wrongWhy": ["", "숫자의 크기보다 무엇과 비교했는지가 먼저입니다.", "소자 하나의 에너지는 시스템 전력의 한 항일 뿐입니다.", "엣지 응용의 실제 경쟁자는 GPU가 아니라 MCU + 작은 신경망입니다."], "ref": "d05.html#s-zhong-limits", "refLabel": "논문의 절감 숫자를 읽을 때 볼 세 가지"}, {"id": "d06-r07", "core": true, "type": "mc", "q": "몸에 붙이는 패치용 작은 신경망(가중치 2,000개, 하나에 1 byte)을 칩 안 메모리 64 KB인 저전력 MCU로 돌린다. 입력이 하나씩(배치 1) 올 때 맞는 것은?", "options": ["배치 1이므로 매번 칩 밖 DRAM에서 가중치를 가져와야 한다", "가중치가 너무 커서 MCU로는 돌릴 수 없다", "가중치 2 KB가 칩 안에 들어가 칩 밖 이동이 없다", "배치 1이면 MCU는 계산을 시작할 수 없다"], "a": 2, "why": "가중치 2,000개 × 1 byte = 2 KB는 칩 안 메모리에 들어가므로, 배치 1이어도 칩 밖에서 가져오지 않습니다. 그래서 MCU + 작은 신경망은 µW 자릿수로 동작하는 진짜 경쟁자입니다.", "wrongWhy": ["가중치가 칩 안에 있으면 배치 1이어도 칩 밖 이동이 없습니다.", "2 KB는 64 KB 칩 안 메모리에 넉넉히 들어갑니다.", "", "MCU는 입력이 하나씩 와도 곱해서 더하기를 차례로 해 나갑니다."], "ref": "d05.html#s-mcu-nn", "refLabel": "MCU에서 작은 신경망이 도는 장면"}, {"id": "d06-r08", "type": "mc", "q": "몸에 붙인 이온 소자 전처리기가 첫 주에는 잘 동작하다가 한 달 뒤 응답이 바뀌었다. bio-interface의 두 조건 가운데 무엇이 부족했나?", "options": ["이온–전자 변환 효율", "입력의 희소성", "프로그램 가능성", "동작 안정성"], "a": 3, "why": "이온 소자가 생체와 '같은 언어'를 쓴다는 이점에는 안정성과 이온–전자 변환 효율이라는 두 조건이 붙습니다. 시간이 지나며 응답이 바뀐 것은 안정성의 문제입니다. 이온 시스템은 동작 안정성에서 전자 시스템에 뒤처진다는 지적이 있습니다.", "wrongWhy": ["변환 효율은 이온 신호를 다음 전자 회로가 읽을 수 있게 바꾸는 효율입니다. 시간에 따른 변화와는 다른 조건입니다.", "희소성은 사다리의 질문이지 bio-interface의 두 조건이 아닙니다.", "프로그램 가능성은 MCU와의 비교 항목입니다.", ""], "ref": "d05.html#s-bio-conditions", "refLabel": "bio-interface의 두 조건", "fig": "../assets/img/d05/fig4-bio-interface.svg", "figAlt": "bio-interface가 요구하는 것과 이온 소자, 전자 소자의 자리"}, {"id": "d06-r09", "type": "ox", "q": "입력이 하나씩 실시간으로 온다는 것만으로, 그 응용에서 뉴로모픽 소자가 MCU + 작은 신경망보다 낫다고 말할 수 있다.", "a": false, "why": "실시간 입력은 사다리의 첫 질문을 통과했다는 뜻일 뿐입니다. 희소·대기 전력, 근사 허용, τ 정합, 다음 단계를 지나도, 같은 과제에서 MCU + 작은 신경망보다 시스템 전체로 나은지는 따로 비교해야 합니다.", "wrongWhy": ["실시간은 첫 질문일 뿐입니다. 나머지 조건과 MCU + 작은 신경망과의 시스템 비교가 남아 있습니다.", ""], "ref": "d05.html#s-ladder-questions", "refLabel": "질문 사다리: 1부터 6까지"}]}}}</script>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>
 <div class="done-box" data-day="d06">
   <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>현상 재현 ≠ 계산, 학습형 계산의 검증 사다리(과제·읽을 수 있는 상태·readout·held-out·기준선), PPF 곡선이 증명하는 것과 못 하는 것</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
   <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
@@ -1645,14 +1722,14 @@ window.Quarto = {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
     <div class="nav-footer-center">
-<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
-</div>
-    <div class="nav-footer-right">
       &nbsp;
     </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
   </div>
 </footer>
 

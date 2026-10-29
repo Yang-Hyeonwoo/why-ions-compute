@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13" role="img" aria-label="C 자극 장치 옆모습과 누름·힘·판독 시점 타임라인">
+  <rect width="760" height="360" fill="#ffffff"/>
+  <text x="20" y="24" fill="#1f2937" font-weight="600">장치 옆모습 (개념도)</text>
+  <!-- servo -->
+  <rect x="40" y="50" width="70" height="50" rx="6" fill="#e5e7eb" stroke="#6b7280"/><text x="50" y="80" font-size="12">서보</text>
+  <line x1="110" y1="70" x2="200" y2="110" stroke="#1f2937" stroke-width="5" stroke-linecap="round"/>
+  <rect x="190" y="110" width="22" height="16" rx="4" fill="#fca5a5" stroke="#b91c1c"/>
+  <text x="218" y="122" font-size="11.5">실리콘 팁</text>
+  <!-- device -->
+  <rect x="150" y="126" width="110" height="6" fill="#93c5fd" stroke="#2b59c3"/>
+  <rect x="160" y="132" width="90" height="14" fill="#eef2fb" stroke="#2b59c3"/>
+  <rect x="160" y="146" width="90" height="14" fill="#fdf2e9" stroke="#b45309"/>
+  <rect x="150" y="160" width="110" height="10" fill="#93c5fd" stroke="#2b59c3"/>
+  <text x="266" y="134" font-size="11">ITO-PET</text><text x="266" y="152" font-size="11">p / n 고분자</text><text x="266" y="170" font-size="11">ITO 유리</text>
+  <rect x="140" y="170" width="130" height="10" fill="#d1d5db" stroke="#6b7280"/>
+  <rect x="150" y="180" width="110" height="22" fill="#a3a3a3" stroke="#525252"/><text x="166" y="196" font-size="11.5" fill="#fff">로드셀 → HX711</text>
+  <rect x="30" y="202" width="300" height="10" fill="#9ca3af"/>
+  <text x="40" y="232" font-size="12" fill="#6b7280">밀봉·습도: 봉지는 기계적 보호일 뿐, 수증기 차단은 측정으로 확인</text>
+  <!-- timeline -->
+  <text x="370" y="24" fill="#1f2937" font-weight="600">한 시행의 시간 (리듬 R2 예)</text>
+  <line x1="380" y1="180" x2="745" y2="180" stroke="#9ca3af"/><text x="706" y="198" font-size="12" fill="#6b7280">t [s]</text>
+  <!-- onsets at 0, .2, .4, 1.8 s : scale 120 px/s from x=400 -->
+  <g fill="#2b59c3"><rect x="400" y="60" width="10" height="40"/><rect x="424" y="60" width="10" height="40"/><rect x="448" y="60" width="10" height="40"/><rect x="616" y="60" width="10" height="40"/></g>
+  <text x="384" y="54" font-size="11.5" fill="#2b59c3">누름 (HOLD 80 ms)</text>
+  <g font-size="11" fill="#1f2937"><text x="396" y="116">o₁</text><text x="420" y="116">o₂</text><text x="444" y="116">o₃</text><text x="612" y="116">o₄</text></g>
+  <path d="M400,170 l4,-32 l6,32 M424,170 l4,-30 l6,30 M448,170 l4,-33 l6,33 M616,170 l4,-31 l6,31" fill="none" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="470" y="150" font-size="11.5" fill="#b91c1c">힘 F(t) — 로드셀로 실제 기록</text>
+  <line x1="400" y1="130" x2="616" y2="130" stroke="#6b7280"/><text x="470" y="126" font-size="11.5" fill="#6b7280">총 길이 = o₁→o₄ (모든 리듬 같음)</text>
+  <line x1="616" y1="40" x2="616" y2="215" stroke="#7c3aed" stroke-dasharray="4 3"/>
+  <text x="560" y="230" font-size="11.5" fill="#7c3aed">X 트리거 = o₄</text>
+  <g fill="#7c3aed"><circle cx="652" cy="180" r="4"/><circle cx="688" cy="180" r="4"/><circle cx="736" cy="180" r="4"/></g>
+  <text x="640" y="250" font-size="11.5" fill="#7c3aed">+0.3 · +0.6 · +1.0 s 읽기</text>
+  <g font-size="12" fill="#1f2937">
+    <text x="20" y="282">onset 간격 = 누름 시작 → 다음 누름 시작. '끝'은 tapper가 보내는 o₄ 시각(외부 트리거)으로 안다.</text>
+    <text x="20" y="302">트리거 없이 소자 신호로 끝을 찾으려면 그동안 계속 읽어야 하므로, 그 읽기 횟수도 비용에 넣는다.</text>
+    <text x="20" y="322">서보 각도 ≠ 힘. 리듬마다 힘·누름 시간이 다르면 소자가 아니라 그 차이로 구별했을 수 있다.</text>
+  </g>
+  <text x="20" y="348" fill="#6b7280" font-size="12">개념도 · 축척 대략 · 힘 곡선 모양은 설명용(실측 아님)</text>
+</svg>

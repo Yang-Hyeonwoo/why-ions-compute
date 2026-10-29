@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 24. 분리·rank·일반화: 상태는 얼마나 다른가 – Why Ions Compute</title>
+<title>Day 25. 분리·rank·일반화: 상태는 얼마나 다른가 – Why Ions Compute?</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -47,18 +47,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
-  "collapse-after": 3,
+  "collapse-after": 2,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    "/"
   ],
   "language": {
     "search-no-results-text": "일치 없음",
@@ -129,7 +127,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Why Ions Compute</span>
+    <span class="navbar-title">Why Ions Compute?</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="검색"></div>
@@ -140,46 +138,27 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
-<span class="menu-text">커버</span></a>
+<span class="menu-text">홈</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../plan.html"> 
-<span class="menu-text">전체 학습 지도</span></a>
+<span class="menu-text">로드맵</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">장부</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
-        <li>
-    <a class="dropdown-item" href="../ledger/bottleneck.html">
- <span class="dropdown-text">병목 장부</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/unknowns.html">
- <span class="dropdown-text">아직 모르는 것</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/glossary.html">
- <span class="dropdown-text">용어집</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/kill-criteria.html">
- <span class="dropdown-text">접는 기준</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/references.html">
- <span class="dropdown-text">참고문헌</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/questions.html">
- <span class="dropdown-text">질문 모음</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" href="../rules.html"> 
-<span class="menu-text">공부 규칙</span></a>
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -192,7 +171,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d13a.html">Phase 3 · 좋은 시스템이란</a></li><li class="breadcrumb-item"><a href="../days/d14a.html">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d13a.html">Phase 3 · 좋은 시스템이란</a></li><li class="breadcrumb-item"><a href="../days/d14a.html">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -213,7 +192,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">전체 학습 지도</span></a>
+ <span class="menu-text">로드맵</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -270,7 +249,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -311,7 +290,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -322,44 +301,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
   </div>
 </li>
       </ul>
@@ -376,67 +361,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14a.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
   </div>
 </li>
       </ul>
@@ -453,49 +444,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
   </div>
 </li>
       </ul>
@@ -512,69 +527,93 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">장부</span></a>
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -582,46 +621,28 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">병목 장부</span></a>
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">아직 모르는 것</span></a>
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">용어집</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">접는 기준</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">참고문헌</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">질문 모음</span></a>
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rules.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">공부 규칙</span></a>
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
   </div>
 </li>
     </ul>
@@ -644,9 +665,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d13a.html">Phase 3 · 좋은 시스템이란</a></li><li class="breadcrumb-item"><a href="../days/d14a.html">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d13a.html">Phase 3 · 좋은 시스템이란</a></li><li class="breadcrumb-item"><a href="../days/d14a.html">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Day 24. 분리·rank·일반화: 상태는 얼마나 다른가</h1>
+<h1 class="title">Day 25. 분리·rank·일반화: 상태는 얼마나 다른가</h1>
 <p class="subtitle lead">Phase 3 · 좋은 시스템이란 무엇인가</p>
 </div>
 
@@ -666,8 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> — 다른 입력은 다른 상태로, 비슷한 입력은 비슷한 상태로 가는지 어떻게 재나?</p>
-<p><strong>배울 핵심</strong> — 응답의 크기 ≠ 상태의 차이(포화가 차이를 지움), 분리 = 거리 ÷ 반복 흔들림, rank·kernel rank = 진짜로 다른 방향의 수, 비슷한 입력은 모으는 GR</p>
-<p><strong>이후 쓰이는 곳</strong> — Day 26–29 정확도·기준선 해석, Day 32 반복 흔들림과 소자 간 편차, Day 48 내 소자의 구동 진폭을 훑어 상태가 갈리는 범위를 찾을 때</p>
+<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> — 내 소재를 세게 구동하면(전압 진폭·펄스 폭을 키우면) 전류 변화는 커지지만 입력 0.8과 1.0이 만드는 응답의 차이는 오히려 줄 수 있습니다. 내 구동 진폭 스캔에서 "상태가 갈리는 범위"를 찾으려면 응답의 크기가 아니라 차이를 봐야 합니다.</p>
+<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> — 입력 = 입력 이력 여러 개(순서만 다른 것, 비슷한 것) → 내부에서 하는 일 = 끝 상태를 모아 두 이력 사이의 거리, 거리 ÷ 반복 흔들림, 상태 표의 rank(진짜로 다른 방향의 수)를 센다 → 출력 = 분리(separation), kernel rank(KR), generalization rank(GR) 숫자.</p>
+<p><strong>오늘 반드시</strong> — 응답이 크다는 것과 입력의 차이가 상태의 차이로 남는다는 것은 다르다(포화가 차이를 지운다). 분리는 거리 ÷ 반복 흔들림이고, rank는 상태들이 펼치는 진짜로 다른 방향의 수이며 노드 수와 상태 수 중 작은 값을 넘지 못한다.</p>
+<p><strong>나중에 더 봐도 되는 것</strong> — 특이값을 손으로 구하는 법(접힌 심화), 절편이 있을 때 따로 정할 수 있는 답의 수, 유효 rank. 논문에서 KR·GR 숫자를 비교할 때는 "기준 몇 %로 셌나"만 먼저 확인하면 됩니다.</p>
+<p><strong>다음으로 넘어가는 기준</strong> — '오늘 반드시'를 내 말로 한두 문장 말할 수 있으면 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 27–30 정확도·기준선 해석, Day 33–34 반복 흔들림과 소자 간 편차, Day 55–56 내 소자의 구동 진폭을 훑어 상태가 갈리는 범위를 찾을 때</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d14a">
@@ -678,7 +703,7 @@ window.Quarto = {
 <section id="review" class="level2">
 <h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
 <div class="flow-line">
-<p>지난 학습 단위(Day 23 · 과제의 시간척도와 좋은 memory의 조건)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+<p>지난 학습 단위(Day 24 · 과제의 시간척도와 좋은 memory의 조건)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
 </div>
 <div class="quiz" data-day="d14" data-set="review"></div>
 </section>
@@ -691,7 +716,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
 <div class="lesson-body">
 <div class="lesson-meta">
-<p>학습 구간 6개(1–6) · 한 번에 다 읽지 않아도 됩니다(구간 안의 '멈추기 좋은 곳'에서 끊어 읽어도 됩니다) · 선택 영상 2개 · 퀴즈 25문항 · 내 답 쓰기는 따로. 그림 1–8과 본문의 계산 예(포화 표, 분리 거리, rank, 특이값, KR·GR, 공분산·참여비, 입력 세기 실험)는 <strong>Claude가 코드로 계산한 모형 값</strong>이고 실제 소자 측정이 아닙니다. 원문 그림 두 장도 측정 데이터가 아닙니다(Stepney 2024 Fig. 3은 시뮬레이션, Singh 2026 Fig. 3은 개념도).</p>
+<p>이번 Day는 학습 구간 1–4 · 한 번에 다 읽지 않아도 됩니다(구간 안의 '멈추기 좋은 곳'에서 끊어 읽어도 됩니다) · 선택 영상 2개 · 내 답 쓰기는 따로. 그림 1–8과 본문의 계산 예(포화 표, 분리 거리, rank, 특이값, KR·GR, 공분산·참여비, 입력 세기 실험)는 <strong>Claude가 코드로 계산한 모형 값</strong>이고 실제 소자 측정이 아닙니다. 원문 그림 두 장도 측정 데이터가 아닙니다(Stepney 2024 Fig. 3은 시뮬레이션, Singh 2026 Fig. 3은 개념도).</p>
 <details class="meta-more">
 <summary>
 근거 표기와 Claude가 대조한 범위
@@ -699,14 +724,15 @@ window.Quarto = {
 <p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024는 p.196, 198, 200(물리 노드·전처리·성능 지표 절)만 / Stepney 2024(Natural Computing 튜토리얼)는 p.668, 673, 676–679, 681(입력 크기 조정, 관측 노드, 벤치마크·rank·기억 용량 절) / Singh 2026(Adv. Mater.)은 p.5–6, 7(Fig. 3), 8–9, 13, 18, 22(설계 규칙 DR2·DR4, Table 1, 3.2–3.3절, 5.1절, Table 4). <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다.</p>
 </details>
 </div>
-<p>Day 22–23에서는 "기억"을 셋으로 나눴습니다. 소자의 retention(쓴 값이 정해진 기준 안에서 남아 있는 시간), 모형의 τ(변화가 원래로 돌아가는 시간의 척도), 그리고 readout(상태 숫자들에서 답을 꺼내도록 학습한 직선)까지 포함한 계의 memory capacity. 이번에는 reservoir(입력을 받아 상태로 바꾸는, 학습하지 않는 물리계 또는 신경망)의 다른 두 재료, <strong>비선형성</strong>과 <strong>상태의 다양성</strong>을 같은 방식으로 따집니다. 소자 논문은 흔히 "전류가 10⁴배 변한다", "히스테리시스 고리가 크다", "전극이 16개다"를 좋은 reservoir의 근거로 듭니다. 질문은 그 숫자들이 계산 능력에 대해 무엇을 말해 주고 무엇을 말해 주지 못하느냐입니다. 앞을 알아야 뒤가 읽히니 순서대로 가세요.</p>
+<p>Day 23–24에서는 "기억"을 셋으로 나눴습니다. 소자의 retention(쓴 값이 정해진 기준 안에서 남아 있는 시간), 모형의 τ(변화가 원래로 돌아가는 시간의 척도), 그리고 readout(상태 숫자들에서 답을 꺼내도록 학습한 직선)까지 포함한 계의 memory capacity. 이번에는 reservoir(입력을 받아 상태로 바꾸는, 학습하지 않는 물리계 또는 신경망)의 다른 두 재료, <strong>비선형성</strong>과 <strong>상태의 다양성</strong>을 같은 방식으로 따집니다. 소자 논문은 흔히 "전류가 10⁴배 변한다", "히스테리시스 고리가 크다", "전극이 16개다"를 좋은 reservoir의 근거로 듭니다. 질문은 그 숫자들이 계산 능력에 대해 무엇을 말해 주고 무엇을 말해 주지 못하느냐입니다. 앞을 알아야 뒤가 읽히니 순서대로 가세요.</p>
+<p><strong>이 주제의 질문 순서</strong> — 이번 Day 25에서는 구간 1–4만 읽습니다. 나머지는 Day 26에서 이어집니다(구간 번호는 원래 한 묶음이던 순서 그대로입니다).</p>
 <ol type="1">
-<li>"응답이 크다"는 무엇을 잰 값이고, 왜 그것만으로는 부족한가?</li>
-<li>서로 다른 입력을 서로 다른 상태로 보내는지(분리)는 어떻게 재나?</li>
-<li>상태들이 "진짜로 다른 방향"을 몇 개나 펼치나? — rank와 kernel quality</li>
-<li>비슷한 입력은 비슷한 상태로 보내는가? — 일반화와 generalization rank</li>
-<li>전극(채널) 수와 상태의 차원은 왜 다른가?</li>
-<li>비선형성은 무엇으로 평가하나 — 전기적 비선형과 계산에 쓰이는 비선형</li>
+<li>"응답이 크다"는 무엇을 잰 값이고, 왜 그것만으로는 부족한가? <a href="#ch-big-response">→ 구간 1</a></li>
+<li>서로 다른 입력을 서로 다른 상태로 보내는지(분리)는 어떻게 재나? <a href="#ch-separation">→ 구간 2</a></li>
+<li>상태들이 "진짜로 다른 방향"을 몇 개나 펼치나? — rank와 kernel quality <a href="#ch-rank">→ 구간 3</a></li>
+<li>비슷한 입력은 비슷한 상태로 보내는가? — 일반화와 generalization rank <a href="#ch-generalization">→ 구간 4</a></li>
+<li>전극(채널) 수와 상태의 차원은 왜 다른가? <em>(Day 26에서)</em></li>
+<li>비선형성은 무엇으로 평가하나 — 전기적 비선형과 계산에 쓰이는 비선형 <em>(Day 26에서)</em></li>
 </ol>
 <section id="ch-big-response" class="level3">
 <h3 class="anchored" data-anchor-id="ch-big-response">1. 큰 응답 변화의 함정: 포화가 상태의 차이를 누른다</h3>
@@ -714,17 +740,17 @@ window.Quarto = {
 <p>이 구간을 읽고 나면 "응답이 크다"와 "입력의 차이가 상태의 차이로 남는다"가 다른 말이라는 것을 숫자로 보이고, 소자를 너무 세게 구동하면 왜 계산 능력이 줄어드는지 말할 수 있다.</p>
 </div>
 <p>실험실 장면 하나로 시작합니다. 어떤 논문이 소자에 전압 펄스를 넣었더니 전류가 10⁴배 바뀌고 히스테리시스 고리(전압을 올릴 때와 내릴 때 전류가 다른 길을 그리는 고리)가 크다고 보여 준 뒤, "풍부한 동역학이 있으므로 reservoir로 쓸 수 있다"고 씁니다. 이 문장이 맞는지 판단하려면 먼저 readout이 무엇을 보는지 떠올려야 합니다.</p>
-<p><strong>복습 두 가지.</strong> Day 10에서 본 <a href="../days/d06.html#b-readout">readout</a>은 상태 숫자들에 가중치를 곱해 더하는 직선입니다. 그러니 readout이 답을 가를 수 있으려면 "다른 답을 가져야 할 입력이 서로 다른 상태로 끝나야" 합니다(<a href="../days/d06.html#b-task-state">Day 10 기초 2: 과제와 읽을 수 있는 상태</a>). 그리고 <a href="../days/d10a.html#b-nonlinearity">Day 16 기초: 비선형</a>에서 본 대로, <strong>선형</strong>이란 입력을 두 배로 하면 출력도 두 배, 두 입력의 합을 넣으면 출력도 두 출력의 합이 되는 성질(겹침 원리)이고, 이것이 깨지는 응답이 <strong>비선형</strong>입니다. 포화(어느 이상은 더 오르지 않는 것)는 가장 흔한 비선형입니다.</p>
+<p><strong>복습 두 가지.</strong> Day 10에서 본 <a href="../days/d06.html#b-readout">readout</a>은 상태 숫자들에 가중치를 곱해 더하는 직선입니다. 그러니 readout이 답을 가를 수 있으려면 "다른 답을 가져야 할 입력이 서로 다른 상태로 끝나야" 합니다(<a href="../days/d06.html#b-task-state">Day 10 기초 2: 과제와 읽을 수 있는 상태</a>). 그리고 <a href="../days/d10a.html#b-nonlinearity">Day 17 기초: 비선형</a>에서 본 대로, <strong>선형</strong>이란 입력을 두 배로 하면 출력도 두 배, 두 입력의 합을 넣으면 출력도 두 출력의 합이 되는 성질(superposition principle)이고, 이것이 깨지는 응답이 <strong>비선형</strong>입니다. 포화(어느 이상은 더 오르지 않는 것)는 가장 흔한 비선형입니다.</p>
 <div id="b-response-vs-difference" class="basics">
 <section id="응답의-크기와-응답의-차이-기울기가-정하는-것" class="level4">
 <h4 class="anchored" data-anchor-id="응답의-크기와-응답의-차이-기울기가-정하는-것">응답의 크기와 응답의 차이 — 기울기가 정하는 것</h4>
-<p><strong>왜 필요한가.</strong> readout은 상태의 <strong>크기</strong>가 아니라 상태들 사이의 <strong>차이</strong>로 답을 가릅니다. 0.8 V를 넣었을 때와 1.0 V를 넣었을 때 상태가 똑같으면, 응답이 아무리 커도 둘은 같은 답을 받습니다.</p>
+<p><strong>왜 필요한가.</strong> <span class="key">readout은 상태의 크기가 아니라 상태들 사이의 차이로 답을 가릅니다.</span> 0.8 V를 넣었을 때와 1.0 V를 넣었을 때 상태가 똑같으면, 응답이 아무리 커도 둘은 같은 답을 받습니다.</p>
 <p><strong>작은 숫자로.</strong> 포화형 응답의 대표로 <span class="math inline">\(f(u) = \tanh(g \cdot u)\)</span>를 씁니다. <span class="math inline">\(\tanh\)</span>는 어떤 수가 들어와도 −1과 1 사이로 눌러 주는 S자 곡선이고, <span class="math inline">\(g\)</span>는 "얼마나 세게 구동하나"를 나타내는 배율입니다(전압 진폭이나 펄스 폭을 키우는 것에 해당한다고 보면 됩니다. 실제 소자에서 어느 손잡이가 <span class="math inline">\(g\)</span>에 해당하는지는 소자마다 다릅니다). 입력 0.8과 1.0을 넣어 봅니다.</p>
 <div class="predict">
 <p>응답을 키우려고 <span class="math inline">\(g\)</span>를 1에서 20으로 올리면, 입력 0.8과 1.0의 응답 <strong>차이</strong>는 커질까요, 줄어들까요? 그림 1을 보기 전에 정해 두세요.</p>
 </div>
-<p><strong>무엇을 볼지.</strong> 그림 1의 가로축은 입력 <span class="math inline">\(u\)</span>(0–1), 세로축은 응답 <span class="math inline">\(\tanh(g \cdot u)\)</span>(0–1)이고, 색 하나가 <span class="math inline">\(g\)</span> 하나입니다. <span class="math inline">\(g\)</span>가 클수록 곡선이 빨리 올라가 꼭대기(1)에 붙습니다. 가로축 0.8과 1.0 사이에서 각 곡선이 얼마나 올라가는지(기울기)를 보고, 오른쪽 표의 두 열을 비교하세요.</p>
-<figure class="fig figure"><img src="../assets/img/d14/fig1-saturation.svg" alt="tanh(g·u) 곡선 다섯 개(g = 0.5, 1, 2, 5, 20)와 표. g가 커질수록 최대 응답은 0.462에서 1.000으로 커지지만 입력 0.8과 1.0의 응답 차는 0.0976(g=1)에서 0.0000(g=20)으로 줄어든다" class="figure-img"><figcaption><b>그림 1.</b> 같은 다섯 입력(0.2, 0.4, …, 1.0)을 구동 세기 $g$만 바꿔 넣은 응답. 오른쪽 표의 가운데 열이 최대 응답, 오른쪽 열이 입력 0.8과 1.0의 응답 차이. 응답을 크게 만드는 구동이 상태의 차이를 지운다. 아래 단계 1–3이 표의 $g$ = 1, 2, 20 줄을 손으로 계산한다. $\tanh$는 포화형 응답의 예시로 쓴 함수이고 특정 소자의 측정값이 아니다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>무엇을 볼지.</strong> 그림 1의 가로축은 입력 <span class="math inline">\(u\)</span>(0–1), 세로축은 응답 <span class="math inline">\(\tanh(g \cdot u)\)</span>(0–1)이고, 색 하나가 <span class="math inline">\(g\)</span> 하나입니다. <span class="math inline">\(g\)</span>가 클수록 곡선이 빨리 올라가 꼭대기(1)에 붙습니다. 가로축 0.8과 1.0 사이에서 각 곡선이 얼마나 올라가는지(기울기(slope): 입력이 조금 바뀔 때 응답이 몇 배로 바뀌나)를 보고, 그림 1(b) 표의 두 열을 비교하세요.</p>
+<figure class="fig figure"><img src="../assets/img/d14/fig1-saturation.svg" alt="tanh(g·u) 곡선 다섯 개(g = 0.5, 1, 2, 5, 20)와 표. g가 커질수록 최대 응답은 0.462에서 1.000으로 커지지만 입력 0.8과 1.0의 응답 차는 0.0976(g=1)에서 0.0000(g=20)으로 줄어든다" class="figure-img"><figcaption><b>그림 1.</b> 같은 다섯 입력(0.2, 0.4, …, 1.0)을 구동 세기 $g$만 바꿔 넣은 응답. <b>(a)</b> $g$별 응답 곡선. <b>(b)</b> 표: 가운데 열이 최대 응답, 오른쪽 열이 입력 0.8과 1.0의 응답 차이. 응답을 크게 만드는 구동이 상태의 차이를 지운다. 아래 단계 1–3이 표의 $g$ = 1, 2, 20 줄을 손으로 계산한다. $\tanh$는 포화형 응답의 예시로 쓴 함수이고 특정 소자의 측정값이 아니다. (Claude가 계산해 그림)</figcaption></figure>
 <div class="stepper">
 <div class="step">
 <p><strong>단계 1 — 약하게 구동(<span class="math inline">\(g = 1\)</span>).</strong> <span class="math inline">\(\tanh(0.8) = 0.664\)</span>, <span class="math inline">\(\tanh(1.0) = 0.762\)</span>. 두 응답의 차이는 0.0976. 최대 응답은 0.762.</p>
@@ -744,12 +770,12 @@ window.Quarto = {
 </div>
 <p><span id="s-sat-sources"></span><strong>폴더 원문은 뭐라고 하나.</strong> 세 문헌이 같은 경고를 서로 다른 말로 합니다.</p>
 <ul>
-<li>Stepney(물리 reservoir computing, 줄여서 물리 RC의 튜토리얼, Natural Computing 2024)는 입력의 크기를 정할 때 "입력이 reservoir 동역학을 흔들 만큼 충분히 커야 하지만, 계를 포화시킬 만큼 커서는 안 된다"고 씁니다. <span class="src">Stepney 2024, p.668</span> <span class="prov">서지: S. Stepney, <a href="https://doi.org/10.1007/s11047-024-09997-y" target="_blank"><i>Natural Computing</i> 23, 665–685 (2024)</a></span></li>
-<li>Liang(Nat. Electron. 2024, 내가 읽은 리뷰)은 시간다중화(소자 하나를 시간으로 잘게 나눠 여러 노드처럼 쓰는 방법, <a href="../days/d10b.html#b-time-multiplexing">Day 17 기초</a>)에서 한 입력 조각의 길이 θ가 너무 길면 "다음 값이 오기 전에 포화"해 노드 응답이 두 값으로 몰리고(쌍안정) 상태가 빈약해지며, 너무 짧으면 노드가 작은 진폭의 선형 구간에서만 움직인다고 씁니다. <span class="src">Liang 2024, p.198</span> 너무 약해도(선형) 너무 세도(포화) 나쁘다는 같은 말입니다.</li>
+<li>Stepney(물리 reservoir computing, 줄여서 physical reservoir computing의 튜토리얼, Natural Computing 2024)는 입력의 크기를 정할 때 "입력이 reservoir 동역학을 흔들 만큼 충분히 커야 하지만, 계를 포화시킬 만큼 커서는 안 된다"고 씁니다. <span class="src">Stepney 2024, p.668</span> <span class="prov">서지: S. Stepney, <a href="https://doi.org/10.1007/s11047-024-09997-y" target="_blank"><i>Natural Computing</i> 23, 665–685 (2024)</a></span></li>
+<li>Liang(Nat. Electron. 2024, 내가 읽은 리뷰)은 time multiplexing(소자 하나를 시간으로 잘게 나눠 여러 노드처럼 쓰는 방법, <a href="../days/d10b.html#b-time-multiplexing">Day 18 기초</a>)에서 한 입력 조각의 길이 θ가 너무 길면 "다음 값이 오기 전에 포화"해 노드 응답이 두 값으로 몰리고(쌍안정(bistable)) 상태가 빈약해지며, 너무 짧으면 노드가 작은 진폭의 선형 구간에서만 움직인다고 씁니다. <span class="src">Liang 2024, p.198</span> 너무 약해도(선형) 너무 세도(포화) 나쁘다는 같은 말입니다.</li>
 <li>Singh(Adv. Mater. 2026, 물리 reservoir의 재료·소자 관점 전망 논문)은 비선형성 설계 규칙의 실패 신호로 "응답이 거의 선형", "비선형 응답이 불안정한 스위칭 근처에서만 나타남", "시행마다 큰 편차", "포화가 reservoir 상태 사이의 차이를 압축함"을 표로 적고 <span class="src">Singh 2026, p.9</span>, "최적화의 목표는 가장 큰 히스테리시스나 가장 가파른 기울기 변화가 아니라, 현실적인 자극에서 반복해서 상태를 만들어 내는 재현 가능한 비선형 구간"이라고 씁니다. <span class="src">Singh 2026, p.5</span> <span class="prov">서지: K. RB Singh et al., <a href="https://doi.org/10.1002/adma.74897" target="_blank"><i>Adv. Mater.</i> 2026, e74897</a></span></li>
 </ul>
 <div class="myth">
-<p><strong>"on/off 비와 히스테리시스가 클수록 좋은 reservoir다"</strong> — 아닙니다. 큰 변화는 소자가 반응한다는 증거일 뿐, 서로 다른 입력이 서로 다른 상태로 남는다는 증거가 아닙니다. 그림 1처럼 응답을 키우는 구동이 오히려 상태 사이의 차이를 지울 수 있습니다. 비휘발 메모리(값을 오래 저장하는 소자)에서 좋은 지표인 큰 on/off 비가 reservoir에서는 포화의 신호일 수도 있습니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>"on/off 비와 히스테리시스가 클수록 좋은 reservoir다"</strong> — 아닙니다. <span class="key">큰 변화는 소자가 반응한다는 증거일 뿐, 서로 다른 입력이 서로 다른 상태로 남는다는 증거가 아닙니다.</span> 그림 1처럼 응답을 키우는 구동이 오히려 상태 사이의 차이를 지울 수 있습니다. 비휘발 메모리(값을 오래 저장하는 소자)에서 좋은 지표인 큰 on/off 비가 reservoir에서는 포화의 신호일 수도 있습니다. <span class="tag tag-interp">해석</span></p>
 </div>
 <div class="quiz" data-day="d14" data-set="1-check"></div>
 <div class="stop-point">
@@ -769,15 +795,16 @@ window.Quarto = {
 <div class="goal">
 <p>이 구간을 읽고 나면 두 입력 이력이 남긴 상태의 거리를 손으로 계산하고, 그 거리가 잡음보다 커야 한다는 조건과, 기억이 너무 짧거나 길면 순서 정보가 왜 사라지는지 말할 수 있다.</p>
 </div>
-<p>1구간은 입력 하나짜리였습니다. reservoir에는 입력이 시간 순서로 이어 들어오고, 상태는 지난 입력들의 흔적을 함께 담습니다(<a href="../days/d09.html#b-fading-memory">Day 15 기초: fading memory</a> — 오래된 입력의 영향은 점점 줄어들어 결국 잊힌다는 성질). 그러니 질문은 "다른 <strong>이력</strong>(입력의 순서 있는 목록)이 다른 상태로 끝나는가"가 됩니다.</p>
+<p><strong>상황.</strong> 제스처를 가려내는 센서에서 두 동작이 같은 신호 조각의 순서만 바꾼 것일 수 있습니다. reservoir의 끝 상태가 둘을 다르게 만들어야 readout이 가를 수 있습니다. 이 구간은 그 "다르다"를 거리 하나로 재고, 같은 입력을 반복 측정했을 때의 흔들림과 비교하는 법입니다.</p>
+<p>1구간은 입력 하나짜리였습니다. reservoir에는 입력이 시간 순서로 이어 들어오고, 상태는 지난 입력들의 흔적을 함께 담습니다(<a href="../days/d09a.html#b-fading-memory">Day 15 기초: fading memory</a> — 오래된 입력의 영향은 점점 줄어들어 결국 잊힌다는 성질). 그러니 질문은 "다른 <strong>이력</strong>(history: 입력의 순서 있는 목록)이 다른 상태로 끝나는가"가 됩니다.</p>
 <div id="b-separation" class="basics">
 <section id="분리separation-두-이력이-남긴-상태의-거리" class="level4">
 <h4 class="anchored" data-anchor-id="분리separation-두-이력이-남긴-상태의-거리">분리(separation): 두 이력이 남긴 상태의 거리</h4>
 <p><strong>왜 필요한가.</strong> "1, 0, 1"이 들어온 경우와 "0, 1, 1"이 들어온 경우를 다르게 답해야 하는 과제(예: 순서를 알아야 하는 제스처 구분)라면, 두 이력이 서로 다른 상태로 끝나야 readout이 가를 수 있습니다.</p>
-<p><strong>무엇을 재나.</strong> 상태가 숫자 하나면 거리는 두 값의 차이의 크기 <span class="math inline">\(|x_A - x_B|\)</span>입니다. 상태가 숫자 여러 개(노드 여러 개)면 노드마다 차이를 제곱해 더한 뒤 제곱근을 씌운 값, 즉 평면에서 두 점 사이의 직선거리를 늘린 것을 씁니다. 노드 두 개에서 상태가 (1, 2)와 (4, 6)이면 차이는 (3, 4), 거리는 <span class="math inline">\(\sqrt{3^2 + 4^2} = 5\)</span>입니다.</p>
-<p><strong>작은 숫자로 따라가기.</strong> 노드 하나, 규칙은 지난 상태를 <span class="math inline">\(d\)</span>배로 줄여 남기고 새 입력을 더하는 <span class="math inline">\(x \leftarrow d \cdot x + u\)</span>입니다. <span class="math inline">\(d\)</span>는 한 단계에 <strong>남는 비율</strong>(0이면 바로 잊고, 1에 가까우면 오래 남김)로, Day 15·Day 22–23의 <span class="math inline">\(d\)</span>와 같은 양입니다(<a href="../days/d13a.html#s-node-model">Day 22 2구간: 노드의 식</a>). Day 22–23의 노드는 새 입력에 <span class="math inline">\((1-d)\)</span>를 곱했지만, 여기서는 계산을 쉽게 하려고 입력 배율을 1로 둡니다(Day 15의 식과 같은 꼴). 같은 기호 <span class="math inline">\(a\)</span>를 쓰는 leak rate(다음 상태를 새 값 쪽으로 옮기는 비율, <a href="../days/d09.html#s-four-numbers">Day 15 4구간: 헷갈리기 쉬운 다섯 숫자</a>)와는 다른 양이니 섞지 마세요. 이력 A = (1, 0, 1)과 B = (0, 1, 1)을 넣습니다. 두 이력은 들어간 숫자도 같고(1이 두 번, 0이 한 번) 마지막 입력도 같으며 <strong>순서만</strong> 다릅니다.</p>
-<p><strong>무엇을 볼지.</strong> 그림 2의 왼쪽 세 칸은 <span class="math inline">\(d\)</span> = 0.1, 0.5, 0.9인 노드에 두 이력을 넣은 궤적입니다. 가로축은 단계(몇 번째 입력까지 넣었나), 세로축은 상태 <span class="math inline">\(x\)</span>입니다. 파랑 실선이 A, 주황 점선이 B이고, 오른쪽 끝의 빨간 세로 막대가 끝 상태 사이의 거리입니다. 막대 길이가 <span class="math inline">\(d\)</span>에 따라 어떻게 바뀌는지 먼저 보세요.</p>
-<figure class="fig figure"><img src="../assets/img/d14/fig6-separation.svg" alt="왼쪽 세 칸은 d = 0.1, 0.5, 0.9일 때 이력 A(1,0,1, 파랑 실선)와 B(0,1,1, 주황 점선)를 넣은 상태의 궤적으로 끝 거리가 각각 0.09, 0.25, 0.09이다. 오른쪽은 끝 거리 d(1−d) 곡선으로 d = 0.5에서 최대 0.25이고, 회색 점선(잡음 0.05)과 비교된다" class="figure-img"><figcaption><b>그림 2.</b> 순서만 다른 두 이력을 남는 비율 $d$만 바꾼 노드에 넣은 궤적. 왼쪽 세 칸에서 빨간 세로 막대(끝 거리)의 길이를 비교하고, 오른쪽에서 그 세 값이 $d(1 - d)$ 곡선 위 어디에 놓이는지 보세요. $d$ = 0.1은 앞 입력을 잊어서, $d$ = 0.9는 합(둘 다 2)에 가까워져서 거리가 0.09로 줄고, 둘 다 회색 점선(잡음 0.05의 예) 두 배가 안 됩니다. 아래 단계 1–4가 세 칸을 손으로 계산합니다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>무엇을 재나.</strong> 상태가 숫자 하나면 거리(distance)는 두 값의 차이의 크기 <span class="math inline">\(|x_A - x_B|\)</span>입니다. 상태가 숫자 여러 개(노드 여러 개)면 노드마다 차이를 제곱해 더한 뒤 제곱근을 씌운 값, 즉 평면에서 두 점 사이의 직선거리를 늘린 것을 씁니다. 노드 두 개에서 상태가 (1, 2)와 (4, 6)이면 차이는 (3, 4), 거리는 <span class="math inline">\(\sqrt{3^2 + 4^2} = 5\)</span>입니다.</p>
+<p><strong>작은 숫자로 따라가기.</strong> 노드 하나, 규칙은 지난 상태를 <span class="math inline">\(d\)</span>배로 줄여 남기고 새 입력을 더하는 <span class="math inline">\(x \leftarrow d \cdot x + u\)</span>입니다. <span class="math inline">\(d\)</span>는 한 단계에 <strong>남는 비율</strong>(0이면 바로 잊고, 1에 가까우면 오래 남김)로, Day 15–16·Day 23–24의 <span class="math inline">\(d\)</span>와 같은 양입니다(<a href="../days/d13a.html#s-node-model">Day 23 2구간: 노드의 식</a>). Day 23–24의 노드는 새 입력에 <span class="math inline">\((1-d)\)</span>를 곱했지만, 여기서는 계산을 쉽게 하려고 입력 배율을 1로 둡니다(Day 15–16의 식과 같은 꼴). 같은 기호 <span class="math inline">\(a\)</span>를 쓰는 leak rate(다음 상태를 새 값 쪽으로 옮기는 비율, <a href="../days/d09b.html#s-four-numbers">Day 16 4구간: 헷갈리기 쉬운 다섯 숫자</a>)와는 다른 양이니 섞지 마세요. 이력 A = (1, 0, 1)과 B = (0, 1, 1)을 넣습니다. 두 이력은 들어간 숫자도 같고(1이 두 번, 0이 한 번) 마지막 입력도 같으며 <strong>순서만</strong> 다릅니다.</p>
+<p><strong>무엇을 볼지.</strong> 그림 2(a)의 세 칸은 <span class="math inline">\(d\)</span> = 0.1, 0.5, 0.9인 노드에 두 이력을 넣은 궤적(trajectory)입니다. 가로축은 단계(몇 번째 입력까지 넣었나), 세로축은 상태 <span class="math inline">\(x\)</span>입니다. 파랑 실선이 A, 주황 점선이 B이고, 각 칸 오른쪽 끝의 빨간 세로 막대가 끝 상태 사이의 거리입니다. 막대 길이가 <span class="math inline">\(d\)</span>에 따라 어떻게 바뀌는지 먼저 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d14/fig6-separation.svg" alt="(a) 세 칸은 d = 0.1, 0.5, 0.9일 때 이력 A(1,0,1, 파랑 실선)와 B(0,1,1, 주황 점선)를 넣은 상태의 궤적으로 끝 거리가 각각 0.09, 0.25, 0.09이다. (b)는 끝 거리 d(1−d) 곡선으로 d = 0.5에서 최대 0.25이고, 회색 점선(잡음 0.05)과 비교된다" class="figure-img"><figcaption><b>그림 2.</b> 순서만 다른 두 이력을 남는 비율 $d$만 바꾼 노드에 넣은 궤적. <b>(a)</b> 세 칸에서 빨간 세로 막대(끝 거리)의 길이를 비교하세요. <b>(b)</b> 그 세 값이 $d(1 - d)$ 곡선 위 어디에 놓이는지 보세요. $d$ = 0.1은 앞 입력을 잊어서, $d$ = 0.9는 합(둘 다 2)에 가까워져서 거리가 0.09로 줄고, 둘 다 회색 점선(잡음 0.05의 예) 두 배가 안 됩니다. 아래 단계 1–4가 세 칸을 손으로 계산합니다. (Claude가 계산해 그림)</figcaption></figure>
 </section>
 </div>
 <div class="stepper">
@@ -794,12 +821,12 @@ window.Quarto = {
 <p><strong>단계 4 — 기억이 길 때(<span class="math inline">\(d = 0.9\)</span>).</strong> A: 1 → 0.9 → 1.81. B: 0 → 1 → 1.9. 거리 역시 0.09. 이번에는 오래 남기는 바람에 상태가 "들어온 숫자의 합(둘 다 2)"에 가까워져 순서가 흐려졌습니다.</p>
 </div>
 <div class="step">
-<p><strong>정리.</strong> 이 예에서 거리는 <span class="math inline">\(d(1-d)\)</span>이고 <span class="math inline">\(d = 0.5\)</span>에서 가장 큽니다(0.25). 순서를 가르는 능력은 기억이 짧아도, 길어도 줄어듭니다. Day 22–23에서 본 "τ가 입력 간격보다 훨씬 짧으면 지워지고, 훨씬 길면 평균된다"(<a href="../days/d13b.html#b-timescale-match">Day 23 기초: 시간척도 정합</a>)가 같은 이야기입니다.</p>
+<p><strong>정리.</strong> 이 예에서 거리는 <span class="math inline">\(d(1-d)\)</span>이고 <span class="math inline">\(d = 0.5\)</span>에서 가장 큽니다(0.25). 순서를 가르는 능력은 기억이 짧아도, 길어도 줄어듭니다. Day 23–24에서 본 "τ가 입력 간격보다 훨씬 짧으면 지워지고, 훨씬 길면 평균된다"(<a href="../days/d13b.html#b-timescale-match">Day 24 기초: 시간척도 정합</a>)가 같은 이야기입니다.</p>
 </div>
 </div>
-<p><span id="s-sep-noise"></span><strong>잡음과 비교해야 거리가 뜻을 갖는다.</strong> 같은 입력을 여러 번 넣어도 측정한 상태는 조금씩 흔들립니다. 그 흔들림의 전형적인 크기가 <strong>표준편차</strong>입니다(분산의 제곱근이라 상태와 단위가 같다, <a href="../days/d13a.html#b-variance-share">Day 22 기초: 분산·상관²</a>). 예를 들어 0.95, 1.05, 0.95, 1.05로 흔들리면 평균 1에서 ±0.05씩 벗어나므로 표준편차는 0.05입니다(개수 n으로 나눈 값. Day 22–23의 기본인 n−1로 나누면 약 0.058). 표준편차가 0.05라면, 거리 0.25는 잡음의 5배이고 0.09는 2배도 안 됩니다. 앞의 경우는 readout이 대부분 맞게 가르고, 뒤의 경우는 자주 헷갈립니다. 그러니 분리는 <strong>거리 ÷ 잡음</strong>으로 읽어야 하며, 잡음은 같은 입력을 여러 번 넣어 상태가 얼마나 흔들리는지로 잽니다(Day 32에서 자세히). <span class="tag tag-interp">해석</span></p>
+<p><span id="s-sep-noise"></span><strong>잡음과 비교해야 거리가 뜻을 갖는다.</strong> 같은 입력을 여러 번 넣어도 측정한 상태는 조금씩 흔들립니다. 그 흔들림의 전형적인 크기가 <strong>표준편차</strong>입니다(분산의 제곱근이라 상태와 단위가 같다, <a href="../days/d13a.html#b-variance-share">Day 23 기초: 분산·상관²</a>). 예를 들어 0.95, 1.05, 0.95, 1.05로 흔들리면 평균 1에서 ±0.05씩 벗어나므로 표준편차는 0.05입니다(개수 n으로 나눈 값. Day 23–24의 기본인 n−1로 나누면 약 0.058). 표준편차가 0.05라면, 거리 0.25는 잡음의 5배이고 0.09는 2배도 안 됩니다. 앞의 경우는 readout이 대부분 맞게 가르고, 뒤의 경우는 자주 헷갈립니다. 그러니 <span class="key">분리는 거리 자체가 아니라 거리 ÷ 잡음으로 읽어야 합니다.</span> 잡음은 같은 입력을 여러 번 넣어 상태가 얼마나 흔들리는지로 잽니다(Day 33–34에서 자세히). <span class="tag tag-interp">해석</span></p>
 <p><span id="s-sep-saturation"></span><strong>포화가 끼면.</strong> 위 노드의 상태를 그대로 읽지 않고 <span class="math inline">\(\tanh(5x)\)</span>처럼 세게 포화하는 응답으로 읽는다고 합시다. <span class="math inline">\(d = 0.5\)</span>에서 A는 <span class="math inline">\(\tanh(6.25) = 0.999993\)</span>, B는 <span class="math inline">\(\tanh(7.5) = 0.999999\)</span>로 거리가 <span class="math inline">\(6.8 \times 10^{-6}\)</span>입니다. 1구간의 함정이 이력에서도 그대로 나타납니다. 응답은 1에 가까울 만큼 "크지만" 순서 정보는 남지 않습니다.</p>
-<p><strong>이름.</strong> 서로 다른 입력 이력을 충분히 다른 상태로 보내는 성질을 액체 상태 기계(LSM: 스파이크를 주고받는 뉴런 회로를 reservoir로 쓰는 방식, Day 11–12)를 제안한 Maass 등은 <strong>분리 성질(separation property)</strong>이라고 불렀습니다. <span class="src">Maass 2002</span> <span class="tag tag-unverified">미확인</span> <span class="prov">원문은 폴더에 없음</span> Stepney는 ESN(무작위로 고정한 순환 신경망을 reservoir로 쓰는 방식, Day 11–12)의 무작위 가중치가 입력을 고차원 공간으로 투영해(입력 몇 개를 노드 수만큼 많은 숫자로 옮겨 적어) "학습한 선형 출력 변환으로 원하는 클래스 분리를 얻게 한다"고 설명하고, 투영마다 좋고 나쁨이 과제에 따라 다르다고 덧붙입니다. <span class="src">Stepney 2024, p.668</span> <a href="../days/d10a.html#b-separability">Day 16 기초: 선형 분리</a>에서 본 "직선 하나로 두 무리를 가를 수 있는가"가 바로 이 거리들이 어떻게 놓였는가의 문제입니다.</p>
+<p><strong>이름.</strong> 서로 다른 입력 이력을 충분히 다른 상태로 보내는 성질을 액체 상태 기계(LSM: 스파이크를 주고받는 뉴런 회로를 reservoir로 쓰는 방식, Day 11–12)를 제안한 Maass 등은 <strong>분리 성질(separation property)</strong>이라고 불렀습니다. <span class="src">Maass 2002</span> <span class="tag tag-unverified">미확인</span> <span class="prov">원문은 폴더에 없음</span> Stepney는 ESN(무작위로 고정한 순환 신경망을 reservoir로 쓰는 방식, Day 11–12)의 무작위 가중치가 입력을 고차원 공간으로 투영해(입력 몇 개를 노드 수만큼 많은 숫자로 옮겨 적어) "학습한 선형 출력 변환으로 원하는 클래스 분리를 얻게 한다"고 설명하고, 투영마다 좋고 나쁨이 과제에 따라 다르다고 덧붙입니다. <span class="src">Stepney 2024, p.668</span> <a href="../days/d10a.html#b-separability">Day 17 기초: 선형 분리</a>에서 본 "직선 하나로 두 무리를 가를 수 있는가"가 바로 이 거리들이 어떻게 놓였는가의 문제입니다.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="분리만으로는 부족한 이유">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -831,21 +858,22 @@ window.Quarto = {
 <div class="goal">
 <p>이 구간을 읽고 나면 3×3 숫자 표에서 "진짜로 다른 방향"의 수(rank)를 손으로 세고, 특이값이 그 방향마다의 크기라는 것을 같은 표의 숫자로 확인하고, kernel quality(kernel rank)가 어떤 실험으로 재는 값이며 왜 기준(몇 %)을 함께 적어야 하는지 말할 수 있다.</p>
 </div>
+<p><strong>상황.</strong> 논문이 입력 이력을 수십 개 넣고 끝 상태를 모아 표로 만들었습니다. 이력 쌍마다 거리를 일일이 보면 수백 개라 감당이 안 됩니다. 이 구간은 표 전체를 숫자 하나(rank)로 요약하는 법이고, 핵심은 "다른 상태의 몇 배인 상태는 새 정보가 아니다"라는 한 가지입니다.</p>
 <p>2구간처럼 두 이력의 거리를 하나씩 재는 일은 이력이 많아지면 감당이 안 됩니다. 이 구간은 "여러 이력이 남긴 상태들이 얼마나 다양하게 퍼져 있나"를 숫자 하나로 요약하는 방법입니다. 행렬(숫자를 가로줄·세로줄로 늘어놓은 표)과 벡터(숫자 목록)는 <a href="../days/d01b.html#b-vector-matrix">Day 2 기초</a>에서 본 그대로입니다. 여기서는 <strong>상태 하나 = 숫자 목록 하나</strong>(노드마다 숫자 하나)로 씁니다.</p>
 <div id="b-rank" class="basics">
 <section id="진짜로-다른-방향의-수-행렬의-rank" class="level4">
 <h4 class="anchored" data-anchor-id="진짜로-다른-방향의-수-행렬의-rank">진짜로 다른 방향의 수 — 행렬의 rank</h4>
-<p><strong>왜 필요한가.</strong> readout은 상태의 숫자들에 가중치를 곱해 더합니다. 그래서 어떤 상태가 다른 상태를 통째로 몇 배 한 것이라면, readout에게는 새로 쓸 재료가 생기지 않습니다(아래 '<a href="#s-readout-intercept">readout에 주는 뜻</a>'에서 숫자로 확인합니다). 상태가 <strong>몇 개</strong>냐보다 <strong>진짜로 다른 방향이 몇 개</strong>냐가 readout이 할 수 있는 일을 정합니다. 그 수를 세는 법부터 봅니다.</p>
+<p><strong>왜 필요한가.</strong> readout은 상태의 숫자들에 가중치를 곱해 더합니다. 그래서 어떤 상태가 다른 상태를 통째로 몇 배 한 것이라면, readout에게는 새로 쓸 재료가 생기지 않습니다(아래 '<a href="#s-readout-intercept">readout에 주는 뜻</a>'에서 숫자로 확인합니다). <span class="key">상태가 몇 개냐보다 진짜로 다른 방향이 몇 개냐가 readout이 할 수 있는 일을 정합니다.</span> 그 수를 세는 법부터 봅니다.</p>
 <p><strong>상태를 화살표로 그리기.</strong> 노드가 2개인 상태 (1, 2)는, 가로축이 노드 1의 값이고 세로축이 노드 2의 값인 평면에서 원점에서 점 (1, 2)로 가는 화살표입니다. 화살표에서 <strong>방향</strong>(어느 쪽을 가리키나)과 <strong>길이</strong>(얼마나 긴가)를 따로 봅니다. (2, 4)는 (1, 2)를 통째로 두 배 한 것이라 같은 직선 위에서 두 배 길 뿐 방향은 같습니다. (2, 1)은 그 직선을 벗어나므로 다른 방향입니다. 노드가 3개면 화살표가 3차원 공간에 놓일 뿐 생각은 같습니다. "방향이 같다"는 "한쪽이 다른 쪽의 몇 배"라는 뜻입니다.</p>
-<p><strong>표의 모양.</strong> 노드가 <span class="math inline">\(N\)</span>개, 입력 이력(표본)이 <span class="math inline">\(S\)</span>개이면, 표본 하나의 상태를 <strong>세로줄 하나</strong>로 세워 <span class="math inline">\(N \times S\)</span> 표를 만듭니다. 이것을 <strong>상태 행렬</strong>이라 부릅니다. 가로줄(행) 하나는 노드 하나가 표본마다 낸 값이고, 세로줄(열) 하나는 표본 하나의 상태입니다.</p>
+<p><strong>표의 모양.</strong> 노드가 <span class="math inline">\(N\)</span>개, 입력 이력(표본)이 <span class="math inline">\(S\)</span>개이면, 표본 하나의 상태를 <strong>세로줄 하나</strong>로 세워 <span class="math inline">\(N \times S\)</span> 표를 만듭니다. 이것을 <strong>상태 행렬</strong>(state matrix)이라 부릅니다. 가로줄(행) 하나는 노드 하나가 표본마다 낸 값이고, 세로줄(열) 하나는 표본 하나의 상태입니다.</p>
 <p><strong>작은 예: 노드 3개, 입력 이력 3개.</strong> 세 이력이 남긴 상태가 다음과 같다고 합시다(각 상태는 노드 1·2·3의 값).</p>
 <ul>
 <li>상태 <span class="math inline">\(s_1 = (1, 2, 3)\)</span></li>
 <li>상태 <span class="math inline">\(s_2 = (2, 4, 6)\)</span></li>
 <li>상태 <span class="math inline">\(s_3 = (1, 0, 1)\)</span></li>
 </ul>
-<p><strong>무엇을 볼지.</strong> 그림 3의 왼쪽 두 평면은 노드가 둘일 때의 화살표입니다. 같은 직선 위에 겹친 두 화살표(왼쪽)와 서로 다른 직선 위의 두 화살표(가운데)를 비교하세요. 오른쪽 표는 위의 3×3 예를 '세로줄 하나 = 상태 하나'로 적은 것이고, 표 아래 세 줄이 바로 아래 단계 1–3입니다. 맨 아래 회색 '방향별 크기(특이값)'는 이 구간 뒤쪽에서 계산하니 지금은 건너뛰세요.</p>
-<figure class="fig figure"><img src="../assets/img/d14/fig0-rank-directions.svg" alt="노드 2개인 상태를 화살표로 그린 두 평면((2,4)=2×(1,2)이면 같은 직선 위라 방향 1개, (1,2)와 (2,1)은 방향 2개)과, 노드 3개·상태 3개 표 s1=(1,2,3), s2=(2,4,6), s3=(1,0,1)에서 진짜로 다른 방향이 2개(rank 2)임을 보이는 그림. 방향별 크기(특이값)는 8.44, 0.92, 0.00" class="figure-img"><figcaption><b>그림 3.</b> rank를 그림으로. 왼쪽 두 평면은 노드가 둘인 상태를 화살표로 그린 것이다. 같은 직선 위의 두 화살표는 방향 하나, 서로 다른 직선이면 방향 둘. 오른쪽 표는 본문의 3×3 예(세로줄 하나가 상태 하나)이고, 표 아래 세 줄을 단계 1–3에서 손으로 따라간다. 맨 아래 회색 '방향별 크기(특이값)'는 뒤의 '특이값' 단계에서 같은 표의 숫자로 계산한다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>무엇을 볼지.</strong> 그림 3(a)(b)는 노드가 둘일 때의 화살표입니다. 같은 직선 위에 겹친 두 화살표(a)와 서로 다른 직선 위의 두 화살표(b)를 비교하세요. (c)의 표는 위의 3×3 예를 '세로줄 하나 = 상태 하나'로 적은 것이고, 표 아래 세 줄이 바로 아래 단계 1–3입니다. 맨 아래 회색 '방향별 크기(특이값)'는 이 구간 뒤쪽에서 계산하니 지금은 건너뛰세요.</p>
+<figure class="fig figure"><img src="../assets/img/d14/fig0-rank-directions.svg" alt="노드 2개인 상태를 화살표로 그린 두 평면((2,4)=2×(1,2)이면 같은 직선 위라 방향 1개, (1,2)와 (2,1)은 방향 2개)과, 노드 3개·상태 3개 표 s1=(1,2,3), s2=(2,4,6), s3=(1,0,1)에서 진짜로 다른 방향이 2개(rank 2)임을 보이는 그림. 방향별 크기(특이값)는 8.44, 0.92, 0.00" class="figure-img"><figcaption><b>그림 3.</b> rank를 그림으로. <b>(a)</b> 노드가 둘인 상태를 화살표로 그렸다. 같은 직선 위의 두 화살표는 방향 하나. <b>(b)</b> 서로 다른 직선이면 방향 둘. <b>(c)</b> 본문의 3×3 예(세로줄 하나가 상태 하나)이고, 표 아래 세 줄을 단계 1–3에서 손으로 따라간다. 맨 아래 회색 '방향별 크기(특이값)'는 뒤의 '특이값' 단계에서 같은 표의 숫자로 계산한다. (Claude가 계산해 그림)</figcaption></figure>
 <div class="stepper">
 <div class="step">
 <p><strong>단계 1 — <span class="math inline">\(s_2\)</span>는 새로운가?</strong> 노드마다 비교합니다. <span class="math inline">\(2 = 2 \times 1\)</span>, <span class="math inline">\(4 = 2 \times 2\)</span>, <span class="math inline">\(6 = 2 \times 3\)</span>. <span class="math inline">\(s_2\)</span>는 <span class="math inline">\(s_1\)</span>을 통째로 두 배 한 것입니다. 화살표로 그리면 같은 방향으로 두 배 길 뿐이라 <strong>새 방향이 아닙니다</strong>.</p>
@@ -854,7 +882,7 @@ window.Quarto = {
 <p><strong>단계 2 — <span class="math inline">\(s_3\)</span>는 새로운가?</strong> <span class="math inline">\(s_3\)</span>가 <span class="math inline">\(s_1\)</span>의 몇 배라면 첫 숫자에서 배수는 1이어야 합니다(<span class="math inline">\(1 = c \times 1\)</span>). 그런데 그러면 둘째 숫자가 <span class="math inline">\(1 \times 2 = 2\)</span>여야 하는데 실제는 0입니다. 어떤 배수로도 안 되므로 <span class="math inline">\(s_3\)</span>는 <strong>새 방향</strong>입니다. (<span class="math inline">\(s_2\)</span>는 <span class="math inline">\(s_1\)</span>과 같은 직선 위에 있으므로, "<span class="math inline">\(s_1\)</span>의 몇 배인가"만 확인하면 <span class="math inline">\(s_1\)</span>·<span class="math inline">\(s_2\)</span>가 이미 가진 방향 전체와 비교한 셈입니다.)</p>
 </div>
 <div class="step">
-<p><strong>단계 3 — 섞어서 만들 수 있으면 새 방향이 아니다.</strong> 지금까지 방향은 <span class="math inline">\(s_1\)</span> 쪽과 <span class="math inline">\(s_3\)</span> 쪽 둘입니다. 넷째 이력이 <span class="math inline">\(s_4 = (2, 2, 4)\)</span>를 남겼다고 해 봅시다. 이것은 <span class="math inline">\(s_1 + s_3 = (1+1, 2+0, 3+1)\)</span>이라 두 방향을 섞어 만들 수 있으므로 역시 새 방향이 아닙니다. 두 방향의 "몇 배씩 더하기"(Day 18–19에서 본 가중합. 정식 이름은 선형 결합(linear combination))로 만들 수 있는 상태는 모두 같은 평면 위에 있습니다. 그래서 새 방향인지 확인할 때는 "한 상태의 몇 배인가"만이 아니라 "이미 모은 방향들을 몇 배씩 더해 만들 수 있나"를 봅니다.</p>
+<p><strong>단계 3 — 섞어서 만들 수 있으면 새 방향이 아니다.</strong> 지금까지 방향은 <span class="math inline">\(s_1\)</span> 쪽과 <span class="math inline">\(s_3\)</span> 쪽 둘입니다. 넷째 이력이 <span class="math inline">\(s_4 = (2, 2, 4)\)</span>를 남겼다고 해 봅시다. 이것은 <span class="math inline">\(s_1 + s_3 = (1+1, 2+0, 3+1)\)</span>이라 두 방향을 섞어 만들 수 있으므로 역시 새 방향이 아닙니다. 두 방향의 "몇 배씩 더하기"(Day 19–20에서 본 가중합. 정식 이름은 선형 결합(linear combination))로 만들 수 있는 상태는 모두 같은 평면 위에 있습니다. 그래서 새 방향인지 확인할 때는 "한 상태의 몇 배인가"만이 아니라 "이미 모은 방향들을 몇 배씩 더해 만들 수 있나"를 봅니다.</p>
 </div>
 <div class="step">
 <p><span id="s-rank-name"></span><strong>이름.</strong> 상태는 셋이지만 진짜로 다른 방향은 <strong>2개</strong>입니다. 이렇게 센 "진짜로 다른 방향의 수"를 그 숫자 표(행렬)의 <strong>rank</strong>(계수)라고 합니다. 손으로 셀 때의 순서는 늘 같습니다. 상태를 하나씩 보며, 앞에서 모은 방향들의 몇 배씩 더하기로 만들 수 있으면 건너뛰고, 못 만들면 새 방향으로 하나 셉니다. 마지막에 센 개수가 rank입니다. 이 예의 상태 행렬(노드 3 × 표본 3)의 rank는 2입니다.</p>
@@ -865,8 +893,8 @@ window.Quarto = {
 </div>
 <p><span id="s-readout-intercept"></span><strong>readout에 주는 뜻.</strong> 이제 rank가 readout의 한계와 어떻게 이어지는지 봅니다.</p>
 <ul>
-<li><strong>절편이 없을 때.</strong> readout이 <span class="math inline">\(y = w_1 x_1 + \cdots + w_N x_N\)</span>(상태의 숫자에 가중치를 곱해 더함)이라면, <span class="math inline">\(s_2 = 2s_1\)</span>일 때 출력도 언제나 두 배입니다. <span class="math inline">\(y(s_2) = w \cdot 2s_1 = 2\,y(s_1)\)</span>. 그래서 <span class="math inline">\(s_1\)</span>과 <span class="math inline">\(s_2\)</span>에 +1과 −1을 줄 수 없고, 위 세 이력에 (+1, −1, 0) 같은 답을 동시에 줄 수도 없습니다.</li>
-<li><strong>절편이 있을 때.</strong> 보통 readout은 <strong>상수 하나(절편)</strong> <span class="math inline">\(w_0\)</span>를 더합니다: <span class="math inline">\(y = w_0 + w_1 x_1 + \cdots + w_N x_N\)</span>. Day 13–14의 ridge와 Day 20–21의 <code>esn.py</code>도 상태 옆에 늘 1인 칸을 하나 붙여 이 절편을 함께 풉니다. 그러면 위의 막힘이 풀립니다. 상태가 숫자 하나인 가장 작은 예로, <span class="math inline">\(x = 1\)</span>과 <span class="math inline">\(x = 2\)</span>에 <span class="math inline">\(y = 3 - 2x\)</span>를 쓰면 출력은 <span class="math inline">\(3 - 2 = +1\)</span>, <span class="math inline">\(3 - 4 = -1\)</span>입니다. 절편 3이 "모두에게 똑같이 더하는 몫"을 맡기 때문에 2배 관계가 깨집니다.</li>
+<li><strong>절편(intercept)이 없을 때.</strong> readout이 <span class="math inline">\(y = w_1 x_1 + \cdots + w_N x_N\)</span>(상태의 숫자에 가중치를 곱해 더함)이라면, <span class="math inline">\(s_2 = 2s_1\)</span>일 때 출력도 언제나 두 배입니다. <span class="math inline">\(y(s_2) = w \cdot 2s_1 = 2\,y(s_1)\)</span>. 그래서 <span class="math inline">\(s_1\)</span>과 <span class="math inline">\(s_2\)</span>에 +1과 −1을 줄 수 없고, 위 세 이력에 (+1, −1, 0) 같은 답을 동시에 줄 수도 없습니다.</li>
+<li><strong>절편이 있을 때.</strong> 보통 readout은 <strong>상수 하나(절편)</strong> <span class="math inline">\(w_0\)</span>를 더합니다: <span class="math inline">\(y = w_0 + w_1 x_1 + \cdots + w_N x_N\)</span>. Day 13–14의 ridge와 Day 21–22의 <code>esn.py</code>도 상태 옆에 늘 1인 칸을 하나 붙여 이 절편을 함께 풉니다. 그러면 위의 막힘이 풀립니다. 상태가 숫자 하나인 가장 작은 예로, <span class="math inline">\(x = 1\)</span>과 <span class="math inline">\(x = 2\)</span>에 <span class="math inline">\(y = 3 - 2x\)</span>를 쓰면 출력은 <span class="math inline">\(3 - 2 = +1\)</span>, <span class="math inline">\(3 - 4 = -1\)</span>입니다. 절편 3이 "모두에게 똑같이 더하는 몫"을 맡기 때문에 2배 관계가 깨집니다.</li>
 </ul>
 <p>그래도 원리는 같습니다. 절편은 '모두에게 같은 몫'이라는 방향 하나를 더할 뿐이고, 따로따로 정할 수 있는 답의 수는 여전히 방향의 수가 정합니다. 아래의 kernel rank는 <strong>상태 행렬 자체</strong>의 rank를 셉니다. 1을 붙인 줄은 어느 reservoir에나 똑같이 붙으므로 상태의 다양성을 비교할 때는 빼고 셉니다. <span class="tag tag-interp">해석</span></p>
 <details class="deep">
@@ -882,7 +910,7 @@ window.Quarto = {
 </section>
 </div>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/bvB5uQXX7WY?start=403&amp;rel=0" title="영상: 제7장: 역행렬, 열공간, 영공간 | 선형대수학의 본질" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 6:43–9:29, 약 3분 · 전체 12분, 한국어 더빙·번역판).</b> 3Blue1Brown 한국어, "제7장: 역행렬, 열공간, 영공간 | 선형대수학의 본질"(원본: 3Blue1Brown, "Inverse matrices, column space and null space"). <b>볼 이유:</b> 챕터 '행렬식이 0일 경우'(6:43)에서 행렬이 공간을 직선이나 평면으로 납작하게 누르는 장면을, '랭크, 열공간'(8:02)에서 "눌린 뒤 남은 차원의 수 = rank", "열(세로줄)들이 펼치는 공간 = 열공간"을 설명한다(챕터 제목·설명 기준). 본문의 상태 행렬은 세로줄 하나가 상태 하나이므로, 상태들이 펼치는 공간이 곧 이 열공간이다 [해석]. 영상은 행렬을 '공간을 움직이는 변환'으로 보는 앞 장들을 전제하므로, 앞부분이 낯설면 9:29까지만 봐도 된다. <b>보고 답할 질문:</b> 본문 예의 노드 3 × 상태 3 표(rank 2)에서, 세 상태 화살표는 3차원 공간 안의 무엇(점·직선·평면) 위에 모두 놓이는가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 목록(영상 내용은 미검증)</span></div></div>
-<p><span id="s-singular"></span><strong>방향별 크기 — 특이값.</strong> rank는 방향이 "있다/없다"만 셉니다. 그런데 아래 단계들 다음에 보듯 실제 측정에는 잡음 때문에 "아주 작지만 0은 아닌" 방향이 생기므로, 방향마다 상태들이 <strong>얼마나 크게</strong> 뻗어 있는지를 숫자로 알아야 합니다. 그 숫자가 <strong>특이값</strong>(singular value. Day 15의 '특잇값'과 같은 말)입니다. 재는 도구는 <a href="../days/d11a.html#ch-bound">Day 18 3구간</a>의 <strong>그림자</strong>입니다. 길이가 1인 방향 하나를 정하고, 각 상태 화살표를 그 방향에 비춘 그림자 길이(상태의 숫자와 방향의 숫자를 칸마다 곱해 더한 값)를 잽니다. 같은 3×3 표로 따라갑니다.</p>
+<p><span id="s-singular"></span><strong>방향별 크기 — 특이값.</strong> rank는 방향이 "있다/없다"만 셉니다. 그런데 아래 단계들 다음에 보듯 실제 측정에는 잡음 때문에 "아주 작지만 0은 아닌" 방향이 생기므로, 방향마다 상태들이 <strong>얼마나 크게</strong> 뻗어 있는지를 숫자로 알아야 합니다. 그 숫자가 <strong>특이값</strong>(singular value. Day 15–16의 '특잇값'과 같은 말)입니다. 재는 도구는 <a href="../days/d11a.html#ch-bound">Day 19 3구간</a>의 <strong>그림자</strong>입니다. 길이가 1인 방향 하나를 정하고, 각 상태 화살표를 그 방향에 비춘 그림자 길이(상태의 숫자와 방향의 숫자를 칸마다 곱해 더한 값)를 잽니다. 같은 3×3 표로 따라갑니다.</p>
 <div class="stepper">
 <div class="step">
 <p><strong>단계 1 — 전체 퍼짐.</strong> 표의 숫자 아홉 개를 모두 제곱해 더합니다. <span class="math inline">\(s_1\)</span>: 1 + 4 + 9 = 14, <span class="math inline">\(s_2\)</span>: 4 + 16 + 36 = 56, <span class="math inline">\(s_3\)</span>: 1 + 0 + 1 = 2. 합은 72입니다. 서로 직각인 방향 세 개를 고르면, 이 72를 세 방향이 나눠 갖습니다(방향마다 "세 상태의 그림자 길이를 제곱해 더한 값"이 그 방향의 몫). 특이값은 몫이 가장 큰 방향부터 차례로 고른 직각 방향들의 몫에 제곱근을 씌운 값입니다.</p>
@@ -897,23 +925,23 @@ window.Quarto = {
 <p><strong>단계 4 — 남은 방향.</strong> 세 방향의 몫을 더하면 72여야 하므로 둘째 방향의 몫은 72 − 71.16 − 0 = 0.84, <span class="math inline">\(\sigma_2 = \sqrt{0.84} = 0.92\)</span>입니다. 이 둘째 방향은 주로 <span class="math inline">\(s_3\)</span>가 <span class="math inline">\(s_1\)</span>의 직선에서 벗어난 만큼입니다(컴퓨터로 확인한 이 방향의 그림자 길이: <span class="math inline">\(s_1\)</span> 0.05, <span class="math inline">\(s_2\)</span> 0.11, <span class="math inline">\(s_3\)</span> 0.91. 부호는 뗀 크기).</p>
 </div>
 <div class="step">
-<p><strong>정리.</strong> 특이값은 8.44, 0.92, 0. 0이 아닌 것이 2개이므로 rank 2로, 위에서 손으로 센 것과 같습니다. 특이값은 rank가 버린 정보, 곧 <strong>방향마다의 크기</strong>를 더 줍니다. 여기서는 둘째 방향이 첫째의 약 1/9입니다. 이렇게 직각 방향들을 몫이 큰 순서로 찾아 주는 계산이 특이값 분해(SVD)이고, 큰 표는 컴퓨터가 합니다. Day 15에서는 가장 큰 특잇값을 "표를 한 번 곱할 때 어떤 방향이든 최대 몇 배 늘리나"로 봤는데, 같은 수를 상태 쪽에서 보면 "상태들이 가장 많이 뻗은 방향의 그림자 크기"입니다. [계산] 2 × 2 표라면 고유값으로 끝까지 손으로 구할 수 있습니다(아래 접힌 상자).</p>
+<p><strong>정리.</strong> 특이값은 8.44, 0.92, 0. 0이 아닌 것이 2개이므로 rank 2로, 위에서 손으로 센 것과 같습니다. 특이값은 rank가 버린 정보, 곧 <strong>방향마다의 크기</strong>를 더 줍니다. 여기서는 둘째 방향이 첫째의 약 1/9입니다. 이렇게 직각 방향들을 몫이 큰 순서로 찾아 주는 계산이 특이값 분해(SVD)이고, 큰 표는 컴퓨터가 합니다. Day 15–16에서는 가장 큰 특잇값을 "표를 한 번 곱할 때 어떤 방향이든 최대 몇 배 늘리나"로 봤는데, 같은 수를 상태 쪽에서 보면 "상태들이 가장 많이 뻗은 방향의 그림자 크기"입니다. [계산] 2 × 2 표라면 고유값으로 끝까지 손으로 구할 수 있습니다(아래 접힌 상자).</p>
 </div>
 </div>
 <details class="deep">
 <summary>
 심화 · 2 × 2 표의 특이값을 손으로 구하기
 </summary>
-<p>표 <span class="math inline">\(A\)</span>의 특이값은 "<span class="math inline">\(A\)</span>를 뒤집어 곱한 표 <span class="math inline">\(A^{\mathsf T}A\)</span>"의 고유값(<a href="../days/d09.html#b-spectral-radius">Day 15 기초</a>의 '고윳값': 그 방향으로 몇 배 늘리나를 뜻하는 수)에 제곱근을 씌운 것입니다. 세로줄 하나를 상태 하나로 보면, <span class="math inline">\(A^{\mathsf T}A\)</span>의 칸은 <strong>상태끼리 칸마다 곱해 더한 값</strong>입니다(왼쪽 위 = 첫 상태 자신과, 오른쪽 위 = 첫 상태와 둘째 상태).</p>
+<p>표 <span class="math inline">\(A\)</span>의 특이값은 "<span class="math inline">\(A\)</span>를 뒤집어 곱한 표 <span class="math inline">\(A^{\mathsf T}A\)</span>"의 고유값(eigenvalue, <a href="../days/d09b.html#b-spectral-radius">Day 16 기초</a>의 '고윳값': 그 방향으로 몇 배 늘리나를 뜻하는 수)에 제곱근을 씌운 것입니다. 세로줄 하나를 상태 하나로 보면, <span class="math inline">\(A^{\mathsf T}A\)</span>의 칸은 <strong>상태끼리 칸마다 곱해 더한 값</strong>입니다(왼쪽 위 = 첫 상태 자신과, 오른쪽 위 = 첫 상태와 둘째 상태).</p>
 <ol type="1">
 <li><span class="math inline">\(A = \begin{pmatrix} 3 &amp; 0 \\ 4 &amp; 5 \end{pmatrix}\)</span>이면 <span class="math inline">\(A^{\mathsf T}A = \begin{pmatrix} 3\cdot3+4\cdot4 &amp; 3\cdot0+4\cdot5 \\ 0\cdot3+5\cdot4 &amp; 0\cdot0+5\cdot5 \end{pmatrix} = \begin{pmatrix} 25 &amp; 20 \\ 20 &amp; 25 \end{pmatrix}\)</span>.</li>
-<li>이 표는 방향 (1, 1)을 <span class="math inline">\(25+20 = 45\)</span>배, 방향 (1, −1)을 <span class="math inline">\(25-20 = 5\)</span>배 늘립니다(직접 곱해 확인해 보세요). 이것이 고유값 45와 5입니다. Day 15의 2차방정식으로도 같습니다: <span class="math inline">\(\lambda^2 - 50\lambda + (25 \cdot 25 - 20 \cdot 20) = \lambda^2 - 50\lambda + 225 = 0\)</span> → <span class="math inline">\(\lambda = (50 \pm 40)/2\)</span> = 45, 5.</li>
+<li>이 표는 방향 (1, 1)을 <span class="math inline">\(25+20 = 45\)</span>배, 방향 (1, −1)을 <span class="math inline">\(25-20 = 5\)</span>배 늘립니다(직접 곱해 확인해 보세요). 이것이 고유값 45와 5입니다. Day 15–16의 2차방정식으로도 같습니다: <span class="math inline">\(\lambda^2 - 50\lambda + (25 \cdot 25 - 20 \cdot 20) = \lambda^2 - 50\lambda + 225 = 0\)</span> → <span class="math inline">\(\lambda = (50 \pm 40)/2\)</span> = 45, 5.</li>
 <li>제곱근을 씌우면 특이값은 <span class="math inline">\(\sqrt{45} = 6.708\)</span>, <span class="math inline">\(\sqrt{5} = 2.236\)</span>. 둘 다 0이 아니므로 rank 2: 두 방향이 모두 살아 있습니다. 확인: 45 + 5 = 50 = 표의 숫자 제곱합 9 + 0 + 16 + 25(본문 단계 1의 "전체 퍼짐을 방향들이 나눠 갖는다"와 같은 성질).</li>
 <li>비교: <span class="math inline">\(A = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \end{pmatrix}\)</span>(둘째 세로줄 = 상태 (2, 4)가 첫째 (1, 2)의 2배)이면 <span class="math inline">\(A^{\mathsf T}A = \begin{pmatrix} 5 &amp; 10 \\ 10 &amp; 20 \end{pmatrix}\)</span>이고 고유값은 25와 0, 특이값은 5와 <strong>0</strong>. 한 방향이 사라져 rank 1입니다. 상태 두 개가 같은 방향을 가리킬 때 일어나는 일이 이것입니다.</li>
 </ol>
 숫자는 numpy로 다시 확인했습니다. (Claude의 계산)
 </details>
-<p><span id="s-sv-noise"></span><strong>잡음이 끼면 0이 사라진다.</strong> 위 표의 숫자마다 표준편차 0.02의 측정 잡음을 더하면 특이값이 8.40, 0.91, 0.0068이 됩니다(Claude 계산, 잡음 크기는 예시 가정). 셋째 값이 정확히 0이 아니므로 "0이 아닌 개수"를 세면 rank는 언제나 3이 됩니다. 그래서 실제로는 <strong>기준</strong>을 정합니다. "가장 큰 특이값의 몇 % 아래는 0으로 본다." 셋째 값은 가장 큰 값의 0.08%이니 1% 기준이면 버려지고 rank는 2로 돌아옵니다.</p>
+<p><span id="s-sv-noise"></span><strong>잡음이 끼면 0이 사라진다.</strong> 위 표의 숫자마다 표준편차 0.02의 측정 잡음을 더하면 특이값이 8.40, 0.91, 0.0068이 됩니다(Claude 계산, 잡음 크기는 예시 가정). 셋째 값이 정확히 0이 아니므로 "0이 아닌 개수"를 세면 rank는 언제나 3이 됩니다. 그래서 실제로는 <strong>기준</strong>(threshold)을 정합니다. "가장 큰 특이값의 몇 % 아래는 0으로 본다." 셋째 값은 가장 큰 값의 0.08%이니 1% 기준이면 버려지고 rank는 2로 돌아옵니다.</p>
 <div class="stop-point">
 <p>여기까지: 3×3 표의 rank를 손으로 세고(2), 특이값 8.44, 0.92, 0이 방향마다의 크기라는 것과 잡음이 끼면 '몇 %' 기준이 필요한 이유를 말할 수 있다. 다음: 이 계산을 reservoir에 적용한 kernel rank.</p>
 </div>
@@ -921,23 +949,60 @@ window.Quarto = {
 <section id="kernel-quality-generalization-rank-state-diversity" class="level4">
 <h4 class="anchored" data-anchor-id="kernel-quality-generalization-rank-state-diversity">kernel quality, generalization rank, state diversity</h4>
 <p><strong>kernel quality(kernel rank, KR).</strong> 위의 rank를 reservoir에 적용한 것입니다. Stepney는 절차를 이렇게 정리합니다. ① reservoir에 서로 <strong>최대한 다른</strong> 무작위 입력열을 <span class="math inline">\(S\)</span>개 넣는다. ② 각 입력열이 끝난 시점의 상태(노드 <span class="math inline">\(N\)</span>개의 값)를 잰다. ③ 그 상태들을 세로줄로 늘어놓은 <span class="math inline">\(N \times S\)</span> 표를 만든다. ④ 그 표의 rank를 센다. 최대값은 <span class="math inline">\(N\)</span>과 <span class="math inline">\(S\)</span> 중 작은 값이고, KR이 높을수록 서로 다른 입력을 선형 readout이 가를 수 있게 펼쳐 놓았다는 뜻입니다. <span class="src">Stepney 2024, p.677–678</span> Liang도 같은 정의를 소개합니다. <span class="src">Liang 2024, p.200</span></p>
-<p><strong>generalization rank(GR).</strong> 같은 절차를 쓰되 입력열을 서로 <strong>비슷하게</strong> 만듭니다(예: 끝의 몇 값을 같게, 또는 아주 작은 범위의 값만). 비슷한 입력이 비슷한 상태로 가면 rank가 낮게 나오고, Stepney는 "GR이 낮을수록 잡음에 강하다"고 씁니다. <span class="src">Stepney 2024, p.678</span> 자세한 것은 4구간.</p>
+<p><strong>generalization rank(GR).</strong> 같은 절차를 쓰되 입력열을 서로 <strong>비슷하게</strong> 만듭니다(예: 끝의 몇 값을 같게, 또는 아주 작은 범위의 값만). 비슷한 입력이 비슷한 상태로 가면 rank가 낮게 나오고, Stepney는 "GR이 낮을수록 잡음에 강하다"고 씁니다. <span class="src">Stepney 2024, p.678</span> 자세한 것은 4구간(그림 5에서 두 실험을 나란히 봅니다).</p>
+<p>두 실험을 나란히 놓으면 다음과 같습니다. 세는 법은 같고 <strong>넣는 입력열</strong>이 다릅니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>KR 실험</th>
+<th>GR 실험</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>넣는 입력열 <span class="math inline">\(S\)</span>개</td>
+<td>서로 최대한 다른 무작위 입력열</td>
+<td>서로 비슷한 입력열(끝 몇 값이 같거나, 아주 작은 범위의 값만)</td>
+</tr>
+<tr class="even">
+<td>세는 것</td>
+<td>끝 상태로 만든 <span class="math inline">\(N \times S\)</span> 표의 rank(기준 몇 %)</td>
+<td>같음</td>
+</tr>
+<tr class="odd">
+<td>묻는 것</td>
+<td>다른 입력을 갈라 놓나</td>
+<td>비슷한 입력(잡음·옛 차이)을 한데 모으나</td>
+</tr>
+<tr class="even">
+<td>보통 바라는 쪽</td>
+<td>높을수록</td>
+<td>낮을수록(단, 과제가 정함 — 4구간)</td>
+</tr>
+</tbody>
+</table>
 <p><strong>state diversity(상태 다양성).</strong> 위 두 rank, 그리고 5구간에서 볼 참여비 차원처럼 "상태들이 서로 얼마나 독립적인 방향으로 퍼져 있나"를 묻는 지표들을 묶어 부르는 이 교재의 말입니다. 노드 수나 전극 수와는 다른 양입니다. <span class="tag tag-interp">해석</span></p>
 </section>
 </div>
-<p><strong>무엇을 볼지.</strong> 그림 4는 노드 3개에 서로 다른 입력열 6개를 넣은 끝 상태 표 두 개입니다(세로줄 하나 = 입력열 하나의 끝 상태, 가로줄 하나 = 노드 하나). 왼쪽 표의 세 가로줄이 서로 같은지, 오른쪽 표는 다른지 먼저 보고, 그다음 표 아래의 특이값과 5% 기준 rank를 읽으세요.</p>
-<figure class="fig figure"><img src="../assets/img/d14/fig2-kernel-rank.svg" alt="노드 3개에 입력열 6개를 넣은 끝 상태 표 두 개. 세 노드의 d가 모두 0.7이면 세 행이 똑같아 특이값 3.48, 0, 0으로 rank 1이고, d가 0.3, 0.7, 0.95로 다르면 특이값 3.37, 1.29, 0.35로 5% 기준 rank 3" class="figure-img"><figcaption><b>그림 4.</b> kernel rank를 직접 잰 예. 각 노드는 $x \leftarrow d \cdot x + u$($d$ = 한 단계에 남는 비율), 입력열마다 값 8개를 넣은 뒤의 끝 상태를 모았다(칸 색: 파랑 +, 빨강 −). 왼쪽은 세 노드가 같은 $d$라 같은 입력에 똑같이 반응하고, 노드가 3개여도 rank는 1이다. 오른쪽은 $d$가 달라 같은 입력을 서로 다른 시간 가중으로 기억하고 rank가 3이다. 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
-<p><span id="s-kr-example"></span>그림 4의 왼쪽은 Day 22–23의 "같은 τ를 가진 노드는 기억이 겹친다"를 rank로 다시 본 것입니다. 전극이 셋이어도 응답이 같은 것의 배수이면 readout에게는 방향 하나입니다.</p>
+<p><strong>무엇을 볼지.</strong> 그림 4는 노드 3개에 서로 다른 입력열 6개를 넣은 끝 상태 표 두 개입니다(세로줄 하나 = 입력열 하나의 끝 상태, 가로줄 하나 = 노드 하나). (a) 표의 세 가로줄이 서로 같은지, (b) 표는 다른지 먼저 보고, 그다음 표 아래의 특이값과 5% 기준 rank를 읽으세요.</p>
+<figure class="fig figure"><img src="../assets/img/d14/fig2-kernel-rank.svg" alt="노드 3개에 입력열 6개를 넣은 끝 상태 표 두 개. 세 노드의 d가 모두 0.7이면 세 행이 똑같아 특이값 3.48, 0, 0으로 rank 1이고, d가 0.3, 0.7, 0.95로 다르면 특이값 3.37, 1.29, 0.35로 5% 기준 rank 3" class="figure-img"><figcaption><b>그림 4.</b> kernel rank를 직접 잰 예. 각 노드는 $x \leftarrow d \cdot x + u$($d$ = 한 단계에 남는 비율), 입력열마다 값 8개를 넣은 뒤의 끝 상태를 모았다(칸 색: 파랑 +, 빨강 −). <b>(a)</b> 세 노드가 같은 $d$라 같은 입력에 똑같이 반응하고, 노드가 3개여도 rank는 1이다. <b>(b)</b> $d$가 달라 같은 입력을 서로 다른 시간 가중으로 기억하고 rank가 3이다. 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-kr-example"></span>그림 4(a)는 Day 23–24의 "같은 τ를 가진 노드는 기억이 겹친다"를 rank로 다시 본 것입니다. 전극이 셋이어도 응답이 같은 것의 배수이면 readout에게는 방향 하나입니다.</p>
 <p><span id="s-kr-threshold"></span><strong>기준은 반드시 적어야 한다.</strong> Stepney는 잡음과 수치 오차 때문에 특이값이 보통 전부 0이 아니어서, 가장 큰 특이값의 몇 %를 기준으로 잡는다고 씁니다. 절대값으로 잡으면 안 되는데, 단위만 바꿔도(예: A를 mA로) 특이값이 함께 바뀌기 때문입니다. 그리고 기준은 "본질적으로 임의적이고 측정된 rank에 영향을 주므로 결과와 함께 적어야 한다"고 씁니다. <span class="src">Stepney 2024, p.678–679</span> 또 입력열 수 <span class="math inline">\(S\)</span>를 늘리면 rank가 어느 값으로 수렴할 때까지 커지므로 <span class="math inline">\(S\)</span>를 미리 정해야 하고 <span class="src">Stepney 2024, p.678</span>, Liang은 상태의 잡음을 고려한 rank 계산이 필요하다고 덧붙입니다. <span class="src">Liang 2024, p.200</span></p>
 <details class="deep">
 <summary>
 심화 · 기준 없이 쓰는 연속값: 유효 rank
 </summary>
-<p>Stepney는 기준 없이 쓸 수 있는 연속값으로 <strong>유효 rank</strong>도 소개합니다. 특이값을 합이 1이 되게 나눈 비율 <span class="math inline">\(p_i\)</span>로 <span class="math inline">\(\exp(-\sum_i p_i \ln p_i)\)</span>를 계산한 값이고, 특이값 R개가 똑같고 나머지가 0이면 정확히 R이 됩니다. <span class="src">Stepney 2024, p.679</span> 위 3×3 예(8.44, 0.92, 0)는 <span class="math inline">\(p\)</span> = 0.90, 0.10이라 유효 rank 1.38입니다(Claude 계산). rank 2가 "방향이 둘 있다"만 말한다면, 1.38은 "둘째 방향이 작다"까지 반영합니다. 아래 원문 그림의 보라 선이 이 값입니다.</p>
+<p>Stepney는 기준 없이 쓸 수 있는 연속값으로 <strong>유효 rank</strong>(effective rank)도 소개합니다. 특이값을 합이 1이 되게 나눈 비율 <span class="math inline">\(p_i\)</span>로 <span class="math inline">\(\exp(-\sum_i p_i \ln p_i)\)</span>를 계산한 값이고, 특이값 R개가 똑같고 나머지가 0이면 정확히 R이 됩니다. <span class="src">Stepney 2024, p.679</span> 위 3×3 예(8.44, 0.92, 0)는 <span class="math inline">\(p\)</span> = 0.90, 0.10이라 유효 rank 1.38입니다(Claude 계산). rank 2가 "방향이 둘 있다"만 말한다면, 1.38은 "둘째 방향이 작다"까지 반영합니다. 아래 원문 그림의 보라 선이 이 값입니다.</p>
 </details>
 <p><strong>원문 그림을 읽기 전에.</strong> 아래 그림은 같은 reservoir(노드 100개)를 같은 방법으로 재면서 <strong>기준만</strong> 바꿔 KR을 그린 것입니다. 여기서 쓴 방식(Dale 등 2019의 변형)은 입력열 여러 개 대신 <strong>긴 입력열 하나</strong>를 넣고 매 시점의 상태를 표의 세로줄로 씁니다. 그래서 가로축이 입력열의 길이 <span class="math inline">\(S\)</span>(= 표의 세로줄 수)이고, 세로축은 KR(최대 100)입니다. 색 하나가 기준 하나입니다. 같은 색 안의 실선·점선·파선은 서로 다른 입력열 세 개입니다.</p>
 <figure class="fig paper figure"><img src="../assets/img/papers/stepney2024-fig3-kr.png" alt="Stepney 2024 Fig. 3: 노드 100개 reservoir 두 개에서 입력열 길이(가로축, 100–800)에 따른 kernel rank(세로축, 0–100). 기준이 10%면 약 10, 5%면 약 17–25, 2%면 약 50–65, 1%면 약 80–93, 유효 rank는 약 31–36" class="figure-img"><figcaption><b>원문 그림.</b> Stepney, <a href="https://doi.org/10.1007/s11047-024-09997-y" target="_blank"><i>Natural Computing</i> 2024, 23, 665–685</a>, Fig. 3, p.679. 볼 것: 왼쪽 패널(첫째 reservoir)에서 파랑(10% 기준)은 약 10, 주황(5%)은 약 17, 초록(2%)은 약 50, 빨강(1%)은 약 80에 머문다. **같은 reservoir의 KR이 기준만 바꿔 8배 달라진다.** 보라는 기준이 없는 유효 rank(약 31). 오른쪽 패널은 다른 reservoir로, 같은 기준에서도 값이 다르다. 캡션은 "reservoir 사이의 차이가 입력열 사이의 차이보다 훨씬 크다"고 적는다. 세 선(입력열)이 거의 겹치는 것이 그 뜻이다. 수치는 그림에서 눈으로 읽은 근삿값. 시뮬레이션 데이터. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p>그러니 어떤 논문이 "KR = 80"이라고만 쓰면 그 숫자는 비교에 쓸 수 없습니다. 기준(몇 %), 입력열 수와 분포, 측정 시점, 잡음 처리를 함께 봐야 합니다.</p>
+<p>그러니 <span class="key">어떤 논문이 "KR = 80"이라고만 쓰면 그 숫자는 비교에 쓸 수 없습니다.</span> 기준(몇 %), 입력열 수와 분포, 측정 시점, 잡음 처리를 함께 봐야 합니다.</p>
 <div class="predict">
 <p>노드 8개짜리 소자에 서로 다른 입력열 5개만 넣어 KR을 쟀습니다. KR은 최대 얼마까지 나올 수 있을까요? 그리고 노드 3개짜리 표에서 상태가 (1, 1, 0), (0, 1, 1), (1, 2, 1)이면 rank는? 손으로 먼저 세고 아래에서 확인하세요. 첫 점검의 첫 문제는 본문 예의 확인, 둘째는 일부가 채워져 있고, 셋째(바로 이 문제)는 혼자 풉니다. KR의 최대값은 그다음 마무리 퀴즈에 있습니다.</p>
 </div>
@@ -987,14 +1052,14 @@ kernel quality / kernel rank (KR)
 <p>이 구간을 읽고 나면 generalization rank가 kernel rank와 어떻게 다른 입력으로 재는 값인지, 왜 "낮을수록 좋다"가 과제에 따라 조건부인지, 그리고 KR과 GR을 함께 봐야 하는 이유를 계산 예로 말할 수 있다.</p>
 </div>
 <p><strong>왜 필요한가.</strong> 2구간 끝에서 남긴 질문입니다. 같은 손글씨 "3"도 쓸 때마다 조금씩 다르고, 같은 심박도 잡음이 섞여 들어옵니다. reservoir가 이 작은 차이까지 모두 다른 방향으로 벌려 놓으면, readout은 학습 데이터의 잡음을 답의 단서로 착각해 외워 버립니다. 그러면 학습 데이터에서는 잘 맞고 새 데이터에서는 틀립니다. Day 10에서 본 <a href="../days/d06.html#b-heldout-baseline">held-out 성능</a>(학습에 안 쓴 데이터로 잰 성능)이 떨어지는 전형적인 경로입니다. 그래서 "다른 것은 멀리"와 함께 "<strong>비슷한 것은 가까이</strong>"가 필요합니다.</p>
-<p><span id="s-gr-measure"></span><strong>어떻게 재나.</strong> KR과 <strong>같은 절차</strong>(입력열 → 끝 상태 → 표 → rank)를 쓰되, 입력열을 일부러 비슷하게 만듭니다. Stepney가 정리한 두 방식이 있습니다. <span class="src">Stepney 2024, p.678</span></p>
+<p><span id="s-gr-measure"></span><strong>어떻게 재나.</strong> <span class="key">GR은 KR과 같은 절차(입력열 → 끝 상태 → 표 → rank)를 쓰되, 넣는 입력열만 일부러 비슷하게 만든 다른 실험입니다.</span> Stepney가 정리한 두 방식이 있습니다. <span class="src">Stepney 2024, p.678</span></p>
 <ul>
 <li><strong>끝 몇 값을 같게</strong>: 입력열마다 앞부분은 무작위로, 마지막 3개 값은 모두 같게 둔다. <span class="prov">Büsing 등 2010, Vidamour 등 2022이 쓴 방식으로 소개됨</span></li>
 <li><strong>아주 작은 범위의 값만</strong>: 입력열 하나를 −δ와 +δ 사이의 작은 값으로만 채운다. δ는 입력에 섞일 잡음 크기에 해당하는 값으로 고른다. <span class="prov">Dale 등 2019의 방식으로 소개됨</span></li>
 </ul>
 <p>이렇게 잰 rank가 <strong>generalization rank(GR)</strong>입니다. Stepney는 "KR이 높으면 분리를 잘하고, GR이 낮으면 잡음에 강하며 과적합(학습 데이터를 외우는 것)을 피한다"고 씁니다. <span class="src">Stepney 2024, p.678</span> Liang은 GR을 "최근 입력열에 얼마나 빠르게 반응하면서 초기 상태의 영향을 줄이는가"로 설명하고, KR·GR을 계산할 때 상태의 잡음을 고려한 rank 계산이 필요하다고 씁니다. <span class="src">Liang 2024, p.200</span> 두 설명은 강조점이 다르지만 "옛것과 잡음에는 둔감하게"라는 방향이 같습니다. <span class="tag tag-interp">해석</span></p>
-<p><span id="s-krgr-example"></span><strong>계산 예.</strong> 그림 5는 노드 8개짜리 reservoir 두 개를 비교합니다. 두 reservoir는 입력을 받는 방식(입력 배율 <span class="math inline">\(w\)</span>와 치우침 <span class="math inline">\(b\)</span>)이 똑같고, 한 단계에 남는 비율 <span class="math inline">\(d\)</span>(기억의 길이)만 다릅니다. 하나는 짧은 기억(<span class="math inline">\(d\)</span> = 0.00–0.39), 하나는 긴 기억(<span class="math inline">\(d\)</span> = 0.85–0.97). 각각에 KR용 입력열 8개(서로 완전히 다름)와 GR용 입력열 8개(끝 세 값만 같음)를 넣었습니다. <strong>무엇을 볼지</strong>: 막대 하나가 방향 하나의 크기(특이값을 가장 큰 값으로 나눈 것)이고 세로축은 로그 눈금입니다. 빨간 점선(5%) 위로 올라온 막대의 수가 그 기준의 rank입니다. 위 줄(짧은 기억)과 아래 줄(긴 기억)에서, 왼쪽(KR)은 비슷하고 오른쪽(GR)은 다른지 보세요.</p>
-<figure class="fig figure"><img src="../assets/img/d14/fig3-kr-gr.svg" alt="노드 8개 reservoir 두 개의 정규화 특이값 막대(로그 눈금). 짧은 기억: KR 5% 기준 3(1% 기준 6), GR 5% 기준 1(1% 기준 2). 긴 기억: KR 5% 기준 3(1% 기준 6), GR 5% 기준 3(1% 기준 5)" class="figure-img"><figcaption><b>그림 5.</b> KR과 GR을 같은 방식으로 잰 예. 막대는 방향별 크기(특이값)를 가장 큰 값으로 나눈 것이고 세로축은 로그 눈금(한 칸이 10배)이다. 빨간 점선이 5% 기준, 보라 점선이 1% 기준. 두 reservoir의 KR은 같지만(5% 기준 3), 끝 세 값이 같은 입력열에 대해 짧은 기억은 거의 한 점으로 모이고(GR 1) 긴 기억은 여전히 벌어진다(GR 3). 노드 규칙은 $x \leftarrow d \cdot x + (1-d)\tanh(w \cdot u + b)$($d$ = 한 단계에 남는 비율), 측정 잡음 0.01(예시 가정). (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-krgr-example"></span><strong>계산 예.</strong> 그림 5는 노드 8개짜리 reservoir 두 개를 비교합니다. 두 reservoir는 입력을 받는 방식(입력 배율 <span class="math inline">\(w\)</span>와 치우침 <span class="math inline">\(b\)</span>)이 똑같고, 한 단계에 남는 비율 <span class="math inline">\(d\)</span>(기억의 길이)만 다릅니다. 하나는 짧은 기억(<span class="math inline">\(d\)</span> = 0.00–0.39), 하나는 긴 기억(<span class="math inline">\(d\)</span> = 0.85–0.97). 각각에 KR용 입력열 8개(서로 완전히 다름)와 GR용 입력열 8개(끝 세 값만 같음)를 넣었습니다. <strong>무엇을 볼지</strong>: 왼쪽 열 (a)(c)가 KR 실험(서로 완전히 다른 입력열), 오른쪽 열 (b)(d)가 GR 실험(끝 세 값만 같은 입력열)이고, 위 줄 (a)(b)가 짧은 기억, 아래 줄 (c)(d)가 긴 기억입니다. 막대 하나가 방향 하나의 크기(특이값을 가장 큰 값으로 나눈 것)이고 세로축은 로그 눈금입니다. 빨간 점선(5%) 위로 올라온 막대의 수가 그 기준의 rank입니다. KR 열 (a)(c)는 비슷하고 GR 열 (b)(d)는 다른지 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d14/fig3-kr-gr.svg" alt="노드 8개 reservoir 두 개의 정규화 특이값 막대(로그 눈금). 짧은 기억: KR 5% 기준 3(1% 기준 6), GR 5% 기준 1(1% 기준 2). 긴 기억: KR 5% 기준 3(1% 기준 6), GR 5% 기준 3(1% 기준 5)" class="figure-img"><figcaption><b>그림 5.</b> KR과 GR을 같은 방식으로 잰 예. <b>(a)(c)</b> KR: 서로 완전히 다른 입력열 8개. <b>(b)(d)</b> GR: 끝 세 값만 같은 입력열 8개. 위 줄 (a)(b)는 짧은 기억, 아래 줄 (c)(d)는 긴 기억. 막대는 방향별 크기(특이값)를 가장 큰 값으로 나눈 것이고 세로축은 로그 눈금(한 칸이 10배)이다. 빨간 점선이 5% 기준, 보라 점선이 1% 기준. 두 reservoir의 KR은 같지만((a)(c), 5% 기준 3), 끝 세 값이 같은 입력열에 대해 짧은 기억은 거의 한 점으로 모이고((b), GR 1) 긴 기억은 여전히 벌어진다((d), GR 3). 노드 규칙은 $x \leftarrow d \cdot x + (1-d)\tanh(w \cdot u + b)$($d$ = 한 단계에 남는 비율), 측정 잡음 0.01(예시 가정). (Claude가 계산해 그림)</figcaption></figure>
 <div class="stepper">
 <div class="step">
 <p><strong>단계 1 — KR은 같다.</strong> 서로 완전히 다른 입력열에 대해서는 두 reservoir 모두 5% 기준 rank 3, 1% 기준 rank 6입니다. "다른 것을 가르는 능력"만 보면 둘은 구별되지 않습니다.</p>
@@ -1009,7 +1074,7 @@ kernel quality / kernel rank (KR)
 <p><strong>정리.</strong> KR과 GR은 같은 측정을 다른 입력으로 한 것이고, 둘을 함께 봐야 "가를 것은 가르고, 무시할 것은 무시하는가"가 보입니다. 무엇을 무시해야 하는지는 과제가 정합니다.</p>
 </div>
 </div>
-<p>Stepney도 이 지표들의 "알맞은 값"이 무엇이냐는 물음에 "가장 적절한 값은 과제에 달려 있다. 어떤 과제는 큰 기억 용량이, 어떤 과제는 높은 kernel rank와 낮은 기억 용량이 나을 수 있다"고 답합니다. <span class="src">Stepney 2024, p.681</span> 그리고 GR의 "비슷하다"는 정의가 다소 임의적이어서, 위의 두 방식이 꽤 다른 결과를 낼 수 있으므로 서로 다른 지표로 봐야 한다고 씁니다. <span class="src">Stepney 2024, p.679</span></p>
+<p><span class="key">GR이 낮을수록 좋다는 말은 과제가 최근 입력만 필요로 할 때의 말이고, 알맞은 값은 과제가 정합니다.</span> Stepney도 이 지표들의 "알맞은 값"이 무엇이냐는 물음에 "가장 적절한 값은 과제에 달려 있다. 어떤 과제는 큰 기억 용량이, 어떤 과제는 높은 kernel rank와 낮은 기억 용량이 나을 수 있다"고 답합니다. <span class="src">Stepney 2024, p.681</span> 그리고 GR의 "비슷하다"는 정의가 다소 임의적이어서, 위의 두 방식이 꽤 다른 결과를 낼 수 있으므로 서로 다른 지표로 봐야 한다고 씁니다. <span class="src">Stepney 2024, p.679</span></p>
 <p><span id="s-krgr-table"></span></p>
 <table class="caption-top table">
 <colgroup>
@@ -1055,12 +1120,13 @@ kernel quality / kernel rank (KR)
 </div>
 </section>
 </div>
-<script type="application/json" id="quiz-d14">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 과제의 시간척도와 좋은 memory의 조건", "items": [{"id": "d14-r01", "type": "mc", "q": "τ = 20 ms인 소자에 입력이 10 ms 간격으로 들어온다. 한 간격 동안 남는 비율 d = e의 지수 (−입력 간격/τ)는? (참고: e의 지수 −0.5 ≈ 0.61, e의 지수 −2 ≈ 0.14)", "options": ["0.14", "0.39", "0.50", "0.61"], "a": 3, "why": "입력 간격/τ = 10/20 = 0.5이므로 d = e의 지수 (−0.5) ≈ 0.61입니다. 한 간격 뒤 지금 흔적의 61%가 남고 39%가 줄어듭니다.", "ref": "d13b.html#b-timescale-match", "refLabel": "기초 상자 ③ 단계 1: 한 간격 동안 남는 비율", "wrongWhy": ["0.14는 τ/입력 간격 = 2를 지수에 넣은 값입니다. 지수는 입력 간격 ÷ τ입니다.", "0.39는 한 간격에 줄어드는 몫(1 − d)입니다. d는 남는 몫입니다.", "0.50은 입력 간격/τ 자체입니다. d는 그 값을 e의 지수(음수)로 넣은 결과입니다.", ""]}, {"id": "d14-r02", "type": "mc", "q": "τ = 2 ms 소자와 τ = 2 s 소자, 입력 간격 1 ms인 과제 X와 1 s인 과제 Y가 있다(둘 다 최근 몇 개 입력이 필요). 상태에 남는 기억의 모양(지연별 MCₖ)이 똑같은 짝은?", "options": ["두 소자 모두 과제 X에 쓸 때", "2 ms 소자 × X와 2 s 소자 × Y", "2 ms 소자 × Y와 2 s 소자 × X", "두 소자 모두 과제 Y에 쓸 때"], "a": 1, "why": "기억의 모양은 d = e의 지수 (−입력 간격/τ)가 정하고, d는 입력 간격/τ에만 달려 있습니다. 1 ms/2 ms와 1 s/2 s는 둘 다 0.5라 d가 같습니다. 좋은 τ는 절대값이 아니라 입력 간격에 대한 비율로 정해집니다.", "ref": "d13b.html#s-four-cases", "refLabel": "10 ms 소자와 10 s 소자의 네 칸 표", "wrongWhy": ["같은 과제 X라도 1/2와 1/2000으로 비율이 달라 d가 0.61과 거의 1로 다릅니다.", "", "1 s/2 ms = 500과 1 ms/2 s = 0.0005는 정반대의 실패(너무 빨리 잊음, 흔적이 너무 작음)입니다.", "같은 과제 Y라도 비율이 500과 0.5로 달라 기억의 모양이 다릅니다."]}, {"id": "d14-r03", "type": "mc", "q": "회복이 아주 느린(τ가 입력 간격보다 훨씬 긴) 소자에 서로 독립이어야 할 입력열을 차례로 넣었더니, 둘째 입력열의 결과가 첫째 입력열이 무엇이었는지에 따라 달라졌다. 이 현상의 이름으로 알맞은 것은?", "options": ["넘어옴: 앞 입력열의 흔적이 다음 입력열에 남음", "너무 빨리 잊음: 필요한 지연 전에 흔적이 사라짐", "포화: 응답이 최대값 근처에 붙어 차이가 없음", "측정 잡음: 반복할 때마다 값이 무작위로 흔들림"], "a": 0, "why": "너무 느린 회복은 명목상 독립인 입력열 사이에 원치 않는 넘어옴(carry-over)을 만듭니다. 그래서 입력열 사이의 회복·리셋 절차를 함께 보고해야 합니다.", "ref": "d13b.html#s-two-failures", "refLabel": "기초 상자 ⑥: 두 가지 실패", "wrongWhy": ["", "너무 빨리 잊으면 첫째 입력열의 흔적이 없어 둘째 결과에 영향을 주지 못합니다. 여기서는 반대입니다.", "포화는 응답 크기의 문제이고, 앞 입력열에 따라 결과가 달라지는 현상을 설명하지 않습니다.", "무작위 잡음은 앞 입력열의 내용과 관계없이 흔들립니다. 여기서는 앞 입력열에 따라 체계적으로 달라졌습니다."]}, {"id": "d14-r04", "type": "mc", "q": "다음 중 입력 간격을 실험자가 마음대로 고를 수 없는 경우는?", "options": ["저장된 음성 파일을 펄스열로 바꿔 재생할 때", "손글씨 사진을 열 단위 펄스열로 바꿀 때", "피부에 붙인 센서로 맥박을 실시간 처리할 때", "녹화한 사건 카메라 기록을 네 프레임으로 나눌 때"], "a": 2, "why": "실시간 신호는 신호가 입력 간격을 정합니다. 심장은 소자의 τ에 맞춰 뛰어 주지 않으므로 정합은 소자 쪽을 바꿔서만 맞출 수 있습니다. 저장된 데이터는 실험자가 간격을 고를 수 있어, 거기서 맞춘 정합은 실제 신호와의 정합을 증명하지 않습니다.", "ref": "d13b.html#s-who-sets-interval", "refLabel": "3-1절: 누가 입력 간격을 정하나", "wrongWhy": ["저장된 파일은 재생 속도를 실험자가 정할 수 있습니다.", "정지 사진에는 시간이 없어서, 펄스 사이 간격을 실험자가 고릅니다.", "", "이미 녹화한 기록을 몇 장으로 나눌지, 얼마 간격으로 넣을지는 실험자가 정합니다."]}, {"id": "d14-r05", "type": "mc", "q": "어떤 소자의 τ는 그대로 두고 입력 간격을 τ의 1/5에서 τ의 100배로 늘렸더니, 앞 입력의 흔적이 거의 사라지는데도 과제 정확도는 90%에서 89%로 1%p만 떨어졌다. 가장 조심스러운 해석은?", "options": ["이 과제는 정보 대부분이 마지막 입력에 있어 기억에 덜 기댄다", "이 소자는 τ의 100배 간격에서도 앞 입력을 잘 기억한다", "시간척도 정합은 어떤 과제에서도 성능과 무관하다", "τ를 늘리면 이 과제의 정확도가 10%p 넘게 오를 것이다"], "a": 0, "why": "흔적이 사라졌는데도 성능이 거의 그대로라면, 과제가 기억에 많이 기대지 않는다고 읽는 것이 조심스럽습니다. 시간척도 불일치가 성능을 얼마나 깎는지는 과제가 기억을 얼마나 필요로 하느냐에 달렸습니다.", "ref": "d13b.html#s-lee-lesson", "refLabel": "3-2절: 이 그림이 주는 두 가지", "wrongWhy": ["", "간격이 τ의 100배면 d ≈ e의 지수 (−100)으로 앞 입력의 흔적이 사실상 0입니다.", "한 과제의 결과로 모든 과제에 일반화할 수 없습니다. 기억이 핵심인 과제라면 크게 떨어졌을 것입니다.", "잃은 것이 1%p뿐이라 τ를 늘려도 되찾을 여지가 그만큼 작습니다."]}, {"id": "d14-r06", "type": "ox", "q": "τ가 모두 같은 선형 소자 3개를 입력 배율만 1, 2, 3배로 다르게 연결해 함께 읽으면, 잡음이 없을 때 총 MC는 약 3이다.", "a": false, "why": "τ가 같은 선형 소자는 입력 배율이 달라도 상태가 서로의 배수일 뿐이라, readout에게는 한 숫자를 세 번 본 것과 같습니다. 총 MC는 소자 하나와 같은 약 1입니다. τ가 서로 달라야 쌓입니다.", "ref": "d13b.html#ch-many-nodes", "refLabel": "4구간: 같은 τ는 겹치고 다른 τ는 쌓인다", "wrongWhy": ["상태 수 3은 상한일 뿐입니다. 세 상태가 서로의 배수이면 새로 꺼낼 과거 정보가 없어 약 1에 머뭅니다.", ""]}, {"id": "d14-r07", "type": "mc", "q": "기억이 전혀 없는 노드 A(d = 0, 상태 = 방금 입력)와 d = 0.8인 노드 B를 함께 읽는다(선형, 잡음 없음). A를 더한 효과로 맞는 것은?", "options": ["A는 기억이 없으므로 총 MC에 보탬이 없다", "A가 B의 기억을 덮어 총 MC가 1보다 줄어든다", "B에서 방금 입력 몫을 빼게 되어 총 MC가 2가 된다", "두 노드는 d = 0.4인 노드 하나와 같아진다"], "a": 2, "why": "readout이 B − A를 만들면 방금 입력의 몫이 지워지고 그 앞 입력들이 또렷해집니다. 선형·잡음 없는 조건에서 서로 다른 d의 노드 둘은 총 MC 2(= 상태 수)를 냅니다. 혼자서는 기억이 없는 노드가 다른 노드의 기억을 쓸 수 있게 만든 것입니다.", "ref": "d13b.html#s-two-nodes", "refLabel": "노드 둘로 확인하기", "wrongWhy": ["A 혼자의 기억은 0이지만, B와 함께 읽으면 B에서 방금 입력을 빼는 재료가 됩니다.", "readout은 A를 쓰지 않을 수도 있으므로(가중치 0), 노드를 더해 총 MC가 줄지는 않습니다.", "", "두 상태를 따로 읽으므로 평균 노드 하나로 합쳐지지 않습니다."]}, {"id": "d14-r08", "type": "ox", "q": "비선형 노드로 만든 reservoir의 MC가 같은 크기의 선형 reservoir보다 낮게 나왔다면, 비선형 쪽은 그만큼 쓸모없는 reservoir다.", "a": false, "why": "비선형 노드는 상태의 흔들림 일부를 '입력들의 곱' 같은 비선형 정보에 씁니다. 기억과 비선형이 같은 상태 수를 나눠 쓰므로 MC가 낮을 수 있고, 과제가 비선형을 필요로 하면 그쪽이 더 나을 수 있습니다.", "ref": "d13b.html#s-nonlinear-share", "refLabel": "4구간: 비선형이 끼면", "wrongWhy": ["MC는 1차(기억) 몫만 셉니다. 비선형 노드가 2차 이상 정보에 쓴 몫은 MC에 나타나지 않습니다.", ""]}, {"id": "d14-r09", "type": "mc", "q": "어떤 논문이 지연별 MCₖ 곡선을 보고했는데 가로축이 지연 k뿐이고 입력 간격은 적혀 있지 않다. 이 정보만으로 판단할 수 없는 것은?", "options": ["곡선 아래 총 MC가 얼마인지", "그 기억이 실제 시간으로 몇 ms까지 닿는지", "최근 입력의 몫이 먼 입력보다 큰지", "MCₖ가 기준 0.05를 넘는 지연이 몇 개인지"], "a": 1, "why": "k개 전 입력의 물리적 지연은 k × 입력 간격입니다. 입력 간격이 없으면 같은 곡선이 10 ms짜리 기억인지 10 s짜리 기억인지 알 수 없고, 과제의 기억 창(물리 시간)과 맞는지도 판단할 수 없습니다.", "ref": "d13b.html#s-six-questions", "refLabel": "확인 질문 여섯 표(③ 물리 지연 축)", "wrongWhy": ["총 MC는 지연별 값을 더하면 되므로 입력 간격 없이도 구할 수 있습니다.", "", "곡선의 모양만 보면 최근과 먼 지연의 몫을 비교할 수 있습니다.", "기준을 넘는 지연의 개수도 곡선에서 바로 셀 수 있습니다. 모르는 것은 그 지연의 물리 시간입니다."]}, {"id": "d14-r10", "type": "mc", "q": "물리 reservoir의 총 MC가 4로 측정됐다. 이 숫자의 가치를 판단하려고 디지털 쪽과 비교할 때 가장 알맞은 비교 대상은?", "options": ["MC가 수십인 소프트웨어 ESN의 MC 숫자", "같은 소자의 retention 시간", "다른 이온 소자 논문이 보고한 MC 숫자", "숫자 4개를 저장·갱신하는 디지털 회로의 비용"], "a": 3, "why": "과거 입력 k개를 그대로 적어 두는 디지털 지연 탭은 MC가 정확히 k입니다. 그러니 'MC = 4' 자체는 크지도 작지도 않고, 같은 기억을 디지털로 만드는 비용(에너지·면적·센서와의 거리)과 비교해야 물리 기억의 가치가 드러납니다.", "ref": "d13b.html#s-digital-compare", "refLabel": "5구간 ⑥: 디지털 지연 탭과 비교", "wrongWhy": ["MC 숫자끼리만 비교하면 같은 기억을 만드는 비용의 차이가 빠집니다.", "retention은 MC를 정하지 않습니다. 둘은 다른 양입니다.", "조건(입력 간격·잡음·readout)이 다른 MC 숫자는 직접 비교하기 어렵고, 비용 비교도 빠집니다.", ""]}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 분리·rank·일반화: 상태는 얼마나 다른가", "items": [{"id": "d14-rb01", "type": "mc", "q": "응답이 tanh(g·u)인 소자에 입력 0.3과 0.4를 넣는다. 구동 세기 g를 1에서 10으로 올리면 어떻게 되나?", "options": ["최대 응답과 두 응답의 차가 함께 약 10배 커진다", "최대 응답은 그대로이고 두 응답의 차만 커진다", "두 응답의 차는 입력 차 0.1로 언제나 같다", "최대 응답은 커지고, 두 응답의 차는 0에 가깝게 준다"], "a": 3, "why": "g = 1: tanh(0.3) = 0.291, tanh(0.4) = 0.380, 차 0.089. g = 10: tanh(3) = 0.995, tanh(4) = 0.999, 차 0.004. 응답은 1에 가까워지지만, 포화 구간의 기울기가 0에 가까워 입력 차이가 응답 차이로 옮겨지지 않습니다.", "ref": "d14a.html#b-response-vs-difference", "refLabel": "응답의 크기와 응답의 차이", "wrongWhy": ["tanh는 1을 넘지 못하므로 응답을 10배로 키울 수 없고, 포화 쪽에서는 차가 오히려 줄어듭니다.", "g를 키우면 응답 자체도 커집니다(0.38 → 0.999). 줄어드는 것은 차입니다.", "응답 차 = 입력 차 × 곡선의 기울기입니다. 기울기는 g와 구간에 따라 바뀝니다.", ""], "note": "곡선의 기울기가 '입력 차이 → 응답 차이'의 배율입니다. 포화된 곳에서는 그 배율이 0에 가깝습니다."}, {"id": "d14-rb02", "type": "mc", "q": "누설 노드 x ← d·x + u(처음 x = 0)에서 d = 0.3일 때, 이력 A = (1, 0, 1)과 B = (0, 1, 1)의 끝 상태 사이 거리는?", "options": ["0.09", "0.21", "0.30", "0.49"], "a": 1, "why": "A: 1 → 0.3 → 1.09, B: 0 → 1 → 1.3. 거리 |1.09 − 1.3| = 0.21 = d(1 − d) = 0.3 × 0.7.", "ref": "d14a.html#b-separation", "refLabel": "분리: 순서만 다른 두 이력 손 계산", "wrongWhy": ["0.09는 d² = 0.3²입니다. 거리는 d(1 − d)입니다.", "", "0.30은 d 자체입니다. 단계마다 '지난 상태 × d + 새 입력'을 적어 보세요.", "0.49는 (1 − d)²입니다. 두 끝 상태 1.09와 1.3을 직접 빼 보세요."]}, {"id": "d14-rb03", "type": "mc", "q": "두 이력의 끝 상태 거리가 0.12다. 소자 P는 같은 입력을 반복할 때 상태의 흔들림(표준편차)이 0.01, 소자 Q는 0.08이다. 알맞은 판단은?", "options": ["P가 낫다: 거리가 흔들림의 12배, Q는 1.5배다", "같다: 두 소자의 거리가 0.12로 같다", "Q가 낫다: 흔들림이 커서 상태를 넓게 쓴다", "둘 다 못 가른다: 거리 0.12는 너무 작다"], "a": 0, "why": "분리는 거리 ÷ 같은 입력의 흔들림으로 읽습니다. 0.12/0.01 = 12, 0.12/0.08 = 1.5. P에서는 readout이 대부분 맞게 가르고, Q에서는 자주 헷갈립니다.", "ref": "d14a.html#s-sep-noise", "refLabel": "잡음과 비교해야 거리가 뜻을 갖는다", "wrongWhy": ["", "거리만으로는 판단할 수 없습니다. 같은 거리라도 흔들림이 크면 겹칩니다.", "흔들림은 신호가 아니라 잡음입니다. 같은 입력의 상태가 넓게 흩어지면 두 이력이 겹칩니다.", "거리의 크기는 흔들림과 견줘야 뜻이 있습니다. P에서는 0.12가 흔들림의 12배입니다."]}, {"id": "d14-rb04", "type": "ox", "q": "끝 상태가 1.25와 1.5인 두 이력(거리 0.25)을, 상태를 그대로 읽지 않고 tanh(5x)처럼 강하게 포화하는 응답으로 읽어도 거리는 약 0.25로 남는다.", "a": false, "why": "tanh(6.25) = 0.999993, tanh(7.5) = 0.999999라 거리가 약 7 × 10⁻⁶으로 사라집니다. 응답은 1에 가까울 만큼 크지만 순서 정보는 남지 않습니다.", "ref": "d14a.html#s-sep-saturation", "refLabel": "2구간: 포화가 끼면", "wrongWhy": ["포화 구간에서는 기울기가 0에 가까워, 상태의 차이 0.25가 응답의 차이로 거의 옮겨지지 않습니다.", ""]}, {"id": "d14-rb05", "type": "mc", "q": "노드 3개의 상태 s₁ = (2, 0, 1), s₂ = (0, 1, 1), s₃ = (2, 2, 3)이 펼치는 진짜로 다른 방향의 수(rank)는?", "options": ["0", "1", "2", "3"], "a": 2, "why": "s₂는 s₁의 몇 배도 아니므로(첫 숫자 2와 0) 새 방향입니다. s₃ = s₁ + 2 × s₂ = (2 + 0, 0 + 2, 1 + 2)라 두 방향을 몇 배씩 더해 만들 수 있으므로 새 방향이 아닙니다. rank는 2.", "ref": "d14a.html#b-rank", "refLabel": "rank 단계 3: 섞어서 만들 수 있으면 새 방향이 아니다", "wrongWhy": ["모든 숫자가 0인 상태가 아니면 방향은 적어도 하나 있습니다.", "s₂는 s₁의 배수가 아니므로 방향이 적어도 둘입니다.", "", "s₃가 s₁의 배수가 아니어도, s₁과 s₂를 몇 배씩 더해 만들 수 있으면 새 방향이 아닙니다."]}, {"id": "d14-rb06", "type": "mc", "q": "전극 6개 소자에 서로 다른 입력열 4개를 넣어 KR을 쟀더니 4였다. 입력열을 20개로 늘리자 같은 기준에서 KR이 6이 되었다. 가장 알맞은 설명은?", "options": ["입력열이 늘면 소자 안의 노드 수도 늘어나서", "처음에는 입력열 수 4가 rank의 상한이었어서", "입력열이 많을수록 rank 기준이 자동으로 낮아져서", "입력열이 많아지면 측정 잡음이 줄어들어서"], "a": 1, "why": "rank는 노드 수 N과 상태 수 S 중 작은 값을 넘지 못합니다. 6 × 4 표의 상한은 4이고, S를 20으로 늘리자 상한이 6이 되었습니다. 그래서 KR을 보고할 때는 입력열 수 S를 함께 적어야 합니다.", "ref": "d14a.html#b-rank", "refLabel": "rank 단계 '상한': min(N, S)", "wrongWhy": ["노드(전극) 수는 소자가 정합니다. 입력열 수와 무관하게 6입니다.", "", "기준(몇 %)은 측정하는 사람이 정해 적는 값이고, 입력열 수에 따라 저절로 바뀌지 않습니다.", "입력열 수와 측정 잡음의 크기는 별개입니다. 상한 min(N, S)가 바뀐 것입니다."]}, {"id": "d14-rb07", "type": "mc", "q": "잡음 섞인 상태 표의 특이값이 큰 순서로 5.0, 1.2, 0.3, 0.02였다. '가장 큰 값의 5% 아래는 0으로 본다'는 기준으로 센 rank는?", "options": ["1", "2", "3", "4"], "a": 2, "why": "5.0의 5%는 0.25입니다. 5.0, 1.2, 0.3은 0.25보다 크고 0.02는 작으므로 rank는 3입니다. 기준을 10%(0.5)로 바꾸면 2가 되니, 결과와 함께 기준을 적어야 합니다.", "ref": "d14a.html#s-sv-noise", "refLabel": "잡음이 끼면 0이 사라진다", "wrongWhy": ["가장 큰 값 하나만 센 것입니다. 기준 0.25보다 큰 값이 셋입니다.", "0.3도 기준 0.25보다 큽니다. 10% 기준이었다면 2입니다.", "", "0이 아닌 값을 모두 센 것입니다. 잡음 때문에 생긴 작은 값(0.02)은 기준 아래라 버립니다."]}, {"id": "d14-rb08", "type": "mc", "q": "전극 4개가 모두 같은 시간상수로, 같은 입력에 크기만 다르게 반응한다. 서로 다른 입력열 10개로 만든 4 × 10 끝 상태 표의 KR(잡음 무시)은?", "options": ["1", "4", "10", "40"], "a": 0, "why": "네 가로줄이 서로의 배수라 readout에게는 방향 하나입니다. KR은 전극 수가 아니라 서로 다른 응답의 수를 셉니다.", "ref": "d14a.html#s-kr-example", "refLabel": "그림 4: 같은 τ의 노드 셋은 rank 1", "wrongWhy": ["", "4는 전극 수입니다. 크기만 다른 같은 응답은 새 방향을 더하지 않습니다.", "10은 입력열 수입니다. 상한 min(4, 10) = 4조차 채우지 못합니다.", "40은 표의 칸 수입니다. rank는 min(N, S)를 넘지 못합니다."]}, {"id": "d14-rb09", "type": "mc", "q": "끝 다섯 값이 같은 입력열들로 GR을 쟀더니 reservoir X는 1, Y는 4였다(KR은 둘이 같음). 과제가 20단계 전 입력까지 필요하다면 알맞은 판단은?", "options": ["X가 낫다: GR이 낮으므로 어느 과제에서나 낫다", "같다: KR이 같으므로 이 과제에서도 같다", "Y가 낫다: GR이 높을수록 잡음에 강하다", "Y가 맞을 수 있다: 필요한 옛 차이를 남긴다"], "a": 3, "why": "GR이 높다는 것은 끝 다섯 값 이전의 차이를 상태에 남긴다는 뜻입니다. 과제가 20단계 전 입력을 필요로 하면 그 차이가 바로 필요한 정보입니다. 'GR이 낮을수록 좋다'는 과제가 최근 입력만 필요로 할 때의 말입니다.", "ref": "d14a.html#s-krgr-example", "refLabel": "4구간 계산 예 단계 3: 어느 쪽이 좋은가", "wrongWhy": ["GR의 알맞은 값은 과제가 정합니다. 옛 입력이 필요한 과제에서는 낮은 GR이 필요한 정보를 지운 것일 수 있습니다.", "KR이 같아도 GR이 다르면 옛 입력의 차이를 남기는 정도가 다릅니다.", "방향이 반대입니다. Stepney는 GR이 낮을수록 잡음에 강하다고 씁니다.", ""]}, {"id": "d14-rb10", "type": "ox", "q": "절편이 없는 readout에서 상태 s₂ = 3 × s₁이면, s₁에 대한 출력이 0.5일 때 s₂에 대한 출력은 반드시 1.5다.", "a": true, "why": "절편이 없으면 출력은 상태의 숫자에 가중치를 곱해 더한 값이라, 상태를 3배 하면 출력도 정확히 3배입니다(y(3s) = 3·y(s)). 절편이 있으면 이 묶임이 풀립니다.", "ref": "d14a.html#s-readout-intercept", "refLabel": "rank가 readout에 주는 뜻(절편)", "wrongWhy": ["", "가중치를 곱해 더하는 계산은 상태를 3배 하면 결과도 3배가 됩니다. 이 묶임은 절편이 있어야 풀립니다."]}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "가로축 입력, 세로축 응답인 S자 곡선 두 개를 그려 보세요 — 하나는 완만하게 휘고, 다른 하나는 입력이 조금만 커져도 금방 꼭대기에 붙는(포화하는) 곡선입니다. 두 곡선 위에 입력 0.6, 0.8, 1.0이 만드는 응답 점 세 개씩을 찍고, '응답이 더 큰 쪽'과 '세 입력이 더 잘 구별되는 쪽'이 같은 곡선인지 비교해 한 줄로 적으세요.", "items": [{"id": "d14-p01", "type": "mc", "q": "응답이 S자로 포화하는 소자를 아주 세게 구동했다. 입력 0.8과 1.0이 만드는 응답의 차이는 어떻게 되기 쉬운가?", "options": ["응답 전체가 커지므로 차이도 함께 커진다", "곡선이 거의 평평한 구간이라 차이가 0에 가까워진다", "구동 세기와 무관하게 입력 차이 0.2가 그대로 남는다", "포화하면 두 응답의 순서가 뒤바뀌어 음수가 된다"], "a": 1, "why": "readout은 상태의 크기가 아니라 상태 사이의 차이로 답을 가르고, 그 차이의 배율은 응답 곡선의 기울기입니다. 구동 세기 g = 20에서는 0.8과 1.0의 응답 차가 0.0000이었습니다(Claude 계산). 큰 on/off 비는 오히려 포화의 신호일 수 있습니다(1구간).", "ref": "#b-response-vs-difference", "refLabel": "응답의 크기와 응답의 차이"}, {"id": "d14-p02", "type": "mc", "q": "순서만 다른 두 입력열 (1, 0, 1)과 (0, 1, 1)을 '한 단계마다 상태의 일부만 남기는' 노드에 넣는다. 끝 상태의 차이가 가장 크게 남는 노드는?", "options": ["한 단계에 10%만 남기는(빨리 잊는) 노드", "한 단계에 90%를 남기는(오래 남기는) 노드", "한 단계에 50%를 남기는 노드", "남기는 비율과 관계없이 셋 다 같다"], "a": 2, "why": "남는 비율을 d라 하면 끝 상태의 거리는 d(1−d)라서 d = 0.5에서 0.25로 가장 크고, d = 0.1과 0.9에서는 0.09입니다. 빨리 잊으면 앞 입력이 지워지고, 오래 남기면 상태가 '들어온 숫자의 합'에 가까워져 순서가 흐려집니다(2구간).", "ref": "#b-separation", "refLabel": "분리: 순서만 다른 두 이력 손 계산"}, {"id": "d14-p03", "type": "mc", "q": "두 입력 이력이 남긴 상태 사이의 거리가 0.1이다. 이것이 '잘 갈린다'는 뜻인지 판단하려면 무엇과 비교해야 하나?", "options": ["그 소자가 낼 수 있는 응답의 최대 크기", "같은 입력을 반복해 넣을 때 상태가 흔들리는 크기", "다른 논문의 소자가 보고한 상태 거리", "비교는 필요 없고, 0보다 크기만 하면 된다"], "a": 1, "why": "거리는 잡음과 견줘야(거리 ÷ 흔들림) 뜻이 있습니다. 흔들림이 0.05라면 거리 0.25는 5배라 확실히 갈리지만 0.09는 약 1.8배에 그칩니다(2구간).", "ref": "#s-sep-noise", "refLabel": "잡음과 비교해야 거리가 뜻을 갖는다"}, {"id": "d14-p04b", "type": "ox", "q": "절편(모두에게 똑같이 더하는 상수)이 없는 선형 readout에서, 어떤 상태가 다른 상태를 정확히 2배 한 것이라면 두 상태에 +1과 −1처럼 반대 부호의 답을 줄 수 없다.", "a": true, "why": "절편이 없으면 출력도 정확히 2배로 묶입니다(y(2s) = 2·y(s)). 하지만 절편이 있으면 풀립니다. 숫자 하나짜리 상태 x = 1, 2에 y = 3 − 2x를 쓰면 +1, −1이 나옵니다. 그래서 상태 수보다 '진짜로 다른 방향의 수(rank)'가 readout의 한계를 정합니다(3구간).", "ref": "#s-readout-intercept", "refLabel": "rank가 readout에 주는 뜻(절편)"}, {"id": "d14-p05", "type": "ox", "q": "서로 다른 입력열이 만든 상태들의 '진짜로 다른 방향'의 수(kernel rank)는, 측정 잡음이 있어도 따로 기준을 정하지 않고 하나의 정해진 값으로 셀 수 있다.", "a": false, "why": "잡음 때문에 아주 작은 방향까지 세면 rank가 부풀므로, '최대값의 몇 % 이상'이라는 기준이 필요합니다. 기준만 바꿔도 같은 reservoir의 값이 약 10에서 80으로 바뀌었습니다. 기준을 적지 않은 값은 비교할 수 없습니다(3구간).", "ref": "#s-kr-threshold", "refLabel": "기준은 반드시 적어야 한다"}, {"id": "d14-p06", "type": "mc", "q": "서로 다른 입력은 물론, 과제상 같은 답이어야 할 비슷한 입력까지 최대한 다른 상태로 벌려 놓는 reservoir의 문제는?", "options": ["없다. 상태를 많이 벌릴수록 readout에 언제나 유리하다", "상태가 벌어질수록 readout의 계산이 느려진다", "벌어진 상태가 포화를 일으켜 차이가 사라진다", "잡음과 무관한 옛 입력 차이까지 남아 readout이 외우기 쉽다"], "a": 3, "why": "비슷한 입력열로 잰 rank(generalization rank)가 높다는 것은 무관한 차이까지 남긴다는 뜻입니다. 다른 입력은 갈라 놓고(높은 KR) 무관한 차이는 덜 남기는(낮은 GR) 균형을 과제에 맞춰 봅니다(4구간).", "ref": "#ch-generalization", "refLabel": "4구간 첫머리: 왜 '비슷한 것은 가까이'가 필요한가"}, {"id": "d14-p07", "type": "short", "q": "전극 16개에서 신호를 읽었는데, 알고 보니 모두 같은 신호를 크기만 다르게 읽은 것이었다. 이 상태들이 펼치는 '진짜로 다른 방향'의 수는? (숫자만)", "a": ["1", "1개", "하나", "한 개", "1.0", "1.00"], "why": "같은 신호의 배수들은 한 방향뿐이라, 같은 신호를 크기만 다르게 읽은 8채널의 참여비 차원이 1.00이었습니다(Claude 계산). 채널 수는 차원이 아니므로 공분산 고유값과 참여비 차원으로 확인합니다(5구간).", "ref": "#s-dpr-8ch", "refLabel": "그림 7(Day 25): 채널 8개, 참여비 1.00 vs 3.94"}, {"id": "d14-p08", "type": "mc", "q": "소자를 점점 세게 구동하면 전류–전압 곡선의 휨 같은 전기적 비선형은 계속 커진다. 이때 readout이 실제로 꺼내 쓰는 '입력들의 곱' 능력은 어떻게 되나?", "options": ["중간 세기에서 최대이고 더 세면 다시 준다", "전기적 비선형을 따라 계속 함께 커진다", "선형 readout이라 어느 세기에서나 0이다", "구동 세기와 상관없이 거의 일정하다"], "a": 0, "why": "모형 계산에서 전기적 비선형은 0 → 0.62로 계속 커졌지만, 곱셈 용량은 g = 3에서 0.52로 최대였다가 0.33으로 줄었고 기억도 0.16까지 줄었습니다. 아주 약하게 구동하면(거의 선형) 곱셈 용량이 0에 가깝지만, 세기를 올리면 생깁니다. 전기적 측정과 계산 비선형은 서로 다른 것을 재므로 둘 다 봐야 합니다(6구간).", "ref": "#s-gain-sweep", "refLabel": "6-2 계산 예: 구동 세기 실험(그림 8(Day 25))"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 큰 응답의 함정", "items": [{"id": "d14-q01", "type": "mc", "q": "그림 1에서 입력 0.8과 1.0을 가장 잘 가르는(응답 차이가 가장 큰) 구동 세기는?", "options": ["g = 0.5", "g = 1", "g = 5", "g = 20"], "a": 1, "why": "응답 차(Claude 계산)는 g = 0.5에서 0.0822, g = 1에서 0.0976, g = 2에서 0.0424, g = 5에서 0.0006, g = 20에서 0.0000이다. 너무 약하면 곡선 전체가 완만해 차이가 작고, 너무 세면 포화 구간이라 기울기가 0에 가깝다. '세게 구동할수록 더 잘 가른다'고 생각했다면 응답의 크기와 응답의 차이를 섞은 것이다.", "ref": "#b-response-vs-difference", "refLabel": "그림 1과 단계 1–3: 응답의 크기와 차이"}, {"id": "d14-q02", "type": "ox", "q": "on/off 비가 큰 소자일수록 reservoir로서 서로 다른 입력을 더 잘 가른다.", "a": false, "why": "on/off 비는 최대 변화량이다. readout이 쓰는 것은 다른 입력이 남긴 상태의 차이이고, 큰 변화를 만드는 구동이 포화를 일으켜 차이를 지울 수 있다(그림 1). 비휘발 메모리에서 좋은 지표가 reservoir에서는 포화의 신호일 수도 있다.", "ref": "#b-response-vs-difference", "refLabel": "'이름과 뜻': 응답이 크다 vs 구분 가능하다"}, {"id": "d14-q03b", "type": "mc", "q": "시간다중화에서 한 입력 조각의 길이 θ를 소자의 시간상수에 비해 너무 길게 잡으면 노드 응답은 어떻게 되기 쉬운가?", "options": ["작은 진폭의 선형 구간에서만 움직인다", "응답이 커져 노드끼리 더 잘 구별된다", "포화해 응답이 두 값으로 몰린다", "θ와 상관없이 노드 응답은 똑같다"], "a": 2, "why": "다음 값이 오기 전에 포화해 응답이 두 값으로 몰리고 상태가 빈약해진다(Liang 2024, p.198). 너무 짧으면 반대로 작은 진폭의 선형 구간에서만 움직인다. 첫 보기를 골랐다면 '너무 짧을 때'와 방향을 바꿔 기억한 것이다. 둘째 보기는 '응답이 크면 좋다'는 1구간의 오해다.", "ref": "#s-sat-sources", "refLabel": "1구간 '폴더 원문은 뭐라고 하나'(Liang 항목)"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 분리", "items": [{"id": "d14-q04", "type": "short", "q": "(풀이 예시 확인) 노드 x ← d·x + u, d = 0.5, 처음 x = 0. 이력 A = (1, 0, 1)과 B = (0, 1, 1)의 끝 상태 사이 거리는?", "a": ["0.25", ".25", "1/4"], "why": "A: 1 → 0.5 → 1.25, B: 0 → 1 → 1.5. 거리 |1.25 − 1.5| = 0.25. 본문 2구간 단계 1–2.", "ref": "#b-separation", "refLabel": "2구간 단계 1–2: d = 0.5 손 계산"}, {"id": "d14-q05", "type": "short", "q": "(일부 채우기) 같은 노드에서 d = 0.2. 이력 A = (1, 0, 1)은 1 → 0.2 → 1.04로 끝난다. B = (0, 1, 1)의 끝 상태를 구해 두 상태의 거리를 적으세요.", "a": ["0.16", ".16", "0.160"], "why": "B: 0 → 0.2×0 + 1 = 1 → 0.2×1 + 1 = 1.2. 거리 |1.04 − 1.2| = 0.16. 일반식 d(1 − d) = 0.2 × 0.8 = 0.16과 같다. 헷갈렸다면 매 단계 '지난 상태 × d + 새 입력'을 순서대로 적어 보세요.", "ref": "#b-separation", "refLabel": "2구간 단계 1–4: 지난 상태 × d + 새 입력"}, {"id": "d14-q06", "type": "mc", "q": "d = 0.9(기억이 긴 노드)에서 순서만 다른 두 이력 A, B의 거리가 0.09로 작아지는 이유로 가장 알맞은 것은?", "options": ["앞의 입력을 거의 잊어 마지막 입력만 남기 때문", "포화가 일어나 두 상태가 1 근처로 몰리기 때문", "측정 잡음이 두 상태의 차이를 덮기 때문", "상태가 입력의 합에 가까워지고 두 합이 같기 때문"], "a": 3, "why": "A, B 모두 1이 두 번, 0이 한 번이라 합이 2다. d가 1에 가까우면 각 입력이 거의 같은 무게로 남아 순서가 흐려진다. 첫 보기는 d가 작을 때(d = 0.1)의 이유다. 이 노드에는 포화도 잡음도 넣지 않았다.", "ref": "#b-separation", "refLabel": "2구간 단계 4: 기억이 길 때"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · rank 세기 (예시 → 일부 채우기 → 혼자)", "items": [{"id": "d14-q07", "type": "short", "q": "(풀이 예시 확인) 상태 s₁ = (1, 2, 3), s₂ = (2, 4, 6), s₃ = (1, 0, 1)이 펼치는 진짜로 다른 방향의 수(rank)는?", "a": ["2", "2개", "둘"], "why": "s₂ = 2 × s₁이라 새 방향이 아니고, s₃는 s₁의 어떤 배수로도 만들 수 없어 새 방향이다. 방향은 2개. 3구간 rank 단계 1–3과 '이름'.", "ref": "#b-rank", "refLabel": "rank 단계 1–3: 3×3 예"}, {"id": "d14-q08", "type": "short", "q": "(일부 채우기) 상태 s₁ = (1, 0, 2), s₂ = (3, 0, 6), s₃ = (0, 1, 0). s₂ = 3 × s₁이므로 새 방향이 아니다. s₃는 둘째 숫자가 1이라 s₁의 몇 배로도 만들 수 없다. 이 세 상태의 rank는?", "a": ["2", "2개", "둘"], "why": "새 방향은 s₁ 쪽과 s₃ 쪽 둘이다. 상태가 셋이라고 rank가 3인 것이 아니다.", "ref": "#s-rank-name", "refLabel": "rank 단계 '이름': 세는 순서"}, {"id": "d14-q09", "type": "short", "q": "(혼자 풀기) 노드 3개, 상태 s₁ = (1, 1, 0), s₂ = (0, 1, 1), s₃ = (1, 2, 1). rank는?", "a": ["2", "2개", "둘"], "why": "s₂는 s₁의 배수가 아니다(첫 숫자가 0, 1). 그런데 s₃ = s₁ + s₂ = (1+0, 1+1, 0+1)이라 두 방향을 더해 만들 수 있으므로 새 방향이 아니다. 배수만 확인하고 3이라고 답했다면 '몇 배씩 더하기'로 만들어지는 경우를 놓친 것이다(rank 단계 3의 s₄).", "ref": "#b-rank", "refLabel": "rank 단계 3: 섞어서 만들 수 있으면 새 방향이 아니다"}]}, "3-end": {"kind": "end", "title": "3구간 마무리 · kernel rank", "items": [{"id": "d14-q10", "type": "short", "q": "노드 8개짜리 소자에 서로 다른 입력열 5개를 넣어 끝 상태로 8 × 5 표를 만들었다. 이 표로 잰 kernel rank의 최대값은?", "a": ["5", "5개"], "why": "rank는 노드 수 N과 상태(입력열) 수 S 중 작은 값을 넘지 못한다. min(8, 5) = 5. 8이라고 답했다면 입력열이 5개뿐이라 방향도 최대 5개라는 점을 놓친 것이다.", "ref": "#b-rank", "refLabel": "rank 단계 '상한': min(N, S)"}, {"id": "d14-q11", "type": "ox", "q": "전극이 3개인 소자로 만든 끝 상태 표는 rank가 3이다.", "a": false, "why": "그림 4 왼쪽처럼 세 전극이 같은 시간상수로 같은 입력에 똑같이(또는 크기만 다르게) 반응하면 세 행이 서로의 배수라 rank는 1이다. rank는 전극 수가 아니라 서로 다른 응답의 수다.", "ref": "#s-kr-example", "refLabel": "그림 4: 같은 τ의 노드 셋은 rank 1"}, {"id": "d14-q12", "type": "mc", "q": "노드 100개 reservoir 하나의 KR을 같은 입력열·같은 방법으로 재면서, '0으로 볼 특이값의 기준'만 가장 큰 값의 10%에서 1%로 바꿨더니 약 10에서 약 80이 되었다. 알맞은 결론은?", "options": ["1% 기준이 맞는 값이고 10% 기준은 틀린 값이다", "기준을 낮추자 reservoir의 계산 성능이 8배 좋아졌다", "기준을 적지 않은 KR은 다른 결과와 비교할 수 없다", "입력열을 바꾸면 KR도 8배쯤 달라질 것이다"], "a": 2, "why": "같은 reservoir를 같은 방식으로 재면서 기준만 바꿨으므로 달라진 것은 '세는 방법'이지 성능이 아니다. 기준은 본질적으로 임의적이라 결과와 함께 적어야 한다(Stepney 2024, p.678–679). 같은 연구에서 입력열 사이의 차이는 reservoir 사이의 차이보다 훨씬 작았다.", "ref": "#s-kr-threshold", "refLabel": "기준은 반드시 적어야 한다(원문 그림 포함)"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 일반화", "items": [{"id": "d14-q13", "type": "mc", "q": "generalization rank(GR)를 잴 때 KR과 무엇이 다른가?", "options": ["절차는 같고, 입력열만 일부러 비슷하게 만든다", "rank 대신 새 데이터에서의 정확도를 잰다", "같은 입력열을 쓰고, 기준만 더 낮게 잡는다", "노드 하나만 골라 그 응답의 rank를 센다"], "a": 0, "why": "입력열 → 끝 상태 → 표 → rank라는 절차는 KR과 같고 입력만 다르다(끝 몇 값을 같게, 또는 아주 작은 범위의 값으로; Stepney 2024, p.678). 같은 측정을 다른 입력으로 한다는 점이 둘을 함께 읽어야 하는 이유다.", "ref": "#s-gr-measure", "refLabel": "4구간: GR을 어떻게 재나"}, {"id": "d14-q14", "type": "mc", "q": "그림 5에서 KR은 둘 다 3인데 GR은 짧은 기억 1, 긴 기억 3이었다. 옳은 해석은?", "options": ["긴 기억 쪽이 더 많이 가르므로 어느 과제에서나 낫다", "GR이 높은 긴 기억 쪽이 잡음에 더 강하다", "GR은 낮을수록 좋으므로 어느 과제에서나 짧은 기억이 낫다", "최근 세 입력으로 답이 정해지는 과제라면 짧은 기억이 유리하다"], "a": 3, "why": "KR이 같으니 '다른 것을 가르는 능력'은 같다. 긴 기억은 끝 세 값 이전의 차이를 남기는데, 그것이 필요한지는 과제가 정한다. 과제가 열 개 전 입력을 요구하면 긴 기억이 필요하다. 'GR은 언제나 낮을수록 좋다'는 과제 조건을 빼먹은 문장이다(Stepney 2024, p.681). 그리고 GR이 낮을수록 잡음에 강하다.", "ref": "#s-krgr-example", "refLabel": "4구간 계산 예(그림 5)와 단계 3"}, {"id": "d14-q15", "type": "ox", "q": "KR이 높고 GR도 높은 reservoir는 잡음이나 과제와 무관한 옛 입력의 차이까지 벌려, readout이 학습 데이터를 외울 위험이 있다.", "a": true, "why": "다른 것도, 비슷한 것도 모두 벌리면 readout은 학습 데이터의 우연한 차이를 답의 단서로 쓸 수 있고, held-out 성능이 떨어진다(Day 10 기초 4). 4구간의 2×2 표 오른쪽 위 칸.", "ref": "#s-krgr-table", "refLabel": "4구간 KR × GR 표"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 참여비 차원", "items": [{"id": "d14-q16", "type": "short", "q": "채널 4개의 공분산 고유값이 (2, 2, 0, 0)이다. 참여비 차원 (Σλ)² ÷ Σλ²는?", "a": ["2", "2.0", "2.00"], "why": "합 4의 제곱 16, 제곱의 합 4 + 4 = 8, 16 ÷ 8 = 2. 몫으로 보면 (0.5, 0.5, 0, 0)이라 1 ÷ (0.25 + 0.25) = 2. 두 방향에 고르게 퍼져 있으니 2다. (3, 1, 0, 0)의 1.6보다 크다. 같은 합이라도 고를수록 크다.", "ref": "#s-dpr-formula", "refLabel": "참여비 차원: 몫 → 제곱의 합 → 역수"}, {"id": "d14-q17", "type": "short", "q": "(혼자 풀기) 고유값이 (2, 1, 1, 0)이면 참여비 차원은? (소수 둘째 자리까지)", "a": ["2.67", "2.7", "8/3", "2.666", "2.667"], "why": "합 4 → 16. 제곱의 합 4 + 1 + 1 + 0 = 6. 16 ÷ 6 = 2.67. 방향은 셋이 참여하지만 크기가 고르지 않아 3보다 작다. 분모에 제곱을 하지 않고 4로 나눴다면 식의 분모(제곱의 합)를 다시 보세요.", "ref": "#s-dpr-formula", "refLabel": "참여비 차원 식과 '식으로 확인'"}, {"id": "d14-q18", "type": "ox", "q": "전극 16개를 모두 readout에 넣으면 상태의 참여비 차원은 16이다.", "a": false, "why": "참여비 차원은 채널 수가 아니라 측정한 상태의 공분산 고유값으로 정해진다. 전극들이 같은 신호를 크기만 다르게 읽으면 1에 가깝다(그림 7(Day 25)의 A). Singh 2026(p.13)은 관측 차원을 채널 수에서 추정하지 말고 측정한 상태에서 평가하라고 한다.", "ref": "#s-dpr-8ch", "refLabel": "그림 7(Day 25): 채널 8개, 참여비 1.00 vs 3.94"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 비선형 평가", "items": [{"id": "d14-q19", "type": "mc", "q": "그림 8(Day 25)의 g = 30(아주 세게 구동)에 대해 옳은 것은?", "options": ["전기적 비선형은 최대지만 곱셈 용량은 g = 3보다 낮다", "전기적 비선형과 곱셈 용량이 함께 최대가 된다", "포화 때문에 전기적 비선형이 오히려 가장 작다", "곱셈 용량은 최대지만 되살리기 용량은 가장 낮다"], "a": 0, "why": "모형 계산(Claude) 기준 g = 30: 전기적 비선형 0.62(최대), 곱셈 용량 0.33(g = 3의 0.52보다 낮음), 되살리기 0.16(최저). 포화된 노드가 대부분 −1 아니면 +1에 붙어 입력의 세부 차이가 남지 않는다. 곱셈 용량이 최대인 곳은 g = 3이다. 전기적 비선형이 크면 계산에도 좋다고 생각했다면 6-2의 단계 3을 다시 보세요.", "ref": "#s-gain-sweep", "refLabel": "6-2 계산 예: 단계 3(g = 30)"}, {"id": "d14-q20", "type": "mc", "q": "상태가 과거 입력의 가중 합뿐인(선형) reservoir에서 직선 readout이 u(t)·u(t−1)을 만들 수 없는 이유는?", "options": ["노드 수가 만들 곱셈 항의 수보다 적어서", "학습 데이터가 부족해 곱을 배우지 못해서", "가중 합을 다시 더해도 곱 항이 생기지 않아서", "입력이 무작위라 이웃 입력끼리 상관이 없어서"], "a": 2, "why": "선형 상태의 직선 조합은 a·u(t) + b·u(t−1) + … 꼴일 뿐이다. 곱셈 항은 어디에도 없으므로 노드나 데이터를 늘려도 생기지 않는다. 그래서 그림 8(Day 25)의 g = 0.1에서 곱셈 용량이 0.00이다. Day 16–17 XOR 기초와 같은 이유다.", "ref": "#s-gain-sweep", "refLabel": "6-2 계산 예: 단계 1(g = 0.1)"}, {"id": "d14-q21", "type": "ox", "q": "출력에 고조파(입력에 없던 2배·3배 주파수 성분)가 강하게 나오면, readout이 꺼내 쓸 수 있는 계산 비선형도 크다고 결론 내릴 수 있다.", "a": false, "why": "고조파는 전기적 비선형의 증거일 뿐이다. 그 비선형이 포화나 불안정한 영역에서 생겼을 수 있어, 측정한 상태에서 직선 readout이 비선형 함수를 되살리는지 따로 봐야 한다(Singh 2026, p.13). 두 측정은 보완적이지 대체 관계가 아니다.", "ref": "#s-two-measures", "refLabel": "6-1 두 종류의 측정"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d14-q22", "type": "mc", "q": "어떤 논문이 'on/off 비 10⁴, 전극 16개, MNIST 정확도 95%'를 근거로 소자가 좋은 reservoir라고 주장한다. 이 주장을 확인하려고 가장 먼저 요구할 것은?", "options": ["on/off 비를 10⁵ 이상으로 더 키운 소자", "히스테리시스 고리 넓이를 더 키운 측정 결과", "전극을 32개로 두 배 늘린 소자의 결과", "상태 차이 ÷ 반복 흔들림, 고유값, 원시 입력 기준선"], "a": 3, "why": "on/off 비는 응답 크기, 전극 수는 읽은 숫자의 개수, 정확도는 파이프라인 전체의 결과다. 차이 ÷ 흔들림(2구간), 실제 차원(5구간), 정확도의 출처(6-3 표, Day 28–29)를 봐야 한다. 나머지 보기는 모두 '더 크게'를 요구할 뿐 무엇이 계산했는지를 묻지 않는다.", "ref": "#s-claims-table", "refLabel": "6-3 논문에서 무엇을 요구하나(표)"}, {"id": "d14-q23", "type": "mc", "q": "비슷한 소자를 다룬 두 논문이 KR을 각각 20과 60으로 보고했다. 어느 쪽이 나은지 판단하기 전에 가장 먼저 확인할 것은?", "options": ["rank 기준(몇 %), 입력열 수 S, 잡음 처리", "두 소자의 on/off 비와 히스테리시스 크기", "두 논문이 readout 가중치를 학습한 방법", "확인할 것 없이 KR이 큰 쪽(60)이 낫다"], "a": 0, "why": "같은 reservoir도 기준만 바꾸면 KR이 약 10에서 80으로 바뀐다(Stepney 2024, Fig. 3, p.679). S를 늘리면 수렴할 때까지 커진다(p.678). 측정 조건이 같아야 숫자를 비교할 수 있다. KR은 readout 학습과 무관하게 상태 표만으로 센다.", "ref": "#s-kr-threshold", "refLabel": "기준은 반드시 적어야 한다"}, {"id": "d14-q24", "type": "mc", "q": "소자 A는 순서만 다른 두 이력의 상태 거리가 0.09, 소자 B는 0.25이다. 같은 입력을 반복할 때 상태의 흔들림(표준편차)은 둘 다 0.05다. readout이 두 이력을 더 확실히 가를 소자와 그 근거는?", "options": ["A. 거리가 작을수록 상태가 안정적이다", "둘이 같다. 흔들림이 둘 다 0.05이다", "B. 거리 ÷ 흔들림이 5 대 1.8이다", "알 수 없다. 응답의 최대값을 모른다"], "a": 2, "why": "분리는 거리를 잡음과 비교해야 뜻이 있다. 0.25/0.05 = 5, 0.09/0.05 = 1.8. 응답의 최대값(크기)은 두 이력을 가르는 데 필요한 정보가 아니다(1구간).", "ref": "#s-sep-noise", "refLabel": "잡음과 비교해야 거리가 뜻을 갖는다"}, {"id": "d14-q25", "type": "ox", "q": "RC에서는 소자 간 편차가 상태의 다양성을 늘리므로 편차는 클수록, 언제나 이롭다.", "a": false, "why": "Liang 2024(p.196)는 편차가 풍부함을 '어느 정도' 늘린다고 쓴다. 편차가 크면 한 소자로 학습한 readout을 다른 소자에 쓸 수 없고, 같은 입력의 흔들림이 차이를 덮을 수도 있다. 조건부 이득이며 대가는 Day 32에서 다룬다.", "ref": "#s-variation", "refLabel": "편차는 다양성을 준다 — 조건부로"}]}}}</script>
+<script type="application/json" id="quiz-d14">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 돌아갈 장의 앵커.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: 과제의 시간척도와 좋은 memory의 조건", "items": [{"id": "d14-r01", "type": "mc", "q": "τ = 20 ms인 소자에 입력이 10 ms 간격으로 들어온다. 한 간격 동안 남는 비율 d = e의 지수 (−입력 간격/τ)는? (참고: e의 지수 −0.5 ≈ 0.61, e의 지수 −2 ≈ 0.14)", "options": ["0.14", "0.39", "0.50", "0.61"], "a": 3, "why": "입력 간격/τ = 10/20 = 0.5이므로 d = e의 지수 (−0.5) ≈ 0.61입니다. 한 간격 뒤 지금 흔적의 61%가 남고 39%가 줄어듭니다.", "ref": "d13b.html#b-timescale-match", "refLabel": "기초 상자 ③ 단계 1: 한 간격 동안 남는 비율", "wrongWhy": ["0.14는 τ/입력 간격 = 2를 지수에 넣은 값입니다. 지수는 입력 간격 ÷ τ입니다.", "0.39는 한 간격에 줄어드는 몫(1 − d)입니다. d는 남는 몫입니다.", "0.50은 입력 간격/τ 자체입니다. d는 그 값을 e의 지수(음수)로 넣은 결과입니다.", ""], "core": true}, {"id": "d14-r02", "type": "mc", "q": "τ = 2 ms 소자와 τ = 2 s 소자, 입력 간격 1 ms인 과제 X와 1 s인 과제 Y가 있다(둘 다 최근 몇 개 입력이 필요). 상태에 남는 기억의 모양(지연별 MCₖ)이 똑같은 짝은?", "options": ["두 소자 모두 과제 X에 쓸 때", "2 ms 소자 × X와 2 s 소자 × Y", "2 ms 소자 × Y와 2 s 소자 × X", "두 소자 모두 과제 Y에 쓸 때"], "a": 1, "why": "기억의 모양은 d = e의 지수 (−입력 간격/τ)가 정하고, d는 입력 간격/τ에만 달려 있습니다. 1 ms/2 ms와 1 s/2 s는 둘 다 0.5라 d가 같습니다. 좋은 τ는 절대값이 아니라 입력 간격에 대한 비율로 정해집니다.", "ref": "d13b.html#s-four-cases", "refLabel": "10 ms 소자와 10 s 소자의 네 칸 표", "wrongWhy": ["같은 과제 X라도 1/2와 1/2000으로 비율이 달라 d가 0.61과 거의 1로 다릅니다.", "", "1 s/2 ms = 500과 1 ms/2 s = 0.0005는 정반대의 실패(너무 빨리 잊음, 흔적이 너무 작음)입니다.", "같은 과제 Y라도 비율이 500과 0.5로 달라 기억의 모양이 다릅니다."], "core": true}, {"id": "d14-r03", "type": "mc", "q": "회복이 아주 느린(τ가 입력 간격보다 훨씬 긴) 소자에 서로 독립이어야 할 입력열을 차례로 넣었더니, 둘째 입력열의 결과가 첫째 입력열이 무엇이었는지에 따라 달라졌다. 이 현상의 이름으로 알맞은 것은?", "options": ["넘어옴: 앞 입력열의 흔적이 다음 입력열에 남음", "너무 빨리 잊음: 필요한 지연 전에 흔적이 사라짐", "포화: 응답이 최대값 근처에 붙어 차이가 없음", "측정 잡음: 반복할 때마다 값이 무작위로 흔들림"], "a": 0, "why": "너무 느린 회복은 명목상 독립인 입력열 사이에 원치 않는 넘어옴(carry-over)을 만듭니다. 그래서 입력열 사이의 회복·리셋 절차를 함께 보고해야 합니다.", "ref": "d13b.html#s-two-failures", "refLabel": "기초 상자 ⑥: 두 가지 실패", "wrongWhy": ["", "너무 빨리 잊으면 첫째 입력열의 흔적이 없어 둘째 결과에 영향을 주지 못합니다. 여기서는 반대입니다.", "포화는 응답 크기의 문제이고, 앞 입력열에 따라 결과가 달라지는 현상을 설명하지 않습니다.", "무작위 잡음은 앞 입력열의 내용과 관계없이 흔들립니다. 여기서는 앞 입력열에 따라 체계적으로 달라졌습니다."]}, {"id": "d14-r04", "type": "mc", "q": "다음 중 입력 간격을 실험자가 마음대로 고를 수 없는 경우는?", "options": ["저장된 음성 파일을 펄스열로 바꿔 재생할 때", "손글씨 사진을 열 단위 펄스열로 바꿀 때", "피부에 붙인 센서로 맥박을 실시간 처리할 때", "녹화한 사건 카메라 기록을 네 프레임으로 나눌 때"], "a": 2, "why": "실시간 신호는 신호가 입력 간격을 정합니다. 심장은 소자의 τ에 맞춰 뛰어 주지 않으므로 정합은 소자 쪽을 바꿔서만 맞출 수 있습니다. 저장된 데이터는 실험자가 간격을 고를 수 있어, 거기서 맞춘 정합은 실제 신호와의 정합을 증명하지 않습니다.", "ref": "d13b.html#s-who-sets-interval", "refLabel": "3-1절: 누가 입력 간격을 정하나", "wrongWhy": ["저장된 파일은 재생 속도를 실험자가 정할 수 있습니다.", "정지 사진에는 시간이 없어서, 펄스 사이 간격을 실험자가 고릅니다.", "", "이미 녹화한 기록을 몇 장으로 나눌지, 얼마 간격으로 넣을지는 실험자가 정합니다."]}, {"id": "d14-r05", "type": "mc", "q": "어떤 소자의 τ는 그대로 두고 입력 간격을 τ의 1/5에서 τ의 100배로 늘렸더니, 앞 입력의 흔적이 거의 사라지는데도 과제 정확도는 90%에서 89%로 1%p만 떨어졌다. 가장 조심스러운 해석은?", "options": ["이 과제는 정보 대부분이 마지막 입력에 있어 기억에 덜 기댄다", "이 소자는 τ의 100배 간격에서도 앞 입력을 잘 기억한다", "시간척도 정합은 어떤 과제에서도 성능과 무관하다", "τ를 늘리면 이 과제의 정확도가 10%p 넘게 오를 것이다"], "a": 0, "why": "흔적이 사라졌는데도 성능이 거의 그대로라면, 과제가 기억에 많이 기대지 않는다고 읽는 것이 조심스럽습니다. 시간척도 불일치가 성능을 얼마나 깎는지는 과제가 기억을 얼마나 필요로 하느냐에 달렸습니다.", "ref": "d13b.html#s-lee-lesson", "refLabel": "3-2절: 이 그림이 주는 두 가지", "wrongWhy": ["", "간격이 τ의 100배면 d ≈ e의 지수 (−100)으로 앞 입력의 흔적이 사실상 0입니다.", "한 과제의 결과로 모든 과제에 일반화할 수 없습니다. 기억이 핵심인 과제라면 크게 떨어졌을 것입니다.", "잃은 것이 1%p뿐이라 τ를 늘려도 되찾을 여지가 그만큼 작습니다."]}, {"id": "d14-r06", "type": "ox", "q": "τ가 모두 같은 선형 소자 3개를 입력 배율만 1, 2, 3배로 다르게 연결해 함께 읽으면, 잡음이 없을 때 총 MC는 약 3이다.", "a": false, "why": "τ가 같은 선형 소자는 입력 배율이 달라도 상태가 서로의 배수일 뿐이라, readout에게는 한 숫자를 세 번 본 것과 같습니다. 총 MC는 소자 하나와 같은 약 1입니다. τ가 서로 달라야 쌓입니다.", "ref": "d13b.html#ch-many-nodes", "refLabel": "4구간: 같은 τ는 겹치고 다른 τ는 쌓인다", "wrongWhy": ["상태 수 3은 상한일 뿐입니다. 세 상태가 서로의 배수이면 새로 꺼낼 과거 정보가 없어 약 1에 머뭅니다.", ""], "core": true}, {"id": "d14-r07", "type": "mc", "q": "기억이 전혀 없는 노드 A(d = 0, 상태 = 방금 입력)와 d = 0.8인 노드 B를 함께 읽는다(선형, 잡음 없음). A를 더한 효과로 맞는 것은?", "options": ["A는 기억이 없으므로 총 MC에 보탬이 없다", "A가 B의 기억을 덮어 총 MC가 1보다 줄어든다", "B에서 방금 입력 몫을 빼게 되어 총 MC가 2가 된다", "두 노드는 d = 0.4인 노드 하나와 같아진다"], "a": 2, "why": "readout이 B − A를 만들면 방금 입력의 몫이 지워지고 그 앞 입력들이 또렷해집니다. 선형·잡음 없는 조건에서 서로 다른 d의 노드 둘은 총 MC 2(= 상태 수)를 냅니다. 혼자서는 기억이 없는 노드가 다른 노드의 기억을 쓸 수 있게 만든 것입니다.", "ref": "d13b.html#s-two-nodes", "refLabel": "노드 둘로 확인하기", "wrongWhy": ["A 혼자의 기억은 0이지만, B와 함께 읽으면 B에서 방금 입력을 빼는 재료가 됩니다.", "readout은 A를 쓰지 않을 수도 있으므로(가중치 0), 노드를 더해 총 MC가 줄지는 않습니다.", "", "두 상태를 따로 읽으므로 평균 노드 하나로 합쳐지지 않습니다."], "core": true}, {"id": "d14-r08", "type": "ox", "q": "비선형 노드로 만든 reservoir의 MC가 같은 크기의 선형 reservoir보다 낮게 나왔다면, 비선형 쪽은 그만큼 쓸모없는 reservoir다.", "a": false, "why": "비선형 노드는 상태의 흔들림 일부를 '입력들의 곱' 같은 비선형 정보에 씁니다. 기억과 비선형이 같은 상태 수를 나눠 쓰므로 MC가 낮을 수 있고, 과제가 비선형을 필요로 하면 그쪽이 더 나을 수 있습니다.", "ref": "d13b.html#s-nonlinear-share", "refLabel": "4구간: 비선형이 끼면", "wrongWhy": ["MC는 1차(기억) 몫만 셉니다. 비선형 노드가 2차 이상 정보에 쓴 몫은 MC에 나타나지 않습니다.", ""]}, {"id": "d14-r09", "type": "mc", "q": "어떤 논문이 지연별 MCₖ 곡선을 보고했는데 가로축이 지연 k뿐이고 입력 간격은 적혀 있지 않다. 이 정보만으로 판단할 수 없는 것은?", "options": ["곡선 아래 총 MC가 얼마인지", "그 기억이 실제 시간으로 몇 ms까지 닿는지", "최근 입력의 몫이 먼 입력보다 큰지", "MCₖ가 기준 0.05를 넘는 지연이 몇 개인지"], "a": 1, "why": "k개 전 입력의 물리적 지연은 k × 입력 간격입니다. 입력 간격이 없으면 같은 곡선이 10 ms짜리 기억인지 10 s짜리 기억인지 알 수 없고, 과제의 기억 창(물리 시간)과 맞는지도 판단할 수 없습니다.", "ref": "d13b.html#s-six-questions", "refLabel": "확인 질문 여섯 표(③ 물리 지연 축)", "wrongWhy": ["총 MC는 지연별 값을 더하면 되므로 입력 간격 없이도 구할 수 있습니다.", "", "곡선의 모양만 보면 최근과 먼 지연의 몫을 비교할 수 있습니다.", "기준을 넘는 지연의 개수도 곡선에서 바로 셀 수 있습니다. 모르는 것은 그 지연의 물리 시간입니다."]}, {"id": "d14-r10", "type": "mc", "q": "물리 reservoir의 총 MC가 4로 측정됐다. 이 숫자의 가치를 판단하려고 디지털 쪽과 비교할 때 가장 알맞은 비교 대상은?", "options": ["MC가 수십인 소프트웨어 ESN의 MC 숫자", "같은 소자의 retention 시간", "다른 이온 소자 논문이 보고한 MC 숫자", "숫자 4개를 저장·update하는 디지털 회로의 비용"], "a": 3, "why": "과거 입력 k개를 그대로 적어 두는 디지털 delay tap은 MC가 정확히 k입니다. 그러니 'MC = 4' 자체는 크지도 작지도 않고, 같은 기억을 디지털로 만드는 비용(에너지·면적·센서와의 거리)과 비교해야 물리 기억의 가치가 드러납니다.", "ref": "d13b.html#s-digital-compare", "refLabel": "5구간 ⑥: 디지털 delay tap과 비교", "wrongWhy": ["MC 숫자끼리만 비교하면 같은 기억을 만드는 비용의 차이가 빠집니다.", "retention은 MC를 정하지 않습니다. 둘은 다른 양입니다.", "조건(입력 간격·잡음·readout)이 다른 MC 숫자는 직접 비교하기 어렵고, 비용 비교도 빠집니다.", ""]}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 분리·rank·일반화: 상태는 얼마나 다른가", "items": [{"id": "d14-rb01", "type": "mc", "q": "응답이 tanh(g·u)인 소자에 입력 0.3과 0.4를 넣는다. 구동 세기 g를 1에서 10으로 올리면 어떻게 되나?", "options": ["최대 응답과 두 응답의 차가 함께 약 10배 커진다", "최대 응답은 그대로이고 두 응답의 차만 커진다", "두 응답의 차는 입력 차 0.1로 언제나 같다", "최대 응답은 커지고, 두 응답의 차는 0에 가깝게 준다"], "a": 3, "why": "g = 1: tanh(0.3) = 0.291, tanh(0.4) = 0.380, 차 0.089. g = 10: tanh(3) = 0.995, tanh(4) = 0.999, 차 0.004. 응답은 1에 가까워지지만, 포화 구간의 기울기가 0에 가까워 입력 차이가 응답 차이로 옮겨지지 않습니다.", "ref": "d14a.html#b-response-vs-difference", "refLabel": "응답의 크기와 응답의 차이", "wrongWhy": ["tanh는 1을 넘지 못하므로 응답을 10배로 키울 수 없고, 포화 쪽에서는 차가 오히려 줄어듭니다.", "g를 키우면 응답 자체도 커집니다(0.38 → 0.999). 줄어드는 것은 차입니다.", "응답 차 = 입력 차 × 곡선의 기울기입니다. 기울기는 g와 구간에 따라 바뀝니다.", ""], "note": "곡선의 기울기가 '입력 차이 → 응답 차이'의 배율입니다. 포화된 곳에서는 그 배율이 0에 가깝습니다."}, {"id": "d14-rb02", "type": "mc", "q": "누설 노드 x ← d·x + u(처음 x = 0)에서 d = 0.3일 때, 이력 A = (1, 0, 1)과 B = (0, 1, 1)의 끝 상태 사이 거리는?", "options": ["0.09", "0.21", "0.30", "0.49"], "a": 1, "why": "A: 1 → 0.3 → 1.09, B: 0 → 1 → 1.3. 거리 |1.09 − 1.3| = 0.21 = d(1 − d) = 0.3 × 0.7.", "ref": "d14a.html#b-separation", "refLabel": "분리: 순서만 다른 두 이력 손 계산", "wrongWhy": ["0.09는 d² = 0.3²입니다. 거리는 d(1 − d)입니다.", "", "0.30은 d 자체입니다. 단계마다 '지난 상태 × d + 새 입력'을 적어 보세요.", "0.49는 (1 − d)²입니다. 두 끝 상태 1.09와 1.3을 직접 빼 보세요."], "core": true}, {"id": "d14-rb03", "type": "mc", "q": "두 이력의 끝 상태 거리가 0.12다. 소자 P는 같은 입력을 반복할 때 상태의 흔들림(표준편차)이 0.01, 소자 Q는 0.08이다. 알맞은 판단은?", "options": ["P가 낫다: 거리가 흔들림의 12배, Q는 1.5배다", "같다: 두 소자의 거리가 0.12로 같다", "Q가 낫다: 흔들림이 커서 상태를 넓게 쓴다", "둘 다 못 가른다: 거리 0.12는 너무 작다"], "a": 0, "why": "분리는 거리 ÷ 같은 입력의 흔들림으로 읽습니다. 0.12/0.01 = 12, 0.12/0.08 = 1.5. P에서는 readout이 대부분 맞게 가르고, Q에서는 자주 헷갈립니다.", "ref": "d14a.html#s-sep-noise", "refLabel": "잡음과 비교해야 거리가 뜻을 갖는다", "wrongWhy": ["", "거리만으로는 판단할 수 없습니다. 같은 거리라도 흔들림이 크면 겹칩니다.", "흔들림은 신호가 아니라 잡음입니다. 같은 입력의 상태가 넓게 흩어지면 두 이력이 겹칩니다.", "거리의 크기는 흔들림과 견줘야 뜻이 있습니다. P에서는 0.12가 흔들림의 12배입니다."], "core": true}, {"id": "d14-rb04", "type": "ox", "q": "끝 상태가 1.25와 1.5인 두 이력(거리 0.25)을, 상태를 그대로 읽지 않고 tanh(5x)처럼 강하게 포화하는 응답으로 읽어도 거리는 약 0.25로 남는다.", "a": false, "why": "tanh(6.25) = 0.999993, tanh(7.5) = 0.999999라 거리가 약 7 × 10⁻⁶으로 사라집니다. 응답은 1에 가까울 만큼 크지만 순서 정보는 남지 않습니다.", "ref": "d14a.html#s-sep-saturation", "refLabel": "2구간: 포화가 끼면", "wrongWhy": ["포화 구간에서는 기울기가 0에 가까워, 상태의 차이 0.25가 응답의 차이로 거의 옮겨지지 않습니다.", ""]}, {"id": "d14-rb05", "type": "mc", "q": "노드 3개의 상태 s₁ = (2, 0, 1), s₂ = (0, 1, 1), s₃ = (2, 2, 3)이 펼치는 진짜로 다른 방향의 수(rank)는?", "options": ["0", "1", "2", "3"], "a": 2, "why": "s₂는 s₁의 몇 배도 아니므로(첫 숫자 2와 0) 새 방향입니다. s₃ = s₁ + 2 × s₂ = (2 + 0, 0 + 2, 1 + 2)라 두 방향을 몇 배씩 더해 만들 수 있으므로 새 방향이 아닙니다. rank는 2.", "ref": "d14a.html#b-rank", "refLabel": "rank 단계 3: 섞어서 만들 수 있으면 새 방향이 아니다", "wrongWhy": ["모든 숫자가 0인 상태가 아니면 방향은 적어도 하나 있습니다.", "s₂는 s₁의 배수가 아니므로 방향이 적어도 둘입니다.", "", "s₃가 s₁의 배수가 아니어도, s₁과 s₂를 몇 배씩 더해 만들 수 있으면 새 방향이 아닙니다."], "core": true}, {"id": "d14-rb06", "type": "mc", "q": "전극 6개 소자에 서로 다른 입력열 4개를 넣어 KR을 쟀더니 4였다. 입력열을 20개로 늘리자 같은 기준에서 KR이 6이 되었다. 가장 알맞은 설명은?", "options": ["입력열이 늘면 소자 안의 노드 수도 늘어나서", "처음에는 입력열 수 4가 rank의 상한이었어서", "입력열이 많을수록 rank 기준이 자동으로 낮아져서", "입력열이 많아지면 측정 잡음이 줄어들어서"], "a": 1, "why": "rank는 노드 수 N과 상태 수 S 중 작은 값을 넘지 못합니다. 6 × 4 표의 상한은 4이고, S를 20으로 늘리자 상한이 6이 되었습니다. 그래서 KR을 보고할 때는 입력열 수 S를 함께 적어야 합니다.", "ref": "d14a.html#b-rank", "refLabel": "rank 단계 '상한': min(N, S)", "wrongWhy": ["노드(전극) 수는 소자가 정합니다. 입력열 수와 무관하게 6입니다.", "", "기준(몇 %)은 측정하는 사람이 정해 적는 값이고, 입력열 수에 따라 저절로 바뀌지 않습니다.", "입력열 수와 측정 잡음의 크기는 별개입니다. 상한 min(N, S)가 바뀐 것입니다."]}, {"id": "d14-rb07", "type": "mc", "q": "잡음 섞인 상태 표의 특이값이 큰 순서로 5.0, 1.2, 0.3, 0.02였다. '가장 큰 값의 5% 아래는 0으로 본다'는 기준으로 센 rank는?", "options": ["1", "2", "3", "4"], "a": 2, "why": "5.0의 5%는 0.25입니다. 5.0, 1.2, 0.3은 0.25보다 크고 0.02는 작으므로 rank는 3입니다. 기준을 10%(0.5)로 바꾸면 2가 되니, 결과와 함께 기준을 적어야 합니다.", "ref": "d14a.html#s-sv-noise", "refLabel": "잡음이 끼면 0이 사라진다", "wrongWhy": ["가장 큰 값 하나만 센 것입니다. 기준 0.25보다 큰 값이 셋입니다.", "0.3도 기준 0.25보다 큽니다. 10% 기준이었다면 2입니다.", "", "0이 아닌 값을 모두 센 것입니다. 잡음 때문에 생긴 작은 값(0.02)은 기준 아래라 버립니다."]}, {"id": "d14-rb08", "type": "mc", "q": "전극 4개가 모두 같은 시간상수로, 같은 입력에 크기만 다르게 반응한다. 서로 다른 입력열 10개로 만든 4 × 10 끝 상태 표의 KR(잡음 무시)은?", "options": ["1", "4", "10", "40"], "a": 0, "why": "네 가로줄이 서로의 배수라 readout에게는 방향 하나입니다. KR은 전극 수가 아니라 서로 다른 응답의 수를 셉니다.", "ref": "d14a.html#s-kr-example", "refLabel": "그림 4: 같은 τ의 노드 셋은 rank 1", "wrongWhy": ["", "4는 전극 수입니다. 크기만 다른 같은 응답은 새 방향을 더하지 않습니다.", "10은 입력열 수입니다. 상한 min(4, 10) = 4조차 채우지 못합니다.", "40은 표의 칸 수입니다. rank는 min(N, S)를 넘지 못합니다."]}, {"id": "d14-rb09", "type": "mc", "q": "끝 다섯 값이 같은 입력열들로 GR을 쟀더니 reservoir X는 1, Y는 4였다(KR은 둘이 같음). 과제가 20단계 전 입력까지 필요하다면 알맞은 판단은?", "options": ["X가 낫다: GR이 낮으므로 어느 과제에서나 낫다", "같다: KR이 같으므로 이 과제에서도 같다", "Y가 낫다: GR이 높을수록 잡음에 강하다", "Y가 맞을 수 있다: 필요한 옛 차이를 남긴다"], "a": 3, "why": "GR이 높다는 것은 끝 다섯 값 이전의 차이를 상태에 남긴다는 뜻입니다. 과제가 20단계 전 입력을 필요로 하면 그 차이가 바로 필요한 정보입니다. 'GR이 낮을수록 좋다'는 과제가 최근 입력만 필요로 할 때의 말입니다.", "ref": "d14a.html#s-krgr-example", "refLabel": "4구간 계산 예 단계 3: 어느 쪽이 좋은가", "wrongWhy": ["GR의 알맞은 값은 과제가 정합니다. 옛 입력이 필요한 과제에서는 낮은 GR이 필요한 정보를 지운 것일 수 있습니다.", "KR이 같아도 GR이 다르면 옛 입력의 차이를 남기는 정도가 다릅니다.", "방향이 반대입니다. Stepney는 GR이 낮을수록 잡음에 강하다고 씁니다.", ""], "core": true}, {"id": "d14-rb10", "type": "ox", "q": "절편이 없는 readout에서 상태 s₂ = 3 × s₁이면, s₁에 대한 출력이 0.5일 때 s₂에 대한 출력은 반드시 1.5다.", "a": true, "why": "절편이 없으면 출력은 상태의 숫자에 가중치를 곱해 더한 값이라, 상태를 3배 하면 출력도 정확히 3배입니다(y(3s) = 3·y(s)). 절편이 있으면 이 묶임이 풀립니다.", "ref": "d14a.html#s-readout-intercept", "refLabel": "rank가 readout에 주는 뜻(절편)", "wrongWhy": ["", "가중치를 곱해 더하는 계산은 상태를 3배 하면 결과도 3배가 됩니다. 이 묶임은 절편이 있어야 풀립니다."]}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "가로축 입력, 세로축 응답인 S자 곡선 두 개를 그려 보세요 — 하나는 완만하게 휘고, 다른 하나는 입력이 조금만 커져도 금방 꼭대기에 붙는(포화하는) 곡선입니다. 두 곡선 위에 입력 0.6, 0.8, 1.0이 만드는 응답 점 세 개씩을 찍고, '응답이 더 큰 쪽'과 '세 입력이 더 잘 구별되는 쪽'이 같은 곡선인지 비교해 한 줄로 적으세요.", "items": [{"id": "d14-p01", "type": "mc", "q": "응답이 S자로 포화하는 소자를 아주 세게 구동했다. 입력 0.8과 1.0이 만드는 응답의 차이는 어떻게 되기 쉬운가?", "options": ["응답 전체가 커지므로 차이도 함께 커진다", "곡선이 거의 평평한 구간이라 차이가 0에 가까워진다", "구동 세기와 무관하게 입력 차이 0.2가 그대로 남는다", "포화하면 두 응답의 순서가 뒤바뀌어 음수가 된다"], "a": 1, "why": "readout은 상태의 크기가 아니라 상태 사이의 차이로 답을 가르고, 그 차이의 배율은 응답 곡선의 기울기입니다. 구동 세기 g = 20에서는 0.8과 1.0의 응답 차가 0.0000이었습니다(Claude 계산). 큰 on/off 비는 오히려 포화의 신호일 수 있습니다(1구간).", "ref": "#b-response-vs-difference", "refLabel": "응답의 크기와 응답의 차이"}, {"id": "d14-p02", "type": "mc", "q": "순서만 다른 두 입력열 (1, 0, 1)과 (0, 1, 1)을 '한 단계마다 상태의 일부만 남기는' 노드에 넣는다. 끝 상태의 차이가 가장 크게 남는 노드는?", "options": ["한 단계에 10%만 남기는(빨리 잊는) 노드", "한 단계에 90%를 남기는(오래 남기는) 노드", "한 단계에 50%를 남기는 노드", "남기는 비율과 관계없이 셋 다 같다"], "a": 2, "why": "남는 비율을 d라 하면 끝 상태의 거리는 d(1−d)라서 d = 0.5에서 0.25로 가장 크고, d = 0.1과 0.9에서는 0.09입니다. 빨리 잊으면 앞 입력이 지워지고, 오래 남기면 상태가 '들어온 숫자의 합'에 가까워져 순서가 흐려집니다(2구간).", "ref": "#b-separation", "refLabel": "분리: 순서만 다른 두 이력 손 계산"}, {"id": "d14-p03", "type": "mc", "q": "두 입력 이력이 남긴 상태 사이의 거리가 0.1이다. 이것이 '잘 갈린다'는 뜻인지 판단하려면 무엇과 비교해야 하나?", "options": ["그 소자가 낼 수 있는 응답의 최대 크기", "같은 입력을 반복해 넣을 때 상태가 흔들리는 크기", "다른 논문의 소자가 보고한 상태 거리", "비교는 필요 없고, 0보다 크기만 하면 된다"], "a": 1, "why": "거리는 잡음과 견줘야(거리 ÷ 흔들림) 뜻이 있습니다. 흔들림이 0.05라면 거리 0.25는 5배라 확실히 갈리지만 0.09는 약 1.8배에 그칩니다(2구간).", "ref": "#s-sep-noise", "refLabel": "잡음과 비교해야 거리가 뜻을 갖는다"}, {"id": "d14-p04b", "type": "ox", "q": "절편(모두에게 똑같이 더하는 상수)이 없는 선형 readout에서, 어떤 상태가 다른 상태를 정확히 2배 한 것이라면 두 상태에 +1과 −1처럼 반대 부호의 답을 줄 수 없다.", "a": true, "why": "절편이 없으면 출력도 정확히 2배로 묶입니다(y(2s) = 2·y(s)). 하지만 절편이 있으면 풀립니다. 숫자 하나짜리 상태 x = 1, 2에 y = 3 − 2x를 쓰면 +1, −1이 나옵니다. 그래서 상태 수보다 '진짜로 다른 방향의 수(rank)'가 readout의 한계를 정합니다(3구간).", "ref": "#s-readout-intercept", "refLabel": "rank가 readout에 주는 뜻(절편)"}, {"id": "d14-p05", "type": "ox", "q": "서로 다른 입력열이 만든 상태들의 '진짜로 다른 방향'의 수(kernel rank)는, 측정 잡음이 있어도 따로 기준을 정하지 않고 하나의 정해진 값으로 셀 수 있다.", "a": false, "why": "잡음 때문에 아주 작은 방향까지 세면 rank가 부풀므로, '최대값의 몇 % 이상'이라는 기준이 필요합니다. 기준만 바꿔도 같은 reservoir의 값이 약 10에서 80으로 바뀌었습니다. 기준을 적지 않은 값은 비교할 수 없습니다(3구간).", "ref": "#s-kr-threshold", "refLabel": "기준은 반드시 적어야 한다"}, {"id": "d14-p06", "type": "mc", "q": "서로 다른 입력은 물론, 과제상 같은 답이어야 할 비슷한 입력까지 최대한 다른 상태로 벌려 놓는 reservoir의 문제는?", "options": ["없다. 상태를 많이 벌릴수록 readout에 언제나 유리하다", "상태가 벌어질수록 readout의 계산이 느려진다", "벌어진 상태가 포화를 일으켜 차이가 사라진다", "잡음과 무관한 옛 입력 차이까지 남아 readout이 외우기 쉽다"], "a": 3, "why": "비슷한 입력열로 잰 rank(generalization rank)가 높다는 것은 무관한 차이까지 남긴다는 뜻입니다. 다른 입력은 갈라 놓고(높은 KR) 무관한 차이는 덜 남기는(낮은 GR) 균형을 과제에 맞춰 봅니다(4구간).", "ref": "#ch-generalization", "refLabel": "4구간 첫머리: 왜 '비슷한 것은 가까이'가 필요한가"}, {"id": "d14-p07", "type": "short", "q": "전극 16개에서 신호를 읽었는데, 알고 보니 모두 같은 신호를 크기만 다르게 읽은 것이었다. 이 상태들이 펼치는 '진짜로 다른 방향'의 수는? (숫자만)", "a": ["1", "1개", "하나", "한 개", "1.0", "1.00"], "why": "같은 신호의 배수들은 한 방향뿐이라, 같은 신호를 크기만 다르게 읽은 8채널의 참여비 차원이 1.00이었습니다(Claude 계산). 채널 수는 차원이 아니므로 공분산 고유값과 참여비 차원으로 확인합니다(5구간).", "ref": "#s-dpr-8ch", "refLabel": "그림 7(Day 26): 채널 8개, 참여비 1.00 vs 3.94"}, {"id": "d14-p08", "type": "mc", "q": "소자를 점점 세게 구동하면 전류–전압 곡선의 휨 같은 전기적 비선형은 계속 커진다. 이때 readout이 실제로 꺼내 쓰는 '입력들의 곱' 능력은 어떻게 되나?", "options": ["중간 세기에서 최대이고 더 세면 다시 준다", "전기적 비선형을 따라 계속 함께 커진다", "선형 readout이라 어느 세기에서나 0이다", "구동 세기와 상관없이 거의 일정하다"], "a": 0, "why": "모형 계산에서 전기적 비선형은 0 → 0.62로 계속 커졌지만, 곱셈 용량은 g = 3에서 0.52로 최대였다가 0.33으로 줄었고 기억도 0.16까지 줄었습니다. 아주 약하게 구동하면(거의 선형) 곱셈 용량이 0에 가깝지만, 세기를 올리면 생깁니다. 전기적 측정과 계산 비선형은 서로 다른 것을 재므로 둘 다 봐야 합니다(6구간).", "ref": "#s-gain-sweep", "refLabel": "6-2 계산 예: 구동 세기 실험(그림 8(Day 26))"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 큰 응답의 함정", "items": [{"id": "d14-q01", "type": "mc", "q": "그림 1에서 입력 0.8과 1.0을 가장 잘 가르는(응답 차이가 가장 큰) 구동 세기는?", "options": ["g = 0.5", "g = 1", "g = 5", "g = 20"], "a": 1, "why": "응답 차(Claude 계산)는 g = 0.5에서 0.0822, g = 1에서 0.0976, g = 2에서 0.0424, g = 5에서 0.0006, g = 20에서 0.0000이다. 너무 약하면 곡선 전체가 완만해 차이가 작고, 너무 세면 포화 구간이라 기울기가 0에 가깝다. '세게 구동할수록 더 잘 가른다'고 생각했다면 응답의 크기와 응답의 차이를 섞은 것이다.", "ref": "#b-response-vs-difference", "refLabel": "그림 1과 단계 1–3: 응답의 크기와 차이"}, {"id": "d14-q02", "type": "ox", "q": "on/off 비가 큰 소자일수록 reservoir로서 서로 다른 입력을 더 잘 가른다.", "a": false, "why": "on/off 비는 최대 변화량이다. readout이 쓰는 것은 다른 입력이 남긴 상태의 차이이고, 큰 변화를 만드는 구동이 포화를 일으켜 차이를 지울 수 있다(그림 1). 비휘발 메모리에서 좋은 지표가 reservoir에서는 포화의 신호일 수도 있다.", "ref": "#b-response-vs-difference", "refLabel": "'이름과 뜻': 응답이 크다 vs 구분 가능하다"}, {"id": "d14-q03b", "type": "mc", "q": "time multiplexing에서 한 입력 조각의 길이 θ를 소자의 시간상수에 비해 너무 길게 잡으면 노드 응답은 어떻게 되기 쉬운가?", "options": ["작은 진폭의 선형 구간에서만 움직인다", "응답이 커져 노드끼리 더 잘 구별된다", "포화해 응답이 두 값으로 몰린다", "θ와 상관없이 노드 응답은 똑같다"], "a": 2, "why": "다음 값이 오기 전에 포화해 응답이 두 값으로 몰리고 상태가 빈약해진다(Liang 2024, p.198). 너무 짧으면 반대로 작은 진폭의 선형 구간에서만 움직인다. 첫 보기를 골랐다면 '너무 짧을 때'와 방향을 바꿔 기억한 것이다. 둘째 보기는 '응답이 크면 좋다'는 1구간의 오해다.", "ref": "#s-sat-sources", "refLabel": "1구간 '폴더 원문은 뭐라고 하나'(Liang 항목)"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 분리", "items": [{"id": "d14-q04", "type": "short", "q": "(풀이 예시 확인) 노드 x ← d·x + u, d = 0.5, 처음 x = 0. 이력 A = (1, 0, 1)과 B = (0, 1, 1)의 끝 상태 사이 거리는?", "a": ["0.25", ".25", "1/4"], "why": "A: 1 → 0.5 → 1.25, B: 0 → 1 → 1.5. 거리 |1.25 − 1.5| = 0.25. 본문 2구간 단계 1–2.", "ref": "#b-separation", "refLabel": "2구간 단계 1–2: d = 0.5 손 계산"}, {"id": "d14-q05", "type": "short", "q": "(일부 채우기) 같은 노드에서 d = 0.2. 이력 A = (1, 0, 1)은 1 → 0.2 → 1.04로 끝난다. B = (0, 1, 1)의 끝 상태를 구해 두 상태의 거리를 적으세요.", "a": ["0.16", ".16", "0.160"], "why": "B: 0 → 0.2×0 + 1 = 1 → 0.2×1 + 1 = 1.2. 거리 |1.04 − 1.2| = 0.16. 일반식 d(1 − d) = 0.2 × 0.8 = 0.16과 같다. 헷갈렸다면 매 단계 '지난 상태 × d + 새 입력'을 순서대로 적어 보세요.", "ref": "#b-separation", "refLabel": "2구간 단계 1–4: 지난 상태 × d + 새 입력"}, {"id": "d14-q06", "type": "mc", "q": "d = 0.9(기억이 긴 노드)에서 순서만 다른 두 이력 A, B의 거리가 0.09로 작아지는 이유로 가장 알맞은 것은?", "options": ["앞의 입력을 거의 잊어 마지막 입력만 남기 때문", "포화가 일어나 두 상태가 1 근처로 몰리기 때문", "측정 잡음이 두 상태의 차이를 덮기 때문", "상태가 입력의 합에 가까워지고 두 합이 같기 때문"], "a": 3, "why": "A, B 모두 1이 두 번, 0이 한 번이라 합이 2다. d가 1에 가까우면 각 입력이 거의 같은 무게로 남아 순서가 흐려진다. 첫 보기는 d가 작을 때(d = 0.1)의 이유다. 이 노드에는 포화도 잡음도 넣지 않았다.", "ref": "#b-separation", "refLabel": "2구간 단계 4: 기억이 길 때"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · rank 세기 (예시 → 일부 채우기 → 혼자)", "items": [{"id": "d14-q07", "type": "short", "q": "(풀이 예시 확인) 상태 s₁ = (1, 2, 3), s₂ = (2, 4, 6), s₃ = (1, 0, 1)이 펼치는 진짜로 다른 방향의 수(rank)는?", "a": ["2", "2개", "둘"], "why": "s₂ = 2 × s₁이라 새 방향이 아니고, s₃는 s₁의 어떤 배수로도 만들 수 없어 새 방향이다. 방향은 2개. 3구간 rank 단계 1–3과 '이름'.", "ref": "#b-rank", "refLabel": "rank 단계 1–3: 3×3 예"}, {"id": "d14-q08", "type": "short", "q": "(일부 채우기) 상태 s₁ = (1, 0, 2), s₂ = (3, 0, 6), s₃ = (0, 1, 0). s₂ = 3 × s₁이므로 새 방향이 아니다. s₃는 둘째 숫자가 1이라 s₁의 몇 배로도 만들 수 없다. 이 세 상태의 rank는?", "a": ["2", "2개", "둘"], "why": "새 방향은 s₁ 쪽과 s₃ 쪽 둘이다. 상태가 셋이라고 rank가 3인 것이 아니다.", "ref": "#s-rank-name", "refLabel": "rank 단계 '이름': 세는 순서"}, {"id": "d14-q09", "type": "short", "q": "(혼자 풀기) 노드 3개, 상태 s₁ = (1, 1, 0), s₂ = (0, 1, 1), s₃ = (1, 2, 1). rank는?", "a": ["2", "2개", "둘"], "why": "s₂는 s₁의 배수가 아니다(첫 숫자가 0, 1). 그런데 s₃ = s₁ + s₂ = (1+0, 1+1, 0+1)이라 두 방향을 더해 만들 수 있으므로 새 방향이 아니다. 배수만 확인하고 3이라고 답했다면 '몇 배씩 더하기'로 만들어지는 경우를 놓친 것이다(rank 단계 3의 s₄).", "ref": "#b-rank", "refLabel": "rank 단계 3: 섞어서 만들 수 있으면 새 방향이 아니다"}]}, "3-end": {"kind": "end", "title": "3구간 마무리 · kernel rank", "items": [{"id": "d14-q10", "type": "short", "q": "노드 8개짜리 소자에 서로 다른 입력열 5개를 넣어 끝 상태로 8 × 5 표를 만들었다. 이 표로 잰 kernel rank의 최대값은?", "a": ["5", "5개"], "why": "rank는 노드 수 N과 상태(입력열) 수 S 중 작은 값을 넘지 못한다. min(8, 5) = 5. 8이라고 답했다면 입력열이 5개뿐이라 방향도 최대 5개라는 점을 놓친 것이다.", "ref": "#b-rank", "refLabel": "rank 단계 '상한': min(N, S)"}, {"id": "d14-q11", "type": "ox", "q": "전극이 3개인 소자로 만든 끝 상태 표는 rank가 3이다.", "a": false, "why": "그림 4(a)처럼 세 전극이 같은 시간상수로 같은 입력에 똑같이(또는 크기만 다르게) 반응하면 세 행이 서로의 배수라 rank는 1이다. rank는 전극 수가 아니라 서로 다른 응답의 수다.", "ref": "#s-kr-example", "refLabel": "그림 4: 같은 τ의 노드 셋은 rank 1"}, {"id": "d14-q12", "type": "mc", "q": "노드 100개 reservoir 하나의 KR을 같은 입력열·같은 방법으로 재면서, '0으로 볼 특이값의 기준'만 가장 큰 값의 10%에서 1%로 바꿨더니 약 10에서 약 80이 되었다. 알맞은 결론은?", "options": ["1% 기준이 맞는 값이고 10% 기준은 틀린 값이다", "기준을 낮추자 reservoir의 계산 성능이 8배 좋아졌다", "기준을 적지 않은 KR은 다른 결과와 비교할 수 없다", "입력열을 바꾸면 KR도 8배쯤 달라질 것이다"], "a": 2, "why": "같은 reservoir를 같은 방식으로 재면서 기준만 바꿨으므로 달라진 것은 '세는 방법'이지 성능이 아니다. 기준은 본질적으로 임의적이라 결과와 함께 적어야 한다(Stepney 2024, p.678–679). 같은 연구에서 입력열 사이의 차이는 reservoir 사이의 차이보다 훨씬 작았다.", "ref": "#s-kr-threshold", "refLabel": "기준은 반드시 적어야 한다(원문 그림 포함)"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 일반화", "items": [{"id": "d14-q13", "type": "mc", "q": "generalization rank(GR)를 잴 때 KR과 무엇이 다른가?", "options": ["절차는 같고, 입력열만 일부러 비슷하게 만든다", "rank 대신 새 데이터에서의 정확도를 잰다", "같은 입력열을 쓰고, 기준만 더 낮게 잡는다", "노드 하나만 골라 그 응답의 rank를 센다"], "a": 0, "why": "입력열 → 끝 상태 → 표 → rank라는 절차는 KR과 같고 입력만 다르다(끝 몇 값을 같게, 또는 아주 작은 범위의 값으로; Stepney 2024, p.678). 같은 측정을 다른 입력으로 한다는 점이 둘을 함께 읽어야 하는 이유다.", "ref": "#s-gr-measure", "refLabel": "4구간: GR을 어떻게 재나"}, {"id": "d14-q14", "type": "mc", "q": "그림 5에서 KR은 둘 다 3인데 GR은 짧은 기억 1, 긴 기억 3이었다. 옳은 해석은?", "options": ["긴 기억 쪽이 더 많이 가르므로 어느 과제에서나 낫다", "GR이 높은 긴 기억 쪽이 잡음에 더 강하다", "GR은 낮을수록 좋으므로 어느 과제에서나 짧은 기억이 낫다", "최근 세 입력으로 답이 정해지는 과제라면 짧은 기억이 유리하다"], "a": 3, "why": "KR이 같으니 '다른 것을 가르는 능력'은 같다. 긴 기억은 끝 세 값 이전의 차이를 남기는데, 그것이 필요한지는 과제가 정한다. 과제가 열 개 전 입력을 요구하면 긴 기억이 필요하다. 'GR은 언제나 낮을수록 좋다'는 과제 조건을 빼먹은 문장이다(Stepney 2024, p.681). 그리고 GR이 낮을수록 잡음에 강하다.", "ref": "#s-krgr-example", "refLabel": "4구간 계산 예(그림 5)와 단계 3"}, {"id": "d14-q15", "type": "ox", "q": "KR이 높고 GR도 높은 reservoir는 잡음이나 과제와 무관한 옛 입력의 차이까지 벌려, readout이 학습 데이터를 외울 위험이 있다.", "a": true, "why": "다른 것도, 비슷한 것도 모두 벌리면 readout은 학습 데이터의 우연한 차이를 답의 단서로 쓸 수 있고, held-out 성능이 떨어진다(Day 10 기초 4). 4구간의 2×2 표 오른쪽 위 칸.", "ref": "#s-krgr-table", "refLabel": "4구간 KR × GR 표"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 참여비 차원", "items": [{"id": "d14-q16", "type": "short", "q": "채널 4개의 공분산 고유값이 (2, 2, 0, 0)이다. 참여비 차원 (Σλ)² ÷ Σλ²는?", "a": ["2", "2.0", "2.00"], "why": "합 4의 제곱 16, 제곱의 합 4 + 4 = 8, 16 ÷ 8 = 2. 몫으로 보면 (0.5, 0.5, 0, 0)이라 1 ÷ (0.25 + 0.25) = 2. 두 방향에 고르게 퍼져 있으니 2다. (3, 1, 0, 0)의 1.6보다 크다. 같은 합이라도 고를수록 크다.", "ref": "#s-dpr-formula", "refLabel": "참여비 차원: 몫 → 제곱의 합 → 역수"}, {"id": "d14-q17", "type": "short", "q": "(혼자 풀기) 고유값이 (2, 1, 1, 0)이면 참여비 차원은? (소수 둘째 자리까지)", "a": ["2.67", "2.7", "8/3", "2.666", "2.667"], "why": "합 4 → 16. 제곱의 합 4 + 1 + 1 + 0 = 6. 16 ÷ 6 = 2.67. 방향은 셋이 참여하지만 크기가 고르지 않아 3보다 작다. 분모에 제곱을 하지 않고 4로 나눴다면 식의 분모(제곱의 합)를 다시 보세요.", "ref": "#s-dpr-formula", "refLabel": "참여비 차원 식과 '식으로 확인'"}, {"id": "d14-q18", "type": "ox", "q": "전극 16개를 모두 readout에 넣으면 상태의 참여비 차원은 16이다.", "a": false, "why": "참여비 차원은 채널 수가 아니라 측정한 상태의 공분산 고유값으로 정해진다. 전극들이 같은 신호를 크기만 다르게 읽으면 1에 가깝다(그림 7(Day 26)(a)). Singh 2026(p.13)은 관측 차원을 채널 수에서 추정하지 말고 측정한 상태에서 평가하라고 한다.", "ref": "#s-dpr-8ch", "refLabel": "그림 7(Day 26): 채널 8개, 참여비 1.00 vs 3.94"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 비선형 평가", "items": [{"id": "d14-q19", "type": "mc", "q": "그림 8(Day 26)의 g = 30(아주 세게 구동)에 대해 옳은 것은?", "options": ["전기적 비선형은 최대지만 곱셈 용량은 g = 3보다 낮다", "전기적 비선형과 곱셈 용량이 함께 최대가 된다", "포화 때문에 전기적 비선형이 오히려 가장 작다", "곱셈 용량은 최대지만 되살리기 용량은 가장 낮다"], "a": 0, "why": "모형 계산(Claude) 기준 g = 30: 전기적 비선형 0.62(최대), 곱셈 용량 0.33(g = 3의 0.52보다 낮음), 되살리기 0.16(최저). 포화된 노드가 대부분 −1 아니면 +1에 붙어 입력의 세부 차이가 남지 않는다. 곱셈 용량이 최대인 곳은 g = 3이다. 전기적 비선형이 크면 계산에도 좋다고 생각했다면 6-2의 단계 3을 다시 보세요.", "ref": "#s-gain-sweep", "refLabel": "6-2 계산 예: 단계 3(g = 30)"}, {"id": "d14-q20", "type": "mc", "q": "상태가 과거 입력의 가중 합뿐인(선형) reservoir에서 직선 readout이 u(t)·u(t−1)을 만들 수 없는 이유는?", "options": ["노드 수가 만들 곱셈 항의 수보다 적어서", "학습 데이터가 부족해 곱을 배우지 못해서", "가중 합을 다시 더해도 곱 항이 생기지 않아서", "입력이 무작위라 이웃 입력끼리 상관이 없어서"], "a": 2, "why": "선형 상태의 직선 조합은 a·u(t) + b·u(t−1) + … 꼴일 뿐이다. 곱셈 항은 어디에도 없으므로 노드나 데이터를 늘려도 생기지 않는다. 그래서 그림 8(Day 26)의 g = 0.1에서 곱셈 용량이 0.00이다. Day 17–18 XOR 기초와 같은 이유다.", "ref": "#s-gain-sweep", "refLabel": "6-2 계산 예: 단계 1(g = 0.1)"}, {"id": "d14-q21", "type": "ox", "q": "출력에 고조파(입력에 없던 2배·3배 주파수 성분)가 강하게 나오면, readout이 꺼내 쓸 수 있는 계산 비선형도 크다고 결론 내릴 수 있다.", "a": false, "why": "고조파는 전기적 비선형의 증거일 뿐이다. 그 비선형이 포화나 불안정한 영역에서 생겼을 수 있어, 측정한 상태에서 직선 readout이 비선형 함수를 되살리는지 따로 봐야 한다(Singh 2026, p.13). 두 측정은 보완적이지 대체 관계가 아니다.", "ref": "#s-two-measures", "refLabel": "6-1 두 종류의 측정"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d14-q22", "type": "mc", "q": "어떤 논문이 'on/off 비 10⁴, 전극 16개, MNIST 정확도 95%'를 근거로 소자가 좋은 reservoir라고 주장한다. 이 주장을 확인하려고 가장 먼저 요구할 것은?", "options": ["on/off 비를 10⁵ 이상으로 더 키운 소자", "히스테리시스 고리 넓이를 더 키운 측정 결과", "전극을 32개로 두 배 늘린 소자의 결과", "상태 차이 ÷ 반복 흔들림, 고유값, 원시 입력 기준선"], "a": 3, "why": "on/off 비는 응답 크기, 전극 수는 읽은 숫자의 개수, 정확도는 파이프라인 전체의 결과다. 차이 ÷ 흔들림(2구간), 실제 차원(5구간), 정확도의 출처(6-3 표, Day 29–30)를 봐야 한다. 나머지 보기는 모두 '더 크게'를 요구할 뿐 무엇이 계산했는지를 묻지 않는다.", "ref": "#s-claims-table", "refLabel": "6-3 논문에서 무엇을 요구하나(표)"}, {"id": "d14-q23", "type": "mc", "q": "비슷한 소자를 다룬 두 논문이 KR을 각각 20과 60으로 보고했다. 어느 쪽이 나은지 판단하기 전에 가장 먼저 확인할 것은?", "options": ["rank 기준(몇 %), 입력열 수 S, 잡음 처리", "두 소자의 on/off 비와 히스테리시스 크기", "두 논문이 readout 가중치를 학습한 방법", "확인할 것 없이 KR이 큰 쪽(60)이 낫다"], "a": 0, "why": "같은 reservoir도 기준만 바꾸면 KR이 약 10에서 80으로 바뀐다(Stepney 2024, Fig. 3, p.679). S를 늘리면 수렴할 때까지 커진다(p.678). 측정 조건이 같아야 숫자를 비교할 수 있다. KR은 readout 학습과 무관하게 상태 표만으로 센다.", "ref": "#s-kr-threshold", "refLabel": "기준은 반드시 적어야 한다"}, {"id": "d14-q24", "type": "mc", "q": "소자 A는 순서만 다른 두 이력의 상태 거리가 0.09, 소자 B는 0.25이다. 같은 입력을 반복할 때 상태의 흔들림(표준편차)은 둘 다 0.05다. readout이 두 이력을 더 확실히 가를 소자와 그 근거는?", "options": ["A. 거리가 작을수록 상태가 안정적이다", "둘이 같다. 흔들림이 둘 다 0.05이다", "B. 거리 ÷ 흔들림이 5 대 1.8이다", "알 수 없다. 응답의 최대값을 모른다"], "a": 2, "why": "분리는 거리를 잡음과 비교해야 뜻이 있다. 0.25/0.05 = 5, 0.09/0.05 = 1.8. 응답의 최대값(크기)은 두 이력을 가르는 데 필요한 정보가 아니다(1구간).", "ref": "#s-sep-noise", "refLabel": "잡음과 비교해야 거리가 뜻을 갖는다"}, {"id": "d14-q25", "type": "ox", "q": "RC에서는 소자 간 편차가 상태의 다양성을 늘리므로 편차는 클수록, 언제나 이롭다.", "a": false, "why": "Liang 2024(p.196)는 편차가 풍부함을 '어느 정도' 늘린다고 쓴다. 편차가 크면 한 소자로 학습한 readout을 다른 소자에 쓸 수 없고, 같은 입력의 흔들림이 차이를 덮을 수도 있다. 조건부 이득이며 대가는 Day 33–34에서 다룬다.", "ref": "#s-variation", "refLabel": "편차는 다양성을 준다 — 조건부로"}]}}}</script>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>
 <div class="done-box" data-day="d14a">
   <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>응답의 크기 ≠ 상태의 차이(포화가 차이를 지움), 분리 = 거리 ÷ 반복 흔들림, rank·kernel rank = 진짜로 다른 방향의 수, 비슷한 입력은 모으는 GR</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
   <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
@@ -1070,7 +1136,7 @@ kernel quality / kernel rank (KR)
   <div class="done-static static-only"></div>
 </div>
 <div class="next-unit">
-<p><strong>다음 학습</strong> — <a href="../days/d14b.html">Day 25 · 차원과 비선형성의 평가 →</a></p>
+<p><strong>다음 학습</strong> — <a href="../days/d14b.html">Day 26 · 차원과 비선형성의 평가 →</a></p>
 </div>
 <section class="comments" id="comments"></section>
 
@@ -1495,13 +1561,13 @@ kernel quality / kernel rank (KR)
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../days/d13b.html" class="pagination-link" aria-label="Day 23 · 과제의 시간척도와 좋은 memory의 조건">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span>
+      <a href="../days/d13b.html" class="pagination-link" aria-label="Day 24 · 과제의 시간척도와 좋은 memory의 조건">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../days/d14b.html" class="pagination-link" aria-label="Day 25 · 차원과 비선형성의 평가">
-        <span class="nav-page-text">Day 25 · 차원과 비선형성의 평가</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../days/d14b.html" class="pagination-link" aria-label="Day 26 · 차원과 비선형성의 평가">
+        <span class="nav-page-text">Day 26 · 차원과 비선형성의 평가</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1509,14 +1575,14 @@ kernel quality / kernel rank (KR)
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
     <div class="nav-footer-center">
-<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
-</div>
-    <div class="nav-footer-right">
       &nbsp;
     </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
   </div>
 </footer>
 

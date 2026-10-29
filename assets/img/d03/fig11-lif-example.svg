@@ -1,6 +1,7 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 380' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='aR' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker><marker id='aB' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#3d6fb4'/></marker><marker id='aM' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#13936b'/></marker><marker id='aO' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#e08a3c'/></marker><marker id='aG' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#999'/></marker></defs>
 <text x='360' y='22' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >LIF 예제: 같은 입력 세 개, 같은 가중치 — 몰려 오면 발화하고, 흩어져 오면 발화하지 않는다</text>
+<text x='22' y='50' font-size='13' fill='#444' text-anchor='start' font-weight='bold' >(a)</text>
 <text x='203.0' y='50' font-size='12' fill='#13936b' text-anchor='middle' font-weight='bold' >몰려 온 입력: 1, 2, 3 ms</text>
 <rect x='66' y='70' width='274' height='192' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='61' y='255.89473684210526' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >−70</text>
@@ -27,6 +28,7 @@
 <text x='115.8' y='91.58315789473679' font-size='9.5' fill='#c8553d' text-anchor='end' font-weight='bold' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >+16.3 ≥ 15</text>
 <line x1='120.8' y1='100.31578947368422' x2='120.8' y2='72' stroke='#c8553d' stroke-width='2.6'/>
 <text x='127.8' y='84' font-size='10' fill='#c8553d' text-anchor='start' font-weight='bold' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >발화 → 곧바로 휴지(−70)로 리셋</text>
+<text x='374' y='50' font-size='13' fill='#444' text-anchor='start' font-weight='bold' >(b)</text>
 <text x='555.0' y='50' font-size='12' fill='#13936b' text-anchor='middle' font-weight='bold' >흩어진 입력: 1, 6, 11 ms</text>
 <rect x='418' y='70' width='274' height='192' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='413' y='255.89473684210526' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >−70</text>
@@ -52,7 +54,7 @@
 <text x='527.6' y='147.46081684210515' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >+9.5</text>
 <text x='618.9333333333334' y='126.31989247393653' font-size='9.5' fill='#444' text-anchor='middle' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >+11.6</text>
 <text x='555.0' y='86' font-size='10' fill='#999' text-anchor='middle' font-weight='bold' >문턱에 못 닿음: 스파이크 없음</text>
-<text x='26' y='166' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' transform='rotate(-90 26 166)'>막전위 (mV)</text>
+<text x='26' y='166' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' transform='rotate(-90 26 166)'>membrane potential (mV)</text>
 <text x='360' y='352' font-size='10' fill='#444' text-anchor='middle' font-weight='normal' >규칙 (1 ms마다): u ← 0.9 × u + 6 × (그동안 온 입력 수).  u = 휴지 전위(−70 mV) 위로 올라간 양.  u ≥ 15 mV면 발화하고 u = 0(리셋).</text>
-<text x='360' y='368' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >×0.9는 Δt = 1 ms일 때의 감쇠 계수(지금 값의 90%가 남음)이고 시간상수 τ ≈ 9.5 ms에 해당한다. 가중치 6 mV는 보기 쉽게 키운 예시값. (Claude 계산)</text>
+<text x='360' y='368' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >×0.9는 Δt = 1 ms일 때의 decay factor(지금 값의 90%가 남음)이고 시간상수 τ ≈ 9.5 ms에 해당한다. 가중치 6 mV는 보기 쉽게 키운 예시값. (Claude 계산)</text>
 </svg>

@@ -2,7 +2,8 @@
 <rect x='0' y='0' width='780' height='480' fill='#fff'/>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arrR' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker></defs>
 <text x='380' y='22' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >배열(array)의 기초: 선을 나눠 쓰면 선이 줄지만, 엉뚱한 길로도 전류가 샌다 (모식도)</text>
-<text x='30' y='54' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >a  소자 하나 = 선 두 개</text>
+<text x='380' y='40' font-size='10.2' fill='#999' text-anchor='middle' font-weight='normal' >읽는 순서 (a) → (b) → (c) · 이 그림은 가로줄(행) = 입력(V 걸기), 세로줄(열) = 출력(I 재기). Day 7–8 그림과 방향이 반대</text>
+<text x='30' y='54' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >(a) 소자 하나 = 선 두 개</text>
 <line x1='50' y1='110' x2='100' y2='110' stroke='#444' stroke-width='2'/>
 <rect x='107.0' y='105.0' width='16' height='10' rx='2' fill='#fff' stroke='#13936b' stroke-width='1.6' />
 <line x1='130' y1='110' x2='180' y2='110' stroke='#444' stroke-width='2'/>
@@ -16,7 +17,7 @@
 <text x='38' y='242' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >3×3 → 선 6개 (가로 3 + 세로 3)</text>
 <text x='38' y='258' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >10×10 → 선 20개 (가로 10 + 세로 10)</text>
 <text x='38' y='274' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='normal' >100×100 → 선 200개 (가로 100 + 세로 100)</text>
-<text x='260' y='54' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >b  3×3 crossbar: 가운데 칸(행 2, 열 2)을 읽을 때</text>
+<text x='260' y='54' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >(b) 3×3 crossbar: 가운데 칸(행 2, 열 2)을 읽을 때</text>
 <line x1='290' y1='100' x2='490' y2='100' stroke='#444' stroke-width='1.6'/>
 <text x='284' y='104' font-size='10.2' fill='#444' text-anchor='end' font-weight='normal' >행1</text>
 <line x1='290' y1='162' x2='490' y2='162' stroke='#3d6fb4' stroke-width='2.2'/>
@@ -49,46 +50,38 @@
 <text x='502' y='159' font-size='10.2' fill='#c8553d' text-anchor='start' font-weight='normal' >→ 행1 → (1,2) → 열2</text>
 <text x='502' y='180' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >옆 소자 셋을 거친 전류가</text>
 <text x='502' y='193' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >읽는 전류에 섞인다</text>
-<text x='260' y='316' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >c  해결책 하나: 칸마다 스위치(트랜지스터)를 하나씩 — 1T1R</text>
-<line x1='280' y1='422' x2='632' y2='422' stroke='#444' stroke-width='1.6'/>
-<text x='638' y='426' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >출력선(I를 잰다)</text>
-<line x1='280' y1='397' x2='632' y2='397' stroke='#3d6fb4' stroke-width='1.2' stroke-dasharray='4 3'/>
-<text x='638' y='401' font-size='10.2' fill='#3d6fb4' text-anchor='start' font-weight='normal' >게이트 선: 읽는 칸만 켠다</text>
-<line x1='310' y1='334' x2='310' y2='352' stroke='#444' stroke-width='1.6'/>
-<text x='310' y='332' font-size='10.2' fill='#999' text-anchor='middle' font-weight='normal' >입력선 1</text>
-<rect x='301' y='352' width='18' height='14' rx='2' fill='#fff' stroke='#13936b' stroke-width='1.8' />
-<line x1='310' y1='366' x2='310' y2='388' stroke='#444' stroke-width='1.6'/>
-<rect x='296' y='388' width='28' height='18' rx='3' fill='#f2f2f2' stroke='#999' stroke-width='1.2' />
-<text x='310' y='401' font-size='10.2' fill='#999' text-anchor='middle' font-weight='bold' >T</text>
-<line x1='310' y1='406' x2='310' y2='412' stroke='#999' stroke-width='1.4'/>
-<text x='326' y='416' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >끊김</text>
-<text x='324' y='363' font-size='10.2' fill='#13936b' text-anchor='start' font-weight='normal' >소자</text>
-<line x1='430' y1='334' x2='430' y2='352' stroke='#444' stroke-width='1.6'/>
-<text x='430' y='332' font-size='10.2' fill='#999' text-anchor='middle' font-weight='normal' >입력선 2</text>
-<rect x='421' y='352' width='18' height='14' rx='2' fill='#fff' stroke='#13936b' stroke-width='1.8' />
-<line x1='430' y1='366' x2='430' y2='388' stroke='#444' stroke-width='1.6'/>
-<rect x='416' y='388' width='28' height='18' rx='3' fill='#e9f7f1' stroke='#13936b' stroke-width='1.2' />
-<text x='430' y='401' font-size='10.2' fill='#13936b' text-anchor='middle' font-weight='bold' >T</text>
-<line x1='430' y1='406' x2='430' y2='422' stroke='#13936b' stroke-width='2.2'/>
-<text x='444' y='363' font-size='10.2' fill='#13936b' text-anchor='start' font-weight='normal' >소자</text>
-<line x1='550' y1='334' x2='550' y2='352' stroke='#444' stroke-width='1.6'/>
-<text x='550' y='332' font-size='10.2' fill='#999' text-anchor='middle' font-weight='normal' >입력선 3</text>
-<rect x='541' y='352' width='18' height='14' rx='2' fill='#fff' stroke='#13936b' stroke-width='1.8' />
-<line x1='550' y1='366' x2='550' y2='388' stroke='#444' stroke-width='1.6'/>
-<rect x='536' y='388' width='28' height='18' rx='3' fill='#f2f2f2' stroke='#999' stroke-width='1.2' />
-<text x='550' y='401' font-size='10.2' fill='#999' text-anchor='middle' font-weight='bold' >T</text>
-<line x1='550' y1='406' x2='550' y2='412' stroke='#999' stroke-width='1.4'/>
-<text x='566' y='416' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >끊김</text>
-<text x='564' y='363' font-size='10.2' fill='#13936b' text-anchor='start' font-weight='normal' >소자</text>
-<text x='290' y='442' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >트랜지스터(T) = 전압으로 여닫는 스위치. 읽는 칸의 T만 켜면 다른 칸을 거치는 길이 끊긴다.</text>
-<text x='290' y='457' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >대가: 칸마다 트랜지스터 1개(면적·공정), 그리고 T를 켜고 끄는 게이트 선이 하나 더 필요하다.</text>
-<rect x='20' y='330' width='230' height='150' rx='8' fill='#fafafa' stroke='#d9d9d9' stroke-width='1.2' />
-<text x='32' y='352' font-size='12' fill='#13936b' text-anchor='start' font-weight='bold' >집적(integration)이란</text>
-<text x='32' y='372' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >같은 면적에 소자를 많이 두고,</text>
-<text x='32' y='387' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >배선·읽기 회로·스위치와 함께</text>
-<text x='32' y='402' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >한 판(칩·기판) 위에 만드는 것.</text>
-<text x='32' y='417' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' ></text>
-<text x='32' y='432' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >실험실: 소자 1개 ↔ 장비 케이블 2개</text>
-<text x='32' y='447' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >집적: 소자 수천 개 ↔ 칩 안의 배선 +</text>
-<text x='32' y='462' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >주변회로 몇 개</text>
+<text x='30' y='304' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >(c) 해결책 하나: 칸마다 스위치(트랜지스터)를 하나씩 — 1T1R</text>
+<text x='30' y='320' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >(b)의 열 2에 붙은 세 칸만 옆으로 눕혀 그렸다: 위의 짧은 선이 행 1–3(입력), 아래 가로선이 열 2(출력)</text>
+<line x1='70' y1='432' x2='422' y2='432' stroke='#444' stroke-width='1.6'/>
+<text x='428' y='436' font-size='10.2' fill='#e08a3c' text-anchor='start' font-weight='normal' >열 2 = 출력선(I를 잰다)</text>
+<line x1='70' y1='407' x2='422' y2='407' stroke='#3d6fb4' stroke-width='1.2' stroke-dasharray='4 3'/>
+<text x='428' y='411' font-size='10.2' fill='#3d6fb4' text-anchor='start' font-weight='normal' >게이트 선: 읽는 칸만 켠다</text>
+<line x1='100' y1='344' x2='100' y2='362' stroke='#444' stroke-width='1.6'/>
+<text x='100' y='342' font-size='10.2' fill='#999' text-anchor='middle' font-weight='normal' >행 1 (입력)</text>
+<rect x='91' y='362' width='18' height='14' rx='2' fill='#fff' stroke='#13936b' stroke-width='1.8' />
+<line x1='100' y1='376' x2='100' y2='398' stroke='#444' stroke-width='1.6'/>
+<rect x='86' y='398' width='28' height='18' rx='3' fill='#f2f2f2' stroke='#999' stroke-width='1.2' />
+<text x='100' y='411' font-size='10.2' fill='#999' text-anchor='middle' font-weight='bold' >T</text>
+<line x1='100' y1='416' x2='100' y2='422' stroke='#999' stroke-width='1.4'/>
+<text x='116' y='426' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >끊김</text>
+<text x='114' y='373' font-size='10.2' fill='#13936b' text-anchor='start' font-weight='normal' >소자</text>
+<line x1='220' y1='344' x2='220' y2='362' stroke='#444' stroke-width='1.6'/>
+<text x='220' y='342' font-size='10.2' fill='#999' text-anchor='middle' font-weight='normal' >행 2 (입력)</text>
+<rect x='211' y='362' width='18' height='14' rx='2' fill='#fff' stroke='#13936b' stroke-width='1.8' />
+<line x1='220' y1='376' x2='220' y2='398' stroke='#444' stroke-width='1.6'/>
+<rect x='206' y='398' width='28' height='18' rx='3' fill='#e9f7f1' stroke='#13936b' stroke-width='1.2' />
+<text x='220' y='411' font-size='10.2' fill='#13936b' text-anchor='middle' font-weight='bold' >T</text>
+<line x1='220' y1='416' x2='220' y2='432' stroke='#13936b' stroke-width='2.2'/>
+<text x='234' y='373' font-size='10.2' fill='#13936b' text-anchor='start' font-weight='normal' >소자</text>
+<line x1='340' y1='344' x2='340' y2='362' stroke='#444' stroke-width='1.6'/>
+<text x='340' y='342' font-size='10.2' fill='#999' text-anchor='middle' font-weight='normal' >행 3 (입력)</text>
+<rect x='331' y='362' width='18' height='14' rx='2' fill='#fff' stroke='#13936b' stroke-width='1.8' />
+<line x1='340' y1='376' x2='340' y2='398' stroke='#444' stroke-width='1.6'/>
+<rect x='326' y='398' width='28' height='18' rx='3' fill='#f2f2f2' stroke='#999' stroke-width='1.2' />
+<text x='340' y='411' font-size='10.2' fill='#999' text-anchor='middle' font-weight='bold' >T</text>
+<line x1='340' y1='416' x2='340' y2='422' stroke='#999' stroke-width='1.4'/>
+<text x='356' y='426' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >끊김</text>
+<text x='354' y='373' font-size='10.2' fill='#13936b' text-anchor='start' font-weight='normal' >소자</text>
+<text x='80' y='452' font-size='10.2' fill='#444' text-anchor='start' font-weight='normal' >트랜지스터(T) = 전압으로 여닫는 스위치. 읽는 칸의 T만 켜면 다른 칸을 거치는 길이 끊긴다.</text>
+<text x='80' y='467' font-size='10.2' fill='#999' text-anchor='start' font-weight='normal' >대가: 칸마다 트랜지스터 1개(면적·공정), 그리고 T를 켜고 끄는 게이트 선이 하나 더 필요하다.</text>
 </svg>

@@ -1,7 +1,7 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 345' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
 <text x='340' y='20' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >거의 같은 노드 두 개 + 최소제곱(λ = 0): 학습 표본에는 맞고, 새 표본에서는 틀린다</text>
-<text x='30' y='48' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' ><tspan>① 두 노드 값의 차이 x</tspan><tspan dy='4' font-size='9'>1</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> − x</tspan><tspan dy='4' font-size='9'>2</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
+<text x='30' y='48' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' ><tspan>(a) 두 노드 값의 차이 x</tspan><tspan dy='4' font-size='9'>1</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> − x</tspan><tspan dy='4' font-size='9'>2</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
 <rect x='60' y='62' width='240' height='200' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='54' y='246.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >−0.2</text>
 <line x1='60' y1='242.0' x2='300' y2='242.0' stroke='#f2f2f2' stroke-width='1'/>
@@ -34,7 +34,7 @@
 <text x='280.0' y='277' font-size='9.5' fill='#e08a3c' text-anchor='middle' font-weight='normal' >새 2</text>
 <text x='140.0' y='78' font-size='10' fill='#3d6fb4' text-anchor='middle' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >학습: 차이 ±0.03 이내</text>
 <text x='260.0' y='242.0' font-size='10' fill='#e08a3c' text-anchor='middle' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >새 표본: 차이가 더 큼</text>
-<text x='350' y='48' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' >② 정답(검정)과 λ = 0 예측(빨강)</text>
+<text x='350' y='48' font-size='11.5' fill='#444' text-anchor='start' font-weight='bold' >(b) 정답(검정)과 λ = 0 예측(빨강)</text>
 <rect x='380' y='62' width='280' height='200' rx='0' fill='#fff' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='374' y='266.0' font-size='9.5' fill='#999' text-anchor='end' font-weight='normal' >0</text>
 <line x1='380' y1='262.0' x2='660' y2='262.0' stroke='#f2f2f2' stroke-width='1'/>
@@ -84,6 +84,6 @@
 <text x='629.6666666666666' y='126.17391304347825' font-size='9.5' fill='#444' text-anchor='end' font-weight='normal' stroke='#fff' stroke-width='4' paint-order='stroke' stroke-linejoin='round' >3.4</text>
 <text x='636.6666666666666' y='277' font-size='9.5' fill='#e08a3c' text-anchor='middle' font-weight='normal' >새 2</text>
 <text x='340' y='300' font-size='11' fill='#444' text-anchor='middle' font-weight='normal' ><tspan>λ = 0의 가중치 (4.00, −3.00): 예측 = 4.00x</tspan><tspan dy='4' font-size='9'>1</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> − 3.00x</tspan><tspan dy='4' font-size='9'>2</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> ≈ x</tspan><tspan dy='4' font-size='9'>1</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> + 3(x</tspan><tspan dy='4' font-size='9'>1</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> − x</tspan><tspan dy='4' font-size='9'>2</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan>)</tspan></text>
-<text x='340' y='318' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >평균 제곱 오차: 학습 표본 0.00098, 새 표본 0.317.  ①의 작은 차이를 3배로 키워 쓰므로, 차이가 커지면 예측이 크게 빗나간다.</text>
+<text x='340' y='318' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >평균 제곱 오차: 학습 표본 0.00098, 새 표본 0.317.  (a)의 작은 차이를 3배로 키워 쓰므로, 차이가 커지면 예측이 크게 빗나간다.</text>
 <text x='340' y='336' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >데이터(예시): 노드 1 = 1, 2, 3, 4 / 노드 2 = 1.02, 1.97, 3.03, 3.98 / 정답 1.0, 2.1, 2.9, 4.1. 새 표본 (2.5, 2.6)→2.55, (3.5, 3.3)→3.4.</text>
 </svg>

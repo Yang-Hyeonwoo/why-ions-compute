@@ -1,6 +1,7 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 330' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
 <defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
-<text x='300' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >무엇을 학습하나: 일반 RNN(왼쪽) 대 ESN/reservoir computing(오른쪽)</text>
+<text x='300' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >무엇을 학습하나: (a) 일반 RNN 대 (b) ESN/reservoir computing</text>
+<text x='10' y='46' font-size='14' fill='#444' text-anchor='start' font-weight='bold' >(a)</text>
 <text x='150' y='44' font-size='13' fill='#c8553d' text-anchor='middle' font-weight='bold' >일반 RNN</text>
 <circle cx='40' cy='100' r='11' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.4'/>
 <circle cx='40' cy='150' r='11' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.4'/>
@@ -37,7 +38,8 @@
 <text x='150' y='236' font-size='11.5' fill='#c8553d' text-anchor='middle' font-weight='normal' >모든 가중치를 학습: 반복적 BPTT</text>
 <text x='150' y='254' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >시간을 거슬러 기울기 전파</text>
 <text x='150' y='270' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >내부 접근 + 미분 가능한 모형 필요</text>
-<text x='450' y='44' font-size='13' fill='#13936b' text-anchor='middle' font-weight='bold' >ESN (Jaeger 2001)</text>
+<text x='310' y='46' font-size='14' fill='#444' text-anchor='start' font-weight='bold' >(b)</text>
+<text x='450' y='44' font-size='13' fill='#13936b' text-anchor='middle' font-weight='bold' >ESN</text>
 <circle cx='340' cy='100' r='11' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.4'/>
 <circle cx='340' cy='150' r='11' fill='#fdf4ec' stroke='#e08a3c' stroke-width='1.4'/>
 <text x='340' y='175' font-size='11' fill='#e08a3c' text-anchor='middle' font-weight='normal' >입력 u</text>
@@ -71,8 +73,9 @@
 <text x='558' y='196' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='normal' ><tspan>W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
 <text x='558' y='211' font-size='10' fill='#c8553d' text-anchor='middle' font-weight='normal' >(빨강 = 학습)</text>
 <text x='450' y='236' font-size='11.5' fill='#13936b' text-anchor='middle' font-weight='normal' ><tspan>난수로 두고 고정: W, W</tspan><tspan dy='4' font-size='9'>in</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
-<text x='450' y='254' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' ><tspan>(D8) 선형 회귀로 한 번에 학습: W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
+<text x='450' y='254' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' ><tspan>(Day 13–14) 선형 회귀로 한 번에 학습: W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
 <text x='450' y='270' font-size='11' fill='#999' text-anchor='middle' font-weight='normal' >내부는 블랙박스 → 물리 소자로 바꿀 수 있다</text>
 <line x1='300' y1='54' x2='300' y2='280' stroke='#d9d9d9' stroke-width='1' stroke-dasharray='4 4'/>
-<text x='300' y='308' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >모식도. 대가: 고정된 난수 reservoir는 과제에 맞춰 내부를 다듬지 못한다 → 표현력은 DNN보다 낮다 [Liang 2024, p.194].</text>
+<text x='300' y='302' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >모식도. 대가: 고정된 reservoir는 과제에 맞춰 내부를 다듬지 못한다</text>
+<text x='300' y='318' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >→ 표현력은 DNN보다 낮다 [Liang 2024, p.194].</text>
 </svg>

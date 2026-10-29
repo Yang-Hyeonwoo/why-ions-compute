@@ -1,0 +1,22 @@
+{
+ "note": "B5 보드용 (board_collect.py). encoding은 보드의 config.h와 같아야 합니다 — export_mcu.py가 이 manifest로 config.h를 만듭니다.",
+ "instrument": {
+  "addr": "BOARD",
+  "board": "ESP32 DevKitC + MCP4725 + ADS1115 + MCP6002 TIA",
+  "v_limit_V": 1.0,
+  "R_meas_ohm": 150000,
+  "R_lim_ohm": 33000
+ },
+ "device": {
+  "id": "dev01",
+  "polarity": "+V = EMIMSPA 쪽 ITO가 높은 전위",
+  "env": "측정 때 온도·습도"
+ },
+ "encoding": {
+  "V0": 0.0,
+  "VA": 0.8,
+  "mask": [0.84, 0.43, 0.97, 0.61],
+  "theta_s": 0.05,
+  "rest_s": 2.0
+ }
+}

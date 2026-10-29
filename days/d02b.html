@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Day 4. 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling – Why Ions Compute</title>
+<title>Day 4. 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling – Why Ions Compute?</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -47,18 +47,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-28455a0eef46160940adf851dab3e4a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
-  "collapse-after": 3,
+  "collapse-after": 2,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    "/"
   ],
   "language": {
     "search-no-results-text": "일치 없음",
@@ -129,7 +127,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Why Ions Compute</span>
+    <span class="navbar-title">Why Ions Compute?</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="검색"></div>
@@ -140,46 +138,27 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
-<span class="menu-text">커버</span></a>
+<span class="menu-text">홈</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../plan.html"> 
-<span class="menu-text">전체 학습 지도</span></a>
+<span class="menu-text">로드맵</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">장부</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
-        <li>
-    <a class="dropdown-item" href="../ledger/bottleneck.html">
- <span class="dropdown-text">병목 장부</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/unknowns.html">
- <span class="dropdown-text">아직 모르는 것</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/glossary.html">
- <span class="dropdown-text">용어집</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/kill-criteria.html">
- <span class="dropdown-text">접는 기준</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/references.html">
- <span class="dropdown-text">참고문헌</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../ledger/questions.html">
- <span class="dropdown-text">질문 모음</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" href="../rules.html"> 
-<span class="menu-text">공부 규칙</span></a>
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -213,7 +192,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">전체 학습 지도</span></a>
+ <span class="menu-text">로드맵</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -270,7 +249,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 8 · LIF 회로, 시냅스 소자 사양, 주변회로 비용</span></a>
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -311,7 +290,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 13 · 상태 갱신과 readout 학습: 최소제곱에서 ridge까지</span></a>
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -322,44 +301,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 15 · fading memory와 echo state property</span></a>
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 16 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 17 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 소자 비선형의 쓸모</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 18 · 정보처리용량과 노드 수 한계</span></a>
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 19 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 20 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 21 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
   </div>
 </li>
       </ul>
@@ -376,67 +361,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 22 · 기억의 세 가지 양과 MC 손계산</span></a>
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 23 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 24 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 25 · 차원과 비선형성의 평가</span></a>
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 26 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 27 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 28 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 29 · RC 회로로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 30 · 정확도 옆의 숫자와 에너지 예산</span></a>
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 31 · 지연시간과 같은 경계에서 비교하기</span></a>
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 32 · 재현성과 신뢰성, Phase 3 종합</span></a>
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
   </div>
 </li>
       </ul>
@@ -453,49 +444,73 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 33 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 34 · 이온만의 자유도와 이온이 지는 영역</span></a>
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 35 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 소자의 기억과 비선형 (1)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 36 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 소자의 기억과 비선형 (2)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 37 · 이온 동역학의 시간척도</span></a>
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 38 · 화학구조 → 계산 특성</span></a>
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 39 · 이온전도도와 성능</span></a>
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 40 · single-ion·polyelectrolyte·heterojunction, Phase 4 종합</span></a>
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, 전도도가 정하는 것과 정하지 못하는 것, 같은 전도도 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 전도도의 최적점, 질문 바꾸기와 최소 필요 전도도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
   </div>
 </li>
       </ul>
@@ -512,69 +527,93 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 41 · 논문 평가 표와 연구 지도</span></a>
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 42 · 시냅스 모사·이온 RC 논문 읽기와 패턴</span></a>
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 43 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 44 · 전자회로 접속과 진짜 병목</span></a>
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 45 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 46 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 47 · 가장 중요한 가설</span></a>
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../days/d29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 48 · 최소 검증 실험</span></a>
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, 소자 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 소자가 필요한가, 성공·실패가 남기는 것</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 49 · 결정의 틀과 트랜스포머·어텐션 기초</span></a>
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Day 50 · RNN·RC·어텐션 비교, 차세대 후보, 최종 결정</span></a>
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">장부</span></a>
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -582,46 +621,28 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/bottleneck.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">병목 장부</span></a>
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A. 계측기로 탐색</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/unknowns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">아직 모르는 것</span></a>
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ledger/glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">용어집</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/kill-criteria.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">접는 기준</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">참고문헌</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ledger/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">질문 모음</span></a>
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C. 감지와 처리의 결합</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rules.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">공부 규칙</span></a>
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
   </div>
 </li>
     </ul>
@@ -666,8 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> — 계산보다 데이터 이동이 비싼 이유는 무엇이고, 왜 더 빨리 돌리기만으로는 해결되지 않나?</p>
-<p><strong>배울 핵심</strong> — 덧셈보다 자릿수로 비싼 데이터 이동, 연산 밀도와 배치(재사용·기다림), memory-bound 판단, Dennard 종말과 세 벽</p>
-<p><strong>이후 쓰이는 곳</strong> — Day 5–6 뇌–디지털 에너지 비교 조건, Day 22–23 이완 시간이 기억 시간이 되는 조건, Day 30–31 판단 한 번당 시스템 에너지</p>
+<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> — 소자 논문의 "weight 이동이 없어 저전력" 문장을 평가하려면, 보통 컴퓨터에서 이동이 계산보다 얼마나 비싼지와 그 이동이 언제 병목인지(batch 1의 실시간 센서)를 숫자로 알아야 합니다. 소자 하나의 에너지가 시스템 전체 에너지와 다른 숫자라는 것도 여기서 확인합니다.</p>
+<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> — 연산량 [op]과 이동량 [byte] → 연산 밀도(op/byte)를 장치의 연산 속도 ÷ 대역폭과 비교 → 계산 시간과 전송 시간 중 긴 쪽이 병목(판단). batch를 키우면 같은 weight의 재사용이 늘어 연산 밀도가 오릅니다.</p>
+<p><strong>오늘 반드시</strong> — RAM 읽기 한 번은 덧셈 한 번보다 자릿수로 비싸다(약 10⁴배, Horowitz 표의 45 nm 값). 연산 밀도와 장치의 op/byte를 비교해 memory-bound인지 판단할 수 있고, 클록이 멈춘 것은 P ≈ αCV²f에서 V를 못 내렸기 때문이다.</p>
+<p><strong>나중에 더 봐도 되는 것</strong> — 타일링·낮은 정밀도·batch의 세부 계산(5-4), 실시간 장면 세 개의 일곱 질문 전부(장면 하나만 골라도 충분), Dennard 표의 세부.</p>
+<p><strong>다음으로 넘어가는 기준</strong> — '오늘 반드시'를 내 말로 한두 문장 말할 수 있으면 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
+<p><strong>이후 쓰이는 곳</strong> — Day 5–6 뇌–디지털 에너지 비교 조건, Day 23–24 이완 시간이 기억 시간이 되는 조건, Day 31–32 판단 한 번당 시스템 에너지</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d02b">
@@ -690,6 +715,7 @@ window.Quarto = {
 <div class="goal">
 <p>이 구간을 읽고 나면 덧셈 한 번과 RAM 읽기 한 번의 에너지를 같은 단위로 비교하고, "소자가 싸도 값이 멀면 소용없다"를 숫자로 설명할 수 있다.</p>
 </div>
+<p><strong>상황.</strong> 소자 하나의 쓰기 에너지를 pJ 단위로 쟀다고 합시다. 논문은 "그러니 이 소자로 만든 시스템도 저전력"이라고 쓰고 싶어 합니다. 그런데 그 소자가 쓸 가중치를 RAM에서 가져오는 에너지가 소자 에너지보다 자릿수로 크다면 그 문장은 성립할까요? 이 구간은 그 비교를 같은 단위(J)로 하는 법입니다.</p>
 <div id="b-energy-power" class="basics">
 <section id="에너지와-전력-그리고-pj" class="level4">
 <h4 class="anchored" data-anchor-id="에너지와-전력-그리고-pj">에너지와 전력, 그리고 pJ</h4>
@@ -703,8 +729,8 @@ window.Quarto = {
 <p>계산 한 번의 에너지는 아주 작아서 접두어를 씁니다. 1 pJ(피코줄) = 10⁻¹² J, 1 fJ(펨토줄) = 10⁻¹⁵ J = 0.001 pJ, 1 nJ(나노줄) = 10⁻⁹ J = 1,000 pJ. AA 건전지 하나(약 10 kJ)로 1 nJ짜리 일을 10¹³번 할 수 있습니다. "연산당 에너지"는 J/op, "접근당 에너지"는 J/access로, 둘 다 J이므로 서로 비교할 수 있습니다.</p>
 </section>
 </div>
-<p><strong>직관.</strong> 숫자 두 개를 더하는 데 드는 에너지와, 그 숫자를 창고(<a href="../days/d02a.html#b-memory-kinds" class="recall">RAM</a>)에서 가져오는 데 드는 에너지는 같은 단위(J)로 잴 수 있습니다. 재 보면 가져오기가 더하기보다 자릿수로 큽니다. 그러니 계산 하나하나를 아무리 싸게 만들어도, 값이 멀리 있으면 전체 에너지는 거의 줄지 않습니다.</p>
-<p><span id="fig-energy"></span> <strong>그림 9 읽기 전에.</strong> 가로축은 에너지이고 <strong>로그 눈금</strong>입니다. 눈금 한 칸이 10배라서, 막대가 한 칸 더 길면 에너지가 10배입니다(읽는 법은 <a href="../days/d01a.html#b-log-axis">Day 1 기초: 로그 축</a>). 초록은 계산, 파랑은 칩 안 캐시에서 읽기, 주황은 RAM(DRAM)에서 읽기입니다. 값은 Horowitz가 반도체 회로 학회(ISSCC) 발표에서 "45 nm, 0.9 V"라는 조건으로 정리한 표입니다. 여기서 <strong>공정</strong>(process)은 칩을 만드는 제조 기술의 세대이고, '45 nm'는 그 세대의 이름입니다(대략 가장 작은 치수의 규모를 가리키던 꼬리표로, 요즘 세대의 이름은 실제 어느 한 치수와 정확히 같지 않습니다 <span class="tag tag-unverified">미확인</span> <span class="prov">일반적 서술, 원문 대조 안 함</span>). 0.9 V는 공급전압 <span class="math inline">\(V_{DD}\)</span>입니다. 세대와 전압이 바뀌면 값도 바뀝니다. 또 같은 32 bit라도 <strong>정수</strong>(소수점 없는 수) 덧셈과 <strong>부동소수</strong>(1-2구간의 '32 bit 실수') 연산은 회로가 달라 에너지가 다릅니다. 같은 표에서 32 bit 정수 덧셈 0.1 pJ, 부동소수 덧셈 0.9 pJ, 부동소수 곱셈 3.7 pJ입니다. <span class="src">Horowitz 2014, p.14</span></p>
+<p><strong>직관.</strong> 숫자 두 개를 더하는 데 드는 에너지와, 그 숫자를 창고(<a href="../days/d02a.html#b-memory-kinds" class="recall">RAM</a>)에서 가져오는 데 드는 에너지는 같은 단위(J)로 잴 수 있습니다. <span class="key">재 보면 가져오기가 더하기보다 자릿수로 큽니다.</span> 그러니 계산 하나하나를 아무리 싸게 만들어도, 값이 멀리 있으면 전체 에너지는 거의 줄지 않습니다.</p>
+<p><span id="fig-energy"></span> <strong>그림 9 읽기 전에.</strong> 가로축은 에너지이고 <strong>로그 눈금</strong>입니다. 눈금 한 칸이 10배라서, 막대가 한 칸 더 길면 에너지가 10배입니다(읽는 법은 <a href="../days/d01a.html#b-log-axis">Day 1 기초: 로그 축</a>). 초록은 계산, 파랑은 칩 안 캐시에서 읽기, 주황은 RAM(DRAM)에서 읽기입니다. 값은 Horowitz가 반도체 회로 학회(ISSCC) 발표에서 "45 nm, 0.9 V"라는 조건으로 정리한 표입니다. 여기서 <strong>공정</strong>(process)은 칩을 만드는 제조 기술의 세대이고, '45 nm'는 그 세대의 이름입니다(대략 가장 작은 치수의 규모를 가리키던 꼬리표로, 요즘 세대의 이름은 실제 어느 한 치수와 정확히 같지 않습니다 <span class="tag tag-unverified">미확인</span> <span class="prov">일반적 서술, 원문 대조 안 함</span>). 0.9 V는 공급전압(supply voltage) <span class="math inline">\(V_{DD}\)</span>입니다. 세대와 전압이 바뀌면 값도 바뀝니다. 또 같은 32 bit라도 <strong>정수</strong>(소수점 없는 수) 덧셈과 <strong>부동소수</strong>(1-2구간의 '32 bit 실수') 연산은 회로가 달라 에너지가 다릅니다. 같은 표에서 32 bit 정수 덧셈 0.1 pJ, 부동소수 덧셈 0.9 pJ, 부동소수 곱셈 3.7 pJ입니다. <span class="src">Horowitz 2014, p.14</span></p>
 <figure class="fig figure"><img src="../assets/img/d02/fig2-energy-per-op.svg" alt="32비트 덧셈 0.1 pJ부터 DRAM 64비트 읽기 1.3 nJ까지 로그 눈금 막대. DRAM 읽기가 덧셈의 약 13,000배." class="figure-img"><figcaption><b>그림 9.</b> 연산 1회와 데이터 접근 1회의 에너지(로그 눈금: 한 칸이 10배, <a href="d01a.html#b-log-axis">Day 1–2 기초: 로그 축</a>). 수치는 Horowitz(ISSCC 2014) Fig. 1.1.9의 45 nm·0.9 V 공정 값이다. 메모리 읽기는 64 bit 단위이고, DRAM은 원문의 1.3–2.6 nJ 중 하한을 그렸다 [확인]. 공정이 바뀌면 값도 바뀌므로 정확한 값보다 "덧셈 ≪ 캐시 읽기 ≪ RAM 읽기"라는 자릿수 순서를 보기 위한 그림이다. <span class="prov">폴더 밖 문헌이며 값과 조건은 Claude가 웹의 원문 PDF로 대조. 비율은 코드가 계산, Claude가 그림.</span></figcaption></figure>
 <p><span id="ex-energy-mvm"></span> <strong>작은 예시를 단계별로.</strong> 그림 9의 값을 그대로 쓰면 32 bit 정수 덧셈 0.1 pJ, RAM(DRAM) 64 bit 읽기 1.3 nJ = 1,300 pJ이므로 비율은 13,000배입니다 <span class="tag tag-fact">확인</span> (Horowitz 2014, 45 nm·0.9 V) <span class="prov">Fig. 1.1.9, 원문 PDF 대조</span>. 이제 3구간의 1,000×1,000 MVM(입력 벡터 하나, MAC 100만 번)에 적용합니다.</p>
 <ol type="1">
@@ -717,10 +743,10 @@ window.Quarto = {
 <ul>
 <li>덧셈기 안: 선이 µm 단위로 짧습니다.</li>
 <li>칩 안 캐시까지: mm 단위 배선과 큰 SRAM 배열의 긴 워드선·비트선을 지납니다. 그림 9에서 캐시가 클수록(32 kB → 1 MB) 비싼 이유입니다.</li>
-<li>RAM까지: 칩 밖으로 나가 보드 위 cm 단위 배선을 지나고, 칩과 칩 사이에서 신호를 주고받는 <strong>입출력 회로</strong>(I/O)와 DRAM 안의 감지 증폭기·새로 고침까지 거칩니다.</li>
+<li>RAM까지: 칩 밖으로 나가 보드 위 cm 단위 배선을 지나고, 칩과 칩 사이에서 신호를 주고받는 <strong>입출력 회로</strong>(I/O)와 DRAM 안의 감지 증폭기(sense amplifier)·새로 고침까지 거칩니다.</li>
 </ul>
-<p>Horowitz도 DRAM 접근이 비싼 이유의 일부로 비트당 20 pJ이 넘는 비효율적인 입출력 회로를 들고, 입출력을 개선하더라도 요청과 데이터가 프로세서와 메모리 칩 위에서 먼 거리를 가야 하므로 여전히 비트당 약 10 pJ로 크다고 적습니다. <span class="src">Horowitz 2014, p.11</span> 정리하면 '멀다'는 곧 '긴 배선의 큰 <span class="math inline">\(C\)</span>를 충방전한다'이고, 6구간의 <span class="math inline">\(P \approx \alpha C V^2 f\)</span>에서 <span class="math inline">\(C\)</span>가 배선 길이로 커지는 것과 같은 이야기입니다. <span class="tag tag-interp">해석</span></p>
-<p><strong>적용 조건.</strong> 이 계산은 세 가지를 가정합니다. (1) 가중치가 재사용되지 않고 칩 안에 머물지도 않는다(입력 벡터 하나를 처리하고 끝, 5구간에서 '배치 1'이라 부릅니다). (2) 입력과 중간 합은 가까운 층에 있다. (3) 수치는 특정 공정·전압의 값이다. (1)이 깨지면, 즉 같은 가중치를 많은 입력 벡터에 돌려 쓰면 이동 비용이 그 수로 나뉩니다. 이것이 GPU가 "배치"를 키우는 이유이고, 5-2에서 그림 10와 그림 11으로 따라갑니다. 폴더의 리뷰들도 같은 말을 합니다. Roadmap은 데이터 이동을 "기존 전자 컴퓨팅의 주요 에너지 병목"이라 부르고 <span class="src">Roadmap 2026, p.8114</span>, Kudithipudi 리뷰(Nature 2025)는 뉴로모픽의 첫 번째 이점을 "메모리와 연산이 밀접하게 결합되어 연산기와 메모리 사이의 비싼 데이터 전송을 피한다"로 듭니다. <span class="src">Kudithipudi 2025, p.801</span> 둘 다 "피한다"가 아니라 "줄인다"로 읽어야 하는 이유는 7구간에서 봅니다.</p>
+<p>Horowitz도 DRAM 접근이 비싼 이유의 일부로 비트당 20 pJ이 넘는 비효율적인 입출력 회로를 들고, 입출력을 개선하더라도 요청과 데이터가 프로세서와 메모리 칩 위에서 먼 거리를 가야 하므로 여전히 비트당 약 10 pJ로 크다고 적습니다. <span class="src">Horowitz 2014, p.11</span> <span class="key">정리하면 '멀다'는 곧 '긴 배선의 큰 정전용량을 충방전한다'는 뜻입니다.</span> 이것은 6구간의 <span class="math inline">\(P \approx \alpha C V^2 f\)</span>에서 <span class="math inline">\(C\)</span>가 배선 길이로 커지는 것과 같은 이야기입니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>적용 조건.</strong> 이 계산은 세 가지를 가정합니다. (1) 가중치가 재사용되지 않고 칩 안에 머물지도 않는다(입력 벡터 하나를 처리하고 끝, 5구간에서 '배치(batch) 1'이라 부릅니다). (2) 입력과 중간 합은 가까운 층에 있다. (3) 수치는 특정 공정·전압의 값이다. (1)이 깨지면, 즉 같은 가중치를 많은 입력 벡터에 돌려 쓰면 이동 비용이 그 수로 나뉩니다. 이것이 GPU가 "배치"를 키우는 이유이고, 5-2에서 그림 10와 그림 11으로 따라갑니다. 폴더의 리뷰들도 같은 말을 합니다. Roadmap은 데이터 이동을 "기존 전자 컴퓨팅의 주요 에너지 병목"이라 부르고 <span class="src">Roadmap 2026, p.8114</span>, Kudithipudi 리뷰(Nature 2025)는 뉴로모픽의 첫 번째 이점을 "메모리와 연산이 밀접하게 결합되어 연산기와 메모리 사이의 비싼 데이터 전송을 피한다"로 듭니다. <span class="src">Kudithipudi 2025, p.801</span> 둘 다 "피한다"가 아니라 "줄인다"로 읽어야 하는 이유는 7구간에서 봅니다.</p>
 <div class="numbers">
 <ul>
 <li>그림 9 기준 RAM 읽기 ÷ 32 bit 정수 덧셈 ≈ 1.3×10⁴. 1 MB SRAM 읽기 ÷ 덧셈 ≈ 10³. <span class="tag tag-fact">확인</span> (Horowitz 2014, 45 nm·0.9 V) <span class="prov">Fig. 1.1.9, 원문 PDF 대조</span> 2014년 공정의 값이라 오늘의 공정에서는 비율이 다를 수 있다.</li>
@@ -730,7 +756,7 @@ window.Quarto = {
 </div>
 <div class="quiz" data-day="d02" data-set="4-check"></div>
 <div id="think-device-system" class="think">
-<p>내가 만드는 이온 소자 하나의 쓰기 에너지가 "fJ"라고 논문에 적는다고 합시다. 그 소자 100만 개의 값을 읽어 PC로 보내는 에너지는 얼마일까요? ADC(소자의 아날로그 전류·전압을 숫자로 바꾸는 회로, 7구간)와 케이블, PC가 쓰는 에너지를 더하면 fJ라는 숫자가 시스템에서 어떤 의미를 갖나요? (답은 Day 30–31에서. 오늘은 "소자 에너지 ≠ 시스템 에너지"라는 질문만 적어 두세요.)</p>
+<p>내가 만드는 이온 소자 하나의 쓰기 에너지가 "fJ"라고 논문에 적는다고 합시다. 그 소자 100만 개의 값을 읽어 PC로 보내는 에너지는 얼마일까요? ADC(소자의 아날로그 전류·전압을 숫자로 바꾸는 회로, 7구간)와 케이블, PC가 쓰는 에너지를 더하면 fJ라는 숫자가 시스템에서 어떤 의미를 갖나요? (답은 Day 31–32에서. 오늘은 "소자 에너지 ≠ 시스템 에너지"라는 질문만 적어 두세요.)</p>
 </div>
 <div class="quiz" data-day="d02" data-set="4-end"></div>
 <div class="keypoints">
@@ -745,9 +771,10 @@ window.Quarto = {
 <section id="ch-memory-wall" class="level3">
 <h3 class="anchored" data-anchor-id="ch-memory-wall">5. 시간은 어디로 가나: memory wall과 재사용</h3>
 <div class="goal">
-<p>이 구간을 읽고 나면 3구간의 2×2 예제로 연산 밀도(옮긴 1 byte당 연산 수)와 배치(함께 처리하는 입력 벡터 수)를 계산해 보일 수 있고, 장치의 연산 속도·대역폭이 주어지면 어느 쪽이 시간을 정하는지 판단할 수 있으며, '실시간 입력'을 구체적인 센서 장면으로 말할 수 있다.</p>
+<p>이 구간을 읽고 나면 3구간의 2×2 예제로 연산 밀도(arithmetic intensity: 옮긴 1 byte당 연산 수)와 배치(batch: 함께 처리하는 입력 벡터 수)를 계산해 보일 수 있고, 장치의 연산 속도·대역폭이 주어지면 어느 쪽이 시간을 정하는지 판단할 수 있으며, '실시간 입력'을 구체적인 센서 장면으로 말할 수 있다.</p>
 </div>
-<p>이 구간은 길어서 다섯 단계로 나눕니다. 5-1 연산 밀도 → 5-2 배치 → 5-3 계산 시간과 전송 시간(병목) → 5-4 병목을 줄이는 세 방법 → 5-5 실시간 입력의 연구 장면. 3구간 2×2 예제의 숫자(8 op, 16 byte)를 끝까지 씁니다.</p>
+<p><strong>상황.</strong> 같은 신경망을 GPU로 돌릴 때는 입력 1,000개를 모아 한꺼번에 처리하지만, 로봇 손가락의 센서 값은 1 ms마다 하나씩 옵니다. 모을 수 있는 입력이 달라지면 같은 가중치를 다시 쓰는 횟수가 달라지고, 병목의 위치가 바뀝니다. 이 구간은 그 판단을 숫자 두 개(연산 밀도, 장치의 op/byte)로 합니다.</p>
+<p>이 구간은 길어서 두 부분, 다섯 단계로 나눕니다. <strong>앞부분 '병목 읽기'</strong>: 5-1 연산 밀도 → 5-2 배치 → 5-3 계산 시간과 전송 시간(병목). <strong>뒷부분 '설계 처방'</strong>: 5-4 병목을 줄이는 세 방법(타일링·낮은 정밀도·배치) → 5-5 실시간 입력의 연구 장면. 두 부분 사이에 멈추기 좋은 곳이 있습니다. 3구간 2×2 예제의 숫자(8 op, 16 byte)를 끝까지 씁니다.</p>
 <section id="ai-intro" class="level4">
 <h4 class="anchored" data-anchor-id="ai-intro">5-1. 옮긴 데이터 1 byte당 계산을 얼마나 하나: 연산 밀도</h4>
 <p><strong>먼저 말로.</strong> 4구간에서 본 것처럼 계산 한 번보다 값을 멀리서 가져오는 한 번이 비쌉니다. 그렇다면 어떤 계산이 "가져오기에 휘둘리는지"는 <strong>데이터를 이만큼 옮겨 와서 계산을 얼마나 했는가</strong>로 가늠할 수 있습니다. 많이 옮기고 조금 계산하면 옮기는 쪽이, 조금 옮기고 많이 계산하면 계산하는 쪽이 비용을 정할 가능성이 큽니다.</p>
@@ -768,7 +795,7 @@ window.Quarto = {
 <ul>
 <li>같다: 가중치를 DRAM에서 정확히 한 번 읽어 칩 안에서 쓰고 끝낼 때. 위의 0.5 op/byte가 이 경우입니다.</li>
 <li>이동이 더 작다: 지난번 계산에서 쓴 가중치가 아직 칩 안(캐시)에 남아 있으면 이번에는 DRAM에서 가져올 것이 없습니다. 16 byte짜리 2×2 가중치는 레지스터·캐시에 계속 둘 수 있을 만큼 작습니다.</li>
-<li>이동이 더 크다: 칩 안 저장소가 작아 같은 가중치를 계산 도중에 몇 번씩 다시 읽어야 하면, 이동량이 저장 크기의 여러 배가 됩니다(5-4의 타일링 예).</li>
+<li>이동이 더 크다: 칩 안 저장소가 작아 같은 가중치를 계산 도중에 몇 번씩 다시 읽어야 하면, 이동량이 저장 크기의 여러 배가 됩니다(5-4의 타일링(tiling) 예).</li>
 </ul>
 <p><span id="ai-io"></span> <strong>가중치만 셀 때와 입력·출력까지 셀 때.</strong> 지금까지는 가중치 이동만 셌습니다. 그러나 입력 벡터도 가져와야 하고 출력 벡터도 내보내야 합니다. 2×2 예제에서 입력 숫자 2개 = 8 byte, 출력 숫자 2개 = 8 byte입니다.</p>
 <table class="caption-top table">
@@ -816,7 +843,7 @@ window.Quarto = {
 </section>
 <section id="batch" class="level4">
 <h4 class="anchored" data-anchor-id="batch">5-2. 같은 가중치를 여러 입력 벡터에: 배치</h4>
-<p><strong>뜻부터.</strong> <strong>배치(batch)</strong>는 같은 가중치 행렬 <span class="math inline">\(W\)</span>로 <strong>함께 처리하는 입력 벡터(샘플)의 개수</strong>입니다. 입력 벡터 하나 <strong>안의</strong> 숫자 개수(2×2 예제의 2, 1,000×1,000의 1,000)가 아닙니다. 그것은 층의 입력 수 <span class="math inline">\(N\)</span>이고, 배치는 그런 벡터가 <strong>몇 개</strong> 모였느냐입니다. 기호는 <span class="math inline">\(B\)</span>를 씁니다(1-1구간의 전송 속도 <span class="math inline">\(s\)</span>와 다른 기호이고, 단위 byte와도 다릅니다).</p>
+<p><strong>뜻부터.</strong> <span class="key"><strong>배치(batch)</strong>는 같은 가중치 행렬 <span class="math inline">\(W\)</span>로 <strong>함께 처리하는 입력 벡터(샘플)의 개수</strong>입니다.</span> 입력 벡터 하나 <strong>안의</strong> 숫자 개수(2×2 예제의 2, 1,000×1,000의 1,000)가 아닙니다. 그것은 층의 입력 수 <span class="math inline">\(N\)</span>이고, 배치는 그런 벡터가 <strong>몇 개</strong> 모였느냐입니다. 기호는 <span class="math inline">\(B\)</span>를 씁니다(1-1구간의 전송 속도 <span class="math inline">\(s\)</span>와 다른 기호이고, 단위 byte와도 다릅니다).</p>
 <p><strong>무엇을 볼지.</strong> 그림 10는 같은 <span class="math inline">\(W\)</span> 하나와 서로 다른 입력 벡터 4개를 나란히 놓은 것입니다. 가운데 가로줄의 W 동그라미가 모두 <strong>같은 표</strong>라는 점, 각 열 안의 숫자 2개는 입력 수이고 열의 개수 4가 배치라는 점을 보세요.</p>
 <figure class="fig figure"><img src="../assets/img/d02/fig12-batch4.svg" alt="왼쪽에 2×2 가중치 표 W(16 byte)가 하나 있고, 오른쪽에 입력 벡터 u(1)=(2,1), u(2)=(1,2), u(3)=(4,0), u(4)=(3,3) 네 개가 나란히 놓여 같은 W를 거쳐 y(1)=(5,4.5), y(2)=(7,3), y(3)=(4,8), y(4)=(12,7.5)가 된다. 위쪽 괄호는 배치 B=4가 입력 벡터의 수라고 표시한다" class="figure-img"><figcaption><b>그림 10.</b> 배치 4. 같은 가중치 행렬 W를 서로 다른 입력 벡터 4개에 차례로 쓴다. 열 안의 숫자 2개는 입력 수 N이고, 열의 개수 4가 배치 B다. W는 칩 밖 메모리에서 한 번 가져와 네 벡터를 다 처리할 때까지 칩 안에 둔다고 가정했다. 입력 벡터 값은 예시. 모식도. <span class="prov">출력은 코드가 계산, Claude가 그림.</span></figcaption></figure>
 <ol type="1">
@@ -901,7 +928,7 @@ window.Quarto = {
 </section>
 <section id="bound" class="level4">
 <h4 class="anchored" data-anchor-id="bound">5-3. 계산 시간과 전송 시간: 어느 쪽이 병목인가</h4>
-<p><strong>memory wall이라는 말.</strong> 창고에서 재료를 가져오는 길이 좁으면(<a href="../days/d02a.html#ch-data-path" class="recall">대역폭</a>이 낮으면), 요리사가 아무리 빨라도 재료를 기다립니다. 연산 속도는 해마다 빨라졌는데 메모리 대역폭과 지연은 그만큼 빨라지지 않아, 연산기가 메모리를 기다리는 일이 벽처럼 느껴진다는 뜻에서 이것을 <strong>memory wall</strong>이라 부릅니다. <span class="tag tag-unverified">미확인</span> <span class="prov">용어의 기원은 Wulf &amp; McKee 1995로 알려져 있으나 폴더에 없어 원문 대조 안 함</span> 1-1구간에서 손으로 바꿔 본 "긴 쪽이 전체를 정한다"를 이제 실제 단위로 씁니다.</p>
+<p><strong>memory wall이라는 말.</strong> 창고에서 재료를 가져오는 길이 좁으면(<a href="../days/d02a.html#ch-data-path" class="recall">대역폭</a>(bandwidth)이 낮으면), 요리사가 아무리 빨라도 재료를 기다립니다. 연산 속도는 해마다 빨라졌는데 메모리 대역폭과 지연은 그만큼 빨라지지 않아, 연산기가 메모리를 기다리는 일이 벽처럼 느껴진다는 뜻에서 이것을 <strong>memory wall</strong>이라 부릅니다. <span class="tag tag-unverified">미확인</span> <span class="prov">용어의 기원은 Wulf &amp; McKee 1995로 알려져 있으나 폴더에 없어 원문 대조 안 함</span> 1-1구간에서 손으로 바꿔 본 "긴 쪽이 전체를 정한다"를 이제 실제 단위로 씁니다.</p>
 <p><strong>두 시간을 따로 구한다.</strong></p>
 <ul>
 <li>계산 시간 = 연산량 [op] ÷ 연산 속도 [op/s]. 연산 속도는 장치가 1초에 할 수 있는 연산 수입니다.</li>
@@ -935,10 +962,13 @@ t \approx \max\!\left(\frac{\text{연산량}}{\text{연산 속도}},\ \frac{\tex
 <p><strong>정리.</strong> 경계선은 장치의 <strong>연산 속도 ÷ 대역폭 [op/byte]</strong>입니다. 계산의 연산 밀도가 이보다 낮으면 전송이, 높으면 계산이 시간을 정합니다. 장치 A에서 배치 1 MVM(0.5 op/byte)은 경계(10 op/byte)보다 20배 낮아 memory-bound입니다. 아래 영상의 roofline 그림에서 선이 꺾이는 점이 이 경계입니다.</p>
 </div>
 </div>
-<p><span id="bound-device"></span> <strong>같은 계산, 다른 장치 — 장치 B.</strong> 이번에는 연산 속도가 100배 느린(10¹¹ op/s) 장치 B에 대역폭은 같다(10¹² byte/s)고 합시다. 배치 1 MVM의 전송 시간은 그대로 4 µs이지만 계산 시간은 2×10⁶ ÷ 10¹¹ = 2×10⁻⁵ s = 20 µs라서 이번에는 <strong>계산이 긴 쪽</strong>(compute-bound)입니다. 장치 B의 경계는 10¹¹ ÷ 10¹² = 0.1 op/byte이고, 배치 1 MVM의 0.5 op/byte는 이 경계보다 높습니다. 그림 12이 두 장치를 같은 눈금으로 나란히 보여 줍니다.</p>
-<figure class="fig figure"><img src="../assets/img/d02/fig13-bound.svg" alt="1,000×1,000 MVM의 계산 시간(초록)과 전송 시간(주황) 막대. 장치 A(10^13 op/s, 10^12 byte/s)에서는 배치 1과 8에서 전송 4 µs가 길고, 배치 20에서 같아지며, 배치 64에서는 계산 12.8 µs가 길다. 장치 B(10^11 op/s)에서는 배치 1에서도 계산 20 µs가 전송 4 µs보다 길다" class="figure-img"><figcaption><b>그림 12.</b> 계산 시간(초록)과 전송 시간(주황) 중 긴 쪽이 전체를 정한다. 같은 배치 1 MVM이라도 장치 A에서는 전송이, 장치 B에서는 계산이 길다. 전송은 가중치 4 MB만 셌고, 두 장치는 특정 제품이 아닌 가상의 값이다. 계산과 전송이 완전히 겹친다고 둔 모형. <span class="prov">막대 길이는 코드가 계산, Claude가 그림.</span></figcaption></figure>
-<p><strong>정리.</strong> 병목은 계산의 연산 밀도 <strong>하나만으로</strong> 정해지지 않습니다. 장치마다 경계(연산 속도 ÷ 대역폭)가 다르고, 연산 밀도가 그 경계보다 낮으면 memory-bound, 높으면 compute-bound입니다. 그래서 "배치 1 MVM은 memory-bound다"는 "연산 속도에 비해 대역폭이 좁은 장치, 즉 경계가 0.5 op/byte보다 높은 장치에서, 그리고 가중치가 칩 안에 머물지 못할 때"라는 조건이 붙은 문장입니다. 연산기를 아주 많이 넣은 요즘의 GPU 같은 장치는 경계가 높아 이 조건에 잘 맞는 편입니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="bound-device"></span> <strong>같은 계산, 다른 장치 — 장치 B.</strong> 이번에는 연산 속도가 100배 느린(10¹¹ op/s) 장치 B에 대역폭은 같다(10¹² byte/s)고 합시다. 배치 1 MVM의 전송 시간은 그대로 4 µs이지만 계산 시간은 2×10⁶ ÷ 10¹¹ = 2×10⁻⁵ s = 20 µs라서 이번에는 <strong>계산이 긴 쪽</strong>(compute-bound)입니다. 장치 B의 경계는 10¹¹ ÷ 10¹² = 0.1 op/byte이고, 배치 1 MVM의 0.5 op/byte는 이 경계보다 높습니다. 그림 12의 (a)와 (b)가 두 장치를 같은 눈금으로 나란히 보여 줍니다.</p>
+<figure class="fig figure"><img src="../assets/img/d02/fig13-bound.svg" alt="1,000×1,000 MVM의 계산 시간(초록)과 전송 시간(주황) 막대. 장치 A(10^13 op/s, 10^12 byte/s)에서는 배치 1과 8에서 전송 4 µs가 길고, 배치 20에서 같아지며, 배치 64에서는 계산 12.8 µs가 길다. 장치 B(10^11 op/s)에서는 배치 1에서도 계산 20 µs가 전송 4 µs보다 길다" class="figure-img"><figcaption><b>그림 12.</b> 계산 시간(초록)과 전송 시간(주황) 중 긴 쪽이 전체를 정한다. <b>(a)</b> 장치 A(경계 10 op/byte)에서 배치 1, 8, 20, 64. <b>(b)</b> 장치 B(경계 0.1 op/byte)에서 배치 1. 같은 배치 1 MVM이라도 (a)에서는 전송이, (b)에서는 계산이 길다. 전송은 가중치 4 MB만 셌고, 두 장치는 특정 제품이 아닌 가상의 값이다. 계산과 전송이 완전히 겹친다고 둔 모형. <span class="prov">막대 길이는 코드가 계산, Claude가 그림.</span></figcaption></figure>
+<p><strong>정리.</strong> 병목은 계산의 연산 밀도 <strong>하나만으로</strong> 정해지지 않습니다. 장치마다 경계(연산 속도 ÷ 대역폭. roofline 그림에서 선이 꺾이는 점이라 ridge point라고도 합니다)가 다르고, <span class="key">계산의 연산 밀도가 장치의 경계보다 낮으면 memory-bound, 높으면 compute-bound입니다.</span> 그래서 "배치 1 MVM은 memory-bound다"는 "연산 속도에 비해 대역폭이 좁은 장치, 즉 경계가 0.5 op/byte보다 높은 장치에서, 그리고 가중치가 칩 안에 머물지 못할 때"라는 조건이 붙은 문장입니다. 연산기를 아주 많이 넣은 요즘의 GPU 같은 장치는 경계가 높아 이 조건에 잘 맞는 편입니다. <span class="tag tag-interp">해석</span></p>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/4b6KpFN7Rio?start=32&amp;rel=0" title="영상: The AI Memory Wall: Why LLMs &amp; AI Accelerators Hit a Bottleneck" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:32–8:25와 9:48–10:35, 약 9분 · 전체 12분, 영어).</b> IBM Technology, "The AI Memory Wall: Why LLMs &amp; AI Accelerators Hit a Bottleneck" (2026). IBM 연구자 Kaoutar El Maghraoui의 칠판 강의. <b>볼 이유:</b> 이 구간의 단어가 챕터 제목에 그대로 나온다. 'The Memory Wall'(0:32), 'Compute Growth vs Memory Bandwidth'(1:00), 'Arithmetic Intensity'(2:39, 이 교재의 연산 밀도), 'Roofline Model'(3:48, 위 시간 식의 원형), 'Compute-Bound vs Memory-Bound'(5:27), 'How Batching Improves AI Inference Efficiency'(9:48, 5-2의 배치). 8:25–9:48은 대형 언어 모델에 특화된 내용이라 건너뛰어도 된다. <b>보고 답할 질문:</b> 영상의 roofline 그림에서 배치 1인 행렬–벡터 곱(연산 밀도 0.5 op/byte)은 경사진 쪽과 평평한 쪽 중 어디에 놓이나? 그 답이 장치에 따라 바뀔 수 있는 이유는? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
+<div class="stop-point">
+<p>여기까지가 <strong>병목 읽기</strong>입니다. 2×2 예로 연산 밀도(0.5 op/byte)와 배치를 계산하고, 장치의 경계(연산 속도 ÷ 대역폭)와 비교해 memory-bound인지 compute-bound인지 판단할 수 있습니다. 다음 5-4·5-5는 <strong>설계 처방</strong>입니다. 같은 2×2·1,000×1,000 예로 병목을 줄이는 방법과 그 대가를 봅니다.</p>
+</div>
 </section>
 <section id="three-fixes" class="level4">
 <h4 class="anchored" data-anchor-id="three-fixes">5-4. 병목을 줄이는 세 가지 방법: 타일링, 낮은 정밀도, 배치 재사용</h4>
@@ -1003,20 +1033,20 @@ t \approx \max\!\left(\frac{\text{연산량}}{\text{연산 속도}},\ \frac{\tex
 <li>소재: 센서 소재에 가스가 붙고 떨어지는(흡착·탈착) 이완 시간이 수 초–수 분이면 현재 출력에 과거 농도가 섞여 남는데, 이것은 기억으로 쓸 수도 있고 빠른 변화를 놓치게 하는 원인도 됩니다. 습도·온도에 따른 잡음과 표류, 농도가 오를 때와 내릴 때 응답이 다른 히스테리시스는 같은 농도에 다른 출력을 만듭니다.</li>
 </ol>
 <p><strong>세 장면이 공통으로 말하는 것.</strong> 셋 다 입력 벡터가 시간 순서대로 하나씩 오고, 답을 정해진 시간 안에 내야 하며, 판단에 과거 신호가 필요합니다. 그러나 기다릴 수 있는 정도는 다릅니다(촉각은 ms, 생체 신호·가스는 초). 그리고 셋 다 층이 작습니다. 장면 1의 입력 16개 → 출력 8개 층이라면 가중치는 16 × 8 = 128개, × 4 byte = 512 byte뿐입니다.</p>
-<p><span id="rt-baseline"></span> <strong>그래서 무엇과 비교해야 하나: 디지털 기준선.</strong> 지난 학습의 줄기 중 (다) in-memory와 (라) 물리 RC(재료로 하는 reservoir computing)가 겨냥한다고 흔히 말하는 자리가 이런 장면입니다. <span class="tag tag-interp">해석</span> 그러나 위 장면들이 "배치 1"이라고 해서 보통 컴퓨터가 반드시 memory wall에 막히는 것은 아닙니다. 512 byte짜리 가중치는 작은 마이크로컨트롤러(MCU: 센서 옆에 붙이는 작은 칩으로, 연산기와 작은 메모리를 칩 하나에 담은 것)의 칩 안 메모리에 계속 둘 수 있어, 배치 1이라도 판단마다 칩 밖 DRAM에서 가중치를 가져올 일이 없습니다(5-1의 '이동이 더 작다' 경우). 이온 소재나 물리 RC가 이런 장면에서 유리하다고 말하려면, 같은 조건에서 디지털 기준선과 비교해야 합니다.</p>
+<p><span id="rt-baseline"></span> <strong>그래서 무엇과 비교해야 하나: 디지털 기준선.</strong> 지난 학습의 줄기 중 (다) in-memory와 (라) physical reservoir computing(재료로 하는 reservoir computing)가 겨냥한다고 흔히 말하는 자리가 이런 장면입니다. <span class="tag tag-interp">해석</span> 그러나 위 장면들이 "배치 1"이라고 해서 보통 컴퓨터가 반드시 memory wall에 막히는 것은 아닙니다. 512 byte짜리 가중치는 작은 마이크로컨트롤러(MCU: 센서 옆에 붙이는 작은 칩으로, 연산기와 작은 메모리를 칩 하나에 담은 것)의 칩 안 메모리에 계속 둘 수 있어, 배치 1이라도 판단마다 칩 밖 DRAM에서 가중치를 가져올 일이 없습니다(5-1의 '이동이 더 작다' 경우). 이온 소재나 physical reservoir computing이 이런 장면에서 유리하다고 말하려면, 같은 조건에서 디지털 기준선과 비교해야 합니다.</p>
 <ul>
-<li>같은 과제와 같은 정확도(오경보·놓침 비율 포함)</li>
+<li>같은 과제와 같은 정확도(오경보(false alarm)·놓침(miss) 비율 포함)</li>
 <li>같은 지연 예산(장면 1의 10 ms 같은)</li>
-<li>판단 한 번당 <strong>시스템 전체</strong> 에너지: 센서 읽기, 소자 출력을 숫자로 바꾸는 ADC, 통신, 대기 전력까지 포함 (Day 30–31)</li>
+<li>판단 한 번당 <strong>시스템 전체</strong> 에너지: 센서 읽기, 소자 출력을 숫자로 바꾸는 ADC, 통신, 대기 전력까지 포함 (Day 31–32)</li>
 <li>디지털 기준선의 크기와 위치: 칩 안 메모리에 다 들어가는 작은 모델이나 간단한 필터(최근 값 몇 개의 평균 같은)로도 충분한지</li>
-<li>기억 시간: 필요한 과거 길이(장면별 수 ms–수십 초)를 소재의 이완 시간이 덮는지, 디지털은 그만큼의 과거 값을 버퍼에 들고 있으면 되는지 (Day 22–23)</li>
+<li>기억 시간: 필요한 과거 길이(장면별 수 ms–수십 초)를 소재의 이완 시간이 덮는지, 디지털은 그만큼의 과거 값을 버퍼에 들고 있으면 되는지 (Day 23–24)</li>
 </ul>
-<p>이 비교 없이 "실시간이니 물리 RC가 유리하다"고 결론 내릴 수는 없습니다. 디지털 쪽이 이미 충분한 장면도 있을 것이고, 소재가 이길 여지는 "가중치나 과거 이력이 칩 안에 두기 어려울 만큼 크거나, 지연·에너지 예산이 아주 빡빡하고, 정밀도를 조금 양보해도 되는" 조건에서 찾아야 합니다. <span class="tag tag-hypo">가설</span></p>
+<p>이 비교 없이 "실시간이니 physical reservoir computing이 유리하다"고 결론 내릴 수는 없습니다. 디지털 쪽이 이미 충분한 장면도 있을 것이고, 소재가 이길 여지는 "가중치나 과거 이력이 칩 안에 두기 어려울 만큼 크거나, 지연·에너지 예산이 아주 빡빡하고, 정밀도를 조금 양보해도 되는" 조건에서 찾아야 합니다. <span class="tag tag-hypo">가설</span></p>
 <p><strong>연구 질문으로 정리하면.</strong> 5구간이 뉴로모픽·소재 연구에 주는 질문은 셋입니다. <span class="tag tag-interp">해석</span></p>
 <ol type="1">
 <li>내 소자가 들어갈 응용에서 입력 벡터는 어떻게 오고, 기다릴 수 있는 시간은 얼마인가? (배치를 키울 수 있나)</li>
 <li>그 응용의 디지털 기준선은 가중치를 칩 안에 둘 수 있나, 아니면 정말로 먼 메모리에서 계속 가져와야 하나? (병목이 실제로 데이터 이동인가)</li>
-<li>소재의 이완 시간·잡음·히스테리시스가 그 응용이 요구하는 기억 시간·정확도와 맞는가? (Day 22–23·Day 30–31에서 측정 기준으로)</li>
+<li>소재의 이완 시간·잡음·히스테리시스가 그 응용이 요구하는 기억 시간·정확도와 맞는가? (Day 23–24·Day 31–32에서 측정 기준으로)</li>
 </ol>
 <div class="think">
 <p>위 세 장면 중 하나(또는 내 소자가 들어갈 응용)를 골라 ②–⑤에 내 숫자로 답해 보세요. 기다릴 수 있는 시간이 길면 배치로, 모델이 작으면 칩 안 메모리로 디지털이 memory wall을 피할 수 있습니다. 둘 다 안 되는 이유가 있다면 한 줄로 적어 보세요. 그것이 내 연구 동기의 후보입니다.</p>
@@ -1084,6 +1114,7 @@ memory-bound / compute-bound
 <div class="goal">
 <p>이 구간을 읽고 나면 클록·활동률이 무엇인지, <span class="math inline">\(P \approx \alpha C V^2 f\)</span>의 기호 하나하나가 무슨 뜻인지, 그리고 왜 2000년대 중반부터 클록이 안 오르는지 설명할 수 있다.</p>
 </div>
+<p><strong>상황.</strong> Day 1–2에서 "클록을 올리면 더 빨리 끝난다"고 했는데, 2000년대 중반 이후 클록은 수 GHz에서 멈췄습니다. 논문이 낮은 전압·낮은 f·높은 병렬성 쪽 소자를 내세우는 이유가 여기서 나옵니다. 이 구간은 왜 멈췄는지를 식 <span class="math inline">\(P pprox lpha C V^2 f\)</span> 하나로 확인합니다.</p>
 <div id="b-clock" class="basics">
 <section id="클록-회로-전체가-맞추는-박자" class="level4">
 <h4 class="anchored" data-anchor-id="클록-회로-전체가-맞추는-박자">클록: 회로 전체가 맞추는 박자</h4>
@@ -1114,22 +1145,22 @@ P \approx \alpha \, C \, V^2 f
 <li><span class="math inline">\(V\)</span> [V]: 공급 전압(1-2구간의 '높은 전압').</li>
 <li><span class="math inline">\(f\)</span> [Hz]: 클록 주파수.</li>
 <li>계산 순서: 한 번 충방전에 <span class="math inline">\(C V^2\)</span> 정도의 에너지가 들고, 그것이 초당 <span class="math inline">\(\alpha f\)</span>번 일어나므로 곱한다.</li>
-<li>결과의 뜻: 전력 [W]. 칩이 1초에 열로 내보내는 에너지. 전력밀도 = <span class="math inline">\(P / A\)</span> [W/cm²], <span class="math inline">\(A\)</span>는 면적. 이 식은 충방전에 드는 <strong>동적 전력</strong>만 셉니다. 꺼진 소자로 새는 누설 전류 × 전압인 <strong>정적 전력</strong>은 따로 더합니다(아래, Day 1–2 1-7).</li>
+<li>결과의 뜻: 전력 [W]. 칩이 1초에 열로 내보내는 에너지. 전력밀도(power density) = <span class="math inline">\(P / A\)</span> [W/cm²], <span class="math inline">\(A\)</span>는 면적. 이 식은 충방전에 드는 <strong>동적 전력</strong>(dynamic power)만 셉니다. 꺼진 소자로 새는 누설 전류 × 전압인 <strong>정적 전력</strong>(static power)은 따로 더합니다(아래, Day 1–2 1-7).</li>
 </ul>
-<p>Dennard의 규칙은 트랜지스터의 치수(게이트 길이·폭·산화막 두께)를 <span class="math inline">\(1/\kappa\)</span>로 줄일 때 전압도 <span class="math inline">\(1/\kappa\)</span>로 함께 줄이고 도핑을 <span class="math inline">\(\kappa\)</span>배로 늘리면, 회로 하나의 <span class="math inline">\(C\)</span>도 <span class="math inline">\(1/\kappa\)</span>, 회로 하나가 차지하는 면적 <span class="math inline">\(A\)</span>는 <span class="math inline">\(1/\kappa^2\)</span>, 신호가 안정되는 지연은 <span class="math inline">\(1/\kappa\)</span>로 짧아진다는 것입니다. 지연이 짧아진 만큼 클록 <span class="math inline">\(f\)</span>를 <span class="math inline">\(\kappa\)</span>배 올려도 회로 하나의 <span class="math inline">\(P\)</span>는 <span class="math inline">\(1/\kappa^2\)</span>이라, <span class="math inline">\(P/A\)</span>가 일정합니다. 그림 13의 왼쪽 표가 그 계산입니다. 여기서 <span class="math inline">\(\kappa\)</span>는 <strong>축소 배율</strong>이고(Day 1–2 1-2에서 같은 글자로 쓴 '게이트 전압이 장벽을 낮추는 비율'과 다른 양), 한 세대를 <span class="math inline">\(\kappa \approx 1.4\)</span>로 잡는 것은 <span class="math inline">\(1.4^2 \approx 2\)</span>라서 회로 하나의 면적이 절반, 같은 면적에 넣는 회로 수가 2배가 되기 때문입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d02/fig4-dennard.svg" alt="Dennard scaling에서 전압·정전용량·클록·면적이 세대마다 어떻게 바뀌어 전력밀도가 일정한지와, 전압이 고정된 뒤 전력밀도가 세대마다 약 2배로 오르는 모형 곡선." class="figure-img"><figcaption><b>그림 13.</b> Dennard scaling의 규칙(왼쪽)과, 전압을 더 못 내리게 된 뒤의 전력밀도(오른쪽, 모형 계산, 세로축은 로그 눈금). $V$가 고정되면 $f \cdot C / A \propto \kappa^2$이라 세대마다 약 2배, 4세대면 약 15배로 오른다. 실제 공정의 세대별 $\kappa$·전압 값은 다루지 않으며 식의 구조만 보는 그림이다. <span class="prov">Claude가 계산해 그림.</span></figcaption></figure>
+<p>Dennard의 규칙은 트랜지스터의 치수(게이트 길이·폭·산화막 두께)를 <span class="math inline">\(1/\kappa\)</span>로 줄일 때 전압도 <span class="math inline">\(1/\kappa\)</span>로 함께 줄이고 도핑을 <span class="math inline">\(\kappa\)</span>배로 늘리면, 회로 하나의 <span class="math inline">\(C\)</span>도 <span class="math inline">\(1/\kappa\)</span>, 회로 하나가 차지하는 면적 <span class="math inline">\(A\)</span>는 <span class="math inline">\(1/\kappa^2\)</span>, 신호가 안정되는 지연은 <span class="math inline">\(1/\kappa\)</span>로 짧아진다는 것입니다. 지연이 짧아진 만큼 클록 <span class="math inline">\(f\)</span>를 <span class="math inline">\(\kappa\)</span>배 올려도 회로 하나의 <span class="math inline">\(P\)</span>는 <span class="math inline">\(1/\kappa^2\)</span>이라, <span class="math inline">\(P/A\)</span>가 일정합니다. 그림 13(a)의 표가 그 계산입니다. 여기서 <span class="math inline">\(\kappa\)</span>는 <strong>축소 배율</strong>(scaling factor)이고(Day 1–2 1-2에서 같은 글자로 쓴 '게이트 전압이 장벽을 낮추는 비율'과 다른 양), 한 세대를 <span class="math inline">\(\kappa \approx 1.4\)</span>로 잡는 것은 <span class="math inline">\(1.4^2 \approx 2\)</span>라서 회로 하나의 면적이 절반, 같은 면적에 넣는 회로 수가 2배가 되기 때문입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d02/fig4-dennard.svg" alt="Dennard scaling에서 전압·정전용량·클록·면적이 세대마다 어떻게 바뀌어 전력밀도가 일정한지와, 전압이 고정된 뒤 전력밀도가 세대마다 약 2배로 오르는 모형 곡선." class="figure-img"><figcaption><b>그림 13.</b> Dennard scaling의 규칙과 그 끝. <b>(a)</b> 한 세대마다 치수를 1/κ로 줄일 때 각 양의 변화. <b>(b)</b> 전압을 더 못 내리게 된 뒤의 전력밀도(모형 계산, 세로축은 로그 눈금). $V$가 고정되면 $f \cdot C / A \propto \kappa^2$이라 세대마다 약 2배, 4세대면 약 15배로 오른다. 실제 공정의 세대별 $\kappa$·전압 값은 다루지 않으며 식의 구조만 보는 그림이다. <span class="prov">Claude가 계산해 그림.</span></figcaption></figure>
 <p><span id="dennard-example"></span> <strong>작은 예시.</strong> <span class="math inline">\(\kappa = 1.4\)</span>면 한 세대에 <span class="math inline">\(V^2\)</span>은 <span class="math inline">\(1/1.96\)</span>, <span class="math inline">\(C\)</span>는 <span class="math inline">\(1/1.4\)</span>, <span class="math inline">\(f\)</span>는 1.4배. 곱하면 <span class="math inline">\(P\)</span>는 <span class="math inline">\((1/1.96) \times (1/1.4) \times 1.4 = 1/1.96\)</span>, 면적도 <span class="math inline">\(1/1.96\)</span>이니 <span class="math inline">\(P/A\)</span>는 1(그대로). 전압을 못 내리면 <span class="math inline">\(V^2\)</span> 항이 1이 되어 <span class="math inline">\(P/A\)</span>는 <span class="math inline">\(1.4 \times (1/1.4) / (1/1.96) = 1.96\)</span>배. 네 세대면 <span class="math inline">\(1.96^4 \approx 15\)</span>배입니다. 칩은 그 열을 못 견딥니다.</p>
 <p><span id="why-no-lower-v"></span> <strong>왜 전압을 못 내리게 되었나.</strong> <a href="../days/d01a.html#ch-origin">Day 1 1-7</a>의 사슬을 짧게 다시 적습니다.</p>
 <ol type="1">
-<li>켜진 트랜지스터가 충분한 전류를 내야 출력을 빨리 충방전할 수 있으므로, 공급전압 <span class="math inline">\(V_{DD}\)</span>는 문턱전압 <span class="math inline">\(V_{th}\)</span>(트랜지스터가 켜졌다고 보는 기준 전압)보다 넉넉히 커야 합니다. 그래서 <span class="math inline">\(V_{DD}\)</span>를 내리려면 <span class="math inline">\(V_{th}\)</span>도 함께 내려야 합니다.</li>
+<li>켜진 트랜지스터가 충분한 전류를 내야 출력을 빨리 충방전할 수 있으므로, 공급전압 <span class="math inline">\(V_{DD}\)</span>는 문턱전압(threshold voltage) <span class="math inline">\(V_{th}\)</span>(트랜지스터가 켜졌다고 보는 기준 전압)보다 넉넉히 커야 합니다. 그래서 <span class="math inline">\(V_{DD}\)</span>를 내리려면 <span class="math inline">\(V_{th}\)</span>도 함께 내려야 합니다.</li>
 <li>그런데 꺼진 트랜지스터(<span class="math inline">\(V_{GS} = 0\)</span>)에도 <a href="../days/d01a.html#b-transistor">문턱 아래 전류</a>가 흐르고, <span class="math inline">\(V_{th}\)</span>를 낮출수록 이 전류가 지수적으로 커집니다. 실온에서는 열에너지 때문에 이상적인 경우에도 <span class="math inline">\(V_{th}\)</span>를 약 60 mV 낮출 때마다 10배(잘 만든 실제 소자는 약 70–90 mV마다 10배)가 되며, 이 한계는 소자를 작게 만들어도 줄지 않습니다. <span class="src">del Alamo 2007 (MIT OCW), 강의 29, 슬라이드 13</span></li>
 <li>작은 누설도 수가 많으면 비용입니다. Day 1–2의 어림(65 nm 공정 대표값을 쓴 계산 <span class="prov">Claude 계산</span>)에서는 꺼져 있는 트랜지스터 10억 개가 <span class="math inline">\(V_{th}\)</span> = 0.4 V일 때 아무 계산도 하지 않고 약 1 W를 쓰고, <span class="math inline">\(V_{th}\)</span>를 0.3 V로 0.1 V만 낮추면 약 10 W가 됐습니다. <span class="src">Harris E158 강의 7, 슬라이드 23</span> 누설은 <span class="math inline">\(\alpha\)</span>나 <span class="math inline">\(f\)</span>와 무관하게 늘 흐르는 정적 전력입니다.</li>
-<li>그래서 <span class="math inline">\(V_{th}\)</span>와 <span class="math inline">\(V_{DD}\)</span>를 계속 내리지 못했고, <span class="math inline">\(V\)</span>를 그대로 둔 채 <span class="math inline">\(f\)</span>를 올리면 위 계산처럼 전력밀도가 세대마다 약 2배가 됩니다. 칩을 식히는 장치가 감당하는 열에는 상한이 있으므로(아래 추세 그래프에서 칩 전력이 100 W 근처에서 멈춘 것), 결국 <span class="math inline">\(f\)</span>를 멈췄습니다. <span class="tag tag-interp">해석</span></li>
+<li><span class="key">그래서 문턱전압과 공급전압을 계속 내리지 못했고, 전압 <span class="math inline">\(V\)</span>를 그대로 둔 채 클록 <span class="math inline">\(f\)</span>를 올리면 위 계산처럼 전력밀도가 세대마다 약 2배가 됩니다.</span> 칩을 식히는 장치가 감당하는 열에는 상한이 있으므로(아래 추세 그래프에서 칩 전력이 100 W 근처에서 멈춘 것), 결국 <span class="math inline">\(f\)</span>를 멈췄습니다. <span class="tag tag-interp">해석</span></li>
 </ol>
 <p>결과는 폴더 리뷰에 적혀 있습니다. Roadmap은 "디지털 프로세서의 클록은 CMOS 노드가 계속 줄어드는데도 수 GHz에서 정체했다"고 쓰고 <span class="src">Roadmap 2026, p.8114</span>, "무어의 법칙이 물리적·경제적 한계에 다가가 기존 스케일링만으로는 필요한 개선을 못 낸다"고 씁니다. <span class="src">Roadmap 2026, p.8102</span> Jiang도 AI의 연산 수요가 무어의 법칙에 의한 칩 성능 개선을 크게 앞지른다고 씁니다. <span class="src">Jiang 2026, p.1110</span></p>
-<p>그 뒤 산업은 클록 대신 한 칩에 넣는 코어(연산기 묶음) 수를 늘렸고(<strong>멀티코어</strong>), 특정 계산만 잘하도록 만든 전용 칩(<strong>가속기</strong>: <a href="../days/d02a.html#b-cpu-gpu" class="recall">GPU</a>, 신경망 전용인 NPU)으로 갔습니다. 그래도 벽은 남습니다. 코어를 늘려도 칩 전체를 동시에 켜면 열을 못 견디므로, 일부만 켜고 나머지는 꺼 둬야 합니다(<span class="math inline">\(\alpha\)</span>를 낮추는 것). 꺼 둔 부분을 "어두운 실리콘(dark silicon)"이라 부릅니다. <span class="tag tag-unverified">미확인</span> <span class="prov">용어의 출처 문헌은 대조하지 않음</span> 이 지점에서 뇌의 방식, 즉 <strong>낮은 전압·낮은 주파수·높은 병렬성·낮은 활동률</strong>이 대안으로 거론됩니다. Aluru 리뷰가 뇌를 "수십 Hz, 약 100 mV 스파이크"로, 디지털을 "GHz, 1 V 이상"으로 대비하며 <span class="math inline">\(P \sim f \cdot C \cdot V^2\)</span>을 적는 맥락이 이것입니다. <span class="src">Aluru 2026, p.592</span> 다만 이 식은 같은 <span class="math inline">\(C\)</span>·같은 <span class="math inline">\(\alpha\)</span>에서의 가상 비교일 뿐, 작업당 에너지의 우위를 증명하지 않습니다. 뇌가 느린 만큼 일을 덜 하고, 그만큼 병렬성과 희소성(한 번에 일부 신경세포만 활동하는 것, <a href="../days/d01b.html#ch-branches">Day 2 (나)</a>)으로 메우기 때문입니다. 이 조건을 Day 5–6에서 하나씩 따집니다.</p>
+<p>그 뒤 산업은 클록 대신 한 칩에 넣는 코어(연산기 묶음) 수를 늘렸고(<strong>멀티코어</strong>), 특정 계산만 잘하도록 만든 전용 칩(<strong>가속기</strong>, accelerator: <a href="../days/d02a.html#b-cpu-gpu" class="recall">GPU</a>, 신경망 전용인 NPU)으로 갔습니다. 그래도 벽은 남습니다. 코어를 늘려도 칩 전체를 동시에 켜면 열을 못 견디므로, 일부만 켜고 나머지는 꺼 둬야 합니다(<span class="math inline">\(\alpha\)</span>를 낮추는 것). 꺼 둔 부분을 "어두운 실리콘(dark silicon)"이라 부릅니다. <span class="tag tag-unverified">미확인</span> <span class="prov">용어의 출처 문헌은 대조하지 않음</span> 이 지점에서 뇌의 방식, 즉 <strong>낮은 전압·낮은 주파수·높은 병렬성·낮은 활동률</strong>이 대안으로 거론됩니다. Aluru 리뷰가 뇌를 "수십 Hz, 약 100 mV 스파이크"로, 디지털을 "GHz, 1 V 이상"으로 대비하며 <span class="math inline">\(P \sim f \cdot C \cdot V^2\)</span>을 적는 맥락이 이것입니다. <span class="src">Aluru 2026, p.592</span> <span class="key">다만 이 식은 같은 조건에서의 가상 비교일 뿐, 작업당 에너지의 우위를 증명하지 않습니다.</span> 뇌가 느린 만큼 일을 덜 하고, 그만큼 병렬성과 희소성(한 번에 일부 신경세포만 활동하는 것, <a href="../days/d01b.html#ch-branches">Day 2 (나)</a>)으로 메우기 때문입니다. 이 조건을 Day 5–6에서 하나씩 따집니다.</p>
 <figure class="fig photo figure"><img src="../assets/img/web/d02-cpu-trend-50y.png" alt="1970–2021년 마이크로프로세서 추세 그래프(로그 세로축). 주황 삼각형 트랜지스터 수는 끝까지 오르고, 초록 네모 클록 주파수(MHz)는 2005년 무렵부터 수천 MHz에서 평평해지며, 빨간 역삼각형 전력(W)도 100 W 근처에서 멈추고, 검은 마름모 코어 수는 2005년 무렵부터 오르기 시작한다" loading="lazy" class="figure-img"><figcaption><b>실제 데이터.</b> 50년 동안의 마이크로프로세서 추세(Karl Rupp 정리, 2010년까지는 M. Horowitz 등이 모은 값). <b>볼 것 (읽는 순서):</b> ① 초록 네모(클록 주파수, MHz)가 2005년 무렵 약 3,000 MHz(3 GHz)에서 꺾여 평평해진다 — 위에서 말한 "클록은 수 GHz에서 정체". ② 같은 시기 빨간 역삼각형(전형적 전력, W)도 100 W 근처에서 더 오르지 않는다 — 냉각의 상한. ③ 그런데 주황 삼각형(트랜지스터 수)은 계속 오른다. 늘어난 트랜지스터를 클록 대신 ④ 검은 마름모(코어 수)에 썼다는 것이 바로 위 문단의 '멀티코어'다. 세로축은 로그(한 칸이 10배)다. 이 그래프는 Dennard scaling의 끝을 간접적으로 보여 줄 뿐, 전압 값 자체는 그려져 있지 않다. 출처: Karl Rupp, <a href="https://commons.wikimedia.org/wiki/File:50_Years_Of_Microprocessor_Trend_Data.png" target="_blank">Wikimedia Commons</a>, CC BY 4.0 (데이터: github.com/karlrupp/microprocessor-trend-data).</figcaption></figure>
-<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/dK66mV6RU5Q?start=0&amp;rel=0" title="영상: 4 dennard scaling" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–7:36, 약 8분, 영어).</b> David Black-Schaffer(Uppsala 대학 교수, 컴퓨터 구조 강의 시리즈), "4 dennard scaling". 슬라이드 강의다. <b>볼 이유:</b> 챕터가 이 구간의 순서와 같다. 1:12 Dennard가 1974년에 본 규칙(치수 1/κ), 2:46 Moore의 법칙과 합쳐진 결과, 4:46 'Why Dennard scaling ended'(트랜지스터는 계속 작아지는데 무엇이 안 되나), 6:13 그 결과. 그림 13의 왼쪽 표와 나란히 보면 좋다. 조회 수가 적은 개인 강의 채널이라는 점은 감안할 것. <b>보고 답할 질문:</b> 영상이 꼽는 "끝난 이유"는 이 구간이 말한 누설 전류·문턱전압 이야기와 같은가, 다른 것을 더 드는가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/dK66mV6RU5Q?start=0&amp;rel=0" title="영상: 4 dennard scaling" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–7:36, 약 8분, 영어).</b> David Black-Schaffer(Uppsala 대학 교수, 컴퓨터 구조 강의 시리즈), "4 dennard scaling". 슬라이드 강의다. <b>볼 이유:</b> 챕터가 이 구간의 순서와 같다. 1:12 Dennard가 1974년에 본 규칙(치수 1/κ), 2:46 Moore의 법칙과 합쳐진 결과, 4:46 'Why Dennard scaling ended'(트랜지스터는 계속 작아지는데 무엇이 안 되나), 6:13 그 결과. 그림 13(a)의 표와 나란히 보면 좋다. 조회 수가 적은 개인 강의 채널이라는 점은 감안할 것. <b>보고 답할 질문:</b> 영상이 꼽는 "끝난 이유"는 이 구간이 말한 누설 전류·문턱전압 이야기와 같은가, 다른 것을 더 드는가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
 <div class="quiz" data-day="d02" data-set="6-check"></div>
 <div class="think">
 <p>"뇌는 100 mV, 수십 Hz로 동작하니 디지털보다 유리하다"는 문장에 "같은 일을 하는 데"라는 조건을 붙이면 무엇이 달라지나요? <span class="math inline">\(P\)</span>(전력)가 작은 것과 <span class="math inline">\(E\)</span>(작업당 에너지)가 작은 것은 같은 말인가요? 내 답에 쓸 한 문장을 지금 적어 두세요. Day 5–6에서 이 문장을 검증합니다.</p>
@@ -1189,7 +1220,7 @@ Dennard scaling
 <div class="goal">
 <p>이 구간을 읽고 나면 오늘 본 것을 세 벽으로 묶고, 지난 학습의 줄기들이 각각 어느 벽을 공격하는지, 그 대가가 무엇인지 한 줄씩 말할 수 있다.</p>
 </div>
-<p>오늘 본 것을 세 벽으로 묶습니다. 이해를 위한 분류이고 서로 겹칩니다. 표의 마지막 열은 지난 학습의 네 줄기를 가리킵니다. 짧게 다시 적으면 (가) 아날로그 회로의 물리로 계산, (나) 디지털이지만 코어마다 메모리를 붙이고 사건이 올 때만 일하는 칩, (다) 메모리 배열 안에서 곱해 더하기(crossbar), (라) 재료의 동역학을 계산 자원으로 쓰기(물리 reservoir computing)입니다. 표의 '양자화'는 가중치를 더 적은 비트로 반올림해 적는 것입니다(5-4의 낮은 정밀도와 같은 생각이고, 층마다 다른 정밀도를 섞어 쓰는 것을 혼합 정밀도라 합니다).</p>
+<p>오늘 본 것을 세 벽으로 묶습니다. 이해를 위한 분류이고 서로 겹칩니다. 표의 마지막 열은 지난 학습의 네 줄기를 가리킵니다. 짧게 다시 적으면 (가) 아날로그 회로의 물리로 계산, (나) 디지털이지만 코어마다 메모리를 붙이고 사건이 올 때만 일하는 칩, (다) 메모리 배열 안에서 곱해 더하기(crossbar), (라) 재료의 동역학을 계산 자원으로 쓰기(물리 reservoir computing)입니다. 표의 '양자화'는 가중치를 더 적은 비트로 반올림해 적는 것입니다(5-4의 낮은 정밀도와 같은 생각이고, 층마다 다른 정밀도를 섞어 쓰는 것을 혼합 정밀도(mixed precision)라 합니다).</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1226,24 +1257,24 @@ Dennard scaling
 </tr>
 </tbody>
 </table>
-<p><strong>벽 ③을 숫자로.</strong> 정밀도에 왜 비용이 붙을까요? 숫자 하나에 비트가 많을수록 그 숫자를 나르는 선과 다루는 회로가 커지기 때문입니다. 그림 9와 같은 Horowitz 표(45 nm·0.9 V)에서 정수 덧셈은 8 bit 0.03 pJ, 32 bit 0.1 pJ이고, 정수 곱셈은 8 bit 0.2 pJ, 32 bit 3.1 pJ입니다. <span class="src">Horowitz 2014, p.14</span> 비트 수를 4배로 늘리면 덧셈은 약 3배, 곱셈은 약 15배가 됩니다. 곱셈 회로는 손 곱셈처럼 한 자리씩 곱한 줄을 비트 수만큼 더하므로(Day 1–2 1-6) 비트 수가 늘면 회로가 훨씬 빨리 커집니다 <span class="tag tag-interp">해석</span>. 옮기는 양도 비트 수에 비례합니다(8 bit 가중치는 32 bit의 4분의 1 byte). 이것이 5-4의 낮은 정밀도와 표의 양자화가 노리는 절약입니다. 아날로그 쪽에서는 비용이 다른 곳에서 청구됩니다. 소자의 아날로그 전류·전압을 숫자로 바꾸는 ADC(아래 원문 그림 설명)는 비트가 하나 늘 때마다 구별해야 할 단계 수가 2배가 되므로(8 bit = 256단계, 10 bit = 1,024단계) 정밀할수록 크고 느리고 전력을 많이 씁니다(Day 30–31) <span class="tag tag-interp">해석</span>.</p>
-<figure class="fig figure"><img src="../assets/img/d02/fig5-three-walls.svg" alt="데이터 이동, 전력밀도, 정밀도라는 세 벽과 각각에 대한 뉴로모픽 줄기의 대응을 세 상자로 정리한 모식도." class="figure-img"><figcaption><b>그림 14.</b> 세 가지 벽과 뉴로모픽 줄기의 대응. 분류는 이해용이며 서로 겹친다. 각 처방의 대가(정밀도, 프로그램 가능성, 주변회로)는 Day 5–9에서 조건별로 따진다. 분류 모식도. <span class="prov">Claude가 그림.</span></figcaption></figure>
+<p><strong>벽 ③을 숫자로.</strong> 정밀도에 왜 비용이 붙을까요? 숫자 하나에 비트가 많을수록 그 숫자를 나르는 선과 다루는 회로가 커지기 때문입니다. 그림 9와 같은 Horowitz 표(45 nm·0.9 V)에서 정수 덧셈은 8 bit 0.03 pJ, 32 bit 0.1 pJ이고, 정수 곱셈은 8 bit 0.2 pJ, 32 bit 3.1 pJ입니다. <span class="src">Horowitz 2014, p.14</span> 비트 수를 4배로 늘리면 덧셈은 약 3배, 곱셈은 약 15배가 됩니다. 곱셈 회로는 손 곱셈처럼 한 자리씩 곱한 줄을 비트 수만큼 더하므로(Day 1–2 1-6) 비트 수가 늘면 회로가 훨씬 빨리 커집니다 <span class="tag tag-interp">해석</span>. 옮기는 양도 비트 수에 비례합니다(8 bit 가중치는 32 bit의 4분의 1 byte). 이것이 5-4의 낮은 정밀도와 표의 양자화가 노리는 절약입니다. 아날로그 쪽에서는 비용이 다른 곳에서 청구됩니다. 소자의 아날로그 전류·전압을 숫자로 바꾸는 ADC(아래 원문 그림 설명)는 비트가 하나 늘 때마다 구별해야 할 단계 수가 2배가 되므로(8 bit = 256단계, 10 bit = 1,024단계) 정밀할수록 크고 느리고 전력을 많이 씁니다(Day 31–32) <span class="tag tag-interp">해석</span>.</p>
+<figure class="fig figure"><img src="../assets/img/d02/fig5-three-walls.svg" alt="데이터 이동, 전력밀도, 정밀도라는 세 벽과 각각에 대한 뉴로모픽 줄기의 대응을 세 상자로 정리한 모식도." class="figure-img"><figcaption><b>그림 14.</b> 세 가지 벽과 뉴로모픽 줄기의 대응. 분류는 이해용이며 서로 겹친다. 각 처방의 대가(정밀도, 프로그램 가능성, peripheral circuit)는 Day 5–9에서 조건별로 따진다. 분류 모식도. <span class="prov">Claude가 그림.</span></figcaption></figure>
 <p><strong>원문 그림을 읽기 전에.</strong> 아래 Jiang 2026의 그림은 두 패널입니다. 왼쪽 a는 1-2구간 그림 2(Day 3)의 "메모리 ↔︎ 연산기" 구조를 신경망 관점에서 그린 것으로, 가운데 화살표에 'von Neumann bottleneck'이라고 적혀 있습니다. 오른쪽 b는 지난 학습의 crossbar입니다. 이 그림에서는 왼쪽에서 화살표가 들어가는 위층 막대에 입력 전압 <span class="math inline">\(V\)</span>가 걸리고, 두 층이 겹치는 기둥(소자)이 가중치(전도도 <span class="math inline">\(G_{ij}\)</span>)이며, 앞쪽으로 뻗은 아래층 막대에서 전류 <span class="math inline">\(I\)</span>가 모입니다. 지난 학습에서 그림과 가로·세로가 바뀌어 그려졌지만, 어느 줄을 입력으로 쓰느냐는 그리는 방식의 차이일 뿐 같은 계산입니다. 두 패널에서 <strong>가중치 <span class="math inline">\(w\)</span>가 어디에 있는지</strong>를 비교하는 것이 읽는 요령입니다.</p>
 <figure class="fig paper figure"><img src="../assets/img/papers/jiang2026-fig1ab.png" alt="Jiang 2026 Fig. 1a·b: 왼쪽은 von Neumann 구조에서 가중치가 메모리에서 연산기로 올라오는 병목, 오른쪽은 crossbar 안에서 행렬–벡터 곱을 끝내는 모습" class="figure-img"><figcaption><b>원문 그림.</b> Jiang et al., <a href="https://doi.org/10.1038/s41563-026-02600-y" target="_blank"><i>Nat. Mater.</i> 2026, 25, 1110–1124</a>, Fig. 1a·b, p.1111. 볼 것: <b>a</b>의 'von Neumann bottleneck' 화살표는 모든 덧셈의 왕복이 아니라 가중치 $w_{ij}$가 메모리에서 연산기로 계속 올라와야 하는 것(5구간의 배치 1 상황)이다. <b>b</b>에서는 그 이동이 crossbar 안으로 들어갔지만, 입력 전압 $V$를 만드는 쪽과 출력 전류 $I$를 숫자로 바꾸는 쪽이 그림 바깥에 남아 있다. 숫자를 전압으로 바꾸는 회로가 DAC(digital-to-analog converter), 전류·전압을 숫자로 바꾸는 회로가 ADC(analog-to-digital converter)이고, 둘 다 공짜가 아니다(바로 아래). <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
 <p><span id="walls-cost"></span> <strong>대가를 먼저 적어 둡니다.</strong> 폴더의 두 리뷰가 각각 한 줄씩 줍니다.</p>
 <ul>
-<li>Jiang(in-memory 쪽 리뷰)은 CIM이 "에너지 효율과 연산력에서 혁명적 이득"을 준다고 쓰면서도, 아날로그 계산의 잡음 민감성과 소자·회로의 비이상성이 오차를 만들고, 그 오차를 줄이는 기법들이 "하드웨어나 에너지 오버헤드를 끌어들여 CIM의 핵심 이점을 깎아 먹는다"고 같은 초록에 적습니다. <span class="src">Jiang 2026, p.1110</span> 즉 벽 ①을 줄이는 대가가 벽 ③에서 청구됩니다.</li>
-<li>Roadmap은 큰 시스템에서 배열 바깥의 주변회로(특히 고정밀 ADC/DAC, 즉 숫자↔︎아날로그 변환기)가 전체 시스템 전력의 최대 70%까지 차지할 수 있다고 씁니다. <span class="src">Roadmap 2026, p.8130</span> 이 수치는 그 리뷰가 인용한 문헌 기준이며, 어떤 시스템에서 측정한 것인지는 원문 참고문헌을 봐야 합니다.</li>
+<li>Jiang(in-memory 쪽 리뷰)은 CIM이 "에너지 효율과 연산력에서 혁명적 이득"을 준다고 쓰면서도, 아날로그 계산의 잡음 민감성과 소자·회로의 비이상성이 오차를 만들고, 그 오차를 줄이는 기법들이 "하드웨어나 에너지 오버헤드를 끌어들여 CIM의 핵심 이점을 깎아 먹는다"고 같은 초록에 적습니다. <span class="src">Jiang 2026, p.1110</span> <span class="key">즉 벽 ①을 줄이는 대가가 벽 ③에서 청구됩니다.</span></li>
+<li>Roadmap은 큰 시스템에서 배열 바깥의 peripheral circuit(특히 고정밀 ADC/DAC, 즉 숫자↔︎아날로그 변환기)가 전체 시스템 전력의 최대 70%까지 차지할 수 있다고 씁니다. <span class="src">Roadmap 2026, p.8130</span> 이 수치는 그 리뷰가 인용한 문헌 기준이며, 어떤 시스템에서 측정한 것인지는 원문 참고문헌을 봐야 합니다.</li>
 </ul>
 <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/5tmGKTNW8DQ?start=452&amp;rel=0" title="영상: AI's Hardware Problem" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 7:32–11:34, 약 4분 · 전체 17분, 영어).</b> Asianometry, "AI's Hardware Problem" (2022). 반도체 산업을 다루는 해설 채널이다. <b>볼 이유:</b> 시작을 7:32 'Compute in Memory' 챕터에 맞춰 두었다. 이어지는 10:10 'Practical Shortcomings'가 바로 위 두 리뷰가 말한 대가(아날로그 오차, 변환 회로)를 산업 쪽 말로 다시 말한다. 앞부분 1:02 'The Von Neumann Computer'와 4:57 'Memory Scaling'은 2·5구간의 복습이라 시간이 있으면 처음부터 봐도 된다. <b>보고 답할 질문:</b> 영상이 드는 in-memory 계산의 현실적 약점 가운데 이 구간의 벽 ③(정밀도의 비용)에 해당하는 것은 무엇인가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
-<p>그러니 오늘 질문 "왜 기존 컴퓨터만으로 충분하지 않은가"의 정직한 답은 "충분하지 않은 계산이 <strong>있다</strong>"입니다. 큰 배치로 돌릴 수 있는 계산은 보통 컴퓨터가 재사용으로 벽 ①을 꽤 눌러 놓았고, 벽 ②는 모두에게 공통입니다. 기존 컴퓨터가 특히 불리할 수 있는 자리는 <strong>입력 벡터를 모아 기다릴 수 없고(<a href="#rt-scenes">5-5의 장면</a>), 가중치나 과거 이력이 칩 안에 머물기 어려울 만큼 커서 재사용 없이 계속 가져와야 하며, 정밀도를 조금 양보해도 되는 계산</strong>입니다. 세 조건이 함께 맞는지, 그리고 같은 조건의 디지털 기준선보다 나은지는 응용마다 따로 확인해야 합니다(<a href="#rt-baseline">5-5의 비교 조건</a>). <span class="tag tag-interp">해석</span> 이 조건은 Day 9의 "어떤 문제에 적합한가"로 그대로 이어집니다.</p>
+<p><span class="key">그러니 오늘 질문 "왜 기존 컴퓨터만으로 충분하지 않은가"의 정직한 답은 "충분하지 않은 계산이 <strong>있다</strong>"입니다.</span> 큰 배치로 돌릴 수 있는 계산은 보통 컴퓨터가 재사용으로 벽 ①을 꽤 눌러 놓았고, 벽 ②는 모두에게 공통입니다. 기존 컴퓨터가 특히 불리할 수 있는 자리는 <strong>입력 벡터를 모아 기다릴 수 없고(<a href="#rt-scenes">5-5의 장면</a>), 가중치나 과거 이력이 칩 안에 머물기 어려울 만큼 커서 재사용 없이 계속 가져와야 하며, 정밀도를 조금 양보해도 되는 계산</strong>입니다. 세 조건이 함께 맞는지, 그리고 같은 조건의 디지털 기준선보다 나은지는 응용마다 따로 확인해야 합니다(<a href="#rt-baseline">5-5의 비교 조건</a>). <span class="tag tag-interp">해석</span> 이 조건은 Day 9의 "어떤 문제에 적합한가"로 그대로 이어집니다.</p>
 <div class="myth">
 <p><strong>"데이터 이동이 병목이니 저장과 계산을 합치면 문제가 풀린다"</strong> — 반만 맞습니다. 합치면 가중치 이동은 줄지만, (1) 중간 결과는 여전히 배열 사이를 오가고 <span class="src">Roadmap 2026, p.8128</span>, (2) 아날로그 값을 디지털로 바꾸는 변환이 새 비용이 되며 <span class="src">Roadmap 2026, p.8130</span>, (3) 소자 오차를 보정하는 비용이 이득을 깎습니다 <span class="src">Jiang 2026, p.1110</span>. "주요 데이터 이동을 줄인다"까지가 폴더 원문이 뒷받침하는 문장입니다.</p>
 </div>
 <section id="오늘의-반론" class="level4">
 <h4 class="anchored" data-anchor-id="오늘의-반론">오늘의 반론</h4>
 <p>가장 강한 반론은 이것입니다. <strong>"세 벽은 데이터센터의 문제다. 내가 만드는 cm 크기 하이드로겔 소자 하나는 어차피 PC와 소스미터로 측정하고, 그 PC의 에너지가 소자보다 10¹⁰배 크다. 오늘 이야기는 내 연구와 무관하다."</strong></p>
-<p>이 반론은 상당 부분 맞습니다. 그래서 오늘 자료가 내 연구에 주는 것은 정당화가 아니라 <strong>질문의 형태</strong>입니다. 내 소자가 어떤 시스템에 들어갈 때, 그 시스템의 어느 벽을 줄이는지(①인지 ②인지), 그 자리의 입력이 정말 배치 1인지, 변환(ADC)과 보정 비용을 포함해도 이득이 남는지. 이 세 질문에 답할 수 없으면 "에너지 효율적"이라는 말을 논문 서론에 쓰지 않는 편이 정직합니다. 답은 Day 9와 Day 30–31에서 더 구체화합니다.</p>
+<p>이 반론은 상당 부분 맞습니다. 그래서 오늘 자료가 내 연구에 주는 것은 정당화가 아니라 <strong>질문의 형태</strong>입니다. 내 소자가 어떤 시스템에 들어갈 때, 그 시스템의 어느 벽을 줄이는지(①인지 ②인지), 그 자리의 입력이 정말 배치 1인지, 변환(ADC)과 보정 비용을 포함해도 이득이 남는지. 이 세 질문에 답할 수 없으면 "에너지 효율적"이라는 말을 논문 서론에 쓰지 않는 편이 정직합니다. 답은 Day 9와 Day 31–32에서 더 구체화합니다.</p>
 <div class="think">
 <p>세 벽 중 내 소자가 줄일 수 있는 벽은 어느 것인가요? 하나만 고르고, "그 대신 무엇을 잃는가"를 한 줄 적어 보세요. 고를 수 없다면 그것이 '아직 모르는 것'의 오늘 항목입니다.</p>
 </div>
@@ -1348,9 +1379,9 @@ Dennard scaling
 <section id="ledger-items" class="level3">
 <h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
 <ul>
-<li><strong>병목 장부:</strong> (응용이 요구하는 것) 기다릴 수 없는 입력(촉각 수 ms, 생체 신호·가스 수 초)에서 필요한 과거 길이와 지연 예산 vs (메커니즘이 허용하는 것) 소자 상태에 과거 입력을 담아 두는 물리 RC의 이완 시간·잡음·히스테리시스. 둘이 맞는 조건과 디지털 기준선을 Day 9·Day 22–23에서 확인.</li>
-<li><strong>병목 장부:</strong> in-memory가 줄인 이동 에너지 vs 새로 생기는 ADC·보정 에너지(주변회로 최대 70% <span class="src">Roadmap 2026, p.8130</span>). 어느 쪽이 큰지는 시스템 규모와 정밀도에 달렸다.</li>
-<li><strong>아직 모르는 것:</strong> Horowitz 2014의 45 nm·0.9 V 값(메모리는 64 bit 읽기)이 최신 공정과 HBM에서 얼마나 달라지는가. / 내 응용에서 입력을 얼마나 기다릴 수 있고, 디지털 기준선이 가중치를 칩 안에 둘 수 있는가. / 소자 fJ와 시스템 J 사이에 무엇이 끼어 있나(Day 30–31).</li>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 기다릴 수 없는 입력(촉각 수 ms, 생체 신호·가스 수 초)에서 필요한 과거 길이와 지연 예산 vs (메커니즘이 허용하는 것) 소자 상태에 과거 입력을 담아 두는 physical reservoir computing의 이완 시간·잡음·히스테리시스. 둘이 맞는 조건과 디지털 기준선을 Day 9·Day 23–24에서 확인.</li>
+<li><strong>병목 장부:</strong> in-memory가 줄인 이동 에너지 vs 새로 생기는 ADC·보정 에너지(peripheral circuit 최대 70% <span class="src">Roadmap 2026, p.8130</span>). 어느 쪽이 큰지는 시스템 규모와 정밀도에 달렸다.</li>
+<li><strong>아직 모르는 것:</strong> Horowitz 2014의 45 nm·0.9 V 값(메모리는 64 bit 읽기)이 최신 공정과 HBM에서 얼마나 달라지는가. / 내 응용에서 입력을 얼마나 기다릴 수 있고, 디지털 기준선이 가중치를 칩 안에 둘 수 있는가. / 소자 fJ와 시스템 J 사이에 무엇이 끼어 있나(Day 31–32).</li>
 <li><strong>용어집:</strong> 비트, 바이트, 디지털/아날로그, 트랜지스터, CMOS, CPU, GPU, 병렬, 레지스터, 캐시, RAM/DRAM, 지연, 대역폭, 가중치, 입력 벡터·샘플, 출력 벡터, 행렬, 원소, 완전연결, 행렬–벡터 곱, op, MAC, 누적값, 연산 밀도, 배치, 재사용, 타일링, 토큰, memory wall, memory-bound·compute-bound, 이완 시간, 히스테리시스, 클록, 활동률 α, Dennard scaling, 누설 전류, 전력밀도.</li>
 <li><strong>접는 기준 후보:</strong> "내 소자가 줄이는 벽을 하나도 지목하지 못하면 '에너지 효율'을 연구 동기로 쓰지 않는다."</li>
 </ul>
@@ -1365,7 +1396,7 @@ Dennard scaling
 <p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
 <ul>
 <li>Jiang 2026, <em>Nat. Mater.</em> 25, 1110–1124. p.1110 서론(데이터 왕복·memory wall·power wall, 그리고 오버헤드가 이점을 깎는다는 초록), p.1111 Fig. 1.</li>
-<li>Roadmap 2026, <em>ACS Nano</em> 20, 8102–8163. p.8102–8103(무어의 법칙 한계, GPT-3 에너지), p.8114(클록 정체), p.8128(배열 간 전송이 VMM 비용을 넘을 수 있음), p.8130(주변회로 70%), p.8131(재사용 전략).</li>
+<li>Roadmap 2026, <em>ACS Nano</em> 20, 8102–8163. p.8102–8103(무어의 법칙 한계, GPT-3 에너지), p.8114(클록 정체), p.8128(배열 간 전송이 VMM 비용을 넘을 수 있음), p.8130(peripheral circuit 70%), p.8131(재사용 전략).</li>
 <li>Kudithipudi 2025, <em>Nature</em> 637, 801–812. p.801(뉴로모픽의 다섯 이점), p.803(비동기 통신). 폴더의 Readable papers3에 있음.</li>
 <li>Aluru 2026, <em>Science</em> 392, 592–601. p.592의 <span class="math inline">\(P \sim f \cdot C \cdot V^2\)</span> 문단. Day 5–6의 출발점.</li>
 </ul>
@@ -1379,12 +1410,13 @@ Dennard scaling
 </ul>
 </section>
 </div>
-<script type="application/json" id="quiz-d02">{"_형식": "v2. 문항마다 id, ref(바로 필요한 설명·작은 예제의 앵커), refLabel(그곳의 짧은 이름). 오답 해설(why)은 '어떤 생각에서 헷갈렸는지'와 다시 볼 곳을 적는다.", "version": 2, "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "연산기는 계산 1번에 1 ns, 메모리에서 숫자 1개를 가져오는 데 4 ns가 걸립니다(가져오는 동안 앞 숫자는 계산할 수 있음). 계산 100번에 숫자 100개가 하나씩 필요하다면 ① 전체 시간은 대략 몇 ns일까요? ② 연산기만 2배 빠르게 하면 어떻게 될까요? 짐작이라도 숫자로 적고, 모르면 '모르겠음'이라고 적어도 됩니다. 1-1구간 실습에서 직접 바꿔 보며 확인합니다.", "items": [{"id": "d02-p01", "ref": "#b-cpu-gpu", "refLabel": "계산하는 부품: CPU와 GPU", "type": "mc", "q": "GPU가 CPU와 가장 크게 다른 점으로 맞는 것은?", "options": ["값을 저장하는 곳과 계산하는 곳이 한 자리에 붙어 있다", "아날로그 전압으로 계산한다", "단순한 연산기를 수천 개 두고 같은 계산을 동시에 시킨다", "공통 박자(클록) 없이 움직인다"], "a": 2, "why": "GPU는 단순한 연산기 수천 개가 같은 계산을 동시에(병렬) 합니다. 데이터 전체는 여전히 칩 밖 메모리에 있어서 저장과 계산이 떨어져 있다는 점은 CPU와 같습니다. '병렬이면 저장·계산도 붙어 있다'고 섞기 쉽습니다(1-2구간 기초: CPU와 GPU)."}, {"id": "d02-p02", "ref": "#lat-bw", "refLabel": "'느리다'의 두 가지 뜻: 지연과 대역폭", "type": "ox", "q": "메모리에서 값 하나를 받기까지 걸리는 시간이 짧은 메모리는, 1초에 옮길 수 있는 데이터 양도 반드시 많다.", "a": false, "why": "한 번 받을 때까지의 시간(지연)과 1초에 옮기는 양(대역폭)은 따로 노는 두 양입니다. 차선을 늘리면 한꺼번에 많이 옮기지만 톨게이트 대기 시간은 그대로인 것과 같습니다(2구간)."}, {"id": "d02-p03", "ref": "#b-weight", "refLabel": "가중치: 입력마다 곱하는 숫자", "type": "mc", "q": "신경망이 하는 계산의 대부분을 이루는 것은?", "options": ["숫자들을 크기 순으로 정렬하기", "입력마다 가중치를 곱한 뒤 모두 더하기", "나눗셈과 제곱근 구하기", "두 값이 같은지 참·거짓으로 비교하기"], "a": 1, "why": "신경망 층의 출력은 '입력 × 가중치'를 모두 더한 값이고, 이것을 표(행렬)로 묶은 것이 행렬–벡터 곱입니다. 그래서 신경망 하드웨어의 질문은 결국 이 곱해서 더하기를 어디서 하느냐로 모입니다(3구간)."}, {"id": "d02-p04", "ref": "#ex-mac-count", "refLabel": "MAC 세기와 1,000×1,000으로 넓히기", "type": "short", "q": "입력 숫자 1,000개를 받아 출력 숫자 1,000개를 내는 신경망 층(모든 출력이 모든 입력과 이어짐)이 입력 벡터 하나(숫자 1,000개짜리 샘플 하나)를 처리할 때, 곱셈은 몇 번 필요할까? (숫자만)", "a": ["1000000", "1,000,000", "100만", "백만", "10^6", "10⁶", "1e6", "100만 번", "1000000번", "1,000,000번"], "why": "출력 하나마다 입력 1,000개에 각각 가중치를 곱하므로 1,000 × 1,000 = 100만 번입니다. 이때 가중치 100만 개(숫자 하나 4 byte면 4 MB)를 한 번씩 읽어야 한다는 점이 에너지·시간 이야기의 출발점입니다(3구간)."}, {"id": "d02-p05", "ref": "#fig-energy", "refLabel": "그림 9: 계산 1회와 가져오기 1회의 에너지", "type": "mc", "q": "32 bit 숫자 하나를 RAM(주기억장치)에서 읽어 오는 에너지는, 그 숫자로 덧셈 한 번 하는 에너지와 비교해 대략 어느 정도일까?", "options": ["덧셈의 100분의 1 정도", "덧셈과 거의 같다", "덧셈의 약 10배", "덧셈의 약 1만 배"], "a": 3, "why": "Horowitz 2014의 45 nm 값(32 bit 덧셈 0.1 pJ, RAM 64 bit 읽기 1.3–2.6 nJ)으로 RAM 읽기는 덧셈의 약 10⁴배입니다. 2014년 공정 값이라 자릿수가 요점입니다. 그래서 계산 하나를 아무리 싸게 만들어도 값을 멀리서 가져오면 전체 에너지는 거의 줄지 않습니다(4구간)."}, {"id": "d02-p06", "ref": "#batch", "refLabel": "배치: 같은 W를 여러 입력 벡터에", "type": "mc", "q": "같은 가중치로 여러 입력 벡터(샘플)를 모아 한꺼번에 처리하면, 메모리에서 가져온 가중치 1바이트당 할 수 있는 연산 수는 어떻게 되나?", "options": ["모은 입력 벡터 수만큼 늘어난다", "처리 순서만 바뀌고 그대로다", "가져올 입력이 늘어 오히려 줄어든다", "벡터 안의 숫자 수만큼 늘어난다"], "a": 0, "why": "가중치를 한 번 가져와 칩 안에 둔 채 여러 입력 벡터에 돌려 쓰므로 연산 밀도(연산량 ÷ 이동량)가 모은 수(배치 B)만큼 오릅니다. '벡터 안의 숫자 수만큼'은 배치(벡터의 개수)와 입력 수(벡터 안의 숫자 수)를 섞은 것입니다. 단, 가중치가 칩 안에 머물 수 있어야 하고, 입력을 모아 기다릴 수 없는 실시간 계산에서는 이 방법을 쓰기 어렵습니다(5구간)."}, {"id": "d02-p07", "ref": "#why-no-lower-v", "refLabel": "왜 전압을 못 내리게 되었나", "type": "mc", "q": "2000년대 중반부터 컴퓨터 칩의 박자(클록)가 수 GHz에서 거의 오르지 않은 주된 이유로 맞는 것은?", "options": ["트랜지스터를 더 작게 만드는 공정이 더 이상 나오지 않아서", "전압을 더 못 내려, 박자를 올리면 면적당 열이 너무 커져서", "칩 안 신호가 빛의 속도보다 빨리 갈 수 없어서", "프로그램이 빠른 박자를 활용하지 못해서"], "a": 1, "why": "전압을 함께 내리던 동안은 박자를 올려도 면적당 열(전력밀도)이 그대로였습니다. 꺼져 있어도 새는 전류 때문에 전압을 더 못 내리자, 박자를 올릴 때마다 전력밀도가 세대마다 약 2배로 커졌습니다. 트랜지스터는 그 뒤에도 계속 작아졌으므로 '작게 못 만들어서'는 아닙니다(6구간)."}, {"id": "d02-p08", "ref": "#walls-cost", "refLabel": "세 벽: 저장과 계산을 합친 대가", "type": "mc", "q": "값을 저장하는 자리에서 바로 곱해 더하는(저장과 계산을 합친) 칩에 대한 설명으로 맞는 것은?", "options": ["칩 안에서 데이터를 옮기는 일이 더 이상 필요 없어진다", "아날로그로 곱하므로 계산 정밀도가 디지털보다 높아진다", "가중치 이동은 줄지만 변환·보정·중간 결과 전송 비용이 생긴다", "어떤 계산이든 기존 컴퓨터보다 에너지가 적게 든다"], "a": 2, "why": "합치면 가중치를 가져오는 이동은 줄지만, 배열 사이 중간 결과 전송, 아날로그 값을 디지털로 바꾸는 변환, 소자 오차 보정이 비용으로 남습니다. 정확한 말은 '이동이 없다'가 아니라 '주요 이동을 줄인다'입니다(7구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 예측 확인", "items": [{"id": "d02-q01", "ref": "#b-bit", "refLabel": "바이트와 '숫자 하나 = 4 byte' 약속", "type": "short", "q": "숫자 하나를 32 bit 형식으로 저장할 때, 숫자 100만 개는 몇 MB? (1 MB = 10⁶ byte, 숫자만)", "a": ["4", "4mb", "4 mb", "약 4", "4.0"], "why": "32 bit = 4 byte이므로 100만 × 4 byte = 400만 byte = 4 MB. '32 bit = 32 byte'로 헷갈렸다면 비트 8개가 1 byte라는 것을, '숫자가 크면 칸도 크다'고 생각했다면 저장 크기는 값이 아니라 형식이 정한다는 것을 다시 보세요(기초 계단: 비트와 바이트)."}, {"id": "d02-q02", "ref": "#b-memory-kinds", "refLabel": "저장 층의 크기 순서", "type": "mc", "q": "그 4 MB는 네 층 중 어디에 '편하게' 들어가나?", "options": ["레지스터", "L1 캐시", "RAM(DRAM)", "어디에도 안 들어간다"], "a": 2, "why": "레지스터는 수십 개, L1은 수십 kB라 4 MB는 안 들어가고, L2·L3는 제품에 따라 겨우 들어가거나 못 들어간다. RAM(수 GB)에는 넉넉히 들어간다. '캐시가 크다'고 생각했다면 기초 계단(저장하는 부품)의 크기 순서를 다시 보세요."}, {"id": "d02-q03", "ref": "#b-cpu-gpu", "refLabel": "계산하는 부품: CPU와 GPU", "type": "ox", "q": "GPU는 CPU와 달리 값을 연산기 안에 두고 계산하므로 저장과 계산이 떨어져 있지 않다.", "a": false, "why": "GPU도 값을 자기 메모리(칩 밖)에 두고 레지스터로 가져와 계산한다. CPU와 다른 점은 연산기의 수와 종류(단순한 것 수천 개, 병렬)이지 저장·계산의 분리가 아니다. '병렬 = 메모리 안에서 계산'으로 섞였다면 기초 계단(CPU와 GPU)을 다시."}]}, "2-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d02-q04", "ref": "#ex-3plus5", "refLabel": "3 + 5를 처리하는 다섯 단계", "type": "mc", "q": "3 + 5를 처리하는 다섯 단계 중 '계산'은 몇 단계인가?", "options": ["한 단계", "세 단계", "다섯 단계 모두", "0단계 (계산은 메모리가 한다)"], "a": 0, "why": "덧셈 회로가 8을 만드는 한 걸음(단계 4)만 계산이고 나머지는 옮기기다. '가져오기도 계산의 일부'라고 느꼈다면 맞는 직관이지만, 에너지·시간을 따질 때는 둘을 갈라 세야 한다(단계 보기 정리)."}, {"id": "d02-q05", "ref": "#lat-bw", "refLabel": "'느리다'의 두 가지 뜻: 지연과 대역폭", "type": "mc", "q": "고속도로에 차선을 두 배로 늘렸다. 무엇이 달라지나?", "options": ["지연이 반으로 줄어든다", "지연과 대역폭이 모두 두 배가 된다", "지연과 대역폭 모두 그대로다", "대역폭이 두 배가 되고 지연은 그대로다"], "a": 3, "why": "차선 = 1초에 옮길 수 있는 양(대역폭). 톨게이트 대기(지연)는 그대로다. 둘을 섞었다면 '느리다의 두 가지 뜻' 문단과 그림 3(Day 3)을 다시."}]}, "2-end": {"kind": "end", "title": "2구간 마무리", "items": [{"id": "d02-q06", "ref": "#myth-every-add", "refLabel": "흔한 오해: 더하기마다 RAM 왕복", "type": "ox", "q": "보통 컴퓨터는 더하기 한 번마다 숫자가 RAM을 왕복한다.", "a": false, "why": "레지스터의 값으로 계산하고 캐시가 RAM 접근을 걸러 준다. 이 문장이 참이라면 캐시가 있을 이유가 없다. 사전 테스트나 '먼저 만들어 보기'에 이렇게 썼다면 2구간의 '흔한 오해' 상자로."}, {"id": "d02-q07b", "ref": "#data-shuttling", "refLabel": "'잦은' 데이터 왕복의 조건", "type": "mc", "q": "보통 컴퓨터의 '데이터 이동 병목'을 가장 정확하게 표현한 것은?", "options": ["덧셈·곱셈 한 번마다 값이 RAM을 한 번씩 왕복하는 것", "연산기 안 트랜지스터가 켜지고 꺼지는 속도가 느린 것", "재사용 없이 큰 데이터를 먼 메모리에서 계속 가져와야 하는 것", "캐시가 RAM보다 커서 값을 찾는 데 오래 걸리는 것"], "a": 2, "why": "캐시가 대부분의 접근을 걸러 주므로 '모든 연산마다'는 틀리고, 재사용 없이 큰 데이터를 계속 가져올 때 왕복이 잦아진다. 캐시는 RAM보다 작다(1-2구간). 리뷰 원문은 이를 'frequent data shuttling'(잦은 데이터 왕복)이라 쓴다."}]}, "3-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기", "items": [{"id": "d02-q08", "ref": "#ex-2x2-mvm", "refLabel": "2×2 행렬–벡터 곱 손계산", "type": "short", "q": "[풀이 예시 확인] W의 행 1 = (1, 3), 입력 벡터 u = (1, 2). y1 = 1×1 + 3×2 = ? (숫자만)", "a": ["7", "7.0"], "why": "1×1 = 1, 3×2 = 6, 더하면 7. 행 1과 입력 벡터를 같은 자리끼리 곱해 더한다. 5가 나왔다면 입력을 (2, 1)로 둔 본문 예와 섞은 것."}, {"id": "d02-q09", "ref": "#ex-2x2-mvm", "refLabel": "2×2 행렬–벡터 곱 손계산", "type": "short", "q": "[일부 채우기] 같은 입력 벡터 u = (1, 2)에 행 2 = (2, 0.5). y2 = 2×1 + 0.5×▢ = ? 빈칸에 들어갈 숫자와 y2를 '빈칸,답' 꼴로 (예: 3,4)", "a": ["2,3", "2, 3", "2,3.0"], "why": "빈칸은 입력 벡터의 둘째 원소 u2 = 2 (행 2의 둘째 원소 W[2,2] = 0.5에 곱하는 자리). y2 = 2 + 1 = 3. 빈칸에 0.5를 넣었다면 '가중치끼리 곱한다'로 헷갈린 것 — 가중치는 입력에 곱한다."}, {"id": "d02-q10", "ref": "#b-matrix", "refLabel": "그림 5(Day 3): 행 = 출력, 열 = 입력", "type": "short", "q": "[혼자 풀기] 새 행렬 W = [[2, 1], [0, 4]], 입력 벡터 u = (3, 1). 출력 (y1, y2)를 '5,6' 꼴로", "a": ["7,4", "7, 4", "(7,4)", "(7, 4)"], "why": "y1 = 2×3 + 1×1 = 7, y2 = 0×3 + 4×1 = 4. 열을 세로로 읽어 (6, 7)이 나왔다면 '행 하나 = 출력 하나로 들어오는 선들'을 그림 5(Day 3)에서 다시."}, {"id": "d02-q11", "ref": "#ex-2x2-mvm", "refLabel": "손계산 단계 4: 가중치는 한 번씩만", "type": "mc", "q": "입력 벡터 하나(샘플 하나)를 처리할 때 가중치 원소 하나는 몇 번 쓰이나?", "options": ["입력 수만큼", "출력 수만큼", "0번", "1번"], "a": 3, "why": "원소 W[j,i]는 출력 j를 만들 때 u_i에 한 번 곱해지고 끝이다. 이 '한 번씩만'이 5구간에서 연산 밀도 0.5가 되는 이유다. '입력 수만큼'이나 '출력 수만큼'이라고 답했다면 여러 행에 반복해 쓰이는 입력 벡터와 가중치를 바꿔 생각한 것."}, {"id": "d02-q29", "ref": "#ex-mac-count", "refLabel": "그림 8(Day 3): 누적값 0부터 MAC 세기", "type": "short", "q": "[혼자 세기] 누적값 0에서 시작해 1 MAC = 2 op로 셀 때, 입력 숫자 3개 → 출력 숫자 2개 층(완전연결)이 입력 벡터 하나를 처리하면 몇 op? (숫자만)", "a": ["12", "12 op", "12op"], "why": "출력마다 입력 3개에 MAC 3번, 출력 2개라 MAC 6번 = 곱셈 6 + 덧셈 6 = 12 op. 10이 나왔다면 식의 + 기호(출력마다 2개)를 센 것 — 그 차이가 누적의 첫 덧셈 '0 +'다(3-3, 그림 8(Day 3))."}]}, "4-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d02-q12", "ref": "#b-energy-power", "refLabel": "에너지와 전력, 그리고 pJ", "type": "mc", "q": "'이 칩은 10 W'와 '이 덧셈은 0.1 pJ'. 두 숫자의 관계로 맞는 것은?", "options": ["둘 다 에너지라서 숫자 크기만 비교하면 된다", "10 W는 1초당 에너지, 0.1 pJ은 덧셈 한 번의 에너지다", "둘 다 전력이라서 단위 접두어만 맞추면 된다", "10 W는 칩 전체, 0.1 pJ은 트랜지스터 하나의 전력이다"], "a": 1, "why": "W = J/s(초당), pJ = 10⁻¹² J(일 하나). 10 W 칩이 덧셈만 한다면 초당 10 ÷ 10⁻¹³ = 10¹⁴번 할 수 있다는 식으로 잇는다. 둘을 같은 종류의 양으로 봤다면 기초 계단(에너지와 전력)을 다시."}, {"id": "d02-q13", "ref": "#ex-energy-mvm", "refLabel": "1,000×1,000 MVM의 에너지 단계 계산", "type": "short", "q": "MAC 1번 4 pJ, RAM 읽기 1,300 pJ. 가중치 100만 개를 RAM에서 한 번씩 읽는 MVM(입력 벡터 하나)에서 이동 에너지는 연산 에너지의 몇 배? (정수)", "a": ["325", "약 325", "325배"], "why": "연산 100만 × 4 pJ = 4 µJ, 이동 100만 × 1,300 pJ = 1.3 mJ, 비율 1,300/4 = 325. 13,000이 나왔다면 덧셈(0.1 pJ)과 MAC(4 pJ)을 섞은 것. 수치는 Horowitz 2014(45 nm) 값을 단순화한 어림이고 자릿수가 요점이다."}]}, "4-end": {"kind": "end", "title": "4구간 마무리", "items": [{"id": "d02-q15", "ref": "#think-device-system", "refLabel": "소자 에너지 vs 시스템 에너지", "type": "ox", "q": "소자 하나의 쓰기 에너지가 fJ이면 그 소자로 만든 시스템도 fJ 수준으로 동작한다.", "a": false, "why": "소자 에너지 ≠ 시스템 에너지. 4구간의 계산처럼 값을 읽고 옮기는 비용이 계산 자체보다 자릿수로 클 수 있고, 변환(ADC) 비용도 따로 든다(Day 30–31). '소자가 싸면 시스템도 싸다'는 오늘 자료 전체가 반박하는 생각이다."}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 연산 밀도와 배치", "items": [{"id": "d02-q31", "ref": "#ai-io", "refLabel": "가중치만 vs 입력·출력까지 센 연산 밀도", "type": "short", "q": "2×2 예제(숫자 하나 4 byte)에서 입력 벡터 하나를 처리할 때, 가중치·입력·출력 이동을 모두 세면 연산 밀도는 몇 op/byte? (숫자만)", "a": ["0.25", ".25", "1/4", "0.25 op/byte", "0.25op/byte"], "why": "연산 8 op, 이동 = 가중치 16 + 입력 8 + 출력 8 = 32 byte, 8 ÷ 32 = 0.25. 0.5가 나왔다면 가중치만 센 값이다. 작은 층에서는 입력·출력 이동이 가중치 이동만큼 커서 무시할 수 없다(5-1의 표)."}, {"id": "d02-q30", "ref": "#batch", "refLabel": "배치의 뜻과 그림 10", "type": "mc", "q": "'배치 4로 처리한다'는 말의 뜻으로 맞는 것은?", "options": ["입력 벡터 하나에 숫자가 4개 들어 있다", "같은 W로 서로 다른 입력 벡터 4개를 함께 처리한다", "가중치 행렬 W를 네 조각으로 잘라 차례로 쓴다", "출력 벡터 하나에서 숫자 4개를 한꺼번에 낸다"], "a": 1, "why": "배치는 함께 처리하는 입력 벡터(샘플)의 수다. 벡터 안의 숫자 수는 층의 입력 수 N이고, W를 조각내는 것은 타일링(5-4)이다. 그림 10에서 열의 개수(4)가 배치, 열 안의 숫자(2)가 입력 수다."}, {"id": "d02-q16", "ref": "#batch-table", "refLabel": "배치 1과 배치 4 비교 표", "type": "short", "q": "2×2 행렬(가중치 16 byte)로 입력 벡터 8개를 배치로 처리한다. W를 한 번만 가져와 칩 안에 둔다면, 가중치 이동만 센 연산 밀도는 몇 op/byte? (숫자만)", "a": ["4", "4.0", "4 op/byte"], "why": "연산량 = 벡터 8개 × 8 op = 64 op, 가중치 이동은 16 byte 한 번. 64 ÷ 16 = 4 = 0.5 × 8. 0.5가 나왔다면 배치에서도 가중치를 벡터마다 다시 가져온다고 본 것(표의 마지막 줄) — W가 칩 안에 남아 있을 때의 재사용이 요점."}]}, "5-end": {"kind": "end", "title": "5구간 마무리", "items": [{"id": "d02-q32", "ref": "#bound-device", "refLabel": "같은 계산, 다른 장치 (그림 12)", "type": "mc", "q": "연산 속도 10¹⁰ op/s, 대역폭 10¹² byte/s인 장치에서 배치 1인 1,000×1,000 MVM(연산 2×10⁶ op, 가중치 이동 4×10⁶ byte)의 시간을 정하는 쪽은?", "options": ["계산: 200 µs라 compute-bound", "전송: 4 µs라 memory-bound", "둘이 같아 경계에 있다", "0.5 op/byte라서 어느 장치든 memory-bound"], "a": 0, "why": "계산 2×10⁶ ÷ 10¹⁰ = 2×10⁻⁴ s = 200 µs, 전송 4×10⁶ ÷ 10¹² = 4 µs. 긴 쪽(계산)이 전체를 정하므로 compute-bound다. 이 장치의 경계는 10¹⁰ ÷ 10¹² = 0.01 op/byte라 0.5가 경계보다 높다. '0.5면 늘 memory-bound'는 장치를 빼고 계산만 본 오해다(그림 12의 장치 B)."}, {"id": "d02-q33", "ref": "#batch-conditions", "refLabel": "'한 번만 가져온다'의 조건", "type": "ox", "q": "배치가 1이면 가중치는 입력 벡터마다 반드시 칩 밖 DRAM에서 다시 가져와야 한다.", "a": false, "why": "가중치가 칩 안 저장소에 들어갈 만큼 작고 밀려나지 않으면(2×2의 16 byte, 촉각 장면의 512 byte) 처음 한 번 가져온 뒤에는 DRAM에서 다시 가져올 일이 없다. 배치 1에서 매번 다시 가져오는 것은 가중치가 칩 안에 머물 수 없을 만큼 클 때다(5-1의 '이동이 더 작다', 5-5의 디지털 기준선)."}, {"id": "d02-q18b", "ref": "#rt-scenes", "refLabel": "실시간 입력의 세 장면", "type": "mc", "q": "다음 중 입력 벡터를 모아 배치를 키우기 가장 어려운 계산은?", "options": ["밤새 모아 둔 사진 100만 장을 한꺼번에 분류하기", "미끄러지는 물체를 잡은 촉각 센서 신호를 10 ms 안에 판단하기", "데이터센터에서 큰 모델을 큰 배치로 학습하기", "문서 1만 개를 모아 한꺼번에 번역하기"], "a": 1, "why": "촉각 장면은 10 ms 안에 답해야 해서 입력 벡터를 모아 기다리기 어렵다(5-5 장면 1). 나머지는 입력을 미리 모을 수 있어 배치를 키울 수 있다. 단, 배치를 못 키운다고 곧 memory-bound인 것은 아니다. 가중치가 작아 칩 안에 두면 DRAM 이동이 없고, 병목은 장치의 연산 속도·대역폭에도 달려 있다(5-3, 5-5)."}]}, "6-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d02-q20", "ref": "#b-alpha", "refLabel": "활동률: 한 박자에 실제로 바뀌는 비율", "type": "mc", "q": "P ≈ αCV²f에서 '활동률 α'의 뜻은?", "options": ["1초에 박자가 오는 횟수", "칩 전체 트랜지스터 중 켜져 있는 것의 비율", "한 박자에 실제로 0↔1이 바뀌는 회로의 비율", "꺼진 트랜지스터로 새는 전류의 비율"], "a": 2, "why": "에너지는 전압이 바뀔 때만 들고, 매 박자에 바뀌는 회로는 일부뿐이다. '켜져 있는 비율'은 상태가 그대로면 충방전이 없으므로 다르다. 박자 횟수는 f, 새는 전류는 정적 전력이다(기초 계단: 활동률)."}, {"id": "d02-q21", "ref": "#dennard-example", "refLabel": "Dennard 작은 예시: κ = 1.4 한 세대", "type": "short", "q": "κ = 1.4인 한 세대에서 전압을 못 내리면 전력밀도는 약 몇 배? (소수 둘째 자리까지)", "a": ["1.96", "약 1.96", "2", "1.96배"], "why": "V² 항이 1로 고정되면 f·C/A ∝ κ² = 1.96. 1.4가 나왔다면 C의 감소(1/κ)와 면적의 감소(1/κ²) 중 하나를 빠뜨린 것 — 작은 예시의 곱셈 순서를 다시."}]}, "6-end": {"kind": "end", "title": "6구간 마무리", "items": [{"id": "d02-q22", "ref": "#why-no-lower-v", "refLabel": "왜 전압을 못 내리게 되었나", "type": "mc", "q": "클록이 수 GHz에서 멈춘 직접적 이유로 이 자료가 설명한 것은?", "options": ["트랜지스터를 더 작게 만드는 공정이 더 나오지 않아서", "메모리가 연산기를 따라오지 못해 박자를 올려도 소용없어서", "소프트웨어가 빠른 박자를 쓰도록 바뀌지 못해서", "전압을 더 못 내리자 박자를 올리면 전력밀도가 세대마다 약 2배가 되어서"], "a": 3, "why": "Dennard scaling의 전제(V도 같이 줄임)가 누설 때문에 깨졌다. 트랜지스터는 계속 작아졌다. 메모리 격차는 5구간의 다른 벽(memory wall)이다."}, {"id": "d02-q23", "ref": "#b-clock", "refLabel": "클록과 동기·비동기", "type": "ox", "q": "디지털 회로는 반드시 클록(동기) 방식이다.", "a": false, "why": "디지털(값이 0·1)과 동기(공통 박자)는 다른 축이다. Loihi 2는 디지털이지만 비동기. 기초 계단(클록)의 한 줄 복습과 구간 끝 심화, Day 5–6."}]}, "7-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d02-q24", "ref": "#walls-cost", "refLabel": "세 벽: 저장과 계산을 합친 대가", "type": "mc", "q": "벽 ①(데이터 이동)을 줄이는 뉴로모픽 처방의 대가가 청구되는 곳은?", "options": ["벽 ③ 정밀도: 변환·보정 회로의 비용이 생긴다", "벽 ② 전력밀도: 소자가 많아져 면적당 열이 커진다", "벽 ① 데이터 이동: 가중치를 더 자주 옮겨야 한다", "대가 없음: 저장과 계산을 합치면 비용이 함께 준다"], "a": 0, "why": "아날로그 계산의 오차를 줄이는 보정 기법이 오버헤드를 끌어들여 이점을 깎고(Jiang 2026), 주변회로(ADC/DAC)가 큰 몫을 차지할 수 있다(Roadmap 2026). 그래서 ①을 줄인 대가는 주로 ③에서 청구된다."}, {"id": "d02-q14b", "ref": "#walls-cost", "refLabel": "세 벽: 저장과 계산을 합친 대가", "type": "mc", "q": "'메모리와 연산을 한곳에 붙이면 연산기–메모리 사이의 비싼 데이터 전송을 피한다'는 주장을 시스템 전체로 보면 더 정확한 표현은?", "options": ["'피한다'가 맞다: 연산기와 메모리 사이 이동이 모두 사라진다", "'피한다'가 맞다: 아날로그 소자는 값을 옮길 필요가 없다", "'옮긴다'가 맞다: 이동 비용이 줄지 않고 다른 곳으로 옮겨 갈 뿐이다", "'줄인다'가 맞다: 중간 결과 전송·변환·보정 비용이 남는다"], "a": 3, "why": "가중치 이동은 줄지만 배열 사이 중간 결과 전송, ADC 같은 변환, 오차 보정 비용이 남는다(7구간의 대가 목록과 '흔한 오해' 상자). 그렇다고 이득이 전혀 없는 것은 아니므로 '줄인다'가 정확하다."}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d02-q26", "ref": "#mvm-crossbar", "refLabel": "MVM과 crossbar의 대응", "type": "mc", "q": "지난 학습의 crossbar 식 I_j = Σ_i G_ij V_i 에서 오늘의 가중치 행렬의 '원소'에 해당하는 것은?", "options": ["입력 전압 V_i", "교차점의 전도도 G_ij", "가로줄 전류 I_j", "교차점 소자의 개수"], "a": 1, "why": "G_ij가 가중치 표의 원소, V_i가 입력 벡터의 원소, I_j가 출력 벡터의 원소. 곱셈은 Ohm 법칙, 덧셈은 전류가 합쳐지는 것이 대신한다."}, {"id": "d02-q34", "ref": "#tiling", "refLabel": "타일링 예제: 4 MB 표와 1 MB 캐시", "type": "mc", "q": "칩 안 저장소가 1 MB인 장치에서 4 MB 가중치 행렬로 입력 벡터 4개(배치 4)를 처리한다. 표를 0.5 MB 조각으로 잘라 조각마다 네 벡터에 다 쓰면(타일링), 가중치의 DRAM 이동량은 대략?", "options": ["4 MB: 조각마다 한 번씩만 가져온다", "16 MB: 벡터마다 표 전체를 다시 가져온다", "1 MB: 칩 안 저장소 크기만큼만 옮긴다", "0.5 MB: 조각 하나만 가져오면 된다"], "a": 0, "why": "조각 8개를 각각 한 번씩 가져와 네 벡터에 다 쓰므로 합계 4 MB다. 16 MB는 조각내지 않았을 때(벡터마다 다시 읽음)의 값이다. 타일링은 배치로 생긴 재사용이 작은 캐시 때문에 사라지는 것을 막을 뿐, 표 전체를 한 번은 옮겨야 한다(5-4 (가))."}, {"id": "d02-q36", "ref": "#rt-baseline", "refLabel": "디지털 기준선과 비교할 조건", "type": "mc", "q": "촉각 센서로 미끄러짐을 10 ms 안에 판단하는 일에 물리 RC 소자가 디지털보다 낫다고 주장하려면, 비교에서 꼭 맞춰야 하는 것으로 가장 적절한 것은?", "options": ["소자 하나의 쓰기 에너지가 fJ 수준인지 여부", "소재의 이완 시간이 가능한 한 길다는 점", "같은 정확도·지연에서 판단 한 번당 시스템 전체 에너지", "디지털 쪽은 배치 1이라 반드시 DRAM을 쓴다는 전제"], "a": 2, "why": "같은 과제·정확도·지연 예산에서 센서 읽기·ADC·대기 전력까지 포함한 판단 한 번당 에너지를 비교해야 한다. 소자 에너지만으로는 시스템을 말할 수 없고(4구간), 이완 시간은 필요한 기억 길이에 맞아야 하며 길수록 좋은 것이 아니고, 작은 디지털 모델은 가중치를 칩 안에 두어 DRAM을 안 쓸 수 있다(5-5)."}]}, "review": {"kind": "review", "title": "지난 학습 복습: 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치", "items": [{"id": "d02-r01", "type": "mc", "q": "어떤 칩은 평범한 디지털 트랜지스터를 그대로 쓰되, 작은 코어마다 메모리를 바로 옆에 붙이고 스파이크가 올 때만 코어가 일하게 만들었다. 이 칩이 바꾼 것과 그대로 둔 것으로 맞는 것은?", "options": ["소자는 그대로 두고, 메모리 위치와 일하는 때를 바꿨다", "소자의 물리를 바꿔, 재료의 동역학으로 계산하게 했다", "가중치를 전도도에 저장해, 배열 안에서 곱해 더하게 했다", "아날로그 회로의 물리로 신경 동역학을 직접 재현했다"], "a": 0, "why": "디지털 SNN 칩 줄기의 설명입니다. 소자는 평범한 CMOS 트랜지스터 그대로이고, 바꾼 것은 구조입니다. 코어마다 로컬 메모리를 두고 사건(스파이크)이 올 때만 일하게 해 큰 신경망의 에너지를 줄이려 합니다.", "wrongWhy": ["", "재료의 동역학을 계산 자원으로 쓰는 것은 물리 컴퓨팅 줄기입니다. 이 칩은 평범한 트랜지스터를 씁니다.", "전도도에 가중치를 저장해 배열 안에서 곱해 더하는 것은 in-memory 줄기입니다.", "아날로그 회로로 동역학을 재현하는 것은 아날로그 VLSI 줄기입니다. 이 칩은 디지털입니다."], "ref": "d01b.html#ch-branches", "refLabel": "(나) 디지털 SNN 칩: 소자는 그대로, 구조만 뇌처럼", "fig": "../assets/img/d01/fig2-branches.svg", "figAlt": "뉴로모픽의 네 줄기와 회색지대 분류 모식도"}, {"id": "d02-r02", "type": "mc", "q": "crossbar의 한 가로줄(0 V로 유지)에 전도도 G₁ = 3 µS, G₂ = 1 µS인 소자가 있고, 세로줄에 V₁ = 0.1 V, V₂ = 0.5 V를 걸었다. 이 가로줄로 모이는 전류는?", "options": ["0.3 µA", "0.8 µA", "1.6 µA", "2.4 µA"], "a": 1, "why": "소자마다 Ohm 법칙으로 곱셈이 일어나고(3 × 0.1 = 0.3 µA, 1 × 0.5 = 0.5 µA), 한 가로줄로 모이며 Kirchhoff 법칙으로 더해져 0.8 µA입니다. 행렬–벡터 곱에서 행 하나와 입력을 자리끼리 곱해 더한 것과 같은 계산입니다.", "wrongWhy": ["한 소자의 전류(3 µS × 0.1 V)만 셌습니다. 같은 가로줄의 전류는 모두 더해집니다.", "", "전도도와 전압의 짝을 바꿔 곱했습니다(3 × 0.5 + 1 × 0.1). 같은 자리끼리 곱해야 합니다.", "전도도의 합(4 µS)과 전압의 합(0.6 V)을 곱했습니다. 자리끼리 곱한 뒤 더해야 합니다."], "ref": "d01b.html#b-vector-matrix", "refLabel": "(다) 곱해서 더하기를 숫자로, 그리고 crossbar", "fig": "../assets/img/d01/fig3-crossbar.svg", "figAlt": "2×2 crossbar에서 세로줄 전압, 교차점 전도도, 가로줄 전류를 표시한 그림"}, {"id": "d02-r03", "type": "mc", "q": "어떤 재료에 펄스열을 넣었더니 응답이 입력 크기에 정확히 비례했고(선형), 펄스가 끝나면 응답이 즉시 0으로 돌아왔다. 물리 reservoir의 재료로서 부족한 것은?", "options": ["비선형성만 부족하고, 기억은 충분하다", "기억만 부족하고, 비선형성은 충분하다", "둘 다 갖췄으므로 재료로서 부족한 것이 없다", "비선형성과 서서히 잊는 기억 둘 다 부족하다"], "a": 3, "why": "물리 노드가 갖출 두 기본 성질은 입력에 대한 비선형 응답과, 지나간 입력을 잠시 기억했다가 서서히 잊는 동역학입니다. 비례 응답은 선형이고, 즉시 0으로 돌아오는 것은 기억이 없다는 뜻이라 둘 다 부족합니다.", "wrongWhy": ["즉시 0으로 돌아오면 지나간 입력의 흔적이 남지 않으므로 기억도 없습니다.", "입력에 정확히 비례하는 응답은 선형이므로 비선형성도 없습니다.", "비례 응답(선형)과 즉시 소멸(기억 없음)은 두 성질이 모두 빠진 경우입니다.", ""], "ref": "d01b.html#ch-branches", "refLabel": "(라) 물리 컴퓨팅: 비선형성과 fading memory", "fig": "../assets/img/d01/fig4-fading-memory.svg", "figAlt": "펄스열과, 펄스마다 올랐다가 서서히 내려오는 소자 상태"}, {"id": "d02-r04", "type": "ox", "q": "펄스 둘 사이 간격이 짧을수록 둘째 응답이 커지는 시냅스 현상을 소자 하나에서 재현했다면, 그 소자는 이미 계산을 하고 있다고 말할 수 있다.", "a": false, "why": "시냅스 현상의 재현은 계산 시스템의 부품 후보에 머뭅니다(회색지대). 상태를 읽어 내고, 출력층(readout)을 학습시키고, 학습에 쓰지 않은 데이터에서 성능을 재고, 디지털 기준선과 비교해야 '계산한다'고 말할 수 있습니다.", "wrongWhy": ["현상 재현은 부품 후보입니다. 읽어 낸 상태로 과제를 풀고 기준선과 비교해야 계산이라고 말할 수 있습니다.", ""], "ref": "d01b.html#ch-branches", "refLabel": "(마) 회색지대: 소자 수준의 생체 모사"}, {"id": "d02-r05", "type": "mc", "q": "가중치를 전도도로 저장해 메모리 배열 안에서 곱해 더하는 crossbar 가속기는 다섯 비교 축 가운데 어느 축을 바꾸지 않나?", "options": ["① 저장과 계산의 위치", "② 정보의 표현", "③ 시간의 역할", "④ 정밀도"], "a": 2, "why": "crossbar는 가중치를 저장한 자리에서 계산하고(①), 전도도라는 연속 양으로 값을 나타내며(②), 잡음·편차를 감수하는 근사 계산을 합니다(④). 그러나 곱해 더한 결과를 읽을 뿐 소자의 시간상수가 기억의 시간척도를 정하지는 않으므로 ③은 그대로입니다. ③을 바꾸는 줄기는 아날로그 VLSI와 물리 컴퓨팅입니다.", "wrongWhy": ["가중치가 저장된 배열 안에서 곱해 더하므로 저장과 계산의 위치를 바꿉니다.", "가중치를 비트가 아니라 전도도라는 연속 양으로 나타내므로 표현을 바꿉니다.", "", "아날로그 값이라 잡음과 소자 편차를 감수하므로 정밀도 축도 바뀝니다."], "ref": "d01b.html#ch-axes", "refLabel": "다섯 축 표: 이 축을 바꾸는 줄기", "fig": "../assets/img/d01/fig7-axes.svg", "figAlt": "보통 컴퓨터와 뉴로모픽을 다섯 축으로 비교한 그림"}, {"id": "d02-r06", "type": "mc", "q": "회로 A는 2 mW로 한 작업을 1 s에, 회로 B는 200 mW로 같은 작업을 1 ms에 끝낸다. 작업 하나에 드는 에너지로 맞는 것은?", "options": ["A가 전력이 100분의 1이므로 에너지도 100분의 1이다", "B가 10분의 1이다. 에너지 = 전력 × 시간이기 때문이다", "둘이 같다. 같은 작업에는 같은 에너지가 들기 때문이다", "비교할 수 없다. 전력과 에너지는 단위가 다르기 때문이다"], "a": 1, "why": "A는 2 mW × 1 s = 2 mJ, B는 200 mW × 0.001 s = 0.2 mJ입니다. 전력이 100배 큰 B가 작업 하나에는 10분의 1만 씁니다. 전력이 작아도 오래 걸리면 에너지는 작지 않을 수 있습니다.", "wrongWhy": ["전력은 초당 에너지입니다. A는 1,000배 오래 걸려 작업당 에너지가 오히려 큽니다(2 mJ).", "", "같은 작업이라도 회로마다 드는 에너지가 다릅니다. 전력 × 시간으로 따로 계산해야 합니다.", "전력(W)에 걸린 시간(s)을 곱하면 에너지(J)가 되어 같은 단위로 비교할 수 있습니다."], "ref": "d01b.html#b-energy-power", "refLabel": "에너지(J)와 전력(W)"}, {"id": "d02-r07", "type": "mc", "q": "같은 디지털 칩에서 클록 박자마다 실제로 값이 바뀌는 전선의 비율(활동률 α)이 0.2에서 0.05로 줄었다. 전압·정전용량·클록이 같다면 동적 전력은?", "options": ["그대로다. 박자의 수가 같기 때문이다", "16분의 1이 된다. 활동률은 제곱으로 들어가기 때문이다", "4분의 1이 된다. 바뀌는 전선만 충방전되기 때문이다", "알 수 없다. 활동률은 시간에만 영향을 주기 때문이다"], "a": 2, "why": "P ≈ αCV²f에서 α는 비례로 들어가므로 0.2 → 0.05는 4분의 1입니다. 박자가 와도 값이 바뀌지 않는 전선은 충방전이 없어 에너지를 거의 쓰지 않기 때문입니다. 낮은 활동률이 유리한 이유입니다.", "wrongWhy": ["박자가 같아도 값이 바뀌지 않는 전선은 충방전하지 않아 전력이 줍니다.", "제곱으로 들어가는 것은 전압 V뿐이고, α는 비례로 들어갑니다.", "", "α는 한 박자에 충방전되는 전선의 비율이라 전력에 직접 들어갑니다."], "ref": "d01b.html#b-energy-power", "refLabel": "P ≈ αCV²f의 기호와 활동률"}, {"id": "d02-r08", "type": "mc", "q": "어떤 논문이 '우리 이온 뉴런은 스파이크당 10 fJ로, 생물 뉴런(스파이크당 수십 pJ)보다 수천 배 효율적'이라고 쓴다. 이 결론을 받아들이기 전에 먼저 맞춰야 할 것은?", "options": ["fJ와 pJ 중 하나로 단위만 맞추면 충분하다", "이온 뉴런이 생물 뉴런보다 빠른지만 확인하면 된다", "맞출 것이 없다. 소자 숫자가 작으면 시스템도 효율적이다", "두 숫자가 무엇을 포함했고 어떻게 얻은 값인지"], "a": 3, "why": "소자 회로 하나의 최선값과 생물 뉴런의 추정치는 포함하는 것(시냅스, 통신, 대기 전력)과 숫자의 성격(측정한 최선값인지, 2차 문헌의 추정인지)이 달라 같은 기준이 아닙니다. 비교 결과보다 '무엇을 같게 맞춰야 하나'가 먼저입니다.", "wrongWhy": ["단위를 맞춰도 두 숫자가 세는 범위가 다르면 비교가 되지 않습니다.", "빠르기는 다른 질문입니다. 에너지 비교는 포함 범위를 먼저 맞춰야 합니다.", "큰 시스템에서는 주변회로가 전력의 주원인이 될 수 있어, 소자 숫자가 곧 시스템 효율은 아닙니다.", ""], "ref": "d01b.html#ch-axes", "refLabel": "에너지로 보면: 같은 기준이 아닌 두 숫자"}, {"id": "d02-r09", "type": "mc", "q": "어떤 이온 소자의 retention(쓴 값이 유지되는 시간)이 약 1시간이다. 이 소자를 추론 전용 in-memory 가중치(몇 년 사용)와, 수 초 단위 신호를 다루는 물리 RC 노드에 비춰 본 판단으로 맞는 것은?", "options": ["가중치로는 부족하고, RC 노드로는 너무 길 수 있다", "어느 용도에서나 충분히 길어 좋은 소자다", "가중치로는 너무 길고, RC 노드로는 너무 짧다", "줄기와 상관없이 retention은 짧을수록 좋다"], "a": 0, "why": "in-memory 가중치는 학습된 값이 쓰이는 기간 동안(추론 전용 칩이면 년 단위) 유지돼야 하고, 물리 RC 노드는 과제의 시간척도에 맞게 잊어야 합니다. 같은 1시간이 한쪽에서는 부족하고 다른 쪽에서는 너무 깁니다. '좋은 소자인가'는 줄기와 응용을 정한 뒤에 답할 수 있습니다.", "wrongWhy": ["", "어느 줄기에 쓰느냐에 따라 같은 숫자가 부족할 수도, 너무 길 수도 있습니다.", "방향이 거꾸로입니다. 가중치에는 길게, 수 초 신호의 RC 노드에는 짧게 필요합니다.", "가중치로 쓸 때는 값을 오래 들고 있어야 하므로 짧을수록 좋지 않습니다."], "ref": "d01b.html#ch-volatile", "refLabel": "같은 현상, 정반대의 역할: 요구 사양 표", "fig": "../assets/img/d01/fig6-volatile.svg", "figAlt": "같은 쓰기 펄스 뒤 오래 유지되는 가중치와 적당히 잊는 RC 노드의 전도도"}, {"id": "d02-r10", "type": "mc", "q": "내 이온 소자를 in-memory 가중치 소자로 내세우기로 했다. 먼저 이겨야 할 경쟁자와 지표로 가장 맞는 것은?", "options": ["디지털 RC·저전력 MCU, 그리고 과제 시간척도에 맞는 기억", "생물 시냅스, 그리고 PPF·STDP를 얼마나 닮았는가", "PCM·RRAM·ECRAM, 그리고 상태 수·retention", "GPU, 그리고 한꺼번에 돌리는 연산기의 수"], "a": 2, "why": "줄기를 고르면 경쟁자가 정해지고, 경쟁자가 정해지면 이겨야 할 지표가 정해집니다. in-memory 가중치의 경쟁자는 PCM·RRAM·ECRAM이고, 많은 전도도 상태, 선형·대칭 갱신, 긴 retention, 내구성이 지표입니다.", "wrongWhy": ["디지털 RC·MCU와 시간척도 정합은 물리 RC 노드로 내세울 때의 경쟁자와 지표입니다.", "현상을 닮았는지는 계산 시스템의 지표가 아닙니다.", "", "GPU의 병렬성은 이 줄기의 소자 경쟁 지표가 아닙니다."], "ref": "d01b.html#ch-my-position", "refLabel": "나는 어느 줄기에 있나: 선택지와 경쟁자"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 숫자·메모리·곱해서 더하기: 계산의 재료", "items": [{"id": "d02-rb01", "type": "mc", "q": "연산기는 계산 1번에 3 ns, 할 일은 계산 1,000번, 길은 1 ns에 숫자 1개를 옮기고, 재사용은 1번이다. 가져오기와 계산이 겹쳐 진행될 때 전체 시간을 줄이는 조작은?", "options": ["길(전송 속도)을 2배로 넓힌다", "숫자 하나를 2번씩 재사용한다", "연산기를 2배 빠르게 한다", "어느 것을 바꿔도 전체는 줄지 않는다"], "a": 2, "why": "계산 시간은 1,000 × 3 = 3,000 ns, 가져오기는 1,000 ÷ 1 = 1,000 ns라 계산이 긴 쪽이고 전체 ≈ 3,000 ns입니다. 긴 쪽을 줄여야 전체가 줄므로 연산기를 2배 빠르게 하면 1,500 ns가 됩니다.", "wrongWhy": ["길을 넓히면 원래 짧던 가져오기(1,000 ns)만 줄고, 전체는 계산 시간 3,000 ns에 묶여 있습니다.", "재사용도 가져오기만 줄입니다. 이 경우 긴 쪽은 계산입니다.", "", "긴 쪽(계산)을 줄이는 조작은 전체를 줄입니다."], "ref": "d02a.html#ch-compute-store", "refLabel": "1-1 직접 바꿔 보기: 긴 쪽이 전체를 정한다", "note": "전체 시간 ≈ max(계산 시간, 가져오기 시간). 짧은 쪽은 아무리 줄여도 전체가 그대로입니다."}, {"id": "d02-rb02", "type": "mc", "q": "숫자를 8 bit 정수 형식(0–255)으로 저장하는 칸에 300을 넣으려 한다. 맞는 것은?", "options": ["300은 값이 커서 칸 하나가 저절로 2 byte로 늘어난다", "8 bit로는 300을 못 적어 더 큰 형식이 필요하다", "300은 세 자리라서 8 bit 칸 세 개(3 byte)에 나눠 적힌다", "칸 크기는 값이 정하므로 300에 맞는 칸이 새로 만들어진다"], "a": 1, "why": "저장 칸의 크기는 값이 아니라 숫자를 적기 전에 정한 형식이 정합니다. 8 bit는 2⁸ = 256가지(0–255)만 적을 수 있어 300은 범위를 넘고, 16 bit(0–65,535) 이상의 형식이 필요합니다.", "wrongWhy": ["형식은 적기 전에 정해지고, 값에 따라 칸이 저절로 늘지 않습니다.", "", "십진수 자릿수와 비트 칸은 관계가 없습니다. 형식이 칸 수를 정합니다.", "칸 크기는 값이 아니라 형식이 정합니다."], "ref": "d02a.html#b-bit", "refLabel": "값의 크기와 저장 칸의 크기는 다르다"}, {"id": "d02-rb03", "type": "mc", "q": "입력 숫자 5개 → 출력 숫자 3개인 완전연결 층의 가중치를 숫자 하나 = 4 byte로 저장하면 몇 byte인가?", "options": ["20 byte", "32 byte", "15 byte", "60 byte"], "a": 3, "why": "모든 출력이 모든 입력과 이어지므로 선은 3 × 5 = 15개, 가중치도 15개(3행 5열)입니다. 하나에 4 byte이면 15 × 4 = 60 byte입니다.", "wrongWhy": ["출력 하나(행 하나)의 가중치 5개만 셌습니다. 출력 3개 모두 셉니다.", "입력 수와 출력 수를 더했습니다(5 + 3 = 8). 가중치 수는 곱(5 × 3)입니다.", "가중치 개수(15개)만 세고 4 byte를 곱하지 않았습니다.", ""], "ref": "d02a.html#ex-2x2-storage", "refLabel": "3-1 저장 칸 세기", "fig": "../assets/img/d02/fig10-storage-16byte.svg", "figAlt": "2×2 가중치 네 개를 4 byte씩 저장한 16칸"}, {"id": "d02-rb04", "type": "mc", "q": "가중치 행렬 W에서 원소 W[2,1](행 2, 열 1)이 뜻하는 것은?", "options": ["입력 u₁이 출력 y₂에 곱해지는 가중치", "입력 u₂가 출력 y₁에 곱해지는 가중치", "출력 y₂와 출력 y₁을 잇는 가중치", "입력 u₂와 입력 u₁을 잇는 가중치"], "a": 0, "why": "행 하나 = 출력 하나의 가중치 목록, 열 하나 = 입력 숫자 하나에 곱해지는 자리입니다. 그래서 W[2,1]은 출력 y₂(행 2)를 만들 때 입력 u₁(열 1)에 곱하는 가중치입니다.", "wrongWhy": ["", "행과 열을 바꿔 읽었습니다. 행이 출력, 열이 입력입니다.", "가중치는 입력 하나와 출력 하나를 잇습니다. 출력끼리 잇는 선은 없습니다.", "가중치는 입력 하나와 출력 하나를 잇습니다. 입력끼리 잇는 선은 없습니다."], "ref": "d02a.html#b-matrix", "refLabel": "2×2 표: 행 = 출력, 열 = 입력", "fig": "../assets/img/d02/fig9-weights-2x2.svg", "figAlt": "입력 2개와 출력 2개를 잇는 선 네 개와 같은 내용의 2×2 표"}, {"id": "d02-rb05", "type": "mc", "q": "입력 1,000개 → 출력 1,000개 층(완전연결, 숫자 하나 4 byte)을 입력 2,000개 → 출력 2,000개로 키웠다. 입력 벡터 하나를 처리할 때 가중치 저장량과 연산량(op)은 각각 몇 배가 되나?", "options": ["둘 다 2배", "저장량은 4배, 연산량은 2배", "둘 다 4배", "저장량은 2배, 연산량은 4배"], "a": 2, "why": "가중치 수 = 입력 수 × 출력 수이므로 2 × 2 = 4배(4 MB → 16 MB)입니다. 가중치 하나마다 MAC 1번(2 op)이 일어나므로 연산량도 4배(2×10⁶ → 8×10⁶ op)입니다.", "wrongWhy": ["입력과 출력이 둘 다 2배라 가중치 수는 2 × 2 = 4배입니다.", "가중치 하나마다 MAC이 1번씩 일어나 연산량도 가중치 수를 따라 4배가 됩니다.", "", "저장량도 입력 수 × 출력 수를 따라 4배가 됩니다."], "ref": "d02a.html#ex-mac-count", "refLabel": "3-3 MAC과 op: 크기를 키우면"}, {"id": "d02-rb06", "type": "mc", "q": "지연 80 ns, 대역폭 4 byte/ns인 메모리에서 값 하나(8 byte)씩 따로따로 요청하는 프로그램이 있다. 대역폭만 2배로 늘리면 요청 하나의 시간은?", "options": ["약 절반(41 ns)으로 준다", "2배(164 ns)로 는다", "0 ns에 가까워진다", "거의 그대로(약 81 ns)다"], "a": 3, "why": "가져오기 시간 ≈ 지연 + 양 ÷ 대역폭 = 80 + 8 ÷ 4 = 82 ns이고, 대역폭을 2배로 하면 80 + 1 = 81 ns입니다. 작은 값을 띄엄띄엄 가져오면 지연이, 큰 데이터를 통째로 가져오면 대역폭이 시간을 정합니다.", "wrongWhy": ["대역폭은 '양 ÷ 대역폭' 몫만 줄입니다. 여기서는 그 몫이 2 ns뿐입니다.", "대역폭을 넓히면 시간이 늘지 않습니다.", "차선을 늘려도 톨게이트 대기(지연 80 ns)는 그대로입니다.", ""], "ref": "d02a.html#lat-bw", "refLabel": "'느리다'의 두 가지 뜻: 지연과 대역폭", "fig": "../assets/img/d02/fig8-latency-bandwidth.svg", "figAlt": "가져오기 시간을 지연과 양 나누기 대역폭으로 나눠 그린 막대"}, {"id": "d02-rb07", "type": "mc", "q": "연산기 옆의 빠른 저장소(SRAM)로 수 GB짜리 주기억장치 전체를 만들지 않는 까닭으로 가장 맞는 것은?", "options": ["SRAM은 전원을 꺼도 값이 남아 주기억장치로 쓸 수 없기 때문", "한 칸에 트랜지스터 6개라 비트당 값이 비싸기 때문", "SRAM은 새로 고침이 필요해 수 GB에서는 감당할 수 없기 때문", "SRAM은 값을 0과 1이 아닌 연속 값으로 저장하기 때문"], "a": 1, "why": "SRAM 한 칸은 트랜지스터 6개, DRAM 한 칸은 트랜지스터 1개 + 커패시터 1개라 같은 면적에 DRAM이 훨씬 많은 비트를 담습니다. 칸이 많을수록 선도 길어집니다. 그래서 '자주 쓰는 것은 작고 빠른 층에, 나머지는 크고 싼 층에' 두는 타협을 합니다.", "wrongWhy": ["SRAM은 전원이 있는 동안만 값을 들고 있습니다. 전원을 꺼도 남는 곳은 SSD 같은 저장장치입니다.", "", "새로 고침이 필요한 쪽은 커패시터를 쓰는 DRAM입니다. SRAM은 되먹임 고리로 값을 붙잡습니다.", "SRAM도 0과 1을 다루는 디지털 저장소입니다."], "ref": "d02a.html#b-memory-kinds", "refLabel": "저장하는 부품: 왜 네 층이나 두는가", "fig": "../assets/img/d02/fig0-computer.svg", "figAlt": "계산하는 곳과 저장하는 곳의 위치를 그린 컴퓨터 모식도"}, {"id": "d02-rb08", "type": "ox", "q": "저장과 계산을 같은 곳에서 하는 칩이라면, 계산 중에 데이터를 옮기는 일은 전혀 없다.", "a": false, "why": "저장과 계산을 합치면 주요 데이터 이동(가중치 가져오기)이 줄어들 뿐, 옮길 것이 아예 없어지지는 않습니다. 정확한 문장은 '주요 데이터 이동을 줄인다'입니다.", "wrongWhy": ["가중치 이동이 줄 뿐 옮기는 일이 모두 사라지지는 않습니다. '옮길 것이 없다'는 과장입니다.", ""], "ref": "d02a.html#myth-every-add", "refLabel": "흔한 오해: 더하기마다 RAM 왕복, 그리고 '옮길 것이 없다'"}, {"id": "d02-rb09", "type": "mc", "q": "3 + 5 계산에서 두 숫자의 복사본이 이미 캐시에 있었다(hit). RAM까지 다녀와야 했을 때(miss)와 비교해 달라지는 것은?", "options": ["값을 레지스터로 가져오는 시간이 자릿수로 짧아진다", "덧셈 회로 자체가 더 빨리 계산한다", "계산 결과 8이 달라질 수 있다", "달라지는 것이 없다. 계산은 늘 레지스터에서 하기 때문이다"], "a": 0, "why": "캐시 hit면 몇 클록 만에 레지스터로 오고, miss면 칩 밖 RAM까지 가서 수백 클록이 걸립니다. 다섯 단계 중 계산은 한 단계이고 나머지는 옮기는 일이라, 어디까지 가야 하느냐가 비용을 정합니다.", "wrongWhy": ["", "덧셈 자체는 hit든 miss든 레지스터에서 한 클록 안팎입니다. 바뀌는 것은 가져오는 시간입니다.", "어디서 가져왔든 값은 같은 복사본이라 결과는 같습니다.", "계산은 레지스터에서 하지만, 값이 레지스터에 오기까지의 시간이 크게 다릅니다."], "ref": "d02a.html#ex-3plus5", "refLabel": "3 + 5가 처리되는 다섯 단계"}]}}}</script>
+<script type="application/json" id="quiz-d02">{"_형식": "v2. 문항마다 id, ref(바로 필요한 설명·작은 예제의 앵커), refLabel(그곳의 짧은 이름). 오답 해설(why)은 '어떤 생각에서 헷갈렸는지'와 다시 볼 곳을 적는다.", "version": 2, "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "연산기는 계산 1번에 1 ns, 메모리에서 숫자 1개를 가져오는 데 4 ns가 걸립니다(가져오는 동안 앞 숫자는 계산할 수 있음). 계산 100번에 숫자 100개가 하나씩 필요하다면 ① 전체 시간은 대략 몇 ns일까요? ② 연산기만 2배 빠르게 하면 어떻게 될까요? 짐작이라도 숫자로 적고, 모르면 '모르겠음'이라고 적어도 됩니다. 1-1구간 실습에서 직접 바꿔 보며 확인합니다.", "items": [{"id": "d02-p01", "ref": "#b-cpu-gpu", "refLabel": "계산하는 부품: CPU와 GPU", "type": "mc", "q": "GPU가 CPU와 가장 크게 다른 점으로 맞는 것은?", "options": ["값을 저장하는 곳과 계산하는 곳이 한 자리에 붙어 있다", "아날로그 전압으로 계산한다", "단순한 연산기를 수천 개 두고 같은 계산을 동시에 시킨다", "공통 박자(클록) 없이 움직인다"], "a": 2, "why": "GPU는 단순한 연산기 수천 개가 같은 계산을 동시에(병렬) 합니다. 데이터 전체는 여전히 칩 밖 메모리에 있어서 저장과 계산이 떨어져 있다는 점은 CPU와 같습니다. '병렬이면 저장·계산도 붙어 있다'고 섞기 쉽습니다(1-2구간 기초: CPU와 GPU)."}, {"id": "d02-p02", "ref": "#lat-bw", "refLabel": "'느리다'의 두 가지 뜻: 지연과 대역폭", "type": "ox", "q": "메모리에서 값 하나를 받기까지 걸리는 시간이 짧은 메모리는, 1초에 옮길 수 있는 데이터 양도 반드시 많다.", "a": false, "why": "한 번 받을 때까지의 시간(지연)과 1초에 옮기는 양(대역폭)은 따로 노는 두 양입니다. 차선을 늘리면 한꺼번에 많이 옮기지만 톨게이트 대기 시간은 그대로인 것과 같습니다(2구간)."}, {"id": "d02-p03", "ref": "#b-weight", "refLabel": "가중치: 입력마다 곱하는 숫자", "type": "mc", "q": "신경망이 하는 계산의 대부분을 이루는 것은?", "options": ["숫자들을 크기 순으로 정렬하기", "입력마다 가중치를 곱한 뒤 모두 더하기", "나눗셈과 제곱근 구하기", "두 값이 같은지 참·거짓으로 비교하기"], "a": 1, "why": "신경망 층의 출력은 '입력 × 가중치'를 모두 더한 값이고, 이것을 표(행렬)로 묶은 것이 행렬–벡터 곱입니다. 그래서 신경망 하드웨어의 질문은 결국 이 곱해서 더하기를 어디서 하느냐로 모입니다(3구간)."}, {"id": "d02-p04", "ref": "#ex-mac-count", "refLabel": "MAC 세기와 1,000×1,000으로 넓히기", "type": "short", "q": "입력 숫자 1,000개를 받아 출력 숫자 1,000개를 내는 신경망 층(모든 출력이 모든 입력과 이어짐)이 입력 벡터 하나(숫자 1,000개짜리 샘플 하나)를 처리할 때, 곱셈은 몇 번 필요할까? (숫자만)", "a": ["1000000", "1,000,000", "100만", "백만", "10^6", "10⁶", "1e6", "100만 번", "1000000번", "1,000,000번"], "why": "출력 하나마다 입력 1,000개에 각각 가중치를 곱하므로 1,000 × 1,000 = 100만 번입니다. 이때 가중치 100만 개(숫자 하나 4 byte면 4 MB)를 한 번씩 읽어야 한다는 점이 에너지·시간 이야기의 출발점입니다(3구간)."}, {"id": "d02-p05", "ref": "#fig-energy", "refLabel": "그림 9: 계산 1회와 가져오기 1회의 에너지", "type": "mc", "q": "32 bit 숫자 하나를 RAM(주기억장치)에서 읽어 오는 에너지는, 그 숫자로 덧셈 한 번 하는 에너지와 비교해 대략 어느 정도일까?", "options": ["덧셈의 100분의 1 정도", "덧셈과 거의 같다", "덧셈의 약 10배", "덧셈의 약 1만 배"], "a": 3, "why": "Horowitz 2014의 45 nm 값(32 bit 덧셈 0.1 pJ, RAM 64 bit 읽기 1.3–2.6 nJ)으로 RAM 읽기는 덧셈의 약 10⁴배입니다. 2014년 공정 값이라 자릿수가 요점입니다. 그래서 계산 하나를 아무리 싸게 만들어도 값을 멀리서 가져오면 전체 에너지는 거의 줄지 않습니다(4구간)."}, {"id": "d02-p06", "ref": "#batch", "refLabel": "배치: 같은 W를 여러 입력 벡터에", "type": "mc", "q": "같은 가중치로 여러 입력 벡터(샘플)를 모아 한꺼번에 처리하면, 메모리에서 가져온 가중치 1바이트당 할 수 있는 연산 수는 어떻게 되나?", "options": ["모은 입력 벡터 수만큼 늘어난다", "처리 순서만 바뀌고 그대로다", "가져올 입력이 늘어 오히려 줄어든다", "벡터 안의 숫자 수만큼 늘어난다"], "a": 0, "why": "가중치를 한 번 가져와 칩 안에 둔 채 여러 입력 벡터에 돌려 쓰므로 연산 밀도(연산량 ÷ 이동량)가 모은 수(배치 B)만큼 오릅니다. '벡터 안의 숫자 수만큼'은 배치(벡터의 개수)와 입력 수(벡터 안의 숫자 수)를 섞은 것입니다. 단, 가중치가 칩 안에 머물 수 있어야 하고, 입력을 모아 기다릴 수 없는 실시간 계산에서는 이 방법을 쓰기 어렵습니다(5구간)."}, {"id": "d02-p07", "ref": "#why-no-lower-v", "refLabel": "왜 전압을 못 내리게 되었나", "type": "mc", "q": "2000년대 중반부터 컴퓨터 칩의 박자(클록)가 수 GHz에서 거의 오르지 않은 주된 이유로 맞는 것은?", "options": ["트랜지스터를 더 작게 만드는 공정이 더 이상 나오지 않아서", "전압을 더 못 내려, 박자를 올리면 면적당 열이 너무 커져서", "칩 안 신호가 빛의 속도보다 빨리 갈 수 없어서", "프로그램이 빠른 박자를 활용하지 못해서"], "a": 1, "why": "전압을 함께 내리던 동안은 박자를 올려도 면적당 열(전력밀도)이 그대로였습니다. 꺼져 있어도 새는 전류 때문에 전압을 더 못 내리자, 박자를 올릴 때마다 전력밀도가 세대마다 약 2배로 커졌습니다. 트랜지스터는 그 뒤에도 계속 작아졌으므로 '작게 못 만들어서'는 아닙니다(6구간)."}, {"id": "d02-p08", "ref": "#walls-cost", "refLabel": "세 벽: 저장과 계산을 합친 대가", "type": "mc", "q": "값을 저장하는 자리에서 바로 곱해 더하는(저장과 계산을 합친) 칩에 대한 설명으로 맞는 것은?", "options": ["칩 안에서 데이터를 옮기는 일이 더 이상 필요 없어진다", "아날로그로 곱하므로 계산 정밀도가 디지털보다 높아진다", "가중치 이동은 줄지만 변환·보정·중간 결과 전송 비용이 생긴다", "어떤 계산이든 기존 컴퓨터보다 에너지가 적게 든다"], "a": 2, "why": "합치면 가중치를 가져오는 이동은 줄지만, 배열 사이 중간 결과 전송, 아날로그 값을 디지털로 바꾸는 변환, 소자 오차 보정이 비용으로 남습니다. 정확한 말은 '이동이 없다'가 아니라 '주요 이동을 줄인다'입니다(7구간)."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 예측 확인", "items": [{"id": "d02-q01", "ref": "#b-bit", "refLabel": "바이트와 '숫자 하나 = 4 byte' 약속", "type": "short", "q": "숫자 하나를 32 bit 형식으로 저장할 때, 숫자 100만 개는 몇 MB? (1 MB = 10⁶ byte, 숫자만)", "a": ["4", "4mb", "4 mb", "약 4", "4.0"], "why": "32 bit = 4 byte이므로 100만 × 4 byte = 400만 byte = 4 MB. '32 bit = 32 byte'로 헷갈렸다면 비트 8개가 1 byte라는 것을, '숫자가 크면 칸도 크다'고 생각했다면 저장 크기는 값이 아니라 형식이 정한다는 것을 다시 보세요(기초 계단: 비트와 바이트)."}, {"id": "d02-q02", "ref": "#b-memory-kinds", "refLabel": "저장 층의 크기 순서", "type": "mc", "q": "그 4 MB는 네 층 중 어디에 '편하게' 들어가나?", "options": ["레지스터", "L1 캐시", "RAM(DRAM)", "어디에도 안 들어간다"], "a": 2, "why": "레지스터는 수십 개, L1은 수십 kB라 4 MB는 안 들어가고, L2·L3는 제품에 따라 겨우 들어가거나 못 들어간다. RAM(수 GB)에는 넉넉히 들어간다. '캐시가 크다'고 생각했다면 기초 계단(저장하는 부품)의 크기 순서를 다시 보세요."}, {"id": "d02-q03", "ref": "#b-cpu-gpu", "refLabel": "계산하는 부품: CPU와 GPU", "type": "ox", "q": "GPU는 CPU와 달리 값을 연산기 안에 두고 계산하므로 저장과 계산이 떨어져 있지 않다.", "a": false, "why": "GPU도 값을 자기 메모리(칩 밖)에 두고 레지스터로 가져와 계산한다. CPU와 다른 점은 연산기의 수와 종류(단순한 것 수천 개, 병렬)이지 저장·계산의 분리가 아니다. '병렬 = 메모리 안에서 계산'으로 섞였다면 기초 계단(CPU와 GPU)을 다시."}]}, "2-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d02-q04", "ref": "#ex-3plus5", "refLabel": "3 + 5를 처리하는 다섯 단계", "type": "mc", "q": "3 + 5를 처리하는 다섯 단계 중 '계산'은 몇 단계인가?", "options": ["한 단계", "세 단계", "다섯 단계 모두", "0단계 (계산은 메모리가 한다)"], "a": 0, "why": "덧셈 회로가 8을 만드는 한 걸음(단계 4)만 계산이고 나머지는 옮기기다. '가져오기도 계산의 일부'라고 느꼈다면 맞는 직관이지만, 에너지·시간을 따질 때는 둘을 갈라 세야 한다(단계 보기 정리)."}, {"id": "d02-q05", "ref": "#lat-bw", "refLabel": "'느리다'의 두 가지 뜻: 지연과 대역폭", "type": "mc", "q": "고속도로에 차선을 두 배로 늘렸다. 무엇이 달라지나?", "options": ["지연이 반으로 줄어든다", "지연과 대역폭이 모두 두 배가 된다", "지연과 대역폭 모두 그대로다", "대역폭이 두 배가 되고 지연은 그대로다"], "a": 3, "why": "차선 = 1초에 옮길 수 있는 양(대역폭). 톨게이트 대기(지연)는 그대로다. 둘을 섞었다면 '느리다의 두 가지 뜻' 문단과 그림 3(Day 3)을 다시."}]}, "2-end": {"kind": "end", "title": "2구간 마무리", "items": [{"id": "d02-q06", "ref": "#myth-every-add", "refLabel": "흔한 오해: 더하기마다 RAM 왕복", "type": "ox", "q": "보통 컴퓨터는 더하기 한 번마다 숫자가 RAM을 왕복한다.", "a": false, "why": "레지스터의 값으로 계산하고 캐시가 RAM 접근을 걸러 준다. 이 문장이 참이라면 캐시가 있을 이유가 없다. 사전 테스트나 '먼저 만들어 보기'에 이렇게 썼다면 2구간의 '흔한 오해' 상자로."}, {"id": "d02-q07b", "ref": "#data-shuttling", "refLabel": "'잦은' 데이터 왕복의 조건", "type": "mc", "q": "보통 컴퓨터의 '데이터 이동 병목'을 가장 정확하게 표현한 것은?", "options": ["덧셈·곱셈 한 번마다 값이 RAM을 한 번씩 왕복하는 것", "연산기 안 트랜지스터가 켜지고 꺼지는 속도가 느린 것", "재사용 없이 큰 데이터를 먼 메모리에서 계속 가져와야 하는 것", "캐시가 RAM보다 커서 값을 찾는 데 오래 걸리는 것"], "a": 2, "why": "캐시가 대부분의 접근을 걸러 주므로 '모든 연산마다'는 틀리고, 재사용 없이 큰 데이터를 계속 가져올 때 왕복이 잦아진다. 캐시는 RAM보다 작다(1-2구간). 리뷰 원문은 이를 'frequent data shuttling'(잦은 데이터 왕복)이라 쓴다."}]}, "3-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기", "items": [{"id": "d02-q08", "ref": "#ex-2x2-mvm", "refLabel": "2×2 행렬–벡터 곱 손계산", "type": "short", "q": "[풀이 예시 확인] W의 행 1 = (1, 3), 입력 벡터 u = (1, 2). y1 = 1×1 + 3×2 = ? (숫자만)", "a": ["7", "7.0"], "why": "1×1 = 1, 3×2 = 6, 더하면 7. 행 1과 입력 벡터를 같은 자리끼리 곱해 더한다. 5가 나왔다면 입력을 (2, 1)로 둔 본문 예와 섞은 것."}, {"id": "d02-q09", "ref": "#ex-2x2-mvm", "refLabel": "2×2 행렬–벡터 곱 손계산", "type": "short", "q": "[일부 채우기] 같은 입력 벡터 u = (1, 2)에 행 2 = (2, 0.5). y2 = 2×1 + 0.5×▢ = ? 빈칸에 들어갈 숫자와 y2를 '빈칸,답' 꼴로 (예: 3,4)", "a": ["2,3", "2, 3", "2,3.0"], "why": "빈칸은 입력 벡터의 둘째 원소 u2 = 2 (행 2의 둘째 원소 W[2,2] = 0.5에 곱하는 자리). y2 = 2 + 1 = 3. 빈칸에 0.5를 넣었다면 '가중치끼리 곱한다'로 헷갈린 것 — 가중치는 입력에 곱한다."}, {"id": "d02-q10", "ref": "#b-matrix", "refLabel": "그림 5(Day 3): 행 = 출력, 열 = 입력", "type": "short", "q": "[혼자 풀기] 새 행렬 W = [[2, 1], [0, 4]], 입력 벡터 u = (3, 1). 출력 (y1, y2)를 '5,6' 꼴로", "a": ["7,4", "7, 4", "(7,4)", "(7, 4)"], "why": "y1 = 2×3 + 1×1 = 7, y2 = 0×3 + 4×1 = 4. 열을 세로로 읽어 (6, 7)이 나왔다면 '행 하나 = 출력 하나로 들어오는 선들'을 그림 5(Day 3)에서 다시."}, {"id": "d02-q11", "ref": "#ex-2x2-mvm", "refLabel": "손계산 단계 4: 가중치는 한 번씩만", "type": "mc", "q": "입력 벡터 하나(샘플 하나)를 처리할 때 가중치 원소 하나는 몇 번 쓰이나?", "options": ["입력 수만큼", "출력 수만큼", "0번", "1번"], "a": 3, "why": "원소 W[j,i]는 출력 j를 만들 때 u_i에 한 번 곱해지고 끝이다. 이 '한 번씩만'이 5구간에서 연산 밀도 0.5가 되는 이유다. '입력 수만큼'이나 '출력 수만큼'이라고 답했다면 여러 행에 반복해 쓰이는 입력 벡터와 가중치를 바꿔 생각한 것."}, {"id": "d02-q29", "ref": "#ex-mac-count", "refLabel": "그림 8(Day 3): 누적값 0부터 MAC 세기", "type": "short", "q": "[혼자 세기] 누적값 0에서 시작해 1 MAC = 2 op로 셀 때, 입력 숫자 3개 → 출력 숫자 2개 층(완전연결)이 입력 벡터 하나를 처리하면 몇 op? (숫자만)", "a": ["12", "12 op", "12op"], "why": "출력마다 입력 3개에 MAC 3번, 출력 2개라 MAC 6번 = 곱셈 6 + 덧셈 6 = 12 op. 10이 나왔다면 식의 + 기호(출력마다 2개)를 센 것 — 그 차이가 누적의 첫 덧셈 '0 +'다(3-3, 그림 8(Day 3))."}]}, "4-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d02-q12", "ref": "#b-energy-power", "refLabel": "에너지와 전력, 그리고 pJ", "type": "mc", "q": "'이 칩은 10 W'와 '이 덧셈은 0.1 pJ'. 두 숫자의 관계로 맞는 것은?", "options": ["둘 다 에너지라서 숫자 크기만 비교하면 된다", "10 W는 1초당 에너지, 0.1 pJ은 덧셈 한 번의 에너지다", "둘 다 전력이라서 단위 접두어만 맞추면 된다", "10 W는 칩 전체, 0.1 pJ은 트랜지스터 하나의 전력이다"], "a": 1, "why": "W = J/s(초당), pJ = 10⁻¹² J(일 하나). 10 W 칩이 덧셈만 한다면 초당 10 ÷ 10⁻¹³ = 10¹⁴번 할 수 있다는 식으로 잇는다. 둘을 같은 종류의 양으로 봤다면 기초 계단(에너지와 전력)을 다시."}, {"id": "d02-q13", "ref": "#ex-energy-mvm", "refLabel": "1,000×1,000 MVM의 에너지 단계 계산", "type": "short", "q": "MAC 1번 4 pJ, RAM 읽기 1,300 pJ. 가중치 100만 개를 RAM에서 한 번씩 읽는 MVM(입력 벡터 하나)에서 이동 에너지는 연산 에너지의 몇 배? (정수)", "a": ["325", "약 325", "325배"], "why": "연산 100만 × 4 pJ = 4 µJ, 이동 100만 × 1,300 pJ = 1.3 mJ, 비율 1,300/4 = 325. 13,000이 나왔다면 덧셈(0.1 pJ)과 MAC(4 pJ)을 섞은 것. 수치는 Horowitz 2014(45 nm) 값을 단순화한 어림이고 자릿수가 요점이다."}]}, "4-end": {"kind": "end", "title": "4구간 마무리", "items": [{"id": "d02-q15", "ref": "#think-device-system", "refLabel": "소자 에너지 vs 시스템 에너지", "type": "ox", "q": "소자 하나의 쓰기 에너지가 fJ이면 그 소자로 만든 시스템도 fJ 수준으로 동작한다.", "a": false, "why": "소자 에너지 ≠ 시스템 에너지. 4구간의 계산처럼 값을 읽고 옮기는 비용이 계산 자체보다 자릿수로 클 수 있고, 변환(ADC) 비용도 따로 든다(Day 31–32). '소자가 싸면 시스템도 싸다'는 오늘 자료 전체가 반박하는 생각이다."}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · 연산 밀도와 배치", "items": [{"id": "d02-q31", "ref": "#ai-io", "refLabel": "가중치만 vs 입력·출력까지 센 연산 밀도", "type": "short", "q": "2×2 예제(숫자 하나 4 byte)에서 입력 벡터 하나를 처리할 때, 가중치·입력·출력 이동을 모두 세면 연산 밀도는 몇 op/byte? (숫자만)", "a": ["0.25", ".25", "1/4", "0.25 op/byte", "0.25op/byte"], "why": "연산 8 op, 이동 = 가중치 16 + 입력 8 + 출력 8 = 32 byte, 8 ÷ 32 = 0.25. 0.5가 나왔다면 가중치만 센 값이다. 작은 층에서는 입력·출력 이동이 가중치 이동만큼 커서 무시할 수 없다(5-1의 표)."}, {"id": "d02-q30", "ref": "#batch", "refLabel": "배치의 뜻과 그림 10", "type": "mc", "q": "'배치 4로 처리한다'는 말의 뜻으로 맞는 것은?", "options": ["입력 벡터 하나에 숫자가 4개 들어 있다", "같은 W로 서로 다른 입력 벡터 4개를 함께 처리한다", "가중치 행렬 W를 네 조각으로 잘라 차례로 쓴다", "출력 벡터 하나에서 숫자 4개를 한꺼번에 낸다"], "a": 1, "why": "배치는 함께 처리하는 입력 벡터(샘플)의 수다. 벡터 안의 숫자 수는 층의 입력 수 N이고, W를 조각내는 것은 타일링(5-4)이다. 그림 10에서 열의 개수(4)가 배치, 열 안의 숫자(2)가 입력 수다."}, {"id": "d02-q16", "ref": "#batch-table", "refLabel": "배치 1과 배치 4 비교 표", "type": "short", "q": "2×2 행렬(가중치 16 byte)로 입력 벡터 8개를 배치로 처리한다. W를 한 번만 가져와 칩 안에 둔다면, 가중치 이동만 센 연산 밀도는 몇 op/byte? (숫자만)", "a": ["4", "4.0", "4 op/byte"], "why": "연산량 = 벡터 8개 × 8 op = 64 op, 가중치 이동은 16 byte 한 번. 64 ÷ 16 = 4 = 0.5 × 8. 0.5가 나왔다면 배치에서도 가중치를 벡터마다 다시 가져온다고 본 것(표의 마지막 줄) — W가 칩 안에 남아 있을 때의 재사용이 요점."}]}, "5-end": {"kind": "end", "title": "5구간 마무리", "items": [{"id": "d02-q32", "ref": "#bound-device", "refLabel": "같은 계산, 다른 장치 (그림 12)", "type": "mc", "q": "연산 속도 10¹⁰ op/s, 대역폭 10¹² byte/s인 장치에서 배치 1인 1,000×1,000 MVM(연산 2×10⁶ op, 가중치 이동 4×10⁶ byte)의 시간을 정하는 쪽은?", "options": ["계산: 200 µs라 compute-bound", "전송: 4 µs라 memory-bound", "둘이 같아 경계에 있다", "0.5 op/byte라서 어느 장치든 memory-bound"], "a": 0, "why": "계산 2×10⁶ ÷ 10¹⁰ = 2×10⁻⁴ s = 200 µs, 전송 4×10⁶ ÷ 10¹² = 4 µs. 긴 쪽(계산)이 전체를 정하므로 compute-bound다. 이 장치의 경계는 10¹⁰ ÷ 10¹² = 0.01 op/byte라 0.5가 경계보다 높다. '0.5면 늘 memory-bound'는 장치를 빼고 계산만 본 오해다(그림 12의 장치 B)."}, {"id": "d02-q33", "ref": "#batch-conditions", "refLabel": "'한 번만 가져온다'의 조건", "type": "ox", "q": "배치가 1이면 가중치는 입력 벡터마다 반드시 칩 밖 DRAM에서 다시 가져와야 한다.", "a": false, "why": "가중치가 칩 안 저장소에 들어갈 만큼 작고 밀려나지 않으면(2×2의 16 byte, 촉각 장면의 512 byte) 처음 한 번 가져온 뒤에는 DRAM에서 다시 가져올 일이 없다. 배치 1에서 매번 다시 가져오는 것은 가중치가 칩 안에 머물 수 없을 만큼 클 때다(5-1의 '이동이 더 작다', 5-5의 디지털 기준선)."}, {"id": "d02-q18b", "ref": "#rt-scenes", "refLabel": "실시간 입력의 세 장면", "type": "mc", "q": "다음 중 입력 벡터를 모아 배치를 키우기 가장 어려운 계산은?", "options": ["밤새 모아 둔 사진 100만 장을 한꺼번에 분류하기", "미끄러지는 물체를 잡은 촉각 센서 신호를 10 ms 안에 판단하기", "데이터센터에서 큰 모델을 큰 배치로 학습하기", "문서 1만 개를 모아 한꺼번에 번역하기"], "a": 1, "why": "촉각 장면은 10 ms 안에 답해야 해서 입력 벡터를 모아 기다리기 어렵다(5-5 장면 1). 나머지는 입력을 미리 모을 수 있어 배치를 키울 수 있다. 단, 배치를 못 키운다고 곧 memory-bound인 것은 아니다. 가중치가 작아 칩 안에 두면 DRAM 이동이 없고, 병목은 장치의 연산 속도·대역폭에도 달려 있다(5-3, 5-5)."}]}, "6-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d02-q20", "ref": "#b-alpha", "refLabel": "활동률: 한 박자에 실제로 바뀌는 비율", "type": "mc", "q": "P ≈ αCV²f에서 '활동률 α'의 뜻은?", "options": ["1초에 박자가 오는 횟수", "칩 전체 트랜지스터 중 켜져 있는 것의 비율", "한 박자에 실제로 0↔1이 바뀌는 회로의 비율", "꺼진 트랜지스터로 새는 전류의 비율"], "a": 2, "why": "에너지는 전압이 바뀔 때만 들고, 매 박자에 바뀌는 회로는 일부뿐이다. '켜져 있는 비율'은 상태가 그대로면 충방전이 없으므로 다르다. 박자 횟수는 f, 새는 전류는 정적 전력이다(기초 계단: 활동률)."}, {"id": "d02-q21", "ref": "#dennard-example", "refLabel": "Dennard 작은 예시: κ = 1.4 한 세대", "type": "short", "q": "κ = 1.4인 한 세대에서 전압을 못 내리면 전력밀도는 약 몇 배? (소수 둘째 자리까지)", "a": ["1.96", "약 1.96", "2", "1.96배"], "why": "V² 항이 1로 고정되면 f·C/A ∝ κ² = 1.96. 1.4가 나왔다면 C의 감소(1/κ)와 면적의 감소(1/κ²) 중 하나를 빠뜨린 것 — 작은 예시의 곱셈 순서를 다시."}]}, "6-end": {"kind": "end", "title": "6구간 마무리", "items": [{"id": "d02-q22", "ref": "#why-no-lower-v", "refLabel": "왜 전압을 못 내리게 되었나", "type": "mc", "q": "클록이 수 GHz에서 멈춘 직접적 이유로 이 자료가 설명한 것은?", "options": ["트랜지스터를 더 작게 만드는 공정이 더 나오지 않아서", "메모리가 연산기를 따라오지 못해 박자를 올려도 소용없어서", "소프트웨어가 빠른 박자를 쓰도록 바뀌지 못해서", "전압을 더 못 내리자 박자를 올리면 전력밀도가 세대마다 약 2배가 되어서"], "a": 3, "why": "Dennard scaling의 전제(V도 같이 줄임)가 누설 때문에 깨졌다. 트랜지스터는 계속 작아졌다. 메모리 격차는 5구간의 다른 벽(memory wall)이다."}, {"id": "d02-q23", "ref": "#b-clock", "refLabel": "클록과 동기·비동기", "type": "ox", "q": "디지털 회로는 반드시 클록(동기) 방식이다.", "a": false, "why": "디지털(값이 0·1)과 동기(공통 박자)는 다른 축이다. Loihi 2는 디지털이지만 비동기. 기초 계단(클록)의 한 줄 복습과 구간 끝 심화, Day 5–6."}]}, "7-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d02-q24", "ref": "#walls-cost", "refLabel": "세 벽: 저장과 계산을 합친 대가", "type": "mc", "q": "벽 ①(데이터 이동)을 줄이는 뉴로모픽 처방의 대가가 청구되는 곳은?", "options": ["벽 ③ 정밀도: 변환·보정 회로의 비용이 생긴다", "벽 ② 전력밀도: 소자가 많아져 면적당 열이 커진다", "벽 ① 데이터 이동: 가중치를 더 자주 옮겨야 한다", "대가 없음: 저장과 계산을 합치면 비용이 함께 준다"], "a": 0, "why": "아날로그 계산의 오차를 줄이는 보정 기법이 오버헤드를 끌어들여 이점을 깎고(Jiang 2026), peripheral circuit(ADC/DAC)가 큰 몫을 차지할 수 있다(Roadmap 2026). 그래서 ①을 줄인 대가는 주로 ③에서 청구된다."}, {"id": "d02-q14b", "ref": "#walls-cost", "refLabel": "세 벽: 저장과 계산을 합친 대가", "type": "mc", "q": "'메모리와 연산을 한곳에 붙이면 연산기–메모리 사이의 비싼 데이터 전송을 피한다'는 주장을 시스템 전체로 보면 더 정확한 표현은?", "options": ["'피한다'가 맞다: 연산기와 메모리 사이 이동이 모두 사라진다", "'피한다'가 맞다: 아날로그 소자는 값을 옮길 필요가 없다", "'옮긴다'가 맞다: 이동 비용이 줄지 않고 다른 곳으로 옮겨 갈 뿐이다", "'줄인다'가 맞다: 중간 결과 전송·변환·보정 비용이 남는다"], "a": 3, "why": "가중치 이동은 줄지만 배열 사이 중간 결과 전송, ADC 같은 변환, 오차 보정 비용이 남는다(7구간의 대가 목록과 '흔한 오해' 상자). 그렇다고 이득이 전혀 없는 것은 아니므로 '줄인다'가 정확하다."}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d02-q26", "ref": "#mvm-crossbar", "refLabel": "MVM과 crossbar의 대응", "type": "mc", "q": "지난 학습의 crossbar 식 I_j = Σ_i G_ij V_i 에서 오늘의 가중치 행렬의 '원소'에 해당하는 것은?", "options": ["입력 전압 V_i", "교차점의 전도도 G_ij", "가로줄 전류 I_j", "교차점 소자의 개수"], "a": 1, "why": "G_ij가 가중치 표의 원소, V_i가 입력 벡터의 원소, I_j가 출력 벡터의 원소. 곱셈은 Ohm 법칙, 덧셈은 전류가 합쳐지는 것이 대신한다."}, {"id": "d02-q34", "ref": "#tiling", "refLabel": "타일링 예제: 4 MB 표와 1 MB 캐시", "type": "mc", "q": "칩 안 저장소가 1 MB인 장치에서 4 MB 가중치 행렬로 입력 벡터 4개(배치 4)를 처리한다. 표를 0.5 MB 조각으로 잘라 조각마다 네 벡터에 다 쓰면(타일링), 가중치의 DRAM 이동량은 대략?", "options": ["4 MB: 조각마다 한 번씩만 가져온다", "16 MB: 벡터마다 표 전체를 다시 가져온다", "1 MB: 칩 안 저장소 크기만큼만 옮긴다", "0.5 MB: 조각 하나만 가져오면 된다"], "a": 0, "why": "조각 8개를 각각 한 번씩 가져와 네 벡터에 다 쓰므로 합계 4 MB다. 16 MB는 조각내지 않았을 때(벡터마다 다시 읽음)의 값이다. 타일링은 배치로 생긴 재사용이 작은 캐시 때문에 사라지는 것을 막을 뿐, 표 전체를 한 번은 옮겨야 한다(5-4 (가))."}, {"id": "d02-q36", "ref": "#rt-baseline", "refLabel": "디지털 기준선과 비교할 조건", "type": "mc", "q": "촉각 센서로 미끄러짐을 10 ms 안에 판단하는 일에 physical reservoir computing 소자가 디지털보다 낫다고 주장하려면, 비교에서 꼭 맞춰야 하는 것으로 가장 적절한 것은?", "options": ["소자 하나의 쓰기 에너지가 fJ 수준인지 여부", "소재의 이완 시간이 가능한 한 길다는 점", "같은 정확도·지연에서 판단 한 번당 시스템 전체 에너지", "디지털 쪽은 배치 1이라 반드시 DRAM을 쓴다는 전제"], "a": 2, "why": "같은 과제·정확도·지연 예산에서 센서 읽기·ADC·대기 전력까지 포함한 판단 한 번당 에너지를 비교해야 한다. 소자 에너지만으로는 시스템을 말할 수 없고(4구간), 이완 시간은 필요한 기억 길이에 맞아야 하며 길수록 좋은 것이 아니고, 작은 디지털 모델은 가중치를 칩 안에 두어 DRAM을 안 쓸 수 있다(5-5)."}]}, "review": {"kind": "review", "title": "지난 학습 복습: 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치", "items": [{"id": "d02-r01", "type": "mc", "q": "어떤 칩은 평범한 디지털 트랜지스터를 그대로 쓰되, 작은 코어마다 메모리를 바로 옆에 붙이고 스파이크가 올 때만 코어가 일하게 만들었다. 이 칩이 바꾼 것과 그대로 둔 것으로 맞는 것은?", "options": ["소자는 그대로 두고, 메모리 위치와 일하는 때를 바꿨다", "소자의 물리를 바꿔, 재료의 동역학으로 계산하게 했다", "가중치를 전도도에 저장해, 배열 안에서 곱해 더하게 했다", "아날로그 회로의 물리로 신경 동역학을 직접 재현했다"], "a": 0, "why": "디지털 SNN 칩 줄기의 설명입니다. 소자는 평범한 CMOS 트랜지스터 그대로이고, 바꾼 것은 구조입니다. 코어마다 로컬 메모리를 두고 사건(스파이크)이 올 때만 일하게 해 큰 신경망의 에너지를 줄이려 합니다.", "wrongWhy": ["", "재료의 동역학을 계산 자원으로 쓰는 것은 물리 컴퓨팅 줄기입니다. 이 칩은 평범한 트랜지스터를 씁니다.", "전도도에 가중치를 저장해 배열 안에서 곱해 더하는 것은 in-memory 줄기입니다.", "아날로그 회로로 동역학을 재현하는 것은 아날로그 VLSI 줄기입니다. 이 칩은 디지털입니다."], "ref": "d01b.html#ch-branches", "refLabel": "(나) 디지털 SNN 칩: 소자는 그대로, 구조만 뇌처럼", "fig": "../assets/img/d01/fig2-branches.svg", "figAlt": "뉴로모픽의 네 줄기와 회색지대 분류 모식도"}, {"id": "d02-r02", "core": true, "type": "mc", "q": "crossbar의 한 가로줄(0 V로 유지)에 전도도 G₁ = 3 µS, G₂ = 1 µS인 소자가 있고, 세로줄에 V₁ = 0.1 V, V₂ = 0.5 V를 걸었다. 이 가로줄로 모이는 전류는?", "options": ["0.3 µA", "0.8 µA", "1.6 µA", "2.4 µA"], "a": 1, "why": "소자마다 Ohm 법칙으로 곱셈이 일어나고(3 × 0.1 = 0.3 µA, 1 × 0.5 = 0.5 µA), 한 가로줄로 모이며 Kirchhoff 법칙으로 더해져 0.8 µA입니다. 행렬–벡터 곱에서 행 하나와 입력을 자리끼리 곱해 더한 것과 같은 계산입니다.", "wrongWhy": ["한 소자의 전류(3 µS × 0.1 V)만 셌습니다. 같은 가로줄의 전류는 모두 더해집니다.", "", "전도도와 전압의 짝을 바꿔 곱했습니다(3 × 0.5 + 1 × 0.1). 같은 자리끼리 곱해야 합니다.", "전도도의 합(4 µS)과 전압의 합(0.6 V)을 곱했습니다. 자리끼리 곱한 뒤 더해야 합니다."], "ref": "d01b.html#b-vector-matrix", "refLabel": "(다) 곱해서 더하기를 숫자로, 그리고 crossbar", "fig": "../assets/img/d01/fig3-crossbar.svg", "figAlt": "2×2 crossbar에서 세로줄 전압, 교차점 전도도, 가로줄 전류를 표시한 그림"}, {"id": "d02-r03", "type": "mc", "q": "어떤 재료에 펄스열을 넣었더니 응답이 입력 크기에 정확히 비례했고(선형), 펄스가 끝나면 응답이 즉시 0으로 돌아왔다. 물리 reservoir의 재료로서 부족한 것은?", "options": ["비선형성만 부족하고, 기억은 충분하다", "기억만 부족하고, 비선형성은 충분하다", "둘 다 갖췄으므로 재료로서 부족한 것이 없다", "비선형성과 서서히 잊는 기억 둘 다 부족하다"], "a": 3, "why": "물리 노드가 갖출 두 기본 성질은 입력에 대한 비선형 응답과, 지나간 입력을 잠시 기억했다가 서서히 잊는 동역학입니다. 비례 응답은 선형이고, 즉시 0으로 돌아오는 것은 기억이 없다는 뜻이라 둘 다 부족합니다.", "wrongWhy": ["즉시 0으로 돌아오면 지나간 입력의 흔적이 남지 않으므로 기억도 없습니다.", "입력에 정확히 비례하는 응답은 선형이므로 비선형성도 없습니다.", "비례 응답(선형)과 즉시 소멸(기억 없음)은 두 성질이 모두 빠진 경우입니다.", ""], "ref": "d01b.html#ch-branches", "refLabel": "(라) 물리 컴퓨팅: 비선형성과 fading memory", "fig": "../assets/img/d01/fig4-fading-memory.svg", "figAlt": "펄스열과, 펄스마다 올랐다가 서서히 내려오는 소자 상태"}, {"id": "d02-r04", "type": "ox", "q": "펄스 둘 사이 간격이 짧을수록 둘째 응답이 커지는 시냅스 현상을 소자 하나에서 재현했다면, 그 소자는 이미 계산을 하고 있다고 말할 수 있다.", "a": false, "why": "시냅스 현상의 재현은 계산 시스템의 부품 후보에 머뭅니다(회색지대). 상태를 읽어 내고, 출력층(readout)을 학습시키고, 학습에 쓰지 않은 데이터에서 성능을 재고, 디지털 기준선과 비교해야 '계산한다'고 말할 수 있습니다.", "wrongWhy": ["현상 재현은 부품 후보입니다. 읽어 낸 상태로 과제를 풀고 기준선과 비교해야 계산이라고 말할 수 있습니다.", ""], "ref": "d01b.html#ch-branches", "refLabel": "(마) 회색지대: 소자 수준의 생체 모사"}, {"id": "d02-r05", "type": "mc", "q": "가중치를 전도도로 저장해 메모리 배열 안에서 곱해 더하는 crossbar 가속기는 다섯 비교 축 가운데 어느 축을 바꾸지 않나?", "options": ["① 저장과 계산의 위치", "② 정보의 표현", "③ 시간의 역할", "④ 정밀도"], "a": 2, "why": "crossbar는 가중치를 저장한 자리에서 계산하고(①), 전도도라는 연속 양으로 값을 나타내며(②), 잡음·편차를 감수하는 근사 계산을 합니다(④). 그러나 곱해 더한 결과를 읽을 뿐 소자의 시간상수가 기억의 시간척도를 정하지는 않으므로 ③은 그대로입니다. ③을 바꾸는 줄기는 아날로그 VLSI와 물리 컴퓨팅입니다.", "wrongWhy": ["가중치가 저장된 배열 안에서 곱해 더하므로 저장과 계산의 위치를 바꿉니다.", "가중치를 비트가 아니라 전도도라는 연속 양으로 나타내므로 표현을 바꿉니다.", "", "아날로그 값이라 잡음과 소자 편차를 감수하므로 정밀도 축도 바뀝니다."], "ref": "d01b.html#ch-axes", "refLabel": "다섯 축 표: 이 축을 바꾸는 줄기", "fig": "../assets/img/d01/fig7-axes.svg", "figAlt": "보통 컴퓨터와 뉴로모픽을 다섯 축으로 비교한 그림"}, {"id": "d02-r06", "core": true, "type": "mc", "q": "회로 A는 2 mW로 한 작업을 1 s에, 회로 B는 200 mW로 같은 작업을 1 ms에 끝낸다. 작업 하나에 드는 에너지로 맞는 것은?", "options": ["A가 전력이 100분의 1이므로 에너지도 100분의 1이다", "B가 10분의 1이다. 에너지 = 전력 × 시간이기 때문이다", "둘이 같다. 같은 작업에는 같은 에너지가 들기 때문이다", "비교할 수 없다. 전력과 에너지는 단위가 다르기 때문이다"], "a": 1, "why": "A는 2 mW × 1 s = 2 mJ, B는 200 mW × 0.001 s = 0.2 mJ입니다. 전력이 100배 큰 B가 작업 하나에는 10분의 1만 씁니다. 전력이 작아도 오래 걸리면 에너지는 작지 않을 수 있습니다.", "wrongWhy": ["전력은 초당 에너지입니다. A는 1,000배 오래 걸려 작업당 에너지가 오히려 큽니다(2 mJ).", "", "같은 작업이라도 회로마다 드는 에너지가 다릅니다. 전력 × 시간으로 따로 계산해야 합니다.", "전력(W)에 걸린 시간(s)을 곱하면 에너지(J)가 되어 같은 단위로 비교할 수 있습니다."], "ref": "d01b.html#b-energy-power", "refLabel": "에너지(J)와 전력(W)"}, {"id": "d02-r07", "core": true, "type": "mc", "q": "같은 디지털 칩에서 클록 박자마다 실제로 값이 바뀌는 전선의 비율(활동률 α)이 0.2에서 0.05로 줄었다. 전압·정전용량·클록이 같다면 동적 전력은?", "options": ["그대로다. 박자의 수가 같기 때문이다", "16분의 1이 된다. 활동률은 제곱으로 들어가기 때문이다", "4분의 1이 된다. 바뀌는 전선만 충방전되기 때문이다", "알 수 없다. 활동률은 시간에만 영향을 주기 때문이다"], "a": 2, "why": "P ≈ αCV²f에서 α는 비례로 들어가므로 0.2 → 0.05는 4분의 1입니다. 박자가 와도 값이 바뀌지 않는 전선은 충방전이 없어 에너지를 거의 쓰지 않기 때문입니다. 낮은 활동률이 유리한 이유입니다.", "wrongWhy": ["박자가 같아도 값이 바뀌지 않는 전선은 충방전하지 않아 전력이 줍니다.", "제곱으로 들어가는 것은 전압 V뿐이고, α는 비례로 들어갑니다.", "", "α는 한 박자에 충방전되는 전선의 비율이라 전력에 직접 들어갑니다."], "ref": "d01b.html#b-energy-power", "refLabel": "P ≈ αCV²f의 기호와 활동률"}, {"id": "d02-r08", "type": "mc", "q": "어떤 논문이 '우리 이온 뉴런은 스파이크당 10 fJ로, 생물 뉴런(스파이크당 수십 pJ)보다 수천 배 효율적'이라고 쓴다. 이 결론을 받아들이기 전에 먼저 맞춰야 할 것은?", "options": ["fJ와 pJ 중 하나로 단위만 맞추면 충분하다", "이온 뉴런이 생물 뉴런보다 빠른지만 확인하면 된다", "맞출 것이 없다. 소자 숫자가 작으면 시스템도 효율적이다", "두 숫자가 무엇을 포함했고 어떻게 얻은 값인지"], "a": 3, "why": "소자 회로 하나의 최선값과 생물 뉴런의 추정치는 포함하는 것(시냅스, 통신, 대기 전력)과 숫자의 성격(측정한 최선값인지, 2차 문헌의 추정인지)이 달라 같은 기준이 아닙니다. 비교 결과보다 '무엇을 같게 맞춰야 하나'가 먼저입니다.", "wrongWhy": ["단위를 맞춰도 두 숫자가 세는 범위가 다르면 비교가 되지 않습니다.", "빠르기는 다른 질문입니다. 에너지 비교는 포함 범위를 먼저 맞춰야 합니다.", "큰 시스템에서는 peripheral circuit이 전력의 주원인이 될 수 있어, 소자 숫자가 곧 시스템 효율은 아닙니다.", ""], "ref": "d01b.html#ch-axes", "refLabel": "에너지로 보면: 같은 기준이 아닌 두 숫자"}, {"id": "d02-r09", "core": true, "type": "mc", "q": "어떤 이온 소자의 retention(쓴 값이 유지되는 시간)이 약 1시간이다. 이 소자를 추론 전용 in-memory 가중치(몇 년 사용)와, 수 초 단위 신호를 다루는 physical reservoir computing 노드에 비춰 본 판단으로 맞는 것은?", "options": ["가중치로는 부족하고, RC 노드로는 너무 길 수 있다", "어느 용도에서나 충분히 길어 좋은 소자다", "가중치로는 너무 길고, RC 노드로는 너무 짧다", "줄기와 상관없이 retention은 짧을수록 좋다"], "a": 0, "why": "in-memory 가중치는 학습된 값이 쓰이는 기간 동안(추론 전용 칩이면 년 단위) 유지돼야 하고, physical reservoir computing 노드는 과제의 시간척도에 맞게 잊어야 합니다. 같은 1시간이 한쪽에서는 부족하고 다른 쪽에서는 너무 깁니다. '좋은 소자인가'는 줄기와 응용을 정한 뒤에 답할 수 있습니다.", "wrongWhy": ["", "어느 줄기에 쓰느냐에 따라 같은 숫자가 부족할 수도, 너무 길 수도 있습니다.", "방향이 거꾸로입니다. 가중치에는 길게, 수 초 신호의 RC 노드에는 짧게 필요합니다.", "가중치로 쓸 때는 값을 오래 들고 있어야 하므로 짧을수록 좋지 않습니다."], "ref": "d01b.html#ch-volatile", "refLabel": "같은 현상, 정반대의 역할: 요구 사양 표", "fig": "../assets/img/d01/fig6-volatile.svg", "figAlt": "같은 쓰기 펄스 뒤 오래 유지되는 가중치와 적당히 잊는 RC 노드의 전도도"}, {"id": "d02-r10", "type": "mc", "q": "내 이온 소자를 in-memory 가중치 소자로 내세우기로 했다. 먼저 이겨야 할 경쟁자와 지표로 가장 맞는 것은?", "options": ["디지털 RC·저전력 MCU, 그리고 과제 시간척도에 맞는 기억", "생물 시냅스, 그리고 PPF·STDP를 얼마나 닮았는가", "PCM·RRAM·ECRAM, 그리고 상태 수·retention", "GPU, 그리고 한꺼번에 돌리는 연산기의 수"], "a": 2, "why": "줄기를 고르면 경쟁자가 정해지고, 경쟁자가 정해지면 이겨야 할 지표가 정해집니다. in-memory 가중치의 경쟁자는 PCM·RRAM·ECRAM이고, 많은 전도도 상태, 선형·대칭 update, 긴 retention, endurance가 지표입니다.", "wrongWhy": ["디지털 RC·MCU와 시간척도 정합은 physical reservoir computing 노드로 내세울 때의 경쟁자와 지표입니다.", "현상을 닮았는지는 계산 시스템의 지표가 아닙니다.", "", "GPU의 병렬성은 이 줄기의 소자 경쟁 지표가 아닙니다."], "ref": "d01b.html#ch-my-position", "refLabel": "나는 어느 줄기에 있나: 선택지와 경쟁자"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: 숫자·메모리·곱해서 더하기: 계산의 재료", "items": [{"id": "d02-rb01", "core": true, "type": "mc", "q": "연산기는 계산 1번에 3 ns, 할 일은 계산 1,000번, 길은 1 ns에 숫자 1개를 옮기고, 재사용은 1번이다. 가져오기와 계산이 겹쳐 진행될 때 전체 시간을 줄이는 조작은?", "options": ["길(전송 속도)을 2배로 넓힌다", "숫자 하나를 2번씩 재사용한다", "연산기를 2배 빠르게 한다", "어느 것을 바꿔도 전체는 줄지 않는다"], "a": 2, "why": "계산 시간은 1,000 × 3 = 3,000 ns, 가져오기는 1,000 ÷ 1 = 1,000 ns라 계산이 긴 쪽이고 전체 ≈ 3,000 ns입니다. 긴 쪽을 줄여야 전체가 줄므로 연산기를 2배 빠르게 하면 1,500 ns가 됩니다.", "wrongWhy": ["길을 넓히면 원래 짧던 가져오기(1,000 ns)만 줄고, 전체는 계산 시간 3,000 ns에 묶여 있습니다.", "재사용도 가져오기만 줄입니다. 이 경우 긴 쪽은 계산입니다.", "", "긴 쪽(계산)을 줄이는 조작은 전체를 줄입니다."], "ref": "d02a.html#ch-compute-store", "refLabel": "1-1 직접 바꿔 보기: 긴 쪽이 전체를 정한다", "note": "전체 시간 ≈ max(계산 시간, 가져오기 시간). 짧은 쪽은 아무리 줄여도 전체가 그대로입니다."}, {"id": "d02-rb02", "type": "mc", "q": "숫자를 8 bit 정수 형식(0–255)으로 저장하는 칸에 300을 넣으려 한다. 맞는 것은?", "options": ["300은 값이 커서 칸 하나가 저절로 2 byte로 늘어난다", "8 bit로는 300을 못 적어 더 큰 형식이 필요하다", "300은 세 자리라서 8 bit 칸 세 개(3 byte)에 나눠 적힌다", "칸 크기는 값이 정하므로 300에 맞는 칸이 새로 만들어진다"], "a": 1, "why": "저장 칸의 크기는 값이 아니라 숫자를 적기 전에 정한 형식이 정합니다. 8 bit는 2⁸ = 256가지(0–255)만 적을 수 있어 300은 범위를 넘고, 16 bit(0–65,535) 이상의 형식이 필요합니다.", "wrongWhy": ["형식은 적기 전에 정해지고, 값에 따라 칸이 저절로 늘지 않습니다.", "", "십진수 자릿수와 비트 칸은 관계가 없습니다. 형식이 칸 수를 정합니다.", "칸 크기는 값이 아니라 형식이 정합니다."], "ref": "d02a.html#b-bit", "refLabel": "값의 크기와 저장 칸의 크기는 다르다"}, {"id": "d02-rb03", "core": true, "type": "mc", "q": "입력 숫자 5개 → 출력 숫자 3개인 완전연결 층의 가중치를 숫자 하나 = 4 byte로 저장하면 몇 byte인가?", "options": ["20 byte", "32 byte", "15 byte", "60 byte"], "a": 3, "why": "모든 출력이 모든 입력과 이어지므로 선은 3 × 5 = 15개, 가중치도 15개(3행 5열)입니다. 하나에 4 byte이면 15 × 4 = 60 byte입니다.", "wrongWhy": ["출력 하나(행 하나)의 가중치 5개만 셌습니다. 출력 3개 모두 셉니다.", "입력 수와 출력 수를 더했습니다(5 + 3 = 8). 가중치 수는 곱(5 × 3)입니다.", "가중치 개수(15개)만 세고 4 byte를 곱하지 않았습니다.", ""], "ref": "d02a.html#ex-2x2-storage", "refLabel": "3-1 저장 칸 세기", "fig": "../assets/img/d02/fig10-storage-16byte.svg", "figAlt": "2×2 가중치 네 개를 4 byte씩 저장한 16칸"}, {"id": "d02-rb04", "type": "mc", "q": "가중치 행렬 W에서 원소 W[2,1] (행 2, 열 1)이 뜻하는 것은?", "options": ["입력 u₁이 출력 y₂에 곱해지는 가중치", "입력 u₂가 출력 y₁에 곱해지는 가중치", "출력 y₂와 출력 y₁을 잇는 가중치", "입력 u₂와 입력 u₁을 잇는 가중치"], "a": 0, "why": "행 하나 = 출력 하나의 가중치 목록, 열 하나 = 입력 숫자 하나에 곱해지는 자리입니다. 그래서 W[2,1]은 출력 y₂(행 2)를 만들 때 입력 u₁(열 1)에 곱하는 가중치입니다.", "wrongWhy": ["", "행과 열을 바꿔 읽었습니다. 행이 출력, 열이 입력입니다.", "가중치는 입력 하나와 출력 하나를 잇습니다. 출력끼리 잇는 선은 없습니다.", "가중치는 입력 하나와 출력 하나를 잇습니다. 입력끼리 잇는 선은 없습니다."], "ref": "d02a.html#b-matrix", "refLabel": "2×2 표: 행 = 출력, 열 = 입력", "fig": "../assets/img/d02/fig9-weights-2x2.svg", "figAlt": "입력 2개와 출력 2개를 잇는 선 네 개와 같은 내용의 2×2 표"}, {"id": "d02-rb05", "core": true, "type": "mc", "q": "입력 1,000개 → 출력 1,000개 층(완전연결, 숫자 하나 4 byte)을 입력 2,000개 → 출력 2,000개로 키웠다. 입력 벡터 하나를 처리할 때 가중치 저장량과 연산량(op)은 각각 몇 배가 되나?", "options": ["둘 다 2배", "저장량은 4배, 연산량은 2배", "둘 다 4배", "저장량은 2배, 연산량은 4배"], "a": 2, "why": "가중치 수 = 입력 수 × 출력 수이므로 2 × 2 = 4배(4 MB → 16 MB)입니다. 가중치 하나마다 MAC 1번(2 op)이 일어나므로 연산량도 4배(2×10⁶ → 8×10⁶ op)입니다.", "wrongWhy": ["입력과 출력이 둘 다 2배라 가중치 수는 2 × 2 = 4배입니다.", "가중치 하나마다 MAC이 1번씩 일어나 연산량도 가중치 수를 따라 4배가 됩니다.", "", "저장량도 입력 수 × 출력 수를 따라 4배가 됩니다."], "ref": "d02a.html#ex-mac-count", "refLabel": "3-3 MAC과 op: 크기를 키우면"}, {"id": "d02-rb06", "core": true, "type": "mc", "q": "지연 80 ns, 대역폭 4 byte/ns인 메모리에서 값 하나(8 byte)씩 따로따로 요청하는 프로그램이 있다. 대역폭만 2배로 늘리면 요청 하나의 시간은?", "options": ["약 절반(41 ns)으로 준다", "2배(164 ns)로 는다", "0 ns에 가까워진다", "거의 그대로(약 81 ns)다"], "a": 3, "why": "가져오기 시간 ≈ 지연 + 양 ÷ 대역폭 = 80 + 8 ÷ 4 = 82 ns이고, 대역폭을 2배로 하면 80 + 1 = 81 ns입니다. 작은 값을 띄엄띄엄 가져오면 지연이, 큰 데이터를 통째로 가져오면 대역폭이 시간을 정합니다.", "wrongWhy": ["대역폭은 '양 ÷ 대역폭' 몫만 줄입니다. 여기서는 그 몫이 2 ns뿐입니다.", "대역폭을 넓히면 시간이 늘지 않습니다.", "차선을 늘려도 톨게이트 대기(지연 80 ns)는 그대로입니다.", ""], "ref": "d02a.html#lat-bw", "refLabel": "'느리다'의 두 가지 뜻: 지연과 대역폭", "fig": "../assets/img/d02/fig8-latency-bandwidth.svg", "figAlt": "가져오기 시간을 지연과 양 나누기 대역폭으로 나눠 그린 막대"}, {"id": "d02-rb07", "type": "mc", "q": "연산기 옆의 빠른 저장소(SRAM)로 수 GB짜리 주기억장치 전체를 만들지 않는 까닭으로 가장 맞는 것은?", "options": ["SRAM은 전원을 꺼도 값이 남아 주기억장치로 쓸 수 없기 때문", "한 칸에 트랜지스터 6개라 비트당 값이 비싸기 때문", "SRAM은 새로 고침이 필요해 수 GB에서는 감당할 수 없기 때문", "SRAM은 값을 0과 1이 아닌 연속 값으로 저장하기 때문"], "a": 1, "why": "SRAM 한 칸은 트랜지스터 6개, DRAM 한 칸은 트랜지스터 1개 + 커패시터 1개라 같은 면적에 DRAM이 훨씬 많은 비트를 담습니다. 칸이 많을수록 선도 길어집니다. 그래서 '자주 쓰는 것은 작고 빠른 층에, 나머지는 크고 싼 층에' 두는 타협을 합니다.", "wrongWhy": ["SRAM은 전원이 있는 동안만 값을 들고 있습니다. 전원을 꺼도 남는 곳은 SSD 같은 저장장치입니다.", "", "새로 고침이 필요한 쪽은 커패시터를 쓰는 DRAM입니다. SRAM은 되먹임 고리로 값을 붙잡습니다.", "SRAM도 0과 1을 다루는 디지털 저장소입니다."], "ref": "d02a.html#b-memory-kinds", "refLabel": "저장하는 부품: 왜 네 층이나 두는가", "fig": "../assets/img/d02/fig0-computer.svg", "figAlt": "계산하는 곳과 저장하는 곳의 위치를 그린 컴퓨터 모식도"}, {"id": "d02-rb08", "type": "ox", "q": "저장과 계산을 같은 곳에서 하는 칩이라면, 계산 중에 데이터를 옮기는 일은 전혀 없다.", "a": false, "why": "저장과 계산을 합치면 주요 데이터 이동(가중치 가져오기)이 줄어들 뿐, 옮길 것이 아예 없어지지는 않습니다. 정확한 문장은 '주요 데이터 이동을 줄인다'입니다.", "wrongWhy": ["가중치 이동이 줄 뿐 옮기는 일이 모두 사라지지는 않습니다. '옮길 것이 없다'는 과장입니다.", ""], "ref": "d02a.html#myth-every-add", "refLabel": "흔한 오해: 더하기마다 RAM 왕복, 그리고 '옮길 것이 없다'"}, {"id": "d02-rb09", "type": "mc", "q": "3 + 5 계산에서 두 숫자의 복사본이 이미 캐시에 있었다(hit). RAM까지 다녀와야 했을 때(miss)와 비교해 달라지는 것은?", "options": ["값을 레지스터로 가져오는 시간이 자릿수로 짧아진다", "덧셈 회로 자체가 더 빨리 계산한다", "계산 결과 8이 달라질 수 있다", "달라지는 것이 없다. 계산은 늘 레지스터에서 하기 때문이다"], "a": 0, "why": "캐시 hit면 몇 클록 만에 레지스터로 오고, miss면 칩 밖 RAM까지 가서 수백 클록이 걸립니다. 다섯 단계 중 계산은 한 단계이고 나머지는 옮기는 일이라, 어디까지 가야 하느냐가 비용을 정합니다.", "wrongWhy": ["", "덧셈 자체는 hit든 miss든 레지스터에서 한 클록 안팎입니다. 바뀌는 것은 가져오는 시간입니다.", "어디서 가져왔든 값은 같은 복사본이라 결과는 같습니다.", "계산은 레지스터에서 하지만, 값이 레지스터에 오기까지의 시간이 크게 다릅니다."], "ref": "d02a.html#ex-3plus5", "refLabel": "3 + 5가 처리되는 다섯 단계"}]}}}</script>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>
 <div class="done-box" data-day="d02b">
   <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>덧셈보다 자릿수로 비싼 데이터 이동, 연산 밀도와 배치(재사용·기다림), memory-bound 판단, Dennard 종말과 세 벽</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
   <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
@@ -1842,14 +1874,14 @@ Dennard scaling
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Why Ions Compute? · 이온은 어떻게, 그리고 왜 계산하는가</p>
+</div>   
     <div class="nav-footer-center">
-<p>Why Ions Compute · 이온 소자는 어떻게, 왜 계산하는가</p>
-</div>
-    <div class="nav-footer-right">
       &nbsp;
     </div>
+    <div class="nav-footer-right">
+<p>만든 사람 · 양현우 (KAIST 생명화학공학과 박사과정)</p>
+</div>
   </div>
 </footer>
 
