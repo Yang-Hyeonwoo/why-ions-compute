@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> reservoir가 과거 입력의 어떤 함수를 얼마나 되살리는지 어떻게 재고, 총량은 왜 노드 수를 넘지 못하나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 논문이 '기억이 늘었다', '비선형이 늘었다'고 쓸 때 둘을 한 저울(목표 하나의 용량 C = 1 − 오차/분산)로 잴 수 있고, 그 총합은 서로 독립인 상태 수를 넘지 못합니다. 그래서 내 device를 더 놓는 것보다, <span class="key">내 device 전류 시계열이 몇 개의 독립 상태를 주는지가 용량을 정한다</span>는 것을 압니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 목표 함수(지연된 입력들의 곱) + 상태 → 선형 readout이 최선으로 맞춘 오차 → 용량 C. 차수별로 더하면 차수 1의 합이 MC(기억), 모든 차수의 합이 information processing capacity(IPC). <span class="key">노드 N개의 합은 N 이하</span>.</p>
-<p><strong>오늘 반드시</strong> <span class="key">용량 C = 1 − 오차/분산이고, 차수 1(기억)의 합이 MC, 모든 차수의 합이 IPC다. 노드 하나의 합은 1(Day 15–16의 memory budget)이고 노드 N개의 합은 서로 독립인 상태 수 N을 넘지 못한다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> Legendre 다항식으로 겹치지 않는 조각을 만드는 계산(심화 접기), '원 논문의 정리: 상한과 같아지는 조건'의 세부 목록, 그림자(projection) 설명의 수식. 처음에는 '합 ≤ N'과 노드 2개 평면에서 그림자 길이 제곱의 합 1 + 0.5 + 0.5 = 2만 잡으면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 21–22 MC 실습, Day 23–24 지연별 MC, Day 25–26 rank로 독립 상태 세기, Day 49–50 device 배열. 'device를 더 놓으면 용량이 느나'를 판단할 때</p>
+<p><strong>왜 배우나</strong> 내 device 전류 시계열이 <span class="key">몇 개의 독립 상태를 주는지가 capacity</span>를 정한다.</p>
+<p><strong>오늘의 장면</strong> 목표 함수(지연 입력의 곱) + 상태 → 선형 readout 오차 → capacity C → <span class="key">합 ≤ 독립 상태 수 N</span></p>
+<p><strong>오늘 반드시</strong> <span class="key">C = 1 − 오차/분산. 차수 1의 합이 MC, 전 차수의 합이 IPC이며 노드 N개의 합은 N을 넘지 못한다.</span></p>
+<p><strong>나중에 봐도 됨</strong> Legendre 다항식 계산 · 원 논문 정리의 등호 조건 · 그림자 수식</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 21–22 MC 실습 · Day 23–24 지연별 MC · Day 25–26 rank로 독립 상태 · Day 49–50 device 배열</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d11a">

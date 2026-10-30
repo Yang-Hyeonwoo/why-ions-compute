@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 어떤 기준선과 비교해야 하고, 단순한 모형은 NARMA10에서 얼마나 하나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 내 device가 NARMA10에서 NMSE 0.26을 냈다고 해도, <span class="key">device 없이 지연된 입력과 그 곱만 쓴 단순한 모형(NG-RC)이 얼마를 내는지 모르면 그 숫자의 크기를 모릅니다</span>. 내 device 시연에 어떤 기준선(baseline)을 같이 돌려야 하는지 정할 수 있어야 합니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = 같은 과제(NARMA10)의 입력열과 정답 → 내부에서 하는 일 = <span class="key">device에서 한 가지씩 뺀 기준선(평균 찍기, 원시 입력, delay tap, 다항 회귀·NG-RC 등)을 같은 readout·같은 조정 예산·같은 특징 수로 학습</span> → 출력 = 기준선마다의 NMSE와 'device가 어느 기준선을 이겼나' 표.</p>
-<p><strong>오늘 반드시</strong> <span class="key">어떤 기준선을 이겼는지가 곧 주장의 범위다. 다항 회귀·NG-RC는 비선형을 특징 만들기에 두고 학습은 선형 그대로 하므로 reservoir computing과 같은 구조이고, 곱과 기억을 소프트웨어로 만든 어려운 상대다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 특징 수가 C(k+p, p)인 이유(접힌 심화), '86%'의 곱의 분산 계산, 열 가지 모형 순위의 세부 숫자. 새 논문에서 비교 표를 볼 때 "어느 기준선이 빠졌나"만 먼저 보면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 31–32 정확도 옆의 비용(측정 vs 곱셈), Day 33–34 device 편차, Day 47–48 논문 평가 표의 기준선 칸, Day 55–56 내 device의 기준선과 최소 검증 실험</p>
+<p><strong>왜 배우나</strong> 내 NMSE의 크기를 알려면 <span class="key">device 없는 NG-RC 기준선</span>을 같이 돌려야 한다.</p>
+<p><strong>오늘의 장면</strong> NARMA10 입력·정답 → device를 한 가지씩 뺀 기준선 → <span class="key">같은 readout·예산·특징 수로 학습</span> → 기준선별 NMSE 표</p>
+<p><strong>오늘 반드시</strong> <span class="key">어떤 기준선을 이겼는지가 주장의 범위다. NG-RC는 reservoir computing과 같은 구조의 어려운 상대다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 특징 수 C(k+p, p) · '86%' 분산 계산 · 모형 순위 숫자</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 31–32 정확도 옆의 비용 · Day 33–34 device 편차 · Day 47–48 기준선 칸 · Day 55–56 최소 검증 실험</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d16a">

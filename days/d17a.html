@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 정확도 옆에 어떤 비용 숫자를 붙여야 하고, 감지 사슬의 에너지 예산은 어떻게 짜나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 논문이 "저전력 reservoir computing"이라고 쓸 때, <span class="key">내 소재의 fJ급 device 에너지가 장치 전체 에너지의 몇 %인지</span> 알아야 이 주장을 판단합니다. 내 소재 측정에서 읽기 전압·전류·시간을 같이 기록해야 하는 이유도 여기서 나옵니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = 감지 사슬(센서 → 구동·읽기 회로 → device → ADC → readout → 판정)의 항목별 전력·시간 가정 → 내부에서 하는 일 = <span class="key">항목마다 에너지 = 전력 × 걸린 시간으로 계산해 표로 쌓고</span>, 에너지를 센 경계(① device만 ② device + 읽기 ③ 장치 전체)를 정한다 → 출력 = inference 한 번의 에너지 [µJ]와 device의 몫(약 1%), 결론을 뒤집는 가정.</p>
-<p><strong>오늘 반드시</strong> <span class="key">전력이 작은 것과 inference 한 번의 에너지가 작은 것은 다르다(1 µW × 2 s는 100 µW × 1 ms보다 20배 크다). device 에너지만 센 숫자는 장치 에너지가 아니고, 어느 경계에서 센 숫자인지 적혀 있어야 한다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> TIA·임피던스·포텐쇼스탯 이름, TOPS/W 같은 리뷰 지표, 예산표 각 항목의 가정값. 논문 에너지 주장을 읽을 때 "경계 ①②③ 중 어디인가"만 먼저 보면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 47–48 논문 평가 표의 '에너지 경계' 칸, Day 49–50 fJ device 에너지를 장치 예산에 넣기, Day 51–52 몸 안 심전도 장치의 읽기·전원 판단</p>
+<p><strong>왜 배우나</strong> <span class="key">fJ급 device 에너지가 장치 전체의 몇 %인지</span> 알아야 '저전력' 주장을 판단한다.</p>
+<p><strong>오늘의 장면</strong> 항목별 전력·시간 → <span class="key">에너지 = 전력 × 시간, 표로 쌓기</span> → 경계 ①②③ 정함 → inference µJ와 device 몫</p>
+<p><strong>오늘 반드시</strong> <span class="key">전력이 작은 것 ≠ inference 한 번의 에너지가 작은 것(1 µW × 2 s는 100 µW × 1 ms의 20배). 숫자는 경계를 적어야 한다.</span></p>
+<p><strong>나중에 봐도 됨</strong> TIA·임피던스·포텐쇼스탯 · TOPS/W · 예산표 가정값</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 47–48 '에너지 경계' 칸 · Day 49–50 fJ를 장치 예산에 · Day 51–52 몸 안 심전도 장치</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d17a">

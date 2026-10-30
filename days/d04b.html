@@ -687,12 +687,13 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> crossbar row의 current를 neuron 회로가 받으면 무슨 일이 일어나고, crossbar의 각 칸에 들어갈 synapse device는 무엇을 잘해야 하나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> ionic device 논문은 "우리 소재가 neuron처럼 integrate하고 leak한다", "synapse로 쓸 수 있다", "spike당 fJ"라고 씁니다. 오늘을 마치면 <span class="key">그 주장마다 어느 측정(전류 계단 응답, I–V, 펄스 응답, retention)을 봐야 맞는지</span> 판단할 수 있습니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> LIF neuron: 입력 current → <span class="key">capacitor에 charge가 쌓이고 resistor로 샘(축적 = 유입 − 유출)</span> → voltage가 threshold에 닿으면 spike 출력, 0으로 reset. synapse device: write 펄스 → conductance가 바뀜 → 작은 read voltage에서 current로 읽힘.</p>
-<p><strong>오늘 반드시</strong> <span class="key">LIF neuron은 capacitor(쌓기) + resistor(새기) + threshold switch(fire &amp; reset)이고, 일정한 입력은 stop value I × R에서 멈춘다. synapse device는 read와 write가 다른 일이고, 좋은 숫자의 기준은 용도(inference, on-chip training, reservoir computing)마다 다르다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> decay factor의 정확한 식(e^−Δt/τ), quantization error의 RMS, 리뷰 논문의 지표 분류, Lan 2026 회로의 세부, peripheral circuits의 전력 비율. 접힌 '심화'에 있습니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 15–16 fading memory(leaky node), Day 39–40 내 소재의 τ 측정, Day 23–24 retention의 정의, Day 31–32 device vs system energy, Phase 4·5 내 device의 I–V·LTP/LTD curve가 어느 용도의 spec을 만족하는지 판단</p>
+<p><strong>왜 배우나</strong> ionic device 논문의 주장마다 <span class="key">어느 측정을 봐야 하는지</span> 판단한다.</p>
+<p><strong>오늘의 장면</strong> 입력 current → <span class="key">capacitor에 charge 축적</span> → threshold에서 spike → reset<br>
+write 펄스 → conductance 변화 → read로 읽기</p>
+<p><strong>오늘 반드시</strong> <span class="key">LIF = capacitor + resistor + threshold switch, 일정 입력은 I × R에서 멈춘다. synapse spec의 기준은 용도마다 다르다.</span></p>
+<p><strong>나중에 봐도 됨</strong> decay factor 정확한 식 · RMS error · 리뷰의 지표 분류 · 전력 비율</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 15–16 fading memory · Day 39–40 내 소재의 τ · Day 23–24 retention 정의 · Day 31–32 system energy</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d04b">

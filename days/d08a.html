@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> reservoir 상태는 무엇을 담고, readout weight는 어떻게 구하나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 내 device의 전류를 일정 간격(예: 4 ms)으로 읽은 값들이 reservoir의 상태 x이고, 그 값들에 곱할 weight를 구하는 일이 readout training입니다. 오늘 숫자로, <span class="key">내 device N개의 전류가 '거의 같은 노드'라 weight가 튀는지(ridge의 λ가 필요한지)</span>와 논문의 오차가 학습 데이터 값인지 시험 데이터 값인지를 판단합니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 시계열 u(t) → 매 시간 단계 state update로 노드 값이 바뀜(지난 상태를 섞고 새 입력을 더한 뒤 tanh) → <span class="key">상태에 weight를 곱해 더한 출력 y(t)</span>. 학습은 (상태, 정답) 표본에서 오차 제곱의 합이 가장 작은 weight를 구하는 일이고, ridge는 큰 weight에 벌점을 줍니다.</p>
-<p><strong>오늘 반드시</strong> <span class="key">t는 초가 아니라 번호(실제 시각 = t × 샘플링 주기)이고, 상태는 지난 입력들의 비선형 함수다. readout weight는 오차 제곱 합의 바닥(least squares)이고, 노드가 거의 같으면 weight가 +4, −3처럼 튀므로 ridge의 λ가 필요하다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 전치·역행렬로 쓰는 행렬 표기와 2×2 역행렬 확인(심화 접기). 처음에는 노드 하나·둘짜리 손 계산만 따라가면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 15–16 fading memory, Day 17–18 XOR, Day 19–20 '서로 다른' 노드, Day 21–22 ESN 실습. 비슷한 device 노드가 정보를 늘리는지, λ가 필요한지 판단에 쓰임</p>
+<p><strong>왜 배우나</strong> 내 device N개 전류가 <span class="key">거의 같은 노드라 weight가 튀는지</span>(ridge λ 필요) 판단한다.</p>
+<p><strong>오늘의 장면</strong> 입력 시계열 u(t) → state update → <span class="key">상태 × weight → y(t)</span> → 오차 최소 weight 구함</p>
+<p><strong>오늘 반드시</strong> <span class="key">t는 초가 아니라 번호다. 노드가 거의 같으면 weight가 +4, −3처럼 튀므로 ridge의 λ가 필요하다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 전치·역행렬 표기 · 2×2 역행렬 확인(심화)</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 15–16 fading memory · Day 17–18 XOR · Day 19–20 서로 다른 노드 · Day 21–22 ESN 실습</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d08a">

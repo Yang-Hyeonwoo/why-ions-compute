@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 노드가 여럿이면 무엇이 기억의 길이를 정하고, 천천히 감소하는 전류는 언제 계산에 도움이 되나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 'device 전류가 천천히 감소하므로 시간 정보를 처리한다'는 논문 문장에는 고리 다섯 개가 빠져 있습니다. 내 device의 측정(펄스 응답의 τ, 같은 펄스 열 반복 시 궤적 재현, 두 이력의 전류 차이가 잡음보다 큰지, 기준선과의 성능 비교)이 <span class="key">그중 어느 고리를 확인해 주는지</span> 가려냅니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 노드가 여럿이면: 상태 벡터에 행렬 W를 곱해 섞음 → <span class="key">가장 오래 남는 방향의 배율(spectral radius ρ)이 기억의 길이를 정함</span>. leak rate a는 다음 상태를 새 값 쪽으로 a만큼만 옮겨 배율을 (1−a) + aλ로 바꿈.</p>
-<p><strong>오늘 반드시</strong> <span class="key">d, τ, 고윳값, ρ, a는 서로 다른 양이다(device의 τ ≠ 소프트웨어의 leak rate). 느린 감쇠가 계산에 도움이 되려면 다섯 고리(물리량이 바뀐다 → 천천히 돌아간다 → 지금 값이 이력의 가중합 → 이력이 구별되는 상태 → readout이 기준선보다 낫다)가 모두 이어져야 한다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 아무 2×2 표의 고윳값 공식과 복소수 고윳값, a = Δt/τ 유도, memory budget을 분산과 공분산으로 유도하는 증명(모두 심화 접기). 오늘은 (1, 1)·(1, −1) 두 방향과 다섯 고리만 잡으면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 17–18 선형 기억과 비선형, Day 19–20 노드 수와 용량 상한, Day 21–22 ESN 실습(ρ·leak·washout), Day 23–24 τ와 과제 시간척도, Day 27–30 leak 노드. device 논문의 '느린 감쇠 → 계산' 주장이 어느 고리까지 보였는지, 기억이 device에서 오는지 소프트웨어 leak에서 오는지 판단</p>
+<p><strong>왜 배우나</strong> '느린 감쇠 → 계산' 문장에서 <span class="key">내 측정이 확인하는 고리</span>를 가려낸다.</p>
+<p><strong>오늘의 장면</strong> 상태 벡터 × 행렬 W → <span class="key">spectral radius ρ</span> → 기억 길이 결정 → leak rate a로 배율 조정</p>
+<p><strong>오늘 반드시</strong> <span class="key">d, τ, 고윳값, ρ, a는 서로 다른 양이다. 느린 감쇠가 계산에 도움되려면 다섯 고리가 모두 이어져야 한다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 2×2 고윳값 공식 · a = Δt/τ 유도 · memory budget 증명</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 17–18 선형 기억과 비선형 · Day 19–20 노드 수와 용량 · Day 21–22 ESN 실습 · Day 23–24 τ와 시간척도</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d09b">

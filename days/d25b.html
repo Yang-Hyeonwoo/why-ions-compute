@@ -687,12 +687,13 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 대표 논문들의 곡선과 정확도 숫자는 무엇을 입증하고 무엇을 입증하지 못하나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 내 소재로 synapse 곡선(PPF, STDP, LTP/LTD)을 재면, 논문 초록에 <span class="key">'시냅스 모사'까지는 쓸 수 있지만 '계산 이득'이나 '저전력'은 쓸 수 없는 이유</span>를 오늘 일곱 편·다섯 편에서 확인합니다. 내 결과를 쓸 때 어떤 추가 측정(원시 입력 기준선, device 간 편차, drift, 에너지 경계)이 먼저 필요한지 정하는 근거가 됩니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> STDP: 입력 쪽 스파이크와 출력 쪽 스파이크의 순서·간격(Δt) → 연결 세기 w가 커지거나 작아짐 → Δw 곡선. lookup RC 논문: 4-bit 조각 16가지를 device로 재 둠 → <span class="key">컴퓨터가 표를 찾아 MNIST 계산 → 정확도 숫자(device가 실시간 처리한 것이 아님)</span>.</p>
-<p><strong>오늘 반드시</strong> <span class="key">시냅스 곡선이 입증하는 것은 '이력 의존 응답과 시간척도'이고 계산 이득이 아니다. 정확도 숫자는 device가 처리했는지, 측정한 16상태로 컴퓨터가 계산했는지(lookup)부터 가려야 한다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> STDP 식의 상수 값(교육용 A, τ), 일곱 편·다섯 편 줄의 세부 숫자와 쪽수, 영상, 이식 논문의 세부 판정(Day 51–52에서 다시 나옴).</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 49–50 처리율과 fJ 숫자의 전압 조건, Day 51–52 이식 논문(급성 실험·꺼내서 측정), Day 53–56 내 device의 원시 입력 기준선·device 간 편차를 재는 최소 실험</p>
+<p><strong>왜 배우나</strong> synapse 곡선으로 <span class="key">쓸 수 있는 말과 쓸 수 없는 말</span>을 가른다.</p>
+<p><strong>오늘의 장면</strong> 스파이크 순서·간격 Δt → 연결 세기 w 변화 → Δw 곡선<br>
+4-bit 조각 16상태 측정 → <span class="key">컴퓨터가 표 찾아 MNIST 계산</span> → 정확도(lookup)</p>
+<p><strong>오늘 반드시</strong> <span class="key">synapse 곡선이 입증하는 것은 이력 의존 응답과 시간척도이지 계산 이득이 아니다. 정확도는 lookup인지 먼저 가린다.</span></p>
+<p><strong>나중에 봐도 됨</strong> STDP 상수(A, τ) · 일곱 편·다섯 편 줄 세부 · 영상 · 이식 논문 판정</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 49–50 처리율·fJ 전압 조건 · Day 51–52 이식 논문 · Day 53–56 원시 입력 기준선·device 간 편차</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d25b">

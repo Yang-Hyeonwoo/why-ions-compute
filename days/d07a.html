@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 신경망은 어떻게 학습하고, 시간을 거슬러 올라가는 학습은 왜 어려운가?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 논문의 "내부는 학습시키지 않고 readout만 학습한다"가 왜 필요한지 알아야, <span class="key">내 device 내부(conductance)를 학습시키려 하지 않고 device의 서서히 잊는 응답을 그대로 계산 재료로 쓰는 설계</span>를 이해할 수 있습니다. 오늘 이 기초가 있어야 Day 13–16의 readout 학습과 fading memory가 읽힙니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = 데이터(입력·정답)와 weight → 내부 변화 = 오차(손실)가 줄도록 weight를 기울기의 반대쪽으로 조금씩 옮김(RNN이면 시간을 거슬러 같은 배율이 거듭 곱해짐) → 출력 = <span class="key">학습된 weight, 또는 기울기가 0으로 꺼지거나 폭주해 학습이 안 되는 결과</span>.</p>
-<p><strong>오늘 반드시</strong> <span class="key">학습 = 손실이 줄도록 weight를 기울기의 반대쪽으로 조금씩 옮기는 일이고, RNN은 같은 배율이 시간 단계마다 거듭 곱해져 기울기가 소실·폭주한다. 그래서 device 내부를 학습시키기 어렵다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> tanh의 세부, 고유값·Pascanu 조건, 행렬 계산의 세부, epoch, 영상. 단계 상자 계산을 손으로 다 따라가지 못해도, 곱의 뜻(2 × 0.5 × (−8), 0.434 × 0.484 × 0.496)을 말할 수 있으면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 13–14 readout 학습, Day 15–16 fading memory·spectral radius, Day 21–22 ESN 실습. 이온 device 내부를 학습시키기 어려운 이유와 device에 요구할 spec 판단에 쓰임</p>
+<p><strong>왜 배우나</strong> <span class="key">readout만 학습하는 이유</span>를 알아야 device 내부를 학습시키지 않는 설계가 읽힌다.</p>
+<p><strong>오늘의 장면</strong> 데이터·weight → 손실 줄도록 weight 이동 → <span class="key">기울기 소실·폭주 또는 학습 weight</span></p>
+<p><strong>오늘 반드시</strong> <span class="key">학습 = 손실이 줄도록 weight를 기울기 반대쪽으로 옮기는 일. RNN은 같은 배율이 거듭 곱해져 기울기가 소실·폭주한다.</span></p>
+<p><strong>나중에 봐도 됨</strong> tanh 세부 · 고유값·Pascanu 조건 · 행렬 계산 · epoch</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 13–14 readout 학습 · Day 15–16 fading memory · Day 21–22 ESN 실습</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d07a">

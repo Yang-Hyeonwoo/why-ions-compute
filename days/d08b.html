@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 분류에는 어떤 readout과 학습법을 쓰고, reservoir를 고정해도 되는 조건은 무엇인가?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> device 논문의 분류 과제(부정맥, 손동작)는 readout이 점수를 내고 softmax로 종류를 고르는 구조이고, 학습법(ridge, gradient descent, Adam)도 논문마다 다릅니다. 오늘을 마치면 <span class="key">'재료가 계산했다'는 주장이 선형 readout만으로 얻은 결과인지</span>, 내 device 상태가 기억·비선형·다양함을 갖췄는지 판단합니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 상태 x → 종류마다 점수(weight 행 × x) → <span class="key">softmax로 확률 → 가장 큰 종류를 답으로(argmax)</span>. 학습: 확률과 정답의 차이(cross-entropy)가 줄도록 weight를 ridge로 한 번에, 또는 gradient descent로 조금씩 고칩니다.</p>
-<p><strong>오늘 반드시</strong> <span class="key">readout은 상태에 있는 것을 섞을 뿐 없는 것을 만들지 않는다. reservoir를 고정해도 되는 조건은 기억, 비선형 섞임, 다양함이고, 선형 readout만으로 높은 성능이 나와야 재료의 기여라고 말할 수 있다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> momentum과 Adam의 계산 세부(심화 접기), 학습률을 바꿔 발산을 확인하는 실험, 오늘의 반론에 나오는 기준선 숫자. 논문에서 그 말이 나올 때 다시 펼치면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 17–20 비선형·다양성, Day 21–22 실습, Day 27–28 심전도 분류, Day 29–30 기준선. 논문 성능이 선형 readout으로 잰 것인지, readout이 일을 다 했는지 판단</p>
+<p><strong>왜 배우나</strong> <span class="key">재료가 계산했다는 주장이 선형 readout 결과인지</span> 판단한다.</p>
+<p><strong>오늘의 장면</strong> 상태 x → 종류별 점수 → <span class="key">softmax → argmax</span> → 답</p>
+<p><strong>오늘 반드시</strong> <span class="key">readout은 상태에 있는 것만 섞는다. 기억·비선형 섞임·다양함이 있고 선형 readout만으로 성능이 나와야 재료의 기여다.</span></p>
+<p><strong>나중에 봐도 됨</strong> momentum·Adam 세부 · 학습률 발산 실험 · 오늘의 반론 기준선 숫자</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 17–20 비선형·다양성 · Day 21–22 실습 · Day 27–28 심전도 분류 · Day 29–30 기준선</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d08b">

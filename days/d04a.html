@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> conductance 배열은 어떻게 곱셈과 덧셈을 한 번에 하고, 그 조건은 무엇인가?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> ionic synapse 논문은 "이 device를 crossbar에 넣으면 행렬–벡터 곱을 한다"고 씁니다. <span class="key">그 말이 맞으려면 device의 I–V curve가 어떤 조건을 만족해야 하는지</span> 알아야, 내 소재의 I–V 측정이 그 조건을 통과하는지 판단할 수 있습니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 숫자 → column voltage(DAC) → 각 device에서 <span class="key">current = conductance × voltage(곱셈) → row에서 current가 합쳐짐(덧셈)</span> → TIA가 voltage로 바꿈 → ADC가 숫자로 → 출력 숫자.</p>
-<p><strong>오늘 반드시</strong> <span class="key">device 하나가 곱셈(I = G × V)을, 선 하나가 덧셈(current가 합쳐짐)을 한다. 이 계산은 순간이 아니라 읽기 회로가 정착하는 settling time(예: 5τ) 안에 끝나고, device의 I–V가 직선이 아니면 곱셈이 틀어진다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> IR drop·sneak path의 크기 계산, ADC의 내부 동작(SAR), 1T1R과 CMOS. 논문에서 그 말이 나올 때 다시 펼쳐 보면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 10 readout = 행렬–벡터 곱, Day 49–50 array·sneak path·peripheral circuits. rectifying junction을 read linear 범위에서 쓸 수 있나 판단</p>
+<p><strong>왜 배우나</strong> crossbar 행렬–벡터 곱이 성립할 <span class="key">I–V 조건</span>을 내 소재가 통과하는지 판단한다.</p>
+<p><strong>오늘의 장면</strong> 입력 숫자 → column voltage(DAC) → <span class="key">I = G × V, row에서 합</span> → TIA·ADC로 읽기 → 출력 숫자</p>
+<p><strong>오늘 반드시</strong> <span class="key">device는 곱셈(I = G × V), 선은 덧셈을 한다. 읽기는 settling time(예: 5τ) 안에 끝나고, I–V가 직선이 아니면 곱셈이 틀어진다.</span></p>
+<p><strong>나중에 봐도 됨</strong> IR drop·sneak path 계산 · ADC 내부(SAR) · 1T1R·CMOS</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 10 readout = 행렬–벡터 곱 · Day 49–50 array·sneak path</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d04a">

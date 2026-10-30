@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 계산보다 데이터 이동이 비싼 이유는 무엇이고, 왜 더 빨리 돌리기만으로는 해결되지 않나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> device 논문의 "weight 이동이 없어 저전력" 문장을 평가하려면, <span class="key">보통 컴퓨터에서 이동이 계산보다 얼마나 비싼지와 그 이동이 언제 병목인지(batch 1의 실시간 센서)를 숫자로 알아야 합니다</span>. device 하나의 에너지가 시스템 전체 에너지와 다른 숫자라는 것도 여기서 확인합니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> <span class="key">연산량 [op]과 이동량 [byte] → 연산 밀도(op/byte)를 장치의 연산 속도 ÷ 대역폭과 비교 → 계산 시간과 전송 시간 중 긴 쪽이 병목(판단)</span>. batch를 키우면 같은 weight의 재사용이 늘어 연산 밀도가 오릅니다.</p>
-<p><strong>오늘 반드시</strong> <span class="key">RAM 읽기 한 번은 덧셈 한 번보다 자릿수로 비싸다(약 10⁴배, Horowitz 표의 45 nm 값). 연산 밀도와 장치의 op/byte를 비교해 memory-bound인지 판단할 수 있고, 클록이 멈춘 것은 P ≈ αCV²f(전력 = 활동률 × capacitance × 전압² × 클록)에서 V를 못 내렸기 때문이다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 타일링·낮은 정밀도·batch의 세부 계산('설계 처방' 절), 실시간 장면 세 개의 일곱 질문 전부(장면 하나만 골라도 충분), Dennard 표의 세부.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 5–6 뇌–디지털 에너지 비교 조건, Day 23–24 이완 시간이 기억 시간이 되는 조건, Day 31–32 판단 한 번당 시스템 에너지</p>
+<p><strong>왜 배우나</strong> '이동이 없어 저전력' 문장을 <span class="key">이동 대 계산 비용 숫자</span>로 평가한다.</p>
+<p><strong>오늘의 장면</strong> 연산량 op·이동량 byte → 연산 밀도 op/byte → <span class="key">장치 op/byte와 비교</span> → 느린 쪽이 병목</p>
+<p><strong>오늘 반드시</strong> <span class="key">RAM 읽기 한 번은 덧셈 한 번보다 약 10⁴배 비싸다(45 nm). op/byte를 비교하면 memory-bound인지 판단한다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 타일링·낮은 정밀도 세부 · 실시간 장면 일곱 질문 · Dennard 표</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 5–6 뇌–디지털 에너지 · Day 23–24 이완 시간 = 기억 · Day 31–32 시스템 에너지</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d02b">

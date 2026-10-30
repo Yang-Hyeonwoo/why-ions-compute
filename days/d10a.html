@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 선형 readout으로 풀 수 없는 계산은 무엇이고, 비선형 노드는 무엇을 더해 주나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 내 device의 응답이 계산에 쓸 만한 비선형인지는 I–V 곡선이 휘었는지가 아니라, <span class="key">입력 이력 두 개를 따로 넣은 응답의 합이 함께 넣은 응답과 같은지(superposition test)</span>로 가립니다. 이 시험은 내 device의 pulse response로 할 수 있고, 선형이면 delay tap 기준선과 같은 일밖에 못 한다는 것을 압니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 이력(10, 01, 11) → 상태 → 선형 readout. 상태가 입력의 가중합이면 <span class="key">x(10) + x(01) = x(11)(superposition 성립)</span>. tanh처럼 포화가 있으면 11의 상태가 달라져 입력들의 곱 같은 특징이 상태에 생기고, 그 곱 특징 덕에 XOR을 평면 하나로 가를 수 있음.</p>
-<p><strong>오늘 반드시</strong> <span class="key">선형이면 superposition이 성립하고, 선형 reservoir의 상태는 지난 입력들의 가중합일 뿐이다. XOR처럼 입력들의 곱이 필요한 과제는 선형 readout으로 못 풀지만, 비선형 노드가 곱 특징을 상태에 남기면 푼다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 선형 사상을 행렬로 쓴 증명, kernel(SVM) 요령(심화 접기). 오늘은 superposition 검사와 XOR 네 점만 따라가면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 19–20 차수별 information processing capacity, Day 21–22 선형 reservoir·2차 탭 기준선, Day 25–26 분리 성질. 내 device 응답이 입력 이력에 대해 superposition을 깨는지 판단</p>
+<p><strong>왜 배우나</strong> 응답이 쓸 만한 비선형인지는 <span class="key">superposition test</span>로 가른다.</p>
+<p><strong>오늘의 장면</strong> 입력 이력 10, 01, 11 → 상태 → <span class="key">x(10)+x(01) = x(11)?</span> → 아니면 곱 특징 생겨 XOR 가능</p>
+<p><strong>오늘 반드시</strong> <span class="key">선형이면 superposition이 성립하고 상태는 입력의 가중합뿐이다. XOR처럼 곱이 필요한 과제는 비선형 노드가 곱 특징을 남겨야 푼다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 선형 사상 행렬 증명 · kernel(SVM) 요령</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 19–20 차수별 capacity · Day 21–22 2차 탭 기준선 · Day 25–26 분리 성질</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d10a">

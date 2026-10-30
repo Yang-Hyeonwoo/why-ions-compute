@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 왜 기억이 필요하고, 흔적이 얼마나 남아야 하며, 처음 상태는 왜 잊어야 하나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 내 device에 펄스를 주고 전류가 천천히 줄어드는 곡선(pulse response, step response)에서 τ를 읽으면, 입력 간격 Δt에서 한 단계 뒤 남는 비율 d = e^(−Δt/τ)를 계산할 수 있습니다. 이 d로 <span class="key">'내 device의 기억이 과제의 시간척도에 맞나'</span>, 같은 펄스 열을 두 번 넣었을 때 같은 궤적이 나오나(ESP)를 판단합니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 펄스 입력 u → 상태 x가 매 단계 d배로 줄면서 새 입력이 더해짐(x(t+1) = d·x(t) + u(t)) → <span class="key">읽은 전류에 k단계 전 입력의 흔적이 d^k로 남음</span>. 출발 상태가 달라도 같은 입력을 받으면 차이가 매 단계 d배가 되어 사라지면 echo state property(ESP).</p>
-<p><strong>오늘 반드시</strong> <span class="key">기억 없는 장치는 지금 입력이 같으면 늘 같은 답을 내서 과거가 필요한 과제를 못 푼다. d &lt; 1이면 k단계 전 입력의 몫이 d^k로 줄고(fading memory), d = e^(−Δt/τ)이므로 같은 device도 입력 간격에 따라 d가 다르다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 입력 크기에 따라 ESP가 달라지는 세부와 노드 하나의 tanh 분석(echo state property 절의 뒤쪽), 원문 그림(Liang 2024 Fig. 3)의 해설. 오늘은 d = 0.5, 0.9, 1.1의 숫자와 이온 device 이완 대응표가 핵심입니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> 다음 단위의 고윳값·ρ(노드가 여럿일 때의 d), Day 21–22 ESN 실습의 washout·ESP 확인, Day 23–24 τ와 과제 시간척도, Day 39–40 이온 이완. 목표 입력 간격에서 내 device의 d가 맞는지, 같은 펄스 열에 같은 궤적이 나오는지 판단</p>
+<p><strong>왜 배우나</strong> pulse response의 τ로 d를 구해 <span class="key">기억이 과제 시간척도에 맞는지</span> 판단한다.</p>
+<p><strong>오늘의 장면</strong> 펄스 입력 u → x(t+1) = d·x(t) + u → <span class="key">k단계 전 흔적이 d^k로 남음</span> → d &lt; 1이면 ESP</p>
+<p><strong>오늘 반드시</strong> <span class="key">d &lt; 1이면 k단계 전 입력의 몫이 d^k로 준다(fading memory). d = e^(−Δt/τ)라 같은 device도 간격에 따라 d가 다르다.</span></p>
+<p><strong>나중에 봐도 됨</strong> ESP의 입력 크기 의존 · 노드 하나 tanh 분석 · Liang 2024 Fig. 3</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 15–16 고윳값·ρ · Day 21–22 washout·ESP · Day 23–24 τ와 시간척도 · Day 39–40 이온 이완</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d09a">

@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 같은 입력에 다른 응답이 나오는 편차를 어떻게 나눠 재고, 그 흔들림과 device 간 차이는 학습한 readout을 언제 무너뜨리나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 내 소재를 같은 입력으로 다시 재도, 옆 device로 바꿔도 응답이 달라집니다. <span class="key">그 변동을 반복 간·device 간·drift·환경으로 나눠 재야</span> reservoir의 readout이 쓰는 상태 차이와 비교할 수 있고, 한 device에서 학습한 readout을 다른 device에 써도 되는지 판단할 수 있습니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = 명목상 같은 device 여러 개를 같은 입력열로 여러 번 잰 τ(또는 상태) 값 묶음 → 내부에서 하는 일 = <span class="key">평균·표본 표준편차·CV·drift 기울기를 계산하고, 상태 차이 Δ ÷ 반복 흔들림 σ로 틀릴 확률을 어림</span> → 출력 = 편차 종류별 숫자(예: 반복 간 SD 0.16 ms, device 간 CV 14.1%)와 "readout을 그대로 옮겨도 되나 / device마다 보정하나" 판단.</p>
-<p><strong>오늘 반드시</strong> <span class="key">편차는 반복 간·device 간·drift·환경으로 가르고 각각 다른 측정으로 잰다. 잡음의 피해는 Δ/σ가 정하고, 평균 n번은 반복 간 흔들림만 √n분의 1로 줄이며 drift와 device 간 차이는 못 줄인다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 정규분포 꼬리 확률 표, SNR과 dB 환산, d′ 이름, 두 평균 차이의 흔들림(심화), 칩 사이 이식 실패 대응책의 세부. 논문의 오차 막대가 SD인지 표준오차인지 확인할 때 다시 봅니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> 다음 단위의 drift·재보정 주기와 체크리스트 F1·F4, Day 35–36 이온 드리프트와의 구별, Day 41–42 화학 구조가 바꾸는 편차, Day 49–52 이식형 장치의 보정, Day 55–56 반복·device 수 정하기. 내 device τ의 반복 간·device 간 CV를 먼저 재고, 하나의 readout으로 쓸지 device마다 보정할지 판단</p>
+<p><strong>왜 배우나</strong> 변동을 <span class="key">반복 간·device 간·drift·환경으로 나눠 재야</span> readout 이식 여부를 판단한다.</p>
+<p><strong>오늘의 장면</strong> 여러 device·반복 τ → 평균·SD·CV·drift 기울기 → <span class="key">Δ ÷ σ로 오류 확률 어림</span> → 이식 또는 device별 보정</p>
+<p><strong>오늘 반드시</strong> <span class="key">편차는 반복 간·device 간·drift·환경으로 가르고 따로 잰다. 평균 n번은 반복 간 흔들림만 1/√n로 줄인다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 정규분포 꼬리 표 · SNR·dB · d′ 이름 · 평균 차이의 흔들림</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 35–36 이온 드리프트 구별 · Day 41–42 화학 구조와 편차 · Day 49–52 이식형 보정 · Day 55–56 device 수 정하기</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d18a">

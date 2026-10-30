@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 벤치마크는 무엇을 시험하고, 필터와 전처리는 신호에서 무엇을 바꾸나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 논문의 "MNIST 95%", "심전도 96.6%"는 <span class="key">device가 아니라 필터·전처리가 일부를 해 놓은 점수일 수 있습니다</span>. 내 device로 신호를 다루는 시연을 고를 때, 앞단에서 이미 지워진 것(저역·고역·노치 필터)과 device의 몫을 갈라 보려면 필터와 신호의 모양을 알아야 합니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = 벤치마크의 데이터·나누는 규칙·채점, 그리고 시간 신호(사인파의 합, 심전도 측정값) → 내부에서 하는 일 = <span class="key">스펙트럼으로 보고, 필터(이동평균, 저역·고역·대역·노치)와 전처리 사슬</span>(필터 → R파 찾기 → 자르기 → 정규화)을 통과시킨다 → 출력 = device에 들어가는 숫자 입력열(예: 박동당 50개).</p>
-<p><strong>오늘 반드시</strong> <span class="key">벤치마크 점수는 데이터 + 나누기 + 채점이 정한 범위까지만 말한다. 필터는 주파수마다 다른 비율로 크기를 줄이는 계산(회로)이고, 이동평균은 가장 단순한 저역 통과(low-pass)이다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 푸리에 분석의 식, 샘플링의 엄밀한 형태, 이동평균 노치의 응답 계산, Zhong 2022 부정맥 검출의 세부. 필터 이름이 논문에 나올 때 이 Day의 그림 2를 다시 보면 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 29–30 기준선·저항–capacitor 필터 비교, Day 31–32 필터·전처리의 에너지와 지연, Day 51–52 몸 안 심전도 장치의 신호 사슬, Day 55–56 내 device의 계산 시연을 고를 때</p>
+<p><strong>왜 배우나</strong> 벤치마크 점수 중 <span class="key">필터·전처리가 한 몫과 device의 몫</span>을 갈라 본다.</p>
+<p><strong>오늘의 장면</strong> 시간 신호(사인파 합, 심전도) → 스펙트럼 → <span class="key">필터·전처리 사슬 통과</span> → device 입력열(박동당 50개)</p>
+<p><strong>오늘 반드시</strong> <span class="key">벤치마크 점수는 데이터 + 나누기 + 채점이 정한 범위만 말한다. 필터는 주파수마다 크기를 다르게 줄이는 계산이고 이동평균은 low-pass다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 푸리에 식 · 엄밀한 샘플링 · 이동평균 notch 응답 · Zhong 2022 세부</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 29–30 RC 필터 기준선 · Day 31–32 전처리 에너지·지연 · Day 51–52 몸 안 심전도 신호 사슬 · Day 55–56 시연 고르기</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d15a">

@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 세 벤치마크는 각각 무엇을 검증하고 무엇을 검증하지 못하나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> device reservoir computing 논문의 MNIST·NARMA·spoken digit 점수가 device의 시간 처리 능력을 보여 주는지 판단합니다. 내 device로 계산 시연을 고를 때 <span class="key">어떤 과제가 기억·비선형을 요구하고 어떤 과제는 readout이 혼자 풀 수 있는지 구별</span>해야 합니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = 정지 영상(그림 한 장), NARMA 수식, 소리 녹음 → 내부에서 하는 일 = <span class="key">그림은 한 행씩 시간 신호로 바꿔 device에 넣고, 소리는 필터 묶음으로 '높이 × 시간' 지도(cochleagram)로 바꾼 뒤</span> device와 readout을 통과 → 출력 = 분류 정확도 또는 NMSE, 그리고 기준선(device 없이 readout만) 점수.</p>
-<p><strong>오늘 반드시</strong> <span class="key">그림의 '시간'은 부호화가 만든 것이고, 모든 시점을 읽으면 readout이 일을 다 할 수 있다. 그래서 MNIST 점수만으로 device의 시간 처리를 말할 수 없고 device 없는 기준선과 함께 읽어야 한다. NARMA 숫자는 정의(차수)와 delay tap 기준점과 같이 읽는다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> EuroSAT 위성 영상 세 가지 변환, 다른 논문 네 편 비교, Lyon 귀 모형 구조와 MFCC. 논문 평가(Day 47–48)에서 '과제·기준선' 칸을 채울 때 다시 봅니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 29–30 기준선 비교와 공정한 비교 규칙, Day 31–32 정확도 옆의 비용, Day 47–48 논문 평가 표의 과제·기준선 칸, Day 55–56 내 device로 고를 계산 시연과 대조 실험</p>
+<p><strong>왜 배우나</strong> MNIST·NARMA 점수 중 <span class="key">기억·비선형을 요구하는 과제</span>만 가른다.</p>
+<p><strong>오늘의 장면</strong> 영상·NARMA 식·소리 → 시간 신호로 부호화 → <span class="key">device + readout 통과</span> → 정확도·NMSE + 기준선</p>
+<p><strong>오늘 반드시</strong> <span class="key">영상의 '시간'은 부호화가 만든 것이라 readout이 혼자 풀 수 있다. MNIST 점수는 device 없는 기준선과 함께 읽는다.</span></p>
+<p><strong>나중에 봐도 됨</strong> EuroSAT 변환 세 가지 · 다른 논문 네 편 · Lyon 귀 모형·MFCC</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 29–30 공정한 비교 규칙 · Day 31–32 정확도 옆의 비용 · Day 47–48 논문 평가 표 · Day 55–56 시연·대조 실험</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d15b">

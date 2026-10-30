@@ -1365,3 +1365,8 @@ dl.terms dd { margin: 0; padding: 0.55rem 0 0.55rem 0.4rem; border-top: 1px soli
 .progress-strip .ps-gist { font-size: 0.86rem; color: var(--text); margin-top: 0.1rem; }
 /* 논문 탭에서 인용 링크로 온 논문 표시 */
 article.paper:target { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+
+/* 머리말 이름표: 한 줄 고정(줄바꿈으로 다음 칸과 겹치지 않게), 칸 사이 간격 */
+.unit-head p { padding-left: 7.4rem; margin: 0 0 0.75rem; }
+.unit-head p > strong:first-child { width: 6.9rem; white-space: nowrap; }
+@media (max-width: 640px) { .unit-head p { padding-left: 0; } .unit-head p > strong:first-child { white-space: normal; } }

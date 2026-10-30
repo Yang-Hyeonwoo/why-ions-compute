@@ -687,12 +687,13 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> reservoir를 전자회로와 어떻게 잇고, 그래서 진짜 병목은 무엇인가?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 내 reservoir 뒤에 <span class="key">readout을 어디에 두느냐(컴퓨터 / 비휘발 crossbar)</span>는 시스템 에너지와 재현성에 영향을 주는 설계 결정입니다. 오늘은 Zhong 2022처럼 ADC를 없애도 늘 켜진 TIA 비용은 남는다는 계산으로, 연구에서 먼저 재야 할 숫자(device 간 편차, drift, 시스템 에너지)를 고릅니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = reservoir 상태 N개(device 전류) → <span class="key">구성 A: TIA → ADC → MCU 곱셈·덧셈 / 구성 B: TIA·적분기 → crossbar(I = ΣG·V) → 비교기</span> → 출력 = 박동 하나의 에너지 합, 쓰기 오차가 만드는 출력 흔들림, 그리고 병목 판정표.</p>
-<p><strong>오늘 반드시</strong> <span class="key">weight는 두 구성 모두 칩 밖에서 한 번 학습한다. 노드마다 붙는 TIA는 readout을 crossbar로 옮겨도 남는다. 병목은 네 질문으로 가르며, 응용에 따라 판정이 바뀐다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 쓰기 오차의 상태 수별 계산 세부, Kim 2026 칩 위 학습, Liang Fig. 5의 연표, 영상 두 개, 반론의 실리콘 비유. 접힌 곳과 선택 항목입니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 51–52 몸 안 장치의 readout·전원 배치, Day 53–54 가설이 겨냥할 병목(drift·내구) 고르기, Day 55–56 최소 검증 실험, Day 57–58 물리 어텐션의 crossbar 쓰기 비용</p>
+<p><strong>왜 배우나</strong> <span class="key">readout을 컴퓨터에 둘지 crossbar에 둘지</span>가 시스템 에너지와 재현성을 정한다.</p>
+<p><strong>오늘의 장면</strong> A: TIA → ADC → MCU 곱셈<br>
+B: TIA → <span class="key">crossbar(I = ΣG·V)</span> → 비교기</p>
+<p><strong>오늘 반드시</strong> <span class="key">weight는 두 구성 모두 칩 밖에서 한 번 학습한다. 노드마다 붙는 TIA는 crossbar로 옮겨도 남는다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 쓰기 오차 계산 · Kim 2026 칩 위 학습 · Liang Fig. 5 연표 · 영상</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 51–52 readout·전원 배치 · Day 53–54 drift·내구 가설 · Day 55–56 최소 검증 · Day 57–58 물리 attention 쓰기 비용</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d26b">

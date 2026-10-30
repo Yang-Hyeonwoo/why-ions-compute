@@ -687,12 +687,13 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> 몸 안 장치의 readout·전원·안전 조건은 무엇이고, 고분자 이온 소재가 이길 수 있는 문제는 어디인가?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 내 reservoir 뒤의 readout을 선형으로 둘지, 어디서 학습할지, 이온 device가 시스템 에너지를 정말 줄이는지는 연구 설계의 결정이고 실험 선택(어떤 기준선과 비교할지)을 바꿉니다. 오늘은 <span class="key">1년 에너지 예산과 '같은 전극 + 증폭 + ADC + MCU' 기준선 개념</span>으로 내 소재가 이길 수 있는 문제와 먼저 재야 할 숫자를 정합니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = reservoir 상태 120개(x) → <span class="key">곱해서 더하기 y = Σwᵢxᵢ + b(w는 몸 밖에서 ridge로 한 번 학습)</span> → 문턱과 비교 → 출력 = 정상 / 이상. 에너지 예산은 입력 = 가정값(ADC 1 nJ/변환, 무선 50 nJ/bit, 펄스당 ½CV²) → 줄별 에너지 계산 → 출력 = 1년 µW·J와 가장 큰 줄.</p>
-<p><strong>오늘 반드시</strong> <span class="key">readout을 선형으로 두는 것은 이 교재의 기본 선택이고 이유는 세 가지다. 몸 안 판정의 가장 큰 에너지 이득은 원시 신호를 안 보내는 것이고, 이온 reservoir는 구동 에너지가 ADC보다 작을 때만 이득이다. 어떤 후보도 기준선보다 낫다는 측정은 아직 없다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> Wright 2022 같은 폴더 밖 논문, 안전 표준의 숫자, 출력 시연 논문들의 세부, 생분해 논문 그림, 영상. 후보 표의 네 줄 중 내 소재와 관계없는 줄은 훑기만 해도 됩니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 53–54 가설과 기각 조건, Day 55–56 '같은 전극 + 증폭 + ADC + MCU' 기준선 대비 최소 검증 실험, Day 57–58 국소 learning rule과 차세대 후보</p>
+<p><strong>왜 배우나</strong> <span class="key">1년 에너지 예산과 같은 전극·ADC·MCU 기준선</span>으로 이길 문제를 정한다.</p>
+<p><strong>오늘의 장면</strong> reservoir 상태 120개 → <span class="key">y = Σwᵢxᵢ + b</span> → 문턱 비교 → 정상/이상<br>
+가정값 → 줄별 에너지 → 가장 큰 줄</p>
+<p><strong>오늘 반드시</strong> <span class="key">몸 안 판정의 가장 큰 이득은 원시 신호를 안 보내는 것이다. 이온 reservoir는 구동 에너지가 ADC보다 작을 때만 이득이다.</span></p>
+<p><strong>나중에 봐도 됨</strong> Wright 2022 등 폴더 밖 논문 · 안전 표준 숫자 · 생분해 그림 · 영상</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 53–54 가설·기각 조건 · Day 55–56 같은 전극·ADC·MCU 기준선 실험 · Day 57–58 국소 learning rule</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d27b">

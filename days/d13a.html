@@ -687,12 +687,12 @@ window.Quarto = {
 
 <div class="unit-head">
 <p><strong>이번 질문</strong> retention, τ, memory capacity는 각각 무엇을 재고, 상태 숫자 하나에 과거는 어떻게 담기나?</p>
-<p><strong>왜 배우나 (내 소재 연구와의 연결)</strong> 논문이 "우리 소재는 기억이 길다"고 쓸 때, 내 소재의 펄스 응답 곡선(step response, 감쇠)에서 읽은 <span class="key">retention·τ가 reservoir computing의 memory capacity(MC)와 같은 말인지</span> 가려야 합니다. 이 판단이 없으면 감쇠가 느린 소재를 곧바로 "좋은 reservoir"라고 잘못 결론 냅니다.</p>
-<p><strong>오늘의 장면 (입력 → 내부 변화 → 출력)</strong> 입력 = 펄스 하나 뒤 감쇠 곡선 + 무작위 입력열을 일정 간격으로 넣은 측정 → 내부에서 하는 일 = <span class="key">곡선에서 retention(기준 %)·τ를 읽고, 입력열에서는 상태의 흔들림을 k개 전 입력이 나눠 갖는 몫을 계산</span> → 출력 = retention [s 또는 %], τ [s], MC_k [0–1].</p>
-<p><strong>오늘 반드시</strong> <span class="key">retention·τ·MC는 서로 다른 양이다(retention은 기준이 붙은 지표, τ는 모형의 숫자, MC는 입력열과 readout까지 포함). 노드 하나의 MC는 d(한 간격 뒤 남는 비율)가 무엇이든 합이 1이고, d는 그 1을 어떻게 나눠 갖는지만 바꾼다.</span></p>
-<p><strong>나중에 더 봐도 되는 것</strong> 분산·표본 분산(n−1) 설명의 세부, 잡음이 들어간 d = 0.99 계산, Lee 2025 곡선의 다섯 가지 retention 표, k를 0부터 세느냐 1부터 세느냐의 번호 차이. 논문 숫자를 비교할 때 다시 펼쳐 봅니다.</p>
-<p><strong>다음으로 넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 한두 문장 말할 수 있으면</span> 됩니다. 나머지는 뒤의 Day에서 다시 나옵니다.</p>
-<p><strong>이후 쓰이는 곳</strong> Day 25–30 과제의 기억 요구·기준선 비교, Day 33–34 잡음, Day 55–56 실험 계획에서 '기억이 길다'는 device 주장을 MC_k로 확인하는 데</p>
+<p><strong>왜 배우나</strong> 내 소재 <span class="key">retention·τ가 MC와 같은 말인지</span> 가려야 좋은 reservoir로 오판하지 않는다.</p>
+<p><strong>오늘의 장면</strong> 감쇠 곡선 + 입력열 → retention·τ 읽기 → <span class="key">k개 전 입력 몫 계산</span> → τ [s]·MC_k [0–1]</p>
+<p><strong>오늘 반드시</strong> <span class="key">retention·τ·MC는 서로 다른 양이다. 노드 하나의 MC 합은 d와 상관없이 1이고, d는 그 1을 나누는 방식만 바꾼다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 표본 분산 (n−1) · 잡음 d = 0.99 계산 · Lee 2025 retention 표 · k 번호</p>
+<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
+<p><strong>이후 쓰이는 곳</strong> Day 25–30 과제 기억·기준선 · Day 33–34 잡음 · Day 55–56 실험 계획</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
 <ol class="day-steps" data-day="d13a">
