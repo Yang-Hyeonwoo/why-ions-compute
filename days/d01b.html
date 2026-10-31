@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -692,7 +698,6 @@ window.Quarto = {
 입력 voltage → conductance 곱(Ohm) → row에서 current 합 → 출력 current</p>
 <p><strong>오늘 반드시</strong> <span class="key">뉴로모픽은 줄기마다 푸는 문제가 다르다. 같은 이온 이완이 in-memory weight에서는 오차, reservoir computing node에서는 자원이다.</span></p>
 <p><strong>나중에 봐도 됨</strong> Liang의 네 아키텍처 · Roadmap 칩 분류 · fJ·pJ/spike 출처</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 7–8 synapse spec · Day 11–24 reservoir computing · Day 31–32 시스템 비교</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -1009,7 +1014,7 @@ short-term / long-term potentiation. 자극 뒤 응답이 커진 상태가 짧�
 <p><strong>끝나면 할 수 있는 것.</strong> "뉴로모픽은 보통 컴퓨터와 무엇이 다른가"를 비교 축(axis) 몇 개로 말합니다. 다섯 축을 다 외울 필요는 없고, 줄기를 구별하는 질문으로 쓰면 됩니다.</p>
 <p>또 전력(W)과 에너지(J)를 구별하며, <span class="math inline">\(P \approx \alpha C V^2 f\)</span>라는 식이 무엇을 말해 주고 무엇을 말해 주지 않는지 설명합니다.</p>
 </div>
-<p>"뉴로모픽은 뇌처럼 계산한다"는 답은 아무것도 설명하지 않습니다. 앞에서 본 보통 컴퓨터와의 차이를 <strong>축</strong>으로 나눠야 구체적인 답이 됩니다. <span class="tag tag-interp">해석</span> 표에 나오는 말 중 '시간상수'만 새 말입니다. 어떤 양이 변한 뒤 원래로 돌아가는 데 걸리는 시간의 척도로, 물리 컴퓨팅 줄기의 "서서히 잊는" 속도를 숫자 하나로 적은 것입니다(표 아래 용어 상자에 정확한 정의).</p>
+<p>"뉴로모픽은 뇌처럼 계산한다"는 답은 아무것도 설명하지 않습니다. 앞에서 본 보통 컴퓨터와의 차이를 <strong>축</strong>으로 나눠야 구체적인 답이 됩니다. <span class="tag tag-interp">해석</span> 표에 나오는 말 중 '시간상수'만 새 말입니다. 어떤 양이 새 평형값에 다가가는 데 걸리는 시간의 척도로, 물리 컴퓨팅 줄기의 "서서히 잊는" 속도를 숫자 하나로 적은 것입니다(표 아래 용어 상자에 정확한 정의).</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1075,7 +1080,7 @@ short-term / long-term potentiation. 자극 뒤 응답이 커진 상태가 짧�
 시간상수 (time constant) <span class="math inline">\(\tau\)</span>
 </dt>
 <dd>
-어떤 양이 변한 뒤 원래로 돌아가는 데 걸리는 시간의 척도. 단위 s. 값이 <span class="math inline">\(e^{-t/\tau}\)</span>로 줄어들 때, <span class="math inline">\(t = \tau\)</span>에서 처음의 약 37%가 남는다. Device 논문의 "decay time"은 정의에 따라 <span class="math inline">\(\tau\)</span>이거나 그 몇 배다. "retention"은 보통 '쓴 값이 얼마나 오래 남는가'를 다른 기준(몇 %가 남는 시간, 또는 측정한 가장 긴 시간)으로 잰 양이라 <span class="math inline">\(\tau\)</span>와 같은 것이 아니다(뒤의 용어 상자). 예: capacitor <span class="math inline">\(C\)</span>와 저항 <span class="math inline">\(R\)</span>이 있으면 <span class="math inline">\(\tau = RC\)</span>. 1 µF와 1 kΩ이면 1 ms.
+입력이 바뀐 뒤 어떤 양이 새 평형값(입력을 끊었으면 원래 값)에 다가가는 빠르기를 나타내는 시간의 척도. 단위 s. 남은 차이가 <span class="math inline">\(e^{-t/\tau}\)</span>로 줄어들 때, <span class="math inline">\(t = \tau\)</span>에서 처음 차이의 약 37%가 남는다(63%를 따라감). 1τ는 끝난 시점이 아니며, 거의 다 따라가려면 3–5τ(95–99%)가 걸린다. Device 논문의 "decay time"은 정의에 따라 <span class="math inline">\(\tau\)</span>이거나 그 몇 배다. "retention"은 보통 '쓴 값이 얼마나 오래 남는가'를 다른 기준(몇 %가 남는 시간, 또는 측정한 가장 긴 시간)으로 잰 양이라 <span class="math inline">\(\tau\)</span>와 같은 것이 아니다(뒤의 용어 상자). 예: capacitor <span class="math inline">\(C\)</span>와 저항 <span class="math inline">\(R\)</span>이 있으면 <span class="math inline">\(\tau = RC\)</span>. 1 µF와 1 kΩ이면 1 ms.
 </dd>
 </dl>
 </div>

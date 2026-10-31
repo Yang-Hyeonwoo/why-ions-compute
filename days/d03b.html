@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -691,7 +697,6 @@ window.Quarto = {
 <p><strong>오늘의 장면</strong> 원리 하나 → 줄이는 비용 → <span class="key">성립 조건</span> → 대신 생기는 비용</p>
 <p><strong>오늘 반드시</strong> <span class="key">원리마다 '줄이는 비용 → 성립 조건 → 생기는 비용'을 말한다. 가소성은 update가 선형·대칭이고 retention이 충분할 때만 이득이다.</span></p>
 <p><strong>나중에 봐도 됨</strong> Roadmap Fig. 9 패널 해설 · 리뷰 목록 비교 · NMDA 단계 · 오늘의 반론</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 10·Day 23–24 τ와 신호 시간척도 · Phase 4 update linearity·endurance</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -917,7 +922,7 @@ analog-to-digital converter. 연속 전압·전류를 0/1 묶음(숫자)으로 �
 <h4 class="anchored" data-anchor-id="s-time-dynamics">5-2. 시간 동역학: 벽 ①(과거 입력의 저장·update)</h4>
 <p><strong>왜 필요한가.</strong> 음성, 심전도, 센서 신호처럼 시간 순서로 들어오는 신호(시계열)를 처리하려면 "지금 값"만으로는 부족하고 "방금 전까지 어땠는지"가 있어야 합니다. 디지털로 하려면 과거 입력을 메모리에 저장하고, 새 입력이 올 때마다 꺼내서 update해야 합니다. 이것도 데이터 이동입니다.</p>
 <p><strong>무엇인가.</strong> device가 과거 입력을 <strong>자기 상태에</strong> 담고 서서히 잊으면, 저장·update가 device 물리로 대체됩니다. Roadmap은 이온 게이트 트랜지스터나 이종 접합 이온 device에서 "이온 축적이 적분(integration)을, 역확산이 leak 거동을 재현한다"고 씁니다. <span class="src">Roadmap 2026, p.8108</span> 역확산은 입력 전압으로 한쪽에 몰려 쌓였던 이온이, 입력이 끊기면 농도 차 때문에 원래 자리로 되돌아 퍼져 나가는 것입니다(back-diffusion). 이렇게 자극이 끝난 뒤 device가 원래 상태로 돌아가는 과정을 device 논문에서는 흔히 <strong>이완</strong>(relaxation)이라 하고, 그 시간을 이완 시간이라 부릅니다. <a href="../days/d03a.html#b-ann-snn" class="recall">인공 신경망(ANN)과 스파이킹 신경망(SNN), 그리고 스파이크</a>의 LIF(적분·leak·발화)에서 "적분·leak"이 이온의 움직임으로 구현되는 것입니다. 생물 막에서도 적분은 막(capacitor)에 전하가 모이는 것, leak은 늘 열린 통로로 이온이 빠지는 것이었으니 "이온이 쌓이고 빠진다"는 점은 닮았습니다. ★ 다만 발화(문턱과 리셋)는 축적·역확산만으로 생기지 않으므로, device 논문이 무엇으로 문턱을 만들었는지(별도 회로인지, device 자체의 급격한 변화인지)를 따로 확인해야 합니다. <span class="tag tag-interp">해석</span> Kudithipudi의 다섯째 이점 "여러 시간척도의 동역학"도 같은 원리입니다. <span class="src">Kudithipudi 2025, p.801</span></p>
-<p><strong>변수와 단위.</strong> device의 시간상수 <span class="math inline">\(\tau\)</span> [s] (Day 1–2에서 본 대로 어떤 양이 변한 뒤 원래로 돌아가는 데 걸리는 시간의 척도)와 신호의 시간척도 <span class="math inline">\(T_{\text{signal}}\)</span> [s] (신호에서 뜻있는 변화가 일어나는 시간 간격, 예: 심전도의 박동 간격 약 1 s). ★ Liang은 physical reservoir computing의 단기 기억이 주로 물리 노드에서 나오고 <span class="src">Liang 2024, p.197</span>, <span class="math inline">\(\tau\)</span>가 시스템의 동작 시간척도를 정하며, 센서 안이나 바로 곁에서 쓰는 물리 노드는 환경·자연 신호와 주고받도록 1 ms보다 긴 생물학적 시간척도를 가질 수 있어야 하고, <span class="math inline">\(\tau\)</span>가 짧으면 실시간 신호와 결합하지 못한다고 씁니다. <span class="src">Liang 2024, p.198</span> 같은 리뷰는 memristor(지나간 전압·전류에 따라 저항값이 바뀌고 그 값을 기억하는 두 단자 device)·capacitor(전하를 담아 두는 부품)·저항을 한 셀에 넣은 "temporal kernel"이 초음파(시간상수 10⁻⁷ s)부터 심전도(1 s)까지 맞출 수 있었다고 소개합니다. <span class="src">Liang 2024, p.196</span></p>
+<p><strong>변수와 단위.</strong> device의 시간상수 <span class="math inline">\(\tau\)</span> [s] (Day 1–2에서 본 대로 어떤 양이 새 평형값에 다가가는 데 걸리는 시간의 척도)와 신호의 시간척도 <span class="math inline">\(T_{\text{signal}}\)</span> [s] (신호에서 뜻있는 변화가 일어나는 시간 간격, 예: 심전도의 박동 간격 약 1 s). ★ Liang은 physical reservoir computing의 단기 기억이 주로 물리 노드에서 나오고 <span class="src">Liang 2024, p.197</span>, <span class="math inline">\(\tau\)</span>가 시스템의 동작 시간척도를 정하며, 센서 안이나 바로 곁에서 쓰는 물리 노드는 환경·자연 신호와 주고받도록 1 ms보다 긴 생물학적 시간척도를 가질 수 있어야 하고, <span class="math inline">\(\tau\)</span>가 짧으면 실시간 신호와 결합하지 못한다고 씁니다. <span class="src">Liang 2024, p.198</span> 같은 리뷰는 memristor(지나간 전압·전류에 따라 저항값이 바뀌고 그 값을 기억하는 두 단자 device)·capacitor(전하를 담아 두는 부품)·저항을 한 셀에 넣은 "temporal kernel"이 초음파(시간상수 10⁻⁷ s)부터 심전도(1 s)까지 맞출 수 있었다고 소개합니다. <span class="src">Liang 2024, p.196</span></p>
 <figure class="fig figure"><img src="../assets/img/d03/fig4-timescale.svg" alt="로그 시간축 위에 전자 device(ns), 이온 이동(µs–s), 초음파 신호(10⁻⁷ s), 센서 곁 노드에 권하는 τ(>1 ms), 심전도(1 s)를 나란히 놓은 그림" class="figure-img"><figcaption><b>그림 17.</b> 시간 동역학이 자원이 되는 조건: device의 시간척도가 신호의 시간척도와 겹쳐야 한다. 가로축은 시간(로그 눈금: 한 칸이 10배). 막대와 점은 리뷰가 적은 범위(전자 ns, 이온 µs–s <span class="src">Roadmap 2026, p.8126</span>; 초음파 10⁻⁷ s, 심전도 1 s <span class="src">Liang 2024, p.196</span>; 센서 안·곁에서 쓰는 노드 &gt;1 ms <span class="src">Liang 2024, p.198</span>)이고 특정 device의 측정값이 아니다. (Claude가 그림)</figcaption></figure>
 <p><strong>작은 예시.</strong> 심전도 한 박동은 약 1 s입니다. 상태에 남은 흔적은 <span class="math inline">\(\tau\)</span>만큼 시간이 지날 때마다 약 37%(e⁻¹)로 줄어듭니다(LIF 뉴런의 leak과 같은 지수 감쇠). <span class="math inline">\(\tau = 1\)</span> ns인 전자 device에게 1 s는 <span class="math inline">\(\tau\)</span>의 10⁹배라, 다음 박동이 올 무렵 흔적은 e의 −10⁹제곱, 사실상 0입니다. 그래서 과거 박동은 디지털 메모리가 대신 저장해야 합니다. ★ <span class="math inline">\(\tau = 0.5\)</span> s인 이온 device라면 1 s 뒤 직전 박동의 흔적이 e⁻² ≈ 14%, 2 s 뒤 그 전 박동은 e⁻⁴ ≈ 2% 남으므로 한두 박동을 상태에 담습니다 <span class="prov">Claude 계산</span>. 같은 이온 device라도 <span class="math inline">\(\tau = 0.1\)</span> s면 1 s 뒤 e⁻¹⁰ ≈ 0.005%라 직전 박동조차 거의 남지 않습니다. 반대로 초음파(10⁻⁷ s)에는 이온 device가 너무 느려서 신호가 지나간 뒤에 반응합니다. <span class="tag tag-interp">해석</span></p>
 <p><strong>적용 조건.</strong> (1) <span class="math inline">\(\tau \approx T_{\text{signal}}\)</span>이어야 합니다. <span class="key">Device의 시간척도가 신호와 맞지 않으면 시간 동역학은 자원이 아니라 지연이나 망각입니다.</span> (2) 여기서 <span class="math inline">\(\tau\)</span>는 <strong>모형의 매개변수</strong>이고, 논문의 retention(유지 시간)은 <strong>정의·허용오차·측정 기간에 따른 지표</strong>입니다. 둘을 같은 것으로 쓰지 않습니다(Day 1–2의 휘발성 구간). (3) device가 과거 입력의 일부를 상태에 담는다는 것과, 그 상태에서 과제에 필요한 정보를 <strong>읽어 낼 수 있다</strong>는 것은 다른 주장입니다. 읽어 낼 수 있으려면 서로 다른 입력 이력이 서로 다른 상태로 가야 하고(분리), 과제에 필요한 만큼의 과거(시간 창)가 상태에 남아 있어야 하며, 그 상태가 readout(상태를 읽어 답을 내는 마지막 단계)이 쓸 수 있는 모양이어야 하고, 그 차이가 잡음과 반복마다의 흔들림보다 커야 합니다. 이것을 Day 10에서 "과제·읽을 수 있는 상태·학습"의 조건으로 다루고(<a href="../days/d06.html#ch-minimal-conditions">계산이라 부를 최소 조건</a>), Phase 2에서 검증 방법을 따로 다룹니다.</p>

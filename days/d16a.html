@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -691,7 +697,6 @@ window.Quarto = {
 <p><strong>오늘의 장면</strong> NARMA10 입력·정답 → device를 한 가지씩 뺀 기준선 → <span class="key">같은 readout·예산·특징 수로 학습</span> → 기준선별 NMSE 표</p>
 <p><strong>오늘 반드시</strong> <span class="key">어떤 기준선을 이겼는지가 주장의 범위다. NG-RC는 reservoir computing과 같은 구조의 어려운 상대다.</span></p>
 <p><strong>나중에 봐도 됨</strong> 특징 수 C(k+p, p) · '86%' 분산 계산 · 모형 순위 숫자</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 31–32 정확도 옆의 비용 · Day 33–34 device 편차 · Day 47–48 기준선 칸 · Day 55–56 최소 검증 실험</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -1118,7 +1123,7 @@ y(t+1) = 0.3\,y(t) + 0.05\,y(t)\sum_{i=0}^{9} y(t-i) + 1.5\,u(t-9)\,u(t) + 0.1
 <p><span id="s-models"></span><strong>열 모형.</strong> 아래 모형은 모두 위 조건을 따르고, 서로 다른 것은 특징을 만드는 부분뿐입니다.</p>
 <ul>
 <li><strong>Delay tap + 선형</strong>: 입력 10개 또는 20개를 그대로(delay tap 기준선).</li>
-<li><strong>저항–capacitor 필터 65개</strong>: 시간상수(값이 원래로 돌아가는 빠르기의 척도 <span class="math inline">\(\tau\)</span>, <a href="../days/d13b.html#b-timescale-match">시간척도 정합</a>)가 서로 다른 선형 저역 통과 필터(low-pass filter) 65개의 출력. 각 필터는 <a href="../days/d15a.html#b-filter">필터</a>의 leak 노드 그대로 매 걸음 <span class="math inline">\(x \leftarrow d\,x + (1-d)\,u\)</span>로 update합니다. <span class="math inline">\(d\)</span>는 이전 상태가 다음 걸음에 <strong>남는</strong> 비율입니다(<span class="math inline">\(d\)</span> = 0.9면 90%가 남고, 새 입력 쪽으로 10%만 옮겨 감). 입력 간격이 <span class="math inline">\(\Delta t\)</span>이고 시간상수가 <span class="math inline">\(\tau\)</span>이면 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>입니다(<a href="../days/d15a.html#s-rc-lowpass">주파수와 필터</a>). 여기서는 <span class="math inline">\(d\)</span>를 0.05부터 0.97까지 65개 값으로 고정했으므로, 시간상수로는 입력 간격의 약 0.33배부터 33배까지입니다. 이름에 '저항–capacitor'가 붙은 까닭은 저항 하나와 capacitor 하나로 된 회로가 정확히 이 식을 따르기 때문인데, 그 유도는 ‘R–C 회로와 비교’ 구간에서 합니다. ★ 여기서는 'Day 27–28의 leak 노드 65개'로 읽으면 됩니다(단순 필터 기준선).</li>
+<li><strong>저항–capacitor 필터 65개</strong>: 시간상수(값이 평형값으로 다가가는 빠르기의 척도 <span class="math inline">\(\tau\)</span>, <a href="../days/d13b.html#b-timescale-match">시간척도 정합</a>)가 서로 다른 선형 저역 통과 필터(low-pass filter) 65개의 출력. 각 필터는 <a href="../days/d15a.html#b-filter">필터</a>의 leak 노드 그대로 매 걸음 <span class="math inline">\(x \leftarrow d\,x + (1-d)\,u\)</span>로 update합니다. <span class="math inline">\(d\)</span>는 이전 상태가 다음 걸음에 <strong>남는</strong> 비율입니다(<span class="math inline">\(d\)</span> = 0.9면 90%가 남고, 새 입력 쪽으로 10%만 옮겨 감). 입력 간격이 <span class="math inline">\(\Delta t\)</span>이고 시간상수가 <span class="math inline">\(\tau\)</span>이면 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>입니다(<a href="../days/d15a.html#s-rc-lowpass">주파수와 필터</a>). 여기서는 <span class="math inline">\(d\)</span>를 0.05부터 0.97까지 65개 값으로 고정했으므로, 시간상수로는 입력 간격의 약 0.33배부터 33배까지입니다. 이름에 '저항–capacitor'가 붙은 까닭은 저항 하나와 capacitor 하나로 된 회로가 정확히 이 식을 따르기 때문인데, 그 유도는 ‘R–C 회로와 비교’ 구간에서 합니다. ★ 여기서는 'Day 27–28의 leak 노드 65개'로 읽으면 됩니다(단순 필터 기준선).</li>
 <li><strong>NG-RC</strong>: 탭 10개 + 2차 곱(특징 65개), 탭 20개 + 2차 곱(230개)(다항 회귀·NG-RC 기준선).</li>
 <li><strong>소프트웨어 ESN 65노드</strong>: 무작위로 연결된 인공 노드 65개. 각 노드는 들어온 값의 합을 tanh(어떤 수든 −1과 1 사이로 누르는 S자 곡선)에 넣습니다(<a href="../days/d07b.html#ch-esn-lsm">ESN과 LSM</a>). 하나는 처음 정한 설정 그대로, 하나는 설정 6개 중 선택(소프트웨어 ESN 기준선).</li>
 <li><strong>'device' 모형 65개</strong>: 서로 연결되지 않은 비선형 leak 노드 65개. 각 노드는 자기 상태를 조금씩 잊으면서(leak) 입력과 자기 상태를 S자 함수에 넣어 update합니다. 식으로는 <span class="math inline">\(x \leftarrow d\,x + (1-d)\tanh(w\,u + v\,x + b)\)</span>이고(<span class="math inline">\(w, v, b\)</span>는 노드마다 무작위로 정해 고정한 수), 바로 위 필터 식에서 새 입력 <span class="math inline">\(u\)</span> 자리에 S자 함수가 들어간 것만 다릅니다. ★ 그래서 필터 65개와 'device' 65개의 차이는 대체로 <strong>비선형(S자 함수와 그 안의 자기 되먹임 <span class="math inline">\(v\,x\)</span>)의 몫</strong>으로 읽을 수 있습니다. 다만 'device' 쪽은 설정 6개 중 고르는 조정 기회도 받았으므로, 정확히 비선형 하나만의 차이는 아닙니다 <span class="tag tag-interp">해석</span>. Device 여러 개를 병렬로 읽는 physical reservoir computing을 흉내 낸 <strong>가상의</strong> device이고, 실제 device의 측정값이 아닙니다. 측정 잡음(표준편차 0.01)을 더한 판도 함께 돌렸습니다.</li>

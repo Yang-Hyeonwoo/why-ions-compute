@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -691,7 +697,6 @@ window.Quarto = {
 <p><strong>오늘의 장면</strong> τ와 입력 간격 T_sym → d = e^(−T_sym/τ) 계산 → <span class="key">최근 입력이 얼마나 남는지</span> → 맞는지 판정(빠름·적당·느림)</p>
 <p><strong>오늘 반드시</strong> <span class="key">좋은 τ는 τ ÷ 입력 간격과 과제의 기억 창이 정한다. 같은 τ의 device를 여럿 쓰면 MC가 안 늘고, 다른 τ를 섞어야 쌓인다.</span></p>
 <p><strong>나중에 봐도 됨</strong> Lee 2025로 d 계산 · 선형 vs 비선형 노드 MC · 'MC 높을수록 좋다' 반론</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 31–32 같은 기억의 디지털 비용 · Day 39–46 τ 여럿 만들기 · Day 55–56 τ 분포와 입력 간격</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -727,7 +732,7 @@ window.Quarto = {
 <p><strong>① 왜 필요한가.</strong> 같은 device가 어떤 과제에서는 쓸 만하고 어떤 과제에서는 쓸모없습니다. 그 차이를 device 탓이나 과제 탓으로 돌리기 전에, 둘의 <strong>시간척도가 맞았는지</strong>부터 확인해야 합니다.</p>
 <p><strong>② 무엇인가 — 세 개의 시간.</strong></p>
 <ul>
-<li><strong>Device의 시간상수 τ</strong> [s]: 상태가 스스로 원래로 돌아가는 속도(‘세 가지 기억’ 구간).</li>
+<li><strong>Device의 시간상수 τ</strong> [s]: 상태가 스스로 평형값으로 다가가는 속도(‘세 가지 기억’ 구간).</li>
 <li><strong>입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span></strong> [s]: 연속한 두 입력이 <strong>시작되는 시각 사이의 간격</strong>. Singh 2026은 이것을 "연속한 두 부호화 입력 기호(symbol)의 시작 사이 시간"으로 정의하고, 펄스 폭이 그보다 짧아도 이 정의를 쓴다고 적습니다. 그리고 "언제 상태를 읽느냐"(state-sampling delay)와는 다른 양이므로 따로 보고하라고 합니다. <span class="src">Singh 2026, p.13</span> 이 교재에서는 "입력 간격"이라고 부릅니다.</li>
 <li><strong>과제의 기억 창</strong> [s]: 답을 내는 데 필요한 과거의 길이(이 교재의 말. 여기서 과제는 device로 풀려는 계산 문제, 예: 다음 값 예측·분류). 예를 들어 "최근 10개 입력의 패턴"이 필요하면 기억 창은 <span class="math inline">\(10 \times T_{\text{sym}}\)</span>입니다. <span class="math inline">\(k\)</span>개 전 입력의 물리적 시간 지연은 <span class="math inline">\(\tau_k = k\,T_{\text{sym}}\)</span>입니다. <span class="src">Singh 2026, p.13</span></li>
 </ul>

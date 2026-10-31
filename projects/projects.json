@@ -1,0 +1,107 @@
+{
+  "_설명": "프로젝트 카탈로그·단계·진행 표시의 단일 원본. tools/projects_build.py가 projects/_catalog.qmd를 만들고, study.js가 각 페이지의 단계 머리(anchor)에 상태 단추를 붙인다. 단계 id는 진행 기록의 키이므로 바꾸지 않는다.",
+  "projects": [
+    {
+      "id": "s",
+      "page": "s.html",
+      "letter": "S",
+      "title": "신호를 숫자로, 기억을 숫자로 — 장비 없이",
+      "outcome": "같은 신호를 bit·샘플링률만 바꿔 숫자로 만든 표·그래프, 기억 없는 모델·R–C·작은 reservoir의 비교 그래프",
+      "question": "데이터량을 줄이면 무엇을 잃는가? '기억이 있다'와 '과제에 쓸모 있는 기억'은 어떻게 다른가?",
+      "research": "이온 소자를 평가할 기준선(ADC 설정, R–C 하나)을 먼저 숫자로 갖게 됩니다. A의 대조군과 같은 질문입니다.",
+      "topics": ["bit·ADC", "시간상수 τ", "reservoir 기준선"],
+      "prereq": "Python 명령 실행 (S1 안에서 설명). Day 9의 bit, 시간상수를 다룬 Day.",
+      "level": {"sw": 1, "circuit": 0, "lab": 0},
+      "equipment": "PC만",
+      "cost": "없음",
+      "materials": "소재·소자 필요 없음",
+      "verify": "코드 실행 확인 (깨끗한 Python 환경에서 두 명령과 그래프 생성)",
+      "steps": [
+        {"id": "s1", "anchor": "s1", "title": "S1. 같은 신호, 다른 bit·샘플링률", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d05"]},
+        {"id": "s2", "anchor": "s2", "title": "S2. 기억 없음 vs R–C vs 작은 reservoir", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d03", "d04", "d09", "d10"]}
+      ]
+    },
+    {
+      "id": "a",
+      "page": "a.html",
+      "letter": "A",
+      "title": "내 소자 전류에 과거 입력의 흔적이 남는지 재기",
+      "outcome": "소자 특성표(전압 범위·흔적이 줄어드는 시간 규모·반복성), 저항·RC·소자의 '끝만 읽기' 정확도 비교표",
+      "question": "내 소자의 전류에 과거 입력의 흔적이 남는가, 그 흔적으로 시간 패턴을 구별할 수 있는가?",
+      "research": "physical reservoir 논문의 첫 그림(펄스 응답·기억)을 대조군과 함께 내 소자로 만드는 단계입니다.",
+      "topics": ["소자 특성화", "대조군", "readout"],
+      "prereq": "전압·전류·옴의 법칙, 시간상수 τ (프로젝트 홈의 기초)",
+      "level": {"sw": 2, "circuit": 1, "lab": 2},
+      "equipment": "A0: PC만 · A0R부터: 소스미터(SMU), 1 MΩ 저항, 1 µF 필름 커패시터 · A1부터: 소자",
+      "cost": "연구실 기존 장비 활용 (추가 구매 거의 없음)",
+      "materials": "A1부터 ITO / 이온성 고분자 두 층 / ITO 소자 (현재 A·B의 공통 플랫폼)",
+      "verify": "A0 모의 명령 실행 확인 · 실제 소스미터 연결은 미검증",
+      "steps": [
+        {"id": "a0", "anchor": "a0", "title": "A0. 모의 장비로 한 바퀴 (장비 없음)", "time": "30–60분", "needs": "PC", "kind": "모의", "days": ["d06", "d08"]},
+        {"id": "a0r", "anchor": "a0r", "title": "A0R. 실제 소스미터로 저항과 RC", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"]},
+        {"id": "a1", "anchor": "a1", "title": "A1. 소자 특성 측정", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"]},
+        {"id": "a2", "anchor": "a2", "title": "A2. 끝만 읽어도 앞을 기억하는가", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"]},
+        {"id": "a3", "anchor": "a3", "title": "A3. (선택) ECG 박동으로 확장", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"]}
+      ]
+    },
+    {
+      "id": "b",
+      "page": "b.html",
+      "letter": "B",
+      "title": "소스미터 없이 작은 보드가 재고 판단하는 시제품",
+      "outcome": "저장된 입력을 재생해 소자에 걸고, 보드가 판단해 화면·소리로 알리는 브레드보드 시제품",
+      "question": "소스미터·PC가 하던 측정과 판단을 작은 회로와 보드가 대신할 수 있는가, 그때 정확도·시간·에너지는?",
+      "research": "에너지·지연을 공정하게 비교하려면 실제 회로의 측정 경계가 필요합니다 (Day 9의 비교 조건).",
+      "topics": ["MCU", "측정 회로", "에너지 측정"],
+      "prereq": "B1은 없음. B4부터 op-amp·ADC 기초 (B 페이지에서 설명)",
+      "level": {"sw": 2, "circuit": 3, "lab": 1},
+      "equipment": "ESP32 개발보드, 브레드보드, 멀티미터 · B4부터 DAC·ADC 모듈, op-amp",
+      "cost": "부품 구매 필요 — 가격은 구매 시 확인 (미확인)",
+      "materials": "B1–B4는 저항·RC로 진행, B5부터 A의 소자",
+      "verify": "펌웨어 컴파일·업로드·실물 동작 모두 미검증 · 회로는 설계안",
+      "steps": [
+        {"id": "b1", "anchor": "b1", "title": "B1. ESP32에 첫 코드 올리기", "time": "1–2시간", "needs": "ESP32 보드, USB 케이블 (없으면 Wokwi 시뮬레이터)", "kind": "실물", "days": []},
+        {"id": "b2", "anchor": "b2", "title": "B2–B3. DAC로 전압 만들고 ADC로 읽기", "time": "반나절", "needs": "ESP32, DAC·ADC 모듈", "kind": "실물", "days": ["d05"]},
+        {"id": "b4", "anchor": "b4", "title": "B4. 소자 구동·전류 측정 회로", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"]},
+        {"id": "b5", "anchor": "b5", "title": "B5. 보드로 레저버 데이터 모으기", "time": "하루", "needs": "B4 회로, 소자", "kind": "실물", "days": ["d08"]},
+        {"id": "b6", "anchor": "b6", "title": "B6. PC 없이 판단하고 알리기", "time": "하루", "needs": "B5 결과", "kind": "실물", "days": ["d08"]},
+        {"id": "b7", "anchor": "b7", "title": "B7. 시간과 에너지를 공정하게 재기", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"]},
+        {"id": "b8", "anchor": "b8", "title": "B8. ECG 신호로 (도전)", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"]}
+      ]
+    },
+    {
+      "id": "c",
+      "page": "c.html",
+      "letter": "C",
+      "title": "누름이 소자 상태를 바꾸고, 그 상태에 리듬이 남는지 확인",
+      "outcome": "추·서보로 누른 기록, 대조군 비교, '끝에서 몇 번만 읽기' 리듬 분류 결과",
+      "question": "누름이 소자 상태를 직접 바꾸는가, 그 상태에 이전 누름의 흔적이 남는가?",
+      "research": "in-sensor 컴퓨팅 주장의 핵심 대조군(점탄성·접촉 면적·장치 자체)을 직접 다루는 경로입니다.",
+      "topics": ["in-sensor", "압력 응답", "대조군"],
+      "prereq": "A0R의 소스미터 연결",
+      "level": {"sw": 2, "circuit": 2, "lab": 3},
+      "equipment": "C0: 소스미터, 추, 실리콘 패드 · C3부터 서보·로드셀",
+      "cost": "C3부터 부품 구매 — 가격 미확인",
+      "materials": "A·B와 다른 압력용 구조가 필요 (별도 가설). 없으면 모의 분석부터",
+      "verify": "모의 분석 실행 확인 · 압력용 소자·tapper 실물 미검증",
+      "steps": [
+        {"id": "c0", "anchor": "c0", "title": "C0. 눌러서 반응이 있는가", "time": "1–2시간 (모의 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 모의)", "kind": "실측", "days": []},
+        {"id": "c2", "anchor": "c1", "title": "C1–C2. 소자 구조와 대조군", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": []},
+        {"id": "c3", "anchor": "c3", "title": "C3–C4. 자극 장치와 기본 특성", "time": "여러 날", "needs": "서보, 로드셀, 보드", "kind": "실물", "days": []},
+        {"id": "c5", "anchor": "c5", "title": "C5. 리듬 과제: 끝에서 몇 번만 읽기", "time": "여러 날", "needs": "C3 장치, 소자", "kind": "실측", "days": ["d08"]}
+      ]
+    }
+  ],
+  "extensions": [
+    {"title": "시간상수 측정 (펄스 폭·간격·측정 간격을 바꿔 τ 추정)", "where": "A0R의 RC → A1-3·A1-4", "when": "A0R의 RC 측정이 끝나면"},
+    {"title": "bit·ADC 실험", "where": "S1 (이번에 만듦)", "when": "지금"},
+    {"title": "장비 없는 기억 실험", "where": "S2 (이번에 만듦)", "when": "지금"},
+    {"title": "내 소재의 동작 지도 (전압·펄스·간격·환경)", "where": "A1-6 특성표 확장", "when": "A1에서 소자 3개 이상 측정한 뒤"},
+    {"title": "디지털 기준선 (필터·문턱·작은 모델·디지털 RC)", "where": "S2 → B7", "when": "A2 결과가 있을 때 같은 과제로"},
+    {"title": "Event-driven 전처리 (연속 전송 vs 사건 전송)", "where": "S1 마지막 줄 → B8", "when": "S1 뒤"},
+    {"title": "Drift 대응 (날·소자·습도)", "where": "A2 반복 측정 + C의 --normalize", "when": "같은 측정을 다른 날 2번 이상 한 뒤"},
+    {"title": "작은 다중 감각 (압력 + 온도 등)", "where": "C 뒤의 후보", "when": "C0에서 압력 응답이 재현될 때"},
+    {"title": "공개 생체신호 → 재생 장치", "where": "A3 + B8 (기존 ECG 경로)", "when": "A2 수준 2 이후"},
+    {"title": "협업형 바이오 연구", "where": "후보 목록만 (아래 조건)", "when": "공개 자료·벤치 실험에서 소재의 역할이 분명해진 뒤, 승인된 협업 프로토콜로"}
+  ]
+}

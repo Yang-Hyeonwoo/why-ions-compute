@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -691,7 +697,6 @@ window.Quarto = {
 <p><strong>오늘의 장면</strong> 감쇠 곡선 + 입력열 → retention·τ 읽기 → <span class="key">k개 전 입력 몫 계산</span> → τ [s]·MC_k [0–1]</p>
 <p><strong>오늘 반드시</strong> <span class="key">retention·τ·MC는 서로 다른 양이다. 노드 하나의 MC 합은 d와 상관없이 1이고, d는 그 1을 나누는 방식만 바꾼다.</span></p>
 <p><strong>나중에 봐도 됨</strong> 표본 분산 (n−1) · 잡음 d = 0.99 계산 · Lee 2025 retention 표 · k 번호</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 25–30 과제 기억·기준선 · Day 33–34 잡음 · Day 55–56 실험 계획</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -744,7 +749,7 @@ window.Quarto = {
 </div>
 <p><strong>상황.</strong> 이온 device에 전압 펄스를 한 번 주면 conductance(device 전체로 전류가 얼마나 잘 흐르는가, 컨덕턴스 <span class="math inline">\(G\)</span> [S]. 재료 성질인 이온전도도 σ [S/m]와는 다른 양, <a href="../days/d04a.html#ch-basics-matrix">Day 7의 Ohm·Kirchhoff 법칙</a>)가 올라갔다가 서서히 원래로 돌아옵니다. 이 곡선을 보고 사람들은 세 가지 다른 말을 합니다. "이 device는 retention이 2초다", "이 device의 τ는 0.8초다", "이 device는 기억이 좋아서 RC에 쓸 만하다". 세 문장은 같은 곡선에서 나왔지만, 같은 것을 말하지 않습니다.</p>
 <p>첫째는 <strong>정의에 따라 달라지는 측정 지표</strong>, 둘째는 <strong>곡선에 맞춘 모형의 숫자</strong>, 셋째는 <strong>계산 능력에 대한 주장</strong>입니다. 셋째를 뒷받침하려면 곡선 하나로는 부족하고, 다른 실험이 필요합니다. 이 구간이 그 차이를 device 하나의 그림(그림 1)으로 정리합니다.</p>
-<p>먼저 앞에서 배운 세 가지를 다시 꺼냅니다. <strong>시간상수 τ</strong>(time constant)는 어떤 양이 변한 뒤 원래로 돌아가는 빠르기를 나타내는 시간의 척도입니다. 변화가 <span class="math inline">\(e^{-t/\tau}\)</span> 꼴로 줄어들면 <span class="math inline">\(t = \tau\)</span>에서 처음 변화의 약 37%가 남습니다(<a href="../days/d03a.html#s-lif-decay">Day 5의 ‘leak과 남는 비율’</a>). <strong>남는 비율 <span class="math inline">\(d\)</span></strong>는 입력과 입력 사이의 간격 동안 변화가 몇 배로 남는지를 적은 숫자로, 간격이 <span class="math inline">\(\Delta t\)</span>이면 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>입니다.</p>
+<p>먼저 앞에서 배운 세 가지를 다시 꺼냅니다. <strong>시간상수 τ</strong>(time constant)는 입력이 바뀐 뒤 어떤 양이 새 평형값(입력이 끊기면 원래 값)에 다가가는 빠르기를 나타내는 시간의 척도입니다. 변화가 <span class="math inline">\(e^{-t/\tau}\)</span> 꼴로 줄어들면 <span class="math inline">\(t = \tau\)</span>에서 처음 변화의 약 37%가 남습니다(<a href="../days/d03a.html#s-lif-decay">Day 5의 ‘leak과 남는 비율’</a>). <strong>남는 비율 <span class="math inline">\(d\)</span></strong>는 입력과 입력 사이의 간격 동안 변화가 몇 배로 남는지를 적은 숫자로, 간격이 <span class="math inline">\(\Delta t\)</span>이면 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>입니다.</p>
 <p>0.9라면 90%가 남고 10%가 줄어든다는 뜻이며, 같은 device라도 간격을 바꾸면 <span class="math inline">\(d\)</span>가 바뀝니다(<a href="../days/d09a.html#s-d-time">Day 15의 d와 τ·Δt</a>). 오늘은 이 간격을 <strong>입력 간격</strong> <span class="math inline">\(T_{\text{sym}}\)</span>이라고 적습니다(Day 15–16의 <span class="math inline">\(\Delta t\)</span>와 같은 것. 정확한 정의는 ‘시간척도 정합’ 구간). <strong>retention</strong>은 써 넣은 상태가 "얼마나 오래 남는가"를 재는 지표로, Day 7–8에서 같은 감쇠 곡선 하나가 정의에 따라 478 s, "10⁴ s 이상", "1년 뒤 30%"로 달리 적힐 수 있음을 봤습니다(<a href="../days/d04b.html#s-retention">Day 8의 retention 비교 그림</a>).</p>
 <p><span id="s-one-device"></span><strong>무엇을 볼지.</strong> 그림 1은 τ = 10 ms인 device <strong>하나</strong>에서 나오는 세 숫자를 한 장에 놓은 것입니다. (a)는 펄스를 한 번 준 뒤의 감쇠 곡선입니다(가로축: 펄스가 끝난 뒤의 시간 [ms], 세로축: 펄스가 만든 변화 가운데 아직 남은 몫 [%]). (b)는 같은 device에 서로 무관한 무작위 입력을 일정한 간격으로 <strong>줄지어</strong> 넣었을 때, 지금 상태로 <span class="math inline">\(k\)</span>개 전 입력을 얼마나 되살리는지를 0–1 사이 숫자(<span class="math inline">\(MC_k\)</span>, 단위 없음)로 그린 막대입니다. <span class="math inline">\(k\)</span> = 1은 방금 들어온 입력, <span class="math inline">\(k\)</span> = 2는 그 하나 전입니다. (b)의 위와 아래 막대는 <strong>입력 간격만</strong> 다릅니다(2 ms, 20 ms).</p>
 <figure class="fig figure"><img src="../assets/img/d13/fig1-three-memories.svg" alt="τ = 10 ms device 하나. (a) 감쇠 곡선에서 50% 기준 retention 6.9 ms, 10% 기준 23.0 ms, 20 ms 뒤 14% 남음, τ = 10 ms(37% 지점). (b)는 같은 device에 입력을 2 ms 간격으로 넣으면 d = 0.82로 MCk가 0.33, 0.22, 0.15…로 퍼지고, 20 ms 간격이면 d = 0.14로 0.98, 0.02로 몰리며, 둘 다 합은 1.00" class="figure-img"><figcaption><b>그림 1.</b> device 하나(τ = 10 ms)에서 나오는 세 가지 '기억' 숫자. <b>(a)</b> 펄스 하나 뒤 감쇠 곡선(①·②). <b>(b)</b> 같은 device에 입력을 줄지어 넣을 때의 $MC_k$(③), 위는 입력 간격 2 ms, 아래는 20 ms. ① retention은 기준을 정해야 나온다: 50% 기준이면 6.9 ms, 10% 기준이면 23.0 ms, "20 ms 뒤 남은 몫"으로 쓰면 14%. ② τ는 곡선을 지수 하나로 맞춘 매개변수로, 37%가 남는 시각이다. ③ $MC_k$는 입력을 줄지어 넣을 때만 정해지고, 같은 device라도 입력 간격이 2 ms면 여러 지연에 퍼지고(0.33, 0.22, 0.15, …) 20 ms면 방금 입력에 몰린다(0.98, 0.02). 노드 하나라 어느 쪽이든 다 더하면 1.00이다. 지수 하나로 감쇠하는 선형 노드, 잡음 없음을 가정한 계산이며 측정값이 아니다. (Claude가 계산해 그림)</figcaption></figure>

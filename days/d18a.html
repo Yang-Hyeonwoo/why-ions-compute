@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -691,7 +697,6 @@ window.Quarto = {
 <p><strong>오늘의 장면</strong> 여러 device·반복 τ → 평균·SD·CV·drift 기울기 → <span class="key">Δ ÷ σ로 오류 확률 어림</span> → 이식 또는 device별 보정</p>
 <p><strong>오늘 반드시</strong> <span class="key">편차는 반복 간·device 간·drift·환경으로 가르고 따로 잰다. 평균 n번은 반복 간 흔들림만 1/√n로 줄인다.</span></p>
 <p><strong>나중에 봐도 됨</strong> 정규분포 꼬리 표 · SNR·dB · d′ 이름 · 평균 차이의 흔들림</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 35–36 이온 드리프트 구별 · Day 41–42 화학 구조와 편차 · Day 49–52 이식형 보정 · Day 55–56 device 수 정하기</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -966,7 +971,7 @@ Drift / 노화
 <section id="s-within-chip" class="level4">
 <h4 class="anchored" data-anchor-id="s-within-chip">3-1. 칩 안: 다양성은 도움이 된다</h4>
 <p>Day 23–24에서 τ가 같은 device 넷은 기억이 겹쳐 MC(memory capacity: 과거 입력을 지연별로 얼마나 되살리는지 더한 값)가 1.00에 머물렀고, τ가 다른 넷은 3.80까지 쌓였습니다(<a href="../days/d13b.html#b-timescale-match">device 시간상수와 과제 시간척도의 정합</a>). Day 25–26에서는 같은 응답의 배수인 채널은 새 방향을 더하지 않는다고 했습니다(<a href="../days/d14a.html#b-rank">rank</a>). 한 reservoir 안의 노드들이 서로 다르면, readout이 섞어 쓸 재료가 늘어납니다.</p>
-<p>시뮬레이션으로 확인합니다. 가상의 "device 같은" 노드 8개를 만듭니다. <strong>노드</strong>는 device 하나를 흉내 낸 상태 숫자 하나입니다. 각 노드는 입력을 비선형으로 바꾼 뒤(tanh, 입력이 커지면 ±1에서 포화하는 S자 함수, <a href="../days/d10a.html#b-nonlinearity">비선형</a>) 시간상수 τ(변화가 원래로 돌아가는 시간의 척도, <a href="../days/d13a.html#ch-three-memories">세 가지 기억</a>)로 서서히 잊습니다. 식으로는 Day 15–16·Day 23–32의 leak 노드(<a href="../days/d09b.html#b-leak">leak</a>)와 같은 모양입니다.</p>
+<p>시뮬레이션으로 확인합니다. 가상의 "device 같은" 노드 8개를 만듭니다. <strong>노드</strong>는 device 하나를 흉내 낸 상태 숫자 하나입니다. 각 노드는 입력을 비선형으로 바꾼 뒤(tanh, 입력이 커지면 ±1에서 포화하는 S자 함수, <a href="../days/d10a.html#b-nonlinearity">비선형</a>) 시간상수 τ(변화가 평형값으로 다가가는 시간의 척도, <a href="../days/d13a.html#ch-three-memories">세 가지 기억</a>)로 서서히 잊습니다. 식으로는 Day 15–16·Day 23–32의 leak 노드(<a href="../days/d09b.html#b-leak">leak</a>)와 같은 모양입니다.</p>
 <p><span class="math display">\[
 x \leftarrow d\,x + (1-d)\,\tanh\!\big(g\,(w\,u + b)\big), \qquad d = e^{-\Delta t/\tau}
 \]</span></p>

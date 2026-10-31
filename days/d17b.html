@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -691,7 +697,6 @@ window.Quarto = {
 <p><strong>오늘의 장면</strong> device 응답 시간 + 응용 → <span class="key">시스템 지연을 요소별로 쌓기</span> → 단위·경계·과제 대조 → 비교 가능 판정</p>
 <p><strong>오늘 반드시</strong> <span class="key">device 응답 시간 ≠ 시스템 latency(τ = 50 ms가 실시간 0.6 ms, 재생 750 ms). 비용은 단위·경계·과제가 같을 때만 비교한다.</span></p>
 <p><strong>나중에 봐도 됨</strong> 비용 점검 질문 여섯 개 암기 · 보정 비용 나누기 숫자</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 33–34 보정 주기·안정성 · Day 47–48 비용 주장 점검 · Day 49–50 이온–전자 접속 지연 · Day 53–56 비용 기준</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -718,7 +723,7 @@ window.Quarto = {
 <p><strong>상황.</strong> 내 소재의 τ가 50 ms입니다. 이것이 장치의 지연시간이 되나요? 심전도를 실시간으로 처리할 때와 저장된 기록을 다시 돌릴 때 답이 다릅니다. 이 구간이 그 차이를 계산합니다(그림 4).</p>
 <p><span id="s-two-times"></span><strong>자주 섞이는 두 시간.</strong> device 논문에는 "응답 시간(response time) 10 ms", "이완 시간(relaxation time) 50 ms" 같은 숫자가 나옵니다. 이것은 device의 상태가 바뀌거나 돌아오는 데 걸리는 시간, 즉 <strong>device의 시간척도</strong>입니다. 시스템의 <strong>지연시간</strong>은 그와 다릅니다. 입력을 펄스로 바꾸는 시간, device가 입력열을 다 받는 시간, 상태를 읽고 숫자로 바꾸는 시간, readout을 계산하는 시간, 다음 입력을 위해 device가 원래 상태로 돌아오기를 기다리는 시간이 모두 들어갑니다.</p>
 <p>Singh 2026은 재료의 고유 응답 시간을 시스템 전체의 지연시간으로 보고하면 안 되며, 입력 부호화·reservoir의 변화·상태 획득·readout 계산을 <strong>같은 시간 경계 안에</strong> 넣었을 때만 시스템 지연이라 부를 수 있다고 씁니다. <span class="src">Singh 2026, p.19</span> 보고하는 값이 고유 응답 시간인지 전체 구간인지를 밝히고, 처리율과 가정한 <strong>병렬</strong>(parallel) 동작(여러 개를 동시에 처리하는 것)도 적으라고 합니다. <span class="src">Singh 2026, p.14</span></p>
-<p>Day 23–24의 시간척도 정합을 다시 떠올립니다. Device의 시간상수 τ는 상태가 스스로 원래로 돌아가는 빠르기이고, 입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span>은 연속한 두 입력이 시작되는 시각 사이의 간격입니다. 한 간격 동안 앞 입력의 흔적이 남는 비율이 <span class="math inline">\(d = e^{-T_{\text{sym}}/\tau}\)</span>입니다(Day 15–16·Day 27–28의 leak 노드 <span class="math inline">\(x \leftarrow d\,x + (1-d)\,u\)</span>의 그 <span class="math inline">\(d\)</span>). <span class="math inline">\(d\)</span>가 0에 가까우면 방금 입력만 남고, 1에 아주 가까우면 입력 하나가 상태를 거의 움직이지 못해, 둘 다 과제에 쓸 기억이 줄었습니다(<a href="../days/d13b.html#b-timescale-match">시간척도 정합</a>). 이번에는 그 정합이 시간과 에너지에서 무엇을 뜻하는지 봅니다. 핵심은 <strong><span class="math inline">\(T_{\text{sym}}\)</span>을 누가 정하느냐</strong>입니다.</p>
+<p>Day 23–24의 시간척도 정합을 다시 떠올립니다. Device의 시간상수 τ는 상태가 스스로 평형값으로 다가가는 빠르기이고, 입력 간격 <span class="math inline">\(T_{\text{sym}}\)</span>은 연속한 두 입력이 시작되는 시각 사이의 간격입니다. 한 간격 동안 앞 입력의 흔적이 남는 비율이 <span class="math inline">\(d = e^{-T_{\text{sym}}/\tau}\)</span>입니다(Day 15–16·Day 27–28의 leak 노드 <span class="math inline">\(x \leftarrow d\,x + (1-d)\,u\)</span>의 그 <span class="math inline">\(d\)</span>). <span class="math inline">\(d\)</span>가 0에 가까우면 방금 입력만 남고, 1에 아주 가까우면 입력 하나가 상태를 거의 움직이지 못해, 둘 다 과제에 쓸 기억이 줄었습니다(<a href="../days/d13b.html#b-timescale-match">시간척도 정합</a>). 이번에는 그 정합이 시간과 에너지에서 무엇을 뜻하는지 봅니다. 핵심은 <strong><span class="math inline">\(T_{\text{sym}}\)</span>을 누가 정하느냐</strong>입니다.</p>
 <p><strong>무엇을 볼지.</strong> 그림 4는 같은 박동 하나를 처리하는 세 경우를 한 시간축(가로, ms) 위에 놓은 것입니다. 첫 줄은 <strong>실시간 처리</strong>(real-time processing: 신호가 들어오는 대로 처리), 둘째·셋째 줄은 저장해 둔 박동을 나중에 다시 넣는 <strong>재생</strong>(오프라인 처리, offline processing)입니다. 재생 줄의 회색 칸 '초기화 대기'는 다음 박동을 넣기 전에 앞 박동의 흔적이 device에서 빠지기를 기다리는 시간입니다(아래 단계 2). 막대의 오른쪽 끝이 답이 나오는 시각이므로 세 줄의 오른쪽 끝을 먼저 비교해 보세요. 왜 그렇게 되는지는 아래 경우 1과 경우 2에서 차례로 계산합니다.</p>
 <figure class="fig figure"><img src="../assets/img/d17/fig3-latency.svg" alt="시간축(0–1,100 ms) 위의 세 줄. 실시간 처리에서는 박동 신호 1 s 동안 device가 함께 변하고 박동이 끝난 뒤 추가 지연은 0.6 ms. 재생에서 τ=50 ms device는 입력 500 ms + 초기화 대기 250 ms로 합계 750.6 ms, 1초에 1.33개. τ=50 µs device는 합계 1.35 ms, 1초에 741개" class="figure-img"><figcaption><b>그림 4.</b> device의 응답 시간과 시스템의 지연시간(가정값으로 계산, 가로축 시간 ms). 첫 줄: 실시간 처리에서는 신호 자체의 길이(1 s)가 어느 방법에나 공통이고 device는 그동안 함께 변하므로, device의 느림이 추가 지연이 되지 않는다. 둘째·셋째 줄: 저장한 데이터를 다시 넣을 때는 device의 τ가 입력 간격과 초기화 대기를 정해 그대로 지연이 된다. ADC 1회 10 µs, readout 0.1 ms, 초기화 대기 5τ는 [가정]. (Claude가 계산해 그림)</figcaption></figure>
 <p><span id="s-realtime"></span><strong>경우 1 — 실시간 처리: 신호가 <span class="math inline">\(T_{\text{sym}}\)</span>을 정한다.</strong> (그림 4 첫 줄) 가슴의 심전도처럼 신호가 실제 시간에 흘러들어오면, 박동 하나는 어차피 1 s 동안 들어옵니다. 박동을 50단계로 나눠 넣으면 <span class="math inline">\(T_{\text{sym}}\)</span> = 1 s ÷ 50 = 20 ms이고, 이것은 device가 아니라 신호가 정한 값입니다. 디지털만 쓰는 장치(A)도 박동이 끝나야 판정할 수 있으니, 이 1 s는 <strong>어느 방법에나 공통</strong>입니다.</p>

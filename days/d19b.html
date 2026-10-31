@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -691,7 +697,6 @@ window.Quarto = {
 <p><strong>오늘의 장면</strong> 전압·이온 종·용매 → 수화 껍질·화학 상태·연성 매질 → <span class="key">다섯 축 숫자 비교</span></p>
 <p><strong>오늘 반드시</strong> <span class="key">이온에는 자유도 넷(여러 종·수화·화학 상태·연성 매질)이 있지만 자유도가 곧 계산 자원은 아니다. 다섯 축: 속도·정밀도·집적·endurance·변환.</span></p>
 <p><strong>나중에 봐도 됨</strong> OECT 단계 계산 · 원문 그림 · 에너지 비교 세부 · 리뷰 현황</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 37–38 이온 memory·비선형 메커니즘 · Day 45–46 접합 고유 이점 · Day 51–52 응용 교차표 · Day 57–58 최종 판단</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -731,7 +736,7 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="s-hydration">3-2. 질량과 수화 껍질이 있다: 용매·힘·열과 직접 결합한다</h4>
 <p>이온은 용매 분자를 끌고 다니므로 압력·흐름·온도와 직접 이어집니다. Dobashi 2022(Science)의 <strong>압전이온</strong>(piezoionic) 하이드로겔은 겔을 누르면 기공 속 용매가 흐르고, 그 흐름이 양이온과 음이온을 서로 다르게 실어 날라 전하가 갈리는 원리입니다. <span class="src">Dobashi 2022, p.502</span> 그림 7이 이 순서와 두께의 효과를 그린 것입니다. 왼쪽 세 칸을 ①→③으로 읽고, 오른쪽에서 두께와 응답 시간을 보세요.</p>
 <figure class="fig figure"><img src="../assets/img/d19/fig8-piezoionic.svg" alt="압전이온 하이드로겔의 동작 세 단계와 두께 효과. 1 겔을 누른다. 2 기공 속 용매가 눌린 곳에서 바깥으로 흐르며 양이온과 음이온을 서로 다르게 실어 나른다. 3 양·음이온이 갈린 만큼 두 전극 사이에 전압·전류가 생긴다. 오른쪽: 두께 1 mm 응답 약 5 s, 0.2 mm 약 30 ms, 길이의 제곱만으로 계산하면 25분의 1이지만 실제는 약 170분의 1" class="figure-img"><figcaption><b>그림 7.</b> 압전이온 하이드로겔(모식도). 응답 시간은 이온 하나의 이동이 아니라 용매가 빠져나가는 기계적 이완이 정한다. 그림에서 양이온이 더 멀리 실려 간 것은 예시이고, 실제로 어느 이온이 더 멀리 가는지는 겔과 이온에 따라 다르다. 두께와 시간은 Dobashi 2022 p.505의 값이다. (Claude가 그림, 모식도)</figcaption></figure>
-<p>같은 글에서 겔 두께를 1 mm에서 0.2 mm로 줄이면 전류 응답 시간이 약 5 s에서 30 ms로 짧아졌습니다. <span class="src">Dobashi 2022, p.505</span> 단, 이 시간은 이온 하나의 이동이 아니라 <strong>겔이 눌렸다가 용매가 빠져나가는 기계적 이완</strong>(poroelastic 이완: 시간상수가 변형의 특성 길이, 예컨대 누르는 물체의 크기의 제곱에 비례하고 기공 속 용매의 점도·겔의 투과도·탄성률에 달린 과정)이 정합니다. <span class="src">Dobashi 2022, p.502</span> <span class="tag tag-interp">해석</span> 두께가 5분의 1이니 '길이의 제곱'만으로 계산하면 응답이 25분의 1(약 0.2 s)이어야 하는데 실제로는 약 170분의 1입니다. 저자들은 겔이 두꺼울수록 누른 압력이 넓게 퍼져 압력 기울기가 작아지는 것을 이유로 듭니다. <span class="src">Dobashi 2022, p.505</span> ★ 이온 device의 시간상수(변화가 원래로 돌아가는 빠르기를 나타내는 시간의 척도, <a href="../days/d13a.html#b-retention-vs-mc">Retention time과 memory capacity는 무엇이 다른가</a>) 가운데 일부는 이온 확산이 아니라 고분자망의 역학에서 온다는 것, 이것이 Day 39–40·Day 41–42에서 다시 나옵니다.</p>
+<p>같은 글에서 겔 두께를 1 mm에서 0.2 mm로 줄이면 전류 응답 시간이 약 5 s에서 30 ms로 짧아졌습니다. <span class="src">Dobashi 2022, p.505</span> 단, 이 시간은 이온 하나의 이동이 아니라 <strong>겔이 눌렸다가 용매가 빠져나가는 기계적 이완</strong>(poroelastic 이완: 시간상수가 변형의 특성 길이, 예컨대 누르는 물체의 크기의 제곱에 비례하고 기공 속 용매의 점도·겔의 투과도·탄성률에 달린 과정)이 정합니다. <span class="src">Dobashi 2022, p.502</span> <span class="tag tag-interp">해석</span> 두께가 5분의 1이니 '길이의 제곱'만으로 계산하면 응답이 25분의 1(약 0.2 s)이어야 하는데 실제로는 약 170분의 1입니다. 저자들은 겔이 두꺼울수록 누른 압력이 넓게 퍼져 압력 기울기가 작아지는 것을 이유로 듭니다. <span class="src">Dobashi 2022, p.505</span> ★ 이온 device의 시간상수(변화가 평형값으로 다가가는 빠르기를 나타내는 시간의 척도, <a href="../days/d13a.html#b-retention-vs-mc">Retention time과 memory capacity는 무엇이 다른가</a>) 가운데 일부는 이온 확산이 아니라 고분자망의 역학에서 온다는 것, 이것이 Day 39–40·Day 41–42에서 다시 나옵니다.</p>
 <p>Bayley 그룹의 합성 신경은 반대쪽 극단입니다. 나노리터 물방울과 하이드로겔 섬유를 지질 이중막(lipid bilayer: 세포막처럼 기름 성질의 분자가 두 겹으로 늘어선 얇은 막)으로 이은 구조에서 신호가 센티미터 거리를 전달되고, 끝에서 신경전달물질(neurotransmitter: 신경세포가 다음 세포에 신호를 넘길 때 내보내는 분자)을 <strong>방출</strong>합니다. 저자들은 이 전달 방식이 생체를 그대로 흉내 낸 것이 아닌(non-biomimetic) 기구라고 밝힙니다. <span class="src">Hoskin 2022, p.650</span> 출력이 전압이 아니라 <strong>분자의 방출</strong>이라는 것, 전자 회로에는 없는 출력 형식입니다.</p>
 </section>
 <section id="s-chem-state" class="level4">

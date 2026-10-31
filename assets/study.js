@@ -1238,18 +1238,29 @@
       }) || cands[0] || null
     );
   }
-  // 지금 학습할 단위: 마지막으로 읽던 단위가 아직 완료 전이면 그것, 아니면 완료 전 첫 단위
+  // 홈의 두 길(2026-10-31 요청): 주 행동은 '최근 읽던 곳'. 읽던 단위가 완료면 그 바로 다음 미완료 단위.
+  // 순서상 앞에 완료 표시가 없는 단위(firstOpen)는 따로 작게 알린다. 기록이 없으면 첫 미완료 단위.
   function currentUnit(days) {
-    var firstOpen = days.find(function (d) {
+    var open = function (d) {
       return dayState(d.day) !== "done";
-    });
+    };
+    var firstOpen = days.find(open) || null;
     var last = null;
     try {
       last = JSON.parse(recall("study-last-any") || "null");
     } catch (e) {}
     var lastU = unitForLast(days, last);
-    var cur = lastU && dayState(lastU.day) !== "done" ? lastU : firstOpen;
-    return { cur: cur, last: last, resume: !!(cur && cur === lastU) };
+    var cur = firstOpen,
+      resume = false,
+      after = null;
+    if (lastU && open(lastU)) {
+      cur = lastU;
+      resume = true;
+    } else if (lastU) {
+      after = lastU;
+      cur = days.slice(days.indexOf(lastU) + 1).find(open) || firstOpen;
+    }
+    return { cur: cur, last: last, resume: resume, after: after, firstOpen: firstOpen };
   }
   // 가장 최근에 완료로 표시한 단위
   // 완료한 단위 중 가장 뒤의 것(누른 시각이 아니라 순서 기준: 앞 Day를 나중에 몰아서 눌러도 흐름상 마지막을 보인다)
@@ -1331,7 +1342,9 @@
     card.innerHTML = "";
     var main = h("div", "tc-main");
     if (cur) {
-      main.appendChild(h("div", "tc-label", cu.resume ? "이어서 학습" : anyDone ? "다음 학습" : "처음 시작"));
+      main.appendChild(
+        h("div", "tc-label", cu.resume ? "최근 읽던 곳" : cu.after ? "최근 학습한 Day " + cu.after.n + " 다음" : anyDone ? "다음 단위" : "처음 시작")
+      );
       var t = h("h2", "tc-title");
       t.appendChild(h("span", "tc-day", "Day " + cur.n));
       t.appendChild(h("span", "tc-t", cur.title));
@@ -1355,16 +1368,26 @@
         if (at >= 0) {
           where.appendChild(h("b", "", "구간 " + (at + 1) + " / " + chs.length));
           var ct = chapterText(last.title);
-          if (ct) where.appendChild(document.createTextNode(" 읽는 중 · " + ct));
+          if (ct) where.appendChild(document.createTextNode(" · " + ct));
         } else {
           where.appendChild(document.createTextNode("학습 구간 " + chs.length + "개"));
         }
         prog.appendChild(where);
         main.appendChild(prog);
       }
-      var a = h("a", "sbtn primary tc-go", cu.resume ? "이어서 학습 →" : "학습 시작 →");
+      var a = h("a", "sbtn primary tc-go", cu.resume ? "이어서 읽기 →" : "Day " + cur.n + " 시작 →");
       a.href = OFFSET + "days/" + cur.day + ".html" + (cu.resume && last.id ? "#" + last.id : "");
       main.appendChild(a);
+      // 순서상 앞에 완료 표시가 없는 단위: 강요하지 않고 한 줄로만
+      var fo = cu.firstOpen;
+      if (fo && fo !== cur && fo.n < cur.n) {
+        var sk = h("p", "tc-skip");
+        sk.appendChild(document.createTextNode("순서대로 보면 완료 표시가 없는 앞 단위가 있어요: "));
+        var sa = h("a", "", "Day " + fo.n + " · " + fo.title);
+        sa.href = OFFSET + "days/" + fo.day + ".html";
+        sk.appendChild(sa);
+        main.appendChild(sk);
+      }
     } else {
       main.appendChild(h("div", "tc-label", "모든 학습 단위를 완료로 표시했습니다"));
       main.appendChild(h("h2", "tc-title", "복습을 이어 가고, 마지막 Day의 결정을 다시 읽어 보세요."));
@@ -1372,24 +1395,12 @@
     card.appendChild(main);
 
     var side = h("div", "tc-side");
-    var prev = lastDone(days);
-    if (prev) {
-      var pv = h("div", "tc-prev");
-      pv.appendChild(h("div", "tc-mini-label", "지난번에 배운 것"));
-      var pa = h("a", "tc-prev-t");
-      pa.href = OFFSET + "days/" + prev.day + ".html";
-      pa.appendChild(h("span", "tc-rv-n", "Day " + prev.n));
-      pa.appendChild(document.createTextNode(prev.title));
-      pv.appendChild(pa);
-      if (prev.learn) pv.appendChild(h("p", "tc-prev-l", prev.learn));
-      side.appendChild(pv);
-    }
     var due = dueReviews(days);
     if (due.length) {
       var rb = h("div", "tc-review");
       var hd = h("div", "tc-rv-head");
-      hd.appendChild(h("span", "tc-mini-label", "복습할 차례"));
-      hd.appendChild(h("span", "tc-rv-hint", "완료 뒤 1·3·7·14·30일에 다시 떠올리면 오래 남습니다. 버거우면 건너뛰어도 됩니다."));
+      hd.appendChild(h("span", "tc-mini-label", "다시 떠올려 볼 단위"));
+      hd.appendChild(h("span", "tc-rv-hint", "완료하고 며칠 지난 단위예요. 시간이 날 때만, 3문제면 충분합니다."));
       rb.appendChild(hd);
       due.slice(0, 3).forEach(function (r) {
         var row = h("div", "tc-rv-row");
@@ -1403,13 +1414,13 @@
         var btns = h("div", "tc-rv-btns");
         var slot = h("div", "tc-recall");
         btns.appendChild(
-          button("3문제 풀기", "lab-small", function () {
+          button("3문제", "lab-small", function () {
             recallHere(r.d, slot);
           })
         );
         if (LOCAL) {
           btns.appendChild(
-            button("복습함", "ghost lab-small", function () {
+            button("떠올려 봄", "ghost lab-small", function () {
               var patch = { reviews: {} };
               var have = pageStatus(r.d.day).reviews || {};
               REVIEW_GAPS.forEach(function (g) {
@@ -1417,7 +1428,7 @@
               });
               setDayStatus(r.d.day, patch)
                 .then(function () {
-                  toast("Day " + r.d.n + " 복습을 기록했어요");
+                  toast("Day " + r.d.n + " 기록했어요");
                   setupToday();
                 })
                 .catch(function (err) {
@@ -1437,6 +1448,331 @@
     if (gains) side.appendChild(gains);
     if (side.children.length) card.appendChild(side);
     markRoadmap(days, cur);
+    homeNext(cur);
+  }
+
+  // 홈 카드 아래 한 줄: 지금 개념과 이어지는 작은 프로젝트 단계 하나, 연구 노트
+  function homeNext(cur) {
+    var box = document.getElementById("home-next");
+    var data = projData();
+    if (!box || !data) return;
+    projLoad().then(function (P) {
+      box.innerHTML = "";
+      var pick = null,
+        lab = "작게 만들어 보기";
+      var nx = P.last ? projNextStep(data, P) : null;
+      if (nx) {
+        pick = nx.step;
+        lab = nx.label;
+      } else {
+        var src = cur ? cur.src : "";
+        pick =
+          data.steps.find(function (st) {
+            return st.days.indexOf(src) >= 0 && projState(P, st.id) !== "done";
+          }) ||
+          data.steps.find(function (st) {
+            return projState(P, st.id) !== "done";
+          });
+      }
+      if (pick) {
+        var a = h("a", "hn-item");
+        a.href = projHref(pick);
+        a.appendChild(h("span", "hn-k", lab));
+        a.appendChild(h("span", "hn-t", pick.title));
+        a.appendChild(h("span", "hn-m", pick.time + " · " + pick.needs));
+        box.appendChild(a);
+      }
+      var n = h("a", "hn-item");
+      n.href = OFFSET + "notes.html";
+      n.appendChild(h("span", "hn-k", "연구 노트"));
+      n.appendChild(h("span", "hn-t", "오늘 이해한 것이나 막힌 점을 한 줄 남기기"));
+      box.appendChild(n);
+    });
+  }
+
+  // ---------- 프로젝트 단계 진행 ----------
+  // 원본: projects/projects.json → 페이지의 #project-data. 기록: 내 컴퓨터(로컬 모드)는 answers/projects.json(서버가 git에 기록),
+  // 공개 사이트는 이 브라우저(localStorage)에만. 공개 배포물에는 들어가지 않는다. 저장이 실패하면 화면을 되돌리고 알린다.
+  var PROJ = null;
+  var PSTATE = { doing: "진행 중", done: "완료", hold: "보류" };
+  function projData() {
+    var el = document.getElementById("project-data");
+    if (!el) return null;
+    try {
+      return JSON.parse(el.textContent);
+    } catch (e) {
+      return null;
+    }
+  }
+  function projLoad() {
+    if (PROJ) return Promise.resolve(PROJ);
+    var p;
+    if (LOCAL)
+      p = api("projects").catch(function () {
+        return null;
+      });
+    else {
+      var d = null;
+      try {
+        d = JSON.parse(recall("study-projects") || "null");
+      } catch (e) {}
+      p = Promise.resolve(d);
+    }
+    return p.then(function (d) {
+      PROJ = d && d.steps ? d : { steps: {}, last: null };
+      return PROJ;
+    });
+  }
+  function projSave(next) {
+    if (LOCAL)
+      return api("projects", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(next),
+      }).then(function (j) {
+        PROJ = j.projects;
+        return PROJ;
+      });
+    try {
+      localStorage.setItem("study-projects", JSON.stringify(next));
+    } catch (e) {
+      return Promise.reject(new Error("이 브라우저가 저장을 막았어요(사생활 보호 창이거나 저장 공간 부족)"));
+    }
+    PROJ = next;
+    return Promise.resolve(PROJ);
+  }
+  function projState(P, id) {
+    return (P.steps[id] || {}).state || "";
+  }
+  function projHref(st) {
+    return OFFSET + "projects/" + st.page + "#" + st.anchor;
+  }
+  function projWhere() {
+    return LOCAL ? "기록은 내 컴퓨터에 저장됩니다 (answers/projects.json)." : "공개 사이트: 기록은 이 브라우저에만 저장됩니다. 내 컴퓨터 사이트의 기록과는 따로입니다.";
+  }
+  // 계속하기: 마지막으로 만진 단계가 끝나지 않았으면 그 단계, 끝났으면 같은 프로젝트의 다음 미완료 단계
+  function projNextStep(data, P) {
+    if (!P.last) return null;
+    var st = data.steps.find(function (x) {
+      return x.id === P.last.step;
+    });
+    if (!st) return null;
+    var s0 = projState(P, st.id);
+    if (s0 !== "done") return { step: st, label: "프로젝트 계속" + (s0 ? " · " + PSTATE[s0] : "") };
+    var same = data.steps.filter(function (x) {
+      return x.project === st.project;
+    });
+    var nx = same.slice(same.indexOf(st) + 1).find(function (x) {
+      return projState(P, x.id) !== "done";
+    });
+    return nx ? { step: nx, label: "프로젝트 다음 단계" } : null;
+  }
+  function projClone(P) {
+    return JSON.parse(JSON.stringify(P));
+  }
+  function nowStamp() {
+    var d = new Date();
+    return todayIso() + "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
+  }
+  function stepBar(st, rerender) {
+    var bar = h("div", "pstep");
+    bar.dataset.step = st.id;
+    function draw() {
+      bar.innerHTML = "";
+      var cur = projState(PROJ, st.id);
+      var row = h("div", "pstep-row");
+      row.appendChild(h("span", "pstep-k", "이 단계"));
+      var grp = h("div", "pstep-btns");
+      grp.setAttribute("role", "group");
+      grp.setAttribute("aria-label", st.title + " 진행 상태");
+      ["doing", "done", "hold"].forEach(function (k) {
+        var b = button(PSTATE[k] + (cur === k ? " ✓" : ""), "pstep-b" + (cur === k ? " on" : ""), function () {
+          if (cur === k && k === "done") return;
+          set(cur === k ? "" : k);
+        });
+        b.setAttribute("aria-pressed", cur === k ? "true" : "false");
+        grp.appendChild(b);
+      });
+      row.appendChild(grp);
+      if (cur === "done")
+        row.appendChild(
+          button("완료 취소", "ghost lab-small", function () {
+            set("");
+          })
+        );
+      row.appendChild(h("span", "pstep-meta", st.time + " · " + st.needs));
+      bar.appendChild(row);
+      if (cur === "done") bar.appendChild(h("div", "pstep-note", "완료 = 실행하고 기록하고 해석함. 성능이 좋았다는 뜻은 아닙니다."));
+      // 기록(선택): 날짜·설정·관찰·막힌 점·결과 파일 또는 연구 노트 링크. 긴 글은 연구 노트에.
+      var logs = (PROJ.steps[st.id] || {}).log || [];
+      var det = h("details", "pstep-log");
+      det.appendChild(h("summary", "", logs.length ? "기록 " + logs.length + "개" : "기록 남기기 (선택)"));
+      logs.forEach(function (lg, i) {
+        var it = h("div", "pstep-entry");
+        var head = h("div", "pstep-entry-h");
+        head.appendChild(h("b", "", lg.date || ""));
+        head.appendChild(
+          button("지우기", "ghost lab-small", function () {
+            if (!window.confirm("이 기록을 지울까요?")) return;
+            var next = projClone(PROJ);
+            next.steps[st.id].log.splice(i, 1);
+            save(next, "기록을 지웠어요", true);
+          })
+        );
+        it.appendChild(head);
+        [["setup", "설정"], ["obs", "관찰"], ["stuck", "막힌 점"], ["link", "결과·노트"]].forEach(function (f) {
+          if (!lg[f[0]]) return;
+          var line = h("div", "pstep-entry-l");
+          line.appendChild(h("span", "pstep-entry-k", f[1]));
+          if (f[0] === "link" && /^https?:\/\//.test(lg.link)) {
+            var la = h("a", "", lg.link);
+            la.href = lg.link;
+            la.target = "_blank";
+            la.rel = "noopener";
+            line.appendChild(la);
+          } else line.appendChild(document.createTextNode(lg[f[0]]));
+          it.appendChild(line);
+        });
+        det.appendChild(it);
+      });
+      var form = h("div", "pstep-form");
+      var fields = {};
+      [
+        ["date", "날짜", "date"],
+        ["setup", "설정 (바꾼 값, 장비, 파일)", "text"],
+        ["obs", "관찰", "textarea"],
+        ["stuck", "막힌 점", "text"],
+        ["link", "결과 파일 위치나 연구 노트 링크", "text"],
+      ].forEach(function (f) {
+        var lb = h("label", "pstep-f");
+        lb.appendChild(h("span", "", f[1]));
+        var inp = f[2] === "textarea" ? h("textarea") : h("input");
+        if (f[2] !== "textarea") inp.type = f[2];
+        else inp.rows = 2;
+        if (f[0] === "date") inp.value = todayIso();
+        fields[f[0]] = inp;
+        lb.appendChild(inp);
+        form.appendChild(lb);
+      });
+      form.appendChild(
+        button("기록 추가", "lab-small", function () {
+          var item = {};
+          Object.keys(fields).forEach(function (k) {
+            var v = fields[k].value.trim();
+            if (v) item[k] = v;
+          });
+          if (!item.setup && !item.obs && !item.stuck && !item.link) {
+            toast("설정·관찰·막힌 점·링크 중 하나는 적어 주세요");
+            return;
+          }
+          var next = projClone(PROJ);
+          var e = (next.steps[st.id] = next.steps[st.id] || {});
+          e.log = (e.log || []).concat([item]);
+          next.last = { step: st.id, at: nowStamp() };
+          save(next, "기록을 남겼어요", true);
+        })
+      );
+      det.appendChild(form);
+      det.appendChild(h("div", "pstep-where", projWhere() + " 긴 글은 연구 노트에 쓰고 링크만 남기세요."));
+      bar.appendChild(det);
+    }
+    function save(next, msg, keepOpen) {
+      projSave(next)
+        .then(function () {
+          toast(msg + (LOCAL ? "" : " (이 브라우저에만)"));
+          draw();
+          if (keepOpen) bar.querySelector("details.pstep-log").open = true;
+          if (rerender) rerender();
+        })
+        .catch(function (err) {
+          toast("저장하지 못했어요: " + String(err.message).replace(/\.+$/, "") + ". 화면은 저장 전 상태로 되돌렸습니다.", true);
+          draw();
+        });
+    }
+    function set(k) {
+      var next = projClone(PROJ);
+      var e = (next.steps[st.id] = next.steps[st.id] || {});
+      if (k) {
+        e.state = k;
+        e.at = nowStamp();
+      } else {
+        delete e.state;
+        delete e.at;
+      }
+      next.last = { step: st.id, at: nowStamp() };
+      save(next, k ? st.title.split(". ")[0] + ": " + PSTATE[k] : "표시를 지웠어요");
+    }
+    draw();
+    return bar;
+  }
+  function continueBox(box, data) {
+    box.innerHTML = "";
+    var nx = projNextStep(data, PROJ);
+    if (nx) {
+      var a = h("a", "pj-cont");
+      a.href = projHref(nx.step);
+      a.appendChild(h("span", "pj-cont-k", nx.label));
+      a.appendChild(h("span", "pj-cont-t", nx.step.title + " →"));
+      box.appendChild(a);
+    }
+    box.appendChild(h("div", "pj-where", projWhere()));
+  }
+  function setupProjects() {
+    var data = projData();
+    if (!data || document.getElementById("today-card")) return;
+    projLoad().then(function () {
+      var page = (location.pathname.split("/").pop() || "index.html").replace(/\.html?$/, "") + ".html";
+      // 카탈로그(프로젝트 홈): 프로젝트마다 진행 수와 '계속' 단추
+      function catalog() {
+        document.querySelectorAll("[data-project-progress]").forEach(function (el) {
+          var pid = el.dataset.projectProgress;
+          var steps = data.steps.filter(function (x) {
+            return x.project === pid;
+          });
+          var n = { doing: 0, done: 0, hold: 0 };
+          steps.forEach(function (x) {
+            var k = projState(PROJ, x.id);
+            if (k) n[k]++;
+          });
+          el.textContent = n.done || n.doing || n.hold ? "단계 " + steps.length + "개 중 완료 " + n.done + " · 진행 중 " + n.doing + " · 보류 " + n.hold : "";
+          var go = document.querySelector('[data-project-go="' + pid + '"]');
+          var open =
+            steps.find(function (x) {
+              return projState(PROJ, x.id) === "doing";
+            }) ||
+            (n.done
+              ? steps.find(function (x) {
+                  return projState(PROJ, x.id) !== "done";
+                })
+              : null);
+          if (go && open) {
+            go.href = projHref(open);
+            go.textContent = open.title.split(". ")[0] + " 계속 →";
+          }
+        });
+        var cb = document.getElementById("pj-continue");
+        if (cb) continueBox(cb, data);
+      }
+      catalog();
+      // 프로젝트 상세 페이지: 단계 머리마다 상태 단추, 맨 위에 계속하기
+      var mine = data.steps.filter(function (x) {
+        return x.page === page;
+      });
+      if (!mine.length) return;
+      mine.forEach(function (st) {
+        var el = document.getElementById(st.anchor);
+        if (!el) return;
+        var head = el.matches("h1,h2,h3,h4") ? el : el.querySelector(":scope > h2, :scope > h3");
+        if (!head) return;
+        head.parentNode.insertBefore(stepBar(st, catalog), head.nextSibling);
+      });
+      var title = document.getElementById("title-block-header");
+      if (title && PROJ.last) {
+        var top = h("div", "pj-continue pj-continue-top");
+        continueBox(top, data);
+        title.parentNode.insertBefore(top, title.nextSibling);
+      }
+    });
   }
 
   function setupComments() {
@@ -2339,7 +2675,10 @@
     var t = document.querySelector(".navbar-title");
     if (!t || t.querySelector(".brand-ion")) return;
     if (t.textContent.trim() !== "Why Ions Compute?") return;
-    t.innerHTML = 'Why <span class="brand-ion">Ions<sup>+</sup></span> Compute?';
+    // 아주 좁은 화면(휴대폰 200% 확대 등)에서는 짧은 워드마크 'Ions⁺'만 보인다(study.css)
+    t.innerHTML =
+      '<span class="brand-full">Why <span class="brand-ion">Ions<sup>+</sup></span> Compute?</span>' +
+      '<span class="brand-short" aria-hidden="true"><span class="brand-ion">Ions<sup>+</sup></span></span>';
   }
 
   function setupCircled() {
@@ -3425,6 +3764,164 @@
 
   // ---------- 그림 클릭 확대 (원문 그림의 작은 글씨를 읽기 위해) ----------
   // ---------- 그림 크기: 그림 속 글자가 본문 글자의 약 0.9배로 보이게(tools/fig_sizes.py가 잰 값) ----------
+  // Day 9: 센서 노드 전력 비교 도구 (교육용 모형. 가정은 본문의 '모형의 가정'에 적어 둠)
+  // 기본값은 본문 계산과 같다: A 621, B 약 24, C 약 4, D 약 7 µW. 가정을 바꾸면 MCU 쪽(B·D)이 더 작아질 수도 있다.
+  LABS.budget = function (root) {
+    var FS = [100, 250, 500, 1000, 2000]; // 샘플링률 S/s
+    var BITS = [8, 10, 12, 16];
+    var EV = [0.1, 0.5, 1, 2, 5, 10]; // 사건 수 /s
+    var RADIO = [16, 50, 400]; // 무선 nJ/bit
+    var ALWAYS = [0.1, 0.3, 1, 3, 10, 30]; // 늘 켜진 전처리(device + 읽기 회로) µW
+    var NN = [0.3, 1, 3, 10]; // 작은 신경망 판정 한 번 µJ (1초에 한 번 판정)
+    var DEF = { fs: 3, bits: 2, ev: 3, radio: 1, always: 2, nn: 2 };
+    var st = JSON.parse(JSON.stringify(DEF));
+    var ADC = 1, MCU = 20, MSG = 16, SLEEP = 1.2; // nJ/변환, nJ/샘플, bit/사건, µW
+
+    function calc() {
+      var fs = FS[st.fs], b = BITS[st.bits], ev = EV[st.ev], e = RADIO[st.radio];
+      var uw = function (nJps) {
+        return nJps / 1000;
+      };
+      var send = uw(ev * MSG * e);
+      return [
+        { k: "A", name: "Raw signal 전부 송신", bps: fs * b, parts: [["ADC", uw(fs * ADC)], ["MCU", uw(fs * MCU)], ["무선", uw(fs * b * e)]] },
+        { k: "B", name: "MCU가 매 샘플 처리, 사건만 송신", bps: ev * MSG, parts: [["ADC", uw(fs * ADC)], ["MCU", uw(fs * MCU)], ["무선", send], ["MCU 잠듦", SLEEP]] },
+        { k: "C", name: "Near-sensor device가 지켜보다 사건 때만 깨움", bps: ev * MSG, parts: [["늘 켜진 전처리", ALWAYS[st.always]], ["ADC", uw(ev * ADC)], ["MCU", uw(ev * MCU)], ["무선", send], ["MCU 잠듦", SLEEP]] },
+        { k: "D", name: "MCU + 작은 신경망 (1초에 한 번 판정)", bps: ev * MSG, parts: [["ADC", uw(fs * ADC)], ["신경망", NN[st.nn]], ["무선", send], ["MCU 잠듦", SLEEP]] },
+      ].map(function (r) {
+        r.total = r.parts.reduce(function (a, p) {
+          return a + p[1];
+        }, 0);
+        return r;
+      });
+    }
+    function fmtUw(v) {
+      return v >= 100 ? Math.round(v).toLocaleString("ko-KR") : v >= 10 ? v.toFixed(1) : v >= 1 ? v.toFixed(2) : v.toFixed(3);
+    }
+
+    root.appendChild(
+      labCheck({
+        key: "d05-budget-predict",
+        question: "먼저 예상: 다른 값은 그대로 두고 '늘 켜진 전처리' 전력만 키우면, 약 몇 µW부터 D(MCU + 작은 신경망)가 C보다 작아질까요?",
+        options: ["약 1 µW", "약 4 µW", "약 30 µW", "모르겠음"],
+        correct: 1,
+        explain: "C의 나머지(ADC·MCU 사건 때만 + 무선 1.6 + 잠듦 1.2)가 약 2.8 µW, D가 약 6.8 µW라서, 전처리가 약 4 µW를 넘으면 D가 작아집니다. 아래에서 직접 바꿔 확인해 보세요.",
+      })
+    );
+
+    var ctl = h("div", "lab-ctls");
+    var sliders = {};
+    function add(key, label, values, fmt, help) {
+      var s = labSlider({
+        id: "bud-" + key,
+        label: label,
+        values: values,
+        index: st[key],
+        fmt: fmt,
+        help: help,
+        onInput: function (i) {
+          st[key] = i;
+          draw();
+        },
+      });
+      sliders[key] = s;
+      ctl.appendChild(s);
+    }
+    add("fs", "샘플링률", FS, function (v) {
+      return v.toLocaleString("ko-KR") + " S/s";
+    });
+    add("bits", "샘플당 bit", BITS, function (v) {
+      return v + " bit";
+    });
+    add("ev", "사건 수", EV, function (v) {
+      return v + "번/s";
+    }, "이상 박동처럼 보낼 사건이 1초에 몇 번 생기나");
+    add("radio", "무선 1 bit의 에너지", RADIO, function (v) {
+      return v + " nJ/bit";
+    }, "16 = 칩이 전파를 내는 순간만, 50 = 본문 가정, 400 = 준비·연결 유지까지 넣은 실측");
+    add("always", "늘 켜진 전처리 (device + 읽기 회로)", ALWAYS, function (v) {
+      return v + " µW";
+    }, "C에만 들어감. 아직 잰 값이 없는 가정");
+    add("nn", "신경망 판정 한 번", NN, function (v) {
+      return v + " µJ";
+    }, "D에만 들어감. 1초에 한 번 판정");
+    root.appendChild(ctl);
+
+    var out = h("div", "bud-out");
+    out.setAttribute("aria-live", "polite");
+    root.appendChild(out);
+    root.appendChild(
+      button("처음 값으로", "ghost lab-small", function () {
+        st = JSON.parse(JSON.stringify(DEF));
+        Object.keys(sliders).forEach(function (k) {
+          sliders[k].setIndex(st[k]);
+        });
+        draw();
+      })
+    );
+
+    function draw() {
+      var rows = calc();
+      var max = Math.max.apply(null, rows.map(function (r) {
+        return r.total;
+      }));
+      out.innerHTML = "";
+      var tb = h("table", "bud-table");
+      var hd = h("tr");
+      ["설계", "보내는 데이터", "평균 전력", "구성 (큰 순서)"].forEach(function (t) {
+        hd.appendChild(h("th", "", t));
+      });
+      var thead = h("thead");
+      thead.appendChild(hd);
+      tb.appendChild(thead);
+      var body = h("tbody");
+      rows.forEach(function (r) {
+        var tr = h("tr");
+        var c0 = h("td");
+        c0.appendChild(h("b", "", r.k + " "));
+        c0.appendChild(document.createTextNode(r.name));
+        tr.appendChild(c0);
+        tr.appendChild(h("td", "bud-num", r.bps.toLocaleString("ko-KR", { maximumFractionDigits: 1 }) + " bit/s"));
+        var c2 = h("td", "bud-num");
+        c2.appendChild(h("b", "", fmtUw(r.total) + " µW"));
+        var bar = h("span", "bud-bar");
+        // 로그 눈금 막대: 0.1 µW → 0, 최댓값 → 100%
+        var lo = Math.log10(0.1), hi = Math.log10(Math.max(max, 1));
+        bar.style.width = Math.max(4, (100 * (Math.log10(r.total) - lo)) / (hi - lo)) + "%";
+        bar.setAttribute("aria-hidden", "true");
+        c2.appendChild(bar);
+        tr.appendChild(c2);
+        var parts = r.parts.slice().sort(function (a, b) {
+          return b[1] - a[1];
+        });
+        tr.appendChild(
+          h(
+            "td",
+            "bud-parts",
+            parts
+              .map(function (p) {
+                return p[0] + " " + Math.round((100 * p[1]) / r.total) + "%";
+              })
+              .join(" · ")
+          )
+        );
+        body.appendChild(tr);
+      });
+      tb.appendChild(body);
+      out.appendChild(tb);
+      var C = rows[2].total, D = rows[3].total, B = rows[1].total;
+      var best = rows.slice().sort(function (a, b) {
+        return a.total - b.total;
+      })[0];
+      var msg = "이 가정에서 가장 작은 것은 " + best.k + "(" + fmtUw(best.total) + " µW)입니다. ";
+      msg += C < D ? "C가 D보다 " + (D / C).toFixed(1) + "배 작습니다." : "D(MCU + 작은 신경망)가 C보다 " + (C / D).toFixed(1) + "배 작습니다.";
+      if (B < C) msg += " MCU가 매 샘플을 처리하는 B도 C보다 작습니다.";
+      out.appendChild(h("p", "bud-msg", msg));
+      out.appendChild(h("p", "bud-note", "교육용 계산입니다. 네 설계가 같은 일을 같은 정확도로 한다고 가정했고, 센서·증폭기 전력은 넣지 않았습니다. 막대는 로그 눈금입니다."));
+    }
+    draw();
+  };
+
   function setupFigSizes() {
     var imgs = document.querySelectorAll("figure.fig img");
     if (!imgs.length) return;
@@ -3855,7 +4352,7 @@
   setupSidebar();
   setupSearch();
   setupPapers();
-  setupDrift();
+  // setupDrift(); 홈 배경의 떠다니는 이온 장식은 끔(2026-10-31 요청: 학습과 관련 없는 장식 절제)
   setupPaperFigs();
   setupFigSizes();
   setupFigZoom();
@@ -3893,6 +4390,7 @@
       setupReadMode();
       setupToday();
       setupRoadmap();
+      setupProjects();
       setupComments();
     });
   depsP.then(function () {

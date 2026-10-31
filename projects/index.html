@@ -36,7 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../projects/a.html" rel="next">
+<link href="../projects/s.html" rel="next">
 <link href="../papers.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -85,15 +85,12 @@ ul.task-list li input[type="checkbox"] {
     // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
   };
 </script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../assets/study.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -595,20 +592,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -624,25 +627,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">이 페이지</h2>
-   
-  <ul>
-  <li><a href="#levels" id="toc-levels" class="nav-link active" data-scroll-target="#levels">결과를 네 수준으로 나눠 보기</a></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">코드 묶음</a></li>
-  <li><a href="#시작-전에-꼭-필요한-기초-열-가지" id="toc-시작-전에-꼭-필요한-기초-열-가지" class="nav-link" data-scroll-target="#시작-전에-꼭-필요한-기초-열-가지">시작 전에: 꼭 필요한 기초 열 가지</a></li>
-  <li><a href="#claudegpt에게-도움을-받는-법" id="toc-claudegpt에게-도움을-받는-법" class="nav-link" data-scroll-target="#claudegpt에게-도움을-받는-법">Claude·GPT에게 도움을 받는 법</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">프로젝트</h1>
-<p class="subtitle lead">내 이온 소자를 계산에 써 보는 세 단계 — 작은 실험부터</p>
+<p class="subtitle lead">Day에서 배운 것을 작게 만들고 재 보기 — 장비 없이 시작할 수 있습니다</p>
 </div>
 
 
@@ -659,74 +651,238 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-tip callout-titled" title="지금 할 첫 실험">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">힌트</span>지금 할 첫 실험
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>A0 — 장비 없이 한 바퀴 (30분).</strong> <a href="code/ion-projects-code.zip">코드 묶음</a>을 받아 모의 장비로 "입력 → 펄스 → 전류 → 분류"를 끝까지 돌려 봅니다. 그다음 실제 소스미터에 <strong>저항 하나</strong>를 연결해 같은 일을 합니다. 소자가 아직 없어도 할 수 있습니다. → <a href="../projects/a.html#a0">A0으로 가기</a></p>
-</div>
-</div>
-<p>세 프로젝트는 <strong>같은 소자</strong>(ITO / 이온성 고분자 두 층 / ITO)를 쓰고, 단계가 올라갈수록 연구실 장비가 하던 일을 작은 회로가 넘겨받습니다. 소자는 아직 만들어지지 않았으므로, 각 단계는 "이렇게 될 것이다"가 아니라 <strong>"이것을 확인한다"</strong>로 쓰여 있습니다.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A["A. 계측기로 탐색"] --&gt; B["B. 작은 보드로 독립 동작"]
-  A --&gt; C["C. 감지와 처리의 결합"]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<table class="caption-top table">
+<p>처음이라면 장비가 필요 없는 <strong>S1</strong>(신호를 bit로) 또는 <strong>A0</strong>(모의 장비로 한 바퀴)부터 시작하세요. 소재·소자가 없어도 됩니다. 단계마다 진행 중·완료·보류를 표시할 수 있고, 완료는 "실행하고 기록하고 해석했다"는 뜻입니다. 성능이 좋게 나와야 완료인 것은 아닙니다.</p>
+<div id="pj-continue" class="pj-continue" aria-live="polite"></div>
+<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "S", "title": "신호를 숫자로, 기억을 숫자로 — 장비 없이", "page": "s.html"}, {"id": "a", "letter": "A", "title": "내 소자 전류에 과거 입력의 흔적이 남는지 재기", "page": "a.html"}, {"id": "b", "letter": "B", "title": "소스미터 없이 작은 보드가 재고 판단하는 시제품", "page": "b.html"}, {"id": "c", "letter": "C", "title": "누름이 소자 상태를 바꾸고, 그 상태에 리듬이 남는지 확인", "page": "c.html"}], "steps": [{"id": "s1", "project": "s", "title": "S1. 같은 신호, 다른 bit·샘플링률", "page": "s.html", "anchor": "s1", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d05"]}, {"id": "s2", "project": "s", "title": "S2. 기억 없음 vs R–C vs 작은 reservoir", "page": "s.html", "anchor": "s2", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d03", "d04", "d09", "d10"]}, {"id": "a0", "project": "a", "title": "A0. 모의 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "30–60분", "needs": "PC", "kind": "모의", "days": ["d06", "d08"]}, {"id": "a0r", "project": "a", "title": "A0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"]}, {"id": "a1", "project": "a", "title": "A1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"]}, {"id": "a2", "project": "a", "title": "A2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"]}, {"id": "a3", "project": "a", "title": "A3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"]}, {"id": "b1", "project": "b", "title": "B1. ESP32에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "ESP32 보드, USB 케이블 (없으면 Wokwi 시뮬레이터)", "kind": "실물", "days": []}, {"id": "b2", "project": "b", "title": "B2–B3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "ESP32, DAC·ADC 모듈", "kind": "실물", "days": ["d05"]}, {"id": "b4", "project": "b", "title": "B4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"]}, {"id": "b5", "project": "b", "title": "B5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "B4 회로, 소자", "kind": "실물", "days": ["d08"]}, {"id": "b6", "project": "b", "title": "B6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "B5 결과", "kind": "실물", "days": ["d08"]}, {"id": "b7", "project": "b", "title": "B7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"]}, {"id": "b8", "project": "b", "title": "B8. ECG 신호로 (도전)", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"]}, {"id": "c0", "project": "c", "title": "C0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (모의 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 모의)", "kind": "실측", "days": []}, {"id": "c2", "project": "c", "title": "C1–C2. 소자 구조와 대조군", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": []}, {"id": "c3", "project": "c", "title": "C3–C4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "서보, 로드셀, 보드", "kind": "실물", "days": []}, {"id": "c5", "project": "c", "title": "C5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "C3 장치, 소자", "kind": "실측", "days": ["d08"]}]}</script>
+<div class="pj-cat"><article class="pj-card" data-project="s"><div class="pj-head"><span class="pj-letter" aria-hidden="true">S</span><h3 class="pj-title anchored"><a href="s.html">신호를 숫자로, 기억을 숫자로 — 장비 없이</a></h3></div><p class="pj-out"><span class="pj-k">남는 것</span>같은 신호를 bit·샘플링률만 바꿔 숫자로 만든 표·그래프, 기억 없는 모델·R–C·작은 reservoir의 비교 그래프</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>S1 · 30–45분</dd></div><div><dt>장비</dt><dd>PC</dd></div><div><dt>난도</dt><dd>코드 쉬움 · 회로 없음 · 실험 없음</dd></div></dl><div class="pj-prog" data-project-progress="s"></div><details class="pj-more"><summary>자세히 · 단계 2개</summary><p><span class="pj-k">묻는 것</span>데이터량을 줄이면 무엇을 잃는가? '기억이 있다'와 '과제에 쓸모 있는 기억'은 어떻게 다른가?</p><p><span class="pj-k">연구와의 연결</span>이온 소자를 평가할 기준선(ADC 설정, R–C 하나)을 먼저 숫자로 갖게 됩니다. A의 대조군과 같은 질문입니다.</p><p><span class="pj-k">주제</span>bit·ADC · 시간상수 τ · reservoir 기준선</p><p><span class="pj-k">먼저 알면 좋은 것</span>Python 명령 실행 (S1 안에서 설명). Day 9의 bit, 시간상수를 다룬 Day.</p><p><span class="pj-k">소재·소자</span>소재·소자 필요 없음</p><p><span class="pj-k">장비 전체</span>PC만</p><p><span class="pj-k">비용</span>없음</p><p><span class="pj-k">검증 상태</span>코드 실행 확인 (깨끗한 Python 환경에서 두 명령과 그래프 생성)</p>
+<table class="pj-steps caption-top table">
 <thead>
 <tr class="header">
-<th></th>
-<th>A. 계측기로 탐색</th>
-<th>B. 작은 보드로 독립 동작</th>
-<th>C. 감지와 처리의 결합</th>
+<th data-quarto-table-cell-role="th">단계</th>
+<th data-quarto-table-cell-role="th">시간</th>
+<th data-quarto-table-cell-role="th">필요한 것</th>
+<th data-quarto-table-cell-role="th">종류</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>묻는 것</td>
-<td>내 소자의 전류에 과거 입력의 흔적이 남는가? 그 흔적이 분류에 쓸모 있는가?</td>
-<td>소스미터·PC 없이 작은 회로가 같은 측정·판단을 할 수 있는가?</td>
-<td>누름 같은 자극이 소자 상태를 직접 바꾸고, 그 상태에 자극의 시간 패턴이 남는가?</td>
+<td><a href="s.html#s1">S1. 같은 신호, 다른 bit·샘플링률</a></td>
+<td>30–45분</td>
+<td>PC</td>
+<td>모의</td>
 </tr>
 <tr class="even">
-<td>만드는 것</td>
-<td>소자 특성표, 작은 시간 패턴 과제 결과, (선택) ECG 박동 분류</td>
-<td>저장된 입력을 재생해 판단·알림하는 브레드보드 시제품</td>
-<td>압력 응답 확인, 리듬 분류 실험 장치</td>
-</tr>
-<tr class="odd">
-<td>첫 단계</td>
-<td><a href="../projects/a.html#a0">A0 모의 장비·저항</a></td>
-<td><a href="../projects/b.html#b1">B1 ESP32 첫 연결</a></td>
-<td><a href="../projects/c.html#c0">C0 눌러서 반응이 있는가</a></td>
-</tr>
-<tr class="even">
-<td>먼저 끝나야 할 것</td>
-<td>없음 (A0은 지금 가능)</td>
-<td>A1의 전압·전류 범위</td>
-<td>A1의 측정법. C의 압력용 구조는 <strong>별도 가설</strong></td>
+<td><a href="s.html#s2">S2. 기억 없음 vs R–C vs 작은 reservoir</a></td>
+<td>30–45분</td>
+<td>PC</td>
+<td>모의</td>
 </tr>
 </tbody>
 </table>
-<p>예상 기간은 적지 않았습니다. 소자가 어떻게 동작할지 아직 모르기 때문입니다.</p>
+</details><a class="sbtn primary pj-go" data-project-go="s" href="s.html#s1">S1 시작 →</a></article><article class="pj-card" data-project="a"><div class="pj-head"><span class="pj-letter" aria-hidden="true">A</span><h3 class="pj-title anchored"><a href="a.html">내 소자 전류에 과거 입력의 흔적이 남는지 재기</a></h3></div><p class="pj-out"><span class="pj-k">남는 것</span>소자 특성표(전압 범위·흔적이 줄어드는 시간 규모·반복성), 저항·RC·소자의 '끝만 읽기' 정확도 비교표</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>A0 · 30–60분</dd></div><div><dt>장비</dt><dd>PC</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 쉬움 · 실험 보통</dd></div></dl><div class="pj-prog" data-project-progress="a"></div><details class="pj-more"><summary>자세히 · 단계 5개</summary><p><span class="pj-k">묻는 것</span>내 소자의 전류에 과거 입력의 흔적이 남는가, 그 흔적으로 시간 패턴을 구별할 수 있는가?</p><p><span class="pj-k">연구와의 연결</span>physical reservoir 논문의 첫 그림(펄스 응답·기억)을 대조군과 함께 내 소자로 만드는 단계입니다.</p><p><span class="pj-k">주제</span>소자 특성화 · 대조군 · readout</p><p><span class="pj-k">먼저 알면 좋은 것</span>전압·전류·옴의 법칙, 시간상수 τ (프로젝트 홈의 기초)</p><p><span class="pj-k">소재·소자</span>A1부터 ITO / 이온성 고분자 두 층 / ITO 소자 (현재 A·B의 공통 플랫폼)</p><p><span class="pj-k">장비 전체</span>A0: PC만 · A0R부터: 소스미터(SMU), 1 MΩ 저항, 1 µF 필름 커패시터 · A1부터: 소자</p><p><span class="pj-k">비용</span>연구실 기존 장비 활용 (추가 구매 거의 없음)</p><p><span class="pj-k">검증 상태</span>A0 모의 명령 실행 확인 · 실제 소스미터 연결은 미검증</p>
+<table class="pj-steps caption-top table">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">단계</th>
+<th data-quarto-table-cell-role="th">시간</th>
+<th data-quarto-table-cell-role="th">필요한 것</th>
+<th data-quarto-table-cell-role="th">종류</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="a.html#a0">A0. 모의 장비로 한 바퀴 (장비 없음)</a></td>
+<td>30–60분</td>
+<td>PC</td>
+<td>모의</td>
+</tr>
+<tr class="even">
+<td><a href="a.html#a0r">A0R. 실제 소스미터로 저항과 RC</a></td>
+<td>1–2시간</td>
+<td>소스미터, 저항, 커패시터</td>
+<td>실측</td>
+</tr>
+<tr class="odd">
+<td><a href="a.html#a1">A1. 소자 특성 측정</a></td>
+<td>여러 날</td>
+<td>소스미터, 소자</td>
+<td>실측</td>
+</tr>
+<tr class="even">
+<td><a href="a.html#a2">A2. 끝만 읽어도 앞을 기억하는가</a></td>
+<td>반나절–하루</td>
+<td>소스미터, 소자</td>
+<td>실측</td>
+</tr>
+<tr class="odd">
+<td><a href="a.html#a3">A3. (선택) ECG 박동으로 확장</a></td>
+<td>여러 날</td>
+<td>소스미터, 소자, 공개 ECG 자료</td>
+<td>실측</td>
+</tr>
+</tbody>
+</table>
+</details><a class="sbtn primary pj-go" data-project-go="a" href="a.html#a0">A0 시작 →</a></article><article class="pj-card" data-project="b"><div class="pj-head"><span class="pj-letter" aria-hidden="true">B</span><h3 class="pj-title anchored"><a href="b.html">소스미터 없이 작은 보드가 재고 판단하는 시제품</a></h3></div><p class="pj-out"><span class="pj-k">남는 것</span>저장된 입력을 재생해 소자에 걸고, 보드가 판단해 화면·소리로 알리는 브레드보드 시제품</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>B1 · 1–2시간</dd></div><div><dt>장비</dt><dd>ESP32 보드, USB 케이블 (없으면 Wokwi 시뮬레이터)</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 어려움 · 실험 쉬움</dd></div></dl><div class="pj-prog" data-project-progress="b"></div><details class="pj-more"><summary>자세히 · 단계 7개</summary><p><span class="pj-k">묻는 것</span>소스미터·PC가 하던 측정과 판단을 작은 회로와 보드가 대신할 수 있는가, 그때 정확도·시간·에너지는?</p><p><span class="pj-k">연구와의 연결</span>에너지·지연을 공정하게 비교하려면 실제 회로의 측정 경계가 필요합니다 (Day 9의 비교 조건).</p><p><span class="pj-k">주제</span>MCU · 측정 회로 · 에너지 측정</p><p><span class="pj-k">먼저 알면 좋은 것</span>B1은 없음. B4부터 op-amp·ADC 기초 (B 페이지에서 설명)</p><p><span class="pj-k">소재·소자</span>B1–B4는 저항·RC로 진행, B5부터 A의 소자</p><p><span class="pj-k">장비 전체</span>ESP32 개발보드, 브레드보드, 멀티미터 · B4부터 DAC·ADC 모듈, op-amp</p><p><span class="pj-k">비용</span>부품 구매 필요 — 가격은 구매 시 확인 (미확인)</p><p><span class="pj-k">검증 상태</span>펌웨어 컴파일·업로드·실물 동작 모두 미검증 · 회로는 설계안</p>
+<table class="pj-steps caption-top table">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">단계</th>
+<th data-quarto-table-cell-role="th">시간</th>
+<th data-quarto-table-cell-role="th">필요한 것</th>
+<th data-quarto-table-cell-role="th">종류</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="b.html#b1">B1. ESP32에 첫 코드 올리기</a></td>
+<td>1–2시간</td>
+<td>ESP32 보드, USB 케이블 (없으면 Wokwi 시뮬레이터)</td>
+<td>실물</td>
+</tr>
+<tr class="even">
+<td><a href="b.html#b2">B2–B3. DAC로 전압 만들고 ADC로 읽기</a></td>
+<td>반나절</td>
+<td>ESP32, DAC·ADC 모듈</td>
+<td>실물</td>
+</tr>
+<tr class="odd">
+<td><a href="b.html#b4">B4. 소자 구동·전류 측정 회로</a></td>
+<td>하루 이상</td>
+<td>op-amp, 저항·RC</td>
+<td>실물</td>
+</tr>
+<tr class="even">
+<td><a href="b.html#b5">B5. 보드로 레저버 데이터 모으기</a></td>
+<td>하루</td>
+<td>B4 회로, 소자</td>
+<td>실물</td>
+</tr>
+<tr class="odd">
+<td><a href="b.html#b6">B6. PC 없이 판단하고 알리기</a></td>
+<td>하루</td>
+<td>B5 결과</td>
+<td>실물</td>
+</tr>
+<tr class="even">
+<td><a href="b.html#b7">B7. 시간과 에너지를 공정하게 재기</a></td>
+<td>하루</td>
+<td>USB 전력 측정기</td>
+<td>실물</td>
+</tr>
+<tr class="odd">
+<td><a href="b.html#b8">B8. ECG 신호로 (도전)</a></td>
+<td>여러 날</td>
+<td>ECG 시뮬레이터 또는 재생 장치</td>
+<td>실물</td>
+</tr>
+</tbody>
+</table>
+</details><a class="sbtn primary pj-go" data-project-go="b" href="b.html#b1">B1 시작 →</a></article><article class="pj-card" data-project="c"><div class="pj-head"><span class="pj-letter" aria-hidden="true">C</span><h3 class="pj-title anchored"><a href="c.html">누름이 소자 상태를 바꾸고, 그 상태에 리듬이 남는지 확인</a></h3></div><p class="pj-out"><span class="pj-k">남는 것</span>추·서보로 누른 기록, 대조군 비교, '끝에서 몇 번만 읽기' 리듬 분류 결과</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>C0 · 1–2시간 (모의 분석은 30분)</dd></div><div><dt>장비</dt><dd>소스미터, 추 (없으면 PC만으로 모의)</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 보통 · 실험 어려움</dd></div></dl><div class="pj-prog" data-project-progress="c"></div><details class="pj-more"><summary>자세히 · 단계 4개</summary><p><span class="pj-k">묻는 것</span>누름이 소자 상태를 직접 바꾸는가, 그 상태에 이전 누름의 흔적이 남는가?</p><p><span class="pj-k">연구와의 연결</span>in-sensor 컴퓨팅 주장의 핵심 대조군(점탄성·접촉 면적·장치 자체)을 직접 다루는 경로입니다.</p><p><span class="pj-k">주제</span>in-sensor · 압력 응답 · 대조군</p><p><span class="pj-k">먼저 알면 좋은 것</span>A0R의 소스미터 연결</p><p><span class="pj-k">소재·소자</span>A·B와 다른 압력용 구조가 필요 (별도 가설). 없으면 모의 분석부터</p><p><span class="pj-k">장비 전체</span>C0: 소스미터, 추, 실리콘 패드 · C3부터 서보·로드셀</p><p><span class="pj-k">비용</span>C3부터 부품 구매 — 가격 미확인</p><p><span class="pj-k">검증 상태</span>모의 분석 실행 확인 · 압력용 소자·tapper 실물 미검증</p>
+<table class="pj-steps caption-top table">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">단계</th>
+<th data-quarto-table-cell-role="th">시간</th>
+<th data-quarto-table-cell-role="th">필요한 것</th>
+<th data-quarto-table-cell-role="th">종류</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="c.html#c0">C0. 눌러서 반응이 있는가</a></td>
+<td>1–2시간 (모의 분석은 30분)</td>
+<td>소스미터, 추 (없으면 PC만으로 모의)</td>
+<td>실측</td>
+</tr>
+<tr class="even">
+<td><a href="c.html#c1">C1–C2. 소자 구조와 대조군</a></td>
+<td>여러 날</td>
+<td>압력용 소자, 대조 막</td>
+<td>실측</td>
+</tr>
+<tr class="odd">
+<td><a href="c.html#c3">C3–C4. 자극 장치와 기본 특성</a></td>
+<td>여러 날</td>
+<td>서보, 로드셀, 보드</td>
+<td>실물</td>
+</tr>
+<tr class="even">
+<td><a href="c.html#c5">C5. 리듬 과제: 끝에서 몇 번만 읽기</a></td>
+<td>여러 날</td>
+<td>C3 장치, 소자</td>
+<td>실측</td>
+</tr>
+</tbody>
+</table>
+</details><a class="sbtn primary pj-go" data-project-go="c" href="c.html#c0">C0 시작 →</a></article></div>
+<section id="ext" class="level2">
+<h2 class="anchored" data-anchor-id="ext">확장 후보</h2>
+<p>새 제목을 늘리지 않고, 위 경로의 다음 단계로 합쳤습니다. 오른쪽 조건이 되면 시작합니다.</p>
+<table class="pj-ext caption-top table">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">후보</th>
+<th data-quarto-table-cell-role="th">어디에 합쳤나</th>
+<th data-quarto-table-cell-role="th">시작할 때</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>시간상수 측정 (펄스 폭·간격·측정 간격을 바꿔 τ 추정)</td>
+<td>A0R의 RC → A1-3·A1-4</td>
+<td>A0R의 RC 측정이 끝나면</td>
+</tr>
+<tr class="even">
+<td>bit·ADC 실험</td>
+<td>S1 (이번에 만듦)</td>
+<td>지금</td>
+</tr>
+<tr class="odd">
+<td>장비 없는 기억 실험</td>
+<td>S2 (이번에 만듦)</td>
+<td>지금</td>
+</tr>
+<tr class="even">
+<td>내 소재의 동작 지도 (전압·펄스·간격·환경)</td>
+<td>A1-6 특성표 확장</td>
+<td>A1에서 소자 3개 이상 측정한 뒤</td>
+</tr>
+<tr class="odd">
+<td>디지털 기준선 (필터·문턱·작은 모델·디지털 RC)</td>
+<td>S2 → B7</td>
+<td>A2 결과가 있을 때 같은 과제로</td>
+</tr>
+<tr class="even">
+<td>Event-driven 전처리 (연속 전송 vs 사건 전송)</td>
+<td>S1 마지막 줄 → B8</td>
+<td>S1 뒤</td>
+</tr>
+<tr class="odd">
+<td>Drift 대응 (날·소자·습도)</td>
+<td>A2 반복 측정 + C의 --normalize</td>
+<td>같은 측정을 다른 날 2번 이상 한 뒤</td>
+</tr>
+<tr class="even">
+<td>작은 다중 감각 (압력 + 온도 등)</td>
+<td>C 뒤의 후보</td>
+<td>C0에서 압력 응답이 재현될 때</td>
+</tr>
+<tr class="odd">
+<td>공개 생체신호 → 재생 장치</td>
+<td>A3 + B8 (기존 ECG 경로)</td>
+<td>A2 수준 2 이후</td>
+</tr>
+<tr class="even">
+<td>협업형 바이오 연구</td>
+<td>후보 목록만 (아래 조건)</td>
+<td>공개 자료·벤치 실험에서 소재의 역할이 분명해진 뒤, 승인된 협업 프로토콜로</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="levels" class="level2">
 <h2 class="anchored" data-anchor-id="levels">결과를 네 수준으로 나눠 보기</h2>
-<p>"성능이 좋게 나와야 끝"이 아닙니다. 각 프로젝트는 <strong>수준 1–2에 도달하면 끝</strong>낼 수 있고, 3–4는 결과가 허락할 때의 보너스입니다.</p>
+<p>각 프로젝트는 <strong>수준 1–2에 도달하면 끝</strong>낼 수 있고, 3–4는 결과가 허락할 때의 보너스입니다.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -763,10 +919,82 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>기억이나 성능 향상이 나오지 않아도 "어떤 조건에서 무엇이 없었는지"와 "다음에 무엇을 바꿔 확인할지"가 남으면 그 단계는 끝난 것입니다.</p>
 </section>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">코드 묶음</h2>
+<section id="materials" class="level2">
+<h2 class="anchored" data-anchor-id="materials">소재와 구조</h2>
+<ul>
+<li><strong>S와 B1–B4는 소재 없이</strong> 진행합니다. 회로는 저항·RC로 먼저 확인합니다.</li>
+<li><strong>A·B의 공통 플랫폼</strong>은 ITO / 이온성 고분자 두 층 / ITO입니다. 지금 만들 수 있는 구조라서 고른 것이지, 모든 프로젝트가 이 구조여야 하는 것은 아닙니다.</li>
+<li><strong>C는 별도 구조 가설</strong>입니다. 누름에 반응하려면 유연한 전극·요철 계면 같은 다른 구조가 필요하고, 그 구조가 반응할지는 아직 모릅니다.</li>
+</ul>
+</section>
+<section id="help" class="level2">
+<h2 class="anchored" data-anchor-id="help">기초와 도움말</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="시간상수 τ — 그림 하나로">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>시간상수 τ — 그림 하나로
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/tau-approach.svg" class="img-fluid figure-img" alt="옛 값에서 새 값으로 올라가는 지수 곡선, 1τ 63%, 2τ 86%, 3τ 95%, 5τ 99% 표시"></p>
+<figcaption>입력이 바뀐 뒤 값이 <strong>새 평형값</strong>을 향해 다가가는 모양. 1τ가 지나면 남은 차이의 약 63%를 따라가고, 3τ에 약 95%, 5τ에 약 99%입니다.</figcaption>
+</figure>
+</div>
+<ul>
+<li>τ(타우)는 "원래로 돌아가는 시간"이라기보다 <strong>새 평형값에 다가가는 빠르기</strong>입니다. 전압을 걸면 새 값으로 올라가고, 끊으면 0이라는 새 평형값으로 내려갑니다. 둘 다 같은 모양입니다.</li>
+<li><strong>1τ는 끝난 시점이 아닙니다.</strong> 1τ에 63%이고, 거의 다 갔다고 보려면 3–5τ가 필요합니다.</li>
+<li>실제 소자는 τ 하나로 설명되지 않을 수 있습니다. 여러 과정이 겹치면 곡선이 지수 하나로 맞지 않습니다. A1에서 확인합니다.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="꼭 필요한 기초 아홉 가지 (전압·전류·SMU·GND·ADC…)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>꼭 필요한 기초 아홉 가지 (전압·전류·SMU·GND·ADC…)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>처음 보는 것만 읽으면 됩니다. 각 단계에서도 처음 쓰는 자리에서 다시 설명합니다.</p>
+<ol type="1">
+<li><strong>전압(voltage, V)</strong>: 두 점 사이의 "전기적 높이 차이". 물로 치면 수위 차이입니다. 보통 GND(아래 5번)를 기준으로 잽니다.</li>
+<li><strong>전류(current, A)</strong>: 1초에 흐르는 전하의 양. 1 mA = 10⁻³ A, 1 µA = 10⁻⁶ A, 1 nA = 10⁻⁹ A.</li>
+<li><strong>저항(resistance, Ω)과 옴의 법칙</strong>: V = I × R. 1 V를 1 kΩ에 걸면 1 mA. 회로의 거의 모든 숫자를 이 식으로 확인합니다.</li>
+<li><strong>소스미터(SMU, source-measure unit)</strong>: 전압을 걸면서 전류를 재는 장비. <strong>compliance(전류 제한)</strong>는 "전류가 이 값을 넘지 않도록 장비가 전압을 낮추는 동작"입니다. 실험 프로그램을 멈추는 기능이 아니므로, 제한에 걸렸는지를 기록으로 확인해야 합니다.</li>
+<li><strong>GND(그라운드, ground)</strong>: 회로의 0 V 기준점. 서로 연결된 모듈은 GND를 반드시 서로 잇습니다.</li>
+<li><strong>DAC와 ADC</strong>: DAC(digital-to-analog converter)는 숫자를 전압으로, ADC(analog-to-digital converter)는 전압을 숫자로 바꿉니다. bit 수가 한 눈금의 크기를 정합니다 (S1에서 직접 확인).</li>
+<li><strong>MCU(마이크로컨트롤러, microcontroller)</strong>: 손톱만 한 컴퓨터. B에서는 ESP32 보드를 기준으로 씁니다.</li>
+<li><strong>I²C</strong>: MCU와 모듈이 선 두 개(SDA·SCL)로 대화하는 약속. 모듈마다 주소(예: 0x48)가 있습니다.</li>
+<li><strong>op-amp(연산증폭기, operational amplifier)</strong>: 저항·커패시터와 함께 써서 전류→전압 변환(TIA), 기준 전압 버퍼를 만듭니다. 이상적으로 동작하는 범위(출력 전압·속도)가 정해져 있어서, 그 밖에서는 계산대로 동작하지 않습니다.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="코드 묶음과 검증 이력">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>코드 묶음과 검증 이력
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p><a href="code/ion-projects-code.zip">ion-projects-code.zip 내려받기</a> · <a href="code/README.md">README</a></p>
 <table class="caption-top table">
 <colgroup>
@@ -784,7 +1012,7 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td>Python</td>
-<td>모의 장비로 시험 12개 통과 (안전 거부, 이어서 하기, 조건 불일치 거부, 사람 단위 분할, 누출 없는 교차검증, MC null 비교, 헤더 내보내기 수치 일치, A1 쓰기–쉬기–읽기 순서, C 모의 기록→분석, 보드 통신 형식). 압축을 새 폴더에 풀어 A0 명령 전체 실행 확인</td>
+<td>새 폴더에 zip을 풀고 깨끗한 Python 환경에서 설치 → <code>run_tests.py</code> 12개 통과, S1·S2 실행과 그래프 생성 확인 (2026-10-31). A0 명령·A1 모의·C 모의 분석은 2026-10-29에 같은 방식으로 확인</td>
 <td>실제 소스미터·보드·tapper 연결, ECG 내려받기 실행</td>
 </tr>
 <tr class="even">
@@ -799,31 +1027,21 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-</section>
-<section id="시작-전에-꼭-필요한-기초-열-가지" class="level2">
-<h2 class="anchored" data-anchor-id="시작-전에-꼭-필요한-기초-열-가지">시작 전에: 꼭 필요한 기초 열 가지</h2>
-<p>처음 보는 것만 읽으면 됩니다. 각 페이지에서도 처음 쓰는 자리에서 다시 설명합니다.</p>
-<ol type="1">
-<li><strong>전압(voltage, V)</strong> — 두 점 사이의 "전기적 높이 차이". 물로 치면 수위 차이입니다. 보통 GND(아래 6번)를 기준으로 잽니다.</li>
-<li><strong>전류(current, A)</strong> — 1초에 흐르는 전하의 양. 1 mA = 10⁻³ A, 1 µA = 10⁻⁶ A, 1 nA = 10⁻⁹ A.</li>
-<li><strong>저항(resistance, Ω)과 옴의 법칙</strong> — V = I × R. 1 V를 1 kΩ에 걸면 1 mA. 회로의 거의 모든 숫자를 이 식으로 확인합니다.</li>
-<li><strong>시간 상수 τ(타우)</strong> — 바뀐 값이 원래로 돌아가는 데 걸리는 대표 시간. 실제 소자는 τ 하나로 설명되지 않을 수도 있습니다 (여러 과정이 겹치면 곡선이 지수 하나로 맞지 않음).</li>
-<li><strong>소스미터(SMU, source-measure unit)</strong> — 전압을 걸면서 전류를 재는 장비. <strong>compliance(전류 제한)</strong>는 "전류가 이 값을 넘지 않도록 장비가 전압을 낮추는 동작"입니다. 실험 프로그램을 멈추는 기능이 아니므로, 제한에 걸렸는지를 기록으로 확인해야 합니다.</li>
-<li><strong>GND(그라운드, ground)</strong> — 회로의 0 V 기준점. 서로 연결된 모듈은 GND를 반드시 서로 잇습니다.</li>
-<li><strong>DAC와 ADC</strong> — DAC(digital-to-analog converter)는 숫자를 전압으로, ADC(analog-to-digital converter)는 전압을 숫자로 바꿉니다.</li>
-<li><strong>MCU(마이크로컨트롤러, microcontroller)</strong> — 손톱만 한 컴퓨터. B에서는 ESP32 보드를 기준으로 씁니다.</li>
-<li><strong>I²C</strong> — MCU와 모듈이 선 두 개(SDA·SCL)로 대화하는 약속. 모듈마다 주소(예: 0x48)가 있습니다.</li>
-<li><strong>op-amp(연산증폭기, operational amplifier)</strong> — 저항·커패시터와 함께 써서 전류→전압 변환(TIA), 기준 전압 버퍼를 만듭니다. 이상적으로 동작하는 범위(출력 전압·속도)가 정해져 있어서, 그 밖에서는 계산대로 동작하지 않습니다.</li>
-</ol>
+<p>검증 단계를 섞지 않습니다: <strong>읽어 봄 → 시뮬레이션 → 컴파일 → 실물</strong>. 페이지마다 어느 단계까지 했는지 적어 두었습니다.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled" title="소재 정보 중 확인이 필요한 것">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">노트</span>소재 정보 중 확인이 필요한 것
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>사용자 표기 <strong>METMATFSI</strong>의 이동 음이온이 FSI⁻인지 TFSI⁻인지 (두 이온은 크기·흡습성이 다름). 이 사이트는 확인 전까지 "X⁻"로 씁니다.</li>
@@ -832,14 +1050,47 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </div>
 </div>
-</section>
-<section id="claudegpt에게-도움을-받는-법" class="level2">
-<h2 class="anchored" data-anchor-id="claudegpt에게-도움을-받는-법">Claude·GPT에게 도움을 받는 법</h2>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="협업형 바이오 연구를 생각할 때의 조건">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>협업형 바이오 연구를 생각할 때의 조건
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>먼저 <strong>공개 자료와 벤치 실험</strong>으로 이온 소재가 맡을 역할(예: 신호의 시간 정보를 줄여 보내기)이 분명해야 합니다. 생체 모델이 꼭 필요한 이유도 적을 수 있어야 합니다.</li>
+<li>동물·사람 실험의 용량·수술·자극 조건은 이 사이트에서 정하지 않습니다. <strong>승인된 기관 프로토콜과 전문 협업자</strong>가 필요합니다.</li>
+<li>생체적합성은 소재 이름으로 가정하지 않습니다. 세포 독성 등은 해당 시험으로 확인합니다.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="막혔을 때 질문하는 법 (사람·AI 공통)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>막혔을 때 질문하는 법 (사람·AI 공통)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <pre class="text"><code>[상황] 무엇을 만들고 있는지 + 지금 단계 (예: "프로젝트 B4, ESP32 + ADS1115로 저항 전류 읽기")
 [구성] 부품 모델명, 연결표(어느 핀 → 어느 핀), 전원 전압, 코드 파일 전체
 [관찰] 기대한 것 vs 실제로 본 것 (숫자, 오류 메시지 원문, 사진)
 [요청] 원하는 것 한 가지 (예: "원인 후보를 확인하기 쉬운 순서대로")</code></pre>
-<p>AI가 준 코드·회로는 <strong>먼저 저항으로 시험</strong>하고, 숫자를 옴의 법칙으로 확인한 뒤 소자에 연결합니다. AI가 그린 회로 그림은 결선도로 쓰지 말고, 핀 번호를 데이터시트와 대조합니다.</p>
+<p>받은 코드·회로는 <strong>먼저 저항으로 시험</strong>하고, 숫자를 옴의 법칙으로 확인한 뒤 소자에 연결합니다. 회로 그림은 결선도로 쓰지 말고, 핀 번호를 데이터시트와 대조합니다.</p>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1267,8 +1518,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../projects/a.html" class="pagination-link" aria-label="A. 계측기로 탐색">
-        <span class="nav-page-text">A. 계측기로 탐색</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../projects/s.html" class="pagination-link" aria-label="S. 장비 없이: bit·기억">
+        <span class="nav-page-text">S. 장비 없이: bit·기억</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

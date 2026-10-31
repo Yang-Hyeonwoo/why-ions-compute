@@ -180,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/b.html">B. 작은 보드로 독립 동작</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/b.html">B. 작은 보드 시제품</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -630,20 +630,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -667,7 +673,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#board" id="toc-board" class="nav-link active" data-scroll-target="#board">기준 보드 정하기</a></li>
   <li><a href="#구매-목록" id="toc-구매-목록" class="nav-link" data-scroll-target="#구매-목록">구매 목록</a></li>
   <li><a href="#b1" id="toc-b1" class="nav-link" data-scroll-target="#b1">B1. ESP32 첫 연결</a></li>
-  <li><a href="#b2b3.-dac로-전압-만들고-adc로-읽기" id="toc-b2b3.-dac로-전압-만들고-adc로-읽기" class="nav-link" data-scroll-target="#b2b3.-dac로-전압-만들고-adc로-읽기">B2–B3. DAC로 전압 만들고 ADC로 읽기</a></li>
+  <li><a href="#b2" id="toc-b2" class="nav-link" data-scroll-target="#b2">B2–B3. DAC로 전압 만들고 ADC로 읽기</a></li>
   <li><a href="#b4" id="toc-b4" class="nav-link" data-scroll-target="#b4">B4. 소자 구동·전류 측정 회로</a>
   <ul class="collapse">
   <li><a href="#전압전류-경로" id="toc-전압전류-경로" class="nav-link" data-scroll-target="#전압전류-경로">4-1. 전압·전류 경로</a></li>
@@ -694,7 +700,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/b.html">B. 작은 보드로 독립 동작</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/b.html">B. 작은 보드 시제품</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">B. 작은 보드로 독립 동작하는 시제품</h1>
 <p class="subtitle lead">DAC가 전압을 걸고, 작은 회로가 전류를 읽고, 보드가 저장된 가중치로 판단해 알린다</p>
@@ -714,6 +720,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "S", "title": "신호를 숫자로, 기억을 숫자로 — 장비 없이", "page": "s.html"}, {"id": "a", "letter": "A", "title": "내 소자 전류에 과거 입력의 흔적이 남는지 재기", "page": "a.html"}, {"id": "b", "letter": "B", "title": "소스미터 없이 작은 보드가 재고 판단하는 시제품", "page": "b.html"}, {"id": "c", "letter": "C", "title": "누름이 소자 상태를 바꾸고, 그 상태에 리듬이 남는지 확인", "page": "c.html"}], "steps": [{"id": "s1", "project": "s", "title": "S1. 같은 신호, 다른 bit·샘플링률", "page": "s.html", "anchor": "s1", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d05"]}, {"id": "s2", "project": "s", "title": "S2. 기억 없음 vs R–C vs 작은 reservoir", "page": "s.html", "anchor": "s2", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d03", "d04", "d09", "d10"]}, {"id": "a0", "project": "a", "title": "A0. 모의 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "30–60분", "needs": "PC", "kind": "모의", "days": ["d06", "d08"]}, {"id": "a0r", "project": "a", "title": "A0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"]}, {"id": "a1", "project": "a", "title": "A1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"]}, {"id": "a2", "project": "a", "title": "A2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"]}, {"id": "a3", "project": "a", "title": "A3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"]}, {"id": "b1", "project": "b", "title": "B1. ESP32에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "ESP32 보드, USB 케이블 (없으면 Wokwi 시뮬레이터)", "kind": "실물", "days": []}, {"id": "b2", "project": "b", "title": "B2–B3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "ESP32, DAC·ADC 모듈", "kind": "실물", "days": ["d05"]}, {"id": "b4", "project": "b", "title": "B4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"]}, {"id": "b5", "project": "b", "title": "B5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "B4 회로, 소자", "kind": "실물", "days": ["d08"]}, {"id": "b6", "project": "b", "title": "B6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "B5 결과", "kind": "실물", "days": ["d08"]}, {"id": "b7", "project": "b", "title": "B7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"]}, {"id": "b8", "project": "b", "title": "B8. ECG 신호로 (도전)", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"]}, {"id": "c0", "project": "c", "title": "C0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (모의 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 모의)", "kind": "실측", "days": []}, {"id": "c2", "project": "c", "title": "C1–C2. 소자 구조와 대조군", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": []}, {"id": "c3", "project": "c", "title": "C3–C4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "서보, 로드셀, 보드", "kind": "실물", "days": []}, {"id": "c5", "project": "c", "title": "C5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "C3 장치, 소자", "kind": "실측", "days": ["d08"]}]}</script>
 <div class="callout callout-style-default callout-tip callout-titled" title="오늘 할 첫 실험 — B1: ESP32에 첫 코드 올리기">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -827,7 +834,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="구매-목록" class="level2">
 <h2 class="anchored" data-anchor-id="구매-목록">구매 목록</h2>
-<p>가격은 구매할 때 다시 확인합니다. DIP(브레드보드에 꽂는 모양)가 편하지만 꼭 DIP일 필요는 없습니다. 표면실장(SMD) 칩도 변환 기판(breakout)에 올린 모듈이면 같이 쓸 수 있습니다. <strong>"A1 뒤" 부품은 A1의 전압·전류 범위를 본 뒤 정합니다.</strong></p>
+<p>가격은 구매할 때 다시 확인합니다. DIP(브레드보드에 꽂는 모양)가 편하지만 꼭 DIP일 필요는 없습니다. 표면실장(SMD) 칩도 변환 기판(breakout)에 올린 모듈이면 같이 쓸 수 있습니다. <strong>연구실에 이미 있는 것(멀티미터, 브레드보드, 저항·커패시터 키트, USB 케이블)은 사지 않습니다.</strong> "측정 뒤 선택" 부품은 A1의 전압·전류 범위를 본 뒤 정하고, 같은 일을 하는 다른 모듈로 바꿔도 됩니다(대체 가능). 가격·판매처·배송비는 이 페이지에서 확인하지 않았으므로 적지 않았습니다 <span class="tag tag-unverified">미확인</span>. 비싼 보드로 바꿔도 아날로그 측정 회로 문제는 그대로 남습니다.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -875,25 +882,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>몇 개</td>
 </tr>
 <tr class="even">
-<td>A1 뒤</td>
+<td>측정 뒤 선택</td>
 <td>DAC 모듈 MCP4725</td>
 <td>3.3 V 동작, 주소 표기, <strong>VOUT·VCC·GND·SDA·SCL 핀 이름을 모듈 실크로 확인</strong></td>
 <td>2</td>
 </tr>
 <tr class="odd">
-<td>A1 뒤</td>
+<td>측정 뒤 선택</td>
 <td>ADC 모듈 ADS1115</td>
 <td>ADDR 핀, 모듈의 I²C 풀업 저항 유무 확인</td>
 <td>2</td>
 </tr>
 <tr class="even">
-<td>A1 뒤</td>
+<td>측정 뒤 선택</td>
 <td>op-amp</td>
 <td>전류 ≥ 1 µA: MCP6002 (DIP-8). 10 nA–1 µA: 입력 바이어스 전류가 fA–pA인 제품(예: LMC6482). 그 아래: 위의 계측 중심 대안</td>
 <td>각 3–5</td>
 </tr>
 <tr class="odd">
-<td>A1 뒤</td>
+<td>측정 뒤 선택</td>
 <td>OLED SSD1306(I²C, 0x3C), 액티브 부저, USB 전력 측정기</td>
 <td>전력 측정기는 해상도(mW·mA 단위)를 확인</td>
 <td>각 1</td>
@@ -920,14 +927,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span> Serial<span class="op">.</span>println<span class="op">(</span>millis<span class="op">());</span> delay<span class="op">(</span><span class="dv">500</span><span class="op">);</span> <span class="op">}</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p>부품이 오기 전에는 <a href="https://wokwi.com">Wokwi</a>(브라우저 ESP32 시뮬레이터)로 연습할 수 있습니다.</p>
 </section>
-<section id="b2b3.-dac로-전압-만들고-adc로-읽기" class="level2">
-<h2 class="anchored" data-anchor-id="b2b3.-dac로-전압-만들고-adc로-읽기">B2–B3. DAC로 전압 만들고 ADC로 읽기</h2>
+<section id="b2" class="level2">
+<h2 class="anchored" data-anchor-id="b2">B2–B3. DAC로 전압 만들고 ADC로 읽기</h2>
 <p><strong>연결 (모듈 핀 이름은 제품마다 다르니 실크 인쇄로 확인):</strong> 두 모듈 모두 VCC→3V3, GND→GND, SDA→GPIO 21, SCL→GPIO 22. ADS1115의 ADDR→GND(주소 0x48). DAC VOUT → ADS1115 A0.</p>
 <ol type="1">
-<li>라이브러리 관리자에서 Adafruit MCP4725, Adafruit ADS1X15를 설치합니다.</li>
-<li>I²C 스캐너(예제 메뉴 또는 AI에게 요청)로 두 주소가 보이는지 확인합니다.</li>
-<li>DAC 코드 0, 1024, 2048, 3072, 4095를 내보내 멀티미터와 ADC 값을 비교합니다. 3V3 전원이 정확히 3.300 V가 아니어서 수십 mV 차이는 정상입니다. 양 끝(0 V·3.3 V 근처)은 출력이 끝까지 붙지 않을 수 있습니다 (출력 여유, headroom).</li>
-<li><strong>풀업 확인:</strong> 모듈마다 I²C 풀업 저항이 있으면 병렬로 합쳐집니다. 통신이 불안정하면 모듈 하나만 남기고 시험해 원인을 좁힙니다.</li>
+<li><p>라이브러리 관리자에서 Adafruit MCP4725, Adafruit ADS1X15를 설치합니다.</p></li>
+<li><p><strong>I²C 스캐너</strong>를 올려 두 모듈의 주소가 보이는지 확인합니다. 시리얼 모니터(115200)에 <code>I2C 주소 0x48</code>(ADS1115)과 DAC 주소(모듈에 따라 0x60–0x63)가 나오면 성공입니다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Wire.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  Wire<span class="op">.</span>begin<span class="op">(</span><span class="dv">21</span><span class="op">,</span> <span class="dv">22</span><span class="op">);</span>  <span class="co">// SDA, SCL</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">500</span><span class="op">);</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">uint8_t</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> a <span class="op">&lt;</span> <span class="dv">127</span><span class="op">;</span> a<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    Wire<span class="op">.</span>beginTransmission<span class="op">(</span>a<span class="op">);</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>Wire<span class="op">.</span>endTransmission<span class="op">()</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> Serial<span class="op">.</span>printf<span class="op">(</span><span class="st">"I2C 주소 0x</span><span class="sc">%02X\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">"끝"</span><span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{}</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>아래 코드로 DAC 코드 0, 1024, 2048, 3072, 4095를 차례로 내보내고, 멀티미터로 DAC VOUT을 재서 시리얼 모니터의 ADC 값과 비교합니다. <code>DAC_ADDR</code>은 2에서 본 주소로 바꿉니다. <strong>이 코드는 컴파일·실물 시험 전입니다.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Wire.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Adafruit_MCP4725.h&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Adafruit_ADS1X15.h&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DAC_ADDR </span><span class="bn">0x62</span><span class="pp">  </span><span class="co">// 바꿀 것: 스캐너에서 본 DAC 주소</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Adafruit_MCP4725 dac<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>Adafruit_ADS1115 ads<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">uint16_t</span> codes<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">,</span> <span class="dv">1024</span><span class="op">,</span> <span class="dv">2048</span><span class="op">,</span> <span class="dv">3072</span><span class="op">,</span> <span class="dv">4095</span><span class="op">};</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  Wire<span class="op">.</span>begin<span class="op">(</span><span class="dv">21</span><span class="op">,</span> <span class="dv">22</span><span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>dac<span class="op">.</span>begin<span class="op">(</span>DAC_ADDR<span class="op">))</span> <span class="op">{</span> Serial<span class="op">.</span>println<span class="op">(</span><span class="st">"DAC 없음: 주소 확인"</span><span class="op">);</span> <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>ads<span class="op">.</span>begin<span class="op">(</span><span class="bn">0x48</span><span class="op">))</span> <span class="op">{</span> Serial<span class="op">.</span>println<span class="op">(</span><span class="st">"ADC 없음: 배선 확인"</span><span class="op">);</span> <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  ads<span class="op">.</span>setGain<span class="op">(</span>GAIN_ONE<span class="op">);</span>  <span class="co">// 입력 범위 ±4.096 V</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">uint16_t</span> c <span class="op">:</span> codes<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    dac<span class="op">.</span>setVoltage<span class="op">(</span>c<span class="op">,</span> <span class="kw">false</span><span class="op">);</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">200</span><span class="op">);</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int16_t</span> raw <span class="op">=</span> ads<span class="op">.</span>readADC_SingleEnded<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>printf<span class="op">(</span><span class="st">"DAC 코드 </span><span class="sc">%4u</span><span class="st"> → ADC </span><span class="sc">%6d</span><span class="st"> = </span><span class="sc">%.3f</span><span class="st"> V</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> c<span class="op">,</span> raw<span class="op">,</span> ads<span class="op">.</span>computeVolts<span class="op">(</span>raw<span class="op">));</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">3000</span><span class="op">);</span>  <span class="co">// 이 사이에 멀티미터로 VOUT을 읽는다</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>예상:</strong> 코드 2048에서 약 1.65 V(전원 3.3 V의 절반). 3V3 전원이 정확히 3.300 V가 아니어서 수십 mV 차이는 정상입니다. 양 끝(0 V·3.3 V 근처)은 출력이 끝까지 붙지 않을 수 있습니다 (출력 여유, headroom).</p></li>
+<li><p><strong>풀업 확인:</strong> 모듈마다 I²C 풀업 저항이 있으면 병렬로 합쳐집니다. 통신이 불안정하면 모듈 하나만 남기고 시험해 원인을 좁힙니다.</p></li>
 </ol>
 </section>
 <section id="b4" class="level2">
@@ -1212,8 +1255,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p><strong>측정:</strong></p>
 <p>COM 번호는 장치 관리자 → "포트(COM &amp; LPT)"에서 보드를 꽂을 때 새로 생기는 번호입니다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> board_collect.py config_board.json task.npz runs/b_dev01 <span class="at">--port</span> COM5 <span class="at">--limit</span> 10</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> board_collect.py config_board.json task.npz runs/b_dev01 <span class="at">--port</span> COM5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> board_collect.py config_board.json task.npz runs/b_dev01 <span class="at">--port</span> COM5 <span class="at">--limit</span> 10</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> board_collect.py config_board.json task.npz runs/b_dev01 <span class="at">--port</span> COM5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>보드는 입력 줄의 길이·숫자 형식·범위(0–1)·개수·시간 초과를 검사하고, 하나라도 이상하면 <strong>소자를 구동하지 않고</strong> <code>E</code> 줄을 보냅니다. DAC 쓰기가 실패하면 0 V를 한 번 더 시도하고 멈춥니다.</li>
 <li>측정이 다 끝난 뒤에 결과를 한꺼번에 보냅니다 (보내는 시간이 펄스 타이밍에 섞이지 않게). 시행마다 다섯 줄이 옵니다:</li>
@@ -1264,8 +1307,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="b6" class="level2">
 <h2 class="anchored" data-anchor-id="b6">B6. PC 없이 판단하고 알리기</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/b_dev01/checkpoint.npz task.npz <span class="at">--out</span> b_model.joblib <span class="at">--end-only</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> export_mcu.py b_model.joblib runs/b_dev01/manifest.json runs/b_dev01/checkpoint.npz ../firmware/B6_standalone <span class="at">--v-limit</span> 1.0 <span class="at">--inputs</span> task.npz</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/b_dev01/checkpoint.npz task.npz <span class="at">--out</span> b_model.joblib <span class="at">--end-only</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> export_mcu.py b_model.joblib runs/b_dev01/manifest.json runs/b_dev01/checkpoint.npz ../firmware/B6_standalone <span class="at">--v-limit</span> 1.0 <span class="at">--inputs</span> task.npz</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="1">
 <li>두 번째 명령이 <code>config.h</code>, <code>weights.h</code>, <code>ref_vectors.h</code>, <code>inputs_test.h</code>를 <code>firmware/B6_standalone/</code>에 새로 씁니다 (이진·다중 분류 모두 지원). <code>--v-limit</code>은 <code>config_board.json</code>의 값과 같게.</li>
 <li><a href="code/firmware/B6_standalone/B6_standalone.ino">B6_standalone</a>를 올리면 <strong>먼저 저장된 특징으로 점수를 계산해 Python 점수와 비교</strong>합니다 (소자 사용 안 함). 시리얼의 <code>R,…</code> 줄에 <code>FAIL</code>이 없어야 다음으로 갑니다. "같은 숫자 → 같은 계산"의 확인이고, Python 쪽 계산 일치는 모의 시험으로 확인했습니다 (보드에서는 미검증).</li>
@@ -1845,13 +1888,13 @@ C_in을 모를 때 안정성 확인 절차, 출력 여유, 포화 판정. 계산
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../projects/a.html" class="pagination-link" aria-label="A. 계측기로 탐색">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">A. 계측기로 탐색</span>
+      <a href="../projects/a.html" class="pagination-link" aria-label="A. 소자 흔적 재기">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">A. 소자 흔적 재기</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../projects/c.html" class="pagination-link" aria-label="C. 감지와 처리의 결합">
-        <span class="nav-page-text">C. 감지와 처리의 결합</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../projects/c.html" class="pagination-link" aria-label="C. 누름과 리듬">
+        <span class="nav-page-text">C. 누름과 리듬</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

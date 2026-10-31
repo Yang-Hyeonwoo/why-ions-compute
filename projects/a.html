@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../projects/b.html" rel="next">
-<link href="../projects/index.html" rel="prev">
+<link href="../projects/s.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -177,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/a.html">A. 계측기로 탐색</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/a.html">A. 소자 흔적 재기</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -627,20 +627,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -661,13 +667,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">이 페이지</h2>
    
   <ul>
-  <li><a href="#a0" id="toc-a0" class="nav-link active" data-scroll-target="#a0">A0. 장비 없이, 그다음 저항과 RC로</a>
+  <li><a href="#a0" id="toc-a0" class="nav-link active" data-scroll-target="#a0">A0. 모의 장비로 한 바퀴 (장비 없음, 30–60분)</a>
   <ul class="collapse">
   <li><a href="#a0-1.-준비-폴더와-python" id="toc-a0-1.-준비-폴더와-python" class="nav-link" data-scroll-target="#a0-1.-준비-폴더와-python">A0-1. 준비: 폴더와 Python</a></li>
   <li><a href="#a0-2" id="toc-a0-2" class="nav-link" data-scroll-target="#a0-2">A0-2. 모의 장비로 한 바퀴</a></li>
-  <li><a href="#a0-3.-실제-소스미터와-대화하기" id="toc-a0-3.-실제-소스미터와-대화하기" class="nav-link" data-scroll-target="#a0-3.-실제-소스미터와-대화하기">A0-3. 실제 소스미터와 대화하기</a></li>
-  <li><a href="#a0-4.-저항1-mω으로-측정-흐름-확인" id="toc-a0-4.-저항1-mω으로-측정-흐름-확인" class="nav-link" data-scroll-target="#a0-4.-저항1-mω으로-측정-흐름-확인">A0-4. 저항(1 MΩ)으로 측정 흐름 확인</a></li>
-  <li><a href="#a0-5" id="toc-a0-5" class="nav-link" data-scroll-target="#a0-5">A0-5. 직렬 RC로 "기억처럼 보이는 신호" 만들기</a></li>
+  <li><a href="#a0-3" id="toc-a0-3" class="nav-link" data-scroll-target="#a0-3">A0-3. 모의 RC로 "기억처럼 보이는 신호" 보기</a></li>
+  </ul></li>
+  <li><a href="#a0r" id="toc-a0r" class="nav-link" data-scroll-target="#a0r">A0R. 실제 소스미터로 저항과 RC (1–2시간)</a>
+  <ul class="collapse">
+  <li><a href="#a0r-1.-실제-소스미터와-대화하기" id="toc-a0r-1.-실제-소스미터와-대화하기" class="nav-link" data-scroll-target="#a0r-1.-실제-소스미터와-대화하기">A0R-1. 실제 소스미터와 대화하기</a></li>
+  <li><a href="#a0r-2.-저항1-mω으로-측정-흐름-확인" id="toc-a0r-2.-저항1-mω으로-측정-흐름-확인" class="nav-link" data-scroll-target="#a0r-2.-저항1-mω으로-측정-흐름-확인">A0R-2. 저항(1 MΩ)으로 측정 흐름 확인</a></li>
+  <li><a href="#a0r-3" id="toc-a0r-3" class="nav-link" data-scroll-target="#a0r-3">A0R-3. 직렬 RC 실측</a></li>
   </ul></li>
   <li><a href="#a1" id="toc-a1" class="nav-link" data-scroll-target="#a1">A1. 소자 특성 측정</a>
   <ul class="collapse">
@@ -681,14 +691,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#a2" id="toc-a2" class="nav-link" data-scroll-target="#a2">A2. 작은 합성 과제: "끝만 읽어도 앞을 기억하는가"</a></li>
   <li><a href="#a3" id="toc-a3" class="nav-link" data-scroll-target="#a3">A3. (선택) ECG 박동으로 확장</a></li>
   <li><a href="#문제-해결" id="toc-문제-해결" class="nav-link" data-scroll-target="#문제-해결">문제 해결</a></li>
-  <li><a href="#ai에게-맡길-때" id="toc-ai에게-맡길-때" class="nav-link" data-scroll-target="#ai에게-맡길-때">AI에게 맡길 때</a></li>
+  <li><a href="#선택-다른-소스미터-모델로-옮길-때-ai에게-묻는-법" id="toc-선택-다른-소스미터-모델로-옮길-때-ai에게-묻는-법" class="nav-link" data-scroll-target="#선택-다른-소스미터-모델로-옮길-때-ai에게-묻는-법">(선택) 다른 소스미터 모델로 옮길 때 AI에게 묻는 법</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/a.html">A. 계측기로 탐색</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/index.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/a.html">A. 소자 흔적 재기</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">A. 계측기로 탐색하는 물리 레저버</h1>
 <p class="subtitle lead">소스미터로 소자에 펄스를 걸고, 남는 전류의 흔적이 계산에 쓸모 있는지 확인한다</p>
@@ -708,6 +718,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "S", "title": "신호를 숫자로, 기억을 숫자로 — 장비 없이", "page": "s.html"}, {"id": "a", "letter": "A", "title": "내 소자 전류에 과거 입력의 흔적이 남는지 재기", "page": "a.html"}, {"id": "b", "letter": "B", "title": "소스미터 없이 작은 보드가 재고 판단하는 시제품", "page": "b.html"}, {"id": "c", "letter": "C", "title": "누름이 소자 상태를 바꾸고, 그 상태에 리듬이 남는지 확인", "page": "c.html"}], "steps": [{"id": "s1", "project": "s", "title": "S1. 같은 신호, 다른 bit·샘플링률", "page": "s.html", "anchor": "s1", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d05"]}, {"id": "s2", "project": "s", "title": "S2. 기억 없음 vs R–C vs 작은 reservoir", "page": "s.html", "anchor": "s2", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d03", "d04", "d09", "d10"]}, {"id": "a0", "project": "a", "title": "A0. 모의 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "30–60분", "needs": "PC", "kind": "모의", "days": ["d06", "d08"]}, {"id": "a0r", "project": "a", "title": "A0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"]}, {"id": "a1", "project": "a", "title": "A1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"]}, {"id": "a2", "project": "a", "title": "A2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"]}, {"id": "a3", "project": "a", "title": "A3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"]}, {"id": "b1", "project": "b", "title": "B1. ESP32에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "ESP32 보드, USB 케이블 (없으면 Wokwi 시뮬레이터)", "kind": "실물", "days": []}, {"id": "b2", "project": "b", "title": "B2–B3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "ESP32, DAC·ADC 모듈", "kind": "실물", "days": ["d05"]}, {"id": "b4", "project": "b", "title": "B4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"]}, {"id": "b5", "project": "b", "title": "B5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "B4 회로, 소자", "kind": "실물", "days": ["d08"]}, {"id": "b6", "project": "b", "title": "B6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "B5 결과", "kind": "실물", "days": ["d08"]}, {"id": "b7", "project": "b", "title": "B7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"]}, {"id": "b8", "project": "b", "title": "B8. ECG 신호로 (도전)", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"]}, {"id": "c0", "project": "c", "title": "C0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (모의 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 모의)", "kind": "실측", "days": []}, {"id": "c2", "project": "c", "title": "C1–C2. 소자 구조와 대조군", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": []}, {"id": "c3", "project": "c", "title": "C3–C4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "서보, 로드셀, 보드", "kind": "실물", "days": []}, {"id": "c5", "project": "c", "title": "C5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "C3 장치, 소자", "kind": "실측", "days": ["d08"]}]}</script>
 <div class="callout callout-style-default callout-tip callout-titled" title="오늘 할 첫 실험 — A0: 장비 없이 한 바퀴">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -722,14 +733,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>준비물:</strong> Windows PC, Python 3.11 이상, <a href="code/ion-projects-code.zip">코드 묶음 zip</a>. 소스미터·소자는 아직 필요 없습니다.</li>
 <li><strong>걸리는 시간:</strong> 30–60분.</li>
 <li><strong>끝나면 얻는 것:</strong> 모의 장비로 잰 기록 폴더, 시간별 전류 그래프 2장, "기억 있는 모의 소자 vs 저항"의 분류 결과.</li>
+<li><strong>실제 장비는 다음 단계:</strong> 소스미터를 쓰는 실행은 <a href="#a0r">A0R</a>(1–2시간)로 따로 나눴습니다. A0만 끝내도 그날은 끝입니다.</li>
 <li><strong>오늘의 완료 기준:</strong> A0-2의 명령 ①–⑧이 모두 예상대로 끝나고, 그래프에서 '펄스 끝 읽기' 점이 무엇인지 설명할 수 있으면 끝입니다.</li>
 <li><strong>남길 기록:</strong> 사용한 Python 버전, 각 명령의 마지막 출력 한 줄, 그래프 2장 (연구 노트에 붙이기).</li>
 </ul>
 </div>
 </div>
-<p><strong>이 프로젝트가 묻는 것:</strong> 내 소자의 전류에 과거 입력의 흔적이 남는가, 남는다면 그 흔적으로 시간 패턴을 구별할 수 있는가. 순서는 A0(장비 없이·저항·RC) → <a href="#a1">A1</a>(소자 특성) → <a href="#a2">A2</a>(작은 합성 과제) → <a href="#a3">A3</a>(선택: ECG)입니다. A1까지 기록이 남으면 <a href="../projects/index.html#levels">수준 2</a>이고, 기억이나 성능 향상이 보이지 않아도 그 단계는 끝난 것입니다.</p>
+<p><strong>이 프로젝트가 묻는 것:</strong> 내 소자의 전류에 과거 입력의 흔적이 남는가, 남는다면 그 흔적으로 시간 패턴을 구별할 수 있는가. 순서는 A0(장비 없이 모의) → <a href="#a0r">A0R</a>(소스미터로 저항·RC) → <a href="#a1">A1</a>(소자 특성) → <a href="#a2">A2</a>(작은 합성 과제) → <a href="#a3">A3</a>(선택: ECG)입니다. A1까지 기록이 남으면 <a href="../projects/index.html#levels">수준 2</a>이고, 기억이나 성능 향상이 보이지 않아도 그 단계는 끝난 것입니다.</p>
 <section id="a0" class="level2">
-<h2 class="anchored" data-anchor-id="a0">A0. 장비 없이, 그다음 저항과 RC로</h2>
+<h2 class="anchored" data-anchor-id="a0">A0. 모의 장비로 한 바퀴 (장비 없음, 30–60분)</h2>
 <section id="a0-1.-준비-폴더와-python" class="level3">
 <h3 class="anchored" data-anchor-id="a0-1.-준비-폴더와-python">A0-1. 준비: 폴더와 Python</h3>
 <ol type="1">
@@ -782,8 +794,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </section>
-<section id="a0-3.-실제-소스미터와-대화하기" class="level3">
-<h3 class="anchored" data-anchor-id="a0-3.-실제-소스미터와-대화하기">A0-3. 실제 소스미터와 대화하기</h3>
+<section id="a0-3" class="level3">
+<h3 class="anchored" data-anchor-id="a0-3">A0-3. 모의 RC로 "기억처럼 보이는 신호" 보기</h3>
+<p>직렬 RC는 저항 R과 커패시터 C를 일렬로 이은 것입니다. 시간상수 τ = R × C이고, 아래 모의 장비는 R = 1 MΩ, C = 1 µF(τ = 1 s)로 계산합니다. 실물 연결은 <a href="#a0r-3">A0R-3</a>에서 합니다.</p>
+<p>아래 명령으로 쓰기–쉬기–읽기를 모의 RC에 겁니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py wrr config_example.json runs/wrr_rc_mock <span class="at">--mock</span> <span class="at">--mock-model</span> series_rc <span class="at">--gaps</span> 0.1,1,5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>이 명령은 이 순서로 전압을 겁니다: <strong>0 V 5초(settle) → 쓰기 ±0.5 V 1초 → 0 V 쉬기(gap) → 읽기 0.05 V 0.5초</strong>. 쉬기 0.1·1·5초마다 + 쓰기와 − 쓰기를 한 번씩 합니다.</li>
+<li>화면의 <code>I_read_first</code>는 읽기 시작 직후 전류입니다. 모의 RC에서는 쉬기가 0.1 s일 때 + 쓰기 뒤 약 −0.23 µA, − 쓰기 뒤 약 +0.32 µA로 크게 다르고, 5 s에서는 둘 다 약 +0.045 µA로 거의 같아집니다.</li>
+<li><strong>뜻:</strong> 커패시터에 남은 전하가 쉬는 동안 τ ≈ 1 s로 빠져나갑니다. <strong>커패시터만으로도 '쓰기 극성을 기억하는 것처럼' 보이는 결과가 나옵니다.</strong> 이 모양을 알아 두면 A1에서 소자 결과를 볼 때 비교할 기준이 생깁니다.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/ex-mock-wrr-rc.png" class="img-fluid figure-img" alt="모의 직렬 RC에 쓰기 쉬기 읽기를 세 번 반복한 전압과 전류 그래프"></p>
+<figcaption>모의 직렬 RC의 쓰기–쉬기–읽기 예시 (실측 아님) — 위: 걸어 준 전압, 아래: 전류. 전압을 바꿀 때마다 전류가 튀었다가 τ ≈ 1 s로 0을 향해 줄어듭니다.</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="a0r" class="level2">
+<h2 class="anchored" data-anchor-id="a0r">A0R. 실제 소스미터로 저항과 RC (1–2시간)</h2>
+<ul>
+<li><strong>준비물:</strong> 소스미터(이 코드는 Keithley 2400 계열 기준), 연결 케이블(GPIB–USB 어댑터 등), 1 MΩ 저항, 1 µF <strong>필름</strong> 커패시터, 악어 클립. 소자는 아직 필요 없습니다.</li>
+<li><strong>끝나면 얻는 것:</strong> 저항과 RC의 실측 그래프, 실제 펄스 길이 기록. A0의 모의 그래프와 나란히 놓습니다.</li>
+<li><strong>완료 기준:</strong> 저항에서 전류 = 전압 ÷ 1 MΩ이 맞고, RC에서 쓰기 극성에 따라 읽기 전류가 달라졌다가 쉬기가 길면 같아지는 것을 실측으로 봤으면 끝입니다.</li>
+</ul>
+<section id="a0r-1.-실제-소스미터와-대화하기" class="level3">
+<h3 class="anchored" data-anchor-id="a0r-1.-실제-소스미터와-대화하기">A0R-1. 실제 소스미터와 대화하기</h3>
 <ol type="1">
 <li>소스미터 뒷면에서 연결 방식(USB·GPIB·LAN·RS-232)을 확인합니다. Keithley 2400처럼 GPIB만 있으면 GPIB–USB 어댑터가 필요합니다 (NI-VISA가 인식하는 제품. 연구실에 남는 것이 있는지 먼저 물어보세요).</li>
 <li><strong>NI-VISA</strong>(NI 홈페이지, 무료)를 설치하고, 같이 설치되는 <strong>NI MAX</strong>를 열어 "장치와 인터페이스"에서 장비 주소를 찾습니다. 예: <code>GPIB0::24::INSTR</code>. 장비가 안 보이면 장비 앞면 메뉴에서 통신 방식·GPIB 주소를 확인합니다.</li>
@@ -795,7 +832,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>"mock"</code> 줄은 실제 장비에서는 쓰이지 않습니다.</li>
 </ul></li>
 </ol>
-<p><a href="code/python/smu.py">smu.py</a>는 <strong>Keithley 2400 계열</strong> 기준입니다. 2450·2600 시리즈는 명령이 다르므로 파일 전체를 Claude에게 주고 모델에 맞게 바꿔 달라고 하세요. 이 드라이버가 하는 일:</p>
+<p><a href="code/python/smu.py">smu.py</a>는 <strong>Keithley 2400 계열</strong> 기준입니다. 2450·2600 시리즈는 명령 체계가 달라 <strong>이 코드로는 아직 잴 수 없습니다.</strong> 2450은 설명서에서 2400 호환 명령 모드를 고를 수 있는지 먼저 확인하세요 <span class="tag tag-unverified">미확인</span>. 연결이 되면 <code>2400 계열이 아닙니다</code> 오류 없이 A0R-2가 돌아가야 합니다. 이 드라이버가 하는 일:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -840,15 +877,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="a0-4.-저항1-mω으로-측정-흐름-확인" class="level3">
-<h3 class="anchored" data-anchor-id="a0-4.-저항1-mω으로-측정-흐름-확인">A0-4. 저항(1 MΩ)으로 측정 흐름 확인</h3>
+<section id="a0r-2.-저항1-mω으로-측정-흐름-확인" class="level3">
+<h3 class="anchored" data-anchor-id="a0r-2.-저항1-mω으로-측정-흐름-확인">A0R-2. 저항(1 MΩ)으로 측정 흐름 확인</h3>
 <p><strong>연결:</strong> 소스미터 앞면 <strong>HI</strong> 단자 → 악어 클립 → 저항 한쪽 다리, <strong>LO</strong> 단자 → 저항 다른 쪽 다리. 저항은 방향이 없습니다.</p>
 <ul>
 <li><strong>계산 예시:</strong> 0.5 V를 걸면 I = 0.5 / 1,000,000 = 0.5 µA.</li>
 <li><strong>이번 입력이 실제로 거는 전압:</strong> <code>task.npz</code> + <code>config_example.json</code>의 인코딩은 V = 0.8 × u × mask이므로 펄스 높이가 <strong>약 0.07–0.78 V</strong>입니다. 1 MΩ이면 전류는 약 0.07–0.78 µA입니다.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task.npz runs/r1M <span class="at">--limit</span> 3</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_run.py runs/r1M <span class="at">--trial</span> 0</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task.npz runs/r1M <span class="at">--limit</span> 3</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_run.py runs/r1M <span class="at">--trial</span> 0</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><strong>예상:</strong> 그래프의 전류 계단이 전압 계단과 같은 모양이고, 크기가 전압 / 1 MΩ입니다. 제목의 "실제 펄스 길이"가 설정 50 ms보다 <strong>얼마나 긴지</strong> 적습니다. PC가 명령을 하나씩 보내는 방식이라 보통 수십 ms 길어집니다.</li>
 <li><strong>다르면:</strong> 전류가 0 → 연결. 값이 튐 → <code>i_range_A</code> 고정. 시간 초과 → 주소·케이블.</li>
@@ -868,23 +905,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="a0-5" class="level3">
-<h3 class="anchored" data-anchor-id="a0-5">A0-5. 직렬 RC로 "기억처럼 보이는 신호" 만들기</h3>
+<section id="a0r-3" class="level3">
+<h3 class="anchored" data-anchor-id="a0r-3">A0R-3. 직렬 RC 실측</h3>
 <p><strong>연결:</strong> HI → 1 MΩ 저항 → 1 µF <strong>필름</strong> 커패시터(극성 없음) → LO. 저항과 커패시터를 일렬로 잇습니다 (직렬, series). 시간 상수 τ = R × C = 1 s.</p>
-<p>먼저 장비 없이 같은 실험을 모의로 해 봅니다:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py wrr config_example.json runs/wrr_rc_mock <span class="at">--mock</span> <span class="at">--mock-model</span> series_rc <span class="at">--gaps</span> 0.1,1,5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A0-3의 명령에서 <code>config_example.json</code> 대신 <code>config_real.json</code>을 쓰고 <code>--mock --mock-model series_rc</code>를 빼고 실행합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py wrr config_real.json runs/wrr_rc_real <span class="at">--gaps</span> 0.1,1,5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>이 명령은 그림 ②와 같은 순서로 전압을 겁니다: <strong>0 V 5초(settle) → 쓰기 ±0.5 V 1초 → 0 V 쉬기(gap) → 읽기 0.05 V 0.5초</strong>. 쉬기 0.1·1·5초마다 + 쓰기와 − 쓰기를 한 번씩 합니다.</li>
-<li>화면의 <code>I_read_first</code>는 읽기 시작 직후 전류입니다. 모의 RC에서는 쉬기가 0.1 s일 때 + 쓰기 뒤 약 −0.23 µA, − 쓰기 뒤 약 +0.32 µA로 크게 다르고, 5 s에서는 둘 다 약 +0.045 µA로 거의 같아집니다.</li>
-<li><strong>뜻:</strong> 커패시터에 남은 전하가 쉬는 동안 τ ≈ 1 s로 빠져나갑니다. <strong>커패시터만으로도 '쓰기 극성을 기억하는 것처럼' 보이는 결과가 나옵니다.</strong> 이 모양을 알아 두면 A1에서 소자 결과를 볼 때 비교할 기준이 생깁니다.</li>
+<li><strong>예상:</strong> A0-3의 모의 숫자(쉬기 0.1 s에서 + 쓰기 뒤 약 −0.23 µA, − 쓰기 뒤 약 +0.32 µA, 5 s에서 둘 다 약 +0.045 µA)와 부호·크기 순서가 비슷합니다. 실제 부품은 허용 오차(저항 1%, 커패시터 5–10%)와 장비의 실제 펄스 길이 때문에 숫자가 조금 다릅니다.</li>
+<li><strong>다르면:</strong> 전류가 저항만 있을 때와 같음 → 커패시터 연결. 부호가 반대 → HI·LO 방향.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/ex-mock-wrr-rc.png" class="img-fluid figure-img" alt="모의 직렬 RC에 쓰기 쉬기 읽기를 세 번 반복한 전압과 전류 그래프"></p>
-<figcaption>모의 직렬 RC의 쓰기–쉬기–읽기 예시 (실측 아님) — 위: 걸어 준 전압, 아래: 전류. 전압을 바꿀 때마다 전류가 튀었다가 τ ≈ 1 s로 0을 향해 줄어듭니다.</figcaption>
-</figure>
-</div>
-<p>실제 RC로는 <code>config_example.json</code> 대신 <code>config_real.json</code>을 쓰고 <code>--mock …</code>을 빼고 실행합니다. 실측 모양이 모의와 비슷하면 측정 흐름이 맞게 동작하는 것입니다.</p>
 </section>
 </section>
 <section id="a1" class="level2">
@@ -921,8 +950,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="a1-1.-쓸-전압-범위-찾기" class="level3">
 <h3 class="anchored" data-anchor-id="a1-1.-쓸-전압-범위-찾기">A1-1. 쓸 전압 범위 찾기</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py iv config_real.json runs/iv_dev01_02 <span class="at">--vmax</span> 0.2 <span class="at">--step</span> 0.02 <span class="at">--dwell</span> 0.05</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py iv config_real.json runs/iv_dev01_04 <span class="at">--vmax</span> 0.4 <span class="at">--step</span> 0.02 <span class="at">--dwell</span> 0.05</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py iv config_real.json runs/iv_dev01_02 <span class="at">--vmax</span> 0.2 <span class="at">--step</span> 0.02 <span class="at">--dwell</span> 0.05</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py iv config_real.json runs/iv_dev01_04 <span class="at">--vmax</span> 0.4 <span class="at">--step</span> 0.02 <span class="at">--dwell</span> 0.05</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>결과: <code>.npz</code>(모든 읽기), <code>.json</code>(조건), <code>.png</code>(I–V). compliance를 작게(예: 10–100 µA) 두고 <code>--vmax</code>를 한 단계씩 넓힙니다.</li>
 <li>넓힐 때마다 <strong>처음의 작은 스윕(0.2 V)을 다시 재서 같은지</strong> 확인합니다. 달라졌다면 직전 범위에서 소자가 바뀐 것(전기화학 반응, ITO 손상 등 가능)이므로 그 아래까지만 씁니다. 기포·변색·박리도 눈으로 봅니다.</li>
@@ -941,9 +970,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>그림 ② 쓰기–쉬기–읽기와 읽기 전류의 가능한 모양 — <strong>개념 예시, 실측 아님</strong>. 한 번의 모양만으로 원인을 정하지 않습니다.</figcaption>
 </figure>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py wrr config_real.json runs/wrr_dev01 <span class="at">--vw</span> 0.5 <span class="at">--tw</span> 1 <span class="at">--vr</span> 0.05 <span class="at">--tr</span> 0.5 <span class="at">--gaps</span> 0.1,0.3,1,3,10</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py wrr config_real.json runs/wrr_dev01 <span class="at">--vw</span> 0.5 <span class="at">--tw</span> 1 <span class="at">--vr</span> 0.05 <span class="at">--tr</span> 0.5 <span class="at">--gaps</span> 0.1,0.3,1,3,10</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>전압 순서는 그림 ②와 같습니다 (A0-5의 명령과 같은 파일). <code>--vw</code>·<code>--vr</code>은 A1-1에서 정한 범위 안으로 고칩니다. 읽기 전압 <code>--vr</code>은 I–V에서 거의 직선인 작은 값으로.</li>
+<li>전압 순서는 그림 ②와 같습니다 (A0-3·A0R-3의 명령과 같은 파일). <code>--vw</code>·<code>--vr</code>은 A1-1에서 정한 범위 안으로 고칩니다. 읽기 전압 <code>--vr</code>은 I–V에서 거의 직선인 작은 값으로.</li>
 <li><code>I_read_first</code>(읽기 직후)와 <code>I_read_late</code>(읽기 후반 평균)를 + 쓰기 / − 쓰기로 비교하고, 쉬기 시간에 따라 차이가 어떻게 줄어드는지 봅니다.</li>
 <li>같은 명령으로 <strong>직렬 RC, 1 MΩ 저항, 한 층 소자</strong>도 잽니다.</li>
 </ul>
@@ -969,7 +998,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td>처음에만 튀고 같아짐 (ⓑ)</td>
 <td>전극 계면·벌크의 충·방전(용량성 과도 응답)</td>
-<td>A0-5의 RC와 모양 비교, 읽기 구간을 길게(<code>--tr</code>)</td>
+<td>A0R-3의 RC와 모양 비교, 읽기 구간을 길게(<code>--tr</code>)</td>
 </tr>
 <tr class="odd">
 <td>한쪽으로 계속 흘러감 (ⓒ)</td>
@@ -982,8 +1011,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="a1-4.-짝펄스-두-자극-사이-간격의-흔적" class="level3">
 <h3 class="anchored" data-anchor-id="a1-4.-짝펄스-두-자극-사이-간격의-흔적">A1-4. 짝펄스: 두 자극 사이 간격의 흔적</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py ppf config_real.json runs/ppf_dev01 <span class="at">--vp</span> 0.5 <span class="at">--tp</span> 0.2 <span class="at">--gaps</span> 0.05,0.1,0.2,0.5,1,2,5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p>순서: 0 V 쉬기 → 펄스 1 → 0 V(간격) → 펄스 2. 그래프 위쪽은 간격에 따른 두 번째/첫 번째 펄스 끝 전류 비입니다. 간격이 짧을수록 비가 1에서 멀어지면 간격 정보가 전류에 남는다는 뜻입니다. 직렬 RC로도 같은 명령을 돌려 비교합니다. 간격 0.05 s처럼 짧은 값은 PC 타이밍 한계(A0-4)에 걸리므로 기록된 시각을 확인합니다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> a1_tests.py ppf config_real.json runs/ppf_dev01 <span class="at">--vp</span> 0.5 <span class="at">--tp</span> 0.2 <span class="at">--gaps</span> 0.05,0.1,0.2,0.5,1,2,5</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>순서: 0 V 쉬기 → 펄스 1 → 0 V(간격) → 펄스 2. 그래프 위쪽은 간격에 따른 두 번째/첫 번째 펄스 끝 전류 비입니다. 간격이 짧을수록 비가 1에서 멀어지면 간격 정보가 전류에 남는다는 뜻입니다. 직렬 RC로도 같은 명령을 돌려 비교합니다. 간격 0.05 s처럼 짧은 값은 PC 타이밍 한계(A0R-2)에 걸리므로 기록된 시각을 확인합니다.</p>
 </section>
 <section id="a1-5.-eis-퍼텐쇼스탯이-있으면" class="level3">
 <h3 class="anchored" data-anchor-id="a1-5.-eis-퍼텐쇼스탯이-있으면">A1-5. EIS (퍼텐쇼스탯이 있으면)</h3>
@@ -1066,12 +1095,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>입력 12칸 중 높은 값 3개가 <strong>앞쪽(0–3칸)</strong>이면 클래스 0, <strong>뒤쪽(4–7칸)</strong>이면 클래스 1. 8–11칸은 모든 시행에서 같은 낮은 값입니다.</li>
 <li>각 칸 = 마스크 4개의 펄스 (그림 ⑤). <code>--end-only</code>는 8–11칸 동안의 전류 16개만 씁니다.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tasks.py timing task_a2.npz <span class="at">--n</span> 40</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task_a2.npz runs/a2_dev01 <span class="at">--limit</span> 10</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_run.py runs/a2_dev01 <span class="at">--trial</span> 0</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task_a2.npz runs/a2_dev01</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/a2_dev01/checkpoint.npz task_a2.npz <span class="at">--out</span> a2_dev01.joblib <span class="at">--end-only</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/a2_dev01/checkpoint.npz task_a2.npz <span class="at">--out</span> a2_dev01_full.joblib</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tasks.py timing task_a2.npz <span class="at">--n</span> 40</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task_a2.npz runs/a2_dev01 <span class="at">--limit</span> 10</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_run.py runs/a2_dev01 <span class="at">--trial</span> 0</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json task_a2.npz runs/a2_dev01</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/a2_dev01/checkpoint.npz task_a2.npz <span class="at">--out</span> a2_dev01.joblib <span class="at">--end-only</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/a2_dev01/checkpoint.npz task_a2.npz <span class="at">--out</span> a2_dev01_full.joblib</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p>먼저 10시행만 재고 그래프·compliance·실제 펄스 길이를 확인한 뒤 나머지를 이어서 잽니다. 같은 과제를 <strong>1 MΩ 저항, 직렬 RC, 한 층 소자</strong>로도 잽니다 (폴더 이름만 바꿔서).</p>
 <table class="caption-top table">
 <colgroup>
@@ -1126,9 +1155,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>직렬 RC도 0.5보다 높게 나올 수 있습니다. 그렇다면 "용량성 흔적만으로도 이 과제가 풀린다"는 뜻이고, 소자가 RC와 무엇이 다른지가 다음 질문입니다.</li>
 </ul>
 <p><strong>기억 용량(MC, memory capacity) — 같이 재면 좋은 지표.</strong> 무작위 입력 600개를 한 줄로 걸고, 지금 상태로 d걸음 전 입력을 맞히는 정도를 봅니다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tasks.py mc mc_input.npz <span class="at">--n</span> 600</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json mc_input.npz runs/mc_dev01</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> mc.py runs/mc_dev01/checkpoint.npz mc_input.npz <span class="at">--M</span> 4</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tasks.py mc mc_input.npz <span class="at">--n</span> 600</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json mc_input.npz runs/mc_dev01</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> mc.py runs/mc_dev01/checkpoint.npz mc_input.npz <span class="at">--M</span> 4</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="code/python/mc.py">mc.py</a>는 앞 50걸음을 버리고(washout), 앞 2/3로 학습·뒤 1/3로 평가하며, <strong>독립 무작위 목표로 같은 계산을 한 null 값</strong>보다 큰 부분(<code>MC_excess</code>)만 셉니다. MC는 "이 입력 통계에서 선형으로 꺼낼 수 있는 과거 정보의 양"이지 좋은 레저버의 인증서가 아닙니다.</p>
 </section>
 <section id="a3" class="level2">
@@ -1138,10 +1167,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>분할.</strong> 관행적 분할(DS1 학습 / DS2 시험)을 쓰되, PhysioNet 설명에 따르면 <strong>201과 202는 같은 사람의 기록</strong>입니다. <a href="code/python/ecg_prep.py">ecg_prep.py</a>는 기본으로 202를 시험에서 빼고, 사람 번호를 <code>groups</code>에 넣어 내부 교차검증도 사람 단위로 나눕니다.</p>
 <p><strong>전처리는 '오프라인' 경로입니다.</strong> 전체 기록·전문가 R파 주석·앞뒤를 보는 필터를 씁니다. 실시간 장치는 R파를 스스로 찾고 미래 샘플을 볼 수 없으므로 다른 과제입니다. 360 Hz → 36 Hz로 줄일 때 안티앨리어싱 필터가 들어간 <code>resample_poly</code>를 쓰고, 이때 <strong>18 Hz 이상 성분이 사라져</strong> QRS의 날카로운 모양·폭 정보가 무뎌집니다. 그래서 이 결과는 "36 Hz로 줄인 박동 모양에서의 구별"이고, 원 신호 전체를 쓴 분류와 직접 비교할 수 없습니다. 리드는 이름이 MLII인 채널을 고릅니다.</p>
 <p><strong>시간.</strong> 박동 하나 = 25칸 × 마스크 4 × θ 50 ms = 5초 + 쉬기 2초 ≈ 7초 (그림 ⑤). 600박동이면 명목 70분에 통신·읽기 시간이 더해집니다. <strong>저장된 박동을 하나씩 재생하는 실험이고, 실시간 처리가 아닙니다.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> ecg_prep.py ecg_set.npz <span class="at">--train</span> 200 <span class="at">--test</span> 100</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json ecg_set.npz runs/ecg_dev01 <span class="at">--limit</span> 10</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json ecg_set.npz runs/ecg_dev01</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/ecg_dev01/checkpoint.npz ecg_set.npz <span class="at">--out</span> ecg_dev01.joblib</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> ecg_prep.py ecg_set.npz <span class="at">--train</span> 200 <span class="at">--test</span> 100</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json ecg_set.npz runs/ecg_dev01 <span class="at">--limit</span> 10</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> measure_seq.py config_real.json ecg_set.npz runs/ecg_dev01</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> readout.py runs/ecg_dev01/checkpoint.npz ecg_set.npz <span class="at">--out</span> ecg_dev01.joblib</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p>첫 줄은 PhysioNet에서 기록을 내려받습니다 (인터넷 필요, 이 줄은 아직 실행 검증하지 않음). <a href="code/python/readout.py">readout.py</a>는 표준화를 분류기와 한 Pipeline에 넣어 교차검증 fold 안에서만 맞추고, 사람 단위 <code>GroupKFold</code>로 정규화 강도를 고르며, 시험 데이터는 마지막에 한 번만 씁니다. 비교는 A2와 같은 줄(입력 그대로, 저항, RC, 소자) + 같은 특징 수의 디지털 기준 모델입니다. 측정 조건·특징 수·분할을 표에 같이 적고, 빈칸은 측정하기 전까지 비워 둡니다.</p>
 <p>정확도가 낮을 때 원인을 τ 하나로 정하지 않습니다. 인코딩(θ, 마스크, 전압 범위), 다운샘플링으로 잃은 정보, 소자 drift, 시행 수, 라벨 묶음의 어려움이 모두 후보입니다.</p>
 </section>
@@ -1173,7 +1202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>2400 계열이 아닙니다</code></td>
-<td>모델이 다름 → <code>smu.py</code>를 모델에 맞게 수정</td>
+<td>모델이 다름 → A0R-1의 모델 안내. 이 코드는 2400 계열만 지원</td>
 </tr>
 <tr class="odd">
 <td>전류가 compliance 값에 붙음</td>
@@ -1186,8 +1215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="ai에게-맡길-때" class="level2">
-<h2 class="anchored" data-anchor-id="ai에게-맡길-때">AI에게 맡길 때</h2>
+<section id="선택-다른-소스미터-모델로-옮길-때-ai에게-묻는-법" class="level2">
+<h2 class="anchored" data-anchor-id="선택-다른-소스미터-모델로-옮길-때-ai에게-묻는-법">(선택) 다른 소스미터 모델로 옮길 때 AI에게 묻는 법</h2>
 <pre class="text"><code>첨부한 smu.py는 Keithley 2400용이야. 내 장비는 [모델]이고 [연결 방식]으로 연결해.
 같은 클래스 구조(open/enable/set_v/read/hold/close, 출력 자동 켜짐 없음, close에서 0 V→OFF를
 단계별로 시도하고 실패 기록, compliance 상태 기록)를 유지하면서 이 모델 명령으로 바꿔 줘.
@@ -1614,13 +1643,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../projects/index.html" class="pagination-link" aria-label="프로젝트">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">프로젝트</span>
+      <a href="../projects/s.html" class="pagination-link" aria-label="S. 장비 없이: bit·기억">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">S. 장비 없이: bit·기억</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../projects/b.html" class="pagination-link" aria-label="B. 작은 보드로 독립 동작">
-        <span class="nav-page-text">B. 작은 보드로 독립 동작</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../projects/b.html" class="pagination-link" aria-label="B. 작은 보드 시제품">
+        <span class="nav-page-text">B. 작은 보드 시제품</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

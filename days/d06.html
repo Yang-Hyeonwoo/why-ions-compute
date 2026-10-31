@@ -621,20 +621,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">S. 장비 없이: bit·기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A. 계측기로 탐색</span></a>
+ <span class="menu-text">A. 소자 흔적 재기</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">B. 작은 보드로 독립 동작</span></a>
+ <span class="menu-text">B. 작은 보드 시제품</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">C. 감지와 처리의 결합</span></a>
+ <span class="menu-text">C. 누름과 리듬</span></a>
   </div>
 </li>
       </ul>
@@ -692,7 +698,6 @@ window.Quarto = {
 <p><strong>오늘의 장면</strong> 펄스 열 → conductance 변화 → readout 규칙 → <span class="key">정확도 vs device 뺀 기준선</span></p>
 <p><strong>오늘 반드시</strong> <span class="key">PPF 곡선은 기억(사다리 0단)까지만 보인다. '계산했다'고 하려면 과제·학습한 readout·held-out·기준선이 필요하다.</span></p>
 <p><strong>나중에 봐도 됨</strong> R² 계산 · Singh 2026 심화 · 폴더 논문 5개 세부 · PPF 이중 지수식</p>
-<p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 11–14 readout 학습 · Day 21–22 delay tap 기준선 · Day 29–30 기준선 일곱 종류 · Day 33–34 증거 수준</p>
 </div>
 <div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
@@ -879,7 +884,7 @@ window.Quarto = {
 <p><b>7. 정적 device 기준선(다른 종류).</b> 그런데 원시 입력 readout이 Δt를 받을 수 있었던 것은 누군가 시계로 간격을 재서 숫자로 줬기 때문이다. Readout이 <b>두 번째 펄스 순간의 값만</b> 볼 수 있다면? 기억이 없는 보통 저항(지금 걸린 전압에만 따라 전류가 정해지는 device)은 Δt와 상관없이 두 번째 펄스에도 1.00 µA를 낸다. 시험 표본 넷이 모두 같은 값이라 어떤 θ로도 가를 수 없고, 한쪽으로 다 찍으면 2/4 = 50%다. Device(75%)가 이보다 낫다는 것은 '현재 순간만 읽는 조건에서 device의 기억이 쓰였다'는 진단이다. 다만 차이 25%p를 기억의 정확한 몫으로 읽지는 않는다. 부호화·동역학·상태 읽기·readout이 서로 얽혀 있어서 기준선 사이의 차이를 한 부품의 몫으로 딱 떼어 줄 수 없기 때문이다. <span class="src">Singh 2026, p.18</span></p>
 </div>
 <div class="step">
-<p><b>8. 시스템 비용.</b> Device가 기여하는 조건이라도, 전류를 재고 숫자로 바꾸는 회로와 readout까지 넣은 비용이 MCU(센서 옆에 붙는 작은 범용 컴퓨터 칩)의 타이머로 간격을 재는 것보다 싼지는 따로 따져야 한다(<a href="../days/d05.html#ch-competitor">진짜 경쟁자: 저전력 MCU + 작은 신경망</a>). 이 예제에서는 계산하지 않는다.</p>
+<p><b>8. 시스템 비용.</b> Device가 기여하는 조건이라도, 전류를 재고 숫자로 바꾸는 회로와 readout까지 넣은 비용이 MCU(센서 옆에 붙는 작은 범용 컴퓨터 칩)의 타이머로 간격을 재는 것보다 싼지는 따로 따져야 한다(<a href="../days/d05.html#ch-competitor">디지털 기준선: 저전력 MCU + 작은 신경망</a>). 이 예제에서는 계산하지 않는다.</p>
 </div>
 </div>
 </section>
