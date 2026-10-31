@@ -1,7 +1,8 @@
 """S2: 같은 시간 패턴을 기억 없는 모델·R–C 하나·작은 reservoir에 넣고, '끝만 읽어서' 두 패턴을 가를 수 있는지 비교한다.
 
 장비가 필요 없다. 과제는 A2와 같은 모양이다: 12칸 입력 중 높은 값 3개가 앞쪽(0–3칸)이면 0, 뒤쪽(4–7칸)이면 1.
-8–11칸은 두 패턴이 똑같으므로, 8–11칸의 상태만 읽어 맞힌다면 그 상태에 앞 입력의 흔적이 남았다는 뜻이다.
+8–11칸은 두 패턴 모두 낮은 값(0.1)이고, 시행마다 같은 분포의 작은 잡음(표준편차 0.03)만 더해진다.
+배열 값이 똑같지는 않지만 패턴에 따른 차이가 없으므로, 8–11칸의 상태만 읽어 맞힌다면 그 상태에 앞 입력의 흔적이 남았다는 뜻이다.
 
 사용법:
   python s2_memory.py runs/s2
@@ -9,7 +10,8 @@
 
 결과 (출력 폴더):
   s2_table.csv   모델·설정마다 끝만 읽기 균형 정확도(5겹 교차검증 평균 ± 표준편차)와 라벨 섞기 확인 값
-  s2_memory.png  왼쪽: R–C의 τ에 따른 정확도 / 오른쪽: τ가 다른 R–C 셋의 상태 곡선(두 패턴 평균)
+  s2_inputs.png  두 패턴의 입력 예 한 개씩 (읽는 칸 표시)
+  s2_memory.png  (a) R–C의 τ에 따른 정확도 / (b) τ가 다른 R–C 셋의 상태 곡선(두 패턴 평균)
 
 모형의 가정:
   - R–C 하나: x[k] = a·x[k−1] + (1−a)·u[k], a = exp(−1/τ) (한 칸 = 시간 1, τ도 칸 단위).
@@ -129,7 +131,24 @@ def main():
     except ImportError:
         print("matplotlib이 없어 그래프는 건너뜀")
         return
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 3.6))
+    # 먼저 과제 그림: 두 패턴의 입력 한 개씩 (높은 값 3개의 위치만 다르고, 읽는 끝 4칸은 둘 다 낮은 값 + 잡음)
+    fig0, axs = plt.subplots(2, 1, figsize=(6.4, 3.4), sharex=True, sharey=True)
+    for ax, c, tag in zip(axs, (0, 1), ("(a) 패턴 0: 높은 값 3개가 앞쪽(0–3칸)", "(b) 패턴 1: 높은 값 3개가 뒤쪽(4–7칸)")):
+        u = U[np.where(y == c)[0][0]]
+        hi = u > 0.5
+        ax.bar(range(12), u, color=np.where(hi, "#2b59c3", "#b9c6e4"), width=0.75)
+        ax.axvspan(7.5, 11.5, color="#fff3c4", zorder=0)
+        ax.set_title(tag, fontsize=9, loc="left")
+        ax.set_ylabel("입력", fontsize=8)
+        ax.set_ylim(0, 1.25)
+    axs[0].text(9.5, 1.18, "읽는 칸 (8–11): 두 패턴 모두 낮은 값", ha="center", va="top", fontsize=8)
+    axs[1].set_xticks(range(12))
+    axs[1].set_xlabel("칸 (시간 순서)")
+    fig0.tight_layout()
+    fig0.savefig(out / "s2_inputs.png", dpi=130)
+    plt.close(fig0)
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 4.0))
     rc = [r for r in rows if r["system"] == "R-C 하나"]
     ax1.errorbar(taus, [r["end_only_bacc"] for r in rc], yerr=[r["sd"] for r in rc], fmt="o-", color="#2b59c3",
                  capsize=3, label="R–C 하나")
@@ -140,21 +159,30 @@ def main():
     ax1.set_ylim(0.4, 1.02)
     ax1.set_xlabel("R–C 시간상수 τ (칸)")
     ax1.set_ylabel("끝만 읽기 균형 정확도")
+    ax1.set_title("(a) τ에 따른 정확도", fontsize=10, loc="left")
     ax1.legend(fontsize=8, loc="lower center")
     show = [taus[0], taus[len(taus) // 2], taus[-1]]
     cols = ["#9db3e8", "#2b59c3", "#16306b"]
     for tau, c in zip(show, cols):
         X = run_rc(U, tau)[:, :, 0]
-        ax2.plot(range(12), X[y == 0].mean(0), color=c, lw=1.6, label=f"τ = {tau:g}: 앞쪽 패턴")
-        ax2.plot(range(12), X[y == 1].mean(0), color=c, lw=1.6, ls="--", label=f"τ = {tau:g}: 뒤쪽 패턴")
+        ax2.plot(range(12), X[y == 0].mean(0), color=c, lw=1.6)
+        ax2.plot(range(12), X[y == 1].mean(0), color=c, lw=1.6, ls="--")
     ax2.axvspan(7.5, 11.5, color="#fff3c4", zorder=0)
-    ax2.text(9.5, ax2.get_ylim()[1] * 0.95, "읽는 칸", ha="center", va="top", fontsize=8)
+    ax2.text(9.5, ax2.get_ylim()[1] * 0.97, "읽는 칸", ha="center", va="top", fontsize=8)
     ax2.set_xlabel("칸")
     ax2.set_ylabel("R–C 상태 (두 패턴 평균)")
-    ax2.legend(fontsize=7, ncol=1, loc="upper left")
+    ax2.set_title("(b) R–C 상태: 색 = τ, 선 = 패턴", fontsize=10, loc="left")
+    # 범례는 곡선을 가리지 않게 그래프 아래로: 색(τ)과 선 모양(패턴)을 나눠서
+    from matplotlib.lines import Line2D
+    h_tau = [Line2D([], [], color=c, lw=2, label=f"τ = {tau:g}") for tau, c in zip(show, cols)]
+    h_pat = [Line2D([], [], color="0.3", lw=1.6, label="패턴 0 (앞쪽)"),
+             Line2D([], [], color="0.3", lw=1.6, ls="--", label="패턴 1 (뒤쪽)")]
+    ax2.legend(handles=h_tau + h_pat, fontsize=7.5, ncol=5, loc="upper center", bbox_to_anchor=(0.5, -0.2),
+               handlelength=1.6, columnspacing=0.9,
+               frameon=False)
     fig.tight_layout()
     fig.savefig(out / "s2_memory.png", dpi=130)
-    print("그래프:", out / "s2_memory.png")
+    print("그래프:", out / "s2_inputs.png", "/", out / "s2_memory.png")
 
 
 if __name__ == "__main__":

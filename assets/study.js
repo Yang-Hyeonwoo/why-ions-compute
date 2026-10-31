@@ -166,7 +166,12 @@
     return fetch("/api/" + path, Object.assign({ cache: "no-store" }, opts || {})).then(
       function (r) {
         return r.json().then(function (j) {
-          if (!r.ok) throw new Error(j.error || r.status);
+          if (!r.ok) {
+            var err = new Error(j.error || r.status);
+            err.status = r.status;
+            err.data = j;
+            throw err;
+          }
           return j;
         });
       },
@@ -1456,23 +1461,24 @@
     var box = document.getElementById("home-next");
     var data = projData();
     if (!box || !data) return;
-    projLoad().then(function (P) {
+    function draw() {
       box.innerHTML = "";
-      var pick = null,
+      var P = PROJ,
+        pick = null,
         lab = "작게 만들어 보기";
       var nx = P.last ? projNextStep(data, P) : null;
-      if (nx) {
+      if (nx && nx.step && !nx.hold) {
         pick = nx.step;
         lab = nx.label;
       } else {
         var src = cur ? cur.src : "";
+        var free = function (st) {
+          return !st.optional && !projState(P, st.id);
+        };
         pick =
           data.steps.find(function (st) {
-            return st.days.indexOf(src) >= 0 && projState(P, st.id) !== "done";
-          }) ||
-          data.steps.find(function (st) {
-            return projState(P, st.id) !== "done";
-          });
+            return st.days.indexOf(src) >= 0 && free(st);
+          }) || data.steps.find(free);
       }
       if (pick) {
         var a = h("a", "hn-item");
@@ -1487,13 +1493,23 @@
       n.appendChild(h("span", "hn-k", "연구 노트"));
       n.appendChild(h("span", "hn-t", "오늘 이해한 것이나 막힌 점을 한 줄 남기기"));
       box.appendChild(n);
+    }
+    projLoad().then(function () {
+      draw();
+      PVIEWS.push(draw);
     });
   }
 
   // ---------- 프로젝트 단계 진행 ----------
   // 원본: projects/projects.json → 페이지의 #project-data. 기록: 내 컴퓨터(로컬 모드)는 answers/projects.json(서버가 git에 기록),
-  // 공개 사이트는 이 브라우저(localStorage)에만. 공개 배포물에는 들어가지 않는다. 저장이 실패하면 화면을 되돌리고 알린다.
-  var PROJ = null;
+  // 공개 사이트는 이 브라우저(localStorage)에만. 공개 배포물에는 들어가지 않는다.
+  // 저장은 기록 전체가 아니라 단계 하나의 변경(op)으로 보낸다. 다른 탭의 옛 사본이 다른 단계를 지우지 않게 하고,
+  // 같은 단계를 다른 탭이 먼저 바꿨으면 저장하지 않고 최신 기록으로 다시 그린다. 저장은 한 줄로 세워 차례로 보낸다.
+  var PROJ = null,
+    PROJ_ERR = null,
+    PVIEWS = [],
+    PQ = Promise.resolve(),
+    PBC = null;
   var PSTATE = { doing: "진행 중", done: "완료", hold: "보류" };
   function projData() {
     var el = document.getElementById("project-data");
@@ -1504,42 +1520,151 @@
       return null;
     }
   }
-  function projLoad() {
-    if (PROJ) return Promise.resolve(PROJ);
-    var p;
-    if (LOCAL)
-      p = api("projects").catch(function () {
-        return null;
-      });
-    else {
-      var d = null;
-      try {
-        d = JSON.parse(recall("study-projects") || "null");
-      } catch (e) {}
-      p = Promise.resolve(d);
+  function projEmpty() {
+    return { steps: {}, last: null };
+  }
+  // 공개 사이트: 저장된 글을 읽지 못하면(깨진 기록) 빈 기록으로 보지 않고 오류로 다룬다
+  function projReadLocal() {
+    var raw = localStorage.getItem("study-projects");
+    if (!raw) return projEmpty();
+    var d;
+    try {
+      d = JSON.parse(raw);
+    } catch (e) {
+      d = null;
     }
-    return p.then(function (d) {
-      PROJ = d && d.steps ? d : { steps: {}, last: null };
-      return PROJ;
+    if (!d || typeof d.steps !== "object") throw new Error("이 브라우저의 프로젝트 기록을 읽을 수 없어요");
+    return d;
+  }
+  // 읽기 실패는 빈 기록과 구분한다: PROJ_ERR가 있으면 단계 단추를 막고 '다시 불러오기'만 보인다
+  function projLoad(force) {
+    if (PROJ && !force) return Promise.resolve(PROJ);
+    var p = LOCAL
+      ? api("projects")
+      : new Promise(function (res) {
+          res(projReadLocal());
+        });
+    return p.then(
+      function (d) {
+        PROJ = d && d.steps ? d : projEmpty();
+        PROJ_ERR = null;
+        return PROJ;
+      },
+      function (err) {
+        PROJ_ERR = err;
+        if (!PROJ) PROJ = projEmpty();
+        return PROJ;
+      }
+    );
+  }
+  function projRefreshAll() {
+    PVIEWS.forEach(function (f) {
+      f();
     });
   }
-  function projSave(next) {
-    if (LOCAL)
-      return api("projects", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(next),
-      }).then(function (j) {
-        PROJ = j.projects;
-        return PROJ;
-      });
-    try {
-      localStorage.setItem("study-projects", JSON.stringify(next));
-    } catch (e) {
-      return Promise.reject(new Error("이 브라우저가 저장을 막았어요(사생활 보호 창이거나 저장 공간 부족)"));
+  // 다른 탭에서 바뀐 기록 반영: 같은 브라우저의 탭끼리는 저장 직후 BroadcastChannel로 새 기록을 보내고,
+  // 공개 사이트는 storage 이벤트, 로컬은 탭·창으로 돌아올 때 서버에서 다시 읽는다(다른 브라우저에서 바꾼 경우)
+  function projWatch() {
+    var before = JSON.stringify(PROJ) + !!PROJ_ERR;
+    if (window.BroadcastChannel) {
+      PBC = new BroadcastChannel("study-projects");
+      PBC.onmessage = function (ev) {
+        if (!ev.data || typeof ev.data.steps !== "object") return;
+        PROJ = ev.data;
+        PROJ_ERR = null;
+        before = JSON.stringify(PROJ) + false;
+        projRefreshAll();
+      };
     }
-    PROJ = next;
-    return Promise.resolve(PROJ);
+    function reload() {
+      projLoad(true).then(function () {
+        var now = JSON.stringify(PROJ) + !!PROJ_ERR;
+        if (now !== before) projRefreshAll();
+        before = now;
+      });
+    }
+    if (LOCAL) {
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "visible") reload();
+      });
+      window.addEventListener("focus", reload);
+    } else
+      window.addEventListener("storage", function (ev) {
+        if (ev.key === "study-projects") reload();
+      });
+  }
+  // 단계 하나의 변경을 적용 (공개 사이트용, 서버의 apply_project_op와 같은 규칙)
+  function projApply(cur, op) {
+    var e = Object.assign({}, cur.steps[op.step] || {});
+    if (op.op === "state") {
+      var have = e.state || "",
+        prev = op.prev || {};
+      if (have !== op.state && (have !== (prev.state || "") || (e.at || "") !== (prev.at || ""))) throw projConflict(cur);
+      if (op.state && have !== op.state) {
+        e.state = op.state;
+        e.at = op.at;
+      } else if (!op.state) {
+        delete e.state;
+        delete e.at;
+      }
+    } else if (op.op === "log_add") {
+      e.log = (e.log || []).concat([op.item]);
+    } else if (op.op === "log_del") {
+      var logs = (e.log || []).slice(),
+        key = JSON.stringify(op.item),
+        i = logs[op.index] && JSON.stringify(logs[op.index]) === key ? op.index : logs.map(JSON.stringify).indexOf(key);
+      if (i < 0) throw projConflict(cur);
+      logs.splice(i, 1);
+      e.log = logs;
+    }
+    if (e.log && !e.log.length) delete e.log;
+    var next = JSON.parse(JSON.stringify(cur));
+    if (Object.keys(e).length) next.steps[op.step] = e;
+    else delete next.steps[op.step];
+    if (op.op !== "log_del") next.last = { step: op.step, at: op.at };
+    return next;
+  }
+  function projConflict(cur) {
+    var err = new Error("conflict");
+    err.status = 409;
+    err.data = { projects: cur };
+    return err;
+  }
+  // make(): 보내는 순간의 PROJ로 op를 만든다(같은 탭의 앞 저장이 끝난 뒤의 상태 기준)
+  function projOp(make) {
+    function run() {
+      if (PROJ_ERR) return Promise.reject(new Error("기록을 불러오지 못한 상태라 저장하지 않았어요. '다시 불러오기'를 먼저 눌러 주세요"));
+      var op = make(PROJ);
+      op.at = nowStamp();
+      if (LOCAL)
+        return api("project-step", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(op),
+        }).then(function (j) {
+          PROJ = j.projects;
+          return PROJ;
+        });
+      var next;
+      try {
+        next = projApply(projReadLocal(), op);
+      } catch (err) {
+        return Promise.reject(err);
+      }
+      try {
+        localStorage.setItem("study-projects", JSON.stringify(next));
+      } catch (e) {
+        return Promise.reject(new Error("이 브라우저가 저장을 막았어요(사생활 보호 창이거나 저장 공간 부족)"));
+      }
+      PROJ = next;
+      return Promise.resolve(PROJ);
+    }
+    var p = PQ.then(run, run).then(function (P) {
+      if (PBC) PBC.postMessage(P);
+      return P;
+    });
+    PQ = p.catch(function () {});
+    return p;
   }
   function projState(P, id) {
     return (P.steps[id] || {}).state || "";
@@ -1550,7 +1675,53 @@
   function projWhere() {
     return LOCAL ? "기록은 내 컴퓨터에 저장됩니다 (answers/projects.json)." : "공개 사이트: 기록은 이 브라우저에만 저장됩니다. 내 컴퓨터 사이트의 기록과는 따로입니다.";
   }
-  // 계속하기: 마지막으로 만진 단계가 끝나지 않았으면 그 단계, 끝났으면 같은 프로젝트의 다음 미완료 단계
+  function projTag(st) {
+    return st.title.split(". ")[0];
+  }
+  // 보류 이유: 그 단계 기록 중 가장 최근의 '막힌 점'
+  function projReason(P, id) {
+    var logs = (P.steps[id] || {}).log || [];
+    for (var i = logs.length - 1; i >= 0; i--) if (logs[i].stuck) return logs[i].stuck;
+    return "";
+  }
+  // 한 프로젝트의 진행: 필수(optional 아닌) 단계와 선택 단계를 나눠 센다
+  function projSummary(steps, P) {
+    var st = function (s) {
+        return projState(P, s.id);
+      },
+      req = steps.filter(function (s) {
+        return !s.optional;
+      }),
+      opt = steps.filter(function (s) {
+        return s.optional;
+      }),
+      cnt = function (list, k) {
+        return list.filter(function (s) {
+          return st(s) === k;
+        }).length;
+      };
+    return {
+      req: req,
+      opt: opt,
+      touched: steps.some(st),
+      doing: steps.find(function (s) {
+        return st(s) === "doing";
+      }),
+      nextReq: req.find(function (s) {
+        return !st(s);
+      }),
+      nextOpt: opt.find(function (s) {
+        return !st(s);
+      }),
+      holds: steps.filter(function (s) {
+        return st(s) === "hold";
+      }),
+      reqDone: cnt(req, "done"),
+      optDone: cnt(opt, "done"),
+    };
+  }
+  // 계속하기: 마지막으로 만진 단계가 진행 중(또는 표시 없음)이면 그 단계. 완료·보류면 같은 프로젝트에서
+  // 진행 중 → 남은 필수 → 남은 선택 순. 실행할 단계가 없으면 보류 중인지, 필수 단계를 다 끝냈는지 알려 준다.
   function projNextStep(data, P) {
     if (!P.last) return null;
     var st = data.steps.find(function (x) {
@@ -1558,66 +1729,134 @@
     });
     if (!st) return null;
     var s0 = projState(P, st.id);
-    if (s0 !== "done") return { step: st, label: "프로젝트 계속" + (s0 ? " · " + PSTATE[s0] : "") };
-    var same = data.steps.filter(function (x) {
-      return x.project === st.project;
+    if (s0 === "doing" || !s0) return { step: st, label: "프로젝트 계속" + (s0 ? " · 진행 중" : "") };
+    var sm = projSummary(
+      data.steps.filter(function (x) {
+        return x.project === st.project;
+      }),
+      P
+    );
+    var after = s0 === "hold" ? projTag(st) + " 보류 중 · 대신 할 수 있는 단계" : "프로젝트 다음 단계";
+    if (sm.doing) return { step: sm.doing, label: "프로젝트 계속 · 진행 중" };
+    if (sm.nextReq) return { step: sm.nextReq, label: after };
+    var pr = data.projects.find(function (p) {
+      return p.id === st.project;
     });
-    var nx = same.slice(same.indexOf(st) + 1).find(function (x) {
-      return projState(P, x.id) !== "done";
+    var reqHold = sm.holds.filter(function (x) {
+      return !x.optional;
     });
-    return nx ? { step: nx, label: "프로젝트 다음 단계" } : null;
-  }
-  function projClone(P) {
-    return JSON.parse(JSON.stringify(P));
+    if (reqHold.length) return { step: reqHold[0], hold: true, project: pr, label: "남은 필수 단계는 모두 보류 중", reason: projReason(P, reqHold[0].id) };
+    if (sm.nextOpt) return { step: sm.nextOpt, label: "필수 단계 모두 완료 · 원하면 선택 단계" };
+    return { done: true, project: pr, label: "필수 단계 모두 완료" + (sm.holds.length ? " · 선택 단계 보류 중" : "") };
   }
   function nowStamp() {
     var d = new Date();
     return todayIso() + "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
   }
-  function stepBar(st, rerender) {
+  // 저장 실패 메시지: 충돌이면 최신 기록으로 다시 그렸다고 알리고, 그 밖에는 원인을 보인다
+  function projFail(err) {
+    if (err.status === 409 && err.data && err.data.projects) {
+      PROJ = err.data.projects;
+      projRefreshAll();
+      toast("다른 탭(또는 창)에서 먼저 바꾼 기록이 있어 이번 변경은 저장하지 않았어요. 최신 기록으로 다시 그렸으니 확인한 뒤 다시 눌러 주세요", true);
+    } else {
+      var why = String(err.message).replace(/\.+$/, "");
+      if (LOCAL && err.status === 404) why = "서버가 예전 버전이에요. '사이트 열기'를 닫았다가 다시 켜 주세요";
+      toast("저장하지 못했어요: " + why + ". 화면은 저장 전 상태 그대로이고, 쓰던 기록은 남겨 두었어요", true);
+    }
+  }
+  function stepBar(st) {
     var bar = h("div", "pstep");
     bar.dataset.step = st.id;
+    // 작성 중인 기록·펼침·초점은 다시 그려도 남긴다(저장 실패, 다른 단계 단추, 다른 탭 반영 때)
+    var draft = { date: todayIso() },
+      openLog = false,
+      busy = false,
+      lastFk = null;
+    function mark(el, fk) {
+      el.dataset.fk = fk;
+      return el;
+    }
+    function locked() {
+      return busy || !!PROJ_ERR;
+    }
     function draw() {
+      var act = document.activeElement,
+        fk = act && bar.contains(act) && act.dataset.fk ? act.dataset.fk : null,
+        sel = null;
+      if (fk && typeof act.selectionStart === "number") sel = [act.selectionStart, act.selectionEnd];
+      if (lastFk) {
+        fk = lastFk;
+        sel = null;
+      }
+      lastFk = null;
       bar.innerHTML = "";
+      bar.setAttribute("aria-busy", busy ? "true" : "false");
       var cur = projState(PROJ, st.id);
+      if (PROJ_ERR) {
+        var err = h("div", "pstep-err", "기록을 불러오지 못해 지금은 바꿀 수 없어요 (" + String(PROJ_ERR.message).replace(/\.+$/, "") + "). 빈 기록으로 덮어쓰지 않도록 저장을 막았습니다. ");
+        err.setAttribute("role", "status");
+        err.appendChild(
+          mark(
+            button("다시 불러오기", "lab-small", function () {
+              projLoad(true).then(projRefreshAll);
+            }),
+            "reload"
+          )
+        );
+        bar.appendChild(err);
+      }
       var row = h("div", "pstep-row");
-      row.appendChild(h("span", "pstep-k", "이 단계"));
+      row.appendChild(h("span", "pstep-k", st.optional ? "이 단계 (선택)" : "이 단계"));
       var grp = h("div", "pstep-btns");
       grp.setAttribute("role", "group");
       grp.setAttribute("aria-label", st.title + " 진행 상태");
       ["doing", "done", "hold"].forEach(function (k) {
         var b = button(PSTATE[k] + (cur === k ? " ✓" : ""), "pstep-b" + (cur === k ? " on" : ""), function () {
-          if (cur === k && k === "done") return;
+          if (locked() || (cur === k && k === "done")) return;
           set(cur === k ? "" : k);
         });
         b.setAttribute("aria-pressed", cur === k ? "true" : "false");
-        grp.appendChild(b);
+        if (locked()) b.setAttribute("aria-disabled", "true");
+        grp.appendChild(mark(b, "st-" + k));
       });
       row.appendChild(grp);
-      if (cur === "done")
-        row.appendChild(
-          button("완료 취소", "ghost lab-small", function () {
-            set("");
-          })
-        );
-      row.appendChild(h("span", "pstep-meta", st.time + " · " + st.needs));
+      if (cur === "done") {
+        var u = button("완료 취소", "ghost lab-small", function () {
+          if (!locked()) set("");
+        });
+        if (locked()) u.setAttribute("aria-disabled", "true");
+        row.appendChild(mark(u, "undo"));
+      }
+      row.appendChild(h("span", "pstep-meta", busy ? "저장 중…" : st.time + " · " + st.needs));
       bar.appendChild(row);
       if (cur === "done") bar.appendChild(h("div", "pstep-note", "완료 = 실행하고 기록하고 해석함. 성능이 좋았다는 뜻은 아닙니다."));
+      if (cur === "hold") {
+        var why = projReason(PROJ, st.id);
+        bar.appendChild(h("div", "pstep-note", why ? "보류 이유: " + why : "보류 이유를 아래 기록의 '막힌 점'에 적어 두면 나중에 다시 시작하기 쉽습니다."));
+      }
       // 기록(선택): 날짜·설정·관찰·막힌 점·결과 파일 또는 연구 노트 링크. 긴 글은 연구 노트에.
       var logs = (PROJ.steps[st.id] || {}).log || [];
       var det = h("details", "pstep-log");
-      det.appendChild(h("summary", "", logs.length ? "기록 " + logs.length + "개" : "기록 남기기 (선택)"));
+      det.open = openLog;
+      det.addEventListener("toggle", function () {
+        openLog = det.open;
+      });
+      det.appendChild(mark(h("summary", "", logs.length ? "기록 " + logs.length + "개" : "기록 남기기 (선택)"), "sum"));
       logs.forEach(function (lg, i) {
         var it = h("div", "pstep-entry");
         var head = h("div", "pstep-entry-h");
         head.appendChild(h("b", "", lg.date || ""));
         head.appendChild(
-          button("지우기", "ghost lab-small", function () {
-            if (!window.confirm("이 기록을 지울까요?")) return;
-            var next = projClone(PROJ);
-            next.steps[st.id].log.splice(i, 1);
-            save(next, "기록을 지웠어요", true);
-          })
+          mark(
+            button("지우기", "ghost lab-small", function () {
+              if (locked() || !window.confirm("이 기록을 지울까요?")) return;
+              save(function () {
+                return { op: "log_del", step: st.id, index: i, item: lg };
+              }, "기록을 지웠어요");
+            }),
+            "del-" + i
+          )
         );
         it.appendChild(head);
         [["setup", "설정"], ["obs", "관찰"], ["stuck", "막힌 점"], ["link", "결과·노트"]].forEach(function (f) {
@@ -1636,12 +1875,11 @@
         det.appendChild(it);
       });
       var form = h("div", "pstep-form");
-      var fields = {};
       [
         ["date", "날짜", "date"],
         ["setup", "설정 (바꾼 값, 장비, 파일)", "text"],
         ["obs", "관찰", "textarea"],
-        ["stuck", "막힌 점", "text"],
+        ["stuck", cur === "hold" ? "막힌 점 (보류 이유)" : "막힌 점", "text"],
         ["link", "결과 파일 위치나 연구 노트 링크", "text"],
       ].forEach(function (f) {
         var lb = h("label", "pstep-f");
@@ -1649,111 +1887,164 @@
         var inp = f[2] === "textarea" ? h("textarea") : h("input");
         if (f[2] !== "textarea") inp.type = f[2];
         else inp.rows = 2;
-        if (f[0] === "date") inp.value = todayIso();
-        fields[f[0]] = inp;
-        lb.appendChild(inp);
+        inp.value = draft[f[0]] || "";
+        inp.addEventListener("input", function () {
+          draft[f[0]] = inp.value;
+        });
+        lb.appendChild(mark(inp, "f-" + f[0]));
         form.appendChild(lb);
       });
-      form.appendChild(
-        button("기록 추가", "lab-small", function () {
-          var item = {};
-          Object.keys(fields).forEach(function (k) {
-            var v = fields[k].value.trim();
-            if (v) item[k] = v;
-          });
-          if (!item.setup && !item.obs && !item.stuck && !item.link) {
-            toast("설정·관찰·막힌 점·링크 중 하나는 적어 주세요");
-            return;
+      var add = button("기록 추가", "lab-small", function () {
+        if (locked()) return;
+        var item = {};
+        ["date", "setup", "obs", "stuck", "link"].forEach(function (k) {
+          var v = (draft[k] || "").trim();
+          if (v) item[k] = v;
+        });
+        if (!item.setup && !item.obs && !item.stuck && !item.link) {
+          toast("설정·관찰·막힌 점·링크 중 하나는 적어 주세요");
+          return;
+        }
+        save(
+          function () {
+            return { op: "log_add", step: st.id, item: item };
+          },
+          "기록을 남겼어요",
+          function () {
+            draft = { date: todayIso() };
           }
-          var next = projClone(PROJ);
-          var e = (next.steps[st.id] = next.steps[st.id] || {});
-          e.log = (e.log || []).concat([item]);
-          next.last = { step: st.id, at: nowStamp() };
-          save(next, "기록을 남겼어요", true);
-        })
-      );
+        );
+      });
+      if (locked()) add.setAttribute("aria-disabled", "true");
+      form.appendChild(mark(add, "add"));
       det.appendChild(form);
       det.appendChild(h("div", "pstep-where", projWhere() + " 긴 글은 연구 노트에 쓰고 링크만 남기세요."));
       bar.appendChild(det);
+      if (fk) {
+        var el = bar.querySelector('[data-fk="' + fk + '"]');
+        if (el) {
+          el.focus({ preventScroll: true });
+          if (sel)
+            try {
+              el.setSelectionRange(sel[0], sel[1]);
+            } catch (e) {}
+        }
+      }
     }
-    function save(next, msg, keepOpen) {
-      projSave(next)
+    // 성공하면 모든 화면을 최신 기록으로, 실패하면 기록 초안을 그대로 두고 다시 그린다
+    function save(make, msg, onOk) {
+      busy = true;
+      draw();
+      projOp(make)
         .then(function () {
+          busy = false;
+          if (onOk) onOk();
           toast(msg + (LOCAL ? "" : " (이 브라우저에만)"));
-          draw();
-          if (keepOpen) bar.querySelector("details.pstep-log").open = true;
-          if (rerender) rerender();
+          projRefreshAll();
         })
         .catch(function (err) {
-          toast("저장하지 못했어요: " + String(err.message).replace(/\.+$/, "") + ". 화면은 저장 전 상태로 되돌렸습니다.", true);
+          busy = false;
           draw();
+          projFail(err);
         });
     }
     function set(k) {
-      var next = projClone(PROJ);
-      var e = (next.steps[st.id] = next.steps[st.id] || {});
-      if (k) {
-        e.state = k;
-        e.at = nowStamp();
-      } else {
-        delete e.state;
-        delete e.at;
-      }
-      next.last = { step: st.id, at: nowStamp() };
-      save(next, k ? st.title.split(". ")[0] + ": " + PSTATE[k] : "표시를 지웠어요");
+      save(
+        function (P) {
+          var e = P.steps[st.id] || {};
+          return { op: "state", step: st.id, state: k, prev: { state: e.state || "", at: e.at || "" } };
+        },
+        k ? projTag(st) + ": " + PSTATE[k] : "표시를 지웠어요",
+        function () {
+          // 보류하면 이유를 적을 수 있게 기록을 펼치고 '막힌 점'으로
+          if (k === "hold") {
+            openLog = true;
+            lastFk = "f-stuck";
+          }
+        }
+      );
     }
     draw();
+    PVIEWS.push(draw);
     return bar;
   }
   function continueBox(box, data) {
     box.innerHTML = "";
     var nx = projNextStep(data, PROJ);
-    if (nx) {
+    if (nx && nx.done) {
+      var d = h("a", "pj-cont");
+      d.href = OFFSET + "projects/" + nx.project.page;
+      d.appendChild(h("span", "pj-cont-k", nx.project.letter + " · " + nx.label));
+      d.appendChild(h("span", "pj-cont-t", "결과 보기 →"));
+      box.appendChild(d);
+    } else if (nx) {
       var a = h("a", "pj-cont");
       a.href = projHref(nx.step);
       a.appendChild(h("span", "pj-cont-k", nx.label));
       a.appendChild(h("span", "pj-cont-t", nx.step.title + " →"));
       box.appendChild(a);
+      if (nx.hold) box.appendChild(h("div", "pj-where", nx.reason ? "보류 이유: " + nx.reason : "보류 이유가 아직 기록되지 않았어요."));
     }
+    if (PROJ_ERR) box.appendChild(h("div", "pj-where pj-err", "기록을 불러오지 못했어요: " + String(PROJ_ERR.message).replace(/\.+$/, "")));
     box.appendChild(h("div", "pj-where", projWhere()));
   }
   function setupProjects() {
     var data = projData();
-    if (!data || document.getElementById("today-card")) return;
+    if (!data) return;
+    var home = !!document.getElementById("today-card");
     projLoad().then(function () {
+      projWatch();
+      if (home) return;
       var page = (location.pathname.split("/").pop() || "index.html").replace(/\.html?$/, "") + ".html";
-      // 카탈로그(프로젝트 홈): 프로젝트마다 진행 수와 '계속' 단추
+      // 카탈로그(프로젝트 홈): 프로젝트마다 진행(필수·선택 따로)과 '계속' 단추
       function catalog() {
         document.querySelectorAll("[data-project-progress]").forEach(function (el) {
           var pid = el.dataset.projectProgress;
-          var steps = data.steps.filter(function (x) {
-            return x.project === pid;
+          var pr = data.projects.find(function (p) {
+            return p.id === pid;
           });
-          var n = { doing: 0, done: 0, hold: 0 };
-          steps.forEach(function (x) {
-            var k = projState(PROJ, x.id);
-            if (k) n[k]++;
-          });
-          el.textContent = n.done || n.doing || n.hold ? "단계 " + steps.length + "개 중 완료 " + n.done + " · 진행 중 " + n.doing + " · 보류 " + n.hold : "";
+          var sm = projSummary(
+            data.steps.filter(function (x) {
+              return x.project === pid;
+            }),
+            PROJ
+          );
           var go = document.querySelector('[data-project-go="' + pid + '"]');
-          var open =
-            steps.find(function (x) {
-              return projState(PROJ, x.id) === "doing";
-            }) ||
-            (n.done
-              ? steps.find(function (x) {
-                  return projState(PROJ, x.id) !== "done";
-                })
-              : null);
-          if (go && open) {
-            go.href = projHref(open);
-            go.textContent = open.title.split(". ")[0] + " 계속 →";
+          if (go && !go.dataset.first) go.dataset.first = go.textContent + "|" + go.getAttribute("href");
+          var first = go ? go.dataset.first.split("|") : null;
+          var allReq = sm.reqDone === sm.req.length;
+          var txt = "",
+            target = null,
+            label = "";
+          if (!sm.touched) txt = "";
+          else if (allReq) {
+            txt = "필수 단계 " + sm.req.length + "개 모두 완료" + (sm.opt.length ? " · 선택 " + sm.optDone + "/" + sm.opt.length : "") + (sm.holds.length ? " · 보류 " + sm.holds.length : "");
+            label = "완료 · 결과 보기 →";
+          } else {
+            txt = "필수 " + sm.reqDone + "/" + sm.req.length + " 완료" + (sm.doing ? " · 진행 중 " + projTag(sm.doing) : "") + (sm.holds.length ? " · 보류 " + sm.holds.map(projTag).join(", ") : "");
+            target = sm.doing || sm.nextReq;
+            if (target) label = projTag(target) + (sm.doing ? " 계속 →" : " 다음 →");
+            else {
+              target = sm.holds[0];
+              label = "보류 중인 " + projTag(target) + " 보기 →";
+              txt += " · 남은 필수 단계는 모두 보류 중";
+            }
+          }
+          el.textContent = txt;
+          if (!go) return;
+          if (!sm.touched) {
+            go.textContent = first[0];
+            go.setAttribute("href", first[1]);
+          } else {
+            go.textContent = label;
+            go.href = target ? projHref(target) : pr.page;
           }
         });
         var cb = document.getElementById("pj-continue");
         if (cb) continueBox(cb, data);
       }
       catalog();
+      PVIEWS.push(catalog);
       // 프로젝트 상세 페이지: 단계 머리마다 상태 단추, 맨 위에 계속하기
       var mine = data.steps.filter(function (x) {
         return x.page === page;
@@ -1764,13 +2055,18 @@
         if (!el) return;
         var head = el.matches("h1,h2,h3,h4") ? el : el.querySelector(":scope > h2, :scope > h3");
         if (!head) return;
-        head.parentNode.insertBefore(stepBar(st, catalog), head.nextSibling);
+        head.parentNode.insertBefore(stepBar(st), head.nextSibling);
       });
       var title = document.getElementById("title-block-header");
-      if (title && PROJ.last) {
+      if (title) {
         var top = h("div", "pj-continue pj-continue-top");
-        continueBox(top, data);
         title.parentNode.insertBefore(top, title.nextSibling);
+        var drawTop = function () {
+          if (PROJ.last || PROJ_ERR) continueBox(top, data);
+          else top.innerHTML = "";
+        };
+        drawTop();
+        PVIEWS.push(drawTop);
       }
     });
   }
@@ -3784,10 +4080,10 @@
       };
       var send = uw(ev * MSG * e);
       return [
-        { k: "A", name: "Raw signal 전부 송신", bps: fs * b, parts: [["ADC", uw(fs * ADC)], ["MCU", uw(fs * MCU)], ["무선", uw(fs * b * e)]] },
+        { k: "A", name: "Raw signal 전부 송신", bps: fs * b, parts: [["ADC", uw(fs * ADC)], ["MCU", uw(fs * MCU)], ["무선", uw(fs * b * e)], ["MCU 잠듦", SLEEP]] },
         { k: "B", name: "MCU가 매 샘플 처리, 사건만 송신", bps: ev * MSG, parts: [["ADC", uw(fs * ADC)], ["MCU", uw(fs * MCU)], ["무선", send], ["MCU 잠듦", SLEEP]] },
         { k: "C", name: "Near-sensor device가 지켜보다 사건 때만 깨움", bps: ev * MSG, parts: [["늘 켜진 전처리", ALWAYS[st.always]], ["ADC", uw(ev * ADC)], ["MCU", uw(ev * MCU)], ["무선", send], ["MCU 잠듦", SLEEP]] },
-        { k: "D", name: "MCU + 작은 신경망 (1초에 한 번 판정)", bps: ev * MSG, parts: [["ADC", uw(fs * ADC)], ["신경망", NN[st.nn]], ["무선", send], ["MCU 잠듦", SLEEP]] },
+        { k: "D", name: "MCU + 작은 신경망 (1초에 한 번 판정, 알림은 최대 1초 늦음)", bps: ev * MSG, parts: [["ADC", uw(fs * ADC)], ["신경망", NN[st.nn]], ["무선", send], ["MCU 잠듦", SLEEP]] },
       ].map(function (r) {
         r.total = r.parts.reduce(function (a, p) {
           return a + p[1];
@@ -3848,8 +4144,11 @@
     root.appendChild(ctl);
 
     var out = h("div", "bud-out");
-    out.setAttribute("aria-live", "polite");
     root.appendChild(out);
+    var live = h("p", "bud-msg");
+    live.setAttribute("aria-live", "polite");
+    root.appendChild(live);
+    root.appendChild(h("p", "bud-note", "교육용 계산입니다. 네 설계가 같은 일을 같은 정확도로 한다고 가정했고(지연은 D만 최대 1초), 센서·증폭기 전력은 넣지 않았습니다. 막대는 로그 눈금입니다."));
     root.appendChild(
       button("처음 값으로", "ghost lab-small", function () {
         st = JSON.parse(JSON.stringify(DEF));
@@ -3868,7 +4167,8 @@
       out.innerHTML = "";
       var tb = h("table", "bud-table");
       var hd = h("tr");
-      ["설계", "보내는 데이터", "평균 전력", "구성 (큰 순서)"].forEach(function (t) {
+      var HEAD = ["설계", "보내는 데이터", "평균 전력", "구성 (큰 순서)"];
+      HEAD.forEach(function (t) {
         hd.appendChild(h("th", "", t));
       });
       var thead = h("thead");
@@ -3881,8 +4181,11 @@
         c0.appendChild(h("b", "", r.k + " "));
         c0.appendChild(document.createTextNode(r.name));
         tr.appendChild(c0);
-        tr.appendChild(h("td", "bud-num", r.bps.toLocaleString("ko-KR", { maximumFractionDigits: 1 }) + " bit/s"));
+        var c1 = h("td", "bud-num", r.bps.toLocaleString("ko-KR", { maximumFractionDigits: 1 }) + " bit/s");
+        c1.dataset.label = HEAD[1];
+        tr.appendChild(c1);
         var c2 = h("td", "bud-num");
+        c2.dataset.label = HEAD[2];
         c2.appendChild(h("b", "", fmtUw(r.total) + " µW"));
         var bar = h("span", "bud-bar");
         // 로그 눈금 막대: 0.1 µW → 0, 최댓값 → 100%
@@ -3894,17 +4197,17 @@
         var parts = r.parts.slice().sort(function (a, b) {
           return b[1] - a[1];
         });
-        tr.appendChild(
-          h(
-            "td",
-            "bud-parts",
-            parts
-              .map(function (p) {
-                return p[0] + " " + Math.round((100 * p[1]) / r.total) + "%";
-              })
-              .join(" · ")
-          )
+        var c3 = h(
+          "td",
+          "bud-parts",
+          parts
+            .map(function (p) {
+              return p[0] + " " + Math.round((100 * p[1]) / r.total) + "%";
+            })
+            .join(" · ")
         );
+        c3.dataset.label = HEAD[3];
+        tr.appendChild(c3);
         body.appendChild(tr);
       });
       tb.appendChild(body);
@@ -3916,8 +4219,7 @@
       var msg = "이 가정에서 가장 작은 것은 " + best.k + "(" + fmtUw(best.total) + " µW)입니다. ";
       msg += C < D ? "C가 D보다 " + (D / C).toFixed(1) + "배 작습니다." : "D(MCU + 작은 신경망)가 C보다 " + (C / D).toFixed(1) + "배 작습니다.";
       if (B < C) msg += " MCU가 매 샘플을 처리하는 B도 C보다 작습니다.";
-      out.appendChild(h("p", "bud-msg", msg));
-      out.appendChild(h("p", "bud-note", "교육용 계산입니다. 네 설계가 같은 일을 같은 정확도로 한다고 가정했고, 센서·증폭기 전력은 넣지 않았습니다. 막대는 로그 눈금입니다."));
+      live.textContent = "A " + fmtUw(rows[0].total) + ", B " + fmtUw(B) + ", C " + fmtUw(C) + ", D " + fmtUw(D) + " µW. " + msg;
     }
     draw();
   };

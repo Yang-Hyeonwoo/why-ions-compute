@@ -837,12 +837,12 @@ window.Quarto = {
 </div>
 </section>
 <section id="ch-edge-insensor" class="level3">
-<h3 class="anchored" data-anchor-id="ch-edge-insensor">학습 구간 2. Edge, in-sensor, always-on: 에너지 사슬의 어디를 끊나</h3>
+<h3 class="anchored" data-anchor-id="ch-edge-insensor">학습 구간 2. Edge, near-sensor·in-sensor, always-on: 에너지 사슬의 어디를 끊나</h3>
 <div class="goal">
 <p><strong>상황.</strong> 심전도 패치는 전지 하나로 며칠을 버텨야 합니다. 내 이온 device를 넣으면 어느 부품의 전력이 줄까요? 논문의 "전력 99.9% 절감"은 어디를 센 숫자일까요?</p>
 <p><strong>왜 지금?</strong> Device 하나의 에너지(fJ 같은 숫자)만으로는 패치 전체 전력을 말할 수 없습니다. 센서 → 변환 → 처리 → 송신 가운데 어느 부품이 큰지부터 알아야 합니다.</p>
 <p><strong>어디에 쓰이나?</strong> 논문의 전력 숫자가 "어느 부품을 셌나"를 묻고, 내 device가 어느 부품의 일을 줄이는지 주장하는 데 씁니다.</p>
-<p><strong>끝나면 할 수 있는 것.</strong> 한 번의 에너지와 1초당 횟수로 평균 전력을 계산한다. 엣지 처리·in-sensor 처리·always-on이 각각 어느 부품을 줄이는지 숫자로 말한다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> 한 번의 에너지와 1초당 횟수로 평균 전력을 계산한다. 엣지 처리·near-sensor/in-sensor 처리·always-on이 각각 어느 부품을 줄이는지 숫자로 말한다.</p>
 </div>
 <p>이 구간은 네 걸음입니다. 센서 노드의 네 부품 → 평균 전력을 세는 규칙 → 세 가지 설계 비교 → 논문 숫자 읽기.</p>
 <section id="s-sensor-chain" class="level4">
@@ -1101,7 +1101,7 @@ window.Quarto = {
 <p>한 칸을 풀어 보면, A의 무선 = 12,000 bit/s × 50 nJ/bit = 600,000 nJ/s = 600 µW입니다(1,000 nJ/s = 1 µW). C의 합계는 0.002 + 0.04 + 1.6 + 1 ≈ 2.6 µW라 반올림해 3 µW입니다. <span class="tag tag-calc">계산</span></p>
 <p>★ <span class="key">A → B에서는 무선이 600 µW → 1.6 µW로 줄고(보내는 bit 수가 375분의 1), B → C에서는 매 샘플의 ADC·MCU(21 µW)가 사건 때만 일하게 줄어듭니다.</span></p>
 <p><strong>모형이 넣지 않은 것.</strong> 무선을 실측 쪽(약 400 nJ/bit)으로 잡으면 A의 송신 몫은 더 커집니다. 그리고 이 모형은 센서·증폭기 전력(세 설계에서 같다고 봄)과, 부품이 잠든 동안의 대기 전력을 뺐습니다. 뒤의 것을 넣어 봅니다. MCU가 잠든 동안 쓰는 1.2 µW(데이터시트 값)를 B와 C에 더하면 B ≈ 24 µW, C ≈ 4 µW가 되어, 차이가 약 9배에서 약 6배로 줄어듭니다. <span class="tag tag-calc">계산</span> 일을 줄일수록 대기 전력이 바닥을 정한다는 교훈이 여기서도 나옵니다.</p>
-<p><strong>핵심.</strong> ★ <span class="key">송신이 지배하면 엣지 처리가, 매 샘플의 ADC·MCU가 지배하면 in-sensor 전처리가 효과를 냅니다.</span> 일하는 몫을 줄일수록 남는 것은 always-on 부분과 잠든 부품의 대기 전력입니다.</p>
+<p><strong>핵심.</strong> ★ <span class="key">송신이 지배하면 엣지 처리가, 매 샘플의 ADC·MCU가 지배하면 ADC 앞의 전처리(near-sensor 또는 in-sensor)가 효과를 냅니다.</span> 일하는 몫을 줄일수록 남는 것은 always-on 부분과 잠든 부품의 대기 전력입니다.</p>
 <p><span id="s-always-on"></span><strong>Always-on을 숫자로.</strong> 사건이 아주 드문 노드라면 평균 전력은 거의 대기 전력입니다. 대기 1 µW인 노드에 사건이 하루 100번 오고 사건마다 10 µJ을 쓴다면, 사건 몫은 100 × 10 µJ ÷ 86,400 s ≈ 0.012 µW로 대기 1 µW의 약 1%입니다. <span class="tag tag-calc">계산</span> ★ <span class="key">이런 노드에서는 사건당 에너지보다 대기 전력을 줄이는 것이 평균 전력을 정합니다.</span></p>
 <div class="quiz" data-day="d05" data-set="2-check"></div>
 </section>
@@ -1155,7 +1155,7 @@ Raw signal (원시 신호)
 In-sensor computing
 </dt>
 <dd>
-센서 자체 또는 바로 옆에서 처리를 끝내 ADC·메모리·processor로 가는 데이터를 줄이는 방식 <span class="src">Singh 2026, p.1</span>.
+센서 <b>자체</b>가 감지하면서 처리까지 해(센서와 처리기가 한 몸) ADC·메모리·processor로 가는 데이터를 줄이는 방식 <span class="src">Singh 2026, p.1</span>. 이 사이트에서는 센서 바로 옆 회로가 ADC 앞에서 처리하는 near-sensor computing과 구분해 씁니다. 논문에 따라 둘을 묶어 in-sensor라 부르기도 하니, 논문을 읽을 때는 device가 센서 자체인지 옆인지 확인하세요.
 </dd>
 <dt>
 Always-on
@@ -1199,7 +1199,7 @@ Baseline (기준선)
 <div class="quiz" data-day="d05" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>센서 노드 = 센서 → ADC → MCU → 무선. 엣지 처리는 송신을, in-sensor 전처리는 ADC·MCU의 일을 줄인다. <span class="key">어느 부품이 지배하느냐가 효과를 정한다</span>(세 설계: 621 → 23 → 3 µW, 모형 계산).</li>
+<li>센서 노드 = 센서 → ADC → MCU → 무선. 엣지 처리는 송신을, ADC 앞의 전처리(near-sensor·in-sensor)는 ADC·MCU의 일을 줄인다. <span class="key">어느 부품이 지배하느냐가 효과를 정한다</span>(세 설계: 621 → 23 → 3 µW, 모형 계산).</li>
 <li>한 번의 일의 에너지 자릿수: ADC 변환 약 1–2 nJ, MCU 박자당 약 0.3 nJ, 무선 1 bit 약 16 nJ(송신 순간)–400 nJ(실측). <span class="key">평균 전력 = Σ(1초당 횟수 × 한 번의 에너지) + 늘 나가는 대기·always-on 전력</span>.</li>
 <li>이온 device의 자리는 센서 뒤·ADC 앞(near-sensor) 또는 센서 자체(in-sensor)다. <span class="key">이득은 ADC·MCU가 사건 때만 일하는 데서 나오고, 대가는 늘 켜진 device·읽기 회로의 대기 전력이다</span>.</li>
 <li>Zhong 2022는 디지털 RC 대비 1.1% 손실, 전력 99.9% 절감을 주장한다 <span class="src">Zhong 2022, p.678–679</span>. <span class="key">기준선이 디지털 RC이고, 시스템에 MCU가 있으며, 전력은 저자의 추정값이다</span>.</li>
@@ -1237,14 +1237,17 @@ Baseline (기준선)
 </ol>
 <p>★ <span class="key">이 값(약 4 µW)은 앞의 설계 C(센서 곁 전처리, 약 3 µW)와 같은 자릿수입니다.</span> 그래서 "뉴로모픽 device는 µW로 동작한다"는 말만으로는 이긴다고 할 수 없고, 같은 과제·같은 조건에서 이 숫자와 나란히 놓아야 뜻이 생깁니다. <span class="tag tag-interp">해석</span> 두 숫자 모두 가정값으로 만든 <strong>교육용 계산</strong>이지 실측 비교가 아닙니다 <span class="tag tag-calc">계산</span>. 공정하게 비교하려면 측정 경계(어느 부품까지 넣었나), 하는 일, 판정 빈도, 정확도 요구가 같아야 합니다. 아래 비교 도구에서 가정을 바꾸면 MCU 쪽이 더 작아지는 경우도 직접 볼 수 있습니다.</p>
 <p><span id="s-budget-lab"></span><strong>직접 바꿔 보기: 네 설계의 평균 전력.</strong> 앞의 세 설계(A·B·C)에 방금 센 MCU + 작은 신경망(D)을 더해, 같은 규칙(1초 횟수 × 한 번의 에너지 + 대기 전력)으로 셉니다. 손잡이를 하나씩 바꾸고, 어느 부품이 합계를 정하는지 보세요.</p>
+<p>★ <span class="key">도구의 처음 값은 본문 표와 <strong>조금 다릅니다</strong></span>. 본문 표(621 · 약 23 · 약 3 µW)는 단순하게 보려고 MCU가 잠든 동안의 1.2 µW를 뺐고, 도구는 네 설계 모두에 이것을 더합니다. 그래서 도구는 A 약 622 · B 23.8 · C 3.84 µW로 1.2 µW씩 큽니다. D(6.8 µW)는 바로 위에서 센 '판정 3 + 잠듦 1.2 µW'에 매 샘플 ADC 1 µW와 사건 송신 1.6 µW를 더한 값입니다. 같은 값을 모두에 더하므로 순서는 바뀌지 않지만, C·D처럼 작은 설계에서는 합계의 큰 몫(C에서 약 30%)이 됩니다.</p>
 <div class="lab" data-lab="budget">
 <p class="lab-model-line"><b>교육용 모형</b>입니다. 특정 센서 노드를 잰 값이 아니며, 숫자는 데이터시트·실측으로 자릿수만 맞춘 가정값입니다. 단위: µW(마이크로와트), bit/s.</p>
 <details class="lab-model"><summary>모형의 가정과 입력 범위</summary>
 <ul>
-<li>평균 전력 = 부품마다 (1초 횟수 × 한 번의 에너지)의 합 + 대기 전력. ADC 1 nJ/변환(bit 수와 무관하다고 둠), MCU 20 nJ/샘플, 사건 하나 16 bit, MCU가 잠든 동안 1.2 µW(B·C·D에 더함).</li>
+<li>평균 전력 = 부품마다 (1초 횟수 × 한 번의 에너지)의 합 + 대기 전력. ADC 1 nJ/변환(bit 수와 무관하다고 둠), MCU 20 nJ/샘플, 사건 하나 16 bit. MCU는 일하는 순간 말고는 잠들므로 잠든 전력 1.2 µW를 <b>네 설계 모두에</b> 똑같이 더합니다(A도 샘플 사이에는 잠듦).</li>
+<li>C의 ADC·MCU는 사건 때만 깨어 샘플 하나를 변환·처리한다고 둡니다. 사건 앞뒤 파형을 몇십 샘플 읽어야 하는 과제라면 C의 ADC·MCU 몫이 그만큼 커집니다.</li>
+<li>D는 ADC가 샘플을 메모리에 바로 쌓고(DMA, MCU를 깨우지 않음) MCU는 1초에 한 번 깨어 그동안 모인 1,000 샘플로 판정 한 번을 합니다. 그 1초 안의 사건을 모두 찾아 사건마다 16 bit를 보낸다고 두므로 '사건 수' 손잡이는 판정 횟수와 따로 움직입니다. 대신 D의 알림은 최대 1초 늦고, B·C는 사건 직후에 나갑니다.</li>
 <li>무선은 payload bit 수에 비례한다고 둡니다(16·50·400 nJ/bit). 패킷 머리말·재전송·수신 대기 같은 고정 비용은 따로 넣지 않았습니다.</li>
 <li>C의 '늘 켜진 전처리'(device + 읽기 회로)와 D의 '판정 한 번'은 아직 잰 값이 없는 가정입니다.</li>
-<li>네 설계가 같은 일을 같은 정확도로 한다고 둡니다. 실제로는 정확도·지연이 다를 수 있고, 그러면 이 비교는 공정하지 않습니다. 센서·증폭기 전력은 네 설계에서 같다고 보고 뺐습니다.</li>
+<li>네 설계가 같은 일을 같은 정확도로 한다고 둡니다. 실제로는 B의 단순 규칙, C의 device, D의 신경망이 맞히는 정도가 다를 수 있고 D만 알림이 늦습니다. 그러면 전력만으로는 공정한 비교가 아닙니다. 센서·증폭기 전력은 네 설계에서 같다고 보고 뺐습니다.</li>
 </ul>
 </details>
 <div class="lab-static">
@@ -1262,7 +1265,7 @@ Baseline (기준선)
 <tr class="odd">
 <td>A Raw signal 전부 송신</td>
 <td>12,000 bit/s</td>
-<td>621 µW (무선 97%)</td>
+<td>약 622 µW (무선 96%)</td>
 </tr>
 <tr class="even">
 <td>B MCU가 매 샘플 처리</td>
@@ -1451,7 +1454,7 @@ Baseline (기준선)
 </tr>
 <tr class="even">
 <td>센서 노드</td>
-<td>센서 → ADC → MCU → 무선. Edge는 송신을, in-sensor는 ADC·MCU의 일을, always-on 설계는 대기 전력을 다룬다</td>
+<td>센서 → ADC → MCU → 무선. Edge는 송신을, near-sensor·in-sensor는 ADC·MCU의 일을, always-on 설계는 대기 전력을 다룬다</td>
 <td>세 설계 모형, 가정값은 데이터시트·실측으로 자릿수만 맞춤; <span class="src">Singh 2026, p.1</span></td>
 </tr>
 <tr class="odd">
@@ -1503,7 +1506,7 @@ Baseline (기준선)
 <h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
 <ol type="1">
 <li>"적합한 문제"를 조건의 <strong>순서</strong>로 적었나? 한 문장("저전력이 필요한 곳")으로 끝나지 않았나?</li>
-<li>센서 노드의 네 부품을 적고, edge·in-sensor·always-on이 각각 어디를 줄이는지 구별했나? 평균 전력을 '한 번의 에너지 × 횟수 + 대기 전력'으로 셌나?</li>
+<li>센서 노드의 네 부품을 적고, edge·near-sensor/in-sensor·always-on이 각각 어디를 줄이는지 구별했나? 평균 전력을 '한 번의 에너지 × 횟수 + 대기 전력'으로 셌나?</li>
 <li>폴더의 수치 하나(예: Zhong 2022)를 들 때 기준선의 종류와 시스템 경계를 함께 적었나?</li>
 <li>센서 옆 디지털 기준선(예: MCU + 작은 신경망)을 적고, 항목별로 누가 유리한지 조건을 붙였나?</li>
 <li>Bio-interface의 이점에 안정성·변환 효율이라는 조건을 붙였나?</li>
@@ -1550,7 +1553,7 @@ Baseline (기준선)
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>
 <div class="done-box" data-day="d05">
   <div class="done-state" role="status" aria-live="polite"></div>
-  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>적합성 질문 사다리 여섯 단, 평균 전력 = 한 번의 에너지 × 횟수 + 대기 전력, 엣지·in-sensor·always-on, 센서 옆 디지털 기준선(MCU + 작은 신경망)</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>적합성 질문 사다리 여섯 단, 평균 전력 = 한 번의 에너지 × 횟수 + 대기 전력, 엣지·near-sensor/in-sensor·always-on, 센서 옆 디지털 기준선(MCU + 작은 신경망)</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
   <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
   <div class="btn-row local-only">
     <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>

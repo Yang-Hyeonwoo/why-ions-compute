@@ -745,7 +745,7 @@ C\,\frac{dV_{out}}{dt} = \frac{V_{in} - V_{out}}{R}
 <ul>
 <li>기호: <span class="math inline">\(V_{in}\)</span> 입력 전압 [V], <span class="math inline">\(V_{out}\)</span> capacitor 전압 = 출력 [V], <span class="math inline">\(dV_{out}/dt\)</span>는 "출력이 1초에 몇 V씩 변하나".</li>
 <li>단위: Ω × F = (V/A) × (C/V) = C/A = s. 그래서 <span class="math inline">\(\tau\)</span>는 초입니다.</li>
-<li>결과의 뜻: 남은 차이 <span class="math inline">\(V_{in} - V_{out}\)</span>가 <span class="math inline">\(\tau\)</span>마다 <span class="math inline">\(e^{-1}\)</span> ≈ 0.37배가 됩니다. "<span class="math inline">\(\tau\)</span> 동안 남은 차이의 63%가 메워진다"와 같은 말입니다. 예: <span class="math inline">\(R\)</span> = 1 MΩ, <span class="math inline">\(C\)</span> = 100 nF이면 <span class="math inline">\(\tau\)</span> = 10⁶ × 10⁻⁷ = 0.1 s.</li>
+<li>결과의 뜻: 남은 차이 <span class="math inline">\(V_{in} - V_{out}\)</span>가 <span class="math inline">\(\tau\)</span>마다 <span class="math inline">\(e^{-1}\)</span> ≈ 0.37배가 됩니다. "<span class="math inline">\(\tau\)</span>마다 그때 남아 있던 차이의 63%가 메워진다"와 같은 말이고, 처음부터 세면 1τ에 처음 차이의 63%를 이동(37% 남음)합니다. 예: <span class="math inline">\(R\)</span> = 1 MΩ, <span class="math inline">\(C\)</span> = 100 nF이면 <span class="math inline">\(\tau\)</span> = 10⁶ × 10⁻⁷ = 0.1 s.</li>
 </ul>
 <p><span id="s-rc-step"></span><strong>한 걸음씩 적으면 Day 15–16·Day 27–28의 식이 된다.</strong> 측정 장비나 컴퓨터는 값을 <span class="math inline">\(\Delta t\)</span>마다 읽습니다. 한 걸음 동안 <span class="math inline">\(V_{in}\)</span>이 일정하면, 남은 차이 <span class="math inline">\(V_{out} - V_{in}\)</span>은 그 걸음 동안 <span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>배로 줄어 남습니다. 그래서 <span class="math inline">\(V_{out}(t+\Delta t) - V_{in} = d\,[V_{out}(t) - V_{in}]\)</span>이고, 정리하면</p>
 <p><span class="math display">\[

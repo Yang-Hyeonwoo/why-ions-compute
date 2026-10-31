@@ -1,5 +1,6 @@
 {
   "_설명": "프로젝트 카탈로그·단계·진행 표시의 단일 원본. tools/projects_build.py가 projects/_catalog.qmd를 만들고, study.js가 각 페이지의 단계 머리(anchor)에 상태 단추를 붙인다. 단계 id는 진행 기록의 키이므로 바꾸지 않는다.",
+  "_days": "steps[].days는 화면의 Day 번호가 아니라 lessons/_dNN.qmd의 원본 id다 (d05 = Day 9, d06 = Day 10, d04 = Day 7–8, d07 = Day 11–12, d09 = Day 15–16). 홈의 '작게 만들어 보기'가 지금 단위의 원본 id와 맞춰 고른다. optional: true인 단계는 선택이라 필수 경로 진행에 넣지 않는다. verify_short·preview는 카드 밖에 보이는 짧은 검증 배지와 결과 미리보기다.",
   "projects": [
     {
       "id": "s",
@@ -16,9 +17,11 @@
       "cost": "없음",
       "materials": "소재·소자 필요 없음",
       "verify": "코드 실행 확인 (깨끗한 Python 환경에서 두 명령과 그래프 생성)",
+      "verify_short": "코드 실행 확인",
+      "preview": {"src": "img/s2-memory.png", "label": "결과 예 (모의)", "alt": "R–C의 τ에 따른 정확도가 산 모양으로 나오는 그래프와 상태 곡선"},
       "steps": [
         {"id": "s1", "anchor": "s1", "title": "S1. 같은 신호, 다른 bit·샘플링률", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d05"]},
-        {"id": "s2", "anchor": "s2", "title": "S2. 기억 없음 vs R–C vs 작은 reservoir", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d03", "d04", "d09", "d10"]}
+        {"id": "s2", "anchor": "s2", "title": "S2. 기억 없음 vs R–C vs 작은 reservoir", "time": "30–45분", "needs": "PC", "kind": "모의", "days": ["d04", "d07", "d09"]}
       ]
     },
     {
@@ -36,12 +39,14 @@
       "cost": "연구실 기존 장비 활용 (추가 구매 거의 없음)",
       "materials": "A1부터 ITO / 이온성 고분자 두 층 / ITO 소자 (현재 A·B의 공통 플랫폼)",
       "verify": "A0 모의 명령 실행 확인 · 실제 소스미터 연결은 미검증",
+      "verify_short": "모의 확인 · 실측 미검증",
+      "preview": {"src": "img/ex-mock-wrr-rc.png", "label": "결과 예 (모의 장비)", "alt": "모의 RC에 쓰기–쉬기–읽기 전압을 걸었을 때의 전압과 전류 그래프"},
       "steps": [
         {"id": "a0", "anchor": "a0", "title": "A0. 모의 장비로 한 바퀴 (장비 없음)", "time": "30–60분", "needs": "PC", "kind": "모의", "days": ["d06", "d08"]},
         {"id": "a0r", "anchor": "a0r", "title": "A0R. 실제 소스미터로 저항과 RC", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"]},
         {"id": "a1", "anchor": "a1", "title": "A1. 소자 특성 측정", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"]},
         {"id": "a2", "anchor": "a2", "title": "A2. 끝만 읽어도 앞을 기억하는가", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"]},
-        {"id": "a3", "anchor": "a3", "title": "A3. (선택) ECG 박동으로 확장", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"]}
+        {"id": "a3", "anchor": "a3", "title": "A3. (선택) ECG 박동으로 확장", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}
       ]
     },
     {
@@ -59,6 +64,7 @@
       "cost": "부품 구매 필요 — 가격은 구매 시 확인 (미확인)",
       "materials": "B1–B4는 저항·RC로 진행, B5부터 A의 소자",
       "verify": "펌웨어 컴파일·업로드·실물 동작 모두 미검증 · 회로는 설계안",
+      "verify_short": "설계안 · 실물 미검증",
       "steps": [
         {"id": "b1", "anchor": "b1", "title": "B1. ESP32에 첫 코드 올리기", "time": "1–2시간", "needs": "ESP32 보드, USB 케이블 (없으면 Wokwi 시뮬레이터)", "kind": "실물", "days": []},
         {"id": "b2", "anchor": "b2", "title": "B2–B3. DAC로 전압 만들고 ADC로 읽기", "time": "반나절", "needs": "ESP32, DAC·ADC 모듈", "kind": "실물", "days": ["d05"]},
@@ -66,7 +72,7 @@
         {"id": "b5", "anchor": "b5", "title": "B5. 보드로 레저버 데이터 모으기", "time": "하루", "needs": "B4 회로, 소자", "kind": "실물", "days": ["d08"]},
         {"id": "b6", "anchor": "b6", "title": "B6. PC 없이 판단하고 알리기", "time": "하루", "needs": "B5 결과", "kind": "실물", "days": ["d08"]},
         {"id": "b7", "anchor": "b7", "title": "B7. 시간과 에너지를 공정하게 재기", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"]},
-        {"id": "b8", "anchor": "b8", "title": "B8. ECG 신호로 (도전)", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"]}
+        {"id": "b8", "anchor": "b8", "title": "B8. (선택) ECG 신호로 도전", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}
       ]
     },
     {
@@ -84,6 +90,7 @@
       "cost": "C3부터 부품 구매 — 가격 미확인",
       "materials": "A·B와 다른 압력용 구조가 필요 (별도 가설). 없으면 모의 분석부터",
       "verify": "모의 분석 실행 확인 · 압력용 소자·tapper 실물 미검증",
+      "verify_short": "모의 확인 · 실물 미검증",
       "steps": [
         {"id": "c0", "anchor": "c0", "title": "C0. 눌러서 반응이 있는가", "time": "1–2시간 (모의 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 모의)", "kind": "실측", "days": []},
         {"id": "c2", "anchor": "c1", "title": "C1–C2. 소자 구조와 대조군", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": []},

@@ -1420,6 +1420,12 @@ a.pj-cont { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0
 main h3.pj-title { font-size: 1.02rem; line-height: 1.45; margin: 0.05rem 0 0; padding: 0; border: 0; }
 .pj-title a { color: var(--ink); text-decoration: none; }
 .pj-title a:hover { color: var(--accent); }
+.pj-badges { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.pj-badge { font-size: 0.72rem; line-height: 1.4; padding: 0.08rem 0.5rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: #fff; }
+.pj-badge.pj-verify { border-color: var(--accent-line); background: var(--accent-soft); color: var(--accent-strong); font-weight: 600; }
+figure.pj-preview { margin: 0; }
+.pj-preview img { display: block; width: 100%; height: 8.5rem; object-fit: contain; border: 1px solid var(--line-soft); border-radius: 8px; background: #fff; }
+.pj-preview figcaption { margin-top: 0.2rem; font-size: 0.72rem; color: var(--subtle); }
 .pj-out { font-size: 0.88rem; margin: 0; color: var(--text); line-height: 1.6; }
 .pj-k { display: block; font-size: 0.72rem; font-weight: 700; color: var(--subtle); letter-spacing: 0.02em; }
 .pj-facts { margin: 0; display: grid; gap: 0.2rem; font-size: 0.82rem; }
@@ -1444,6 +1450,10 @@ table.pj-ext { font-size: 0.86rem; }
 .pstep .pstep-b.on { border-color: var(--accent); background: var(--accent); color: #fff; }
 .pstep-meta { margin-left: auto; color: var(--subtle); font-size: 0.78rem; }
 .pstep-note { margin-top: 0.35rem; color: var(--muted); font-size: 0.78rem; }
+.pstep-err { margin-bottom: 0.45rem; color: var(--warn-ink, #8a4b00); font-size: 0.8rem; }
+.pj-where.pj-err { color: var(--warn-ink, #8a4b00); }
+.pstep [aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+.pstep[aria-busy="true"] .pstep-meta { color: var(--accent-strong); }
 main details.pstep-log { margin: 0.4rem 0 0; padding: 0; border: 0; background: none; }
 main details.pstep-log > summary { font-size: 0.8rem; color: var(--accent-strong); cursor: pointer; }
 .pstep-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.4rem 0.7rem; margin-top: 0.5rem; align-items: end; }
@@ -1467,7 +1477,15 @@ table.bud-table th, table.bud-table td { padding: 0.35rem 0.4rem; border-bottom:
 .bud-parts { font-size: 0.78rem; color: var(--muted); }
 .bud-msg { font-weight: 600; color: var(--ink); margin: 0.5rem 0 0.2rem; }
 .bud-note { font-size: 0.78rem; color: var(--subtle); margin: 0 0 0.5rem; }
-@media (max-width: 575.98px) { table.bud-table { font-size: 0.76rem; } table.bud-table th, table.bud-table td { padding: 0.3rem 0.25rem; } }
+/* 좁은 화면: 표를 설계마다 한 칸(카드)으로. 글자를 줄이지 않고 칸 이름을 앞에 붙인다 */
+@media (max-width: 575.98px) {
+  table.bud-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.bud-table, table.bud-table tbody, table.bud-table tr, table.bud-table td { display: block; width: 100%; }
+  table.bud-table tr { padding: 0.45rem 0; border-bottom: 1px solid var(--line); }
+  table.bud-table td { border: 0; padding: 0.1rem 0; }
+  table.bud-table td[data-label]::before { content: attr(data-label) " · "; color: var(--subtle); font-size: 0.76rem; font-weight: 600; }
+  table.bud-table td.bud-num { white-space: normal; }
+}
 /* 로고: 좁은 화면에서 짧은 워드마크 */
 .navbar-title .brand-short { display: none; }
 @media (max-width: 299.98px) {

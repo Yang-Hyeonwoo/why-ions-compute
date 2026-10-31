@@ -7,7 +7,7 @@
   python s1_bits.py runs/s1 --fs 25,50,100,250,500 --bits 3,4,6,8,12 --seed 1
 
 결과 (출력 폴더):
-  s1_table.csv   설정마다 데이터량(bit/s)·양자화 한 눈금·박동 판정(맞힘·놓침·헛것)·시각 오차
+  s1_table.csv   설정마다 데이터량(bit/s)·양자화 한 눈금·박동 판정(맞힘·놓침·오검출(없는데 있다고 판단))·시각 오차
   s1_waves.png   같은 2초 구간을 세 설정으로 숫자로 만든 모양 (회색 = 원래 신호)
 
 모형의 가정 (실제 장치와 다른 점):
@@ -120,10 +120,10 @@ def main():
         w.writerows(rows)
 
     print(f"합성 신호 {a.seconds:.0f}초, 실제 박동 {len(truth)}개 (seed {a.seed})")
-    print(f"{'샘플링률':>8} {'bit':>4} {'데이터량':>11} {'한 눈금':>9}  맞힘 놓침 헛것  시각 오차")
+    print(f"{'샘플링률':>8} {'bit':>4} {'데이터량':>11} {'한 눈금':>9}  맞힘 놓침 오검출  시각 오차")
     for r in rows:
         print(f"{r['fs_Hz']:>6} Hz {r['bits']:>4} {r['data_bit_s']:>7} bit/s {r['lsb_uV']:>7} uV"
-              f"  {r['hit']:>4} {r['miss']:>4} {r['false']:>4}  {r['time_err_ms']:>5} ms")
+              f"  {r['hit']:>4} {r['miss']:>4} {r['false']:>6}  {r['time_err_ms']:>5} ms")
     print(f"비교: 박동마다 사건 하나(16 bit)만 보내면 약 {event_bps:.0f} bit/s (payload만, 무선 비용 제외)")
     print("표:", out / "s1_table.csv")
 
