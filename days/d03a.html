@@ -826,11 +826,11 @@ window.Quarto = {
 <div class="quiz" data-day="d03" data-set="1-end"></div>
 <div class="keypoints">
 <ul>
-<li>정의: 효율은 작업당 에너지 <span class="math inline">\(E = P /\)</span> 처리율. "20 W"는 <span class="math inline">\(P\)</span>다.</li>
-<li>왜 함정인가: 작업이 같지 않고, 포함 범위가 다르다. 뇌 20 W는 폴더 밖 문헌으로 확인되는 뇌 전체의 대사 전력이다(몸 산소·열량의 약 20%) <span class="tag tag-fact">확인</span> (Raichle &amp; Gusnard 2002; Balasubramanian 2021). Zhu 2025는 W를 효율이라 적고 <span class="src">Zhu 2025, p.2</span>, Roadmap은 몸 전체 100 W를 적는다 <span class="src">Roadmap 2026, p.8103</span>.</li>
-<li>성립 조건: 같은 작업, 같은 포함 범위, 같은 단위에서만 <span class="math inline">\(E\)</span> 비교가 된다.</li>
-<li>쉬는 뇌도 에너지를 쓰는 이유: 늘 열린 통로로 이온이 새어 Na⁺·K⁺ 농도 차가 줄고, 펌프가 ATP로 되돌린다(한 번에 Na⁺ 3개 밖, K⁺ 2개 안). 이것이 생물 쪽 대기 전력이다.</li>
-<li>쉬어 가기: 여기까지가 "숫자 읽는 법"이다. 다음 구간은 단어 공부다.</li>
+<li>정의: <span class="key">효율은 작업당 에너지 <span class="math inline">\(E = P /\)</span> 처리율</span>. "20 W"는 <span class="math inline">\(P\)</span>다.</li>
+<li>왜 함정인가: 작업이 같지 않고, 포함 범위가 다르다. <span class="key">뇌 20 W는 폴더 밖 문헌으로 확인되는 뇌 전체의 대사 전력이다</span>(몸 산소·열량의 약 20%) <span class="tag tag-fact">확인</span> (Raichle &amp; Gusnard 2002; Balasubramanian 2021). Zhu 2025는 W를 효율이라 적고 <span class="src">Zhu 2025, p.2</span>, Roadmap은 몸 전체 100 W를 적는다 <span class="src">Roadmap 2026, p.8103</span>.</li>
+<li>성립 조건: <span class="key">같은 작업, 같은 포함 범위, 같은 단위에서만 <span class="math inline">\(E\)</span> 비교가 된다</span>.</li>
+<li>쉬는 뇌도 에너지를 쓰는 이유: <span class="key">늘 열린 통로로 이온이 새어 Na⁺·K⁺ 농도 차가 줄고, 펌프가 ATP로 되돌린다</span>(한 번에 Na⁺ 3개 밖, K⁺ 2개 안). 이것이 생물 쪽 대기 전력이다.</li>
+<li>쉬어 가기: <span class="key">여기까지가 "숫자 읽는 법"이다</span>. 다음 구간은 단어 공부다.</li>
 </ul>
 </div>
 </section>
@@ -1101,11 +1101,11 @@ u_{\text{다음}} = 0.9 \times u_{\text{지금}} + 6 \times (\text{그 1 ms 동�
 <div class="quiz" data-day="d03" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>네 축은 독립이다: 표현(디지털/아날로그), 동작 방식(동기/비동기, 클록), 동시 처리(직렬/병렬), 입력 처리(항시/사건 구동). 여러 뉴로모픽 칩이 사건 기반 비동기 통신을 쓰고 <span class="src">Kudithipudi 2025, p.803</span>, Loihi처럼 디지털이면서 비동기 통신을 쓰는 칩이 있다 <span class="src">Roadmap 2026, p.8132, 8135</span>.</li>
-<li>유닛 = 입력을 받아 상태를 갖고 조건이 맞으면 발화하는 계산 단위 하나(모형 뉴런 하나). 클록은 박자, 사건은 처리할 변화(입력 사건)나 발화(출력 사건)다. 그림 4에서 1초마다 확인하면 10번, 바뀔 때만 알리면 2번 계산하지만 감지 회로의 대기 전력은 남고, 동기식도 클록 게이팅 등으로 일을 줄일 수 있다.</li>
-<li>희소 분산 부호화 = 적은 수만 켜지되 '어느 유닛들'의 조합이 정보(8개 중 2개 = 28가지, 조합 수는 상한일 뿐). 구조적 희소성은 연결이 적은 것, 활성 희소성은 연결은 있어도 지금 활동이 적은 것 <span class="src">Roadmap 2026, p.8126–8127</span>. 유닛 활동률 = 발화한 칸 ÷ 전체 칸(그림 8: 5/80)이며 세는 창을 함께 적고, Day 3–4의 스위칭 활동률과 섞지 않는다.</li>
-<li>AER = 발화한 유닛의 주소만 공용 통로로(8개면 3 bit, 3번 = 011). 동시 발화는 중재로 순서를 정하고, 시각은 도착 시각 또는 타임스탬프(구현마다). 희소할 때만 이득이다(그림 8의 10초: 15 bit vs 80 bit).</li>
-<li>스파이크 = 문턱(약 −55 mV)을 넘으면 Na⁺가 들어와 약 +30 mV로 솟고 K⁺가 나가 되돌아오는 약 1 ms·약 100 mV의 펄스. LIF = 적분·leak·문턱·발화와 리셋: 같은 세 입력도 1·2·3 ms에 오면 발화하고(16.26 mV) 1·6·11 ms에 오면 발화하지 않는다(11.64 mV). 0.9는 Δt = 1 ms의 decay factor(<span class="math inline">\(= e^{-\Delta t/\tau}\)</span>, τ ≈ 9.5 ms)라 Δt를 바꾸면 바뀐다. Co-location = 저장된 물체가 계산도 한다.</li>
+<li><span class="key">네 축은 독립이다</span>: 표현(디지털/아날로그), 동작 방식(동기/비동기, 클록), 동시 처리(직렬/병렬), 입력 처리(항시/사건 구동). 여러 뉴로모픽 칩이 사건 기반 비동기 통신을 쓰고 <span class="src">Kudithipudi 2025, p.803</span>, Loihi처럼 디지털이면서 비동기 통신을 쓰는 칩이 있다 <span class="src">Roadmap 2026, p.8132, 8135</span>.</li>
+<li><span class="key">유닛 = 입력을 받아 상태를 갖고 조건이 맞으면 발화하는 계산 단위 하나(모형 뉴런 하나)</span>. 클록은 박자, 사건은 처리할 변화(입력 사건)나 발화(출력 사건)다. 그림 4에서 1초마다 확인하면 10번, 바뀔 때만 알리면 2번 계산하지만 감지 회로의 대기 전력은 남고, 동기식도 클록 게이팅 등으로 일을 줄일 수 있다.</li>
+<li><span class="key">희소 분산 부호화 = 적은 수만 켜지되 '어느 유닛들'의 조합이 정보</span>(8개 중 2개 = 28가지, 조합 수는 상한일 뿐). 구조적 희소성은 연결이 적은 것, 활성 희소성은 연결은 있어도 지금 활동이 적은 것 <span class="src">Roadmap 2026, p.8126–8127</span>. 유닛 활동률 = 발화한 칸 ÷ 전체 칸(그림 8: 5/80)이며 세는 창을 함께 적고, Day 3–4의 스위칭 활동률과 섞지 않는다.</li>
+<li>AER = 발화한 유닛의 주소만 공용 통로로(8개면 3 bit, 3번 = 011). 동시 발화는 중재로 순서를 정하고, 시각은 도착 시각 또는 타임스탬프(구현마다). <span class="key">희소할 때만 이득이다</span>(그림 8의 10초: 15 bit vs 80 bit).</li>
+<li>스파이크 = 문턱(약 −55 mV)을 넘으면 Na⁺가 들어와 약 +30 mV로 솟고 K⁺가 나가 되돌아오는 약 1 ms·약 100 mV의 펄스. <span class="key">LIF = 적분·leak·문턱·발화와 리셋</span>: 같은 세 입력도 1·2·3 ms에 오면 발화하고(16.26 mV) 1·6·11 ms에 오면 발화하지 않는다(11.64 mV). 0.9는 Δt = 1 ms의 decay factor(<span class="math inline">\(= e^{-\Delta t/\tau}\)</span>, τ ≈ 9.5 ms)라 Δt를 바꾸면 바뀐다. Co-location = 저장된 물체가 계산도 한다.</li>
 </ul>
 </div>
 </section>

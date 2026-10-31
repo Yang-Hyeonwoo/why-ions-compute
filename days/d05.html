@@ -833,10 +833,10 @@ window.Quarto = {
 <div class="quiz" data-day="d05" data-set="1-end"></div>
 <div class="keypoints">
 <ul>
-<li>적합성은 한 문장이 아니라 여섯 질문의 순서다: 실시간으로 하나씩 → 희소·낮은 대기 전력 → 근사를 견딤 → τ가 신호와 맞음 → 다음 부품도 아날로그(또는 변환이 드묾) → MCU + 작은 신경망보다 나음.</li>
-<li>'실시간으로 하나씩'의 '예'는 "batch로 이득을 보기 어렵다"까지다. Weight가 칩 안에 들어가는 작은 모델이면 보통 컴퓨터도 하나씩 처리해 손해가 없으므로, 이동이 병목인지는 MCU와의 비교에서 따진다.</li>
-<li>심전도 패치의 첫 "모름"은 '사건을 골라내는 앞단의 대기 전력'이고, τ는 device를 재야 답이 난다.</li>
-<li>대기 전력과 다음 부품은 설계로 바꾸고, 희소성·근사 허용·신호 빠르기는 과제가 정하며, τ는 재료로 그 목표에 맞춘다.</li>
+<li><span class="key">적합성은 한 문장이 아니라 여섯 질문의 순서다</span>: 실시간으로 하나씩 → 희소·낮은 대기 전력 → 근사를 견딤 → τ가 신호와 맞음 → 다음 부품도 아날로그(또는 변환이 드묾) → MCU + 작은 신경망보다 나음.</li>
+<li>'실시간으로 하나씩'의 '예'는 "batch로 이득을 보기 어렵다"까지다. Weight가 칩 안에 들어가는 작은 모델이면 보통 컴퓨터도 하나씩 처리해 손해가 없으므로, <span class="key">이동이 병목인지는 MCU와의 비교에서 따진다</span>.</li>
+<li>심전도 패치의 첫 "모름"은 '<span class="key">사건을 골라내는 앞단의 대기 전력</span>'이고, τ는 device를 재야 답이 난다.</li>
+<li>대기 전력과 다음 부품은 설계로 바꾸고, <span class="key">희소성·근사 허용·신호 빠르기는 과제가 정하며, τ는 재료로 그 목표에 맞춘다</span>.</li>
 </ul>
 </div>
 </section>
@@ -1202,10 +1202,10 @@ Baseline (기준선)
 <div class="quiz" data-day="d05" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>센서 노드 = 센서 → ADC → MCU → 무선. 엣지 처리는 송신을, in-sensor 전처리는 ADC·MCU의 일을 줄인다. 어느 부품이 지배하느냐가 효과를 정한다(세 설계: 621 → 23 → 3 µW, 모형 계산).</li>
-<li>한 번의 일의 에너지 자릿수: ADC 변환 약 1–2 nJ, MCU 박자당 약 0.3 nJ, 무선 1 bit 약 16 nJ(송신 순간)–400 nJ(실측). 평균 전력 = Σ(1초당 횟수 × 한 번의 에너지) + 늘 나가는 대기·always-on 전력.</li>
-<li>이온 device의 자리는 센서 뒤·ADC 앞(near-sensor) 또는 센서 자체(in-sensor)다. 이득은 ADC·MCU가 사건 때만 일하는 데서 나오고, 대가는 늘 켜진 device·읽기 회로의 대기 전력이다.</li>
-<li>Zhong 2022는 디지털 RC 대비 1.1% 손실, 전력 99.9% 절감을 주장한다 <span class="src">Zhong 2022, p.678–679</span>. 기준선이 디지털 RC이고, 시스템에 MCU가 있으며, 전력은 저자의 추정값이다.</li>
+<li>센서 노드 = 센서 → ADC → MCU → 무선. 엣지 처리는 송신을, in-sensor 전처리는 ADC·MCU의 일을 줄인다. <span class="key">어느 부품이 지배하느냐가 효과를 정한다</span>(세 설계: 621 → 23 → 3 µW, 모형 계산).</li>
+<li>한 번의 일의 에너지 자릿수: ADC 변환 약 1–2 nJ, MCU 박자당 약 0.3 nJ, 무선 1 bit 약 16 nJ(송신 순간)–400 nJ(실측). <span class="key">평균 전력 = Σ(1초당 횟수 × 한 번의 에너지) + 늘 나가는 대기·always-on 전력</span>.</li>
+<li>이온 device의 자리는 센서 뒤·ADC 앞(near-sensor) 또는 센서 자체(in-sensor)다. <span class="key">이득은 ADC·MCU가 사건 때만 일하는 데서 나오고, 대가는 늘 켜진 device·읽기 회로의 대기 전력이다</span>.</li>
+<li>Zhong 2022는 디지털 RC 대비 1.1% 손실, 전력 99.9% 절감을 주장한다 <span class="src">Zhong 2022, p.678–679</span>. <span class="key">기준선이 디지털 RC이고, 시스템에 MCU가 있으며, 전력은 저자의 추정값이다</span>.</li>
 </ul>
 </div>
 </section>
@@ -1286,11 +1286,11 @@ Baseline (기준선)
 <div class="quiz" data-day="d05" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>뉴로모픽이 적합한 자리에서 경쟁자는 GPU가 아니라 MCU + 작은 신경망이다 <span class="tag tag-interp">해석</span>. 근거: <span class="src">Liang 2024, p.202</span> <span class="src">Kudithipudi 2025, p.802</span>.</li>
-<li>작은 신경망 = MCU에서 weight 수백–수천 개로 '곱해서 더하기'를 몇 층 하는 프로그램. Weight 1,000개 망을 1초에 한 번 돌리면 약 3 µW + 잠든 1.2 µW [계산, 박자 수는 가정].</li>
-<li>Weight 1 kB는 칩 안에 들어가므로 먼 이동(칩 밖 DRAM)이 없다. 뉴로모픽은 칩 안의 짧고 싼 이동보다 더 아껴야 이긴다.</li>
-<li>MCU가 유리: 프로그램 가능성, 정밀도·재현성, 성숙도. 조건부로 뉴로모픽이 유리: 실시간 시계열(τ 정합), 변환 생략(아날로그 다음 부품), 생체·수계 환경.</li>
-<li>공정한 비교는 같은 과제·데이터·정확도 목표·시스템 경계에서 전력과 지연을 재는 것이다. 폴더에 완전한 예는 없다.</li>
+<li>뉴로모픽이 적합한 자리에서 <span class="key">경쟁자는 GPU가 아니라 MCU + 작은 신경망이다</span> <span class="tag tag-interp">해석</span>. 근거: <span class="src">Liang 2024, p.202</span> <span class="src">Kudithipudi 2025, p.802</span>.</li>
+<li>작은 신경망 = MCU에서 weight 수백–수천 개로 '곱해서 더하기'를 몇 층 하는 프로그램. <span class="key">Weight 1,000개 망을 1초에 한 번 돌리면 약 3 µW + 잠든 1.2 µW</span> [계산, 박자 수는 가정].</li>
+<li>Weight 1 kB는 칩 안에 들어가므로 먼 이동(칩 밖 DRAM)이 없다. <span class="key">뉴로모픽은 칩 안의 짧고 싼 이동보다 더 아껴야 이긴다</span>.</li>
+<li>MCU가 유리: 프로그램 가능성, 정밀도·재현성, 성숙도. 조건부로 뉴로모픽이 유리: <span class="key">실시간 시계열(τ 정합), 변환 생략(아날로그 다음 부품), 생체·수계 환경</span>.</li>
+<li>공정한 비교는 <span class="key">같은 과제·데이터·정확도 목표·시스템 경계에서 전력과 지연을 재는 것이다</span>. 폴더에 완전한 예는 없다.</li>
 </ul>
 </div>
 </section>
@@ -1368,9 +1368,9 @@ Baseline (기준선)
 <div class="quiz" data-day="d05" data-set="4-check"></div>
 <div class="keypoints">
 <ul>
-<li>Bio-interface는 "전자 device로도 할 수 있는 일을 싸게"가 아니라 "전자 device가 어려운 환경"이라 따로 다룬다. Aluru의 제안 <span class="src">Aluru 2026, 요약면</span>, Pei 2026의 예(자가치유, pH 입력, 0.02 s 회복) <span class="src">Pei 2026, p.1199</span>.</li>
-<li>조건: 안정성(이온 시스템은 다기능성·계산 능력·안정성에서 전자에 뒤처짐 <span class="src">Wang 2025, p.329</span>)과 이온–전자 변환 효율 <span class="src">Roadmap 2026, p.8126</span>. 우열이 아니라 분업 <span class="src">Zhu 2025, p.14</span>.</li>
-<li>부적합: batch 가능한 큰 계산, 정확한 산술, 자주 바뀌는 기능, 희소하지 않은 고정밀 입력 <span class="tag tag-interp">해석</span>.</li>
+<li>Bio-interface는 <span class="key">"전자 device로도 할 수 있는 일을 싸게"가 아니라 "전자 device가 어려운 환경"이라 따로 다룬다</span>. Aluru의 제안 <span class="src">Aluru 2026, 요약면</span>, Pei 2026의 예(자가치유, pH 입력, 0.02 s 회복) <span class="src">Pei 2026, p.1199</span>.</li>
+<li>조건: 안정성(이온 시스템은 다기능성·계산 능력·안정성에서 전자에 뒤처짐 <span class="src">Wang 2025, p.329</span>)과 이온–전자 변환 효율 <span class="src">Roadmap 2026, p.8126</span>. <span class="key">우열이 아니라 분업</span> <span class="src">Zhu 2025, p.14</span>.</li>
+<li>부적합: <span class="key">batch 가능한 큰 계산, 정확한 산술, 자주 바뀌는 기능, 희소하지 않은 고정밀 입력</span> <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>

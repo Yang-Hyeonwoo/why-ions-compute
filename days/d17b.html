@@ -783,10 +783,10 @@ device 상태가 바뀌거나 돌아오는 시간 / 입력에서 답까지 부�
 <div class="quiz" data-day="d17" data-set="4-end"></div>
 <div class="keypoints">
 <ul>
-<li>지연시간은 시작·끝을 정해야 하는 시스템의 양이다. Device의 고유 응답 시간을 그대로 시스템 지연이라 부르지 않는다 <span class="src">Singh 2026, p.14, 19</span>.</li>
-<li>실시간 처리: 신호 길이는 공통, device가 맞으면 추가 지연은 읽기·readout(이 예에서 0.6 ms)뿐 <span class="tag tag-assume">가정</span>.</li>
-<li>재생: τ = 50 ms device는 박동당 750.6 ms(입력 500 + 초기화 250), 하루 기록 약 18시간. 지연 × 대기 전력이 예산의 89% [가정, 계산].</li>
-<li>이온–전자 경계는 클록·버퍼·오차 허용 설계를 요구한다 <span class="src">Roadmap 2026, p.8126</span>. 남은 질문: 논문의 에너지 숫자들은 어느 경계에서 잰 것인가? → ‘같은 경계 비교’ 구간.</li>
+<li>지연시간은 시작·끝을 정해야 하는 시스템의 양이다. <span class="key">Device의 고유 응답 시간을 그대로 시스템 지연이라 부르지 않는다</span> <span class="src">Singh 2026, p.14, 19</span>.</li>
+<li>실시간 처리: 신호 길이는 공통, <span class="key">device가 맞으면 추가 지연은 읽기·readout(이 예에서 0.6 ms)뿐</span> <span class="tag tag-assume">가정</span>.</li>
+<li>재생: τ = 50 ms device는 박동당 750.6 ms(입력 500 + 초기화 250), 하루 기록 약 18시간. <span class="key">지연 × 대기 전력이 예산의 89%</span> [가정, 계산].</li>
+<li><span class="key">이온–전자 경계는 클록·버퍼·오차 허용 설계를 요구한다</span> <span class="src">Roadmap 2026, p.8126</span>. 남은 질문: 논문의 에너지 숫자들은 어느 경계에서 잰 것인가? → ‘같은 경계 비교’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -877,10 +877,10 @@ device 상태가 바뀌거나 돌아오는 시간 / 입력에서 답까지 부�
 <div class="quiz" data-day="d17" data-set="5-end"></div>
 <div class="keypoints">
 <ul>
-<li>비교의 네 조건: 같은 일을 세는 단위(W와 J를 섞지 않음), 같은 경계, 측정/추정 구분, 같은 과제·정확도 <span class="src">Singh 2026, p.12, 14</span> <span class="tag tag-interp">해석</span>.</li>
-<li>6.7 fJ/스파이크, 0.5 nJ/펄스, 0.07 nW/접합, 22 µW/제스처는 서로 다른 경계·단위의 숫자다 <span class="src">Roadmap 2026, p.8119</span> <span class="src">Singh 2026, p.22</span> <span class="src">Zhong 2022, p.678</span>.</li>
-<li>Zhong 2022의 전력 절감 요인은 ADC 제거와 작은 reservoir라는 시스템 구조였다 <span class="src">Zhong 2022, p.679</span>. peripheral circuit은 시스템 전력의 최대 70%일 수 있다 <span class="src">Roadmap 2026, p.8130</span>.</li>
-<li>남은 질문: 그래서 논문에 무엇을 요구하고, 내 측정에서 무엇을 재야 하나? → ‘비용 보고 점검’ 구간.</li>
+<li>비교의 네 조건: <span class="key">같은 일을 세는 단위(W와 J를 섞지 않음), 같은 경계, 측정/추정 구분, 같은 과제·정확도</span> <span class="src">Singh 2026, p.12, 14</span> <span class="tag tag-interp">해석</span>.</li>
+<li>6.7 fJ/스파이크, 0.5 nJ/펄스, 0.07 nW/접합, 22 µW/제스처는 <span class="key">서로 다른 경계·단위의 숫자다</span> <span class="src">Roadmap 2026, p.8119</span> <span class="src">Singh 2026, p.22</span> <span class="src">Zhong 2022, p.678</span>.</li>
+<li>Zhong 2022의 <span class="key">전력 절감 요인은 ADC 제거와 작은 reservoir라는 시스템 구조였다</span> <span class="src">Zhong 2022, p.679</span>. peripheral circuit은 시스템 전력의 최대 70%일 수 있다 <span class="src">Roadmap 2026, p.8130</span>.</li>
+<li>남은 질문: <span class="key">그래서 논문에 무엇을 요구하고, 내 측정에서 무엇을 재야 하나?</span> → ‘비용 보고 점검’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -946,9 +946,9 @@ E_{\text{inference, 실효}} = E_{\text{inference}} + \frac{E_{\text{보정}}}{N
 <div class="quiz" data-day="d17" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>보정 비용은 보정 사이의 inference 수로 나눠 얹는다. 10 mJ을 86,400번에 나누면 0.12 µJ, 600번에 나누면 16.7 µJ [가정, 계산]. 안정성이 곧 에너지 항목이다.</li>
-<li>논문의 비용 주장에는 단위·경계·측정/추정·부호화 경로·지연의 정의·비교 대상·보정 빈도를 묻는다 <span class="src">Singh 2026, p.12, 20</span> <span class="tag tag-interp">해석</span>.</li>
-<li>반론에 대한 답: 주장의 강도를 증거 수준에 맞춘다 <span class="src">Singh 2026, p.19</span>. "저전력"을 주장할 때만 시스템 경계 비교가 필요하다 <span class="tag tag-interp">해석</span>.</li>
+<li>보정 비용은 보정 사이의 inference 수로 나눠 얹는다. 10 mJ을 86,400번에 나누면 0.12 µJ, 600번에 나누면 16.7 µJ [가정, 계산]. <span class="key">안정성이 곧 에너지 항목이다</span>.</li>
+<li>논문의 <span class="key">비용 주장에는 단위·경계·측정/추정·부호화 경로·지연의 정의·비교 대상·보정 빈도를 묻는다</span> <span class="src">Singh 2026, p.12, 20</span> <span class="tag tag-interp">해석</span>.</li>
+<li>반론에 대한 답: 주장의 강도를 증거 수준에 맞춘다 <span class="src">Singh 2026, p.19</span>. <span class="key">"저전력"을 주장할 때만 시스템 경계 비교가 필요하다</span> <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>

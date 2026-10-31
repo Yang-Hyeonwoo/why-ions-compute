@@ -775,10 +775,10 @@ window.Quarto = {
 <div class="quiz" data-day="d02" data-set="4-end"></div>
 <div class="keypoints">
 <ul>
-<li>에너지(J)는 일의 양, 전력(W)은 초당 에너지. 연산당 에너지(J/op)와 접근당 에너지(J/access)는 같은 단위라 비교할 수 있다.</li>
-<li>RAM 접근이 덧셈보다 약 10⁴배 크다(Horowitz 2014의 45 nm 값 <span class="tag tag-fact">확인</span>; 자릿수가 요점). 1,000×1,000 MVM 한 번(입력 벡터 하나): 연산 4 µJ vs RAM 읽기 1.3 mJ (weight마다 RAM 읽기 1번으로 단순화한 어림, 325배).</li>
-<li>왜: 배선도 capacitor라 길수록 <span class="math inline">\(C\)</span>가 크다. 멀리 옮기면 긴 배선과 칩 사이 입출력 회로를 충방전해야 한다 <span class="src">Horowitz 2014, p.11</span> <span class="tag tag-interp">해석</span>.</li>
-<li>성립 조건: weight가 재사용되지 않고 칩 안에 머물지 못하는 계산(배치 1 + 큰 weight)에서 이동이 지배한다. 남은 질문: 재사용을 늘리면 어디까지 줄고, 시간은? → 다음 'memory wall' 구간.</li>
+<li>에너지(J)는 일의 양, 전력(W)은 초당 에너지. <span class="key">연산당 에너지(J/op)와 접근당 에너지(J/access)는 같은 단위라 비교할 수 있다</span>.</li>
+<li><span class="key">RAM 접근이 덧셈보다 약 10⁴배 크다</span>(Horowitz 2014의 45 nm 값 <span class="tag tag-fact">확인</span>; 자릿수가 요점). 1,000×1,000 MVM 한 번(입력 벡터 하나): 연산 4 µJ vs RAM 읽기 1.3 mJ (weight마다 RAM 읽기 1번으로 단순화한 어림, 325배).</li>
+<li>왜: 배선도 capacitor라 길수록 <span class="math inline">\(C\)</span>가 크다. <span class="key">멀리 옮기면 긴 배선과 칩 사이 입출력 회로를 충방전해야 한다</span> <span class="src">Horowitz 2014, p.11</span> <span class="tag tag-interp">해석</span>.</li>
+<li>성립 조건: <span class="key">weight가 재사용되지 않고 칩 안에 머물지 못하는 계산(배치 1 + 큰 weight)에서 이동이 지배한다</span>. 남은 질문: 재사용을 늘리면 어디까지 줄고, 시간은? → 다음 'memory wall' 구간.</li>
 </ul>
 </div>
 </section>
@@ -1117,11 +1117,11 @@ Memory-bound / compute-bound
 </div>
 <div class="keypoints">
 <ul>
-<li>연산 밀도 = 연산량 ÷ 이동량 [op/byte]. 2×2 배치 1: 8 op ÷ 16 byte = 0.5(weight만), 입력·출력까지 세면 0.25. 큰 층(1,000×1,000)은 weight만 세도 거의 같다(0.499).</li>
-<li>배치 B = 함께 처리하는 입력 벡터 수. W를 DRAM에서 한 번 가져와 칩 안에 둘 수 있으면 weight만 센 밀도가 0.5B(2×2 배치 4: 2, 모두 세면 0.4).</li>
-<li>시간 ≈ max(연산량/연산 속도, 이동량/대역폭) <span class="tag tag-interp">해석</span>. 밀도가 장치의 경계(연산 속도 ÷ 대역폭)보다 낮으면 memory-bound. 같은 배치 1 MVM도 장치 A(경계 10)에서는 memory-bound, 장치 B(경계 0.1)에서는 compute-bound.</li>
-<li>타일링은 있는 재사용을 지키고, 낮은 정밀도는 칸을 줄이고, 배치는 재사용을 만들되 기다림이 대가다. 배치 1이라도 weight가 칩 안에 있으면 DRAM 이동은 없다.</li>
-<li>실시간 센서 장면(촉각 ms, 생체 신호·가스 초)에서 소재의 이점을 말하려면 같은 정확도·지연·시스템 에너지로 디지털 기준선(칩 안 메모리의 작은 모델)과 비교해야 한다 <span class="tag tag-interp">해석</span>. In-memory 칩 안에서도 배열 사이 전송이 VMM 비용을 넘을 수 있다 <span class="src">Roadmap 2026, p.8128, 8131</span>.</li>
+<li><span class="key">연산 밀도 = 연산량 ÷ 이동량 [op/byte]</span>. 2×2 배치 1: 8 op ÷ 16 byte = 0.5(weight만), 입력·출력까지 세면 0.25. 큰 층(1,000×1,000)은 weight만 세도 거의 같다(0.499).</li>
+<li>배치 B = 함께 처리하는 입력 벡터 수. <span class="key">W를 DRAM에서 한 번 가져와 칩 안에 둘 수 있으면 weight만 센 밀도가 0.5B</span>(2×2 배치 4: 2, 모두 세면 0.4).</li>
+<li>시간 ≈ max(연산량/연산 속도, 이동량/대역폭) <span class="tag tag-interp">해석</span>. <span class="key">밀도가 장치의 경계(연산 속도 ÷ 대역폭)보다 낮으면 memory-bound</span>. 같은 배치 1 MVM도 장치 A(경계 10)에서는 memory-bound, 장치 B(경계 0.1)에서는 compute-bound.</li>
+<li>타일링은 있는 재사용을 지키고, 낮은 정밀도는 칸을 줄이고, 배치는 재사용을 만들되 기다림이 대가다. <span class="key">배치 1이라도 weight가 칩 안에 있으면 DRAM 이동은 없다</span>.</li>
+<li>실시간 센서 장면(촉각 ms, 생체 신호·가스 초)에서 소재의 이점을 말하려면 <span class="key">같은 정확도·지연·시스템 에너지로 디지털 기준선(칩 안 메모리의 작은 모델)과 비교해야 한다</span> <span class="tag tag-interp">해석</span>. In-memory 칩 안에서도 배열 사이 전송이 VMM 비용을 넘을 수 있다 <span class="src">Roadmap 2026, p.8128, 8131</span>.</li>
 </ul>
 </div>
 </section>
@@ -1237,10 +1237,10 @@ Leak 전류 (leakage)
 </div>
 <div class="keypoints">
 <ul>
-<li>클록 = 공통 박자(f, Hz). 활동률 α = 한 박자에 실제로 바뀌는 비율. <span class="math inline">\(P \approx \alpha C V^2 f\)</span>: 충방전 에너지 <span class="math inline">\(CV^2\)</span> × 초당 횟수 <span class="math inline">\(\alpha f\)</span>.</li>
-<li>Dennard scaling은 치수·전압을 같이 줄여 <span class="math inline">\(P/A\)</span>를 일정하게 유지한 규칙 <span class="src">Dennard 1974, p.265</span>. <span class="math inline">\(V_{th}\)</span>를 낮추면 꺼짐 전류가 지수적으로 늘어(실온에서 이상적으로도 60 mV마다 10배) <span class="math inline">\(V\)</span>를 더 못 내리자 끝났고, 클록은 수 GHz에서 정체 <span class="src">Roadmap 2026, p.8114</span>.</li>
-<li><span class="math inline">\(P \sim fCV^2\)</span> 비교는 같은 <span class="math inline">\(C\)</span>·<span class="math inline">\(\alpha\)</span>의 가상 비교다. 작업당 에너지 우위는 따로 증명해야 한다 <span class="src">Aluru 2026, p.592</span> <span class="tag tag-interp">해석</span>.</li>
-<li>남은 질문: 뇌의 낮은 <span class="math inline">\(V\)</span>·<span class="math inline">\(f\)</span>가 어떤 조건에서 실제 비용을 줄이나 → Day 5–6.</li>
+<li>클록 = 공통 박자(f, Hz). 활동률 α = 한 박자에 실제로 바뀌는 비율. <span class="key"><span class="math inline">\(P \approx \alpha C V^2 f\)</span>: 충방전 에너지 <span class="math inline">\(CV^2\)</span> × 초당 횟수 <span class="math inline">\(\alpha f\)</span></span>.</li>
+<li>Dennard scaling은 치수·전압을 같이 줄여 <span class="math inline">\(P/A\)</span>를 일정하게 유지한 규칙 <span class="src">Dennard 1974, p.265</span>. <span class="math inline">\(V_{th}\)</span>를 낮추면 꺼짐 전류가 지수적으로 늘어(실온에서 이상적으로도 60 mV마다 10배) <span class="key"><span class="math inline">\(V\)</span>를 더 못 내리자 끝났고, 클록은 수 GHz에서 정체</span> <span class="src">Roadmap 2026, p.8114</span>.</li>
+<li><span class="math inline">\(P \sim fCV^2\)</span> 비교는 같은 <span class="math inline">\(C\)</span>·<span class="math inline">\(\alpha\)</span>의 가상 비교다. <span class="key">작업당 에너지 우위는 따로 증명해야 한다</span> <span class="src">Aluru 2026, p.592</span> <span class="tag tag-interp">해석</span>.</li>
+<li>남은 질문: <span class="key">뇌의 낮은 <span class="math inline">\(V\)</span>·<span class="math inline">\(f\)</span>가 어떤 조건에서 실제 비용을 줄이나</span> → Day 5–6.</li>
 </ul>
 </div>
 </section>
@@ -1325,10 +1325,10 @@ Leak 전류 (leakage)
 <div class="quiz" data-day="d02" data-set="7-check"></div>
 <div class="keypoints">
 <ul>
-<li>세 벽: ① 데이터 이동(이동량·대역폭·지연) ② 전력밀도(Dennard 종말) ③ 정밀도의 비용. 이해용 분류이며 겹친다.</li>
-<li>보통 컴퓨터는 재사용·계층·낮은 정밀도로 ①을 상당히 눌렀다. 기존 컴퓨터가 특히 불리할 수 있는 자리는 기다릴 수 없는 입력 + 칩 안에 못 두는 큰 weight·이력 + 정밀도 양보 가능이 함께 맞는 계산이고, 디지털 기준선과 같은 조건으로 비교해야 한다 <span class="tag tag-interp">해석</span>.</li>
-<li>대가: ①을 줄이면 ③(변환·보정)이 청구된다 <span class="src">Jiang 2026, p.1110</span> <span class="src">Roadmap 2026, p.8128, 8130</span>. "옮길 것이 없다"가 아니라 "주요 이동을 줄인다".</li>
-<li>정밀도의 벽을 숫자로: 32 bit 정수 곱셈 3.1 pJ는 8 bit 0.2 pJ의 약 15배(Horowitz 2014, 45 nm). 비트를 줄이면 계산과 이동이 함께 준다.</li>
+<li><span class="key">세 벽: ① 데이터 이동(이동량·대역폭·지연) ② 전력밀도(Dennard 종말) ③ 정밀도의 비용</span>. 이해용 분류이며 겹친다.</li>
+<li>보통 컴퓨터는 재사용·계층·낮은 정밀도로 ①을 상당히 눌렀다. 기존 컴퓨터가 특히 불리할 수 있는 자리는 <span class="key">기다릴 수 없는 입력 + 칩 안에 못 두는 큰 weight·이력 + 정밀도 양보 가능이 함께 맞는 계산</span>이고, 디지털 기준선과 같은 조건으로 비교해야 한다 <span class="tag tag-interp">해석</span>.</li>
+<li>대가: <span class="key">①을 줄이면 ③(변환·보정)이 청구된다</span> <span class="src">Jiang 2026, p.1110</span> <span class="src">Roadmap 2026, p.8128, 8130</span>. "옮길 것이 없다"가 아니라 "주요 이동을 줄인다".</li>
+<li>정밀도의 벽을 숫자로: 32 bit 정수 곱셈 3.1 pJ는 8 bit 0.2 pJ의 약 15배(Horowitz 2014, 45 nm). <span class="key">비트를 줄이면 계산과 이동이 함께 준다</span>.</li>
 </ul>
 </div>
 </section>

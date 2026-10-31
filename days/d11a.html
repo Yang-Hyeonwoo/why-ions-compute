@@ -756,9 +756,9 @@ window.Quarto = {
 <div class="quiz" data-day="d11" data-set="1-check"></div>
 <div class="keypoints">
 <ul>
-<li>기억 = 지난 입력의 흔적(Day 15–16), 비선형 = 입력들의 곱·굽힘(Day 17–18). 둘은 다른 일을 한다.</li>
-<li>과제는 둘을 정해진 양만큼 요구한다: NARMA10 ≈ 10단계 기억 + 2차 곱 <span class="src">Stepney 2024, p.676</span>, 지연 XOR = 2단계 + 2차, 3-parity = 3단계 + 3차.</li>
-<li>바른 질문: 과제가 요구하는 기억과 비선형을 동시에 줄 수 있나?</li>
+<li>기억 = 지난 입력의 흔적(Day 15–16), 비선형 = 입력들의 곱·굽힘(Day 17–18). <span class="key">둘은 다른 일을 한다</span>.</li>
+<li><span class="key">과제는 둘을 정해진 양만큼 요구한다</span>: NARMA10 ≈ 10단계 기억 + 2차 곱 <span class="src">Stepney 2024, p.676</span>, 지연 XOR = 2단계 + 2차, 3-parity = 3단계 + 3차.</li>
+<li>바른 질문: <span class="key">과제가 요구하는 기억과 비선형을 동시에 줄 수 있나?</span></li>
 </ul>
 </div>
 </section>
@@ -891,10 +891,10 @@ C_f = 1 - \frac{\langle (f - \hat{f})^2 \rangle}{\mathrm{Var}(f)}
 <div class="quiz" data-day="d11" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>목표 하나의 용량 <span class="math inline">\(C_f = 1 - \langle(f-\hat f)^2\rangle/\mathrm{Var}(f)\)</span> <span class="src">Singh 2026, p.13</span>. <span class="math inline">\(\langle\cdot\rangle\)</span>는 단계 수 <span class="math inline">\(n\)</span>으로 나눈 평균, 분산도 <span class="math inline">\(n\)</span>으로 나눈다. 예: 오차 0.36, 분산 1 → 0.64. 네 단계 예(목표 1, 2, 3, 6)는 0.714 = 상관². 1 = 완벽, 0 = 평균만 말하는 것과 같음.</li>
-<li>기저 함수 = 숫자를 곱해 더해 목표를 만드는 조각, 직교 = 곱의 평균이 0(겹치지 않음). 네 이력 예: 노드 A(선형)는 <span class="math inline">\(u(t-1)\)</span> 0.80, <span class="math inline">\(u(t-2)\)</span> 0.20, 곱 0, 노드 B(<span class="math inline">\(\tanh\)</span>)는 0.43, 0.43, 0.14. 용량 = 그 조각이 노드 분산에서 차지하는 몫이라 노드 하나의 합은 1.</li>
-<li>차수 = 곱해진 입력의 개수(차수 1 = 기억, 2 이상 = 비선형). 차수 1의 합 = MC <span class="src">Stepney 2024, p.680</span>, 모든 차수의 합 = IPC. 기억과 비선형을 한 저울에서 잰다 <span class="src">Liang 2024, p.200</span>.</li>
-<li>연속 입력에서는 <span class="math inline">\(u\)</span>와 <span class="math inline">\(u^3\)</span>이 겹치므로(곱의 평균 1/5) 겹친 몫을 뺀 Legendre 다항식 <span class="math inline">\(P_3 = (5u^3-3u)/2\)</span> 등을 쓴다 <span class="src">Stepney 2024, p.679–680</span>.</li>
+<li>목표 하나의 용량 <span class="math inline">\(C_f = 1 - \langle(f-\hat f)^2\rangle/\mathrm{Var}(f)\)</span> <span class="src">Singh 2026, p.13</span>. <span class="math inline">\(\langle\cdot\rangle\)</span>는 단계 수 <span class="math inline">\(n\)</span>으로 나눈 평균, 분산도 <span class="math inline">\(n\)</span>으로 나눈다. 예: 오차 0.36, 분산 1 → 0.64. 네 단계 예(목표 1, 2, 3, 6)는 0.714 = 상관². <span class="key">1 = 완벽, 0 = 평균만 말하는 것과 같음</span>.</li>
+<li>기저 함수 = 숫자를 곱해 더해 목표를 만드는 조각, 직교 = 곱의 평균이 0(겹치지 않음). 네 이력 예: 노드 A(선형)는 <span class="math inline">\(u(t-1)\)</span> 0.80, <span class="math inline">\(u(t-2)\)</span> 0.20, 곱 0, 노드 B(<span class="math inline">\(\tanh\)</span>)는 0.43, 0.43, 0.14. <span class="key">용량 = 그 조각이 노드 분산에서 차지하는 몫이라 노드 하나의 합은 1</span>.</li>
+<li>차수 = 곱해진 입력의 개수(차수 1 = 기억, 2 이상 = 비선형). 차수 1의 합 = MC <span class="src">Stepney 2024, p.680</span>, 모든 차수의 합 = IPC. <span class="key">기억과 비선형을 한 저울에서 잰다</span> <span class="src">Liang 2024, p.200</span>.</li>
+<li>연속 입력에서는 <span class="math inline">\(u\)</span>와 <span class="math inline">\(u^3\)</span>이 겹치므로(곱의 평균 1/5) <span class="key">겹친 몫을 뺀 Legendre 다항식</span> <span class="math inline">\(P_3 = (5u^3-3u)/2\)</span> 등을 쓴다 <span class="src">Stepney 2024, p.679–680</span>.</li>
 </ul>
 </div>
 </section>
@@ -971,11 +971,11 @@ C_f = 1 - \frac{\langle (f - \hat{f})^2 \rangle}{\mathrm{Var}(f)}
 <div class="quiz" data-day="d11" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>목표 = 화살표, 노드 <span class="math inline">\(N\)</span>개의 출력 = <span class="math inline">\(N\)</span>차원 판, 용량 = 그림자 길이². 수직인 목표 셋을 2차원 판에 비추면 1 + 0.5 + 0.5 = 2(IPC 절의 두 노드를 함께 쓰면 0.87 + 0.50 + 0.63 = 2).</li>
-<li>그림자 제곱 합은 판의 차원 <span class="math inline">\(N\)</span>을 넘지 못하고, 목표가 전부를 덮으면 <span class="math inline">\(N\)</span>이다(Day 15–16의 예산 1은 <span class="math inline">\(N = 1\)</span>).</li>
-<li><span class="math inline">\(N\)</span>보다 작아지는 이유: 복사본 노드, 잡음 <span class="src">Stepney 2024, p.680</span>, 세지 않은 목표.</li>
-<li>상한은 선형 readout 기준이다. 비선형 readout이 키운 몫은 readout의 몫.</li>
-<li>원 논문: 총 IPC ≤ 선형 독립인 상태 변수 수. 같아지려면 fading memory, 상태의 선형 독립(rank <span class="math inline">\(N\)</span>), 완전한 직교 기저, 무한한 데이터, i.i.d. 입력이라는 조건이 붙는다 <span class="src">Dambre 2012, 초록·Theorem 4·7</span> <span class="src">Stepney 2024, p.680</span>. device 개수 ≠ 독립 상태 수. 측정은 데이터 길이·차수·지연·문턱을 함께 보고한다.</li>
+<li>목표 = 화살표, 노드 <span class="math inline">\(N\)</span>개의 출력 = <span class="math inline">\(N\)</span>차원 판, <span class="key">용량 = 그림자 길이²</span>. 수직인 목표 셋을 2차원 판에 비추면 1 + 0.5 + 0.5 = 2(IPC 절의 두 노드를 함께 쓰면 0.87 + 0.50 + 0.63 = 2).</li>
+<li><span class="key">그림자 제곱 합은 판의 차원 <span class="math inline">\(N\)</span>을 넘지 못하고</span>, 목표가 전부를 덮으면 <span class="math inline">\(N\)</span>이다(Day 15–16의 예산 1은 <span class="math inline">\(N = 1\)</span>).</li>
+<li><span class="key"><span class="math inline">\(N\)</span>보다 작아지는 이유</span>: 복사본 노드, 잡음 <span class="src">Stepney 2024, p.680</span>, 세지 않은 목표.</li>
+<li>상한은 선형 readout 기준이다. <span class="key">비선형 readout이 키운 몫은 readout의 몫</span>.</li>
+<li>원 논문: <span class="key">총 IPC ≤ 선형 독립인 상태 변수 수</span>. 같아지려면 fading memory, 상태의 선형 독립(rank <span class="math inline">\(N\)</span>), 완전한 직교 기저, 무한한 데이터, i.i.d. 입력이라는 조건이 붙는다 <span class="src">Dambre 2012, 초록·Theorem 4·7</span> <span class="src">Stepney 2024, p.680</span>. device 개수 ≠ 독립 상태 수. 측정은 데이터 길이·차수·지연·문턱을 함께 보고한다.</li>
 </ul>
 </div>
 </section>

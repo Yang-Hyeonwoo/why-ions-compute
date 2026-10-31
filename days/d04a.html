@@ -804,10 +804,10 @@ y_j = \sum_{i} W_{ji}\, u_i
 <div class="quiz" data-day="d04" data-set="1-check"></div>
 <div class="keypoints">
 <ul>
-<li>2×2 예제: <span class="math inline">\(W\)</span> = [[1, 3], [2, 0.5]], <span class="math inline">\(\mathbf{u}\)</span> = (2, 1) → <span class="math inline">\(\mathbf{y}\)</span> = (5, 4.5). <span class="math inline">\(W_{ji}\)</span> = 입력 <span class="math inline">\(i\)</span>가 출력 <span class="math inline">\(j\)</span>에 곱해지는 weight(행 = 출력, 열 = 입력).</li>
-<li>crossbar: <span class="math inline">\(u_i \to V_i\)</span> [V], <span class="math inline">\(W_{ji} \to G_{ji}\)</span> [S = 1/Ω], <span class="math inline">\(y_j \to I_j\)</span> [A]. 곱셈은 Ohm(<span class="math inline">\(I = GV\)</span>, µS × V = µA), 덧셈은 Kirchhoff(한 선으로 흘러든 전류가 합쳐짐). 예제의 row 전류는 0.5 µA와 0.45 µA.</li>
-<li>이 계산은 row 전위가 0 V로 유지되어 device 양끝에 column 전압이 그대로 걸릴 때 성립한다(row 끝의 읽기 회로 TIA가 row를 0 V로 붙든다. 아래 학습 구간 2).</li>
-<li>신경망 한 층 = MVM + 비선형. 계산량의 대부분이 MVM이다 <span class="src">Jiang 2026, p.1110</span>.</li>
+<li>2×2 예제: <span class="math inline">\(W\)</span> = [[1, 3], [2, 0.5]], <span class="math inline">\(\mathbf{u}\)</span> = (2, 1) → <span class="math inline">\(\mathbf{y}\)</span> = (5, 4.5). <span class="key"><span class="math inline">\(W_{ji}\)</span> = 입력 <span class="math inline">\(i\)</span>가 출력 <span class="math inline">\(j\)</span>에 곱해지는 weight(행 = 출력, 열 = 입력)</span>.</li>
+<li>crossbar: <span class="math inline">\(u_i \to V_i\)</span> [V], <span class="math inline">\(W_{ji} \to G_{ji}\)</span> [S = 1/Ω], <span class="math inline">\(y_j \to I_j\)</span> [A]. <span class="key">곱셈은 Ohm(<span class="math inline">\(I = GV\)</span>, µS × V = µA), 덧셈은 Kirchhoff(한 선으로 흘러든 전류가 합쳐짐)</span>. 예제의 row 전류는 0.5 µA와 0.45 µA.</li>
+<li>이 계산은 <span class="key">row 전위가 0 V로 유지되어 device 양끝에 column 전압이 그대로 걸릴 때 성립한다</span>(row 끝의 읽기 회로 TIA가 row를 0 V로 붙든다. 아래 학습 구간 2).</li>
+<li><span class="key">신경망 한 층 = MVM + 비선형</span>. 계산량의 대부분이 MVM이다 <span class="src">Jiang 2026, p.1110</span>.</li>
 </ul>
 </div>
 </section>
@@ -1068,10 +1068,10 @@ DAC / ADC (복습)
 <div class="quiz" data-day="d04" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>신호의 길: 숫자 →(DAC) column 전압 →(Ohm) device 전류 →(Kirchhoff) row 합 →(TIA) 전압 →(ADC) 숫자. 예제: (2, 1) → 0.2·0.1 V → 0.5·0.45 µA → 0.5·0.45 V → 50·45 → (5, 4.5).</li>
-<li>Crossbar MVM은 settling time 안에 끝나는 병렬 연산이다. 읽기 회로를 RC 하나로 줄인 모형에서 <span class="math inline">\(\tau = R_f C\)</span>(1 MΩ, 1 pF면 1 µs), 99%까지 약 5τ [해석, 모형]. 전류가 작은 device는 <span class="math inline">\(R_f\)</span>를 키우게 되어 읽기가 느려지기 쉽다.</li>
-<li>조건: row 0 V 유지, IR drop(배열이 클수록 악화, 예: 128×128 초과) <span class="src">Jiang 2026, p.1114</span>, 읽기 I–V 선형성(의사 선형 영역) <span class="src">Jiang 2026, p.1117</span>, sneak path 차단(1T1R) <span class="src">Liang 2024, p.198</span>.</li>
-<li>ADC는 다음 단계가 디지털일 때 필요하다. 낮은 정밀도(4–10 bit)로 비용을 줄이되 잡음을 따로 본다 <span class="src">Liang 2024, p.195</span>.</li>
+<li>신호의 길: <span class="key">숫자 →(DAC) column 전압 →(Ohm) device 전류 →(Kirchhoff) row 합 →(TIA) 전압 →(ADC) 숫자</span>. 예제: (2, 1) → 0.2·0.1 V → 0.5·0.45 µA → 0.5·0.45 V → 50·45 → (5, 4.5).</li>
+<li><span class="key">Crossbar MVM은 settling time 안에 끝나는 병렬 연산이다</span>. 읽기 회로를 RC 하나로 줄인 모형에서 <span class="math inline">\(\tau = R_f C\)</span>(1 MΩ, 1 pF면 1 µs), 99%까지 약 5τ [해석, 모형]. 전류가 작은 device는 <span class="math inline">\(R_f\)</span>를 키우게 되어 읽기가 느려지기 쉽다.</li>
+<li>조건: <span class="key">row 0 V 유지, IR drop(배열이 클수록 악화, 예: 128×128 초과)</span> <span class="src">Jiang 2026, p.1114</span>, 읽기 I–V 선형성(의사 선형 영역) <span class="src">Jiang 2026, p.1117</span>, sneak path 차단(1T1R) <span class="src">Liang 2024, p.198</span>.</li>
+<li><span class="key">ADC는 다음 단계가 디지털일 때 필요하다</span>. 낮은 정밀도(4–10 bit)로 비용을 줄이되 잡음을 따로 본다 <span class="src">Liang 2024, p.195</span>.</li>
 </ul>
 </div>
 </section>

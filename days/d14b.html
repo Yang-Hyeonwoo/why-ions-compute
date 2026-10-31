@@ -828,11 +828,11 @@ D_{PR} = \frac{(\lambda_1 + \lambda_2 + \cdots)^2}{\lambda_1^2 + \lambda_2^2 + \
 <div class="quiz" data-day="d14" data-set="5-check"></div>
 <div class="keypoints">
 <ul>
-<li>관측한 채널 수 ≠ 진짜로 다른 방향의 수. 같은 신호를 크기만 다르게 읽은 8채널의 참여비 차원은 1.00, 서로 다른 신호 4개를 읽으면 3.94(그림 7(a)(b), Claude 계산).</li>
-<li>공분산 표: 대각선은 채널 분산, 밖은 두 채널의 공분산. 그 고유값 = 서로 무관한 방향별 분산(합은 채널 분산의 합). 채널 2개 예: 같은 신호의 2배 (5, 0), 무관 (1, 1), 반쯤 겹침 (2.62, 0.38).</li>
-<li><span class="math inline">\(D_{PR} = (\sum \lambda)^2 / \sum \lambda^2\)</span>. (5, 0) → 1, (1, 1) → 2, (2.62, 0.38) → 1.29, (3,1,0,0) → 1.6. Rank와 달리 크기를 반영하지만, 단위·정규화에 따라 바뀌고 방향이 신호인지 잡음인지는 모른다.</li>
-<li>보고할 것: 공분산 고유값, <span class="math inline">\(D_{PR}\)</span>, 채널을 늘려 가며 잰 성능 <span class="src">Singh 2026, p.13</span>. 전극 수만으로는 풍부함을 주장하지 않는다 <span class="src">Singh 2026, p.5–6</span>.</li>
-<li>Device 간 편차는 다양성을 늘릴 수 있지만 <span class="src">Liang 2024, p.196</span>, 대가(readout 이식 불가)가 있다 → Day 33–34.</li>
+<li><span class="key">관측한 채널 수 ≠ 진짜로 다른 방향의 수</span>. 같은 신호를 크기만 다르게 읽은 8채널의 참여비 차원은 1.00, 서로 다른 신호 4개를 읽으면 3.94(그림 7(a)(b), Claude 계산).</li>
+<li>공분산 표: 대각선은 채널 분산, 밖은 두 채널의 공분산. <span class="key">그 고유값 = 서로 무관한 방향별 분산</span>(합은 채널 분산의 합). 채널 2개 예: 같은 신호의 2배 (5, 0), 무관 (1, 1), 반쯤 겹침 (2.62, 0.38).</li>
+<li><span class="key"><span class="math inline">\(D_{PR} = (\sum \lambda)^2 / \sum \lambda^2\)</span></span>. (5, 0) → 1, (1, 1) → 2, (2.62, 0.38) → 1.29, (3,1,0,0) → 1.6. Rank와 달리 크기를 반영하지만, 단위·정규화에 따라 바뀌고 방향이 신호인지 잡음인지는 모른다.</li>
+<li>보고할 것: 공분산 고유값, <span class="math inline">\(D_{PR}\)</span>, 채널을 늘려 가며 잰 성능 <span class="src">Singh 2026, p.13</span>. <span class="key">전극 수만으로는 풍부함을 주장하지 않는다</span> <span class="src">Singh 2026, p.5–6</span>.</li>
+<li>Device 간 편차는 다양성을 늘릴 수 있지만 <span class="src">Liang 2024, p.196</span>, <span class="key">대가(readout 이식 불가)가 있다</span> → Day 33–34.</li>
 </ul>
 </div>
 </section>
@@ -947,9 +947,9 @@ D_{PR} = \frac{(\lambda_1 + \lambda_2 + \cdots)^2}{\lambda_1^2 + \lambda_2^2 + \
 <div class="quiz" data-day="d14" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>전기적 비선형(곡률·고조파·히스테리시스·정류)은 메커니즘과 동작 범위를, 계산 비선형(IPC 차수별 몫, XOR류)은 readout이 실제로 꺼내 쓰는 몫을 잰다. 보완적이지 대체 가능하지 않다 <span class="src">Singh 2026, p.13</span>.</li>
-<li>모형 계산: 구동을 세게 하면 전기적 비선형은 계속 커지지만(0 → 0.62), 곱셈 용량은 <span class="math inline">\(g = 3\)</span>에서 0.52로 최대였다가 0.33으로 줄고, 기억은 0.16까지 준다.</li>
-<li>높은 과제 정확도는 부호화·특징 수·readout에서도 올 수 있다 <span class="src">Singh 2026, p.18</span>. 대리 지표는 그 출처를 진단하는 보조 근거다 <span class="tag tag-interp">해석</span>.</li>
+<li>전기적 비선형(곡률·고조파·히스테리시스·정류)은 메커니즘과 동작 범위를, 계산 비선형(IPC 차수별 몫, XOR류)은 readout이 실제로 꺼내 쓰는 몫을 잰다. <span class="key">보완적이지 대체 가능하지 않다</span> <span class="src">Singh 2026, p.13</span>.</li>
+<li>모형 계산: 구동을 세게 하면 전기적 비선형은 계속 커지지만(0 → 0.62), <span class="key">곱셈 용량은 <span class="math inline">\(g = 3\)</span>에서 0.52로 최대였다가 0.33으로 줄고</span>, 기억은 0.16까지 준다.</li>
+<li><span class="key">높은 과제 정확도는 부호화·특징 수·readout에서도 올 수 있다</span> <span class="src">Singh 2026, p.18</span>. 대리 지표는 그 출처를 진단하는 보조 근거다 <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>

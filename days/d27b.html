@@ -814,10 +814,10 @@ window.Quarto = {
 <div class="quiz" data-day="d27" data-set="4-end"></div>
 <div class="keypoints">
 <ul>
-<li>이 교재가 readout을 선형으로 두는 세 이유(필수조건은 아님): reservoir가 비선형 일을 이미 했다 / 학습이 ridge 한 번이고 라벨이 적어도 된다(device 안을 몰라도 되는 것은 device 밖 readout만 학습하기 때문이며 비선형 readout도 같다) / 곱해서 더하기는 MCU에 가볍고 crossbar가 물리로 할 수 있다. 비선형 readout을 쓰면 같은 readout에 원시 입력을 넣은 기준선과 비교해야 device의 몫을 말할 수 있다.</li>
-<li>학습은 몸 밖에서 한 번(그 장치의 reservoir로 상태를 기록해야 함), 몸 안에서는 같은 w로 판정만, 가끔 무선으로 재보정. 이온 RC의 on-chip training은 이 폴더의 문헌에서 시연을 찾지 못했다.</li>
-<li>몸 밖 오프라인 학습 + MCU 제어 구성에서 소프트웨어가 맡는 곳: 학습, weight 쓰기, 순서 제어, 기록·무선, 재보정 판단. 물리·회로로 가능한 곳: 증폭·필터, reservoir, crossbar readout, 문턱 비교. 학습·제어 방식이 다르면(고정 논리 회로, 하드웨어 학습 회로) 이 목록도 달라진다 <span class="tag tag-interp">해석</span>.</li>
-<li>완전 아날로그는 inference 신호 경로에서만 가능하다(Zhong 2022, 몸 밖) <span class="src">Zhong 2022, p.673–680</span>. 이 구성의 장치 전체는 디지털 부품이 필요하다.</li>
+<li>이 교재가 readout을 선형으로 두는 세 이유(필수조건은 아님): reservoir가 비선형 일을 이미 했다 / 학습이 ridge 한 번이고 라벨이 적어도 된다(device 안을 몰라도 되는 것은 device 밖 readout만 학습하기 때문이며 비선형 readout도 같다) / 곱해서 더하기는 MCU에 가볍고 crossbar가 물리로 할 수 있다. <span class="key">비선형 readout을 쓰면 같은 readout에 원시 입력을 넣은 기준선과 비교해야 device의 몫을 말할 수 있다</span>.</li>
+<li>학습은 몸 밖에서 한 번(그 장치의 reservoir로 상태를 기록해야 함), 몸 안에서는 같은 w로 판정만, 가끔 무선으로 재보정. <span class="key">이온 RC의 on-chip training은 이 폴더의 문헌에서 시연을 찾지 못했다</span>.</li>
+<li>몸 밖 오프라인 학습 + MCU 제어 구성에서 <span class="key">소프트웨어가 맡는 곳: 학습, weight 쓰기, 순서 제어, 기록·무선, 재보정 판단</span>. 물리·회로로 가능한 곳: 증폭·필터, reservoir, crossbar readout, 문턱 비교. 학습·제어 방식이 다르면(고정 논리 회로, 하드웨어 학습 회로) 이 목록도 달라진다 <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">완전 아날로그는 inference 신호 경로에서만 가능하다</span>(Zhong 2022, 몸 밖) <span class="src">Zhong 2022, p.673–680</span>. 이 구성의 장치 전체는 디지털 부품이 필요하다.</li>
 </ul>
 </div>
 </section>
@@ -962,10 +962,10 @@ window.Quarto = {
 <div class="quiz" data-day="d27" data-set="5-check"></div>
 <div class="keypoints">
 <ul>
-<li>출력의 폴더 시연: 이식 약물 방출(시간표대로, 배터리·무선 스위치) <span class="src">Yoo 2025, p.5</span>, 급성 신경 자극(하이드로겔은 몸 밖) <span class="src">Dai 2024, p.6</span>. 판단 → 출력의 고리는 Pei 2026이 몸 밖 컴퓨터·PCB를 거쳐 급성으로만 이었다 <span class="src">Pei 2026, p.1205</span>.</li>
-<li>1년 에너지 예산<span class="tag tag-assume">가정</span>: mm 크기 이온 device 24개를 ±1 V로 72번/s 충전 ≈ 86 µW(약 2,700 J) &gt; 원시 신호 무선 43 µW(약 1,360 J) &gt; 디지털 readout ADC 8.6 µW(약 270 J) ≫ 경보만 0.44 J. 몸 안 판정의 큰 이득은 원시 신호를 안 보내는 것, 이온 reservoir의 이득은 구동 에너지가 ADC보다 작을 때만 <span class="tag tag-interp">해석</span>.</li>
-<li>생체 시험은 4–14일 수준(Lee, Yoo), 요구는 6개월 이상 <span class="src">Zhu 2025, p.19</span>. 생리 식염수·pH 7.4에서의 동작 시험은 이번 범위에 없다.</li>
-<li>단계의 부품은 따로따로 보였지만 몸 안의 한 장치로 오래 이어진 시연은 폴더 문헌에서 찾지 못했다(Pei 2026은 마취한 쥐에서 몸 밖 readout으로 급성).</li>
+<li>출력의 폴더 시연: 이식 약물 방출(시간표대로, 배터리·무선 스위치) <span class="src">Yoo 2025, p.5</span>, 급성 신경 자극(하이드로겔은 몸 밖) <span class="src">Dai 2024, p.6</span>. <span class="key">판단 → 출력의 고리는 Pei 2026이 몸 밖 컴퓨터·PCB를 거쳐 급성으로만 이었다</span> <span class="src">Pei 2026, p.1205</span>.</li>
+<li>1년 에너지 예산<span class="tag tag-assume">가정</span>: mm 크기 이온 device 24개를 ±1 V로 72번/s 충전 ≈ 86 µW(약 2,700 J) &gt; 원시 신호 무선 43 µW(약 1,360 J) &gt; 디지털 readout ADC 8.6 µW(약 270 J) ≫ 경보만 0.44 J. <span class="key">몸 안 판정의 큰 이득은 원시 신호를 안 보내는 것</span>, 이온 reservoir의 이득은 구동 에너지가 ADC보다 작을 때만 <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">생체 시험은 4–14일 수준(Lee, Yoo), 요구는 6개월 이상</span> <span class="src">Zhu 2025, p.19</span>. 생리 식염수·pH 7.4에서의 동작 시험은 이번 범위에 없다.</li>
+<li>단계의 부품은 따로따로 보였지만 <span class="key">몸 안의 한 장치로 오래 이어진 시연은 폴더 문헌에서 찾지 못했다</span>(Pei 2026은 마취한 쥐에서 몸 밖 readout으로 급성).</li>
 </ul>
 </div>
 </section>
@@ -1060,9 +1060,9 @@ window.Quarto = {
 <div class="quiz" data-day="d27" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>경쟁 조건: 이온·물·부드러움이 꼭 필요 / 속도·밀도·정밀도 요구가 낮음 / 전자 해법도 그 자리에서 비용을 치름 / 요구 수명이 짧거나 생분해가 필요 <span class="tag tag-interp">해석</span>.</li>
-<li>후보: 조직 경계 전처리, 단기·생분해 이식, 이온 종류 구별 감지, 연성 로봇 피부 전처리. 비후보: 대량 inference, 정밀 weight, 수년 이식에서 계산 전체를 맡는 구성.</li>
-<li>어느 후보도 "같은 전극 + 증폭 + ADC + MCU" 기준선보다 낫다는 측정은 폴더에 없다. 반론("이온은 전극만, 계산은 CMOS")은 강하다.</li>
+<li>경쟁 조건: <span class="key">이온·물·부드러움이 꼭 필요</span> / 속도·밀도·정밀도 요구가 낮음 / 전자 해법도 그 자리에서 비용을 치름 / 요구 수명이 짧거나 생분해가 필요 <span class="tag tag-interp">해석</span>.</li>
+<li>후보: <span class="key">조직 경계 전처리, 단기·생분해 이식, 이온 종류 구별 감지, 연성 로봇 피부 전처리</span>. 비후보: 대량 inference, 정밀 weight, 수년 이식에서 계산 전체를 맡는 구성.</li>
+<li><span class="key">어느 후보도 "같은 전극 + 증폭 + ADC + MCU" 기준선보다 낫다는 측정은 폴더에 없다</span>. 반론("이온은 전극만, 계산은 CMOS")은 강하다.</li>
 </ul>
 </div>
 </section>

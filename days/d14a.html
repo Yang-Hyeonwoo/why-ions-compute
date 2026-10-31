@@ -784,10 +784,10 @@ window.Quarto = {
 <div class="quiz" data-day="d14" data-set="1-check"></div>
 <div class="keypoints">
 <ul>
-<li>Readout은 상태의 크기가 아니라 상태 사이의 차이로 답을 가른다. 차이의 배율은 응답 곡선의 기울기다.</li>
-<li>세게 구동하면 응답은 커지지만 포화 구간에서 기울기가 0에 가까워져 차이가 사라진다(<span class="math inline">\(g = 20\)</span>: 0.8과 1.0의 차 0.0000, Claude 계산).</li>
-<li>너무 약하면 선형, 너무 세면 포화. 세 문헌이 같은 조건을 말한다 <span class="src">Stepney 2024, p.668</span> <span class="src">Liang 2024, p.198</span> <span class="src">Singh 2026, p.5, 9</span>.</li>
-<li>남은 질문: 입력이 한 번이 아니라 여러 번 이어 들어올 때, "다른 이력 → 다른 상태"는 어떻게 재나? → ‘separation(분리)’ 구간.</li>
+<li><span class="key">Readout은 상태의 크기가 아니라 상태 사이의 차이로 답을 가른다</span>. 차이의 배율은 응답 곡선의 기울기다.</li>
+<li>세게 구동하면 응답은 커지지만 <span class="key">포화 구간에서 기울기가 0에 가까워져 차이가 사라진다</span>(<span class="math inline">\(g = 20\)</span>: 0.8과 1.0의 차 0.0000, Claude 계산).</li>
+<li><span class="key">너무 약하면 선형, 너무 세면 포화</span>. 세 문헌이 같은 조건을 말한다 <span class="src">Stepney 2024, p.668</span> <span class="src">Liang 2024, p.198</span> <span class="src">Singh 2026, p.5, 9</span>.</li>
+<li>남은 질문: 입력이 한 번이 아니라 여러 번 이어 들어올 때, <span class="key">"다른 이력 → 다른 상태"는 어떻게 재나?</span> → ‘separation(분리)’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -846,10 +846,10 @@ window.Quarto = {
 <div class="quiz" data-day="d14" data-set="2-check"></div>
 <div class="keypoints">
 <ul>
-<li>분리 = 다른 입력 이력이 남긴 상태의 거리. 상태가 여럿이면 노드별 차이를 제곱해 더하고 제곱근.</li>
-<li>순서만 다른 A = (1, 0, 1)과 B = (0, 1, 1): 남는 비율 <span class="math inline">\(d\)</span>인 leak 노드에서 거리 <span class="math inline">\(d(1-d)\)</span>, <span class="math inline">\(d = 0.5\)</span>에서 0.25로 최대, <span class="math inline">\(d = 0.1\)</span>·<span class="math inline">\(0.9\)</span>에서 0.09. 짧아도 길어도 순서가 흐려진다.</li>
-<li>거리는 잡음과 비교해야 뜻이 있다(거리 ÷ 잡음). 포화된 읽기(<span class="math inline">\(\tanh(5x)\)</span>)는 거리를 <span class="math inline">\(10^{-6}\)</span> 수준으로 지운다(Claude 계산).</li>
-<li>남은 질문: 상태가 수십 개, 입력 이력이 수십 개면 거리를 일일이 볼 수 없다. 한 숫자로 요약할 방법은? → ‘rank’ 구간.</li>
+<li><span class="key">분리 = 다른 입력 이력이 남긴 상태의 거리</span>. 상태가 여럿이면 노드별 차이를 제곱해 더하고 제곱근.</li>
+<li>순서만 다른 A = (1, 0, 1)과 B = (0, 1, 1): 남는 비율 <span class="math inline">\(d\)</span>인 leak 노드에서 거리 <span class="math inline">\(d(1-d)\)</span>, <span class="math inline">\(d = 0.5\)</span>에서 0.25로 최대, <span class="math inline">\(d = 0.1\)</span>·<span class="math inline">\(0.9\)</span>에서 0.09. <span class="key">짧아도 길어도 순서가 흐려진다</span>.</li>
+<li><span class="key">거리는 잡음과 비교해야 뜻이 있다(거리 ÷ 잡음)</span>. 포화된 읽기(<span class="math inline">\(\tanh(5x)\)</span>)는 거리를 <span class="math inline">\(10^{-6}\)</span> 수준으로 지운다(Claude 계산).</li>
+<li>남은 질문: 상태가 수십 개, 입력 이력이 수십 개면 거리를 일일이 볼 수 없다. <span class="key">한 숫자로 요약할 방법은?</span> → ‘rank’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -1035,11 +1035,11 @@ Kernel quality / kernel rank (KR)
 </div>
 <div class="keypoints">
 <ul>
-<li>Rank = 진짜로 다른 방향의 수, 최대 <span class="math inline">\(\min(N, S)\)</span>. <span class="math inline">\(s_2 = 2 s_1\)</span>이면 새 방향이 아니고, 절편 없는 readout의 출력은 2배로 묶인다. 절편은 '모두에게 같은 몫' 방향 하나를 더할 뿐이다. 3×3 예의 상태 행렬 rank는 2.</li>
-<li>특이값 = 방향마다 상태들이 뻗은 크기. 3×3 예는 8.44, 0.92, 0(제곱합 72 = 표의 숫자 제곱합). 세 상태 모두 (1, 1, −1) 방향 그림자가 0이라 셋째가 0이다.</li>
-<li>KR: 서로 다른 입력열 <span class="math inline">\(S\)</span>개의 끝 상태로 <span class="math inline">\(N \times S\)</span> 표를 만들어 rank를 센다 <span class="src">Stepney 2024, p.677–678</span>. 같은 τ의 노드 셋은 rank 1, 다른 τ면 3(그림 4, Claude 계산).</li>
-<li>잡음 때문에 기준(최대값의 몇 %)이 필요하고, 기준만 바꿔도 같은 reservoir의 KR이 약 10에서 80으로 바뀐다. 기준을 적지 않은 KR은 비교할 수 없다 <span class="src">Stepney 2024, p.679</span>.</li>
-<li>남은 질문: 무엇이든 다 갈라 놓으면 좋은가? → ‘generalization(일반화)’ 구간.</li>
+<li><span class="key">Rank = 진짜로 다른 방향의 수, 최대 <span class="math inline">\(\min(N, S)\)</span></span>. <span class="math inline">\(s_2 = 2 s_1\)</span>이면 새 방향이 아니고, 절편 없는 readout의 출력은 2배로 묶인다. 절편은 '모두에게 같은 몫' 방향 하나를 더할 뿐이다. 3×3 예의 상태 행렬 rank는 2.</li>
+<li><span class="key">특이값 = 방향마다 상태들이 뻗은 크기</span>. 3×3 예는 8.44, 0.92, 0(제곱합 72 = 표의 숫자 제곱합). 세 상태 모두 (1, 1, −1) 방향 그림자가 0이라 셋째가 0이다.</li>
+<li>KR: 서로 다른 입력열 <span class="math inline">\(S\)</span>개의 끝 상태로 <span class="math inline">\(N \times S\)</span> <span class="key">표를 만들어 rank를 센다</span> <span class="src">Stepney 2024, p.677–678</span>. 같은 τ의 노드 셋은 rank 1, 다른 τ면 3(그림 4, Claude 계산).</li>
+<li>잡음 때문에 기준(최대값의 몇 %)이 필요하고, 기준만 바꿔도 같은 reservoir의 KR이 약 10에서 80으로 바뀐다. <span class="key">기준을 적지 않은 KR은 비교할 수 없다</span> <span class="src">Stepney 2024, p.679</span>.</li>
+<li>남은 질문: <span class="key">무엇이든 다 갈라 놓으면 좋은가?</span> → ‘generalization(일반화)’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -1118,10 +1118,10 @@ Kernel quality / kernel rank (KR)
 <div class="quiz" data-day="d14" data-set="4-check"></div>
 <div class="keypoints">
 <ul>
-<li>GR = KR과 같은 절차를 <strong>비슷한</strong> 입력열(끝 세 값이 같거나, 아주 작은 범위의 값)로 잰 rank. 낮을수록 잡음에 강하다 <span class="src">Stepney 2024, p.678</span>.</li>
-<li>계산 예(Claude 계산): KR은 같아도(5% 기준 3), 끝 세 값이 같은 입력열에서 짧은 기억은 GR 1, 긴 기억은 GR 3.</li>
-<li>"GR이 낮으면 좋다"는 과제가 최근 입력만 필요로 할 때의 말이다. 알맞은 값은 과제가 정한다 <span class="src">Stepney 2024, p.681</span>.</li>
-<li>"비슷하다"의 정의가 임의적이라 방식마다 값이 다르다. 방식·기준을 함께 적는다 <span class="src">Stepney 2024, p.679</span>.</li>
+<li>GR = KR과 같은 절차를 <strong>비슷한</strong> 입력열(끝 세 값이 같거나, 아주 작은 범위의 값)로 잰 rank. <span class="key">낮을수록 잡음에 강하다</span> <span class="src">Stepney 2024, p.678</span>.</li>
+<li>계산 예(Claude 계산): <span class="key">KR은 같아도(5% 기준 3), 끝 세 값이 같은 입력열에서 짧은 기억은 GR 1, 긴 기억은 GR 3</span>.</li>
+<li><span class="key">"GR이 낮으면 좋다"는 과제가 최근 입력만 필요로 할 때의 말이다</span>. 알맞은 값은 과제가 정한다 <span class="src">Stepney 2024, p.681</span>.</li>
+<li>"비슷하다"의 정의가 임의적이라 방식마다 값이 다르다. <span class="key">방식·기준을 함께 적는다</span> <span class="src">Stepney 2024, p.679</span>.</li>
 </ul>
 </div>
 </section>

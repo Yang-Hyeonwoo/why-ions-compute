@@ -865,10 +865,10 @@ resistor–capacitor 회로. 이 교재의 RC(reservoir computing)와 다른 말
 </div>
 <div class="keypoints">
 <ul>
-<li>기준선은 device에서 한 가지를 뺀 비교 대상이다. 평균값 → 원시 입력 → delay tap(선형 기억) → 다항·NG-RC(소프트웨어 기억+곱) → 소프트웨어 ESN → 단순 부품·정적 device → MCU+NN.</li>
-<li>어떤 기준선을 이겼는지가 주장의 범위다. 하나만 이기고 "계산을 잘한다"고 일반화하지 않는다.</li>
-<li>다항 회귀 = 특징 열을 늘린 뒤 직선 맞추기. 비선형은 특징에, 학습은 선형에. RC와 같은 구조다.</li>
-<li>남은 질문: 기억과 곱셈을 소프트웨어로 직접 만들면 몇 개의 특징이 필요한가? → ‘다항 회귀와 NG-RC’ 구간.</li>
+<li><span class="key">기준선은 device에서 한 가지를 뺀 비교 대상이다</span>. 평균값 → 원시 입력 → delay tap(선형 기억) → 다항·NG-RC(소프트웨어 기억+곱) → 소프트웨어 ESN → 단순 부품·정적 device → MCU+NN.</li>
+<li><span class="key">어떤 기준선을 이겼는지가 주장의 범위다</span>. 하나만 이기고 "계산을 잘한다"고 일반화하지 않는다.</li>
+<li>다항 회귀 = 특징 열을 늘린 뒤 직선 맞추기. <span class="key">비선형은 특징에, 학습은 선형에. RC와 같은 구조다</span>.</li>
+<li>남은 질문: <span class="key">기억과 곱셈을 소프트웨어로 직접 만들면 몇 개의 특징이 필요한가?</span> → ‘다항 회귀와 NG-RC’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -1088,11 +1088,11 @@ NG-RC
 </div>
 <div class="keypoints">
 <ul>
-<li>NG-RC 특징 = 상수 1 + 지연 입력 + 그 제곱과 쌍의 곱. 예: (0.5, −1) → (1, 0.5, −1, 0.25, −0.5, 1).</li>
-<li>특징 수는 <span class="math inline">\(\binom{k+p}{p}\)</span>로 빠르게 는다(k=10: 66, k=20: 231). 기억 길이와 차수를 미리 알아야 효율적이다.</li>
-<li>물리 device가 NG-RC를 이기려면 같은 성능을 더 적은 특징·더 싼 비용으로 내야 한다 <span class="tag tag-interp">해석</span>.</li>
-<li>작은 예(정답 <span class="math inline">\(u(t)\,u(t-1)\)</span>): 시각마다 특징 줄을 쌓고 같은 최소제곱 → 곱 열의 weight 1, 오차 0. 기억이 없으면 훈련 NMSE 0.85, 곱이 없으면 0.34(Claude 계산).</li>
-<li>남은 질문: 실제로 돌리면 누가 이기나? → ‘NARMA10 열 모형 비교’ 구간.</li>
+<li><span class="key">NG-RC 특징 = 상수 1 + 지연 입력 + 그 제곱과 쌍의 곱</span>. 예: (0.5, −1) → (1, 0.5, −1, 0.25, −0.5, 1).</li>
+<li>특징 수는 <span class="math inline">\(\binom{k+p}{p}\)</span>로 빠르게 는다(k=10: 66, k=20: 231). <span class="key">기억 길이와 차수를 미리 알아야 효율적이다</span>.</li>
+<li>물리 device가 NG-RC를 이기려면 <span class="key">같은 성능을 더 적은 특징·더 싼 비용으로 내야 한다</span> <span class="tag tag-interp">해석</span>.</li>
+<li>작은 예(정답 <span class="math inline">\(u(t)\,u(t-1)\)</span>): 시각마다 특징 줄을 쌓고 같은 최소제곱 → 곱 열의 weight 1, 오차 0. <span class="key">기억이 없으면 훈련 NMSE 0.85, 곱이 없으면 0.34</span>(Claude 계산).</li>
+<li>남은 질문: <span class="key">실제로 돌리면 누가 이기나?</span> → ‘NARMA10 열 모형 비교’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -1271,11 +1271,11 @@ y(t+1) = 0.3\,y(t) + 0.05\,y(t)\sum_{i=0}^{9} y(t-i) + 1.5\,u(t-9)\,u(t) + 0.1
 <div class="quiz" data-day="d16" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>같은 입력·같은 readout·같은 조정 예산으로 재면: 평균 1.00, 탭10 0.36, 탭20 0.17, 필터65 0.30, NG-RC(65) 0.28, NG-RC(230) 0.04, ESN 조정 없음 0.52 / 조정 0.16, 'device' 0.26, 'device'+잡음 0.38 (Claude의 시뮬레이션).</li>
-<li>이 설정의 NARMA10은 곱셈항의 86%가 선형으로 설명되어(Claude 계산) 긴 선형 기억이 많은 일을 한다 <span class="tag tag-interp">해석</span>.</li>
-<li>조정 안 한 소프트웨어 기준선, 특징 수가 다른 비교는 결론을 뒤집는다.</li>
-<li>공정한 표: 입력·readout·<span class="math inline">\(\lambda\)</span> 후보는 모두 같고, 다른 것은 특징을 만드는 부분과 그 계산량뿐이다. 필터와 'device'는 tanh 하나 차이(0.30 vs 0.26), NG-RC(탭 10)는 곱셈 약 120번으로 0.28.</li>
-<li>남은 질문: device의 응답이 단순한 회로로 재현된다면? → ‘R–C 회로와 비교’ 구간.</li>
+<li>같은 입력·같은 readout·같은 조정 예산으로 재면: 평균 1.00, 탭10 0.36, 탭20 0.17, 필터65 0.30, NG-RC(65) 0.28, <span class="key">NG-RC(230) 0.04</span>, ESN 조정 없음 0.52 / 조정 0.16, 'device' 0.26, 'device'+잡음 0.38 (Claude의 시뮬레이션).</li>
+<li>이 설정의 NARMA10은 <span class="key">곱셈항의 86%가 선형으로 설명되어</span>(Claude 계산) 긴 선형 기억이 많은 일을 한다 <span class="tag tag-interp">해석</span>.</li>
+<li>조정 안 한 소프트웨어 기준선, <span class="key">특징 수가 다른 비교는 결론을 뒤집는다</span>.</li>
+<li>공정한 표: 입력·readout·<span class="math inline">\(\lambda\)</span> 후보는 모두 같고, <span class="key">다른 것은 특징을 만드는 부분과 그 계산량뿐이다</span>. 필터와 'device'는 tanh 하나 차이(0.30 vs 0.26), NG-RC(탭 10)는 곱셈 약 120번으로 0.28.</li>
+<li>남은 질문: <span class="key">device의 응답이 단순한 회로로 재현된다면?</span> → ‘R–C 회로와 비교’ 구간.</li>
 </ul>
 </div>
 </section>

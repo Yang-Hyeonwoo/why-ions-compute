@@ -747,9 +747,9 @@ window.Quarto = {
 <div class="quiz" data-day="d11" data-set="4-end"></div>
 <div class="keypoints">
 <ul>
-<li>상한 <span class="math inline">\(N\)</span> 안에서 차수 1(기억)과 차수 ≥ 2(비선형)가 용량을 나눠 갖는다. 총량이 상한에 닿아 있을 때(fading memory, 목표 전부, 잡음 없음)만 비선형 몫이 늘면 기억 몫이 그만큼 준다. 상한 아래에서는 둘이 함께 늘 수 있다(입력 0.01 → 0.1). 선형 노드가 대개 MC가 훨씬 높다 <span class="src">Liang 2024, p.200</span>.</li>
-<li>노드 20개: 입력 0.1 → 3에서 차수 1이 11.5 → 4.0, 차수 3이 0.02 → 6.9. 합은 최대 18.7로 20을 넘지 않는다(Claude의 시뮬레이션).</li>
-<li>입력이 너무 작으면 잡음에 묻혀 합 자체가 작다(8.4). 노드 200개에서도 MC 56.9(선형) → 8.2(입력 2.0). 모두 Claude의 시뮬레이션.</li>
+<li><span class="key">상한 <span class="math inline">\(N\)</span> 안에서 차수 1(기억)과 차수 ≥ 2(비선형)가 용량을 나눠 갖는다</span>. 총량이 상한에 닿아 있을 때(fading memory, 목표 전부, 잡음 없음)만 비선형 몫이 늘면 기억 몫이 그만큼 준다. 상한 아래에서는 둘이 함께 늘 수 있다(입력 0.01 → 0.1). 선형 노드가 대개 MC가 훨씬 높다 <span class="src">Liang 2024, p.200</span>.</li>
+<li>노드 20개: 입력 0.1 → 3에서 차수 1이 11.5 → 4.0, 차수 3이 0.02 → 6.9. <span class="key">합은 최대 18.7로 20을 넘지 않는다</span>(Claude의 시뮬레이션).</li>
+<li><span class="key">입력이 너무 작으면 잡음에 묻혀 합 자체가 작다</span>(8.4). 노드 200개에서도 MC 56.9(선형) → 8.2(입력 2.0). 모두 Claude의 시뮬레이션.</li>
 </ul>
 </div>
 </section>
@@ -794,10 +794,10 @@ window.Quarto = {
 <div class="quiz" data-day="d11" data-set="5-end"></div>
 <div class="keypoints">
 <ul>
-<li>연결 없는 device 20개: 같은 device 1.00, 시간상수만 다름 6.59, 시간상수·감도·치우침 다름 11.67, 연결된 reservoir 18.65(Claude의 시뮬레이션).</li>
-<li>병렬 device의 MC는 누적되지 않고 대부분 겹친다; device 간 동역학 편차·다른 게이트 길이가 풍부함을 높인다 <span class="src">Liang 2024, p.196</span>.</li>
-<li>채널 수 ≠ 독립 상태 수. 참여비 차원과 채널을 늘리며 본 성능으로 확인한다 <span class="src">Singh 2026, p.6, 13</span>.</li>
-<li>이온 device 배열의 설계 변수 후보: 통제된 차이(시간상수·감도·대칭) <span class="tag tag-hypo">가설</span>. 통제 안 된 편차는 잡음이다.</li>
+<li>연결 없는 device 20개: 같은 device 1.00, 시간상수만 다름 6.59, 시간상수·감도·치우침 다름 11.67, <span class="key">연결된 reservoir 18.65</span>(Claude의 시뮬레이션).</li>
+<li><span class="key">병렬 device의 MC는 누적되지 않고 대부분 겹친다</span>; device 간 동역학 편차·다른 게이트 길이가 풍부함을 높인다 <span class="src">Liang 2024, p.196</span>.</li>
+<li><span class="key">채널 수 ≠ 독립 상태 수</span>. 참여비 차원과 채널을 늘리며 본 성능으로 확인한다 <span class="src">Singh 2026, p.6, 13</span>.</li>
+<li>이온 device 배열의 설계 변수 후보: <span class="key">통제된 차이(시간상수·감도·대칭)</span> <span class="tag tag-hypo">가설</span>. 통제 안 된 편차는 잡음이다.</li>
 </ul>
 </div>
 </section>
@@ -823,9 +823,9 @@ window.Quarto = {
 <div class="quiz" data-day="d11" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>NARMA10: 선형(MC 56.9) 0.144, 입력 2.0(MC 8.2) 0.232, 기본(17.9) 0.053, 입력 0.1(29.3) 0.032, N = 800 0.0165(Claude의 시뮬레이션). 최대 기억도 최대 비선형도 최선이 아니다.</li>
-<li>좋은 reservoir = 노드 수로 묶인 총량을 과제가 요구하는 차수·지연에 배분하는 reservoir <span class="tag tag-interp">해석</span>. 지연별 기억 분포와 차수별 용량을 함께 본다 <span class="src">Singh 2026, p.8, 13</span>.</li>
-<li>NARMA 숫자 하나로 결론 내리지 않는다 <span class="src">Stepney 2024, p.677, 680</span>.</li>
+<li>NARMA10: 선형(MC 56.9) 0.144, 입력 2.0(MC 8.2) 0.232, 기본(17.9) 0.053, 입력 0.1(29.3) 0.032, N = 800 0.0165(Claude의 시뮬레이션). <span class="key">최대 기억도 최대 비선형도 최선이 아니다</span>.</li>
+<li>좋은 reservoir = 노드 수로 묶인 <span class="key">총량을 과제가 요구하는 차수·지연에 배분하는 reservoir</span> <span class="tag tag-interp">해석</span>. 지연별 기억 분포와 차수별 용량을 함께 본다 <span class="src">Singh 2026, p.8, 13</span>.</li>
+<li><span class="key">NARMA 숫자 하나로 결론 내리지 않는다</span> <span class="src">Stepney 2024, p.677, 680</span>.</li>
 </ul>
 </div>
 </section>

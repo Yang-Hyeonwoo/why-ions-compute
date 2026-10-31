@@ -870,11 +870,11 @@ Drift / 노화
 </div>
 <div class="keypoints">
 <ul>
-<li>편차는 반복 간·device 간·drift·환경 네 종류로 가르고, 기원에 따라 따로 보고한다 <span class="src">Singh 2026, p.14</span>.</li>
-<li>순서: 반복성·drift·(device 안 &lt; device 사이)를 먼저 확인한다. Drift는 기억인 척한다 <span class="src">Singh 2026, p.5</span>.</li>
-<li>측정값 한 묶음을 같은 device 반복(①)·같은 날 다른 device(②)·같은 device 다른 날(③)로 읽는다. 예: device 2 반복 SD 0.16 ms, device 간 SD 1.41 ms(약 9배), drift 0.1 ms/일.</li>
-<li>숫자: τ = 8, 10, 12, 10, 10 ms → 평균 10. 표본 표준편차(n−1로 나눔, 기본) 1.41, CV 14.1%. 개수 n으로 나누면 1.26, CV 12.6%.</li>
-<li>DC 특성의 균일성 ≠ 동적 응답의 균일성 <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">편차는 반복 간·device 간·drift·환경 네 종류로 가르고, 기원에 따라 따로 보고한다</span> <span class="src">Singh 2026, p.14</span>.</li>
+<li>순서: 반복성·drift·(device 안 &lt; device 사이)를 먼저 확인한다. <span class="key">Drift는 기억인 척한다</span> <span class="src">Singh 2026, p.5</span>.</li>
+<li>측정값 한 묶음을 같은 device 반복(①)·같은 날 다른 device(②)·같은 device 다른 날(③)로 읽는다. 예: device 2 반복 SD 0.16 ms, <span class="key">device 간 SD 1.41 ms(약 9배)</span>, drift 0.1 ms/일.</li>
+<li>숫자: τ = 8, 10, 12, 10, 10 ms → 평균 10. <span class="key">표본 표준편차(n−1로 나눔, 기본) 1.41, CV 14.1%</span>. 개수 n으로 나누면 1.26, CV 12.6%.</li>
+<li><span class="key">DC 특성의 균일성 ≠ 동적 응답의 균일성</span> <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>
@@ -951,9 +951,9 @@ Drift / 노화
 <div class="quiz" data-day="d18" data-set="2-check"></div>
 <div class="keypoints">
 <ul>
-<li>잡음의 피해는 Δ/σ(readout이 쓰는 상태 차이 ÷ 반복 흔들림, 진폭으로 잰 신호 대 잡음비)로 정해진다. 문턱까지의 거리 Δ/2가 σ의 몇 배인지를 보면 된다. Δ/σ = 1이면 30.9%, 4면 2.3% 틀린다(정규분포 가정).</li>
-<li>요동이 상태 차이와 비슷해지면 재현 가능한 동작이 깨졌다는 신호다 <span class="src">Singh 2026, p.9</span>.</li>
-<li>평균 <span class="math inline">\(n\)</span>번은 σ를 <span class="math inline">\(\sqrt{n}\)</span>분의 1로 줄이지만 시간·에너지를 <span class="math inline">\(n\)</span>배 쓴다(Day 31–32). 평균으로 줄어드는 것은 반복 간 흔들림뿐이고, drift와 device 간 차이는 줄지 않는다.</li>
+<li>잡음의 피해는 Δ/σ(readout이 쓰는 상태 차이 ÷ 반복 흔들림, 진폭으로 잰 신호 대 잡음비)로 정해진다. 문턱까지의 거리 Δ/2가 σ의 몇 배인지를 보면 된다. <span class="key">Δ/σ = 1이면 30.9%, 4면 2.3% 틀린다</span>(정규분포 가정).</li>
+<li><span class="key">요동이 상태 차이와 비슷해지면 재현 가능한 동작이 깨졌다는 신호다</span> <span class="src">Singh 2026, p.9</span>.</li>
+<li>평균 <span class="math inline">\(n\)</span>번은 σ를 <span class="math inline">\(\sqrt{n}\)</span>분의 1로 줄이지만 시간·에너지를 <span class="math inline">\(n\)</span>배 쓴다(Day 31–32). <span class="key">평균으로 줄어드는 것은 반복 간 흔들림뿐이고, drift와 device 간 차이는 줄지 않는다</span>.</li>
 </ul>
 </div>
 </section>
@@ -1114,10 +1114,10 @@ x \leftarrow d\,x + (1-d)\,\tanh\!\big(g\,(w\,u + b)\big), \qquad d = e^{-\Delta
 <div class="quiz" data-day="d18" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>칩 안의 다양성은 이득: 같은 노드 8개 NMSE 0.84 → 서로 다른 노드 0.32(시뮬레이션). 폴더 원문도 편차가 풍부함을 높인다고 쓴다 <span class="src">Liang 2024, p.196</span> <span class="src">Pei 2026, p.1200</span>.</li>
-<li>칩 사이의 편차는 학습한 readout의 이식을 깬다: CV 10%에서 0.36 → 1.41(평균만 찍는 것보다 나쁨, 시뮬레이션). 편차·drift는 readout의 타당성을 떨어뜨리고 재보정을 요구한다 <span class="src">Singh 2026, p.19</span>.</li>
-<li>대응책(칩별 재보정, 여러 칩으로 학습, 규제 강화, 잡음 인지 학습)은 각각 보정 데이터·성능·설계 비용을 치른다.</li>
-<li>Pei 2026의 같은 <span class="math inline">\(W_{OUT}\)</span> 재사용은 한 device의 기계적 변화에 대한 견고성이지 device 간 이식이 아니다 <span class="src">Pei 2026, p.1203–1204</span>.</li>
+<li>칩 안의 다양성은 이득: <span class="key">같은 노드 8개 NMSE 0.84 → 서로 다른 노드 0.32</span>(시뮬레이션). 폴더 원문도 편차가 풍부함을 높인다고 쓴다 <span class="src">Liang 2024, p.196</span> <span class="src">Pei 2026, p.1200</span>.</li>
+<li><span class="key">칩 사이의 편차는 학습한 readout의 이식을 깬다</span>: CV 10%에서 0.36 → 1.41(평균만 찍는 것보다 나쁨, 시뮬레이션). 편차·drift는 readout의 타당성을 떨어뜨리고 재보정을 요구한다 <span class="src">Singh 2026, p.19</span>.</li>
+<li>대응책(칩별 재보정, 여러 칩으로 학습, 규제 강화, 잡음 인지 학습)은 <span class="key">각각 보정 데이터·성능·설계 비용을 치른다</span>.</li>
+<li>Pei 2026의 같은 <span class="math inline">\(W_{OUT}\)</span> 재사용은 <span class="key">한 device의 기계적 변화에 대한 견고성이지 device 간 이식이 아니다</span> <span class="src">Pei 2026, p.1203–1204</span>.</li>
 </ul>
 </div>
 </section>

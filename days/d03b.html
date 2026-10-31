@@ -787,7 +787,7 @@ window.Quarto = {
 <div class="keypoints">
 <ul>
 <li>Roadmap: 희소성·병렬성·아날로그 동역학·사건 구동 <span class="src">Roadmap 2026, p.8103</span>. Aluru: co-location(디지털로 부분 재현 가능) vs 병렬·비동기·다중 이온·적응(재현 어려움) <span class="src">Aluru 2026, p.592</span>. Kudithipudi: 다섯 이점 + "마법이 아니다" <span class="src">Kudithipudi 2025, p.801</span>.</li>
-<li>목록이 다른 것은 출발 줄기가 달라서다 <span class="tag tag-interp">해석</span>. 오늘의 다섯 축은 이 학습 계획의 분류이며 서로 겹친다.</li>
+<li><span class="key">목록이 다른 것은 출발 줄기가 달라서다</span> <span class="tag tag-interp">해석</span>. 오늘의 다섯 축은 이 학습 계획의 분류이며 서로 겹친다.</li>
 </ul>
 </div>
 </section>
@@ -893,9 +893,9 @@ analog-to-digital converter. 연속 전압·전류를 0/1 묶음(숫자)으로 �
 <div class="quiz" data-day="d03" data-set="4-end"></div>
 <div class="keypoints">
 <ul>
-<li>Co-location은 벽 ①(weight 이동)을 줄이되 ADC·보정·배열 간 이동(벽 ③)에서 값을 치른다 <span class="src">Roadmap 2026, p.8128, 8130</span>.</li>
-<li>사건 구동은 <span class="math inline">\(P \approx P_{\text{static}} + \alpha_{\text{unit}} N f E_{\text{unit}}\)</span>에서 유닛 활동률과 클록 배분을 줄인다 <span class="src">Roadmap 2026, p.8127</span>. 이득은 입력이 희소하고 <strong>대기 전력과 사건 처리의 추가 비용이 작을 때</strong>만 크다(그림 16, 모형). 비교 상대는 클록 게이팅 등을 쓴 동기식이어야 공정하다 <span class="tag tag-interp">해석</span>.</li>
-<li>사건 구동은 디지털/아날로그와 별개다. 비동기 사건 통신을 쓰는 디지털 칩(Loihi)이 있다 <span class="src">Roadmap 2026, p.8132, 8135</span>.</li>
+<li><span class="key">Co-location은 벽 ①(weight 이동)을 줄이되 ADC·보정·배열 간 이동(벽 ③)에서 값을 치른다</span> <span class="src">Roadmap 2026, p.8128, 8130</span>.</li>
+<li>사건 구동은 <span class="math inline">\(P \approx P_{\text{static}} + \alpha_{\text{unit}} N f E_{\text{unit}}\)</span>에서 유닛 활동률과 클록 배분을 줄인다 <span class="src">Roadmap 2026, p.8127</span>. <span class="key">이득은 입력이 희소하고 <strong>대기 전력과 사건 처리의 추가 비용이 작을 때</strong>만 크다</span>(그림 16, 모형). 비교 상대는 클록 게이팅 등을 쓴 동기식이어야 공정하다 <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">사건 구동은 디지털/아날로그와 별개다</span>. 비동기 사건 통신을 쓰는 디지털 칩(Loihi)이 있다 <span class="src">Roadmap 2026, p.8132, 8135</span>.</li>
 </ul>
 </div>
 </section>
@@ -962,9 +962,9 @@ Leaky integration (leak 적분)
 <div class="quiz" data-day="d03" data-set="5-end"></div>
 <div class="keypoints">
 <ul>
-<li>Analog는 벽 ③(비트 수만큼의 회로)을 줄이되 잡음·편차를 감수한다. 같은 구성이면 소프트웨어 RC가 대개 더 정확하다 <span class="src">Liang 2024, p.201</span>. 조건: 과제의 잡음 내성 + 다음 단계가 아날로그이거나 변환이 드묾.</li>
-<li>시간 동역학은 과거 입력의 저장·update(벽 ①)을 device 상태로 대체한다 <span class="src">Roadmap 2026, p.8108</span>. 조건: <span class="math inline">\(\tau \approx T_{\text{signal}}\)</span> <span class="src">Liang 2024, p.198</span>. 이온 µs–s는 생체·센서 신호(ms–s)와 겹친다 <span class="src">Roadmap 2026, p.8126</span>.</li>
-<li><span class="math inline">\(\tau\)</span>(모형 매개변수) ≠ retention(지표). 상태에 과거가 담긴다 ≠ 과제에 필요한 정보를 읽을 수 있다 → Day 10.</li>
+<li><span class="key">Analog는 벽 ③(비트 수만큼의 회로)을 줄이되 잡음·편차를 감수한다</span>. 같은 구성이면 소프트웨어 RC가 대개 더 정확하다 <span class="src">Liang 2024, p.201</span>. 조건: 과제의 잡음 내성 + 다음 단계가 아날로그이거나 변환이 드묾.</li>
+<li><span class="key">시간 동역학은 과거 입력의 저장·update(벽 ①)을 device 상태로 대체한다</span> <span class="src">Roadmap 2026, p.8108</span>. 조건: <span class="math inline">\(\tau \approx T_{\text{signal}}\)</span> <span class="src">Liang 2024, p.198</span>. 이온 µs–s는 생체·센서 신호(ms–s)와 겹친다 <span class="src">Roadmap 2026, p.8126</span>.</li>
+<li><span class="key"><span class="math inline">\(\tau\)</span>(모형 매개변수) ≠ retention(지표)</span>. 상태에 과거가 담긴다 ≠ 과제에 필요한 정보를 읽을 수 있다 → Day 10.</li>
 </ul>
 </div>
 </section>
@@ -1038,9 +1038,9 @@ Leaky integration (leak 적분)
 <div class="quiz" data-day="d03" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>가소성은 역전파의 데이터 왕복과 엣지 재학습 비용을 줄일 수 있다 <span class="src">Kudithipudi 2025, p.801</span> <span class="src">Aluru 2026, p.592</span>. 조건: update 선형·대칭·내구, 10 bit 이상 정밀도 <span class="src">Roadmap 2026, p.8112</span>, 충분한 retention <span class="src">Roadmap 2026, p.8113</span>. inference용과 on-chip training용은 다른 spec이다 <span class="src">Jiang 2026, p.1114</span>.</li>
-<li>"왜 하필 뇌인가"의 답은 "존재 증명 + 조건"의 형태다 <span class="tag tag-interp">해석</span>. "20 W"와 "수천 배"는 답이 아니다.</li>
-<li>(다시 볼 때) 반론: 조건을 붙이면 '뇌의 원리'는 좋은 공학 원칙의 다른 이름이다 → 위 심화 접기.</li>
+<li>가소성은 역전파의 데이터 왕복과 엣지 재학습 비용을 줄일 수 있다 <span class="src">Kudithipudi 2025, p.801</span> <span class="src">Aluru 2026, p.592</span>. 조건: update 선형·대칭·내구, 10 bit 이상 정밀도 <span class="src">Roadmap 2026, p.8112</span>, 충분한 retention <span class="src">Roadmap 2026, p.8113</span>. <span class="key">inference용과 on-chip training용은 다른 spec이다</span> <span class="src">Jiang 2026, p.1114</span>.</li>
+<li><span class="key">"왜 하필 뇌인가"의 답은 "존재 증명 + 조건"의 형태다</span> <span class="tag tag-interp">해석</span>. "20 W"와 "수천 배"는 답이 아니다.</li>
+<li>(다시 볼 때) 반론: <span class="key">조건을 붙이면 '뇌의 원리'는 좋은 공학 원칙의 다른 이름이다</span> → 위 심화 접기.</li>
 </ul>
 </div>
 </section>

@@ -758,9 +758,9 @@ window.Quarto = {
 <div class="quiz" data-day="d09" data-set="1-check"></div>
 <div class="keypoints">
 <ul>
-<li>기억 없는 장치 <span class="math inline">\(y = g(u(t))\)</span>는 지금 입력이 같으면 늘 같은 답 → "1, 0"과 "0, 0"을 못 가른다. 과거가 필요한 과제는 기억 없이 못 푼다.</li>
-<li>기억을 얻는 두 방법: 지난 입력을 저장해 두기(delay tap, 메모리 비용) vs 상태에 흔적 남기기(reservoir, 물리 device).</li>
-<li>RC의 단기/fading memory는 MC로 잰다 <span class="src">Liang 2024, p.194</span>. MC가 크면 보조 메모리를 줄일 수 있다 <span class="src">Liang 2024, p.200</span>.</li>
+<li>기억 없는 장치 <span class="math inline">\(y = g(u(t))\)</span>는 지금 입력이 같으면 늘 같은 답 → "1, 0"과 "0, 0"을 못 가른다. <span class="key">과거가 필요한 과제는 기억 없이 못 푼다</span>.</li>
+<li>기억을 얻는 두 방법: <span class="key">지난 입력을 저장해 두기(delay tap, 메모리 비용) vs 상태에 흔적 남기기(reservoir, 물리 device)</span>.</li>
+<li>RC의 단기/fading memory는 MC로 잰다 <span class="src">Liang 2024, p.194</span>. <span class="key">MC가 크면 보조 메모리를 줄일 수 있다</span> <span class="src">Liang 2024, p.200</span>.</li>
 </ul>
 </div>
 </section>
@@ -956,11 +956,11 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 <div class="quiz" data-day="d09" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>Fading memory: <span class="math inline">\(x(t+1) = d\,x(t) + u(t)\)</span>에서 <span class="math inline">\(k\)</span>단계 전 입력의 몫은 <span class="math inline">\(d^k\)</span>. <span class="math inline">\(d\)</span>는 한 단계 뒤 <strong>남는</strong> 몫(0.9 = 90% 남고 10%씩 줄어듦). <span class="math inline">\(d &lt; 1\)</span>이면 최근 입력이 상태를 주로 정한다.</li>
-<li><span class="math inline">\(d\)</span> = 0.5: 1, 0.5, 0.25 … / 0.9: 1, 0.9, 0.81 …(11단계에 0.349) / 1.1: 계속 커짐. <span class="math inline">\(\tanh\)</span>를 씌운 1.1은 0.50에 영원히 머문다(잊지 못함).</li>
-<li><span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>: 같은 device도 입력 간격에 따라 <span class="math inline">\(d\)</span>가 다르다. τ = 38 ms에서 4 ms 간격 0.90, 8 ms 0.81, 100 ms 0.07.</li>
-<li>이온 device로 읽으면 <span class="math inline">\(x\)</span> = 늘어난 conductance(펄스 하나의 <span class="math inline">\(\Delta g\)</span> 단위), <span class="math inline">\(u\)</span> = 쓰기 펄스, <span class="math inline">\(d\)</span> = 다음 펄스 때까지 남는 몫. '천천히 감소하는 전류'는 <span class="math inline">\(u\)</span> = 0인 동안 <span class="math inline">\(x\)</span>가 <span class="math inline">\(d\)</span>배씩 줄어드는 것이다.</li>
-<li>단기 기억은 주로 물리 노드의 동역학에서 나온다 <span class="src">Liang 2024, p.197</span>. <span class="math inline">\(\tau\)</span> ≠ retention(Day 23–24).</li>
+<li>Fading memory: <span class="math inline">\(x(t+1) = d\,x(t) + u(t)\)</span>에서 <span class="key"><span class="math inline">\(k\)</span>단계 전 입력의 몫은 <span class="math inline">\(d^k\)</span></span>. <span class="math inline">\(d\)</span>는 한 단계 뒤 <strong>남는</strong> 몫(0.9 = 90% 남고 10%씩 줄어듦). <span class="math inline">\(d &lt; 1\)</span>이면 최근 입력이 상태를 주로 정한다.</li>
+<li><span class="math inline">\(d\)</span> = 0.5: 1, 0.5, 0.25 … / 0.9: 1, 0.9, 0.81 …(11단계에 0.349) / 1.1: 계속 커짐. <span class="key"><span class="math inline">\(\tanh\)</span>를 씌운 1.1은 0.50에 영원히 머문다(잊지 못함)</span>.</li>
+<li><span class="math inline">\(d = e^{-\Delta t/\tau}\)</span>: <span class="key">같은 device도 입력 간격에 따라 <span class="math inline">\(d\)</span>가 다르다</span>. τ = 38 ms에서 4 ms 간격 0.90, 8 ms 0.81, 100 ms 0.07.</li>
+<li>이온 device로 읽으면 <span class="math inline">\(x\)</span> = 늘어난 conductance(펄스 하나의 <span class="math inline">\(\Delta g\)</span> 단위), <span class="math inline">\(u\)</span> = 쓰기 펄스, <span class="key"><span class="math inline">\(d\)</span> = 다음 펄스 때까지 남는 몫</span>. '천천히 감소하는 전류'는 <span class="math inline">\(u\)</span> = 0인 동안 <span class="math inline">\(x\)</span>가 <span class="math inline">\(d\)</span>배씩 줄어드는 것이다.</li>
+<li><span class="key">단기 기억은 주로 물리 노드의 동역학에서 나온다</span> <span class="src">Liang 2024, p.197</span>. <span class="math inline">\(\tau\)</span> ≠ retention(Day 23–24).</li>
 </ul>
 </div>
 </section>
@@ -1053,10 +1053,10 @@ d = e^{-\Delta t/\tau}, \qquad \tau = -\frac{\Delta t}{\ln d}
 <div class="quiz" data-day="d09" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>ESP: 출발점만 다른 두 상태가 같은 입력을 받으면 하나로 모인다 → 상태가 입력 이력만으로 정해진다. 먼 훗날 상태가 이른 시점 세부에 의존하지 않는다 <span class="src">Stepney 2024, p.668</span>.</li>
-<li>선형 노드: 차이가 입력과 무관하게 매 단계 <span class="math inline">\(d\)</span>배 → <span class="math inline">\(d &lt; 1\)</span>이면 ESP(1.6 → 0.8 → 0.4).</li>
-<li><span class="math inline">\(\tanh\)</span> 노드 <span class="math inline">\(d\)</span> = 1.1: 작은 입력에서는 두 fixed point(±0.50)에 따로 남아 차이 0.96, 큰 입력에서는 <span class="math inline">\(\tanh\)</span>의 평평한 끝에서 배율이 작아져 다시 모인다 → ESP는 reservoir와 입력의 조합의 성질.</li>
-<li>Washout은 ESP가 있을 때만 의미가 있다. 실험에서는 반복성과 드리프트를 먼저 확인한다 <span class="src">Singh 2026, p.5</span>.</li>
+<li>ESP: <span class="key">출발점만 다른 두 상태가 같은 입력을 받으면 하나로 모인다 → 상태가 입력 이력만으로 정해진다</span>. 먼 훗날 상태가 이른 시점 세부에 의존하지 않는다 <span class="src">Stepney 2024, p.668</span>.</li>
+<li>선형 노드: <span class="key">차이가 입력과 무관하게 매 단계 <span class="math inline">\(d\)</span>배</span> → <span class="math inline">\(d &lt; 1\)</span>이면 ESP(1.6 → 0.8 → 0.4).</li>
+<li><span class="math inline">\(\tanh\)</span> 노드 <span class="math inline">\(d\)</span> = 1.1: 작은 입력에서는 두 fixed point(±0.50)에 따로 남아 차이 0.96, 큰 입력에서는 <span class="math inline">\(\tanh\)</span>의 평평한 끝에서 배율이 작아져 다시 모인다 → <span class="key">ESP는 reservoir와 입력의 조합의 성질</span>.</li>
+<li><span class="key">Washout은 ESP가 있을 때만 의미가 있다</span>. 실험에서는 반복성과 드리프트를 먼저 확인한다 <span class="src">Singh 2026, p.5</span>.</li>
 </ul>
 </div>
 </section>

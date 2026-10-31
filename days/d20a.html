@@ -767,9 +767,9 @@ window.Quarto = {
 <div class="quiz" data-day="d20" data-set="1-check"></div>
 <div class="keypoints">
 <ul>
-<li>기억과 비선형의 뿌리는 같다: 입력에 따라 바뀌고 남는 상태 <span class="math inline">\(x\)</span>. <span class="math inline">\(i = G(x,V)V\)</span>, <span class="math inline">\(\dot{x} = f(x,V)\)</span> <span class="src">Pandey 2026, p.7</span>.</li>
-<li>메커니즘의 차이는 "<span class="math inline">\(x\)</span>가 무엇인가"의 차이다(계면 전하, 접합 농도, 들어간 이온의 양, 채널 속 반대이온·흡착량).</li>
-<li>메커니즘마다 휘발성·시간상수·가역성을 적는다. 셋은 서로 다른 성질이다.</li>
+<li><span class="key">기억과 비선형의 뿌리는 같다</span>: 입력에 따라 바뀌고 남는 상태 <span class="math inline">\(x\)</span>. <span class="math inline">\(i = G(x,V)V\)</span>, <span class="math inline">\(\dot{x} = f(x,V)\)</span> <span class="src">Pandey 2026, p.7</span>.</li>
+<li><span class="key">메커니즘의 차이는 "<span class="math inline">\(x\)</span>가 무엇인가"의 차이다</span>(계면 전하, 접합 농도, 들어간 이온의 양, 채널 속 반대이온·흡착량).</li>
+<li>메커니즘마다 휘발성·시간상수·가역성을 적는다. <span class="key">셋은 서로 다른 성질이다</span>.</li>
 </ul>
 </div>
 </section>
@@ -857,10 +857,10 @@ EDL 탈분극
 </div>
 <div class="keypoints">
 <ul>
-<li>EDL = 계면의 전하 두 층 = 얇은 축전기. 충전 시간 <span class="math inline">\(\tau \approx RC\)</span>는 전해질 conductance·계면 capacitance(재료)과 전극 간격(크기)이 정하고, 면적은 지워진다. 예: 10 mM KCl, 1 cm², 1 cm → 약 3.3 ms(가정값 계산).</li>
-<li>휘발성·가역적·빠름: 이온 게이트 트랜지스터에서 1초 미만의 <span class="math inline">\(\tau_1\)</span>으로 귀속된다 <span class="src">Lee 2024 (AFM), p.3</span>.</li>
-<li>화학으로 늘릴 수 있다: zwitterion 첨가로 0.94 → 3.92 s <span class="src">Lee 2025 (zwitterion), p.5</span>. 방전 길을 막으면 EDL 개방 전압도 오래 남는다 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.309</span>.</li>
-<li>비선형은 EDL 자체보다 그것이 여닫는 채널(트랜지스터 문턱)에서 주로 온다 <span class="tag tag-interp">해석</span>.</li>
+<li>EDL = 계면의 전하 두 층 = 얇은 축전기. 충전 시간 <span class="math inline">\(\tau \approx RC\)</span>는 <span class="key">전해질 conductance·계면 capacitance(재료)과 전극 간격(크기)이 정하고, 면적은 지워진다</span>. 예: 10 mM KCl, 1 cm², 1 cm → 약 3.3 ms(가정값 계산).</li>
+<li><span class="key">휘발성·가역적·빠름</span>: 이온 게이트 트랜지스터에서 1초 미만의 <span class="math inline">\(\tau_1\)</span>으로 귀속된다 <span class="src">Lee 2024 (AFM), p.3</span>.</li>
+<li><span class="key">화학으로 늘릴 수 있다</span>: zwitterion 첨가로 0.94 → 3.92 s <span class="src">Lee 2025 (zwitterion), p.5</span>. 방전 길을 막으면 EDL 개방 전압도 오래 남는다 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.309</span>.</li>
+<li><span class="key">비선형은 EDL 자체보다 그것이 여닫는 채널(트랜지스터 문턱)에서 주로 온다</span> <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>
@@ -993,11 +993,11 @@ Bipolar 접합
 </div>
 <div class="keypoints">
 <ul>
-<li>고정 전하 겔은 Donnan 배제로 한 종류의 이온만 나른다(1 M 고정 전하, 10 mM 염 → 공이온 <span class="math inline">\(c_s^2/X\)</span> = 0.1 mM, 1/100, 코드 계산).</li>
-<li>Bipolar 접합: 순방향 = 접합에 축적(conductance 증가), 역방향 = 고갈(conductance 감소). 정류(비선형)와 이력(기억)이 한 상태변수에서 함께 나온다.</li>
-<li>장난감 모형: 고리는 전압이 바뀌는 빠르기가 device 시간상수와 맞을 때(<span class="math inline">\(2\pi f \sim 1/\tau\)</span>) 가장 크다(0.16 Hz 0.42 vs 0.01 Hz 0.12, 10 Hz 0.008; 촘촘히 훑으면 최대 약 0.08 Hz. Claude 계산). 정류비 <span class="math inline">\(e^{3} \approx 20\)</span>.</li>
-<li>논문 예: HA–CS 역방향 저항이 대조군의 35배 <span class="src">Lee 2026 (AFM), p.4</span>; 기억 200–4000 s, 극성별 시간 차 <span class="src">Zhang 2024 (ACS Nano), p.15029–15030</span>; 이온겔 113시간 <span class="src">Zhou 2025, p.6</span>.</li>
-<li>열린 질문: 이완을 정하는 것이 계면인가 느린 역류인가 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.316</span>.</li>
+<li><span class="key">고정 전하 겔은 Donnan 배제로 한 종류의 이온만 나른다</span>(1 M 고정 전하, 10 mM 염 → 공이온 <span class="math inline">\(c_s^2/X\)</span> = 0.1 mM, 1/100, 코드 계산).</li>
+<li>Bipolar 접합: 순방향 = 접합에 축적(conductance 증가), 역방향 = 고갈(conductance 감소). <span class="key">정류(비선형)와 이력(기억)이 한 상태변수에서 함께 나온다</span>.</li>
+<li>장난감 모형: <span class="key">고리는 전압이 바뀌는 빠르기가 device 시간상수와 맞을 때</span>(<span class="math inline">\(2\pi f \sim 1/\tau\)</span>) 가장 크다(0.16 Hz 0.42 vs 0.01 Hz 0.12, 10 Hz 0.008; 촘촘히 훑으면 최대 약 0.08 Hz. Claude 계산). 정류비 <span class="math inline">\(e^{3} \approx 20\)</span>.</li>
+<li>논문 예: <span class="key">HA–CS 역방향 저항이 대조군의 35배</span> <span class="src">Lee 2026 (AFM), p.4</span>; 기억 200–4000 s, 극성별 시간 차 <span class="src">Zhang 2024 (ACS Nano), p.15029–15030</span>; 이온겔 113시간 <span class="src">Zhou 2025, p.6</span>.</li>
+<li>열린 질문: <span class="key">이완을 정하는 것이 계면인가 느린 역류인가</span> <span class="src">Wang 2025 (Chem. Soc. Rev.), p.316</span>.</li>
 </ul>
 </div>
 </section>

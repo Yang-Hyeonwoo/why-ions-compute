@@ -990,11 +990,11 @@ Washout
 </div>
 <div class="keypoints">
 <ul>
-<li>고윳값 = 곱해도 방향이 안 바뀌는 특별한 방향의 배율. <span class="math inline">\(W = [[0.6, 0.3],[0.3, 0.6]]\)</span>은 (1, 1) 방향 0.9배, (1, −1) 방향 0.3배(<span class="math inline">\((0.6-\lambda)^2 = 0.09\)</span>). 가장 큰 크기가 spectral radius ρ(여기 0.9). Day 13–14의 <span class="math inline">\(W\)</span>는 방향이 돌며 줄고 ρ = 0.54.</li>
-<li>반복해서 곱하면 작은 배율 방향은 사라지고 가장 큰 배율 방향만 남는다 → ρ가 기억의 길이를 정한다. 노드 200개에서 ρ = 0.3, 0.9는 처음 상태를 잊고 1.2, 2.0은 1,000단계 뒤에도 거리 5.3, 14(시뮬레이션).</li>
-<li>ρ &lt; 1: 선형이면 ESP의 조건. <span class="math inline">\(\tanh\)</span> reservoir에서는 관행적 기준일 뿐 충분조건도(ρ &lt; 1에서 깨지는 예) 필요조건도(큰 입력이면 ρ &gt; 1에서도 성립) 아니다. 보장하는 충분조건은 가장 큰 특잇값 &lt; 1 <span class="src">Stepney 2024, p.668</span>.</li>
-<li>leak: 다음 상태가 새 값 쪽으로 <span class="math inline">\(a\)</span>만큼만 움직인다(0.8과 새 값 0.2, <span class="math inline">\(a\)</span> = 0.1이면 0.74). 배율 <span class="math inline">\((1-a)+a\lambda\)</span>: λ = 0.9에서 <span class="math inline">\(a\)</span> = 1, 0.5, 0.1 → 0.90, 0.95, 0.99 <span class="src">Stepney 2024, p.669</span>. 연속 시간으로는 <span class="math inline">\(a \approx \Delta t/\tau\)</span> <span class="src">Lukoševičius 2012, 3.2.6절</span>.</li>
-<li>그러나 leak을 줄이자 MC는 17.9 → 6.2로 줄었다(시뮬레이션): 오래 남는 것은 평균이지 하나하나의 입력이 아니다. <span class="math inline">\(d\)</span>·τ·λ·ρ·<span class="math inline">\(a\)</span>는 서로 다른 양이다.</li>
+<li>고윳값 = 곱해도 방향이 안 바뀌는 특별한 방향의 배율. <span class="math inline">\(W = [[0.6, 0.3],[0.3, 0.6]]\)</span>은 (1, 1) 방향 0.9배, (1, −1) 방향 0.3배(<span class="math inline">\((0.6-\lambda)^2 = 0.09\)</span>). <span class="key">가장 큰 크기가 spectral radius ρ(여기 0.9)</span>. Day 13–14의 <span class="math inline">\(W\)</span>는 방향이 돌며 줄고 ρ = 0.54.</li>
+<li>반복해서 곱하면 작은 배율 방향은 사라지고 가장 큰 배율 방향만 남는다 → <span class="key">ρ가 기억의 길이를 정한다</span>. 노드 200개에서 ρ = 0.3, 0.9는 처음 상태를 잊고 1.2, 2.0은 1,000단계 뒤에도 거리 5.3, 14(시뮬레이션).</li>
+<li>ρ &lt; 1: 선형이면 ESP의 조건. <span class="key"><span class="math inline">\(\tanh\)</span> reservoir에서는 관행적 기준일 뿐</span> 충분조건도(ρ &lt; 1에서 깨지는 예) 필요조건도(큰 입력이면 ρ &gt; 1에서도 성립) 아니다. 보장하는 충분조건은 가장 큰 특잇값 &lt; 1 <span class="src">Stepney 2024, p.668</span>.</li>
+<li>leak: <span class="key">다음 상태가 새 값 쪽으로 <span class="math inline">\(a\)</span>만큼만 움직인다</span>(0.8과 새 값 0.2, <span class="math inline">\(a\)</span> = 0.1이면 0.74). 배율 <span class="math inline">\((1-a)+a\lambda\)</span>: λ = 0.9에서 <span class="math inline">\(a\)</span> = 1, 0.5, 0.1 → 0.90, 0.95, 0.99 <span class="src">Stepney 2024, p.669</span>. 연속 시간으로는 <span class="math inline">\(a \approx \Delta t/\tau\)</span> <span class="src">Lukoševičius 2012, 3.2.6절</span>.</li>
+<li>그러나 leak을 줄이자 MC는 17.9 → 6.2로 줄었다(시뮬레이션): <span class="key">오래 남는 것은 평균이지 하나하나의 입력이 아니다</span>. <span class="math inline">\(d\)</span>·τ·λ·ρ·<span class="math inline">\(a\)</span>는 서로 다른 양이다.</li>
 </ul>
 </div>
 </section>
@@ -1065,10 +1065,10 @@ Washout
 <div class="quiz" data-day="d09" data-set="5-end"></div>
 <div class="keypoints">
 <ul>
-<li>다섯 고리: ① 입력이 물리량을 바꾼다 → ② 천천히 돌아간다(<span class="math inline">\(d\)</span>) → ③ 지금 읽는 값에 과거가 섞인다 → ④ 이력이 잡음보다 크게 구별된다(ESP 포함) → ⑤ 학습한 readout이 새 데이터에서 기준선보다 낫다. 느린 감쇠는 ② 하나다.</li>
-<li>느린 감쇠만으로는 쓸모 있는 기억이 확립되지 않는다 <span class="src">Singh 2026, p.8</span>. 시간척도가 과제에 맞아야 한다 <span class="src">Singh 2026, p.4</span> <span class="src">Stepney 2024, p.673</span>.</li>
-<li>(잡음 없는 선형) 노드 하나의 기억은 합이 1인 예산: <span class="math inline">\(d^{2k}(1-d^2)\)</span>. <span class="math inline">\(d\)</span>는 예산을 과거에 나눠 주는 방식일 뿐이다. 최근과 먼 과거를 다 원하면 서로 다른 노드가 여럿 필요하다(Day 19–20).</li>
-<li>Device 논문의 기억이 device에서 오는지 소프트웨어 leak에서 오는지 확인한다 <span class="src">Zhong 2026, p.4, 7</span>.</li>
+<li>다섯 고리: ① 입력이 물리량을 바꾼다 → ② 천천히 돌아간다(<span class="math inline">\(d\)</span>) → ③ 지금 읽는 값에 과거가 섞인다 → ④ 이력이 잡음보다 크게 구별된다(ESP 포함) → ⑤ 학습한 readout이 새 데이터에서 기준선보다 낫다. <span class="key">느린 감쇠는 ② 하나다</span>.</li>
+<li><span class="key">느린 감쇠만으로는 쓸모 있는 기억이 확립되지 않는다</span> <span class="src">Singh 2026, p.8</span>. 시간척도가 과제에 맞아야 한다 <span class="src">Singh 2026, p.4</span> <span class="src">Stepney 2024, p.673</span>.</li>
+<li>(잡음 없는 선형) 노드 하나의 기억은 합이 1인 예산: <span class="math inline">\(d^{2k}(1-d^2)\)</span>. <span class="math inline">\(d\)</span>는 예산을 과거에 나눠 주는 방식일 뿐이다. <span class="key">최근과 먼 과거를 다 원하면 서로 다른 노드가 여럿 필요하다</span>(Day 19–20).</li>
+<li><span class="key">Device 논문의 기억이 device에서 오는지 소프트웨어 leak에서 오는지 확인한다</span> <span class="src">Zhong 2026, p.4, 7</span>.</li>
 </ul>
 </div>
 </section>

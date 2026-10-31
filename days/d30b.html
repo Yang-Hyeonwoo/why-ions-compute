@@ -834,10 +834,10 @@ window.Quarto = {
 <div class="quiz" data-day="d30" data-set="4-check"></div>
 <div class="keypoints">
 <ul>
-<li>RNN: 상태 하나에 압축, 전부 학습(BPTT). RC: 고정 상태에 서서히 잊으며 남음, readout만 학습. 어텐션: 지난 단어를 모두 보관해 다시 봄, 전부 학습. 단어 1,000개면 어텐션 점수 500,500번 vs state update 1,000번(셈 한 번의 크기가 달라 연산량·에너지 비교는 아니고, 증가 방식 <span class="math inline">\(n^2\)</span> 대 <span class="math inline">\(n\)</span>의 비교).</li>
-<li>트랜스포머의 곱셈 두 종류: 고정 곱셈(고정 weight × 입력, crossbar에 맞음) / 입력끼리 곱셈(입력 × 입력, 단어마다 새로 써야 함).</li>
-<li>측정된 하드웨어는 고정 곱셈을 칩에서, 입력끼리 곱셈은 디지털 <span class="src">Chen 2025 (ALBERT)</span>. 입력끼리 곱셈을 아날로그로 한 것은 회로 시뮬레이션 <span class="src">Leroux 2025</span>, RC + 어텐션은 시뮬레이션·소프트웨어 <span class="src">Köster 2024</span> <span class="src">Shen 2021</span>. 이온 device 어텐션은 웹 검색 범위(2026-10 기준)에서 찾지 못함 <span class="tag tag-unverified">미확인</span>.</li>
-<li>이온 device의 문헌 대표값(내구 10², 상태 2⁶–2⁸ <span class="src">Aluru 2026, Table 1, p.598</span>)으로는 1,024 단어 창에서 칸마다 1,024 단어에 쓰기 한 번, 쓰기 한 번 = 내구 1회라고 가정하면 약 10⁵ 단어면 닳고, LLM의 정확도 요구(8–16 bit <span class="src">Jiang 2026, p.1120</span>)보다 낮다 <span class="tag tag-interp">해석</span>.</li>
+<li>RNN: 상태 하나에 압축, 전부 학습(BPTT). RC: 고정 상태에 서서히 잊으며 남음, readout만 학습. 어텐션: 지난 단어를 모두 보관해 다시 봄, 전부 학습. <span class="key">단어 1,000개면 어텐션 점수 500,500번 vs state update 1,000번</span>(셈 한 번의 크기가 달라 연산량·에너지 비교는 아니고, 증가 방식 <span class="math inline">\(n^2\)</span> 대 <span class="math inline">\(n\)</span>의 비교).</li>
+<li>트랜스포머의 곱셈 두 종류: <span class="key">고정 곱셈(고정 weight × 입력, crossbar에 맞음) / 입력끼리 곱셈(입력 × 입력, 단어마다 새로 써야 함)</span>.</li>
+<li>측정된 하드웨어는 고정 곱셈을 칩에서, 입력끼리 곱셈은 디지털 <span class="src">Chen 2025 (ALBERT)</span>. 입력끼리 곱셈을 아날로그로 한 것은 회로 시뮬레이션 <span class="src">Leroux 2025</span>, RC + 어텐션은 시뮬레이션·소프트웨어 <span class="src">Köster 2024</span> <span class="src">Shen 2021</span>. <span class="key">이온 device 어텐션은 웹 검색 범위(2026-10 기준)에서 찾지 못함</span> <span class="tag tag-unverified">미확인</span>.</li>
+<li>이온 device의 문헌 대표값(내구 10², 상태 2⁶–2⁸ <span class="src">Aluru 2026, Table 1, p.598</span>)으로는 1,024 단어 창에서 칸마다 1,024 단어에 쓰기 한 번, <span class="key">쓰기 한 번 = 내구 1회라고 가정하면 약 10⁵ 단어면 닳고</span>, LLM의 정확도 요구(8–16 bit <span class="src">Jiang 2026, p.1120</span>)보다 낮다 <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>
@@ -965,11 +965,11 @@ window.Quarto = {
 <div class="quiz" data-day="d30" data-set="5-end"></div>
 <div class="keypoints">
 <ul>
-<li>RC의 의미가 줄어드는 조건: 일반 시계열은 디지털 모델이 더 잘·싸게 하고, physical reservoir computing의 "변환을 줄이는" 이득이 측정되지 않거나 작을 때 <span class="tag tag-interp">해석</span>.</li>
+<li>RC의 의미가 줄어드는 조건: 일반 시계열은 디지털 모델이 더 잘·싸게 하고, <span class="key">physical reservoir computing의 "변환을 줄이는" 이득이 측정되지 않거나 작을 때</span> <span class="tag tag-interp">해석</span>.</li>
 <li>후보 세 묶음: 새 이온 device 원리(나노유체·광·액체 계면) / 새 계산 방식(확률적, 혼돈의 가장자리) / device 안의 학습(BCM).</li>
-<li>확률적 비트: 입력이 1의 확률을 정한다(0.18, 0.50, 0.82). 20번 뽑으면 비율이 흔들린다(12/20 = 0.60). 많이 뽑는 비용이 든다.</li>
-<li>음의 미분저항: 100 nA·0.97 V → 130 nA·0.36 V, 기울기 약 −20 MΩ, 전력 97 → 47 nW <span class="src">Kim 2026 (EOC), p.3</span>. BCM: Δw ∝ y(y − θ), y = 1.3에서 θ = 1이면 +0.39, θ = 1.6이면 −0.39.</li>
-<li>공통으로 없는 것: 엮은 하드웨어 시스템, 시스템 에너지, 기준선 비교. 후보는 아직 관문을 통과하지 않은 질문의 목록이다 <span class="tag tag-interp">해석</span>.</li>
+<li>확률적 비트: 입력이 1의 확률을 정한다(0.18, 0.50, 0.82). 20번 뽑으면 비율이 흔들린다(12/20 = 0.60). <span class="key">많이 뽑는 비용이 든다</span>.</li>
+<li>음의 미분저항: 100 nA·0.97 V → 130 nA·0.36 V, 기울기 약 −20 MΩ, 전력 97 → 47 nW <span class="src">Kim 2026 (EOC), p.3</span>. <span class="key">BCM: Δw ∝ y(y − θ), y = 1.3에서 θ = 1이면 +0.39, θ = 1.6이면 −0.39</span>.</li>
+<li>공통으로 없는 것: 엮은 하드웨어 시스템, 시스템 에너지, 기준선 비교. <span class="key">후보는 아직 관문을 통과하지 않은 질문의 목록이다</span> <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>
@@ -1018,10 +1018,10 @@ window.Quarto = {
 <div class="quiz" data-day="d30" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>핵심 과정의 끝 = 배운 사슬 한 장 + 내 소재에서 측정할 질문 하나. 결정 양식은 선택이고 되돌릴 수 있는 다음 실험 순서다.</li>
+<li><span class="key">핵심 과정의 끝 = 배운 사슬 한 장 + 내 소재에서 측정할 질문 하나</span>. 결정 양식은 선택이고 되돌릴 수 있는 다음 실험 순서다.</li>
 <li>일곱 단계: 장부 열기 → 치명 기준 먼저 → 한 줄씩 판정(근거) → 흐름 → 결정 + 이유 → A–E 또는 근거 → 다시 결정할 날짜와 첫 최소 실험.</li>
 <li>회고: 이제 답할 수 있는 것 / 질문의 모양이 바뀐 것 / 아직 못 하는 것과 필요한 것.</li>
-<li>반론(문헌 공부만으로 결정은 성급): 이번 결정은 되돌릴 수 있게 설계한다, 결정하지 않는 것도 결정이다, 이번에 정하는 것은 실험의 순서다.</li>
+<li>반론(문헌 공부만으로 결정은 성급): 이번 결정은 되돌릴 수 있게 설계한다, <span class="key">결정하지 않는 것도 결정이다, 이번에 정하는 것은 실험의 순서다</span>.</li>
 </ul>
 </div>
 </section>

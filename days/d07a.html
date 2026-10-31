@@ -1079,11 +1079,11 @@ weight를 한없이 조금 바꿀 때 손실이 변하는 비율. 부호가 방�
 </div>
 <div class="keypoints">
 <ul>
-<li>모델 = 입력 × weight → 출력. 학습 = 손실(오차²)이 줄도록 weight를 데이터로 고치기. 예: 입력 2, 정답 5, <span class="math inline">\(w=1.0\)</span>이면 손실 9.</li>
-<li>기울기 = "조금 바꾸면 얼마나 변하나"의 극한 비율. <span class="math inline">\(w=1.0\)</span>에서 −12. 기울기의 반대쪽으로 보폭만큼 옮기면 손실이 준다(9 → 3.24). 보폭이 너무 크면 나빠진다(9 → 81). 가진 데이터를 모두 한 번씩 쓰는 한 바퀴가 epoch(데이터 둘이면 1.0 → 1.6 → 1.69).</li>
-<li>Weight가 이어져 있으면 앞쪽 weight의 기울기는 통로 배율의 <strong>곱</strong>이다(연쇄 법칙·역전파): <span class="math inline">\(2 \times 0.5 \times (-8) = -8\)</span>. 통로가 <span class="math inline">\(k\)</span>개면 배율이 <span class="math inline">\(k\)</span>번 곱해진다.</li>
-<li>S자 함수 <span class="math inline">\(\tanh\)</span>가 끼면 통로 배율은 'weight × <span class="math inline">\(f'\)</span>'. <span class="math inline">\(f'\)</span>는 입력 0에서 1, 입력 2에서 0.07로 1 이하라서 배율이 weight보다 커지지 않는다.</li>
-<li>남은 질문: 시간 순서로 들어오는 신호에는 어떤 모델을 쓰나? → 1구간. 그 모델에서 통로가 몇 개나 되나? → 2구간.</li>
+<li>모델 = 입력 × weight → 출력. <span class="key">학습 = 손실(오차²)이 줄도록 weight를 데이터로 고치기</span>. 예: 입력 2, 정답 5, <span class="math inline">\(w=1.0\)</span>이면 손실 9.</li>
+<li>기울기 = "조금 바꾸면 얼마나 변하나"의 극한 비율. <span class="math inline">\(w=1.0\)</span>에서 −12. <span class="key">기울기의 반대쪽으로 보폭만큼 옮기면 손실이 준다(9 → 3.24)</span>. 보폭이 너무 크면 나빠진다(9 → 81). 가진 데이터를 모두 한 번씩 쓰는 한 바퀴가 epoch(데이터 둘이면 1.0 → 1.6 → 1.69).</li>
+<li>Weight가 이어져 있으면 <span class="key">앞쪽 weight의 기울기는 통로 배율의 <strong>곱</strong>이다(연쇄 법칙·역전파)</span>: <span class="math inline">\(2 \times 0.5 \times (-8) = -8\)</span>. 통로가 <span class="math inline">\(k\)</span>개면 배율이 <span class="math inline">\(k\)</span>번 곱해진다.</li>
+<li>S자 함수 <span class="math inline">\(\tanh\)</span>가 끼면 통로 배율은 'weight × <span class="math inline">\(f'\)</span>'. <span class="math inline">\(f'\)</span>는 입력 0에서 1, 입력 2에서 0.07로 <span class="key">1 이하라서 배율이 weight보다 커지지 않는다</span>.</li>
+<li>남은 질문: <span class="key">시간 순서로 들어오는 신호에는 어떤 모델을 쓰나?</span> → 1구간. 그 모델에서 통로가 몇 개나 되나? → 2구간.</li>
 </ul>
 </div>
 </section>
@@ -1197,10 +1197,10 @@ Weight
 <div class="quiz" data-day="d07" data-set="1-end"></div>
 <div class="keypoints">
 <ul>
-<li>RNN은 상태 <span class="math inline">\(h(t)\)</span>를 다음 단계로 넘겨 시계열의 '방금 전까지'를 담는다 <span class="src">Stepney 2024, p.665</span>.</li>
-<li>같은 <span class="math inline">\(W\)</span>를 매 단계 다시 쓴다. 1차원 예시: 입력 1 뒤에 0만 와도 0.762 → 0.363 → 0.180으로 흔적이 남으며 줄어든다.</li>
-<li>줄어드는 속도는 <span class="math inline">\(W\)</span>가 정한다. 1차원 예의 0.5는 이전 상태의 50%가 남는 계수로, Day 5–6 LIF의 0.9(90%가 남음)와 같은 꼴이다. 단 RNN의 0.5는 물리 시간상수가 아니라 weight다. 이것이 Day 15–16 fading memory의 씨앗이다.</li>
-<li>남은 질문: 이 구조를 어떻게 학습시키나? 왜 어렵나?</li>
+<li><span class="key">RNN은 상태 <span class="math inline">\(h(t)\)</span>를 다음 단계로 넘겨 시계열의 '방금 전까지'를 담는다</span> <span class="src">Stepney 2024, p.665</span>.</li>
+<li><span class="key">같은 <span class="math inline">\(W\)</span>를 매 단계 다시 쓴다</span>. 1차원 예시: 입력 1 뒤에 0만 와도 0.762 → 0.363 → 0.180으로 흔적이 남으며 줄어든다.</li>
+<li><span class="key">줄어드는 속도는 <span class="math inline">\(W\)</span>가 정한다</span>. 1차원 예의 0.5는 이전 상태의 50%가 남는 계수로, Day 5–6 LIF의 0.9(90%가 남음)와 같은 꼴이다. 단 RNN의 0.5는 물리 시간상수가 아니라 weight다. 이것이 Day 15–16 fading memory의 씨앗이다.</li>
+<li>남은 질문: <span class="key">이 구조를 어떻게 학습시키나? 왜 어렵나?</span></li>
 </ul>
 </div>
 </section>
@@ -1313,10 +1313,10 @@ weight를 조금 바꿀 때 오차가 변하는 비율. 학습은 기울기의 �
 <div class="quiz" data-day="d07" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>학습 = 기울기(weight 변화 → 오차 변화)의 반대 방향으로 weight를 반복해 옮기기. RNN은 시간을 거슬러 기울기를 모아야 한다(BPTT) <span class="src">Stepney 2024, p.665, 669</span>.</li>
-<li>펼친 RNN은 시간 단계마다 통로가 하나씩 있고 통로 배율이 매번 같은 <span class="math inline">\(W\cdot f'\)</span>이므로, 거슬러 올라가며 같은 인자가 <span class="math inline">\(k\)</span>번 곱해진다: <span class="math inline">\(0.5^{20}\approx10^{-6}\)</span>(소실), <span class="math inline">\(1.5^{20}\approx3325\)</span>(폭주). 1구간 예의 실제 <span class="math inline">\(f'\)</span>로 세 단계를 곱하면 0.104(0.5만 곱하면 0.125). 상태가 여럿이면 가장 큰 고유값의 크기가 이 인자 역할을 한다. RC는 이 문제를 피한다 <span class="src">Liang 2024, p.194</span>.</li>
-<li>물리 device의 세 번째 벽: 내부 weight에 손을 댈 수 없고 미분 가능한 모형이 없다 <span class="src">Stepney 2024, p.669</span>.</li>
-<li>남은 질문: 내부를 학습시키지 않고도 쓸모 있는 네트워크가 가능한가?</li>
+<li>학습 = 기울기(weight 변화 → 오차 변화)의 반대 방향으로 weight를 반복해 옮기기. <span class="key">RNN은 시간을 거슬러 기울기를 모아야 한다(BPTT)</span> <span class="src">Stepney 2024, p.665, 669</span>.</li>
+<li>펼친 RNN은 시간 단계마다 통로가 하나씩 있고 통로 배율이 매번 같은 <span class="math inline">\(W\cdot f'\)</span>이므로, <span class="key">거슬러 올라가며 같은 인자가 <span class="math inline">\(k\)</span>번 곱해진다</span>: <span class="math inline">\(0.5^{20}\approx10^{-6}\)</span>(소실), <span class="math inline">\(1.5^{20}\approx3325\)</span>(폭주). 1구간 예의 실제 <span class="math inline">\(f'\)</span>로 세 단계를 곱하면 0.104(0.5만 곱하면 0.125). 상태가 여럿이면 가장 큰 고유값의 크기가 이 인자 역할을 한다. RC는 이 문제를 피한다 <span class="src">Liang 2024, p.194</span>.</li>
+<li>물리 device의 세 번째 벽: <span class="key">내부 weight에 손을 댈 수 없고 미분 가능한 모형이 없다</span> <span class="src">Stepney 2024, p.669</span>.</li>
+<li>남은 질문: <span class="key">내부를 학습시키지 않고도 쓸모 있는 네트워크가 가능한가?</span></li>
 </ul>
 </div>
 </section>

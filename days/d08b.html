@@ -928,10 +928,10 @@ Momentum / Adam
 </div>
 <div class="keypoints">
 <ul>
-<li>분류 readout은 종류마다 점수를 내고 argmax로 고른다. Softmax는 점수를 확률로: <span class="math inline">\(e^{z}\)</span> → 합 → 나누기. 교차 엔트로피 = <span class="math inline">\(-\ln p_{\text{정답}}\)</span>(예: 0.417)이고, 점수의 기울기는 <span class="math inline">\(p - y\)</span> = (−0.341, 0.242, 0.099)라 정답 점수는 올리고 나머지는 내린다.</li>
-<li>물리 reservoir를 평가할 때는 선형(아핀) readout이 기준이다. 비선형 readout의 성능만으로 재료의 기여를 말하지 않는다 <span class="src">Singh 2026, p.18</span>.</li>
-<li>학습률은 손실의 가파름에 맞춰야 한다: 바닥까지의 거리가 걸음마다 <span class="math inline">\((1 - 28\eta)\)</span>배라 이 그릇에서 <span class="math inline">\(\eta = 0.08\)</span>이면 발산한다.</li>
-<li>학습의 두 길: 공식으로 한 번(ridge) vs 조금씩(경사 하강·momentum·Adam). RC의 선형 readout은 대개 ridge 한 번이면 된다 <span class="src">Stepney 2024, p.669</span> <span class="src">Liang 2024, p.194</span>. Adam은 공식이 없는 손실이나 큰 데이터에서 쓴다 <span class="src">Zhong 2026, p.8</span>.</li>
+<li>분류 readout은 종류마다 점수를 내고 argmax로 고른다. Softmax는 점수를 확률로: <span class="math inline">\(e^{z}\)</span> → 합 → 나누기. 교차 엔트로피 = <span class="math inline">\(-\ln p_{\text{정답}}\)</span>(예: 0.417)이고, <span class="key">점수의 기울기는 <span class="math inline">\(p - y\)</span> = (−0.341, 0.242, 0.099)라 정답 점수는 올리고 나머지는 내린다</span>.</li>
+<li>물리 reservoir를 평가할 때는 선형(아핀) readout이 기준이다. <span class="key">비선형 readout의 성능만으로 재료의 기여를 말하지 않는다</span> <span class="src">Singh 2026, p.18</span>.</li>
+<li><span class="key">학습률은 손실의 가파름에 맞춰야 한다</span>: 바닥까지의 거리가 걸음마다 <span class="math inline">\((1 - 28\eta)\)</span>배라 이 그릇에서 <span class="math inline">\(\eta = 0.08\)</span>이면 발산한다.</li>
+<li>학습의 두 길: 공식으로 한 번(ridge) vs 조금씩(경사 하강·momentum·Adam). <span class="key">RC의 선형 readout은 대개 ridge 한 번이면 된다</span> <span class="src">Stepney 2024, p.669</span> <span class="src">Liang 2024, p.194</span>. Adam은 공식이 없는 손실이나 큰 데이터에서 쓴다 <span class="src">Zhong 2026, p.8</span>.</li>
 </ul>
 </div>
 </section>
@@ -973,10 +973,10 @@ Momentum / Adam
 <div class="quiz" data-day="d08" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>고정된 다양한 특징 + 학습한 선형 결합으로 많은 목표를 흉내 낸다(난수 곡선 K = 2, 5, 20 → NMSE 0.33, 0.0074, 0.0001 미만, 예시 목표로 한 Claude 계산). 섞는 비율 찾기는 포물선이라 한 번에 풀린다.</li>
-<li>시간이 있으면 노드마다 입력 이력의 다른 함수. NARMA10에서 N = 50 → 800이면 NMSE 0.213 → 0.0165(시뮬레이션).</li>
-<li>고정해도 되는 조건: 기억(Day 15–16), 비선형 섞임(Day 17–18), 다양함(Day 19–20). Readout은 있는 것을 섞을 뿐 없는 것을 만들지 않는다 → 표현력의 한계 <span class="src">Liang 2024, p.194, 202</span>.</li>
-<li>Physical reservoir computing은 여기에 '읽을 수 있음'이 붙고 <span class="src">Stepney 2024, p.672</span>, 같은 구성이면 대개 소프트웨어가 더 정확하며 <span class="src">Liang 2024, p.201</span>, 디지털보다 비싸면 의미가 없다 <span class="src">Liang 2024, p.202</span>.</li>
+<li><span class="key">고정된 다양한 특징 + 학습한 선형 결합으로 많은 목표를 흉내 낸다</span>(난수 곡선 K = 2, 5, 20 → NMSE 0.33, 0.0074, 0.0001 미만, 예시 목표로 한 Claude 계산). 섞는 비율 찾기는 포물선이라 한 번에 풀린다.</li>
+<li><span class="key">시간이 있으면 노드마다 입력 이력의 다른 함수</span>. NARMA10에서 N = 50 → 800이면 NMSE 0.213 → 0.0165(시뮬레이션).</li>
+<li>고정해도 되는 조건: 기억(Day 15–16), 비선형 섞임(Day 17–18), 다양함(Day 19–20). <span class="key">Readout은 있는 것을 섞을 뿐 없는 것을 만들지 않는다 → 표현력의 한계</span> <span class="src">Liang 2024, p.194, 202</span>.</li>
+<li>Physical reservoir computing은 <span class="key">여기에 '읽을 수 있음'이 붙고</span> <span class="src">Stepney 2024, p.672</span>, 같은 구성이면 대개 소프트웨어가 더 정확하며 <span class="src">Liang 2024, p.201</span>, 디지털보다 비싸면 의미가 없다 <span class="src">Liang 2024, p.202</span>.</li>
 </ul>
 </div>
 </section>

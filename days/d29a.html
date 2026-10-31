@@ -779,10 +779,10 @@ window.Quarto = {
 <div class="quiz" data-day="d29" data-set="1-end"></div>
 <div class="keypoints">
 <ul>
-<li>최소 검증 실험 = 가설 사슬의 가장 약한 고리를 가장 낮은 비용의 단에서 시험해, 가설을 죽일 수 있는 가장 싼 실험. 가설을 죽일 수 없는 실험은 싸도 최소 실험이 아니다.</li>
-<li>기각 조건 = 결과를 보기 전에 숫자로 적은 "이 결과면 접는다". 성공 조건·모호 구간의 행동과 한 벌로 적는다.</li>
-<li>실험 사다리: 문헌 → 계산 → 기존 device → 새 device → 여러 device → 배열 → 시스템. 죽일 수 있는 가장 낮은 단을 고른다.</li>
-<li>Drift 예: 허용 5% ÷ 168 h ≈ 0.03%/h가 필요. 지금 2%/h면 재보정 주기 2.5 h, 필요한 개선 약 67배. 무게(용매 증발)와 응답을 함께 재면 합성 전에 원인 후보를 좁힐 수 있다(무게가 그대로면 총 용매 손실만으로는 설명하기 어렵다는 뜻이지, 증발이 전혀 없다는 증명은 아니다).</li>
+<li>최소 검증 실험 = 가설 사슬의 가장 약한 고리를 가장 낮은 비용의 단에서 시험해, 가설을 죽일 수 있는 가장 싼 실험. <span class="key">가설을 죽일 수 없는 실험은 싸도 최소 실험이 아니다</span>.</li>
+<li>기각 조건 = <span class="key">결과를 보기 전에 숫자로 적은 "이 결과면 접는다"</span>. 성공 조건·모호 구간의 행동과 한 벌로 적는다.</li>
+<li>실험 사다리: 문헌 → 계산 → 기존 device → 새 device → 여러 device → 배열 → 시스템. <span class="key">죽일 수 있는 가장 낮은 단을 고른다</span>.</li>
+<li>Drift 예: <span class="key">허용 5% ÷ 168 h ≈ 0.03%/h가 필요. 지금 2%/h면 재보정 주기 2.5 h, 필요한 개선 약 67배</span>. 무게(용매 증발)와 응답을 함께 재면 합성 전에 원인 후보를 좁힐 수 있다(무게가 그대로면 총 용매 손실만으로는 설명하기 어렵다는 뜻이지, 증발이 전혀 없다는 증명은 아니다).</li>
 </ul>
 </div>
 </section>
@@ -929,12 +929,12 @@ n \approx 2 \times (1.96 + 0.84)^2 \times \left(\frac{\text{CV}}{\Delta}\right)^
 <div class="quiz" data-day="d29" data-set="2-check"></div>
 <div class="keypoints">
 <ul>
-<li>독립변수(바꾸는 것: 가교제 농도), 종속변수(재는 것: τ), 통제변수(같게 두거나 재 두는 것: 두께·함수율·습도), 대조군(그 성분만 뺀 시료). 실험 단위 = 따로 부은 device 하나.</li>
-<li>프로토콜: 쉬기 → 기저 전류 → 쓰기 펄스 → 읽기 → ΔI → τ = t ÷ ln(ΔI(0)/ΔI(t))(100 → 60.7 nA, 10 ms면 20 ms). 반복 측정은 device별 평균 하나로. MC·NMSE는 훈련 구간으로 readout을 배우고 held-out 시험 구간에서 계산한다. 프로토콜까지 적는다 <span class="src">Singh 2026, p.20</span>.</li>
-<li>한 device를 여러 번 잰 것(반복 측정)은 측정 흔들림, device 여러 개(독립 반복)는 제작 편차를 본다. 화학의 효과를 주장하려면 표본 수는 device 수다. 반복 측정을 표본으로 세면 유사 반복.</li>
-<li>평균 차이의 흔들림 SE = CV × √(2/n). 판정선 1.96 × SE에서 진짜 차이까지 0.84 × SE가 더 남아야 검출력 80%. CV 20%·차이 30%면 n = 3에서 검출력 45%, n = 7에서 80%.</li>
-<li>어림식 <span class="math inline">\(n \approx 2 \times 7.85 \times (\text{CV}/\Delta)^2\)</span>(정규 근사): CV 20%·차이 30% → 7개, CV 10%·차이 20% → 4개, CV 30%·차이 20% → 36개. t 분포로 보정하면 9·6·37개로, device가 적을수록 1–2개 더 든다. Device 5개로 CV 20%면 볼 수 있는 차이는 약 35%(t 보정 시 약 40%).</li>
-<li>블록(묶음마다 모든 수준) + 무작위화(자리·측정 순서를 난수로). 조건이 묶음·측정 시간과 겹치면 device를 늘려도 그 섞임은 줄지 않는다.</li>
+<li>독립변수(바꾸는 것: 가교제 농도), 종속변수(재는 것: τ), 통제변수(같게 두거나 재 두는 것: 두께·함수율·습도), 대조군(그 성분만 뺀 시료). <span class="key">실험 단위 = 따로 부은 device 하나</span>.</li>
+<li>프로토콜: 쉬기 → 기저 전류 → 쓰기 펄스 → 읽기 → ΔI → τ = t ÷ ln(ΔI(0)/ΔI(t))(100 → 60.7 nA, 10 ms면 20 ms). <span class="key">반복 측정은 device별 평균 하나로</span>. MC·NMSE는 훈련 구간으로 readout을 배우고 held-out 시험 구간에서 계산한다. 프로토콜까지 적는다 <span class="src">Singh 2026, p.20</span>.</li>
+<li>한 device를 여러 번 잰 것(반복 측정)은 측정 흔들림, device 여러 개(독립 반복)는 제작 편차를 본다. <span class="key">화학의 효과를 주장하려면 표본 수는 device 수다</span>. 반복 측정을 표본으로 세면 유사 반복.</li>
+<li>평균 차이의 흔들림 SE = CV × √(2/n). 판정선 1.96 × SE에서 진짜 차이까지 0.84 × SE가 더 남아야 검출력 80%. <span class="key">CV 20%·차이 30%면 n = 3에서 검출력 45%, n = 7에서 80%</span>.</li>
+<li>어림식 <span class="math inline">\(n \approx 2 \times 7.85 \times (\text{CV}/\Delta)^2\)</span>(정규 근사): CV 20%·차이 30% → 7개, CV 10%·차이 20% → 4개, CV 30%·차이 20% → 36개. t 분포로 보정하면 9·6·37개로, device가 적을수록 1–2개 더 든다. <span class="key">Device 5개로 CV 20%면 볼 수 있는 차이는 약 35%(t 보정 시 약 40%)</span>.</li>
+<li>블록(묶음마다 모든 수준) + 무작위화(자리·측정 순서를 난수로). <span class="key">조건이 묶음·측정 시간과 겹치면 device를 늘려도 그 섞임은 줄지 않는다</span>.</li>
 </ul>
 </div>
 </section>
@@ -1000,9 +1000,9 @@ n \approx 2 \times (1.96 + 0.84)^2 \times \left(\frac{\text{CV}}{\Delta}\right)^
 <div class="quiz" data-day="d29" data-set="3-check"></div>
 <div class="keypoints">
 <ul>
-<li>가설이 "무엇보다 낫다"고 말하면 그 "무엇"이 기준선이다. 계산 기여 → 원시 입력 + 같은 readout·정적 device, 화학 손잡이 → 그 성분만 뺀 대조군·크기만 바꾼 device, 조건 → 같은 device의 기준 조건·고정 전하 없는 접합, 시스템 → 같은 전극 + 증폭 + ADC + MCU.</li>
-<li>문헌의 최소 귀속 대조: 원시 입력 기준선, 정적 device 기준선, 같은 readout, 마스크·채널 수 절제 <span class="src">Singh 2026, p.20</span>.</li>
-<li>같은 분할·readout·규제·조정 예산, 특징 수 맞춤. 기준선은 결과를 보기 전에 정한다.</li>
+<li><span class="key">가설이 "무엇보다 낫다"고 말하면 그 "무엇"이 기준선이다</span>. 계산 기여 → 원시 입력 + 같은 readout·정적 device, 화학 손잡이 → 그 성분만 뺀 대조군·크기만 바꾼 device, 조건 → 같은 device의 기준 조건·고정 전하 없는 접합, 시스템 → 같은 전극 + 증폭 + ADC + MCU.</li>
+<li>문헌의 최소 귀속 대조: <span class="key">원시 입력 기준선, 정적 device 기준선, 같은 readout, 마스크·채널 수 절제</span> <span class="src">Singh 2026, p.20</span>.</li>
+<li>같은 분할·readout·규제·조정 예산, 특징 수 맞춤. <span class="key">기준선은 결과를 보기 전에 정한다</span>.</li>
 </ul>
 </div>
 </section>

@@ -855,9 +855,9 @@ runtime 56.6 s -&gt; C:\Users\hyeon\OneDrive\Desktop\Neuromorphic ionotronics\st
 <div class="quiz" data-day="d12" data-set="4-check"></div>
 <div class="keypoints">
 <ul>
-<li>ESN 줄 = 조건(N, ρ, leak, <span class="math inline">\(s_{in}\)</span>, f) | NARMA10 NMSE 평균 ± 표준편차 | MC 평균 ± 표준편차 | λ. 표준편차는 reservoir 난수에 따른 흔들림.</li>
-<li>ESP 줄: 거리가 <code>e-13</code>처럼 0으로 가면 ESP, 그대로면 없음.</li>
-<li>실험 기록 표에는 내 출력의 숫자만. 양식에 없는 <span class="math inline">\(s_{in}\)</span>·선형 결과도 줄을 더해 적는다.</li>
+<li>ESN 줄 = 조건(N, ρ, leak, <span class="math inline">\(s_{in}\)</span>, f) | NARMA10 NMSE 평균 ± 표준편차 | MC 평균 ± 표준편차 | λ. <span class="key">표준편차는 reservoir 난수에 따른 흔들림</span>.</li>
+<li>ESP 줄: <span class="key">거리가 <code>e-13</code>처럼 0으로 가면 ESP, 그대로면 없음</span>.</li>
+<li>실험 기록 표에는 <span class="key">내 출력의 숫자만</span>. 양식에 없는 <span class="math inline">\(s_{in}\)</span>·선형 결과도 줄을 더해 적는다.</li>
 </ul>
 </div>
 </section>
@@ -933,11 +933,11 @@ runtime 56.6 s -&gt; C:\Users\hyeon\OneDrive\Desktop\Neuromorphic ionotronics\st
 <div class="quiz" data-day="d12" data-set="5-check"></div>
 <div class="keypoints">
 <ul>
-<li>N ↑: NMSE 0.213 → 0.053 → 0.0165, MC 11.7 → 21.9로 N에 한참 못 미침(≤ N이지만 차지 않음).</li>
-<li>다섯 knob은 update식 안의 자리가 다르다: N = 상태 숫자 개수, ρ = <span class="math inline">\(W\)</span>의 배율, leak = 섞는 비율, <span class="math inline">\(s_{in}\)</span> = tanh 앞 입력 배율(몫 최대 <span class="math inline">\(0.5 \times s_{in}\)</span>), 선형 = 휘지 않는 <span class="math inline">\(f\)</span>. 한 번에 하나만 바꾼다.</li>
-<li>ρ: 0.3은 기억 부족(0.428), 1.2는 MC가 비슷해도 ESP가 깨져 0.260. Leak ↓: MC와 NMSE 모두 나빠짐(평균화).</li>
-<li><span class="math inline">\(s_{in}\)</span> ↓: MC 29.3, NMSE 0.032로 기본보다 좋음. 선형 노드: MC 56.9인데 NMSE 0.144(delay tap 50개와 같음).</li>
-<li><code>--one</code>으로 내 조건, <code>--taps</code>로 기준선 탭 수를 바꿔 본다. 탭 10 → 11에서 기준선이 크게 좋아진다(u(t−10)). 모두 Claude의 시뮬레이션.</li>
+<li>N ↑: NMSE 0.213 → 0.053 → 0.0165, <span class="key">MC 11.7 → 21.9로 N에 한참 못 미침</span>(≤ N이지만 차지 않음).</li>
+<li>다섯 knob은 update식 안의 자리가 다르다: N = 상태 숫자 개수, ρ = <span class="math inline">\(W\)</span>의 배율, leak = 섞는 비율, <span class="math inline">\(s_{in}\)</span> = tanh 앞 입력 배율(몫 최대 <span class="math inline">\(0.5 \times s_{in}\)</span>), 선형 = 휘지 않는 <span class="math inline">\(f\)</span>. <span class="key">한 번에 하나만 바꾼다</span>.</li>
+<li>ρ: 0.3은 기억 부족(0.428), <span class="key">1.2는 MC가 비슷해도 ESP가 깨져 0.260</span>. Leak ↓: MC와 NMSE 모두 나빠짐(평균화).</li>
+<li><span class="math inline">\(s_{in}\)</span> ↓: MC 29.3, NMSE 0.032로 기본보다 좋음. <span class="key">선형 노드: MC 56.9인데 NMSE 0.144</span>(delay tap 50개와 같음).</li>
+<li><code>--one</code>으로 내 조건, <code>--taps</code>로 기준선 탭 수를 바꿔 본다. <span class="key">탭 10 → 11에서 기준선이 크게 좋아진다</span>(u(t−10)). 모두 Claude의 시뮬레이션.</li>
 </ul>
 </div>
 </section>
@@ -977,9 +977,9 @@ runtime 56.6 s -&gt; C:\Users\hyeon\OneDrive\Desktop\Neuromorphic ionotronics\st
 <div class="quiz" data-day="d12" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>ESN 기본(202개) 0.053 vs 선형 탭 50(51개) 0.146: ESN이 낫다(2차 곱).</li>
-<li>vs 2차 탭 20(231개) 0.035: 같은 특징 수에서는 기본 ESN이 나을 게 없다. N 800(0.0165), 입력 0.1(0.032)은 이긴다. 같은 특징 수로 비교한다 <span class="src">Singh 2026, p.8</span>. 숫자는 모두 Claude의 실행 결과이고, 내 실행과 셋째 자리는 다를 수 있다.</li>
-<li>소프트웨어가 대개 물리보다 정확하고 <span class="src">Liang 2024, p.201</span>, 디지털보다 비싸면 무의미 <span class="src">Liang 2024, p.202</span> → physical reservoir computing의 판정은 시스템 비용으로(Phase 3).</li>
+<li>ESN 기본(202개) 0.053 vs 선형 탭 50(51개) 0.146: <span class="key">ESN이 낫다(2차 곱)</span>.</li>
+<li>vs 2차 탭 20(231개) 0.035: <span class="key">같은 특징 수에서는 기본 ESN이 나을 게 없다</span>. N 800(0.0165), 입력 0.1(0.032)은 이긴다. 같은 특징 수로 비교한다 <span class="src">Singh 2026, p.8</span>. 숫자는 모두 Claude의 실행 결과이고, 내 실행과 셋째 자리는 다를 수 있다.</li>
+<li>소프트웨어가 대개 물리보다 정확하고 <span class="src">Liang 2024, p.201</span>, <span class="key">디지털보다 비싸면 무의미</span> <span class="src">Liang 2024, p.202</span> → physical reservoir computing의 판정은 시스템 비용으로(Phase 3).</li>
 </ul>
 </div>
 </section>
@@ -1071,8 +1071,8 @@ runtime 56.6 s -&gt; C:\Users\hyeon\OneDrive\Desktop\Neuromorphic ionotronics\st
 <div class="keypoints">
 <ul>
 <li>Phase 2 사슬: 학습의 어려움(Day 11–12) → 고정 + readout(Day 13–14) → 기억(Day 15–16) → 비선형(Day 17–18) → 노드 수로 묶인 배분(Day 19–20) → 실습과 기준선(Day 21–22).</li>
-<li>가장 약한 고리 후보: 모든 정량이 소프트웨어 시뮬레이션·가상 모형이라는 점, IPC 상한의 조건(아주 긴 데이터·독립 입력·잡음 없음)이 실제 측정과 다르다는 점 <span class="tag tag-interp">해석</span>.</li>
-<li>바뀐 가정 표에는 날·글·근거를 적고, 하나는 내 소재에 관한 것으로.</li>
+<li>가장 약한 고리 후보: <span class="key">모든 정량이 소프트웨어 시뮬레이션·가상 모형이라는 점</span>, IPC 상한의 조건(아주 긴 데이터·독립 입력·잡음 없음)이 실제 측정과 다르다는 점 <span class="tag tag-interp">해석</span>.</li>
+<li>바뀐 가정 표에는 날·글·근거를 적고, <span class="key">하나는 내 소재에 관한 것으로</span>.</li>
 </ul>
 </div>
 </section>

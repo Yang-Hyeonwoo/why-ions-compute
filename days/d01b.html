@@ -991,11 +991,11 @@ short-term / long-term potentiation. 자극 뒤 응답이 커진 상태가 짧�
 <div class="keypoints">
 <ul>
 <li>아날로그 VLSI: 회로의 물리로 신경 동역학 재현 / 디지털 SNN: device는 그대로, 구조를 사건 구동·로컬 메모리로 / in-memory: 메모리 배열 안에서 행렬 곱 / 물리 컴퓨팅: 재료 동역학을 계산 자원으로.</li>
-<li>분류는 이해용이고 서로 겹친다. Liang 2024의 RC 시스템 예시는 물리 컴퓨팅의 reservoir와 in-memory crossbar를 함께 쓴다.</li>
-<li>행렬–벡터 곱 = "행 하나와 입력을 자리끼리 곱해 더하기". 1행 (1, 3), 2행 (2, 1), 입력 (1, 2)면 출력 (7, 4). 같은 표를 conductance로, 입력을 전압으로 바꾸면 crossbar.</li>
-<li>crossbar: 곱셈은 Ohm, 덧셈은 Kirchhoff. 대신 ADC 등 peripheral circuit이 비싸고 <span class="src">Roadmap 2026, p.8119</span>, device 오차가 답에 섞인다.</li>
-<li>물리 컴퓨팅의 핵심 성질은 nonlinearity와 dynamics(fading memory) <span class="src">Liang 2024, Fig. 3a</span>. 디지털 RC보다 자원을 더 쓰면 의미가 없다 <span class="src">Liang 2024, p.202</span>.</li>
-<li>회색지대의 시냅스 현상 재현은 아직 계산이 아니라 부품 후보다 <span class="src">Aluru 2026, 요약면, p.593</span>.</li>
+<li><span class="key">분류는 이해용이고 서로 겹친다</span>. Liang 2024의 RC 시스템 예시는 물리 컴퓨팅의 reservoir와 in-memory crossbar를 함께 쓴다.</li>
+<li><span class="key">행렬–벡터 곱 = "행 하나와 입력을 자리끼리 곱해 더하기".</span> 1행 (1, 3), 2행 (2, 1), 입력 (1, 2)면 출력 (7, 4). 같은 표를 conductance로, 입력을 전압으로 바꾸면 crossbar.</li>
+<li><span class="key">crossbar: 곱셈은 Ohm, 덧셈은 Kirchhoff</span>. 대신 ADC 등 peripheral circuit이 비싸고 <span class="src">Roadmap 2026, p.8119</span>, device 오차가 답에 섞인다.</li>
+<li><span class="key">물리 컴퓨팅의 핵심 성질은 nonlinearity와 dynamics(fading memory)</span> <span class="src">Liang 2024, Fig. 3a</span>. 디지털 RC보다 자원을 더 쓰면 의미가 없다 <span class="src">Liang 2024, p.202</span>.</li>
+<li><span class="key">회색지대의 시냅스 현상 재현은 아직 계산이 아니라 부품 후보다</span> <span class="src">Aluru 2026, 요약면, p.593</span>.</li>
 </ul>
 </div>
 </section>
@@ -1136,10 +1136,10 @@ P \approx \alpha\, C\, V^2 f
 <div class="quiz" data-day="d01" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>다섯 축: ① 저장·계산 위치 ② 정보 표현 ③ 시간의 역할 ④ 정밀도 ⑤ 계산을 정하는 것. GPU는 병렬성을 공유하고 메모리·정밀도 설계도 다듬었지만, 다섯 축의 기본 선택은 보통 컴퓨터와 같다 <span class="tag tag-interp">해석</span>.</li>
-<li>이온 device가 가장 눈여겨볼 축은 ③. 시간상수가 기억의 시간척도를 정하는 줄기가 물리 컴퓨팅이다 <span class="tag tag-interp">해석</span>.</li>
-<li>P ≈ α·C·V²·f: 같은 회로에서 전압·주파수만 뇌 수준으로 낮추면 전력은 10⁻⁹배(가상 비교, Claude 계산). 전력이지 과제당 에너지가 아니고, 느린 만큼 오래 걸린다 <span class="src">Aluru 2026, p.592</span>.</li>
-<li>6.7 fJ/spike(특수 CMOS 뉴런, 최선값)와 수십 pJ/spike(생물, 2차 문헌)는 같은 기준의 숫자가 아니다 <span class="src">Roadmap 2026, p.8119</span>. 비교하려면 무엇을 포함하는지부터 맞춰야 한다 → Day 3–4·Day 5–6.</li>
+<li><span class="key">다섯 축: ① 저장·계산 위치 ② 정보 표현 ③ 시간의 역할 ④ 정밀도 ⑤ 계산을 정하는 것</span>. GPU는 병렬성을 공유하고 메모리·정밀도 설계도 다듬었지만, 다섯 축의 기본 선택은 보통 컴퓨터와 같다 <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">이온 device가 가장 눈여겨볼 축은 ③</span>. 시간상수가 기억의 시간척도를 정하는 줄기가 물리 컴퓨팅이다 <span class="tag tag-interp">해석</span>.</li>
+<li>P ≈ α·C·V²·f: 같은 회로에서 전압·주파수만 뇌 수준으로 낮추면 전력은 10⁻⁹배(가상 비교, Claude 계산). <span class="key">전력이지 과제당 에너지가 아니고, 느린 만큼 오래 걸린다</span> <span class="src">Aluru 2026, p.592</span>.</li>
+<li>6.7 fJ/spike(특수 CMOS 뉴런, 최선값)와 수십 pJ/spike(생물, 2차 문헌)는 <span class="key">같은 기준의 숫자가 아니다</span> <span class="src">Roadmap 2026, p.8119</span>. 비교하려면 무엇을 포함하는지부터 맞춰야 한다 → Day 3–4·Day 5–6.</li>
 </ul>
 </div>
 </section>
@@ -1241,9 +1241,9 @@ In-memory computing에서 이온 고분자 device의 경쟁자인 PCM과 RRAM은
 <div class="quiz" data-day="d01" data-set="4-end"></div>
 <div class="keypoints">
 <ul>
-<li>같은 이온 이완이 in-memory weight에서는 지워야 할 오차 <span class="src">Jiang 2026, p.1115</span>, RC 노드에서는 계산 자원이다.</li>
-<li>휘발성 시냅스 → 동적 전처리, 비휘발성 → in-memory 계산 <span class="src">Wang 2025, p.324</span>. Liang 2024 Fig. 4d는 두 역할이 한 시스템에 있는 구현 예시이지 필수조건이 아니다.</li>
-<li>'이 device는 좋은가?'는 줄기(와 응용)를 정하기 전에는 답할 수 없다. Retention 3000 s는 weight로는 부족할 수도, RC 노드로는 너무 길 수도 있다.</li>
+<li><span class="key">같은 이온 이완이 in-memory weight에서는 지워야 할 오차</span> <span class="src">Jiang 2026, p.1115</span>, RC 노드에서는 계산 자원이다.</li>
+<li><span class="key">휘발성 시냅스 → 동적 전처리, 비휘발성 → in-memory 계산</span> <span class="src">Wang 2025, p.324</span>. Liang 2024 Fig. 4d는 두 역할이 한 시스템에 있는 구현 예시이지 필수조건이 아니다.</li>
+<li><span class="key">'이 device는 좋은가?'는 줄기(와 응용)를 정하기 전에는 답할 수 없다</span>. Retention 3000 s는 weight로는 부족할 수도, RC 노드로는 너무 길 수도 있다.</li>
 </ul>
 </div>
 </section>

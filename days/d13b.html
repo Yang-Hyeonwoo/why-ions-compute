@@ -927,12 +927,12 @@ device의 τ(들)가 입력 간격과 기억 창 사이에 놓여, 창 안의 �
 </div>
 <div class="keypoints">
 <ul>
-<li>정의: 한 간격 동안 남는 비율 <span class="math inline">\(d = e^{-T_{\text{sym}}/\tau}\)</span>가 기억의 모양을 정한다. 좋은 τ는 입력 간격에 대한 비율과 과제의 기억 창으로 정해진다.</li>
-<li>숫자: 10 ms × 2 ms 과제와 10 s × 2 s 과제는 똑같다(창 안 합 0.979). 10 ms × 2 s는 방금 입력만, 10 s × 2 ms는 창 안 합 0.001(선형 노드 모형, 잡음 0.01 가정).</li>
-<li>실패 둘: 창보다 빨리 잊음 / 너무 느린 회복으로 넘어옴 <span class="src">Singh 2026, p.18–19</span>. 실제 측정: 데이터 간격이 τ를 넘으면 정확도가 떨어진다 <span class="src">Lee 2025 (npj), p.7</span>.</li>
-<li>측정 τ에 이어 보기: Lee 2025 device(τ₀ = 0.92 ms)는 간격 0.14 ms에서 <span class="math inline">\(d\)</span> = 0.86(네 프레임이 섞여 남음), 10 ms 이상에서 <span class="math inline">\(d \approx 0\)</span>(마지막 프레임만)이고, 그사이 정확도는 86.8% → 85.0%로 약 2%p 떨어졌다(모형 계산과 그림 읽기).</li>
-<li>조건: 실시간 신호는 신호가 간격을 정하고, 저장된 데이터는 실험자가 정한다. 후자의 정합은 실제 신호와의 정합을 증명하지 않는다 <span class="tag tag-interp">해석</span>.</li>
-<li>남은 질문: 시간척도가 다른 device를 여러 개 쓰면? → ‘여러 노드’ 구간.</li>
+<li>정의: 한 간격 동안 남는 비율 <span class="math inline">\(d = e^{-T_{\text{sym}}/\tau}\)</span>가 기억의 모양을 정한다. <span class="key">좋은 τ는 입력 간격에 대한 비율과 과제의 기억 창으로 정해진다</span>.</li>
+<li>숫자: <span class="key">10 ms × 2 ms 과제와 10 s × 2 s 과제는 똑같다</span>(창 안 합 0.979). 10 ms × 2 s는 방금 입력만, 10 s × 2 ms는 창 안 합 0.001(선형 노드 모형, 잡음 0.01 가정).</li>
+<li>실패 둘: <span class="key">창보다 빨리 잊음 / 너무 느린 회복으로 넘어옴</span> <span class="src">Singh 2026, p.18–19</span>. 실제 측정: 데이터 간격이 τ를 넘으면 정확도가 떨어진다 <span class="src">Lee 2025 (npj), p.7</span>.</li>
+<li>측정 τ에 이어 보기: Lee 2025 device(τ₀ = 0.92 ms)는 간격 0.14 ms에서 <span class="math inline">\(d\)</span> = 0.86(네 프레임이 섞여 남음), 10 ms 이상에서 <span class="math inline">\(d \approx 0\)</span>(마지막 프레임만)이고, <span class="key">그사이 정확도는 86.8% → 85.0%로 약 2%p 떨어졌다</span>(모형 계산과 그림 읽기).</li>
+<li>조건: 실시간 신호는 신호가 간격을 정하고, 저장된 데이터는 실험자가 정한다. <span class="key">후자의 정합은 실제 신호와의 정합을 증명하지 않는다</span> <span class="tag tag-interp">해석</span>.</li>
+<li>남은 질문: <span class="key">시간척도가 다른 device를 여러 개 쓰면?</span> → ‘여러 노드’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -957,10 +957,10 @@ device의 τ(들)가 입력 간격과 기억 창 사이에 놓여, 창 안의 �
 <div class="quiz" data-day="d13" data-set="4-check"></div>
 <div class="keypoints">
 <ul>
-<li>같은 τ의 device 넷은 서로의 배수처럼 움직여 MC가 1.00(노드 하나와 같음). τ가 다른 넷은 3.80(상한 4)이다(선형 모형 계산). Day 19–20의 "같은 device 20개 = 1.00"과 같은 원리이고, 노드 둘(<span class="math inline">\(d\)</span> = 0과 0.5)이면 손으로도 총 MC 2가 나온다.</li>
-<li>폴더의 리뷰: 병렬 device들의 MC는 쌓이기보다 대부분 겹친다 <span class="src">Liang 2024, p.196</span>. 한 device를 여러 바이어스로 읽어 상태를 늘린 예 <span class="src">Lee 2025 (npj), p.8</span>.</li>
-<li>조건: 선형 노드의 결과다. 비선형 노드는 상태의 일부를 비선형 정보에 쓰므로 MC가 낮아진다 <span class="src">Liang 2024, p.200</span>.</li>
-<li>남은 질문: 그러면 "좋은 memory"를 어떻게 보고하고 확인하나? → ‘좋은 memory의 조건’ 구간.</li>
+<li>같은 τ의 device 넷은 서로의 배수처럼 움직여 MC가 1.00(노드 하나와 같음). <span class="key">τ가 다른 넷은 3.80(상한 4)이다</span>(선형 모형 계산). Day 19–20의 "같은 device 20개 = 1.00"과 같은 원리이고, 노드 둘(<span class="math inline">\(d\)</span> = 0과 0.5)이면 손으로도 총 MC 2가 나온다.</li>
+<li>폴더의 리뷰: <span class="key">병렬 device들의 MC는 쌓이기보다 대부분 겹친다</span> <span class="src">Liang 2024, p.196</span>. 한 device를 여러 바이어스로 읽어 상태를 늘린 예 <span class="src">Lee 2025 (npj), p.8</span>.</li>
+<li>조건: 선형 노드의 결과다. <span class="key">비선형 노드는 상태의 일부를 비선형 정보에 쓰므로 MC가 낮아진다</span> <span class="src">Liang 2024, p.200</span>.</li>
+<li>남은 질문: <span class="key">그러면 "좋은 memory"를 어떻게 보고하고 확인하나?</span> → ‘좋은 memory의 조건’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -1038,10 +1038,10 @@ device의 τ(들)가 입력 간격과 기억 창 사이에 놓여, 창 안의 �
 <div class="quiz" data-day="d13" data-set="5-check"></div>
 <div class="keypoints">
 <ul>
-<li>좋은 memory = 과제의 기억 창 안 지연들의 정보를 잡음보다 크게, 구별되게, 창 밖으로는 끌고 가지 않게 담는 상태.</li>
-<li>확인 질문 여섯: 기억 창 / <span class="math inline">\(MC_k\)</span> 곡선 / 물리 지연 축 / 잡음·상태 수 / 넘어옴 / 비교 대상. 보고 항목은 Singh 2026 Table 2와 같다 <span class="src">Singh 2026, p.11–12</span>.</li>
-<li>Retention은 과제 맥락에서 평가해야 한다 <span class="src">Roadmap 2026, p.8113</span>. 지표의 적절한 값은 과제에 따라 다르다 <span class="src">Stepney 2024, p.681</span>.</li>
-<li>반론: i.i.d. MC는 대리 지표다. 그래서 MC 곡선과 과제 성능을 같은 조건에서 함께 보고한다.</li>
+<li>좋은 memory = <span class="key">과제의 기억 창 안 지연들의 정보를 잡음보다 크게, 구별되게, 창 밖으로는 끌고 가지 않게 담는 상태</span>.</li>
+<li><span class="key">확인 질문 여섯: 기억 창 / <span class="math inline">\(MC_k\)</span> 곡선 / 물리 지연 축 / 잡음·상태 수 / 넘어옴 / 비교 대상</span>. 보고 항목은 Singh 2026 Table 2와 같다 <span class="src">Singh 2026, p.11–12</span>.</li>
+<li><span class="key">Retention은 과제 맥락에서 평가해야 한다</span> <span class="src">Roadmap 2026, p.8113</span>. 지표의 적절한 값은 과제에 따라 다르다 <span class="src">Stepney 2024, p.681</span>.</li>
+<li>반론: i.i.d. MC는 대리 지표다. 그래서 <span class="key">MC 곡선과 과제 성능을 같은 조건에서 함께 보고한다</span>.</li>
 </ul>
 </div>
 </section>

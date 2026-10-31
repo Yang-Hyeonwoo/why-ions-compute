@@ -838,9 +838,9 @@ window.Quarto = {
 <div class="quiz" data-day="d26" data-set="1-check"></div>
 <div class="keypoints">
 <ul>
-<li>병목 = 전체의 빠르기·비용을 정하는 가장 좁은 단계. 병목이 아닌 곳을 고쳐도 전체는 그대로다(1,000·10·500개/s → 10개/s).</li>
-<li>네 계층: device · 회로·배열 · 시스템 · 응용. 계층에 따라 누가 풀 수 있는지가 다르고, 아래를 풀어도 위가 막히면 응용은 열리지 않는다.</li>
-<li>네 질문(요구가 실재하나 / 메커니즘인가 공정인가 / 대안이 이미 내나 / 내가 바꿀 수 있나)을 통과한 줄만 병목 장부에 올린다.</li>
+<li><span class="key">병목 = 전체의 빠르기·비용을 정하는 가장 좁은 단계</span>. 병목이 아닌 곳을 고쳐도 전체는 그대로다(1,000·10·500개/s → 10개/s).</li>
+<li>네 계층: device · 회로·배열 · 시스템 · 응용. 계층에 따라 누가 풀 수 있는지가 다르고, <span class="key">아래를 풀어도 위가 막히면 응용은 열리지 않는다</span>.</li>
+<li>네 질문(요구가 실재하나 / 메커니즘인가 공정인가 / 대안이 이미 내나 / 내가 바꿀 수 있나)을 <span class="key">통과한 줄만 병목 장부에 올린다</span>.</li>
 </ul>
 </div>
 </section>
@@ -883,9 +883,9 @@ window.Quarto = {
 <div class="quiz" data-day="d26" data-set="2-check"></div>
 <div class="keypoints">
 <ul>
-<li>τ ~ L²/D: D = 10⁻⁹ m²/s일 때 1 mm → 1,000 s, 10 µm → 0.1 s, 100 nm → 10 µs <span class="tag tag-assume">가정</span>. 크기를 10배 줄이면 100배 빨라진다.</li>
-<li>연성 이온 device의 τ는 52 ms–4,000 s에 흩어져 있다. 고체 양성자 device는 5 µs <span class="src">Zhou 2026 (Nat. Nanotech.), p.581</span>, 전자 device도 0.92–123 ms <span class="src">Lee 2025 (npj), p.2–3</span>. ms–s τ는 이온만의 자산이 아니다.</li>
-<li>자연 신호와 맞물리려면 1 ms보다 긴 τ <span class="src">Liang 2024, p.198</span>. 맞더라도 처리율은 τ에 묶여, time multiplexing·대량 처리에는 비용이 된다.</li>
+<li>τ ~ L²/D: D = 10⁻⁹ m²/s일 때 1 mm → 1,000 s, 10 µm → 0.1 s, 100 nm → 10 µs <span class="tag tag-assume">가정</span>. <span class="key">크기를 10배 줄이면 100배 빨라진다</span>.</li>
+<li>연성 이온 device의 τ는 52 ms–4,000 s에 흩어져 있다. 고체 양성자 device는 5 µs <span class="src">Zhou 2026 (Nat. Nanotech.), p.581</span>, 전자 device도 0.92–123 ms <span class="src">Lee 2025 (npj), p.2–3</span>. <span class="key">ms–s τ는 이온만의 자산이 아니다</span>.</li>
+<li>자연 신호와 맞물리려면 1 ms보다 긴 τ <span class="src">Liang 2024, p.198</span>. <span class="key">맞더라도 처리율은 τ에 묶여</span>, time multiplexing·대량 처리에는 비용이 된다.</li>
 </ul>
 </div>
 </section>
@@ -1088,11 +1088,11 @@ window.Quarto = {
 <div class="quiz" data-day="d26" data-set="3-check"></div>
 <div class="keypoints">
 <ul>
-<li>가장 작은 fJ 숫자는 µV 자극에서 나왔다(−10 µV에서 0.074 fJ <span class="src">Chen 2024, p.6</span>). 과제의 ±1 V 펄스, 읽기 회로, readout은 경계 밖이다.</li>
-<li>계면 충전 ½CV²: 1 mm², 10 µF/cm²<span class="tag tag-assume">가정</span>, 1 V → 50 nJ, 20 mV → 20 pJ. 면적과 전압의 제곱이 손잡이다. ½CV²는 저장되는 몫이고, 전원은 펄스마다 CV²를 쓴다(하한과 실제).</li>
-<li>박동당 장부(Day 31–32 B 경로, 펄스 500개): device 줄을 1 mm²·1 V 계면 충전으로 바꾸면 25 µJ로 합 48.2 µJ의 52%, 디지털 경로 전체(21.05 µJ)보다 크다. 100 µm 전극·0.5 V면 0.06 µJ(0.3%)이고 병목은 늘 켜진 TIA(10 µJ) [가정, Claude 계산].</li>
-<li>연성 이온 소재의 안정성 문제: 탈수(17시간 전류 감소 <span class="src">Guo 2026, p.7</span>), 팽윤·박리 <span class="src">Roadmap 2026, p.8123</span>, 전극 소모 <span class="src">Yoo 2025, p.5</span>, 내구 10² 회(나노유체 위주) <span class="src">Aluru 2026, p.598</span>.</li>
-<li>이식 ECG 1년 ≈ 3.2 × 10⁷ 박동 ≈ 1.6 × 10⁹ 펄스 vs 보고된 최대 4,000 펄스: 다섯 자릿수 이상의 간극 <span class="tag tag-interp">해석</span>.</li>
+<li>가장 작은 fJ 숫자는 µV 자극에서 나왔다(−10 µV에서 0.074 fJ <span class="src">Chen 2024, p.6</span>). <span class="key">과제의 ±1 V 펄스, 읽기 회로, readout은 경계 밖이다</span>.</li>
+<li>계면 충전 ½CV²: 1 mm², 10 µF/cm²<span class="tag tag-assume">가정</span>, 1 V → 50 nJ, 20 mV → 20 pJ. <span class="key">면적과 전압의 제곱이 손잡이다</span>. ½CV²는 저장되는 몫이고, 전원은 펄스마다 CV²를 쓴다(하한과 실제).</li>
+<li>박동당 장부(Day 31–32 B 경로, 펄스 500개): device 줄을 1 mm²·1 V 계면 충전으로 바꾸면 25 µJ로 합 48.2 µJ의 52%, 디지털 경로 전체(21.05 µJ)보다 크다. 100 µm 전극·0.5 V면 0.06 µJ(0.3%)이고 <span class="key">병목은 늘 켜진 TIA(10 µJ)</span> [가정, Claude 계산].</li>
+<li><span class="key">연성 이온 소재의 안정성 문제</span>: 탈수(17시간 전류 감소 <span class="src">Guo 2026, p.7</span>), 팽윤·박리 <span class="src">Roadmap 2026, p.8123</span>, 전극 소모 <span class="src">Yoo 2025, p.5</span>, 내구 10² 회(나노유체 위주) <span class="src">Aluru 2026, p.598</span>.</li>
+<li>이식 ECG 1년 ≈ 3.2 × 10⁷ 박동 ≈ 1.6 × 10⁹ 펄스 vs 보고된 최대 4,000 펄스: <span class="key">다섯 자릿수 이상의 간극</span> <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>
@@ -1250,11 +1250,11 @@ IR drop
 </div>
 <div class="keypoints">
 <ul>
-<li>배열은 선을 나눠 써서 device 1만 개를 선 200개로 다루게 한다. 대가는 sneak path이고, 1T1R(칸마다 스위치)이 흔한 해결이다 <span class="src">Jiang 2026, p.1114</span> <span class="src">Liang 2024, p.198</span>.</li>
-<li>둘레: device N², 선·드라이버·TIA N, ADC·MCU는 공유(한 번 다 읽는 변환 N번). 칸당 peripheral circuit은 1/N로 줄지만 IR drop은 ~N²(Day 7–8 모형: N = 100에서 10 mV, 1,000에서 약 1 V) [Claude 계산].</li>
-<li>연성 이온 device의 집적 현황: 인쇄·레이저 공정의 10×10(수율 94%), 계산은 3×3 중 5개를 하나씩 <span class="src">Guo 2026, p.7–8</span>; 27 부화소 <span class="src">Huang 2026, p.12</span>; Zhang 2024는 배열 없음.</li>
-<li>밀도: 약 6개/cm² vs 5 µm device를 10 µm 간격으로 놓으면 10⁶개/cm² <span class="tag tag-assume">가정</span>. τ ~ L²/D 때문에 줄이면 빨라진다 — 크기와 시간척도가 묶여 있다 <span class="tag tag-interp">해석</span>.</li>
-<li>집적이 어려워도 남는 자리: 센서 옆 소수 노드 전처리, 생체 인터페이스, PCB 혼성 시스템 <span class="tag tag-interp">해석</span>.</li>
+<li>배열은 선을 나눠 써서 device 1만 개를 선 200개로 다루게 한다. <span class="key">대가는 sneak path이고, 1T1R(칸마다 스위치)이 흔한 해결이다</span> <span class="src">Jiang 2026, p.1114</span> <span class="src">Liang 2024, p.198</span>.</li>
+<li>둘레: device N², 선·드라이버·TIA N, ADC·MCU는 공유(한 번 다 읽는 변환 N번). <span class="key">칸당 peripheral circuit은 1/N로 줄지만 IR drop은 ~N²</span>(Day 7–8 모형: N = 100에서 10 mV, 1,000에서 약 1 V) [Claude 계산].</li>
+<li>연성 이온 device의 집적 현황: <span class="key">인쇄·레이저 공정의 10×10(수율 94%), 계산은 3×3 중 5개를 하나씩</span> <span class="src">Guo 2026, p.7–8</span>; 27 부화소 <span class="src">Huang 2026, p.12</span>; Zhang 2024는 배열 없음.</li>
+<li>밀도: 약 6개/cm² vs 5 µm device를 10 µm 간격으로 놓으면 10⁶개/cm² <span class="tag tag-assume">가정</span>. τ ~ L²/D 때문에 줄이면 빨라진다 — <span class="key">크기와 시간척도가 묶여 있다</span> <span class="tag tag-interp">해석</span>.</li>
+<li>집적이 어려워도 남는 자리: <span class="key">센서 옆 소수 노드 전처리, 생체 인터페이스, PCB 혼성 시스템</span> <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>

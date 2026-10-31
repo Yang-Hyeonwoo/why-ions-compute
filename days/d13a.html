@@ -873,11 +873,11 @@ Memory capacity (MC)
 </div>
 <div class="keypoints">
 <ul>
-<li>정의: retention(기준이 붙은 device 지표), τ(모형 매개변수), MC(입력열·readout·잡음을 포함한 계의 계산 지표)는 다른 양이다.</li>
-<li>왜: retention·τ는 입력 하나의 흔적을, MC는 이어지는 입력들 속에서 그 흔적을 구별해 꺼내는 능력을 잰다.</li>
-<li>그림 1: τ = 10 ms device 하나에서 retention은 기준에 따라 6.9 ms(50%), 23.0 ms(10%, 50% 기준의 3.3배), "20 ms 뒤 14%"이고, τ는 10 ms다. <span class="math inline">\(MC_k\)</span>는 입력 간격 2 ms와 20 ms에서 모양이 다르다(합은 둘 다 1, 지수 모형·잡음 없음 계산).</li>
-<li>측정 곡선에서: Lee 2025(npj)의 τ = 0.92 ms 곡선 하나도 정의에 따라 0.64 ms부터 "20 ms 이상"까지 다른 retention이 된다(그래프 읽기와 모형 계산). 기준·출발점·측정 간격·측정 창을 함께 적는다.</li>
-<li>남은 질문: MC는 상태 숫자 하나에서 어떻게 계산되나? → ‘MC 손 계산’ 구간.</li>
+<li>정의: retention(기준이 붙은 device 지표), τ(모형 매개변수), <span class="key">MC(입력열·readout·잡음을 포함한 계의 계산 지표)는 다른 양이다</span>.</li>
+<li>왜: retention·τ는 입력 하나의 흔적을, <span class="key">MC는 이어지는 입력들 속에서 그 흔적을 구별해 꺼내는 능력을 잰다</span>.</li>
+<li>그림 1: τ = 10 ms device 하나에서 <span class="key">retention은 기준에 따라 6.9 ms(50%), 23.0 ms(10%, 50% 기준의 3.3배)</span>, "20 ms 뒤 14%"이고, τ는 10 ms다. <span class="math inline">\(MC_k\)</span>는 입력 간격 2 ms와 20 ms에서 모양이 다르다(합은 둘 다 1, 지수 모형·잡음 없음 계산).</li>
+<li>측정 곡선에서: Lee 2025(npj)의 τ = 0.92 ms 곡선 하나도 정의에 따라 0.64 ms부터 "20 ms 이상"까지 다른 retention이 된다(그래프 읽기와 모형 계산). <span class="key">기준·출발점·측정 간격·측정 창을 함께 적는다</span>.</li>
+<li>남은 질문: <span class="key">MC는 상태 숫자 하나에서 어떻게 계산되나?</span> → ‘MC 손 계산’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -1080,13 +1080,13 @@ Washout
 </div>
 <div class="keypoints">
 <ul>
-<li>절차: i.i.d. 입력을 펄스로 넣고 → 입력마다 상태를 읽고 → 지연마다 readout을 맞추고 → 새 데이터에서 상관²(<span class="math inline">\(MC_k\)</span>)을 구해 더한다. 입력 8개짜리 예는 0.75, 0.19, 0.01(정확한 값 0.75, 0.19, 0.05). 데이터가 적으면 크게 흔들린다.</li>
-<li>번호: 오늘의 <span class="math inline">\(k\)</span> = 1(방금 입력) = Day 15–16·Day 19–20의 <span class="math inline">\(k\)</span> = 0. Day 21–22 <code>esn.py</code>의 <span class="math inline">\(MC_1\)</span>은 오늘의 <span class="math inline">\(MC_2\)</span>. 기호: 오늘의 남는 비율 <span class="math inline">\(d\)</span>는 Day 15–16의 <span class="math inline">\(d\)</span>와 같다(Day 43–44은 <span class="math inline">\(a\)</span>로 적음).</li>
-<li>정의: 노드 하나의 <span class="math inline">\(MC_k\)</span> = 상태의 흔들림에서 k개 전 입력이 차지하는 몫 = <span class="math inline">\((1-d^2)d^{2(k-1)}\)</span>.</li>
-<li>왜: 상태가 숫자 하나뿐이라, 과거 입력들이 그 흔들림을 나눠 가질 수밖에 없다. 그래서 합은 1(= 상태 수)을 넘지 못한다.</li>
-<li>숫자: <span class="math inline">\(d = 0.5\)</span>이면 0.75, 0.19, 0.05, …. <span class="math inline">\(d = 0.99\)</span>에 잡음(표준편차 0.01)을 넣으면 최근 10개의 합이 0.17(모형 계산, 잡음 크기는 예시 가정).</li>
-<li>조건: 입력이 서로 무관하고 노드가 선형일 때의 정확한 계산이다. 비선형 노드는 몫의 일부를 "입력들의 곱" 같은 비선형 정보에 쓴다(뒤의 '비선형이 끼면' 문단, Day 19–20의 <a href="../days/d11b.html#b-tradeoff">상충</a>).</li>
-<li>남은 질문: <span class="math inline">\(d\)</span>를 정하는 것은 τ뿐인가? → ‘시간척도 정합’ 구간: τ와 입력 간격의 비.</li>
+<li>절차: i.i.d. 입력을 펄스로 넣고 → 입력마다 상태를 읽고 → 지연마다 readout을 맞추고 → <span class="key">새 데이터에서 상관²(<span class="math inline">\(MC_k\)</span>)을 구해 더한다</span>. 입력 8개짜리 예는 0.75, 0.19, 0.01(정확한 값 0.75, 0.19, 0.05). 데이터가 적으면 크게 흔들린다.</li>
+<li>번호: <span class="key">오늘의 <span class="math inline">\(k\)</span> = 1(방금 입력) = Day 15–16·Day 19–20의 <span class="math inline">\(k\)</span> = 0</span>. Day 21–22 <code>esn.py</code>의 <span class="math inline">\(MC_1\)</span>은 오늘의 <span class="math inline">\(MC_2\)</span>. 기호: 오늘의 남는 비율 <span class="math inline">\(d\)</span>는 Day 15–16의 <span class="math inline">\(d\)</span>와 같다(Day 43–44은 <span class="math inline">\(a\)</span>로 적음).</li>
+<li>정의: <span class="key">노드 하나의 <span class="math inline">\(MC_k\)</span> = 상태의 흔들림에서 k개 전 입력이 차지하는 몫</span> = <span class="math inline">\((1-d^2)d^{2(k-1)}\)</span>.</li>
+<li>왜: 상태가 숫자 하나뿐이라, 과거 입력들이 그 흔들림을 나눠 가질 수밖에 없다. 그래서 <span class="key">합은 1(= 상태 수)을 넘지 못한다</span>.</li>
+<li>숫자: <span class="math inline">\(d = 0.5\)</span>이면 0.75, 0.19, 0.05, …. <span class="key"><span class="math inline">\(d = 0.99\)</span>에 잡음(표준편차 0.01)을 넣으면 최근 10개의 합이 0.17</span>(모형 계산, 잡음 크기는 예시 가정).</li>
+<li>조건: <span class="key">입력이 서로 무관하고 노드가 선형일 때의 정확한 계산이다</span>. 비선형 노드는 몫의 일부를 "입력들의 곱" 같은 비선형 정보에 쓴다(뒤의 '비선형이 끼면' 문단, Day 19–20의 <a href="../days/d11b.html#b-tradeoff">상충</a>).</li>
+<li>남은 질문: <span class="key"><span class="math inline">\(d\)</span>를 정하는 것은 τ뿐인가?</span> → ‘시간척도 정합’ 구간: τ와 입력 간격의 비.</li>
 </ul>
 </div>
 </section>

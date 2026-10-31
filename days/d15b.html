@@ -802,10 +802,10 @@ Chop·merge·rotate
 </div>
 <div class="keypoints">
 <ul>
-<li>그림 = 숫자 표. 정규화·잘라내기·이진화 뒤 한 행씩 펄스로 넣으면 시계열이 된다. 28 × 28 → 28통로 × 28단계(또는 1통로 × 784단계).</li>
-<li>행 순서·입력 간격·자르는 방식은 실험자가 정한다. 기억이 모자라면 그림을 잘라 이어 붙여(112 × 7) 과제를 device에 맞춘다 <span class="src">Liang 2024, p.198–199</span>.</li>
-<li>공간 데이터(그림, 위성 영상)는 '어디에'가 정보이고, 시간은 부호화가 지어낸다 <span class="tag tag-interp">해석</span>.</li>
-<li>남은 질문: 그렇게 지어낸 시간을 device가 처리한 결과는, device 없이 readout만 쓴 결과보다 나은가? → ‘MNIST는 시간 과제인가’ 구간.</li>
+<li>그림 = 숫자 표. 정규화·잘라내기·이진화 뒤 <span class="key">한 행씩 펄스로 넣으면 시계열이 된다</span>. 28 × 28 → 28통로 × 28단계(또는 1통로 × 784단계).</li>
+<li><span class="key">행 순서·입력 간격·자르는 방식은 실험자가 정한다</span>. 기억이 모자라면 그림을 잘라 이어 붙여(112 × 7) 과제를 device에 맞춘다 <span class="src">Liang 2024, p.198–199</span>.</li>
+<li>공간 데이터(그림, 위성 영상)는 '어디에'가 정보이고, <span class="key">시간은 부호화가 지어낸다</span> <span class="tag tag-interp">해석</span>.</li>
+<li>남은 질문: 그렇게 지어낸 시간을 device가 처리한 결과는, <span class="key">device 없이 readout만 쓴 결과보다 나은가?</span> → ‘MNIST는 시간 과제인가’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -887,10 +887,10 @@ Chop·merge·rotate
 <div class="quiz" data-day="d15" data-set="5-end"></div>
 <div class="keypoints">
 <ul>
-<li>그림 과제의 '시간'은 부호화가 만든다. 픽셀 순서를 섞어도 모든 시점 상태를 읽으면 결과가 같다(82.4% vs 81.9%, 합성 데이터, Claude 계산) — 이 읽기 방식에서 시간 순서는 아무 일도 하지 않는다.</li>
-<li>모든 시점 상태를 다 읽으면 readout이 그림을 직접 보는 것과 같다(81.9% vs 원시 83.0%, 합성 데이터, Claude 계산). Device의 기억은 같은 특징 수에서만 이득으로 보였다(특징 10개: 50.0% vs 42.2%).</li>
-<li>넣는 방식 같은 임의의 선택이 결과를 33–65%로 흔든다(합성 데이터, Claude 계산). 폴더의 MNIST 결과는 시뮬레이션이 많고 <span class="src">Zhong 2026, p.8</span> <span class="src">Pei 2026, p.1200</span>, 원시 입력 기준선이 있는 예에서 device는 기준선과 비슷하거나 낮았다 <span class="src">Lee 2025 (npj), p.8</span>.</li>
-<li>확인할 것: 원시 입력·정적 device·동적 device를 같은 readout으로, 특징 수 곡선으로 <span class="src">Singh 2026, p.18</span>.</li>
+<li>그림 과제의 '시간'은 부호화가 만든다. <span class="key">픽셀 순서를 섞어도 모든 시점 상태를 읽으면 결과가 같다</span>(82.4% vs 81.9%, 합성 데이터, Claude 계산) — 이 읽기 방식에서 시간 순서는 아무 일도 하지 않는다.</li>
+<li><span class="key">모든 시점 상태를 다 읽으면 readout이 그림을 직접 보는 것과 같다</span>(81.9% vs 원시 83.0%, 합성 데이터, Claude 계산). Device의 기억은 같은 특징 수에서만 이득으로 보였다(특징 10개: 50.0% vs 42.2%).</li>
+<li><span class="key">넣는 방식 같은 임의의 선택이 결과를 33–65%로 흔든다</span>(합성 데이터, Claude 계산). 폴더의 MNIST 결과는 시뮬레이션이 많고 <span class="src">Zhong 2026, p.8</span> <span class="src">Pei 2026, p.1200</span>, 원시 입력 기준선이 있는 예에서 device는 기준선과 비슷하거나 낮았다 <span class="src">Lee 2025 (npj), p.8</span>.</li>
+<li>확인할 것: <span class="key">원시 입력·정적 device·동적 device를 같은 readout으로, 특징 수 곡선으로</span> <span class="src">Singh 2026, p.18</span>.</li>
 </ul>
 </div>
 </section>
@@ -978,9 +978,9 @@ Chop·merge·rotate
 <div class="quiz" data-day="d15" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>NARMA는 기억 + 곱셈을 함께 묻지만, 매개변수·입력 범위·N이 논문마다 달라 NMSE를 그대로 비교할 수 없다 <span class="src">Stepney 2024, p.676–677</span>. NARMA2와 NARMA10은 다른 과제다.</li>
-<li>기준점: 이 교재의 설정에서 device 없는 선형 delay tap 10개가 NMSE ≈ 0.30, 20개가 ≈ 0.15 (Claude의 계산).</li>
-<li>Spoken digit은 진짜 시간 신호지만, 1초에 수백–수천 번 떨리는 소리를 필터 묶음이 먼저 '통로별 세기의 느린 변화'(cochleagram, 귀 모형 64통로)로 바꿔 준다 <span class="src">Zhou 2026 (Nat. Nanotech.), p.585</span>. 처리 없음 기준선과 사람 단위 나누기를 확인한다.</li>
+<li>NARMA는 기억 + 곱셈을 함께 묻지만, 매개변수·입력 범위·N이 논문마다 달라 <span class="key">NMSE를 그대로 비교할 수 없다</span> <span class="src">Stepney 2024, p.676–677</span>. NARMA2와 NARMA10은 다른 과제다.</li>
+<li>기준점: 이 교재의 설정에서 <span class="key">device 없는 선형 delay tap 10개가 NMSE ≈ 0.30, 20개가 ≈ 0.15</span> (Claude의 계산).</li>
+<li>Spoken digit은 진짜 시간 신호지만, 1초에 수백–수천 번 떨리는 소리를 필터 묶음이 먼저 '통로별 세기의 느린 변화'(cochleagram, 귀 모형 64통로)로 바꿔 준다 <span class="src">Zhou 2026 (Nat. Nanotech.), p.585</span>. <span class="key">처리 없음 기준선과 사람 단위 나누기를 확인한다</span>.</li>
 </ul>
 </div>
 </section>
@@ -1077,9 +1077,9 @@ Chop·merge·rotate
 <div class="quiz" data-day="d15" data-set="7-check"></div>
 <div class="keypoints">
 <ul>
-<li>성적표 하나를 볼 때: 데이터에 원래 시간이 있나 → 무엇을 시험하나 → 무엇을 못 하나 → 기준선·특징 수·나누기·시뮬레이션 여부.</li>
-<li>보고 조건(나눔, 실행 수, readout, 균형 정확도, 예측 거리)이 없으면 readout의 몫을 알 수 없다 <span class="src">Singh 2026, p.12</span>. 초매개변수(넣는 방식, 문턱, λ 등)는 시험이 아니라 검증 데이터로 골랐는지 본다.</li>
-<li>Physical reservoir computing의 장점은 정확도보다 시스템 비용 쪽에 있다는 것이 Liang의 정리다 <span class="src">Liang 2024, p.201</span> → Day 31–32.</li>
+<li>성적표 하나를 볼 때: <span class="key">데이터에 원래 시간이 있나 → 무엇을 시험하나 → 무엇을 못 하나</span> → 기준선·특징 수·나누기·시뮬레이션 여부.</li>
+<li><span class="key">보고 조건(나눔, 실행 수, readout, 균형 정확도, 예측 거리)이 없으면 readout의 몫을 알 수 없다</span> <span class="src">Singh 2026, p.12</span>. 초매개변수(넣는 방식, 문턱, λ 등)는 시험이 아니라 검증 데이터로 골랐는지 본다.</li>
+<li>Physical reservoir computing의 <span class="key">장점은 정확도보다 시스템 비용 쪽에 있다</span>는 것이 Liang의 정리다 <span class="src">Liang 2024, p.201</span> → Day 31–32.</li>
 </ul>
 </div>
 </section>

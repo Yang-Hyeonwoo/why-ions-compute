@@ -814,9 +814,9 @@ y(t) = c_1 u(t-1) + c_2 u(t-2) + c_3 u(t-3) + \cdots
 <div class="quiz" data-day="d10" data-set="1-check"></div>
 <div class="keypoints">
 <ul>
-<li>선형 = superposition principle: <span class="math inline">\(f(a+b) = f(a)+f(b)\)</span>, <span class="math inline">\(f(ca) = cf(a)\)</span>. <span class="math inline">\(2u\)</span>는 선형, <span class="math inline">\(u^2\)</span>·<span class="math inline">\(\tanh\)</span>는 비선형(<span class="math inline">\(\tanh 1 + \tanh 2 = 1.726 \neq \tanh 3 = 0.995\)</span>).</li>
-<li>선형 reservoir + 선형 readout의 출력은 지난 입력들의 가중합뿐 → delay tap 기준선과 같은 일.</li>
-<li>시뮬레이션: 선형 reservoir 200노드 0.144 ≈ delay tap 50개 0.146, tanh reservoir 0.053(Claude의 시뮬레이션).</li>
+<li><span class="key">선형 = superposition principle: <span class="math inline">\(f(a+b) = f(a)+f(b)\)</span>, <span class="math inline">\(f(ca) = cf(a)\)</span></span>. <span class="math inline">\(2u\)</span>는 선형, <span class="math inline">\(u^2\)</span>·<span class="math inline">\(\tanh\)</span>는 비선형(<span class="math inline">\(\tanh 1 + \tanh 2 = 1.726 \neq \tanh 3 = 0.995\)</span>).</li>
+<li><span class="key">선형 reservoir + 선형 readout의 출력은 지난 입력들의 가중합뿐</span> → delay tap 기준선과 같은 일.</li>
+<li>시뮬레이션: <span class="key">선형 reservoir 200노드 0.144 ≈ delay tap 50개 0.146, tanh reservoir 0.053</span>(Claude의 시뮬레이션).</li>
 </ul>
 </div>
 </section>
@@ -899,9 +899,9 @@ y(t) = c_1 u(t-1) + c_2 u(t-2) + c_3 u(t-3) + \cdots
 <div class="quiz" data-day="d10" data-set="2-check"></div>
 <div class="keypoints">
 <ul>
-<li>XOR: 서로 다를 때만 1. 부등식 2+3과 1+4가 <span class="math inline">\(w_1 + w_2 + 2b\)</span>를 1보다 크면서 작게 만들어 모순 → 선형 분리 불가.</li>
-<li>±1 표기에서 XOR = 두 입력의 곱, 3-parity = 세 입력의 곱. 차수가 높을수록 더 높은 차수의 비선형이 필요하다.</li>
-<li>물리 노드가 비선형이 아니면 physical reservoir computing은 선형 분리 가능한 문제만 푼다 <span class="src">Liang 2024, p.197</span>.</li>
+<li>XOR: 서로 다를 때만 1. 부등식 2+3과 1+4가 <span class="math inline">\(w_1 + w_2 + 2b\)</span>를 1보다 크면서 작게 만들어 모순 → <span class="key">선형 분리 불가</span>.</li>
+<li><span class="key">±1 표기에서 XOR = 두 입력의 곱, 3-parity = 세 입력의 곱</span>. 차수가 높을수록 더 높은 차수의 비선형이 필요하다.</li>
+<li>물리 노드가 비선형이 아니면 <span class="key">physical reservoir computing은 선형 분리 가능한 문제만 푼다</span> <span class="src">Liang 2024, p.197</span>.</li>
 </ul>
 </div>
 </section>
@@ -1030,10 +1030,10 @@ y = -1.724\,u_1 - 1.724\,u_2 + 3.577\,h
 <div class="quiz" data-day="d10" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>앞 숫자들의 가중합으로 늘린 차원은 readout에게 여전히 원래 입력의 가중합이다(weight (1, 2, 3) → <span class="math inline">\(4u_1 + 5u_2\)</span>). XOR에서 (a)와 (b) 모두 출력 0.50 넷.</li>
-<li>곱 하나(<span class="math inline">\(u_1 u_2\)</span>)를 더한 (c)는 <span class="math inline">\(z_1 + z_2 - 2z_3\)</span>으로 XOR을 정확히 낸다.</li>
-<li><span class="math inline">\(\tanh\)</span> 노드 하나 <span class="math inline">\(h = \tanh(u_1 + u_2)\)</span>는 네 점에서 <span class="math inline">\(0.762\,u_1 + 0.762\,u_2 - 0.560\,u_1 u_2\)</span>와 같아, readout <span class="math inline">\(-1.724\,u_1 - 1.724\,u_2 + 3.577\,h\)</span>가 XOR을 낸다. 노드가 거의 곧으면(입력 0.05배) 곱의 몫이 −0.00025로 줄어 잡음에 묻힌다.</li>
-<li>분리를 돕는 것은 차원 수가 아니라 서로 다른 비선형 조합. 관측 가능한 차원이 충분해야 한다 <span class="src">Stepney 2024, p.673</span>, 이상적인 상태는 고차원에서 선형 분리 가능하다 <span class="src">Liang 2024, p.200</span>, 채널 수 ≠ 풍부함 <span class="src">Singh 2026, p.5</span>.</li>
+<li>앞 숫자들의 가중합으로 늘린 차원은 <span class="key">readout에게 여전히 원래 입력의 가중합이다</span>(weight (1, 2, 3) → <span class="math inline">\(4u_1 + 5u_2\)</span>). XOR에서 (a)와 (b) 모두 출력 0.50 넷.</li>
+<li><span class="key">곱 하나(<span class="math inline">\(u_1 u_2\)</span>)를 더한 (c)는 <span class="math inline">\(z_1 + z_2 - 2z_3\)</span>으로 XOR을 정확히 낸다</span>.</li>
+<li><span class="math inline">\(\tanh\)</span> 노드 하나 <span class="math inline">\(h = \tanh(u_1 + u_2)\)</span>는 네 점에서 <span class="math inline">\(0.762\,u_1 + 0.762\,u_2 - 0.560\,u_1 u_2\)</span>와 같아, readout <span class="math inline">\(-1.724\,u_1 - 1.724\,u_2 + 3.577\,h\)</span>가 XOR을 낸다. <span class="key">노드가 거의 곧으면(입력 0.05배) 곱의 몫이 −0.00025로 줄어 잡음에 묻힌다</span>.</li>
+<li><span class="key">분리를 돕는 것은 차원 수가 아니라 서로 다른 비선형 조합</span>. 관측 가능한 차원이 충분해야 한다 <span class="src">Stepney 2024, p.673</span>, 이상적인 상태는 고차원에서 선형 분리 가능하다 <span class="src">Liang 2024, p.200</span>, 채널 수 ≠ 풍부함 <span class="src">Singh 2026, p.5</span>.</li>
 </ul>
 </div>
 </section>

@@ -862,9 +862,9 @@ CPU / 메모리(DRAM) / 캐시 / GPU
 <div class="quiz" data-day="d01" data-set="0-end"></div>
 <div class="keypoints">
 <ul>
-<li>저장 = 값을 들고 있기, 계산 = 들고 있는 값으로 새 값 만들기. 보통 컴퓨터는 값을 전압의 높낮이(비트, 디지털)로 적는다.</li>
-<li>계산은 CPU·GPU 안의 연산기가, 데이터 전체는 칩 밖 메모리(DRAM)가 든다. 값은 레지스터·캐시·DRAM의 계단을 오르내린다. Weight가 캐시보다 크면 먼 메모리 왕복이 시간과 에너지를 먹는다. 이것이 von Neumann 병목이다 <span class="src">Liang 2024, p.193</span>.</li>
-<li>클록 = 높음·낮음이 번갈아 오는 사각파 전압(주기 <span class="math inline">\(T\)</span>, 주파수 <span class="math inline">\(f = 1/T\)</span>). 레지스터가 가장자리에서 값을 붙잡고, 사이 시간에 논리 회로가 새 값을 만들어 안정된다. 1 GHz → 2 GHz면 주기가 절반이라 같은 계산(가장자리 세 번)이 3 ns → 1.5 ns에 끝나고 결과는 같다. 주기가 가장 느린 경로의 지연보다 짧으면 결과를 보장할 수 없다. ★ 보통의 디지털 계산에서 시간은 걸음을 담는 그릇일 뿐이고, 이 점을 뒤의 '다섯 축' 구간에서 뒤집는다. (디지털 ≠ 동기: 비동기 디지털 칩도 있다.)</li>
+<li><span class="key">저장 = 값을 들고 있기, 계산 = 들고 있는 값으로 새 값 만들기</span>. 보통 컴퓨터는 값을 전압의 높낮이(비트, 디지털)로 적는다.</li>
+<li>계산은 CPU·GPU 안의 연산기가, 데이터 전체는 칩 밖 메모리(DRAM)가 든다. 값은 레지스터·캐시·DRAM의 계단을 오르내린다. <span class="key">Weight가 캐시보다 크면 먼 메모리 왕복이 시간과 에너지를 먹는다</span>. 이것이 von Neumann 병목이다 <span class="src">Liang 2024, p.193</span>.</li>
+<li>클록 = 높음·낮음이 번갈아 오는 사각파 전압(주기 <span class="math inline">\(T\)</span>, 주파수 <span class="math inline">\(f = 1/T\)</span>). 레지스터가 가장자리에서 값을 붙잡고, 사이 시간에 논리 회로가 새 값을 만들어 안정된다. 1 GHz → 2 GHz면 주기가 절반이라 같은 계산(가장자리 세 번)이 3 ns → 1.5 ns에 끝나고 결과는 같다. <span class="key">주기가 가장 느린 경로의 지연보다 짧으면 결과를 보장할 수 없다</span>. ★ 보통의 디지털 계산에서 시간은 걸음을 담는 그릇일 뿐이고, 이 점을 뒤의 '다섯 축' 구간에서 뒤집는다. (디지털 ≠ 동기: 비동기 디지털 칩도 있다.)</li>
 </ul>
 </div>
 </section>
@@ -1275,11 +1275,11 @@ Mead의 아날로그 VLSI가 왜 주류가 되지 못했나
 <div class="quiz" data-day="d01" data-set="1-end"></div>
 <div class="keypoints">
 <ul>
-<li>n채널 MOSFET = p형 기판 + n⁺ 소스·드레인 + 게이트 산화막 + 게이트 전극. <span class="math inline">\(V_{GS}\)</span>는 표면에 전자가 얼마나 모이는지(장벽 높이)를, <span class="math inline">\(V_{DS}\)</span>는 그 전자를 드레인으로 끄는 힘을 정한다. 전자는 소스 → 드레인, 관습적 전류는 드레인 → 소스. 게이트 leak(산화막 세로 경로)은 문턱 아래 전류(가로 경로)와 다르다.</li>
-<li>문턱 아래에는 강한 채널(반전층)이 없을 뿐 전자는 조금 있다. 실리콘 안 소스–채널 사이의 장벽을 열에너지 꼬리의 전자가 넘어 <span class="math inline">\(I_D \propto e^{\kappa V_{GS}/U_T}\)</span>. 기울기 = <span class="math inline">\((kT/q)\ln 10/\kappa\)</span> ≥ 약 60 mV/decade(300 K), κ = 0.7이면 85 mV마다 10배. <span class="math inline">\(V_{th}\)</span>는 닫힌 문이 아니라 기준점.</li>
-<li>디지털은 트랜지스터를 스위치로: 저장(DRAM: <span class="math inline">\(Q = CV\)</span>, 새어서 수십 ms마다 새로 고침) → 논리(CMOS 인버터·NAND: 출력이 <span class="math inline">\(V_{DD}\)</span>와 GND 중 어디에 이어지나, AND = NAND + 인버터) → 덧셈(S = XOR, C = AND). CMOS 정지 전류는 이상적으로 0이지만 실제로는 leak이 있고, 바뀔 때 <span class="math inline">\(C_L\)</span> 충방전(<span class="math inline">\(CV^2\)</span>)과 짧은 단락 전류가 흐른다.</li>
-<li>Dennard 1974: 치수·전압 1/κ, 도핑 κ → 전력 밀도 그대로 <span class="src">Dennard 1974, p.265</span>. 약 60 mV/decade 한계 때문에 <span class="math inline">\(V_{th}\)</span>·<span class="math inline">\(V_{DD}\)</span>를 계속 못 낮추자 전력 밀도가 커져, 냉각 한계에 막힌 클록이 수 GHz에서 멈췄다.</li>
-<li>Mead는 같은 문턱 아래 전류를 'leak'이 아니라 계산 재료로 썼다(작은 전류, 지수·로그, Kirchhoff 덧셈) <span class="src">Mead 1990, p.1630–1631</span>. 대가는 느림·잡음·편차·온도 민감. 이온 채널과는 수학의 꼴이 닮았을 뿐 물리량이 다르다.</li>
+<li>n채널 MOSFET = p형 기판 + n⁺ 소스·드레인 + 게이트 산화막 + 게이트 전극. <span class="math inline">\(V_{GS}\)</span>는 표면에 전자가 얼마나 모이는지(장벽 높이)를, <span class="math inline">\(V_{DS}\)</span>는 그 전자를 드레인으로 끄는 힘을 정한다. 전자는 소스 → 드레인, 관습적 전류는 드레인 → 소스. <span class="key">게이트 leak(산화막 세로 경로)은 문턱 아래 전류(가로 경로)와 다르다</span>.</li>
+<li>문턱 아래에는 강한 채널(반전층)이 없을 뿐 전자는 조금 있다. 실리콘 안 소스–채널 사이의 장벽을 열에너지 꼬리의 전자가 넘어 <span class="math inline">\(I_D \propto e^{\kappa V_{GS}/U_T}\)</span>. 기울기 = <span class="math inline">\((kT/q)\ln 10/\kappa\)</span> ≥ 약 60 mV/decade(300 K), κ = 0.7이면 85 mV마다 10배. <span class="key"><span class="math inline">\(V_{th}\)</span>는 닫힌 문이 아니라 기준점</span>.</li>
+<li>디지털은 트랜지스터를 스위치로: 저장(DRAM: <span class="math inline">\(Q = CV\)</span>, 새어서 수십 ms마다 새로 고침) → 논리(CMOS 인버터·NAND: 출력이 <span class="math inline">\(V_{DD}\)</span>와 GND 중 어디에 이어지나, AND = NAND + 인버터) → 덧셈(S = XOR, C = AND). CMOS 정지 전류는 이상적으로 0이지만 실제로는 leak이 있고, <span class="key">바뀔 때 <span class="math inline">\(C_L\)</span> 충방전(<span class="math inline">\(CV^2\)</span>)과 짧은 단락 전류가 흐른다</span>.</li>
+<li>Dennard 1974: 치수·전압 1/κ, 도핑 κ → 전력 밀도 그대로 <span class="src">Dennard 1974, p.265</span>. <span class="key">약 60 mV/decade 한계 때문에 <span class="math inline">\(V_{th}\)</span>·<span class="math inline">\(V_{DD}\)</span>를 계속 못 낮추자 전력 밀도가 커져</span>, 냉각 한계에 막힌 클록이 수 GHz에서 멈췄다.</li>
+<li><span class="key">Mead는 같은 문턱 아래 전류를 'leak'이 아니라 계산 재료로 썼다</span>(작은 전류, 지수·로그, Kirchhoff 덧셈) <span class="src">Mead 1990, p.1630–1631</span>. 대가는 느림·잡음·편차·온도 민감. 이온 채널과는 수학의 꼴이 닮았을 뿐 물리량이 다르다.</li>
 </ul>
 </div>
 </section>

@@ -766,10 +766,10 @@ window.Quarto = {
 <div class="quiz" data-day="d08" data-set="1-check"></div>
 <div class="keypoints">
 <ul>
-<li>샘플링 = 연속 신호를 일정 간격으로 재기. 샘플링 속도(Hz)와 샘플링 주기(s)는 역수: 250 Hz ↔︎ 4 ms.</li>
-<li>시계열 = 시간 순서로 늘어선 샘플 목록. 시간 단계 <span class="math inline">\(t\)</span>는 번호이고, 실제 시각 = <span class="math inline">\(t\)</span> × 샘플링 주기.</li>
-<li>예: 심전도 72 Hz, 한 박동 700 ms ≈ 50단계 <span class="src">Zhong 2022, p.675</span>; 손동작 10 Hz, 3 s = 30단계 <span class="src">Zhong 2022, p.677</span>.</li>
-<li>남은 질문: 이 숫자 목록이 reservoir에 들어가면 상태는 어떻게 바뀌나? → 다음 절(state update).</li>
+<li>샘플링 = 연속 신호를 일정 간격으로 재기. <span class="key">샘플링 속도(Hz)와 샘플링 주기(s)는 역수</span>: 250 Hz ↔︎ 4 ms.</li>
+<li>시계열 = 시간 순서로 늘어선 샘플 목록. 시간 단계 <span class="math inline">\(t\)</span>는 번호이고, <span class="key">실제 시각 = <span class="math inline">\(t\)</span> × 샘플링 주기</span>.</li>
+<li>예: <span class="key">심전도 72 Hz, 한 박동 700 ms ≈ 50단계</span> <span class="src">Zhong 2022, p.675</span>; 손동작 10 Hz, 3 s = 30단계 <span class="src">Zhong 2022, p.677</span>.</li>
+<li>남은 질문: <span class="key">이 숫자 목록이 reservoir에 들어가면 상태는 어떻게 바뀌나?</span> → 다음 절(state update).</li>
 </ul>
 </div>
 </section>
@@ -895,10 +895,10 @@ x_i(t+1) = \tanh\!\Big(\sum_{j=1}^{N} W[i,j]\, x_j(t) + W_{in}[i]\, u(t)\Big)
 <div class="quiz" data-day="d08" data-set="2-check"></div>
 <div class="keypoints">
 <ul>
-<li>State update = (지금 상태를 <span class="math inline">\(W\)</span>로 섞기) + (지금 입력 × <span class="math inline">\(W_{in}\)</span>) → <span class="math inline">\(\tanh\)</span>로 누르기. 매 단계 같은 <span class="math inline">\(W\)</span>, <span class="math inline">\(W_{in}\)</span>을 쓴다.</li>
-<li>Day 11–12의 두 칸은 대각선 밖이 0이라 섞이지 않았고, 오늘의 <span class="math inline">\(W\)</span>는 대각선 밖(0.3, −0.3)으로 노드끼리 섞는다.</li>
-<li>예: <span class="math inline">\(u = 1, 0, 0\)</span> → <span class="math inline">\(x(1) = (0.762, -0.462)\)</span>, <span class="math inline">\(x(2) = (0.164, -0.430)\)</span>, <span class="math inline">\(x(3) = (-0.063, -0.258)\)</span>. 입력이 0이어도 흔적이 남는다.</li>
-<li>노드가 여럿이면 같은 과거가 노드마다 다른 모양으로 남는다. 이 다양함이 readout의 재료다. <span class="math inline">\(W\)</span>, <span class="math inline">\(W_{in}\)</span>은 난수로 만들고 학습하지 않는다 <span class="src">Liang 2024, p.194</span>.</li>
+<li>State update = <span class="key">(지금 상태를 <span class="math inline">\(W\)</span>로 섞기) + (지금 입력 × <span class="math inline">\(W_{in}\)</span>) → <span class="math inline">\(\tanh\)</span>로 누르기</span>. 매 단계 같은 <span class="math inline">\(W\)</span>, <span class="math inline">\(W_{in}\)</span>을 쓴다.</li>
+<li>Day 11–12의 두 칸은 대각선 밖이 0이라 섞이지 않았고, <span class="key">오늘의 <span class="math inline">\(W\)</span>는 대각선 밖(0.3, −0.3)으로 노드끼리 섞는다</span>.</li>
+<li>예: <span class="math inline">\(u = 1, 0, 0\)</span> → <span class="math inline">\(x(1) = (0.762, -0.462)\)</span>, <span class="math inline">\(x(2) = (0.164, -0.430)\)</span>, <span class="math inline">\(x(3) = (-0.063, -0.258)\)</span>. <span class="key">입력이 0이어도 흔적이 남는다</span>.</li>
+<li>노드가 여럿이면 <span class="key">같은 과거가 노드마다 다른 모양으로 남는다. 이 다양함이 readout의 재료다</span>. <span class="math inline">\(W\)</span>, <span class="math inline">\(W_{in}\)</span>은 난수로 만들고 학습하지 않는다 <span class="src">Liang 2024, p.194</span>.</li>
 </ul>
 </div>
 </section>
@@ -961,10 +961,10 @@ x(t) = F\big(u(t-1),\, u(t-2),\, u(t-3),\, \dots\big)
 <div class="quiz" data-day="d08" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>상태 <span class="math inline">\(x(t) = F(u(t-1), u(t-2), \dots)\)</span>: 지난 입력들을 노드 <span class="math inline">\(N\)</span>개 값으로 펼쳐 적은 것. <span class="math inline">\(\tanh\)</span> 때문에 비선형이다.</li>
-<li>예: 00, 10, 01, 11 → 네 개의 서로 다른 점(구별, Day 10 사다리 2단). <span class="math inline">\(\tanh\)</span>를 빼면 <span class="math inline">\(x(10)+x(01) = x(11)\)</span>이지만, 있으면 <span class="math inline">\((0.926, -0.892) \neq (0.823, -0.744)\)</span> → superposition이 깨진다.</li>
-<li>Readout = 상태 공간에 직선(평면)을 긋는 일. "방금 1", "한 단계 전 1"은 가를 수 있었지만 XOR은 이 두 노드로 못 갈랐다.</li>
-<li>Reservoir의 목적은 고차원 비선형 사상이며, 노드들이 서로의 복사본이 아니어야 한다 <span class="src">Liang 2024, p.194</span> <span class="src">Stepney 2024, p.668</span>.</li>
+<li>상태 <span class="math inline">\(x(t) = F(u(t-1), u(t-2), \dots)\)</span>: <span class="key">지난 입력들을 노드 <span class="math inline">\(N\)</span>개 값으로 펼쳐 적은 것</span>. <span class="math inline">\(\tanh\)</span> 때문에 비선형이다.</li>
+<li>예: 00, 10, 01, 11 → 네 개의 서로 다른 점(구별, Day 10 사다리 2단). <span class="math inline">\(\tanh\)</span>를 빼면 <span class="math inline">\(x(10)+x(01) = x(11)\)</span>이지만, 있으면 <span class="math inline">\((0.926, -0.892) \neq (0.823, -0.744)\)</span> → <span class="key">superposition이 깨진다</span>.</li>
+<li><span class="key">Readout = 상태 공간에 직선(평면)을 긋는 일</span>. "방금 1", "한 단계 전 1"은 가를 수 있었지만 XOR은 이 두 노드로 못 갈랐다.</li>
+<li><span class="key">Reservoir의 목적은 고차원 비선형 사상이며, 노드들이 서로의 복사본이 아니어야 한다</span> <span class="src">Liang 2024, p.194</span> <span class="src">Stepney 2024, p.668</span>.</li>
 </ul>
 </div>
 </section>
@@ -1235,10 +1235,10 @@ weight를 정하는 데 / <span class="math inline">\(\lambda\)</span> 같은 �
 </div>
 <div class="keypoints">
 <ul>
-<li>Day 11–12에서는 weight 둘·식 둘이라 정확히 풀렸지만(<span class="math inline">\(W_{out} \approx (-4.31, 4.31)\)</span>), 표본이 weight보다 많으면 모두 맞출 수 없다 → 최소제곱 = 오차 제곱의 합을 가장 작게. 세 표본이면 <span class="math inline">\(L = 14w^2 - 29w + 15.06\)</span>의 바닥 <span class="math inline">\(w = 14.5/14 = 1.036\)</span>.</li>
-<li>거의 같은 노드 둘: <span class="math inline">\(D = ad - b^2 = 0.077\)</span> → weight (+4, −3), 곧 예측 <span class="math inline">\(= x_1 + 3(x_1 - x_2)\)</span> → 새 데이터에서 틀린다(0.317). 이것이 과적합이다(예시 데이터 네 개로 한 Claude 계산).</li>
-<li>ridge: 손실에 <span class="math inline">\(\lambda w^2\)</span>, weight 하나면 <span class="math inline">\(w = \sum xy/(\sum x^2 + \lambda)\)</span>(1.036 → 0.967 → 0.518). 노드 둘이면 대각선 <span class="math inline">\(a\)</span>, <span class="math inline">\(d\)</span>에 <span class="math inline">\(\lambda\)</span> → <span class="math inline">\(\lambda = 0.1\)</span>에서 <span class="math inline">\(D = 6.08\)</span>, 새 데이터 0.0009. 규제를 키우면 weight가 줄고 학습 오차는 는다 <span class="src">Stepney 2024, p.669</span>.</li>
-<li>행렬: <span class="math inline">\(X^{\mathsf T}X\)</span>는 합 <span class="math inline">\(a, b, d\)</span>의 표, 역행렬은 그 표로 나누기(앞에 <span class="math inline">\(1/D\)</span>). <span class="math inline">\(W_{out} = (X^{\mathsf T}X + \lambda I)^{-1}X^{\mathsf T}\mathbf{y}\)</span>. <span class="math inline">\(\lambda\)</span>는 검증 데이터로 고르고 성능은 시험 데이터로 잰다(Day 10 사다리 4단, held-out).</li>
+<li>Day 11–12에서는 weight 둘·식 둘이라 정확히 풀렸지만(<span class="math inline">\(W_{out} \approx (-4.31, 4.31)\)</span>), <span class="key">표본이 weight보다 많으면 모두 맞출 수 없다 → 최소제곱 = 오차 제곱의 합을 가장 작게</span>. 세 표본이면 <span class="math inline">\(L = 14w^2 - 29w + 15.06\)</span>의 바닥 <span class="math inline">\(w = 14.5/14 = 1.036\)</span>.</li>
+<li>거의 같은 노드 둘: <span class="math inline">\(D = ad - b^2 = 0.077\)</span> → weight (+4, −3), 곧 예측 <span class="math inline">\(= x_1 + 3(x_1 - x_2)\)</span> → <span class="key">새 데이터에서 틀린다(0.317). 이것이 과적합이다</span>(예시 데이터 네 개로 한 Claude 계산).</li>
+<li>ridge: 손실에 <span class="math inline">\(\lambda w^2\)</span>, weight 하나면 <span class="math inline">\(w = \sum xy/(\sum x^2 + \lambda)\)</span>(1.036 → 0.967 → 0.518). 노드 둘이면 대각선 <span class="math inline">\(a\)</span>, <span class="math inline">\(d\)</span>에 <span class="math inline">\(\lambda\)</span> → <span class="math inline">\(\lambda = 0.1\)</span>에서 <span class="math inline">\(D = 6.08\)</span>, 새 데이터 0.0009. <span class="key">규제를 키우면 weight가 줄고 학습 오차는 는다</span> <span class="src">Stepney 2024, p.669</span>.</li>
+<li>행렬: <span class="math inline">\(X^{\mathsf T}X\)</span>는 합 <span class="math inline">\(a, b, d\)</span>의 표, 역행렬은 그 표로 나누기(앞에 <span class="math inline">\(1/D\)</span>). <span class="math inline">\(W_{out} = (X^{\mathsf T}X + \lambda I)^{-1}X^{\mathsf T}\mathbf{y}\)</span>. <span class="key"><span class="math inline">\(\lambda\)</span>는 검증 데이터로 고르고 성능은 시험 데이터로 잰다</span>(Day 10 사다리 4단, held-out).</li>
 </ul>
 </div>
 </section>

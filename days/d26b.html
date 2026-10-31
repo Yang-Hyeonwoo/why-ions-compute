@@ -849,11 +849,11 @@ B: TIA → <span class="key">crossbar(I = ΣG·V)</span> → 비교기</p>
 <div class="quiz" data-day="d26" data-set="5-end"></div>
 <div class="keypoints">
 <ul>
-<li>A(reservoir만 device): weight는 숫자, 정밀·재학습 쉬움, 대신 상태마다 ADC. 폴더 이온 RC는 모두 A.</li>
-<li>보드 위: TIA는 device마다(N개, 늘 켜짐), ADC·MCU는 공유. N = 10 → 100이면 TIA 10 → 100 µJ/박동, readout(ADC + MAC) 0.35 → 3.5 µJ. Readout을 crossbar로 옮겨도 TIA는 남는다 [Day 31–32 가정값, Claude 계산].</li>
-<li>B(readout까지 crossbar): ADC 없이 물리로 가중합. 대신 쓰기 정밀도는 보통 8 bit 미만(반복 쓰기로 11 bit 예), drift <span class="src">Jiang 2026, p.1115</span>, 비휘발 필요 <span class="src">Liang 2024, p.198</span>. 오차 ±0.04, 상태 120개면 출력이 약 0.22 흔들림 <span class="tag tag-assume">가정</span>.</li>
-<li>학습은 A·B 모두 칩 밖 컴퓨터에서 한 번(ridge), B는 쓰고-읽고-고치기로 옮긴다 <span class="src">Zhong 2022, p.676, 680</span>. 학습 단계에는 ADC가 쓰인다.</li>
-<li>완전 아날로그의 조건: 전압 상태, 고정·저drift weight, 단순 문턱 출력, MCU 제어. 이온 device는 휘발성이라 readout보다 reservoir 쪽 <span class="src">Wang 2025 (Chem. Soc. Rev.), p.328</span> <span class="tag tag-interp">해석</span>.</li>
+<li>A(reservoir만 device): <span class="key">weight는 숫자, 정밀·재학습 쉬움, 대신 상태마다 ADC</span>. 폴더 이온 RC는 모두 A.</li>
+<li>보드 위: TIA는 device마다(N개, 늘 켜짐), ADC·MCU는 공유. N = 10 → 100이면 TIA 10 → 100 µJ/박동, readout(ADC + MAC) 0.35 → 3.5 µJ. <span class="key">Readout을 crossbar로 옮겨도 TIA는 남는다</span> [Day 31–32 가정값, Claude 계산].</li>
+<li>B(readout까지 crossbar): <span class="key">ADC 없이 물리로 가중합</span>. 대신 쓰기 정밀도는 보통 8 bit 미만(반복 쓰기로 11 bit 예), drift <span class="src">Jiang 2026, p.1115</span>, 비휘발 필요 <span class="src">Liang 2024, p.198</span>. 오차 ±0.04, 상태 120개면 출력이 약 0.22 흔들림 <span class="tag tag-assume">가정</span>.</li>
+<li><span class="key">학습은 A·B 모두 칩 밖 컴퓨터에서 한 번(ridge)</span>, B는 쓰고-읽고-고치기로 옮긴다 <span class="src">Zhong 2022, p.676, 680</span>. 학습 단계에는 ADC가 쓰인다.</li>
+<li>완전 아날로그의 조건: 전압 상태, 고정·저drift weight, 단순 문턱 출력, MCU 제어. <span class="key">이온 device는 휘발성이라 readout보다 reservoir 쪽</span> <span class="src">Wang 2025 (Chem. Soc. Rev.), p.328</span> <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>
@@ -978,9 +978,9 @@ B: TIA → <span class="key">crossbar(I = ΣG·V)</span> → 비교기</p>
 <div class="quiz" data-day="d26" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>이식 ECG를 응용으로 놓으면: 속도는 병목 아님(우위도 아님), 내구·drift·device 간 재현성과 인터페이스·봉지가 진짜 병목 후보, 시스템 에너지는 미측정 <span class="tag tag-interp">해석</span>.</li>
-<li>공정으로 풀릴 수 있는 것과 메커니즘에서 오는 조건(크기–τ의 묶임, 젖은 동작·전극 반응)을 구별한다.</li>
-<li>판정은 응용에 따라 바뀐다. 교차표는 Day 51–52에서.</li>
+<li>이식 ECG를 응용으로 놓으면: 속도는 병목 아님(우위도 아님), <span class="key">내구·drift·device 간 재현성과 인터페이스·봉지가 진짜 병목 후보</span>, 시스템 에너지는 미측정 <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">공정으로 풀릴 수 있는 것과 메커니즘에서 오는 조건</span>(크기–τ의 묶임, 젖은 동작·전극 반응)을 구별한다.</li>
+<li><span class="key">판정은 응용에 따라 바뀐다</span>. 교차표는 Day 51–52에서.</li>
 </ul>
 </div>
 </section>

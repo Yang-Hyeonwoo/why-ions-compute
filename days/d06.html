@@ -824,10 +824,10 @@ window.Quarto = {
 </div>
 <div class="keypoints">
 <ul>
-<li>PPF 지수 = 두 번째 응답 ÷ 첫 번째 응답 × 100(%). 간격이 짧을수록 크다(모형 device: 10 ms에서 188%, 1 s에서 105%).</li>
-<li>물리계가 계산한다 = 추상 문제의 입력을 물리로 부호화하고, 물리가 움직인 뒤 상태를 해독해 얻은 답이 추상 세계의 답과 허용 오차 안에서 일치한다(사각형이 닫힌다) <span class="src">Stepney 2024, p.666–667</span>.</li>
-<li>실패 유형: 표현 없음 / 해독 단계에 계산을 숨김(다른 컴퓨터 필요) / 우연히 맞은 것만 고름 <span class="src">Stepney 2024, p.667</span>. 미리 정한 문턱도 닫히는 입력 범위를 재 둬야 한다(문턱 1.5는 약 69–99 ms에서 틀림) <span class="tag tag-calc">계산</span>.</li>
-<li>시냅스 현상 재현은 ②(물리가 움직임)만이다. Aluru: "단순 이온 conductance 이력을 넘어서야" <span class="src">Aluru 2026, p.593</span>.</li>
+<li><span class="key">PPF 지수 = 두 번째 응답 ÷ 첫 번째 응답 × 100(%)</span>. 간격이 짧을수록 크다(모형 device: 10 ms에서 188%, 1 s에서 105%).</li>
+<li>물리계가 계산한다 = 추상 문제의 입력을 물리로 부호화하고, 물리가 움직인 뒤 상태를 해독해 <span class="key">얻은 답이 추상 세계의 답과 허용 오차 안에서 일치한다(사각형이 닫힌다)</span> <span class="src">Stepney 2024, p.666–667</span>.</li>
+<li>실패 유형: <span class="key">표현 없음 / 해독 단계에 계산을 숨김(다른 컴퓨터 필요) / 우연히 맞은 것만 고름</span> <span class="src">Stepney 2024, p.667</span>. 미리 정한 문턱도 닫히는 입력 범위를 재 둬야 한다(문턱 1.5는 약 69–99 ms에서 틀림) <span class="tag tag-calc">계산</span>.</li>
+<li><span class="key">시냅스 현상 재현은 ②(물리가 움직임)만이다</span>. Aluru: "단순 이온 conductance 이력을 넘어서야" <span class="src">Aluru 2026, p.593</span>.</li>
 </ul>
 </div>
 </section>
@@ -1029,11 +1029,11 @@ window.Quarto = {
 <div class="quiz" data-day="d06" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>이 사다리(학습한 readout·held-out·기준선)는 readout을 데이터로 학습하는 계산(RC식)을 검증하는 기준이다. 해독 규칙을 미리 정해 둔 계산의 필요조건은 아니다 <span class="tag tag-interp">해석</span>.</li>
-<li>과제 = 입력·정답·척도가 정해진 문제. 표본 = 입력과 정답의 한 쌍. 읽을 수 있는 상태 = 구별되고 반복 가능한 측정값 목록 <span class="src">Singh 2026, p.6</span>.</li>
-<li>Readout = 상태에서 답을 꺼내는 규칙. 가장 단순한 것은 문턱 하나 또는 직선 맞추기(<span class="math inline">\(\mathbf{y} = W_{out}\mathbf{x}\)</span>). RC는 readout만 학습한다 <span class="src">Liang 2024, p.194</span>.</li>
-<li>held-out: 훈련 데이터 성능은 증거가 아니다. 잡음 상태 30개로도 훈련 <span class="math inline">\(R^2\)</span> 0.74 <span class="tag tag-calc">계산</span>. 독립 시험 데이터가 증거 <span class="src">Stepney 2024, p.669</span>.</li>
-<li>기준선: 원시 입력 / 정적 device / 디지털 RC / MCU+NN. 귀속 대조 없이는 device 기여를 말할 수 없다 <span class="src">Singh 2026, p.19–20</span>. 펄스 간격 예제: 훈련 100% → 시험 75%, 원시 입력 기준선도 75%(기여 주장 불가), 기억 없는 저항 50% <span class="tag tag-calc">계산</span>.</li>
+<li>이 사다리(학습한 readout·held-out·기준선)는 readout을 데이터로 학습하는 계산(RC식)을 검증하는 기준이다. <span class="key">해독 규칙을 미리 정해 둔 계산의 필요조건은 아니다</span> <span class="tag tag-interp">해석</span>.</li>
+<li>과제 = 입력·정답·척도가 정해진 문제. 표본 = 입력과 정답의 한 쌍. <span class="key">읽을 수 있는 상태 = 구별되고 반복 가능한 측정값 목록</span> <span class="src">Singh 2026, p.6</span>.</li>
+<li>Readout = 상태에서 답을 꺼내는 규칙. 가장 단순한 것은 문턱 하나 또는 직선 맞추기(<span class="math inline">\(\mathbf{y} = W_{out}\mathbf{x}\)</span>). <span class="key">RC는 readout만 학습한다</span> <span class="src">Liang 2024, p.194</span>.</li>
+<li>held-out: <span class="key">훈련 데이터 성능은 증거가 아니다</span>. 잡음 상태 30개로도 훈련 <span class="math inline">\(R^2\)</span> 0.74 <span class="tag tag-calc">계산</span>. 독립 시험 데이터가 증거 <span class="src">Stepney 2024, p.669</span>.</li>
+<li>기준선: 원시 입력 / 정적 device / 디지털 RC / MCU+NN. <span class="key">귀속 대조 없이는 device 기여를 말할 수 없다</span> <span class="src">Singh 2026, p.19–20</span>. 펄스 간격 예제: 훈련 100% → 시험 75%, 원시 입력 기준선도 75%(기여 주장 불가), 기억 없는 저항 50% <span class="tag tag-calc">계산</span>.</li>
 </ul>
 </div>
 </section>
@@ -1088,10 +1088,10 @@ window.Quarto = {
 <div class="quiz" data-day="d06" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>PPF 곡선은 기억(시간상수)의 <strong>존재</strong>를 보인다. 사다리 0단. 모형: <span class="math inline">\(100(1 + 0.6e^{-\Delta t/\tau_1} + 0.4e^{-\Delta t/\tau_2})\)</span>, τ₁ 50 ms·τ₂ 0.5 s, 10 ms에서 188%.</li>
-<li>'간격이 짧을수록 커짐'은 선형 저항–capacitor 회로에서도 나오므로 비선형의 증거가 아니다(겹침 시험이 필요, Day 29–30).</li>
-<li>증명하지 못하는 것: 상태 구별·재현, held-out 성능, 기준선 대비 우위, 시스템 비용.</li>
-<li>고친 문장(readout을 학습하는 경우): 최근 입력의 일부 정보가 상태에 남는다. 과제에 필요한 차이가 읽을 수 있는 상태들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며, 기준선보다 나은지는 따로 검증한다.</li>
+<li><span class="key">PPF 곡선은 기억(시간상수)의 <strong>존재</strong>를 보인다</span>. 사다리 0단. 모형: <span class="math inline">\(100(1 + 0.6e^{-\Delta t/\tau_1} + 0.4e^{-\Delta t/\tau_2})\)</span>, τ₁ 50 ms·τ₂ 0.5 s, 10 ms에서 188%.</li>
+<li><span class="key">'간격이 짧을수록 커짐'은 선형 저항–capacitor 회로에서도 나오므로 비선형의 증거가 아니다</span>(겹침 시험이 필요, Day 29–30).</li>
+<li><span class="key">증명하지 못하는 것: 상태 구별·재현, held-out 성능, 기준선 대비 우위, 시스템 비용</span>.</li>
+<li>고친 문장(readout을 학습하는 경우): 최근 입력의 일부 정보가 상태에 남는다. <span class="key">과제에 필요한 차이가 읽을 수 있는 상태들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며</span>, 기준선보다 나은지는 따로 검증한다.</li>
 </ul>
 </div>
 </section>
@@ -1162,9 +1162,9 @@ window.Quarto = {
 <div class="quiz" data-day="d06" data-set="4-end"></div>
 <div class="keypoints">
 <ul>
-<li>원시 입력 기준선의 수치까지 원문으로 확인되는 사례는 Lee 2025뿐이고 device가 1.3%p 낮다 <span class="src">Lee 2025 (npj), p.8</span>. Zhong 2022의 기준선은 디지털 RC <span class="src">Zhong 2022, p.677</span>. Koh 2022는 원시 입력 기준선보다 낮다고 저자가 서술 <span class="tag tag-fact">확인</span> (기준선 수치는 <span class="tag tag-unverified">미확인</span>). Chen 2025는 SVM 기준선이 있으나 조건 불명 <span class="src">Chen 2025, p.7–8</span>. Fan 2026·Wu 2025는 학습·평가 과제 없음(Wu는 문턱 비교만).</li>
-<li>Device의 가치는 정확도보다 readout 크기·전력·시간척도 조절에서 찾아야 할 수 있다 <span class="src">Liang 2024, p.201</span>.</li>
-<li>제목의 "computing"과 사다리의 단은 별개다. 그림으로 읽는다.</li>
+<li><span class="key">원시 입력 기준선의 수치까지 원문으로 확인되는 사례는 Lee 2025뿐이고 device가 1.3%p 낮다</span> <span class="src">Lee 2025 (npj), p.8</span>. Zhong 2022의 기준선은 디지털 RC <span class="src">Zhong 2022, p.677</span>. Koh 2022는 원시 입력 기준선보다 낮다고 저자가 서술 <span class="tag tag-fact">확인</span> (기준선 수치는 <span class="tag tag-unverified">미확인</span>). Chen 2025는 SVM 기준선이 있으나 조건 불명 <span class="src">Chen 2025, p.7–8</span>. Fan 2026·Wu 2025는 학습·평가 과제 없음(Wu는 문턱 비교만).</li>
+<li><span class="key">Device의 가치는 정확도보다 readout 크기·전력·시간척도 조절에서 찾아야 할 수 있다</span> <span class="src">Liang 2024, p.201</span>.</li>
+<li><span class="key">제목의 "computing"과 사다리의 단은 별개다</span>. 그림으로 읽는다.</li>
 </ul>
 </div>
 </section>
@@ -1234,10 +1234,10 @@ window.Quarto = {
 <div class="quiz" data-day="d06" data-set="5-check"></div>
 <div class="keypoints">
 <ul>
-<li>Phase 1의 사슬: 우산 이름과 회색지대(Day 1–2) → 벽(Day 3–4) → 조건부 존재 증명(Day 5–6) → 응용별 spec(Day 7–8) → 좁은 자리와 MCU 경쟁자(Day 9) → 학습형(RC식) 계산의 검증 조건(Day 10).</li>
-<li>"왜 필요한가" 세 문장: 어떤 계산에서 / 어느 원리가 어떤 조건에서 / 어느 자리에서 무엇을 보여야. "항상" 금지, [미확인]·<span class="tag tag-hypo">가설</span> 하나 이상.</li>
-<li>가장 약한 고리는 근거 태그가 몰린 곳. 바뀐 가정은 사전 테스트·먼저 만들어 보기와 대조해 표로.</li>
-<li>반론: 기준이 너무 높다 → 주장의 강도와 증거 수준의 일치가 기준이다 <span class="src">Singh 2026, p.19</span>.</li>
+<li>Phase 1의 사슬: 우산 이름과 회색지대(Day 1–2) → 벽(Day 3–4) → 조건부 존재 증명(Day 5–6) → 응용별 spec(Day 7–8) → 좁은 자리와 MCU 경쟁자(Day 9) → <span class="key">학습형(RC식) 계산의 검증 조건(Day 10)</span>.</li>
+<li>"왜 필요한가" 세 문장: <span class="key">어떤 계산에서 / 어느 원리가 어떤 조건에서 / 어느 자리에서 무엇을 보여야</span>. "항상" 금지, [미확인]·<span class="tag tag-hypo">가설</span> 하나 이상.</li>
+<li><span class="key">가장 약한 고리는 근거 태그가 몰린 곳</span>. 바뀐 가정은 사전 테스트·먼저 만들어 보기와 대조해 표로.</li>
+<li>반론: 기준이 너무 높다 → <span class="key">주장의 강도와 증거 수준의 일치가 기준이다</span> <span class="src">Singh 2026, p.19</span>.</li>
 </ul>
 </div>
 </section>

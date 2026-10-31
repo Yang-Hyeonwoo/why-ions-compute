@@ -1175,11 +1175,11 @@ Spiking neural network (SNN)
 <div class="quiz" data-day="d04" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>LIF neuron = capacitor(integrate) + resistor(leak) + threshold switch(fire &amp; reset). τ = R × C (예: 20 MΩ × 1 nF = 20 ms).</li>
-<li>일정한 입력은 stop value <span class="math inline">\(I \times R\)</span>에서 멈춘다. 이것이 <span class="math inline">\(V_{th}\)</span>보다 작으면 fire하지 않는다(12 nA × 20 MΩ = 0.24 V &lt; 0.5 V). 40 nA는 0.8 V를 향해 오르다 약 20 ms마다 fire한다.</li>
-<li>Decay factor는 Δt에 묶인 수다. 1 ms에 0.9면 2 ms에는 0.81. Neuron의 빠르기는 τ로 말한다.</li>
-<li>Day 7의 settling time도 같은 R–C 곡선이다(5τ에 99%). Crossbar는 짧은 τ, neuron은 긴 τ를 원한다.</li>
-<li>Lan 2026의 hydrogel LIF neuron에서 integrate는 외부 capacitor가 하고, hydrogel은 threshold switching(Ag filament)을 맡는다 <span class="src">Lan 2026, p.4–7</span> <span class="tag tag-interp">해석</span>. 0.72 nJ/spike는 device energy다.</li>
+<li>LIF neuron = <span class="key">capacitor(integrate) + resistor(leak) + threshold switch(fire &amp; reset)</span>. τ = R × C (예: 20 MΩ × 1 nF = 20 ms).</li>
+<li>일정한 입력은 stop value <span class="math inline">\(I \times R\)</span>에서 멈춘다. <span class="key">이것이 <span class="math inline">\(V_{th}\)</span>보다 작으면 fire하지 않는다</span>(12 nA × 20 MΩ = 0.24 V &lt; 0.5 V). 40 nA는 0.8 V를 향해 오르다 약 20 ms마다 fire한다.</li>
+<li>Decay factor는 Δt에 묶인 수다. 1 ms에 0.9면 2 ms에는 0.81. <span class="key">Neuron의 빠르기는 τ로 말한다</span>.</li>
+<li>Day 7의 settling time도 같은 R–C 곡선이다(5τ에 99%). <span class="key">Crossbar는 짧은 τ, neuron은 긴 τ를 원한다</span>.</li>
+<li>Lan 2026의 hydrogel LIF neuron에서 <span class="key">integrate는 외부 capacitor가 하고, hydrogel은 threshold switching(Ag filament)을 맡는다</span> <span class="src">Lan 2026, p.4–7</span> <span class="tag tag-interp">해석</span>. 0.72 nJ/spike는 device energy다.</li>
 </ul>
 </div>
 </section>
@@ -1525,10 +1525,10 @@ Spiking neural network (SNN)
 <div class="quiz" data-day="d04" data-set="4-end"></div>
 <div class="keypoints">
 <ul>
-<li>Read(작은 voltage, 상태 그대로)와 write(큰 펄스, conductance를 바꿈)는 다른 일이다. Inference-only는 한 번 write하고 read만, on-chip training은 write를 매 단계 한다.</li>
-<li>Number of states: <span class="math inline">\(b\)</span> bit = <span class="math inline">\(2^b\)</span> states, step size = 범위 ÷ states. Bit 하나에 step size와 quantization error가 절반. Device 2–6 bit, inference 4–8 bit, training &gt;10 bit <span class="src">Roadmap 2026, p.8112</span>.</li>
-<li>Read linearity: <span class="math inline">\(I = G \times V\)</span>가 성립해야 crossbar의 곱셈이 맞다(1 µS × 0.2 V가 0.3 µA면 출력 20% 오류). 그래서 작은 read voltage를 쓴다.</li>
-<li>Update linearity·symmetry: 같은 명령에 같은 <span class="math inline">\(\Delta G\)</span>인가(+0.10, −0.15 µS면 한 쌍마다 −0.05 µS 쏠림) <span class="src">Roadmap 2026, p.8113</span>. inference-only는 write-verify로 우회하지만 on-chip training은 못 한다 <span class="src">Jiang 2026, p.1114</span>.</li>
+<li><span class="key">Read(작은 voltage, 상태 그대로)와 write(큰 펄스, conductance를 바꿈)는 다른 일이다</span>. Inference-only는 한 번 write하고 read만, on-chip training은 write를 매 단계 한다.</li>
+<li>Number of states: <span class="key"><span class="math inline">\(b\)</span> bit = <span class="math inline">\(2^b\)</span> states, step size = 범위 ÷ states</span>. Bit 하나에 step size와 quantization error가 절반. Device 2–6 bit, inference 4–8 bit, training &gt;10 bit <span class="src">Roadmap 2026, p.8112</span>.</li>
+<li>Read linearity: <span class="key"><span class="math inline">\(I = G \times V\)</span>가 성립해야 crossbar의 곱셈이 맞다</span>(1 µS × 0.2 V가 0.3 µA면 출력 20% 오류). 그래서 작은 read voltage를 쓴다.</li>
+<li><span class="key">Update linearity·symmetry: 같은 명령에 같은 <span class="math inline">\(\Delta G\)</span>인가</span>(+0.10, −0.15 µS면 한 쌍마다 −0.05 µS 쏠림) <span class="src">Roadmap 2026, p.8113</span>. inference-only는 write-verify로 우회하지만 on-chip training은 못 한다 <span class="src">Jiang 2026, p.1114</span>.</li>
 </ul>
 </div>
 </section>
@@ -1657,10 +1657,10 @@ Spiking neural network (SNN)
 <div class="quiz" data-day="d04" data-set="5-end"></div>
 <div class="keypoints">
 <ul>
-<li>Retention은 task가 정한다. 짧은 retention은 weight device에서는 refresh 비용, 단기 task나 reservoir computing node에서는 필요한 성질 <span class="src">Roadmap 2026, p.8113</span>. 정의·relaxation·τ와의 구별을 확인한다.</li>
-<li>Endurance·variation 요구는 on-chip training에서 높다. 10¹⁷ cycle은 범용 memory의 바람직한 값이다 <span class="src">Kudithipudi 2025, p.809</span> <span class="tag tag-interp">해석</span>.</li>
-<li>같은 D2D variation이 weight에서는 error, reservoir computing node에서는 자원 <span class="src">Liang 2024, p.196</span>.</li>
-<li>Inference-only, on-chip training, physical reservoir computing node는 서로 다른 spec 표다. 논문이 어느 용도인지부터 확인한다.</li>
+<li><span class="key">Retention은 task가 정한다</span>. 짧은 retention은 weight device에서는 refresh 비용, 단기 task나 reservoir computing node에서는 필요한 성질 <span class="src">Roadmap 2026, p.8113</span>. 정의·relaxation·τ와의 구별을 확인한다.</li>
+<li><span class="key">Endurance·variation 요구는 on-chip training에서 높다</span>. 10¹⁷ cycle은 범용 memory의 바람직한 값이다 <span class="src">Kudithipudi 2025, p.809</span> <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">같은 D2D variation이 weight에서는 error, reservoir computing node에서는 자원</span> <span class="src">Liang 2024, p.196</span>.</li>
+<li><span class="key">Inference-only, on-chip training, physical reservoir computing node는 서로 다른 spec 표다</span>. 논문이 어느 용도인지부터 확인한다.</li>
 </ul>
 </div>
 </section>
@@ -1763,9 +1763,9 @@ Spiking neural network (SNN)
 <div class="quiz" data-day="d04" data-set="6-check"></div>
 <div class="keypoints">
 <ul>
-<li>Peripheral circuits(DAC, TIA, ADC, driver, control, buffer)는 system 전력의 최대 70% <span class="src">Roadmap 2026, p.8130</span>. error 보정 기법은 이점을 깎는다 <span class="src">Jiang 2026, p.1110</span>.</li>
-<li>비용이 작아지는 조건: 낮은 ADC 정밀도, analog 다음 단계, 큰 array, 드문 update <span class="tag tag-interp">해석</span>.</li>
-<li>"fJ/event"는 device energy다(예: 6 fJ/event는 0.5 pA·20 mV 조건의 device 항 <span class="src">Chen 2025, p.5</span>). System energy는 다른 줄에 적는다 → Day 31–32.</li>
+<li><span class="key">Peripheral circuits(DAC, TIA, ADC, driver, control, buffer)는 system 전력의 최대 70%</span> <span class="src">Roadmap 2026, p.8130</span>. error 보정 기법은 이점을 깎는다 <span class="src">Jiang 2026, p.1110</span>.</li>
+<li>비용이 작아지는 조건: <span class="key">낮은 ADC 정밀도, analog 다음 단계, 큰 array, 드문 update</span> <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">"fJ/event"는 device energy다</span>(예: 6 fJ/event는 0.5 pA·20 mV 조건의 device 항 <span class="src">Chen 2025, p.5</span>). System energy는 다른 줄에 적는다 → Day 31–32.</li>
 </ul>
 </div>
 </section>

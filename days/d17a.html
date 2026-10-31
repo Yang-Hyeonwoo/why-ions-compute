@@ -820,10 +820,10 @@ TOPS/W
 <div class="quiz" data-day="d17" data-set="1-end"></div>
 <div class="keypoints">
 <ul>
-<li>정확도 옆에 붙일 숫자: inference 한 번의 에너지[J], 지연시간[s], 처리율[inference/s], 면적·부품 수, 보정·재학습 비용.</li>
-<li>전력이 작아도 오래 걸리면 에너지는 크다: 1 µW × 2 s = 2 µJ &gt; 100 µW × 1 ms = 0.1 µJ.</li>
-<li>Physical reservoir computing의 장점은 정확도가 아니라 시스템 복잡도·전력·학습 비용·속도에 있다는 것이 Liang의 정리다 <span class="src">Liang 2024, p.201</span>. 그렇다면 비용을 재야 동기가 검증된다 <span class="tag tag-interp">해석</span>.</li>
-<li>상충은 합친 점수가 아니라 파레토 경계로 보인다 <span class="src">Singh 2026, p.8, 14</span>. 남은 질문: 그 비용은 장치의 어디에서 생기나? → ‘감지 사슬’ 구간.</li>
+<li><span class="key">정확도 옆에 붙일 숫자</span>: inference 한 번의 에너지[J], 지연시간[s], 처리율[inference/s], 면적·부품 수, 보정·재학습 비용.</li>
+<li><span class="key">전력이 작아도 오래 걸리면 에너지는 크다</span>: 1 µW × 2 s = 2 µJ &gt; 100 µW × 1 ms = 0.1 µJ.</li>
+<li>Physical reservoir computing의 장점은 정확도가 아니라 시스템 복잡도·전력·학습 비용·속도에 있다는 것이 Liang의 정리다 <span class="src">Liang 2024, p.201</span>. 그렇다면 <span class="key">비용을 재야 동기가 검증된다</span> <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">상충은 합친 점수가 아니라 파레토 경계로 보인다</span> <span class="src">Singh 2026, p.8, 14</span>. 남은 질문: 그 비용은 장치의 어디에서 생기나? → ‘감지 사슬’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -951,10 +951,10 @@ ADC가 맨 앞 / reservoir와 readout 사이 / 그 사이에 없음. '완전 아
 </div>
 <div class="keypoints">
 <ul>
-<li>심전도 장치의 사슬: 전극 → 증폭+필터(AFE) → 입력 부호화 → device → 상태 읽기(TIA·MUX) → ADC → readout(MCU) → 판정·무선, 그리고 늘 켜진 MCU·클록.</li>
-<li>AFE·전극·무선은 device를 쓰든 안 쓰든 필요하다. 비교할 때 양쪽에 똑같이 넣는다 <span class="tag tag-interp">해석</span>.</li>
-<li>ADC는 다음 단계가 디지털인 자리마다 생긴다. Zhong 2022의 '완전 아날로그'는 reservoir–readout 사이의 ADC를 없앤 것이고, MCU·증폭기·MUX·디지털 가변저항은 남아 있다 <span class="src">Zhong 2022, p.673–674, 679</span>.</li>
-<li>남은 질문: 이 고리들이 각각 얼마를 쓰나? → ‘에너지 예산’ 구간.</li>
+<li>심전도 장치의 사슬: 전극 → 증폭+필터(AFE) → 입력 부호화 → <span class="key">device → 상태 읽기(TIA·MUX) → ADC</span> → readout(MCU) → 판정·무선, 그리고 늘 켜진 MCU·클록.</li>
+<li>AFE·전극·무선은 device를 쓰든 안 쓰든 필요하다. <span class="key">비교할 때 양쪽에 똑같이 넣는다</span> <span class="tag tag-interp">해석</span>.</li>
+<li><span class="key">ADC는 다음 단계가 디지털인 자리마다 생긴다</span>. Zhong 2022의 '완전 아날로그'는 reservoir–readout 사이의 ADC를 없앤 것이고, MCU·증폭기·MUX·디지털 가변저항은 남아 있다 <span class="src">Zhong 2022, p.673–674, 679</span>.</li>
+<li>남은 질문: <span class="key">이 고리들이 각각 얼마를 쓰나?</span> → ‘에너지 예산’ 구간.</li>
 </ul>
 </div>
 </section>
@@ -1218,11 +1218,11 @@ E_{res} = \int_{t_0}^{t_1} V(t)\, I(t)\, dt
 <div class="quiz" data-day="d17" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>Device 에너지 <span class="math inline">\(E_{res} = \int V I\,dt\)</span>, 일정한 펄스면 <span class="math inline">\(V \times I \times t\)</span>. 예: 0.5 V × 1 µA × 1 ms = 0.5 nJ <span class="src">Singh 2026, p.14</span>.</li>
-<li>예산의 단위: 켜져 있는 항목은 전력[W = J/s] × 시간[s], 한 번마다의 항목은 [J/회] × 횟수. [J/회] × [회/s] = W(Day 9의 평균 전력).</li>
-<li>가정을 표로 드러낸 예산에서 device의 몫은 약 1%. Device를 10배 좋게 해도 시스템은 약 1% 줄어든다 [가정, 계산].</li>
-<li>공통 항목을 빼고 '다른 부분'끼리 비교한다. Device 하나 vs MCU 처리만 비교하면 사이에 낀 TIA를 놓친다.</li>
-<li>결론은 민감한 가정 하나(이 예에서는 TIA 전력)에 달릴 수 있다. 그 가정이 곧 측정해야 할 것이다 <span class="tag tag-interp">해석</span>. 남은 질문: device가 느리면 시간 비례 항목은? → ‘응답 시간과 지연시간’ 구간.</li>
+<li>Device 에너지 <span class="math inline">\(E_{res} = \int V I\,dt\)</span>, 일정한 펄스면 <span class="math inline">\(V \times I \times t\)</span>. <span class="key">예: 0.5 V × 1 µA × 1 ms = 0.5 nJ</span> <span class="src">Singh 2026, p.14</span>.</li>
+<li><span class="key">예산의 단위</span>: 켜져 있는 항목은 전력[W = J/s] × 시간[s], 한 번마다의 항목은 [J/회] × 횟수. [J/회] × [회/s] = W(Day 9의 평균 전력).</li>
+<li>가정을 표로 드러낸 예산에서 <span class="key">device의 몫은 약 1%. Device를 10배 좋게 해도 시스템은 약 1% 줄어든다</span> [가정, 계산].</li>
+<li><span class="key">공통 항목을 빼고 '다른 부분'끼리 비교한다</span>. Device 하나 vs MCU 처리만 비교하면 사이에 낀 TIA를 놓친다.</li>
+<li><span class="key">결론은 민감한 가정 하나(이 예에서는 TIA 전력)에 달릴 수 있다</span>. 그 가정이 곧 측정해야 할 것이다 <span class="tag tag-interp">해석</span>. 남은 질문: device가 느리면 시간 비례 항목은? → ‘응답 시간과 지연시간’ 구간.</li>
 </ul>
 </div>
 </section>
