@@ -1,5 +1,5 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
-<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arr-cc8553d' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker><marker id='arr-c3d6fb4' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#3d6fb4'/></marker></defs>
 <text x='320' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >천천히 줄어드는 응답이 '계산'이 되기까지의 사슬과 각 고리가 끊기는 조건</text>
 <rect x='15' y='48' width='345' height='52' rx='8' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
 <text x='28' y='69' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >① 입력 펄스가 물리량을 바꾼다</text>
@@ -7,38 +7,38 @@
 <rect x='383' y='54' width='247' height='40' rx='8' fill='#fdf1ee' stroke='#c8553d' stroke-width='1.2' />
 <text x='392' y='71' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >끊기는 조건</text>
 <text x='392' y='87' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >입력이 너무 약함(안 바뀜) / 너무 셈(포화)</text>
-<line x1='360' y1='74' x2='381' y2='74' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr)'/>
-<line x1='190' y1='100' x2='190' y2='114' stroke='#3d6fb4' stroke-width='1.4' marker-end='url(#arr)'/>
+<line x1='360' y1='74' x2='381' y2='74' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr-cc8553d)'/>
+<line x1='190' y1='100' x2='190' y2='114' stroke='#3d6fb4' stroke-width='1.4' marker-end='url(#arr-c3d6fb4)'/>
 <rect x='15' y='116' width='345' height='52' rx='8' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
 <text x='28' y='137' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >② 그 변화가 천천히 돌아간다</text>
 <text x='28' y='156' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' ><tspan>다음 입력 때 흔적 d = e</tspan><tspan dy='-6' font-size='9'>−Δt/τ</tspan><tspan dy='6' font-size='1'>​</tspan><tspan>가 남는다</tspan></text>
 <rect x='383' y='122' width='247' height='40' rx='8' fill='#fdf1ee' stroke='#c8553d' stroke-width='1.2' />
 <text x='392' y='139' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >끊기는 조건</text>
 <text x='392' y='155' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >τ ≪ 입력 간격: 다음 입력 전에 사라짐</text>
-<line x1='360' y1='142' x2='381' y2='142' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr)'/>
-<line x1='190' y1='168' x2='190' y2='182' stroke='#3d6fb4' stroke-width='1.4' marker-end='url(#arr)'/>
+<line x1='360' y1='142' x2='381' y2='142' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr-cc8553d)'/>
+<line x1='190' y1='168' x2='190' y2='182' stroke='#3d6fb4' stroke-width='1.4' marker-end='url(#arr-c3d6fb4)'/>
 <rect x='15' y='184' width='345' height='52' rx='8' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
 <text x='28' y='205' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >③ 지금 읽는 값 = 지금 입력 + 지난 입력의 가중합</text>
 <text x='28' y='224' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >이력이 다르면 읽는 전류가 다르다 (PPF가 그 2-펄스 판)</text>
 <rect x='383' y='190' width='247' height='40' rx='8' fill='#fdf1ee' stroke='#c8553d' stroke-width='1.2' />
 <text x='392' y='207' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >끊기는 조건</text>
 <text x='392' y='223' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >τ ≫ 입력 간격: 옛 입력이 쌓여 최근 것이 묻힘</text>
-<line x1='360' y1='210' x2='381' y2='210' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr)'/>
-<line x1='190' y1='236' x2='190' y2='250' stroke='#3d6fb4' stroke-width='1.4' marker-end='url(#arr)'/>
+<line x1='360' y1='210' x2='381' y2='210' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr-cc8553d)'/>
+<line x1='190' y1='236' x2='190' y2='250' stroke='#3d6fb4' stroke-width='1.4' marker-end='url(#arr-c3d6fb4)'/>
 <rect x='15' y='252' width='345' height='52' rx='8' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
 <text x='28' y='273' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >④ 서로 다른 이력 → 서로 구별되는 상태</text>
 <text x='28' y='292' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >차이가 잡음·드리프트보다 커야 한다</text>
 <rect x='383' y='258' width='247' height='40' rx='8' fill='#fdf1ee' stroke='#c8553d' stroke-width='1.2' />
 <text x='392' y='275' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >끊기는 조건</text>
 <text x='392' y='291' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >잡음·드리프트·초기 상태 의존(ESP 깨짐)</text>
-<line x1='360' y1='278' x2='381' y2='278' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr)'/>
-<line x1='190' y1='304' x2='190' y2='318' stroke='#3d6fb4' stroke-width='1.4' marker-end='url(#arr)'/>
+<line x1='360' y1='278' x2='381' y2='278' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr-cc8553d)'/>
+<line x1='190' y1='304' x2='190' y2='318' stroke='#3d6fb4' stroke-width='1.4' marker-end='url(#arr-c3d6fb4)'/>
 <rect x='15' y='320' width='345' height='52' rx='8' fill='#f2f6fc' stroke='#3d6fb4' stroke-width='1.2' />
 <text x='28' y='341' font-size='12' fill='#3d6fb4' text-anchor='start' font-weight='bold' >⑤ 학습한 readout이 과거가 필요한 질문에 답한다</text>
 <text x='28' y='360' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >새 데이터에서, 기준선보다 낫게</text>
 <rect x='383' y='326' width='247' height='40' rx='8' fill='#fdf1ee' stroke='#c8553d' stroke-width='1.2' />
 <text x='392' y='343' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='bold' >끊기는 조건</text>
 <text x='392' y='359' font-size='9.5' fill='#c8553d' text-anchor='start' font-weight='normal' >readout이 외움 / delay tap 기준선과 같음</text>
-<line x1='360' y1='346' x2='381' y2='346' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr)'/>
+<line x1='360' y1='346' x2='381' y2='346' stroke='#c8553d' stroke-width='1' stroke-dasharray='3,2' marker-end='url(#arr-cc8553d)'/>
 <text x='320' y='395' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >①–⑤가 모두 이어져야 '계산에 도움'이다. 느린 감쇠(②)는 고리 하나일 뿐이다. (Claude가 그림, 모식도)</text>
 </svg>

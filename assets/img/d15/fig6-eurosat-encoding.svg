@@ -1,5 +1,5 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 386' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
-<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arr-c999' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#999'/></marker></defs>
 <text x='450.0' y='26.0' font-size='14' fill='#444' text-anchor='middle' font-weight='bold' >위성 영상 한 장 = 64 × 64 픽셀 × 13 대역 = 숫자 53,248개. 이것을 시계열로 바꾸는 세 방법</text>
 <rect x='40.0' y='60.0' width='120.0' height='120.0' rx='2' fill='#e8f0fb' stroke='#999' stroke-width='0.8' />
 <rect x='47.0' y='67.0' width='120.0' height='120.0' rx='2' fill='#eef6f1' stroke='#999' stroke-width='0.8' />
@@ -15,19 +15,19 @@
 <text x='350.0' y='79.0' font-size='12.5' fill='#444' text-anchor='start' font-weight='bold' >시간 64단계 × 통로 832개</text>
 <text x='244.0' y='99.0' font-size='12' fill='#444' text-anchor='start' font-weight='normal' >한 행(64픽셀 × 13대역)을 한 번에 넣고 다음 행으로</text>
 <text x='244.0' y='118.0' font-size='12' fill='#999' text-anchor='start' font-weight='normal' >지어낸 시간 = 위→아래 위치. 행 사이 관계는 기억, 행 안은 통로가 맡는다</text>
-<line x1='178.0' y1='120.0' x2='228.0' y2='93.0' stroke='#999' stroke-width='1' marker-end='url(#arr)'/>
+<line x1='178.0' y1='120.0' x2='228.0' y2='93.0' stroke='#999' stroke-width='1' marker-end='url(#arr-c999)'/>
 <rect x='230.0' y='136.0' width='650.0' height='70.0' rx='6' fill='#fff' stroke='#13936b' stroke-width='1.4' />
 <text x='244.0' y='157.0' font-size='13' fill='#13936b' text-anchor='start' font-weight='bold' >나. 대역 순서</text>
 <text x='350.0' y='157.0' font-size='12.5' fill='#444' text-anchor='start' font-weight='bold' >시간 13단계 × 통로 4,096개</text>
 <text x='244.0' y='177.0' font-size='12' fill='#444' text-anchor='start' font-weight='normal' >픽셀마다 device 하나, 13개 대역 밝기를 차례로</text>
 <text x='244.0' y='196.0' font-size='12' fill='#999' text-anchor='start' font-weight='normal' >지어낸 시간 = 파장 순서. device의 기억이 이웃 대역을 섞어 '스펙트럼 모양'을 담는다</text>
-<line x1='178.0' y1='120.0' x2='228.0' y2='171.0' stroke='#999' stroke-width='1' marker-end='url(#arr)'/>
+<line x1='178.0' y1='120.0' x2='228.0' y2='171.0' stroke='#999' stroke-width='1' marker-end='url(#arr-c999)'/>
 <rect x='230.0' y='214.0' width='650.0' height='70.0' rx='6' fill='#fff' stroke='#e08a3c' stroke-width='1.4' />
 <text x='244.0' y='235.0' font-size='13' fill='#e08a3c' text-anchor='start' font-weight='bold' >다. 줄여서 넣기</text>
 <text x='350.0' y='235.0' font-size='12.5' fill='#444' text-anchor='start' font-weight='bold' >8×8로 줄인 뒤 시간 13단계 × 통로 64개</text>
 <text x='244.0' y='255.0' font-size='12' fill='#444' text-anchor='start' font-weight='normal' >이웃 8×8 픽셀을 평균해 통로 수를 64분의 1로</text>
 <text x='244.0' y='274.0' font-size='12' fill='#999' text-anchor='start' font-weight='normal' >통로·device 수가 확 준다. 대신 작은 무늬(질감) 정보가 사라진다</text>
-<line x1='178.0' y1='120.0' x2='228.0' y2='249.0' stroke='#999' stroke-width='1' marker-end='url(#arr)'/>
+<line x1='178.0' y1='120.0' x2='228.0' y2='249.0' stroke='#999' stroke-width='1' marker-end='url(#arr-c999)'/>
 <text x='450.0' y='314.0' font-size='12.5' fill='#444' text-anchor='middle' font-weight='normal' >어느 방법이든 '시간'은 데이터에 원래 있던 것이 아니라 실험자가 정한 순서다.</text>
 <text x='450.0' y='333.0' font-size='12.5' fill='#444' text-anchor='middle' font-weight='normal' >원 논문은 CNN으로 98.57%를 보고했다(Helber 2019).</text>
 <text x='450.0' y='355.0' font-size='12' fill='#999' text-anchor='middle' font-weight='normal' >숫자는 코드가 계산했다. 세 방법은 설명용 예시이며 EuroSAT을 device RC로 처리한 폴더 논문은 없다</text>

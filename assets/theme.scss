@@ -83,19 +83,9 @@ body.nav-fixed { padding-top: 0 !important; }
   min-height: 56px;
   .navbar-brand-container { margin-right: 1.4rem; }
   .navbar-title { overflow: visible !important; font-weight: 700; font-size: 1.02rem; letter-spacing: -0.01em; color: #111827 !important; }
-  .navbar-title::before {
-    content: ""; display: inline-block; width: 0.62rem; height: 0.62rem; border-radius: 50%;
-    /* 제목 칸이 overflow:hidden이라 바깥 빛이 잘리지 않게 왼쪽에 여유를 둔다 */
-    margin-left: 0.45rem; margin-right: 0.7rem; vertical-align: 0.06rem;
-    background: radial-gradient(circle at 35% 35%, #b9ceff 0%, $accent 58%, $accent-dark 100%);
-    box-shadow: 0 0 0 2px rgba(43, 89, 195, 0.12), 0 0 6px 1px rgba(91, 140, 255, 0.35);
-    animation: ion-glow 3.2s ease-in-out infinite;
-  }
-  @keyframes ion-glow {
-    0%, 100% { box-shadow: 0 0 0 2px rgba(43, 89, 195, 0.10), 0 0 4px 0 rgba(91, 140, 255, 0.25); filter: brightness(1); }
-    50% { box-shadow: 0 0 0 3px rgba(43, 89, 195, 0.16), 0 0 11px 3px rgba(91, 140, 255, 0.55); filter: brightness(1.18); }
-  }
-  @media (prefers-reduced-motion: reduce) { .navbar-title::before { animation: none; } }
+  /* 2026-10-31: 빛나는 공 아이콘을 빼고 글자만으로. 'Ions'만 강조색, 작은 +는 이온 전하 */
+  .navbar-title .brand-ion { color: $accent; }
+  .navbar-title .brand-ion sup { font-size: 0.62em; font-weight: 800; margin-left: 0.05em; top: -0.55em; color: $accent; }
   .nav-link { font-size: 0.88rem; font-weight: 500; padding-left: 0.8rem !important; padding-right: 0.8rem !important; color: #4b5563; border-radius: 8px; }
   .nav-link:hover { color: #111827; background: #f3f4f6; }
   .nav-link.active { color: $accent !important; font-weight: 600; }

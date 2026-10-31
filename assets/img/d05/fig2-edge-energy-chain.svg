@@ -1,17 +1,17 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 334' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
-<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arr-c999' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#999'/></marker></defs>
 <text x='300' y='20' font-size='12.5' fill='#444' text-anchor='middle' font-weight='bold' >엣지 센서 노드의 에너지 사슬: 어디를 끊어야 줄어드나 (모형 계산, 가정값)</text>
 <text x='14' y='40' font-size='12' fill='#444' text-anchor='start' font-weight='bold' >(a)</text>
 <text x='14' y='106' font-size='12' fill='#444' text-anchor='start' font-weight='bold' >(b)</text>
 <rect x='40' y='44' width='110' height='34' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.4' />
 <text x='95' y='66' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >센서</text>
-<line x1='150' y1='61' x2='180' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='150' y1='61' x2='180' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
 <rect x='180' y='44' width='110' height='34' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.4' />
 <text x='235' y='66' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >ADC</text>
-<line x1='290' y1='61' x2='320' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='290' y1='61' x2='320' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
 <rect x='320' y='44' width='110' height='34' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.4' />
 <text x='375' y='66' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >MCU 처리</text>
-<line x1='430' y1='61' x2='460' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='430' y1='61' x2='460' y2='61' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
 <rect x='460' y='44' width='110' height='34' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.4' />
 <text x='515' y='66' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >무선 송신</text>
 <text x='240' y='114' font-size='11' fill='#444' text-anchor='end' font-weight='bold' >A. 원시 데이터를 전부 보냄</text>
@@ -32,6 +32,6 @@
 <text x='450.0' y='264' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >100 µW</text>
 <text x='550.0' y='264' font-size='9.5' fill='#999' text-anchor='middle' font-weight='normal' >1 mW</text>
 <text x='300' y='288' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >A→B: 송신을 줄여 27배. B→C: 매 샘플의 ADC·MCU까지 줄여 9배 더. 어느 단계가 지배하느냐에 따라 끊을 곳이 다르다.</text>
-<text x='300' y='304' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >가정: ADC 1 nJ/변환, MCU 20 nJ/샘플, 무선 50 nJ/bit (그림 3의 근거로 자릿수만 맞춘 값). C의 'device 1 µW'는 임의값.</text>
+<text x='300' y='304' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >가정: ADC 1 nJ/변환, MCU 20 nJ/샘플, 무선 50 nJ/bit (데이터시트·실측으로 자릿수만 맞춘 값). C의 'device 1 µW'는 임의값.</text>
 <text x='300' y='320' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >센서·증폭기 전력과, 부품이 잠든 동안의 대기 전력은 넣지 않았다.</text>
 </svg>

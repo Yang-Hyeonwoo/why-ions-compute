@@ -1,27 +1,27 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 350' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
-<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arr-c999' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#999'/></marker></defs>
 <text x='300' y='22' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >CPU는 어디서 계산하고, 값은 어디에 있나: 메모리 계층 (모식도)</text>
 <rect x='40' y='50' width='230' height='44' rx='6' fill='#fff' stroke='#13936b' stroke-width='1.6' />
 <text x='50' y='69' font-size='13' fill='#13936b' text-anchor='start' font-weight='bold' >레지스터</text>
 <text x='50' y='86' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >연산기 바로 옆. 덧셈·곱셈은 이 값으로</text>
 <text x='280' y='69' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >수십 개 × 64 bit</text>
 <text x='280' y='86' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >왕복: 클록 1번 안팎</text>
-<line x1='100' y1='94' x2='100' y2='108' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
-<line x1='120' y1='108' x2='120' y2='94' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='100' y1='94' x2='100' y2='108' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<line x1='120' y1='108' x2='120' y2='94' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
 <rect x='40' y='108' width='295' height='44' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.6' />
 <text x='50' y='127' font-size='13' fill='#3d6fb4' text-anchor='start' font-weight='bold' >L1 캐시</text>
 <text x='50' y='144' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >최근 쓴 값의 복사본</text>
 <text x='345' y='127' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >수십 kB</text>
 <text x='345' y='144' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >왕복: 클록 수 번</text>
-<line x1='100' y1='152' x2='100' y2='166' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
-<line x1='120' y1='166' x2='120' y2='152' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='100' y1='152' x2='100' y2='166' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<line x1='120' y1='166' x2='120' y2='152' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
 <rect x='40' y='166' width='360' height='44' rx='6' fill='#fff' stroke='#3d6fb4' stroke-width='1.6' />
 <text x='50' y='185' font-size='13' fill='#3d6fb4' text-anchor='start' font-weight='bold' >L2 · L3 캐시</text>
 <text x='50' y='202' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >더 크고 더 먼 복사본</text>
 <text x='410' y='185' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >수백 kB – 수십 MB</text>
 <text x='410' y='202' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >왕복: 클록 수십 번</text>
-<line x1='100' y1='210' x2='100' y2='224' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
-<line x1='120' y1='224' x2='120' y2='210' stroke='#999' stroke-width='1.2' marker-end='url(#arr)'/>
+<line x1='100' y1='210' x2='100' y2='224' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<line x1='120' y1='224' x2='120' y2='210' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
 <rect x='40' y='224' width='425' height='44' rx='6' fill='#fff' stroke='#e08a3c' stroke-width='1.6' />
 <text x='50' y='243' font-size='13' fill='#e08a3c' text-anchor='start' font-weight='bold' >DRAM (주기억)</text>
 <text x='50' y='260' font-size='10.5' fill='#999' text-anchor='start' font-weight='normal' >프로그램과 데이터 전체</text>

@@ -4,6 +4,8 @@ local TAGS = {
   { "[해석]", "해석", "tag-interp" },
   { "[가설]", "가설", "tag-hypo" },
   { "[미확인]", "미확인", "tag-unverified" },
+  { "[계산]", "계산", "tag-calc" },
+  { "[가정]", "가정", "tag-assume" },
 }
 
 function Str(el)

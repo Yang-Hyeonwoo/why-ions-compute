@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-3f293521207566e6698e084718a767e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-38b12a2c769cbf7df2ce7c55208cb0ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -691,7 +691,7 @@ window.Quarto = {
 <p><strong>왜 배우나</strong> 응용이 <span class="key">뉴로모픽에 맞고 MCU보다 시스템 전체로 나은지</span> device 재기 전에 가린다.</p>
 <p><strong>오늘의 장면</strong> 응용 + 부품별 에너지·횟수 → 여섯 질문 사다리 → <span class="key">평균 전력 = 에너지 × 횟수 + 대기</span> → 첫 '아니오'와 µW 값</p>
 <p><strong>오늘 반드시</strong> <span class="key">적합성은 여섯 질문을 위에서부터 묻는다. 평균 전력 = 에너지 × 횟수 + 대기 전력, '절감' 숫자는 기준선과 경계부터 묻는다.</span></p>
-<p><strong>나중에 봐도 됨</strong> MCU·무선 데이터시트 출처 · Zhong 2022 숫자 · bio-interface 4구간 · 영상</p>
+<p><strong>나중에 봐도 됨</strong> MCU·무선 데이터시트 출처 · Zhong 2022 숫자 · bio-interface 구간 · 영상</p>
 <p><strong>넘어가는 기준</strong> <span class="key">'오늘 반드시'를 내 말로 말할 수 있으면</span> 충분합니다.</p>
 <p><strong>이후 쓰이는 곳</strong> Day 10 기준선 종류 · Day 23–24 τ 정합 · Day 31–32 시스템 에너지 · Day 51–52 bio-interface</p>
 </div>
@@ -717,98 +717,126 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
 <div class="lesson-body">
 <div class="lesson-meta">
-<p>학습 구간 4개 · 한 번에 다 읽지 않아도 됩니다(구간이 끝날 때마다 요점 상자가 있으니 거기서 끊어 읽어도 됩니다) · 선택 영상 4개(모두 합쳐 약 10분, 전부 선택) · 내 답 쓰기는 따로. 그림 3·4의 전력 숫자는 데이터시트·실측으로 자릿수만 맞춘 <strong>모형 계산</strong>이고, 특정 센서 노드를 잰 값이 아닙니다.</p>
+<p>학습 구간 4개 · 구간마다 끝에 요점 상자가 있으니 거기서 끊어 읽어도 됩니다 · 선택 영상 4개(모두 합쳐 약 10분). 전력 숫자는 데이터시트·실측으로 자릿수만 맞춘 <strong>모형 계산</strong>이고, 특정 센서 노드를 잰 값이 아닙니다.</p>
 <details class="meta-more">
 <summary>
 근거 표기와 Claude가 대조한 범위
 </summary>
-<p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Pei 2026 Fig. 5 그림·캡션과 같은 쪽 본문(폴더 PDF 7쪽) / Liang 2024 전체 / Zhong 2022 p.672, 674, 677–679 / Pei 2026 p.1199(초록·서론 첫 문단)과 폴더 PDF 2·5쪽의 몇 문장(이 PDF에는 인쇄 쪽수가 없음) / Kim 2026(Nat. Sensors) p.535(초록), p.536–538(몇 문장) / Singh 2026 p.1, 8, 20 / Roadmap 2026 p.8103, 8126, 8130, 8136, 8137 / Aluru 2026 요약면·p.592 / Wang 2025(CSR) p.329 / Zhu 2025 p.14 / Kudithipudi 2025 p.801–802. <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 오늘 MCU(마이크로컨트롤러)·ADC·무선 통신의 전력 수치는 폴더에 없습니다. 제조사 데이터시트(TI MSP430FR5969, Nordic nRF52832)와 측정 논문(Siekkinen 2012)에서 Claude가 확인한 값에는 <span class="tag tag-fact">확인</span>과 링크를, 그 값으로 Claude가 계산한 것에는 [계산]을 붙였고, 나머지는 <span class="tag tag-unverified">미확인</span>입니다. 회색 '출처·검증' 표시는 출처를 확인한 과정이고, 숫자를 이해하는 데 필요한 조건(단위, 가정, 예시인지 측정인지)은 본문에 그대로 둡니다.</p>
+<p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 논문 탭이 새 창으로 열립니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Pei 2026 Fig. 5와 같은 쪽 본문, 초록·서론 / Liang 2024 전체 / Zhong 2022 본문 전체 / Kim 2026 p.535–538 / Singh 2026 p.1, 8, 20 / Roadmap 2026 p.8103, 8126, 8130, 8136, 8137 / Aluru 2026 요약면·p.592 / Wang 2025 p.329 / Zhu 2025 p.14 / Kudithipudi 2025 p.801–802. MCU·ADC·무선의 전력 수치는 폴더에 없어서 제조사 데이터시트(TI MSP430FR5969, Nordic nRF52832)와 측정 논문(Siekkinen 2012)에서 확인했습니다. 꼬리표: <span class="tag tag-fact">확인</span> 출처에서 확인, <span class="tag tag-calc">계산</span> 그 값으로 Claude가 계산, <span class="tag tag-assume">가정</span> 예제를 위해 정한 값, <span class="tag tag-interp">해석</span> Claude의 해석, <span class="tag tag-unverified">미확인</span> 확인하지 못함.</p>
 </details>
 </div>
-<p>Day 3–4에서 "기존 컴퓨터가 특히 불리한 계산"의 조건을, Day 5–6에서 뇌의 원리가 비용을 줄이는 조건을, Day 7–8에서 device·회로가 갖춰야 할 조건을 봤습니다. 오늘은 그 조건들을 <strong>응용 쪽에서</strong> 읽습니다. 어떤 문제가 그 조건을 만족하고, 어떤 문제는 만족하지 못하는가. 그리고 조건을 만족하는 문제에서도 뉴로모픽의 진짜 경쟁자는 데이터센터의 큰 칩이 아니라 <strong>센서 옆에 실제로 들어가는 작은 컴퓨터(마이크로컨트롤러)에 올린 작은 신경망</strong>이라는 점을 짚습니다. 오늘 내내 가슴에 전극 두 개를 붙여 심장 신호를 읽고 박동마다 정상/이상을 표시하는 <strong>심전도 패치</strong>(Day 3–4 <a href="../days/d02b.html#rt-biosignal">장면 2</a>에서 쓴 것) 하나를 예제로 씁니다. 심전도는 내 연구의 응용으로 정한 것이 아니라, 신호의 크기·빠르기가 잘 알려져 숫자를 따라가기 쉬운 <strong>예시 하나</strong>입니다. 같은 사다리와 같은 전력 계산을 땀 센서·압력 센서 같은 다른 응용에도 그대로 씁니다.</p>
-<p>읽는 순서: 1구간(질문 사다리)과 2구간 2-1–2-3(신호 사슬과 평균 전력)이 오늘의 <strong>핵심 경로</strong>입니다. 2-4(논문 숫자 읽기), 3구간(경쟁자 평가), 4구간(bio-interface와 부적합한 문제)은 핵심 경로의 심전도 예를 이해한 뒤 그 눈으로 다른 사례를 읽는 단계입니다. 네 개의 학습 구간입니다.</p>
+<p>앞에서 세 가지 조건을 모았습니다. 기존 컴퓨터가 특히 불리한 계산, 뇌의 원리가 비용을 줄이는 조건, device·회로가 갖춰야 할 조건입니다. 오늘은 그 조건들을 <strong>응용 쪽에서</strong> 읽습니다. 어떤 문제가 조건을 만족하고, 어떤 문제는 못 하는가.</p>
+<p>★ <span class="key">그리고 조건을 만족하는 문제에서도, 뉴로모픽의 진짜 경쟁자는 데이터센터의 큰 칩이 아니라 센서 옆에 실제로 들어가는 작은 컴퓨터(MCU)에 올린 작은 신경망입니다.</span></p>
+<p>오늘 내내 예제 하나를 씁니다. 가슴에 전극 두 개를 붙여 심장 신호를 읽고, 박동마다 정상/이상을 표시하는 <strong>심전도 패치</strong>입니다. 내 연구의 응용이라서가 아니라, 신호의 크기·빠르기가 잘 알려져 숫자를 따라가기 쉬워서 고른 예입니다. 같은 사다리와 같은 전력 계산을 땀 센서·압력 센서에도 그대로 씁니다.</p>
 <p><strong>이번 Day의 질문 순서</strong> — 오른쪽 '→ 구간' 링크를 누르면 그 구간으로 갑니다.</p>
 <ol type="1">
-<li>"적합한 문제"를 가르는 질문은 무엇이고, 어떤 순서로 묻나? (심전도 패치를 사다리에 올려 보기) <a href="#ch-fit-conditions">→ 구간 1</a></li>
-<li>센서 노드는 어떤 고리로 이뤄지고, 각 고리의 에너지를 어떻게 세나? edge, in-sensor, always-on은 그 사슬의 어디를 줄이나? <a href="#ch-edge-insensor">→ 구간 2</a></li>
-<li>진짜 경쟁자(MCU + 작은 신경망)는 같은 일을 얼마의 전력으로 하고, 항목별로 누가 유리한가? <a href="#ch-competitor">→ 구간 3</a></li>
-<li>bio-interface는 왜 따로 다루고, 어떤 조건이 붙나? 그리고 부적합한 문제는 무엇인가? <a href="#ch-bio-interface">→ 구간 4</a></li>
+<li>"적합한 문제"를 가르는 질문은 무엇이고, 어떤 순서로 묻나? <a href="#ch-fit-conditions">→ 구간 1</a></li>
+<li>센서 노드는 어떤 부품으로 이뤄지고, 각 부품의 에너지를 어떻게 세나? Edge, in-sensor, always-on은 그중 어디를 줄이나? <a href="#ch-edge-insensor">→ 구간 2</a></li>
+<li>진짜 경쟁자(MCU + 작은 신경망)는 같은 일을 얼마의 전력으로 하나? <a href="#ch-competitor">→ 구간 3</a></li>
+<li>Bio-interface는 왜 따로 다루고, 부적합한 문제는 무엇인가? <a href="#ch-bio-interface">→ 구간 4</a></li>
 </ol>
 <section id="ch-fit-conditions" class="level3">
 <h3 class="anchored" data-anchor-id="ch-fit-conditions">학습 구간 1. 적합성을 가르는 질문 사다리</h3>
 <div class="goal">
-<p><strong>상황.</strong> 내 이온 소재로 땀 속 염분을 감시하는 피부 패치를 만들려 한다고 합시다. 지도교수가 "그게 뉴로모픽이 맞는 문제냐"고 묻습니다. device를 재기 전에, 질문 몇 개로 "맞을 가능성"을 먼저 가릴 수 있을까요?</p>
-<p><strong>왜 지금?</strong> 지난 사흘(Day 3–8)에 "기존 컴퓨터가 불리한 계산", "뇌의 원리가 비용을 줄이는 조건", "device·회로가 갖출 조건"을 모았습니다. 이제 그 조건을 <strong>응용 쪽에서</strong> 순서대로 물어야 합니다.</p>
-<p><strong>어디에 쓰이나?</strong> 논문이 "엣지(edge)에 적합하다"고 쓸 때 어느 질문에 걸리는지 읽고, 내 응용의 첫 병목을 정하는 데 씁니다.</p>
-<p><strong>끝나면 할 수 있는 것.</strong> Day 3–8에서 모은 조건을 여섯 개의 질문으로 순서 있게 세우고, 내 응용을 그 사다리에 올려 첫 "아니오"가 어디서 나오는지 찾는다.</p>
+<p><strong>상황.</strong> 내 이온 소재로 땀 속 염분을 감시하는 피부 패치를 만들려 합니다. 지도교수가 "그게 뉴로모픽이 맞는 문제냐"고 묻습니다. Device를 재기 전에, 질문 몇 개로 "맞을 가능성"을 먼저 가릴 수 있을까요?</p>
+<p><strong>왜 지금?</strong> 지금까지 모은 조건을 응용 쪽에서 <strong>순서대로</strong> 물어야, 내 응용의 첫 병목이 보입니다.</p>
+<p><strong>어디에 쓰이나?</strong> 논문이 "엣지(edge)에 적합하다"고 쓸 때 어느 조건을 근거로 했는지 읽고, 내 응용에서 다음에 잴 것을 정합니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> 내 응용을 여섯 질문의 사다리에 올려, 첫 "아니오"나 "모름"이 어디서 나오는지 말한다.</p>
 </div>
-<p><strong>직관.</strong> "뉴로모픽은 어디에 좋은가"를 한 문장으로 답하면 틀립니다. <span class="key">적합성(suitability)은 한 문장이 아니라, 지난 사흘의 조건을 세운 질문 여섯 개를 위에서부터 차례로 묻는 순서입니다.</span> 앞 질문에 "아니오"면 그 아래는 볼 필요가 없습니다.</p>
-<p><strong>그 질문들이 아래 그림 1의 사다리입니다.</strong> 질문마다 Day 3–8의 말이 하나씩 들어가는데, 낯선 말은 그림 아래 접힌 상자에서 찾아보세요.</p>
-<p><strong>무엇을 볼지.</strong> 그림 1은 질문 여섯 개를 위에서 아래로 놓고, 각 질문의 오른쪽에 "아니오"일 때 무엇이 문제인지와 그 이유를 배운 날을 적었습니다. 초록 1–5는 Day 3–8의 조건, 주황 6은 오늘 새로 묻는 질문입니다.</p>
-<figure class="fig figure"><img src="../assets/img/d05/fig1-question-ladder.svg" alt="여섯 질문의 사다리: 실시간으로 하나씩 오나, 희소·낮은 대기 전력인가, 근사를 견디나, τ가 신호와 겹치나, 다음 단계가 아날로그인가, MCU+작은 NN보다 나은가. 각 '아니오'에 Day 3–8의 이유가 붙음" class="figure-img"><figcaption><b>그림 1.</b> 적합한 문제를 가르는 질문 사다리. 1–5는 Day 3–8의 조건이고, 6은 오늘의 질문이다. 다섯 '예'를 지나야 6에 이르고, 6이 '아니오'면 MCU를 쓴다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>직관.</strong> "뉴로모픽은 어디에 좋은가"를 한 문장으로 답하면 틀립니다. ★ <span class="key">적합성(suitability)은 한 문장이 아니라, 질문 여섯 개를 위에서부터 차례로 묻는 순서입니다.</span> 앞 질문에서 "아니오"가 나오면 그 아래는 볼 필요가 없습니다.</p>
+<p><strong>무엇을 볼지.</strong> 왼쪽 기둥을 따라 위에서부터 '예'로 내려갑니다. 카드마다 빨간 '아니오' 옆에, 그 질문에서 떨어지면 무엇이 문제인지 적었습니다. 마지막 주황 질문이 오늘 새로 묻는 질문입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/fig1-question-ladder.svg" alt="여섯 질문의 사다리: 실시간으로 하나씩 오나, 희소하고 대기 전력이 작은가, 조금 틀려도 답이 같은가, τ가 신호 빠르기와 맞나, 다음 부품도 아날로그이거나 변환이 드문가, MCU + 작은 신경망보다 나은가. 각 질문에 '아니오'면 생기는 문제가 붙어 있다" class="figure-img"><figcaption><b>그림 1.</b> 적합한 문제를 가르는 질문 사다리. 여섯 번 모두 '예'여야 뉴로모픽이 맞는 문제 후보다. (Claude가 그림, 모식도)</figcaption></figure>
 <div id="b-ladder-terms" class="basics">
-<p><strong>사다리를 읽기 전에: 앞날에서 가져오는 말 여섯 묶음</strong></p>
+<p><strong>사다리를 읽기 전에: 다시 쓰는 말 다섯 묶음</strong></p>
 <details class="fold">
 <summary>
-여섯 묶음 펼치기 (낯선 것만 읽으면 됩니다)
+펼치기 (낯선 것만 읽으면 됩니다)
 </summary>
 <ul>
-<li><strong>weight·배치·칩 안 메모리(on-chip memory)</strong> (Day 3–4). 신경망 한 층은 입력 숫자마다 weight(입력마다 붙은 '얼마나 중요하게 볼지'라는 숫자, <a href="../days/d02a.html#b-weight">Day 3 기초</a>)를 곱해 더합니다. weight가 칩 밖 메모리(DRAM)에 있으면 그것을 연산기까지 <strong>가져오는</strong> 데 계산보다 큰 에너지·시간이 들 수 있고, 연산기가 기다리는 상황을 memory wall이라 불렀습니다. <strong>배치</strong>(batch)는 같은 weight로 함께 처리하는 입력 벡터(샘플)의 수입니다. 여러 입력을 모으면 한 번 가져온 weight를 그 수만큼 재사용합니다(<a href="../days/d02b.html#batch">Day 4 5-2</a>). 다만 모델이 작아 weight가 칩 안 메모리에 다 들어가면, 배치가 1이어도 판단마다 칩 밖에서 가져올 일이 없습니다(<a href="../days/d02b.html#rt-baseline">Day 4 5-5 디지털 기준선</a>).</li>
-<li><strong>사건·희소성·대기 전력</strong> (Day 5–6). 사건(event)은 처리할 변화(예: 입력이 정해 둔 폭 이상 바뀜)이고, 사건 구동은 사건이 올 때만 계산하는 방식입니다(<a href="../days/d03a.html#b-event-driven">Day 5 기초 4</a>). 희소하다(sparse)는 것은 대부분의 시간·채널이 조용하고 적은 일부만 활동한다는 뜻입니다(<a href="../days/d03a.html#b-sparsity">Day 5 기초 5</a>). 아무 일이 없어도 나가는 전력이 <strong>대기 전력</strong>(standby power)입니다. 전력은 대략 '대기 전력 <span class="math inline">\(P_{\text{static}}\)</span> + 활동률 <span class="math inline">\(\alpha_{\text{unit}}\)</span> × (유닛 수 × 속도 × 유닛 한 번의 에너지)'이라서, 활동률 <span class="math inline">\(\alpha_{\text{unit}}\)</span>(전체 유닛 가운데 실제로 일하는 비율)을 아무리 낮춰도 대기 전력 <span class="math inline">\(P_{\text{static}}\)</span>이 바닥으로 남습니다(<a href="../days/d03b.html#s-event-power">Day 6 4-2</a>).</li>
-<li><strong>아날로그·편차·잡음</strong> (Day 5–6). 아날로그는 값을 전압·conductance 같은 연속량 그대로 다루는 방식이고(<a href="../days/d03a.html#b-digital-analog">Day 5 기초 1</a>), 그 값은 device마다 조금씩 다르고(편차) 읽을 때마다 흔들립니다(잡음, noise).</li>
-<li><strong>시간상수 <span class="math inline">\(\tau\)</span></strong> (Day 5–6). device의 상태가 변했다가 돌아오는 데 걸리는 시간의 척도입니다. 신호에서 뜻있는 변화가 일어나는 간격(신호의 시간척도, timescale)과 비슷해야 과거 입력의 흔적을 상태에 쓸모 있게 남깁니다(<a href="../days/d03b.html#s-time-dynamics">Day 6 5-2</a>).</li>
-<li><strong>ADC·peripheral circuit</strong> (Day 7–8). ADC는 전압을 가장 가까운 단계의 숫자로 바꾸는 회로이고(<a href="../days/d04a.html#b-adc">Day 7 기초 5</a>), peripheral circuit은 device 배열 바깥에서 전압을 만들고 전류를 숫자로 바꾸는 변환기·증폭기 같은 회로입니다(<a href="../days/d04b.html#ch-periphery">Day 8 6구간</a>).</li>
-<li><strong>RC, physical reservoir computing, 디지털 RC</strong> (Day 1–2). reservoir computing(RC)은 입력에 따라 시간적으로 변하는 계의 상태를 읽어, 간단한 곱해서 더하기(readout)로 답을 내는 방식입니다. 그 계가 실제 device면 <strong>physical reservoir computing</strong>, 같은 계산을 숫자로 흉내 낸 프로그램이면 <strong>소프트웨어(디지털) RC</strong>입니다(<a href="../days/d01b.html#ch-branches">Day 2 2구간 (라)</a>).</li>
+<li><strong>Weight, batch, 칩 안 메모리(on-chip memory).</strong> 신경망은 입력 숫자마다 <a href="../days/d02a.html#b-weight">weight</a>(입력마다 붙은 '얼마나 중요하게 볼지'라는 숫자)를 곱해 더합니다.
+<ul>
+<li>Weight가 <strong>칩 밖 메모리</strong>(DRAM)에 있으면, 계산할 때마다 그것을 칩 안의 곱셈기까지 가져와야 합니다. ★ <span class="key">이 가져오기가 계산보다 비쌀 수 있고, 곱셈기가 weight를 기다리며 노는 상황을 memory wall이라 부릅니다.</span></li>
+<li><strong>Batch</strong>는 이 비용을 나누는 요령입니다. 입력 64개를 모아 두었다가 weight를 한 번 가져와 64개에 연달아 쓰면, 가져오는 비용이 입력 하나당 64분의 1이 됩니다.</li>
+<li>그런데 <strong>weight가 처음부터 칩 안 메모리에 다 들어가는 작은 모델</strong>이면 사정이 다릅니다. 가져올 먼 곳(칩 밖 DRAM)이 없으니 나눌 비용도 없습니다. 그래서 입력을 하나씩 처리해도(batch = 1) 손해가 없습니다(아래 그림 2).</li>
+</ul></li>
+<li><strong>사건(event)·희소(sparse)·대기 전력(standby power).</strong> 사건은 처리할 변화(예: 입력이 정해 둔 폭 이상 바뀜)이고, 희소하다는 것은 대부분의 시간이 조용하고 가끔만 사건이 온다는 뜻입니다. 대기 전력은 아무 일이 없어도 나가는 전력입니다. ★ <span class="key">전력 = 대기 전력 + 일하는 몫이라서, 일을 아무리 줄여도 대기 전력은 바닥으로 남습니다.</span></li>
+<li><strong>아날로그·variation·noise.</strong> 아날로그는 값을 전압·conductance 같은 연속량 그대로 다루는 방식이고, 그 값은 device마다 조금씩 다르고(variation) 읽을 때마다 흔들립니다(noise).</li>
+<li><strong>시간상수 τ(time constant).</strong> Device 상태가 자극을 받은 뒤 원래대로 돌아오는 데 걸리는 시간의 척도입니다.</li>
+<li><strong>ADC와 peripheral circuit.</strong> ADC(analog-to-digital converter)는 전압을 가장 가까운 단계의 숫자로 바꾸는 회로이고, peripheral circuit(주변회로)은 device 배열 바깥에서 전압을 만들고 전류를 숫자로 바꾸는 회로들입니다.</li>
 </ul>
+<figure class="fig figure"><img src="../assets/img/d05/weight-where.svg" alt="왼쪽: MCU 칩 하나 안에 메모리 64 KB와 weight 1 kB, 곱셈기가 있어 가져오는 길이 짧다. 오른쪽: 데이터센터 칩은 weight가 GB급이라 칩 밖 DRAM에서 먼 길로 가져온다" class="figure-img"><figcaption><b>그림 2.</b> Weight가 칩 안에 있나(작은 신경망), 칩 밖에 있나(큰 신경망). Batch는 오른쪽의 '먼 길' 비용을 나누는 요령이라, 왼쪽에서는 쓸 이유가 없다. (Claude가 그림, 모식도)</figcaption></figure>
 </details>
-<p>여섯째 질문에 나오는 <strong>마이크로컨트롤러</strong>(microcontroller, MCU)는 센서 옆에 붙이는 작은 칩으로, 연산기와 작은 메모리를 칩 하나에 담은 것입니다(Day 3–4 5-5에서 한 줄로 봤고, 2구간 <a href="#b-sensor-node">기초 1</a>에서 생김새와 전력을 자세히 봅니다).</p>
 </div>
-<p><span id="s-ladder-questions"></span>그림의 번호를 따라 여섯 질문을 폴더 원문의 근거와 함께 적습니다.</p>
-<ol type="1">
-<li><strong>입력이 한 번에 하나씩, 실시간으로 오나?</strong> 입력을 모아 둘 수 있는 일(예: 사진 수백만 장 분류)이면 배치로 weight를 재사용해 보통 컴퓨터가 유리합니다. 반대로 센서 신호처럼 샘플이 시간 순서로 오고 정해진 시간 안에 답해야 하는 일은 많이 모아 기다릴 수 없습니다. 이 '예'가 뜻하는 것은 "배치로 이득을 보기 어렵다"까지입니다. weight가 칩 안에 다 들어가는 작은 모델이면 보통 컴퓨터도 배치 1에서 memory wall에 막히지 않으므로, 데이터 이동이 실제 병목인지는 질문 6에서 숫자로 따집니다. Roadmap이 "마이크로와트로 동작하는 엣지 센서의 희소한 로컬 데이터 스트림"과 "대규모 클라우드 데이터센터"를 양 끝으로 둔 것이 이 구분입니다. <span class="src">Roadmap 2026, p.8103</span></li>
-<li><strong>입력이 희소하고 대기 전력을 작게 둘 수 있나?</strong> 사건이 드물면 계산 몫의 전력은 거의 사라지고 대기 전력이 남습니다(위 접힌 상자의 식: 평균 전력 = 대기 전력 + 일하는 몫). 그래서 '희소한가'와 '대기 전력이 작은가'를 함께 묻습니다. 입력이 희소하지 않으면 사건 구동의 이득이 작습니다.</li>
-<li><strong>과제가 근사·편차·잡음을 견디나?</strong> 근사(approximation)를 견딘다는 것은 1% 남짓 틀려도 결과('정상/이상' 판정)가 같다는 뜻이고, 그런 과제면 문제가 없습니다. 정확한 답이 필요하면 device마다 값을 재서 맞춰 주는 보정(calibration), 여러 번 읽어 평균 내기, 더 세밀한 ADC가 필요해지고, 이 변환·보정 비용이 아날로그로 아낀 에너지를 먹습니다(Day 7–8에서 본 peripheral circuit의 비용). 같은 구성이면 소프트웨어 RC가 대개 더 정확하다는 Liang의 관찰 <span class="src">Liang 2024, p.201</span>도 같은 방향입니다. device로 하면 정확도가 떨어지기 쉬우니, 근사를 견디는 과제여야 이득이 남습니다.</li>
-<li><strong>device의 <span class="math inline">\(\tau\)</span>가 신호의 시간척도와 겹치나?</strong> <span class="math inline">\(\tau\)</span>를 심전도 예로 보면, 박동 간격은 약 1 s입니다. <span class="math inline">\(\tau\)</span>가 1 ns인 전자 device는 다음 박동이 오기 전에 앞 박동의 흔적을 사실상 다 잊고(<strong>망각</strong>), 반대로 10⁻⁷ s마다 변하는 초음파 신호에 <span class="math inline">\(\tau\)</span>가 ms–s인 이온 device를 쓰면 신호가 지나간 뒤에야 반응합니다(<strong>지연</strong>). <span class="math inline">\(\tau\)</span>가 박동 간격과 비슷할 때(예: 0.5 s) 한두 박동의 흔적이 상태에 남아 시간 정보를 담습니다. <span class="src">Liang 2024, p.198</span></li>
-<li><strong>다음 단계가 아날로그이거나 변환이 드문가?</strong> device의 출력(전류)을 받아 쓰는 다음 부품이 디지털 칩이면, 읽을 때마다 ADC로 숫자를 만들어야 합니다. 이런 peripheral circuit이 시스템 전력의 최대 70%까지 차지할 수 있습니다. <span class="src">Roadmap 2026, p.8130</span></li>
-<li><strong>저전력 마이크로컨트롤러 + 작은 신경망보다 시스템 전체로 나은가?</strong> 이것이 오늘 2·3구간에서 숫자로 따질 질문입니다. Liang의 한 문장이 이 질문의 뼈대입니다. "디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다." <span class="src">Liang 2024, p.202</span> Liang의 비교 대상은 디지털 RC이고, 그것을 "MCU + 작은 신경망"으로 넓힌 것은 이 자료의 해석입니다. <span class="tag tag-interp">해석</span> 이렇게 "device 대신 무엇을 썼다면 얼마나 됐을까"를 재는 비교 상대를 <strong>기준선</strong>(baseline)이라 부릅니다. 기준선에는 여러 종류가 있고(2구간 끝에서 봅니다), 이 사다리의 기준선은 MCU + 작은 신경망입니다.</li>
-</ol>
-<p><span id="s-ladder-ecg"></span><strong>작은 예: 심전도 패치를 사다리에 올리기.</strong> Day 3–4 <a href="../days/d02b.html#rt-biosignal">장면 2</a>의 패치를 그대로 씁니다. 가슴에 붙인 전극 두 개로 심장의 전기 신호를 읽고, 박동마다 정상/이상을 표시하고, 이상이 이어지면 수 초 안에 경고하며, 전지 하나로 며칠을 버텨야 합니다(장면 속 숫자는 교육용 가정).</p>
-<ol type="1">
-<li><strong>실시간?</strong> 예(조건부). 값이 시간 순서로 오고 수 초 안에 경고해야 하므로 수십 초씩 모을 수는 없습니다. 수 초 분량은 모아 두었다가 처리해도 됩니다. 그리고 weight 수백–수천 개짜리 작은 모델이면 MCU의 칩 안 메모리에 들어가므로, 이 '예'가 곧 "디지털이 memory wall에 막힌다"는 뜻은 아닙니다.</li>
-<li><strong>희소·대기 전력?</strong> 원시 전압은 매 샘플 값이 있으므로 그 자체로는 희소하지 않습니다. 드문 것은 '이상 박동'이라는 <strong>사건</strong>입니다. 그래서 질문은 "사건을 골라내는 앞단을 얼마나 작은 대기 전력으로 늘 켜 둘 수 있나"가 되고, 이것은 2구간에서 숫자로 셉니다.</li>
-<li><strong>근사?</strong> 예(조건부). 정상/이상 분류이므로, 미리 정한 놓침·오경보 비율 안에 들면 근사를 견딥니다.</li>
-<li><strong><span class="math inline">\(\tau\)</span> 정합?</strong> 박동 간격 약 1 s에 맞는 <span class="math inline">\(\tau\)</span>(예: 0.5 s)를 가진 device면 예입니다. 내 device의 <span class="math inline">\(\tau\)</span>가 ms 자릿수면 아니오입니다. device를 재야 답할 수 있습니다.</li>
-<li><strong>다음 단계?</strong> 패치 안에서 결과를 저장하거나 보내는 부품이 디지털 MCU라면 ADC가 필요합니다. '예'가 되려면 변환이 매 샘플이 아니라 사건 때만 일어나도록 설계해야 합니다(2구간 2-3의 설계 C처럼).</li>
-<li><strong>MCU + 작은 NN보다?</strong> 모름. 2구간에서 센서 노드의 전력을, 3구간에서 MCU 쪽 전력을 세어야 처음으로 비교할 수 있습니다.</li>
-</ol>
-<p>이 예에서 첫 "모름"은 질문 2(앞단의 대기 전력)이고, 질문 4는 device 측정이 있어야 답이 납니다. <span class="key">사다리는 "맞다/아니다"의 판정보다, <strong>다음에 무엇을 재거나 계산해야 하는지</strong>를 알려 주는 도구입니다.</span></p>
-<p><span id="s-ladder-limits"></span><strong>적용 조건.</strong> 이 사다리는 이해를 위한 순서이지 공식이 아닙니다. 질문 2의 대기 전력과 질문 5의 다음 단계(예: 출력층까지 아날로그로 만들기)는 회로 설계로 바꿀 수 있는 부분입니다. 질문 2의 입력 희소성, 질문 3의 근사 허용 여부, 질문 4의 신호 시간척도는 과제가 정합니다. device의 <span class="math inline">\(\tau\)</span>는 재료로 어느 정도 조절할 수 있지만, 맞춰야 할 목표(신호의 시간척도)는 과제가 줍니다. 그리고 Kudithipudi가 뉴로모픽 설계를 "흔히 크기·무게·전력 제약이 있는 응용"을 위한 것으로 소개한 것 <span class="src">Kudithipudi 2025, p.801</span>은 질문 1–2를 응용 쪽에서 쓴 말입니다.</p>
+<p><span id="s-ladder-questions"></span><strong>여섯 질문을 하나씩.</strong> 질문마다 무엇을 묻는지, 왜 묻는지, 그림 한 장으로 봅니다.</p>
+<p><strong>① 입력이 한 번에 하나씩, 실시간으로 오나?</strong> 사진 수백만 장 분류처럼 입력을 모아 둘 수 있는 일이면, 보통 컴퓨터가 batch로 weight를 재사용해 유리합니다. 심전도처럼 값이 1 ms마다 오고 수 초 안에 답해야 하는 일은 오래 모을 수 없습니다.</p>
+<p>★ <span class="key">여기서 '예'의 뜻은 "batch로 이득을 보기 어렵다"까지입니다.</span> Weight가 칩 안에 다 들어가는 작은 모델이면 보통 컴퓨터도 하나씩 처리해서 손해가 없습니다. 그래서 데이터 이동이 정말 병목인지는 마지막 질문(MCU와의 비교)에서 숫자로 따집니다. Roadmap은 이 구분을 "마이크로와트로 동작하는 엣지 센서의 희소한 로컬 데이터 스트림"과 "대규모 클라우드 데이터센터"라는 양 끝으로 적습니다. <span class="src">Roadmap 2026, p.8103</span></p>
+<figure class="fig figure"><img src="../assets/img/d05/c1-batch-stream.svg" alt="왼쪽: 사진 여러 장을 모아 weight를 한 번 가져와 64장에 다시 쓰는 batch, 보통 컴퓨터가 유리. 오른쪽: 1 ms마다 샘플이 오고 수 초 안에 경고해야 하는 stream, 모을 수 없어 batch 이득 없음" class="figure-img"><figcaption><b>그림 3.</b> 모아서 한꺼번에(batch) 대 하나씩 실시간(stream). (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>② 입력이 희소하고, 대기 전력을 작게 둘 수 있나?</strong> 사건이 드물면 '일하는 몫'의 전력은 거의 사라집니다. 그런데 아무 일이 없어도 나가는 대기 전력은 그대로 남습니다. ★ <span class="key">그래서 '희소한가'와 '대기 전력이 작은가'를 함께 묻습니다.</span> 입력이 늘 바쁘면(희소하지 않으면) 사건 때만 일하는 방식의 이득이 작습니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/c2-sparse-standby.svg" alt="위: 거의 평평한 신호에 사건 두 개. 아래: 전력은 사건 때만 솟는 일하는 몫과, 늘 깔려 있는 대기 전력 바닥" class="figure-img"><figcaption><b>그림 4.</b> 사건이 드물면 남는 것은 대기 전력이다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>③ 조금 틀려도(근사·편차·잡음) 답이 같은 과제인가?</strong> 근사(approximation)를 견딘다는 것은 값이 1% 남짓 틀려도 최종 답이 같다는 뜻입니다.</p>
+<ul>
+<li><strong>견디는 예: 심전도 박동 분류.</strong> '이상' 점수가 정확히는 0.82인데 device가 0.81로 계산해도, 문턱 0.5를 넘는 것은 같으니 답('이상')이 그대로입니다.</li>
+<li><strong>못 견디는 예: 계좌 이자 계산.</strong> 100만 원을 1% 틀리면 1만 원이 틀리고, 그것은 틀린 답입니다.</li>
+</ul>
+<p>Device로 계산하면 variation과 noise 때문에 1% 안팎의 오차가 생기기 쉽습니다. ★ <span class="key">정확한 답이 필요한 과제면 그 오차를 없애려고 보정(calibration), 여러 번 읽어 평균 내기, 더 세밀한 ADC가 필요해지고, 이 비용이 아날로그로 아낀 에너지를 먹습니다.</span> 같은 구성이면 software RC가 대개 더 정확하다는 Liang의 관찰도 같은 방향입니다. <span class="src">Liang 2024, p.201</span></p>
+<figure class="fig figure"><img src="../assets/img/d05/c3-approximation.svg" alt="왼쪽: 심전도 분류에서 0.82와 0.81이 둘 다 문턱 0.5를 넘어 답이 같다. 오른쪽: 계좌 이자에서 1% 오차는 10,000원 차이라 틀린 답" class="figure-img"><figcaption><b>그림 5.</b> 근사를 견디는 과제와 못 견디는 과제. (Claude가 그림, 예시 숫자)</figcaption></figure>
+<p><strong>④ Device의 τ가 신호의 빠르기와 맞나?</strong> 심전도의 박동 간격은 약 1 s입니다. 아래 그림은 같은 박동 입력을 τ가 다른 세 device에 넣었을 때 상태가 어떻게 변하는지입니다.</p>
+<ul>
+<li>τ = 1 ms: 다음 박동이 오기 전에 앞 박동의 흔적이 다 사라집니다(망각).</li>
+<li>τ = 100 s: 모든 박동이 섞여 계속 쌓이기만 해서, 어느 박동이 언제 왔는지 구별이 안 됩니다.</li>
+<li>★ <span class="key">τ가 박동 간격과 비슷하면(예: 0.5 s) 앞 한두 박동의 흔적이 상태에 남아, 시간 정보를 담습니다.</span> <span class="src">Liang 2024, p.198</span></li>
+</ul>
+<figure class="fig figure"><img src="../assets/img/d05/c4-tau-match.svg" alt="1 s 간격의 박동 입력과, τ가 1 ms, 0.5 s, 100 s인 세 device의 상태 곡선. 1 ms는 바로 잊고, 0.5 s는 한두 박동의 흔적이 남고, 100 s는 계단처럼 쌓인다" class="figure-img"><figcaption><b>그림 6.</b> τ와 신호 빠르기의 정합. 곡선은 '박동마다 상태가 1 오르고 τ로 줄어든다'는 규칙으로 Claude가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>⑤ 다음 부품도 아날로그이거나, 변환이 드문가?</strong> Device의 출력(전류나 전압)을 받아 쓰는 다음 부품이 디지털 칩이면, 읽을 때마다 ADC로 숫자를 만들어야 합니다. 이런 peripheral circuit이 시스템 전력의 최대 70%까지 차지할 수 있습니다. <span class="src">Roadmap 2026, p.8130</span></p>
+<p>★ <span class="key">다음 부품도 아날로그로 받거나, 변환을 매 샘플이 아니라 사건 때만 하면 이 비용이 줄어듭니다.</span> 아래 그림의 아랫줄이 그 설계입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/c5-convert-on-event.svg" alt="윗줄: 센서·device 출력을 매 샘플 ADC가 변환하고 MCU가 1초에 1,000번 깨어남. 아랫줄: 문턱 비교 회로가 늘 지켜보다 사건 때만 ADC와 MCU를 깨워 1초에 2번만 깨어남" class="figure-img"><figcaption><b>그림 7.</b> 매 샘플 변환 대 사건 때만 변환. 아랫줄의 문턱 비교는 아날로그 회로(또는 내 device)가 늘 켜진 채 맡는다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>⑥ MCU + 작은 신경망보다 시스템 전체로 나은가?</strong> 오늘 새로 묻는 질문입니다.</p>
+<ul>
+<li><strong>MCU</strong>(microcontroller, 마이크로컨트롤러)는 센서 옆에 붙이는 손톱만 한 칩으로, 계산기와 작은 메모리를 칩 하나에 담은 것입니다.</li>
+<li><strong>작은 신경망</strong>(small neural network)은 그 MCU에서 돌리는 작은 계산 프로그램입니다. '입력 숫자마다 weight를 곱해 더하고, 그 합을 다음 층으로 넘기기'를 몇 층 하고, weight가 수백–수천 개라 MCU의 칩 안 메모리에 다 들어갑니다. 예: 박동 하나의 숫자 200개를 넣으면 '정상'과 '이상' 점수 두 개가 나옵니다.</li>
+<li>★ <span class="key">뉴로모픽 device가 전류의 물리로 하려는 '곱해서 더하기'를, MCU는 숫자 계산으로 하나씩 차례로 합니다. 그래서 둘은 같은 자리를 두고 경쟁합니다.</span></li>
+</ul>
+<p>Liang의 한 문장이 이 질문의 뼈대입니다. "디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다." <span class="src">Liang 2024, p.202</span> Liang의 비교 대상은 디지털 RC이고, 그것을 MCU + 작은 신경망으로 넓힌 것은 이 자료의 해석입니다. <span class="tag tag-interp">해석</span> 이렇게 "device 대신 무엇을 썼다면 얼마나 됐을까"를 재는 비교 상대를 <strong>기준선</strong>(baseline)이라 부릅니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/c6-same-scale.svg" alt="저울 왼쪽에 내 device 시스템(device, 읽기 회로, ADC 깨움과 무선), 오른쪽에 MCU + 작은 신경망(ADC, MCU 계산, 무선). 같은 과제·같은 정확도·같은 시스템 경계에서 µW를 비교" class="figure-img"><figcaption><b>그림 8.</b> 같은 저울에 올리기. Device 하나가 아니라, 읽는 회로까지 포함한 시스템끼리 비교한다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><span id="s-ladder-ecg"></span><strong>작은 예: 심전도 패치를 사다리에 올리기.</strong> 패치는 가슴에 붙인 전극 두 개로 심장의 전기 신호를 1 ms마다 하나씩 읽습니다. 이렇게 센서가 낸 전압을 숫자로 바꾸기만 하고 아무 처리도 하지 않은 값의 줄을 <strong>raw signal</strong>(원시 신호)이라 부릅니다. 패치는 박동마다 정상/이상을 표시하고, 이상이 이어지면 수 초 안에 경고하며, 전지 하나로 며칠을 버텨야 합니다(교육용 가정).</p>
+<figure class="fig figure"><img src="../assets/img/d05/ecg-ladder.svg" alt="심전도 패치를 여섯 질문에 올린 결과: 실시간 예(조건부), 희소·대기 전력 모름, 근사 예(조건부), τ 재야 앎, 다음 부품 설계에 달림, MCU 비교 모름" class="figure-img"><figcaption><b>그림 9.</b> 심전도 패치를 사다리에 올린 결과. (Claude가 정리)</figcaption></figure>
+<p>설명이 더 필요한 두 칸만 풀어 씁니다.</p>
+<ul>
+<li><strong>'희소·대기 전력'이 '모름'인 이유.</strong> Raw signal은 1 ms마다 값이 있으니 그 자체로는 희소하지 않습니다. 드문 것은 '이상 박동'이라는 <strong>사건</strong>입니다. ★ <span class="key">그래서 질문은 "사건을 골라내는 앞단을 얼마나 작은 대기 전력으로 늘 켜 둘 수 있나"로 바뀌고, 그 값은 아직 모릅니다.</span></li>
+<li><strong>'다음 부품'이 '설계에 달림'인 이유.</strong> 패치 안에서 결과를 저장하거나 보내는 부품은 디지털 MCU라서 ADC가 필요합니다. '예'가 되려면 센서 바로 뒤에 아날로그 회로(또는 내 device)를 두고, 그것이 신호를 늘 지켜보다 이상 박동 같은 사건이 생길 때만 ADC와 MCU를 깨우게 설계해야 합니다. 그러면 ADC는 1초에 1,000번이 아니라 사건 수(예: 2번)만큼만 일합니다. 이 설계는 다음 구간에서 '설계 C'라는 이름으로 전력을 계산합니다.</li>
+</ul>
+<p>★ <span class="key">사다리는 "맞다/아니다"를 판정하는 도구라기보다, <strong>다음에 무엇을 재거나 계산해야 하는지</strong>를 알려 주는 도구입니다.</span> 이 예에서는 앞단의 대기 전력과 device의 τ가 다음에 잴 것입니다.</p>
+<p><span id="s-ladder-limits"></span><strong>적용 조건.</strong> 이 사다리는 이해를 위한 순서이지 공식이 아닙니다. 그리고 질문마다 누가 답을 바꿀 수 있는지가 다릅니다.</p>
+<ul>
+<li><strong>회로 설계로 바꿀 수 있는 것:</strong> 대기 전력의 크기, 다음 부품을 아날로그로 둘지(예: 출력층까지 아날로그로).</li>
+<li><strong>과제가 정하는 것:</strong> 입력이 희소한지, 근사를 견디는지, 신호가 얼마나 빠른지.</li>
+<li><strong>재료로 맞추는 것:</strong> Device의 τ. 다만 맞춰야 할 목표(신호의 빠르기)는 과제가 줍니다.</li>
+</ul>
+<p>Kudithipudi가 뉴로모픽 설계를 "흔히 크기·무게·전력 제약이 있는 응용"을 위한 것으로 소개한 것도 <span class="src">Kudithipudi 2025, p.801</span> 응용 쪽에서 보면 같은 말입니다. '입력이 하나씩 실시간으로 오는가'와 '희소하고 대기 전력이 작은가'라는 첫 두 질문을 통과하는 응용을 가리킵니다.</p>
 <div class="quiz" data-day="d05" data-set="1-check"></div>
 <div class="think">
-<p>내가 생각하는 응용 하나를 정해 사다리를 타 보세요(예: 피부에 붙인 압력 센서로 걸음 패턴 분류). 질문 1–5 중 "아니오" 또는 "모름"이 처음 나오는 자리는 어디인가요? 그 자리가 내 응용의 첫 병목입니다.</p>
+<p>내가 생각하는 응용 하나를 정해 사다리를 타 보세요(예: 피부에 붙인 압력 센서로 걸음 패턴 분류). 첫 다섯 질문 가운데 "아니오"나 "모름"이 처음 나오는 곳은 어디인가요? 그곳이 내 응용의 첫 병목입니다.</p>
 <details class="think-answer">
 <summary>
 생각 정리 보기
 </summary>
-<p>판단 절차: 질문 1부터 차례로 "예 / 아니오 / 모름"을 적고, 처음 "아니오"나 "모름"이 나온 곳에서 멈춥니다.</p>
-<p><span class="tag tag-interp">해석</span> 걸음 패턴 압력 센서의 예:</p>
+<p>걸음 패턴 압력 센서로 답해 보면 이렇습니다. <span class="tag tag-interp">해석</span></p>
 <ul>
-<li>1 실시간으로 하나씩: 예. 발걸음 신호가 시간 순서로 옵니다.</li>
-<li>2 희소·대기 전력: 걸을 때만 신호가 크니 희소할 수 있지만, 늘 켜 둘 앞단의 대기 전력은 아직 모릅니다. <strong>첫 '모름'은 여기입니다.</strong></li>
-<li>3 근사 허용: 걸음 종류 분류라면 예.</li>
-<li>4 <span class="math inline">\(\tau\)</span> 정합: 걸음 주기(약 1 s)와 내 device의 <span class="math inline">\(\tau\)</span>를 비교해야 하니, device를 재야 답이 납니다.</li>
+<li><strong>실시간으로 하나씩?</strong> 예. 발걸음 신호는 시간 순서로 오고, 걸음이 끝나기 전에 판정해야 하니 오래 모을 수 없습니다.</li>
+<li><strong>희소·대기 전력?</strong> 발이 땅에 닿는 순간에만 압력이 크게 변하니 사건은 희소합니다(1초에 1–2번). 그런데 그 순간을 놓치지 않으려면 앞단이 늘 켜져 있어야 하고, 그 대기 전력이 얼마인지는 아직 모릅니다. ★ <strong>첫 '모름'은 여기입니다.</strong></li>
+<li><strong>근사?</strong> 예. '걷기/뛰기/계단' 같은 분류라 점수가 1% 틀려도 답은 대개 같습니다.</li>
+<li><strong>τ 정합?</strong> 걸음 간격이 약 0.5–1 s이니 τ가 0.2–0.5 s쯤인 device면 맞습니다. 내 device의 τ를 재야 답이 납니다.</li>
 </ul>
-<p>그래서 이 예의 첫 병목은 질문 2이고, 다음에 잴 것은 앞단 device의 대기 전류입니다.</p>
+<p>판단: 첫 병목은 '희소·대기 전력'이고, 다음에 잴 것은 <strong>앞단(압력 센서 + 내 device + 문턱 회로)이 늘 켜져 있을 때의 전류</strong>입니다. 그 전류 × 전압이 MCU가 잠든 전력(약 1 µW)보다 작으면 다음 질문으로 넘어갈 수 있습니다.</p>
 </details>
 </div>
 <div class="quiz" data-day="d05" data-set="1-end"></div>
 <div class="keypoints">
 <ul>
-<li>적합성은 한 문장이 아니라 질문 여섯 개의 순서다: 실시간으로 하나씩(배치로 이득을 보기 어려움) → 희소·낮은 대기 전력 → 근사 허용 → <span class="math inline">\(\tau\)</span> 정합 → 아날로그 다음 단계 → MCU+작은 NN보다 나은가 [해석, Day 3–8 종합].</li>
-<li>질문 1의 '예'는 "배치로 이득을 보기 어렵다"까지다. weight가 칩 안에 들어가는 작은 모델이면 디지털도 배치 1에서 memory wall에 막히지 않으므로, 이동이 실제 병목인지는 질문 6에서 따진다.</li>
-<li>심전도 패치를 올리면 첫 "모름"은 질문 2(사건을 골라내는 앞단의 대기 전력)이고, 질문 4는 device의 <span class="math inline">\(\tau\)</span>를 재야 답이 난다.</li>
-<li>대기 전력(2)·다음 단계(5)는 설계로 바꿀 수 있고, 입력 희소성(2)·근사 허용(3)·신호 시간척도(4)는 과제가 정한다(device <span class="math inline">\(\tau\)</span>는 그 목표에 맞춰 재료로 조절).</li>
-<li>"디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다" <span class="src">Liang 2024, p.202</span>가 여섯째 질문의 근거다.</li>
+<li>적합성은 한 문장이 아니라 여섯 질문의 순서다: 실시간으로 하나씩 → 희소·낮은 대기 전력 → 근사를 견딤 → τ가 신호와 맞음 → 다음 부품도 아날로그(또는 변환이 드묾) → MCU + 작은 신경망보다 나음.</li>
+<li>'실시간으로 하나씩'의 '예'는 "batch로 이득을 보기 어렵다"까지다. Weight가 칩 안에 들어가는 작은 모델이면 보통 컴퓨터도 하나씩 처리해 손해가 없으므로, 이동이 병목인지는 MCU와의 비교에서 따진다.</li>
+<li>심전도 패치의 첫 "모름"은 '사건을 골라내는 앞단의 대기 전력'이고, τ는 device를 재야 답이 난다.</li>
+<li>대기 전력과 다음 부품은 설계로 바꾸고, 희소성·근사 허용·신호 빠르기는 과제가 정하며, τ는 재료로 그 목표에 맞춘다.</li>
 </ul>
 </div>
 </section>
@@ -816,194 +844,368 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="ch-edge-insensor">학습 구간 2. Edge, in-sensor, always-on: 에너지 사슬의 어디를 끊나</h3>
 <div class="goal">
 <p><strong>상황.</strong> 심전도 패치는 전지 하나로 며칠을 버텨야 합니다. 내 이온 device를 넣으면 어느 부품의 전력이 줄까요? 논문의 "전력 99.9% 절감"은 어디를 센 숫자일까요?</p>
-<p><strong>왜 지금?</strong> device 하나의 에너지(fJ 같은 숫자)만으로는 패치 전체 전력을 말할 수 없습니다. 센서 → 변환 → 처리 → 송신의 사슬에서 어느 고리가 큰지부터 알아야 합니다.</p>
-<p><strong>어디에 쓰이나?</strong> 논문의 전력 숫자를 읽을 때 "어느 고리를 셌나"를 묻고, 내 device의 전처리가 어느 고리를 줄이는지 주장하는 데 씁니다.</p>
-<p><strong>끝나면 할 수 있는 것.</strong> 한 번의 에너지와 1초당 횟수로 평균 전력을 계산한다. 엣지 처리·in-sensor 처리·상시 대기(always-on)가 각각 사슬의 어느 고리를 줄이는지 숫자 예로 말한다.</p>
+<p><strong>왜 지금?</strong> Device 하나의 에너지(fJ 같은 숫자)만으로는 패치 전체 전력을 말할 수 없습니다. 센서 → 변환 → 처리 → 송신 가운데 어느 부품이 큰지부터 알아야 합니다.</p>
+<p><strong>어디에 쓰이나?</strong> 논문의 전력 숫자가 "어느 부품을 셌나"를 묻고, 내 device가 어느 부품의 일을 줄이는지 주장하는 데 씁니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> 한 번의 에너지와 1초당 횟수로 평균 전력을 계산한다. 엣지 처리·in-sensor 처리·always-on이 각각 어느 부품을 줄이는지 숫자로 말한다.</p>
 </div>
-<p>이 구간은 네 걸음입니다. 2-1에서 사슬의 네 고리가 신호를 무엇으로 바꾸는지 보고, 2-2에서 각 고리의 에너지를 세는 방법(평균 전력 모형)을 MCU 하나로 계산해 본 뒤, 2-3에서 그 모형으로 세 가지 설계를 비교하고, 2-4에서 폴더 논문의 숫자를 그 눈으로 읽습니다.</p>
+<p>이 구간은 네 걸음입니다. 센서 노드의 네 부품 → 평균 전력을 세는 규칙 → 세 가지 설계 비교 → 논문 숫자 읽기.</p>
 <section id="s-sensor-chain" class="level4">
-<h4 class="anchored" data-anchor-id="s-sensor-chain">2-1. 센서 노드의 네 고리: 신호가 무엇으로 바뀌나</h4>
+<h4 class="anchored" data-anchor-id="s-sensor-chain">2-1. 센서 노드의 네 부품: 신호가 무엇으로 바뀌나</h4>
 <div id="b-sensor-node" class="basics">
-<p><strong>기초 1: 센서 노드와 마이크로컨트롤러(MCU)</strong></p>
-<p><strong>왜 필요한가.</strong> "엣지에서 뉴로모픽이 유리하다"는 말의 엣지가 무엇인지, 그 자리에 지금 무엇이 들어 있는지 알아야 경쟁자를 지목할 수 있습니다.</p>
-<p><strong>무엇인가.</strong> 가슴에 붙이는 심전도 패치, 공장 기계에 붙은 진동 센서, 농장의 토양 습도 센서처럼 <strong>데이터가 생기는 자리에 붙어 있는 작은 장치</strong>를 센서 노드(sensor node)라고 하고, 그 자리 전체를 <strong>엣지</strong>(edge, 가장자리)라고 부릅니다. 반대말은 <strong>클라우드</strong>(cloud: 데이터를 통신으로 보내 데이터센터에서 처리). 센서 노드 안에는 보통 네 부품이 있고, 신호는 이 순서로 지나갑니다.</p>
+<p><strong>기초 1: 센서 노드, 엣지, 마이크로컨트롤러(MCU)</strong></p>
+<p><strong>센서 노드와 엣지.</strong> 가슴의 심전도 패치, 공장 기계의 진동 센서, 밭의 토양 습도 센서처럼 데이터가 생기는 현장에 붙은 작은 장치를 <strong>센서 노드</strong>(sensor node)라고 합니다.</p>
+<p><strong>엣지</strong>(edge)는 '가장자리'라는 뜻입니다. 인터넷을 하나의 망으로 그리면, 한가운데에 데이터센터(<strong>클라우드</strong>, cloud)가 있고 데이터가 실제로 생기는 현장(몸, 공장, 밭)은 망의 바깥 가장자리에 있습니다. 그래서 "엣지에서 처리한다"는 데이터를 멀리 클라우드까지 보내지 않고, 그것이 생긴 자리 가까이(센서 노드 안)에서 처리한다는 뜻입니다.</p>
+<p>★ <span class="key">엣지 처리가 중요한 이유는 셋입니다. 보내는 일(무선 송신) 자체가 비싸고, 전지가 작고, 답이 빨리 필요하기 때문입니다.</span></p>
+<figure class="fig figure"><img src="../assets/img/d05/edge-cloud.svg" alt="위쪽 가운데에 데이터센터(클라우드), 아래 넓은 띠에 심전도 패치·진동 센서·토양 습도 센서가 있는 엣지. 센서들에서 클라우드로 점선 화살표(무선 송신)" class="figure-img"><figcaption><b>그림 10.</b> 클라우드와 엣지. 엣지는 데이터가 생기는 현장 쪽 가장자리다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>센서 노드 안의 네 부품.</strong> 신호는 이 순서로 지나갑니다.</p>
 <ul>
-<li>① <strong>센서 + 증폭기</strong>(amplifier): 피부 전위 같은 물리량을 전압으로 바꾸고, 너무 작은 그 전압을 키운다.</li>
-<li>② <strong>ADC</strong>: 그 전압을 1초에 정해진 횟수(샘플링률, sampling rate)만큼 읽어 숫자로 바꾼다. 한 번 읽은 숫자 하나가 <strong>샘플</strong>(sample)이다.</li>
-<li>③ <strong>MCU</strong>: 숫자를 받아 프로그램대로 판정한다. 학습이 끝난 작은 신경망으로 새 입력의 답을 내는 일, 즉 inference도 한다.</li>
+<li>① <strong>센서 + 증폭기</strong>(amplifier): 피부 전위 같은 물리량을 전압으로 바꾸고, 너무 작은 전압을 키운다.</li>
+<li>② <strong>ADC</strong>: 그 전압을 1초에 정해진 횟수만큼 읽어 숫자로 바꾼다. 읽은 숫자 하나가 <strong>샘플</strong>(sample)이다.</li>
+<li>③ <strong>MCU</strong>: 숫자를 받아 프로그램대로 판정한다. 작은 신경망으로 답을 내는 일(inference)도 한다.</li>
 <li>④ <strong>무선 송신</strong>(wireless transmission): 결과를 전파로 보낸다.</li>
 </ul>
-<p>아래 사진과 그림 2는 이 네 고리를 실물과 한 샘플의 길로 보여 주고, 그림 2 뒤의 단계 보기에서 고리마다 자세히 봅니다.</p>
-<figure class="fig photo figure"><img src="../assets/img/web/d05-ecg-patch.jpg" alt="가슴 피부에 붙은 길쭉한 투명 패치 사진. 양 끝에 회색 둥근 전극 두 개가 있고, 가운데에 'ZIO XT'라고 적힌 흰 타원형 본체가 있다" loading="lazy" class="figure-img"><figcaption><b>사진.</b> 실제 센서 노드의 예: 가슴에 붙이는 심전도 기록 패치(iRhythm ZIO XT), 붙인 지 9일째. <b>볼 것:</b> 양 끝의 회색 원 두 개가 피부 전위를 받는 전극(사슬의 1. 센서), 가운데 흰 본체 안에 ADC·작은 프로세서·기억장치·전지가 들어 있다(2–3) [해석: 내부 구성은 사진 설명에 없음]. 이런 장치는 며칠–몇 주를 전지 하나로 버텨야 하므로, 2-2·2-3의 "어느 고리가 에너지를 얼마나 쓰나"가 곧 설계 문제다. 이 제품이 데이터를 무선으로 보내는지, 기록만 하는지는 사진으로 알 수 없다 [미확인]. 출처: KamenG, <a href="https://commons.wikimedia.org/wiki/File:IRhythm_ZIO%C2%AE_XT_Patch.jpg" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0.</figcaption></figure>
-<p><strong>무엇을 볼지.</strong> 그림 2는 심전도 패치에서 <strong>샘플 하나</strong>가 네 고리를 차례로 지나며 무엇으로 바뀌는지 보여 줍니다. 위의 파란 이름표가 고리, 가운데 칸이 그 고리 안에서 일어나는 일, 아래 굵은 글씨가 그 고리의 출력입니다. 맨 아랫줄은 각 고리의 '한 번의 일'을 무엇으로 세는지인데, 이것은 2-2에서 에너지를 셀 때 씁니다.</p>
-<figure class="fig figure"><img src="../assets/img/d05/fig2b-signal-chain.svg" alt="심전도 패치 예로 한 샘플이 네 고리를 지나는 모식도: 센서·증폭기는 mV 피부 전위를 V 자릿수의 연속 전압으로, ADC는 1 ms마다 점을 찍어 1.234 V를 숫자 1234로, MCU는 숫자 열을 받아 정상/사건을 판정, 무선은 1234를 12 bit 0100 1101 0010으로 전파에 싣는다. 아랫줄은 각 고리의 한 번의 일: 늘 켜져 있음, 변환 1번, 샘플 1개 처리, 1 bit 송신" class="figure-img"><figcaption><b>그림 2.</b> 한 샘플이 센서 노드의 네 고리를 지나가는 모습(심전도 패치 예). 위 칸은 각 고리가 신호를 무엇으로 바꾸는지(연속 전압 → 1 ms마다 찍은 점 → 12 bit 숫자 → 판정 → 비트 묶음 → 전파), 아랫줄은 각 고리의 '한 번의 일'(늘 켜져 있음, 변환 1번, 샘플 1개 처리, 1 bit 송신)이다. 그 에너지 숫자는 그림 3에 있다. 파형은 모양만 흉내 낸 것이며 측정값이 아니다. (Claude가 그림, 모식도)</figcaption></figure>
-<p><strong>그림의 번호를 따라.</strong> 각 단계를 눌러 하나씩 봅니다.</p>
+<figure class="fig photo figure"><img src="../assets/img/web/d05-ecg-patch.jpg" alt="가슴 피부에 붙은 길쭉한 투명 패치 사진. 양 끝에 회색 둥근 전극 두 개가 있고, 가운데에 'ZIO XT'라고 적힌 흰 타원형 본체가 있다" loading="lazy" class="figure-img"><figcaption><b>사진.</b> 실제 센서 노드의 예: 가슴에 붙이는 심전도 기록 패치(iRhythm ZIO XT). <b>볼 것:</b> 양 끝의 회색 원 두 개가 피부 전위를 받는 전극(센서)이고, 가운데 흰 본체 안에 나머지 부품과 전지가 들어 있다. 이런 장치는 며칠–몇 주를 전지 하나로 버텨야 하므로, "어느 부품이 에너지를 얼마나 쓰나"가 곧 설계 문제다. 출처: KamenG, <a href="https://commons.wikimedia.org/wiki/File:IRhythm_ZIO%C2%AE_XT_Patch.jpg" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0.</figcaption></figure>
+<p><strong>무엇을 볼지.</strong> 그림 11은 샘플 <strong>하나</strong>가 네 부품을 차례로 지나며 무엇으로 바뀌는지입니다. 맨 아랫줄은 각 부품이 '한 번의 일'로 무엇을 하는지(늘 켜져 있음, 변환 1번, 샘플 1개 처리, 1 bit 송신)입니다. 아래에서 평균 전력을 셀 때, 이 '한 번'마다 에너지를 매깁니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/fig2b-signal-chain.svg" alt="심전도 패치 예로 한 샘플이 네 부품을 지나는 모식도: 센서·증폭기는 mV 피부 전위를 V 자릿수의 연속 전압으로, ADC는 1 ms마다 점을 찍어 1.234 V를 숫자 1234로, MCU는 숫자 열을 받아 정상/사건을 판정, 무선은 1234를 12 bit 0100 1101 0010으로 전파에 싣는다. 아랫줄은 각 부품의 한 번의 일" class="figure-img"><figcaption><b>그림 11.</b> 한 샘플이 센서 노드의 네 부품을 지나가는 모습(심전도 패치 예). 파형은 모양만 흉내 낸 것이다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>부품마다 자세히.</strong> 그림의 번호를 따라 봅니다.</p>
 <div class="stepper">
 <div class="step">
-<p><b>① 센서(+ 증폭기).</b> 압력·빛·전위 같은 물리량을 전압이나 전류로 바꾼다. 출력은 연속량(아날로그, <a href="../days/d03a.html#b-digital-analog">Day 5 기초 1</a>). 심전도 패치라면 피부에 닿은 두 전극 사이의 전압 차가 센서 출력인데, 크기가 mV 자릿수라 <span class="tag tag-unverified">미확인</span> <span class="prov">교재의 일반값, 원전 대조 안 함</span> 그대로는 ADC의 한 눈금보다 작거나 비슷하다. 그래서 보통 센서 바로 뒤에 <strong>증폭기</strong>(작은 전압을 같은 모양 그대로 크게 키우는 회로)와 <strong>필터</strong>(filter: 필요 없는 떨림을 거르는 회로)를 둬 V 자릿수로 키운다. 이 앞단은 신호를 놓치지 않으려고 <strong>늘 켜져 있다</strong>. 그래서 이 고리의 에너지는 '몇 번'이 아니라 '켜져 있는 동안의 전력 [W]'으로 센다(그림 2 아랫줄).</p>
+<p><b>① 센서 + 증폭기.</b> 심전도 패치에서는 피부에 닿은 두 전극 사이의 전압 차가 센서 출력이고, 크기는 1 mV 안팎입니다 <span class="tag tag-unverified">미확인</span>.</p>
+<p>이것은 ADC가 그대로 읽기에 너무 작습니다. <strong>ADC의 한 눈금</strong>은 ADC가 구별할 수 있는 가장 작은 전압 차입니다. 예: 0–4.095 V를 4,096칸으로 나누는 12 bit ADC는 한 눈금이 1 mV입니다. 그러면 1 mV짜리 심전도 파형 전체가 한두 눈금 안에 들어가 모양을 읽을 수 없습니다.</p>
+<p>★ <span class="key">그래서 센서 바로 뒤에 증폭기(모양은 그대로 두고 크기만 키우는 회로)를 둬 크게 키웁니다.</span> 예: 1,000배 키우면 1 mV가 1 V가 되어 파형이 약 1,000눈금에 걸쳐 그려집니다. 필요 없는 떨림을 거르는 필터(filter)도 함께 둡니다.</p>
+<p>이 앞단은 신호를 놓치지 않으려고 <strong>늘 켜져 있습니다</strong>. 그래서 에너지를 '몇 번'이 아니라 '켜져 있는 동안의 전력 [W]'로 셉니다.</p>
 </div>
 <div class="step">
-<p><b>② ADC(아날로그–디지털 변환기).</b> Day 7–8 복습: ADC는 전압을 받아 가장 가까운 단계의 숫자로 바꾸는 회로다(<a href="../days/d04a.html#b-adc">Day 7 기초 5</a>). 센서 노드의 ADC는 이 일을 1초에 정해진 횟수만큼 되풀이한다. 이 횟수가 <strong>샘플링률</strong>(sampling rate, 단위 S/s = 1초당 샘플 수)이고, 한 번 읽어 얻은 숫자 하나가 <strong>샘플</strong>(sample)이다. 변환 1번이 곧 샘플 1개다. 심전도 기록에서 흔히 쓰는 신호 대역은 약 0.05–150 Hz(1초에 150번 오르내리는 떨림까지)이고 <span class="tag tag-unverified">미확인</span> <span class="prov">AHA/ACC/HRS 권고(Kligfield 2007, <i>Circulation</i> 115, 1306)를 요약한 2차 자료로만 확인, 원문 미대조</span>, 가장 빠른 오르내림 한 번에 점이 둘 넘게 찍혀야 모양을 놓치지 않으므로 1초에 수백 번 이상 읽는다. 오늘 예제는 1,000 S/s, 즉 1 ms마다 한 번으로 둔다(가정). Day 3–4 장면 2는 4 ms 간격(250 S/s)을 골랐는데, 둘 다 교육용 가정이고, 150 Hz까지의 모양을 담으려면 더 촘촘한 쪽이 맞다. <b>12 bit</b> ADC는 입력 범위를 2¹² = 4,096단계로 나눈다. 범위가 0–4.095 V라면 한 단계가 1 mV이므로 1.234 V는 숫자 1234가 되고, 이진수로는 0100 1101 0010, 열두 자리다.</p>
+<p><b>② ADC.</b> 전압을 1초에 정해진 횟수만큼 읽어 숫자로 바꿉니다. 이 횟수가 <strong>sampling rate</strong>(샘플링률, 단위 S/s = 1초당 샘플 수)이고, 변환 1번이 곧 샘플 1개입니다.</p>
+<p>심전도에서 의미 있는 떨림은 1초에 약 150번 오르내리는 것까지이고 <span class="tag tag-unverified">미확인</span>, 가장 빠른 오르내림 한 번에 점이 둘 넘게 찍혀야 모양을 놓치지 않습니다. ★ <span class="key">그래서 오늘 예제는 1초에 1,000번, 즉 1 ms마다 한 번 읽습니다.</span> <span class="tag tag-assume">가정</span></p>
+<p><strong>12 bit</strong> ADC는 입력 범위를 2¹² = 4,096칸으로 나눕니다. 범위가 0–4.095 V면 한 칸이 1 mV이므로, 1.234 V는 숫자 1234가 됩니다.</p>
 </div>
 <div class="step">
-<p><b>③ 마이크로컨트롤러(MCU).</b> 손톱만 한 칩 하나에 작은 계산기(프로세서), 작은 기억장치, ADC, 통신 회로를 모두 넣은 범용 제어기. 숫자를 받아 프로그램대로 처리한다. 심전도 예라면 샘플이 올 때마다 최근 값 몇 개를 기억 칸에 저장하고, 필요 없는 떨림을 거르고, 문턱과 비교해 '사건(예: 이상 박동 후보)'인지 판정한다. 요즘 MCU는 작은 신경망(<a href="../days/d03a.html#b-ann-snn">Day 5 기초 7</a>의 '입력 × weight 더하기'를 몇 층)도 돌릴 수 있다. 학습이 끝난 신경망에 새 입력을 넣어 답을 내는 일을 <strong>inference</strong>이라 한다(<a href="../days/d01b.html#ch-branches">Day 2 2구간 (다)</a>). 할 일이 없을 때 MCU는 대부분의 회로를 끄고 <strong>잠든다</strong>(sleep). 그래서 MCU의 전력은 깨어 일할 때(mW 자릿수)와 잠들었을 때(µW 자릿수) 두 가지로 적는다. 숫자는 2-2에서 본다.</p>
+<p><b>③ MCU.</b> 손톱만 한 칩 하나에 작은 계산기(processor), 작은 메모리, ADC, 통신 회로를 모두 넣은 범용 제어기입니다.</p>
+<p>심전도 예라면 샘플이 올 때마다 최근 값 몇 개를 메모리에 저장하고, 떨림을 거르고, 문턱과 비교해 '사건(이상 박동 후보)'인지 판정합니다. 작은 신경망(weight 수백–수천 개로 '입력 × weight 더하기'를 몇 층 하는 프로그램)도 돌릴 수 있고, 그렇게 답을 내는 일을 <strong>inference</strong>라 합니다.</p>
+<p>★ <span class="key">할 일이 없을 때 MCU는 대부분의 회로를 끄고 잠듭니다(sleep).</span> 그래서 MCU의 전력은 깨어 일할 때(mW 자릿수)와 잠들었을 때(µW 자릿수) 두 가지로 적습니다.</p>
 </div>
 <div class="step">
-<p><b>④ 무선 송신.</b> 처리 결과(또는 원시 데이터)를 전파로 보낸다. 보내는 비트(<a href="../days/d02a.html#b-bit">Day 3 기초</a>: 0 또는 1 하나를 적는 단위) 수에 비례해 에너지가 들고, 많은 노드에서 가장 비싼 고리로 꼽힌다 [미확인: 노드 설계마다 다름]. 왜 비싼가: 몇 m–수십 m 떨어진 수신기까지 닿을 만큼의 전파(전자기파)를 안테나로 내보내야 하고, 데이터 앞뒤에 붙는 주소·확인 신호 같은 덧붙는 비트, 무선 회로를 켜고 주파수를 맞추는 준비 시간도 함께 든다 <span class="tag tag-interp">해석</span>. 원시 데이터를 다 보내면 1초에 1,000 샘플 × 12 bit = 12,000 bit, '이상 박동' 같은 사건만 보내면 사건 하나에 16 bit(오늘의 가정) 정도다.</p>
+<p><b>④ 무선 송신.</b> 전파로는 숫자를 0과 1의 줄로 바꿔 하나씩 보냅니다. 0 또는 1 하나가 <strong>1 bit</strong>입니다.</p>
+<ul>
+<li>12 bit ADC가 만든 숫자 하나(예: 1234)는 0과 1 열두 개(0100 1101 0010)입니다. 그래서 샘플 하나를 보내려면 12 bit를 보내야 합니다.</li>
+<li>Raw signal을 다 보내면 1초에 1,000 샘플 × 12 bit = <strong>12,000 bit</strong>입니다.</li>
+<li>★ <span class="key">이상 박동 같은 사건만 보내면, 사건 하나에 16 bit(언제 12 bit + 무엇 4 bit, 오늘의 가정)라 훨씬 적습니다.</span></li>
+</ul>
+<p>무선 에너지는 보내는 bit 수에 비례합니다. 무선이 비싼 이유는 몇 m 떨어진 수신기까지 닿을 전파를 내야 하고, 주소·확인 신호 같은 덧붙는 bit와 무선 회로를 켜는 준비 시간도 들기 때문입니다. <span class="tag tag-interp">해석</span></p>
+<figure class="fig figure"><img src="../assets/img/d05/bits-message.svg" alt="숫자 1234를 0과 1 열두 칸(010011010010)으로 나타낸 그림과, 사건 메시지 16 bit를 '언제 12 bit'와 '무엇 4 bit'로 나눈 그림" class="figure-img"><figcaption><b>그림 12.</b> 숫자를 bit로 보내기. 사건 메시지는 '언제'(0–4,095 ms 안의 시각, 12 bit)와 '무엇'(이상의 종류 16가지, 4 bit)으로 정했다. (Claude가 그림, 오늘의 가정)</figcaption></figure>
 </div>
 </div>
-<p>세 번째 고리인 MCU는 실물로 이렇게 생겼습니다.</p>
-<figure class="fig photo figure"><img src="../assets/img/web/d05-pico-board.jpg" alt="초록색 길쭉한 회로 기판 사진. 가운데에 검은 정사각형 칩이 있고, 가장자리를 따라 금색 접속 구멍이 두 줄로 늘어서 있으며, 위쪽 끝에 은색 USB 단자가 있다" loading="lazy" class="figure-img"><figcaption><b>사진.</b> Raspberry Pi Pico 보드(오른쪽 위가 USB 단자). Commons 설명에 따르면 RP2040 마이크로컨트롤러가 올라간 보드다. <b>볼 것:</b> 가운데 검은 정사각형이 MCU 칩 하나(프로세서·메모리·입출력이 한 칩 안에 있다), 둘레의 금색 구멍은 센서·전원을 잇는 단자, 칩 주변의 작은 부품은 전원·시계 회로다. 이런 칩 한 개가 "센서 옆에 들어가는 작은 컴퓨터"의 정체다. 이 보드의 전력은 오늘 계산하지 않는다 [미확인]. 사진: Phiarc, <a href="https://commons.wikimedia.org/wiki/File:Raspberry_Pi_Pico_oblique.jpg" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0.</figcaption></figure>
-<p><strong>연결.</strong> 뉴로모픽 device가 들어간다면 ADC와 MCU 사이(전처리) 또는 센서와 ADC를 합친 자리(센서가 곧 처리기)입니다. Singh 2026은 기존 엣지 하드웨어가 센서 → ADC → 메모리 → 프로세서로 데이터를 옮기는 데 에너지·시간을 낭비하며, 그래서 near-sensor·in-sensor computing(센서 곁이나 센서 안에서 처리하는 방식, 2-3에서 다시 봄)이 나왔다고 씁니다. <span class="src">Singh 2026, p.1</span></p>
+<p>세 번째 부품인 MCU는 실물로 이렇게 생겼습니다.</p>
+<figure class="fig photo figure"><img src="../assets/img/web/d05-pico-board.jpg" alt="초록색 길쭉한 회로 기판 사진. 가운데에 검은 정사각형 칩이 있고, 가장자리를 따라 금색 접속 구멍이 두 줄로 늘어서 있으며, 위쪽 끝에 은색 USB 단자가 있다" loading="lazy" class="figure-img"><figcaption><b>사진.</b> Raspberry Pi Pico 보드. <b>볼 것:</b> 가운데 검은 정사각형이 MCU 칩 하나(RP2040)로, processor·메모리·입출력이 한 칩 안에 있다. 둘레의 금색 구멍은 센서·전원을 잇는 단자다. 이런 칩 한 개가 "센서 옆에 들어가는 작은 컴퓨터"의 정체다. 사진: Phiarc, <a href="https://commons.wikimedia.org/wiki/File:Raspberry_Pi_Pico_oblique.jpg" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0.</figcaption></figure>
 </div>
-<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/ZY-HrRGCQ4w?start=0&amp;rel=0" title="영상: What is a microcontroller? ft. Raspberry Pi Pico" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:00–2:18, 약 2분 · 전체 4.5분, 영어).</b> Raspberry Pi(공식 채널), "What is a microcontroller? ft. Raspberry Pi Pico". <b>볼 이유:</b> 사슬의 3번 MCU가 실물로 무엇인지 본다. 0:00 'What is a microcontroller'에서 개념, 1:12 'Exploring onboard features'에서 손톱만 한 칩 하나에 프로세서·메모리·입출력이 다 들어 있는 모습을 본다. 3:26 이후는 프로그래밍 방법이라 오늘은 건너뛴다. <b>보고 답할 질문:</b> 영상의 보드에서 아날로그 입력(ADC)과 프로세서는 같은 칩 안에 있나? 그렇다면 뒤에서 말하는 "MCU 경로"의 ADC 비용은 어디에 숨어 있나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
+<p><span id="s-device-place"></span><strong>뉴로모픽 device는 이 사슬의 어디에 들어가나.</strong> 내 연구에 가장 중요한 질문입니다. 지금의 사슬에서는 ADC와 MCU가 1초에 1,000번, 샘플마다 깨어나 일합니다. 그런데 심전도 샘플의 대부분은 '아무 일 없음'입니다. 이온 device가 들어갈 수 있는 자리는 두 곳입니다.</p>
+<ul>
+<li><strong>A. 센서 뒤, ADC 앞(near-sensor 전처리).</strong> 증폭된 연속 신호를 device가 늘 지켜봅니다. Device의 상태가 최근 신호의 이력을 요약하고(예: 박동 간격이 갑자기 짧아짐), 그 상태가 문턱을 넘을 때만 ADC·MCU에 '깨어나라' 신호를 보냅니다.</li>
+<li><strong>B. 센서 자체(in-sensor).</strong> 압력이나 이온 농도 같은 자극이 곧바로 device 속 이온의 분포를 바꾸는 소재라면, 센서가 신호를 받는 순간 이미 그 이력을 상태로 요약합니다. 센서와 전처리기가 한 몸입니다.</li>
+</ul>
+<p>★ <span class="key">어느 자리든 이득은 같은 곳에서 나옵니다. ADC·MCU가 매 샘플(1초 1,000번)이 아니라 사건 때(예: 1초 2번)만 일하게 됩니다.</span> 얼마나 줄어드는지는 아래 세 설계 비교에서 계산합니다.</p>
+<p>대가도 있습니다. ★ <span class="key">Device와 그것을 읽는 회로는 늘 켜져 있어야 하므로, 그 대기 전력이 MCU가 잠든 전력(µW 자릿수)보다 작아야 이득이 남습니다.</span> 디지털 뉴로모픽 칩이라면 ADC 뒤의 MCU 자리에 들어가겠지만, 이온 device는 아날로그라 A나 B가 자연스럽습니다. <span class="tag tag-interp">해석</span> Singh 2026도 기존 엣지 하드웨어가 센서 → ADC → 메모리 → 프로세서로 데이터를 옮기는 데 에너지와 시간을 낭비하고, 그래서 센서 곁(near-sensor)이나 센서 안(in-sensor)에서 처리하는 방식이 나왔다고 씁니다. <span class="src">Singh 2026, p.1</span></p>
+<figure class="fig figure"><img src="../assets/img/d05/insert-points.svg" alt="센서·증폭기 → ADC → MCU → 무선 사슬. A는 센서와 ADC 사이(아날로그 전처리, 사건 때만 ADC·MCU를 깨움), B는 센서 자체(자극이 곧 device의 이온 분포를 바꿈)" class="figure-img"><figcaption><b>그림 13.</b> 이온 device가 들어갈 두 자리. (Claude가 그림, 모식도)</figcaption></figure>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/ZY-HrRGCQ4w?start=0&amp;rel=0" title="영상: What is a microcontroller? ft. Raspberry Pi Pico" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:00–2:18, 약 2분 · 전체 4.5분, 영어).</b> Raspberry Pi(공식 채널), "What is a microcontroller? ft. Raspberry Pi Pico". <b>볼 이유:</b> MCU가 실물로 무엇인지 본다. 0:00 'What is a microcontroller'에서 개념, 1:12 'Exploring onboard features'에서 칩 하나에 processor·메모리·입출력이 다 들어 있는 모습을 본다. 3:26 이후는 프로그래밍 방법이라 건너뛴다. <b>보고 답할 질문:</b> 영상의 보드에서 아날로그 입력(ADC)과 processor는 같은 칩 안에 있나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
 <div class="quiz" data-day="d05" data-set="2-chain"></div>
 </section>
 <section id="s-energy-model" class="level4">
 <h4 class="anchored" data-anchor-id="s-energy-model">2-2. 한 번의 에너지 × 1초당 횟수: 평균 전력을 세는 법</h4>
-<p><strong>왜 필요한가.</strong> 전지로 며칠을 버텨야 하는 패치에서 묻는 것은 "평균적으로 1초에 몇 J을 쓰나", 즉 <strong>평균 전력</strong>입니다. 그런데 부품의 spec은 "변환 한 번에 몇 nJ", "1 bit에 몇 nJ"처럼 <strong>한 번의 에너지</strong>로 주어지거나, "깨어 있을 때 몇 mW, 잠들었을 때 몇 µW"처럼 <strong>상태별 전력</strong>으로 주어집니다. 둘을 이어 주는 규칙 하나만 있으면 됩니다. 에너지 [J]와 전력 [W = J/s]의 구분은 <a href="../days/d03a.html#b-power-energy">Day 5 기초: 전력과 에너지</a>에서 봤습니다.</p>
-<p><strong>규칙.</strong> <span class="key">부품의 '한 번의 에너지'에 1초에 하는 횟수를 곱하면 평균 전력이 되고, 여기에 횟수와 상관없이 늘 나가는 대기 전력을 더합니다.</span> 단위로 쓰면 한 번의 에너지 [J/번] × 1초에 하는 횟수 [번/s] = [J/s] = 평균 전력 [W]. 예: 1,000번/s × 1 nJ = 1,000 × 10⁻⁹ J/s = 10⁻⁶ W = 1 µW.</p>
-<p><strong>그림 전에 두 말.</strong> MCU는 내부 시계(클록)가 똑딱일 때마다 한 걸음씩 일합니다. 이 똑딱 하나를 이 자료에서는 <strong>박자</strong>(clock cycle, <a href="../days/d01a.html#b-clock">Day 1 기초: 클록</a>)라 부르고, 8 MHz면 1초에 800만 박자입니다. 그래서 '샘플 하나 처리에 몇 박자'를 알면 깨어 있어야 하는 시간과 에너지를 셀 수 있습니다. 그리고 1초 가운데 깨어 일하는 시간의 비율을 <strong>듀티 사이클</strong>(duty cycle)이라 합니다.</p>
-<p><strong>무엇을 볼지.</strong> 그림 3(a)는 MCU 하나가 5 ms 동안 무엇을 하는지 시간축에 그린 것입니다. 샘플이 1 ms마다 오면 MCU는 깨어나(위로 솟은 칸) 그 샘플을 처리하고 다시 잠듭니다(바닥). 솟은 칸 하나의 넓이가 <strong>한 번의 에너지</strong>, 1초에 솟는 횟수가 <strong>횟수</strong>, 바닥의 높이가 <strong>대기 전력</strong>입니다. 아래 ①–④의 계산을 그림과 함께 따라가세요. 그림 3(b)는 같은 방식으로 네 고리 각각의 '한 번의 에너지'를 모은 것으로, (a)의 계산을 마친 뒤 아래 '네 고리의 한 번의 에너지'에서 봅니다.</p>
-<figure class="fig figure"><img src="../assets/img/d05/fig2c-energy-model.svg" alt="a: MCU가 1 ms마다 약 8.3 µs 깨어 2.4 mW로 일하고 나머지는 1.2 µW로 잠드는 시간축. 한 번의 에너지 2.4 mW × 8.3 µs ≈ 20 nJ, 일하는 몫 20 nJ × 1,000/s = 20 µW, 깨어 있는 비율 0.83%, 대기 몫 약 1.2 µW, 평균 약 21 µW. b: 네 고리의 한 번의 에너지 가정값(ADC 1 nJ, MCU 20 nJ, 무선 50 nJ/bit)과 근거(1.7 nJ, 0.3 nJ/박자 × 67박자, 16 nJ/bit와 실측 400 nJ/bit)" class="figure-img"><figcaption><b>그림 3.</b> 평균 전력 = 한 번의 에너지 × 1초당 횟수 + 대기 전력. <b>(a)</b> MCU 하나의 5 ms와 그 아래 계산 ①–④(세로축은 눈금 없음: 동작 2.4 mW와 잠 1.2 µW는 2,000배 차이라 같은 눈금에 그릴 수 없다. 깨어 있는 칸의 폭도 과장했다). <b>(b)</b> 네 고리의 '한 번의 에너지'(먼저 (a)를 따라간 뒤 본다). 파란 숫자가 그림 4 모형의 가정값, 검은 숫자가 그 자릿수의 근거(데이터시트·실측으로 Claude가 계산)다. 8 MHz 클록과 '샘플 하나에 약 67박자'는 예제 가정이다. (Claude가 계산해 그림)</figcaption></figure>
-<p><span id="ex-mcu-duty"></span><strong>그림 3(a)를 따라 계산하기.</strong> 숫자는 저전력 MCU 하나(TI MSP430FR5969)의 데이터시트 값입니다. 동작 전류 약 100 µA/MHz, 잠든 상태(LPM3) 0.4 µA, 전원 1.8–3.6 V <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://www.ti.com/document-viewer/MSP430FR5969-SP/datasheet/features-slas7049120">TI MSP430FR5969-SP 데이터시트 특징 목록</a></span>. 칩마다 값은 다릅니다.</p>
+<p><strong>왜 필요한가.</strong> 전지로 며칠을 버텨야 하는 패치에서 묻는 것은 "평균적으로 1초에 몇 J을 쓰나", 즉 <strong>평균 전력</strong>(average power)입니다. 그런데 부품의 spec(사양: 제조사가 적어 둔 성능 숫자)은 "변환 한 번에 몇 nJ"처럼 <strong>한 번의 에너지</strong>로 주어지거나, "깨어 있을 때 몇 mW, 잠들었을 때 몇 µW"처럼 <strong>상태별 전력</strong>으로 주어집니다. 둘을 이어 주는 규칙 하나만 있으면 됩니다.</p>
+<p><strong>규칙.</strong> ★ <span class="key">부품의 '한 번의 에너지'에 1초에 하는 횟수를 곱하면 평균 전력이 되고, 여기에 횟수와 상관없이 늘 나가는 대기 전력을 더합니다.</span> 단위로 쓰면 [J/번] × [번/s] = [J/s] = [W]입니다. 예: 1,000번/s × 1 nJ = 1,000 nJ/s = 1 µW.</p>
+<p><strong>박자와 duty cycle.</strong> MCU는 내부 시계(clock)가 똑딱일 때마다 한 걸음씩 일합니다. 이 똑딱 하나를 이 자료에서는 <strong>박자</strong>(clock cycle)라 부르고, 8 MHz면 1초에 800만 박자입니다. 그래서 '샘플 하나 처리에 몇 박자'를 알면 깨어 있는 시간과 에너지를 셀 수 있습니다. 1초 가운데 깨어 일하는 시간의 비율은 <strong>duty cycle</strong>(듀티 사이클)이라 합니다.</p>
+<p><strong>무엇을 볼지.</strong> 그림 14는 MCU 하나가 5 ms 동안 하는 일입니다. 샘플이 1 ms마다 오면 MCU는 잠깐 깨어나(솟은 칸) 처리하고 다시 잠듭니다(바닥). ★ 솟은 칸 하나의 넓이가 <strong>한 번의 에너지</strong>, 1초에 솟는 횟수가 <strong>횟수</strong>, 바닥의 높이가 <strong>대기 전력</strong>입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/fig2c-energy-model.svg" alt="MCU가 1 ms마다 약 8.3 µs 깨어 2.4 mW로 일하고 나머지 시간은 1.2 µW로 잠드는 시간축 모식도" class="figure-img"><figcaption><b>그림 14.</b> MCU 하나의 5 ms. 동작 2.4 mW와 잠 1.2 µW는 2,000배 차이라 세로축 눈금 없이 그렸고, 깨어 있는 칸의 폭도 과장했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="ex-mcu-duty"></span><strong>MCU 하나의 평균 전력 계산하기.</strong> 숫자는 저전력 MCU 하나(TI MSP430FR5969)의 데이터시트 값입니다. <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://www.ti.com/lit/ds/symlink/msp430fr5969.pdf">TI MSP430FR5969 데이터시트</a></span> 칩마다 값은 다릅니다.</p>
+<p><strong>먼저 데이터시트 숫자 읽기.</strong></p>
+<ul>
+<li><strong>동작 전류 '100 µA/MHz'</strong>: 시계를 1 MHz(1초에 100만 박자)로 돌릴 때 전류가 100 µA 든다는 뜻입니다. 시계를 8 MHz로 돌리면 8배인 800 µA = 0.8 mA입니다.</li>
+<li><strong>잠든 상태(LPM3) 전류</strong>: 0.4 µA.</li>
+<li><strong>전원 전압</strong>: 3 V로 둡니다.</li>
+</ul>
+<p><strong>전류를 전력으로.</strong> 전력 = 전류 × 전압입니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>상태</th>
+<th>전류</th>
+<th>× 전압</th>
+<th>= 전력</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>깨어 있을 때 (8 MHz)</td>
+<td>0.8 mA</td>
+<td>3 V</td>
+<td><strong>2.4 mW</strong></td>
+</tr>
+<tr class="even">
+<td>잠들었을 때</td>
+<td>0.4 µA</td>
+<td>3 V</td>
+<td><strong>1.2 µW</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>박자 하나의 에너지.</strong> 깨어 있으면 1초에 2.4 mJ을 쓰고(2.4 mW = 2.4 mJ/s), 그 1초에 박자가 800만 번 있습니다. ★ <span class="key">그래서 박자 하나 = 2.4 mJ ÷ 8,000,000 = <strong>0.3 nJ</strong>입니다.</span> <span class="tag tag-calc">계산</span> 시계를 다른 빠르기로 돌려도 이 값은 거의 같습니다. 전류와 박자 수가 같은 비율로 변하기 때문입니다.</p>
+<p><strong>이제 그림 14를 따라 네 걸음.</strong></p>
 <div class="stepper">
 <div class="step">
-<p><b>준비: 상태별 전력.</b> 3 V·8 MHz(1초에 800만 박자)로 돌리면 100 µA/MHz × 8 MHz = 0.8 mA, × 3 V ≈ <b>2.4 mW</b>(깨어 있을 때). 잠들면 0.4 µA × 3 V ≈ <b>1.2 µW</b> [계산]. 박자 하나의 에너지는 100 µA/MHz × 3 V를 1초당 박자 수로 나눈 0.3 mW ÷ 10⁶/s = <b>0.3 nJ</b>이다 [계산].</p>
-</div>
-<div class="step">
-<p><b>① 한 번의 에너지.</b> 샘플 하나를 거르고 문턱과 비교하는 데 약 67박자가 든다고 두자(가정). 67박자 ÷ 8 MHz ≈ 8.3 µs 동안 깨어 있으므로, 2.4 mW × 8.3 µs ≈ <b>20 nJ</b>. 같은 값을 박자로 세면 0.3 nJ × 67 ≈ 20 nJ이다.</p>
+<p><b>① 한 번의 에너지.</b> 샘플 하나를 거르고 문턱과 비교하는 데 약 67박자가 든다고 둡니다 <span class="tag tag-assume">가정</span>. 0.3 nJ × 67 ≈ <b>20 nJ</b>입니다. (시간으로 보면 67박자 ÷ 8 MHz ≈ 8.3 µs 동안 2.4 mW로 일한 것과 같습니다.)</p>
 </div>
 <div class="step">
 <p><b>② 일하는 몫.</b> 샘플이 1초에 1,000번 오므로 20 nJ × 1,000/s = 20,000 nJ/s = <b>20 µW</b>.</p>
 </div>
 <div class="step">
-<p><b>③ 깨어 있는 비율.</b> 1초 가운데 깨어 있는 시간은 8.3 µs × 1,000 = 8.3 ms, 즉 <b>약 0.83%</b>다. 이것이 듀티 사이클이다. 나머지 약 99.2%는 잠들어 있다.</p>
+<p><b>③ Duty cycle.</b> 1초 가운데 깨어 있는 시간은 8.3 µs × 1,000 = 8.3 ms, 즉 <b>약 0.83%</b>입니다. 나머지 약 99.2%는 잠들어 있습니다.</p>
 </div>
 <div class="step">
-<p><b>④ 대기 몫과 합계.</b> 잠든 동안의 몫은 1.2 µW × 99.2% ≈ 1.2 µW. 평균 전력 ≈ 20 + 1.2 ≈ <b>21 µW</b>. 일하는 몫은 횟수에 비례하고, 대기 몫은 횟수와 거의 무관하게 바닥으로 남는다. 샘플이 드물어 일하는 몫이 1 µW 아래로 내려가면, 평균 전력은 대기 몫이 정한다.</p>
+<p><b>④ 대기 몫과 합계.</b> 잠든 동안의 몫은 1.2 µW × 99.2% ≈ 1.2 µW. ★ 평균 전력 ≈ 20 + 1.2 ≈ <b>21 µW</b>. 일하는 몫은 횟수에 비례하고, 대기 몫은 횟수와 거의 무관하게 바닥으로 남습니다.</p>
 </div>
 </div>
-<p><strong>새 이름 둘.</strong> 잠든 상태처럼 아무 일이 없어도 나가는 전력이 <strong>대기 전력</strong>(standby power)이고, 앞 접힌 상자 식의 <span class="math inline">\(P_{\text{static}}\)</span>(횟수와 상관없이 바닥으로 남는 전력)에 해당합니다. 그리고 첫 고리인 센서·증폭기처럼 신호를 놓치지 않으려고 <strong>잠들지 않고 늘 켜 두는</strong> 동작을 <strong>always-on</strong>(상시 대기)이라 부릅니다. always-on 부분의 전력은 횟수와 상관없이 1초 내내 나가므로, '한 번의 에너지 × 횟수'가 아니라 그 전력 [W]을 그대로 더합니다.</p>
-<p><strong>네 고리의 한 번의 에너지(그림 3(b)).</strong> 같은 방식으로 다른 고리의 자릿수를 잡습니다.</p>
+<p><strong>대기 전력과 always-on.</strong> 잠든 MCU처럼 아무 일이 없어도 나가는 전력이 <strong>대기 전력</strong>(standby power)입니다. 그리고 센서·증폭기처럼 신호를 놓치지 않으려고 잠들지 않고 늘 켜 두는 동작을 <strong>always-on</strong>이라 부릅니다. ★ <span class="key">Always-on 부분의 전력은 횟수와 상관없이 1초 내내 나가므로, '한 번의 에너지 × 횟수'가 아니라 그 전력 [W]을 그대로 더합니다.</span></p>
+<p><strong>네 부품의 '한 번의 에너지'.</strong> 같은 방식으로 다른 부품의 자릿수를 잡습니다. 아래 계산에는 오른쪽 열의 둥근 값을 씁니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>부품</th>
+<th>한 번의 일</th>
+<th>근거 (데이터시트·실측으로 계산)</th>
+<th>계산에 쓰는 값</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ADC</td>
+<td>변환 1번</td>
+<td>145 µA × 3 V × 약 3.9 µs ≈ 1.7 nJ</td>
+<td><strong>1 nJ</strong></td>
+</tr>
+<tr class="even">
+<td>MCU</td>
+<td>샘플 1개 처리(거르기·문턱 비교)</td>
+<td>0.3 nJ/박자 × 약 67박자 ≈ 20 nJ</td>
+<td><strong>20 nJ</strong></td>
+</tr>
+<tr class="odd">
+<td>무선</td>
+<td>1 bit 송신</td>
+<td>칩이 전파를 내는 순간만: 약 16 nJ · 준비와 연결 유지까지 넣은 실측: 약 400 nJ</td>
+<td><strong>50 nJ</strong></td>
+</tr>
+<tr class="even">
+<td>센서·증폭기</td>
+<td>늘 켜짐</td>
+<td>세 설계에 똑같이 들어가므로 비교에서는 뺌</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<details class="fold">
+<summary>
+근거를 자세히 (데이터시트·논문 값)
+</summary>
 <ul>
-<li><strong>② ADC 변환 1번.</strong> 변환 한 번의 에너지 = 동작 중 전력 × 변환에 걸린 시간. 같은 MCU 안의 12 bit ADC는 3.0 V에서 동작 전류 145 µA(전형값)이고, 변환에 내부 시계 14박자(약 2.9 µs)와 입력 전압을 붙잡아 두는 표본 시간 약 1 µs가 든다 <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://www.ti.com/lit/ds/symlink/msp430fr5969.pdf">데이터시트 SLAS704G, Table 5-22·5-23</a></span>. 0.145 mA × 3 V × 약 3.9 µs ≈ 1.7 nJ [계산: 내부 기준전압 회로의 전류는 넣지 않음]. 모형에서는 <strong>1 nJ</strong>로 둡니다.</li>
-<li><strong>③ MCU 샘플 1개.</strong> 위의 20 nJ(0.3 nJ/박자 × 약 67박자)는 거르기·비교 정도의 간단한 처리에 해당합니다 <span class="tag tag-interp">해석</span>. 신경망을 돌리면 박자 수가 훨씬 늘어납니다(뒤의 '진짜 경쟁자' 구간에서 계산). 모형에서는 <strong>20 nJ</strong>.</li>
-<li><strong>④ 무선 1 bit.</strong> 두 가지 자릿수가 있습니다. 칩 하나가 전파를 내는 순간만 보면, Nordic nRF52832(저전력 블루투스 칩)는 3 V에서 0 dBm(dBm은 1 mW를 기준으로 한 로그 단위, 0 dBm = 1 mW) 송신 중 5.3 mA를 쓰고 1초에 100만 bit(1 Mbps)를 전파에 싣습니다 <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://www.nordicsemi.com/-/media/Software-and-other-downloads/Product-Briefs/nRF52832-product-brief.pdf">제품 안내서 v2.4</a></span>. 5.3 mA × 3 V ÷ 10⁶ bit/s ≈ 16 nJ/bit [계산]. 한편 저전력 무선 두 종류를 실제 칩으로 잰 연구는 IEEE 802.15.4(ZigBee 계열)가 연속 전송에서 보낸 데이터 1 J당 최대 약 300 KB이고, 연결 한 번 단위로 비교하면 Bluetooth Low Energy가 802.15.4보다 약 2.5배 낫다고 보고합니다 <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://doi.org/10.1109/WCNCW.2012.6215496">Siekkinen et al. 2012, IEEE WCNCW, pp.232–237</a></span>. 300 KB/J를 비트당으로 바꾸면 1 J ÷ (300,000 × 8 bit) ≈ 0.4 µJ/bit = 약 400 nJ/bit [계산]. 16 nJ/bit는 전파를 내는 순간만 센 값이고, 400 nJ/bit는 준비·덧붙는 비트·연결 유지까지 들어간 실측이라 더 큽니다. 모형에서는 그 사이의 <strong>50 nJ/bit</strong>로 둡니다.</li>
-<li><strong>① 센서·증폭기.</strong> always-on이라 W로 셉니다. 2-3의 세 경우에 똑같이 들어가므로 비교 모형에서는 뺍니다. 실제 크기는 Day 31–32에서 상용 칩 값으로 다룹니다.</li>
+<li><strong>ADC.</strong> 같은 MCU 안의 12 bit ADC는 3 V에서 동작 전류 145 µA(전형값)이고, 변환 한 번에 내부 시계 14박자(약 2.9 µs)와 입력 전압을 붙잡아 두는 시간 약 1 µs가 듭니다. <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://www.ti.com/lit/ds/symlink/msp430fr5969.pdf">데이터시트 Table 5-22·5-23</a></span> 0.145 mA × 3 V × 3.9 µs ≈ 1.7 nJ. <span class="tag tag-calc">계산</span></li>
+<li><strong>무선, 전파를 내는 순간만.</strong> Nordic nRF52832(저전력 블루투스 칩)는 3 V에서 송신 중 5.3 mA를 쓰고 1초에 100만 bit를 전파에 싣습니다. <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://www.nordicsemi.com/-/media/Software-and-other-downloads/Product-Briefs/nRF52832-product-brief.pdf">제품 안내서 v2.4</a></span> 5.3 mA × 3 V ÷ 1,000,000 bit/s ≈ 16 nJ/bit. <span class="tag tag-calc">계산</span></li>
+<li><strong>무선, 실측.</strong> 저전력 무선 칩을 실제로 잰 연구는 IEEE 802.15.4(ZigBee 계열)가 에너지 1 J로 최대 약 300 KB를 보냈다고 보고합니다. <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://doi.org/10.1109/WCNCW.2012.6215496">Siekkinen et al. 2012, IEEE WCNCW</a></span> 1 J ÷ (300,000 × 8 bit) ≈ 400 nJ/bit. <span class="tag tag-calc">계산</span> 준비 시간·덧붙는 bit·연결 유지까지 들어가 칩 값보다 큽니다.</li>
+<li>그래서 무선은 둘 사이의 50 nJ/bit로 둡니다. <span class="tag tag-assume">가정</span></li>
 </ul>
-<p><strong>식으로 모으면.</strong> 기호를 먼저 정합니다. 샘플링률 <span class="math inline">\(f_s\)</span> [S/s], 샘플당 비트 수 <span class="math inline">\(b\)</span> [bit], 변환 한 번의 에너지 <span class="math inline">\(E_{ADC}\)</span> [J], 샘플 하나를 처리하는 에너지 <span class="math inline">\(E_{MCU}\)</span> [J], 1 bit를 보내는 에너지 <span class="math inline">\(E_{radio}\)</span> [J/bit], 1초에 보내는 비트 수 <span class="math inline">\(R\)</span> [bit/s], 늘 켜진 부분과 잠든 부품의 전력을 모은 <span class="math inline">\(P_{\text{standby}}\)</span> [W].</p>
+</details>
+<p><strong>평균 전력의 식.</strong> 위 규칙을 기호로 한 줄에 적으면 이렇습니다.</p>
 <p><span class="math display">\[P_{\text{avg}} \approx f_s E_{ADC} + f_s E_{MCU} + R\,E_{radio} + P_{\text{standby}}\]</span></p>
-<p>(<span class="math inline">\(P_{\text{avg}}\)</span>는 평균 전력.) 앞의 세 항은 모두 "1초당 횟수 × 한 번의 에너지"이고 단위는 [번/s] × [J] = [W]입니다. 원시 데이터를 다 보내면 <span class="math inline">\(R = f_s \times b\)</span>이고, 사건만 보내면 <span class="math inline">\(R\)</span> = 초당 사건 수 × 사건당 비트 수입니다. 마지막 항은 횟수와 무관하게 늘 나가는 몫입니다.</p>
+<ul>
+<li><span class="math inline">\(f_s\)</span>: sampling rate [번/s]. <span class="math inline">\(E_{ADC}\)</span>, <span class="math inline">\(E_{MCU}\)</span>: 변환 1번, 샘플 1개 처리의 에너지 [J].</li>
+<li><span class="math inline">\(R\)</span>: 1초에 보내는 bit 수 [bit/s]. <span class="math inline">\(E_{radio}\)</span>: 1 bit 송신의 에너지 [J/bit].</li>
+<li><span class="math inline">\(P_{\text{standby}}\)</span>: 늘 켜진 부분과 잠든 부품의 전력 [W].</li>
+</ul>
+<p>앞의 세 항은 모두 "1초당 횟수 × 한 번의 에너지"이고, 마지막 항만 횟수와 무관합니다.</p>
 </section>
 <section id="s-three-cases" class="level4">
 <h4 class="anchored" data-anchor-id="s-three-cases">2-3. 세 가지 설계 비교: 사슬의 어디를 끊나</h4>
-<p><strong>이름 둘.</strong> 센서 노드의 처리를 어디서 하느냐에 따라 두 말이 쓰입니다. <strong>엣지 컴퓨팅</strong>(edge computing)은 데이터를 보내기 전에 노드 안(주로 MCU)에서 처리해 <strong>송신</strong>(무선 고리)을 줄이는 것이고, <strong>in-sensor computing</strong>은 센서 자체나 바로 옆에서 처리해 <strong>ADC·MCU로 가는 데이터</strong>까지 줄이는 것입니다(센서 바로 옆이면 near-sensor라고도 부릅니다). 어느 고리가 전력을 지배하느냐에 따라 끊을 곳이 다릅니다.</p>
-<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/rzyutax4uCs?start=0&amp;rel=0" title="영상: Neuromorphic Sensors for In-Sensor Computing" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–3:05, 약 3분, 영어).</b> PolyU Science(홍콩이공대학 공식 채널), "[FAST Research Excellence] Neuromorphic Sensors for In-Sensor Computing" (2021). <b>볼 이유:</b> 바로 위의 "in-sensor computing"을 한 연구실의 실제 device로 본다. 설명란에 따르면 Chai Yang 교수 팀의 광전 저항 메모리(ORRAM)가 빛을 감지하면서 그 자리에서 기억·전처리까지 해, 뒤의 영상 인식이 빨라지고 에너지가 준다는 내용이다. 0:21 'Problem Statement'가 앞에서 본 센서 노드 사슬의 문제와 같은 말이다. <b>보고 답할 질문:</b> 이 센서는 센서 → ADC → MCU → 무선 사슬에서 어느 고리를 줄이나(송신, ADC, MCU)? 영상이 내세우는 이득은 무엇과 비교한 것인가(기준선)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
-<p><strong>세 가지 설계.</strong> 같은 심전도 패치(1,000 S/s × 12 bit, 이상 박동 사건은 초당 2번, 사건 하나에 16 bit라고 가정)를 세 가지로 만듭니다.</p>
+<p><strong>엣지 컴퓨팅과 in-sensor computing.</strong> 처리를 어디서 하느냐에 따라 두 말이 쓰입니다.</p>
 <ul>
-<li><strong>A. 원시 데이터를 전부 보냄</strong>(처리는 클라우드에서).</li>
+<li><strong>엣지 컴퓨팅</strong>(edge computing): 데이터를 보내기 전에 노드 안(주로 MCU)에서 처리해 <strong>무선 송신</strong>을 줄입니다.</li>
+<li><strong>In-sensor computing</strong>: 센서 자체나 바로 옆에서 처리해 <strong>ADC·MCU가 하는 일</strong>까지 줄입니다. 센서 바로 옆이면 near-sensor라고도 부릅니다.</li>
+</ul>
+<p>어느 부품이 전력을 지배하느냐에 따라 끊을 곳이 다릅니다.</p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/rzyutax4uCs?start=0&amp;rel=0" title="영상: Neuromorphic Sensors for In-Sensor Computing" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–3:05, 약 3분, 영어).</b> PolyU Science(홍콩이공대학 공식 채널), "[FAST Research Excellence] Neuromorphic Sensors for In-Sensor Computing" (2021). <b>볼 이유:</b> in-sensor computing을 한 연구실의 실제 device로 본다. 설명란에 따르면 Chai Yang 교수 팀의 광전 저항 메모리(ORRAM)가 빛을 감지하면서 그 자리에서 기억·전처리까지 해, 뒤의 영상 인식이 빨라지고 에너지가 준다는 내용이다. <b>보고 답할 질문:</b> 이 센서는 센서 → ADC → MCU → 무선 가운데 어느 부품의 일을 줄이나? 영상이 내세우는 이득은 무엇과 비교한 것인가(기준선)? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
+<p><strong>세 가지 설계.</strong> 같은 심전도 패치(1,000 S/s × 12 bit, 이상 박동 사건은 1초에 2번, 사건 하나에 16 bit라고 가정)를 세 가지로 만듭니다.</p>
+<ul>
+<li><strong>A. Raw signal을 전부 보냄</strong>(처리는 클라우드에서).</li>
 <li><strong>B. 엣지 처리</strong>: MCU가 매 샘플을 처리해 사건만 보냄.</li>
-<li><strong>C. in-sensor(near-sensor) 전처리</strong>: 센서 바로 뒤의 아날로그 전처리 device가 연속 전압을 always-on으로 지켜보다가, 문턱을 넘는 사건이 생길 때만 ADC·MCU에 '깨어나라' 신호를 보냄(그 밖의 시간에 ADC·MCU는 잠듦).</li>
+<li><strong>C. Near-sensor 전처리</strong>: 센서 바로 뒤의 아날로그 전처리 device가 연속 전압을 always-on으로 지켜보다가, 문턱을 넘는 사건이 생길 때만 ADC·MCU를 깨움(그 밖의 시간에 ADC·MCU는 잠듦).</li>
 </ul>
 <div class="predict">
-<p>A에서 ADC·MCU·무선 가운데 어느 고리가 평균 전력의 대부분을 차지할까요? 아래 그림을 보기 전에, '평균 전력 = 한 번의 에너지 × 1초당 횟수'와 한 번의 에너지(ADC 변환 1번 1 nJ, MCU 샘플 1개 20 nJ, 무선 1 bit 50 nJ)만으로 짐작해 보세요.</p>
+<p>A에서 ADC·MCU·무선 가운데 어느 부품이 평균 전력의 대부분을 차지할까요? 한 번의 에너지(ADC 1 nJ, MCU 20 nJ, 무선 1 bit 50 nJ)와 1초당 횟수만으로 짐작해 보세요.</p>
 </div>
-<p><strong>무엇을 볼지.</strong> 그림 4(a)의 네 상자는 앞에서 본 센서 노드의 네 고리(센서·증폭기, ADC, MCU, 무선)이고, 그림 4(b)의 세 막대가 A·B·C의 평균 전력입니다. 가로축은 로그 눈금(한 칸이 10배: 1 µW → 10 µW → 100 µW → 1 mW, <a href="../days/d01a.html#b-log-axis">Day 1 기초: 로그 축</a>)이라, 막대 길이 차이 한 칸이 10배 차이입니다. A→B에서 줄어든 고리와 B→C에서 줄어든 고리가 각각 무엇인지 보세요.</p>
-<figure class="fig figure"><img src="../assets/img/d05/fig2-edge-energy-chain.svg" alt="센서→ADC→MCU→무선의 사슬과 세 시나리오의 전력(로그 막대): 원시 데이터 전부 송신 621 µW, MCU 처리 후 사건만 송신 23 µW, 아날로그 전처리로 사건마다만 변환·처리 3 µW" class="figure-img"><figcaption><b>그림 4.</b> 센서 노드의 에너지 사슬과 세 설계(모형 계산, 가정값). <b>(a)</b> 그림 2의 네 고리. <b>(b)</b> 세 시나리오의 평균 전력이고, 가로축은 로그 눈금(한 칸이 10배: 1 µW → 10 µW → 100 µW → 1 mW)이다. A→B는 송신을, B→C는 매 샘플의 ADC·MCU를 줄인다. 가정값은 그림 3(b)의 데이터시트·실측값으로 자릿수만 맞춘 것이고, C의 "device 1 µW"는 임의값이다. 센서·증폭기 전력과 잠든 동안의 대기 전력은 넣지 않았다. (Claude가 계산해 그림)</figcaption></figure>
-<p><span id="ex-three-cases"></span><strong>그림을 따라 계산하기.</strong> 2-2의 식 <span class="math inline">\(P_{\text{avg}} \approx f_s E_{ADC} + f_s E_{MCU} + R\,E_{radio} + P_{\text{standby}}\)</span>에 넣습니다. (<span class="math inline">\(f_s\)</span> = 샘플링률 1,000/s, <span class="math inline">\(E_{ADC}\)</span> = 변환 1번의 에너지, <span class="math inline">\(E_{MCU}\)</span> = 샘플 1개 처리의 에너지, <span class="math inline">\(R\)</span> = 1초에 보내는 비트 수, <span class="math inline">\(E_{radio}\)</span> = 1 bit 송신의 에너지, <span class="math inline">\(P_{\text{standby}}\)</span> = 늘 나가는 전력.)</p>
+<p><strong>무엇을 볼지.</strong> 그림 15(b)의 세 막대가 A·B·C의 평균 전력입니다. 가로축은 로그 눈금(한 칸이 10배: 1 µW → 10 µW → 100 µW → 1 mW)이라, 막대 길이 차이 한 칸이 10배 차이입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/fig2-edge-energy-chain.svg" alt="센서→ADC→MCU→무선의 사슬과 세 설계의 전력(로그 막대): raw signal 전부 송신 621 µW, MCU 처리 후 사건만 송신 23 µW, 아날로그 전처리로 사건마다만 변환·처리 3 µW" class="figure-img"><figcaption><b>그림 15.</b> 세 설계의 평균 전력(모형 계산, 가정값). C의 "device 1 µW"는 임의값이고, 센서·증폭기 전력과 잠든 동안의 대기 전력은 넣지 않았다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="ex-three-cases"></span><strong>세 설계의 평균 전력 계산하기.</strong> 규칙은 하나입니다. 부품마다 (1초에 하는 횟수) × (한 번의 에너지)를 구해 더합니다.</p>
+<p>★ 헷갈리기 쉬운 것은 무선입니다. <span class="key">무선의 '한 번'은 1 bit라서, 1초에 보내는 bit 수를 먼저 셉니다.</span></p>
 <ul>
-<li><strong>A.</strong> ADC 1,000/s × 1 nJ = 1 µW, MCU 1,000/s × 20 nJ = 20 µW, 송신 1,000 × 12 = 12,000 bit/s × 50 nJ = 600 µW. 송신이 거의 전부라 합계 621 µW.</li>
-<li><strong>B.</strong> 송신은 2 × 16 = 32 bit/s × 50 nJ = 1.6 µW로 줄고 ADC·MCU 21 µW가 남아 약 23 µW(A의 약 27분의 1).</li>
-<li><strong>C.</strong> 매 샘플의 ADC·MCU가 사라지고 사건 때만 일합니다. 전처리 device 1 µW(always-on이라 <span class="math inline">\(P_{\text{standby}}\)</span> 항, 임의 가정) + 사건 2개 × (1 + 20) nJ ≈ 0.04 µW + 송신 1.6 µW ≈ 2.6 µW, 반올림해 3 µW(B의 약 9분의 1).</li>
+<li>A는 raw signal을 다 보냅니다: 1초에 1,000 샘플 × 샘플당 12 bit = <strong>12,000 bit/s</strong>.</li>
+<li>B와 C는 사건만 보냅니다: 1초에 사건 2개 × 사건당 16 bit = <strong>32 bit/s</strong>.</li>
 </ul>
-<p><strong>모형이 넣지 않은 것.</strong> 숫자는 자릿수 가정이고, 근거는 그림 3(b)에 모았습니다. 무선 50 nJ/bit가 실측(약 400 nJ/bit) 쪽에 가까우면 A의 송신 몫은 더 커집니다 [계산]. 그리고 이 모형은 (1) 센서·증폭기 전력(세 경우 같다고 봄)과 (2) 부품이 잠든 동안의 대기 전력을 뺐습니다. (2)를 넣어 봅니다. 그림 3(a)에서 본 MCU의 잠든 몫 약 1.2 µW를 B와 C 모두에 더하면 B ≈ 24 µW, C ≈ 4 µW가 되어, 차이는 약 9배에서 약 6배로 줄어듭니다 [계산]. C처럼 일을 줄일수록 대기 전력이 바닥을 정한다(일을 줄여도 대기 전력은 남는다)는 교훈이 여기서도 나옵니다.</p>
-<p><strong>핵심.</strong> <span class="key">송신이 지배하면 엣지 처리가, 매 샘플의 ADC·MCU가 지배하면 in-sensor 전처리가 효과를 냅니다.</span> 그리고 일하는 몫을 줄일수록 남는 것은 always-on 부분과 잠든 부품의 대기 전력입니다.</p>
-<p><span id="s-always-on"></span><strong>Always-on을 숫자로.</strong> 사건이 아주 드문 노드라면 평균 전력은 거의 대기 전력입니다. 숫자로: 대기 1 µW인 노드에 사건이 하루 100번 오고 사건마다 10 µJ을 쓴다면, 사건 몫은 100 × 10 µJ ÷ 86,400 s ≈ 0.012 µW로 대기 1 µW의 약 1%입니다 [계산, 가정값]. 그래서 이런 노드에서는 사건당 에너지를 더 줄이기보다 대기 전력(<span class="math inline">\(P_{\text{static}}\)</span>)을 줄이는 것이 평균 전력을 정합니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>설계</th>
+<th>ADC (1 nJ/번)</th>
+<th>MCU (20 nJ/번)</th>
+<th>무선 (50 nJ/bit)</th>
+<th>늘 켜진 전처리</th>
+<th>합계</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>1,000번/s → 1 µW</td>
+<td>1,000번/s → 20 µW</td>
+<td>12,000 bit/s → <strong>600 µW</strong></td>
+<td>–</td>
+<td><strong>621 µW</strong></td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>1,000번/s → 1 µW</td>
+<td>1,000번/s → 20 µW</td>
+<td>32 bit/s → 1.6 µW</td>
+<td>–</td>
+<td><strong>약 23 µW</strong></td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>2번/s → 0.002 µW</td>
+<td>2번/s → 0.04 µW</td>
+<td>32 bit/s → 1.6 µW</td>
+<td>1 µW <span class="tag tag-assume">가정</span></td>
+<td><strong>약 3 µW</strong></td>
+</tr>
+</tbody>
+</table>
+<p>한 칸을 풀어 보면, A의 무선 = 12,000 bit/s × 50 nJ/bit = 600,000 nJ/s = 600 µW입니다(1,000 nJ/s = 1 µW). C의 합계는 0.002 + 0.04 + 1.6 + 1 ≈ 2.6 µW라 반올림해 3 µW입니다. <span class="tag tag-calc">계산</span></p>
+<p>★ <span class="key">A → B에서는 무선이 600 µW → 1.6 µW로 줄고(보내는 bit 수가 375분의 1), B → C에서는 매 샘플의 ADC·MCU(21 µW)가 사건 때만 일하게 줄어듭니다.</span></p>
+<p><strong>모형이 넣지 않은 것.</strong> 무선을 실측 쪽(약 400 nJ/bit)으로 잡으면 A의 송신 몫은 더 커집니다. 그리고 이 모형은 센서·증폭기 전력(세 설계에서 같다고 봄)과, 부품이 잠든 동안의 대기 전력을 뺐습니다. 뒤의 것을 넣어 봅니다. MCU가 잠든 동안 쓰는 1.2 µW(데이터시트 값)를 B와 C에 더하면 B ≈ 24 µW, C ≈ 4 µW가 되어, 차이가 약 9배에서 약 6배로 줄어듭니다. <span class="tag tag-calc">계산</span> 일을 줄일수록 대기 전력이 바닥을 정한다는 교훈이 여기서도 나옵니다.</p>
+<p><strong>핵심.</strong> ★ <span class="key">송신이 지배하면 엣지 처리가, 매 샘플의 ADC·MCU가 지배하면 in-sensor 전처리가 효과를 냅니다.</span> 일하는 몫을 줄일수록 남는 것은 always-on 부분과 잠든 부품의 대기 전력입니다.</p>
+<p><span id="s-always-on"></span><strong>Always-on을 숫자로.</strong> 사건이 아주 드문 노드라면 평균 전력은 거의 대기 전력입니다. 대기 1 µW인 노드에 사건이 하루 100번 오고 사건마다 10 µJ을 쓴다면, 사건 몫은 100 × 10 µJ ÷ 86,400 s ≈ 0.012 µW로 대기 1 µW의 약 1%입니다. <span class="tag tag-calc">계산</span> ★ <span class="key">이런 노드에서는 사건당 에너지보다 대기 전력을 줄이는 것이 평균 전력을 정합니다.</span></p>
 <div class="quiz" data-day="d05" data-set="2-check"></div>
 </section>
 <section id="s-zhong" class="level4">
 <h4 class="anchored" data-anchor-id="s-zhong">2-4. 폴더 논문의 숫자를 사슬의 눈으로 읽기</h4>
-<p>지금까지는 내가 정한 가정값으로 모형을 계산했습니다. 논문이 보고한 전력 숫자도 같은 사슬의 눈으로 읽으면, 어느 고리를 셌고 무엇과 비교했는지 물을 수 있습니다. 심전도 패치 예를 이해한 뒤 읽는 첫 사례입니다.</p>
-<p><strong>폴더의 예.</strong> Zhong 2022(Nat. Electron.)는 휘발성 memristor(저항이 지나온 전압·전류 이력에 따라 바뀌는 2단자 device. 휘발성은 그 변화가 시간이 지나면 저절로 풀린다는 뜻, <a href="../days/d01b.html#ch-volatile">Day 2 4구간</a>) 24개를 reservoir(입력을 받아 상태로 바꾸는 고정된 부분, Phase 2의 주제)로, 비휘발 memristor 배열을 readout(상태에서 답을 꺼내는 마지막 층)으로 쓴 <strong>완전 아날로그</strong> RC 시스템으로 심전도 부정맥 검출(96.6%, 완전 디지털 RC 기준선 98.2%; 기준선은 "device 대신 무엇을 썼다면 얼마나 됐을까"를 재는 비교 대상)과 3축 가속도 제스처 분류(97.9%)를 했고, 제스처 과제에서 디지털 RC 대비 평균 정확도 손실 1.1%에 전력 99.9% 이상 절감을 주장합니다. <span class="src">Zhong 2022, p.677–678</span> 이 전력은 저자들이 "전력 추정(power estimation)"이라 부른 값이고 방법은 보충자료(SI)에 있습니다. <span class="src">Zhong 2022, p.679</span> 저자들은 두 요인을 듭니다. 완전 아날로그 신호 전달로 ADC 오버헤드(본 계산 외에 덧붙는 변환 비용)를 없앤 것과, 큰 순환 신경망(recurrent neural network: 자기 출력을 다음 시점의 입력으로 다시 받아 과거를 기억하는 신경망. 디지털 RC의 reservoir가 이런 망이다)을 소수의 병렬 device로 대체한 것. <span class="src">Zhong 2022, p.679</span> 그리고 "극히 낮은 전력과 하드웨어 비용을 요구하는 엣지 컴퓨팅"을 응용 분야로 적습니다. <span class="src">Zhong 2022, p.672</span></p>
-<figure class="fig paper figure"><img src="../assets/img/papers/zhong2022-fig5g.png" alt="Zhong 2022 Fig. 5g: 네 제스처와 평균에서 디지털 RC(파랑)와 아날로그 RC(빨강)의 정확도 막대(평균 99.0 vs 97.9%), 오른쪽에 제스처당 전력 29,400 µW vs 22 µW(로그축, ×1,000 이상)" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41928-022-00838-3" target="_blank"><i>Nat. Electron.</i> 2022, 5, 672–681</a>, Fig. 5g, p.678. 볼 것: 왼쪽 초록 영역은 네 제스처(G1–G4)와 평균의 정확도(%), 파랑이 디지털 RC, 빨강이 아날로그 RC. 오른쪽 분홍 영역은 **제스처 하나당 전력**(µW, 로그축: 한 칸이 10배)이다. 29,400 → 22 µW로 1,000배 넘게 줄었다는 것이 주장이지만, 이 두 막대가 무엇을 포함해 센 값인지(디지털 RC는 어떤 하드웨어에서 돌렸는지, 아날로그 쪽에 MCU·전원 모듈·측정 PC가 들어갔는지)는 Supplementary Table 1에 있고 폴더에는 없다 [미확인]. 정확도 축이 80%부터 시작해 차이가 커 보이는 것도 확인하라. 정확도는 실험 측정값, 전력은 저자들의 추정값(p.679, 방법은 SI)이다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p><span id="s-zhong-limits"></span><strong>적용 조건.</strong> 이 수치를 읽을 때 세 가지를 봅니다.</p>
+<p>지금까지는 내가 정한 가정값으로 계산했습니다. 논문이 보고한 전력 숫자도 같은 눈으로 읽으면, 어느 부품을 셌고 무엇과 비교했는지 물을 수 있습니다.</p>
+<p><strong>폴더의 예: Zhong 2022(Nat. Electron.).</strong></p>
+<ul>
+<li><strong>무엇을 만들었나.</strong> 휘발성 memristor(volatile memristor: 저항이 지나온 전압·전류 이력에 따라 바뀌었다가 시간이 지나면 저절로 돌아오는 2단자 device) 24개를 reservoir로, 비휘발 memristor 배열을 readout으로 쓴 <strong>완전 아날로그</strong> RC 시스템입니다.</li>
+<li><strong>무엇을 했나.</strong> 심전도 부정맥 검출 96.6%(같은 알고리즘을 숫자로 돌린 디지털 RC는 98.2%), 3축 가속도 제스처 분류 97.9%. <span class="src">Zhong 2022, p.677–678</span></li>
+<li>★ <strong>무엇을 주장하나.</strong> <span class="key">제스처 과제에서 디지털 RC보다 정확도는 평균 1.1% 낮지만, 전력은 99.9% 넘게 줄었다(제스처당 29,400 → 22 µW).</span> <span class="src">Zhong 2022, p.678</span></li>
+<li><strong>왜 줄었다고 하나.</strong> 저자들이 든 이유는 둘입니다. 신호를 끝까지 아날로그로 전달해 ADC 비용을 없앴고, 큰 recurrent neural network(순환 신경망: 자기 출력을 다음 입력으로 다시 받아 과거를 기억하는 신경망)를 device 몇 개로 대체했다. <span class="src">Zhong 2022, p.679</span></li>
+<li>★ <strong>주의.</strong> <span class="key">이 전력은 측정값이 아니라 저자들의 추정값이고, 본문에는 두 숫자에 어떤 부품이 들어갔는지(디지털 RC를 어떤 칩에서 돌렸는지 등)가 나오지 않습니다.</span></li>
+</ul>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2022-fig5g.png" alt="Zhong 2022 Fig. 5g: 네 제스처와 평균에서 디지털 RC(파랑)와 아날로그 RC(빨강)의 정확도 막대(평균 99.0 vs 97.9%), 오른쪽에 제스처당 전력 29,400 µW vs 22 µW(로그축, ×1,000 이상)" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41928-022-00838-3" target="_blank"><i>Nat. Electron.</i> 2022, 5, 672–681</a>, Fig. 5g, p.678. <b>볼 것:</b> 왼쪽 초록 영역은 네 제스처(G1–G4)와 평균의 정확도(%)로, 파랑이 디지털 RC, 빨강이 아날로그 RC다. 오른쪽 분홍 영역은 제스처 하나당 전력(µW, 로그축: 한 칸이 10배)이다. 정확도 축이 80%부터 시작해 차이가 커 보이는 것도 확인하라. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p><span id="s-zhong-limits"></span><strong>이 숫자를 읽을 때 볼 세 가지.</strong></p>
 <ol type="1">
-<li><strong>기준선의 종류.</strong> 98.2%와 99.0%는 "완전 디지털 RC"(같은 알고리즘을 숫자 계산으로 돌린 것)이지 "MCU + 작은 신경망"이 아닙니다. 그리고 "device를 빼고 원시 입력 + readout"이라는 기준선은 본문에 없습니다. <span class="tag tag-interp">해석</span></li>
-<li><strong>시스템 경계</strong>(system boundary: 전력을 셀 때 어느 부품까지 넣었는지의 테두리. 위 세 설계 모형(그림 4)은 센서·증폭기와 대기 전력을 경계 밖에 두었다). 같은 논문의 시스템 구성에는 전원 모듈과 <strong>MCU</strong>가 들어 있습니다. MCU는 제어 신호를 만들고 데이터 전송을 맡습니다. <span class="src">Zhong 2022, p.674</span> 즉 "완전 아날로그 RC"에도 디지털 제어기가 옆에 있고, 22 µW가 그것을 포함하는지는 폴더에서 확인할 수 없습니다.</li>
-<li><strong>과제의 성격.</strong> 심전도와 제스처는 모두 <strong>실시간 시계열, 배치 1, 분류(근사 허용)</strong>입니다. 사다리의 '실시간으로 하나씩'·'근사 허용'·'<span class="math inline">\(\tau\)</span> 정합' 질문을 통과하는 과제를 골랐기 때문에 이득이 난 것이고, 다른 과제에서도 같은 이득이 난다고 볼 근거는 이 논문에 없습니다. <span class="tag tag-interp">해석</span></li>
+<li><strong>기준선의 종류.</strong> 98.2%와 99.0%는 "완전 디지털 RC"(같은 알고리즘을 숫자 계산으로 돌린 것)이지 "MCU + 작은 신경망"이 아닙니다. "device를 빼고 raw 입력 + readout"이라는 기준선도 본문에 없습니다. <span class="tag tag-interp">해석</span></li>
+<li><strong>시스템 경계</strong>(system boundary: 전력을 셀 때 어느 부품까지 넣었는지의 테두리). 앞의 세 설계 계산도 센서·증폭기와 대기 전력을 경계 밖에 두었습니다. ★ <span class="key">같은 논문의 시스템 구성에는 전원 모듈과 MCU가 들어 있습니다(MCU가 제어 신호와 데이터 전송을 맡음).</span> <span class="src">Zhong 2022, p.674</span> 즉 "완전 아날로그 RC"에도 디지털 제어기가 옆에 있고, 22 µW가 그것을 포함하는지는 본문으로 알 수 없습니다.</li>
+<li><strong>과제의 성격.</strong> 심전도와 제스처는 모두 실시간 시계열, batch 1, 분류(근사 허용)입니다. 사다리의 '실시간으로 하나씩'·'근사를 견딤'·'τ가 맞음'을 통과하는 과제를 골랐기 때문에 이득이 난 것이고, 다른 과제에서도 같은 이득이 난다는 근거는 이 논문에 없습니다. <span class="tag tag-interp">해석</span></li>
 </ol>
 <details class="deep">
 <summary>
 심화 · always-on의 다른 길: 전원 없이 늘 켜 두기(Kim 2026)
 </summary>
-<p>앞에서 always-on 부분은 대기 전력이 평균 전력을 정한다고 봤습니다. Kim 2026(Nat. Sensors)은 센서와 memristor만으로 "디지털 회로나 외부 전원 없이" 다중 감각 입력의 스파이크 부호화(spike encoding: 세기를 짧은 전압 펄스, 즉 스파이크의 시점으로 바꾸기, <a href="../days/d03a.html#b-ann-snn">Day 5 기초 7</a>)와 비지도 학습(unsupervised learning: 정답을 알려 주지 않고 입력이 함께 오는 규칙성만으로 연결 세기를 바꾸는 학습)을 하는 자가 구동(self-powered) 아날로그 시스템을 초록에서 주장합니다. <span class="src">Kim 2026, p.535</span> "외부 전원 없이"는 환경 자극이 정보원이자 에너지원이 된다는 뜻입니다(예: 광전지·압전 센서가 만든 전압을 그대로 device에 건다). <span class="src">Kim 2026, p.536–538</span> 그러니 이 방식은 입력이 있을 때만 동작하고, learning rule도 device 근처의 신호만으로 돌아가야 합니다. 이것이 사다리의 질문 2(희소·대기 전력)와, learning rule이 device 근처 신호만으로 돌아야 한다는 가소성(plasticity) 조건에 해당한다는 것은 <span class="tag tag-interp">해석</span>입니다. <span class="prov">본문은 p.536–538의 몇 문장 외에는 대조하지 않음</span></p>
+<p>Always-on 부분은 대기 전력이 평균 전력을 정한다고 했습니다. Kim 2026(Nat. Sensors)은 센서와 memristor만으로 "디지털 회로나 외부 전원 없이" 여러 감각 입력의 spike encoding(세기를 짧은 전압 펄스의 시점으로 바꾸기)과 unsupervised learning(정답 없이 함께 오는 입력의 규칙성만으로 연결 세기를 바꾸는 학습)을 하는 self-powered 아날로그 시스템을 주장합니다. <span class="src">Kim 2026, p.535</span></p>
+<p>"외부 전원 없이"는 환경 자극이 정보원이자 에너지원이 된다는 뜻입니다(예: 광전지·압전 센서가 만든 전압을 그대로 device에 건다). <span class="src">Kim 2026, p.536–538</span> ★ <span class="key">그러니 이 방식은 입력이 있을 때만 동작하고, learning rule도 device 근처의 신호만으로 돌아가야 합니다.</span> 이것이 '희소하고 대기 전력이 작은가'라는 질문에 대한 극단적인 답이라는 것은 <span class="tag tag-interp">해석</span>입니다.</p>
 </details>
 <div class="numbers">
 <ul>
-<li>Zhong 2022: 부정맥 96.6% vs 디지털 RC 98.2% <span class="src">Zhong 2022, p.677</span>; 제스처 평균 손실 1.1%, 전력 99.9% 절감(29,400 → 22 µW/제스처, 추정 방법은 SI) <span class="src">Zhong 2022, p.678, Fig. 5g</span>.</li>
-<li>그림 4의 가정값과 근거(그림 3(b)): ADC 1 nJ/변환(데이터시트 예 약 1.7 nJ), MCU 20 nJ/샘플(0.3 nJ/박자 × 약 67박자), 무선 50 nJ/bit(칩 송신 중 약 16 nJ/bit, 실측 약 400 nJ/bit) [계산, 근거값의 링크는 2-2].</li>
-<li>Roadmap의 엣지 BIC(생체 모방 컴퓨팅) 예: "Tianmouc" 비전 칩이 최대 10,000 fps(초당 프레임), 동적 범위 130 dB(한 장면에서 함께 담을 수 있는 가장 밝은 빛과 가장 어두운 빛의 비를 로그로 적은 값. 영상 센서에서는 20 × log₁₀(비)로 적으므로 130 dB는 약 300만 배 [계산]), 적응형 대역폭(내보내야 하는 데이터 양) 90% 절감 <span class="src">Roadmap 2026, p.8136</span>. 이것은 비전 칩이지 이온 device가 아니다.</li>
+<li>Zhong 2022: 부정맥 96.6% vs 디지털 RC 98.2% <span class="src">Zhong 2022, p.677</span>; 제스처 평균 손실 1.1%, 전력 99.9% 절감(29,400 → 22 µW/제스처, 저자 추정) <span class="src">Zhong 2022, p.678, Fig. 5g</span>.</li>
+<li>세 설계 계산의 가정값: ADC 1 nJ/변환(데이터시트 예 약 1.7 nJ), MCU 20 nJ/샘플(0.3 nJ/박자 × 약 67박자), 무선 50 nJ/bit(칩 송신 중 약 16 nJ/bit, 실측 약 400 nJ/bit). <span class="tag tag-calc">계산</span></li>
+<li>Roadmap의 엣지 BIC(생체 모방 컴퓨팅) 예: "Tianmouc" 비전 칩이 최대 10,000 fps, dynamic range 130 dB(한 장면에 함께 담는 가장 밝은 빛과 가장 어두운 빛의 비, 약 300만 배 <span class="tag tag-calc">계산</span>), 내보내는 데이터 양 90% 절감. <span class="src">Roadmap 2026, p.8136</span> 이것은 비전 칩이지 이온 device가 아니다.</li>
 </ul>
 </div>
 <div class="terms-box">
 <dl class="terms">
 <dt>
-Edge / 센서 노드 / MCU (복습)
+Edge / 센서 노드 / MCU
 </dt>
 <dd>
-데이터가 생기는 자리 / 그 자리의 작은 장치 / 그 안의 범용 제어 칩. <a href="#b-sensor-node" class="recall">기초 1</a>
+데이터가 생기는 현장 쪽 가장자리 / 그 자리의 작은 장치 / 그 안의 범용 제어 칩. <a href="#b-sensor-node" class="recall">센서 노드와 엣지</a>
+</dd>
+<dt>
+Raw signal (원시 신호)
+</dt>
+<dd>
+센서 전압을 숫자로 바꾸기만 하고 아무 처리도 하지 않은 값의 줄.
 </dd>
 <dt>
 In-sensor computing
 </dt>
 <dd>
-센서 자체 또는 바로 옆에서 처리를 끝내 ADC·메모리·프로세서로 가는 데이터를 줄이는 방식 <span class="src">Singh 2026, p.1</span>.
+센서 자체 또는 바로 옆에서 처리를 끝내 ADC·메모리·processor로 가는 데이터를 줄이는 방식 <span class="src">Singh 2026, p.1</span>.
 </dd>
 <dt>
-Always-on (상시 대기)
+Always-on
 </dt>
 <dd>
-잠들지 않고 늘 켜 둔 채 입력을 감시하다 사건이 오면 반응. 그 전력은 횟수와 무관하게 나가므로, 사건이 드물면 평균 전력을 정한다. <a href="#s-energy-model" class="recall">2-2</a>
+잠들지 않고 늘 켜 둔 채 입력을 감시하다 사건이 오면 반응. 그 전력은 횟수와 무관하게 나가므로, 사건이 드물면 평균 전력을 정한다. <a href="#s-energy-model" class="recall">평균 전력을 세는 법</a>
 </dd>
 <dt>
-듀티 사이클 (duty cycle)
+Duty cycle
 </dt>
 <dd>
-전체 시간 가운데 깨어 일하는 시간의 비율. 그림 3(a)의 MCU는 약 0.83%. <a href="#ex-mcu-duty" class="recall">2-2</a>
+전체 시간 가운데 깨어 일하는 시간의 비율. 1 ms마다 8.3 µs 깨는 MCU는 약 0.83%. <a href="#ex-mcu-duty" class="recall">MCU 계산</a>
 </dd>
 <dt>
-기준선 (baseline)
+Baseline (기준선)
 </dt>
 <dd>
-"device가 없었다면 얼마나 잘 됐을까"를 재는 비교 대상. 종류가 여럿이다: 같은 알고리즘의 디지털 구현, 원시 입력 + 같은 readout, MCU + 작은 신경망. Day 10의 주제.
+"device가 없었다면 얼마나 잘 됐을까"를 재는 비교 대상. 같은 알고리즘의 디지털 구현, raw 입력 + 같은 readout, MCU + 작은 신경망 등 여러 종류가 있다.
 </dd>
 </dl>
 </div>
 <div class="think">
-<p>내 device가 "센서"인 동시에 "전처리기"라면(piezoionic, electrostatic sensor처럼 자극이 곧 이온 분포를 바꾸는 경우), 센서 → ADC → MCU → 무선 사슬에서 ADC 앞에 서는 셈입니다. 그때 ADC는 사건당 몇 번 깨어나야 하나요? 내 device의 출력(전위? 전류?)을 읽는 데 어떤 회로가 필요하고, 그 회로의 대기 전력은 얼마일까요? 모르는 항목을 적습니다.</p>
+<p>내 device가 센서이면서 전처리기라면 사슬은 어떻게 달라질까요? Piezoionic이나 electrostatic sensor처럼 압력 같은 자극이 곧 device 속 이온 분포를 바꾸는 경우를 떠올려 보세요. 세 가지를 생각합니다. (1) ADC는 1초에 몇 번 깨어나야 하나? (2) Device 출력을 읽으려면 어떤 회로가 필요한가? (3) 그 회로가 늘 켜져 있을 때의 대기 전력은?</p>
 <details class="think-answer">
 <summary>
 생각 정리 보기
 </summary>
-<p>판단 절차:</p>
+<p><strong>먼저, '이온 분포가 바뀐다'가 왜 중요한가.</strong> 보통 센서는 '지금 값'만 냅니다. 압력을 빼면 출력도 바로 0으로 돌아가고, 과거는 뒤의 ADC·MCU가 숫자로 저장해 기억합니다. 반면 압력으로 이온이 한쪽으로 몰리는 소재는, 압력을 뺀 뒤에도 이온이 제자리로 돌아가는 데 τ만큼 시간이 걸립니다. 그래서 출력에 최근 자극의 이력이 섞여 남습니다.</p>
+<p>예: 0.2 s 간격으로 두 번 누르면, 앞의 이온이 아직 덜 돌아온 상태에서 두 번째 자극이 더해져 두 번째 출력이 첫 번째보다 커집니다. [해석, 예시] ★ <span class="key">센서가 '최근 얼마나 자주, 세게 눌렸나'를 스스로 요약하는 셈이라, 그 요약을 얻으려고 매 샘플 ADC로 숫자를 만들어 MCU가 계산할 필요가 줄어듭니다.</span></p>
+<p><strong>(1) ADC 깨움.</strong> Device 출력(이력의 요약)이 문턱을 넘을 때만 ADC를 깨우면, 사건이 1초에 2번일 때 ADC도 1초에 2번입니다. 매 샘플 방식이면 1,000번입니다.</p>
+<p><strong>(2) 읽기 회로.</strong></p>
 <ul>
-<li>device 출력이 전위인지 전류인지, 크기가 mV인지 nA인지 적는다.</li>
-<li>그 크기를 ADC가 읽으려면 증폭기가 필요한지 본다.</li>
-<li>device가 문턱을 넘는 '사건'을 낼 때만 ADC를 깨울 수 있는지 본다.</li>
-<li>각 회로의 대기 전력을 데이터시트나 측정으로 채운다.</li>
+<li>출력이 <strong>전압</strong>(mV 자릿수)이면: 작은 전압을 키우는 증폭기 + 문턱 비교기(comparator: 두 전압을 비교해 넘으면 1을 내는 회로).</li>
+<li>출력이 <strong>전류</strong>(nA 자릿수)이면: 먼저 전류를 전압으로 바꾸는 TIA(transimpedance amplifier)가 필요하고, 그 뒤에 비교기.</li>
+<li>내 device가 이온 전류를 내는지, 열린 회로 전압을 내는지부터 확인합니다.</li>
 </ul>
-<p><span class="tag tag-interp">해석</span> 예: 출력이 mV 전위이고 사건이 초당 2번이면 ADC 깨움은 초당 2번(매 샘플 1,000번이 아님)입니다. 필요한 회로는 증폭기와 문턱 비교 회로 정도이고, 그 대기 전력은 아직 모르는 항목으로 적습니다.</p>
+<p><strong>(3) 대기 전력.</strong> 위 회로들은 늘 켜져 있어야 합니다. ★ <span class="key">그 합이 MCU가 잠든 전력(약 1.2 µW)보다 작아야 이 설계의 이득이 남습니다.</span> 저전력 비교기는 1 µA보다 훨씬 작은 전류로 도는 제품이 있지만 <span class="tag tag-unverified">미확인</span>, 증폭기까지 합친 값은 내 device 신호의 크기에 달려 있어 지금은 모르는 항목입니다.</p>
+<p><strong>판단.</strong> 이 세 숫자를 채우면, 앞의 세 설계 비교의 C(near-sensor 전처리) 줄에 내 device를 넣어 평균 전력을 계산할 수 있습니다.</p>
 </details>
 </div>
 <div class="quiz" data-day="d05" data-set="2-end"></div>
 <div class="keypoints">
 <ul>
-<li>센서 노드 = 센서 → ADC → MCU → 무선. 엣지 처리는 송신을, in-sensor 전처리는 ADC·MCU로 가는 데이터를 줄인다. 어느 고리가 지배하느냐가 효과를 정한다(그림 4: 621 → 23 → 3 µW) [모형: 가정값은 데이터시트·실측으로 자릿수만 맞춤, 센서·대기 전력 제외].</li>
-<li>한 번의 일에 드는 에너지의 자릿수: ADC 변환 약 1–2 nJ, MCU 박자당 약 0.3 nJ, 무선 1 bit 약 16 nJ(송신 순간)–400 nJ(실측). 평균 전력 = Σ(1초당 횟수 × 한 번의 에너지) + 늘 나가는 대기·always-on 전력. 예: MCU 20 nJ × 1,000/s = 20 µW, 듀티 사이클 0.83%, 잠든 몫 1.2 µW [계산, 데이터시트·실측 기반].</li>
-<li>Zhong 2022는 실시간 시계열·배치 1·분류 과제에서 디지털 RC 대비 1.1% 손실, 전력 99.9% 절감을 주장한다 <span class="src">Zhong 2022, p.678–679</span>. 기준선이 디지털 RC이고, 시스템에 MCU가 있으며, 전력은 추정값이고 그 방법은 SI에 있다 <span class="tag tag-unverified">미확인</span>.</li>
-<li>always-on은 사건이 드물면 대기 전력이 곧 평균 전력이다. 자가 구동 시스템(Kim 2026)은 환경 자극을 에너지원으로 쓰므로 입력이 있을 때만 동작한다 <span class="tag tag-interp">해석</span>.</li>
-<li>쉬어 가기: 다음 구간은 "그 자리에 이미 있는 것"과의 비교다.</li>
+<li>센서 노드 = 센서 → ADC → MCU → 무선. 엣지 처리는 송신을, in-sensor 전처리는 ADC·MCU의 일을 줄인다. 어느 부품이 지배하느냐가 효과를 정한다(세 설계: 621 → 23 → 3 µW, 모형 계산).</li>
+<li>한 번의 일의 에너지 자릿수: ADC 변환 약 1–2 nJ, MCU 박자당 약 0.3 nJ, 무선 1 bit 약 16 nJ(송신 순간)–400 nJ(실측). 평균 전력 = Σ(1초당 횟수 × 한 번의 에너지) + 늘 나가는 대기·always-on 전력.</li>
+<li>이온 device의 자리는 센서 뒤·ADC 앞(near-sensor) 또는 센서 자체(in-sensor)다. 이득은 ADC·MCU가 사건 때만 일하는 데서 나오고, 대가는 늘 켜진 device·읽기 회로의 대기 전력이다.</li>
+<li>Zhong 2022는 디지털 RC 대비 1.1% 손실, 전력 99.9% 절감을 주장한다 <span class="src">Zhong 2022, p.678–679</span>. 기준선이 디지털 RC이고, 시스템에 MCU가 있으며, 전력은 저자의 추정값이다.</li>
 </ul>
 </div>
 </section>
@@ -1012,54 +1214,83 @@ Always-on (상시 대기)
 <h3 class="anchored" data-anchor-id="ch-competitor">학습 구간 3. 진짜 경쟁자: 저전력 MCU + 작은 신경망</h3>
 <div class="goal">
 <p><strong>상황.</strong> 어떤 뉴로모픽 논문 서론이 "GPU보다 10⁶배 효율적"이라고 씁니다. 그런데 센서 패치 안에는 GPU가 없습니다. 이 비교는 정말 같은 저울에 올릴 수 있을까요?</p>
-<p><strong>왜 지금?</strong> 앞에서 센서 노드의 전력을 세는 법을 익혔습니다. 이제 그 자리에 이미 들어 있는 경쟁자(MCU + 작은 신경망)의 전력을 같은 방법으로 세어 비교해야 합니다.</p>
-<p><strong>어디에 쓰이나?</strong> 논문의 "에너지 절감" 주장이 어떤 기준선과 비교한 것인지 읽고, 내 연구 동기의 비교 대상을 정하는 데 씁니다.</p>
+<p><strong>왜 지금?</strong> 앞에서 센서 노드의 전력을 세는 법을 익혔습니다. 이제 그 자리에 이미 들어 있는 경쟁자의 전력을 같은 방법으로 셉니다.</p>
+<p><strong>어디에 쓰이나?</strong> 논문의 "에너지 절감"이 어떤 기준선과 비교한 것인지 읽고, 내 연구 동기의 비교 대상을 정하는 데 씁니다.</p>
 <p><strong>끝나면 할 수 있는 것.</strong> 비교 대상이 GPU가 아니라 MCU + 작은 신경망임을 설명한다. 항목별로 누가 유리한지 조건을 붙여 말하고, 공정한 비교의 형식을 적는다.</p>
 </div>
-<p><strong>직관.</strong> 뉴로모픽 논문의 서론은 데이터센터용 그래픽 칩(GPU, <a href="../days/d03a.html#b-parallel">Day 5 기초 3</a>)의 수백 W와 비교하지만, 센서 노드에 GPU를 넣는 사람은 없습니다. 그 자리에 실제로 들어가는 것은 <a href="#b-sensor-node" class="recall">MCU</a>이고, 요즘 MCU는 작은 신경망을 돌릴 수 있습니다(이 분야를 TinyML이라 부릅니다 <span class="prov">Warden &amp; Situnayake, <i>TinyML</i>, O'Reilly 2020, ISBN 9781492052043에서 서지만 확인</span>). 그러니 "뉴로모픽 device가 GPU보다 효율적"은 뉴로모픽의 적합한 자리에서는 의미 없는 비교이고, <span class="key">물어야 할 것은 "같은 과제를 MCU + 작은 신경망으로 하면 전력·정확도·비용이 얼마인가"입니다.</span> Liang의 "디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다" <span class="src">Liang 2024, p.202</span>는 디지털 RC와의 비교를 요구하는 문장이고, 이 자료는 그 요구를 엣지에 실제로 들어가는 MCU + 작은 신경망까지 넓혀 읽습니다. <span class="tag tag-interp">해석</span> Kudithipudi가 보통 컴퓨터의 성능을 "가장 작은 마이크로컨트롤러부터 서버급 프로세서까지" 한 척도로 재듯 뉴로모픽의 규모도 그렇게 재자고 한 것 <span class="src">Kudithipudi 2025, p.802</span>도, 뉴로모픽을 MCU급 장치와 같은 저울에 올릴 수 있다는 뜻으로 읽을 수 있습니다. <span class="tag tag-interp">해석</span></p>
-<p><span id="s-mcu-nn"></span><strong>MCU에서 작은 신경망이 도는 장면.</strong> MCU에는 곱셈기가 하나 또는 몇 개뿐이라, 신경망의 '입력 × weight를 더하기'(<a href="../days/d02a.html#ch-mvm">Day 3 3구간</a>)를 한 번에 하나씩 차례로 합니다. 곱하고 더하기 한 번(MAC, multiply-accumulate, <a href="../days/d02a.html#ex-mac-count">Day 3 3-3</a>)마다 기억장치에서 weight와 입력을 꺼내 곱셈기에 넣고 결과를 누적하는 데 몇–수십 박자가 듭니다. 숫자로 따라가 봅니다. weight 1,000개짜리 작은 망이면 MAC 1,000번이고, MAC 하나에 10박자로 잡으면 [가정] 1만 박자입니다. 박자당 0.3 nJ(<a href="#ex-mcu-duty" class="recall">2-2 그림 3(a)</a>에서 데이터시트 값으로 계산)이면 <a href="#b-sensor-node" class="recall">inference</a>(학습이 끝난 망으로 새 입력의 답을 내는 일) 한 번에 3 µJ입니다. 2-2와 같은 규칙(한 번의 에너지 × 1초당 횟수)으로, 1초에 한 번 판정하면 평균 3 µW이고, 그 사이에 잠든 동안의 대기 약 1.2 µW가 더해집니다 [계산]. 8 MHz라면 1만 박자는 1.25 ms이므로 듀티 사이클은 약 0.13%입니다 [계산]. 2-3의 설계 C(센서 곁 전처리, 약 3 µW)와 같은 자릿수입니다. 그래서 '뉴로모픽 device는 µW로 동작한다'는 말은 이 숫자와 같은 과제·같은 조건에서 비교해야 뜻이 생깁니다. <span class="tag tag-interp">해석</span></p>
-<p><strong>weight는 어디에 있나.</strong> weight 1,000개를 하나에 1 byte(8 bit)로 두면 1 kB, 4 byte로 두어도 4 kB입니다(<a href="../days/d02a.html#b-bit">Day 3 기초: 바이트</a>). 2-2의 MCU는 칩 안에 전원이 꺼져도 값이 남는 메모리(FRAM) 64 KB와, 전원이 있는 동안 값을 들고 있는 빠른 작업용 메모리(SRAM) 2 KB를 가지므로 <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://www.ti.com/product/MSP430FR5969">TI MSP430FR5969 제품 페이지</a>, 2026-10-27 열람</span> 이 정도 weight는 칩 안에 다 들어갑니다. 즉 이 경쟁자는 배치 1이어도 판단마다 칩 밖 메모리에서 weight를 가져오지 않습니다(<a href="../days/d02b.html#rt-baseline">Day 4 5-5</a>). 남는 이동은 칩 안 메모리와 곱셈기 사이의 짧은 이동이고, 그 비용은 위의 '박자당 0.3 nJ'에 이미 들어 있습니다. 뉴로모픽 device가 '데이터 이동을 줄인다'는 장점을 내세우려면, 이 짧은 이동과 비교해야 합니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>직관.</strong> 뉴로모픽 논문의 서론은 GPU(graphics processing unit: 곱셈기 수천 개를 한꺼번에 돌리는 데이터센터용 칩)의 수백 W와 비교하곤 합니다. 하지만 센서 노드에 GPU를 넣는 사람은 없습니다. 그 자리에 실제로 들어가는 것은 MCU이고, 요즘 MCU는 작은 신경망을 돌립니다(이 분야를 TinyML이라 부릅니다 <span class="prov">Warden &amp; Situnayake, TinyML, 2020</span>).</p>
+<p>★ <span class="key">그러니 물어야 할 것은 "GPU보다 몇 배"가 아니라, "같은 과제를 MCU + 작은 신경망으로 하면 전력·정확도·비용이 얼마인가"입니다.</span></p>
+<p>Liang의 "디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다" <span class="src">Liang 2024, p.202</span>는 디지털 RC와의 비교를 요구하는 문장이고, 이 자료는 그 요구를 엣지에 실제로 들어가는 MCU + 작은 신경망까지 넓혀 읽습니다. <span class="tag tag-interp">해석</span> Kudithipudi가 보통 컴퓨터를 "가장 작은 마이크로컨트롤러부터 서버급 processor까지" 한 척도로 재듯 뉴로모픽의 규모도 그렇게 재자고 한 것 <span class="src">Kudithipudi 2025, p.802</span>도, 뉴로모픽을 MCU급 장치와 같은 저울에 올릴 수 있다는 뜻으로 읽을 수 있습니다. <span class="tag tag-interp">해석</span></p>
+<p><span id="s-mcu-nn"></span><strong>MCU에서 작은 신경망이 도는 장면.</strong></p>
+<p><strong>먼저 '작은 신경망'이 무엇인지.</strong> 신경망(neural network)은 "입력 숫자마다 weight를 곱해 더하고, 그 합을 다음 층으로 넘기기"를 몇 층 되풀이하는 계산 규칙입니다. 이름에 '신경'이 붙었지만, MCU에서는 그냥 곱셈과 덧셈을 하는 프로그램입니다.</p>
+<ul>
+<li>'작은'은 weight가 수백–수천 개라 MCU의 칩 안 메모리에 다 들어간다는 뜻입니다. 데이터센터의 큰 신경망은 수십억 개입니다.</li>
+<li>예: 박동 하나의 숫자 200개를 넣고, weight 1,000개로 계산해 '정상/이상' 점수를 내는 분류기.</li>
+<li>★ <span class="key">뉴로모픽 device 배열은 이 '곱해서 더하기'를 전류의 물리(Ohm의 법칙과 전류의 합)로 한 번에 하려는 것이고, MCU는 같은 일을 숫자 계산으로 하나씩 합니다.</span></li>
+</ul>
+<p><strong>하나씩 차례로.</strong> MCU에는 곱셈기가 하나(또는 몇 개)뿐입니다. 그래서 weight 1,000개짜리 망이면 "메모리에서 weight와 입력을 꺼내 → 곱하고 → 누적 합에 더하기"를 1,000번 되풀이합니다. 이 한 묶음을 <strong>MAC</strong>(multiply-accumulate)이라 부릅니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/mcu-nn.svg" alt="MCU 칩 안에서 메모리의 weight와 입력을 하나씩 곱셈기에 넣고 누적 합에 더하기를 1,000번 되풀이하는 모습. 아래 계산: MAC 1번 약 10박자 × 0.3 nJ = 3 nJ, × 1,000번 = 3 µJ, 1초에 1번이면 3 µW" class="figure-img"><figcaption><b>그림 16.</b> MCU에서 작은 신경망이 도는 장면. (Claude가 그림, 박자 수는 가정)</figcaption></figure>
+<p><strong>에너지를 한 줄씩.</strong></p>
+<ol type="1">
+<li>MAC 1번에 약 10박자가 든다고 둡니다(메모리에서 꺼내기·곱하기·더하기). <span class="tag tag-assume">가정</span></li>
+<li>박자 하나는 0.3 nJ(앞의 MSP430 데이터시트 계산)이므로, MAC 1번 ≈ 3 nJ.</li>
+<li>MAC 1,000번이면 판정 한 번(inference: 학습이 끝난 망에 새 입력을 넣어 답을 내는 일)에 3 µJ.</li>
+<li>1초에 한 번 판정하면 평균 3 µW. 그 사이 잠든 동안의 1.2 µW를 더하면 약 4 µW. <span class="tag tag-calc">계산</span></li>
+<li>걸리는 시간은 1만 박자 ÷ 8 MHz = 1.25 ms라, 1초 가운데 0.13%만 깨어 있습니다. <span class="tag tag-calc">계산</span></li>
+</ol>
+<p>★ <span class="key">이 값(약 4 µW)은 앞의 설계 C(센서 곁 전처리, 약 3 µW)와 같은 자릿수입니다.</span> 그래서 "뉴로모픽 device는 µW로 동작한다"는 말만으로는 이긴다고 할 수 없고, 같은 과제·같은 조건에서 이 숫자와 나란히 놓아야 뜻이 생깁니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>Weight는 어디에 있나.</strong> Weight 1,000개를 하나에 1 byte(8 bit)로 저장하면 1,000 byte = 1 kB입니다. 이 MCU는 칩 안에 64 KB 메모리(FRAM: 전원이 꺼져도 값이 남는 메모리)와 2 KB 작업용 메모리(SRAM)를 갖고 있어서 <span class="tag tag-fact">확인</span> <span class="prov"><a href="https://www.ti.com/product/MSP430FR5969">TI MSP430FR5969 제품 페이지</a></span>, weight 1 kB가 칩 안에 넉넉히 들어갑니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/weight-where.svg" alt="왼쪽: MCU 칩 하나 안에 메모리 64 KB와 weight 1 kB, 곱셈기가 있어 가져오는 길이 짧다. 오른쪽: 데이터센터 칩은 weight가 GB급이라 칩 밖 DRAM에서 먼 길로 가져온다" class="figure-img"><figcaption><b>그림 17.</b> 작은 신경망은 weight가 칩 안에, 큰 신경망은 칩 밖에 있다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>이것이 왜 중요한가.</strong></p>
+<ul>
+<li>데이터센터의 큰 신경망은 weight가 GB급이라 칩 밖 메모리(DRAM)에 두고, 계산할 때마다 가져와야 합니다. 이 먼 이동이 계산보다 비쌀 수 있습니다(memory wall).</li>
+<li>뉴로모픽이 "데이터 이동을 줄인다"고 할 때 보통 이 <strong>먼 이동</strong>을 가리킵니다.</li>
+<li>★ <span class="key">그런데 작은 신경망을 돌리는 MCU에는 이 먼 이동이 처음부터 없습니다.</span> 남는 것은 칩 안 메모리와 곱셈기 사이의 짧은 이동뿐이고, 그 비용은 이미 '박자당 0.3 nJ'에 들어 있습니다.</li>
+<li>그러니 엣지에서 뉴로모픽 device가 "이동을 줄여 이긴다"고 하려면, 이 <strong>짧고 싼 이동</strong>보다 더 아낀다는 것을 보여야 합니다. <span class="tag tag-interp">해석</span></li>
+</ul>
 <div class="quiz" data-day="d05" data-set="3-check"></div>
-<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/0fLvCezGMko?start=0&amp;rel=0" title="영상: The Future of Machine Learning is Tiny - Pete Warden (Google)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–3:11, 약 3분, 영어).</b> O'Reilly, "The Future of Machine Learning is Tiny - Pete Warden (Google)" (2019). Pete Warden은 마이크로컨트롤러용 신경망 도구(TensorFlow Lite for Microcontrollers)를 만든 Google 엔지니어로, "TinyML"이라는 흐름의 대표 인물이다. <b>볼 이유:</b> 이 구간의 "진짜 경쟁자(MCU + 작은 신경망)"를 그 진영의 사람이 직접 설명한다. 설명란의 요지는 "센서 데이터는 너무 많아 클라우드로 다 보낼 수 없으니, 기기 위에서 기계학습을 돌린다"는 것으로, 2구간의 엣지 처리와 같은 논리다. <b>보고 답할 질문:</b> 영상이 말하는 기기 위 기계학습의 장점 가운데, 아래 항목별 비교에서 MCU가 유리하다고 적힌 것(프로그램 가능성, 정밀도, 성숙도)은 무엇인가? 뉴로모픽 device가 이 사람을 설득하려면 어떤 숫자를 보여야 할까? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
-<p><strong>무엇을 볼지.</strong> 그림 5는 같은 자리에 들어갈 두 후보를 일곱 항목으로 나란히 놓은 표입니다. 왼쪽 항목 이름의 색이 '누가 유리한가'입니다(파랑: MCU, 초록: 조건이 맞을 때 뉴로모픽, 회색: 설계에 달림). 초록 항목마다 괄호 안의 조건을 함께 읽으세요.</p>
-<figure class="fig figure"><img src="../assets/img/d05/fig3-competitor.svg" alt="MCU+작은 NN과 뉴로모픽·physical reservoir computing device를 프로그램 가능성, 정밀도·재현성, 성숙도, 대기 전력, 실시간 시계열, 변환 비용, 생체·수계 환경의 일곱 항목으로 비교한 표. 앞 셋은 MCU, 뒤 셋은 조건부로 뉴로모픽이 유리" class="figure-img"><figcaption><b>그림 5.</b> 진짜 경쟁자와의 항목별 비교(조건부). 파란 항목은 MCU가, 초록 항목은 조건이 맞을 때 뉴로모픽 쪽이 유리하다. 대기 전력은 설계에 달렸다. MCU 대기 전력 예는 2-2의 데이터시트 값이고, 그 밖의 MCU 특성은 일반적 서술이다 [미확인: 폴더 밖]. (Claude가 그림, 모식도)</figcaption></figure>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/0fLvCezGMko?start=0&amp;rel=0" title="영상: The Future of Machine Learning is Tiny - Pete Warden (Google)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간: 전체 0:00–3:11, 약 3분, 영어).</b> O'Reilly, "The Future of Machine Learning is Tiny - Pete Warden (Google)" (2019). Pete Warden은 마이크로컨트롤러용 신경망 도구(TensorFlow Lite for Microcontrollers)를 만든 Google 엔지니어로, TinyML 흐름의 대표 인물이다. <b>볼 이유:</b> 진짜 경쟁자(MCU + 작은 신경망)를 그 진영의 사람이 직접 설명한다. 설명란의 요지는 "센서 데이터는 너무 많아 클라우드로 다 보낼 수 없으니, 기기 위에서 기계학습을 돌린다"는 것으로, 엣지 처리와 같은 논리다. <b>보고 답할 질문:</b> 뉴로모픽 device가 이 사람을 설득하려면 어떤 숫자를 보여야 할까? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
+<p><strong>무엇을 볼지.</strong> 그림 18은 같은 자리에 들어갈 두 후보를 일곱 항목으로 나란히 놓은 표입니다. 항목 이름의 색이 '누가 유리한가'입니다(파랑: MCU, 초록: 조건이 맞을 때 뉴로모픽, 회색: 설계에 달림).</p>
+<figure class="fig figure"><img src="../assets/img/d05/fig3-competitor.svg" alt="MCU+작은 NN과 뉴로모픽·physical reservoir computing device를 프로그램 가능성, 정밀도·재현성, 성숙도, 대기 전력, 실시간 시계열, 변환 비용, 생체·수계 환경의 일곱 항목으로 비교한 표. 앞 셋은 MCU, 뒤 셋은 조건부로 뉴로모픽이 유리" class="figure-img"><figcaption><b>그림 18.</b> 진짜 경쟁자와의 항목별 비교(조건부). MCU 대기 전력 예는 데이터시트 값이고, 그 밖의 MCU 특성은 일반적 서술이다. (Claude가 그림, 모식도)</figcaption></figure>
 <p><span id="s-compare-items"></span><strong>항목별로.</strong></p>
 <ul>
-<li><strong>프로그램 가능성.</strong> MCU는 소프트웨어(프로그램)를 바꾸면 기능이 바뀝니다. physical reservoir computing은 readout만 다시 학습하면 과제를 바꿀 수 있지만(Phase 2), reservoir의 시간척도와 비선형성은 device에 고정됩니다. 아날로그 회로는 기능을 바꾸려면 회로를 바꿔야 하는 <strong>경우가 많습니다</strong>(항상은 아닙니다. Liang이 소개한 temporal kernel처럼 device 안에 조절 손잡이를 둔 설계도 있습니다 <span class="src">Liang 2024, p.196</span>).</li>
-<li><strong>정밀도·재현성.</strong> MCU는 디지털(<a href="../days/d03a.html#b-digital-analog">Day 5 기초 1</a>)이라 비트 정확이고 device 편차가 없습니다. 아날로그 쪽은 device 편차·잡음·ADC 양자화 같은 모든 오차원을 안고 갑니다.</li>
-<li><strong>성숙도.</strong> MCU는 컴파일러(프로그램을 기계어로 바꾸는 도구)·라이브러리·공급망이 있습니다. 뉴로모픽은 Roadmap이 "성능 지표가 아직 발전 중이고, 방식이 다양해 표준화가 어려우며, 어떤 평가 기준이 적절한지 분야의 합의가 없다"고 쓰는 단계입니다 <span class="src">Roadmap 2026, p.8136</span>.</li>
-<li><strong>대기 전력.</strong> 설계에 달렸습니다. MCU 슬립 모드는 µW급입니다(예: 대기 0.4 µA × 3 V ≈ 1.2 µW, <a href="#ex-mcu-duty" class="recall">2-2</a>의 데이터시트 예) <span class="tag tag-fact">확인</span>. 반면 이온 device의 "대기"에는 바이어스(동작점을 잡으려고 걸어 두는 전압) 유지나 leak 이온 전류(신호가 없어도 조금씩 새어 흐르는 이온 전류)가 있을 수 있습니다. <span class="tag tag-interp">해석</span></li>
-<li><strong>실시간 시계열.</strong> MCU는 '최근 1초'처럼 과거 샘플을 기억 칸에 줄지어 저장해 두고(1,000 S/s면 숫자 1,000개), 새 샘플이 올 때마다 가장 오래된 것을 지우고 새것을 넣은 뒤 weight와 함께 다시 꺼내 계산합니다(데이터를 기억장치와 연산기 사이로 옮기는 일). device가 이력을 상태(예: 서서히 빠지는 이온 농도)에 담으면 그 저장·꺼내기가 줄어듭니다. 조건: <span class="math inline">\(\tau\)</span> 정합. 다만 12 bit 샘플 1,000개는 2 byte씩 약 2 kB라 위 MCU의 칩 안 메모리에 들어가므로, 줄어드는 것은 칩 안의 짧은 이동이고 그 이득의 크기는 계산해 봐야 합니다. <span class="tag tag-interp">해석</span></li>
-<li><strong>변환 비용.</strong> MCU 경로는 ADC가 필수입니다. 아날로그 경로는 다음 단계가 아날로그면 생략할 수 있습니다.</li>
-<li><strong>생체·수계·연성 환경.</strong> 4구간.</li>
+<li><strong>프로그램 가능성.</strong> MCU는 프로그램을 바꾸면 기능이 바뀝니다. Physical reservoir computing은 readout만 다시 학습하면 과제를 바꿀 수 있지만, reservoir의 시간척도와 비선형성은 device에 고정됩니다. 아날로그 회로는 기능을 바꾸려면 회로를 바꿔야 하는 경우가 많습니다(항상은 아닙니다. Device 안에 조절 손잡이를 둔 설계도 있습니다 <span class="src">Liang 2024, p.196</span>).</li>
+<li><strong>정밀도·재현성.</strong> ★ <span class="key">MCU는 디지털이라 결과가 bit 단위로 똑같이 재현되고 device 편차가 없습니다.</span> 아날로그 쪽은 device 편차·noise·ADC 눈금 오차를 모두 안고 갑니다.</li>
+<li><strong>성숙도.</strong> MCU는 컴파일러(프로그램을 기계어로 바꾸는 도구)·라이브러리·공급망이 있습니다. 뉴로모픽은 Roadmap이 "성능 지표가 아직 발전 중이고, 표준화가 어려우며, 평가 기준에 분야의 합의가 없다"고 쓰는 단계입니다. <span class="src">Roadmap 2026, p.8136</span></li>
+<li><strong>대기 전력.</strong> 설계에 달렸습니다. MCU는 잠들면 µW급입니다(0.4 µA × 3 V ≈ 1.2 µW). <span class="tag tag-fact">확인</span> 반면 이온 device의 '대기'에는 bias(동작점을 잡으려고 걸어 두는 전압) 유지나 leak 이온 전류(신호가 없어도 조금씩 새어 흐르는 전류)가 있을 수 있습니다. <span class="tag tag-interp">해석</span></li>
+<li><strong>실시간 시계열.</strong> MCU는 '최근 1초'처럼 과거 샘플을 메모리에 줄지어 저장해 두고(1,000 S/s면 숫자 1,000개), 새 샘플이 올 때마다 가장 오래된 것을 지우고 새것을 넣은 뒤 다시 꺼내 계산합니다. Device가 이력을 상태(예: 서서히 빠지는 이온 농도)에 담으면 그 저장·꺼내기가 줄어듭니다. 조건은 τ가 신호와 맞는 것입니다. 다만 12 bit 샘플 1,000개는 약 2 kB라 MCU 칩 안에 들어가므로, 줄어드는 것은 칩 안의 짧은 이동이고 그 이득의 크기는 계산해 봐야 합니다. <span class="tag tag-interp">해석</span></li>
+<li><strong>변환 비용.</strong> MCU 경로는 ADC가 필수입니다. 아날로그 경로는 다음 부품도 아날로그면 생략할 수 있습니다.</li>
+<li><strong>생체·수계·연성 환경.</strong> 아래 bio-interface 구간에서 봅니다.</li>
 </ul>
-<p><span id="s-fair-compare"></span><strong>공정한 비교의 형식.</strong> <span class="key">같은 과제, 같은 데이터, 같은 정확도 목표에서 <strong>시스템 경계를 같게</strong> 두고 전력과 지연(latency: 입력이 들어와 답이 나오기까지의 시간)을 재는 것입니다.</span> Zhong의 비교는 "디지털 RC(같은 알고리즘의 디지털 구현)"가 기준이라 알고리즘은 같지만, MCU에 최적화된 작은 신경망과 비교한 것은 아닙니다. 그 비교가 없으면 "엣지에 적합"은 아직 <span class="tag tag-hypo">가설</span>입니다. <span class="tag tag-interp">해석</span> Singh 2026(Adv. Mater. 퍼스펙티브)은 physical reservoir computing 논문에 "같은 입력 부호화·데이터 분할·readout을 쓴 참조 사례(원시 입력 기준선, 기억을 최소화한 정적 device 기준선)"를 요구하는데 <span class="src">Singh 2026, p.8</span> <span class="src">Singh 2026, p.20, Table 3</span>, MCU 비교는 그 목록 바깥의, 시스템 수준 비교입니다. Day 31–32에서 이 비교의 절차를 다룹니다.</p>
+<p><span id="s-fair-compare"></span><strong>공정한 비교의 형식.</strong> ★ <span class="key">같은 과제, 같은 데이터, 같은 정확도 목표에서 <strong>시스템 경계를 같게</strong> 두고 전력과 지연(latency: 입력이 들어와 답이 나오기까지의 시간)을 재는 것입니다.</span></p>
+<p>Zhong의 비교는 디지털 RC(같은 알고리즘의 디지털 구현)가 기준이라 알고리즘은 같지만, MCU에 최적화된 작은 신경망과 비교한 것은 아닙니다. 그 비교가 없으면 "엣지에 적합"은 아직 <span class="tag tag-hypo">가설</span>입니다. Singh 2026은 physical reservoir computing 논문에 "같은 입력 부호화·데이터 분할·readout을 쓴 참조 사례(raw 입력 기준선, 기억을 최소화한 정적 device 기준선)"를 요구하는데 <span class="src">Singh 2026, p.8</span> <span class="src">Singh 2026, p.20, Table 3</span>, MCU 비교는 그 목록 바깥의 시스템 수준 비교입니다.</p>
 <p><span id="s-myth-gpu"></span></p>
 <div class="myth">
-<p><strong>"뉴로모픽 device는 GPU보다 10⁶배 효율적이다"</strong> — 비교 대상이 맞지 않습니다. 뉴로모픽이 적합한 자리(엣지·실시간·희소)에서 경쟁자는 GPU가 아니라 MCU + 작은 신경망이고, 오늘 대조한 폴더 논문 가운데 그 비교를 완전한 형태로 제시한 것은 없습니다. GPU 비교는 데이터센터 과제에서만 뜻이 있는데, 그 과제는 사다리의 첫 질문에서 떨어집니다.</p>
+<p><strong>"뉴로모픽 device는 GPU보다 10⁶배 효율적이다"</strong> — 비교 대상이 맞지 않습니다. 뉴로모픽이 적합한 자리(엣지·실시간·희소)에서 경쟁자는 GPU가 아니라 MCU + 작은 신경망이고, 오늘 대조한 폴더 논문 가운데 그 비교를 완전한 형태로 제시한 것은 없습니다. GPU 비교는 데이터센터 과제에서만 뜻이 있는데, 그 과제는 사다리의 첫 질문('실시간으로 하나씩 오나')에서 떨어집니다.</p>
 </div>
 <div class="think">
-<p>내 응용에서 MCU + 작은 신경망으로 같은 일을 하면 어떻게 될지 구체적으로 상상해 보세요. 샘플링률은? 신경망의 weight 수는? 그 MCU가 깨어 있는 시간 비율은? 세 질문 중 하나라도 답할 수 있다면 Day 31–32의 비교를 시작할 수 있습니다.</p>
+<p>내 응용에서 MCU + 작은 신경망으로 같은 일을 하면 어떻게 될지 구체적으로 상상해 보세요. Sampling rate는? 신경망의 weight 수는? 그 MCU가 깨어 있는 시간 비율은? 셋 중 하나라도 숫자로 답할 수 있으면 비교를 시작할 수 있습니다.</p>
 <details class="think-answer">
 <summary>
 생각 정리 보기
 </summary>
-<p>세 질문을 숫자로 채우는 방법:</p>
+<p>심전도 패치로 셋을 채워 보면 이렇습니다.</p>
 <ul>
-<li>샘플링률: 내 신호에서 가장 빠른 변화를 점 2개 넘게 찍을 수 있는 횟수 (심전도 예: 1,000 S/s).</li>
-<li>weight 수: 작은 분류망이면 수백–수천 개 [해석, 가정].</li>
-<li>깨어 있는 비율: 판정 1번의 박자 수 ÷ 클록 × 1초당 판정 횟수. 예: 1만 박자(8 MHz에서 1.25 ms)를 1초에 1번이면 약 0.13%.</li>
+<li><strong>Sampling rate.</strong> 신호에서 가장 빠른 변화(약 150번/s)에 점이 둘 넘게 찍히도록 → 1,000 S/s.</li>
+<li><strong>Weight 수.</strong> 박동 하나(숫자 200개)를 넣어 정상/이상을 고르는 작은 분류기면 수백–수천 개 → 1,000개로 둡니다. <span class="tag tag-assume">가정</span></li>
+<li><strong>깨어 있는 비율.</strong> 판정 1번 = MAC 1,000번 × 10박자 = 1만 박자 = 8 MHz에서 1.25 ms. 박동마다(1초에 1번) 판정하면 0.13%.</li>
 </ul>
-<p>모르는 항목은 모른다고 적습니다. 하나라도 숫자가 나오면 비교를 시작할 수 있습니다.</p>
+<p>★ 이 셋으로 평균 전력이 나옵니다: 판정 3 µW + 잠든 1.2 µW ≈ 4 µW. 여기에 매 샘플 ADC(1 µW)와 사건 송신(1.6 µW)을 더하면, 내 device 시스템이 이겨야 할 상대는 <strong>약 7 µW</strong>입니다. <span class="tag tag-calc">계산</span> 모르는 항목(예: 내 응용의 정확도 목표)은 모른다고 적어 둡니다.</p>
 </details>
 </div>
 <div class="quiz" data-day="d05" data-set="3-end"></div>
 <div class="keypoints">
 <ul>
-<li>뉴로모픽의 적합한 자리에서 경쟁자는 GPU가 아니라 MCU + 작은 NN이다 <span class="tag tag-interp">해석</span>. 근거: <span class="src">Liang 2024, p.202</span> <span class="src">Kudithipudi 2025, p.802</span>.</li>
-<li>MCU가 유리한 항목: 프로그램 가능성, 정밀도·재현성, 성숙도. 조건부로 뉴로모픽이 유리한 항목: 실시간 시계열(<span class="math inline">\(\tau\)</span> 정합), 변환 생략(아날로그 다음 단계), 생체·수계 환경.</li>
-<li>MCU + 작은 NN도 µW 자릿수다: weight 1,000개 망을 1초에 한 번 돌리면 약 3 µW + 대기 약 1.2 µW [계산, 박자 수는 가정]. weight 1–4 kB는 칩 안에 들어가므로 배치 1이어도 칩 밖에서 가져오지 않는다.</li>
-<li>공정한 비교는 같은 과제·데이터·정확도 목표·시스템 경계에서 전력과 지연을 재는 것이다. 폴더에 완전한 예는 없다 → Day 31–32.</li>
+<li>뉴로모픽이 적합한 자리에서 경쟁자는 GPU가 아니라 MCU + 작은 신경망이다 <span class="tag tag-interp">해석</span>. 근거: <span class="src">Liang 2024, p.202</span> <span class="src">Kudithipudi 2025, p.802</span>.</li>
+<li>작은 신경망 = MCU에서 weight 수백–수천 개로 '곱해서 더하기'를 몇 층 하는 프로그램. Weight 1,000개 망을 1초에 한 번 돌리면 약 3 µW + 잠든 1.2 µW [계산, 박자 수는 가정].</li>
+<li>Weight 1 kB는 칩 안에 들어가므로 먼 이동(칩 밖 DRAM)이 없다. 뉴로모픽은 칩 안의 짧고 싼 이동보다 더 아껴야 이긴다.</li>
+<li>MCU가 유리: 프로그램 가능성, 정밀도·재현성, 성숙도. 조건부로 뉴로모픽이 유리: 실시간 시계열(τ 정합), 변환 생략(아날로그 다음 부품), 생체·수계 환경.</li>
+<li>공정한 비교는 같은 과제·데이터·정확도 목표·시스템 경계에서 전력과 지연을 재는 것이다. 폴더에 완전한 예는 없다.</li>
 </ul>
 </div>
 </section>
@@ -1069,56 +1300,77 @@ Always-on (상시 대기)
 <p><strong>상황.</strong> 내 소재가 물을 머금은 이온 고분자라면 몸에 붙이거나 이식하는 응용을 떠올리기 쉽습니다. "이온 device는 생체와 같은 언어를 쓴다"는 말만으로 보통의 전자 칩(CMOS)보다 낫다고 쓸 수 있을까요?</p>
 <p><strong>왜 지금?</strong> 앞 세 구간의 조건은 "전자 device로도 할 수 있는 일을 더 싸게"였습니다. 생체 인터페이스는 전자 device가 어려운 환경이라 따로 봐야 합니다.</p>
 <p><strong>어디에 쓰이나?</strong> 내 연구 동기에 bio-interface를 쓸 때 붙여야 할 조건과, 부적합한 문제를 가려내는 데 씁니다.</p>
-<p><strong>끝나면 할 수 있는 것.</strong> 생체 인터페이스가 "전자 device가 어려운 환경"이라 따로 다뤄진다는 것과, 그 이점에 붙는 두 조건(안정성, 변환 효율)을 말한다. 부적합한 문제를 최소 두 가지 든다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> Bio-interface가 따로 다뤄지는 이유와, 그 이점에 붙는 두 조건(안정성, 변환 효율)을 말한다. 부적합한 문제를 최소 두 가지 든다.</p>
 </div>
 <section id="s-bio-why" class="level4">
 <h4 class="anchored" data-anchor-id="s-bio-why">4-1. 왜 bio-interface는 따로 다루나</h4>
-<p><strong>직관.</strong> 지금까지의 조건은 "전자 device로도 할 수 있는 일을 더 싸게"였습니다. bio-interface(생체 조직과 직접 신호를 주고받는 장치)는 다릅니다. 아래에서 CMOS는 보통의 반도체 칩을 만드는 회로 방식(<a href="../days/d01a.html#b-switch-cmos">Day 1 기초: CMOS</a>), 즉 '전자 device' 쪽을 가리킵니다. 생체 조직은 이온으로 신호를 보내고(약 100 mV의 전압 스파이크 <span class="src">Aluru 2026, p.592</span>, ms–s), 물과 염 속에 있으며, 연하고 움직입니다. 전자 device는 이 환경에서 <strong>변환</strong>(이온 신호 ↔︎ 전자 신호)과 <strong>봉지</strong>(encapsulation: 물·염이 회로에 닿지 않게 감싸는 보호층)가 필요하고, 딱딱합니다. <span class="key">이온 device는 생체와 같은 언어(이온)를 쓰므로 변환이 줄고, 수계에서 동작하며, 하이드로겔·엘라스토머로 만들 수 있습니다.</span> 이것이 Aluru가 이온 컴퓨팅은 "적어도 처음에는 CMOS와 경쟁하지 말고" 생의학 응용(예: 뇌–컴퓨터 인터페이스)·환경 모니터링·농식품처럼 극한의 에너지 효율과 화학·생체 적합성(biocompatibility)이 필요한 응용에 집중하라고 제안한 이유입니다. <span class="src">Aluru 2026, 요약면</span> 그 리뷰의 제안이지 합의된 사실은 아닙니다.</p>
-<p><strong>무엇을 볼지.</strong> 그림 6은 생체 인터페이스가 요구하는 다섯 가지(왼쪽 열)에 대해 생체 쪽의 조건, 이온 device가 주는 것, 전자 device의 자리를 한 줄씩 나란히 놓았습니다. 줄마다 '이온 device 칸이 쉬워지는가, 조건이 붙는가'를 보세요.</p>
-<figure class="fig figure"><img src="../assets/img/d05/fig4-bio-interface.svg" alt="생체 인터페이스의 다섯 요구(신호 언어, 환경, 기계적 성질, 시간척도, 정밀도)에 대해 생체 쪽·이온 device·전자 device를 나란히 적은 표" class="figure-img"><figcaption><b>그림 6.</b> bio-interface가 요구하는 것 ↔ 이온 device가 주는 것 ↔ 전자 device의 자리. "같은 언어"가 곧 "더 낫다"는 아니며 안정성과 이온–전자 변환 효율이 조건이다. (Claude가 그림, 모식도)</figcaption></figure>
-<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/s_-PG3BtDQ8?start=0&amp;rel=0" title="영상: Brain-computer interfaces: first in-human recording with new, high-capacity device" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:00–2:02, 약 2분 · 전체 4분, 영어).</b> Michigan Medicine(미시간대 의대 공식 채널), "Brain-computer interfaces: first in-human recording with new, high-capacity device" (2025). <b>볼 이유:</b> 지금의 bio-interface가 <b>전자 device</b>로 어떻게 만들어지는지 본다. 설명란에 따르면 미세전극 421개를 가진 무선 뇌–컴퓨터 인터페이스를 뇌전증 수술 중 잠시 사람 뇌에 넣어 기록한 첫 사례다. 0:22 'How BCI technology works', 1:20 'Implanting the BCI chip'. <b>보고 답할 질문:</b> 그림 6의 다섯 요구(신호 언어, 환경, 기계적 성질, 시간척도, 정밀도) 가운데 이 전자 장치가 해결해야 하는 어려움은 무엇으로 보이나? 이온 device라면 어느 칸이 쉬워지고 어느 칸은 그대로인가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
-<p><span id="s-pei"></span><strong>폴더의 예.</strong> Pei 2026(Nat. Mater.)은 PAA/PEI 자가치유(self-healing) 하이드로겔과 레이저 유도 그래핀 전극으로 만든 3단자 이온 reservoir<span class="prov">서론 끝, 폴더 PDF 2쪽; 이 PDF에는 인쇄 쪽수가 없음</span>를 신경 보철(neural prosthesis: 잃은 감각·운동 기능을 대신하는 인공 장치)용으로 시연했습니다. 초록의 주장은 하이드로겔–전극 계면의 비선형 동역학이 시계열을 전처리하는 물리 reservoir가 되고, 음성 인식 95%를 달성하며, 절단 뒤 다시 붙이면 0.02 s 안에 기능이 회복되고, pH 민감성 동역학으로 쥐 모델에서 폐루프(closed-loop: 출력이 다시 입력에 영향을 주는) 신경 자극 제어를 했다는 것입니다. <span class="src">Pei 2026, p.1199</span> 이 논문이 bio-interface 조건을 어떻게 쓰는지 보세요. 자가치유(기계적 환경), pH 의존(화학 환경을 입력으로 씀), 시계열 전처리(<span class="math inline">\(\tau\)</span> 정합). 다만 절단된 상태에서 원래 readout weight를 쓰면 음성 명령 네 가지의 인식 정확도가 25%, 즉 넷 중 하나를 찍는 우연 수준으로 떨어집니다<span class="prov">폴더 PDF 5쪽</span>. 그리고 "계면에 국한되어 손상에 둔감하다"는 주장은 벌크(device 내부 전체)가 동작을 정하는 대조 device와 실험으로 비교되지 않은 것으로 보입니다 <span class="tag tag-unverified">미확인</span> <span class="prov">Claude의 논문 정리 노트 기준, 해당 쪽 원문 대조 안 함. 초록과 위 두 곳 외의 본문은 오늘 대조하지 않음</span>.</p>
-<p><strong>원문 그림을 읽기 전에.</strong> 아래는 Pei 2026의 Fig. 5에서 패널 b만 자른 것입니다. 왼쪽 사진은 쥐 다리 근육 곁에 이식한 하이드로겔 이온 reservoir(HIRE)와 거기서 나온 세 가닥 전극(GND, V<sub>OUT</sub>, V<sub>IN</sub>), 아래 상자는 신호의 흐름(명령 입력 → device → 회로 기판 PCB → 신경 자극), 오른쪽 세 사진은 그 결과 다리가 움직인 각도입니다.</p>
-<figure class="fig paper figure"><img src="../assets/img/papers/pei2026-fig5b.png" alt="Pei 2026 Fig. 5b: 쥐 다리 근육 곁에 이식한 HIRE device 사진과 GND·VOUT·VIN 세 전극, 아래에 Instruction → PCB 흐름 상자, 오른쪽에 개입 뒤 다리 각도 0°, 20°, 38° 사진 세 장" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Pei et al., <a href="https://doi.org/10.1038/s41563-026-02532-7" target="_blank"><i>Nat. Mater.</i> 2026, 25, 1199–1208</a>, Fig. 5b, 폴더 PDF 7쪽(이 PDF에는 인쇄 쪽수가 없음). 볼 것 (읽는 순서): ① 'Implanted HIRE' 화살표가 가리키는 것이 몸속(근육 곁)에 들어간 이온 device다. 4-1의 "물·이온 환경에서 동작"이 실제로 이런 모습이다. ② 세 전극 가운데 V<sub>IN</sub>으로 음성 명령에서 만든 전압이 들어가고 V<sub>OUT</sub>을 읽는다. ③ 그런데 인식 결과는 <b>PCB(전자 회로 기판)</b>를 거쳐 좌골신경 자극 신호가 된다. 이온 device 혼자 하는 것이 아니라 전자 회로와 분업한다는 점이 아래 '적용 조건'의 Zhu 2025 "우열이 아니라 분업"과 같은 그림이다. ④ 오른쪽 0°, 20°, 38°는 본문(같은 쪽)에 따르면 자극 펄스 0, 4, 5 V에 대응하는 다리 각도다. device 속 pH 반응으로 피로 상태를 함께 읽는다는 주장은 같은 그림의 c–d(여기서는 생략)에 있다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
-<p><span id="s-bio-conditions"></span><strong>적용 조건.</strong> 이온 device의 "같은 언어" 이점에는 두 조건이 붙습니다. (1) <strong>안정성.</strong> Wang 2025(Chem. Soc. Rev.)는 이온 지능 시스템이 생체 상호작용과 생체 적합성, 수계 동작 가능성을 갖지만 "다기능성·계산 능력·동작 안정성이 기존 전자 시스템에 뒤처진다"고 쓰고, 이온과 전자 시스템의 통합을 유망한 경로로 듭니다. <span class="src">Wang 2025, p.329</span> Zhu 2025도 이온과 전자의 선택은 "우열이 아니라 응용과의 전략적 정합"이며, 전자가 처리의 견고한 뼈대를 맡고 soft iontronics가 조직 쪽을 맡는 분업을 말합니다. <span class="src">Zhu 2025, p.14</span> (2) <strong>변환 효율.</strong> 결국 어딘가에서 이온 신호는 전자 신호로 바뀝니다. 그 자리는 전극과 전해질(또는 하이드로겔)이 맞닿은 계면입니다. 계면에서 전기 이중층(electrical double layer, <a href="../days/d04a.html#b-capacitor">Day 7 기초: capacitor</a>에서 본, 전극 표면에 반대 부호 이온이 얇게 모인 층)이 충·방전되거나(축전성, capacitive), 전자가 계면을 건너 산화·환원 반응을 일으켜(패러데이성, faradaic) 이온의 흐름이 전극 속 전자의 흐름으로 이어집니다. 이 계면은 저항과 capacitor를 함께 가진 것처럼 행동해(이 둘을 묶어 교류 신호에 대한 '저항'으로 적은 값이 임피던스, impedance) 신호를 작게, 늦게 만들 수 있습니다. <span class="tag tag-interp">해석</span> 그 변환의 지연·에너지·왜곡을 Roadmap은 이온(µs–s)과 전자(ns)의 시간척도 불일치 문제로 적습니다. <span class="src">Roadmap 2026, p.8126</span> 시간척도가 다르면 빠른 전자 회로가 느린 이온 신호를 기다리며 켜져 있거나(대기 전력), 신호를 모아 둘 저장 칸이 필요해집니다. <span class="tag tag-interp">해석</span> <span class="key">그래서 "같은 언어"가 곧 "더 낫다"는 아니며, 이온–전자 변환이 어디서 몇 번 일어나느냐가 시스템 비용을 정합니다.</span></p>
+<p><strong>직관.</strong> 지금까지의 조건은 "전자 device로도 할 수 있는 일을 더 싸게"였습니다. Bio-interface(생체 조직과 직접 신호를 주고받는 장치)는 다릅니다. 아래에서 CMOS는 보통의 반도체 칩을 만드는 회로 방식, 즉 '전자 device' 쪽을 가리킵니다.</p>
+<ul>
+<li><strong>생체 조직은</strong> 이온으로 신호를 보내고(약 100 mV의 전압 스파이크, ms–s <span class="src">Aluru 2026, p.592</span>), 물과 염 속에 있으며, 연하고 움직입니다.</li>
+<li><strong>전자 device는</strong> 이 환경에서 변환(이온 신호 ↔︎ 전자 신호)과 encapsulation(봉지: 물·염이 회로에 닿지 않게 감싸는 보호층)이 필요하고, 딱딱합니다.</li>
+<li>★ <span class="key">이온 device는 생체와 같은 언어(이온)를 쓰므로 변환이 줄고, 물속에서 동작하며, 하이드로겔·엘라스토머로 만들 수 있습니다.</span></li>
+</ul>
+<p>이것이 Aluru가 이온 컴퓨팅은 "적어도 처음에는 CMOS와 경쟁하지 말고", 생의학 응용(예: 뇌–컴퓨터 인터페이스)·환경 모니터링·농식품처럼 극한의 에너지 효율과 biocompatibility(생체 적합성)가 필요한 응용에 집중하라고 제안한 이유입니다. <span class="src">Aluru 2026, 요약면</span> 그 리뷰의 제안이지, 합의된 사실은 아닙니다.</p>
+<p><strong>무엇을 볼지.</strong> 그림 19는 생체 인터페이스가 요구하는 다섯 가지(왼쪽 열)에 대해 생체 쪽의 조건, 이온 device가 주는 것, 전자 device의 자리를 한 줄씩 놓았습니다. 줄마다 '이온 device 칸이 쉬워지는가, 조건이 붙는가'를 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d05/fig4-bio-interface.svg" alt="생체 인터페이스의 다섯 요구(신호 언어, 환경, 기계적 성질, 시간척도, 정밀도)에 대해 생체 쪽·이온 device·전자 device를 나란히 적은 표" class="figure-img"><figcaption><b>그림 19.</b> Bio-interface가 요구하는 것 ↔ 이온 device가 주는 것 ↔ 전자 device의 자리. (Claude가 그림, 모식도)</figcaption></figure>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/s_-PG3BtDQ8?start=0&amp;rel=0" title="영상: Brain-computer interfaces: first in-human recording with new, high-capacity device" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 0:00–2:02, 약 2분 · 전체 4분, 영어).</b> Michigan Medicine(미시간대 의대 공식 채널), "Brain-computer interfaces: first in-human recording with new, high-capacity device" (2025). <b>볼 이유:</b> 지금의 bio-interface가 <b>전자 device</b>로 어떻게 만들어지는지 본다. 설명란에 따르면 미세전극 421개를 가진 무선 뇌–컴퓨터 인터페이스를 뇌전증 수술 중 잠시 사람 뇌에 넣어 기록한 첫 사례다. 0:22 'How BCI technology works', 1:20 'Implanting the BCI chip'. <b>보고 답할 질문:</b> 바로 위 그림의 다섯 요구 가운데 이 전자 장치가 해결해야 하는 어려움은 무엇으로 보이나? 이온 device라면 어느 칸이 쉬워지고 어느 칸은 그대로인가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·설명·챕터 시각(영상 내용은 미검증)</span></div></div>
+<p><span id="s-pei"></span><strong>폴더의 예: Pei 2026(Nat. Mater.).</strong></p>
+<ul>
+<li><strong>무엇을 만들었나.</strong> PAA/PEI self-healing(자가치유) 하이드로겔과 레이저 유도 그래핀 전극으로 만든 3단자 이온 reservoir를, neural prosthesis(신경 보철: 잃은 감각·운동 기능을 대신하는 인공 장치)용으로 시연했습니다.</li>
+<li><strong>초록의 주장.</strong> 하이드로겔–전극 계면의 비선형 동역학이 시계열을 전처리하는 물리 reservoir가 되고, 음성 인식 95%를 달성하며, 절단 뒤 다시 붙이면 0.02 s 안에 기능이 회복되고, pH에 민감한 동역학으로 쥐 모델에서 closed-loop(출력이 다시 입력에 영향을 주는) 신경 자극 제어를 했다. <span class="src">Pei 2026, p.1199</span></li>
+<li>★ <strong>Bio-interface 조건을 쓰는 방식.</strong> <span class="key">자가치유(기계적 환경), pH 의존(화학 환경을 입력으로 씀), 시계열 전처리(τ 정합).</span></li>
+<li><strong>주의.</strong> 절단된 상태에서 원래 readout weight를 그대로 쓰면, 음성 명령 네 가지의 인식 정확도가 25%(넷 중 하나를 찍는 우연 수준)로 떨어집니다. <span class="tag tag-fact">확인</span> "계면에 국한되어 손상에 둔감하다"는 주장은, 벌크(device 내부 전체)가 동작을 정하는 대조 device와 실험으로 비교되지 않은 것으로 보입니다. <span class="tag tag-unverified">미확인</span></li>
+</ul>
+<p><strong>원문 그림을 읽기 전에.</strong> 아래는 Pei 2026의 Fig. 5에서 패널 b만 자른 것입니다. 왼쪽 사진은 쥐 다리 근육 곁에 이식한 하이드로겔 이온 reservoir(HIRE)와 세 가닥 전극(GND, V<sub>OUT</sub>, V<sub>IN</sub>), 아래 상자는 신호의 흐름(명령 입력 → device → 회로 기판 PCB → 신경 자극), 오른쪽 세 사진은 그 결과 다리가 움직인 각도입니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/pei2026-fig5b.png" alt="Pei 2026 Fig. 5b: 쥐 다리 근육 곁에 이식한 HIRE device 사진과 GND·VOUT·VIN 세 전극, 아래에 Instruction → PCB 흐름 상자, 오른쪽에 개입 뒤 다리 각도 0°, 20°, 38° 사진 세 장" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Pei et al., <a href="https://doi.org/10.1038/s41563-026-02532-7" target="_blank"><i>Nat. Mater.</i> 2026, 25, 1199–1208</a>, Fig. 5b. <b>볼 것 (읽는 순서):</b> ① 'Implanted HIRE' 화살표가 가리키는 것이 몸속(근육 곁)에 들어간 이온 device다. ② V<sub>IN</sub>으로 음성 명령에서 만든 전압이 들어가고 V<sub>OUT</sub>을 읽는다. ③ 그런데 인식 결과는 <b>PCB(전자 회로 기판)</b>를 거쳐 좌골신경 자극 신호가 된다. 이온 device 혼자가 아니라 전자 회로와 분업한다. ④ 오른쪽 0°, 20°, 38°는 자극 펄스 0, 4, 5 V에 대응하는 다리 각도다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p><span id="s-bio-conditions"></span><strong>적용 조건.</strong> 이온 device의 "같은 언어" 이점에는 두 조건이 붙습니다.</p>
+<p><strong>(1) 안정성.</strong> Wang 2025(Chem. Soc. Rev.)는 이온 지능 시스템이 생체 상호작용·생체 적합성·물속 동작을 갖지만 "다기능성·계산 능력·동작 안정성이 기존 전자 시스템에 뒤처진다"고 쓰고, 이온과 전자 시스템의 통합을 유망한 경로로 듭니다. <span class="src">Wang 2025, p.329</span> ★ <span class="key">Zhu 2025도 이온과 전자의 선택은 "우열이 아니라 응용과의 전략적 정합"이며, 전자가 처리의 뼈대를 맡고 soft iontronics가 조직 쪽을 맡는 분업을 말합니다.</span> <span class="src">Zhu 2025, p.14</span> 바로 위 Pei 그림의 PCB가 그 분업의 예입니다.</p>
+<p><strong>(2) 변환 효율.</strong> 결국 어딘가에서 이온 신호는 전자 신호로 바뀝니다. 그 자리는 전극과 전해질(또는 하이드로겔)이 맞닿은 계면입니다.</p>
+<ul>
+<li>계면에서는 electrical double layer(전기 이중층: 전극 표면에 반대 부호 이온이 얇게 모인 층)가 충·방전되거나(capacitive), 전자가 계면을 건너 산화·환원 반응을 일으켜(faradaic) 이온의 흐름이 전극 속 전자의 흐름으로 이어집니다.</li>
+<li>이 계면은 저항과 capacitor를 함께 가진 것처럼 행동해(둘을 묶어 교류 신호에 대한 '저항'으로 적은 값이 impedance) 신호를 작게, 늦게 만들 수 있습니다. <span class="tag tag-interp">해석</span></li>
+<li>Roadmap은 이 변환의 지연·에너지·왜곡을 이온(µs–s)과 전자(ns)의 시간척도 불일치 문제로 적습니다. <span class="src">Roadmap 2026, p.8126</span> 시간척도가 다르면 빠른 전자 회로가 느린 이온 신호를 기다리며 켜져 있거나(대기 전력), 신호를 모아 둘 저장 칸이 필요해집니다. <span class="tag tag-interp">해석</span></li>
+</ul>
+<p>★ <span class="key">그래서 "같은 언어"가 곧 "더 낫다"는 아니며, 이온–전자 변환이 어디서 몇 번 일어나느냐가 시스템 비용을 정합니다.</span></p>
 </section>
 <section id="s-unfit" class="level4">
 <h4 class="anchored" data-anchor-id="s-unfit">4-2. 부적합한 문제</h4>
-<p>사다리를 거꾸로 읽으면 부적합한 문제가 나옵니다. <strong>무엇을 볼지.</strong> 그림 7은 여덟 가지 문제 유형을 상자로 놓고, 오른쪽 아래에 판정(초록: 적합 후보, 빨강: 부적합, 주황: 조건부)과 그 이유를 괄호로 적었습니다.</p>
-<figure class="fig figure"><img src="../assets/img/d05/fig5-fit-map.svg" alt="여덟 가지 문제 유형을 적합 후보(실시간 시계열, 생체 인터페이스, always-on), 부적합(배치 가능·데이터센터, 정확한 산술, 자주 바뀌는 기능, 정밀 수치 시뮬레이션), 조건부(영상 전체 고정밀 처리)로 나눈 지도" class="figure-img"><figcaption><b>그림 7.</b> 적합·부적합의 지도(이해용 분류). 경계는 조건에 따라 움직이고, "적합 후보"는 Day 3–8의 조건을 통과했다는 뜻이지 MCU + 작은 NN과의 비교(Day 31–32)를 끝냈다는 뜻이 아니다. (Claude가 그림, 모식도)</figcaption></figure>
+<p>사다리를 거꾸로 읽으면 부적합한 문제가 나옵니다. <strong>무엇을 볼지.</strong> 그림 20은 여덟 가지 문제 유형을 상자로 놓고, 오른쪽 아래에 판정(초록: 적합 후보, 빨강: 부적합, 주황: 조건부)을 적었습니다.</p>
+<figure class="fig figure"><img src="../assets/img/d05/fig5-fit-map.svg" alt="여덟 가지 문제 유형을 적합 후보(실시간 시계열, 생체 인터페이스, always-on), 부적합(batch 가능·데이터센터, 정확한 산술, 자주 바뀌는 기능, 정밀 수치 시뮬레이션), 조건부(영상 전체 고정밀 처리)로 나눈 지도" class="figure-img"><figcaption><b>그림 20.</b> 적합·부적합의 지도(이해용 분류). "적합 후보"는 사다리의 앞 다섯 질문을 통과했다는 뜻이지, MCU + 작은 신경망과의 비교를 끝냈다는 뜻이 아니다. (Claude가 그림, 모식도)</figcaption></figure>
 <ul>
-<li><strong>배치로 돌릴 수 있는 큰 계산</strong>(데이터센터의 학습과 <a href="#b-sensor-node" class="recall">inference</a>): 배치로 weight를 재사용해 이동 비용을 나누고, 정밀도 요구가 높으며, GPU가 이미 최적화되어 있습니다. Roadmap이 "속도만 높이는 데 집중하면 지속 학습 같은 생물학적 이점을 놓친다"고 쓴 것 <span class="src">Roadmap 2026, p.8137</span>은, 이 자리에서 뉴로모픽이 GPU와 같은 게임을 하면 진다는 뜻으로 읽을 수 있습니다. <span class="tag tag-interp">해석</span></li>
-<li><strong>정확한 산술</strong>(회계, 암호, 정밀 시뮬레이션): 근사를 허용하지 않습니다. 사다리의 '근사 허용' 질문(3번)에서 떨어집니다.</li>
+<li><strong>Batch로 돌릴 수 있는 큰 계산</strong>(데이터센터의 학습과 inference): batch로 weight를 재사용해 이동 비용을 나누고, 정밀도 요구가 높으며, GPU가 이미 최적화되어 있습니다. Roadmap이 "속도만 높이는 데 집중하면 지속 학습 같은 생물학적 이점을 놓친다"고 쓴 것 <span class="src">Roadmap 2026, p.8137</span>은, 이 자리에서 뉴로모픽이 GPU와 같은 게임을 하면 진다는 뜻으로 읽을 수 있습니다. <span class="tag tag-interp">해석</span></li>
+<li><strong>정확한 산술</strong>(회계, 암호, 정밀 시뮬레이션): '조금 틀려도 답이 같은가'라는 질문에서 떨어집니다.</li>
 <li><strong>자주 바뀌는 기능</strong>(범용 소프트웨어): 프로그램 가능성에서 MCU에 집니다.</li>
-<li><strong>희소하지 않은 고정밀 입력</strong>(영상 전체를 매 프레임 처리): 사건 구동의 이득이 없고 정밀도 요구가 높아 조건부입니다. Roadmap의 엣지 비전 칩 예(Tianmouc)는 두 경로(정밀 인지와 빠른 반응)를 나눠 대역폭 90%를 줄였다고 하는데 <span class="src">Roadmap 2026, p.8136</span>, 이것은 "희소하게 만드는 설계"로 조건을 바꾼 예입니다.</li>
+<li><strong>희소하지 않은 고정밀 입력</strong>(영상 전체를 매 프레임 처리): 사건 때만 일하는 이득이 없고 정밀도 요구가 높아 조건부입니다. Roadmap의 엣지 비전 칩 예(Tianmouc)는 두 경로(정밀 인지와 빠른 반응)를 나눠 데이터 양을 90% 줄였다고 하는데 <span class="src">Roadmap 2026, p.8136</span>, 이것은 "희소하게 만드는 설계"로 조건을 바꾼 예입니다.</li>
 </ul>
 <details class="deep">
 <summary>
-심화 · 오늘의 반론(앞의 심전도 예를 이해한 뒤)
+심화 · 오늘의 반론
 </summary>
-<p>가장 강한 반론: <strong>"조건을 다 통과하는 응용은 너무 좁다. 심전도·제스처·보철 몇 개를 위해 새 device 플랫폼을 만드는 것은 수지가 안 맞는다. MCU + 작은 신경망이 그 자리도 충분히 싸게 해낸다."</strong> 이 반론에 답하려면 MCU 비교(앞의 '진짜 경쟁자' 구간)를 실제로 해야 하고, 폴더에는 그 비교가 없습니다. 응답의 한 방향은 Aluru와 Zhu·Wang이 말하는 bio-interface(전자가 못 가는 자리)이고, 다른 방향은 "device 하나가 아니라 센서·전처리·저장을 겸하는 통합"입니다(Kim 2026 초록의 방향). 어느 방향이 내 소재에 맞는지는 Day 51–52의 질문입니다.</p>
+<p>가장 강한 반론: <strong>"조건을 다 통과하는 응용은 너무 좁다. 심전도·제스처·보철 몇 개를 위해 새 device 플랫폼을 만드는 것은 수지가 안 맞는다. MCU + 작은 신경망이 그 자리도 충분히 싸게 해낸다."</strong></p>
+<p>이 반론에 답하려면 MCU와의 비교를 실제로 해야 하고, 폴더에는 그 비교가 없습니다. 응답의 한 방향은 Aluru와 Zhu·Wang이 말하는 bio-interface(전자가 못 가는 자리)이고, 다른 방향은 "device 하나가 아니라 센서·전처리·저장을 겸하는 통합"입니다(Kim 2026 초록의 방향). 어느 방향이 내 소재에 맞는지는 bio-interface를 다시 다루는 날의 질문입니다.</p>
 </details>
 <div class="think">
-<p>내 소재가 가장 잘 맞는 칸은 그림 7의 어디인가요? "적합 후보" 칸을 골랐다면, 그 칸에서 MCU + 작은 NN을 이기기 위해 내 device가 <strong>숫자로</strong> 보여야 할 것 하나를 적어 보세요. "부적합" 칸만 떠오른다면 그것이 오늘의 가장 중요한 메모입니다.</p>
+<p>내 소재가 가장 잘 맞는 칸은 바로 위 지도의 어디인가요? "적합 후보" 칸을 골랐다면, 그 칸에서 MCU + 작은 신경망을 이기려고 내 device가 <strong>숫자로</strong> 보여야 할 것 하나를 적어 보세요. "부적합" 칸만 떠오른다면 그것이 오늘의 가장 중요한 메모입니다.</p>
 <details class="think-answer">
 <summary>
 생각 정리 보기
 </summary>
-<p>판단 절차: 적합 후보 칸(실시간 시계열, 생체 인터페이스, always-on) 가운데 내 소재가 가장 가까운 칸을 고르고, 그 칸에서 MCU를 이기려면 보여야 할 숫자 하나를 정합니다.</p>
-<p><span class="tag tag-interp">해석</span> 예:</p>
+<p>적합 후보는 세 칸(실시간 시계열, 생체 인터페이스, always-on)입니다. 칸마다 보여야 할 숫자는 이렇습니다. <span class="tag tag-interp">해석</span></p>
 <ul>
-<li>always-on 칸: "device 앞단의 대기 전력이 MCU 잠든 몫(약 1.2 µW)보다 작다", 또는 "사건당 ADC 깨움이 초당 1,000번에서 2번으로 준다".</li>
-<li>실시간 시계열 칸: "device의 <span class="math inline">\(\tau\)</span>가 신호 시간척도와 겹친다"와 "같은 과제 정확도가 MCU + 작은 NN과 비슷하다".</li>
+<li><strong>Always-on 칸.</strong> ★ "Device 앞단(device + 읽기 회로)의 대기 전력 &lt; MCU가 잠든 전력 약 1.2 µW". 이것을 보이면 심전도 예의 설계 C처럼 ADC·MCU 깨움을 1초 1,000번에서 사건 수(예: 2번)로 줄인 이득이 그대로 남습니다.</li>
+<li><strong>실시간 시계열 칸.</strong> "Device의 τ가 신호의 빠르기와 맞는다"(예: 박동 간격 1 s에 τ 0.5 s)와 "같은 과제 정확도가 MCU + 작은 신경망과 비슷하다"(예: 둘 다 95% 이상) 두 숫자가 함께 필요합니다.</li>
+<li><strong>생체 인터페이스 칸.</strong> "체액 속에서 며칠 동안 성능이 유지된다"(예: 7일 뒤 응답 변화 10% 이내)와 "계면 변환에서 신호가 얼마나 줄어드나".</li>
 </ul>
-<p>"부적합" 칸만 떠오르면 그것이 오늘의 가장 중요한 메모입니다.</p>
+<p>"부적합" 칸만 떠오른다면, 그 칸이 왜 부적합인지(사다리의 어느 질문에서 떨어지는지)를 적어 두는 것이 오늘의 가장 중요한 메모입니다.</p>
 </details>
 </div>
 <div class="quiz" data-day="d05" data-set="4-check"></div>
 <div class="keypoints">
 <ul>
-<li>bio-interface는 "전자 device로도 할 수 있는 일을 싸게"가 아니라 "전자 device가 어려운 환경"이라 따로 다룬다. Aluru의 제안 <span class="src">Aluru 2026, 요약면</span>, Pei 2026의 예(자가치유, pH 입력, 0.02 s 회복) <span class="src">Pei 2026, p.1199</span>.</li>
+<li>Bio-interface는 "전자 device로도 할 수 있는 일을 싸게"가 아니라 "전자 device가 어려운 환경"이라 따로 다룬다. Aluru의 제안 <span class="src">Aluru 2026, 요약면</span>, Pei 2026의 예(자가치유, pH 입력, 0.02 s 회복) <span class="src">Pei 2026, p.1199</span>.</li>
 <li>조건: 안정성(이온 시스템은 다기능성·계산 능력·안정성에서 전자에 뒤처짐 <span class="src">Wang 2025, p.329</span>)과 이온–전자 변환 효율 <span class="src">Roadmap 2026, p.8126</span>. 우열이 아니라 분업 <span class="src">Zhu 2025, p.14</span>.</li>
-<li>부적합: 배치 가능한 큰 계산, 정확한 산술, 자주 바뀌는 기능, 희소하지 않은 고정밀 입력 <span class="tag tag-interp">해석</span>.</li>
+<li>부적합: batch 가능한 큰 계산, 정확한 산술, 자주 바뀌는 기능, 희소하지 않은 고정밀 입력 <span class="tag tag-interp">해석</span>.</li>
 </ul>
 </div>
 </section>
@@ -1146,48 +1398,53 @@ Always-on (상시 대기)
 <tbody>
 <tr class="odd">
 <td>적합한 문제의 조건</td>
-<td>실시간으로 하나씩 → 희소·낮은 대기 전력 → 근사 허용 → <span class="math inline">\(\tau\)</span> 정합 → 아날로그 다음 단계 → MCU보다 나음</td>
-<td>사전 테스트·먼저 만들어 보기에서 "저전력이 필요한 곳"이라고만 썼다면 달라질 지점 [해석, Day 3–8]</td>
+<td>실시간으로 하나씩 → 희소·낮은 대기 전력 → 근사를 견딤 → τ 정합 → 아날로그 다음 부품 → MCU보다 나음</td>
+<td>사전 테스트에서 "저전력이 필요한 곳"이라고만 썼다면 달라질 지점 <span class="tag tag-interp">해석</span></td>
 </tr>
 <tr class="even">
 <td>센서 노드</td>
-<td>센서 → ADC → MCU → 무선. edge / in-sensor / always-on은 각각 송신 / ADC·MCU 데이터 / 대기 전력을 줄인다</td>
-<td>그림 4 모형, 가정값은 데이터시트·실측으로 자릿수만 맞춤(그림 3(b)); <span class="src">Singh 2026, p.1</span></td>
+<td>센서 → ADC → MCU → 무선. Edge는 송신을, in-sensor는 ADC·MCU의 일을, always-on 설계는 대기 전력을 다룬다</td>
+<td>세 설계 모형, 가정값은 데이터시트·실측으로 자릿수만 맞춤; <span class="src">Singh 2026, p.1</span></td>
 </tr>
 <tr class="odd">
 <td>평균 전력 세기</td>
-<td>한 번의 에너지 × 1초당 횟수 + 대기 전력. MCU 20 nJ × 1,000/s = 20 µW, 듀티 사이클 0.83%, 잠든 몫 1.2 µW</td>
-<td>그림 3(a), 데이터시트 값으로 계산 [계산]</td>
+<td>한 번의 에너지 × 1초당 횟수 + 대기 전력. MCU 20 nJ × 1,000/s = 20 µW, duty cycle 0.83%, 잠든 몫 1.2 µW</td>
+<td>데이터시트 값으로 계산 <span class="tag tag-calc">계산</span></td>
 </tr>
 <tr class="even">
-<td>오늘의 숫자</td>
-<td>Zhong 2022: 정확도 손실 1.1%, 전력 99.9% 절감(29,400 → 22 µW/제스처)</td>
-<td>기준선은 디지털 RC, 시스템에 MCU 포함, 전력은 추정값이고 방법은 SI <span class="src">Zhong 2022, p.674, 678–679</span></td>
+<td>이온 device의 자리</td>
+<td>센서 뒤·ADC 앞(near-sensor) 또는 센서 자체(in-sensor). ADC·MCU가 사건 때만 일하게 함</td>
+<td>대가: 늘 켜진 device·읽기 회로의 대기 전력 <span class="tag tag-interp">해석</span></td>
 </tr>
 <tr class="odd">
-<td>진짜 경쟁자</td>
-<td>MCU + 작은 신경망(weight 1,000개면 약 3 µW + 잠든 몫 1.2 µW, weight는 칩 안). 프로그램 가능성·정밀도·성숙도는 MCU, 실시간 시계열·변환 생략·생체 환경은 조건부로 뉴로모픽</td>
-<td><span class="src">Liang 2024, p.202</span> <span class="src">Kudithipudi 2025, p.802</span></td>
+<td>오늘의 숫자</td>
+<td>Zhong 2022: 정확도 손실 1.1%, 전력 99.9% 절감(29,400 → 22 µW/제스처)</td>
+<td>기준선은 디지털 RC, 시스템에 MCU 포함, 전력은 저자 추정 <span class="src">Zhong 2022, p.674, 678–679</span></td>
 </tr>
 <tr class="even">
-<td>bio-interface</td>
+<td>진짜 경쟁자</td>
+<td>MCU + 작은 신경망(weight 1,000개면 약 3 µW + 잠든 1.2 µW, weight는 칩 안)</td>
+<td><span class="src">Liang 2024, p.202</span> <span class="src">Kudithipudi 2025, p.802</span></td>
+</tr>
+<tr class="odd">
+<td>Bio-interface</td>
 <td>같은 언어(이온·물·연성)라 변환·봉지가 준다. 조건: 안정성, 변환 효율</td>
 <td><span class="src">Aluru 2026, 요약면</span> <span class="src">Pei 2026, p.1199</span> <span class="src">Wang 2025, p.329</span> <span class="src">Zhu 2025, p.14</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>부적합</td>
-<td>배치 가능한 큰 계산, 정확한 산술, 자주 바뀌는 기능, 희소하지 않은 고정밀 입력</td>
+<td>Batch 가능한 큰 계산, 정확한 산술, 자주 바뀌는 기능, 희소하지 않은 고정밀 입력</td>
 <td><span class="tag tag-interp">해석</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>오늘의 반론</td>
 <td>조건을 다 통과하는 응용은 너무 좁고 MCU가 그 자리도 해낸다</td>
 <td>내 답에서 응답. MCU 비교는 폴더에 없음</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>모르는 것 하나</td>
-<td>내 응용을 MCU + 작은 NN으로 할 때의 전력·정확도</td>
-<td>Day 31–32</td>
+<td>내 응용을 MCU + 작은 신경망으로 할 때의 전력·정확도</td>
+<td>시스템 에너지를 다루는 날에 계산</td>
 </tr>
 </tbody>
 </table>
@@ -1198,21 +1455,21 @@ Always-on (상시 대기)
 <h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
 <ol type="1">
 <li>"적합한 문제"를 조건의 <strong>순서</strong>로 적었나? 한 문장("저전력이 필요한 곳")으로 끝나지 않았나?</li>
-<li>센서 노드의 네 고리를 적고, edge·in-sensor·always-on이 각각 어느 고리를 줄이는지 구별했나? 평균 전력을 '한 번의 에너지 × 횟수 + 대기 전력'으로 셌나?</li>
+<li>센서 노드의 네 부품을 적고, edge·in-sensor·always-on이 각각 어디를 줄이는지 구별했나? 평균 전력을 '한 번의 에너지 × 횟수 + 대기 전력'으로 셌나?</li>
 <li>폴더의 수치 하나(예: Zhong 2022)를 들 때 기준선의 종류와 시스템 경계를 함께 적었나?</li>
 <li>진짜 경쟁자를 MCU + 작은 신경망으로 적고, 항목별로 누가 유리한지 조건을 붙였나?</li>
-<li>bio-interface의 이점에 안정성·변환 효율이라는 조건을 붙였나?</li>
+<li>Bio-interface의 이점에 안정성·변환 효율이라는 조건을 붙였나?</li>
 <li>부적합한 문제를 최소 두 가지 적었나? 내 소재가 어느 칸에 가까운지 적었나?</li>
 </ol>
 </section>
 <section id="ledger-items" class="level3">
 <h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
 <ul>
-<li><strong>병목 장부:</strong> (응용이 요구하는 것) 센서 노드에서 MCU + 작은 NN의 평균 전력·정확도(수치 <span class="tag tag-unverified">미확인</span>) vs (메커니즘이 허용하는 것) 이온 device 전처리의 대기 전력·변환 횟수. 이 비교 자체가 폴더 문헌에는 아직 없음.</li>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) 센서 노드에서 MCU + 작은 신경망의 평균 전력·정확도(수치 <span class="tag tag-unverified">미확인</span>) vs (메커니즘이 허용하는 것) 이온 device 전처리의 대기 전력·변환 횟수. 이 비교 자체가 폴더 문헌에는 아직 없음.</li>
 <li><strong>병목 장부:</strong> (응용이 요구하는 것) bio-interface의 장기 안정성(탈수·이온 누출·섬유화) vs (메커니즘이 허용하는 것) 하이드로겔·이온겔의 수계 안정성 <span class="src">Wang 2025, p.329</span>.</li>
-<li><strong>아직 모르는 것:</strong> Zhong 2022의 22 µW에 MCU·전원·측정이 포함됐는지(SI). / 내 응용에 맞는 MCU의 슬립·동작 전력과 깨어 있는 시간 비율. / 내 응용의 사다리 첫 "아니오"가 어디인지.</li>
-<li><strong>용어집:</strong> edge, 클라우드, 센서 노드, 증폭기, 샘플, 샘플링률, 박자당 에너지, 듀티 사이클, 대기 전력, MCU, inference, TinyML(미확인), in-sensor computing, always-on, 시스템 경계, 지연, 기준선의 종류(디지털 RC / 원시 입력 / 정적 device / MCU+NN), reservoir·readout, bio-interface, 폐루프, 이온–전자 변환.</li>
-<li><strong>접는 기준 후보:</strong> "내 응용에서 MCU + 작은 NN의 추정 전력보다 시스템 전체 전력이 낮다는 계산(가정 포함)을 제시하지 못하면 '엣지 적합'을 연구 동기로 쓰지 않는다."</li>
+<li><strong>아직 모르는 것:</strong> Zhong 2022의 22 µW에 MCU·전원·측정이 포함됐는지. / 내 응용에 맞는 MCU의 잠든·동작 전력과 깨어 있는 시간 비율. / 내 응용의 사다리 첫 "아니오"가 어디인지. / 내 device 앞단(device + 읽기 회로)의 대기 전력.</li>
+<li><strong>용어집:</strong> edge, cloud, 센서 노드, raw signal, 증폭기, ADC의 한 눈금, 샘플, sampling rate, bit, 박자당 에너지, duty cycle, 대기 전력, MCU, 작은 신경망, MAC, inference, TinyML, in-sensor computing, near-sensor, always-on, 시스템 경계, 지연, 기준선의 종류(디지털 RC / raw 입력 / 정적 device / MCU + 신경망), bio-interface, closed-loop, 이온–전자 변환.</li>
+<li><strong>접는 기준 후보:</strong> "내 응용에서 MCU + 작은 신경망의 추정 전력보다 시스템 전체 전력이 낮다는 계산(가정 포함)을 제시하지 못하면 '엣지 적합'을 연구 동기로 쓰지 않는다."</li>
 </ul>
 </section>
 <section id="reading" class="level3">
@@ -1224,22 +1481,22 @@ Always-on (상시 대기)
 </ul>
 <p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
 <ul>
-<li>Zhong 2022, <em>Nat. Electron.</em> 5, 672–681 (Readable papers3). p.672(엣지 용도), p.674(시스템 구성에 MCU), p.677(96.6 vs 98.2%), p.678 Fig. 5g, p.679(전력 추정과 두 요인). SI(전력 추정 방법)는 폴더에 없음.</li>
-<li>Pei 2026, <em>Nat. Mater.</em> 25, 1199–1208 (폴더 루트). p.1199 초록. 노트(notes/Pei_2026_NatMater.md)에 본문 정리가 있으나 오늘은 초록과 device 구조·절단 시 정확도 문장만 대조.</li>
+<li>Zhong 2022, <em>Nat. Electron.</em> 5, 672–681 (Readable papers3). p.672(엣지 용도), p.674(시스템 구성에 MCU), p.677(96.6 vs 98.2%), p.678 Fig. 5g, p.679(전력 추정과 두 요인).</li>
+<li>Pei 2026, <em>Nat. Mater.</em> 25, 1199–1208 (폴더 루트). p.1199 초록. 노트(notes/Pei_2026_NatMater.md)에 본문 정리가 있음.</li>
 <li>Kim 2026, <em>Nat. Sensors</em> 1, 535–544 (Readable papers3). p.535 초록, p.536–538(자극이 에너지원).</li>
-<li>Singh 2026, <em>Adv. Mater.</em> e74897 (Readable papers3, "Descriptors to Dynamics"). p.1(엣지 사슬), p.8(같은 조건의 참조 사례), p.20 Table 3(귀속 대조·에너지 경계). Day 10과 Day 31–32의 핵심 자료.</li>
+<li>Singh 2026, <em>Adv. Mater.</em> e74897 (Readable papers3, "Descriptors to Dynamics"). p.1(엣지 사슬), p.8(같은 조건의 참조 사례), p.20 Table 3(귀속 대조·에너지 경계).</li>
 <li>Roadmap 2026, <em>ACS Nano</em> 20, 8102–8163. p.8103(µW 엣지 센서–데이터센터), p.8126(시간척도 불일치), p.8130(peripheral circuit 최대 70%), p.8136(엣지 BIC 예, 벤치마크 합의 없음), p.8137(속도만 높이면 놓치는 것).</li>
 <li>Aluru 2026, <em>Science</em> 392, 592–601. 요약면(CMOS와 경쟁하지 말라는 제안).</li>
 <li>Wang 2025, <em>Chem. Soc. Rev.</em> 55, 299–335 (읽음). p.329 Outlook (6) 이온–전자 통합.</li>
 <li>Zhu 2025, <em>Adv. Mater. Technol.</em> 11, e01963. p.14 3.6절(전략적 정합).</li>
 </ul>
-<p><strong>폴더 밖 (서지를 직접 확인한 뒤 쓰세요)</strong> <span class="tag tag-unverified">미확인</span></p>
+<p><strong>폴더 밖 (서지를 직접 확인한 뒤 쓰세요)</strong></p>
 <ul>
-<li>MCU 전력 수치와 TinyML 벤치마크(예: MLPerf Tiny), 무선 송신의 비트당 에너지는 폴더에 없습니다. 오늘 쓴 값은 Claude가 아래에서 확인했습니다: <a href="https://www.ti.com/lit/ds/symlink/msp430fr5969.pdf">TI MSP430FR5969 데이터시트(SLAS704G)</a> 특징 목록(동작 약 100 µA/MHz, 대기 0.4 µA)과 Table 5-22·5-23(ADC 145 µA, 변환 14박자), <a href="https://www.nordicsemi.com/-/media/Software-and-other-downloads/Product-Briefs/nRF52832-product-brief.pdf">Nordic nRF52832 제품 안내서 v2.4</a>(송신 0 dBm 5.3 mA, 1 Mbps), Siekkinen et al. 2012(무선 실측), Warden &amp; Situnayake 2020 <i>TinyML</i>(서지만). MLPerf Tiny 같은 벤치마크와 심전도 신호 크기·대역의 원전은 확인하지 않았습니다 <span class="tag tag-unverified">미확인</span>. MCU 비교를 하려면 내 응용에 맞는 칩의 데이터시트와 벤치마크 문헌을 직접 확인하세요.</li>
+<li>MCU 전력 수치와 무선 송신의 bit당 에너지는 폴더에 없습니다. 오늘 쓴 값은 Claude가 아래에서 확인했습니다: <a href="https://www.ti.com/lit/ds/symlink/msp430fr5969.pdf">TI MSP430FR5969 데이터시트(SLAS704G)</a>(동작 약 100 µA/MHz, 대기 0.4 µA, ADC 145 µA·변환 14박자), <a href="https://www.nordicsemi.com/-/media/Software-and-other-downloads/Product-Briefs/nRF52832-product-brief.pdf">Nordic nRF52832 제품 안내서 v2.4</a>(송신 0 dBm 5.3 mA, 1 Mbps), Siekkinen et al. 2012(무선 실측), Warden &amp; Situnayake 2020 <i>TinyML</i>(서지만). MLPerf Tiny 같은 벤치마크와 심전도 신호 크기·대역의 원전은 확인하지 않았습니다 <span class="tag tag-unverified">미확인</span>.</li>
 </ul>
 </section>
 </div>
-<script type="application/json" id="quiz-d05">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 바로 돌아갈 설명·작은 예제의 앵커. refLabel: '다시 볼 곳' 링크에 보일 짧은 이름. why에는 정답 이유와 흔한 혼동을 적는다.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "네 가지 일 — 스마트워치의 심박 이상 감지, 은행 이자 계산, 데이터센터의 사진 수백만 장 분류, 땀 속 염분 변화 감시 — 를 '뉴로모픽이 맞을 것 같다 / 아니다 / 모르겠다'로 나눠 보세요. 각각을 나눌 때 스스로 던진 판단 질문을 한 줄씩 적어 두면, 그 질문들이 오늘의 '적합성 사다리' 초안이 됩니다.", "items": [{"id": "d05-p01", "ref": "#s-ladder-questions", "type": "mc", "q": "다음 중 저장·계산을 합치고 사건이 올 때만 움직이는 아날로그 하드웨어가 가장 유리할 가능성이 큰 일은?", "options": ["은행 계좌의 이자를 원 단위까지 정확히 계산하기", "데이터센터에서 사진 수백만 장을 한꺼번에 분류하기", "몸에 붙인 센서로 드문 심장 이상을 실시간 감시하기", "기능이 자주 바뀌는 스마트폰 앱 돌리기"], "a": 2, "why": "입력이 하나씩 실시간으로 오고(묶어 처리 불가), 사건이 드물며, 약간의 오차를 견디고, 신호 시간척도가 device와 겹치는 일일수록 적합 후보입니다. 대량 일괄 처리는 기존 컴퓨터가 weight를 재사용해 유리하고, 정확한 산술·자주 바뀌는 기능은 부적합합니다.", "refLabel": "여섯 질문의 사다리"}, {"id": "d05-p02", "ref": "#ex-three-cases", "type": "mc", "q": "센서 노드가 측정값을 모두 무선으로 보내는 대신, 노드 안에서 처리해 '이상 있음' 같은 결과만 보내도록 바꾸면 주로 줄어드는 것은?", "options": ["센서가 측정에 쓰는 에너지", "무선으로 보내는 데이터 양과 그 송신 에너지", "센서 신호를 숫자로 바꾸는 변환기의 에너지", "줄어드는 것이 없다"], "a": 1, "why": "엣지 처리는 보내기 전에 처리해서 송신 고리를 줄입니다. 원시 데이터를 다 보내는 모형에서는 송신이 전력의 거의 전부라 효과가 큽니다. 변환기·처리기 쪽을 줄이는 것은 센서 안 전처리(in-sensor)입니다.", "refLabel": "A → B에서 줄어든 고리"}, {"id": "d05-p03", "ref": "#ex-three-cases", "type": "ox", "q": "센서 바로 안에서 신호를 미리 처리하면, 어떤 센서 노드에서든 전체 에너지가 크게 줄어든다.", "a": false, "why": "센서 노드는 센서 → 변환(ADC) → 처리(MCU) → 송신의 사슬로 에너지를 씁니다. 송신이 지배하면 엣지 처리가, 변환·처리 쪽이 지배하면 센서 안 전처리가 효과를 냅니다. 어느 고리가 전력을 지배하느냐에 따라 끊을 곳과 효과의 크기가 노드마다 다릅니다.", "refLabel": "어느 고리가 지배하나"}, {"id": "d05-p04", "ref": "#ch-competitor", "type": "mc", "q": "몸에 붙이는 심박 센서 패치에 넣을 처리 장치를 고를 때, 이온 뉴로모픽 device와 맞붙여 비교해야 할 가장 적절한 상대는?", "options": ["데이터센터의 GPU 한 장(수백 W급)", "같은 소재로 만든 다른 이온 device 한 개", "사람 뇌의 에너지 사용(약 20 W)", "저전력 MCU(작은 범용 칩) + 작은 신경망"], "a": 3, "why": "뉴로모픽이 적합한 엣지·실시간 자리에는 이미 저전력 MCU + 작은 신경망이 들어가 있습니다. GPU나 뇌의 20 W와 비교하는 것은 같은 자리의 경쟁자가 아니고, 같은 소재끼리의 비교는 '이 device를 쓸 이유'를 보여 주지 못합니다. 이 경쟁자 설정은 이 교재의 해석 [해석]이며, 폴더 논문에 MCU와 직접 비교한 숫자는 없습니다.", "refLabel": "진짜 경쟁자(구간 첫 문단)"}, {"id": "d05-p05", "ref": "#s-compare-items", "type": "mc", "q": "저전력 마이크로컨트롤러 + 작은 신경망이 아날로그 뉴로모픽 device보다 대체로 유리한 점은?", "options": ["물이나 몸속 같은 환경에서 봉지 없이도 잘 견딘다", "아날로그 신호를 숫자로 바꾸지 않고 바로 처리한다", "프로그램만 바꾸면 기능이 바뀌고, 결과가 비트 단위로 재현된다", "과거 입력을 device 상태에 담아 따로 저장할 필요가 없다"], "a": 2, "why": "MCU 쪽은 프로그램 가능성·정밀도·재현성·성숙도에서 앞섭니다. 나머지 셋(생체·수계 환경, 변환 생략, 이력을 상태에 담기)은 시간척도가 맞거나 다음 단계가 아날로그인 것 같은 조건이 붙을 때 뉴로모픽 device 쪽이 유리할 수 있는 항목입니다. 폴더 논문에 MCU와 직접 비교한 숫자는 없습니다 [해석].", "refLabel": "MCU와 뉴로모픽의 항목별 비교"}, {"id": "d05-p06", "ref": "#s-bio-why", "type": "mc", "q": "이온 device를 생체 인터페이스(몸과 맞닿는 장치)에 쓰자는 주장을 가장 정확히 말한 것은?", "options": ["전자 device가 다루기 어려운 물·이온 환경을 노리되, 조건이 붙는다", "전자 device로도 되는 일을 더 싸게 하려는 것이다", "이온 device가 모든 면에서 전자 device보다 빠르고 안정적이다", "이온 device는 결과를 전자 회로로 넘길 필요가 전혀 없다"], "a": 0, "why": "생체 인터페이스는 '싸게'가 아니라 '전자 device가 어려운 환경' 때문에 따로 다룹니다. 이온 시스템은 안정성 등에서 아직 전자에 뒤처지고, 결과는 어딘가에서 전자 신호로 바뀌어야 하므로 변환 효율 문제도 있어, 우열이 아니라 분업으로 봅니다.", "refLabel": "bio-interface를 따로 다루는 이유"}, {"id": "d05-p07", "ref": "#s-unfit", "type": "ox", "q": "기능을 자주 바꿔야 하는 일(앱을 수시로 업데이트하는 것처럼)은 아날로그 뉴로모픽 회로에 잘 맞는다.", "a": false, "why": "기능이 자주 바뀌는 일은 프로그램만 바꾸면 되는 범용 디지털 칩에 유리해서 부적합한 문제로 분류됩니다. 대량 일괄 계산, 정확한 산술, 희소하지 않은 고정밀 입력도 같은 칸입니다.", "refLabel": "부적합한 문제"}]}, "1-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d05-q01", "ref": "#s-ladder-questions", "refLabel": "질문 1: 실시간과 배치", "type": "mc", "q": "사다리 질문 1('입력이 한 번에 하나씩, 실시간으로 오나?')에 '아니오'인 과제, 예를 들어 사진 수백만 장을 한꺼번에 분류하는 일에서 보통 컴퓨터가 유리한 주된 이유는?", "options": ["사진들을 배치로 묶어 같은 weight를 재사용하므로 가져오는 비용이 나뉜다", "사진 분류는 근사를 견디지 못하므로 아날로그 device를 쓸 수 없다", "입력이 많을수록 사건 구동의 활동률이 낮아져 보통 컴퓨터가 유리해진다", "보통 컴퓨터는 클록이 빨라 데이터 이동 비용이 생기지 않는다"], "a": 0, "why": "모아 둘 수 있는 입력은 배치로 묶어, 한 번 가져온 weight를 여러 입력에 재사용합니다. 분류는 오히려 근사를 견디는 과제이고, 입력이 많다고 활동률이 낮아지지 않으며, 클록이 빨라도 이동 비용은 남습니다. 반대로 '예'인 과제도 배치로 이득을 보기 어렵다는 것까지이고, 작은 모델이면 디지털이 memory wall에 막히지 않을 수 있습니다."}, {"id": "d05-q28", "type": "ox", "q": "사다리의 여섯 질문 가운데 '과제가 근사를 견디나'와 '신호의 시간척도'는 회로 설계로 바꿀 수 있다.", "a": false, "why": "둘 다 과제가 정한다. device의 τ는 재료로 조절할 수 있지만, 맞춰야 할 목표인 신호의 시간척도는 과제가 준다. 회로 설계로 바꿀 수 있는 것은 대기 전력(질문 2)과 다음 단계를 아날로그로 두는 것(질문 5)이다.", "ref": "#s-ladder-limits", "refLabel": "적용 조건: 설계가 바꾸는 것과 과제가 정하는 것"}, {"id": "d05-q38", "ref": "#s-ladder-ecg", "refLabel": "심전도 패치를 사다리에 올리기, 질문 1", "type": "ox", "q": "심전도 패치처럼 입력이 실시간으로 하나씩 오는 과제라도, weight가 칩 안 메모리에 다 들어가는 작은 모델이면 디지털 쪽이 배치 1에서 memory wall에 막히지 않을 수 있다.", "a": true, "why": "배치 1이라는 것은 '여러 입력으로 weight 가져오기 비용을 나눌 수 없다'는 뜻입니다. weight가 칩 안에 계속 있으면 판단마다 칩 밖 메모리에서 가져올 일이 없습니다(디지털 기준선). 그래서 질문 1의 '예'만으로 뉴로모픽이 유리하다고 하지 않고, 질문 6에서 숫자로 비교합니다."}]}, "1-end": {"kind": "end", "title": "1장 마무리 퀴즈", "items": [{"id": "d05-q26", "type": "mc", "q": "어떤 physical reservoir computing 논문이 '디지털 RC보다 정확도가 2%p 낮지만, device 하나가 한 번 반응하는 데 쓰는 에너지는 fJ 수준'이라고 보고했다. '디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다'는 기준으로 볼 때, 이 논문이 아직 보여 주지 않은 것은?", "options": ["같은 과제에서 정확도가 디지털 RC보다 높다는 것", "device 하나의 반응 에너지가 fJ보다 더 작다는 것", "peripheral circuit까지 넣은 시스템 자원이 더 적다는 것", "device가 입력에 비선형으로 반응한다는 것을 측정한 것"], "a": 2, "why": "기준은 정확도가 아니라 자원(전력·하드웨어·학습 비용)이다. Liang은 같은 구성이면 소프트웨어 RC가 대개 더 정확하다고 보므로 정확도 우위는 요구 조건이 아니다. device 하나의 fJ는 시스템 자원이 아니다(peripheral circuit이 시스템 전력의 최대 70%). 이것이 사다리 여섯째 질문의 뼈대다.", "ref": "#s-ladder-questions", "refLabel": "질문 6: 디지털 RC보다 자원을 더 쓰면"}, {"id": "d05-q27", "type": "mc", "q": "희소한 데이터가 조금씩 들어오는 마이크로와트급 엣지 센서와, 거대한 데이터를 한꺼번에 처리하는 클라우드 데이터센터. 사다리 첫 질문('입력이 한 번에 하나씩, 실시간으로 오나?')을 통과할 가능성이 큰 쪽과 그 이유는?", "options": ["데이터센터: 데이터가 많을수록 뉴로모픽의 이득이 커진다", "엣지 센서: 입력이 하나씩 와서 모아 두고 기다릴 여유가 작다", "둘 다: 둘 다 신경망을 쓰는 AI 응용이다", "데이터센터: 전력을 많이 써서 줄일 여지가 크다"], "a": 1, "why": "Roadmap 2026이 AI 응용의 양 끝으로 둔 두 자리다. 데이터센터는 입력을 묶어 weight를 재사용할 수 있어 첫 질문에서 떨어진다. 엣지 센서는 첫 질문을 통과하지만, 그것은 '배치로 이득을 보기 어렵다'까지이고 디지털 기준선과의 비교(질문 6)는 남는다. 전력이 크다는 것만으로 뉴로모픽이 유리해지지 않는다.", "ref": "#s-ladder-questions", "refLabel": "질문 1: 엣지 센서와 데이터센터"}]}, "2-chain": {"kind": "check", "title": "잠깐 점검 · 센서 노드의 네 고리", "items": [{"id": "d05-q21", "type": "mc", "q": "센서 노드의 네 고리를 데이터가 흐르는 순서대로 고르면?", "options": ["MCU → 센서 → ADC → 무선", "센서 → 무선 → ADC → MCU", "ADC → 센서 → MCU → 무선", "센서 → ADC → MCU → 무선"], "a": 3, "why": "센서가 물리량을 연속 전압으로 바꾸고, ADC가 숫자로 바꾸고, MCU가 처리하고, 무선이 보낸다. 흔한 혼동은 ADC와 MCU의 순서다. MCU는 숫자만 다루므로 ADC가 먼저다.", "ref": "#s-sensor-chain", "refLabel": "네 고리의 순서"}, {"id": "d05-q23", "ref": "#b-sensor-node", "type": "mc", "q": "센서 노드에서 MCU(마이크로컨트롤러)가 하는 일로 맞는 것은?", "options": ["센서의 mV 신호를 V 자릿수로 키우고 떨림을 거르는 아날로그 회로다", "연속 전압을 1 ms마다 읽어 12 bit 숫자로 바꾸는 일만 한다", "ADC가 만든 숫자를 프로그램대로 거르고 판정하며, 작은 신경망도 돌린다", "처리 없이 원시 숫자를 전파에 실어 보내는 일만 한다"], "a": 2, "why": "MCU는 작은 프로세서·메모리·ADC·통신 회로를 한 칩에 담은 범용 제어기로, 숫자를 받아 프로그램대로 처리한다. 첫째는 증폭기·필터, 둘째는 ADC, 넷째는 무선의 일이다. 작은 신경망을 돌릴 수 있다는 점 때문에 뒤에서 뉴로모픽 device의 실제 경쟁자가 된다.", "refLabel": "기초 1: 센서 노드와 MCU"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 평균 전력 세기", "items": [{"id": "d05-q36", "ref": "#ex-mcu-duty", "refLabel": "깨어 있는 비율 계산(MCU 5 ms 그림)", "type": "mc", "q": "MCU가 샘플 하나를 처리하려고 약 8.3 µs 깨어 있고, 샘플은 1초에 1,000번 온다. 1초 가운데 깨어 있는 시간의 비율(듀티 사이클)은?", "options": ["약 0.083%", "약 0.83%", "약 8.3%", "약 83%"], "a": 1, "why": "8.3 µs × 1,000 = 8,300 µs = 8.3 ms = 0.0083 s이므로 약 0.83%다. 나머지 약 99.2%는 잠들어 있고, 그동안의 대기 전력(이 MCU는 약 1.2 µW)이 바닥으로 남는다. 8.3%는 µs와 ms를 한 자리 잘못 옮긴 값이다."}, {"id": "d05-q35", "ref": "#ex-three-cases", "refLabel": "A의 송신 계산", "type": "mc", "q": "원시 데이터를 전부 보내는 설계(A)에서 ADC는 1,000/s × 1 nJ = 1 µW, MCU는 1,000/s × 20 nJ = 20 µW다. 같은 방식으로 송신 전력을 계산하면? (1,000 S/s × 12 bit, 무선 50 nJ/bit)", "options": ["약 0.6 µW", "약 60 µW", "약 600 µW", "약 6,000 µW"], "a": 2, "why": "1초에 보내는 비트 수 R = 1,000 × 12 = 12,000 bit/s, × 50 nJ/bit = 600,000 nJ/s = 600 µW. ADC·MCU(21 µW)보다 훨씬 커서 A의 합계 621 µW는 거의 송신이다. 그래서 사건만 보내는 B가 약 27분의 1로 줄인다. 송신이 지배하지 않는 노드라면 끊을 곳이 달라진다(가정값 기준)."}, {"id": "d05-q29", "ref": "#ex-three-cases", "type": "mc", "q": "설계 B(MCU가 처리해 사건만 보냄)에서 사건이 초당 2번이 아니라 20번 온다면 송신 전력은? (사건당 16 bit, 무선 50 nJ/bit. '1초에 보내는 비트 수 × 1 bit의 에너지'로 혼자 풀어 보세요.)", "options": ["160 µW", "1.6 µW", "600 µW", "16 µW"], "a": 3, "why": "20 사건/s × 16 bit = 320 bit/s, × 50 nJ/bit = 16,000 nJ/s = 16 µW. 사건이 10배면 송신도 10배다. 1.6 µW는 사건 2번일 때의 값이고, 600 µW는 원시 데이터를 다 보낸 A의 송신이다. 이제 송신이 ADC·MCU 21 µW와 비슷해져 B의 합계가 약 37 µW가 되므로, 사건이 잦을수록 '사건만 보내기'의 이득이 줄어든다(가정값 기준).", "refLabel": "B의 송신 계산"}, {"id": "d05-q24", "ref": "#s-always-on", "type": "mc", "q": "늘 켜져 입력을 감시하다가 사건이 오면 반응하는 동작(always-on)에서 사건이 드물다면, 평균 전력을 주로 정하는 것은?", "options": ["아무 일도 없을 때 쓰는 대기 전력", "사건 하나를 처리하는 에너지", "MCU가 깨어 일할 때의 클록 주파수", "ADC가 쓰는 비트 수(해상도)"], "a": 0, "why": "사건이 드물면 대부분의 시간이 대기이므로 평균 전력 ≈ 대기 전력(P_static)이다. 예: 대기 1 µW, 사건 하루 100번 × 10 µJ이면 사건 몫은 약 0.012 µW로 대기의 약 1%다. 사건당 에너지를 아무리 줄여도 대기 전력이 크면 이득이 작다.", "refLabel": "always-on을 숫자로"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d05-q06", "type": "ox", "q": "Zhong 2022의 '완전 아날로그 RC 시스템' 구성에는 디지털 제어기가 전혀 없다.", "a": false, "why": "같은 논문의 시스템 구성(p.674)에는 전원 모듈, MCU, reservoir 모듈, readout 모듈이 있고 MCU가 제어 신호와 데이터 전송을 맡는다. 22 µW가 이 MCU를 포함하는지는 보충자료에 있어 폴더에서 확인할 수 없다. 그래서 '완전 아날로그'라는 이름만 보고 시스템 경계를 짐작하지 않는다.", "ref": "#s-zhong-limits", "refLabel": "Zhong 적용 조건 (2) 시스템 경계"}, {"id": "d05-q30", "ref": "#s-zhong-limits", "refLabel": "Zhong 적용 조건 (1) 기준선의 종류", "type": "mc", "q": "Zhong 2022는 아날로그 RC의 부정맥 검출 정확도 96.6%를 '완전 디지털 RC'의 98.2%와 비교했다. 이 비교만으로 말할 수 있는 것은?", "options": ["MCU + 작은 신경망으로 같은 과제를 하면 정확도가 96.6%보다 낮다", "device를 빼고 원시 입력에 readout만 써도 96.6%보다 낮다", "아날로그 RC 시스템은 디지털 제어기 없이 이 정확도를 냈다", "같은 알고리즘의 디지털 구현보다 1.6%p 낮다는 것까지다"], "a": 3, "why": "기준선은 같은 알고리즘을 숫자로 돌린 디지털 RC 하나다. MCU에 맞춘 작은 신경망이나 '원시 입력 + readout' 기준선과는 비교하지 않았으므로 그 둘에 대해서는 말할 수 없고, 시스템에는 MCU가 들어 있다."}, {"id": "d05-q31", "ref": "#s-zhong", "refLabel": "Zhong이 든 두 요인과 사다리", "type": "mc", "q": "Zhong 2022는 전력 절감의 한 요인으로 '완전 아날로그 신호 전달로 ADC 오버헤드를 없앴다'를 든다. 이 요인은 사다리의 어느 질문을 통과한 덕분인가?", "options": ["질문 1: 입력이 실시간으로 하나씩 오나", "질문 2: 희소하고 대기 전력이 작나", "질문 4: τ가 신호의 시간척도와 겹치나", "질문 5: 다음 단계가 아날로그이거나 변환이 드문가"], "a": 3, "why": "reservoir 출력을 숫자로 바꾸지 않고 아날로그 readout으로 바로 넘겼으므로, 다음 단계가 아날로그라 변환을 생략한 경우(질문 5)다. 다른 요인인 '큰 순환 신경망을 소수의 device로 대체'는 device 상태가 이력을 담는 쪽(질문 4)에 가깝다. 기준선은 디지털 RC다."}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 경쟁자의 전력", "items": [{"id": "d05-q34", "ref": "#s-mcu-nn", "refLabel": "MCU 신경망 숫자 따라가기", "type": "mc", "q": "weight 1,000개짜리 작은 신경망을 MCU에서 돌린다. MAC 하나에 10박자, 박자당 0.3 nJ이고 1초에 한 번 판정한다. 잠든 몫을 빼면 평균 전력은?", "options": ["약 0.3 µW", "약 3 µW", "약 30 µW", "약 3 mW"], "a": 1, "why": "MAC 1,000번 × 10박자 = 1만 박자, × 0.3 nJ = 3 µJ/inference. 1초에 한 번이면 3 µJ × 1/s = 3 µW이고, 잠든 몫 약 1.2 µW를 더하면 약 4 µW다. 아날로그 전처리(설계 C, 약 3 µW)와 같은 자릿수이므로, 'µW로 동작한다'만으로는 뉴로모픽의 이득을 말할 수 없다."}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d05-q11", "type": "mc", "q": "다음 중 MCU + 작은 NN이 뉴로모픽 device보다 대체로 유리한 항목이 아닌 것은?", "options": ["실시간 시계열의 과거 이력 저장", "프로그램을 바꿔 기능 바꾸기", "비트 단위의 정밀도·재현성", "컴파일러·라이브러리 같은 성숙도"], "a": 0, "why": "실시간 시계열은 device가 이력을 상태에 담으면(τ 정합 시) 뉴로모픽 쪽이 유리할 수 있는 조건부 항목이다. 다만 이력이 칩 안 메모리에 들어가는 크기면 줄어드는 것은 칩 안의 짧은 이동이라, 그 이득은 계산해 봐야 한다. 나머지 셋은 MCU의 강점이다.", "ref": "#s-compare-items", "refLabel": "MCU와 뉴로모픽의 항목별 비교"}, {"id": "d05-q12", "type": "ox", "q": "'아날로그 회로는 기능을 바꾸려면 반드시 회로를 바꿔야 한다'는 항상 참이다.", "a": false, "why": "경우가 많지만 항상은 아니다. physical reservoir computing은 readout 재학습으로 과제를 바꿀 수 있고, Liang p.196의 temporal kernel처럼 device 안에 조절 손잡이를 둔 설계도 있다. 전칭 표현을 조건부로 바꾸는 연습.", "ref": "#s-compare-items", "refLabel": "항목별 비교: 프로그램 가능성"}, {"id": "d05-q13", "type": "mc", "q": "MCU + 작은 신경망과 뉴로모픽 device 시스템을 공정하게 비교하는 방법은?", "options": ["같은 과제에서, device 하나가 한 번 반응하는 에너지만 비교한다", "같은 데이터에서, 정확도가 더 높은 쪽을 더 효율적이라고 본다", "같은 과제·데이터·정확도 목표에서, 같은 시스템 경계로 전력과 지연을 잰다", "각 논문이 보고한 전력 절감률을 그대로 나란히 놓는다"], "a": 2, "why": "device 하나의 에너지는 peripheral circuit·변환을 빠뜨리고, 정확도만으로는 자원을 알 수 없으며, 논문마다 기준선과 시스템 경계가 다르면 절감률을 나란히 놓을 수 없다. Zhong의 비교도 알고리즘은 같지만(디지털 RC) MCU 최적화 신경망과의 비교가 아니고, 시스템 경계는 보충자료에 있다. Day 31–32에서 절차를 다룬다.", "ref": "#s-fair-compare", "refLabel": "공정한 비교의 형식"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · bio-interface", "items": [{"id": "d05-q15", "type": "ox", "q": "이온 device가 생체와 '같은 언어'를 쓴다는 것은 곧 생체 인터페이스에서 전자 device보다 낫다는 뜻이다.", "a": false, "why": "조건이 둘 붙는다. 안정성(Wang 2025 CSR p.329: 다기능성·계산 능력·안정성에서 전자에 뒤처짐)과 이온–전자 변환 효율(Roadmap p.8126: 시간척도 불일치). Zhu 2025 p.14는 우열이 아니라 분업이라고 쓴다.", "ref": "#s-bio-conditions", "refLabel": "적용 조건: 안정성과 변환"}, {"id": "d05-q33", "ref": "#s-bio-conditions", "refLabel": "적용 조건 (2) 변환 효율", "type": "mc", "q": "땀 속 염분을 감시하는 피부 패치에 이온 device 전처리를 넣으려 한다. bio-interface의 두 조건 가운데 '이온–전자 변환'이 묻는 것은?", "options": ["device가 물·염 속에서 몇 주 동안 처음 특성을 그대로 유지하는가", "이온 신호를 어디서 몇 번 전자 신호로 바꾸고, 그 지연·에너지·왜곡이 얼마인가", "device 하나가 한 번 반응하는 데 fJ 수준의 아주 작은 에너지를 쓰는가", "이온 device가 같은 신호에 전자 device보다 빠르게 반응하는가"], "a": 1, "why": "결과는 결국 전극–전해질 계면에서 전자 신호로 바뀌고, 그 계면의 임피던스와 이온(µs–s)·전자(ns) 시간척도 차이가 지연·에너지·왜곡을 만든다. 첫째는 다른 조건인 안정성이고, 셋째는 시스템이 아닌 device 하나의 숫자이며, 넷째는 이온 device의 장점으로 내세우는 점이 아니다."}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d05-q16", "type": "mc", "q": "다음 중 사다리의 질문 3('과제가 근사·편차·잡음을 견디나?')에서 떨어지는 문제는?", "options": ["원 단위까지 맞아야 하는 회계·암호 계산", "심전도의 실시간 부정맥 검출", "늘 켜 둔 압력 센서의 사건 감지", "보철 다리의 폐루프 자극 제어"], "a": 0, "why": "근사를 허용하지 않는 과제는 질문 3에서 떨어진다. 나머지는 정해 둔 놓침·오경보 비율 안에서 근사를 견디는 분류·판단 과제다(실시간·희소·생체 환경 조건과 MCU 비교는 따로 남는다).", "ref": "#s-unfit", "refLabel": "부적합한 문제"}, {"id": "d05-q25", "type": "mc", "q": "자가치유 하이드로겔 reservoir로 음성 명령 네 가지를 구별하는 시스템이, device가 잘린 상태에서는 정확도 25%, 다시 붙이면 0.02 s 안에 원래 수준으로 돌아온다고 보고됐다. 25%라는 숫자가 뜻하는 것은?", "options": ["네 명령 가운데 한 가지만 틀리고 나머지 셋은 맞혔다", "찍어도 나오는 수준이라, 잘린 동안 인식 기능은 사실상 없었다", "정확도가 25%p만 줄었으니 손상에 꽤 강한 device다", "다시 붙인 뒤 회복에 25 ms가 걸렸다는 뜻이다"], "a": 1, "why": "선택지가 4개면 찍기만 해도 1/4 = 25%다. 이 시연이 보여 주는 것은 잘렸을 때 버티는 성질이 아니라 다시 붙인 뒤 재학습 없이 빨리 돌아오는 성질이다. 자가치유(기계적 환경)와 pH 입력(화학 환경)이 bio-interface 조건의 예이고, '계면에 국한되어 손상에 둔감하다'는 설명은 대조 device로 따로 확인해야 한다.", "ref": "#s-pei", "refLabel": "Pei 2026의 절단 실험"}, {"id": "d05-q32", "ref": "#ex-three-cases", "refLabel": "B → C와 모형이 뺀 대기 전력", "type": "mc", "q": "센서 노드 모형에서 C(아날로그 전처리가 사건 때만 ADC·MCU를 깨움)가 B(MCU가 매 샘플 처리)보다 평균 전력이 낮은 이유와, 그 차이에 대한 설명으로 맞는 것은?", "options": ["매 샘플의 ADC·MCU 일을 사건 때로 줄여서이고, 잠든 몫을 넣으면 차이가 준다", "송신 비트를 줄였기 때문이고, 사건이 늘어도 두 설계의 차이는 그대로다", "아날로그 device는 전력을 쓰지 않기 때문이고, device 전력을 넣어도 그대로다", "ADC의 비트 수를 줄였기 때문이고, 샘플링률을 높이면 차이가 더 커진다"], "a": 0, "why": "B와 C는 둘 다 사건만 보내므로 송신은 같다(1.6 µW). 차이는 매 샘플의 ADC·MCU(21 µW)를 사건 때만(약 0.04 µW)으로 줄인 데서 온다. C에도 device 1 µW(가정)가 있고, MCU의 잠든 몫 약 1.2 µW를 두 설계에 더하면 B ≈ 24 µW, C ≈ 4 µW로 차이가 약 9배에서 약 6배로 준다."}, {"id": "d05-q19", "type": "mc", "q": "'뉴로모픽 device는 GPU보다 10⁶배 효율적'이라는 문장을 심전도 패치용 device의 근거로 쓸 때 가장 큰 문제는?", "options": ["효율은 전력(W)으로 비교해야 하는데 이 문장은 작업당 에너지로 비교했다", "GPU도 배치 1에서는 늘 칩 밖에서 weight를 가져오므로 배율이 과소평가됐다", "10⁶배는 측정 오차일 수 있다는 점 말고는 문제가 없다", "패치 자리에서 실제로 맞붙는 상대는 GPU가 아니라 MCU + 작은 신경망이다"], "a": 3, "why": "패치 자리에 GPU를 넣는 사람은 없고, 그 자리의 경쟁자는 MCU + 작은 신경망이다. 효율은 W가 아니라 작업당 에너지로 비교해야 하므로 첫째는 거꾸로이고, 배치 1이어도 weight가 칩 안에 있으면 칩 밖 이동은 없다. 비교하려면 작업·시스템 경계·경쟁자를 맞춰야 한다.", "ref": "#s-myth-gpu", "refLabel": "흔한 오해: GPU보다 10⁶배"}, {"id": "d05-q37", "ref": "#s-unfit", "refLabel": "'적합 후보'의 뜻", "type": "ox", "q": "'적합 후보'로 분류된 응용이라도, 같은 과제에서 MCU + 작은 신경망보다 시스템 전체로 나은지는 따로 비교해야 한다.", "a": true, "why": "'적합 후보'는 Day 3–8의 조건(사다리 1–5)을 통과했다는 뜻이고, 질문 6의 시스템 비교(Day 31–32)는 남아 있다. 오늘 대조한 폴더 논문에는 그 비교의 완전한 예가 없다."}]}, "review": {"kind": "review", "title": "지난 학습 복습: LIF 회로, 시냅스 device spec, peripheral circuit 비용", "items": [{"id": "d05-r01", "core": true, "type": "mc", "q": "LIF 회로(C = 1 nF, R = 10 MΩ, 문턱 0.5 V)에 일정한 입력 전류 40 nA를 계속 넣는다. 결과는?", "options": ["0.4 V를 향해 오르다 멈춰 발화하지 않는다", "전하가 끝없이 쌓이므로 언젠가는 반드시 발화한다", "0.8 V를 향해 오르다 0.5 V에서 되풀이해 발화한다", "입력이 일정하면 membrane potential이 전혀 오르지 않는다"], "a": 0, "why": "leak 전류 V/R이 입력 전류와 같아지는 V = IR = 40 nA × 10 MΩ = 0.4 V에서 membrane potential이 멈춥니다. 문턱 0.5 V보다 낮아 발화하지 않습니다. 같은 40 nA라도 R = 20 MΩ이면 멈추는 값이 0.8 V라 발화합니다.", "wrongWhy": ["", "R로 빠져나가는 leak이 있어 전하가 끝없이 쌓이지 않습니다.", "0.8 V는 R = 20 MΩ일 때의 멈추는 값입니다. 여기서는 R = 10 MΩ입니다.", "처음에는 C에 전하가 쌓이며 membrane potential이 오릅니다."], "ref": "d04b.html#s-lif-steady", "refLabel": "LIF 따라가기: 일정한 입력은 어디서 멈추나", "fig": "../assets/img/d04/fig2-lif.svg", "figAlt": "LIF 회로와 입력 전류에 따른 membrane potential 곡선"}, {"id": "d05-r02", "core": true, "type": "mc", "q": "τ_m = 20 ms인 막을 Δt = 1 ms로 계산하면 decay factor는 0.951이다. 누군가 Δt를 2 ms로 바꾸면서 계수는 0.951을 그대로 썼다. 결과로 맞는 것은?", "options": ["같은 막을 2배 빨리 계산할 뿐 결과는 같다", "시간상수가 약 40 ms인, 더 느리게 새는 다른 막을 계산하는 셈이다", "시간상수가 약 10 ms인, 더 빨리 새는 다른 막을 계산하는 셈이다", "계수는 막만 정하므로 Δt와 상관없이 같은 막이다"], "a": 1, "why": "decay factor는 e^(−Δt/τ)라서 Δt에 묶인 수입니다. 2 ms마다 0.951이 남으면 Δt/τ = 0.05, 곧 τ ≈ 40 ms인 막입니다. 같은 막(20 ms)이라면 2 ms의 계수는 0.905여야 합니다. 막의 빠르기는 τ_m이나 leak rate 1/τ_m으로 말합니다.", "wrongWhy": ["같은 막이라면 Δt = 2 ms의 계수는 0.905로 바뀌어야 합니다.", "", "같은 계수를 더 긴 Δt에 쓰면 덜 새는 것이므로 시간상수는 길어집니다.", "계수는 막과 Δt가 함께 정합니다."], "ref": "d04b.html#s-lif-dt", "refLabel": "leak 항과 decay factor: Δt에 묶인 수"}, {"id": "d05-r03", "type": "mc", "q": "0–255 범위의 8 bit weight 200을 16단계(0–15) device 두 개에 '상위 × 16 + 하위'로 나눠 쓴다. 두 device에 쓸 값은?", "options": ["상위 20, 하위 0", "상위 8, 하위 12", "상위 15, 하위 15", "상위 12, 하위 8"], "a": 3, "why": "12 × 16 + 8 = 192 + 8 = 200입니다. 상태 수가 적은 device 여러 개를 고정된 비중으로 묶어 더 높은 정밀도의 weight를 나타내는 방법입니다.", "wrongWhy": ["device 하나는 0–15만 담으므로 20을 쓸 수 없습니다. 십진수 자릿수로 나눈 것입니다.", "상위와 하위를 바꿨습니다. 8 × 16 + 12 = 140입니다.", "15 × 16 + 15 = 255로 가장 큰 값입니다.", ""], "ref": "d04b.html#s-states", "refLabel": "상태 수: 비트 분할의 예"}, {"id": "d05-r04", "core": true, "type": "mc", "q": "강화 펄스 하나에 +0.12 µS, 억제 펄스 하나에 −0.08 µS 움직이는 device에 learning rule이 '+'와 '−'를 고르게(같은 수만큼) 보낸다. 학습이 이어질 때 weight는 어떻게 되나?", "options": ["명령이 고르게 오면 제자리로 돌아와 문제가 없다", "명령이 고르게 와도 weight가 아래쪽으로 조금씩 쏠린다", "명령이 고르게 와도 weight가 위쪽으로 조금씩 쏠린다", "강화가 크므로 학습이 더 빨리, 더 정확하게 끝난다"], "a": 2, "why": "+0.12 − 0.08 = +0.04 µS가 '+·−' 한 쌍마다 남아, 10쌍이면 +0.4 µS입니다. 명령이 한쪽으로 치우치지 않았는데도 weight가 한쪽으로 쏠리므로, on-chip training에서는 update의 대칭성이 필수입니다.", "wrongWhy": ["한 쌍마다 +0.04 µS가 남아 제자리로 돌아오지 않습니다.", "방향이 거꾸로입니다. 강화(+0.12)가 억제(0.08)보다 커서 위로 쏠립니다.", "", "learning rule이 의도하지 않은 쏠림이 생기므로 수렴과 안정을 해칩니다."], "ref": "d04b.html#s-symmetry", "refLabel": "대칭성을 숫자로", "fig": "../assets/img/d04/fig3-two-linearities.svg", "figAlt": "읽기 I–V 선형성과 update linearity·대칭성을 나눠 그린 모형"}, {"id": "d05-r05", "type": "mc", "q": "학습된 weight를 한 번 써 두고 몇 년 쓰는 inference 전용 칩이, on-chip training 칩보다 오히려 더 까다롭게 요구하는 spec은?", "options": ["update의 선형성·대칭성", "반복 쓰기 endurance", "유지 시간(retention)", "구별되는 상태 수(10 bit 이상)"], "a": 2, "why": "inference 전용은 써 둔 값이 쓰이는 기간 전체(년 단위) 동안 유지돼야 합니다. on-chip training은 학습–inference 간격(초–시간)만큼이면 되고, 지속 학습에서는 서서히 잊는 것이 도움이 되기도 합니다. 나머지 셋은 학습 쪽이 더 까다롭습니다.", "wrongWhy": ["inference 전용은 반복 프로그래밍(write-verify)으로 보정할 수 있어 덜 중요합니다. 학습에서 필수입니다.", "inference 전용은 weight를 몇 번만 쓰므로 요구가 낮습니다.", "", "10 bit 이상은 학습의 요구입니다. inference는 4–8 bit입니다."], "ref": "d04b.html#s-spec-table", "refLabel": "inference용 vs on-chip training용 spec표"}, {"id": "d05-r06", "type": "mc", "q": "논문 A는 'retention 10⁴ s 이상', 논문 B는 'retention 500 s'라고 적었다. B의 device가 더 빨리 잊는다고 결론 내리기 전에 확인할 것은?", "options": ["두 숫자가 같은 정의로 잰 retention인지", "두 device의 쓰기 전압이 같은지만 확인하면 충분하다", "숫자가 큰 쪽이 늘 좋은 device이므로 확인할 것이 없다", "두 숫자를 시간상수 τ로 보고 그대로 나눠 비교하면 된다"], "a": 0, "why": "같은 감쇠 곡선 하나에서도 '90%가 남는 시간'으로 정의하면 약 478 s, '측정한 가장 긴 시간'으로 쓰면 '10⁴ s 이상'(그때 이미 25%만 남음)이 됩니다. 정의, 프로그래밍 직후의 이완, τ와의 구별을 먼저 확인합니다.", "wrongWhy": ["", "쓰기 조건도 중요할 수 있지만, 같은 곡선에서도 정의만 달라지면 숫자가 수십 배 달라집니다.", "필요한 유지 기간은 과제가 정하고, 숫자의 정의도 서로 다를 수 있습니다.", "retention은 정의에 따른 지표이고, 모형의 시간상수 τ와 같은 양이 아닙니다."], "ref": "d04b.html#s-retention", "refLabel": "같은 곡선, 세 가지 retention", "fig": "../assets/img/d04/fig6-retention-defs.svg", "figAlt": "같은 감쇠 곡선에서 정의에 따라 다르게 나오는 세 retention 숫자"}, {"id": "d05-r07", "core": true, "type": "mc", "q": "어떤 crossbar 시스템의 전력이 교차점 device 10%, peripheral circuit 70%, 그 밖 20%로 나뉜다(예시). 재료를 바꿔 device 에너지만 10분의 1로 줄이면 시스템 전력은 대략?", "options": ["10분의 1로 준다", "약 70% 준다", "변하지 않는다", "약 9% 준다"], "a": 3, "why": "device 몫 10%가 1%가 되어 9%p만 줄고, peripheral circuit 70%와 나머지 20%는 그대로라 시스템 전력은 약 91%가 됩니다. device의 fJ는 시스템 에너지의 한 항일 뿐이라, device 숫자와 시스템 숫자는 다른 줄에 적습니다.", "wrongWhy": ["10분의 1이 되는 것은 전체의 10%인 device 몫뿐입니다.", "70%는 peripheral circuit의 몫입니다. device를 바꿔도 peripheral circuit 전력은 그대로입니다.", "device 몫이 10%에서 1%로 줄므로 시스템 전력도 조금은 줍니다.", ""], "ref": "d04b.html#s-device-vs-system", "refLabel": "device 항과 시스템 항", "fig": "../assets/img/d04/fig5-power-breakdown.svg", "figAlt": "crossbar 시스템에서 전력이 가는 곳을 나눈 예시 모식도"}, {"id": "d05-r08", "type": "mc", "q": "학습 단계마다 weight를 고쳐 쓰는 on-chip training 칩과, 학습된 값을 한 번 써 두는 inference 칩. 반복 쓰기 endurance과 쓰기 속도·에너지가 더 중요한 쪽과 그 까닭은?", "options": ["inference 칩. 오래 쓰므로 쓰기 횟수가 더 많다", "on-chip training 칩. 매 단계 쓰므로 쓰기 횟수와 비용이 쌓인다", "둘 다 같다. 쓰기 횟수는 용도와 상관없다", "어느 쪽도 아니다. endurance는 읽기 횟수를 세는 값이다"], "a": 1, "why": "on-chip training은 학습 단계마다 weight를 update하므로 쓰기 횟수가 많고, 한 번의 쓰기 속도·에너지도 매 단계 쌓입니다. inference 전용은 weight를 드물게 쓰므로 요구가 낮습니다.", "wrongWhy": ["inference 칩은 오래 쓰지만 대부분 읽기만 합니다. 쓰기는 드뭅니다.", "", "용도에 따라 쓰기 횟수가 크게 다릅니다.", "endurance는 쓰고 되돌리는 사이클 수를 셉니다."], "ref": "d04b.html#s-endurance-var", "refLabel": "endurance과 편차"}, {"id": "d05-r09", "type": "ox", "q": "스파이킹 신경망 한 층(crossbar + LIF)에서는 스파이크가 오지 않은 column의 교차점 device들도 매 순간 row로 전류를 흘린다.", "a": false, "why": "스파이크가 온 column에만 짧은 전압 펄스가 걸리고, 그 줄의 device들만 conductance만큼 전류를 row로 흘립니다. 스파이크가 없는 column은 조용합니다(사건 구동).", "wrongWhy": ["스파이크가 없는 column에는 전압이 걸리지 않아 그 줄의 device는 전류를 흘리지 않습니다.", ""], "ref": "d04b.html#s-snn-layer", "refLabel": "스파이킹 신경망 한 층: crossbar + LIF"}]}}}</script>
+<script type="application/json" id="quiz-d05">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 바로 돌아갈 설명·작은 예제의 앵커. refLabel: '다시 볼 곳' 링크에 보일 짧은 이름. why에는 정답 이유와 흔한 혼동을 적는다.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "네 가지 일 — 스마트워치의 심박 이상 감지, 은행 이자 계산, 데이터센터의 사진 수백만 장 분류, 땀 속 염분 변화 감시 — 를 '뉴로모픽이 맞을 것 같다 / 아니다 / 모르겠다'로 나눠 보세요. 각각을 나눌 때 스스로 던진 판단 질문을 한 줄씩 적어 두면, 그 질문들이 오늘의 '적합성 사다리' 초안이 됩니다.", "items": [{"id": "d05-p01", "ref": "#s-ladder-questions", "type": "mc", "q": "다음 중 저장·계산을 합치고 사건이 올 때만 움직이는 아날로그 하드웨어가 가장 유리할 가능성이 큰 일은?", "options": ["은행 계좌의 이자를 원 단위까지 정확히 계산하기", "데이터센터에서 사진 수백만 장을 한꺼번에 분류하기", "몸에 붙인 센서로 드문 심장 이상을 실시간 감시하기", "기능이 자주 바뀌는 스마트폰 앱 돌리기"], "a": 2, "why": "입력이 하나씩 실시간으로 오고(묶어 처리 불가), 사건이 드물며, 약간의 오차를 견디고, 신호 시간척도가 device와 겹치는 일일수록 적합 후보입니다. 대량 일괄 처리는 기존 컴퓨터가 weight를 재사용해 유리하고, 정확한 산술·자주 바뀌는 기능은 부적합합니다.", "refLabel": "여섯 질문의 사다리"}, {"id": "d05-p02", "ref": "#ex-three-cases", "type": "mc", "q": "센서 노드가 측정값을 모두 무선으로 보내는 대신, 노드 안에서 처리해 '이상 있음' 같은 결과만 보내도록 바꾸면 주로 줄어드는 것은?", "options": ["센서가 측정에 쓰는 에너지", "무선으로 보내는 데이터 양과 그 송신 에너지", "센서 신호를 숫자로 바꾸는 변환기의 에너지", "줄어드는 것이 없다"], "a": 1, "why": "센서 노드의 전력은 네 부품(센서 → 숫자로 바꾸는 ADC → 계산하는 MCU → 무선 송신)이 나눠 씁니다. 측정값을 모두 보내면 1초에 수천–수만 개의 0/1(bit)을 전파로 보내야 하고, 1 bit를 보내는 데 드는 에너지가 커서 송신이 전력의 대부분을 차지합니다. 노드 안에서 먼저 처리해 '이상 있음' 같은 결과만 보내면 보내는 bit 수가 수백 분의 1로 줄어, 줄어드는 것은 무선 송신 에너지입니다. 센서가 측정하는 일과 ADC가 숫자로 바꾸는 일은 그대로 남습니다.", "refLabel": "A → B에서 줄어든 고리"}, {"id": "d05-p03", "ref": "#ex-three-cases", "type": "ox", "q": "센서 바로 안에서 신호를 미리 처리하면, 어떤 센서 노드에서든 전체 에너지가 크게 줄어든다.", "a": false, "why": "센서 노드는 센서 → 변환(ADC) → 처리(MCU) → 송신의 사슬로 에너지를 씁니다. 송신이 지배하면 엣지 처리가, 변환·처리 쪽이 지배하면 센서 안 전처리가 효과를 냅니다. 어느 고리가 전력을 지배하느냐에 따라 끊을 곳과 효과의 크기가 노드마다 다릅니다.", "refLabel": "어느 고리가 지배하나"}, {"id": "d05-p04", "ref": "#ch-competitor", "type": "mc", "q": "몸에 붙이는 심박 센서 패치에 넣을 처리 장치를 고를 때, 이온 뉴로모픽 device와 맞붙여 비교해야 할 가장 적절한 상대는?", "options": ["데이터센터의 GPU 한 장(수백 W급)", "같은 소재로 만든 다른 이온 device 한 개", "사람 뇌의 에너지 사용(약 20 W)", "저전력 MCU(작은 범용 칩) + 작은 신경망"], "a": 3, "why": "뉴로모픽이 적합한 엣지·실시간 자리에는 이미 저전력 MCU + 작은 신경망이 들어가 있습니다. GPU나 뇌의 20 W와 비교하는 것은 같은 자리의 경쟁자가 아니고, 같은 소재끼리의 비교는 '이 device를 쓸 이유'를 보여 주지 못합니다. 이 경쟁자 설정은 이 교재의 해석 [해석]이며, 폴더 논문에 MCU와 직접 비교한 숫자는 없습니다.", "refLabel": "진짜 경쟁자(구간 첫 문단)"}, {"id": "d05-p05", "ref": "#s-compare-items", "type": "mc", "q": "저전력 마이크로컨트롤러 + 작은 신경망이 아날로그 뉴로모픽 device보다 대체로 유리한 점은?", "options": ["물이나 몸속 같은 환경에서 봉지 없이도 잘 견딘다", "아날로그 신호를 숫자로 바꾸지 않고 바로 처리한다", "프로그램만 바꾸면 기능이 바뀌고, 결과가 비트 단위로 재현된다", "과거 입력을 device 상태에 담아 따로 저장할 필요가 없다"], "a": 2, "why": "MCU 쪽은 프로그램 가능성·정밀도·재현성·성숙도에서 앞섭니다. 나머지 셋(생체·수계 환경, 변환 생략, 이력을 상태에 담기)은 시간척도가 맞거나 다음 단계가 아날로그인 것 같은 조건이 붙을 때 뉴로모픽 device 쪽이 유리할 수 있는 항목입니다. 폴더 논문에 MCU와 직접 비교한 숫자는 없습니다 [해석].", "refLabel": "MCU와 뉴로모픽의 항목별 비교"}, {"id": "d05-p06", "ref": "#s-bio-why", "type": "mc", "q": "이온 device를 생체 인터페이스(몸과 맞닿는 장치)에 쓰자는 주장을 가장 정확히 말한 것은?", "options": ["전자 device가 다루기 어려운 물·이온 환경을 노리되, 조건이 붙는다", "전자 device로도 되는 일을 더 싸게 하려는 것이다", "이온 device가 모든 면에서 전자 device보다 빠르고 안정적이다", "이온 device는 결과를 전자 회로로 넘길 필요가 전혀 없다"], "a": 0, "why": "생체 인터페이스는 '싸게'가 아니라 '전자 device가 어려운 환경' 때문에 따로 다룹니다. 이온 시스템은 안정성 등에서 아직 전자에 뒤처지고, 결과는 어딘가에서 전자 신호로 바뀌어야 하므로 변환 효율 문제도 있어, 우열이 아니라 분업으로 봅니다.", "refLabel": "bio-interface를 따로 다루는 이유"}, {"id": "d05-p07", "ref": "#s-unfit", "type": "ox", "q": "기능을 자주 바꿔야 하는 일(앱을 수시로 업데이트하는 것처럼)은 아날로그 뉴로모픽 회로에 잘 맞는다.", "a": false, "why": "기능이 자주 바뀌는 일은 프로그램만 바꾸면 되는 범용 디지털 칩에 유리해서 부적합한 문제로 분류됩니다. 대량 일괄 계산, 정확한 산술, 희소하지 않은 고정밀 입력도 같은 칸입니다.", "refLabel": "부적합한 문제"}]}, "1-check": {"kind": "check", "title": "잠깐 점검", "items": [{"id": "d05-q01", "ref": "#s-ladder-questions", "refLabel": "질문 1: 실시간과 배치", "type": "mc", "q": "사다리의 첫 질문('입력이 한 번에 하나씩, 실시간으로 오나?')에 '아니오'인 과제, 예를 들어 사진 수백만 장을 한꺼번에 분류하는 일에서 보통 컴퓨터가 유리한 주된 이유는?", "options": ["사진들을 배치로 묶어 같은 weight를 재사용하므로 가져오는 비용이 나뉜다", "사진 분류는 근사를 견디지 못하므로 아날로그 device를 쓸 수 없다", "입력이 많을수록 사건 구동의 활동률이 낮아져 보통 컴퓨터가 유리해진다", "보통 컴퓨터는 클록이 빨라 데이터 이동 비용이 생기지 않는다"], "a": 0, "why": "모아 둘 수 있는 입력은 배치로 묶어, 한 번 가져온 weight를 여러 입력에 재사용합니다. 분류는 오히려 근사를 견디는 과제이고, 입력이 많다고 활동률이 낮아지지 않으며, 클록이 빨라도 이동 비용은 남습니다. 반대로 '예'인 과제도 배치로 이득을 보기 어렵다는 것까지이고, 작은 모델이면 디지털이 memory wall에 막히지 않을 수 있습니다."}, {"id": "d05-q28", "type": "ox", "q": "사다리의 여섯 질문 가운데 '과제가 근사를 견디나'와 '신호의 시간척도'는 회로 설계로 바꿀 수 있다.", "a": false, "why": "둘 다 과제가 정합니다. 근사를 견디는지는 과제의 답이 얼마나 정확해야 하는지로 정해지고, 신호의 빠르기는 신호 자체의 성질입니다. Device의 τ는 재료로 조절할 수 있지만, 맞춰야 할 목표(신호의 빠르기)는 과제가 줍니다. 회로 설계로 바꿀 수 있는 것은 대기 전력의 크기와, 다음 부품을 아날로그로 둘지입니다.", "ref": "#s-ladder-limits", "refLabel": "적용 조건: 설계가 바꾸는 것과 과제가 정하는 것"}, {"id": "d05-q38", "ref": "#s-ladder-ecg", "refLabel": "심전도 패치를 사다리에 올리기, 질문 1", "type": "ox", "q": "심전도 패치처럼 입력이 실시간으로 하나씩 오는 과제라도, weight가 칩 안 메모리에 다 들어가는 작은 모델이면 디지털 쪽이 배치 1에서 memory wall에 막히지 않을 수 있다.", "a": true, "why": "Batch 1은 '여러 입력으로 weight 가져오기 비용을 나눌 수 없다'는 뜻입니다. 그런데 weight가 칩 안 메모리에 계속 있으면 판단마다 칩 밖 메모리에서 가져올 일이 없으니 나눌 비용도 없습니다. 그래서 '실시간으로 하나씩 오나'의 '예'만으로 뉴로모픽이 유리하다고 하지 않고, 마지막 질문('MCU + 작은 신경망보다 나은가')에서 숫자로 비교합니다."}]}, "1-end": {"kind": "end", "title": "1장 마무리 퀴즈", "items": [{"id": "d05-q26", "type": "mc", "q": "어떤 physical reservoir computing 논문이 '디지털 RC보다 정확도가 2%p 낮지만, device 하나가 한 번 반응하는 데 쓰는 에너지는 fJ 수준'이라고 보고했다. '디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다'는 기준으로 볼 때, 이 논문이 아직 보여 주지 않은 것은?", "options": ["같은 과제에서 정확도가 디지털 RC보다 높다는 것", "device 하나의 반응 에너지가 fJ보다 더 작다는 것", "peripheral circuit까지 넣은 시스템 자원이 더 적다는 것", "device가 입력에 비선형으로 반응한다는 것을 측정한 것"], "a": 2, "why": "기준은 정확도가 아니라 자원(전력·하드웨어·학습 비용)입니다. Liang은 같은 구성이면 software RC가 대개 더 정확하다고 보므로 정확도 우위는 요구 조건이 아닙니다. Device 하나의 fJ는 시스템 자원이 아닙니다(peripheral circuit이 시스템 전력의 최대 70%). 이것이 사다리 마지막 질문('MCU + 작은 신경망보다 시스템 전체로 나은가')의 뼈대입니다.", "ref": "#s-ladder-questions", "refLabel": "질문 6: 디지털 RC보다 자원을 더 쓰면"}, {"id": "d05-q27", "type": "mc", "q": "희소한 데이터가 조금씩 들어오는 마이크로와트급 엣지 센서와, 거대한 데이터를 한꺼번에 처리하는 클라우드 데이터센터. 사다리 첫 질문('입력이 한 번에 하나씩, 실시간으로 오나?')을 통과할 가능성이 큰 쪽과 그 이유는?", "options": ["데이터센터: 데이터가 많을수록 뉴로모픽의 이득이 커진다", "엣지 센서: 입력이 하나씩 와서 모아 두고 기다릴 여유가 작다", "둘 다: 둘 다 신경망을 쓰는 AI 응용이다", "데이터센터: 전력을 많이 써서 줄일 여지가 크다"], "a": 1, "why": "Roadmap 2026이 AI 응용의 양 끝으로 둔 두 자리입니다. 데이터센터는 입력을 묶어 weight를 재사용할 수 있어 첫 질문에서 떨어집니다. 엣지 센서는 첫 질문을 통과하지만, 그 뜻은 'batch로 이득을 보기 어렵다'까지이고, MCU + 작은 신경망과의 비교는 여전히 남습니다. 전력이 작아야 한다는 것만으로 뉴로모픽이 유리해지지 않습니다.", "ref": "#s-ladder-questions", "refLabel": "질문 1: 엣지 센서와 데이터센터"}]}, "2-chain": {"kind": "check", "title": "잠깐 점검 · 센서 노드의 네 고리", "items": [{"id": "d05-q21", "type": "mc", "q": "센서 노드의 네 고리를 데이터가 흐르는 순서대로 고르면?", "options": ["MCU → 센서 → ADC → 무선", "센서 → 무선 → ADC → MCU", "ADC → 센서 → MCU → 무선", "센서 → ADC → MCU → 무선"], "a": 3, "why": "센서가 물리량을 연속 전압으로 바꾸고, ADC가 숫자로 바꾸고, MCU가 처리하고, 무선이 보낸다. 흔한 혼동은 ADC와 MCU의 순서다. MCU는 숫자만 다루므로 ADC가 먼저다.", "ref": "#s-sensor-chain", "refLabel": "네 고리의 순서"}, {"id": "d05-q23", "ref": "#b-sensor-node", "type": "mc", "q": "센서 노드에서 MCU(마이크로컨트롤러)가 하는 일로 맞는 것은?", "options": ["센서의 mV 신호를 V 자릿수로 키우고 떨림을 거르는 아날로그 회로다", "연속 전압을 1 ms마다 읽어 12 bit 숫자로 바꾸는 일만 한다", "ADC가 만든 숫자를 프로그램대로 거르고 판정하며, 작은 신경망도 돌린다", "처리 없이 원시 숫자를 전파에 실어 보내는 일만 한다"], "a": 2, "why": "MCU는 작은 프로세서·메모리·ADC·통신 회로를 한 칩에 담은 범용 제어기로, 숫자를 받아 프로그램대로 처리한다. 첫째는 증폭기·필터, 둘째는 ADC, 넷째는 무선의 일이다. 작은 신경망을 돌릴 수 있다는 점 때문에 뒤에서 뉴로모픽 device의 실제 경쟁자가 된다.", "refLabel": "기초 1: 센서 노드와 MCU"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 평균 전력 세기", "items": [{"id": "d05-q36", "ref": "#ex-mcu-duty", "refLabel": "깨어 있는 비율 계산(MCU 5 ms 그림)", "type": "mc", "q": "MCU가 샘플 하나를 처리하려고 약 8.3 µs 깨어 있고, 샘플은 1초에 1,000번 온다. 1초 가운데 깨어 있는 시간의 비율(듀티 사이클)은?", "options": ["약 0.083%", "약 0.83%", "약 8.3%", "약 83%"], "a": 1, "why": "8.3 µs × 1,000 = 8,300 µs = 8.3 ms = 0.0083 s이므로 약 0.83%다. 나머지 약 99.2%는 잠들어 있고, 그동안의 대기 전력(이 MCU는 약 1.2 µW)이 바닥으로 남는다. 8.3%는 µs와 ms를 한 자리 잘못 옮긴 값이다."}, {"id": "d05-q35", "ref": "#ex-three-cases", "refLabel": "A의 송신 계산", "type": "mc", "q": "원시 데이터를 전부 보내는 설계(A)에서 ADC는 1,000/s × 1 nJ = 1 µW, MCU는 1,000/s × 20 nJ = 20 µW다. 같은 방식으로 송신 전력을 계산하면? (1,000 S/s × 12 bit, 무선 50 nJ/bit)", "options": ["약 0.6 µW", "약 60 µW", "약 600 µW", "약 6,000 µW"], "a": 2, "why": "1초에 보내는 비트 수 R = 1,000 × 12 = 12,000 bit/s, × 50 nJ/bit = 600,000 nJ/s = 600 µW. ADC·MCU(21 µW)보다 훨씬 커서 A의 합계 621 µW는 거의 송신이다. 그래서 사건만 보내는 B가 약 27분의 1로 줄인다. 송신이 지배하지 않는 노드라면 끊을 곳이 달라진다(가정값 기준)."}, {"id": "d05-q29", "ref": "#ex-three-cases", "type": "mc", "q": "설계 B(MCU가 처리해 사건만 보냄)에서 사건이 초당 2번이 아니라 20번 온다면 송신 전력은? (사건당 16 bit, 무선 50 nJ/bit. '1초에 보내는 비트 수 × 1 bit의 에너지'로 혼자 풀어 보세요.)", "options": ["160 µW", "1.6 µW", "600 µW", "16 µW"], "a": 3, "why": "20 사건/s × 16 bit = 320 bit/s, × 50 nJ/bit = 16,000 nJ/s = 16 µW. 사건이 10배면 송신도 10배다. 1.6 µW는 사건 2번일 때의 값이고, 600 µW는 원시 데이터를 다 보낸 A의 송신이다. 이제 송신이 ADC·MCU 21 µW와 비슷해져 B의 합계가 약 37 µW가 되므로, 사건이 잦을수록 '사건만 보내기'의 이득이 줄어든다(가정값 기준).", "refLabel": "B의 송신 계산"}, {"id": "d05-q24", "ref": "#s-always-on", "type": "mc", "q": "늘 켜져 입력을 감시하다가 사건이 오면 반응하는 동작(always-on)에서 사건이 드물다면, 평균 전력을 주로 정하는 것은?", "options": ["아무 일도 없을 때 쓰는 대기 전력", "사건 하나를 처리하는 에너지", "MCU가 깨어 일할 때의 클록 주파수", "ADC가 쓰는 비트 수(해상도)"], "a": 0, "why": "사건이 드물면 대부분의 시간이 대기이므로 평균 전력 ≈ 대기 전력(P_static)이다. 예: 대기 1 µW, 사건 하루 100번 × 10 µJ이면 사건 몫은 약 0.012 µW로 대기의 약 1%다. 사건당 에너지를 아무리 줄여도 대기 전력이 크면 이득이 작다.", "refLabel": "always-on을 숫자로"}]}, "2-end": {"kind": "end", "title": "2장 마무리 퀴즈", "items": [{"id": "d05-q06", "type": "ox", "q": "Zhong 2022의 '완전 아날로그 RC 시스템' 구성에는 디지털 제어기가 전혀 없다.", "a": false, "why": "같은 논문의 시스템 구성(p.674)에는 전원 모듈, MCU, reservoir 모듈, readout 모듈이 있고 MCU가 제어 신호와 데이터 전송을 맡는다. 22 µW가 이 MCU를 포함하는지는 보충자료에 있어 폴더에서 확인할 수 없다. 그래서 '완전 아날로그'라는 이름만 보고 시스템 경계를 짐작하지 않는다.", "ref": "#s-zhong-limits", "refLabel": "Zhong 적용 조건 (2) 시스템 경계"}, {"id": "d05-q30", "ref": "#s-zhong-limits", "refLabel": "Zhong 적용 조건 (1) 기준선의 종류", "type": "mc", "q": "Zhong 2022는 아날로그 RC의 부정맥 검출 정확도 96.6%를 '완전 디지털 RC'의 98.2%와 비교했다. 이 비교만으로 말할 수 있는 것은?", "options": ["MCU + 작은 신경망으로 같은 과제를 하면 정확도가 96.6%보다 낮다", "device를 빼고 원시 입력에 readout만 써도 96.6%보다 낮다", "아날로그 RC 시스템은 디지털 제어기 없이 이 정확도를 냈다", "같은 알고리즘의 디지털 구현보다 1.6%p 낮다는 것까지다"], "a": 3, "why": "기준선은 같은 알고리즘을 숫자로 돌린 디지털 RC 하나다. MCU에 맞춘 작은 신경망이나 '원시 입력 + readout' 기준선과는 비교하지 않았으므로 그 둘에 대해서는 말할 수 없고, 시스템에는 MCU가 들어 있다."}, {"id": "d05-q31", "ref": "#s-zhong", "refLabel": "Zhong이 든 두 요인과 사다리", "type": "mc", "q": "Zhong 2022는 전력 절감의 한 요인으로 '완전 아날로그 신호 전달로 ADC 오버헤드를 없앴다'를 든다. 이 요인은 사다리의 어느 질문을 통과한 덕분인가?", "options": ["질문 1: 입력이 실시간으로 하나씩 오나", "질문 2: 희소하고 대기 전력이 작나", "질문 4: τ가 신호의 시간척도와 겹치나", "질문 5: 다음 단계가 아날로그이거나 변환이 드문가"], "a": 3, "why": "Reservoir 출력을 숫자로 바꾸지 않고 아날로그 readout으로 바로 넘겼으므로, '다음 부품도 아날로그라 변환을 생략한' 경우입니다. 다른 요인인 '큰 순환 신경망을 device 몇 개로 대체'는 device 상태가 입력의 이력을 담는 쪽('τ가 신호의 빠르기와 맞나')에 가깝습니다. 기준선은 디지털 RC입니다."}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 경쟁자의 전력", "items": [{"id": "d05-q34", "ref": "#s-mcu-nn", "refLabel": "MCU 신경망 숫자 따라가기", "type": "mc", "q": "weight 1,000개짜리 작은 신경망을 MCU에서 돌린다. MAC 하나에 10박자, 박자당 0.3 nJ이고 1초에 한 번 판정한다. 잠든 몫을 빼면 평균 전력은?", "options": ["약 0.3 µW", "약 3 µW", "약 30 µW", "약 3 mW"], "a": 1, "why": "MAC 1,000번 × 10박자 = 1만 박자, × 0.3 nJ = 3 µJ/inference. 1초에 한 번이면 3 µJ × 1/s = 3 µW이고, 잠든 몫 약 1.2 µW를 더하면 약 4 µW다. 아날로그 전처리(설계 C, 약 3 µW)와 같은 자릿수이므로, 'µW로 동작한다'만으로는 뉴로모픽의 이득을 말할 수 없다."}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d05-q11", "type": "mc", "q": "다음 중 MCU + 작은 NN이 뉴로모픽 device보다 대체로 유리한 항목이 아닌 것은?", "options": ["실시간 시계열의 과거 이력 저장", "프로그램을 바꿔 기능 바꾸기", "비트 단위의 정밀도·재현성", "컴파일러·라이브러리 같은 성숙도"], "a": 0, "why": "실시간 시계열은 device가 이력을 상태에 담으면(τ 정합 시) 뉴로모픽 쪽이 유리할 수 있는 조건부 항목이다. 다만 이력이 칩 안 메모리에 들어가는 크기면 줄어드는 것은 칩 안의 짧은 이동이라, 그 이득은 계산해 봐야 한다. 나머지 셋은 MCU의 강점이다.", "ref": "#s-compare-items", "refLabel": "MCU와 뉴로모픽의 항목별 비교"}, {"id": "d05-q12", "type": "ox", "q": "'아날로그 회로는 기능을 바꾸려면 반드시 회로를 바꿔야 한다'는 항상 참이다.", "a": false, "why": "경우가 많지만 항상은 아니다. physical reservoir computing은 readout 재학습으로 과제를 바꿀 수 있고, Liang p.196의 temporal kernel처럼 device 안에 조절 손잡이를 둔 설계도 있다. 전칭 표현을 조건부로 바꾸는 연습.", "ref": "#s-compare-items", "refLabel": "항목별 비교: 프로그램 가능성"}, {"id": "d05-q13", "type": "mc", "q": "MCU + 작은 신경망과 뉴로모픽 device 시스템을 공정하게 비교하는 방법은?", "options": ["같은 과제에서, device 하나가 한 번 반응하는 에너지만 비교한다", "같은 데이터에서, 정확도가 더 높은 쪽을 더 효율적이라고 본다", "같은 과제·데이터·정확도 목표에서, 같은 시스템 경계로 전력과 지연을 잰다", "각 논문이 보고한 전력 절감률을 그대로 나란히 놓는다"], "a": 2, "why": "Device 하나의 에너지는 peripheral circuit·변환을 빠뜨리고, 정확도만으로는 자원을 알 수 없으며, 논문마다 기준선과 시스템 경계가 다르면 절감률을 나란히 놓을 수 없습니다. Zhong의 비교도 알고리즘은 같지만(디지털 RC) MCU에 최적화된 신경망과의 비교가 아니고, 본문에는 전력 숫자에 어떤 부품이 들어갔는지가 나오지 않습니다.", "ref": "#s-fair-compare", "refLabel": "공정한 비교의 형식"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · bio-interface", "items": [{"id": "d05-q15", "type": "ox", "q": "이온 device가 생체와 '같은 언어'를 쓴다는 것은 곧 생체 인터페이스에서 전자 device보다 낫다는 뜻이다.", "a": false, "why": "조건이 둘 붙는다. 안정성(Wang 2025 CSR p.329: 다기능성·계산 능력·안정성에서 전자에 뒤처짐)과 이온–전자 변환 효율(Roadmap p.8126: 시간척도 불일치). Zhu 2025 p.14는 우열이 아니라 분업이라고 쓴다.", "ref": "#s-bio-conditions", "refLabel": "적용 조건: 안정성과 변환"}, {"id": "d05-q33", "ref": "#s-bio-conditions", "refLabel": "적용 조건 (2) 변환 효율", "type": "mc", "q": "땀 속 염분을 감시하는 피부 패치에 이온 device 전처리를 넣으려 한다. bio-interface의 두 조건 가운데 '이온–전자 변환'이 묻는 것은?", "options": ["device가 물·염 속에서 몇 주 동안 처음 특성을 그대로 유지하는가", "이온 신호를 어디서 몇 번 전자 신호로 바꾸고, 그 지연·에너지·왜곡이 얼마인가", "device 하나가 한 번 반응하는 데 fJ 수준의 아주 작은 에너지를 쓰는가", "이온 device가 같은 신호에 전자 device보다 빠르게 반응하는가"], "a": 1, "why": "결과는 결국 전극–전해질 계면에서 전자 신호로 바뀌고, 그 계면의 임피던스와 이온(µs–s)·전자(ns) 시간척도 차이가 지연·에너지·왜곡을 만든다. 첫째는 다른 조건인 안정성이고, 셋째는 시스템이 아닌 device 하나의 숫자이며, 넷째는 이온 device의 장점으로 내세우는 점이 아니다."}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d05-q16", "type": "mc", "q": "다음 중 사다리의 '과제가 근사·편차·잡음을 견디나?'(조금 틀려도 답이 같은가)라는 질문에서 떨어지는 문제는?", "options": ["원 단위까지 맞아야 하는 회계·암호 계산", "심전도의 실시간 부정맥 검출", "늘 켜 둔 압력 센서의 사건 감지", "보철 다리의 폐루프 자극 제어"], "a": 0, "why": "원 단위까지 맞아야 하는 계산처럼 근사를 허용하지 않는 과제는 '조금 틀려도 답이 같은가'라는 질문에서 떨어집니다. 나머지는 정해 둔 놓침·오경보 비율 안에서 근사를 견디는 분류·판단 과제입니다(실시간·희소·생체 환경 조건과 MCU 비교는 따로 남습니다).", "ref": "#s-unfit", "refLabel": "부적합한 문제"}, {"id": "d05-q25", "type": "mc", "q": "자가치유 하이드로겔 reservoir로 음성 명령 네 가지를 구별하는 시스템이, device가 잘린 상태에서는 정확도 25%, 다시 붙이면 0.02 s 안에 원래 수준으로 돌아온다고 보고됐다. 25%라는 숫자가 뜻하는 것은?", "options": ["네 명령 가운데 한 가지만 틀리고 나머지 셋은 맞혔다", "찍어도 나오는 수준이라, 잘린 동안 인식 기능은 사실상 없었다", "정확도가 25%p만 줄었으니 손상에 꽤 강한 device다", "다시 붙인 뒤 회복에 25 ms가 걸렸다는 뜻이다"], "a": 1, "why": "선택지가 4개면 찍기만 해도 1/4 = 25%다. 이 시연이 보여 주는 것은 잘렸을 때 버티는 성질이 아니라 다시 붙인 뒤 재학습 없이 빨리 돌아오는 성질이다. 자가치유(기계적 환경)와 pH 입력(화학 환경)이 bio-interface 조건의 예이고, '계면에 국한되어 손상에 둔감하다'는 설명은 대조 device로 따로 확인해야 한다.", "ref": "#s-pei", "refLabel": "Pei 2026의 절단 실험"}, {"id": "d05-q32", "ref": "#ex-three-cases", "refLabel": "B → C와 모형이 뺀 대기 전력", "type": "mc", "q": "센서 노드 모형에서 C(아날로그 전처리가 사건 때만 ADC·MCU를 깨움)가 B(MCU가 매 샘플 처리)보다 평균 전력이 낮은 이유와, 그 차이에 대한 설명으로 맞는 것은?", "options": ["매 샘플의 ADC·MCU 일을 사건 때로 줄여서이고, 잠든 몫을 넣으면 차이가 준다", "송신 비트를 줄였기 때문이고, 사건이 늘어도 두 설계의 차이는 그대로다", "아날로그 device는 전력을 쓰지 않기 때문이고, device 전력을 넣어도 그대로다", "ADC의 비트 수를 줄였기 때문이고, 샘플링률을 높이면 차이가 더 커진다"], "a": 0, "why": "B와 C는 둘 다 사건만 보내므로 송신은 같다(1.6 µW). 차이는 매 샘플의 ADC·MCU(21 µW)를 사건 때만(약 0.04 µW)으로 줄인 데서 온다. C에도 device 1 µW(가정)가 있고, MCU의 잠든 몫 약 1.2 µW를 두 설계에 더하면 B ≈ 24 µW, C ≈ 4 µW로 차이가 약 9배에서 약 6배로 준다."}, {"id": "d05-q19", "type": "mc", "q": "'뉴로모픽 device는 GPU보다 10⁶배 효율적'이라는 문장을 심전도 패치용 device의 근거로 쓸 때 가장 큰 문제는?", "options": ["효율은 전력(W)으로 비교해야 하는데 이 문장은 작업당 에너지로 비교했다", "GPU도 배치 1에서는 늘 칩 밖에서 weight를 가져오므로 배율이 과소평가됐다", "10⁶배는 측정 오차일 수 있다는 점 말고는 문제가 없다", "패치 자리에서 실제로 맞붙는 상대는 GPU가 아니라 MCU + 작은 신경망이다"], "a": 3, "why": "패치 자리에 GPU를 넣는 사람은 없고, 그 자리의 경쟁자는 MCU + 작은 신경망이다. 효율은 W가 아니라 작업당 에너지로 비교해야 하므로 첫째는 거꾸로이고, 배치 1이어도 weight가 칩 안에 있으면 칩 밖 이동은 없다. 비교하려면 작업·시스템 경계·경쟁자를 맞춰야 한다.", "ref": "#s-myth-gpu", "refLabel": "흔한 오해: GPU보다 10⁶배"}, {"id": "d05-q37", "ref": "#s-unfit", "refLabel": "'적합 후보'의 뜻", "type": "ox", "q": "'적합 후보'로 분류된 응용이라도, 같은 과제에서 MCU + 작은 신경망보다 시스템 전체로 나은지는 따로 비교해야 한다.", "a": true, "why": "'적합 후보'는 사다리의 앞 다섯 질문(실시간, 희소·대기 전력, 근사, τ, 다음 부품)을 통과했다는 뜻이고, 마지막 질문인 MCU + 작은 신경망과의 시스템 비교는 남아 있습니다. 오늘 대조한 폴더 논문에는 그 비교의 완전한 예가 없습니다."}]}, "review": {"kind": "review", "title": "지난 학습 복습: LIF 회로, 시냅스 device spec, peripheral circuit 비용", "items": [{"id": "d05-r01", "core": true, "type": "mc", "q": "LIF 회로(C = 1 nF, R = 10 MΩ, 문턱 0.5 V)에 일정한 입력 전류 40 nA를 계속 넣는다. 결과는?", "options": ["0.4 V를 향해 오르다 멈춰 발화하지 않는다", "전하가 끝없이 쌓이므로 언젠가는 반드시 발화한다", "0.8 V를 향해 오르다 0.5 V에서 되풀이해 발화한다", "입력이 일정하면 membrane potential이 전혀 오르지 않는다"], "a": 0, "why": "leak 전류 V/R이 입력 전류와 같아지는 V = IR = 40 nA × 10 MΩ = 0.4 V에서 membrane potential이 멈춥니다. 문턱 0.5 V보다 낮아 발화하지 않습니다. 같은 40 nA라도 R = 20 MΩ이면 멈추는 값이 0.8 V라 발화합니다.", "wrongWhy": ["", "R로 빠져나가는 leak이 있어 전하가 끝없이 쌓이지 않습니다.", "0.8 V는 R = 20 MΩ일 때의 멈추는 값입니다. 여기서는 R = 10 MΩ입니다.", "처음에는 C에 전하가 쌓이며 membrane potential이 오릅니다."], "ref": "d04b.html#s-lif-steady", "refLabel": "LIF 따라가기: 일정한 입력은 어디서 멈추나", "fig": "../assets/img/d04/fig2-lif.svg", "figAlt": "LIF 회로와 입력 전류에 따른 membrane potential 곡선"}, {"id": "d05-r02", "core": true, "type": "mc", "q": "τ_m = 20 ms인 막을 Δt = 1 ms로 계산하면 decay factor는 0.951이다. 누군가 Δt를 2 ms로 바꾸면서 계수는 0.951을 그대로 썼다. 결과로 맞는 것은?", "options": ["같은 막을 2배 빨리 계산할 뿐 결과는 같다", "시간상수가 약 40 ms인, 더 느리게 새는 다른 막을 계산하는 셈이다", "시간상수가 약 10 ms인, 더 빨리 새는 다른 막을 계산하는 셈이다", "계수는 막만 정하므로 Δt와 상관없이 같은 막이다"], "a": 1, "why": "decay factor는 e^(−Δt/τ)라서 Δt에 묶인 수입니다. 2 ms마다 0.951이 남으면 Δt/τ = 0.05, 곧 τ ≈ 40 ms인 막입니다. 같은 막(20 ms)이라면 2 ms의 계수는 0.905여야 합니다. 막의 빠르기는 τ_m이나 leak rate 1/τ_m으로 말합니다.", "wrongWhy": ["같은 막이라면 Δt = 2 ms의 계수는 0.905로 바뀌어야 합니다.", "", "같은 계수를 더 긴 Δt에 쓰면 덜 새는 것이므로 시간상수는 길어집니다.", "계수는 막과 Δt가 함께 정합니다."], "ref": "d04b.html#s-lif-dt", "refLabel": "leak 항과 decay factor: Δt에 묶인 수"}, {"id": "d05-r03", "type": "mc", "q": "0–255 범위의 8 bit weight 200을 16단계(0–15) device 두 개에 '상위 × 16 + 하위'로 나눠 쓴다. 두 device에 쓸 값은?", "options": ["상위 20, 하위 0", "상위 8, 하위 12", "상위 15, 하위 15", "상위 12, 하위 8"], "a": 3, "why": "12 × 16 + 8 = 192 + 8 = 200입니다. 상태 수가 적은 device 여러 개를 고정된 비중으로 묶어 더 높은 정밀도의 weight를 나타내는 방법입니다.", "wrongWhy": ["device 하나는 0–15만 담으므로 20을 쓸 수 없습니다. 십진수 자릿수로 나눈 것입니다.", "상위와 하위를 바꿨습니다. 8 × 16 + 12 = 140입니다.", "15 × 16 + 15 = 255로 가장 큰 값입니다.", ""], "ref": "d04b.html#s-states", "refLabel": "상태 수: 비트 분할의 예"}, {"id": "d05-r04", "core": true, "type": "mc", "q": "강화 펄스 하나에 +0.12 µS, 억제 펄스 하나에 −0.08 µS 움직이는 device에 learning rule이 '+'와 '−'를 고르게(같은 수만큼) 보낸다. 학습이 이어질 때 weight는 어떻게 되나?", "options": ["명령이 고르게 오면 제자리로 돌아와 문제가 없다", "명령이 고르게 와도 weight가 아래쪽으로 조금씩 쏠린다", "명령이 고르게 와도 weight가 위쪽으로 조금씩 쏠린다", "강화가 크므로 학습이 더 빨리, 더 정확하게 끝난다"], "a": 2, "why": "+0.12 − 0.08 = +0.04 µS가 '+·−' 한 쌍마다 남아, 10쌍이면 +0.4 µS입니다. 명령이 한쪽으로 치우치지 않았는데도 weight가 한쪽으로 쏠리므로, on-chip training에서는 update의 대칭성이 필수입니다.", "wrongWhy": ["한 쌍마다 +0.04 µS가 남아 제자리로 돌아오지 않습니다.", "방향이 거꾸로입니다. 강화(+0.12)가 억제(0.08)보다 커서 위로 쏠립니다.", "", "learning rule이 의도하지 않은 쏠림이 생기므로 수렴과 안정을 해칩니다."], "ref": "d04b.html#s-symmetry", "refLabel": "대칭성을 숫자로", "fig": "../assets/img/d04/fig3-two-linearities.svg", "figAlt": "읽기 I–V 선형성과 update linearity·대칭성을 나눠 그린 모형"}, {"id": "d05-r05", "type": "mc", "q": "학습된 weight를 한 번 써 두고 몇 년 쓰는 inference 전용 칩이, on-chip training 칩보다 오히려 더 까다롭게 요구하는 spec은?", "options": ["update의 선형성·대칭성", "반복 쓰기 endurance", "유지 시간(retention)", "구별되는 상태 수(10 bit 이상)"], "a": 2, "why": "inference 전용은 써 둔 값이 쓰이는 기간 전체(년 단위) 동안 유지돼야 합니다. on-chip training은 학습–inference 간격(초–시간)만큼이면 되고, 지속 학습에서는 서서히 잊는 것이 도움이 되기도 합니다. 나머지 셋은 학습 쪽이 더 까다롭습니다.", "wrongWhy": ["inference 전용은 반복 프로그래밍(write-verify)으로 보정할 수 있어 덜 중요합니다. 학습에서 필수입니다.", "inference 전용은 weight를 몇 번만 쓰므로 요구가 낮습니다.", "", "10 bit 이상은 학습의 요구입니다. inference는 4–8 bit입니다."], "ref": "d04b.html#s-spec-table", "refLabel": "inference용 vs on-chip training용 spec표"}, {"id": "d05-r06", "type": "mc", "q": "논문 A는 'retention 10⁴ s 이상', 논문 B는 'retention 500 s'라고 적었다. B의 device가 더 빨리 잊는다고 결론 내리기 전에 확인할 것은?", "options": ["두 숫자가 같은 정의로 잰 retention인지", "두 device의 쓰기 전압이 같은지만 확인하면 충분하다", "숫자가 큰 쪽이 늘 좋은 device이므로 확인할 것이 없다", "두 숫자를 시간상수 τ로 보고 그대로 나눠 비교하면 된다"], "a": 0, "why": "같은 감쇠 곡선 하나에서도 '90%가 남는 시간'으로 정의하면 약 478 s, '측정한 가장 긴 시간'으로 쓰면 '10⁴ s 이상'(그때 이미 25%만 남음)이 됩니다. 정의, 프로그래밍 직후의 이완, τ와의 구별을 먼저 확인합니다.", "wrongWhy": ["", "쓰기 조건도 중요할 수 있지만, 같은 곡선에서도 정의만 달라지면 숫자가 수십 배 달라집니다.", "필요한 유지 기간은 과제가 정하고, 숫자의 정의도 서로 다를 수 있습니다.", "retention은 정의에 따른 지표이고, 모형의 시간상수 τ와 같은 양이 아닙니다."], "ref": "d04b.html#s-retention", "refLabel": "같은 곡선, 세 가지 retention", "fig": "../assets/img/d04/fig6-retention-defs.svg", "figAlt": "같은 감쇠 곡선에서 정의에 따라 다르게 나오는 세 retention 숫자"}, {"id": "d05-r07", "core": true, "type": "mc", "q": "어떤 crossbar 시스템의 전력이 교차점 device 10%, peripheral circuit 70%, 그 밖 20%로 나뉜다(예시). 재료를 바꿔 device 에너지만 10분의 1로 줄이면 시스템 전력은 대략?", "options": ["10분의 1로 준다", "약 70% 준다", "변하지 않는다", "약 9% 준다"], "a": 3, "why": "device 몫 10%가 1%가 되어 9%p만 줄고, peripheral circuit 70%와 나머지 20%는 그대로라 시스템 전력은 약 91%가 됩니다. device의 fJ는 시스템 에너지의 한 항일 뿐이라, device 숫자와 시스템 숫자는 다른 줄에 적습니다.", "wrongWhy": ["10분의 1이 되는 것은 전체의 10%인 device 몫뿐입니다.", "70%는 peripheral circuit의 몫입니다. device를 바꿔도 peripheral circuit 전력은 그대로입니다.", "device 몫이 10%에서 1%로 줄므로 시스템 전력도 조금은 줍니다.", ""], "ref": "d04b.html#s-device-vs-system", "refLabel": "device 항과 시스템 항", "fig": "../assets/img/d04/fig5-power-breakdown.svg", "figAlt": "crossbar 시스템에서 전력이 가는 곳을 나눈 예시 모식도"}, {"id": "d05-r08", "type": "mc", "q": "학습 단계마다 weight를 고쳐 쓰는 on-chip training 칩과, 학습된 값을 한 번 써 두는 inference 칩. 반복 쓰기 endurance과 쓰기 속도·에너지가 더 중요한 쪽과 그 까닭은?", "options": ["inference 칩. 오래 쓰므로 쓰기 횟수가 더 많다", "on-chip training 칩. 매 단계 쓰므로 쓰기 횟수와 비용이 쌓인다", "둘 다 같다. 쓰기 횟수는 용도와 상관없다", "어느 쪽도 아니다. endurance는 읽기 횟수를 세는 값이다"], "a": 1, "why": "on-chip training은 학습 단계마다 weight를 update하므로 쓰기 횟수가 많고, 한 번의 쓰기 속도·에너지도 매 단계 쌓입니다. inference 전용은 weight를 드물게 쓰므로 요구가 낮습니다.", "wrongWhy": ["inference 칩은 오래 쓰지만 대부분 읽기만 합니다. 쓰기는 드뭅니다.", "", "용도에 따라 쓰기 횟수가 크게 다릅니다.", "endurance는 쓰고 되돌리는 사이클 수를 셉니다."], "ref": "d04b.html#s-endurance-var", "refLabel": "endurance과 편차"}, {"id": "d05-r09", "type": "ox", "q": "스파이킹 신경망 한 층(crossbar + LIF)에서는 스파이크가 오지 않은 column의 교차점 device들도 매 순간 row로 전류를 흘린다.", "a": false, "why": "스파이크가 온 column에만 짧은 전압 펄스가 걸리고, 그 줄의 device들만 conductance만큼 전류를 row로 흘립니다. 스파이크가 없는 column은 조용합니다(사건 구동).", "wrongWhy": ["스파이크가 없는 column에는 전압이 걸리지 않아 그 줄의 device는 전류를 흘리지 않습니다.", ""], "ref": "d04b.html#s-snn-layer", "refLabel": "스파이킹 신경망 한 층: crossbar + LIF"}]}}}</script>
 </section>
 <section id="done" class="level2">
 <h2 class="anchored" data-anchor-id="done">학습 완료</h2>

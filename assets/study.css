@@ -654,7 +654,7 @@ figure.fig figcaption b, .video .vcap b { color: var(--ink); }
 /* 캡션: 핵심 관찰(본문 대비) / 출처 줄(작고 회색, 한 줄 띄움) */
 .paper-note { display: block; margin-top: 0.3rem; font-size: 0.82rem; color: #565f67; }
 figure.fig.narrow { max-width: 520px; margin-left: auto; margin-right: auto; }
-figure.fig.photo img { border-radius: 8px; border: 1px solid var(--line); max-height: 520px; width: auto; max-width: 100%; display: block; margin: 0 auto; }
+figure.fig.photo img { border-radius: 8px; border: 1px solid var(--line); max-height: 21em; width: auto; max-width: min(34em, 100%); display: block; margin: 0 auto; }
 .video { margin: 1.8rem 0 2rem; }
 .video .frame { position: relative; width: 100%; padding-top: 56.25%; background: #111; border-radius: 10px; overflow: hidden; }
 .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -1364,9 +1364,34 @@ dl.terms dd { margin: 0; padding: 0.55rem 0 0.55rem 0.4rem; border-top: 1px soli
 .progress-strip li.later { color: #a0a6b2; }
 .progress-strip .ps-gist { font-size: 0.86rem; color: var(--text); margin-top: 0.1rem; }
 /* 논문 탭에서 인용 링크로 온 논문 표시 */
-article.paper:target { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+/* 본문의 출처 링크로 온 논문: 형광펜 노란 테두리 (2026-10-31) */
+article.paper:target, article.paper.pp-hit { outline: 3px solid #f2c94c; outline-offset: 5px; border-radius: 8px; box-shadow: 0 0 0 9px rgba(251, 231, 161, 0.35); }
 
 /* 머리말 이름표: 한 줄 고정(줄바꿈으로 다음 칸과 겹치지 않게), 칸 사이 간격 */
 .unit-head p { padding-left: 7.4rem; margin: 0 0 0.75rem; }
 .unit-head p > strong:first-child { width: 6.9rem; white-space: nowrap; }
 @media (max-width: 640px) { .unit-head p { padding-left: 0; } .unit-head p > strong:first-child { white-space: normal; } }
+
+/* ---------- 2026-10-31 Day 9 학습 피드백 ---------- */
+/* 중요한 문장 앞의 별: 형광펜과 같은 노란 계열 */
+.star-mark { color: #f0b400; font-size: 1.02em; margin-right: 0.18em; text-shadow: 0 0 0.5px #b88600; }
+/* [계산] [가정] 꼬리표 */
+.tag-calc { background: #eef0fb; color: #3b4aa0; }
+.tag-assume { background: #f6eefa; color: #7a3f97; }
+/* 출처·검증 메모: 평소에는 작은 '출처' 단추만, 누르면 펼침 */
+.prov-chip { font: inherit; font-size: 0.68rem; line-height: 1.2; padding: 0.05rem 0.45rem; margin: 0 0.15rem; border: 1px solid #d5dadd; border-radius: 999px; background: #f6f7f9; color: #6b7280; vertical-align: 0.12em; cursor: pointer; }
+.prov-chip:hover, .prov-chip[aria-expanded="true"] { border-color: #b9c2cc; color: #374151; background: #eef1f4; }
+span.prov[data-chip] { display: none; }
+span.prov[data-chip].open { display: inline; }
+figcaption span.prov[data-chip].open, .vcap span.prov[data-chip].open { display: block; }
+/* 다른 Day로 가는 본문 링크(새 탭) 표시 */
+.lesson-body a.x-day::after { content: "↗"; font-size: 0.72em; margin-left: 0.12em; vertical-align: 0.25em; opacity: 0.6; }
+/* 좁은 화면에서도 사이트 이름이 'Why Io…'로 잘리지 않게 */
+@media (min-width: 400px) and (max-width: 991.98px) {
+  .navbar-brand-container { max-width: none !important; flex-shrink: 0; }
+  .navbar .navbar-brand { max-width: none !important; overflow: visible !important; }
+  .navbar .navbar-title { text-overflow: clip !important; font-size: 0.98rem; }
+}
+
+/* 그림 크기: study.js가 그림마다 max-width(em)를 주면 가운데 정렬 */
+figure.fig img.sized { margin-left: auto; margin-right: auto; }

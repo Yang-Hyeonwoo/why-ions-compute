@@ -1,0 +1,27 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 388' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='nA_ink' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='nA_gray' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#999'/></marker><marker id='nA_blue' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#3d6fb4'/></marker><marker id='nA_amb' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#e08a3c'/></marker><marker id='nA_mint' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#13936b'/></marker><marker id='nA_red' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker></defs>
+<rect x='54' y='10' width='530' height='56' rx='12' fill='#f6f8fc' stroke='#d5dff0' stroke-width='1.2' />
+<circle cx='30' cy='38.0' r='13' fill='#3d6fb4'/><text x='30' y='42.5' font-size='12.5' fill='#fff' text-anchor='middle' font-weight='bold' >1</text>
+<text x='70' y='33' font-size='14' fill='#222' text-anchor='start' font-weight='bold' >냉각의 상한</text>
+<text x='70' y='54' font-size='12' fill='#555' text-anchor='start' font-weight='normal' >칩이 내보낼 수 있는 열(면적당 전력)에 한계가 있다</text>
+<line x1='30' y1='53.0' x2='30' y2='100.0' stroke='#999' stroke-width='1.6' marker-end='url(#nA_gray)'/>
+<rect x='54' y='88' width='530' height='56' rx='12' fill='#f6f8fc' stroke='#d5dff0' stroke-width='1.2' />
+<circle cx='30' cy='116.0' r='13' fill='#3d6fb4'/><text x='30' y='120.5' font-size='12.5' fill='#fff' text-anchor='middle' font-weight='bold' >2</text>
+<text x='70' y='111' font-size='14' fill='#222' text-anchor='start' font-weight='bold' >칩의 전력 = 동적 + 정적</text>
+<text x='70' y='132' font-size='12' fill='#555' text-anchor='start' font-weight='normal' >동적 ≈ αCV²f (0↔1로 바뀔 때 충방전), 정적 = 꺼져 있어도 새는 leak</text>
+<line x1='30' y1='131.0' x2='30' y2='178.0' stroke='#999' stroke-width='1.6' marker-end='url(#nA_gray)'/>
+<rect x='54' y='166' width='530' height='56' rx='12' fill='#f6f8fc' stroke='#d5dff0' stroke-width='1.2' />
+<circle cx='30' cy='194.0' r='13' fill='#3d6fb4'/><text x='30' y='198.5' font-size='12.5' fill='#fff' text-anchor='middle' font-weight='bold' >3</text>
+<text x='70' y='189' font-size='14' fill='#222' text-anchor='start' font-weight='bold' >전압을 더 못 낮춘다</text>
+<text x='70' y='210' font-size='12' fill='#555' text-anchor='start' font-weight='normal' >문턱 아래 기울기 한계 때문에 문턱전압과 전원 전압이 1 V 안팎에서 멈춤</text>
+<line x1='30' y1='209.0' x2='30' y2='256.0' stroke='#999' stroke-width='1.6' marker-end='url(#nA_gray)'/>
+<rect x='54' y='244' width='530' height='56' rx='12' fill='#f6f8fc' stroke='#d5dff0' stroke-width='1.2' />
+<circle cx='30' cy='272.0' r='13' fill='#3d6fb4'/><text x='30' y='276.5' font-size='12.5' fill='#fff' text-anchor='middle' font-weight='bold' >4</text>
+<text x='70' y='267' font-size='14' fill='#222' text-anchor='start' font-weight='bold' >V 그대로 f를 올리면 전력이 는다</text>
+<text x='70' y='288' font-size='12' fill='#555' text-anchor='start' font-weight='normal' >동적 전력은 f에 비례해 늘고, device가 많아질수록 leak도 쌓인다</text>
+<line x1='30' y1='287.0' x2='30' y2='334.0' stroke='#999' stroke-width='1.6' marker-end='url(#nA_gray)'/>
+<rect x='54' y='322' width='530' height='56' rx='12' fill='#eef9f4' stroke='#9fd8c2' stroke-width='1.2' />
+<circle cx='30' cy='350.0' r='13' fill='#13936b'/><text x='30' y='354.5' font-size='12.5' fill='#fff' text-anchor='middle' font-weight='bold' >5</text>
+<text x='70' y='345' font-size='14' fill='#222' text-anchor='start' font-weight='bold' >클록은 수 GHz에서 멈추고 코어 수를 늘렸다</text>
+<text x='70' y='366' font-size='12' fill='#555' text-anchor='start' font-weight='normal' >"다른 방식으로 계산하자"는 요구가 커진 배경 중 하나</text>
+</svg>

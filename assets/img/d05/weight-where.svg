@@ -1,0 +1,29 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 660 226' width='100%' style='max-width:660px' font-family='Pretendard, Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#1f2937'>
+<defs><marker id='a' viewBox='0 0 10 10' refX='8.5' refY='5' markerWidth='6.5' markerHeight='6.5' orient='auto-start-reverse'><path d='M0,0.6 L10,5 L0,9.4 z' fill='#6b7280'/></marker><marker id='a-c2b59c3' viewBox='0 0 10 10' refX='8.5' refY='5' markerWidth='6.5' markerHeight='6.5' orient='auto-start-reverse'><path d='M0,0.6 L10,5 L0,9.4 z' fill='#2b59c3'/></marker><marker id='a-cc0463a' viewBox='0 0 10 10' refX='8.5' refY='5' markerWidth='6.5' markerHeight='6.5' orient='auto-start-reverse'><path d='M0,0.6 L10,5 L0,9.4 z' fill='#c0463a'/></marker></defs>
+<text x='14.0' y='26.0' font-size='13.5' fill='#2b59c3' text-anchor='start' font-weight='700'>작은 신경망 (MCU)</text>
+<rect x='14.0' y='40.0' width='300.0' height='130.0' rx='14' fill='#eaf0fd' stroke='#2b59c3' stroke-width='1.4'/>
+<text x='28.0' y='60.0' font-size='11.5' fill='#2b59c3' text-anchor='start' font-weight='600'>칩 하나</text>
+<rect x='34.0' y='74.0' width='120.0' height='78.0' rx='8' fill='#fff' stroke='#2b59c3' stroke-width='1.1'/>
+<text x='94.0' y='100.0' font-size='12' fill='#1f2937' text-anchor='middle' font-weight='400'>메모리 64 KB</text>
+<rect x='50.0' y='112.0' width='88.0' height='26.0' rx='5' fill='#f0b400' stroke='none' stroke-width='1.2'/>
+<text x='94.0' y='130.0' font-size='12' fill='#1f2937' text-anchor='middle' font-weight='700'>weight 1 kB</text>
+<line x1='158.0' y1='113.0' x2='196.0' y2='113.0' stroke='#2b59c3' stroke-width='1.8' stroke-linecap='round' marker-end='url(#a-c2b59c3)'/>
+<rect x='200.0' y='90.0' width='100.0' height='46.0' rx='8' fill='#fff' stroke='#2b59c3' stroke-width='1.1'/>
+<text x='250.0' y='118.0' font-size='12' fill='#1f2937' text-anchor='middle' font-weight='400'>곱셈기</text>
+<text x='14.0' y='196.0' font-size='12' fill='#1f2937' text-anchor='start' font-weight='400'>Weight가 다 칩 안에 들어간다 → 가져오는 길이 짧고 싸다.</text>
+<text x='14.0' y='214.0' font-size='12' fill='#6b7280' text-anchor='start' font-weight='400'>그 비용은 이미 '박자당 0.3 nJ'에 들어 있다.</text>
+<text x='346.0' y='26.0' font-size='13.5' fill='#c0463a' text-anchor='start' font-weight='700'>큰 신경망 (데이터센터 칩)</text>
+<rect x='346.0' y='40.0' width='150.0' height='130.0' rx='14' fill='#fbeceb' stroke='#c0463a' stroke-width='1.4'/>
+<text x='360.0' y='60.0' font-size='11.5' fill='#c0463a' text-anchor='start' font-weight='600'>계산 칩</text>
+<rect x='366.0' y='90.0' width='110.0' height='46.0' rx='8' fill='#fff' stroke='#c0463a' stroke-width='1.1'/>
+<text x='421.0' y='118.0' font-size='12' fill='#1f2937' text-anchor='middle' font-weight='400'>곱셈기 수천 개</text>
+<rect x='540.0' y='56.0' width='104.0' height='98.0' rx='10' fill='#fff' stroke='#9ca3af' stroke-width='1.2'/>
+<text x='592.0' y='82.0' font-size='12' fill='#1f2937' text-anchor='middle' font-weight='400'>칩 밖 메모리</text>
+<text x='592.0' y='100.0' font-size='11' fill='#6b7280' text-anchor='middle' font-weight='400'>(DRAM)</text>
+<rect x='552.0' y='112.0' width='80.0' height='26.0' rx='5' fill='#f0b400' stroke='none' stroke-width='1.2'/>
+<text x='592.0' y='130.0' font-size='12' fill='#1f2937' text-anchor='middle' font-weight='700'>weight GB급</text>
+<line x1='536.0' y1='113.0' x2='482.0' y2='113.0' stroke='#c0463a' stroke-width='2.2' stroke-linecap='round' marker-end='url(#a-cc0463a)'/>
+<text x='510.0' y='104.0' font-size='10.5' fill='#c0463a' text-anchor='middle' font-weight='700'>먼 길</text>
+<text x='346.0' y='196.0' font-size='12' fill='#1f2937' text-anchor='start' font-weight='400'>칩 밖에서 매번 가져온다 → 이동이 계산보다 비쌀 수 있다</text>
+<text x='346.0' y='214.0' font-size='12' fill='#6b7280' text-anchor='start' font-weight='400'>(memory wall). 그래서 batch로 모아 재사용한다.</text>
+</svg>

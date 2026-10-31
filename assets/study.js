@@ -22,6 +22,8 @@
     ["[해석]", "tag-interp", "해석"],
     ["[가설]", "tag-hypo", "가설"],
     ["[미확인]", "tag-unverified", "미확인"],
+    ["[계산]", "tag-calc", "계산"],
+    ["[가정]", "tag-assume", "가정"],
   ];
 
   var LOCAL = false;
@@ -2188,6 +2190,9 @@
         var a = h("a", "src-link");
         if (hit && hit.pp) a.href = OFFSET + "papers.html#" + hit.pp;
         else a.href = OFFSET + "ledger/references.html" + (hit ? "#ref-" + hit.id : "");
+        // 새 탭에서 열어 읽던 자리를 잃지 않게(2026-10-31 학습자 요청)
+        a.target = "_blank";
+        a.rel = "noopener";
         a.title = hit ? hit.bib : "참고문헌 페이지";
         if (hit && hit.short) sp.textContent = hit.short;
         sp.parentNode.insertBefore(a, sp);
@@ -2251,19 +2256,25 @@
     if (!root) return;
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode: function (n) {
-        if (!/[①-⑳]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+        if (!/[①-⑳★]/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
         var p = n.parentElement;
-        return p && !p.closest("svg, script, style, textarea, .editable, .cnum") ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        return p && !p.closest("svg, script, style, textarea, .editable, .cnum, .star-mark") ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
       },
     });
     var nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(function (n) {
       var frag = document.createDocumentFragment();
-      n.nodeValue.split(/([①-⑳])/).forEach(function (part) {
+      n.nodeValue.split(/([①-⑳★])/).forEach(function (part) {
         if (!part) return;
         var k = CIRCLED.indexOf(part);
-        if (k >= 0) {
+        // 2026-10-31: 중요한 문장 앞의 ★는 형광펜과 같은 노란색 별로
+        if (part === "★") {
+          var st = document.createElement("span");
+          st.className = "star-mark";
+          st.textContent = "★";
+          frag.appendChild(st);
+        } else if (k >= 0) {
           var b = document.createElement("span");
           b.className = "cnum";
           b.textContent = String(k + 1);
@@ -2273,6 +2284,64 @@
       n.parentNode.replaceChild(frag, n);
     });
   }
+  // ---------- 출처·검증 메모는 작은 '출처' 단추로 접는다 (읽는 흐름을 끊지 않게) ----------
+  function setupProv() {
+    document.querySelectorAll("main span.prov").forEach(function (sp) {
+      if (sp.dataset.chip || sp.closest(".quiz, details.prov")) return;
+      sp.dataset.chip = "1";
+      var b = h("button", "prov-chip", "출처");
+      b.type = "button";
+      b.title = sp.textContent.trim();
+      b.setAttribute("aria-expanded", "false");
+      b.addEventListener("click", function () {
+        var open = sp.classList.toggle("open");
+        b.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      sp.parentNode.insertBefore(b, sp);
+    });
+  }
+
+  // ---------- 논문 탭: 주소의 #논문으로 왔으면 그 논문 칸을 화면 가운데에, 노란 테두리로 ----------
+  function setupPaperTarget() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    if (!/^(p-|ref-)/.test(id)) return;
+    // 논문 목록은 스크립트가 다시 그리고 읽던 위치 복원도 끼어들 수 있어서, 처음 1.5초 동안 몇 번 다시 맞춘다
+    var userMoved = false;
+    ["wheel", "touchstart", "keydown"].forEach(function (ev) {
+      window.addEventListener(ev, function () { userMoved = true; }, { once: true, passive: true });
+    });
+    function center() {
+      var el = document.getElementById(id);
+      if (!el || userMoved) return;
+      el.classList.add("pp-hit");
+      var r = el.getBoundingClientRect();
+      var want = window.scrollY + r.top - Math.max(70, (window.innerHeight - r.height) / 2);
+      if (Math.abs(r.top + r.height / 2 - window.innerHeight / 2) > 40) window.scrollTo(0, Math.max(0, want));
+    }
+    [0, 150, 400, 800, 1500].forEach(function (t) { setTimeout(center, t); });
+    window.addEventListener("load", function () { setTimeout(center, 60); });
+  }
+
+  // ---------- 다른 Day의 개념으로 가는 본문 링크는 새 탭에서 (읽던 자리를 지키려고) ----------
+  function setupCrossLinks() {
+    document.querySelectorAll(".lesson-body p a[href], .lesson-body li a[href], .lesson-body td a[href], .lesson-body dd a[href]").forEach(function (a) {
+      if (a.target || !a.hash || a.closest(".day-steps, .progress-strip, .quiz, nav")) return;
+      if (a.pathname === location.pathname || !/\/days\/d\d\d[ab]?\.html$/.test(a.pathname)) return;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.classList.add("x-day");
+    });
+  }
+
+  // ---------- 왼쪽 위 사이트 이름: 'Ions'만 색을 달리하고 작은 +를 붙인다 ----------
+  function setupBrand() {
+    var t = document.querySelector(".navbar-title");
+    if (!t || t.querySelector(".brand-ion")) return;
+    if (t.textContent.trim() !== "Why Ions Compute?") return;
+    t.innerHTML = 'Why <span class="brand-ion">Ions<sup>+</sup></span> Compute?';
+  }
+
   function setupCircled() {
     var main = document.querySelector("main") || document.body;
     circledIn(main);
@@ -3355,6 +3424,26 @@
   };
 
   // ---------- 그림 클릭 확대 (원문 그림의 작은 글씨를 읽기 위해) ----------
+  // ---------- 그림 크기: 그림 속 글자가 본문 글자의 약 0.9배로 보이게(tools/fig_sizes.py가 잰 값) ----------
+  function setupFigSizes() {
+    var imgs = document.querySelectorAll("figure.fig img");
+    if (!imgs.length) return;
+    fetchJson(OFFSET + "assets/fig-sizes.json").then(function (sizes) {
+      if (!sizes) return;
+      imgs.forEach(function (img) {
+        if (img.closest("figure.photo")) return;
+        var src = img.getAttribute("src") || "";
+        var k = src.indexOf("assets/img/");
+        if (k < 0) return;
+        var r = sizes[src.slice(k + 11).split("?")[0]];
+        if (!r || !r.em) return;
+        // em이라 글자 크기 단추(가−/가+)를 눌러도 그림이 같이 따라간다. 원본보다 크게 늘이지는 않는다.
+        img.style.maxWidth = r.natural ? "min(" + r.em + "em, " + r.natural + "px, 100%)" : "min(" + r.em + "em, 100%)";
+        img.classList.add("sized");
+      });
+    });
+  }
+
   function setupFigZoom() {
     var imgs = document.querySelectorAll("figure.fig img");
     if (!imgs.length) return;
@@ -3768,6 +3857,7 @@
   setupPapers();
   setupDrift();
   setupPaperFigs();
+  setupFigSizes();
   setupFigZoom();
   setupRecall();
   setupSteppers();
@@ -3780,6 +3870,10 @@
   setupEmphasis();
   setupGlossary();
   setupCircled();
+  setupProv();
+  setupPaperTarget();
+  setupCrossLinks();
+  setupBrand();
   var depsP = deps();
   detectMode()
     .then(loadStatus)

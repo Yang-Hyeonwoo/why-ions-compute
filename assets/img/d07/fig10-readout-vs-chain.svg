@@ -1,5 +1,5 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 420' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
-<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker></defs><defs><marker id='arrR' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker></defs>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arr-cc8553d' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker></defs><defs><marker id='arrR' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c8553d'/></marker></defs>
 <text x='300' y='20' font-size='13.5' fill='#444' text-anchor='middle' font-weight='bold' >같은 RNN, 무엇을 학습하나: 내부의 0.5는 시간을 거슬러, readout은 지금 상태만</text>
 <rect x='20' y='34' width='560' height='150' rx='8' fill='#fdf6f4' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='30' y='54' font-size='14' fill='#444' text-anchor='start' font-weight='bold' >(a)</text>
@@ -24,7 +24,7 @@
 <text x='297.5' y='149' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='bold' >× 0.484</text>
 <line x1='452' y1='132' x2='413' y2='132' stroke='#c8553d' stroke-width='1.8' marker-end='url(#arrR)'/>
 <text x='432.5' y='149' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='bold' >× 0.496</text>
-<text x='300' y='172' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >멀리 갈수록 1보다 작은 배율이 더 곱해진다(세 단계면 0.104, 그림 5). 이 사슬이 소실·폭주의 원인이었다.</text>
+<text x='300' y='172' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' >멀리 갈수록 1보다 작은 배율이 더 곱해진다(세 단계면 0.104). 이 사슬이 소실·폭주의 원인이었다.</text>
 <rect x='20' y='196' width='560' height='196' rx='8' fill='#f3faf7' stroke='#d9d9d9' stroke-width='1.2' />
 <text x='30' y='216' font-size='14' fill='#444' text-anchor='start' font-weight='bold' >(b)</text>
 <text x='58' y='216' font-size='12' fill='#13936b' text-anchor='start' font-weight='bold' ><tspan>readout W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan>만 학습하면 (ESN): 기울기에 '지금 상태'만 들어간다</tspan></text>
@@ -36,13 +36,13 @@
 <rect x='198' y='240' width='128' height='58' rx='8' fill='#fff' stroke='#3d6fb4' stroke-width='1.2' />
 <text x='262' y='260' font-size='10.5' fill='#3d6fb4' text-anchor='middle' font-weight='normal' >경우 A의 지금 상태</text>
 <text x='262' y='282' font-size='12' fill='#3d6fb4' text-anchor='middle' font-weight='bold' >(0.363, 0.595)</text>
-<line x1='328' y1='269' x2='366' y2='269' stroke='#c8553d' stroke-width='1.6' marker-end='url(#arr)'/>
+<line x1='328' y1='269' x2='366' y2='269' stroke='#c8553d' stroke-width='1.6' marker-end='url(#arr-cc8553d)'/>
 <text x='347' y='260' font-size='10.5' fill='#c8553d' text-anchor='middle' font-weight='normal' ><tspan>W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan></text>
 <rect x='368' y='240' width='196' height='58' rx='8' fill='#fff' stroke='#c8553d' stroke-width='1.2' />
 <text x='466' y='260' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' ><tspan>W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> = (−1, 1) → y = 0.232</tspan></text>
 <text x='466' y='282' font-size='11' fill='#c8553d' text-anchor='middle' font-weight='bold' >정답 1, 오차 −0.768</text>
 <text x='40' y='326' font-size='11' fill='#c8553d' text-anchor='start' font-weight='bold' ><tspan>w</tspan><tspan dy='4' font-size='9'>a</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan>의 기울기 = 2 × (−0.768) × 0.363 = −0.558,   w</tspan><tspan dy='4' font-size='9'>b</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan>의 기울기 = 2 × (−0.768) × 0.595 = −0.914</tspan></text>
-<text x='40' y='346' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >0구간 공식 2 × 오차 × 입력에서 입력 자리에 지금 상태가 들어갔을 뿐, 거슬러 곱할 배율이 없다.</text>
+<text x='40' y='346' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >기초 계단의 공식 2 × 오차 × 입력에서 입력 자리에 지금 상태가 들어갔을 뿐, 거슬러 곱할 배율이 없다.</text>
 <text x='40' y='370' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='bold' ><tspan>한 번에 풀기: A(정답 1)와 B(상태 (0.363, 0.363), 정답 0)를 맞추는 두 식 → W</tspan><tspan dy='4' font-size='9'>out</tspan><tspan dy='-4' font-size='1'>​</tspan><tspan> = (−4.31, 4.31)</tspan></text>
-<text x='300' y='410' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >숫자는 본문 1·3구간 예를 코드로 계산(상태는 소수 셋째 자리로 반올림한 값). (Claude가 계산해 그림, 모식도)</text>
+<text x='300' y='410' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >숫자는 본문의 두 상태 RNN 예를 코드로 계산(상태는 소수 셋째 자리로 반올림한 값). (Claude가 계산해 그림, 모식도)</text>
 </svg>
