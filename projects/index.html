@@ -686,11 +686,98 @@ ul.task-list li input[type="checkbox"] {
 
 <script>document.documentElement.classList.add("proj-page")</script>
 <script src="../assets/projects.js" defer=""></script>
-<p><strong>처음이라면 이 순서로.</strong> ① <a href="../projects/setup.html">처음 한 번: 내 컴퓨터 준비하기</a>에서 Python을 깔고 명령 프롬프트 여는 법을 익힙니다(20–40분, 그림으로 설명). ② <a href="../projects/s.html">P1</a>을 합니다. 명령 두 줄로 표와 그래프가 나옵니다. ③ 그다음 <a href="../projects/a.html#a0">P2.0</a>에서 가짜(mock) 장비로 측정 흐름을 돌려 봅니다. 여기까지 소재·소자·장비가 전혀 필요 없습니다.</p>
-<p>각 프로젝트 페이지는 <strong>무엇을 하게 되는지 그림 → 끝나면 나오는 결과 → 한 단계씩 번호 붙은 카드</strong> 순서입니다. 카드마다 "입력할 것", "화면에 보여야 하는 것", "다르면" 을 적어 두었으니 그대로 따라 하면 됩니다. 단계마다 진행 중·완료·보류를 표시할 수 있고, 완료는 "실행하고 기록하고 해석했다"는 뜻입니다. 성능이 좋게 나와야 완료인 것은 아닙니다.</p>
+<div class="pj-start">
+<a class="pj-start-btn" href="setup.html"><small>처음이면</small><b>컴퓨터 준비</b><span>Python·VS Code 설치부터 첫 ▷까지</span></a>
+<a class="pj-start-btn primary" href="s.html#s1"><small>준비가 끝났으면</small><b>첫 실습 시작</b><span>P1 실습 1 · 장비 없이 PC만</span></a>
+</div>
 <div id="pj-continue" class="pj-continue" aria-live="polite"></div>
-<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "P1", "title": "컴퓨터만으로 하는 첫 실험", "page": "s.html"}, {"id": "a", "letter": "P2", "title": "소스미터로 내 소자 재기", "page": "a.html"}, {"id": "b", "letter": "P3", "title": "손바닥 보드로 만드는 측정·판단 장치", "page": "b.html"}, {"id": "c", "letter": "P4", "title": "눌러서 쓰는 소자: 누름의 리듬이 남는가", "page": "c.html"}, {"id": "e", "letter": "P5", "title": "근육 신호(EMG)와 physical reservoir", "page": "e.html"}], "steps": [{"id": "s1", "project": "s", "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까", "page": "s.html", "anchor": "s1", "time": "40분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "s2", "project": "s", "title": "P1.2. 기억은 길수록 좋을까", "page": "s.html", "anchor": "s2", "time": "40분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d09"], "optional": false}, {"id": "a0", "project": "a", "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "30–60분", "needs": "PC", "kind": "mock", "days": ["d06", "d08"], "optional": false}, {"id": "a0r", "project": "a", "title": "P2.0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"], "optional": false}, {"id": "a1", "project": "a", "title": "P2.1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"], "optional": false}, {"id": "a2", "project": "a", "title": "P2.2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"], "optional": false}, {"id": "a3", "project": "a", "title": "P2.3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}, {"id": "b1", "project": "b", "title": "P3.1. NU40 DK에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "NU40 DK, 데이터용 USB 케이블", "kind": "실물", "days": [], "optional": false}, {"id": "b1a", "project": "b", "title": "P3.1a. 버튼 리듬을 CSV로 남기기", "page": "b.html", "anchor": "b1a", "time": "30–60분", "needs": "NU40 DK (키트 조도 모듈은 선택)", "kind": "실물", "days": [], "optional": false}, {"id": "b1b", "project": "b", "title": "P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가", "page": "b.html", "anchor": "b1b", "time": "1–2시간", "needs": "NU40 DK, P3.1a 기록", "kind": "실물", "days": [], "optional": false}, {"id": "b2", "project": "b", "title": "P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "NU40 DK, DAC·ADC 모듈", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b4", "project": "b", "title": "P3.4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"], "optional": false}, {"id": "b5", "project": "b", "title": "P3.5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "P3.4 회로, 소자", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b6", "project": "b", "title": "P3.6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "P3.5 결과", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b7", "project": "b", "title": "P3.7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b8", "project": "b", "title": "P3.8. (선택) ECG 신호로 도전", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}, {"id": "c0", "project": "c", "title": "P4.0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (mock 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 mock)", "kind": "실측", "days": [], "optional": false}, {"id": "c2", "project": "c", "title": "P4.1–P4.2. 소자 구조와 control", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": [], "optional": false}, {"id": "c3", "project": "c", "title": "P4.3–P4.4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "servo, load cell, 보드", "kind": "실물", "days": [], "optional": false}, {"id": "c5", "project": "c", "title": "P4.5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "P4.3 장치, 소자", "kind": "실측", "days": ["d08"], "optional": false}, {"id": "e1", "project": "e", "title": "P5.1. EMG를 숫자로: sampling rate와 data rate", "page": "e.html", "anchor": "e1", "time": "30–45분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "e2", "project": "e", "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기", "page": "e.html", "anchor": "e2", "time": "40–60분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d08"], "optional": false}]}</script>
-<div class="pj-cat"><article class="pj-card" data-project="s"><figure class="pj-preview figure"><img src="img/s2-memory.png" alt="R–C의 τ에 따른 정확도가 산 모양으로 나오는 그래프와 상태 곡선" loading="lazy" class="figure-img"><figcaption>결과 예 (P1.2 그래프)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P1</span><h3 class="pj-title anchored"><a href="s.html">컴퓨터만으로 하는 첫 실험</a></h3></div><p class="pj-q">심장 신호를 거칠게 숫자로 바꾸면 박동을 놓칠까? 기억(memory)은 길수록 좋을까?</p><div class="pj-badges"><span class="pj-badge pj-verify">코드 실행 확인</span><span class="pj-badge">sampling rate·bit·ADC</span><span class="pj-badge">time constant τ</span><span class="pj-badge">reservoir baseline</span></div><p class="pj-out"><span class="pj-k">남는 것</span>숫자 하나(박동을 하나도 놓치지 않는 가장 작은 data rate)와 그래프 한 장(기억 길이 τ가 과제와 맞아야 맞힌다는 산 모양)</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P1.1 · 40분</dd></div><div><dt>장비</dt><dd>PC</dd></div><div><dt>난도</dt><dd>코드 쉬움 · 회로 없음 · 실험 없음</dd></div></dl><div class="pj-prog" data-project-progress="s"></div><a class="sbtn primary pj-go" data-project-go="s" href="s.html#s1">P1.1 시작 →</a><details class="pj-more"><summary>자세히 · 단계 2개</summary><p><span class="pj-k">연구와의 연결</span>이온 소자를 평가할 baseline(ADC 설정, R–C 하나)을 먼저 숫자로 갖게 됩니다. P2의 control과 같은 질문입니다.</p><p><span class="pj-k">먼저 알면 좋은 것</span>없음. Python 설치와 명령 프롬프트 여는 법은 '처음 한 번: 내 컴퓨터 준비하기'에서 그림으로 설명</p><p><span class="pj-k">소재·소자</span>소재·소자 필요 없음</p><p><span class="pj-k">장비 전체</span>PC만</p><p><span class="pj-k">비용</span>없음</p><p><span class="pj-k">검증 상태</span>코드 실행 확인 (깨끗한 Python 환경에서 두 명령과 그래프 생성)</p>
+<section id="compare" class="level2">
+<h2 class="anchored" data-anchor-id="compare">한눈에 비교</h2>
+<div class="pj-compare-wrap">
+<table class="pj-compare caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col"></th>
+<th data-quarto-table-cell-role="th" scope="col">프로젝트 · 끝나면 남는 것</th>
+<th data-quarto-table-cell-role="th" scope="col">필요한 것</th>
+<th data-quarto-table-cell-role="th" scope="col">난도</th>
+<th data-quarto-table-cell-role="th" scope="col">상태</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row"><a href="s.html">P1</a></th>
+<td><a href="s.html">컴퓨터만으로 하는 첫 실험</a><span class="pj-sub">박동을 놓치지 않는 가장 작은 설정 + 기억 길이 그래프</span></td>
+<td>PC만</td>
+<td>코드 쉬움 · 회로 없음 · 실험 없음</td>
+<td>코드 실행 확인
+<div class="pj-prog" data-project-progress="s">
+
+</div></td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row"><a href="a.html">P2</a></th>
+<td><a href="a.html">소스미터로 내 소자 재기</a><span class="pj-sub">내 소자의 특성표 + '끝만 읽기' 정확도 비교</span></td>
+<td>PC (mock) → 소스미터·소자</td>
+<td>코드 보통 · 회로 쉬움 · 실험 보통</td>
+<td>mock 확인 · 실측 미검증
+<div class="pj-prog" data-project-progress="a">
+
+</div></td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row"><a href="b.html">P3</a></th>
+<td><a href="b.html">손바닥 보드로 만드는 측정·판단 장치</a><span class="pj-sub">보드가 전압 걸고·읽고·판단하는 브레드보드 시제품</span></td>
+<td>NU40 DK·브레드보드·모듈</td>
+<td>코드 보통 · 회로 어려움 · 실험 쉬움</td>
+<td>컴파일 확인 · 실물 미검증
+<div class="pj-prog" data-project-progress="b">
+
+</div></td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row"><a href="c.html">P4</a></th>
+<td><a href="c.html">눌러서 쓰는 소자: 누름의 리듬이 남는가</a><span class="pj-sub">누름 리듬 기록과 control 비교표</span></td>
+<td>소스미터·추 → servo·load cell</td>
+<td>코드 보통 · 회로 보통 · 실험 어려움</td>
+<td>mock 확인 · 실물 미검증
+<div class="pj-prog" data-project-progress="c">
+
+</div></td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row"><a href="e.html">P5</a></th>
+<td><a href="e.html">근육 신호(EMG)와 physical reservoir</a><span class="pj-sub">EMG 정확도 표 + 보낼 bit 비교 그래프</span></td>
+<td>PC만</td>
+<td>코드 쉬움 · 회로 없음 · 실험 없음</td>
+<td>코드 실행 확인
+<div class="pj-prog" data-project-progress="e">
+
+</div></td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row"><a href="side.html">사이드</a></th>
+<td><a href="side.html">NU40 DK 하루 실습</a><span class="pj-sub">센서 키트로 만드는 작은 장치 여섯 개</span></td>
+<td>NU40 DK·센서 키트</td>
+<td>코드 쉬움 · 회로 쉬움 · 실험 없음</td>
+<td>컴파일만 확인 · 실물 미검증</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>시간은 참고치입니다.</strong> '실행'은 ▷를 누르고 결과가 나오기까지(실습 대부분 수 초–30초), '학습'은 읽고 숫자를 바꿔 보며 이해하는 시간입니다. 마감이 아닙니다.</p>
+</section>
+<section id="cards" class="level2">
+<h2 class="anchored" data-anchor-id="cards">프로젝트 자세히</h2>
+<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "P1", "title": "컴퓨터만으로 하는 첫 실험", "page": "s.html"}, {"id": "a", "letter": "P2", "title": "소스미터로 내 소자 재기", "page": "a.html"}, {"id": "b", "letter": "P3", "title": "손바닥 보드로 만드는 측정·판단 장치", "page": "b.html"}, {"id": "c", "letter": "P4", "title": "눌러서 쓰는 소자: 누름의 리듬이 남는가", "page": "c.html"}, {"id": "e", "letter": "P5", "title": "근육 신호(EMG)와 physical reservoir", "page": "e.html"}], "steps": [{"id": "s1", "project": "s", "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까", "page": "s.html", "anchor": "s1", "time": "학습 약 60분 (실행은 실습마다 수 초)", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "s2", "project": "s", "title": "P1.2. 기억은 길수록 좋을까", "page": "s.html", "anchor": "s2", "time": "학습 약 50분 (실행은 실습마다 수 초–30초)", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d09"], "optional": false}, {"id": "a0", "project": "a", "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "학습 40–60분 (실행은 실습마다 수 초–30초)", "needs": "PC", "kind": "mock", "days": ["d06", "d08"], "optional": false}, {"id": "a0r", "project": "a", "title": "P2.0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"], "optional": false}, {"id": "a1", "project": "a", "title": "P2.1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"], "optional": false}, {"id": "a2", "project": "a", "title": "P2.2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"], "optional": false}, {"id": "a3", "project": "a", "title": "P2.3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}, {"id": "b1", "project": "b", "title": "P3.1. NU40 DK에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "NU40 DK, 데이터용 USB 케이블", "kind": "실물", "days": [], "optional": false}, {"id": "b1a", "project": "b", "title": "P3.1a. 버튼 리듬을 CSV로 남기기", "page": "b.html", "anchor": "b1a", "time": "30–60분", "needs": "NU40 DK (키트 조도 모듈은 선택)", "kind": "실물", "days": [], "optional": false}, {"id": "b1b", "project": "b", "title": "P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가", "page": "b.html", "anchor": "b1b", "time": "1–2시간", "needs": "NU40 DK, P3.1a 기록", "kind": "실물", "days": [], "optional": false}, {"id": "b2", "project": "b", "title": "P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "NU40 DK, DAC·ADC 모듈", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b4", "project": "b", "title": "P3.4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"], "optional": false}, {"id": "b5", "project": "b", "title": "P3.5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "P3.4 회로, 소자", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b6", "project": "b", "title": "P3.6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "P3.5 결과", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b7", "project": "b", "title": "P3.7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b8", "project": "b", "title": "P3.8. (선택) ECG 신호로 도전", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}, {"id": "c0", "project": "c", "title": "P4.0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (mock 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 mock)", "kind": "실측", "days": [], "optional": false}, {"id": "c2", "project": "c", "title": "P4.1–P4.2. 소자 구조와 control", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": [], "optional": false}, {"id": "c3", "project": "c", "title": "P4.3–P4.4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "servo, load cell, 보드", "kind": "실물", "days": [], "optional": false}, {"id": "c5", "project": "c", "title": "P4.5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "P4.3 장치, 소자", "kind": "실측", "days": ["d08"], "optional": false}, {"id": "e1", "project": "e", "title": "P5.1. EMG를 숫자로: sampling rate와 data rate", "page": "e.html", "anchor": "e1", "time": "학습 30–45분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "e2", "project": "e", "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기", "page": "e.html", "anchor": "e2", "time": "학습 40–60분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d08"], "optional": false}]}</script>
+<div class="pj-cat"><article class="pj-card" data-project="s"><figure class="pj-preview figure"><img src="img/thumb-p1.svg" alt="기억 길이 τ가 과제에 딱 맞을 때 정확도가 가장 높은 산 모양" loading="lazy" class="figure-img"><figcaption>핵심 결과 (개념 그림)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P1</span><h3 class="pj-title anchored"><a href="s.html">컴퓨터만으로 하는 첫 실험</a></h3></div><p class="pj-q">심장 신호를 거칠게 숫자로 바꾸면 박동을 놓칠까? 기억(memory)은 길수록 좋을까?</p><div class="pj-badges"><span class="pj-badge pj-verify">코드 실행 확인</span><span class="pj-badge">sampling rate·bit·ADC</span><span class="pj-badge">time constant τ</span><span class="pj-badge">reservoir baseline</span></div><p class="pj-out"><span class="pj-k">남는 것</span>숫자 하나(박동을 하나도 놓치지 않는 가장 작은 data rate)와 그래프 한 장(기억 길이 τ가 과제와 맞아야 맞힌다는 산 모양)</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P1.1 · 학습 약 60분 (실행은 실습마다 수 초)</dd></div><div><dt>장비</dt><dd>PC</dd></div><div><dt>난도</dt><dd>코드 쉬움 · 회로 없음 · 실험 없음</dd></div></dl><div class="pj-prog" data-project-progress="s"></div><a class="sbtn primary pj-go" data-project-go="s" href="s.html#s1">P1.1 시작 →</a><details class="pj-more"><summary>자세히 · 단계 2개</summary><p><span class="pj-k">연구와의 연결</span>이온 소자를 평가할 baseline(ADC 설정, R–C 하나)을 먼저 숫자로 갖게 됩니다. P2의 control과 같은 질문입니다.</p><p><span class="pj-k">먼저 알면 좋은 것</span>없음. Python·VS Code 준비는 '처음 한 번: 내 컴퓨터 준비하기'</p><p><span class="pj-k">소재·소자</span>소재·소자 필요 없음</p><p><span class="pj-k">장비 전체</span>PC만</p><p><span class="pj-k">비용</span>없음</p><p><span class="pj-k">검증 상태</span>코드 실행 확인 (깨끗한 Python 환경에서 실습 7개를 실행해 표·그림 생성)</p>
 <table class="pj-steps caption-top table">
 <thead>
 <tr class="header">
@@ -703,19 +790,19 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><a href="s.html#s1">P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까</a></td>
-<td>40분</td>
+<td>학습 약 60분 (실행은 실습마다 수 초)</td>
 <td>PC</td>
 <td>mock</td>
 </tr>
 <tr class="even">
 <td><a href="s.html#s2">P1.2. 기억은 길수록 좋을까</a></td>
-<td>40분</td>
+<td>학습 약 50분 (실행은 실습마다 수 초–30초)</td>
 <td>PC</td>
 <td>mock</td>
 </tr>
 </tbody>
 </table>
-</details></div></article><article class="pj-card" data-project="a"><figure class="pj-preview figure"><img src="img/ex-mock-wrr-rc.png" alt="mock RC에 쓰기–쉬기–읽기 전압을 걸었을 때의 전압과 전류 그래프" loading="lazy" class="figure-img"><figcaption>결과 예 (mock 장비)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P2</span><h3 class="pj-title anchored"><a href="a.html">소스미터로 내 소자 재기</a></h3></div><p class="pj-q">내 소자에 전압 펄스를 걸면 앞 펄스의 흔적이 전류에 남을까? 그 흔적으로 시간 패턴을 구별할 수 있을까?</p><div class="pj-badges"><span class="pj-badge pj-verify">mock 확인 · 실측 미검증</span><span class="pj-badge">소자 특성화</span><span class="pj-badge">control</span><span class="pj-badge">readout</span></div><p class="pj-out"><span class="pj-k">남는 것</span>소자 특성표(쓸 수 있는 전압 범위·흔적이 사라지는 시간·반복성)와, 저항·RC·소자의 '끝만 읽기' 정확도 비교표</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P2.0 · 30–60분</dd></div><div><dt>장비</dt><dd>PC</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 쉬움 · 실험 보통</dd></div></dl><div class="pj-prog" data-project-progress="a"></div><a class="sbtn primary pj-go" data-project-go="a" href="a.html#a0">P2.0 시작 →</a><details class="pj-more"><summary>자세히 · 단계 5개</summary><p><span class="pj-k">연구와의 연결</span>physical reservoir 논문의 첫 그림(펄스 응답·기억)을 control과 함께 내 소자로 만드는 단계입니다.</p><p><span class="pj-k">먼저 알면 좋은 것</span>전압·전류·옴의 법칙, time constant τ (프로젝트 홈의 기초)</p><p><span class="pj-k">소재·소자</span>P2.1부터 ITO / 이온성 고분자 두 층 / ITO 소자 (현재 P2·P3의 공통 플랫폼)</p><p><span class="pj-k">장비 전체</span>P2.0: PC만 · P2.0R부터: 소스미터(SMU), 1 MΩ 저항, 1 µF 필름 커패시터 · P2.1부터: 소자</p><p><span class="pj-k">비용</span>연구실 기존 장비 활용 (추가 구매 거의 없음)</p><p><span class="pj-k">검증 상태</span>P2.0 mock 명령 실행 확인 · 실제 소스미터 연결은 미검증</p>
+</details></div></article><article class="pj-card" data-project="a"><figure class="pj-preview figure"><img src="img/thumb-p2.svg" alt="전압 pulse 네 개 뒤에 전류가 조금씩 쌓이는 모양" loading="lazy" class="figure-img"><figcaption>핵심 질문 (개념 그림)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P2</span><h3 class="pj-title anchored"><a href="a.html">소스미터로 내 소자 재기</a></h3></div><p class="pj-q">내 소자에 전압 펄스를 걸면 앞 펄스의 흔적이 전류에 남을까? 그 흔적으로 시간 패턴을 구별할 수 있을까?</p><div class="pj-badges"><span class="pj-badge pj-verify">mock 확인 · 실측 미검증</span><span class="pj-badge">소자 특성화</span><span class="pj-badge">control</span><span class="pj-badge">readout</span></div><p class="pj-out"><span class="pj-k">남는 것</span>소자 특성표(쓸 수 있는 전압 범위·흔적이 사라지는 시간·반복성)와, 저항·RC·소자의 '끝만 읽기' 정확도 비교표</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P2.0 · 학습 40–60분 (실행은 실습마다 수 초–30초)</dd></div><div><dt>장비</dt><dd>PC</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 쉬움 · 실험 보통</dd></div></dl><div class="pj-prog" data-project-progress="a"></div><a class="sbtn primary pj-go" data-project-go="a" href="a.html#a0">P2.0 시작 →</a><details class="pj-more"><summary>자세히 · 단계 5개</summary><p><span class="pj-k">연구와의 연결</span>physical reservoir 논문의 첫 그림(펄스 응답·기억)을 control과 함께 내 소자로 만드는 단계입니다.</p><p><span class="pj-k">먼저 알면 좋은 것</span>전압·전류·옴의 법칙, time constant τ (프로젝트 홈의 기초)</p><p><span class="pj-k">소재·소자</span>P2.1부터 ITO / 이온성 고분자 두 층 / ITO 소자 (현재 P2·P3의 공통 플랫폼)</p><p><span class="pj-k">장비 전체</span>P2.0: PC만 · P2.0R부터: 소스미터(SMU), 1 MΩ 저항, 1 µF 필름 커패시터 · P2.1부터: 소자</p><p><span class="pj-k">비용</span>연구실 기존 장비 활용 (추가 구매 거의 없음)</p><p><span class="pj-k">검증 상태</span>P2.0 mock 실습 실행 확인 · 실제 소스미터 연결은 미검증</p>
 <table class="pj-steps caption-top table">
 <thead>
 <tr class="header">
@@ -728,7 +815,7 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><a href="a.html#a0">P2.0. mock 장비로 한 바퀴 (장비 없음)</a></td>
-<td>30–60분</td>
+<td>학습 40–60분 (실행은 실습마다 수 초–30초)</td>
 <td>PC</td>
 <td>mock</td>
 </tr>
@@ -758,7 +845,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-</details></div></article><article class="pj-card" data-project="b"><figure class="pj-preview figure"><img src="img/p3-overview.svg" alt="브레드보드 위 NU40 DK 보드, DAC, 소자, op-amp, ADC, OLED, 부저와 전압 걸기·전류 읽기·판단·알림 흐름" loading="lazy" class="figure-img"><figcaption>구성도 (개념도)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P3</span><h3 class="pj-title anchored"><a href="b.html">손바닥 보드로 만드는 측정·판단 장치</a></h3></div><p class="pj-q">소스미터와 PC 없이, 작은 보드와 회로가 전압을 걸고 전류를 읽고 답을 낼 수 있을까? 그때 정확도·시간·전지는?</p><div class="pj-badges"><span class="pj-badge pj-verify">컴파일 확인 · 실물 미검증</span><span class="pj-badge">MCU</span><span class="pj-badge">측정 회로</span><span class="pj-badge">에너지 측정</span></div><p class="pj-out"><span class="pj-k">남는 것</span>저장된 입력을 소자에 걸고 보드가 판단해 화면·소리로 알리는 브레드보드 시제품, 그리고 시간·에너지 측정표</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P3.1 · 1–2시간</dd></div><div><dt>장비</dt><dd>NU40 DK, 데이터용 USB 케이블</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 어려움 · 실험 쉬움</dd></div></dl><div class="pj-prog" data-project-progress="b"></div><a class="sbtn primary pj-go" data-project-go="b" href="b.html#b1">P3.1 시작 →</a><details class="pj-more"><summary>자세히 · 단계 9개</summary><p><span class="pj-k">연구와의 연결</span>에너지·지연을 공정하게 비교하려면 실제 회로의 측정 경계가 필요합니다 (Day 9의 비교 조건).</p><p><span class="pj-k">먼저 알면 좋은 것</span>P3.1은 없음. P3.4부터 op-amp·ADC 기초 (P3 페이지에서 설명)</p><p><span class="pj-k">소재·소자</span>P3.1–P3.4는 저항·RC로 진행, P3.5부터 P2의 소자</p><p><span class="pj-k">장비 전체</span>NU40 DK, 브레드보드, 멀티미터 · P3.2부터 DAC·ADC 모듈 · P3.4부터 op-amp</p><p><span class="pj-k">비용</span>부품 구매 필요 — 가격은 구매 시 확인 (미확인)</p><p><span class="pj-k">검증 상태</span>firmware는 NU40 DK용 컴파일만 확인 · 업로드·실물 동작 미검증 · 회로는 설계안</p>
+</details></div></article><article class="pj-card" data-project="b"><figure class="pj-preview figure"><img src="img/thumb-p3.svg" alt="DAC가 전압을 걸고 소자를 지난 전류를 ADC가 읽어 화면과 소리로 알림" loading="lazy" class="figure-img"><figcaption>구성 (개념 그림)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P3</span><h3 class="pj-title anchored"><a href="b.html">손바닥 보드로 만드는 측정·판단 장치</a></h3></div><p class="pj-q">소스미터와 PC 없이, 작은 보드와 회로가 전압을 걸고 전류를 읽고 답을 낼 수 있을까? 그때 정확도·시간·전지는?</p><div class="pj-badges"><span class="pj-badge pj-verify">컴파일 확인 · 실물 미검증</span><span class="pj-badge">MCU</span><span class="pj-badge">측정 회로</span><span class="pj-badge">에너지 측정</span></div><p class="pj-out"><span class="pj-k">남는 것</span>저장된 입력을 소자에 걸고 보드가 판단해 화면·소리로 알리는 브레드보드 시제품, 그리고 시간·에너지 측정표</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P3.1 · 1–2시간</dd></div><div><dt>장비</dt><dd>NU40 DK, 데이터용 USB 케이블</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 어려움 · 실험 쉬움</dd></div></dl><div class="pj-prog" data-project-progress="b"></div><a class="sbtn primary pj-go" data-project-go="b" href="b.html#b1">P3.1 시작 →</a><details class="pj-more"><summary>자세히 · 단계 9개</summary><p><span class="pj-k">연구와의 연결</span>에너지·지연을 공정하게 비교하려면 실제 회로의 측정 경계가 필요합니다 (Day 9의 비교 조건).</p><p><span class="pj-k">먼저 알면 좋은 것</span>P3.1은 없음. P3.4부터 op-amp·ADC 기초 (P3 페이지에서 설명)</p><p><span class="pj-k">소재·소자</span>P3.1–P3.4는 저항·RC로 진행, P3.5부터 P2의 소자</p><p><span class="pj-k">장비 전체</span>NU40 DK, 브레드보드, 멀티미터 · P3.2부터 DAC·ADC 모듈 · P3.4부터 op-amp</p><p><span class="pj-k">비용</span>부품 구매 필요 — 가격은 구매 시 확인 (미확인)</p><p><span class="pj-k">검증 상태</span>firmware는 NU40 DK용 컴파일만 확인 · 업로드·실물 동작 미검증 · 회로는 설계안</p>
 <table class="pj-steps caption-top table">
 <thead>
 <tr class="header">
@@ -825,7 +912,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-</details></div></article><article class="pj-card" data-project="c"><figure class="pj-preview figure"><img src="img/p4-overview.svg" alt="servo가 실리콘 팁으로 소자를 누르고 load cell이 힘을 재며, 누름 리듬과 소자 전류, 끝에서 몇 번만 읽기" loading="lazy" class="figure-img"><figcaption>구성도 (개념도)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P4</span><h3 class="pj-title anchored"><a href="c.html">눌러서 쓰는 소자: 누름의 리듬이 남는가</a></h3></div><p class="pj-q">손가락 대신 servo가 소자를 누르면 전류가 바뀔까? 누른 리듬이 소자에 남아, 끝에서 몇 번만 읽어도 알 수 있을까?</p><div class="pj-badges"><span class="pj-badge pj-verify">mock 확인 · 실물 미검증</span><span class="pj-badge">in-sensor</span><span class="pj-badge">압력 응답</span><span class="pj-badge">control</span></div><p class="pj-out"><span class="pj-k">남는 것</span>추·servo로 누른 전류 기록, control과의 비교, '끝에서 몇 번만 읽기' 리듬 분류 결과표</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P4.0 · 1–2시간 (mock 분석은 30분)</dd></div><div><dt>장비</dt><dd>소스미터, 추 (없으면 PC만으로 mock)</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 보통 · 실험 어려움</dd></div></dl><div class="pj-prog" data-project-progress="c"></div><a class="sbtn primary pj-go" data-project-go="c" href="c.html#c0">P4.0 시작 →</a><details class="pj-more"><summary>자세히 · 단계 4개</summary><p><span class="pj-k">연구와의 연결</span>in-sensor 컴퓨팅 주장의 핵심 control(점탄성·접촉 면적·장치 자체)을 직접 다루는 경로입니다.</p><p><span class="pj-k">먼저 알면 좋은 것</span>P2.0R의 소스미터 연결</p><p><span class="pj-k">소재·소자</span>P2·P3와 다른 압력용 구조가 필요 (별도 가설). 없으면 mock 분석부터</p><p><span class="pj-k">장비 전체</span>P4.0: 소스미터, 추, 실리콘 패드 · P4.3부터 servo·load cell</p><p><span class="pj-k">비용</span>P4.3부터 부품 구매 — 가격 미확인</p><p><span class="pj-k">검증 상태</span>mock 분석 실행 확인 · 압력용 소자·tapper 실물 미검증</p>
+</details></div></article><article class="pj-card" data-project="c"><figure class="pj-preview figure"><img src="img/thumb-p4.svg" alt="리듬에 맞춰 소자를 누르고 끝에서 읽기" loading="lazy" class="figure-img"><figcaption>핵심 질문 (개념 그림)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P4</span><h3 class="pj-title anchored"><a href="c.html">눌러서 쓰는 소자: 누름의 리듬이 남는가</a></h3></div><p class="pj-q">손가락 대신 servo가 소자를 누르면 전류가 바뀔까? 누른 리듬이 소자에 남아, 끝에서 몇 번만 읽어도 알 수 있을까?</p><div class="pj-badges"><span class="pj-badge pj-verify">mock 확인 · 실물 미검증</span><span class="pj-badge">in-sensor</span><span class="pj-badge">압력 응답</span><span class="pj-badge">control</span></div><p class="pj-out"><span class="pj-k">남는 것</span>추·servo로 누른 전류 기록, control과의 비교, '끝에서 몇 번만 읽기' 리듬 분류 결과표</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P4.0 · 1–2시간 (mock 분석은 30분)</dd></div><div><dt>장비</dt><dd>소스미터, 추 (없으면 PC만으로 mock)</dd></div><div><dt>난도</dt><dd>코드 보통 · 회로 보통 · 실험 어려움</dd></div></dl><div class="pj-prog" data-project-progress="c"></div><a class="sbtn primary pj-go" data-project-go="c" href="c.html#c0">P4.0 시작 →</a><details class="pj-more"><summary>자세히 · 단계 4개</summary><p><span class="pj-k">연구와의 연결</span>in-sensor 컴퓨팅 주장의 핵심 control(점탄성·접촉 면적·장치 자체)을 직접 다루는 경로입니다.</p><p><span class="pj-k">먼저 알면 좋은 것</span>P2.0R의 소스미터 연결</p><p><span class="pj-k">소재·소자</span>P2·P3와 다른 압력용 구조가 필요 (별도 가설). 없으면 mock 분석부터</p><p><span class="pj-k">장비 전체</span>P4.0: 소스미터, 추, 실리콘 패드 · P4.3부터 servo·load cell</p><p><span class="pj-k">비용</span>P4.3부터 부품 구매 — 가격 미확인</p><p><span class="pj-k">검증 상태</span>mock 분석 실행 확인 · 압력용 소자·tapper 실물 미검증</p>
 <table class="pj-steps caption-top table">
 <thead>
 <tr class="header">
@@ -862,7 +949,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-</details></div></article><article class="pj-card" data-project="e"><figure class="pj-preview figure"><img src="img/e-compare.png" alt="모형별 정확도 막대와, 판정 한 번에 보내는 bit 수에 따른 정확도 그래프" loading="lazy" class="figure-img"><figcaption>결과 예 (P5.2 그래프, 합성 신호)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P5</span><h3 class="pj-title anchored"><a href="e.html">근육 신호(EMG)와 physical reservoir</a></h3></div><p class="pj-q">손목을 어느 순서로 움직였는지 근육이 다 쉰 뒤에도 맞힐 수 있을까? 소자가 신호를 먼저 '흔적'으로 바꾸면 컴퓨터로 보낼 숫자가 얼마나 줄까?</p><div class="pj-badges"><span class="pj-badge pj-verify">코드 실행 확인</span><span class="pj-badge">EMG·envelope</span><span class="pj-badge">sampling rate·aliasing</span><span class="pj-badge">multi-τ physical reservoir</span><span class="pj-badge">in-sensor data rate</span></div><p class="pj-out"><span class="pj-k">남는 것</span>표 3개와 그래프 4장: sampling rate별 정확도, 모형별(no memory · R–C · reservoir · digital) 끝만 읽은 정확도, 판정 한 번에 보내는 bit 비교(약 60,000 대 약 600)</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P5.1 · 30–45분</dd></div><div><dt>장비</dt><dd>PC</dd></div><div><dt>난도</dt><dd>코드 쉬움 · 회로 없음 · 실험 없음</dd></div></dl><div class="pj-prog" data-project-progress="e"></div><a class="sbtn primary pj-go" data-project-go="e" href="e.html#e1">P5.1 시작 →</a><details class="pj-more"><summary>자세히 · 단계 2개</summary><p><span class="pj-k">연구와의 연결</span>in-sensor computing의 '데이터가 준다'는 주장을 숫자로 확인하고, 그 이득이 '기억을 소자가 들고 있어 끝에서만 읽는 것'에서 온다는 점과 R–C 하나·디지털 기준과의 공정한 비교를 익힙니다.</p><p><span class="pj-k">먼저 알면 좋은 것</span>P1 권장(sampling rate, R–C, balanced accuracy). Python 준비는 '처음 한 번: 내 컴퓨터 준비하기'</p><p><span class="pj-k">소재·소자</span>소재·소자 필요 없음</p><p><span class="pj-k">장비 전체</span>PC만 (실물 확장은 선택: 시판 EMG 센서 모듈 + P3 보드)</p><p><span class="pj-k">비용</span>없음 (선택 확장은 센서 모듈 값)</p><p><span class="pj-k">검증 상태</span>코드 실행 확인 (두 명령, seed 1–3, 그림 겹침 검사 OK). 실물 확장은 미검증</p>
+</details></div></article><article class="pj-card" data-project="e"><figure class="pj-preview figure"><img src="img/thumb-p5.svg" alt="판정 한 번에 바로 숫자로 보내면 약 60,000 bit, 흔적 끝만 읽으면 약 600 bit" loading="lazy" class="figure-img"><figcaption>핵심 결과 (합성 신호)</figcaption></figure><div class="pj-body"><div class="pj-head"><span class="pj-letter" aria-hidden="true">P5</span><h3 class="pj-title anchored"><a href="e.html">근육 신호(EMG)와 physical reservoir</a></h3></div><p class="pj-q">손목을 어느 순서로 움직였는지 근육이 다 쉰 뒤에도 맞힐 수 있을까? 소자가 신호를 먼저 '흔적'으로 바꾸면 컴퓨터로 보낼 숫자가 얼마나 줄까?</p><div class="pj-badges"><span class="pj-badge pj-verify">코드 실행 확인</span><span class="pj-badge">EMG·envelope</span><span class="pj-badge">sampling rate·aliasing</span><span class="pj-badge">multi-τ physical reservoir</span><span class="pj-badge">in-sensor data rate</span></div><p class="pj-out"><span class="pj-k">남는 것</span>표 3개와 그래프 4장: sampling rate별 정확도, 모형별(no memory · R–C · reservoir · digital) 끝만 읽은 정확도, 판정 한 번에 보내는 bit 비교(약 60,000 대 약 600)</p><dl class="pj-facts"><div><dt>첫 단계</dt><dd>P5.1 · 학습 30–45분</dd></div><div><dt>장비</dt><dd>PC</dd></div><div><dt>난도</dt><dd>코드 쉬움 · 회로 없음 · 실험 없음</dd></div></dl><div class="pj-prog" data-project-progress="e"></div><a class="sbtn primary pj-go" data-project-go="e" href="e.html#e1">P5.1 시작 →</a><details class="pj-more"><summary>자세히 · 단계 2개</summary><p><span class="pj-k">연구와의 연결</span>in-sensor computing의 '데이터가 준다'는 주장을 숫자로 확인하고, 그 이득이 '기억을 소자가 들고 있어 끝에서만 읽는 것'에서 온다는 점과 R–C 하나·디지털 기준과의 공정한 비교를 익힙니다.</p><p><span class="pj-k">먼저 알면 좋은 것</span>P1 권장(sampling rate, R–C, balanced accuracy). Python 준비는 '처음 한 번: 내 컴퓨터 준비하기'</p><p><span class="pj-k">소재·소자</span>소재·소자 필요 없음</p><p><span class="pj-k">장비 전체</span>PC만 (실물 확장은 선택: 시판 EMG 센서 모듈 + P3 보드)</p><p><span class="pj-k">비용</span>없음 (선택 확장은 센서 모듈 값)</p><p><span class="pj-k">검증 상태</span>코드 실행 확인 (실습 5개, 그림 겹침 검사 OK). 실물 확장은 미검증</p>
 <table class="pj-steps caption-top table">
 <thead>
 <tr class="header">
@@ -875,19 +962,20 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><a href="e.html#e1">P5.1. EMG를 숫자로: sampling rate와 data rate</a></td>
-<td>30–45분</td>
+<td>학습 30–45분</td>
 <td>PC</td>
 <td>mock</td>
 </tr>
 <tr class="even">
 <td><a href="e.html#e2">P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기</a></td>
-<td>40–60분</td>
+<td>학습 40–60분</td>
 <td>PC</td>
 <td>mock</td>
 </tr>
 </tbody>
 </table>
 </details></div></article></div>
+</section>
 <section id="ext" class="level2">
 <h2 class="anchored" data-anchor-id="ext">확장 후보</h2>
 <p>새 제목을 늘리지 않고, 위 경로의 다음 단계로 합쳤습니다. 오른쪽 조건이 되면 시작합니다.</p>
@@ -952,6 +1040,14 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+</section>
+<section id="howto" class="level2">
+<h2 class="anchored" data-anchor-id="howto">이 페이지 쓰는 법</h2>
+<ul>
+<li>순서는 <strong>컴퓨터 준비 → P1 → P2.0(mock)</strong>. 여기까지 소재·소자·장비가 필요 없습니다.</li>
+<li>프로젝트 페이지는 <strong>도입 그림 → 실습 바로 가기 목록 → 실습마다 '이 스텝에서 하는 일' → 코드 붙여 넣고 ▷ → 예상 출력과 결과 그림 → 바꿔 보기</strong> 순서입니다. 코드 상자는 접혀 있고, <strong>전체 코드 복사</strong> 단추는 항상 실행 가능한 전체 코드를 복사합니다.</li>
+<li>단계마다 진행 중·완료·보류를 표시할 수 있습니다. <strong>완료 = 실습을 실행하고 결과 그림을 확인했다</strong>는 뜻입니다. 관찰을 글로 적는 것은 선택이고, 성능이 좋게 나와야 완료인 것도 아닙니다. 실제 소자 측정(P2.1부터)에서는 날짜·소자 이름·조건 같은 <strong>측정 기록</strong>은 꼭 남깁니다. 이것은 감상이 아니라 연구 데이터입니다.</li>
+</ul>
 </section>
 <section id="levels" class="level2">
 <h2 class="anchored" data-anchor-id="levels">결과를 네 수준으로 나눠 보기</h2>

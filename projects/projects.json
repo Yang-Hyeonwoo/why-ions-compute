@@ -15,7 +15,7 @@
         "time constant τ",
         "reservoir baseline"
       ],
-      "prereq": "없음. Python 설치와 명령 프롬프트 여는 법은 '처음 한 번: 내 컴퓨터 준비하기'에서 그림으로 설명",
+      "prereq": "없음. Python·VS Code 준비는 '처음 한 번: 내 컴퓨터 준비하기'",
       "level": {
         "sw": 1,
         "circuit": 0,
@@ -24,19 +24,19 @@
       "equipment": "PC만",
       "cost": "없음",
       "materials": "소재·소자 필요 없음",
-      "verify": "코드 실행 확인 (깨끗한 Python 환경에서 두 명령과 그래프 생성)",
+      "verify": "코드 실행 확인 (깨끗한 Python 환경에서 실습 7개를 실행해 표·그림 생성)",
       "verify_short": "코드 실행 확인",
       "preview": {
-        "src": "img/s2-memory.png",
-        "label": "결과 예 (P1.2 그래프)",
-        "alt": "R–C의 τ에 따른 정확도가 산 모양으로 나오는 그래프와 상태 곡선"
+        "src": "img/thumb-p1.svg",
+        "label": "핵심 결과 (개념 그림)",
+        "alt": "기억 길이 τ가 과제에 딱 맞을 때 정확도가 가장 높은 산 모양"
       },
       "steps": [
         {
           "id": "s1",
           "anchor": "s1",
           "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까",
-          "time": "40분",
+          "time": "학습 약 60분 (실행은 실습마다 수 초)",
           "needs": "PC",
           "kind": "mock",
           "days": [
@@ -47,7 +47,7 @@
           "id": "s2",
           "anchor": "s2",
           "title": "P1.2. 기억은 길수록 좋을까",
-          "time": "40분",
+          "time": "학습 약 50분 (실행은 실습마다 수 초–30초)",
           "needs": "PC",
           "kind": "mock",
           "days": [
@@ -56,7 +56,9 @@
             "d09"
           ]
         }
-      ]
+      ],
+      "outcome_short": "박동을 놓치지 않는 가장 작은 설정 + 기억 길이 그래프",
+      "equip_short": "PC만"
     },
     {
       "id": "a",
@@ -80,19 +82,19 @@
       "equipment": "P2.0: PC만 · P2.0R부터: 소스미터(SMU), 1 MΩ 저항, 1 µF 필름 커패시터 · P2.1부터: 소자",
       "cost": "연구실 기존 장비 활용 (추가 구매 거의 없음)",
       "materials": "P2.1부터 ITO / 이온성 고분자 두 층 / ITO 소자 (현재 P2·P3의 공통 플랫폼)",
-      "verify": "P2.0 mock 명령 실행 확인 · 실제 소스미터 연결은 미검증",
+      "verify": "P2.0 mock 실습 실행 확인 · 실제 소스미터 연결은 미검증",
       "verify_short": "mock 확인 · 실측 미검증",
       "preview": {
-        "src": "img/ex-mock-wrr-rc.png",
-        "label": "결과 예 (mock 장비)",
-        "alt": "mock RC에 쓰기–쉬기–읽기 전압을 걸었을 때의 전압과 전류 그래프"
+        "src": "img/thumb-p2.svg",
+        "label": "핵심 질문 (개념 그림)",
+        "alt": "전압 pulse 네 개 뒤에 전류가 조금씩 쌓이는 모양"
       },
       "steps": [
         {
           "id": "a0",
           "anchor": "a0",
           "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)",
-          "time": "30–60분",
+          "time": "학습 40–60분 (실행은 실습마다 수 초–30초)",
           "needs": "PC",
           "kind": "mock",
           "days": [
@@ -147,7 +149,9 @@
           ],
           "optional": true
         }
-      ]
+      ],
+      "outcome_short": "내 소자의 특성표 + '끝만 읽기' 정확도 비교",
+      "equip_short": "PC (mock) → 소스미터·소자"
     },
     {
       "id": "b",
@@ -174,9 +178,9 @@
       "verify": "firmware는 NU40 DK용 컴파일만 확인 · 업로드·실물 동작 미검증 · 회로는 설계안",
       "verify_short": "컴파일 확인 · 실물 미검증",
       "preview": {
-        "src": "img/p3-overview.svg",
-        "label": "구성도 (개념도)",
-        "alt": "브레드보드 위 NU40 DK 보드, DAC, 소자, op-amp, ADC, OLED, 부저와 전압 걸기·전류 읽기·판단·알림 흐름"
+        "src": "img/thumb-p3.svg",
+        "label": "구성 (개념 그림)",
+        "alt": "DAC가 전압을 걸고 소자를 지난 전류를 ADC가 읽어 화면과 소리로 알림"
       },
       "steps": [
         {
@@ -273,7 +277,9 @@
           ],
           "optional": true
         }
-      ]
+      ],
+      "outcome_short": "보드가 전압 걸고·읽고·판단하는 브레드보드 시제품",
+      "equip_short": "NU40 DK·브레드보드·모듈"
     },
     {
       "id": "c",
@@ -300,9 +306,9 @@
       "verify": "mock 분석 실행 확인 · 압력용 소자·tapper 실물 미검증",
       "verify_short": "mock 확인 · 실물 미검증",
       "preview": {
-        "src": "img/p4-overview.svg",
-        "label": "구성도 (개념도)",
-        "alt": "servo가 실리콘 팁으로 소자를 누르고 load cell이 힘을 재며, 누름 리듬과 소자 전류, 끝에서 몇 번만 읽기"
+        "src": "img/thumb-p4.svg",
+        "label": "핵심 질문 (개념 그림)",
+        "alt": "리듬에 맞춰 소자를 누르고 끝에서 읽기"
       },
       "steps": [
         {
@@ -343,7 +349,9 @@
             "d08"
           ]
         }
-      ]
+      ],
+      "outcome_short": "누름 리듬 기록과 control 비교표",
+      "equip_short": "소스미터·추 → servo·load cell"
     },
     {
       "id": "e",
@@ -368,19 +376,19 @@
       "equipment": "PC만 (실물 확장은 선택: 시판 EMG 센서 모듈 + P3 보드)",
       "cost": "없음 (선택 확장은 센서 모듈 값)",
       "materials": "소재·소자 필요 없음",
-      "verify": "코드 실행 확인 (두 명령, seed 1–3, 그림 겹침 검사 OK). 실물 확장은 미검증",
+      "verify": "코드 실행 확인 (실습 5개, 그림 겹침 검사 OK). 실물 확장은 미검증",
       "verify_short": "코드 실행 확인",
       "preview": {
-        "src": "img/e-compare.png",
-        "label": "결과 예 (P5.2 그래프, 합성 신호)",
-        "alt": "모형별 정확도 막대와, 판정 한 번에 보내는 bit 수에 따른 정확도 그래프"
+        "src": "img/thumb-p5.svg",
+        "label": "핵심 결과 (합성 신호)",
+        "alt": "판정 한 번에 바로 숫자로 보내면 약 60,000 bit, 흔적 끝만 읽으면 약 600 bit"
       },
       "steps": [
         {
           "id": "e1",
           "anchor": "e1",
           "title": "P5.1. EMG를 숫자로: sampling rate와 data rate",
-          "time": "30–45분",
+          "time": "학습 30–45분",
           "needs": "PC",
           "kind": "mock",
           "days": [
@@ -391,7 +399,7 @@
           "id": "e2",
           "anchor": "e2",
           "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기",
-          "time": "40–60분",
+          "time": "학습 40–60분",
           "needs": "PC",
           "kind": "mock",
           "days": [
@@ -400,7 +408,9 @@
             "d08"
           ]
         }
-      ]
+      ],
+      "outcome_short": "EMG 정확도 표 + 보낼 bit 비교 그래프",
+      "equip_short": "PC만"
     }
   ],
   "extensions": [
@@ -454,5 +464,13 @@
       "where": "후보 목록만 (아래 조건)",
       "when": "공개 자료·벤치 실험에서 소재의 역할이 분명해진 뒤, 승인된 협업 프로토콜로"
     }
-  ]
+  ],
+  "side": {
+    "page": "side.html",
+    "title": "NU40 DK 하루 실습",
+    "outcome_short": "센서 키트로 만드는 작은 장치 여섯 개",
+    "equip_short": "NU40 DK·센서 키트",
+    "level": "코드 쉬움 · 회로 쉬움 · 실험 없음",
+    "verify_short": "컴파일만 확인 · 실물 미검증"
+  }
 }

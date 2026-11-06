@@ -1,25 +1,48 @@
 # 프로젝트 코드 묶음
 
-사이트의 프로젝트 P2·P3·P4 페이지와 같이 쓰는 실행 파일입니다. 명령은 모두 `python` 폴더에서 입력합니다.
+사이트(Why Ions Compute?)의 프로젝트 P1–P5 실습 코드입니다. **기본 방법은 VS Code 하나**입니다. 자세한 그림 설명은 사이트의 "처음 한 번: 내 컴퓨터 준비하기" 페이지에 있습니다.
+
+## 기본 방법: VS Code에서 ▷
+
+1. 이 zip을 풀고, VS Code에서 **File → Open Folder…**로 `ion-projects-code`를 엽니다. 왼쪽 EXPLORER 바로 아래에 `python`·`labs` 폴더가 보여야 합니다. (`ion-projects-code` 안에 `ion-projects-code`가 또 보이면 압축이 두 겹으로 풀린 것이니 **안쪽**을 엽니다.)
+2. `mylabs` 폴더를 새로 만듭니다. 사이트에서 복사한 실습 코드는 모두 여기에 같은 파일 이름으로 붙여 넣습니다.
+3. **Ctrl+Shift+P → Python: Select Interpreter**로 Python 3.11 이상을 고릅니다.
+4. `mylabs/p0_install.py`(사이트의 준비 페이지 코드, `labs/p0_install.py`와 같음)를 ▷ → package가 **▷가 쓰는 바로 그 Python**에 설치됩니다.
+5. `mylabs/p0_hello.py`를 ▷ → 사인 곡선 그림 창이 뜨면 준비 끝. 이어서 `python/run_tests.py`를 ▷ → `all passed (13)`.
+6. 이후 각 실습: 사이트의 코드를 `mylabs/<파일 이름>.py`에 붙여 넣기 → Ctrl+S → ▷. 결과 글자는 TERMINAL에, 그래프는 따로 뜬 그림 창에 나옵니다.
+
+| 폴더 | 무엇 |
+|---|---|
+| `labs/` | 사이트 실습 코드의 **완성본** (p0_*, p1_*–p5_*). 내 파일이 이상하면 열어서 비교하거나 그대로 ▷ |
+| `mylabs/` | (직접 만듦) 내가 붙여 넣은 실습 파일 |
+| `python/` | 실습 파일이 불러 쓰는 공용 코드 (장비 연결·측정·채점) |
+| `firmware/` | P3·P4에서 보드에 올리는 Arduino 코드 |
+
+실습 파일은 `mylabs` 안에 있어야 공용 코드(`python/`)를 찾습니다. 결과 파일은 `runs/` 아래에 저장됩니다.
+
+## (선택) 명령으로 실행하기
+
+명령 창에 익숙하면 TERMINAL에서 직접 실행해도 됩니다. 이 경우 TERMINAL의 `python`이 VS Code ▷의 Python과 같은지 먼저 확인하세요(`python -c "import sys; print(sys.executable)"`).
+
+```bash
+python -m pip install -r python/requirements.txt
+python labs/p1_1_ecg.py
+```
+
+아래 "장비 없이 처음 해 보기"의 옛 명령들은 `python` 폴더 안에서(`cd python`) 실행하는 형식입니다. 사이트의 실습 파일과 같은 계산을 합니다.
 
 ## 검증 상태 (2026-11-03)
 
 | 대상 | 한 것 | 하지 않은 것 |
 |---|---|---|
+| VS Code 실습 (2026-11-06) | 이 zip을 새 폴더에 풀고 package가 하나도 없는 새 Python 3.12 환경에서 `labs/p0_install.py` 실행 → 8개 package 설치·불러오기 ok, 이어서 `p0_hello`, P1 실습 1–7, P2 실습 1–4(실습 2는 memory·resistor 두 번), `run_tests.py`(all passed (13)) 실행 확인. 그림 창은 화면 없이(Agg) 확인 | VS Code 화면에서의 실제 클릭(▷·interpreter 선택)은 사람이 직접 하는 부분이라 미확인 |
 | Python | 문법 확인. 모의 장비·합성 데이터로 `run_tests.py` 13개 통과. 이 zip을 새 폴더에 풀어 P2.0 명령·P2.1 모의·C 모의 분석·헤더 내보내기를 순서대로 실행해 결과와 그래프가 나오는 것 확인 | 실제 Keithley·보드·tapper 연결, MIT-BIH 내려받기(`ecg_prep.py`), `c_run.py`·`board_collect.py`의 실제 장비 실행 |
 | 펌웨어 (`firmware/`) | NU40 DK용 컴파일 (아래 기록) | **보드 업로드, 실물 동작 미검증** |
 | 회로 | 설계안 | 저항·RC 모의 소자로의 실측 |
 
 모의 장비는 코드 흐름을 확인하는 장난감 모델입니다. 모의 결과는 실제 소자 성능에 대해 아무것도 말해 주지 않습니다.
 
-## 설치
-
-```bash
-cd python
-python -m pip install -r requirements.txt
-```
-
-## 장비 없이 처음 해 보기 (P2.0)
+## (선택) 장비 없이 처음 해 보기 (P2.0, 명령 방식)
 
 ```bash
 python run_tests.py

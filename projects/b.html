@@ -133,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../assets/projects.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -698,60 +698,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">이 페이지</h2>
-   
-  <ul>
-  <li><a href="#why" id="toc-why" class="nav-link active" data-scroll-target="#why">이야기부터: 큰 장비의 일을 작은 board가</a></li>
-  <li><a href="#board" id="toc-board" class="nav-link" data-scroll-target="#board">기준 board 정하기</a></li>
-  <li><a href="#buy" id="toc-buy" class="nav-link" data-scroll-target="#buy">준비물</a></li>
-  <li><a href="#ide" id="toc-ide" class="nav-link" data-scroll-target="#ide">준비: PC에 Arduino IDE 2 깔기</a></li>
-  <li><a href="#b1" id="toc-b1" class="nav-link" data-scroll-target="#b1">P3.1. NU40 DK 첫 연결</a></li>
-  <li><a href="#b1a" id="toc-b1a" class="nav-link" data-scroll-target="#b1a">P3.1a. 버튼 리듬을 CSV로 남기기</a>
-  <ul class="collapse">
-  <li><a href="#실습-1.-board가-보내는-줄을-csv로-p3_1_record.py" id="toc-실습-1.-board가-보내는-줄을-csv로-p3_1_record.py" class="nav-link" data-scroll-target="#실습-1.-board가-보내는-줄을-csv로-p3_1_record.py">실습 1. board가 보내는 줄을 CSV로 (<code>p3_1_record.py</code>)</a></li>
-  <li><a href="#진짜-board로-기록하기" id="toc-진짜-board로-기록하기" class="nav-link" data-scroll-target="#진짜-board로-기록하기">진짜 board로 기록하기</a></li>
-  </ul></li>
-  <li><a href="#b1b" id="toc-b1b" class="nav-link" data-scroll-target="#b1b">P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가</a>
-  <ul class="collapse">
-  <li><a href="#실습-2.-leaky-node-하나에-리듬-넣기-p3_2_leaky.py" id="toc-실습-2.-leaky-node-하나에-리듬-넣기-p3_2_leaky.py" class="nav-link" data-scroll-target="#실습-2.-leaky-node-하나에-리듬-넣기-p3_2_leaky.py">실습 2. leaky node 하나에 리듬 넣기 (<code>p3_2_leaky.py</code>)</a></li>
-  <li><a href="#실습-3.-다섯-방법으로-맞히기-p3_3_compare.py" id="toc-실습-3.-다섯-방법으로-맞히기-p3_3_compare.py" class="nav-link" data-scroll-target="#실습-3.-다섯-방법으로-맞히기-p3_3_compare.py">실습 3. 다섯 방법으로 맞히기 (<code>p3_3_compare.py</code>)</a></li>
-  <li><a href="#내-손으로-기록하고-다시-비교" id="toc-내-손으로-기록하고-다시-비교" class="nav-link" data-scroll-target="#내-손으로-기록하고-다시-비교">내 손으로 기록하고 다시 비교</a></li>
-  </ul></li>
-  <li><a href="#b2" id="toc-b2" class="nav-link" data-scroll-target="#b2">P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기</a></li>
-  <li><a href="#b4" id="toc-b4" class="nav-link" data-scroll-target="#b4">P3.4. 소자 구동·전류 측정 회로</a>
-  <ul class="collapse">
-  <li><a href="#b4-path" id="toc-b4-path" class="nav-link" data-scroll-target="#b4-path">전압·전류 경로</a></li>
-  <li><a href="#b4-poweron" id="toc-b4-poweron" class="nav-link" data-scroll-target="#b4-poweron">전원·리셋·통신 실패 때 무엇이 걸리나</a></li>
-  <li><a href="#b4-tia" id="toc-b4-tia" class="nav-link" data-scroll-target="#b4-tia">전류 측정: 션트 또는 TIA</a></li>
-  <li><a href="#b4-verify" id="toc-b4-verify" class="nav-link" data-scroll-target="#b4-verify">저항·RC로 회로를 먼저 검증</a></li>
-  </ul></li>
-  <li><a href="#b5" id="toc-b5" class="nav-link" data-scroll-target="#b5">P3.5. board로 reservoir 데이터 모으기</a>
-  <ul class="collapse">
-  <li><a href="#실습-4.-입력과-board-설정-만들기-p3_4_prepare.py" id="toc-실습-4.-입력과-board-설정-만들기-p3_4_prepare.py" class="nav-link" data-scroll-target="#실습-4.-입력과-board-설정-만들기-p3_4_prepare.py">실습 4. 입력과 board 설정 만들기 (<code>p3_4_prepare.py</code>)</a></li>
-  <li><a href="#실습-5.-mock-board로-trial-80개-모으기-p3_5_collect.py" id="toc-실습-5.-mock-board로-trial-80개-모으기-p3_5_collect.py" class="nav-link" data-scroll-target="#실습-5.-mock-board로-trial-80개-모으기-p3_5_collect.py">실습 5. mock board로 trial 80개 모으기 (<code>p3_5_collect.py</code>)</a></li>
-  <li><a href="#진짜-board로-모으기" id="toc-진짜-board로-모으기" class="nav-link" data-scroll-target="#진짜-board로-모으기">진짜 board로 모으기</a></li>
-  </ul></li>
-  <li><a href="#b6" id="toc-b6" class="nav-link" data-scroll-target="#b6">P3.6. PC 없이 판단하고 알리기</a>
-  <ul class="collapse">
-  <li><a href="#실습-6.-판단-식-학습-p3_6_readout.py" id="toc-실습-6.-판단-식-학습-p3_6_readout.py" class="nav-link" data-scroll-target="#실습-6.-판단-식-학습-p3_6_readout.py">실습 6. 판단 식 학습 (<code>p3_6_readout.py</code>)</a></li>
-  <li><a href="#실습-7.-board용-파일-내보내기와-자기-점검-p3_7_export.py" id="toc-실습-7.-board용-파일-내보내기와-자기-점검-p3_7_export.py" class="nav-link" data-scroll-target="#실습-7.-board용-파일-내보내기와-자기-점검-p3_7_export.py">실습 7. board용 파일 내보내기와 자기 점검 (<code>p3_7_export.py</code>)</a></li>
-  <li><a href="#진짜-board로-판단하기" id="toc-진짜-board로-판단하기" class="nav-link" data-scroll-target="#진짜-board로-판단하기">진짜 board로 판단하기</a></li>
-  </ul></li>
-  <li><a href="#b7" id="toc-b7" class="nav-link" data-scroll-target="#b7">P3.7. 시간과 에너지를 공정하게 재기</a></li>
-  <li><a href="#b8" id="toc-b8" class="nav-link" data-scroll-target="#b8">P3.8. (선택) ECG 신호로 도전</a>
-  <ul class="collapse">
-  <li><a href="#기본-경로-사람-없이" id="toc-기본-경로-사람-없이" class="nav-link" data-scroll-target="#기본-경로-사람-없이">기본 경로: 사람 없이</a></li>
-  <li><a href="#두-경로를-정확히-구분하기" id="toc-두-경로를-정확히-구분하기" class="nav-link" data-scroll-target="#두-경로를-정확히-구분하기">두 경로를 정확히 구분하기</a></li>
-  <li><a href="#연속-처리에-필요한-조건-계산-먼저" id="toc-연속-처리에-필요한-조건-계산-먼저" class="nav-link" data-scroll-target="#연속-처리에-필요한-조건-계산-먼저">연속 처리에 필요한 조건 (계산 먼저)</a></li>
-  </ul></li>
-  <li><a href="#b-trouble" id="toc-b-trouble" class="nav-link" data-scroll-target="#b-trouble">문제 해결</a></li>
-  <li><a href="#b-ai" id="toc-b-ai" class="nav-link" data-scroll-target="#b-ai">AI에게 맡길 때</a></li>
-  <li><a href="#b-code" id="toc-b-code" class="nav-link" data-scroll-target="#b-code">이 실습들이 단순하게 만든 부분</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -777,7 +724,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script>document.documentElement.classList.add("proj-page")</script>
 <script src="../assets/projects.js" defer=""></script>
-<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "P1", "title": "컴퓨터만으로 하는 첫 실험", "page": "s.html"}, {"id": "a", "letter": "P2", "title": "소스미터로 내 소자 재기", "page": "a.html"}, {"id": "b", "letter": "P3", "title": "손바닥 보드로 만드는 측정·판단 장치", "page": "b.html"}, {"id": "c", "letter": "P4", "title": "눌러서 쓰는 소자: 누름의 리듬이 남는가", "page": "c.html"}, {"id": "e", "letter": "P5", "title": "근육 신호(EMG)와 physical reservoir", "page": "e.html"}], "steps": [{"id": "s1", "project": "s", "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까", "page": "s.html", "anchor": "s1", "time": "40분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "s2", "project": "s", "title": "P1.2. 기억은 길수록 좋을까", "page": "s.html", "anchor": "s2", "time": "40분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d09"], "optional": false}, {"id": "a0", "project": "a", "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "30–60분", "needs": "PC", "kind": "mock", "days": ["d06", "d08"], "optional": false}, {"id": "a0r", "project": "a", "title": "P2.0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"], "optional": false}, {"id": "a1", "project": "a", "title": "P2.1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"], "optional": false}, {"id": "a2", "project": "a", "title": "P2.2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"], "optional": false}, {"id": "a3", "project": "a", "title": "P2.3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}, {"id": "b1", "project": "b", "title": "P3.1. NU40 DK에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "NU40 DK, 데이터용 USB 케이블", "kind": "실물", "days": [], "optional": false}, {"id": "b1a", "project": "b", "title": "P3.1a. 버튼 리듬을 CSV로 남기기", "page": "b.html", "anchor": "b1a", "time": "30–60분", "needs": "NU40 DK (키트 조도 모듈은 선택)", "kind": "실물", "days": [], "optional": false}, {"id": "b1b", "project": "b", "title": "P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가", "page": "b.html", "anchor": "b1b", "time": "1–2시간", "needs": "NU40 DK, P3.1a 기록", "kind": "실물", "days": [], "optional": false}, {"id": "b2", "project": "b", "title": "P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "NU40 DK, DAC·ADC 모듈", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b4", "project": "b", "title": "P3.4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"], "optional": false}, {"id": "b5", "project": "b", "title": "P3.5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "P3.4 회로, 소자", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b6", "project": "b", "title": "P3.6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "P3.5 결과", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b7", "project": "b", "title": "P3.7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b8", "project": "b", "title": "P3.8. (선택) ECG 신호로 도전", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}, {"id": "c0", "project": "c", "title": "P4.0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (mock 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 mock)", "kind": "실측", "days": [], "optional": false}, {"id": "c2", "project": "c", "title": "P4.1–P4.2. 소자 구조와 control", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": [], "optional": false}, {"id": "c3", "project": "c", "title": "P4.3–P4.4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "servo, load cell, 보드", "kind": "실물", "days": [], "optional": false}, {"id": "c5", "project": "c", "title": "P4.5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "P4.3 장치, 소자", "kind": "실측", "days": ["d08"], "optional": false}, {"id": "e1", "project": "e", "title": "P5.1. EMG를 숫자로: sampling rate와 data rate", "page": "e.html", "anchor": "e1", "time": "30–45분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "e2", "project": "e", "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기", "page": "e.html", "anchor": "e2", "time": "40–60분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d08"], "optional": false}]}</script>
+<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "P1", "title": "컴퓨터만으로 하는 첫 실험", "page": "s.html"}, {"id": "a", "letter": "P2", "title": "소스미터로 내 소자 재기", "page": "a.html"}, {"id": "b", "letter": "P3", "title": "손바닥 보드로 만드는 측정·판단 장치", "page": "b.html"}, {"id": "c", "letter": "P4", "title": "눌러서 쓰는 소자: 누름의 리듬이 남는가", "page": "c.html"}, {"id": "e", "letter": "P5", "title": "근육 신호(EMG)와 physical reservoir", "page": "e.html"}], "steps": [{"id": "s1", "project": "s", "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까", "page": "s.html", "anchor": "s1", "time": "학습 약 60분 (실행은 실습마다 수 초)", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "s2", "project": "s", "title": "P1.2. 기억은 길수록 좋을까", "page": "s.html", "anchor": "s2", "time": "학습 약 50분 (실행은 실습마다 수 초–30초)", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d09"], "optional": false}, {"id": "a0", "project": "a", "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "학습 40–60분 (실행은 실습마다 수 초–30초)", "needs": "PC", "kind": "mock", "days": ["d06", "d08"], "optional": false}, {"id": "a0r", "project": "a", "title": "P2.0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"], "optional": false}, {"id": "a1", "project": "a", "title": "P2.1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"], "optional": false}, {"id": "a2", "project": "a", "title": "P2.2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"], "optional": false}, {"id": "a3", "project": "a", "title": "P2.3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}, {"id": "b1", "project": "b", "title": "P3.1. NU40 DK에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "NU40 DK, 데이터용 USB 케이블", "kind": "실물", "days": [], "optional": false}, {"id": "b1a", "project": "b", "title": "P3.1a. 버튼 리듬을 CSV로 남기기", "page": "b.html", "anchor": "b1a", "time": "30–60분", "needs": "NU40 DK (키트 조도 모듈은 선택)", "kind": "실물", "days": [], "optional": false}, {"id": "b1b", "project": "b", "title": "P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가", "page": "b.html", "anchor": "b1b", "time": "1–2시간", "needs": "NU40 DK, P3.1a 기록", "kind": "실물", "days": [], "optional": false}, {"id": "b2", "project": "b", "title": "P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "NU40 DK, DAC·ADC 모듈", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b4", "project": "b", "title": "P3.4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"], "optional": false}, {"id": "b5", "project": "b", "title": "P3.5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "P3.4 회로, 소자", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b6", "project": "b", "title": "P3.6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "P3.5 결과", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b7", "project": "b", "title": "P3.7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b8", "project": "b", "title": "P3.8. (선택) ECG 신호로 도전", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}, {"id": "c0", "project": "c", "title": "P4.0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (mock 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 mock)", "kind": "실측", "days": [], "optional": false}, {"id": "c2", "project": "c", "title": "P4.1–P4.2. 소자 구조와 control", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": [], "optional": false}, {"id": "c3", "project": "c", "title": "P4.3–P4.4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "servo, load cell, 보드", "kind": "실물", "days": [], "optional": false}, {"id": "c5", "project": "c", "title": "P4.5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "P4.3 장치, 소자", "kind": "실측", "days": ["d08"], "optional": false}, {"id": "e1", "project": "e", "title": "P5.1. EMG를 숫자로: sampling rate와 data rate", "page": "e.html", "anchor": "e1", "time": "학습 30–45분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "e2", "project": "e", "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기", "page": "e.html", "anchor": "e2", "time": "학습 40–60분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d08"], "optional": false}]}</script>
 <div class="pj-hero">
 <div class="pj-hero-art">
 <p><img src="img/p3-overview.svg" class="img-fluid" alt="breadboard 위에 NU40 DK 보드, DAC, ADC, op-amp 회로, 소자, OLED, 부저가 놓여 있고 ① 보드가 DAC로 전압을 걸고 ② 소자에 전류가 흐르고 ③ ADC가 읽어 ④ 보드가 판단해 알리는 흐름을 번호로 보인 모식도"></p>
@@ -796,6 +743,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><b>P3.1a 버튼 리듬</b><small>실습 1 · CSV + 그림</small></li>
 <li class="arrow">→</li>
 <li><b>P3.1b 기억이 필요한가</b><small>실습 2–3 · 정확도</small></li>
+<li class="arrow">→</li>
+<li><b>R–C 첫 배선</b><small>breadboard · τ 약 1초</small></li>
 <li class="arrow">→</li>
 <li><b>P3.2–3 DAC·ADC</b><small>module 2개 · 전압 표</small></li>
 <li class="arrow">→</li>
@@ -1060,11 +1009,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="buy">준비물</h2>
 <p>첫 실험(<a href="#b1">P3.1</a>)은 <strong>board와 USB 케이블만</strong> 있으면 됩니다. 나머지는 그 단계에 가서 삽니다. 부품 이름이 처음이면 아래 표에서 "무엇인가"만 훑어보고, 자세한 쓰임은 그 단계에서 다시 설명합니다.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>부품</th>
@@ -1085,18 +1029,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td>breadboard</td>
-<td>납땜 없이 부품 다리를 꽂아 잇는 구멍판. 번호가 같은 세로줄의 구멍 5개(a–e, 또는 f–j)는 속으로 이어져 있고, 양옆의 긴 빨강(+)·파랑(−) 줄은 한 줄 전체가 이어진 전원용입니다</td>
-<td>P3.2</td>
+<td>납땜 없이 부품 다리를 꽂아 잇는 구멍판. 번호 하나를 <strong>행</strong>이라 부릅니다. 한 행의 a–e 다섯 구멍, f–j 다섯 구멍이 각각 속으로 이어져 있고, 위·아래의 긴 빨강(+)·파랑(−) 줄(<strong>rail</strong>)은 한 줄 전체가 이어진 전원용입니다(<a href="#b-bb">그림</a>)</td>
+<td>R–C 첫 배선</td>
 </tr>
 <tr class="even">
 <td>jumper wire</td>
 <td>구멍끼리, 또는 board와 breadboard를 잇는 짧은 전선. 수-수(양쪽 다 핀), 수-암(한쪽은 구멍)이 있습니다</td>
-<td>P3.2</td>
+<td>R–C 첫 배선</td>
 </tr>
 <tr class="odd">
 <td>디지털 멀티미터</td>
-<td>전압·저항값을 재는 손 계측기. board가 읽은 숫자가 맞는지 대조합니다</td>
-<td>P3.2</td>
+<td>전압·저항값을 재고, 두 점이 이어졌는지 소리로 알려 주는(continuity) 손 계측기. board가 읽은 숫자가 맞는지 대조합니다</td>
+<td>R–C 첫 배선</td>
 </tr>
 <tr class="even">
 <td>DAC module (MCP4725)</td>
@@ -1111,12 +1055,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td>resistor (저항)</td>
 <td>전류를 일정 비율로 줄이는 부품. 값의 단위는 Ω(옴). 전류 상한을 묶고(R_lim), 전류를 전압으로 바꾸는(R_f, R_s) 데 씁니다</td>
-<td>P3.4</td>
+<td>R–C 첫 배선</td>
 </tr>
 <tr class="odd">
 <td>capacitor</td>
 <td>전기를 잠깐 담아 두는 부품. 단위는 F(패럿). 저항과 짝지으면 "천천히 변하는" 모의 소자가 됩니다</td>
-<td>P3.4</td>
+<td>R–C 첫 배선</td>
 </tr>
 <tr class="even">
 <td>op-amp (operational amplifier)</td>
@@ -1189,7 +1133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>지금</td>
 <td>저항 키트 1% 금속피막, 세라믹·필름·전해 capacitor 키트</td>
-<td>1 µF <strong>필름</strong> capacitor 몇 개 (RC 모의 소자용)</td>
+<td>100 kΩ 저항과 10 µF 전해 capacitor (R–C 첫 배선용), 1 µF <strong>필름</strong> capacitor 몇 개 (RC 모의 소자용)</td>
 <td>1</td>
 </tr>
 <tr class="even">
@@ -1350,6 +1294,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>이 번호를 <strong>적어 둡니다.</strong> 진짜 board를 쓰는 실습 파일의 <code>PORT = "COM5"</code> 자리에 이 번호를 넣습니다. board USB가 칩 안에 있어 따로 드라이버를 깔지 않아도 되는 경우가 많습니다. <strong>다른 USB 구멍에 꽂으면 번호가 바뀔 수 있으니</strong> 그때마다 여기서 다시 봅니다.</p>
 <div class="ifnot">
 <p>케이블을 꽂아도 새 줄이 안 생기면 케이블이 충전 전용인 경우가 가장 흔합니다. 다른 케이블로 바꿉니다. 그래도 안 되면 다른 USB 구멍에 꽂아 봅니다.</p>
+</div>
+</section>
+</div>
+</section>
+<section id="b-stages" class="level2">
+<h2 class="anchored" data-anchor-id="b-stages">하드웨어는 네 단계로, 하나씩 확인하고 넘어가기</h2>
+<p>회로를 한 번에 다 꽂으면, 안 될 때 어디가 문제인지 모릅니다. 그래서 <strong>USB·LED·버튼 → 저항·R–C → DAC·ADC → 전류 측정 회로</strong> 순서로 하나씩 더하고, 단계마다 "정상이면 보이는 숫자"를 확인한 뒤 다음으로 갑니다. 앞 단계가 정상이었다면, 다음 단계에서 문제가 생겼을 때 <strong>새로 꽂은 것만</strong> 보면 됩니다.</p>
+<p>아래 카드 네 개가 그 점검표입니다. 숫자는 설계에서 계산한 기대값이며, 실물에서 확인한 값이 아닙니다 [실물 미검증]. 자세한 순서는 각 단계에 있습니다.</p>
+<div class="howsteps">
+<section id="usbled버튼-p3.1p3.1a" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="usbled버튼-p3.1p3.1a">USB·LED·버튼 (<a href="#b1">P3.1</a>·<a href="#b1a">P3.1a</a>)</h4>
+<ul>
+<li><strong>연결 전 상태:</strong> breadboard에 아무것도 없음. board와 데이터용 USB 케이블만.</li>
+<li><strong>꽂는 것:</strong> USB 한 가닥. 핀에는 아무것도 안 꽂음(LED1·버튼1은 board에 붙어 있음).</li>
+<li><strong>정상 값:</strong> LED1이 <strong>0.5 s</strong>마다 깜빡임. Serial Monitor 숫자가 <strong>500씩</strong> 늚. 버튼1을 누르는 동안 <code>btn</code> = 1.</li>
+</ul>
+<div class="ifnot">
+<p>먼저 Tools → Port에 COM 번호가 있는지(없으면 충전 전용 케이블), 그다음 baud가 115200인지 봅니다.</p>
+</div>
+</section>
+<section id="저항rc-rc-첫-배선" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="저항rc-rc-첫-배선">저항·R–C (<a href="#b1c">R–C 첫 배선</a>)</h4>
+<ul>
+<li><strong>연결 전 상태:</strong> USB 뺌. breadboard는 비어 있음. rail이 가운데서 끊겼는지 멀티미터로 확인해 둠.</li>
+<li><strong>꽂는 것:</strong> P1.04 → 10행 a, A0 → 14행 a, GND → 위 − rail. 100 kΩ: 10행 c ↔︎ 14행 c. 10 µF: + 14행 d, − 15행 d. jumper: 15행 a ↔︎ 위 − rail.</li>
+<li><strong>정상 값:</strong> <code>tau measured</code> <strong>0.8–1.2 s</strong> (100 kΩ × 10 µF = 1.0 s). 충전 끝 A0 ≈ <strong>3.3 V</strong>, 1 s 시점 ≈ <strong>2.1 V</strong>.</li>
+</ul>
+<div class="ifnot">
+<p>모두 0 V 근처 → P1.04 선과 10행. 처음부터 3.3 V 근처 → A0 선이 14행이 아니라 10행에 있음. 값이 튐 → 15행–rail–GND 선.</p>
+</div>
+</section>
+<section id="dacadc-p3.2p3.3" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="dacadc-p3.2p3.3">DAC·ADC (<a href="#b2">P3.2–P3.3</a>)</h4>
+<ul>
+<li><strong>연결 전 상태:</strong> USB 뺌. R–C 부품·선은 뽑음(같은 행을 씀). board 3.3V·GND → 위 + rail·− rail.</li>
+<li><strong>꽂는 것:</strong> 두 module의 VCC·GND → rail, SDA → P0.26, SCL → P0.27, ADC ADDR → GND, DAC VOUT → ADC A0.</li>
+<li><strong>정상 값:</strong> I²C 스캐너에 주소 <strong>2개</strong>(0x48, 그리고 0x60–0x63 중 하나). DAC 코드 2048 → 멀티미터와 ADC 모두 <strong>약 1.65 V</strong>(서로 수십 mV 안).</li>
+</ul>
+<div class="ifnot">
+<p>주소가 하나도 없으면 SDA·SCL이 바뀌었는지, GND가 이어졌는지. 하나만 나오면 안 나온 module의 VCC·GND 행.</p>
+</div>
+</section>
+<section id="전류-측정-회로-p3.4" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="전류-측정-회로-p3.4">전류 측정 회로 (<a href="#b4-verify">P3.4</a>)</h4>
+<ul>
+<li><strong>연결 전 상태:</strong> USB 뺌, <strong>J1 뺌</strong>. DAC·ADC 배선은 그대로 두고 DAC VOUT–ADC A0 선만 뺌.</li>
+<li><strong>꽂는 것:</strong> MCP6002(30–33행, 가운데 홈 걸침), 10 kΩ 두 개 + 1 µF(36행), R_f·C_f, R_lim(40–44행), J1(44–45행). 소자 자리 = 45행 ↔︎ 49행.</li>
+<li><strong>정상 값:</strong> 켠 뒤 <code>READY VREF=</code> <strong>1.4–1.9 V</strong>. 소자 자리에 100 kΩ, <code>s</code> 명령 → +0.5 V 줄에서 약 <strong>+5000 nA</strong>(기대값과 몇 % 안). 0 V 줄은 몇 nA(op-amp 오프셋).</li>
+</ul>
+<div class="ifnot">
+<p><code>E,-1,io_init</code> → I²C 주소와 A3의 V_ref부터. <code>[포화]</code> → R_f가 너무 큼. 전류가 일정 비율로 틀림 → R_f 실제 값과 DAC 보정.</p>
 </div>
 </section>
 </div>
@@ -2642,7 +2637,244 @@ last value only            50%
 <li>손 떨림을 키우면 leaky node가 가장 먼저 떨어지고, reservoir 40 (slow)와 first-gap rule은 비슷하게 버팁니다.</li>
 </ul>
 <p><strong>소자로 가는 다리.</strong> 여기서 'leaky node'가 맡은 자리에 나중에 실제 소자가 들어갑니다(<a href="../projects/a.html">P2</a>). 그때 물을 것은 같습니다. 내 소자의 기억 시간은 입력 간격과 맞는가, 같은 과제를 first-gap rule 같은 한 줄 규칙이나 R–C 회로가 더 싸게 풀지는 않는가.</p>
-<p><strong>다음 단계 조건.</strong> 기록란을 한 줄 채웠으면 부품(DAC·ADC module)을 준비해 <a href="#b2">P3.2–P3.3</a>으로 갑니다.</p>
+<p><strong>다음 단계 조건.</strong> 기록란을 한 줄 채웠으면 저항·capacitor를 준비해 <a href="#b1c">R–C 첫 배선</a>으로 갑니다.</p>
+</section>
+</section>
+<section id="b1c" class="level2">
+<h2 class="anchored" data-anchor-id="b1c">R–C 첫 배선: 부품 읽기와 breadboard</h2>
+<p>처음으로 breadboard에 부품을 꽂습니다. 레고 설명서에서 "이 블록을 저 자리에"를 읽는 법부터 익히듯, 이 단계는 <strong>부품 모양 → 회로 기호 → 다리 → 구멍 자리</strong>를 읽는 연습입니다. 회로는 저항 하나와 capacitor 하나뿐입니다. board가 P1.04 핀으로 3.3 V를 걸면 capacitor 전압이 천천히 오르고, board가 그것을 A0로 읽어 τ(time constant)를 잽니다. <a href="../projects/side.html#m3">사이드 프로젝트 미니 3</a>과 같은 회로·같은 코드이고, 여기서는 <strong>구멍 자리</strong>를 정확히 적었습니다. 이 R–C가 나중에 소자 자리에 놓일 "느린 부품"의 가장 단순한 모형입니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>할 일</th>
+<th>하는 곳</th>
+<th>결과로 보는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rail 끊김 확인</td>
+<td>멀티미터</td>
+<td>삐 소리가 나는가</td>
+</tr>
+<tr class="even">
+<td>R–C 꽂기</td>
+<td>breadboard</td>
+<td>멀티미터로 10행–14행 약 100 kΩ</td>
+</tr>
+<tr class="odd">
+<td><code>side3_rc_tau</code> Upload</td>
+<td>Arduino IDE</td>
+<td><code>tau measured</code> 0.8–1.2 s</td>
+</tr>
+</tbody>
+</table>
+<p><strong>준비물:</strong> 100 kΩ 저항 1개, 10 µF 전해 capacitor(16 V 이상) 1개, 수-수 jumper 1가닥, board와 breadboard를 잇는 jumper 3가닥(<a href="../projects/side.html#pins">점퍼선 고르기</a>), 멀티미터.</p>
+<section id="b-parts" class="level3">
+<h3 class="anchored" data-anchor-id="b-parts">부품 → 기호 → 다리 → 꽂는 자리</h3>
+<figure class="fig figure">
+<img src="img/p3-parts.svg" alt="여섯 줄 표 그림. 저항: 색띠 원통과 톱니 기호, 방향 없음. 전해 capacitor: 띠가 있는 원통, 긴 다리 +, 곧은 판과 굽은 판 기호. 필름 capacitor: 평행한 두 판. LED: 긴 다리 +, 평평한 쪽 −, 세모와 막대 기호. MCP6002: 왼쪽 반달 홈, 아래 줄 1–4, 위 줄 8–5, op-amp 세모 기호. DAC module: 다리 여섯 개와 이름 붙은 네모 기호" class="figure-img">
+<figcaption>
+<b>개념도.</b> 왼쪽은 흔한 부품을 꽂는 방향에서 본 모양, 가운데는 회로도에 그려지는 기호, 오른쪽은 다리 읽는 법입니다. 모양은 예이며, 내 부품의 표시와 데이터시트가 그림보다 우선합니다.
+</figcaption>
+</figure>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>부품</th>
+<th>실물에서 볼 곳 (+ 또는 1번 찾기)</th>
+<th>다리</th>
+<th>breadboard에 꽂는 법</th>
+<th>처음 쓰는 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>저항</td>
+<td>색띠가 있는 작은 원통. 방향 없음. 값은 멀티미터 Ω로 확인</td>
+<td>2개, 구별 없음</td>
+<td>두 다리를 <strong>서로 다른 행</strong>에. 같은 행에 꽂으면 양 끝이 이미 이어져 있어 저항이 없는 것과 같음</td>
+<td>이 단계 (100 kΩ)</td>
+</tr>
+<tr class="even">
+<td>전해 capacitor</td>
+<td>몸통 한쪽의 띠(− 표시)와 짧은 다리 = <strong>−</strong>, 긴 다리 = <strong>+</strong></td>
+<td>2개, <strong>+·− 있음</strong></td>
+<td>+ 다리를 전압이 높은 쪽 행에, − 다리를 GND 쪽 행에</td>
+<td>이 단계 (10 µF)</td>
+</tr>
+<tr class="odd">
+<td>필름·세라믹 capacitor</td>
+<td>작은 네모·동전 모양. 숫자 105 = 1 µF, 104 = 100 nF</td>
+<td>2개, 구별 없음</td>
+<td>서로 다른 행에</td>
+<td><a href="#b4-verify">P3.4</a> (1 µF, 100 nF, C_f)</td>
+</tr>
+<tr class="even">
+<td>LED</td>
+<td>긴 다리 = + (anode), 테두리가 평평한 쪽 다리 = − (cathode)</td>
+<td>2개, <strong>+·− 있음</strong></td>
+<td>220 Ω 저항을 한 줄로 이어서. P3는 board의 LED를 쓰므로 따로 꽂을 일은 거의 없음</td>
+<td>(참고)</td>
+</tr>
+<tr class="odd">
+<td>op-amp MCP6002 (DIP-8)</td>
+<td>몸통 한쪽 끝의 반달 홈, 또는 모서리의 작은 점 = 1번 쪽</td>
+<td>8개. 홈을 왼쪽에 두고 위에서 보면 왼쪽 아래 = 1번, 아래 줄 1–4, 위 줄은 오른쪽부터 5–8</td>
+<td>가운데 홈을 걸쳐서: 아래 다리 4개는 f열, 위 다리 4개는 e열</td>
+<td><a href="#b4-verify">P3.4</a></td>
+</tr>
+<tr class="even">
+<td>DAC·ADC module</td>
+<td>기판 가장자리의 흰 글자(실크): VCC, GND, SDA, SCL, VOUT, A0 …</td>
+<td>DAC 6개·ADC 10개 정도, <strong>순서는 제품마다 다름</strong></td>
+<td>다리 하나하나가 서로 다른 행에 가도록 한 열(c열)에</td>
+<td><a href="#b2">P3.2</a></td>
+</tr>
+</tbody>
+</table>
+<p>회로도와 breadboard를 잇는 규칙은 하나입니다. <span class="key"><strong>회로도에서 선으로 이어진 점들은 breadboard에서 같은 행(또는 같은 rail)에 꽂힌 다리들입니다.</strong></span> 회로도의 점(●) 하나 = breadboard의 묶음 하나로 읽으면 됩니다.</p>
+</section>
+<section id="b-bb" class="level3">
+<h3 class="anchored" data-anchor-id="b-bb">breadboard 속에서 이어진 구멍</h3>
+<figure class="fig figure">
+<img src="img/p3-breadboard.svg" alt="breadboard 일부(1–12행). 위에 + rail과 − rail, 그 아래 a–e, 가운데 홈, f–j, 아래 − rail과 + rail. 3행 a–e, 3행 f–j, 9행 a–e, 위 + rail이 각각 다른 색으로 묶여 있다. 아래에는 가운데가 끊긴 rail과, 멀티미터 두 침을 rail 양 끝에 대는 그림" class="figure-img">
+<figcaption>
+<b>개념도.</b> breadboard를 번호가 긴 변을 따라 왼쪽→오른쪽으로 늘어서고 rail이 위·아래에 오게 놓은 모습입니다(1–12행만 그림). 색칠한 묶음 안의 구멍끼리는 속에서 이어져 있습니다. 위 rail의 + · − 순서는 제품마다 다르니, 줄 옆에 인쇄된 빨강·파랑 선을 따릅니다.
+</figcaption>
+</figure>
+<ul>
+<li><strong>놓는 법:</strong> 번호(1–63)가 긴 변을 따라 왼쪽→오른쪽, rail이 위·아래. a가 위쪽에 오게 놓습니다. 이 페이지는 번호 하나를 <strong>행</strong>, 글자를 <strong>열</strong>이라 부르고 구멍을 "10행 c"처럼 적습니다.</li>
+<li><strong>같은 묶음:</strong> 한 행의 a–e 다섯 구멍이 한 묶음, f–j 다섯 구멍이 또 한 묶음입니다. 가운데 홈을 건너면 이어지지 않고, 행 번호가 다르면 이어지지 않습니다.</li>
+<li><strong>rail:</strong> 한 줄 전체가 가로로 이어져 있습니다. 단, <strong>가운데에서 끊긴 제품이 있습니다.</strong> 겉에 그려진 빨강·파랑 선이 끊겨 있으면 의심하고, 아래처럼 멀티미터로 확인합니다.</li>
+</ul>
+<div class="howsteps">
+<section id="rail이-끊겼는지-멀티미터로-확인-5분-한-번만" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="rail이-끊겼는지-멀티미터로-확인-5분-한-번만">rail이 끊겼는지 멀티미터로 확인 (5분, 한 번만)</h4>
+<p><span class="do">할 일</span> breadboard에 아무것도 꽂지 않은 채 합니다.</p>
+<ol type="1">
+<li>멀티미터 다이얼을 <strong>continuity</strong>(소리 표시가 그려진 칸. 다이오드 표시와 같은 칸인 제품도 많음)에 맞춥니다. 두 침 끝을 서로 대서 <strong>삐</strong> 소리가 나는지 먼저 봅니다.</li>
+<li>위 + rail의 <strong>1행 쪽 끝 구멍</strong>과 <strong>63행 쪽 끝 구멍</strong>에 jumper를 한 가닥씩 꽂고, 두 jumper 끝에 침을 댑니다(침이 구멍에 잘 안 들어가기 때문).</li>
+<li>삐 → 이어짐. 조용함 → 끊김. 끊겼으면 가운데의 끊긴 자리 양쪽 구멍을 짧은 jumper로 잇습니다.</li>
+<li>위 − rail, 아래 − rail, 아래 + rail도 같은 방법으로 봅니다. 결과를 <a href="../notes.html">연구 노트</a>에 적습니다(예: "위 + 끊김 → 30·32행 사이 jumper").</li>
+</ol>
+<div class="ifnot">
+<p>두 침을 맞대도 소리가 안 나면 다이얼 위치나 멀티미터 배터리 문제입니다. 확인용으로 같은 행의 a와 e에 침을 대면 삐 소리가 나야 합니다.</p>
+</div>
+</section>
+</div>
+</section>
+<section id="b1c-wire" class="level3">
+<h3 class="anchored" data-anchor-id="b1c-wire">R–C 꽂기</h3>
+<figure class="fig figure">
+<img src="img/p3-rc-wiring.svg" alt="배선도. 위의 NU40 DK 헤더에서 P1.04 주황 선이 10행 a로, A0 파랑 선이 14행 a로, GND 검정 선이 위 − rail로 내려온다. 100킬로옴 저항이 10행 c와 14행 c를 잇고, 10마이크로패럿 capacitor의 + 다리는 14행 d, − 다리는 15행 d. 15행 a에서 검정 jumper가 위 − rail로. 아래에는 같은 회로를 기호로: P1.04, 저항, 가운데 점, A0, capacitor, GND" class="figure-img">
+<figcaption>
+<b>배선도.</b> 위의 초록 띠는 board 헤더의 세 핀(P1.04, A0, GND)이고, 굵은 색선은 jumper입니다. 색칠한 묶음 ①②③이 각각 같은 전압이 되는 점이며, 아래 기호 그림의 ①②③과 같은 점입니다. 실물로 꽂아 본 적 없는 설계입니다 [실물 미검증].
+</figcaption>
+</figure>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>부품</th>
+<th>다리</th>
+<th>구멍 자리</th>
+<th>이어진 묶음</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>저항 100 kΩ</td>
+<td>한쪽 다리</td>
+<td>10행 c</td>
+<td>① 10행 a–e</td>
+</tr>
+<tr class="even">
+<td>저항 100 kΩ</td>
+<td>다른 쪽 다리</td>
+<td>14행 c</td>
+<td>② 14행 a–e</td>
+</tr>
+<tr class="odd">
+<td>전해 capacitor 10 µF</td>
+<td><strong>+</strong> (긴 다리)</td>
+<td>14행 d</td>
+<td>② 14행 a–e</td>
+</tr>
+<tr class="even">
+<td>전해 capacitor 10 µF</td>
+<td><strong>−</strong> (띠 쪽, 짧은 다리)</td>
+<td>15행 d</td>
+<td>③ 15행 a–e</td>
+</tr>
+<tr class="odd">
+<td>수-수 jumper (검정)</td>
+<td>양 끝</td>
+<td>15행 a ↔︎ 위 − rail</td>
+<td>③ (15행 a–e + − rail)</td>
+</tr>
+<tr class="even">
+<td>jumper (검정)</td>
+<td>breadboard 쪽 끝</td>
+<td>위 − rail 아무 구멍 ← board <strong>GND</strong></td>
+<td>③</td>
+</tr>
+<tr class="odd">
+<td>jumper (주황)</td>
+<td>breadboard 쪽 끝</td>
+<td>10행 a ← board <strong>P1.04</strong></td>
+<td>①</td>
+</tr>
+<tr class="even">
+<td>jumper (파랑)</td>
+<td>breadboard 쪽 끝</td>
+<td>14행 a ← board <strong>A0</strong></td>
+<td>②</td>
+</tr>
+</tbody>
+</table>
+<div class="howsteps">
+<section id="꽂기-usb를-뺀-채-15분" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="꽂기-usb를-뺀-채-15분">꽂기 (USB를 뺀 채, 15분)</h4>
+<p><span class="do">할 일</span></p>
+<ol type="1">
+<li>board에서 <strong>USB를 뺍니다.</strong></li>
+<li>표의 위에서부터 부품 → breadboard 안 jumper → board로 가는 jumper 순서로 꽂습니다.</li>
+<li>눈으로 점검: 저항 두 다리가 <strong>서로 다른 행</strong>(10행, 14행)인지, capacitor <strong>긴 다리가 14행</strong>인지, board의 <strong>5V 핀에 간 선이 없는지</strong>.</li>
+<li>멀티미터를 <strong>Ω</strong>에 두고 10행 b와 14행 b에 침을 댑니다. <strong>약 100 kΩ</strong>이면 저항이 제자리입니다(capacitor 때문에 숫자가 잠깐 움직일 수 있음).</li>
+</ol>
+<div class="ifnot">
+<p>0 Ω 근처면 두 다리가 같은 행에 있거나 선이 10행과 14행을 직접 잇고 있습니다. 숫자가 안 나오면(OL) 저항 다리가 구멍에 덜 들어갔습니다.</p>
+</div>
+</section>
+<section id="코드-올리고-τ-읽기" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="코드-올리고-τ-읽기">코드 올리고 τ 읽기</h4>
+<p><span class="do">할 일</span> <a href="../projects/side.html#m3">미니 3의 코드</a>(<code>side3_rc_tau</code>)를 그대로 씁니다. 핀(P1.04, A0)이 같습니다. <a href="#b1">P3.1</a>처럼 새 sketch에 붙여 넣고 <code>p3_rc_tau</code>로 저장 → USB 꽂기 → Upload → Serial Monitor(115200).</p>
+<ul>
+<li><strong>정상 값:</strong> 약 22초마다 한 묶음이 찍힙니다. <code>tau measured</code>가 <strong>0.8–1.2 s</strong>(부품값 1.00 s, 전해 capacitor 오차 ±20%), <code>V_end</code>가 <strong>약 3.3 V</strong>, <code>t_s</code> 1.00 줄이 <strong>약 2.1 V</strong>.</li>
+<li><strong>멀티미터로도:</strong> DC V, 검은 침 − rail, 빨간 침 14행 b. 충전하는 6초 동안 0 V에서 약 3.3 V로 천천히 오르고, 방전하는 6초 동안 0 V로 내려가면 정상입니다.</li>
+</ul>
+<div class="ifnot">
+<ul>
+<li>모두 0.00 근처 → P1.04 선이 다른 핀에 꽂혔거나 10행에 없습니다. 또는 저항이 10행과 14행을 잇지 않았습니다.</li>
+<li>처음부터 3.3 V 근처 → A0 선이 14행이 아니라 10행(저항 앞쪽)에 있습니다.</li>
+<li><code>tau measured -1.00</code> → 6초 안에 63%에 못 갔습니다. capacitor가 10 µF보다 훨씬 큽니다(예: 100 µF).</li>
+<li>값이 들쭉날쭉 튐 → 15행 a–rail jumper나 board GND 선이 빠졌습니다. rail이 끊긴 제품이면 끊긴 자리를 이었는지 봅니다.</li>
+</ul>
+</div>
+</section>
+<section id="기록-남기기-완료-조건-1" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="기록-남기기-완료-조건-1">기록 남기기 (완료 조건)</h4>
+<p><span class="do">할 일</span> <a href="../notes.html">연구 노트</a>에 잰 τ 세 번, 멀티미터로 잰 저항값, rail 끊김 여부를 적습니다.</p>
+</section>
+</div>
+<p><strong>관찰할 점.</strong> 회로도의 점 ②(가운데 점)는 breadboard에서 <strong>14행 a–e 묶음 하나</strong>입니다. 부품 다리 두 개와 A0 선이 모두 이 묶음에 들어 있어서 하나의 점이 됩니다.</p>
+<p><strong>다음 단계 조건.</strong> <code>tau measured</code>가 0.8–1.2 s이면 <strong>USB를 빼고 R–C 부품과 선을 모두 뽑은 뒤</strong>(DAC·ADC가 같은 행을 씀) <a href="#b2">P3.2–P3.3</a>으로 갑니다.</p>
 </section>
 </section>
 <section id="b2" class="level2">
@@ -2704,7 +2936,7 @@ last value only            50%
 <p><span class="do">할 일</span> (20–30분) <strong>USB를 뺀 채</strong> 합니다. 꽂는 동안 board에 전원이 들어가 있으면 안 됩니다.</p>
 <ol type="1">
 <li>board에서 <strong>USB 케이블을 뺍니다.</strong></li>
-<li>breadboard 위쪽 반(a–e 쪽)에 DAC module을, 조금 떨어진 곳에 ADC module을 꽂습니다. module의 <strong>다리 하나하나가 서로 다른 번호 세로줄</strong>에 들어가게 꽂습니다(예: DAC 다리를 c열 10–15번에). 같은 세로줄 a–e는 속으로 이어져 있으므로, 다리와 같은 번호 줄의 남은 구멍(a, b, d, e)에 jumper wire를 꽂으면 그 다리에 이어집니다.</li>
+<li><a href="#b1c">R–C 첫 배선</a>의 부품·선이 남아 있으면 모두 뽑습니다. DAC module 다리 6개를 <strong>c열 5–10행</strong>에, ADC module 다리 10개를 <strong>c열 15–24행</strong>에 꽂습니다(다리 하나에 한 행). 꽂은 뒤 행마다 들어간 다리 이름을 module 실크 글자로 읽어 적어 둡니다(예: "5행 = VCC"). 한 행의 a–e는 속으로 이어져 있으므로, 그 행의 남은 구멍(몸통에 가리지 않은 쪽)에 jumper wire를 꽂으면 그 다리에 이어집니다(<a href="#b-parts">부품 읽는 법</a>, <a href="#b-bb">breadboard 속 연결</a>).</li>
 <li>아래 표의 순서대로 jumper wire를 하나씩 꽂습니다. 한 줄 꽂을 때마다 표에 체크합니다.</li>
 </ol>
 <table class="caption-top table">
@@ -2737,62 +2969,62 @@ last value only            50%
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>DAC <strong>VCC</strong> 다리의 세로줄</td>
+<td>DAC <strong>VCC</strong> 다리의 행</td>
 <td>빨강(+) 전원줄</td>
 <td>빨강</td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td>DAC <strong>GND</strong> 다리의 세로줄</td>
+<td>DAC <strong>GND</strong> 다리의 행</td>
 <td>파랑(−) 전원줄</td>
 <td>검정</td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td>ADC <strong>VDD</strong>(VCC) 다리의 세로줄</td>
+<td>ADC <strong>VDD</strong>(VCC) 다리의 행</td>
 <td>빨강(+) 전원줄</td>
 <td>빨강</td>
 </tr>
 <tr class="even">
 <td>6</td>
-<td>ADC <strong>GND</strong> 다리의 세로줄</td>
+<td>ADC <strong>GND</strong> 다리의 행</td>
 <td>파랑(−) 전원줄</td>
 <td>검정</td>
 </tr>
 <tr class="odd">
 <td>7</td>
-<td>ADC <strong>ADDR</strong> 다리의 세로줄</td>
+<td>ADC <strong>ADDR</strong> 다리의 행</td>
 <td>파랑(−) 전원줄 (주소 0x48)</td>
 <td>검정</td>
 </tr>
 <tr class="even">
 <td>8</td>
 <td>board <strong>SDA</strong>(P0.26) 핀</td>
-<td>DAC <strong>SDA</strong> 다리의 세로줄</td>
+<td>DAC <strong>SDA</strong> 다리의 행</td>
 <td>파랑</td>
 </tr>
 <tr class="odd">
 <td>9</td>
-<td>DAC SDA 세로줄 (남은 구멍)</td>
-<td>ADC <strong>SDA</strong> 다리의 세로줄</td>
+<td>DAC SDA 행 (남은 구멍)</td>
+<td>ADC <strong>SDA</strong> 다리의 행</td>
 <td>파랑</td>
 </tr>
 <tr class="even">
 <td>10</td>
 <td>board <strong>SCL</strong>(P0.27) 핀</td>
-<td>DAC <strong>SCL</strong> 다리의 세로줄</td>
+<td>DAC <strong>SCL</strong> 다리의 행</td>
 <td>노랑</td>
 </tr>
 <tr class="odd">
 <td>11</td>
-<td>DAC SCL 세로줄 (남은 구멍)</td>
-<td>ADC <strong>SCL</strong> 다리의 세로줄</td>
+<td>DAC SCL 행 (남은 구멍)</td>
+<td>ADC <strong>SCL</strong> 다리의 행</td>
 <td>노랑</td>
 </tr>
 <tr class="even">
 <td>12</td>
-<td>DAC <strong>VOUT</strong> 다리의 세로줄</td>
-<td>ADC <strong>A0</strong> 다리의 세로줄</td>
+<td>DAC <strong>VOUT</strong> 다리의 행</td>
+<td>ADC <strong>A0</strong> 다리의 행</td>
 <td>초록</td>
 </tr>
 </tbody>
@@ -2802,7 +3034,7 @@ last value only            50%
 <li>점검이 끝나면 <strong>USB를 꽂습니다.</strong> board LED와 module의 작은 LED(있으면)가 켜집니다.</li>
 </ol>
 <div class="why">
-<p>830홀 breadboard 중에는 긴 전원줄이 <strong>가운데에서 끊긴</strong> 제품이 있습니다. 전원줄 중간의 빨강·파랑 선이 끊겨 그려져 있으면, 끊긴 양쪽을 짧은 jumper로 이어 줍니다. board 헤더의 SDA·SCL·3.3V·GND 글자 위치는 board 실크로 확인합니다 [사진 확인].</p>
+<p>830홀 breadboard 중에는 긴 전원줄(rail)이 <strong>가운데에서 끊긴</strong> 제품이 있습니다. <a href="#b-bb">멀티미터로 확인</a>한 결과대로, 끊겼으면 끊긴 양쪽을 짧은 jumper로 이어 줍니다. board 헤더의 SDA·SCL·3.3V·GND 글자 위치는 board 실크로 확인합니다 [사진 확인].</p>
 </div>
 </section>
 <section id="i²c-스캐너-sketch-붙여-넣고-저장" class="level4 howstep">
@@ -2895,7 +3127,7 @@ I2C 주소 0x62
 <ol type="1">
 <li>board·port 확인 → <strong>Upload(→)</strong> → <strong>Done uploading.</strong> 확인.</li>
 <li>Serial Monitor(115200)를 엽니다. 3초마다 한 줄씩 나오고, 다섯 줄(코드 0 → 4095)이 끝나면 처음부터 되풀이합니다.</li>
-<li>멀티미터를 <strong>DC V</strong>에 맞추고, <strong>검은 침을 파랑(−) 전원줄</strong>, <strong>빨간 침을 DAC VOUT 세로줄의 남은 구멍</strong>에 댑니다.</li>
+<li>멀티미터를 <strong>DC V</strong>에 맞추고, <strong>검은 침을 파랑(−) 전원줄</strong>, <strong>빨간 침을 DAC VOUT 다리 행의 남은 구멍</strong>에 댑니다.</li>
 <li>Serial Monitor에 새 줄이 찍힌 뒤 3초 안에 멀티미터 값을 읽어, 그 줄의 <code>… V</code>와 함께 <a href="../notes.html">연구 노트</a>에 적습니다. 다섯 코드 모두 합니다.</li>
 </ol>
 <div class="screen" data-screen-title="Arduino IDE — Serial Monitor (예상, 실물 미검증)">
@@ -3332,8 +3564,8 @@ DAC 코드 4095 → ADC  26320 = 3.290 V</code></pre>
 <p><span class="do">할 일</span> (30–60분) P3.2–3의 DAC·ADC 배선은 그대로 두고, <strong>DAC VOUT과 ADC A0를 잇던 초록 선만 뺍니다.</strong> 아래는 그림 7을 꽂는 순서입니다. <strong>설계안이며 실물로 꽂아 본 적이 없습니다.</strong> 꽂기 전에 MCP6002 데이터시트의 핀 배치와 대조합니다.</p>
 <ol type="1">
 <li><strong>USB를 뺍니다. J1은 아직 꽂지 않습니다.</strong></li>
-<li>MCP6002를 breadboard <strong>가운데 홈을 걸치게</strong> 꽂습니다(다리 4개는 위쪽 e열, 4개는 아래쪽 f열). 반달 홈·점이 왼쪽에 오게 하면 왼쪽 아래가 1번 핀, 아래 줄이 1–4번, 위 줄이 오른쪽부터 5–8번입니다(위에서 본 그림 7 오른쪽과 같은 배치를 눕힌 것).</li>
-<li>아래 표를 순서대로 꽂습니다.</li>
+<li>MCP6002를 breadboard <strong>가운데 홈을 걸치게</strong> 꽂습니다(다리 4개는 위쪽 e열, 4개는 아래쪽 f열). 반달 홈·점이 왼쪽에 오게 하면 왼쪽 아래가 1번 핀, 아래 줄이 1–4번, 위 줄이 오른쪽부터 5–8번입니다(위에서 본 그림 7 오른쪽과 같은 배치를 눕힌 것, <a href="#b-parts">부품 읽는 법</a>). 아래 표는 <strong>1번 핀을 30행 f</strong>에 꽂았다고 정한 예입니다. 그러면 1–4번 = 30–33행 f, 8·7·6·5번 = 30·31·32·33행 e입니다. 다른 행에 꽂았다면 표의 행 번호를 같은 만큼 옮겨 적습니다.</li>
+<li>아래 표를 순서대로 꽂습니다. 행 번호 옆의 핀 이름은 그 행 묶음에 이어진 MCP6002 다리입니다.</li>
 </ol>
 <table class="caption-top table">
 <colgroup>
@@ -3353,105 +3585,105 @@ DAC 코드 4095 → ADC  26320 = 3.290 V</code></pre>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td>MCP6002 <strong>8번</strong> (VDD)</td>
-<td>빨강(+) 전원줄 (3.3 V)</td>
-<td>전원</td>
+<td>30행 a = MCP6002 <strong>8번</strong> (VDD)</td>
+<td>위 빨강(+) rail (3.3 V)</td>
+<td>jumper, 전원</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td>MCP6002 <strong>4번</strong> (VSS)</td>
-<td>파랑(−) 전원줄</td>
-<td>GND</td>
+<td>33행 j = MCP6002 <strong>4번</strong> (VSS)</td>
+<td>위 파랑(−) rail</td>
+<td>jumper, GND</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>8번 핀 세로줄</td>
-<td>4번 핀 세로줄 또는 파랑 줄</td>
+<td>30행 b (8번)</td>
+<td>위 파랑(−) rail</td>
 <td><strong>100 nF</strong> capacitor, 칩 바로 옆</td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td>빨강(+) 줄</td>
-<td>빈 세로줄 하나 (이하 '분압점')</td>
+<td>위 빨강(+) rail</td>
+<td>36행 b (이하 '분압점' = 36행 a–e)</td>
 <td><strong>10 kΩ</strong></td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td>분압점</td>
-<td>파랑(−) 줄</td>
+<td>36행 c (분압점)</td>
+<td>위 파랑(−) rail</td>
 <td><strong>10 kΩ</strong></td>
 </tr>
 <tr class="even">
 <td>6</td>
-<td>분압점</td>
-<td>파랑(−) 줄</td>
-<td><strong>1 µF</strong> capacitor</td>
+<td>36행 d (분압점)</td>
+<td>위 파랑(−) rail</td>
+<td><strong>1 µF</strong> capacitor (전해면 + 다리가 36행)</td>
 </tr>
 <tr class="odd">
 <td>7</td>
-<td>분압점</td>
-<td>MCP6002 <strong>3번</strong> (+INA)</td>
+<td>36행 a (분압점)</td>
+<td>32행 g = MCP6002 <strong>3번</strong> (+INA)</td>
 <td>jumper</td>
 </tr>
 <tr class="even">
 <td>8</td>
-<td>MCP6002 <strong>1번</strong> (OUTA)</td>
-<td>MCP6002 <strong>2번</strong> (−INA)</td>
-<td>jumper (U1A 버퍼) → <strong>1번 핀 = V_ref</strong></td>
+<td>30행 h = MCP6002 <strong>1번</strong> (OUTA)</td>
+<td>31행 h = MCP6002 <strong>2번</strong> (−INA)</td>
+<td>jumper (U1A 버퍼) → <strong>1번 핀 = V_ref</strong>. 30행 f–j 묶음 전체가 V_ref</td>
 </tr>
 <tr class="odd">
 <td>9</td>
-<td>MCP6002 <strong>1번</strong> (V_ref)</td>
-<td>MCP6002 <strong>5번</strong> (+INB)</td>
+<td>30행 i (V_ref)</td>
+<td>33행 b = MCP6002 <strong>5번</strong> (+INB)</td>
 <td>jumper</td>
 </tr>
 <tr class="even">
 <td>10</td>
-<td>MCP6002 <strong>6번</strong> (−INB)</td>
-<td>MCP6002 <strong>7번</strong> (OUTB)</td>
-<td><strong>R_f</strong> (예: 150 kΩ, 멀티미터로 잰 값 적기)</td>
+<td>32행 c = MCP6002 <strong>6번</strong> (−INB)</td>
+<td>31행 c = MCP6002 <strong>7번</strong> (OUTB)</td>
+<td><strong>R_f</strong> (예: 150 kΩ, 옆 행이라 다리를 짧게 구부림. 멀티미터로 잰 값 적기)</td>
 </tr>
 <tr class="odd">
 <td>11</td>
-<td>6번</td>
-<td>7번</td>
+<td>32행 d (6번)</td>
+<td>31행 d (7번)</td>
 <td><strong>C_f</strong> (예: 6.8 nF), R_f와 나란히</td>
 </tr>
 <tr class="even">
 <td>12</td>
-<td>MCP6002 <strong>7번</strong> (V_out)</td>
-<td>ADC <strong>A2</strong></td>
+<td>31행 a = MCP6002 <strong>7번</strong> (V_out)</td>
+<td>ADC <strong>A2</strong> 다리의 행</td>
 <td>jumper</td>
 </tr>
 <tr class="odd">
 <td>13</td>
-<td>MCP6002 <strong>1번</strong> (V_ref)</td>
-<td>ADC <strong>A1</strong>, ADC <strong>A3</strong></td>
+<td>30행 g, 30행 j (V_ref)</td>
+<td>ADC <strong>A1</strong> 다리의 행, ADC <strong>A3</strong> 다리의 행</td>
 <td>jumper 2개</td>
 </tr>
 <tr class="even">
 <td>14</td>
-<td>DAC <strong>VOUT</strong></td>
-<td>빈 세로줄 하나에 <strong>R_lim</strong> (예: 33 kΩ) 한쪽</td>
-<td>저항</td>
+<td>DAC <strong>VOUT</strong> 다리 행의 남은 구멍</td>
+<td>40행 a. 그리고 40행 c ↔︎ 44행 c에 <strong>R_lim</strong> (예: 33 kΩ)</td>
+<td>jumper + 저항</td>
 </tr>
 <tr class="odd">
 <td>15</td>
-<td>R_lim 다른 쪽</td>
-<td>J1의 한쪽 핀</td>
-<td>(J1은 아직 열린 채)</td>
+<td>44행 e</td>
+<td>45행 e</td>
+<td><strong>J1</strong>: 2핀 header를 두 행에 걸쳐 꽂음 (jumper 캡은 아직 빼 둔 채)</td>
 </tr>
 <tr class="even">
 <td>16</td>
-<td>J1 다른 쪽 핀 = <strong>소자 ① 위쪽 자리</strong></td>
-<td>ADC <strong>A0</strong></td>
+<td>45행 a = <strong>소자 ① 위쪽 자리</strong></td>
+<td>ADC <strong>A0</strong> 다리의 행</td>
 <td>jumper</td>
 </tr>
 <tr class="odd">
 <td>17</td>
-<td>소자 ② 아래쪽 자리</td>
-<td>MCP6002 <strong>6번</strong> (−INB)</td>
-<td>jumper. 소자 ①·② 자리는 다음 카드에서 저항을 꽂을 두 세로줄</td>
+<td>49행 a = 소자 ② 아래쪽 자리</td>
+<td>32행 a = MCP6002 <strong>6번</strong> (−INB)</td>
+<td>jumper. <strong>소자 자리 = 45행 c–d ↔︎ 49행 c–d</strong> (다음 카드에서 저항을 꽂을 두 행)</td>
 </tr>
 </tbody>
 </table>
@@ -3459,7 +3691,7 @@ DAC 코드 4095 → ADC  26320 = 3.290 V</code></pre>
 <li>눈으로 점검: 5 V에 간 선이 없는지, 8번·4번이 바뀌지 않았는지, ADC 입력(A0–A3)에 3.3 V를 넘는 점이 이어지지 않았는지.</li>
 <li>멀티미터로 R_f와 R_lim의 실제 저항값을 재서 연구 노트에 적습니다(꽂기 전에 재도 됩니다).</li>
 </ol>
-<p>션트 방식(전류 ≥ 1 µA)이면 10–12번 대신 소자 ② 아래쪽 → <strong>R_s</strong> → V_ref로 잇고, A1·A2를 소자 ② 아래쪽(R_s 위쪽)에, A3를 V_ref에 둡니다(그림 7 아래 설명과 같음).</p>
+<p>션트 방식(전류 ≥ 1 µA)이면 10–12번 대신 소자 ② 아래쪽(49행) → <strong>R_s</strong> → V_ref(30행 f–j의 남은 구멍)로 잇고, A1·A2를 소자 ② 아래쪽(49행, R_s 위쪽)에, A3를 V_ref에 둡니다(그림 7 아래 설명과 같음).</p>
 </section>
 <section id="device_io.h에-내-dac-주소r_f-적기" class="level4 howstep">
 <h4 class="anchored" data-anchor-id="device_io.h에-내-dac-주소r_f-적기">device_io.h에 내 DAC 주소·R_f 적기</h4>
@@ -3518,7 +3750,7 @@ DAC 코드 4095 → ADC  26320 = 3.290 V</code></pre>
 <h4 class="anchored" data-anchor-id="dac-출력-보정-c-명령">DAC 출력 보정 (<code>c</code> 명령)</h4>
 <p><span class="do">할 일</span></p>
 <ol type="1">
-<li>소자 자리(①·② 세로줄)에 <strong>아무것도 꽂지 않은</strong>(열린) 상태로 두고, <strong>J1을 꽂습니다.</strong></li>
+<li>소자 자리(① 45행, ② 49행)에 <strong>아무것도 꽂지 않은</strong>(열린) 상태로 두고, <strong>J1을 꽂습니다.</strong></li>
 <li>Serial Monitor <strong>위쪽 입력 칸</strong>("Message (Enter to send …)")을 클릭하고 <code>c</code>를 친 뒤 Enter.</li>
 <li>1–2초 안에 다섯 줄이 나옵니다.</li>
 </ol>
@@ -3565,7 +3797,7 @@ device_io.h에 넣을 값: DAC_SLOPE = 0.00080573f; DAC_OFS = 0.00024f;</code></
 <h4 class="anchored" data-anchor-id="kω-저항으로-전압-계단-s-명령">100 kΩ 저항으로 전압 계단 (<code>s</code> 명령)</h4>
 <p><span class="do">할 일</span></p>
 <ol type="1">
-<li><strong>J1을 뺍니다.</strong> 소자 자리(①·② 세로줄 사이)에 <strong>100 kΩ 저항</strong>을 꽂습니다. 멀티미터로 잰 실제 값도 적어 둡니다.</li>
+<li><strong>J1을 뺍니다.</strong> 소자 자리(45행 c ↔︎ 49행 c)에 <strong>100 kΩ 저항</strong>을 꽂습니다. 멀티미터로 잰 실제 값도 적어 둡니다.</li>
 <li><strong>J1을 꽂습니다.</strong></li>
 <li>Serial Monitor 입력 칸에 <code>s</code>를 넣고 Enter. 약 2초 동안 다섯 줄이 나옵니다.</li>
 </ol>
@@ -3617,7 +3849,7 @@ device_io.h에 넣을 값: DAC_SLOPE = 0.00080573f; DAC_OFS = 0.00024f;</code></
 <h4 class="anchored" data-anchor-id="rc-모의-소자로-떨림정착-확인">RC 모의 소자로 떨림·정착 확인</h4>
 <p><span class="do">할 일</span></p>
 <ol type="1">
-<li><strong>J1을 뺍니다.</strong> 소자 자리의 100 kΩ 옆에 <strong>1 µF 필름 capacitor</strong>를 나란히(같은 두 세로줄에) 꽂아 RC 모의 소자를 만듭니다.</li>
+<li><strong>J1을 뺍니다.</strong> 소자 자리의 100 kΩ 옆에 <strong>1 µF 필름 capacitor</strong>를 나란히(같은 두 행, 45행 d ↔︎ 49행 d에) 꽂아 RC 모의 소자를 만듭니다.</li>
 <li><strong>J1을 꽂고</strong> Serial Monitor에 <code>s</code> → Enter.</li>
 <li>출력이 떨리지(발진) 않는지, 원하는 시간 안에 자리 잡는지 봅니다. B4_test는 전압을 바꾸고 0.3초 뒤에 읽으므로, RC(τ = 100 kΩ × 1 µF = 0.1 s)가 다 정착하지 않은 값이 섞여 보일 수 있습니다.</li>
 </ol>
@@ -3634,6 +3866,47 @@ device_io.h에 넣을 값: DAC_SLOPE = 0.00080573f; DAC_OFS = 0.00024f;</code></
 </div>
 <p><strong>관찰할 점.</strong> 소스미터와 다른 점을 세 가지로 정리합니다. 첫째, 이 회로는 compliance가 없고 R_lim이 상한만 묶습니다. 둘째, DAC가 낸 전압과 소자에 걸린 전압은 다르므로 소자 전압은 항상 <strong>재서</strong> 씁니다. 셋째, 포화는 숫자만 봐서는 모르므로 firmware가 세어 줍니다.</p>
 <p><strong>다음 단계 조건.</strong> 저항·RC 측정이 소스미터와 겹치면 <a href="#b5">P3.5</a>로 갑니다.</p>
+</section>
+<section id="b4-swap" class="level3">
+<h3 class="anchored" data-anchor-id="b4-swap">R–C 자리에 소자를 꽂을 때: 부품만 바꾸면 되나</h3>
+<p><a href="../projects/side.html#m3">사이드 프로젝트</a>와 <a href="#b1c">R–C 첫 배선</a>에서는 "R–C 자리에 소자를 꽂으면 같은 질문을 할 수 있다"고 했습니다. 질문은 같지만, <strong>회로는 그대로 두고 부품만 바꾸면 되는 경우는 드뭅니다.</strong> 먼저 이 회로가 하는 일을 두 줄로 정리합니다.</p>
+<ul>
+<li><strong>거는 것:</strong> DAC가 만든 전압 pulse. 소자 아래쪽이 V_ref(약 1.65 V)에 붙어 있어서, 소자에는 DAC 전압 − V_ref가 걸립니다(R_lim에서 떨어지는 만큼 덜).</li>
+<li><strong>읽는 것:</strong> 소자를 지나간 <strong>전류</strong>. TIA(또는 션트 저항)가 전류를 전압으로 바꾸고, ADS1115가 그 전압을 숫자로 읽습니다. R–C 첫 배선처럼 capacitor <strong>전압</strong>을 바로 읽는 것이 아닙니다.</li>
+</ul>
+<p>아래 조건 중 하나라도 맞으면 소자 앞뒤의 회로(interface)를 바꾸거나 더해야 합니다. <span class="key"><strong>모두 확인 전의 조건이며 사실이 아닙니다.</strong></span> 내 소자에 해당하는지는 <a href="../projects/a.html#a1">P2.1</a>에서 잰 특성(전류 범위, 필요한 전압, 저항)으로 판단합니다 [실물 미검증].</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>조건 (이러면)</th>
+<th>왜 문제인가</th>
+<th>무엇을 바꾸나</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>소자 전류가 <strong>TIA 범위 밖</strong>: 최대 전류 × R_f가 약 1.5 V를 넘거나, 전류가 너무 작아 ADC 숫자가 몇 칸밖에 안 움직임</td>
+<td>크면 op-amp 출력이 전원 끝에 붙어(포화) 숫자가 틀림. 작으면 noise에 묻힘</td>
+<td><strong>R_f를 바꿈</strong>: R_f ≈ 1.5 V ÷ 최대 전류. 바꾼 값은 <code>device_io.h</code>의 R_MEAS에도. 10 nA보다 작으면 breadboard TIA로는 어려움(<a href="#b4-tia">전류 측정</a>의 표)</td>
+</tr>
+<tr class="even">
+<td>소자에 <strong>양·음(bipolar) 전압</strong>이 필요한데, DAC는 <strong>0–3.3 V만</strong> 냄</td>
+<td>소자 아래쪽을 GND(0 V)에 붙이면 + 쪽만 걸 수 있음</td>
+<td>이 설계처럼 아래쪽을 V_ref(1.65 V)에 두어 약 ±1 V까지. 그보다 넓은 범위가 필요하면 음전원 op-amp 회로나 계측 중심 대안(AFE 평가보드·퍼텐쇼스탯)</td>
+</tr>
+<tr class="odd">
+<td>소자 <strong>임피던스가 큼</strong>: 같은 전압에서 전류가 nA 이하</td>
+<td>큰 R_f가 필요해 반응이 느려지고, op-amp 입력 바이어스 전류·누설·배선 noise가 상대적으로 커짐</td>
+<td>입력 바이어스가 작은 op-amp(예: LMC6482), 짧은 배선·차폐. 그래도 안 되면 소스미터 유지</td>
+</tr>
+<tr class="even">
+<td>소자가 합선될 수 있거나 <strong>허용 전류가 작음</strong></td>
+<td>이 회로에는 compliance가 없음</td>
+<td><strong>직렬 전류 제한 저항 R_lim</strong>을 꼭 둠: 3.3 V ÷ R_lim ≤ 허용 전류. 대신 R_lim × 소자 용량만큼 pulse가 느려지므로 소자 전압을 A0로 재서 씀</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#b1c">R–C 첫 배선</a> 회로(P1.04 → 저항 → capacitor)에는 소자를 꽂지 않습니다. P1.04는 0 V와 3.3 V 두 값만 내고, 전류 제한도 없고, 전류가 아니라 전압을 읽기 때문입니다. 소자는 이 단계의 회로(R_lim·J1·TIA)를 저항·RC로 검증한 뒤 <a href="#b5">P3.5</a>에서 꽂습니다.</p>
 </section>
 </section>
 <section id="b5" class="level2">
@@ -4319,7 +4592,7 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 </div>
 <ol start="5" type="1">
 <li><code>READY L=12 M=4 …</code>가 보이면 <strong>Serial Monitor 탭의 ×를 눌러 닫습니다.</strong></li>
-<li>소자를 소자 자리(①·② 세로줄)에 꽂고, <strong>J1을 꽂습니다.</strong></li>
+<li>소자를 소자 자리(① 45행 ↔︎ ② 49행, <a href="#b4-swap">부품만 바꾸면 되나</a> 먼저 확인)에 꽂고, <strong>J1을 꽂습니다.</strong></li>
 </ol>
 <div class="ifnot">
 <p><code>E,-1,io_init</code> → <a href="#b4-verify">측정 회로 검증</a>의 B4_test 카드와 같은 원인입니다.</p>
@@ -4915,12 +5188,12 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 <tr class="odd">
 <td>3</td>
 <td>OLED <strong>SDA</strong></td>
-<td>ADC SDA 세로줄의 남은 구멍 (= P0.26 선)</td>
+<td>ADC SDA 다리 행의 남은 구멍 (= P0.26 선)</td>
 </tr>
 <tr class="even">
 <td>4</td>
 <td>OLED <strong>SCL</strong></td>
-<td>ADC SCL 세로줄의 남은 구멍 (= P0.27 선)</td>
+<td>ADC SCL 다리 행의 남은 구멍 (= P0.27 선)</td>
 </tr>
 <tr class="odd">
 <td>5</td>

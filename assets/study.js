@@ -2154,7 +2154,7 @@
       var at = done ? String((PROJ.steps[id] || {}).at || "").slice(0, 10) : "";
       holder.appendChild(h("div", "pj-finish-k", done ? "완료한 프로젝트" : "여기까지 왔다면"));
       holder.appendChild(
-        h("div", "pj-finish-t", done ? pr.letter + " 완료" + (at ? " · " + at : "") : "이 프로젝트를 끝냈나요? 관찰 질문에 답을 적었다면 완료로 표시하세요.")
+        h("div", "pj-finish-t", done ? pr.letter + " 완료" + (at ? " · " + at : "") : "이 프로젝트를 끝냈나요? 실습을 ▷ 실행하고 결과 그림까지 확인했다면 완료로 표시하세요. 관찰을 글로 적는 것은 선택입니다.")
       );
       var b = button(done ? "완료 취소" : pr.letter + " 완료로 표시", done ? "ghost lab-small" : "sbtn primary", function () {
         if (busy || PROJ_ERR) return;
@@ -4482,7 +4482,7 @@
   }
 
   function setupFigZoom() {
-    var imgs = document.querySelectorAll("figure.fig img");
+    var imgs = document.querySelectorAll("figure.fig img, html.proj-page main figure:not(.pj-preview) img, .pj-hero-art img");   // 프로젝트 도입·본문 그림도 크게 보기 (2026-11-06 검토)
     if (!imgs.length) return;
     var ov = h("div");
     ov.id = "fig-zoom";

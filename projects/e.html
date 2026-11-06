@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../assets/projects.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -695,29 +695,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">이 페이지</h2>
-   
-  <ul>
-  <li><a href="#e0" id="toc-e0" class="nav-link active" data-scroll-target="#e0">준비: VS Code와 mylabs 폴더</a></li>
-  <li><a href="#e1" id="toc-e1" class="nav-link" data-scroll-target="#e1">P5.1. EMG는 무엇이고, 숫자로 바꾸면 얼마나 많을까</a>
-  <ul class="collapse">
-  <li><a href="#과제-근육이-다-쉰-뒤에-어느-순서로-움직였는지-맞히기" id="toc-과제-근육이-다-쉰-뒤에-어느-순서로-움직였는지-맞히기" class="nav-link" data-scroll-target="#과제-근육이-다-쉰-뒤에-어느-순서로-움직였는지-맞히기">과제: 근육이 다 쉰 뒤에, 어느 순서로 움직였는지 맞히기</a></li>
-  <li><a href="#실습-1.-가짜-emg-만들기-p5_1_emg.py" id="toc-실습-1.-가짜-emg-만들기-p5_1_emg.py" class="nav-link" data-scroll-target="#실습-1.-가짜-emg-만들기-p5_1_emg.py">실습 1. 가짜 EMG 만들기 (<code>p5_1_emg.py</code>)</a></li>
-  <li><a href="#실습-2.-sampling-rate-emg를-1초에-몇-번-집어야-하나-p5_2_sampling.py" id="toc-실습-2.-sampling-rate-emg를-1초에-몇-번-집어야-하나-p5_2_sampling.py" class="nav-link" data-scroll-target="#실습-2.-sampling-rate-emg를-1초에-몇-번-집어야-하나-p5_2_sampling.py">실습 2. sampling rate: EMG를 1초에 몇 번 집어야 하나 (<code>p5_2_sampling.py</code>)</a></li>
-  </ul></li>
-  <li><a href="#e2" id="toc-e2" class="nav-link" data-scroll-target="#e2">P5.2. 소자가 먼저 흔적으로 바꾸면</a>
-  <ul class="collapse">
-  <li><a href="#실습-3.-정류와-rc-흔적-보기-p5_3_rc.py" id="toc-실습-3.-정류와-rc-흔적-보기-p5_3_rc.py" class="nav-link" data-scroll-target="#실습-3.-정류와-rc-흔적-보기-p5_3_rc.py">실습 3. 정류와 R–C 흔적 보기 (<code>p5_3_rc.py</code>)</a></li>
-  <li><a href="#실습-4.-모형별로-끝만-읽어-채점하기-p5_4_models.py" id="toc-실습-4.-모형별로-끝만-읽어-채점하기-p5_4_models.py" class="nav-link" data-scroll-target="#실습-4.-모형별로-끝만-읽어-채점하기-p5_4_models.py">실습 4. 모형별로 끝만 읽어 채점하기 (<code>p5_4_models.py</code>)</a></li>
-  <li><a href="#실습-5.-판정-한-번에-보내는-bit-비교-p5_5_bits.py" id="toc-실습-5.-판정-한-번에-보내는-bit-비교-p5_5_bits.py" class="nav-link" data-scroll-target="#실습-5.-판정-한-번에-보내는-bit-비교-p5_5_bits.py">실습 5. 판정 한 번에 보내는 bit 비교 (<code>p5_5_bits.py</code>)</a></li>
-  </ul></li>
-  <li><a href="#e-real" id="toc-e-real" class="nav-link" data-scroll-target="#e-real">(선택) 실물로 확장하기</a></li>
-  <li><a href="#e-code" id="toc-e-code" class="nav-link" data-scroll-target="#e-code">이 프로그램이 단순하게 만든 부분</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -743,7 +721,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script>document.documentElement.classList.add("proj-page")</script>
 <script src="../assets/projects.js" defer=""></script>
-<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "P1", "title": "컴퓨터만으로 하는 첫 실험", "page": "s.html"}, {"id": "a", "letter": "P2", "title": "소스미터로 내 소자 재기", "page": "a.html"}, {"id": "b", "letter": "P3", "title": "손바닥 보드로 만드는 측정·판단 장치", "page": "b.html"}, {"id": "c", "letter": "P4", "title": "눌러서 쓰는 소자: 누름의 리듬이 남는가", "page": "c.html"}, {"id": "e", "letter": "P5", "title": "근육 신호(EMG)와 physical reservoir", "page": "e.html"}], "steps": [{"id": "s1", "project": "s", "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까", "page": "s.html", "anchor": "s1", "time": "40분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "s2", "project": "s", "title": "P1.2. 기억은 길수록 좋을까", "page": "s.html", "anchor": "s2", "time": "40분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d09"], "optional": false}, {"id": "a0", "project": "a", "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "30–60분", "needs": "PC", "kind": "mock", "days": ["d06", "d08"], "optional": false}, {"id": "a0r", "project": "a", "title": "P2.0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"], "optional": false}, {"id": "a1", "project": "a", "title": "P2.1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"], "optional": false}, {"id": "a2", "project": "a", "title": "P2.2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"], "optional": false}, {"id": "a3", "project": "a", "title": "P2.3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}, {"id": "b1", "project": "b", "title": "P3.1. NU40 DK에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "NU40 DK, 데이터용 USB 케이블", "kind": "실물", "days": [], "optional": false}, {"id": "b1a", "project": "b", "title": "P3.1a. 버튼 리듬을 CSV로 남기기", "page": "b.html", "anchor": "b1a", "time": "30–60분", "needs": "NU40 DK (키트 조도 모듈은 선택)", "kind": "실물", "days": [], "optional": false}, {"id": "b1b", "project": "b", "title": "P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가", "page": "b.html", "anchor": "b1b", "time": "1–2시간", "needs": "NU40 DK, P3.1a 기록", "kind": "실물", "days": [], "optional": false}, {"id": "b2", "project": "b", "title": "P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "NU40 DK, DAC·ADC 모듈", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b4", "project": "b", "title": "P3.4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"], "optional": false}, {"id": "b5", "project": "b", "title": "P3.5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "P3.4 회로, 소자", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b6", "project": "b", "title": "P3.6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "P3.5 결과", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b7", "project": "b", "title": "P3.7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b8", "project": "b", "title": "P3.8. (선택) ECG 신호로 도전", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}, {"id": "c0", "project": "c", "title": "P4.0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (mock 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 mock)", "kind": "실측", "days": [], "optional": false}, {"id": "c2", "project": "c", "title": "P4.1–P4.2. 소자 구조와 control", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": [], "optional": false}, {"id": "c3", "project": "c", "title": "P4.3–P4.4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "servo, load cell, 보드", "kind": "실물", "days": [], "optional": false}, {"id": "c5", "project": "c", "title": "P4.5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "P4.3 장치, 소자", "kind": "실측", "days": ["d08"], "optional": false}, {"id": "e1", "project": "e", "title": "P5.1. EMG를 숫자로: sampling rate와 data rate", "page": "e.html", "anchor": "e1", "time": "30–45분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "e2", "project": "e", "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기", "page": "e.html", "anchor": "e2", "time": "40–60분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d08"], "optional": false}]}</script>
+<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "P1", "title": "컴퓨터만으로 하는 첫 실험", "page": "s.html"}, {"id": "a", "letter": "P2", "title": "소스미터로 내 소자 재기", "page": "a.html"}, {"id": "b", "letter": "P3", "title": "손바닥 보드로 만드는 측정·판단 장치", "page": "b.html"}, {"id": "c", "letter": "P4", "title": "눌러서 쓰는 소자: 누름의 리듬이 남는가", "page": "c.html"}, {"id": "e", "letter": "P5", "title": "근육 신호(EMG)와 physical reservoir", "page": "e.html"}], "steps": [{"id": "s1", "project": "s", "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까", "page": "s.html", "anchor": "s1", "time": "학습 약 60분 (실행은 실습마다 수 초)", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "s2", "project": "s", "title": "P1.2. 기억은 길수록 좋을까", "page": "s.html", "anchor": "s2", "time": "학습 약 50분 (실행은 실습마다 수 초–30초)", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d09"], "optional": false}, {"id": "a0", "project": "a", "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "학습 40–60분 (실행은 실습마다 수 초–30초)", "needs": "PC", "kind": "mock", "days": ["d06", "d08"], "optional": false}, {"id": "a0r", "project": "a", "title": "P2.0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"], "optional": false}, {"id": "a1", "project": "a", "title": "P2.1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"], "optional": false}, {"id": "a2", "project": "a", "title": "P2.2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"], "optional": false}, {"id": "a3", "project": "a", "title": "P2.3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}, {"id": "b1", "project": "b", "title": "P3.1. NU40 DK에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "NU40 DK, 데이터용 USB 케이블", "kind": "실물", "days": [], "optional": false}, {"id": "b1a", "project": "b", "title": "P3.1a. 버튼 리듬을 CSV로 남기기", "page": "b.html", "anchor": "b1a", "time": "30–60분", "needs": "NU40 DK (키트 조도 모듈은 선택)", "kind": "실물", "days": [], "optional": false}, {"id": "b1b", "project": "b", "title": "P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가", "page": "b.html", "anchor": "b1b", "time": "1–2시간", "needs": "NU40 DK, P3.1a 기록", "kind": "실물", "days": [], "optional": false}, {"id": "b2", "project": "b", "title": "P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "NU40 DK, DAC·ADC 모듈", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b4", "project": "b", "title": "P3.4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"], "optional": false}, {"id": "b5", "project": "b", "title": "P3.5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "P3.4 회로, 소자", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b6", "project": "b", "title": "P3.6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "P3.5 결과", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b7", "project": "b", "title": "P3.7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b8", "project": "b", "title": "P3.8. (선택) ECG 신호로 도전", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}, {"id": "c0", "project": "c", "title": "P4.0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (mock 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 mock)", "kind": "실측", "days": [], "optional": false}, {"id": "c2", "project": "c", "title": "P4.1–P4.2. 소자 구조와 control", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": [], "optional": false}, {"id": "c3", "project": "c", "title": "P4.3–P4.4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "servo, load cell, 보드", "kind": "실물", "days": [], "optional": false}, {"id": "c5", "project": "c", "title": "P4.5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "P4.3 장치, 소자", "kind": "실측", "days": ["d08"], "optional": false}, {"id": "e1", "project": "e", "title": "P5.1. EMG를 숫자로: sampling rate와 data rate", "page": "e.html", "anchor": "e1", "time": "학습 30–45분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "e2", "project": "e", "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기", "page": "e.html", "anchor": "e2", "time": "학습 40–60분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d08"], "optional": false}]}</script>
 <div class="pj-hero">
 <div class="pj-hero-art">
 <p><img src="img/p5-overview.svg" class="img-fluid" alt="아래팔 근육 두 개에서 나온 빠른 EMG 신호가 두 길로 간다. 위(P5.1)는 1초에 1,000번 숫자로 바꿔 컴퓨터가 2.5초 전체를 보고 판정하며 판정 한 번에 약 60,000 bit. 아래(P5.2)는 이온 소자가 먼저 흔적으로 바꾸고 끝에서 몇 번만 읽어 판정하며 약 600 bit"></p>
@@ -757,9 +735,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="pj-flow">
 <li class="first"><b>준비</b><small>VS Code · mylabs 폴더</small></li>
 <li class="arrow">→</li>
-<li><b>P5.1 EMG를 숫자로</b><small>실습 1–2 · 40분</small></li>
+<li><b>P5.1 EMG를 숫자로</b><small>실습 1–2 · 학습 약 40분</small></li>
 <li class="arrow">→</li>
-<li><b>P5.2 소자가 먼저 흔적으로</b><small>실습 3–5 · 60분</small></li>
+<li><b>P5.2 소자가 먼저 흔적으로</b><small>실습 3–5 · 학습 약 60분</small></li>
 <li class="arrow">→</li>
 <li><b>끝</b><small>맨 아래 [완료] 단추</small></li>
 </ul>
@@ -773,7 +751,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>실습 5개를 모두 ▷ 실행하고, "관찰 적기" 질문에 <strong>내 말로 한 문장씩</strong> 답을 적으면 끝입니다. 결과가 예상과 달라도 괜찮습니다.</p>
+<p>실습 5개를 모두 ▷ 실행하고 <strong>결과 그림을 확인하면</strong> 끝입니다. "관찰 적기" 질문은 머릿속으로 답해 보고 '정답 보기'로 확인하면 충분하고, 글로 적는 것은 선택입니다. 결과가 예상과 달라도 괜찮습니다.</p>
 </div>
 </div>
 <section id="e0" class="level2">
@@ -1434,7 +1412,7 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 <li>이 과제에 필요한 것은 envelope(언제 얼마나 세게)뿐이라, 깨끗한 가짜 신호에서는 50 Hz로도 맞힙니다.</li>
 <li>여기까지는 <strong>컴퓨터가 2.5초를 모두 저장</strong>하고 판정했습니다. 기억은 컴퓨터가 맡았습니다. 끝 0.3초만 보면 어떻게 될까요? 실습 1에서 본 것처럼 근육이 쉬고 있으니 찍기입니다(실습 4의 <code>no memory</code> 줄).</li>
 </ul>
-<p><strong>다음 단계 조건.</strong> 두 질문에 답을 적었으면 <a href="#e2">P5.2</a>로 갑니다.</p>
+<p><strong>다음 단계 조건.</strong> 실습 2까지 ▷ 실행해 결과 그림을 확인했으면 <a href="#e2">P5.2</a>로 갑니다(질문에 글로 답하기는 선택).</p>
 </section>
 </section>
 <section id="e2" class="level2">
@@ -1469,7 +1447,7 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 <tr class="odd">
 <td>3</td>
 <td>정류와 R–C 하나</td>
-<td>τ에 따라 끝 0.3초에 흔적이 남는다/안 남는다</td>
+<td>τ에 따라 끝 0.3초에 흔적이 남는다/안 남는다 (끝 구간 확대 그림)</td>
 </tr>
 <tr class="even">
 <td>4</td>
@@ -1734,7 +1712,7 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 <b>그림 6.</b> 실습 3의 첫째 그림 창 (class 0 trial 하나, τ = 0.3초). <b>(a)</b> 0.05초 확대. 회색 = raw EMG, 파란 선 = 정류한 |EMG|. −쪽이 +로 뒤집혔습니다. <b>(b)(c)</b> 연한 회색 = |EMG|, 진한 선 = R–C state, 노란 띠 = readout 구간. state는 떨림을 매끈하게 따라 오르고, 힘을 뺀 뒤 천천히 식습니다. 나중에 힘을 준 extensor 쪽(c)이 끝에서 더 높게 남았습니다.
 </figcaption>
 </figure>
-<figure class="fig plot figure">
+<figure class="fig plot figure" id="fig-end">
 <img src="img/lab/p5_3_rc_fig2.png" alt="왼쪽: trial 200개의 extensor − flexor state. class 0(파랑)은 처음에 음수로 내려갔다 1.4초쯤 양수로 올라가고, class 1(주황)은 반대. 오른쪽 끝 0.3초 확대: 파랑은 +0.007–0.02, 주황은 −0.007–−0.02로 띠가 겹치지 않는다" class="figure-img">
 <figcaption>
 <b>그림 7.</b> 둘째 그림 창: trial 200개의 (extensor state − flexor state). 선 = class의 가운데 값, 옅은 띠 = trial의 가운데 절반이 들어오는 범위. <b>왼쪽</b> = 2.5초 전체, <b>오른쪽</b> = 끝 0.3초 확대(세로 눈금이 다름). 끝 구간에서 파랑(class 0)은 + 쪽, 주황(class 1)은 − 쪽에 있고 두 띠가 겹치지 않습니다.
@@ -1768,7 +1746,7 @@ simple rule 'extensor &gt; flexor -&gt; class 0' : balanced accuracy 0.64  (chan
 PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 </div>
 <!-- /RUN -->
-<figure class="fig plot figure">
+<figure class="fig plot figure" id="fig-tau3">
 <img src="img/lab/p5_3_rc__TAU3p0_fig2.png" alt="τ 3초. 끝 0.3초 확대에서 파랑과 주황 띠가 대부분 겹친다" class="figure-img">
 <figcaption>
 <b>그림 8.</b> TAU = 3.0의 둘째 그림 창. 끝 구간에서 두 class의 띠가 크게 겹칩니다.
@@ -2143,7 +2121,7 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 <p><strong>결과가 뜻하는 것.</strong></p>
 <ul>
 <li><strong>no memory는 찍기 수준(0.59)입니다.</strong> 0.50보다 조금 높은 것은 우연의 흔들림입니다(<code>+/-</code> 0.08로 큼). <code>SEED = 2</code>, <code>3</code>으로 돌리면 0.49가 나옵니다.</li>
-<li><strong>R–C 하나는 τ에 따라 산 모양입니다.</strong> τ 0.3초가 0.93으로 가장 좋습니다. 실습 3에서 간단한 규칙으로 1.00이던 것이 측정 오차 때문에 조금 떨어졌습니다.</li>
+<li><strong>R–C 하나는 τ에 따라 산 모양입니다.</strong> τ 0.3초가 0.93으로 가장 좋습니다. 이유는 실습 3의 끝 구간 확대 그림에서 이미 봤습니다: τ 0.3초에서는 두 class의 띠가 떨어져 있고(<a href="#fig-end">그림 7</a>), τ 3초에서는 크게 겹칩니다(<a href="#fig-tau3">그림 8</a>). 실습 3에서 간단한 규칙으로 1.00이던 것이 측정 오차 때문에 조금 떨어졌습니다.</li>
 <li><strong>τ가 다른 흔적 여러 개(R–C ×4 0.96, reservoir 1.00)가 R–C 하나보다 낫습니다.</strong> 끝만 읽고도 2.5초 전체를 본 digital(0.99)만큼 맞힙니다.</li>
 </ul>
 <div class="lab-try">
@@ -2581,7 +2559,7 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 <li><strong>포화(비선형)는 측정 오차가 작을 때는 거의 보태지 않았습니다.</strong> R–C ×4 0.96과 reservoir 1.00의 차이는 seed 흔들림과 비슷합니다. 오차가 클 때(0.05)는 reservoir가 더 버텼습니다. 실제 소자를 평가할 때 "R–C 여러 개로도 되는 일인가?"를 먼저 묻는 이유입니다.</li>
 <li><span class="key"><strong>판정 한 번에 보내는 양은 약 100배 줄었습니다</strong>(60,000 → 576 bit). 이 이득은 소자가 기억을 들고 있어서 끝에서만 읽으면 되는 데서 옵니다</span>.</li>
 </ul>
-<p><strong>다음 단계 조건.</strong> 세 질문에 답을 적었으면 P5는 끝입니다. 맨 아래 단추로 완료를 표시합니다. 실물로 해 보고 싶다면 아래 선택 확장을 읽습니다.</p>
+<p><strong>다음 단계 조건.</strong> 실습 5까지 ▷ 실행해 결과 그림을 확인했으면 P5는 끝입니다(질문에 글로 답하기는 선택). 맨 아래 단추로 완료를 표시합니다. 실물로 해 보고 싶다면 아래 선택 확장을 읽습니다.</p>
 </section>
 </section>
 <section id="e-real" class="level2">

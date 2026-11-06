@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../assets/projects.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -695,19 +695,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">이 페이지</h2>
-   
-  <ul>
-  <li><a href="#py" id="toc-py" class="nav-link active" data-scroll-target="#py">1. Python 설치</a></li>
-  <li><a href="#zip" id="toc-zip" class="nav-link" data-scroll-target="#zip">2. 코드 묶음 받아서 풀기</a></li>
-  <li><a href="#vscode" id="toc-vscode" class="nav-link" data-scroll-target="#vscode">3. VS Code 설치하고 코드 묶음 열기</a></li>
-  <li><a href="#pip" id="toc-pip" class="nav-link" data-scroll-target="#pip">4. 필요한 package 설치</a></li>
-  <li><a href="#cmd" id="toc-cmd" class="nav-link" data-scroll-target="#cmd">5. 첫 실습: 코드 붙여 넣고 ▷ Run</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -735,12 +723,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../assets/projects.js" defer=""></script>
 <div class="pj-hero">
 <div class="pj-hero-art">
-<p><img src="img/vscode-window.svg" class="img-fluid" alt="VS Code 화면. 왼쪽 EXPLORER에 mylabs 폴더와 hello.py, 가운데 편집기에 코드, 오른쪽 위 ▷ 실행 단추, 아래 TERMINAL에 결과 글자, 오른쪽 아래에 따로 뜬 그림 창(Figure 1)"></p>
+<p><img src="img/vscode-window.svg" class="img-fluid" alt="VS Code 화면. 왼쪽 EXPLORER에 mylabs 폴더와 p0_hello.py, 가운데 편집기에 코드, 오른쪽 위 ▷ 실행 단추, 아래 TERMINAL에 결과 글자, 오른쪽 아래에 따로 뜬 그림 창(Figure 1)"></p>
 </div>
 <div class="pj-hero-text">
 <p><strong>무엇을 하나</strong> 프로젝트 실습은 모두 <strong>VS Code</strong>에서 합니다. 사이트의 코드를 복사해 내 파일에 붙여 넣고, 오른쪽 위 <strong>▷</strong>를 누르면 결과 숫자가 아래에 찍히고 그래프 창이 뜹니다. 이 페이지에서 그렇게 할 수 있게 준비합니다.</p>
-<p><strong>걸리는 시간</strong> 30–50분. Python·VS Code 내려받기와 package 설치가 가장 오래 걸립니다.</p>
-<p><strong>끝나면</strong> <code>hello.py</code>를 ▷ 실행했을 때 사인 곡선 그래프 창이 뜨고, <code>run_tests.py</code>를 ▷ 실행했을 때 마지막 줄에 <code>all passed (13)</code>이 보입니다. 그러면 <a href="../projects/s.html">P1</a>으로 갑니다.</p>
+<p><strong>걸리는 시간</strong> 30–50분 (참고치). Python·VS Code 내려받기와 package 설치가 가장 오래 걸립니다.</p>
+<p><strong>끝나면</strong> <code>p0_install.py</code>를 ▷ 실행해 <code>ready.</code>가 나오고, <code>p0_hello.py</code>를 ▷ 실행했을 때 사인 곡선 그래프 창이 뜨고, <code>run_tests.py</code>를 ▷ 실행했을 때 마지막 줄에 <code>all passed (13)</code>이 보입니다. 그러면 <a href="../projects/s.html">P1</a>으로 갑니다.</p>
 </div>
 </div>
 <p><strong>왜 VS Code인가.</strong> 명령 창에 명령 한 줄만 넣으면 "무엇을 했는지"가 보이지 않습니다. VS Code에서는 코드를 내 파일로 붙여 넣고, 코드 속 설명(주석)을 읽고, 맨 위의 숫자 하나를 바꿔 다시 ▷ 누르면서 결과가 어떻게 바뀌는지 바로 봅니다. 코드를 직접 짜지 않아도 <strong>내가 실험을 돌린다</strong>는 느낌이 납니다.</p>
@@ -752,32 +740,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="py" class="level2">
 <h2 class="anchored" data-anchor-id="py">1. Python 설치</h2>
 <div class="howsteps">
-<section id="이미-깔려-있는지-먼저-확인" class="level4 howstep">
-<h4 class="anchored" data-anchor-id="이미-깔려-있는지-먼저-확인">이미 깔려 있는지 먼저 확인</h4>
-<p>이 확인은 <strong>어느 폴더에서 연 명령 프롬프트든 상관없습니다.</strong></p>
-<p><span class="do">할 일</span></p>
-<ol type="1">
-<li>키보드 왼쪽 아래의 <strong>Windows 키</strong>(창문 모양)를 한 번 누릅니다. 시작 메뉴가 뜹니다.</li>
-<li>그 상태로 <code>cmd</code> 세 글자를 칩니다. 위에 <strong>명령 프롬프트</strong>가 나타납니다.</li>
-<li>Enter를 누르면 검은 창이 뜹니다. 맨 아래 줄이 <code>C:\Users\내이름&gt;</code>처럼 끝나고 커서가 깜빡입니다.</li>
-<li>아래 명령 상자 오른쪽 위의 <strong>복사 아이콘</strong>(네모 두 개 겹친 모양)을 누르고, 검은 창을 한 번 클릭한 뒤 <strong>마우스 오른쪽 단추</strong>를 한 번 누릅니다. 명령이 붙으면 Enter.</li>
-</ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="screen typed" data-screen-title="명령 프롬프트 — 붙여 넣은 모습">
-<pre class="text"><code>C:\Users\내이름&gt;python --version</code></pre>
-</div>
-<div class="screen" data-screen-title="명령 프롬프트 — Enter 뒤 (이렇게 나오면 성공)">
-<pre class="text"><code>C:\Users\내이름&gt;python --version
-Python 3.12.4
-
-C:\Users\내이름&gt;</code></pre>
-</div>
-<p><code>Python 3.11</code> 이상이면(3.12, 3.13 모두 됨) 설치가 끝난 것입니다. <strong>2번을 건너뛰고 <a href="#zip">코드 묶음 받기</a>로</strong> 갑니다. 마지막 숫자(3.12.<strong>4</strong>)는 달라도 됩니다.</p>
+<section id="이미-깔려-있는지-모르면" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="이미-깔려-있는지-모르면">이미 깔려 있는지 모르면</h4>
+<p><strong>그냥 아래대로 설치합니다.</strong> 이미 있어도 문제없습니다. 컴퓨터에 Python이 여러 개가 되어도, 나중에 <a href="#pip">VS Code에서 쓸 것 하나를 고르고</a> 그 Python에 package를 설치하므로 헷갈리지 않습니다.</p>
 <div class="ifnot">
-<ul>
-<li><code>'python'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다.</code>가 나오면 Python이 없는 것입니다. 2번으로.</li>
-<li>Microsoft Store 창이 열리면 두 가지 중 하나를 합니다. Store에서 <strong>Python 3.12</strong>의 '받기'를 눌러 설치해도 되고(이것도 똑같이 동작합니다), Store 창을 닫고 2번대로 python.org에서 설치해도 됩니다.</li>
-</ul>
+<p>Microsoft Store에서 받은 Python 3.11 이상이 이미 있으면 그것을 써도 됩니다. 설치 중 <code>Defaulting to user installation…</code>이라는 글자가 나오는 것만 다릅니다(무시해도 됨).</p>
 </div>
 </section>
 <section id="python-내려받아-설치" class="level4 howstep">
@@ -789,11 +756,11 @@ C:\Users\내이름&gt;</code></pre>
 <li>그 파일을 더블클릭합니다. "이 앱이 디바이스를 변경하도록 허용하시겠어요?"가 뜨면 <strong>예</strong>.</li>
 <li>설치 첫 화면 아래쪽의 <strong>"Add python.exe to PATH"</strong> 체크 상자를 <strong>반드시 켭니다.</strong></li>
 <li>위쪽의 <strong>Install Now</strong>를 누르고, 막대가 다 차서 "Setup was successful"이 나오면 <strong>Close</strong>.</li>
-<li><strong>열려 있던 검은 창을 모두 닫습니다</strong>(오른쪽 위 ×). 새 설정은 새로 연 창부터 적용됩니다.</li>
-<li>위 '이미 깔려 있는지 확인'을 처음부터 다시 해서 <code>Python 3.x.x</code>가 나오는지 봅니다.</li>
+<li>VS Code가 이미 켜져 있었다면 <strong>껐다 켭니다</strong>. 새로 깐 Python은 새로 연 창부터 보입니다.</li>
+<li>버전 확인은 VS Code에서 합니다(<a href="#pip">Python 고르기</a>에서 목록에 <code>Python 3.x.x</code>가 보이면 설치된 것).</li>
 </ol>
 <div class="why">
-<p>4번 체크를 안 하면 Python은 깔리지만 명령 프롬프트가 <code>python</code>이라는 말을 못 알아듣습니다. 빠뜨렸다면 내려받은 설치 파일을 다시 실행해 <strong>Modify → Next</strong> 화면에서 "Add Python to environment variables"를 켜고 Install.</p>
+<p>4번 체크를 안 하면 Python은 깔리지만 TERMINAL이 <code>python</code>이라는 말을 못 알아듣습니다(▷ 실행은 VS Code가 Python을 직접 찾아서 대개 괜찮습니다). 빠뜨렸다면 내려받은 설치 파일을 다시 실행해 <strong>Modify → Next</strong> 화면에서 "Add Python to environment variables"를 켜고 Install.</p>
 </div>
 </section>
 </div>
@@ -813,12 +780,15 @@ C:\Users\내이름&gt;</code></pre>
 <li><code>ion-projects-code.zip</code>에 마우스를 올리고 <strong>오른쪽 단추</strong> → <strong>모두 압축 풀기…</strong>(Windows 11은 '압축 풀기').</li>
 <li>뜬 창의 <strong>찾아보기…</strong> → 왼쪽에서 <strong>바탕 화면</strong> 선택 → <strong>폴더 선택</strong> → <strong>압축 풀기</strong>.</li>
 </ol>
-<p>바탕화면에 <code>ion-projects-code</code> 폴더가 생기고, 안은 이렇게 생겼습니다.</p>
+<p>바탕화면에 <code>ion-projects-code</code> 폴더가 생깁니다. <strong>더블클릭해서 들어갔을 때 바로</strong> 아래 폴더들이 보여야 합니다.</p>
 <pre class="text"><code>ion-projects-code\
   README.md        코드 묶음 설명
   firmware\        P3·P4에서 보드에 올리는 코드 (지금은 안 씀)
   labs\            VS Code 실습 코드 완성본 (비교용)
   python\          프로젝트 공용 코드</code></pre>
+<div class="ifnot">
+<p>들어갔더니 <code>ion-projects-code</code> 폴더가 <strong>또 하나</strong> 있으면, 폴더가 두 겹으로 풀린 것입니다(압축 풀기 창의 경로 끝에 <code>\ion-projects-code</code>가 붙어 있으면 이렇게 됩니다). 고장은 아닙니다. 앞으로는 <strong>안쪽</strong> <code>ion-projects-code</code>(열었을 때 <code>python</code> 폴더가 바로 보이는 쪽)를 씁니다.</p>
+</div>
 <div class="ifnot">
 <p>zip을 더블클릭만 하면 '미리보기'라서 실행이 안 됩니다. 꼭 <strong>압축 풀기</strong>를 해서 보통 폴더로 만들어야 합니다. 바탕화면이 아닌 곳에 풀어도 되지만, 그러면 이 사이트의 <code>Desktop</code> 경로가 내 경로와 달라 보입니다(동작은 같음).</p>
 </div>
@@ -855,10 +825,13 @@ C:\Users\내이름&gt;</code></pre>
 <p><span class="do">할 일</span></p>
 <ol type="1">
 <li>VS Code 위쪽 메뉴 <strong>File → Open Folder…</strong></li>
-<li><strong>바탕 화면 → <code>ion-projects-code</code></strong>를 한 번 눌러 고르고 <strong>폴더 선택</strong>. (안으로 들어가지 말고 <code>ion-projects-code</code> 자체를 고릅니다.)</li>
+<li><strong>바탕 화면 → <code>ion-projects-code</code></strong>를 한 번 눌러 고르고 <strong>폴더 선택</strong>. 고를 폴더는 <strong>열었을 때 <code>python</code> 폴더가 바로 보이는</strong> <code>ion-projects-code</code>입니다. 두 겹으로 풀렸다면 바깥 폴더로 한 번 들어가서 안쪽 <code>ion-projects-code</code>를 고릅니다.</li>
 <li>"Do you trust the authors of the files in this folder?"가 뜨면 <strong>Yes, I trust the authors</strong>.</li>
 <li>왼쪽 <strong>EXPLORER</strong>에 <code>ION-PROJECTS-CODE</code> 아래로 <code>firmware</code>, <code>labs</code>, <code>python</code> 폴더가 보이면 성공입니다.</li>
 </ol>
+<div class="ifnot">
+<p>EXPLORER 맨 위 <code>ION-PROJECTS-CODE</code> 바로 아래에 <code>firmware</code>·<code>python</code> 대신 <code>ion-projects-code</code> 폴더가 <strong>또</strong> 보이면, 바깥 폴더를 연 것입니다. 이대로 두면 다음 단계 package 설치가 <code>No such file or directory</code> 오류로 실패합니다. <strong>File → Open Folder…</strong>를 다시 눌러 안쪽 <code>ion-projects-code</code>를 고르세요.</p>
+</div>
 <div class="term">
 <p><strong>EXPLORER:</strong> VS Code 왼쪽의 폴더·파일 목록. 탐색기와 같은 역할입니다. 안 보이면 왼쪽 세로 줄 맨 위의 <strong>종이 두 장 아이콘</strong>을 누릅니다.</p>
 </div>
@@ -880,53 +853,250 @@ C:\Users\내이름&gt;</code></pre>
 </div>
 </section>
 <section id="pip" class="level2">
-<h2 class="anchored" data-anchor-id="pip">4. 필요한 package 설치</h2>
+<h2 class="anchored" data-anchor-id="pip">4. VS Code가 쓸 Python 고르고 package 설치</h2>
 <div class="howsteps">
-<section id="vs-code-안의-terminal-열기" class="level4 howstep">
-<h4 class="anchored" data-anchor-id="vs-code-안의-terminal-열기">VS Code 안의 TERMINAL 열기</h4>
-<p><span class="do">할 일</span> 위쪽 메뉴 <strong>Terminal → New Terminal</strong>. 화면 아래에 검은 칸이 열리고 맨 아래 줄이 이렇게 끝납니다.</p>
-<div class="screen vscode" data-screen-title="VS Code 아래 TERMINAL">
-<pre class="text"><code>PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
-</div>
+<section id="vs-code-화면-지도" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="vs-code-화면-지도">VS Code 화면 지도</h4>
+<p>처음 보는 화면이라 어디를 누를지부터 봅니다. 아래는 <strong>설명용 모식도</strong>입니다(실제 캡처가 아니라 색·글자 크기는 내 화면과 조금 다릅니다). 메뉴 이름은 영어로 적고 한국어 VS Code의 이름을 괄호에 함께 적었습니다.</p>
+<figure class="fig figure">
+<img src="img/vscode-window.svg" alt="VS Code 화면 모식도. 위 메뉴 줄의 File, 왼쪽 EXPLORER의 mylabs 폴더와 p0_hello.py, 오른쪽 위 ▷와 옆 작은 ⌄, 아래 TERMINAL 글자, 맨 아래 파란 상태 표시줄 오른쪽의 Python 3.12.4, 따로 뜬 Figure 1 그림 창에 번호 1부터 6까지" class="figure-img">
+<figcaption>
+<b>그림 1.</b> VS Code 화면 지도 (설명용 모식도, 실제 캡처 아님).
+</figcaption>
+</figure>
+<ol type="1">
+<li><strong>File (파일) → Open Folder… (폴더 열기)</strong>: 코드 묶음 폴더를 엽니다. <code>python</code> 폴더가 바로 보이는 <code>ion-projects-code</code>를 고릅니다.</li>
+<li><strong>EXPLORER (탐색기)</strong>: 폴더·파일 목록. <code>mylabs</code> 폴더를 <strong>마우스 오른쪽 단추 → New File… (새 파일)</strong> 로 내 파일을 만듭니다.</li>
+<li><strong>상태 표시줄의 Python 버전</strong>: 맨 아래 파란 줄 오른쪽. <code>.py</code> 파일을 열어 둔 동안 보입니다. <strong>▷가 실행할 Python</strong>이 이것입니다.</li>
+<li><strong>▷ Run Python File (Python 파일 실행)</strong>: 편집기 오른쪽 위. 옆의 작은 <strong>⌄</strong>를 누르면 실행 방법을 고를 수 있습니다.</li>
+<li><strong>TERMINAL (터미널)</strong>: <code>print</code>로 찍은 <strong>글자와 숫자</strong>가 나오는 곳.</li>
+<li><strong>Figure 창 (그림 창)</strong>: <code>plt.show()</code>가 띄우는 <strong>그래프</strong>. VS Code 밖에 <strong>따로</strong> 뜨고, 이 창을 닫아야 프로그램이 끝납니다.</li>
+</ol>
+</section>
+<section id="python-interpreter-고르기-한-번만" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="python-interpreter-고르기-한-번만">Python interpreter 고르기 (한 번만)</h4>
+<p>컴퓨터에 Python이 둘 이상 있으면(Microsoft Store판과 python.org판 등), VS Code가 엉뚱한 쪽을 쓸 수 있습니다. 그래서 <strong>VS Code가 쓸 Python을 직접 고르고, package도 바로 그 Python에 설치</strong>합니다.</p>
 <div class="term">
-<p><strong>TERMINAL:</strong> VS Code 아래쪽의 글자 창. 명령 프롬프트와 같은 것이 VS Code 안에 들어 있습니다. 실습 코드를 ▷ 실행하면 결과 글자도 여기에 나옵니다. 줄 앞의 <code>PS</code>는 "PowerShell(윈도우의 명령 창 종류)"이라는 표시일 뿐입니다.</p>
+<p><strong>interpreter:</strong> 코드를 읽어 실행하는 Python 프로그램 하나(<code>python.exe</code> 파일). VS Code에서는 "어느 Python으로 실행할지"를 이렇게 부릅니다.</p>
+</div>
+<p><span class="do">할 일</span></p>
+<ol type="1">
+<li>EXPLORER에서 <code>mylabs</code>를 마우스 오른쪽 단추 → <strong>New File…</strong> → <code>p0_install.py</code> → Enter. (아무 <code>.py</code> 파일이나 열려 있어야 아래 명령이 보입니다.)</li>
+<li><strong>Ctrl+Shift+P</strong> (명령 팔레트) → <code>select interpreter</code>를 치고 → <strong>Python: Select Interpreter (Python: 인터프리터 선택)</strong>.</li>
+<li>목록에서 <strong>Python 3.11 이상</strong>을 고릅니다. <code>Recommended</code>(추천)가 붙은 것이 있으면 그것. 3.12가 두 줄이면 경로에 <code>Programs\Python</code>이 있는 쪽(python.org판)을 고르면 됩니다. 어느 쪽이든 <strong>다음 단계의 설치를 같은 것으로</strong> 하면 됩니다.</li>
+<li>맨 아래 상태 표시줄 오른쪽에 <code>3.12.x</code> 같은 버전이 보이면 끝.</li>
+</ol>
+<div class="ifnot">
+<ul>
+<li>목록이 비어 있거나 Python이 안 보임 → Python 설치 뒤 VS Code를 <strong>완전히 껐다 켭니다</strong>. 그래도 없으면 <a href="#py">1. Python 설치</a>부터.</li>
+<li><code>Python: Select Interpreter</code>가 목록에 없음 → <a href="#vscode">Python extension</a>이 설치되지 않은 것.</li>
+</ul>
 </div>
 </section>
-<section id="package-설치-한-번만" class="level4 howstep">
-<h4 class="anchored" data-anchor-id="package-설치-한-번만">package 설치 (한 번만)</h4>
-<p><span class="do">할 일</span> 아래 명령 상자 오른쪽 위의 <strong>복사 아이콘</strong>을 누르고, TERMINAL을 한 번 클릭한 뒤 <strong>Ctrl+V</strong>(또는 마우스 오른쪽 단추)로 붙여 넣고 <strong>Enter</strong>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> python/requirements.txt</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="screen typed vscode" data-screen-title="VS Code 아래 TERMINAL — 붙여 넣은 모습">
-<pre class="text"><code>PS C:\Users\내이름\Desktop\ion-projects-code&gt;python -m pip install -r python/requirements.txt</code></pre>
+<section id="package-설치-설치-파일을-한-번만" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="package-설치-설치-파일을-한-번만">package 설치: 설치 파일을 ▷ (한 번만)</h4>
+<p><strong>왜 이렇게 하나.</strong> TERMINAL에 설치 명령을 넣으면, 그 TERMINAL의 <code>python</code>이 ▷가 쓰는 Python과 다를 수 있습니다. 그러면 설치는 됐는데 실행하면 <code>No module named numpy</code>가 납니다. 아래 파일은 <strong>▷가 실행하는 바로 그 Python에</strong> 설치하므로 어긋나지 않습니다.</p>
+<p><span class="do">할 일</span> 앞에서 만든 <code>p0_install.py</code>에 아래 코드를 붙여 넣고(<strong>전체 코드 복사</strong> → 편집기 클릭 → Ctrl+V) → Ctrl+S → ▷. 1–3분 동안 글자가 많이 흐릅니다.</p>
+<!-- LAB p0_install -->
+<div class="labcode">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>mylabs/p0_install.py</strong></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="mylabs/p0_install.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 준비 · package 설치 (한 번만)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 전체 과정:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   지금 VS Code가 쓰는 Python이 어느 것인지 찍기</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         ↓</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   바로 그 Python에 package 설치 (python/requirements.txt 목록)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#         ↓</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   설치한 package를 하나씩 불러 보기 → 모두 ok면 준비 끝</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 왜 이 파일로 설치하나:</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   컴퓨터에 Python이 두 개 이상 있으면, TERMINAL에서 설치한 Python과</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   ▷가 실행하는 Python이 서로 다를 수 있습니다. 그러면 설치했는데도</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   "No module named numpy" 오류가 납니다. 이 파일은 ▷가 실행하는 바로</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   그 Python(sys.executable)에 설치하므로 둘이 어긋나지 않습니다.</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess                   <span class="co"># 다른 프로그램(pip)을 실행하는 도구</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys                          <span class="co"># 지금 실행 중인 Python의 정보</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path            <span class="co"># 폴더·파일 경로</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 지금 쓰는 Python 확인</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"python  :"</span>, sys.executable)                        <span class="co"># ▷가 쓰는 Python 파일 위치</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"version :"</span>, sys.version.split()[<span class="dv">0</span>])                <span class="co"># 3.11 이상이면 됨</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> sys.version_info <span class="op">&lt;</span> (<span class="dv">3</span>, <span class="dv">11</span>):</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    sys.exit(<span class="st">"Python 3.11 이상이 필요합니다. 오른쪽 아래 상태 표시줄에서 다른 Python을 고르세요."</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 설치할 목록 찾기</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 이 파일은 ion-projects-code\mylabs 안에 있어야 합니다.</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co"># 한 단계 위 폴더(ion-projects-code) 안의 python\requirements.txt를 찾습니다.</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>CODE <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parent.parent</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>REQ <span class="op">=</span> CODE <span class="op">/</span> <span class="st">"python"</span> <span class="op">/</span> <span class="st">"requirements.txt"</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"list    :"</span>, REQ)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> REQ.exists():</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    sys.exit(<span class="st">"requirements.txt가 없습니다. VS Code가 연 폴더 바로 아래에 python 폴더가 보이는지 확인하세요.</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>             <span class="st">"압축이 두 겹으로 풀렸다면 File → Open Folder로 안쪽 ion-projects-code를 여세요."</span>)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 바로 이 Python에 설치 (1–3분, 글자가 많이 흐릅니다)</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">installing … (1-3 min)</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> subprocess.run([sys.executable, <span class="st">"-m"</span>, <span class="st">"pip"</span>, <span class="st">"install"</span>, <span class="st">"-r"</span>, <span class="bu">str</span>(REQ)])</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> r.returncode <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    sys.exit(<span class="st">"</span><span class="ch">\n</span><span class="st">설치 실패: 위의 빨간 ERROR 줄을 복사해 질문하세요."</span>)</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 하나씩 불러 보기</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">check:"</span>)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>ok <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name <span class="kw">in</span> [<span class="st">"numpy"</span>, <span class="st">"scipy"</span>, <span class="st">"sklearn"</span>, <span class="st">"joblib"</span>, <span class="st">"matplotlib"</span>, <span class="st">"pyvisa"</span>, <span class="st">"serial"</span>, <span class="st">"wfdb"</span>]:</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>        <span class="bu">__import__</span>(name)</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>name<span class="sc">:&lt;11}</span><span class="ss"> ok"</span>)</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:                      <span class="co"># 하나라도 못 불러오면 이름과 이유를 찍는다</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        ok <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>name<span class="sc">:&lt;11}</span><span class="ss"> FAILED (</span><span class="sc">{</span><span class="bu">type</span>(e)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">ready. 다음은 p0_hello.py"</span> <span class="cf">if</span> ok <span class="cf">else</span> <span class="st">"</span><span class="ch">\n</span><span class="st">FAILED 줄이 있습니다. 그 줄을 복사해 질문하세요."</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<!-- /LAB -->
+<div class="screen vscode" data-screen-title="VS Code 아래 TERMINAL — p0_install.py 끝났을 때 (가운데 설치 글자는 줄임)">
+<pre class="text"><code>PS C:\Users\내이름\Desktop\ion-projects-code&gt; &amp; python mylabs/p0_install.py
+python  : C:\Users\내이름\AppData\Local\Programs\Python\Python312\python.exe
+version : 3.12.10
+list    : C:\Users\내이름\Desktop\ion-projects-code\python\requirements.txt
+
+installing … (1-3 min)
+
+Collecting numpy
+…
+Successfully installed joblib-… matplotlib-… numpy-… pyserial-… pyvisa-… scikit-learn-… scipy-… wfdb-…
+
+check:
+  numpy       ok
+  scipy       ok
+  sklearn     ok
+  joblib      ok
+  matplotlib  ok
+  pyvisa      ok
+  serial      ok
+  wfdb        ok
+
+ready. 다음은 p0_hello.py
+PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
+</div>
+<p>맨 아래가 <strong><code>ready.</code></strong>이면 끝입니다. 맨 위 <code>python :</code> 줄의 경로를 기억해 둡니다. 다음 첫 실습에서 같은 경로가 찍히면 설치한 Python과 실행하는 Python이 같다는 확인입니다. 두 번째로 ▷ 하면 설치 대신 <code>Requirement already satisfied</code>가 나오는데, 이미 깔려 있다는 뜻이라 정상입니다.</p>
+<p><strong>설치 중에 나오는 글자: 무시해도 되는 것 / 멈춰야 하는 것</strong></p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>조각</th>
+<th>보이는 글자</th>
 <th>뜻</th>
+<th>할 일</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>python -m pip install</code></td>
-<td>Python의 설치 도구(pip)로 package를 설치하라</td>
+<td><code>[notice] A new release of pip is available</code></td>
+<td>pip 새 버전이 있다는 알림</td>
+<td>무시</td>
 </tr>
 <tr class="even">
-<td><code>-r python/requirements.txt</code></td>
-<td>설치할 목록은 <code>python</code> 폴더 안의 이 파일에 적힌 것 (numpy, matplotlib 등)</td>
+<td><code>Defaulting to user installation because normal site-packages is not writeable</code></td>
+<td>내 사용자 폴더에 설치함 (Microsoft Store판 Python에서 흔함)</td>
+<td>무시</td>
+</tr>
+<tr class="odd">
+<td><code>WARNING: The script … is installed in '…\Scripts' which is not on PATH</code></td>
+<td>보조 명령의 위치 안내. 우리 실습은 그 명령을 쓰지 않음</td>
+<td>무시</td>
+</tr>
+<tr class="even">
+<td><code>Requirement already satisfied</code></td>
+<td>이미 깔려 있음</td>
+<td>무시</td>
+</tr>
+<tr class="odd">
+<td><code>ERROR: Could not open requirements file</code> · <code>requirements.txt가 없습니다</code></td>
+<td>폴더를 잘못 엶 (압축이 두 겹이면 바깥 폴더를 연 것)</td>
+<td>File → Open Folder로 <strong>안쪽</strong> <code>ion-projects-code</code>를 열고 다시 ▷</td>
+</tr>
+<tr class="even">
+<td><code>ERROR: No matching distribution found</code> · <code>Could not find a version</code></td>
+<td>인터넷이 끊겼거나, Python이 너무 새것·옛것</td>
+<td>인터넷 확인. 계속되면 Python 3.12를 골라 다시</td>
+</tr>
+<tr class="odd">
+<td><code>ERROR: … Permission denied</code> · <code>Access is denied</code></td>
+<td>다른 프로그램이 파일을 쓰는 중</td>
+<td>VS Code를 껐다 켜고 다시 ▷</td>
+</tr>
+<tr class="even">
+<td>마지막에 <code>FAILED</code> 줄이 있음</td>
+<td>그 package만 설치가 안 됨</td>
+<td>그 줄과 위쪽 빨간 <code>ERROR</code> 줄을 복사해 질문</td>
 </tr>
 </tbody>
 </table>
-<p>글자가 한참 흐르고 1–3분 뒤 맨 아래에 <code>Successfully installed …</code>(이미 있으면 <code>Requirement already satisfied</code>)와 다시 <code>PS …&gt;</code> 줄이 나오면 끝입니다. 노란 <code>WARNING</code> 줄은 무시해도 됩니다.</p>
-<div class="ifnot">
-<ul>
-<li><code>python : 'python' 용어가 cmdlet, 함수 … 이름으로 인식되지 않습니다</code> → Python 설치 때 <strong>Add python.exe to PATH</strong>를 체크하지 않은 것입니다. <a href="#py">1. Python 설치</a>를 다시 하고(체크!), VS Code를 껐다 켭니다.</li>
-<li><code>ERROR: Could not open requirements file</code> → 폴더를 잘못 연 것입니다. File → Open Folder로 <code>ion-projects-code</code>를 다시 엽니다(줄 끝이 <code>ion-projects-code&gt;</code>여야 함).</li>
-</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="(다른 방법) TERMINAL에 명령으로 설치하기">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>(다른 방법) TERMINAL에 명령으로 설치하기
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>명령 창에 익숙하면 이렇게 해도 됩니다. <strong>Terminal (터미널) → New Terminal (새 터미널)</strong> → 아래를 붙여 넣고 Enter.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> python/requirements.txt</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>이때는 TERMINAL의 <code>python</code>이 ▷의 Python과 같은지 직접 확인해야 합니다. <code>python -c "import sys; print(sys.executable)"</code>의 결과가 다음 단계 <code>p0_hello.py</code>가 찍는 <code>python :</code> 경로와 같아야 합니다. 다르면 위의 ▷ 방법으로 설치합니다.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="장비용 package까지 지금 설치하는 이유">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>장비용 package까지 지금 설치하는 이유
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>목록에는 실제 장비 단계에서만 쓰는 <code>pyvisa</code>(소스미터), <code>pyserial</code>(보드), <code>wfdb</code>(공개 ECG)도 들어 있습니다. 첫 실습에는 필요 없지만 나누지 않았습니다. 셋 다 몇 초면 설치되는 작은 package이고, 목록을 둘로 나누면 P2.0R·P3에서 "설치를 하나 더" 해야 하는 단계가 생겨 오히려 빠뜨리기 쉽기 때문입니다. 장비 연결 코드는 장비를 실제로 쓸 때만 이 package를 불러옵니다.</p>
+</div>
+</div>
 </div>
 </section>
 </div>
@@ -953,64 +1123,66 @@ C:\Users\내이름&gt;</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>mylabs/p0_hello.py</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-filename="mylabs/p0_hello.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 첫 실습 · VS Code에서 코드 돌려 보기</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 전체 과정:</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   숫자 몇 개 계산해서 글자로 찍기 (print)  → 아래 TERMINAL에 보임</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         ↓</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   사인(sin) 곡선 그리기 (plot)            → 그림 창이 따로 뜸</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 이 파일이 잘 돌면 준비 끝입니다.</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np                 <span class="co"># 숫자 계산 도구</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt    <span class="co"># 그래프 도구</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 0. 그림 설정 (한글 글꼴) — 모든 실습 파일 맨 위에 똑같이 있습니다</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.family"</span>: <span class="st">"Malgun Gothic"</span>, <span class="st">"axes.unicode_minus"</span>: <span class="va">False</span>, <span class="st">"font.size"</span>: <span class="dv">11</span>,</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"legend.frameon"</span>: <span class="va">False</span>, <span class="st">"axes.spines.top"</span>: <span class="va">False</span>, <span class="st">"axes.spines.right"</span>: <span class="va">False</span>,</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 바꿔 볼 수 있는 설정값</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>FREQ <span class="op">=</span> <span class="fl">2.0</span>      <span class="co"># 1초에 몇 번 오르내리나 (Hz)</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 계산하고 글자로 찍기</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">500</span>)               <span class="co"># 0초부터 1초까지 점 500개</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> FREQ <span class="op">*</span> t)         <span class="co"># 사인 곡선</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! VS Code에서 Python이 돌아갑니다."</span>)</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"points : </span><span class="sc">{</span><span class="bu">len</span>(t)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"FREQ   : </span><span class="sc">{</span>FREQ<span class="sc">}</span><span class="ss"> Hz  → 1초 동안 </span><span class="sc">{</span>FREQ<span class="sc">:g}</span><span class="ss">번 오르내림"</span>)</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"max    : </span><span class="sc">{</span>y<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 그림 그리기</span></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.2</span>))</span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>ax.plot(t, y, color<span class="op">=</span><span class="st">"#2b59c3"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"time (s)"</span>)</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"value"</span>)</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"FREQ = </span><span class="sc">{</span>FREQ<span class="sc">:g}</span><span class="ss"> Hz 사인 곡선"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>plt.show()   <span class="co"># 그림 창이 뜹니다. 창을 닫으면 프로그램이 끝납니다.</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="mylabs/p0_hello.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 첫 실습 · VS Code에서 코드 돌려 보기</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 전체 과정:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   숫자 몇 개 계산해서 글자로 찍기 (print)  → 아래 TERMINAL에 보임</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         ↓</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   사인(sin) 곡선 그리기 (plot)            → 그림 창이 따로 뜸</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 이 파일이 잘 돌면 준비 끝입니다.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys                         <span class="co"># 지금 실행 중인 Python의 정보</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np                 <span class="co"># 숫자 계산 도구</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt    <span class="co"># 그래프 도구</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 0. 그림 설정 (한글 글꼴) — 모든 실습 파일 맨 위에 똑같이 있습니다</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.family"</span>: <span class="st">"Malgun Gothic"</span>, <span class="st">"axes.unicode_minus"</span>: <span class="va">False</span>, <span class="st">"font.size"</span>: <span class="dv">11</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"legend.frameon"</span>: <span class="va">False</span>, <span class="st">"axes.spines.top"</span>: <span class="va">False</span>, <span class="st">"axes.spines.right"</span>: <span class="va">False</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 바꿔 볼 수 있는 설정값</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>FREQ <span class="op">=</span> <span class="fl">2.0</span>      <span class="co"># 1초에 몇 번 오르내리나 (Hz)</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 계산하고 글자로 찍기</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">500</span>)               <span class="co"># 0초부터 1초까지 점 500개</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> FREQ <span class="op">*</span> t)         <span class="co"># 사인 곡선</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! VS Code에서 Python이 돌아갑니다."</span>)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"python : </span><span class="sc">{</span>sys<span class="sc">.</span>executable<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>sys<span class="sc">.</span>version<span class="sc">.</span>split()[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">)"</span>)   <span class="co"># p0_install.py가 찍은 줄과 같아야 함</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"points : </span><span class="sc">{</span><span class="bu">len</span>(t)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"FREQ   : </span><span class="sc">{</span>FREQ<span class="sc">}</span><span class="ss"> Hz  → 1초 동안 </span><span class="sc">{</span>FREQ<span class="sc">:g}</span><span class="ss">번 오르내림"</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"max    : </span><span class="sc">{</span>y<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 그림 그리기</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.2</span>))</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>ax.plot(t, y, color<span class="op">=</span><span class="st">"#2b59c3"</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"time (s)"</span>)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"value"</span>)</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"FREQ = </span><span class="sc">{</span>FREQ<span class="sc">:g}</span><span class="ss"> Hz 사인 곡선"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>plt.show()   <span class="co"># 그림 창이 뜹니다. 창을 닫으면 프로그램이 끝납니다.</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <!-- /LAB -->
@@ -1028,6 +1200,7 @@ C:\Users\내이름&gt;</code></pre>
 <div class="screen vscode" data-screen-title="VS Code 아래 TERMINAL — p0_hello.py 실행 결과">
 <pre class="text"><code>PS C:\Users\내이름\Desktop\ion-projects-code&gt; &amp; python mylabs/p0_hello.py
 hello! VS Code에서 Python이 돌아갑니다.
+python : C:\Users\내이름\AppData\Local\Programs\Python\Python312\python.exe (3.12.10)
 points : 500
 FREQ   : 2.0 Hz  → 1초 동안 2번 오르내림
 max    : 1.00
@@ -1038,7 +1211,7 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 <figure class="fig plot figure">
 <img src="img/lab/p0_hello_fig1.png" alt="0초부터 1초까지 두 번 오르내리는 파란 사인 곡선" class="figure-img">
 <figcaption>
-<b>그림 1.</b> 따로 뜨는 그림 창의 모습. 1초 동안 두 번 오르내리는 사인 곡선입니다(FREQ = 2).
+<b>그림 2.</b> 따로 뜨는 그림 창의 모습. 1초 동안 두 번 오르내리는 사인 곡선입니다(FREQ = 2).
 </figcaption>
 </figure>
 <div class="lab-try">
@@ -1046,8 +1219,11 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 </div>
 <div class="ifnot">
 <ul>
-<li>▷ 단추가 안 보임 → Python extension이 설치되지 않았거나 파일 이름이 <code>.py</code>로 끝나지 않는 것. 위 카드를 다시 확인.</li>
-<li><code>ModuleNotFoundError: No module named 'numpy'</code> → <a href="#pip">package 설치</a>를 안 했거나, VS Code가 다른 Python을 쓰는 것. <strong>Ctrl+Shift+P</strong> → <code>Python: Select Interpreter</code> → 목록에서 <code>Python 3.12</code>(설치한 버전)를 고르고 다시 ▷.</li>
+<li>▷ 단추가 안 보임 → Python extension이 설치되지 않았거나 파일 이름이 <code>.py</code>로 끝나지 않는 것. 위 카드를 다시 확인. 단추 대신 편집기 안에서 <strong>마우스 오른쪽 단추 → Run Python → Run Python File in Terminal</strong>도 같습니다.</li>
+<li>▷를 눌렀는데 TERMINAL이 아니라 <strong>OUTPUT (출력)</strong> 칸에 글자가 나오거나 <code>[Running] python -u …</code>로 시작함 → 다른 실행 확장(Code Runner의 Run Code)이 눌린 것입니다. ▷ 옆 <strong>⌄</strong>를 눌러 <strong>Run Python File</strong>을 고르면 그다음부터 그 방법이 ▷에 붙습니다.</li>
+<li>⌄에서 <strong>Debug Python File</strong>을 눌렀음 → 실행은 되지만 느리고 화면 위에 작은 막대가 생깁니다. 끝나면 막대의 빨간 네모(Stop)를 누르고, 다음부터 <strong>Run Python File</strong>을 씁니다.</li>
+<li>TERMINAL의 <code>python :</code> 경로가 <code>p0_install.py</code>가 찍은 경로와 다름 → ▷가 다른 Python을 쓰는 중입니다. <a href="#pip">Python interpreter 고르기</a>에서 같은 것을 고릅니다.</li>
+<li><code>ModuleNotFoundError: No module named 'numpy'</code> → <a href="#pip">package 설치</a>를 안 했거나, VS Code가 설치한 것과 다른 Python을 쓰는 것. 지금 고른 Python으로 <code>p0_install.py</code>를 한 번 더 ▷ 하면 해결됩니다.</li>
 <li>그림 창이 안 보임 → 작업 표시줄의 Python 로켓/깃털 아이콘을 누릅니다. 그림 창을 닫기 전에는 다음 실행이 안 되니, 창을 꼭 닫습니다.</li>
 <li>한글이 네모(□)로 나옴 → 코드 맨 위 그림 설정의 <code>"Malgun Gothic"</code>이 지워졌는지 봅니다.</li>
 </ul>
@@ -1077,17 +1253,17 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 <p>TERMINAL의 글자는 마우스로 끌어 칠한 뒤 <strong>Ctrl+C</strong>로 복사합니다. 메모장·메신저·AI 채팅 창에 붙여 넣고, "어느 페이지의 어느 실습에서, 어떤 파일을 ▷ 했더니, 이 글자가 나왔다"를 함께 적습니다. 더 자세한 양식은 <a href="../projects/index.html#help">막혔을 때 질문하는 법</a>에 있습니다.</p>
 </section>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="(참고) 명령 프롬프트로 하던 예전 방식">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-note callout-titled" title="(선택) TERMINAL에서 명령으로 실행하기">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">노트</span>(참고) 명령 프롬프트로 하던 예전 방식
+<span class="screen-reader-only">노트</span>(선택) TERMINAL에서 명령으로 실행하기
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>VS Code의 TERMINAL은 명령 프롬프트와 같습니다. P2–P4의 일부 단계처럼 "명령 한 줄"이 필요할 때는 TERMINAL에 <code>cd python</code>을 넣어 python 폴더로 들어간 뒤(줄 끝이 <code>\python&gt;</code>), 페이지의 명령을 붙여 넣으면 됩니다.</p>
 </div>

@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../assets/projects.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -695,48 +695,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">이 페이지</h2>
-   
-  <ul>
-  <li><a href="#why" id="toc-why" class="nav-link active" data-scroll-target="#why">이야기부터: 왜 "누름"이고 왜 "끝에서 몇 번만"인가</a></li>
-  <li><a href="#insensor" id="toc-insensor" class="nav-link" data-scroll-target="#insensor">무엇을 in-sensor라고 부르나</a></li>
-  <li><a href="#c-prep" id="toc-c-prep" class="nav-link" data-scroll-target="#c-prep">준비: VS Code와 mylabs 폴더</a></li>
-  <li><a href="#c-mock" id="toc-c-mock" class="nav-link" data-scroll-target="#c-mock">장비 없이 먼저: PC만으로 분석 연습 (40분)</a>
-  <ul class="collapse">
-  <li><a href="#실습-1.-리듬-일정-만들기-p4_1_rhythm.py" id="toc-실습-1.-리듬-일정-만들기-p4_1_rhythm.py" class="nav-link" data-scroll-target="#실습-1.-리듬-일정-만들기-p4_1_rhythm.py">실습 1. 리듬 일정 만들기 (<code>p4_1_rhythm.py</code>)</a></li>
-  <li><a href="#실습-2.-가짜-소자를-리듬대로-누른-척하기-p4_2_mock.py" id="toc-실습-2.-가짜-소자를-리듬대로-누른-척하기-p4_2_mock.py" class="nav-link" data-scroll-target="#실습-2.-가짜-소자를-리듬대로-누른-척하기-p4_2_mock.py">실습 2. 가짜 소자를 리듬대로 누른 척하기 (<code>p4_2_mock.py</code>)</a></li>
-  <li><a href="#실습-3.-easy-cue-점검-리듬마다-누른-방식이-같았나-p4_3_cues.py" id="toc-실습-3.-easy-cue-점검-리듬마다-누른-방식이-같았나-p4_3_cues.py" class="nav-link" data-scroll-target="#실습-3.-easy-cue-점검-리듬마다-누른-방식이-같았나-p4_3_cues.py">실습 3. easy cue 점검: 리듬마다 누른 방식이 같았나 (<code>p4_3_cues.py</code>)</a></li>
-  <li><a href="#실습-4.-리듬-맞히기-끝의-전류-몇-개만-보고-p4_4_classify.py" id="toc-실습-4.-리듬-맞히기-끝의-전류-몇-개만-보고-p4_4_classify.py" class="nav-link" data-scroll-target="#실습-4.-리듬-맞히기-끝의-전류-몇-개만-보고-p4_4_classify.py">실습 4. 리듬 맞히기: 끝의 전류 몇 개만 보고 (<code>p4_4_classify.py</code>)</a></li>
-  </ul></li>
-  <li><a href="#c0" id="toc-c0" class="nav-link" data-scroll-target="#c0">P4.0. 눌러서 반응이 있는가</a></li>
-  <li><a href="#c1" id="toc-c1" class="nav-link" data-scroll-target="#c1">P4.1. 소자 구조 (가설)</a></li>
-  <li><a href="#c2" id="toc-c2" class="nav-link" data-scroll-target="#c2">P4.2. control — 무엇과 비교해야 "이온 때문"이라고 말할 수 있나</a></li>
-  <li><a href="#c3" id="toc-c3" class="nav-link" data-scroll-target="#c3">P4.3. 자극 장치: servo로 누르고 load cell로 힘을 잰다</a>
-  <ul class="collapse">
-  <li><a href="#부품" id="toc-부품" class="nav-link" data-scroll-target="#부품">부품</a></li>
-  <li><a href="#연결" id="toc-연결" class="nav-link" data-scroll-target="#연결">연결</a></li>
-  <li><a href="#firmware-올리기와-calibration기록" id="toc-firmware-올리기와-calibration기록" class="nav-link" data-scroll-target="#firmware-올리기와-calibration기록">firmware 올리기와 calibration·기록</a></li>
-  <li><a href="#실습-5.-tapper-시험-리듬-한-번-누르고-힘-곡선-보기-p4_5_tap.py" id="toc-실습-5.-tapper-시험-리듬-한-번-누르고-힘-곡선-보기-p4_5_tap.py" class="nav-link" data-scroll-target="#실습-5.-tapper-시험-리듬-한-번-누르고-힘-곡선-보기-p4_5_tap.py">실습 5. tapper 시험: 리듬 한 번 누르고 힘 곡선 보기 (<code>p4_5_tap.py</code>)</a></li>
-  </ul></li>
-  <li><a href="#c4" id="toc-c4" class="nav-link" data-scroll-target="#c4">P4.4. 기본 특성</a></li>
-  <li><a href="#c5" id="toc-c5" class="nav-link" data-scroll-target="#c5">P4.5. 리듬 과제: "끝에서 몇 번만 읽기"</a>
-  <ul class="collapse">
-  <li><a href="#리듬과-easy-cue-통제" id="toc-리듬과-easy-cue-통제" class="nav-link" data-scroll-target="#리듬과-easy-cue-통제">리듬과 easy cue 통제</a></li>
-  <li><a href="#끝은-누가-알려-주나" id="toc-끝은-누가-알려-주나" class="nav-link" data-scroll-target="#끝은-누가-알려-주나">'끝'은 누가 알려 주나</a></li>
-  <li><a href="#실행-실물-검증-대기" id="toc-실행-실물-검증-대기" class="nav-link" data-scroll-target="#실행-실물-검증-대기">실행 (실물 검증 대기)</a></li>
-  <li><a href="#실습-6.-리듬-trial-돌리기-tapper로-누르며-전류-기록-p4_6_run.py" id="toc-실습-6.-리듬-trial-돌리기-tapper로-누르며-전류-기록-p4_6_run.py" class="nav-link" data-scroll-target="#실습-6.-리듬-trial-돌리기-tapper로-누르며-전류-기록-p4_6_run.py">실습 6. 리듬 trial 돌리기: tapper로 누르며 전류 기록 (<code>p4_6_run.py</code>)</a></li>
-  <li><a href="#결과-표" id="toc-결과-표" class="nav-link" data-scroll-target="#결과-표">결과 표</a></li>
-  </ul></li>
-  <li><a href="#c6" id="toc-c6" class="nav-link" data-scroll-target="#c6">P4.6. 소자 여러 개 (선택)</a></li>
-  <li><a href="#p4.7.-board로-판단하기-선택-설계만-있음-구현-안-됨" id="toc-p4.7.-board로-판단하기-선택-설계만-있음-구현-안-됨" class="nav-link" data-scroll-target="#p4.7.-board로-판단하기-선택-설계만-있음-구현-안-됨">P4.7. board로 판단하기 (선택 · 설계만 있음, 구현 안 됨)</a></li>
-  <li><a href="#결과로-남길-것" id="toc-결과로-남길-것" class="nav-link" data-scroll-target="#결과로-남길-것">결과로 남길 것</a></li>
-  <li><a href="#문제-해결" id="toc-문제-해결" class="nav-link" data-scroll-target="#문제-해결">문제 해결</a></li>
-  <li><a href="#ai에게-맡길-때" id="toc-ai에게-맡길-때" class="nav-link" data-scroll-target="#ai에게-맡길-때">AI에게 맡길 때</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -762,7 +721,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script>document.documentElement.classList.add("proj-page")</script>
 <script src="../assets/projects.js" defer=""></script>
-<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "P1", "title": "컴퓨터만으로 하는 첫 실험", "page": "s.html"}, {"id": "a", "letter": "P2", "title": "소스미터로 내 소자 재기", "page": "a.html"}, {"id": "b", "letter": "P3", "title": "손바닥 보드로 만드는 측정·판단 장치", "page": "b.html"}, {"id": "c", "letter": "P4", "title": "눌러서 쓰는 소자: 누름의 리듬이 남는가", "page": "c.html"}, {"id": "e", "letter": "P5", "title": "근육 신호(EMG)와 physical reservoir", "page": "e.html"}], "steps": [{"id": "s1", "project": "s", "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까", "page": "s.html", "anchor": "s1", "time": "40분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "s2", "project": "s", "title": "P1.2. 기억은 길수록 좋을까", "page": "s.html", "anchor": "s2", "time": "40분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d09"], "optional": false}, {"id": "a0", "project": "a", "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "30–60분", "needs": "PC", "kind": "mock", "days": ["d06", "d08"], "optional": false}, {"id": "a0r", "project": "a", "title": "P2.0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"], "optional": false}, {"id": "a1", "project": "a", "title": "P2.1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"], "optional": false}, {"id": "a2", "project": "a", "title": "P2.2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"], "optional": false}, {"id": "a3", "project": "a", "title": "P2.3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}, {"id": "b1", "project": "b", "title": "P3.1. NU40 DK에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "NU40 DK, 데이터용 USB 케이블", "kind": "실물", "days": [], "optional": false}, {"id": "b1a", "project": "b", "title": "P3.1a. 버튼 리듬을 CSV로 남기기", "page": "b.html", "anchor": "b1a", "time": "30–60분", "needs": "NU40 DK (키트 조도 모듈은 선택)", "kind": "실물", "days": [], "optional": false}, {"id": "b1b", "project": "b", "title": "P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가", "page": "b.html", "anchor": "b1b", "time": "1–2시간", "needs": "NU40 DK, P3.1a 기록", "kind": "실물", "days": [], "optional": false}, {"id": "b2", "project": "b", "title": "P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "NU40 DK, DAC·ADC 모듈", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b4", "project": "b", "title": "P3.4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"], "optional": false}, {"id": "b5", "project": "b", "title": "P3.5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "P3.4 회로, 소자", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b6", "project": "b", "title": "P3.6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "P3.5 결과", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b7", "project": "b", "title": "P3.7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b8", "project": "b", "title": "P3.8. (선택) ECG 신호로 도전", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}, {"id": "c0", "project": "c", "title": "P4.0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (mock 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 mock)", "kind": "실측", "days": [], "optional": false}, {"id": "c2", "project": "c", "title": "P4.1–P4.2. 소자 구조와 control", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": [], "optional": false}, {"id": "c3", "project": "c", "title": "P4.3–P4.4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "servo, load cell, 보드", "kind": "실물", "days": [], "optional": false}, {"id": "c5", "project": "c", "title": "P4.5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "P4.3 장치, 소자", "kind": "실측", "days": ["d08"], "optional": false}, {"id": "e1", "project": "e", "title": "P5.1. EMG를 숫자로: sampling rate와 data rate", "page": "e.html", "anchor": "e1", "time": "30–45분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "e2", "project": "e", "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기", "page": "e.html", "anchor": "e2", "time": "40–60분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d08"], "optional": false}]}</script>
+<script id="project-data" type="application/json">{"projects": [{"id": "s", "letter": "P1", "title": "컴퓨터만으로 하는 첫 실험", "page": "s.html"}, {"id": "a", "letter": "P2", "title": "소스미터로 내 소자 재기", "page": "a.html"}, {"id": "b", "letter": "P3", "title": "손바닥 보드로 만드는 측정·판단 장치", "page": "b.html"}, {"id": "c", "letter": "P4", "title": "눌러서 쓰는 소자: 누름의 리듬이 남는가", "page": "c.html"}, {"id": "e", "letter": "P5", "title": "근육 신호(EMG)와 physical reservoir", "page": "e.html"}], "steps": [{"id": "s1", "project": "s", "title": "P1.1. 신호를 숫자로 바꿀 때, 어디까지 줄여도 될까", "page": "s.html", "anchor": "s1", "time": "학습 약 60분 (실행은 실습마다 수 초)", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "s2", "project": "s", "title": "P1.2. 기억은 길수록 좋을까", "page": "s.html", "anchor": "s2", "time": "학습 약 50분 (실행은 실습마다 수 초–30초)", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d09"], "optional": false}, {"id": "a0", "project": "a", "title": "P2.0. mock 장비로 한 바퀴 (장비 없음)", "page": "a.html", "anchor": "a0", "time": "학습 40–60분 (실행은 실습마다 수 초–30초)", "needs": "PC", "kind": "mock", "days": ["d06", "d08"], "optional": false}, {"id": "a0r", "project": "a", "title": "P2.0R. 실제 소스미터로 저항과 RC", "page": "a.html", "anchor": "a0r", "time": "1–2시간", "needs": "소스미터, 저항, 커패시터", "kind": "실측", "days": ["d04"], "optional": false}, {"id": "a1", "project": "a", "title": "P2.1. 소자 특성 측정", "page": "a.html", "anchor": "a1", "time": "여러 날", "needs": "소스미터, 소자", "kind": "실측", "days": ["d06", "d09"], "optional": false}, {"id": "a2", "project": "a", "title": "P2.2. 끝만 읽어도 앞을 기억하는가", "page": "a.html", "anchor": "a2", "time": "반나절–하루", "needs": "소스미터, 소자", "kind": "실측", "days": ["d08", "d11"], "optional": false}, {"id": "a3", "project": "a", "title": "P2.3. (선택) ECG 박동으로 확장", "page": "a.html", "anchor": "a3", "time": "여러 날", "needs": "소스미터, 소자, 공개 ECG 자료", "kind": "실측", "days": ["d05"], "optional": true}, {"id": "b1", "project": "b", "title": "P3.1. NU40 DK에 첫 코드 올리기", "page": "b.html", "anchor": "b1", "time": "1–2시간", "needs": "NU40 DK, 데이터용 USB 케이블", "kind": "실물", "days": [], "optional": false}, {"id": "b1a", "project": "b", "title": "P3.1a. 버튼 리듬을 CSV로 남기기", "page": "b.html", "anchor": "b1a", "time": "30–60분", "needs": "NU40 DK (키트 조도 모듈은 선택)", "kind": "실물", "days": [], "optional": false}, {"id": "b1b", "project": "b", "title": "P3.1b. 같은 끝, 다른 순서 — 기억이 필요한가", "page": "b.html", "anchor": "b1b", "time": "1–2시간", "needs": "NU40 DK, P3.1a 기록", "kind": "실물", "days": [], "optional": false}, {"id": "b2", "project": "b", "title": "P3.2–P3.3. DAC로 전압 만들고 ADC로 읽기", "page": "b.html", "anchor": "b2", "time": "반나절", "needs": "NU40 DK, DAC·ADC 모듈", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b4", "project": "b", "title": "P3.4. 소자 구동·전류 측정 회로", "page": "b.html", "anchor": "b4", "time": "하루 이상", "needs": "op-amp, 저항·RC", "kind": "실물", "days": ["d04"], "optional": false}, {"id": "b5", "project": "b", "title": "P3.5. 보드로 레저버 데이터 모으기", "page": "b.html", "anchor": "b5", "time": "하루", "needs": "P3.4 회로, 소자", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b6", "project": "b", "title": "P3.6. PC 없이 판단하고 알리기", "page": "b.html", "anchor": "b6", "time": "하루", "needs": "P3.5 결과", "kind": "실물", "days": ["d08"], "optional": false}, {"id": "b7", "project": "b", "title": "P3.7. 시간과 에너지를 공정하게 재기", "page": "b.html", "anchor": "b7", "time": "하루", "needs": "USB 전력 측정기", "kind": "실물", "days": ["d05"], "optional": false}, {"id": "b8", "project": "b", "title": "P3.8. (선택) ECG 신호로 도전", "page": "b.html", "anchor": "b8", "time": "여러 날", "needs": "ECG 시뮬레이터 또는 재생 장치", "kind": "실물", "days": ["d05"], "optional": true}, {"id": "c0", "project": "c", "title": "P4.0. 눌러서 반응이 있는가", "page": "c.html", "anchor": "c0", "time": "1–2시간 (mock 분석은 30분)", "needs": "소스미터, 추 (없으면 PC만으로 mock)", "kind": "실측", "days": [], "optional": false}, {"id": "c2", "project": "c", "title": "P4.1–P4.2. 소자 구조와 control", "page": "c.html", "anchor": "c1", "time": "여러 날", "needs": "압력용 소자, 대조 막", "kind": "실측", "days": [], "optional": false}, {"id": "c3", "project": "c", "title": "P4.3–P4.4. 자극 장치와 기본 특성", "page": "c.html", "anchor": "c3", "time": "여러 날", "needs": "servo, load cell, 보드", "kind": "실물", "days": [], "optional": false}, {"id": "c5", "project": "c", "title": "P4.5. 리듬 과제: 끝에서 몇 번만 읽기", "page": "c.html", "anchor": "c5", "time": "여러 날", "needs": "P4.3 장치, 소자", "kind": "실측", "days": ["d08"], "optional": false}, {"id": "e1", "project": "e", "title": "P5.1. EMG를 숫자로: sampling rate와 data rate", "page": "e.html", "anchor": "e1", "time": "학습 30–45분", "needs": "PC", "kind": "mock", "days": ["d05"], "optional": false}, {"id": "e2", "project": "e", "title": "P5.2. 소자가 먼저 흔적으로: 끝만 천천히 읽기", "page": "e.html", "anchor": "e2", "time": "학습 40–60분", "needs": "PC", "kind": "mock", "days": ["d04", "d07", "d08"], "optional": false}]}</script>
 <div class="pj-hero">
 <div class="pj-hero-art">
 <p><img src="img/p4-overview.svg" class="img-fluid" alt="왼쪽: servo(모터)의 팔 끝에 실리콘 팁이 달려 소자를 누르고, 소자 아래 load cell이 힘을 잰다. 오른쪽: ① 누름 리듬(언제 눌렀나), ② 소자 전류에 누른 흔적이 쌓이고 새어 나가는 곡선과 '끝에서 몇 번만 읽기' 표시"></p>
@@ -2661,12 +2620,74 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 </section>
 <section id="거치대에-올리기" class="level4 howstep">
 <h4 class="anchored" data-anchor-id="거치대에-올리기">거치대에 올리기</h4>
-<p><span class="do">할 일</span> load cell 막대의 한쪽 끝을 아크릴판에 고정하고, 다른 쪽 끝 위에 소자를 놓습니다. servo는 팔 끝의 실리콘 팁이 소자 <strong>바로 위</strong>에 오도록 고정합니다. 팁이 내려왔을 때 소자의 활성 면적(테이프 구멍) 안에 닿아야 합니다.</p>
+<p><span class="do">할 일</span> load cell 막대의 한쪽 끝을 아크릴판에 고정하고, 다른 쪽 끝 위에 소자를 놓습니다. servo는 팔 끝의 실리콘 팁이 소자 <strong>바로 위</strong>에 오도록 고정합니다. 팁이 내려왔을 때 소자의 활성 면적(테이프 구멍) 안에 닿아야 합니다. 어느 쪽을 고정하고 어느 쪽으로 향하게 하는지는 바로 아래 <a href="#c3-mount">조립</a>에 있습니다.</p>
 </section>
 </div>
 </section>
-<section id="firmware-올리기와-calibration기록" class="level3">
-<h3 class="anchored" data-anchor-id="firmware-올리기와-calibration기록">firmware 올리기와 calibration·기록</h3>
+<section id="c3-mount" class="level3">
+<h3 class="anchored" data-anchor-id="c3-mount">조립: 표로는 안 보이는 방향과 힘의 길</h3>
+<p>배선 표는 "어느 선을 어디에"만 알려 줍니다. 누르는 장치에서는 <strong>어느 쪽을 단단히 고정하고, 어느 쪽이 움직이게 두는지</strong>가 더 중요합니다. 부엌 저울의 다리 하나가 바닥에 걸리면 올린 무게가 다르게 나오는 것과 같습니다. 아래 그림은 개념도이고, 이 조립은 아직 실물로 해 보지 않았습니다 [실물 미검증].</p>
+<figure class="fig figure">
+<img src="img/p4-mount.svg" alt="옆에서 본 tapper 개념도. 바닥판에 세운 기둥에 servo가 붙어 있고, servo 축의 horn 팔 끝 아래에 빨간 팁이 소자를 향한다. 소자는 위판 위에, 위판은 받침을 거쳐 load cell 막대의 받는 끝에, 막대의 다른 쪽 고정 끝은 받침을 거쳐 바닥판에 나사로 고정. 막대의 화살표 스티커는 아래를 향한다. load cell 선 4가닥은 HX711로, HX711과 servo 선은 NU40 DK로 실선. 파란 점선 화살은 board에서 servo로 각도 명령, HX711에서 board로 힘 숫자. 주황 번호 1–5가 힘의 길. 아래 작은 그래프: 각도를 60도에서 42도로 내리면 47도 근처에서 힘이 noise의 3배 선을 넘는다" class="figure-img">
+<figcaption>
+<b>개념도 (실제 제작 사진 아님).</b> 옆에서 본 tapper입니다. <b>실선</b>은 몸체끼리의 연결과 전선(화살촉 없음), <b>파란 점선 화살</b>은 정보(board → servo 각도 명령, HX711 → board 힘 숫자), <b>굵은 주황 화살과 번호 ①–⑤</b>는 힘이 지나는 길입니다. 아래 작은 그래프는 각도를 내리며 힘이 noise보다 뚜렷이 커지는 첫 각도(접촉점)를 찾는 모양을 보인 예이며, 실측이 아닙니다.
+</figcaption>
+</figure>
+<p><strong>힘의 길.</strong> servo가 낸 힘은 ① horn → ② 팁 → ③ 소자 → ④ 위판과 load cell의 받는 끝 → 막대가 아주 조금 휨 → ⑤ 고정 끝 → 바닥판 → 기둥 → 다시 servo로 돌아오는 고리입니다. load cell은 이 고리에서 <strong>막대가 휘는 정도</strong>만 잽니다. 그래서 고리 중 한 곳이라도 흔들리거나 힘이 다른 길로 새면(예: 위판이 바닥판에 닿음, 기둥이 휨) 소자에 실제로 걸린 힘과 잰 힘이 달라집니다.</p>
+<div class="howsteps">
+<section id="load-cell-고정-고정-끝과-받는-끝" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="load-cell-고정-고정-끝과-받는-끝">load cell 고정: 고정 끝과 받는 끝</h4>
+<p><span class="do">할 일</span></p>
+<ol type="1">
+<li>막대의 한쪽 끝을 <strong>고정 끝</strong>으로 정합니다. 받침(spacer, 몇 mm 두께의 판이나 너트)을 끼워 바닥판에 나사 2개로 조입니다.</li>
+<li>다른 쪽 끝이 <strong>받는 끝</strong>입니다. 받침을 끼워 위판(아크릴)에 나사 2개로 조입니다. 소자는 이 위판 위, 받는 끝 바로 위에 놓습니다.</li>
+<li>막대에 붙은 <strong>화살표 스티커가 아래</strong>(누르는 방향)를 향하게 둡니다. 흔한 조립 안내는 스티커가 없는 쪽을 고정 끝으로 둡니다 [<a href="https://shillehtek.com/blogs/news/build-an-arduino-digital-scale-with-a-5kg-load-cell-and-hx711-amplifier">예: ShillehTek 조립 안내</a>]. 내 제품의 설명서가 우선입니다 [제품 설명서 확인].</li>
+<li>가운데 흰 부분(strain gauge, 휘는 정도를 재는 얇은 막)은 아무 데도 닿지 않게 둡니다. 선은 테이프로 바닥판에 붙여, 누를 때 선이 막대를 당기지 않게 합니다.</li>
+</ol>
+<div class="ifnot">
+<p>위판을 손가락으로 살짝 누를 때 위판이나 막대가 바닥판에 닿으면 받침이 너무 얇습니다. 화살표가 위를 향하게 달면 힘을 줄 때 숫자가 거꾸로 움직일 수 있습니다.</p>
+</div>
+</section>
+<section id="servo-몸통과-팁-높이" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="servo-몸통과-팁-높이">servo 몸통과 팁 높이</h4>
+<p><span class="do">할 일</span></p>
+<ol type="1">
+<li>servo는 load cell과 <strong>같은 바닥판</strong>에 세운 단단한 기둥(아크릴판, 알루미늄 앵글 등)에 나사로 고정합니다. 책상처럼 다른 곳에 따로 두면 힘의 고리가 책상을 거치면서 흔들립니다.</li>
+<li>servo 축(horn이 끼는 톱니 축)이 옆을 보게 고정합니다. 옆에서 볼 때 팔이 위아래로 돌게 됩니다.</li>
+<li>팁이 소자에 닿는 순간 horn 팔이 <strong>거의 수평</strong>이 되도록 기둥에서 servo 높이를 맞춥니다(받침을 끼우거나, 기둥의 긴 구멍으로 조절). 수평 근처에서는 팁이 거의 위아래로만 움직여 소자 위에서 미끄러지지 않습니다.</li>
+<li>팁은 팔 끝의 <strong>아래쪽</strong>에 붙이고, 소자의 활성 면적(테이프 구멍) 가운데 위에 오게 합니다.</li>
+</ol>
+</section>
+<section id="horn-방향-맞추기-firmware를-올린-뒤" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="horn-방향-맞추기-firmware를-올린-뒤">horn 방향 맞추기 (firmware를 올린 뒤)</h4>
+<p><span class="do">할 일</span> 소자는 아직 올리지 않습니다.</p>
+<ol type="1">
+<li><a href="#c3-fw">C_tapper를 올리면</a> 켤 때 servo가 UP 자세(<code>UP = 60</code>)로 갑니다. horn은 <strong>그다음에</strong> 끼웁니다. 소자 쪽을 향하고 수평보다 조금 위를 보게 끼운 뒤 가운데 나사로 조입니다.</li>
+<li>Serial Monitor에 <code>ANGLE,55</code> → Enter. 팔이 <strong>아래로</strong> 조금 내려가면 방향이 맞습니다. 위로 가면 servo를 반대 방향으로 다시 고정합니다. 이 페이지의 <code>UP = 60</code>, <code>DOWN = 42</code>는 "숫자가 작을수록 내려감"을 가정한 예입니다.</li>
+<li><code>ANGLE,60</code>으로 다시 올립니다.</li>
+</ol>
+<div class="ifnot">
+<p>horn이 축에서 헛돌면 가운데 나사가 풀린 것입니다. 팔 끝이 처지거나 떨리면 팔이 너무 길거나 얇은 것이니, 짧고 두꺼운 horn으로 바꿉니다.</p>
+</div>
+</section>
+<section id="영점과-접촉점-찾기-firmware를-올린-뒤" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="영점과-접촉점-찾기-firmware를-올린-뒤">영점과 접촉점 찾기 (firmware를 올린 뒤)</h4>
+<p><span class="do">할 일</span></p>
+<ol type="1">
+<li><strong>영점:</strong> 위판까지 조립하고, 소자는 내려놓고, 팁은 위에 떠 있는 상태(<code>ANGLE,60</code>)에서 <a href="#c3-fw">TARE</a>를 보냅니다. 위판 무게까지 0이 됩니다. Upload·RESET·USB를 다시 꽂을 때마다 다시 합니다.</li>
+<li><strong>noise:</strong> 소자를 올리고, <a href="#c3-angle">각도 → 힘 표</a>와 같은 방법(<code>DOWN</code>을 바꿔 Upload → 실습 5)으로 <code>DOWN = 60</code>(닿지 않음)일 때의 peak force를 봅니다. 안 눌러도 나오는 이 흔들림이 noise입니다.</li>
+<li><strong>접촉점:</strong> <code>DOWN</code>을 60°에서 <strong>2°씩</strong>, 가까워지면 <strong>1°씩</strong> 내리며 같은 방법으로 peak force를 봅니다. 힘이 noise의 약 <strong>3배를 처음 넘는 각도</strong>가 접촉점입니다. 눈으로 본 "막 닿는 각도"와 함께 적습니다.</li>
+<li>실제로 누를 각도(<code>DOWN</code>)는 접촉점보다 몇 도 더 내린 곳에서, 원하는 힘이 나오는 각도로 <a href="#c3-angle">각도 → 힘 표</a>에서 고릅니다.</li>
+</ol>
+<p>지금 firmware에는 "지금 힘 읽기" 명령이 없어서 각도마다 Upload를 다시 해야 합니다. "noise의 3배"는 흔히 쓰는 어림 기준이며, 이 장치에서 정한 값이 아닙니다 [실물 미검증].</p>
+<div class="ifnot">
+<p>각도를 내려도 힘이 계속 noise 수준이면 팁이 소자에 닿지 않는 것입니다. 기둥에서 servo를 내립니다. <code>DOWN = 60</code>에서 이미 힘이 크면 팁이 처음부터 소자를 누르고 있는 것입니다. servo를 올립니다.</p>
+</div>
+</section>
+</div>
+</section>
+<section id="c3-fw" class="level3">
+<h3 class="anchored" data-anchor-id="c3-fw">firmware 올리기와 calibration·기록</h3>
 <p>이제 board에 할 일을 가르칩니다. 새 저울을 사면 먼저 영점을 맞추고, 무게를 아는 추로 눈금이 맞는지 확인하는 것처럼 합니다. 순서는 이렇습니다: board에 <code>C_tapper</code> firmware를 올리기 → 영점 맞추기 → load cell의 숫자를 뉴턴(N)으로 바꾸는 계수 구하기 → 리듬 한 번 눌러 힘 곡선 보기(실습 5) → servo 각도가 실제로 몇 N인지 표로 만들기.</p>
 <div class="term">
 <p><strong>firmware:</strong> board 안에 올려 두는 프로그램. <a href="../projects/b.html#b1">P3.1</a>에서 Arduino IDE로 올리는 법을 익혔습니다. 여기서는 <a href="code/firmware/C_tapper/C_tapper.ino">C_tapper</a>를 씁니다.</p>
@@ -3161,8 +3182,8 @@ PS C:\Users\내이름\Desktop\ion-projects-code&gt;</code></pre>
 </div>
 </div>
 <div class="howsteps">
-<section id="각도-힘-표-만들기-angle" class="level4 howstep">
-<h4 class="anchored" data-anchor-id="각도-힘-표-만들기-angle">"각도 → 힘" 표 만들기 (ANGLE)</h4>
+<section id="c3-angle" class="level4 howstep">
+<h4 class="anchored" data-anchor-id="c3-angle">"각도 → 힘" 표 만들기 (ANGLE)</h4>
 <p>servo에게는 "몇 N으로 눌러라"가 아니라 "몇 도까지 내려라"만 말할 수 있습니다. 그래서 각도마다 실제로 몇 N이 되는지 표를 만들어 둡니다.</p>
 <p><span class="do">할 일</span> 먼저 소자를 load cell 위 자리에 놓습니다.</p>
 <ol type="1">

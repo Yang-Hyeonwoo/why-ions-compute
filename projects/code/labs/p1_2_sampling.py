@@ -7,7 +7,7 @@
 #         ↓
 #   FS Hz로 값 집기  = 1/FS 초마다 점 하나만 남기기
 #         ↓
-#   R 봉우리(박동)마다 "0.5 mV 선 위에 점이 찍혔나?" 세기
+#   R 봉우리(박동)마다 "기준선보다 0.5 mV 높은 선 위에 점이 찍혔나?" 세기
 #         ↓
 #   그래프: 매끈한 원래 신호 vs 컴퓨터가 가진 점들
 #
@@ -33,7 +33,7 @@ plt.rcParams.update({
 # ============================================================
 
 FS = 25            # sampling rate (Hz): 1초에 값을 몇 번 집나. 25, 50, 100, 250, 500 …
-THRESHOLD = 0.5    # 박동 판정 선 (mV). 실습 4에서 자세히
+THRESHOLD = 0.5    # 박동 판정 선: 봉우리 앞 기준선보다 몇 mV 높아야 하나. 실습 4에서 자세히
 SECONDS = 60       # 신호 길이 (초)
 SEED = 1
 
@@ -83,7 +83,7 @@ interval_ms = 1000 / FS
 
 
 # ============================================================
-# 4. 박동마다: R 봉우리 근처(±30 ms)에 0.5 mV 선을 넘는 점이 있나?
+# 4. 박동마다: R 봉우리 근처(±30 ms)에 "기준선 + 0.5 mV" 선을 넘는 점이 있나?
 # ============================================================
 #
 # 기준선이 흔들리므로, 봉우리 바로 앞 0.2초의 평균을 빼고 본다.
@@ -106,7 +106,7 @@ print("=" * 50)
 print(f"interval between samples : {interval_ms:.0f} ms")
 print(f"samples in {SECONDS} s           : {len(xs)}")
 print(f"true beats               : {len(beats)}")
-print(f"beats with a sample above {THRESHOLD} mV : {caught} / {len(beats)}")
+print(f"beats with a sample above baseline + {THRESHOLD} mV : {caught} / {len(beats)}")
 print(f"beats missed by sampling : {len(beats) - caught}")
 
 
@@ -135,7 +135,7 @@ for ax, (b, title) in zip(axs, pick):
 
     # 판정 선: 봉우리 앞 기준선 + THRESHOLD. 파란 점이 이 선을 넘어야 '박동'으로 잡힌다
     base_b = ecg[(t > b - 0.25) & (t < b - 0.05)].mean()
-    ax.axhline(base_b + THRESHOLD, color="#d9962a", ls="--", lw=1.3, label=f"판정 선 (+{THRESHOLD} mV)")
+    ax.axhline(base_b + THRESHOLD, color="#d9962a", ls="--", lw=1.3, label=f"판정 선 (기준선 + {THRESHOLD} mV)")
     ax.plot((t[m] - b) * 1000, ecg[m], color="0.75", lw=2, label="원래 신호")
     ax.vlines((ts[ms] - b) * 1000, -0.4, xs[ms], color="#2b59c3", lw=1)
     ax.plot((ts[ms] - b) * 1000, xs[ms], "o", color="#2b59c3", ms=5, label=f"집은 값 ({FS} Hz)")

@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../assets/projects.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -695,25 +695,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">이 페이지</h2>
-   
-  <ul>
-  <li><a href="#plan" id="toc-plan" class="nav-link active" data-scroll-target="#plan">내일 무엇부터</a></li>
-  <li><a href="#tonight" id="toc-tonight" class="nav-link" data-scroll-target="#tonight">오늘 밤 할 것 (30분)</a></li>
-  <li><a href="#upload" id="toc-upload" class="nav-link" data-scroll-target="#upload">공통: 코드 올리는 순서</a></li>
-  <li><a href="#pins" id="toc-pins" class="nav-link" data-scroll-target="#pins">공통: NU40 DK의 핀</a></li>
-  <li><a href="#m1" id="toc-m1" class="nav-link" data-scroll-target="#m1">미니 1. LED 깜빡이기 + 버튼</a></li>
-  <li><a href="#m2" id="toc-m2" class="nav-link" data-scroll-target="#m2">미니 2. ADC: 손잡이를 돌리며 숫자 보기</a></li>
-  <li><a href="#m3" id="toc-m3" class="nav-link" data-scroll-target="#m3">미니 3. R–C 충전 곡선으로 τ 재기</a></li>
-  <li><a href="#m4" id="toc-m4" class="nav-link" data-scroll-target="#m4">미니 4. 연구실 온습도를 휴대폰으로</a></li>
-  <li><a href="#m5" id="toc-m5" class="nav-link" data-scroll-target="#m5">미니 5. 맥박 파형 · 운동 횟수</a></li>
-  <li><a href="#m6" id="toc-m6" class="nav-link" data-scroll-target="#m6">미니 6. R–C로 "끝에서 한 번만 읽기"</a></li>
-  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">출처</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -809,7 +791,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><strong>module의 + 는 board의 3.3V 핀에만.</strong> NU40 DK 핀은 3.3 V까지만 받습니다. module을 5V 핀에서 켜면 신호선도 5 V가 되어 칩이 상할 수 있습니다. module이 "5V"라고 적혀 있어도 이 페이지의 module은 3.3 V에서 켭니다.</li>
+<li><strong>핀의 한계와 module의 전원 범위는 다른 문제입니다.</strong>
+<ul>
+<li><strong>board 핀이 받는 신호:</strong> NU40 DK 핀은 3.3 V 신호용이고 5 V를 견디지 못합니다(5 V tolerant 아님). 핀에 들어가는 신호는 항상 0–3.3 V.</li>
+<li><strong>module이 켜지는 전원 범위:</strong> module마다 다릅니다. 이 페이지의 module은 대부분 전원 전압을 나눠 내보내는 구조라, 3.3V 핀에서 켜면 출력도 3.3 V를 넘지 않습니다. 단, 모든 module이 3.3 V에서 동작하지는 않으므로 꽂기 전에 <a href="#volt">module 전압 표</a>를 봅니다.</li>
+</ul></li>
 <li><strong>USB를 뺀 채로 배선을 바꿉니다.</strong> 꽂을 때는 GND → 3.3V → 신호선 순서, 다 꽂고 눈으로 한 번 본 뒤 USB를 꽂습니다.</li>
 <li><strong>몸에 대는 센서(맥박)는 노트북을 배터리로 돌릴 때만.</strong> 충전기를 노트북에서 뽑고 씁니다. 콘센트에 연결된 장치와 몸이 전선으로 이어지지 않게 하기 위해서입니다.</li>
 <li><strong>릴레이 module로 콘센트 전기(220 V)를 다루지 않습니다.</strong> 키트의 릴레이는 이 페이지에서 쓰지 않습니다. 레이저 module은 눈에 비추지 않습니다.</li>
@@ -889,7 +875,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="term">
 <p><strong>module:</strong> 센서 하나와 그것이 일하는 데 필요한 작은 부품을 손톱만 한 기판에 붙여 둔 것. 다리가 보통 3개입니다: <strong>S</strong>(signal, 신호), <strong>+</strong>(전원), <strong>−</strong>(GND, 0 V).</p>
-<p><strong>breadboard:</strong> 납땜 없이 부품 다리를 꽂아 잇는 구멍판. 번호가 같은 세로줄 구멍 5개는 속에서 이어져 있습니다.</p>
+<p><strong>breadboard:</strong> 납땜 없이 부품 다리를 꽂아 잇는 구멍판. 번호 하나(행)의 a–e 다섯 구멍, f–j 다섯 구멍이 각각 속에서 이어져 있습니다(<a href="../projects/b.html#b-bb">그림</a>).</p>
 </div>
 </section>
 <section id="tonight" class="level2">
@@ -1016,6 +1002,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>핀 번호 규칙은 P3와 같습니다: <strong>P0.xx → xx, P1.xx → 32 + xx</strong>. A6·A7(P0.30·P0.31)은 다른 기능과 겹치므로 쓰지 않습니다.</p>
 <p><strong>점퍼선 고르기.</strong> 키트 module의 다리는 튀어나온 핀(수)입니다. board의 핀이 튀어나온 핀이면 <strong>암-암</strong> 선, 구멍(암)이면 <strong>수-암</strong> 선을 씁니다 [board 헤더 모양 사진 확인]. 판매 페이지의 점퍼선(5개 500원)은 "모든 종류"라고 되어 있습니다.</p>
+</section>
+<section id="volt" class="level2">
+<h2 class="anchored" data-anchor-id="volt">공통: module 전원·출력 전압 표</h2>
+<p>"5 V라고 적힌 module도 3.3 V로 켠다"는 이 페이지의 module에만 맞는 말이고, 이유가 있습니다. <strong>board 핀의 보호 한계</strong>(신호는 3.3 V까지)와 <strong>module의 전원 범위</strong>(몇 V로 켜야 일하나)는 서로 다른 문제입니다. 아래 표는 이 페이지에서 쓰는 module마다 둘을 따로 적은 것입니다. 키트의 정확한 제품 모델은 모르므로([내 키트 구성 미확인]) 같은 이름의 흔한 module 문서를 근거로 적었습니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>module (쓰는 곳)</th>
+<th>전원 범위</th>
+<th>출력 신호</th>
+<th>핀 순서 (흔한 예)</th>
+<th>3.3 V로 켜면</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>조이스틱 KY-023 (<a href="#m2">미니 2</a>)</td>
+<td>3.3 V(제조사 표기), 판매처는 3.3–5 V</td>
+<td>VRx·VRy: 아날로그 0 V–전원 전압(가변저항이 전원을 나눔). SW: 누르면 GND</td>
+<td>GND, +5V, VRx, VRy, SW (제품마다 다름)</td>
+<td>됨. 출력 ≤ 3.3 V, 가운데 약 1.65 V. SW는 칩 안 pull-up 필요</td>
+<td><a href="https://joy-it.net/en/products/COM-KY023JM">Joy-IT 제품 페이지</a>, <a href="https://sensorkit.joy-it.net/en/sensors/ky-023">Joy-IT sensorkit</a></td>
+</tr>
+<tr class="even">
+<td>조도 KY-018 (<a href="#m2">미니 2</a> 대신)</td>
+<td>3.3–5 V</td>
+<td>아날로그 0 V–전원 전압(LDR과 10 kΩ 분압)</td>
+<td>S, + (가운데), −</td>
+<td>됨. 출력 ≤ 3.3 V</td>
+<td><a href="https://sensorkit.joy-it.net/en/sensors/ky-018">Joy-IT sensorkit</a></td>
+</tr>
+<tr class="odd">
+<td>온습도 DHT11 / KY-015 (<a href="#m4">미니 4</a>)</td>
+<td>데이터시트 판마다 다름: 3–5.5 V, 3.3–5.5 V, 3.5–5.5 V</td>
+<td>디지털 한 선. high 전압 = module pull-up이 이어진 전원 전압</td>
+<td>S, + (가운데), − (판매처에 따라 VCC·DATA·GND)</td>
+<td><strong>하한 근처.</strong> 짧은 선으로 먼저 해 봄. 데이터시트가 3.5 V부터라고 적은 판도 있어 안 될 수 있음</td>
+<td><a href="https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf">DHT11 데이터시트(번역판)</a>, <a href="https://jlcpcb.com/partdetail/Aosong_Guangzhou_Elec-DHT11/C117051">Aosong DHT11 부품 정보</a>, <a href="https://sensorkit.joy-it.net/en/sensors/ky-015">Joy-IT sensorkit</a></td>
+</tr>
+<tr class="even">
+<td>심박 KY-039 (<a href="#m5">미니 5</a>)</td>
+<td>3.3 V·5 V</td>
+<td>아날로그 (적외선 LED + 빛 받는 부품)</td>
+<td>S, + (가운데), −</td>
+<td>됨. 출력 ≤ 3.3 V. 신호 크기는 전원에 따라 달라질 수 있음 <span class="tag tag-unverified">미확인</span></td>
+<td><a href="https://www.joy-it.net/en/products/SEN-KY039HS">Joy-IT 제품 페이지</a>, <a href="https://sensorkit.joy-it.net/en/sensors/ky-039">Joy-IT sensorkit</a></td>
+</tr>
+<tr class="odd">
+<td>기울기 스위치 KY-020 (<a href="#m5">미니 5</a>)</td>
+<td>3.3–5 V</td>
+<td>디지털 (쇠구슬 접점이 붙었다 떨어짐)</td>
+<td>S, + (가운데), −</td>
+<td>됨. 출력 ≤ 3.3 V</td>
+<td><a href="https://sensorkit.joy-it.net/en/sensors/ky-020">Joy-IT sensorkit</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>표에 없는 module이나 모양이 다른 module이면</strong> 이렇게 합니다.</p>
+<ul>
+<li>module 뒷면에 <strong>칩이 없고 저항·가변저항·스위치만</strong> 있으면(조이스틱·조도·기울기처럼), 출력은 전원 전압을 넘지 않습니다. 3.3 V로 켭니다.</li>
+<li><strong>칩이 있거나 무엇인지 모르면:</strong> module을 3.3 V로 켜고, 신호 핀을 board에 꽂기 <strong>전에</strong> 멀티미터(DC V)로 S–GND 전압을 먼저 잽니다. 손잡이를 돌리거나 센서를 가리며 잰 가장 큰 값이 3.3 V 이하일 때만 board에 연결합니다.</li>
+<li><strong>5 V로 켜야만 일하는 module</strong>(3.3 V에서 출력이 안 나오거나 데이터시트 하한이 3.3 V보다 높음)의 출력이 3.3 V를 넘으면, 핀에 바로 꽂지 않습니다. 한 방향 신호(아날로그 출력, 스위치 출력)는 <strong>저항 두 개 분압(voltage divider)</strong>으로 낮춥니다. 예: 신호 → 10 kΩ → 핀, 핀 → 15 kΩ → GND이면 5 V가 5 × 15/25 = 3.0 V가 됩니다. DHT11처럼 한 선으로 <strong>주고받는</strong> 신호는 분압으로는 안 되고 양방향 <strong>level shifter</strong> module이 필요합니다.</li>
+<li>module의 + 를 board의 <strong>5V 핀</strong>에 꽂는 것은 위 경우에만, 신호 쪽 대책을 갖춘 뒤입니다.</li>
+</ul>
 </section>
 <section id="m1" class="level2">
 <h2 class="anchored" data-anchor-id="m1">미니 1. LED 깜빡이기 + 버튼</h2>
@@ -1272,7 +1323,7 @@ pressed 3   t_ms 5611</code></pre>
 <div class="howsteps">
 <section id="breadboard에-꽂기-usb를-뺀-채로" class="level4 howstep">
 <h4 class="anchored" data-anchor-id="breadboard에-꽂기-usb를-뺀-채로">breadboard에 꽂기 (USB를 뺀 채로)</h4>
-<p><span class="do">할 일</span> breadboard의 세로줄 세 개를 ①②③이라고 부릅니다(아무 번호나 골라 정함).</p>
+<p><span class="do">할 일</span> breadboard는 번호가 긴 변을 따라 왼쪽→오른쪽, 전원 줄(rail)이 위·아래에 오게 놓고, 구멍을 "10행 c"처럼 부릅니다(<a href="../projects/b.html#b-bb">breadboard 속 연결</a>). 자리는 P3의 <a href="../projects/b.html#b1c-wire">R–C 첫 배선 배선도</a>와 같습니다.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1293,35 +1344,41 @@ pressed 3   t_ms 5611</code></pre>
 <td>1</td>
 <td>board GND</td>
 <td>board <strong>GND</strong></td>
-<td>세로줄 ③</td>
+<td>위 − rail</td>
 </tr>
 <tr class="even">
 <td>2</td>
 <td>저항 100 kΩ</td>
-<td>세로줄 ①</td>
-<td>세로줄 ② (방향 없음)</td>
+<td>10행 c</td>
+<td>14행 c (방향 없음)</td>
 </tr>
 <tr class="odd">
 <td>3</td>
 <td>커패시터 10 µF</td>
-<td><strong>+ 다리(긴 다리)</strong> → 세로줄 ②</td>
-<td><strong>− 다리(띠 쪽)</strong> → 세로줄 ③</td>
+<td><strong>+ 다리(긴 다리)</strong> → 14행 d</td>
+<td><strong>− 다리(띠 쪽)</strong> → 15행 d</td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td>점퍼선</td>
-<td>board <strong>P1.04</strong></td>
-<td>세로줄 ①</td>
+<td>수-수 점퍼선</td>
+<td>15행 a</td>
+<td>위 − rail</td>
 </tr>
 <tr class="odd">
 <td>5</td>
 <td>점퍼선</td>
-<td>세로줄 ②</td>
+<td>board <strong>P1.04</strong></td>
+<td>10행 a</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>점퍼선</td>
+<td>14행 a</td>
 <td>board <strong>A0</strong></td>
 </tr>
 </tbody>
 </table>
-<p>②가 그림 2의 "가운데 점"입니다. 3.3V 핀은 이번에 쓰지 않습니다(P1.04가 전원 역할).</p>
+<p>14행(a–e)이 그림 2의 "가운데 점"입니다. 3.3V 핀은 이번에 쓰지 않습니다(P1.04가 전원 역할).</p>
 </section>
 <section id="코드-올리고-τ-읽기" class="level4 howstep">
 <h4 class="anchored" data-anchor-id="코드-올리고-τ-읽기">코드 올리고 τ 읽기</h4>
@@ -1402,10 +1459,10 @@ t_s,V
 <p><code>t_s,V</code> 아래는 0.2초마다 한 줄씩 모두 30줄이 찍힙니다(위에서는 <code>...</code>로 줄임). 실물에서는 <code>tau measured</code>가 0.8–1.2 s 사이면 정상입니다(커패시터 오차 ±20%).</p>
 <div class="ifnot">
 <ul>
-<li>모든 줄이 0.00 근처 → P1.04 선이 다른 핀에 꽂혔거나, 저항이 세로줄 ①·②를 잇지 않았습니다.</li>
-<li>처음부터 3.3 V 근처 → A0 선이 ①(저항 앞쪽)에 꽂혔습니다. ②로 옮깁니다.</li>
+<li>모든 줄이 0.00 근처 → P1.04 선이 다른 핀에 꽂혔거나, 저항이 10행과 14행을 잇지 않았습니다.</li>
+<li>처음부터 3.3 V 근처 → A0 선이 10행(저항 앞쪽)에 꽂혔습니다. 14행으로 옮깁니다.</li>
 <li><code>tau measured -1.00</code> → 6초 안에 63%에 못 갔습니다. 커패시터가 10 µF보다 훨씬 큽니다(예: 100 µF). 값을 확인합니다.</li>
-<li>값이 들쭉날쭉 튐 → GND 선(③)이 빠졌습니다.</li>
+<li>값이 들쭉날쭉 튐 → 15행–rail–GND 선이 빠졌습니다. rail이 가운데서 끊긴 breadboard인지도 봅니다.</li>
 </ul>
 </div>
 </section>
@@ -1414,7 +1471,7 @@ t_s,V
 <div class="answer">
 <p>예를 들어 1.08 s면 8% 깁니다. 이유: (1) <strong>커패시터 값 오차</strong>: 전해 커패시터는 표시값에서 ±20%까지 다를 수 있어, 이것이 가장 큽니다. (2) 저항 오차(보통 ±1–5%), (3) board의 3.3 V가 정확히 3.300 V가 아님 — 이것은 τ에는 거의 영향이 없습니다. 63% "비율"로 재기 때문입니다. 그래서 τ를 정확히 알려면 "부품 표시값"이 아니라 <strong>잰 값</strong>을 씁니다. P2에서 소자의 τ를 잴 때도 같습니다.</p>
 </div>
-<p><strong>RC 연구와의 연결.</strong> P2에서 소스미터로 잰 RC 모의 소자가 바로 이 회로입니다. <strong>R–C 자리에 이온 소자를 꽂으면</strong> 같은 코드가 "소자에 전압을 건 뒤 전류(전압)가 얼마나 천천히 따라오는지"를 잽니다. 다만 소자는 전압을 걸 때 극성·크기 제한이 있으므로, 소자를 꽂는 것은 P3의 보호 회로(R_lim, J1)를 갖춘 뒤에 합니다.</p>
+<p><strong>RC 연구와의 연결.</strong> P2에서 소스미터로 잰 RC 모의 소자가 바로 이 회로입니다. <strong>R–C 자리에 이온 소자를 꽂으면</strong> 같은 코드가 "소자에 전압을 건 뒤 전류(전압)가 얼마나 천천히 따라오는지"를 잽니다. 다만 소자는 전압을 걸 때 극성·크기 제한이 있으므로, 소자를 꽂는 것은 P3의 보호 회로(R_lim, J1)를 갖춘 뒤에 합니다. 부품만 바꿔 꽂으면 되지 않는 경우는 P3의 <a href="../projects/b.html#b4-swap">부품만 바꾸면 되나</a>에 정리했습니다.</p>
 </section>
 <section id="m4" class="level2">
 <h2 class="anchored" data-anchor-id="m4">미니 4. 연구실 온습도를 휴대폰으로</h2>
@@ -1460,7 +1517,7 @@ t_s,V
 </tr>
 </tbody>
 </table>
-<p>DHT11은 3–5.5 V에서 동작하는 센서라 3.3 V에서 켜도 됩니다. module에 pull-up 저항이 이미 붙어 있는 것이 보통입니다.</p>
+<p>DHT11의 전원 범위는 데이터시트 판마다 3–5.5 V, 3.3–5.5 V, 3.5–5.5 V로 다르게 적혀 있어, 3.3 V는 <strong>하한 근처</strong>입니다(<a href="#volt">module 전압 표</a>). 선을 짧게 해서 3.3 V로 먼저 해 봅니다. module에 pull-up 저항이 이미 붙어 있는 것이 보통이며, 그 저항이 + 핀에 이어져 있어서 3.3 V로 켜면 신호도 3.3 V를 넘지 않습니다.</p>
 </section>
 <section id="먼저-pc-화면에-띄우기" class="level4 howstep">
 <h4 class="anchored" data-anchor-id="먼저-pc-화면에-띄우기">먼저 PC 화면에 띄우기</h4>
@@ -1499,7 +1556,7 @@ T 24.0 C   RH 47 %   t_s 9</code></pre>
 <p>세 번째 줄은 센서에 입김을 한 번 불었을 때의 예입니다. 습도가 몇 % 뛰었다가 천천히 돌아오면 정상입니다.</p>
 <div class="ifnot">
 <ul>
-<li><code>read failed (check wiring: S, +, -)</code>만 나옴 → S가 P1.04에 꽂혔는지, +가 3.3V인지 봅니다. module 핀 순서가 다를 수 있으니 인쇄 글자를 다시 봅니다.</li>
+<li><code>read failed (check wiring: S, +, -)</code>만 나옴 → S가 P1.04에 꽂혔는지, +가 3.3V인지 봅니다. module 핀 순서가 다를 수 있으니 인쇄 글자를 다시 봅니다. 배선이 맞는데도 계속 실패하면 3.3 V가 이 센서의 하한 아래일 수 있습니다. 이때 <strong>+를 5V로 바로 옮기지 않습니다</strong>(신호선이 5 V가 됨). 양방향 level shifter가 필요합니다(<a href="#volt">module 전압 표</a>).</li>
 <li>컴파일 때 <code>DHT.h: No such file or directory</code> → DHT library가 안 깔렸습니다(<a href="#tonight">오늘 밤 할 것</a>).</li>
 </ul>
 </div>
@@ -1977,6 +2034,7 @@ ready</code></pre>
 <ul>
 <li>행사: <a href="https://luma.com/dofnfu94">Luma — Physical AI Playground: NUcoders Vol.2</a>, <a href="https://nucoders.xyz/">누코더스</a>, <a href="https://nucoders-shop.vercel.app/">현장 판매 페이지</a> (2026-11-06 확인)</li>
 <li>NU40 DK: <a href="https://docs.zephyrproject.org/latest/boards/nucode/nucode_nu40/doc/index.html">Zephyr — NUCODE NU40</a> (nRF52840, LED·버튼·I²C 핀, 부트로더), <a href="https://nucode.gitbook.io/nuseries/dks/nu-40-dk.md">NUseries 문서 — NU-40 DK</a> (Arduino IDE 설정), <a href="https://github.com/Nucode01/Adafruit_nRF52_Arduino">NUCODE board package</a> (<code>variants/nu40dk_nrf52840/variant.h</code>의 A0–A7·LED·버튼 번호, <code>cores/nRF5/wiring_analog_nRF52.c</code>의 ADC 기본값)</li>
+<li>module 전원·출력 전압: <a href="https://sensorkit.joy-it.net/">Joy-IT sensorkit</a> (KY-015·018·020·023·039 쪽), <a href="https://joy-it.net/en/products/COM-KY023JM">Joy-IT KY-023</a>, <a href="https://www.joy-it.net/en/products/SEN-KY039HS">Joy-IT KY-039</a>, <a href="https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf">DHT11 데이터시트 번역판</a>, <a href="https://jlcpcb.com/partdetail/Aosong_Guangzhou_Elec-DHT11/C117051">Aosong DHT11 부품 정보</a> (2026-11-06 확인. 키트 module이 이 제품과 같은지는 미확인)</li>
 <li>37종 키트 구성: 일반적인 목록 예 <a href="https://makerselectronics.com/product/37-in-1-sensor-module-board-set-kit-for-arduino/">makerselectronics</a>. 디바이스마켓 키트·SZH-EK009의 정확한 목록은 찾지 못했습니다 <span class="tag tag-unverified">미확인</span>.</li>
 <li>R–C 기억 계산 그림·표: <code>tools/figs_side.py</code>로 계산(실측 아님).</li>
 </ul>

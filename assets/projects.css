@@ -98,6 +98,7 @@ html.proj-page #TOC a.active, html.proj-page .sidebar-item a.active { color: var
 /* '보여야 하는 것': 명령 창 모양. 제목 막대는 projects.js가 붙인다(.screen-bar). 창 이름은 data-screen-title */
 .screen { position: relative; margin: 0.6rem 0 0.8rem; border-radius: 10px; overflow: hidden; background: var(--p-dark, #2c2420); border: 1px solid #4b3f38; box-shadow: 0 6px 18px rgba(50, 30, 10, 0.12); }
 .screen-bar { display: flex; align-items: center; gap: 0.85rem; height: 2.2rem; padding: 0 1rem; background: #3b322c; border-bottom: 1px solid #4b3f38; }
+.screen-kind { flex: none; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em; color: #2c2420; background: #e6cfa0; border-radius: 4px; padding: 0.12rem 0.45rem; }
 .screen-dots { display: inline-flex; align-items: center; gap: 0.42rem; flex: none; }
 .screen-dots i { display: block; width: 0.66rem; height: 0.66rem; border-radius: 50%; background: #e0705b; }
 .screen-dots i:nth-child(2) { background: #e6b94d; }
@@ -204,7 +205,24 @@ details.answer > .answer-body p, details.answer > .answer-body li { font-size: 0
 .screen.vscode pre code, .screen.vscode pre { color: #d4d4d4 !important; }
 .screen.vscode code .sc-prompt { color: #9cdcfe !important; }
 .screen.vscode code .sc-cmd { color: #9cdcfe !important; font-weight: 400; }
-.labcode div.sourceCode pre { max-height: 30rem; overflow: auto; }
+.labcode div.sourceCode pre { max-height: none; overflow-x: auto; }
+/* 실습 코드 상자: 기본 접힘 (projects.js labcode). 복사는 '전체 코드 복사' 단추 하나로 */
+.labcode .code-copy-button { display: none !important; }
+.labcode:not(.is-open) div.sourceCode { display: none; }
+.labcode .lab-peek div.sourceCode, .labcode .lab-peek pre { display: block; }
+.labcode .lab-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.5rem 0.7rem; background: #f8efe3; border: 1px solid #ecdcc6; border-top: 0; }
+.labcode:not(.is-open) .lab-bar:last-child { border-radius: 0 0 10px 10px; }
+.lab-btn { display: inline-flex; align-items: center; min-height: 2rem; padding: 0.15rem 0.75rem; border-radius: 999px; border: 1px solid #d9c3a6; background: #fff; color: #5a3a1e; font-size: 0.84rem; font-weight: 600; text-decoration: none; cursor: pointer; }
+.lab-btn:hover { background: #fff7ec; color: #5a3a1e; }
+.lab-btn:focus-visible { outline: 2px solid #c0521c; outline-offset: 2px; }
+.lab-copy { background: #c0521c; border-color: #c0521c; color: #fff; }
+.lab-copy:hover { background: #a8461a; color: #fff; }
+.lab-peek { border: 1px solid #ecdcc6; border-top: 0; border-radius: 0 0 10px 10px; background: #fffdf9; padding: 0.5rem 0.8rem 0.6rem; }
+.labcode.is-open .lab-peek { display: none; }
+.lab-peek-k { font-size: 0.74rem; font-weight: 700; color: #8f3a0f; margin-bottom: 0.25rem; }
+.lab-peek pre { margin: 0 !important; background: transparent !important; border: 0 !important; padding: 0 !important; font-size: 0.86rem; white-space: pre-wrap; }
+.labcode code .lc-common { opacity: 0.45; }
+.labcode code .lc-sets { background: #fff3cf; }
 .labcode .code-with-filename-file { background: #f3e3cf; border-radius: 10px 10px 0 0; padding: 0.3rem 0.8rem; font-size: 0.8rem; }
 .labcode .code-with-filename-file pre { background: transparent !important; border: 0 !important; margin: 0; padding: 0 !important; max-height: none; }
 .lab-what { margin: 0.2rem 0 0.9rem; padding: 0.75rem 1rem; border-radius: 10px; background: var(--p-accent-soft, #fbe8dc); border-left: 4px solid var(--p-accent, #c0521c); }
@@ -214,3 +232,51 @@ details.answer > .answer-body p, details.answer > .answer-body li { font-size: 0
 .lab-try > p:first-child::before { content: "바꿔 보기"; display: inline-block; margin-right: 0.45rem; padding: 0.02rem 0.45rem; border-radius: 999px; background: #2b59c3; color: #fff; font-size: 0.7rem; font-weight: 700; vertical-align: 0.12em; }
 .lab-try p, .lab-try li { font-size: 0.93rem; line-height: 1.75; }
 html.proj-page main .do { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; color: var(--p-accent-deep, #8f3a0f); background: var(--p-accent-soft, #fbe8dc); border-radius: 999px; padding: 0.05rem 0.55rem; margin-right: 0.35rem; vertical-align: 0.1em; }
+
+/* 실습 바로 가기 + 다음 실습 단추 (projects.js labNav, 2026-11-06 검토) */
+.lab-nav { margin: 0.4rem 0 2rem; padding: 0.8rem 1rem 0.6rem; border: 1px solid var(--p-line, #ead9c6); border-radius: 12px; background: #fffdf9; }
+.lab-nav-k { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em; color: #8f3a0f; margin-bottom: 0.3rem; }
+.ln-h { font-size: 0.86rem; font-weight: 700; color: var(--p-ink, #2f2521); margin: 0.35rem 0 0.1rem; }
+.lab-nav ol { margin: 0; padding-left: 0; list-style: none; columns: 2 16rem; column-gap: 1.6rem; }
+.lab-nav li { font-size: 0.88rem; line-height: 1.55; padding: 0.12rem 0; break-inside: avoid; }
+.lab-nav li a { text-decoration: none; }
+.lab-nav li a:hover { text-decoration: underline; }
+.ln-stop { margin: 0.45rem 0 0.2rem; font-size: 0.78rem; color: #4f7f5d; display: flex; align-items: center; gap: 0.5rem; }
+.ln-stop::before, .ln-stop::after { content: ""; flex: 1; border-top: 1px dashed #b9d1b8; }
+.lab-pill { position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 40; padding: 0.5rem 0.95rem; border-radius: 999px; background: #2f2521; color: #fff; font-size: 0.84rem; font-weight: 600; text-decoration: none; box-shadow: 0 6px 18px rgba(30, 20, 10, 0.25); }
+.lab-pill:hover { color: #fff; background: #4a3a31; }
+.lab-pill[hidden] { display: none; }
+@media (max-width: 640px) { .lab-pill { right: 50%; transform: translateX(50%); bottom: 0.8rem; white-space: nowrap; } }
+@media print { .lab-pill, .lab-bar, .lab-peek { display: none; } .labcode div.sourceCode { display: block !important; } }
+
+/* 프로젝트 홈 첫 화면 (2026-11-06 검토: 모바일 첫 화면이 소개 문단으로 차지됨) */
+.pj-start { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.7rem; margin: 0.6rem 0 0.8rem; }
+.pj-start-btn { display: flex; flex-direction: column; gap: 0.1rem; padding: 0.8rem 1rem; border-radius: 12px; border: 1px solid var(--p-line, #ead9c6); background: #fffdf9; color: var(--p-ink, #2f2521); text-decoration: none; }
+.pj-start-btn small { font-size: 0.74rem; color: var(--p-muted, #6f5f55); }
+.pj-start-btn b { font-size: 1.05rem; }
+.pj-start-btn span { font-size: 0.84rem; color: var(--p-muted, #6f5f55); }
+.pj-start-btn:hover { border-color: #c0521c; color: var(--p-ink, #2f2521); }
+.pj-start-btn.primary { background: #c0521c; border-color: #c0521c; color: #fff; }
+.pj-start-btn.primary small, .pj-start-btn.primary span { color: #fbe8dc; }
+.pj-start-btn.primary:hover { background: #a8461a; color: #fff; }
+.pj-compare-wrap { overflow-x: auto; margin: 0.3rem 0 0.8rem; }
+html.proj-page main table.pj-compare { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 0; }
+html.proj-page main table.pj-compare th, html.proj-page main table.pj-compare td { padding: 0.55rem 0.6rem !important; border-bottom: 1px solid var(--p-line, #ead9c6) !important; text-align: left; }
+html.proj-page main table.pj-compare thead th { font-size: 0.76rem; color: var(--p-muted, #6f5f55); }
+table.pj-compare tbody th { white-space: nowrap; }
+table.pj-compare tbody th a { font-weight: 700; color: #c0521c; text-decoration: none; }
+table.pj-compare td a { font-weight: 600; text-decoration: none; }
+table.pj-compare .pj-sub { display: block; color: var(--p-muted, #6f5f55); font-size: 0.8rem; line-height: 1.45; }
+table.pj-compare .pj-prog { font-size: 0.76rem; color: #4f7f5d; }
+@media (max-width: 640px) {
+  table.pj-compare thead { display: none; }
+  table.pj-compare, table.pj-compare tbody { display: block; }
+  table.pj-compare tr { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); column-gap: 0.4rem; padding: 0.7rem 0; border-bottom: 1px solid var(--p-line, #ead9c6); }
+  html.proj-page main table.pj-compare th, html.proj-page main table.pj-compare td { border: 0 !important; padding: 0.05rem 0 !important; line-height: 1.5; }
+  table.pj-compare tbody th { grid-row: span 4; }
+  table.pj-compare td:nth-child(3)::before { content: "필요 · "; color: var(--p-muted, #6f5f55); }
+  table.pj-compare td:nth-child(4)::before { content: "난도 · "; color: var(--p-muted, #6f5f55); }
+  table.pj-compare td:nth-child(5)::before { content: "상태 · "; color: var(--p-muted, #6f5f55); }
+  table.pj-compare td:nth-child(n+3) { font-size: 0.82rem; }
+}
+.fz-inner img[src$="-m.svg"] { width: 100%; max-width: 100%; }

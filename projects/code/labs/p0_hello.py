@@ -10,6 +10,7 @@
 # 이 파일이 잘 돌면 준비 끝입니다.
 # ============================================================
 
+import sys                         # 지금 실행 중인 Python의 정보
 import numpy as np                 # 숫자 계산 도구
 import matplotlib.pyplot as plt    # 그래프 도구
 
@@ -39,6 +40,7 @@ t = np.linspace(0, 1, 500)               # 0초부터 1초까지 점 500개
 y = np.sin(2 * np.pi * FREQ * t)         # 사인 곡선
 
 print("hello! VS Code에서 Python이 돌아갑니다.")
+print(f"python : {sys.executable} ({sys.version.split()[0]})")   # p0_install.py가 찍은 줄과 같아야 함
 print(f"points : {len(t)}")
 print(f"FREQ   : {FREQ} Hz  → 1초 동안 {FREQ:g}번 오르내림")
 print(f"max    : {y.max():.2f}")

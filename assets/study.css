@@ -673,13 +673,15 @@ figure.fig.photo img { border-radius: 8px; border: 1px solid var(--line); max-he
 .paper-missing { border: 1px dashed #d5dadd; border-radius: 8px; padding: 1rem; font-size: 0.88rem; color: var(--muted); text-align: center; background: var(--bg-soft); }
 
 /* 그림 클릭 확대 */
-figure.fig img.zoomable { cursor: zoom-in; }
+img.zoomable { cursor: zoom-in; }
 figure.fig img.zoomable:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 #fig-zoom { position: fixed; inset: 0; z-index: 2000; background: rgba(18,18,18,0.93); display: none; overflow: auto; padding: 2.2rem 1rem 3rem; cursor: zoom-out; }
 #fig-zoom.show { display: block; }
 body.fz-open { overflow: hidden; }
 .fz-inner { max-width: 1600px; margin: 0 auto; }
 .fz-inner img { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto; background: #fff; border-radius: 4px; }
+/* 휴대폰: 크게 보기에서 그림을 화면보다 넓게 펼쳐 옆으로 밀어 보게 (작은 글씨를 읽을 수 있게) */
+@media (max-width: 760px) { .fz-inner { max-width: none; } .fz-inner img { width: 860px; max-width: none; } }
 .fz-cap { color: #e4e4e4; font-size: 0.93rem; line-height: 1.65; margin: 0.9rem auto 0; max-width: 900px; cursor: auto; }
 .fz-cap b { color: #fff; }
 .fz-cap a { color: #a9c4ff; }
