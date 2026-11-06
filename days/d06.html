@@ -1,0 +1,2386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 10. ’계산한다’의 조건과 증거 사다리 – Why Ions Compute?</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d07a.html" rel="next">
+<link href="../days/d05.html" rel="prev">
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-38b12a2c769cbf7df2ce7c55208cb0ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 2,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "/"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script>
+  // 2026-11-03: 저장된 글자 크기를 그리기 전에 적용 (탭을 누를 때 글자가 잠깐 커졌다 돌아오는 깜빡임 방지)
+  try { var f = parseInt(localStorage.getItem('study-fs') || '2', 10); if (f >= 1 && f <= 4) document.documentElement.classList.add('study-fs-' + f); } catch (e) {}
+</script>
+<meta name="theme-color" content="#ffffff">
+<!-- 2026-11-02: 본문 글꼴은 Pretendard(study.css)라서 쓰지 않던 Noto Sans KR 내려받기를 뺐다 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+<link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute?</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">홈</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../research.html"> 
+<span class="menu-text">연구 개요</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">커리큘럼</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d01a.html">Phase 1 · 왜 뉴로모픽인가</a></li><li class="breadcrumb-item"><a href="../days/d06.html">Day 10 · '계산한다'의 조건과 증거 사다리</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 개요</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">커리큘럼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 device 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 device의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 device의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, conductance가 정하는 것과 정하지 못하는 것, 같은 conductance 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 conductance의 최적점, 질문 바꾸기와 최소 필요 conductance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, device 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 device가 필요한가, 성공·실패가 남기는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">처음 한 번 · 컴퓨터 준비</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P1. 컴퓨터만으로 첫 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P2. 소스미터로 소자 재기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P3. 보드로 만드는 장치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P4. 누름과 리듬</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/e.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P5. EMG와 reservoir</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/side.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">사이드 · NU40 DK 하루 실습</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">지난 학습 복습</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing">선택 활동: 글로 정리하기</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d01a.html">Phase 1 · 왜 뉴로모픽인가</a></li><li class="breadcrumb-item"><a href="../days/d06.html">Day 10 · '계산한다'의 조건과 증거 사다리</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 10. ’계산한다’의 조건과 증거 사다리</h1>
+<p class="subtitle lead">Phase 1 · 왜 뉴로모픽 컴퓨팅인가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> 무엇을 해야 '계산한다'고 말할 수 있는가? PPF·STP·LTP 관찰이 곧 유용한 device인가?</p>
+<p><strong>왜 배우나</strong> PPF·STP·LTP 결과로 <span class="key">논문에 쓸 수 있는 문장과 다음 실험</span>을 정한다.</p>
+<p><strong>오늘의 장면</strong> 펄스 열 → conductance 변화 → readout 규칙 → <span class="key">정확도 vs device 뺀 baseline</span></p>
+<p><strong>오늘 반드시</strong> <span class="key">PPF 곡선은 기억(사다리 0단)까지만 보인다. '계산했다'고 하려면 task·학습한 readout·held-out·baseline이 필요하다.</span></p>
+<p><strong>나중에 봐도 됨</strong> R² 계산 · Singh 2026 심화 · 폴더 논문 5개 세부 · PPF 이중 지수식</p>
+<p><strong>이후 쓰이는 곳</strong> Day 11–14 readout 학습 · Day 21–22 delay tap baseline · Day 29–30 baseline 일곱 종류 · Day 33–34 증거 수준</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d06">
+  <li data-step="review"><a href="#review"><b>1</b>지난 학습 복습</a></li>
+  <li data-step="lesson"><a href="#lesson"><b>2</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>3</b>학습 완료</a></li>
+</ol>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
+<div class="flow-line">
+<p>지난 학습 단위(Day 9 · 적합한 문제, 부적합한 문제)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+</div>
+<div class="quiz" data-day="d06" data-set="review"></div>
+</section>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">사전 테스트 (선택)</h2>
+<details class="fold pretest-fold"><summary>사전 테스트 펼치기 · 배우기 전에 짐작해 보는 문제 (선택)</summary><div class="quiz" data-day="d06" data-set="pre"></div>
+</details>
+</section>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<div class="lesson-meta">
+<p>학습 구간 5개 · 한 번에 다 읽지 않아도 됩니다(구간이 끝날 때마다 요점 상자가 있으니 거기서 끊어 읽어도 됩니다) · 선택 영상 2개(합쳐 약 9분, 모두 선택) · 내 답 쓰기는 따로(오늘은 Phase 1 종합 양식). PPF 그림과 펄스 간격 예제의 device 전류값(1.00 µA, 1.88 µA 등)은 모두 <strong>모형 device의 가상 측정값</strong>이고 특정 device를 잰 값이 아닙니다. 폴더 논문 사례의 정확도는 논문이 적은 값입니다.</p>
+<details class="meta-more">
+<summary>
+근거 표기와 Claude가 대조한 범위
+</summary>
+<p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024 전체 / Aluru 2026 요약면·p.593 / Stepney 2024 p.666–667, 669 / Singh 2026 p.3, 6, 8, 18–20 / Lee 2025(npj UC) p.6–8 / Chen 2025 p.7–8(Fig. 4 캡션·본문), p.10(Methods) / Wu 2025 p.8 / Fan 2026 본문(키워드 검색으로 task·정확도 부재 확인, 나머지는 노트 기준) / Zhong 2022 p.677. Koh 2022는 폴더에 없어 웹 본문(PMC)으로 일부 문장만 확인했고 내용은 <span class="tag tag-unverified">미확인</span>으로 둡니다. ★ <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. 회색 '출처·검증' 표시는 출처를 확인한 과정이고, 숫자를 이해하는 데 필요한 조건(단위, 가정, 예시인지 측정인지)은 본문에 그대로 둡니다.</p>
+</details>
+</div>
+<p>Phase 1의 마지막 학습 단위입니다. 앞선 단위들에서 "왜 뉴로모픽인가"를 네 갈래로 나눠 봤습니다. 기존 컴퓨터의 벽(Day 3–4), 뇌의 원리와 조건(Day 5–6), 하드웨어의 spec(Day 7–8), 적합한 문제(Day 9)입니다. 오늘 질문은 그 모든 것의 바탕에 있는 질문입니다.</p>
+<p>★ <strong>Device가 PPF·STP·LTP 같은 시냅스 현상을 보였다면, 그 device는 "계산"을 한 것인가?</strong></p>
+<p>세 현상은 Day 1–2에서 이름만 봤습니다. 뉴로모픽의 줄기를 나눌 때 '시냅스 현상만 재현한 회색지대'(<a href="../days/d01b.html#ch-branches">이름이 커지다: 우산 아래의 줄기들</a>)로 나온 것들입니다. 오늘은 첫 구간 첫머리에서 그림으로 다시 봅니다. 폴더의 이온 device 논문 상당수가 이 현상들을 첫 그림으로 내세웁니다. 그래서 이 질문에 답하지 못하면 Phase 2–5의 논문을 평가하기 어렵습니다. 다섯 개의 학습 구간입니다.</p>
+<p><strong>이번 Day의 질문 순서</strong> — 오른쪽 '→ 구간' 링크를 누르면 그 구간으로 갑니다.</p>
+<ol type="1">
+<li>"현상을 재현했다"와 "계산했다"는 왜 다른 말인가? (PPF가 무엇인지부터, 그리고 "계산"의 네 단계) <a href="#ch-phenomenon-vs-computation">→ 구간 1</a></li>
+<li>Readout을 데이터로 학습하는 계산(RC식)에서 "계산했다"고 말하려면 무엇을 보여야 하나? (작은 예제 하나 → 사다리 그림 → 단마다 더 깊게) <a href="#ch-minimal-conditions">→ 구간 2</a></li>
+<li>PPF 곡선 하나는 무엇을 증명하고 무엇을 증명하지 못하나? <a href="#ch-ppf-limits">→ 구간 3</a></li>
+<li>폴더의 논문들은 사다리의 어디에서 멈췄나? (baseline이 있는 예와 없는 예) <a href="#ch-folder-examples">→ 구간 4</a></li>
+<li>Phase 1 종합: Day 1–10을 오늘의 질문에 다시 잇기 (새 내용 없음) <a href="#ch-phase1-wrapup">→ 구간 5</a></li>
+</ol>
+<section id="ch-phenomenon-vs-computation" class="level3">
+<h3 class="anchored" data-anchor-id="ch-phenomenon-vs-computation">학습 구간 1. 현상 재현과 계산은 다른 말이다</h3>
+<div class="goal">
+<p><strong>상황.</strong> 내 고분자 전해질 device에 짧은 펄스 두 개를 넣었더니 두 번째 응답이 첫 번째보다 컸습니다. 논문이라면 이것을 "시냅스처럼 반응한다(PPF)"고 쓰고 제목에 computing을 붙입니다. 그런데 응답이 커졌다는 것만으로 이 device가 무엇을 계산했다고 할 수 있을까요?</p>
+<p><strong>왜 지금?</strong> 이온 device 논문 상당수가 PPF·STP·LTP 같은 시냅스 현상을 첫 그림으로 내세웁니다. 이 질문에 답하지 못하면 Phase 2–5의 논문을 평가하기 어렵습니다.</p>
+<p><strong>어디에 쓰이나?</strong> 내 device의 PPF 곡선을 논문에 쓸 때 "여기까지 보였다고 말해도 되는 것"을 정하고, 다른 논문의 PPF 그림이 어디까지 보여 주는지 읽는 데 씁니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> 두 펄스의 전류로 PPF 지수를 계산한다. "물리계가 계산한다"는 말을 네 단계(부호화 → 물리 변화 → 해독 → 비교)로 설명하고, 시냅스 현상 재현이 그중 어디까지인지 말한다.</p>
+</div>
+<p>먼저 PPF가 무엇인지 그림 하나로 봅니다.</p>
+<div id="b-ppf" class="basics">
+<p><strong>먼저: PPF·STP·LTP — 오늘 내내 판단할 device 현상</strong></p>
+<p><strong>무엇을 볼지.</strong> device에 짧은 전압 펄스(pulse: 짧은 시간만 걸었다 끄는 전압) 두 개를 간격 Δt를 두고 넣고, 펄스마다 흐른 전류의 봉우리를 잽니다. 그림 1은 같은 모형 device에 간격만 바꿔 넣은 두 경우(a)(b)입니다. 패널마다 위가 응답 전류, 아래가 입력 펄스입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig0-ppf-pair.svg" alt="같은 모형 device에 펄스 두 개를 넣은 두 경우: 간격 10 ms면 첫 응답 1.00 µA, 두 번째 응답 1.88 µA로 PPF 지수 188%, 간격 1 s면 두 번째 응답 1.05 µA로 105%" class="figure-img"><figcaption><b>그림 1.</b> PPF를 펄스 두 개로 보기. <b>(a)</b> 간격 Δt = 10 ms. <b>(b)</b> 간격 Δt = 1 s. 첫 펄스의 응답 $I_1$은 둘 다 1.00 µA인데, 두 번째 응답 $I_2$는 간격이 짧은 (a)에서 훨씬 크다. 패널마다 위가 응답 전류, 아래가 입력 펄스다. 시간축은 모식도라 눈금이 없고((b)는 가운데를 생략), 응답 높이만 PPF 모형식(뒤의 'PPF 곡선' 부분에서 보는 이중 지수 식)으로 계산한 가상 측정값이다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>그림을 따라가며.</strong> (a) 10 ms: 첫 응답 <span class="math inline">\(I_1\)</span> = 1.00 µA, 두 번째 응답 <span class="math inline">\(I_2\)</span> = 1.88 µA로 두 번째가 더 큽니다. (b) 1 s: <span class="math inline">\(I_2\)</span> = 1.05 µA로 첫 응답과 거의 같습니다. 이렇게 <strong>간격이 짧을수록 두 번째 응답이 커지는 현상</strong>을 PPF(paired-pulse facilitation, 짝펄스 촉진)라 하고, 크기를 PPF 지수로 적습니다.</p>
+<p><span class="math display">\[
+\text{PPF 지수} = \frac{I_2}{I_1} \times 100\ (\%)
+\]</span></p>
+<p>(a)는 1.88 ÷ 1.00 × 100 = 188%, (b)는 105%입니다. 100%면 첫 펄스의 흔적이 남지 않은 것이고, 100%를 넘는 만큼이 남은 흔적입니다.</p>
+<p><strong>왜 생기나(이온 device에서 흔히 드는 설명).</strong> 첫 펄스가 이온을 한쪽으로 몰아 conductance(전류가 얼마나 잘 흐르는지)가 잠깐 오르고, 펄스가 끝나면 이온이 농도 차 때문에 천천히 되돌아갑니다. 다 돌아가기 전에 두 번째 펄스가 오면 남은 몫 위에 새 몫이 얹힙니다. <a href="../days/d03b.html#s-time-dynamics">시간 동역학</a>의 "이온 축적은 적분, 역확산은 leak"과 같은 그림입니다. 되돌아가는 빠르기를 재는 것이 시간상수 τ이고, 간격 전체에 대한 곡선과 그 모형식은 뒤의 'PPF 곡선 하나는 무엇을 증명하나' 구간에서 봅니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>STP와 LTP.</strong> PPF는 펄스 두 개 사이의 짧은 효과입니다. 논문은 이것과 함께 '커진 응답이 얼마나 오래 남나'도 보고합니다. <span class="key">자극 뒤 커진 응답이 짧게 유지되다 사라지면 STP(short-term potentiation, 단기 강화), 오래 유지되면 LTP(long-term potentiation, 장기 강화)라 부릅니다.</span></p>
+<p>신경과학 책에서는 STP를 short-term plasticity(단기 가소성: 짧게 커지는 것과 짧게 작아지는 것을 모두 포함)의 약자로 쓰는 일도 많으니, 논문마다 어느 뜻인지 확인합니다. PPF도 커진 응답이 짧게 남았다 사라지는 현상이라, device 논문에서는 STP와 같은 묶음으로 보고하는 일이 흔합니다. <span class="tag tag-interp">해석</span> '짧다/길다'의 기준 시각은 정해져 있지 않고 논문마다 다르게 씁니다(<a href="../days/d01b.html#ch-branches">이름이 커지다: 우산 아래의 줄기들</a>).</p>
+</div>
+<p><strong>직관.</strong> 돌멩이를 던지면 포물선을 그립니다. 돌멩이가 "포물선 방정식을 계산했다"고 말하지는 않습니다. 하지만 같은 돌멩이의 궤적을 재서 "초속 몇 m로 던지면 어디 떨어지나"라는 <strong>문제의 답</strong>으로 쓴다면, 그때는 돌멩이를 계산에 쓴 것입니다.</p>
+<p>★ <span class="key">차이는 돌멩이가 아니라 <strong>우리가 문제를 정의하고, 입력을 넣고, 결과를 읽어 답으로 해석하는 절차</strong>에 있습니다.</span> 앞에서 본 PPF 현상(펄스 두 개에서 두 번째 전류가 커짐)도 마찬가지입니다. 전류가 커진 것만으로는 아무 문제도 풀지 않았습니다.</p>
+<div id="b-what-is-computing" class="basics">
+<p><strong>기초 1: 물리계가 "계산한다"는 것의 뜻</strong></p>
+<p><strong>왜 필요한가.</strong> "device가 시냅스처럼 반응했다"와 "device가 계산했다"를 구별할 기준이 없으면, 모든 물리 현상이 계산이 되어 버립니다.</p>
+<p>이 질문을 정면으로 다룬 글이 Stepney의 물리 reservoir computing 튜토리얼입니다. 물리 reservoir computing은 재료가 입력에 시간에 따라 반응하는 모습을 계산 자원으로 쓰고, 그 반응을 답으로 바꾸는 마지막 규칙만 학습하는 방법입니다. Day 1–2에서 본 '물리 컴퓨팅' 줄기(<a href="../days/d01b.html#ch-branches">이름이 커지다: 우산 아래의 줄기들</a>)이고, Phase 2의 주제입니다. Stepney는 이렇게 묻습니다. "물리계는 언제 계산하는가? 즉 단순히 물리계로 존재하는 것이 아니라, 특정하게 그리고 신뢰성 있게 계산을 수행하는 것은 언제인가?" <span class="src">Stepney 2024, p.666</span></p>
+<p><strong>무엇인가.</strong> Stepney가 소개하는 추상/표현 이론(abstraction/representation theory, AR 이론)의 틀은 두 층을 둡니다. 위층은 <strong>추상 세계</strong>(abstract domain: 문제와 답, 숫자와 기호), 아래층은 <strong>물리 세계</strong>(physical domain: device, 전압, 이온). 네 개의 화살표가 사각형을 이룹니다.</p>
+<p>그림 2는 그 사각형을 그림 1의 device로 푸는 작은 문제, "두 펄스 사이 간격이 100 ms보다 짧았나?"(짧으면 1, 아니면 0)에 맞춰 그린 것입니다. 위 띠가 추상 세계, 아래 띠가 물리 세계이고, ①–④를 차례로 따라갑니다. 네 화살표를 한 줄로 먼저 적으면 이렇습니다.</p>
+<ul>
+<li>① <strong>부호화</strong>(encoding): 문제의 입력을 물리 입력으로 바꾼다.</li>
+<li>② 물리가 움직인다.</li>
+<li>③ <strong>해독</strong>(decoding): 변한 물리 상태를 읽어 답으로 해석한다. 이 해석 규칙을 <strong>readout</strong>이라 부르고, 그림 2에서는 '비가 <strong>문턱</strong>(threshold) 1.5보다 크면 1'이다.</li>
+<li>④ <strong>비교</strong>: 그 답이 추상 세계에서 직접 구한 답과 <strong>허용 오차</strong>(tolerance) 안에서 같은지 본다.</li>
+</ul>
+<p>아래 단계 상자는 이 네 줄을 그림 2의 숫자로 하나씩 풀어 봅니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig0-square-example.svg" alt="추상 세계(위)와 물리 세계(아래)의 사각형: ① 간격 10 ms를 펄스 두 개로 부호화, ② device가 변해 두 번째 전류 1.88 µA, ③ 비 1.88이 1.5보다 크므로 1로 해독, ④ 사람이 직접 판단한 답 1과 같아 사각형이 닫힘" class="figure-img"><figcaption><b>그림 2.</b> 기초 1의 사각형을 펄스 간격 문제에 적용한 교육용 도식. 위 가로 화살표는 사람이 추상 세계에서 직접 구한 답(10 ms &lt; 100 ms → 1), 왼쪽 ① → 아래 ② → 오른쪽 ③은 device를 거쳐 얻은 답이다. ④에서 두 답이 같으면 "사각형이 닫힌다". 문턱 1.5는 사람이 미리 정한 해독 규칙이다. 전류는 모형 device의 가상 측정값. (Claude가 그림, 모식도)</figcaption></figure>
+<div class="stepper">
+<div class="step">
+<p><b>1. 내려가기(부호화).</b> 추상 문제의 입력을 물리 입력으로 바꿔 device에 넣는다. 그림 2: 숫자 'Δt = 10 ms'를 '10 ms 간격의 펄스 두 개'로.</p>
+</div>
+<div class="step">
+<p><b>2. 물리가 움직인다.</b> Device가 자기 물리 법칙대로 변한다(이온이 움직이고 conductance, 곧 전류가 얼마나 잘 흐르는지가 바뀐다). 이 단계는 device가 혼자 한다. 그림 2: 두 번째 전류가 1.88 µA가 된다.</p>
+</div>
+<div class="step">
+<p><b>3. 올라오기(해독).</b> 변한 뒤의 물리 상태를 읽어 추상 결과로 해석한다. 이 해석 규칙을 해독 규칙, 곧 <b>readout</b>이라 부른다. 그림 2: '두 번째 전류 ÷ 첫 번째 전류가 1.5보다 크면 1'. 1.88 → 1.</p>
+</div>
+<div class="step">
+<p><b>4. 비교.</b> 해독한 답이 추상 세계에서 직접 구한 답과 (허용 오차 안에서) 일치하는가? 일치하면 '사각형이 닫힌다'고 하고, 그때 그 물리계는 그 문제를 계산한 것이다. 그림 2: 직접 판단한 답도 1(10 ms는 100 ms보다 짧다) → 닫힘.</p>
+</div>
+</div>
+<p><span id="s-square-example"></span><strong>작은 계산.</strong> 1 s 간격이면 두 번째 전류는 1.05 µA, 비 1.05 &lt; 1.5라 0으로 해독되고, 직접 판단한 답(1 s는 100 ms보다 길다 = 0)과 같아 역시 닫힙니다. 이 두 입력에 대해서는 PPF device가 이 작은 문제를 "계산"합니다. 문제가 작을 뿐입니다. 여기서 문턱 1.5는 <strong>사람이 미리 정한</strong> 해독 규칙입니다. 다음 구간은 같은 문제에서 문턱을 데이터로 정합니다.</p>
+<p><strong>같은 사각형을 원문은 이렇게 그립니다.</strong> 그림 2는 교육용으로 새로 그린 도식이고, 아래는 Stepney 원문의 그림입니다. 기호가 낯설어도 화살표 네 개의 자리만 그림 2와 맞춰 보면 됩니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/stepney2024-fig1.png" alt="Stepney 2024 Fig. 1: 위층(Abstract)의 m_p가 C(m_p)로 m'_p가 되는 화살표, 아래층(Physical)의 p가 H(p)로 p'가 되는 화살표, 둘을 잇는 표현 R̃(내려가기)과 R(올라오기), 그리고 m'_p와 m_p'의 ε-일치 표시" class="figure-img"><figcaption><b>원문 그림.</b> Stepney, <a href="https://doi.org/10.1007/s11047-024-09997-y" target="_blank"><i>Natural Computing</i> 2024, 23, 665–685</a>, Fig. 1, p.666. 볼 것: 점선 위가 추상 세계, 아래가 물리 세계. 왼쪽 세로 화살표 $\tilde{\mathcal{R}}$가 그림 2의 ①(부호화), 아래 가로 화살표 $\mathbf{H}(\mathbf{p})$가 ②(물리가 움직임), 오른쪽 세로 화살표 $\mathcal{R}$이 ③(해독), 위 가로 화살표 $C(m_{\mathbf{p}})$가 그림 2의 "사람이 직접 판단", 곧 추상 세계에서 직접 계산한 답이다. 오른쪽 위의 $=_\varepsilon$가 ④(허용 오차 안의 일치). 네 화살표를 돌아 같은 곳에 오면 "사각형이 닫힌다". 시냅스 현상 논문은 아래 가로 화살표만 보여 준다. 개념도. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+</div>
+<p><span id="s-fail-types"></span><strong>어디서 실패하나.</strong> Stepney는 "계산한다"고 주장되는 많은 장치가 세 가지 이유로 이 기준을 못 넘는다고 씁니다.</p>
+<ul>
+<li><ol type="a">
+<li>표현(representation: 추상 모델과 물리 장치의 연결)이 아예 없는 경우.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>사각형을 닫기 위해 <strong>다른 컴퓨터가 필요한</strong> 경우. 전형적으로 원하는 계산 전체를 사후에 출력 해석 단계에 숨겨서 수행하는 경우(돌멩이-컴퓨터).</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>계가 잘 특성화되지 않아 우연히 맞은 결과만 골라 쓰는 경우.</li>
+</ol></li>
+</ul>
+<p>세 가지의 출처: <span class="src">Stepney 2024, p.667</span>. 그림 3이 셋을 한 장에 나란히 놓습니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig7-fail-types.svg" alt="세 카드: (a) 문제·답이 정의되지 않은 채 device 전류만 변함, (b) 작은 돌멩이 뒤의 큰 해석표가 7×8=56을 내므로 일은 해석표가 함, (c) 간격 축에서 10 ms와 1 s만 재고 69–99 ms의 틀리는 구간을 놓침" class="figure-img"><figcaption><b>그림 3.</b> Stepney가 든 실패 유형 셋을 그림으로. (c)의 축은 위 사각형 예제의 PPF 모형식으로 계산했다(초록: 사각형이 닫히는 간격, 빨강: 닫히지 않는 간격). (Claude가 그림, 모식도)</figcaption></figure>
+<p>여기서 <strong>특성화</strong>(characterisation)는 실험으로 "어떤 입력 범위에서 사각형이 허용 오차 안에 닫히는가"를 미리 알아 두는 것입니다 <span class="src">Stepney 2024, p.667</span>.</p>
+<p>펄스 간격 판정 문제에서도 이 일이 생깁니다. 문턱 1.5는 모형식으로 간격 약 69 ms에 해당하므로, 약 69–99 ms 간격은 정답이 1('짧다')인데 비가 1.5 아래라 0으로 해독됩니다. 이 범위에서는 사각형이 닫히지 않습니다. <span class="tag tag-calc">계산</span> <span class="key">10 ms와 1 s만 재 보고 "계산한다"고 쓰면 '맞은 것만 골라 보인' 경우에 가까워지고, 닫히는 범위를 미리 재 두는 것이 특성화입니다.</span></p>
+<p><strong>돌멩이-컴퓨터 이야기.</strong> 철학 논쟁에는 "돌멩이도 어떤 함수든 계산할 수 있다"는 주장이 있고, Stepney는 이것을 예로 듭니다(Chalmers 1996 인용) <span class="src">Stepney 2024, p.666</span>. 돌멩이 안의 미세한 상태(원자의 진동, 온도 분포)는 늘 변하므로, 변한 상태마다 "이 상태는 답 56을 뜻한다" 같은 해석표를 <strong>나중에</strong> 붙이면 돌멩이가 7 × 8을 '계산'한 것처럼 꾸밀 수 있다는 것입니다. 그런데 그 표를 만들려면 7 × 8 = 56을 이미 다른 곳(사람이나 다른 컴퓨터)에서 계산해 알고 있어야 합니다. 일은 해석표가 했고 돌멩이는 아무 일도 하지 않았습니다. <span class="tag tag-interp">해석</span> 이온 device에서도 같은 일이 생길 수 있습니다. ★ <span class="key">해독 단계(readout)가 크고 복잡해서 일을 다 하면, device는 계산한 것이 아닙니다.</span> 이 실패 유형(해독 단계에 계산을 숨김)이 오늘의 핵심입니다.</p>
+<p><span id="s-square-connect"></span><strong>시냅스 논문이 보여 주는 것은 ②뿐.</strong> <span class="key">이온 device 논문의 PPF·STP·LTP 그림은 위 사각형의 <strong>②만</strong>(물리가 움직였다는 것) 보여 주고, ①·③·④(문제, 해독, 비교)가 붙어야 "계산"이 됩니다.</span> Aluru 리뷰가 이온 device로 "synaptomimetic(시냅스 흉내) 거동"을 낸 보고가 폭발적으로 늘었지만 목표에 닿으려면 훨씬 정교한 기능이 필요하다고 쓰고 <span class="src">Aluru 2026, 요약면</span>, 생물을 흉내 내려면 "단순한 이온 conductance 이력(hysteresis)을 넘는" 복잡한 기능이 필요하다고 쓴 것 <span class="src">Aluru 2026, p.593</span>이 같은 지적입니다.</p>
+<div class="quiz" data-day="d06" data-set="1-check"></div>
+<div class="think">
+<p>내가 최근 본 이온 device 논문의 첫 그림(PPF나 LTP)을 떠올려, 사각형의 네 단계(① 부호화, ② 물리 변화, ③ 해독, ④ 비교) 중 어디까지 보여 줬는지 적어 보세요. "문제"가 정의되어 있었나요? 결과를 "답"으로 해석하는 규칙이 있었나요?</p>
+<details class="think-answer">
+<summary>
+생각 정리 보기
+</summary>
+<p>점검 순서: 논문 그림에서 아래 셋이 보이는지 확인합니다.</p>
+<ul>
+<li>① 풀려는 문제와 입력이 정의되어 있는가</li>
+<li>③ device 상태를 답으로 바꾸는 규칙(readout)이 있는가</li>
+<li>④ 그 답을 정답과 비교했는가</li>
+</ul>
+<p><span class="tag tag-interp">해석</span> PPF·LTP 곡선만 있고 문제·규칙·비교가 없으면 ②(물리가 움직였다)까지입니다. "간격 &lt; 100 ms 판정" 같은 문제와 문턱, 정답 비교까지 있으면 ①–④입니다.</p>
+<p>예: 폴더의 Fan 2026은 제목에 computing이 있지만 그림은 PPD(두 번째 응답이 작아지는 짝펄스 억제)·기억·망각 곡선입니다. ① 풀려는 문제 없음, ② 있음(전류가 변함), ③ 답으로 바꾸는 규칙 없음, ④ 정답 비교 없음 → ②까지입니다.</p>
+</details>
+</div>
+<div class="keypoints">
+<ul>
+<li><span class="key">PPF 지수 = 두 번째 응답 ÷ 첫 번째 응답 × 100(%)</span>. 간격이 짧을수록 크다(모형 device: 10 ms에서 188%, 1 s에서 105%).</li>
+<li>물리계가 계산한다 = 추상 문제의 입력을 물리로 부호화하고, 물리가 움직인 뒤 상태를 해독해 <span class="key">얻은 답이 추상 세계의 답과 허용 오차 안에서 일치한다(사각형이 닫힌다)</span> <span class="src">Stepney 2024, p.666–667</span>.</li>
+<li>실패 유형: <span class="key">표현 없음 / 해독 단계에 계산을 숨김(다른 컴퓨터 필요) / 우연히 맞은 것만 고름</span> <span class="src">Stepney 2024, p.667</span>. 미리 정한 문턱도 닫히는 입력 범위를 재 둬야 한다(문턱 1.5는 약 69–99 ms에서 틀림) <span class="tag tag-calc">계산</span>.</li>
+<li><span class="key">시냅스 현상 재현은 ②(물리가 움직임)만이다</span>. Aluru: "단순 이온 conductance 이력을 넘어서야" <span class="src">Aluru 2026, p.593</span>.</li>
+</ul>
+</div>
+</section>
+<section id="ch-minimal-conditions" class="level3">
+<h3 class="anchored" data-anchor-id="ch-minimal-conditions">학습 구간 2. 학습형 계산(RC식)을 검증하는 조건: task, 읽을 수 있는 state, 학습한 readout, held-out, baseline</h3>
+<div class="goal">
+<p><strong>상황.</strong> 내 device에서 읽은 전류 수백 개로 readout(상태에서 답을 꺼내는 규칙)을 학습시켰더니 정확도가 90%였습니다. 이것을 device의 계산 능력이라고 논문에 쓸 수 있을까요?</p>
+<p><strong>왜 지금?</strong> 앞 구간의 문턱 1.5는 사람이 정했습니다. RC 논문들은 readout의 숫자를 데이터로 정합니다. 그러면 새 함정이 생깁니다. Readout이 데이터를 외워서 맞힐 수 있고, device가 없어도 맞힐 수 있습니다.</p>
+<p><strong>어디에 쓰이나?</strong> 논문의 정확도 옆에 held-out(training에 안 쓴 데이터)과 baseline이 있는지 확인하고, 내 실험에서 무엇을 함께 재야 할지 정하는 데 씁니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> "계산했다", 더 나아가 "device가 기여했다"고 말하려면 무엇을 보여야 하는지를 펄스 간격 예제 하나로 끝까지 따라간다. 그 단계들을 증거 사다리 그림 한 장에 놓는다.</p>
+</div>
+<p>앞 구간의 문턱 1.5는 사람이 정했습니다. 그런데 Phase 2 이후에 읽을 reservoir computing(RC) 논문들은 이런 숫자를 사람이 아니라 <strong>데이터로 정합니다</strong>. Device에서 읽는 숫자가 수백–수천 개라서(뒤에서 볼 Lee 2025는 2,352개) 사람이 손으로 정할 수 없기 때문입니다. 이 Day에서는 이 방식을 <strong>학습형 계산</strong>이라 부릅니다.</p>
+<p>★ <span class="key">숫자를 데이터로 정하면 꼭 확인할 것이 둘 생깁니다. ① 처음 보는 데이터에서도 맞히나(<strong>test</strong>)? ② device를 빼도 똑같이 맞히나(<strong>baseline</strong>)?</span></p>
+<p>이 구간은 세 걸음입니다. 먼저 간격 8개짜리 작은 예제로 이 두 확인을 직접 해 보고, 그 순서를 사다리 그림 한 장으로 정리한 뒤, 단마다 더 깊게 봅니다.</p>
+<section id="s-worked-example" class="level4">
+<h4 class="anchored" data-anchor-id="s-worked-example">2-1. 처음부터 끝까지: 펄스 간격 맞히기</h4>
+<p><strong>어떤 예제인가.</strong> 문제는 학습 구간 1의 사각형 예제와 같습니다. "두 펄스 사이 간격 Δt가 100 ms보다 짧았나?" Device도 같은 모형 device이고, 전류값은 PPF 모형식으로 계산한 <strong>가상 측정값</strong>입니다. 다른 점은 하나입니다. <span class="key">문턱을 사람이 정하지 않고 <strong>데이터로 정합니다</strong>.</span></p>
+<p><strong>먼저 용어와 기호.</strong> 이 예제에 나오는 것만 모았습니다. 논문에서 그대로 쓰는 영어 이름으로 적습니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>용어</th>
+<th>뜻</th>
+<th>이 예제에서</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>task</td>
+<td>무엇을 맞힐지 정한 문제</td>
+<td>Δt가 100 ms보다 짧으면 1('짧다'), 아니면 0('길다')</td>
+</tr>
+<tr class="even">
+<td>sample</td>
+<td>입력 하나와 그 정답의 한 쌍</td>
+<td>(Δt = 20 ms, 정답 1)</td>
+</tr>
+<tr class="odd">
+<td>training sample</td>
+<td>규칙을 정할 때 보는 sample</td>
+<td>20, 80, 300, 1000 ms</td>
+</tr>
+<tr class="even">
+<td>test sample (held-out)</td>
+<td>규칙을 정한 뒤 채점에만 쓰는 sample. 규칙을 정할 때는 보지 않는다</td>
+<td>10, 50, 120, 600 ms</td>
+</tr>
+<tr class="odd">
+<td>state x</td>
+<td>device에서 읽은 숫자</td>
+<td>두 번째 펄스 때의 전류 (µA). PPF 때문에 간격이 짧을수록 크다</td>
+</tr>
+<tr class="even">
+<td>readout</td>
+<td>state를 답으로 바꾸는 규칙</td>
+<td>x가 θ보다 크면 1</td>
+</tr>
+<tr class="odd">
+<td>θ (theta, threshold)</td>
+<td>readout의 문턱값. training sample로 정한다</td>
+<td>θ = 1.34 µA</td>
+</tr>
+<tr class="even">
+<td>accuracy</td>
+<td>맞힌 개수 ÷ 전체 개수</td>
+<td>3/4 = 75%</td>
+</tr>
+<tr class="odd">
+<td>baseline</td>
+<td>device 대신 넣어 보는 비교 대상. device를 빼도 점수가 같으면 그 점수는 device 덕이 아니다</td>
+<td>아래 단계 6·7</td>
+</tr>
+</tbody>
+</table>
+<div class="predict">
+<p><strong>카드를 열기 전에 예상해 보기.</strong> 아래 8단계 카드에서 나올 세 점수를 먼저 적어 보세요. 틀려도 됩니다. 어디서 예상이 빗나가는지 보는 것이 목적입니다.</p>
+<ul>
+<li>Device의 x로 정한 readout은 test sample 4개 중 몇 개를 맞힐까?</li>
+<li>Device 없이 Δt 숫자를 그대로 readout에 넣으면(raw input baseline) 몇 개?</li>
+<li>기억이 없는 device(static device baseline)라면 몇 개?</li>
+</ul>
+</div>
+<p><strong>8단계 카드가 하는 일.</strong> 단계 1–5는 '계산했다'고 말하기 위한 순서입니다. 단계 6–7은 baseline으로 'device가 기여했나'를 확인합니다. 단계 8은 비용입니다.</p>
+<div class="stepper">
+<div class="step">
+<p><b>1. Task 정하기.</b> 입력은 펄스 두 개와 그 간격 Δt. 정답은 Δt가 100 ms보다 짧으면 1, 아니면 0. 채점 방법(<strong>metric</strong>)은 accuracy. 이 세 가지가 정해져야 '맞았다'를 셀 수 있다.</p>
+</div>
+<div class="step">
+<p><b>2. 데이터 나누기.</b> 간격 8가지로 sample 8개를 만든다. 규칙을 정하기 <b>전에</b> 4개는 training, 4개는 test로 떼어 둔다.<br>training: 20, 80 ms(정답 1), 300, 1000 ms(정답 0)<br>test: 10, 50 ms(정답 1), 120, 600 ms(정답 0)<br>test sample은 마지막 채점 때까지 보지 않는다.</p>
+</div>
+<div class="step">
+<p><b>3. State 읽기.</b> 각 sample에서 두 번째 펄스 때 전류 x를 읽는다(첫 펄스는 늘 1.00 µA).<br>training: 1.79, 1.46, 1.22, 1.05 µA<br>test: 1.88, 1.58, 1.37, 1.12 µA<br>간격이 짧을수록 x가 크다. 같은 간격을 다시 재도 같은 x가 나온다고 가정했다. 실제 device라면 이것부터 측정으로 보여야 한다.</p>
+</div>
+<div class="step">
+<p><b>4. Readout 정하기 (training).</b> 규칙은 'x가 θ보다 크면 1'. θ는 <b>training sample만</b> 보고 정한다. 정답 1 중 가장 작은 x(1.46)와 정답 0 중 가장 큰 x(1.22)의 가운데를 고른다. θ = (1.46 + 1.22) ÷ 2 = 1.34 µA. 이 θ로 training sample 4개는 다 맞는다(4/4). θ를 그 4개에 맞춰 골랐으니 당연하다.</p>
+</div>
+<div class="step">
+<p><b>5. Test로 채점.</b> 같은 θ를 test sample에 쓴다. 1.88 → 1 맞음, 1.58 → 1 맞음, 1.37 → 1 <b>틀림</b>(120 ms는 '길다'), 1.12 → 0 맞음. Test accuracy = 3/4 = 75%로 training의 100%보다 낮다. Training sample에 80 ms와 300 ms 사이 간격이 없어서, θ가 실제 경계(100 ms일 때 x = 1.41 µA)보다 낮게 잡혔기 때문이다. 이 예제의 차이는 readout이 복잡해서가 아니라 training sample이 적어서 생겼다.<br>Readout이 training data의 우연한 특징까지 맞추느라, training에서만 잘 맞고 새 데이터에서 떨어지는 것을 <strong>overfitting</strong>이라 한다. 극단적인 예로, training sample 4개의 답을 표로 외우기만 한 readout은 training 4/4지만 test sample의 x는 표에 없으니 하나도 답하지 못한다. Training sample이 적은 것도, overfitting도 training 점수만 봐서는 드러나지 않는다. 그래서 점수는 반드시 test로 매긴다.</p>
+</div>
+<div class="step">
+<p><b>6. Raw input baseline.</b> 이제 질문을 바꾼다. Device가 정말 도움이 됐나? Device를 빼고, 입력 숫자 Δt를 readout에 바로 넣어 본다. 이것이 <strong>raw input baseline</strong>이다(raw input = 아무 처리도 안 한 입력 그대로). Training sample로 θ를 정하면 80 ms와 300 ms의 가운데인 190 ms다('190 ms보다 짧으면 1'). test: 10 맞음, 50 맞음, 120 <b>틀림</b>, 600 맞음 → 75%. Device와 같다. Device는 Δt를 전류로 바꿨을 뿐, 답을 더 쉽게 만들어 주지 않았다. 그래서 이 task에서는 'device가 기여했다'고 말할 수 없다.</p>
+</div>
+<div class="step">
+<p><b>7. Static device baseline.</b> 그런데 raw input baseline은 누군가 시계로 Δt를 재서 숫자로 넘겨줬기 때문에 가능했다. Readout이 <b>두 번째 펄스 순간의 전류만</b> 볼 수 있다면 어떨까? 기억이 없는 보통 저항(<strong>static device</strong>)은 지금 걸린 전압만 보고 전류를 낸다. 그래서 간격과 상관없이 늘 1.00 µA다. Test sample 4개가 모두 같은 값이라 어떤 θ로도 가를 수 없고, 한쪽으로 다 찍으면 2/4 = 50%다. Device(75%)가 이보다 높다. 즉 '지금 순간만 읽을 수 있을 때는 device의 기억이 쓰였다'. 다만 25%p 차이를 전부 기억의 몫으로 보지는 않는다. 입력을 넣는 방식, device의 변화, 읽는 방식이 함께 작용해서 한 부분의 몫만 떼어 낼 수 없기 때문이다. <span class="src">Singh 2026, p.18</span></p>
+</div>
+<div class="step">
+<p><b>8. 시스템 비용.</b> Device가 도움이 되더라도, 전류를 재는 회로와 readout까지 합친 비용이 MCU(센서 옆에 붙는 작은 컴퓨터 칩)의 타이머로 간격을 재는 것보다 싼지는 따로 따져야 한다(<a href="../days/d05.html#ch-competitor">digital baseline: 저전력 MCU + 작은 신경망</a>). 이 예제에서는 계산하지 않는다.</p>
+</div>
+</div>
+<p><strong>그림 4로 한 번에 보기.</strong> 단계 3–7을 한 장에 모았습니다. 가로줄 하나가 답하는 방법 하나이고, 오른쪽 상자가 그 방법의 test accuracy입니다. 동그라미는 training sample, 마름모는 test sample, 빨간 테두리는 틀린 답입니다. 주황 점선이 training sample로 정한 θ입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig6-worked-example.svg" alt="펄스 간격 예제의 세 방법. (a) device의 state x에 threshold θ = 1.34 µA를 그으면 test sample 중 120 ms만 틀려 75%. (b) raw input baseline: device 없이 Δt에 θ = 190 ms를 그어도 120 ms만 틀려 75%. (c) static device baseline: 기억 없는 저항은 모든 sample이 1.00 µA라 가를 수 없어 50%." class="figure-img"><figcaption><b>그림 4.</b> 같은 task를 세 방법으로 풀고 test accuracy를 비교한다. <b>(a)</b> device의 state x로 답하기. <b>(b)</b> raw input baseline: device 없이 Δt 숫자로 답하기(가로축은 로그). <b>(c)</b> static device baseline: 기억이 없는 저항이면. x는 PPF 모형식으로 계산한 가상 측정값이며 특정 device의 측정이 아니다. (Claude가 계산해 그림)</figcaption></figure>
+</section>
+<section id="s-ladder" class="level4">
+<h4 class="anchored" data-anchor-id="s-ladder">2-2. 사다리 한 장으로 정리하기</h4>
+<p><strong>무엇을 볼지.</strong> 펄스 간격 예제의 순서를 아래에서 위로 쌓으면 그림 5의 사다리가 됩니다. 왼쪽이 단의 이름, 가운데가 그 단에서 보여야 하는 것(회색 글씨: 펄스 간격 예제에서는 무엇이었나), 오른쪽이 그 단까지 오면 말할 수 있는 것입니다. 맨 아래 0단(현상 재현)은 학습 구간 1의 PPF처럼 '현상이 보인다'는 것뿐이고, 1–6단 어느 것도 증명하지 않습니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig1-ladder.svg" alt="학습형 계산의 사다리: 0 현상 재현, 1 task 정의, 2 읽을 수 있는 state, 3 학습한 readout, 4 held-out 성능, 5 baseline 비교, 6 시스템 비용. 각 단에서 보여야 하는 것, 2-1 예제에서 무엇이었는지, 그 단까지 오면 말할 수 있는 것" class="figure-img"><figcaption><b>그림 5.</b> 학습형 계산에서 "계산한다"고 말하기까지의 사다리. 가운데 회색 글씨가 펄스 간격 예제에서 각 단이 무엇이었는지, 오른쪽이 그 단까지 오면 말할 수 있는 것이다. 뒤에서 폴더 논문들을 이 사다리에 놓는다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><strong>왜 아래부터인가.</strong> 아래 단이 안 되면 위 단의 숫자를 믿을 수 없습니다. 예를 들어 같은 입력에 device가 매번 다른 state를 낸다면(2단 실패), accuracy가 높게 나와도 그것이 device 덕인지 운 덕인지 알 수 없습니다. <span class="src">Singh 2026, p.8</span></p>
+<p><strong>이 사다리는 언제 쓰나.</strong> <span class="key">readout의 숫자(θ 같은 것)를 <strong>데이터로 정하는</strong> 계산을 확인할 때 씁니다. Phase 2–5에서 읽을 RC 논문들이 모두 여기에 해당합니다.</span></p>
+<ul>
+<li>학습 구간 1처럼 사람이 문턱(1.5)을 미리 정해 둔 계산이라면, 3단(readout 학습)과 4단(test 채점)은 필요 없습니다. 그때는 정해 둔 입력 범위에서 맞는 답이 반복해서 나오는지만 확인합니다. <span class="src">Stepney 2024, p.666–667</span></li>
+<li>단, 사람이 측정 데이터를 보고 1.5를 골랐다면 그것도 데이터로 정한 셈입니다. 고를 때 안 본 입력으로 다시 확인해야 합니다.</li>
+<li>5단(baseline)은 '계산이 일어났다'에서 한 걸음 더 나아가 '<strong>device가</strong> 기여했다'고 말하고 싶을 때 필요합니다. <span class="tag tag-interp">해석</span></li>
+</ul>
+<p><span id="s-ladder-table"></span><strong>각 단이 지우는 '다른 설명'.</strong> 점수가 좋게 나와도 "device 덕이 아니라 다른 이유 때문일 수 있다"는 의심이 남습니다. 사다리의 단 하나가 이런 의심을 하나씩 지웁니다. 펄스 간격 예제에 맞춰 보면 이렇습니다. <span class="tag tag-interp">해석</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>단</th>
+<th>이 단이 없으면 남는 의심</th>
+<th>펄스 간격 예제에서</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 task</td>
+<td>'맞았다'를 셀 기준이 없다</td>
+<td>정답 = 100 ms보다 짧은가, metric = test accuracy</td>
+</tr>
+<tr class="even">
+<td>2 읽을 수 있는 state</td>
+<td>좋은 결과가 측정 흔들림이나 운일 수 있다</td>
+<td>간격마다 다른 x, 반복해도 같다고 가정(실제로는 측정 필요)</td>
+</tr>
+<tr class="odd">
+<td>3 학습한 readout</td>
+<td>전류값 자체는 답이 아니다</td>
+<td>training sample로 θ = 1.34 µA를 정함</td>
+</tr>
+<tr class="even">
+<td>4 held-out (test)</td>
+<td>readout이 training sample을 외웠을 수 있다</td>
+<td>training 100% → test 75%. 외우기만 한 readout은 test에서 답하지 못함</td>
+</tr>
+<tr class="odd">
+<td>5 baseline</td>
+<td>device를 빼도 같은 점수가 나올 수 있다(그러면 device 덕이 아니다)</td>
+<td>raw input 75%(같음), static device 50%(낮음)</td>
+</tr>
+<tr class="even">
+<td>6 시스템 비용</td>
+<td>다른 방법(MCU 등)이 더 쌀 수 있다</td>
+<td>계산하지 않음</td>
+</tr>
+</tbody>
+</table>
+<div class="quiz" data-day="d06" data-set="2-check"></div>
+</section>
+<section id="s-rungs-deeper" class="level4">
+<h4 class="anchored" data-anchor-id="s-rungs-deeper">2-3. 단마다 더 깊게: task와 state, readout, held-out과 baseline</h4>
+<p><strong>왜 한 번 더 보나.</strong> 펄스 간격 예제는 작았습니다. State는 숫자 하나, sample은 8개였습니다. 실제 논문은 다릅니다. State가 수백–수천 개, sample이 수천–수만 개입니다. 규모가 커지면 같은 단에서도 새로 조심할 점이 생깁니다.</p>
+<p>아래 기초 상자 셋이 사다리의 1–5단을 차례로 다룹니다.</p>
+<ul>
+<li>기초 2: task(1단)와 읽을 수 있는 state(2단)</li>
+<li>기초 3: 학습한 readout(3단)</li>
+<li>기초 4: held-out(4단)과 baseline(5단)</li>
+</ul>
+<div id="b-task-state" class="basics">
+<p><strong>기초 2: task와 읽을 수 있는 state</strong></p>
+<p><strong>Task(1단).</strong> Task는 세 가지로 정해집니다. 무엇을 넣나(입력), 무엇이 맞는 답인가(정답), 어떻게 채점하나(metric). 펄스 간격 예제의 task는 입력 = 간격 Δt, 정답 = 1 또는 0, metric = accuracy였습니다. 논문에서 흔히 보는 task 세 가지를 같은 틀로 적으면 이렇습니다.</p>
+<ul>
+<li><strong>MNIST</strong>(device 논문에서 가장 흔한 연습 task): 입력 = 손글씨 숫자 그림(28×28 픽셀), 정답 = 0–9 중 하나, metric = accuracy.</li>
+<li><strong>시계열 task</strong>: 입력 = 전압 펄스 열. 정답 = 그 열이 어느 종류인지(분류) 또는 다음 값이 얼마인지(예측). Metric = accuracy, 또는 오차의 크기(예: NRMSE, 오차를 정답의 크기로 나눈 값).</li>
+<li><strong>심전도(ECG, 심장의 전기 신호) 패치</strong>(Day 3–4·Day 9의 <a href="../days/d02b.html#rt-biosignal">몸에 붙인 전극으로 읽는 심전도</a>): 입력 = 박동 하나 구간의 전압 파형, 정답 = 정상/이상, metric = accuracy(또는 이상 박동을 놓친 비율).</li>
+</ul>
+<p><span class="key">Task가 없으면 "맞았다"는 말 자체가 성립하지 않습니다.</span></p>
+<p>아래 사진은 MNIST task의 입력이 실제로 어떻게 생겼는지 보여 줍니다.</p>
+<figure class="fig photo figure"><img src="../assets/img/web/d06-mnist-digits.png" alt="MNIST test data에서 뽑은 손글씨 숫자 0부터 9까지가 줄마다 20개씩, 검은 바탕에 흰 글씨로 놓인 격자" loading="lazy" class="figure-img"><figcaption><b>사진(데이터 실물).</b> MNIST task의 입력이 실제로 이렇게 생겼다. 칸 하나가 28×28 픽셀 그림 한 장이고, 줄마다 정답(0–9)이 같은 그림 20장씩이다. <b>볼 것:</b> 같은 '7'이라도 기울기·굵기·가운데 가로획 유무가 제각각이다. task(1단)란 이런 그림 하나를 넣고 정답 하나를 맞히는지 세는 규칙이고, readout이 '외우기'가 아니라 '규칙 배우기'를 했는지는 training에 안 쓴 그림(held-out)으로만 알 수 있다. 출처: Suvanjanprasai, <a href="https://commons.wikimedia.org/wiki/File:MNIST_dataset_example.png" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0.</figcaption></figure>
+<p><strong>읽을 수 있는 state(2단).</strong> Device 안에서 실제로 변하는 것은 이온 분포, 농도 프로필, 계면 전하 같은 <strong>물리 상태</strong>입니다. 그런데 readout은 이것을 직접 볼 수 없습니다. Readout이 받는 것은 전극에서 잰 숫자뿐입니다.</p>
+<p>그래서 계산에서 말하는 state는 '입력을 넣은 뒤 device에서 <strong>실제로 측정한 값</strong>(전류, 전압, conductance)들의 목록'입니다.</p>
+<p>이 state가 쓸모 있으려면 두 조건이 붙습니다.</p>
+<ul>
+<li><ol type="a">
+<li><strong>구별</strong>: 다른 답을 가져야 할 입력들은 서로 다른 state로 끝나야 합니다. 같은 state로 끝나면 readout이 아무리 애써도 못 가릅니다.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li><strong>반복 가능</strong>: 같은 입력을 다시 넣으면 거의 같은 state가 나와야 합니다.</li>
+</ol></li>
+</ul>
+<p>그림 6은 두 조건을 눈으로 확인하는 그림입니다. 입력 A·B·C를 다섯 번씩 넣고, 끝난 뒤 전류(끝 전류)를 점으로 찍었습니다. 입력마다 줄이 하나, 점 하나가 측정 한 번입니다. 가로 위치가 전류값이니, <strong>줄끼리 가로 위치가 다르면 구별</strong>되는 것이고, <strong>한 줄의 다섯 점이 모여 있으면 반복</strong>되는 것입니다. 맨 위 상자는 두 조건이 다 맞는 경우, 아래 두 상자는 조건이 하나씩 깨진 경우입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig8-state-conditions.svg" alt="세 상자. 상자마다 입력 A·B·C의 줄이 하나씩 있고 끝 전류(µA) 축 위에 다섯 번의 측정이 점으로 찍혀 있다. (1) 세 줄의 점 무리가 1.2, 1.5, 1.8 µA에 따로 모여 문턱 둘로 가를 수 있음. (2) B와 C의 무리가 둘 다 1.5 µA에 있어 가를 수 없음. (3) 각 줄의 다섯 점이 넓게 흩어져 이웃 줄과 겹침" class="figure-img"><figcaption><b>그림 6.</b> 읽을 수 있는 state의 두 조건. 입력 A·B·C를 다섯 번씩 넣고 끝 전류를 찍었다. 줄 하나가 입력 하나, 점 하나가 측정 한 번. <b>(1)</b> 입력마다 다른 자리에 모이고 다섯 점이 거의 같은 값 → 문턱 둘로 가를 수 있다. <b>(2)</b> B와 C가 같은 전류로 끝난다 → 어떤 문턱으로도 못 가른다(구별 실패). <b>(3)</b> 다섯 점이 흩어져 이웃 입력과 겹친다 → 역시 못 가른다(반복 실패). 전류값은 모식도의 가상 값. (Claude가 그림)</figcaption></figure>
+<p><strong>왜 반복이 중요한가.</strong> 측정 한 번만 보면 기억처럼 보이지만 실은 잡음인 것들이 있습니다. Singh 2026은 그런 "겉보기 기억"의 원인으로 넷을 듭니다.</p>
+<ul>
+<li>바닥 드리프트(drift: 기준값이 시간에 따라 천천히 흘러감)</li>
+<li>불완전한 리셋</li>
+<li>열 축적</li>
+<li>비가역적 구조 변화</li>
+</ul>
+<p>Singh은 이런 겉보기 기억이 한 번의 측정에서는 인상적으로 보여도, 재현성을 해치므로 형편없는 계산 자원이라고 씁니다. <span class="src">Singh 2026, p.6</span> <a href="../days/d04b.html#ch-synapse-states">Synapse device spec (1)</a>에서 본 "구별되고 반복 가능한 상태 수"와 같은 조건입니다.</p>
+<p><span class="key">State에 과거가 담긴다는 것과, task에 필요한 정보를 그 state에서 읽어 낼 수 있다는 것은 다른 말입니다.</span> 읽어 내려면 state가 몇 가지를 더 갖춰야 합니다. 각각은 뒤의 Day에서 이름을 달고 따로 다룹니다.</p>
+<ul>
+<li>서로 다른 입력 이력이 서로 다른 state로 가는가: <a href="../days/d14a.html#ch-separation">분리(separation)</a></li>
+<li>Task에 필요한 만큼 먼 과거까지 남는가(시간 창): <a href="../days/d09a.html#ch-fading">fading memory</a>와 <a href="../days/d13a.html#ch-mc-by-hand">memory capacity</a></li>
+<li>단순한 readout(직선 하나)이 가를 수 있는 모양인가: <a href="../days/d10a.html#ch-separability">선형 분리</a>와 <a href="../days/d14a.html#ch-rank">rank</a></li>
+<li>State 사이의 차이가 반복 흔들림보다 큰가: <a href="../days/d18a.html#ch-noise-gap">상태 차이 대 잡음</a></li>
+<li>같은 입력에 같은 state가 다시 나오는가: <a href="../days/d09a.html#s-washout-esp">echo state property와 반복성</a></li>
+</ul>
+<p><strong>작은 숫자로: 4-bit 펄스 열.</strong> 이 예는 '구별'이 숫자로 무슨 뜻인지 보여 줍니다. 먼저 입력부터 봅니다. 4-bit 펄스 열은 박자 네 번짜리 입력입니다. 박자마다 1이면 펄스를 넣고, 0이면 쉽니다. 예: 1010은 첫째·셋째 박자에만 펄스를 넣습니다. 가능한 열은 0000부터 1111까지 2⁴ = 16가지입니다.</p>
+<p>이 열을 device에 넣고, 끝난 뒤 전류 하나를 읽는다고 합시다.</p>
+<ul>
+<li>16개 열이 16개의 서로 다른 전류값으로 끝난다.</li>
+<li>같은 열을 다시 넣었을 때의 흔들림이, 이웃한 전류값과의 간격보다 작다.</li>
+</ul>
+<p>둘 다 맞으면 <span class="key">이 device는 "4-bit 열을 전류 하나로 구별하는" state를 가진 것입니다.</span> 흔들림이 간격보다 크면 구별되는 state 수는 16보다 작습니다. 폴더 사례의 <a href="#s-case-lee">Lee 2025</a>(HfO₂ memristor로 손글씨 숫자 분류)가 바로 이 방식으로 픽셀 하나의 시간 정보를 device 하나에 넣습니다.</p>
+</div>
+<div id="b-readout" class="basics">
+<p><strong>기초 3: 학습한 readout — state에서 답을 꺼내는 직선 맞추기</strong></p>
+<p><strong>왜 필요한가.</strong> Device가 0.37 µA를 냈다고 해서 그것이 "숫자 7"이라는 뜻은 아닙니다. State(측정값 목록)를 답으로 바꾸는 규칙이 따로 필요합니다. 그 규칙을 데이터로 정하는 것이 readout 학습입니다. 펄스 간격 예제의 readout은 문턱 하나였습니다. State가 여러 개면 규칙도 커집니다.</p>
+<p><strong>기호부터.</strong> 아래 식에 나오는 기호는 셋입니다.</p>
+<ul>
+<li><span class="math inline">\(\mathbf{x}\)</span>: state 벡터. 측정값들을 한 줄로 늘어놓은 목록입니다.</li>
+<li><span class="math inline">\(W_{out}\)</span>: weight 행렬. 측정값마다 "얼마나 중요하게 볼지"를 곱하는 숫자들의 표입니다(<a href="../days/d02a.html#b-weight">weight</a>).</li>
+<li><span class="math inline">\(\mathbf{y}\)</span>: readout이 내는 답입니다.</li>
+</ul>
+<p><strong>무엇인가.</strong> 가장 단순한 readout은 <span class="math inline">\(\mathbf{y} = W_{out}\mathbf{x}\)</span>입니다. 측정값마다 weight를 곱해 더하는 행렬–벡터 곱입니다(<a href="../days/d04a.html#b-vector-matrix">원소, 입력 벡터, weight 행렬</a>).</p>
+<p>"학습"은 <span class="math inline">\(W_{out}\)</span>의 숫자들을 정하는 일입니다. 정답을 아는 예제들(training data)을 놓고, 예측과 정답의 차이가 가장 작아지는 숫자를 고릅니다. 차이는 보통 '차이를 제곱해 모두 더한 값'으로 잽니다.</p>
+<p>State가 하나이고 답도 하나면, 이것은 "점들에 가장 잘 맞는 직선 긋기"(linear regression, 선형 회귀)와 같습니다. 예: state <span class="math inline">\(x\)</span> = 2, 4, 6일 때 정답 <span class="math inline">\(y\)</span> = 1, 2, 3이면 <span class="math inline">\(y = 0.5x\)</span>가 가장 잘 맞습니다. 이때 <span class="math inline">\(W_{out}\)</span> = 0.5입니다.</p>
+<p>State가 100개면 weight도 100개입니다. 하는 일은 같고 숫자만 많아서, 계산은 컴퓨터가 합니다. (수학 용어로는 100차원 공간의 평평한 면, 곧 hyperplane을 맞춘다고 합니다.)</p>
+<p>답이 '짧다/길다' 같은 범주일 때(분류) 가장 작은 readout은 <strong>문턱(threshold) 하나</strong>입니다. 펄스 간격 예제의 'x가 θ보다 크면 1'이 그것입니다. θ를 training data로 정했으니 그것도 학습한 readout입니다.</p>
+<p><strong>왜 "readout만" 학습하나.</strong> Reservoir computing(RC, Phase 2)의 핵심 약속은 이렇습니다. Device(reservoir)는 고정하고 <strong>readout만</strong> 학습한다. 계산의 큰 몫은 device의 물리 변화가 맡고, 컴퓨터 쪽 readout은 작게 둔다는 뜻입니다. Liang은 이것을 물리 동역학을 계산 자원으로 "수확"해 자원 효율적인 정보 처리를 노린다고 표현합니다. <span class="src">Liang 2024, p.194</span> 그러니 readout이 커질수록 device에서 "수확"한 몫은 줄어듭니다.</p>
+<p><strong>Readout이 커지면 무엇이 문제인가.</strong> Readout이 크다는 것은 state 수가 많거나, 여러 층의 신경망처럼 선형이 아닌 복잡한 규칙을 쓴다는 뜻입니다. 그러면 device가 아무것도 안 해도 readout 혼자 답을 맞힐 수 있습니다. 학습 구간 1의 <a href="#ch-phenomenon-vs-computation">돌멩이-컴퓨터 이야기</a>와 같은 실패입니다. 일은 해석하는 쪽(readout)이 다 하고, 물리계는 아무 일도 하지 않은 경우입니다. 그래서 다음 상자의 두 조건, held-out과 baseline이 필요합니다.</p>
+</div>
+<div id="b-heldout-baseline" class="basics">
+<p><strong>기초 4: held-out 성능과 baseline</strong></p>
+<p><strong>Held-out(4단) — 안 본 데이터에서 맞히는가.</strong> 펄스 간격 예제의 '데이터 나누기'와 'Test로 채점' 카드에서 한 일을 일반 규칙으로 적으면 이렇습니다.</p>
+<p>Training에 쓴 데이터로 성능을 재면, readout이 그 데이터를 <strong>외운</strong> 것인지 <strong>규칙을 배운</strong> 것인지 구별할 수 없습니다. ★ <span class="key">그래서 데이터를 둘로 나눠, 한쪽(training)으로 <span class="math inline">\(W_{out}\)</span>를 정하고 다른 쪽(held-out, test)으로만 성능을 잽니다.</span></p>
+<p>지킬 것이 둘 있습니다.</p>
+<ul>
+<li>나누는 시점은 학습 <strong>전</strong>입니다.</li>
+<li>떼어 둔 sample은 설정을 고를 때도 쓰지 않습니다. 여기서 설정은 readout의 숫자뿐 아니라 'state를 몇 개 쓸지', '문턱을 얼마로 할지' 같은 선택까지 말합니다. Test data를 보며 설정을 고르면, 그 데이터도 사실상 training에 쓴 셈이 되기 때문입니다. <span class="tag tag-interp">해석</span></li>
+</ul>
+<p>Stepney는 reservoir를 학습한 뒤 "독립적인 test data로 평가해야 하며, 이 평가가 시스템이 요구된 계산을 충분히 잘 한다는 증거"라고 씁니다. <span class="src">Stepney 2024, p.669</span></p>
+<p><span id="s-r2-sim"></span><strong>작은 숫자로 — 외우기가 얼마나 쉬운가.</strong> 이 시뮬레이션은 한 가지를 보이기 위한 것입니다. <span class="key">Device가 <strong>아무 쓸모 없는</strong> 숫자를 내더라도, 그 숫자가 많기만 하면 training 점수는 오른다.</span> 그러니 training 점수는 device가 일했다는 증거가 될 수 없습니다. 먼저 점수를 매기는 metric인 <span class="math inline">\(R^2\)</span>를 보고, 그다음 시뮬레이션의 설정과 그림 7을 봅니다.</p>
+<p><strong><span class="math inline">\(R^2\)</span>란.</strong> 펄스 간격 예제의 metric은 accuracy였습니다. 그런데 정답이 숫자(예: 다음 전압값)인 task에서는 '맞았다/틀렸다'로 셀 수 없습니다. 대신 예측이 정답에서 얼마나 벗어났는지로 채점합니다. <span class="math inline">\(R^2\)</span>(R-squared)가 그런 metric입니다. 뜻은 한 줄입니다. ★ <span class="key"><strong>"정답의 평균값만 계속 내는 바보 예측"과 비교해 내 예측이 얼마나 나은가.</strong></span></p>
+<ul>
+<li><span class="math inline">\(R^2\)</span> = 1: 완벽하게 맞힘.</li>
+<li><span class="math inline">\(R^2\)</span> = 0: 바보 예측과 같은 수준.</li>
+<li><span class="math inline">\(R^2\)</span> &lt; 0: 바보 예측보다도 못함.</li>
+</ul>
+<p><strong>숫자로 하나.</strong> 정답이 1, 2, 3, 6인 sample 4개가 있다고 합시다. 평균은 (1 + 2 + 3 + 6) ÷ 4 = 3입니다.</p>
+<ol type="1">
+<li><strong>바보 예측의 오차.</strong> 네 sample 모두 "3"이라고 답하면 오차(정답 − 예측)는 −2, −1, 0, 3입니다. 제곱하면 4, 1, 0, 9. 평균은 14 ÷ 4 = 3.5. 이 값, 곧 <strong>평균값만 냈을 때의 오차 제곱 평균</strong>을 <strong>분산</strong>(variance)이라고 부릅니다. 모든 예측은 이 3.5와 비교됩니다.</li>
+<li><strong>내 예측의 오차.</strong> 같은 방법으로 내 readout의 예측 오차를 제곱해 평균 냅니다.</li>
+<li><strong>나누기.</strong> <span class="math inline">\(R^2 = 1 - (\text{내 예측의 오차 제곱 평균}) \div (\text{분산})\)</span>.</li>
+</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>내 예측</th>
+<th>오차(정답 − 예측)</th>
+<th>오차 제곱의 평균</th>
+<th><span class="math inline">\(R^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>늘 3 (바보 예측)</td>
+<td>−2, −1, 0, 3</td>
+<td>3.5 (= 분산)</td>
+<td>1 − 3.5 ÷ 3.5 = <strong>0</strong></td>
+</tr>
+<tr class="even">
+<td>1.5, 2, 3, 5.5 (좋은 예측)</td>
+<td>−0.5, 0, 0, 0.5</td>
+<td>0.125</td>
+<td>1 − 0.125 ÷ 3.5 = <strong>0.96</strong></td>
+</tr>
+<tr class="odd">
+<td>6, 1, 5, 0 (엉뚱한 예측)</td>
+<td>−5, 1, −2, 6</td>
+<td>16.5</td>
+<td>1 − 16.5 ÷ 3.5 = <strong>−3.7</strong></td>
+</tr>
+</tbody>
+</table>
+<p>읽는 법은 이렇습니다. 내 예측의 오차가 바보 예측과 같으면 0, 더 작으면 0과 1 사이, 더 크면 음수입니다. 뒤의 그림 7에서 held-out <span class="math inline">\(R^2\)</span>가 −2.65까지 내려가는 것은 "오차 제곱의 평균이 분산의 3.65배(= 1 + 2.65)", 곧 바보 예측보다 훨씬 나쁘다는 뜻입니다.</p>
+<p>정식 설명은 <a href="../days/d13a.html#b-variance-share">분산·상관²</a>에 있습니다.</p>
+<details class="deep">
+<summary>
+심화 · 분산을 n으로 나누나 n−1로 나누나
+</summary>
+<p>Sample에서 모집단의 분산을 추정할 때는 개수 4 대신 n−1 = 3으로 나눈 4.67을 쓰는 것이 교과서 기본입니다. <span class="math inline">\(R^2\)</span> 계산에서는 분자(예측 오차)와 분모(분산)를 같은 방식으로 나누므로 어느 쪽으로 나누든 결과가 같습니다.</p>
+</details>
+<p><strong>시뮬레이션의 설정.</strong> 쓸모없는 device를 일부러 만듭니다. 컴퓨터 안에서 주사위를 굴리듯 무작위 숫자를 만드는 것입니다.</p>
+<ol type="1">
+<li>Sample 40개를 만듭니다. 각 sample의 정답 <span class="math inline">\(y\)</span>는 무작위 숫자입니다.</li>
+<li>각 sample의 state도 무작위 숫자 <span class="math inline">\(p\)</span>개입니다. 정답과 <strong>아무 관계가 없습니다</strong>. 이것이 "쓸모없는 device"입니다.</li>
+<li>Readout은 기초 3의 직선 맞추기입니다. State <span class="math inline">\(p\)</span>개에 weight <span class="math inline">\(p\)</span>개를 곱해 더해 <span class="math inline">\(y\)</span>를 맞춥니다. Weight는 training sample 40개로 정합니다.</li>
+<li>점수(<span class="math inline">\(R^2\)</span>)는 두 번 잽니다. Weight를 정하는 데 쓴 training sample 40개에서 한 번, 새로 만든 held-out sample 400개에서 한 번.</li>
+<li><span class="math inline">\(p\)</span>를 2, 5, 10, …, 30으로 바꿔 가며 1–4를 되풀이합니다(각 20회 평균).</li>
+</ol>
+<p><strong>그림 7 읽는 법.</strong> 가로축은 state 수 <span class="math inline">\(p\)</span>, 세로축은 <span class="math inline">\(R^2\)</span>입니다. 빨간 선은 training sample에서 잰 <span class="math inline">\(R^2\)</span>, 파란 선은 held-out sample에서 잰 <span class="math inline">\(R^2\)</span>입니다. 0 높이의 회색 선이 "평균값만 내는 바보 예측"의 수준입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig3-heldout.svg" alt="정답과 무관한 잡음 state p개로 sample 40개에 직선을 맞출 때, training R²는 p가 늘수록 0.74까지 오르지만 held-out R²는 0 아래로 계속 떨어져 p = 30에서 −2.65가 되는 시뮬레이션 곡선" class="figure-img"><figcaption><b>그림 7.</b> 정답과 무관한 잡음 state로도 training $R^2$는 오른다(난수 시뮬레이션, 순수 Python, seed 7, 20회 평균. seed는 무작위 숫자를 만드는 시작값으로, 같은 seed면 다시 돌려도 같은 숫자가 나와 결과를 재현할 수 있다). 가로축은 readout이 쓰는 state 수 $p$, 세로축은 $R^2$. 빨간 선이 training sample, 파란 선이 held-out sample에서 잰 값. 회색 가로선($R^2$ = 0)이 정답의 평균값만 내는 수준이다. State 수가 sample 수(40)에 가까워질수록 빨간 선은 오르고 파란 선은 내려간다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>그림을 따라가며.</strong> <span class="math inline">\(p\)</span> = 2일 때는 두 선이 다 0 근처입니다. 쓸모없는 state 2개로는 training도 못 맞춥니다. <span class="math inline">\(p\)</span>가 늘수록 빨간 선이 오릅니다. <span class="math inline">\(p\)</span> = 30이면 training <span class="math inline">\(R^2\)</span> = 0.74입니다. 정답과 무관한 숫자인데도 training에서는 '꽤 맞힌' 것처럼 보입니다. 같은 readout을 held-out sample에 쓰면 파란 선은 −2.65까지 내려갑니다. 바보 예측보다 훨씬 나쁩니다. ★ <span class="key">Training 점수만 보면 이 readout은 쓸 만해 보이지만, held-out 점수를 보면 아무것도 배우지 않았다는 것이 드러납니다.</span></p>
+<p><strong>왜 training에서는 오르나.</strong> Weight 하나는 예측을 움직이는 손잡이 하나입니다. 손잡이가 많을수록 training sample 하나하나의 예측을 따로 맞춰 줄 여지가 커집니다. 손잡이 수가 sample 수와 같아지면(<span class="math inline">\(p\)</span> = <span class="math inline">\(n\)</span> = 40) 모든 training sample을 정확히 맞출 수 있습니다(training <span class="math inline">\(R^2\)</span> = 1). 그 전까지는 대략 <span class="math inline">\(p/n\)</span> 근처입니다(30/40 = 0.75; 시뮬레이션 값 0.74) <span class="tag tag-interp">해석</span>.</p>
+<p><strong>왜 held-out에서는 음수인가.</strong> 그 '맞음'은 training sample 40개가 우연히 가진 값에 손잡이를 맞춘 것입니다. 새 sample은 다른 우연한 값을 가지니, 그 손잡이는 엉뚱한 예측을 냅니다. 평균값만 낼 때보다 오차가 커지므로 <span class="math inline">\(R^2\)</span>가 음수가 됩니다. <span class="math inline">\(p\)</span>가 클수록 손잡이가 training sample에 더 꼭 맞춰져 있어 새 sample에서는 더 엉뚱해집니다. 파란 선이 <span class="math inline">\(p\)</span>와 함께 계속 내려가는 이유입니다.</p>
+<p>이것이 펄스 간격 예제에서 이름을 붙인 <strong>overfitting</strong>입니다. Training data의 우연한 잡음까지 외워서, training 성능만 오르고 새 데이터에서는 나빠지는 것입니다. 조절할 숫자(state 수, weight 수)가 sample 수에 가까워질수록 쉽게 일어납니다. 그러니 <span class="key"><strong>training accuracy는 증거가 아니고</strong>, held-out accuracy와 함께 state 수·sample 수·readout 크기를 적어야 합니다.</span></p>
+<p>같은 현상을 손으로 그린 예로 보고 싶다면 아래 영상을 보세요. Training/test 성능이 갈라지는 장면이 그림 7의 빨간 선·파란 선과 같습니다.</p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/EuBBz3bI-aA?start=83&amp;rel=0" title="영상: Machine Learning Fundamentals: Bias and Variance" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:23–6:36, 약 5분 · 전체 6분 36초, 영어·자막).</b> StatQuest with Josh Starmer, "Machine Learning Fundamentals: Bias and Variance". <b>볼 이유:</b> 1:23 'training/test data 나누기' 챕터부터, 직선 맞추기와 구불구불한 선 맞추기를 같은 데이터에 해 보고 3:40 'test data에서의 성능' 챕터에서 둘의 순위가 뒤집히는 장면을 보여 준다. 5:10 챕터가 overfit(overfitting)의 정의다. 그림 7에서 빨간 선(training)과 파란 선(held-out)이 갈라지는 것과 같은 현상을 손으로 그린 예로 본다. <b>보고 답할 질문:</b> 구불구불한 선이 training data에서 오차 0을 낸 것은 무엇을 증명하고, 무엇을 증명하지 못하나? 그림 7의 상태 수 p를 늘리는 것은 영상의 어느 쪽 선에 해당하나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터(영상 내용은 미검증)</span></div></div>
+<p><span id="s-baseline-kinds"></span><strong>Baseline(5단) — device가 없었다면.</strong> Test에서 90%가 나왔다고 합시다. 그 90%가 device 덕인지 readout 덕인지는 아직 모릅니다. 확인하는 방법은 <strong>device를 빼고, 같은 종류의 readout을 다시 학습시켜 보는 것</strong>입니다.</p>
+<p>"Device를 뺀다"는 말이 이상하게 들릴 수 있습니다. Device가 있어야 무언가를 배우는 것 아닌가? 아닙니다. <span class="key">RC에서 배우는 쪽은 device가 아니라 readout입니다. Device는 입력을 다른 숫자(state)로 바꿔 주는 <strong>변환기</strong>일 뿐이고, 답을 배우는 일은 readout이 합니다.</span> 두 시스템을 나란히 놓으면 이렇습니다.</p>
+<ul>
+<li>내 시스템: 입력 → <strong>device가 입력을 state로 바꾼다</strong> → readout이 state에서 답을 배운다.</li>
+<li>Raw input baseline: 입력 → (device 없음) → readout이 <strong>입력 숫자에서 바로</strong> 답을 배운다.</li>
+</ul>
+<p>펄스 간격 예제의 raw input baseline 카드가 바로 이것이었습니다. Device 쪽은 전류 x(1.79, 1.46, …)를 보고 θ를 정했고, baseline 쪽은 Δt 숫자(20, 80, …)를 보고 θ를 정했습니다. 둘 다 75%였으니, device는 입력을 더 가르기 쉽게 바꿔 주지 않은 것입니다. ★ <span class="key">Device를 빼도 점수가 같으면, 그 점수는 device 덕이 아닙니다.</span> (이 비교는 입력 숫자를 컴퓨터가 이미 갖고 있을 때 할 수 있습니다. 뒤의 Lee 2025에서는 픽셀 값 3136개가 그 입력 숫자입니다.)</p>
+<p>펄스 간격 예제에서는 baseline 두 종류(raw input, static device)를 봤습니다. 논문에서 쓰는 종류는 더 있습니다. 그림 8은 네 종류를 한 장에 놓은 것입니다. 맨 윗줄이 내 시스템이고, 그 아래 줄 하나가 baseline 하나입니다. 줄마다 내 시스템의 어느 부분을 바꿔 끼웠는지 비교해 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig9-baseline-kinds.svg" alt="다섯 줄의 흐름도: 내 시스템(입력→내 device→readout→답), raw input(device 자리를 비움), static device(기억 없는 저항), 디지털 RC(컴퓨터 속 수식), MCU + 작은 신경망(전체를 바꿈)과 각각이 재는 것" class="figure-img"><figcaption><b>그림 8.</b> baseline 네 종류. 위 세 baseline은 readout을 그대로 두고 가운데 자리만 바꿔 끼운다. 마지막 줄은 시스템 전체를 다른 방법으로 바꾼다. (Claude가 그림, 모식도)</figcaption></figure>
+<p>네 종류를 하나씩 적으면 이렇습니다. 항목마다 '무엇을 바꿔 끼우나'와 '무엇을 재나'를 봅니다.</p>
+<ul>
+<li><strong>Raw input baseline</strong>: device 대신 입력 숫자를 그대로 readout에 넣는다. Device가 입력을 "더 가르기 쉽게" 바꿨는지를 잰다. 입력 전체(예: 시간 프레임 네 장 모두)를 한꺼번에 주는 경우가 흔하다.</li>
+<li><strong>Static device baseline</strong>: 기억이 없는(또는 기억을 최소화한) device로 같은 일을 한다. 예: 지금 걸린 전압만으로 전류가 정해지는 보통 저항. 시간 동역학이 얼마나 기여했는지를 잰다.</li>
+<li><strong>Digital RC baseline</strong>: 같은 RC 구조를 device 없이 컴퓨터의 숫자 계산으로 돌린다. Device의 반응을 흉내 낸 수식을 잡음 없이 계산하는 것이다. 하드웨어 잡음 때문에 잃은 accuracy를 잰다. Liang은 "비슷한 구성이면 소프트웨어 RC가 대개 낫다"고 쓴다. <span class="src">Liang 2024, p.201</span></li>
+<li><strong>MCU + 작은 신경망(NN)</strong>: 시스템 수준의 경쟁자. <a href="../days/d05.html#b-sensor-node">MCU</a>는 센서 옆에 붙는 작은 범용 컴퓨터 칩이고, 작은 신경망은 그 MCU에서 돌아가는 프로그램이다. 신경망은 수백–수천 개의 weight를 갖고, '입력에 weight를 곱해 더한 뒤, 정해 둔 비선형 함수에 통과시키기'(예: 0보다 작은 값은 0으로 자르기)를 층마다 되풀이한다. 예: 심전도 박동 하나의 숫자 200개를 넣으면 '정상/이상' 점수 두 개가 나온다.</li>
+</ul>
+<p><span id="s-evidence-levels"></span><strong>Device 덕이라고 말하려면.</strong> Baseline 한두 개보다 점수가 높다는 것만으로는 부족합니다. '그 점수가 device의 물리 변화 덕'이라고 말하려면 실험이 더 필요합니다. 다음 세 가지를 바꿔 봐도 차이가 남는지 확인하는 실험입니다.</p>
+<ul>
+<li>입력을 넣는 방식</li>
+<li>Readout이 받는 숫자 개수</li>
+<li>Readout 크기</li>
+</ul>
+<p>Singh 2026이 이렇게 씁니다. <span class="src">Singh 2026, p.19–20</span> 이런 대조 실험의 목록과, Singh이 나눈 증거의 세 수준은 아래 심화에 있습니다. 펄스 간격 예제를 이해한 뒤 다시 볼 때 펼치면 됩니다.</p>
+<details class="deep">
+<summary>
+심화 · 귀속 대조(attribution controls)와 증거의 세 수준 (Singh 2026, 다시 볼 때)
+</summary>
+<p><strong>용어 먼저.</strong> 귀속(attribution)은 성능의 공을 어디에 돌리느냐는 뜻입니다. 기판(substrate)은 여기서 웨이퍼가 아니라 계산을 맡은 물리계 자체, 곧 소재·device를 말합니다.</p>
+<p><strong>귀속 대조의 목록.</strong> Singh 2026은 보고 항목표에 "귀속 대조(attribution controls)"로 다음을 넣습니다. <span class="src">Singh 2026, p.20, Table 3</span></p>
+<ul>
+<li>입력/원시 센서 baseline</li>
+<li>기억을 최소화한 static device baseline</li>
+<li>같은 readout을 쓴 동적 reservoir</li>
+<li>절제 실험(ablation: 한 요소를 빼고 성능이 얼마나 변하는지 보는 실험). 마스크(입력을 device에 넣기 전에 곱하는 고정된 패턴, Day 17–18에서 다룸)나 채널 수를 바꾸거나 빼 본다.</li>
+</ul>
+<p>목적은 "유용한 성능이 이력에 의존하는 물리 동역학에 달려 있는지 시험하는 것"이라고 적습니다.</p>
+<p><strong>증거의 세 수준.</strong> 같은 글은 증거를 세 수준으로 나눕니다. 아래로 갈수록 앞 수준에 조건이 더 붙습니다.</p>
+<ol type="1">
+<li>Reservoir <strong>기능의 시연</strong>: 재현 가능한 state + 적절한 계산 지표.</li>
+<li>그 기능을 <strong>물리 기판에 귀속</strong>: 위에 더해, 다음 효과와 구별하는 대조 실험. 입력 부호화, feature 수, state 획득(언제·어떻게 state를 재서 숫자로 가져오는지), readout 복잡도.</li>
+<li><strong>기술적 배치 가능성</strong>: 위에 더해 안정성·편차·환경·보정·지연(입력에서 답까지 걸리는 시간)·에너지 경계(어디까지의 에너지를 셌는지 밝힌 범위).</li>
+</ol>
+<p>★ "주장의 강도는 제시된 증거 수준과 일치해야 한다." <span class="src">Singh 2026, p.19</span></p>
+</details>
+<p><strong>시스템 비용(6단).</strong> Device 바깥의 변환 회로, readout, 대기 전력까지 넣은 비용입니다(<a href="../days/d04b.html#ch-periphery">Peripheral circuits</a>, Day 31–32). 오늘은 사다리에 자리만 둡니다.</p>
+</div>
+<div class="think">
+<p>'잡음 state로도 training 성능이 오른다'는 시뮬레이션의 논리를 내 실험에 적용해 보세요.</p>
+<p>먼저 용어 하나. Virtual node는 device 하나의 응답을 여러 시점에서 읽어, 각 시점의 값을 별개의 state처럼 쓰는 것입니다(정식 설명은 Day 17–18).</p>
+<p>Device 하나에서 virtual node 200개를 읽고, task의 sample이 100개라고 합시다. 아무 정보 없는 device로도 training accuracy가 얼마나 나올까요? Held-out을 떼어 두지 않으면 무엇을 증명할 수 없나요?</p>
+<details class="think-answer">
+<summary>
+생각 정리 보기
+</summary>
+<ul>
+<li>State 수(200)가 sample 수(100)보다 많습니다. Weight(손잡이)가 sample보다 많으면 training sample을 거의 정확히 맞출 수 있습니다.</li>
+<li>그래서 정보 없는 device로도 training accuracy는 100%에 가깝게 나올 수 있습니다(state 수 = sample 수면 training <span class="math inline">\(R^2\)</span> = 1).</li>
+<li>Held-out이 없으면 readout이 '규칙을 배웠는지'와 'sample을 외웠는지'를 가를 수 없습니다. Device가 기여했다는 말도 할 수 없습니다.</li>
+<li>대책: sample을 늘리거나 state 수를 줄이고, training에 안 쓴 sample의 성능과 baseline을 함께 적습니다.</li>
+</ul>
+</details>
+</div>
+<div class="quiz" data-day="d06" data-set="2-end"></div>
+<div class="keypoints">
+<ul>
+<li>이 사다리(학습한 readout·held-out·baseline)는 readout을 데이터로 학습하는 계산(RC식)을 확인하는 기준이다. <span class="key">사람이 문턱을 미리 정한 계산(PPF 사각형 예제의 문턱 1.5)에는 3단·4단이 필요 없고, 정해 둔 입력 범위에서 답이 맞는지만 확인한다</span> <span class="tag tag-interp">해석</span>.</li>
+<li>Task = 입력·정답·metric이 정해진 문제. Sample = 입력과 정답의 한 쌍. <span class="key">읽을 수 있는 state = 구별되고 반복 가능한 측정값 목록</span> <span class="src">Singh 2026, p.6</span>.</li>
+<li>Readout = state에서 답을 꺼내는 규칙. 가장 단순한 것은 threshold 하나 또는 직선 맞추기(<span class="math inline">\(\mathbf{y} = W_{out}\mathbf{x}\)</span>). <span class="key">RC는 readout만 학습한다</span> <span class="src">Liang 2024, p.194</span>.</li>
+<li>Held-out: <span class="key">training data 성능은 증거가 아니다</span>. 잡음 state 30개로도 training <span class="math inline">\(R^2\)</span> 0.74 <span class="tag tag-calc">계산</span>. 독립 test data가 증거 <span class="src">Stepney 2024, p.669</span>.</li>
+<li>Baseline: raw input / static device / digital RC / MCU+NN. <span class="key">귀속 대조 없이는 device 기여를 말할 수 없다</span> <span class="src">Singh 2026, p.19–20</span>. 펄스 간격 예제: training 100% → test 75%, raw input baseline도 75%(기여 주장 불가), 기억 없는 저항 50% <span class="tag tag-calc">계산</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-ppf-limits" class="level3">
+<h3 class="anchored" data-anchor-id="ch-ppf-limits">학습 구간 3. PPF 곡선 하나는 무엇을 증명하고 무엇을 증명하지 못하나</h3>
+<div class="goal">
+<p><strong>상황.</strong> 내 device에서 PPF를 재고 시간상수(time constant: 남은 효과가 줄어드는 빠르기) τ₁, τ₂를 얻었습니다. 논문에 "비선형이고 서서히 잊으니 reservoir로 쓸 수 있다"고 써도 될까요?</p>
+<p><strong>왜 지금?</strong> PPF 곡선은 이온 device 논문의 첫 그림입니다. 이 곡선 하나가 무엇을 보여 주고 무엇을 보여 주지 않는지 알아야 내 문장의 수위를 정할 수 있습니다.</p>
+<p><strong>어디에 쓰이나?</strong> 내 PPF 데이터를 논문 문장으로 옮길 때, 그리고 다른 논문의 PPF 그림을 읽을 때 씁니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> PPF 곡선이 주는 정보(시간상수)와 주지 않는 정보(task 성능)를 나눈다. "비선형 + 서서히 잊음이면 계산"이라는 흔한 비약을 정확한 문장으로 고친다.</p>
+</div>
+<p>앞 구간의 사다리(task → 읽을 수 있는 state → 학습한 readout → held-out → baseline → 시스템 비용)에서 PPF는 맨 아래 0단(현상 재현)이었습니다. 이 구간은 그 0단을 자세히 봅니다. PPF 곡선 하나에서 무엇을 알 수 있고, 무엇을 알 수 없나.</p>
+<p><strong>PPF 곡선이란.</strong> 오늘 처음 본 PPF 그림은 간격 두 개(10 ms, 1 s)만 봤습니다. 간격을 1 ms부터 10 s까지 바꿔 가며 PPF 지수를 재고 점들을 이으면 <strong>PPF 곡선</strong>이 됩니다. 많은 시냅스 device 논문이 이것을 첫 그림으로 냅니다. 이 구간의 그림 9가 같은 모형 device의 PPF 곡선입니다. 그림을 보기 전에, 곡선을 만든 식부터 읽습니다.</p>
+<p><span id="s-ppf-formula"></span><strong>식 읽기.</strong> 곡선의 식은 <span class="math inline">\(100\,(1 + 0.6\,e^{-\Delta t/\tau_1} + 0.4\,e^{-\Delta t/\tau_2})\)</span>입니다. 복잡해 보이지만 뜻은 하나입니다. ★ <span class="key">두 번째 응답 = 첫 응답(1) + 첫 펄스가 남긴 흔적. 흔적은 두 몫으로 나뉘고, 각 몫은 간격 Δt가 길어질수록 줄어든다.</span> 항을 하나씩 보면 이렇습니다.</p>
+<ul>
+<li>1: 첫 응답. 100을 곱하면 100%.</li>
+<li><span class="math inline">\(0.6\,e^{-\Delta t/\tau_1}\)</span>: <strong>빨리 사라지는 몫</strong>. 간격이 0이면 0.6이 통째로 남고, 간격이 τ₁ = 50 ms씩 길어질 때마다 남은 양이 0.37배(<span class="math inline">\(1/e\)</span>)로 줄어든다.</li>
+<li><span class="math inline">\(0.4\,e^{-\Delta t/\tau_2}\)</span>: <strong>천천히 사라지는 몫</strong>. 간격이 0이면 0.4가 남고, τ₂ = 0.5 s씩 길어질 때마다 0.37배로 줄어든다.</li>
+</ul>
+<p>τ(tau)가 <strong>시간상수</strong>입니다. 0.6과 0.4는 두 몫의 최대 크기(간격이 0일 때 남는 양)이고, 둘을 더하면 1이라 간격 0에서 두 번째 응답은 첫 응답의 2배(200%)입니다.</p>
+<p>이 꼴은 LIF neuron에서 본 decay factor와 같습니다. 거기서는 계산 한 칸마다 남는 비율이 <span class="math inline">\(0.9 = e^{-\Delta t/\tau}\)</span>였습니다(<a href="../days/d03a.html#s-lif-decay">값·계수·leak의 빠르기는 서로 다른 양입니다</a>). 다른 점은 Δt의 뜻뿐입니다. 거기서 Δt는 계산 한 칸의 길이, 여기서는 펄스 간격입니다.</p>
+<p>이 곡선에는 시간상수가 둘(τ₁ = 50 ms, τ₂ = 0.5 s) 있습니다. 그래서 <strong>이중 지수</strong>(double exponential)라 부릅니다. 빨리 사라지는 성분과 천천히 사라지는 성분, 두 지수 감쇠의 합이라는 뜻입니다. 실제 논문들도 흔히 이렇게 피팅합니다.</p>
+<p><strong>숫자로.</strong> 간격마다 두 몫이 얼마나 남는지 계산하면 이렇습니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>간격 Δt</th>
+<th>빨리 사라지는 몫</th>
+<th>천천히 사라지는 몫</th>
+<th>두 번째 응답</th>
+<th>PPF 지수</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 (붙여 넣음)</td>
+<td>0.6</td>
+<td>0.4</td>
+<td>1 + 0.6 + 0.4 = 2.00</td>
+<td>200%</td>
+</tr>
+<tr class="even">
+<td>10 ms</td>
+<td>0.6 × 0.82 = 0.49</td>
+<td>0.4 × 0.98 = 0.39</td>
+<td>1 + 0.49 + 0.39 = 1.88</td>
+<td>188%</td>
+</tr>
+<tr class="odd">
+<td>1 s</td>
+<td>0.6 × 0.00 = 0</td>
+<td>0.4 × 0.14 = 0.05</td>
+<td>1 + 0 + 0.05 = 1.05</td>
+<td>105%</td>
+</tr>
+<tr class="even">
+<td>아주 길면</td>
+<td>0</td>
+<td>0</td>
+<td>1.00</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<p>10 ms에서 빨리 사라지는 몫이 0.82배로 많이 남은 것은 10 ms가 τ₁ = 50 ms의 1/5밖에 안 되기 때문입니다. 1 s에서 천천히 사라지는 몫이 0.14배로 줄어든 것은 1 s가 τ₂ = 0.5 s의 2배라 <span class="math inline">\(e^{-2}\)</span> = 0.14가 남았기 때문입니다.</p>
+<p>학습 구간 1의 PPF 그림과 부호화–해독 도식, 펄스 간격 예제의 전류값이 모두 이 식에서 나왔습니다.</p>
+<p><strong>그림 9 읽는 법.</strong> (a)는 위 식으로 그린 PPF 곡선입니다. 가로축은 로그 축입니다(눈금 한 칸이 10배; <a href="../days/d01a.html#b-log-axis">로그 축</a>). 1 ms부터 10 s까지 네 자릿수를 한 그림에 담으려고 씁니다. 파란 점과 주황 점이 앞에서 본 두 경우(10 ms에서 188%, 1 s에서 105%)입니다. (b)는 이 곡선으로 알 수 있는 것과 없는 것의 목록입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig2-ppf-limits.svg" alt="펄스 간격 Δt(로그)에 대한 PPF 지수 곡선(이중 지수, τ₁ 50 ms, τ₂ 0.5 s)에 10 ms 188%, 1 s 105% 두 점을 표시하고, 이 곡선에서 알 수 있는 것(기억, 시간상수 두 개)과 알 수 없는 것(누적이 비선형인지, 상태 구별, 재현성, held-out, baseline, 시스템 비용)의 목록" class="figure-img"><figcaption><b>그림 9.</b> PPF 곡선 하나가 말해 주는 것과 말해 주지 않는 것(계산). <b>(a)</b> PPF 곡선. 가로축 펄스 간격(로그), 세로축 PPF 지수(%). 모형식 $100\,(1 + 0.6\,e^{-\Delta t/\tau_1} + 0.4\,e^{-\Delta t/\tau_2})$이며 특정 device의 측정값이 아니다. 파란 점(10 ms, 188%)과 주황 점(1 s, 105%)이 처음 PPF 그림의 두 경우다. <b>(b)</b> 이 곡선으로 알 수 있는 것과 없는 것. 아래 목록의 첫 줄은 이 구간에서 설명하는 비선형 시험이고, 나머지가 증거 사다리의 2–6단(읽을 수 있는 상태부터 시스템 비용까지)이다. (Claude가 계산해 그림)</figcaption></figure>
+<p>PPF가 원래 어떤 현상인지 생물 시냅스에서 보고 싶다면 아래 영상을 보세요. 이온 device의 PPF 그림이 흉내 내는 원래 현상입니다.</p>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/mlJec5yy3fU?start=587&amp;rel=0" title="영상: Short-Term Plasticity &amp; Binomial Synapse Explained (Paired-Pulse Facilitation &amp; Depression)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 9:47–14:09, 약 4분 · 전체 15분, 영어·자동 자막).</b> Science With Tal, "Short-Term Plasticity &amp; Binomial Synapse Explained (Paired-Pulse Facilitation &amp; Depression)". <b>볼 이유:</b> 9:47 'Short term plasticity (PPF, PPD)' 챕터부터 생물 시냅스에서 펄스 두 개 중 두 번째 응답이 커지거나(PPF) 작아지는(PPD) 현상을 설명한다. 이온 device 논문의 PPF 그림이 흉내 내는 원래 현상이 무엇인지 보는 용도다. 2:27–9:47 'binomial model'은 신경전달물질 방출 확률 모형이라 건너뛰어도 된다. 작은 개인 교육 채널이다. <b>보고 답할 질문:</b> 영상에서 PPF는 무엇이 '남아서' 생기나? 그 남은 것이 사라지는 시간이 그림 9의 τ에 해당한다면, 그것만으로 사다리의 몇 단까지 올라갔다고 말할 수 있나? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터·설명(영상 내용은 미검증)</span></div></div>
+<p><span id="s-ppf-proves"></span><strong>이 곡선이 증명하는 것.</strong> <span class="key">Device state에 최근 입력의 일부 정보가 두 시간척도(timescale)로 남는다는 것, 곧 기억이 <strong>있다</strong>는 것까지입니다.</span> 다른 Day의 말로 바꾸면 이렇습니다.</p>
+<ul>
+<li>Day 5–6에서 본 <a href="../days/d03b.html#s-time-dynamics">시간 동역학</a>이 <strong>있다</strong>는 증거입니다.</li>
+<li>Day 1–2의 fading memory(서서히 잊음)를 가장 단순하게 잰 것입니다.</li>
+<li>Liang은 물리 노드의 두 기본 성질로 nonlinearity(비선형)와 dynamics(시간 동역학)를 듭니다. <span class="src">Liang 2024, Fig. 3a</span> PPF 곡선은 그중 <strong>dynamics가 있다는 증명</strong>입니다.</li>
+</ul>
+<p><span id="s-ppf-nonlinear"></span><strong>비선형은 이 곡선만으로 증명되지 않는다.</strong> <span class="key">간격이 짧을수록 두 번째 응답이 커지는 것은 선형 회로에서도 일어납니다.</span> 저항과 <a href="../days/d01a.html#b-capacitor">capacitor</a>를 이은 회로로 확인해 봅니다.</p>
+<ol type="1">
+<li>펄스를 주면 capacitor가 충전됩니다.</li>
+<li>펄스가 끝나면 capacitor는 저항을 통해 천천히 방전합니다.</li>
+<li>다 방전하기 전에 두 번째 펄스가 오면, 남은 전하 위에 새 충전이 얹힙니다. 그래서 출력(capacitor에 걸린 전압)의 두 번째 봉우리가 더 높아집니다.</li>
+</ol>
+<p>이 회로는 입력을 두 배로 하면 출력도 두 배인 <strong>선형</strong> 회로입니다. 그런데도 PPF 지수가 100%를 넘습니다(Day 29–30에서 161%를 손으로 계산합니다).</p>
+<p>비선형인지 보려면 다음 둘을 비교해야 합니다.</p>
+<ul>
+<li>두 펄스를 함께 준 응답</li>
+<li>각 펄스를 따로 준 응답을, 시간을 맞춰 더한 것</li>
+</ul>
+<p>둘이 같으면 선형, 다르면 비선형입니다. 선형 회로가 따르는 이 성질을 superposition principle이라 합니다(합쳐 준 입력의 응답 = 각 입력의 응답의 합; <a href="../days/d10a.html#b-nonlinearity">선형과 비선형</a>)입니다. 이 시험은 Day 29–30의 <a href="../days/d16b.html#ch-rc-circuit">"저항–capacitor 회로로 같은 응답이 나오면 왜 이온 소재인가"</a>에서 직접 해 봅니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>이 곡선이 증명하지 못하는 것</strong> (사다리 2–6단):</p>
+<ul>
+<li>서로 다른 입력열이 <strong>서로 다른 state</strong>로 끝나는가(구별). PPF는 "두 펄스"라는 한 종류의 입력만 봅니다.</li>
+<li>그 state가 <strong>반복 측정에서 재현</strong>되는가. PPF 곡선은 보통 한 device, 한 번의 스캔입니다.</li>
+<li>학습한 readout이 <strong>안 본 데이터</strong>에서 답을 맞히는가.</li>
+<li><strong>raw input + 같은 readout</strong>보다 나은가.</li>
+<li>ADC(device의 아날로그 전류·전압, 곧 연속적으로 변하는 값을 숫자로 바꾸는 회로; <a href="../days/d04a.html#b-adc">숫자와 전압 사이의 변환</a>)·readout을 넣은 <strong>시스템 비용</strong>이 경쟁자보다 낮은가.</li>
+</ul>
+<p><span id="s-ppf-fix"></span><strong>문장 고쳐 쓰기.</strong> 논문에는 이런 흔한 문장이 있습니다.</p>
+<ul>
+<li>"비선형 + 서서히 잊음이면 그것만으로 계산이다"</li>
+<li>"현재 state 한 값으로 입력 이력·순서를 복원한다"</li>
+</ul>
+<p>RC처럼 readout을 학습해 쓰는 경우라면, 이렇게 고쳐 써야 정확합니다. <strong>"최근 입력의 일부 정보가 state에 남는다. Task에 필요한 차이가 읽을 수 있는 state들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며, 단순 baseline보다 나은지는 따로 검증해야 한다."</strong></p>
+<p><span id="s-one-value"></span><strong>작은 숫자로 — 왜 "한 값"으로 이력을 복원할 수 없나.</strong> <a href="#b-task-state">읽을 수 있는 state 상자의 4-bit 펄스 열 예</a>를 다시 씁니다. 박자 네 번에 펄스를 넣거나 쉬는 입력이고, 끝난 뒤 전류 하나를 읽습니다.</p>
+<ul>
+<li>전류 하나는 숫자 하나이고, 4-bit 열은 16가지입니다.</li>
+<li>16가지가 16개의 서로 다른 전류로 끝난다면 구별은 됩니다.</li>
+<li>하지만 "1100"과 "0011"이 같은 전류로 끝난다면(펄스 수는 같고 순서만 다름), 그 device의 그 읽기 방식으로는 순서를 복원할 수 없습니다.</li>
+</ul>
+<p>순서가 보존되는지는 <strong>해 봐야 압니다</strong>. 시간상수가 둘이라 순서 정보가 일부 남을 수는 있습니다. 하지만 "남는다"와 "task에 충분히 남는다"는 다른 말입니다. <span class="tag tag-interp">해석</span></p>
+<div class="myth">
+<p><strong>"PPF와 STP/LTP를 보였으니 뉴로모픽 device다"</strong> — 사다리 0단입니다. 보인 것은 device에 기억(시간상수)이 있다는 것까지입니다. 기억은 RC 노드에 흔히 요구되는 조건의 하나입니다(비선형은 따로 시험해야 합니다). 계산을 했다는 것은 보이지 않았습니다.</p>
+<p>Aluru도 같은 문제를 지적합니다. 이온 device의 "synaptomimetic 보고의 폭발" <span class="src">Aluru 2026, 요약면</span>을 말하면서, "단순 conductance 이력을 넘어서야" 한다고 씁니다. <span class="src">Aluru 2026, p.593</span> Day 1–2에서 시냅스 현상만 보인 device를 "계산 시스템의 부품 후보"(회색지대)라고 부른 이유입니다.</p>
+</div>
+<div class="quiz" data-day="d06" data-set="3-check"></div>
+<div class="think">
+<p>내 device에서 PPF를 재고 τ₁·τ₂를 얻었다고 합시다. 사다리 2단(읽을 수 있는 state)으로 올라가려면 어떤 실험을 추가해야 하나요? 최소한 몇 가지 입력열을, 몇 번씩 반복해서, 무엇을 읽어야 할까요? 지금 바로 설계할 수 있는 가장 작은 실험을 한 줄로 적어 보세요.</p>
+<details class="think-answer">
+<summary>
+생각 정리 보기
+</summary>
+<p>가장 작은 실험의 뼈대:</p>
+<ul>
+<li>입력열: 펄스 수는 같고 순서만 다른 쌍(예: 1100과 0011) 이상. 여유가 되면 4-bit 16가지 전체.</li>
+<li>반복: 열마다 5–10번 다시 넣습니다.</li>
+<li>읽는 값: 열이 끝난 뒤의 전류(또는 conductance) 하나.</li>
+<li>판정: 서로 다른 열의 평균 차이가 같은 열의 반복 흔들림보다 크면 '구별되고 반복 가능'입니다.</li>
+</ul>
+<p><span class="tag tag-interp">해석</span> 한 줄 예: "1100과 0011을 각각 10번 넣고, 끝 전류의 평균 차이가 표준편차보다 큰지 본다."</p>
+</details>
+</div>
+<div class="quiz" data-day="d06" data-set="3-end"></div>
+<div class="keypoints">
+<ul>
+<li><span class="key">PPF 곡선은 기억(시간상수)의 <strong>존재</strong>를 보인다</span>. 사다리 0단. 모형: <span class="math inline">\(100(1 + 0.6e^{-\Delta t/\tau_1} + 0.4e^{-\Delta t/\tau_2})\)</span>, τ₁ 50 ms·τ₂ 0.5 s, 10 ms에서 188%.</li>
+<li><span class="key">'간격이 짧을수록 커짐'은 선형 저항–capacitor 회로에서도 나오므로 비선형의 증거가 아니다</span>(겹침 시험이 필요, Day 29–30).</li>
+<li><span class="key">증명하지 못하는 것: state 구별·재현, held-out 성능, baseline 대비 우위, 시스템 비용</span>.</li>
+<li>고친 문장(readout을 학습하는 경우): 최근 입력의 일부 정보가 state에 남는다. <span class="key">Task에 필요한 차이가 읽을 수 있는 state들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며</span>, baseline보다 나은지는 따로 검증한다.</li>
+</ul>
+</div>
+</section>
+<section id="ch-folder-examples" class="level3">
+<h3 class="anchored" data-anchor-id="ch-folder-examples">학습 구간 4. 폴더의 논문들은 사다리의 어디에서 멈췄나</h3>
+<div class="goal">
+<p><strong>상황.</strong> 논문 그림에서 device(90.01%)가 소프트웨어 baseline(91.32%)보다 낮게 나왔습니다. 이 논문은 실패한 논문일까요?</p>
+<p><strong>왜 지금?</strong> 앞의 세 구간에서 만든 사다리를 실제 논문에 대어 봅니다. 같은 사다리로 읽어야 "baseline이 있다/없다"와 "어떤 종류의 baseline인가"를 가를 수 있습니다.</p>
+<p><strong>어디에 쓰이나?</strong> 내 분야 논문이 사다리의 몇 단까지 갔는지 판정하고, 내 논문에 어떤 baseline을 넣을지 정하는 데 씁니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> 폴더의 다섯 사례를 사다리에 놓는다. "baseline이 있다/없다"와 "baseline의 종류"를 구별해 읽고, device가 baseline보다 <strong>낮은</strong> 사례에서 무엇을 배울지 말한다.</p>
+</div>
+<p>이 구간은 같은 사다리로 실제 논문을 읽어 보는 자리이고, 앞의 세 구간을 마친 뒤 다시 와도 됩니다. 처음 읽을 때는 그림 10, 사례 1(raw input baseline)과 사례 2(digital RC baseline), 끝의 '다섯 사례에서 배울 것'만 읽어도 핵심은 잡힙니다. 사례 3–5는 baseline 수치가 불확실하거나 조건이 불명이거나 task가 없는 경우로, 다시 볼 때 하나씩 판정해 봅니다.</p>
+<p><strong>무엇을 볼지.</strong> 그림 10은 폴더 사례 넷을 한눈에 비교하는 그림입니다. 사례마다 device 성능(색 막대)과 baseline(회색 막대)을 나란히 놓았습니다.</p>
+<ul>
+<li>각 사례 이름 아래 회색 글씨: 그 baseline의 <strong>종류</strong>(raw input, static device, digital RC, MCU + 작은 신경망 중 무엇인지).</li>
+<li>오른쪽: 한 줄 판정.</li>
+</ul>
+<p>사례를 하나씩 읽은 뒤 다시 이 그림으로 돌아옵니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig4-baselines.svg" alt="Lee 2025 npj UC(device 90.01 vs raw input baseline 91.32), Zhong 2022(96.6 vs 디지털 RC 98.2), Koh 2022(90.2, baseline 수치 미확인), Chen 2025(RC 88 vs SVM 약 61)의 정확도 막대 비교" class="figure-img"><figcaption><b>그림 10.</b> 폴더 사례의 device 성능과 baseline(정확도 %, 논문이 적은 값). 색 막대가 device, 회색 막대가 baseline. baseline의 **종류**가 사례마다 달라 막대 길이를 서로 비교할 수는 없다. Chen 2025의 SVM 값은 Fig. 4g에서 눈으로 읽은 근삿값이고 본문에 숫자가 없다. (Claude가 그림)</figcaption></figure>
+<section id="s-case-lee" class="level4">
+<h4 class="anchored" data-anchor-id="s-case-lee">사례 1. Lee 2025 (npj Unconv. Comput.) — raw input baseline이 있고, device가 그보다 낮다</h4>
+<p><strong>무엇을 했나.</strong> HfO₂ memristor(흐른 전하의 이력에 따라 저항이 바뀌는 2단자 device)로 손글씨 숫자를 분류했습니다. 다만 보통의 MNIST가 아니라 <strong>N-MNIST</strong>입니다. 같은 손글씨 숫자를 event camera(밝기가 바뀐 픽셀만 그 순간에 기록하는 카메라)로 찍은 것이라, 숫자 하나가 그림 한 장이 아니라 <strong>시간 순서대로 찍힌 그림 네 장</strong>(프레임 4장)입니다.</p>
+<p><strong>숫자 하나가 어떻게 생겼나.</strong> 그림 한 장은 28×28 = 784 픽셀이고, 픽셀 값은 0 또는 1입니다. 프레임이 네 장이니 픽셀 한 자리에는 값이 네 개(예: 0, 1, 1, 0) 시간 순으로 있습니다. 숫자 하나 전체는 4 × 784 = 3136개의 0/1입니다.</p>
+<p><strong>Device가 하는 일 — 숫자 4개를 1개로.</strong> 그림 11의 위쪽 길입니다.</p>
+<ol type="1">
+<li>픽셀 한 자리의 값 네 개를 펄스 네 개로 바꿉니다. 1이면 3 V·2 ms 펄스, 0이면 0 V(쉼).</li>
+<li>이 펄스 네 개를 device 하나에 차례로 넣습니다.</li>
+<li>끝난 뒤 conductance를 <strong>하나</strong> 읽습니다. 네 펄스의 흔적이 쌓인 값입니다.</li>
+</ol>
+<p><a href="#b-task-state">읽을 수 있는 state 상자의 4-bit 펄스 열 예</a>와 같습니다. 0000부터 1111까지 16가지 패턴이 16가지 다른 conductance로 끝나면 됩니다. 784 자리마다 이렇게 하면 state 784개가 나옵니다(실험에서는 device 10개를 돌려 가며 썼습니다). <span class="src">Lee 2025 (npj), p.6</span></p>
+<p><strong>Bias와 "Multiple".</strong> 펄스 사이의 쉬는 구간에 작은 전압(bias)을 걸어 두면 device가 잊는 빠르기(시간상수)가 바뀝니다. 저자들은 bias를 세 가지로 바꿔 같은 숫자를 세 번 읽고, state 784개 × 3 = 2352개를 이어 붙였습니다. 이것이 "Multiple" 방법이고, 90.01%를 얻었습니다. <span class="src">Lee 2025 (npj), p.8</span></p>
+<p><strong>Baseline — device를 빼면.</strong> 그림 11의 아래쪽 길입니다. 픽셀 값 3136개를 device에 넣지 않고 readout에 <strong>그대로</strong> 넣습니다. 이것이 raw input baseline이고, 91.32%입니다. 저자들은 device 결과(90.01%)가 이와 "비슷하다"고 씁니다. <span class="src">Lee 2025 (npj), p.8</span></p>
+<figure class="fig figure"><img src="../assets/img/d06/fig10-nmnist.svg" alt="Lee 2025의 두 길. 위: 픽셀 한 자리의 값 4개(0,1,1,0) → 펄스 4개 → device 1개 → conductance 1개. 784 자리 × bias 3가지 = state 2352개 → readout 2352×10 → 점수 10개 → 90.01%. 아래(raw input baseline): 픽셀 값 3136개 그대로 → readout 3136×10 → 점수 10개 → 91.32%" class="figure-img"><figcaption><b>그림 11.</b> Lee 2025의 N-MNIST에서 device를 거친 길과 device를 뺀 길. Device는 픽셀 한 자리의 숫자 4개를 conductance 1개로 줄인다. 두 길의 readout은 같은 방식(받은 숫자 N개마다 점수 10개에 곱하는 weight 표)이고 각자 training data로 학습한다. 수치는 [Lee 2025 (npj), p.6–8]{.src}. (Claude가 그림, 도식)</figcaption></figure>
+<p><strong>사다리로 읽으면.</strong> 1·2·3·4단을 갖췄고, 5단의 <strong>raw input baseline</strong>이 있습니다. Device는 baseline보다 1.3%p <strong>낮습니다</strong>. 정확도로는 device가 기여했다고 말할 수 없습니다. 그러면 device가 한 일은 무엇일까요? 숫자 4개를 1개로 줄인 것입니다. 그래서 readout이 받는 숫자가 3136개에서 2352개로 줄고, readout의 weight(받은 숫자 하나마다 점수 10개에 곱하는 수)는 31,360개에서 23,520개로 줄었습니다. ★ <span class="key">이 논문의 device 기여는 accuracy가 아니라 readout 크기 감소(weight 25% 절감)입니다.</span></p>
+<p><strong>한계도 둘 있습니다.</strong> <span class="tag tag-interp">해석</span></p>
+<ul>
+<li>이 task에서 device에 요구된 것은 "펄스 네 개의 패턴 16가지를 서로 다른 conductance 16가지로 바꾸기"뿐입니다. 찾아보기 표(lookup table)와 같은 일이라, 펄스 네 개보다 긴 기억은 필요 없습니다. 그래서 이 결과만으로는 device가 긴 시계열을 다룰 수 있다고 말할 수 없습니다.</li>
+<li>시간에 따라 변하는 신호의 다음 값을 맞히는 task(MSO, Mackey–Glass; Day 27–28)도 이 논문에 있지만, 실제 device가 아니라 시뮬레이션입니다.</li>
+</ul>
+<p>아래 원문 그림에서 device 결과가 소프트웨어 baseline 점선에 얼마나 다가가는지 확인합니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/lee2025npj-fig6a-d.png" alt="Lee 2025 npj UC Fig. 6a·c·d: a는 시간척도에 대한 N-MNIST 정확도(Multiple·Single·Conventional과 점선 소프트웨어 baseline 91.32%), c는 단일/그룹 읽기의 정확도 막대, d는 간격을 무작위로 섞은 데이터에서 네 읽기 방식의 정확도 막대" class="figure-img"><figcaption><b>원문 그림.</b> Lee et al., <a href="https://doi.org/10.1038/s44335-025-00043-3" target="_blank"><i>npj Unconv. Comput.</i> 2025, 2, 27</a>, Fig. 6a·c·d(b는 생략), p.7. 볼 것: <b>a</b>에서 가로축은 데이터 간격(시간척도, 로그), 세로축은 정확도(%). 맨 위 **점선이 소프트웨어 baseline(원시 4프레임 직접 입력, 91.32%)**이고, 검은 선(Multiple)이 그 아래 90.01%까지 다가간다. 파란 선(Conventional, 바이어스 없음)은 간격이 device의 고유 τ를 넘으면 떨어진다. 즉 device 쪽은 baseline을 넘지 못했고, 기여는 시간척도 조절과 readout 크기 감소다. <b>c</b>는 이웃 셀 여러 개를 묶어 한 번에 읽으면(2×2, 4×4) 정확도가 얼마나 떨어지는지, <b>d</b>는 펄스 간격을 0.14–100 ms에서 무작위로 섞은 데이터에서 읽기 방식별 정확도(흰 막대가 바이어스 없는 Conventional). 측정 데이터(readout은 소프트웨어). <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+</section>
+<section id="s-case-zhong" class="level4">
+<h4 class="anchored" data-anchor-id="s-case-zhong">사례 2. Zhong 2022 (Nat. Electron.) — digital RC baseline은 있고, raw input baseline은 없다</h4>
+<p>부정맥(불규칙한 심장 박동) 검출용 완전 아날로그 RC입니다. Day 9에서 이 논문의 <a href="../days/d05.html#s-zhong-limits">적용 조건</a>을 볼 때 baseline의 종류와 시스템 경계를 짚었습니다.</p>
+<ul>
+<li>부정맥 검출 accuracy: 96.6%.</li>
+<li>Baseline: "완전 디지털 RC 98.2%". <span class="src">Zhong 2022, p.677</span></li>
+</ul>
+<p>이 baseline은 <strong>같은 알고리즘을 디지털로 구현한 것</strong>(digital RC)입니다. 그래서 하드웨어 잡음으로 잃은 것(1.6%p)을 잽니다. "Device를 빼고 raw input + 같은 readout"은 본문에 없습니다.</p>
+<p>사다리로 읽으면 1–4단, 5단의 <strong>한 종류</strong>(digital RC), 그리고 6단의 전력 비교 <span class="tag tag-unverified">미확인</span>까지입니다. Device가 baseline보다 낮다는 점은 Lee 2025와 같습니다. 다만 이 논문의 주장은 accuracy가 아니라 전력입니다.</p>
+</section>
+<section id="s-case-koh" class="level4">
+<h4 class="anchored" data-anchor-id="s-case-koh">사례 3. Koh 2022 (Sci. Rep.) — 저자가 "baseline보다 낮다"고 적었다 (폴더 밖)</h4>
+<details class="deep">
+<summary>
+심화 · 사례 3 펼치기(폴더 밖 논문, baseline 수치 미확인 — 다시 볼 때)
+</summary>
+<p>이온액체–전극 계면의 dielectric relaxation(유전 이완)을 reservoir로 쓴 논문입니다(<em>Sci. Rep.</em> 12, 6958). 유전 이완은 전압을 바꾼 뒤 계면의 이온 배치가 천천히 새 평형을 따라가며, 전류가 서서히 줄어드는 현상입니다. 폴더에는 원문이 없어 웹 본문으로 확인했습니다.</p>
+<ul>
+<li>MNIST accuracy: 87.3–90.2% (이온액체 종류별)</li>
+<li>Baseline: 입력 픽셀 400개를 readout에 그대로 넣은 raw input baseline</li>
+<li>★ <span class="key">저자들이 직접 "물리 reservoir의 정확도가 <strong>baseline보다 낮다</strong>"고 쓰고, 대신 readout weight 수가 줄었다고 설명합니다.</span></li>
+</ul>
+<p><span class="src">Koh 2022</span> <span class="tag tag-fact">확인</span> <span class="prov">PMC 웹 본문과 대조</span> Baseline의 accuracy 값은 원문 그림에만 있어 확인하지 못했습니다 <span class="tag tag-unverified">미확인</span>.</p>
+<p>★ 이 사례에서 배울 것은 두 사슬의 차이입니다. <span class="tag tag-interp">해석</span></p>
+<ul>
+<li>"소재 → 시간상수" 사슬은 견고했습니다. 점도와 τ 사이에 멱법칙(power law: τ가 점도의 몇 제곱에 비례하는 관계)이 있었습니다.</li>
+<li>"시간상수 → 계산 성능" 사슬은 약했습니다.</li>
+</ul>
+<p>Phase 4·5에서 내 소재를 볼 때 같은 실수를 하지 않기 위한 예입니다.</p>
+</details>
+</section>
+<section id="s-case-chen" class="level4">
+<h4 class="anchored" data-anchor-id="s-case-chen">사례 4. Chen 2025 (Adv. Mater., 읽음) — 선형 baseline(SVM)이 있고, device가 그보다 높다. 단 조건이 불명</h4>
+<p>Day 7–8에서 본 이온겔 나노섬유 시냅스입니다. 용어 둘부터 봅니다.</p>
+<ul>
+<li>Virtual node: 한 device의 응답을 여러 시점에서 읽은 값들.</li>
+<li>Logistic regression(로지스틱 회귀): 직선 맞추기를 분류용으로 바꾼 것. 각 답일 확률을 내도록 weight를 맞춥니다.</li>
+</ul>
+<p><strong>무엇을 했나.</strong> <span class="src">Chen 2025, p.10</span></p>
+<ol type="1">
+<li>MNIST sample 1000개의 픽셀 밝기를 0–10 pA 전류 크기로 바꿉니다.</li>
+<li>이것을 1차원 펄스 열로 device에 넣고, virtual node를 읽습니다.</li>
+<li>Sample의 80%로 logistic regression readout을 학습합니다.</li>
+</ol>
+<p><strong>결과.</strong> Accuracy는 88% 이상입니다. 저자들은 "선형 분류 시스템(SVM)"과 비교해, reservoir의 비선형 변환 뒤 accuracy가 크게 올랐다고 씁니다. 비교에 쓴 것은 혼동 행렬(confusion matrix: 정답별로 어떤 답을 냈는지 센 표; 아래 원문 그림 e·f)입니다. <span class="src">Chen 2025, p.7–8, Fig. 4e–g</span></p>
+<p>SVM(support vector machine)은 기본형(linear SVM)에서 점들을 직선(hyperplane)으로 나누는 선형 분류기입니다. (kernel이라는 변환을 붙이면 곡선 경계도 만들 수 있지만, Chen 2025는 "선형 분류 시스템"이라고 적었습니다.) 그래서 이것은 <strong>선형 baseline</strong>이고, 이 묶음에서 드물게 baseline이 <strong>있는</strong> 사례입니다.</p>
+<p><strong>다만 조건이 불명입니다.</strong> <span class="tag tag-interp">해석</span></p>
+<ul>
+<li>SVM의 입력이 원시 픽셀인지 본문에서 분명하지 않습니다.</li>
+<li>Virtual node 수와 feature 수(readout이 받는 숫자 개수)를 맞췄는지도 분명하지 않습니다.</li>
+<li>Fig. 4e·f의 혼동 행렬 제목이 "SVM_train", "RC_train"입니다. Training data의 결과로 읽힙니다.</li>
+<li>g의 곡선이 떼어 둔 20%(held-out)에서 잰 값인지도 본문에 적혀 있지 않습니다.</li>
+</ul>
+<p><span class="key">Baseline의 "종류"와 "조건"을 모르면 막대 길이 차이를 device 기여로 읽을 수 없습니다.</span></p>
+<p>아래 원문 그림에서 RC와 SVM의 차이, 그리고 혼동 행렬 위의 "_train" 제목을 직접 확인합니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/chen2025-fig4e-g.png" alt="Chen 2025 Fig. 4e–g: e는 SVM의 MNIST 혼동 행렬(대각선이 흐림), f는 RC의 혼동 행렬(대각선이 진함), g는 virtual node(sample) 수에 대한 RC(빨강, 88%까지)와 SVM(청록, 약 60%)의 정확도 곡선" class="figure-img"><figcaption><b>원문 그림.</b> Chen et al., <a href="https://doi.org/10.1002/adma.202419013" target="_blank"><i>Adv. Mater.</i> 2025, 37, 2419013</a>, Fig. 4e–g, p.7. 볼 것: <b>e·f</b>는 혼동 행렬(가로축 예측, 세로축 정답; 대각선이 진할수록 맞힘). <b>g</b>의 가로축은 virtual node(sample) 수, 세로축 정확도. 빨간 RC 곡선이 88% 근처, 청록 SVM 곡선이 60% 근처에서 포화한다. 이것이 "선형 baseline 대비 device의 기여"로 읽히려면 SVM의 입력이 무엇이었는지(원시 픽셀? 같은 virtual node?)를 알아야 하는데 본문은 밝히지 않는다. e·f 위의 제목 "_train"은 training data의 혼동 행렬이라는 뜻으로 읽힌다(held-out 결과가 아님). 측정 device 응답 + 소프트웨어 readout. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+</section>
+<section id="s-case-fan" class="level4">
+<h4 class="anchored" data-anchor-id="s-case-fan">사례 5. Fan 2026 (Nat. Commun.)과 Wu 2025 (AFM, 읽음) — 학습·평가 task가 없다</h4>
+<p><strong>Fan 2026.</strong> 제목은 "neuromorphic ionic computing"입니다. 그런데 본문에 분류·예측·RC task와 accuracy가 없습니다. <span class="prov">원문 텍스트 검색으로 확인</span> 본문에 있는 것은 다음이 전부입니다. <span class="src">Fan 2026</span></p>
+<ul>
+<li>시냅스 기능 모사:
+<ul>
+<li>PPD(paired-pulse depression, 짝펄스 억제): 두 번째 응답이 오히려 작아지는 것.</li>
+<li>SRDP: 자극을 주는 빈도에 따라 변화 방향이 달라지는 가소성.</li>
+<li>기억·망각.</li>
+<li>연상학습: 두 자극을 함께 주다 보면 한 자극만으로도 반응하게 되는 것.</li>
+</ul></li>
+<li>5×4 어레이의 이미지 저장·소거.</li>
+</ul>
+<p><strong>Wu 2025.</strong> 신호가 흐르는 순서는 이렇습니다. <span class="src">Wu 2025, p.8</span></p>
+<ol type="1">
+<li>압력·빛 자극에 대한 전위 응답을 ADC로 숫자로 바꿉니다.</li>
+<li>이 숫자가 MCU를 거쳐 컴퓨터 소프트웨어로 갑니다.</li>
+<li>신호가 미리 정한 세 문턱(Th-1, Th-2, Th-3)을 넘으면, 그 명령이 다시 MCU를 거쳐 로봇팔을 움직입니다.</li>
+</ol>
+<p>문턱 비교는 "답"을 내긴 합니다. 하지만 학습한 readout도, held-out도, baseline도 없습니다. 그래서 사다리 1단(task: 문턱 넘김)에서 멈춥니다. 학습 구간 1에서 사람이 미리 정한 문턱 1.5와 같은 종류입니다.</p>
+<p>두 논문 모두 그 자체로 잘못은 아닙니다. <span class="key">사다리의 어느 단에 있는지를 <strong>제목이 아니라 그림으로</strong> 읽어야 한다는 것이 오늘의 요점입니다.</span></p>
+<p><span id="s-case-lessons"></span><strong>다섯 사례에서 배울 것.</strong></p>
+<ol type="1">
+<li>Baseline의 종류가 분명한 폴더 사례에서 device는 baseline보다 <strong>낮거나 비슷</strong>합니다(Lee, Zhong, Koh. 단 Koh는 baseline의 accuracy 값을 그림에서만 읽을 수 있음). Device가 baseline보다 높게 나온 Chen은 baseline의 조건이 불명확합니다. 이것은 Liang의 "비슷한 구성이면 소프트웨어 RC가 대개 낫다" <span class="src">Liang 2024, p.201</span>와 맞습니다. Liang은 같은 자리에서 physical reservoir computing의 장점을 accuracy가 아니라 시스템 복잡도·전력 소모·학습 비용·계산 속도 같은 데서 찾습니다 <span class="src">Liang 2024, p.201</span>. <span class="key">그러니 device의 가치를 accuracy가 아닌 곳(readout 크기, 전력, 시간척도 조절)에서 재야 할 수 있습니다.</span> <span class="tag tag-interp">해석</span></li>
+<li><span class="key">baseline이 "있다"만으로는 부족하고 <strong>종류와 조건</strong>이 적혀야 합니다</span>(Chen).</li>
+<li>제목의 "computing"과 사다리의 단은 별개입니다(Fan).</li>
+</ol>
+<div class="quiz" data-day="d06" data-set="4-check"></div>
+<div class="think">
+<p>Lee 2025처럼 device가 raw input baseline보다 <strong>낮은</strong> 결과가 나왔을 때, 그 논문이 여전히 가치 있다고 주장할 수 있는 근거는 무엇일까요(readout 크기? 전력? 시간척도?). 내 device 논문이 같은 상황이 되면 나는 무엇을 근거로 쓸 수 있을지 한 줄 적어 보세요.</p>
+<details class="think-answer">
+<summary>
+생각 정리 보기
+</summary>
+<p>Lee 2025가 내세우는 가치는 accuracy가 아닌 곳에 있습니다.</p>
+<ul>
+<li>Readout 크기: weight 31,360개 → 23,520개(약 25% 절감).</li>
+<li>시간척도 조절: 쉬는 구간의 bias로 시간상수를 바꿔 device 고유의 τ를 넘는 간격도 다룹니다.</li>
+</ul>
+<p><span class="tag tag-interp">해석</span> 내 논문이라면 내가 실제로 잰 것에서만 근거를 고릅니다. 예: "raw input 대비 readout weight 수", "device τ(ms–s)가 task 시간척도와 겹침", "판단 한 번의 에너지". 잰 적이 없는 항목은 근거로 쓰지 않고 '아직 모르는 것'에 적습니다.</p>
+</details>
+</div>
+<div class="quiz" data-day="d06" data-set="4-end"></div>
+<div class="keypoints">
+<ul>
+<li><span class="key">raw input baseline의 수치까지 원문으로 확인되는 사례는 Lee 2025뿐이고 device가 1.3%p 낮다</span> <span class="src">Lee 2025 (npj), p.8</span>. Zhong 2022의 baseline은 digital RC <span class="src">Zhong 2022, p.677</span>. Koh 2022는 raw input baseline보다 낮다고 저자가 서술 <span class="tag tag-fact">확인</span> (baseline 수치는 <span class="tag tag-unverified">미확인</span>). Chen 2025는 SVM baseline이 있으나 조건 불명 <span class="src">Chen 2025, p.7–8</span>. Fan 2026·Wu 2025는 학습·평가 task 없음(Wu는 문턱 비교만).</li>
+<li><span class="key">Device의 가치는 accuracy보다 readout 크기·전력·시간척도 조절에서 찾아야 할 수 있다</span> <span class="src">Liang 2024, p.201</span>.</li>
+<li><span class="key">제목의 "computing"과 사다리의 단은 별개다</span>. 그림으로 읽는다.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-phase1-wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="ch-phase1-wrapup">학습 구간 5. Phase 1 종합: "왜 뉴로모픽인가"를 세 문장으로</h3>
+<div class="goal">
+<p><strong>상황.</strong> Phase 종합 양식에 "이 Phase의 질문들에 대한 한 단락 답"을 써야 합니다. Phase 1의 질문은 하나였습니다. <strong>"왜 뉴로모픽인가?"</strong> 지금까지 배운 것으로 이 질문에 세 문장으로 답할 수 있을까요?</p>
+<p><strong>왜 지금?</strong> Phase 1의 마지막 학습 단위입니다. 여러 Day에 걸쳐 본 것을 한 장으로 모아 두지 않으면, 각 Day의 결론은 따로 떠다니고 질문에 대한 답은 남지 않습니다. 이 구간에 새 내용은 없습니다.</p>
+<p><strong>어디에 쓰이나?</strong> 내 답(Phase 종합 양식)의 세 칸, 곧 "한 단락 답", "가장 약한 고리", "바뀐 가정"을 채우는 데 씁니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> 자료를 덮고 "왜 뉴로모픽인가"를 세 문장으로 말한다. 세 문장의 어느 고리가 가장 약한지, 그것을 확인하려면 무엇을 찾아야 하는지 말한다.</p>
+</div>
+<section id="s-phase1-table" class="level4">
+<h4 class="anchored" data-anchor-id="s-phase1-table">5-1. Phase 1이 답한 것: 한 장 표</h4>
+<p>Phase 1의 질문 "왜 뉴로모픽인가"를 여러 Day가 조각내어 답했습니다. 각 Day의 답을 <strong>한 줄 결론 + 기억할 숫자나 예 하나</strong>로 줄이면 아래 표입니다. ★ <span class="key">이 표가 Phase 1의 내용 전부입니다.</span> 아래의 세 문장도, 약한 고리도, 바뀐 가정도 모두 이 표에서 나옵니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>질문</th>
+<th>한 줄 결론</th>
+<th>기억할 숫자·예</th>
+<th>근거 상태</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Day 1–2</td>
+<td>뉴로모픽이란 무엇인가</td>
+<td>여러 줄기를 덮는 우산 이름이다. 이온 device 논문 상당수는 시냅스 현상만 재현한 회색지대에 있다</td>
+<td>줄기: 뉴런 흉내 칩 / crossbar 연산 / 물리 reservoir / 시냅스 현상 재현</td>
+<td>리뷰 정의 + <span class="tag tag-interp">해석</span></td>
+</tr>
+<tr class="even">
+<td>Day 3–4</td>
+<td>기존 컴퓨터는 어디서 막히나</td>
+<td>메모리와 연산기 사이의 데이터 이동이 전력과 시간을 먹는다. 특히 기다릴 수 없는 입력, 칩 안에 못 두는 큰 weight에서</td>
+<td>RAM 접근 한 번이 덧셈 한 번보다 약 10⁴배 비싸다(Horowitz 2014, 45 nm)</td>
+<td>2014년 값 <span class="tag tag-fact">확인</span>, 지금 공정의 비율은 <span class="tag tag-unverified">미확인</span></td>
+</tr>
+<tr class="odd">
+<td>Day 5–6</td>
+<td>왜 하필 뇌인가</td>
+<td>뇌의 원리(기억과 계산이 같은 자리, 입력이 올 때만 동작, 시간 동역학, 가소성)는 <strong>조건이 맞으면</strong> 비용을 줄인다는 조건부 존재 증명이다</td>
+<td>뇌 약 20 W. 단, 작업당 효율은 증명되지 않음</td>
+<td>20 W <span class="tag tag-fact">확인</span>, 나머지는 리뷰 인용</td>
+</tr>
+<tr class="even">
+<td>Day 7–8</td>
+<td>하드웨어 부품의 spec은</td>
+<td>crossbar·LIF·시냅스 device의 spec은 용도(inference / 학습 / RC 노드)마다 다르다</td>
+<td>시냅스 device의 spec: 구별되고 반복되는 state 수</td>
+<td>리뷰 인용, 내 device 수치 없음</td>
+</tr>
+<tr class="odd">
+<td>Day 9</td>
+<td>어떤 문제에 맞나</td>
+<td>적합한 자리는 좁다(실시간·희소·근사 허용·τ 정합). 경쟁자는 MCU + 작은 신경망이다</td>
+<td>Zhong 2022 심전도 RC. MCU와의 비교는 폴더에 없음</td>
+<td><span class="tag tag-hypo">가설</span></td>
+</tr>
+<tr class="even">
+<td>Day 10</td>
+<td>현상을 보이면 계산인가</td>
+<td>아니다. PPF는 0단(기억이 있다)까지다. "계산했다"는 task·state·readout·held-out·baseline으로 보인다</td>
+<td>펄스 간격 예제: training 100% → test 75%, raw input baseline도 75%</td>
+<td>Stepney·Singh·Liang 인용 + <span class="tag tag-calc">계산</span></td>
+</tr>
+</tbody>
+</table>
+<p>그림 12는 이 표의 '한 줄 결론'과 '근거 상태'를 사슬로 이은 것입니다. 위에서 아래로 읽으면 한 Day의 결론이 다음 Day의 질문이 됩니다.</p>
+<figure class="fig figure"><img src="../assets/img/d06/fig5-phase1-chain.svg" alt="Day 1–2부터 Day 10까지 여섯 주장(뉴로모픽은 여러 줄기의 우산이고 이온 device 논문 다수는 회색지대 → 기존 컴퓨터가 불리할 수 있는 계산 → 뇌의 원리는 조건부 존재 증명 → device spec은 용도별 → 적합한 자리는 좁고 경쟁자는 MCU → 현상 재현은 계산이 아님)을 세로로 잇고, 각 고리의 근거 상태([해석], [미확인], [가설])를 오른쪽에 적은 그림" class="figure-img"><figcaption><b>그림 12.</b> Phase 1의 주장 사슬과 각 고리의 근거 상태. [가설]과 [미확인]이 몰린 곳이 "가장 약한 고리" 후보다. 어느 고리를 고를지는 내 답에서 정한다. (Claude가 그림, 모식도)</figcaption></figure>
+<details class="deep">
+<summary>
+여섯 고리를 하나씩: 각 Day의 결론과 근거, 다시 볼 곳 (내 답을 쓸 때)
+</summary>
+<ul>
+<li><strong>Day 1–2</strong> (<a href="../days/d01b.html#ch-branches">이름이 커지다: 우산 아래의 줄기들</a>): '뉴로모픽'은 여러 줄기를 덮는 우산 이름이고, 폴더의 이온 device 논문 상당수는 시냅스 현상만 재현한 회색지대, 곧 계산 시스템의 <strong>부품 후보</strong>에 있다 <span class="tag tag-interp">해석</span>. → 오늘의 질문은 그 부품 후보가 언제 "계산하는 device"가 되느냐였다.</li>
+<li><strong>Day 3–4</strong> (<a href="../days/d02b.html#ch-walls">세 가지 벽, 그리고 뉴로모픽의 자리와 대가</a>): 기다릴 수 없는 입력, 칩 안에 못 두는 큰 weight·이력, 정밀도 양보 가능이 함께 맞는 계산에서 기존 컴퓨터가 특히 불리할 수 있고, 디지털 baseline과 같은 조건으로 비교해야 한다 <span class="tag tag-interp">해석</span>. 근거: Horowitz 2014의 에너지 표 <span class="tag tag-fact">확인</span> + 리뷰의 정성 서술. → 오늘 사다리의 'baseline'이 그 비교의 형식이다.</li>
+<li>★ <strong>Day 5–6</strong> (<a href="../days/d03b.html#ch-plasticity">가소성, 그리고 "왜 하필 뇌인가"의 답</a>): 뇌의 원리(co-location: 기억과 계산을 같은 자리에서, 사건 구동: 입력이 올 때만 동작, 아날로그, 시간 동역학, 가소성)는 조건이 맞으면 비용을 줄일 수 있다는 <strong>조건부 존재 증명</strong>이다. "뇌 약 20 W"는 공개 문헌으로 확인되는 총전력이지만 작업당 효율을 증명하지는 않는다 <span class="tag tag-fact">확인</span> <span class="prov">뇌는 몸무게의 약 2%이지만 몸 산소·열량 소비의 약 20%: <a href="https://doi.org/10.1073/pnas.172399499">Raichle &amp; Gusnard 2002, <em>PNAS</em> 99, 10237</a>; 약 20 W: <a href="https://doi.org/10.1073/pnas.2107022118">Balasubramanian 2021, <em>PNAS</em> 118, e2107022118</a></span>. → 오늘의 PPF는 그중 '시간 동역학'이 device에 있다는 0단 증거다.</li>
+<li><strong>Day 7–8</strong> (<a href="../days/d04a.html#ch-vmm">Crossbar에서 행렬–벡터 곱</a>): crossbar(가로·세로 도선의 교차점마다 device를 둔 격자)·LIF(입력을 적분하다 문턱을 넘으면 발화하고 리셋하며, 그사이 leak으로 조금씩 줄어드는 뉴런 모형)·시냅스 device의 spec은 응용(application: inference, 곧 학습이 끝난 모델로 답 내기 / 학습(training) / RC 노드)마다 다르다. 근거: 리뷰 인용; 내 device의 수치는 없음. → ★ 오늘의 readout은 Day 7–8의 행렬–벡터 곱이고, 사다리 2단의 '구별·재현'은 Day 7–8에서 본 '구별되고 반복 가능한 상태 수' 조건이다.</li>
+<li><strong>Day 9</strong> (<a href="../days/d05.html#ch-fit-conditions">적합성을 가르는 질문 사다리</a>): 적합한 자리는 좁고(실시간·희소: 입력이 드문드문 옴·근사 허용·τ 정합: device 시간상수가 신호의 시간척도와 맞음·다음 단계가 아날로그라 숫자 변환을 생략할 수 있음), 경쟁자는 MCU + 작은 신경망이다. 근거: MCU 비교가 폴더에 없음 <span class="tag tag-hypo">가설</span>. → 사다리 5단 baseline의 한 종류이자 6단 시스템 비용의 비교 상대다.</li>
+<li><strong>Day 10</strong>: <span class="key">현상 재현은 계산이 아니다.</span> readout을 학습하는 계산(RC식)을 검증하려면 task·읽을 수 있는 state·학습한 readout·held-out·baseline·시스템 비용을 보여야 한다(사람이 문턱을 미리 정한 계산에는 readout 학습·test 채점이 필요 없다). 근거: Stepney·Singh·Liang 인용.</li>
+</ul>
+</details>
+</section>
+<section id="s-three-sentences" class="level4">
+<h4 class="anchored" data-anchor-id="s-three-sentences">5-2. "왜 뉴로모픽인가"를 세 문장으로</h4>
+<p><strong>무엇을 쓰는 자리인가.</strong> Phase 종합 양식의 첫 칸은 "왜 뉴로모픽인가"에 대한 <strong>내 답</strong>을 한 단락으로 적는 자리입니다. 누가 "그래서 결론이 뭐냐"고 물었을 때 할 말입니다. 위 표의 여섯 줄을 다 옮겨 적는 것이 아니라 세 문장으로 줄이고, 세 문장은 각각 표의 다른 줄에서 나옵니다.</p>
+<ol type="1">
+<li>첫 문장 — <strong>어떤 계산에서</strong> 기존 컴퓨터가 불리한가. (Day 3–4의 줄)</li>
+<li>둘째 문장 — <strong>어느 원리가 어떤 조건에서</strong> 그 비용을 줄이는가. (Day 5–6·Day 7–8의 줄)</li>
+<li>셋째 문장 — <strong>그 조건이 맞는 자리가 어디이고, 거기서 무엇을 보여야</strong> 뉴로모픽 device라 말할 수 있나. (Day 9·Day 10의 줄)</li>
+</ol>
+<p><strong>예를 들어 쓰면 이렇습니다.</strong> <span class="tag tag-interp">해석</span> Claude가 위 표에서 뽑아 쓴 예입니다. 내 답은 내 말로 다시 쓰되, 세 문장이 각각 무엇에 답하는지는 같아야 합니다.</p>
+<blockquote class="blockquote">
+<p>① 센서에서 입력이 쉬지 않고 들어오고 답에 필요한 weight가 칩 안에 다 들어가지 않는 계산에서는, 기존 컴퓨터가 메모리와 연산기 사이의 데이터 이동 때문에 전력과 시간을 많이 쓴다(2014년 공정의 수치는 <span class="tag tag-fact">확인</span>, 지금 공정의 비율은 <span class="tag tag-unverified">미확인</span>). ② 기억과 계산을 같은 자리에서 하고 입력이 올 때만 동작하는 뇌의 원리는, 입력이 드문드문 오고 근사한 답으로 충분한 조건에서만 이 비용을 줄인다. ③ 그런 자리(예: 몸에 붙인 심전도 패치)에서 뉴로모픽 device가 쓸모 있으려면, <span class="key">device가 PPF 같은 현상을 보이는 것으로는 부족하고, task에서 학습한 readout이 held-out data로 MCU + 작은 신경망 같은 baseline보다 나은지 보여야 한다</span>(MCU와의 비교는 아직 <span class="tag tag-hypo">가설</span>).</p>
+</blockquote>
+<p><strong>점검.</strong> 세 문장 어디에도 "항상"이 없어야 합니다. Phase 1 내내 모든 주장에 조건이 붙었기 때문입니다. 그리고 적어도 한 문장에는 근거가 약하다는 표시(<span class="tag tag-unverified">미확인</span> 또는 <span class="tag tag-hypo">가설</span>)가 있어야 정직합니다. 위 예에는 두 개 있습니다.</p>
+</section>
+<section id="s-weakest-link" class="level4">
+<h4 class="anchored" data-anchor-id="s-weakest-link">5-3. 가장 약한 고리</h4>
+<p><strong>무엇인가.</strong> 세 문장은 사슬입니다. 한 문장의 근거가 약하면 그 뒤 문장도 함께 약해집니다. 위 표의 '근거 상태' 열에서 <span class="tag tag-hypo">가설</span>·[미확인]이 몰린 줄이 가장 약한 고리입니다.</p>
+<p><strong>Claude의 판단으로는 두 후보가 있습니다.</strong> <span class="tag tag-interp">해석</span></p>
+<ul>
+<li><strong>Day 9의 줄 — "경쟁자는 MCU + 작은 신경망이다."</strong> 폴더에 MCU로 같은 task를 돌린 수치가 없어서 <span class="tag tag-hypo">가설</span>입니다. 이것이 약하면 셋째 문장 전체("baseline보다 나아야 한다")가 공중에 뜹니다. <strong><span class="tag tag-fact">확인</span>으로 바꾸려면:</strong> 심전도 분류를 MCU에서 돌린 논문 한 편을 찾아, 판단 한 번의 에너지와 accuracy를 Zhong 2022의 수치 옆에 나란히 적는다.</li>
+<li><strong>Day 3–4의 줄 — "데이터 이동이 비싸다."</strong> 수치가 2014년 45 nm 공정의 것이라, 지금 공정에서도 같은 비율인지는 <span class="tag tag-unverified">미확인</span>입니다. 이것이 약하면 첫 문장이 흔들립니다. <strong><span class="tag tag-fact">확인</span>으로 바꾸려면:</strong> 최근 공정(7 nm 안팎)의 덧셈 에너지와 DRAM 접근 에너지를 적은 문헌 한 편을 찾아 Horowitz 2014의 표 옆에 놓는다.</li>
+</ul>
+<p>내 답에서는 다른 고리를 골라도 됩니다. 다만 고른 고리마다 "무엇을 확인하면 <span class="tag tag-fact">확인</span>으로 바뀌는가"를 위처럼 한 줄 적습니다. 그 한 줄이 Phase 2 이후의 숙제가 됩니다.</p>
+</section>
+<section id="s-changed-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="s-changed-assumptions">5-4. 바뀐 가정 표</h4>
+<p><strong>무엇인가.</strong> Phase 종합 양식의 마지막 칸은 "앞서 세운 가정 중 바뀐 것" 표입니다. 각 Day의 <strong>사전 테스트·먼저 만들어 보기</strong>에 내가 적었던 문장과 지금 생각을 나란히 놓는 것입니다. 배운 것이 머릿속에 남았는지 확인하는 가장 빠른 방법입니다.</p>
+<p><strong>예를 들어 채우면 이렇습니다.</strong> <span class="tag tag-interp">해석</span> 흔히 바뀌는 가정 다섯 개를 Claude가 예로 채웠습니다. 내 표는 내 사전 테스트에서 고릅니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>바뀌기 전 가정</th>
+<th>바뀐 뒤</th>
+<th>바꾼 근거</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"컴퓨터는 더하기마다 메모리를 왕복한다"</td>
+<td>덧셈 자체보다 숫자를 메모리에서 가져오는 이동이 비싸고, 이동이 잦아지는 것은 weight가 칩 안에 다 들어가지 않을 때다</td>
+<td>Day 3–4, Horowitz 2014 <span class="tag tag-fact">확인</span></td>
+</tr>
+<tr class="even">
+<td>"뇌는 20 W라 효율적이다"</td>
+<td>20 W는 총전력이고, 작업당 효율은 따로 증명해야 한다</td>
+<td>Day 5–6, 20 W는 공개 문헌 <span class="tag tag-fact">확인</span></td>
+</tr>
+<tr class="odd">
+<td>"선형인 device가 좋다"</td>
+<td>용도에 따라 다르다. crossbar 연산에는 선형이, RC 노드에는 비선형과 기억이 요구된다</td>
+<td>Day 7–8, 리뷰 인용</td>
+</tr>
+<tr class="even">
+<td>"뉴로모픽은 저전력이 필요한 곳이면 어디든 쓴다"</td>
+<td>실시간·희소·근사 허용·τ 정합이 함께 맞는 좁은 자리에서만. 그 밖에서는 MCU가 낫다</td>
+<td>Day 9 <span class="tag tag-hypo">가설</span></td>
+</tr>
+<tr class="odd">
+<td>"PPF를 보이면 뉴로모픽 device다"</td>
+<td>PPF는 기억이 있다는 0단 증거다. 계산은 task·readout·held-out·baseline으로 보인다</td>
+<td>Day 10, Stepney·Singh 인용</td>
+</tr>
+</tbody>
+</table>
+<p><strong>채우는 법.</strong></p>
+<ol type="1">
+<li>각 Day의 사전 테스트·먼저 만들어 보기를 다시 열어, 지금 보면 고치고 싶은 문장을 고릅니다.</li>
+<li>어느 Day의 어느 글에서 바뀌었는지와 근거(쪽수)를 적습니다. 근거가 <span class="tag tag-interp">해석</span>이면 그렇게 적습니다. 바뀌지 않은 가정도 적어도 됩니다. "읽고 나서도 그대로"도 정보입니다.</li>
+<li>한 줄은 반드시 <strong>내 연구 방향</strong>에 관한 것이어야 합니다. 예: "내 소재(polyelectrolyte 접합)는 physical reservoir computing의 자원이다"라는 가정이, Day 7–8(RC 노드의 spec: 비선형·기억·재현되는 state)와 Day 9(좁은 자리, MCU 경쟁자)를 지나며 어떤 조건이 붙었는지.</li>
+</ol>
+</section>
+<section id="s-objection" class="level4">
+<h4 class="anchored" data-anchor-id="s-objection">오늘의 반론</h4>
+<details class="deep">
+<summary>
+심화 · 오늘의 반론 펼치기(앞 내용을 이해한 뒤)
+</summary>
+<p>가장 강한 반론: <strong>"사다리를 다 올라간 논문은 폴더에 하나도 없다. 그렇다면 기준이 너무 높은 것 아닌가? 현상 재현 논문도 분야를 키우는 데 기여했다."</strong></p>
+<p>응답의 재료는 Singh이 나눈 증거의 세 수준(기능 시연 / 물리 기판에 귀속 / 기술적 배치 가능성)입니다. Singh 2026은 "모든 원리 증명(proof-of-principle) 연구가 모든 요구를 만족할 필요는 없다. 다만 주장의 강도는 제시된 증거 수준과 일치해야 한다"고 씁니다. <span class="src">Singh 2026, p.19</span></p>
+<p>즉 기준은 "모든 논문이 6단까지"가 아닙니다. "자기가 어느 단에 있는지 제목과 결론이 정직하게 말할 것"입니다. 내 답에서 이 반론에 어떻게 설지 적으세요.</p>
+</details>
+<div class="think">
+<p>Phase 1을 마치며, 내 소재(polyelectrolyte 접합, ionic diode, depletion층)에 대해 지금 적을 수 있는 가장 정직한 문장은 무엇인가요? "____ 현상을 보일 수 있다(0단). ____ task에서 ____ baseline보다 나은지는 아직 모른다(5단)." 빈칸을 채우고, 채우지 못한 빈칸을 '아직 모르는 것'에 옮기세요.</p>
+<details class="think-answer">
+<summary>
+생각 정리 보기
+</summary>
+<p><span class="tag tag-interp">해석</span> 채운 예:</p>
+<ul>
+<li>"polyelectrolyte 접합이 PPF 같은 이중 시간상수 응답을 보일 수 있다(0단)."</li>
+<li>"시계열 분류 task에서 raw input baseline보다 나은지는 아직 모른다(5단)."</li>
+</ul>
+<p>채우지 못하는 빈칸은 대개 아래 셋입니다. '아직 모르는 것'에 옮깁니다.</p>
+<ul>
+<li>서로 다른 입력열이 구별되고 반복되는 state를 내는가(2단)</li>
+<li>Held-out에서 accuracy가 얼마인가(4단)</li>
+<li>어떤 baseline과 비교할 것인가(5단)</li>
+</ul>
+</details>
+</div>
+<div class="quiz" data-day="d06" data-set="5-check"></div>
+<div class="keypoints">
+<ul>
+<li>Phase 1의 사슬: 우산 이름과 회색지대(Day 1–2) → 벽(Day 3–4) → 조건부 존재 증명(Day 5–6) → 응용별 spec(Day 7–8) → 좁은 자리와 MCU 경쟁자(Day 9) → <span class="key">학습형(RC식) 계산의 검증 조건(Day 10)</span>.</li>
+<li>"왜 뉴로모픽인가" 세 문장: <span class="key">어떤 계산에서 기존 컴퓨터가 불리한가 / 어느 원리가 어떤 조건에서 비용을 줄이나 / 어느 자리에서 무엇을 보여야 하나</span>. "항상" 금지, [미확인]·<span class="tag tag-hypo">가설</span> 하나 이상.</li>
+<li><span class="key">가장 약한 고리는 근거 태그가 몰린 곳</span>(후보: MCU 비교 부재, 데이터 이동 비용의 현재 수치). 고른 고리마다 "무엇을 확인하면 <span class="tag tag-fact">확인</span>이 되나"를 한 줄. 바뀐 가정은 사전 테스트·먼저 만들어 보기와 대조해 표로.</li>
+<li>반론: 기준이 너무 높다 → <span class="key">주장의 강도와 증거 수준의 일치가 기준이다</span> <span class="src">Singh 2026, p.19</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="wrapup" class="level3">
+<h3 class="anchored" data-anchor-id="wrapup">오늘의 총정리</h3>
+<p>자료를 덮고 아래 표를 먼저 머릿속으로 채운 뒤 펼쳐 보세요. 그다음 종합 퀴즈를 풉니다.</p>
+<details class="recap">
+<summary>
+오늘의 한 장 요약 표 펼치기
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>한 줄 답</th>
+<th>근거·조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PPF란</td>
+<td>간격이 짧을수록 두 번째 응답이 커지는 현상. PPF 지수 = <span class="math inline">\(I_2 \div I_1 \times 100\)</span></td>
+<td>모형 device: 10 ms 188%, 1 s 105% <span class="tag tag-calc">계산</span></td>
+</tr>
+<tr class="even">
+<td>물리계가 "계산한다"란</td>
+<td>문제를 device 입력으로 바꾸고(부호화) → device가 변하고(물리 변화) → 그 결과를 답으로 읽었을 때(해독), 사람이 직접 구한 답과 허용 오차 안에서 같음(AR 틀에서 "사각형이 닫힌다"고 부름)</td>
+<td>사전 테스트·먼저 만들어 보기에서 "비선형+기억 = 계산"이라 썼다면 달라질 지점 <span class="src">Stepney 2024, p.666–667</span></td>
+</tr>
+<tr class="odd">
+<td>학습형(RC식) 계산의 검증 조건</td>
+<td>task → 읽을 수 있는 state → 학습한 readout → held-out → baseline → 시스템 비용</td>
+<td><span class="src">Stepney 2024, p.669</span> <span class="src">Singh 2026, p.19–20</span>. readout을 데이터로 학습할 때의 기준. 사람이 문턱을 미리 정한 계산에는 readout 학습·test 채점이 필요 없음 <span class="tag tag-interp">해석</span></td>
+</tr>
+<tr class="even">
+<td>오늘의 숫자</td>
+<td>펄스 간격 예제: training 100% → test 75%, raw input baseline 75%, static device 50%. 잡음 state 30개·sample 40개로 training <span class="math inline">\(R^2\)</span> 0.74, held-out &lt; −1</td>
+<td>가상 측정값·시뮬레이션 <span class="tag tag-calc">계산</span>. training accuracy는 증거가 아니다</td>
+</tr>
+<tr class="odd">
+<td>PPF가 증명하는 것</td>
+<td>기억(시간상수)의 존재. 비선형은 따로 시험(선형 회로도 PPF를 낸다). 사다리 0단</td>
+<td><span class="src">Liang 2024, Fig. 3a</span> <span class="src">Aluru 2026, p.593</span>, 비선형 부분은 <span class="tag tag-interp">해석</span></td>
+</tr>
+<tr class="even">
+<td>폴더 사례</td>
+<td>raw input baseline: Lee 2025(device 90.01 &lt; 91.32). digital RC baseline: Zhong 2022. 조건 불명 baseline: Chen 2025. 학습·평가 task 없음: Fan 2026, Wu 2025(문턱 비교만)</td>
+<td><span class="src">Lee 2025 (npj), p.8</span> <span class="src">Zhong 2022, p.677</span> <span class="src">Chen 2025, p.7–8</span> <span class="src">Wu 2025, p.8</span></td>
+</tr>
+<tr class="odd">
+<td>가장 약한 고리</td>
+<td>근거 태그가 몰린 곳. 후보: Day 9(MCU 비교 부재), Day 3–4(수치 미확인)</td>
+<td><span class="tag tag-interp">해석</span>, 내 답에서 고름</td>
+</tr>
+<tr class="even">
+<td>오늘의 반론</td>
+<td>기준이 너무 높다</td>
+<td>주장의 강도 = 증거 수준 <span class="src">Singh 2026, p.19</span></td>
+</tr>
+<tr class="odd">
+<td>모르는 것 하나</td>
+<td>내 device로 사다리 2단(구별·재현되는 state)을 보이는 최소 실험</td>
+<td>Phase 3·5로</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="quiz" data-day="d06" data-set="final"></div>
+</section>
+<section id="checklist" class="level3">
+<h3 class="anchored" data-anchor-id="checklist">내 답에 꼭 들어가야 할 것</h3>
+<p>오늘은 Phase 종합 양식(바로 답 / 왜·어떻게 / 근거와 반론 / 남은 질문 + Phase 종합)을 씁니다.</p>
+<ol type="1">
+<li>"계산한다"의 조건을 내 말로 다섯 개 이상 적었나? 그 조건이 readout을 학습하는 계산(RC식)의 검증 기준이라는 범위를 밝혔나? "비선형 + 기억 = 계산"이 남아 있지 않나?</li>
+<li>PPF·STP·LTP가 증명하는 것과 증명하지 못하는 것을 나눠 적었나?</li>
+<li>폴더 사례 하나 이상을 사다리의 단으로 읽고, baseline의 <strong>종류</strong>를 적었나?</li>
+<li>Phase 종합의 "한 단락 답"이 세 문장 형식(어떤 계산에서 / 어느 원리가 어떤 조건에서 / 어느 자리에서 무엇을 보여야)을 갖췄고, "항상"이 없나?</li>
+<li>가장 약한 고리를 하나 고르고, 그것을 <span class="tag tag-fact">확인</span>으로 바꾸려면 무엇을 확인해야 하는지 적었나?</li>
+<li>"바뀐 가정" 표에 최소 세 줄(그중 하나는 내 연구 방향)을 채웠나? 각 줄에 근거 쪽수가 있나?</li>
+</ol>
+</section>
+<section id="ledger-items" class="level3">
+<h3 class="anchored" data-anchor-id="ledger-items">장부에 옮길 후보</h3>
+<ul>
+<li><strong>병목 장부:</strong> (응용이 요구하는 것) task에 필요한 차이가 구별·재현되는 state로 남을 것, held-out에서 raw input baseline보다 나을 것 vs (메커니즘이 허용하는 것) 내 device의 state 수·재현성·시간상수. 둘 다 미측정.</li>
+<li><strong>병목 장부:</strong> baseline의 종류가 분명한 폴더 사례에서 device는 baseline보다 낮거나 비슷하다 <span class="src">Lee 2025 (npj), p.8</span> <span class="src">Zhong 2022, p.677</span>. 내 device의 가치를 accuracy 외의 어디서 찾을지(readout 크기, 전력, 시간척도) 미정.</li>
+<li><strong>아직 모르는 것:</strong> Koh 2022 원문(baseline 수치). / Chen 2025 SVM의 입력 조건. / 내 device로 사다리 2단(구별·재현되는 state)을 보이는 최소 실험 설계.</li>
+<li><strong>용어집(현상과 계산):</strong> PPF 지수, STP/LTP, 시간상수·이중 지수, 계산(AR 틀의 사각형), 부호화/해독, 특성화.</li>
+<li><strong>용어집(학습형 계산):</strong> task, sample, metric(accuracy, NRMSE, <span class="math inline">\(R^2\)</span>), 분산(variance), 읽을 수 있는 state, 구별/재현, readout, threshold, linear regression, <span class="math inline">\(W_{out}\)</span>, training/test data, held-out, overfitting(외우기), baseline(raw input/static device/digital RC/MCU+NN), 귀속 대조, SVM, 혼동 행렬, MNIST/N-MNIST.</li>
+<li><strong>접는 기준 후보:</strong> "Phase 3이 끝날 때까지 내 device로 사다리 2단(구별·재현되는 state)을 보이는 실험을 설계하지 못하면 '계산 device' 방향을 접고 '소재 물리' 방향으로 좁힌다."</li>
+</ul>
+</section>
+<section id="reading" class="level3">
+<h3 class="anchored" data-anchor-id="reading">더 읽을거리</h3>
+<p>서지와 읽음·대조 상태는 <a href="../ledger/references.html">참고문헌</a> 페이지에 있습니다. 쪽수는 인쇄 쪽수입니다.</p>
+<p><strong>내가 읽은 논문 (다시 볼 곳)</strong></p>
+<ul>
+<li>Liang 2024, <em>Nat. Electron.</em> 7, 193–206. p.194(PRC의 정의: 물리 동역학을 수확), p.197 Fig. 3a(nonlinearity와 dynamics), p.200(MC·IPC·KQ 같은 task 독립 지표 — Phase 3의 재료), p.201–202(소프트웨어 RC와의 비교, 정확도 밖의 장점).</li>
+<li>Chen 2025, <em>Adv. Mater.</em> 37, 2419013. p.7 Fig. 4e–g(SVM baseline), p.7–8 본문, p.10 Methods(입력 부호화, 80% training, 로지스틱 회귀 readout). SVM 입력 조건과 Fig. 4g가 test data 값인지는 본문에 없다.</li>
+<li>Wu 2025, <em>Adv. Funct. Mater.</em> 35, 2500048. p.8(세 문턱으로 로봇팔 제어).</li>
+</ul>
+<p><strong>폴더에 있지만 아직 읽지 않은 논문 (Claude가 대조함)</strong></p>
+<ul>
+<li>Stepney 2024, <em>Natural Computing</em> 23, 665–685 (Readable papers3). p.666–667(물리계가 계산한다는 것의 정의, 실패 유형), p.669(독립 test data), §7(벤치마크와 task 독립 지표 — Phase 3).</li>
+<li>Singh 2026, <em>Adv. Mater.</em> e74897 (Readable papers3). p.3 Figure 2 캡션(함정 목록), p.6(겉보기 기억), p.8(재현되는 상태가 먼저), p.18(baseline 차이는 한 부품의 몫으로 나눌 수 없음), p.19(증거 수준), p.20 Table 3(귀속 대조, 에너지 경계). Day 31–32·Day 33–34의 핵심 자료.</li>
+<li>Lee 2025, <em>npj Unconv. Comput.</em> 2, 27 (Readable papers3). p.7–8 Fig. 6(raw input baseline 91.32%).</li>
+<li>Fan 2026, <em>Nat. Commun.</em> 17, 8635 (Readable papers3). 노트(notes/Fan_2026_NatCommun.md)와 원문 텍스트 검색: 분류·정확도 같은 계산 task가 없음.</li>
+<li>Aluru 2026, <em>Science</em> 392, 592–601. 요약면(synaptomimetic), p.593(단순 conductance 이력을 넘어서).</li>
+</ul>
+<p><strong>폴더 밖 (서지를 직접 확인한 뒤 쓰세요)</strong> <span class="tag tag-unverified">미확인</span></p>
+<ul>
+<li>Koh 2022, <em>Sci. Rep.</em> 12, 6958, "Reservoir computing with dielectric relaxation at an electrode–ionic liquid interface" (<a href="https://doi.org/10.1038/s41598-022-10152-9">doi:10.1038/s41598-022-10152-9</a>; 서지는 웹으로 <span class="tag tag-fact">확인</span>). 내용은 노트와 웹 본문 열람 기준이며, baseline 수치(그림에만 있음)는 <span class="tag tag-unverified">미확인</span>.</li>
+<li>Horsman et al. 2014, <em>Proc. R. Soc. A</em> 470, 20140182, "When does a physical system compute?" — Stepney가 인용한 AR 이론의 원 문헌(서지는 Stepney 2024의 참고문헌 목록으로 확인, 내용은 <span class="tag tag-unverified">미확인</span>).</li>
+</ul>
+</section>
+</div>
+<script type="application/json" id="quiz-d06">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox | mc(options, a: 0부터) | short(a: 인정 답 목록). ref: 틀렸을 때 바로 돌아갈 설명·작은 예제의 앵커. refLabel: '다시 볼 곳' 링크에 보일 짧은 이름. why에는 정답 이유와 흔한 혼동을 적는다.", "sets": {"pre": {"kind": "pre", "title": "사전 테스트", "challenge": "내 device(또는 상상한 이온 device)가 '시냅스처럼 반응한다'를 넘어 '계산한다'고 다른 사람을 설득하려면 어떤 실험 결과가 필요할지, 순서대로 상자 세 개를 그려 각 상자에 '무엇을 넣고, 무엇을 재고, 무엇과 비교하나'를 적어 보세요. 마지막에 '이 결과가 나오면 설득 실패'인 경우를 하나 적으세요.", "items": [{"id": "d06-p01", "ref": "#b-what-is-computing", "refLabel": "사각형의 네 단계", "type": "ox", "q": "자극을 주면 어떤 물질이든 무언가 변하므로, 모든 물리 현상은 '계산'이라고 부를 수 있다.", "a": false, "why": "물리계가 계산한다고 말하려면 문제의 입력을 물리 입력으로 바꿔 넣고(부호화), 물리가 움직인 뒤 상태를 읽어(해독) 얻은 답이 원래 문제의 답과 허용 오차 안에서 맞아야 합니다. 물리가 움직인 것만으로는 네 단계 중 하나뿐입니다."}, {"id": "d06-p02", "ref": "#s-fail-types", "refLabel": "해독 단계에 숨은 계산", "type": "mc", "q": "돌멩이의 온도 변화를 '읽는 방법'을 아주 복잡하게 짜서 원하는 답이 나오게 만들었다. 이것을 '돌멩이가 계산했다'고 말할 수 없는 가장 큰 이유는?", "options": ["돌멩이는 전기가 통하지 않아 신호를 읽을 수 없어서", "온도는 연속적인 값이라 0과 1의 답이 될 수 없어서", "답을 만드는 일을 읽는 단계(다른 컴퓨터)가 대신 해서", "돌멩이의 온도 변화가 계산에 쓰기에는 너무 느려서"], "a": 2, "why": "원하는 계산 전체를 출력 해석 단계에 숨기면 사각형을 닫는 데 다른 컴퓨터가 필요해집니다. 이것이 '계산한다'는 주장이 실패하는 전형적인 유형입니다. 전기·연속값·속도는 계산 여부를 가르는 기준이 아닙니다."}, {"id": "d06-p03", "ref": "#s-baseline-kinds", "refLabel": "baseline: device를 빼고 같은 readout", "type": "ox", "q": "이온 device를 거친 신호로 분류 정확도 90%를 얻었다면, 그 숫자만으로 device가 분류 계산에 기여했다고 말할 수 있다.", "a": false, "why": "device 없이 원래 입력을 같은 readout에 그대로 넣은 baseline과 비교해야 device의 기여를 말할 수 있습니다. 원래 입력만으로도 90% 이상이 나오면 device는 기여하지 않은 것입니다."}, {"id": "d06-p04", "ref": "#s-r2-sim", "refLabel": "잡음 상태로 맞춘 training R²", "type": "mc", "q": "정답과 아무 관계없는 무작위 숫자 30개를 특징으로 삼아, sample 40개에 직선 모형을 맞췄다. 맞춘 바로 그 sample에서 맞춤 정도(R², 1이면 완벽, 0이면 평균만 찍는 수준)는 어떻게 나올 가능성이 큰가?", "options": ["거의 0 — 무관한 숫자들이므로 맞출 수 없다", "정확히 0.5 — 무작위라 반은 맞고 반은 틀린다", "음수 — 무관한 숫자는 예측을 오히려 망친다", "0.7 안팎 — 무관한 숫자로도 꽤 맞춰진다"], "a": 3, "why": "특징 수가 sample 수에 가까우면 맞춘 그 데이터에서는 우연히 잘 맞습니다(시뮬레이션에서 training R² 약 0.74, 대략 특징 수 ÷ sample 수). 음수가 나오는 것은 맞출 때 쓰지 않은 새 데이터 쪽입니다. 그래서 training에 쓰지 않고 떼어 둔 데이터의 성능만 증거가 됩니다."}, {"id": "d06-p05", "ref": "#s-ppf-proves", "refLabel": "PPF 곡선이 증명하는 것과 못 하는 것", "type": "mc", "q": "두 번 연달아 자극하면 두 번째 반응이 첫 번째보다 크고, 두 자극 간격이 길수록 그 차이가 줄어드는 곡선을 device에서 측정했다. 이 곡선 하나만으로 아직 보이지 못한 것은?", "options": ["최근 자극의 영향이 일정 시간 남아 있다는 것", "새 데이터에서 task를 device 없이보다 잘 푼다는 것", "그 영향이 사라지는 데 걸리는 시간의 크기", "자극 간격이 달라지면 반응도 달라진다는 것"], "a": 1, "why": "이런 곡선(짝펄스 촉진, PPF)은 기억(시간상수)이 '있다'는 것을 보입니다. 간격이 짧을수록 커지는 것은 선형 회로에서도 나오므로 비선형의 증거는 아닙니다. 상태가 구별·재현되는지, 떼어 둔 데이터에서 성능, baseline 대비 우위, 시스템 비용은 따로 보여야 합니다."}, {"id": "d06-p06", "ref": "#s-case-fan", "refLabel": "사례 5: 제목과 사다리의 단", "type": "mc", "q": "device 논문의 제목에 'computing(계산)'이라는 말이 들어 있을 때 맞는 태도는?", "options": ["그림·표에서 task·readout·baseline이 있는지 따로 확인한다", "그 device가 task를 풀어 보였다고 믿고 결과를 인용한다", "baseline 비교까지 끝난 연구라고 보고 결론을 받아들인다", "시스템 전체의 전력까지 측정했다는 뜻으로 읽는다"], "a": 0, "why": "제목에 계산이 들어 있어도 task 없이 시냅스 기능 모사에서 멈춘 논문이 있습니다. 증거 사다리의 어느 단에 있는지는 그림으로 읽습니다."}, {"id": "d06-p07", "ref": "#s-case-lessons", "refLabel": "다섯 사례에서 배울 것", "type": "ox", "q": "device로 계산했다는 논문들 가운데 device 없이 같은 일을 한 baseline과 비교한 경우를 보면, device 쪽 성능이 baseline보다 낮거나 비슷한 경우가 흔하다.", "a": true, "why": "원래 입력을 그대로 넣은 baseline(한 사례에서 device가 1.3%p 낮음)이나 같은 알고리즘을 디지털로 돌린 baseline(다른 사례에서 1.6%p 낮음)과 비교한 사례들에서 device는 낮거나 비슷했고, physical reservoir computing 리뷰(Liang 2024)도 비슷한 구성이면 소프트웨어 쪽이 대개 낫다고 씁니다. device가 더 높게 나온 사례는 baseline의 조건이 불분명했습니다. 그래서 device의 가치는 정확도보다 readout 크기·전력·시간척도 조절에서 찾아야 할 수 있습니다."}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 계산이란", "items": [{"id": "d06-q01", "type": "mc", "q": "'물리계가 계산한다'의 사각형 틀(부호화 → 물리 변화 → 해독 → 비교)에서 물리계가 어떤 문제를 '계산한다'고 말할 수 있는 때는?", "options": ["입력을 넣었을 때 물리계 안에서 무언가 복잡하게 변할 때", "Device가 비선형이고 최근 입력의 흔적을 기억할 때", "해독한 답이 문제의 원래 답과 허용 오차 안에서 맞을 때", "같은 입력을 넣으면 매번 같은 출력이 나올 때"], "a": 2, "why": "네 화살표의 사각형이 닫혀야 한다(부호화 → 물리 변화 → 해독 → 비교). 복잡한 변화나 '비선형 + 기억'은 '물리가 움직임'에 관한 말일 뿐이고, 반복해서 같은 출력이 나오는 것도 해독한 답이 맞는지와는 별개다. 사각형의 네 단계(부호화·물리 변화·해독·비교)를 다시 보세요.", "ref": "#b-what-is-computing", "refLabel": "사각형의 네 단계"}, {"id": "d06-q29", "type": "mc", "q": "어떤 device의 출력 전류를 큰 신경망에 넣어 손글씨 숫자를 98% 맞혔다. 그런데 device 대신 아무 저항이나 넣어도 같은 신경망이 98%를 냈다. Stepney가 든 세 실패 유형 중 무엇에 가까운가?", "options": ["추상 문제와 물리 장치를 잇는 표현이 아예 없는 경우", "계산을 해독 단계에 숨겨 다른 컴퓨터가 한 경우", "잘 맞은 결과만 골라 보고한 경우", "실패가 아니다 — 98%면 device가 계산한 것이다"], "a": 1, "why": "Device를 바꿔도 점수가 같다면 일은 해독 단계(큰 신경망)가 했다. 돌멩이에 해석표를 붙여 7 × 8을 '계산'한 것처럼 꾸민 장면과 같은 유형, 곧 '해독 단계에 계산을 숨김'이다. 표현은 있고(전류를 신경망에 넣음), 골라 보고한 것도 아니다.", "ref": "#s-fail-types", "refLabel": "해독 단계에 숨은 계산과 돌멩이 예"}, {"id": "d06-q03", "type": "ox", "q": "시냅스 현상(PPF·LTP) 재현 논문의 첫 그림은 사각형의 네 단계(부호화·물리 변화·해독·비교) 중 '물리가 움직인다'만 보여 준다.", "a": true, "why": "문제 정의, 해독 규칙, 답과의 비교가 없다. Aluru 2026 p.593의 '단순 이온 conductance 이력을 넘어서야'가 같은 지적이다.", "ref": "#s-square-connect", "refLabel": "연결: 시냅스 현상 그림은 물리 변화만"}]}, "2-check": {"kind": "check", "title": "잠깐 점검 · 펄스 간격 예제와 사다리", "items": [{"id": "d06-q26", "type": "mc", "q": "펄스 간격을 맞히는 task에서 test accuracy가 device 75%, raw input(간격 숫자를 직접 준) baseline 75%, 기억 없는 저항(static device) baseline 50%였다. 맞는 해석은?", "options": ["기억은 쓰였으나 간격 숫자보다 낫다고는 못 한다", "Device가 raw input baseline보다 나으므로 device가 기여했다", "Device의 기억이 정확히 25%p만큼 정확도를 올렸다", "Training accuracy가 100%이므로 device가 task를 완전히 풀었다"], "a": 0, "why": "Baseline의 종류마다 묻는 것이 다르다. Raw input baseline과 같으면 'device가 readout의 일을 덜었다'고 말할 수 없고, static device보다 높으면 기억이 쓰였다는 진단이 된다. 다만 baseline 사이의 차이를 한 부품의 정확한 몫으로 나눌 수는 없다(Singh 2026 p.18). Training 100%는 문턱을 training sample에 맞춰 골랐으니 당연한 값이다.", "ref": "#s-worked-example", "refLabel": "펄스 간격 예제의 단계 6·7"}, {"id": "d06-q28", "type": "mc", "q": "펄스 간격 예제에서 문턱 θ를 고를 때 test sample(10, 50, 120, 600 ms)까지 함께 보고, 여덟 개를 모두 맞히는 값으로 정했다. 이때 나온 test accuracy 100%는 어떻게 읽어야 하나?", "options": ["Readout이 실제 경계를 정확히 배웠다는 증거다", "Device의 기억 덕분에 100%가 나왔다는 증거다", "Sample이 8개뿐이라 100%는 나올 수 없으니 계산 실수다", "Test sample이 학습에 쓰여 새 데이터 성능의 증거가 못 된다"], "a": 3, "why": "Test data를 보며 설정(여기서는 θ)을 고르면 그 데이터도 사실상 training에 쓴 셈이다. 그래서 학습 전에 떼어 두고 마지막 채점에만 쓴다(펄스 간격 예제의 '데이터 나누기'). 100%는 계산상 가능하지만(1.37과 1.46 사이에 θ를 두면 된다), 처음 보는 간격에서도 맞는다는 증거는 아니다.", "ref": "#s-worked-example", "refLabel": "예제 단계 2: 학습 전에 데이터 나누기"}]}, "2-end": {"kind": "end", "title": "2구간 마무리 퀴즈", "items": [{"id": "d06-q04", "type": "short", "q": "State x = 2, 4, 6에서 정답 y = 1, 2, 3이면 가장 잘 맞는 직선 y = W·x의 W는?", "a": ["0.5", "1/2", "0.5x", "w=0.5", "w = 0.5"], "why": "세 점 모두 y = 0.5x 위에 있다. 이것이 가장 단순한 readout 학습(linear regression)이다. State가 100개면 weight 100개를 같은 원리로 정한다.", "ref": "#b-readout", "refLabel": "직선 맞추기: 2, 4, 6 → 1, 2, 3 직선"}, {"id": "d06-q05", "type": "mc", "q": "'읽을 수 있는 state'에 붙는 두 조건은?", "options": ["응답이 크고, 입력에 빠르게 반응할 것", "다른 답이면 다른 state, 같은 입력이면 같은 state일 것", "전원을 꺼도 state가 남고, 읽기 I–V가 직선일 것", "값이 아날로그로 연속적이고, 잡음이 전혀 없을 것"], "a": 1, "why": "구별(다른 답을 가져야 할 입력은 다른 state로) + 반복 가능(같은 입력이면 거의 같은 state). 크기·속도·비휘발성·선형성은 다른 응용의 spec이고, 잡음이 '전혀' 없을 필요는 없다(흔들림이 state 사이 간격보다 작으면 된다). Singh 2026 p.6은 drift·불완전 리셋·비가역 변화에서 생기는 '겉보기 기억'이 재현성을 해친다고 쓴다.", "ref": "#b-task-state", "refLabel": "구별과 반복 가능"}, {"id": "d06-q30", "type": "mc", "q": "정답과 무관한 잡음 숫자 30개를 state로 주고 sample 40개로 직선을 맞췄다. Training R²와 held-out R²는 어떻게 나올 가능성이 큰가?", "options": ["둘 다 0 근처 — 무관한 숫자라 어디서도 못 맞힌다", "둘 다 0.7 안팎 — 맞춘 직선이 새 데이터에도 통한다", "Training은 0.7 안팎, held-out은 0보다 낮다", "Training은 0 근처, held-out은 0.7 안팎이다"], "a": 2, "why": "손잡이(weight)가 sample 수에 가까우면 training sample의 우연한 값까지 맞춰 training R²는 대략 30/40 근처(시뮬레이션 0.74)로 오르지만, 새 데이터에서는 평균만 찍는 것보다 못해 음수가 된다. Overfitting이고, 그래서 training 성능은 증거가 아니다.", "ref": "#s-r2-sim", "refLabel": "training R²와 held-out R²"}, {"id": "d06-q24", "ref": "#b-heldout-baseline", "refLabel": "외우기와 규칙 배우기", "type": "mc", "q": "Training에 쓰지 않고 떼어 둔 데이터(held-out)로 성능을 재야 하는 이유는?", "options": ["Training data는 sample 수가 적어 숫자가 흔들리기 때문", "Held-out 데이터는 더 정밀한 장비로 따로 측정하기 때문", "Training data로 재면 성능이 늘 낮게 나오기 때문", "Training에 쓴 데이터로는 외운 것과 배운 것을 가를 수 없기 때문"], "a": 3, "why": "잡음 state 시뮬레이션처럼 state가 많고 sample이 적으면 training 성능은 높아도 새 데이터에서는 무너진다(training 성능은 낮게가 아니라 부풀려져 나온다). Readout을 데이터로 학습한 계산이라면 '계산했다'는 주장은 새 데이터 성능으로 서야 한다. 해독 규칙을 미리 정해 둔 계산에는 이 조건이 그대로 적용되지 않는다."}, {"id": "d06-q08", "type": "mc", "q": "'device가 입력을 더 가르기 쉽게 바꿨는가'를 재는 baseline은?", "options": ["입력을 그대로 같은 readout에 넣은 raw input baseline", "같은 RC를 컴퓨터에서 잡음 없이 돌린 digital RC baseline", "센서 옆 작은 칩에서 신경망을 돌린 MCU baseline", "기억이 없는 보통 저항을 넣은 static device baseline"], "a": 0, "why": "Raw input baseline은 'device를 거치지 않은 입력'과 비교하므로 device의 변환이 도움이 됐는지를 잰다. Digital RC baseline은 하드웨어 잡음의 loss를, static device baseline은 시간 동역학(기억)의 기여를, MCU는 시스템 수준 경쟁을 잰다. 종류가 다르면 막대 길이를 비교할 수 없다.", "ref": "#s-baseline-kinds", "refLabel": "baseline의 네 종류"}, {"id": "d06-q31", "type": "mc", "q": "Raw input baseline보다 device 쪽 test accuracy가 3%p 높았다. 'device의 시간 동역학 덕분'이라고 말하려면 무엇을 더 확인해야 하나?", "options": ["Training accuracy도 3%p 이상 높은지 확인한다", "Device 수를 늘려 정확도가 더 오르는지 본다", "Feature 수·readout을 맞춘 대조에서도 남는지 본다", "같은 device로 PPF 곡선을 다시 재서 τ를 확인한다"], "a": 2, "why": "기능을 물리 기판(소재·device)에 귀속하려면 입력 부호화·feature 수·state 획득·readout 복잡도의 효과와 구별하는 대조 실험(예: 기억을 최소화한 static device baseline, feature 수를 맞춘 비교)이 필요하다(Singh 2026). Training accuracy는 증거가 아니고, device 수나 PPF 재측정은 그 질문에 답하지 않는다.", "ref": "#s-evidence-levels", "refLabel": "증거의 세 수준: 기판에 귀속"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · PPF", "items": [{"id": "d06-q25", "type": "mc", "q": "PPF 곡선(간격 Δt 대 PPF 지수) 하나가 증명하는 것은?", "options": ["새 데이터에서 task를 푸는 성능", "같은 입력에 state가 반복해서 재현된다는 것", "Device의 누적 방식이 비선형이라는 것", "최근 입력의 흔적이 남았다가 사라진다는 것"], "a": 3, "why": "사다리 0단: 기억(시간상수)의 존재. '간격이 짧을수록 커짐'은 선형인 저항–capacitor 회로에서도 나오므로 비선형의 증거가 아니다. 비선형은 '함께 준 응답'과 '따로 준 응답의 합'을 비교하는 겹침 시험으로 따로 본다(Day 29–30). 재현성(읽을 수 있는 state)과 새 데이터에서의 task 성능(held-out)은 사다리의 위 단에서 따로 검증한다.", "ref": "#s-ppf-proves", "refLabel": "이 곡선이 증명하는 것"}, {"id": "d06-q11", "type": "ox", "q": "Device가 비선형이고 서서히 잊으면 그 자체로 계산을 한다고 말할 수 있다.", "a": false, "why": "흔한 비약이다. 비선형과 서서히 잊음은 RC node에 흔히 요구되는 성질일 뿐 계산의 증거가 아니다. Readout을 학습하는 경우의 고친 문장: 최근 입력의 일부 정보가 state에 남는다. Task에 필요한 차이가 읽을 수 있는 state들에 보존되고, 학습한 readout이 새 데이터에서 답을 구분하며, baseline보다 나은지는 따로 검증해야 한다.", "ref": "#s-ppf-fix", "refLabel": "고쳐 쓴 문장"}]}, "3-end": {"kind": "end", "title": "3구간 마무리 퀴즈", "items": [{"id": "d06-q12", "type": "mc", "q": "4-bit 펄스 열 '1100'과 '0011'이 같은 최종 전류로 끝나는 device·읽기 방식에서 알 수 있는 것은?", "options": ["이 읽기 방식으로는 순서를 복원할 수 없다", "Device가 고장 나서 펄스를 기억하지 못한다", "두 열의 순서를 전류 하나로 복원할 수 있다", "이 device에는 짧은 기억(PPF)이 전혀 없다"], "a": 0, "why": "'state 하나로 이력·순서를 복원'은 해 봐야 안다. 남는 것과 task에 충분히 남는 것은 다르다. 같은 전류로 끝났다는 것만으로 기억이 없다거나 고장이라고 할 수는 없고, 다른 시점을 더 읽거나(다중 탭) 다른 state를 읽으면 달라질 수 있다.", "ref": "#s-one-value", "refLabel": "1100과 0011: 전류 한 값의 한계"}, {"id": "d06-q27", "type": "short", "q": "모형 device에서 첫 펄스의 응답이 1.00 µA, 50 ms 뒤 두 번째 펄스의 응답이 1.58 µA였다. PPF 지수는 몇 %인가? (숫자만)", "a": ["158", "158%", "158 %"], "why": "PPF 지수 = 두 번째 응답 ÷ 첫 번째 응답 × 100 = 1.58 ÷ 1.00 × 100 = 158%. 앞의 10 ms(188%)와 1 s(105%) 사이 값이고, PPF 곡선에서 50 ms 자리에 해당한다.", "ref": "#b-ppf", "refLabel": "PPF 지수 계산"}]}, "4-check": {"kind": "check", "title": "잠깐 점검 · 폴더 사례", "items": [{"id": "d06-q32", "type": "mc", "q": "Device RC가 90.01%, 원시 시간 프레임 네 장을 그대로 같은 방식의 readout에 넣은 baseline이 91.32%였다. 이 결과로 말할 수 있는 것은?", "options": ["Device가 정확도를 높였으니 계산에 기여했다", "정확도로는 device 기여를 말할 수 없다", "Baseline이 raw input이라 이 비교는 의미가 없다", "1.3%p 차이는 하드웨어 잡음 때문에 잃은 정확도다"], "a": 1, "why": "Raw input baseline보다 낮으므로 정확도로는 device 기여를 말할 수 없다. 이 사례(Lee 2025)의 기여는 readout 크기 감소(2352×10 vs 3136×10, weight 25% 적음)와 timescale 조절이다. '하드웨어 잡음의 loss'은 같은 알고리즘을 디지털로 돌린 digital RC baseline이 재는 것이다.", "ref": "#s-case-lee", "refLabel": "사례 1: raw input baseline보다 낮은 device"}, {"id": "d06-q15", "type": "mc", "q": "같은 RC 알고리즘을 디지털 컴퓨터로 잡음 없이 돌린 baseline(98.2%)과 아날로그 device 시스템(96.6%)의 차이가 재는 것은?", "options": ["Device가 입력을 더 가르기 쉽게 바꿨는지", "Device 시스템과 MCU의 전력 차이", "Device state가 얼마나 오래 유지되는지", "하드웨어 잡음·편차 때문에 잃은 정확도"], "a": 3, "why": "알고리즘은 같고 구현만 다르므로 차이(1.6%p)는 하드웨어 쪽에서 잃은 몫이다. 'device를 빼고 raw input + 같은 readout' baseline은 Zhong 2022 본문에 없어서, device가 입력을 가르기 쉽게 바꿨는지는 이 비교로 알 수 없다. Baseline의 종류를 적어야 하는 이유.", "ref": "#s-case-zhong", "refLabel": "사례 2: digital RC baseline"}]}, "4-end": {"kind": "end", "title": "4구간 마무리 퀴즈", "items": [{"id": "d06-q16", "type": "ox", "q": "Chen 2025의 Fig. 4g에서 RC(88%)가 SVM(약 60%)보다 높으므로, device의 기여가 약 28%p라고 결론 내릴 수 있다.", "a": false, "why": "SVM(선형 분류기)의 입력이 원시 픽셀인지 같은 virtual node인지, feature 차원이 맞춰졌는지 본문에 없다. 또 e·f의 혼동 행렬은 training data 결과로 읽힌다 [해석]. Baseline이 '있다'만으로는 부족하고 종류와 조건이 적혀야 막대 길이 차이를 device 기여로 읽을 수 있다.", "ref": "#s-case-chen", "refLabel": "사례 4: 조건이 불명인 SVM baseline"}, {"id": "d06-q17", "type": "mc", "q": "제목에 'neuromorphic ionic computing'이 들어 있지만, 그림에는 짝펄스 억제·기억과 망각·연상학습 흉내·어레이 이미지 저장만 있고 분류·예측 task와 정확도는 없다. 사다리의 어디에 놓나?", "options": ["4단 — 저장한 이미지를 다시 읽었으니 held-out이다", "5단 — 생물 시냅스와 비교했으니 baseline이 있다", "0단 — 현상 재현까지이고 task가 없다", "6단 — 어레이를 만들었으니 시스템 비용까지 왔다"], "a": 2, "why": "task(입력·정답·척도)가 없으면 1단도 서지 않는다. 저장한 그림을 다시 읽는 것은 training에 안 쓴 데이터로 채점하는 held-out이 아니고, 생물과 닮았다는 것은 device를 뺀 baseline이 아니며, 어레이 제작은 시스템 비용 측정이 아니다. 제목의 'computing'과 사다리의 단은 별개이며 그림으로 읽는다(Fan 2026).", "ref": "#s-case-fan", "refLabel": "사례 5: task가 없는 논문"}, {"id": "d06-q33", "type": "mc", "q": "Baseline의 종류가 분명한 사례들에서 device가 baseline보다 낮거나 비슷했다. Physical reservoir computing 리뷰의 관찰과 함께 보면, device의 가치를 어디서 재는 것이 맞나?", "options": ["정확도 밖의 이점(readout 크기·전력)에서", "Baseline을 빼고 device 결과만 보고하는 데서", "정확도 차이 대신 PPF 곡선을 더 많이 보이는 데서", "Training accuracy를 함께 보고해 차이를 메우는 데서"], "a": 0, "why": "Liang 2024(p.201)는 비슷한 구성이면 소프트웨어 RC가 대개 낫고, physical reservoir computing의 장점은 정확도보다 시스템 복잡도·전력·학습 비용·속도 같은 데 있다고 쓴다. Lee 2025도 기여가 readout 크기 감소였다. Baseline을 빼거나 training accuracy로 메우면 증거 수준이 내려가고, PPF는 0단 증거다.", "ref": "#s-case-lessons", "refLabel": "다섯 사례에서 배울 것"}]}, "5-check": {"kind": "check", "title": "잠깐 점검 · Phase 1 종합", "items": [{"id": "d06-q34", "type": "mc", "q": "Phase 1 답의 첫 문장으로 지금까지의 근거에 가장 맞게 쓴 것은?", "options": ["기존 컴퓨터는 모든 계산에서 데이터 이동 때문에 비효율적이다.", "실시간 입력이 이어지는 계산에서는 데이터 이동 비용이 커질 수 있다.", "뉴로모픽 device는 뇌처럼 20 W로 동작하므로 항상 더 효율적이다.", "PPF를 보인 이온 device는 이미 계산 device이므로 응용만 남았다."], "a": 1, "why": "첫 문장은 '어떤 계산에서' 기존 컴퓨터가 불리할 수 있는지를 조건과 함께 말하는 자리다. '모든 계산에서', '항상'은 Day 3–4·Day 5–6에서 조건을 붙인 주장과 맞지 않고, PPF만으로 계산 device라고 하는 것은 오늘 사다리 0단의 오해다.", "ref": "#s-three-sentences", "refLabel": "'왜 필요한가' 세 문장의 형식"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈 · Phase 1", "items": [{"id": "d06-q20", "type": "mc", "q": "사다리에서 'raw input·static device·디지털 RC를 같은 readout으로 비교'가 증명하는 것은?", "options": ["무엇을 계산하는지 말할 수 있다", "외운 것이 아니라 일반화했다", "Device가 기여했다", "시스템으로 쓸 만하다"], "a": 2, "why": "5단 baseline 비교 = device의 기여. 1단(task)은 '무엇을', 4단(held-out)은 '일반화', 6단(시스템 비용)은 '쓸 만한가'. 사다리 그림의 오른쪽 열(각 단이 증명하는 것).", "ref": "#s-ladder", "refLabel": "각 단이 증명하는 것"}, {"id": "d06-q35", "type": "ox", "q": "원리 증명 단계의 device 논문은 사다리 6단까지 모두 보여야 가치가 있다.", "a": false, "why": "모든 원리 증명 연구가 모든 요구를 만족할 필요는 없다. 기준은 주장의 강도가 제시된 증거 수준과 일치하는가, 곧 자기가 어느 단에 있는지 제목과 결론이 정직하게 말하는가다(Singh 2026). 오늘의 반론('기준이 너무 높다')에 대한 응답의 재료.", "ref": "#s-objection", "refLabel": "오늘의 반론: 기준이 너무 높은가"}, {"id": "d06-q36", "type": "mc", "q": "Phase 1 주장 사슬에서 '가장 약한 고리'를 고르는 기준으로 맞는 것은?", "options": ["가장 최근에 배운 날의 주장을 고른다", "가장 많은 논문이 인용된 고리를 고른다", "내 소재와 가장 멀어 보이는 고리를 고른다", "[가설]·[미확인] 태그가 몰린 고리를 고른다"], "a": 3, "why": "근거 태그가 약한 곳이 사슬 전체를 약하게 한다(예: MCU 비교가 폴더에 없는 Day 9 [가설], 수치가 대부분 [미확인]인 Day 3–4). 인용 수가 많아도 정성 서술뿐이면 약할 수 있다. 고른 뒤에는 '무엇을 확인하면 [확인]으로 바뀌나'를 적는다.", "ref": "#s-weakest-link", "refLabel": "가장 약한 고리 고르기"}, {"id": "d06-q23", "type": "mc", "q": "내 device로 사다리 2단(읽을 수 있는 state)을 보이는 최소 실험에 꼭 들어가야 하는 것은?", "options": ["여러 입력열을 반복해 넣고 끝 state의 구별·재현을 본다", "PPF 곡선을 여러 간격에서 더 촘촘하게 다시 잰다", "MNIST를 넣어 분류 정확도를 잰다", "펄스 뒤 전류가 얼마나 오래 유지되는지 잰다"], "a": 0, "why": "구별 + 반복 가능. PPF와 유지 시간은 한 종류의 입력(두 펄스, 한 펄스)만 본다. MNIST 정확도는 3·4단이고, 2단 없이 올라가면 readout이 일을 다 하는지 알 수 없다.", "ref": "#b-task-state", "refLabel": "구별과 반복 가능"}]}, "review": {"kind": "review", "title": "지난 학습 복습: 적합한 문제, 부적합한 문제", "items": [{"id": "d06-r01", "core": true, "type": "mc", "q": "공장의 하루치 측정 기록 수억 줄을 밤마다 한꺼번에 분석하는 일을 적합성 질문 사다리에 올리면, 처음 '아니오'가 나오는 질문과 그 까닭은?", "options": ["'입력이 실시간으로 하나씩 오나'에서: 모아서 배치로 처리할 수 있다", "'근사를 견딜 수 있나'에서: 기록이 많으면 근사를 견딜 수 없다", "'device τ가 신호의 timescale와 맞나'에서: 밤마다 하므로 τ가 하루여야 한다", "'MCU보다 나은가'에서: 아직 모른다"], "a": 0, "why": "첫 질문은 '입력이 한 번에 하나씩, 실시간으로 오나?'입니다. 밤마다 모아 둔 기록은 배치로 weight를 재사용할 수 있어 보통 컴퓨터가 유리하므로, 여기서 이미 '아니오'입니다. 앞 질문이 '아니오'면 아래는 볼 필요가 없습니다.", "wrongWhy": ["", "근사 허용은 데이터 양이 아니라 task가 정합니다. 그리고 그보다 앞선 '실시간으로 하나씩 오나'에서 이미 떨어집니다.", "τ 정합은 신호의 timescale 이야기이고, 그 전에 '실시간으로 하나씩 오나'에서 떨어집니다.", "MCU 비교까지 가기 전에 첫 질문 '실시간으로 하나씩 오나'에서 '아니오'가 나옵니다."], "ref": "d05.html#s-ladder-questions", "refLabel": "질문 사다리의 여섯 질문", "fig": "../assets/img/d05/fig1-question-ladder.svg", "figAlt": "적합한 문제를 가르는 여섯 질문의 사다리"}, {"id": "d06-r02", "type": "mc", "q": "ADC 변환 한 번에 2 nJ이 들고, 1초에 500번 변환한다. ADC가 쓰는 평균 전력은?", "options": ["2 nJ", "1 µW", "1 µJ", "1 mW"], "a": 1, "why": "한 번의 에너지 × 1초당 횟수 = 평균 전력이므로 2 nJ × 500/s = 1,000 nJ/s = 1 µJ/s = 1 µW입니다.", "wrongWhy": ["2 nJ은 한 번의 에너지입니다. 평균 전력은 여기에 1초당 횟수를 곱한 값입니다.", "", "1 µJ은 1초 동안 쓴 에너지이고, 단위를 J/s(= W)로 적어야 평균 전력입니다.", "1,000 nJ/s = 1 µW입니다. 자릿수를 1,000배 크게 잡았습니다."], "ref": "d05.html#s-energy-model", "refLabel": "한 번의 에너지 × 1초당 횟수", "fig": "../assets/img/d05/fig2c-energy-model.svg", "figAlt": "평균 전력을 한 번의 에너지, 횟수, 대기 전력으로 나눈 그림"}, {"id": "d06-r03", "core": true, "type": "mc", "q": "대기 전력 2 µW인 센서 node에 사건이 하루 1,000번 오고 사건마다 1 µJ을 쓴다(하루 = 86,400 s). 평균 전력을 줄이려면 무엇을 먼저 바꿔야 하나?", "options": ["사건당 에너지를 절반으로 줄인다", "사건 횟수를 절반으로 줄인다", "대기 전력을 절반으로 줄인다", "셋 다 효과가 비슷하다"], "a": 2, "why": "사건 몫은 1,000 × 1 µJ ÷ 86,400 s ≈ 0.012 µW로 대기 2 µW의 1%도 안 됩니다. 사건이 드문 always-on node에서는 평균 전력이 거의 대기 전력이라, 대기 전력을 줄이는 것이 먼저입니다.", "wrongWhy": ["사건 몫이 약 0.012 µW라 절반으로 줄여도 약 0.006 µW만 줍니다.", "사건 몫 자체가 작아 횟수를 줄여도 효과가 거의 없습니다.", "", "대기 전력이 평균 전력의 99% 이상이라 효과가 크게 다릅니다."], "ref": "d05.html#s-always-on", "refLabel": "always-on을 숫자로"}, {"id": "d06-r04", "type": "mc", "q": "어떤 센서 node의 평균 전력 대부분이 무선 송신이다. 효과가 가장 큰 처방은?", "options": ["MCU 클록을 2배로 올린다", "In-sensor 전처리로 ADC·MCU가 깨는 횟수를 줄인다", "센서 채널 수를 늘려 정보를 더 모은다", "엣지 처리로 사건만 보내 송신 비트를 줄인다"], "a": 3, "why": "어느 고리가 지배하느냐가 처방을 정합니다. 송신이 지배하면 node 안에서 처리해 결과(사건)만 보내는 엣지 처리가 효과를 냅니다(원시 데이터 전부 621 µW → 사건만 23 µW). In-sensor 전처리는 매 샘플의 ADC·MCU가 지배할 때 효과가 큽니다.", "wrongWhy": ["클록을 올려도 보낼 비트 수는 그대로라 송신 전력이 줄지 않습니다.", "ADC·MCU 몫을 줄이는 처방입니다. 지배하는 고리인 송신은 그대로입니다.", "채널이 늘면 보낼 데이터도 늘어 송신 전력이 커집니다.", ""], "ref": "d05.html#s-three-cases", "refLabel": "세 가지 설계: 사슬의 어디를 끊나", "fig": "../assets/img/d05/fig2-edge-energy-chain.svg", "figAlt": "센서 노드의 에너지 사슬과 세 설계의 평균 전력 막대"}, {"id": "d06-r05", "core": true, "type": "mc", "q": "심전도 패치 모형에서 C(아날로그 전처리 device가 늘 켜져 지켜보다가 사건 때만 ADC·MCU를 깨움)의 전처리 device 전력이 1 µW가 아니라 30 µW라면, B(MCU가 매 샘플 처리, 약 23 µW)와 비교해 어떻게 되나?", "options": ["C가 여전히 B의 약 9분의 1이다", "C가 약 32 µW로 B보다 높아진다", "송신이 같으므로 둘은 같아진다", "ADC·MCU가 잠들므로 C는 0에 가까워진다"], "a": 1, "why": "C = always-on 30 µW + 사건 2개 × 21 nJ ≈ 0.04 µW + 송신 1.6 µW ≈ 32 µW로 B(약 23 µW)보다 커집니다. 일하는 몫을 줄일수록 always-on 부분의 전력이 결론을 정하므로, 전처리 device의 대기 전력이 작아야 in-sensor가 이득입니다.", "wrongWhy": ["9분의 1은 전처리 device가 1 µW일 때의 결과입니다. Always-on 전력은 평균 전력에 그대로 더해집니다.", "", "송신(1.6 µW)은 같지만 나머지 몫이 다릅니다.", "ADC·MCU가 잠들어도 늘 켜진 전처리 device의 30 µW는 남습니다."], "ref": "d05.html#ex-three-cases", "refLabel": "A·B·C의 평균 전력 계산"}, {"id": "d06-r06", "type": "mc", "q": "어떤 논문이 '전력 99.9% 절감'이라고 적었다. 이 숫자를 내 응용의 근거로 쓰기 전에 먼저 물을 것으로 가장 맞는 것은?", "options": ["Baseline과 시스템 경계가 무엇이었나", "절감률이 99%를 넘을 만큼 큰가", "Device 하나의 에너지가 fJ 수준인가", "GPU와 비교해도 절감이 유지되는가"], "a": 0, "why": "절감률은 무엇과 비교했는지(같은 알고리즘의 디지털 구현인지, MCU + 작은 신경망인지, raw input + 같은 readout인지)와 어디까지 셌는지(센서·ADC·MCU·무선·대기 전력)에 따라 뜻이 달라집니다.", "wrongWhy": ["", "숫자의 크기보다 무엇과 비교했는지가 먼저입니다.", "Device 하나의 에너지는 시스템 전력의 한 항일 뿐입니다.", "엣지 응용의 실제 경쟁자는 GPU가 아니라 MCU + 작은 신경망입니다."], "ref": "d05.html#s-zhong-limits", "refLabel": "논문의 절감 숫자를 읽을 때 볼 세 가지"}, {"id": "d06-r07", "core": true, "type": "mc", "q": "몸에 붙이는 패치용 작은 신경망(weight 2,000개, 하나에 1 byte)을 칩 안 메모리 64 KB인 저전력 MCU로 돌린다. 입력이 하나씩(배치 1) 올 때 맞는 것은?", "options": ["배치 1이므로 매번 칩 밖 DRAM에서 weight를 가져와야 한다", "Weight가 너무 커서 MCU로는 돌릴 수 없다", "Weight 2 KB가 칩 안에 들어가 칩 밖 이동이 없다", "배치 1이면 MCU는 계산을 시작할 수 없다"], "a": 2, "why": "Weight 2,000개 × 1 byte = 2 KB는 칩 안 메모리에 들어가므로, 배치 1이어도 칩 밖에서 가져오지 않습니다. 그래서 MCU + 작은 신경망은 µW 자릿수로 동작하는 진짜 경쟁자입니다.", "wrongWhy": ["Weight가 칩 안에 있으면 배치 1이어도 칩 밖 이동이 없습니다.", "2 KB는 64 KB 칩 안 메모리에 넉넉히 들어갑니다.", "", "MCU는 입력이 하나씩 와도 곱해서 더하기를 차례로 해 나갑니다."], "ref": "d05.html#s-mcu-nn", "refLabel": "MCU에서 작은 신경망이 도는 장면"}, {"id": "d06-r08", "type": "mc", "q": "몸에 붙인 이온 device 전처리기가 첫 주에는 잘 동작하다가 한 달 뒤 응답이 바뀌었다. Bio-interface의 두 조건 가운데 무엇이 부족했나?", "options": ["이온–전자 변환 효율", "입력의 희소성", "프로그램 가능성", "동작 안정성"], "a": 3, "why": "이온 device가 생체와 '같은 언어'를 쓴다는 이점에는 안정성과 이온–전자 변환 효율이라는 두 조건이 붙습니다. 시간이 지나며 응답이 바뀐 것은 안정성의 문제입니다. 이온 시스템은 동작 안정성에서 전자 시스템에 뒤처진다는 지적이 있습니다.", "wrongWhy": ["변환 효율은 이온 신호를 다음 전자 회로가 읽을 수 있게 바꾸는 효율입니다. 시간에 따른 변화와는 다른 조건입니다.", "희소성은 사다리의 질문이지 bio-interface의 두 조건이 아닙니다.", "프로그램 가능성은 MCU와의 비교 항목입니다.", ""], "ref": "d05.html#s-bio-conditions", "refLabel": "bio-interface의 두 조건", "fig": "../assets/img/d05/fig4-bio-interface.svg", "figAlt": "bio-interface가 요구하는 것과 이온 device, 전자 device의 자리"}, {"id": "d06-r09", "type": "ox", "q": "입력이 하나씩 실시간으로 온다는 것만으로, 그 응용에서 뉴로모픽 device가 MCU + 작은 신경망보다 낫다고 말할 수 있다.", "a": false, "why": "실시간 입력은 사다리의 첫 질문을 통과했다는 뜻일 뿐입니다. 희소·대기 전력, 근사 허용, τ 정합, 다음 단계를 지나도, 같은 task에서 MCU + 작은 신경망보다 시스템 전체로 나은지는 따로 비교해야 합니다.", "wrongWhy": ["실시간은 첫 질문일 뿐입니다. 나머지 조건과 MCU + 작은 신경망과의 시스템 비교가 남아 있습니다.", ""], "ref": "d05.html#s-ladder-questions", "refLabel": "질문 사다리: 1부터 6까지"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d06">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>현상 재현 ≠ 계산, 학습형 계산의 검증 사다리(task·읽을 수 있는 상태·readout·held-out·baseline), PPF 곡선이 증명하는 것과 못 하는 것</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d07a.html">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유 →</a></p>
+</div>
+</section>
+<section id="writing" class="level2">
+<h2 class="anchored" data-anchor-id="writing">선택 활동: 글로 정리하기</h2>
+<details class="fold writing-fold"><summary>선택 활동 펼치기 · 백지 회상, 가르치듯 내 답, 사전 테스트 다시 풀기 (학습 완료와 무관)</summary>
+<p><strong>가르치듯 내 답.</strong> 후배에게 설명한다고 생각하고 짧게(3–5문장 또는 작은 도식 하나) 답합니다.</p>
+<div class="guide-box">
+<p><strong>오늘은 Phase를 마무리하는 날입니다.</strong> 내 답의 아래쪽에 'Phase 종합' 양식이 붙어 있습니다.</p>
+<ul>
+<li><strong>한 단락 답</strong>: 이번 Phase 6일의 답을 한 단락으로 잇습니다. 각 날의 결론을 나열하지 말고, 하나의 주장으로 엮으세요.</li>
+<li><strong>가장 약한 고리</strong>: <span class="tag tag-hypo">가설</span> 태그가 몰린 곳, 숫자가 없는 곳이 후보입니다.</li>
+<li><strong>가정 중 바뀐 것</strong>: 앞 날들의 글에서 지금 보면 틀린 문장을 찾아 적습니다. "없다"면 공부가 얕았던 것입니다. 바꾼 근거에는 출처를 씁니다.</li>
+<li><strong>모의 디펜스</strong>: 내 답을 저장한 뒤 Claude에게 "Day 10 모의 디펜스"라고 말하면, 이번 Phase 전체에서 섞어서 묻습니다. 답하지 못한 것을 양식의 마지막 칸에 적습니다.</li>
+</ul>
+</div>
+<div class="editable" data-file="d06-answer" data-title="내 답" data-template="answer-phase"></div>
+<p><strong>사전 테스트 다시 풀기.</strong> 같은 문제를 이유와 함께 다시 풉니다(정답을 이미 본 문제라 이해 점검 점수로 쓰지 않습니다).</p>
+<div class="quiz" data-day="d06" data-set="pre" data-mode="post"></div>
+</details>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d05.html" class="pagination-link" aria-label="Day 9 · 적합한 문제, 부적합한 문제">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 9 · 적합한 문제, 부적합한 문제</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d07a.html" class="pagination-link" aria-label="Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유">
+        <span class="nav-page-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p><span class="ft-links"><a href="../index.html">Home</a> <a href="../research.html">Research</a> <a href="../plan.html">Curriculum</a> <a href="../projects/index.html">Projects</a> <a href="../notes.html">Notes</a> <a href="../papers.html">Papers</a> <a href="../ledger/terms.html">Glossary</a></span><span class="ft-copy">Copyright © 2026 All rights reserved · Hyeon Woo Yang · KAIST</span></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,61 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 338' width='100%' font-family='Noto Sans KR, Malgun Gothic, sans-serif' font-size='13' fill='#444'>
+<defs><marker id='arr' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#444'/></marker><marker id='arr-c999' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#999'/></marker></defs>
+<text x='340.0' y='22' font-size='13' fill='#444' text-anchor='middle' font-weight='bold' >Lee 2025의 N-MNIST: device를 거친 길과 device를 뺀 길(raw input baseline)</text>
+<text x='20' y='59' font-size='11' fill='#444' text-anchor='start' font-weight='bold' >숫자 하나</text>
+<rect x='112' y='46' width='42' height='42' rx='3' fill='#fff' stroke='#999' stroke-width='1.2' />
+<rect x='136' y='60' width='8' height='8' rx='1' fill='#fff' stroke='#444' stroke-width='0.8' />
+<text x='133' y='102' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >프레임 1</text>
+<text x='140' y='69.5' font-size='9' fill='#444' text-anchor='middle' font-weight='bold' >0</text>
+<rect x='162' y='46' width='42' height='42' rx='3' fill='#fff' stroke='#999' stroke-width='1.2' />
+<rect x='186' y='60' width='8' height='8' rx='1' fill='#444' stroke='#444' stroke-width='0.8' />
+<text x='183' y='102' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >프레임 2</text>
+<text x='190' y='69.5' font-size='9' fill='#444' text-anchor='middle' font-weight='bold' >1</text>
+<rect x='212' y='46' width='42' height='42' rx='3' fill='#fff' stroke='#999' stroke-width='1.2' />
+<rect x='236' y='60' width='8' height='8' rx='1' fill='#444' stroke='#444' stroke-width='0.8' />
+<text x='233' y='102' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >프레임 3</text>
+<text x='240' y='69.5' font-size='9' fill='#444' text-anchor='middle' font-weight='bold' >1</text>
+<rect x='262' y='46' width='42' height='42' rx='3' fill='#fff' stroke='#999' stroke-width='1.2' />
+<rect x='286' y='60' width='8' height='8' rx='1' fill='#fff' stroke='#444' stroke-width='0.8' />
+<text x='283' y='102' font-size='9' fill='#999' text-anchor='middle' font-weight='normal' >프레임 4</text>
+<text x='290' y='69.5' font-size='9' fill='#444' text-anchor='middle' font-weight='bold' >0</text>
+<text x='320' y='60' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >28×28 픽셀 그림이 시간 순으로 네 장(프레임 1–4). 픽셀 값은 0 또는 1.</text>
+<text x='320' y='78' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >같은 자리의 픽셀(작은 네모)을 시간 순으로 읽으면 0, 1, 1, 0.</text>
+<text x='320' y='96' font-size='10.5' fill='#444' text-anchor='start' font-weight='normal' >숫자 하나 = 4 프레임 × 784 픽셀 = 숫자 3136개.</text>
+<text x='20' y='120' font-size='11.5' fill='#13936b' text-anchor='start' font-weight='bold' >device를 거친 길</text>
+<text x='20' y='143' font-size='11' fill='#444' text-anchor='start' font-weight='bold' >픽셀 한 자리</text>
+<rect x='112' y='128' width='176' height='30' rx='6' fill='#fff' stroke='#d9d9d9' stroke-width='1.4' />
+<text x='200.0' y='143.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' dominant-baseline='central'>픽셀 한 자리의 값 4개: 0, 1, 1, 0</text>
+<line x1='290' y1='143.0' x2='304' y2='143.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<rect x='306' y='128' width='153' height='30' rx='6' fill='#fff' stroke='#d9d9d9' stroke-width='1.4' />
+<text x='382.5' y='143.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' dominant-baseline='central'>펄스 4개: 0 V, 3 V, 3 V, 0 V</text>
+<line x1='461' y1='143.0' x2='475' y2='143.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<rect x='477' y='128' width='75' height='30' rx='6' fill='#fff' stroke='#13936b' stroke-width='1.4' />
+<text x='514.5' y='143.0' font-size='10.5' fill='#13936b' text-anchor='middle' font-weight='normal' dominant-baseline='central'>device 1개</text>
+<line x1='554' y1='143.0' x2='568' y2='143.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<rect x='570' y='128' width='103' height='30' rx='6' fill='#fff' stroke='#13936b' stroke-width='1.4' />
+<text x='621.5' y='143.0' font-size='10.5' fill='#13936b' text-anchor='middle' font-weight='normal' dominant-baseline='central'>conductance 1개</text>
+<text x='681' y='147' font-size='10.5' fill='#13936b' text-anchor='start' font-weight='bold' >4개 → 1개</text>
+<text x='20' y='191' font-size='11' fill='#444' text-anchor='start' font-weight='bold' >숫자 전체</text>
+<rect x='112' y='176' width='201' height='30' rx='6' fill='#fff' stroke='#13936b' stroke-width='1.4' />
+<text x='212.5' y='191.0' font-size='10.5' fill='#13936b' text-anchor='middle' font-weight='normal' dominant-baseline='central'>784 자리 × bias 3가지 = state 2352개</text>
+<line x1='315' y1='191.0' x2='329' y2='191.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<rect x='331' y='176' width='200' height='30' rx='6' fill='#fff' stroke='#e08a3c' stroke-width='1.4' />
+<text x='431.0' y='191.0' font-size='10.5' fill='#e08a3c' text-anchor='middle' font-weight='normal' dominant-baseline='central'>readout 2352×10 (weight 23,520개)</text>
+<line x1='533' y1='191.0' x2='547' y2='191.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<rect x='549' y='176' width='112' height='30' rx='6' fill='#fff' stroke='#444' stroke-width='1.4' />
+<text x='605.0' y='191.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' dominant-baseline='central'>점수 10개 → 90.01%</text>
+<text x='20' y='228' font-size='11.5' fill='#999' text-anchor='start' font-weight='bold' >device를 뺀 길 (raw input baseline)</text>
+<text x='20' y='251' font-size='11' fill='#444' text-anchor='start' font-weight='bold' >숫자 전체</text>
+<rect x='112' y='236' width='132' height='30' rx='6' fill='#fff' stroke='#999' stroke-width='1.4' />
+<text x='178.0' y='251.0' font-size='10.5' fill='#999' text-anchor='middle' font-weight='normal' dominant-baseline='central'>픽셀 값 3136개를 그대로</text>
+<line x1='246' y1='251.0' x2='260' y2='251.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<rect x='262' y='236' width='200' height='30' rx='6' fill='#fff' stroke='#e08a3c' stroke-width='1.4' />
+<text x='362.0' y='251.0' font-size='10.5' fill='#e08a3c' text-anchor='middle' font-weight='normal' dominant-baseline='central'>readout 3136×10 (weight 31,360개)</text>
+<line x1='464' y1='251.0' x2='478' y2='251.0' stroke='#999' stroke-width='1.2' marker-end='url(#arr-c999)'/>
+<rect x='480' y='236' width='112' height='30' rx='6' fill='#fff' stroke='#444' stroke-width='1.4' />
+<text x='536.0' y='251.0' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' dominant-baseline='central'>점수 10개 → 91.32%</text>
+<rect x='112' y='234' width='4' height='34' rx='6' fill='none' stroke='none' stroke-width='1.2' />
+<text x='340.0' y='292' font-size='10.5' fill='#444' text-anchor='middle' font-weight='normal' >readout은 두 길 모두 같은 방식(숫자 N개 × 점수 10개의 weight 표)이고, 각자 training data로 학습한다.</text>
+<text x='340.0' y='309' font-size='10.5' fill='#444' text-anchor='middle' font-weight='bold' >device가 한 일: 숫자 4개를 1개로 줄임 → readout이 25% 작아짐. 정확도는 baseline보다 1.3%p 낮음.</text>
+<text x='340.0' y='326' font-size='10' fill='#999' text-anchor='middle' font-weight='normal' >수치는 Lee 2025 (npj Unconv. Comput.) p.6–8. 도식은 Claude가 그림.</text>
+</svg>

@@ -1,0 +1,15 @@
+<script>
+  // 2026-11-03: 저장된 글자 크기를 그리기 전에 적용 (탭을 누를 때 글자가 잠깐 커졌다 돌아오는 깜빡임 방지)
+  try { var f = parseInt(localStorage.getItem('study-fs') || '2', 10); if (f >= 1 && f <= 4) document.documentElement.classList.add('study-fs-' + f); } catch (e) {}
+</script>
+<meta name="theme-color" content="#ffffff">
+<!-- 2026-11-02: 본문 글꼴은 Pretendard(study.css)라서 쓰지 않던 Noto Sans KR 내려받기를 뺐다 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>

@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 13. state update와 readout 학습: 최소제곱에서 ridge까지 – Why Ions Compute?</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../days/d08b.html" rel="next">
+<link href="../days/d07b.html" rel="prev">
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-38b12a2c769cbf7df2ce7c55208cb0ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 2,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "/"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script>
+  // 2026-11-03: 저장된 글자 크기를 그리기 전에 적용 (탭을 누를 때 글자가 잠깐 커졌다 돌아오는 깜빡임 방지)
+  try { var f = parseInt(localStorage.getItem('study-fs') || '2', 10); if (f >= 1 && f <= 4) document.documentElement.classList.add('study-fs-' + f); } catch (e) {}
+</script>
+<meta name="theme-color" content="#ffffff">
+<!-- 2026-11-02: 본문 글꼴은 Pretendard(study.css)라서 쓰지 않던 Noto Sans KR 내려받기를 뺐다 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/study.css">
+<link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute?</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">홈</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../research.html"> 
+<span class="menu-text">연구 개요</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">커리큘럼</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07a.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d08a.html">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 개요</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">커리큘럼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 device 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 device의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 device의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, conductance가 정하는 것과 정하지 못하는 것, 같은 conductance 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 conductance의 최적점, 질문 바꾸기와 최소 필요 conductance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, device 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 device가 필요한가, 성공·실패가 남기는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">처음 한 번 · 컴퓨터 준비</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P1. 컴퓨터만으로 첫 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P2. 소스미터로 소자 재기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P3. 보드로 만드는 장치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P4. 누름과 리듬</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/e.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P5. EMG와 reservoir</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/side.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">사이드 · NU40 DK 하루 실습</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">지난 학습 복습</a></li>
+  <li><a href="#pretest" id="toc-pretest" class="nav-link" data-scroll-target="#pretest">사전 테스트 (선택)</a></li>
+  <li><a href="#lesson" id="toc-lesson" class="nav-link" data-scroll-target="#lesson">학습자료</a></li>
+  <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">학습 완료</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../days/d07a.html">Phase 2 · RC의 원리</a></li><li class="breadcrumb-item"><a href="../days/d08a.html">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Day 13. state update와 readout 학습: 최소제곱에서 ridge까지</h1>
+<p class="subtitle lead">Phase 2 · RC는 왜, 어떻게 작동하는가</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이번 질문</strong> reservoir 상태는 무엇을 담고, readout weight는 어떻게 구하나?</p>
+<p><strong>왜 배우나</strong> 내 device N개 전류가 <span class="key">거의 같은 노드라 weight가 튀는지</span>(ridge λ 필요) 판단한다.</p>
+<p><strong>오늘의 장면</strong> 입력 시계열 u(t) → state update → <span class="key">상태 × weight → y(t)</span> → 오차 최소 weight 구함</p>
+<p><strong>오늘 반드시</strong> <span class="key">t는 초가 아니라 번호다. 노드가 거의 같으면 weight가 +4, −3처럼 튀므로 ridge의 λ가 필요하다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 전치·역행렬 표기 · 2×2 역행렬 확인(심화)</p>
+<p><strong>이후 쓰이는 곳</strong> Day 15–16 fading memory · Day 17–18 XOR · Day 19–20 서로 다른 노드 · Day 21–22 ESN 실습</p>
+</div>
+<div class="day-tools local-only"><button type="button" class="sbtn ghost" data-action="read-mode">읽기 모드</button></div>
+<ol class="day-steps" data-day="d08a">
+  <li data-step="review"><a href="#review"><b>1</b>지난 학습 복습</a></li>
+  <li data-step="lesson"><a href="#lesson"><b>2</b>학습자료</a></li>
+  <li data-step="done"><a href="#done"><b>3</b>학습 완료</a></li>
+</ol>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">지난 학습 복습</h2>
+<div class="flow-line">
+<p>지난 학습 단위(Day 12 · ESN·LSM과 물리 reservoir computing)의 핵심을 다른 예로 확인합니다. 고르는 즉시 맞았는지와 이유가 보입니다. 틀려도 아래 학습자료는 그대로 열려 있고, 틀린 문제에는 다시 볼 곳이 붙습니다.</p>
+</div>
+<div class="quiz" data-day="d08" data-set="review"></div>
+</section>
+<section id="pretest" class="level2">
+<h2 class="anchored" data-anchor-id="pretest">사전 테스트 (선택)</h2>
+<details class="fold pretest-fold"><summary>사전 테스트 펼치기 · 배우기 전에 짐작해 보는 문제 (선택)</summary><div class="quiz" data-day="d08" data-set="pre"></div>
+</details>
+</section>
+<section id="lesson" class="level2">
+<h2 class="anchored" data-anchor-id="lesson">학습자료</h2>
+<div class="lesson-body">
+<div class="lesson-meta">
+<p>이번 Day는 학습 구간 1–4 · 한 번에 다 읽지 않아도 됩니다. 구간마다 끝에 요점 상자가 있으니 거기서 끊어 읽으세요 · 선택 영상 3개(모두 선택) · 내 답 쓰기는 따로. 아래 숫자 예는 모두 <strong>Claude가 계산한 교육용 예</strong>이고 측정값이 아닙니다(node 두 개 reservoir, least squares·ridge, 분류 readout 한 걸음, learning rate·momentum·Adam의 걸음, 난수 곡선 섞기). 예외는 Zhong 2022가 적은 값입니다. Sampling 절의 72 Hz·50단계·10 Hz·30단계와, ridge 절의 training 1,000 / test 9,000 박동이 그것입니다.</p>
+<details class="meta-more">
+<summary>
+근거 표기와 Claude가 대조한 범위
+</summary>
+<p>근거 표기 <code>[저자 연도, p.N]</code>은 폴더 원문의 <strong>인쇄 쪽수</strong>이고, 누르면 참고문헌 항목으로 갑니다. <strong>내가 읽은 논문</strong>(2026-10-23 기준): Readable papers1 전체와 Liang 2024(Nat. Electron.). <strong>Claude가 원문과 대조한 범위</strong>: Liang 2024는 p.193–194(RC 정의·식 1–2·학습 방법), p.201–202(비교·전망); Stepney 2024는 3.2절(p.668–669, ESN 식·무작위 사상·출력 weight 학습)과 4.1절(p.672); Singh 2026은 p.16, p.18(readout 종류에 관한 문단)만; Zhong 2022는 p.675, 677(sampling·데이터 나누기 문장)만; Zhong 2026은 p.8(Methods 식과 최적화 방법)만. ★ <span class="tag tag-unverified">미확인</span>은 폴더에 없는 내용, <span class="tag tag-interp">해석</span>은 Claude의 해석, <span class="tag tag-hypo">가설</span>은 검증이 필요한 것입니다. Least squares·transpose·inverse matrix·softmax·cross-entropy·learning rate·momentum·Adam의 정의는 폴더 논문이 아니라 일반 교과 내용입니다(대조한 외부 자료는 ridge·softmax 절의 출처 기록에 적었습니다).</p>
+</details>
+</div>
+<p>지난 학습(Day 11–12)는 여기까지 왔습니다.</p>
+<ul>
+<li>RNN(state를 다음 time step으로 넘기는 신경망)은 내부를 학습시키기 어렵다.</li>
+<li>ESN(echo state network)은 내부를 난수로 정한 뒤 고정한다. 그리고 마지막 한 층, 곧 output layer만 학습한다. 이 층을 readout이라 부른다(state에 weight를 곱해 답을 내는 층).</li>
+<li>이 방식을 통틀어 reservoir computing(RC)이라 부르고, 고정된 내부를 reservoir라고 부른다(<a href="../days/d07b.html#ch-esn-lsm">Day 12의 ESN·LSM 절</a>).</li>
+</ul>
+<p>★ 그런데 빈칸이 두 개 남아 있습니다.</p>
+<p><strong>이번 주제에서 답할 질문</strong> — 아래 학습 구간들이 차례로 답합니다.</p>
+<ol type="1">
+<li><strong>고정된 난수 네트워크의 state에는 무엇이 담겨 있나?</strong> 무엇이 담겨 있길래 마지막 한 층만 고쳐도 답이 나오나?</li>
+<li><strong>그 마지막 한 층은 구체적으로 어떻게 학습하나?</strong></li>
+</ol>
+<p>오늘은 Day 11–12의 작은 예에서 이어 가며 이 두 빈칸을 숫자로 채웁니다. 아래 질문 여섯 개를 차례로 풉니다. 앞을 알아야 뒤가 읽히니 순서대로 가세요.</p>
+<ol type="1">
+<li>Reservoir에 들어가는 입력, 즉 "time series"는 어떻게 생긴 숫자인가? (1초에 250번 재면 무엇이 생기나)</li>
+<li>State update식 <span class="math inline">\(x(t+1) = f(W x(t) + W_{in} u(t))\)</span>는 실제로 어떤 계산인가? (Day 11–12의 두 칸 예를 '서로 섞이는' node 두 개로 바꿔 손 계산)</li>
+<li>그렇게 만든 state는 무엇을 뜻하나? 왜 "입력 이력의 비선형 전개"라고 부르나?</li>
+<li>Readout은 어떻게 학습하나? Day 11–12에서 식 두 개로 풀던 것이 sample이 많아지면 왜 least squares가 되고, 왜 ridge라는 regularization term을 더하나?</li>
+<li>답이 '종류'(분류)일 때 readout은 무엇을 내나(softmax)? 한 번에 푸는 길과 조금씩 내려가는 길(gradient descent·Adam)은 언제 쓰나?</li>
+<li>그래서 왜 고정해도 되고, 언제는 고정하면 안 되나?</li>
+</ol>
+<section id="ch-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="ch-time-series">1. Time series: reservoir가 받는 숫자는 어떻게 생겼나</h3>
+<div class="goal">
+<p><strong>상황.</strong> 내 device에 4 ms마다 전압 펄스를 넣고 그때마다 전류를 읽으면, 연속 곡선이 아니라 '번호 붙은 전류 숫자 목록'이 남습니다. Reservoir의 식이 받는 것은 이 목록뿐이므로, 목록의 몇 번째가 몇 ms인지부터 정해야 합니다.</p>
+<p><strong>왜 지금?</strong> 식의 <span class="math inline">\(t\)</span>가 몇 ms인지 정하지 않으면, 뒤에 나오는 "한 단계 전", "10단계 전"이 몇 ms 전인지 알 수 없습니다.</p>
+<p><strong>어디에 쓰이나?</strong> 논문의 "72 Hz로 sampling", "박동 하나가 50 time step" 같은 문장과 내 device의 펄스 간격을 같은 말로 옮길 때 씁니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> "1초에 250번 잰다"는 말을 sampling rate·sampling period·time step이라는 세 단어로 풀어 말할 수 있고, 700 ms짜리 심전도 한 박동이 몇 개의 숫자가 되는지 계산할 수 있다.</p>
+</div>
+<p>Day 11–12에서 RNN은 "시간 순서로 들어오는 신호"를 다룬다고 했습니다. 그리고 식의 <span class="math inline">\(t\)</span>를 'time step(정수, 측정 번호)'이라고만 적었습니다(<a href="../days/d07a.html#s-rnn-general">Day 11의 RNN 일반식</a>). 오늘은 식에 나오는 <span class="math inline">\(u(t)\)</span>의 <span class="math inline">\(t\)</span>가 실제로 몇 ms인지부터 정합니다. Day 10 사다리로 말하면 1단, <strong>task</strong>에서 입력을 무엇으로 정하느냐의 일입니다(<a href="../days/d06.html#s-ladder">Day 10의 증거 사다리</a>).</p>
+<p>아래 상자에서 새 용어 넷이 한꺼번에 나옵니다. 먼저 표로 훑어 두세요.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>용어</th>
+<th>뜻</th>
+<th>이 예제에서</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sampling</td>
+<td>연속 신호를 일정한 간격마다 재는 일</td>
+<td>4 ms마다 전류 읽기</td>
+</tr>
+<tr class="even">
+<td>Sampling rate</td>
+<td>1초에 몇 번 재나 (단위 Hz)</td>
+<td>250 Hz</td>
+</tr>
+<tr class="odd">
+<td>Sampling period</td>
+<td>두 번 잴 때 사이의 시간 (단위 s)</td>
+<td>4 ms</td>
+</tr>
+<tr class="even">
+<td>Time step <span class="math inline">\(t\)</span></td>
+<td>잰 값에 붙인 번호 (0, 1, 2, …)</td>
+<td><span class="math inline">\(t = 3\)</span>이면 12 ms</td>
+</tr>
+</tbody>
+</table>
+<div id="b-time-series" class="basics">
+<section id="time-seriessamplingsampling-periodtime-step" class="level4">
+<h4 class="anchored" data-anchor-id="time-seriessamplingsampling-periodtime-step">Time series·sampling·sampling period·time step</h4>
+<p><strong>왜 필요한가.</strong> 심장의 전기 신호, 손가락의 압력, device에 흐르는 전류는 모두 시간에 따라 <strong>연속적으로</strong> 변합니다. 그런데 컴퓨터(그리고 reservoir 식)는 연속 곡선을 그대로 다루지 못하고 <strong>숫자 목록</strong>만 다룹니다. 그래서 곡선을 일정한 간격으로 "찍어서" 숫자 목록으로 바꿉니다.</p>
+<p><strong>무엇인가.</strong> 연속 신호를 일정한 시간 간격마다 재는 일을 <strong>sampling</strong>이라 합니다. 잰 값 하나하나도 영어로는 sample이라 부릅니다. 이 글에서는 헷갈리지 않게 '잰 값'이라고 쓰겠습니다. Day 10의 sample(입력 하나와 정답의 한 쌍)과 다른 것이기 때문입니다. 둘의 구분은 readout 학습 절에서 다시 봅니다.</p>
+<p>1초에 몇 번 재는지가 <strong>sampling rate</strong>(단위 Hz = 1/s)입니다. 두 번 잴 때 사이의 시간이 <strong>sampling period</strong>(단위 s)입니다. 둘은 서로 역수입니다.</p>
+<p><span class="math display">\[
+\text{sampling period} = \frac{1}{\text{sampling rate}}
+\]</span></p>
+<p><span id="s-sampling-numbers"></span><strong>작은 숫자로.</strong> 1초에 250번 재면(250 Hz) sampling period는 <span class="math inline">\(1/250\)</span> s = 0.004 s = <strong>4 ms</strong>입니다. 0 ms, 4 ms, 8 ms, 12 ms, …에 값을 하나씩 얻습니다. 1초 녹음이면 숫자 250개, 10초면 2,500개입니다. 이렇게 시간 순서대로 늘어선 숫자 목록을 <strong>time series</strong>라고 부릅니다.</p>
+<p>이제 각 숫자에 0, 1, 2, 3, …이라는 <strong>번호</strong>를 붙입니다. 이 번호가 <strong>time step</strong> <span class="math inline">\(t\)</span>입니다. <span class="math inline">\(u(0)\)</span>은 0 ms에 잰 값, <span class="math inline">\(u(1)\)</span>은 4 ms에 잰 값, <span class="math inline">\(u(3)\)</span>은 12 ms에 잰 값입니다. <span class="key">식 안의 <span class="math inline">\(t\)</span>는 초가 아니라 <strong>번호</strong>이고, 실제 시각은 "<span class="math inline">\(t\)</span> × sampling period"로 바꿔야 나옵니다.</span> 예를 들어 "10단계 전"은 250 Hz에서는 40 ms 전입니다. 10 Hz에서는 1초 전입니다. 같은 식, 같은 "10단계"라도 실제 시간은 sampling rate에 따라 25배 다릅니다.</p>
+<p>그림 1은 이 과정을 한 장에 보여 줍니다. (a)에서 회색 곡선이 점으로 바뀌는 것을, (b)에서 그 점들이 번호 붙은 표가 되는 것을 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d08/fig1-sampling.svg" alt="(a) 회색 연속 곡선을 4 ms마다 찍은 파란 점 11개. 점 아래에 시간 단계 0부터 10과 실제 시각 0 ms부터 40 ms가 적혀 있고, (b) 표에 t, 시각, 값 u(t)가 다섯 줄 있다" class="figure-img"><figcaption><b>그림 1.</b> Sampling: 연속 신호를 번호 붙은 숫자 목록으로. <b>(a)</b> 연속 신호(회색, 예시 곡선)를 4 ms마다 재면(250 Hz) 번호 붙은 값 $u(0), u(1), \dots$이 된다. <b>(b)</b> reservoir 식이 받는 것은 이 표의 숫자들뿐이다. 곡선과 값은 코드가 계산한 예시다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>실제 논문의 숫자.</strong> 폴더의 Zhong 2022(<em>Nat. Electron.</em>)를 봅니다. 이 논문은 memristor로 reservoir를 만든 RC 시스템입니다. Memristor는 흘러간 전류의 이력에 따라 저항이 변하는 device입니다. 이 시스템은 값을 0·1로 바꾸지 않고 연속 전압·전류 그대로 계산합니다(아날로그, <a href="../days/d02a.html#b-bit">비트와 바이트</a>).</p>
+<p>부정맥 검출 task에서 이 논문은 심전도 파형을 <strong>72 Hz로 다시 sampling</strong>했습니다. 그리고 한 박동씩 <strong>700 ms</strong>로 잘라, 박동 하나가 <strong>50개 time step</strong>이 되게 했습니다. <span class="src">Zhong 2022, p.675</span> <span class="key">계산해 보면 0.7 s × 72 /s = 50.4이니 박동 하나가 약 50개 time step입니다.</span> 같은 논문의 손동작 인식 task는 가속도 센서 신호를 <strong>10 Hz</strong>로 기록했습니다. 그래서 동작 하나(3 s)가 <strong>30개 time step</strong>이 되었습니다. <span class="src">Zhong 2022, p.677</span></p>
+<p><strong>읽는 법.</strong> 아래 원문 그림은 이 50개 time step이 실제로 어떻게 생겼는지 보여 줍니다. 가로축 "Time step"이 이 절의 time step <span class="math inline">\(t\)</span>입니다. 0부터 50까지가 한 박동(약 700 ms)입니다. 72 Hz이므로 눈금 하나(1단계)는 약 14 ms입니다. 곡선처럼 보이지만 실제로는 점 50개를 이은 것입니다. Reservoir에 들어가는 것은 이 점 50개의 숫자 목록입니다.</p>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2022-fig4b.png" alt="Zhong 2022 Fig. 4b: 가로축 Time step 0–50, 세로축 Amplitude −0.5–1.0. 왼쪽 빨간 곡선은 정상(Healthy) 박동으로 20단계 근처에 높고 좁은 봉우리, 오른쪽 파란 곡선은 부정맥(Arrhythmic) 박동으로 봉우리 뒤에 깊은 골과 느린 출렁임이 있다" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41928-022-00838-3" target="_blank"><i>Nat. Electron.</i> 2022, 5, 672–681</a>, Fig. 4b, p.677. 볼 것: (1) 가로축이 초가 아니라 <b>time step 번호</b>(0–50)라는 것. (2) 세로축은 진폭을 −1–1 범위로 맞춘 값(정규화, p.675)이라 단위가 없다. (3) 정상(빨강)과 부정맥(파랑)은 봉우리 위치는 비슷하고 <b>봉우리 뒤 25–50단계의 모양</b>이 다르다. 그 차이를 가르려면 reservoir가 봉우리 뒤까지 앞부분을 '기억'해야 한다. 그 기억이 state에 어떻게 담기는지가 아래 state update와 'state는 무엇을 담나'의 질문이다. 같은 그림 전체(a–h)는 Day 27–28에서 벤치마크를 볼 때 다시 본다. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+<p><strong>어디서 깨지나.</strong> Sampling period가 너무 길면 그 사이에 일어난 빠른 변화를 놓칩니다(그림 1(a)에서 점 사이의 굴곡). 너무 짧으면 두 가지 문제가 생깁니다. 숫자가 많아져 계산·저장 비용이 커집니다. 그리고 device의 응답이 다음 측정 전에 거의 변하지 않아 같은 값이 반복됩니다. <span class="key">그래서 sampling period는 "신호가 변하는 속도"와 "device가 반응하고 잊는 속도" 사이에서 고릅니다.</span> 이것이 Day 11–12에서 본 Stepney의 시간척도 조건 <span class="src">Stepney 2024, p.673</span>을 숫자로 옮긴 것이고, Day 15–16·Day 23–24에서 다시 씁니다.</p>
+</section>
+</div>
+<p>아래 예측 문제는 방금 본 역수 관계와 "개수 = 시간 × sampling rate"를 직접 써 보는 연습입니다.</p>
+<div class="predict">
+<p>72 Hz로 sampling하면 sampling period는 몇 ms일까요? 그리고 3초짜리 손동작을 10 Hz로 재면 숫자가 몇 개일까요? 먼저 계산하고 아래에서 확인하세요.</p>
+</div>
+<div class="quiz" data-day="d08" data-set="1-check"></div>
+<div class="keypoints">
+<ul>
+<li>Sampling = 연속 신호를 일정 간격으로 재기. <span class="key">Sampling rate(Hz)와 sampling period(s)는 역수</span>: 250 Hz ↔︎ 4 ms.</li>
+<li>Time series = 시간 순서로 늘어선 잰 값의 목록. Time step <span class="math inline">\(t\)</span>는 번호이고, <span class="key">실제 시각 = <span class="math inline">\(t\)</span> × sampling period</span>.</li>
+<li>예: <span class="key">심전도 72 Hz, 한 박동 700 ms ≈ 50단계</span> <span class="src">Zhong 2022, p.675</span>; 손동작 10 Hz, 3 s = 30단계 <span class="src">Zhong 2022, p.677</span>.</li>
+<li>남은 질문: <span class="key">이 숫자 목록이 reservoir에 들어가면 state는 어떻게 바뀌나?</span> → 다음 절(state update).</li>
+</ul>
+</div>
+</section>
+<section id="ch-update" class="level3">
+<h3 class="anchored" data-anchor-id="ch-update">2. State update식을 손으로 돌리기: node 두 개</h3>
+<div class="goal">
+<p><strong>상황.</strong> 내 device 두 개(또는 reservoir node 두 개)의 전류가 서로 영향을 준다면 다음 순간의 값은 어떻게 정해질까요? 논문의 update식 <span class="math inline">\(x(t+1) = f(W x(t) + W_{in} u(t))\)</span>가 바로 이 질문의 답입니다.</p>
+<p><strong>왜 지금?</strong> 앞에서 입력이 번호 붙은 숫자 목록이 되었으니, 그 숫자가 reservoir 안에서 state를 어떻게 바꾸는지 손으로 한 번 돌려 봅니다.</p>
+<p><strong>어디에 쓰이나?</strong> 논문 Methods의 state update식을 읽고, 내 device 읽기값 표가 그 식의 state <span class="math inline">\(x\)</span>에 해당함을 알아볼 때 씁니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> <span class="math inline">\(x(t+1) = \tanh(W x(t) + W_{in} u(t))\)</span>를 node 두 개짜리 예로 세 단계 손 계산할 수 있고, 식의 각 부분(지금 state의 섞임, 새 입력, S자 함수)이 무슨 일을 하는지 말할 수 있다.</p>
+</div>
+<p><span id="s-from-d7"></span><strong>Day 11–12의 예에서 이어서.</strong> Day 11–12에서 state가 숫자 하나인 RNN <span class="math inline">\(h(t+1) = \tanh(0.5\,h(t) + u(t))\)</span>를 손으로 돌렸습니다(0.762 → 0.363 → 0.180). State 두 개짜리도 돌렸습니다. 그때의 <span class="math inline">\(W\)</span>는 행 1 = (0.5, 0), 행 2 = (0, 0.9)였습니다. 대각선 밖이 0이었으므로 두 칸은 <strong>서로 섞이지 않았습니다</strong>. 각자 다른 속도로 잊기만 했습니다(0.762 → 0.363 → 0.180과 0.762 → 0.595 → 0.490, <a href="../days/d07a.html#s-rnn-general">Day 11의 RNN 손 계산</a>). Day 11–12에서는 그 RNN을 고정한 채 readout만 맞췄습니다.</p>
+<p><span class="key">오늘은 대각선 밖에도 숫자를 넣어 <strong>칸끼리 서로 영향을 주게</strong> 합니다.</span> Reservoir에서 보통 쓰는 모양이 이것입니다. 칸이 두 개면 그 효과가 처음으로 보입니다. 세 개 이상은 같은 계산을 되풀이할 뿐입니다.</p>
+<p><strong><span class="math inline">\(h\)</span> 대신 <span class="math inline">\(x\)</span>, 칸 대신 node.</strong> 기호 두 개를 바꿉니다.</p>
+<ul>
+<li>Day 11–12에서는 state를 <span class="math inline">\(h(t)\)</span>로 썼습니다. Reservoir 문헌(Stepney 튜토리얼, 그리고 Day 15–16 이후)은 <span class="math inline">\(x(t)\)</span>로 쓰는 경우가 많습니다. 그래서 오늘부터 <span class="math inline">\(x(t)\)</span>로 씁니다. 뜻은 같습니다.</li>
+<li>State 목록의 칸 하나를 <strong>node</strong>라 부릅니다. "숫자 하나를 들고 다음 단계로 넘기는 단위"입니다. Day 11–12의 'state 두 칸'이 오늘의 'node 두 개'입니다.</li>
+</ul>
+<p>앞에서 배운 개념도 짧게 되짚습니다.</p>
+<ul>
+<li><a href="../days/d07a.html#b-model">모델</a>: 입력에 weight를 곱해 출력을 내는 규칙.</li>
+<li><strong>Vector</strong>: 숫자 목록. <strong>Matrix</strong>: weight를 행·열로 늘어놓은 표. 표 안의 숫자 하나는 <strong>원소</strong>(element).</li>
+<li>Matrix–vector 곱: "행 하나와 입력을 같은 자리끼리 곱해 더하기"(<a href="../days/d07a.html#b-vector-matrix">vector·matrix</a>).</li>
+<li><span class="math inline">\(\tanh\)</span>: 어떤 수가 들어와도 −1과 1 사이로 눌러 주는 S자 함수(<span class="math inline">\(\tanh(1) = 0.762\)</span>, <a href="../days/d07a.html#b-backprop">Day 11의 tanh 그림</a>).</li>
+</ul>
+<div id="b-rc-update" class="basics">
+<section id="state-update식-xt1-fw-xt-w_in-ut를-숫자로" class="level4">
+<h4 class="anchored" data-anchor-id="state-update식-xt1-fw-xt-w_in-ut를-숫자로">State update식 <span class="math inline">\(x(t+1) = f(W x(t) + W_{in} u(t))\)</span>를 숫자로</h4>
+<p><strong>왜 필요한가.</strong> Reservoir가 "입력을 받아 state를 만든다"는 말은 이 식 하나로 정해집니다. 식을 손으로 한 번 돌려 보면, state가 무엇으로 만들어지는지 눈에 보입니다. 답은 '지금 입력 + 지난 state의 섞임'입니다.</p>
+<p><strong>기호와 단위.</strong></p>
+<ul>
+<li><span class="math inline">\(u(t)\)</span>: time step <span class="math inline">\(t\)</span>의 입력(time step <span class="math inline">\(t\)</span>에서 잰 값). 오늘 예에서는 0 또는 1. 무차원.</li>
+<li><span class="math inline">\(x(t) = (x_1(t), x_2(t))\)</span>: node 두 개의 state 값 목록(vector). 무차원.</li>
+<li><span class="math inline">\(W\)</span>: node끼리의 연결 세기를 적은 2×2 표. <span class="math inline">\(W[i, j]\)</span>는 "node <span class="math inline">\(j\)</span>의 지금 값이 node <span class="math inline">\(i\)</span>의 다음 값에 얼마나 들어가나"입니다. 오늘 예: <span class="math inline">\(W = \begin{pmatrix} 0.4 &amp; 0.3 \\ -0.3 &amp; 0.5 \end{pmatrix}\)</span>.
+<ul>
+<li>대각선(diagonal: 왼쪽 위에서 오른쪽 아래로 놓인 0.4, 0.5): 자기 자신의 값이 얼마나 남나.</li>
+<li>대각선 밖(0.3, −0.3): 다른 node의 값이 얼마나 섞여 들어오나. Day 11–12의 표는 이 자리가 0이었습니다.</li>
+</ul></li>
+<li><span class="math inline">\(W_{in}\)</span>: 입력이 각 node에 들어가는 세기. 오늘 예: <span class="math inline">\(W_{in} = (1.0, -0.5)\)</span>.</li>
+<li><span class="math inline">\(f\)</span>: 비선형 함수. 오늘은 <span class="math inline">\(\tanh\)</span>.</li>
+</ul>
+<p><strong>계산 순서.</strong></p>
+<ol type="1">
+<li>지금 state에 <span class="math inline">\(W\)</span>를 곱한다(node끼리 섞기).</li>
+<li>지금 입력에 <span class="math inline">\(W_{in}\)</span>을 곱해 더한다(새 입력 넣기). 이 합을 <span class="math inline">\(z\)</span>라 부른다.</li>
+<li><span class="math inline">\(z\)</span>를 node마다 <span class="math inline">\(\tanh\)</span>에 넣는다(−1과 1 사이로 누르기).</li>
+<li>결과가 다음 state다. 다음 입력으로 1부터 반복한다.</li>
+</ol>
+<p><strong>결과의 뜻.</strong> <span class="key">다음 state는 "새 입력"과 "지난 state를 섞은 것"의 합을 S자로 누른 것입니다.</span> 지난 state는 그 전 입력들이 만든 것입니다. 그래서 반복할수록 state에는 <strong>여러 time step의 입력이 섞여 들어갑니다</strong>.</p>
+</section>
+</div>
+<p><strong>그림 읽는 법.</strong> 그림 2는 위의 기호를 그림으로 옮기고, 아래 손 계산의 답을 미리 표로 보여 줍니다.</p>
+<ul>
+<li><ol type="a">
+<li>동그라미 두 개가 node <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>입니다.</li>
+</ol></li>
+<li>자기 자신으로 돌아오는 화살표의 숫자가 <span class="math inline">\(W\)</span>의 대각선(0.4, 0.5)입니다.</li>
+<li>두 node를 잇는 화살표가 대각선 밖입니다(0.3: <span class="math inline">\(x_2\)</span>에서 <span class="math inline">\(x_1\)</span>로, −0.3: <span class="math inline">\(x_1\)</span>에서 <span class="math inline">\(x_2\)</span>로).</li>
+<li>주황 화살표가 <span class="math inline">\(W_{in}\)</span>입니다.</li>
+<li>(b)의 표는 입력 1, 0, 0을 넣었을 때 단계마다의 합 <span class="math inline">\(z\)</span>와 다음 state(파랑)입니다. 아래 단계 카드 1–4가 이 표의 세 줄을 하나씩 채웁니다.</li>
+</ul>
+<figure class="fig figure"><img src="../assets/img/d08/fig2-two-node-update.svg" alt="(a) 노드 x1, x2 두 개와 자기 연결 0.4, 0.5, 교차 연결 0.3(x2에서 x1로), −0.3(x1에서 x2로), 입력 u에서 1.0과 −0.5로 들어가는 화살표. (b) 표에 입력 1, 0, 0일 때 z와 x(1)=(0.762, −0.462), x(2)=(0.164, −0.430), x(3)=(−0.063, −0.258)" class="figure-img"><figcaption><b>그림 2.</b> Node 두 개짜리 reservoir와 위 단계의 숫자. <b>(a)</b> 화살표 숫자가 $W$(검정·빨강)와 $W_{in}$(주황)의 원소다. <b>(b)</b> 입력 1, 0, 0을 넣은 표. 파란 숫자가 각 단계의 state다. 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><span id="s-update-steps"></span>이제 손으로 돌립니다. 목적은 하나입니다. <strong>입력이 0이 된 뒤에도 state에 무엇이 남는지</strong> 보는 것입니다. 입력 <span class="math inline">\(u = 1, 0, 0\)</span>을 차례로 넣습니다. 처음 state는 <span class="math inline">\(x(0) = (0, 0)\)</span>입니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — <span class="math inline">\(t = 0\)</span>, 입력 1.</strong> 지금 state가 (0, 0)이라 <span class="math inline">\(W x(0) = (0, 0)\)</span>. 입력 항은 <span class="math inline">\(W_{in} \times 1 = (1.0, -0.5)\)</span>. 합 <span class="math inline">\(z = (1.0, -0.5)\)</span>. Node마다 <span class="math inline">\(\tanh\)</span>: <span class="math inline">\(\tanh(1.0) = 0.762\)</span>, <span class="math inline">\(\tanh(-0.5) = -0.462\)</span>. 그래서 <span class="math inline">\(x(1) = (0.762, -0.462)\)</span>. 같은 입력 1이 node 1은 위로, node 2는 아래로 밀었습니다(<span class="math inline">\(W_{in}\)</span>의 부호가 달라서).</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — <span class="math inline">\(t = 1\)</span>, 입력 0: node 1의 섞기.</strong> 행 1은 (0.4, 0.3). <span class="math inline">\(0.4 \times 0.762 + 0.3 \times (-0.462) = 0.305 - 0.139 = 0.166\)</span>. 입력이 0이니 입력 항은 0. <span class="math inline">\(z_1 = 0.166\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — node 2의 섞기.</strong> 행 2는 (−0.3, 0.5). <span class="math inline">\(-0.3 \times 0.762 + 0.5 \times (-0.462) = -0.229 - 0.231 = -0.460\)</span>. <span class="math inline">\(z_2 = -0.460\)</span>. 그래서 <span class="math inline">\(z = (0.166, -0.460)\)</span>이고, <span class="math inline">\(\tanh\)</span>를 거치면 <span class="math inline">\(x(2) = (0.164, -0.430)\)</span>. 입력은 0이었는데 state는 0이 아닙니다. <strong>한 단계 전 입력 1의 흔적</strong>입니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — <span class="math inline">\(t = 2\)</span>, 입력 0.</strong> 행 1: <span class="math inline">\(0.4 \times 0.164 + 0.3 \times (-0.430) = 0.066 - 0.129 = -0.063\)</span>. 행 2: <span class="math inline">\(-0.3 \times 0.164 + 0.5 \times (-0.430) = -0.049 - 0.215 = -0.264\)</span>. <span class="math inline">\(\tanh\)</span>를 거쳐 <span class="math inline">\(x(3) = (-0.063, -0.258)\)</span>. Node 1은 부호가 바뀌었고 node 2는 천천히 줄어듭니다. <strong>두 node가 같은 과거를 서로 다른 모양으로 들고 있습니다.</strong></p>
+</div>
+<div class="step">
+<p><strong>정리.</strong> 세 경우를 비교합니다.</p>
+<ul>
+<li>Node 하나짜리(Day 11–12): 흔적이 한 가지 모양(0.762 → 0.363 → 0.180)으로만 줄었습니다.</li>
+<li>Day 11–12의 섞이지 않는 두 칸: 각자 한 가지 속도로만 줄었습니다.</li>
+<li>오늘의 섞이는 두 node: 같은 입력의 흔적이 node마다 다른 속도·다른 부호로 남습니다.</li>
+</ul>
+<p>Node가 200개면 200가지 모양의 흔적이 생깁니다. 그 다양함이 뒤에서 readout이 섞어 쓰는 재료가 됩니다.</p>
+</div>
+</div>
+<section id="직접-바꿔-보기-입력-state-출력" class="level4">
+<h4 class="anchored" data-anchor-id="직접-바꿔-보기-입력-state-출력">직접 바꿔 보기: 입력 → state → 출력</h4>
+<p>위 손계산과 같은 node 두 개(<span class="math inline">\(W\)</span>, <span class="math inline">\(W_{in}\)</span>, tanh)를 컴퓨터가 계산합니다. 입력 순서, 입력 세기, node끼리 섞는 세기(<span class="math inline">\(W\)</span> 배율)를 바꾸며 <strong>state가 무엇으로 만들어지는지</strong> 봅니다. 먼저 예상을 고르세요.</p>
+<div class="lab" data-lab="reservoir">
+<p class="lab-model-line"><b>교육용 모형</b>입니다. 본문 손계산의 작은 ESN(노드 2개)이며 실제 device reservoir가 아닙니다. 예시 출력 y = x₁ − x₂의 weight는 설명용으로 고른 값입니다. 입력은 0/1, 입력 세기 ×0.5–4, W 배율 ×0–2.</p>
+<div class="lab-static">
+<p><b>정적 예제.</b> 입력 1, 0, 0, 0, 0, 0 (본문과 같은 설정)</p>
+
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th">x₁(t)</th>
+<th data-quarto-table-cell-role="th">x₂(t)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.762</td>
+<td>−0.462</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.164</td>
+<td>−0.430</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>−0.063</td>
+<td>−0.258</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>−0.102</td>
+<td>−0.110</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>−0.074</td>
+<td>−0.024</td>
+</tr>
+</tbody>
+</table>
+
+<p>W를 0으로 두면 t = 2부터 상태가 (0, 0)입니다.</p>
+</div>
+</div>
+<p><strong>무슨 일이 있었나.</strong> 세 가지를 볼 수 있습니다.</p>
+<ul>
+<li>입력은 t = 0에 한 번뿐인데 state는 그 뒤로도 0이 아닙니다. <span class="math inline">\(W\)</span>가 지난 state를 다음 state로 섞어 넘기기 때문입니다. 그 값은 점점 작아집니다(fading memory, Day 15–16).</li>
+<li><span class="math inline">\(W\)</span>를 0으로 두면 이 넘김이 없습니다. 그래서 기억도 사라집니다.</li>
+<li>입력 세기를 4배로 올려도 state는 4배가 되지 않습니다. <span class="math inline">\(\tanh\)</span>가 1 근처에서 눌러 주기 때문입니다. 이것이 비선형이고, 1 근처에서 더 오르지 않는 현상을 saturation(포화)이라 합니다.</li>
+</ul>
+<p><span class="key">Readout은 이렇게 만들어진 state를 받아 곱해 더할 뿐입니다. 그러니 task에 필요한 과거 정보가 state에 남아 있어야 답할 수 있습니다.</span></p>
+<div class="lab" data-lab="reservoir-check">
+<div class="lab-static">
+<ol>
+<li>입력 세기 1 → 4이면 x₁(1)은? <details><summary>답</summary>tanh(4) ≈ 0.999. 1을 넘지 못합니다.</details></li>
+<li>W = 0, 입력 1, 0, 0이면 x(2)는? <details><summary>답</summary>(0, 0). 지난 상태를 넘겨 줄 W가 없습니다.</details></li>
+</ol>
+</div>
+</div>
+<p><strong>일반식.</strong> 손 계산에서는 node마다 "행 하나와 지금 state를 곱해 더하기"를 따로 했습니다. 이것을 node 수와 상관없이 한 줄로 씁니다. Node가 <span class="math inline">\(N\)</span>개, 입력이 하나라고 합시다. 그러면 <span class="math inline">\(W\)</span>는 <span class="math inline">\(N \times N\)</span> 표이고, <span class="math inline">\(W_{in}\)</span>은 숫자 <span class="math inline">\(N\)</span>개 목록입니다. 새 기호 <span class="math inline">\(\sum_{j=1}^{N}\)</span>은 "node <span class="math inline">\(j\)</span> = 1부터 <span class="math inline">\(N\)</span>까지 모두 더하라"는 뜻입니다. Node <span class="math inline">\(i\)</span>의 다음 값은 이렇습니다.</p>
+<p><span class="math display">\[
+x_i(t+1) = \tanh\!\Big(\sum_{j=1}^{N} W[i,j]\, x_j(t) + W_{in}[i]\, u(t)\Big)
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: node 1, node 2의 섞기를 따로 계산한 손 계산을, node 수와 상관없이 한 줄로 쓰기 위해.</li>
+<li>기호: <span class="math inline">\(\sum_j\)</span>는 "모든 node <span class="math inline">\(j\)</span>에 대해 더하라". 나머지는 위의 기호 목록과 같다.</li>
+<li>단위: 모두 무차원(정규화한 값).</li>
+<li>계산 순서: node <span class="math inline">\(i\)</span>마다 (행 <span class="math inline">\(i\)</span>와 지금 state를 자리끼리 곱해 더하기) + (입력 × <span class="math inline">\(W_{in}[i]\)</span>) → <span class="math inline">\(\tanh\)</span>.</li>
+<li>결과의 뜻: node <span class="math inline">\(i\)</span>의 다음 값 = 모든 node의 지금 값과 지금 입력을 node <span class="math inline">\(i\)</span>만의 비율로 섞어 누른 것.</li>
+</ul>
+<p><strong>논문에서는 어떻게 쓰나.</strong> 기호만 다르고 같은 식입니다.</p>
+<ul>
+<li>Liang 리뷰의 식 (1)은 <span class="math inline">\(s(n) = f[a W_{in} u(n) + b W_{res} s(n-1)]\)</span>입니다. 여기서 <span class="math inline">\(s\)</span>가 state, <span class="math inline">\(W_{res}\)</span>가 오늘의 <span class="math inline">\(W\)</span>입니다. <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>는 입력과 되먹임의 크기를 조절하는 계수입니다. 리뷰는 <span class="math inline">\(W_{res}\)</span>와 <span class="math inline">\(W_{in}\)</span>을 보통 난수로 만들고, 학습하는 것은 <span class="math inline">\(W_{out}\)</span>뿐이라고 적습니다. <span class="src">Liang 2024, p.194</span></li>
+<li>Stepney 튜토리얼의 식 1도 같습니다. 저자에 따라 첨자만 조금 다른 변형이 있다고 밝힙니다. 예를 들어 <span class="math inline">\(u(t)\)</span> 대신 <span class="math inline">\(u(t+1)\)</span>을 씁니다. <span class="src">Stepney 2024, p.668</span> Day 21–22의 실습 코드는 <span class="math inline">\(u(t+1)\)</span> 쪽 변형을 씁니다. 결과의 뜻은 같습니다.</li>
+</ul>
+<p>아래 예측 문제는 같은 reservoir에 입력만 바꿔, 섞기 항과 입력 항이 각각 어떻게 더해지는지 확인하는 연습입니다.</p>
+<div class="predict">
+<p>같은 reservoir에 입력을 <span class="math inline">\(u = 1, 1\)</span>로 넣으면 <span class="math inline">\(x(2)\)</span>의 첫째 값 <span class="math inline">\(z_1\)</span>은 얼마일까요? 입력 1, 0을 넣었을 때 node 1의 섞기 결과는 0.166이었습니다. 여기에 무엇이 더해지는지 생각해 보세요. 아래 점검의 첫 문제는 단계 1의 확인, 둘째는 일부가 빈 문제, 셋째는 입력이 다른 새 문제입니다.</p>
+</div>
+<div class="quiz" data-day="d08" data-set="2-check"></div>
+<div class="keypoints">
+<ul>
+<li>State update = <span class="key">(지금 state를 <span class="math inline">\(W\)</span>로 섞기) + (지금 입력 × <span class="math inline">\(W_{in}\)</span>) → <span class="math inline">\(\tanh\)</span>로 누르기</span>. 매 단계 같은 <span class="math inline">\(W\)</span>, <span class="math inline">\(W_{in}\)</span>을 쓴다.</li>
+<li>Day 11–12의 두 칸은 대각선 밖이 0이라 섞이지 않았고, <span class="key">오늘의 <span class="math inline">\(W\)</span>는 대각선 밖(0.3, −0.3)으로 node끼리 섞는다</span>.</li>
+<li>예: <span class="math inline">\(u = 1, 0, 0\)</span> → <span class="math inline">\(x(1) = (0.762, -0.462)\)</span>, <span class="math inline">\(x(2) = (0.164, -0.430)\)</span>, <span class="math inline">\(x(3) = (-0.063, -0.258)\)</span>. <span class="key">입력이 0이어도 흔적이 남는다</span>.</li>
+<li>Node가 여럿이면 <span class="key">같은 과거가 node마다 다른 모양으로 남는다. 이 다양함이 readout의 재료다</span>. <span class="math inline">\(W\)</span>, <span class="math inline">\(W_{in}\)</span>은 난수로 만들고 학습하지 않는다 <span class="src">Liang 2024, p.194</span>.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="ch-state-meaning" class="level3">
+<h3 class="anchored" data-anchor-id="ch-state-meaning">3. 내부 state는 무엇을 뜻하나: 입력 이력의 비선형 전개</h3>
+<div class="goal">
+<p><strong>상황.</strong> 논문은 "reservoir state는 입력 이력의 비선형 함수"라고 씁니다. 내 device의 전류가 정말 이력을 담고 있는지는 어떻게 보일 수 있을까요?</p>
+<p><strong>왜 지금?</strong> 방금 돌린 update식에서 state가 지난 입력에 따라 달라졌습니다. 이것이 무엇을 뜻하고 무엇을 뜻하지 않는지 정확히 해 둡니다.</p>
+<p><strong>어디에 쓰이나?</strong> "따로 넣은 응답의 합과 함께 넣은 응답이 같은가"를 내 device pulse response로 확인하는 실험(Day 17–18)의 바탕이 됩니다.</p>
+<p><strong>끝나면 할 수 있는 것.</strong> "State = 입력 이력의 비선형 전개"를 네 가지 입력 이력(00, 10, 01, 11)이 만드는 네 점으로 설명하고, superposition principle이 깨지는 것을 숫자로 보이며, state가 담지 못하는 것이 무엇인지 말할 수 있다.</p>
+</div>
+<p>방금 본 state update에서 state가 "여러 time step의 입력이 섞인 것"이라고 했습니다. 이 말을 정확히 하려면, 서로 다른 입력 이력을 넣고 state가 어떻게 달라지는지 직접 비교하면 됩니다.</p>
+<div id="b-reservoir-state" class="basics">
+<section id="reservoir의-내부-state-입력-이력의-비선형-전개" class="level4">
+<h4 class="anchored" data-anchor-id="reservoir의-내부-state-입력-이력의-비선형-전개">Reservoir의 내부 state = 입력 이력의 비선형 전개</h4>
+<p><strong>왜 필요한가.</strong> Readout은 state만 봅니다. 그러니 "state에 무엇이 들어 있나"가 곧 "readout이 무엇을 할 수 있나"의 한계입니다. <span class="key">State에 없는 정보는 어떤 readout도 꺼내지 못합니다.</span></p>
+<p><strong>무엇인가.</strong> State update식을 거꾸로 펼쳐 봅니다.</p>
+<ul>
+<li>지금 state <span class="math inline">\(x(t)\)</span>는 바로 전 state <span class="math inline">\(x(t-1)\)</span>과 그때 들어온 입력 <span class="math inline">\(u(t-1)\)</span>로 정해집니다.</li>
+<li><span class="math inline">\(x(t-1)\)</span>은 다시 <span class="math inline">\(x(t-2)\)</span>와 <span class="math inline">\(u(t-2)\)</span>로 정해집니다.</li>
+<li>이것을 계속 거슬러 올라가면, 남는 것은 지난 입력들뿐입니다.</li>
+</ul>
+<p>식으로 쓰면 이렇습니다. 여기서 <span class="math inline">\(F\)</span>는 <span class="math inline">\(W\)</span>, <span class="math inline">\(W_{in}\)</span>, <span class="math inline">\(\tanh\)</span>가 정하는 고정된 규칙(함수)입니다.</p>
+<p><span class="math display">\[
+x(t) = F\big(u(t-1),\, u(t-2),\, u(t-3),\, \dots\big)
+\]</span></p>
+<p>곧 지금 state는 <strong>지난 입력들의 함수</strong>입니다. "입력 이력의 전개"는 이 뜻입니다. 지난 입력 목록을 node <span class="math inline">\(N\)</span>개의 값으로 <strong>펼쳐 적은 것</strong>입니다. 그리고 <span class="math inline">\(F\)</span> 안에 <span class="math inline">\(\tanh\)</span>가 있습니다. 그래서 <span class="math inline">\(F\)</span>는 입력들에 weight를 곱해 더하기만 한 것이 아닙니다. 이것이 <strong>비선형</strong> 전개라고 부르는 이유입니다.</p>
+<p><strong>'담겨 있다'가 뜻하지 않는 것.</strong> 두 가지를 조심합니다.</p>
+<ul>
+<li>펼쳐 적었다고 지난 입력을 <strong>전부</strong> 담는 것은 아닙니다. 오래된 입력의 흔적은 작아집니다(Day 15–16의 fading memory). Node가 <span class="math inline">\(N\)</span>개면 서로 독립인 정보도 많아야 <span class="math inline">\(N\)</span>가지입니다(Day 19–20).</li>
+<li>"담겨 있다"는 수학적으로 0이 아니라는 뜻만으로는 쓸모가 없습니다. <strong>잡음보다 크게, 다른 이력과 구별되게</strong> 남아야 합니다(Day 10의 <a href="../days/d06.html#b-task-state">task와 "읽을 수 있는 state"</a>).</li>
+</ul>
+</section>
+</div>
+<p><strong>네 가지 이력, 네 점.</strong> 이 예의 목적은 "state가 이력을 담는다"를 눈으로 보는 것입니다. 앞에서 손으로 돌린 node 두 개 reservoir에 입력 두 칸 <span class="math inline">\((u(0), u(1))\)</span>을 넣고, 그 뒤의 state <span class="math inline">\(x(2)\)</span>를 봅니다. 가능한 이력은 00, 10, 01, 11의 네 가지입니다(왼쪽 숫자가 먼저 들어간 것).</p>
+<p>그림에 앞서 용어 둘을 정합니다.</p>
+<ul>
+<li><strong>선형</strong>(linear): update식에 <span class="math inline">\(\tanh\)</span>가 없어 곱하고 더하기만 하는 시스템.</li>
+<li><strong>Superposition principle</strong>: 선형 시스템에서는 두 입력을 함께 넣은 결과가 따로 넣은 결과의 합과 같다는 성질.</li>
+</ul>
+<p><strong>그림 읽는 법.</strong> 그림 3의 점 하나가 이력 하나입니다.</p>
+<ul>
+<li>가로축은 입력 두 칸을 넣은 뒤 node 1의 값 <span class="math inline">\(x_1(2)\)</span>, 세로축은 node 2의 값 <span class="math inline">\(x_2(2)\)</span>입니다.</li>
+<li>지금은 "네 점이 모두 다른 자리에 있다"만 확인하세요.</li>
+<li>보라색 빈 원은 "시스템이 선형이었다면 11이 있었을 자리"입니다. 아래 superposition 검사 카드에서 숫자로 확인합니다.</li>
+<li>초록 점선 두 개는 그 아래 'readout은 직선을 긋는 일'에서 씁니다.</li>
+</ul>
+<figure class="fig figure"><img src="../assets/img/d08/fig3-history-states.svg" alt="가로축 x1, 세로축 x2 평면에 네 점: 00은 (0,0), 10은 (0.164, −0.430), 01은 (0.762, −0.462), 11은 (0.823, −0.744). 보라색 빈 원 x(10)+x(01)=(0.926, −0.892)에서 x(11)로 점선 화살표가 있어 superposition principle이 깨짐을 보인다. 초록 점선 경계 ①(x1 = 0.45 세로선)은 01·11과 00·10을, 기울어진 경계 ②는 10·11과 00·01을 가른다" class="figure-img"><figcaption><b>그림 3.</b> 입력 이력 네 가지가 state 평면의 네 점이 된다. 네 점이 모두 다른 자리에 있으므로 이 reservoir의 state는 "최근 두 입력"을 구별한다. 가로축은 node 1, 세로축은 node 2의 값이다. 보라색 빈 원은 선형이었다면 11이 있었을 자리이고, 실제 11(빨강)과의 차이가 비선형의 흔적이다(superposition 검사). 초록 점선은 readout이 그을 수 있는 직선의 예로, 경계 ①은 '방금 1인가', 경계 ②는 '한 단계 전 1인가'를 가른다. {10, 01}과 {00, 11}을 가르는 직선은 없다(XOR, Day 17–18). 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p>아래 단계 카드는 네 점의 좌표를 하나씩 구하고, 마지막 카드에서 superposition이 성립하는지 검사합니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 00.</strong> 아무것도 안 들어왔으니 <span class="math inline">\(x(2) = (0, 0)\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 10 (한 단계 전에 1).</strong> 앞에서 입력 1 다음에 0을 넣어 구한 값 그대로 <span class="math inline">\(x(2) = (0.164, -0.430)\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 01 (방금 1).</strong> <span class="math inline">\(x(1) = (0, 0)\)</span>이고 그다음 입력 1이 들어옵니다. 앞에서 입력 1을 처음 넣었을 때와 같은 계산이므로 <span class="math inline">\(x(2) = (0.762, -0.462)\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 11 (둘 다 1).</strong> <span class="math inline">\(x(1) = (0.762, -0.462)\)</span>에서 출발합니다. 섞기 결과는 입력 1, 0일 때와 같은 <span class="math inline">\((0.166, -0.460)\)</span>입니다. 여기에 새 입력 <span class="math inline">\(W_{in} \times 1 = (1.0, -0.5)\)</span>가 더해져 <span class="math inline">\(z = (1.166, -0.960)\)</span>. <span class="math inline">\(\tanh\)</span>를 거쳐 <span class="math inline">\(x(2) = (0.823, -0.744)\)</span>.</p>
+</div>
+<div class="step">
+<p><span id="s-superposition"></span><strong>단계 5 — superposition principle 검사.</strong> 검사할 것은 "함께 넣은 결과 = 따로 넣은 결과의 합"이 맞는가입니다.</p>
+<ul>
+<li><strong><span class="math inline">\(\tanh\)</span>를 뺀 식(선형)으로 먼저.</strong> 식은 <span class="math inline">\(x(t+1) = W x(t) + W_{in} u(t)\)</span>로, 곱하고 더하기만 남습니다. 계산하면 <span class="math inline">\(x(10) = (0.25, -0.55)\)</span>, <span class="math inline">\(x(01) = (1.0, -0.5)\)</span>, <span class="math inline">\(x(11) = (1.25, -1.05)\)</span>입니다. 정확히 <span class="math inline">\(x(10) + x(01) = x(11)\)</span>입니다.</li>
+<li><strong><span class="math inline">\(\tanh\)</span>가 있는 원래 식으로.</strong> <span class="math inline">\(x(10) + x(01) = (0.164 + 0.762,\; -0.430 - 0.462) = (0.926, -0.892)\)</span>입니다. 그런데 실제 <span class="math inline">\(x(11) = (0.823, -0.744)\)</span>입니다(그림 3의 보라색 빈 원과 빨간 점).</li>
+</ul>
+<p>차이 <span class="math inline">\((-0.103, +0.148)\)</span>은 "두 입력이 <strong>함께</strong> 1이었다"는 사실이 따로 남긴 흔적입니다. 이것이 비선형 전개의 덤입니다. 입력 두 개의 곱(둘 다 1인가?) 같은 정보가 state에 섞여 들어간 것입니다.</p>
+</div>
+</div>
+<p>네 점이 모두 다른 자리에 있습니다. 그러므로 이 reservoir의 state는 "최근 두 입력"을 <strong>구별</strong>합니다. Day 10 사다리 2단(읽을 수 있는 state)의 첫 조건입니다. 여기서는 시뮬레이션이라 같은 입력에 늘 같은 state가 나옵니다(반복 가능). Device라면 이것도 반복 측정으로 보여야 합니다(<a href="../days/d06.html#b-task-state">Day 10의 읽을 수 있는 state</a>).</p>
+<p>아래에 그림 3을 다시 놓습니다. 이번에는 초록 점선 두 개를 봅니다. Readout이 이 평면에서 하는 일이 바로 이런 직선 긋기입니다.</p>
+<figure class="fig figure"><img src="../assets/img/d08/fig3-history-states.svg" alt="가로축 x1, 세로축 x2 평면에 네 점: 00은 (0,0), 10은 (0.164, −0.430), 01은 (0.762, −0.462), 11은 (0.823, −0.744). 보라색 빈 원 x(10)+x(01)=(0.926, −0.892)에서 x(11)로 점선 화살표가 있어 superposition principle이 깨짐을 보인다. 초록 점선 경계 ①(x1 = 0.45 세로선)은 01·11과 00·10을, 기울어진 경계 ②는 10·11과 00·01을 가른다" loading="lazy" class="figure-img"><figcaption><b>다시 보기 · 그림 3.</b> 네 입력 이력의 state 네 점. 초록 점선 ①은 $x_1 = 0.45$ 세로선(01·11 대 00·10), ②는 기울어진 선(10·11 대 00·01)이다.</figcaption></figure>
+<p><span id="s-readout-line"></span><strong>Readout은 이 평면에 직선을 긋는 일이다.</strong> Day 10의 readout(<a href="../days/d06.html#b-readout">Day 10의 readout 정의</a>)은 state에 weight를 곱해 더한 값으로 답을 냈습니다. Day 11–12의 두 칸 readout도 <span class="math inline">\(y = w_a h_a + w_b h_b\)</span>였습니다. 오늘은 여기에 상수 하나 <span class="math inline">\(w_0\)</span>를 붙입니다. <span class="math inline">\(w_0\)</span>는 state와 상관없이 늘 더하는 수입니다.</p>
+<p><span class="math display">\[
+y = w_0 + w_1 x_1 + w_2 x_2
+\]</span></p>
+<p>답을 "<span class="math inline">\(y\)</span>가 0.5보다 크면 예"로 읽는다고 합시다. 그러면 이 readout은 평면에 <strong>직선 하나를 그어 양쪽으로 나누는 일</strong>을 합니다.</p>
+<ul>
+<li><strong>왜 직선인가.</strong> 경계는 <span class="math inline">\(y\)</span>가 정확히 0.5인 점들입니다. 이 점들은 <span class="math inline">\(w_0 + w_1 x_1 + w_2 x_2 = 0.5\)</span>를 만족합니다. 이것은 <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>의 1차식이므로 평면에서 직선입니다.</li>
+<li><strong>예.</strong> <span class="math inline">\(w_0 = 0.05\)</span>, <span class="math inline">\(w_1 = 1\)</span>, <span class="math inline">\(w_2 = 0\)</span>이면 경계는 <span class="math inline">\(x_1 = 0.45\)</span>인 세로선입니다(그림 3의 경계 ①). 그 오른쪽 점은 <span class="math inline">\(y &gt; 0.5\)</span>('예'), 왼쪽 점은 '아니오'입니다.</li>
+</ul>
+<p><span class="key">Weight를 바꾸면 이 직선이 기울어진 방향과 위치가 바뀔 뿐, 굽은 선이 되지는 않습니다.</span> 이제 그림 3에서 질문 세 개를 해 봅니다.</p>
+<ul>
+<li><strong>"방금 들어온 입력이 1인가?"</strong>(01, 11 대 00, 10): <span class="math inline">\(x_1\)</span>이 0.762, 0.823 대 0, 0.164입니다. 경계 ① 하나로 나뉩니다. 가능.</li>
+<li><strong>"한 단계 전 입력이 1인가?"</strong>(10, 11 대 00, 01): 00과 01을 잇는 선 바로 아래에 10과 11이 모두 있습니다. 그 선을 조금 내린 직선(그림 3의 경계 ②)으로 나뉩니다. 가능. State에 <strong>과거</strong>가 담겨 있다는 증거입니다.</li>
+<li><strong>"두 입력이 서로 다른가?"</strong>(10, 01 대 00, 11): 직선 <strong>하나</strong>로는 못 나눕니다. 00–11을 잇는 선분과 10–01을 잇는 선분이 한 점에서 엇갈리기 때문입니다. 직선이 00과 11을 한쪽에 두면, 둘을 잇는 선분 전체도 그쪽에 있습니다. 10과 01을 반대쪽에 두면, 그 선분 전체도 반대쪽에 있습니다. 그런데 두 선분이 만나는 점은 양쪽에 동시에 있을 수 없습니다. 이 reservoir는 비선형인데도 이 질문에는 답하지 못합니다.</li>
+</ul>
+<p>셋째 질문이 XOR이라는 유명한 문제이고, Day 17–18의 주제입니다. 오늘 챙길 것은 하나입니다. <span class="key"><strong>"비선형이다"와 "readout이 원하는 답을 꺼낼 수 있다"는 다른 말입니다.</strong></span> Node 두 개, 이 <span class="math inline">\(W\)</span>, 이 <span class="math inline">\(W_{in}\)</span>으로는 셋째 질문에 필요한 차이가 직선으로 가를 수 있는 모양으로 남지 않았습니다. Node를 늘리거나 <span class="math inline">\(W_{in}\)</span>을 바꾸면 달라질 수 있습니다. 그것을 확인하는 방법이 held-out 성능(학습에 쓰지 않은 데이터에서 잰 성능, <a href="../days/d06.html#b-heldout-baseline">held-out 성능과 baseline</a>)입니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>논문은 이렇게 쓴다.</strong> 두 리뷰가 같은 생각을 다른 말로 씁니다.</p>
+<ul>
+<li>★ Liang: Reservoir 층의 목적은 저차원 입력을 <strong>고차원 feature space로 비선형 사상(nonlinear mapping)</strong>하는 것이다. 그래서 state는 고차원 공간에서 서로 다른 입력 정보를 잘 가르도록 "선형적으로 얽히지 않은(linearly uncoupled) 동역학"을 제공해야 한다. <span class="src">Liang 2024, p.194</span> 여기서 "선형적으로 얽히지 않은"은 node들이 서로의 복사본이거나 단순한 배수가 아니어야 한다는 뜻입니다. 그 반대 경우가 readout 학습 절의 '거의 같은 node'이고, Day 19–20에서 숫자로 봅니다.</li>
+<li>Stepney: 난수 weight가 입력을 고차원 공간으로 <strong>무작위 사상</strong>(random mapping)한다. 그래서 학습한 선형 출력으로 원하는 분리가 가능해진다. 다만 <strong>어떤 사상은 다른 사상보다 낫고, 그것은 task에 따라 다르다</strong>. <span class="src">Stepney 2024, p.668</span></li>
+</ul>
+<div class="quiz" data-day="d08" data-set="3-check"></div>
+<div class="myth">
+<p><strong>"State 하나에 입력의 과거 전체가 담긴다"</strong> — 수학적으로는 지난 입력이 모두 <span class="math inline">\(F\)</span>의 재료입니다. 하지만 실제로 <strong>읽을 수 있게</strong> 남는 것은 최근 입력의 일부 정보입니다. 이유는 셋입니다. 오래된 입력의 흔적은 작아집니다(Day 15–16). Node 수만큼의 독립 정보만 담깁니다(Day 19–20). 잡음보다 작은 차이는 없는 것과 같습니다. Task에 필요한 차이가 state에 읽을 수 있게 남았는지는, 학습한 readout이 <strong>새 데이터</strong>에서 답을 가르는지로 확인합니다.</p>
+</div>
+<div class="quiz" data-day="d08" data-set="3-end"></div>
+<div class="keypoints">
+<ul>
+<li>State <span class="math inline">\(x(t) = F(u(t-1), u(t-2), \dots)\)</span>: <span class="key">지난 입력들을 node <span class="math inline">\(N\)</span>개 값으로 펼쳐 적은 것</span>. <span class="math inline">\(\tanh\)</span> 때문에 비선형이다.</li>
+<li>예: 00, 10, 01, 11 → 네 개의 서로 다른 점(구별, Day 10 사다리 2단). <span class="math inline">\(\tanh\)</span>를 빼면 <span class="math inline">\(x(10)+x(01) = x(11)\)</span>이지만, 있으면 <span class="math inline">\((0.926, -0.892) \neq (0.823, -0.744)\)</span> → <span class="key">superposition이 깨진다</span>.</li>
+<li><span class="key">Readout = state 공간에 직선(평면)을 긋는 일</span>. "방금 1", "한 단계 전 1"은 가를 수 있었지만 XOR은 이 두 node로 못 갈랐다.</li>
+<li><span class="key">Reservoir의 목적은 고차원 비선형 사상이며, node들이 서로의 복사본이 아니어야 한다</span> <span class="src">Liang 2024, p.194</span> <span class="src">Stepney 2024, p.668</span>.</li>
+</ul>
+</div>
+</section>
+<section id="ch-ridge" class="level3">
+<h3 class="anchored" data-anchor-id="ch-ridge">4. Readout 학습: least squares에서 ridge까지</h3>
+<div class="goal">
+<p><strong>상황.</strong> 내 device node N개의 전류를 읽어 모았다고 합시다. 이 N개 값에 곱할 weight는 어떻게 정하나요? 그리고 device 두 개가 거의 같은 전류를 내면 weight가 어떻게 되나요? 이 구간이 그 두 질문의 답입니다.</p>
+<p><strong>왜 지금?</strong> Readout에서 학습하는 것은 state에 곱할 weight뿐입니다. Weight를 어떻게 정하는지 모르면 논문의 "ridge regression으로 학습했다"를 읽을 수 없습니다. 보고된 오차가 training data의 값인지도 판단할 수 없습니다.</p>
+<p><strong>어디에 쓰이나?</strong> 두 곳에 씁니다. 논문의 <span class="math inline">\(\lambda\)</span>(regularization) 값과 training/test 오차를 읽을 때. 그리고 내 device node들이 "거의 같은 값"을 낼 때 weight가 튀는 문제를 알아볼 때.</p>
+<p><strong>끝나면 할 수 있는 것.</strong></p>
+<ul>
+<li>Day 11–12에서 식 두 개로 정확히 풀던 readout이, sample이 많아지면 왜 least squares(오차 제곱의 합을 가장 작게)가 되는지 세 sample의 그림으로 설명할 수 있다.</li>
+<li>거의 같은 node 두 개에서 생기는 overfitting(weight +4, −3)을 ridge의 <span class="math inline">\(\lambda\)</span>가 어떻게 막는지 손으로 계산할 수 있다.</li>
+<li>그 손 계산을 matrix 기호(transpose·inverse matrix)로 옮긴 공식이 같은 계산이라는 것을 숫자로 대응시킬 수 있다.</li>
+</ul>
+</div>
+<p><span id="s-from-d7-readout"></span><strong>Day 11–12에서 이어서: 식 두 개면 정확히 풀렸다.</strong> Day 11–12에서는 고정한 RNN의 state를 읽어 두 경우를 가렸습니다.</p>
+<ul>
+<li>경우 A(정답 1)의 state: <span class="math inline">\((h_a, h_b) = (0.363, 0.595)\)</span></li>
+<li>경우 B(정답 0)의 state: <span class="math inline">\((0.363, 0.363)\)</span></li>
+</ul>
+<p>그리고 readout <span class="math inline">\(y = w_a h_a + w_b h_b\)</span>가 두 경우를 정확히 맞히도록 식 두 개를 세웠습니다.</p>
+<p><span class="math display">\[
+0.363\,w_a + 0.595\,w_b = 1, \qquad 0.363\,w_a + 0.363\,w_b = 0 \quad\Rightarrow\quad W_{out} \approx (-4.31,\; 4.31)
+\]</span></p>
+<p>미지수(weight)가 둘이고 식(경우)도 둘이었습니다. 그래서 둘 다 정확히 맞출 수 있었습니다(<a href="../days/d07b.html#s-readout-fit">Day 12의 readout 맞추기</a>). 실제 데이터에서는 경우가 수백–수천 개이고, weight 수보다 훨씬 많습니다. <span class="key">그러면 모든 식을 <strong>동시에</strong> 정확히 맞추는 weight가 없는 것이 보통입니다.</span></p>
+<p>이 구간은 그때 생기는 질문 넷을 차례로 봅니다.</p>
+<ul>
+<li>무엇을 가장 작게 할까? → least squares</li>
+<li>Weight가 이상하게 커지는 일은 왜 생길까? → overfitting</li>
+<li>그것을 어떻게 막을까? → ridge</li>
+<li><span class="math inline">\(\lambda\)</span>는 어떻게 고를까? → λ 고르기</li>
+</ul>
+<p>Least squares·overfitting·ridge에서는 weight 한두 개로 손 계산을 끝까지 합니다. 그다음 matrix 표기에는 새 계산이 없습니다. 이미 구한 숫자를 matrix 기호에 맞춰 보기만 합니다. Day 10 사다리로 말하면 3단, <strong>학습한 readout</strong>을 만드는 과정입니다. 마지막 λ 고르기에서 4단(held-out)으로 넘어갑니다(<a href="../days/d06.html#s-ladder">Day 10의 증거 사다리</a>).</p>
+<p><strong>Sample이라는 말.</strong> 여기서 <strong>sample</strong>은 Day 10에서처럼 '입력에서 얻은 state와 그 정답'의 한 쌍입니다. RC에서는 보통 time step 하나가 sample 하나입니다. 그 단계의 state <span class="math inline">\(x\)</span>와 그 단계의 정답 <span class="math inline">\(y\)</span>가 한 쌍입니다. Sampling 절에서 본 '잰 값'(신호를 한 번 잰 값)도 영어로는 sample이라 부르지만, 가리키는 것이 다릅니다.</p>
+<p>이 구간에서 새로 나오는 용어를 먼저 표로 봅니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>용어</th>
+<th>뜻</th>
+<th>이 예제에서</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Loss <span class="math inline">\(L\)</span></td>
+<td>얼마나 틀렸나를 숫자 하나로 잰 것</td>
+<td>오차 제곱의 합</td>
+</tr>
+<tr class="even">
+<td>Least squares</td>
+<td>loss(오차 제곱의 합)가 가장 작은 weight를 고르기</td>
+<td>세 sample에서 <span class="math inline">\(w = 1.036\)</span></td>
+</tr>
+<tr class="odd">
+<td>Overfitting</td>
+<td>training data의 우연한 잡음까지 맞춰 새 데이터에서 틀리기</td>
+<td>거의 같은 node 둘에서 weight (+4, −3)</td>
+</tr>
+<tr class="even">
+<td>Ridge regression</td>
+<td>loss에 "weight가 크면 벌점"을 더한 least squares</td>
+<td>벌점 <span class="math inline">\(\lambda w^2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\lambda\)</span> (람다)</td>
+<td>벌점의 세기. 사람이 정하는 0 이상의 수</td>
+<td>0, 0.01, 0.1, 1, 14</td>
+</tr>
+</tbody>
+</table>
+<section id="s-ls" class="level4">
+<h4 class="anchored" data-anchor-id="s-ls">4-1. Weight 하나, sample 셋: least squares</h4>
+</section>
+<div id="b-ridge" class="basics">
+<section id="readout-학습-least-squares와-ridge-regression-①-least-squares" class="level4">
+<h4 class="anchored" data-anchor-id="readout-학습-least-squares와-ridge-regression-①-least-squares">Readout 학습: least squares와 ridge regression ① Least squares</h4>
+<p><strong>왜 필요한가.</strong> Reservoir를 고정했으니 학습할 것은 readout weight뿐입니다. Sample이 weight보다 많으면 모든 sample을 정확히 맞출 수 없습니다. 그래서 규칙이 하나 필요합니다. "얼마나 틀렸나"를 숫자 하나로 정하고, 그 숫자가 가장 작은 weight를 고르는 규칙입니다.</p>
+<p><span id="s-ls-small"></span><strong>가장 작은 경우.</strong> 이 예의 목적은 "모든 sample을 맞출 수 없을 때 어떤 <span class="math inline">\(w\)</span>를 고르나"를 숫자로 보는 것입니다. 기호부터 정합니다.</p>
+<ul>
+<li>Node가 하나라 state <span class="math inline">\(x\)</span>는 숫자 하나입니다.</li>
+<li>Readout은 <span class="math inline">\(\hat{y} = w x\)</span>입니다. <span class="math inline">\(\hat{y}\)</span>는 '와이 햇'이라 읽습니다. 모델이 낸 답을 정답 <span class="math inline">\(y\)</span>와 구별하는 표시입니다.</li>
+<li>Sample 셋: <span class="math inline">\(x = 1, 2, 3\)</span>, 정답 <span class="math inline">\(y = 1.1, 1.9, 3.2\)</span>.</li>
+</ul>
+<p>Sample 하나씩만 맞춰 봅니다. Sample 1만 맞추려면 <span class="math inline">\(w = 1.1/1 = 1.1\)</span>입니다. Sample 2만이면 <span class="math inline">\(1.9/2 = 0.95\)</span>, sample 3만이면 <span class="math inline">\(3.2/3 = 1.067\)</span>입니다. 세 값이 다릅니다. 그러니 <strong>세 sample을 모두 지나는 직선 <span class="math inline">\(\hat{y} = wx\)</span>는 없습니다</strong>.</p>
+<p>그래서 loss를 이렇게 정합니다. Day 11–12에서는 데이터 하나의 loss를 오차의 제곱으로 쟀습니다(<a href="../days/d07a.html#b-training">loss</a>). 오늘은 그것을 sample마다 구해 <strong>모두 더한 값</strong>을 loss로 씁니다. <span class="math inline">\(w\)</span> 몇 개로 직접 계산해 봅니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(w\)</span></th>
+<th>오차 <span class="math inline">\(wx - y\)</span> (sample 1, 2, 3)</th>
+<th>오차 제곱의 합 <span class="math inline">\(L\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.5</td>
+<td>−0.6, −0.9, −1.7</td>
+<td>0.36 + 0.81 + 2.89 = 4.06</td>
+</tr>
+<tr class="even">
+<td>0.95</td>
+<td>−0.15, 0, −0.35</td>
+<td>0.0225 + 0 + 0.1225 = 0.145</td>
+</tr>
+<tr class="odd">
+<td>1.0</td>
+<td>−0.1, +0.1, −0.2</td>
+<td>0.01 + 0.01 + 0.04 = 0.060</td>
+</tr>
+<tr class="even">
+<td>1.1</td>
+<td>0, +0.3, +0.1</td>
+<td>0 + 0.09 + 0.01 = 0.100</td>
+</tr>
+</tbody>
+</table>
+<p>Sample 하나에 딱 맞춘 <span class="math inline">\(w\)</span>(0.95, 1.1)는 다른 sample에서 오차가 커집니다. 1.0 근처에서 합이 작아집니다. 가장 작은 곳은 어디일까요? 그림 4가 이 표를 곡선으로 그려 답을 보여 줍니다.</p>
+<p><strong>그림 읽는 법.</strong></p>
+<ul>
+<li><ol type="a">
+<li>파란 점이 세 sample입니다. 초록 직선은 아래에서 구할 가장 좋은 <span class="math inline">\(w\)</span>의 직선입니다. 빨간 세로 막대가 sample마다의 오차입니다. 회색 점선은 <span class="math inline">\(w = 0.5\)</span>의 직선입니다.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>가로축이 weight <span class="math inline">\(w\)</span>, 세로축이 그 <span class="math inline">\(w\)</span>에서의 loss(오차 제곱의 합)입니다. <span class="math inline">\(w\)</span> 하나에 loss 하나가 정해지므로 곡선이 됩니다. 곡선의 가장 낮은 점(바닥)을 보세요.</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>위에서 <span class="math inline">\(w\)</span>를 바꿔 가며 계산한 loss 표에 바닥의 값을 더한 것입니다.</li>
+</ol></li>
+</ul>
+<figure class="fig figure"><img src="../assets/img/d08/fig-ls-bowl.svg" alt="(a) 점 (1, 1.1), (2, 1.9), (3, 3.2)와 최소제곱 직선 y = 1.036x, 점마다 빨간 오차 막대 −0.06, +0.17, −0.09, 회색 점선 w = 0.5 직선. (b) 가로축 w 0–1.6, 세로축 손실 0–16의 그릇 모양 곡선과 바닥 w = 1.036, w = 0.5에서 4.06. (c) 표: w 0.5, 0.95, 1, 1.036, 1.1의 손실 4.060, 0.145, 0.060, 0.042, 0.100" class="figure-img"><figcaption><b>그림 4.</b> Least squares가 하는 일. <b>(a)</b> 세 sample과 직선 $\hat{y} = w x$. 빨간 막대가 오차이고, 그 제곱의 합이 loss이다. <b>(b)</b> $w$를 바꿀 때의 loss $L(w) = 14w^2 - 29w + 15.06$은 바닥이 하나인 그릇이고, 바닥 $w = 1.036$에서 0.042로 가장 작다. <b>(c)</b> 본문 표의 $w$들과 바닥의 loss. sample 하나에만 딱 맞춘 $w$(0.95, 1.1)는 바닥보다 loss가 크다. 데이터는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p>곡선은 바닥이 하나인 그릇 모양이고, 바닥은 <span class="math inline">\(w = 1.036\)</span>, loss 0.042입니다. 표의 어떤 <span class="math inline">\(w\)</span>보다도 작습니다. <span class="key">이렇게 <strong>오차 제곱의 합이 가장 작은 weight를 고르는 것</strong>을 <strong>least squares</strong>라 합니다.</span> 이름 그대로 '제곱의 합을 최소로'입니다. Day 11–12처럼 weight 둘·식 둘이면 모든 sample을 정확히 맞출 수 있습니다. 그 답은 loss 0인 바닥이므로, 그것도 least squares의 한 경우입니다.</p>
+<p><strong>바닥을 공식으로 찾기.</strong> 그림 4(b)의 그릇에서 바닥은 <strong>gradient가 0인 곳</strong>입니다(<a href="../days/d07a.html#b-gradient">gradient</a>). Gradient는 "<span class="math inline">\(w\)</span>를 조금 바꾸면 loss가 얼마나 변하나"의 비율입니다. Gradient = 0을 풀면 반복 없이 바닥이 나옵니다. 기호를 정합니다. <span class="math inline">\(k\)</span>번째 sample의 state를 <span class="math inline">\(x_k\)</span>, 정답을 <span class="math inline">\(y_k\)</span>로 씁니다. <span class="math inline">\(\sum_k\)</span>는 "모든 sample <span class="math inline">\(k\)</span>에 대해 더하라"입니다. 그러면 loss는 이렇습니다.</p>
+<p><span class="math display">\[
+L(w) = \sum_{k} (w\,x_k - y_k)^2
+\]</span></p>
+<p>바닥은 네 걸음으로 구합니다.</p>
+<ol type="1">
+<li>Gradient를 구한다. Day 11–12의 공식 "gradient = 2 × 오차 × 입력"을 sample마다 쓰고 더하면 <span class="math inline">\(dL/dw = \sum_k 2(w x_k - y_k)\,x_k\)</span>.</li>
+<li>바닥에서는 gradient가 0이므로 <span class="math inline">\(\sum_k 2(w x_k - y_k)\,x_k = 0\)</span>.</li>
+<li>2로 나누고 괄호를 풀면 <span class="math inline">\(w\sum_k x_k^2 - \sum_k x_k y_k = 0\)</span>.</li>
+<li>양변을 <span class="math inline">\(\sum_k x_k^2\)</span>로 나누면 아래 식이 됩니다.</li>
+</ol>
+<p><span class="math display">\[
+w = \frac{\sum_k x_k y_k}{\sum_k x_k^2}
+\]</span></p>
+<ul>
+<li>기호: <span class="math inline">\(x_k\)</span>는 <span class="math inline">\(k\)</span>번째 sample의 state 값, <span class="math inline">\(y_k\)</span>는 그때의 정답.</li>
+<li>단위: <span class="math inline">\(w\)</span>의 단위 = 정답 단위 ÷ state 단위(오늘은 둘 다 무차원).</li>
+<li>계산 순서: state × 정답을 모두 더한다 → state²을 모두 더한다 → 나눈다.</li>
+<li>결과의 뜻: 오차 제곱의 합이 가장 작은 직선의 slope(기울기) <span class="math inline">\(w\)</span>.</li>
+</ul>
+<p><strong>숫자로 확인.</strong> <span class="math inline">\(\sum xy = 1.1 + 3.8 + 9.6 = 14.5\)</span>, <span class="math inline">\(\sum x^2 = 1 + 4 + 9 = 14\)</span>이므로 <span class="math inline">\(w = 14.5/14 = 1.036\)</span>. 그림 4의 바닥과 같습니다.</p>
+<p>왜 그릇 모양인지도 펼쳐 보면 보입니다. <span class="math inline">\((w x_k - y_k)^2 = x_k^2 w^2 - 2x_k y_k w + y_k^2\)</span>입니다. 이것을 세 sample에 대해 더하면</p>
+<p><span class="math display">\[
+L(w) = 14\,w^2 - 29\,w + 15.06
+\]</span></p>
+<p>입니다. <span class="math inline">\(w^2\)</span> 앞의 수는 <span class="math inline">\(\sum x^2 = 14\)</span>, <span class="math inline">\(w\)</span> 앞의 수는 <span class="math inline">\(-2\sum xy = -29\)</span>, 상수는 <span class="math inline">\(\sum y^2 = 15.06\)</span>입니다. <span class="math inline">\(w^2\)</span> 앞의 수가 양수인 포물선이라 바닥이 하나뿐입니다.</p>
+<p>이것은 이 예만의 우연이 아닙니다. Readout이 '곱해 더하기'뿐이고 loss가 오차 제곱의 합이면, loss는 늘 이런 포물선 꼴입니다. Weight가 여럿이면 여러 방향으로 휜 그릇이 됩니다. (뒤에서 볼 것처럼 node가 거의 같으면 그릇의 한 방향이 거의 평평해집니다.) 그래서 Day 11–12처럼 조금씩 내려가지 않고 <strong>한 번에</strong> 풀 수 있습니다. Day 11–12이 예고한 "linear regression을 공식 한 번으로"가 이것입니다.</p>
+</section>
+</div>
+<section id="s-collinear" class="level4">
+<h4 class="anchored" data-anchor-id="s-collinear">4-2. Node 둘이 거의 같을 때: overfitting</h4>
+<p><strong>상황.</strong> Reservoir의 node 두 개가 거의 같은 값을 낸다고 합시다. 같은 입력을 받는 비슷한 device 두 개를 node로 쓰면 생기기 쉬운 상황입니다 <span class="tag tag-interp">해석</span>. 이 예의 목적은 이때 least squares의 weight가 왜 크게 튀는지, 그리고 그 weight가 새 데이터에서 어떻게 틀리는지 보는 것입니다. 데이터는 sample 네 개입니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Sample</th>
+<th>node 1 (<span class="math inline">\(x_1\)</span>)</th>
+<th>node 2 (<span class="math inline">\(x_2\)</span>)</th>
+<th>정답 <span class="math inline">\(y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1.0</td>
+<td>1.02</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2.0</td>
+<td>1.97</td>
+<td>2.1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>3.0</td>
+<td>3.03</td>
+<td>2.9</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>4.0</td>
+<td>3.98</td>
+<td>4.1</td>
+</tr>
+</tbody>
+</table>
+<p>Readout은 <span class="math inline">\(\hat{y} = w_1 x_1 + w_2 x_2\)</span>입니다. <span class="math inline">\(x_{1k}\)</span>는 <span class="math inline">\(k\)</span>번째 sample에서 node 1의 값입니다. Loss는 세 sample 예와 같은 오차 제곱의 합 <span class="math inline">\(L = \sum_k (w_1 x_{1k} + w_2 x_{2k} - y_k)^2\)</span>입니다.</p>
+<p><strong>식 두 개가 나오는 이유.</strong> 이제 weight가 둘입니다. 그래서 바닥에서는 <span class="math inline">\(w_1\)</span> 방향으로도, <span class="math inline">\(w_2\)</span> 방향으로도 gradient가 0이어야 합니다. Day 11–12의 둥근 d 기호로 쓰면 <span class="math inline">\(\partial L/\partial w_1 = 0\)</span>과 <span class="math inline">\(\partial L/\partial w_2 = 0\)</span>입니다. <span class="math inline">\(\partial L/\partial w_1\)</span>은 "<span class="math inline">\(w_2\)</span>는 그대로 두고 <span class="math inline">\(w_1\)</span>만 조금 바꿀 때의 gradient"입니다(<a href="../days/d07a.html#b-backprop">역전파</a>).</p>
+<p>첫째 식을 세 sample 예와 똑같이(gradient = 0) 풀면 <span class="math inline">\(\sum_k 2(\hat{y}_k - y_k)\,x_{1k} = 0\)</span> → <span class="math inline">\(w_1 \sum x_1^2 + w_2 \sum x_1 x_2 = \sum x_1 y\)</span>입니다. 둘째 식도 <span class="math inline">\(x_1\)</span> 자리에 <span class="math inline">\(x_2\)</span>가 들어간 같은 꼴입니다. Day 11–12처럼 미지수 두 개에 식 두 개, 곧 연립방정식(system of equations)이 됩니다. 다른 점은 하나입니다. 식의 숫자가 sample 하나의 값이 아니라 <strong>네 sample의 합</strong>입니다.</p>
+<p>아래 단계 카드는 이 연립방정식을 실제로 풀고, 그 답을 새 데이터에 넣어 봅니다.</p>
+<div class="stepper">
+<div class="step">
+<p><strong>단계 1 — 식에 들어갈 합 다섯 개.</strong> <span class="math inline">\(a = \sum x_1^2 = 30.0\)</span>, <span class="math inline">\(b = \sum x_1 x_2 = 29.97\)</span>, <span class="math inline">\(d = \sum x_2^2 = 29.943\)</span>, <span class="math inline">\(r_1 = \sum x_1 y = 30.3\)</span>, <span class="math inline">\(r_2 = \sum x_2 y = 30.262\)</span>.</p>
+</div>
+<div class="step">
+<p><strong>단계 2 — 풀이 공식.</strong> 두 식 <span class="math inline">\(a w_1 + b w_2 = r_1\)</span>, <span class="math inline">\(b w_1 + d w_2 = r_2\)</span>의 해는 <span class="math inline">\(w_1 = (d r_1 - b r_2)/D\)</span>, <span class="math inline">\(w_2 = (a r_2 - b r_1)/D\)</span>이고, 분모는 <span class="math inline">\(D = a d - b^2\)</span>입니다(중학교 연립방정식을 공식으로 쓴 것).</p>
+</div>
+<div class="step">
+<p><strong>단계 3 — 분모가 거의 0.</strong> <span class="math inline">\(D = 30.0 \times 29.943 - 29.97^2 = 0.077\)</span>. 두 node가 거의 같으면 <span class="math inline">\(ad\)</span>와 <span class="math inline">\(b^2\)</span>이 거의 같습니다. 그래서 <span class="math inline">\(D\)</span>가 0에 가까워집니다. 0에 가까운 수로 나누면 답이 크게 튑니다. 계산하면 <span class="math inline">\(w_1 = +4.00\)</span>, <span class="math inline">\(w_2 = -3.00\)</span>입니다. "Node 1을 4배, node 2를 −3배" 한 것입니다. 둘의 <strong>아주 작은 차이</strong>를 키워 정답의 잔물결까지 맞춘 셈입니다. Training data의 mean squared error(오차 제곱의 합 ÷ sample 수)는 0.00098로 아주 작습니다.</p>
+</div>
+<div class="step">
+<p><strong>단계 4 — 새 데이터에서.</strong> 이 weight를 처음 보는 sample 두 개에 넣어 봅니다.</p>
+<ul>
+<li>새 sample 1: node 값 (2.5, 2.6), 정답 2.55. 예측은 <span class="math inline">\(4.00 \times 2.5 - 3.00 \times 2.6 = 2.20\)</span>입니다(소수 셋째 자리까지 쓴 weight로는 2.22).</li>
+<li>새 sample 2: node 값 (3.5, 3.3), 정답 3.4. 예측은 <span class="math inline">\(4.00 \times 3.5 - 3.00 \times 3.3 = 4.10\)</span>입니다(같은 방식으로 4.12). 0.7 넘게 틀립니다.</li>
+</ul>
+<p>새 데이터 두 sample의 mean squared error는 0.317입니다. Training data의 0.00098과 비교해 보세요.</p>
+</div>
+</div>
+<p><strong>그림 읽는 법.</strong> 그림 5는 training data에서는 잘 맞던 weight가 새 데이터에서 왜 틀리는지 보여 줍니다.</p>
+<ul>
+<li><ol type="a">
+<li>sample마다 두 node 값의 차이 <span class="math inline">\(x_1 - x_2\)</span>를 막대로 그렸습니다. 파랑(training sample 넷)은 ±0.03 안이고, 주황(새 sample 둘)은 −0.10, +0.20입니다.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>sample마다 정답(검정 점)과 <span class="math inline">\(\lambda = 0\)</span> readout의 예측(빨강 네모)입니다. Training sample에서는 두 표시가 거의 겹치고, 새 sample에서는 벌어집니다.</li>
+</ol></li>
+</ul>
+<figure class="fig figure"><img src="../assets/img/d08/fig-overfit.svg" alt="(a) 막대: 학습 sample 넷의 두 노드 차이 x1−x2는 −0.02, +0.03, −0.03, +0.02이고 새 sample 둘은 −0.10, +0.20. (b) sample마다 정답(검정)과 λ=0 예측(빨강). 학습 sample은 1/0.95, 2.1/2.10, 2.9/2.93, 4.1/4.09로 거의 겹치고, 새 sample은 2.55/2.22, 3.4/4.12로 벌어진다" class="figure-img"><figcaption><b>그림 5.</b> 거의 같은 node 두 개에 least squares($\lambda = 0$) readout을 맞출 때의 overfitting. <b>(a)</b> sample마다 두 node 값의 차이 $x_1 - x_2$: training sample(파랑)은 ±0.03 안, 새 sample(주황)은 −0.10, +0.20. <b>(b)</b> 정답(검정)과 예측(빨강). 예측 $= 4.00x_1 - 3.00x_2 \approx x_1 + 3(x_1 - x_2)$라 training sample에서는 거의 맞고(mean squared error 0.00098), 차이가 큰 새 sample 2에서는 3.4 대신 4.12를 낸다(새 sample mean squared error 0.317). 데이터는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>왜 이렇게 되나.</strong> Weight (4.00, −3.00)으로 예측을 다시 쓰면 <span class="math inline">\(4x_1 - 3x_2 = x_1 + 3(x_1 - x_2)\)</span>입니다. 곧 "node 1의 값 + 두 node 차이의 3배"입니다.</p>
+<ul>
+<li>Training sample에서는 차이가 ±0.03 안입니다. 3배 해도 ±0.09입니다. 이것으로 정답의 잔물결(정답 − node 1 = 0, +0.1, −0.1, +0.1)을 일부 맞췄습니다.</li>
+<li>새 sample 2는 차이가 +0.20입니다. 3배 하면 +0.6이 더해집니다. 그래서 정답 3.4 대신 약 4.1을 냅니다.</li>
+</ul>
+<p>정리하면 이렇습니다. Weight는 training sample의 우연한 잔물결을 맞추려고 '두 node의 아주 작은 차이'를 크게 키웠습니다. 그 차이가 다르게 나오는 새 sample에서는 크게 틀렸습니다.</p>
+<p><span id="s-overfit"></span>이것이 Day 10에서 이름을 본 <strong>overfitting</strong>입니다. Readout이 training data의 우연한 잡음까지 외운 것입니다. 그래서 training data에서는 잘 맞고 새 데이터에서는 틀립니다(<a href="../days/d06.html#s-worked-example">Day 10의 overfitting 예</a>).</p>
+<ul>
+<li>Day 10에서는 정답과 무관한 state를 늘려 같은 일이 생겼습니다. 조절할 weight 수가 sample 수에 가까울수록 쉬워졌습니다(<a href="../days/d06.html#s-r2-sim">Day 10의 외우기 시뮬레이션</a>).</li>
+<li>여기서는 weight가 둘뿐입니다. 그래도 두 node가 거의 같아 분모가 0에 가까워지면 생깁니다.</li>
+<li>Day 11–12에서 구한 <span class="math inline">\(W_{out} \approx (-4.31, 4.31)\)</span>이 컸던 것도 같은 이유입니다. 그 readout은 <span class="math inline">\(4.31 \times (h_b - h_a)\)</span>입니다. 경우 A에서 두 칸의 차이가 <span class="math inline">\(0.595 - 0.363 = 0.232\)</span>뿐이었습니다. 그것을 1로 키우려면 <span class="math inline">\(1/0.232 = 4.31\)</span>배가 필요했습니다.</li>
+</ul>
+</section>
+<section id="s-ridge" class="level4">
+<h4 class="anchored" data-anchor-id="s-ridge">4-3. Ridge: weight가 크면 벌점</h4>
+</section>
+<div id="b-ridge-lambda" class="basics">
+<section id="readout-학습-least-squares와-ridge-regression-②-ridge의-lambda" class="level4">
+<h4 class="anchored" data-anchor-id="readout-학습-least-squares와-ridge-regression-②-ridge의-lambda">Readout 학습: least squares와 ridge regression ② ridge의 <span class="math inline">\(\lambda\)</span></h4>
+<p><strong>Weight가 크면 벌점을 주자.</strong> 거의 같은 node 둘의 예에서 문제는 이것이었습니다. Training 오차만 보고 weight를 정했습니다. 그래서 training 오차를 조금 줄이려고 weight를 마음껏 키웠습니다. <span class="key">해결책은 loss에 "weight가 크면 벌점"을 더하는 것입니다. 그러면 training data에 <strong>조금 덜 맞는 대신</strong> weight가 작게 유지됩니다.</span> 이 방법을 <strong>ridge regression</strong>이라 합니다.</p>
+<p><span id="s-ridge-small"></span><strong>작은 숫자로 먼저(weight 하나).</strong> 이 예의 목적은 벌점이 그릇과 바닥을 어떻게 옮기는지 보는 것입니다. 세 sample(x = 1, 2, 3) 예에 벌점 <span class="math inline">\(\lambda w^2\)</span>를 더합니다. <span class="math inline">\(\lambda\)</span>(람다, 0 이상)는 벌점의 세기를 정하는 숫자이고, 사람이 정합니다. 고르는 법은 λ 고르기에서 봅니다.</p>
+<p><span class="math display">\[
+L(w) = \sum_{k} (w\,x_k - y_k)^2 + \lambda\, w^2 = 14w^2 - 29w + 15.06 + \lambda w^2
+\]</span></p>
+<p><span class="math inline">\(\lambda = 1\)</span>이면 <span class="math inline">\(15w^2 - 29w + 15.06\)</span>, <span class="math inline">\(\lambda = 14\)</span>면 <span class="math inline">\(28w^2 - 29w + 15.06\)</span>입니다. <span class="math inline">\(w^2\)</span> 앞의 수만 커집니다. 그래서 그릇이 더 가팔라지고 바닥이 0 쪽으로 옮겨 갑니다. 바닥은 least squares와 같은 방법(gradient = 0)으로 구합니다. <span class="math inline">\(\lambda = 1\)</span>이면 <span class="math inline">\(w = 14.5/15 = 0.967\)</span>, <span class="math inline">\(\lambda = 14\)</span>면 <span class="math inline">\(14.5/28 = 0.518\)</span>입니다.</p>
+<p><strong>그림 읽는 법.</strong> 그림 6은 <span class="math inline">\(\lambda\)</span>를 키울 때 바닥이 어디로 가는지 보여 줍니다.</p>
+<ul>
+<li><ol type="a">
+<li>세 <span class="math inline">\(\lambda\)</span>로 구한 직선입니다. <span class="math inline">\(\lambda\)</span>가 커질수록 직선이 덜 가팔라지는 것을 보세요.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>벌점을 더한 loss의 그릇 세 개입니다. <span class="math inline">\(\lambda\)</span>가 커질수록 바닥의 점이 0 쪽(왼쪽)으로 가는 것을 보세요.</li>
+</ol></li>
+</ul>
+<figure class="fig figure"><img src="../assets/img/d08/fig-ridge-bowl.svg" alt="(a) 세 점과 λ=0, 1, 14로 구한 직선 w=1.036, 0.967, 0.518. (b) 손실에 벌점을 더한 그릇 세 개. λ가 커질수록 가팔라지고 바닥이 1.036, 0.967, 0.518로 0 쪽으로 옮겨 간다. 아래 줄: 벌점을 뺀 오차 제곱 합 0.042, 0.109, 3.797" class="figure-img"><figcaption><b>그림 6.</b> Ridge가 하는 일(weight 하나, least squares 그림과 같은 세 sample). <b>(a)</b> $\lambda = 0, 1, 14$로 구한 직선. <b>(b)</b> 벌점을 더한 loss $14w^2 - 29w + 15.06 + \lambda w^2$. $\lambda$가 커지면 그릇이 가팔라지고 바닥이 1.036 → 0.967 → 0.518로 0 쪽에 옮겨 간다. 아래 줄은 벌점을 뺀 training data의 오차 제곱 합(0.042 → 0.109 → 3.797)으로, weight를 줄인 대가다. 데이터는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>일반 공식.</strong> 벌점 <span class="math inline">\(\lambda w^2\)</span>의 gradient는 <span class="math inline">\(2\lambda w\)</span>입니다. Day 11–12에서 <span class="math inline">\((e + \delta)^2\)</span>를 펼친 것과 같은 계산입니다. <span class="math inline">\(\lambda (w + \delta)^2 = \lambda w^2 + 2\lambda w\,\delta + \lambda \delta^2\)</span>에서 <span class="math inline">\(\delta\)</span>에 붙은 배율이 <span class="math inline">\(2\lambda w\)</span>입니다(<span class="math inline">\(\delta\)</span>는 <span class="math inline">\(w\)</span>를 바꾸는 아주 작은 양). 그래서 gradient = 0은 <span class="math inline">\(\sum_k 2(w x_k - y_k)x_k + 2\lambda w = 0\)</span>입니다. 2로 나눠 정리하면 <span class="math inline">\(w(\sum_k x_k^2 + \lambda) = \sum_k x_k y_k\)</span>, 즉</p>
+<p><span class="math display">\[
+w = \frac{\sum_k x_k y_k}{\sum_k x_k^2 + \lambda}
+\]</span></p>
+<ul>
+<li>기호: <span class="math inline">\(\lambda\)</span>는 벌점의 세기(0 이상). <span class="math inline">\(\lambda = 0\)</span>이면 벌점 없는 least squares 그대로.</li>
+<li>계산 순서: least squares와 같고, 분모에 <span class="math inline">\(\lambda\)</span>를 더한다.</li>
+<li>결과의 뜻: 분모가 커지므로 <span class="math inline">\(w\)</span>는 0 쪽으로 줄어든다.</li>
+</ul>
+<p><strong>Regularization과 regularization term.</strong> 이렇게 loss에 벌점을 더해 weight를 억누르는 것을 <strong>regularization</strong>이라 부릅니다. 더한 항 <span class="math inline">\(\lambda w^2\)</span>를 <strong>regularization term</strong>이라 합니다. 입력의 범위를 맞추는 normalization(정규화)과는 다른 말입니다(Day 11–12에서 구별함).</p>
+<p><strong><span class="math inline">\(\lambda\)</span>가 바꾸는 것과 대가.</strong> 그림 6 아래 줄을 보세요. 벌점을 뺀 training data의 오차 제곱 합이 커집니다. <span class="math inline">\(\lambda = 0\)</span>이면 0.042, <span class="math inline">\(\lambda = 1\)</span>이면 0.109, <span class="math inline">\(\lambda = 14\)</span>면 3.80입니다.</p>
+<ul>
+<li><span class="math inline">\(\lambda\)</span>가 너무 작으면 weight를 붙잡지 못합니다.</li>
+<li><span class="math inline">\(\lambda\)</span>가 너무 크면 정답을 따라가지 못합니다. <span class="math inline">\(\lambda = 14\)</span>의 slope 0.518은 데이터가 보여 주는 약 1의 절반입니다.</li>
+</ul>
+<p>Weight 하나인 이 예에서는 줄여서 좋아지는 점이 보이지 않습니다. 이득은 '거의 같은 node 둘'처럼 node가 여럿이고 서로 비슷할 때 드러납니다.</p>
+<p><span id="s-ridge-collinear"></span><strong>거의 같은 node 둘에 <span class="math inline">\(\lambda = 0.1\)</span>을 더하면.</strong> 이제 ridge를 overfitting 예에 써 봅니다. Weight가 둘일 때 벌점은 "weight 제곱의 합" <span class="math inline">\(\lambda(w_1^2 + w_2^2)\)</span>입니다. <span class="math inline">\(w_1\)</span> 쪽 gradient에는 <span class="math inline">\(2\lambda w_1\)</span>만 붙고, <span class="math inline">\(w_2\)</span> 쪽에는 <span class="math inline">\(2\lambda w_2\)</span>만 붙습니다. 그래서 두 식에서 <strong>같은 node끼리 곱한 합</strong>인 <span class="math inline">\(a\)</span>, <span class="math inline">\(d\)</span>에만 <span class="math inline">\(\lambda\)</span>가 더해집니다.</p>
+<ul>
+<li><span class="math inline">\(a = 30.1\)</span>, <span class="math inline">\(d = 30.043\)</span>.</li>
+<li>분모 <span class="math inline">\(D = 30.1 \times 30.043 - 29.97^2 = 6.08\)</span>. 약 80배 커졌습니다.</li>
+<li>해는 <span class="math inline">\(w_1 = 0.55\)</span>, <span class="math inline">\(w_2 = 0.46\)</span>. 두 node가 일을 비슷하게 나눠 갖습니다.</li>
+<li>Training data의 mean squared error는 0.0087로 조금 늘었습니다. 새 데이터의 mean squared error는 0.0009로 약 350분의 1이 됩니다.</li>
+</ul>
+<p>그림 7은 <span class="math inline">\(\lambda\)</span>를 0, 0.01, 0.1, 1로 바꿔 가며 같은 계산을 한 것입니다. (a)에서 weight 막대가 0.5 근처로 모이는 것을, (b)에서 두 오차가 서로 반대로 움직이는 것을 보세요.</p>
+<figure class="fig figure"><img src="../assets/img/d08/fig4-ridge-collinear.svg" alt="(a) λ = 0, 0.01, 0.1, 1에서 readout weight w1, w2 막대. λ=0에서 +4.00, −3.00이고 λ가 커지면 0.5 근처로 모인다. (b) 표에 학습 오차 0.00098에서 0.0109로 늘고 새 데이터 오차는 0.317에서 0.0003으로 준다" class="figure-img"><figcaption><b>그림 7.</b> 거의 같은 node 두 개(overfitting 그림과 같은 데이터)에 readout을 맞출 때 $\lambda$의 효과. <b>(a)</b> $\lambda$마다의 weight 막대. <b>(b)</b> Training data와 새 데이터의 mean squared error. $\lambda = 0$(least squares)은 training data에 가장 잘 맞지만 weight가 (+4, −3)으로 커져 새 데이터에서 틀리고, $\lambda$를 조금만 더해도 두 weight가 0.5 근처로 모이며 새 데이터 오차가 준다. 대신 training data 오차는 조금씩 는다. 데이터는 예시이고 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p>Stepney는 출력 weight를 구하는 방법 두 가지를 듭니다.</p>
+<ul>
+<li>Least squares의 답을 matrix 계산 한 번으로 직접 구하는 법. 논문 용어로 Moore–Penrose pseudoinverse이고, 뒤에서 볼 inverse matrix를 넓힌 것입니다. 정확하지만, overfitting을 피하려면 sample 수가 node 수보다 훨씬 많아야 합니다.</li>
+<li>Regularization parameter(매개변수)를 둔 ridge regression.</li>
+</ul>
+<p>그리고 <strong>regularization을 크게 하면 출력 weight 성분의 크기가 줄어드는 대신 오차가 커진다</strong>고 씁니다. Regularization의 세기는 task·데이터에 따라 다르지만, 여러 값으로 한 번씩 계산해 보면 효율적으로 고를 수 있다고 합니다. <span class="src">Stepney 2024, p.669</span></p>
+</section>
+</div>
+<div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/Q81RR3yKn30?start=85&amp;rel=0" title="영상: Regularization Part 1: Ridge (L2) Regression" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy"></iframe></div><div class="vcap"><b>영상 (추천 구간 1:25–10:21, 약 9분 · 전체 20분, 영어·자막).</b> StatQuest with Josh Starmer, "Regularization Part 1: Ridge (L2) Regression". <b>볼 이유:</b> 1:25 'Ridge Regression main ideas'와 4:15 'details' 챕터가 점 몇 개에 직선을 맞추면서, least squares 직선에 'slope² × λ' 벌점을 더하면 직선이 덜 가팔라지고 새 데이터에서 덜 틀린다는 것을 그림으로 보여 준다. 이 절의 식 $\sum (w x_k - y_k)^2 + \lambda w^2$와 같은 식이다. 15:34 'when you don't have much data' 챕터는 데이터 수보다 변수가 많을 때(node 수 &gt; sample 수) ridge가 답을 정해 준다는 내용이라, overfitting 예의 '분모가 거의 0'과 이어 볼 수 있다. <b>보고 답할 질문:</b> 영상에서 λ를 키우면 직선의 slope는 어느 쪽으로 가나? 이 절의 작은 숫자($\lambda$ = 1, 14일 때 $w$ = 0.967, 0.518)와 같은 방향인가? <span class="vcheck">Claude가 확인한 범위: 제목·채널·길이·챕터·설명(영상 내용은 미검증)</span></div></div>
+<p>아래 예측 문제는 두 공식 <span class="math inline">\(w = \sum xy/\sum x^2\)</span>와 <span class="math inline">\(w = \sum xy/(\sum x^2 + \lambda)\)</span>를 새 숫자에 써 보는 연습입니다.</p>
+<div class="predict">
+<p>데이터가 <span class="math inline">\(x = 1, 2\)</span>, <span class="math inline">\(y = 2, 3\)</span>이면 least squares <span class="math inline">\(w\)</span>는 얼마일까요? <span class="math inline">\(\lambda = 3\)</span>인 ridge라면? 아래 점검의 셋째 문제입니다. 첫 문제는 세 sample 숫자의 확인, 둘째는 빈칸 채우기입니다.</p>
+</div>
+<div class="quiz" data-day="d08" data-set="4-check"></div>
+<section id="s-matrix-form" class="level4">
+<h4 class="anchored" data-anchor-id="s-matrix-form">4-4. Matrix로 쓰면: transpose와 inverse matrix</h4>
+<p><strong>왜 필요한가.</strong> Node가 둘인 예에서는 합 다섯 개(<span class="math inline">\(a, b, d, r_1, r_2\)</span>)와 식 두 개로 충분했습니다. Node가 200개면 식이 200개입니다. 식에 들어갈 'node끼리 곱한 합'만 2만 개가 넘습니다. 같은 계산을 node 수와 상관없이 한 줄로 쓰려고 matrix를 씁니다. 새 계산은 없습니다. 앞에서 손으로 구한 숫자를 기호에 대응시키는 것이 전부입니다.</p>
+<p>새로 필요한 말은 둘입니다. 먼저 표로 보고, 아래에서 작은 숫자로 뜻을 정합니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>용어</th>
+<th>기호</th>
+<th>뜻</th>
+<th>숫자 하나에 비유하면</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Transpose</td>
+<td><span class="math inline">\(X^{\mathsf T}\)</span></td>
+<td>표의 행과 열을 바꾼 것</td>
+<td>(해당 없음)</td>
+</tr>
+<tr class="even">
+<td>Inverse matrix</td>
+<td><span class="math inline">\(A^{-1}\)</span></td>
+<td>그 표로 '나누기'</td>
+<td>4로 나누기 = <span class="math inline">\(1/4\)</span> 곱하기</td>
+</tr>
+<tr class="odd">
+<td>Identity matrix</td>
+<td><span class="math inline">\(I\)</span></td>
+<td>대각선만 1인 표. 곱해도 그대로</td>
+<td>숫자 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Transpose를 작은 숫자로.</strong> Transpose는 표의 행과 열을 바꾸는 것입니다. 3행 2열 표 <span class="math inline">\(\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6 \end{pmatrix}\)</span>의 transpose는 2행 3열 <span class="math inline">\(\begin{pmatrix} 1 &amp; 3 &amp; 5 \\ 2 &amp; 4 &amp; 6 \end{pmatrix}\)</span>입니다. 첫 열 (1, 3, 5)가 첫 행이 되었습니다. 숫자는 하나도 바뀌지 않았습니다. 표 이름 오른쪽 위에 T를 붙여 <span class="math inline">\(X^{\mathsf T}\)</span>로 씁니다.</p>
+<p><strong>Inverse matrix를 작은 숫자로.</strong> Inverse matrix는 '그 표로 나누기'입니다.</p>
+<ul>
+<li>숫자 4로 나누는 것은 <span class="math inline">\(1/4\)</span>을 곱하는 것이고, <span class="math inline">\(4 \times 1/4 = 1\)</span>입니다.</li>
+<li>표에서 1의 역할을 하는 것은 대각선만 1인 표 <span class="math inline">\(I = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>입니다.</li>
+<li>예를 들어 <span class="math inline">\(A = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 4 \end{pmatrix}\)</span>의 inverse matrix는 <span class="math inline">\(A^{-1} = \begin{pmatrix} 0.5 &amp; 0 \\ 0 &amp; 0.25 \end{pmatrix}\)</span>입니다. 둘을 곱하면 <span class="math inline">\(I\)</span>입니다.</li>
+<li>그래서 연립방정식 <span class="math inline">\(2w_1 = 6\)</span>, <span class="math inline">\(4w_2 = 8\)</span>을 표로 쓴 <span class="math inline">\(A\mathbf{w} = (6, 8)\)</span>은 <span class="math inline">\(\mathbf{w} = A^{-1}(6, 8) = (0.5 \times 6,\; 0.25 \times 8) = (3, 2)\)</span>로 풀립니다.</li>
+</ul>
+<p>대각선 밖이 0이 아닌 표도 뜻은 같습니다. 이제 node 둘 예의 숫자 그대로 그림을 봅니다.</p>
+<p><strong>그림 읽는 법.</strong> 그림 8은 손으로 구한 합 <span class="math inline">\(a, b, d, r_1, r_2\)</span>가 matrix의 어느 칸에 들어가는지 보여 줍니다.</p>
+<ul>
+<li><ol type="a">
+<li>node 둘 예의 state를 표로 모은 <span class="math inline">\(X\)</span>입니다. 한 행이 sample 하나(한 time step의 state), 한 열이 node 하나입니다. 옆의 <span class="math inline">\(\mathbf{y}\)</span>는 정답 목록입니다.</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li><span class="math inline">\(X\)</span>의 행과 열을 바꾼 표(transpose)입니다.</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>(b)와 (a)를 곱한 2×2 표, 그리고 (b)와 <span class="math inline">\(\mathbf{y}\)</span>를 곱한 목록입니다.</li>
+</ol></li>
+<li><ol start="4" type="a">
+<li>그것으로 weight를 푸는 과정입니다.</li>
+</ol></li>
+<li>색: 파랑은 node 1, 주황은 node 2, 보라는 둘을 함께 곱한 칸입니다.</li>
+</ul>
+<figure class="fig figure"><img src="../assets/img/d08/fig-matrix-xtx.svg" alt="(a) 4행 2열 상태 표 X(노드 1 열 1, 2, 3, 4와 노드 2 열 1.02, 1.97, 3.03, 3.98)와 정답 1.0, 2.1, 2.9, 4.1. (b) 행과 열을 바꾼 2행 4열 X의 전치. (c) X전치·X = [[30.0, 29.97],[29.97, 29.943]], X전치·y = (30.3, 30.262). (d) D = 0.077이라 w = (4.00, −3.00), 대각선에 λ = 0.1을 더하면 D = 6.08, w = (0.55, 0.46)" class="figure-img"><figcaption><b>그림 8.</b> 'node 둘이 거의 같을 때'의 계산을 matrix로. <b>(a)</b> State 표 $X$(행 = sample, 열 = node)와 정답 $\mathbf{y}$. <b>(b)</b> Transpose $X^{\mathsf T}$: 행과 열을 바꾼 표. <b>(c)</b> $X^{\mathsf T}X$의 칸은 node 열끼리 같은 자리를 곱해 더한 값이라 overfitting 예의 합 $a, b, d$가 되고, $X^{\mathsf T}\mathbf{y}$는 $r_1, r_2$가 된다. <b>(d)</b> $(X^{\mathsf T}X)\mathbf{w} = X^{\mathsf T}\mathbf{y}$를 푸는 것이 inverse matrix를 곱하는 것이며, $D = 0.077$이 거의 0이라 weight가 (4.00, −3.00)으로 튄다. 대각선에 $\lambda = 0.1$을 더하면 $D = 6.08$, weight (0.55, 0.46). 숫자는 코드가 계산했다. (Claude가 계산해 그림)</figcaption></figure>
+<p><strong>Transpose(그림 8(b)).</strong> 위의 작은 예와 같은 일을 4행 2열인 <span class="math inline">\(X\)</span>에 합니다. <span class="math inline">\(X\)</span>의 node 1 열(1.0, 2.0, 3.0, 4.0)이 <span class="math inline">\(X^{\mathsf T}\)</span>의 1행이 되고, node 2 열이 2행이 됩니다. 숫자는 하나도 바뀌지 않고 자리만 바뀝니다.</p>
+<p><strong><span class="math inline">\(X^{\mathsf T}X\)</span>와 <span class="math inline">\(X^{\mathsf T}\mathbf{y}\)</span>(그림 8(c)).</strong> <a href="../days/d07a.html#b-vector-matrix">Matrix–vector 곱</a>과 같은 '같은 자리끼리 곱해 더하기'를 칸마다 합니다.</p>
+<ul>
+<li><span class="math inline">\((1,1)\)</span> 칸: <span class="math inline">\(X^{\mathsf T}\)</span>의 1행(node 1)과 <span class="math inline">\(X\)</span>의 1열(node 1). <span class="math inline">\(1.0^2 + 2.0^2 + 3.0^2 + 4.0^2 = 30.0 = a\)</span>.</li>
+<li><span class="math inline">\((1,2)\)</span> 칸: node 1과 node 2. <span class="math inline">\(1.0 \times 1.02 + 2.0 \times 1.97 + 3.0 \times 3.03 + 4.0 \times 3.98 = 29.97 = b\)</span>.</li>
+<li><span class="math inline">\((2,2)\)</span> 칸: node 2끼리. <span class="math inline">\(29.943 = d\)</span>.</li>
+</ul>
+<p>곧 손으로 구했던 합 <span class="math inline">\(a, b, d\)</span>가 그대로 2×2 표에 들어갑니다. 같은 방식으로 <span class="math inline">\(X^{\mathsf T}\mathbf{y}\)</span>는 각 node 열과 정답을 곱해 더한 값입니다. <span class="math inline">\(r_1 = 30.3\)</span>, <span class="math inline">\(r_2 = 30.262\)</span>입니다. 그래서 연립방정식 두 개가 한 줄이 됩니다. 여기서 <span class="math inline">\(\mathbf{w} = (w_1, w_2)\)</span>입니다.</p>
+<p><span class="math display">\[
+X^{\mathsf T}X\,\mathbf{w} = X^{\mathsf T}\mathbf{y}
+\]</span></p>
+<p><strong>Inverse matrix(그림 8(d)).</strong> 숫자 하나라면 <span class="math inline">\(a w = r\)</span>을 <span class="math inline">\(w = r/a\)</span>로 풉니다. 표도 같습니다. 표 <span class="math inline">\(X^{\mathsf T}X\)</span>로 "나누는" 것을, 그 표의 inverse matrix <span class="math inline">\((X^{\mathsf T}X)^{-1}\)</span>을 곱하는 것으로 씁니다. 위의 <span class="math inline">\(A\)</span> 예와 같은 일입니다. 결과의 뜻은 <strong>연립방정식의 해</strong>입니다. 여기서는 손으로 푼 공식이 주는 <span class="math inline">\(w_1 = 4.00\)</span>, <span class="math inline">\(w_2 = -3.00\)</span>과 같습니다.</p>
+<p>0에 가까운 수로 나누면 답이 커집니다. 표도 마찬가지입니다. 2×2 표의 inverse matrix 앞에는 <span class="math inline">\(1/D\)</span>(<span class="math inline">\(D = ad - b^2 = 0.077\)</span>)가 붙어 약 13배로 키웁니다. 앞에서 본 '분모가 거의 0'이 이것입니다.</p>
+<details class="deep">
+<summary>
+심화 · 2×2 inverse matrix를 직접 확인하기
+</summary>
+<p>2×2 표 <span class="math inline">\(\begin{pmatrix} a &amp; b \\ b &amp; d \end{pmatrix}\)</span>의 inverse matrix는 <span class="math inline">\(\frac{1}{D}\begin{pmatrix} d &amp; -b \\ -b &amp; a \end{pmatrix}\)</span>(<span class="math inline">\(D = ad - b^2\)</span>)입니다. 둘을 곱하면 대각선만 1인 표 <span class="math inline">\(I = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>가 나옵니다(1행·1열: <span class="math inline">\((ad - b^2)/D = 1\)</span>, 1행·2열: <span class="math inline">\((-ab + ba)/D = 0\)</span>). 숫자 <span class="math inline">\(a\)</span>와 <span class="math inline">\(1/a\)</span>를 곱하면 1이 되는 것과 같은 성질입니다. 그래서 inverse(역)라는 이름이 붙었습니다.</p>
+<p>이것을 <span class="math inline">\(X^{\mathsf T}\mathbf{y} = (r_1, r_2)\)</span>에 곱하면 <span class="math inline">\(w_1 = (d r_1 - b r_2)/D\)</span>, <span class="math inline">\(w_2 = (a r_2 - b r_1)/D\)</span>입니다. 손으로 푼 공식이 그대로 나옵니다. 이 숫자로는 <span class="math inline">\(1/D \approx 13.0\)</span>이고, inverse matrix의 원소는 ±389 안팎으로 커집니다.</p>
+<p>Node가 <span class="math inline">\(N\)</span>개면 <span class="math inline">\(N \times N\)</span> 표의 inverse matrix를 컴퓨터가 계산합니다(Gaussian elimination(가우스 소거) 등). 실제 프로그램은 inverse matrix를 따로 만들지 않고 연립방정식을 바로 푸는 경우가 많습니다. 원리는 같습니다. <span class="prov">일반 선형대수 내용이며 폴더 논문의 내용은 아님</span></p>
+</details>
+<p><strong>Ridge를 넣으면.</strong> Ridge에서는 '대각선 <span class="math inline">\(a\)</span>, <span class="math inline">\(d\)</span>에만 <span class="math inline">\(\lambda\)</span> 더하기'를 했습니다. 이것을 표로 쓰면 <span class="math inline">\(X^{\mathsf T}X + \lambda I\)</span>입니다. <span class="math inline">\(\lambda I\)</span>는 대각선만 <span class="math inline">\(\lambda\)</span>인 표입니다. Node가 몇 개든 같은 모양으로 쓰면 해는 이렇습니다.</p>
+<p><span class="math display">\[
+W_{out} = (X^{\mathsf T}X + \lambda I)^{-1} X^{\mathsf T}\mathbf{y}
+\]</span></p>
+<ul>
+<li>왜 지금 필요한가: node가 200개여도 손 계산과 같은 일을 하는 공식. Day 11–12에서 본 Zhong 2026의 식 <span class="math inline">\(W_{out} = (U^{\mathsf T}U)^{-1}U^{\mathsf T}y\)</span>는 이 식의 <span class="math inline">\(\lambda = 0\)</span>인 경우다. <span class="src">Zhong 2026, p.8</span></li>
+<li>기호: <span class="math inline">\(X\)</span>는 state 표(<span class="math inline">\(T\)</span>행 <span class="math inline">\(N\)</span>열: sample <span class="math inline">\(T\)</span>개, node <span class="math inline">\(N\)</span>개), <span class="math inline">\(X^{\mathsf T}\)</span>는 transpose, <span class="math inline">\(I\)</span>는 대각선만 1인 표, <span class="math inline">\((\cdot)^{-1}\)</span>은 inverse matrix(그 표로 '나누기').</li>
+<li>단위: 무차원.</li>
+<li>계산 순서: state 표를 모은다 → <span class="math inline">\(X^{\mathsf T}X\)</span>와 <span class="math inline">\(X^{\mathsf T}\mathbf{y}\)</span>를 만든다 → 대각선에 <span class="math inline">\(\lambda\)</span>를 더한다 → 연립방정식을 푼다.</li>
+<li>결과의 뜻: training data의 오차 제곱 합 + <span class="math inline">\(\lambda\)</span> × (weight 제곱 합)이 가장 작은 readout. 반복 없이 <strong>한 번에</strong> 나온다.</li>
+</ul>
+<p><strong>읽는 법.</strong> 아래 원문 그림은 위 식의 표 <span class="math inline">\(X\)</span>가 실제 device 시스템에서 어떻게 생겼는지 보여 줍니다.</p>
+<ul>
+<li>그림 d의 세로축 "States" 120개가 node 수 <span class="math inline">\(N\)</span>입니다(device 24개 × mask(마스크) 5칸, p.675).</li>
+<li>가로축 "Time step" 50개가 한 박동의 time step입니다.</li>
+<li>칸의 색이 state 값(0–1)입니다.</li>
+<li>표 <span class="math inline">\(X\)</span>의 한 행이 이 그림의 세로 한 줄에 해당합니다. 그림은 <span class="math inline">\(X\)</span>를 옆으로 눕힌 모양입니다.</li>
+</ul>
+<figure class="fig paper figure"><img src="../assets/img/papers/zhong2022-fig4cd.png" alt="Zhong 2022 Fig. 4c–d: c는 입력 I가 동적 memristor 24개(DM × 24)를 거쳐 NVM 배열 1개의 readout으로 출력 O가 되는 블록도. d는 세로축 States 0–120, 가로축 Time step 0–50의 파란 색 지도로, 20단계 근처에 세로로 흰 띠가 있다" loading="lazy" class="figure-img"><figcaption><b>원문 그림.</b> Zhong et al., <a href="https://doi.org/10.1038/s41928-022-00838-3" target="_blank"><i>Nat. Electron.</i> 2022, 5, 672–681</a>, Fig. 4c–d, p.677. 볼 것: <b>c</b>에서 reservoir는 device 24개(DM × 24), readout은 비휘발 메모리 배열 하나(NVM array × 1)다. 이 절의 $W_{out}$이 이 배열의 conductance로 저장된다. <b>d</b>는 심전도 한 박동을 넣었을 때의 state 120개 × 50단계다. 20단계 근처의 흰 세로 띠는 앞의 원문 Fig. 4b(정상·부정맥 박동)에서 봉우리가 있던 시점과 겹친다. 봉우리가 들어온 순간 state들이 크게 바뀐 것으로 읽힌다 [해석]. 이 논문은 training 박동 1,000개로 readout을 정하고 9,000개로 test했다(p.675). 가로줄(state)들이 서로 비슷해 보이는 곳이 많다는 점이 이 절의 'node가 거의 같을 때'와 같은 상황인지는 그림만으로 판단할 수 없다 [해석]. <span class="paper-note">원문 그림(비영리 학습용 인용). 클릭하면 크게 볼 수 있습니다.</span></figcaption></figure>
+</section>
+<section id="s-lambda-choice" class="level4">
+<h4 class="anchored" data-anchor-id="s-lambda-choice">4-5. λ는 어떻게 고르나, 그리고 Day 10 사다리에서의 자리</h4>
+<p><strong>Training data 오차로는 못 고른다.</strong> λ를 0, 0.01, 0.1, 1로 바꿔 본 결과를 다시 봅니다. Training data 오차는 <span class="math inline">\(\lambda = 0\)</span>일 때 가장 작습니다(0.00098). 바로 그때 새 데이터 오차가 가장 큽니다(0.317). <span class="key">그래서 <span class="math inline">\(\lambda\)</span>는 학습에 쓰지 않은 데이터로 고릅니다.</span> 순서는 셋입니다.</p>
+<ol type="1">
+<li>Training data를 다시 둘로 나눕니다. 앞부분으로 여러 <span class="math inline">\(\lambda\)</span>에 대해 <span class="math inline">\(W_{out}\)</span>을 구합니다.</li>
+<li>뒷부분(<strong>validation</strong> data)에서 오차가 가장 작은 <span class="math inline">\(\lambda\)</span>를 고릅니다.</li>
+<li>마지막으로 <strong>test data</strong>(training·validation 어디에도 쓰지 않은 것)로 성능을 한 번 잽니다.</li>
+</ol>
+<p>Day 10의 held-out(<a href="../days/d06.html#b-heldout-baseline">held-out 성능과 baseline</a>)을 한 겹 더 나눈 것입니다. Day 21–22의 실습 코드가 이렇게 합니다(training 1,500 / validation 500 / test 1,900단계). Test data를 보며 <span class="math inline">\(\lambda\)</span>를 고르면 test data도 사실상 학습에 쓴 셈이 됩니다. 그러면 그 test 성능이 새 데이터에서의 성능을 과대평가하게 됩니다. 그림 9가 이 나누기와 순서를 한 장에 놓습니다.</p>
+<figure class="fig figure"><img src="../assets/img/d08/fig7-data-split.svg" alt="시계열 하나를 시간 순서대로 학습 1,500단계, 검증 500단계, 시험 1,900단계로 나눈 막대와, 아래에 ① 학습 데이터로 λ마다 W_out을 구하고 ② 검증 데이터로 오차가 가장 작은 λ를 고르고 ③ test data로 마지막에 한 번만 잰다는 순서" class="figure-img"><figcaption><b>그림 9.</b> Training·validation·test data의 나누기와 쓰는 순서. 단계 수는 Day 21–22 실습 코드의 값이고, 신호 모양은 모식도다. (Claude가 그림, 모식도)</figcaption></figure>
+<p><span id="s-ladder-map"></span><strong>오늘 하는 일을 Day 10 사다리에 놓으면.</strong> <span class="tag tag-interp">해석</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>오늘 한 일</th>
+<th>Day 10 사다리의 단</th>
+<th>그 단에서 확인하는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>신호를 sampling해 time step <span class="math inline">\(t\)</span>와 정답을 정한다</td>
+<td>1 task</td>
+<td>입력·정답·척도가 정해졌나</td>
+</tr>
+<tr class="even">
+<td>State update로 state를 만들고, 다른 이력이 다른 점으로 끝나는지 본다</td>
+<td>2 읽을 수 있는 state</td>
+<td>구별되나(네 점이 다른 자리), device라면 반복 측정해도 같나</td>
+</tr>
+<tr class="odd">
+<td>Least squares·ridge(또는 softmax + gradient descent)로 <span class="math inline">\(W_{out}\)</span>을 정한다</td>
+<td>3 학습한 readout</td>
+<td>Training data만으로 숫자를 정했나</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\lambda\)</span>를 validation data로 고르고, test data로 한 번 잰다</td>
+<td>4 held-out</td>
+<td>외운 것이 아니라 새 데이터에서도 맞나</td>
+</tr>
+<tr class="odd">
+<td>Reservoir를 빼고 같은 readout에 지연 입력을 준 baseline과 비교한다</td>
+<td>5 baseline</td>
+<td>Reservoir 없이도 같은 성능이 나오지 않나</td>
+</tr>
+<tr class="even">
+<td>같은 정확도에서 회로·전력 비용을 비교한다 (Day 31–32)</td>
+<td>6 시스템 비용</td>
+<td>디지털 구현보다 싼가</td>
+</tr>
+</tbody>
+</table>
+<p>Training data에서 오차가 작다는 것(3단까지)은 증거가 아닙니다. '새 데이터에서도 맞는다'는 주장은 4단부터입니다.</p>
+<div class="quiz" data-day="d08" data-set="4-end"></div>
+<div class="terms-box">
+<dl class="terms">
+<dt>
+Sample
+</dt>
+<dd>
+State와 그 정답의 한 쌍. RC에서는 보통 time step 하나. Sampling에서 '신호를 한 번 잰 값'도 sample이라 부르지만 다른 것이다.
+</dd>
+<dt>
+Least squares
+</dt>
+<dd>
+오차 제곱의 합이 가장 작은 weight를 고르기. 포물선 loss의 바닥(gradient = 0)을 공식으로 바로 푼다. Weight 하나면 <span class="math inline">\(w = \sum xy/\sum x^2\)</span>.
+</dd>
+<dt>
+Overfitting
+</dt>
+<dd>
+Training data의 우연한 잔물결까지 맞춰 새 데이터에서 틀리는 것. Overfitting 예의 <span class="math inline">\(\lambda = 0\)</span>(training 0.00098, 새 데이터 0.317).
+</dd>
+<dt>
+Ridge regression / regularization term λ
+</dt>
+<dd>
+Loss에 <span class="math inline">\(\lambda w^2\)</span>를 더해 weight가 커지지 않게 하는 least squares. <span class="math inline">\(w = \sum xy/(\sum x^2 + \lambda)\)</span>. 비슷한 node가 여럿일 때 분모가 0에 가까워지는 것을 막는다.
+</dd>
+<dt>
+Transpose / inverse matrix
+</dt>
+<dd>
+표의 행과 열을 바꾼 것(<span class="math inline">\(X^{\mathsf T}\)</span>) / 그 표로 '나누는' 것. <span class="math inline">\((X^{\mathsf T}X)^{-1}X^{\mathsf T}\mathbf{y}\)</span>는 연립방정식의 해다.
+</dd>
+<dt>
+Training / validation / test data
+</dt>
+<dd>
+Weight를 정하는 데 / <span class="math inline">\(\lambda\)</span> 같은 설정을 고르는 데 / 마지막에 성능을 한 번 재는 데 쓰는 데이터. 서로 겹치지 않는다.
+</dd>
+</dl>
+</div>
+<div class="keypoints">
+<ul>
+<li>Day 11–12에서는 weight 둘·식 둘이라 정확히 풀렸지만(<span class="math inline">\(W_{out} \approx (-4.31, 4.31)\)</span>), <span class="key">sample이 weight보다 많으면 모두 맞출 수 없다 → least squares = 오차 제곱의 합을 가장 작게</span>. 세 sample이면 <span class="math inline">\(L = 14w^2 - 29w + 15.06\)</span>의 바닥 <span class="math inline">\(w = 14.5/14 = 1.036\)</span>.</li>
+<li>거의 같은 node 둘: <span class="math inline">\(D = ad - b^2 = 0.077\)</span> → weight (+4, −3), 곧 예측 <span class="math inline">\(= x_1 + 3(x_1 - x_2)\)</span> → <span class="key">새 데이터에서 틀린다(0.317). 이것이 overfitting이다</span>(예시 데이터 네 개로 한 Claude 계산).</li>
+<li>Ridge: loss에 <span class="math inline">\(\lambda w^2\)</span>, weight 하나면 <span class="math inline">\(w = \sum xy/(\sum x^2 + \lambda)\)</span>(1.036 → 0.967 → 0.518). Node 둘이면 대각선 <span class="math inline">\(a\)</span>, <span class="math inline">\(d\)</span>에 <span class="math inline">\(\lambda\)</span> → <span class="math inline">\(\lambda = 0.1\)</span>에서 <span class="math inline">\(D = 6.08\)</span>, 새 데이터 0.0009. <span class="key">Regularization을 키우면 weight가 줄고 training 오차는 는다</span> <span class="src">Stepney 2024, p.669</span>.</li>
+<li>Matrix: <span class="math inline">\(X^{\mathsf T}X\)</span>는 합 <span class="math inline">\(a, b, d\)</span>의 표, inverse matrix는 그 표로 나누기(앞에 <span class="math inline">\(1/D\)</span>). <span class="math inline">\(W_{out} = (X^{\mathsf T}X + \lambda I)^{-1}X^{\mathsf T}\mathbf{y}\)</span>. <span class="key"><span class="math inline">\(\lambda\)</span>는 validation data로 고르고 성능은 test data로 잰다</span>(Day 10 사다리 4단, held-out).</li>
+</ul>
+</div>
+</section>
+</section>
+</div>
+<script type="application/json" id="quiz-d08">{"version": 2, "_형식": "sets의 키가 본문 <div class=\"quiz\" data-set=\"...\">와 연결된다. type: ox(a: true/false) | mc(options, a: 정답 번호 0부터) | short(a: 인정하는 답 목록). why: 정답 이유. kind: check | end | final. id는 파일 안에서 고유, 문항을 바꾸면 id도 바꾼다. ref는 틀렸을 때 돌아갈 장의 앵커.", "sets": {"review": {"kind": "review", "title": "지난 학습 복습: ESN·LSM과 물리 reservoir computing", "items": [{"id": "d08-r01", "type": "mc", "q": "Node 1,000개짜리 reservoir에 500단계 길이의 신호를 넣고 readout만 학습한다. Readout weight 하나의 gradient를 구할 때 무엇이 필요한가?", "options": ["500단계를 거슬러 가며 단계마다의 배율을 곱한 값", "Reservoir 내부 weight W의 값과 그 gradient", "지금 단계의 오차와 그 weight가 곱해지는 지금 state", "Reservoir를 흉내 낸 미분 가능한 수식 모형"], "a": 2, "why": "Readout은 state에 weight를 곱해 더할 뿐이라, gradient는 '2 × 오차 × 지금 state'다. 과거는 reservoir 안에서 이미 계산되어 지금 state에 들어 있으므로 시간을 거슬러 배율을 곱할 일이 없다. 그래서 소실·폭주도 생기지 않는다.", "wrongWhy": ["거슬러 가며 배율을 곱하는 것은 내부 W를 학습할 때(BPTT)의 일이다. Readout만 학습하면 필요 없다.", "내부는 고정이라 학습이 내부 값을 알 필요도, 바꿀 필요도 없다.", "", "미분 가능한 모형은 내부를 학습할 때 필요하다. Readout 학습은 읽은 state만 있으면 된다."], "ref": "d07b.html#s-readout-fit", "refLabel": "readout의 기울기는 지금 상태만 쓴다", "fig": "../assets/img/d07/fig10-readout-vs-chain.svg", "figAlt": "내부 0.5를 학습하면 모든 단계를 거슬러 배율을 곱하지만, readout만 학습하면 2 × 오차 × 지금 상태뿐임을 비교한 그림", "core": true}, {"id": "d08-r02", "type": "mc", "q": "어떤 reservoir에서 '5단계 전에 입력 1이 있었던 경우'와 '없었던 경우'가 모두 같은 state 값 (0.40, 0.40)으로 끝났다. 이 두 경우를 가르려면?", "options": ["Readout을 더 오래, 더 작은 learning rate로 학습한다", "Readout weight를 아주 크게 키워 차이를 늘린다", "Readout 앞에서 같은 state를 두 번씩 곱해 쓴다", "그 차이를 state에 남기는 node가 필요하다"], "a": 3, "why": "Readout이 쓸 수 있는 것은 reservoir가 이미 만들어 둔 state뿐이다. 두 경우의 state가 똑같으면 어떤 W_out을 곱해도 같은 답이 나온다. 천천히 잊는 칸이 있어 state가 달라져야 가를 수 있다.", "wrongWhy": ["더 오래 학습해도 같은 state에는 같은 답만 낼 수 있다. 학습이 state에 없는 차이를 만들지 못한다.", "같은 숫자에 큰 weight를 곱해도 두 경우의 결과는 여전히 같다.", "같은 state로 만든 숫자는 몇 번 곱해도 두 경우가 같다. 새 정보가 생기지 않는다.", ""], "ref": "d07b.html#s-readout-fit", "refLabel": "정리: 필요한 흔적이 상태에 없으면", "core": true}, {"id": "d08-r03", "type": "mc", "q": "어떤 reservoir를 서로 다른 시작 state에서 같은 입력으로 두 번 돌렸더니, 두 state의 차이가 0.3 → 0.3 → 0.3으로 줄지 않았다. 이 reservoir에서 앞부분을 버리는 washout은?", "options": ["앞부분을 더 길게 버리면 해결된다", "버리는 길이와 상관없이 의미가 없다", "한 단계만 버려도 충분하다", "처음부터 버릴 필요가 없다"], "a": 1, "why": "Washout은 시작값의 흔적이 남은 앞부분을 버려, 그 뒤 state가 입력만으로 정해지게 하려는 것이다. 시작값의 차이가 줄지 않으면 아무리 버려도 state가 시작값에 매여 있다. Washout은 시작값을 잊는 성질이 있어야 의미가 있다.", "wrongWhy": ["차이가 줄지 않으므로 더 길게 버려도 남은 state에는 시작값의 흔적이 그대로 있다.", "", "한 단계 뒤에도 차이가 0.3 그대로다. 시작값의 흔적이 줄지 않는다.", "시작값에 따라 state가 달라지므로, 그대로 쓰면 readout이 우연한 시작값을 배우게 된다."], "ref": "d07b.html#s-washout", "refLabel": "washout: 시작값의 흔적 버리기"}, {"id": "d08-r04", "type": "mc", "q": "이온 device 배열로 만든 physical reservoir computing에서 각 부분이 맡는 일을 짝지은 것으로 맞는 것은?", "options": ["내부 W는 device 동역학이 맡고, readout만 컴퓨터에서 학습한다", "내부 W를 device에서 학습하고, readout은 난수로 정해 고정해 둔다", "비선형 함수는 설계자가 tanh로 고르고, device는 기억만 맡는다", "입력 weight와 readout을 함께 BPTT로 학습하고, device는 고정한다"], "a": 0, "why": "Physical reservoir computing에서 내부 weight와 비선형 함수의 자리는 재료·device의 물리 동역학과 비선형 응답이 맡고, 만든 뒤에는 손대지 않는다. 학습하는 것은 readout W_out 하나이고 보통 컴퓨터에서 linear regression 한 번으로 구한다.", "wrongWhy": ["", "고정과 학습이 뒤바뀌었다. 내부는 고정이고 readout만 학습한다.", "Physical reservoir computing에서는 비선형 함수 자리도 device의 비선형 응답이 맡는다.", "BPTT를 피하려고 내부를 고정한 것이다. Readout은 linear regression으로 한 번에 구한다."], "ref": "d07b.html#s-fixed-vs-trained", "refLabel": "무엇이 고정이고 무엇이 학습인가(표)"}, {"id": "d08-r05", "type": "mc", "q": "호수의 물결을 reservoir로 쓰려 한다. Readout 학습 절차를 그대로 쓰기 위해 꼭 필요한 것은?", "options": ["물의 움직임을 정확히 적은 미분 가능한 방정식", "물결의 세기를 원하는 대로 조절할 수 있는 장치", "뉴런처럼 연결된 내부 구조를 가진 물", "여러 지점의 물결 높이를 잴 수 있는 방법"], "a": 3, "why": "내부가 고정이면 학습은 내부 값을 알 필요도 바꿀 필요도 없고, state만 본다. 그래서 난수 행렬이든 이온 device든 물결이든 state를 읽을 수만 있으면 학습 절차가 같다.", "wrongWhy": ["미분 가능한 모형은 내부를 학습할 때 필요하다. Readout만 학습하면 필요 없다.", "내부는 고정해 두고 손대지 않으므로 물결을 조절할 수 있어야 할 필요는 없다.", "ESN 성능은 연결 구조에 둔감하고, 재료는 뉴런을 닮지 않아도 된다.", ""], "ref": "d07b.html#s-fixed-vs-trained", "refLabel": "내부 고정 → 상태만 읽으면 된다"}, {"id": "d08-r06", "type": "mc", "q": "입력 펄스가 100 ms마다 하나씩 들어오는 task에 reservoir device를 고른다. Device가 자극 뒤 원래대로 돌아가는(이완하는) 시간이 각각 다음과 같을 때 가장 알맞은 것은?", "options": ["약 10 µs, 빠를수록 반응이 정확하므로", "약 1,000 s, 오래 기억할수록 좋으므로", "약 100 ms, input interval과 비슷하므로", "어느 것이든 비선형이면 상관없다"], "a": 2, "why": "기판의 동역학이 입력보다 훨씬 빠르면 다음 입력 전에 이완해 이전 입력의 기억이 없고, 훨씬 느리면 다음 입력 전에 제대로 반응하지 못한다. 두 timescale가 비슷해야 한다.", "wrongWhy": ["10 µs면 다음 입력(100 ms 뒤)이 오기 훨씬 전에 다 이완해 이전 입력의 흔적이 남지 않는다.", "1,000 s면 input interval 동안 거의 변하지 않아 새 입력에 제대로 반응하지 못한다.", "", "비선형이어도 timescale가 안 맞으면 기억이 없거나 반응하지 못해 reservoir가 잘 되지 않는다."], "ref": "d07b.html#s-prc-why", "refLabel": "적용 조건: 시간척도 맞추기", "core": true}, {"id": "d08-r07", "type": "mc", "q": "같은 데이터로, 내부까지 모두 gradient로 학습한 신경망과 내부를 고정하고 readout만 학습한 RC를 비교했다. RC의 특성과 맞는 결과는?", "options": ["RC가 loss의 바닥에 늘 더 낮게 도달했다", "RC는 바닥이 높지만 학습이 빠르고 간단했다", "RC가 학습은 더 느리지만 expressive power가 더 컸다", "두 방식의 도달 loss와 학습 시간이 같았다"], "a": 1, "why": "RC는 내부를 데이터에 맞춰 고치지 못하므로 expressive power가 낮아 도달할 수 있는 loss의 바닥이 더 높다. 대신 출력층만 linear regression으로 학습하므로 소실·폭주를 피하고 적은 샘플로 빨리 학습된다.", "wrongWhy": ["내부를 고치지 못하는 RC는 같은 데이터에서 바닥이 더 높은 쪽이다.", "", "반대다. RC는 expressive power를 내주고 학습의 빠름과 단순함을 얻었다.", "고정과 학습의 범위가 다르므로 expressive power와 학습 비용이 서로 다르게 나온다."], "ref": "d07b.html#s-gain-loss", "refLabel": "무엇을 얻고 무엇을 잃었나"}, {"id": "d08-r08", "type": "mc", "q": "내 이온 device는 이완이 있어 서서히 원래대로 돌아가고, 전압을 키우면 응답이 S자로 포화한다. 지금 쓸 수 있는 가장 정확한 문장은?", "options": ["이 device는 그 자체로 reservoir computing을 한다", "이 device는 RC보다 정확한 시계열 계산을 한다", "이 device는 reservoir 재료가 될 수 있다는 가설이다", "이 device는 비선형이 있어 기억은 필요 없다"], "a": 2, "why": "이완(fading memory)과 포화(비선형)는 reservoir 재료의 조건이지 계산의 증명이 아니다. 기억이 task의 timescale와 맞는지, state가 반복되는지, 읽을 수 있는 state가 몇 개인지, 새 데이터에서 baseline보다 나은지를 따로 시험해야 한다.", "wrongWhy": ["비선형과 서서히 잊음은 재료의 조건일 뿐이다. 읽을 state·학습한 readout·새 데이터·baseline이 있어야 계산이다.", "정확도는 시험하지 않았다. 리뷰는 오히려 같은 구성이면 소프트웨어 RC가 대개 낫다고 본다.", "", "Reservoir에는 비선형과 함께 서서히 잊는 기억이 필요하다. 둘은 서로를 대신하지 않는다."], "ref": "d07b.html#s-prc-hypothesis", "refLabel": "지금은 가설입니다"}, {"id": "d08-r09", "type": "mc", "q": "Leaky node의 update는 '지난 state의 (1 − α)를 남기고 새 계산값을 α만큼 섞는다'이다. α = 0.2이고 지난 state가 0.5, 새 계산값이 0이면 다음 state는?", "options": ["0.1", "0", "0.5", "0.4"], "a": 3, "why": "다음 state = (1 − 0.2) × 0.5 + 0.2 × 0 = 0.4. 새 계산값이 0이어도 지난 state의 80%가 남아 한 번에 0으로 떨어지지 않는다. 남는 비율 1 − α가 유지 계수 역할을 해 timescale를 하나 더 준다.", "wrongWhy": ["0.1은 지난 state에 α를 곱한 값이다. 남는 몫은 α가 아니라 1 − α다.", "Leaky node는 지난 state의 일부를 남기므로 새 계산값이 0이어도 한 번에 0이 되지 않는다.", "0.5는 지난 state가 그대로 남는 경우(α = 0)다. α = 0.2면 20%가 새 값 쪽으로 옮겨 간다.", ""], "ref": "d07b.html#s-zhong", "refLabel": "leaky node와 forgetting rate α", "core": true}, {"id": "d08-r10", "type": "ox", "q": "내부를 난수로 고정한 ESN을 보통 컴퓨터에서 숫자 계산으로 돌리면, 그것만으로도 물리 reservoir computing, 곧 뉴로모픽 하드웨어가 된다.", "a": false, "why": "RC 자체는 알고리즘이다. 컴퓨터 안의 난수 행렬로 돌리면 뉴로모픽 하드웨어와 관계가 없다. Reservoir를 재료·device의 물리 동역학으로 바꿀 때 physical reservoir computing이 되고, 그때 뉴로모픽(물리 컴퓨팅)과 만난다.", "wrongWhy": ["컴퓨터에서 도는 ESN은 소프트웨어 RC다. Reservoir를 물리 동역학으로 바꿔야 physical reservoir computing이 된다.", ""], "ref": "d07b.html#s-position", "refLabel": "RC는 알고리즘, PRC는 구현", "fig": "../assets/img/d07/fig5-position.svg", "figAlt": "RC는 알고리즘이고, 그 reservoir를 물리로 바꾼 PRC가 물리 컴퓨팅 줄기와 겹치는 위치도"}]}, "review-b": {"kind": "review", "title": "지난 학습 복습: state update와 readout 학습: 최소제곱에서 ridge까지", "items": [{"id": "d08-rb01", "type": "mc", "q": "어떤 device는 입력의 흔적을 약 50 ms 동안 들고 있다. 이 신호를 1,000 Hz로 sampling할 때와 10 Hz로 sampling할 때, 흔적이 남는 길이를 time step 수로 세면?", "options": ["1,000 Hz는 약 50단계, 10 Hz는 1단계도 안 된다", "두 경우 모두 50단계다(흔적의 시간이 같으므로)", "1,000 Hz는 약 5단계, 10 Hz는 약 500단계다", "두 경우 모두 1단계도 안 된다(50 ms는 짧으므로)"], "a": 0, "why": "Sampling period는 sampling rate의 역수다. 1,000 Hz면 1 ms마다 한 단계라 50 ms는 약 50단계, 10 Hz면 100 ms마다 한 단계라 50 ms는 한 단계도 안 된다. 식의 t는 번호이고, 실제 시각은 t × sampling period다.", "wrongWhy": ["", "같은 50 ms라도 한 단계의 길이가 1 ms와 100 ms로 다르므로 단계 수가 달라진다.", "거꾸로 셌다. 주기가 짧은(1,000 Hz) 쪽이 같은 시간에 단계가 더 많다.", "1,000 Hz에서는 한 단계가 1 ms라 50 ms 동안 약 50단계가 지나간다."], "ref": "d08a.html#s-sampling-numbers", "refLabel": "샘플링 주기와 시간 단계", "fig": "../assets/img/d08/fig1-sampling.svg", "figAlt": "연속 신호를 4 ms마다 재어 번호 붙은 숫자 목록으로 바꾸는 샘플링 그림", "core": true}, {"id": "d08-rb02", "type": "mc", "q": "Node 두 개 reservoir에서 W의 대각선 밖(다른 node에서 들어오는 몫)을 0으로 두었다가 0.3, −0.3으로 바꿨다. 입력 1을 한 번 넣은 뒤 0만 넣을 때 무엇이 달라지나?", "options": ["입력이 0이 되면 state가 곧바로 0이 된다", "두 node가 같은 값을 갖게 되어 하나와 같아진다", "같은 입력의 흔적이 node마다 다르게 남는다", "tanh가 없어져 state가 입력에 비례하게 된다"], "a": 2, "why": "대각선 밖이 0이면 두 node는 섞이지 않고 각자 한 가지 속도로만 줄어든다. 대각선 밖에 숫자가 있으면 한 node의 값이 다른 node의 다음 값에 들어가, 같은 입력의 흔적이 node마다 다른 속도·다른 부호로 남는다. 이 다양함이 readout의 재료다.", "wrongWhy": ["대각선의 몫과 섞여 들어오는 몫이 지난 state를 넘겨 주므로, 입력이 0이어도 흔적이 남는다.", "섞인다고 같아지지 않는다. 본문 예에서 두 node는 (0.164, −0.430)처럼 다른 값을 들고 있었다.", "", "W를 바꾸는 것은 tanh와 상관없다. tanh는 그대로 합을 −1과 1 사이로 누른다."], "ref": "d08a.html#s-update-steps", "refLabel": "노드 두 개로 손 계산", "fig": "../assets/img/d08/fig2-two-node-update.svg", "figAlt": "서로 섞이는 노드 두 개와 입력 1, 0, 0에 따른 단계별 상태 표"}, {"id": "d08-rb03", "type": "mc", "q": "같은 reservoir에 처음 입력을 1로 넣으면 첫 node가 tanh(1) = 0.762가 된다. 입력을 3으로 키우면 첫 node 값은?", "options": ["약 2.29로 세 배가 된다", "0.762보다 작아진다", "0.762 그대로다", "1보다 조금 작은 값이 된다"], "a": 3, "why": "tanh는 어떤 수가 들어와도 −1과 1 사이로 누르고, 입력이 클수록 1 근처에서 눌려 거의 늘지 않는다(포화, tanh(3) = 0.995). 입력을 세 배로 해도 state는 세 배가 되지 않는다. 이것이 비선형이다.", "wrongWhy": ["세 배가 되는 것은 선형일 때다. tanh는 1을 넘을 수 없다.", "tanh는 입력이 커지면 출력도 커지는 쪽으로만 변한다. 줄어들지 않는다.", "입력이 달라지면 tanh에 들어가는 값이 달라지므로 출력도 달라진다.", ""], "ref": "d08a.html#ch-update", "refLabel": "직접 바꿔 보기: 입력 세기"}, {"id": "d08-rb04", "type": "mc", "q": "어떤 device의 state를 재니 '한 단계 전에만 1'이면 0.30, '방금만 1'이면 0.50, '둘 다 1'이면 0.80이었다. 이 결과로 말할 수 있는 것은?", "options": ["'둘 다 1'만의 흔적은 따로 남지 않았다", "두 입력의 곱 같은 정보가 state에 섞여 들어갔다", "이 device는 최근 두 입력을 전혀 구별하지 못한다", "이 device는 superposition principle이 깨지는 비선형 device다"], "a": 0, "why": "0.30 + 0.50 = 0.80으로, 함께 넣은 결과가 따로 넣은 결과의 합과 같다(superposition principle이 성립). 비선형 전개라면 이 합과 다르고, 그 차이가 '두 입력이 함께 1이었다'는 흔적이 된다. 이 측정에서는 그런 흔적이 보이지 않는다.", "wrongWhy": ["", "곱 같은 정보는 superposition이 깨질 때 생기는 차이로 나타난다. 여기서는 합과 정확히 같다.", "세 이력이 0.30, 0.50, 0.80으로 서로 다르므로 구별은 된다.", "함께 넣은 결과가 따로 넣은 결과의 합과 같으므로 이 측정에서는 superposition principle이 성립한다."], "ref": "d08a.html#s-superposition", "refLabel": "단계 5: superposition principle 검사", "note": "선형이면 x(10) + x(01) = x(11). 본문 reservoir는 (0.926, −0.892) ≠ (0.823, −0.744)로 superposition이 깨졌다.", "core": true}, {"id": "d08-rb05", "type": "ox", "q": "Reservoir가 비선형이기만 하면, state에 weight를 곱해 더하는 readout으로 '두 입력이 서로 다른가' 같은 질문에도 항상 답할 수 있다.", "a": false, "why": "선형 readout은 state 공간에 직선(평면)을 하나 긋는 일이다. Weight를 바꿔도 직선의 기울기와 위치만 바뀐다. 본문의 node 두 개 reservoir는 비선형인데도 {10, 01}과 {00, 11}을 직선 하나로 가를 수 없었다. '비선형이다'와 'readout이 원하는 답을 꺼낼 수 있다'는 다른 말이다.", "wrongWhy": ["비선형이어도 필요한 차이가 직선으로 가를 수 있는 모양으로 남는다는 보장은 없다. 본문 reservoir가 그 예다.", ""], "ref": "d08a.html#s-readout-line", "refLabel": "readout은 직선을 긋는 일", "fig": "../assets/img/d08/fig3-history-states.svg", "figAlt": "입력 이력 00, 10, 01, 11이 상태 평면의 네 점이 되고, 직선 경계 두 개가 그어진 그림"}, {"id": "d08-rb06", "type": "mc", "q": "Node 하나, readout ŷ = w x에 sample이 다섯 개라 다섯 점을 모두 지나는 직선이 없다. Least squares가 고르는 w는?", "options": ["다섯 sample 중 하나에 딱 맞는 w", "다섯 sample의 오차 제곱 합이 가장 작은 w", "다섯 sample의 오차를 부호째 더해 가장 큰 w", "가장 큰 sample 하나의 오차만 0으로 만드는 w"], "a": 1, "why": "Least squares는 sample마다의 오차를 제곱해 모두 더한 loss가 가장 작은 w를 고른다. Loss가 바닥 하나인 그릇 모양이라 gradient = 0을 풀어 한 번에 구한다(w = Σxy ÷ Σx²). Sample 하나에 맞춘 w는 다른 sample에서 오차가 커져 합이 더 크다.", "wrongWhy": ["Sample 하나에 맞추면 나머지 sample에서 오차가 커져 전체 loss가 바닥보다 크다.", "", "부호째 더하면 양·음의 오차가 서로 지워진다. 그래서 제곱해 더한다. 또 크게가 아니라 작게 한다.", "한 sample만 맞추는 규칙은 나머지 sample을 무시한다. 모든 sample의 오차 제곱 합을 본다."], "ref": "d08a.html#s-ls-small", "refLabel": "weight 하나, sample 셋: 최소제곱", "fig": "../assets/img/d08/fig-ls-bowl.svg", "figAlt": "세 sample에 직선을 맞출 때 weight에 따른 오차 제곱 합이 바닥 하나인 그릇이 되는 그림"}, {"id": "d08-rb07", "type": "mc", "q": "비슷한 device 두 개를 node로 써서 거의 같은 값을 낸다. Least squares readout을 맞추니 weight가 (+12, −11)로 나왔고 학습 오차는 아주 작았다. 두 node 값이 학습 때보다 더 벌어진 새 sample에서는?", "options": ["학습 오차가 작았으니 새 sample에서도 잘 맞는다", "두 weight가 서로 지워져 예측이 0 근처가 된다", "두 node가 거의 같으니 weight 크기는 상관없다", "두 node의 차이가 크게 키워져 예측이 크게 틀린다"], "a": 3, "why": "12x₁ − 11x₂ = x₁ + 11(x₁ − x₂)이다. 학습 sample에서는 두 node의 아주 작은 차이를 11배로 키워 정답의 잔물결까지 맞췄지만, 차이가 더 큰 새 sample에서는 그 11배가 그대로 예측에 더해져 크게 틀린다. 이것이 overfitting이다.", "wrongWhy": ["학습 오차가 작은 것은 증거가 아니다. 작은 차이를 크게 키운 weight는 새 데이터에서 틀린다.", "두 node 값이 다르면 서로 완전히 지워지지 않는다. 남는 것은 차이의 11배다.", "Weight가 크면 두 node의 작은 차이가 크게 키워진다. Node가 비슷할수록 이 문제가 커진다.", ""], "ref": "d08a.html#s-collinear", "refLabel": "노드 둘이 거의 같을 때: overfitting", "fig": "../assets/img/d08/fig-overfit.svg", "figAlt": "학습 sample에서는 두 노드 차이가 작고 새 sample에서는 커서, 최소제곱 예측이 새 sample에서 크게 벗어나는 그림", "core": true}, {"id": "d08-rb08", "type": "mc", "q": "Node 하나 readout에서 Σxy = 10, Σx² = 10이다. Ridge 공식 w = Σxy ÷ (Σx² + λ)로 λ를 0에서 10으로 올리면 w와 training data 오차는?", "options": ["w는 1에서 0.5로 줄고, 학습 오차는 커진다", "w는 1에서 2로 늘고, 학습 오차는 작아진다", "w는 1에서 0.5로 줄고, 학습 오차도 작아진다", "w는 그대로 1이고, 학습 오차만 커진다"], "a": 0, "why": "λ = 0이면 10 ÷ 10 = 1(least squares), λ = 10이면 10 ÷ 20 = 0.5다. λ는 'weight가 크면 벌점'이라 weight를 0 쪽으로 끌어당기고, 그 대가로 training data에는 덜 맞아 학습 오차가 커진다.", "wrongWhy": ["", "λ는 분모에 더해지므로 w를 키우지 않고 줄인다.", "λ = 0이 training data 오차가 가장 작은 least squares다. Weight를 줄인 대가로 학습 오차는 커진다.", "분모가 10에서 20으로 커지므로 w는 바뀐다."], "ref": "d08a.html#s-ridge-small", "refLabel": "ridge: weight가 크면 벌점", "fig": "../assets/img/d08/fig-ridge-bowl.svg", "figAlt": "λ가 커질수록 손실 그릇이 가팔라지고 바닥이 0 쪽으로 옮겨 가는 그림", "core": true}, {"id": "d08-rb09", "type": "mc", "q": "데이터를 학습·검증·시험 세 부분으로 나눠 ridge readout을 만든다. 각 부분의 쓰임으로 맞는 것은?", "options": ["학습으로 λ를 고르고, 검증으로 weight를, 시험으로 성능을 잰다", "학습으로 weight를, 시험으로 λ를 고르고, 검증으로 성능을 잰다", "학습으로 weight를, 검증으로 λ를 고르고, 시험으로 성능을 잰다", "세 부분을 합쳐 weight와 λ를 정하고, 시험으로 성능을 잰다"], "a": 2, "why": "Weight는 training data로 구한다. λ는 학습에 쓰지 않은 validation data에서 오차가 가장 작은 값으로 고른다(training data로 고르면 늘 λ = 0이 이긴다). Test data는 학습·검증 어디에도 쓰지 않고 마지막에 성능을 한 번 잰다.", "wrongWhy": ["Training data로 λ를 고르면 학습 오차가 가장 작은 λ = 0이 늘 골라져 overfitting을 막지 못한다.", "Test data로 λ를 고르면 그 데이터도 사실상 학습에 쓴 셈이라 성능이 과대평가된다.", "", "Test data까지 weight와 λ를 정하는 데 쓰면 '새 데이터에서의 성능'을 잴 데이터가 없다."], "ref": "d08a.html#s-lambda-choice", "refLabel": "λ는 어떻게 고르나"}, {"id": "d08-rb10", "type": "ox", "q": "Ridge는 X^T X의 대각선에 λ를 더한다. 그래서 두 node가 거의 같아 0에 가까워졌던 분모 D = ad − b²가 커지고, weight가 크게 튀지 않는다.", "a": true, "why": "X^T X의 대각선 a, d는 같은 node끼리 곱한 합이고, b는 두 node를 곱한 합이다. Node가 거의 같으면 ad와 b²가 거의 같아 D가 0에 가깝다. 대각선에만 λ를 더하면 ad는 커지고 b²는 그대로라 D가 커진다(본문: 0.077 → 6.08). Weight도 (+4, −3)에서 (0.55, 0.46)으로 모였다.", "wrongWhy": ["", "본문 숫자로 확인된다. λ = 0.1을 대각선에 더하자 D가 0.077에서 6.08로 커지고 weight가 0.5 근처로 모였다."], "ref": "d08a.html#s-matrix-form", "refLabel": "행렬로 쓰면: ridge를 넣으면", "fig": "../assets/img/d08/fig-matrix-xtx.svg", "figAlt": "상태 표 X, 전치, X^T X의 칸이 합 a, b, d가 되고 대각선에 λ를 더하는 과정"}]}, "pre": {"kind": "pre", "title": "사전 테스트", "challenge": "모눈종이에 서로 다른 구불구불한 곡선 세 개를 아무렇게나 그린 뒤, 각 곡선에 곱할 숫자 세 개를 골라 더하면 목표 모양(예: 오른쪽으로 올라가는 직선)에 얼마나 가까워지는지 점 다섯 개에서 계산해 보세요. 곡선은 그대로 두고 곱할 숫자만 고르는 이 방법으로는 만들 수 없는 모양이 있을지 한 줄로 적어 보세요.", "items": [{"id": "d08-p01", "ref": "#s-sampling-numbers", "type": "short", "q": "심전도를 1초에 72번 잰다. 약 0.7초 걸리는 심장 박동 하나는 대략 몇 개의 숫자로 기록되나? (정수)", "a": ["50", "약 50", "50개", "약 50개", "50.4", "51", "약50"], "why": "숫자 개수 = 샘플링 속도 × 시간 = 72 × 0.7 ≈ 50입니다. reservoir는 이 숫자 목록을 시간 단계 하나에 하나씩 받습니다.", "refLabel": "샘플링: 숫자 개수 = 속도 × 시간"}, {"id": "d08-p02", "ref": "#b-rc-update", "type": "mc", "q": "reservoir의 상태를 한 시간 단계 update할 때 일어나는 일로 맞는 것은?", "options": ["지금 상태를 그대로 복사해 다음 상태로 넘긴다", "새 입력만으로 상태를 새로 만들고 지난 상태는 버린다", "지금 상태를 고정된 연결로 섞고 새 입력을 더해 S자로 누른다", "매 단계 내부 연결을 새로 학습한 뒤 상태를 계산한다"], "a": 2, "why": "update식은 x(t+1) = tanh(W x(t) + W_in u(t))입니다. 같은 W, W_in을 매 단계 쓰고, 둘 다 난수로 정해 학습하지 않습니다. 지난 상태를 버리면 기억이 없고, 그대로 복사하면 새 입력이 들어갈 자리가 없습니다.", "refLabel": "state update식의 계산 순서"}, {"id": "d08-p03", "ref": "#s-update-steps", "type": "ox", "q": "reservoir에 입력 1을 한 번 넣은 뒤 입력이 계속 0이면, 다음 단계에서 상태는 곧바로 0이 되어 그 입력의 흔적이 사라진다.", "a": false, "why": "지금 상태가 W로 섞여 다음 상태로 넘어가므로, 입력이 0이어도 흔적이 남으며 점점 줄어듭니다. 노드 두 개 예에서 (0.762, −0.462) → (0.164, −0.430) → (−0.063, −0.258)입니다.", "refLabel": "노드 두 개 손 계산(입력 1, 0, 0)"}, {"id": "d08-p04", "ref": "#b-reservoir-state", "type": "ox", "q": "reservoir의 현재 상태에는 지금까지 들어온 입력의 과거 전체가 읽어 낼 수 있는 형태로 담겨 있다.", "a": false, "why": "지난 입력이 모두 상태의 재료이긴 하지만, 실제로 읽을 수 있게 남는 것은 최근 입력의 일부 정보입니다. 오래된 흔적은 작아지고, 노드 수만큼의 독립 정보만 담기며, 잡음보다 작은 차이는 없는 것과 같습니다.", "refLabel": "상태에 담기는 것의 두 단서"}, {"id": "d08-p05", "ref": "#s-readout-line", "type": "mc", "q": "reservoir 상태를 점으로 찍은 공간에서, 상태에 weight를 곱해 더하기만 하는 출력부(readout)가 답을 가르는 방식을 그림으로 나타내면?", "options": ["점들을 reservoir에 다시 넣어 한 번 더 섞는다", "가장 큰 좌표값 하나만 골라 답으로 쓴다", "점마다 가장 가까운 학습 점의 답을 그대로 쓴다", "점들 사이에 직선(또는 평면)을 그어 양쪽을 가른다"], "a": 3, "why": "곱해 더하기만 하는 readout의 경계(답이 문턱과 같은 점들)는 상태 값의 1차식이라 직선(평면)입니다. 그래서 상태가 직선 하나로 갈리게 놓였는지가 중요하고, 노드 두 개 예에서는 '한 단계 전 입력'은 가를 수 있었지만 XOR은 가르지 못했습니다. 가장 가까운 점을 외워 쓰는 것은 곱해 더하기가 아닙니다.", "refLabel": "readout = 상태 평면에 직선 긋기"}, {"id": "d08-p06", "ref": "#b-ridge", "type": "mc", "q": "reservoir 상태를 섞어 답을 내는 출력 weight(곱해 더하기만 하는 readout)는 보통 어떻게 구하나?", "options": ["손실이 포물선이라 바닥을 공식으로 한 번에 푼다", "수천 번 조금씩 고쳐 가는 방법만 쓸 수 있다", "난수로 정한 뒤 그대로 둔다", "reservoir 내부 연결과 함께 학습해야 구할 수 있다"], "a": 0, "why": "readout은 곱해 더하기뿐이라 오차 제곱의 합이 포물선이고, 기울기 = 0을 풀면 w = Σxy / Σx² 같은 공식이 나옵니다. RC의 선형 readout은 대개 ridge 공식 한 번이면 됩니다. 조금씩 고치는 경사 하강도 쓸 수 있지만 '그것밖에 없다'는 틀립니다.", "refLabel": "최소제곱: 그릇의 바닥을 공식으로"}, {"id": "d08-p07", "ref": "#s-collinear", "type": "mc", "q": "거의 같은 값을 내는 노드 두 개로 출력 weight를 맞추면 어떤 일이 생기기 쉬운가?", "options": ["두 weight가 똑같이 작은 값으로 나온다", "weight가 +4, −3처럼 크게 튀어 새 데이터에서 틀리기 쉽다", "공식의 분모가 너무 커져 계산이 아예 안 된다", "학습 데이터와 새 데이터 모두에서 오차가 0이 된다"], "a": 1, "why": "두 노드가 거의 같으면 공식의 분모 D = ad − b²가 0에 가까워져 두 노드의 작은 차이가 크게 증폭됩니다. weight 크기에 벌점을 주는 ridge(λ)를 넣으면 weight가 줄고 새 데이터 오차가 크게 줄어듭니다(예: 0.317 → 0.0009).", "refLabel": "거의 같은 노드 둘"}, {"id": "d08-p08", "ref": "#s-random-features", "type": "ox", "q": "모양을 바꾸지 않는 무작위 곡선 여러 개를 알맞은 비율로 섞기만 해도, 꽤 복잡한 목표 곡선을 거의 그대로 흉내 낼 수 있다.", "a": true, "why": "곡선 수 K를 2, 5, 20으로 늘리면 오차(NMSE)가 0.33, 0.0074, 0.0001 미만으로 줄었습니다. 다만 readout은 있는 것을 섞을 뿐 상태에 없는 정보를 만들지는 못하므로, 기억·비선형·다양함이 있어야 고정해도 됩니다.", "refLabel": "고정된 난수 곡선 K개 섞기"}]}, "1-check": {"kind": "check", "title": "잠깐 점검 · 샘플링", "items": [{"id": "d08-q01", "type": "short", "q": "72 Hz로 sampling하면 sampling period는 몇 ms인가? (소수 첫째 자리까지)", "a": ["13.9", "13.9 ms", "약 13.9", "13.89", "14", "약 14"], "why": "주기 = 1/72 s = 0.0139 s = 13.9 ms. 72 ms라고 답했다면 속도(1초에 몇 번)와 주기(한 번과 다음 사이의 시간)를 바꿔 쓴 것 — 둘은 서로 역수다(기초 계단: 시계열).", "ref": "#s-sampling-numbers", "refLabel": "샘플링 주기 = 1/샘플링 속도(250 Hz ↔ 4 ms)"}, {"id": "d08-q02", "type": "short", "q": "가속도 센서 신호를 10 Hz로 기록해 3초짜리 손동작 하나를 자르면 time step이 몇 개인가? (숫자만)", "a": ["30", "30개"], "why": "3 s × 10 /s = 30. Zhong 2022도 손동작 하나를 30 time step으로 만들었다(p.677). 0.3이 나왔다면 3을 10으로 나눈 것 — 개수 = 시간 × 속도다.", "ref": "#s-sampling-numbers", "refLabel": "숫자 개수 = 시간 × 샘플링 속도"}]}, "2-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 노드 두 개 update", "items": [{"id": "d08-q03", "type": "short", "q": "[풀이 예시 확인] 본문 reservoir에서 $x(0) = (0, 0)$, $u(0) = 1$이면 $x(1)$의 첫째 값 $x_1(1)$은? ($\\tanh(1) = 0.762$)", "a": ["0.762", "0.76", "+0.762"], "why": "지금 state가 0이라 섞기 항이 0이고, 입력 항 $W_{in}[1] \\times 1 = 1.0$만 남는다. $\\tanh(1.0) = 0.762$. 1.0이라고 답했다면 $\\tanh$로 누르는 단계를 빠뜨린 것(기초 계단: state update식).", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}, {"id": "d08-q04", "type": "short", "q": "[일부 채우기] 입력을 $u = 1, 1$로 넣는다. $x(1) = (0.762, -0.462)$에서 node 1의 섞기 결과(지금 state에 $W$를 곱한 값)는 0.166이고, 입력 1의 weight는 $W_{in}[1] = 1.0$이다. 그러면 $z_1 = 0.166 + ▢$. 빈칸과 $z_1$을 '빈칸,답' 꼴로 (예: 0.5,0.666)", "a": ["1,1.166", "1.0,1.166", "1, 1.166", "1.0, 1.166"], "why": "새 입력 항 $W_{in}[1] \\times u(1) = 1.0 \\times 1 = 1.0$이 더해져 $z_1 = 1.166$, $\\tanh(1.166) = 0.823$이 입력 이력 11의 $x(11)$ 첫째 값이다. 빈칸에 0을 넣었다면 입력이 0이던 앞의 계산(0.166만 쓴 것)을 그대로 옮긴 것 — 이번에는 두 번째 입력도 1이다.", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}, {"id": "d08-q05", "type": "short", "q": "[혼자 풀기] 같은 reservoir에 $x(0) = (0, 0)$, $u(0) = 0.5$를 넣으면 $x(1)$의 둘째 값 $x_2(1)$은? ($\\tanh(0.25) = 0.245$, $\\tanh$는 부호만 바꾸면 $\\tanh(-a) = -\\tanh(a)$)", "a": ["-0.245", "−0.245", "-0.24", "−0.24", "-0.2449"], "why": "$z_2 = W_{in}[2] \\times 0.5 = -0.5 \\times 0.5 = -0.25$, $\\tanh(-0.25) = -0.245$. +0.245가 나왔다면 $W_{in}$의 둘째 값이 음수(−0.5)인 것을 놓친 것. −0.5가 나왔다면 입력 0.5를 곱하지 않은 것.", "ref": "#s-update-steps", "refLabel": "노드 두 개 손 계산 단계 1–3"}]}, "3-check": {"kind": "check", "title": "잠깐 점검 · 상태의 뜻", "items": [{"id": "d08-q06", "type": "ox", "q": "본문의 node 두 개 reservoir에서 '둘 다 1'(11)의 state는 '한 단계 전 1'(10)과 '방금 1'(01)의 state를 더한 것과 같다.", "a": false, "why": "$x(10)+x(01) = (0.926, -0.892)$이지만 $x(11) = (0.823, -0.744)$다. $\\tanh$ 때문에 superposition principle이 깨지고, 그 차이가 '두 입력이 함께 1이었다'는 흔적이다. 같다고 생각했다면 reservoir를 선형으로 상상한 것이다.", "ref": "#s-superposition", "refLabel": "superposition principle 검사"}, {"id": "d08-q07", "type": "mc", "q": "입력 이력 네 가지(00, 10, 01, 11)가 만든 state 네 점 $(0, 0)$, $(0.164, -0.430)$, $(0.762, -0.462)$, $(0.823, -0.744)$에서 '직선 하나'로 가를 수 없는 질문은?", "options": ["방금 들어온 입력이 1인가 (01, 11 대 00, 10)", "한 단계 전 입력이 1인가 (10, 11 대 00, 01)", "두 입력이 서로 다른가 (10, 01 대 00, 11)", "아무 입력도 없었는가 (00 대 나머지)"], "a": 2, "why": "00–11을 잇는 선분과 10–01을 잇는 선분이 엇갈리므로 직선 하나로는 못 가른다(XOR, Day 17–18). 앞의 둘은 본문에서 직선으로 갈렸고, 넷째는 원점 하나만 떼어 내면 되므로 가능하다. '비선형이면 다 된다'는 생각에서 헷갈리기 쉽다.", "ref": "#s-readout-line", "refLabel": "readout = 직선 긋기, 세 질문"}]}, "3-end": {"kind": "end", "title": "3장 마무리 퀴즈", "items": [{"id": "d08-q08", "type": "mc", "q": "'state는 입력 이력의 비선형 전개다'에 대한 설명으로 가장 정확한 것은?", "options": ["지금 state 하나에 과거 입력 전체가 빠짐없이 기록된다", "지금 입력만으로 정해지고 지난 입력과는 상관이 없다", "비선형이므로 어떤 질문이든 선형 readout으로 답할 수 있다", "지난 입력들의 고정된 비선형 함수이며, 최근 것 일부만 읽힌다"], "a": 3, "why": "$x(t) = F(u(t-1), u(t-2), \\dots)$이지만 오래된 흔적은 작아지고(Day 15–16), 독립 정보는 node 수만큼이며(Day 19–20), 잡음보다 작은 차이는 쓸 수 없다. 첫 보기는 흔한 과장, 둘째는 손 계산에서 '입력 0에도 남는 흔적'이 반례, 셋째는 네 점 그림의 XOR이 반례다.", "ref": "#b-reservoir-state", "refLabel": "상태 = 입력 이력의 비선형 전개, 두 단서"}]}, "4-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · 최소제곱과 ridge", "items": [{"id": "d08-q09", "type": "short", "q": "[풀이 예시 확인] $x = 1, 2, 3$, $y = 1.1, 1.9, 3.2$일 때 least squares $w = \\sum xy / \\sum x^2$는? (소수 셋째 자리까지)", "a": ["1.036", "1.04", "1.0357"], "why": "$\\sum xy = 1.1 + 3.8 + 9.6 = 14.5$, $\\sum x^2 = 14$, $14.5/14 = 1.036$. 0.97 근처가 나왔다면 $\\lambda = 1$을 넣은 ridge 값이다. 1.1이나 0.95가 나왔다면 sample 하나에만 맞춘 값이다(세 sample 예의 표).", "ref": "#s-ls-small", "refLabel": "세 sample의 최소제곱"}, {"id": "d08-q10", "type": "short", "q": "[일부 채우기] 같은 데이터, ridge $\\lambda = 1$. $w = 14.5 / (14 + ▢) = ?$ 빈칸과 답을 '빈칸,답' 꼴로 (예: 2,0.906)", "a": ["1,0.967", "1, 0.967", "1,0.97", "1, 0.97", "1,0.9667"], "why": "분모에 $\\lambda = 1$이 더해져 $14.5/15 = 0.967$. 분자에 더했다면 $15.5/14 = 1.107$로 오히려 커진다 — Ridge는 분모(state² 합)에 $\\lambda$를 더해 weight를 0 쪽으로 끈다.", "ref": "#s-ridge-small", "refLabel": "weight 하나의 ridge"}, {"id": "d08-q11", "type": "short", "q": "[혼자 풀기] 새 데이터 $x = 1, 2$, $y = 2, 3$. Least squares $w$와 $\\lambda = 3$인 ridge $w$를 'least squares,ridge' 꼴로 (예: 1.2,0.8)", "a": ["1.6,1", "1.6, 1", "1.6,1.0", "1.6, 1.0"], "why": "$\\sum xy = 2 + 6 = 8$, $\\sum x^2 = 1 + 4 = 5$. Least squares $8/5 = 1.6$, ridge $8/(5+3) = 1.0$. 2.5가 나왔다면 $\\sum y/\\sum x$(5/2)로 계산한 것 — 곱의 합을 제곱의 합으로 나눈다.", "ref": "#s-ridge-small", "refLabel": "최소제곱과 ridge 공식"}]}, "4-end": {"kind": "end", "title": "4장 마무리 퀴즈", "items": [{"id": "d08-q12", "type": "mc", "q": "거의 같은 값을 내는 node 두 개에 least squares($\\lambda = 0$) readout을 맞추면 weight가 +4, −3처럼 커진다. 가장 직접적인 이유는?", "options": ["Sample이 너무 많아 식끼리 서로 부딪쳐서 풀 수 없으므로", "tanh가 포화되어 두 node 값이 1 근처에 몰리므로", "Learning rate가 너무 커서 걸음마다 바닥을 지나치므로", "분모 D = ad − b²가 0에 가까워 작은 차이가 커지므로"], "a": 3, "why": "두 node가 거의 같으면 $ad \\approx b^2$라 $D = 0.077$처럼 작아지고, 0에 가까운 수로 나누면 해가 튄다. 예측은 $x_1 + 3(x_1 - x_2)$꼴이 되어 두 node의 작은 차이를 키운다. $\\lambda$를 대각선에 더하면 $D = 6.08$로 커진다. Learning rate는 gradient descent의 개념으로, 공식으로 한 번에 푸는 least squares에는 없다.", "ref": "#s-collinear", "refLabel": "분모 D가 거의 0"}, {"id": "d08-q13", "type": "ox", "q": "Ridge의 $\\lambda$는 training data에서 오차가 가장 작아지는 값을 고르면 된다.", "a": false, "why": "Training data 오차는 $\\lambda = 0$일 때 가장 작다(거의 같은 node 두 개의 예시 데이터로 한 Claude 계산: 0.00098). 그런데 그때 새 데이터 오차가 가장 크다(같은 계산: 0.317). 그래서 $\\lambda$는 학습에 쓰지 않은 validation data로 고르고, 성능은 또 다른 test data로 잰다(Day 10 사다리의 held-out 단).", "ref": "#s-lambda-choice", "refLabel": "λ 고르기: 검증 데이터"}, {"id": "d08-q27", "type": "mc", "q": "State 표 $X$(행 = sample, 열 = node)에서 $X^{\\mathsf T}X$의 (1, 2) 칸에는 무엇이 들어가나?", "options": ["Node 1 열과 node 2 열을 같은 자리끼리 곱해 더한 값", "Node 1 열의 값들을 모두 더한 값", "Sample 1 행과 sample 2 행을 같은 자리끼리 곱해 더한 값", "Node 1과 node 2의 readout weight를 곱한 값"], "a": 0, "why": "$X^{\\mathsf T}$의 1행은 $X$의 node 1 열이므로 (1, 2) 칸 = (node 1 열)·(node 2 열) = $\\sum x_1 x_2 = b$(node 둘 예의 29.97)다. Sample 행끼리 곱한 값은 sample × sample 크기의 다른 표($XX^{\\mathsf T}$)의 칸이다. Weight는 이 표로 푸는 미지수이지 표의 재료가 아니다.", "ref": "#s-matrix-form", "refLabel": "전치와 XᵀX"}]}, "5-check": {"kind": "check", "title": "풀이 예시 → 일부 채우기 → 혼자 풀기 · softmax", "items": [{"id": "d08-q14", "type": "short", "q": "[풀이 예시 확인] 점수 (2.0, 1.0, 0.1)의 softmax에서 첫째 종류의 확률은? ($e^{2} = 7.389$, 합 = 11.212, 소수 셋째 자리까지)", "a": ["0.659", "0.66", "65.9%", "66%"], "why": "$7.389 / 11.212 = 0.659$. 0.645처럼 2.0/3.1로 계산했다면 $e^{\\text{점수}}$를 거치지 않고 점수를 그대로 나눈 것 — Softmax는 먼저 $e$의 거듭제곱으로 바꾼다(기초 계단: softmax).", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}, {"id": "d08-q15", "type": "short", "q": "[일부 채우기] 점수 (1.0, 0.0). 첫째 확률 $= 2.718 / (2.718 + ▢) = ?$ 빈칸과 답을 '빈칸,답' 꼴로 (예: 2,0.576)", "a": ["1,0.731", "1, 0.731", "1,0.73", "1, 0.73"], "why": "$e^{0} = 1$이므로 $2.718/3.718 = 0.731$. 빈칸에 0을 넣었다면 점수 0을 그대로 쓴 것 — 점수 0도 $e^0 = 1$로 바뀌어 확률을 나눠 갖는다.", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}, {"id": "d08-q16", "type": "short", "q": "[혼자 풀기] 두 종류의 점수가 (3.0, 1.0)이다. $e^{3} = 20.09$, $e^{1} = 2.718$일 때 첫째 종류의 softmax 확률은? (소수 둘째 자리까지)", "a": ["0.88", "0.881", "88%", "0.8808"], "why": "$20.09/(20.09 + 2.718) = 20.09/22.81 = 0.881$. 0.75(=3/4)가 나왔다면 점수를 그대로 나눈 것. 점수 차이 2가 확률에서는 88:12로 벌어진다 — 이것이 $e^{\\text{점수}}$의 효과다.", "ref": "#s-softmax-steps", "refLabel": "softmax 세 단계(e^점수 → 합 → 나누기)"}]}, "5-end": {"kind": "end", "title": "5장 마무리 퀴즈", "items": [{"id": "d08-q17", "type": "mc", "q": "RC의 선형 readout(node 수백 개, 연속값 출력)을 학습할 때 gradient descent·Adam보다 ridge 한 번이 흔히 쓰이는 이유로 가장 알맞은 것은?", "options": ["Loss가 포물선이라 공식으로 바로 풀리고 learning rate를 고를 필요가 없어서", "Ridge가 언제나 더 정확하다는 것이 증명되어 있어서", "Adam은 곱해 더하기만 하는 모델에는 쓸 수 없어서", "Ridge는 training data 없이도 weight를 정할 수 있어서"], "a": 0, "why": "선형 readout + 제곱 오차는 포물선 loss라 gradient = 0을 바로 풀 수 있다(Stepney의 '한 번의 학습'). Adam도 선형 모델에 쓸 수 있고 같은 바닥으로 갈 수 있지만, learning rate와 걸음 수를 정해야 한다. '언제나 더 정확'은 과장이고, ridge도 training data로 푼다.", "ref": "#s-two-paths-table", "refLabel": "언제 무엇을 쓰나"}, {"id": "d08-q18", "type": "ox", "q": "물리 reservoir의 계산 기여를 평가할 때, 여러 층의 비선형 readout으로 얻은 높은 정확도만으로 '재료가 계산했다'고 말할 수 있다.", "a": false, "why": "Singh 2026은 선형(아핀) readout이 가장 분명한 기준이고, 복잡한 비선형 readout의 성능만으로 재료의 기여를 추론해서는 안 된다고 쓴다(p.18). 비선형 readout은 스스로 feature를 만들어 재료 없이도 맞힐 수 있다.", "ref": "#s-rc-readout", "refLabel": "RC에서는: 선형 readout이 기준"}, {"id": "d08-q28", "type": "short", "q": "세 종류 분류에서 softmax 확률이 (0.659, 0.242, 0.099)이고 정답이 B다. Cross-entropy loss는? ($\\ln 0.242 = -1.419$, 소수 둘째 자리까지)", "a": ["1.42", "1.419", "약 1.42", "1.41"], "why": "Cross-entropy = −ln(정답 칸의 확률) = −ln 0.242 = 1.42. 정답이 A일 때(0.417)보다 크다 — 정답 칸에 낮은 확률을 줬기 때문이다. 0.417이 나왔다면 가장 큰 확률 칸(A)을 쓴 것이고, 0.242가 나왔다면 −ln을 빠뜨린 것이다.", "ref": "#s-cross-entropy", "refLabel": "교차 엔트로피 = −ln p정답"}, {"id": "d08-q29", "type": "mc", "q": "Loss $L(w) = 14w^2 - 29w + 15.06$(gradient $28w - 29$)에서 $w = 0$부터 gradient descent를 한다. Learning rate를 0.02에서 0.08로 올리면?", "options": ["걸음이 네 배가 되어 바닥에 네 배 빨리 닿는다", "첫 걸음에 바닥을 지나치고, 걸음마다 바닥에서 더 멀어진다", "Learning rate와 상관없이 같은 경로를 따라 바닥에 닿는다", "Gradient가 0이 되어 w = 0에서 더 움직이지 않는다"], "a": 1, "why": "η = 0.08이면 첫 걸음이 0 + 0.08 × 29 = 2.32로 바닥(1.036)을 지나치고, 바닥까지의 거리가 걸음마다 (1 − 28 × 0.08) = −1.24배가 되어 2.32 → −0.557 → 3.01로 커진다(발산). 0.02면 0.44배씩 줄어 곧게 다가간다. 'learning rate를 키우면 빨라진다'는 바닥을 넘지 않는 범위에서만 맞다(Day 11–12에서 보폭 0.5로 loss가 9 → 81로 나빠진 것과 같은 현상).", "ref": "#s-learning-rate", "refLabel": "학습률만 바꾼 경사 하강"}]}, "6-check": {"kind": "check", "title": "잠깐 점검 · 왜 고정해도 되나", "items": [{"id": "d08-q19", "type": "mc", "q": "고정된 난수 tanh 곡선 $K$개를 섞어 목표 곡선을 흉내 내는 예에서, $K = 20$개를 쓰면 목표를 거의 완벽히 흉내 냈다. 이때 학습한 것은?", "options": ["곡선 20개의 모양을 정하는 숫자 a, c", "곡선 20개를 섞는 비율(weight) 21개", "목표 곡선 sin(3u) + 0.5u²의 식", "입력 u를 넣을 범위(−1에서 1)"], "a": 1, "why": "곡선 모양 $\\tanh(a_j u + c_j)$의 $a$, $c$는 난수로 고정했고, 학습한 것은 섞는 비율(상수 1개 + 곡선 20개 = 21개)뿐이다. Reservoir에서 $W$, $W_{in}$을 고정하고 $W_{out}$만 학습하는 것과 같은 구조다.", "ref": "#s-random-features", "refLabel": "고정된 난수 곡선 K개 섞기"}, {"id": "d08-q20", "type": "mc", "q": "어떤 reservoir의 state에 10단계 전 입력의 흔적이 남아 있지 않다. 10단계 전 입력이 필요한 task에서 readout으로 할 수 있는 것은?", "options": ["λ를 키워 weight를 더 작게 만든다", "Weight를 크게 학습해 작은 흔적을 키운다", "reservoir(또는 입력 방식)를 바꿔야 한다", "Readout을 softmax로 바꿔 확률로 답한다"], "a": 2, "why": "Readout은 state에 있는 것을 섞을 뿐 없는 것을 만들지 않는다. 흔적이 아예 없으면 키울 것도 없다. 기억이 부족하면 reservoir의 timescale(Day 15–16)나 node 수(Day 19–20), 입력 방식을 바꿔야 한다. 이것이 Liang이 말하는 '낮은 expressive power'의 한 얼굴이다.", "ref": "#s-readout-limits", "refLabel": "readout이 고칠 수 없는 것"}]}, "final": {"kind": "final", "title": "오늘의 종합 퀴즈", "items": [{"id": "d08-q21", "type": "mc", "q": "250 Hz로 sampling한 시계열에서 '10단계 전'은 실제로 몇 ms 전인가?", "options": ["10 ms", "25 ms", "40 ms", "2,500 ms"], "a": 2, "why": "Sampling period 4 ms × 10 = 40 ms. 같은 '10단계'도 10 Hz라면 1초다. 단계 수만 보고 실제 시간을 말할 수 없는 이유이고, Day 15–16·Day 23–24의 timescale 비교에서 다시 쓴다.", "ref": "#s-sampling-numbers", "refLabel": "시간 단계 → 실제 시각(t × 샘플링 주기)"}, {"id": "d08-q22", "type": "mc", "q": "Reservoir의 $W$와 $W_{in}$을 학습하지 않아도 되는 근거로 가장 정확한 것은? (기억·비선형 섞임·다양함이 state에 있다는 조건에서)", "options": ["난수로 정한 weight가 우연히 정답을 담고 있어서", "Readout이 비선형이라 어떤 관계든 스스로 만들어 내서", "고정 feature의 선형 결합으로 되는 task가 많고 한 번에 풀려서", "Device reservoir가 소프트웨어보다 대개 더 정확해서"], "a": 2, "why": "조건부 답이 핵심이다. 조건이 깨지면(기억 부족, XOR처럼 갈리지 않는 state, 복사본 node) readout으로 고칠 수 없다. 둘째 보기의 readout은 선형이고, 넷째는 반대다: 같은 구성이면 대개 소프트웨어 RC가 더 정확하다(Liang 2024, p.201).", "ref": "#s-fixed-conditions", "refLabel": "고정해도 되는 조건 세 가지"}, {"id": "d08-q23", "type": "short", "q": "데이터 $x = 2, 2$, $y = 2, 4$. Least squares $w$와 $\\lambda = 4$인 ridge $w$를 'least squares,ridge' 꼴로 (예: 1.2,0.8)", "a": ["1.5,1", "1.5, 1", "1.5,1.0", "1.5, 1.0"], "why": "$\\sum xy = 4 + 8 = 12$, $\\sum x^2 = 8$. Least squares $12/8 = 1.5$, ridge $12/(8+4) = 1.0$. 같은 $x$에서 정답이 2와 4로 갈리면 least squares는 그 평균(3)을 내는 직선($w = 1.5$)을 고른다.", "ref": "#s-ridge-small", "refLabel": "최소제곱과 ridge 공식"}, {"id": "d08-q24", "type": "mc", "q": "'readout이 계산을 다 하는 것 아닌가'를 가려내는 실험으로 가장 알맞은 것은?", "options": ["Reservoir state로 training data에서 정확도를 잰다", "Node 수를 늘려 정확도가 더 오르는지 본다", "Readout을 여러 층으로 바꿔 정확도를 올린다", "Reservoir를 뺀 readout과 새 데이터로 비교한다"], "a": 3, "why": "같은 readout·같은 feature 수의 baseline과 held-out에서 비교해야 reservoir의 몫이 보인다(Day 10 사다리의 baseline 단, Day 21–22). Training data 정확도는 외우기로도 오르고, 여러 층 readout은 오히려 readout의 몫을 키운다.", "ref": "#ch-objection", "refLabel": "오늘의 반론: delay tap baseline"}, {"id": "d08-q26", "type": "ox", "q": "물리 reservoir의 정확도가 같은 구성의 소프트웨어 ESN보다 조금 낮다면, 그것만으로 그 물리 reservoir는 쓸모가 없다고 결론 낼 수 있다.", "a": false, "why": "정확도만으로는 판단할 수 없다. Task에 필요한 정확도를 넘는지, 그리고 그 정확도에서 회로·전력·지연 같은 시스템 비용이 디지털 구현보다 낮은지를 함께 비교해야 한다(Day 10 사다리의 시스템 비용 단, Day 31–32). 반대로 정확도가 같아도 자원을 더 쓰면 이점이 없다. Liang 2024는 비슷한 구성이면 하드웨어 잡음 때문에 소프트웨어 RC가 대개 더 정확하다고 보고(p.201), 디지털 RC보다 자원을 더 쓰는 physical reservoir computing은 의미가 없다고 쓴다(p.202).", "ref": "#s-physical-rc", "refLabel": "물리 reservoir에서는: 읽을 수 있음과 자원 조건"}, {"id": "d08-q30", "type": "mc", "q": "Readout의 λ를 validation data로 고르고, 학습·검증에 쓰지 않은 test data로 성능을 한 번 쟀다. 이 단계가 지우는 '다른 설명'은?", "options": ["Readout이 학습 sample을 외워서 맞혔을 수 있다", "Reservoir 없이 readout만으로도 같은 점수가 났을 수 있다", "같은 입력에도 state가 매번 달라 운으로 맞았을 수 있다", "디지털 회로로 하는 편이 더 쌌을 수 있다"], "a": 0, "why": "Held-out(Day 10 사다리 4단)은 '외웠을 수 있다'를 지운다. 둘째는 baseline(5단), 셋째는 읽을 수 있는 state의 반복 가능성(2단), 넷째는 시스템 비용(6단)이 지우는 설명이다.", "ref": "#s-ladder-map", "refLabel": "오늘 한 일 ↔ Day 10 사다리"}]}}}</script>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">학습 완료</h2>
+<div class="done-box" data-day="d08a">
+  <div class="done-state" role="status" aria-live="polite"></div>
+  <div class="done-gain"><b>이번 단위에서 새로 다룬 것</b><span>샘플링과 시간 단계, 노드끼리 섞는 state update, 상태 = 입력 이력의 비선형 전개, 최소제곱과 ridge의 λ로 readout 구하기</span><em>이 중 하나를 골라 소리 내어 한 문장으로 설명해 보세요. 막히는 곳만 다시 보면 됩니다.</em></div>
+  <p class="done-desc">이 학습 단위를 마쳤으면 눌러 주세요. 쓰기·영상·심화·추가 연습은 필요 없고, 퀴즈 점수와도 따로 기록됩니다. '완료'는 이 단위를 끝냈다는 표시이지 모든 내용을 완벽히 익혔다는 뜻이 아닙니다.</p>
+  <div class="btn-row local-only">
+    <button type="button" class="sbtn primary" data-action="done">✓ 학습 완료로 표시</button>
+    <button type="button" class="sbtn ghost" data-action="undone">학습 중으로 되돌리기</button>
+  </div>
+  <div class="done-msg" role="alert"></div>
+  <div class="done-static static-only"></div>
+</div>
+<div class="next-unit">
+<p><strong>다음 학습</strong> — <a href="../days/d08b.html">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유 →</a></p>
+</div>
+<section class="comments" id="comments"></section>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../days/d07b.html" class="pagination-link" aria-label="Day 12 · ESN·LSM과 물리 reservoir computing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Day 12 · ESN·LSM과 물리 reservoir computing</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../days/d08b.html" class="pagination-link" aria-label="Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유">
+        <span class="nav-page-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p><span class="ft-links"><a href="../index.html">Home</a> <a href="../research.html">Research</a> <a href="../plan.html">Curriculum</a> <a href="../projects/index.html">Projects</a> <a href="../notes.html">Notes</a> <a href="../papers.html">Papers</a> <a href="../ledger/terms.html">Glossary</a></span><span class="ft-copy">Copyright © 2026 All rights reserved · Hyeon Woo Yang · KAIST</span></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
