@@ -2191,3 +2191,8 @@ footer.footer .nav-footer { padding-top: 2.2rem; padding-bottom: 2.2rem; }
 .research-page .rm-wide th, .research-page .rm-wide td { vertical-align: top; }
 .research-page h2 { margin-top: 2.6rem; }
 .research-page .callout { font-size: 0.92rem; }
+/* 2026-11-08 연구 로드맵: 휴대폰에서는 모든 표를 옆으로 밀어 본다(칸이 눌려 글자가 깨지지 않게) */
+@media (max-width: 640px) {
+  .research-page main table:not(.rm-wide > table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .research-page main table:not(.rm-wide > table) th, .research-page main table:not(.rm-wide > table) td { min-width: 9rem; }
+}
