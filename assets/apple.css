@@ -1,0 +1,147 @@
+/* =====================================================================
+   apple.css — 2026-11-09 apple-design 스킬 점검 반영 (study.css · projects.css 다음에 읽힌다)
+   원칙: 중립 바탕 + 포인트 색 하나 · 큰 제목·촘촘한 자간 · 8px 간격 · 겹친 부드러운 그림자 · 알약 버튼(44px)
+         · 머리 막대만 반투명 유리 · 300ms 전환(움직임 줄이기면 끔) · 가로 폭별 유동 글자 크기
+   하지 않은 것: 어두운 모드(사이트가 밝은 화면 전용으로 설계됨 · SVG 그림 색이 고정) · 스크롤 등장 애니메이션(학습 사이트라 뺌)
+   프로젝트 페이지(html.proj-page)의 따뜻한 색은 그대로 두고 모양·간격·그림자 규칙만 공유한다.
+   ===================================================================== */
+
+/* ---------- 1. 토큰 ---------- */
+:root {
+  --ink: #1d1d1f;              /* 제목 */
+  --text: #2b2f36;             /* 본문 (흰 바탕 12.9:1) */
+  --muted: #6e6e73;            /* 보조 글 (흰 바탕 4.9:1, #f5f5f7 위 4.6:1) */
+  --subtle: #6e6e73;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-soft: rgba(0, 0, 0, 0.05);
+  --rule: rgba(0, 0, 0, 0.08);
+  --bg-soft: #f5f5f7;
+  --paper-2: #f5f5f7;
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-12: 3rem; --space-16: 4rem;
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px; --radius-full: 980px;
+  --radius: var(--radius-md);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 32px rgba(0, 0, 0, 0.08);
+  --shadow: var(--shadow-sm);
+
+  --duration-fast: 150ms; --duration-base: 300ms;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- 2. 글자: 큰 제목, 촘촘한 자간, 폭에 따라 유동 ---------- */
+body { color: var(--text); line-height: 1.75; letter-spacing: -0.005em; }
+#title-block-header.quarto-title-block { padding: var(--space-3) 0 var(--space-6); margin-bottom: var(--space-8); border-bottom: 1px solid var(--line); }
+#title-block-header.quarto-title-block .title {
+  font-size: clamp(1.9rem, 1.35rem + 1.6vw, 2.5rem); line-height: 1.18; letter-spacing: -0.025em; font-weight: 700; color: var(--ink);
+}
+#title-block-header.quarto-title-block .subtitle { font-size: 1.02rem; line-height: 1.65; color: var(--muted); font-weight: 400; margin-top: var(--space-3); max-width: 44rem; }
+main h2 { font-size: clamp(1.4rem, 1.15rem + 0.7vw, 1.7rem); letter-spacing: -0.02em; line-height: 1.3; margin: var(--space-12) 0 var(--space-4); }
+main h3 { font-size: 1.22rem; letter-spacing: -0.015em; margin: var(--space-8) 0 var(--space-3); }
+main h4 { font-size: 1.05rem; margin: var(--space-6) 0 var(--space-2); }
+main p { margin: 0 0 var(--space-4); }
+main li { margin-bottom: var(--space-1); }
+.quarto-title-breadcrumbs, .quarto-page-breadcrumbs { font-size: 0.8rem; color: var(--muted); }
+
+/* ---------- 3. 머리 막대: 반투명 유리는 여기에만 ---------- */
+#quarto-header {
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.navbar .nav-link {
+  border-radius: var(--radius-full); padding: 0.4rem 0.9rem; font-weight: 500; color: var(--muted);
+  transition: background-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+.navbar .nav-link:hover { background: var(--bg-soft); color: var(--ink); }
+.navbar .nav-link.active { background: var(--bg-soft); color: var(--ink); font-weight: 600; }
+.fs-control { border-radius: var(--radius-full); border-color: var(--line); }
+.fs-control button { font-size: 0.78rem; padding: 3px 11px; min-height: 28px; }
+
+/* ---------- 4. 옆 메뉴·이 페이지 ---------- */
+#quarto-sidebar .sidebar-item .sidebar-item-text, #quarto-sidebar .sidebar-item-container a {
+  border-radius: var(--radius-sm); transition: background-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+#quarto-sidebar .sidebar-item-container:hover > a, #quarto-sidebar .sidebar-item-container a:hover { background: var(--bg-soft); color: var(--ink); }
+#quarto-sidebar .sidebar-item-container a.active, #quarto-sidebar .sidebar-item-container .sidebar-link.active { background: var(--bg-soft); color: var(--ink); font-weight: 600; }
+#quarto-margin-sidebar .toc-active, #TOC .nav-link.active { color: var(--ink); font-weight: 600; }
+#TOC .nav-link { color: var(--muted); }
+
+/* ---------- 5. 버튼: 알약, 44px, 살짝 들림 ---------- */
+.sbtn {
+  border-radius: var(--radius-full); border: 1px solid var(--line); background: #fff; color: var(--ink);
+  padding: 0.42rem 1rem; font-weight: 500;
+  transition: transform var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease), background-color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+.sbtn:hover { border-color: rgba(0, 0, 0, 0.16); color: var(--ink); background: #fff; }
+.sbtn.primary, a.sbtn.hh-go, .pj-card .pj-go.sbtn {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+  min-height: 44px; padding: 0.7rem 1.5rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: var(--radius-full);
+}
+.sbtn.primary:hover, a.sbtn.hh-go:hover { background: var(--accent-strong); border-color: var(--accent-strong); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(43, 89, 195, 0.28); color: #fff; }
+.sbtn.primary:active, a.sbtn.hh-go:active { transform: translateY(0); box-shadow: none; }
+/* 프로젝트 홈의 큰 시작 카드: 원래 모양을 두고 모서리·들림만 */
+.pj-start-btn { border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+.pj-start-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.sbtn.ghost { border-color: transparent; background: transparent; color: var(--muted); }
+.sbtn.ghost:hover { background: var(--bg-soft); color: var(--ink); }
+.sbtn.tagbtn, .sbtn.lab-small, .pstep .pstep-b { min-height: 0; border-radius: var(--radius-full); }
+a.hh-link { text-decoration-color: var(--line); }
+
+/* ---------- 6. 카드·상자: 16–20px 모서리, 겹친 그림자, 링크 카드는 들림 ---------- */
+.paper, .pj-card, .today-card, .home-plate, .day-map, .keypoints, .rv-q, .rv-tau, .rv-branch, .rv-sys, .rv-three-c, .pj-hero, .howstep, .labcode, .screen, .quiz, .basics, .unit-head, .pstep, .lab, .nt-banner {
+  border-radius: var(--radius-lg);
+}
+.paper, .pj-card, .today-card, .home-plate, .rv-q, .pj-hero, .howstep, .quiz { box-shadow: var(--shadow-sm); border-color: var(--line); }
+.paper, .pj-card, .today-card, a.rm-seg, .pj-start-btn, figure.fig img.zoomable {
+  transition: transform var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease), border-color var(--duration-fast) var(--ease);
+}
+.paper:hover, .pj-card:hover, .today-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(0, 0, 0, 0.12); }
+.keypoints { border: 1px solid var(--accent-line); }
+.day-map { border: 1px solid var(--line); box-shadow: none; }
+.callout { border-radius: var(--radius-lg); border-left-width: 3px; }
+.callout.callout-style-default:not(.callout-tip):not(.callout-warning):not(.callout-important):not(.callout-caution) { background: var(--bg-soft); }
+main details { border-radius: var(--radius-md); }
+
+/* ---------- 7. 표·코드·그림 ---------- */
+main table { font-size: 0.92rem; }
+main table thead th { background: var(--bg-soft); border-bottom: 1px solid var(--line); color: var(--ink); font-weight: 600; }
+main table td, main table th { border-color: var(--line-soft); }
+main pre:not(.sourceCode), div.sourceCode, main pre.sourceCode { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius-md); }
+main :not(pre) > code { border-radius: 6px; background: var(--bg-soft); color: #9b2c55; }
+figure.fig img, figure.fig svg, .rv-fig > img { border-radius: var(--radius-md); }
+figure.fig.paper img, figure.fig.photo img { border-radius: var(--radius-md); border-color: var(--line); }
+figure.fig figcaption, .rv-fig figcaption { color: var(--muted); }
+figure.fig img.zoomable:hover { transform: scale(1.01); box-shadow: var(--shadow-md); }
+
+/* ---------- 8. 홈 ---------- */
+.home-hero { padding: var(--space-16) 0 var(--space-8); }
+main .hh-title { letter-spacing: -0.035em; line-height: 1.12; }
+.home-hero .hh-sub { font-size: 1.08rem; color: var(--muted); }
+.hh-cta { gap: var(--space-3) var(--space-6); margin-top: var(--space-8); }
+.home-plate { padding: var(--space-6) var(--space-6) var(--space-4); border-radius: var(--radius-xl); }
+.rm-seg-fill { border-radius: var(--radius-full); }
+
+/* ---------- 9. 바닥 ---------- */
+.nav-footer { border-top: 1px solid var(--line); color: var(--muted); }
+.page-navigation { border-top: 1px solid var(--line); }
+
+/* ---------- 10. 폭: 휴대폰 16px 가장자리, 손가락 크기 ---------- */
+@media (max-width: 640px) {
+  #title-block-header.quarto-title-block .title { font-size: clamp(1.6rem, 1.2rem + 2.4vw, 1.9rem); }
+  main h2 { font-size: 1.35rem; margin-top: var(--space-8); }
+  .navbar .nav-link { padding: 0.55rem 0.9rem; min-height: 44px; display: inline-flex; align-items: center; }
+  .sbtn { min-height: 40px; }
+  .home-hero { padding: var(--space-8) 0 var(--space-6); }
+}
+
+/* ---------- 11. 움직임 줄이기 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sbtn, .paper, .pj-card, .today-card, a.rm-seg, .pj-start-btn, figure.fig img.zoomable, .navbar .nav-link { transition: none; }
+  .sbtn.primary:hover, a.sbtn.hh-go:hover, .pj-start-btn:hover, .paper:hover, .pj-card:hover, .today-card:hover, figure.fig img.zoomable:hover { transform: none; }
+}
