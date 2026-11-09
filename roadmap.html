@@ -676,14 +676,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">이 페이지</h2>
    
   <ul class="collapse">
-  <li><a href="#rm-summary" id="toc-rm-summary" class="nav-link active" data-scroll-target="#rm-summary">한눈에: 연구 질문과 기대 기여</a></li>
+  <li><a href="#rm-summary" id="toc-rm-summary" class="nav-link active" data-scroll-target="#rm-summary">한눈에: 이 연구는 무엇을 풀려고 하나</a></li>
   <li><a href="#rm-why" id="toc-rm-why" class="nav-link" data-scroll-target="#rm-why">1. 문제: 작은 센서가 "순서"를 판정해야 할 때 무엇이 막히는가</a></li>
   <li><a href="#rm-prc" id="toc-rm-prc" class="nav-link" data-scroll-target="#rm-prc">2. Reservoir computing: 과거를 숫자로 쌓지 않고 재료에 남긴다</a></li>
   <li><a href="#rm-metrics" id="toc-rm-metrics" class="nav-link" data-scroll-target="#rm-metrics">3. 좋은 reservoir란 무엇인가: 소자가 가져야 할 특성, 정의, 측정</a></li>
   <li><a href="#rm-howmuch" id="toc-rm-howmuch" class="nav-link" data-scroll-target="#rm-howmuch">4. 얼마나 필요한가: 응용의 시간이 소자의 목표 특성을 정한다</a></li>
   <li><a href="#rm-material" id="toc-rm-material" class="nav-link" data-scroll-target="#rm-material">5. 어떻게 조절할 것인가: 왜 펄스가 아니라 소재인가</a></li>
   <li><a href="#rm-prior" id="toc-rm-prior" class="nav-link" data-scroll-target="#rm-prior">6. 선행연구는 어디까지 왔고, 무엇이 남았나</a></li>
-  <li><a href="#rm-aims" id="toc-rm-aims" class="nav-link" data-scroll-target="#rm-aims">7. 중심 가설과 세 Aims</a></li>
+  <li><a href="#rm-aims" id="toc-rm-aims" class="nav-link" data-scroll-target="#rm-aims">7. 중심 가설과 세 연구 목표</a></li>
   <li><a href="#rm-papers" id="toc-rm-papers" class="nav-link" data-scroll-target="#rm-papers">8. 논문으로 어떻게 묶이나: figure 구상과 생체 데모의 자리</a></li>
   <li><a href="#rm-first" id="toc-rm-first" class="nav-link" data-scroll-target="#rm-first">9. 첫 실험, 결과별 다음 행동, 작은 프로젝트</a></li>
   <li><a href="#rm-roadmap" id="toc-rm-roadmap" class="nav-link" data-scroll-target="#rm-roadmap">10. 4년 로드맵과 위험 관리</a></li>
@@ -717,24 +717,24 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="rv-abstract">
-<p><strong>이 페이지는 교수님과의 개인 미팅을 위한 연구 제안서 초안입니다.</strong> <a href="./research.html">연구 개요</a>가 "왜 이 질문인가"를 그림으로 짧게 설명했다면, 여기서는 처음부터 끝까지 한 번에 읽히도록 씁니다: 어떤 문제가 있고 → 기존 방법은 어디까지 되고 → reservoir computing이 무엇이고 왜 이 문제에 맞으며 → 왜 전자소자가 아니라 이온·고분자인가 → 소자가 가져야 할 특성은 무엇이고 어떻게 재며 → 얼마나 필요하고 → 소재로 어떻게 조절하고 → 선행연구는 어디까지 왔고 → 무엇을 검증해 어떤 논문과 4년 계획으로 가는가. 길이는 신경 쓰지 않았고, 대신 같은 말을 반복하지 않으려 했습니다. 정확한 계산 규약과 상세 문헌은 접힌 상자와 부록에 있습니다.</p>
+<p><strong>이 페이지는 교수님과의 개인 미팅을 위한 연구 제안서 초안입니다.</strong> <a href="./research.html">연구 개요</a>가 "왜 이 질문인가"를 그림으로 짧게 설명했다면, 여기서는 처음부터 끝까지 한 번에 읽히도록 씁니다: 어떤 문제가 있고 → 기존 방법은 어디까지 되고 → reservoir computing이 무엇이고 왜 이 문제에 맞으며 → 왜 전자소자가 아니라 이온·고분자인가 → 소자가 가져야 할 특성은 무엇이고 어떻게 재며 → 얼마나 필요하고 → 소재로 어떻게 조절하고 → 선행연구는 어디까지 왔고 → 무엇을 검증해 어떤 논문과 4년 계획으로 가는가. 길이는 신경 쓰지 않았고, 대신 같은 말을 반복하지 않으려 했습니다. 정확한 계산 규칙과 상세 문헌은 접힌 상자와 부록에 있습니다.</p>
 <p>표시: <span class="tag tag-fact">논문</span> 원문·데이터시트에서 확인한 사실 · <span class="tag tag-interp">해석</span> 문헌에서 유추한 내 해석 · <span class="tag tag-hypo">가설</span> 내가 검증할 가설 · <span class="tag tag-unverified">미확인</span> 아직 확인하지 못한 것 · <span class="tag tag-unverified">모의</span> 설명용 모의 데이터(소재 가설의 증거가 아님) · <span class="tag tag-unverified">파일럿</span> 문헌값이 아니라 첫 실험의 출발 설정</p>
 </div>
 <section id="rm-summary" class="level2">
-<h2 class="anchored" data-anchor-id="rm-summary">한눈에: 연구 질문과 기대 기여</h2>
-<div class="rv-q rm-sum">
-<p><strong>문제.</strong> 피부 위 EMG·ECG 패치 같은 작은 센서 장치가 "지금 값"이 아니라 <strong>직전 0.1–3초의 순서</strong>로 판정해야 할 때, 지금은 신호를 1초에 1,000번 숫자로 바꿔(ADC) 메모리에 쌓고 작은 컴퓨터(MCU)가 특징을 계산합니다. 이 "숫자로 바꾸고–쌓고–계산하는" 경로가 전지·지연·부품의 대부분을 차지합니다. 계산 자체는 이미 싸므로(보고된 wearable 구현에서 MCU ≈ 1 mW) "소자가 계산 전력을 아낀다"는 말만으로는 이온 소자를 쓸 이유가 되지 않습니다.</p>
-<p><strong>이 연구가 묻는 것.</strong> 이온성 고분자 소자의 전류에는 직전 입력의 흔적이 남습니다(fading memory). 이 흔적이 버퍼·특징 계산을 대신할 수 있는지를 세 질문으로 나눕니다.</p>
-<ul>
-<li><strong>Aim 1 — 기억이 일하는가.</strong> 같은 입력·같은 readout에서, 소자의 흔적이 소자 없는 방법(raw · delay tap · R–C 회로)보다 held-out 정확도를 높이는 조건(τ/Δt)이 있는가?</li>
-<li><strong>Aim 2 — 소재가 시간 구조를 고르는가.</strong> 두께·고정전하 밀도·가소제(Tg)로 흔적의 시간 구조(τ의 수와 분포)를 재현 가능하게, 과제에 맞게 설계할 수 있는가?</li>
-<li><strong>Aim 3 — 시스템에서 남는가.</strong> 구동·읽기·전송까지 넣은 실제 장치에서 지연·전송 bit·에너지 중 무엇이 실제로 줄어드는가?</li>
-</ul>
-<p><strong>중심 가설.</strong> <span class="key">고분자 접합의 이온 동역학에는 서로 다른 시간척도의 과정(EDL 충전 · 농도분극/IDL · 이온쌍·사슬 재배열)이 있고, 조성·구조 변수로 그 시간 구조를 재현 가능하게 바꿀 수 있다. 시간 구조가 과제가 기억해야 하는 구간과 맞을 때 같은 readout의 baseline보다 held-out 정확도가 높아진다.</span> <span class="tag tag-hypo">가설</span> 변수 하나가 과정 하나만 움직이는 <strong>독립 제어</strong>는 이 가설의 강한 형태이며, 성립하면 설계 규칙이 되고 성립하지 않아도 다변수 설계·안정성·접속성의 기여는 남습니다.</p>
-<p><strong>왜 이온·고분자인가 (한 줄).</strong> 전자소자·R–C 회로도 "느린 기억"은 만들 수 있습니다. 이온·고분자가 다른 점은 (1) 여러 시간척도의 과정을 한 소자 안에서 화학으로 설계할 수 있을 가능성, (2) 나노가공 없이 몸속 염농도에서 작동하는 접합, (3) 땀·조직의 이온 신호를 전자 신호로 바꾸지 않고 바로 받는 접속입니다(2절).</p>
-<p><strong>기대 기여.</strong> (1) 고분자 이온 소자에 대한 반증 가능한 측정 규약, (2) 조성·구조 변수 → 시간 구조 → 과제 성능의 감도 표, (3) 센서부터 전송까지 경계를 정한 시스템 비교표, (4) 피부 위 EMG 실제 장치 데모(조건부로 자원자 실험).</p>
-<p><strong>첫 3개월.</strong> PC 모의실험(이미 실행) → 공개 EMG 데이터의 디지털 baseline(PC) → NU40 DK로 실제 시간 패턴 기록 → (장비·시료 확인 뒤) 기존 소자로 τ/Δt 효과 판정.</p>
-<p><strong>교수님께 여쭐 것.</strong> 장비·시료 현황, 무게를 둘 방향, 첫 판정 날짜와 기각 기준, 협업 가능성(부록 D).</p>
+<h2 class="anchored" data-anchor-id="rm-summary">한눈에: 이 연구는 무엇을 풀려고 하나</h2>
+<div class="rm-sum2">
+<p><strong>풀려는 문제.</strong> 손목 밴드나 가슴 패치처럼 <strong>몸에 붙이는 작은 센서</strong>는 "지금 값"이 아니라 <strong>직전 몇 초의 순서</strong>로 판단해야 할 때가 많습니다(예: 손목을 굽혔다 폈는지, 폈다 굽혔는지). 지금 장치는 그 순서를 알기 위해 신호를 1초에 1,000번 숫자로 바꿔(ADC) 메모리에 2.5초치를 쌓아 두고, 작은 컴퓨터(MCU)가 다시 꺼내 계산합니다. <strong>이 "숫자로 바꾸고 → 쌓고 → 다시 계산하는" 경로가 작은 장치의 전지·지연·부품 대부분을 차지합니다.</strong> 계산 자체는 이미 싸서(보고된 구현에서 약 1 mW) 줄일 게 없고, 줄여야 할 것은 이 경로입니다. 이 연구는 <strong>이온성 고분자 소자에 저절로 남는 "직전 입력의 흔적"으로 그 경로(쌓기와 특징 계산)를 대신할 수 있는가</strong>를 묻습니다.</p>
+<p><strong>세 가지 질문.</strong></p>
+<ol type="1">
+<li><strong>소자에 남는 흔적만 읽어도, 소자 없이 계산할 때보다 순서를 더 잘 맞히는가?</strong> <small>같은 EMG 입력을 (a) 숫자로 바꿔 그대로 넣은 경우, (b) 저항–커패시터(R–C) 회로 하나에 통과시킨 경우, (c) 이온 소자에 통과시킨 경우로 나눠, 마지막에 몇 번만 읽은 값으로 "굽힘→폄 / 폄→굽힘"을 맞히는 정확도를 비교합니다. 학습에 쓰지 않은 새 데이터로 채점합니다. 소자의 흔적이 사라지는 속도(τ)와 동작 간격(Δt)의 비율을 바꿔 가며, 어느 비율에서 (c)가 (a)·(b)를 이기는지 찾습니다.</small></li>
+<li><strong>소자가 흔적을 몇 초 동안, 몇 가지 속도로 남길지를 고분자 조성과 구조로 정할 수 있는가?</strong> <small>이온 소자 안에는 속도가 다른 과정이 여럿 있습니다(전극 표면에 이온이 몰리는 EDL 충전 ms, 접합에서 이온이 비거나 쌓이는 농도분극 10 ms–10 s, 이온쌍·고분자 사슬이 자리를 바꾸는 재배열 s–분). 두께, 고정전하 밀도, 가소제(T<sub>g</sub>), counterion 종류를 바꾸면 이 속도들이 각각 얼마나 움직이는지 표로 만듭니다. 과제가 요구하는 시간(EMG는 0.3–2.5 s)에 소자의 속도를 맞출 수 있는지가 핵심입니다.</small></li>
+<li><strong>구동 회로·읽기 회로·무선 전송까지 포함한 실제 장치에서, 지연·전송량·전력 중 무엇이 실제로 줄어드는가?</strong> <small>소자만 보면 전력이 거의 0이지만, 소자에 펄스를 거는 회로와 전류를 읽는 회로(TIA·ADC)가 새로 필요합니다. NU40 DK 보드로 "디지털로 현장 판정하는 장치"와 "이온 소자를 넣은 장치"를 같은 정확도 조건에서 만들어, 판정 1회당 지연[ms]·보내는 bit·에너지[µJ]를 센서부터 전송까지 전부 재서 비교합니다.</small></li>
+</ol>
+<p><strong>검증할 가설 (한 문장).</strong> <span class="key">이온 소자의 흔적이 사라지는 속도를 과제가 요구하는 시간(EMG 동작 간격 0.3–2.5 s)에 맞추면, 마지막에 몇 번만 읽어도 소자 없이 계산할 때보다 순서를 더 잘 맞히고, 그 속도는 고분자의 두께·고정전하·가소제로 재현 가능하게 조절할 수 있다.</span> <span class="tag tag-hypo">가설</span> 변수 하나가 과정 하나만 바꾸는 것(예: 두께는 농도분극 속도만, 가소제는 사슬 재배열 속도만)이 가장 깔끔한 결과이고, 그렇게 되면 "이 과제엔 이 조성"이라는 설계 규칙이 됩니다. 변수 하나가 여러 과정을 함께 바꿔도 "어느 변수를 얼마나 바꾸면 속도가 어떻게 되는가"의 표는 남으므로 실패가 아닙니다.</p>
+<p><strong>왜 전자소자가 아니라 이온·고분자인가.</strong> 느린 흔적만 필요하다면 저항과 커패시터로도 됩니다. 이온·고분자가 다른 점은 셋입니다: (1) 속도가 다른 과정 여러 개를 <strong>한 소자 안에</strong> 넣고 화학으로 각각 조절할 가능성, (2) 나노 가공 없이 <strong>몸속 염농도(150 mM)에서도</strong> 작동하는 접합, (3) 땀·조직의 신호가 이미 이온이라 <strong>전자 신호로 바꾸지 않고 바로 받는</strong> 연결. (1)은 이 연구가 시험하고, (2)·(3)은 결과와 무관하게 남는 장점입니다(2절).</p>
+<p><strong>이 연구가 남길 것.</strong> (1) 이온 소자가 정말 계산에 보탬이 되는지 <strong>틀렸으면 틀렸다고 나오게</strong> 재는 절차(소자 없는 비교 대상, 몇 초 전까지 기억하는지의 곡선, 반복·하루 뒤·다른 소자에서의 재현성), (2) 고분자 변수 → 흔적 속도 → 과제 정확도를 잇는 표, (3) 센서부터 전송까지 다 넣고 디지털 장치와 공정하게 비교한 표, (4) 피부 위 EMG로 돌아가는 실제 장치(자원자 실험은 조건부). 결과가 "아니오"여도 (1)–(3)은 그대로 남습니다.</p>
+<p><strong>첫 3개월.</strong> PC 모의실험(이미 실행) → 공개 EMG 데이터로 디지털 판정 정확도 확인(PC) → NU40 DK로 실제 시간 패턴 기록 → 연구실 장비·시료를 확인한 뒤 기존 소자로 질문 1의 첫 측정.</p>
+<p><strong>교수님께 여쭐 것.</strong> 장비·시료 현황, 무게를 둘 방향(계산 / 소재 물리 / 생체 응용), 첫 판정 날짜와 "여기까지 안 되면 접는다"는 기준, 협업 가능성(부록 B).</p>
 </div>
 <p>이 제안은 이온 뉴로모픽 논문 57편의 원문 노트와 연구 공백 분석, 학습 사이트 Day 1–30과 프로젝트 P1–P5의 모의실험 코드, 2026-11-07의 외부 검토 의견을 바탕으로 썼습니다.</p>
 </section>
@@ -816,7 +816,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="몸속폐루프로-가면-같은-문제가-더-커진다" class="level3">
 <h3 class="anchored" data-anchor-id="몸속폐루프로-가면-같은-문제가-더-커진다">몸속·폐루프로 가면 같은 문제가 더 커진다</h3>
-<p>같은 구조를 몸속 장치나 폐루프(closed loop: 신호를 보고 바로 자극이나 약물 주입을 결정하는 장치)에 넣으면 세 가지가 더 붙습니다. (1) 전지를 바꿀 수 없으니 대기·변환 전력이 곧 수명입니다. (2) 판정이 늦으면 자극 시점이 어긋납니다. (3) 센서와 계산기가 떨어져 있으면 그 사이를 잇는 선·무선이 또 비용입니다. 이온 reservoir로 rat의 신경 자극을 폐루프로 돌린 보고(Pei 2026)가 이 방향의 예이지만, 그 논문도 소자 없는 baseline과의 비교는 하지 않았습니다 <span class="tag tag-fact">논문</span>. 이 연구는 생체 데모를 목표의 끝에 두되, <strong>그 전에 "소자가 버퍼·특징 계산을 정말 대신하는가"를 피부 위 EMG에서 숫자로 먼저 답합니다</strong>(Aim 1–3). 동물·약물 데모는 비생체 입력으로 답할 수 없는 질문이 남을 때만 제안합니다.</p>
+<p>같은 구조를 몸속 장치나 폐루프(closed loop: 신호를 보고 바로 자극이나 약물 주입을 결정하는 장치)에 넣으면 세 가지가 더 붙습니다. (1) 전지를 바꿀 수 없으니 대기·변환 전력이 곧 수명입니다. (2) 판정이 늦으면 자극 시점이 어긋납니다. (3) 센서와 계산기가 떨어져 있으면 그 사이를 잇는 선·무선이 또 비용입니다. 이온 reservoir로 rat의 신경 자극을 폐루프로 돌린 보고(Pei 2026)가 이 방향의 예이지만, 그 논문도 소자 없는 baseline과의 비교는 하지 않았습니다 <span class="tag tag-fact">논문</span>. 이 연구는 생체 데모를 목표의 끝에 두되, <strong>그 전에 "소자가 버퍼·특징 계산을 정말 대신하는가"를 피부 위 EMG에서 숫자로 먼저 답합니다</strong>(목표 1–3). 동물·약물 데모는 비생체 입력으로 답할 수 없는 질문이 남을 때만 제안합니다.</p>
 </section>
 <section id="왜-emg-동작-순서를-대표-문제로-고르나" class="level3">
 <h3 class="anchored" data-anchor-id="왜-emg-동작-순서를-대표-문제로-고르나">왜 EMG 동작 순서를 대표 문제로 고르나</h3>
@@ -839,7 +839,7 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td>과제가 기억할 구간</td>
+<td>과제가 기억해야 할 시간 길이</td>
 <td>0.3–2.5 s</td>
 <td>박동 2–5개 = 1–5 s (beat 분류) · AF는 15–60 s 통계</td>
 <td>5–20 분</td>
@@ -884,12 +884,12 @@ ul.task-list li input[type="checkbox"] {
 <td>판정</td>
 <td><strong>대표</strong></td>
 <td>비교 과제</td>
-<td>확장(Aim 2에서 느린 과정이 분리될 때)</td>
+<td>확장(목표 2에서 느린 과정이 분리될 때)</td>
 <td>제외</td>
 </tr>
 </tbody>
 </table>
-<p>EMG를 고른 이유는 셋입니다. 과제의 시간(0.3–2.5 s)이 이온 소자의 농도분극 시간과 겹치고, 공개 데이터가 있어 소자 없이도 먼저 시험할 수 있으며, 피부 위라 몸속보다 먼저 실제 장치를 만들 수 있습니다. lactate는 분 단위라 소자의 느린 과정이 실제로 분리될 때(Aim 2) 확장합니다.</p>
+<p>EMG를 고른 이유는 셋입니다. 과제의 시간(0.3–2.5 s)이 이온 소자의 농도분극 시간과 겹치고, 공개 데이터가 있어 소자 없이도 먼저 시험할 수 있으며, 피부 위라 몸속보다 먼저 실제 장치를 만들 수 있습니다. lactate는 분 단위라 소자의 느린 과정이 실제로 분리될 때(목표 2) 확장합니다.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="같은 EMG라도 다른 과제: 동작이 끝난 뒤 순서 판정 vs 동작 중 의수 제어">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -943,8 +943,8 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td>이 연구에서의 자리</td>
-<td>Aim 1–3의 과제</td>
-<td>Aim 3 이후, 소자 τ가 창 길이와 맞을 때만</td>
+<td>목표 1–3의 과제</td>
+<td>목표 3 이후, 소자 τ가 창 길이와 맞을 때만</td>
 </tr>
 </tbody>
 </table>
@@ -1052,7 +1052,7 @@ ul.task-list li input[type="checkbox"] {
 <p>"시스템 복잡도·전력·지연에서 장점을 찾는다"를 1절 장면으로 구체화하면 이렇습니다. <span class="tag tag-interp">해석</span></p>
 <ul>
 <li><strong>복잡도.</strong> 디지털 경로: 증폭기 → ADC(1 kHz) → RAM 60 kbit → 특징 계산 코드 → 분류기. PRC 경로: 증폭기 → 소자 → (쉬는 구간에) 전류 읽기 몇 번 → 가중치 2–10개 곱셈. ADC는 남지만 <strong>1 kHz 연속이 아니라 판정 때 몇 번</strong>이고, RAM 버퍼와 특징 계산 코드가 없어집니다.</li>
-<li><strong>전력.</strong> 줄어드는 것은 ADC 횟수(2,500회 → 수 회)·RAM·특징 계산. 새로 드는 것은 소자 구동과 전류 읽기 회로(TIA는 켜진 동안 ≈ 1 mA, 즉 3 mW). <strong>그래서 읽기 회로를 판정 때만 켜지 않으면 이득이 사라질 수 있습니다.</strong> 이것이 Aim 3이 "경계를 정해 재는" 이유입니다.</li>
+<li><strong>전력.</strong> 줄어드는 것은 ADC 횟수(2,500회 → 수 회)·RAM·특징 계산. 새로 드는 것은 소자 구동과 전류 읽기 회로(TIA는 켜진 동안 ≈ 1 mA, 즉 3 mW). <strong>그래서 읽기 회로를 판정 때만 켜지 않으면 이득이 사라질 수 있습니다.</strong> 이것이 목표 3이 "경계를 정해 재는" 이유입니다.</li>
 <li><strong>지연.</strong> 디지털은 2.5초 창을 다 채운 뒤 특징을 계산하므로 창 끝 + 계산 시간. PRC는 재료가 이미 "계산해 둔" 상태를 읽으므로 읽는 순간 + 곱셈 몇 번. 단, 소자의 τ가 과제보다 길면 앞 판정의 흔적이 다음 판정에 섞입니다(3절).</li>
 <li><strong>크기·유연성.</strong> 부품 수가 줄고, 소자가 겔이라 피부·조직 모양을 따릅니다. 이것은 장점이지만 이 연구의 측정 대상은 아닙니다.</li>
 </ul>
@@ -1147,16 +1147,16 @@ ul.task-list li input[type="checkbox"] {
 <td><strong>여러 시간척도의 과정을 한 재료 안에서 화학으로 설계</strong></td>
 <td>이온 소자에는 서로 다른 속도의 과정이 함께 있다: 전극 표면에 이온이 몰리는 EDL 충전(ms), 접합에서 이온이 비거나 쌓이는 농도분극(10 ms–10 s), 이온쌍이 풀리고 고분자 사슬이 움직이는 재배열(s–분). 전자 회로에서 이것을 흉내 내려면 R–C를 여러 개 붙여야 하지만, 고분자에서는 조성으로 각 과정의 속도를 따로 바꿀 <strong>가능성</strong>이 있다</td>
 <td>지지: 고분자 전해질 복합체에서 이온 이동과 사슬 운동이 분리된다는 보고(Akkaoui 2024, Macromolecules). 반대: 변수 하나가 두 과정을 함께 움직인 예(Zhou 2025)는 있고, 따로 움직인 예는 이 조사에서 못 찾음</td>
-<td><strong>잠재적으로 가장 강하지만 미입증 → 이 연구의 중심(Aim 2)</strong></td>
+<td><strong>잠재적으로 가장 강하지만 미입증 → 이 연구의 중심(목표 2)</strong></td>
 </tr>
 <tr class="odd">
 <td>나노가공 없이 몸속 염농도에서 작동하는 접합</td>
 <td>이온 다이오드·접합은 "한쪽 이온만 통과"(permselectivity)가 핵심이다. 나노채널 소자는 표면전하로 이것을 만드는데, 몸속 염농도(150 mM)에서는 채널이 1 nm보다 좁아야 해서 가공이 어렵다. 고정전하가 1 M 이상인 겔은 Donnan 배제로 같은 일을 하므로 나노가공이 필요 없다</td>
-<td>이상 Donnan 계산(반대이온 수송수 ≈ 0.98)이지 실측이 아니며, 반대이온 응축·팽윤으로 실효 고정전하가 줄 수 있다</td>
+<td>이상 Donnan 계산(counterion 수송수 ≈ 0.98)이지 실측이 아니며, counterion 응축·팽윤으로 실효 고정전하가 줄 수 있다</td>
 <td><strong>강함(계산 근거, 실측 필요)</strong></td>
 </tr>
 <tr class="even">
-<td>이온·생체 신호의 무변환 접속</td>
+<td>이온·생체 신호의 변환 없는 직접 연결</td>
 <td>땀의 이온, 조직의 전위, 압력에 따른 이온 이동은 모두 <strong>이온 신호</strong>다. 전자소자는 그것을 먼저 전자 신호로 바꾸는 전극·증폭기가 필요하지만, 이온 소자는 같은 "언어"라 센서와 계산기를 한 몸으로 만들 수 있다(예: 압력이 겔을 눌러 이온 분포가 바뀌면 그것이 곧 입력)</td>
 <td>그래도 읽기 회로(전류계)는 남는다</td>
 <td><strong>유효</strong></td>
@@ -1188,7 +1188,7 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Physical reservoir computing (PRC):</strong> 고정된 물리계의 동역학을 상태로 쓰고 readout만 학습.</li>
 <li><strong>In-memory computing:</strong> 저항 배열에서 곱셈·덧셈을 바로 함. 가중치를 저장하는 쪽이라 RC와 역할이 다르고, readout으로 결합할 수 있음(Zhong 2022).</li>
 <li><strong>Near-sensor / in-sensor computing:</strong> 센서 옆 칩에서 판정 / 센서 자체가 변환과 전처리를 겸함. in-sensor라도 증폭기·필터·읽기 인터페이스는 남는다 <span class="tag tag-interp">해석</span>.</li>
-<li>이 연구: 전기 입력(Aim 1–2)은 near-sensor PRC, 압력·화학 입력 확장은 in-sensor PRC.</li>
+<li>이 연구: 전기 입력(목표 1–2)은 near-sensor PRC, 압력·화학 입력 확장은 in-sensor PRC.</li>
 </ul>
 </div>
 </div>
@@ -1232,25 +1232,25 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="클수록-좋다가-틀리는-이유">"클수록 좋다"가 틀리는 이유</h3>
 <figure class="rv-fig figure">
 <img src="assets/img/roadmap/sim3-nonlinearity.png" alt="(a) 비선형 이득 g에 따라 XOR 정확도는 g≈1.7에서 최대가 되었다가 포화에서 떨어지고, 합의 크기 3수준 정확도는 g가 커지면 급락한다. (b) g = 0.3, 3, 15의 포화 곡선" class="figure-img">
-<figcaption><b>그림 7. nonlinearity의 trade-off.</b> 노드 둘(τ = 0.8, 3)에 포화 비선형을 걸고 이득 g를 바꿨다. <b>(a)</b> 가로축 = 비선형의 세기 g(왼쪽은 거의 선형, 오른쪽은 포화), 세로축 = held-out 정확도. 실선 = "두 펄스가 서로 다른가"(XOR, 순서·조합 과제), 점선 = "두 펄스 세기의 합이 0·1·2 중 무엇인가"(크기 과제). g가 작으면 XOR을 못 풀고(0.5), g ≈ 1.7에서 1.00까지 오르며, g가 커지면 포화 때문에 다시 떨어진다. 크기 과제는 g ≤ 2에서 0.99지만 g = 20에서 0.33(우연)으로 — 포화가 약·강의 차이를 지운다. 잡음 0.03에서는 XOR 최대 0.68. <b>(b)</b> 가로축 = 입력 세기, 세로축 = 노드 응답. g = 15에서는 '약'(0.3)과 '강'(0.9)의 응답이 거의 같다. <span class="tag tag-unverified">모의</span> sim3, 숫자는 sims.json.</figcaption>
+<figcaption><b>그림 7. nonlinearity의 trade-off.</b> 노드 둘(τ = 0.8, 3)에 포화 비선형을 걸고 이득 g를 바꿨다. <b>(a)</b> 가로축 = 비선형의 세기 g(왼쪽은 거의 선형, 오른쪽은 포화), 세로축 = 새 데이터 정확도(held-out). 실선 = "두 펄스가 서로 다른가"(XOR, 순서·조합 과제), 점선 = "두 펄스 세기의 합이 0·1·2 중 무엇인가"(크기 과제). g가 작으면 XOR을 못 풀고(0.5), g ≈ 1.7에서 1.00까지 오르며, g가 커지면 포화 때문에 다시 떨어진다. 크기 과제는 g ≤ 2에서 0.99지만 g = 20에서 0.33(우연)으로 — 포화가 약·강의 차이를 지운다. 잡음 0.03에서는 XOR 최대 0.68. <b>(b)</b> 가로축 = 입력 세기, 세로축 = 노드 응답. g = 15에서는 '약'(0.3)과 '강'(0.9)의 응답이 거의 같다. <span class="tag tag-unverified">모의</span> sim3, 숫자는 sims.json.</figcaption>
 </figure>
 <figure class="rv-fig figure">
 <img src="assets/img/roadmap/sim4-rank-vs-nodes.png" alt="(a) 노드 수 1–16에 대해 잡음 기준 rank: 같은 τ면 1, τ를 고르게 펼치면 3에서 멈춘다. (b) 16-pattern 정확도는 같은 τ 0.1, 펼친 τ 0.27→0.55로 천천히 오른다" class="figure-img">
-<figcaption><b>그림 8. 노드 수 ≠ 독립 정보량.</b> 4-bit 입력열 16가지, 노드 N개. <b>(a)</b> 가로축 = 노드 수, 세로축 = 잡음 기준 rank. τ를 0.5–8에 고르게 펼치면 N = 3부터 3에 머물고, 모두 같은 τ면 1이다. 소자 편차 ±25 %를 더해도 같다. <b>(b)</b> 같은 조건의 16-pattern held-out 정확도: N = 3에서 0.48 ± 0.04, N = 16에서 0.55 ± 0.02(같은 τ는 0.1). rank가 멈춘 뒤에도 조금 오르는 것은 잡음 평균 효과다. 상태 수가 아니라 <b>서로 다른 τ</b>가 정보를 늘린다. <span class="tag tag-unverified">모의</span> sim4, ±1 SD(seed 5).</figcaption>
+<figcaption><b>그림 8. 노드 수 ≠ 독립 정보량.</b> 4-bit 입력열 16가지, 노드 N개. <b>(a)</b> 가로축 = 노드 수, 세로축 = 잡음 기준 rank. τ를 0.5–8에 고르게 펼치면 N = 3부터 3에 머물고, 모두 같은 τ면 1이다. 소자 편차 ±25 %를 더해도 같다. <b>(b)</b> 같은 조건의 16-pattern 새 데이터 정확도(held-out): N = 3에서 0.48 ± 0.04, N = 16에서 0.55 ± 0.02(같은 τ는 0.1). rank가 멈춘 뒤에도 조금 오르는 것은 잡음 평균 효과다. 상태 수가 아니라 <b>서로 다른 τ</b>가 정보를 늘린다. <span class="tag tag-unverified">모의</span> sim4, ±1 SD(seed 5).</figcaption>
 </figure>
 <p>★ <span class="key">τ 하나는 과제가 요구하는 기억 전체를 대표하지 않고(memory curve가 필요), nonlinearity는 커질수록 포화·잡음도 커지며(그림 7), 상태 수가 늘어도 중복이면 정보는 늘지 않습니다(그림 8). 그리고 <strong>지표가 좋아지는 것과 held-out 과제 성능이 좋아지는 것은 다릅니다</strong> — 모든 지표 옆에 같은 readout의 정확도를 둡니다.</span></p>
 </section>
-<section id="이-연구에서-쓸-정의와-계산법-쉬운-설명-정확한-규약" class="level3">
-<h3 class="anchored" data-anchor-id="이-연구에서-쓸-정의와-계산법-쉬운-설명-정확한-규약">이 연구에서 쓸 정의와 계산법 (쉬운 설명 + 정확한 규약)</h3>
-<p>각 지표를 "무엇을 넣고 → 무엇을 읽고 → 어떻게 계산하고 → 숫자를 어떻게 읽나"로 적습니다. 정확한 규약은 접힌 상자에 있습니다. 모든 지표에서 <strong>먼저 데이터를 학습용과 시험용으로 나누고</strong>, 표준화·가중치 결정은 학습용 안에서만, 시험용은 마지막에 한 번만 씁니다. 세션·소자가 다른 데이터는 섞지 않습니다.</p>
+<section id="이-연구에서-쓸-정의와-계산법-쉬운-설명-정확한-규칙" class="level3">
+<h3 class="anchored" data-anchor-id="이-연구에서-쓸-정의와-계산법-쉬운-설명-정확한-규칙">이 연구에서 쓸 정의와 계산법 (쉬운 설명 + 정확한 규칙)</h3>
+<p>각 지표를 "무엇을 넣고 → 무엇을 읽고 → 어떻게 계산하고 → 숫자를 어떻게 읽나"로 적습니다. 정확한 규칙은 접힌 상자에 있습니다. 모든 지표에서 <strong>먼저 데이터를 학습용과 시험용으로 나누고</strong>, 표준화·가중치 결정은 학습용 안에서만, 시험용은 마지막에 한 번만 씁니다. 세션·소자가 다른 데이터는 섞지 않습니다.</p>
 <p><strong>M1. Memory curve와 memory capacity (fading memory를 재는 법).</strong> 무작위로 오르내리는 입력(예: 0–1 V 사이의 무작위 펄스 높이)을 수천 개 넣으면서 매 칸의 상태를 기록합니다. 그다음 "k칸 전의 입력이 얼마였는지"를 지금 상태에서 가중합으로 맞혀 봅니다(k = 1, 2, 3 …). 맞히는 정도를 0–1 사이의 점수(결정계수 R²)로 적고, k를 가로축에 두면 <strong>memory curve</strong>가 됩니다. 보통 k가 커질수록 떨어집니다. 점수가 0.5로 떨어지는 k가 "쓸 수 있는 기억 길이"이고, 곡선 아래 면적(점수의 합)이 memory capacity(MC)입니다. 예: 그림 4의 τ=1 노드는 k=1에서 높고 k=3에서 거의 0, τ=4 노드는 k=1–4에 고르게 낮은 점수 — 길지만 흐린 기억.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="M1 정확한 규약">
+<div class="callout callout-style-default callout-note callout-titled" title="M1 정확한 규칙">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">노트</span>M1 정확한 규약
+<span class="screen-reader-only">노트</span>M1 정확한 규칙
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1267,27 +1267,27 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p><strong>M2. Nonlinearity (비선형을 재는 법).</strong> 가장 쉬운 방법은 <strong>과제로 재는 것</strong>입니다. 펄스 두 개의 세기를 '약/강' 무작위로 넣고, (a) "두 펄스가 서로 다른가"(같으면 0, 다르면 1 — XOR)와 (b) "두 펄스 세기의 합"을 각각 가중합 readout으로 맞힙니다. (a)는 덧셈만으로는 절대 못 맞히는 과제라(약+강 = 강+약인데 답은 같고, 약+약과 강+강은 답이 0인데 합은 다름) 비선형이 있어야 풀리고, (b)는 포화되면 못 풉니다. 두 점수를 함께 보면 "비선형이 있는가"와 "너무 포화되었는가"를 동시에 압니다(그림 7). 더 정밀한 방법은 IPC(information processing capacity)라는 지표로, 상태가 "k칸 전 입력"(1차), "k칸 전 × j칸 전 입력의 곱"(2차) … 을 얼마나 담는지 차수별로 나눠 재는 것입니다. 2차 점수가 <strong>서로 다른 시점의 곱</strong>에 있으면 "시간 상호작용" 비선형입니다.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="M2 정확한 규약">
+<div class="callout callout-style-default callout-note callout-titled" title="M2 정확한 규칙">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">노트</span>M2 정확한 규약
+<span class="screen-reader-only">노트</span>M2 정확한 규칙
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>과제형: 입력 2수준(0.3·0.9 V 등) 무작위, XOR/parity와 합 과제의 held-out 정확도. 진폭 3–4수준으로 반복해 진폭 창을 표로.</li>
+<li>과제형: 입력 2수준(0.3·0.9 V 등) 무작위, XOR/parity와 합 과제의 새 데이터 정확도(held-out). 진폭 3–4수준으로 반복해 진폭 창을 표로.</li>
 <li>분해형: Legendre 다항식 곱 목표에 대한 capacity 합(IPC, Dambre 2012)을 1·2·3차로 나눠 보고; M1과 같은 분할·null 보정; 총합 ≤ N 확인.</li>
 <li>한계: 문턱 스위칭처럼 응답이 급변하는 영역에서는 유한 차수 근사 오차가 커지고 비정상성이 섞이므로 낮은 차수만 보고(급수가 무효라는 뜻은 아님).</li>
 </ul>
 </div>
 </div>
 </div>
-<p><strong>M3. Signal separability와 sequence sensitivity.</strong> 입력열 16가지(4-bit) × 반복 10회를 넣고 끝 상태를 모읍니다. 모든 쌍의 거리를 재서 "다른 입력끼리 평균 ÷ 같은 입력 반복끼리 평균"이 separability. 같은 Hamming weight끼리만 고른 같은 비율이 sequence sensitivity. 1이면 구별 불가. "3 이상이면 가중합 readout이 거의 완벽"은 모형에서의 경험 기준이며 실제 소자에서는 held-out 정확도와 함께 봅니다 <span class="tag tag-unverified">파일럿</span>. 거리를 재기 전에 노드별로 표준화(학습 집합 기준)합니다.</p>
+<p><strong>M3. Signal separability와 sequence sensitivity.</strong> 입력열 16가지(4-bit) × 반복 10회를 넣고 끝 상태를 모읍니다. 모든 쌍의 거리를 재서 "다른 입력끼리 평균 ÷ 같은 입력 반복끼리 평균"이 separability. 같은 Hamming weight끼리만 고른 같은 비율이 sequence sensitivity. 1이면 구별 불가. "3 이상이면 가중합 readout이 거의 완벽"은 모형에서의 경험 기준이며 실제 소자에서는 새 데이터 정확도(held-out)와 함께 봅니다 <span class="tag tag-unverified">파일럿</span>. 거리를 재기 전에 노드별로 표준화(학습 집합 기준)합니다.</p>
 <p><strong>M4. Rank (kernel rank, generalization rank)와 유효 차원.</strong> 서로 다른 입력열 S개(≥ 50)의 끝 상태를 열로 세워 행렬을 만들고, 그 행렬에 "진짜로 다른 방향"이 몇 개인지 셉니다(rank). 잡음 때문에 작은 방향이 생기므로, <strong>같은 크기의 잡음만 행렬</strong>이 만드는 최대 방향 크기(특이값)보다 큰 것만 셉니다(잡음 기준 rank; 임의 비율 5 % 대신). 다른 입력열로 재면 kernel rank(KR, 높을수록 다른 입력을 가름), 비슷한 입력열(기준 몇 개 + 작은 변형)로 재면 generalization rank(GR, 낮을수록 비슷한 입력을 모음). 출처: Legenstein R., Maass W., Neural Netw. 20, 323 (2007), <a href="https://doi.org/10.1016/j.neunet.2007.04.017">10.1016/j.neunet.2007.04.017</a> — 조작적 정의는 2차 문헌으로 확인, 원문 본문 <span class="tag tag-unverified">미확인</span>. 주의: 잡음이 크면 rank가 <strong>오히려 커질</strong> 수 있으므로 잡음 기준이 필수입니다.</p>
 <p><strong>M5. Consistency, drift, 소자 편차.</strong> consistency: 같은 입력열을 다른 시작 상태에서 r회 넣고 상태 궤적의 상관(0–1). drift: 24시간 동안 1시간마다 같은 펄스열을 넣은 끝 상태의 변화율[%/h], 무게(함수율)를 함께. 편차: 독립 소자의 끝 상태 CV[%] — <strong>같은 소자의 반복 펄스는 소자 표본이 아닙니다.</strong> consistency "0.9 아래면 위험"은 출발 기준 <span class="tag tag-unverified">파일럿</span>. drift가 class 차이의 절반을 넘으면 재보정이 필요합니다.</p>
 </section>
@@ -1310,7 +1310,7 @@ ul.task-list li input[type="checkbox"] {
 <th>신호</th>
 <th>원신호 주파수</th>
 <th>사건 길이</th>
-<th>과제가 기억할 구간</th>
+<th>과제가 기억해야 할 시간 길이</th>
 <th>센서 응답</th>
 <th>허용 판정 지연</th>
 <th>요구되는 τ 범위 <span class="tag tag-interp">해석</span></th>
@@ -1351,7 +1351,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="τ와-입력-간격-δt-너무-짧아도-길어도-안-된다">τ와 입력 간격 Δt: 너무 짧아도 길어도 안 된다</h3>
 <figure class="rv-fig figure">
 <img src="assets/img/roadmap/sim1-tau-window.png" alt="(a) 끝 상태의 class 평균 차이가 τ/Δt ≈ 2에서 최대인 종 모양 곡선. (b) 측정 잡음 0.003, 0.01, 0.03에서 balanced accuracy가 τ/Δt 1–10 사이에서만 0.9 이상, 띠는 ±1 SD" class="figure-img">
-<figcaption><b>그림 9. 기억이 너무 짧거나 길면.</b> 8칸 입력에 펄스 3개가 앞쪽(0–3칸)인지 가운데(2–5칸)인지를 끝(7칸)에서만 읽어 가른다. <b>(a)</b> 가로축 = τ ÷ 입력 간격, 세로축 = 두 class의 끝 상태 평균 차이. τ/Δt ≈ 2에서 최대. 점선은 잡음 σ의 2배. <b>(b)</b> 같은 가로축, 세로축 = held-out 정확도. 최고는 잡음 0.003에서 1.00(τ/Δt = 5.0), 0.01에서 0.99(4.0), 0.03에서 0.94(2.5). τ/Δt = 0.2(너무 짧아 잊음)에서는 0.48–0.49, τ/Δt = 50(너무 길어 다 쌓임)에서는 0.61 ± 0.02 / 0.49 ± 0.05 / 0.48 ± 0.03. 잡음이 작으면 긴 τ에서도 작은 차이가 남아 우연보다 조금 높다. <span class="tag tag-unverified">모의</span> sim1, seed 5개.</figcaption>
+<figcaption><b>그림 9. 기억이 너무 짧거나 길면.</b> 8칸 입력에 펄스 3개가 앞쪽(0–3칸)인지 가운데(2–5칸)인지를 끝(7칸)에서만 읽어 가른다. <b>(a)</b> 가로축 = τ ÷ 입력 간격, 세로축 = 두 class의 끝 상태 평균 차이. τ/Δt ≈ 2에서 최대. 점선은 잡음 σ의 2배. <b>(b)</b> 같은 가로축, 세로축 = 새 데이터 정확도(held-out). 최고는 잡음 0.003에서 1.00(τ/Δt = 5.0), 0.01에서 0.99(4.0), 0.03에서 0.94(2.5). τ/Δt = 0.2(너무 짧아 잊음)에서는 0.48–0.49, τ/Δt = 50(너무 길어 다 쌓임)에서는 0.61 ± 0.02 / 0.49 ± 0.05 / 0.48 ± 0.03. 잡음이 작으면 긴 τ에서도 작은 차이가 남아 우연보다 조금 높다. <span class="tag tag-unverified">모의</span> sim1, seed 5개.</figcaption>
 </figure>
 <p>★ <span class="key">좋은 τ는 절댓값이 아니라 기억할 간격과의 비율 τ/Δt로 정해집니다. 모형의 최적 비율(2–5)은 실제 소자의 필요조건이 아니라 <strong>첫 실험에서 훑을 범위</strong>입니다. 잡음이 작으면 허용 폭이 넓고(1–10), 크면 좁습니다(2–4).</span></p>
 </section>
@@ -1360,7 +1360,7 @@ ul.task-list li input[type="checkbox"] {
 <p>EMG 과제는 "마지막 두 동작의 순서"(짧은 정보, 0.3–1 s)와 "그 전에 큰 동작이 있었는가"(긴 정보, 2–3 s)처럼 두 시간척도의 정보를 함께 요구할 수 있습니다. τ 하나로는 어느 τ를 골라도 한쪽을 잃습니다.</p>
 <figure class="rv-fig figure">
 <img src="assets/img/roadmap/sim2-multi-tau.png" alt="(a) τ 하나의 정확도는 어느 τ에서도 0.5를 넘지 못한다. (b) τ 하나 0.50, 같은 τ 셋 0.50, τ 셋 0.7·2·8은 0.77, 1·2·4는 0.60" class="figure-img">
-<figcaption><b>그림 10. 단일 τ와 다중 τ.</b> 20칸 입력, 4 class(마지막 두 펄스의 순서 × 2–5칸의 묶음 유무). <b>(a)</b> 가로축 = τ/Δt, 세로축 = held-out 정확도(노드 하나). 어느 τ에서도 0.50을 넘지 못한다(긴 정보 0.99, 짧은 정보 0.48 — 한쪽만 맞힘). <b>(b)</b> 노드 셋: τ가 0.7·2·8로 다르면 0.77 ± 0.03(짧은 정보 0.85, 긴 정보 0.91), 같은 τ 셋은 0.50 ± 0.02(노드 수만 늘려서는 소용없음), τ가 2배씩만 다르면(1·2·4) 0.60 ± 0.02 — τ 사이 간격이 1 decade쯤 벌어져야 한다. <span class="tag tag-unverified">모의</span> sim2.</figcaption>
+<figcaption><b>그림 10. 단일 τ와 다중 τ.</b> 20칸 입력, 4 class(마지막 두 펄스의 순서 × 2–5칸의 묶음 유무). <b>(a)</b> 가로축 = τ/Δt, 세로축 = 새 데이터 정확도(held-out)(노드 하나). 어느 τ에서도 0.50을 넘지 못한다(긴 정보 0.99, 짧은 정보 0.48 — 한쪽만 맞힘). <b>(b)</b> 노드 셋: τ가 0.7·2·8로 다르면 0.77 ± 0.03(짧은 정보 0.85, 긴 정보 0.91), 같은 τ 셋은 0.50 ± 0.02(노드 수만 늘려서는 소용없음), τ가 2배씩만 다르면(1·2·4) 0.60 ± 0.02 — τ 사이 간격이 1 decade쯤 벌어져야 한다. <span class="tag tag-unverified">모의</span> sim2.</figcaption>
 </figure>
 </section>
 <section id="nonlinearity와-richness는-얼마나" class="level3">
@@ -1427,10 +1427,10 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="인과-사슬-조성-이온-과정-소자-응답-지표-과제-시스템">인과 사슬: 조성 → 이온 과정 → 소자 응답 → 지표 → 과제 → 시스템</h3>
 <figure class="rv-fig figure">
 <!-- RM:chain -->
-<svg class="rv-svg" viewbox="0 0 640 354" role="img" aria-label="분자·조성 변수에서 이온 동역학, 소자 응답, reservoir 지표, task 성능, 시스템 가치로 이어지는 여섯 상자. 보라 점선 화살표 세 개(H1–H3)가 이 연구가 검증할 연결이다."><rect x="16.0" y="40.0" width="190.0" height="78.0" rx="10" fill="#fff" stroke="#c6cedb" stroke-width="1.4"></rect><text x="26.0" y="59.0" font-size="12" fill="#0f1b33" font-weight="800">1. 분자·조성·구조 변수</text><text x="26.0" y="78.0" font-size="10.5" fill="#2b313a">고정전하 밀도 X · 반대이온 종</text><text x="26.0" y="93.0" font-size="10.5" fill="#2b313a">첨가제(가소제·redox) · Tg</text><text x="26.0" y="108.0" font-size="10.5" fill="#2b313a">두께 L · 접합(P|N, P|N|P)</text><rect x="228.0" y="40.0" width="190.0" height="78.0" rx="10" fill="#fff" stroke="#c6cedb" stroke-width="1.4"></rect><text x="238.0" y="59.0" font-size="12" fill="#0f1b33" font-weight="800">2. 이온 수송·계면 동역학</text><text x="238.0" y="78.0" font-size="10.5" fill="#2b313a">EDL 충전 (ms)</text><text x="238.0" y="93.0" font-size="10.5" fill="#2b313a">IDL·농도분극 (L²/D)</text><text x="238.0" y="108.0" font-size="10.5" fill="#2b313a">이온쌍·착물·사슬 재배열 (s–분)</text><rect x="440.0" y="40.0" width="190.0" height="78.0" rx="10" fill="#fff" stroke="#c6cedb" stroke-width="1.4"></rect><text x="450.0" y="59.0" font-size="12" fill="#0f1b33" font-weight="800">3. 소자의 전기 응답</text><text x="450.0" y="78.0" font-size="10.5" fill="#2b313a">τ 스펙트럼 (몇 개? 연속?)</text><text x="450.0" y="93.0" font-size="10.5" fill="#2b313a">비선형 모양 (정류·포화)</text><text x="450.0" y="108.0" font-size="10.5" fill="#2b313a">잡음·drift·소자 편차</text><rect x="16.0" y="178.0" width="190.0" height="78.0" rx="10" fill="#fff" stroke="#c6cedb" stroke-width="1.4"></rect><text x="26.0" y="197.0" font-size="12" fill="#0f1b33" font-weight="800">4. reservoir 상태·지표</text><text x="26.0" y="216.0" font-size="10.5" fill="#2b313a">memory curve (지연별)</text><text x="26.0" y="231.0" font-size="10.5" fill="#2b313a">separability · rank</text><text x="26.0" y="246.0" font-size="10.5" fill="#2b313a">consistency (재현성)</text><rect x="228.0" y="178.0" width="190.0" height="78.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="238.0" y="197.0" font-size="12" fill="#0f1b33" font-weight="800">5. task 성능</text><text x="238.0" y="216.0" font-size="10.5" fill="#2b313a">같은 readout·같은 특징 수의</text><text x="238.0" y="231.0" font-size="10.5" fill="#2b313a">baseline(raw·delay tap·R–C)</text><text x="238.0" y="246.0" font-size="10.5" fill="#2b313a">대비 held-out 정확도</text><rect x="440.0" y="178.0" width="190.0" height="78.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="450.0" y="197.0" font-size="12" fill="#0f1b33" font-weight="800">6. 시스템 가치</text><text x="450.0" y="216.0" font-size="10.5" fill="#2b313a">지연 · 전송 bit · 에너지(경계 명시)</text><text x="450.0" y="231.0" font-size="10.5" fill="#2b313a">회로 복잡도 · 안정성</text><text x="450.0" y="246.0" font-size="10.5" fill="#2b313a">같은 정확도에서 비교</text><line x1="206.0" y1="79.0" x2="221.0" y2="79.0" stroke="#7a3f97" stroke-width="2" stroke-dasharray="5 4"></line><path d="M221.0,83.5 L228.0,79.0 L221.0,74.5 Z" fill="#7a3f97"></path><text x="217.0" y="73.0" font-size="10" fill="#7a3f97" font-weight="800" text-anchor="middle">Aim 2</text><line x1="418.0" y1="79.0" x2="433.0" y2="79.0" stroke="#0f1b33" stroke-width="2"></line><path d="M433.0,83.5 L440.0,79.0 L433.0,74.5 Z" fill="#0f1b33"></path><text x="429.0" y="73.0" font-size="10" fill="#0f1b33" font-weight="800" text-anchor="middle">원리</text><path d="M535.0,118 L535.0,148 L111.0,148 L111.0,170" fill="none" stroke="#7a3f97" stroke-width="2" stroke-dasharray="5 4"></path><line x1="111.0" y1="168.0" x2="111.0" y2="171.0" stroke="#7a3f97" stroke-width="2"></line><path d="M106.5,171.0 L111.0,178.0 L115.5,171.0 Z" fill="#7a3f97"></path><text x="525.0" y="142.0" font-size="10" fill="#7a3f97" font-weight="800" text-anchor="end">Aim 2</text><line x1="206.0" y1="217.0" x2="221.0" y2="217.0" stroke="#7a3f97" stroke-width="2" stroke-dasharray="5 4"></line><path d="M221.0,221.5 L228.0,217.0 L221.0,212.5 Z" fill="#7a3f97"></path><text x="217.0" y="211.0" font-size="10" fill="#7a3f97" font-weight="800" text-anchor="middle">Aim 1</text><line x1="418.0" y1="217.0" x2="433.0" y2="217.0" stroke="#7a3f97" stroke-width="2" stroke-dasharray="5 4"></line><path d="M433.0,221.5 L440.0,217.0 L433.0,212.5 Z" fill="#7a3f97"></path><text x="429.0" y="211.0" font-size="10" fill="#7a3f97" font-weight="800" text-anchor="middle">Aim 3</text><text x="16.0" y="288.0" font-size="10.5" fill="#7a3f97" font-weight="700">Aim 2 (1→2, 3→4): 조성·구조 변수로 τ의 수와 분포를 재현 가능하게 설계할 수 있는가; 그 구조가 memory curve·rank를 정하는가</text><text x="16.0" y="303.0" font-size="10.5" fill="#7a3f97" font-weight="700">Aim 1 (4→5): 소자의 흔적이 같은 readout의 baseline(raw · delay tap · R–C)보다 held-out 성능을 높이는 조건이 있는가</text><text x="16.0" y="318.0" font-size="10.5" fill="#7a3f97" font-weight="700">Aim 3 (5→6): 구동·읽기·전송까지 넣은 시스템에서 지연·bit·에너지 중 무엇이 실제로 줄어드는가</text><line x1="330" y1="16" x2="356" y2="16" stroke="#0f1b33" stroke-width="2"></line><text x="362.0" y="20.0" font-size="11" fill="#0f1b33" font-weight="700">알려진 원리</text><line x1="470" y1="16" x2="496" y2="16" stroke="#7a3f97" stroke-width="2.4" stroke-dasharray="5 4"></line><text x="502.0" y="20.0" font-size="11" fill="#7a3f97" font-weight="700">이 연구가 검증할 연결</text><rect x="16.0" y="330.0" width="120.1" height="19" rx="9.5" fill="#f6eefa"></rect><text x="76.0" y="343.5" font-size="11" fill="#7a3f97" font-weight="700" text-anchor="middle">개념도 · 숫자 없음</text></svg>
+<svg class="rv-svg" viewbox="0 0 640 354" role="img" aria-label="분자·조성 변수에서 이온 동역학, 소자 응답, reservoir 지표, task 성능, 시스템 가치로 이어지는 여섯 상자. 보라 점선 화살표 세 개(H1–H3)가 이 연구가 검증할 연결이다."><rect x="16.0" y="40.0" width="190.0" height="78.0" rx="10" fill="#fff" stroke="#c6cedb" stroke-width="1.4"></rect><text x="26.0" y="59.0" font-size="12" fill="#0f1b33" font-weight="800">1. 분자·조성·구조 변수</text><text x="26.0" y="78.0" font-size="10.5" fill="#2b313a">고정전하 밀도 X · counterion 종류</text><text x="26.0" y="93.0" font-size="10.5" fill="#2b313a">첨가제(가소제·redox) · T</text></svg><sub>g</sub><text x="26.0" y="108.0" font-size="10.5" fill="#2b313a">두께 L · 접합(P|N, P|N|P)</text><rect x="228.0" y="40.0" width="190.0" height="78.0" rx="10" fill="#fff" stroke="#c6cedb" stroke-width="1.4"><text x="238.0" y="59.0" font-size="12" fill="#0f1b33" font-weight="800">2. 이온 수송·계면 동역학</text><text x="238.0" y="78.0" font-size="10.5" fill="#2b313a">EDL 충전 (ms)</text><text x="238.0" y="93.0" font-size="10.5" fill="#2b313a">IDL·농도분극 (L²/D)</text><text x="238.0" y="108.0" font-size="10.5" fill="#2b313a">이온쌍·착물·사슬 재배열 (s–분)</text><rect x="440.0" y="40.0" width="190.0" height="78.0" rx="10" fill="#fff" stroke="#c6cedb" stroke-width="1.4"><text x="450.0" y="59.0" font-size="12" fill="#0f1b33" font-weight="800">3. 소자의 전기 응답</text><text x="450.0" y="78.0" font-size="10.5" fill="#2b313a">τ 스펙트럼 (몇 개? 연속?)</text><text x="450.0" y="93.0" font-size="10.5" fill="#2b313a">비선형 모양 (정류·포화)</text><text x="450.0" y="108.0" font-size="10.5" fill="#2b313a">잡음·drift·소자 편차</text><rect x="16.0" y="178.0" width="190.0" height="78.0" rx="10" fill="#fff" stroke="#c6cedb" stroke-width="1.4"><text x="26.0" y="197.0" font-size="12" fill="#0f1b33" font-weight="800">4. reservoir 상태·지표</text><text x="26.0" y="216.0" font-size="10.5" fill="#2b313a">memory curve (지연별)</text><text x="26.0" y="231.0" font-size="10.5" fill="#2b313a">separability · rank</text><text x="26.0" y="246.0" font-size="10.5" fill="#2b313a">consistency (재현성)</text><rect x="228.0" y="178.0" width="190.0" height="78.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"><text x="238.0" y="197.0" font-size="12" fill="#0f1b33" font-weight="800">5. task 성능</text><text x="238.0" y="216.0" font-size="10.5" fill="#2b313a">같은 readout·같은 특징 수의</text><text x="238.0" y="231.0" font-size="10.5" fill="#2b313a">baseline(raw·delay tap·R–C)</text><text x="238.0" y="246.0" font-size="10.5" fill="#2b313a">대비 새 데이터 정확도(held-out)</text><rect x="440.0" y="178.0" width="190.0" height="78.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"><text x="450.0" y="197.0" font-size="12" fill="#0f1b33" font-weight="800">6. 시스템 가치</text><text x="450.0" y="216.0" font-size="10.5" fill="#2b313a">지연 · 전송 bit · 에너지(어디까지 셀지 명시)</text><text x="450.0" y="231.0" font-size="10.5" fill="#2b313a">회로 복잡도 · 안정성</text><text x="450.0" y="246.0" font-size="10.5" fill="#2b313a">같은 정확도에서 비교</text><line x1="206.0" y1="79.0" x2="221.0" y2="79.0" stroke="#7a3f97" stroke-width="2" stroke-dasharray="5 4"><path d="M221.0,83.5 L228.0,79.0 L221.0,74.5 Z" fill="#7a3f97"><text x="217.0" y="73.0" font-size="10" fill="#7a3f97" font-weight="800" text-anchor="middle">목표 2</text><line x1="418.0" y1="79.0" x2="433.0" y2="79.0" stroke="#0f1b33" stroke-width="2"><path d="M433.0,83.5 L440.0,79.0 L433.0,74.5 Z" fill="#0f1b33"><text x="429.0" y="73.0" font-size="10" fill="#0f1b33" font-weight="800" text-anchor="middle">원리</text><path d="M535.0,118 L535.0,148 L111.0,148 L111.0,170" fill="none" stroke="#7a3f97" stroke-width="2" stroke-dasharray="5 4"><line x1="111.0" y1="168.0" x2="111.0" y2="171.0" stroke="#7a3f97" stroke-width="2"><path d="M106.5,171.0 L111.0,178.0 L115.5,171.0 Z" fill="#7a3f97"><text x="525.0" y="142.0" font-size="10" fill="#7a3f97" font-weight="800" text-anchor="end">목표 2</text><line x1="206.0" y1="217.0" x2="221.0" y2="217.0" stroke="#7a3f97" stroke-width="2" stroke-dasharray="5 4"><path d="M221.0,221.5 L228.0,217.0 L221.0,212.5 Z" fill="#7a3f97"><text x="217.0" y="211.0" font-size="10" fill="#7a3f97" font-weight="800" text-anchor="middle">목표 1</text><line x1="418.0" y1="217.0" x2="433.0" y2="217.0" stroke="#7a3f97" stroke-width="2" stroke-dasharray="5 4"><path d="M433.0,221.5 L440.0,217.0 L433.0,212.5 Z" fill="#7a3f97"><text x="429.0" y="211.0" font-size="10" fill="#7a3f97" font-weight="800" text-anchor="middle">목표 3</text><text x="16.0" y="288.0" font-size="10.5" fill="#7a3f97" font-weight="700">목표 2 (1→2, 3→4): 조성·구조 변수로 τ의 수와 분포를 재현 가능하게 설계할 수 있는가; 그 구조가 memory curve·rank를 정하는가</text><text x="16.0" y="303.0" font-size="10.5" fill="#7a3f97" font-weight="700">목표 1 (4→5): 소자의 흔적이 소자 없이 같은 방법으로 판정한 기준(baseline)(raw · delay tap · R–C)보다 새 데이터에서의 성능(held-out)을 높이는 조건이 있는가</text><text x="16.0" y="318.0" font-size="10.5" fill="#7a3f97" font-weight="700">목표 3 (5→6): 구동·읽기·전송까지 넣은 시스템에서 지연·bit·에너지 중 무엇이 실제로 줄어드는가</text><line x1="330" y1="16" x2="356" y2="16" stroke="#0f1b33" stroke-width="2"><text x="362.0" y="20.0" font-size="11" fill="#0f1b33" font-weight="700">알려진 원리</text><line x1="470" y1="16" x2="496" y2="16" stroke="#7a3f97" stroke-width="2.4" stroke-dasharray="5 4"><text x="502.0" y="20.0" font-size="11" fill="#7a3f97" font-weight="700">이 연구가 검증할 연결</text><rect x="16.0" y="330.0" width="120.1" height="19" rx="9.5" fill="#f6eefa"><text x="76.0" y="343.5" font-size="11" fill="#7a3f97" font-weight="700" text-anchor="middle">개념도 · 숫자 없음</text>
 <!-- /RM:chain -->
-<figcaption><b>그림 11. 인과 사슬과 Aim의 자리.</b> <b>볼 것:</b> 보라 점선이 이 연구가 검증할 연결이고 검은 실선은 알려진 원리다. 1→2·3→4는 Aim 2, 4→5는 Aim 1, 5→6은 Aim 3에서 시험한다.</figcaption>
-</figure>
+<figcaption><b>그림 11. 인과 사슬과 연구 목표의 자리.</b> <b>볼 것:</b> 보라 점선이 이 연구가 검증할 연결이고 검은 실선은 알려진 원리다. 1→2·3→4는 목표 2, 4→5는 목표 1, 5→6은 목표 3에서 시험한다.</figcaption>
+</rect></line></line></path></line></path></line></path></line></path></path></line></path></line></rect></rect></rect></rect></rect></figure>
 </section>
 <section id="이온-소자-안의-과정들과-그것을-움직이는-손잡이" class="level3">
 <h3 class="anchored" data-anchor-id="이온-소자-안의-과정들과-그것을-움직이는-손잡이">이온 소자 안의 과정들과, 그것을 움직이는 손잡이</h3>
@@ -1467,7 +1467,7 @@ ul.task-list li input[type="checkbox"] {
 <td>이온쌍·착물·사슬 재배열</td>
 <td>이온이 고분자 사슬과 짝을 이루거나 풀리고, 사슬이 움직여 자리를 바꾼다</td>
 <td>s–분</td>
-<td><strong>Tg·가소제</strong>, 반대이온 종(Hofmeister)</td>
+<td><strong>T<sub>g</sub>·가소제</strong>, counterion 종류(Hofmeister 계열)</td>
 </tr>
 </tbody>
 </table>
@@ -1507,7 +1507,7 @@ ul.task-list li input[type="checkbox"] {
 <td>조성, 전극, 온습도, 펄스</td>
 <td>DRT 극 주파수, 펄스 감쇠 τ₂, memory curve</td>
 <td>예상 τ₂ ∝ L². 대안: 기울기 &lt; 2(계면·접촉·경계 기여; 보고된 τ 비 ≈ 20 vs L² 비 ≈ 8 <span class="tag tag-fact">논문</span> Zhang/Yossifon 2024)</td>
-<td>log τ₂–log L 기울기와 95 % 구간; 기울기만으로 확정하지 않고 판정표의 다른 축과 합산</td>
+<td>log τ₂–log L 기울기와 95 % 구간; 기울기만으로 확정하지 않고 확인 표의 다른 축과 합산</td>
 <td>≈ 2면 두께를 1순위 손잡이로; 아니면 전극·블로킹 조건을 바꿔 재측정</td>
 </tr>
 <tr class="even">
@@ -1517,12 +1517,12 @@ ul.task-list li input[type="checkbox"] {
 <td>가교제 비, 두께, 전극</td>
 <td>정류비, XOR 과제 정확도, 2차 IPC 교차항, 팽윤·σ</td>
 <td>예상 X↑ → 정류·IDL 폭↑, τ는 약하게. 대안: 팽윤·가교도 변화로 D가 함께 변함</td>
-<td>감도 표에서 X가 IDL 과정에 가장 크게 작용하는가(강한 형태: 비대각 ≤ 1/3 <span class="tag tag-unverified">파일럿</span>)</td>
-<td>직교하지 않아도 "X의 효과 범위"를 설계 표에 남김</td>
+<td>변수별 효과 표에서 X가 IDL 과정에 가장 크게 작용하는가(강한 형태: 비대각 ≤ 1/3 <span class="tag tag-unverified">파일럿</span>)</td>
+<td>독립적으로 작용하지 않아도 "X의 효과 범위"를 설계 표에 남김</td>
 </tr>
 <tr class="odd">
 <td><strong>느린 τ (사슬·이온쌍 과정) 켜기</strong></td>
-<td>S-T 가소제/Tg</td>
+<td>S-T 가소제/T<sub>g</sub></td>
 <td>가소제(예: SN) 0 · 5 · 10 · 20 wt % <span class="tag tag-unverified">제안, 호환성 미확인</span>, 온도 −10–60 °C</td>
 <td>조성 나머지, 두께</td>
 <td>DRT 극의 온도 의존(VFT vs Arrhenius), 유전 완화 병행</td>
@@ -1552,8 +1552,8 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>SN(succinonitrile) 첨가의 예 — "conductivity ↑ → τ ↓"를 가정하지 않기.</strong> SN은 염을 녹이는 plastic crystal로 이온전도도를 크게 올립니다 <span class="tag tag-fact">논문</span> Alarco P.-J. et al., Nat. Mater. 3, 476 (2004), <a href="https://doi.org/10.1038/nmat1158">10.1038/nmat1158</a>. PIL 접합에 SN을 넣으면 "이온이 빨리 움직이니 τ가 짧아진다"고 생각하기 쉽지만, 소자 τ는 σ만으로 정해지지 않습니다: (i) EDL τ ≈ R·C_EDL에서 R은 줄지만 SN이 C_EDL도 바꾸고, (ii) 농도분극 τ ≈ L²/D에서 이온쌍 해리도가 바뀌면 자유 이온 수와 이동도가 따로 움직이며, (iii) Tg가 낮아지면 느린 사슬 과정이 켜지고, (iv) 접합의 Donnan 평형이 바뀔 수 있습니다. 그래서 SN은 "τ를 줄이는 손잡이"가 아니라 "직교성을 시험할 변수"로 다룹니다. PIL 전해질 + SN의 synaptic transistor 보고는 있으나(Lee et al., Mater. Horiz. 2026, <a href="https://doi.org/10.1039/D5MH01319D">10.1039/D5MH01319D</a>) 과정 분리는 하지 않았습니다 <span class="tag tag-interp">해석</span>.</p>
-<p><strong>메커니즘 판정표 — 한 증거로 이름 붙이지 않기.</strong> DRT에 극이 하나 보인다고 "이것이 IDL"이라고 쓰지 않습니다. 극마다 ① 두께 의존(L² vs L⁰), ② 전극 의존(블로킹/비블로킹), ③ 접합 방향 의존, ④ 온도 의존(VFT vs Arrhenius), ⑤ 바이어스 의존, ⑥ 함수율 의존의 6축을 재고, 3축 이상이 같은 과정을 가리킬 때만 라벨을 붙입니다. 측정 회로가 만드는 완화(R–C 더미)와 접촉 저항은 먼저 뺍니다. <span class="tag tag-interp">해석</span></p>
+<p><strong>SN(succinonitrile) 첨가의 예 — "conductivity ↑ → τ ↓"를 가정하지 않기.</strong> SN은 염을 녹이는 plastic crystal로 이온전도도를 크게 올립니다 <span class="tag tag-fact">논문</span> Alarco P.-J. et al., Nat. Mater. 3, 476 (2004), <a href="https://doi.org/10.1038/nmat1158">10.1038/nmat1158</a>. PIL 접합에 SN을 넣으면 "이온이 빨리 움직이니 τ가 짧아진다"고 생각하기 쉽지만, 소자 τ는 σ만으로 정해지지 않습니다: (i) EDL τ ≈ R·C_EDL에서 R은 줄지만 SN이 C_EDL도 바꾸고, (ii) 농도분극 τ ≈ L²/D에서 이온쌍 해리도가 바뀌면 자유 이온 수와 이동도가 따로 움직이며, (iii) Tg가 낮아지면 느린 사슬 과정이 켜지고, (iv) 접합의 Donnan 평형이 바뀔 수 있습니다. 그래서 SN은 "τ를 줄이는 손잡이"가 아니라 "독립 제어(변수 하나가 과정 하나만 바꾸는 성질)을 시험할 변수"로 다룹니다. PIL 전해질 + SN의 synaptic transistor 보고는 있으나(Lee et al., Mater. Horiz. 2026, <a href="https://doi.org/10.1039/D5MH01319D">10.1039/D5MH01319D</a>) 과정 분리는 하지 않았습니다 <span class="tag tag-interp">해석</span>.</p>
+<p><strong>메커니즘 확인 표 — 한 증거로 이름 붙이지 않기.</strong> DRT에 극이 하나 보인다고 "이것이 IDL"이라고 쓰지 않습니다. 극마다 ① 두께 의존(L² vs L⁰), ② 전극 의존(블로킹/비블로킹), ③ 접합 방향 의존, ④ 온도 의존(VFT vs Arrhenius), ⑤ 바이어스 의존, ⑥ 함수율 의존의 6축을 재고, 3축 이상이 같은 과정을 가리킬 때만 라벨을 붙입니다. 측정 회로가 만드는 완화(R–C 더미)와 접촉 저항은 먼저 뺍니다. <span class="tag tag-interp">해석</span></p>
 </section>
 <section id="내가-가진-후보-아이디어의-판정-해석" class="level3">
 <h3 class="anchored" data-anchor-id="내가-가진-후보-아이디어의-판정-해석">내가 가진 후보 아이디어의 판정 <span class="tag tag-interp">해석</span></h3>
@@ -1584,7 +1584,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>SN 등 첨가제</td>
 <td>S-T 변수로 포함</td>
-<td>여러 과정을 함께 움직일 가능성이 커 직교성 시험 대상</td>
+<td>여러 과정을 함께 움직일 가능성이 커 독립 제어(변수 하나가 과정 하나만 바꾸는 성질) 시험 대상</td>
 </tr>
 <tr class="even">
 <td>EMG·lactate</td>
@@ -1598,7 +1598,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td>연구실 iontronic reservoir(redox 첨가제·duty cycle)</td>
-<td>Aim 1의 기존 소자 후보</td>
+<td>목표 1의 기존 소자 후보</td>
 <td>held-out 과제·baseline·반복 분포·Faradaic 대조군 필요. 세부는 비공개 검토 페이지</td>
 </tr>
 </tbody>
@@ -1607,7 +1607,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="rm-prior" class="level2">
 <h2 class="anchored" data-anchor-id="rm-prior">6. 선행연구는 어디까지 왔고, 무엇이 남았나</h2>
-<p><strong>이 절의 결론.</strong> τ를 바꾼 보고와 τ 정합의 원리는 이미 있습니다. 이 조사 범위에서 확인하지 못한 것은 <strong>(a) 같은 readout의 baseline·지연별 기억·재현성을 함께 보고한 고분자 이온 소자 연구, (b) 조성·구조 변수가 어느 시간 과정을 얼마나 움직이는지의 감도 표, (c) 센서부터 전송까지 경계를 정한 시스템 비교</strong>이고, 이 셋이 내 기여 후보입니다.</p>
+<p><strong>이 절의 결론.</strong> τ를 바꾼 보고와 τ 맞춤의 원리는 이미 있습니다. 이 조사 범위에서 확인하지 못한 것은 <strong>(a) 소자 없이 같은 방법으로 판정한 기준(baseline)·지연별 기억·재현성을 함께 보고한 고분자 이온 소자 연구, (b) 조성·구조 변수가 어느 시간 과정을 얼마나 움직이는지의 변수별 효과 표, (c) 센서부터 전송까지 어디까지 셀지 정한 시스템 비교</strong>이고, 이 셋이 내 기여 후보입니다.</p>
 <section id="남들은-prc로-무엇을-하나" class="level3">
 <h3 class="anchored" data-anchor-id="남들은-prc로-무엇을-하나">남들은 PRC로 무엇을 하나</h3>
 <p>이온·고분자 PRC 논문은 대개 이렇게 진행합니다: 소자를 만들어 펄스 응답(PPF, 4-bit 16가지 상태)을 보이고, 그 상태를 소프트웨어 readout에 넣어 MNIST·음성·EMG 같은 벤치마크 정확도를 보고합니다. 실제 소자 데이터를 쓴 것(HW)과 소자 모델로 만든 것(SIM)이 섞여 있고, <strong>소자 없이 같은 readout에 입력을 바로 넣은 baseline</strong>은 드뭅니다. 조사한 표본 13편(본문 기준)에서 baseline 4/13, memory capacity 2/13, IPC 0, consistency 0이었고, baseline이 있던 경우 소자 기여가 0이거나 음수인 사례(Lee S.H. 2025: raw 91.3 % &gt; reservoir 90.0 %)가 있었습니다 <span class="tag tag-fact">논문</span>. 이 비율은 이 표본의 것이지 분야 전체의 비율이 아닙니다.</p>
@@ -1641,7 +1641,7 @@ ul.task-list li input[type="checkbox"] {
 <td>산화물 memristor, base voltage로 τ 2 decade</td>
 <td>전기적 τ 조절</td>
 <td>raw 91.3 % vs reservoir 90.0 %(저자 보고; 비교 조건 동일 여부 <span class="tag tag-unverified">미확인</span>)</td>
-<td>baseline 비교의 모범이자 경고</td>
+<td>소자 없는 기준(baseline)과의 비교의 모범이자 경고</td>
 </tr>
 <tr class="odd">
 <td>Zhou 2025 Nat. Commun.</td>
@@ -1843,7 +1843,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>"τ–성능 정량 연결 연구가 없다"(이전) → <strong>수정.</strong> τ 정합은 알려져 있다(Maraj 2023, Lee S.H. 2025, Yang 2026). 없는 것은 MC/IPC 수준의 연결과 상태변수 구조.</li>
+<li>"τ–성능 정량 연결 연구가 없다"(이전) → <strong>수정.</strong> τ 맞춤은 알려져 있다(Maraj 2023, Lee S.H. 2025, Yang 2026). 없는 것은 MC/IPC 수준의 연결과 상태변수 구조.</li>
 <li>Nat. Commun. 2024 Yan et al.(<a href="https://doi.org/10.1038/s41467-024-45187-1">10.1038/s41467-024-45187-1</a>)은 <strong>리뷰</strong>이며 timescale matching 실험이 아님 <span class="tag tag-fact">논문</span>. 실험 근거로는 Jaurigue &amp; Lüdge 2024(<a href="https://doi.org/10.1088/2634-4386/ad1d32">10.1088/2634-4386/ad1d32</a>), Jang 2021 Nat. Commun., Dhungel 2023.</li>
 <li>Kai Xiao 그룹은 SUSTech 소속으로 보이며(TIPC는 협력 기관), RC 논문은 이 조사(웹, 2026-11-07)에서 찾지 못함 <span class="tag tag-interp">해석</span>.</li>
 <li>Fc(ferrocene) redox 첨가제 + LiClO₄ + duty-cycle 코딩의 이온 reservoir: 같은 조사에서 출판 선행을 찾지 못함. 가까운 것은 redox-type ion-gating reservoir(NIMS), Faradaic 전류 reservoir(JSAP 2024 발표).</li>
@@ -1858,45 +1858,45 @@ ul.task-list li input[type="checkbox"] {
 <section id="research-gap과-내-기여-이-조사-범위에서" class="level3">
 <h3 class="anchored" data-anchor-id="research-gap과-내-기여-이-조사-범위에서">Research gap과 내 기여 (이 조사 범위에서)</h3>
 <ol type="1">
-<li><strong>측정 규약.</strong> 시간영역 감쇠를 2–3개 지수로 맞추고 이름을 붙이는 것이 관행이고 그 귀속을 반증하는 실험이 드뭅니다. 지연별 memory curve·consistency·같은 readout의 baseline을 함께 보고한 고분자 이온 소자 연구를 찾지 못했습니다. → <strong>기여 후보 1:</strong> 반증 가능한 측정 규약(3절 M1–M5 + baseline). 이것만으로는 "특성 분석"이므로 2·3과 묶습니다.</li>
-<li><strong>변수 → 시간 구조의 감도.</strong> 변수 하나를 2–3수준 바꿔 τ를 움직인 예는 많지만, 변수가 어느 과정을 얼마나 움직이는지의 감도 표(두께·전극·온도·바이어스 독립 측정 조합)는 없습니다. → <strong>기여 후보 2:</strong> 감도 표와 판정표(5절). 직교하면 설계 규칙, 직교하지 않아도 "다변수 설계 범위"가 결과입니다.</li>
-<li><strong>시간 구조 ↔︎ 과제 성능.</strong> τ의 수와 분포가 지연별 기억·rank·held-out 성능을 어떻게 정하는지, R–C 여러 개와 어디서 달라지는지는 측정되지 않았습니다. → <strong>기여 후보 3:</strong> 같은 입력·같은 readout에서 소자 vs raw vs delay tap vs R–C(하나·여러 개)의 체계적 비교.</li>
+<li><strong>측정 절차.</strong> 시간영역 감쇠를 2–3개 지수로 맞추고 이름을 붙이는 것이 관행이고 그 귀속을 반증하는 실험이 드뭅니다. 지연별 memory curve·consistency·소자 없이 같은 방법으로 판정한 기준(baseline)을 함께 보고한 고분자 이온 소자 연구를 찾지 못했습니다. → <strong>기여 후보 1:</strong> 틀렸으면 틀렸다고 나오는 측정 절차(3절 M1–M5 + baseline). 이것만으로는 "특성 분석"이므로 2·3과 묶습니다.</li>
+<li><strong>변수 → time scale 구성(τ의 개수와 값)의 감도.</strong> 변수 하나를 2–3수준 바꿔 τ를 움직인 예는 많지만, 변수가 어느 과정을 얼마나 움직이는지의 변수별 효과 표(두께·전극·온도·바이어스 독립 측정 조합)는 없습니다. → <strong>기여 후보 2:</strong> 변수별 효과 표와 확인 표(5절). 독립적으로 작용하면 설계 규칙, 독립적으로 작용하지 않아도 "여러 변수를 함께 쓰는 설계 범위"가 결과입니다.</li>
+<li><strong>time scale 구성(τ의 개수와 값) ↔︎ 과제 성능.</strong> τ의 수와 분포가 지연별 기억·rank·새 데이터에서의 성능(held-out)을 어떻게 정하는지, R–C 여러 개와 어디서 달라지는지는 측정되지 않았습니다. → <strong>기여 후보 3:</strong> 같은 입력·같은 readout에서 소자 vs raw vs delay tap vs R–C(하나·여러 개)의 체계적 비교.</li>
 <li><strong>실제 장치.</strong> 피부 위 EMG에서 센서–소자–읽기–전송을 한 장치로 만들고 디지털 경로와 같은 정확도에서 지연·bit·에너지를 <strong>실측</strong>한 비교. 이것이 "시뮬레이션만으로는 높은 저널에 가기 어렵다"는 판단에 대한 답이며, 동물·몸속은 그 뒤의 조건부 확장입니다.</li>
-<li>(조건부) <strong>선형 응답에 안 보이는 상태변수</strong>를 multisine/NLEIS로 식별하는 것(Aim 2′).</li>
+<li>(조건부) <strong>선형 응답에 안 보이는 상태변수</strong>를 multisine/NLEIS로 식별하는 것(목표 2′).</li>
 </ol>
-<p><strong>array·소자 편차·다중 τ·"두 응용"의 신규성 <span class="tag tag-interp">해석</span>.</strong> (a) "τ가 다른 소자를 나란히"는 Dhungel 2023·Yang 2026에 선행이 있어 그 자체로는 새롭지 않습니다. 새로운 것은 고분자 조성으로 τ 분포를 <strong>설계</strong>하고, 설계된 다양성과 무작위 편차·drift를 분리해 어느 쪽이 성능에 기여하는지 보이는 것입니다(그림 8은 편차가 rank를 거의 안 올림을 모의로 보임). (b) 공간 정보: 전해질을 공유하는 어레이에서 소자 간 <strong>결합</strong>(한 소자의 이온 변화가 옆 소자에 미치는 영향)을 실측한 연구는 찾지 못했습니다 — 공백은 맞지만, 결합이 계산 차원을 늘린다는 보장이 없고 읽기 채널(TIA) 비용이 소자 수에 비례해 늘어납니다. 그래서 2–3 전극 사이의 전달 임피던스(Z_ij)를 재는 실험까지만 Aim 2에 넣고, 큰 어레이는 그 결과를 본 뒤 정합니다. (c) "서로 다른 time scale의 응용 둘"(EMG + lactate)은 같은 측정 규약으로 소자의 <strong>과정이 다름</strong>을 보일 때만 하나의 연구가 되고, 그렇지 않으면 데모 두 개의 나열입니다. 논문의 단위는 특성 이름이 아니라 <strong>독립된 과학적 질문</strong>(Aim 1·2·3)이며, 어느 Aim의 부정 결과도 자동으로 논문이 되지는 않습니다(논문화에 필요한 증거는 8절).</p>
+<p><strong>array·소자 편차·다중 τ·"두 응용"의 신규성 <span class="tag tag-interp">해석</span>.</strong> (a) "τ가 다른 소자를 나란히"는 Dhungel 2023·Yang 2026에 선행이 있어 그 자체로는 새롭지 않습니다. 새로운 것은 고분자 조성으로 τ 분포를 <strong>설계</strong>하고, 설계된 다양성과 무작위 편차·drift를 분리해 어느 쪽이 성능에 기여하는지 보이는 것입니다(그림 8은 편차가 rank를 거의 안 올림을 모의로 보임). (b) 공간 정보: 전해질을 공유하는 어레이에서 소자 간 <strong>결합</strong>(한 소자의 이온 변화가 옆 소자에 미치는 영향)을 실측한 연구는 찾지 못했습니다 — 공백은 맞지만, 결합이 계산 차원을 늘린다는 보장이 없고 읽기 채널(TIA) 비용이 소자 수에 비례해 늘어납니다. 그래서 2–3 전극 사이의 전달 임피던스(Z_ij)를 재는 실험까지만 목표 2에 넣고, 큰 어레이는 그 결과를 본 뒤 정합니다. (c) "서로 다른 time scale의 응용 둘"(EMG + lactate)은 같은 측정 절차로 소자의 <strong>과정이 다름</strong>을 보일 때만 하나의 연구가 되고, 그렇지 않으면 데모 두 개의 나열입니다. 논문의 단위는 특성 이름이 아니라 <strong>독립된 과학적 질문</strong>(목표 1·2·3)이며, 어느 목표의 부정 결과도 자동으로 논문이 되지는 않습니다(논문화에 필요한 증거는 8절).</p>
 </section>
 </section>
 <section id="rm-aims" class="level2">
-<h2 class="anchored" data-anchor-id="rm-aims">7. 중심 가설과 세 Aims</h2>
-<p><strong>이 절의 결론.</strong> Aim 1(기억이 일하는가) → Aim 2(소재가 시간 구조를 고르는가) → Aim 3(시스템에서 남는가) 순서로, 앞 단계가 뒷 단계의 합성·제작을 정당화합니다. 가설 ID는 Aim 번호와 같습니다.</p>
-<section id="aim-1.-기억이-일하는가-기존-소자-τδt-baseline" class="level3">
-<h3 class="anchored" data-anchor-id="aim-1.-기억이-일하는가-기존-소자-τδt-baseline">Aim 1. 기억이 일하는가 — 기존 소자, τ/Δt, baseline</h3>
+<h2 class="anchored" data-anchor-id="rm-aims">7. 중심 가설과 세 연구 목표</h2>
+<p><strong>이 절의 결론.</strong> 목표 1(기억이 일하는가) → 목표 2(소재가 time scale 구성(τ의 개수와 값)을 고르는가) → 목표 3(시스템에서 남는가) 순서로, 앞 단계가 뒷 단계의 합성·제작을 정당화합니다. 가설 번호는 목표 번호와 같게 씁니다.</p>
+<section id="목표-1.-기억이-일하는가-기존-소자-τδt-baseline" class="level3">
+<h3 class="anchored" data-anchor-id="목표-1.-기억이-일하는가-기존-소자-τδt-baseline">목표 1. 기억이 일하는가 — 기존 소자, τ/Δt, baseline</h3>
 <ul>
 <li><strong>질문.</strong> τ가 다른 기존 소자들이 τ/Δt를 바꿀 때, 같은 펄스열·같은 읽기 횟수·같은 readout의 raw input · delay tap · 같은 τ의 R–C 회로보다 held-out 순서 구분 정확도를 미리 정한 문턱 이상 개선하는 τ/Δt 구간이 있는가?</li>
-<li><strong>왜 중요한가.</strong> 조사한 표본에서 baseline 비교가 드물었고, 있던 경우 소자 기여가 0이거나 음수인 사례가 있었습니다. 이 비교 없이 Aim 2의 합성을 시작하면 소재 연구가 헛돌 수 있습니다.</li>
-<li><strong>가설 H1-a.</strong> 소자의 held-out 정확도는 τ/Δt의 종 모양 함수이고 최댓값이 τ/Δt ≈ 1–5에 있다(모형 2–5, 그림 9; 실제 값은 측정 전). <strong>H1-b.</strong> 그 최댓값에서 같은 τ의 R–C 하나보다 높고 R–C 셋(τ 세 개)과 비슷하다 — 즉 1차 이득은 "다중 τ"에서 온다. <span class="tag tag-hypo">가설</span></li>
+<li><strong>왜 중요한가.</strong> 조사한 표본에서 소자 없는 기준(baseline)과의 비교가 드물었고, 있던 경우 소자 기여가 0이거나 음수인 사례가 있었습니다. 이 비교 없이 목표 2의 합성을 시작하면 소재 연구가 헛돌 수 있습니다.</li>
+<li><strong>가설 H1-a.</strong> 소자의 새 데이터 정확도(held-out)는 τ/Δt의 종 모양 함수이고 최댓값이 τ/Δt ≈ 1–5에 있다(모형 2–5, 그림 9; 실제 값은 측정 전). <strong>H1-b.</strong> 그 최댓값에서 같은 τ의 R–C 하나보다 높고 R–C 셋(τ 세 개)과 비슷하다 — 즉 1차 이득은 "다중 τ"에서 온다. <span class="tag tag-hypo">가설</span></li>
 <li><strong>실험.</strong> 4-bit 펄스열 16가지 + EMG 순서 과제(합성 → 공개 데이터), Δt 5수준. 대조: raw(같은 읽기 횟수의 원시 펄스), delay tap(최근 k개 저장), R–C 하나(같은 τ), R–C 셋, static device(기억 없는 비선형), 측정 회로의 R–C 더미(회로 흔적 분리), label shuffle 20회. <strong>기억의 기여를 가르는 ablation:</strong> 같은 합·다른 순서 입력, 시간 재배열, 읽기 시점 이동. 소자 7–9개 <span class="tag tag-unverified">파일럿</span>(첫 3개 소자의 CV로 다시 정함), 24 h drift. 같은 소자의 반복 펄스는 반복 측정이지 소자 표본이 아닙니다.</li>
 <li><strong>지표.</strong> held-out balanced accuracy(세션·소자 분리, test 고정), memory curve, separability·sequence sensitivity, rank, consistency.</li>
-<li><strong>해석.</strong> (i) 문턱 이상 재현 → Aim 2. (ii) R–C 셋과 같음 → "다중 τ가 본질"로 Aim 2를 τ 분포 설계에 집중. (iii) raw·R–C와 같음 → <strong>이 과제·조건에서는 추가 이득을 입증하지 못함</strong>(계산 기능이 없다는 뜻이 아님). 비선형이 필요한 과제로 바꿔 재시험하거나 역할을 센싱·접속으로 옮김. (iv) static device도 비슷 → 기억의 기여가 작다는 정황이며 ablation으로 확인한 뒤 결론.</li>
+<li><strong>해석.</strong> (i) 문턱 이상 재현 → 목표 2. (ii) R–C 셋과 같음 → "다중 τ가 본질"로 목표 2를 τ 분포 설계에 집중. (iii) raw·R–C와 같음 → <strong>이 과제·조건에서는 추가 이득을 입증하지 못함</strong>(계산 기능이 없다는 뜻이 아님). 비선형이 필요한 과제로 바꿔 재시험하거나 역할을 센싱·접속으로 옮김. (iv) static device도 비슷 → 기억의 기여가 작다는 정황이며 ablation으로 확인한 뒤 결론.</li>
 <li><strong>다음 단계 조건.</strong> 12개월 안에 판정. 기존 시료가 없으면 두께만 다른 같은 조성(S-L)으로 대신.</li>
 </ul>
 </section>
-<section id="aim-2.-소재가-시간-구조를-고르는가-조성-계열-감도-표-판정표" class="level3">
-<h3 class="anchored" data-anchor-id="aim-2.-소재가-시간-구조를-고르는가-조성-계열-감도-표-판정표">Aim 2. 소재가 시간 구조를 고르는가 — 조성 계열, 감도 표, 판정표</h3>
+<section id="목표-2.-소재가-time-scale-구성τ의-개수와-값을-고르는가-조성-계열-변수별-효과-표-확인-표" class="level3">
+<h3 class="anchored" data-anchor-id="목표-2.-소재가-time-scale-구성τ의-개수와-값을-고르는가-조성-계열-변수별-효과-표-확인-표">목표 2. 소재가 time scale 구성(τ의 개수와 값)을 고르는가 — 조성 계열, 변수별 효과 표, 확인 표</h3>
 <ul>
-<li><strong>질문.</strong> 두께 L · 고정전하 밀도 X · Tg(가소제) 세 변수가 각각 어느 시간 과정(EDL · 농도분극/IDL · 사슬·이온쌍)을 얼마나 움직이는가? 설계된 τ 분포가 memory curve·rank·held-out 성능을 예측대로 바꾸는가?</li>
-<li><strong>가설 H2-a (감도).</strong> 감도 표 ∂ln τᵢ/∂(변수ⱼ)에서 두께는 농도분극 과정에, 가소제는 사슬 과정에 가장 크게 작용한다(강한 형태: 비대각이 대각의 1/3 이하 <span class="tag tag-unverified">파일럿</span>). <strong>H2-b (구조 → 지표).</strong> 식별된 독립 과정의 수와 τ 간격(≥ 1 decade)이 선형 MC의 포화값과 잡음 기준 rank, 두 시간척도 과제의 정확도를 정한다(그림 10). <span class="tag tag-hypo">가설</span></li>
+<li><strong>질문.</strong> 두께 L · 고정전하 밀도 X · T<sub>g</sub>(가소제) 세 변수가 각각 어느 시간 과정(EDL · 농도분극(접합에서 이온이 비거나 쌓임)/IDL · 사슬·이온쌍)을 얼마나 움직이는가? 설계된 τ 분포가 memory curve·rank·새 데이터에서의 성능(held-out)을 예측대로 바꾸는가?</li>
+<li><strong>가설 H2-a (감도).</strong> 변수별 효과 표 ∂ln τᵢ/∂(변수ⱼ)에서 두께는 농도분극 과정에, 가소제는 사슬 과정에 가장 크게 작용한다(강한 형태: 비대각이 대각의 1/3 이하 <span class="tag tag-unverified">파일럿</span>). <strong>H2-b (구조 → 지표).</strong> 식별된 독립 과정의 수와 τ 간격(≥ 1 decade)이 선형 MC의 포화값과 잡음 기준 rank, 두 시간척도 과제의 정확도를 정한다(그림 10). <span class="tag tag-hypo">가설</span></li>
 <li><strong>실험.</strong> 형제 소재 계열: S0(중성 이온겔 + 블로킹 전극; EDL이 지배할 것으로 <strong>기대</strong>하는 대조군) · S1(고정전하 단일층) · S2(P|N) · S-L(두께 4수준) · S-T(가소제 2–3수준). 측정: EIS/DRT(온도 5점), 펄스 감쇠, memory curve, separability·rank, consistency, 2–3 전극 전달 임피던스(결합).</li>
-<li><strong>해석.</strong> 성공: 설계 규칙. 부분: 두께만 깨끗한 손잡이이고 조성은 전역 손잡이 → "다변수 설계 범위"를 표로(여전히 설계에 유용). 실패: 모든 변수가 모든 극을 비슷하게 움직임 → 이 조성·조건 범위에서 분리되지 않는다는 결과(분야 전체로 확대하지 않음) + R–C 여러 개와의 비용 비교로 마무리.</li>
+<li><strong>해석.</strong> 성공: 설계 규칙. 부분: 두께만 깨끗한 손잡이이고 조성은 전역 손잡이 → "여러 변수를 함께 쓰는 설계 범위"를 표로(여전히 설계에 유용). 실패: 모든 변수가 모든 극을 비슷하게 움직임 → 이 조성·조건 범위에서 분리되지 않는다는 결과(분야 전체로 확대하지 않음) + R–C 여러 개와의 비용 비교로 마무리.</li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled" title="Aim 2′ (조건부). 선형 응답에 안 보이는 상태변수 — multisine/NLEIS">
+<div class="callout callout-style-default callout-note callout-titled" title="목표 2′ (조건부). 선형 응답에 안 보이는 상태변수 — multisine/NLEIS">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">노트</span>Aim 2′ (조건부). 선형 응답에 안 보이는 상태변수 — multisine/NLEIS
+<span class="screen-reader-only">노트</span>목표 2′ (조건부). 선형 응답에 안 보이는 상태변수 — multisine/NLEIS
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1912,8 +1912,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="aim-3.-시스템에서-남는가-실제-장치-공개-데이터-경계를-정한-비교" class="level3">
-<h3 class="anchored" data-anchor-id="aim-3.-시스템에서-남는가-실제-장치-공개-데이터-경계를-정한-비교">Aim 3. 시스템에서 남는가 — 실제 장치, 공개 데이터, 경계를 정한 비교</h3>
+<section id="목표-3.-시스템에서-남는가-실제-장치-공개-데이터-어디까지-셀지-정한-비교" class="level3">
+<h3 class="anchored" data-anchor-id="목표-3.-시스템에서-남는가-실제-장치-공개-데이터-어디까지-셀지-정한-비교">목표 3. 시스템에서 남는가 — 실제 장치, 공개 데이터, 어디까지 셀지 정한 비교</h3>
 <ul>
 <li><strong>질문.</strong> 같은 정확도·같은 판정 주기에서, 이온 소자 경로(C)가 디지털 현장 판정 경로(B)보다 <strong>지연·전송 bit·에너지(센서–전송 전체)·회로 복잡도</strong> 중 무엇을 실제로 줄이는가?</li>
 <li><strong>가설 H3.</strong> 전송 bit는 원신호 전송(A) 대비 100배 이상 줄지만 그 대부분은 <strong>현장 판정 자체(B)의 이득</strong>이고, C가 B에 더하는 이득은 읽기 횟수를 줄인 만큼의 ADC·버퍼·특징 계산분이다. 에너지는 TIA·DAC의 정지전류와 사건 검출 회로 때문에 B와 같은 급(mW)이 될 수 있고, 이득은 읽기 회로를 사건 때만 켜는 구성에서만 남는다 — 회로 조건을 넣어 계산할 <strong>시나리오</strong>이지 보편 기준이 아닙니다. <span class="tag tag-hypo">가설</span></li>
@@ -1931,7 +1931,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <figure class="rv-fig figure">
 <!-- RM:aims -->
-<svg class="rv-svg" viewbox="0 0 640 250" role="img" aria-label="세 연구 목표(기억이 일하는가, 소재가 모드를 고르는가, 시스템에서 남는가)와 데모 D0–D6의 연결."><rect x="16.0" y="16.0" width="194.0" height="70.0" rx="10" fill="#fff" stroke="#0e8a83" stroke-width="1.6"></rect><text x="26.0" y="36.0" font-size="12" fill="#0e8a83" font-weight="800">Aim 1 · 기억이 일하는가</text><text x="26.0" y="56.0" font-size="10.5" fill="#2b313a">기존 소자 · τ/Δt · baseline</text><text x="26.0" y="74.0" font-size="10" fill="#525b68">답: 지지 / 부분 / 기각 각각 해석</text><rect x="222.0" y="16.0" width="194.0" height="70.0" rx="10" fill="#fff" stroke="#7a3f97" stroke-width="1.6"></rect><text x="232.0" y="36.0" font-size="12" fill="#7a3f97" font-weight="800">Aim 2 · 소재가 모드를 고르는가</text><text x="232.0" y="56.0" font-size="10.5" fill="#2b313a">조성 계열 · 지표 · 비선형 식별</text><text x="232.0" y="74.0" font-size="10" fill="#525b68">답: 지지 / 부분 / 기각 각각 해석</text><rect x="428.0" y="16.0" width="194.0" height="70.0" rx="10" fill="#fff" stroke="#c2682b" stroke-width="1.6"></rect><text x="438.0" y="36.0" font-size="12" fill="#c2682b" font-weight="800">Aim 3 · 시스템에서 남는가</text><text x="438.0" y="56.0" font-size="10.5" fill="#2b313a">보드 실시간 · 공개 데이터 · 에너지 경계</text><text x="438.0" y="74.0" font-size="10" fill="#525b68">답: 지지 / 부분 / 기각 각각 해석</text><rect x="16.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#0e8a83" stroke-width="1.2"></rect><text x="57.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D0</text><text x="57.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">PC 모의</text><line x1="57" y1="150" x2="113" y2="86" stroke="#0e8a83" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="104.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#0e8a83" stroke-width="1.2"></rect><text x="145.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D1</text><text x="145.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">보드+버튼·센서</text><line x1="145" y1="150" x2="113" y2="86" stroke="#0e8a83" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="192.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#0e8a83" stroke-width="1.2"></rect><text x="233.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D2</text><text x="233.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">기존 소자 측정</text><line x1="233" y1="150" x2="113" y2="86" stroke="#0e8a83" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="280.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#7a3f97" stroke-width="1.2"></rect><text x="321.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D3</text><text x="321.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">조성 계열 소자</text><line x1="321" y1="150" x2="319" y2="86" stroke="#7a3f97" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="368.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#c2682b" stroke-width="1.2"></rect><text x="409.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D4</text><text x="409.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">보드+소자 실시간</text><line x1="409" y1="150" x2="525" y2="86" stroke="#c2682b" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="456.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#c2682b" stroke-width="1.2"></rect><text x="497.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D5</text><text x="497.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">공개 EMG/ECG</text><line x1="497" y1="150" x2="525" y2="86" stroke="#c2682b" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="544.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#c2682b" stroke-width="1.2"></rect><text x="585.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D6</text><text x="585.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">생체 입력(조건부)</text><line x1="585" y1="150" x2="525" y2="86" stroke="#c2682b" stroke-width="1.2" stroke-dasharray="3 3"></line><text x="16.0" y="222.0" font-size="10.5" fill="#525b68">D0–D2는 추가 합성·구매 없이 지금 시작한다. D6는 비생체 입력·공개 데이터로 답할 수 없는 질문이 남을 때만 제안한다.</text><rect x="16.0" y="228.0" width="37.0" height="19" rx="9.5" fill="#f6eefa"></rect><text x="34.5" y="241.5" font-size="11" fill="#7a3f97" font-weight="700" text-anchor="middle">계획</text></svg>
+<svg class="rv-svg" viewbox="0 0 640 250" role="img" aria-label="세 연구 목표(기억이 일하는가, 소재가 모드를 고르는가, 시스템에서 남는가)와 데모 D0–D6의 연결."><rect x="16.0" y="16.0" width="194.0" height="70.0" rx="10" fill="#fff" stroke="#0e8a83" stroke-width="1.6"></rect><text x="26.0" y="36.0" font-size="12" fill="#0e8a83" font-weight="800">목표 1 · 기억이 일하는가</text><text x="26.0" y="56.0" font-size="10.5" fill="#2b313a">기존 소자 · τ/Δt · baseline</text><text x="26.0" y="74.0" font-size="10" fill="#525b68">답: 지지 / 부분 / 기각 각각 해석</text><rect x="222.0" y="16.0" width="194.0" height="70.0" rx="10" fill="#fff" stroke="#7a3f97" stroke-width="1.6"></rect><text x="232.0" y="36.0" font-size="12" fill="#7a3f97" font-weight="800">목표 2 · 소재가 모드를 고르는가</text><text x="232.0" y="56.0" font-size="10.5" fill="#2b313a">조성 계열 · 지표 · 비선형 식별</text><text x="232.0" y="74.0" font-size="10" fill="#525b68">답: 지지 / 부분 / 기각 각각 해석</text><rect x="428.0" y="16.0" width="194.0" height="70.0" rx="10" fill="#fff" stroke="#c2682b" stroke-width="1.6"></rect><text x="438.0" y="36.0" font-size="12" fill="#c2682b" font-weight="800">목표 3 · 시스템에서 남는가</text><text x="438.0" y="56.0" font-size="10.5" fill="#2b313a">보드 실시간 · 공개 데이터 · 에너지 경계</text><text x="438.0" y="74.0" font-size="10" fill="#525b68">답: 지지 / 부분 / 기각 각각 해석</text><rect x="16.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#0e8a83" stroke-width="1.2"></rect><text x="57.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D0</text><text x="57.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">PC 모의</text><line x1="57" y1="150" x2="113" y2="86" stroke="#0e8a83" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="104.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#0e8a83" stroke-width="1.2"></rect><text x="145.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D1</text><text x="145.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">보드+버튼·센서</text><line x1="145" y1="150" x2="113" y2="86" stroke="#0e8a83" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="192.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#0e8a83" stroke-width="1.2"></rect><text x="233.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D2</text><text x="233.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">기존 소자 측정</text><line x1="233" y1="150" x2="113" y2="86" stroke="#0e8a83" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="280.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#7a3f97" stroke-width="1.2"></rect><text x="321.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D3</text><text x="321.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">조성 계열 소자</text><line x1="321" y1="150" x2="319" y2="86" stroke="#7a3f97" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="368.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#c2682b" stroke-width="1.2"></rect><text x="409.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D4</text><text x="409.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">보드+소자 실시간</text><line x1="409" y1="150" x2="525" y2="86" stroke="#c2682b" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="456.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#c2682b" stroke-width="1.2"></rect><text x="497.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D5</text><text x="497.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">공개 EMG/ECG</text><line x1="497" y1="150" x2="525" y2="86" stroke="#c2682b" stroke-width="1.2" stroke-dasharray="3 3"></line><rect x="544.0" y="150.0" width="82.0" height="44.0" rx="8" fill="#fff" stroke="#c2682b" stroke-width="1.2"></rect><text x="585.0" y="170.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">D6</text><text x="585.0" y="183.0" font-size="10" fill="#0f1b33" font-weight="700" text-anchor="middle">생체 입력(조건부)</text><line x1="585" y1="150" x2="525" y2="86" stroke="#c2682b" stroke-width="1.2" stroke-dasharray="3 3"></line><text x="16.0" y="222.0" font-size="10.5" fill="#525b68">D0–D2는 추가 합성·구매 없이 지금 시작한다. D6는 비생체 입력·공개 데이터로 답할 수 없는 질문이 남을 때만 제안한다.</text><rect x="16.0" y="228.0" width="37.0" height="19" rx="9.5" fill="#f6eefa"></rect><text x="34.5" y="241.5" font-size="11" fill="#7a3f97" font-weight="700" text-anchor="middle">계획</text></svg>
 <!-- /RM:aims -->
 <figcaption><b>그림 13. 연구 목표와 데모의 연결.</b> D0–D2는 추가 합성 없이 시작하되 D2(기존 소자 측정)는 장비·시료 확인 뒤에. D6는 조건부.</figcaption>
 </figure>
@@ -1940,9 +1940,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="rm-papers" class="level2">
 <h2 class="anchored" data-anchor-id="rm-papers">8. 논문으로 어떻게 묶이나: figure 구상과 생체 데모의 자리</h2>
 <p><strong>이 절의 결론.</strong> 논문의 단위는 "memory 조절 논문, nonlinearity 조절 논문"이 아니라 독립된 질문 셋입니다. 각 논문의 마지막 figure는 실제 장치·실제 입력으로 끝내되, 그 앞 figure들이 소자 없는 baseline과 메커니즘 증거를 갖춰야 합니다.</p>
-<p><strong>논문 1 (Aim 1): "이온 소자의 흔적은 언제 baseline을 이기는가"</strong> — Fig. 1 과제·같은 입력·같은 읽기 횟수의 정의와 장치 도식 · Fig. 2 τ/Δt 종 모양(소자 ≥ 5개, R–C 더미 대조) · Fig. 3 같은 readout의 4종 baseline 비교와 ablation · Fig. 4 consistency·drift·소자 간 CV · Fig. 5 공개 EMG 데이터(PutEMG/Ninapro)를 소자 경로로 판정한 결과와 디지털 baseline의 대조. <strong>논문화에 필요한 증거:</strong> 세션·소자 분리 held-out, 반복 ≥ 5 소자, 효과 크기와 구간, label shuffle.</p>
-<p><strong>논문 2 (Aim 2): "조성과 구조가 흔적의 시간 구조를 어디까지 설계하는가"</strong> — Fig. 1 형제 소재 계열과 과정 도식 · Fig. 2 DRT 극과 6축 판정표 · Fig. 3 감도 표 heat map(두께·X·가소제 × 과정) · Fig. 4 설계된 τ 분포 → memory curve·rank · Fig. 5 두 시간척도 과제(EMG 순서 + 느린 정보)에서 설계 소자 vs 단일 τ vs R–C 셋. 직교하지 않을 때도 Fig. 3(비대각)이 주장이 됩니다. <strong>증거:</strong> 변수 3 × 수준 ≥ 3, 극마다 ≥ 3축 독립 증거.</p>
-<p><strong>논문 3 (Aim 3): "피부 위 EMG 장치에서 소자 경로가 실제로 줄이는 것"</strong> — Fig. 1 세 경로와 측정 경계 · Fig. 2 같은 정확도에서 지연·bit·에너지·부품 수 · Fig. 3 읽기 주기에 따른 에너지 교차점(회로 조건 명시) · Fig. 4 자원자 손목 EMG 24 h 실시간(IRB) · Fig. 5 (조건부) 느린 과정이 분리된 소자로 땀 lactate 추세 — Aim 2에서 분 단위 과정이 실제로 분리될 때만. <strong>증거:</strong> 통제 비교 + 제품 비교, 실측 전류, 피부 입력.</p>
+<p><strong>논문 1 (목표 1): "이온 소자의 흔적은 언제 baseline을 이기는가"</strong> — Fig. 1 과제·같은 입력·같은 읽기 횟수의 정의와 장치 도식 · Fig. 2 τ/Δt 종 모양(소자 ≥ 5개, R–C 더미 대조) · Fig. 3 같은 readout의 4종 소자 없는 기준(baseline)과의 비교와 ablation · Fig. 4 consistency·drift·소자 간 CV · Fig. 5 공개 EMG 데이터(PutEMG/Ninapro)를 소자 경로로 판정한 결과와 디지털 baseline의 대조. <strong>논문화에 필요한 증거:</strong> 세션·소자 분리 held-out, 반복 ≥ 5 소자, 효과 크기와 구간, label shuffle.</p>
+<p><strong>논문 2 (목표 2): "조성과 구조가 흔적의 time scale 구성(τ의 개수와 값)을 어디까지 설계하는가"</strong> — Fig. 1 형제 소재 계열과 과정 도식 · Fig. 2 DRT 극과 6축 확인 표 · Fig. 3 변수별 효과 표 heat map(두께·X·가소제 × 과정) · Fig. 4 설계된 τ 분포 → memory curve·rank · Fig. 5 두 시간척도 과제(EMG 순서 + 느린 정보)에서 설계 소자 vs 단일 τ vs R–C 셋. 독립적으로 작용하지 않을 때도 Fig. 3(비대각)이 주장이 됩니다. <strong>증거:</strong> 변수 3 × 수준 ≥ 3, 극마다 ≥ 3축 독립 증거.</p>
+<p><strong>논문 3 (목표 3): "피부 위 EMG 장치에서 소자 경로가 실제로 줄이는 것"</strong> — Fig. 1 세 경로와 측정 경계 · Fig. 2 같은 정확도에서 지연·bit·에너지·부품 수 · Fig. 3 읽기 주기에 따른 에너지 교차점(회로 조건 명시) · Fig. 4 자원자 손목 EMG 24 h 실시간(IRB) · Fig. 5 (조건부) 느린 과정이 분리된 소자로 땀 lactate 추세 — 목표 2에서 분 단위 과정이 실제로 분리될 때만. <strong>증거:</strong> 통제 비교 + 제품 비교, 실측 전류, 피부 입력.</p>
 <p><strong>생체 데모의 자리.</strong> "시뮬레이션만으로는 부족하다"는 판단에 동의합니다. 다만 순서가 중요합니다: 소자 없는 baseline을 이기지 못한 장치를 쥐에 붙이면 "되긴 되는데 왜 소자인지" 답할 수 없습니다. 그래서 (1) 공개 데이터 → (2) 보드 + 소자 실시간 → (3) 자원자 피부 EMG(비침습, IRB) → (4) 동물·몸속(조건부, 협업)의 순서로 가고, (4)는 비생체 입력·공개 데이터·피부 입력으로 답할 수 없는 질문(예: 몸속 염농도·단백질 흡착에서 접합 물리가 유지되는가, 폐루프 자극의 시점 오차)이 남을 때만 제안합니다. 전문 협업(전기생리)과 승인(IRB·동물)은 구분합니다.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="교수님 예상 질문과 답">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -1957,15 +1957,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li><strong>"간단한 디지털 방법으로 충분하지 않은가?"</strong> — 계산은 보고된 구현에서 약 1 mW면 됩니다. 소자가 바꾸는 것은 ADC·버퍼·특징 경로와 읽기 횟수이고, 그것이 TIA·DAC·검출 회로 비용보다 큰지는 Aim 3의 측정이 답합니다. 작으면 그렇게 쓰겠습니다.</li>
-<li><strong>"이온 소재가 꼭 필요한가? R–C로 되지 않나?"</strong> — R–C 하나로 되면 그렇게 쓸 것입니다(Aim 1 대조군). 소재가 필요한 지점은 여러 시간척도를 한 소자에, 비선형의 모양, 이온 신호의 무변환 접속이고, 첫째가 Aim 2입니다.</li>
-<li><strong>"기존 논문과 무엇이 다른가?"</strong> — τ 정합은 알려져 있습니다. 다른 것은 baseline·consistency를 포함한 측정 규약, 변수→과정의 감도 표와 판정표, 전체 경계의 시스템 비교이며, 셋 다 이 조사 범위에서 고분자 이온 소자에 대한 보고를 찾지 못했습니다.</li>
-<li><strong>"metric이 좋아지면 과제도 좋아지나?"</strong> — 아닙니다(그림 8). 모든 지표 옆에 held-out 정확도를 둡니다.</li>
+<li><strong>"간단한 디지털 방법으로 충분하지 않은가?"</strong> — 계산은 보고된 구현에서 약 1 mW면 됩니다. 소자가 바꾸는 것은 ADC·버퍼·특징 경로와 읽기 횟수이고, 그것이 TIA·DAC·검출 회로 비용보다 큰지는 목표 3의 측정이 답합니다. 작으면 그렇게 쓰겠습니다.</li>
+<li><strong>"이온 소재가 꼭 필요한가? R–C로 되지 않나?"</strong> — R–C 하나로 되면 그렇게 쓸 것입니다(목표 1 대조군). 소재가 필요한 지점은 여러 시간척도를 한 소자에, 비선형의 모양, 이온 신호의 변환 없는 직접 연결이고, 첫째가 목표 2입니다.</li>
+<li><strong>"기존 논문과 무엇이 다른가?"</strong> — τ 맞춤은 알려져 있습니다. 다른 것은 baseline·consistency를 포함한 측정 절차, 변수→과정의 변수별 효과 표와 확인 표, 전체 경계의 시스템 비교이며, 셋 다 이 조사 범위에서 고분자 이온 소자에 대한 보고를 찾지 못했습니다.</li>
+<li><strong>"metric이 좋아지면 과제도 좋아지나?"</strong> — 아닙니다(그림 8). 모든 지표 옆에 새 데이터 정확도(held-out)를 둡니다.</li>
 <li><strong>"측정 회로의 흔적을 소재 기억으로 오해하는 것은 아닌가?"</strong> — τ를 아는 R–C 더미를 같은 회로로 먼저 재고, 소자 τ가 더미 τ와 분명히 구분되며 두께·전극 의존성이 소재 쪽 설명과 맞을 때만 소재 기억으로 해석합니다.</li>
-<li><strong>"조성을 바꾸면 여러 성질이 함께 변해 인과를 말할 수 있나?"</strong> — 두께(조성 불변)를 1순위 손잡이로 두고, 조성 변수는 감도 표로 교란을 정량합니다. 직교하지 않으면 그 범위가 결과입니다.</li>
+<li><strong>"조성을 바꾸면 여러 성질이 함께 변해 인과를 말할 수 있나?"</strong> — 두께(조성 불변)를 1순위 손잡이로 두고, 조성 변수는 변수별 효과 표로 교란을 정량합니다. 독립적으로 작용하지 않으면 그 범위가 결과입니다.</li>
 <li><strong>"비교가 공정한가?"</strong> — 통제 비교(같은 입력·관찰 시간·읽기 횟수·특징 수·readout)와 제품 비교(최적화된 디지털)를 둘 다 합니다.</li>
-<li><strong>"1년 안에 틀렸다는 것을 알 수 있나?"</strong> — Aim 1의 12개월 판정점에서 이득이 없으면 방향을 바꿉니다. Aim 2′는 12개월에 타당성만 판정합니다.</li>
-<li><strong>"바이오 데모가 실패해도 남는 것은?"</strong> — 측정 규약, 감도 표(부정이어도), 시스템 비교표. 생체 데모는 조건부 확장입니다.</li>
+<li><strong>"1년 안에 틀렸다는 것을 알 수 있나?"</strong> — 목표 1의 12개월 판정점에서 이득이 없으면 방향을 바꿉니다. 목표 2′는 12개월에 타당성만 판정합니다.</li>
+<li><strong>"바이오 데모가 실패해도 남는 것은?"</strong> — 측정 절차, 변수별 효과 표(부정이어도), 시스템 비교표. 생체 데모는 조건부 확장입니다.</li>
 <li><strong>"남들은 PRC로 무엇을 하나?"</strong> — 6절 첫 단락. 대부분 소자 응답을 소프트웨어 readout에 넣은 벤치마크이고, 실제 장치·baseline·생체 입력을 함께 갖춘 것은 드뭅니다.</li>
 </ul>
 </div>
@@ -1977,9 +1977,9 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>이 절의 결론.</strong> 큰 것을 준비하다 시간을 쓰지 않고, 작은 프로젝트를 하나씩 끝내며 실제 병목을 경험합니다. 이번 주에 시작할 수 있는 것은 PC 모의실험 재현과 공개 EMG 데이터의 디지털 baseline이며, 기존 소자 측정은 장비·시료 확인 뒤에 합니다.</p>
 <figure class="rv-fig figure">
 <!-- RM:decision -->
-<svg class="rv-svg" viewbox="0 0 640 330" role="img" aria-label="1차 실험 결과에 따른 세 갈래(R–C와 같다, static device도 이긴다, 소자만 이기고 재현된다)와 모든 가지에서 함께 재는 대조 항목."><rect x="170.0" y="14.0" width="300.0" height="44.0" rx="10" fill="#0f1b33" stroke="#0f1b33" stroke-width="1"></rect><text x="320.0" y="32.0" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">1차 실험: 같은 펄스열·같은 읽기 횟수에서</text><text x="320.0" y="46.0" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">소자 vs raw · delay tap · 같은 τ의 R–C</text><line x1="320" y1="58" x2="113" y2="92" stroke="#c6cedb" stroke-width="1.5"></line><rect x="16.0" y="92.0" width="194.0" height="96.0" rx="10" fill="#fff" stroke="#525b68" stroke-width="1.6"></rect><text x="26.0" y="112.0" font-size="11.5" fill="#525b68" font-weight="800">(a) R–C와 같다</text><text x="26.0" y="131.0" font-size="10.3" fill="#2b313a">이 과제에서 '계산 소자' 표현을 쓰지 않음.</text><text x="26.0" y="145.0" font-size="10.3" fill="#2b313a">→ 역할을 센싱·계면으로 좁히거나,</text><text x="26.0" y="159.0" font-size="10.3" fill="#2b313a">비선형이 필요한 과제로 바꿔 재시험</text><line x1="320" y1="58" x2="319" y2="92" stroke="#c6cedb" stroke-width="1.5"></line><rect x="222.0" y="92.0" width="194.0" height="96.0" rx="10" fill="#fff" stroke="#c2682b" stroke-width="1.6"></rect><text x="232.0" y="112.0" font-size="11.5" fill="#c2682b" font-weight="800">(b) 이기지만 static device도 이김</text><text x="232.0" y="131.0" font-size="10.3" fill="#2b313a">기억이 아니라 비선형(정류)이 일한 것.</text><text x="232.0" y="145.0" font-size="10.3" fill="#2b313a">→ 기억 주장 철회, 비선형 조절 연구로</text><line x1="320" y1="58" x2="525" y2="92" stroke="#c6cedb" stroke-width="1.5"></line><rect x="428.0" y="92.0" width="194.0" height="96.0" rx="10" fill="#fff" stroke="#0e8a83" stroke-width="1.6"></rect><text x="438.0" y="112.0" font-size="11.5" fill="#0e8a83" font-weight="800">(c) 소자만 이기고 재현된다</text><text x="438.0" y="131.0" font-size="10.3" fill="#2b313a">다른 날·다른 소자 7–9개에서도 유지되면</text><text x="438.0" y="145.0" font-size="10.3" fill="#2b313a">→ Aim 2 (조성 계열)로 진행</text><text x="16.0" y="216.0" font-size="12" fill="#0f1b33" font-weight="800">모든 가지에서 함께 재는 것</text><text x="24.0" y="236.0" font-size="10.5" fill="#2b313a">• 측정 회로 자체의 시간 응답: τ를 아는 R–C 더미를 같은 회로로 측정 → 회로의 흔적을 소재 기억으로 오해하지 않기</text><text x="24.0" y="253.0" font-size="10.5" fill="#2b313a">• label shuffle (정답 섞기) 20회 평균 → 우연 수준 확인</text><text x="24.0" y="270.0" font-size="10.5" fill="#2b313a">• 같은 입력 반복 측정의 분포(consistency) → 잡음 하한</text><text x="24.0" y="287.0" font-size="10.5" fill="#2b313a">• 24 h drift: 1 h마다 같은 펄스열 + 무게(함수율)</text><rect x="16.0" y="306.0" width="277.3" height="19" rx="9.5" fill="#fff3cf"></rect><text x="154.7" y="319.5" font-size="11" fill="#8a6a10" font-weight="700" text-anchor="middle">판정 기준은 결과를 보기 전에 날짜와 함께 기록</text></svg>
+<svg class="rv-svg" viewbox="0 0 640 330" role="img" aria-label="1차 실험 결과에 따른 세 갈래(R–C와 같다, static device도 이긴다, 소자만 이기고 재현된다)와 모든 가지에서 함께 재는 대조 항목."><rect x="170.0" y="14.0" width="300.0" height="44.0" rx="10" fill="#0f1b33" stroke="#0f1b33" stroke-width="1"></rect><text x="320.0" y="32.0" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">1차 실험: 같은 펄스열·같은 읽기 횟수에서</text><text x="320.0" y="46.0" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">소자 vs raw · delay tap · 같은 τ의 R–C</text><line x1="320" y1="58" x2="113" y2="92" stroke="#c6cedb" stroke-width="1.5"></line><rect x="16.0" y="92.0" width="194.0" height="96.0" rx="10" fill="#fff" stroke="#525b68" stroke-width="1.6"></rect><text x="26.0" y="112.0" font-size="11.5" fill="#525b68" font-weight="800">(a) R–C와 같다</text><text x="26.0" y="131.0" font-size="10.3" fill="#2b313a">이 과제에서 '계산 소자' 표현을 쓰지 않음.</text><text x="26.0" y="145.0" font-size="10.3" fill="#2b313a">→ 역할을 센싱·계면으로 좁히거나,</text><text x="26.0" y="159.0" font-size="10.3" fill="#2b313a">비선형이 필요한 과제로 바꿔 재시험</text><line x1="320" y1="58" x2="319" y2="92" stroke="#c6cedb" stroke-width="1.5"></line><rect x="222.0" y="92.0" width="194.0" height="96.0" rx="10" fill="#fff" stroke="#c2682b" stroke-width="1.6"></rect><text x="232.0" y="112.0" font-size="11.5" fill="#c2682b" font-weight="800">(b) 이기지만 static device도 이김</text><text x="232.0" y="131.0" font-size="10.3" fill="#2b313a">기억이 아니라 비선형(정류)이 일한 것.</text><text x="232.0" y="145.0" font-size="10.3" fill="#2b313a">→ 기억 주장 철회, 비선형 조절 연구로</text><line x1="320" y1="58" x2="525" y2="92" stroke="#c6cedb" stroke-width="1.5"></line><rect x="428.0" y="92.0" width="194.0" height="96.0" rx="10" fill="#fff" stroke="#0e8a83" stroke-width="1.6"></rect><text x="438.0" y="112.0" font-size="11.5" fill="#0e8a83" font-weight="800">(c) 소자만 이기고 재현된다</text><text x="438.0" y="131.0" font-size="10.3" fill="#2b313a">다른 날·다른 소자 7–9개에서도 유지되면</text><text x="438.0" y="145.0" font-size="10.3" fill="#2b313a">→ 목표 2 (조성 계열)로 진행</text><text x="16.0" y="216.0" font-size="12" fill="#0f1b33" font-weight="800">모든 가지에서 함께 재는 것</text><text x="24.0" y="236.0" font-size="10.5" fill="#2b313a">• 측정 회로 자체의 시간 응답: τ를 아는 R–C 더미를 같은 회로로 측정 → 회로의 흔적을 소재 기억으로 오해하지 않기</text><text x="24.0" y="253.0" font-size="10.5" fill="#2b313a">• label shuffle (정답 섞기) 20회 평균 → 우연 수준 확인</text><text x="24.0" y="270.0" font-size="10.5" fill="#2b313a">• 같은 입력 반복 측정의 분포(consistency) → 잡음 하한</text><text x="24.0" y="287.0" font-size="10.5" fill="#2b313a">• 24 h drift: 1 h마다 같은 펄스열 + 무게(함수율)</text><rect x="16.0" y="306.0" width="277.3" height="19" rx="9.5" fill="#fff3cf"></rect><text x="154.7" y="319.5" font-size="11" fill="#8a6a10" font-weight="700" text-anchor="middle">판정 기준은 결과를 보기 전에 날짜와 함께 기록</text></svg>
 <!-- /RM:decision -->
-<figcaption><b>그림 14. Aim 1의 결과별 해석과 공통 대조군.</b> <b>볼 것:</b> 어느 가지로 가도 할 일이 있다. (a)는 "이 과제·조건에서 추가 이득을 입증하지 못함"이고, (b)는 기억의 기여를 ablation으로 확인한 뒤에 결론을 내린다.</figcaption>
+<figcaption><b>그림 14. 목표 1의 결과별 해석과 공통 대조군.</b> <b>볼 것:</b> 어느 가지로 가도 할 일이 있다. (a)는 "이 과제·조건에서 추가 이득을 입증하지 못함"이고, (b)는 기억의 기여를 ablation으로 확인한 뒤에 결론을 내린다.</figcaption>
 </figure>
 <section id="모의실험과-데모의-역할" class="level3">
 <h3 class="anchored" data-anchor-id="모의실험과-데모의-역할">모의실험과 데모의 역할</h3>
@@ -2002,13 +2002,13 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>sim1 (그림 9)</td>
 <td>τ/Δt 종 모양, 잡음에 따른 허용 폭</td>
-<td>Aim 1의 Δt 범위 설계</td>
+<td>목표 1의 Δt 범위 설계</td>
 <td>소재 가설의 증거</td>
 </tr>
 <tr class="even">
 <td>sim2 (그림 10)</td>
 <td>두 시간척도 과제에서 단일 τ의 한계</td>
-<td>Aim 2의 τ 분포 목표</td>
+<td>목표 2의 τ 분포 목표</td>
 <td>〃</td>
 </tr>
 <tr class="odd">
@@ -2026,13 +2026,13 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>sim5 (그림 6)</td>
 <td>separability·KR·GR 계산 절차</td>
-<td>측정 규약의 코드 원형</td>
+<td>측정 절차의 코드 원형</td>
 <td>〃</td>
 </tr>
 <tr class="even">
 <td>P1·P5 실습</td>
 <td>ECG/EMG 합성 + R–C/소형 reservoir, bit 비교</td>
-<td>Aim 3의 bit 추정 원형</td>
+<td>목표 3의 bit 추정 원형</td>
 <td>에너지 주장</td>
 </tr>
 </tbody>
@@ -2044,8 +2044,8 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="첫-2주-1개월-3개월">첫 2주 · 1개월 · 3개월</h3>
 <ul>
 <li><strong>첫 2주.</strong> (1) 모의실험 5개 재현(R0). (2) 공개 EMG 데이터 하나를 받아 "동작 순서" 과제로 자르고 디지털 baseline을 PC에서 돌린다(R0′). (3) 연구실 장비·시료 목록 확인(부록 D).</li>
-<li><strong>1개월.</strong> (4) P3 실습 1–3으로 보드에서 두 리듬의 CSV와 그래프(R1). (5) 소스미터가 있으면 R–C 더미로 측정 회로의 흔적 확인(R2). (6) Aim 1의 판정 규칙(문턱·반복·분할)을 날짜와 함께 기록.</li>
-<li><strong>3개월.</strong> (7) 기존 소자 1–3개에서 4-bit 16가지 × 반복 10회 × Δt 3수준(R3). (8) 결과에 따라 Aim 2의 첫 계열(두께 4수준) 설계.</li>
+<li><strong>1개월.</strong> (4) P3 실습 1–3으로 보드에서 두 리듬의 CSV와 그래프(R1). (5) 소스미터가 있으면 R–C 더미로 측정 회로의 흔적 확인(R2). (6) 목표 1의 판정 규칙(문턱·반복·분할)을 날짜와 함께 기록.</li>
+<li><strong>3개월.</strong> (7) 기존 소자 1–3개에서 4-bit 16가지 × 반복 10회 × Δt 3수준(R3). (8) 결과에 따라 목표 2의 첫 계열(두께 4수준) 설계.</li>
 </ul>
 </section>
 <section id="초기-작은-프로젝트" class="level3">
@@ -2136,16 +2136,16 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p><strong>추가 구매.</strong> R0–R1은 추가 구매가 없습니다. R2–R3의 소스미터/potentiostat은 보유를 먼저 확인합니다. 없다면 공용 장비 또는 저가 potentiostat(가격·공급처는 확인한 날짜와 함께 적어야 하므로 여기서는 제시하지 않음) <span class="tag tag-unverified">미확인</span>.</p>
-<p><strong>이번 주에 시작할 최소 실험 하나: R0′ 공개 EMG baseline.</strong> 준비물: PC, 공개 데이터 1개, P5 실습 코드. 순서: 두 동작이 연속된 구간을 "A→B / B→A" 쌍으로 자름 → (i) 전체 구간, (ii) 끝 0.3 s만 읽는 두 조건에서 RMS 특징 + 선형 분류 → 세션 분리 교차검증. 예상: (i)는 높고 (ii)는 우연 근처. 다음 판단: (ii)도 높다면 "기억이 필요 없는 과제"이므로 과제를 바꾸고, 낮으면 Aim 1의 과제로 확정합니다.</p>
+<p><strong>이번 주에 시작할 최소 실험 하나: R0′ 공개 EMG baseline.</strong> 준비물: PC, 공개 데이터 1개, P5 실습 코드. 순서: 두 동작이 연속된 구간을 "A→B / B→A" 쌍으로 자름 → (i) 전체 구간, (ii) 끝 0.3 s만 읽는 두 조건에서 RMS 특징 + 선형 분류 → 세션 분리 교차검증. 예상: (i)는 높고 (ii)는 우연 근처. 다음 판단: (ii)도 높다면 "기억이 필요 없는 과제"이므로 과제를 바꾸고, 낮으면 목표 1의 과제로 확정합니다.</p>
 </section>
 </section>
 <section id="rm-roadmap" class="level2">
 <h2 class="anchored" data-anchor-id="rm-roadmap">10. 4년 로드맵과 위험 관리</h2>
 <figure class="rv-fig figure">
 <!-- RM:roadmap -->
-<svg class="rv-svg" viewbox="0 0 640 382" role="img" aria-label="4년 로드맵. 사다리(PC 모의, 보드, 기존 소자), Aim 1 소자 대 baseline, Aim 2 조성 계열, Aim 2' 비선형 식별, Aim 3 시스템, 조건부 생체 협업, 논문 막대와 3개월·12개월·30개월 판정점."><line x1="250.0" y1="30" x2="250.0" y2="300" stroke="#e3e7ee"></line><text x="296.2" y="22.0" font-size="11.5" fill="#525b68" font-weight="700" text-anchor="middle">1년 차</text><line x1="342.5" y1="30" x2="342.5" y2="300" stroke="#e3e7ee"></line><text x="388.8" y="22.0" font-size="11.5" fill="#525b68" font-weight="700" text-anchor="middle">2년 차</text><line x1="435.0" y1="30" x2="435.0" y2="300" stroke="#e3e7ee"></line><text x="481.2" y="22.0" font-size="11.5" fill="#525b68" font-weight="700" text-anchor="middle">3년 차</text><line x1="527.5" y1="30" x2="527.5" y2="300" stroke="#e3e7ee"></line><text x="573.8" y="22.0" font-size="11.5" fill="#525b68" font-weight="700" text-anchor="middle">4년 차</text><text x="242.0" y="56.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">0. 사다리: PC 모의→보드→기존 소자</text><rect x="250.0" y="44" width="46.2" height="18" rx="5" fill="#2b59c3" opacity="0.9"></rect><text x="242.0" y="92.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">Aim 1 소자 vs baseline</text><rect x="268.5" y="80" width="83.2" height="18" rx="5" fill="#0e8a83" opacity="0.9"></rect><text x="242.0" y="128.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">Aim 2 조성 계열·모드별 knob</text><rect x="333.2" y="116" width="157.2" height="18" rx="5" fill="#0e8a83" opacity="0.9"></rect><text x="242.0" y="164.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">Aim 2' 비선형 식별 (multisine)</text><rect x="361.0" y="152" width="148.0" height="18" rx="5" fill="#7a3f97" opacity="0.9"></rect><text x="242.0" y="200.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">Aim 3 보드 실시간·공개 데이터</text><rect x="462.8" y="188" width="120.2" height="18" rx="5" fill="#c2682b" opacity="0.9"></rect><text x="242.0" y="236.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">확장(조건부) 생체 입력 협업</text><rect x="527.5" y="224" width="92.5" height="18" rx="5" fill="#9eadc6" opacity="0.5"></rect><text x="242.0" y="272.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">논문·학위논문</text><rect x="379.5" y="260" width="240.5" height="18" rx="5" fill="#525b68" opacity="0.9"></rect><line x1="296.2" y1="36" x2="296.2" y2="296" stroke="#8a6a10" stroke-width="1.5" stroke-dasharray="4 3"></line><line x1="351.8" y1="36" x2="351.8" y2="296" stroke="#8a6a10" stroke-width="1.5" stroke-dasharray="4 3"></line><line x1="490.5" y1="36" x2="490.5" y2="296" stroke="#8a6a10" stroke-width="1.5" stroke-dasharray="4 3"></line><text x="20.0" y="318.0" font-size="10.5" fill="#8a6a10" font-weight="700">◆ 3개월: τ/Δt 효과가 PC·보드·기존 소자에서 보이는가</text><text x="20.0" y="334.0" font-size="10.5" fill="#8a6a10" font-weight="700">◆ 12개월: baseline 대비 이득 재현? · 짝수 왜곡 ≥ 잡음 + 10 dB?</text><text x="20.0" y="350.0" font-size="10.5" fill="#8a6a10" font-weight="700">◆ 30개월: knob 하나가 모드 하나만 움직이는가</text><rect x="16.0" y="358.0" width="231.3" height="19" rx="9.5" fill="#f6eefa"></rect><text x="131.7" y="371.5" font-size="11" fill="#7a3f97" font-weight="700" text-anchor="middle">단계별 의사결정 계획 · 성과 예언 아님</text></svg>
+<svg class="rv-svg" viewbox="0 0 640 382" role="img" aria-label="4년 로드맵. 사다리(PC 모의, 보드, 기존 소자), 목표 1 소자 대 baseline, 목표 2 조성 계열, 목표 2′ 비선형 식별, 목표 3 시스템, 조건부 생체 협업, 논문 막대와 3개월·12개월·30개월 판정점."><line x1="250.0" y1="30" x2="250.0" y2="300" stroke="#e3e7ee"></line><text x="296.2" y="22.0" font-size="11.5" fill="#525b68" font-weight="700" text-anchor="middle">1년 차</text><line x1="342.5" y1="30" x2="342.5" y2="300" stroke="#e3e7ee"></line><text x="388.8" y="22.0" font-size="11.5" fill="#525b68" font-weight="700" text-anchor="middle">2년 차</text><line x1="435.0" y1="30" x2="435.0" y2="300" stroke="#e3e7ee"></line><text x="481.2" y="22.0" font-size="11.5" fill="#525b68" font-weight="700" text-anchor="middle">3년 차</text><line x1="527.5" y1="30" x2="527.5" y2="300" stroke="#e3e7ee"></line><text x="573.8" y="22.0" font-size="11.5" fill="#525b68" font-weight="700" text-anchor="middle">4년 차</text><text x="242.0" y="56.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">0. 사다리: PC 모의→보드→기존 소자</text><rect x="250.0" y="44" width="46.2" height="18" rx="5" fill="#2b59c3" opacity="0.9"></rect><text x="242.0" y="92.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">목표 1 소자 vs baseline</text><rect x="268.5" y="80" width="83.2" height="18" rx="5" fill="#0e8a83" opacity="0.9"></rect><text x="242.0" y="128.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">목표 2 조성 계열·모드별 knob</text><rect x="333.2" y="116" width="157.2" height="18" rx="5" fill="#0e8a83" opacity="0.9"></rect><text x="242.0" y="164.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">목표 2′ 비선형 식별 (multisine)</text><rect x="361.0" y="152" width="148.0" height="18" rx="5" fill="#7a3f97" opacity="0.9"></rect><text x="242.0" y="200.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">목표 3 보드 실시간·공개 데이터</text><rect x="462.8" y="188" width="120.2" height="18" rx="5" fill="#c2682b" opacity="0.9"></rect><text x="242.0" y="236.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">확장(조건부) 생체 입력 협업</text><rect x="527.5" y="224" width="92.5" height="18" rx="5" fill="#9eadc6" opacity="0.5"></rect><text x="242.0" y="272.0" font-size="11" fill="#0f1b33" font-weight="700" text-anchor="end">논문·학위논문</text><rect x="379.5" y="260" width="240.5" height="18" rx="5" fill="#525b68" opacity="0.9"></rect><line x1="296.2" y1="36" x2="296.2" y2="296" stroke="#8a6a10" stroke-width="1.5" stroke-dasharray="4 3"></line><line x1="351.8" y1="36" x2="351.8" y2="296" stroke="#8a6a10" stroke-width="1.5" stroke-dasharray="4 3"></line><line x1="490.5" y1="36" x2="490.5" y2="296" stroke="#8a6a10" stroke-width="1.5" stroke-dasharray="4 3"></line><text x="20.0" y="318.0" font-size="10.5" fill="#8a6a10" font-weight="700">◆ 3개월: τ/Δt 효과가 PC·보드·기존 소자에서 보이는가</text><text x="20.0" y="334.0" font-size="10.5" fill="#8a6a10" font-weight="700">◆ 12개월: baseline 대비 이득 재현? · 짝수 왜곡 ≥ 잡음 + 10 dB?</text><text x="20.0" y="350.0" font-size="10.5" fill="#8a6a10" font-weight="700">◆ 30개월: knob 하나가 모드 하나만 움직이는가</text><rect x="16.0" y="358.0" width="231.3" height="19" rx="9.5" fill="#f6eefa"></rect><text x="131.7" y="371.5" font-size="11" fill="#7a3f97" font-weight="700" text-anchor="middle">단계별 의사결정 계획 · 성과 예언 아님</text></svg>
 <!-- /RM:roadmap -->
-<figcaption><b>그림 15. 4년 로드맵(단계별 의사결정 계획).</b> <b>볼 것:</b> 세로 점선이 판정점이다. 12개월 판정은 Aim 1과 Aim 2′의 타당성에만 적용하고, Aim 2′ 본 연구는 그 뒤에 시작한다. 작은 프로젝트(R0–R3)와 보드·공개 데이터 사이드 과제는 큰 단계와 병행해 작은 성공을 쌓는다.</figcaption>
+<figcaption><b>그림 15. 4년 로드맵(단계별 의사결정 계획).</b> <b>볼 것:</b> 세로 점선이 판정점이다. 12개월 판정은 목표 1과 목표 2′의 타당성에만 적용하고, 목표 2′ 본 연구는 그 뒤에 시작한다. 작은 프로젝트(R0–R3)와 보드·공개 데이터 사이드 과제는 큰 단계와 병행해 작은 성공을 쌓는다.</figcaption>
 </figure>
 <div class="rm-wide rm-w1100">
 <table class="caption-top table">
@@ -2183,23 +2183,23 @@ ul.task-list li input[type="checkbox"] {
 <td>—</td>
 </tr>
 <tr class="even">
-<td>1 (3–13개월) Aim 1</td>
+<td>1 (3–13개월) 목표 1</td>
 <td>baseline 대비 이득 유무, 소자 반복 재현</td>
 <td>같음 + 소자 다수</td>
 <td>0</td>
 <td>미리 정한 문턱 이상 재현</td>
 <td>12개월에 이득 없음 → 그림 14의 가지</td>
-<td>R–C 셋과 같음 → Aim 2를 τ 분포 설계로 좁힘</td>
+<td>R–C 셋과 같음 → 목표 2를 τ 분포 설계로 좁힘</td>
 <td>같은 readout의 4종 baseline, 소자 ≥ 5개 재현, drift·consistency, ablation</td>
 </tr>
 <tr class="odd">
-<td>2 (10–30개월) Aim 2</td>
-<td>형제 소재 계열, 감도 표, 판정표</td>
+<td>2 (10–30개월) 목표 2</td>
+<td>형제 소재 계열, 변수별 효과 표, 확인 표</td>
 <td>합성(PIL/polyelectrolyte), EIS·DRT, 온도 스테이지</td>
 <td>1</td>
-<td>감도 표 완성 + 판정표 3축 이상</td>
+<td>변수별 효과 표 완성 + 확인 표 3축 이상</td>
 <td>두 변수 이상이 모든 극을 비슷하게 움직임 → 범위 결과로 정리</td>
-<td>두께만 직교 → 설계 규칙을 두께 중심으로</td>
+<td>두께만 독립 제어 → 설계 규칙을 두께 중심으로</td>
 <td>변수 3 × 수준 ≥ 3, 극마다 ≥ 3축 독립 증거, 과제 성능과의 연결</td>
 </tr>
 <tr class="even">
@@ -2213,8 +2213,8 @@ ul.task-list li input[type="checkbox"] {
 <td>대칭성 유도 + 대조 구조 + 반복</td>
 </tr>
 <tr class="odd">
-<td>3 (28–44개월) Aim 3</td>
-<td>보드 실시간 + 공개 EMG + 자원자 피부 EMG, 경계 명시 비교표</td>
+<td>3 (28–44개월) 목표 3</td>
+<td>보드 실시간 + 공개 EMG + 자원자 피부 EMG, 어디까지 셀지 명시 비교표</td>
 <td>NU40 DK, TIA/DAC, 전류 측정, TinyML baseline, IRB</td>
 <td>1, 2</td>
 <td>같은 정확도에서 지연·bit·에너지 표</td>
@@ -2235,21 +2235,21 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </div>
-<p><strong>위험과 대응.</strong> (1) 장비·시료가 없음 → 두께 계열(S-L)부터 자체 제작, 공용 장비. (2) 신호가 잡음·drift에 묻힘 → 무용매 소재, 밀봉 셀, 측정 간격 단축. (3) 이론 그룹의 선점(비선형 요동–응답 이론) → 소재 계열과 화학 귀속은 실험 쪽 가치로 남음. (4) 바이오 확장이 불가 → Aim 1–3의 결과는 독립적으로 남음. (5) 큰 실험에 시간이 잠김 → 분기마다 끝나는 작은 프로젝트(R 시리즈, 보드 사이드 과제)를 병행해 작은 성공과 실제 병목 경험을 쌓음.</p>
+<p><strong>위험과 대응.</strong> (1) 장비·시료가 없음 → 두께 계열(S-L)부터 자체 제작, 공용 장비. (2) 신호가 잡음·drift에 묻힘 → 무용매 소재, 밀봉 셀, 측정 간격 단축. (3) 이론 그룹의 선점(비선형 요동–응답 이론) → 소재 계열과 화학 귀속은 실험 쪽 가치로 남음. (4) 바이오 확장이 불가 → 목표 1–3의 결과는 독립적으로 남음. (5) 큰 실험에 시간이 잠김 → 분기마다 끝나는 작은 프로젝트(R 시리즈, 보드 사이드 과제)를 병행해 작은 성공과 실제 병목 경험을 쌓음.</p>
 </section>
 <section id="rm-objections" class="level2">
 <h2 class="anchored" data-anchor-id="rm-objections">부록 A. 반론 검토</h2>
 <ol type="1">
-<li>"특성 분석에 그친다" → Aim 2를 반증 가능한 가설(감도 표의 구조)로 앞세웠고, 그 결과가 설계 규칙 또는 설계 범위로 바로 쓰입니다.</li>
-<li>수계 하이드로겔을 피한 대가 → 생체 접속 논거는 수계에서 강합니다. 무용매로 시작하는 것은 drift 때문이고, 생리 염농도(150 mM) 노출 시험을 Aim 2의 스트레스 조건으로 넣습니다.</li>
+<li>"특성 분석에 그친다" → 목표 2를 틀렸으면 틀렸다고 나오는 가설(변수별 효과 표의 구조)로 앞세웠고, 그 결과가 설계 규칙 또는 설계 범위로 바로 쓰입니다.</li>
+<li>수계 하이드로겔을 피한 대가 → 생체 신호와의 직접 연결 논거는 수계에서 강합니다. 무용매로 시작하는 것은 drift 때문이고, 생리 염농도(150 mM) 노출 시험을 목표 2의 스트레스 조건으로 넣습니다.</li>
 <li>연구실 소자(redox 첨가제)와의 관계 → Faradaic 경로가 열리므로 "이온 기억"과 "전기화학 반응 기억"을 가르는 대조군(첨가제 없는 동일 전해질, 블로킹 전극)이 필요합니다.</li>
-<li>연구의 긍정적 기여 → 2절의 (2)·(3)(고이온강도 접합 물리, 무변환 접속)과 Aim 2의 다변수 설계 범위는 Aim 1의 결과와 무관하게 남는 기여 후보입니다.</li>
+<li>연구의 긍정적 기여 → 2절의 (2)·(3)(고이온강도 접합 물리, 변환 없는 직접 연결)과 목표 2의 여러 변수를 함께 쓰는 설계 범위는 목표 1의 결과와 무관하게 남는 기여 후보입니다.</li>
 </ol>
 </section>
 <section id="rm-status" class="level2">
 <h2 class="anchored" data-anchor-id="rm-status">부록 B. 확정된 것 · 가설 · 미확인 · 결정이 필요한 것</h2>
-<p><strong>확인한 사실</strong> <span class="tag tag-fact">논문</span> - EMG 분류 창 100–300 ms, 의수 제어 최적 지연 100–125 ms; ECG 박동 창 0.5–1.2 s; lactate 센서 응답 &lt; 90 s, 생리 변화 수 분. - 보고된 sEMG wearable 구현 MCU ≈ 0.8 mW·시스템 ≈ 2.9 mW; TinyML 시계열 추론 수십 µJ–수 mJ; BLE 광고 1회 ≈ 42 µJ; fA급 TIA 0.9–1.3 mA. - 조사 표본 13편(본문 기준): baseline 4/13, MC 2/13, IPC 0, consistency 0. - 화학 변수로 τ를 바꾼 보고는 많으나 과정별 감도 표는 없음; 이온 어레이의 결합 실측 없음; Fc/LiClO₄/duty-cycle reservoir 선행 없음 — 모두 이 조사 범위(웹·원문 노트, 2026-11-07) 내. - Nat. Commun. 2024 Yan et al.은 리뷰. Pei 2026은 Author Correction(mouse → rat)이 있음.</p>
-<p><strong>문헌에서 유추한 해석</strong> <span class="tag tag-interp">해석</span> - 이온 소자의 차별성은 시간 구조의 화학·구조 설계, 고이온강도 접합 물리, 무변환 접속에 있고, 에너지·속도·뇌 유사성 논거는 약하다. - 디지털 경로의 병목은 계산이 아니라 ADC–버퍼–특징 경로와 전송이다. - lactate는 drift와 시간척도가 겹쳐 중심 과제로 부적합하다.</p>
+<p><strong>확인한 사실</strong> <span class="tag tag-fact">논문</span> - EMG 분류 창 100–300 ms, 의수 제어 최적 지연 100–125 ms; ECG 박동 창 0.5–1.2 s; lactate 센서 응답 &lt; 90 s, 생리 변화 수 분. - 보고된 sEMG wearable 구현 MCU ≈ 0.8 mW·시스템 ≈ 2.9 mW; TinyML 시계열 추론 수십 µJ–수 mJ; BLE 광고 1회 ≈ 42 µJ; fA급 TIA 0.9–1.3 mA. - 조사 표본 13편(본문 기준): baseline 4/13, MC 2/13, IPC 0, consistency 0. - 화학 변수로 τ를 바꾼 보고는 많으나 과정별 변수별 효과 표는 없음; 이온 어레이의 결합 실측 없음; Fc/LiClO₄/duty-cycle reservoir 선행 없음 — 모두 이 조사 범위(웹·원문 노트, 2026-11-07) 내. - Nat. Commun. 2024 Yan et al.은 리뷰. Pei 2026은 Author Correction(mouse → rat)이 있음.</p>
+<p><strong>문헌에서 유추한 해석</strong> <span class="tag tag-interp">해석</span> - 이온 소자의 차별성은 time scale 구성(τ의 개수와 값)의 화학·구조 설계, 고이온강도 접합 물리, 변환 없는 직접 연결에 있고, 에너지·속도·뇌 유사성 논거는 약하다. - 디지털 경로의 병목은 계산이 아니라 ADC–버퍼–특징 경로와 전송이다. - lactate는 drift와 시간척도가 겹쳐 중심 과제로 부적합하다.</p>
 <p><strong>검증할 가설</strong> <span class="tag tag-hypo">가설</span>: H1-a/b, H2-a/b, H2′, H3 (7절).</p>
 <p><strong>아직 확인하지 못한 것</strong> <span class="tag tag-unverified">미확인</span> - 연구실의 소스미터/potentiostat·FRA·온도 스테이지 보유, 기존 시료의 수·조성, 연구실 reservoir 소자의 조성·지표 정의(EPSO 등), 보유 단량체·가소제의 호환성. - Legenstein &amp; Maass 2007 원문 세부; Jaeger 2002 보고서 원문; Pei 2026·Lee 2026·Kim 2025의 SI; Balqis 2026의 HW/SW 구분; Lee S.H. 2025 비교 조건의 동일성; SN의 EDL 시간상수 보고. - 저가 potentiostat의 가격·공급처. - 모든 모의실험은 모형이며 실제 소자의 수치는 측정 전.</p>
 <p><strong>내 결정이 필요한 사항 (교수님과 상의)</strong></p>
@@ -2257,7 +2257,7 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li><strong>무게:</strong> 계산 성능 · 소재 물리(과정 분리) · 생체 응용 중 어디에 두는가.</li>
 <li><strong>장비·시료:</strong> 소스미터/potentiostat·FRA·온도 스테이지가 있는가. τ가 다른 기존 시료가 있는가. 없으면 두께 계열(S-L)부터 만드는가.</li>
-<li><strong>연구실 reservoir 플랫폼:</strong> redox 첨가제 소자를 Aim 1의 출발 소자로 쓰는가, 첨가제 없는 PIL 접합으로 시작하는가.</li>
+<li><strong>연구실 reservoir 플랫폼:</strong> redox 첨가제 소자를 목표 1의 출발 소자로 쓰는가, 첨가제 없는 PIL 접합으로 시작하는가.</li>
 <li><strong>판정 날짜:</strong> 3개월·12개월 판정점의 날짜와 기각 숫자를 지금 정하는가.</li>
 <li><strong>협업:</strong> 시스템 식별(multisine/NLEIS)과 읽기 회로(TIA) 쪽. 자원자 EMG는 IRB가 필요하므로 3–4년 차에.</li>
 <li><strong>공개 범위:</strong> 이 페이지는 공개 사이트에 올라가 있습니다(비공개 검토 페이지는 안내만). 세부 가설·연구실 아이디어의 공개 범위가 적절한지 확인해 주세요.</li>
@@ -2307,8 +2307,8 @@ ul.task-list li input[type="checkbox"] {
 <li>echo state property → Jaeger H., GMD Report 148 (2001). memory capacity → Jaeger H., "Short term memory in echo state networks", GMD Report 152 (2002) (원문 <span class="tag tag-unverified">미확인</span>). separation property → Maass W., Natschläger T., Markram H., Neural Comput. 14, 2531 (2002).</li>
 <li>kernel/generalization rank → Legenstein R., Maass W., Neural Netw. 20, 323 (2007), <a href="https://doi.org/10.1016/j.neunet.2007.04.017">10.1016/j.neunet.2007.04.017</a>.</li>
 <li>IPC → Dambre J. et al., Sci. Rep. 2, 514 (2012), <a href="https://doi.org/10.1038/srep00514">10.1038/srep00514</a>. consistency → Uchida A. et al., PRL 93, 244102 (2004), <a href="https://doi.org/10.1103/PhysRevLett.93.244102">10.1103/PhysRevLett.93.244102</a>; Lymburn T. et al., Chaos 29, 023118 (2019), <a href="https://doi.org/10.1063/1.5079686">10.1063/1.5079686</a>.</li>
-<li>IPC = 직교다항식 계수 → Kubota T., Takahashi H., Nakajima K., Phys. Rev. Res. 3, 043135 (2021), <a href="https://doi.org/10.1103/PhysRevResearch.3.043135">10.1103/PhysRevResearch.3.043135</a> (초록).</li>
-<li>시간척도 정합 → Jaurigue L., Lüdge K., Neuromorph. Comput. Eng. (2024), <a href="https://doi.org/10.1088/2634-4386/ad1d32">10.1088/2634-4386/ad1d32</a>. Yan M. et al., Nat. Commun. 15, 2056 (2024)는 리뷰, <a href="https://doi.org/10.1038/s41467-024-45187-1">10.1038/s41467-024-45187-1</a>.</li>
+<li>IPC = 독립 제어다항식 계수 → Kubota T., Takahashi H., Nakajima K., Phys. Rev. Res. 3, 043135 (2021), <a href="https://doi.org/10.1103/PhysRevResearch.3.043135">10.1103/PhysRevResearch.3.043135</a> (초록).</li>
+<li>time scale 맞춤 → Jaurigue L., Lüdge K., Neuromorph. Comput. Eng. (2024), <a href="https://doi.org/10.1088/2634-4386/ad1d32">10.1088/2634-4386/ad1d32</a>. Yan M. et al., Nat. Commun. 15, 2056 (2024)는 리뷰, <a href="https://doi.org/10.1038/s41467-024-45187-1">10.1038/s41467-024-45187-1</a>.</li>
 <li>물리 RC 리뷰 → Liang X. et al., Nat. Electron. 7, 193 (2024), <a href="https://doi.org/10.1038/s41928-024-01133-z">10.1038/s41928-024-01133-z</a>.</li>
 </ul>
 </div>
