@@ -140,7 +140,7 @@ def sim1():
         a.set_xlim(-0.7, T - 0.3)
         a.set_yticks([0, 1])
         a.set_xticks(range(T))
-        a.set_xlabel("칸 k (한 칸 = Δt)")
+        a.set_xlabel("칸 n (한 칸 = Δt)")
         a.set_title("입력 종류 " + "AB"[j] + ": " + lab, fontsize=11, color=c)
         if j == 0:
             a.set_ylabel("입력 u")
@@ -158,7 +158,7 @@ def sim1():
         a.axvline(T - 1, color=NOW, lw=1, ls=":")
         a.set_title(name + chr(10) + f"읽는 칸에서의 차이 {abs(ends[0] - ends[1]):.3f}", fontsize=10.5, linespacing=1.35)
         a.set_xticks([0, 2, 4, 6])
-        a.set_xlabel("칸 k")
+        a.set_xlabel("칸 n")
         if j == 0:
             a.set_ylabel("state x")
             a.text(-0.38, 1.2, "(b)", transform=a.transAxes, fontsize=13, fontweight="bold", va="bottom", ha="left")
@@ -240,7 +240,7 @@ def sim2():
     a.set_ylim(0, 1.62)
     a.set_yticks([])
     a.set_xticks([0, 5, 10, 15, 19])
-    a.set_xlabel("칸 k (입력 하나의 예)")
+    a.set_xlabel("칸 n (입력 하나의 예)")
     a.spines["left"].set_visible(False)
     a.text(3.5, 1.1, "긴 정보 (칸 2–5):\n펄스 묶음이 있었나", color=B_C, ha="center", fontsize=10, linespacing=1.3)
     a.text(10.5, 0.8, "방해 펄스", color=MUTED, ha="center", fontsize=10)
@@ -332,7 +332,7 @@ def sim3():
     a.text(1.15, 9.0, "펄스 1", fontsize=10.5, color=MUTED, ha="center")
     a.text(3.55, 9.0, "펄스 2", fontsize=10.5, color=MUTED, ha="center")
     a.text(6.2, 9.0, "서로 다른가?\n(XOR)", fontsize=10.5, color=A_C, va="center", ha="center", linespacing=1.2)
-    a.text(8.9, 9.0, "세기의 합", fontsize=10.5, color=B_C, ha="center")
+    a.text(8.9, 9.0, "강한 펄스 수", fontsize=10.5, color=B_C, ha="center")
     for r, (p1, p2) in enumerate(((0, 0), (0, 1), (1, 0), (1, 1))):
         yy = 6.9 - r * 1.75
         for xx, v in ((0.2, p1), (2.6, p2)):
@@ -361,7 +361,7 @@ def sim3():
     a.set_title("g = 비선형(포화)의 세기")
     a.legend(loc="upper center", bbox_to_anchor=(0.5, -0.24), ncol=3, fontsize=10, columnspacing=1.2, handlelength=1.4)
     panel(a, "(b)")
-    for j, (title, key, chance, lab, col) in enumerate((("'서로 다른가'(XOR): 덧셈만으론 못 푼다", 0, 0.5, "(c)", A_C), ("'세기의 합': 포화되면 못 푼다", 1, 1 / 3, "(d)", B_C))):
+    for j, (title, key, chance, lab, col) in enumerate((("'서로 다른가'(XOR): 덧셈만으론 못 푼다", 0, 0.5, "(c)", A_C), ("'강한 펄스의 개수': 포화되면 못 푼다", 1, 1 / 3, "(d)", B_C))):
         a = fig.add_subplot(gs[1, j])
         for nz, ls in zip(noises, ("-", "--")):
             a.plot(gains, [r[0] for r in res[nz][key]], color=col, ls=ls, label=f"σ = {nz}")

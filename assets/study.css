@@ -1858,7 +1858,8 @@ i.hp-dot.st-hold { background: #f0c48a; }
 .rv-abstract { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); padding: 1.1rem 0 0.4rem; margin: 0 0 1.6rem; font-size: 1.02rem; line-height: 1.9; }
 .rv-abstract p { color: var(--text); }
 .rv-fig { margin: 1.6rem 0 2rem; }
-.rv-fig > svg, .rv-fig > img { display: block; width: 100%; height: auto; }
+.rv-fig > svg, .rv-fig > img, .rv-fig > a > img { display: block; width: 100%; height: auto; }
+.rv-fig > a { display: block; }
 .rv-fig figcaption { margin-top: 0.7rem; font-size: 0.88rem; line-height: 1.7; color: var(--muted); }
 .rv-fig figcaption b { color: var(--ink); font-family: var(--serif); }
 .rv-q { border: 1.5px solid var(--accent-line); background: var(--accent-soft); border-radius: 14px; padding: 1.1rem 1.3rem 0.4rem; margin: 1.2rem 0 1.4rem; font-family: var(--serif); font-size: 1.08rem; line-height: 1.8; color: var(--ink); }
@@ -1930,7 +1931,8 @@ ol.rv-ladder li.is-now b, ol.rv-ladder li.is-now span { color: #fff; }
 @media (max-width: 640px) {
   .research-page .rv-fig { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .research-page .rv-fig > svg.rv-svg { min-width: 700px; }  /* 2026-11-10: 그림 viewBox 720 → 휴대폰에서 글자 약 14 px, 가로로 밀어서 본다 */
-  .research-page .rv-fig > img { min-width: 640px; }
+  .research-page .rv-fig > img, .research-page .rv-fig > a { min-width: 640px; }
+  .research-page .rv-fig figcaption::before { content: "↔ 그림은 옆으로 밀어서 봅니다. 그래프는 누르면 크게 열립니다. "; font-weight: 700; color: var(--ink); }
   .rv-scroll > svg { min-width: 600px; }
   .research-page .rv-tau { overflow-x: auto; }
   .research-page .rv-tau-svg { min-width: 520px; }
