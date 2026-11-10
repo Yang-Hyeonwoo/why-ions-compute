@@ -1248,7 +1248,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td>잡음·drift·소자 편차</td>
 <td>없음</td>
-<td>있음. 같은 입력에 같은 상태가 나오는가(재현성)가 성능의 분모(3절)</td>
+<td>있음. 같은 입력에 같은 상태가 나오는가(재현성)를 먼저 확인해야 한다(3절)</td>
 </tr>
 <tr class="odd">
 <td>상태를 읽는 비용</td>
@@ -1514,12 +1514,19 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="세-층으로-나눠-보기" class="level3">
 <h3 class="anchored" data-anchor-id="세-층으로-나눠-보기">3.2 세 층으로 나눠 보기</h3>
-<p>아래 성질들은 같은 층위가 아닙니다. <strong>재료가 가진 성질(원인)</strong> → <strong>그 결과로 상태가 갖는 성질(실제로 재는 지표)</strong> → <strong>그것을 믿을 수 있게 하는 조건(분모)</strong>의 순서입니다.</p>
+<p>아래 성질들은 같은 층위가 아닙니다. 구분하는 기준은 <strong>"어디에 붙어 있는 성질인가"</strong>입니다.</p>
+<ul>
+<li><strong>Ⅰ 재료가 가진 성질</strong> — 소자 자체의 성질. 입력을 넣기 전에도 소자가 가지고 있고, <strong>소재·구조로 바꾸는 것</strong>입니다(τ가 얼마인가, 흔적이 단순 합인가 아닌가).</li>
+<li><strong>Ⅱ 상태가 갖는 성질</strong> — 입력열 여러 개를 넣고 <strong>읽은 숫자들(상태)의 모임</strong>이 가지는 성질. 데이터가 있어야 비로소 잴 수 있고, Ⅰ의 <strong>결과</strong>로 나타납니다(상태들이 서로 얼마나 떨어져 있나, 서로 다른 정보를 몇 가지 담았나).</li>
+<li><strong>Ⅲ 믿고 쓸 수 있는가</strong> — Ⅱ의 숫자가 "진짜"이기 위한 <strong>조건</strong>. 같은 입력을 다시 넣었을 때 같은 상태가 나오지 않으면, Ⅱ에서 잰 거리와 정보의 수는 신호가 아니라 잡음을 잰 것이 됩니다.</li>
+<li><strong>Ⅳ 과제 정확도</strong> — 최종 확인. Ⅱ가 좋아도 과제 정확도가 비례해서 오르지는 않으므로 항상 나란히 둡니다.</li>
+</ul>
+<p>비유하면 Ⅰ은 카메라 렌즈의 성질(초점 거리, 밝기), Ⅱ는 그 렌즈로 찍은 사진들의 성질(피사체끼리 구별되나, 세부가 몇 가지나 보이나), Ⅲ은 "같은 장면을 다시 찍어도 같은 사진이 나오는가"(흔들림·손떨림), Ⅳ는 "그 사진으로 실제로 사람을 알아볼 수 있나"입니다.</p>
 <figure class="rv-fig figure">
 <!-- RM:props -->
-<svg class="rv-svg" viewbox="0 0 640 360" role="img" aria-label="좋은 reservoir의 특성을 세 층으로 나눈 구조도. 1층 재료의 성질(fading memory, nonlinearity), 2층 상태의 성질(signal separability, sequence sensitivity, state richness/linear independency), 3층 신뢰성(consistency와 수렴, drift와 소자 편차)."><text x="16.0" y="24.0" font-size="12.5" fill="#0f1b33" font-weight="800">좋은 reservoir의 특성: 세 층</text><rect x="16.0" y="40.0" width="608.0" height="82.0" rx="10" fill="#f4fbfa" stroke="#0e8a83" stroke-width="1.4"></rect><text x="28.0" y="57.0" font-size="11.5" fill="#0e8a83" font-weight="800">Ⅰ. 상태를 만드는 재료의 성질</text><text x="36.0" y="76.0" font-size="11" fill="#0f1b33" font-weight="800">fading memory</text><text x="250.0" y="76.0" font-size="10.5" fill="#2b313a">앞 입력의 흔적이 남되 점점 사라진다 (얼마나 오래: τ, memory curve)</text><text x="36.0" y="102.0" font-size="11" fill="#0f1b33" font-weight="800">nonlinearity</text><text x="250.0" y="102.0" font-size="10.5" fill="#2b313a">흔적이 단순 합이 아니라 순서·조합에 따라 달라진다</text><rect x="16.0" y="134.0" width="608.0" height="108.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="28.0" y="151.0" font-size="11.5" fill="#2b59c3" font-weight="800">Ⅱ. 그 결과 상태가 갖는 성질 (측정하는 것)</text><text x="36.0" y="170.0" font-size="11" fill="#0f1b33" font-weight="800">signal separability</text><text x="250.0" y="170.0" font-size="10.5" fill="#2b313a">다른 입력열 → 충분히 다른 상태 (거리 ÷ 반복 흔들림)</text><text x="36.0" y="196.0" font-size="11" fill="#0f1b33" font-weight="800">sequence sensitivity</text><text x="250.0" y="196.0" font-size="10.5" fill="#2b313a">같은 개수라도 순서가 다르면 다른 상태 (separability 중 '순서' 부분)</text><text x="36.0" y="222.0" font-size="11" fill="#0f1b33" font-weight="800">state richness / linear independency</text><text x="250.0" y="222.0" font-size="10.5" fill="#2b313a">상태들이 서로 다른 정보를 담는 방향의 수 (rank); 겹치면 redundancy</text><rect x="16.0" y="254.0" width="608.0" height="82.0" rx="10" fill="#f6eefa" stroke="#7a3f97" stroke-width="1.4"></rect><text x="28.0" y="271.0" font-size="11.5" fill="#7a3f97" font-weight="800">Ⅲ. 믿고 쓸 수 있는가</text><text x="36.0" y="290.0" font-size="11" fill="#0f1b33" font-weight="800">consistency · 수렴</text><text x="250.0" y="290.0" font-size="10.5" fill="#2b313a">같은 입력이면 같은 상태; 시작 상태의 영향이 사라진다</text><text x="36.0" y="316.0" font-size="11" fill="#0f1b33" font-weight="800">drift · 소자 편차</text><text x="250.0" y="316.0" font-size="10.5" fill="#2b313a">하루 뒤, 다른 소자에서도 같은가</text><text x="16.0" y="356.0" font-size="10" fill="#525b68">읽는 법: Ⅰ이 원인, Ⅱ가 결과(실제로 재는 지표), Ⅲ이 Ⅱ의 분모. Ⅱ의 세 지표는 다른 논문의 separability·sequence sensitivity·kernel quality와 같다.</text><rect x="470.0" y="6.0" width="48.5" height="19" rx="9.5" fill="#f6eefa"></rect><text x="494.2" y="19.5" font-size="11" fill="#7a3f97" font-weight="700" text-anchor="middle">개념도</text></svg>
+<svg class="rv-svg" viewbox="0 0 640 400" role="img" aria-label="좋은 reservoir의 성질 구조도. Ⅰ 재료의 성질(fading memory, nonlinearity)이 Ⅱ 상태의 성질(signal separability, sequence sensitivity, state richness)을 만들고, Ⅱ가 Ⅳ held-out 정확도로 확인된다. Ⅲ consistency와 drift는 Ⅱ를 믿기 위한 조건."><rect x="16" y="14" width="190" height="40" rx="8" fill="#f4fbfa" stroke="#0e8a83" stroke-width="1.4"></rect><text x="111.0" y="30.0" font-size="11.5" fill="#0e8a83" font-weight="800" text-anchor="middle">Ⅰ 재료가 가진 성질</text><text x="111.0" y="45.0" font-size="9" fill="#525b68" text-anchor="middle">원인 · 소재로 바꾸는 것</text><rect x="262" y="14" width="196" height="40" rx="8" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="360.0" y="30.0" font-size="11.5" fill="#2b59c3" font-weight="800" text-anchor="middle">Ⅱ 상태가 갖는 성질</text><text x="360.0" y="45.0" font-size="9" fill="#525b68" text-anchor="middle">결과 · 데이터로 재는 지표</text><rect x="484" y="14" width="140" height="40" rx="8" fill="#fdf3ea" stroke="#c2682b" stroke-width="1.4"></rect><text x="554.0" y="30.0" font-size="11.5" fill="#c2682b" font-weight="800" text-anchor="middle">Ⅳ 과제 정확도</text><text x="554.0" y="45.0" font-size="9" fill="#525b68" text-anchor="middle">최종 확인 · held-out</text><rect x="16.0" y="70.0" width="190.0" height="86.0" rx="8" fill="#fff" stroke="#0e8a83" stroke-width="1.3"></rect><text x="26.0" y="86.0" font-size="10.5" fill="#0f1b33" font-weight="800">fading memory</text><text x="26.0" y="101.0" font-size="9" fill="#2b313a">흔적이 남되 점점 사라진다</text><text x="26.0" y="113.0" font-size="9" fill="#2b313a">얼마나 오래: τ</text><text x="26.0" y="125.0" font-size="9" fill="#2b313a">몇 가지 속도: τ의 수(여러 과정)</text><rect x="16.0" y="170.0" width="190.0" height="72.0" rx="8" fill="#fff" stroke="#0e8a83" stroke-width="1.3"></rect><text x="26.0" y="186.0" font-size="10.5" fill="#0f1b33" font-weight="800">nonlinearity</text><text x="26.0" y="201.0" font-size="9" fill="#2b313a">흔적이 단순 합이 아니라</text><text x="26.0" y="213.0" font-size="9" fill="#2b313a">순서·조합에 따라 달라진다</text><text x="26.0" y="225.0" font-size="9" fill="#2b313a">(포화·정류)</text><rect x="262.0" y="70.0" width="196.0" height="58.0" rx="8" fill="#fff" stroke="#2b59c3" stroke-width="1.3"></rect><text x="272.0" y="86.0" font-size="10.5" fill="#0f1b33" font-weight="800">signal separability</text><text x="272.0" y="101.0" font-size="9" fill="#2b313a">다른 입력열 → 충분히 다른 상태</text><text x="272.0" y="113.0" font-size="9" fill="#2b313a">(거리 ÷ 같은 입력 반복의 흔들림)</text><rect x="262.0" y="140.0" width="196.0" height="58.0" rx="8" fill="#fff" stroke="#2b59c3" stroke-width="1.3"></rect><text x="272.0" y="156.0" font-size="10.5" fill="#0f1b33" font-weight="800">sequence sensitivity</text><text x="272.0" y="171.0" font-size="9" fill="#2b313a">펄스 개수가 같아도 순서가</text><text x="272.0" y="183.0" font-size="9" fill="#2b313a">다르면 다른 상태</text><rect x="262.0" y="210.0" width="196.0" height="58.0" rx="8" fill="#fff" stroke="#2b59c3" stroke-width="1.3"></rect><text x="272.0" y="226.0" font-size="10.5" fill="#0f1b33" font-weight="800">state richness (rank)</text><text x="272.0" y="241.0" font-size="9" fill="#2b313a">상태들이 담은 서로 다른 정보의 수</text><text x="272.0" y="253.0" font-size="9" fill="#2b313a">(= linear independency = kernel quality)</text><rect x="484.0" y="120.0" width="140.0" height="86.0" rx="8" fill="#fff" stroke="#c2682b" stroke-width="1.3"></rect><text x="494.0" y="136.0" font-size="10.5" fill="#0f1b33" font-weight="800">held-out 정확도</text><text x="494.0" y="151.0" font-size="9" fill="#2b313a">학습에 안 쓴 데이터로 채점</text><text x="494.0" y="163.0" font-size="9" fill="#2b313a">Ⅱ가 좋아도 비례하지 않음</text><text x="494.0" y="175.0" font-size="9" fill="#2b313a">→ 항상 나란히 둔다</text><line x1="208.0" y1="95.8" x2="253.0" y2="98.6" stroke="#0e8a83" stroke-width="1.4"></line><path d="M252.7,103.1 L260.0,99.0 L253.3,94.1 Z" fill="#0e8a83"></path><line x1="208.0" y1="121.6" x2="254.4" y2="156.1" stroke="#0e8a83" stroke-width="1.4"></line><path d="M251.7,159.7 L260.0,160.3 L257.1,152.5 Z" fill="#0e8a83"></path><line x1="208.0" y1="143.1" x2="256.3" y2="221.4" stroke="#0e8a83" stroke-width="1.4"></line><path d="M252.5,223.8 L260.0,227.4 L260.2,219.1 Z" fill="#0e8a83"></path><line x1="208.0" y1="191.6" x2="253.2" y2="182.0" stroke="#525b68" stroke-width="1.4"></line><path d="M254.1,186.5 L260.0,180.6 L252.2,177.6 Z" fill="#525b68"></path><line x1="208.0" y1="213.2" x2="254.3" y2="246.5" stroke="#525b68" stroke-width="1.4"></line><path d="M251.7,250.2 L260.0,250.6 L256.9,242.9 Z" fill="#525b68"></path><line x1="460.0" y1="99.0" x2="478.8" y2="135.3" stroke="#c2682b" stroke-width="1.2"></line><path d="M474.8,137.4 L482.0,141.5 L482.8,133.2 Z" fill="#c2682b"></path><line x1="460.0" y1="169.0" x2="475.2" y2="164.8" stroke="#c2682b" stroke-width="1.2"></line><path d="M476.4,169.2 L482.0,163.0 L474.1,160.5 Z" fill="#c2682b"></path><line x1="460.0" y1="239.0" x2="479.4" y2="191.0" stroke="#c2682b" stroke-width="1.2"></line><path d="M483.6,192.7 L482.0,184.5 L475.2,189.3 Z" fill="#c2682b"></path><rect x="16" y="292" width="608" height="62" rx="8" fill="#f6eefa" stroke="#7a3f97" stroke-width="1.3"></rect><text x="28.0" y="309.0" font-size="10.5" fill="#7a3f97" font-weight="800">Ⅲ 믿고 쓸 수 있는가 — Ⅱ의 숫자가 '진짜'이려면 먼저 갖춰야 할 조건</text><text x="28.0" y="326.0" font-size="9.5" fill="#2b313a">consistency · 수렴: 같은 입력이면 같은 상태가 나오고, 시작 상태의 영향은 사라진다</text><text x="28.0" y="341.0" font-size="9.5" fill="#2b313a">drift · 소자 편차: 하루 뒤에도, 다른 소자에서도 같다 (안 되면 Ⅱ는 신호가 아니라 잡음을 잰 것)</text><line x1="16" y1="385" x2="40" y2="385" stroke="#0e8a83" stroke-width="2"></line><text x="46.0" y="389.0" font-size="9.5" fill="#0b6e69">fading memory가 만드는 지표</text><line x1="220" y1="385" x2="244" y2="385" stroke="#525b68" stroke-width="2"></line><text x="250.0" y="389.0" font-size="9.5" fill="#525b68">nonlinearity가 만드는 지표</text><line x1="420" y1="385" x2="444" y2="385" stroke="#c2682b" stroke-width="2"></line><text x="450.0" y="389.0" font-size="9.5" fill="#9a4f1d">지표 → 최종 확인</text><rect x="560.0" y="4.0" width="48.5" height="19" rx="9.5" fill="#f6eefa"></rect><text x="584.2" y="17.5" font-size="11" fill="#7a3f97" font-weight="700" text-anchor="middle">개념도</text></svg>
 <!-- /RM:props -->
-<figcaption><b>그림 6. 좋은 reservoir의 성질, 세 층.</b> <b>볼 것:</b> Ⅰ층은 재료가 가진 성질(원인), Ⅱ층은 그 결과로 상태가 갖는 성질(실제로 재는 지표), Ⅲ층은 Ⅱ층의 숫자를 믿을 수 있게 하는 조건. Ⅱ층의 세 지표는 다른 논문에서 signal separability · sequence sensitivity · linear independency(또는 kernel quality)라고 부르는 것과 같다. 피부·몸속에 쓰려면 "부드럽고 · 생체에 해가 없고 · 몸속 염농도에서 동작"이 별도 조건으로 붙는다(2절).</figcaption>
+<figcaption><b>그림 6. 좋은 reservoir의 성질 구조도.</b> <b>볼 것:</b> 왼쪽(Ⅰ)이 원인, 가운데(Ⅱ)가 결과이자 실제로 재는 지표, 오른쪽(Ⅳ)이 최종 확인. 화살표가 "무엇이 무엇을 만드는가": fading memory의 τ가 과제 시간에 맞아야 separability가 생기고, τ가 여러 개이거나 비선형이 있어야 rank가 오른다. sequence sensitivity는 기억과 비선형 둘 다 필요하다. 아래 띠(Ⅲ)는 Ⅱ의 숫자를 믿기 위한 조건이고, 피부·몸속에 쓰려면 "부드럽고 · 생체에 해가 없고 · 몸속 염농도에서 동작"이 별도 조건으로 붙는다(2절).</figcaption>
 </figure>
 </section>
 <section id="층-재료가-가진-성질-두-가지" class="level3">
@@ -1536,13 +1543,46 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>왜 필요한가.</strong> 2절 그림 5의 천천히 잊는 노드(τ=4)는 "네 칸의 합"에 가까운 값을 남겨, 합이 같은 0110과 1001을 거의 구별하지 못했습니다(0.24 vs 0.25). <strong>덧셈만 하는 재료는 순서를 잃기 쉽습니다.</strong> 비선형이 있어야 "먼저 온 것"과 "나중 온 것"이 다르게 남습니다.</li>
 <li><strong>그러나 클수록 좋지 않습니다.</strong> 비선형이 너무 크면(포화) 약한 입력과 강한 입력이 <strong>같은 값</strong>으로 찍혀 크기 정보를 잃습니다. 3.6의 그림 8이 그 양쪽을 보입니다.</li>
 </ul>
+<p><strong>Ⅰ의 어느 성질이 Ⅱ의 어느 지표를 만드나.</strong> 하나씩 깔끔하게 대응되지는 않지만, 주된 연결은 이렇습니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ⅱ 지표</th>
+<th>주로 만드는 Ⅰ 성질</th>
+<th>왜</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>signal separability</td>
+<td><strong>fading memory</strong> (τ가 과제 시간에 맞는가)</td>
+<td>τ가 너무 짧으면 흔적이 사라져 모든 입력열이 비슷한 상태로 끝나고, 너무 길면 모두 쌓여 역시 비슷해진다. 비선형은 보조.</td>
+</tr>
+<tr class="even">
+<td>sequence sensitivity</td>
+<td><strong>fading memory + nonlinearity 둘 다</strong></td>
+<td>순서를 알려면 "언제 왔나"가 남아야 하고(기억), 덧셈만 하는 재료는 합이 같은 입력열을 구별하기 어렵다(비선형이 필요).</td>
+</tr>
+<tr class="odd">
+<td>state richness (rank)</td>
+<td><strong>τ의 수(여러 과정) + nonlinearity</strong></td>
+<td>선형 재료에서는 서로 다른 τ의 개수가 곧 rank의 상한이다. 비선형이 있으면 같은 τ라도 "곱" 정보가 생겨 rank가 더 오를 수 있다.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>kernel quality와 linear independency는 같은 것인가.</strong> 사실상 같습니다. Legenstein &amp; Maass가 "kernel quality"라고 이름 붙인 것을 재는 방법이 <strong>상태 행렬의 rank</strong>(선형 독립인 방향의 수)이고, 다른 논문들은 그 숫자를 "linear independency" 또는 "state richness"라고 부릅니다. 이 글에서는 <strong>rank</strong>로 통일하고, 다른 입력으로 잰 것을 kernel rank(KR), 비슷한 입력으로 잰 것을 generalization rank(GR)라고 부릅니다(3.7 M4).</p>
 </section>
 <section id="층-상태가-갖는-성질-세-가지-실제로-재는-지표" class="level3">
 <h3 class="anchored" data-anchor-id="층-상태가-갖는-성질-세-가지-실제로-재는-지표">3.4 Ⅱ층 — 상태가 갖는 성질 세 가지 (실제로 재는 지표)</h3>
 <p><strong>① Signal separability(신호 분리).</strong></p>
 <ul>
 <li><strong>뜻.</strong> "다른 입력열이 충분히 <strong>다른</strong> 상태로 끝나는가."</li>
-<li><strong>왜 분모가 필요한가.</strong> 두 상태의 거리가 0.2라도, 같은 입력을 반복했을 때 0.2씩 흔들린다면 구별이 안 됩니다. 그래서 거리를 <strong>반복 흔들림으로 나눕니다.</strong> 키 160 cm와 162 cm인 두 사람을 "구별할 수 있다"고 말하려면 줄자의 오차가 1 cm 안팎이어야 하는 것과 같습니다.</li>
+<li><strong>왜 '반복 흔들림으로 나누나'.</strong> 두 상태의 거리가 0.2라도, 같은 입력을 반복했을 때 0.2씩 흔들린다면 구별이 안 됩니다. 그래서 거리를 <strong>반복 흔들림으로 나눕니다.</strong> 키 160 cm와 162 cm인 두 사람을 "구별할 수 있다"고 말하려면 줄자의 오차가 1 cm 안팎이어야 하는 것과 같습니다.</li>
 <li><strong>어떻게 재나.</strong> 입력열 16가지(4-bit)를 각각 10번씩 넣고 끝 상태를 모은 뒤, (서로 다른 입력열끼리의 거리 평균) ÷ (같은 입력열을 반복했을 때의 거리 평균). 1이면 구별 불가. 그림 7(b)의 11은 "다른 입력끼리가 같은 입력 반복끼리보다 11배 멀다"는 뜻입니다.</li>
 </ul>
 <p><strong>② Sequence sensitivity(순서 민감도).</strong></p>
@@ -1558,8 +1598,9 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>어떻게 재나.</strong> 서로 다른 정보의 방향 수를 <strong>rank</strong>라고 부릅니다(3.6의 그림 9). 노드 수에서 rank를 뺀 것이 중복(redundancy). 예: 노드 3개, rank 1 → 2개는 중복. 다른 논문의 kernel quality · generalization rank가 이 지표입니다.</li>
 </ul>
 </section>
-<section id="층-믿고-쓸-수-있는가" class="level3">
-<h3 class="anchored" data-anchor-id="층-믿고-쓸-수-있는가">3.5 Ⅲ층 — 믿고 쓸 수 있는가</h3>
+<section id="층-믿고-쓸-수-있는가-ⅱ의-숫자를-믿기-위한-조건" class="level3">
+<h3 class="anchored" data-anchor-id="층-믿고-쓸-수-있는가-ⅱ의-숫자를-믿기-위한-조건">3.5 Ⅲ층 — 믿고 쓸 수 있는가: Ⅱ의 숫자를 믿기 위한 조건</h3>
+<p><strong>왜 따로 두나.</strong> Ⅱ의 지표는 모두 "상태들 사이의 거리"로 잽니다. 그런데 같은 입력을 두 번 넣었는데 상태가 매번 다르면, 그 거리는 입력의 차이가 아니라 소자의 흔들림을 잰 것입니다. 그래서 Ⅱ를 재기 전에 Ⅲ을 먼저 확인합니다.</p>
 <p><strong>Consistency(재현성)와 수렴.</strong> 같은 입력열을 다시 넣으면 같은 상태가 나오는가(consistency). 시작 상태가 달라도 입력열이 충분히 지나면 상태가 같아지는가(수렴, echo state property). 이것이 안 되면 readout이 신호가 아니라 <strong>잡음을 외웁니다.</strong> <span class="tag tag-fact">논문</span> Uchida A., McAllister R., Roy R., PRL 93, 244102 (2004), <a href="https://doi.org/10.1103/PhysRevLett.93.244102">10.1103/PhysRevLett.93.244102</a>.</p>
 <p><strong>Drift(저절로 변함)와 소자 편차.</strong> 하루 뒤에도, 다른 소자에서도 같은가. 물이 들어 있는 하이드로겔은 마르고 부풀어 drift가 큽니다(그래서 이 연구는 무용매 소재로 시작합니다, 5절). 소자 사이의 편차는 두께 흔들림이 지배하므로(τ가 두께의 제곱에 비례한다면) 두께로 보정한 값으로 비교합니다.</p>
 </section>
