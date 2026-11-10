@@ -35,7 +35,7 @@ plt = korean_plot()
 plt.rcParams.update({"font.size": 11.5, "axes.titlesize": 12, "axes.labelsize": 11.5, "legend.fontsize": 10.5,
                      "xtick.labelsize": 10.5, "ytick.labelsize": 10.5, "lines.linewidth": 2.2})
 INK = "#1d1d1f"
-ACC = "정확도 (학습에 안 쓴 데이터)"
+ACC = "balanced accuracy (시험 데이터)"
 A_C, B_C, NOW, HYP, MUTED = "#0e8a83", "#c2682b", "#2b59c3", "#7a3f97", "#525b68"
 NUMS = {}
 SEEDS = [0, 1, 2, 3, 4]
@@ -125,35 +125,51 @@ def sim1():
     noises = [0.003, 0.01, 0.03]
     res = {nz: [cv_stats(run_nodes(U, [t])[:, -1, :], y, nz) for t in taus] for nz in noises}
     diff = [abs(run_nodes(U, [t])[:, -1, 0][y == 0].mean() - run_nodes(U, [t])[:, -1, 0][y == 1].mean()) for t in taus]
-    fig = plt.figure(figsize=(8.0, 6.3))
-    gs = fig.add_gridspec(2, 6, height_ratios=[0.8, 1.25], hspace=0.62, wspace=1.4, left=0.1, right=0.98, top=0.9, bottom=0.1)
-    ex = {"펄스가 앞쪽에 온 입력": [0, 1, 3], "펄스가 가운데에 온 입력": [2, 4, 5]}
-    for j, (t, name) in enumerate(((0.3, "너무 짧음: τ/Δt = 0.3"), (3.0, "알맞음: τ/Δt = 3"), (30.0, "너무 김: τ/Δt = 30"))):
-        a = fig.add_subplot(gs[0, 2 * j:2 * j + 2])
+    fig = plt.figure(figsize=(8.0, 8.4))
+    gs = fig.add_gridspec(3, 6, height_ratios=[0.62, 0.8, 1.2], hspace=0.95, wspace=1.4, left=0.1, right=0.98, top=0.95, bottom=0.075)
+    ex = {"펄스 3개가 앞쪽 (칸 0–3)": [0, 1, 3], "펄스 3개가 가운데 (칸 2–5)": [2, 4, 5]}
+    # (a) 실험 구성: 두 종류의 입력과 읽는 칸
+    for j, ((lab, idx), c) in enumerate(zip(ex.items(), (A_C, B_C))):
+        a = fig.add_subplot(gs[0, 3 * j:3 * j + 3])
+        u = np.full(T, 0.1)
+        u[idx] = 1.0
+        a.bar(range(T), u, color=[c if k in idx else "#c9ced6" for k in range(T)], width=0.72)
+        a.axvline(T - 1, color=NOW, lw=1.2, ls=":")
+        a.text(T - 1.15, 1.2, "여기서 한 번 읽음", color=NOW, fontsize=10, ha="right", va="center")
+        a.set_ylim(0, 1.42)
+        a.set_xlim(-0.7, T - 0.3)
+        a.set_yticks([0, 1])
+        a.set_xticks(range(T))
+        a.set_xlabel("칸 k (한 칸 = Δt)")
+        a.set_title("입력 종류 " + "AB"[j] + ": " + lab, fontsize=11, color=c)
+        if j == 0:
+            a.set_ylabel("입력 u")
+            panel(a, "(a)")
+    # (b) 같은 두 입력이 남기는 state
+    for j, (t, name) in enumerate(((0.3, "τ/Δt = 0.3 (너무 짧음)"), (3.0, "τ/Δt = 3 (알맞음)"), (30.0, "τ/Δt = 30 (너무 김)"))):
+        a = fig.add_subplot(gs[1, 2 * j:2 * j + 2])
+        ends = []
         for (lab, idx), c in zip(ex.items(), (A_C, B_C)):
             u = np.full((1, T), 0.1)
             u[0, idx] = 1.0
             x = run_nodes(u, [t])[0, :, 0]
-            a.plot(range(T), x, "o-", color=c, ms=3.5, label=lab)
+            a.plot(range(T), x, "o-", color=c, ms=3.5)
+            ends.append(x[-1])
         a.axvline(T - 1, color=NOW, lw=1, ls=":")
-        a.set_title(name, fontsize=11)
+        a.set_title(name + chr(10) + f"읽는 칸에서의 차이 {abs(ends[0] - ends[1]):.3f}", fontsize=10.5, linespacing=1.35)
         a.set_xticks([0, 2, 4, 6])
         a.set_xlabel("칸 k")
         if j == 0:
-            a.set_ylabel("상태 x")
-            a.legend(loc="lower left", bbox_to_anchor=(0.0, 1.22), ncol=2, fontsize=10, columnspacing=1.0, handlelength=1.4)
-        a.text(T - 1, a.get_ylim()[1], "읽기", color=NOW, fontsize=9.5, ha="center", va="bottom")
-    a0 = fig.add_subplot(gs[1, 0:3])
-    a1 = fig.add_subplot(gs[1, 3:6])
+            a.set_ylabel("state x")
+            a.text(-0.38, 1.2, "(b)", transform=a.transAxes, fontsize=13, fontweight="bold", va="bottom", ha="left")
+    a0 = fig.add_subplot(gs[2, 0:3])
+    a1 = fig.add_subplot(gs[2, 3:6])
     a0.plot(taus, diff, color=INK)
     a0.set_xscale("log")
-    a0.set_xlabel("τ/Δt = 사라지는 시간 ÷ 입력 간격")
-    a0.set_ylabel("두 답의 끝 상태 평균 차이")
-    a0.set_title("끝 상태의 차이")
-    for nz, c in zip(noises, [A_C, NOW, B_C]):
-        a0.axhline(2 * nz, color=c, lw=1, ls=":")
-    a0.text(0.98, 0.93, "점선: 읽기 잡음 σ의 2배\n(σ 세 가지)", fontsize=10, color=MUTED, ha="right", va="top", transform=a0.transAxes)
-    panel(a0, "(a)")
+    a0.set_xlabel("τ/Δt")
+    a0.set_ylabel("A 평균 − B 평균 (끝 state)")
+    a0.set_title("끝에서 읽은 state의 차이")
+    panel(a0, "(c)")
     for c, nz in zip([A_C, NOW, B_C], noises):
         m = np.array([r[0] for r in res[nz]])
         s_ = np.array([r[1] for r in res[nz]])
@@ -164,10 +180,10 @@ def sim1():
     a1.set_xscale("log")
     a1.set_ylim(0.38, 1.04)
     a1.set_xlabel("τ/Δt")
-    a1.set_ylabel(ACC)
-    a1.set_title("맞히는 정도")
-    a1.legend(loc="center", bbox_to_anchor=(0.47, 0.42), title="읽기 잡음", title_fontsize=10, fontsize=10)
-    panel(a1, "(b)")
+    a1.set_ylabel("balanced accuracy (시험 데이터)")
+    a1.set_title("A/B를 맞힌 비율")
+    a1.legend(loc="center", bbox_to_anchor=(0.47, 0.42), title="읽을 때 더한 잡음", title_fontsize=10, fontsize=10)
+    panel(a1, "(d)")
     fig.savefig(OUT / "sim1-tau-window.png")
     plt.close(fig)
     NUMS["sim1"] = {"taus": [round(t, 3) for t in taus],
@@ -207,9 +223,9 @@ def sim2():
         sub[name] = {"short": cv_stats(F, y % 2, noise), "long": cv_stats(F, y // 2, noise)}
     ratios = [1.0, 1.5, 2.0, 3.0, 4.0, 6.0, 10.0]
     sweep = {str(r): cv_stats(run_nodes(U, [2.4 / r, 2.4, 2.4 * r])[:, -1, :], y, noise) for r in ratios}
-    fig = plt.figure(figsize=(8.0, 6.4))
-    gs = fig.add_gridspec(2, 2, height_ratios=[0.62, 1.25], hspace=0.55, wspace=0.42, left=0.1, right=0.98, top=0.93, bottom=0.1)
-    a = fig.add_subplot(gs[0, :])
+    fig = plt.figure(figsize=(8.0, 6.6))
+    gs = fig.add_gridspec(2, 20, height_ratios=[0.66, 1.25], hspace=0.6, wspace=0.42, left=0.1, right=0.98, top=0.93, bottom=0.1)
+    a = fig.add_subplot(gs[0, 0:13])
     ue = np.full(T, 0.05)
     ue[[2, 3, 5]] = 1.0
     ue[[9, 12]] = 0.7
@@ -221,46 +237,63 @@ def sim2():
         cols[k] = A_C
     a.bar(range(T), ue, color=cols, width=0.7)
     a.set_xlim(-0.8, T - 0.2)
-    a.set_ylim(0, 1.5)
+    a.set_ylim(0, 1.62)
     a.set_yticks([])
     a.set_xticks([0, 5, 10, 15, 19])
-    a.set_xlabel("칸 k (입력 한 개의 예)")
+    a.set_xlabel("칸 k (입력 하나의 예)")
     a.spines["left"].set_visible(False)
-    a.text(3.5, 1.1, "긴 정보: 여기 펄스 묶음이\n있었나?", color=B_C, ha="center", fontsize=10.5, linespacing=1.3)
-    a.text(10.5, 0.82, "방해 펄스", color=MUTED, ha="center", fontsize=10)
-    a.text(15.3, 1.1, "짧은 정보: 어느 쪽이\n더 컸나?", color=A_C, ha="center", fontsize=10.5, linespacing=1.3)
+    a.text(3.5, 1.1, "긴 정보 (칸 2–5):\n펄스 묶음이 있었나", color=B_C, ha="center", fontsize=10, linespacing=1.3)
+    a.text(10.5, 0.8, "방해 펄스", color=MUTED, ha="center", fontsize=10)
+    a.text(14.6, 1.1, "짧은 정보 (칸 16·17):\n어느 쪽이 컸나", color=A_C, ha="center", fontsize=10, linespacing=1.3)
     a.axvline(19, color=NOW, lw=1, ls=":")
-    a.text(18.8, 1.32, "읽기", color=NOW, ha="right", fontsize=10)
-    a.set_title("과제: 답은 2 × 2 = 4가지 (긴 정보 × 짧은 정보)")
-    a0 = fig.add_subplot(gs[1, 0])
-    a1 = fig.add_subplot(gs[1, 1])
-    for vals, c, lab, ls in ((single, INK, "네 가지 답 전체", "-"), (s_short, A_C, "짧은 정보만", "--"), (s_long, B_C, "긴 정보만", "--")):
-        a0.plot(taus, [v[0] for v in vals], color=c, ls=ls, label=lab, lw=2.4 if ls == "-" else 1.8)
+    a.text(18.7, 1.5, "읽기", color=NOW, ha="right", fontsize=10)
+    a.set_title("입력 하나와 두 질문", fontsize=11.5)
+    a.text(-0.06, 1.07, "(a)", transform=a.transAxes, fontsize=13, fontweight="bold", va="bottom", ha="left")
+    at = fig.add_subplot(gs[0, 14:20])
+    at.axis("off")
+    at.set_xlim(0, 3)
+    at.set_ylim(0, 3.3)
+    at.set_title("정답 4가지", fontsize=11.5)
+    at.text(1.5, 2.72, "앞이 큼", ha="center", fontsize=10, color=A_C)
+    at.text(2.5, 2.72, "뒤가 큼", ha="center", fontsize=10, color=A_C)
+    at.text(0.92, 1.9, "묶음\n없음", ha="right", va="center", fontsize=10, color=B_C, linespacing=1.2)
+    at.text(0.92, 0.9, "묶음\n있음", ha="right", va="center", fontsize=10, color=B_C, linespacing=1.2)
+    for r_ in range(2):
+        for c_ in range(2):
+            at.add_patch(plt.Rectangle((1.04 + c_, 1.44 - r_), 0.92, 0.92, facecolor="#eef0f3", edgecolor="none"))
+            at.text(1.5 + c_, 1.9 - r_, f"답 {r_ * 2 + c_ + 1}", ha="center", va="center", fontsize=11.5, fontweight="bold", color=INK)
+    a0 = fig.add_subplot(gs[1, 0:8])
+    a1 = fig.add_subplot(gs[1, 12:20])
+    for vals, c, ls in ((single, INK, "-"), (s_short, A_C, "--"), (s_long, B_C, "--")):
+        a0.plot(taus, [v[0] for v in vals], color=c, ls=ls, lw=2.4 if ls == "-" else 1.8)
     a0.axhline(0.25, color=MUTED, lw=1, ls=":")
-    a0.text(taus[-1], 0.17, "전체의 우연 0.25", fontsize=10, color=MUTED, ha="right")
+    a0.axhline(0.5, color=MUTED, lw=1, ls=":")
+    a0.text(taus[0], 0.2, "4가지 답의 우연 0.25", fontsize=9.5, color=MUTED, ha="left", va="top")
+    a0.text(taus[0], 0.525, "2가지 답의 우연 0.5", fontsize=9.5, color=MUTED, ha="left")
     a0.set_xscale("log")
-    a0.set_ylim(0.1, 1.06)
-    a0.set_xlabel("τ/Δt (노드 하나)")
-    a0.set_ylabel(ACC)
-    a0.set_title("τ 하나: 한쪽만 맞힌다")
-    a0.text(1.5, 0.91, "짧은 정보만", color=A_C, fontsize=10.5, ha="center")
-    a0.text(8.5, 0.99, "긴 정보만", color=B_C, fontsize=10.5, ha="right")
-    a0.text(3.2, 0.31, "네 가지 답 전체", color=INK, fontsize=10.5, ha="center")
-    panel(a0, "(a)")
-    names = list(results)
-    vals = [results[k][0] for k in names]
-    errs = [results[k][1] for k in names]
+    a0.set_ylim(0.1, 1.08)
+    a0.set_xlabel("τ/Δt (읽는 state 1개)")
+    a0.set_ylabel("balanced accuracy (시험 데이터)")
+    a0.set_title("state 1개: 한쪽 질문만 맞힌다")
+    a0.text(1.5, 0.92, "짧은 정보만 채점", color=A_C, fontsize=10, ha="center")
+    a0.text(9.5, 1.01, "긴 정보만 채점", color=B_C, fontsize=10, ha="right")
+    a0.text(3.2, 0.31, "4가지 답 전체", color=INK, fontsize=10, ha="center")
+    panel(a0, "(b)")
+    names = ["state 1개\n(가장 좋은 τ)", "state 3개\n같은 τ", "state 3개\nτ = 1 · 2 · 4", "state 3개\nτ = 0.7 · 2 · 8"]
+    keys = list(results)
+    vals = [results[k][0] for k in keys]
+    errs = [results[k][1] for k in keys]
     a1.barh(range(len(names)), vals, xerr=errs, color=[MUTED, MUTED, A_C, A_C], capsize=3, error_kw={"lw": 1}, height=0.6)
     a1.set_yticks(range(len(names)))
-    a1.set_yticklabels(names)
+    a1.set_yticklabels(names, fontsize=10)
     a1.invert_yaxis()
     a1.set_xlim(0, 1.0)
     a1.axvline(0.25, color=MUTED, lw=1, ls=":")
     for i, v in enumerate(vals):
         a1.text(v + errs[i] + 0.02, i, f"{v:.2f}", va="center", fontsize=11)
-    a1.set_xlabel(ACC)
-    a1.set_title("노드 셋의 조합")
-    panel(a1, "(b)")
+    a1.set_xlabel("balanced accuracy (4가지 답)")
+    a1.set_title("읽는 state를 3개로")
+    a1.text(-0.5, 1.07, "(c)", transform=a1.transAxes, fontsize=13, fontweight="bold", va="bottom", ha="left")
     fig.savefig(OUT / "sim2-multi-tau.png")
     plt.close(fig)
     NUMS["sim2"] = {"best_single_tau": round(tb, 2), "results": {k: f"{v[0]:.2f} ± {v[1]:.2f}" for k, v in results.items()},
