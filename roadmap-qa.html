@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>연구 로드맵 1장: 읽으며 생긴 질문과 답 – Why Ions Compute?</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./signals/emg.html" rel="next">
+<link href="./roadmap.html" rel="prev">
+<link href="./assets/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-38b12a2c769cbf7df2ce7c55208cb0ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 2,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "/"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script>
+  // 2026-11-03: 저장된 글자 크기를 그리기 전에 적용 (탭을 누를 때 글자가 잠깐 커졌다 돌아오는 깜빡임 방지)
+  try { var f = parseInt(localStorage.getItem('study-fs') || '2', 10); if (f >= 1 && f <= 4) document.documentElement.classList.add('study-fs-' + f); } catch (e) {}
+</script>
+<meta name="theme-color" content="#ffffff">
+<!-- 2026-11-02: 본문 글꼴은 Pretendard(study.css)라서 쓰지 않던 Noto Sans KR 내려받기를 뺐다 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+
+<link rel="stylesheet" href="assets/study.css">
+<link rel="stylesheet" href="assets/projects.css">
+<link rel="stylesheet" href="assets/apple.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed research-page quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Why Ions Compute?</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">홈</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./research.html"> 
+<span class="menu-text">연구 개요</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">연구 로드맵</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="./roadmap.html">
+ <span class="dropdown-text">로드맵 본문</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./roadmap-qa.html">
+ <span class="dropdown-text">1장 질문과 답</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu--1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">생체 신호</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu--1">    
+        <li>
+    <a class="dropdown-item" href="./signals/emg.html">
+ <span class="dropdown-text">근전도(EMG)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./signals/emg-fatigue.html">
+ <span class="dropdown-text">근전도 · 컨셉 A: 피로 시계</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./plan.html"> 
+<span class="menu-text">커리큘럼</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./notes.html"> 
+<span class="menu-text">연구 노트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./roadmap.html">연구 로드맵</a></li><li class="breadcrumb-item"><a href="./roadmap-qa.html">1장 질문과 답</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 개요</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">연구 로드맵</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./roadmap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">로드맵 본문</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./roadmap-qa.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">1장 질문과 답</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">생체 신호</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./signals/emg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">근전도(EMG)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./signals/emg-fatigue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">근전도 · 컨셉 A: 피로 시계</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">커리큘럼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 device 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 device의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 device의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, conductance가 정하는 것과 정하지 못하는 것, 같은 conductance 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 conductance의 최적점, 질문 바꾸기와 최소 필요 conductance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, device 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 device가 필요한가, 성공·실패가 남기는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">처음 한 번 · 컴퓨터 준비</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P1. 컴퓨터만으로 첫 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P2. 소스미터로 소자 재기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P3. 보드로 만드는 장치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P4. 누름과 리듬</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects/e.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P5. EMG와 reservoir</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects/side.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">사이드 · NU40 DK 하루 실습</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul class="collapse">
+  <li><a href="#qa-summary" id="toc-qa-summary" class="nav-link active" data-scroll-target="#qa-summary">요약: 이 연구는 무엇을, 왜</a></li>
+  <li><a href="#qa-11" id="toc-qa-11" class="nav-link" data-scroll-target="#qa-11">1.1 어떤 판단에 과거가 필요한가</a></li>
+  <li><a href="#qa-12" id="toc-qa-12" class="nav-link" data-scroll-target="#qa-12">1.2 과거의 정보를 갖는 세 가지 방법</a></li>
+  <li><a href="#qa-13" id="toc-qa-13" class="nav-link" data-scroll-target="#qa-13">1.3 지금의 장치는 어떻게 하나</a></li>
+  <li><a href="#qa-14" id="toc-qa-14" class="nav-link" data-scroll-target="#qa-14">1.4 ADC가 하는 일과 숫자의 양</a></li>
+  <li><a href="#qa-15" id="toc-qa-15" class="nav-link" data-scroll-target="#qa-15">1.5 무엇을 줄이려는가: 작은 장치의 제약과 비용</a></li>
+  <li><a href="#qa-16" id="toc-qa-16" class="nav-link" data-scroll-target="#qa-16">1.6 응용 후보와 선택 방법</a></li>
+  <li><a href="#qa-17" id="toc-qa-17" class="nav-link" data-scroll-target="#qa-17">1.7 시간의 지도</a></li>
+  <li><a href="#qa-marks" id="toc-qa-marks" class="nav-link" data-scroll-target="#qa-marks">표시만 바꾼 것</a></li>
+  <li><a href="#qa-rules" id="toc-qa-rules" class="nav-link" data-scroll-target="#qa-rules">뒤 장에 미리 적용한 규칙</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./roadmap.html">연구 로드맵</a></li><li class="breadcrumb-item"><a href="./roadmap-qa.html">1장 질문과 답</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">연구 로드맵 1장: 읽으며 생긴 질문과 답</h1>
+<p class="subtitle lead">2026-11-12 필기본(빨간 펜) 2–20쪽의 질문 46개를 그 질문이 나온 문장과 함께 36개 묶음으로 정리 — 모든 답은 로드맵 본문에도 반영됨</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이 페이지는</strong> 연구 로드맵의 요약과 1절을 읽으며 빨간 펜으로 적은 질문을, <strong>그때 로드맵에 있던 문장 → 질문 → 답 → 로드맵에서 바뀐 곳</strong>의 순서로 정리한 것입니다.</p>
+<p><strong>읽는 법</strong> 회색 상자는 질문이 달린 원래 문장입니다. 빨간 줄은 그 자리에 적은 질문이고, 그 아래가 답입니다. 맨 아래 파란 글씨는 지금 로드맵의 어디가 어떻게 바뀌었는지입니다.</p>
+<p><strong>가장 큰 변화</strong> <span class="key">① 이 연구가 할 수 있는 일을 한 줄로 정함: <strong>"MCU가 자는 동안에도 과거를 잃지 않는 센서"</strong>. ② 부품 이름(AFE, MCU 안의 CPU·RAM·Flash, 비교기, TIA, 모터 드라이버)을 단계마다 적음. ③ 전력 표를 평균 µW 하나로 통일. ④ 그래프 축을 실제 단위로. ⑤ 문헌값 하나를 고침(확산계수가 10–100배 컸음).</span></p>
+<p><strong>바로 가기</strong> <a href="./roadmap.html">연구 로드맵 본문</a> · 새로 넣은 그림 9개는 이 페이지에도 함께 넣었습니다.</p>
+</div>
+<section id="qa-summary" class="level2">
+<h2 class="anchored" data-anchor-id="qa-summary">요약: 이 연구는 무엇을, 왜</h2>
+<p><strong>이 부분이 말하던 것.</strong> 몸에 붙이는 센서가 "직전 몇 초의 변화"로 판단하려면 과거를 쥐고 있어야 하고, 지금은 디지털이 그 일을 잘한다. 그래도 줄여 볼 곳이 있는지 이온 소자로 따져 본다.</p>
+<div class="qa-card">
+<p><span class="qa-num">Q1</span> <strong>소자는 "쉬지 않고 숫자로 바꾸는 일"을 어떻게 피하나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "줄일 여지가 있는지 따져 볼 곳은 그 판단을 위해 <strong>신호를 쉬지 않고 숫자로 바꾸고 계산하는 일</strong>이 … 차지하는 몫입니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> R–C(소자)에서는 그 일을 어떻게 안 하나? 정말 따져 볼 곳이 여기인가?</p>
+</div>
+<p>디지털은 과거를 <strong>숫자</strong>로 쥡니다. 그래서 ADC(전압 → 숫자)와 MCU(작은 컴퓨터)가 신호가 들어오는 내내, 예를 들어 1초에 1,000번씩 깨어 있어야 합니다. 하나라도 빠뜨리면 그 순간의 과거가 사라집니다.</p>
+<p>이온 소자는 과거를 <strong>이온이 쏠린 정도</strong>로 쥡니다. 입력이 들어오면 저절로 쌓이고 서서히 돌아가므로, 숫자로 바꿀 필요가 없습니다. <span class="key">그래서 ADC와 MCU는 <strong>판정할 때만</strong> 깨서 소자의 전류를 몇 번 읽으면 됩니다.</span></p>
+<p>"따져 볼 곳이 맞나"에 대한 답도 같습니다. 증폭기는 어느 방식에나 남으므로 줄일 수 없습니다. 소자가 줄일 수 있는 것은 <strong>ADC가 계속 켜져 있는 몫과 MCU가 1초에 1,000번 깨는 몫</strong>뿐입니다. 그 크기는 1.5절의 전력 표(Q27)에서 숫자로 봅니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 요약에 "지금의 장치는 어떻게 하나"와 "소자를 쓰면 무엇이 달라지나" 두 문단을 새로 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q2</span> <strong>기존이 못 하던 것이 있어야 하지 않나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "'기억이 필요하다'는 이유만으로 새 소재가 필요하지는 않습니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 그러면 기존이 못 하던 걸 하거나, 더 잘하는 게 있어야 하지 않나?</p>
+</div>
+<p>있습니다. <span class="key"><strong>"MCU가 자는 동안에도 과거를 잃지 않는 센서"</strong>입니다.</span></p>
+<p>디지털 장치도 전력을 아끼려고 MCU를 재웁니다. 하지만 자는 동안 들어온 신호는 숫자로 남지 않습니다. 비교기로 "무언가 시작됐다"를 보고 깨워도, <strong>깨기 전의 첫 동작은 이미 지나간 뒤</strong>입니다. 이온 소자는 MCU가 자는 동안에도 그 첫 동작의 흔적을 이온의 분포로 쥐고 있습니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 요약 첫머리에 이 한 줄을 연구의 목표로 적음. 1.2절에 "판단할 순간은 어떻게 아나"를 새로 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q3</span> <strong>필요한 순간을 알려면 결국 계속 읽어야 하지 않나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "소자의 전류를 <strong>판단이 필요한 순간에 몇 번만</strong> 읽어도 그 값에 직전 입력의 이력이 반영됩니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 필요한 순간을 알려면 계속 값을 읽어야 하는 거 아닌가?</p>
+</div>
+<p>맞습니다. 누군가는 계속 지켜봐야 합니다. 다만 <strong>지켜보는 일</strong>과 <strong>숫자로 바꿔 쌓는 일</strong>은 다릅니다.</p>
+<ul>
+<li><strong>지켜보기</strong>: <strong>비교기</strong>(comparator)가 합니다. 비교기는 "전압이 문턱보다 큰가, 작은가"만 알려 주는 아날로그 부품입니다. 예: TLV3691은 75 nA를 써서, 3 V에서 약 0.2 µW입니다.</li>
+<li><strong>숫자로 바꿔 쌓기</strong>: ADC와 MCU가 합니다. 수십–수백 µW가 듭니다.</li>
+</ul>
+<p>예를 들어 근전도 세기가 문턱 아래로 <strong>0.3초 넘게</strong> 머무르면 비교기가 "동작이 끝났다"고 보고 MCU를 깨웁니다. MCU는 그때 소자를 몇 번 읽고 판정한 뒤 다시 잡니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.2절 "판단할 순간은 어떻게 아나"(비교기). 1.5절의 소자 방식 줄에 "비교기가 끝을 알림"을 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q4</span> <strong>왜 τ를 굳이 소재로 조절해야 하나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "이 응답이 사라지는 시간(τ, 타우)과 모양을 두께·고정전하·가소제 같은 <strong>소재 변수로 정할 수 있다면</strong>, 과제에 맞는 소자를 설계할 수 있습니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 연구의 필요성. 왜 τ를 조절해야 하나?</p>
+</div>
+<p>이유는 셋입니다.</p>
+<ol type="1">
+<li><strong>τ가 사건 간격과 맞아야 기억이 쓸모 있습니다.</strong> 두 동작이 1초 간격일 때 τ = 10 ms면 첫 동작을 잊습니다. τ = 1분이면 그 전의 동작까지 쌓여 흐려집니다. τ = 0.5–2초가 맞습니다.</li>
+<li><strong>과제마다 사건 간격이 다릅니다.</strong> 손목 동작은 0.3–2.5초, 심장 박동은 0.6–1.2초, 손가락으로 쓸기는 0.1–5초입니다. 지금까지는 소재를 먼저 만들고, 그 τ에 맞는 과제를 골랐습니다. 순서가 거꾸로입니다.</li>
+<li><strong>τ가 다른 소자를 배열하려면</strong> τ를 원하는 값에 놓는 규칙이 필요합니다(Q5).</li>
+</ol>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 요약에 "왜 τ를 소재로 조절해야 하나"를 세 줄로 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q5</span> <strong>배열로 "어디서 시작해 어느 쪽으로"를 어떻게 읽나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "τ가 서로 다른 소자를 여러 자리에 배열해, 자극이 어느 자리에서 시작해 어느 쪽으로 번졌는지 같은 공간 정보까지 읽을 수 있는지 시험합니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 이게 어떻게 가능하지?</p>
+</div>
+<p>피부 위의 패드 A, B, C 밑에 소자를 하나씩 둡니다. 손가락이 0.5초 간격으로 A → B → C를 지나간 뒤, 1.5초에 세 소자를 한 번에 읽습니다.</p>
+<ul>
+<li>가장 먼저 눌린 A는 가장 오래 새서 <strong>0.22</strong>로 가장 작습니다.</li>
+<li>B는 <strong>0.37</strong>입니다.</li>
+<li>방금 눌린 C는 <strong>0.61</strong>로 가장 큽니다.</li>
+</ul>
+<p>"작음 → 큼"의 순서가 곧 방향입니다. 반대로 지나가면 순서도 거꾸로입니다.</p>
+<figure class="rv-fig figure">
+<!-- QA:dirx -->
+<svg class="rv-svg" viewbox="0 0 720 370" role="img" aria-label="패드 A, B, C 아래에 τ 1초인 소자를 두고 손가락이 A에서 C로 0.5초 간격으로 지나간 뒤 1.5초에 읽으면 0.22, 0.37, 0.61로 커지는 순서가 되고, 반대 방향이면 줄어드는 순서가 된다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">소자 세 개로 방향 읽기: 지나간 순서가 '남은 크기의 차이'로 남는다</text><rect x="14.0" y="76.0" width="52.0" height="48.0" rx="8" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.4"></rect><text x="40.0" y="106.0" font-size="16" fill="#0e8a83" font-weight="800" text-anchor="middle">A</text><text x="40.0" y="146.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0 s</text><rect x="94.0" y="76.0" width="52.0" height="48.0" rx="8" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.4"></rect><text x="120.0" y="106.0" font-size="16" fill="#0e8a83" font-weight="800" text-anchor="middle">B</text><text x="120.0" y="146.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0.5 s</text><rect x="174.0" y="76.0" width="52.0" height="48.0" rx="8" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.4"></rect><text x="200.0" y="106.0" font-size="16" fill="#0e8a83" font-weight="800" text-anchor="middle">C</text><text x="200.0" y="146.0" font-size="12.5" fill="#5f6368" text-anchor="middle">1.0 s</text><line x1="30.0" y1="62.0" x2="206.0" y2="62.0" stroke="#c2682b" stroke-width="2" stroke-linecap="round"></line><path d="M206.0,66.4 L214.0,62.0 L206.0,57.6 Z" fill="#c2682b"></path><text x="122.0" y="54.0" font-size="12.5" fill="#c2682b" font-weight="700" text-anchor="middle">손가락이 A → C로 지나감</text><text x="16.0" y="172.0" font-size="12.5" fill="#2b2f36">각 패드 아래에 τ = 1 s인 소자 하나</text><text x="16.0" y="192.0" font-size="12.5" fill="#2b2f36">지나간 순간 소자 값이 1로 오르고</text><text x="16.0" y="212.0" font-size="12.5" fill="#2b2f36">그 뒤 τ마다 37 %로 줄어든다</text><line x1="270.0" y1="210.0" x2="470.0" y2="210.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><line x1="270.0" y1="210.0" x2="270.0" y2="70.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><polyline points="270.0,210.0 270.0,70.0 270.0,70.0 273.1,73.5 276.2,76.8 279.4,80.1 282.5,83.3 285.6,86.5 288.8,89.5 291.9,92.5 295.0,95.4 298.1,98.2 301.2,101.0 304.4,103.7 307.5,106.3 310.6,108.8 313.8,111.3 316.9,113.8 320.0,116.2 323.1,118.5 326.2,120.7 329.4,122.9 332.5,125.1 335.6,127.2 338.8,129.2 341.9,131.2 345.0,133.2 348.1,135.1 351.2,136.9 354.4,138.7 357.5,140.5 360.6,142.2 363.8,143.9 366.9,145.5 370.0,147.1 373.1,148.6 376.2,150.2 379.4,151.6 382.5,153.1 385.6,154.5 388.8,155.9 391.9,157.2 395.0,158.5 398.1,159.8 401.2,161.0 404.4,162.2 407.5,163.4 410.6,164.5 413.8,165.7 416.9,166.8 420.0,167.8 423.1,168.9 426.2,169.9 429.4,170.9 432.5,171.8 435.6,172.8 438.8,173.7 441.9,174.6 445.0,175.5 448.1,176.3 451.2,177.2 454.4,178.0 457.5,178.8 460.6,179.5 463.8,180.3 466.9,181.0 470.0,181.7" fill="none" stroke="#0e8a83" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="273.0" y="64.0" font-size="12.5" fill="#0e8a83" font-weight="800">A</text><polyline points="332.5,210.0 332.5,70.0 332.5,70.0 335.6,73.5 338.8,76.8 341.9,80.1 345.0,83.3 348.1,86.5 351.2,89.5 354.4,92.5 357.5,95.4 360.6,98.2 363.8,101.0 366.9,103.7 370.0,106.3 373.1,108.8 376.2,111.3 379.4,113.8 382.5,116.2 385.6,118.5 388.8,120.7 391.9,122.9 395.0,125.1 398.1,127.2 401.2,129.2 404.4,131.2 407.5,133.2 410.6,135.1 413.8,136.9 416.9,138.7 420.0,140.5 423.1,142.2 426.2,143.9 429.4,145.5 432.5,147.1 435.6,148.6 438.8,150.2 441.9,151.6 445.0,153.1 448.1,154.5 451.2,155.9 454.4,157.2 457.5,158.5 460.6,159.8 463.8,161.0 466.9,162.2 470.0,163.4" fill="none" stroke="#0e8a83" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 0"></polyline><text x="335.5" y="64.0" font-size="12.5" fill="#0e8a83" font-weight="800">B</text><polyline points="395.0,210.0 395.0,70.0 395.0,70.0 398.1,73.5 401.2,76.8 404.4,80.1 407.5,83.3 410.6,86.5 413.8,89.5 416.9,92.5 420.0,95.4 423.1,98.2 426.2,101.0 429.4,103.7 432.5,106.3 435.6,108.8 438.8,111.3 441.9,113.8 445.0,116.2 448.1,118.5 451.2,120.7 454.4,122.9 457.5,125.1 460.6,127.2 463.8,129.2 466.9,131.2 470.0,133.2" fill="none" stroke="#0e8a83" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="398.0" y="64.0" font-size="12.5" fill="#0e8a83" font-weight="800">C</text><line x1="457.5" y1="64.0" x2="457.5" y2="210.0" stroke="#2b59c3" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="4 3"></line><text x="457.5" y="60.0" font-size="12.5" fill="#2b59c3" font-weight="700" text-anchor="middle">1.5 s에 읽기</text><text x="270.0" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0</text><text x="332.5" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0.5</text><text x="395.0" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">1</text><text x="457.5" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">1.5</text><text x="370.0" y="246.0" font-size="12.5" fill="#5f6368" text-anchor="middle">시간 (s)</text><text x="544.0" y="64.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">A → C</text><rect x="504" y="183.2" width="22" height="26.8" rx="3" fill="#0e8a83"></rect><text x="515.0" y="178.2" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.22</text><text x="515.0" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">A</text><rect x="532" y="165.9" width="22" height="44.1" rx="3" fill="#0e8a83"></rect><text x="543.0" y="160.9" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.37</text><text x="543.0" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">B</text><rect x="560" y="137.2" width="22" height="72.8" rx="3" fill="#0e8a83"></rect><text x="571.0" y="132.2" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.61</text><text x="571.0" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">C</text><text x="648.0" y="64.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">C → A</text><rect x="608" y="137.2" width="22" height="72.8" rx="3" fill="#0e8a83"></rect><text x="619.0" y="132.2" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.61</text><text x="619.0" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">A</text><rect x="636" y="165.9" width="22" height="44.1" rx="3" fill="#0e8a83"></rect><text x="647.0" y="160.9" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.37</text><text x="647.0" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">B</text><rect x="664" y="183.2" width="22" height="26.8" rx="3" fill="#0e8a83"></rect><text x="675.0" y="178.2" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.22</text><text x="675.0" y="228.0" font-size="12.5" fill="#5f6368" text-anchor="middle">C</text><text x="608.0" y="246.0" font-size="12.5" fill="#5f6368" text-anchor="middle">읽은 값 (A, B, C)</text><rect x="16.0" y="272.0" width="688.0" height="64.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="297.0" font-size="12.5" fill="#1d1d1f" font-weight="700">커지는 순서(작음 → 큼)면 A → C, 줄어드는 순서면 C → A. τ가 같은 소자로도 방향은 읽힌다.</text><text x="30.0" y="319.0" font-size="12.5" fill="#2b2f36">그런데 손이 5초에 걸쳐 천천히 지나가면 τ = 1 s 소자는 앞의 흔적을 잊는다 → 느린 움직임에는 τ가 긴 소자가 필요하다.</text><text x="16.0" y="360.0" font-size="12.5" fill="#5f6368">모형 계산 · 값 = e^(−경과 시간/τ) · 실제 소자는 곡선 모양과 잡음이 다르다</text></svg>
+<!-- /QA:dirx -->
+<figcaption><b>로드맵 그림 1. 소자 세 개로 방향 읽기.</b> 읽은 값의 크기 순서가 지나간 순서를 거꾸로 알려 준다.</figcaption>
+</figure>
+<p><span class="key"><strong>τ가 모두 같아도 방향은 읽힙니다.</strong></span> τ를 섞는 이유는 다른 데 있습니다. 5초에 걸친 느린 움직임과 0.2초의 빠른 움직임을 <strong>함께</strong> 다루려면 τ가 짧은 소자와 긴 소자가 둘 다 필요합니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 요약의 질문 2에 이 그림(숫자 예)을 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q6</span> <strong>신호가 소자까지 가는 길을 그림으로</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "근전도 신호를 소자에 넣을 전압 펄스로 바꾸는 회로(정류·필터와 펄스를 만드는 스위치), 소자의 아주 작은 전류를 전압으로 바꾸는 증폭기(TIA), 그 전압을 숫자로 바꾸는 ADC입니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> EMG → 전압 펄스 → 소자 → 전류 → TIA → ADC 그림으로.</p>
+</div>
+<figure class="rv-fig figure">
+<!-- QA:syschain -->
+<svg class="rv-svg" viewbox="0 0 720 184" role="img" aria-label="근전도에서 다듬는 회로, 펄스 스위치, 이온 소자, TIA, ADC, MCU로 이어지는 소자 방식의 신호 사슬. 새로 드는 회로는 호박색, 소자는 청록, 디지털은 파랑."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">소자 방식의 신호 사슬: 단계마다 무엇이 무엇으로 바뀌나</text><rect x="16.0" y="56.0" width="88.0" height="60.0" rx="10" fill="#f5f5f7"></rect><text x="60.0" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">근전도</text><text x="60.0" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">µV–mV 전압</text><line x1="105.0" y1="86.0" x2="111.3" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M111.3,88.8 L116.3,86.0 L111.3,83.2 Z" fill="#5f6368"></path><rect x="117.3" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="161.3" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">다듬는 회로</text><text x="161.3" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">증폭·정류·필터</text><line x1="206.3" y1="86.0" x2="212.6" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M212.6,88.8 L217.6,86.0 L212.6,83.2 Z" fill="#5f6368"></path><rect x="218.6" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="262.6" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">펄스 스위치</text><text x="262.6" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">전압 펄스로</text><line x1="307.6" y1="86.0" x2="313.9" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M313.9,88.8 L318.9,86.0 L313.9,83.2 Z" fill="#5f6368"></path><rect x="319.9" y="56.0" width="88.0" height="60.0" rx="10" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.4"></rect><text x="363.9" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">이온 소자</text><text x="363.9" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">이력이 남음</text><line x1="408.9" y1="86.0" x2="415.2" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M415.2,88.8 L420.2,86.0 L415.2,83.2 Z" fill="#5f6368"></path><rect x="421.2" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="465.2" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">TIA</text><text x="465.2" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">전류 → 전압</text><line x1="510.2" y1="86.0" x2="516.5" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M516.5,88.8 L521.5,86.0 L516.5,83.2 Z" fill="#5f6368"></path><rect x="522.5" y="56.0" width="88.0" height="60.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="566.5" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">ADC</text><text x="566.5" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">판정 때만</text><line x1="611.5" y1="86.0" x2="617.8" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M617.8,88.8 L622.8,86.0 L617.8,83.2 Z" fill="#5f6368"></path><rect x="623.8" y="56.0" width="88.0" height="60.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="667.8" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">MCU</text><text x="667.8" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">가중합 → 답</text><rect x="16.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#fdf3da" stroke="#a86a12" stroke-width="1.2"></rect><text x="40.0" y="146.0" font-size="12.5" fill="#2b2f36">새로 드는 회로</text><rect x="166.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.2"></rect><text x="190.0" y="146.0" font-size="12.5" fill="#2b2f36">이온 소자</text><rect x="278.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.2"></rect><text x="302.0" y="146.0" font-size="12.5" fill="#2b2f36">디지털</text><text x="16.0" y="174.0" font-size="12.5" fill="#5f6368">개념도 · TIA = transimpedance amplifier, 아주 작은 전류(nA–µA)를 읽을 수 있는 전압으로 바꾸는 증폭기</text></svg>
+<!-- /QA:syschain -->
+<figcaption><b>로드맵 그림 2. 소자 방식의 신호 사슬.</b> 새로 드는 회로(펄스를 만드는 회로, TIA)도 함께 표시했다. 이 회로들의 전력까지 넣어 비교해야 공정하다.</figcaption>
+</figure>
+<p><strong>TIA</strong>(transimpedance amplifier)는 소자에서 나오는 nA–µA의 작은 전류를 ADC가 읽을 수 있는 전압으로 바꾸는 증폭기입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 요약의 질문 3에 이 그림을 넣음. 함께 "동역학"을 영어 <strong>dynamics</strong>로 바꾸고 뜻("입력이 들어온 뒤 시간에 따라 변하는 모양")을 붙임.</p>
+</div>
+</div>
+</section>
+<section id="qa-11" class="level2">
+<h2 class="anchored" data-anchor-id="qa-11">1.1 어떤 판단에 과거가 필요한가</h2>
+<p><strong>이 절이 말하던 것.</strong> 심전도·근전도·뇌파의 쓰임새. 손목 밴드가 "굽힘 다음 폄"과 "폄 다음 굽힘"을 구분하는 것을 설명용 예로 씀.</p>
+<div class="qa-card">
+<p><span class="qa-num">Q7</span> <strong>이점이 전력·부품뿐인가? 부드러움은 센서의 장점 아닌가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "줄일 수 있는 것은 <strong>평균 전력</strong>(→ 더 작은 전지)과, 피부에 닿는 부분을 <strong>부드러운 소재로 만들 가능성</strong>입니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 전력·부품 말고 이점은? 이온 소자가 soft해서 생체에 잘 붙는 건 센서의 장점이지 RC(계산)의 장점은 아니지 않나?</p>
+</div>
+<p>맞는 지적입니다. 그래서 장점을 둘로 나눴습니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>장점</th>
+<th>누구의 장점</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>부드러움, 피부와 같은 이온으로 신호를 주고받음</td>
+<td><strong>주로 센서</strong></td>
+<td>센서 층과 계산 층을 같은 소재로 만들면 RC로도 이어진다</td>
+</tr>
+<tr class="even">
+<td>초 단위 τ를 작은 면적에서</td>
+<td><strong>RC</strong></td>
+<td>실리콘으로 τ = 1초를 만들려면 1 MΩ × 1 µF처럼 칩 밖의 큰 부품이 필요하다</td>
+</tr>
+<tr class="odd">
+<td>화학으로 τ를 ms–분까지 바꿈</td>
+<td><strong>RC</strong></td>
+<td>두께·가교·고정전하로 정한다(이 연구의 목표 1)</td>
+</tr>
+<tr class="even">
+<td>전원 없이 기억</td>
+<td><strong>RC</strong></td>
+<td>MCU가 자는 동안에도 과거를 쥔다(Q2)</td>
+</tr>
+</tbody>
+</table>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.5절에 "이온 소자라서 생길 수 있는 장점" 표(센서 / RC 구분)를 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q8</span> <strong>Kaifosh 2025는 왜 Nature에 실렸나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "손목의 근전도만으로 컴퓨터 화면의 커서를 움직이거나 글자를 입력하는 연구가 보고되어 있습니다(Kaifosh 2025, Nature)."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 이건 기존에도 있던 연구인데 왜 Nature?</p>
+</div>
+<p>새로운 것은 <strong>규모와 일반화</strong>입니다.</p>
+<ul>
+<li>과제마다 <strong>162–6,627명</strong>의 근전도로 학습했습니다.</li>
+<li>그래서 <strong>처음 쓰는 사람도 보정 없이</strong> 바로 씁니다. 예전에는 사람마다 몇 분씩 보정해야 했습니다.</li>
+<li>손글씨 입력은 분당 20.9단어였습니다.</li>
+</ul>
+<p>다만 계산은 손목이 아니라 <strong>노트북</strong>에서 합니다. 밴드는 원신호를 계속 보냅니다. 이 점이 이 연구가 들어갈 틈입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.1절의 손목 밴드 줄에 "왜 Nature인가"와 "계산은 노트북에서"를 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q9</span> <strong>재활은 어떤 장면인가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "<strong>재활</strong> — 뇌졸중 환자가 근육에 힘을 주려는 순간을 잡아 재활 로봇이 움직임을 돕습니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 잘 상상이 안 됨.</p>
+</div>
+<p>뇌졸중 뒤에는 팔을 굽히려 해도 힘이 모자랍니다. 하지만 <strong>약한 근전도는 나옵니다.</strong> 근전도가 문턱을 넘는 순간 팔에 찬 보조기의 모터가 팔꿈치를 함께 굽혀 줍니다.</p>
+<p>목적은 "움직이려 한 순간"과 "도움"을 맞추는 것입니다. 그래야 뇌가 "내가 움직였다"고 배웁니다.</p>
+<figure class="rv-fig figure">
+<!-- QA:emguse -->
+<svg class="rv-svg" viewbox="0 0 720 280" role="img" aria-label="근전도가 쓰이는 세 장면: 남은 팔 근육의 근전도로 인공 손을 움직이는 근전 의수, 손목 근전도로 커서와 글자를 조작하는 손목 밴드, 근전도가 문턱을 넘는 순간 모터가 팔꿈치를 함께 굽혀 주는 재활 로봇."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">근전도가 쓰이는 세 장면</text><rect x="16.0" y="50.0" width="224.0" height="196.0" rx="10" fill="#f5f5f7"></rect><rect x="248.0" y="50.0" width="224.0" height="196.0" rx="10" fill="#f5f5f7"></rect><rect x="480.0" y="50.0" width="224.0" height="196.0" rx="10" fill="#f5f5f7"></rect><text x="28.0" y="74.0" font-size="14" fill="#1d1d1f" font-weight="800">① 근전 의수</text><rect x="34" y="150" width="70" height="34" rx="16" fill="#e3c9b3"></rect><rect x="86" y="144" width="48" height="46" rx="8" fill="#8b929d"></rect><circle cx="96.0" cy="154.0" r="4" fill="#0e8a83"></circle><circle cx="96.0" cy="180.0" r="4" fill="#c2682b"></circle><rect x="156.0" y="152.0" width="33.0" height="33.0" rx="6.6" fill="#8b929d"></rect><rect x="157.1" y="127.8" width="6.6" height="26.4" rx="3.3" fill="#8b929d"></rect><rect x="165.1" y="127.8" width="6.6" height="26.4" rx="3.3" fill="#8b929d"></rect><rect x="173.2" y="127.8" width="6.6" height="26.4" rx="3.3" fill="#8b929d"></rect><rect x="181.2" y="127.8" width="6.6" height="26.4" rx="3.3" fill="#8b929d"></rect><rect x="146.1" y="158.6" width="13.2" height="6.6" rx="3.3" fill="#8b929d" transform="rotate(-30 156.0 161.9)"></rect><text x="28.0" y="216.0" font-size="12.5" fill="#2b2f36">남은 팔 근육의 근전도로</text><text x="28.0" y="234.0" font-size="12.5" fill="#2b2f36">인공 손을 쥐고 편다 (제품)</text><text x="80.0" y="138.0" font-size="11.5" fill="#5f6368" text-anchor="middle">소켓 안 전극</text><text x="260.0" y="74.0" font-size="14" fill="#1d1d1f" font-weight="800">② 손목 밴드로 기기 조작</text><rect x="264" y="154" width="86" height="28" rx="13" fill="#e3c9b3"></rect><rect x="314" y="146" width="16" height="44" rx="5" fill="#2b59c3"></rect><line x1="354.0" y1="168.0" x2="368.0" y2="168.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M368.0,171.3 L374.0,168.0 L368.0,164.7 Z" fill="#5f6368"></path><rect x="378.0" y="126.0" width="82.0" height="58.0" rx="4" fill="#fff" stroke="#1d1d1f" stroke-width="1.6"></rect><rect x="406" y="184" width="26" height="8" fill="#1d1d1f"></rect><path d="M408,142 l0,20 l5,-5 l5,9 l4,-2 l-5,-9 l7,0 Z" fill="#1d1d1f"></path><text x="436.0" y="154.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="middle">Ab</text><text x="260.0" y="216.0" font-size="12.5" fill="#2b2f36">손목의 근전도만으로 커서를</text><text x="260.0" y="234.0" font-size="12.5" fill="#2b2f36">움직이고 글자를 쓴다 (연구)</text><text x="492.0" y="74.0" font-size="14" fill="#1d1d1f" font-weight="800">③ 재활 로봇</text><polyline points="510.0,116.0 550.0,170.0 608.0,142.0" fill="none" stroke="#e3c9b3" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="510.0,116.0 550.0,170.0 608.0,142.0" fill="none" stroke="#8b929d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"></polyline><circle cx="550.0" cy="170.0" r="10" fill="#a86a12"></circle><text x="550.0" y="196.0" font-size="11.5" fill="#a86a12" font-weight="700" text-anchor="middle">모터</text><circle cx="530.0" cy="142.0" r="4" fill="#0e8a83"></circle><line x1="620.0" y1="120.0" x2="692.0" y2="120.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><line x1="620.0" y1="104.0" x2="692.0" y2="104.0" stroke="#a86a12" stroke-width="1" stroke-linecap="round" stroke-dasharray="3 3"></line><polyline points="620.0,120.0 622.0,118.8 624.0,120.3 626.0,121.1 628.0,119.4 630.0,119.0 632.0,120.8 634.0,120.7 636.0,119.0 638.0,119.5 640.0,121.2 642.0,120.2 644.0,118.8 646.0,120.1 648.0,121.2 650.0,119.6 652.0,118.9 654.0,120.7 656.0,137.5 658.0,101.4 660.0,107.3 662.0,141.8 664.0,127.1 666.0,96.3 668.0,119.0 670.0,143.9 672.0,114.8 674.0,97.4 676.0,131.0 678.0,139.7 680.0,103.9 682.0,104.4 684.0,140.1 686.0,130.4 688.0,97.2 690.0,115.5" fill="none" stroke="#0e8a83" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="656.0" y="156.0" font-size="11" fill="#a86a12" font-weight="700" text-anchor="middle">문턱을 넘으면</text><text x="492.0" y="216.0" font-size="12.5" fill="#2b2f36">힘을 주려는 순간을 잡아</text><text x="492.0" y="234.0" font-size="12.5" fill="#2b2f36">로봇이 팔꿈치를 함께 굽힌다</text><text x="16.0" y="270.0" font-size="12.5" fill="#5f6368">개념도 · ①은 제품으로 쓰이는 방식, ②는 연구 단계(Kaifosh 2025), ③은 임상 연구에서 쓰이는 방식</text></svg>
+<!-- /QA:emguse -->
+<figcaption><b>로드맵 그림 3. 근전도가 쓰이는 세 장면.</b> 의수, 손목 밴드, 재활 보조기. 재활 칸은 "약한 근전도 → 문턱 → 모터가 도움"의 순서다.</figcaption>
+</figure>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.1절에 재활 설명과 이 그림을 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q10</span> <strong>잡기와 놓기가 바뀐 것 아닌가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "앞의 것('굽힘 다음 폄')을 <em>잡기</em>, 뒤의 것('폄 다음 굽힘')을 <em>놓기</em>로 정하면 …"</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 반대 아닌가?</p>
+</div>
+<p>맞습니다. <strong>마지막 동작</strong>을 기준으로 바꿨습니다. 손가락을 펴며 끝나면 놓는 동작이고, 쥐며 끝나면 잡는 동작이기 때문입니다.</p>
+<ul>
+<li>"굽힘 다음 폄"(펴며 끝남) = <strong>놓기</strong></li>
+<li>"폄 다음 굽힘"(쥐며 끝남) = <strong>잡기</strong></li>
+</ul>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.1절 본문과 특징 그림(로드맵 그림 7)의 표시를 함께 바꿈.</p>
+</div>
+</div>
+</section>
+<section id="qa-12" class="level2">
+<h2 class="anchored" data-anchor-id="qa-12">1.2 과거의 정보를 갖는 세 가지 방법</h2>
+<p><strong>이 절이 말하던 것.</strong> 과거를 갖는 방법은 ① 원신호 저장(숫자 2,500개를 다 둠), ② 디지털 요약값 갱신(숫자 몇 개만 고쳐 씀), ③ 아날로그 소자의 dynamics 셋이다. 실제로 견줄 상대는 ②다.</p>
+<div class="qa-card">
+<p><span class="qa-num">Q11</span> <strong>②의 계산은 어느 부품이 하나? MCU에 ADC와 메모리가 같이 있나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> 표의 ② 줄: "ADC(①과 똑같이 계속 켜짐)와 작은 계산. 메모리는 숫자 몇 개."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 이 계산은 어느 소자가 하나? MCU에 ADC와 메모리가 같이 들어 있나? ①은 메모리가 분리된 건가?</p>
+</div>
+<p><span class="key"><strong>MCU 칩 하나 안에 CPU, RAM, Flash가 함께 있습니다.</strong></span></p>
+<ul>
+<li><strong>CPU</strong>는 계산합니다.</li>
+<li><strong>RAM</strong>은 계산하는 동안 숫자를 쌓아 둡니다. 전원이 꺼지면 지워집니다.</li>
+<li><strong>Flash</strong>는 가중치처럼 오래 둘 것을 보관합니다. 전원이 꺼져도 남습니다.</li>
+</ul>
+<p>ADC와 BLE 무선까지 한 칩에 든 MCU도 많습니다(예: nRF52840). 그래서 ①과 ②는 <strong>부품이 다른 것이 아니라</strong>, RAM에 쌓는 양(2,500개 vs 몇 개)과 계산하는 때(판정 때 한꺼번에 vs 숫자가 올 때마다 조금씩)가 다릅니다.</p>
+<figure class="rv-fig figure">
+<!-- QA:methods3 -->
+<svg class="rv-svg" viewbox="0 0 720 402" role="img" aria-label="과거 정보를 갖는 세 방법을 세 줄로 비교. 원신호 저장과 요약값 갱신은 증폭과 ADC가 늘 켜져 있고 과거가 RAM에 있다. 소자 방식은 아날로그 윤곽 회로와 비교기만 늘 켜져 있고 과거가 소자 안 이온 분포에 있으며, 판정 때만 TIA와 ADC로 몇 번 읽는다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">과거를 갖는 세 방법: 과거가 어디에 있고, 무엇이 늘 켜져 있나</text><text x="16.0" y="90.0" font-size="14" fill="#1d1d1f" font-weight="800">① 원신호 저장</text><rect x="146.0" y="56.0" width="128.0" height="58.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="210.0" y="80.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">증폭</text><text x="210.0" y="100.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">AFE</text><rect x="228.0" y="47.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="250.0" y="59.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="275.0" y1="85.0" x2="282.0" y2="85.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M282.0,87.8 L287.0,85.0 L282.0,82.2 Z" fill="#5f6368"></path><rect x="288.0" y="56.0" width="128.0" height="58.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="352.0" y="80.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">ADC</text><text x="352.0" y="100.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">1초 1,000번</text><rect x="370.0" y="47.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="392.0" y="59.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="417.0" y1="85.0" x2="424.0" y2="85.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M424.0,87.8 L429.0,85.0 L424.0,82.2 Z" fill="#5f6368"></path><rect x="430.0" y="56.0" width="128.0" height="58.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="494.0" y="80.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">RAM</text><text x="494.0" y="100.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">숫자 2,500개/채널</text><rect x="512.0" y="47.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="534.0" y="59.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="559.0" y1="85.0" x2="566.0" y2="85.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M566.0,87.8 L571.0,85.0 L566.0,82.2 Z" fill="#5f6368"></path><rect x="572.0" y="56.0" width="128.0" height="58.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="636.0" y="80.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">판정 때</text><text x="636.0" y="100.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">한꺼번에 계산</text><text x="16.0" y="174.0" font-size="14" fill="#1d1d1f" font-weight="800">② 요약값 갱신</text><rect x="146.0" y="140.0" width="128.0" height="58.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="210.0" y="164.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">증폭</text><text x="210.0" y="184.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">AFE</text><rect x="228.0" y="131.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="250.0" y="143.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="275.0" y1="169.0" x2="282.0" y2="169.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M282.0,171.8 L287.0,169.0 L282.0,166.2 Z" fill="#5f6368"></path><rect x="288.0" y="140.0" width="128.0" height="58.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="352.0" y="164.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">ADC</text><text x="352.0" y="184.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">1초 1,000번</text><rect x="370.0" y="131.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="392.0" y="143.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="417.0" y1="169.0" x2="424.0" y2="169.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M424.0,171.8 L429.0,169.0 L424.0,166.2 Z" fill="#5f6368"></path><rect x="430.0" y="140.0" width="128.0" height="58.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="494.0" y="164.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">CPU</text><text x="494.0" y="184.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">새 숫자마다 s를 고침</text><rect x="512.0" y="131.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="534.0" y="143.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="559.0" y1="169.0" x2="566.0" y2="169.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M566.0,171.8 L571.0,169.0 L566.0,166.2 Z" fill="#5f6368"></path><rect x="572.0" y="140.0" width="128.0" height="58.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="636.0" y="164.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">판정 때</text><text x="636.0" y="184.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">s 하나를 읽음</text><text x="16.0" y="258.0" font-size="14" fill="#1d1d1f" font-weight="800">③ 소자 동역학</text><rect x="146.0" y="224.0" width="128.0" height="58.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="210.0" y="248.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">증폭·윤곽</text><text x="210.0" y="268.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">아날로그 회로</text><rect x="228.0" y="215.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="250.0" y="227.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="275.0" y1="253.0" x2="282.0" y2="253.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M282.0,255.8 L287.0,253.0 L282.0,250.2 Z" fill="#5f6368"></path><rect x="288.0" y="224.0" width="128.0" height="58.0" rx="10" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.4"></rect><text x="352.0" y="248.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">이온 소자</text><text x="352.0" y="268.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">state가 저절로 변함</text><rect x="370.0" y="215.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="392.0" y="227.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="417.0" y1="253.0" x2="424.0" y2="253.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M424.0,255.8 L429.0,253.0 L424.0,250.2 Z" fill="#5f6368"></path><rect x="430.0" y="224.0" width="128.0" height="58.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="494.0" y="248.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">비교기</text><text x="494.0" y="268.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">끝났나만 지켜봄</text><rect x="512.0" y="215.0" width="44.0" height="17.0" rx="8" fill="#fff" stroke="#a86a12" stroke-width="1"></rect><text x="534.0" y="227.5" font-size="10.5" fill="#a86a12" font-weight="700" text-anchor="middle">늘 켜짐</text><line x1="559.0" y1="253.0" x2="566.0" y2="253.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M566.0,255.8 L571.0,253.0 L566.0,250.2 Z" fill="#5f6368"></path><rect x="572.0" y="224.0" width="128.0" height="58.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="636.0" y="248.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">판정 때</text><text x="636.0" y="268.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">TIA+ADC 2–10번</text><text x="16.0" y="314.0" font-size="12.5" fill="#1d1d1f" font-weight="700">과거가 있는 곳:  ① RAM의 숫자 전부  ·  ② RAM의 숫자 몇 개(s)  ·  ③ 소자 안 이온의 분포</text><text x="16.0" y="336.0" font-size="12.5" fill="#2b2f36">③의 '늘 켜짐'은 아날로그 회로와 비교기뿐이다. 비교기는 문턱을 넘었는지만 보는 부품으로, 수십–수백 nA면 된다.</text><rect x="16.0" y="352.0" width="16.0" height="14.0" rx="4" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.2"></rect><text x="40.0" y="364.0" font-size="12.5" fill="#2b2f36">디지털 처리</text><rect x="156.0" y="352.0" width="16.0" height="14.0" rx="4" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.2"></rect><text x="180.0" y="364.0" font-size="12.5" fill="#2b2f36">이온 소자</text><rect x="278.0" y="352.0" width="16.0" height="14.0" rx="4" fill="#fdf3da" stroke="#a86a12" stroke-width="1.2"></rect><text x="302.0" y="364.0" font-size="12.5" fill="#2b2f36">새로 드는 아날로그 회로</text><text x="16.0" y="392.0" font-size="12.5" fill="#5f6368">개념도 · 손목 밴드 예 · 비교기 전류는 TLV3691 데이터시트 기준 75 nA(전형값)</text></svg>
+<!-- /QA:methods3 -->
+<figcaption><b>로드맵 그림 4. 과거를 갖는 세 방법.</b> ①과 ②는 같은 부품(ADC + MCU)을 쓰고 RAM에 쌓는 양만 다르다. ③은 소자가 과거를 쥐고 ADC는 판정 때만 켠다.</figcaption>
+</figure>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.2절 첫머리에 낱말 다섯 개(ADC, MCU와 그 안의 CPU·RAM·Flash, 채널, sampling rate, state)를 먼저 정의함. 표에 "어느 부품이 하나" 칸을 더하고 이 그림을 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q12</span> <strong>①과 ②는 각각 언제 쓰나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "①은 이해하기 가장 쉬워서 아래의 설명에 씁니다. 그러나 <strong>실제로 견줄 상대는 ②입니다.</strong>"</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> ①과 ②가 어떻게 다르고, 각각 언제 쓰나(장단점)? ①의 예시를 더.</p>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>① 원신호 저장</th>
+<th>② 요약값 갱신</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>하는 일</td>
+<td>숫자 2,500개를 줄 세워 두고 오래된 것을 버림. 판정 때 한꺼번에 제곱해 평균</td>
+<td>숫자가 올 때마다 s = 0.99·s + 0.01·v²로 하나만 고침</td>
+</tr>
+<tr class="even">
+<td>장점</td>
+<td>원신호가 남아 <strong>나중에 다른 계산</strong>을 할 수 있다</td>
+<td>RAM이 거의 안 든다</td>
+</tr>
+<tr class="odd">
+<td>단점</td>
+<td>RAM이 많이 든다</td>
+<td><strong>버린 정보는 되살릴 수 없다</strong></td>
+</tr>
+<tr class="even">
+<td>쓰는 곳</td>
+<td>진료용 심전도(의사가 파형을 봐야 함), 큰 신경망</td>
+<td>심박수, 힘의 세기</td>
+</tr>
+</tbody>
+</table>
+<p>이 연구의 ③은 RAM을 거의 안 쓴다는 점에서 ②와 같습니다. 그래서 공정한 비교 상대가 ②입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.2절에 "①과 ②는 언제 쓰나" 표를 넣음.</p>
+</div>
+</div>
+</section>
+<section id="qa-13" class="level2">
+<h2 class="anchored" data-anchor-id="qa-13">1.3 지금의 장치는 어떻게 하나</h2>
+<p><strong>이 절이 말하던 것.</strong> 전극 → 증폭과 ADC → 특징 계산과 분류 → 전송 → 행동의 다섯 단계. 2.5초를 열 구간으로 나눠 채널 둘의 RMS 20개를 만들고, 가중치를 곱해 더한 점수의 부호로 답을 정한다.</p>
+<div class="qa-card">
+<p><span class="qa-num">Q13</span> <strong>증폭·ADC·쌓기·계산·분류는 각각 어떤 부품이 하나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "증폭기가 전압을 키우고, ADC가 … 숫자로 적습니다. 작은 컴퓨터 MCU가 숫자들에서 특징을 계산합니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 각 단계는 어떤 부품이 하나? MCU 안에 amplifier, ADC, 쌓기, 계산이 다 들어 있나?</p>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>단계</th>
+<th>부품</th>
+<th>어디에 있나</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>증폭</td>
+<td>생체 신호 칩(<strong>AFE</strong>, analog front end. 예: ADS1292)</td>
+<td>MCU 밖. µV를 잡음 없이 키우려면 전용 칩이 필요하다</td>
+</tr>
+<tr class="even">
+<td>ADC</td>
+<td>AFE 안 또는 MCU 안</td>
+<td>둘 다 흔하다</td>
+</tr>
+<tr class="odd">
+<td>쌓기</td>
+<td>MCU의 RAM</td>
+<td>MCU 안</td>
+</tr>
+<tr class="even">
+<td>계산·분류</td>
+<td>MCU의 CPU (가중치는 Flash)</td>
+<td>MCU 안</td>
+</tr>
+<tr class="odd">
+<td>전송</td>
+<td>BLE 무선</td>
+<td>보통 MCU 안</td>
+</tr>
+<tr class="even">
+<td>행동</td>
+<td>폰 앱 또는 모터 드라이버</td>
+<td>밴드 밖 또는 의수 안</td>
+</tr>
+</tbody>
+</table>
+<figure class="rv-fig figure">
+<!-- QA:problem -->
+<svg class="rv-svg" viewbox="0 0 720 362" role="img" aria-label="지금 방식의 다섯 단계: 전극이 전압을 재고, ADC가 숫자로 바꾸고, MCU가 쌓고 계산하고 분류하고, 결과를 무선으로 보내고, 기록·알림이나 기기 명령이 된다. 둘째·셋째 단계가 과거를 숫자로 쌓는 구간이다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">지금 방식: 몸의 신호가 행동이 되기까지</text><text x="16.0" y="48.0" font-size="12.5" fill="#5f6368">예: 박동 간격이 불규칙해진 구간을 기록·알림 · 동작 순서에 따라 기기에 명령</text><rect x="11.0" y="66.0" width="114.0" height="84.0" rx="10" fill="#f5f5f7"></rect><line x1="19.0" y1="108.0" x2="117.0" y2="108.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="19.0,108.4 20.9,108.3 22.7,107.5 24.6,107.8 26.4,109.2 28.3,108.3 30.2,108.1 32.0,110.1 33.9,106.2 35.7,111.6 37.6,109.2 39.5,107.8 41.3,109.1 43.2,106.3 45.0,102.7 46.9,96.4 48.8,114.2 50.6,103.2 52.5,101.0 54.3,116.1 56.2,128.9 58.1,86.8 59.9,117.5 61.8,117.2 63.6,88.1 65.5,103.6 67.4,109.5 69.2,93.9 71.1,131.9 72.9,97.8 74.8,113.9 76.7,126.4 78.5,101.3 80.4,91.2 82.2,118.4 84.1,103.8 86.0,113.8 87.8,101.9 89.7,103.1 91.5,113.4 93.4,102.6 95.3,105.8 97.1,105.9 99.0,105.0 100.8,108.5 102.7,106.4 104.6,106.2 106.4,109.5 108.3,107.0 110.1,108.2 112.0,108.0 113.9,108.5 115.7,107.8" fill="none" stroke="#1d1d1f" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="68.0" y="174.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">① 전극</text><text x="68.0" y="194.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">몸의 전기 활동을</text><text x="68.0" y="211.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">전압으로 (µV–mV)</text><rect x="13.0" y="224.0" width="110.0" height="44.0" rx="8" fill="#fff" stroke="#d9dde3" stroke-width="1"></rect><text x="68.0" y="242.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">부품: 전극 패드</text><text x="68.0" y="259.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">(피부에 붙임)</text><line x1="127.0" y1="108.0" x2="149.0" y2="108.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M149.0,111.3 L155.0,108.0 L149.0,104.7 Z" fill="#5f6368"></path><text x="141.0" y="99.0" font-size="11.5" fill="#5f6368" text-anchor="middle">전압</text><rect x="157.0" y="66.0" width="114.0" height="84.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><line x1="165.0" y1="104.0" x2="263.0" y2="104.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="165.0,104.3 166.9,104.3 168.7,103.6 170.6,103.9 172.4,105.0 174.3,104.2 176.2,104.1 178.0,105.7 179.9,102.6 181.7,106.9 183.6,105.0 185.5,103.8 187.3,104.9 189.2,102.7 191.0,99.8 192.9,94.7 194.8,109.0 196.6,100.2 198.5,98.4 200.3,110.5 202.2,120.8 204.1,87.0 205.9,111.6 207.8,111.3 209.6,88.1 211.5,100.5 213.4,105.2 215.2,92.7 217.1,123.1 218.9,95.8 220.8,108.8 222.7,118.7 224.5,98.6 226.4,90.6 228.2,112.3 230.1,100.6 232.0,108.6 233.8,99.1 235.7,100.1 237.5,108.3 239.4,99.7 241.3,102.3 243.1,102.3 245.0,101.6 246.8,104.4 248.7,102.7 250.6,102.5 252.4,105.2 254.3,103.2 256.1,104.2 258.0,104.0 259.9,104.4 261.7,103.8" fill="none" stroke="#b9c0cc" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><circle cx="165.0" cy="104.3" r="2.6" fill="#2b59c3"></circle><circle cx="172.4" cy="105.0" r="2.6" fill="#2b59c3"></circle><circle cx="179.9" cy="102.6" r="2.6" fill="#2b59c3"></circle><circle cx="187.3" cy="104.9" r="2.6" fill="#2b59c3"></circle><circle cx="194.8" cy="109.0" r="2.6" fill="#2b59c3"></circle><circle cx="202.2" cy="120.8" r="2.6" fill="#2b59c3"></circle><circle cx="209.6" cy="88.1" r="2.6" fill="#2b59c3"></circle><circle cx="217.1" cy="123.1" r="2.6" fill="#2b59c3"></circle><circle cx="224.5" cy="98.6" r="2.6" fill="#2b59c3"></circle><circle cx="232.0" cy="108.6" r="2.6" fill="#2b59c3"></circle><circle cx="239.4" cy="99.7" r="2.6" fill="#2b59c3"></circle><circle cx="246.8" cy="104.4" r="2.6" fill="#2b59c3"></circle><circle cx="254.3" cy="103.2" r="2.6" fill="#2b59c3"></circle><circle cx="261.7" cy="103.8" r="2.6" fill="#2b59c3"></circle><text x="214.0" y="141.0" font-size="11" fill="#2b59c3" font-weight="700" text-anchor="middle">2051 2310 1874 …</text><text x="214.0" y="174.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">② 증폭·ADC</text><text x="214.0" y="194.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">1초에 1,000번</text><text x="214.0" y="211.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">숫자로 (12 bit)</text><rect x="159.0" y="224.0" width="110.0" height="44.0" rx="8" fill="#fff" stroke="#d9dde3" stroke-width="1"></rect><text x="214.0" y="242.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">부품: AFE 칩</text><text x="214.0" y="259.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">(증폭기 + ADC)</text><line x1="273.0" y1="108.0" x2="295.0" y2="108.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M295.0,111.3 L301.0,108.0 L295.0,104.7 Z" fill="#5f6368"></path><text x="287.0" y="99.0" font-size="11.5" fill="#5f6368" text-anchor="middle">숫자</text><rect x="303.0" y="66.0" width="114.0" height="84.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><rect x="312" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.35"></rect><rect x="322" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.41"></rect><rect x="332" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.47"></rect><rect x="342" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.53"></rect><rect x="352" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.59"></rect><rect x="362" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.65"></rect><rect x="372" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.71"></rect><rect x="382" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.77"></rect><rect x="392" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.83"></rect><rect x="402" y="80" width="8" height="14" rx="2" fill="#2b59c3" opacity="0.89"></rect><rect x="325" y="120" width="11" height="16" rx="2" fill="#2b59c3"></rect><rect x="341" y="110" width="11" height="26" rx="2" fill="#2b59c3"></rect><rect x="357" y="124" width="11" height="12" rx="2" fill="#2b59c3"></rect><line x1="373.0" y1="124.0" x2="383.0" y2="124.0" stroke="#2b59c3" stroke-width="1.4" stroke-linecap="round"></line><path d="M383.0,127.3 L389.0,124.0 L383.0,120.7 Z" fill="#2b59c3"></path><text x="401.0" y="129.0" font-size="15" fill="#2b59c3" font-weight="800" text-anchor="middle">A</text><text x="360.0" y="174.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">③ 쌓기·계산·분류</text><text x="360.0" y="194.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">2.5 s치 숫자 저장</text><text x="360.0" y="211.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">RMS → 점수 → 분류</text><rect x="305.0" y="224.0" width="110.0" height="44.0" rx="8" fill="#fff" stroke="#d9dde3" stroke-width="1"></rect><text x="360.0" y="242.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">부품: MCU 칩</text><text x="360.0" y="259.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">(RAM·CPU)</text><line x1="419.0" y1="108.0" x2="441.0" y2="108.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M441.0,111.3 L447.0,108.0 L441.0,104.7 Z" fill="#5f6368"></path><text x="433.0" y="99.0" font-size="11.5" fill="#5f6368" text-anchor="middle">결과</text><rect x="449.0" y="66.0" width="114.0" height="84.0" rx="10" fill="#f5f5f7"></rect><path d="M497.0,101.0 A10,10 0 0 1 497.0,115.0" fill="none" stroke="#5f6368" stroke-width="1.6" stroke-linecap="round"></path><path d="M504.0,94.0 A20,20 0 0 1 504.0,122.0" fill="none" stroke="#5f6368" stroke-width="1.6" stroke-linecap="round"></path><path d="M511.0,87.0 A30,30 0 0 1 511.0,129.0" fill="none" stroke="#5f6368" stroke-width="1.6" stroke-linecap="round"></path><circle cx="490.0" cy="108.0" r="4" fill="#1d1d1f"></circle><text x="506.0" y="174.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">④ 무선</text><text x="506.0" y="194.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">결과를 폰으로</text><text x="506.0" y="211.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">(BLE, 저전력 블루투스)</text><rect x="451.0" y="224.0" width="110.0" height="44.0" rx="8" fill="#fff" stroke="#d9dde3" stroke-width="1"></rect><text x="506.0" y="242.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">부품: BLE 무선</text><text x="506.0" y="259.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">(보통 MCU 안에)</text><line x1="565.0" y1="108.0" x2="587.0" y2="108.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M587.0,111.3 L593.0,108.0 L587.0,104.7 Z" fill="#5f6368"></path><text x="579.0" y="99.0" font-size="11.5" fill="#5f6368" text-anchor="middle">전송</text><rect x="595.0" y="66.0" width="114.0" height="84.0" rx="10" fill="#f5f5f7"></rect><rect x="606.0" y="82.0" width="92.0" height="22.0" rx="11" fill="#fff" stroke="#d9dde3" stroke-width="1"></rect><text x="652.0" y="98.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">기록·알림</text><rect x="606.0" y="112.0" width="92.0" height="22.0" rx="11" fill="#fff" stroke="#d9dde3" stroke-width="1"></rect><text x="652.0" y="128.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">잡기 / 놓기</text><text x="652.0" y="174.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">⑤ 행동</text><text x="652.0" y="194.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">기록·알림,</text><text x="652.0" y="211.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">기기 명령</text><rect x="597.0" y="224.0" width="110.0" height="44.0" rx="8" fill="#fff" stroke="#d9dde3" stroke-width="1"></rect><text x="652.0" y="242.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">부품: 폰 앱 또는</text><text x="652.0" y="259.0" font-size="12.5" fill="#1d1d1f" text-anchor="middle">모터 드라이버</text><path d="M157,278 V284 H417 V278" fill="none" stroke="#2b59c3" stroke-width="1.6"></path><text x="287.0" y="304.0" font-size="14" fill="#2b59c3" font-weight="800" text-anchor="middle">과거를 숫자로 만들어 쌓는 구간</text><text x="287.0" y="323.0" font-size="12.5" fill="#5f6368" text-anchor="middle">소자의 state로 대신할 수 있는지 시험하는 부분</text><text x="16.0" y="352.0" font-size="12.5" fill="#5f6368">개념도 · AFE = analog front-end, 생체 신호를 키우고 숫자로 바꾸는 칩 · 부품의 속은 바로 아래 그림</text></svg>
+<!-- /QA:problem -->
+<figcaption><b>로드맵 그림 5. 다섯 단계와 부품.</b> 아래 줄에 단계마다 하는 부품을 적었다.</figcaption>
+</figure>
+<figure class="rv-fig figure">
+<!-- QA:board -->
+<svg class="rv-svg" viewbox="0 0 720 358" role="img" aria-label="손목 밴드 안의 부품: 전극 패드, 증폭기·필터·ADC가 든 AFE 칩, RAM·CPU·Flash·BLE 무선이 든 MCU 칩, 그리고 폰 앱이나 모터 드라이버. 코인셀이 전원을 대고, 가중치는 PC에서 미리 계산해 Flash에 저장한다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">손목 밴드 안의 부품: 누가 무엇을 하나</text><text x="16.0" y="48.0" font-size="12.5" fill="#5f6368">판정까지는 칩 두 개(AFE, MCU)가 한다. 분류기는 따로 있는 부품이 아니라 MCU 안의 짧은 프로그램이다.</text><rect x="16.0" y="70.0" width="104.0" height="150.0" rx="10" fill="#f5f5f7"></rect><text x="68.0" y="92.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">전극 패드</text><circle cx="30.0" cy="116.0" r="6" fill="#0e8a83"></circle><circle cx="46.0" cy="116.0" r="6" fill="#0e8a83"></circle><text x="58.0" y="120.5" font-size="11.5" fill="#2b2f36">채널 1 (+, −)</text><circle cx="30.0" cy="150.0" r="6" fill="#c2682b"></circle><circle cx="46.0" cy="150.0" r="6" fill="#c2682b"></circle><text x="58.0" y="154.5" font-size="11.5" fill="#2b2f36">채널 2 (+, −)</text><circle cx="30.0" cy="184.0" r="6" fill="#5f6368"></circle><circle cx="46.0" cy="184.0" r="6" fill="#fff" stroke="#5f6368" stroke-width="1.2"></circle><text x="58.0" y="188.5" font-size="12.5" fill="#2b2f36">기준 전극</text><text x="68.0" y="240.0" font-size="12.5" fill="#5f6368" text-anchor="middle">피부의 전압 (µV–mV)</text><line x1="122.0" y1="145.0" x2="136.0" y2="145.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M136.0,148.3 L142.0,145.0 L136.0,141.7 Z" fill="#5f6368"></path><text x="132.0" y="136.0" font-size="11.5" fill="#5f6368" text-anchor="middle">전압</text><rect x="144.0" y="70.0" width="150.0" height="150.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.5"></rect><text x="219.0" y="92.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">AFE 칩</text><text x="156.0" y="120.0" font-size="12.5" fill="#2b2f36">① 증폭: µV–mV → V</text><text x="156.0" y="142.0" font-size="12.5" fill="#2b2f36">② 필터: 잡음을 줄임</text><text x="156.0" y="164.0" font-size="12.5" fill="#2b2f36">③ ADC: 1초에</text><text x="156.0" y="186.0" font-size="12.5" fill="#2b2f36">    1,000번 숫자로</text><text x="219.0" y="240.0" font-size="12.5" fill="#5f6368" text-anchor="middle">예: ADS1292 (2채널)</text><line x1="296.0" y1="145.0" x2="312.0" y2="145.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M312.0,148.3 L318.0,145.0 L312.0,141.7 Z" fill="#5f6368"></path><text x="307.0" y="136.0" font-size="11.5" fill="#5f6368" text-anchor="middle">숫자</text><rect x="320.0" y="70.0" width="262.0" height="150.0" rx="10" fill="#fff" stroke="#2b59c3" stroke-width="1.8"></rect><text x="451.0" y="92.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">MCU 칩 하나 (예: nRF52840)</text><rect x="330.0" y="106.0" width="116.0" height="46.0" rx="8" fill="#eef3fd"></rect><text x="388.0" y="125.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="middle">RAM</text><text x="388.0" y="143.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">숫자를 쌓아 두는 곳</text><rect x="456.0" y="106.0" width="116.0" height="46.0" rx="8" fill="#eef3fd"></rect><text x="514.0" y="125.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="middle">CPU</text><text x="514.0" y="143.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">RMS·점수 계산 = 분류기</text><rect x="330.0" y="160.0" width="116.0" height="46.0" rx="8" fill="#eef3fd"></rect><text x="388.0" y="179.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="middle">Flash</text><text x="388.0" y="197.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">프로그램·가중치 보관</text><rect x="456.0" y="160.0" width="116.0" height="46.0" rx="8" fill="#eef3fd"></rect><text x="514.0" y="179.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="middle">BLE 무선</text><text x="514.0" y="197.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">결과를 폰으로</text><text x="451.0" y="240.0" font-size="12.5" fill="#5f6368" text-anchor="middle">ADC가 MCU 안에 든 칩도 많다</text><line x1="584.0" y1="110.0" x2="596.0" y2="110.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M596.0,113.3 L602.0,110.0 L596.0,106.7 Z" fill="#5f6368"></path><rect x="604.0" y="84.0" width="100.0" height="52.0" rx="10" fill="#f5f5f7"></rect><text x="654.0" y="106.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">폰 앱</text><text x="654.0" y="124.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">기록·알림</text><line x1="584.0" y1="182.0" x2="596.0" y2="182.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M596.0,185.3 L602.0,182.0 L596.0,178.7 Z" fill="#5f6368"></path><rect x="604.0" y="156.0" width="100.0" height="52.0" rx="10" fill="#f5f5f7"></rect><text x="654.0" y="178.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">모터 드라이버</text><text x="654.0" y="196.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">→ 의수 모터</text><text x="654.0" y="240.0" font-size="12.5" fill="#5f6368" text-anchor="middle">판정 뒤의 행동</text><rect x="16.0" y="266.0" width="300.0" height="54.0" rx="10" fill="#fdf3da"></rect><text x="30.0" y="288.0" font-size="12.5" fill="#1d1d1f" font-weight="800">코인셀 CR2032 (지름 20 mm, 두께 3.2 mm)</text><text x="30.0" y="308.0" font-size="12.5" fill="#2b2f36">3 V, 약 225 mAh → 모든 칩에 전원</text><rect x="332.0" y="266.0" width="372.0" height="54.0" rx="10" fill="#f5f5f7"></rect><text x="346.0" y="288.0" font-size="12.5" fill="#1d1d1f" font-weight="800">가중치는 어디서 오나</text><text x="346.0" y="308.0" font-size="12.5" fill="#2b2f36">PC에서 정답 붙은 기록으로 미리 계산 → Flash에 한 번 저장</text><line x1="514.0" y1="264.0" x2="514.0" y2="214.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="3 3"></line><path d="M517.3,214.0 L514.0,208.0 L510.7,214.0 Z" fill="#5f6368"></path><text x="16.0" y="348.0" font-size="12.5" fill="#5f6368">개념도 · 칩 이름은 흔히 쓰는 예 · 실제 장치마다 구성이 다르다</text></svg>
+<!-- /QA:board -->
+<figcaption><b>로드맵 그림 6. 손목 밴드 안의 부품.</b> 전극 → AFE 칩 → MCU(CPU·RAM·Flash·ADC·BLE) → 폰 또는 모터 드라이버. 전원은 코인셀.</figcaption>
+</figure>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 그림 5 아래에 부품 줄을 더하고, 그림 6을 새로 그림. 1.3절 단계 2에 AFE 설명을 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q14</span> <strong>BLE, Wi-Fi, LTE는 무엇이 다른가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "몸에 붙이는 장치는 대개 BLE로 스마트폰에 보내고, 스마트폰이 Wi-Fi나 LTE로 클라우드에 올립니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 무슨 말? Wi-Fi와 LTE의 차이? LTE는 데이터 쓸 때 그 LTE?</p>
+</div>
+<p>데이터가 가는 길은 <strong>밴드 → (BLE, 몇 m) → 폰 → (인터넷) → 서버</strong>입니다.</p>
+<ul>
+<li><strong>BLE</strong>: 몇 m 안에서 아주 적은 전력으로 주고받는 블루투스. 밴드와 폰 사이.</li>
+<li><strong>Wi-Fi</strong>: 집이나 건물의 <strong>공유기</strong>를 거쳐 인터넷에 붙는 무선.</li>
+<li><strong>LTE</strong>: 통신사 <strong>기지국</strong>을 거쳐 인터넷에 붙는 무선. 네, 폰으로 "데이터 쓸 때"의 그 LTE입니다.</li>
+</ul>
+<p>밴드가 직접 Wi-Fi나 LTE를 쓰지 않는 이유는 전력이 BLE보다 훨씬 많이 들기 때문입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.3절 단계 4에 세 무선의 차이와 데이터의 길을 적음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q15</span> <strong>채널이란? 채널 하나 = 근육 하나인가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "측정 채널이 둘이면 RMS 20개가 나옵니다." (채널의 정의는 그 뒤 1.4절에 있었음)</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 측정 채널이 둘이라는 게 무슨 말? 채널 → 근육? (뒤에서: 설명이 뒤에 있었구나. 정의는 볼드로.)</p>
+</div>
+<p><span class="key"><strong>채널은 신호 하나를 재는 통로, 곧 전극 한 쌍입니다.</strong></span> 한 쌍이 대략 근육 하나를 맡으므로, 굽히는 근육과 펴는 근육을 따로 재면 채널 2개입니다.</p>
+<p>설명이 처음 쓰는 곳보다 뒤에 있던 것이 문제였습니다. 그래서 1.2절 첫머리로 옮기고, 정의 문장은 모두 굵게 했습니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.2절 "낱말 다섯 개"로 옮김. 1절 전체의 정의 문장을 굵게 함.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q16</span> <strong>채널 1, 2의 그래프가 비슷한데 어떻게 구분하나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "채널 1의 막대가 앞쪽에, 채널 2의 막대가 뒤쪽에 높으면 '굽힘 다음 폄'입니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 두 그래프가 비슷해 보이는데 어떻게 구분하지?</p>
+</div>
+<p>모양이 아니라 <strong>언제 셌는가</strong>로 구분합니다. 채널 1(굽히는 근육)은 앞쪽 구간에서, 채널 2(펴는 근육)는 뒤쪽 구간에서 셉니다. 가중치도 그 자리에 붙습니다. 채널 1의 앞 구간에는 +, 뒤 구간에는 −가 붙고, 채널 2는 그 반대입니다. 그래서 점수의 부호가 순서를 알려 줍니다.</p>
+<figure class="rv-fig figure">
+<!-- QA:feature -->
+<svg class="rv-svg" viewbox="0 0 720 372" role="img" aria-label="두 채널의 2.5초 근전도를 0.25초 구간 10개로 나누어 구간마다 RMS를 구하면 채널당 10개, 모두 20개의 숫자가 된다. 이 20개에 가중치를 곱해 더한 점수의 부호로 동작 순서를 정한다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">특징 계산: 2.5초의 숫자 5,000개를 숫자 20개로 줄이고, 가중합으로 답한다</text><text x="16.0" y="86.0" font-size="14" fill="#0e8a83" font-weight="800">채널 1</text><text x="16.0" y="104.0" font-size="12.5" fill="#5f6368">손목을 굽히는 근육</text><polyline points="150.0,93.9 150.8,92.0 151.6,91.5 152.5,94.4 153.3,93.8 154.1,89.8 154.9,94.2 155.7,93.9 156.6,89.7 157.4,91.4 158.2,92.7 159.0,91.9 159.8,91.1 160.7,93.2 161.5,94.0 162.3,90.4 163.1,91.0 163.9,91.9 164.8,90.2 165.6,91.7 166.4,89.2 167.2,93.8 168.0,91.7 168.9,92.1 169.7,92.9 170.5,91.4 171.3,93.7 172.1,90.0 173.0,89.5 173.8,94.6 174.6,92.2 175.4,93.6 176.2,95.1 177.1,88.9 177.9,92.6 178.7,94.9 179.5,90.5 180.3,94.6 181.2,88.4 182.0,94.6 182.8,96.4 183.6,94.9 184.4,93.6 185.3,92.3 186.1,87.6 186.9,89.8 187.7,93.8 188.5,97.8 189.4,96.2 190.2,85.7 191.0,92.5 191.8,89.4 192.6,98.3 193.5,98.9 194.3,86.7 195.1,90.6 195.9,95.1 196.7,95.1 197.6,99.3 198.4,98.0 199.2,101.0 200.0,85.3 200.8,92.7 201.7,99.9 202.5,86.8 203.3,98.9 204.1,102.3 204.9,89.6 205.8,82.0 206.6,104.3 207.4,83.8 208.2,100.6 209.0,103.7 209.9,106.3 210.7,98.3 211.5,84.8 212.3,92.2 213.1,80.2 214.0,101.7 214.8,98.5 215.6,100.8 216.4,74.1 217.2,75.0 218.1,98.3 218.9,94.6 219.7,99.7 220.5,81.5 221.3,112.1 222.2,111.3 223.0,96.4 223.8,103.9 224.6,75.5 225.4,80.2 226.3,89.7 227.1,83.8 227.9,82.1 228.7,77.3 229.5,69.2 230.4,111.0 231.2,85.1 232.0,111.9 232.8,95.2 233.6,75.5 234.5,69.0 235.3,76.7 236.1,119.7 236.9,100.5 237.7,112.5 238.6,61.4 239.4,114.1 240.2,108.0 241.0,101.0 241.8,119.8 242.7,68.4 243.5,83.3 244.3,113.8 245.1,92.1 245.9,119.2 246.8,84.8 247.6,109.4 248.4,121.9 249.2,116.9 250.0,88.4 250.9,83.2 251.7,103.3 252.5,82.8 253.3,101.5 254.1,115.5 255.0,103.7 255.8,98.6 256.6,66.2 257.4,115.8 258.2,117.4 259.1,88.3 259.9,64.1 260.7,67.7 261.5,80.2 262.3,117.2 263.2,74.4 264.0,81.6 264.8,111.9 265.6,93.9 266.4,116.4 267.3,75.9 268.1,80.5 268.9,76.3 269.7,78.8 270.5,103.5 271.4,77.9 272.2,104.0 273.0,108.9 273.8,97.0 274.6,92.1 275.5,101.3 276.3,87.5 277.1,87.7 277.9,102.5 278.7,87.2 279.6,97.5 280.4,83.2 281.2,99.6 282.0,81.4 282.8,94.9 283.7,90.2 284.5,86.4 285.3,91.4 286.1,99.4 286.9,77.8 287.8,103.6 288.6,96.9 289.4,90.7 290.2,104.3 291.0,100.7 291.9,84.7 292.7,85.3 293.5,88.9 294.3,83.2 295.1,86.6 296.0,96.1 296.8,89.1 297.6,95.0 298.4,87.4 299.2,94.0 300.1,97.9 300.9,85.8 301.7,89.0 302.5,88.3 303.3,91.1 304.2,88.0 305.0,92.7 305.8,91.1 306.6,97.6 307.4,91.3 308.3,88.3 309.1,89.6 309.9,88.6 310.7,92.0 311.5,88.0 312.4,95.9 313.2,88.3 314.0,93.2 314.8,95.7 315.6,90.9 316.5,92.4 317.3,92.6 318.1,89.1 318.9,94.9 319.7,91.1 320.6,92.6 321.4,91.8 322.2,92.0 323.0,94.6 323.8,91.9 324.7,89.6 325.5,94.2 326.3,95.1 327.1,94.7 327.9,92.2 328.8,89.1 329.6,94.7 330.4,89.1 331.2,91.8 332.0,94.2 332.9,92.5 333.7,93.6 334.5,90.8 335.3,91.8 336.1,93.1 337.0,93.3 337.8,90.0 338.6,90.6 339.4,92.3 340.2,92.5 341.1,90.8 341.9,89.6 342.7,94.1 343.5,93.7 344.3,92.7 345.2,92.0 346.0,94.1 346.8,94.2 347.6,93.4 348.4,92.6 349.3,90.8 350.1,91.5 350.9,94.3 351.7,94.2 352.5,92.2 353.4,90.2 354.2,90.0 355.0,92.7 355.8,90.1 356.6,89.9 357.5,92.5 358.3,90.8 359.1,92.7 359.9,93.7 360.7,91.6 361.6,94.0 362.4,91.2 363.2,90.5 364.0,90.0 364.8,92.3 365.7,93.8 366.5,90.1 367.3,90.2 368.1,89.7 368.9,91.5 369.8,91.2 370.6,92.6 371.4,93.5 372.2,93.0 373.0,90.9 373.9,92.8 374.7,91.1 375.5,92.0 376.3,92.2 377.1,89.8 378.0,93.6 378.8,92.1 379.6,93.6 380.4,89.9 381.2,92.1 382.1,92.8 382.9,93.6 383.7,91.5 384.5,92.5 385.3,93.8 386.2,94.2 387.0,92.5 387.8,91.6 388.6,91.9 389.4,90.1 390.3,90.0 391.1,89.9 391.9,90.6 392.7,92.1 393.5,91.9 394.4,92.5 395.2,92.5 396.0,94.2 396.8,90.6 397.6,93.2 398.5,94.3 399.3,92.2 400.1,91.0 400.9,92.3 401.7,92.7 402.6,91.2 403.4,93.6 404.2,94.3 405.0,91.6 405.8,91.9 406.7,90.2 407.5,92.4 408.3,90.6 409.1,94.3 409.9,94.3 410.8,91.5 411.6,93.3 412.4,94.1 413.2,93.8 414.0,92.6 414.9,92.8 415.7,91.7 416.5,90.1 417.3,92.6 418.1,93.5 419.0,91.6 419.8,94.4 420.6,92.6 421.4,92.9 422.2,92.5 423.1,94.2 423.9,91.7 424.7,91.4 425.5,90.8 426.3,89.8 427.2,92.7 428.0,91.2 428.8,92.3 429.6,93.4 430.4,90.1 431.3,90.8 432.1,89.9 432.9,90.5 433.7,90.0 434.5,93.8 435.4,94.3 436.2,93.4 437.0,92.4 437.8,91.1 438.6,92.3 439.5,91.9 440.3,90.7 441.1,94.1 441.9,91.1 442.7,94.2 443.6,93.2 444.4,90.9 445.2,91.1 446.0,92.5 446.8,93.0 447.7,90.4 448.5,93.1 449.3,94.3 450.1,93.2 450.9,94.3 451.8,90.5 452.6,93.8 453.4,89.7 454.2,93.4 455.0,92.9 455.9,91.6 456.7,92.9 457.5,92.6 458.3,93.9 459.1,92.5 460.0,94.3 460.8,93.3 461.6,90.0 462.4,93.1 463.2,93.1 464.1,91.1 464.9,90.2 465.7,93.0 466.5,92.6 467.3,91.0 468.2,90.6 469.0,91.5 469.8,93.5 470.6,93.5 471.4,90.8 472.3,91.0 473.1,90.1 473.9,90.7 474.7,92.4 475.5,93.8 476.4,90.1 477.2,91.1 478.0,91.6 478.8,91.1 479.6,92.6 480.5,92.8 481.3,91.6 482.1,92.1 482.9,91.0 483.7,89.9 484.6,90.3 485.4,92.5 486.2,92.6 487.0,90.0 487.8,92.5 488.7,90.6 489.5,94.0 490.3,92.2 491.1,91.9 491.9,90.5 492.8,90.2 493.6,93.7 494.4,91.4 495.2,91.4 496.0,93.7 496.9,90.4 497.7,91.7 498.5,89.8 499.3,93.5 500.1,91.9 501.0,92.8 501.8,91.3 502.6,91.5 503.4,91.9 504.2,92.8 505.1,92.0 505.9,92.6 506.7,90.1 507.5,92.2 508.3,92.1 509.2,93.2 510.0,93.2 510.8,89.8 511.6,92.9 512.4,90.2 513.3,91.5 514.1,89.7 514.9,93.6 515.7,89.9 516.5,90.7 517.4,91.7 518.2,91.0 519.0,90.9 519.8,92.2 520.6,91.4 521.5,93.3 522.3,94.3 523.1,91.2 523.9,92.1 524.7,90.1 525.6,93.1 526.4,90.5 527.2,89.7 528.0,90.1 528.8,89.8 529.7,93.6 530.5,93.6 531.3,93.3 532.1,92.7 532.9,93.8 533.8,93.7 534.6,94.3 535.4,89.9 536.2,92.7 537.0,91.4 537.9,92.2 538.7,90.8 539.5,90.5 540.3,92.6 541.1,91.8 542.0,93.9 542.8,93.0 543.6,93.3 544.4,92.9 545.2,92.8 546.1,91.6 546.9,92.8 547.7,92.8 548.5,90.4 549.3,94.3 550.2,94.4 551.0,94.1 551.8,90.2 552.6,91.4 553.4,90.9 554.3,89.8 555.1,93.4 555.9,90.0 556.7,93.2 557.5,91.9 558.4,91.1 559.2,90.6" fill="none" stroke="#0e8a83" stroke-width="0.9" stroke-linejoin="round" stroke-linecap="round"></polyline><line x1="150.0" y1="56.0" x2="150.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="191.0" y1="56.0" x2="191.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="232.0" y1="56.0" x2="232.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="273.0" y1="56.0" x2="273.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="314.0" y1="56.0" x2="314.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="355.0" y1="56.0" x2="355.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="396.0" y1="56.0" x2="396.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="437.0" y1="56.0" x2="437.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="478.0" y1="56.0" x2="478.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="519.0" y1="56.0" x2="519.0" y2="128.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><rect x="590" y="112.2" width="8" height="3.8" rx="1.5" fill="#0e8a83"></rect><rect x="601" y="99.6" width="8" height="16.4" rx="1.5" fill="#0e8a83"></rect><rect x="612" y="86.7" width="8" height="29.3" rx="1.5" fill="#0e8a83"></rect><rect x="623" y="105.8" width="8" height="10.2" rx="1.5" fill="#0e8a83"></rect><rect x="634" y="113.2" width="8" height="2.8" rx="1.5" fill="#0e8a83"></rect><rect x="645" y="113.9" width="8" height="2.1" rx="1.5" fill="#0e8a83"></rect><rect x="656" y="113.7" width="8" height="2.3" rx="1.5" fill="#0e8a83"></rect><rect x="667" y="113.8" width="8" height="2.2" rx="1.5" fill="#0e8a83"></rect><rect x="678" y="114.0" width="8" height="2.0" rx="1.5" fill="#0e8a83"></rect><rect x="689" y="113.7" width="8" height="2.3" rx="1.5" fill="#0e8a83"></rect><line x1="566.0" y1="92.0" x2="579.0" y2="92.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M579.0,94.8 L584.0,92.0 L579.0,89.2 Z" fill="#5f6368"></path><text x="248.4" y="52.0" font-size="12.5" fill="#0e8a83" font-weight="700" text-anchor="middle">먼저 셈 (0.4–0.9 s)</text><text x="16.0" y="182.0" font-size="14" fill="#c2682b" font-weight="800">채널 2</text><text x="16.0" y="200.0" font-size="12.5" fill="#5f6368">손목을 펴는 근육</text><polyline points="150.0,189.2 150.8,188.1 151.6,190.2 152.5,189.0 153.3,185.7 154.1,186.1 154.9,187.6 155.7,186.6 156.6,186.1 157.4,188.8 158.2,185.7 159.0,188.2 159.8,189.6 160.7,187.9 161.5,187.6 162.3,187.1 163.1,187.2 163.9,190.2 164.8,187.3 165.6,186.0 166.4,187.2 167.2,185.7 168.0,187.9 168.9,186.5 169.7,189.7 170.5,186.1 171.3,188.3 172.1,186.2 173.0,188.9 173.8,187.4 174.6,186.3 175.4,187.0 176.2,187.4 177.1,185.7 177.9,190.0 178.7,189.9 179.5,187.8 180.3,185.8 181.2,187.1 182.0,188.9 182.8,189.9 183.6,188.2 184.4,188.1 185.3,188.2 186.1,187.4 186.9,189.1 187.7,186.2 188.5,189.0 189.4,189.9 190.2,188.7 191.0,185.9 191.8,189.6 192.6,189.1 193.5,186.0 194.3,188.7 195.1,186.4 195.9,190.2 196.7,186.1 197.6,189.3 198.4,189.5 199.2,186.8 200.0,185.7 200.8,185.8 201.7,186.8 202.5,186.0 203.3,185.7 204.1,187.7 204.9,189.7 205.8,186.3 206.6,188.5 207.4,188.9 208.2,188.0 209.0,190.2 209.9,190.3 210.7,189.1 211.5,187.5 212.3,186.8 213.1,185.8 214.0,186.5 214.8,185.9 215.6,187.3 216.4,186.9 217.2,187.6 218.1,190.0 218.9,190.1 219.7,186.8 220.5,189.4 221.3,186.6 222.2,188.2 223.0,190.4 223.8,187.7 224.6,188.3 225.4,190.0 226.3,189.1 227.1,188.9 227.9,188.7 228.7,187.0 229.5,189.6 230.4,188.3 231.2,187.5 232.0,185.9 232.8,189.8 233.6,190.0 234.5,189.5 235.3,189.3 236.1,189.6 236.9,190.0 237.7,189.4 238.6,189.3 239.4,188.1 240.2,187.3 241.0,188.7 241.8,189.6 242.7,189.9 243.5,189.1 244.3,189.6 245.1,188.1 245.9,186.2 246.8,187.0 247.6,189.4 248.4,190.2 249.2,190.1 250.0,188.3 250.9,188.7 251.7,187.1 252.5,190.0 253.3,189.2 254.1,187.1 255.0,187.7 255.8,187.9 256.6,186.1 257.4,189.9 258.2,189.5 259.1,187.7 259.9,187.7 260.7,185.7 261.5,185.7 262.3,187.6 263.2,186.8 264.0,187.1 264.8,189.8 265.6,187.5 266.4,188.9 267.3,188.7 268.1,189.6 268.9,190.4 269.7,186.3 270.5,187.0 271.4,186.8 272.2,189.0 273.0,188.4 273.8,189.6 274.6,187.5 275.5,186.4 276.3,186.7 277.1,185.9 277.9,189.1 278.7,187.0 279.6,189.8 280.4,187.8 281.2,189.9 282.0,187.8 282.8,187.8 283.7,188.7 284.5,188.7 285.3,187.0 286.1,188.1 286.9,188.4 287.8,189.9 288.6,189.0 289.4,186.3 290.2,185.7 291.0,188.6 291.9,186.2 292.7,186.2 293.5,189.4 294.3,189.1 295.1,187.1 296.0,188.9 296.8,185.8 297.6,188.6 298.4,186.9 299.2,187.0 300.1,189.4 300.9,186.2 301.7,188.8 302.5,189.9 303.3,190.2 304.2,188.2 305.0,187.4 305.8,189.1 306.6,186.4 307.4,189.1 308.3,186.3 309.1,190.2 309.9,189.1 310.7,189.6 311.5,188.3 312.4,188.7 313.2,188.5 314.0,186.3 314.8,187.6 315.6,187.5 316.5,188.5 317.3,186.5 318.1,188.0 318.9,186.8 319.7,186.0 320.6,187.5 321.4,188.3 322.2,189.2 323.0,186.0 323.8,186.7 324.7,186.5 325.5,189.4 326.3,188.3 327.1,186.1 327.9,189.3 328.8,186.4 329.6,187.8 330.4,189.4 331.2,188.6 332.0,190.1 332.9,187.1 333.7,186.8 334.5,190.4 335.3,189.0 336.1,186.6 337.0,189.6 337.8,187.8 338.6,186.4 339.4,187.6 340.2,190.0 341.1,185.8 341.9,186.7 342.7,187.6 343.5,188.9 344.3,187.5 345.2,188.6 346.0,190.2 346.8,190.2 347.6,190.7 348.4,190.0 349.3,189.6 350.1,187.1 350.9,187.5 351.7,187.4 352.5,185.8 353.4,190.8 354.2,188.8 355.0,191.0 355.8,188.6 356.6,191.2 357.5,191.3 358.3,191.1 359.1,188.9 359.9,185.8 360.7,189.9 361.6,185.9 362.4,190.4 363.2,190.0 364.0,188.3 364.8,192.3 365.7,188.5 366.5,187.1 367.3,184.4 368.1,193.1 368.9,184.4 369.8,187.1 370.6,187.0 371.4,193.9 372.2,182.8 373.0,191.2 373.9,187.3 374.7,187.4 375.5,181.5 376.3,186.3 377.1,179.6 378.0,192.7 378.8,185.0 379.6,186.5 380.4,187.7 381.2,185.4 382.1,186.9 382.9,191.6 383.7,184.8 384.5,197.8 385.3,188.5 386.2,189.2 387.0,195.5 387.8,186.2 388.6,183.3 389.4,198.8 390.3,194.0 391.1,201.4 391.9,184.9 392.7,201.6 393.5,197.0 394.4,189.8 395.2,189.7 396.0,205.0 396.8,171.2 397.6,198.4 398.5,183.7 399.3,199.3 400.1,184.0 400.9,194.3 401.7,195.9 402.6,189.1 403.4,184.1 404.2,183.4 405.0,179.0 405.8,199.3 406.7,208.3 407.5,200.5 408.3,196.9 409.1,182.4 409.9,192.6 410.8,198.2 411.6,210.1 412.4,182.6 413.2,210.1 414.0,187.0 414.9,177.0 415.7,180.7 416.5,208.3 417.3,196.7 418.1,161.2 419.0,213.1 419.8,176.9 420.6,192.0 421.4,180.9 422.2,194.7 423.1,211.9 423.9,184.0 424.7,219.7 425.5,164.5 426.3,168.7 427.2,196.2 428.0,185.6 428.8,186.2 429.6,156.9 430.4,217.5 431.3,201.1 432.1,194.0 432.9,169.5 433.7,173.3 434.5,192.9 435.4,218.9 436.2,178.7 437.0,193.8 437.8,211.7 438.6,180.0 439.5,191.4 440.3,199.7 441.1,201.8 441.9,186.8 442.7,202.7 443.6,194.1 444.4,162.9 445.2,189.2 446.0,201.6 446.8,186.8 447.7,165.7 448.5,168.8 449.3,178.9 450.1,167.8 450.9,175.3 451.8,179.2 452.6,191.4 453.4,204.4 454.2,177.4 455.0,182.0 455.9,167.6 456.7,195.6 457.5,172.3 458.3,199.4 459.1,170.4 460.0,168.9 460.8,205.0 461.6,194.4 462.4,170.3 463.2,171.9 464.1,182.3 464.9,199.9 465.7,203.5 466.5,195.7 467.3,174.8 468.2,179.3 469.0,190.0 469.8,181.0 470.6,177.5 471.4,193.0 472.3,178.9 473.1,193.4 473.9,191.9 474.7,198.0 475.5,195.2 476.4,187.0 477.2,197.4 478.0,187.1 478.8,194.1 479.6,183.6 480.5,194.3 481.3,192.8 482.1,191.7 482.9,186.7 483.7,183.4 484.6,184.4 485.4,184.7 486.2,185.6 487.0,187.4 487.8,189.9 488.7,191.8 489.5,183.8 490.3,189.0 491.1,186.4 491.9,192.5 492.8,189.4 493.6,191.9 494.4,189.4 495.2,185.9 496.0,189.4 496.9,186.4 497.7,191.2 498.5,188.9 499.3,188.7 500.1,187.9 501.0,190.0 501.8,186.5 502.6,185.3 503.4,185.8 504.2,191.2 505.1,188.1 505.9,189.0 506.7,187.5 507.5,190.6 508.3,186.6 509.2,188.5 510.0,185.3 510.8,190.8 511.6,188.5 512.4,188.1 513.3,186.1 514.1,186.6 514.9,189.8 515.7,189.1 516.5,186.7 517.4,188.4 518.2,189.3 519.0,185.7 519.8,186.2 520.6,188.8 521.5,187.7 522.3,185.8 523.1,189.4 523.9,185.9 524.7,186.1 525.6,186.9 526.4,187.1 527.2,187.1 528.0,187.8 528.8,187.6 529.7,189.5 530.5,187.7 531.3,187.1 532.1,188.1 532.9,187.1 533.8,188.2 534.6,186.5 535.4,186.9 536.2,190.0 537.0,186.7 537.9,189.0 538.7,190.0 539.5,189.8 540.3,188.9 541.1,187.9 542.0,188.8 542.8,189.4 543.6,186.7 544.4,188.6 545.2,186.2 546.1,189.2 546.9,187.1 547.7,188.7 548.5,186.3 549.3,187.3 550.2,187.1 551.0,190.0 551.8,186.8 552.6,188.7 553.4,186.8 554.3,186.3 555.1,189.8 555.9,190.3 556.7,186.8 557.5,185.7 558.4,186.1 559.2,188.3" fill="none" stroke="#c2682b" stroke-width="0.9" stroke-linejoin="round" stroke-linecap="round"></polyline><line x1="150.0" y1="152.0" x2="150.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="191.0" y1="152.0" x2="191.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="232.0" y1="152.0" x2="232.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="273.0" y1="152.0" x2="273.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="314.0" y1="152.0" x2="314.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="355.0" y1="152.0" x2="355.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="396.0" y1="152.0" x2="396.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="437.0" y1="152.0" x2="437.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="478.0" y1="152.0" x2="478.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="519.0" y1="152.0" x2="519.0" y2="224.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><rect x="590" y="209.8" width="8" height="2.2" rx="1.5" fill="#c2682b"></rect><rect x="601" y="209.6" width="8" height="2.4" rx="1.5" fill="#c2682b"></rect><rect x="612" y="209.7" width="8" height="2.3" rx="1.5" fill="#c2682b"></rect><rect x="623" y="209.9" width="8" height="2.1" rx="1.5" fill="#c2682b"></rect><rect x="634" y="209.7" width="8" height="2.3" rx="1.5" fill="#c2682b"></rect><rect x="645" y="204.2" width="8" height="7.8" rx="1.5" fill="#c2682b"></rect><rect x="656" y="187.7" width="8" height="24.3" rx="1.5" fill="#c2682b"></rect><rect x="667" y="192.0" width="8" height="20.0" rx="1.5" fill="#c2682b"></rect><rect x="678" y="207.7" width="8" height="4.3" rx="1.5" fill="#c2682b"></rect><rect x="689" y="209.8" width="8" height="2.2" rx="1.5" fill="#c2682b"></rect><line x1="566.0" y1="188.0" x2="579.0" y2="188.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M579.0,190.8 L584.0,188.0 L579.0,185.2 Z" fill="#5f6368"></path><text x="428.8" y="148.0" font-size="12.5" fill="#c2682b" font-weight="700" text-anchor="middle">나중에 셈 (1.5–2.0 s)</text><line x1="560.0" y1="56.0" x2="560.0" y2="228.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><text x="150.0" y="244.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0 s</text><text x="560.0" y="244.0" font-size="12.5" fill="#5f6368" text-anchor="middle">2.5 s</text><text x="355.0" y="244.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0.25초 구간 10개 (구간마다 숫자 250개)</text><text x="645.0" y="56.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">구간마다 RMS</text><text x="645.0" y="72.0" font-size="12.5" fill="#5f6368" text-anchor="middle">→ 근육(채널)마다 10개</text><rect x="16.0" y="274.0" width="688.0" height="64.0" rx="10" fill="#f5f5f7"></rect><text x="32.0" y="300.0" font-size="14" fill="#1d1d1f" font-weight="800">점수 = w₁×RMS₁ + w₂×RMS₂ + … + w₂₀×RMS₂₀</text><text x="32.0" y="322.0" font-size="12.5" fill="#2b2f36">점수 &gt; 0 → "굽힘 다음 폄"(놓기),  점수 &lt; 0 → "폄 다음 굽힘"(잡기)   · 가중치 20개는 PC에서 미리 정해 MCU에 넣어 둔다</text><text x="16.0" y="362.0" font-size="12.5" fill="#5f6368">개념도 · 가상 신호 · RMS = 구간의 숫자를 제곱해 평균 내고 제곱근을 취한 값(그 구간의 힘의 세기)</text></svg>
+<!-- /QA:feature -->
+<figcaption><b>로드맵 그림 7. 특징 계산.</b> 2.5초를 열 구간으로 나눠 근육(채널)마다 RMS 10개. "먼저 셈 / 나중에 셈"과 (놓기)/(잡기) 표시를 더했다.</figcaption>
+</figure>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 그림 7에 "먼저 셈 / 나중에 셈", "근육(채널)마다 10개"를 표시함.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q17</span> <strong>가중치는 어디서 오고, 분류기는 무슨 부품인가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "이 20개에 미리 정한 가중치를 곱해 더한 점수의 부호로 답을 정하는 것이 <strong>분류</strong>입니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 가중치는 어떤 데이터로, 어디서 계산해서 어디에 넣나? 분류기는 어떤 부품? 회로를 따로 넣어야 하나?</p>
+</div>
+<ol type="1">
+<li><strong>데이터 모으기.</strong> 사용자가 각 동작을 30번씩 합니다. 기록마다 "이건 잡기", "이건 놓기"라는 정답이 붙습니다.</li>
+<li><strong>계산.</strong> PC가 이 기록으로 가중치 20개를 계산합니다. LDA처럼 두 묶음을 가장 잘 가르는 직선을 찾는 방법을 씁니다.</li>
+<li><strong>넣기.</strong> 가중치를 MCU의 <strong>Flash</strong>에 한 번 써 넣습니다.</li>
+</ol>
+<p><span class="key">분류기는 부품이 아니라 <strong>MCU 안의 짧은 프로그램</strong>입니다.</span> "20개를 곱해 더하고 부호를 본다"는 몇 줄이라 회로를 따로 넣지 않습니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.3절에 "가중치는 어디서 오나"를 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q18</span> <strong>더 복잡한 동작은? 구간은 실제로 얼마나 촘촘히?</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "더 복잡한 동작(손가락 하나하나)을 구분하려면 특징을 더 늘리거나 큰 신경망을 씁니다." / "2.5초를 0.25초씩 열 구간으로 나누고 …"</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 복잡해도 가중치만 미리 계산하면 되지 않나? 채널은 늘리고? 구간은 실제로 더 촘촘히 나누나?</p>
+</div>
+<p><strong>복잡한 동작.</strong> 가중치를 미리 학습해 넣는다는 점은 같습니다. 달라지는 것은 셋입니다.</p>
+<ul>
+<li>채널이 8–16개로 늘어납니다.</li>
+<li>답이 여러 개라 답마다 점수를 하나씩 계산하고 가장 큰 것을 고릅니다.</li>
+<li>패턴이 겹치면 직선 하나로 가를 수 없어 신경망을 씁니다. 신경망은 가중치가 수천–수백만 개라 무겁습니다.</li>
+</ul>
+<p><strong>구간.</strong> 실제로는 100–300 ms 구간을 <strong>50 ms쯤씩 밀며 겹치게</strong> 계산합니다. 200 ms 창을 50 ms씩 밀면 1초에 20번 계산합니다. 중요한 구간을 미리 알 수 없으니 고르게 나누고, 쉬는 구간은 RMS가 작아 점수에 거의 기여하지 않습니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.3절 "특징 20개만으로 분류가 되나" 뒤에 두 문단을 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q19</span> <strong>분류 다음은? 의수에 어떻게 신호를 주나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "<strong>행동.</strong> 결과가 기록·알림 또는 기기 명령이 됩니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 의수면 로봇손에 어떻게 신호를 주나? 전압을 거나? 아두이노처럼 코딩하나?</p>
+</div>
+<p>MCU가 "잡기"로 판정하면 <strong>모터 드라이버</strong> 칩에 신호를 보냅니다. MCU의 핀은 작은 전류밖에 못 내므로, 모터 드라이버가 그 신호를 받아 모터에 큰 전류를 흘립니다.</p>
+<p>프로그램은 아두이노와 같은 방식입니다. "점수 &lt; 0이면 모터를 쥐는 방향으로 0.5초 돌린다" 같은 몇 줄입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.3절 단계 5에 모터 드라이버를 적음.</p>
+</div>
+</div>
+</section>
+<section id="qa-14" class="level2">
+<h2 class="anchored" data-anchor-id="qa-14">1.4 ADC가 하는 일과 숫자의 양</h2>
+<p><strong>이 절이 말하던 것.</strong> ADC가 전압을 일정한 간격으로 재서 숫자로 적는 과정, sampling rate, bit, 채널, 1초에 생기는 숫자의 양.</p>
+<div class="qa-card">
+<p><span class="qa-num">Q20</span> <strong>정규화된 전압이 와닿지 않는다</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> ADC 그림의 세로축이 0–1로 정규화된 전압이었음.</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 정규화 전압 말고 실제 전압으로.</p>
+</div>
+<p>세로축을 <strong>증폭 뒤의 실제 전압 0–3.2 V</strong>로 바꿨습니다. 한 점을 따라가는 예도 넣었습니다.</p>
+<ul>
+<li>그 순간의 전압 <strong>1.37 V</strong></li>
+<li>→ 읽기 쉽게 줄인 4 bit ADC의 16단계 중 가장 가까운 <strong>단계 6</strong>(1.28 V)</li>
+<li>→ 숫자 <strong>0110</strong></li>
+</ul>
+<p>왼쪽에 "아날로그", 오른쪽에 "디지털"을 표시했습니다.</p>
+<figure class="rv-fig figure">
+<!-- QA:adc -->
+<svg class="rv-svg" viewbox="0 0 720 420" role="img" aria-label="ADC 설명: 연속 전압 곡선을 1 ms마다 재서 16단계 중 가장 가까운 단계 번호로 적는다. 한 점을 확대하면 실제 전압(아날로그), 가장 가까운 단계, 2진수(디지털) 순으로 바뀐다. 아래에 sampling rate와 bit rate의 차이."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">ADC가 하는 일: ① 일정 간격으로 재고 ② 단계 번호로 적는다</text><line x1="56.0" y1="256.0" x2="430.0" y2="256.0" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="243.6" x2="430.0" y2="243.6" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="231.2" x2="430.0" y2="231.2" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="218.8" x2="430.0" y2="218.8" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="206.4" x2="430.0" y2="206.4" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="194.0" x2="430.0" y2="194.0" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="181.6" x2="430.0" y2="181.6" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="169.2" x2="430.0" y2="169.2" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="156.8" x2="430.0" y2="156.8" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="144.4" x2="430.0" y2="144.4" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="132.0" x2="430.0" y2="132.0" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="119.6" x2="430.0" y2="119.6" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="107.2" x2="430.0" y2="107.2" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="94.8" x2="430.0" y2="94.8" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="82.4" x2="430.0" y2="82.4" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="70.0" x2="430.0" y2="70.0" stroke="#eceef2" stroke-width="1" stroke-linecap="round"></line><line x1="56.0" y1="256.0" x2="430.0" y2="256.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><line x1="56.0" y1="256.0" x2="56.0" y2="70.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><line x1="430.0" y1="256.0" x2="430.0" y2="70.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="48.0" y="260.5" font-size="12.5" fill="#5f6368" text-anchor="end">0.0</text><text x="48.0" y="167.5" font-size="12.5" fill="#5f6368" text-anchor="end">1.6</text><text x="48.0" y="74.5" font-size="12.5" fill="#5f6368" text-anchor="end">3.2</text><text x="438.0" y="260.5" font-size="12.5" fill="#2b59c3">0</text><text x="438.0" y="198.5" font-size="12.5" fill="#2b59c3">5</text><text x="438.0" y="136.5" font-size="12.5" fill="#2b59c3">10</text><text x="438.0" y="74.5" font-size="12.5" fill="#2b59c3">15</text><text x="26.0" y="58.0" font-size="12.5" fill="#5f6368" font-weight="700">증폭 뒤 전압 (V)</text><text x="438.0" y="58.0" font-size="12.5" fill="#2b59c3" font-weight="700" text-anchor="end">단계 번호 (4 bit 예)</text><polyline points="56.0,163.0 58.3,150.4 60.7,138.9 63.0,129.2 65.3,121.9 67.7,117.4 70.0,115.6 72.4,116.4 74.7,119.0 77.0,122.8 79.4,126.9 81.7,130.5 84.0,132.8 86.4,133.2 88.7,131.6 91.1,127.9 93.4,122.6 95.7,116.2 98.1,109.6 100.4,103.6 102.8,99.1 105.1,96.7 107.4,96.9 109.8,100.0 112.1,105.9 114.4,114.1 116.8,123.9 119.1,134.6 121.5,145.1 123.8,154.7 126.1,162.5 128.5,168.1 130.8,171.2 133.1,171.8 135.5,170.5 137.8,167.9 140.2,164.6 142.5,161.6 144.8,159.8 147.2,159.6 149.5,161.7 151.8,166.1 154.2,172.6 156.5,180.7 158.9,189.9 161.2,199.1 163.5,207.5 165.9,214.3 168.2,218.8 170.5,220.6 172.9,219.6 175.2,215.9 177.6,210.0 179.9,202.6 182.2,194.7 184.6,187.1 186.9,180.6 189.2,175.9 191.6,173.4 193.9,173.2 196.2,175.1 198.6,178.6 200.9,183.1 203.3,187.6 205.6,191.3 207.9,193.4 210.3,193.4 212.6,190.8 214.9,185.8 217.3,178.5 219.6,169.6 222.0,159.7 224.3,149.9 226.6,140.9 229.0,133.6 231.3,128.6 233.7,126.3 236.0,126.6 238.3,129.3 240.7,133.9 243.0,139.5 245.3,145.4 247.7,150.6 250.0,154.4 252.3,156.3 254.7,155.8 257.0,153.1 259.4,148.5 261.7,142.5 264.0,136.0 266.4,129.8 268.7,124.7 271.0,121.5 273.4,120.7 275.7,122.7 278.1,127.2 280.4,133.9 282.7,142.2 285.1,151.3 287.4,160.3 289.8,168.3 292.1,174.5 294.4,178.4 296.8,179.9 299.1,178.8 301.4,175.7 303.8,171.2 306.1,165.9 308.5,160.9 310.8,157.0 313.1,154.8 315.5,154.8 317.8,157.2 320.1,161.9 322.5,168.4 324.8,176.1 327.1,184.2 329.5,191.6 331.8,197.7 334.2,201.7 336.5,203.1 338.8,201.9 341.2,198.1 343.5,192.2 345.9,185.0 348.2,177.2 350.5,169.8 352.9,163.5 355.2,159.2 357.5,157.1 359.9,157.4 362.2,160.0 364.6,164.4 366.9,169.9 369.2,175.6 371.6,180.7 373.9,184.3 376.2,185.9 378.6,185.1 380.9,181.8 383.2,176.2 385.6,168.8 387.9,160.4 390.3,151.9 392.6,144.2 394.9,138.0 397.3,134.0 399.6,132.6 401.9,133.8 404.3,137.3 406.6,142.7 409.0,149.1 411.3,155.8 413.6,161.8 416.0,166.3 418.3,168.8 420.6,169.0 423.0,166.8 425.3,162.5 427.7,156.6 430.0,150.0" fill="none" stroke="#9aa1ad" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></polyline><line x1="65.3" y1="256.0" x2="65.3" y2="119.6" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="65.3" cy="119.6" r="3.4" fill="#2b59c3"></circle><line x1="84.0" y1="256.0" x2="84.0" y2="132.0" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="84.0" cy="132.0" r="3.4" fill="#2b59c3"></circle><line x1="102.8" y1="256.0" x2="102.8" y2="94.8" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="102.8" cy="94.8" r="3.4" fill="#2b59c3"></circle><line x1="121.5" y1="256.0" x2="121.5" y2="144.4" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="121.5" cy="144.4" r="3.4" fill="#2b59c3"></circle><line x1="140.2" y1="256.0" x2="140.2" y2="169.2" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="140.2" cy="169.2" r="3.4" fill="#2b59c3"></circle><line x1="158.9" y1="256.0" x2="158.9" y2="194.0" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="158.9" cy="194.0" r="3.4" fill="#2b59c3"></circle><line x1="177.6" y1="256.0" x2="177.6" y2="206.4" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="177.6" cy="206.4" r="3.4" fill="#2b59c3"></circle><line x1="196.2" y1="256.0" x2="196.2" y2="169.2" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="196.2" cy="169.2" r="3.4" fill="#2b59c3"></circle><line x1="214.9" y1="256.0" x2="214.9" y2="181.6" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="214.9" cy="181.6" r="3.4" fill="#2b59c3"></circle><line x1="233.7" y1="256.0" x2="233.7" y2="132.0" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="233.7" cy="132.0" r="3.4" fill="#2b59c3"></circle><line x1="252.3" y1="256.0" x2="252.3" y2="156.8" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="252.3" cy="156.8" r="3.4" fill="#2b59c3"></circle><line x1="271.0" y1="256.0" x2="271.0" y2="119.6" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="271.0" cy="119.6" r="3.4" fill="#2b59c3"></circle><line x1="289.8" y1="256.0" x2="289.8" y2="169.2" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="289.8" cy="169.2" r="3.4" fill="#2b59c3"></circle><line x1="308.5" y1="256.0" x2="308.5" y2="156.8" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="308.5" cy="156.8" r="3.4" fill="#2b59c3"></circle><line x1="327.1" y1="256.0" x2="327.1" y2="181.6" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="327.1" cy="181.6" r="3.4" fill="#2b59c3"></circle><line x1="345.9" y1="256.0" x2="345.9" y2="181.6" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="345.9" cy="181.6" r="3.4" fill="#2b59c3"></circle><line x1="364.6" y1="256.0" x2="364.6" y2="169.2" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="364.6" cy="169.2" r="3.4" fill="#2b59c3"></circle><line x1="383.2" y1="256.0" x2="383.2" y2="181.6" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="383.2" cy="181.6" r="5.5" fill="#2b59c3" stroke="#fff" stroke-width="2"></circle><line x1="401.9" y1="256.0" x2="401.9" y2="132.0" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="401.9" cy="132.0" r="3.4" fill="#2b59c3"></circle><line x1="420.6" y1="256.0" x2="420.6" y2="169.2" stroke="#2b59c3" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 3"></line><circle cx="420.6" cy="169.2" r="3.4" fill="#2b59c3"></circle><text x="243.0" y="278.0" font-size="12.5" fill="#5f6368" text-anchor="middle">시간 → 20 ms 동안 점 20개 = 1 ms마다 한 번 = sampling rate 1 kHz</text><text x="460.0" y="76.0" font-size="14" fill="#1d1d1f" font-weight="800">점 하나를 따라가면</text><rect x="460.0" y="96.0" width="196.0" height="40.0" rx="10" fill="#f5f5f7"></rect><text x="664.0" y="122.0" font-size="12.5" fill="#5f6368" font-weight="700">아날로그</text><text x="472.0" y="121.0" font-size="12.5" fill="#2b2f36">실제 전압</text><text x="646.0" y="122.0" font-size="15" fill="#9aa1ad" font-weight="800" text-anchor="end">1.37 V</text><line x1="558.0" y1="138.0" x2="558.0" y2="146.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M554.7,146.0 L558.0,152.0 L561.3,146.0 Z" fill="#5f6368"></path><rect x="460.0" y="154.0" width="196.0" height="40.0" rx="10" fill="#f5f5f7"></rect><text x="664.0" y="180.0" font-size="12.5" fill="#5f6368" font-weight="700"></text><text x="472.0" y="179.0" font-size="12.5" fill="#2b2f36">가장 가까운 단계 (1.28 V)</text><text x="646.0" y="180.0" font-size="15" fill="#2b59c3" font-weight="800" text-anchor="end">6</text><line x1="558.0" y1="196.0" x2="558.0" y2="204.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M554.7,204.0 L558.0,210.0 L561.3,204.0 Z" fill="#5f6368"></path><rect x="460.0" y="212.0" width="196.0" height="40.0" rx="10" fill="#f5f5f7"></rect><text x="664.0" y="238.0" font-size="12.5" fill="#5f6368" font-weight="700">디지털</text><text x="472.0" y="237.0" font-size="12.5" fill="#2b2f36">2진수로 적기 (4 bit)</text><text x="646.0" y="238.0" font-size="15" fill="#2b59c3" font-weight="800" text-anchor="end">0110</text><line x1="392.2" y1="181.6" x2="449.9" y2="120.4" stroke="#2b59c3" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="3 3"></line><path d="M452.3,122.6 L454.0,116.0 L447.5,118.1 Z" fill="#2b59c3"></path><rect x="16.0" y="302.0" width="688.0" height="84.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="327.0" font-size="14" fill="#1d1d1f" font-weight="700">실제 장치의 예 (12 bit = 4,096단계, 채널 2개):</text><text x="30.0" y="350.0" font-size="14" fill="#2b2f36">sampling rate (1초에 재는 횟수) = 1,000번/초 = 1 kHz</text><text x="30.0" y="372.0" font-size="14" fill="#2b2f36">bit rate (1초에 생기는 bit) = 1,000 × 12 bit × 2 = 24,000 bit/초 → 2.5초면 60,000 bit</text><text x="16.0" y="410.0" font-size="12.5" fill="#5f6368">설명용 가상 파형 · 근전도(약 1 mV)를 약 1,000배 키워 0–3.2 V 범위에서 잰다고 가정 · 4 bit는 읽기 쉽게 줄인 예</text></svg>
+<!-- /QA:adc -->
+<figcaption><b>로드맵 그림 8. ADC가 하는 일.</b> 실제 전압 축, 한 점의 변환, sampling rate와 bit rate를 따로 적었다.</figcaption>
+</figure>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 그림 8을 다시 그림.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q21</span> <strong>sampling rate는 1 kHz인가, 24,000 bit/s인가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "<strong>sampling rate</strong>는 1초에 값을 재는 횟수입니다 … 계산 예: 채널 2개 × 1,000회/초 × 12 bit = 24,000 bit/초."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> sampling rate는 1 kHz 같은 거야, 24,000 bit/s 같은 거야?</p>
+</div>
+<p>둘은 다른 양입니다.</p>
+<ul>
+<li><strong>sampling rate = 1초에 재는 횟수.</strong> 예: 1 kHz = 1초에 1,000번.</li>
+<li><strong>bit rate = 1초에 생기는 bit 수.</strong> 예: 채널 2개 × 1,000번 × 12 bit = 24,000 bit/s.</li>
+</ul>
+<p>bit rate는 sampling rate에 채널 수와 한 번에 적는 bit 수를 곱한 값입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 그림 8과 1.4절 본문에서 둘을 나란히 따로 적음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q22</span> <strong>패킷의 머리말이란</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "묶음마다 받는 곳의 주소와 오류 검사용 숫자 같은 머리말이 붙어서, 실제로 보내는 양은 데이터보다 조금 많아집니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 머리말이 더 붙는다는 게 무슨 말?</p>
+</div>
+<p>우편물을 보낼 때 상자에 받는 곳의 주소를 붙이는 것과 같습니다. 무선으로 데이터를 보낼 때도 묶음(패킷)마다 받는 곳의 주소와, 오는 길에 깨지지 않았는지 확인하는 숫자(header)를 붙입니다. 그만큼 보내는 양이 조금 늘어납니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.4절의 패킷 정의에 우편물 예를 붙임.</p>
+</div>
+</div>
+</section>
+<section id="qa-15" class="level2">
+<h2 class="anchored" data-anchor-id="qa-15">1.5 무엇을 줄이려는가: 작은 장치의 제약과 비용</h2>
+<p><strong>이 절이 말하던 것.</strong> 작은 장치는 전지·크기·지연의 제약이 있다. 전력이 어디에 쓰이는지 문헌 사례를 표로 보이고, 디지털 방식과 소자 방식을 한 줄씩 비교했다.</p>
+<div class="qa-card">
+<p><span class="qa-num">Q23</span> <strong>단추 전지 → 코인셀, 규격까지</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "단추 전지 하나의 에너지는 약 2,160 J입니다(200 mAh × 3 V)."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 단추 전지 말고 코인셀. 규격도.</p>
+</div>
+<p>가장 흔한 코인셀 <strong>CR2032</strong>(지름 20 mm, 두께 3.2 mm)의 규격은 3 V, 약 225 mAh입니다.</p>
+<p>먼저 단위를 정합니다. <strong>W(와트) = 1초에 쓰는 J(줄)</strong>이고, <strong>에너지 = 전압 × 전류 × 시간</strong>입니다.</p>
+<ul>
+<li>에너지 = 3 V × 0.225 A × 3,600 s ≈ <strong>2,430 J</strong></li>
+<li>평균 3 mW(1초에 0.003 J)를 쓰면 약 <strong>9일</strong> 갑니다.</li>
+<li>1 mW면 약 <strong>28일</strong>, 0.1 mW면 약 <strong>9개월</strong> 갑니다.</li>
+</ul>
+<p><span class="key">그래서 <strong>mW 단위의 차이가 쓸 수 있는 날수의 차이</strong>가 됩니다.</span></p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.5절 전지 줄을 CR2032 기준으로 다시 계산(2,160 J → 2,430 J). 단위 설명을 먼저 둠.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q24</span> <strong>몸속 장치는 전지를 어떻게 하나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "신호를 보고 곧바로 자극을 주는 몸속 장치에서는 전지를 바꿀 수 없고 …"</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 생체 내 장치의 수명은? 수술을 계속 할 수는 없는데?</p>
+</div>
+<ul>
+<li><strong>심박조율기</strong>: 리튬-요오드 전지로 약 10년 갑니다.</li>
+<li><strong>피부 밑 심전도 기록기</strong>(LINQ II): 약 4.5년 갑니다.</li>
+<li><strong>인공와우</strong>처럼 몸 밖에서 무선으로 전력을 받는 장치도 있습니다.</li>
+</ul>
+<p>몸속일수록 전지를 바꾸려면 수술해야 하므로, 평균 전력이 더 중요해집니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.5절 전지 줄 뒤에 몸속 장치의 예를 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q25</span> <strong>작아지면 왜 지연이 문제인가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "장치가 작아지면 세 가지 제약이 강해집니다 … <strong>지연.</strong> 신호를 보고 곧바로 자극을 주는 장치에서는 답이 늦으면 쓸모가 없습니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 작아지는 거랑 지연이 무슨 상관?</p>
+</div>
+<p>작아서 느려지는 것이 아닙니다. 원인은 둘입니다.</p>
+<ul>
+<li>작은 장치는 계산 능력이 작아 <strong>큰 계산이 느립니다.</strong></li>
+<li>계산을 폰이나 클라우드로 보내면 <strong>무선으로 오가는 시간</strong>이 더해집니다.</li>
+</ul>
+<p>그래서 작은 장치 안에서 빨리 끝낼 수 있는 계산이어야 합니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.5절 "지연" 줄을 이 설명으로 바꿈.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q26</span> <strong>전력 표의 단위가 섞여 있어 비교가 안 된다</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> 전력 표: MCU "약 0.8 mW", 무선 "광고 1회 약 42 µJ", ADC "변환 1회에 nJ–수백 nJ", 증폭기 "수십 µA–mA", 대기 "1–3 µA".</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> MCU는 전력, 무선·ADC는 에너지, 증폭기·대기는 전류라 비교가 안 된다. 실제로 어디서 많이 쓰는지 알고 싶다.</p>
+</div>
+<p>모두 <strong>평균 전력(µW)</strong> 하나로 맞췄습니다. 근전도 2채널 손목 밴드를 가정한 값입니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>부품</th>
+<th>평균 전력</th>
+<th>메모</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AFE (증폭기 + ADC)</td>
+<td><strong>약 670 µW</strong></td>
+<td>가장 큼. ADS1292 채널당 335 µW</td>
+</tr>
+<tr class="even">
+<td>MCU</td>
+<td>수십–수백 µW</td>
+<td>1초에 1,000번 깨는 몫</td>
+</tr>
+<tr class="odd">
+<td>무선 (원신호를 계속 보냄)</td>
+<td>수백 µW–1 mW</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>무선 (결과만 보냄)</td>
+<td>수–수십 µW</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>TIA (소자를 읽음)</td>
+<td>평균 수 µW</td>
+<td>판정 때만 켬</td>
+</tr>
+<tr class="even">
+<td>대기</td>
+<td>3–9 µW</td>
+<td>24시간 흐름</td>
+</tr>
+<tr class="odd">
+<td>비교기</td>
+<td>약 0.2 µW</td>
+<td>늘 켜 둬도 작음</td>
+</tr>
+</tbody>
+</table>
+<p><span class="key">가장 큰 몫(증폭)은 소자 방식에서도 남습니다. <strong>소자가 줄일 수 있는 것은 ADC가 늘 켜진 몫과 MCU가 1초에 1,000번 깨는 몫</strong>입니다.</span></p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.5절 전력 표를 평균 µW로 새로 만듦. 이 규칙(비교 표는 단위 하나)은 뒤 장에도 적용함.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q27</span> <strong>이런 전력을 내가 잴 수 있나? 칩마다 편차가 클 텐데</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "재는 방법은 같은 판단을 하는 두 장치를 만들어 전원선에 전류계를 달고 …"</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 이런 걸 내가 측정할 수 있나? 필요한가? 칩마다 편차가 클 텐데.</p>
+</div>
+<p>잴 수 있습니다. 개발 보드의 전원선에 <strong>전력 측정기</strong>(예: Nordic Power Profiler Kit II)를 달면 판정 한 번에 흐른 전류를 시간에 따라 볼 수 있습니다.</p>
+<p>칩마다 절댓값이 다른 것은 맞습니다. 그래서 보고할 것은 절댓값이 아니라, <span class="key"><strong>같은 보드에서 소자를 넣었을 때와 뺐을 때의 차이</strong>와, 그 차이가 어느 부품에서 생겼는가</span>입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.5절에 측정 방법과 보고 방식을 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q28</span> <strong>"장치 안에서 판단을 끝낸다"는 게 감이 안 온다</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "장치 안에서 판단을 끝내고 결과만 보내는 방식은 원신호를 모두 보내는 방식보다 전송을 크게 줄이는 표준적인 해결책입니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 장치 안에서 판단을 끝낸다는 게 감이 안 온다.</p>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>폰이 판단</th>
+<th>밴드가 판단</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>밴드가 하는 일</td>
+<td>원신호를 숫자로 바꿔 계속 보냄</td>
+<td>RMS 20개와 가중합으로 "잡기"까지 정함</td>
+</tr>
+<tr class="even">
+<td>보내는 양</td>
+<td>1초에 <strong>24,000 bit</strong>, 쉬지 않고</td>
+<td>동작 한 쌍마다 <strong>1 byte</strong>(8 bit)</td>
+</tr>
+<tr class="odd">
+<td>무선 전력</td>
+<td>수백 µW–1 mW</td>
+<td>수–수십 µW</td>
+</tr>
+</tbody>
+</table>
+<p>대신 밴드 안에서 ADC와 계산이 늘 돌아야 합니다. 이 몫을 소자로 줄여 보자는 것이 이 연구입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.5절 "이 연구의 가설을 예로 풀면"에 이 비교를 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q29</span> <strong>두 방식의 줄: 다음 단계는? "윤곽으로 다듬는다"는 구체적으로?</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "<strong>디지털 방식</strong>: … → 가중합." / "<strong>소자 방식</strong>: 근전도 → 증폭 → <strong>세기의 윤곽으로 다듬어</strong> 이온 소자에 직접 넣음 → … → 두 동작이 끝난 뒤 소자의 전류를 2–10번만 읽음 → 가중합."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 가중합 다음은? MCU가 분류하나? 윤곽으로 다듬어 넣는다는 건 구체적으로? 두 동작이 끝난 걸 알려면 계속 읽어야 하지 않나?</p>
+</div>
+<p><strong>다음 단계.</strong> 가중합(입력에 가중치를 곱해 더한 값)의 <strong>부호로 잡기/놓기</strong>를 정합니다. 가중치는 미리 Flash에 넣어 둔 것을 MCU가 씁니다(Q17).</p>
+<p><strong>윤곽으로 다듬기.</strong> 세 단계이고, 모두 다이오드·저항·커패시터·증폭기로 된 아날로그 회로입니다.</p>
+<ol type="1">
+<li><strong>정류</strong>: 위아래로 떠는 신호의 음수 쪽을 뒤집어 모두 양수로 만듭니다.</li>
+<li><strong>평활</strong>: 빠른 떨림을 걸러 세기의 윤곽(envelope)만 남깁니다.</li>
+<li><strong>맞춰 걸기</strong>: 그 윤곽을 0–1 V로 맞춰 소자에 걸거나, 문턱을 넘는 동안 펄스를 넣습니다.</li>
+</ol>
+<p><strong>끝을 아는 법.</strong> Q3과 같습니다. 비교기가 "문턱 아래 0.3초"를 보고 MCU를 깨웁니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 두 줄 모두 형광펜, 끝에 "→ 부호로 잡기/놓기"를 붙임. 소자 줄에 "비교기가 끝을 알림"을 넣고, 다듬는 세 단계를 적음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q30</span> <strong>"더 빨리 판단한다고 주장하지 않는다" — 빨라질 수는 있나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "판단에 필요한 관찰 시간은 어느 방법이든 같으므로 소자가 '더 빨리 판단한다'고 주장하지 않습니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 가능하긴 한가? 예시.</p>
+</div>
+<p>이 예에서는 빨라지지 않습니다. 두 방식 모두 <strong>둘째 동작이 끝날 때까지</strong>(0.3–2.5초) 기다려야 답을 알 수 있습니다. 그 뒤 디지털 계산은 1 ms도 안 걸리므로, 소자가 줄일 시간이 거의 없습니다.</p>
+<p>차이가 날 수 있는 경우는 작은 MCU에서 <strong>수백 ms 걸리는 큰 신경망</strong>을 돌릴 때뿐입니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.5절 해당 문장 뒤에 이 설명을 넣음.</p>
+</div>
+</div>
+</section>
+<section id="qa-16" class="level2">
+<h2 class="anchored" data-anchor-id="qa-16">1.6 응용 후보와 선택 방법</h2>
+<p><strong>이 절이 말하던 것.</strong> 손목 근전도, 가슴 심전도, 두피 뇌파, 땀 lactate를 후보로 놓고, 소자가 기여할 가능성을 비교한 표.</p>
+<div class="qa-card">
+<p><span class="qa-num">Q31</span> <strong>"심방세동 판정은 15–60 s의 통계"란</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> 표의 가슴 ECG 칸: "1–5 s. 심방세동 판정은 15–60 s의 통계."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 무슨 말?</p>
+</div>
+<p>박동 간격 하나가 불규칙한 것은 우연일 수 있습니다. 그래서 <strong>15–60초 동안 박동 간격 20–60개를 모아</strong> 얼마나 흩어졌는지를 숫자로 계산해 판정합니다. 예를 들어 간격의 표준편차를 평균으로 나눈 값을 씁니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.6절 표 아래 "ECG 줄을 풀면"에 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q32</span> <strong>"박동 찾기는 간단한 회로로 되므로 소자의 몫은 간격의 변화"란</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> 표의 "소자가 기여할 가능성" 칸: "있다: 같은 시간대. 박동 찾기는 간단한 회로로 되므로 소자의 몫은 간격의 변화."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 이해가 안 됨.</p>
+</div>
+<p>일을 둘로 나눈 것입니다.</p>
+<ol type="1">
+<li><strong>박동 찾기</strong>: 심전도에서 가장 뾰족한 봉우리(R 봉우리)를 문턱 회로가 찾습니다. 소자가 필요 없습니다.</li>
+<li><strong>간격의 이력</strong>: 봉우리마다 펄스를 하나씩 소자에 넣습니다. 간격이 짧으면 흔적이 덜 샌 채 다음 펄스가 와서 쌓이고, 길면 많이 샌 뒤에 옵니다.</li>
+</ol>
+<p>간격이 0.8, 0.8, 0.8초로 고르면 소자 값도 고르게 오르내립니다. 0.5, 1.1, 0.6초로 흩어지면 소자 값이 출렁입니다. <span class="key"><strong>그 출렁임이 "간격이 불규칙해졌다"는 이력</strong>이고, 이것이 소자의 몫입니다.</span></p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.6절 "ECG 줄을 풀면"에 이 예를 넣음.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q33</span> <strong>소자가 저절로 변하는(drift) 구체적인 예는</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "<strong>drift</strong>는 입력이 없어도 시간이 지나며 소자의 읽은 값이 저절로 변하는 것입니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 저절로 변할 가능성? 구체적인 예.</p>
+</div>
+<ul>
+<li><strong>하이드로겔의 물 증발</strong>: 물이 마르면 이온이 덜 움직여 전류가 줄어듭니다.</li>
+<li><strong>이온겔의 습기 흡수</strong>: 공기 중 물을 먹으면 이온이 더 움직여 전류가 늘어납니다.</li>
+<li><strong>피부 온도</strong>: 몇 °C만 바뀌어도 이온의 움직임이 달라집니다.</li>
+<li><strong>오래 걸린 전압</strong>: 같은 방향의 전압이 오래 걸리면 이온이 한쪽에 쌓이거나 전극에서 반응이 조금씩 일어납니다.</li>
+</ul>
+<p>몇 초를 기억하는 과제에서는 이런 변화가 상대적으로 작아 덜 문제입니다. 몇 분을 기억하는 과제일수록 심각해집니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.6절 drift 설명 뒤에 이 네 예를 넣음.</p>
+</div>
+</div>
+</section>
+<section id="qa-17" class="level2">
+<h2 class="anchored" data-anchor-id="qa-17">1.7 시간의 지도</h2>
+<p><strong>이 절이 말하던 것.</strong> 신호의 빠르기, 과제가 기억할 과거, 소자 안의 과정, 이 세 묶음의 시간을 로그 축 하나에 놓은 그림. 소자가 맞춰야 하는 것은 신호의 빠르기가 아니라 과제가 필요로 하는 과거의 길이다.</p>
+<div class="qa-card">
+<p><span class="qa-num">Q34</span> <strong>EMG 2–50 ms는 신호 하나가 생기는 시간인가, 오르내리는 시간인가</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "EMG가 20–450 Hz이면 한 번 오르내리는 데 1/450 ≈ 2 ms에서 1/20 = 50 ms가 걸립니다."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 신호 하나가 생기는 시간? 올라갔다 내려가는 시간?</p>
+</div>
+<p><strong>올라갔다 내려와 제자리로 오는 한 번</strong>(주기)의 시간입니다. 그림에서 막대 이름을 "EMG 1회 오르내림"으로 바꿨습니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 그림 9의 막대 이름을 바꿈.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q35</span> <strong>ECG 25–330 ms × 박동 2–5개면 1–2.5초보다 짧지 않나</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "ECG의 봉우리 성분(3–40 Hz)은 25–330 ms입니다." / "ECG 간격 패턴은 박동 2–5개인 1–5 s."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 25–330 ms에 박동 2–5개를 곱하면 1–2.5 s보다 짧은데?</p>
+</div>
+<p>둘은 곱하는 관계가 아닙니다.</p>
+<ul>
+<li><strong>25–330 ms</strong>: 박동 <strong>하나의 파형 안에서</strong> 봉우리가 오르내리는 빠르기.</li>
+<li><strong>1–5 s</strong>: 박동과 박동 <strong>사이의 간격</strong>(0.6–1초)을 2–5개 모은 길이.</li>
+</ul>
+<p>파형은 짧고, 박동 사이에는 쉬는 시간이 깁니다. 그래서 박동 하나의 길이는 파형보다 훨씬 깁니다.</p>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.7절에 이 구분을 적고, 그림의 이름을 "ECG 박동 2–5개"로 바꿈.</p>
+</div>
+</div>
+<div class="qa-card">
+<p><span class="qa-num">Q36</span> <strong>문헌값을 확실히 조사 (그리고 띠를 사슬 재배열까지)</strong></p>
+<div class="qa-ctx">
+<p><strong>그때 로드맵</strong> "결핍층 확산: τ ≈ ℓ²/D로 어림. D ≈ 10<sup>−10</sup> m²/s, ℓ = 1–30 µm로 잡으면 10 ms–10 s."</p>
+</div>
+<div class="qa-q">
+<p><strong>빨간 펜</strong> 문헌값 확실히 조사. 옅은 청록 띠가 사슬·이온쌍 재배열까지 내려오게.</p>
+</div>
+<p>다시 조사해 <span class="key"><strong>확산계수 하나가 틀렸던 것을 고쳤습니다.</strong></span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>과정</th>
+<th>이전 값</th>
+<th>확인한 값</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>전극 표면 충전(EDL)</td>
+<td>µs–10 ms</td>
+<td>이온겔 박막 수 µs, 이온겔 트랜지스터 약 1 ms 보고</td>
+<td>그대로</td>
+</tr>
+<tr class="even">
+<td>결핍층 확산(IDL)의 D</td>
+<td>10<sup>−10</sup> m²/s</td>
+<td>이온 액체 안에서 약 10<sup>−11</sup>, 겔·고분자 안에서는 더 작음 → <strong>10<sup>−12</sup>–10<sup>−11</sup> m²/s</strong></td>
+<td>10–100배 컸음. τ 범위를 <strong>10 ms–100 s</strong>로 고침(ℓ 0.3–10 µm)</td>
+</tr>
+<tr class="odd">
+<td>사슬·이온쌍 재배열</td>
+<td>19–259 s (Zhou 2025)</td>
+<td>그대로</td>
+<td>그대로</td>
+</tr>
+</tbody>
+</table>
+<p>같은 수정이 5절의 숫자 예에도 이어집니다. ℓ = 3 µm, D = 10<sup>−11</sup> m²/s면 τ ≈ 0.9 s입니다. 손목 과제(0.3–2.5 s)에 맞추려면 ℓ ≈ 1.7–5 µm가 필요합니다.</p>
+<figure class="rv-fig figure">
+<!-- QA:timescales -->
+<svg class="rv-svg" viewbox="0 0 720 512" role="img" aria-label="로그 시간축 위에 신호 자체의 변동, 과제가 기억해야 할 과거, 이온 소자 안 과정의 응답 시간을 세 묶음으로 나란히 둔 그림. EMG·ECG 과제의 기억 시간과 결핍층 확산, 사슬 재배열 시간이 0.3–2.5초 부근에서 겹친다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">시간의 지도: 소자가 맞출 것은 신호의 빠르기가 아니라 과제의 기억 시간</text><rect x="466.5" y="154" width="61.0" height="194" rx="6" fill="#e6f4f2"></rect><text x="16.0" y="60.0" font-size="12.5" fill="#5f6368" font-weight="800">신호가 한 번 오르내리는 시간 (소자가 따라갈 필요 없음)</text><text x="226.0" y="87.0" font-size="14" fill="#1d1d1f" text-anchor="end">EMG 1회 오르내림</text><rect x="322.2" y="74" width="92.7" height="18" rx="5" fill="#9aa1ad" opacity="0.9"></rect><text x="424.9" y="87.5" font-size="12.5" fill="#5f6368">2–50 ms</text><text x="226.0" y="115.0" font-size="14" fill="#1d1d1f" text-anchor="end">ECG 성분 1회 오르내림</text><rect x="394.9" y="102" width="74.3" height="18" rx="5" fill="#9aa1ad" opacity="0.9"></rect><text x="479.2" y="115.5" font-size="12.5" fill="#5f6368">25–330 ms</text><text x="16.0" y="144.0" font-size="12.5" fill="#1d1d1f" font-weight="800">과제가 기억해야 할 과거</text><text x="226.0" y="171.0" font-size="14" fill="#1d1d1f" text-anchor="end">EMG 동작 순서</text><rect x="466.5" y="158" width="61.0" height="18" rx="5" fill="#1d1d1f" opacity="0.9"></rect><text x="537.5" y="171.5" font-size="12.5" fill="#5f6368">0.3–2.5 s</text><text x="226.0" y="199.0" font-size="14" fill="#1d1d1f" text-anchor="end">ECG 박동 2–5개</text><rect x="501.1" y="186" width="46.3" height="18" rx="5" fill="#1d1d1f" opacity="0.9"></rect><text x="557.5" y="199.5" font-size="12.5" fill="#5f6368">1–5 s</text><text x="226.0" y="227.0" font-size="14" fill="#1d1d1f" text-anchor="end">땀 lactate 추세</text><rect x="665.3" y="214" width="34.7" height="18" rx="5" fill="#1d1d1f" opacity="0.9"></rect><path d="M698.0,214 l10,9 l-10,9 Z" fill="#1d1d1f" opacity="0.9"></path><text x="657.3" y="227.5" font-size="12.5" fill="#5f6368" text-anchor="end">5–20분</text><text x="16.0" y="256.0" font-size="12.5" fill="#0e8a83" font-weight="800">소자 안 과정의 응답 시간 (어림 · 구조에 따라 달라짐)</text><text x="226.0" y="283.0" font-size="14" fill="#1d1d1f" text-anchor="end">전극 표면 충전 (EDL)</text><rect x="236.0" y="270" width="132.6" height="18" rx="5" fill="#0e8a83" opacity="0.9"></rect><path d="M238.0,270 l-10,9 l10,9 Z" fill="#0e8a83" opacity="0.9"></path><text x="378.6" y="283.5" font-size="12.5" fill="#5f6368">&lt; 10 ms</text><text x="226.0" y="311.0" font-size="14" fill="#1d1d1f" text-anchor="end">결핍층 확산 (IDL)</text><rect x="368.6" y="298" width="265.1" height="18" rx="5" fill="#0e8a83" opacity="0.9"></rect><text x="360.6" y="311.5" font-size="12.5" fill="#5f6368" text-anchor="end">10 ms–100 s</text><text x="226.0" y="339.0" font-size="14" fill="#1d1d1f" text-anchor="end">사슬·이온쌍 재배열</text><rect x="501.1" y="326" width="198.9" height="18" rx="5" fill="#0e8a83" opacity="0.9"></rect><path d="M698.0,326 l10,9 l-10,9 Z" fill="#0e8a83" opacity="0.9"></path><text x="493.1" y="339.5" font-size="12.5" fill="#5f6368" text-anchor="end">초–분</text><line x1="236.0" y1="364.0" x2="700.0" y2="364.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><line x1="236.0" y1="364.0" x2="236.0" y2="369.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="236.0" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0.1 ms</text><line x1="302.3" y1="364.0" x2="302.3" y2="369.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="302.3" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="middle">1 ms</text><line x1="368.6" y1="364.0" x2="368.6" y2="369.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="368.6" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="middle">10 ms</text><line x1="434.9" y1="364.0" x2="434.9" y2="369.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="434.9" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0.1 s</text><line x1="501.1" y1="364.0" x2="501.1" y2="369.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="501.1" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="middle">1 s</text><line x1="567.4" y1="364.0" x2="567.4" y2="369.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="567.4" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="middle">10 s</text><line x1="633.7" y1="364.0" x2="633.7" y2="369.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="633.7" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="middle">100 s</text><line x1="700.0" y1="364.0" x2="700.0" y2="369.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="700.0" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="middle">1000 s</text><text x="214.0" y="385.0" font-size="12.5" fill="#5f6368" text-anchor="end">로그 눈금: 한 칸 = 10배</text><text x="16.0" y="414.0" font-size="12.5" fill="#0e8a83" font-weight="700">옅은 청록 띠: 과제의 기억 시간(0.3–2.5 s)이 결핍층 확산·사슬 재배열의 시간 범위와 겹친다.</text><text x="16.0" y="434.0" font-size="12.5" fill="#0e8a83" font-weight="700">후보를 고르는 조건일 뿐, 성능의 증거는 아니다.</text><text x="16.0" y="458.0" font-size="12.5" fill="#2b2f36">허용되는 판정 지연(별도 기준):  의수 제어 0.3 s 이내 · 알림 약 1 s · 땀 지표는 분 단위</text><text x="16.0" y="482.0" font-size="12.5" fill="#5f6368">신호·과제: 문헌 범위 · EDL: 이온겔 박막 보고값 수 µs–약 1 ms · IDL: τ ≈ ℓ²/D (D 10⁻¹²–10⁻¹¹ m²/s, ℓ 0.3–10 µm)</text><text x="16.0" y="502.0" font-size="12.5" fill="#5f6368">사슬·이온쌍 재배열: 이온겔 소자의 기억 시간 19–259 s 보고(Zhou 2025)를 근거로 그림 · 모두 내 소자에서 잰 값이 아니다</text></svg>
+<!-- /QA:timescales -->
+<figcaption><b>로드맵 그림 9. 시간의 지도(고친 판).</b> 막대 이름을 바꾸고("1회 오르내림", "박동 2–5개"), 결핍층 막대를 100 s까지 늘리고, 청록 띠를 사슬 재배열까지 내렸다.</figcaption>
+</figure>
+<div class="qa-where">
+<p><strong>로드맵에서 바뀐 곳</strong> 1.7절의 문헌값, 그림 9, 5절의 숫자 예를 함께 고침.</p>
+</div>
+</div>
+</section>
+<section id="qa-marks" class="level2">
+<h2 class="anchored" data-anchor-id="qa-marks">표시만 바꾼 것</h2>
+<p>설명 없이 표시나 낱말만 바꾼 요청입니다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>요청</th>
+<th>반영</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"동역학" → 영어로</td>
+<td><strong>dynamics</strong>로 바꾸고 뜻을 붙임</td>
+</tr>
+<tr class="even">
+<td>"이 숫자가 모두 낭비라는 뜻은 아닙니다…" 형광펜</td>
+<td>함</td>
+</tr>
+<tr class="odd">
+<td>"평균 전력", "부드러운 소재" 형광펜</td>
+<td>함</td>
+</tr>
+<tr class="even">
+<td>디지털 방식 / 소자 방식 두 줄 형광펜</td>
+<td>함</td>
+</tr>
+<tr class="odd">
+<td>정의 문장은 굵게</td>
+<td>1절 전체에 적용, 뒤 장에도 같은 규칙</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qa-rules" class="level2">
+<h2 class="anchored" data-anchor-id="qa-rules">뒤 장에 미리 적용한 규칙</h2>
+<p>이번 질문에서 되풀이된 유형을 뒤 장(2–9절)에도 미리 적용했습니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>되풀이된 질문</th>
+<th>규칙</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"이 일은 어떤 부품이 하나?"</td>
+<td>단계마다 하는 부품을 이름으로 적는다</td>
+</tr>
+<tr class="even">
+<td>"계속 읽어야 하지 않나?"</td>
+<td>늘 켜진 것과 판정 때만 켜는 것을 나눠 적는다</td>
+</tr>
+<tr class="odd">
+<td>"단위가 섞여 비교가 안 된다"</td>
+<td>비교 표의 단위는 하나로</td>
+</tr>
+<tr class="even">
+<td>"정규화 값이 와닿지 않는다"</td>
+<td>그래프 축은 실제 단위(V, Hz, s)로</td>
+</tr>
+<tr class="odd">
+<td>"설명이 뒤에 있었구나"</td>
+<td>용어는 처음 쓰기 전에 정의하고, 정의 문장은 굵게</td>
+</tr>
+<tr class="even">
+<td>"감이 안 온다"</td>
+<td>추상적인 주장에는 구체적인 예를 바로 붙인다</td>
+</tr>
+<tr class="odd">
+<td>"문헌값 확실히"</td>
+<td>확인 수준을 표시하고, 틀린 값은 고쳤다고 알린다</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./roadmap.html" class="pagination-link" aria-label="로드맵 본문">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">로드맵 본문</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./signals/emg.html" class="pagination-link" aria-label="근전도(EMG)">
+        <span class="nav-page-text">근전도(EMG)</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p><span class="ft-links"><a href="./index.html">Home</a> <a href="./research.html">Research</a> <a href="./roadmap.html">Roadmap</a> <a href="./signals/emg.html">EMG</a> <a href="./plan.html">Curriculum</a> <a href="./projects/index.html">Projects</a> <a href="./notes.html">Notes</a> <a href="./papers.html">Papers</a> <a href="./ledger/terms.html">Glossary</a></span><span class="ft-copy">Copyright © 2026 All rights reserved · Hyeon Woo Yang · KAIST</span></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
