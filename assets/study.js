@@ -4951,3 +4951,27 @@
     document.querySelectorAll("figure.fig figcaption, .video .vcap, table.mvm-table").forEach(typeset);
   });
 })();
+
+// v23 (2026-11-12): 휴대폰에서 넓은 그림(가로 스크롤)에 '한눈에 보기' 단추 — 글자 크기를 지킨 채 밀어서 읽거나, 눌러서 전체 흐름을 본다
+(function () {
+  function addFitButtons() {
+    var figs = document.querySelectorAll(".research-page .rv-fig");
+    Array.prototype.forEach.call(figs, function (fig) {
+      var svg = fig.querySelector(":scope > svg.rv-svg");
+      if (!svg || fig.querySelector(":scope > .rv-fit-btn")) return;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "rv-fit-btn";
+      btn.textContent = "한눈에 보기";
+      btn.setAttribute("aria-pressed", "false");
+      btn.addEventListener("click", function () {
+        var on = fig.classList.toggle("rv-fit");
+        btn.textContent = on ? "크게 보기 (밀어서 읽기)" : "한눈에 보기";
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      fig.insertBefore(btn, svg);
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addFitButtons);
+  else addFitButtons();
+})();

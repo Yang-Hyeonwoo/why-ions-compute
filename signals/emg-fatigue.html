@@ -819,7 +819,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- /FC:scene -->
 <figcaption><b>그림 1. 피로 시계 패치의 부품과 켜져 있는 때.</b> ①–③은 디지털 방법에도 똑같이 있는 부분이다. 이온 소자(④)가 몇 분의 과거를 쥐므로, 디지털(⑤)은 1초에 한 번만 깨면 된다.</figcaption>
 </figure>
-<p><span class="key"><strong>판정은 1초에 한 번이면 충분합니다.</strong> 피로는 몇 분에 걸쳐 변하므로, 동작 분류처럼 100 ms 안에 답할 필요가 없습니다.</span> 이것이 디지털이 1초에 1,000번 깨어 있어야 하는 이유를 없애 줍니다.</p>
+<p><span class="key"><strong>판정은 1초에 한 번이면 충분합니다.</strong> 피로는 몇 분에 걸쳐 변하므로, 동작 분류처럼 100 ms 안에 답할 필요가 없습니다.</span> 그래서 디지털도 1 kHz로 쉬지 않고 계산할 필요는 없습니다. 다만 디지털로 과거를 쥐려면 재는 일(ADC)과 모으는 일(DMA·RAM)은 계속해야 합니다.</p>
 </section>
 <section id="fc-define" class="level2">
 <h2 class="anchored" data-anchor-id="fc-define">2. 피로를 숫자로 쓰는 법</h2>
@@ -985,7 +985,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td>④ 이온 소자 8개</td>
 <td>두 대역 세기를 τ = 1·10·100·1,000 s에 쌓음</td>
-<td>전원 없이 기억</td>
+<td>구동은 ③이 함. 입력이 끊겨도 τ 동안 상태가 남음</td>
 <td>1·10 s는 "지금 힘을 주나", 100–1,000 s는 "몇 분의 이력"</td>
 </tr>
 <tr class="odd">
@@ -1038,7 +1038,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><strong>소자 배열(0.89)이 디지털 MDF(0.53)보다 낫습니다.</strong> MDF는 "지금"만 보고, 쉬는 동안에는 값이 없습니다. 힘을 주는 동안만 따로 매겨도 MDF는 0.55로 비슷했습니다. 1초 창의 MDF는 출렁임이 크기 때문입니다.</li>
 <li><strong>소자 하나로는 모자랍니다.</strong> 가장 좋은 τ = 1,000 s 하나가 0.84입니다. 짧은 τ와 함께 읽어야 "지금 힘을 주나"를 빼고 볼 수 있습니다.</li>
-<li><span class="key"><strong>같은 τ를 디지털로 계산하면 0.91입니다. 소자 배열은 정확도로 디지털을 이기지 않습니다.</strong></span> 차이(0.02)는 소자의 τ 편차와 잡음 때문입니다. 따라서 이 연구가 내세울 것은 정확도가 아니라 7절의 전력과 "전원 없이 기억"입니다.</li>
+<li><span class="key"><strong>같은 τ를 디지털로 계산하면 0.91입니다. 소자 배열은 정확도로 디지털을 이기지 않습니다.</strong></span> 차이(0.02)는 소자의 τ 편차와 잡음 때문입니다. 따라서 이 연구가 따져야 할 것은 정확도가 아니라 7절의 전력과, 입력 회로가 꺼져도 τ 동안 상태가 남는 성질이 쓸모 있는 조건입니다.</li>
 <li><strong>패치를 바꾸면 다시 학습해야 합니다.</strong> 다른 패치(τ가 ±20 % 다름)를 그대로 쓰면 0.75로 떨어집니다. 패치마다 τ를 한 번 재서 readout을 맞추거나, τ를 고르게 만들어야 합니다.</li>
 </ul>
 <p><span class="tag tag-interp">해석</span> 정답이 모형이라는 한계가 있습니다. 실제 피로는 이 모형보다 지저분하고, 특히 움직이는 운동에서는 MDF 변화가 작습니다. 자전거 10분 동안 4–8 Hz가 줄었다는 보고가 있습니다(Liu 2019). 그러니 이 숫자는 <strong>"이 방식이 원리적으로 되는가"</strong>의 답일 뿐, 실제 성능의 예측이 아닙니다.</p>
@@ -1117,7 +1117,7 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><strong>D1. 디지털 MDF</strong> (지금의 패치, Liu 2019 방식)</td>
-<td>ADC 1 kHz, MCU가 1초에 1,000번 깨고 1초마다 FFT</td>
+<td>ADC 1 kHz 상시, 숫자는 RAM으로(CPU가 받거나 DMA), 1초마다 FFT</td>
 <td><strong>수십–수백 µW</strong></td>
 <td>MCU의 RAM (전원 필요)</td>
 </tr>
@@ -1139,7 +1139,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><span class="key"><strong>D1과 비교하면 10배 이상 적습니다.</strong></span> 이득은 대부분 아날로그 두 대역 덕분이고, 소자만의 몫은 아닙니다.</li>
 <li><span class="key"><strong>D2와 비교하면 전력은 비슷합니다.</strong></span> D2도 1초에 몇 번만 깨면 되기 때문입니다.</li>
-<li><strong>이온 소자가 확실히 이기는 경우는 "전원이 끊기는 장치"입니다.</strong> 디지털은 과거를 RAM에 쥐므로 전원이 꺼지면 잃습니다. 소자는 전원 없이 수백 초 동안 과거를 쥡니다.
+<li><strong>이온 소자가 이길 수 있는 후보는 "전원이 끊기는 장치"입니다</strong> <span class="tag tag-hypo">가설</span>. 디지털은 과거를 RAM에 쥐므로 전원이 꺼지면 잃습니다. 소자는 전원 없이 수백 초 동안 과거를 쥡니다.
 <ul>
 <li>예: 배터리 없이 작은 발전 소자(땀 연료전지, 유연 태양전지)로 ②③만 돌리는 패치</li>
 <li>폰을 갖다 대면 NFC가 전력을 보내 그 순간의 소자 값을 읽습니다.</li>
@@ -1186,7 +1186,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td><strong>이 컨셉</strong></td>
-<td>회복 시간에 맞춘 τ 배열이 <strong>전원 없이</strong> 피로 이력을 쥐고, 1초에 한 번 읽음</td>
+<td>회복 시간에 맞춘 τ 배열이 피로 이력을 물리 상태로 쥐고(입력이 끊겨도 τ 동안 남음), 1초에 한 번 읽음</td>
 <td>같은 τ의 디지털, 지금의 MDF, 아날로그 MDF와 함께 비교</td>
 </tr>
 </tbody>

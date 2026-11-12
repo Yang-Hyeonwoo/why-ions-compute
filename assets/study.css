@@ -2243,3 +2243,20 @@ footer.footer .nav-footer { padding-top: 2.2rem; padding-bottom: 2.2rem; }
 .qa-where p > strong:first-child { color: #2b59c3; }
 .qa-card .rv-fig { margin: 0.8rem 0 0.6rem; }
 @media (max-width: 600px) { .qa-card { padding: 0.75rem 0.8rem 0.3rem; } }
+
+/* v23 (2026-11-12): 질문·답 펼쳐 보기, 상단 요점, 휴대폰 그림 '한눈에 보기' */
+.qa-more { margin: 0.7rem 0 0.5rem; border-top: 1px dashed #d9dde3; padding-top: 0.45rem; font-size: 0.9rem; color: #3c4048; }
+.qa-more > summary { cursor: pointer; color: #2b59c3; font-weight: 600; font-size: 0.86rem; list-style: none; }
+.qa-more > summary::-webkit-details-marker { display: none; }
+.qa-more > summary::before { content: "▸ "; }
+.qa-more[open] > summary::before { content: "▾ "; }
+.qa-more[open] > summary { margin-bottom: 0.4rem; }
+.qa-more table { font-size: 0.84rem; }
+.qa-card table { font-size: 0.9rem; }
+.rv-fit-btn { display: none; }
+@media (max-width: 600px) {
+  .research-page .rv-fit-btn { display: inline-block; position: sticky; left: 0; margin: 0 0 0.35rem; padding: 0.15rem 0.6rem; font-size: 0.8rem; border: 1px solid #c9d3ea; border-radius: 999px; background: #f4f7fd; color: #2b59c3; }
+  .research-page .rv-fig.rv-fit { overflow-x: visible; }
+  .research-page .rv-fig.rv-fit > svg.rv-svg { min-width: 0; }
+  .research-page .rv-fig figcaption::before { content: "↔ 옆으로 밀어서 읽거나 '한눈에 보기'로 전체 흐름을 봅니다. "; }
+}
