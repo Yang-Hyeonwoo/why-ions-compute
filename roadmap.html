@@ -134,6 +134,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./roadmap-qa.html">
  <span class="dropdown-text">1장 질문과 답</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./roadmap-proposal.html">
+ <span class="dropdown-text">발표 준비</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -225,6 +229,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./roadmap-qa.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1장 질문과 답</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./roadmap-proposal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">발표 준비</span></a>
   </div>
 </li>
       </ul>
@@ -783,31 +793,51 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="rv-abstract">
-<p><strong>한 문장으로.</strong> 이온성 고분자 소자의 전기 응답에는 조금 전에 들어온 입력의 영향이 한동안 남습니다. 이 연구는 <span class="key">그 응답이 사라지는 시간과 모양을 <strong>고분자의 조성·구조로 조절</strong>할 수 있는지</span>, 그리고 그렇게 만든 소자를 읽는 방식이 <strong>같은 판단을 하는 디지털 방법과 비교해 어떤 조건에서</strong> 회로나 에너지를 줄이는지를 시험합니다.</p>
+<p><strong>한 문장으로.</strong> 압력 패드 위를 지나간 접촉의 <strong>방향과 빠르기</strong>를, 접촉이 끝난 뒤 이온성 고분자 소자 배열을 <strong>한 번씩만 읽어</strong> 답하는 시험 장치를 만듭니다. 이 장치로 두 가지를 밝힙니다. <span class="key">소자에 입력의 영향이 남는 시간(τ)과 이웃 소자로 번지는 정도(결합)를 <strong>고분자의 조성·구조와 전극 배치로 미리 정할 수 있는가</strong></span>, 그리고 그렇게 만든 배열을 읽는 방식이 <strong>같은 판단을 하는 최적화된 디지털 방법과 비교해 어떤 조건에서</strong> 읽기 횟수·회로·에너지를 줄이는가.</p>
 <p>표시: <span class="tag tag-fact">논문</span> 원문·데이터시트에서 확인한 사실 · <span class="tag tag-interp">해석</span> 문헌에서 유추한 내 해석 · <span class="tag tag-hypo">가설</span> 내가 검증할 가설 · <span class="tag tag-unverified">미확인</span> 아직 확인하지 못한 것 · <span class="tag tag-unverified">모의</span> 모형으로 계산한 설명용 결과 · <span class="tag tag-unverified">파일럿</span> 첫 실험의 출발 설정(바뀔 수 있음)</p>
 </div>
 <section id="rm-summary" class="level2">
 <h2 class="anchored" data-anchor-id="rm-summary">한눈에: 이 연구는 무엇을, 왜 하려고 하나</h2>
 <div class="rm-sum2">
+<p><span class="lbl">무엇을 만드나.</span> <strong>압력 패드 4개 → 이온성 고분자 소자 4개 → 접촉이 끝난 뒤 한 번씩 읽기 → "어느 쪽에서, 얼마나 빨리 지나갔나".</strong> 손바닥 크기의 시험 장치입니다. 센서는 상용 부품을 쓰고, <span class="key">직접 만들고 바꾸는 것은 가운데의 <strong>이온 소자 배열</strong>입니다.</span></p>
+<figure class="rv-fig figure">
+<!-- RM:build -->
+<svg class="rv-svg" viewbox="0 0 720 354" role="img" aria-label="만들 장치의 구조도. 상용 압력 센서 4개의 저항 변화를 분압과 버퍼로 전압으로 바꿔 이온 소자 4개에 넣는다. 소자 배열은 막이 따로인 독립형과 막 한 장을 함께 쓰는 공유형 두 가지로 만든다. 접촉이 끝나면 비교기와 타이머가 끝을 감지하고, 소자를 한 번씩 읽어 가중합으로 지나간 방향과 빠르기를 답한다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">만들 장치: 압력 패드 4개 → 이온 소자 4개 → 한 번씩 읽기 → 지나간 방향과 빠르기</text><text x="16.0" y="56.0" font-size="13.0" fill="#1d1d1f" font-weight="800">① 센서 (상용 부품)</text><rect x="16.0" y="66.0" width="150.0" height="96.0" rx="10" fill="#f5f5f7"></rect><rect x="28" y="110" width="24" height="24" rx="5" fill="#c2682b" opacity="0.30" stroke="#5f6368" stroke-width="1"></rect><text x="40.0" y="152.0" font-size="12" fill="#5f6368" font-weight="700" text-anchor="middle">A</text><rect x="62" y="110" width="24" height="24" rx="5" fill="#c2682b" opacity="0.50" stroke="#5f6368" stroke-width="1"></rect><text x="74.0" y="152.0" font-size="12" fill="#5f6368" font-weight="700" text-anchor="middle">B</text><rect x="96" y="110" width="24" height="24" rx="5" fill="#c2682b" opacity="0.70" stroke="#5f6368" stroke-width="1"></rect><text x="108.0" y="152.0" font-size="12" fill="#5f6368" font-weight="700" text-anchor="middle">C</text><rect x="130" y="110" width="24" height="24" rx="5" fill="#c2682b" opacity="0.90" stroke="#5f6368" stroke-width="1"></rect><text x="142.0" y="152.0" font-size="12" fill="#5f6368" font-weight="700" text-anchor="middle">D</text><line x1="28.0" y1="94.0" x2="143.0" y2="94.0" stroke="#c2682b" stroke-width="2" stroke-linecap="round"></line><path d="M143.0,97.8 L150.0,94.0 L143.0,90.2 Z" fill="#c2682b"></path><text x="89.0" y="86.0" font-size="11.5" fill="#c2682b" font-weight="700" text-anchor="middle">손가락이 지나감</text><text x="16.0" y="180.0" font-size="12.5" fill="#2b2f36">압력 센서(FSR) 4개</text><text x="16.0" y="198.0" font-size="12.5" fill="#2b2f36">누르면 저항이 줄어든다</text><line x1="170.0" y1="114.0" x2="180.0" y2="114.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M180.0,117.3 L186.0,114.0 L180.0,110.7 Z" fill="#5f6368"></path><text x="190.0" y="56.0" font-size="13.0" fill="#1d1d1f" font-weight="800">② 입력 회로</text><rect x="190.0" y="66.0" width="122.0" height="96.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.3"></rect><text x="251.0" y="96.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">분압 + 버퍼</text><text x="251.0" y="114.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">(패드마다 하나)</text><text x="251.0" y="138.0" font-size="11.5" fill="#2b2f36" text-anchor="middle">저항 변화 → 전압</text><text x="190.0" y="180.0" font-size="12.5" fill="#2b2f36">눌림: 0–1 V (가정)</text><text x="190.0" y="198.0" font-size="12.5" fill="#2b2f36">안 눌림: 0 V로 유지</text><line x1="316.0" y1="114.0" x2="326.0" y2="114.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M326.0,117.3 L332.0,114.0 L326.0,110.7 Z" fill="#5f6368"></path><text x="336.0" y="56.0" font-size="13.0" fill="#1d1d1f" font-weight="800">③ 이온 소자 4개 (두 가지로 만듦)</text><rect x="336.0" y="66.0" width="206.0" height="96.0" rx="10" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.3"></rect><text x="348.0" y="84.0" font-size="11.5" fill="#0e8a83" font-weight="700">독립: 막이 소자마다 따로</text><rect x="348" y="90" width="38" height="16" rx="4" fill="#fff" stroke="#0e8a83" stroke-width="1.4"></rect><line x1="356.0" y1="106.0" x2="356.0" y2="112.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="378.0" y1="106.0" x2="378.0" y2="112.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><rect x="396" y="90" width="38" height="16" rx="4" fill="#fff" stroke="#0e8a83" stroke-width="1.4"></rect><line x1="404.0" y1="106.0" x2="404.0" y2="112.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="422.0" y1="106.0" x2="422.0" y2="112.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><rect x="444" y="90" width="38" height="16" rx="4" fill="#fff" stroke="#0e8a83" stroke-width="1.4"></rect><line x1="452.0" y1="106.0" x2="452.0" y2="112.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="466.0" y1="106.0" x2="466.0" y2="112.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><rect x="492" y="90" width="38" height="16" rx="4" fill="#fff" stroke="#0e8a83" stroke-width="1.4"></rect><line x1="500.0" y1="106.0" x2="500.0" y2="112.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="510.0" y1="106.0" x2="510.0" y2="112.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><text x="348.0" y="130.0" font-size="11.5" fill="#7a3f97" font-weight="700">공유: 막 한 장 (보라 = 이웃 결합)</text><rect x="348" y="136" width="182" height="16" rx="4" fill="#fff" stroke="#0e8a83" stroke-width="1.4"></rect><line x1="356.0" y1="152.0" x2="356.0" y2="158.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="378.0" y1="152.0" x2="378.0" y2="158.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="382.0" y1="144.0" x2="400.0" y2="144.0" stroke="#7a3f97" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="404.0" y1="152.0" x2="404.0" y2="158.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="422.0" y1="152.0" x2="422.0" y2="158.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="430.0" y1="144.0" x2="448.0" y2="144.0" stroke="#7a3f97" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="452.0" y1="152.0" x2="452.0" y2="158.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="466.0" y1="152.0" x2="466.0" y2="158.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="478.0" y1="144.0" x2="496.0" y2="144.0" stroke="#7a3f97" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="2 3"></line><line x1="500.0" y1="152.0" x2="500.0" y2="158.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><line x1="510.0" y1="152.0" x2="510.0" y2="158.0" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"></line><text x="336.0" y="180.0" font-size="12.5" fill="#2b2f36">τ를 다르게: 전극 간격·막 두께</text><text x="336.0" y="198.0" font-size="12.5" fill="#2b2f36">(어느 길이가 정하는지가 첫 질문)</text><line x1="546.0" y1="114.0" x2="556.0" y2="114.0" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"></line><path d="M556.0,117.3 L562.0,114.0 L556.0,110.7 Z" fill="#5f6368"></path><text x="566.0" y="56.0" font-size="13.0" fill="#1d1d1f" font-weight="800">④ 읽기 → 답</text><rect x="566.0" y="66.0" width="138.0" height="44.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.3"></rect><text x="635.0" y="85.0" font-size="11.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">읽기 펄스 → TIA</text><text x="635.0" y="100.0" font-size="11.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">(전류 → 전압)</text><rect x="566.0" y="118.0" width="138.0" height="44.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.3"></rect><text x="635.0" y="137.0" font-size="11.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">ADC 4회 → 가중합</text><text x="635.0" y="152.0" font-size="11.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">(MCU 보드)</text><text x="566.0" y="180.0" font-size="12.5" fill="#1d1d1f" font-weight="700">답: A→D / D→A</text><text x="566.0" y="198.0" font-size="12.5" fill="#1d1d1f" font-weight="700">× 빠름·보통·느림</text><rect x="16.0" y="228.0" width="688.0" height="92.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="252.0" font-size="13.0" fill="#1d1d1f" font-weight="800">한 번의 판정이 일어나는 순서</text><text x="30.0" y="276.0" font-size="12.5" fill="#0e8a83" font-weight="800">1  접촉 중</text><text x="30.0" y="294.0" font-size="11.5" fill="#2b2f36">소자가 스스로 쌓고 잊는다</text><text x="30.0" y="309.0" font-size="11.5" fill="#2b2f36">ADC는 꺼져 있음</text><line x1="174.0" y1="272.0" x2="187.0" y2="272.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M187.0,274.8 L192.0,272.0 L187.0,269.2 Z" fill="#5f6368"></path><text x="198.0" y="276.0" font-size="12.5" fill="#a86a12" font-weight="800">2  끝 감지</text><text x="198.0" y="294.0" font-size="11.5" fill="#2b2f36">비교기 + 타이머가</text><text x="198.0" y="309.0" font-size="11.5" fill="#2b2f36">0.3 s 무입력을 확인</text><line x1="342.0" y1="272.0" x2="355.0" y2="272.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M355.0,274.8 L360.0,272.0 L355.0,269.2 Z" fill="#5f6368"></path><text x="366.0" y="276.0" font-size="12.5" fill="#a86a12" font-weight="800">3  읽기</text><text x="366.0" y="294.0" font-size="11.5" fill="#2b2f36">소자마다 한 번</text><text x="366.0" y="309.0" font-size="11.5" fill="#2b2f36">(숫자 4개)</text><line x1="510.0" y1="272.0" x2="523.0" y2="272.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M523.0,274.8 L528.0,272.0 L523.0,269.2 Z" fill="#5f6368"></path><text x="534.0" y="276.0" font-size="12.5" fill="#2b59c3" font-weight="800">4  답</text><text x="534.0" y="294.0" font-size="11.5" fill="#2b2f36">가중합 → 6가지 중 하나</text><text x="534.0" y="309.0" font-size="11.5" fill="#2b2f36">그 뒤 0 V에서 초기화</text><text x="16.0" y="342.0" font-size="12.5" fill="#5f6368">설계안 · 실물 미검증 · 센서와 소자는 별개 부품(한 막에 합치는 것은 장기 목표) · 전압과 시간은 예시</text></svg>
+<!-- /RM:build -->
+<figcaption><b>그림 0. 만들려는 최소 장치.</b> 압력 센서의 저항 변화를 전압으로 바꿔 이온 소자에 넣는다. 접촉이 지나가는 동안 소자가 스스로 입력을 쌓고 잊으며, 접촉이 끝난 것을 비교기와 타이머가 알아내면 소자를 한 번씩 읽어 가중합으로 답한다. 소자 배열은 막이 따로인 독립형과 막 한 장을 함께 쓰는 공유형 두 가지로 만든다. 설계안이며 아직 만들지 않았다.</figcaption>
+</figure>
+<ul>
+<li><strong>왜 이 장치인가.</strong> 접촉이 지나가는 동안에는 소자가 스스로 입력을 쌓고 잊으므로 숫자로 바꾸는 일(ADC)을 쉬게 할 수 있습니다. 판단에 필요한 과거가 소자의 상태로 남는지, 남는다면 무엇이 그 시간을 정하는지를 가장 작은 구성으로 볼 수 있습니다.</li>
+<li><strong>두 가지로 만듭니다.</strong> 막이 소자마다 따로인 <strong>독립 배열</strong>과 막 한 장을 함께 쓰는 <strong>공유 배열</strong>입니다. 같은 전극 기판에서 막만 다르게 해 이웃 결합의 몫을 가려냅니다.</li>
+<li><strong>이 장치로 답하려는 것.</strong> ① τ와 결합을 고분자·기하 변수로 미리 정할 수 있는가(소재의 질문). ② 그 배열이 같은 읽기 횟수의 R–C 배열이나 디지털 계산보다 나은 조건이 있는가(계산의 질문). ③ 주변 회로까지 넣으면 무엇이 줄고 무엇이 느는가(장치의 질문).</li>
+<li><strong>미리 밝혀 둘 한계.</strong> 방향 판별 자체는 디지털로도 쉽습니다(패드가 눌린 시각을 적으면 됩니다). <span class="key">이 장치는 "디지털이 못 하는 일"을 보이려는 것이 아니라, τ와 결합의 몫을 깨끗하게 재기 위한 시험대입니다.</span> 부품과 회로는 설계안이며 자세한 구성은 <a href="#rm-build">7.1절</a>에 있습니다.</li>
+</ul>
 <p><span class="lbl">해결하려는 어려움.</span> 몸에 붙이는 <strong>센서</strong>(피부의 전기 신호를 재는 패치나 밴드)는 신호를 계속 재면서도 자주 충전하지 않고 써야 합니다. 그런데 "박동 간격이 방금 불규칙해졌는가", "손목을 굽힌 뒤 폈는가"처럼 <span class="key"><strong>지금 값이 아니라 직전 몇 초의 변화로 정해지는 판단</strong></span>은, 장치가 과거의 정보를 어딘가에 갖고 있어야 내릴 수 있습니다.</p>
 <p><span id="rm-sum-now"></span><span class="lbl">지금의 장치는 어떻게 하나.</span> 신호를 1초에 1,000번 숫자로 바꾸고(이 일을 하는 부품이 <strong>ADC</strong>), 작은 컴퓨터 칩(<strong>MCU</strong>)이 그 숫자로 과거의 요약값을 고쳐 씁니다. 판단은 잘 됩니다. 그래서 <strong>"기억이 필요하다"는 이유만으로 새 소재가 필요하지는 않습니다.</strong> 이때 MCU의 계산부(<strong>CPU</strong>)가 숫자마다 깨어 있을 필요는 없습니다. 많은 MCU는 CPU를 재운 채 ADC가 잰 값을 <strong>DMA</strong>(CPU를 거치지 않고 메모리에 바로 쓰는 기능)로 RAM에 모아 둡니다(<a href="https://docs.nordicsemi.com/bundle/ps_nrf52840/page/saadc.html">Nordic SAADC</a>). <span class="key">다만 과거를 숫자로 쥐려면 <strong>ADC·DMA·RAM은 신호가 들어오는 동안 계속 일해야</strong> 하고, 그 전력이 듭니다.</span></p>
 <p><span id="rm-sum-device"></span><span class="lbl">소자를 쓰면 무엇이 달라지나.</span> 이온성 고분자에 전압이 걸리면 이온이 이동하고, 전압이 사라진 뒤에도 한동안 원래 분포로 돌아가지 않습니다. 즉 <span class="key"><strong>소자 자체가 과거를 물리적 상태로 쥡니다.</strong></span> 그러면 숫자로 바꾸는 일을 판정할 때 몇 번으로 줄일 수 있습니다. 대신 새로 드는 회로가 있습니다. 신호를 다듬어 소자에 넣는 아날로그 회로, 동작이 끝났는지 알아내는 회로(비교기 + 시간 재기), 소자를 읽는 회로입니다. 디지털도 같은 비교기로 ADC를 동작이 있을 때만 켜도록 최적화할 수 있습니다.</p>
 <p><span class="key">그래서 이 연구의 질문은 "디지털이 못 하는 기억"이 아닙니다. <strong>최적화한 디지털 수집·특징 계산과 같은 조건에서 비교해, 소자 방식이 전체 에너지·지연·정확도·구현 부담 중 무엇을 어떤 조건에서 줄이는가</strong>입니다.</span> 답은 구동·판독 회로까지 넣고 재야 압니다(<a href="#rm-power">1.5절의 전력 비교</a>).</p>
+<p><span class="lbl">가까운 연구가 이룬 것과 남긴 질문.</span> 이온 소자로 시간 정보를 다룬 연구는 많고, 가까운 것들은 이미 멀리 왔습니다. 길이로 τ를 설계하고 이론으로 예측했고(Kamsma 2024), 한 전해질을 함께 쓰는 소자 사이의 결합을 재고 계산에 썼으며(Gkoupidenis 2017, Cucchi 2021), 압력을 이온 겔 배열에 기억시켰습니다(Zhou 2025). <span class="key">남은 질문은 "되는가"가 아니라 <strong>"무엇이 기여했는가"</strong>입니다.</span> 이전 조사의 13편 가운데 소자를 뺀 비교를 둔 것은 4편이었고, 둔 경우에도 소자를 쓴 쪽이 낮은 예가 있었습니다(Koh 2022). τ가 다른 것, 이웃 결합, readout 가운데 무엇이 정확도를 만들었는지를 가른 연구는 이 조사 범위에서 찾지 못했습니다. 그것을 가르지 못하면 다음 소자를 어떻게 만들어야 하는지 정할 수 없습니다. 이 연구는 그 기여를 소재 변수까지 거슬러 올라가 가릅니다(조사 범위와 확인 수준은 6절).</p>
 <p><span class="lbl">왜 τ를 소재로 조절해야 하나.</span> 소자에 남은 이력이 사라지는 데 걸리는 시간을 <strong>τ</strong>(타우, 응답 시간)라 부릅니다. τ를 조절해야 하는 이유는 셋입니다.</p>
 <ol type="1">
 <li><span class="key"><strong>τ가 사건 사이의 시간과 맞아야 기억이 쓸모 있습니다.</strong></span> 두 동작이 1초 간격일 때 τ = 10 ms이면 첫 동작을 잊고, τ = 1분이면 그 전의 동작들까지 쌓여 구분이 안 됩니다. τ = 0.5–2초여야 순서가 크기 차이로 남습니다.</li>
-<li><strong>과제마다 사건 사이의 시간이 다릅니다.</strong> 손목 동작은 0.3–2.5초, 박동은 0.6–1.2초, 손가락이 센서 위를 쓸고 지나가는 시간은 0.1–5초입니다. 지금까지의 이온 소자 연구는 대개 소재를 먼저 만들고 τ를 나중에 재서, 그 τ에 맞는 과제를 골랐습니다. <span class="key">과제가 먼저 정해지면 τ를 거기에 맞출 <strong>규칙</strong>이 있어야 합니다.</span></li>
+<li><strong>과제마다 사건 사이의 시간이 다릅니다.</strong> 손목 동작은 0.3–2.5초, 박동은 0.6–1.2초, 손가락이 센서 위를 쓸고 지나가는 시간은 0.1–5초입니다. 제가 읽은 이온 소자 연구의 다수는 소재를 먼저 만들고 τ를 나중에 재서 그 τ에 맞는 과제를 골랐고, 길이로 τ를 먼저 정한 예(Kamsma 2024)는 물이 든 미세 통로였습니다. <span class="key">과제가 먼저 정해지면 τ를 거기에 맞출 <strong>규칙</strong>이 있어야 합니다.</span></li>
 <li><strong>τ가 다른 소자를 여러 개 쓰려면 τ를 원하는 값에 놓을 수 있어야 합니다.</strong> 아래 질문 2의 배열이 그 경우입니다.</li>
 </ol>
 <p><span class="lbl">소재 연구자로서 시험할 아이디어.</span> 이 응답 시간과 모양을 두께·고정전하·가소제 같은 <strong>소재 변수로 정할 수 있다면</strong>, 과제에 맞는 소자를 설계할 수 있습니다. 연구는 세 단계로 이어집니다.</p>
 <p>① <strong>소재의 물리.</strong> 응답 시간은 이온이 얼마나 빨리 움직이는가(<strong>kinetics</strong>: 확산계수, 이동 거리)와 이온이 어디에 머무르려 하는가(<strong>thermodynamics</strong>: 고정전하와의 평형, 이온쌍의 결합 세기)로 정해집니다. 이 둘을 조성·구조로 바꿉니다. ② <strong>상관관계 분석.</strong> 바꾼 변수와 측정한 응답 시간 사이의 관계를 표로 만듭니다. ③ <strong>응용.</strong> 그 응답이 실제 판단 과제에서 쓸모 있는지 시험합니다.</p>
-<p>★ <span class="key"><strong>연구 질문:</strong> 고분자의 조성과 구조는 소자의 <strong>dynamics</strong>(시간에 따라 응답이 변하는 방식: 응답 시간, 응답의 모양, 이웃 소자 사이의 결합)를 어떻게 바꾸는가. 그 관계로 <strong>만들지 않은 조성·두께의 응답과 과제 성능을 어디까지 미리 예측할 수 있는가.</strong> 그리고 그 변화는 어떤 과제와 장치(system) 조건에서 쓸모가 있는가.</span></p>
+<p>★ <span class="key"><strong>중심 질문:</strong> 이온성 고분자 막에서 입력의 영향이 <strong>얼마나 오래 남는가(τ)</strong>와 <strong>얼마나 멀리 번지는가(이웃 결합)</strong>는 고분자의 조성·구조와 전극 배치로 어떻게 정해지는가. 그리고 그 관계를 알면, <strong>과제가 요구하는 시간 창과 자리 수에 맞는 배열을 만들기 전에 정할 수 있는가.</strong></span></p>
+<p>이 질문에서 이미 알려진 부분과 새로 확인해야 하는 부분을 나눕니다.</p>
+<ul>
+<li><strong>이미 알려진 것.</strong> 응답 시간이 길이의 제곱에 비례하는 확산형 관계(물이 든 미세 통로에서 이론 모형이 소자의 동작을 정량적으로 예측, Kamsma 2024), 이온의 점도에 따른 이완 시간(Koh 2022), 한 전해질을 함께 쓰는 소자 사이의 결합과 그 세기가 전해질 농도에 따라 변한다는 것(Gkoupidenis 2017). 그래서 "두께를 바꾸면 τ가 변한다"를 다시 보이는 것은 새 지식이 아닙니다.</li>
+<li><strong>새로 확인할 것.</strong> ① 고정전하가 있는 <strong>고체 고분자 접합</strong>에서 초 단위의 느린 응답을 정하는 과정이 무엇인가(결핍층 확산, 전극 표면 충전, 사슬 재배열 가운데. 5.4절). ② 따로 잰 값(전도도, 두께, 전극 용량)만으로 τ와 결합이 닿는 거리를 <strong>맞춤 변수 없이</strong> 예측할 수 있는가, 어디서부터 어긋나는가. ③ τ와 결합을 <strong>서로 따로</strong> 정할 수 있는가, 아니면 같은 이온 수송에 묶여 함께 움직이는가. ④ 소자 하나에서 잰 값으로 <strong>배열의 과제 정확도</strong>를 미리 맞힐 수 있는가.</li>
+<li><strong>새 지식이 아니라 방법인 것.</strong> 소자 없는 baseline, 대조군, 예측 검증은 결과를 믿을 수 있게 하는 방법입니다. 이 연구의 노벨티로 내세우지 않습니다.</li>
+</ul>
 <p><span class="lbl">세 가지 질문.</span></p>
 <ol type="1">
 <li><p><strong>소자의 응답을 읽는 것이, 소자 없이 같은 판단을 하는 방법보다 나은 조건이 있는가.</strong></p>
 <p><strong>가장 단순한</strong> 비교 대상은 저항과 커패시터로 만든 <strong>R–C 회로</strong>, 그리고 <strong>같은 일을 숫자로 하는 디지털 계산</strong>(비교기로 깨우고 DMA로 모으는 최적화 구성 포함)입니다. 같은 입력·같은 읽기 횟수·같은 <strong>readout</strong>(읽은 값에 가중치를 곱해 더하는 계산)으로 견주어, 차이가 있는지와 그 크기를 먼저 확인합니다.</p></li>
 <li><p><strong><span class="key">소자의 응답 시간 τ를 소재 변수로 정하고</span>, <span class="key">τ가 다른 소자를 배열해 공간·시간 정보</span>를 함께 읽을 수 있는가.</strong></p>
-<p>이온 소자에서는 보통 <strong>빠른 응답과 느린 응답이 함께</strong> 나타납니다. 전극 표면에 이온이 모이는 일은 ms 정도로 빠르고, 이온이 고분자 안을 확산해 다시 퍼지는 일은 초 단위로 느립니다. 실제로 이온겔 소자에서 두 시간 상수(약 52 ms와 395 ms)가 함께 보고되었습니다(Zhou 2025) <span class="tag tag-fact">논문</span>. 이 연구는 먼저 <strong>두께만, 고정전하 밀도만, 가소제 양만 바꾼 비교 시료</strong>로 τ를 정하는 규칙을 찾고, <span class="key">그 규칙으로 <strong>만들기 전에 예측한 τ를 새 시료로 확인</strong>합니다.</span> 규칙이 "예측"을 통과해야 설계에 쓸 수 있기 때문입니다. 이온의 종류나 통로 길이로 τ를 바꾼 연구는 있지만, 고분자 네트워크 변수로 한 것은 이번 조사 범위(대부분 초록 수준)에서 찾지 못했습니다(6절).</p>
+<p>이온 소자에서는 보통 <strong>빠른 응답과 느린 응답이 함께</strong> 나타납니다. 전극 표면에 이온이 모이는 일은 ms 정도로 빠르고, 이온이 고분자 안을 확산해 다시 퍼지는 일은 초 단위로 느립니다. 실제로 이온겔 소자에서 두 시간 상수(약 52 ms와 395 ms)가 함께 보고되었습니다(Zhou 2025) <span class="tag tag-fact">논문</span>. 이 연구는 먼저 <strong>두께만, 고정전하 밀도만, 가소제 양만 바꾼 비교 시료</strong>로 τ를 정하는 규칙을 찾고, <span class="key">그 규칙으로 <strong>만들기 전에 예측한 τ를 새 시료로 확인</strong>합니다.</span> 규칙이 "예측"을 통과해야 설계에 쓸 수 있기 때문입니다. 이온의 종류로 τ를 바꾸거나 통로 길이로 τ를 정하고 이론으로 예측한 연구는 있지만(Koh 2022, Kamsma 2024), 고정전하가 있는 고체 고분자 막에서 한 것은 이번 조사 범위(대부분 초록 수준)에서 찾지 못했습니다(6절).</p>
 <p>그다음 소자를 <strong>여러 자리에 배열</strong>합니다. 배열이 방향을 읽는 원리는 아래 그림의 예 하나로 볼 수 있습니다. 패드 세 개 A, B, C 밑에 소자를 하나씩 두고 손가락이 A에서 C로 지나가면, 먼저 지나간 A의 소자가 가장 많이 줄어든 상태로 남습니다. 읽은 세 값이 <strong>작음 → 큼</strong> 순서이면 A → C, 그 반대이면 C → A입니다.</p></li>
 </ol>
 <figure class="rv-fig figure">
@@ -823,16 +853,16 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <figure class="rv-fig figure">
 <!-- RM:syschain -->
-<svg class="rv-svg" viewbox="0 0 720 184" role="img" aria-label="근전도에서 다듬는 회로, 펄스 스위치, 이온 소자, TIA, ADC, MCU로 이어지는 소자 방식의 신호 사슬. 새로 드는 회로는 호박색, 소자는 청록, 디지털은 파랑."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">소자 방식의 신호 사슬: 단계마다 무엇이 무엇으로 바뀌나</text><rect x="16.0" y="56.0" width="88.0" height="60.0" rx="10" fill="#f5f5f7"></rect><text x="60.0" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">근전도</text><text x="60.0" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">µV–mV 전압</text><line x1="105.0" y1="86.0" x2="111.3" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M111.3,88.8 L116.3,86.0 L111.3,83.2 Z" fill="#5f6368"></path><rect x="117.3" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="161.3" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">다듬는 회로</text><text x="161.3" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">증폭·정류·필터</text><line x1="206.3" y1="86.0" x2="212.6" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M212.6,88.8 L217.6,86.0 L212.6,83.2 Z" fill="#5f6368"></path><rect x="218.6" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="262.6" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">펄스 스위치</text><text x="262.6" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">전압 펄스로</text><line x1="307.6" y1="86.0" x2="313.9" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M313.9,88.8 L318.9,86.0 L313.9,83.2 Z" fill="#5f6368"></path><rect x="319.9" y="56.0" width="88.0" height="60.0" rx="10" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.4"></rect><text x="363.9" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">이온 소자</text><text x="363.9" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">이력이 남음</text><line x1="408.9" y1="86.0" x2="415.2" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M415.2,88.8 L420.2,86.0 L415.2,83.2 Z" fill="#5f6368"></path><rect x="421.2" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="465.2" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">TIA</text><text x="465.2" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">전류 → 전압</text><line x1="510.2" y1="86.0" x2="516.5" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M516.5,88.8 L521.5,86.0 L516.5,83.2 Z" fill="#5f6368"></path><rect x="522.5" y="56.0" width="88.0" height="60.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="566.5" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">ADC</text><text x="566.5" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">판정 때만</text><line x1="611.5" y1="86.0" x2="617.8" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M617.8,88.8 L622.8,86.0 L617.8,83.2 Z" fill="#5f6368"></path><rect x="623.8" y="56.0" width="88.0" height="60.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="667.8" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">MCU</text><text x="667.8" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">가중합 → 답</text><rect x="16.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#fdf3da" stroke="#a86a12" stroke-width="1.2"></rect><text x="40.0" y="146.0" font-size="12.5" fill="#2b2f36">새로 드는 회로</text><rect x="166.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.2"></rect><text x="190.0" y="146.0" font-size="12.5" fill="#2b2f36">이온 소자</text><rect x="278.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.2"></rect><text x="302.0" y="146.0" font-size="12.5" fill="#2b2f36">디지털</text><text x="16.0" y="174.0" font-size="12.5" fill="#5f6368">개념도 · TIA = transimpedance amplifier, 아주 작은 전류(nA–µA)를 읽을 수 있는 전압으로 바꾸는 증폭기</text></svg>
+<svg class="rv-svg" viewbox="0 0 720 184" role="img" aria-label="센서 신호에서 다듬는 회로, 펄스 스위치, 이온 소자, TIA, ADC, MCU로 이어지는 소자 방식의 신호 사슬. 새로 드는 회로는 호박색, 소자는 청록, 디지털은 파랑."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">소자 방식의 신호 사슬: 단계마다 무엇이 무엇으로 바뀌나</text><rect x="16.0" y="56.0" width="88.0" height="60.0" rx="10" fill="#f5f5f7"></rect><text x="60.0" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">센서 신호</text><text x="60.0" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">압력·근전도 등</text><line x1="105.0" y1="86.0" x2="111.3" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M111.3,88.8 L116.3,86.0 L111.3,83.2 Z" fill="#5f6368"></path><rect x="117.3" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="161.3" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">다듬는 회로</text><text x="161.3" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">분압·증폭·필터</text><line x1="206.3" y1="86.0" x2="212.6" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M212.6,88.8 L217.6,86.0 L212.6,83.2 Z" fill="#5f6368"></path><rect x="218.6" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="262.6" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">펄스 스위치</text><text x="262.6" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">전압 펄스로</text><line x1="307.6" y1="86.0" x2="313.9" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M313.9,88.8 L318.9,86.0 L313.9,83.2 Z" fill="#5f6368"></path><rect x="319.9" y="56.0" width="88.0" height="60.0" rx="10" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.4"></rect><text x="363.9" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">이온 소자</text><text x="363.9" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">이력이 남음</text><line x1="408.9" y1="86.0" x2="415.2" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M415.2,88.8 L420.2,86.0 L415.2,83.2 Z" fill="#5f6368"></path><rect x="421.2" y="56.0" width="88.0" height="60.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="465.2" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">TIA</text><text x="465.2" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">전류 → 전압</text><line x1="510.2" y1="86.0" x2="516.5" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M516.5,88.8 L521.5,86.0 L516.5,83.2 Z" fill="#5f6368"></path><rect x="522.5" y="56.0" width="88.0" height="60.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="566.5" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">ADC</text><text x="566.5" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">판정 때만</text><line x1="611.5" y1="86.0" x2="617.8" y2="86.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M617.8,88.8 L622.8,86.0 L617.8,83.2 Z" fill="#5f6368"></path><rect x="623.8" y="56.0" width="88.0" height="60.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="667.8" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">MCU</text><text x="667.8" y="101.0" font-size="11" fill="#2b2f36" text-anchor="middle">가중합 → 답</text><rect x="16.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#fdf3da" stroke="#a86a12" stroke-width="1.2"></rect><text x="40.0" y="146.0" font-size="12.5" fill="#2b2f36">새로 드는 회로</text><rect x="166.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.2"></rect><text x="190.0" y="146.0" font-size="12.5" fill="#2b2f36">이온 소자</text><rect x="278.0" y="134.0" width="16.0" height="14.0" rx="4" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.2"></rect><text x="302.0" y="146.0" font-size="12.5" fill="#2b2f36">디지털</text><text x="16.0" y="174.0" font-size="12.5" fill="#5f6368">개념도 · TIA = transimpedance amplifier, 아주 작은 전류(nA–µA)를 읽을 수 있는 전압으로 바꾸는 증폭기</text></svg>
 <!-- /RM:syschain -->
-<figcaption><b>그림 2. 소자 방식의 신호 사슬.</b> 근전도를 다듬어 전압 펄스로 바꿔 소자에 넣고, 소자의 아주 작은 전류를 TIA가 전압으로 바꾸고, 그 전압을 판정 때만 ADC가 숫자로 바꾼다. 호박색 칸이 새로 드는 회로다. 개념도.</figcaption>
+<figcaption><b>그림 2. 소자 방식의 신호 사슬.</b> 센서 신호(첫 검증 과제에서는 압력 패드, 후속 후보에서는 근전도)를 다듬어 전압으로 바꿔 소자에 넣고, 소자의 아주 작은 전류를 TIA가 전압으로 바꾸고, 그 전압을 판정 때만 ADC가 숫자로 바꾼다. 호박색 칸이 새로 드는 회로다. 개념도.</figcaption>
 </figure>
 <p>같은 정확도에서 <strong>지연</strong>(사건이 끝난 뒤 답이 나오기까지 걸리는 시간)·보내는 양·에너지·부품 수를 센서부터 전송까지 재서 비교합니다.</p>
 <p><span class="lbl">검증할 가설.</span> 네 가설을 목표에 하나씩 대응시킵니다(자세한 판정은 7절). <span class="tag tag-hypo">가설</span></p>
 <ul>
 <li><strong>H1 (목표 1).</strong> 소자의 τ를 사건 간격에 맞추면, 같은 입력·읽기 횟수·readout에서 R–C 회로 하나보다 시험 데이터를 더 잘 맞히는 조건이 있다.</li>
-<li><strong>H2 (목표 2-a).</strong> τ와 응답의 모양은 고분자의 두께·고정전하·가소제와 식으로 이어지고, 그 식으로 <strong>만들지 않은 시료의 τ를 미리 정한 오차 안에서 예측</strong>할 수 있다.</li>
-<li><strong>H3 (목표 2-b).</strong> 방향·순서 과제에서 τ가 다른 배열과 이웃 사이의 결합이 각각 성능에 기여하는지를 네 조건(τ 같음/다름 × 결합 없음/있음)으로 가를 수 있고, 적어도 하나가 입력 세기·속도·날짜가 바뀌어도 유지된다.</li>
+<li><strong>H2 (목표 2-a).</strong> τ와 응답의 모양은 고분자의 두께·고정전하·가소제, 전극 간격과 식으로 이어지고, <strong>따로 잰 전도도·두께로 계산한 τ</strong>와 <strong>식을 만들 때 쓰지 않은 조건</strong>(두 변수를 함께 바꾼 시료, 다른 온도)의 τ가 미리 정한 오차 안에서 맞는다. 맞지 않는 범위가 어디인지도 결과다.</li>
+<li><strong>H3 (목표 2-b).</strong> 방향·순서 과제에서 τ가 다른 배열과 이웃 사이의 결합이 각각 성능에 기여하는지를 네 조건(τ 같음/다름 × 결합 없음/있음)으로 가를 수 있고, 적어도 하나가 입력 세기·속도·날짜가 바뀌어도 유지된다. 결합의 이득은 읽는 소자 수가 자리 수보다 적을 때 나타날 것으로 예상한다.</li>
 <li><strong>H4 (목표 3).</strong> 같은 정확도·판정 빈도에서, 아날로그 입력을 소자에 직접 넣는 구성이 최적화한 디지털보다 전체 에너지나 부품을 줄이는 회로 조건이 있다.</li>
 </ul>
 <p><span class="lbl">이 글의 예시에 대해.</span> 본문은 손목 근전도(EMG, electromyogram)의 동작 순서 판정을 예로 설명합니다. <strong>교육용 예시이고, 최종 응용으로 정한 것이 아닙니다.</strong> 이 글에서는 세 가지를 구분합니다.</p>
@@ -861,7 +891,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td><strong>첫 검증 과제</strong></td>
-<td>① 4-bit 펄스열의 순서(소자 하나, 목표 1) → ② 압력 패드 3–4개 위를 지나가는 접촉의 방향·빠르기(배열, 목표 2-b)</td>
+<td>① 4-bit 펄스열의 순서(소자 하나, 목표 1) → ② 같은 순서를 전압 펄스로 넣은 접촉 → ③ 압력 패드 4개 위를 지나가는 접촉의 방향·빠르기(배열, 목표 2-b)</td>
 <td>7·9절</td>
 <td>직접 만든 펄스열, 보드 + 압력 패드로 직접 기록</td>
 </tr>
@@ -2950,7 +2980,7 @@ ul.task-list li input[type="checkbox"] {
 <p>★ <span class="key"><strong>결론: 방금의 정보와 아까의 정보가 함께 필요한 과제에서는, τ가 서로 다른 소자를 여러 개 두면 도움이 됩니다. τ가 같은 소자를 늘리는 것은 도움이 되지 않았습니다.</strong></span></p>
 <p><strong>이 결과로 말할 수 있는 것과 없는 것.</strong></p>
 <ul>
-<li>모형에서는 <strong>τ가 다른 소자 여러 개</strong>를 각각 읽었습니다. 이것은 만들고 분석하기가 분명합니다. 소자마다 두께나 조성을 달리해 τ를 정하면 되기 때문입니다.</li>
+<li>모형에서는 <strong>τ가 다른 소자 여러 개</strong>를 각각 읽었습니다. 이것은 만들고 분석하기가 분명합니다. 소자마다 두께·전극 간격이나 조성을 달리해 τ를 정하는 길이 있기 때문입니다(한 기판 위에서 실제로 어떻게 만들지는 7.1절).</li>
 <li>"소자 <strong>하나</strong> 안에 여러 응답 시간을 넣고 한 출력에서 나눠 읽는다"는 것은 다른 이야기입니다. 만들기도 분석하기도 까다롭고, 굳이 그래야 할 이유도 뚜렷하지 않습니다. <span class="key">그래서 이 연구는 <strong>소자마다 τ 하나를 정확히 조절하고, 그런 소자를 여러 개 배열하는 쪽</strong>을 택합니다</span>(<a href="#rm-aims">7절</a>의 연구 방향).</li>
 <li>τ가 여러 개면 늘 좋은 것도 아닙니다. 소자 하나로 풀리는 과제에서는 읽는 비용만 늡니다.</li>
 </ul>
@@ -3422,7 +3452,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="rm-prior" class="level2">
 <h2 class="anchored" data-anchor-id="rm-prior">6. 선행연구는 어디까지 왔고, 무엇이 남았나</h2>
 <p><strong>이 절이 답하는 질문.</strong> 이온 소자에서 τ를 바꾼 연구가 이미 있는가. 있다면 어떤 변수로 무엇을 바꿨는가. 그리고 아직 아무도 하지 않은 것은 무엇인가.</p>
-<p><strong>결론부터.</strong> <span class="key">이온 소자에서 τ를 바꾼 연구는 <strong>이미 여러 편 있습니다.</strong></span> 그래서 "τ를 바꿀 수 있다"거나 "한 소자에 응답 시간을 여러 개 넣는다"는 것만으로는 새롭지 않습니다. 이번 조사에서 <strong>찾지 못한 것</strong>은 둘입니다. ① <strong>고분자 네트워크 변수</strong>(가교 밀도, 고정전하 밀도, 가소제)로 τ를 조절하는 규칙을 과제 성능과 함께 보인 연구, ② 이온 막을 함께 쓰는 소자들 사이의 <strong>영향이 거리에 따라 어떻게 변하는지를 재고 설계</strong>해, 자극이 번지는 방향이나 순서 같은 <strong>공간 정보</strong>를 읽는 연구입니다. "찾지 못했다"는 "없다"와 다릅니다. 조사는 2026-11-11에 웹 검색 약 35회로 했고, 2026-11-12에 가장 가까운 논문 다섯 편(Zhou 2025, Gkoupidenis 2017, Kamsma 2024, Koh 2022, Cucchi 2021)의 <strong>공개 전문</strong>을 다시 읽었습니다(SI는 미확인). 표의 [본문]은 전문을 읽은 것, [초록]은 초록·본문 일부, [요약]은 검색 요약만 본 것입니다. <span class="key">[초록]·[요약]인 논문에 대해서는 "하지 않았다"고 쓰지 않고 <strong>"확인하지 못했다"</strong>고 씁니다.</span></p>
+<p><strong>결론부터.</strong> <span class="key">이온 소자에서 τ를 바꾼 연구는 <strong>이미 여러 편 있습니다.</strong></span> 그래서 "τ를 바꿀 수 있다"거나 "한 소자에 응답 시간을 여러 개 넣는다"는 것만으로는 새롭지 않습니다. 이번 조사에서 <strong>찾지 못한 것</strong>은 둘입니다. ① 고정전하가 있는 <strong>고체 고분자 막</strong>에서 느린 응답을 정하는 과정을 가려내고, 네트워크 변수(가교 밀도, 고정전하 밀도, 가소제)로 τ를 정하는 규칙을 과제 성능과 함께 보인 연구. 물이 든 미세 통로에서는 길이로 τ를 설계하고 이론으로 예측한 선례가 있습니다(Kamsma 2024). ② 고체 막을 함께 쓰는 소자들 사이의 결합이 <strong>거리와 시간에 따라</strong> 어떻게 변하는지를 재고, τ와 결합을 <strong>각각 설계 변수로 삼아</strong> 그 몫을 방향·순서 과제에서 가려낸 연구. 결합의 세기가 전해질 농도에 따라 변한다는 것(Gkoupidenis 2017)과 결합을 계산에 쓴 예(Cucchi 2021)는 있습니다. "찾지 못했다"는 "없다"와 다릅니다. 조사는 2026-11-11에 웹 검색 약 35회로 했고, 2026-11-12에 가장 가까운 논문 다섯 편(Zhou 2025, Gkoupidenis 2017, Kamsma 2024, Koh 2022, Cucchi 2021)의 <strong>공개 전문</strong>을 다시 읽었습니다(SI는 미확인). 표의 [본문]은 전문을 읽은 것, [초록]은 초록·본문 일부, [요약]은 검색 요약만 본 것입니다. <span class="key">[초록]·[요약]인 논문에 대해서는 "하지 않았다"고 쓰지 않고 <strong>"확인하지 못했다"</strong>고 씁니다.</span></p>
 <section id="이온-소자에서-어떤-변수가-τ를-바꿨나" class="level3">
 <h3 class="anchored" data-anchor-id="이온-소자에서-어떤-변수가-τ를-바꿨나">6.1 이온 소자에서 어떤 변수가 τ를 바꿨나</h3>
 <div class="rm-fit">
@@ -3555,7 +3585,7 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td>Koh 2022 Sci. Rep. [초록]</td>
+<td>Koh 2022 Sci. Rep. [본문]</td>
 <td>ionic liquid 소자 1개, 시간을 나눠 100개 값</td>
 <td>손글씨 숫자 87–90 %</td>
 <td>있음. <strong>소자를 쓴 쪽이 더 낮았다</strong>(입력을 그대로 넣은 쪽은 가중치가 4배)</td>
@@ -3579,8 +3609,8 @@ ul.task-list li input[type="checkbox"] {
 <td>Cucchi 2021 Sci. Adv. [본문]</td>
 <td>한 전해질에 담긴 OECT 섬유 그물. 섬유를 키우는 조건으로 저항·응답 시간을 조절</td>
 <td>부정맥 4종 88 %, Iris 등</td>
-<td>확인 못 함</td>
-<td><strong>가장 가까운 선례 가운데 하나.</strong> 응답 시간을 성장 조건으로 조절하고, 전해질을 통한 섬유 사이의 결합을 비선형 변환으로 썼다. 결합을 거리별로 재거나 방향·순서 과제에 쓰지는 않음(본문 기준)</td>
+<td>있음. 입력을 그대로 분류한 것보다 20 % 개선이라고 보고(80 %), 지연 회로를 더해 88 %</td>
+<td><strong>가장 가까운 선례 가운데 하나.</strong> 성장 조건에 따라 응답 시간이 달라지고(무작위성 포함), 전해질을 통한 섬유 사이의 결합을 비선형 변환으로 썼다. 두 섬유 사이의 crosstalk도 쟀다. τ 다양성과 결합의 몫을 가르거나 방향·순서 과제에 쓰지는 않음(본문 기준)</td>
 </tr>
 <tr class="odd">
 <td>Liu 2024 Nat. Electron. [요약]</td>
@@ -3598,10 +3628,10 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td>Zhou 2025 Nat. Commun. [본문]</td>
-<td>두 층 ionogel 3×3 배열</td>
-<td>누른 이력을 저장</td>
-<td>—</td>
-<td>칸 사이의 결합과 움직임은 본문에서 찾지 못함</td>
+<td>두 층 ionogel 3×3 배열(화소의 조성·모양은 모두 같음). 압력 센서 겔과 기억 겔을 직렬로 연결</td>
+<td>누른 시간(0 / 50 / 200 s)을 화소의 색으로 구분, 글자 저장</td>
+<td>없음</td>
+<td><strong>첫 데모와 가장 가까운 선례</strong>(압력 → 이온 겔 배열의 기억). 화소마다 다른 τ, 초 단위의 움직임, 방향·순서, 칸 사이의 결합은 본문에서 찾지 못함</td>
 </tr>
 </tbody>
 </table>
@@ -3763,7 +3793,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>"τ–성능 정량 연결 연구가 없다"(이전) → <strong>수정.</strong> τ 맞춤은 알려져 있다(Maraj 2023, Lee S.H. 2025, Yang 2026). 없는 것은 MC/IPC 수준의 연결과 상태변수 구조.</li>
+<li>"τ–성능 정량 연결 연구가 없다"(이전) → <strong>수정.</strong> τ 맞춤은 알려져 있다(Maraj 2023, Lee S.H. 2025, Yang 2026 — Yang 2026은 서지 재확인 필요). 없는 것은 MC/IPC 수준의 연결과 상태변수 구조.</li>
 <li>Nat. Commun. 2024 Yan et al.(<a href="https://doi.org/10.1038/s41467-024-45187-1">10.1038/s41467-024-45187-1</a>)은 <strong>리뷰</strong>이며 timescale matching 실험이 아님 <span class="tag tag-fact">논문</span>. 실험 근거로는 Jaurigue &amp; Lüdge 2024(<a href="https://doi.org/10.1088/2634-4386/ad1d32">10.1088/2634-4386/ad1d32</a>), Jang 2021 Nat. Commun., Dhungel 2023.</li>
 <li>Kai Xiao 그룹은 SUSTech 소속으로 보이며(TIPC는 협력 기관), RC 논문은 이 조사(웹, 2026-11-07)에서 찾지 못함 <span class="tag tag-interp">해석</span>.</li>
 <li>Fc(ferrocene) redox 첨가제 + LiClO₄ + duty-cycle 코딩의 이온 reservoir: 같은 조사에서 출판 선행을 찾지 못함. 가까운 것은 redox-type ion-gating reservoir(NIMS), Faradaic 전류 reservoir(JSAP 2024 발표).</li>
@@ -3795,8 +3825,8 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td>Gkoupidenis 2017 Nat. Commun. [본문]</td>
-<td>한 전해질에 담긴 4×4 PEDOT:PSS 소자 배열(소자 간격 5 mm). 한 소자에 넣은 입력이 배열 전체에 번지는 결합을 <strong>지도로</strong> 보임(약한 결합은 약 5 %)</td>
-<td>결합을 막 조성으로 설계하거나 시간 순서·방향 과제에 쓰는 것은 본문에서 찾지 못함(SI 미확인)</td>
+<td>한 전해질에 담긴 4×4 PEDOT:PSS 소자 배열(소자 간격 5 mm). 한 소자에 넣은 입력이 배열 전체에 번지는 결합을 <strong>지도로</strong> 보임. 결합의 세기는 전해질 농도에 따라 약 5 %(100 mM) → 약 2 %(1 mM) → 0 %(순수한 물)로 변함. 여러 자리의 입력이 겹친 것을 한 출력에서 읽음</td>
+<td>결합의 거리·시간 의존을 재거나 시간 순서·방향 과제에 쓰는 것은 본문에서 찾지 못함(SI 미확인)</td>
 </tr>
 <tr class="even">
 <td>Gkoupidenis 2016 Sci. Rep. [요약]</td>
@@ -3831,57 +3861,150 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </div>
-<p><strong>이미 된 것</strong>: 전해질을 함께 써서 생기는 이웃 사이의 결합(지도까지, Gkoupidenis 2017), 성장 조건으로 응답 시간을 조절한 소자 그물과 그 결합을 쓴 분류(Cucchi 2021), 접촉 위치 구분, 입력 둘로 소리 방향 인식, 이온 촉각 피부. <strong>이 조사 범위에서 찾지 못한 것</strong>:</p>
+<p><strong>이미 된 것</strong>: 전해질을 함께 써서 생기는 이웃 사이의 결합(지도와 농도에 따른 세기까지, Gkoupidenis 2017), 압력 센서 겔과 기억 겔을 이은 배열(Zhou 2025), 성장 조건으로 응답 시간을 조절한 소자 그물과 그 결합을 쓴 분류(Cucchi 2021), 접촉 위치 구분, 입력 둘로 소리 방향 인식, 이온 촉각 피부. <strong>이 조사 범위에서 찾지 못한 것</strong>:</p>
 <ul>
-<li>이웃에 번지는 영향이 <strong>거리에 따라 어떻게 줄어드는지</strong>를 재고, 그것을 소재로 <strong>설계</strong>한 연구</li>
+<li>이웃에 번지는 영향이 <strong>거리와 시간에 따라 어떻게 줄어드는지</strong>를 재고, 그것을 고체 고분자 막의 구조로 <strong>설계</strong>한 연구</li>
 <li>여러 자리에 차례로 오는 자극의 <strong>방향이나 빠르기</strong>를 이온 소자 배열로 읽은 연구</li>
 <li>수십 채널의 <strong>고밀도 근전도</strong>(HD-sEMG)를 이온 소자에 넣은 연구</li>
 </ul>
 <p>주의할 점도 있습니다. Gkoupidenis의 배열에서 약한 결합은 약 5 %였습니다. <span class="key">결합은 <strong>키울수록 좋은 것이 아닙니다.</strong> 너무 약하면 정보가 되지 못하고, 너무 강하면 자리마다의 신호가 섞여 "어디서"를 잃습니다.</span> 그래서 크기를 <strong>조절</strong>할 수 있는지, 그리고 과제마다 알맞은 크기가 있는지를 봅니다.</p>
 </section>
 <section id="rm-novelty" class="level3">
-<h3 class="anchored" data-anchor-id="rm-novelty">6.4 핵심 노벨티 주장별 가장 가까운 선례</h3>
-<p>노벨티 주장마다 가장 가까운 선례, 확인 수준, 차이, 그 차이를 보이려면 필요한 실험 증거를 한 표에 둡니다.</p>
-<div class="rm-fit">
+<h3 class="anchored" data-anchor-id="rm-novelty">6.4 가장 가까운 다섯 편과 이 제안의 차이</h3>
+<p>문헌의 수를 늘리기보다, 이 제안과 가장 가까운 다섯 편이 <strong>실제로 한 것</strong>을 본문에서 확인해 나란히 둡니다(2026-11-12, 공개 전문. SI는 다섯 편 모두 확인하지 못했습니다). "차이" 칸은 본문에서 찾지 못했다는 뜻이며, SI에 있을 수 있습니다.</p>
+<div class="rm-wide rm-w1300">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>노벨티 주장</th>
-<th>가장 가까운 선례 (확인 수준)</th>
-<th>차이</th>
-<th>필요한 실험 증거</th>
+<th>연구</th>
+<th>실제 만든 것</th>
+<th>실제 조절한 변수</th>
+<th>설명·예측한 범위</th>
+<th>과제·시스템 검증</th>
+<th>이 제안과 겹치는 부분</th>
+<th>아직 확인되지 않은 차이</th>
+<th>차이를 입증할 결정적 실험</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>N1.</strong> 고분자 네트워크 변수(두께·고정전하·가소제)로 τ와 응답 모양을 정하고, <strong>만들지 않은 시료의 τ를 예측해 확인</strong></td>
-<td>Koh 2022 점도→τ→과제 [본문]; Kamsma 2024 길이²→τ [본문]; Zhou 2025 cation–π 단량체→이완 분포 [본문]</td>
-<td>변수가 고분자 네트워크이고, 관계식으로 <strong>새 시료를 예측</strong>해 검증</td>
-<td>한 변수만 다른 시료 ≥ 3수준, 관계식 적합 → 보간 1점·외삽 1점 새 시료의 τ가 예측 구간 안에 드는지, 다른 날 재현</td>
+<td><strong>Kamsma 2024</strong> PNAS</td>
+<td>콜로이드를 채운 원뿔형 미세 통로(물, KCl). 소자를 하나씩 사용</td>
+<td>통로의 길이</td>
+<td>수송 방정식에서 기억 시간이 길이의 제곱에 비례함을 유도. 이론이 전압에 따른 전류와 단기 기억 응답을 <strong>정량적으로 예측</strong>. 길이가 다른 통로가 다른 주파수에 응답</td>
+<td>4-bit 펄스열을 소자에서 재고, 컴퓨터의 한 층 신경망으로 손글씨 숫자 81 %. 소자를 뺀 비교와 전력은 없음</td>
+<td><strong>길이로 τ를 설계하고 모형으로 예측</strong>한다는 생각(H2)</td>
+<td>고정전하가 있는 고체 고분자 접합에서도 같은 꼴이 성립하는가. 여러 소자의 배열과 결합</td>
+<td>두께·전극 간격 계열에서 τ의 지수(1인가 2인가), 전도도로 계산한 τ와 잰 τ의 일치</td>
 </tr>
 <tr class="even">
-<td><strong>N2.</strong> τ를 <strong>설계해서</strong> 배열하고, τ 다양성의 몫을 같은 τ 배열·R–C 배열과 같은 읽기 횟수로 분리</td>
-<td>Kamsma 2024 길이로 τ 설계 [본문]; Cucchi 2021 성장 조건으로 응답 시간 조절 [본문]</td>
-<td>같은 τ/다른 τ를 같은 소자 수·읽기 횟수·readout으로 비교</td>
-<td>네 조건(τ 같음/다름 × 결합 없음/있음) 중 τ 다양성의 주효과, R–C 배열 대조</td>
+<td><strong>Koh 2022</strong> Sci. Rep.</td>
+<td>금 전극 사이의 ionic liquid 소자 1개</td>
+<td>양이온의 알킬 사슬 길이(에틸–옥틸) → 점도</td>
+<td>여러 이완 시간이 각각 점도의 거듭제곱을 따름(경험식). 새 조성의 예측은 없음</td>
+<td>4-bit 펄스열 16가지 구분, 손글씨 숫자 분류. 소자를 뺀 비교가 있고 소자를 쓴 쪽이 낮았음</td>
+<td>입력의 시간과 이완 시간의 관계가 결과를 정한다는 것, 화학으로 τ 조절, 정직한 baseline</td>
+<td>액체가 아닌 고분자 네트워크에서의 조절 변수. 배열</td>
+<td>고분자 변수 계열과 교차 조건의 예측(7.3)</td>
 </tr>
 <tr class="odd">
-<td><strong>N3.</strong> 이웃 사이 결합을 <strong>거리별로 재고 막 구조로 조절</strong>해, 결합의 몫을 방향·순서 과제에서 분리</td>
-<td>Gkoupidenis 2017 결합 지도(간격 5 mm) [본문]; Cucchi 2021 결합을 비선형 변환으로 사용 [본문]; Yang 2026 게이트 거리→τ [요약]</td>
-<td>결합을 간격·두께·고정전하로 조절하고, 과제 기여를 τ 다양성과 따로 봄</td>
-<td>거리 ≥ 3 × 막 조건 ≥ 2의 결합 측정, 막을 자른 대조, 네 조건의 결합 주효과, 결합이 너무 클 때 성능 저하도 보고</td>
+<td><strong>Zhou 2025</strong> Nat. Commun.</td>
+<td>두 층 ionogel(cation–π 단량체 유무). 3×3 화소 배열(화소는 모두 같음). <strong>압력 센서 겔과 기억 겔을 직렬로</strong></td>
+<td>결합 단량체 유무, 자극 시간(50–500 s)</td>
+<td>ITC·EIS·FTIR로 이온과 사슬의 결합을 설명. τ의 정량 예측은 없음. 기억 τ 19–259 s는 자극 시간에 따른 값</td>
+<td>누른 시간(0 / 50 / 200 s)을 화소의 색으로 구분, 글자 저장. 순서·방향 과제, baseline, 전력은 없음</td>
+<td><strong>첫 데모와 가장 가까움</strong>: 압력을 이온 겔 배열이 기억</td>
+<td>화소마다 다른 τ, 0.1–5초의 움직임, 방향·빠르기, 한 번 읽기, 칸 사이의 결합</td>
+<td>네 조건 배열로 방향·빠르기를 판정하고 디지털 시각 기록과 비교(H3, H4)</td>
 </tr>
 <tr class="even">
-<td><strong>N4.</strong> 모든 결과를 소자 없는 baseline·최적화 디지털과 함께, 장치 전체 전력으로 보고</td>
-<td>Koh 2022 소자 없는 baseline(소자가 짐) [본문]; Zhong 2022 시스템 전력 추정 [초록]</td>
-<td>비교기로 깨우는 최적화 디지털(1.5절 B)과 블록별 실측</td>
-<td>같은 보드에서 구성 A–D의 전체 전력과 차이, 같은 정확도·판정 빈도</td>
+<td><strong>Gkoupidenis 2017</strong> Nat. Commun.</td>
+<td>한 전해질(NaCl 수용액)에 담긴 4×4 PEDOT:PSS 소자(간격 5 mm)</td>
+<td>전해질 농도, 공통 게이트 전압</td>
+<td>이웃 결합의 세기를 측정: 100 mM 약 5 %, 1 mM 약 2 %, 순수한 물 0 %. 정량 모형은 없음</td>
+<td>공통 게이트로 전체 동기화, 여러 자리 입력이 겹친 것을 검출. 분류 과제와 baseline은 없음</td>
+<td>전해질을 통한 이웃 결합, 농도로 세기 조절</td>
+<td>결합의 거리·시간 의존, 고체 막, τ와의 관계, 과제 성능에의 기여</td>
+<td>공유막에서 거리별 결합의 크기와 지연을 재서 어림(7.1)과 대조. 네 조건 비교</td>
+</tr>
+<tr class="odd">
+<td><strong>Cucchi 2021</strong> Sci. Adv.</td>
+<td>염 수용액(PBS)에 담긴 PEDOT 섬유 그물(전극 20개, 교류 전해중합으로 성장)</td>
+<td>성장 조건(저항과 응답 시간이 달라짐. 무작위성 포함)</td>
+<td>섬유 사이의 결합이 비선형 변환을 만든다고 설명. 두 섬유 사이의 crosstalk 측정. 응답 시간을 예측해 설계한 것은 아님</td>
+<td>Iris, 주가 예측, 부정맥 4종 80 %(입력을 그대로 쓴 것보다 20 % 개선이라고 보고) → 지연 회로를 더해 88 %. 전력 비교는 없음</td>
+<td>응답 시간이 다른 요소와 전해질 결합을 함께 계산에 사용</td>
+<td>무작위 성장이 아닌 설계된 τ와 결합. 둘의 몫 분리. 자리의 순서를 묻는 과제</td>
+<td>네 조건(τ 같음/다름 × 결합 없음/있음)에서 두 요인의 효과를 따로 봄(H3)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>서지 확인이 필요한 후보.</strong> Yang D. et al., ACS Nano 2026(전해질을 함께 쓰는 OECT 배열, 게이트 거리에 따른 τ)은 원문을 확인하지 못해 위 표에서 뺐습니다. 발표 전에 서지와 내용을 확인합니다 <span class="tag tag-unverified">미확인</span>.</p>
+<p><strong>무엇을 주장하고 무엇을 주장하지 않나.</strong> 주장을 새 지식, 소자 개념, 방법으로 나눕니다. <span class="key">baseline·대조군·예측 검증은 좋은 방법이지만 그것만으로 새 물리나 새 소자 개념이 되지는 않습니다.</span></p>
+<div class="rm-fit">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>구분</th>
+<th>주장</th>
+<th>가장 가까운 선례</th>
+<th>남은 차이</th>
+<th>결정적 실험</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>새 지식 K1</strong></td>
+<td>고정전하가 있는 고체 고분자 접합에서 초 단위 응답을 정하는 과정과 그 조절 변수</td>
+<td>Kamsma 2024(물이 든 통로, 길이²), Koh 2022(점도), Zhou 2025(이온–사슬 결합)</td>
+<td>소재계와 과정이 다름. 같은 꼴이 성립하면 "기존 모형으로 충분하다"가 결과</td>
+<td>두께·간격 계열의 지수, 전극·온도 의존(5.7절), 전도도로 계산한 τ와의 비</td>
+</tr>
+<tr class="even">
+<td><strong>새 지식 K2</strong></td>
+<td>공유막에서 결합의 거리·시간 의존, 그리고 τ와 결합을 따로 정할 수 있는지</td>
+<td>Gkoupidenis 2017(농도로 세기 조절), Cucchi 2021(crosstalk 측정)</td>
+<td>거리·시간 의존, 고체 막, τ와의 관계</td>
+<td>거리 3가지 이상 × 막 조건 2가지 이상의 결합 크기와 지연, 막을 자른 대조, 저항 더미 배열</td>
+</tr>
+<tr class="odd">
+<td><strong>새 지식 K3</strong></td>
+<td>τ 다양성과 결합이 방향·순서 판정에 각각 얼마나 기여하는가(기여하지 않는 경우 포함)</td>
+<td>Cucchi 2021(둘을 함께 사용), Zhou 2025(같은 화소)</td>
+<td>두 요인의 분리</td>
+<td>네 조건 × 읽는 수 4개/2개, R–C 배열 대조, 조건을 바꾼 시험</td>
+</tr>
+<tr class="even">
+<td><strong>소자 개념 C1</strong></td>
+<td>τ와 결합을 설계한 고분자 소자 배열을 <strong>한 번 읽어</strong> 지나간 방향·빠르기를 답하는 장치</td>
+<td>Zhou 2025(누른 시간의 기억), Hou 2024(접촉 위치) [요약]</td>
+<td>화소별 τ 설계, 움직임, 한 번 읽기</td>
+<td>7.1의 장치와 디지털 시각 기록의 비교</td>
+</tr>
+<tr class="odd">
+<td>방법 (노벨티 아님)</td>
+<td>소자 없는 baseline, 최적화 디지털과의 비교, 예측 검증, 장치 전체 전력</td>
+<td>Koh 2022(baseline), Kamsma 2024(이론 예측), Zhong 2022(전력 추정) [초록]</td>
+<td>—</td>
+<td>결과를 믿을 수 있게 하는 조건이며 주장 자체가 아님</td>
 </tr>
 </tbody>
 </table>
@@ -3909,7 +4032,67 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p><strong>목적.</strong> 분명한 필요가 있는 것(τ를 과제에 맞추기)과 이 조사 범위에서 찾지 못한 것(고분자 변수로 예측 가능한 τ 설계, 결합의 몫 분리)을 묶습니다.</p>
+<p><strong>목적.</strong> 분명한 필요가 있는 것(τ를 과제에 맞추기)과 이 조사 범위에서 찾지 못한 것(고체 고분자 막에서 τ와 결합을 각각 설계 변수로 삼고 그 몫을 가려내는 것)을 묶습니다.</p>
+<p><span id="rm-build"></span><strong>만들 장치.</strong> 요약의 그림 0을 항목별로 적습니다. "지금 만들 것"은 가장 작은 구성이고, 오른쪽 칸은 아직 정하지 못했거나 가정한 것입니다.</p>
+<div class="rm-fit">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>지금 만들 것 (최소 구현)</th>
+<th>가정·미확인</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>센서</strong></td>
+<td>상용 압력 센서(FSR: 누르면 저항이 줄어드는 필름) 4개를 한 줄로. <strong>센서와 기억 소자는 별개 부품</strong></td>
+<td>부품과 간격은 미정. 이온 겔 센서와 기억 소자를 한 막에 합치는 것은 장기 목표(센서 겔과 기억 겔을 이은 선례는 Zhou 2025)</td>
+</tr>
+<tr class="even">
+<td><strong>입력 전달</strong></td>
+<td>패드마다 분압 저항과 버퍼 증폭기. 눌리면 소자에 0–1 V의 전압이 걸리고, 떼면 0 V로 유지되어 소자가 이완. <strong>먼저 손가락 대신 보드가 만든 전압 펄스</strong>로 같은 순서를 넣어 센서의 변동을 빼고 봄</td>
+<td>전압 범위는 예시. 떼었을 때 0 V로 둘지 회로를 끊을지에 따라 τ가 달라지므로 한 가지로 고정하고 기록</td>
+</tr>
+<tr class="odd">
+<td><strong>소자</strong></td>
+<td>두 전극 사이에 이온성 고분자 막이 있는 두 단자 소자. 출발 후보는 poly(ionic liquid) 두 층 접합(5.8절). 용매가 없어 두께를 조성과 따로 바꾸기 쉬움</td>
+<td>초 단위의 τ가 나오는지, 내가 만들 수 있는지 미확인. 위아래 전극(수직)으로 할지 같은 면의 전극 쌍(평면)으로 할지 미정. 연구실에 기존 소자가 있으면 그것으로 먼저</td>
+</tr>
+<tr class="even">
+<td><strong>배열 두 가지</strong></td>
+<td><strong>독립</strong>: 소자마다 막이 떨어져 있음. <strong>공유</strong>: 막 한 장에 소자 4개의 전극을 둠. 같은 전극 기판과 배선을 쓰고 막만 자르거나 이어, 배선의 차이를 없앰</td>
+<td>막을 자르면 가장자리가 생겨 개별 τ와 저항도 변할 수 있음. 배열 상태에서 다시 잼(7.3절)</td>
+</tr>
+<tr class="odd">
+<td><strong>서로 다른 τ</strong></td>
+<td>1순위는 기하(전극 간격, 막 두께), 2순위는 조성. 독립 배열은 따로 만든 소자를 올리면 됨. 공유 배열은 <strong>한 막에서 전극 간격을 달리하는</strong> 방법이 후보</td>
+<td>어느 길이가 τ를 정하는지를 H2에서 먼저 확인해야 함. 한 기판에 조성이 다른 막을 나란히 만드는 것은 어렵다고 보고 뒤로 둠</td>
+</tr>
+<tr class="even">
+<td><strong>읽기</strong></td>
+<td>접촉이 끝나고 0.3초 동안 입력이 없으면(비교기 + 타이머) 소자마다 작은 읽기 펄스를 한 번 걸어 전류를 잼(TIA → ADC). 판정 1회에 숫자 4개 또는 2개</td>
+<td>읽기 펄스가 state를 바꾸는 정도는 재서 보고(7.3절)</td>
+</tr>
+<tr class="odd">
+<td><strong>출력</strong></td>
+<td>읽은 값의 가중합으로 방향 2가지 × 빠르기 3가지 = 6가지 가운데 하나</td>
+<td>빠르기의 구간은 예시(네 패드를 0.4 / 1.2 / 3.6초에 지나감)</td>
+</tr>
+<tr class="even">
+<td><strong>주변 회로</strong></td>
+<td>분압·버퍼 4개, 구동과 읽기를 바꾸는 스위치, TIA 1개와 선택 스위치, 비교기 + 타이머, MCU 보드, 전원. 초기화는 0 V로 두고 τ의 몇 배를 기다리는 것</td>
+<td>모두 설계안이며 만들어 보지 않음. 이 회로들의 전력이 H4의 비교에 들어감</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span class="key">지금은 상용 센서, 따로 만든 소자 4개, 개발 보드로 시작합니다.</span> 센서와 기억을 한 막에 합치는 것, 소자 수를 늘리는 것, 피부 위에 올리는 것은 앞 단계의 결과를 본 뒤의 일입니다. 처음부터 모든 것을 직접 합성해 통합하지 않습니다.</p>
 <figure class="rv-fig figure">
 <!-- RM:array -->
 <svg class="rv-svg" viewbox="0 0 720 374" role="img" aria-label="연구 방향 개념도: 압력 패드 배열 위를 지나가는 접촉의 여러 자리 신호가, 칸마다 응답 시간이 다른 이온 소자 배열에 들어가고, 판단할 때 각 소자의 전류를 한 번씩 읽어 가중합으로 방향과 빠르기를 맞힌다. 후보 응용은 다채널 근전도."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">연구 방향: 응답 시간이 다른 이온 소자를 배열해 '어디서, 어떤 순서로'를 읽는다</text><text x="16.0" y="56.0" font-size="14" fill="#1d1d1f" font-weight="800">① 입력: 여러 자리의 신호</text><rect x="34" y="76" width="178" height="118" rx="14" fill="#f5f5f7" stroke="#d9dde3" stroke-width="1.2"></rect><rect x="50" y="128" width="28" height="28" rx="6" fill="#c2682b" opacity="0.43" stroke="#5f6368" stroke-width="1"></rect><rect x="90" y="128" width="28" height="28" rx="6" fill="#c2682b" opacity="0.58" stroke="#5f6368" stroke-width="1"></rect><rect x="130" y="128" width="28" height="28" rx="6" fill="#c2682b" opacity="0.73" stroke="#5f6368" stroke-width="1"></rect><rect x="170" y="128" width="28" height="28" rx="6" fill="#c2682b" opacity="0.85" stroke="#5f6368" stroke-width="1"></rect><line x1="54.0" y1="106.0" x2="185.0" y2="106.0" stroke="#c2682b" stroke-width="2" stroke-linecap="round"></line><path d="M185.0,109.8 L192.0,106.0 L185.0,102.2 Z" fill="#c2682b"></path><text x="123.0" y="98.0" font-size="11.5" fill="#c2682b" font-weight="700" text-anchor="middle">손가락이 지나감</text><text x="34.0" y="216.0" font-size="12.5" fill="#5f6368">압력 패드 배열 (첫 검증 과제)</text><text x="34.0" y="233.0" font-size="12.5" fill="#c2682b" font-weight="700">방향·빠르기가 정보 · 후보: 다채널 근전도</text><line x1="226.0" y1="136.0" x2="251.0" y2="136.0" stroke="#5f6368" stroke-width="1.6" stroke-linecap="round"></line><path d="M251.0,139.8 L258.0,136.0 L251.0,132.2 Z" fill="#5f6368"></path><text x="262.0" y="56.0" font-size="14" fill="#1d1d1f" font-weight="800">② 이온 소자 배열 (reservoir)</text><rect x="270.0" y="78.0" width="196.0" height="116.0" rx="10" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.3"></rect><rect x="284" y="100" width="28" height="24" rx="5" fill="#fff" stroke="#0e8a83" stroke-width="1.2"></rect><text x="298.0" y="116.0" font-size="10.5" fill="#0e8a83" font-weight="700" text-anchor="middle">0.1 s</text><line x1="313.0" y1="112.0" x2="329.0" y2="112.0" stroke="#7a3f97" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 3"></line><rect x="330" y="100" width="28" height="24" rx="5" fill="#fff" stroke="#0e8a83" stroke-width="1.7"></rect><text x="344.0" y="116.0" font-size="10.5" fill="#0e8a83" font-weight="700" text-anchor="middle">0.3 s</text><line x1="359.0" y1="112.0" x2="375.0" y2="112.0" stroke="#7a3f97" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 3"></line><rect x="376" y="100" width="28" height="24" rx="5" fill="#fff" stroke="#0e8a83" stroke-width="2.2"></rect><text x="390.0" y="116.0" font-size="10.5" fill="#0e8a83" font-weight="700" text-anchor="middle">1 s</text><line x1="405.0" y1="112.0" x2="421.0" y2="112.0" stroke="#7a3f97" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 3"></line><rect x="422" y="100" width="28" height="24" rx="5" fill="#fff" stroke="#0e8a83" stroke-width="2.7"></rect><text x="436.0" y="116.0" font-size="10.5" fill="#0e8a83" font-weight="700" text-anchor="middle">3 s</text><rect x="284" y="148" width="28" height="24" rx="5" fill="#fff" stroke="#0e8a83" stroke-width="1.2"></rect><text x="298.0" y="164.0" font-size="10.5" fill="#0e8a83" font-weight="700" text-anchor="middle">0.1 s</text><line x1="313.0" y1="160.0" x2="329.0" y2="160.0" stroke="#7a3f97" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 3"></line><rect x="330" y="148" width="28" height="24" rx="5" fill="#fff" stroke="#0e8a83" stroke-width="1.7"></rect><text x="344.0" y="164.0" font-size="10.5" fill="#0e8a83" font-weight="700" text-anchor="middle">0.3 s</text><line x1="359.0" y1="160.0" x2="375.0" y2="160.0" stroke="#7a3f97" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 3"></line><rect x="376" y="148" width="28" height="24" rx="5" fill="#fff" stroke="#0e8a83" stroke-width="2.2"></rect><text x="390.0" y="164.0" font-size="10.5" fill="#0e8a83" font-weight="700" text-anchor="middle">1 s</text><line x1="405.0" y1="160.0" x2="421.0" y2="160.0" stroke="#7a3f97" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 3"></line><rect x="422" y="148" width="28" height="24" rx="5" fill="#fff" stroke="#0e8a83" stroke-width="2.7"></rect><text x="436.0" y="164.0" font-size="10.5" fill="#0e8a83" font-weight="700" text-anchor="middle">3 s</text><text x="270.0" y="216.0" font-size="12.5" fill="#0e8a83" font-weight="700">칸마다 응답 시간 τ가 다르다 (두께·조성)</text><text x="270.0" y="233.0" font-size="12.5" fill="#7a3f97">보라 점선: 이온 막을 함께 쓰면 생기는 이웃 사이의 영향</text><line x1="480.0" y1="136.0" x2="505.0" y2="136.0" stroke="#5f6368" stroke-width="1.6" stroke-linecap="round"></line><path d="M505.0,139.8 L512.0,136.0 L505.0,132.2 Z" fill="#5f6368"></path><text x="516.0" y="56.0" font-size="14" fill="#1d1d1f" font-weight="800">③ 읽기 → readout → 답</text><rect x="524" y="103.2" width="13" height="44.8" rx="2" fill="#2b59c3"></rect><rect x="544" y="128.4" width="13" height="19.6" rx="2" fill="#2b59c3"></rect><rect x="564" y="114.4" width="13" height="33.6" rx="2" fill="#2b59c3"></rect><rect x="584" y="136.8" width="13" height="11.2" rx="2" fill="#2b59c3"></rect><rect x="604" y="120.0" width="13" height="28.0" rx="2" fill="#2b59c3"></rect><rect x="624" y="97.6" width="13" height="50.4" rx="2" fill="#2b59c3"></rect><rect x="644" y="139.6" width="13" height="8.4" rx="2" fill="#2b59c3"></rect><rect x="664" y="122.8" width="13" height="25.2" rx="2" fill="#2b59c3"></rect><line x1="520.0" y1="148.0" x2="690.0" y2="148.0" stroke="#5f6368" stroke-width="1.1" stroke-linecap="round"></line><text x="520.0" y="168.0" font-size="12.5" fill="#5f6368">판단할 때 한 번씩 읽은 전류 8개</text><text x="520.0" y="190.0" font-size="12.5" fill="#1d1d1f" font-weight="800">가중합 → "어느 쪽으로, 얼마나 빨리"</text><rect x="16.0" y="262.0" width="688.0" height="76.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="286.0" font-size="13.0" fill="#1d1d1f" font-weight="800">소재 연구자가 답할 질문</text><text x="30.0" y="307.0" font-size="12.5" fill="#2b2f36">(1) 소재 변수로 각 칸의 τ를 예측해 맞출 수 있는가   (2) 이웃 사이의 결합을 막 구조로 조절할 수 있는가 (클수록 좋은 것은 아님)</text><text x="30.0" y="326.0" font-size="12.5" fill="#2b2f36">(3) 네 조건(τ 같음/다름 × 결합 없음/있음)에서 τ 다양성과 결합의 몫이 각각 드러나는가 — 같은 소자 수·읽기 횟수·readout</text><text x="16.0" y="362.0" font-size="12.5" fill="#5f6368">개념도 · 배열 크기와 τ 값은 예시 · 이웃 사이의 영향이 도움이 되는지는 확인할 가설</text></svg>
@@ -3918,10 +4101,16 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 <p>세 가지 요소로 이루어집니다.</p>
 <ol type="1">
-<li><strong>소자 하나의 τ를 소재로 정한다.</strong> 사건 사이의 시간은 사용자가 정하므로 소자의 τ가 거기에 맞아야 합니다(5절). 필요가 분명합니다. <span class="key">새로운 점은 <strong>고분자 네트워크 변수</strong>(두께, 가교 밀도, 고정전하 밀도, 가소제)로 τ와 응답 모양을 정하는 관계를 세우고, 그 관계로 <strong>만들지 않은 시료를 예측해 확인</strong>하는 것, 그리고 이를 과제 성능과 잇는 것입니다.</span> 이온의 종류나 통로 길이로는 선례가 있습니다(6.4의 N1).</li>
-<li><strong>τ가 서로 다른 소자를 배열한다.</strong> 4절의 모의실험에서 방금의 정보와 아까의 정보를 함께 알려면 τ가 다른 소자 여러 개가 도움이 되었습니다. 한 소자에 여러 τ를 넣는 것보다 만들기도 분석하기도 분명합니다. 소자마다 두께나 조성만 달리하면 됩니다.</li>
+<li><strong>소자 하나의 τ를 소재로 정한다.</strong> 사건 사이의 시간은 사용자가 정하므로 소자의 τ가 거기에 맞아야 합니다(5절). 필요가 분명합니다. <span class="key">확인하려는 것은 고정전하가 있는 고체 고분자 접합에서 <strong>어느 과정이 느린 응답을 정하고 어느 변수가 그 손잡이인가</strong>, 그리고 따로 잰 값으로 한 예측이 어디까지 맞는가입니다.</span> 길이로 τ를 설계하고 이론으로 예측한 선례는 물이 든 미세 통로에 있습니다(6.4의 K1).</li>
+<li><strong>τ가 서로 다른 소자를 배열한다.</strong> 4절의 모의실험에서 방금의 정보와 아까의 정보를 함께 알려면 τ가 다른 소자 여러 개가 도움이 되었습니다. 한 소자에 여러 τ를 넣는 것보다 분석하기가 분명합니다. 다만 만드는 일이 간단하지는 않습니다. 따로 만든 소자를 한 기판에 올리는 독립 배열은 쉽지만, 막 한 장을 함께 쓰면서 소자마다 τ를 다르게 하려면 전극 간격이나 막 두께를 자리마다 달리해야 합니다(위의 표).</li>
 <li><strong>배열로 공간 정보를 읽는다.</strong> 소자를 여러 자리에 두면 "어느 자리에서 먼저 시작해 어느 쪽으로 번졌는가"를 알 수 있습니다. 뇌에서 어느 영역이 언제 활동하는지가 중요한 것과 같은 이치입니다. 여기에 소재 연구자만 할 수 있는 질문이 하나 더 있습니다. <span class="key">소자들이 <strong>이온 막을 함께 쓰면</strong> 한 소자의 변화가 이웃으로 번집니다. 이 번짐의 크기와 닿는 거리를 <strong>막의 조성과 구조로 조절</strong>할 수 있는가.</span> 조절할 수 있다면, 이웃한 자리에 차례로 온 자극이 따로따로 온 자극과 다른 값을 남기게 되어 방향·순서 정보를 소자가 직접 담을 수 있습니다. 이것이 도움이 되는지는 확인할 가설입니다.</li>
 </ol>
+<p><strong>결합은 무엇이 정하나(어림).</strong> 공유막에서 한 소자의 변화가 이웃으로 번지는 길은 둘로 생각할 수 있습니다 <span class="tag tag-interp">해석</span>.</p>
+<ul>
+<li><strong>이온이 직접 확산해 가는 길.</strong> 시간 t 동안 가는 거리는 √(D × t)쯤입니다. D = 10<sup>−11</sup> m²/s, t = 1초이면 약 3 µm입니다. mm 간격의 소자 사이에는 닿지 않습니다.</li>
+<li><strong>막의 전위가 퍼지는 길.</strong> 막은 저항이고 전극 표면은 용량이므로, 저항과 용량이 줄지어 이어진 사다리처럼 전압의 변화가 옆으로 퍼집니다. 퍼지는 거리는 √(σ × h × t ÷ c)쯤입니다(σ는 전도도, h는 막 두께, c는 전극의 단위 면적당 용량). σ = 10<sup>−3</sup> S/m, h = 10 µm, c = 0.1 F/m²이면 1초에 약 0.3 mm입니다.</li>
+</ul>
+<p><span class="key">그래서 초 단위의 결합을 쓰려면 소자 간격이 <strong>수백 µm 이하</strong>이거나, 막이 두껍고 전도도가 높아야 합니다.</span> 이 어림이 맞다면 결합의 세기는 주로 간격과 두께 같은 <strong>기하</strong>가 정하고, 조성(전도도)은 τ와 결합을 함께 빠르게 하거나 느리게 합니다. "조성으로 결합만 따로 조절"하기는 어려울 수 있으며, 소자 사이에 전도도가 낮은 띠를 두는 것 같은 <strong>구조</strong>가 조절 손잡이가 됩니다. 이 식은 전극이 막 아래를 고르게 덮은 단순한 경우의 어림이고 값은 예시입니다. 거리별 결합을 재서 이 어림과 견주는 것이 목표 2-b의 첫 측정입니다.</p>
 <p><strong>무엇이 새로운가(novelty).</strong></p>
 <table class="caption-top table">
 <colgroup>
@@ -3933,27 +4122,28 @@ ul.task-list li input[type="checkbox"] {
 <tr class="header">
 <th></th>
 <th>이미 있는 것</th>
-<th>이 연구가 더하는 것</th>
+<th>이 연구가 더하려는 것</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>τ 조절</td>
-<td>이온의 종류, 통로 길이, 습도 등으로 τ를 바꿈</td>
-<td>고분자 네트워크 변수로 τ·응답 모양의 관계식 + <strong>새 시료 예측 검증</strong> + 과제 성능 + baseline</td>
+<td>길이로 τ를 설계하고 이론으로 예측(물이 든 통로, Kamsma 2024), 이온의 점도(Koh 2022)</td>
+<td>고정전하가 있는 고체 고분자 접합에서 느린 응답을 정하는 과정과 조절 변수, 따로 잰 값으로 한 예측이 어디까지 맞는지</td>
 </tr>
 <tr class="even">
 <td>여러 소자</td>
-<td>τ가 다른 소자를 나란히 둔 reservoir, 성장 조건으로 응답 시간을 조절한 소자 그물(Cucchi 2021)</td>
-<td>τ를 <strong>설계해서</strong> 배열하고, τ 다양성의 몫을 같은 τ 배열·R–C 배열과 같은 읽기 횟수로 분리</td>
+<td>성장 조건에 따라 응답 시간이 다른 소자 그물(Cucchi 2021), 같은 화소의 겔 배열(Zhou 2025)</td>
+<td>τ를 <strong>설계해서</strong> 배열하고, τ 다양성의 몫을 같은 τ 배열·R–C 배열과 같은 읽기 횟수로 가려냄</td>
 </tr>
 <tr class="odd">
 <td>공간 정보</td>
-<td>접촉 위치 구분, 결합의 지도(Gkoupidenis 2017), 결합을 비선형 변환으로 사용(Cucchi 2021)</td>
-<td>결합을 거리별로 <strong>재고 막 구조로 조절</strong>, 그 몫을 τ 다양성과 따로 방향·순서 과제에서 확인</td>
+<td>결합의 지도와 농도에 따른 세기(Gkoupidenis 2017), 결합을 계산에 사용(Cucchi 2021), 누른 시간의 기억(Zhou 2025)</td>
+<td>고체 막에서 결합의 거리·시간 의존을 재고, 그 몫을 방향·빠르기 과제에서 τ 다양성과 따로 확인</td>
 </tr>
 </tbody>
 </table>
+<p>baseline, 대조군, 예측 검증은 위 주장을 믿을 수 있게 하는 방법이며 노벨티로 내세우지 않습니다(6.4절).</p>
 <p><strong>어떤 과제(task)로 보일 것인가.</strong> 과제는 이온 소자의 시간 범위(0.1–수 초)와 맞고, 공간과 시간 정보가 모두 필요하며, 공개 데이터나 간단한 장치로 시험할 수 있어야 합니다. 아래 ①이 <strong>첫 검증 과제</strong>이고, ②–④는 <strong>후속 응용 후보</strong>입니다(요약의 구분 표).</p>
 <div class="rm-fit">
 <table class="caption-top table">
@@ -3976,7 +4166,7 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><strong>① 움직이는 접촉의 방향과 빠르기</strong></td>
-<td>손가락이 압력 센서 배열 위를 어느 쪽으로, 얼마나 빨리 지나갔나. 물건이 미끄러지기 시작했나</td>
+<td>손가락이 압력 센서 배열 위를 어느 쪽으로, 얼마나 빨리 지나갔나</td>
 <td>접촉이 한 칸에서 다음 칸으로 넘어가는 시간이 0.05–1초로 이온 소자의 τ와 맞는다. 압력 센서와 이온 소자를 같은 부드러운 소재로 만들 수 있다. 데이터를 직접 만들 수 있다</td>
 <td>이온 촉각 피부는 경쟁이 많다. "이웃 사이의 영향이 계산에 쓰인다"를 baseline과 함께 보여야 차별된다</td>
 <td><strong>첫 번째 시험 과제</strong></td>
@@ -4006,7 +4196,16 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 <p><span class="key">①을 첫 과제로 두는 이유는 <strong>시간 범위가 이온 소자와 가장 잘 맞고, 소재부터 장치까지 내가 직접 만들 수 있기 때문</strong>입니다.</span> ②는 공개 데이터로 먼저 계산해 보고 뒤이어 갑니다. 어느 과제든 디지털로는 "이웃 신호 사이의 시간 차 계산"으로 풀 수 있으므로, 그것을 baseline으로 함께 보고합니다.</p>
-<p><strong>가설.</strong> 요약의 H1–H4와 같습니다. <span class="key">(H1) τ를 사건 간격에 맞추면 같은 조건의 R–C 하나보다 잘 맞히는 조건이 있다(목표 1). (H2) τ와 응답 모양은 고분자 변수와 식으로 이어지고, 만들지 않은 시료의 τ를 예측할 수 있다(목표 2-a). (H3) τ 다양성과 결합의 몫을 네 조건으로 가를 수 있고, 적어도 하나가 조건이 바뀌어도 유지된다(목표 2-b). (H4) 같은 정확도에서 소자 구성이 최적화 디지털보다 전체 에너지나 부품을 줄이는 회로 조건이 있다(목표 3).</span> <span class="tag tag-hypo">가설</span></p>
+<p><strong>첫 데모의 뜻.</strong> 방향 판별은 패드가 눌린 시각만 적어도 풀립니다. 그런데도 이 과제를 첫 검증에 쓰는 이유는 셋입니다. ① 정답을 내가 정할 수 있고, 같은 입력을 전압 펄스로 몇 번이고 되풀이할 수 있습니다. ② 사건 사이의 시간(0.05–1초)이 이온 소자의 τ 범위와 맞습니다. ③ 자리와 시간이 함께 들어 있어 τ 다양성과 결합의 몫을 한 과제에서 가를 수 있습니다. <span class="key">성공했을 때 말할 수 있는 것은 "이 배열의 state가 지나간 순서와 빠르기를 읽기 몇 번으로 꺼낼 만큼 담고 있다, 그리고 τ 다양성과 결합의 몫은 이만큼이다"까지입니다.</span> 디지털보다 낫다거나 실제 촉각 응용에 쓸 수 있다는 주장은 이 데모만으로는 할 수 없습니다.</p>
+<p>가장 먼저 보일 장면은 아래 그림입니다. 끝 모습은 같고 지나온 길만 다른 두 입력을, 지금 값만 보는 장치는 구분하지 못하고 소자 배열은 구분합니다.</p>
+<figure class="rv-fig figure">
+<!-- RM:pathdemo -->
+<svg class="rv-svg" viewbox="0 0 720 382" role="img" aria-label="끝 모습은 같고 지나온 길만 다른 두 입력. A에서 와서 B에 멈춘 경우와 C에서 와서 B에 멈춘 경우, 지금 순간의 압력 분포는 둘 다 B만 눌린 모습으로 같지만, 소자 세 개를 읽으면 앞의 경우는 A에 0.61이, 뒤의 경우는 C에 0.61이 남아 구분된다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">끝 모습은 같다, 지나온 길만 다르다: 과거가 답을 가르는 가장 작은 예</text><text x="16.0" y="52.0" font-size="12.5" fill="#5f6368" font-weight="700">입력</text><text x="268.0" y="52.0" font-size="12.5" fill="#5f6368" font-weight="700">지금 이 순간의 압력</text><text x="486.0" y="52.0" font-size="12.5" fill="#5f6368" font-weight="700">소자 세 개를 한 번 읽은 값</text><text x="16.0" y="76.0" font-size="13.0" fill="#1d1d1f" font-weight="800">A에서 와서 B에 멈춤</text><rect x="20" y="92" width="40" height="34" rx="7" fill="#fff" opacity="1" stroke="#5f6368" stroke-width="1.2"></rect><text x="40.0" y="114.0" font-size="12.5" fill="#5f6368" font-weight="800" text-anchor="middle">A</text><rect x="84" y="92" width="40" height="34" rx="7" fill="#c2682b" opacity="0.85" stroke="#5f6368" stroke-width="1.2"></rect><text x="104.0" y="114.0" font-size="12.5" fill="#fff" font-weight="800" text-anchor="middle">B</text><rect x="148" y="92" width="40" height="34" rx="7" fill="#fff" opacity="1" stroke="#5f6368" stroke-width="1.2"></rect><text x="168.0" y="114.0" font-size="12.5" fill="#5f6368" font-weight="800" text-anchor="middle">C</text><line x1="40.0" y1="140.0" x2="87.0" y2="140.0" stroke="#c2682b" stroke-width="2" stroke-linecap="round"></line><path d="M87.0,143.8 L94.0,140.0 L87.0,136.2 Z" fill="#c2682b"></path><text x="104.0" y="158.0" font-size="11.5" fill="#c2682b" font-weight="700" text-anchor="middle">0.5초 전에 옆 칸을 지나옴</text><line x1="214.0" y1="110.0" x2="244.0" y2="110.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M244.0,113.3 L250.0,110.0 L244.0,106.7 Z" fill="#5f6368"></path><rect x="268" y="131" width="30" height="3" rx="3" fill="#5f6368"></rect><text x="283.0" y="152.0" font-size="11.5" fill="#5f6368" text-anchor="middle">A</text><rect x="314" y="90" width="30" height="44" rx="3" fill="#5f6368"></rect><text x="329.0" y="152.0" font-size="11.5" fill="#5f6368" text-anchor="middle">B</text><rect x="360" y="131" width="30" height="3" rx="3" fill="#5f6368"></rect><text x="375.0" y="152.0" font-size="11.5" fill="#5f6368" text-anchor="middle">C</text><text x="329.0" y="82.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">(0, 1, 0)</text><line x1="410.0" y1="110.0" x2="466.0" y2="110.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M466.0,113.3 L472.0,110.0 L466.0,106.7 Z" fill="#5f6368"></path><rect x="486" y="107.3" width="30" height="26.7" rx="3" fill="#0e8a83"></rect><text x="501.0" y="102.3" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.61</text><text x="501.0" y="152.0" font-size="11.5" fill="#5f6368" text-anchor="middle">A</text><rect x="532" y="90.0" width="30" height="44.0" rx="3" fill="#0e8a83"></rect><text x="547.0" y="85.0" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">1.00</text><text x="547.0" y="152.0" font-size="11.5" fill="#5f6368" text-anchor="middle">B</text><rect x="578" y="131.0" width="30" height="3.0" rx="3" fill="#0e8a83"></rect><text x="593.0" y="126.0" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.00</text><text x="593.0" y="152.0" font-size="11.5" fill="#5f6368" text-anchor="middle">C</text><text x="630.0" y="108.0" font-size="12.5" fill="#0e8a83" font-weight="800">A가 남음</text><text x="630.0" y="126.0" font-size="12.5" fill="#0e8a83" font-weight="800">→ A 쪽</text><text x="16.0" y="188.0" font-size="13.0" fill="#1d1d1f" font-weight="800">C에서 와서 B에 멈춤</text><rect x="20" y="204" width="40" height="34" rx="7" fill="#fff" opacity="1" stroke="#5f6368" stroke-width="1.2"></rect><text x="40.0" y="226.0" font-size="12.5" fill="#5f6368" font-weight="800" text-anchor="middle">A</text><rect x="84" y="204" width="40" height="34" rx="7" fill="#c2682b" opacity="0.85" stroke="#5f6368" stroke-width="1.2"></rect><text x="104.0" y="226.0" font-size="12.5" fill="#fff" font-weight="800" text-anchor="middle">B</text><rect x="148" y="204" width="40" height="34" rx="7" fill="#fff" opacity="1" stroke="#5f6368" stroke-width="1.2"></rect><text x="168.0" y="226.0" font-size="12.5" fill="#5f6368" font-weight="800" text-anchor="middle">C</text><line x1="168.0" y1="252.0" x2="121.0" y2="252.0" stroke="#c2682b" stroke-width="2" stroke-linecap="round"></line><path d="M121.0,248.2 L114.0,252.0 L121.0,255.8 Z" fill="#c2682b"></path><text x="104.0" y="270.0" font-size="11.5" fill="#c2682b" font-weight="700" text-anchor="middle">0.5초 전에 옆 칸을 지나옴</text><line x1="214.0" y1="222.0" x2="244.0" y2="222.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M244.0,225.3 L250.0,222.0 L244.0,218.7 Z" fill="#5f6368"></path><rect x="268" y="243" width="30" height="3" rx="3" fill="#5f6368"></rect><text x="283.0" y="264.0" font-size="11.5" fill="#5f6368" text-anchor="middle">A</text><rect x="314" y="202" width="30" height="44" rx="3" fill="#5f6368"></rect><text x="329.0" y="264.0" font-size="11.5" fill="#5f6368" text-anchor="middle">B</text><rect x="360" y="243" width="30" height="3" rx="3" fill="#5f6368"></rect><text x="375.0" y="264.0" font-size="11.5" fill="#5f6368" text-anchor="middle">C</text><text x="329.0" y="194.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">(0, 1, 0)</text><line x1="410.0" y1="222.0" x2="466.0" y2="222.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M466.0,225.3 L472.0,222.0 L466.0,218.7 Z" fill="#5f6368"></path><rect x="486" y="243.0" width="30" height="3.0" rx="3" fill="#0e8a83"></rect><text x="501.0" y="238.0" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.00</text><text x="501.0" y="264.0" font-size="11.5" fill="#5f6368" text-anchor="middle">A</text><rect x="532" y="202.0" width="30" height="44.0" rx="3" fill="#0e8a83"></rect><text x="547.0" y="197.0" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">1.00</text><text x="547.0" y="264.0" font-size="11.5" fill="#5f6368" text-anchor="middle">B</text><rect x="578" y="219.3" width="30" height="26.7" rx="3" fill="#0e8a83"></rect><text x="593.0" y="214.3" font-size="11" fill="#1d1d1f" font-weight="700" text-anchor="middle">0.61</text><text x="593.0" y="264.0" font-size="11.5" fill="#5f6368" text-anchor="middle">C</text><text x="630.0" y="220.0" font-size="12.5" fill="#0e8a83" font-weight="800">C가 남음</text><text x="630.0" y="238.0" font-size="12.5" fill="#0e8a83" font-weight="800">→ C 쪽</text><rect x="16.0" y="286.0" width="688.0" height="62.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="310.0" font-size="12.5" fill="#1d1d1f" font-weight="700">가운데 열은 두 줄이 똑같다. 지금 값만 보는 장치는 두 입력을 구분할 수 없고, 소자 값은 다르다.</text><text x="30.0" y="332.0" font-size="12.5" fill="#2b2f36">디지털도 된다(패드가 눌린 시각을 적어 두면 됨). 그래서 비교 기준은 '되는가'가 아니라 읽기 횟수와 전력이다.</text><text x="16.0" y="370.0" font-size="12.5" fill="#5f6368">모형 계산 · τ = 1 s인 소자가 패드마다 하나 · 옆 칸에서 손을 뗀 지 0.5 s 뒤에 읽음 · 값 = e^(−0.5) ≈ 0.61</text></svg>
+<!-- /RM:pathdemo -->
+<figcaption><b>그림 36-1. 끝 모습은 같고 지나온 길만 다른 두 입력.</b> A에서 와서 B에 멈춘 경우와 C에서 와서 B에 멈춘 경우, 지금 이 순간의 압력은 둘 다 B만 눌린 모습이다. 소자 세 개를 한 번 읽으면 앞의 경우는 A에, 뒤의 경우는 C에 값이 남아 있어 구분된다. 디지털도 눌린 시각을 적어 두면 풀 수 있으므로, 비교 기준은 읽기 횟수와 전력이다. 모형 계산.</figcaption>
+</figure>
+<p><strong>미끄러짐 감지는 주장하지 않습니다.</strong> 물건이 미끄러지기 시작하는 순간을 잡으려면 정상적인 누름, 위치만 바뀐 접촉, 실제 미끄러짐을 가르는 정답(예: 이동 스테이지의 위치 기록이나 영상)이 있어야 하고, 오경보·놓침·검출 지연으로 평가해야 합니다. 그 준비가 없으므로 후속 후보로만 둡니다.</p>
+<p><strong>가설.</strong> 요약의 H1–H4와 같습니다. <span class="key">(H1) τ를 사건 간격에 맞추면 같은 조건의 R–C 하나보다 잘 맞히는 조건이 있다(목표 1). (H2) τ와 응답 모양은 고분자 변수·전극 간격과 식으로 이어지고, 따로 잰 값과 쓰지 않은 조건에서 τ를 예측할 수 있다(목표 2-a). (H3) τ 다양성과 결합의 몫을 네 조건으로 가를 수 있고, 적어도 하나가 조건이 바뀌어도 유지된다(목표 2-b). (H4) 같은 정확도에서 소자 구성이 최적화 디지털보다 전체 에너지나 부품을 줄이는 회로 조건이 있다(목표 3).</span> <span class="tag tag-hypo">가설</span></p>
 <p><strong>무엇을 성공으로 볼 것인가.</strong> <strong>소재 연구의 성공</strong>(조성·구조로 τ와 이웃 사이의 영향을 조절하고 그 원인을 확인)과 <strong>장치의 성공</strong>(같은 과제에서 디지털 구현보다 에너지나 회로가 줄어듦)을 구분합니다. <span class="key">앞의 것이 이루어져도 뒤의 것이 따라오지 않을 수 있고, 지표가 좋아졌다고 장치의 이득이 증명되는 것도 아닙니다.</span> 두 결과는 따로 보고합니다.</p>
 <p><strong>비교는 두 층으로 합니다.</strong> <strong>통제 비교</strong>는 소재의 역할만 가려내기 위해 입력, 읽는 값의 수, readout을 모두 같게 두고 state를 만드는 부분만 바꿉니다. <strong>시스템 비교</strong>는 실제로 쓸 만한가를 보기 위해, 디지털 쪽은 단순한 규칙·요약값 갱신·소형 신경망 가운데 그 과제에서 가장 좋은 것을 씁니다.</p>
 </section>
@@ -4033,7 +4232,16 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><strong>바꾸는 것.</strong> 두께, 고정전하 밀도, 가소제의 양(5절). 여력이 되면 가교 밀도. 기본 조성은 같고 한 변수만 달리한 시료를 만듭니다.</li>
 <li><strong>재는 것.</strong> 펄스 뒤 감쇠와 EIS·DRT로 τ, 그리고 memory curve와 과제 정확도.</li>
-<li><strong>지지하는 결과(H2).</strong> 변수와 τ 사이에 식으로 적을 수 있는 관계가 나오고(예: τ ∝ 두께<sup>n</sup>), 다른 날 만든 시료에서도 같다. 그리고 <span class="key"><strong>예측 검증</strong>: 관계식을 맞출 때 쓰지 않은 두께·조성(범위 안 1점, 범위 밖 1점)의 τ와 응답 모양을 만들기 전에 예측하고, 새 시료의 측정값이 미리 정한 예측 구간(예: ±30 %, 측정 반복 변동을 반영해 결과 전에 날짜와 함께 기록) 안에 드는지 봅니다.</span> 범위 밖에서 틀리면 그 범위를 설계표의 한계로 적습니다.</li>
+<li><strong>견줄 기존 모형.</strong> 전극 표면 충전(τ = c × L ÷ σ, 길이에 비례), 확산(τ ≈ ℓ² ÷ D, 길이의 제곱에 비례), 사슬·이온쌍 재배열(길이와 무관하고 온도에 민감)입니다(5.4절). <span class="key">이 가운데 하나로 설명되면 "이 소재계는 기존 모형으로 충분하다"가 결과이고, 그 식을 설계에 그대로 씁니다. 억지로 새 식을 만들지 않습니다.</span> 어느 것으로도 설명되지 않으면 관찰한 경향까지만 적습니다.</li>
+<li><strong>의미 있는 예측 세 가지(H2).</strong> 관계식에 점을 더 맞추는 것으로 끝내지 않기 위해, 만들거나 재기 전에 값을 적어 두고 확인합니다.
+<ol type="1">
+<li><strong>따로 잰 값으로.</strong> 전도도와 두께(와 전극 용량)를 따로 재서 τ를 계산하고, 펄스 응답에서 잰 τ와 견줍니다. 맞춤 변수가 없는 비교입니다. 두 값의 비가 1에서 벗어나는 정도와 그것이 조성에 따라 변하는 모양이, 단순한 모형이 놓치는 것(이온쌍, 계면)의 크기입니다.</li>
+<li><strong>교차 조건.</strong> 두께만 바꾼 계열과 조성만 바꾼 계열로 식을 만든 뒤, <strong>둘을 함께 바꾼 시료</strong>(식을 만들 때 쓰지 않은 조합)의 τ를 예측합니다. 두 변수가 서로 독립으로 작용하는지의 시험입니다.</li>
+<li><strong>다른 온도.</strong> 같은 시료를 식을 만들 때 쓰지 않은 온도에서 재서, 전도도의 온도 의존으로 계산한 τ와 견줍니다. 새 시료가 필요 없습니다.</li>
+</ol></li>
+<li><strong>허용 오차를 정하는 방법.</strong> ±30 % 같은 숫자를 미리 못 박지 않습니다. 두 가지에서 정합니다. ① 같은 조건으로 따로 만든 시료들 사이의 τ 변동(예측이 이보다 정밀할 수는 없습니다). ② 과제가 허용하는 τ의 오차. 알아낼 수 있는 과거의 길이가 대략 τ × ln(처음 크기 ÷ 흔들림)이므로, 다뤄야 할 가장 긴 사건 간격이 이 길이 안에 들게 하는 τ의 범위입니다. 둘 중 넓은 쪽을 기준으로 삼아 결과를 보기 전에 날짜와 함께 적습니다.</li>
+<li><strong>주장의 범위.</strong> <span class="key">한두 점의 예측이 맞았다고 "설계 법칙"이라고 부르지 않습니다.</span> 시험한 두께·조성·온도 범위 안에서의 예측 정확도로 보고하고, 범위 밖에서 틀리면 그 경계를 적습니다.</li>
+<li><strong>반복과 독립 시료.</strong> 같은 소자를 다시 잰 횟수(측정 반복), 따로 만든 시료의 수(독립 시료), 만든 날의 수(제작 배치)를 구분해 적습니다. 관계식의 불확실성은 독립 시료에서 계산합니다. 출발 설정은 조건마다 독립 시료 3개 이상, 제작 배치 2회 이상입니다 <span class="tag tag-unverified">파일럿</span>.</li>
 <li><strong>다른 가능한 원인.</strong> 두께를 바꾸며 달라진 건조·접촉 조건, 조성을 바꾸며 달라진 전도도·팽윤(5절의 원인을 가려내는 표).</li>
 <li><strong>결과별 판단.</strong> 규칙이 나오면 "이 사건 간격에는 이 두께와 조성"이라는 설계표가 됩니다. 변수 하나가 여러 성질을 함께 바꾸면 그 범위를 기록하고 두께를 주된 조절 변수로 씁니다.</li>
 </ul>
@@ -4064,6 +4272,17 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>재는 것.</strong> ① 한 소자에 펄스를 넣었을 때 이웃 소자의 전류가 얼마나, 얼마 뒤에 변하는가를 <strong>전극 사이 거리마다</strong> 잽니다. ② 막의 두께, 고정전하 밀도, 전극 간격을 바꿔 이 영향의 크기와 닿는 거리가 달라지는지 봅니다. ③ 과제 ①(움직이는 접촉의 방향)의 정확도.</p></li>
 <li><p><strong>비교.</strong> 위 네 조건 사이의 <strong>통제 비교</strong>가 먼저입니다. τ가 다른 R–C 회로 배열은 통제 비교의 대조로 둡니다. 최적화 디지털(시간 차 계산)과의 <strong>시스템 비교</strong>는 목표 3에서 따로 합니다.</p></li>
 <li><p><strong>조건을 흔들어도 되는가.</strong> 입력 세기, 접촉 압력, 지나가는 속도, 소자 편차(다른 배열), 날짜를 바꾼 시험 데이터에서도 방향·순서를 맞히는지 봅니다. 학습에 쓰지 않은 조건으로 시험합니다.</p></li>
+<li><p><strong>읽는 수.</strong> 네 조건을 읽는 소자 수 4개(자리 수와 같음)와 2개(자리 수보다 적음)에서 각각 봅니다. 결합이 값을 단순히 섞기만 한다면, 네 개를 다 읽을 때는 가중합이 이미 할 수 있는 일이라 새 정보를 주지 못하고, 덜 읽을 때만 읽지 않은 자리의 정보를 실어 올 수 있기 때문입니다.</p></li>
+<li><p><strong>제작이 만드는 교란과 확인.</strong> 막을 잇거나 자르는 일은 결합만 바꾸지 않습니다.</p>
+<ol type="1">
+<li><strong>개별 소자의 변화.</strong> 막을 자르면 가장자리가 생기고 이으면 전류가 옆으로 새어, 개별 소자의 τ와 저항이 달라질 수 있습니다. 네 조건 모두 <strong>배열로 만든 상태에서</strong> 소자마다 τ와 저항을 다시 재고, 맞출 수 없었던 차이는 표로 함께 보고합니다.</li>
+<li><strong>가짜 결합.</strong> 공통 전극, 배선, 측정 회로를 통해서도 이웃의 값이 변할 수 있습니다. 같은 배선에 저항 더미 배열을 연결해 재고, 막을 자른 배열과 견주고, 이웃 전극을 띄운 경우와 0 V에 묶은 경우를 비교합니다.</li>
+<li><strong>읽기가 state를 바꾸는가.</strong> 같은 state를 연달아 두 번 읽어 차이를 잽니다. 읽는 순서를 바꿔도 값이 같은지 봅니다.</li>
+<li><strong>초기화와 이전 입력.</strong> 시행 사이에 기다리는 시간을 τ의 3·5·10배로 바꿔 앞 시행의 영향이 남는지 봅니다. 시행의 순서는 무작위로 합니다.</li>
+<li><strong>개별 τ와 배열 전체의 응답 시간.</strong> 공유막에서는 한 소자의 변화가 이웃을 거쳐 늦게 돌아올 수 있습니다. 소자 하나만 구동했을 때와 모두 구동했을 때의 감쇠를 따로 잽니다.</li>
+<li><strong>환경과 제작.</strong> 온도와 습도를 기록하고, 다른 날, 따로 만든 배열(제작 배치 2회 이상)에서 되풀이합니다.</li>
+</ol></li>
+<li><p><strong>모의로 본 예상(설명용)</strong> <span class="tag tag-unverified">모의</span><strong>.</strong> 단순한 모형(패드 4개, 6가지 답, 읽기 잡음과 τ 편차 10 % 포함)으로 네 조건을 미리 계산해 보았습니다. ① 방향만이면 네 조건 모두 0.97 이상으로 맞혔습니다. ② 6가지 답의 정확도는 네 조건이 0.75–0.87이었고, seed 사이의 변동(0.03–0.07) 안에서 뚜렷이 갈리지 않았습니다. ③ 결합을 3배, 10배로 키우면 0.62, 0.54로 떨어졌습니다. ④ 가운데 소자 2개만 읽을 때는 결합이 있으면 방향 정확도가 올랐습니다(τ가 다른 배열에서 0.82 → 0.91). ⑤ 학습에 없던 약한 압력에서는 6가지 답의 정확도가 0.50–0.60으로 내려갔습니다. <span class="key">즉 τ 다양성이나 결합의 이득은 당연하지 않고, 가장 큰 위험은 입력 세기가 바뀔 때입니다.</span> 모형의 결과이며 실제 소자의 증거가 아닙니다(<code>tools/array_sim.py</code>).</p></li>
 <li><p><strong>지지하는 결과(H3).</strong> 네 조건의 비교에서 τ 다양성이나 결합의 몫이 반복 변동보다 크게 나오고, 그 몫이 위의 바뀐 조건에서도 남는다. <span class="key">결합이 <strong>성능을 떨어뜨리는 결과</strong>(자리 정보가 섞임)도 같은 무게로 보고합니다.</span></p></li>
 <li><p><strong>다른 가능한 원인.</strong> 이웃 사이의 영향이 이온의 이동이 아니라 배선이나 측정 회로를 통해 생긴 것일 수 있습니다. 막을 자른 배열과 견주어 확인합니다.</p></li>
 <li><p><strong>결과별 판단.</strong></p>
@@ -4084,10 +4303,12 @@ ul.task-list li input[type="checkbox"] {
 <figcaption><b>그림 37. 세 경로와 측정 범위.</b> 같은 줄이 같은 역할이다. 경로 ①은 원신호를 모두 보내고, ②는 장치 안에서 디지털로 판단하며(1.5절의 A·B, 비교기로 깨우는 최적화 구성 포함), ③은 이온 소자를 쓴다(1.5절의 D). 소자를 구동하는 방법이 두 갈래이고, 숫자로 바꾼 뒤 구동하면 입력 쪽 ADC가 남는다. 점선 안이 에너지를 재는 범위다. 설계안.</figcaption>
 </figure>
 <ul>
-<li><strong>비교하는 것.</strong> 같은 정확도와 같은 판정 주기에서 경로 B와 C의 지연, 판정 1회에 보내는 양, 에너지, 부품 수.</li>
+<li><strong>비교하는 것.</strong> 같은 정확도와 같은 판정 주기에서 경로 ②와 ③의 지연, 판정 1회에 보내는 양, 에너지, 부품 수.</li>
+<li><strong>순서.</strong> 시스템 비교도 첫 검증 과제(압력 접촉)에서 먼저 합니다. 같은 보드에서 (가) 패드가 눌린 시각을 디지털로 적는 구성과 (나) 이온 소자 배열을 한 번씩 읽는 구성의 전류를 재서 견줍니다. 이 과제에서는 (가)가 이길 가능성이 큽니다. 근전도 같은 후속 응용 후보에서의 비교는 응용이 정해진 뒤에 합니다.</li>
+<li><strong>어떤 조건에서 소자를 쓸 이유가 생기나.</strong> 이온 소자여야 한다고 미리 정하지 않습니다. 이유가 생길 수 있는 조건은 넷입니다. ① 자리(채널)가 많아 자리마다 ADC와 타이머를 두기 어렵다. ② 판정이 드물어 읽기 회로를 대부분 꺼 둘 수 있다. ③ 눌린 시각만이 아니라 <strong>세기의 이력</strong>이 필요해 디지털이라면 ADC를 계속 돌려야 한다. ④ 센서와 같은 부드러운 소재로 한 층에 넣어야 한다. 이 조건들이 없으면 디지털이 낫다고 보고합니다.</li>
 <li><strong>측정 범위.</strong> 전극에서 무선까지. 대기 전력, 켜지는 데 드는 시간, 계속 걸어 두는 전압, 신호를 다듬는 회로, 소자를 처음 상태로 되돌리는 과정을 포함합니다.</li>
-<li><strong>채널.</strong> 손목 예에서 "측정 채널 2개"는 독립된 EMG 신호 두 개를 뜻합니다. 차동 측정에는 채널마다 전극 두 개와 기준 전극이 필요하므로 전극의 수와 채널의 수는 다릅니다. bit 수와 변환 횟수는 채널 수로 계산합니다.</li>
-<li><strong>방법.</strong> 개발 보드(NU40 DK)에 구동·소자·전류 측정·ADC를 연결한 시제품을 만들고, 같은 입력을 PC와 보드에서 판정해 대조합니다. 신호 수집, 대기, 계산, 판정, 전송의 시간을 나눠 잽니다. 전류를 직접 잰 값만 "실측"이라고 적습니다. 마지막 단계는 자원자의 피부 신호이며 IRB 승인이 필요합니다.</li>
+<li><strong>채널(후속 후보인 근전도의 경우).</strong> 손목 예에서 "측정 채널 2개"는 독립된 EMG 신호 두 개를 뜻합니다. 차동 측정에는 채널마다 전극 두 개와 기준 전극이 필요하므로 전극의 수와 채널의 수는 다릅니다. bit 수와 변환 횟수는 채널 수로 계산합니다.</li>
+<li><strong>방법.</strong> 개발 보드(NU40 DK)에 구동·소자·전류 측정·ADC를 연결한 시제품을 만들고, 같은 입력을 PC와 보드에서 판정해 대조합니다. 신호 수집, 대기, 계산, 판정, 전송의 시간을 나눠 잽니다. 전류를 직접 잰 값만 "실측"이라고 적습니다. 응용 후보로 넘어갈 때의 마지막 단계는 자원자의 피부 신호이며 IRB 승인이 필요합니다(조건부).</li>
 <li><strong>다른 가능한 원인.</strong> 에너지의 차이가 소자가 아니라 보드의 대기 설정이나 디지털 쪽 구현의 최적화 수준에서 올 수 있습니다. 그래서 디지털 쪽은 위의 세 구현 가운데 가장 좋은 것과 견줍니다.</li>
 <li><strong>이름.</strong> 이 절과 그림 37의 경로 ①②③은 1.5절의 구성 A–D와 이름이 다릅니다. 경로 ②(장치 안 디지털 판정)는 1.5절의 A·B에, 경로 ③(이온 소자)은 1.5절의 D에 해당하고, 경로 ②에는 비교기로 깨우는 최적화 구성(1.5절 B)을 반드시 포함합니다.</li>
 <li><strong>예상(H4).</strong> 보내는 양은 경로 ①에 비해 크게 줄지만 그 대부분은 장치 안에서 판단하는 것 자체(경로 ②)의 효과다. <span class="key">경로 ③이 ②에 더하는 것은 동작 중 ADC 수집과 특징 계산이 줄어든 만큼이고, 아날로그 입력이 소자에 직접 들어가는 구성에서만 생긴다.</span> 에너지는 읽기 회로가 켜져 있는 시간에 좌우되므로, 읽기 회로를 판정할 때만 켜는 구성에서만 이득이 남을 수 있다. 회로 조건을 넣어 계산하는 시나리오이며 일반적인 기준이 아닙니다. <span class="tag tag-hypo">가설</span></li>
@@ -4095,9 +4316,9 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <figure class="rv-fig figure">
 <!-- RM:aims -->
-<svg class="rv-svg" viewbox="0 0 720 312" role="img" aria-label="세 목표와 다섯 실행 단계의 연결. PC에서 기능 확인, 보드와 기존 소자 측정, 소재 설계, 보드 시스템, 실제 입력 순이며 단계 사이에 다음으로 가기 위한 조건이 적혀 있다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">세 목표와 다섯 실행 단계: 무엇을 끝내야 다음으로 가는가</text><path d="M16,70 V62 H284 V70" fill="none" stroke="#1d1d1f" stroke-width="1.6"></path><text x="150.0" y="54.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">목표 1 · 응답이 과제에 도움이 되는가</text><path d="M296,70 V62 H424 V70" fill="none" stroke="#1d1d1f" stroke-width="1.6"></path><text x="360.0" y="54.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">목표 2 · 소재 설계</text><path d="M436,70 V62 H704 V70" fill="none" stroke="#1d1d1f" stroke-width="1.6"></path><text x="570.0" y="54.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">목표 3 · 장치에서 남는가</text><rect x="16.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#f5f5f7"></rect><text x="26.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">1  PC에서 기능 확인</text><text x="26.0" y="132.0" font-size="12.5" fill="#2b2f36">D0 모의실험 (완료)</text><text x="26.0" y="151.0" font-size="12.5" fill="#2b2f36">D0′ 공개 데이터</text><text x="26.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">구매 없음</text><line x1="145.0" y1="136.0" x2="149.0" y2="136.0" stroke="#1d1d1f" stroke-width="1.5" stroke-linecap="round"></line><path d="M149.0,139.3 L155.0,136.0 L149.0,132.7 Z" fill="#1d1d1f"></path><line x1="150.0" y1="194.0" x2="150.0" y2="208.0" stroke="#5f6368" stroke-width="1" stroke-linecap="round"></line><text x="150.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">과제에 기억이</text><text x="150.0" y="241.0" font-size="12.5" fill="#5f6368" text-anchor="middle">필요함을 확인</text><rect x="156.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#f5f5f7"></rect><text x="166.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">2  보드 · 기존 소자</text><text x="166.0" y="132.0" font-size="12.5" fill="#2b2f36">D1 보드로 기록</text><text x="166.0" y="151.0" font-size="12.5" fill="#2b2f36">D2 기존 소자 측정</text><text x="166.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">D2는 장비 확인 뒤</text><line x1="285.0" y1="136.0" x2="289.0" y2="136.0" stroke="#1d1d1f" stroke-width="1.5" stroke-linecap="round"></line><path d="M289.0,139.3 L295.0,136.0 L289.0,132.7 Z" fill="#1d1d1f"></path><line x1="290.0" y1="194.0" x2="290.0" y2="208.0" stroke="#5f6368" stroke-width="1" stroke-linecap="round"></line><text x="290.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">비교 대상보다 나은</text><text x="290.0" y="241.0" font-size="12.5" fill="#5f6368" text-anchor="middle">결과가 재현</text><rect x="296.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#e6f4f2"></rect><text x="306.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">3  소재 설계</text><text x="306.0" y="132.0" font-size="12.5" fill="#2b2f36">D3 비교 시료 제작</text><text x="306.0" y="151.0" font-size="12.5" fill="#2b2f36">변화 표 · 확인 표</text><text x="306.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">합성 · 임피던스 측정</text><line x1="425.0" y1="136.0" x2="429.0" y2="136.0" stroke="#1d1d1f" stroke-width="1.5" stroke-linecap="round"></line><path d="M429.0,139.3 L435.0,136.0 L429.0,132.7 Z" fill="#1d1d1f"></path><line x1="430.0" y1="194.0" x2="430.0" y2="208.0" stroke="#5f6368" stroke-width="1" stroke-linecap="round"></line><text x="430.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">τ를 과제에 맞춘 소자</text><text x="430.0" y="241.0" font-size="12.5" fill="#5f6368" text-anchor="middle">확보</text><rect x="436.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#f5f5f7"></rect><text x="446.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">4  보드 시스템</text><text x="446.0" y="132.0" font-size="12.5" fill="#2b2f36">D4 보드 + 소자</text><text x="446.0" y="151.0" font-size="12.5" fill="#2b2f36">D5 공개 데이터 통과</text><text x="446.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">전류 측정 필요</text><line x1="565.0" y1="136.0" x2="569.0" y2="136.0" stroke="#1d1d1f" stroke-width="1.5" stroke-linecap="round"></line><path d="M569.0,139.3 L575.0,136.0 L569.0,132.7 Z" fill="#1d1d1f"></path><line x1="570.0" y1="194.0" x2="570.0" y2="208.0" stroke="#5f6368" stroke-width="1" stroke-linecap="round"></line><text x="570.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">보드에서 같은 정확도</text><text x="570.0" y="241.0" font-size="12.5" fill="#5f6368" text-anchor="middle">확인</text><rect x="576.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#f5f5f7"></rect><text x="586.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">5  실제 입력</text><text x="586.0" y="132.0" font-size="12.5" fill="#2b2f36">D6 자원자 피부 신호</text><text x="586.0" y="151.0" font-size="12.5" fill="#2b2f36">(그 뒤는 조건부)</text><text x="586.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">IRB 승인 필요</text><text x="16.0" y="280.0" font-size="12.5" fill="#2b2f36">화살표 = 작업 순서 · 화살표 아래 글 = 다음 단계로 가기 위한 조건</text><text x="16.0" y="302.0" font-size="12.5" fill="#5f6368">계획 · 단계 1–2는 새 합성 없이 시작</text></svg>
+<svg class="rv-svg" viewbox="0 0 720 312" role="img" aria-label="세 목표와 다섯 단계의 연결. PC에서 기능 확인, 보드와 기존 소자 측정, 소재 설계, 보드 시스템, 응용 후보 입력 순이며 단계 사이에 다음으로 가기 위한 조건이 적혀 있다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">세 목표와 다섯 단계: 무엇을 끝내야 다음으로 가는가</text><path d="M16,70 V62 H284 V70" fill="none" stroke="#1d1d1f" stroke-width="1.6"></path><text x="150.0" y="54.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">목표 1 · 응답이 과제에 도움이 되는가</text><path d="M296,70 V62 H424 V70" fill="none" stroke="#1d1d1f" stroke-width="1.6"></path><text x="360.0" y="54.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">목표 2 · 소재 설계</text><path d="M436,70 V62 H704 V70" fill="none" stroke="#1d1d1f" stroke-width="1.6"></path><text x="570.0" y="54.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">목표 3 · 장치에서 남는가</text><rect x="16.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#f5f5f7"></rect><text x="26.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">1  PC에서 기능 확인</text><text x="26.0" y="132.0" font-size="12.5" fill="#2b2f36">D0 모의실험 (완료)</text><text x="26.0" y="151.0" font-size="12.5" fill="#2b2f36">D0′ 공개 데이터</text><text x="26.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">구매 없음</text><line x1="145.0" y1="136.0" x2="149.0" y2="136.0" stroke="#1d1d1f" stroke-width="1.5" stroke-linecap="round"></line><path d="M149.0,139.3 L155.0,136.0 L149.0,132.7 Z" fill="#1d1d1f"></path><line x1="150.0" y1="194.0" x2="150.0" y2="208.0" stroke="#5f6368" stroke-width="1" stroke-linecap="round"></line><text x="150.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">과제에 기억이</text><text x="150.0" y="241.0" font-size="12.5" fill="#5f6368" text-anchor="middle">필요함을 확인</text><rect x="156.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#f5f5f7"></rect><text x="166.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">2  보드 · 기존 소자</text><text x="166.0" y="132.0" font-size="12.5" fill="#2b2f36">D1 보드로 기록</text><text x="166.0" y="151.0" font-size="12.5" fill="#2b2f36">D2 기존 소자 측정</text><text x="166.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">D2는 장비 확인 뒤</text><line x1="285.0" y1="136.0" x2="289.0" y2="136.0" stroke="#1d1d1f" stroke-width="1.5" stroke-linecap="round"></line><path d="M289.0,139.3 L295.0,136.0 L289.0,132.7 Z" fill="#1d1d1f"></path><line x1="290.0" y1="194.0" x2="290.0" y2="208.0" stroke="#5f6368" stroke-width="1" stroke-linecap="round"></line><text x="290.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">비교 대상보다 나은</text><text x="290.0" y="241.0" font-size="12.5" fill="#5f6368" text-anchor="middle">결과가 재현</text><rect x="296.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#e6f4f2"></rect><text x="306.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">3  소재 설계</text><text x="306.0" y="132.0" font-size="12.5" fill="#2b2f36">D3 비교 시료 · 예측</text><text x="306.0" y="151.0" font-size="12.5" fill="#2b2f36">D3′ 네 조건 배열</text><text x="306.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">합성 · 임피던스 측정</text><line x1="425.0" y1="136.0" x2="429.0" y2="136.0" stroke="#1d1d1f" stroke-width="1.5" stroke-linecap="round"></line><path d="M429.0,139.3 L435.0,136.0 L429.0,132.7 Z" fill="#1d1d1f"></path><line x1="430.0" y1="194.0" x2="430.0" y2="208.0" stroke="#5f6368" stroke-width="1" stroke-linecap="round"></line><text x="430.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">τ를 과제에 맞춘 소자</text><text x="430.0" y="241.0" font-size="12.5" fill="#5f6368" text-anchor="middle">확보</text><rect x="436.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#f5f5f7"></rect><text x="446.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">4  보드 시스템</text><text x="446.0" y="132.0" font-size="12.5" fill="#2b2f36">D4 보드 + 소자</text><text x="446.0" y="151.0" font-size="12.5" fill="#2b2f36">D5 응용 후보 데이터</text><text x="446.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">전류 측정 필요</text><line x1="565.0" y1="136.0" x2="569.0" y2="136.0" stroke="#1d1d1f" stroke-width="1.5" stroke-linecap="round"></line><path d="M569.0,139.3 L575.0,136.0 L569.0,132.7 Z" fill="#1d1d1f"></path><line x1="570.0" y1="194.0" x2="570.0" y2="208.0" stroke="#5f6368" stroke-width="1" stroke-linecap="round"></line><text x="570.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">보드에서 같은 정확도</text><text x="570.0" y="241.0" font-size="12.5" fill="#5f6368" text-anchor="middle">확인</text><rect x="576.0" y="84.0" width="128.0" height="104.0" rx="10" fill="#f5f5f7"></rect><text x="586.0" y="108.0" font-size="13.0" fill="#1d1d1f" font-weight="800">5  응용 후보 입력</text><text x="586.0" y="132.0" font-size="12.5" fill="#2b2f36">D6 자원자 피부 신호</text><text x="586.0" y="151.0" font-size="12.5" fill="#2b2f36">(조건부)</text><text x="586.0" y="178.0" font-size="11.5" fill="#a86a12" font-weight="700">IRB 승인 필요</text><text x="16.0" y="280.0" font-size="12.5" fill="#2b2f36">화살표 = 작업 순서 · 화살표 아래 글 = 다음 단계로 가기 위한 조건</text><text x="16.0" y="302.0" font-size="12.5" fill="#5f6368">계획 · 단계 1–2는 새 합성 없이 시작</text></svg>
 <!-- /RM:aims -->
-<figcaption><b>그림 38. 세 목표와 다섯 실행 단계.</b> 단계 사이의 글이 다음 단계로 넘어가기 위한 조건이다. D0–D6은 실행 단계의 번호로, D0은 PC 모의실험, D0′은 공개 데이터, D1은 보드 기록, D2는 기존 소자 측정, D3은 비교 시료 제작, D4는 보드와 소자의 실시간 동작, D5는 소자 경로로 공개 데이터 판정, D6은 자원자 피부 신호다.</figcaption>
+<figcaption><b>그림 38. 세 목표와 다섯 단계.</b> 상자 다섯 개가 단계이고, 단계 사이의 글이 다음 단계로 넘어가기 위한 조건이다. D0–D6은 단계 안의 작업 번호다. D0은 PC 모의실험, D0′은 공개 데이터, D1은 보드 기록(시간 패턴과 움직이는 접촉), D2는 기존 소자 측정, D3은 비교 시료 제작과 예측 검증, D3′은 네 조건 배열, D4는 보드와 소자의 실시간 동작(접촉 과제), D5는 응용 후보의 공개 데이터 판정, D6은 자원자 피부 신호(조건부)다.</figcaption>
 </figure>
 </section>
 </section>
@@ -4130,13 +4351,13 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td>목표 2-a</td>
 <td>고분자 변수로 τ와 응답 모양을 어디까지 <strong>예측</strong>할 수 있는가 (H2)</td>
-<td>비교 시료, 관계식, <strong>만들지 않은 시료의 예측과 확인</strong>, 원인을 가려낸 확인 표, memory curve와 과제 성능</td>
+<td>비교 시료, 기존 모형과의 대조, <strong>따로 잰 값·교차 조건·다른 온도의 예측과 확인</strong>, 원인을 가려낸 확인 표, memory curve와 과제 성능</td>
 <td>시료 제작, 두께 계열 측정(장비가 적으면 τ(L) 기울기까지), 장비 확인</td>
 </tr>
 <tr class="odd">
 <td>목표 2-b</td>
 <td>τ 다양성과 결합은 각각 방향·순서를 읽는 데 도움이 되는가 (H3)</td>
-<td>네 조건(τ 같음/다름 × 결합 없음/있음), 결합의 거리별 측정, 입력 세기·압력·속도·소자·날짜를 바꾼 시험, R–C 배열 대조</td>
+<td>네 조건(τ 같음/다름 × 결합 없음/있음) × 읽는 수 4개/2개, 결합의 거리별 측정, 배열 상태에서 다시 잰 개별 τ, 입력 세기·압력·속도·소자·날짜를 바꾼 시험, R–C 배열 대조</td>
 <td>배열 제작, 압력 패드 입력 장치</td>
 </tr>
 <tr class="even">
@@ -4164,12 +4385,13 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><strong>"디지털 방법으로 충분하지 않은가?"</strong> — 많은 경우 충분합니다. 요약값을 갱신하는 디지털 방법은 작은 메모리로 같은 판단을 합니다. 소자가 바꿀 수 있는 것은 ADC 변환 횟수와 특징 계산이고, 그 절감이 새로 드는 회로보다 큰지는 목표 3의 측정으로 답합니다. 작으면 그렇게 보고합니다.</li>
 <li><strong>"R–C 회로로 되지 않는가?"</strong> — R–C 하나로 되는 과제라면 그것을 쓰는 것이 맞습니다(목표 1의 비교 대상). 소재로 구현했을 때 부품 수·조절 범위·센서와의 연결에서 차이가 나는지가 목표 2와 3입니다.</li>
-<li><strong>"기존 논문과 무엇이 다른가?"</strong> — 이온 소자에서 τ를 바꾼 연구, 여러 소자를 나란히 둔 연구, 결합을 계산에 쓴 연구(Cucchi 2021)는 있습니다. 다른 점은 고분자 네트워크 변수로 만든 관계식으로 <strong>새 시료를 예측해 확인</strong>하는 것, τ 다양성과 결합의 몫을 <strong>네 조건으로 분리</strong>하는 것, 모든 결과를 최적화 디지털을 포함한 baseline과 함께 보고하는 것입니다. 노벨티별 가장 가까운 선례와 필요한 증거는 <a href="#rm-novelty">6.4</a>에 있습니다.</li>
+<li><strong>"기존 논문과 무엇이 다른가?"</strong> — 이온 소자에서 τ를 바꾼 연구, 여러 소자를 나란히 둔 연구, 결합을 계산에 쓴 연구(Cucchi 2021)는 있습니다. 길이로 τ를 설계하고 이론으로 예측한 연구(Kamsma 2024)와 압력을 이온 겔 배열에 기억시킨 연구(Zhou 2025)도 있습니다. 다른 점은 고정전하가 있는 고체 고분자 접합에서 느린 응답을 정하는 과정을 가려내는 것, 공유막에서 결합의 거리·시간 의존을 재는 것, τ 다양성과 결합의 몫을 <strong>네 조건으로 분리</strong>하는 것입니다. baseline과 예측 검증은 방법이며 노벨티로 내세우지 않습니다. 가장 가까운 다섯 편과의 차이는 <a href="#rm-novelty">6.4</a>에 있습니다.</li>
 <li><strong>"지표가 좋아지면 과제도 좋아지는가?"</strong> — 그렇다고 가정하지 않습니다. 모든 지표 옆에 시험 데이터 정확도를 둡니다.</li>
 <li><strong>"측정 회로의 응답을 소재의 응답으로 잘못 읽는 것은 아닌가?"</strong> — 응답 시간을 아는 R–C 더미를 같은 회로로 먼저 재고, 소자의 응답 시간이 더미와 구분되며 두께·전극에 대한 의존이 소재 쪽 설명과 맞을 때만 소재의 응답으로 해석합니다.</li>
 <li><strong>"조성을 바꾸면 여러 성질이 함께 변하는데 인과를 말할 수 있는가?"</strong> — 조성을 건드리지 않는 두께를 첫 번째 변수로 두고, 조성 변수는 변수별 변화 표로 함께 변한 것을 기록합니다.</li>
 <li><strong>"1년 안에 틀렸다는 것을 알 수 있는가?"</strong> — 목표 1의 12개월 판정에서 이득이 확인되지 않으면 방향을 바꿉니다.</li>
 </ul>
+<p>발표용으로 다시 정리한 질문 열 개와 답은 <a href="./roadmap-proposal.html#pp-qa">발표 준비</a>에 있습니다.</p>
 </div>
 </div>
 </div>
@@ -4196,17 +4418,83 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>이 과제의 순서 정보가 응용에서 실제로 뜻이 있는지(예: 그 동작 쌍이 쓸 만한 명령인지)도 함께 판단합니다.</p>
 </section>
-<section id="소자-첫-측정의-결과별-판단" class="level3">
-<h3 class="anchored" data-anchor-id="소자-첫-측정의-결과별-판단">9.2 소자 첫 측정의 결과별 판단</h3>
+<section id="결과별-판단" class="level3">
+<h3 class="anchored" data-anchor-id="결과별-판단">9.2 결과별 판단</h3>
 <figure class="rv-fig figure">
 <!-- RM:decision -->
 <svg class="rv-svg" viewbox="0 0 720 458" role="img" aria-label="1차 실험의 네 가지 결과별 표: 소자와 R–C의 차이가 없을 때, 기억 없는 비선형 소자도 비슷할 때, 소자만 더 정확하고 재현될 때, 소자마다 결과가 갈릴 때 각각 허용되는 해석과 다음 실험."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">소자 첫 측정의 결과별로: 무엇을 말할 수 있고, 다음에 무엇을 하나</text><text x="26.0" y="58.0" font-size="12.5" fill="#5f6368" font-weight="800">관찰한 결과</text><text x="250.0" y="58.0" font-size="12.5" fill="#5f6368" font-weight="800">허용되는 해석</text><text x="484.0" y="58.0" font-size="12.5" fill="#5f6368" font-weight="800">다음 실험</text><rect x="16.0" y="68.0" width="688.0" height="76.0" rx="10" fill="#fff" stroke="#d9dde3" stroke-width="1.2"></rect><rect x="16" y="68" width="5" height="76" rx="2.5" fill="#5f6368"></rect><text x="26.0" y="92.0" font-size="12.5" fill="#1d1d1f" font-weight="700">소자와 R–C 회로 하나의 차이가</text><text x="26.0" y="110.0" font-size="12.5" fill="#1d1d1f" font-weight="700">판정 기준 안쪽</text><text x="250.0" y="92.0" font-size="12.5" fill="#2b2f36">이 과제·조건에서 추가 이득이</text><text x="250.0" y="110.0" font-size="12.5" fill="#2b2f36">검출되지 않았다. '같다'가 입증된</text><text x="250.0" y="128.0" font-size="12.5" fill="#2b2f36">것은 아니다.</text><text x="484.0" y="92.0" font-size="12.5" fill="#2b2f36">소자 수와 반복을 늘려 불확실성을</text><text x="484.0" y="110.0" font-size="12.5" fill="#2b2f36">줄인다. 비선형이 필요한 과제로 다시</text><text x="484.0" y="128.0" font-size="12.5" fill="#2b2f36">잰다.</text><line x1="240.0" y1="78.0" x2="240.0" y2="134.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><line x1="474.0" y1="78.0" x2="474.0" y2="134.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><rect x="16.0" y="154.0" width="688.0" height="58.0" rx="10" fill="#fff" stroke="#d9dde3" stroke-width="1.2"></rect><rect x="16" y="154" width="5" height="58" rx="2.5" fill="#a86a12"></rect><text x="26.0" y="178.0" font-size="12.5" fill="#1d1d1f" font-weight="700">소자가 더 정확하지만, 기억 없는</text><text x="26.0" y="196.0" font-size="12.5" fill="#1d1d1f" font-weight="700">비선형 소자도 비슷하다</text><text x="250.0" y="178.0" font-size="12.5" fill="#2b2f36">기억이 더해 준 몫이 이 조건에서는</text><text x="250.0" y="196.0" font-size="12.5" fill="#2b2f36">입증되지 않았다.</text><text x="484.0" y="178.0" font-size="12.5" fill="#2b2f36">시간 순서를 섞거나 읽는 시점을 옮겨</text><text x="484.0" y="196.0" font-size="12.5" fill="#2b2f36">기억의 몫을 따로 잰다.</text><line x1="240.0" y1="164.0" x2="240.0" y2="202.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><line x1="474.0" y1="164.0" x2="474.0" y2="202.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><rect x="16.0" y="222.0" width="688.0" height="58.0" rx="10" fill="#fff" stroke="#d9dde3" stroke-width="1.2"></rect><rect x="16" y="222" width="5" height="58" rx="2.5" fill="#0e8a83"></rect><text x="26.0" y="246.0" font-size="12.5" fill="#1d1d1f" font-weight="700">소자만 더 정확하고, 다른</text><text x="26.0" y="264.0" font-size="12.5" fill="#1d1d1f" font-weight="700">날·다른 소자에서도 같다</text><text x="250.0" y="246.0" font-size="12.5" fill="#2b2f36">기억이 과제에 기여한다는 가설을</text><text x="250.0" y="264.0" font-size="12.5" fill="#2b2f36">지지한다.</text><text x="484.0" y="246.0" font-size="12.5" fill="#2b2f36">목표 2로: 비교 시료를 만들어 τ를</text><text x="484.0" y="264.0" font-size="12.5" fill="#2b2f36">바꿔 본다.</text><line x1="240.0" y1="232.0" x2="240.0" y2="270.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><line x1="474.0" y1="232.0" x2="474.0" y2="270.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><rect x="16.0" y="290.0" width="688.0" height="58.0" rx="10" fill="#fff" stroke="#d9dde3" stroke-width="1.2"></rect><rect x="16" y="290" width="5" height="58" rx="2.5" fill="#7a3f97"></rect><text x="26.0" y="314.0" font-size="12.5" fill="#1d1d1f" font-weight="700">소자마다 결과가 갈리거나 판정할</text><text x="26.0" y="332.0" font-size="12.5" fill="#1d1d1f" font-weight="700">수 없다</text><text x="250.0" y="314.0" font-size="12.5" fill="#2b2f36">기억 이전에 재현성이 문제다.</text><text x="484.0" y="314.0" font-size="12.5" fill="#2b2f36">drift · 접촉 · 두께 편차를 점검한</text><text x="484.0" y="332.0" font-size="12.5" fill="#2b2f36">뒤 다시 잰다.</text><line x1="240.0" y1="300.0" x2="240.0" y2="338.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><line x1="474.0" y1="300.0" x2="474.0" y2="338.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><rect x="16.0" y="362.0" width="688.0" height="62.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="386.0" font-size="12.5" fill="#1d1d1f" font-weight="800">어느 경우든 함께 잰다</text><text x="30.0" y="408.0" font-size="12.5" fill="#2b2f36">R–C 더미로 측정 회로의 응답 · 정답을 섞은 채점 20회 · 반복 측정의 분포 · 24시간 drift</text><text x="16.0" y="448.0" font-size="12.5" fill="#5f6368">판정 기준(문턱 · 반복 수)은 결과를 보기 전에 날짜와 함께 적는다</text></svg>
 <!-- /RM:decision -->
 <figcaption><b>그림 39. 소자 첫 측정의 결과별 해석과 다음 실험.</b> 한 줄이 한 경우다. "차이가 검출되지 않았다"와 "같다는 것이 입증되었다"는 다르므로, 첫 줄에서도 결론 전에 측정의 불확실성을 먼저 줄인다.</figcaption>
 </figure>
+<p><span id="rm-outcomes"></span><strong>연구 전체의 결과 조합별 해석.</strong> 소자 첫 측정 뒤에도 결과는 여러 갈래로 나옵니다. 갈래마다 말할 수 있는 것과 없는 것, 다음 실험, 줄이거나 멈추는 조건을 미리 적어 둡니다.</p>
+<div class="rm-fit">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>결과</th>
+<th>지지되는 주장</th>
+<th>지지되지 않는 주장</th>
+<th>다음 실험</th>
+<th>줄이거나 멈추는 조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>τ가 변수와 재현되는 관계를 보이지 않는다</strong></td>
+<td>없음(관찰 기록만)</td>
+<td>τ를 설계할 수 있다</td>
+<td>원인 가려내기(5.7절), 전극과 접촉의 통제</td>
+<td>두께 계열을 두 번 다시 만들어도 시료 사이의 변동이 변수의 효과보다 크면 소재계를 바꿈</td>
+</tr>
+<tr class="even">
+<td><strong>τ는 예측되지만 과제 성능의 이득이 없다</strong></td>
+<td>이 소재계에서 τ는 그 변수로 정해진다(시험한 범위 안)</td>
+<td>τ 설계가 과제 성능을 올린다</td>
+<td>과제가 τ에 민감한 구간인지(사건 간격, 잡음) 다시 확인, 같은 τ의 R–C와 다시 비교</td>
+<td>펄스열과 접촉 두 과제 모두에서 R–C 대비 이득이 없으면 계산 쪽 주장을 접고 소재 물리 결과로 줄임</td>
+</tr>
+<tr class="odd">
+<td><strong>결합은 조절되지만 정보가 섞여 성능이 낮아진다</strong></td>
+<td>결합을 그 구조 변수로 조절할 수 있다, 결합의 거리·시간 의존</td>
+<td>결합이 계산에 도움이 된다</td>
+<td>결합을 약하게 한 조건, 읽는 수를 줄인 조건에서만 이득이 있는지 확인</td>
+<td>어느 조건에서도 이득이 없으면 독립 배열로 가고, 결합은 "줄여야 할 crosstalk의 설계 규칙"으로 보고</td>
+</tr>
+<tr class="even">
+<td><strong>성능은 좋아지지만 입력·읽기 회로 때문에 에너지 이득이 없다</strong></td>
+<td>통제 비교에서 소자 state가 정보를 더한다</td>
+<td>장치 전체의 이점</td>
+<td>이득이 남는 회로 조건(읽기 주기, 읽기 회로의 전류, 채널 수)을 수치로 정리</td>
+<td>현실적인 부품 범위에서 그런 조건이 없으면 H4는 "조건 없음"으로 보고하고 장치 주장을 하지 않음</td>
+</tr>
+<tr class="odd">
+<td><strong>특정 압력·속도에서만 좋아지고 조건이 바뀌면 실패한다</strong></td>
+<td>그 범위 안에서의 결과</td>
+<td>조건이 바뀌어도 유지된다</td>
+<td>실패의 원인 분리(입력 세기, τ 범위, drift), 기준 펄스로 보정, τ 범위를 넓힌 배열</td>
+<td>보정 뒤에도 학습에 없던 조건에서 우연 수준이면 "조건 한정"으로 보고하고 응용 주장을 미룸</td>
+</tr>
+<tr class="even">
+<td><strong>최적화한 디지털보다 실질적인 이점이 있다</strong></td>
+<td>그 회로 조건과 측정 범위에서의 이점</td>
+<td>일반적인 우월</td>
+<td>다른 날·다른 보드에서의 재현, 세기의 이력이 필요한 후속 응용 후보로 확장</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span class="key">어느 줄이든 결과가 곧 논문이 되는 것은 아닙니다.</span> 부정 결과는 반복 수, 오차 범위, 배제한 효과의 크기를 갖췄을 때만 쓸 수 있고(7.3절), 갖추지 못하면 방향을 바꾼 기록으로 남깁니다.</p>
 </section>
-<section id="작은-프로젝트-다섯" class="level3">
-<h3 class="anchored" data-anchor-id="작은-프로젝트-다섯">9.3 작은 프로젝트 다섯</h3>
+<section id="작은-프로젝트-여섯" class="level3">
+<h3 class="anchored" data-anchor-id="작은-프로젝트-여섯">9.3 작은 프로젝트 여섯</h3>
 <p>큰 실험을 준비하는 동안, 끝이 분명한 작은 일을 차례로 끝냅니다.</p>
 <div class="rm-fit">
 <table class="caption-top table">
@@ -4258,7 +4546,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td><strong>R4 · 움직이는 접촉 기록</strong></td>
 <td>첫 검증 과제의 입력을 만들 수 있는가</td>
-<td>보드에 압력 패드 3–4개를 달고 손가락으로 양방향·세 가지 빠르기로 지나가며 기록, 디지털 시간 차 계산으로 방향 판정</td>
+<td>먼저 보드가 만든 전압 펄스로 같은 순서를 만들고, 이어서 보드에 압력 패드 4개를 달아 손가락으로 양방향·세 가지 빠르기로 지나가며 기록, 디지털 시간 차 계산으로 방향 판정</td>
 <td>방향·빠르기별 기록과 디지털 baseline 정확도 <span class="tag tag-unverified">구매 필요 여부 미확인</span></td>
 </tr>
 </tbody>
@@ -4307,8 +4595,8 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><strong>0–3개월 · 준비.</strong> 모의실험, 공개 데이터, 보드 기록, (장비가 있으면) 기존 소자 한 번. <strong>3개월 판정:</strong> τ/Δt에 따른 차이가 PC·보드·기존 소자에서 보이는가. 소자 측정 자체가 안 되면 장비와 시료 확보가 먼저입니다.</li>
 <li><strong>3–13개월 · 목표 1.</strong> baseline과의 차이, 독립 소자들 사이의 재현. <strong>12개월 판정:</strong> 미리 정한 크기 이상의 차이가 재현되는가. 아니면 9.2의 갈래를 따릅니다.</li>
-<li><strong>10–30개월 · 목표 2.</strong> 비교 시료로 τ의 규칙과 예측 검증(2-a, 10개월부터), 네 조건 배열 비교(2-b, 2-a의 규칙이 나온 뒤 약 16개월부터). 조건부 측정 2′은 10–14개월에 타당성만 봅니다. 시작 시점은 3개월 판정을 통과하고 두께 시료의 예비 측정이 가능해지는 때로 잡았습니다. <strong>30개월 판정:</strong> 만들기 전에 예측한 τ가 새 시료에서 예측 구간 안에 드는가(H2). 네 조건 비교에서 τ 다양성과 결합의 몫이 각각 드러나고, 바뀐 조건에서도 남는가(H3).</li>
-<li><strong>28–44개월 · 목표 3.</strong> 보드 시제품, 공개 데이터, 자원자 신호, 측정 범위를 정한 비교표.</li>
+<li><strong>10–30개월 · 목표 2.</strong> 비교 시료로 τ의 규칙과 예측 검증(2-a, 10개월부터), 네 조건 배열 비교(2-b, 2-a의 규칙이 나온 뒤 약 16개월부터). 조건부 측정 2′은 10–14개월에 타당성만 봅니다. 시작 시점은 3개월 판정을 통과하고 두께 시료의 예비 측정이 가능해지는 때로 잡았습니다. <strong>30개월 판정:</strong> 만들거나 재기 전에 적어 둔 예측(따로 잰 값, 교차 조건, 다른 온도)이 미리 정한 오차 안에서 맞는가(H2). 네 조건 비교에서 τ 다양성과 결합의 몫이 각각 드러나고, 바뀐 조건에서도 남는가(H3).</li>
+<li><strong>28–44개월 · 목표 3.</strong> 보드 시제품(접촉 과제) → 응용 후보의 공개 데이터 → (조건부) 자원자 신호. 측정 범위를 정한 비교표.</li>
 <li><strong>36–48개월 · 조건부 확장.</strong> 농도 입력 또는 동물·몸속. 앞 단계로 답할 수 없는 질문이 남을 때만.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="단계별 상세 계획 (필요한 장비 · 계속하는 기준 · 바꾸는 기준 · 필요한 증거)">
@@ -4449,13 +4737,15 @@ ul.task-list li input[type="checkbox"] {
 <li>분 단위의 농도 추세는 소자의 drift와 시간이 겹쳐 중심 과제로 삼기 어렵다.</li>
 <li>내가 확인한 범위에서 찾지 못한 것: 소재 변수별로 각 응답 시간의 변화를 모은 표와 그 예측 검증, 결합을 거리별로 재고 막 구조로 조절한 연구(결합의 실측 자체는 있음). 조사 범위와 가장 가까운 선례는 6.4.</li>
 </ul>
-<p><strong>검증할 가설</strong> <span class="tag tag-hypo">가설</span>: H1(τ를 맞추면 R–C 하나보다 나은 조건), H2(고분자 변수로 τ·응답 모양을 예측하고 새 시료로 확인), H3(τ 다양성과 결합의 몫을 네 조건으로 분리), H4(같은 정확도에서 최적화 디지털보다 줄이는 회로 조건) (요약, 7절).</p>
+<p><strong>검증할 가설</strong> <span class="tag tag-hypo">가설</span>: H1(τ를 맞추면 R–C 하나보다 나은 조건), H2(고분자 변수·전극 간격으로 τ·응답 모양을 예측하고, 따로 잰 값과 쓰지 않은 조건으로 확인), H3(τ 다양성과 결합의 몫을 네 조건으로 분리), H4(같은 정확도에서 최적화 디지털보다 줄이는 회로 조건) (요약, 7절).</p>
 <p><strong>아직 확인하지 못한 것</strong> <span class="tag tag-unverified">미확인</span></p>
 <ul>
 <li>연구실의 전류 측정 장비·주파수 응답 분석 장비·온도 조절 장치의 보유, 기존 시료의 수와 조성, 보유한 단량체와 가소제의 호환성.</li>
 <li>실제 소자의 D와 ℓ(따라서 두께 시료의 범위), 한 출력에서 응답 시간이 다른 성분을 구분해 읽을 수 있는지.</li>
 <li>Legenstein &amp; Maass 2007의 세부 절차, Jaeger 2002 보고서 원문, Pei 2026·Lee 2026·Kim 2025의 보충 자료, Lee S.H. 2025의 비교 조건.</li>
 <li>데이터 전송 중의 BLE 에너지(연결 조건별), 순서 명령에 허용되는 지연과 오류율.</li>
+<li>가장 가까운 다섯 편(Kamsma 2024, Koh 2022, Zhou 2025, Gkoupidenis 2017, Cucchi 2021)의 보충 자료(SI), Yang 2026(ACS Nano)의 서지와 내용.</li>
+<li>만들 장치(7.1절)의 부품·회로·전극 기판을 만드는 방법, 공유막에서 τ를 자리마다 다르게 만드는 방법의 실현 가능성, 결합이 퍼지는 거리의 어림이 맞는지.</li>
 <li>모든 모의실험은 모형이며 실제 소자의 값은 측정 전.</li>
 </ul>
 <p><strong>앞으로 정할 것 (상의가 필요한 항목)</strong></p>
@@ -4466,6 +4756,7 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>첫 소자.</strong> 기존의 산화환원 첨가제 소자로 시작할 것인가, 첨가제 없는 접합으로 시작할 것인가.</li>
 <li><strong>판정 시점.</strong> 3개월과 12개월 판정의 날짜와 기준값.</li>
 <li><strong>협업.</strong> 시스템 식별과 읽기 회로. 자원자 신호는 IRB가 필요하므로 3–4년 차.</li>
+<li><strong>소자 구조.</strong> 위아래 전극(수직 접합)과 같은 면의 전극 쌍(평면) 가운데 무엇으로 시작할 것인가. 전극 기판을 만들 공정이 있는가.</li>
 <li><strong>응용과 공개 범위.</strong> 응용 후보는 공개 데이터 실험 뒤에 정한다. 이 페이지는 공개 사이트에 있으므로 세부 가설의 공개 수준을 계속 점검한다.</li>
 </ol>
 </div>
