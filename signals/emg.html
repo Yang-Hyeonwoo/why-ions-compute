@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>근전도(EMG) – Why Ions Compute?</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../plan.html" rel="next">
+<link href="../roadmap.html" rel="prev">
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-38b12a2c769cbf7df2ce7c55208cb0ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 2,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "/"
+  ],
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script>
+  // 2026-11-03: 저장된 글자 크기를 그리기 전에 적용 (탭을 누를 때 글자가 잠깐 커졌다 돌아오는 깜빡임 방지)
+  try { var f = parseInt(localStorage.getItem('study-fs') || '2', 10); if (f >= 1 && f <= 4) document.documentElement.classList.add('study-fs-' + f); } catch (e) {}
+</script>
+<meta name="theme-color" content="#ffffff">
+<!-- 2026-11-02: 본문 글꼴은 Pretendard(study.css)라서 쓰지 않던 Noto Sans KR 내려받기를 뺐다 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>
+  // 사이트를 GitHub에 공개한 뒤 giscus 설정값을 넣으면 각 페이지 아래에 댓글창이 켜진다.
+  // https://giscus.app 에서 저장소를 고르면 아래 네 값이 나온다.
+  window.STUDY_CONFIG = {
+    giscus: null
+    // giscus: { repo: "아이디/저장소", repoId: "...", category: "Comments", categoryId: "..." }
+  };
+</script>
+
+
+<link rel="stylesheet" href="../assets/study.css">
+<link rel="stylesheet" href="../assets/projects.css">
+<link rel="stylesheet" href="../assets/apple.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed research-page quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Why Ions Compute?</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">홈</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../research.html"> 
+<span class="menu-text">연구 개요</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../roadmap.html"> 
+<span class="menu-text">연구 로드맵</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">생체 신호</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../signals/emg.html">
+ <span class="dropdown-text">근전도(EMG)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../plan.html"> 
+<span class="menu-text">커리큘럼</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">프로젝트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">연구 노트</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../papers.html"> 
+<span class="menu-text">논문</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ledger/terms.html"> 
+<span class="menu-text">용어 사전</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signals/emg.html">생체 신호</a></li><li class="breadcrumb-item"><a href="../signals/emg.html">근전도(EMG)</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">홈</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 개요</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../roadmap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 로드맵</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">생체 신호</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../signals/emg.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">근전도(EMG)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">커리큘럼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 1 · 왜 뉴로모픽인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 1 · 보통 컴퓨터는 어떻게 계산하고, '뉴로모픽'은 어디서 왔나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d01b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 2 · 뉴로모픽의 줄기들, 기존 컴퓨팅과의 차이, 나의 위치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 3 · 숫자·메모리·곱해서 더하기: 계산의 재료</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d02b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 4 · 에너지와 시간은 어디로 가나: 메모리 벽과 Dennard scaling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 5 · 뇌는 20 W? 컴퓨터가 일하는 방식의 네 축</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d03b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 6 · 뇌의 원리는 어떤 비용을 줄이나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 7 · crossbar로 행렬–벡터 곱하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d04b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 8 · LIF neuron 회로, synapse device spec, peripheral circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 9 · 적합한 문제, 부적합한 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 10 · '계산한다'의 조건과 증거 사다리</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 2 · RC의 원리</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 11 · 학습·기울기·RNN, 그리고 BPTT가 어려운 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d07b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 12 · ESN·LSM과 물리 reservoir computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 13 · state update와 readout 학습: 최소제곱에서 ridge까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d08b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 14 · 분류 readout과 학습 방법, 고정해도 되는 이유</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 15 · fading memory와 입력 간격, 처음 상태를 잊는 것(ESP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d09b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 16 · 고윳값·spectral radius·leak과 '느린 전류 → 계산'의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 17 · 선형으로 못 푸는 계산: XOR과 선형 분리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d10b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 18 · 노드를 늘리는 법과 device 비선형의 쓸모</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 19 · information processing capacity와 노드 수 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d11b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 20 · 기억–비선형 상충과 '서로 다른' 노드</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 21 · 실습 준비: 코드 실행, 과제와 잣대, 데이터 다루기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d12b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 22 · 실습 결과 읽기, 조건 바꾸기, 기준선 비교</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 3 · 좋은 시스템이란</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 23 · 기억의 세 가지 양과 MC 손계산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d13b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 24 · 과제의 시간척도와 좋은 memory의 조건</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 25 · 분리·rank·일반화: 상태는 얼마나 다른가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d14b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 26 · 차원과 비선형성의 평가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 27 · 벤치마크와 신호 처리 기초: 필터와 심전도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d15b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 28 · MNIST·NARMA·spoken digit이 검증하는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 29 · 기준선의 종류와 다항 회귀·NG-RC 비교</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d16b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 30 · R–C circuit으로 같은 응답이 나오면? 공정한 비교 규칙</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 31 · 정확도 옆의 숫자와 에너지 예산</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d17b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 32 · 지연시간과 같은 경계에서 비교하기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 33 · 편차의 네 종류, 상태 차이 대 반복 흔들림, 칩 사이 readout 이식</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d18b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 34 · drift와 재보정 주기, 논문 평가 체크리스트와 Phase 3 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 4 · 왜 이온 고분자인가</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 35 · 이온과 전자의 숫자: 이동도·확산·상태</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d19b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 36 · 이온만의 자유도와 이온이 지는 영역</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 37 · EDL 충전과 농도 분극: 이온 device의 기억과 비선형 (1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d20b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 38 · 도핑·나노유체·메커니즘 대응표: 이온 device의 기억과 비선형 (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 39 · 무작위 걸음과 확산 시간 L²/D, 디바이 길이의 유도와 그 한계</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d21b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 40 · 계면 충전 시간, 시간의 지도와 거꾸로 설계, 온도, 느림은 재료인가 크기인가</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 41 · Tg·분절 운동과 VFT, 이온쌍과 결합의 '떠나기·머물기'</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d22b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 42 · 가교·염 농도, 논문의 교란변수, 화학 → τ → 계산 지표의 경로</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 43 · 이온전도도는 무엇을 세나, conductance가 정하는 것과 정하지 못하는 것, 같은 conductance 다른 기억</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d23b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 44 · 기억 과제에서 conductance의 최적점, 질문 바꾸기와 최소 필요 conductance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 45 · 세 계단(이온겔·단일 이온 전도체·이종접합)과 수송수, 폴더의 이종접합이 보인 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d24b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 46 · 바깥 염과 Donnan 배제, 정류·고갈·다중 시간상수의 계산 primitive, Phase 4 종합</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Phase 5 · 무엇을 연구할까</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 47 · 논문 평가 표와 연구 지도</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d25b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 48 · 시냅스 모사·ionic reservoir computing 논문 읽기와 패턴</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 49 · 병목의 계층: 속도·전력·안정성·집적</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d26b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 50 · 전자회로 접속과 진짜 병목</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 51 · 응용 지도와 몸 안 심전도 장치: 감지에서 reservoir까지</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d27b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 52 · readout·전원·안전, 그리고 이길 수 있는 문제</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 53 · 검증할 수 있는 가설의 모양: 반증 가능성, 두 사슬과 고리 믿음, 빈칸에서 후보 꺼내기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d28b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 54 · 후보를 거르는 체와 함정: 관문·점수, 교란변수, '가장 중요한' 하나</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 55 · 최소 검증 실험과 실험 사다리, 설계의 낱말·측정 프로토콜, device 수·검출력, 블록·무작위화, 가설마다 고르는 기준선</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d29b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 56 · 기각 조건을 숫자로(차이의 95% 구간과 실용 문턱), 여러 번 보기, 새 device가 필요한가, 성공·실패가 남기는 것</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 57 · 결정의 틀(핵심 마무리)과 트랜스포머·어텐션(확장 읽기)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../days/d30b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Day 58 · 한 장 정리와 (선택) 결정 · 확장 읽기: RNN·reservoir computing·attention, 차세대 후보</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">처음 한 번 · 컴퓨터 준비</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/s.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P1. 컴퓨터만으로 첫 실험</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P2. 소스미터로 소자 재기</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P3. 보드로 만드는 장치</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P4. 누름과 리듬</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/e.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P5. EMG와 reservoir</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/side.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">사이드 · NU40 DK 하루 실습</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">연구 노트</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">논문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ledger/terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어 사전</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">이 페이지</h2>
+   
+  <ul class="collapse">
+  <li><a href="#emg-origin" id="toc-emg-origin" class="nav-link active" data-scroll-target="#emg-origin">1. 근전도는 어디서 오나</a></li>
+  <li><a href="#emg-measure" id="toc-emg-measure" class="nav-link" data-scroll-target="#emg-measure">2. 어떻게 재나</a></li>
+  <li><a href="#emg-system" id="toc-emg-system" class="nav-link" data-scroll-target="#emg-system">3. 측정 시스템은 어떻게 구성되나</a></li>
+  <li><a href="#emg-features" id="toc-emg-features" class="nav-link" data-scroll-target="#emg-features">4. 신호에서 무엇을 뽑나: 특징</a></li>
+  <li><a href="#emg-tasks" id="toc-emg-tasks" class="nav-link" data-scroll-target="#emg-tasks">5. 어떤 과제를 할 수 있나</a></li>
+  <li><a href="#emg-data" id="toc-emg-data" class="nav-link" data-scroll-target="#emg-data">6. 공개 데이터로 무엇을 해 볼 수 있나</a></li>
+  <li><a href="#emg-history" id="toc-emg-history" class="nav-link" data-scroll-target="#emg-history">7. 연구는 어떻게 진행되어 왔나</a></li>
+  <li><a href="#emg-limits" id="toc-emg-limits" class="nav-link" data-scroll-target="#emg-limits">8. 아직 못 하는 것과 그 이유</a></li>
+  <li><a href="#emg-computing" id="toc-emg-computing" class="nav-link" data-scroll-target="#emg-computing">9. 컴퓨팅 쪽에서 더 풀 수 있는 것</a></li>
+  <li><a href="#emg-materials" id="toc-emg-materials" class="nav-link" data-scroll-target="#emg-materials">10. 소재 쪽에서 더 해 볼 수 있는 것</a></li>
+  <li><a href="#emg-mat-comp" id="toc-emg-mat-comp" class="nav-link" data-scroll-target="#emg-mat-comp">11. 소재가 계산에 주는 영향</a></li>
+  <li><a href="#emg-concept" id="toc-emg-concept" class="nav-link" data-scroll-target="#emg-concept">12. 연구 컨셉: 이온 소자로 근전도에서 무엇을 할까</a></li>
+  <li><a href="#emg-check" id="toc-emg-check" class="nav-link" data-scroll-target="#emg-check">13. 스스로 확인</a></li>
+  <li><a href="#emg-refs" id="toc-emg-refs" class="nav-link" data-scroll-target="#emg-refs">14. 출처</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signals/emg.html">생체 신호</a></li><li class="breadcrumb-item"><a href="../signals/emg.html">근전도(EMG)</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">근전도(EMG)</h1>
+<p class="subtitle lead">근육의 전기 신호를 기초부터: 어디서 오고, 어떻게 재고, 무엇에 쓰이고, 어디서 막혀 있으며, 이온 소자로 무엇을 해 볼 수 있나</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="unit-head">
+<p><strong>이 페이지의 질문</strong> 근전도는 무엇이고, 지금의 기술로 어디까지 되며, 이온성 고분자 소자가 들어갈 자리는 어디인가?</p>
+<p><strong>왜 배우나</strong> 연구 로드맵의 설명용 예가 손목 근전도입니다. <span class="key">과제를 모르면 소자의 τ를 얼마로 만들지 정할 수 없습니다.</span></p>
+<p><strong>한 줄 그림</strong> 운동 단위의 전기 → 피부의 µV 떨림 → 증폭·필터·ADC → 특징 → 분류·추정 → 의수·기기·재활</p>
+<p><strong>꼭 가져갈 것</strong> <span class="key">근전도 한 번의 판정은 MCU가 이미 싸고 잘한다. 이온 소자가 들어갈 자리는 <strong>몇 초–몇 분의 과거가 필요한 판정</strong>(동작의 순서, 근육 피로)과 <strong>늘 켜져 있어야 하는 몸 위의 저전력 처리</strong>다.</span></p>
+<p><strong>나중에 봐도 됨</strong> 운동 단위 분해(decomposition)의 수학 · 신경망 모형의 구조</p>
+<p><strong>다음 신호</strong> 심전도(ECG)·뇌파(EEG)도 이 페이지와 같은 순서로 따로 정리할 예정입니다.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="먼저 생각해 보기 (답을 몰라도 됩니다. 읽기 전에 짐작만 적어 보세요)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>먼저 생각해 보기 (답을 몰라도 됩니다. 읽기 전에 짐작만 적어 보세요)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>손목에 찬 밴드가 "손가락을 꼬집었다"를 알아내려면 1초에 몇 번쯤 신호를 재야 할까?</li>
+<li>같은 동작을 해도 1시간 뒤에는 신호가 달라질 수 있다. 무엇 때문일까? 세 가지만 짐작해 보세요.</li>
+<li>근육이 피로해지면 근전도는 커질까, 작아질까?</li>
+</ol>
+<p>답은 본문에 있습니다. 끝의 "스스로 확인"에서 다시 묻습니다.</p>
+</div>
+</div>
+</div>
+<section id="emg-origin" class="level2">
+<h2 class="anchored" data-anchor-id="emg-origin">1. 근전도는 어디서 오나</h2>
+<p><strong>상황.</strong> 컵을 쥐려고 손가락에 힘을 주면, 뇌에서 척수를 거쳐 팔의 근육으로 전기 신호가 갑니다. 그 신호가 근육을 수축시키는 순간 근육 자체에서도 작은 전기가 생기고, 그 일부가 피부까지 퍼집니다. <span class="key"><strong>피부 위에서 잰 근육의 전기 신호가 표면 근전도(surface EMG, sEMG)</strong>입니다.</span></p>
+<figure class="rv-fig figure">
+<!-- EM:origin -->
+<svg class="rv-svg" viewbox="0 0 720 326" role="img" aria-label="운동 뉴런 하나와 근섬유 묶음(운동 단위), 세 운동 단위의 MUAP 열, 그리고 피부에서 합쳐진 표면 근전도. 힘을 더 주면 참여하는 운동 단위와 신호 빈도가 늘어 근전도가 커진다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">근전도는 어디서 오나: 운동 단위의 전기 신호가 피부에서 합쳐진다</text><text x="16.0" y="60.0" font-size="14" fill="#1d1d1f" font-weight="800">① 운동 단위(motor unit)</text><circle cx="40.0" cy="100.0" r="9" fill="#c2682b"></circle><text x="40.0" y="125.0" font-size="12.5" fill="#5f6368" text-anchor="middle">운동 뉴런</text><polyline points="49.0,100.0 80.0,100.0 96.0,90.0" fill="none" stroke="#c2682b" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"></polyline><rect x="96" y="86" width="110" height="8" rx="4" fill="#e7b8a3"></rect><polyline points="49.0,100.0 80.0,100.0 96.0,104.0" fill="none" stroke="#c2682b" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"></polyline><rect x="96" y="100" width="110" height="8" rx="4" fill="#e7b8a3"></rect><polyline points="49.0,100.0 80.0,100.0 96.0,118.0" fill="none" stroke="#c2682b" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"></polyline><rect x="96" y="114" width="110" height="8" rx="4" fill="#e7b8a3"></rect><polyline points="49.0,100.0 80.0,100.0 96.0,132.0" fill="none" stroke="#c2682b" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"></polyline><rect x="96" y="128" width="110" height="8" rx="4" fill="#e7b8a3"></rect><text x="151.0" y="154.0" font-size="12.5" fill="#5f6368" text-anchor="middle">근섬유 수십–수천 개</text><text x="16.0" y="182.0" font-size="12.5" fill="#2b2f36">뉴런 하나가 신호를 보내면</text><text x="16.0" y="200.0" font-size="12.5" fill="#2b2f36">거기 달린 근섬유가 한꺼번에 수축한다</text><text x="240.0" y="60.0" font-size="14" fill="#1d1d1f" font-weight="800">② 운동 단위마다 전기 파형(MUAP)이 반복</text><polyline points="240.0,92.0 241.0,92.0 242.0,92.0 243.0,92.0 244.0,92.0 245.0,92.0 246.0,92.0 247.0,92.0 248.0,92.0 249.0,92.0 250.0,92.0 251.0,92.0 252.0,92.0 253.0,92.0 254.0,92.0 255.0,92.0 256.0,92.0 257.0,92.0 258.0,92.0 259.0,92.0 260.0,92.0 261.0,92.0 262.0,92.0 263.0,92.0 264.0,92.0 265.0,92.0 266.0,92.0 267.0,92.0 268.0,92.0 269.0,92.0 270.0,92.0 271.0,92.0 272.0,92.0 273.0,92.1 274.0,92.4 275.0,93.5 276.0,95.7 277.0,97.4 278.0,94.6 279.0,86.6 280.0,80.3 281.0,83.0 282.0,91.5 283.0,96.9 284.0,96.7 285.0,94.4 286.0,92.8 287.0,92.2 288.0,92.0 289.0,92.0 290.0,92.0 291.0,92.0 292.0,92.0 293.0,92.0 294.0,92.0 295.0,92.0 296.0,92.0 297.0,92.0 298.0,92.0 299.0,92.0 300.0,92.0 301.0,92.0 302.0,92.0 303.0,92.0 304.0,92.0 305.0,92.3 306.0,93.1 307.0,95.0 308.0,97.1 309.0,96.1 310.0,89.2 311.0,81.3 312.0,81.3 313.0,89.1 314.0,96.0 315.0,97.2 316.0,95.0 317.0,93.1 318.0,92.3 319.0,92.0 320.0,92.0 321.0,92.0 322.0,92.0 323.0,92.0 324.0,92.0 325.0,92.0 326.0,92.0 327.0,92.0 328.0,92.0 329.0,92.0 330.0,92.0 331.0,92.0 332.0,92.0 333.0,92.0 334.0,92.0 335.0,92.0 336.0,92.0 337.0,92.0 338.0,92.0 339.0,92.0 340.0,92.0 341.0,92.0 342.0,92.0 343.0,92.0 344.0,92.0 345.0,92.1 346.0,92.3 347.0,93.2 348.0,95.2 349.0,97.2 350.0,95.7 351.0,88.3 352.0,80.9 353.0,81.8 354.0,89.9 355.0,96.4 356.0,97.0 357.0,94.8 358.0,93.0 359.0,92.2 360.0,92.0 361.0,92.0 362.0,92.0 363.0,92.0 364.0,92.0 365.0,92.0 366.0,92.0 367.0,92.0 368.0,92.2 369.0,92.8 370.0,94.3 371.0,96.7 372.0,96.9 373.0,91.6 374.0,83.1 375.0,80.2 376.0,86.5 377.0,94.6 378.0,97.4 379.0,95.7 380.0,93.5 381.0,92.4 382.0,92.1 383.0,92.0 384.0,92.0 385.0,92.0 386.0,92.0 387.0,92.0 388.0,92.0 389.0,92.0 390.0,92.0 391.0,92.0 392.0,92.0 393.0,92.0 394.0,92.0 395.0,92.0 396.0,92.0 397.0,92.0 398.0,92.0 399.0,92.0 400.0,92.0 401.0,92.1 402.0,92.5 403.0,93.8 404.0,96.1 405.0,97.3 406.0,93.6 407.0,85.2 408.0,80.0 409.0,84.2 410.0,92.8 411.0,97.2 412.0,96.3 413.0,94.0 414.0,92.6 415.0,92.1 416.0,92.0 417.0,92.0 418.0,92.0 419.0,92.0 420.0,92.0 421.0,92.0 422.0,92.0 423.0,92.0 424.0,92.0 425.0,92.0 426.0,92.0 427.0,92.0 428.0,92.0 429.0,92.0 430.0,92.2 431.0,93.0 432.0,94.9 433.0,97.1 434.0,96.2 435.0,89.6 436.0,81.6 437.0,81.0 438.0,88.6 439.0,95.8 440.0,97.2 441.0,95.1 442.0,93.2 443.0,92.3 444.0,92.1 445.0,92.0 446.0,92.0 447.0,92.0 448.0,92.0 449.0,92.0 450.0,92.0 451.0,92.0 452.0,92.0 453.0,92.0 454.0,92.0 455.0,92.0 456.0,92.0 457.0,92.0 458.0,92.0 459.0,92.0 460.0,92.0 461.0,92.0 462.0,92.0 463.0,92.0 464.0,92.0 465.0,92.0 466.0,92.0 467.0,92.0 468.0,92.0 469.0,92.0 470.0,92.0" fill="none" stroke="#c2682b" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="240.0,126.0 241.0,126.0 242.0,126.0 243.0,126.0 244.0,126.0 245.0,126.0 246.0,126.0 247.0,126.0 248.0,126.0 249.0,126.0 250.0,126.0 251.0,126.0 252.0,126.0 253.0,126.0 254.0,126.0 255.0,126.0 256.0,126.0 257.0,126.0 258.0,126.0 259.0,126.0 260.0,126.0 261.0,126.0 262.0,126.0 263.0,126.0 264.0,126.0 265.0,126.0 266.0,126.0 267.0,126.0 268.0,126.0 269.0,126.0 270.0,126.0 271.0,126.0 272.0,126.1 273.0,126.6 274.0,127.7 275.0,129.3 276.0,129.4 277.0,125.4 278.0,119.5 279.0,117.8 280.0,122.5 281.0,128.0 282.0,129.7 283.0,128.5 284.0,127.0 285.0,126.3 286.0,126.1 287.0,126.0 288.0,126.0 289.0,126.0 290.0,126.0 291.0,126.0 292.0,126.0 293.0,126.0 294.0,126.0 295.0,126.0 296.0,126.0 297.0,126.0 298.0,126.0 299.0,126.0 300.0,126.0 301.0,126.0 302.0,126.0 303.0,126.0 304.0,126.1 305.0,126.6 306.0,127.8 307.0,129.4 308.0,129.3 309.0,125.2 310.0,119.3 311.0,117.9 312.0,122.7 313.0,128.2 314.0,129.7 315.0,128.4 316.0,127.0 317.0,126.3 318.0,126.0 319.0,126.0 320.0,126.0 321.0,126.0 322.0,126.0 323.0,126.0 324.0,126.0 325.0,126.0 326.0,126.0 327.0,126.0 328.0,126.0 329.0,126.0 330.0,126.0 331.0,126.0 332.0,126.0 333.0,126.0 334.0,126.0 335.0,126.0 336.0,126.0 337.0,126.0 338.0,126.0 339.0,126.0 340.0,126.0 341.0,126.0 342.0,126.0 343.0,126.1 344.0,126.4 345.0,127.2 346.0,128.8 347.0,129.7 348.0,127.2 349.0,121.4 350.0,117.6 351.0,120.4 352.0,126.4 353.0,129.6 354.0,129.1 355.0,127.4 356.0,126.4 357.0,126.1 358.0,126.0 359.0,126.0 360.0,126.0 361.0,126.0 362.0,126.0 363.0,126.0 364.0,126.0 365.0,126.0 366.0,126.0 367.0,126.0 368.0,126.0 369.0,126.0 370.0,126.0 371.0,126.0 372.0,126.0 373.0,126.0 374.0,126.1 375.0,126.6 376.0,127.8 377.0,129.4 378.0,129.2 379.0,124.9 380.0,119.1 381.0,118.0 382.0,123.0 383.0,128.3 384.0,129.7 385.0,128.4 386.0,126.9 387.0,126.2 388.0,126.0 389.0,126.0 390.0,126.0 391.0,126.0 392.0,126.0 393.0,126.0 394.0,126.0 395.0,126.0 396.0,126.0 397.0,126.0 398.0,126.0 399.0,126.0 400.0,126.0 401.0,126.0 402.0,126.0 403.0,126.1 404.0,126.3 405.0,127.0 406.0,128.5 407.0,129.7 408.0,128.0 409.0,122.5 410.0,117.9 411.0,119.5 412.0,125.4 413.0,129.4 414.0,129.3 415.0,127.7 416.0,126.6 417.0,126.1 418.0,126.0 419.0,126.0 420.0,126.0 421.0,126.0 422.0,126.0 423.0,126.0 424.0,126.0 425.0,126.0 426.0,126.0 427.0,126.0 428.0,126.0 429.0,126.0 430.0,126.0 431.0,126.0 432.0,126.0 433.0,126.0 434.0,126.0 435.0,126.0 436.0,126.0 437.0,126.0 438.0,126.0 439.0,126.0 440.0,126.0 441.0,126.3 442.0,127.0 443.0,128.4 444.0,129.7 445.0,128.2 446.0,122.7 447.0,117.9 448.0,119.3 449.0,125.2 450.0,129.3 451.0,129.4 452.0,127.8 453.0,126.6 454.0,126.1 455.0,126.0 456.0,126.0 457.0,126.0 458.0,126.0 459.0,126.0 460.0,126.0 461.0,126.0 462.0,126.0 463.0,126.0 464.0,126.0 465.0,126.0 466.0,126.0 467.0,126.0 468.0,126.0 469.0,126.0 470.0,126.0" fill="none" stroke="#0e8a83" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="240.0,160.0 241.0,160.0 242.0,160.0 243.0,160.0 244.0,160.0 245.0,160.0 246.0,160.0 247.0,160.0 248.0,160.0 249.0,160.0 250.0,160.0 251.0,160.0 252.0,160.0 253.0,160.0 254.0,160.0 255.0,160.0 256.0,160.0 257.0,160.0 258.0,160.0 259.0,160.0 260.0,160.0 261.0,160.0 262.0,160.0 263.0,160.0 264.0,160.0 265.0,160.0 266.0,160.0 267.0,160.0 268.0,160.0 269.0,160.0 270.0,160.0 271.0,160.0 272.0,160.0 273.0,160.0 274.0,160.1 275.0,160.4 276.0,161.2 277.0,162.4 278.0,162.4 279.0,159.7 280.0,155.4 281.0,154.2 282.0,157.4 283.0,161.4 284.0,162.7 285.0,161.8 286.0,160.7 287.0,160.2 288.0,160.0 289.0,160.0 290.0,160.0 291.0,160.0 292.0,160.0 293.0,160.0 294.0,160.0 295.0,160.0 296.0,160.0 297.0,160.0 298.0,160.0 299.0,160.0 300.0,160.0 301.0,160.0 302.0,160.0 303.0,160.0 304.0,160.0 305.0,160.0 306.0,160.0 307.0,160.0 308.0,160.0 309.0,160.0 310.0,160.0 311.0,160.0 312.0,160.0 313.0,160.0 314.0,160.1 315.0,160.4 316.0,161.3 317.0,162.4 318.0,162.3 319.0,159.4 320.0,155.2 321.0,154.3 322.0,157.7 323.0,161.6 324.0,162.7 325.0,161.7 326.0,160.7 327.0,160.2 328.0,160.0 329.0,160.0 330.0,160.0 331.0,160.0 332.0,160.0 333.0,160.0 334.0,160.0 335.0,160.0 336.0,160.0 337.0,160.0 338.0,160.1 339.0,160.3 340.0,160.9 341.0,162.0 342.0,162.7 343.0,160.8 344.0,156.6 345.0,154.0 346.0,156.1 347.0,160.4 348.0,162.6 349.0,162.2 350.0,161.0 351.0,160.3 352.0,160.1 353.0,160.0 354.0,160.0 355.0,160.0 356.0,160.0 357.0,160.0 358.0,160.0 359.0,160.0 360.0,160.0 361.0,160.0 362.0,160.0 363.0,160.0 364.0,160.0 365.0,160.0 366.0,160.0 367.0,160.0 368.0,160.0 369.0,160.0 370.0,160.0 371.0,160.0 372.0,160.2 373.0,160.6 374.0,161.7 375.0,162.6 376.0,161.7 377.0,158.0 378.0,154.4 379.0,155.0 380.0,159.1 381.0,162.3 382.0,162.5 383.0,161.3 384.0,160.5 385.0,160.1 386.0,160.0 387.0,160.0 388.0,160.0 389.0,160.0 390.0,160.0 391.0,160.0 392.0,160.0 393.0,160.0 394.0,160.0 395.0,160.0 396.0,160.0 397.0,160.0 398.0,160.0 399.0,160.0 400.0,160.0 401.0,160.0 402.0,160.0 403.0,160.0 404.0,160.0 405.0,160.0 406.0,160.0 407.0,160.1 408.0,160.4 409.0,161.3 410.0,162.5 411.0,162.3 412.0,159.3 413.0,155.1 414.0,154.3 415.0,157.8 416.0,161.7 417.0,162.7 418.0,161.7 419.0,160.7 420.0,160.2 421.0,160.0 422.0,160.0 423.0,160.0 424.0,160.0 425.0,160.0 426.0,160.0 427.0,160.0 428.0,160.0 429.0,160.0 430.0,160.0 431.0,160.0 432.0,160.0 433.0,160.0 434.0,160.0 435.0,160.0 436.0,160.0 437.0,160.0 438.0,160.0 439.0,160.0 440.0,160.0 441.0,160.0 442.0,160.0 443.0,160.0 444.0,160.0 445.0,160.0 446.0,160.0 447.0,160.1 448.0,160.3 449.0,161.1 450.0,162.2 451.0,162.6 452.0,160.1 453.0,155.9 454.0,154.0 455.0,156.9 456.0,161.0 457.0,162.7 458.0,162.0 459.0,160.8 460.0,160.2 461.0,160.0 462.0,160.0 463.0,160.0 464.0,160.0 465.0,160.0 466.0,160.0 467.0,160.0 468.0,160.0 469.0,160.0 470.0,160.0" fill="none" stroke="#5f6fb0" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="240.0" y="196.0" font-size="12.5" fill="#2b2f36">하나의 MUAP는 5–20 ms</text><text x="240.0" y="214.0" font-size="12.5" fill="#2b2f36">1초에 수–수십 번 반복된다</text><text x="500.0" y="60.0" font-size="14" fill="#1d1d1f" font-weight="800">③ 피부에서는 합쳐서 보인다</text><line x1="500.0" y1="125.0" x2="700.0" y2="125.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="500.0,122.9 501.0,127.6 502.0,125.0 503.0,126.3 504.0,123.9 505.0,128.1 506.0,125.5 507.0,124.7 508.0,127.1 509.0,123.6 510.0,124.7 511.0,123.6 512.0,123.6 513.0,126.4 514.0,126.1 515.0,125.3 516.0,123.9 517.0,123.8 518.0,126.0 519.0,125.9 520.0,126.1 521.0,125.8 522.0,125.3 523.0,125.2 524.0,122.0 525.0,125.7 526.0,125.4 527.0,124.4 528.0,126.7 529.0,127.1 530.0,130.3 531.0,135.0 532.0,138.8 533.0,121.8 534.0,103.1 535.0,95.8 536.0,112.5 537.0,133.5 538.0,137.2 539.0,132.3 540.0,127.4 541.0,125.0 542.0,126.5 543.0,123.3 544.0,126.1 545.0,126.8 546.0,122.0 547.0,125.2 548.0,126.7 549.0,122.3 550.0,125.5 551.0,123.5 552.0,126.2 553.0,125.4 554.0,127.4 555.0,127.8 556.0,126.9 557.0,127.7 558.0,131.7 559.0,134.2 560.0,131.4 561.0,106.3 562.0,97.5 563.0,112.8 564.0,135.4 565.0,139.9 566.0,134.4 567.0,132.3 568.0,128.3 569.0,122.8 570.0,114.3 571.0,119.1 572.0,126.2 573.0,127.4 574.0,126.7 575.0,125.8 576.0,125.3 577.0,125.2 578.0,123.5 579.0,123.9 580.0,124.5 581.0,123.8 582.0,125.8 583.0,124.3 584.0,127.0 585.0,123.1 586.0,125.2 587.0,126.1 588.0,127.5 589.0,128.6 590.0,123.9 591.0,116.3 592.0,121.9 593.0,133.9 594.0,134.6 595.0,129.2 596.0,113.5 597.0,109.6 598.0,112.3 599.0,121.5 600.0,130.6 601.0,132.5 602.0,127.4 603.0,124.2 604.0,122.7 605.0,125.2 606.0,124.8 607.0,123.2 608.0,124.6 609.0,123.9 610.0,124.1 611.0,126.8 612.0,127.1 613.0,132.2 614.0,132.7 615.0,129.7 616.0,122.3 617.0,109.6 618.0,117.1 619.0,130.4 620.0,129.4 621.0,120.2 622.0,116.5 623.0,120.4 624.0,128.7 625.0,130.7 626.0,127.9 627.0,127.4 628.0,124.1 629.0,126.2 630.0,125.2 631.0,124.5 632.0,125.0 633.0,125.2 634.0,124.6 635.0,125.8 636.0,125.9 637.0,125.3 638.0,123.6 639.0,125.2 640.0,122.4 641.0,125.7 642.0,133.0 643.0,133.9 644.0,131.2 645.0,123.6 646.0,112.0 647.0,111.6 648.0,117.6 649.0,127.0 650.0,127.2 651.0,122.4 652.0,121.7 653.0,127.0 654.0,130.8 655.0,126.0 656.0,125.4 657.0,125.3 658.0,123.9 659.0,125.0 660.0,129.2 661.0,122.8 662.0,123.5 663.0,125.2 664.0,125.6 665.0,124.9 666.0,128.2 667.0,129.1 668.0,133.3 669.0,129.3 670.0,116.1 671.0,108.1 672.0,115.7 673.0,128.5 674.0,132.0 675.0,129.4 676.0,129.5 677.0,129.1 678.0,127.3 679.0,123.8 680.0,111.3 681.0,119.8 682.0,128.9 683.0,134.0 684.0,132.8 685.0,123.7 686.0,116.0 687.0,119.4 688.0,128.1 689.0,126.9 690.0,128.2 691.0,123.1 692.0,124.9 693.0,124.7 694.0,124.1 695.0,124.5 696.0,122.3 697.0,121.8 698.0,124.2 699.0,125.2 700.0,126.7" fill="none" stroke="#1d1d1f" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="500.0" y="196.0" font-size="12.5" fill="#2b2f36">표면 근전도(sEMG): 수십 µV–수 mV</text><text x="500.0" y="214.0" font-size="12.5" fill="#2b2f36">20–450 Hz 성분이 섞인 떨림</text><line x1="214.0" y1="112.0" x2="228.0" y2="112.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M228.0,115.3 L234.0,112.0 L228.0,108.7 Z" fill="#5f6368"></path><line x1="474.0" y1="125.0" x2="488.0" y2="125.0" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round"></line><path d="M488.0,128.3 L494.0,125.0 L488.0,121.7 Z" fill="#5f6368"></path><rect x="16.0" y="236.0" width="688.0" height="56.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="259.0" font-size="12.5" fill="#1d1d1f" font-weight="700">힘을 더 주면: ① 더 많은 운동 단위가 참여하고(recruitment) ② 각 단위가 더 자주 신호를 보낸다(firing rate).</text><text x="30.0" y="279.0" font-size="12.5" fill="#2b2f36">그래서 근전도의 크기(RMS)는 힘과 함께 커진다. 크기와 힘의 관계는 근육과 사람마다 다르다.</text><text x="16.0" y="316.0" font-size="12.5" fill="#5f6368">개념도 · MUAP 모양은 단순화 · 파형은 모형으로 만든 가상 신호</text></svg>
+<!-- /EM:origin -->
+<figcaption><b>그림 1. 근전도는 어디서 오나.</b> 운동 뉴런 하나와 그것이 맡은 근섬유 묶음이 운동 단위다. 운동 단위마다 같은 모양의 전기 파형(MUAP)이 반복되고, 피부에서는 여러 운동 단위의 파형이 합쳐진 떨림으로 보인다.</figcaption>
+</figure>
+<ul>
+<li><strong>운동 단위(motor unit)는 운동 뉴런 하나와 그 뉴런이 맡은 근섬유 묶음</strong>입니다. 뉴런이 신호를 한 번 보내면 그 묶음의 근섬유가 한꺼번에 수축합니다.</li>
+<li><strong>MUAP(motor unit action potential)는 운동 단위 하나가 한 번 수축할 때 생기는 전기 파형</strong>입니다. 길이는 5–20 ms이고, 힘을 주는 동안 1초에 수–수십 번 반복됩니다.</li>
+<li>피부의 전극은 근처 여러 운동 단위의 MUAP가 겹친 것을 봅니다. 그래서 표면 근전도는 <strong>+와 −로 빠르게 떨리는 불규칙한 신호</strong>로 보이고, 크기는 수십 µV에서 수 mV, 떨림의 빠르기는 1초에 20–450번(20–450 Hz)입니다.</li>
+</ul>
+<p><strong>힘과 근전도의 관계.</strong> 힘을 더 주면 두 가지가 일어납니다. 더 많은 운동 단위가 참여하고(<strong>recruitment</strong>), 이미 참여한 단위는 더 자주 신호를 보냅니다(<strong>firing rate</strong>가 오름). 그래서 <span class="key">근전도의 크기는 힘과 함께 커집니다.</span> 다만 그 비율은 근육, 전극 위치, 피부 아래 지방의 두께에 따라 달라서, 근전도만으로 "몇 N의 힘"을 바로 알 수는 없습니다.</p>
+<p><strong>근전도는 움직임보다 먼저 나옵니다.</strong> 근육의 전기가 생긴 뒤 실제로 힘이 나기까지 약 20–80 ms가 걸립니다(<strong>electromechanical delay</strong>). 그래서 근전도로 움직임을 아주 조금 앞서 알아챌 수 있고, 의수나 재활 로봇이 이 시간을 이용합니다.</p>
+</section>
+<section id="emg-measure" class="level2">
+<h2 class="anchored" data-anchor-id="emg-measure">2. 어떻게 재나</h2>
+<p><strong>상황.</strong> 팔 위에 전극 하나만 붙이고 땅(ground)과의 전압을 재면, 근육 신호보다 훨씬 큰 <strong>전원 잡음</strong>이 함께 들어옵니다. 몸은 주변 전선의 60 Hz 교류를 안테나처럼 받기 때문입니다. 근전도는 µV 단위라 이 잡음에 묻힙니다.</p>
+<figure class="rv-fig figure">
+<!-- EM:diff -->
+<svg class="rv-svg" viewbox="0 0 720 312" role="img" aria-label="팔의 근육 위 전극 두 개와 기준 전극. 두 전극의 파형에는 같은 전원 잡음이 들어 있고, 둘의 차이를 재면 잡음이 사라지고 근육 신호만 남는다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">왜 전극 두 개의 차이를 재나: 둘에 똑같이 들어온 잡음은 빼면 사라진다</text><rect x="16" y="70" width="250" height="70" rx="34" fill="#e3c9b3"></rect><path d="M50,92 Q140,78 230,92 L230,118 Q140,132 50,118 Z" fill="#e7b8a3" opacity="0.8"></path><text x="140.0" y="110.0" font-size="12.5" fill="#7a4b33" font-weight="700" text-anchor="middle">근육</text><rect x="84" y="60" width="24" height="12" rx="3" fill="#0e8a83"></rect><text x="96.0" y="52.0" font-size="12.5" fill="#0e8a83" font-weight="700" text-anchor="middle">전극 1</text><rect x="164" y="60" width="24" height="12" rx="3" fill="#c2682b"></rect><text x="176.0" y="52.0" font-size="12.5" fill="#c2682b" font-weight="700" text-anchor="middle">전극 2</text><rect x="232" y="128" width="20" height="10" rx="3" fill="#5f6368"></rect><text x="242.0" y="160.0" font-size="12.5" fill="#5f6368" text-anchor="middle">기준 전극</text><text x="136.0" y="184.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">두 전극은 근섬유 방향으로 약 2 cm 간격</text><text x="330.0" y="56.0" font-size="12.5" fill="#0e8a83" font-weight="700">전극 1: 근육 신호 + 잡음</text><line x1="330.0" y1="78.0" x2="580.0" y2="78.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="330.0,78.0 332.1,73.3 334.2,69.7 336.2,68.4 338.3,69.4 340.4,72.6 342.5,76.8 344.6,81.4 346.7,85.0 348.8,86.9 350.8,87.0 352.9,84.9 355.0,81.2 357.1,76.5 359.2,71.7 361.2,68.2 363.3,67.2 365.4,69.9 367.5,74.5 369.6,79.5 371.7,84.0 373.8,86.4 375.8,85.8 377.9,84.3 380.0,82.6 382.1,80.1 384.2,76.0 386.2,72.4 388.3,68.4 390.4,67.8 392.5,69.9 394.6,74.4 396.7,82.7 398.8,89.6 400.8,90.3 402.9,87.1 405.0,81.7 407.1,76.8 409.2,74.3 411.2,74.5 413.3,76.3 415.4,72.6 417.5,69.2 419.6,68.7 421.7,71.4 423.8,81.0 425.8,89.5 427.9,92.0 430.0,89.4 432.1,83.3 434.2,72.0 436.2,68.2 438.3,67.4 440.4,74.1 442.5,75.4 444.6,79.2 446.7,74.3 448.8,71.6 450.8,77.8 452.9,85.4 455.0,90.3 457.1,90.7 459.2,87.8 461.2,76.5 463.3,69.5 465.4,59.9 467.5,67.2 469.6,73.6 471.7,80.1 473.8,82.8 475.8,80.9 477.9,77.0 480.0,79.7 482.1,85.1 484.2,88.3 486.2,86.0 488.3,80.9 490.4,70.4 492.5,63.0 494.6,63.6 496.7,70.2 498.8,77.0 500.8,86.2 502.9,87.5 505.0,86.4 507.1,84.8 509.2,84.4 511.2,81.3 513.3,79.0 515.4,74.9 517.5,72.6 519.6,67.9 521.7,67.5 523.8,71.3 525.8,76.4 527.9,82.6 530.0,87.3 532.1,87.9 534.2,86.9 536.2,83.8 538.3,79.4 540.4,75.6 542.5,72.4 544.6,69.7 546.7,69.3 548.8,70.1 550.8,73.8 552.9,78.5 555.0,83.2 557.1,87.0 559.2,87.9 561.2,86.5 563.3,82.9 565.4,78.1 567.5,73.4 569.6,70.1 571.7,68.7 573.8,69.2 575.8,72.0 577.9,76.1 580.0,80.9" fill="none" stroke="#0e8a83" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="330.0" y="112.0" font-size="12.5" fill="#c2682b" font-weight="700">전극 2: (조금 다른) 신호 + 같은 잡음</text><line x1="330.0" y1="134.0" x2="580.0" y2="134.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="330.0,134.0 332.1,129.5 334.2,126.1 336.2,124.5 338.3,125.2 340.4,128.1 342.5,132.6 344.6,137.4 346.7,141.4 348.8,143.7 350.8,143.3 352.9,140.7 355.0,136.4 357.1,131.6 359.2,127.7 361.2,125.4 363.3,125.3 365.4,126.6 367.5,129.8 369.6,134.2 371.7,138.7 373.8,142.5 375.8,144.7 377.9,143.7 380.0,139.5 382.1,133.8 384.2,128.7 386.2,125.0 388.3,124.5 390.4,125.8 392.5,128.9 394.6,133.0 396.7,135.6 398.8,138.0 400.8,141.4 402.9,143.5 405.0,143.3 407.1,140.0 409.2,133.9 411.2,126.8 413.3,121.0 415.4,121.9 417.5,126.4 419.6,132.3 421.7,138.1 423.8,139.7 425.8,140.1 427.9,140.9 430.0,141.1 432.1,139.9 434.2,139.6 436.2,134.4 438.3,128.7 440.4,121.3 442.5,120.9 444.6,122.5 446.7,132.1 448.8,141.3 450.8,144.3 452.9,144.0 455.0,141.8 457.1,138.6 459.2,134.4 461.2,133.6 463.3,130.6 465.4,131.3 467.5,125.1 469.6,123.2 471.7,124.6 473.8,130.2 475.8,138.8 477.9,147.0 480.0,148.2 482.1,144.1 484.2,137.7 486.2,132.2 488.3,127.7 490.4,127.5 492.5,128.2 494.6,127.7 496.7,127.2 498.8,129.4 500.8,131.5 502.9,137.7 505.0,143.0 507.1,145.2 509.2,142.9 511.2,139.1 513.3,133.1 515.4,128.3 517.5,124.2 519.6,124.7 521.7,126.4 523.8,129.0 525.8,133.1 527.9,136.9 530.0,140.2 532.1,143.1 534.2,143.3 536.2,141.2 538.3,137.2 540.4,131.9 542.5,127.1 544.6,124.5 546.7,124.1 548.8,126.6 550.8,130.4 552.9,135.1 555.0,139.4 557.1,142.3 559.2,143.4 561.2,142.2 563.3,139.1 565.4,134.7 567.5,130.0 569.6,126.2 571.7,124.3 573.8,125.0 575.8,127.8 577.9,132.2 580.0,137.0" fill="none" stroke="#c2682b" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="330.0" y="168.0" font-size="12.5" fill="#1d1d1f" font-weight="700">차이(1 − 2): 잡음이 사라짐</text><line x1="330.0" y1="190.0" x2="580.0" y2="190.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="330.0,190.0 332.1,189.8 334.2,189.6 336.2,189.9 338.3,190.2 340.4,190.5 342.5,190.3 344.6,190.0 346.7,189.6 348.8,189.2 350.8,189.7 352.9,190.2 355.0,190.9 357.1,191.0 359.2,190.0 361.2,188.8 363.3,187.9 365.4,189.2 367.5,190.7 369.6,191.3 371.7,191.3 373.8,189.9 375.8,187.1 377.9,186.6 380.0,189.1 382.1,192.3 384.2,193.3 386.2,193.3 388.3,189.8 390.4,188.0 392.5,187.0 394.6,187.5 396.7,193.1 398.8,197.6 400.8,195.0 402.9,189.5 405.0,184.4 407.1,182.7 409.2,186.5 411.2,193.7 413.3,201.3 415.4,196.7 417.5,188.8 419.6,182.4 421.7,179.3 423.8,187.3 425.8,195.5 427.9,197.1 430.0,194.3 432.1,189.4 434.2,178.4 436.2,179.8 438.3,184.7 440.4,198.8 442.5,200.5 444.6,202.7 446.7,188.2 448.8,176.3 450.8,179.5 452.9,187.5 455.0,194.5 457.1,198.2 459.2,199.4 461.2,188.9 463.3,184.9 465.4,174.7 467.5,188.0 469.6,196.4 471.7,201.5 473.8,198.6 475.8,188.1 477.9,175.9 480.0,177.5 482.1,187.0 484.2,196.6 486.2,199.8 488.3,199.2 490.4,188.8 492.5,180.7 494.6,181.9 496.7,189.0 498.8,193.6 500.8,200.6 502.9,195.8 505.0,189.4 507.1,185.7 509.2,187.5 511.2,188.2 513.3,191.9 515.4,192.6 517.5,194.4 519.6,189.1 521.7,187.1 523.8,188.3 525.8,189.3 527.9,191.7 530.0,193.0 532.1,190.8 534.2,189.6 536.2,188.6 538.3,188.2 540.4,189.7 542.5,191.3 544.6,191.2 546.7,191.3 548.8,189.5 550.8,189.4 552.9,189.3 555.0,189.8 557.1,190.7 559.2,190.4 561.2,190.3 563.3,189.8 565.4,189.4 567.5,189.4 569.6,189.9 571.7,190.3 573.8,190.2 575.8,190.3 577.9,189.9 580.0,189.9" fill="none" stroke="#1d1d1f" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="592.0" y="82.0" font-size="12.5" fill="#a86a12" font-weight="700">60 Hz</text><text x="592.0" y="99.0" font-size="12.5" fill="#a86a12">전원 잡음</text><rect x="16.0" y="222.0" width="688.0" height="56.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="246.0" font-size="14" fill="#1d1d1f" font-weight="800">차동 증폭기:  V<tspan baseline-shift="sub" font-size="72%">out</tspan> = G × (V<tspan baseline-shift="sub" font-size="72%">1</tspan> − V<tspan baseline-shift="sub" font-size="72%">2</tspan>)</text><text x="30.0" y="266.0" font-size="12.5" fill="#2b2f36">G는 키우는 배율(gain). 두 전극에 똑같이 들어온 전원 잡음·몸 전체의 전압은 빼면 0이 된다.</text><text x="16.0" y="302.0" font-size="12.5" fill="#5f6368">개념도 · 가상 신호 · 실제로는 잡음이 완전히 같지 않아 일부가 남는다</text></svg>
+<!-- /EM:diff -->
+<figcaption><b>그림 2. 차동 측정.</b> 근육 위에 전극 두 개를 근섬유 방향으로 나란히 붙이고 둘의 차이를 잰다. 두 전극에 똑같이 들어온 전원 잡음은 빼면 사라지고, 위치에 따라 조금 다른 근육 신호만 남는다.</figcaption>
+</figure>
+<ul>
+<li><strong>차동(differential) 측정은 두 전극의 전압 차이를 재는 방법</strong>입니다. 두 전극에 똑같이 들어온 잡음은 빼면 0이 됩니다. 이 차이를 키우는 증폭기가 <strong>차동 증폭기</strong>이고, 출력은 V<sub>out</sub> = G × (V<sub>1</sub> − V<sub>2</sub>)입니다. G는 키우는 배율(<strong>gain</strong>)입니다.</li>
+<li>두 전극을 한 쌍으로 쓰는 방식을 <strong>bipolar</strong>라 부르고, 한 쌍이 <strong>채널(channel)</strong> 하나입니다. 여러 채널이 함께 쓰는 <strong>기준 전극</strong>(reference)을 뼈 위처럼 근육이 적은 곳에 하나 더 붙입니다.</li>
+<li>전극 간격은 흔히 약 2 cm입니다. 너무 가까우면 두 전극이 거의 같은 신호를 봐서 차이가 작아지고, 너무 멀면 다른 근육의 신호(<strong>crosstalk</strong>)가 섞입니다.</li>
+</ul>
+<p><strong>전극의 종류.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>습식 전극 (Ag/AgCl + 젤)</th>
+<th>건식 전극 (금속·전도성 고무)</th>
+<th>이온성 하이드로겔·이온겔 전극</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>원리</td>
+<td>젤의 이온이 피부와 전극을 잇는다</td>
+<td>금속이 피부에 직접 닿는다</td>
+<td>부드러운 이온 전도체가 피부와 전극을 잇는다</td>
+</tr>
+<tr class="even">
+<td>좋은 점</td>
+<td>피부와의 저항이 낮고 안정적, 임상의 기준</td>
+<td>젤 없이 몇 초 만에 착용(Meta 손목 밴드)</td>
+<td>피부에 잘 붙고 부드러움, 땀에도 버티게 설계 가능</td>
+</tr>
+<tr class="odd">
+<td>나쁜 점</td>
+<td>젤이 마르면 나빠짐, 오래 못 씀</td>
+<td>처음 몇 분 동안 값이 흔들리고 움직임에 약함</td>
+<td>수분 손실·건조, 장기 안정성이 연구 과제</td>
+</tr>
+<tr class="even">
+<td>소재 연구와의 연결</td>
+<td>—</td>
+<td>—</td>
+<td><span class="key"><strong>이온 소재 연구자가 바로 기여할 수 있는 곳</strong></span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>피부-전극 임피던스.</strong> <strong>임피던스(impedance)는 교류에 대한 저항</strong>으로, 피부와 전극 사이에서 신호가 얼마나 쉽게 건너가는지를 나타냅니다. 피부 맨 바깥의 각질층이 마르면 임피던스가 크고, 땀이 나면 작아집니다. 임피던스가 시간에 따라 바뀌면 같은 근육 신호도 다르게 재집니다. 그래서 요즘 장치는 증폭기의 입력 임피던스를 아주 크게 만들어(Meta 밴드: 약 10 TΩ) 피부 쪽 변화의 영향을 줄입니다 <span class="tag tag-fact">논문</span>.</p>
+</section>
+<section id="emg-system" class="level2">
+<h2 class="anchored" data-anchor-id="emg-system">3. 측정 시스템은 어떻게 구성되나</h2>
+<p><strong>입력과 출력.</strong> 입력은 피부의 µV–mV 전압이고, 출력은 "잡기" 같은 판정이나 손목 각도 같은 연속된 값입니다. 그 사이를 여섯 단계가 잇습니다.</p>
+<figure class="rv-fig figure">
+<!-- EM:chain -->
+<svg class="rv-svg" viewbox="0 0 720 278" role="img" aria-label="전극, 증폭, 필터, ADC, MCU, 무선의 여섯 단계와 각 단계를 지난 신호의 모양. 증폭 뒤에는 크지만 흔들리고, 필터 뒤에 깨끗해지고, ADC 뒤에 점(숫자)이 된다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">측정 시스템: 피부의 µV가 숫자가 되기까지, 단계마다 신호가 어떻게 바뀌나</text><rect x="16.0" y="56.0" width="104.0" height="128.0" rx="10" fill="#f5f5f7"></rect><text x="68.0" y="78.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">전극</text><text x="68.0" y="98.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">피부 접촉</text><text x="68.0" y="116.0" font-size="11.5" fill="#5f6368" text-anchor="middle">건식·습식</text><line x1="24.0" y1="154.0" x2="112.0" y2="154.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="24.0,154.0 25.5,151.9 26.9,155.4 28.4,150.6 29.9,152.5 31.3,152.8 32.8,148.7 34.3,152.8 35.7,149.4 37.2,149.1 38.7,151.5 40.1,146.6 41.6,149.9 43.1,149.5 44.5,146.6 46.0,149.7 47.5,145.5 48.9,147.4 50.4,150.3 51.9,145.0 53.3,147.7 54.8,145.7 56.3,146.6 57.7,150.3 59.2,145.6 60.7,144.6 62.1,147.1 63.6,147.5 65.1,154.1 66.5,146.7 68.0,143.8 69.5,149.9 70.9,148.4 72.4,152.8 73.9,149.3 75.3,146.1 76.8,151.6 78.3,150.2 79.7,152.1 81.2,152.1 82.7,148.3 84.1,154.4 85.6,153.0 87.1,152.8 88.5,155.6 90.0,151.7 91.5,156.1 92.9,156.5 94.4,154.0 95.9,158.5 97.3,155.5 98.8,157.1 100.3,159.7 101.7,155.8 103.2,160.3 104.7,158.8 106.1,157.8 107.6,162.0 109.1,157.9 110.5,160.7 112.0,161.5" fill="none" stroke="#1d1d1f" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><line x1="121.0" y1="120.0" x2="126.8" y2="120.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M126.8,122.8 L131.8,120.0 L126.8,117.2 Z" fill="#5f6368"></path><rect x="132.8" y="56.0" width="104.0" height="128.0" rx="10" fill="#fdf3da"></rect><text x="184.8" y="78.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">증폭</text><text x="184.8" y="98.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">× 200–1,000</text><text x="184.8" y="116.0" font-size="11.5" fill="#5f6368" text-anchor="middle">µV → V</text><line x1="140.8" y1="154.0" x2="228.8" y2="154.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="140.8,154.0 142.3,149.7 143.7,157.2 145.2,147.5 146.7,151.5 148.1,152.5 149.6,144.0 151.1,152.6 152.5,145.9 154.0,145.6 155.5,150.3 156.9,140.1 158.4,147.3 159.9,147.9 161.3,141.7 162.8,146.2 164.3,137.4 165.7,143.0 167.2,151.4 168.7,138.2 170.1,141.1 171.6,137.4 173.1,142.9 174.5,150.5 176.0,140.3 177.5,130.5 178.9,139.9 180.4,147.0 181.9,164.6 183.3,141.1 184.8,127.9 186.3,146.5 187.7,148.1 189.2,157.7 190.7,145.2 192.1,135.4 193.6,148.3 195.1,149.9 196.5,152.6 198.0,149.2 199.5,140.2 200.9,154.9 202.4,153.6 203.9,152.6 205.3,156.1 206.8,147.9 208.3,158.1 209.7,159.1 211.2,153.3 212.7,161.9 214.1,155.8 215.6,159.4 217.1,164.6 218.5,156.3 220.0,165.3 221.5,162.1 222.9,160.0 224.4,168.6 225.9,160.0 227.3,165.6 228.8,167.4" fill="none" stroke="#1d1d1f" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><line x1="237.8" y1="120.0" x2="243.6" y2="120.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M243.6,122.8 L248.6,120.0 L243.6,117.2 Z" fill="#5f6368"></path><rect x="249.6" y="56.0" width="104.0" height="128.0" rx="10" fill="#fdf3da"></rect><text x="301.6" y="78.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">필터</text><text x="301.6" y="98.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">20–450 Hz만</text><text x="301.6" y="116.0" font-size="11.5" fill="#5f6368" text-anchor="middle">+ 60 Hz 제거</text><line x1="257.6" y1="154.0" x2="345.6" y2="154.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="257.6,154.0 259.1,154.0 260.5,154.0 262.0,154.0 263.5,154.0 264.9,154.0 266.4,153.8 267.9,154.0 269.3,154.1 270.8,154.7 272.3,153.6 273.7,153.4 275.2,153.9 276.7,156.4 278.1,155.9 279.6,151.8 281.1,151.6 282.5,154.4 284.0,159.4 285.5,154.9 286.9,149.1 288.4,150.1 289.9,157.7 291.3,157.6 292.8,156.5 294.3,140.7 295.7,149.3 297.2,162.9 298.7,170.8 300.1,154.0 301.6,139.2 303.1,151.9 304.5,162.1 306.0,163.1 307.5,152.6 308.9,146.3 310.4,149.8 311.9,159.3 313.3,157.1 314.8,150.4 316.3,148.5 317.7,153.2 319.2,156.7 320.7,155.7 322.1,151.4 323.6,151.6 325.1,154.2 326.5,155.0 328.0,154.2 329.5,152.8 330.9,153.7 332.4,154.3 333.9,154.3 335.3,154.1 336.8,153.8 338.3,153.8 339.7,154.1 341.2,154.0 342.7,154.0 344.1,154.0 345.6,154.0" fill="none" stroke="#1d1d1f" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><line x1="354.6" y1="120.0" x2="360.4" y2="120.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M360.4,122.8 L365.4,120.0 L360.4,117.2 Z" fill="#5f6368"></path><rect x="366.4" y="56.0" width="104.0" height="128.0" rx="10" fill="#eef3fd"></rect><text x="418.4" y="78.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">ADC</text><text x="418.4" y="98.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">1–2 kHz</text><text x="418.4" y="116.0" font-size="11.5" fill="#5f6368" text-anchor="middle">12–16 bit</text><circle cx="374.4" cy="154.0" r="2.2" fill="#2b59c3"></circle><circle cx="380.3" cy="154.0" r="2.2" fill="#2b59c3"></circle><circle cx="386.1" cy="154.1" r="2.2" fill="#2b59c3"></circle><circle cx="392.0" cy="153.9" r="2.2" fill="#2b59c3"></circle><circle cx="397.9" cy="151.6" r="2.2" fill="#2b59c3"></circle><circle cx="403.7" cy="149.1" r="2.2" fill="#2b59c3"></circle><circle cx="409.6" cy="156.5" r="2.2" fill="#2b59c3"></circle><circle cx="415.5" cy="170.8" r="2.2" fill="#2b59c3"></circle><circle cx="421.3" cy="162.1" r="2.2" fill="#2b59c3"></circle><circle cx="427.2" cy="149.8" r="2.2" fill="#2b59c3"></circle><circle cx="433.1" cy="148.5" r="2.2" fill="#2b59c3"></circle><circle cx="438.9" cy="151.4" r="2.2" fill="#2b59c3"></circle><circle cx="444.8" cy="154.2" r="2.2" fill="#2b59c3"></circle><circle cx="450.7" cy="154.3" r="2.2" fill="#2b59c3"></circle><circle cx="456.5" cy="154.1" r="2.2" fill="#2b59c3"></circle><circle cx="462.4" cy="154.0" r="2.2" fill="#2b59c3"></circle><line x1="471.4" y1="120.0" x2="477.2" y2="120.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M477.2,122.8 L482.2,120.0 L477.2,117.2 Z" fill="#5f6368"></path><rect x="483.2" y="56.0" width="104.0" height="128.0" rx="10" fill="#eef3fd"></rect><text x="535.2" y="78.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">MCU</text><text x="535.2" y="98.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">특징·분류</text><text x="535.2" y="116.0" font-size="11.5" fill="#5f6368" text-anchor="middle">또는 전달</text><text x="535.2" y="159.0" font-size="12" fill="#2b59c3" font-weight="700" text-anchor="middle">0.42, 0.88 …</text><line x1="588.2" y1="120.0" x2="594.0" y2="120.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M594.0,122.8 L599.0,120.0 L594.0,117.2 Z" fill="#5f6368"></path><rect x="600.0" y="56.0" width="104.0" height="128.0" rx="10" fill="#f5f5f7"></rect><text x="652.0" y="78.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">무선</text><text x="652.0" y="98.0" font-size="12.5" fill="#2b2f36" text-anchor="middle">BLE</text><text x="652.0" y="116.0" font-size="11.5" fill="#5f6368" text-anchor="middle">폰·PC로</text><text x="652.0" y="159.0" font-size="13" fill="#2b59c3" font-weight="800" text-anchor="middle">"잡기"</text><text x="16.0" y="202.0" font-size="12.5" fill="#2b2f36">예: Meta 손목 밴드(연구용) — 16채널 · 배율 190 · 20 Hz 아래와 850 Hz 위를 거름 · 1초에 2,000번</text><text x="16.0" y="222.0" font-size="12.5" fill="#2b2f36">  · 잡음 2.46 µVrms · 계산은 하지 않고 원신호를 노트북으로 보냄</text><text x="16.0" y="244.0" font-size="12.5" fill="#2b2f36">증폭·필터는 보통 한 칩(AFE)에, ADC·계산·무선은 MCU 칩 하나에 들어 있는 경우가 많다.</text><text x="16.0" y="268.0" font-size="12.5" fill="#5f6368">개념도 · 가상 신호 · 숫자는 흔한 범위와 Kaifosh 2025의 값</text></svg>
+<!-- /EM:chain -->
+<figcaption><b>그림 3. 측정 시스템의 여섯 단계.</b> 칸 아래 파형은 그 단계를 지난 신호다. 증폭 뒤에는 크지만 움직임에 따른 흔들림과 잡음이 남고, 필터를 지나 깨끗해지고, ADC를 지나 점(숫자)이 된다.</figcaption>
+</figure>
+<ol type="1">
+<li><strong>전극.</strong> 피부와 닿아 전압을 받습니다.</li>
+<li><strong>증폭.</strong> µV–mV를 수백–천 배 키워 V 단위로 만듭니다. 잡음이 적어야 해서 생체 신호 전용 칩(<strong>AFE</strong>, analog front-end)을 씁니다.</li>
+<li><strong>필터.</strong> <strong>필터는 정해진 빠르기의 떨림만 통과시키는 회로</strong>입니다. 근전도에서는 세 가지를 씁니다.
+<ul>
+<li><strong>high-pass 약 20 Hz</strong>: 팔을 움직일 때 전극이 흔들려 생기는 느린 출렁임(<strong>motion artifact</strong>)을 없앱니다.</li>
+<li><strong>low-pass 450–850 Hz</strong>: 근전도보다 빠른 잡음을 없애고, ADC가 재기 전에 너무 빠른 성분을 미리 잘라 둡니다.</li>
+<li><strong>notch 60 Hz</strong>: 전원 잡음의 남은 부분을 없앱니다(유럽 등은 50 Hz).</li>
+</ul></li>
+<li><strong>ADC.</strong> 1초에 1,000–2,000번(1–2 kHz) 재서 12–16 bit 숫자로 적습니다. 가장 빠른 성분(약 450 Hz)의 두 배보다 자주 재야 하므로 1 kHz 이상이 필요합니다.</li>
+<li><strong>MCU.</strong> 숫자로 특징을 계산하고 분류합니다. 또는 계산하지 않고 무선으로 넘기기만 합니다.</li>
+<li><strong>무선.</strong> BLE(저전력 블루투스)로 폰이나 PC에 보냅니다.</li>
+</ol>
+<p><strong>장치의 예.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>장치</th>
+<th>채널</th>
+<th>sampling rate</th>
+<th>특징</th>
+<th>쓰임</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>임상·연구용 무선 전극 (예: Delsys Trigno)</td>
+<td>전극마다 1</td>
+<td>약 2 kHz</td>
+<td>습식에 가까운 접촉, 정확</td>
+<td>Ninapro 같은 데이터 수집</td>
+</tr>
+<tr class="even">
+<td>Myo 팔찌 (단종)</td>
+<td>8</td>
+<td>200 Hz, 8 bit</td>
+<td>값싸고 많이 쓰였지만 450 Hz 성분을 다 못 담음</td>
+<td>여러 공개 데이터</td>
+</tr>
+<tr class="odd">
+<td>Meta 연구용 손목 밴드</td>
+<td>16</td>
+<td>2 kHz</td>
+<td>건식, 잡음 2.46 µVrms, 손목에서는 계산하지 않음</td>
+<td>Kaifosh 2025</td>
+</tr>
+<tr class="even">
+<td>고밀도 전극 격자 (HD-sEMG)</td>
+<td>64–256</td>
+<td>약 2 kHz</td>
+<td>근육 위를 사진처럼 덮음</td>
+<td>운동 단위 분해, 신호가 퍼지는 속도 측정</td>
+</tr>
+</tbody>
+</table>
+<p><span class="key">Meta의 손목 밴드도 <strong>손목에서는 계산하지 않고 원신호를 노트북으로 보냅니다</strong>(배터리 4시간 이상).</span> 몸 위에서 늘 켜진 채 적은 전력으로 처리하는 일은 아직 열린 문제입니다 <span class="tag tag-fact">논문</span>.</p>
+</section>
+<section id="emg-features" class="level2">
+<h2 class="anchored" data-anchor-id="emg-features">4. 신호에서 무엇을 뽑나: 특징</h2>
+<p><strong>상황.</strong> 1 kHz로 재면 채널 하나에서 1초에 숫자 1,000개가 나옵니다. 이 숫자를 그대로 분류기에 넣기보다, 짧은 구간마다 <strong>특징(feature)</strong>, 즉 <strong>구간을 요약한 숫자 몇 개</strong>로 줄입니다.</p>
+<figure class="rv-fig figure">
+<!-- EM:features -->
+<svg class="rv-svg" viewbox="0 0 720 398" role="img" aria-label="200 ms 근전도 구간 위에 RMS와 MAV 높이를 점선으로 표시하고, 오른쪽에 다섯 가지 특징(MAV, RMS, ZC, WL, MDF)의 뜻을 정리한 그림. 아래에 숫자 다섯 개로 계산한 예."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">한 구간(200 ms)에서 뽑는 특징: 세기·떨림의 빠르기를 숫자 몇 개로</text><line x1="40.0" y1="140.0" x2="400.0" y2="140.0" stroke="#d9dde3" stroke-width="1.2" stroke-linecap="round"></line><polyline points="40.0,135.7 41.8,132.0 43.6,121.9 45.4,120.7 47.2,125.5 49.0,137.1 50.9,147.4 52.7,156.7 54.5,157.0 56.3,160.3 58.1,154.9 59.9,150.0 61.7,139.6 63.5,121.2 65.3,118.6 67.1,121.6 68.9,125.2 70.8,141.1 72.6,147.8 74.4,161.0 76.2,162.9 78.0,157.5 79.8,144.1 81.6,131.2 83.4,121.6 85.2,115.7 87.0,116.2 88.8,121.5 90.7,138.6 92.5,139.9 94.3,157.2 96.1,166.3 97.9,165.8 99.7,153.8 101.5,149.1 103.3,136.1 105.1,120.8 106.9,111.3 108.7,111.2 110.6,120.4 112.4,138.0 114.2,158.5 116.0,170.5 117.8,171.9 119.6,160.5 121.4,147.5 123.2,138.0 125.0,122.5 126.8,105.9 128.6,105.9 130.5,111.2 132.3,124.8 134.1,157.6 135.9,171.7 137.7,178.8 139.5,178.4 141.3,158.6 143.1,152.9 144.9,132.2 146.7,108.6 148.5,98.0 150.4,103.9 152.2,123.4 154.0,146.6 155.8,170.0 157.6,180.7 159.4,184.5 161.2,183.0 163.0,157.5 164.8,140.8 166.6,113.2 168.4,90.2 170.3,93.4 172.1,114.8 173.9,136.0 175.7,162.8 177.5,187.8 179.3,193.3 181.1,187.3 182.9,166.0 184.7,136.8 186.5,114.8 188.3,87.7 190.2,83.9 192.0,98.2 193.8,118.7 195.6,158.3 197.4,183.1 199.2,188.8 201.0,193.2 202.8,169.5 204.6,158.3 206.4,113.0 208.2,87.4 210.1,81.1 211.9,81.4 213.7,113.0 215.5,148.7 217.3,162.2 219.1,186.0 220.9,199.0 222.7,190.1 224.5,180.4 226.3,144.9 228.1,112.3 229.9,83.4 231.8,81.9 233.6,96.2 235.4,117.8 237.2,151.4 239.0,182.5 240.8,197.5 242.6,194.0 244.4,170.3 246.2,130.6 248.0,109.4 249.8,93.6 251.7,85.4 253.5,86.3 255.3,126.2 257.1,141.5 258.9,169.1 260.7,192.3 262.5,192.5 264.3,174.8 266.1,162.4 267.9,128.9 269.7,102.6 271.6,94.5 273.4,94.6 275.2,99.6 277.0,119.9 278.8,149.8 280.6,181.7 282.4,186.2 284.2,185.5 286.0,171.9 287.8,140.5 289.6,129.6 291.5,104.9 293.3,97.7 295.1,107.7 296.9,114.8 298.7,141.3 300.5,163.6 302.3,179.2 304.1,178.5 305.9,173.2 307.7,152.1 309.5,133.0 311.4,112.4 313.2,107.4 315.0,106.4 316.8,121.0 318.6,134.0 320.4,161.4 322.2,165.7 324.0,171.8 325.8,169.2 327.6,157.0 329.4,135.1 331.3,122.7 333.1,110.7 334.9,112.4 336.7,115.2 338.5,127.3 340.3,147.7 342.1,161.9 343.9,163.7 345.7,163.2 347.5,159.5 349.3,150.4 351.2,134.6 353.0,117.7 354.8,116.0 356.6,116.0 358.4,127.7 360.2,144.9 362.0,149.2 363.8,160.4 365.6,163.1 367.4,155.0 369.2,144.8 371.1,137.5 372.9,122.0 374.7,121.0 376.5,118.6 378.3,124.9 380.1,137.7 381.9,148.2 383.7,154.7 385.5,160.7 387.3,156.4 389.1,148.9 391.0,142.9 392.8,128.2 394.6,125.0 396.4,120.7 398.2,120.9 400.0,133.7" fill="none" stroke="#1d1d1f" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><line x1="40.0" y1="111.2" x2="400.0" y2="111.2" stroke="#0e8a83" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 4"></line><text x="406.0" y="115.2" font-size="12.5" fill="#0e8a83" font-weight="800">RMS</text><line x1="40.0" y1="115.7" x2="400.0" y2="115.7" stroke="#c2682b" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2 3"></line><text x="406.0" y="131.7" font-size="12.5" fill="#c2682b" font-weight="800">MAV</text><text x="40.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">0 ms</text><text x="400.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">200 ms</text><text x="220.0" y="224.0" font-size="12.5" fill="#5f6368" text-anchor="middle">1 kHz면 숫자 200개</text><text x="450.0" y="60.0" font-size="14" fill="#1d1d1f" font-weight="800">흔히 쓰는 특징</text><rect x="450.0" y="76.0" width="254.0" height="34.0" rx="8" fill="#f5f5f7"></rect><text x="460.0" y="98.0" font-size="12.5" fill="#c2682b" font-weight="800">MAV</text><text x="502.0" y="91.0" font-size="11.5" fill="#2b2f36">|값|의 평균</text><text x="502.0" y="105.0" font-size="11.5" fill="#5f6368">→ 세기</text><rect x="450.0" y="116.0" width="254.0" height="34.0" rx="8" fill="#f5f5f7"></rect><text x="460.0" y="138.0" font-size="12.5" fill="#0e8a83" font-weight="800">RMS</text><text x="502.0" y="131.0" font-size="11.5" fill="#2b2f36">제곱 평균의 제곱근</text><text x="502.0" y="145.0" font-size="11.5" fill="#5f6368">→ 세기 (힘과 함께 큼)</text><rect x="450.0" y="156.0" width="254.0" height="34.0" rx="8" fill="#f5f5f7"></rect><text x="460.0" y="178.0" font-size="12.5" fill="#1d1d1f" font-weight="800">ZC</text><text x="502.0" y="171.0" font-size="11.5" fill="#2b2f36">0을 지나는 횟수</text><text x="502.0" y="185.0" font-size="11.5" fill="#5f6368">→ 떨림의 빠르기</text><rect x="450.0" y="196.0" width="254.0" height="34.0" rx="8" fill="#f5f5f7"></rect><text x="460.0" y="218.0" font-size="12.5" fill="#1d1d1f" font-weight="800">WL</text><text x="502.0" y="211.0" font-size="11.5" fill="#2b2f36">이웃 값 차이의 합</text><text x="502.0" y="225.0" font-size="11.5" fill="#5f6368">→ 모양의 복잡함</text><rect x="450.0" y="236.0" width="254.0" height="34.0" rx="8" fill="#f5f5f7"></rect><text x="460.0" y="258.0" font-size="12.5" fill="#2b59c3" font-weight="800">MDF</text><text x="502.0" y="251.0" font-size="11.5" fill="#2b2f36">스펙트럼을 반으로 가르는 주파수</text><text x="502.0" y="265.0" font-size="11.5" fill="#5f6368">→ 피로하면 내려감</text><rect x="16.0" y="290.0" width="688.0" height="76.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="314.0" font-size="12.5" fill="#1d1d1f" font-weight="800">작은 예: 숫자 다섯 개 2, −1, 3, −2, 1 (mV)</text><text x="30.0" y="336.0" font-size="12.5" fill="#2b2f36">MAV = (2+1+3+2+1)÷5 = 1.8 mV  ·  RMS = √((4+1+9+4+1)÷5) = √3.8 ≈ 1.95 mV  ·  ZC = 4번</text><text x="30.0" y="356.0" font-size="12.5" fill="#2b2f36">실제로는 구간을 100–300 ms로 잡고 50 ms쯤씩 밀며 겹치게 계산한다.</text><text x="16.0" y="388.0" font-size="12.5" fill="#5f6368">개념도 · 가상 신호 · MAV·ZC·WL은 Hudgins 계열의 시간 영역 특징, MDF는 주파수 영역 특징</text></svg>
+<!-- /EM:features -->
+<figcaption><b>그림 4. 한 구간에서 뽑는 특징.</b> 200 ms 구간의 숫자 200개를 세기(MAV, RMS), 떨림의 빠르기(ZC), 모양의 복잡함(WL), 주파수(MDF)를 나타내는 숫자 몇 개로 줄인다. 아래는 숫자 다섯 개로 직접 계산한 예다.</figcaption>
+</figure>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>특징</th>
+<th>식 (구간의 값 x₁ … x<sub>N</sub>)</th>
+<th>뜻</th>
+<th>주로 쓰는 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>MAV</strong> (mean absolute value)</td>
+<td>(|x₁| + … + |x<sub>N</sub>|) ÷ N</td>
+<td>평균 세기</td>
+<td>동작 분류, 힘 추정</td>
+</tr>
+<tr class="even">
+<td><strong>RMS</strong> (root mean square)</td>
+<td>√((x₁² + … + x<sub>N</sub>²) ÷ N)</td>
+<td>세기. 힘과 함께 커짐</td>
+<td>동작 분류, 힘 추정</td>
+</tr>
+<tr class="odd">
+<td><strong>ZC</strong> (zero crossings)</td>
+<td>0을 지나는 횟수</td>
+<td>떨림의 빠르기</td>
+<td>동작 분류</td>
+</tr>
+<tr class="even">
+<td><strong>WL</strong> (waveform length)</td>
+<td>|x₂ − x₁| + … + |x<sub>N</sub> − x<sub>N−1</sub>|</td>
+<td>모양이 얼마나 오르내리나</td>
+<td>동작 분류</td>
+</tr>
+<tr class="odd">
+<td><strong>MDF</strong> (median frequency)</td>
+<td>스펙트럼의 세기를 반으로 가르는 주파수</td>
+<td>떨림의 대표 빠르기</td>
+<td><strong>근육 피로</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>MAV·ZC·WL 같은 <strong>시간 영역 특징</strong>은 1993년 Hudgins의 연구 이후 근전도 분류의 기본이 되었습니다 <span class="tag tag-fact">논문</span>.</li>
+<li><strong>스펙트럼은 신호에 어떤 빠르기의 떨림이 얼마나 들어 있는지를 나타낸 그래프</strong>입니다. MDF는 그 스펙트럼에서 왼쪽 넓이와 오른쪽 넓이가 같아지는 주파수입니다.</li>
+<li><strong>구간(window)의 길이.</strong> 보통 100–300 ms로 잡고, 50 ms쯤씩 밀며 겹치게 계산합니다. 구간이 길면 특징이 안정되지만 답이 늦어지고, 짧으면 빠르지만 흔들립니다.</li>
+</ul>
+<p><strong>특징 다음은 분류기 또는 추정기.</strong> 특징을 받아 답을 내는 계산입니다.</p>
+<ul>
+<li><strong>분류(classification)</strong>: 답이 "잡기 / 놓기 / 쉼"처럼 몇 개 중 하나입니다. 대표 방법은 <strong>LDA</strong>(선형 판별 분석)로, 특징에 가중치를 곱해 더한 점수를 답마다 계산하고 가장 큰 것을 고릅니다. 가중치는 정답이 붙은 기록으로 PC에서 미리 정해 둡니다.</li>
+<li><strong>추정(regression)</strong>: 답이 손목 각도나 힘처럼 연속된 값입니다. 의수의 손을 "얼마나" 쥘지 정할 때 씁니다.</li>
+<li><strong>신경망</strong>: 특징을 손으로 정하지 않고 원신호에서 직접 배우게 하는 방법입니다. 데이터가 많을 때 강하고(Meta), 계산이 무겁습니다.</li>
+</ul>
+</section>
+<section id="emg-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="emg-tasks">5. 어떤 과제를 할 수 있나</h2>
+<p><strong>상황 다섯 가지.</strong> 같은 근전도라도 무엇을 알아맞히느냐에 따라 필요한 과거의 길이와 방법이 다릅니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>과제</th>
+<th>입력 → 출력</th>
+<th>필요한 과거</th>
+<th>지금의 방법</th>
+<th>예</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>동작 분류</strong></td>
+<td>특징 → 동작 이름</td>
+<td>0.1–0.3 s</td>
+<td>특징 + LDA, 신경망</td>
+<td>근전 의수, 손목 밴드</td>
+</tr>
+<tr class="even">
+<td><strong>연속 추정</strong></td>
+<td>특징 → 각도·힘</td>
+<td>0.1–0.3 s</td>
+<td>회귀, 신경망</td>
+<td>의수의 쥐는 세기, 커서</td>
+</tr>
+<tr class="odd">
+<td><strong>동작의 순서·연속 동작</strong></td>
+<td>특징의 흐름 → 순서·문장</td>
+<td>0.5–5 s</td>
+<td>순서를 다루는 신경망(LSTM 등)</td>
+<td>동작 암호, 손글씨, 깨우기 동작</td>
+</tr>
+<tr class="even">
+<td><strong>시작 감지</strong></td>
+<td>세기 → "지금 시작"</td>
+<td>20–50 ms</td>
+<td>문턱 비교</td>
+<td>재활 로봇의 보조 시작</td>
+</tr>
+<tr class="odd">
+<td><strong>근육 피로 추적</strong></td>
+<td>스펙트럼의 변화 → 피로 지수</td>
+<td>30 s–10분</td>
+<td>MDF의 기울기</td>
+<td>재활·작업자 경고, 운동</td>
+</tr>
+<tr class="even">
+<td><strong>떨림(tremor)·공동 수축</strong></td>
+<td>두 근육의 리듬 → 증상</td>
+<td>1–3 s, 하루</td>
+<td>대역 필터, 위상 비교</td>
+<td>파킨슨병·뇌졸중 재활</td>
+</tr>
+<tr class="odd">
+<td><strong>신호가 퍼지는 속도</strong></td>
+<td>고밀도 격자 → 속도</td>
+<td>수 ms</td>
+<td>이웃 채널의 시간 차</td>
+<td>근육 상태, 피로</td>
+</tr>
+</tbody>
+</table>
+<figure class="rv-fig figure">
+<!-- EM:timemap -->
+<svg class="rv-svg" viewbox="0 0 720 524" role="img" aria-label="근전도와 관련된 시간을 로그 축에 놓은 그림: MUAP 5–20 ms, 동작 하나 0.1–0.5초, 의수 지연 예산 0.1초, 떨림 감지 1–3초, 동작 순서 0.5–5초, 손글씨 단어 2–3초, 근육 피로 30초–10분, 땀 수 분–수 시간, 날짜 1일. 이온 소자의 τ 범위는 10 ms–수 분."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">근전도의 시간 지도: 무엇이 얼마나 긴 과거를 필요로 하나</text><text x="16.0" y="60.0" font-size="12.5" fill="#5f6368" font-weight="800">신호 자체</text><text x="240.0" y="85.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">MUAP 하나</text><rect x="289.7" y="73" width="34.2" height="16" rx="5" fill="#5f6368" opacity="0.88"></rect><text x="240.0" y="109.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">떨림 한 번 (20–450 Hz)</text><rect x="269.4" y="97" width="77.0" height="16" rx="5" fill="#5f6368" opacity="0.88"></rect><text x="16.0" y="132.0" font-size="12.5" fill="#5f6368" font-weight="800">한 번의 판정</text><text x="240.0" y="157.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">동작 하나 (gesture)</text><rect x="363.5" y="145" width="39.7" height="16" rx="5" fill="#1d1d1f" opacity="0.88"></rect><text x="240.0" y="181.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">의수 제어 지연 예산</text><rect x="363.5" y="169" width="5.5" height="16" rx="5" fill="#a86a12" opacity="0.88"></rect><text x="240.0" y="205.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">떨림(tremor) 감지</text><rect x="420.2" y="193" width="27.1" height="16" rx="5" fill="#1d1d1f" opacity="0.88"></rect><text x="16.0" y="228.0" font-size="12.5" fill="#5f6368" font-weight="800">과거가 필요한 판정</text><text x="240.0" y="253.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">동작의 순서·연속 동작</text><rect x="403.2" y="241" width="56.8" height="16" rx="5" fill="#1d1d1f" opacity="0.88"></rect><text x="240.0" y="277.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">손글씨 단어</text><rect x="437.3" y="265" width="10.0" height="16" rx="5" fill="#1d1d1f" opacity="0.88"></rect><text x="240.0" y="301.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">근육 피로</text><rect x="504.1" y="289" width="73.8" height="16" rx="5" fill="#1d1d1f" opacity="0.88"></rect><text x="16.0" y="324.0" font-size="12.5" fill="#5f6368" font-weight="800">천천히 바뀌는 조건</text><text x="240.0" y="349.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">땀·피부 임피던스</text><rect x="521.2" y="337" width="126.1" height="16" rx="5" fill="#5f6368" opacity="0.88"></rect><text x="240.0" y="373.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">날짜가 바뀜</text><rect x="700.3" y="361" width="4.0" height="16" rx="5" fill="#5f6368" opacity="0.88"></rect><text x="16.0" y="396.0" font-size="12.5" fill="#0e8a83" font-weight="800">이온 소자의 τ (어림)</text><text x="240.0" y="421.0" font-size="12.5" fill="#1d1d1f" text-anchor="end">보고된 범위</text><rect x="306.8" y="409" width="254.1" height="16" rx="5" fill="#0e8a83" opacity="0.88"></rect><line x1="250.0" y1="440.0" x2="704.0" y2="440.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><line x1="250.0" y1="440.0" x2="250.0" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="250.0" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">1 ms</text><line x1="306.8" y1="440.0" x2="306.8" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="306.8" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">10 ms</text><line x1="363.5" y1="440.0" x2="363.5" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="363.5" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">0.1 s</text><line x1="420.2" y1="440.0" x2="420.2" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="420.2" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">1 s</text><line x1="477.0" y1="440.0" x2="477.0" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="477.0" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">10 s</text><line x1="533.8" y1="440.0" x2="533.8" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="533.8" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">100 s</text><line x1="590.5" y1="440.0" x2="590.5" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="590.5" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">17분</text><line x1="647.2" y1="440.0" x2="647.2" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="647.2" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">3시간</text><line x1="704.0" y1="440.0" x2="704.0" y2="445.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><text x="704.0" y="461.0" font-size="11.5" fill="#5f6368" text-anchor="middle">1일</text><text x="16.0" y="490.0" font-size="12.5" fill="#0e8a83" font-weight="700">이온 소자의 τ(10 ms–수 분)가 겹치는 곳은 '동작 순서'와 '근육 피로'이다. 1회 동작은 MCU가 이미 싸게 잘한다.</text><text x="16.0" y="514.0" font-size="12.5" fill="#5f6368">로그 눈금 · 문헌 범위(Kaifosh 2025, Farrell &amp; Weir 2007, 피로·떨림 리뷰) · 이온 τ는 보고된 소자들의 범위</text></svg>
+<!-- /EM:timemap -->
+<figcaption><b>그림 5. 근전도의 시간 지도.</b> 회색은 신호 자체와 천천히 바뀌는 조건, 검정은 판정이 필요로 하는 과거, 청록은 이온 소자에서 보고된 응답 시간의 범위다. 청록이 검정과 겹치는 곳이 이온 소자가 기억 소자로 들어갈 수 있는 후보다.</figcaption>
+</figure>
+<p><span class="key">이 지도에서 읽을 것은 하나입니다. <strong>동작 하나(0.1–0.5초)를 맞히는 일은 MCU가 이미 싸고 잘하므로, 이온 소자의 τ(10 ms–수 분)가 쓸모를 보일 곳은 "동작의 순서"와 "근육 피로"처럼 몇 초–몇 분의 과거가 필요한 판정</strong>입니다.</span> <span class="tag tag-interp">해석</span></p>
+</section>
+<section id="emg-data" class="level2">
+<h2 class="anchored" data-anchor-id="emg-data">6. 공개 데이터로 무엇을 해 볼 수 있나</h2>
+<p><strong>공개 데이터는 다른 연구자가 기록해 누구나 받을 수 있게 올린 근전도 기록</strong>입니다. 장비 없이 PC에서 먼저 실험할 수 있고, 다른 논문과 같은 조건으로 비교할 수 있습니다.</p>
+<div class="rm-fit">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>데이터</th>
+<th>사람</th>
+<th>채널 · sampling rate</th>
+<th>과제</th>
+<th>특별한 점</th>
+<th>이용 조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ninapro DB2</strong> (Atzori 2014)</td>
+<td>40</td>
+<td>12 · 2 kHz</td>
+<td>49가지 손·손목 동작</td>
+<td>동작 비교의 표준</td>
+<td>학술용</td>
+</tr>
+<tr class="even">
+<td><strong>putEMG</strong> (Kaczmarek 2019)</td>
+<td>44</td>
+<td>24 · 5,120 Hz</td>
+<td>8가지 동작 + 힘</td>
+<td><strong>1주 이상 간격의 두 세션</strong></td>
+<td>CC BY-NC 4.0</td>
+</tr>
+<tr class="odd">
+<td><strong>GRABMyo</strong> (Pradhan 2022)</td>
+<td>43</td>
+<td>28 · 2,048 Hz</td>
+<td>16가지 동작</td>
+<td><strong>사흘에 걸친 세 세션</strong>, 동작 사이 전환 데이터(GRABMyoFlow)</td>
+<td>PhysioNet</td>
+</tr>
+<tr class="even">
+<td><strong>CapgMyo</strong> (Du 2017)</td>
+<td>23</td>
+<td>128 · 1 kHz</td>
+<td>8–12가지 동작</td>
+<td>고밀도 격자</td>
+<td>공개</td>
+</tr>
+<tr class="odd">
+<td><strong>emg2qwerty</strong> (Meta 2024)</td>
+<td>108</td>
+<td>32 · 2 kHz</td>
+<td>타자 → 글자</td>
+<td>346시간, 긴 문장</td>
+<td>CC BY-NC 4.0</td>
+</tr>
+<tr class="even">
+<td><strong>emg2pose</strong> (Meta 2024)</td>
+<td>193</td>
+<td>16 · 2 kHz</td>
+<td>손 모양을 연속으로 추정</td>
+<td>모션 캡처 정답</td>
+<td>저장소 확인</td>
+</tr>
+<tr class="odd">
+<td><strong>Meta generic neuromotor</strong> (Kaifosh 2025)</td>
+<td>300</td>
+<td>16 · 2 kHz</td>
+<td>손목 각도 · 9가지 동작 · 손글씨</td>
+<td><strong>3–5개 동작을 잇는 연속 동작 포함</strong></td>
+<td>저장소 확인</td>
+</tr>
+<tr class="even">
+<td>근육 피로 데이터 (Sci. Data 2024 두 편)</td>
+<td>30 등</td>
+<td>여러 근육</td>
+<td>지칠 때까지 버티기</td>
+<td>피로 과제의 첫 시험</td>
+<td>논문 확인</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>처음 해 볼 실습 셋.</strong> 모두 노트북 하나로 됩니다.</p>
+<ol type="1">
+<li><strong>putEMG로 "특징 + LDA"를 직접 만들기.</strong> 채널마다 200 ms 구간의 RMS를 구해 LDA로 8가지 동작을 가릅니다. <span class="key"><strong>나중에 이온 소자와 비교할 기준선(baseline)을 내 손으로 만드는 실습</strong></span>입니다.</li>
+<li><strong>putEMG의 두 세션으로 "날이 바뀌면 얼마나 떨어지나" 재기.</strong> 첫 세션으로 학습하고 일주일 뒤 세션으로 시험합니다. 정확도가 떨어지는 만큼이 근전도의 진짜 어려움입니다.</li>
+<li><strong>피로 데이터로 MDF의 기울기 보기.</strong> 지칠 때까지 버틴 기록에서 1초마다 MDF를 구해 시간에 따라 그립니다. 내려가는 기울기가 보이면, 아래 연구 컨셉의 "피로 시계"를 시험할 준비가 된 것입니다.</li>
+</ol>
+</section>
+<section id="emg-history" class="level2">
+<h2 class="anchored" data-anchor-id="emg-history">7. 연구는 어떻게 진행되어 왔나</h2>
+<figure class="rv-fig figure">
+<!-- EM:history -->
+<svg class="rv-svg" viewbox="0 0 720 460" role="img" aria-label="1955년 근전 의수 개념부터 2025년 Meta의 Nature 논문과 이온·유기 소자 연구까지 근전도 연구의 주요 사건을 위에서 아래로 시간 순서로 놓은 연표."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">근전도 연구의 흐름: 특징 + 단순 분류기 → 큰 데이터 → 몸 위의 저전력 처리</text><line x1="92.0" y1="50.0" x2="92.0" y2="392.0" stroke="#d9dde3" stroke-width="2" stroke-linecap="round"></line><text x="76.0" y="61.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="end">1955</text><circle cx="92.0" cy="56.0" r="5" fill="#1d1d1f"></circle><text x="108.0" y="61.0" font-size="12.5" fill="#1d1d1f" font-weight="800">근전 의수 개념</text><text x="202.5" y="61.0" font-size="12.5" fill="#5f6368">근육의 전기로 인공 손을 움직인다는 생각</text><text x="76.0" y="91.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="end">1993</text><circle cx="92.0" cy="86.0" r="5" fill="#1d1d1f"></circle><text x="108.0" y="91.0" font-size="12.5" fill="#1d1d1f" font-weight="800">Hudgins: 시간 영역 특징</text><text x="264.2" y="91.0" font-size="12.5" fill="#5f6368">MAV·ZC 같은 구간 특징 + 분류기</text><text x="76.0" y="121.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="end">2003</text><circle cx="92.0" cy="116.0" r="5" fill="#1d1d1f"></circle><text x="108.0" y="121.0" font-size="12.5" fill="#1d1d1f" font-weight="800">특징 + LDA가 표준으로</text><text x="247.8" y="121.0" font-size="12.5" fill="#5f6368">실시간 분류, 지금도 임상의 기본</text><text x="76.0" y="151.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="end">2007</text><circle cx="92.0" cy="146.0" r="5" fill="#1d1d1f"></circle><text x="108.0" y="151.0" font-size="12.5" fill="#1d1d1f" font-weight="800">지연 예산 100–125 ms</text><text x="246.5" y="151.0" font-size="12.5" fill="#5f6368">이보다 늦으면 의수가 굼뜨게 느껴진다</text><text x="76.0" y="181.0" font-size="12.5" fill="#a86a12" font-weight="800" text-anchor="end">2011</text><circle cx="92.0" cy="176.0" r="5" fill="#a86a12"></circle><text x="108.0" y="181.0" font-size="12.5" fill="#1d1d1f" font-weight="800">같은 동작, 다른 신호</text><text x="238.5" y="181.0" font-size="12.5" fill="#5f6368">팔 자세만 바꿔도 오류 3.8 → 18 %</text><text x="76.0" y="211.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="end">2014</text><circle cx="92.0" cy="206.0" r="5" fill="#1d1d1f"></circle><text x="108.0" y="211.0" font-size="12.5" fill="#1d1d1f" font-weight="800">Ninapro 공개 데이터</text><text x="240.8" y="211.0" font-size="12.5" fill="#5f6368">40명 · 49가지 동작, 비교의 기준이 됨</text><text x="76.0" y="241.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="end">2016</text><circle cx="92.0" cy="236.0" r="5" fill="#1d1d1f"></circle><text x="108.0" y="241.0" font-size="12.5" fill="#1d1d1f" font-weight="800">패턴 인식 의수 제품</text><text x="231.2" y="241.0" font-size="12.5" fill="#5f6368">사용자가 직접 다시 보정하는 방식</text><text x="76.0" y="271.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="end">2019</text><circle cx="92.0" cy="266.0" r="5" fill="#2b59c3"></circle><text x="108.0" y="271.0" font-size="12.5" fill="#1d1d1f" font-weight="800">스파이킹 칩으로 분류</text><text x="240.0" y="271.0" font-size="12.5" fill="#5f6368">전력은 0.05 mW로 줄고 정확도는 84 → 74 %</text><text x="76.0" y="301.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="end">2021</text><circle cx="92.0" cy="296.0" r="5" fill="#2b59c3"></circle><text x="108.0" y="301.0" font-size="12.5" fill="#1d1d1f" font-weight="800">센서 안에서 계산</text><text x="215.0" y="301.0" font-size="12.5" fill="#5f6368">인쇄 전극 배열 + 저전력 계산, 13가지 동작</text><text x="76.0" y="331.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="end">2024</text><circle cx="92.0" cy="326.0" r="5" fill="#2b59c3"></circle><text x="108.0" y="331.0" font-size="12.5" fill="#1d1d1f" font-weight="800">대규모 손목 데이터 공개</text><text x="256.2" y="331.0" font-size="12.5" fill="#5f6368">emg2qwerty 108명 · emg2pose 193명</text><text x="76.0" y="361.0" font-size="12.5" fill="#0e8a83" font-weight="800" text-anchor="end">2024</text><circle cx="92.0" cy="356.0" r="5" fill="#0e8a83"></circle><text x="108.0" y="361.0" font-size="12.5" fill="#1d1d1f" font-weight="800">이온·유기 소자로 분류</text><text x="247.2" y="361.0" font-size="12.5" fill="#5f6368">3–7가지 동작, 대부분 한 세션·모의 계산</text><text x="76.0" y="391.0" font-size="12.5" fill="#2b59c3" font-weight="800" text-anchor="end">2025</text><circle cx="92.0" cy="386.0" r="5" fill="#2b59c3"></circle><text x="108.0" y="391.0" font-size="12.5" fill="#1d1d1f" font-weight="800">Meta, Nature</text><text x="203.5" y="391.0" font-size="12.5" fill="#5f6368">수천 명 데이터로 보정 없이 바로 사용</text><circle cx="22.0" cy="420.0" r="5" fill="#1d1d1f"></circle><text x="34.0" y="425.0" font-size="12.5" fill="#2b2f36">디지털 분류의 기본기</text><circle cx="192.0" cy="420.0" r="5" fill="#a86a12"></circle><text x="204.0" y="425.0" font-size="12.5" fill="#2b2f36">한계의 발견</text><circle cx="362.0" cy="420.0" r="5" fill="#2b59c3"></circle><text x="374.0" y="425.0" font-size="12.5" fill="#2b2f36">저전력·대규모</text><circle cx="532.0" cy="420.0" r="5" fill="#0e8a83"></circle><text x="544.0" y="425.0" font-size="12.5" fill="#2b2f36">이온·유기 소자</text><text x="16.0" y="450.0" font-size="12.5" fill="#5f6368">연표 · 출처는 본문의 연구 흐름 표</text></svg>
+<!-- /EM:history -->
+<figcaption><b>그림 6. 근전도 연구의 흐름.</b> 1990–2000년대에 "구간 특징 + 단순 분류기"가 자리 잡았고, 2010년대에 같은 동작이라도 신호가 바뀐다는 한계가 드러났으며, 2020년대에는 큰 데이터와 몸 위의 저전력 처리로 옮겨 가고 있다. 이온·유기 소자 연구는 맨 끝에 막 시작했다.</figcaption>
+</figure>
+<p>흐름을 네 시기로 나눠 읽습니다.</p>
+<ol type="1">
+<li><strong>기본기 (1950–2000년대).</strong> 근육의 전기로 의수를 움직이자는 생각(1955)에서 시작해, 구간 특징(MAV, ZC 등) + 분류기(Hudgins 1993), 실시간 LDA(Englehart &amp; Hudgins 2003)가 표준이 됩니다. <span class="key">지금도 임상 의수의 기본은 이 방식입니다.</span></li>
+<li><strong>한계의 발견 (2000–2010년대).</strong> 의수가 늦으면 굼뜨게 느껴지는 한계가 100–125 ms라는 것(Farrell &amp; Weir 2007), 팔 자세만 바꿔도 오류가 3.8 %에서 18 %로 커진다는 것(Fougner 2011)이 알려집니다. 실험실의 높은 정확도가 일상에서는 유지되지 않는다는 것이 핵심 문제가 됩니다.</li>
+<li><strong>데이터와 제품 (2010년대).</strong> Ninapro(2014) 같은 공개 데이터로 비교가 쉬워지고, 패턴 인식 의수(Coapt, Ottobock Myo Plus)가 제품이 됩니다. 제품은 사용자가 직접 다시 보정하는 기능으로 변화에 대응합니다.</li>
+<li><strong>큰 데이터와 저전력 (2019년–).</strong> 두 방향이 갈립니다.
+<ul>
+<li><strong>큰 데이터</strong>: Meta가 수천 명의 데이터로 학습해 처음 쓰는 사람도 보정 없이 쓰게 했습니다(Kaifosh 2025). 대신 모형이 크고(손글씨 6,000만 개 가중치), 계산은 손목 밖에서 합니다.</li>
+<li><strong>저전력 하드웨어</strong>: 뇌를 흉내 낸 스파이킹 칩은 전력을 0.05 mW로 줄였지만 정확도가 84 %에서 74 %로 떨어졌습니다(Donati 2019). 전극 배열 위에서 바로 계산하는 장치도 나왔습니다(Moin 2021).</li>
+</ul></li>
+</ol>
+<p><strong>이온·유기 소자로 근전도를 다룬 연구.</strong> 아직 몇 편뿐이고, 공통된 빈틈이 있습니다.</p>
+<div class="rm-fit">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>연구</th>
+<th>소자</th>
+<th>과제</th>
+<th>결과</th>
+<th>확인한 점과 빈틈</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Liu 2024 Nat. Electron.</td>
+<td>늘어나는 유기 전기화학 트랜지스터(OECT) 4×4 배열</td>
+<td>3가지 동작</td>
+<td>약 90 %</td>
+<td>MCU가 근전도를 4 bit 펄스로 바꿔 넣음. 같은 크기의 디지털 비교 없음 <span class="tag tag-fact">논문</span></td>
+</tr>
+<tr class="even">
+<td>Yin 2024 Small Sci.</td>
+<td>PEDOT 계열 OECT</td>
+<td>6가지 동작, 8채널</td>
+<td>79.2 %</td>
+<td>원신호를 넣으면 더 낮음을 보임. 디지털 특징 비교 없음 <span class="tag tag-fact">논문</span></td>
+</tr>
+<tr class="odd">
+<td>Pei 2026 Nat. Mater.</td>
+<td>스스로 붙는 하이드로겔 memcapacitor</td>
+<td>putEMG 7가지 동작</td>
+<td>92.14 %</td>
+<td><strong>소자 모형으로 계산한 모의 결과</strong>. 특징은 MATLAB에서 뽑음. 소자 없는 비교 없음 <span class="tag tag-fact">논문</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span class="key">세 연구 모두 <strong>근전도를 디지털로 먼저 가공한 뒤</strong> 소자에 넣었고, <strong>같은 조건의 디지털 방법과 비교하지 않았고</strong>, <strong>한 세션 안에서만</strong> 시험했습니다.</span> 이 세 가지가 이 분야에서 아직 아무도 하지 않은 부분입니다.</p>
+</section>
+<section id="emg-limits" class="level2">
+<h2 class="anchored" data-anchor-id="emg-limits">8. 아직 못 하는 것과 그 이유</h2>
+<figure class="rv-fig figure">
+<!-- EM:limits -->
+<svg class="rv-svg" viewbox="0 0 720 262" role="img" aria-label="같은 동작의 근전도가 바뀌는 다섯 이유를 작은 그림 다섯 칸으로: 전극 위치 밀림, 팔 자세 변화, 땀과 피부 상태, 근육 피로, 날짜나 사람이 바뀜. 칸마다 처음 파형과 바뀐 뒤 파형을 위아래로 둠."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">같은 동작인데 신호가 바뀌는 다섯 가지 이유</text><rect x="16.0" y="50.0" width="130.0" height="150.0" rx="10" fill="#f5f5f7"></rect><text x="81.0" y="72.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">전극 위치가 밀림</text><text x="81.0" y="90.0" font-size="11.5" fill="#a86a12" font-weight="700" text-anchor="middle">다시 찰 때마다</text><polyline points="24.0,120.0 25.9,120.0 27.8,120.0 29.7,120.0 31.6,120.1 33.5,120.1 35.4,119.9 37.3,119.8 39.2,119.7 41.1,120.3 43.0,120.3 44.9,120.4 46.8,119.6 48.7,119.0 50.6,119.5 52.5,121.5 54.4,122.4 56.3,120.7 58.2,117.7 60.1,117.4 62.0,120.1 63.9,127.9 65.8,127.8 67.7,118.3 69.6,115.9 71.5,111.0 73.4,123.5 75.3,133.5 77.2,125.3 79.1,116.6 81.0,106.3 82.9,114.6 84.8,127.9 86.7,126.5 88.6,121.7 90.5,111.9 92.4,116.3 94.3,118.5 96.2,123.3 98.1,125.8 100.0,119.9 101.9,116.7 103.8,118.0 105.7,120.7 107.6,123.7 109.5,121.9 111.4,119.4 113.3,118.3 115.2,119.4 117.1,120.4 119.0,120.9 120.9,120.2 122.8,119.8 124.7,119.6 126.6,119.9 128.5,120.1 130.4,120.1 132.3,120.0 134.2,119.9 136.1,120.0 138.0,120.0" fill="none" stroke="#5f6368" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="24.0,172.2 25.9,172.2 27.8,172.2 29.7,171.8 31.6,171.4 33.5,171.7 35.4,172.9 37.3,173.5 39.2,172.4 41.1,170.6 43.0,170.4 44.9,172.0 46.8,176.7 48.7,176.7 50.6,171.0 52.5,169.5 54.4,166.6 56.3,174.1 58.2,180.1 60.1,175.2 62.0,170.0 63.9,163.8 65.8,168.8 67.7,176.7 69.6,175.9 71.5,173.0 73.4,167.2 75.3,169.8 77.2,171.1 79.1,174.0 81.0,175.5 82.9,171.9 84.8,170.0 86.7,170.8 88.6,172.4 90.5,174.2 92.4,173.1 94.3,171.6 96.2,171.0 98.1,171.6 100.0,172.3 101.9,172.6 103.8,172.1 105.7,171.9 107.6,171.8 109.5,172.0 111.4,172.1 113.3,172.1 115.2,172.0 117.1,172.0 119.0,172.0 120.9,172.0 122.8,172.0 124.7,172.0 126.6,172.0 128.5,172.0 130.4,172.0 132.3,172.0 134.2,172.0 136.1,172.0 138.0,172.0" fill="none" stroke="#c2682b" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="24.0" y="98.0" font-size="10.5" fill="#5f6368">처음</text><text x="24.0" y="150.0" font-size="10.5" fill="#c2682b" font-weight="700">바뀐 뒤</text><rect x="155.5" y="50.0" width="130.0" height="150.0" rx="10" fill="#f5f5f7"></rect><text x="220.5" y="72.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">팔 자세가 바뀜</text><text x="220.5" y="90.0" font-size="11.5" fill="#a86a12" font-weight="700" text-anchor="middle">몇 초</text><polyline points="163.5,120.0 165.4,120.0 167.3,120.0 169.2,120.0 171.1,120.1 173.0,120.1 174.9,119.9 176.8,119.8 178.7,119.7 180.6,120.3 182.5,120.3 184.4,120.4 186.3,119.6 188.2,119.0 190.1,119.5 192.0,121.5 193.9,122.4 195.8,120.7 197.7,117.7 199.6,117.4 201.5,120.1 203.4,127.9 205.3,127.8 207.2,118.3 209.1,115.9 211.0,111.0 212.9,123.5 214.8,133.5 216.7,125.3 218.6,116.6 220.5,106.3 222.4,114.6 224.3,127.9 226.2,126.5 228.1,121.7 230.0,111.9 231.9,116.3 233.8,118.5 235.7,123.3 237.6,125.8 239.5,119.9 241.4,116.7 243.3,118.0 245.2,120.7 247.1,123.7 249.0,121.9 250.9,119.4 252.8,118.3 254.7,119.4 256.6,120.4 258.5,120.9 260.4,120.2 262.3,119.8 264.2,119.6 266.1,119.9 268.0,120.1 269.9,120.1 271.8,120.0 273.7,119.9 275.6,120.0 277.5,120.0" fill="none" stroke="#5f6368" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="163.5,172.0 165.4,172.0 167.3,172.0 169.2,172.0 171.1,172.0 173.0,172.0 174.9,172.0 176.8,171.9 178.7,171.8 180.6,172.2 182.5,172.2 184.4,172.2 186.3,171.8 188.2,171.5 190.1,171.8 192.0,172.7 193.9,173.2 195.8,172.3 197.7,170.8 199.6,170.7 201.5,172.0 203.4,175.9 205.3,175.9 207.2,171.1 209.1,169.9 211.0,167.5 212.9,173.7 214.8,178.8 216.7,174.6 218.6,170.3 220.5,154.2 222.4,165.0 224.3,182.2 226.2,180.5 228.1,174.2 230.0,161.5 231.9,167.2 233.8,170.0 235.7,176.3 237.6,179.5 239.5,171.9 241.4,167.7 243.3,169.4 245.2,173.0 247.1,176.8 249.0,174.4 250.9,171.2 252.8,169.8 254.7,171.2 256.6,172.6 258.5,173.2 260.4,172.2 262.3,171.8 264.2,171.5 266.1,171.9 268.0,172.1 269.9,172.2 271.8,172.0 273.7,171.9 275.6,172.0 277.5,172.0" fill="none" stroke="#c2682b" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="163.5" y="98.0" font-size="10.5" fill="#5f6368">처음</text><text x="163.5" y="150.0" font-size="10.5" fill="#c2682b" font-weight="700">바뀐 뒤</text><rect x="295.0" y="50.0" width="130.0" height="150.0" rx="10" fill="#f5f5f7"></rect><text x="360.0" y="72.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">땀·피부 상태</text><text x="360.0" y="90.0" font-size="11.5" fill="#a86a12" font-weight="700" text-anchor="middle">수 분–수 시간</text><polyline points="303.0,120.0 304.9,120.0 306.8,120.0 308.7,120.0 310.6,120.1 312.5,120.1 314.4,119.9 316.3,119.8 318.2,119.7 320.1,120.3 322.0,120.3 323.9,120.4 325.8,119.6 327.7,119.0 329.6,119.5 331.5,121.5 333.4,122.4 335.3,120.7 337.2,117.7 339.1,117.4 341.0,120.1 342.9,127.9 344.8,127.8 346.7,118.3 348.6,115.9 350.5,111.0 352.4,123.5 354.3,133.5 356.2,125.3 358.1,116.6 360.0,106.3 361.9,114.6 363.8,127.9 365.7,126.5 367.6,121.7 369.5,111.9 371.4,116.3 373.3,118.5 375.2,123.3 377.1,125.8 379.0,119.9 380.9,116.7 382.8,118.0 384.7,120.7 386.6,123.7 388.5,121.9 390.4,119.4 392.3,118.3 394.2,119.4 396.1,120.4 398.0,120.9 399.9,120.2 401.8,119.8 403.7,119.6 405.6,119.9 407.5,120.1 409.4,120.1 411.3,120.0 413.2,119.9 415.1,120.0 417.0,120.0" fill="none" stroke="#5f6368" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="303.0,172.0 304.9,171.5 306.8,171.1 308.7,170.7 310.6,170.3 312.5,169.9 314.4,169.5 316.3,169.1 318.2,168.7 320.1,168.8 322.0,168.6 323.9,168.5 325.8,167.9 327.7,167.3 329.6,167.7 331.5,169.1 333.4,169.8 335.3,168.7 337.2,166.7 339.1,166.7 341.0,168.9 342.9,174.6 344.8,174.9 346.7,168.6 348.6,167.3 350.5,164.3 352.4,173.4 354.3,180.9 356.2,175.6 358.1,170.0 360.0,163.2 361.9,169.4 363.8,179.1 365.7,178.6 367.6,175.5 369.5,169.1 371.4,172.4 373.3,174.2 375.2,177.8 377.1,179.8 379.0,175.8 380.9,173.7 382.8,174.6 384.7,176.5 386.6,178.5 388.5,177.2 390.4,175.2 392.3,174.3 394.2,174.8 396.1,175.3 398.0,175.3 399.9,174.4 401.8,173.8 403.7,173.3 405.6,173.1 407.5,172.8 409.4,172.3 411.3,171.8 413.2,171.3 415.1,170.9 417.0,170.5" fill="none" stroke="#c2682b" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="303.0" y="98.0" font-size="10.5" fill="#5f6368">처음</text><text x="303.0" y="150.0" font-size="10.5" fill="#c2682b" font-weight="700">바뀐 뒤</text><rect x="434.5" y="50.0" width="130.0" height="150.0" rx="10" fill="#f5f5f7"></rect><text x="499.5" y="72.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">근육 피로</text><text x="499.5" y="90.0" font-size="11.5" fill="#a86a12" font-weight="700" text-anchor="middle">수십 초–수 분</text><polyline points="442.5,120.0 444.4,120.0 446.3,120.0 448.2,120.0 450.1,120.1 452.0,120.1 453.9,119.9 455.8,119.8 457.7,119.7 459.6,120.3 461.5,120.3 463.4,120.4 465.3,119.6 467.2,119.0 469.1,119.5 471.0,121.5 472.9,122.4 474.8,120.7 476.7,117.7 478.6,117.4 480.5,120.1 482.4,127.9 484.3,127.8 486.2,118.3 488.1,115.9 490.0,111.0 491.9,123.5 493.8,133.5 495.7,125.3 497.6,116.6 499.5,106.3 501.4,114.6 503.3,127.9 505.2,126.5 507.1,121.7 509.0,111.9 510.9,116.3 512.8,118.5 514.7,123.3 516.6,125.8 518.5,119.9 520.4,116.7 522.3,118.0 524.2,120.7 526.1,123.7 528.0,121.9 529.9,119.4 531.8,118.3 533.7,119.4 535.6,120.4 537.5,120.9 539.4,120.2 541.3,119.8 543.2,119.6 545.1,119.9 547.0,120.1 548.9,120.1 550.8,120.0 552.7,119.9 554.6,120.0 556.5,120.0" fill="none" stroke="#5f6368" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="442.5,172.0 444.4,172.0 446.3,171.9 448.2,171.9 450.1,171.9 452.0,172.0 453.9,172.2 455.8,172.4 457.7,172.3 459.6,172.4 461.5,172.3 463.4,171.5 465.3,170.3 467.2,170.7 469.1,169.2 471.0,170.6 472.9,172.3 474.8,174.0 476.7,175.2 478.6,174.9 480.5,176.4 482.4,171.8 484.3,165.8 486.2,167.0 488.1,157.8 490.0,163.1 491.9,170.3 493.8,178.7 495.7,183.1 497.6,180.9 499.5,187.0 501.4,174.0 503.3,167.4 505.2,165.9 507.1,165.0 509.0,160.5 510.9,166.3 512.8,173.9 514.7,180.3 516.6,182.5 518.5,178.3 520.4,175.8 522.3,171.7 524.2,170.4 526.1,169.8 528.0,170.7 529.9,171.2 531.8,171.8 533.7,173.0 535.6,172.5 537.5,173.0 539.4,172.6 541.3,172.1 543.2,171.9 545.1,171.8 547.0,171.8 548.9,171.9 550.8,172.0 552.7,172.0 554.6,172.0 556.5,172.0" fill="none" stroke="#c2682b" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="442.5" y="98.0" font-size="10.5" fill="#5f6368">처음</text><text x="442.5" y="150.0" font-size="10.5" fill="#c2682b" font-weight="700">바뀐 뒤</text><rect x="574.0" y="50.0" width="130.0" height="150.0" rx="10" fill="#f5f5f7"></rect><text x="639.0" y="72.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">날짜·사람이 바뀜</text><text x="639.0" y="90.0" font-size="11.5" fill="#a86a12" font-weight="700" text-anchor="middle">하루 이상</text><polyline points="582.0,120.0 583.9,120.0 585.8,120.0 587.7,120.0 589.6,120.1 591.5,120.1 593.4,119.9 595.3,119.8 597.2,119.7 599.1,120.3 601.0,120.3 602.9,120.4 604.8,119.6 606.7,119.0 608.6,119.5 610.5,121.5 612.4,122.4 614.3,120.7 616.2,117.7 618.1,117.4 620.0,120.1 621.9,127.9 623.8,127.8 625.7,118.3 627.6,115.9 629.5,111.0 631.4,123.5 633.3,133.5 635.2,125.3 637.1,116.6 639.0,106.3 640.9,114.6 642.8,127.9 644.7,126.5 646.6,121.7 648.5,111.9 650.4,116.3 652.3,118.5 654.2,123.3 656.1,125.8 658.0,119.9 659.9,116.7 661.8,118.0 663.7,120.7 665.6,123.7 667.5,121.9 669.4,119.4 671.3,118.3 673.2,119.4 675.1,120.4 677.0,120.9 678.9,120.2 680.8,119.8 682.7,119.6 684.6,119.9 686.5,120.1 688.4,120.1 690.3,120.0 692.2,119.9 694.1,120.0 696.0,120.0" fill="none" stroke="#5f6368" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="582.0,172.0 583.9,172.0 585.8,172.0 587.7,172.1 589.6,172.1 591.5,171.7 593.4,171.6 595.3,172.2 597.2,172.4 599.1,172.0 601.0,170.6 602.9,171.2 604.8,174.2 606.7,173.0 608.6,170.6 610.5,166.9 612.4,173.5 614.3,175.9 616.2,171.6 618.1,166.0 620.0,170.2 621.9,183.3 623.8,177.6 625.7,160.8 627.6,167.2 629.5,175.4 631.4,185.6 633.3,171.1 635.2,160.6 637.1,170.2 639.0,178.0 640.9,177.0 642.8,168.8 644.7,168.1 646.6,173.9 648.5,173.5 650.4,171.8 652.3,170.6 654.2,171.9 656.1,173.2 658.0,172.5 659.9,171.6 661.8,171.7 663.7,172.1 665.6,172.2 667.5,172.0 669.4,172.0 671.3,172.0 673.2,172.0 675.1,172.0 677.0,172.0 678.9,172.0 680.8,172.0 682.7,172.0 684.6,172.0 686.5,172.0 688.4,172.0 690.3,172.0 692.2,172.0 694.1,172.0 696.0,172.0" fill="none" stroke="#c2682b" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="582.0" y="98.0" font-size="10.5" fill="#5f6368">처음</text><text x="582.0" y="150.0" font-size="10.5" fill="#c2682b" font-weight="700">바뀐 뒤</text><text x="16.0" y="228.0" font-size="12.5" fill="#1d1d1f" font-weight="700">가운데 넷은 한 번 착용하는 동안에도 일어난다. 큰 데이터로 사람 사이의 차이는 줄였지만(Meta), 피로와 땀은 그대로 남는다.</text><text x="16.0" y="252.0" font-size="12.5" fill="#5f6368">개념도 · 가상 신호 · 피로는 떨림이 느려지고(주파수 ↓) 크기가 커지는 모습으로 그림</text></svg>
+<!-- /EM:limits -->
+<figcaption><b>그림 7. 같은 동작인데 신호가 바뀌는 다섯 가지 이유.</b> 칸마다 위는 처음, 아래는 바뀐 뒤의 파형이다. 가운데 넷은 한 번 착용하는 동안에도 일어난다.</figcaption>
+</figure>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>한계</th>
+<th>왜 생기나</th>
+<th>얼마나</th>
+<th>언제</th>
+<th>지금의 대응</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>전극 위치가 밀림</strong></td>
+<td>전극이 보는 운동 단위가 바뀜</td>
+<td>수직으로 2 cm 밀리면 오류가 크게 늘어난다는 보고</td>
+<td>다시 찰 때마다</td>
+<td>여러 위치로 학습, 회전에 강한 모형(Meta)</td>
+</tr>
+<tr class="even">
+<td><strong>팔 자세</strong></td>
+<td>근육 길이·피부 위치·중력 부담이 바뀜</td>
+<td>오류 3.8 % → 18 % (Fougner 2011)</td>
+<td>몇 초</td>
+<td>여러 자세로 학습, 가속도계 함께 사용</td>
+</tr>
+<tr class="odd">
+<td><strong>땀·피부 임피던스</strong></td>
+<td>각질층의 수분과 땀의 이온이 바뀜</td>
+<td>수 분–수 시간에 걸쳐 변함</td>
+<td>수 분–수 시간</td>
+<td>입력 임피던스가 큰 증폭기, 하이드로겔 전극</td>
+</tr>
+<tr class="even">
+<td><strong>근육 피로</strong></td>
+<td>근섬유의 신호 전달이 느려짐</td>
+<td>스펙트럼이 낮은 쪽으로, 크기는 커짐</td>
+<td>수십 초–수 분</td>
+<td>분류기는 대개 무시</td>
+</tr>
+<tr class="odd">
+<td><strong>날짜·사람이 바뀜</strong></td>
+<td>위의 것 모두 + 해부 구조·습관</td>
+<td>한 사람의 모형은 다른 사람에게 거의 안 맞음</td>
+<td>하루 이상</td>
+<td>다시 보정, 큰 데이터(Meta)</td>
+</tr>
+<tr class="even">
+<td><strong>지연</strong></td>
+<td>특징이 안정되려면 100–300 ms가 필요</td>
+<td>예산 100–125 ms</td>
+<td>매 판정</td>
+<td>겹치는 짧은 구간</td>
+</tr>
+<tr class="odd">
+<td><strong>늘 켜진 전력</strong></td>
+<td>여러 채널을 1–2 kHz로 계속 재고 보냄</td>
+<td>Meta 밴드는 원신호를 보내며 4시간 이상</td>
+<td>하루 종일</td>
+<td>장치 안에서 판정, 사건이 있을 때만 계산</td>
+</tr>
+<tr class="even">
+<td><strong>여러 관절을 함께</strong></td>
+<td>분류는 한 번에 하나의 답만 냄</td>
+<td>Meta도 연속 조작은 한 방향만 보임</td>
+<td>계속</td>
+<td>회귀, 근육 협응 모형</td>
+</tr>
+</tbody>
+</table>
+<p><strong>근육 피로를 조금 더.</strong> 이 연구 컨셉의 중심이므로 그림으로 봅니다.</p>
+<figure class="rv-fig figure">
+<!-- EM:fatigue -->
+<svg class="rv-svg" viewbox="0 0 720 360" role="img" aria-label="왼쪽: 처음과 피로한 뒤의 근전도 스펙트럼. 피로하면 스펙트럼이 낮은 주파수 쪽으로 이동해 중앙 주파수(MDF)가 약 120 Hz에서 85 Hz로 내려간다. 오른쪽: 같은 힘으로 버틴 시간에 따라 MDF는 내려가고 RMS는 올라간다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">근육 피로가 근전도에 남기는 흔적: 떨림이 느려지고, 크기는 커진다</text><line x1="56.0" y1="210.0" x2="336.0" y2="210.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><line x1="56.0" y1="60.0" x2="56.0" y2="210.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><polyline points="56.6,210.0 58.8,209.2 61.0,207.5 63.3,204.8 65.5,201.3 67.8,196.8 70.0,191.6 72.2,185.7 74.5,179.1 76.7,172.1 79.0,164.6 81.2,156.9 83.4,149.0 85.7,141.0 87.9,133.0 90.2,125.2 92.4,117.6 94.6,110.4 96.9,103.6 99.1,97.4 101.4,91.7 103.6,86.7 105.8,82.4 108.1,78.8 110.3,76.0 112.6,73.9 114.8,72.6 117.0,72.0 119.3,72.2 121.5,73.1 123.8,74.6 126.0,76.8 128.2,79.6 130.5,82.9 132.7,86.6 135.0,90.8 137.2,95.3 139.4,100.1 141.7,105.1 143.9,110.3 146.2,115.7 148.4,121.0 150.6,126.4 152.9,131.8 155.1,137.1 157.4,142.3 159.6,147.3 161.8,152.2 164.1,156.8 166.3,161.3 168.6,165.6 170.8,169.6 173.0,173.4 175.3,176.9 177.5,180.2 179.8,183.3 182.0,186.1 184.2,188.7 186.5,191.1 188.7,193.2 191.0,195.2 193.2,197.0 195.4,198.6 197.7,200.0 199.9,201.3 202.2,202.4 204.4,203.4 206.6,204.3 208.9,205.1 211.1,205.8 213.4,206.4 215.6,206.9 217.8,207.4 220.1,207.8 222.3,208.1 224.6,208.4 226.8,208.7 229.0,208.9 231.3,209.1 233.5,209.2 235.8,209.4 238.0,209.5 240.2,209.6 242.5,209.6 244.7,209.7 247.0,209.8 249.2,209.8 251.4,209.8 253.7,209.9 255.9,209.9 258.2,209.9 260.4,209.9 262.6,209.9 264.9,210.0 267.1,210.0 269.4,210.0 271.6,210.0 273.8,210.0 276.1,210.0 278.3,210.0 280.6,210.0 282.8,210.0 285.0,210.0 287.3,210.0 289.5,210.0 291.8,210.0 294.0,210.0 296.2,210.0 298.5,210.0 300.7,210.0 303.0,210.0 305.2,210.0 307.4,210.0 309.7,210.0 311.9,210.0 314.2,210.0 316.4,210.0 318.6,210.0 320.9,210.0 323.1,210.0 325.4,210.0 327.6,210.0 329.8,210.0 332.1,210.0 334.3,210.0" fill="none" stroke="#0e8a83" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="56.6,209.9 58.8,208.3 61.0,204.7 63.3,199.1 65.5,191.7 67.8,182.8 70.0,172.7 72.2,161.7 74.5,150.2 76.7,138.4 79.0,126.9 81.2,115.8 83.4,105.5 85.7,96.3 87.9,88.4 90.2,81.9 92.4,77.1 94.6,73.8 96.9,72.2 99.1,72.2 101.4,73.7 103.6,76.6 105.8,80.8 108.1,86.1 110.3,92.2 112.6,99.1 114.8,106.4 117.0,114.1 119.3,122.0 121.5,129.9 123.8,137.7 126.0,145.2 128.2,152.4 130.5,159.2 132.7,165.5 135.0,171.3 137.2,176.6 139.4,181.4 141.7,185.7 143.9,189.5 146.2,192.8 148.4,195.6 150.6,198.1 152.9,200.2 155.1,202.0 157.4,203.5 159.6,204.8 161.8,205.8 164.1,206.7 166.3,207.4 168.6,208.0 170.8,208.4 173.0,208.8 175.3,209.0 177.5,209.3 179.8,209.4 182.0,209.6 184.2,209.7 186.5,209.8 188.7,209.8 191.0,209.9 193.2,209.9 195.4,209.9 197.7,210.0 199.9,210.0 202.2,210.0 204.4,210.0 206.6,210.0 208.9,210.0 211.1,210.0 213.4,210.0 215.6,210.0 217.8,210.0 220.1,210.0 222.3,210.0 224.6,210.0 226.8,210.0 229.0,210.0 231.3,210.0 233.5,210.0 235.8,210.0 238.0,210.0 240.2,210.0 242.5,210.0 244.7,210.0 247.0,210.0 249.2,210.0 251.4,210.0 253.7,210.0 255.9,210.0 258.2,210.0 260.4,210.0 262.6,210.0 264.9,210.0 267.1,210.0 269.4,210.0 271.6,210.0 273.8,210.0 276.1,210.0 278.3,210.0 280.6,210.0 282.8,210.0 285.0,210.0 287.3,210.0 289.5,210.0 291.8,210.0 294.0,210.0 296.2,210.0 298.5,210.0 300.7,210.0 303.0,210.0 305.2,210.0 307.4,210.0 309.7,210.0 311.9,210.0 314.2,210.0 316.4,210.0 318.6,210.0 320.9,210.0 323.1,210.0 325.4,210.0 327.6,210.0 329.8,210.0 332.1,210.0 334.3,210.0" fill="none" stroke="#c2682b" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"></polyline><line x1="122.1" y1="210.0" x2="122.1" y2="72.0" stroke="#0e8a83" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 3"></line><text x="126.1" y="72.0" font-size="11.5" fill="#0e8a83" font-weight="700">MDF ≈ 120 Hz</text><line x1="101.9" y1="210.0" x2="101.9" y2="72.0" stroke="#c2682b" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 3"></line><text x="97.9" y="202.0" font-size="11.5" fill="#c2682b" font-weight="700" text-anchor="end">MDF ≈ 85 Hz</text><text x="56.0" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">0</text><text x="112.0" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">100</text><text x="168.0" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">200</text><text x="224.0" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">300</text><text x="280.0" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">400</text><text x="336.0" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">500</text><text x="196.0" y="246.0" font-size="12.5" fill="#5f6368" text-anchor="middle">주파수 (Hz)</text><text x="48.0" y="64.0" font-size="12.5" fill="#5f6368" text-anchor="end">세기</text><line x1="410.0" y1="210.0" x2="690.0" y2="210.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><line x1="410.0" y1="60.0" x2="410.0" y2="210.0" stroke="#5f6368" stroke-width="1.2" stroke-linecap="round"></line><polyline points="410.0,76.4 419.3,91.7 428.7,84.2 438.0,88.7 447.3,89.9 456.7,90.6 466.0,97.6 475.3,93.7 484.7,97.1 494.0,86.0 503.3,96.8 512.7,100.1 522.0,101.3 531.3,104.0 540.7,106.7 550.0,106.2 559.3,105.1 568.7,108.7 578.0,106.6 587.3,111.6 596.7,112.4 606.0,109.4 615.3,113.9 624.7,118.5 634.0,119.0 643.3,118.4 652.7,115.7 662.0,123.8 671.3,125.2 680.7,123.0 690.0,130.2" fill="none" stroke="#2b59c3" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="466.0" y="81.0" font-size="12.5" fill="#2b59c3" font-weight="800">MDF ↓ (중앙 주파수)</text><polyline points="410.0,158.4 419.3,153.8 428.7,153.6 438.0,153.9 447.3,151.1 456.7,160.5 466.0,147.8 475.3,152.7 484.7,153.7 494.0,146.8 503.3,144.4 512.7,146.7 522.0,147.5 531.3,143.1 540.7,142.3 550.0,136.8 559.3,137.7 568.7,138.2 578.0,134.4 587.3,137.2 596.7,138.3 606.0,132.6 615.3,131.6 624.7,132.8 634.0,133.4 643.3,129.3 652.7,136.4 662.0,125.7 671.3,125.2 680.7,130.5 690.0,124.3" fill="none" stroke="#c2682b" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="466.0" y="177.0" font-size="12.5" fill="#c2682b" font-weight="800">RMS ↑ (크기)</text><text x="410.0" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">0</text><text x="503.3" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">100</text><text x="596.7" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">200</text><text x="690.0" y="228.0" font-size="11.5" fill="#5f6368" text-anchor="middle">300</text><text x="550.0" y="246.0" font-size="12.5" fill="#5f6368" text-anchor="middle">같은 힘으로 계속 버틴 시간 (s)</text><rect x="16.0" y="268.0" width="688.0" height="58.0" rx="10" fill="#f5f5f7"></rect><text x="30.0" y="292.0" font-size="12.5" fill="#1d1d1f" font-weight="700">왜: 대사 산물이 쌓이고 pH가 내려가면 근섬유를 따라 신호가 퍼지는 속도가 느려져 MUAP가 길어진다.</text><text x="30.0" y="312.0" font-size="12.5" fill="#2b2f36">길어진 파형 = 낮은 주파수 쪽이 커진 스펙트럼. 같은 힘을 내려고 더 많은 단위가 참여해 크기(RMS)도 커진다.</text><text x="16.0" y="350.0" font-size="12.5" fill="#5f6368">개념도 · 모형 곡선 · 방향은 문헌에서 확립되어 있고, 변화의 크기는 근육·힘·사람에 따라 다르다</text></svg>
+<!-- /EM:fatigue -->
+<figcaption><b>그림 8. 근육 피로가 근전도에 남기는 흔적.</b> 왼쪽은 처음과 피로한 뒤의 스펙트럼으로, 피로하면 낮은 주파수 쪽으로 옮겨 가 중앙 주파수(MDF)가 내려간다. 오른쪽은 같은 힘으로 버틴 시간에 따른 MDF와 RMS다. 모형 곡선이며 변화의 크기는 근육과 사람에 따라 다르다.</figcaption>
+</figure>
+<p><span class="key">피로는 <strong>한 구간(200 ms)만 봐서는 알 수 없고, 몇 분에 걸친 변화</strong>로만 보입니다.</span> 처음의 MDF가 120 Hz인지 85 Hz인지는 사람마다 달라서, "지금 값"보다 "처음보다 얼마나 내려왔나"가 피로를 알려 주기 때문입니다. <span class="key">이것이 <strong>과거가 필요한 판정</strong>의 대표 예입니다.</span></p>
+</section>
+<section id="emg-computing" class="level2">
+<h2 class="anchored" data-anchor-id="emg-computing">9. 컴퓨팅 쪽에서 더 풀 수 있는 것</h2>
+<ol type="1">
+<li><strong>몸 위에서 늘 켜진 채 적은 전력으로.</strong> Meta도 손목에서는 계산하지 않습니다. 손목 안에서 판정을 끝내면 원신호를 계속 보내는 무선의 몫이 줄어듭니다. 남는 비용은 여러 채널을 1–2 kHz로 계속 재는 ADC와 MCU입니다.</li>
+<li><strong>변화에 강하게.</strong> 착용 중에 생기는 땀·피로·자세의 변화는 데이터를 늘려도 다 풀리지 않습니다. 착용 중에 스스로 기준을 고쳐 가는 방법(적응 학습, 기준값의 느린 갱신)이 필요합니다.</li>
+<li><strong>순서와 긴 맥락.</strong> 연속 동작과 손글씨는 수 초의 과거를 봐야 합니다. Meta는 큰 신경망으로 풀었지만, 같은 일을 작은 장치에서 하는 방법은 열려 있습니다.</li>
+<li><strong>뇌를 흉내 낸 하드웨어의 숙제.</strong> 스파이킹 칩은 전력을 크게 줄였지만 정확도를 10점 안팎 잃었습니다. <span class="key">새 하드웨어는 <strong>같은 정확도에서 장치 전체의 전력이 낮거나</strong>, <strong>디지털이 못 하는 일</strong>을 보여야 받아들여집니다.</span></li>
+</ol>
+</section>
+<section id="emg-materials" class="level2">
+<h2 class="anchored" data-anchor-id="emg-materials">10. 소재 쪽에서 더 해 볼 수 있는 것</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>자리</th>
+<th>해 볼 것</th>
+<th>이온 소재가 유리한 이유</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>전극</strong></td>
+<td>땀과 움직임에도 임피던스가 안정한 부드러운 전극</td>
+<td>이온 전도체는 피부와 같은 이온으로 신호를 주고받는다</td>
+</tr>
+<tr class="even">
+<td><strong>증폭</strong></td>
+<td>피부 위에서 바로 신호를 키우는 OECT</td>
+<td>작은 전압으로 큰 전류 변화를 낸다(transconductance가 큼)</td>
+</tr>
+<tr class="odd">
+<td><strong>고밀도 배열</strong></td>
+<td>인쇄로 만드는 수십 채널의 부드러운 배열</td>
+<td>용액 공정, 늘어나는 소재</td>
+</tr>
+<tr class="even">
+<td><strong>기억 소자</strong></td>
+<td>τ가 다른 소자들의 배열(초–분)</td>
+<td>두께·가교·고정전하로 τ를 바꾼다. 실리콘으로 초 단위 τ를 만들려면 칩 밖의 큰 커패시터가 필요하다</td>
+</tr>
+<tr class="odd">
+<td><strong>화학 신호</strong></td>
+<td>땀의 이온·pH에 반응하는 소자</td>
+<td>이온 소재는 화학 환경에 직접 반응한다</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="emg-mat-comp" class="level2">
+<h2 class="anchored" data-anchor-id="emg-mat-comp">11. 소재가 계산에 주는 영향</h2>
+<p>소재의 성질 하나를 바꾸면 계산의 성능 어딘가가 바뀝니다. <span class="key">소재 연구자가 계산 쪽 사람과 대화하려면 <strong>이 연결을 말로 할 수 있어야</strong> 합니다.</span></p>
+<figure class="rv-fig figure">
+<!-- EM:matmap -->
+<svg class="rv-svg" viewbox="0 0 720 354" role="img" aria-label="소재에서 바꾸는 다섯 가지(두께·가교, 고정전하·가소제, 수분 흡수, 전극-피부 계면, 부드러움)가 소자의 성질(τ, 비선형성, drift, 잡음, 접촉 안정)을 거쳐 계산의 성능(기억 길이, 구분 능력, 가짜 피로 신호, 정확도 바닥, 전극 밀림 오류)으로 이어지는 세 칸 그림."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">소재의 성질이 계산의 성능으로 이어지는 길</text><text x="114.0" y="60.0" font-size="14" fill="#1d1d1f" font-weight="800" text-anchor="middle">소재에서 바꾸는 것</text><rect x="16.0" y="74.0" width="196.0" height="36.0" rx="8" fill="#f5f5f7"></rect><text x="114.0" y="97.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">두께 · 가교 밀도</text><line x1="215.0" y1="92.0" x2="253.0" y2="92.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M253.0,95.3 L259.0,92.0 L253.0,88.7 Z" fill="#5f6368"></path><rect x="16.0" y="120.0" width="196.0" height="36.0" rx="8" fill="#f5f5f7"></rect><text x="114.0" y="143.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">고정전하 · 가소제</text><line x1="215.0" y1="138.0" x2="253.0" y2="138.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M253.0,141.3 L259.0,138.0 L253.0,134.7 Z" fill="#5f6368"></path><rect x="16.0" y="166.0" width="196.0" height="36.0" rx="8" fill="#f5f5f7"></rect><text x="114.0" y="189.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">물·습기 흡수</text><line x1="215.0" y1="184.0" x2="253.0" y2="184.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M253.0,187.3 L259.0,184.0 L253.0,180.7 Z" fill="#5f6368"></path><rect x="16.0" y="212.0" width="196.0" height="36.0" rx="8" fill="#f5f5f7"></rect><text x="114.0" y="235.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">전극-피부 계면</text><line x1="215.0" y1="230.0" x2="253.0" y2="230.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M253.0,233.3 L259.0,230.0 L253.0,226.7 Z" fill="#5f6368"></path><rect x="16.0" y="258.0" width="196.0" height="36.0" rx="8" fill="#f5f5f7"></rect><text x="114.0" y="281.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">부드러움(탄성률)</text><line x1="215.0" y1="276.0" x2="253.0" y2="276.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M253.0,279.3 L259.0,276.0 L253.0,272.7 Z" fill="#5f6368"></path><text x="360.0" y="60.0" font-size="14" fill="#0e8a83" font-weight="800" text-anchor="middle">소자의 성질</text><rect x="262.0" y="74.0" width="196.0" height="36.0" rx="8" fill="#e6f4f2"></rect><text x="360.0" y="97.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">응답 시간 τ</text><line x1="461.0" y1="92.0" x2="499.0" y2="92.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M499.0,95.3 L505.0,92.0 L499.0,88.7 Z" fill="#5f6368"></path><rect x="262.0" y="120.0" width="196.0" height="36.0" rx="8" fill="#e6f4f2"></rect><text x="360.0" y="143.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">비선형성</text><line x1="461.0" y1="138.0" x2="499.0" y2="138.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M499.0,141.3 L505.0,138.0 L499.0,134.7 Z" fill="#5f6368"></path><rect x="262.0" y="166.0" width="196.0" height="36.0" rx="8" fill="#e6f4f2"></rect><text x="360.0" y="189.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">drift (저절로 변함)</text><line x1="461.0" y1="184.0" x2="499.0" y2="184.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M499.0,187.3 L505.0,184.0 L499.0,180.7 Z" fill="#5f6368"></path><rect x="262.0" y="212.0" width="196.0" height="36.0" rx="8" fill="#e6f4f2"></rect><text x="360.0" y="235.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">잡음 · 임피던스</text><line x1="461.0" y1="230.0" x2="499.0" y2="230.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M499.0,233.3 L505.0,230.0 L499.0,226.7 Z" fill="#5f6368"></path><rect x="262.0" y="258.0" width="196.0" height="36.0" rx="8" fill="#e6f4f2"></rect><text x="360.0" y="281.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">피부 접촉의 안정</text><line x1="461.0" y1="276.0" x2="499.0" y2="276.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M499.0,279.3 L505.0,276.0 L499.0,272.7 Z" fill="#5f6368"></path><text x="606.0" y="60.0" font-size="14" fill="#2b59c3" font-weight="800" text-anchor="middle">계산에서 보이는 것</text><rect x="508.0" y="74.0" width="196.0" height="36.0" rx="8" fill="#eef3fd"></rect><text x="606.0" y="97.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">기억하는 과거의 길이</text><rect x="508.0" y="120.0" width="196.0" height="36.0" rx="8" fill="#eef3fd"></rect><text x="606.0" y="143.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">구분할 수 있는 패턴</text><rect x="508.0" y="166.0" width="196.0" height="36.0" rx="8" fill="#eef3fd"></rect><text x="606.0" y="189.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">가짜 '피로' 신호</text><rect x="508.0" y="212.0" width="196.0" height="36.0" rx="8" fill="#eef3fd"></rect><text x="606.0" y="235.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">정확도의 바닥</text><rect x="508.0" y="258.0" width="196.0" height="36.0" rx="8" fill="#eef3fd"></rect><text x="606.0" y="281.0" font-size="12.5" fill="#1d1d1f" font-weight="700" text-anchor="middle">전극 밀림 오류</text><text x="16.0" y="320.0" font-size="12.5" fill="#1d1d1f" font-weight="700">같은 줄끼리 이어진다. 예: 물을 빨아들이는 겔 → 습도에 따라 전류가 저절로 변함 → 피로가 아닌데 '피로'로 읽힘.</text><text x="16.0" y="344.0" font-size="12.5" fill="#5f6368">개념도 · 화살표는 주된 연결만 그렸다(실제로는 서로 얽힌다)</text></svg>
+<!-- /EM:matmap -->
+<figcaption><b>그림 9. 소재의 성질이 계산의 성능으로 이어지는 길.</b> 왼쪽은 소재에서 바꾸는 것, 가운데는 그 결과 달라지는 소자의 성질, 오른쪽은 계산에서 보이는 결과다. 같은 줄끼리 주로 이어진다.</figcaption>
+</figure>
+<ul>
+<li><strong>τ ↔︎ 기억하는 과거의 길이.</strong> τ가 과제의 사건 간격보다 짧으면 잊고, 너무 길면 오래된 것까지 쌓여 흐려집니다.</li>
+<li><strong>비선형성 ↔︎ 구분할 수 있는 패턴.</strong> 응답이 입력에 비례하기만 하면 곱이 필요한 패턴을 못 가릅니다.</li>
+<li><strong>drift ↔︎ 가짜 신호.</strong> 습도나 온도로 소자 값이 저절로 변하면, 피로를 재는 장치에서는 그것이 "피로"로 읽힙니다. <span class="key"><strong>느린 과제일수록 drift 관리가 성능을 정합니다.</strong></span></li>
+<li><strong>소자 사이의 차이 ↔︎ 다시 학습.</strong> 소자마다 응답이 다르면 readout의 가중치를 소자마다 다시 정해야 합니다.</li>
+<li><strong>임피던스·잡음 ↔︎ 정확도의 바닥.</strong> 잡음이 신호에 비해 크면 어떤 계산도 그 이상 정확해질 수 없습니다.</li>
+<li><strong>부드러움 ↔︎ 전극 밀림.</strong> 피부에 밀착해 덜 밀리면 근전도의 가장 큰 오류 원인 하나가 줄어듭니다.</li>
+</ul>
+</section>
+<section id="emg-concept" class="level2">
+<h2 class="anchored" data-anchor-id="emg-concept">12. 연구 컨셉: 이온 소자로 근전도에서 무엇을 할까</h2>
+<p><strong>출발점.</strong> 근전도를 "로봇을 움직이는 데 쓴다"는 것만으로는 새롭지 않습니다. 동작 분류는 MCU가 이미 싸고 잘하고, Meta는 큰 데이터로 사람 사이의 차이까지 풀었습니다. 그래서 컨셉을 이렇게 정합니다. <span class="key"><strong>① 몇 초–몇 분의 과거가 꼭 필요한 판정이고, ② 지금은 그 과거를 쥐려고 ADC·MCU가 늘 깨어 있어야 하며, ③ 이온 소자의 τ 범위(초–분)가 그 시간과 겹치는 상황</strong></span>을 고릅니다.</p>
+<section id="컨셉-a-중심-후보-피로-시계" class="level3">
+<h3 class="anchored" data-anchor-id="컨셉-a-중심-후보-피로-시계">컨셉 A (중심 후보): 피로 시계</h3>
+<p><strong>가정하는 상황.</strong> 뇌졸중 재활 환자가 집에서 30분 동안 팔 운동을 합니다. 또는 물류 작업자가 하루 종일 상자를 듭니다. 팔에 붙인 얇은 패치가 근육이 지쳐 가는 것을 지켜보다가 "5분 쉬세요"라고 알리거나, 재활 로봇의 보조 세기를 올립니다. 지친 근육으로 무리하면 다치거나 운동의 질이 떨어지기 때문입니다.</p>
+<p><strong>왜 과거가 필요한가.</strong> 피로는 30초–10분에 걸쳐 쌓이는 <strong>상태</strong>입니다. 지금 200 ms만 봐서는 알 수 없고, 처음보다 스펙트럼이 얼마나 낮은 쪽으로 옮겨 갔는지를 봐야 합니다.</p>
+<figure class="rv-fig figure">
+<!-- EM:concept -->
+<svg class="rv-svg" viewbox="0 0 720 470" role="img" aria-label="피로 시계 컨셉: 근전도를 낮은 대역과 높은 대역 아날로그 필터에 통과시켜 τ가 1, 10, 100, 600초인 이온 소자 배열에 넣고, 1초에 한 번 읽어 피로 지수를 낸다. 아래 모의 그래프에서 τ 100초 소자 두 개의 비율은 5분에 걸쳐 매끈하게 오르고, τ 1초 소자의 비율은 힘과 쉼마다 출렁인다."><text x="16.0" y="26.0" font-size="16" fill="#1d1d1f" font-weight="800">연구 컨셉: '피로 시계' — τ가 다른 이온 소자들이 몇 분의 근육 이력을 쥔다</text><rect x="16.0" y="52.0" width="92.0" height="56.0" rx="10" fill="#f5f5f7"></rect><text x="62.0" y="75.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">근전도</text><text x="62.0" y="94.0" font-size="11" fill="#2b2f36" text-anchor="middle">1–2채널</text><rect x="126.0" y="52.0" width="120.0" height="56.0" rx="10" fill="#fdf3da" stroke="#a86a12" stroke-width="1.4"></rect><text x="186.0" y="75.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">아날로그 필터 둘</text><text x="186.0" y="94.0" font-size="11" fill="#2b2f36" text-anchor="middle">낮은 대역 · 높은 대역</text><rect x="264.0" y="52.0" width="150.0" height="56.0" rx="10" fill="#e6f4f2" stroke="#0e8a83" stroke-width="1.4"></rect><text x="339.0" y="75.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">이온 소자 배열</text><text x="339.0" y="94.0" font-size="11" fill="#2b2f36" text-anchor="middle">τ = 1 · 10 · 100 · 600 s</text><rect x="432.0" y="52.0" width="120.0" height="56.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="492.0" y="75.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">느린 읽기</text><text x="492.0" y="94.0" font-size="11" fill="#2b2f36" text-anchor="middle">1초에 한 번 (TIA+ADC)</text><rect x="570.0" y="52.0" width="134.0" height="56.0" rx="10" fill="#eef3fd" stroke="#2b59c3" stroke-width="1.4"></rect><text x="637.0" y="75.0" font-size="12.5" fill="#1d1d1f" font-weight="800" text-anchor="middle">피로 지수</text><text x="637.0" y="94.0" font-size="11" fill="#2b2f36" text-anchor="middle">"쉬세요" · 보조 세기 조절</text><line x1="109.0" y1="80.0" x2="120.0" y2="80.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M120.0,82.8 L125.0,80.0 L120.0,77.2 Z" fill="#5f6368"></path><line x1="247.0" y1="80.0" x2="258.0" y2="80.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M258.0,82.8 L263.0,80.0 L258.0,77.2 Z" fill="#5f6368"></path><line x1="415.0" y1="80.0" x2="426.0" y2="80.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M426.0,82.8 L431.0,80.0 L426.0,77.2 Z" fill="#5f6368"></path><line x1="553.0" y1="80.0" x2="564.0" y2="80.0" stroke="#5f6368" stroke-width="1.3" stroke-linecap="round"></line><path d="M564.0,82.8 L569.0,80.0 L564.0,77.2 Z" fill="#5f6368"></path><text x="16.0" y="142.0" font-size="12.5" fill="#1d1d1f" font-weight="700">① 힘을 줄 때마다의 두 대역 세기 (힘 3초 · 쉼 2초를 60번 반복) — 낮은 대역은 커지고 높은 대역은 작아진다</text><line x1="70.0" y1="205.0" x2="670.0" y2="205.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><rect x="70.0" y="180.6" width="6.0" height="24.4" fill="#c2682b" opacity="0.85"></rect><rect x="70.0" y="205.0" width="6.0" height="25.5" fill="#5f6fb0" opacity="0.85"></rect><rect x="80.0" y="176.5" width="6.0" height="28.5" fill="#c2682b" opacity="0.85"></rect><rect x="80.0" y="205.0" width="6.0" height="26.5" fill="#5f6fb0" opacity="0.85"></rect><rect x="90.0" y="177.7" width="6.0" height="27.3" fill="#c2682b" opacity="0.85"></rect><rect x="90.0" y="205.0" width="6.0" height="26.5" fill="#5f6fb0" opacity="0.85"></rect><rect x="100.0" y="177.3" width="6.0" height="27.7" fill="#c2682b" opacity="0.85"></rect><rect x="100.0" y="205.0" width="6.0" height="25.9" fill="#5f6fb0" opacity="0.85"></rect><rect x="110.0" y="177.7" width="6.0" height="27.3" fill="#c2682b" opacity="0.85"></rect><rect x="110.0" y="205.0" width="6.0" height="27.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="120.0" y="176.9" width="6.0" height="28.1" fill="#c2682b" opacity="0.85"></rect><rect x="120.0" y="205.0" width="6.0" height="26.4" fill="#5f6fb0" opacity="0.85"></rect><rect x="130.0" y="175.5" width="6.0" height="29.5" fill="#c2682b" opacity="0.85"></rect><rect x="130.0" y="205.0" width="6.0" height="25.0" fill="#5f6fb0" opacity="0.85"></rect><rect x="140.0" y="174.5" width="6.0" height="30.5" fill="#c2682b" opacity="0.85"></rect><rect x="140.0" y="205.0" width="6.0" height="26.6" fill="#5f6fb0" opacity="0.85"></rect><rect x="150.0" y="173.2" width="6.0" height="31.8" fill="#c2682b" opacity="0.85"></rect><rect x="150.0" y="205.0" width="6.0" height="25.9" fill="#5f6fb0" opacity="0.85"></rect><rect x="160.0" y="176.6" width="6.0" height="28.4" fill="#c2682b" opacity="0.85"></rect><rect x="160.0" y="205.0" width="6.0" height="25.8" fill="#5f6fb0" opacity="0.85"></rect><rect x="170.0" y="175.4" width="6.0" height="29.6" fill="#c2682b" opacity="0.85"></rect><rect x="170.0" y="205.0" width="6.0" height="24.8" fill="#5f6fb0" opacity="0.85"></rect><rect x="180.0" y="175.5" width="6.0" height="29.5" fill="#c2682b" opacity="0.85"></rect><rect x="180.0" y="205.0" width="6.0" height="25.9" fill="#5f6fb0" opacity="0.85"></rect><rect x="190.0" y="173.7" width="6.0" height="31.3" fill="#c2682b" opacity="0.85"></rect><rect x="190.0" y="205.0" width="6.0" height="23.8" fill="#5f6fb0" opacity="0.85"></rect><rect x="200.0" y="174.2" width="6.0" height="30.8" fill="#c2682b" opacity="0.85"></rect><rect x="200.0" y="205.0" width="6.0" height="24.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="210.0" y="174.9" width="6.0" height="30.1" fill="#c2682b" opacity="0.85"></rect><rect x="210.0" y="205.0" width="6.0" height="23.8" fill="#5f6fb0" opacity="0.85"></rect><rect x="220.0" y="172.1" width="6.0" height="32.9" fill="#c2682b" opacity="0.85"></rect><rect x="220.0" y="205.0" width="6.0" height="23.9" fill="#5f6fb0" opacity="0.85"></rect><rect x="230.0" y="171.7" width="6.0" height="33.3" fill="#c2682b" opacity="0.85"></rect><rect x="230.0" y="205.0" width="6.0" height="25.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="240.0" y="173.4" width="6.0" height="31.6" fill="#c2682b" opacity="0.85"></rect><rect x="240.0" y="205.0" width="6.0" height="25.4" fill="#5f6fb0" opacity="0.85"></rect><rect x="250.0" y="172.5" width="6.0" height="32.5" fill="#c2682b" opacity="0.85"></rect><rect x="250.0" y="205.0" width="6.0" height="22.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="260.0" y="170.0" width="6.0" height="35.0" fill="#c2682b" opacity="0.85"></rect><rect x="260.0" y="205.0" width="6.0" height="22.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="270.0" y="172.2" width="6.0" height="32.8" fill="#c2682b" opacity="0.85"></rect><rect x="270.0" y="205.0" width="6.0" height="22.4" fill="#5f6fb0" opacity="0.85"></rect><rect x="280.0" y="171.5" width="6.0" height="33.5" fill="#c2682b" opacity="0.85"></rect><rect x="280.0" y="205.0" width="6.0" height="23.1" fill="#5f6fb0" opacity="0.85"></rect><rect x="290.0" y="172.0" width="6.0" height="33.0" fill="#c2682b" opacity="0.85"></rect><rect x="290.0" y="205.0" width="6.0" height="21.8" fill="#5f6fb0" opacity="0.85"></rect><rect x="300.0" y="171.5" width="6.0" height="33.5" fill="#c2682b" opacity="0.85"></rect><rect x="300.0" y="205.0" width="6.0" height="22.8" fill="#5f6fb0" opacity="0.85"></rect><rect x="310.0" y="169.7" width="6.0" height="35.3" fill="#c2682b" opacity="0.85"></rect><rect x="310.0" y="205.0" width="6.0" height="23.2" fill="#5f6fb0" opacity="0.85"></rect><rect x="320.0" y="171.1" width="6.0" height="33.9" fill="#c2682b" opacity="0.85"></rect><rect x="320.0" y="205.0" width="6.0" height="21.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="330.0" y="170.6" width="6.0" height="34.4" fill="#c2682b" opacity="0.85"></rect><rect x="330.0" y="205.0" width="6.0" height="21.8" fill="#5f6fb0" opacity="0.85"></rect><rect x="340.0" y="170.2" width="6.0" height="34.8" fill="#c2682b" opacity="0.85"></rect><rect x="340.0" y="205.0" width="6.0" height="20.4" fill="#5f6fb0" opacity="0.85"></rect><rect x="350.0" y="169.5" width="6.0" height="35.5" fill="#c2682b" opacity="0.85"></rect><rect x="350.0" y="205.0" width="6.0" height="21.4" fill="#5f6fb0" opacity="0.85"></rect><rect x="360.0" y="168.5" width="6.0" height="36.5" fill="#c2682b" opacity="0.85"></rect><rect x="360.0" y="205.0" width="6.0" height="22.6" fill="#5f6fb0" opacity="0.85"></rect><rect x="370.0" y="170.1" width="6.0" height="34.9" fill="#c2682b" opacity="0.85"></rect><rect x="370.0" y="205.0" width="6.0" height="21.1" fill="#5f6fb0" opacity="0.85"></rect><rect x="380.0" y="170.4" width="6.0" height="34.6" fill="#c2682b" opacity="0.85"></rect><rect x="380.0" y="205.0" width="6.0" height="21.3" fill="#5f6fb0" opacity="0.85"></rect><rect x="390.0" y="168.1" width="6.0" height="36.9" fill="#c2682b" opacity="0.85"></rect><rect x="390.0" y="205.0" width="6.0" height="21.6" fill="#5f6fb0" opacity="0.85"></rect><rect x="400.0" y="168.5" width="6.0" height="36.5" fill="#c2682b" opacity="0.85"></rect><rect x="400.0" y="205.0" width="6.0" height="21.9" fill="#5f6fb0" opacity="0.85"></rect><rect x="410.0" y="167.9" width="6.0" height="37.1" fill="#c2682b" opacity="0.85"></rect><rect x="410.0" y="205.0" width="6.0" height="20.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="420.0" y="166.8" width="6.0" height="38.2" fill="#c2682b" opacity="0.85"></rect><rect x="420.0" y="205.0" width="6.0" height="20.1" fill="#5f6fb0" opacity="0.85"></rect><rect x="430.0" y="167.2" width="6.0" height="37.8" fill="#c2682b" opacity="0.85"></rect><rect x="430.0" y="205.0" width="6.0" height="19.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="440.0" y="166.8" width="6.0" height="38.2" fill="#c2682b" opacity="0.85"></rect><rect x="440.0" y="205.0" width="6.0" height="19.4" fill="#5f6fb0" opacity="0.85"></rect><rect x="450.0" y="164.9" width="6.0" height="40.1" fill="#c2682b" opacity="0.85"></rect><rect x="450.0" y="205.0" width="6.0" height="19.8" fill="#5f6fb0" opacity="0.85"></rect><rect x="460.0" y="167.3" width="6.0" height="37.7" fill="#c2682b" opacity="0.85"></rect><rect x="460.0" y="205.0" width="6.0" height="20.3" fill="#5f6fb0" opacity="0.85"></rect><rect x="470.0" y="167.6" width="6.0" height="37.4" fill="#c2682b" opacity="0.85"></rect><rect x="470.0" y="205.0" width="6.0" height="20.4" fill="#5f6fb0" opacity="0.85"></rect><rect x="480.0" y="165.1" width="6.0" height="39.9" fill="#c2682b" opacity="0.85"></rect><rect x="480.0" y="205.0" width="6.0" height="20.3" fill="#5f6fb0" opacity="0.85"></rect><rect x="490.0" y="165.0" width="6.0" height="40.0" fill="#c2682b" opacity="0.85"></rect><rect x="490.0" y="205.0" width="6.0" height="19.2" fill="#5f6fb0" opacity="0.85"></rect><rect x="500.0" y="163.4" width="6.0" height="41.6" fill="#c2682b" opacity="0.85"></rect><rect x="500.0" y="205.0" width="6.0" height="18.9" fill="#5f6fb0" opacity="0.85"></rect><rect x="510.0" y="165.1" width="6.0" height="39.9" fill="#c2682b" opacity="0.85"></rect><rect x="510.0" y="205.0" width="6.0" height="18.3" fill="#5f6fb0" opacity="0.85"></rect><rect x="520.0" y="164.1" width="6.0" height="40.9" fill="#c2682b" opacity="0.85"></rect><rect x="520.0" y="205.0" width="6.0" height="18.3" fill="#5f6fb0" opacity="0.85"></rect><rect x="530.0" y="163.3" width="6.0" height="41.7" fill="#c2682b" opacity="0.85"></rect><rect x="530.0" y="205.0" width="6.0" height="17.9" fill="#5f6fb0" opacity="0.85"></rect><rect x="540.0" y="162.7" width="6.0" height="42.3" fill="#c2682b" opacity="0.85"></rect><rect x="540.0" y="205.0" width="6.0" height="18.5" fill="#5f6fb0" opacity="0.85"></rect><rect x="550.0" y="162.9" width="6.0" height="42.1" fill="#c2682b" opacity="0.85"></rect><rect x="550.0" y="205.0" width="6.0" height="18.0" fill="#5f6fb0" opacity="0.85"></rect><rect x="560.0" y="163.3" width="6.0" height="41.7" fill="#c2682b" opacity="0.85"></rect><rect x="560.0" y="205.0" width="6.0" height="19.0" fill="#5f6fb0" opacity="0.85"></rect><rect x="570.0" y="163.7" width="6.0" height="41.3" fill="#c2682b" opacity="0.85"></rect><rect x="570.0" y="205.0" width="6.0" height="18.2" fill="#5f6fb0" opacity="0.85"></rect><rect x="580.0" y="161.6" width="6.0" height="43.4" fill="#c2682b" opacity="0.85"></rect><rect x="580.0" y="205.0" width="6.0" height="17.7" fill="#5f6fb0" opacity="0.85"></rect><rect x="590.0" y="163.3" width="6.0" height="41.7" fill="#c2682b" opacity="0.85"></rect><rect x="590.0" y="205.0" width="6.0" height="18.0" fill="#5f6fb0" opacity="0.85"></rect><rect x="600.0" y="159.7" width="6.0" height="45.3" fill="#c2682b" opacity="0.85"></rect><rect x="600.0" y="205.0" width="6.0" height="16.6" fill="#5f6fb0" opacity="0.85"></rect><rect x="610.0" y="159.6" width="6.0" height="45.4" fill="#c2682b" opacity="0.85"></rect><rect x="610.0" y="205.0" width="6.0" height="17.4" fill="#5f6fb0" opacity="0.85"></rect><rect x="620.0" y="161.3" width="6.0" height="43.7" fill="#c2682b" opacity="0.85"></rect><rect x="620.0" y="205.0" width="6.0" height="17.2" fill="#5f6fb0" opacity="0.85"></rect><rect x="630.0" y="161.6" width="6.0" height="43.4" fill="#c2682b" opacity="0.85"></rect><rect x="630.0" y="205.0" width="6.0" height="17.6" fill="#5f6fb0" opacity="0.85"></rect><rect x="640.0" y="160.9" width="6.0" height="44.1" fill="#c2682b" opacity="0.85"></rect><rect x="640.0" y="205.0" width="6.0" height="16.5" fill="#5f6fb0" opacity="0.85"></rect><rect x="650.0" y="162.5" width="6.0" height="42.5" fill="#c2682b" opacity="0.85"></rect><rect x="650.0" y="205.0" width="6.0" height="16.2" fill="#5f6fb0" opacity="0.85"></rect><rect x="660.0" y="162.3" width="6.0" height="42.7" fill="#c2682b" opacity="0.85"></rect><rect x="660.0" y="205.0" width="6.0" height="16.9" fill="#5f6fb0" opacity="0.85"></rect><text x="64.0" y="185.0" font-size="11" fill="#c2682b" font-weight="700" text-anchor="end">낮은 대역</text><text x="64.0" y="233.0" font-size="11" fill="#5f6fb0" font-weight="700" text-anchor="end">높은 대역</text><text x="16.0" y="292.0" font-size="12.5" fill="#1d1d1f" font-weight="700">② τ = 100 s 소자 두 개에 남은 값의 비율 (낮은 ÷ 높은) — 몇 분에 걸쳐 오른다</text><line x1="70.0" y1="380.0" x2="670.0" y2="380.0" stroke="#d9dde3" stroke-width="1" stroke-linecap="round"></line><polyline points="130.0,366.8 134.0,365.7 138.0,365.4 142.0,364.9 146.0,364.6 150.0,363.9 154.0,363.8 158.0,363.4 162.0,363.8 166.0,363.4 170.0,363.2 174.0,362.8 178.0,362.7 182.0,362.6 186.0,362.5 190.0,362.3 194.0,361.7 198.0,361.4 202.0,361.2 206.0,360.7 210.0,360.6 214.0,360.2 218.0,360.1 222.0,359.6 226.0,359.0 230.0,358.7 234.0,358.4 238.0,358.4 242.0,358.1 246.0,358.1 250.0,358.0 254.0,357.2 258.0,357.1 262.0,356.3 266.0,355.7 270.0,355.5 274.0,354.9 278.0,354.8 282.0,354.5 286.0,354.0 290.0,354.0 294.0,353.1 298.0,353.0 302.0,352.7 306.0,352.3 310.0,352.2 314.0,351.6 318.0,351.4 322.0,351.0 326.0,350.5 330.0,350.3 334.0,349.8 338.0,349.6 342.0,349.1 346.0,348.4 350.0,348.1 354.0,347.5 358.0,347.4 362.0,347.0 366.0,346.6 370.0,346.4 374.0,346.0 378.0,345.7 382.0,345.4 386.0,345.0 390.0,344.8 394.0,344.0 398.0,344.0 402.0,343.6 406.0,343.3 410.0,343.1 414.0,342.4 418.0,342.2 422.0,341.5 426.0,340.9 430.0,340.8 434.0,339.9 438.0,339.7 442.0,339.0 446.0,338.3 450.0,338.2 454.0,337.1 458.0,336.9 462.0,336.5 466.0,336.0 470.0,336.0 474.0,335.4 478.0,335.2 482.0,334.5 486.0,334.1 490.0,333.8 494.0,333.0 498.0,332.8 502.0,332.0 506.0,331.2 510.0,331.0 514.0,330.2 518.0,329.8 522.0,328.9 526.0,328.3 530.0,328.0 534.0,327.0 538.0,326.7 542.0,325.9 546.0,325.2 550.0,324.9 554.0,323.8 558.0,323.6 562.0,323.2 566.0,322.5 570.0,322.4 574.0,321.3 578.0,321.3 582.0,320.5 586.0,319.6 590.0,319.5 594.0,318.6 598.0,318.4 602.0,317.4 606.0,316.3 610.0,316.2 614.0,314.9 618.0,314.5 622.0,313.7 626.0,313.0 630.0,312.8 634.0,311.9 638.0,311.7 642.0,310.8 646.0,310.0 650.0,309.9 654.0,308.8 658.0,308.5 662.0,307.7 666.0,307.3 670.0,307.1" fill="none" stroke="#0e8a83" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"></polyline><polyline points="130.0,366.3 132.0,360.6 134.0,355.9 136.0,355.7 138.0,355.7 140.0,353.6 142.0,359.3 144.0,362.6 146.0,360.4 148.0,360.4 150.0,335.3 152.0,355.9 154.0,360.7 156.0,355.7 158.0,355.7 160.0,364.3 162.0,367.7 164.0,359.6 166.0,359.2 168.0,359.2 170.0,356.8 172.0,356.8 174.0,355.8 176.0,357.2 178.0,357.2 180.0,356.5 182.0,361.7 184.0,358.7 186.0,360.7 188.0,360.7 190.0,354.0 192.0,355.7 194.0,353.1 196.0,346.9 198.0,346.9 200.0,350.1 202.0,357.1 204.0,352.4 206.0,352.3 208.0,352.3 210.0,354.5 212.0,350.4 214.0,354.3 216.0,353.4 218.0,353.4 220.0,354.4 222.0,348.9 224.0,347.9 226.0,343.8 228.0,343.8 230.0,339.6 232.0,352.5 234.0,353.1 236.0,354.1 238.0,354.1 240.0,347.1 242.0,352.7 244.0,359.4 246.0,356.0 248.0,356.0 250.0,354.1 252.0,344.7 254.0,340.3 256.0,341.5 258.0,341.5 260.0,340.7 262.0,336.9 264.0,339.4 266.0,337.9 268.0,337.9 270.0,337.2 272.0,337.0 274.0,346.3 276.0,345.0 278.0,345.0 280.0,348.4 282.0,344.4 284.0,337.3 286.0,343.5 288.0,343.5 290.0,358.1 292.0,340.9 294.0,333.0 296.0,341.1 298.0,341.1 300.0,336.4 302.0,346.2 304.0,341.0 306.0,341.7 308.0,341.7 310.0,346.3 312.0,333.6 314.0,341.7 316.0,339.9 318.0,339.9 320.0,340.4 322.0,337.4 324.0,334.6 326.0,335.7 328.0,335.7 330.0,331.5 332.0,338.1 334.0,333.9 336.0,334.1 338.0,334.1 340.0,334.7 342.0,332.4 344.0,331.5 346.0,323.4 348.0,323.4 350.0,318.4 352.0,332.8 354.0,324.7 356.0,332.8 358.0,332.8 360.0,323.4 362.0,336.7 364.0,333.3 366.0,333.1 368.0,333.1 370.0,333.0 372.0,330.8 374.0,336.8 376.0,329.0 378.0,329.0 380.0,338.6 382.0,336.2 384.0,329.2 386.0,331.9 388.0,331.9 390.0,324.2 392.0,312.9 394.0,326.0 396.0,334.8 398.0,334.8 400.0,327.1 402.0,328.8 404.0,336.8 406.0,328.6 408.0,328.6 410.0,325.4 412.0,328.7 414.0,322.9 416.0,321.0 418.0,321.0 420.0,317.6 422.0,315.0 424.0,312.2 426.0,318.4 428.0,318.4 430.0,322.0 432.0,317.6 434.0,318.6 436.0,315.3 438.0,315.3 440.0,309.3 442.0,308.9 444.0,313.8 446.0,314.9 448.0,314.9 450.0,324.6 452.0,303.4 454.0,305.1 456.0,311.1 458.0,311.1 460.0,317.7 462.0,321.5 464.0,319.1 466.0,313.7 468.0,313.7 470.0,332.8 472.0,318.5 474.0,324.5 476.0,320.5 478.0,320.5 480.0,303.5 482.0,307.7 484.0,323.5 486.0,313.0 488.0,313.0 490.0,303.7 492.0,305.3 494.0,308.2 496.0,304.3 498.0,304.3 500.0,301.5 502.0,302.0 504.0,300.0 506.0,300.0 508.0,300.0 510.0,303.1 512.0,304.1 514.0,304.9 516.0,300.0 518.0,300.0 520.0,300.0 522.0,300.0 524.0,300.0 526.0,301.5 528.0,301.5 530.0,300.0 532.0,303.1 534.0,300.0 536.0,300.0 538.0,300.0 540.0,300.0 542.0,300.0 544.0,300.0 546.0,300.0 548.0,300.0 550.0,300.0 552.0,300.0 554.0,300.0 556.0,300.0 558.0,300.0 560.0,308.4 562.0,304.3 564.0,304.4 566.0,300.0 568.0,300.0 570.0,312.8 572.0,300.0 574.0,300.0 576.0,303.6 578.0,303.6 580.0,300.0 582.0,300.0 584.0,300.0 586.0,300.0 588.0,300.0 590.0,300.9 592.0,300.0 594.0,300.0 596.0,300.0 598.0,300.0 600.0,300.0 602.0,300.0 604.0,300.0 606.0,300.0 608.0,300.0 610.0,300.0 612.0,300.0 614.0,300.0 616.0,300.0 618.0,300.0 620.0,300.0 622.0,300.0 624.0,300.0 626.0,300.0 628.0,300.0 630.0,300.0 632.0,300.0 634.0,300.0 636.0,300.0 638.0,300.0 640.0,300.0 642.0,300.0 644.0,300.0 646.0,300.0 648.0,300.0 650.0,300.0 652.0,300.0 654.0,300.0 656.0,300.0 658.0,300.0 660.0,300.0 662.0,300.0 664.0,300.0 666.0,300.0 668.0,300.0 670.0,300.0" fill="none" stroke="#9aa1ad" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"></polyline><text x="670.0" y="299.1" font-size="12.5" fill="#0e8a83" font-weight="700" text-anchor="end">τ = 100 s: 매끈하게 오름</text><text x="150.0" y="308.6" font-size="12.5" fill="#5f6368">τ = 1 s: 힘·쉼마다 출렁임</text><text x="70.0" y="398.0" font-size="11.5" fill="#5f6368" text-anchor="middle">0</text><text x="190.0" y="398.0" font-size="11.5" fill="#5f6368" text-anchor="middle">60</text><text x="310.0" y="398.0" font-size="11.5" fill="#5f6368" text-anchor="middle">120</text><text x="430.0" y="398.0" font-size="11.5" fill="#5f6368" text-anchor="middle">180</text><text x="550.0" y="398.0" font-size="11.5" fill="#5f6368" text-anchor="middle">240</text><text x="670.0" y="398.0" font-size="11.5" fill="#5f6368" text-anchor="middle">300</text><text x="370.0" y="416.0" font-size="12.5" fill="#5f6368" text-anchor="middle">시간 (s)</text><text x="16.0" y="436.0" font-size="12.5" fill="#1d1d1f" font-weight="700">짧은 τ는 '지금 힘을 주는가', 긴 τ는 '몇 분 동안 어떻게 변해 왔나'를 쥔다. ADC는 1초에 한 번이면 된다.</text><text x="16.0" y="460.0" font-size="12.5" fill="#5f6368">모형 계산 · 가상 신호(낮은 대역 세기가 5분에 걸쳐 오르고 높은 대역이 내려가게 둠) · 실제 소자는 곡선 모양과 drift가 다르다</text></svg>
+<!-- /EM:concept -->
+<figcaption><b>그림 10. 피로 시계 컨셉.</b> 근전도를 낮은 대역과 높은 대역 두 아날로그 필터로 나눠 τ가 다른 이온 소자들에 넣고, 1초에 한 번만 읽는다. 아래 모의 계산에서 τ = 100 s 소자 두 개에 남은 값의 비율은 몇 분에 걸쳐 매끈하게 오르고, τ = 1 s 소자는 힘을 줄 때와 쉴 때마다 출렁인다. 모형 계산.</figcaption>
+</figure>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>디지털 방법</td>
+<td>1–2 kHz로 계속 재서 1초마다 MDF를 구하고 그 기울기를 봄. 계산은 가볍지만 <strong>ADC와 MCU가 30분 내내 깨어 있어야</strong> 한다</td>
+</tr>
+<tr class="even">
+<td>이온 소자가 하는 일</td>
+<td>두 대역의 세기를 τ = 1, 10, 100, 600 s 소자들에 넣는다. 느린 소자들이 "몇 분 동안의 세기"를 저절로 쥐고, 두 대역의 비율이 피로 지수가 된다. <strong>ADC는 1초에 한 번</strong></td>
+</tr>
+<tr class="odd">
+<td>이기는 조건</td>
+<td>피로 지수가 실제 지친 정도(버틴 시간, 스스로 매긴 피로 점수)와 맞는 정도가 디지털 MDF 기울기와 같고, 그때 <strong>앞단과 읽기의 전력이 10배 이상 낮다</strong></td>
+</tr>
+<tr class="even">
+<td>소재와의 연결</td>
+<td>초–분 τ는 이온겔에서 자연스럽게 나오는 범위이고(19–259 s 보고), 두께·가교로 정한다. 로드맵의 "τ를 소재로 정하는 규칙"이 그대로 쓰인다</td>
+</tr>
+<tr class="odd">
+<td>첫 시험</td>
+<td>공개 피로 데이터로 "소자 모형"을 먼저 계산 → 기록을 소자에 다시 틀어 주는 실험 → 실제 착용</td>
+</tr>
+<tr class="even">
+<td>위험</td>
+<td>디지털 MDF도 싸다. 아날로그 필터 + 소자 + 느린 읽기가 MCU를 가끔 깨우는 방식보다 정말 적게 드는지 재야 한다. 습도·온도에 따른 소자 drift가 "가짜 피로"로 보일 수 있다</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="컨셉-b-깨우기-동작동작-순서-감지" class="level3">
+<h3 class="anchored" data-anchor-id="컨셉-b-깨우기-동작동작-순서-감지">컨셉 B: 깨우기 동작·동작 순서 감지</h3>
+<p><strong>가정하는 상황.</strong> 스마트 안경을 쓴 사람이 손목 밴드로 기기를 조작합니다. 밴드는 평소에 거의 잠들어 있다가, "꼬집기–꼬집기–잠깐 쥐기" 같은 정해진 순서가 나올 때만 큰 해독기를 깨웁니다. 타자 치기나 가방 들기 같은 일상 동작에는 깨면 안 됩니다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>왜 과거가 필요한가</td>
+<td>순서는 0.5–3초에 걸친 <strong>동작의 차례와 간격</strong>으로 정해진다. 한 구간만 보는 분류기는 "꼬집기 한 번"과 "두 번"을 가르지 못한다</td>
+</tr>
+<tr class="even">
+<td>디지털 방법</td>
+<td>늘 켜진 MCU에서 작은 신경망을 돌린다. 또는 문턱 + 상태 기계로 아주 싸게 하지만 잘못 깨는 일이 많다</td>
+</tr>
+<tr class="odd">
+<td>이온 소자가 하는 일</td>
+<td>2–4채널의 세기를 τ = 0.2, 0.5, 1, 3 s 소자들에 넣는다. 소자들에 남은 값의 상대적 크기가 최근 동작의 차례와 간격을 담는다(로드맵의 "방향 읽기"와 같은 원리)</td>
+</tr>
+<tr class="even">
+<td>이기는 조건</td>
+<td>놓치는 비율이 같을 때, 1시간에 잘못 깨는 횟수가 디지털 작은 모형 이하이고 평균 전력이 더 낮다</td>
+</tr>
+<tr class="odd">
+<td>첫 시험</td>
+<td>Meta 공개 데이터의 연속 동작 기록, GRABMyoFlow</td>
+</tr>
+<tr class="even">
+<td>위험</td>
+<td>디지털에서 "깨우는 말" 감지는 이미 µW 수준으로 풀려 있다. 사람마다 다른 동작 습관을 이온 소자가 풀어 주지는 않는다</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="컨셉-c-도전-후보-땀의-화학-근전도를-한-소자에" class="level3">
+<h3 class="anchored" data-anchor-id="컨셉-c-도전-후보-땀의-화학-근전도를-한-소자에">컨셉 C (도전 후보): 땀의 화학 + 근전도를 한 소자에</h3>
+<p><strong>가정하는 상황.</strong> 운동선수의 피로는 근전도(전기)와 땀의 이온·pH(화학)에 함께 나타납니다. Pei 2026은 근육의 pH를 피로의 지표로 썼지만, pH는 따로 든 측정기로 쟀습니다.</p>
+<p>이온 소자는 화학 환경에 따라 τ가 변합니다. 이 성질을 약점(drift)이 아니라 입력으로 쓰면, <span class="key"><strong>근전도의 이력과 땀의 화학을 한 소자의 상태에 함께 담는 장치</strong></span>가 됩니다. 이온 소재만 할 수 있는 일이라 가장 새롭지만, "기억 때문에 변한 값"과 "화학 때문에 변한 값"을 가르는 대조 실험이 어렵습니다. 공개 데이터가 없어 직접 기록해야 합니다.</p>
+</section>
+<section id="어떻게-고를까" class="level3">
+<h3 class="anchored" data-anchor-id="어떻게-고를까">어떻게 고를까</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>컨셉</th>
+<th>새로움</th>
+<th>디지털이 확실히 나을 가능성</th>
+<th>고분자 실험실에서의 실현성</th>
+<th>자리</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A 피로 시계</td>
+<td>높음 (아무도 안 함)</td>
+<td>정확도는 중간, 전력은 낮음</td>
+<td>높음 (초–분 τ)</td>
+<td><strong>중심 목표</strong></td>
+</tr>
+<tr class="even">
+<td>B 깨우기·순서</td>
+<td>중간</td>
+<td>중간–높음</td>
+<td>중간</td>
+<td>둘째 목표 또는 시연</td>
+</tr>
+<tr class="odd">
+<td>C 화학 + 전기</td>
+<td>매우 높음</td>
+<td>낮음</td>
+<td>낮음–중간</td>
+<td>도전 목표</td>
+</tr>
+</tbody>
+</table>
+<p><span class="key">내 판단: <strong>A를 중심에 두고, B를 로드맵의 "방향·순서 읽기"와 같은 원리의 둘째 시연으로, C는 A가 성공한 뒤의 확장으로</strong> 둡니다.</span> <span class="tag tag-interp">해석</span> 어느 컨셉이든 세 가지 비교를 함께 보고합니다. ① 이온 소자, ② <strong>같은 τ를 가진 디지털 모형</strong>(소자가 정말 기여했는지 가르는 대조), ③ <strong>평범한 특징 + LDA</strong>(같은 readout 크기). 그리고 전력은 신호를 다듬는 회로와 읽는 회로까지 넣어서 잽니다.</p>
+<p><strong>아직 아무도 하지 않은 것(약 40번의 검색에서 찾지 못함).</strong> 원신호에 가까운 아날로그 세기를 여러 채널에서 바로 소자에 넣기 · 같은 기억을 가진 디지털 모형과의 비교 · 날이 바뀌어도 되는지의 시험 · 이온 소자로 피로나 drift를 추적하기 · 근전도의 시간 규모에 맞춰 τ 묶음을 설계하기 · 큰 공개 데이터 사용 · 연속 추정 · 장치 전체의 전력 계산. <span class="tag tag-unverified">미확인</span> 찾지 못했다는 것이 없다는 증거는 아닙니다.</p>
+</section>
+</section>
+<section id="emg-check" class="level2">
+<h2 class="anchored" data-anchor-id="emg-check">13. 스스로 확인</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="백지 회상: 아무것도 보지 않고 답해 보세요 (펼치면 답)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>백지 회상: 아무것도 보지 않고 답해 보세요 (펼치면 답)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>표면 근전도는 무엇이 합쳐진 신호인가?</strong> 여러 운동 단위의 MUAP(5–20 ms)가 피부에서 겹친 것. 원리: 운동 단위마다 같은 파형이 반복되고 전극은 근처의 여러 단위를 함께 본다. (1절)</li>
+<li><strong>왜 전극 두 개의 차이를 재나?</strong> 두 전극에 똑같이 들어온 60 Hz 전원 잡음은 빼면 사라지기 때문. (2절)</li>
+<li><strong>sampling rate를 1 kHz 이상으로 잡는 이유는?</strong> 가장 빠른 성분(약 450 Hz)의 두 배보다 자주 재야 오르내림을 놓치지 않는다. Myo 팔찌의 200 Hz는 이 조건을 못 맞춘다. (3절)</li>
+<li><strong>RMS와 MDF는 각각 무엇을 알려 주나?</strong> RMS는 세기(힘과 함께 커짐), MDF는 떨림의 대표 빠르기(피로하면 내려감). (4절)</li>
+<li><strong>근육이 피로해지면 근전도는?</strong> 같은 힘에서 크기(RMS)는 커지고 스펙트럼은 낮은 쪽으로 옮겨 간다(MDF ↓). 원리: 신호 전달이 느려져 MUAP가 길어지고, 같은 힘을 내려고 더 많은 단위가 참여한다. (8절)</li>
+<li><strong>1시간 뒤 신호가 달라지는 이유 세 가지는?</strong> 땀·피부 임피던스, 근육 피로, 팔 자세(또는 전극이 밀림). (8절)</li>
+<li><strong>이온 소자가 근전도에서 쓸모를 보일 곳은 어디이고, 왜 동작 하나의 분류는 아닌가?</strong> 몇 초–몇 분의 과거가 필요한 판정(순서, 피로). 동작 하나는 MCU가 이미 싸고 정확하며, 이온 소자의 τ(초–분)가 겹치지 않는다. (5절, 12절)</li>
+<li><strong>지금까지의 이온 소자 근전도 연구의 공통된 빈틈 셋은?</strong> 디지털로 먼저 가공한 입력, 같은 조건의 디지털 비교 없음, 한 세션 안에서만 시험. (7절)</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="가르치듯 설명하기">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>가르치듯 설명하기
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>화학과 친구에게 2분 동안 설명한다고 생각하고, 아래 순서로 말해 보세요. 막히는 곳이 다시 읽을 곳입니다.</p>
+<p>"근전도는 ○○이 합쳐진 신호야. 재려면 ○○의 차이를 재고, 1초에 ○○번 이상 숫자로 바꿔. 동작 하나를 맞히는 건 ○○이 이미 잘해. 그런데 ○○처럼 몇 분의 과거가 필요한 판정은 ○○이 계속 깨어 있어야 해서 전력이 들어. 이온 소자는 ○○이 초–분이라 그 과거를 저절로 쥘 수 있어. 대신 ○○ 때문에 값이 저절로 변하는 걸 막아야 해."</p>
+</div>
+</div>
+</div>
+</section>
+<section id="emg-refs" class="level2">
+<h2 class="anchored" data-anchor-id="emg-refs">14. 출처</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="문헌과 확인 수준">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>문헌과 확인 수준
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>확인 수준: <span class="tag tag-fact">논문</span> 원문이나 초록을 읽음 · <span class="tag tag-unverified">미확인</span> 검색 요약만 봄 · <span class="tag tag-interp">해석</span> 내 판단.</p>
+<ul>
+<li>Kaifosh P., Reardon T. R. &amp; CTRL-labs, Nature 645, 702 (2025), <a href="https://doi.org/10.1038/s41586-025-09255-w">10.1038/s41586-025-09255-w</a> — 전문. 16채널 2 kHz 건식 밴드, 162·4,900·6,627명, 보정 없이 사용, 손글씨 20.9 WPM, 손목에서 계산 안 함 <span class="tag tag-fact">논문</span>. 공개 데이터: <a href="https://github.com/facebookresearch/generic-neuromotor-interface-data">generic-neuromotor-interface-data</a>.</li>
+<li>Pei M. et al., Nat. Mater. (2026), <a href="https://doi.org/10.1038/s41563-026-02532-7">10.1038/s41563-026-02532-7</a> — 전문. putEMG 결과는 소자 모형의 모의 계산, 소자 없는 비교 없음 <span class="tag tag-fact">논문</span>.</li>
+<li>Liu et al., Nat. Electron. 7, 1176 (2024), <a href="https://doi.org/10.1038/s41928-024-01250-9">10.1038/s41928-024-01250-9</a> — 전문. 3가지 동작 약 90 %, 4 bit 펄스 입력 <span class="tag tag-fact">논문</span>.</li>
+<li>Yin et al., Small Sci. 5, 2400415, <a href="https://doi.org/10.1002/smsc.202400415">10.1002/smsc.202400415</a> — 6가지 동작 79.2 % <span class="tag tag-fact">논문</span>.</li>
+<li>Hudgins B., Parker P., Scott R. N., IEEE TBME 40, 82 (1993), <a href="https://doi.org/10.1109/10.204774">10.1109/10.204774</a> — 초록 <span class="tag tag-fact">논문</span>.</li>
+<li>Englehart K., Hudgins B., IEEE TBME 50, 848 (2003), <a href="https://doi.org/10.1109/TBME.2003.813539">10.1109/TBME.2003.813539</a> <span class="tag tag-unverified">미확인</span>.</li>
+<li>Farrell T. R., Weir R. F., IEEE TNSRE 15, 111 (2007), <a href="https://doi.org/10.1109/TNSRE.2007.891391">10.1109/TNSRE.2007.891391</a> — 지연 100–125 ms <span class="tag tag-fact">논문</span>.</li>
+<li>Fougner A. et al., IEEE TNSRE 19, 644 (2011), <a href="https://doi.org/10.1109/TNSRE.2011.2163529">10.1109/TNSRE.2011.2163529</a> — 팔 자세, 오류 3.8 → 18 % <span class="tag tag-fact">논문</span>.</li>
+<li>Young A. J., Hargrove L. J., Kuiken T. A., IEEE TBME 58, 2537 (2011) — 전극 밀림 <span class="tag tag-fact">논문</span>.</li>
+<li>Donati E. et al., IEEE TBioCAS 13, 795 (2019), <a href="https://doi.org/10.1109/TBCAS.2019.2925454">10.1109/TBCAS.2019.2925454</a> — 스파이킹 74 % vs SVM 84 %, 0.05 mW <span class="tag tag-fact">논문</span>.</li>
+<li>Ceolini E. et al., Front. Neurosci. 14, 637 (2020), <a href="https://doi.org/10.3389/fnins.2020.00637">10.3389/fnins.2020.00637</a> — 전문 <span class="tag tag-fact">논문</span>.</li>
+<li>Moin A. et al., Nat. Electron. 4, 54 (2021), <a href="https://doi.org/10.1038/s41928-020-00510-8">10.1038/s41928-020-00510-8</a> — 13가지 동작 97.12 % <span class="tag tag-fact">논문</span>.</li>
+<li>데이터: Atzori M. et al., Sci. Data 1, 140053 (2014) <span class="tag tag-fact">논문</span> · Kaczmarek P. et al., Sensors 19, 3548 (2019) <span class="tag tag-fact">논문</span> · Pradhan A., He J., Jiang N., Sci. Data 9, 733 (2022) <span class="tag tag-fact">논문</span> · Du Y. et al., Sensors 17, 458 (2017) <span class="tag tag-unverified">미확인</span> · Sivakumar V. et al., arXiv 2410.20081 (2024) <span class="tag tag-fact">논문</span> · Salter et al., arXiv 2412.02725 (2024) <span class="tag tag-fact">논문</span> · 피로 데이터 Sci. Data (2024) 10.1038/s41597-024-03030-8, 10.1038/s41597-024-03254-8 <span class="tag tag-unverified">미확인</span>.</li>
+<li>근육 피로의 생리: Front. Syst. Neurosci. (2022), <a href="https://doi.org/10.3389/fnsys.2022.893275">10.3389/fnsys.2022.893275</a> <span class="tag tag-unverified">미확인</span>. 방향(스펙트럼 ↓, 크기 ↑)은 교과서 수준으로 확립된 내용이고, 크기는 조건에 따라 다르다.</li>
+<li>조사 기록 전체: 사이트 원본 폴더의 <code>_review/emg_survey_2026-11-12.md</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+  (function () {
+    var meta = document.querySelector('meta[name="quarto:offset"]');
+    var offset = meta ? meta.getAttribute("content") : "./";
+    window.STUDY_OFFSET = offset;
+    var s = document.createElement("script");
+    s.src = offset + "assets/study.js";
+    document.body.appendChild(s);
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../roadmap.html" class="pagination-link" aria-label="연구 로드맵">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">연구 로드맵</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../plan.html" class="pagination-link" aria-label="커리큘럼">
+        <span class="nav-page-text">커리큘럼</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p><span class="ft-links"><a href="../index.html">Home</a> <a href="../research.html">Research</a> <a href="../roadmap.html">Roadmap</a> <a href="../signals/emg.html">EMG</a> <a href="../plan.html">Curriculum</a> <a href="../projects/index.html">Projects</a> <a href="../notes.html">Notes</a> <a href="../papers.html">Papers</a> <a href="../ledger/terms.html">Glossary</a></span><span class="ft-copy">Copyright © 2026 All rights reserved · Hyeon Woo Yang · KAIST</span></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
