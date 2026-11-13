@@ -1549,6 +1549,9 @@ button, .sbtn, summary, a.nav-link, input[type="range"] { touch-action: manipula
   }
 }
 
+/* 드롭다운 메뉴(연구 로드맵·생체 신호)의 화살표가 테마 규칙(display:block) 때문에 글자 밑 검은 막대로 보이던 것을 없앤다 (2026-11-13) */
+.navbar .navbar-nav .dropdown-toggle::after { display: none !important; content: none !important; }
+
 /* ---------- 왼쪽 목차 ---------- */
 #quarto-sidebar { border-right-color: var(--rule); }
 .sb-ph { text-transform: none; letter-spacing: 0.01em; font-size: 0.7rem; }
